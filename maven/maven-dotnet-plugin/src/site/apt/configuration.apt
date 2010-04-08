@@ -1,0 +1,85 @@
+~~
+~~ Maven and Sonar plugin for .Net
+~~ Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+~~ mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+~~
+~~ Sonar is free software; you can redistribute it and/or
+~~ modify it under the terms of the GNU Lesser General Public
+~~ License as published by the Free Software Foundation; either
+~~ version 3 of the License, or (at your option) any later version.
+~~
+~~ Sonar is distributed in the hope that it will be useful,
+~~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+~~ Lesser General Public License for more details.
+~~
+~~ You should have received a copy of the GNU Lesser General Public
+~~ License along with Sonar; if not, write to the Free Software
+~~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+~~
+
+ ------
+ Project configuration example
+ ------
+ Jose CHILLAN
+ ------
+ 2010-03-25
+ ------
+
+Example of pom.xml for a .Net solution
+
+  Your must first ensure that the settings.xml file is properly configured. 
+  See the {{{./settings.html} example of settings.xml}} for more details.
+  
+---
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example.myapplication</groupId>
+  <artifactId>example</artifactId>
+   <version>1.0-SNAPSHOT</version>
+  <name>Example Solution .Net</name>
+  <packaging>sln</packaging>
+
+  <properties>
+    <!-- 
+       NOTE : the versions and parameters may be defined as properties. 
+       Prefer this option to the plugin configuration as it may be accessible to several plugins
+    -->
+    
+    <!-- Name of the solution file, located in the same directory as the pom.xml -->
+    <visual.studio.solution>Example.sln</visual.studio.solution>
+    
+    <!-- Name pattern to recognize the test assemblies, so that unit tests are only launched on those,
+    and so that those are excluded from code coverage -->
+    <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
+    
+    <!-- Version of the .Net tools, which may be 2.0 or 3.5 only -->
+    <dotnet.tool.version>3.5</dotnet.tool.version>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.maven.dotnet</groupId>
+        <artifactId>maven-dotnet-plugin</artifactId>
+        <!-- Plugin specific configuration : commented out here as it is redundant with 
+             the properties defined above -->
+        <!--
+        <configuration>
+          <testProjectPattern>*.Tests</testProjectPattern>
+          <solutionName>Example.sln</solutionName>
+          <toolVersion>3.5</toolVersion>
+          <buildConfigurations>
+            <buildConfiguration>Debug</buildConfiguration>
+            <buildConfiguration>Release</buildConfiguration>
+          </buildConfigurations>
+        </configuration>
+        -->
+        
+        <!-- Required to enforce a .Net specific maven lifecycle where compile, test and clean are overridden --> 
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+---  

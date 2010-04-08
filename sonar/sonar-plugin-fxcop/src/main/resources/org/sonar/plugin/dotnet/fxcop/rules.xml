@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<rules>
+    <rule key="AssembliesShouldHaveValidStrongNames">
+        <name>Assemblies should have valid strong names</name>
+        <configKey>AssembliesShouldHaveValidStrongNames@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Assemblies should have valid strong names</description>
+    </rule>
+    <rule key="AvoidEmptyInterfaces">
+        <name>Avoid empty interfaces</name>
+        <configKey>AvoidEmptyInterfaces@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Avoid empty interfaces</description>
+    </rule>
+    <rule key="AvoidExcessiveParametersOnGenericTypes">
+        <name>Avoid excessive parameters on generic types</name>
+        <configKey>AvoidExcessiveParametersOnGenericTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Avoid excessive parameters on generic types</description>
+    </rule>
+    <rule key="AvoidNamespacesWithFewTypes">
+        <name>Avoid namespaces with few types</name>
+        <configKey>AvoidNamespacesWithFewTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Avoid namespaces with few types</description>
+    </rule>
+    <rule key="AvoidOutParameters">
+        <name>Avoid out parameters</name>
+        <configKey>AvoidOutParameters@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Avoid out parameters</description>
+    </rule>
+    <rule key="CollectionsShouldImplementGenericInterface">
+        <name>Collections should implement generic interface</name>
+        <configKey>CollectionsShouldImplementGenericInterface@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Collections should implement generic interface</description>
+    </rule>
+    <rule key="ConsiderPassingBaseTypesAsParameters">
+        <name>Consider passing base types as parameters</name>
+        <configKey>ConsiderPassingBaseTypesAsParameters@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Consider passing base types as parameters</description>
+    </rule>
+    <rule key="DeclareEventHandlersCorrectly">
+        <name>Declare event handlers correctly</name>
+        <configKey>DeclareEventHandlersCorrectly@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Declare event handlers correctly</description>
+    </rule>
+    <rule key="DeclareTypesInNamespaces">
+        <name>Declare types in namespaces</name>
+        <configKey>DeclareTypesInNamespaces@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Declare types in namespaces</description>
+    </rule>
+    <rule key="DefaultParametersShouldNotBeUsed">
+        <name>Default parameters should not be used</name>
+        <configKey>DefaultParametersShouldNotBeUsed@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Default parameters should not be used</description>
+    </rule>
+    <rule key="DefineAccessorsForAttributeArguments">
+        <name>Define accessors for attribute arguments</name>
+        <configKey>DefineAccessorsForAttributeArguments@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Define accessors for attribute arguments</description>
+    </rule>
+    <rule key="DoNotCatchGeneralExceptionTypes">
+        <name>Do not catch general exception types</name>
+        <configKey>DoNotCatchGeneralExceptionTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Reliability"/>
+        <description>Do not catch general exception types</description>
+    </rule>
+    <rule key="DoNotDeclareProtectedMembersInSealedTypes">
+        <name>Do not declare protected members in sealed types</name>
+        <configKey>DoNotDeclareProtectedMembersInSealedTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not declare protected members in sealed types</description>
+    </rule>
+    <rule key="DoNotDeclareStaticMembersOnGenericTypes">
+        <name>Do not declare static members on generic types</name>
+        <configKey>DoNotDeclareStaticMembersOnGenericTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not declare static members on generic types</description>
+    </rule>
+    <rule key="DoNotDeclareVirtualMembersInSealedTypes">
+        <name>Do not declare virtual members in sealed types</name>
+        <configKey>DoNotDeclareVirtualMembersInSealedTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not declare virtual members in sealed types</description>
+    </rule>
+    <rule key="DoNotDeclareVisibleInstanceFields">
+        <name>Do not declare visible instance fields</name>
+        <configKey>DoNotDeclareVisibleInstanceFields@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not declare visible instance fields</description>
+    </rule>
+    <rule key="DoNotExposeGenericLists">
+        <name>Do not expose generic lists</name>
+        <configKey>DoNotExposeGenericLists@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not expose generic lists</description>
+    </rule>
+    <rule key="DoNotHideBaseClassMethods">
+        <name>Do not hide base class methods</name>
+        <configKey>DoNotHideBaseClassMethods@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not hide base class methods</description>
+    </rule>
+    <rule key="DoNotNestGenericTypesInMemberSignatures">
+        <name>Do not nest generic types in member signatures</name>
+        <configKey>DoNotNestGenericTypesInMemberSignatures@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not nest generic types in member signatures</description>
+    </rule>
+    <rule key="DoNotOverloadOperatorEqualsOnReferenceTypes">
+        <name>Do not overload operator equals on reference types</name>
+        <configKey>DoNotOverloadOperatorEqualsOnReferenceTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not overload operator equals on reference types</description>
+    </rule>
+    <rule key="DoNotPassTypesByReference">
+        <name>Do not pass types by reference</name>
+        <configKey>DoNotPassTypesByReference@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not pass types by reference</description>
+    </rule>
+    <rule key="DoNotRaiseExceptionsInUnexpectedLocations">
+        <name>Do not raise exceptions in unexpected locations</name>
+        <configKey>DoNotRaiseExceptionsInUnexpectedLocations@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Do not raise exceptions in unexpected locations</description>
+    </rule>
+    <rule key="EnumeratorsShouldBeStronglyTyped">
+        <name>Enumerators should be strongly typed</name>
+        <configKey>EnumeratorsShouldBeStronglyTyped@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Maintainability should be strongly typed</description>
+    </rule>
+    <rule key="EnumsShouldHaveZeroValue">
+        <name>Enums should have zero value</name>
+        <configKey>EnumsShouldHaveZeroValue@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Enums should have zero value</description>
+    </rule>
+    <rule key="EnumStorageShouldBeInt32">
+        <name>Enum storage should be int32</name>
+        <configKey>EnumStorageShouldBeInt32@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Enum storage should be int32</description>
+    </rule>
+    <rule key="ExceptionsShouldBePublic">
+        <name>Exceptions should be public</name>
+        <configKey>ExceptionsShouldBePublic@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Exceptions should be public</description>
+    </rule>
+    <rule key="GenericMethodsShouldProvideTypeParameter">
+        <name>Generic methods should provide type parameter</name>
+        <configKey>GenericMethodsShouldProvideTypeParameter@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Generic methods should provide type parameter</description>
+    </rule>
+    <rule key="ICollectionImplementationsHaveStronglyTypedMembers">
+        <name>Icollection implementations have strongly typed members</name>
+        <configKey>ICollectionImplementationsHaveStronglyTypedMembers@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Icollection implementations have strongly typed members</description>
+    </rule>
+    <rule key="ImplementIDisposableCorrectly">
+        <name>Implement IDisposable correctly</name>
+        <configKey>ImplementIDisposableCorrectly@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Implement IDisposable correctly</description>
+    </rule>
+    <rule key="ImplementStandardExceptionConstructors">
+        <name>Implement standard exception constructors</name>
+        <configKey>ImplementStandardExceptionConstructors@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Implement standard exception constructors</description>
+    </rule>
+    <rule key="IndexersShouldNotBeMultidimensional">
+        <name>Indexers should not be multidimensional</name>
+        <configKey>IndexersShouldNotBeMultidimensional@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Indexers should not be multidimensional</description>
+    </rule>
+    <rule key="InterfaceMethodsShouldBeCallableByChildTypes">
+        <name>Interface methods should be callable by child types</name>
+        <configKey>InterfaceMethodsShouldBeCallableByChildTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Interface methods should be callable by child types</description>
+    </rule>
+    <rule key="ListsAreStronglyTyped">
+        <name>Lists are strongly typed</name>
+        <configKey>ListsAreStronglyTyped@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Lists are strongly typed</description>
+    </rule>
+    <rule key="MarkEnumsWithFlags">
+        <name>Mark enums with flags</name>
+        <configKey>MarkEnumsWithFlags@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Mark enums with flags</description>
+    </rule>
+    <rule key="MembersShouldNotExposeCertainConcreteTypes">
+        <name>Members should not expose certain concrete types</name>
+        <configKey>MembersShouldNotExposeCertainConcreteTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Members should not expose certain concrete types</description>
+    </rule>
+    <rule key="MovePInvokesToNativeMethodsClass">
+        <name>Move p invokes to native methods class</name>
+        <configKey>MovePInvokesToNativeMethodsClass@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Move PInvokes to native methods class</description>
+    </rule>
+    <rule key="NestedTypesShouldNotBeVisible">
+        <name>Nested types should not be visible</name>
+        <configKey>NestedTypesShouldNotBeVisible@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Nested types should not be visible</description>
+    </rule>
+    <rule key="OverloadOperatorEqualsOnOverloadingAddAndSubtract">
+        <name>Overload operator equals on overloading add and subtract</name>
+        <configKey>OverloadOperatorEqualsOnOverloadingAddAndSubtract@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Overload operator equals on overloading add and subtract</description>
+    </rule>
+    <rule key="OverrideMethodsOnComparableTypes">
+        <name>Override methods on comparable types</name>
+        <configKey>OverrideMethodsOnComparableTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Override methods on comparable types</description>
+    </rule>
+    <rule key="PropertiesShouldNotBeWriteOnly">
+        <name>Properties should not be write only</name>
+        <configKey>PropertiesShouldNotBeWriteOnly@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Properties should not be write only</description>
+    </rule>
+    <rule key="ProvideObsoleteAttributeMessage">
+        <name>Provide obsolete attribute message</name>
+        <configKey>ProvideObsoleteAttributeMessage@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Provide obsolete attribute message</description>
+    </rule>
+    <rule key="ReplaceRepetitiveArgumentsWithParamsArray">
+        <name>Replace repetitive arguments with params array</name>
+        <configKey>ReplaceRepetitiveArgumentsWithParamsArray@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Replace repetitive arguments with params array</description>
+    </rule>
+    <rule key="StaticHolderTypesShouldBeSealed">
+        <name>Static holder types should be sealed</name>
+        <configKey>StaticHolderTypesShouldBeSealed@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Static holder types should be sealed</description>
+    </rule>
+    <rule key="StaticHolderTypesShouldNotHaveConstructors">
+        <name>Static holder types should not have constructors</name>
+        <configKey>StaticHolderTypesShouldNotHaveConstructors@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Static holder types should not have constructors</description>
+    </rule>
+    <rule key="StringUriOverloadsCallSystemUriOverloads">
+        <name>String uri overloads call system uri overloads</name>
+        <configKey>StringUriOverloadsCallSystemUriOverloads@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>String uri overloads call system uri overloads</description>
+    </rule>
+    <rule key="TypesShouldNotExtendCertainBaseTypes">
+        <name>Types should not extend certain base types</name>
+        <configKey>TypesShouldNotExtendCertainBaseTypes@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Types should not extend certain base types</description>
+    </rule>
+    <rule key="TypesThatOwnDisposableFieldsShouldBeDisposable">
+        <name>Types that own disposable fields should be disposable</name>
+        <configKey>TypesThatOwnDisposableFieldsShouldBeDisposable@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Types that own disposable fields should be disposable</description>
+    </rule>
+    <rule key="TypesThatOwnNativeResourcesShouldBeDisposable">
+        <name>Types that own native resources should be disposable</name>
+        <configKey>TypesThatOwnNativeResourcesShouldBeDisposable@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Types that own native resources should be disposable</description>
+    </rule>
+    <rule key="UriParametersShouldNotBeStrings">
+        <name>Uri parameters should not be strings</name>
+        <configKey>UriParametersShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Uri parameters should not be strings</description>
+    </rule>
+    <rule key="UriPropertiesShouldNotBeStrings">
+        <name>Uri properties should not be strings</name>
+        <configKey>UriPropertiesShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Uri properties should not be strings</description>
+    </rule>
+    <rule key="UriReturnValuesShouldNotBeStrings">
+        <name>Uri return values should not be strings</name>
+        <configKey>UriReturnValuesShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Uri return values should not be strings</description>
+    </rule>
+    <rule key="UseEventsWhereAppropriate">
+        <name>Use events where appropriate</name>
+        <configKey>UseEventsWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Use events where appropriate</description>
+    </rule>
+    <rule key="UseGenericEventHandlerInstances">
+        <name>Use generic event handler instances</name>
+        <configKey>UseGenericEventHandlerInstances@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Use generic event handler instances</description>
+    </rule>
+    <rule key="UseGenericsWhereAppropriate">
+        <name>Use generics where appropriate</name>
+        <configKey>UseGenericsWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Use generics where appropriate</description>
+    </rule>
+    <rule key="UseIntegralOrStringArgumentForIndexers">
+        <name>Use integral or string argument for indexers</name>
+        <configKey>UseIntegralOrStringArgumentForIndexers@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Use integral or string argument for indexers</description>
+    </rule>
+    <rule key="UsePropertiesWhereAppropriate">
+        <name>Use properties where appropriate</name>
+        <configKey>UsePropertiesWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+        <category name="Maintainability"/>
+        <description>Use properties where appropriate</description>
+    </rule>
+    <rule key="AvoidDuplicateAccelerators">
+        <name>Avoid duplicate accelerators</name>
+        <configKey>AvoidDuplicateAccelerators@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Avoid duplicate accelerators</description>
+    </rule>
+    <rule key="DoNotHardcodeLocaleSpecificStrings">
+        <name>Do not hardcode locale specific strings</name>
+        <configKey>DoNotHardcodeLocaleSpecificStrings@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Do not hardcode locale specific strings</description>
+    </rule>
+    <rule key="NormalizeStringsToUppercase">
+        <name>Normalize strings to uppercase</name>
+        <configKey>NormalizeStringsToUppercase@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Normalize strings to uppercase</description>
+    </rule>
+    <rule key="SetLocaleForDataTypes">
+        <name>Set locale for data types</name>
+        <configKey>SetLocaleForDataTypes@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Set locale for data types</description>
+    </rule>
+    <rule key="SpecifyIFormatProvider">
+        <name>Specify i format provider</name>
+        <configKey>SpecifyIFormatProvider@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Specify i format provider</description>
+    </rule>
+    <rule key="SpecifyMarshalingForPInvokeStringArguments">
+        <name>Specify marshaling for p invoke string arguments</name>
+        <configKey>SpecifyMarshalingForPInvokeStringArguments@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Specify marshaling for p invoke string arguments</description>
+    </rule>
+    <rule key="SpecifyStringComparison">
+        <name>Specify string comparison</name>
+        <configKey>SpecifyStringComparison@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Specify string comparison</description>
+    </rule>
+    <rule key="UseOrdinalStringComparison">
+        <name>Use ordinal string comparison</name>
+        <configKey>UseOrdinalStringComparison@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Use ordinal string comparison</description>
+    </rule>
+    <rule key="CompoundWordsShouldBeCasedCorrectly">
+        <name>Compound words should be cased correctly</name>
+        <configKey>CompoundWordsShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Compound words should be cased correctly</description>
+    </rule>
+    <rule key="DoNotNameEnumValuesReserved">
+        <name>Do not name enum values reserved</name>
+        <configKey>DoNotNameEnumValuesReserved@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Do not name enum values reserved</description>
+    </rule>
+    <rule key="DoNotPrefixEnumValuesWithTypeName">
+        <name>Do not prefix enum values with type name</name>
+        <configKey>DoNotPrefixEnumValuesWithTypeName@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Do not prefix enum values with type name</description>
+    </rule>
+    <rule key="EventsShouldNotHaveBeforeOrAfterPrefix">
+        <name>Events should not have before or after prefix</name>
+        <configKey>EventsShouldNotHaveBeforeOrAfterPrefix@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Events should not have before or after prefix</description>
+    </rule>
+    <rule key="FlagsEnumsShouldHavePluralNames">
+        <name>Flags enums should have plural names</name>
+        <configKey>FlagsEnumsShouldHavePluralNames@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Flags enums should have plural names</description>
+    </rule>
+    <rule key="IdentifiersShouldDifferByMoreThanCase">
+        <name>Identifiers should differ by more than case</name>
+        <configKey>IdentifiersShouldDifferByMoreThanCase@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should differ by more than case</description>
+    </rule>
+    <rule key="IdentifiersShouldHaveCorrectPrefix">
+        <name>Identifiers should have correct prefix</name>
+        <configKey>IdentifiersShouldHaveCorrectPrefix@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should have correct prefix</description>
+    </rule>
+    <rule key="IdentifiersShouldHaveCorrectSuffix">
+        <name>Identifiers should have correct suffix</name>
+        <configKey>IdentifiersShouldHaveCorrectSuffix@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should have correct suffix</description>
+    </rule>
+    <rule key="IdentifiersShouldNotContainTypeNames">
+        <name>Identifiers should not contain type names</name>
+        <configKey>IdentifiersShouldNotContainTypeNames@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should not contain type names</description>
+    </rule>
+    <rule key="IdentifiersShouldNotHaveIncorrectPrefix">
+        <name>Identifiers should not have incorrect prefix</name>
+        <configKey>IdentifiersShouldNotHaveIncorrectPrefix@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should not have incorrect prefix</description>
+    </rule>
+    <rule key="IdentifiersShouldNotHaveIncorrectSuffix">
+        <name>Identifiers should not have incorrect suffix</name>
+        <configKey>IdentifiersShouldNotHaveIncorrectSuffix@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should not have incorrect suffix</description>
+    </rule>
+    <rule key="IdentifiersShouldNotMatchKeywords">
+        <name>Identifiers should not match keywords</name>
+        <configKey>IdentifiersShouldNotMatchKeywords@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Identifiers should not match keywords</description>
+    </rule>
+    <rule key="OnlyFlagsEnumsShouldHavePluralNames">
+        <name>Only flags enums should have plural names</name>
+        <configKey>OnlyFlagsEnumsShouldHavePluralNames@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Only flags enums should have plural names</description>
+    </rule>
+    <rule key="ParameterNamesShouldMatchBaseDeclaration">
+        <name>Parameter names should match base declaration</name>
+        <configKey>ParameterNamesShouldMatchBaseDeclaration@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Parameter names should match base declaration</description>
+    </rule>
+    <rule key="ParameterNamesShouldNotMatchMemberNames">
+        <name>Parameter names should not match member names</name>
+        <configKey>ParameterNamesShouldNotMatchMemberNames@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Parameter names should not match member names</description>
+    </rule>
+    <rule key="PropertyNamesShouldNotMatchGetMethods">
+        <name>Property names should not match get methods</name>
+        <configKey>PropertyNamesShouldNotMatchGetMethods@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Property names should not match get methods</description>
+    </rule>
+    <rule key="ResourceStringCompoundWordsShouldBeCasedCorrectly">
+        <name>Resource string compound words should be cased correctly</name>
+        <configKey>ResourceStringCompoundWordsShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Resource string compound words should be cased correctly</description>
+    </rule>
+    <rule key="ResourceStringsShouldBeSpelledCorrectly">
+        <name>Resource strings should be spelled correctly</name>
+        <configKey>ResourceStringsShouldBeSpelledCorrectly@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Resource strings should be spelled correctly</description>
+    </rule>
+    <rule key="TypeNamesShouldNotMatchNamespaces">
+        <name>Type names should not match namespaces</name>
+        <configKey>TypeNamesShouldNotMatchNamespaces@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Type names should not match namespaces</description>
+    </rule>
+    <rule key="UsePreferredTerms">
+        <name>Use preferred terms</name>
+        <configKey>UsePreferredTerms@$(FxCopDir)\Rules\NamingRules.dll</configKey>
+        <category name="Usability"/>
+        <description>Use preferred terms</description>
+    </rule>
+    <rule key="AvoidExcessiveLocals">
+        <name>Avoid excessive locals</name>
+        <configKey>AvoidExcessiveLocals@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Avoid excessive locals</description>
+    </rule>
+    <rule key="DoNotCastUnnecessarily">
+        <name>Do not cast unnecessarily</name>
+        <configKey>DoNotCastUnnecessarily@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Do not cast unnecessarily</description>
+    </rule>
+    <rule key="DoNotInitializeUnnecessarily">
+        <name>Do not initialize unnecessarily</name>
+        <configKey>DoNotInitializeUnnecessarily@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Do not initialize unnecessarily</description>
+    </rule>
+    <rule key="InitializeReferenceTypeStaticFieldsInline">
+        <name>Initialize reference type static fields inline</name>
+        <configKey>InitializeReferenceTypeStaticFieldsInline@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Initialize reference type static fields inline</description>
+    </rule>
+    <rule key="OverrideEqualsAndOperatorEqualsOnValueTypes">
+        <name>Override equals and operator equals on value types</name>
+        <configKey>OverrideEqualsAndOperatorEqualsOnValueTypes@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Override equals and operator equals on value types</description>
+    </rule>
+    <rule key="RemoveEmptyFinalizers">
+        <name>Remove empty finalizers</name>
+        <configKey>RemoveEmptyFinalizers@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Remove empty finalizers</description>
+    </rule>
+    <rule key="TestForEmptyStringsUsingStringLength">
+        <name>Test for empty strings using string length</name>
+        <configKey>TestForEmptyStringsUsingStringLength@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Test for empty strings using string length</description>
+    </rule>
+    <rule key="UseLiteralsWhereAppropriate">
+        <name>Use literals where appropriate</name>
+        <configKey>UseLiteralsWhereAppropriate@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
+        <category name="Efficiency"/>
+        <description>Use literals where appropriate</description>
+    </rule>
+</rules>

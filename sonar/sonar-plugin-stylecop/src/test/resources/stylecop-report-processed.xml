@@ -1,0 +1,2859 @@
+<?xml version="1.0" encoding="UTF-8"?><issues xmlns:stc="http://stylecopcmd.sourceforge.net/StyleCopReport.xsd">
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The class must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>9</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>11</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>AccessModifierMustBeDeclared</key>
+<message>The class must have an access modifier.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>9</line>
+</issue>
+<issue>
+<key>AccessModifierMustBeDeclared</key>
+<message>The method must have an access modifier.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>11</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Program.cs</file>
+<line>5</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Application\Properties\AssemblyInfo.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The interface must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>8</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>12</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>12</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummary</key>
+<message>The documentation header must have a summary tag.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>23</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>29</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>32</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>32</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>OpeningCurlyBracketsMustNotBeFollowedByBlankLine</key>
+<message>An opening curly bracket must not be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>9</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All methods must be placed after all properties.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>23</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>11</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>12</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>14</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>15</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>19</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>23</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>25</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>28</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>29</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>TabsMustNotBeUsed</key>
+<message>Tabs are not allowed. Use spaces instead.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\IMoney.cs</file>
+<line>32</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The class must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>8</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>10</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Model\SubType.cs</file>
+<line>10</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>17</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>ConstructorSummaryDocumentationMustBeginWithStandardText</key>
+<message>The documentation text within the constructor's summary tag must begin with the text: Initializes a new instance of the {Type name} class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>ElementParametersMustBeDocumented</key>
+<message>The documentation header must contain param tags matching the element's parameter list.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>ElementReturnValueMustBeDocumented</key>
+<message>The documentation header must contain a returns tag since the element has a return value.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>36</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>43</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>48</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>53</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>58</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>74</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>79</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>84</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>90</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>96</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>101</line>
+</issue>
+<issue>
+<key>FileHeaderMustShowCopyright</key>
+<message>The file header must contain a copyright tag.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>39</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>63</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>64</line>
+</issue>
+<issue>
+<key>OpeningCurlyBracketsMustNotBeFollowedByBlankLine</key>
+<message>An opening curly bracket must not be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>15</line>
+</issue>
+<issue>
+<key>CodeMustNotContainMultipleBlankLinesInARow</key>
+<message>The code must not contain multiple blank lines in a row.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>28</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>SingleLineCommentMustBePrecededByBlankLine</key>
+<message>A single-line comment must be preceded by a blank line or another single-line comment, or must be the first item in its scope. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>105</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'fAmount' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>17</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'fCurrency' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'anObject' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>58</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'aMoney' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>67</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>6</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>7</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>8</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>9</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All methods must be placed after all properties.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>48</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All methods must be placed after all properties.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>53</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All methods must be placed after all properties.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>79</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fAmount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>24</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fCurrency must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>25</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>39</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Currency must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>38</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fAmount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>50</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fCurrency must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>55</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to IsZero must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>62</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Currency must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>68</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>69</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fCurrency must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>76</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>81</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>87</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>93</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Add must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>98</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Amount must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>106</line>
+</issue>
+<issue>
+<key>CommentsMustContainText</key>
+<message>The comment is empty. Add text to the comment or remove it.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>CommentsMustContainText</key>
+<message>The comment is empty. Add text to the comment or remove it.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>53</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'object' rather than Object or System.Object.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>58</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs</file>
+<line>101</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>21</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>23</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>35</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>41</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>47</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>53</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>58</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>63</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>68</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>73</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>87</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>113</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>122</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>131</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>135</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>147</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>156</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>162</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>73</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>87</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>113</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>122</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>131</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>135</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>147</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>156</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>162</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the foreach statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>71</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>84</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>95</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>96</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>102</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>107</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>118</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>159</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the foreach statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>171</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>25</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>72</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>80</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>86</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>91</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>108</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>110</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>112</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>119</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>121</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>128</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>130</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>134</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>144</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>146</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>153</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>155</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>161</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>165</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'fMonies' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>21</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'aBag' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>68</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'aMoney' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>73</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'aMoney' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>87</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'anObject' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'aMoneyBag' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>100</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>5</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All methods must be placed after all properties.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>131</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>122</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>135</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>147</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>162</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All private methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>37</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>38</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>43</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendBag must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>44</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendBag must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>49</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendBag must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>50</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to AppendMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>71</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to FindMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>75</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>78</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>81</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>85</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to FindMoney must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>89</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to IsZero must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>94</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>101</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>104</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>115</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>125</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>133</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>140</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>150</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>159</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>158</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Add must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>164</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMonies must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>170</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'object' rather than Object or System.Object.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>113</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>CodeMustNotContainMultipleWhitespaceInARow</key>
+<message>The code contains multiple spaces in a row. Only one space is needed.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs</file>
+<line>23</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\Properties\AssemblyInfo.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The class must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>8</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The property must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>10</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>12</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The enum must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>14</line>
+</issue>
+<issue>
+<key>EnumerationItemsMustBeDocumented</key>
+<message>The enumeration sub-item must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>EnumerationItemsMustBeDocumented</key>
+<message>The enumeration sub-item must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>17</line>
+</issue>
+<issue>
+<key>EnumerationItemsMustBeDocumented</key>
+<message>The enumeration sub-item must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>EnumerationItemsMustBeDocumented</key>
+<message>The enumeration sub-item must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>19</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The constructor must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>28</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>49</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>54</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>59</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>66</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The method must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>74</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>ElementsMustBeSeparatedByBlankLine</key>
+<message>Adjacent elements must be separated by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>61</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>62</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>68</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>69</line>
+</issue>
+<issue>
+<key>CurlyBracketsMustNotBeOmitted</key>
+<message>The body of the if statement must be wrapped in opening and closing curly brackets.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketMustBeFollowedByBlankLine</key>
+<message>Statements or elements wrapped in curly brackets must be followed by a blank line.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>45</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All properties must be placed after all fields.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>10</line>
+</issue>
+<issue>
+<key>ElementsMustAppearInTheCorrectOrder</key>
+<message>All properties must be placed after all constructors.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>CodeMustNotContainEmptyStatements</key>
+<message>The code contains an extra semicolon.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Size must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>24</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>25</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>35</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>37</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>39</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>41</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>32</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Size must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>30</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Size must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>56</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Equals must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>63</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to Equals must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>71</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to actual must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>78</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>28</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>49</line>
+</issue>
+<issue>
+<key>UseBuiltInTypeAlias</key>
+<message>Use the built-in type alias 'string' rather than String or System.String.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>54</line>
+</issue>
+<issue>
+<key>ClosingCurlyBracketsMustBeSpacedCorrectly</key>
+<message>Invalid spacing around the closing curly bracket.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>SemicolonsMustBeSpacedCorrectly</key>
+<message>Invalid spacing around the semicolon.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>20</line>
+</issue>
+<issue>
+<key>KeywordsMustBeSpacedCorrectly</key>
+<message>The spacing around the keyword 'typeof' is invalid.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>OpeningParenthesisMustBeSpacedCorrectly</key>
+<message>Invalid spacing around the opening parenthesis.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>ClosingParenthesisMustBeSpacedCorrectly</key>
+<message>Invalid spacing around the closing parenthesis.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>78</line>
+</issue>
+<issue>
+<key>SymbolsMustBeSpacedCorrectly</key>
+<message>The spacing around the symbol '*' is invalid.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs</file>
+<line>78</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\Properties\AssemblyInfo.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The class must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>11</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>13</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>14</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>15</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>ElementsMustBeDocumented</key>
+<message>The field must have a documentation header.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>19</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>22</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>26</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>38</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>42</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>53</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>57</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>66</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>79</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>83</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>92</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>96</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>105</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>109</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>118</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>122</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>131</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>135</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>151</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>155</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>162</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>179</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>183</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>191</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>195</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>206</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>210</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>218</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>222</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>232</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>236</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>246</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>250</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>256</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>260</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>268</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>272</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>281</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>285</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>293</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>297</line>
+</issue>
+<issue>
+<key>DocumentationHeadersMustNotContainBlankLines</key>
+<message>The documentation header must not contain blank lines. Use the 'para' tag to insert line breaks within documentation text.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>305</line>
+</issue>
+<issue>
+<key>ElementDocumentationMustHaveSummaryText</key>
+<message>The summary section in the documentation header must not be empty.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>309</line>
+</issue>
+<issue>
+<key>FileMustHaveHeader</key>
+<message>The file has no header, the header Xml is invalid, or the header is not located at the top of the file.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>SingleLineCommentMustBePrecededByBlankLine</key>
+<message>A single-line comment must be preceded by a blank line or another single-line comment, or must be the first item in its scope. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>200</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'f12CHF' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>13</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'f14CHF' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>14</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'f7USD' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>15</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'f21USD' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>16</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'fMB1' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>18</line>
+</issue>
+<issue>
+<key>FieldNamesMustNotUseHungarianNotation</key>
+<message>The variable name 'fMB2' begins with a prefix that looks like Hungarian notation. Remove the prefix or add it to the list of allowed prefixes.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>19</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>1</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>2</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>3</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>4</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>5</line>
+</issue>
+<issue>
+<key>UsingDirectivesMustBePlacedWithinNamespace</key>
+<message>All using directives must be placed inside of the namespace.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>6</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>42</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>57</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>70</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>83</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>96</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>109</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>122</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>135</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>155</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>166</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>183</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>195</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>210</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>222</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>236</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>250</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>260</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>272</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>285</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>297</line>
+</issue>
+<issue>
+<key>ElementsMustBeOrderedByAccess</key>
+<message>All protected methods must be placed after all public methods.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>309</line>
+</issue>
+<issue>
+<key>UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives</key>
+<message>Using alias directives must be placed after all using namespace directives.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>5</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>28</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f14CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>29</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f7USD must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>30</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f21USD must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>31</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>33</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB2 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>34</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>47</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>48</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>49</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>62</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>75</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>88</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>101</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>111</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>125</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>127</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>140</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>142</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>144</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>145</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>146</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>147</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>158</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>171</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>173</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>174</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>175</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>185</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>187</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>214</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to fMB1 must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>228</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>242</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>252</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f12CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>264</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f14CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>277</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f14CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>289</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f14CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>301</line>
+</issue>
+<issue>
+<key>PrefixLocalCallsWithThis</key>
+<message>The call to f14CHF must begin with the 'this.' prefix to indicate that the item is a member of the class.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>313</line>
+</issue>
+<issue>
+<key>SymbolsMustBeSpacedCorrectly</key>
+<message>The spacing around the symbol '=' is invalid.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>5</line>
+</issue>
+<issue>
+<key>SingleLineCommentsMustBeginWithSingleSpace</key>
+<message>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>137</line>
+</issue>
+<issue>
+<key>SingleLineCommentsMustBeginWithSingleSpace</key>
+<message>The comment must start with a single space. To ignore this error when commenting out a line of code, begin the comment with '////' rather than '//'.</message>
+<level>WARNING</level>
+<file>C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\TestMoney.cs</file>
+<line>168</line>
+</issue>
+</issues>

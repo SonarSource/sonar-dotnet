@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<PartCoverReport ver="2.3.0.35109">
+  <File id="2" url="C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs" />
+  <File id="1" url="C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" />
+  <File id="3" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
+  <Type asm="Example.Core" name="Example.Core.Money" flags="1048577">
+    <Method name="Negate" sig="Example.Core.IMoney  ()" flags="486" iflags="0">
+      <code>
+        <pt visit="13" pos="22" len="2" fid="3" sl="94" sc="5" el="94" ec="6" />
+        <pt visit="13" pos="1" len="21" fid="3" sl="93" sc="7" el="93" ec="43" />
+        <pt visit="13" pos="0" len="1" fid="3" sl="91" sc="5" el="91" ec="6" />
+      </code>
+    </Method>
+    <Method name="Equals" sig="bool  (object)" flags="198" iflags="0">
+      <code>
+        <pt visit="27" pos="111" len="2" fid="3" sl="72" sc="5" el="72" ec="6" />
+        <pt visit="3" pos="107" len="4" fid="3" sl="71" sc="7" el="71" ec="20" />
+        <pt visit="24" pos="68" len="39" fid="3" sl="68" sc="9" el="69" ec="38" />
+        <pt visit="24" pos="61" len="7" fid="3" sl="67" sc="9" el="67" ec="40" />
+        <pt visit="24" pos="60" len="1" fid="3" sl="66" sc="7" el="66" ec="8" />
+        <pt visit="27" pos="57" len="3" />
+        <pt visit="27" pos="44" len="13" fid="3" sl="65" sc="7" el="65" ec="29" />
+        <pt visit="0" pos="30" len="14" fid="3" sl="64" sc="11" el="64" ec="44" />
+        <pt visit="0" pos="27" len="3" />
+        <pt visit="0" pos="14" len="13" fid="3" sl="63" sc="9" el="63" ec="32" />
+        <pt visit="27" pos="11" len="3" />
+        <pt visit="27" pos="1" len="10" fid="3" sl="62" sc="7" el="62" ec="18" />
+        <pt visit="27" pos="0" len="1" fid="3" sl="59" sc="5" el="59" ec="6" />
+      </code>
+    </Method>
+    <Method name="AddMoney" sig="Example.Core.IMoney  (Example.Core.Money)" flags="486" iflags="0">
+      <code>
+        <pt visit="17" pos="62" len="2" fid="3" sl="41" sc="5" el="41" ec="6" />
+        <pt visit="1" pos="52" len="10" fid="3" sl="40" sc="7" el="40" ec="36" />
+        <pt visit="16" pos="25" len="27" fid="3" sl="39" sc="9" el="39" ec="55" />
+        <pt visit="17" pos="22" len="3" />
+        <pt visit="17" pos="1" len="21" fid="3" sl="38" sc="7" el="38" ec="39" />
+        <pt visit="17" pos="0" len="1" fid="3" sl="37" sc="5" el="37" ec="6" />
+      </code>
+    </Method>
+    <Method name="Multiply" sig="Example.Core.IMoney  (int)" flags="486" iflags="0">
+      <code>
+        <pt visit="5" pos="23" len="2" fid="3" sl="88" sc="5" el="88" ec="6" />
+        <pt visit="5" pos="1" len="22" fid="3" sl="87" sc="7" el="87" ec="51" />
+        <pt visit="5" pos="0" len="1" fid="3" sl="85" sc="5" el="85" ec="6" />
+      </code>
+    </Method>
+    <Method name="get_Currency" sig="string  ()" flags="2182" iflags="0">
+      <code>
+        <pt visit="406" pos="10" len="2" fid="3" sl="55" sc="31" el="55" ec="32" />
+        <pt visit="406" pos="1" len="9" fid="3" sl="55" sc="13" el="55" ec="30" />
+        <pt visit="406" pos="0" len="1" fid="3" sl="55" sc="11" el="55" ec="12" />
+      </code>
+    </Method>
+    <Method name="Add" sig="Example.Core.IMoney  (Example.Core.IMoney)" flags="486" iflags="0">
+      <code>
+        <pt visit="19" pos="11" len="2" fid="3" sl="34" sc="5" el="34" ec="6" />
+        <pt visit="19" pos="1" len="10" fid="3" sl="33" sc="7" el="33" ec="31" />
+        <pt visit="19" pos="0" len="1" fid="3" sl="32" sc="5" el="32" ec="6" />
+      </code>
+    </Method>
+    <Method name="ToString" sig="string  ()" flags="198" iflags="0">
+      <code>
+        <pt visit="1" pos="83" len="2" fid="3" sl="108" sc="5" el="108" ec="6" />
+        <pt visit="1" pos="74" len="9" fid="3" sl="107" sc="7" el="107" ec="32" />
+        <pt visit="1" pos="7" len="67" fid="3" sl="106" sc="7" el="106" ec="58" />
+        <pt visit="1" pos="1" len="6" fid="3" sl="104" sc="7" el="104" ec="50" />
+        <pt visit="1" pos="0" len="1" fid="3" sl="102" sc="5" el="102" ec="6" />
+      </code>
+    </Method>
+    <Method name="get_IsZero" sig="bool  ()" flags="2534" iflags="0">
+      <code>
+        <pt visit="65" pos="13" len="2" fid="3" sl="81" sc="33" el="81" ec="34" />
+        <pt visit="65" pos="1" len="12" fid="3" sl="81" sc="13" el="81" ec="32" />
+        <pt visit="65" pos="0" len="1" fid="3" sl="81" sc="11" el="81" ec="12" />
+      </code>
+    </Method>
+    <Method name="get_Amount" sig="int  ()" flags="2182" iflags="0">
+      <code>
+        <pt visit="208" pos="10" len="2" fid="3" sl="50" sc="29" el="50" ec="30" />
+        <pt visit="208" pos="1" len="9" fid="3" sl="50" sc="13" el="50" ec="28" />
+        <pt visit="208" pos="0" len="1" fid="3" sl="50" sc="11" el="50" ec="12" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  (int, string)" flags="6278" iflags="0">
+      <code>
+        <pt visit="153" pos="22" len="2" fid="3" sl="26" sc="5" el="26" ec="6" />
+        <pt visit="153" pos="15" len="7" fid="3" sl="25" sc="7" el="25" ec="28" />
+        <pt visit="153" pos="8" len="7" fid="3" sl="24" sc="7" el="24" ec="24" />
+        <pt visit="153" pos="7" len="1" fid="3" sl="23" sc="5" el="23" ec="6" />
+        <pt visit="153" pos="0" len="7" fid="3" sl="22" sc="5" el="22" ec="46" />
+      </code>
+    </Method>
+    <Method name="Subtract" sig="Example.Core.IMoney  (Example.Core.IMoney)" flags="486" iflags="0">
+      <code>
+        <pt visit="2" pos="16" len="2" fid="3" sl="99" sc="5" el="99" ec="6" />
+        <pt visit="2" pos="1" len="15" fid="3" sl="98" sc="7" el="98" ec="30" />
+        <pt visit="2" pos="0" len="1" fid="3" sl="97" sc="5" el="97" ec="6" />
+      </code>
+    </Method>
+    <Method name="GetHashCode" sig="int  ()" flags="198" iflags="0">
+      <code>
+        <pt visit="6" pos="22" len="2" fid="3" sl="77" sc="5" el="77" ec="6" />
+        <pt visit="6" pos="1" len="21" fid="3" sl="76" sc="7" el="76" ec="48" />
+        <pt visit="6" pos="0" len="1" fid="3" sl="75" sc="5" el="75" ec="6" />
+      </code>
+    </Method>
+    <Method name="AddMoneyBag" sig="Example.Core.IMoney  (Example.Core.MoneyBag)" flags="486" iflags="0">
+      <code>
+        <pt visit="2" pos="11" len="2" fid="3" sl="46" sc="5" el="46" ec="6" />
+        <pt visit="2" pos="1" len="10" fid="3" sl="45" sc="7" el="45" ec="31" />
+        <pt visit="2" pos="0" len="1" fid="3" sl="44" sc="5" el="44" ec="6" />
+      </code>
+    </Method>
+  </Type>
+  <Type asm="Example.Core" name="Example.Core.SampleMeasure" flags="1048577">
+    <Method name="Equals" sig="bool  (Example.Core.SampleMeasure)" flags="134" iflags="0">
+      <code>
+        <pt visit="0" pos="86" len="2" fid="2" sl="64" sc="5" el="64" ec="6" />
+        <pt visit="0" pos="37" len="49" fid="2" sl="63" sc="7" el="63" ec="61" />
+        <pt visit="0" pos="33" len="4" fid="2" sl="62" sc="39" el="62" ec="51" />
+        <pt visit="0" pos="30" len="3" />
+        <pt visit="0" pos="19" len="11" fid="2" sl="62" sc="7" el="62" ec="38" />
+        <pt visit="0" pos="15" len="4" fid="2" sl="61" sc="39" el="61" ec="52" />
+        <pt visit="0" pos="12" len="3" />
+        <pt visit="0" pos="1" len="11" fid="2" sl="61" sc="7" el="61" ec="38" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="60" sc="5" el="60" ec="6" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+      <code>
+        <pt visit="0" pos="23" len="2" fid="2" sl="26" sc="5" el="26" ec="6" />
+        <pt visit="0" pos="16" len="7" fid="2" sl="25" sc="7" el="25" ec="27" />
+        <pt visit="0" pos="8" len="8" fid="2" sl="24" sc="7" el="24" ec="16" />
+        <pt visit="0" pos="7" len="1" fid="2" sl="23" sc="5" el="23" ec="6" />
+        <pt visit="0" pos="0" len="7" fid="2" sl="22" sc="5" el="22" ec="27" />
+      </code>
+    </Method>
+    <Method name="Equals" sig="bool  (object)" flags="198" iflags="0">
+      <code>
+        <pt visit="0" pos="78" len="2" fid="2" sl="72" sc="5" el="72" ec="6" />
+        <pt visit="0" pos="63" len="15" fid="2" sl="71" sc="7" el="71" ec="42" />
+        <pt visit="0" pos="59" len="4" fid="2" sl="70" sc="52" el="70" ec="65" />
+        <pt visit="0" pos="56" len="3" />
+        <pt visit="0" pos="37" len="19" fid="2" sl="70" sc="7" el="70" ec="51" />
+        <pt visit="0" pos="33" len="4" fid="2" sl="69" sc="39" el="69" ec="51" />
+        <pt visit="0" pos="30" len="3" />
+        <pt visit="0" pos="19" len="11" fid="2" sl="69" sc="7" el="69" ec="38" />
+        <pt visit="0" pos="15" len="4" fid="2" sl="68" sc="39" el="68" ec="52" />
+        <pt visit="0" pos="12" len="3" />
+        <pt visit="0" pos="1" len="11" fid="2" sl="68" sc="7" el="68" ec="38" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="67" sc="5" el="67" ec="6" />
+      </code>
+    </Method>
+    <Method name="Compute" sig="string  (string)" flags="134" iflags="0">
+      <code>
+        <pt visit="0" pos="17" len="2" fid="2" sl="57" sc="5" el="57" ec="6" />
+        <pt visit="0" pos="1" len="16" fid="2" sl="56" sc="7" el="56" ec="39" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="55" sc="5" el="55" ec="6" />
+      </code>
+    </Method>
+    <Method name="Compute" sig="string  ()" flags="134" iflags="0">
+      <code>
+        <pt visit="0" pos="145" len="2" fid="2" sl="47" sc="5" el="47" ec="6" />
+        <pt visit="0" pos="137" len="8" fid="2" sl="46" sc="7" el="46" ec="21" />
+        <pt visit="0" pos="131" len="6" />
+        <pt visit="0" pos="121" len="10" fid="2" sl="30" sc="25" el="30" ec="35" />
+        <pt visit="0" pos="113" len="8" fid="2" sl="43" sc="13" el="43" ec="27" />
+        <pt visit="0" pos="94" len="19" fid="2" sl="41" sc="13" el="41" ec="38" />
+        <pt visit="0" pos="75" len="19" fid="2" sl="39" sc="13" el="39" ec="38" />
+        <pt visit="0" pos="56" len="19" fid="2" sl="37" sc="13" el="37" ec="38" />
+        <pt visit="0" pos="37" len="19" fid="2" sl="35" sc="13" el="35" ec="38" />
+        <pt visit="0" pos="13" len="24" />
+        <pt visit="0" pos="6" len="7" fid="2" sl="32" sc="9" el="32" ec="24" />
+        <pt visit="0" pos="5" len="1" fid="2" sl="31" sc="7" el="31" ec="8" />
+        <pt visit="0" pos="3" len="2" />
+        <pt visit="0" pos="1" len="2" fid="2" sl="30" sc="12" el="30" ec="24" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="29" sc="5" el="29" ec="6" />
+      </code>
+    </Method>
+    <Method name="set_Size" sig="void  (int)" flags="2182" iflags="0">
+      <code>
+        <pt visit="0" pos="0" len="8" />
+      </code>
+    </Method>
+    <Method name="GetHashCode" sig="int  ()" flags="198" iflags="0">
+      <code>
+        <pt visit="0" pos="34" len="2" fid="2" sl="80" sc="5" el="80" ec="6" />
+        <pt visit="0" pos="2" len="32" fid="2" sl="78" sc="9" el="78" ec="50" />
+        <pt visit="0" pos="1" len="1" fid="2" sl="77" sc="7" el="77" ec="8" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="75" sc="5" el="75" ec="6" />
+      </code>
+    </Method>
+    <Method name="Compute" sig="string  (int)" flags="134" iflags="0">
+      <code>
+        <pt visit="0" pos="16" len="2" fid="2" sl="52" sc="5" el="52" ec="6" />
+        <pt visit="0" pos="1" len="15" fid="2" sl="51" sc="7" el="51" ec="43" />
+        <pt visit="0" pos="0" len="1" fid="2" sl="50" sc="5" el="50" ec="6" />
+      </code>
+    </Method>
+    <Method name="get_Size" sig="int  ()" flags="2182" iflags="0">
+      <code>
+        <pt visit="0" pos="9" len="2" />
+        <pt visit="0" pos="0" len="9" />
+      </code>
+    </Method>
+  </Type>
+  <Type asm="Example.Core" name="Example.Core.Model.SubType" flags="1048577">
+    <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+      <code>
+        <pt visit="0" pos="6" len="1" />
+        <pt visit="0" pos="0" len="6" />
+      </code>
+    </Method>
+    <Method name="set_Name" sig="void  (string)" flags="2182" iflags="0">
+      <code>
+        <pt visit="0" pos="0" len="8" />
+      </code>
+    </Method>
+    <Method name="get_Name" sig="string  ()" flags="2182" iflags="0">
+      <code>
+        <pt visit="0" pos="9" len="2" />
+        <pt visit="0" pos="0" len="9" />
+      </code>
+    </Method>
+  </Type>
+  <Type asm="Example.Core" name="Example.Core.MoneyBag" flags="1048577">
+    <Method name="Multiply" sig="Example.Core.IMoney  (int)" flags="486" iflags="0">
+      <code>
+        <pt visit="3" pos="112" len="2" fid="1" sl="146" sc="5" el="146" ec="6" />
+        <pt visit="3" pos="108" len="4" fid="1" sl="145" sc="7" el="145" ec="21" />
+        <pt visit="2" pos="107" len="1" fid="1" sl="144" sc="7" el="144" ec="8" />
+        <pt visit="2" pos="106" len="1" />
+        <pt visit="6" pos="74" len="32" />
+        <pt visit="6" pos="66" len="8" fid="1" sl="140" sc="26" el="140" ec="28" />
+        <pt visit="4" pos="65" len="1" fid="1" sl="143" sc="9" el="143" ec="10" />
+        <pt visit="4" pos="46" len="19" fid="1" sl="142" sc="11" el="142" ec="57" />
+        <pt visit="4" pos="45" len="1" fid="1" sl="141" sc="9" el="141" ec="10" />
+        <pt visit="4" pos="32" len="13" fid="1" sl="140" sc="18" el="140" ec="25" />
+        <pt visit="2" pos="30" len="2" />
+        <pt visit="2" pos="17" len="13" fid="1" sl="140" sc="29" el="140" ec="36" />
+        <pt visit="2" pos="16" len="1" fid="1" sl="140" sc="9" el="140" ec="16" />
+        <pt visit="2" pos="15" len="1" fid="1" sl="139" sc="7" el="139" ec="8" />
+        <pt visit="3" pos="12" len="3" />
+        <pt visit="3" pos="7" len="5" fid="1" sl="138" sc="7" el="138" ec="23" />
+        <pt visit="3" pos="1" len="6" fid="1" sl="137" sc="7" el="137" ec="40" />
+        <pt visit="3" pos="0" len="1" fid="1" sl="136" sc="5" el="136" ec="6" />
+      </code>
+    </Method>
+    <Method name="AddMoneyBag" sig="Example.Core.IMoney  (Example.Core.MoneyBag)" flags="486" iflags="0">
+      <code>
+        <pt visit="4" pos="16" len="2" fid="1" sl="66" sc="5" el="66" ec="6" />
+        <pt visit="4" pos="1" len="15" fid="1" sl="65" sc="7" el="65" ec="49" />
+        <pt visit="4" pos="0" len="1" fid="1" sl="64" sc="5" el="64" ec="6" />
+      </code>
+    </Method>
+    <Method name="Subtract" sig="Example.Core.IMoney  (Example.Core.IMoney)" flags="486" iflags="0">
+      <code>
+        <pt visit="4" pos="16" len="2" fid="1" sl="165" sc="5" el="165" ec="6" />
+        <pt visit="4" pos="1" len="15" fid="1" sl="164" sc="7" el="164" ec="30" />
+        <pt visit="4" pos="0" len="1" fid="1" sl="163" sc="5" el="163" ec="6" />
+      </code>
+    </Method>
+    <Method name="get_IsZero" sig="bool  ()" flags="2534" iflags="0">
+      <code>
+        <pt visit="17" pos="18" len="2" fid="1" sl="133" sc="40" el="133" ec="41" />
+        <pt visit="17" pos="1" len="17" fid="1" sl="133" sc="13" el="133" ec="39" />
+        <pt visit="17" pos="0" len="1" fid="1" sl="133" sc="11" el="133" ec="12" />
+      </code>
+    </Method>
+    <Method name="Contains" sig="bool  (Example.Core.Money)" flags="129" iflags="0">
+      <code>
+        <pt visit="22" pos="31" len="2" fid="1" sl="91" sc="5" el="91" ec="6" />
+        <pt visit="22" pos="14" len="17" fid="1" sl="90" sc="7" el="90" ec="40" />
+        <pt visit="22" pos="1" len="13" fid="1" sl="89" sc="7" el="89" ec="44" />
+        <pt visit="22" pos="0" len="1" fid="1" sl="88" sc="5" el="88" ec="6" />
+      </code>
+    </Method>
+    <Method name="AddMoney" sig="Example.Core.IMoney  (Example.Core.Money)" flags="486" iflags="0">
+      <code>
+        <pt visit="4" pos="16" len="2" fid="1" sl="61" sc="5" el="61" ec="6" />
+        <pt visit="4" pos="1" len="15" fid="1" sl="60" sc="7" el="60" ec="49" />
+        <pt visit="4" pos="0" len="1" fid="1" sl="59" sc="5" el="59" ec="6" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  (Example.Core.Money, Example.Core.Money)" flags="6278" iflags="0">
+      <code>
+        <pt visit="45" pos="36" len="2" fid="1" sl="39" sc="5" el="39" ec="6" />
+        <pt visit="45" pos="28" len="8" fid="1" sl="38" sc="7" el="38" ec="23" />
+        <pt visit="45" pos="20" len="8" fid="1" sl="37" sc="7" el="37" ec="23" />
+        <pt visit="45" pos="19" len="1" fid="1" sl="36" sc="5" el="36" ec="6" />
+        <pt visit="45" pos="12" len="7" fid="1" sl="35" sc="5" el="35" ec="40" />
+        <pt visit="45" pos="0" len="12" fid="1" sl="21" sc="5" el="21" ec="50" />
+      </code>
+    </Method>
+    <Method name="Simplify" sig="Example.Core.IMoney  ()" flags="129" iflags="0">
+      <code>
+        <pt visit="8" pos="46" len="2" fid="1" sl="161" sc="5" el="161" ec="6" />
+        <pt visit="5" pos="42" len="4" fid="1" sl="160" sc="7" el="160" ec="19" />
+        <pt visit="3" pos="22" len="20" fid="1" sl="159" sc="9" el="159" ec="35" />
+        <pt visit="8" pos="19" len="3" />
+        <pt visit="8" pos="1" len="18" fid="1" sl="158" sc="7" el="158" ec="30" />
+        <pt visit="8" pos="0" len="1" fid="1" sl="157" sc="5" el="157" ec="6" />
+      </code>
+    </Method>
+    <Method name="GetHashCode" sig="int  ()" flags="198" iflags="0">
+      <code>
+        <pt visit="2" pos="88" len="2" fid="1" sl="130" sc="5" el="130" ec="6" />
+        <pt visit="2" pos="84" len="4" fid="1" sl="129" sc="7" el="129" ec="19" />
+        <pt visit="2" pos="83" len="1" />
+        <pt visit="6" pos="49" len="34" />
+        <pt visit="6" pos="41" len="8" fid="1" sl="125" sc="24" el="125" ec="26" />
+        <pt visit="4" pos="40" len="1" fid="1" sl="128" sc="7" el="128" ec="8" />
+        <pt visit="4" pos="31" len="9" fid="1" sl="127" sc="9" el="127" ec="33" />
+        <pt visit="4" pos="30" len="1" fid="1" sl="126" sc="7" el="126" ec="8" />
+        <pt visit="4" pos="18" len="12" fid="1" sl="125" sc="16" el="125" ec="23" />
+        <pt visit="2" pos="16" len="2" />
+        <pt visit="2" pos="4" len="12" fid="1" sl="125" sc="27" el="125" ec="34" />
+        <pt visit="2" pos="3" len="1" fid="1" sl="125" sc="7" el="125" ec="14" />
+        <pt visit="2" pos="1" len="2" fid="1" sl="124" sc="7" el="124" ec="20" />
+        <pt visit="2" pos="0" len="1" fid="1" sl="123" sc="5" el="123" ec="6" />
+      </code>
+    </Method>
+    <Method name="AppendMoney" sig="void  (Example.Core.Money)" flags="129" iflags="0">
+      <code>
+        <pt visit="154" pos="90" len="1" fid="1" sl="86" sc="5" el="86" ec="6" />
+        <pt visit="9" pos="77" len="13" fid="1" sl="85" sc="7" el="85" ec="24" />
+        <pt visit="5" pos="75" len="2" fid="1" sl="84" sc="9" el="84" ec="16" />
+        <pt visit="14" pos="72" len="3" />
+        <pt visit="14" pos="62" len="10" fid="1" sl="83" sc="7" el="83" ec="22" />
+        <pt visit="14" pos="54" len="8" fid="1" sl="82" sc="7" el="82" ec="36" />
+        <pt visit="14" pos="41" len="13" fid="1" sl="81" sc="7" el="81" ec="27" />
+        <pt visit="140" pos="39" len="2" fid="1" sl="79" sc="9" el="79" ec="16" />
+        <pt visit="140" pos="26" len="13" fid="1" sl="78" sc="9" el="78" ec="29" />
+        <pt visit="140" pos="25" len="1" fid="1" sl="77" sc="7" el="77" ec="8" />
+        <pt visit="154" pos="22" len="3" />
+        <pt visit="154" pos="14" len="8" fid="1" sl="76" sc="7" el="76" ec="23" />
+        <pt visit="154" pos="1" len="13" fid="1" sl="75" sc="7" el="75" ec="47" />
+        <pt visit="154" pos="0" len="1" fid="1" sl="74" sc="5" el="74" ec="6" />
+      </code>
+    </Method>
+    <Method name="Add" sig="Example.Core.IMoney  (Example.Core.IMoney)" flags="486" iflags="0">
+      <code>
+        <pt visit="6" pos="11" len="2" fid="1" sl="56" sc="5" el="56" ec="6" />
+        <pt visit="6" pos="1" len="10" fid="1" sl="55" sc="7" el="55" ec="34" />
+        <pt visit="6" pos="0" len="1" fid="1" sl="54" sc="5" el="54" ec="6" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  (Example.Core.Money[])" flags="6278" iflags="0">
+      <code>
+        <pt visit="12" pos="62" len="2" fid="1" sl="33" sc="5" el="33" ec="6" />
+        <pt visit="36" pos="59" len="3" />
+        <pt visit="36" pos="52" len="7" fid="1" sl="28" sc="23" el="28" ec="37" />
+        <pt visit="24" pos="48" len="4" fid="1" sl="28" sc="39" el="28" ec="42" />
+        <pt visit="24" pos="47" len="1" fid="1" sl="32" sc="7" el="32" ec="8" />
+        <pt visit="22" pos="37" len="10" fid="1" sl="31" sc="11" el="31" ec="31" />
+        <pt visit="24" pos="34" len="3" />
+        <pt visit="24" pos="25" len="9" fid="1" sl="30" sc="9" el="30" ec="28" />
+        <pt visit="24" pos="24" len="1" fid="1" sl="29" sc="7" el="29" ec="8" />
+        <pt visit="12" pos="22" len="2" />
+        <pt visit="12" pos="20" len="2" fid="1" sl="28" sc="12" el="28" ec="22" />
+        <pt visit="12" pos="19" len="1" fid="1" sl="27" sc="5" el="27" ec="6" />
+        <pt visit="12" pos="12" len="7" fid="1" sl="26" sc="5" el="26" ec="33" />
+        <pt visit="12" pos="0" len="12" fid="1" sl="21" sc="5" el="21" ec="50" />
+      </code>
+    </Method>
+    <Method name="Negate" sig="Example.Core.IMoney  ()" flags="486" iflags="0">
+      <code>
+        <pt visit="5" pos="101" len="2" fid="1" sl="155" sc="5" el="155" ec="6" />
+        <pt visit="5" pos="97" len="4" fid="1" sl="154" sc="7" el="154" ec="21" />
+        <pt visit="5" pos="96" len="1" />
+        <pt visit="15" pos="62" len="34" />
+        <pt visit="15" pos="54" len="8" fid="1" sl="150" sc="24" el="150" ec="26" />
+        <pt visit="10" pos="53" len="1" fid="1" sl="153" sc="7" el="153" ec="8" />
+        <pt visit="10" pos="35" len="18" fid="1" sl="152" sc="9" el="152" ec="47" />
+        <pt visit="10" pos="34" len="1" fid="1" sl="151" sc="7" el="151" ec="8" />
+        <pt visit="10" pos="22" len="12" fid="1" sl="150" sc="16" el="150" ec="23" />
+        <pt visit="5" pos="20" len="2" />
+        <pt visit="5" pos="8" len="12" fid="1" sl="150" sc="27" el="150" ec="34" />
+        <pt visit="5" pos="7" len="1" fid="1" sl="150" sc="7" el="150" ec="14" />
+        <pt visit="5" pos="1" len="6" fid="1" sl="149" sc="7" el="149" ec="40" />
+        <pt visit="5" pos="0" len="1" fid="1" sl="148" sc="5" el="148" ec="6" />
+      </code>
+    </Method>
+    <Method name="FindMoney" sig="Example.Core.Money  (string)" flags="129" iflags="0">
+      <code>
+        <pt visit="176" pos="97" len="2" fid="1" sl="121" sc="5" el="121" ec="6" />
+        <pt visit="176" pos="96" len="1" />
+        <pt visit="140" pos="92" len="4" fid="1" sl="120" sc="7" el="120" ec="19" />
+        <pt visit="140" pos="91" len="1" />
+        <pt visit="253" pos="60" len="31" />
+        <pt visit="253" pos="53" len="7" fid="1" sl="115" sc="24" el="115" ec="26" />
+        <pt visit="77" pos="52" len="1" fid="1" sl="119" sc="7" el="119" ec="8" />
+        <pt visit="36" pos="48" len="4" fid="1" sl="118" sc="11" el="118" ec="20" />
+        <pt visit="113" pos="45" len="3" />
+        <pt visit="113" pos="29" len="16" fid="1" sl="117" sc="9" el="117" ec="41" />
+        <pt visit="113" pos="28" len="1" fid="1" sl="116" sc="7" el="116" ec="8" />
+        <pt visit="113" pos="16" len="12" fid="1" sl="115" sc="16" el="115" ec="23" />
+        <pt visit="176" pos="14" len="2" />
+        <pt visit="176" pos="2" len="12" fid="1" sl="115" sc="27" el="115" ec="34" />
+        <pt visit="176" pos="1" len="1" fid="1" sl="115" sc="7" el="115" ec="14" />
+        <pt visit="176" pos="0" len="1" fid="1" sl="114" sc="5" el="114" ec="6" />
+      </code>
+    </Method>
+    <Method name="AppendBag" sig="void  (Example.Core.MoneyBag)" flags="129" iflags="0">
+      <code>
+        <pt visit="12" pos="72" len="1" fid="1" sl="72" sc="5" el="72" ec="6" />
+        <pt visit="12" pos="71" len="1" />
+        <pt visit="36" pos="43" len="28" />
+        <pt visit="36" pos="36" len="7" fid="1" sl="70" sc="24" el="70" ec="26" />
+        <pt visit="24" pos="28" len="8" fid="1" sl="71" sc="9" el="71" ec="24" />
+        <pt visit="24" pos="16" len="12" fid="1" sl="70" sc="16" el="70" ec="23" />
+        <pt visit="12" pos="14" len="2" />
+        <pt visit="12" pos="2" len="12" fid="1" sl="70" sc="27" el="70" ec="39" />
+        <pt visit="12" pos="1" len="1" fid="1" sl="70" sc="7" el="70" ec="14" />
+        <pt visit="12" pos="0" len="1" fid="1" sl="69" sc="5" el="69" ec="6" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  (Example.Core.MoneyBag, Example.Core.MoneyBag)" flags="6278" iflags="0">
+      <code>
+        <pt visit="4" pos="36" len="2" fid="1" sl="51" sc="5" el="51" ec="6" />
+        <pt visit="4" pos="28" len="8" fid="1" sl="50" sc="7" el="50" ec="21" />
+        <pt visit="4" pos="20" len="8" fid="1" sl="49" sc="7" el="49" ec="21" />
+        <pt visit="4" pos="19" len="1" fid="1" sl="48" sc="5" el="48" ec="6" />
+        <pt visit="4" pos="12" len="7" fid="1" sl="47" sc="5" el="47" ec="46" />
+        <pt visit="4" pos="0" len="12" fid="1" sl="21" sc="5" el="21" ec="50" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  ()" flags="6278" iflags="0">
+      <code>
+        <pt visit="8" pos="20" len="2" fid="1" sl="25" sc="5" el="25" ec="6" />
+        <pt visit="8" pos="19" len="1" fid="1" sl="24" sc="5" el="24" ec="6" />
+        <pt visit="8" pos="12" len="7" fid="1" sl="23" sc="5" el="23" ec="23" />
+        <pt visit="8" pos="0" len="12" fid="1" sl="21" sc="5" el="21" ec="50" />
+      </code>
+    </Method>
+    <Method name="ToString" sig="string  ()" flags="198" iflags="0">
+      <code>
+        <pt visit="0" pos="118" len="2" fid="1" sl="174" sc="5" el="174" ec="6" />
+        <pt visit="0" pos="109" len="9" fid="1" sl="173" sc="7" el="173" ec="32" />
+        <pt visit="0" pos="97" len="12" fid="1" sl="172" sc="7" el="172" ec="26" />
+        <pt visit="0" pos="96" len="1" />
+        <pt visit="0" pos="62" len="34" />
+        <pt visit="0" pos="54" len="8" fid="1" sl="170" sc="24" el="170" ec="26" />
+        <pt visit="0" pos="46" len="8" fid="1" sl="171" sc="9" el="171" ec="26" />
+        <pt visit="0" pos="34" len="12" fid="1" sl="170" sc="16" el="170" ec="23" />
+        <pt visit="0" pos="32" len="2" />
+        <pt visit="0" pos="20" len="12" fid="1" sl="170" sc="27" el="170" ec="34" />
+        <pt visit="0" pos="19" len="1" fid="1" sl="170" sc="7" el="170" ec="14" />
+        <pt visit="0" pos="7" len="12" fid="1" sl="169" sc="7" el="169" ec="26" />
+        <pt visit="0" pos="1" len="6" fid="1" sl="168" sc="7" el="168" ec="50" />
+        <pt visit="0" pos="0" len="1" fid="1" sl="167" sc="5" el="167" ec="6" />
+      </code>
+    </Method>
+    <Method name="Equals" sig="bool  (object)" flags="198" iflags="0">
+      <code>
+        <pt visit="14" pos="202" len="2" fid="1" sl="112" sc="5" el="112" ec="6" />
+        <pt visit="14" pos="201" len="1" />
+        <pt visit="2" pos="197" len="4" fid="1" sl="111" sc="7" el="111" ec="20" />
+        <pt visit="11" pos="193" len="4" fid="1" sl="109" sc="9" el="109" ec="21" />
+        <pt visit="11" pos="192" len="1" />
+        <pt visit="33" pos="160" len="32" />
+        <pt visit="33" pos="152" len="8" fid="1" sl="104" sc="26" el="104" ec="28" />
+        <pt visit="21" pos="151" len="1" fid="1" sl="108" sc="9" el="108" ec="10" />
+        <pt visit="1" pos="147" len="4" fid="1" sl="107" sc="13" el="107" ec="26" />
+        <pt visit="22" pos="144" len="3" />
+        <pt visit="22" pos="136" len="8" fid="1" sl="106" sc="11" el="106" ec="38" />
+        <pt visit="22" pos="135" len="1" fid="1" sl="105" sc="9" el="105" ec="10" />
+        <pt visit="22" pos="122" len="13" fid="1" sl="104" sc="18" el="104" ec="25" />
+        <pt visit="12" pos="120" len="2" />
+        <pt visit="12" pos="107" len="13" fid="1" sl="104" sc="29" el="104" ec="36" />
+        <pt visit="12" pos="106" len="1" fid="1" sl="104" sc="9" el="104" ec="16" />
+        <pt visit="0" pos="102" len="4" fid="1" sl="102" sc="11" el="102" ec="24" />
+        <pt visit="12" pos="99" len="3" />
+        <pt visit="12" pos="74" len="25" fid="1" sl="101" sc="9" el="101" ec="54" />
+        <pt visit="12" pos="67" len="7" fid="1" sl="100" sc="9" el="100" ec="49" />
+        <pt visit="12" pos="66" len="1" fid="1" sl="99" sc="7" el="99" ec="8" />
+        <pt visit="14" pos="60" len="6" />
+        <pt visit="14" pos="47" len="13" fid="1" sl="98" sc="7" el="98" ec="32" />
+        <pt visit="0" pos="30" len="17" fid="1" sl="96" sc="11" el="96" ec="44" />
+        <pt visit="0" pos="27" len="3" />
+        <pt visit="0" pos="14" len="13" fid="1" sl="95" sc="9" el="95" ec="32" />
+        <pt visit="14" pos="11" len="3" />
+        <pt visit="14" pos="1" len="10" fid="1" sl="94" sc="7" el="94" ec="18" />
+        <pt visit="14" pos="0" len="1" fid="1" sl="93" sc="5" el="93" ec="6" />
+      </code>
+    </Method>
+    <Method name=".ctor" sig="void  (Example.Core.Money, Example.Core.MoneyBag)" flags="6278" iflags="0">
+      <code>
+        <pt visit="4" pos="36" len="2" fid="1" sl="45" sc="5" el="45" ec="6" />
+        <pt visit="4" pos="28" len="8" fid="1" sl="44" sc="7" el="44" ec="22" />
+        <pt visit="4" pos="20" len="8" fid="1" sl="43" sc="7" el="43" ec="22" />
+        <pt visit="4" pos="19" len="1" fid="1" sl="42" sc="5" el="42" ec="6" />
+        <pt visit="4" pos="12" len="7" fid="1" sl="41" sc="5" el="41" ec="43" />
+        <pt visit="4" pos="0" len="12" fid="1" sl="21" sc="5" el="21" ec="50" />
+      </code>
+    </Method>
+  </Type>
+</PartCoverReport>

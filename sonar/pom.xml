@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+		<groupId>org.codehaus.sonar.dotnet</groupId>
+		<artifactId>sonar-dotnet</artifactId>
+	<name>Sonar .Net projects</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>A Reactor Project for all the Sonar .Net code quality projects</description>
+  <prerequisites>
+    <maven>2.1</maven>
+  </prerequisites>
+  <inceptionYear>2009</inceptionYear>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License (LGPL), v.3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>    
+  <developers>
+    <developer>
+      <id>jose</id>
+      <name>Jose CHILLAN</name>
+      <email>jose.chillan@codehaus.org</email>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <id>alex</id>
+      <name>Alexandre VICTOOR</name>
+      <email>alexandre.victoor@codehaus.org</email>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+  </developers>	
+  <properties>
+	  <sonar-build-version>1.11.1</sonar-build-version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+    <dependency>
+      <groupId>org.codehaus.maven.dotnet</groupId>
+      <artifactId>dotnet-commons</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+        <type>jar</type>
+    </dependency>
+   <dependency>
+      <groupId>org.codehaus.sonar.dotnet</groupId>
+      <artifactId>sonar-plugin-dotnet-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar-build-version}</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-project</artifactId>
+      <version>2.0.4</version>
+        <type>jar</type>
+    </dependency>
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.5</version>
+        <type>jar</type>
+      <scope>test</scope>
+    </dependency>			
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+      <version>1.7</version>
+    </dependency>
+			
+    </dependencies>
+	</dependencyManagement>
+  <modules>
+    <module>sonar-plugin-sourcemonitor</module>
+    <module>sonar-plugin-dotnet-core</module>
+    <module>sonar-plugin-fxcop</module>
+    <module>sonar-plugin-partcover</module>
+    <module>sonar-plugin-stylecop</module>
+    <module>sonar-plugin-gallio</module>
+    <module>sonar-plugin-dotnet-cpd</module>
+  </modules>
+  
+  <profiles>
+    <profile>
+      <id>deploy-local</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>install</phase>
+                <configuration>
+                  <tasks>
+                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/sonar-${sonar-build-version}/extensions/plugins" failonerror="false" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

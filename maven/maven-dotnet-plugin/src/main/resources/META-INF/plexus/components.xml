@@ -1,0 +1,81 @@
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<component-set>
+  <components>
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>sln</role-hint>
+      <implementation> org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <lifecycles>
+          <lifecycle>
+            <id>default</id>
+            <phases>
+              <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
+              <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+            </phases>
+          </lifecycle>
+          <lifecycle>
+            <id>clean</id>
+            <phases>
+              <clean>org.apache.maven.plugins:maven-clean-plugin:clean,org.codehaus.maven.dotnet:maven-dotnet-plugin:clean</clean>
+            </phases>
+          </lifecycle>
+          <lifecycle>
+            <id>coverage</id>
+            <phases>
+              <phase>
+                <id>test</id>
+                <configuration>
+                  <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+              </phase>
+            </phases>
+          </lifecycle>
+        </lifecycles>
+      </configuration>
+    </component>
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>dll</role-hint>
+      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <phases>
+          <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
+          <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+        </phases>
+      </configuration>
+    </component>
+    <component>
+      <role>org.apache.maven.lifecycle.mapping.LifecycleMapping</role>
+      <role-hint>exe</role-hint>
+      <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
+      <configuration>
+        <phases>
+          <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
+          <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+        </phases>
+      </configuration>
+    </component>
+  </components>
+</component-set>

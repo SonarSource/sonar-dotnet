@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="question">
+      <question>Why do you only support Java 6.0 ?</question>
+      <answer>
+       Because we are lazy: we need to parse and generate XML files and we did it with JAXB, which is native in Java 6.0.
+       We had trouble reproducing the same behaviour in Java 5.0 (to figure out the adequate projects dependencies), got
+       lost amongs the different JAXB versions, and had no time to investigate. But surely, running on Java 5.0 should be possible!
+      </answer>
+    </faq>
+  </part>
+</faqs>

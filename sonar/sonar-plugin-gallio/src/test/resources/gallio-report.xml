@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Maven and Sonar plugin for .Net
+    Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+
+<report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gallio.org/">
+  <testPackageConfig>
+    <assemblyFiles>
+      <assemblyFile>C:\Program Files\NUnit 2.4.8\samples\csharp\failures\bin\Debug\cs-failures.dll</assemblyFile>
+    </assemblyFiles>
+    <hintDirectories />
+    <excludedFrameworkIds />
+    <hostSetup enableShadowCopy="false" debug="false" configurationFileLocation="appBase" processorArchitecture="None">
+      <configuration legacyUnhandledExceptionPolicyEnabled="true" assertUiEnabled="false" remotingCustomErrorsEnabled="false">
+        <assemblyQualifications />
+        <assemblyDependencies />
+        <supportedRuntimeVersions />
+      </configuration>
+    </hostSetup>
+  </testPackageConfig>
+  <testModel>
+    <test id="c2722843734a7a54" name="Root" fullName="" isTestCase="false">
+      <codeReference />
+      <codeLocation />
+      <metadata>
+        <entry key="TestKind">
+          <value>Root</value>
+        </entry>
+      </metadata>
+      <children>
+        <test id="8c2c7b10d85ff7e" name="NUnit v2.4.8.0" fullName="NUnit v2.4.8.0" isTestCase="false">
+          <codeReference />
+          <codeLocation />
+          <metadata>
+            <entry key="TestKind">
+              <value>Framework</value>
+            </entry>
+          </metadata>
+          <children>
+            <test id="77644deaf21a5e62" name="cs-failures" fullName="NUnit v2.4.8.0/cs-failures" isTestCase="false">
+              <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" />
+              <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\bin\Debug\cs-failures.DLL" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Assembly</value>
+                </entry>
+                <entry key="CodeBase">
+                  <value>C:\Program Files\NUnit 2.4.8\samples\csharp\failures\bin\Debug\cs-failures.DLL</value>
+                </entry>
+                <entry key="Company">
+                  <value>NUnit</value>
+                </entry>
+                <entry key="Copyright">
+                  <value>Copyright (C) 2002-2003 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov. 
+Copyright (C) 2000-2003 Philip Craig.
+All Rights Reserved.</value>
+                </entry>
+                <entry key="Description">
+                  <value>C# Sample Unit Tests</value>
+                </entry>
+                <entry key="Product">
+                  <value>NUnit</value>
+                </entry>
+                <entry key="Title">
+                  <value>csharp.sample.dll</value>
+                </entry>
+                <entry key="Version">
+                  <value>2.2.0.0</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="940ba2b3cd4679a2" name="SimpleCSharpTest" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest" isTestCase="false">
+                  <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" />
+                  <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Fixture</value>
+                    </entry>
+                  </metadata>
+                  <children>
+                    <test id="2502a5dab0b5a49c" name="Add" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/Add" isTestCase="true">
+                      <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="Add" />
+                      <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="40" />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                    <test id="972d7c8d7b275fea" name="DivideByZero" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/DivideByZero" isTestCase="true">
+                      <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="DivideByZero" />
+                      <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="51" />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                    <test id="4669b2126c30ca90" name="Equals" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/Equals" isTestCase="true">
+                      <codeReference />
+                      <codeLocation />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                    <test id="c78f58989d07b01f" name="ExpectAnException" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/ExpectAnException" isTestCase="true">
+                      <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="ExpectAnException" />
+                      <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="74" />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                    <test id="7affaf5d752107e" name="IgnoredTest" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/IgnoredTest" isTestCase="true">
+                      <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="IgnoredTest" />
+                      <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="88" />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                        <entry key="IgnoreReason">
+                          <value>ignored test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                    <test id="57970cb5b43df51c" name="UnexpectedException" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/UnexpectedException" isTestCase="true">
+                      <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="UnexpectedException" />
+                      <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="80" />
+                      <metadata>
+                        <entry key="TestKind">
+                          <value>Test</value>
+                        </entry>
+                      </metadata>
+                      <children />
+                      <parameters />
+                    </test>
+                  </children>
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+          </children>
+          <parameters />
+        </test>
+      </children>
+      <parameters />
+    </test>
+    <annotations />
+  </testModel>
+  <testPackageRun startTime="2009-06-04T15:08:11.5739992+02:00" endTime="2009-06-04T15:08:15.4647487+02:00">
+    <testStepRun startTime="2009-06-04T15:08:14.6522227+02:00" endTime="2009-06-04T15:08:15.4334977+02:00">
+      <testStep id="6a7f17c273042e91" name="Root" fullName="" testId="c2722843734a7a54" isPrimary="true" isTestCase="false" isDynamic="false">
+        <codeReference />
+        <codeLocation />
+        <metadata>
+          <entry key="TestKind">
+            <value>Root</value>
+          </entry>
+        </metadata>
+      </testStep>
+      <children>
+        <testStepRun startTime="2009-06-04T15:08:14.6834737+02:00" endTime="2009-06-04T15:08:15.3553702+02:00">
+          <testStep id="1eb30db2efe9a608" name="NUnit v2.4.8.0" fullName="NUnit v2.4.8.0" testId="8c2c7b10d85ff7e" isPrimary="true" isTestCase="false" isDynamic="false">
+            <codeReference />
+            <codeLocation />
+            <metadata>
+              <entry key="TestKind">
+                <value>Framework</value>
+              </entry>
+            </metadata>
+          </testStep>
+          <children>
+            <testStepRun startTime="2009-06-04T15:08:14.7459757+02:00" endTime="2009-06-04T15:08:15.3397447+02:00">
+              <testStep id="c241e03117f80ca3" name="cs-failures" fullName="NUnit v2.4.8.0/cs-failures" testId="77644deaf21a5e62" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" />
+                <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\bin\Debug\cs-failures.DLL" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Assembly</value>
+                  </entry>
+                  <entry key="CodeBase">
+                    <value>C:\Program Files\NUnit 2.4.8\samples\csharp\failures\bin\Debug\cs-failures.DLL</value>
+                  </entry>
+                  <entry key="Company">
+                    <value>NUnit</value>
+                  </entry>
+                  <entry key="Copyright">
+                    <value>Copyright (C) 2002-2003 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov. 
+Copyright (C) 2000-2003 Philip Craig.
+All Rights Reserved.</value>
+                  </entry>
+                  <entry key="Description">
+                    <value>C# Sample Unit Tests</value>
+                  </entry>
+                  <entry key="Product">
+                    <value>NUnit</value>
+                  </entry>
+                  <entry key="Title">
+                    <value>csharp.sample.dll</value>
+                  </entry>
+                  <entry key="Version">
+                    <value>2.2.0.0</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2009-06-04T15:08:14.7616012+02:00" endTime="2009-06-04T15:08:15.3241192+02:00">
+                  <testStep id="53383f99f580d7cb" name="SimpleCSharpTest" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest" testId="940ba2b3cd4679a2" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" />
+                    <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Fixture</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2009-06-04T15:08:14.7772267+02:00" endTime="2009-06-04T15:08:14.9803582+02:00">
+                      <testStep id="8e6d122ecfcd1812" name="Add" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/Add" testId="2502a5dab0b5a49c" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="Add" />
+                        <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="40" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="1" duration="0.1855492">
+                        <outcome status="failed" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[  Expected Failure.
+  Expected: 6
+  But was:  5.0d
+]]></text>
+                                  </contents>
+                                </section>
+                                <section name="Stack Trace">
+                                  <contents>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at NUnit.Framework.Assert.That(Object actual, Constraint constraint, String message, Object[] args)
+   at NUnit.Framework.Assert.AreEqual(Object expected, Object actual, String message)
+   at NUnit.Samples.SimpleCSharpTest.Add() in C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs:line 43]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2009-06-04T15:08:15.0116092+02:00" endTime="2009-06-04T15:08:15.0584857+02:00">
+                      <testStep id="d7732c983c1970af" name="DivideByZero" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/DivideByZero" testId="972d7c8d7b275fea" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="DivideByZero" />
+                        <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="51" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.050886499999999994">
+                        <outcome status="failed" category="error" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[System.DivideByZeroException : Attempted to divide by zero.]]></text>
+                                  </contents>
+                                </section>
+                                <section name="Stack Trace">
+                                  <contents>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at NUnit.Samples.SimpleCSharpTest.DivideByZero() in C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs:line 53]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2009-06-04T15:08:15.0741112+02:00" endTime="2009-06-04T15:08:15.1209877+02:00">
+                      <testStep id="8390e72b860321d2" name="Equals" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/Equals" testId="4669b2126c30ca90" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference />
+                        <codeLocation />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="5" duration="0.046906899999999994">
+                        <outcome status="failed" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[  Expected Failure (Integer)
+  Expected: 12
+  But was:  13
+]]></text>
+                                  </contents>
+                                </section>
+                                <section name="Stack Trace">
+                                  <contents>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at NUnit.Framework.Assert.That(Object actual, Constraint constraint, String message, Object[] args)
+   at NUnit.Framework.Assert.AreEqual(Int32 expected, Int32 actual, String message, Object[] args)
+   at NUnit.Framework.Assert.AreEqual(Int32 expected, Int32 actual, String message)
+   at NUnit.Samples.SimpleCSharpTest.Equals() in C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs:line 67]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2009-06-04T15:08:15.1366132+02:00" endTime="2009-06-04T15:08:15.1834897+02:00">
+                      <testStep id="155578882e415c5d" name="ExpectAnException" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/ExpectAnException" testId="c78f58989d07b01f" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="ExpectAnException" />
+                        <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="74" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.058959">
+                        <outcome status="failed" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[An unexpected exception type was thrown
+Expected: System.InvalidOperationException
+ but was: System.InvalidCastException : Specified cast is not valid.]]></text>
+                                  </contents>
+                                </section>
+                                <section name="Stack Trace">
+                                  <contents>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at NUnit.Samples.SimpleCSharpTest.ExpectAnException() in C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs:line 75]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2009-06-04T15:08:15.1991152+02:00" endTime="2009-06-04T15:08:15.2303662+02:00">
+                      <testStep id="bef6c66c023a5bc3" name="IgnoredTest" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/IgnoredTest" testId="7affaf5d752107e" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="IgnoredTest" />
+                        <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="88" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                          <entry key="IgnoreReason">
+                            <value>ignored test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0309036">
+                        <outcome status="skipped" category="ignored" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Warnings">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[ignored test]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2009-06-04T15:08:15.2459917+02:00" endTime="2009-06-04T15:08:15.2928682+02:00">
+                      <testStep id="cc57d5352306b36e" name="UnexpectedException" fullName="NUnit v2.4.8.0/cs-failures/SimpleCSharpTest/UnexpectedException" testId="57970cb5b43df51c" isPrimary="true" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="cs-failures, Version=2.2.0.0, Culture=neutral, PublicKeyToken=null" namespace="NUnit.Samples" type="NUnit.Samples.SimpleCSharpTest" member="UnexpectedException" />
+                        <codeLocation path="C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs" line="80" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0455659">
+                        <outcome status="failed" category="error" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Message">
+                                  <contents>
+                                    <text><![CDATA[System.UnauthorizedAccessException : Attempted to perform an unauthorized operation.]]></text>
+                                  </contents>
+                                </section>
+                                <section name="Stack Trace">
+                                  <contents>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at NUnit.Samples.SimpleCSharpTest.UnexpectedException() in C:\Program Files\NUnit 2.4.8\samples\csharp\failures\CSharpTest.cs:line 81]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="6" duration="0.5531278">
+                    <outcome status="failed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Failures">
+                        <body>
+                          <contents>
+                            <section name="Message">
+                              <contents>
+                                <text><![CDATA[Child test failed]]></text>
+                              </contents>
+                            </section>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="6" duration="0.5924378">
+                <outcome status="failed" />
+              </result>
+              <testLog>
+                <streams>
+                  <stream name="Failures">
+                    <body>
+                      <contents>
+                        <section name="Message">
+                          <contents>
+                            <text><![CDATA[Child test failed]]></text>
+                          </contents>
+                        </section>
+                      </contents>
+                    </body>
+                  </stream>
+                </streams>
+                <attachments />
+              </testLog>
+            </testStepRun>
+          </children>
+          <result assertCount="6" duration="0.6758074">
+            <outcome status="failed" />
+          </result>
+          <testLog>
+            <streams />
+            <attachments />
+          </testLog>
+        </testStepRun>
+      </children>
+      <result assertCount="6" duration="3.0954123">
+        <outcome status="failed" />
+      </result>
+      <testLog>
+        <streams />
+        <attachments />
+      </testLog>
+    </testStepRun>
+    <statistics assertCount="6" duration="3.9137885" runCount="5" passedCount="0" failedCount="5" inconclusiveCount="0" skippedCount="1" testCount="6" stepCount="10">
+      <outcomeSummaries>
+        <outcomeSummary count="3">
+          <outcome status="failed" />
+        </outcomeSummary>
+        <outcomeSummary count="2">
+          <outcome status="failed" category="error" />
+        </outcomeSummary>
+        <outcomeSummary count="1">
+          <outcome status="skipped" category="ignored" />
+        </outcomeSummary>
+      </outcomeSummaries>
+    </statistics>
+  </testPackageRun>
+  <logEntries>
+    <logEntry severity="info" message="Host started at 04/06/09 15:08:11 ." />
+    <logEntry severity="debug" message="Listening for connections on IPC port: 'IsolatedProcessHost.8334aa3e9a449336'" />
+    <logEntry severity="info" message="Host stopped at 04/06/09 15:08:15 ." />
+    <logEntry severity="info" message="Host process exited with code: 0" />
+  </logEntries>
+</report>

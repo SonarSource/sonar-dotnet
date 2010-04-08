@@ -1,0 +1,70 @@
+~~
+~~ Maven and Sonar plugin for .Net
+~~ Copyright (C) 2010 Jose Chillan and Alexandre Victoor
+~~ mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+~~
+~~ Sonar is free software; you can redistribute it and/or
+~~ modify it under the terms of the GNU Lesser General Public
+~~ License as published by the Free Software Foundation; either
+~~ version 3 of the License, or (at your option) any later version.
+~~
+~~ Sonar is distributed in the hope that it will be useful,
+~~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+~~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+~~ Lesser General Public License for more details.
+~~
+~~ You should have received a copy of the GNU Lesser General Public
+~~ License along with Sonar; if not, write to the Free Software
+~~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+~~
+
+ ------
+ Introduction
+ ------
+ Jose CHILLAN
+ ------
+ 2010-03-25
+ ------
+
+Maven Dotnet Plugin
+
+  The maven dotnet plugin provides general build and reporting facilities for .Net project on Windows platforms. 
+  As of today, only C# is supported, although some plugin may be relevant for some other languages of the .Net platform.
+  
+	You first need to install the prerequisite application, as {{{./usage.html}described here}}
+
+* Goals Overview
+
+   The maven dotnet plugin provides goals for the build and reporting
+
+** Build goals
+
+  * {{{./compile-mojo.html}dotnet:compile}} builds of the .Net project or solution
+
+  * {{{./test-mojo.html}dotnet:test}} launch the unit tests. It requires the install of {{{http://www.gallio.org}Gallio}}
+
+  * {{{./clean-mojo.html}dotnet:clean}} cleans the .Net build folder
+
+** Reporting goals
+
+  * {{{metrics-mojo.html}dotnet:metrics}} generates a metrics report using SourceMonitor
+
+  * {{{fxcop-mojo.html}dotnet:fxcop}} generates a quality report using FxCop
+
+  * {{{stylecop-mojo.html}dotnet:stylecop}} generates a quality report using StyleCop
+
+  * {{{coverage-mojo.html}dotnet:coverage}} generates a test coverage report using PartCover
+
+  * {{{cpd-mojo.html}dotnet:cpd}} generates a report on copy/paste and duplicated code
+
+** Other
+
+  * {{{help-mojo.html}dotnet:help}} displays help on a specified goal
+
+
+
+* Examples
+
+  {{{./settings.html}Example of settings.xml}} for a machine on which the reporting tools are installed
+
+  {{{./configuration.html}Example of configuration}} of a project for the Maven dotnet Plugin
