@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 5, 2009
  */
@@ -38,6 +37,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.maven.MavenPluginHandler;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
@@ -160,6 +160,14 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
     context.saveMeasure(CoreMetrics.COMPLEXITY, (double) solutionMetrics.getComplexity());
     context.saveMeasure(CoreMetrics.FUNCTION_COMPLEXITY, solutionMetrics.getAverageComplexity());
     context.saveMeasure(CoreMetrics.PACKAGES, (double) solutionMetrics.getCountNamespaces());
+    
+    // Distributions
+    String classDistrib = solutionMetrics.getClassComplexityDistribution();
+    String methodDistrib = solutionMetrics.getMethodComplexityDistribution();
+    Measure classDistribMeasure = new Measure(CoreMetrics.CLASS_COMPLEXITY_DISTRIBUTION, classDistrib);
+    Measure methodDistribMeasure = new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, methodDistrib);
+    context.saveMeasure(classDistribMeasure);
+    context.saveMeasure(methodDistribMeasure);
   }
 
   private void storeProjectMetrics(Project project, SensorContext context)
@@ -170,6 +178,15 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
       CLRAssembly resource = CLRAssembly.fromName(project, assemblyName);
       storeMetrics(project, context, metrics, resource);
       context.saveMeasure(resource, CoreMetrics.PACKAGES, (double) metrics.getCountNamespaces());
+      
+      // Adds distributions
+      String classDistrib = solutionMetrics.getClassComplexityDistribution();
+      String methodDistrib = solutionMetrics.getMethodComplexityDistribution();
+      Measure classDistribMeasure = new Measure(CoreMetrics.CLASS_COMPLEXITY_DISTRIBUTION, classDistrib);
+      Measure methodDistribMeasure = new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, methodDistrib);
+      context.saveMeasure(resource, classDistribMeasure);
+      context.saveMeasure(resource, methodDistribMeasure);
+
     }
   }
 
@@ -187,6 +204,15 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
       CSharpFolder folderResource = CSharpFolder.fromDirectory(project, directory);
       // We store the metrics for each folder
       storeMetrics(project, context, metrics, folderResource);
+      
+      // Adds distributions
+      String classDistrib = solutionMetrics.getClassComplexityDistribution();
+      String methodDistrib = solutionMetrics.getMethodComplexityDistribution();
+      Measure classDistribMeasure = new Measure(CoreMetrics.CLASS_COMPLEXITY_DISTRIBUTION, classDistrib);
+      Measure methodDistribMeasure = new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, methodDistrib);
+      context.saveMeasure(folderResource, classDistribMeasure);
+      context.saveMeasure(folderResource, methodDistribMeasure);
+
     }
   }
 

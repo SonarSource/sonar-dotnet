@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 19, 2009
  */
@@ -34,6 +33,8 @@ import java.util.List;
 public class AbstractMeterable extends SourceMetric
 {
   private List<FileMetrics> files;
+  private Distribution      filesComplexity;
+  private Distribution      methodsComplexity;
 
   /**
    * Constructs a @link{NamespaceMetrics}.
@@ -41,6 +42,8 @@ public class AbstractMeterable extends SourceMetric
   public AbstractMeterable()
   {
     files = new ArrayList<FileMetrics>();
+    this.filesComplexity = new Distribution(DistributionClassification.CLASS_COMPLEXITY);
+    this.methodsComplexity = new Distribution(DistributionClassification.METHOD_COMPLEXITY);
   }
 
   /**
@@ -62,9 +65,18 @@ public class AbstractMeterable extends SourceMetric
     countMethodStatements += file.getCountMethodStatements();
     complexity += file.getComplexity();
     countAccessors += file.getCountAccessors();
+    
+    // Updates the complexity distribution
+    int fileComplexity = file.getComplexity();
+    filesComplexity.addEntry(fileComplexity);
+    List<MethodMetric> methods = file.getMethods();
+    for (MethodMetric methodMetric : methods)
+    {
+      int methodComplexity = methodMetric.getComplexity();
+      methodsComplexity.addEntry(methodComplexity);
+    }
   }
 
-  
   /**
    * Returns the files.
    * 
@@ -74,5 +86,22 @@ public class AbstractMeterable extends SourceMetric
   {
     return this.files;
   }
- 
+
+  /**
+   * Gets the sonar representation of the class complexity distribution
+   * @return
+   */
+  public String getClassComplexityDistribution()
+  {
+    return filesComplexity.toSonarRepresentation();
+  }
+  /**
+   * Gets the sonar representation of the class complexity distribution
+   * @return
+   */
+  public String getMethodComplexityDistribution()
+  {
+    return methodsComplexity.toSonarRepresentation();
+  }
+
 }

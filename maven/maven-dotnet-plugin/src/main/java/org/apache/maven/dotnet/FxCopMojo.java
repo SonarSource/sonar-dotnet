@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 package org.apache.maven.dotnet;
 
 import java.io.File;
@@ -32,6 +31,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 
 /**
+ * Generates a quality report for a .Net project or solution using FxCop
  * @goal fxcop
  * @phase site
  * @description generates a FxCop report on a .Net project or solution
@@ -81,14 +81,7 @@ public class FxCopMojo extends AbstractDotNetMojo
   private String              fxCopReportName            = DEFAULT_FX_COP_REPORT_NAME;
 
   /**
-   * The arguments to pass to fxcop
-   * 
-   * @parameter
-   */
-  private List<String>        arguments;
-
-  /**
-   * A set of dll patterns to check
+   * A set of dll name patterns to include in the analysis
    * 
    * @parameter alias="includes"
    */
@@ -96,7 +89,7 @@ public class FxCopMojo extends AbstractDotNetMojo
                                                          };
 
   /**
-   * A set of dll patterns to exclude from the checking
+   * A set of dll name patterns to exclude from the analysis
    * 
    * @parameter alias="excludes"
    */

@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Jun 18, 2009
  */
@@ -35,6 +34,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 
 /**
+ * Cleans the build objects generated for a .Net project or solution
  * @goal clean
  * @phase clean
  * @description clean the build object of a .Net project or solution

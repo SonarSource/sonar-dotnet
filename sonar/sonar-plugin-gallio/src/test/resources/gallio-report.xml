@@ -20,7 +20,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
-
 <report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gallio.org/">
   <testPackageConfig>
     <assemblyFiles>

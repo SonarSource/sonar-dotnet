@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Sep 1, 2009
  */
@@ -66,7 +65,7 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    */
   private CSharpFile(CSharpFolder folder, File file, boolean unitTest)
   {
-    super(Resource.SCOPE_FILE, (unitTest ? Resource.QUALIFIER_UNIT_TEST_CLASS : Resource.QUALIFIER_CLASS));
+    super(Resource.SCOPE_ENTITY, (unitTest ? Resource.QUALIFIER_UNIT_TEST_CLASS: Resource.QUALIFIER_CLASS));
     this.folder = folder;
     this.fileName = file.getName();
     CLRAssembly assembly = folder.getParent();
@@ -79,6 +78,14 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
     setName(fileName);
   }
 
+  /**
+   * @return
+   */
+  @Override
+  public String getLongName()
+  {
+    return "File " + fileName;
+  }
   /**
    * @return
    */

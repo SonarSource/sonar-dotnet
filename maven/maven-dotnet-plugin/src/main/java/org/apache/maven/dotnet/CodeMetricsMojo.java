@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 package org.apache.maven.dotnet;
 
 /*
@@ -46,7 +45,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
- * Goal that generate the C# metrics
+ * Generates the metrics for a C# project or solution using SourceMonitor
  * 
  * @goal metrics
  * @phase site
@@ -65,7 +64,7 @@ public class CodeMetricsMojo
   private final static String EXPORT_PATH  = "sourcemonitor-runtime";
 
   /**
-   * Location of the Source Monitor installation
+   * Installation directory of the SourceMonitor application 
    * 
    * @parameter expression="${sourcemonitor.directory}"
    */
@@ -93,7 +92,7 @@ public class CodeMetricsMojo
   private String[] excludedExtensions = {"*.Designer.cs"};
   
   /**
-   * Name of the generated metric file.
+   * Name of the generated metrics report.
    * 
    * @parameter alias="${metricsReportFileName}" default-value="metrics-report.xml"
    */

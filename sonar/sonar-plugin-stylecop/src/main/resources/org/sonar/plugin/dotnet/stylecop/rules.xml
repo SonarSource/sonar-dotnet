@@ -20,7 +20,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
-
 <rules>
     <rule key="ElementMustBeginWithUpperCaseLetter">
         <name>Element must begin with upper case letter</name>

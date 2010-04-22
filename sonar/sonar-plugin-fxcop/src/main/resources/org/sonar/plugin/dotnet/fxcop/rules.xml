@@ -20,7 +20,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
-
 <rules>
     <rule key="AssembliesShouldHaveValidStrongNames">
         <name>Assemblies should have valid strong names</name>

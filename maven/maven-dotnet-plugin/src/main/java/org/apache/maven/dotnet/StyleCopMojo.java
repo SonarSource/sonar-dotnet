@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Apr 14, 2009
  */
@@ -40,6 +39,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 
 /**
+ * Generates a quality report for a .Net project or solution using StyleCop
  * @goal stylecop
  * @phase site
  * @description generates a StyleCop report on a C# project 
@@ -71,7 +71,7 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
   private File                styleCopConfigFile;
 
   /**
-   * Name of the file that contains the StyleCop rules to use
+   * Name of the generated StyleCop report 
    * 
    * @parameter alias="${styleCopReportName}" default-value="stylecop-report.xml"
    */

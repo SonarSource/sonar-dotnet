@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 5, 2009
  */
@@ -42,6 +41,7 @@ public class FileMetrics extends SourceMetric
   private String             namespace;
   private double             percentDocumentationLines;
   private double             percentCommentLines;
+
 
   /**
    * Constructs a @link{FileMetrics}.

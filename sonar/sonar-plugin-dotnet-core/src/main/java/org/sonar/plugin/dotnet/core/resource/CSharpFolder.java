@@ -17,13 +17,14 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Sep 3, 2009
  */
 package org.sonar.plugin.dotnet.core.resource;
 
 import java.io.File;
+
+import javax.print.attribute.standard.MediaSize.NA;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -64,7 +65,7 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
    */
   public CSharpFolder(CLRAssembly assembly, File directory)
   {
-    super(SCOPE_SPACE, QUALIFIER_PACKAGE);
+    super(SCOPE_SPACE, QUALIFIER_DIRECTORY);
     this.assembly = assembly;
     VisualStudioProject visualProject = assembly.getVisualProject();
     String folder = visualProject.getRelativePath(directory);
@@ -94,6 +95,14 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
     return false;
   }
 
+  /**
+   * @return
+   */
+  @Override
+  public String getLongName()
+  {
+    return "Folder " + getName();
+  }
   /**
    * @return
    */

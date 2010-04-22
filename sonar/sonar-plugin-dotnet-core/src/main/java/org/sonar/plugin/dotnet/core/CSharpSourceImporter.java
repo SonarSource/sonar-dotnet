@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 14, 2009
  */
@@ -32,6 +31,8 @@ import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.AbstractSourceImporter;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
@@ -45,6 +46,9 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFile;
  */
 public class CSharpSourceImporter extends AbstractSourceImporter
 {
+  
+  private final static Logger log = LoggerFactory.getLogger(CSharpSourceImporter.class);
+  
   /**
    * Constructs the collector.
    */
@@ -106,7 +110,7 @@ public class CSharpSourceImporter extends AbstractSourceImporter
       }
       catch (Exception e)
       {
-        // Avoid error propagation between files
+        log.debug("Could not import file " + sourceFile, e);
       }
     }
   }

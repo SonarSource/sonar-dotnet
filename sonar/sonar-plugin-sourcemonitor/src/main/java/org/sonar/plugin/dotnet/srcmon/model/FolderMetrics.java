@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 19, 2009
  */
@@ -37,7 +36,7 @@ public class FolderMetrics extends AbstractMeterable
   private VisualStudioProject project;
   private File                directory;
   private String              projectFolder;
-
+  
   /**
    * Constructs a @link{NamespaceMetrics}.
    * 
@@ -112,5 +111,4 @@ public class FolderMetrics extends AbstractMeterable
   {
     this.projectFolder = projectFolder;
   }
-
 }

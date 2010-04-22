@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Sep 1, 2009
  */
@@ -102,7 +101,7 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
    */
   public CLRAssembly(VisualStudioProject project)
   {
-    super(SCOPE_DIRECTORY, QUALIFIER_PACKAGE);
+    super(SCOPE_SPACE, QUALIFIER_MODULE);
     this.visualProject = project;
     String assemblyName = project.getAssemblyName();
     String key = CSharp.createKey(assemblyName, null, null);
@@ -119,6 +118,14 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
     return visualProject.getAssemblyName();
   }
   
+  /**
+   * @return
+   */
+  @Override
+  public String getLongName()
+  {
+    return "Assembly " + getAssemblyName();    
+  }
   /**
    * @param antPattern
    * @return

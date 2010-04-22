@@ -20,17 +20,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
-
 <project>
   <body>
     <menu name="Overview">
       <item name="Introduction" href="index.html"/>
       <item name="Goals" href="plugin-info.html"/>
       <item name="Usage" href="usage.html"/>
+      <item name="Troubleshooting" href="troubleshooting.html"/>
       <item name="FAQ" href="faq.html"/>    
      </menu>
     <menu name="Examples">
-      <item name="Configuration of settings.xml" href="./settings.html"/>
+      <item name="Sample settings.xml" href="./settings.html"/>
       <item name="Sample pom.xml" href="./configuration.html"/>
     </menu>
     <menu ref="reports"/>

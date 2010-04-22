@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on Apr 16, 2009
  */
@@ -36,6 +35,7 @@ import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
+ * Generates a coverage report on a .Net project or solution using the unit tests and PartCover
  * @goal coverage
  * @phase site
  * @description generates a report on code coverage of a .Net project or solution

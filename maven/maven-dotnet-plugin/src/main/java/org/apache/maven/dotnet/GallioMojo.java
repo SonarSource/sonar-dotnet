@@ -17,7 +17,6 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 /*
  * Created on May 28, 2009
  */
@@ -35,6 +34,7 @@ import org.apache.maven.plugin.logging.Log;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
+ * Launches the unit tests for a .Net solution or a test project using Gallio
  * @goal test
  * @phase test
  * @description Maven Mojo that executes unit tests with Gallio, that is multi test framework compliant
