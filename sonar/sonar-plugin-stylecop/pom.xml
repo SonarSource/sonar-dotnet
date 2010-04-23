@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>sonar-dotnet</artifactId>
-    <groupId>org.codehaus.sonar.dotnet</groupId>
+    <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.codehaus.sonar.dotnet</groupId>
+  <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>sonar-plugin-stylecop</artifactId>
   <name>Sonar Plugin for StyleCop</name>
   <url>http://maven.apache.org</url>
@@ -41,7 +41,7 @@
       <artifactId>sonar-plugin-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.sonar.dotnet</groupId>
+      <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-plugin-dotnet-core</artifactId>
     </dependency>
     <dependency>
