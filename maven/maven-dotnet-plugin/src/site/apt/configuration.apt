@@ -52,7 +52,7 @@ Example of pom.xml for a .Net solution
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.maven.dotnet</groupId>
+        <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
         <artifactId>maven-dotnet-plugin</artifactId>
         <!-- Plugin specific configuration : commented out here as it is redundant with 
              the properties defined above -->
