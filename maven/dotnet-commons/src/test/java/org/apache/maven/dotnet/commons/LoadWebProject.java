@@ -1,7 +1,7 @@
 /**
  * Maven and Sonar plugin for .Net
  * Copyright (C) 2010 Jose Chillan and Alexandre Victoor
- * mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+ * mailto: jose.chillan@codehaus.org or alexvictoor@codehaus.org
  *
  * Sonar is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,6 +17,7 @@
  * License along with Sonar; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+
 /*
  * Created on Feb 23, 2010
  */
@@ -39,7 +40,7 @@ import org.codehaus.plexus.util.FileUtils;
 import org.junit.Ignore;
 
 /**
- * A LoadWebProject.
+ * An attempt to support the Web projects in Maven.
  * 
  * @author Jose CHILLAN Feb 23, 2010
  */

@@ -3,7 +3,7 @@
 
     Maven and Sonar plugin for .Net
     Copyright (C) 2010 Jose Chillan and Alexandre Victoor
-    mailto: jose.chillan@codehaus.org or alexandre.victoor@codehaus.org
+    mailto: jose.chillan@codehaus.org or alexvictoor@codehaus.org
 
     Sonar is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -20,6 +20,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
+
 <report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gallio.org/">
   <testPackageConfig>
     <assemblyFiles>
