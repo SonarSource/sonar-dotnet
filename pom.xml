@@ -19,6 +19,10 @@
     <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
     <url>http://svn.sonar-plugins.codehaus.org</url>
   </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
+  </issueManagement>
   <licenses>
     <license>
       <name>GNU Lesser General Public License (LGPL), v.3</name>
