@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
     <version>5</version>
     <relativePath>../parent</relativePath>
   </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.codehaus.sonar-plugins.dotnet</groupId>
-	<artifactId>parent</artifactId>
-	<name>.Net code quality projects</name>
-	<version>1.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<description>A Reactor Project for all the code quality relevant projects</description>
+  <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+  <artifactId>parent</artifactId>
+  <name>.Net code quality projects</name>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <description>A Reactor Project for all the code quality relevant projects</description>
+
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
     <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
@@ -30,33 +32,47 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-	<dependencyManagement>
-  	<dependencies>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-project</artifactId>
-      <version>2.0.4</version>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-project</artifactId>
+        <version>2.0.4</version>
         <type>jar</type>
-    </dependency>
-    <!-- Unit tests -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.5</version>
+      </dependency>
+      <!-- Unit tests -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.5</version>
         <type>jar</type>
-      <scope>test</scope>
-    </dependency>			
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <scope>test</scope>
-      <version>1.7</version>
-    </dependency>
-			
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <scope>test</scope>
+        <version>1.7</version>
+      </dependency>
     </dependencies>
-	</dependencyManagement>
+  </dependencyManagement>
   <modules>
     <module>maven</module>
     <module>sonar</module>
   </modules>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <!-- TODO Godin: update version in parent -->
+          <groupId>com.mycila.maven-license-plugin</groupId>
+          <artifactId>maven-license-plugin</artifactId>
+          <version>1.6.0</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
