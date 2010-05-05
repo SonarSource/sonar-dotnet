@@ -92,7 +92,7 @@ public class CpdSensor implements Sensor {
 
 	private CpdMapping getMapping(Project project) {
 
-		return new CsCpdMappind(project);
+		return new CsCpdMapping(project);
 	}
 
 	private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding) throws IOException, DotNetProjectException {

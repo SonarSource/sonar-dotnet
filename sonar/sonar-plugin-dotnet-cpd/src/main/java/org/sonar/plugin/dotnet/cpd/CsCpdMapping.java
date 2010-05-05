@@ -33,12 +33,12 @@ import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.CSharp;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 
-public class CsCpdMappind implements CpdMapping {
+public class CsCpdMapping implements CpdMapping {
 	
 	private CsLanguage language = new CsLanguage();
 	private final Project	project;
 	
-	public CsCpdMappind(Project project) {
+	public CsCpdMapping(Project project) {
 		this.project = project;
 	}
 	
