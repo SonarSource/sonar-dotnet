@@ -10,7 +10,6 @@
   <artifactId>maven-dotnet-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>.Net build plugin project</name>
-  <url>http://sonar.codehaus.org</url>
   <description>A plugin that provides general build and test facilities for .Net projects and solutions</description>
   <build>
     <plugins>

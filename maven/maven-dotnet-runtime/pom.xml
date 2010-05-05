@@ -9,6 +9,4 @@
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>maven-dotnet-runtime</artifactId>
   <name>Maven Dotnet runtime Applications</name>
-  <url>http://maven.apache.org</url>
-
 </project>
