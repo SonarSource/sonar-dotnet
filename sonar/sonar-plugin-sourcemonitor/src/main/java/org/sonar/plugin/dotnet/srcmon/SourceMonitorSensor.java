@@ -46,6 +46,7 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFolder;
+import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.sonar.plugin.dotnet.srcmon.model.FileMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.FolderMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.ProjectMetrics;
@@ -115,7 +116,11 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
     for (int idxFile = 0; idxFile < files.size(); idxFile++)
     {
       FileMetrics file = files.get(idxFile);
-      processFile(project, context, file);
+      try {
+    	  processFile(project, context, file);
+      } catch (InvalidResourceException ex) {
+    	  log.warn("C# file not referenced in the solution", ex);
+      }
     }
 
     storeFolderMetrics(project, context);

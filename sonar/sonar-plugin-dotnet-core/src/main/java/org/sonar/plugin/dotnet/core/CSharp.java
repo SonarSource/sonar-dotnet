@@ -78,14 +78,20 @@ public class CSharp extends AbstractLanguage
   {
     VisualStudioProject visualProject = assembly.getVisualProject();
     SourceFile sourceFile = visualProject.getFile(sourcePath);
+    final String key;
     if (sourceFile == null)
     {
       log.warn("A source file is not included in the project : " + sourcePath);
+      key = null;
+    } 
+    else 
+    {
+    	String assemblyName = assembly.getAssemblyName();
+    	String folder = sourceFile.getFolder();
+    	String fileName = sourceFile.getName();
+    	key = createKey(assemblyName, folder, fileName);
     }
-    String assemblyName = assembly.getAssemblyName();
-    String folder = sourceFile.getFolder();
-    String fileName = sourceFile.getName();
-    return createKey(assemblyName, folder, fileName);
+    return key;
   }
 
   /**

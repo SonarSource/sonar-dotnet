@@ -45,6 +45,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.xml.sax.InputSource;
 
 /**
@@ -102,6 +103,9 @@ public class FxCopSensor extends AbstractDotnetSensor
     catch (MalformedURLException e)
     {
       log.debug("Error while loading the file: {}\n{}", report, e);
+    }
+    catch (InvalidResourceException ex) {
+  	  log.warn("C# file not referenced in the solution", ex);
     }
   }
 
