@@ -27,6 +27,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.*;
 
+@Deprecated
 public class SumDuplicationsDecorator extends AbstractSumChildrenDecorator {
 
 	public SumDuplicationsDecorator() {
