@@ -57,9 +57,9 @@ public class DotnetCpdPlugin implements Plugin {
 
 		List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
 		list.add(CpdSensor.class);
-		list.add(SumDuplicationsDecorator.class);
-		list.add(DuplicationDensityDecorator.class);
-		list.add(CsCpdMapping.class);
+		//list.add(SumDuplicationsDecorator.class);
+		//list.add(DuplicationDensityDecorator.class);
+		//list.add(CsCpdMapping.class);
 
 		return list;
 	}
