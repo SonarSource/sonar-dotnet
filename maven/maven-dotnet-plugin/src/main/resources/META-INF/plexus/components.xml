@@ -31,14 +31,14 @@
           <lifecycle>
             <id>default</id>
             <phases>
-              <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
-              <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+              <compile>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:compile</compile>
+              <test>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:test</test>
             </phases>
           </lifecycle>
           <lifecycle>
             <id>clean</id>
             <phases>
-              <clean>org.apache.maven.plugins:maven-clean-plugin:clean,org.codehaus.maven.dotnet:maven-dotnet-plugin:clean</clean>
+              <clean>org.apache.maven.plugins:maven-clean-plugin:clean,org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:clean</clean>
             </phases>
           </lifecycle>
           <lifecycle>
@@ -61,8 +61,8 @@
       <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
       <configuration>
         <phases>
-          <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
-          <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+          <compile>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:compile</compile>
+          <test>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:test</test>
         </phases>
       </configuration>
     </component>
@@ -72,8 +72,8 @@
       <implementation>org.apache.maven.lifecycle.mapping.DefaultLifecycleMapping</implementation>
       <configuration>
         <phases>
-          <compile>org.codehaus.maven.dotnet:maven-dotnet-plugin:compile</compile>
-          <test>org.codehaus.maven.dotnet:maven-dotnet-plugin:test</test>
+          <compile>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:compile</compile>
+          <test>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:test</test>
         </phases>
       </configuration>
     </component>
