@@ -28,6 +28,7 @@ import org.sonar.api.measures.*;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
+@Deprecated
 public class DuplicationDensityDecorator
     implements Decorator
 {
