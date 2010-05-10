@@ -28,9 +28,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Example.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SOCIETE GENERALE")]
+[assembly: AssemblyCompany("Codehaus")]
 [assembly: AssemblyProduct("Example.Core")]
-[assembly: AssemblyCopyright("Copyright © SOCIETE GENERALE 2009")]
+[assembly: AssemblyCopyright("Copyright Codehaus")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
