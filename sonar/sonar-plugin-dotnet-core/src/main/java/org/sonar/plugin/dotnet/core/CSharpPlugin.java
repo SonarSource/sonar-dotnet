@@ -28,6 +28,7 @@ import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.plugin.dotnet.core.colorizer.CSharpColorizerFormat;
 
 /**
  * The plugin that declares the C# language.
@@ -52,6 +53,7 @@ public class CSharpPlugin
   public List<Class<? extends Extension>> getExtensions()
   {
     ArrayList<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
+    extensions.add(CSharpColorizerFormat.class);
     extensions.add(CSharp.class);
     extensions.add(CSharpSourceImporter.class);
     return extensions;
