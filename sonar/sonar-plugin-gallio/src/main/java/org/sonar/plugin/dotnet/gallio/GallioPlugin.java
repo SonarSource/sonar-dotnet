@@ -54,6 +54,7 @@ public class GallioPlugin
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GallioSensor.class);
     list.add(GallioMetrics.class);
+    list.add(UnitTestDecorator.class);
     return list;
   }
 
