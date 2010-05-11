@@ -44,7 +44,7 @@
     </developer>
   </developers>	
   <properties>
-    <sonar-build-version>2.0.1</sonar-build-version>
+    <sonar-build-version>2.1.1</sonar-build-version>
   </properties>
 
   <dependencyManagement>
