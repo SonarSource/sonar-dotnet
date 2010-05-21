@@ -42,7 +42,7 @@ public abstract class AbstractDotNetMavenPluginHandler implements MavenPluginHan
   /**
    * Version of the .Net plugin
    */
-  private static final String DOTNET_PLUGIN_VERSION = "1.0.0";
+  private static final String DOTNET_PLUGIN_VERSION = "0.1";
   
   /**
    * Constructs a @link{AbstractDotNetMavenPluginHandler}.
