@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
     <artifactId>maven-dotnet</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
@@ -59,12 +59,12 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>dotnet-commons</artifactId>
-      <version>0.1</version>
+      <version>0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>maven-dotnet-runtime</artifactId>
-      <version>0.1</version>
+      <version>0.2-SNAPSHOT</version>
       <optional>true</optional>
     </dependency>
     <!--
