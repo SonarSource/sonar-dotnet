@@ -97,6 +97,7 @@
     <module>sonar-plugin-stylecop</module>
     <module>sonar-plugin-gallio</module>
     <module>sonar-plugin-dotnet-cpd</module>
+	<module>sonar-plugin-gendarme</module>
   </modules>
 
   <profiles>
