@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -40,9 +41,16 @@ public class GendarmeMojo extends AbstractDotNetMojo {
   /**
    * Name of the gendarme report file
    * 
-   * @parameter alias="${fxCopReportName}" default-value="gendarme-report.xml"
+   * @parameter alias="${gendarmeReportName}" default-value="gendarme-report.xml"
    */
   private String              gendarmeReportName            = DEFAULT_GENDARME_REPORT_NAME;
+  
+  /**
+   * Path to the gendarme config file that specifies rule settings
+   * 
+   * @parameter alias="${gendarmeConfig}"
+   */
+  private String							gendarmeConfigFile;
   
   
   /**
@@ -127,7 +135,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
   	Log log = getLog();
     if (assemblies.isEmpty())
     {
-      log.info("No assembly to check with FxCop");
+      log.info("No assembly to check with Gendarme");
       return;
     }
     
@@ -145,10 +153,16 @@ public class GendarmeMojo extends AbstractDotNetMojo {
     commandArguments.add("--xml");
     commandArguments.add(toCommandPath(reportFile));
     
+    if (StringUtils.isNotEmpty(gendarmeConfigFile)) {
+    	commandArguments.add("--config");
+    	commandArguments.add(toCommandPath(gendarmeConfigFile));
+    }
+    
+    
     // Put in verbose mode if required
     if (verbose)
     {
-      commandArguments.add("/v");
+      commandArguments.add("--v");
     }
     // Add the assemblies to check
     log.debug("- Scanned assemblies :");
@@ -158,8 +172,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
       commandArguments.add(toCommandPath(checkedAssembly));
     }
     
-    // We launch the command (and we accept the reference problems)
-    launchCommand(executableFile, commandArguments, "gendarme", 0, true);
+    launchCommand(executableFile, commandArguments, "gendarme", 1, true);
     log.info("gendarme report generated");
   }
 
