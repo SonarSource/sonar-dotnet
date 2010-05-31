@@ -55,7 +55,7 @@ public abstract class AbstractDotNetRuleRepository
   }
   
   /**
-   * A map a of profiles to import, The profile naem as key, and the xml profile file name in the classpath
+   * A map a of profiles to import, The profile name as key, and the xml profile file name in the classpath
    * 
    * @return
    */

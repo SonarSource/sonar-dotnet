@@ -23,6 +23,8 @@
  */
 package org.sonar.plugin.dotnet.core;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -170,6 +172,30 @@ public class AbstractXmlParser
     }
     return null;
   }
+  
+  /**
+   * Extracts the elements matching a XPath in a sax input source.
+   * 
+   * @param file the URL of the file to analyse
+   * @param path the xpath of the elements to extract
+   * @return a non <code>null</code> list of elements
+   */
+  protected List<Element> extractElements(InputSource source, String path)
+  {
+    NodeList nodes;
+    try
+    {
+      // First, we collect all the files
+      XPathExpression expression = xpath.compile(path);
+      nodes = (NodeList) expression.evaluate(source, XPathConstants.NODESET);
+    }
+    catch (Exception e)
+    {
+    	throw new RuntimeException(e);
+    }
+
+    return convertToList(nodes);
+  }
 
   /**
    * Extracts the elements matching a XPath in a file.
@@ -180,20 +206,28 @@ public class AbstractXmlParser
    */
   protected List<Element> extractElements(URL file, String path)
   {
-    NodeList nodes;
     try
     {
       InputSource source = new InputSource(file.openStream());
-      // First, we collect all the files
-      XPathExpression expression = xpath.compile(path);
-      nodes = (NodeList) expression.evaluate(source, XPathConstants.NODESET);
+      return extractElements(source, path);
     }
-    catch (Exception e)
+    catch (IOException e)
     {
-      return Collections.emptyList();
+    	throw new RuntimeException(e);
     }
-
-    return convertToList(nodes);
+  }
+  
+  /**
+   * Extracts the elements matching a XPath in a file.
+   * 
+   * @param file the URL of the file to analyse
+   * @param path the xpath of the elements to extract
+   * @return a non <code>null</code> list of elements
+   */
+  protected List<Element> extractElements(Reader reader, String path)
+  {
+    InputSource source = new InputSource(reader);
+    return extractElements(source, path);
   }
 
   /**
