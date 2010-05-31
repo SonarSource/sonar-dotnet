@@ -1,0 +1,25 @@
+<gendarme>
+  <ruleset name="default">
+    <!--<rules include="*" from="Gendarme.Rules.BadPractice.dll"/>
+    <rules include="*" from="Gendarme.Rules.Concurrency.dll" />
+    <rules include="*" from="Gendarme.Rules.Correctness.dll"/>
+    <rules include="*" from="Gendarme.Rules.Design.dll"/>
+    <rules include="*" from="Gendarme.Rules.Design.Generic.dll"/>
+    <rules include="*" from="Gendarme.Rules.Design.Linq.dll"/>
+    <rules include="*" from="Gendarme.Rules.Exceptions.dll" />
+    <rules include="*" from="Gendarme.Rules.Interoperability.dll"/>
+    <rules include="*" from="Gendarme.Rules.Naming.dll"/>
+    <rules include="*" from="Gendarme.Rules.Performance.dll" />
+    <rules include="*" from="Gendarme.Rules.Portability.dll" />
+    <rules include="*" from="Gendarme.Rules.Security.dll" />
+    <rules include="*" from="Gendarme.Rules.Security.Cas.dll" />
+    <rules include="*" from="Gendarme.Rules.Serialization.dll" />
+    <rules include="*" from="Gendarme.Rules.Ui.dll" />
+    <rules include="*" from="Gendarme.Rules.Maintainability.dll"/>-->
+    
+    <rules include="AvoidCodeDuplicatedInSameClassRule | AvoidCodeDuplicatedInSiblingClassesRule | 
+    AvoidLargeClassesRule | AvoidLongMethodsRule | AvoidLongParameterListsRule" 
+    from="Gendarme.Rules.Smells.dll"/>
+  </ruleset>
+
+</gendarme>
