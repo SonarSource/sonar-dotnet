@@ -22,10 +22,39 @@
 -->
 
 <rules>
-    <rule key="AssembliesShouldHaveValidStrongNames">
-        <name>Assemblies should have valid strong names</name>
-        <configKey>AssembliesShouldHaveValidStrongNames@$(FxCopDir)\Rules\DesignRules.dll</configKey>
+    
+    <rule key="AvoidCodeDuplicatedInSameClassRule">
+        <name>AvoidCodeDuplicatedInSameClassRule</name>
+        <configKey>Gendarme.Rules.Smells.dll$AvoidCodeDuplicatedInSameClassRule</configKey>
         <category name="Maintainability"/>
-        <description>Assemblies should have valid strong names</description>
+        <description>AvoidCodeDuplicatedInSameClassRule</description>
+    </rule>
+    
+    <rule key="AvoidCodeDuplicatedInSiblingClassesRule">
+        <name>AvoidCodeDuplicatedInSiblingClassesRule</name>
+        <configKey>Gendarme.Rules.Smells.dll$AvoidCodeDuplicatedInSiblingClassesRule</configKey>
+        <category name="Maintainability"/>
+        <description>AvoidCodeDuplicatedInSiblingClassesRule</description>
+    </rule>
+    
+    <rule key="AvoidLargeClassesRule">
+        <name>AvoidLargeClassesRule</name>
+        <configKey>Gendarme.Rules.Smells.dll$AvoidLargeClassesRule</configKey>
+        <category name="Maintainability"/>
+        <description>AvoidLargeClassesRule</description>
+    </rule>
+    
+    <rule key="AvoidLongMethodsRule">
+        <name>AvoidLongMethodsRule</name>
+        <configKey>Gendarme.Rules.Smells.dll$AvoidLongMethodsRule</configKey>
+        <category name="Maintainability"/>
+        <description>AvoidLongMethodsRule</description>
+    </rule>
+    
+    <rule key="AvoidLongParameterListsRule">
+        <name>AvoidLongParameterListsRule</name>
+        <configKey>Gendarme.Rules.Smells.dll$AvoidLongParameterListsRule</configKey>
+        <category name="Maintainability"/>
+        <description>AvoidLongParameterListsRule</description>
     </rule>
 </rules>

@@ -17,10 +17,11 @@ public class GendarmePlugin implements Plugin
   public List<Class<? extends Extension>> getExtensions()
   {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
+    list.add(GendarmeRuleParserImpl.class);
+    list.add(GendarmeRuleMarshallerImpl.class);
     list.add(GendarmeRuleRepository.class);
     list.add(GendarmeSensor.class);
     list.add(GendarmePluginHandler.class);
-
     return list;
   }
 

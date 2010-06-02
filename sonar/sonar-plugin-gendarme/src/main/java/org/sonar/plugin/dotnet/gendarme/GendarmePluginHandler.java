@@ -63,16 +63,17 @@ public class GendarmePluginHandler
   @Override
   public void configure(Project project, MavenPlugin plugin)
   {
-    /*try
-    {*/
+    try
+    {
       super.configure(project, plugin);
-      //generateConfigurationFile(project, plugin);
+      generateConfigurationFile(project, plugin);
       configureParameters(plugin);
       plugin.setParameter("gendarmeReportName", GENDARME_REPORT);
-      /*}
+    }
     catch (IOException e)
     {
-    }*/
+    	throw new RuntimeException(e);
+    }
   }
 
   /**
@@ -84,10 +85,10 @@ public class GendarmePluginHandler
    */
   private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException
   {
-    //String fxCopConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-    //File configFile = project.getFileSystem().writeToWorkingDirectory(fxCopConfiguration, GENDARME_FILE);
+  	String gendarmeConfiguration = rulesRepository.exportConfiguration(rulesProfile);
+    File configFile = project.getFileSystem().writeToWorkingDirectory(gendarmeConfiguration, GENDARME_FILE);
     // Defines the configuration file
-    //plugin.setParameter("fxCopConfigFile", configFile.getAbsolutePath());
+    plugin.setParameter("gendarmeConfigFile", configFile.getAbsolutePath());
   }
 
   public void configureParameters(MavenPlugin plugin)
