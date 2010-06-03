@@ -14,15 +14,13 @@ import org.sonar.plugin.dotnet.core.CSharpRulesProfile;
 
 public class GendarmeRuleRepository extends AbstractDotNetRuleRepository implements ConfigurationExportable {
 
-	// TODO make IOC works with pico
+	private final GendarmeRuleParser ruleParser;
+	private final GendarmeRuleMarshaller ruleMarshaller;
 	
-	private final GendarmeRuleParser ruleParser = new GendarmeRuleParserImpl();
-	private final GendarmeRuleMarshaller ruleMarshaller = new GendarmeRuleMarshallerImpl();
-	/*
 	public GendarmeRuleRepository(GendarmeRuleParser ruleParser, GendarmeRuleMarshaller ruleMarshaller) {
 	  this.ruleParser = ruleParser;
 	  this.ruleMarshaller = ruleMarshaller;
-  }*/
+  }
 
 	@Override
   public Map<String, String> getBuiltInProfiles() {
