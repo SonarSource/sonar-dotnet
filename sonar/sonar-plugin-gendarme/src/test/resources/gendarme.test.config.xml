@@ -1,0 +1,9 @@
+<gendarme>
+  <ruleset name="default">
+    
+    <rules include="AvoidCodeDuplicatedInSameClassRule | AvoidCodeDuplicatedInSiblingClassesRule | 
+    AvoidLargeClassesRule | AvoidLongMethodsRule | AvoidLongParameterListsRule" 
+    from="Gendarme.Rules.Smells.dll"/>
+  </ruleset>
+
+</gendarme>
