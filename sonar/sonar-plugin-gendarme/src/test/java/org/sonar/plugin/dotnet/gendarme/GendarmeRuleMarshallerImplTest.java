@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RulePriority;
 
 public class GendarmeRuleMarshallerImplTest {
 
@@ -21,15 +22,22 @@ public class GendarmeRuleMarshallerImplTest {
 		
 		ActiveRule activeRule = new ActiveRule();
 		Rule rule = new Rule();
-		rule.setConfigKey("MyAssembly.dll$MyRule");
+		rule.setConfigKey("MyRule@MyAssembly.dll");
 		activeRule.setRule(rule);
 		activeRules.add(activeRule);
+		
+		ActiveRule activeRuleBlocker = new ActiveRule();
+		Rule ruleBlocker = new Rule();
+		ruleBlocker.setConfigKey("MyRuleBlock@MyAssembly.dll");
+		activeRuleBlocker.setRule(ruleBlocker);
+		activeRuleBlocker.setPriority(RulePriority.BLOCKER);
+		activeRules.add(activeRuleBlocker);
 		
 		String xml = marshaller.marshall(activeRules);
 		System.out.println(xml);
 		assertTrue(StringUtils.contains(xml, "<rules"));
 		assertTrue(StringUtils.contains(xml, "from=\"MyAssembly.dll\""));
-		assertTrue(StringUtils.contains(xml, "include=\"MyRule\""));
+		assertTrue(StringUtils.contains(xml, "include=\"MyRuleBlock\""));
 	}
 
 }

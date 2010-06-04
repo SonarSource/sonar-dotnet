@@ -25,36 +25,60 @@
     
     <rule key="AvoidCodeDuplicatedInSameClassRule">
         <name>AvoidCodeDuplicatedInSameClassRule</name>
-        <configKey>Gendarme.Rules.Smells.dll$AvoidCodeDuplicatedInSameClassRule</configKey>
+        <configKey>AvoidCodeDuplicatedInSameClassRule@Gendarme.Rules.Smells.dll</configKey>
         <category name="Maintainability"/>
         <description>AvoidCodeDuplicatedInSameClassRule</description>
     </rule>
     
     <rule key="AvoidCodeDuplicatedInSiblingClassesRule">
         <name>AvoidCodeDuplicatedInSiblingClassesRule</name>
-        <configKey>Gendarme.Rules.Smells.dll$AvoidCodeDuplicatedInSiblingClassesRule</configKey>
+        <configKey>AvoidCodeDuplicatedInSiblingClassesRule@Gendarme.Rules.Smells.dll</configKey>
         <category name="Maintainability"/>
         <description>AvoidCodeDuplicatedInSiblingClassesRule</description>
     </rule>
     
     <rule key="AvoidLargeClassesRule">
         <name>AvoidLargeClassesRule</name>
-        <configKey>Gendarme.Rules.Smells.dll$AvoidLargeClassesRule</configKey>
+        <configKey>AvoidLargeClassesRule@Gendarme.Rules.Smells.dll</configKey>
         <category name="Maintainability"/>
         <description>AvoidLargeClassesRule</description>
     </rule>
     
     <rule key="AvoidLongMethodsRule">
         <name>AvoidLongMethodsRule</name>
-        <configKey>Gendarme.Rules.Smells.dll$AvoidLongMethodsRule</configKey>
+        <configKey>AvoidLongMethodsRule@Gendarme.Rules.Smells.dll</configKey>
         <category name="Maintainability"/>
         <description>AvoidLongMethodsRule</description>
     </rule>
     
     <rule key="AvoidLongParameterListsRule">
         <name>AvoidLongParameterListsRule</name>
-        <configKey>Gendarme.Rules.Smells.dll$AvoidLongParameterListsRule</configKey>
+        <configKey>AvoidLongParameterListsRule@Gendarme.Rules.Smells.dll</configKey>
         <category name="Maintainability"/>
         <description>AvoidLongParameterListsRule</description>
     </rule>
+    
+    
+    <rule key="AttributeStringLiteralsShouldParseCorrectlyRule">
+        <name>AttributeStringLiteralsShouldParseCorrectlyRule</name>
+        <configKey>AttributeStringLiteralsShouldParseCorrectlyRule@Gendarme.Rules.Correctness.dll</configKey>
+        <category name="Maintainability"/>
+        <description>As attributes are used at compile time, only constants can be passed to constructors. This can lead to runtime errors for things like malformed URI strings.</description>
+    </rule>
+    
+    <rule key="AvoidConstructorsInStaticTypesRule">
+        <name>AvoidConstructorsInStaticTypesRule</name>
+        <configKey>AvoidConstructorsInStaticTypesRule@Gendarme.Rules.Correctness.dll</configKey>
+        <category name="Maintainability"/>
+        <description>This rule checks for types that contain only static members and fires if the type contains a visible instance constructor. This was a common mistake in the 1.x framework because C# adds a default, public, constructor if no other constructors are provided. Code using the framework 2.0 (and later) should change this type, if possible, into a static type.</description>
+    </rule>
+    
+    <rule key="AvoidFloatingPointEqualityRule">
+        <name>AvoidFloatingPointEqualityRule</name>
+        <configKey>AvoidFloatingPointEqualityRule@Gendarme.Rules.Correctness.dll</configKey>
+        <category name="Maintainability"/>
+        <description>In general floating point numbers cannot be usefully compared using the equality and inequality operators. This is because floating point numbers are inexact and most floating point operations introduce errors which can accumulate if multiple operations are performed. This rule will fire if [in]equality comparisons are used with Single or Double types. In general such comparisons should be done with some sort of epsilon test instead of a simple compare</description>
+    </rule>
+    
+    
 </rules>

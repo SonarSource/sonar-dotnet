@@ -1,6 +1,7 @@
 package org.sonar.plugin.dotnet.gendarme;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class GendarmeRuleRepository extends AbstractDotNetRuleRepository impleme
 	@Override
   public List<ActiveRule> importConfiguration(String configuration,
       List<Rule> rules) {
-	  List<GendarmeRule> parsedRules = ruleParser.parseRuleConfiguration(configuration);
+	  Collection<GendarmeRule> parsedRules = ruleParser.parseRuleConfiguration(configuration);
 	  
 	  List<ActiveRule> result = new ArrayList<ActiveRule>();
     // First we build a map of configured rules
