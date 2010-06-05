@@ -45,6 +45,7 @@ public class GendarmeRuleMarshallerImpl implements GendarmeRuleMarshaller {
 			if (assemblyRules == null) {
 				assemblyRules = new ArrayList<String>();
 				assemblyRulesMap.put(assembly, assemblyRules);
+				assemblyRulesMapEmpty = false;
 			}
 			assemblyRules.add(ruleName);
 		}
@@ -64,8 +65,9 @@ public class GendarmeRuleMarshallerImpl implements GendarmeRuleMarshaller {
 				builder.append(assembly);
 				builder.append("\"/>");
 			}
+			builder.append("</ruleset>");
 		}
-		builder.append("</ruleset>");
+		
 
 		return builder.toString();
 	}
