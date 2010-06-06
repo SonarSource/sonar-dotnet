@@ -50,6 +50,10 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    */
   public static CSharpFile from(Project project, File file, boolean unitTest)
   {
+	if (unitTest) {
+		Log.error("test "+file);
+	}
+	
     File directory = file.getParentFile();
     CSharpFolder folder = CSharpFolder.fromDirectory(project, directory);
     if (folder == null)

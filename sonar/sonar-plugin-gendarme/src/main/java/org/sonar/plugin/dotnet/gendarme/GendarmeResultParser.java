@@ -1,6 +1,7 @@
 package org.sonar.plugin.dotnet.gendarme;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
@@ -16,14 +17,18 @@ import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
+import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.w3c.dom.Element;
+
+import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 
 public class GendarmeResultParser extends AbstractXmlParser {
 	private Project project;
 	private SensorContext context;
 	private RulesManager rulesManager;
 	private RulesProfile profile;
+	
 
 	/**
 	 * Constructs a @link{GendarmeResultParser}.
@@ -58,12 +63,26 @@ public class GendarmeResultParser extends AbstractXmlParser {
       String source = getNodeContent(issueElement, "source");
       String message = getNodeContent(issueElement, "message");
       
-      if (source == null) {
-      	continue;
-      }
+      final String filePath;
+      final String lineNumber;
       
-      String filePath = StringUtils.substringBefore(source, "(");
-      String lineNumber = StringUtils.substring(StringUtils.substringBetween(source, "(", ")"), 1);
+      if (StringUtils.isEmpty(source)) {
+      	String assemblyName = 
+      		StringUtils.substringBefore(getNodeContent(issueElement, "assembly-name"), ",");
+      	CLRAssembly assembly = CLRAssembly.fromName(project, assemblyName);
+      	filePath = assembly.getVisualProject().getDirectory().getAbsolutePath()+File.separator+"Properties"+File.separator+"AssemblyInfo.cs";
+      	lineNumber = "";
+      } else {
+      	filePath = StringUtils.substringBefore(source, "(");
+        lineNumber = StringUtils.substring(StringUtils.substringBetween(source, "(", ")"), 1);
+        
+        //
+        // we do not care about violations in generated files
+        //
+        if (GeneratedCodeFilter.INSTANCE.isGenerated(StringUtils.substringAfterLast(filePath, File.separator))) {
+        	continue;
+        }
+      }
       
       Resource<?> resource = getResource(filePath);
       Integer line = getIntValue(lineNumber);

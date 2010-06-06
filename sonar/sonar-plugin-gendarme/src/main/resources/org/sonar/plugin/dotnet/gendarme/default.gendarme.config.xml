@@ -4,7 +4,7 @@
 			include="DoNotLockOnThisOrTypesRule | DoNotLockOnWeakIdentityObjectsRule | DoNotUseLockedRegionOutsideMethodRule | DoNotUseMethodImplOptionsSynchronizedRule | DoNotUseThreadStaticWithInstanceFieldsRule | DoubleCheckLockingRule | NonConstantStaticFieldsShouldNotBeVisibleRule | ProtectCallToEventDelegatesRule | ReviewLockUsedOnlyForOperationsOnVariablesRule | WriteStaticFieldFromInstanceMethodRule"
 			from="Gendarme.Rules.Concurrency.dll" />
 		<rules
-			include="AttributeStringLiteralsShouldParseCorrectlyRule | AvoidConstructorsInStaticTypesRule | AvoidFloatingPointEqualityRule | BadRecursiveInvocationRule | CallingEqualsWithNullArgRule | CheckParametersNullityInVisibleMethodsRule | DisposableFieldsShouldBeDisposedRule | DoNotCompareWithNaNRule | DoNotRecurseInEqualityRule | DoNotRoundIntegersRule | EnsureLocalDisposalRule | FinalizersShouldCallBaseClassFinalizerRule | MethodCanBeMadeStaticRule | ProvideCorrectArgumentsToFormattingMethodsRule | ProvideCorrectRegexPatternRule | ProvideValidXPathExpressionRule | ProvideValidXmlStringRule | ReviewCastOnIntegerDivisionRule | ReviewCastOnIntegerMultiplicationRule | ReviewDoubleAssignmentRule | ReviewInconsistentIdentityRule | ReviewSelfAssignmentRule | ReviewUseOfInt64BitsToDoubleRule | ReviewUseOfModuloOneOnIntegersRule | ReviewUselessControlFlowRule | UseValueInPropertySetterRule"
+			include="AttributeStringLiteralsShouldParseCorrectlyRule | AvoidConstructorsInStaticTypesRule | AvoidFloatingPointEqualityRule | BadRecursiveInvocationRule | CallingEqualsWithNullArgRule | DisposableFieldsShouldBeDisposedRule | DoNotCompareWithNaNRule | DoNotRecurseInEqualityRule | DoNotRoundIntegersRule | EnsureLocalDisposalRule | FinalizersShouldCallBaseClassFinalizerRule | MethodCanBeMadeStaticRule | ProvideCorrectArgumentsToFormattingMethodsRule | ProvideCorrectRegexPatternRule | ProvideValidXPathExpressionRule | ProvideValidXmlStringRule | ReviewCastOnIntegerDivisionRule | ReviewCastOnIntegerMultiplicationRule | ReviewDoubleAssignmentRule | ReviewInconsistentIdentityRule | ReviewSelfAssignmentRule | ReviewUseOfInt64BitsToDoubleRule | ReviewUseOfModuloOneOnIntegersRule | ReviewUselessControlFlowRule | UseValueInPropertySetterRule"
 			from="Gendarme.Rules.Correctness.dll" />
 		<rules
 			include="AddMissingTypeInheritanceDemandRule | DoNotExposeFieldsInSecuredTypeRule | DoNotExposeMethodsProtectedByLinkDemandRule | DoNotReduceTypeSecurityOnMethodsRule | ReviewSealedTypeWithInheritanceDemandRule | ReviewSuppressUnmanagedCodeSecurityUsageRule | SecureGetObjectDataOverridesRule"
@@ -24,7 +24,7 @@
 			from="Gendarme.Rules.BadPractice.dll" />
 		<rules include="AvoidExtensionMethodOnSystemObjectRule" from="Gendarme.Rules.Design.Linq.dll" />
 		<rules
-			include="AvoidLargeNumberOfLocalVariablesRule | AvoidLargeStructureRule | AvoidRepetitiveCastsRule | AvoidReturningArraysOnPropertiesRule | AvoidTypeGetTypeForConstantStringsRule | AvoidUncalledPrivateCodeRule | AvoidUninstantiatedInternalClassesRule | AvoidUnneededCallsOnStringRule | AvoidUnneededFieldInitializationRule | AvoidUnneededUnboxingRule | AvoidUnsealedConcreteAttributesRule | AvoidUnusedParametersRule | AvoidUnusedPrivateFieldsRule | CompareWithEmptyStringEfficientlyRule | ConsiderCustomAccessorsForNonVisibleEventsRule | DoNotIgnoreMethodResultRule | ImplementEqualsTypeRule | MathMinMaxCandidateRule | OverrideValueTypeDefaultsRule | PreferCharOverloadRule | PreferLiteralOverInitOnlyFieldsRule | RemoveUnneededFinalizerRule | RemoveUnusedLocalVariablesRule | ReviewLinqMethodRule | UseIsOperatorRule | UseStringEmptyRule | UseSuppressFinalizeOnIDisposableTypeWithFinalizerRule | UseTypeEmptyTypesRule"
+			include="AvoidLargeNumberOfLocalVariablesRule | AvoidLargeStructureRule | AvoidReturningArraysOnPropertiesRule | AvoidTypeGetTypeForConstantStringsRule | AvoidUncalledPrivateCodeRule | AvoidUninstantiatedInternalClassesRule | AvoidUnneededCallsOnStringRule | AvoidUnneededFieldInitializationRule | AvoidUnneededUnboxingRule | AvoidUnsealedConcreteAttributesRule | AvoidUnusedParametersRule | AvoidUnusedPrivateFieldsRule | CompareWithEmptyStringEfficientlyRule | ConsiderCustomAccessorsForNonVisibleEventsRule | DoNotIgnoreMethodResultRule | ImplementEqualsTypeRule | MathMinMaxCandidateRule | OverrideValueTypeDefaultsRule | PreferCharOverloadRule | PreferLiteralOverInitOnlyFieldsRule | RemoveUnneededFinalizerRule | RemoveUnusedLocalVariablesRule | ReviewLinqMethodRule | UseIsOperatorRule | UseStringEmptyRule | UseSuppressFinalizeOnIDisposableTypeWithFinalizerRule | UseTypeEmptyTypesRule"
 			from="Gendarme.Rules.Performance.dll" />
 		<rules
 			include="CallBaseMethodsOnISerializableTypesRule | DeserializeOptionalFieldRule | ImplementISerializableCorrectlyRule | MarkAllNonSerializableFieldsRule | MarkEnumerationsAsSerializableRule | MissingSerializableAttributeOnISerializableTypeRule | MissingSerializationConstructorRule | UseCorrectSignatureForSerializationMethodsRule"
@@ -33,7 +33,7 @@
 			include="AvoidAlwaysNullFieldRule | AvoidComplexMethodsRule | AvoidDeepInheritanceTreeRule | AvoidLackOfCohesionOfMethodsRule | AvoidUnnecessarySpecializationRule | ConsiderUsingStopwatchRule | PreferStringIsNullOrEmptyRule"
 			from="Gendarme.Rules.Maintainability.dll" />
 		<rules
-			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSameClassRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule | AvoidSwitchStatementsRule"
+			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule | AvoidSwitchStatementsRule"
 			from="Gendarme.Rules.Smells.dll" />
 		<rules
 			include="DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule | DoNotAssumeIntPtrSizeRule | GetLastErrorMustBeCalledRightAfterPInvokeRule | MarshalBooleansInPInvokeDeclarationsRule | MarshalStringsInPInvokeDeclarationsRule | PInvokeShouldNotBeVisibleRule | UseManagedAlternativesToPInvokeRule"
@@ -48,7 +48,7 @@
 		<rules
 			include="AvoidMethodWithUnusedGenericTypeRule | DoNotExposeNestedGenericSignaturesRule | ImplementGenericCollectionInterfacesRule | PreferGenericsOverRefObjectRule | UseGenericEventHandlerRule"
 			from="Gendarme.Rules.Design.Generic.dll" />
-		<rules include="AssembliesShouldHaveValidStrongNames" from="$(FxCopDir)\Rules\DesignRules.dll" />
+		
 	</ruleset>
 	<ruleset name="minor">
 		<rules include="AvoidSwitchStatementsRule" from="Gendarme.Rules.Smells.dll" />
@@ -58,7 +58,7 @@
 			include="AddMissingTypeInheritanceDemandRule | ReviewSealedTypeWithInheritanceDemandRule"
 			from="Gendarme.Rules.Security.Cas.dll" />
 		<rules
-			include="ParameterNamesShouldMatchOverriddenMethodRule | UsePluralNameInEnumFlagsRule"
+			include="AvoidRedundancyInMethodNameRule | AvoidRedundancyInTypeNameRule | ParameterNamesShouldMatchOverriddenMethodRule | UsePluralNameInEnumFlagsRule"
 			from="Gendarme.Rules.Naming.dll" />
 		<rules
 			include="ObsoleteMessagesShouldNotBeEmptyRule | PreferEmptyInstanceOverNullRule"
@@ -70,7 +70,7 @@
 			include="DoNotLockOnThisOrTypesRule | DoNotLockOnWeakIdentityObjectsRule | DoNotUseLockedRegionOutsideMethodRule | DoNotUseMethodImplOptionsSynchronizedRule | DoNotUseThreadStaticWithInstanceFieldsRule | NonConstantStaticFieldsShouldNotBeVisibleRule | ProtectCallToEventDelegatesRule | ReviewLockUsedOnlyForOperationsOnVariablesRule | WriteStaticFieldFromInstanceMethodRule"
 			from="Gendarme.Rules.Concurrency.dll" />
 		<rules
-			include="AvoidConstructorsInStaticTypesRule | AvoidFloatingPointEqualityRule | BadRecursiveInvocationRule | CallingEqualsWithNullArgRule | CheckParametersNullityInVisibleMethodsRule | DisposableFieldsShouldBeDisposedRule | DoNotCompareWithNaNRule | DoNotRecurseInEqualityRule | DoNotRoundIntegersRule | EnsureLocalDisposalRule | FinalizersShouldCallBaseClassFinalizerRule | MethodCanBeMadeStaticRule | ProvideCorrectArgumentsToFormattingMethodsRule | ProvideCorrectRegexPatternRule | ProvideValidXPathExpressionRule | ProvideValidXmlStringRule | ReviewCastOnIntegerDivisionRule | ReviewCastOnIntegerMultiplicationRule | ReviewDoubleAssignmentRule | ReviewInconsistentIdentityRule | ReviewSelfAssignmentRule | ReviewUseOfInt64BitsToDoubleRule | ReviewUseOfModuloOneOnIntegersRule | UseValueInPropertySetterRule"
+			include="AvoidConstructorsInStaticTypesRule | AvoidFloatingPointEqualityRule | BadRecursiveInvocationRule | CallingEqualsWithNullArgRule | DisposableFieldsShouldBeDisposedRule | DoNotCompareWithNaNRule | DoNotRecurseInEqualityRule | DoNotRoundIntegersRule | EnsureLocalDisposalRule | FinalizersShouldCallBaseClassFinalizerRule | MethodCanBeMadeStaticRule | ProvideCorrectArgumentsToFormattingMethodsRule | ProvideCorrectRegexPatternRule | ProvideValidXPathExpressionRule | ProvideValidXmlStringRule | ReviewCastOnIntegerDivisionRule | ReviewCastOnIntegerMultiplicationRule | ReviewDoubleAssignmentRule | ReviewInconsistentIdentityRule | ReviewSelfAssignmentRule | ReviewUseOfInt64BitsToDoubleRule | ReviewUseOfModuloOneOnIntegersRule | UseValueInPropertySetterRule"
 			from="Gendarme.Rules.Correctness.dll" />
 		<rules
 			include="DoNotExposeFieldsInSecuredTypeRule | DoNotExposeMethodsProtectedByLinkDemandRule | DoNotReduceTypeSecurityOnMethodsRule | SecureGetObjectDataOverridesRule"
@@ -79,7 +79,7 @@
 			include="ArrayFieldsShouldNotBeReadOnlyRule | DoNotShortCircuitCertificateCheckRule | NativeFieldsShouldNotBeVisibleRule | StaticConstructorsShouldBePrivateRule"
 			from="Gendarme.Rules.Security.dll" />
 		<rules
-			include="AvoidNonAlphanumericIdentifierRule | AvoidRedundancyInMethodNameRule | AvoidRedundancyInTypeNameRule | DoNotPrefixEventsWithAfterOrBeforeRule | DoNotPrefixValuesWithEnumNameRule | DoNotUseReservedInEnumValueNamesRule | UseCorrectCasingRule | UseCorrectPrefixRule | UseCorrectSuffixRule | UsePreferredTermsRule | UseSingularNameInEnumsUnlessAreFlagsRule"
+			include="AvoidNonAlphanumericIdentifierRule | DoNotPrefixEventsWithAfterOrBeforeRule | DoNotPrefixValuesWithEnumNameRule | DoNotUseReservedInEnumValueNamesRule | UseCorrectCasingRule | UseCorrectPrefixRule | UseCorrectSuffixRule | UsePreferredTermsRule | UseSingularNameInEnumsUnlessAreFlagsRule"
 			from="Gendarme.Rules.Naming.dll" />
 		<rules
 			include="DoNotThrowInUnexpectedLocationRule | DoNotThrowReservedExceptionRule | ExceptionShouldBeVisibleRule | InstantiateArgumentExceptionCorrectlyRule | MissingExceptionConstructorsRule | UseObjectDisposedExceptionRule"
@@ -98,7 +98,7 @@
 			include="CallBaseMethodsOnISerializableTypesRule | DeserializeOptionalFieldRule | ImplementISerializableCorrectlyRule | MarkAllNonSerializableFieldsRule | MarkEnumerationsAsSerializableRule | MissingSerializableAttributeOnISerializableTypeRule | MissingSerializationConstructorRule | UseCorrectSignatureForSerializationMethodsRule"
 			from="Gendarme.Rules.Serialization.dll" />
 		<rules
-			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSameClassRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule"
+			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule"
 			from="Gendarme.Rules.Smells.dll" />
 		<rules
 			include="DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule | DoNotAssumeIntPtrSizeRule | GetLastErrorMustBeCalledRightAfterPInvokeRule | MarshalBooleansInPInvokeDeclarationsRule | MarshalStringsInPInvokeDeclarationsRule | PInvokeShouldNotBeVisibleRule"
@@ -129,9 +129,9 @@
 		<rules
 			include="AvoidArgumentExceptionDefaultConstructorRule | AvoidThrowingBasicExceptionsRule | DoNotSwallowErrorsCatchingNonSpecificExceptionsRule"
 			from="Gendarme.Rules.Exceptions.dll" />
-		<rules include="AssembliesShouldHaveValidStrongNames" from="$(FxCopDir)\Rules\DesignRules.dll" />
+		
 		<rules
-			include="AvoidLargeNumberOfLocalVariablesRule | AvoidRepetitiveCastsRule | AvoidUninstantiatedInternalClassesRule | AvoidUnsealedConcreteAttributesRule | AvoidUnusedPrivateFieldsRule | RemoveUnusedLocalVariablesRule"
+			include="AvoidLargeNumberOfLocalVariablesRule | AvoidUninstantiatedInternalClassesRule | AvoidUnsealedConcreteAttributesRule | AvoidUnusedPrivateFieldsRule | RemoveUnusedLocalVariablesRule"
 			from="Gendarme.Rules.Performance.dll" />
 		<rules include="AvoidExtensionMethodOnSystemObjectRule" from="Gendarme.Rules.Design.Linq.dll" />
 
