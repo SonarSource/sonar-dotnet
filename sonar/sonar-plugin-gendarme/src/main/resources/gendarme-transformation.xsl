@@ -46,6 +46,9 @@
       <source>
         <xsl:value-of select="@Source" />
       </source>
+      <location>
+        <xsl:value-of select="@Location" />
+      </location>
     </issue>
   </xsl:template>
 </xsl:stylesheet>

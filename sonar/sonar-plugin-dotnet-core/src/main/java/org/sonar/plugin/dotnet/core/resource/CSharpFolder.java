@@ -25,8 +25,6 @@ package org.sonar.plugin.dotnet.core.resource;
 
 import java.io.File;
 
-import javax.print.attribute.standard.MediaSize.NA;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.sonar.api.resources.Project;
@@ -46,7 +44,7 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
    * 
    * @param project the project containing the directory
    * @param directory the directory to see as a resource
-   * @return the new folder, or <code>null</code> if a problem occured
+   * @return the new folder, or <code>null</code> if a problem occurred
    */
   public static CSharpFolder fromDirectory(Project project, File directory)
   {
