@@ -26,9 +26,6 @@ import org.w3c.dom.Element;
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 public class GendarmeResultParser extends AbstractXmlParser {
 	
 	private final static Logger log = LoggerFactory.getLogger(GendarmeResultParser.class);
@@ -68,11 +65,12 @@ public class GendarmeResultParser extends AbstractXmlParser {
 			String key = getNodeContent(issueElement, "key");
 			String source = getNodeContent(issueElement, "source");
 			String message = getNodeContent(issueElement, "message");
+			String location = getNodeContent(issueElement, "location");
 
 			final String filePath;
 			final String lineNumber;
 
-			if (StringUtils.isEmpty(source)) {
+			if (StringUtils.isEmpty(source) || StringUtils.contains(source, "debugging symbols unavailable")) {
 				String assemblyName = StringUtils.substringBefore(getNodeContent(
 				    issueElement, "assembly-name"), ",");
 				CLRAssembly assembly = CLRAssembly.fromName(project, assemblyName);
@@ -87,19 +85,20 @@ public class GendarmeResultParser extends AbstractXmlParser {
 					    + "AssemblyInfo.cs";
 					lineNumber = "";
 				} else {
-					String location = getNodeContent(issueElement, "location");
 					if (StringUtils.containsNone(location, " ")) {
 						// we will try to find a cs file that match with the class name
 						final String className = StringUtils.substringAfterLast(location, ".");
 						Collection<SourceFile> sourceFiles 
 							= assembly.getVisualProject().getSourceFiles();
-						SourceFile sourceFile = Iterables.find(sourceFiles,
-						    new Predicate<SourceFile>() {
-							    @Override
-							    public boolean apply(SourceFile input) {
-								    return StringUtils.startsWith(input.getName(), className);
-							    }
-						    });
+						
+						SourceFile sourceFile = null;
+						for (SourceFile currentSourceFile : sourceFiles) {
+							if (StringUtils.startsWith(currentSourceFile.getName(), className)) {
+								sourceFile = currentSourceFile;
+								break;
+							}
+            }
+						
 						if (sourceFile == null) {
 							// this one will be ignored
 							log.info("ignoring gendarme violation {} {} {}", new Object[]{key, source, message});
@@ -127,6 +126,18 @@ public class GendarmeResultParser extends AbstractXmlParser {
 					continue;
 				}
 			}
+			
+			
+			if (StringUtils.isEmpty(lineNumber) && StringUtils.contains(location, "::")) {
+				// append a more specific location information
+				// to the message 
+				String codeElement = StringUtils.substringAfter(location, "::");
+				if (!StringUtils.contains(message, codeElement)) {
+					message = StringUtils.substringAfter(location, "::") + " " + message;
+				}
+			}
+			
+			
 
 			Resource<?> resource = getResource(filePath);
 			Integer line = getIntValue(lineNumber);
@@ -152,6 +163,12 @@ public class GendarmeResultParser extends AbstractXmlParser {
 		if (StringUtils.isBlank(filePath)) {
 			return null;
 		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug("Getting resource for path: "+filePath);
+		}
+		
+		
 		File file = new File(filePath);
 		CSharpFile fileResource = CSharpFile.from(project, file, false);
 		return fileResource;

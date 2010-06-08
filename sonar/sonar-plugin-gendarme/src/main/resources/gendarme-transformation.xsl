@@ -35,7 +35,7 @@
         <xsl:value-of select="ancestor::rule/@Name" />
       </key>
       <message>
-        <xsl:value-of select="ancestor::rule/problem" /><xsl:value-of select="ancestor::rule/solution" /> 
+        <xsl:value-of select="."/>. <xsl:value-of select="ancestor::rule/problem" /><xsl:value-of select="ancestor::rule/solution" /> 
       </message>
      <!-- <level>
         <xsl:value-of select="@Severity" />

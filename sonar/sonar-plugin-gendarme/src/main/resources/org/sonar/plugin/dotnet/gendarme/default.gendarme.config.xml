@@ -37,7 +37,7 @@
 		<rules
 			include="AvoidNonAlphanumericIdentifierRule | AvoidRedundancyInMethodNameRule | AvoidRedundancyInTypeNameRule | AvoidTypeInterfaceInconsistencyRule | DoNotPrefixEventsWithAfterOrBeforeRule | DoNotPrefixValuesWithEnumNameRule | DoNotUseReservedInEnumValueNamesRule | ParameterNamesShouldMatchOverriddenMethodRule | UseCorrectCasingRule | UseCorrectPrefixRule | UsePluralNameInEnumFlagsRule | UsePreferredTermsRule | UseSingularNameInEnumsUnlessAreFlagsRule"
 			from="Gendarme.Rules.Naming.dll" />
-		<rules include="DoNotHardcodePathsRule" from="Gendarme.Rules.Portability.dll" />
+		
 		<rules
 			include="AvoidArgumentExceptionDefaultConstructorRule | AvoidThrowingBasicExceptionsRule | DoNotDestroyStackTraceRule | DoNotSwallowErrorsCatchingNonSpecificExceptionsRule | DoNotThrowInUnexpectedLocationRule | DoNotThrowReservedExceptionRule | ExceptionShouldBeVisibleRule | InstantiateArgumentExceptionCorrectlyRule | MissingExceptionConstructorsRule | UseObjectDisposedExceptionRule"
 			from="Gendarme.Rules.Exceptions.dll" />
@@ -55,7 +55,7 @@
 			include="AvoidAlwaysNullFieldRule | AvoidComplexMethodsRule | AvoidDeepInheritanceTreeRule | AvoidLackOfCohesionOfMethodsRule | AvoidUnnecessarySpecializationRule | ConsiderUsingStopwatchRule | PreferStringIsNullOrEmptyRule"
 			from="Gendarme.Rules.Maintainability.dll" />
 		<rules
-			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule | AvoidSwitchStatementsRule"
+			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidLargeClassesRule | AvoidSwitchStatementsRule"
 			from="Gendarme.Rules.Smells.dll" />
 		<rules
 			include="DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule | DoNotAssumeIntPtrSizeRule | GetLastErrorMustBeCalledRightAfterPInvokeRule | MarshalBooleansInPInvokeDeclarationsRule | MarshalStringsInPInvokeDeclarationsRule | PInvokeShouldNotBeVisibleRule | UseManagedAlternativesToPInvokeRule"
@@ -121,7 +121,7 @@
 			include="CallBaseMethodsOnISerializableTypesRule | DeserializeOptionalFieldRule | ImplementISerializableCorrectlyRule | MarkAllNonSerializableFieldsRule | MarkEnumerationsAsSerializableRule | MissingSerializableAttributeOnISerializableTypeRule | MissingSerializationConstructorRule | UseCorrectSignatureForSerializationMethodsRule"
 			from="Gendarme.Rules.Serialization.dll" />
 		<rules
-			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidCodeDuplicatedInSiblingClassesRule | AvoidLargeClassesRule"
+			include="AvoidLongParameterListsRule | AvoidLongMethodsRule | AvoidLargeClassesRule"
 			from="Gendarme.Rules.Smells.dll" />
 		<rules
 			include="DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule | DoNotAssumeIntPtrSizeRule | GetLastErrorMustBeCalledRightAfterPInvokeRule | MarshalBooleansInPInvokeDeclarationsRule | MarshalStringsInPInvokeDeclarationsRule | PInvokeShouldNotBeVisibleRule"
@@ -164,7 +164,6 @@
 	</ruleset>
 	<ruleset name="blocker">
 		<rules include="TypesShouldBeInsideNamespacesRule" from="Gendarme.Rules.Design.dll" />
-		<rules include="DoNotHardcodePathsRule" from="Gendarme.Rules.Portability.dll" />
 		<rules include="DoNotDestroyStackTraceRule" from="Gendarme.Rules.Exceptions.dll" />
 		<rules include="AvoidAssemblyVersionMismatchRule" from="Gendarme.Rules.BadPractice.dll" />
 		<rules include="AvoidUncalledPrivateCodeRule" from="Gendarme.Rules.Performance.dll" />
