@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
@@ -52,6 +53,8 @@ import org.sonar.plugin.dotnet.srcmon.model.FolderMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.ProjectMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.SolutionMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.SourceMetric;
+
+import static org.sonar.plugin.dotnet.core.Constant.*;
 
 /**
  * Extracts the Source Monitor generated metrics and stores them into sonar.
@@ -112,10 +115,22 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
    */
   private void collectFileMeasures(Project project, List<FileMetrics> files, SensorContext context)
   {
+  	 boolean excludeGeneratedCode = 
+     	project.getConfiguration().getBoolean(SONAR_EXCLUDE_GEN_CODE_KEY, true);
+  	
     // We collect all the files
     for (int idxFile = 0; idxFile < files.size(); idxFile++)
     {
       FileMetrics file = files.get(idxFile);
+      
+      File sourcePath = file.getSourcePath();
+      if (excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
+      	// we will not include the generated code
+      	// in the sonar database
+      	log.info("Ignoring generated cs file "+sourcePath);
+      	continue;
+      }
+      
       try {
     	  processFile(project, context, file);
       } catch (InvalidResourceException ex) {
@@ -268,6 +283,8 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
     solutionMetrics.addFile(fileMetric);
 
     File filePath = fileMetric.getSourcePath();
+    
+    
     VisualStudioProject visualProject = solution.getProject(filePath);
     // We combine the files by assembly
     if (visualProject == null)

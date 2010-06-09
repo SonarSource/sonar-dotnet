@@ -52,14 +52,18 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  */
 public class CpdSensor implements Sensor {
 
-	private final static Logger	log	= LoggerFactory.getLogger(CpdSensor.class);
+	private final static Logger log = LoggerFactory.getLogger(CpdSensor.class);
+
+	public final static String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.minimumTokens";
+	public final static int CPD_MINIMUM_TOKENS_DEFAULT_VALUE = 50;
 
 	public CpdSensor() {
 
 		// default empty constructor
 	}
 
-	private void saveResults(CPD cpd, CpdMapping mapping, Project project, SensorContext context) throws DotNetProjectException {
+	private void saveResults(CPD cpd, CpdMapping mapping, Project project,
+	    SensorContext context) throws DotNetProjectException {
 
 		VisualStudioSolution solution = VisualUtils.getSolution(project);
 		List<VisualStudioProject> projects = solution.getProjects();
@@ -72,18 +76,18 @@ public class CpdSensor implements Sensor {
 		cpdAnalyser.analyse(cpd.getMatches());
 	}
 
-	public boolean shouldExecuteOnProject(Project project)
-	  {
-	    String packaging = project.getPackaging();
-	    // We only accept the "sln" packaging
-	    return "sln".equals(packaging);
-	  }
+	public boolean shouldExecuteOnProject(Project project) {
+		String packaging = project.getPackaging();
+		// We only accept the "sln" packaging
+		return "sln".equals(packaging);
+	}
 
 	public void analyse(Project project, SensorContext context) {
 
 		try {
 			CpdMapping mapping = getMapping(project);
-			CPD cpd = executeCPD(project, mapping, project.getFileSystem().getSourceCharset());
+			CPD cpd = executeCPD(project, mapping, project.getFileSystem()
+			    .getSourceCharset());
 			saveResults(cpd, mapping, project, context);
 		} catch (Exception e) {
 			throw new CpdException(e);
@@ -95,7 +99,8 @@ public class CpdSensor implements Sensor {
 		return new CsCpdMapping(project);
 	}
 
-	private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding) throws IOException, DotNetProjectException {
+	private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding)
+	    throws IOException, DotNetProjectException {
 
 		CPD cpd = configureCPD(project, mapping, encoding);
 		cpd.go();
@@ -103,10 +108,12 @@ public class CpdSensor implements Sensor {
 
 	}
 
-	private CPD configureCPD(Project project, CpdMapping mapping, Charset encoding) throws IOException, DotNetProjectException {
+	private CPD configureCPD(Project project, CpdMapping mapping, Charset encoding)
+	    throws IOException, DotNetProjectException {
 
 		TokenEntry.clearImages();
-		int minTokens = project.getConfiguration().getInt("sonar.cpd.minimumTokens", 100);
+		int minTokens = project.getConfiguration().getInt(
+		    CPD_MINIMUM_TOKENS_PROPERTY, CPD_MINIMUM_TOKENS_DEFAULT_VALUE);
 
 		;
 		CPD cpd = new CPD(minTokens, new CsLanguage());
@@ -129,7 +136,8 @@ public class CpdSensor implements Sensor {
 			} else {
 				Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
 				for (SourceFile sourceFile : sources) {
-					if (filter.accept(sourceFile.getFile().getParentFile(), sourceFile.getName())) {
+					if (filter.accept(sourceFile.getFile().getParentFile(), sourceFile
+					    .getName())) {
 						csFiles.add(sourceFile.getFile());
 					}
 				}

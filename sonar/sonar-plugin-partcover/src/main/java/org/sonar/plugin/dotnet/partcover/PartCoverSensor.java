@@ -23,12 +23,15 @@
  */
 package org.sonar.plugin.dotnet.partcover;
 
+import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
@@ -52,166 +55,170 @@ import org.sonar.plugin.dotnet.partcover.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.partcover.model.SourceLine;
 
 /**
- * Collects the results from a PartCover report. Most of the work is
- * delegator to {@link PartCoverResultParser}.
+ * Collects the results from a PartCover report. Most of the work is delegator
+ * to {@link PartCoverResultParser}.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverSensor extends AbstractDotnetSensor
-{
-  public static final String                        PART_COVER_REPORT_XML = "coverage-report.xml";
-  private final static Logger                       log                   = LoggerFactory.getLogger(PartCoverSensor.class);
-  private final PropertiesBuilder<String, Integer> lineHitsBuilder       = new PropertiesBuilder<String, Integer>(CoreMetrics.COVERAGE_LINE_HITS_DATA);
-  private PartCoverPluginHandler                    pluginHandler;
+public class PartCoverSensor extends AbstractDotnetSensor {
+	public static final String PART_COVER_REPORT_XML = "coverage-report.xml";
+	private final static Logger log = LoggerFactory
+	    .getLogger(PartCoverSensor.class);
+	private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
+	    CoreMetrics.COVERAGE_LINE_HITS_DATA);
+	private PartCoverPluginHandler pluginHandler;
 
-  /**
-   * Constructs the collector Constructs a @link{PartCoverCollector}.
-   */
-  public PartCoverSensor(PartCoverPluginHandler pluginHandler)
-  {
-    this.pluginHandler = pluginHandler;
-  }
+	/**
+	 * Constructs the collector Constructs a @link{PartCoverCollector}.
+	 */
+	public PartCoverSensor(PartCoverPluginHandler pluginHandler) {
+		this.pluginHandler = pluginHandler;
+	}
 
-  /**
-   * Proceeds to the analysis.
-   * 
-   * @param project
-   * @param context
-   */
-  @Override
-  public void analyse(Project project, SensorContext context)
-  {
-    File report = findReport(project, PART_COVER_REPORT_XML);
-    if (report == null)
-    {
-      return;
-    }
-    PartCoverResultParser parser = new PartCoverResultParser();
-    URL url;
-    try
-    {
-      url = report.toURI().toURL();
-    }
-    catch (MalformedURLException e)
-    {
-      return;
-    }
+	/**
+	 * Proceeds to the analysis.
+	 * 
+	 * @param project
+	 * @param context
+	 */
+	@Override
+	public void analyse(Project project, SensorContext context) {
+		File report = findReport(project, PART_COVER_REPORT_XML);
+		if (report == null) {
+			return;
+		}
+		PartCoverResultParser parser = new PartCoverResultParser();
+		URL url;
+		try {
+			url = report.toURI().toURL();
+		} catch (MalformedURLException e) {
+			return;
+		}
 
-    // We parse the file
-    parser.parse(url);
-    List<FileCoverage> files = parser.getFiles();
-    List<ProjectCoverage> projects = parser.getProjects();
+		// We parse the file
+		parser.parse(url);
+		List<FileCoverage> files = parser.getFiles();
+		List<ProjectCoverage> projects = parser.getProjects();
 
-    // Collect the files
-    for (FileCoverage fileCoverage : files)
-    {
-      collectFile(project, context, fileCoverage);
-    }
-
-    // Collect the projects
-    int countLines = 0;
-    int coveredLines = 0;
-
-    for (ProjectCoverage projectCoverage : projects)
-    {
-      collectAssembly(project, context, projectCoverage);
-      countLines += projectCoverage.getCountLines();
-      coveredLines += projectCoverage.getCoveredLines();
-    }
-
-    // Computes the global coverage
-    double coverage = Math.round(100. * coveredLines / countLines) * 0.01;
-    context.saveMeasure(CoreMetrics.COVERAGE, convertPercentage(coverage));
-    context.saveMeasure(CoverageMetrics.ELOC, (double) countLines);
-  }
-
-  /**
-   * Collects the coverage at the assembly level
-   * 
-   * @param context
-   * @param projectCoverage
-   */
-  private void collectAssembly(Project project, SensorContext context, ProjectCoverage projectCoverage)
-  {
-    double coverage = projectCoverage.getCoverage();
-    String assemblyName = projectCoverage.getAssemblyName();
-    VisualStudioSolution solution;
-    try
-    {
-      solution = VisualUtils.getSolution(project);
-
-      VisualStudioProject visualProject = solution.getProject(assemblyName);
-      if (visualProject != null)
-      {
-        CLRAssembly assemblyResource = new CLRAssembly(visualProject);
-        context.saveMeasure(assemblyResource, CoreMetrics.COVERAGE, convertPercentage(coverage));
-        context.saveMeasure(assemblyResource, CoverageMetrics.ELOC, (double) projectCoverage.getCountLines());
+		boolean excludeGeneratedCode = 
+    	project.getConfiguration().getBoolean(SONAR_EXCLUDE_GEN_CODE_KEY, true);
+		
+		// Collect the files
+		for (FileCoverage fileCoverage : files) {
+			File sourcePath = fileCoverage.getFile();
+      if (excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
+      	// we will not include the generated code
+      	// in the sonar database
+      	log.info("Ignoring generated cs file "+sourcePath);
+      	continue;
       }
-    }
-    catch (DotNetProjectException e)
-    {
-      log.debug("Could not find a .Net project : " + e);
-    }
-  }
+			collectFile(project, context, fileCoverage);
+		}
 
-  /**
-   * Collects the results for a class
-   * 
-   * @param context
-   * @param classCoverage
-   */
-  private void collectFile(Project project, SensorContext context, FileCoverage fileCoverage)
-  {
-    File filePath = fileCoverage.getFile();
-    CSharpFile fileResource = CSharpFile.from(project, filePath, false);
-    double coverage = fileCoverage.getCoverage();
-    // We have the effective number of lines here
-    context.saveMeasure(fileResource, CoverageMetrics.ELOC, (double) fileCoverage.getCountLines());
+		// Collect the projects
+		int countLines = 0;
+		int coveredLines = 0;
 
-    context.saveMeasure(fileResource, CoreMetrics.COVERAGE, convertPercentage(coverage));
-    context.saveMeasure(fileResource, getHitData(fileCoverage));
-  }
+		for (ProjectCoverage projectCoverage : projects) {
+			collectAssembly(project, context, projectCoverage);
+			countLines += projectCoverage.getCountLines();
+			coveredLines += projectCoverage.getCoveredLines();
+		}
 
-  /**
-   * Generates a measure that contains the visits of each line of the source file.
-   * 
-   * @param coverable the source file result
-   * @return a measure to store
-   */
-  private Measure getHitData(CoverableSource coverable)
-  {
-    lineHitsBuilder.clear();
-    Map<Integer, SourceLine> lines = coverable.getLines();
-    for (SourceLine line : lines.values())
-    {
-      int lineNumber = line.getLineNumber();
-      int countVisits = line.getCountVisits();
-      lineHitsBuilder.add(Integer.toString(lineNumber), countVisits);
-    }
-    Measure hitData = lineHitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
-    return hitData;
-  }
+		// Computes the global coverage
+		double coverage = Math.round(100. * coveredLines / countLines) * 0.01;
+		context.saveMeasure(CoreMetrics.COVERAGE, convertPercentage(coverage));
+		context.saveMeasure(CoverageMetrics.ELOC, (double) countLines);
+	}
 
-  /**
-   * Gets the plugin handle.
-   * @param project he project to process.
-   * @return the plugin handler for the project
-   */
-  @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project)
-  {
-    return pluginHandler;
-  }
+	/**
+	 * Collects the coverage at the assembly level
+	 * 
+	 * @param context
+	 * @param projectCoverage
+	 */
+	private void collectAssembly(Project project, SensorContext context,
+	    ProjectCoverage projectCoverage) {
+		double coverage = projectCoverage.getCoverage();
+		String assemblyName = projectCoverage.getAssemblyName();
+		VisualStudioSolution solution;
+		try {
+			solution = VisualUtils.getSolution(project);
 
-  /**
-   * Converts a number to a percentage
-   * 
-   * @param percentage
-   * @return
-   */
-  private double convertPercentage(Number percentage)
-  {
-    return ParsingUtils.scaleValue(percentage.doubleValue() * 100.0);
-  }
+			VisualStudioProject visualProject = solution.getProject(assemblyName);
+			if (visualProject != null) {
+				CLRAssembly assemblyResource = new CLRAssembly(visualProject);
+				context.saveMeasure(assemblyResource, CoreMetrics.COVERAGE,
+				    convertPercentage(coverage));
+				context.saveMeasure(assemblyResource, CoverageMetrics.ELOC,
+				    (double) projectCoverage.getCountLines());
+			}
+		} catch (DotNetProjectException e) {
+			log.debug("Could not find a .Net project : " + e);
+		}
+	}
+
+	/**
+	 * Collects the results for a class
+	 * 
+	 * @param context
+	 * @param classCoverage
+	 */
+	private void collectFile(Project project, SensorContext context,
+	    FileCoverage fileCoverage) {
+		File filePath = fileCoverage.getFile();
+		CSharpFile fileResource = CSharpFile.from(project, filePath, false);
+		double coverage = fileCoverage.getCoverage();
+		// We have the effective number of lines here
+		context.saveMeasure(fileResource, CoverageMetrics.ELOC,
+		    (double) fileCoverage.getCountLines());
+
+		context.saveMeasure(fileResource, CoreMetrics.COVERAGE,
+		    convertPercentage(coverage));
+		context.saveMeasure(fileResource, getHitData(fileCoverage));
+	}
+
+	/**
+	 * Generates a measure that contains the visits of each line of the source
+	 * file.
+	 * 
+	 * @param coverable
+	 *          the source file result
+	 * @return a measure to store
+	 */
+	private Measure getHitData(CoverableSource coverable) {
+		lineHitsBuilder.clear();
+		Map<Integer, SourceLine> lines = coverable.getLines();
+		for (SourceLine line : lines.values()) {
+			int lineNumber = line.getLineNumber();
+			int countVisits = line.getCountVisits();
+			lineHitsBuilder.add(Integer.toString(lineNumber), countVisits);
+		}
+		Measure hitData = lineHitsBuilder.build().setPersistenceMode(
+		    PersistenceMode.DATABASE);
+		return hitData;
+	}
+
+	/**
+	 * Gets the plugin handle.
+	 * 
+	 * @param project
+	 *          he project to process.
+	 * @return the plugin handler for the project
+	 */
+	@Override
+	public MavenPluginHandler getMavenPluginHandler(Project project) {
+		return pluginHandler;
+	}
+
+	/**
+	 * Converts a number to a percentage
+	 * 
+	 * @param percentage
+	 * @return
+	 */
+	private double convertPercentage(Number percentage) {
+		return ParsingUtils.scaleValue(percentage.doubleValue() * 100.0);
+	}
 
 }

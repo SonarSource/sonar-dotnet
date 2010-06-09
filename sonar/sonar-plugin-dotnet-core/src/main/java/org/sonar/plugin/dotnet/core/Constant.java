@@ -33,4 +33,6 @@ public class Constant
   
   //public static final String MAVEN_DOTNET_GROUP_ID = "org.codehaus.maven.dotnet";
   public static final String MAVEN_DOTNET_GROUP_ID = "org.codehaus.sonar-plugins.dotnet";
+  
+  public static final String SONAR_EXCLUDE_GEN_CODE_KEY = "sonar.dotnet.excludeGeneratedCode";
 }

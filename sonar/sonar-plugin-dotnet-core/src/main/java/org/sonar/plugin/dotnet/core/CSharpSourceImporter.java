@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -39,6 +40,8 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+
+import static org.sonar.plugin.dotnet.core.Constant.*;
 
 /**
  * Collects the CSharp source files for Sonar.
@@ -93,12 +96,20 @@ public class CSharpSourceImporter extends AbstractSourceImporter
   private void parseVisualProject(VisualStudioProject visualStudioProject, SensorContext context, Project project)
   {
     boolean unitTest = visualStudioProject.isTest();
+    boolean excludeGeneratedCode = 
+    	project.getConfiguration().getBoolean(SONAR_EXCLUDE_GEN_CODE_KEY, true);
     Collection<SourceFile> sourceFiles = visualStudioProject.getSourceFiles();
     for (SourceFile sourceFile : sourceFiles)
     {
       try
       {
         File sourcePath = sourceFile.getFile();
+        if (excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
+        	// we will not include the generated code
+        	// in the sonar database
+        	log.info("Ignoring generated cs file "+sourcePath);
+        	continue;
+        }
         CSharpFile resource = CSharpFile.from(project, sourcePath, unitTest);
         // Windows may sometime generate endian-recognition characters that are not
         // supported by the Sonar GUI, so we remove them

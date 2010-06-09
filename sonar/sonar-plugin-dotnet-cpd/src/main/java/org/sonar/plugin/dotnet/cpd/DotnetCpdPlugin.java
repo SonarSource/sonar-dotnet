@@ -32,9 +32,6 @@ public class DotnetCpdPlugin implements Plugin {
 
 	public static final String	KEY									= "dotnet-cpd";
 
-	public final static String	CPD_MINIMUM_TOKENS_PROPERTY			= "sonar.dotnet.cpd.minimumTokens";
-	public final static String	CPD_MINIMUM_TOKENS_DEFAULT_VALUE	= "100";
-
 	// The key which uniquely identifies your plugin among all others Sonar
 	// plugins
 	public String getKey() {
@@ -57,10 +54,6 @@ public class DotnetCpdPlugin implements Plugin {
 
 		List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
 		list.add(CpdSensor.class);
-		//list.add(SumDuplicationsDecorator.class);
-		//list.add(DuplicationDensityDecorator.class);
-		//list.add(CsCpdMapping.class);
-
 		return list;
 	}
 
