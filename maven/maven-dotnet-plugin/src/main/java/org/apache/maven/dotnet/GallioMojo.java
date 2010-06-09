@@ -27,6 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -107,8 +108,16 @@ public class GallioMojo extends AbstractUnitTestMojo
    * @parameter expression="${maven.test.failure.ignore}" default-value="false"
    */
   protected boolean        testFailureIgnore        = false;
+  
+  
+  /**
+   * Optional test filter for gallio. This can be used to execute only a specific test category
+   * 
+   * @parameter expression="${gallio.filter}"
+   */
+  protected String        	filter;
 
-  private File             reportFile;
+  private File             	reportFile;
 
   @Override
   protected void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException
@@ -229,6 +238,11 @@ public class GallioMojo extends AbstractUnitTestMojo
       fullPaths.add(toCommandPath(testedAssembly));
     }
     reportFile = getReportFile(reportFileName);
+    
+    if (StringUtils.isNotEmpty(filter)) {
+    	arguments.add("/f:" + filter);
+    }
+    
 
     // Defines the runner(default is Local)
     // Note that Local is mandatory to use partcover (maybe we can build a Partcover runner ???)
