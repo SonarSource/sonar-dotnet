@@ -47,7 +47,7 @@ public class StyleCopPlugin implements Plugin
 
   public String getDescription()
   {
-    return "A plugin that collects the SourceMonitor metrics";
+    return "A plugin that collects stylecop warnings";
   }
 
   /**
