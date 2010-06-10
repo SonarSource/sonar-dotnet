@@ -125,7 +125,7 @@ public class StyleCopGenerator
     task.setFullPath(toWindowsPath(visualSolution));
     task.setOutputFile(toWindowsPath(output));
     task.setSettingsFile(toWindowsPath(settings));
-    task.setSourceFiles("@(SourceAnalysisFiles)");
+    task.setSourceFiles("@(SourceAnalysisFiles);@(CSFile)");
 
     // Builds the creation item
     CreateItem createItem = new CreateItem();
