@@ -123,6 +123,10 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
         continue;
       }
       File file = visualStudioProject.getProjectFile();
+      if (file==null) {
+      	// the project is an ASP project without any csproj file
+      	file = visualStudioProject.getDirectory();
+      }
       analyzedProjects.add(file);
 
     }

@@ -44,12 +44,16 @@ public class ItemGroup
   @XmlElement(type=ProjectItem.class, name="Project")
   private List<ProjectItem> projects;
   
+  @XmlElement(type=ProjectItem.class, name="CSFile")
+  private List<ProjectItem> csFiles;
+  
   /**
    * Constructs a @link{ItemGroup}.
    */
   public ItemGroup()
   {
     this.projects = new ArrayList<ProjectItem>();
+    this.csFiles = new ArrayList<ProjectItem>();
   }
 
   
@@ -79,6 +83,24 @@ public class ItemGroup
     ProjectItem project = new ProjectItem();
     project.setInclude(projectPath);
     this.projects.add(project);
+    
+  }
+
+
+	public List<ProjectItem> getCsFiles() {
+  	return csFiles;
+  }
+
+
+	public void setCsFiles(List<ProjectItem> csFiles) {
+  	this.csFiles = csFiles;
+  }
+	
+	public void addCsFiles(String path)
+  {
+    ProjectItem project = new ProjectItem();
+    project.setInclude(path);
+    this.csFiles.add(project);
     
   }
 }

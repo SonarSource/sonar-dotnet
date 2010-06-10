@@ -140,7 +140,11 @@ public class StyleCopGenerator
     // Adds all the projects files
     for (File visualProject : visualProjects)
     {
-      group.addProject(toWindowsPath(visualProject));
+    	if (visualProject.isDirectory()) {
+    		group.addCsFiles(visualProject+"\\**\\*.cs");
+    	} else {
+    		group.addProject(toWindowsPath(visualProject));
+    	}
     }
 
     // Populates the task
