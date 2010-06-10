@@ -154,7 +154,7 @@ public class PartCoverSensor extends AbstractDotnetSensor {
 				    (double) projectCoverage.getCountLines());
 			}
 		} catch (DotNetProjectException e) {
-			log.debug("Could not find a .Net project : " + e);
+			log.debug("Could not find a .Net project : ", e);
 		}
 	}
 
