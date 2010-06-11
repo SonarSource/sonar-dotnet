@@ -24,12 +24,18 @@
 package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import net.sourceforge.pmd.util.StringUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -498,4 +504,55 @@ public class VisualStudioProject
 
     return false;
   }
+  
+  public boolean isWebProject() {
+  	return (projectFile==null);
+  }
+  
+  /**
+   * @return null if the project is not a web project, 
+   * the generated web dll names  otherwise.
+   */
+  public Set<String> getWebAssemblyNames() {
+  	if (!isWebProject()) {
+  		return null;
+  	}
+  	Set<File> assemblies = getWebAssemblies();
+  	Set<String> assemblyNames = new HashSet<String>(); 
+  	
+  	for (File assembly : assemblies) {
+	    assemblyNames.add(StringUtils.substringBeforeLast(assembly.getName(),".dll"));
+    }
+  	
+  	return assemblyNames;
+  }
+  
+  /**
+   * @return null if the project is not a web project, 
+   * the generated web dlls  otherwise.
+   */
+  public Set<File> getWebAssemblies() {
+  	if (!isWebProject()) {
+  		return null;
+  	}
+  	Set<File> result = new HashSet<File>();
+  	
+  	final String precompilationPath;
+  	if (debugOutputDir.list().length==0) {
+  		precompilationPath = releaseOutputDir.getAbsolutePath()+File.separator+"bin";
+  	} else {
+  		precompilationPath = debugOutputDir.getAbsolutePath()+File.separator+"bin";
+  	}
+  	
+  	File[] files = new File(precompilationPath).listFiles();
+		
+		for (File file : files) {
+			String name = file.getName();
+			if (StringUtils.endsWith(name, "dll")) {
+				result.add(file);
+			}
+    }
+		return result;
+  }
+  
 }
