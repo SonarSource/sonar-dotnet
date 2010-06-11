@@ -170,7 +170,14 @@ public class GendarmeResultParser extends AbstractXmlParser {
 		
 		
 		File file = new File(filePath);
-		CSharpFile fileResource = CSharpFile.from(project, file, false);
+		final CSharpFile fileResource;
+		if (file.exists()) {
+			fileResource = CSharpFile.from(project, file, false);
+		} else {
+			log.error("Unable to ge resource for path "+filePath);
+			fileResource = null;
+		}
+		
 		return fileResource;
 	}
 
