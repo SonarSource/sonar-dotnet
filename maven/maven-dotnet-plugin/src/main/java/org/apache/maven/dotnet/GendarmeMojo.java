@@ -82,20 +82,10 @@ public class GendarmeMojo extends AbstractDotNetMojo {
 			if (visualStudioProject.isTest()) {
 				getLog().info(
 				    "Skipping the test project " + visualStudioProject.getName());
-			} else if (visualStudioProject.getProjectFile() == null) {
+			} else if (visualStudioProject.isWebProject()) {
 				// ASP project
-				String precompilationPath = visualStudioProject.getDebugOutputDir().getAbsolutePath()+File.separator+"bin";
-				File[] aspAssemblies = new File(precompilationPath).listFiles(new FilenameFilter() {
-					
-					@Override
-					public boolean accept(File dir, String name) {
-						return StringUtils.endsWithIgnoreCase(name, "dll");
-					}
-				});
-				for (File aspAssembly : aspAssemblies) {
-					checkedAssemblies.add(aspAssembly);
-        }
-
+				checkedAssemblies.addAll(visualStudioProject.getWebAssemblies());
+        
 			} else {
 				File assembly = getGeneratedAssembly(visualStudioProject);
 				if (assembly.exists()) {
