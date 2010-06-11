@@ -35,7 +35,7 @@ public enum GeneratedCodeFilter {
 	INSTANCE;
 	
 	private final static Set<String> fileNamesToExclude = 
-		new HashSet<String>(Arrays.asList(new String[]{"Reference.cs", "AssemblyInfo.cs"}));
+		new HashSet<String>(Arrays.asList(new String[]{"Reference.cs"}));
 	
 	public boolean isGenerated(String fileName) {
 		return fileNamesToExclude.contains(fileName) 
