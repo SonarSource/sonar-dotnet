@@ -537,14 +537,7 @@ public class VisualStudioProject
   	}
   	Set<File> result = new HashSet<File>();
   	
-  	final String precompilationPath;
-  	if (debugOutputDir.list().length==0) {
-  		precompilationPath = releaseOutputDir.getAbsolutePath()+File.separator+"bin";
-  	} else {
-  		precompilationPath = debugOutputDir.getAbsolutePath()+File.separator+"bin";
-  	}
-  	
-  	File[] files = new File(precompilationPath).listFiles();
+  	File[] files = getWebPrecompilationDirectory().listFiles();
 		
 		for (File file : files) {
 			String name = file.getName();
@@ -553,6 +546,22 @@ public class VisualStudioProject
 			}
     }
 		return result;
+  }
+  
+  /**
+   * @return the directory where asp.net pages are precompiled. null for a non web project
+   */
+  public File getWebPrecompilationDirectory() {
+  	if (!isWebProject()) {
+  		return null;
+  	}
+  	final String precompilationPath;
+  	if (debugOutputDir.list().length==0) {
+  		precompilationPath = releaseOutputDir.getAbsolutePath()+File.separator+"bin";
+  	} else {
+  		precompilationPath = debugOutputDir.getAbsolutePath()+File.separator+"bin";
+  	}
+  	return new File(precompilationPath);
   }
   
 }

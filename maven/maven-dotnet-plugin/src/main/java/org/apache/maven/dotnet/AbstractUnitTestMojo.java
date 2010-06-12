@@ -36,51 +36,44 @@ import org.apache.maven.plugin.logging.Log;
 
 /**
  * A base class for unit test mojo for .Net.
+ * 
  * @author Jose CHILLAN Mar 25, 2010
  */
-public abstract class AbstractUnitTestMojo extends AbstractDotNetMojo
-{
+public abstract class AbstractUnitTestMojo extends AbstractDotNetMojo {
 
-  /**
-   * @param solution
-   * @return
-   * @throws MojoFailureException
-   */
-  protected List<File> extractTestAssemblies(VisualStudioSolution solution) throws MojoFailureException
-  {
-    List<VisualStudioProject> projects = solution.getProjects();
-    List<File> testAssemblies = new ArrayList<File>();
-    for (VisualStudioProject visualProject : projects)
-    {
-      if (visualProject.isTest())
-      {
-        File generatedAssembly = getGeneratedAssembly(visualProject);
-        if (generatedAssembly.exists())
-        {
-          testAssemblies.add(generatedAssembly);
-        }
-        else
-        {
-          getLog().warn("Skipping missing test assembly " + generatedAssembly);
-        }
-      }
-    }
-    return testAssemblies;
-  }
+	/**
+	 * @param solution
+	 * @return
+	 * @throws MojoFailureException
+	 */
+	protected List<File> extractTestAssemblies(VisualStudioSolution solution)
+	    throws MojoFailureException {
+		
+		List<VisualStudioProject> projects = solution.getTestProjects();
+		List<File> testAssemblies = new ArrayList<File>();
+		
+		for (VisualStudioProject visualProject : projects) {
+			File generatedAssembly = getGeneratedAssembly(visualProject);
+			if (generatedAssembly.exists()) {
+				testAssemblies.add(generatedAssembly);
+			} else {
+				getLog().warn("Skipping missing test assembly " + generatedAssembly);
+			}
+		}
+		
+		return testAssemblies;
+	}
 
+	@Override
+	protected boolean checkExecutionAllowed() throws MojoExecutionException {
+		Log log = getLog();
+		String skipTest = System.getProperty("maven.test.skip");
 
-  @Override
-  protected boolean checkExecutionAllowed() throws MojoExecutionException
-  {
-    Log log = getLog();
-    String skipTest = System.getProperty("maven.test.skip");
-  
-    if ("TRUE".equalsIgnoreCase(skipTest))
-    {
-      log.info("Skipping Test Execution");
-      return false;
-    }
-    return super.checkExecutionAllowed();
-  }
+		if ("TRUE".equalsIgnoreCase(skipTest)) {
+			log.info("Skipping Test Execution");
+			return false;
+		}
+		return super.checkExecutionAllowed();
+	}
 
 }

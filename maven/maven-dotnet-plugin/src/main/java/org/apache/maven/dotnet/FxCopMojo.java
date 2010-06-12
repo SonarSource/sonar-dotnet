@@ -126,25 +126,7 @@ public class FxCopMojo extends AbstractDotNetMojo {
 	@Override
 	protected void executeSolution(VisualStudioSolution solution)
 	    throws MojoFailureException, MojoExecutionException {
-		List<VisualStudioProject> projects = solution.getProjects();
-		List<File> checkedAssemblies = new ArrayList<File>();
-		// We skip all the test assemblies
-		for (VisualStudioProject visualStudioProject : projects) {
-			if (visualStudioProject.isTest()) {
-				getLog().info(
-				    "Skipping the test project " + visualStudioProject.getName());
-			} else if (visualStudioProject.isWebProject()) {
-				// ASP project
-				checkedAssemblies.addAll(visualStudioProject.getWebAssemblies());
-			} else {
-				File assembly = getGeneratedAssembly(visualStudioProject);
-				if (assembly.exists()) {
-					checkedAssemblies.add(assembly);
-				} else {
-					getLog().info("Skipping the non generated assembly: " + assembly);
-				}
-			}
-		}
+		List<File> checkedAssemblies = extractAssemblies(solution);
 		launchReport(checkedAssemblies);
 	}
 

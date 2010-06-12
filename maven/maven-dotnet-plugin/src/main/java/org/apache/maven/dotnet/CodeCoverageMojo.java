@@ -142,15 +142,14 @@ public class CodeCoverageMojo
                                                                                                        MojoFailureException
   {
     List<VisualStudioProject> projects = solution.getProjects();
-    List<File> testAssemblies = new ArrayList<File>();
-    List<String> coveredAssemblies = new ArrayList<String>();
+    List<String> coveredAssemblyNames = new ArrayList<String>();
     // We build the list to of covered assemblies
     for (VisualStudioProject visualProject : projects)
     {
       if (!visualProject.isTest())
       {
         String assemblyName = visualProject.getAssemblyName();
-        coveredAssemblies.add(assemblyName);
+        coveredAssemblyNames.add(assemblyName);
       }
     }
 
@@ -168,8 +167,7 @@ public class CodeCoverageMojo
       log.debug("Parameters of the PartCover execution");
       log.debug(" - PartCover          : " + executable);
       log.debug(" - Gallio             : " + gallioExe);
-      log.debug(" - Test assemblies    : " + testAssemblies);
-      log.debug(" - Covered assemblies : " + coveredAssemblies);
+      log.debug(" - Covered assemblies : " + coveredAssemblyNames);
       log.debug(" - Exclusions         : " + Arrays.toString(coverageExcludes));
       log.debug(" - Work directory     : " + workDir);
       log.debug(" - Report file        : " + reportFile);
@@ -204,7 +202,7 @@ public class CodeCoverageMojo
     arguments.add(targetArgsBuilder.toString());
 
     // We add all the covered assemblies
-    for (String assemblyName : coveredAssemblies)
+    for (String assemblyName : coveredAssemblyNames)
     {
       arguments.add("--include");
       arguments.add("[" + assemblyName + "]*");

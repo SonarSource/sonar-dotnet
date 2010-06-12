@@ -24,8 +24,10 @@
 package org.apache.maven.dotnet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.maven.dotnet.commons.project.ArtifactType;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -33,13 +35,14 @@ import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Cleans the build objects generated for a .Net project or solution
  * @goal clean
  * @phase clean
  * @description clean the build object of a .Net project or solution
- * @author Jose CHILLAN Apr 9, 2009 * @author Jose CHILLAN Apr 21, 2009 * @author Jose CHILLAN Jun 18, 2009
+ * @author Jose CHILLAN Apr 9, 2009 
  */
 public class CleanMojo extends AbstractDotNetBuildMojo
 {
@@ -86,6 +89,21 @@ public class CleanMojo extends AbstractDotNetBuildMojo
     log.debug(" - Tool Version  : " + toolVersion);
     log.debug(" - MsBuild exe   : " + executable);
 
+    
+    // ASP.NET precompiled directory clean-up
+    List<VisualStudioProject> visualStudioProjects = getVisualSolution().getProjects();
+    for (VisualStudioProject visualStudioProject : visualStudioProjects) {
+	    if (visualStudioProject.isWebProject()) {
+	    	log.info("Cleaning precompiled asp.net dlls for project "+visualStudioProject);
+	    	File precompilationDirectory = visualStudioProject.getWebPrecompilationDirectory();
+	    	try {
+	        FileUtils.cleanDirectory(precompilationDirectory);
+        } catch (IOException e) {
+	       throw new MojoExecutionException("error while cleaning web project "+visualStudioProject, e);
+        }
+	    }
+    }
+    
     // We clean all configurations
     List<String> configurations = getBuildConfigurations();
     for (String configuration : configurations)
@@ -99,6 +117,7 @@ public class CleanMojo extends AbstractDotNetBuildMojo
       // We launch the compile command (the logs are put in debug because they may be verbose)
       launchCommand(executable, arguments, "clean", 0, true);
     }
+    
     log.info("Cleaning done!");
   }
 }
