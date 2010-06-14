@@ -25,6 +25,16 @@ import org.apache.maven.plugin.logging.Log;
 public class GendarmeMojo extends AbstractDotNetMojo {
 
 	public final static String DEFAULT_GENDARME_REPORT_NAME = "gendarme-report.xml";
+	
+	/**
+	 * Name of the resource folder that contains the mono gendarme runtime
+	 */
+	private final static String RESOURCE_DIR = "gendarme";
+	/**
+	 * Name of the extracted folder that will contain the extracted gendarme.exe
+	 */
+	private final static String EXPORT_PATH = "gendarme-runtime";
+	
 
 	/**
 	 * Location of the mono gendarme installation
@@ -124,7 +134,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
 		}
 
 		// We retrieve the required files
-		executableFile = new File(gendarmeDirectory, gendarmeExecutable);
+		prepareExecutable();
 
 		File reportFile = getReportFile(gendarmeReportName,
 		    DEFAULT_GENDARME_REPORT_NAME);
@@ -155,6 +165,18 @@ public class GendarmeMojo extends AbstractDotNetMojo {
 
 		launchCommand(executableFile, commandArguments, "gendarme", 1, true);
 		log.info("gendarme report generated");
+	}
+
+	/**
+	 * Prepares the FxCop executable.
+	 * 
+	 * @throws MojoExecutionException
+	 */
+	private void prepareExecutable() throws MojoExecutionException {
+		if (gendarmeDirectory == null) {
+			gendarmeDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "FxCop");
+		}
+		executableFile = new File(gendarmeDirectory, gendarmeExecutable);
 	}
 
 }

@@ -108,7 +108,7 @@ public abstract class AbstractDotNetMojo
    * Defines if the plugin can use the maven-dotnet-runtime artifact to export the
    * relevant .Net quality applications instead of using their global path. The defined
    * path is always taken in priority.
-   * @parameter expression="${dotnet.use.embedded.runtime}" default-value="false"
+   * @parameter expression="${dotnet.use.embedded.runtime}" default-value="true"
    */
   protected boolean             useEmbbededRuntime;
 
@@ -533,7 +533,7 @@ public abstract class AbstractDotNetMojo
    */
   protected File extractFolder(String resourceDir, String destinationSubFolder, String application) throws MojoExecutionException
   {
-    if (useEmbbededRuntime == false)
+    if (!useEmbbededRuntime)
     {
       getLog().warn("The use of the embedded runtime package is not enabled. Please add the settings 'dotnet.use.embedded.runtime=true'");
       throw new MojoExecutionException("The use of the embedded runtime package is not enabled for " + application);
