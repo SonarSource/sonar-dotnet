@@ -28,8 +28,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -59,15 +57,10 @@ import org.xml.sax.InputSource;
  */
 public class VisualStudioUtils
 {
-  public static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
-  public static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
-  public static String VISUAL_PROJECT_NAME_PROPERTY  = "visual.studio.project";
-  public static String SOLUTION_PACKAGING            = "sln";
-
-  public static void main(String[] args) throws Exception
-  {
-    getProjects(new File("C:/Work/PRB/dotnet/prb-dotnet.sln"));
-  }
+  public final static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
+  public final static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
+  public final static String VISUAL_PROJECT_NAME_PROPERTY  = "visual.studio.project";
+  public final static String SOLUTION_PACKAGING            = "sln";
 
   /**
    * Checks, whether the child directory is a subdirectory of the base directory.
@@ -219,8 +212,7 @@ public class VisualStudioUtils
   protected static List<VisualStudioProject> getProjects(File solutionFile) throws IOException, DotNetProjectException
   {
     File baseDirectory = solutionFile.getParentFile();
-    LineNumberReader reader = new LineNumberReader(new InputStreamReader(new FileInputStream(solutionFile)));
-
+    
     // A pattern to extract the projects from a visual studion solution
     String projectExtractExp = "(Project.*?^EndProject$)";
     Pattern projectExtractPattern = Pattern.compile(projectExtractExp, Pattern.MULTILINE + Pattern.DOTALL);
