@@ -54,6 +54,10 @@ Example of maven <<settings.xml>> configuration.
 
         <!-- Location of Source Monitor installation-->
         <sourcemonitor.directory>C:/Program Files/SourceMonitor</sourcemonitor.directory>
+        
+        <!-- Location of Gendarme installation-->
+        <gendarme.directory>C:/Program Files/gendarme-2.6-bin</gendarme.directory>
+        
       </properties>
    </profile>
    ...
