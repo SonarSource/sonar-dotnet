@@ -43,7 +43,7 @@ Maven Dotnet Plugin
 
   * {{{fxcop-mojo.html}dotnet:fxcop}} generates a quality report using FxCop
   
-  * {{{gendarme-mojo.html}dotnet:fxcop}} generates a quality report using Mono Gendarme
+  * {{{gendarme-mojo.html}dotnet:gendarme}} generates a quality report using Mono Gendarme
 
   * {{{stylecop-mojo.html}dotnet:stylecop}} generates a quality report using StyleCop
 
