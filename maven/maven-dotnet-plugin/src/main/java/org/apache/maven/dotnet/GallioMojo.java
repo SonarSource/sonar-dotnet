@@ -111,7 +111,7 @@ public class GallioMojo extends AbstractUnitTestMojo
   
   
   /**
-   * Optional test filter for gallio. This can be used to execute only a specific test category
+   * Optional test filter for gallio. This can be used to execute only a specific test category (i.e. CategotyName:unit to consider only tests from the 'unit' category)
    * 
    * @parameter expression="${gallio.filter}"
    */
