@@ -260,7 +260,7 @@ public class VisualStudioUtils
           String projectName = webMatcher.group(1);
           String projectPath = webMatcher.group(2);
           File projectRoot = new File(baseDirectory, projectPath);
-          VisualStudioProject project = getWebProject(projectRoot, projectName, projectDefinition);
+          VisualStudioProject project = getWebProject(baseDirectory, projectRoot, projectName, projectDefinition);
           result.add(project);
         }
       }
@@ -347,14 +347,13 @@ public class VisualStudioUtils
     }
   }
 
-  public static VisualStudioProject getWebProject(File projectRoot, String projectName, String definition) throws DotNetProjectException, FileNotFoundException
+  public static VisualStudioProject getWebProject(File solutionRoot, File projectRoot, String projectName, String definition) throws DotNetProjectException, FileNotFoundException
   {
     try
     {
       // We define the namespace prefix for Visual Studio
       VisualStudioProject project = new VisualStudioProject();
       project.setName(projectName);
-      File projectDir = projectRoot;
       
       
       // Extracts the properties of a Visual Studio Project
@@ -372,8 +371,8 @@ public class VisualStudioUtils
       project.setDirectory(projectRoot);
       project.setAssemblyName(assemblyName);
       project.setRootNamespace(rootNamespace);
-      project.setDebugOutputDir(new File(projectDir, debugOutput));
-      project.setReleaseOutputDir(new File(projectDir, releaseOutput));
+      project.setDebugOutputDir(new File(solutionRoot, debugOutput));
+      project.setReleaseOutputDir(new File(solutionRoot, releaseOutput));
       return project;
     }
     catch (Exception e) 
