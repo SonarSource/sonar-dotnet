@@ -65,7 +65,7 @@ public class CsTokenizer implements Tokenizer {
  		this.ignorableCharacter.add(";");
  		this.ignorableCharacter.add(",");
 
- 		// setting markers for 'ignorable string' in Ruby
+ 		// setting markers for 'ignorable string' in csharp
  		this.ignorableStmt = new ArrayList<String>();
  		this.ignorableStmt.add("using");
  		this.ignorableStmt.add("while");
