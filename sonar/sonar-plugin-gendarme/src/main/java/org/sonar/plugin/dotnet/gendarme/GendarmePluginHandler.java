@@ -25,10 +25,14 @@ package org.sonar.plugin.dotnet.gendarme;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.maven.MavenPlugin;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
@@ -39,8 +43,11 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 public class GendarmePluginHandler
   extends AbstractDotNetMavenPluginHandler
 {
-  private static final String GENDARME_FILE   = "sonar.Gendarme";
-  private static final String GENDARME_REPORT = "gendarme-report.xml";
+	
+	private final static Logger log = LoggerFactory.getLogger(GendarmePluginHandler.class);
+	
+  private final static  String GENDARME_FILE   = "sonar.Gendarme";
+  private final static  String GENDARME_REPORT = "gendarme-report.xml";
 
   private RulesProfile        rulesProfile;
   private GendarmeRuleRepository rulesRepository;
@@ -77,7 +84,7 @@ public class GendarmePluginHandler
   }
 
   /**
-   * Extracts the configuration file to use and binds the FXCop Mojo to it.
+   * Extracts the configuration file to use and binds the gendarme Mojo to it.
    * 
    * @param pom
    * @param plugin
@@ -85,10 +92,15 @@ public class GendarmePluginHandler
    */
   private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException
   {
-  	String gendarmeConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-    File configFile = project.getFileSystem().writeToWorkingDirectory(gendarmeConfiguration, GENDARME_FILE);
-    // Defines the configuration file
-    plugin.setParameter("gendarmeConfigFile", configFile.getAbsolutePath());
+  	List<ActiveRule> activeRules = rulesProfile.getActiveRulesByPlugin(GendarmePlugin.KEY);
+  	if (activeRules==null || activeRules.isEmpty()) {
+  		log.error("Warning, no configuration for Mono Gendarme");
+  	} else {
+  		String gendarmeConfiguration = rulesRepository.exportConfiguration(rulesProfile);
+      File configFile = project.getFileSystem().writeToWorkingDirectory(gendarmeConfiguration, GENDARME_FILE);
+      // Defines the configuration file
+      plugin.setParameter("gendarmeConfigFile", configFile.getAbsolutePath());
+  	}
   }
 
   public void configureParameters(MavenPlugin plugin)

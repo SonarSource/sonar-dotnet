@@ -38,7 +38,7 @@ public class GendarmeSensor extends AbstractDotnetSensor
   private GendarmePluginHandler  pluginHandler;
 
   /**
-   * Constructs a @link{FxCopCollector}.
+   * Constructs a @link{GendarmeSensor}.
    * 
    * @param rulesManager
    */
