@@ -87,7 +87,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
 				} else {
 					if (StringUtils.containsNone(location, " ")) {
 						// we will try to find a cs file that match with the class name
-						final String className = StringUtils.substringAfterLast(location, ".");
+						final String className = StringUtils.substringBeforeLast(StringUtils.substringAfterLast(location, "."), "/");
 						Collection<SourceFile> sourceFiles 
 							= assembly.getVisualProject().getSourceFiles();
 						
