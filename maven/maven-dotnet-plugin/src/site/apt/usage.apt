@@ -43,7 +43,7 @@ Usage of Maven Dotnet Plugin
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | Source Monitor| sourcemoniter.directory| C# code metrics          | 2.5+ |  {{{http://www.campwoodsw.com/sourcemonitor.html}http://www.campwoodsw.com/sourcemonitor.html}} |
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
-| Fx Cop        | fxcop.directory        | .Net code quality reports| 1.36 + | {{{http://tinyurl.com/fxcop-donwload}http://tinyurl.com/fxcop-donwload}}|
+| Fx Cop        | fxcop.directory        | .Net code quality reports| 1.36 + | {{{http://www.infoq.com/news/2010/06/FXCop-10}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | Style Cop     | stylecop.directory     | C# code style report | 4.3+ |{{{http://code.msdn.microsoft.com/sourceanalysis}http://code.msdn.microsoft.com/sourceanalysis}}|
 *---------------+------------------------+--------------------------+---+-------------------------------------------------------+
