@@ -21,6 +21,7 @@ import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.w3c.dom.Element;
 
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
@@ -170,9 +171,14 @@ public class GendarmeResultParser extends AbstractXmlParser {
 		
 		
 		File file = new File(filePath);
-		final CSharpFile fileResource;
+		CSharpFile fileResource;
 		if (file.exists()) {
-			fileResource = CSharpFile.from(project, file, false);
+			try {
+				fileResource = CSharpFile.from(project, file, false);
+			} catch (InvalidResourceException ex) {
+				log.warn("resource error", ex);
+				fileResource = null;
+			}
 		} else {
 			log.error("Unable to ge resource for path "+filePath);
 			fileResource = null;
