@@ -41,7 +41,7 @@ Usage of Maven Dotnet Plugin
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | PartCover| partcover.directory     | .Net code coverage| 2.2+ |{{{http://sourceforge.net/projects/partcover/}http://sourceforge.net/projects/partcover}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
-| Source Monitor| sourcemoniter.directory| C# code metrics          | 2.5+ |  {{{http://www.campwoodsw.com/sourcemonitor.html}http://www.campwoodsw.com/sourcemonitor.html}} |
+| Source Monitor| sourcemoniter.directory| C# code metrics          | 2.5 |  {{{http://www.geardownload.com/development/sourcemonitor-download.html}http://www.geardownload.com/development/sourcemonitor-download.html}} |
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | Fx Cop        | fxcop.directory        | .Net code quality reports| 1.36 + | {{{http://www.infoq.com/news/2010/06/FXCop-10}http://www.infoq.com/news/2010/06/FXCop-10}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
