@@ -156,7 +156,7 @@ public class CodeMetricsMojo
       List<String> arguments = new ArrayList<String>();
       arguments.add("/C");
       arguments.add(toCommandPath(commandFile));
-      launchCommand(sourceMonitorExe, arguments, "Metrics", 0, debug);
+      launchCommand(sourceMonitorExe, arguments, "Metrics", 1, debug);
       getLog().info("Metrics generated!");
     }
     catch (Exception e)
