@@ -124,7 +124,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor
       FileMetrics file = files.get(idxFile);
       
       File sourcePath = file.getSourcePath();
-      if (excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
+      if ((excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) || "AssemblyInfo.cs".equals(sourcePath.getName())) {
       	// we will not include the generated code
       	// in the sonar database
       	log.info("Ignoring generated cs file "+sourcePath);
