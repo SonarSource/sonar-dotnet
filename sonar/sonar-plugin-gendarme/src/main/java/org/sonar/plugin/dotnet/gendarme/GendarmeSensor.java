@@ -109,7 +109,7 @@ public class GendarmeSensor extends AbstractDotnetSensor
     }
     catch (Exception exc)
     {
-      log.warn("Error during the processing of the FxCop report for Sonar", exc);
+      log.warn("Error during the processing of the Gendarme report for Sonar", exc);
     }
     return null;
   }
