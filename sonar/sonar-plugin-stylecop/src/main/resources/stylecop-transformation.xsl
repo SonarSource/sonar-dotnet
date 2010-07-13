@@ -27,6 +27,8 @@
   <xsl:template match="/">
     <issues>
       <xsl:apply-templates select="//stc:Violations"></xsl:apply-templates>
+      <!-- stylecop 4.3.3.X -->
+      <xsl:apply-templates select="/StyleCopViolations/Violation"></xsl:apply-templates>
     </issues>
   </xsl:template>
   <xsl:template match="//stc:Violations">
@@ -51,5 +53,18 @@
   <xsl:template match="//stc:Warning">
     <xsl:if test=". = 'false'">WARNING</xsl:if>
     <xsl:if test=". != 'false'">ERROR</xsl:if> 
+  </xsl:template>
+  
+  <!--
+     for stylecop 4.3.3 and later
+  -->
+  <xsl:template match="Violation">
+    <issue>
+      <key><xsl:value-of select="@Rule" /></key>
+      <message><xsl:value-of select="." /></message>
+      <level>WARNING</level>
+      <file><xsl:value-of select="@Source" /></file>
+      <line><xsl:value-of select="@LineNumber" /></line>
+    </issue>
   </xsl:template>
 </xsl:stylesheet>
