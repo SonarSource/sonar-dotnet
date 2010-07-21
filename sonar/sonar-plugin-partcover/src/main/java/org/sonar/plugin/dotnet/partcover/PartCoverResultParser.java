@@ -60,7 +60,7 @@ public class PartCoverResultParser extends AbstractXmlParser
   private final Map<Integer, FileCoverage>   sourceFiles;
   private final Map<String, ProjectCoverage> projects;
   private final List<ClassCoverage>          classes;
-  private ReportXPath                        pathDefinitions = PART_COVER_2_2_XPATH;
+  private ReportXPath                        pathDefinitions = PART_COVER_2_3_XPATH;
 
   /**
    * Internal definition of pathes.
@@ -272,14 +272,14 @@ public class PartCoverResultParser extends AbstractXmlParser
     Element element = elements.get(0);
     String version = element.getAttribute("ver");
     // Evaluates the part cover version
-    if (version.startsWith("2.3"))
+    if (version.startsWith("2.2"))
     {
-      log.debug("Using PartCover 2.3 report format");
-      pathDefinitions = PART_COVER_2_3_XPATH;
+      log.debug("Using PartCover 2.2 report format");
+      pathDefinitions = PART_COVER_2_2_XPATH;
     }
     else
     {
-      log.debug("Using PartCover 2.2 report format");
+      log.debug("Using PartCover 2.3 report format");
     }
   }
   /**
