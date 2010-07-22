@@ -62,8 +62,12 @@ public class PartCoverResultParserTest {
 		assertEquals("Example.Core", projects.get(0).getAssemblyName());
 		
 		FileCoverage firstFileCoverage = files.get(0);
+		System.out.println("firstFileCoverage "+firstFileCoverage);
+		System.out.println("firstFileCoverage.getFile().getName() "+firstFileCoverage.getFile().getName());
 		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
+		System.out.println("firstFileCoverage.getCoveredLines() "+firstFileCoverage.getCoveredLines());
 		assertEquals(45, firstFileCoverage.getCoveredLines());
+		System.out.println("firstFileCoverage.getLines().size() "+firstFileCoverage.getLines().size());
 		assertEquals(47, firstFileCoverage.getLines().size());
 		} catch (RuntimeException ex) {
 			ex.printStackTrace();
@@ -91,7 +95,6 @@ public class PartCoverResultParserTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testParse40() {
 		URL url = buildReportUrl("coverage-report-4.0.xml");
 		parser.parse(url);
@@ -101,7 +104,7 @@ public class PartCoverResultParserTest {
 		assertEquals(1, projects.size());
 		assertEquals(2, files.size());
 		
-		//assertEquals("Example.Core", projects.get(0).getAssemblyName());
+		assertEquals("Example.Core", projects.get(0).getAssemblyName());
 		
 		FileCoverage firstFileCoverage = files.get(0);
 		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
