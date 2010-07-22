@@ -9,10 +9,14 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.partcover.model.FileCoverage;
 import org.sonar.plugin.dotnet.partcover.model.ProjectCoverage;
 
 public class PartCoverResultParserTest {
+	
+	private final static Logger log = LoggerFactory.getLogger(PartCoverResultParserTest.class);
 
 	private PartCoverResultParser parser;
 
@@ -22,6 +26,7 @@ public class PartCoverResultParserTest {
 	}
 	
 	private URL buildReportUrl(String fileName) {
+		//log.de
 		URL result = Thread.currentThread().getContextClassLoader().getResource(fileName);
 		
 		try {
@@ -35,6 +40,7 @@ public class PartCoverResultParserTest {
 	
 	@Test
 	public void testParse() {
+		try {
 		URL url = buildReportUrl("coverage-report-2.2.xml");
 		
 		parser.parse(url);
@@ -50,6 +56,10 @@ public class PartCoverResultParserTest {
 		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
 		assertEquals(45, firstFileCoverage.getCoveredLines());
 		assertEquals(47, firstFileCoverage.getLines().size());
+		} catch (RuntimeException ex) {
+			log.error("test error", ex);
+			throw ex;
+		}
 	}
 	
 	@Test
