@@ -33,9 +33,12 @@ public class PartCoverResultParserTest {
 		assertEquals(1, projects.size());
 		assertEquals(4, files.size());
 		
+		assertEquals("Example.Core", projects.get(0).getAssemblyName());
+		
 		FileCoverage firstFileCoverage = files.get(0);
 		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
 		assertEquals(45, firstFileCoverage.getCoveredLines());
+		assertEquals(47, firstFileCoverage.getLines().size());
 	}
 	
 	@Test
@@ -48,9 +51,12 @@ public class PartCoverResultParserTest {
 		assertEquals(1, projects.size());
 		assertEquals(3, files.size());
 		
+		assertEquals("Example.Core", projects.get(0).getAssemblyName());
+		
 		FileCoverage firstFileCoverage = files.get(0);
 		assertEquals("MoneyBag.cs", firstFileCoverage.getFile().getName());
 		assertEquals(114, firstFileCoverage.getCoveredLines());
+		assertEquals(125, firstFileCoverage.getLines().size());
 	}
 	
 	@Test
@@ -63,9 +69,12 @@ public class PartCoverResultParserTest {
 		assertEquals(1, projects.size());
 		assertEquals(2, files.size());
 		
+		//assertEquals("Example.Core", projects.get(0).getAssemblyName());
+		
 		FileCoverage firstFileCoverage = files.get(0);
 		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
 		assertEquals(24, firstFileCoverage.getCoveredLines());
+		assertEquals(26, firstFileCoverage.getLines().size());
 	}
 
 }

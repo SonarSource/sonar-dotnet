@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -60,63 +61,9 @@ public class PartCoverResultParser extends AbstractXmlParser
   private final Map<Integer, FileCoverage>   sourceFiles;
   private final Map<String, ProjectCoverage> projects;
   private final List<ClassCoverage>          classes;
-  private ReportXPath                        pathDefinitions = PART_COVER_2_3_XPATH;
-
-  /**
-   * Internal definition of pathes.
-   * 
-   * @author Jose CHILLAN Apr 6, 2010
-   */
-  private static class ReportXPath
-  {
-    private final String filePath;
-    private final String methodPath;
-
-    /**
-     * Constructs a @link{ReportXPath}.
-     * 
-     * @param filePath
-     * @param methodPath
-     */
-    public ReportXPath(String filePath, String methodPath)
-    {
-      super();
-      this.filePath = filePath;
-      this.methodPath = methodPath;
-    }
-
-    /**
-     * Returns the filePath.
-     * 
-     * @return The filePath to return.
-     */
-    public String getFilePath()
-    {
-      return this.filePath;
-    }
-
-    /**
-     * Returns the methodPath.
-     * 
-     * @return The methodPath to return.
-     */
-    public String getMethodPath()
-    {
-      return this.methodPath;
-    }
-
-  }
-
-  /**
-   * The XPaths to user with PartCover 2.2 and below.
-   */
-  public final static ReportXPath PART_COVER_2_2_XPATH = new ReportXPath("//file", "//type/method");
-
-  /**
-   * The XPaths to user with PartCover 2.3.
-   */
-  public final static ReportXPath PART_COVER_2_3_XPATH = new ReportXPath("//File", "//Type/Method");
-
+  private final List<AbstractParsingStrategy> parsingStrategies;
+  private AbstractParsingStrategy strategy;
+  
   /**
    * Constructs a @link{PartCoverResultParser}.
    */
@@ -127,6 +74,22 @@ public class PartCoverResultParser extends AbstractXmlParser
     projects = new HashMap<String, ProjectCoverage>();
     factory = XPathFactory.newInstance();
     xpath = factory.newXPath();
+    parsingStrategies = new ArrayList<AbstractParsingStrategy>();
+    
+    PartCover2ParsingStrategy partCover23 = new PartCover2ParsingStrategy();
+    partCover23.setFilePath("/*/File");
+    partCover23.setMethodPath("/*/Type/Method");
+    partCover23.setPartcoverExactVersion("2.3");
+    
+    parsingStrategies.add(partCover23);
+    
+    PartCover2ParsingStrategy partCover22 = new PartCover2ParsingStrategy();
+    partCover22.setFilePath("/*/file");
+    partCover22.setMethodPath("/*/type/method");
+    partCover22.setPartcoverExactVersion("2.2");
+    
+    parsingStrategies.add(partCover22);
+    
   }
 
   /**
@@ -170,7 +133,7 @@ public class PartCoverResultParser extends AbstractXmlParser
   private void processDetail(URL file)
   {
     // We take the coverage in each method
-    List<Element> methodElements = extractElements(file, pathDefinitions.getMethodPath());
+    List<Element> methodElements = extractElements(file, strategy.getMethodPath());
     for (Element methodElement : methodElements)
     {
       processMethod(methodElement);
@@ -263,24 +226,20 @@ public class PartCoverResultParser extends AbstractXmlParser
    */
   private void defineVersion(URL file)
   {
-    List<Element> elements = extractElements(file, "//PartCoverReport");
-    if (elements.size() == 0)
-    {
-      log.warn("Could not extract the PartCover version : using version 2.2 as default");
-      return;
+    List<Element> elements = extractElements(file, "/*");
+    Element root = elements.get(0);
+    Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies.iterator();
+    while (strategyIterator.hasNext() && strategy==null) {
+	    AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator.next();
+	    if (strategy.isCompatible(root)) {
+	    	this.strategy = strategy;
+	    }
     }
-    Element element = elements.get(0);
-    String version = element.getAttribute("ver");
-    // Evaluates the part cover version
-    if (version.startsWith("2.2"))
-    {
-      log.debug("Using PartCover 2.2 report format");
-      pathDefinitions = PART_COVER_2_2_XPATH;
+    if (strategy==null) {
+    	log.warn("XML coverage format unknown, using default strategy");
+    	this.strategy = parsingStrategies.get(0);
     }
-    else
-    {
-      log.debug("Using PartCover 2.3 report format");
-    }
+    
   }
   /**
    * Extracts the files from the file
@@ -290,7 +249,7 @@ public class PartCoverResultParser extends AbstractXmlParser
 
   private void extractFiles(URL file)
   {
-    List<Element> elements = extractElements(file, pathDefinitions.getFilePath());
+    List<Element> elements = extractElements(file, strategy.getFilePath());
     for (Element fileElement : elements)
     {
       String idStr = fileElement.getAttribute("id");
