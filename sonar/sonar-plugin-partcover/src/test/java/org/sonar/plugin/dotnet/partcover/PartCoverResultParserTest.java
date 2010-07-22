@@ -22,12 +22,11 @@ public class PartCoverResultParserTest {
 	}
 	
 	private URL buildReportUrl(String fileName) {
-		URL result = getClass().getClassLoader().getResource(fileName);
+		URL result = Thread.currentThread().getContextClassLoader().getResource(fileName);
 		
 		try {
 	    assertTrue("Requested file not found", new File(result.toURI()).exists());
     } catch (URISyntaxException e) {
-    	System.out.println("Bad filename "+result);
 	    fail("Bad filename "+result);
     }
 		
