@@ -2,6 +2,8 @@ package org.sonar.plugin.dotnet.partcover;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -20,12 +22,21 @@ public class PartCoverResultParserTest {
 	}
 	
 	private URL buildReportUrl(String fileName) {
-		return getClass().getClassLoader().getResource(fileName);
+		URL result = getClass().getClassLoader().getResource(fileName);
+		
+		try {
+	    assertTrue("Requested file not found", new File(result.toURI()).exists());
+    } catch (URISyntaxException e) {
+	    fail("Bad filename "+result);
+    }
+		
+		return result;
 	}
 	
 	@Test
 	public void testParse() {
 		URL url = buildReportUrl("coverage-report-2.2.xml");
+		
 		parser.parse(url);
 		List<FileCoverage> files = parser.getFiles();
 		List<ProjectCoverage> projects = parser.getProjects();
