@@ -27,6 +27,7 @@ public class PartCoverResultParserTest {
 		try {
 	    assertTrue("Requested file not found", new File(result.toURI()).exists());
     } catch (URISyntaxException e) {
+    	System.out.println("Bad filename "+result);
 	    fail("Bad filename "+result);
     }
 		
