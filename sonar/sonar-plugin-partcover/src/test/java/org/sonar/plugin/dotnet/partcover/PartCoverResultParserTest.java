@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class PartCoverResultParserTest {
 		FileCoverage firstFileCoverage = files.get(0);
 		System.out.println("firstFileCoverage "+firstFileCoverage);
 		System.out.println("firstFileCoverage.getFile().getName() "+firstFileCoverage.getFile().getName());
-		assertEquals("Money.cs", firstFileCoverage.getFile().getName());
+		assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), "Money.cs"));
 		System.out.println("firstFileCoverage.getCoveredLines() "+firstFileCoverage.getCoveredLines());
 		assertEquals(45, firstFileCoverage.getCoveredLines());
 		System.out.println("firstFileCoverage.getLines().size() "+firstFileCoverage.getLines().size());
