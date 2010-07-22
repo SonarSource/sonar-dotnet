@@ -90,6 +90,9 @@ public class PartCoverResultParser extends AbstractXmlParser
     
     parsingStrategies.add(partCover22);
     
+    PartCover4ParsingStrategy partCover40 = new PartCover4ParsingStrategy();
+    parsingStrategies.add(partCover40);
+    
   }
 
   /**
@@ -174,8 +177,8 @@ public class PartCoverResultParser extends AbstractXmlParser
     }
 
     // We extract the assembly
-    Element typeElement = (Element) methodElement.getParentNode();
-    String assemblyName = typeElement.getAttribute("asm");
+    String assemblyName = strategy.findAssemblyName(methodElement);
+  
     ProjectCoverage project = projects.get(assemblyName);
     if (project == null)
     {

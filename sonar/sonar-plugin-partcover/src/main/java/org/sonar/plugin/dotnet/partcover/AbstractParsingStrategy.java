@@ -1,8 +1,9 @@
 package org.sonar.plugin.dotnet.partcover;
 
+import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.w3c.dom.Element;
 
-public abstract class AbstractParsingStrategy {
+public abstract class AbstractParsingStrategy extends AbstractXmlParser {
 
 	private String filePath;
 	private String methodPath;

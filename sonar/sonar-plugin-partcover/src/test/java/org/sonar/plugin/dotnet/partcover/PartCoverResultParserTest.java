@@ -25,69 +25,74 @@ public class PartCoverResultParserTest {
 	}
 	
 	@Test
-	public void testParse() {
-		String report = "coverage-report-2.2.xml";
-		String assemblyName = "Example.Core";
-		int fileNumber = 4;
-		String fileName = "Money.cs";
-		int coveredLines = 45;
-		int lines = 47;
+	public void testParsePartCover22() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "coverage-report-2.2.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 4;
+		params.fileName = "Money.cs";
+		params.coveredLines = 45;
+		params.lines = 47;
 		
+		checkParsing(params);
+	}
+
+	@Test
+	public void testParsePartCover23() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "coverage-report-2.3.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 3;
+		params.fileName = "MoneyBag.cs";
+		params.coveredLines = 114;
+		params.lines = 125;
 		
-		URL url = buildReportUrl(report);
-		parser.parse(url);
-		List<FileCoverage> files = parser.getFiles();
-		List<ProjectCoverage> projects = parser.getProjects();
-		
-		assertEquals(1, projects.size());
-		assertEquals(fileNumber, files.size());
-		
-		
-		assertEquals(assemblyName, projects.get(0).getAssemblyName());
-		
-		FileCoverage firstFileCoverage = files.get(0);
-		
-		assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), fileName));
-		
-		assertEquals(coveredLines, firstFileCoverage.getCoveredLines());
-		
-		assertEquals(lines, firstFileCoverage.getLines().size());
+		checkParsing(params);
 	}
 	
 	@Test
-	public void testParse23() {
-		URL url = buildReportUrl("coverage-report-2.3.xml");
-		parser.parse(url);
-		List<FileCoverage> files = parser.getFiles();
-		List<ProjectCoverage> projects = parser.getProjects();
+	public void testParsePartCover40() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "coverage-report-4.0.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 2;
+		params.fileName = "Money.cs";
+		params.coveredLines = 24;
+		params.lines = 26;
 		
-		assertEquals(1, projects.size());
-		assertEquals(3, files.size());
-		
-		assertEquals("Example.Core", projects.get(0).getAssemblyName());
-		
-		FileCoverage firstFileCoverage = files.get(0);
-		assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), "MoneyBag.cs"));
-		assertEquals(114, firstFileCoverage.getCoveredLines());
-		assertEquals(125, firstFileCoverage.getLines().size());
+		checkParsing(params);
 	}
 	
-	@Test
-	public void testParse40() {
-		URL url = buildReportUrl("coverage-report-4.0.xml");
+
+	
+	private void checkParsing(ParsingParameters parameters) {
+	  URL url = buildReportUrl(parameters.report);
 		parser.parse(url);
 		List<FileCoverage> files = parser.getFiles();
 		List<ProjectCoverage> projects = parser.getProjects();
 		
 		assertEquals(1, projects.size());
-		assertEquals(2, files.size());
+		assertEquals(parameters.fileNumber, files.size());
 		
-		//assertEquals("Example.Core", projects.get(0).getAssemblyName());
+		
+		assertEquals(parameters.assemblyName, projects.get(0).getAssemblyName());
 		
 		FileCoverage firstFileCoverage = files.get(0);
-		assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), "Money.cs"));
-		assertEquals(24, firstFileCoverage.getCoveredLines());
-		assertEquals(26, firstFileCoverage.getLines().size());
-	}
+		
+		assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), parameters.fileName));
+		
+		assertEquals(parameters.coveredLines, firstFileCoverage.getCoveredLines());
+		
+		assertEquals(parameters.lines, firstFileCoverage.getLines().size());
+  }
+	
+	public static class ParsingParameters {
+	  public String report;
+	  public String assemblyName;
+	  public int fileNumber;
+	  public String fileName;
+	  public int coveredLines;
+	  public int lines;
+  }
 
 }
