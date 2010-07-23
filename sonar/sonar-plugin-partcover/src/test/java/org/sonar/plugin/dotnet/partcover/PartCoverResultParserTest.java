@@ -63,6 +63,19 @@ public class PartCoverResultParserTest {
 		checkParsing(params);
 	}
 	
+	@Test
+	public void testParseNCover3() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "Coverage.NCover3.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 3;
+		params.fileName = "Money.cs";
+		params.coveredLines = 34;
+		params.lines = 36;
+		
+		checkParsing(params);
+	}
+	
 
 	
 	private void checkParsing(ParsingParameters parameters) {

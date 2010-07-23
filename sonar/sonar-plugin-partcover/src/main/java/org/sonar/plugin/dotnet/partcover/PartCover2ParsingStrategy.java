@@ -4,11 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-public class PartCover2ParsingStrategy extends AbstractParsingStrategy {
+public class PartCover2ParsingStrategy extends PartCoverParsingStrategy {
 
 	private final static Logger log = LoggerFactory.getLogger(PartCover2ParsingStrategy.class);
 
 	private String partcoverExactVersion;
+	
+	protected PartCover2ParsingStrategy() {
+		super();
+	}
 
 	@Override
 	String findAssemblyName(Element methodElement) {

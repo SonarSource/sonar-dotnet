@@ -75,24 +75,10 @@ public class PartCoverResultParser extends AbstractXmlParser
     factory = XPathFactory.newInstance();
     xpath = factory.newXPath();
     parsingStrategies = new ArrayList<AbstractParsingStrategy>();
-    
-    PartCover2ParsingStrategy partCover23 = new PartCover2ParsingStrategy();
-    partCover23.setFilePath("/*/File");
-    partCover23.setMethodPath("/*/Type/Method");
-    partCover23.setPartcoverExactVersion("2.3");
-    
-    parsingStrategies.add(partCover23);
-    
-    PartCover2ParsingStrategy partCover22 = new PartCover2ParsingStrategy();
-    partCover22.setFilePath("/*/file");
-    partCover22.setMethodPath("/*/type/method");
-    partCover22.setPartcoverExactVersion("2.2");
-    
-    parsingStrategies.add(partCover22);
-    
-    PartCover4ParsingStrategy partCover40 = new PartCover4ParsingStrategy();
-    parsingStrategies.add(partCover40);
-    
+    parsingStrategies.add(new PartCover23ParsingStrategy());
+    parsingStrategies.add(new PartCover22ParsingStrategy());
+    parsingStrategies.add(new PartCover4ParsingStrategy());
+    parsingStrategies.add(new NCover3ParsingStrategy());
   }
 
   /**
@@ -150,16 +136,16 @@ public class PartCoverResultParser extends AbstractXmlParser
    */
   private void processMethod(Element methodElement)
   {
-    NodeList nodes = methodElement.getElementsByTagName("pt");
+    NodeList nodes = methodElement.getElementsByTagName(strategy.getPointElement());
     List<Element> elements = convertToList(nodes);
     // First we retrieve the file
     FileCoverage fileCoverage = null;
     // First pass for to retrieve the file
     for (Element pointElement : elements)
     {
-      if (pointElement.hasAttribute("fid"))
+      if (pointElement.hasAttribute(strategy.getFileIdPointAttribute()))
       {
-        String fileId = pointElement.getAttribute("fid");
+        String fileId = pointElement.getAttribute(strategy.getFileIdPointAttribute());
         Integer id = Integer.valueOf(fileId);
         fileCoverage = this.sourceFiles.get(id);
       }
@@ -197,14 +183,14 @@ public class PartCoverResultParser extends AbstractXmlParser
     // Second pass to populate the file
     for (Element pointElement : elements)
     {
-      if (!pointElement.hasAttribute("sl"))
+      if (!pointElement.hasAttribute(strategy.getStartLinePointAttribute()))
       {
         // We skip the elements with no line
         continue;
       }
-      int countVisits = getIntAttribute(pointElement, "visit");
-      int startLine = getIntAttribute(pointElement, "sl");
-      int endLine = getIntAttribute(pointElement, "el");
+      int countVisits = getIntAttribute(pointElement, strategy.getCountVisitsPointAttribute());
+      int startLine = getIntAttribute(pointElement,  strategy.getStartLinePointAttribute());
+      int endLine = getIntAttribute(pointElement, strategy.getEndLinePointAttribute());
       if (endLine == 0)
       {
         endLine = startLine;
@@ -268,6 +254,7 @@ public class PartCoverResultParser extends AbstractXmlParser
       catch (IOException e)
       {
         // We just skip the file
+      	log.debug("bad url", e);
       }
     }
   }
