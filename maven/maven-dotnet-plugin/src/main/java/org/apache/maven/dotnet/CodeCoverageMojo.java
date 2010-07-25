@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -183,9 +184,13 @@ public class CodeCoverageMojo extends GallioMojo {
 			gallioRunner = GALLIO_RUNNER_4_N_COVER;
 			arguments = generateGallioArgs(testedAssemblies);
 			arguments.add("/runner-property:NCoverCoverageFile="+reportFile);				
-			//arguments.add("/runner-property:NCoverArguments=//ias Example.Core");
 
+			String includeParam = 
+				"/runner-property:NCoverArguments=//ias " 
+				+ StringUtils.join(coveredAssemblyNames.toArray(), ";");
 			
+			arguments.add(includeParam);
+
 			executable = getGallioExe();
 		} else {
 			List<String> testCommandArgs = generateGallioArgs(testedAssemblies);
