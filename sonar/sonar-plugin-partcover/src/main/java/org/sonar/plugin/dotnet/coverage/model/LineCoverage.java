@@ -22,39 +22,67 @@
  * Created on May 14, 2009
  *
  */
-package org.sonar.plugin.dotnet.partcover.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.sonar.plugin.dotnet.coverage.model;
 
 /**
- * A PartCover result.
+ * Coverage results for a line
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverResult
+public class LineCoverage
 {
-  private List<ProjectCoverage> projects;
+  private int lineNumber;
+  private int visit;
   
   /**
-   * Constructs a @link{PartCoverResult}.
+   * Constructs a @link{LineCoverage}.
    */
-  public PartCoverResult()
+  public LineCoverage()
   {
-    projects = new ArrayList<ProjectCoverage>();
   }
 
-  public void addProject(ProjectCoverage project)
-  {
-    projects.add(project);
-  }
+  
   /**
-   * Returns the projects.
+   * Returns the lineNumber.
    * 
-   * @return The projects to return.
+   * @return The lineNumber to return.
    */
-  public List<ProjectCoverage> getProjects()
+  public int getLineNumber()
   {
-    return this.projects;
+    return this.lineNumber;
   }
+
+  
+  /**
+   * Sets the lineNumber.
+   * 
+   * @param lineNumber The lineNumber to set.
+   */
+  public void setLineNumber(int lineNumber)
+  {
+    this.lineNumber = lineNumber;
+  }
+
+  
+  /**
+   * Returns the visit.
+   * 
+   * @return The visit to return.
+   */
+  public int getVisit()
+  {
+    return this.visit;
+  }
+
+  
+  /**
+   * Sets the visit.
+   * 
+   * @param visit The visit to set.
+   */
+  public void setVisit(int visit)
+  {
+    this.visit = visit;
+  }
+  
   
 }

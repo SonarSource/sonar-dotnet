@@ -1,4 +1,4 @@
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -20,45 +20,41 @@
 
 /*
  * Created on May 14, 2009
+ *
  */
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage.model;
 
-import org.sonar.api.batch.maven.MavenPlugin;
-import org.sonar.api.resources.Project;
-import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Configures the maven partcover plugin.
- * 
+ * A PartCover result.
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverPluginHandler extends AbstractDotNetMavenPluginHandler
+public class PartCoverResult
 {
-
+  private List<ProjectCoverage> projects;
+  
   /**
-   * Constructs a @link{PartCoverPluginHandler}.
+   * Constructs a @link{PartCoverResult}.
    */
-  public PartCoverPluginHandler()
+  public PartCoverResult()
   {
+    projects = new ArrayList<ProjectCoverage>();
   }
 
-  @Override
-  public void configure(Project project, MavenPlugin plugin)
+  public void addProject(ProjectCoverage project)
   {
-    super.configure(project, plugin);
-    
-    // We ignore the test failures in Sonar.
-    plugin.setParameter("testFailureIgnore", "true");
+    projects.add(project);
   }
-
   /**
-   * Launches the coverage goal.
-   * @return
+   * Returns the projects.
+   * 
+   * @return The projects to return.
    */
-  public String[] getGoals()
+  public List<ProjectCoverage> getProjects()
   {
-    return new String[] { "coverage"
-    };
+    return this.projects;
   }
-
+  
 }

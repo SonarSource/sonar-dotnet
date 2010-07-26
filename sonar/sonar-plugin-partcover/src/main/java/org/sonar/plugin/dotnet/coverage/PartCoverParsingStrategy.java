@@ -1,4 +1,4 @@
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
 

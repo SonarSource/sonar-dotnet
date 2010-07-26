@@ -22,25 +22,34 @@
  * Created on May 14, 2009
  *
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage.model;
 
 /**
- * Coverage results for a line
+ * A FileLine.
  * @author Jose CHILLAN May 14, 2009
  */
-public class LineCoverage
+public class SourceLine
 {
-  private int lineNumber;
-  private int visit;
+  private final int lineNumber;
+  private int countVisits;
   
   /**
-   * Constructs a @link{LineCoverage}.
+   * Constructs a @link{FileLine}.
    */
-  public LineCoverage()
+  public SourceLine(int lineNumber)
   {
+    this.lineNumber = lineNumber;
+  }
+  
+  public void update(CoveragePoint point)
+  {
+    int pointVisits = point.getCountVisits();
+    if (pointVisits > countVisits)
+    {
+      countVisits = pointVisits;
+    }
   }
 
-  
   /**
    * Returns the lineNumber.
    * 
@@ -53,36 +62,12 @@ public class LineCoverage
 
   
   /**
-   * Sets the lineNumber.
+   * Returns the countVisits.
    * 
-   * @param lineNumber The lineNumber to set.
+   * @return The countVisits to return.
    */
-  public void setLineNumber(int lineNumber)
+  public int getCountVisits()
   {
-    this.lineNumber = lineNumber;
+    return this.countVisits;
   }
-
-  
-  /**
-   * Returns the visit.
-   * 
-   * @return The visit to return.
-   */
-  public int getVisit()
-  {
-    return this.visit;
-  }
-
-  
-  /**
-   * Sets the visit.
-   * 
-   * @param visit The visit to set.
-   */
-  public void setVisit(int visit)
-  {
-    this.visit = visit;
-  }
-  
-  
 }

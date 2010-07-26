@@ -21,7 +21,7 @@
 /*
  * Created on May 14, 2009
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage.model;
 
 /**
  * A coverage point.

@@ -21,7 +21,7 @@
 /*
  * Created on May 14, 2009
  */
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,10 +39,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
-import org.sonar.plugin.dotnet.partcover.model.ClassCoverage;
-import org.sonar.plugin.dotnet.partcover.model.CoveragePoint;
-import org.sonar.plugin.dotnet.partcover.model.FileCoverage;
-import org.sonar.plugin.dotnet.partcover.model.ProjectCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ClassCoverage;
+import org.sonar.plugin.dotnet.coverage.model.CoveragePoint;
+import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 

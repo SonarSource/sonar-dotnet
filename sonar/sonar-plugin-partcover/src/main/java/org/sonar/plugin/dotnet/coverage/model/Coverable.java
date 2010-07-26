@@ -20,65 +20,62 @@
 
 /*
  * Created on May 14, 2009
+ *
  */
-package org.sonar.plugin.dotnet.partcover.model;
-
-import java.io.File;
-import java.util.HashMap;
+package org.sonar.plugin.dotnet.coverage.model;
 
 /**
- * A FileCoverage.
- * 
+ * A Coverable.
  * @author Jose CHILLAN May 14, 2009
  */
-public class FileCoverage extends CoverableSource
+public abstract class Coverable
 {
-  private final File file;
-  private String assemblyName;
-  
+  protected int countLines;
+  protected int coveredLines;
+
   /**
-   * Constructs a @link{FileCoverage}.
+   * Constructs a @link{Coverable}.
    */
-  public FileCoverage(File file)
+  public Coverable()
   {
-    this.file = file;
-    this.lines = new HashMap<Integer, SourceLine>();
   }
 
   /**
-   * Returns the file.
+   * Returns the countLines.
    * 
-   * @return The file to return.
+   * @return The countLines to return.
    */
-  public File getFile()
+  public int getCountLines()
   {
-    return this.file;
-  }
-
-  @Override
-  public String toString()
-  {
-    return "File(name=" + file.getName() + ", assembly=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + countLines + ", covered=" + coveredLines + ")";
+    return this.countLines;
   }
 
   /**
-   * Returns the assemblyName.
+   * Returns the coveredLines.
    * 
-   * @return The assemblyName to return.
+   * @return The coveredLines to return.
    */
-  public String getAssemblyName()
+  public int getCoveredLines()
   {
-    return this.assemblyName;
+    return this.coveredLines;
   }
 
-  
   /**
-   * Sets the assemblyName.
-   * 
-   * @param assemblyName The assemblyName to set.
+   * Gets the coverage ratio.
+   * @return the coverage ratio
    */
-  public void setAssemblyName(String assemblyName)
+  public double getCoverage()
   {
-    this.assemblyName = assemblyName;
+    if (countLines== 0)
+    {
+      return 1.;
+    }
+    return Math.round(((double) coveredLines / (double) countLines) * 100)*0.01;
   }
+
+  /**
+   * Summarize the results.
+   */
+  public abstract void summarize();
+
 }

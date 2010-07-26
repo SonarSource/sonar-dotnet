@@ -20,27 +20,29 @@
 
 /*
  * Created on May 14, 2009
- *
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage.model;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
- * The coverage data for a class.
+ * A FileCoverage.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class ClassCoverage extends CoverableSource
+public class FileCoverage extends CoverableSource
 {
-  private File file;
+  private final File file;
   private String assemblyName;
-  private String fullClassName;
-   
+  
   /**
-   * Constructs a @link{ClassCoverage}.
+   * Constructs a @link{FileCoverage}.
    */
-  public ClassCoverage()
+  public FileCoverage(File file)
   {
+    this.file = file;
+    this.lines = new HashMap<Integer, SourceLine>();
   }
 
   /**
@@ -53,18 +55,12 @@ public class ClassCoverage extends CoverableSource
     return this.file;
   }
 
-  
-  /**
-   * Sets the file.
-   * 
-   * @param file The file to set.
-   */
-  public void setFile(File file)
+  @Override
+  public String toString()
   {
-    this.file = file;
+    return "File(name=" + file.getName() + ", assembly=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + countLines + ", covered=" + coveredLines + ")";
   }
 
-  
   /**
    * Returns the assemblyName.
    * 
@@ -85,33 +81,4 @@ public class ClassCoverage extends CoverableSource
   {
     this.assemblyName = assemblyName;
   }
-
-  
-  /**
-   * Returns the fullClassName.
-   * 
-   * @return The fullClassName to return.
-   */
-  public String getFullClassName()
-  {
-    return this.fullClassName;
-  }
-
-  
-  /**
-   * Sets the fullClassName.
-   * 
-   * @param fullClassName The fullClassName to set.
-   */
-  public void setFullClassName(String fullClassName)
-  {
-    this.fullClassName = fullClassName;
-  }
- 
-  @Override
-  public String toString()
-  {
-    return "Class(name=" + fullClassName+ ", coverage=" + getCoverage() +", lines=" + countLines + ", covered=" + coveredLines + ")";
-  }
-  
 }

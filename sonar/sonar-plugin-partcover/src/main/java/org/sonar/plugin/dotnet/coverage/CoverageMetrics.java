@@ -21,7 +21,7 @@
 /*
  * Created on May 19, 2009
  */
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import java.util.ArrayList;
 import java.util.List;

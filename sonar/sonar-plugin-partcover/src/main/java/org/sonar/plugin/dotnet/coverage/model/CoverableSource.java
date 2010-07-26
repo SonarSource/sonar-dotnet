@@ -20,79 +20,75 @@
 
 /*
  * Created on May 14, 2009
+ *
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Coverage results for a method
- * 
+ * A Coverable object (mainly a class or file)
  * @author Jose CHILLAN May 14, 2009
  */
-public class MethodCoverage
+public class CoverableSource extends Coverable
 {
-  private String             name;
-  private List<LineCoverage> lines;
 
+  protected Map<Integer, SourceLine> lines;
   /**
-   * Constructs a @link{MethodCoverage}.
+   * Constructs a @link{Coverable}.
    */
-  public MethodCoverage()
+  public CoverableSource()
   {
-    super();
-    lines = new ArrayList<LineCoverage>();
-  }
-
-  /**
-   * Returns the name.
-   * 
-   * @return The name to return.
-   */
-  public String getName()
-  {
-    return this.name;
-  }
-
-  /**
-   * Sets the name.
-   * 
-   * @param name The name to set.
-   */
-  public void setName(String name)
-  {
-    this.name = name;
+    lines = new HashMap<Integer, SourceLine>();
   }
 
   /**
    * Adds a line coverage.
-   * 
    * @param lineCoverage
    */
-  public void addLine(LineCoverage lineCoverage)
+  public void addPoint(CoveragePoint point)
   {
-    lines.add(lineCoverage);
+    int startLine = point.getStartLine();
+    int endLine = point.getStartLine();
+    for(int idx = startLine; idx <= endLine; idx++)
+    {
+      // We add a point for each line
+      SourceLine line = lines.get(startLine);
+      if (line == null)
+      {
+        line = new SourceLine(idx);
+        lines.put(idx, line);
+      }
+      line.update(point);
+    }
   }
 
+  /**
+   * Summarize the results
+   */
+  @Override
+  public void summarize()
+  {
+    countLines = lines.size();
+    coveredLines = 0;
+    for (SourceLine line : lines.values())
+    {
+      if (line.getCountVisits() > 0)
+      {
+        coveredLines++;
+      }
+    }
+  }
+
+  
   /**
    * Returns the lines.
    * 
    * @return The lines to return.
    */
-  public List<LineCoverage> getLines()
+  public Map<Integer, SourceLine> getLines()
   {
     return this.lines;
   }
-
-  /**
-   * Sets the lines.
-   * 
-   * @param lines The lines to set.
-   */
-  public void setLines(List<LineCoverage> lines)
-  {
-    this.lines = lines;
-  }
-
 }

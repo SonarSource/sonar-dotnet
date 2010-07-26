@@ -21,7 +21,7 @@
 /*
  * Created on May 7, 2009
  */
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import org.sonar.api.Plugin;
  * The plugin that handles the code coverage with PartCover.
  * @author Jose CHILLAN Feb 18, 2010
  */
-public class PartCoverPlugin
+public class CoveragePlugin
   implements Plugin
 {
 
@@ -42,7 +42,7 @@ public class PartCoverPlugin
    */
   public static final String KEY = "partcover";
 
-  public PartCoverPlugin()
+  public CoveragePlugin()
   {
   }
 
@@ -60,7 +60,7 @@ public class PartCoverPlugin
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(PartCoverSensor.class);
     list.add(CoverageMetrics.class);
-    list.add(PartCoverPluginHandler.class);
+    list.add(CoveragePluginHandler.class);
 
     return list;
   }

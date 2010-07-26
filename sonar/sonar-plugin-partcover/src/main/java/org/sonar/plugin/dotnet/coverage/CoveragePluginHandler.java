@@ -20,62 +20,45 @@
 
 /*
  * Created on May 14, 2009
- *
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage;
+
+import org.sonar.api.batch.maven.MavenPlugin;
+import org.sonar.api.resources.Project;
+import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
- * A Coverable.
+ * Configures the maven partcover plugin.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public abstract class Coverable
+public class CoveragePluginHandler extends AbstractDotNetMavenPluginHandler
 {
-  protected int countLines;
-  protected int coveredLines;
 
   /**
-   * Constructs a @link{Coverable}.
+   * Constructs a @link{PartCoverPluginHandler}.
    */
-  public Coverable()
+  public CoveragePluginHandler()
   {
   }
 
-  /**
-   * Returns the countLines.
-   * 
-   * @return The countLines to return.
-   */
-  public int getCountLines()
+  @Override
+  public void configure(Project project, MavenPlugin plugin)
   {
-    return this.countLines;
+    super.configure(project, plugin);
+    
+    // We ignore the test failures in Sonar.
+    plugin.setParameter("testFailureIgnore", "true");
   }
 
   /**
-   * Returns the coveredLines.
-   * 
-   * @return The coveredLines to return.
+   * Launches the coverage goal.
+   * @return
    */
-  public int getCoveredLines()
+  public String[] getGoals()
   {
-    return this.coveredLines;
+    return new String[] { "coverage"
+    };
   }
-
-  /**
-   * Gets the coverage ratio.
-   * @return the coverage ratio
-   */
-  public double getCoverage()
-  {
-    if (countLines== 0)
-    {
-      return 1.;
-    }
-    return Math.round(((double) coveredLines / (double) countLines) * 100)*0.01;
-  }
-
-  /**
-   * Summarize the results.
-   */
-  public abstract void summarize();
 
 }

@@ -21,7 +21,7 @@
 /*
  * Created on May 14, 2009
  */
-package org.sonar.plugin.dotnet.partcover.model;
+package org.sonar.plugin.dotnet.coverage.model;
 
 import java.io.File;
 import java.util.HashMap;

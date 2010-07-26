@@ -21,7 +21,7 @@
 /*
  * Created on May 14, 2009
  */
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
 
@@ -49,10 +49,10 @@ import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
-import org.sonar.plugin.dotnet.partcover.model.CoverableSource;
-import org.sonar.plugin.dotnet.partcover.model.FileCoverage;
-import org.sonar.plugin.dotnet.partcover.model.ProjectCoverage;
-import org.sonar.plugin.dotnet.partcover.model.SourceLine;
+import org.sonar.plugin.dotnet.coverage.model.CoverableSource;
+import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
+import org.sonar.plugin.dotnet.coverage.model.SourceLine;
 
 /**
  * Collects the results from a PartCover report. Most of the work is delegator
@@ -66,12 +66,12 @@ public class PartCoverSensor extends AbstractDotnetSensor {
 	    .getLogger(PartCoverSensor.class);
 	private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
 	    CoreMetrics.COVERAGE_LINE_HITS_DATA);
-	private PartCoverPluginHandler pluginHandler;
+	private CoveragePluginHandler pluginHandler;
 
 	/**
 	 * Constructs the collector Constructs a @link{PartCoverCollector}.
 	 */
-	public PartCoverSensor(PartCoverPluginHandler pluginHandler) {
+	public PartCoverSensor(CoveragePluginHandler pluginHandler) {
 		this.pluginHandler = pluginHandler;
 	}
 
