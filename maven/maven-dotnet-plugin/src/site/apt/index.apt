@@ -47,7 +47,7 @@ Maven Dotnet Plugin
 
   * {{{stylecop-mojo.html}dotnet:stylecop}} generates a quality report using StyleCop
 
-  * {{{coverage-mojo.html}dotnet:coverage}} generates a test coverage report using PartCover
+  * {{{coverage-mojo.html}dotnet:coverage}} generates a test coverage report using PartCover or Ncover3
 
   * {{{cpd-mojo.html}dotnet:cpd}} generates a report on copy/paste and duplicated code
 
