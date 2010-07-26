@@ -1,0 +1,272 @@
+<PartCoverReport version="4.0" date="2010-07-16T00:12:36.2725954+02:00">
+ <File id="1" url="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\Money.cs" />
+ <File id="2" url="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\MoneyBag.cs" />
+ <Assembly id="1" name="Example.Core" module="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" domain="IsolatedAppDomainHost" domainIdx="1" />
+ <Type asmref="1" name="Example.Core.Money" flags="0">
+  <Method name=".ctor" sig="void  (int, string)" bodysize="22" flags="0" iflags="0">
+   <pt visit="153" pos="0" len="6" fid="1" sl="42" sc="5" el="42" ec="46" />
+   <pt visit="153" pos="6" len="7" fid="1" sl="44" sc="7" el="44" ec="24" />
+   <pt visit="153" pos="13" len="7" fid="1" sl="45" sc="7" el="45" ec="28" />
+   <pt visit="153" pos="20" len="1" fid="1" sl="46" sc="5" el="46" ec="6" />
+  </Method>
+  <Method name="TataEquals" sig="bool  (object)" bodysize="93" flags="0" iflags="0" />
+  <Method name="Add" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0">
+   <pt visit="19" pos="0" len="8" fid="1" sl="53" sc="7" el="53" ec="31" />
+  </Method>
+  <Method name="AddMoney" sig="Example.Core.IMoney  (Example.Core.Money)" bodysize="53" flags="0" iflags="0">
+   <pt visit="17" pos="0" len="19" fid="1" sl="58" sc="7" el="58" ec="39" />
+   <pt visit="16" pos="19" len="25" fid="1" sl="59" sc="9" el="59" ec="55" />
+   <pt visit="1" pos="44" len="8" fid="1" sl="60" sc="7" el="60" ec="36" />
+  </Method>
+  <Method name="AddMoneyBag" sig="Example.Core.IMoney  (Example.Core.MoneyBag)" bodysize="9" flags="0" iflags="0">
+   <pt visit="2" pos="0" len="8" fid="1" sl="65" sc="7" el="65" ec="31" />
+  </Method>
+  <Method name="get_Amount" sig="int  ()" bodysize="8" flags="0" iflags="0">
+   <pt visit="208" pos="0" len="7" fid="1" sl="70" sc="13" el="70" ec="28" />
+  </Method>
+  <Method name="get_Currency" sig="string  ()" bodysize="8" flags="0" iflags="0">
+   <pt visit="406" pos="0" len="7" fid="1" sl="75" sc="13" el="75" ec="30" />
+  </Method>
+  <Method name="Equals" sig="bool  (object)" bodysize="93" flags="0" iflags="0">
+   <pt visit="27" pos="0" len="8" fid="1" sl="82" sc="7" el="82" ec="18" />
+   <pt visit="0" pos="8" len="8" fid="1" sl="83" sc="9" el="83" ec="32" />
+   <pt visit="0" pos="16" len="12" fid="1" sl="84" sc="11" el="84" ec="44" />
+   <pt visit="27" pos="28" len="8" fid="1" sl="85" sc="7" el="85" ec="29" />
+   <pt visit="24" pos="36" len="7" fid="1" sl="87" sc="9" el="87" ec="40" />
+   <pt visit="24" pos="43" len="36" fid="1" sl="88" sc="9" el="89" ec="38" />
+   <pt visit="3" pos="79" len="2" fid="1" sl="91" sc="7" el="91" ec="20" />
+  </Method>
+  <Method name="TotoEquals" sig="bool  (object)" bodysize="93" flags="0" iflags="0" />
+  <Method name="TutuEquals" sig="bool  (object)" bodysize="93" flags="0" iflags="0" />
+  <Method name="AltEquals" sig="bool  (object)" bodysize="4853" flags="0" iflags="0" />
+  <Method name="GetHashCode" sig="int  ()" bodysize="20" flags="0" iflags="0">
+   <pt visit="6" pos="0" len="19" fid="1" sl="230" sc="7" el="230" ec="48" />
+  </Method>
+  <Method name="get_IsZero" sig="bool  ()" bodysize="11" flags="0" iflags="0">
+   <pt visit="65" pos="0" len="10" fid="1" sl="235" sc="13" el="235" ec="32" />
+  </Method>
+  <Method name="Multiply" sig="Example.Core.IMoney  (int)" bodysize="21" flags="0" iflags="0">
+   <pt visit="5" pos="0" len="20" fid="1" sl="241" sc="7" el="241" ec="51" />
+  </Method>
+  <Method name="Negate" sig="Example.Core.IMoney  ()" bodysize="20" flags="0" iflags="0">
+   <pt visit="13" pos="0" len="19" fid="1" sl="247" sc="7" el="247" ec="43" />
+  </Method>
+  <Method name="Subtract" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="14" flags="0" iflags="0">
+   <pt visit="2" pos="0" len="13" fid="1" sl="252" sc="7" el="252" ec="30" />
+  </Method>
+  <Method name="ToString" sig="string  ()" bodysize="92" flags="0" iflags="0">
+   <pt visit="1" pos="0" len="6" fid="1" sl="258" sc="7" el="258" ec="50" />
+   <pt visit="1" pos="6" len="67" fid="1" sl="260" sc="7" el="260" ec="58" />
+   <pt visit="1" pos="73" len="7" fid="1" sl="263" sc="7" el="263" ec="32" />
+  </Method>
+ </Type>
+ <Type asmref="1" name="Example.Core.GoodMoney" flags="0">
+  <Method name=".ctor" sig="void  (int, string)" bodysize="24" flags="0" iflags="0" />
+  <Method name="get_IsZero" sig="bool  ()" bodysize="11" flags="0" iflags="0" />
+  <Method name="Add" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0" />
+  <Method name="AddMoney" sig="Example.Core.IMoney  (Example.Core.Money)" bodysize="53" flags="0" iflags="0" />
+  <Method name="AddMoneyBag" sig="Example.Core.IMoney  (Example.Core.MoneyBag)" bodysize="9" flags="0" iflags="0" />
+  <Method name="get_Amount" sig="int  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="get_Currency" sig="string  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="Equals" sig="bool  (object)" bodysize="93" flags="0" iflags="0" />
+  <Method name="GetHashCode" sig="int  ()" bodysize="20" flags="0" iflags="0" />
+  <Method name="Multiply" sig="Example.Core.IMoney  (int)" bodysize="21" flags="0" iflags="0" />
+  <Method name="Negate" sig="Example.Core.IMoney  ()" bodysize="20" flags="0" iflags="0" />
+  <Method name="Subtract" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="14" flags="0" iflags="0" />
+  <Method name="ToString" sig="string  ()" bodysize="92" flags="0" iflags="0" />
+ </Type>
+ <Type asmref="1" name="Example.Core.GoodMoneyInnerData" flags="0">
+  <Method name="get_Id" sig="int  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_Id" sig="void  (int)" bodysize="9" flags="0" iflags="0" />
+  <Method name="get_name" sig="string  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_name" sig="void  (string)" bodysize="9" flags="0" iflags="0" />
+  <Method name="sayHello" sig="void  ()" bodysize="12" flags="0" iflags="0" />
+  <Method name=".ctor" sig="void  ()" bodysize="8" flags="0" iflags="0" />
+ </Type>
+ <Type asmref="1" name="Example.Core.MoneyBag" flags="0">
+  <Method name=".ctor" sig="void  ()" bodysize="20" flags="0" iflags="0">
+   <pt visit="8" pos="0" len="12" fid="2" sl="41" sc="5" el="41" ec="50" />
+   <pt visit="8" pos="12" len="6" fid="2" sl="43" sc="5" el="43" ec="23" />
+   <pt visit="8" pos="18" len="1" fid="2" sl="45" sc="5" el="45" ec="6" />
+  </Method>
+  <Method name="AppendBag" sig="void  (Example.Core.MoneyBag)" bodysize="93" flags="0" iflags="0">
+   <pt visit="12" pos="0" len="12" fid="2" sl="90" sc="27" el="90" ec="39" />
+   <pt visit="12" pos="12" len="2" />
+   <pt visit="24" pos="14" len="12" fid="2" sl="90" sc="16" el="90" ec="23" />
+   <pt visit="24" pos="26" len="7" fid="2" sl="91" sc="9" el="91" ec="24" />
+   <pt visit="36" pos="33" len="8" fid="2" sl="90" sc="24" el="90" ec="26" />
+   <pt visit="12" pos="41" len="19" />
+   <pt visit="12" pos="60" len="1" fid="2" sl="92" sc="5" el="92" ec="6" />
+  </Method>
+  <Method name=".ctor" sig="void  (Example.Core.Money[])" bodysize="64" flags="0" iflags="0">
+   <pt visit="12" pos="0" len="12" fid="2" sl="41" sc="5" el="41" ec="50" />
+   <pt visit="12" pos="12" len="6" fid="2" sl="46" sc="5" el="46" ec="33" />
+   <pt visit="12" pos="18" len="2" fid="2" sl="48" sc="12" el="48" ec="22" />
+   <pt visit="12" pos="20" len="2" />
+   <pt visit="24" pos="22" len="10" fid="2" sl="50" sc="9" el="50" ec="28" />
+   <pt visit="22" pos="32" len="9" fid="2" sl="51" sc="11" el="51" ec="31" />
+   <pt visit="24" pos="41" len="4" fid="2" sl="48" sc="39" el="48" ec="42" />
+   <pt visit="36" pos="45" len="6" fid="2" sl="48" sc="23" el="48" ec="37" />
+   <pt visit="12" pos="51" len="1" fid="2" sl="53" sc="5" el="53" ec="6" />
+  </Method>
+  <Method name=".ctor" sig="void  (Example.Core.Money, Example.Core.Money)" bodysize="34" flags="0" iflags="0">
+   <pt visit="45" pos="0" len="12" fid="2" sl="41" sc="5" el="41" ec="50" />
+   <pt visit="45" pos="12" len="6" fid="2" sl="55" sc="5" el="55" ec="40" />
+   <pt visit="45" pos="18" len="7" fid="2" sl="57" sc="7" el="57" ec="23" />
+   <pt visit="45" pos="25" len="7" fid="2" sl="58" sc="7" el="58" ec="23" />
+   <pt visit="45" pos="32" len="1" fid="2" sl="59" sc="5" el="59" ec="6" />
+  </Method>
+  <Method name=".ctor" sig="void  (Example.Core.Money, Example.Core.MoneyBag)" bodysize="34" flags="0" iflags="0">
+   <pt visit="4" pos="0" len="12" fid="2" sl="41" sc="5" el="41" ec="50" />
+   <pt visit="4" pos="12" len="6" fid="2" sl="61" sc="5" el="61" ec="43" />
+   <pt visit="4" pos="18" len="7" fid="2" sl="63" sc="7" el="63" ec="22" />
+   <pt visit="4" pos="25" len="7" fid="2" sl="64" sc="7" el="64" ec="22" />
+   <pt visit="4" pos="32" len="1" fid="2" sl="65" sc="5" el="65" ec="6" />
+  </Method>
+  <Method name=".ctor" sig="void  (Example.Core.MoneyBag, Example.Core.MoneyBag)" bodysize="34" flags="0" iflags="0">
+   <pt visit="4" pos="0" len="12" fid="2" sl="41" sc="5" el="41" ec="50" />
+   <pt visit="4" pos="12" len="6" fid="2" sl="67" sc="5" el="67" ec="46" />
+   <pt visit="4" pos="18" len="7" fid="2" sl="69" sc="7" el="69" ec="21" />
+   <pt visit="4" pos="25" len="7" fid="2" sl="70" sc="7" el="70" ec="21" />
+   <pt visit="4" pos="32" len="1" fid="2" sl="71" sc="5" el="71" ec="6" />
+  </Method>
+  <Method name="Add" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0">
+   <pt visit="6" pos="0" len="8" fid="2" sl="75" sc="7" el="75" ec="34" />
+  </Method>
+  <Method name="AddMoney" sig="Example.Core.IMoney  (Example.Core.Money)" bodysize="14" flags="0" iflags="0">
+   <pt visit="4" pos="0" len="13" fid="2" sl="80" sc="7" el="80" ec="49" />
+  </Method>
+  <Method name="AddMoneyBag" sig="Example.Core.IMoney  (Example.Core.MoneyBag)" bodysize="14" flags="0" iflags="0">
+   <pt visit="4" pos="0" len="13" fid="2" sl="85" sc="7" el="85" ec="49" />
+  </Method>
+  <Method name="AppendMoney" sig="void  (Example.Core.Money)" bodysize="85" flags="0" iflags="0">
+   <pt visit="154" pos="0" len="13" fid="2" sl="95" sc="7" el="95" ec="47" />
+   <pt visit="154" pos="13" len="3" fid="2" sl="96" sc="7" el="96" ec="23" />
+   <pt visit="140" pos="16" len="13" fid="2" sl="98" sc="9" el="98" ec="29" />
+   <pt visit="140" pos="29" len="1" fid="2" sl="99" sc="9" el="99" ec="16" />
+   <pt visit="14" pos="30" len="12" fid="2" sl="101" sc="7" el="101" ec="27" />
+   <pt visit="14" pos="42" len="8" fid="2" sl="102" sc="7" el="102" ec="36" />
+   <pt visit="14" pos="50" len="8" fid="2" sl="103" sc="7" el="103" ec="22" />
+   <pt visit="5" pos="58" len="1" fid="2" sl="104" sc="9" el="104" ec="16" />
+   <pt visit="9" pos="59" len="13" fid="2" sl="105" sc="7" el="105" ec="24" />
+   <pt visit="9" pos="72" len="1" fid="2" sl="106" sc="5" el="106" ec="6" />
+  </Method>
+  <Method name="Contains" sig="bool  (Example.Core.Money)" bodysize="40" flags="0" iflags="0">
+   <pt visit="22" pos="0" len="13" fid="2" sl="109" sc="7" el="109" ec="44" />
+   <pt visit="22" pos="13" len="15" fid="2" sl="110" sc="7" el="110" ec="40" />
+  </Method>
+  <Method name="Equals" sig="bool  (object)" bodysize="176" flags="0" iflags="0">
+   <pt visit="14" pos="0" len="8" fid="2" sl="114" sc="7" el="114" ec="18" />
+   <pt visit="0" pos="8" len="8" fid="2" sl="115" sc="9" el="115" ec="32" />
+   <pt visit="0" pos="16" len="12" fid="2" sl="116" sc="11" el="116" ec="44" />
+   <pt visit="14" pos="28" len="8" fid="2" sl="118" sc="7" el="118" ec="32" />
+   <pt visit="12" pos="36" len="7" fid="2" sl="120" sc="9" el="120" ec="49" />
+   <pt visit="12" pos="43" len="24" fid="2" sl="121" sc="9" el="121" ec="54" />
+   <pt visit="0" pos="67" len="2" fid="2" sl="122" sc="11" el="122" ec="24" />
+   <pt visit="12" pos="69" len="12" fid="2" sl="124" sc="29" el="124" ec="36" />
+   <pt visit="12" pos="81" len="2" />
+   <pt visit="22" pos="83" len="12" fid="2" sl="124" sc="18" el="124" ec="25" />
+   <pt visit="22" pos="95" len="9" fid="2" sl="126" sc="11" el="126" ec="38" />
+   <pt visit="1" pos="104" len="4" fid="2" sl="127" sc="13" el="127" ec="26" />
+   <pt visit="33" pos="108" len="8" fid="2" sl="124" sc="26" el="124" ec="28" />
+   <pt visit="11" pos="116" len="22" />
+   <pt visit="11" pos="138" len="2" fid="2" sl="129" sc="9" el="129" ec="21" />
+   <pt visit="2" pos="140" len="2" fid="2" sl="131" sc="7" el="131" ec="20" />
+   <pt visit="1" pos="142" len="2" fid="2" sl="132" sc="5" el="132" ec="6" />
+  </Method>
+  <Method name="FindMoney" sig="Example.Core.Money  (string)" bodysize="107" flags="0" iflags="0">
+   <pt visit="176" pos="0" len="12" fid="2" sl="135" sc="27" el="135" ec="34" />
+   <pt visit="176" pos="12" len="2" />
+   <pt visit="113" pos="14" len="12" fid="2" sl="135" sc="16" el="135" ec="23" />
+   <pt visit="113" pos="26" len="14" fid="2" sl="137" sc="9" el="137" ec="41" />
+   <pt visit="36" pos="40" len="4" fid="2" sl="138" sc="11" el="138" ec="20" />
+   <pt visit="253" pos="44" len="8" fid="2" sl="135" sc="24" el="135" ec="26" />
+   <pt visit="140" pos="52" len="19" />
+   <pt visit="140" pos="71" len="2" fid="2" sl="140" sc="7" el="140" ec="19" />
+   <pt visit="36" pos="73" len="2" fid="2" sl="141" sc="5" el="141" ec="6" />
+  </Method>
+  <Method name="GetHashCode" sig="int  ()" bodysize="98" flags="0" iflags="0">
+   <pt visit="2" pos="0" len="2" fid="2" sl="144" sc="7" el="144" ec="20" />
+   <pt visit="2" pos="2" len="12" fid="2" sl="145" sc="27" el="145" ec="34" />
+   <pt visit="2" pos="14" len="2" />
+   <pt visit="4" pos="16" len="12" fid="2" sl="145" sc="16" el="145" ec="23" />
+   <pt visit="4" pos="28" len="9" fid="2" sl="147" sc="9" el="147" ec="33" />
+   <pt visit="6" pos="37" len="8" fid="2" sl="145" sc="24" el="145" ec="26" />
+   <pt visit="2" pos="45" len="19" />
+   <pt visit="2" pos="64" len="2" fid="2" sl="149" sc="7" el="149" ec="19" />
+  </Method>
+  <Method name="get_IsZero" sig="bool  ()" bodysize="16" flags="0" iflags="0">
+   <pt visit="17" pos="0" len="15" fid="2" sl="153" sc="13" el="153" ec="39" />
+  </Method>
+  <Method name="Multiply" sig="Example.Core.IMoney  (int)" bodysize="114" flags="0" iflags="0">
+   <pt visit="3" pos="0" len="6" fid="2" sl="157" sc="7" el="157" ec="40" />
+   <pt visit="3" pos="6" len="3" fid="2" sl="158" sc="7" el="158" ec="23" />
+   <pt visit="2" pos="9" len="12" fid="2" sl="160" sc="29" el="160" ec="36" />
+   <pt visit="2" pos="21" len="2" />
+   <pt visit="4" pos="23" len="12" fid="2" sl="160" sc="18" el="160" ec="25" />
+   <pt visit="4" pos="35" len="18" fid="2" sl="162" sc="11" el="162" ec="57" />
+   <pt visit="6" pos="53" len="8" fid="2" sl="160" sc="26" el="160" ec="28" />
+   <pt visit="2" pos="61" len="19" />
+   <pt visit="3" pos="80" len="2" fid="2" sl="165" sc="7" el="165" ec="21" />
+  </Method>
+  <Method name="Negate" sig="Example.Core.IMoney  ()" bodysize="110" flags="0" iflags="0">
+   <pt visit="5" pos="0" len="6" fid="2" sl="169" sc="7" el="169" ec="40" />
+   <pt visit="5" pos="6" len="12" fid="2" sl="170" sc="27" el="170" ec="34" />
+   <pt visit="5" pos="18" len="2" />
+   <pt visit="10" pos="20" len="12" fid="2" sl="170" sc="16" el="170" ec="23" />
+   <pt visit="10" pos="32" len="17" fid="2" sl="172" sc="9" el="172" ec="47" />
+   <pt visit="15" pos="49" len="8" fid="2" sl="170" sc="24" el="170" ec="26" />
+   <pt visit="5" pos="57" len="19" />
+   <pt visit="5" pos="76" len="2" fid="2" sl="174" sc="7" el="174" ec="21" />
+  </Method>
+  <Method name="Simplify" sig="Example.Core.IMoney  ()" bodysize="35" flags="0" iflags="0">
+   <pt visit="8" pos="0" len="14" fid="2" sl="178" sc="7" el="178" ec="30" />
+   <pt visit="3" pos="14" len="18" fid="2" sl="179" sc="9" el="179" ec="35" />
+   <pt visit="5" pos="32" len="2" fid="2" sl="180" sc="7" el="180" ec="19" />
+  </Method>
+  <Method name="Subtract" sig="Example.Core.IMoney  (Example.Core.IMoney)" bodysize="14" flags="0" iflags="0">
+   <pt visit="4" pos="0" len="13" fid="2" sl="184" sc="7" el="184" ec="30" />
+  </Method>
+  <Method name="ToString" sig="string  ()" bodysize="130" flags="0" iflags="0" />
+ </Type>
+ <Type asmref="1" name="Example.Core.Model.SubType" flags="0">
+  <Method name="get_Name" sig="string  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_Name" sig="void  (string)" bodysize="9" flags="0" iflags="0" />
+  <Method name=".ctor" sig="void  ()" bodysize="8" flags="0" iflags="0" />
+ </Type>
+ <Type asmref="1" name="Example.Core.SampleMeasure" flags="0">
+  <Method name="get_Size" sig="int  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="GetHashCode" sig="int  ()" bodysize="31" flags="0" iflags="0" />
+  <Method name="set_Size" sig="void  (int)" bodysize="9" flags="0" iflags="0" />
+  <Method name=".ctor" sig="void  ()" bodysize="22" flags="0" iflags="0" />
+  <Method name="Compute" sig="string  ()" bodysize="136" flags="0" iflags="0" />
+  <Method name="Compute" sig="string  (int)" bodysize="14" flags="0" iflags="0" />
+  <Method name="Compute" sig="string  (string)" bodysize="15" flags="0" iflags="0" />
+  <Method name="Equals" sig="bool  (Example.Core.SampleMeasure)" bodysize="80" flags="0" iflags="0" />
+  <Method name="Equals" sig="bool  (object)" bodysize="56" flags="0" iflags="0" />
+ </Type>
+ <Type asmref="1" name="Example.Core.Alex" flags="0">
+  <Method name="get_FirstMoney" sig="Example.Core.IMoney  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="coucou" sig="bool  ()" bodysize="3" flags="0" iflags="0" />
+  <Method name="set_FirstMoney" sig="void  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0" />
+  <Method name="get_SecondMoney" sig="Example.Core.IMoney  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_SecondMoney" sig="void  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0" />
+  <Method name="get_ThirdMoney" sig="Example.Core.IMoney  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_ThirdMoney" sig="void  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0" />
+  <Method name="get_FourthMoney" sig="Example.Core.IMoney  ()" bodysize="8" flags="0" iflags="0" />
+  <Method name="set_FourthMoney" sig="void  (Example.Core.IMoney)" bodysize="9" flags="0" iflags="0" />
+  <Method name="DisplayEmptyIf" sig="void  ()" bodysize="19" flags="0" iflags="0" />
+  <Method name="DisplayEmptyElse" sig="void  ()" bodysize="30" flags="0" iflags="0" />
+  <Method name="DisplayEmptyTry" sig="void  ()" bodysize="46" flags="0" iflags="0" />
+  <Method name="displayFirstMoney" sig="void  ()" bodysize="76" flags="0" iflags="0" />
+  <Method name="displaySecondMoney" sig="void  ()" bodysize="13" flags="0" iflags="0" />
+  <Method name="weirdDisplayFirstMoney" sig="void  ()" bodysize="13" flags="0" iflags="0" />
+  <Method name="displayHello" sig="void  ()" bodysize="23" flags="0" iflags="0" />
+  <Method name="GetMoney" sig="Example.Core.IMoney  ()" bodysize="14" flags="0" iflags="0" />
+  <Method name="displayHello2" sig="void  ()" bodysize="23" flags="0" iflags="0" />
+  <Method name="displayHello3" sig="void  ()" bodysize="23" flags="0" iflags="0" />
+  <Method name="displayHello4" sig="void  ()" bodysize="23" flags="0" iflags="0" />
+  <Method name="displayHello5" sig="void  ()" bodysize="23" flags="0" iflags="0" />
+  <Method name=".ctor" sig="void  ()" bodysize="8" flags="0" iflags="0" />
+ </Type>
+</PartCoverReport>
