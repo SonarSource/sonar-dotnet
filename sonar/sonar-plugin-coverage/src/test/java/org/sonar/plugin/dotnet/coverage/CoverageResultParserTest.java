@@ -1,4 +1,4 @@
-package org.sonar.plugin.dotnet.partcover;
+package org.sonar.plugin.dotnet.coverage;
 
 import static org.junit.Assert.*;
 
@@ -8,17 +8,17 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.plugin.dotnet.coverage.PartCoverResultParser;
+import org.sonar.plugin.dotnet.coverage.CoverageResultParser;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 
-public class PartCoverResultParserTest {
+public class CoverageResultParserTest {
 
-	private PartCoverResultParser parser;
+	private CoverageResultParser parser;
 
 	@Before
 	public void setUp() {
-		parser = new PartCoverResultParser();
+		parser = new CoverageResultParser();
 	}
 	
 	private URL buildReportUrl(String fileName) {
