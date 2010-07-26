@@ -58,7 +58,7 @@ public class CoveragePlugin
   public List<Class<? extends Extension>> getExtensions()
   {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(PartCoverSensor.class);
+    list.add(CoverageSensor.class);
     list.add(CoverageMetrics.class);
     list.add(CoveragePluginHandler.class);
 

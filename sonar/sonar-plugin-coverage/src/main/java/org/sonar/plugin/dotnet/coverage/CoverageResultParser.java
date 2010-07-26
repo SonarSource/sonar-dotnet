@@ -52,12 +52,12 @@ import org.w3c.dom.NodeList;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverResultParser extends AbstractXmlParser
+public class CoverageResultParser extends AbstractXmlParser
 {
   /**
    * Generates the logger.
    */
-  private final static Logger log = LoggerFactory.getLogger(PartCoverResultParser.class);
+  private final static Logger log = LoggerFactory.getLogger(CoverageResultParser.class);
   private final Map<Integer, FileCoverage>   sourceFiles;
   private final Map<String, ProjectCoverage> projects;
   private final List<ClassCoverage>          classes;
@@ -67,7 +67,7 @@ public class PartCoverResultParser extends AbstractXmlParser
   /**
    * Constructs a @link{PartCoverResultParser}.
    */
-  public PartCoverResultParser()
+  public CoverageResultParser()
   {
     sourceFiles = new HashMap<Integer, FileCoverage>();
     classes = new ArrayList<ClassCoverage>();

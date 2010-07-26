@@ -56,14 +56,14 @@ import org.sonar.plugin.dotnet.coverage.model.SourceLine;
 
 /**
  * Collects the results from a PartCover report. Most of the work is delegator
- * to {@link PartCoverResultParser}.
+ * to {@link CoverageResultParser}.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverSensor extends AbstractDotnetSensor {
+public class CoverageSensor extends AbstractDotnetSensor {
 	public static final String PART_COVER_REPORT_XML = "coverage-report.xml";
 	private final static Logger log = LoggerFactory
-	    .getLogger(PartCoverSensor.class);
+	    .getLogger(CoverageSensor.class);
 	private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
 	    CoreMetrics.COVERAGE_LINE_HITS_DATA);
 	private CoveragePluginHandler pluginHandler;
@@ -71,7 +71,7 @@ public class PartCoverSensor extends AbstractDotnetSensor {
 	/**
 	 * Constructs the collector Constructs a @link{PartCoverCollector}.
 	 */
-	public PartCoverSensor(CoveragePluginHandler pluginHandler) {
+	public CoverageSensor(CoveragePluginHandler pluginHandler) {
 		this.pluginHandler = pluginHandler;
 	}
 
@@ -87,7 +87,7 @@ public class PartCoverSensor extends AbstractDotnetSensor {
 		if (report == null) {
 			return;
 		}
-		PartCoverResultParser parser = new PartCoverResultParser();
+		CoverageResultParser parser = new CoverageResultParser();
 		URL url;
 		try {
 			url = report.toURI().toURL();
