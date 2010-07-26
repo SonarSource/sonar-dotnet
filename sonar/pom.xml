@@ -93,7 +93,7 @@
     <module>sonar-plugin-sourcemonitor</module>
     <module>sonar-plugin-dotnet-core</module>
     <module>sonar-plugin-fxcop</module>
-    <module>sonar-plugin-partcover</module>
+    <module>sonar-plugin-coverage</module>
     <module>sonar-plugin-stylecop</module>
     <module>sonar-plugin-gallio</module>
     <module>sonar-plugin-dotnet-cpd</module>
