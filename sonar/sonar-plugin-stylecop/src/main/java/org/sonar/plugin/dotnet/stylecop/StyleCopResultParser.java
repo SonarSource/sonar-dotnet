@@ -28,6 +28,9 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
@@ -40,6 +43,7 @@ import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.w3c.dom.Element;
 
 /**
@@ -49,6 +53,8 @@ import org.w3c.dom.Element;
  */
 public class StyleCopResultParser extends AbstractXmlParser
 {
+	private final static Logger log = LoggerFactory.getLogger(StyleCopResultParser.class);
+	
   private Project       project;
   private SensorContext context;
   private RulesManager  rulesManager;
@@ -86,6 +92,7 @@ public class StyleCopResultParser extends AbstractXmlParser
       String message = getNodeContent(issueElement, "message");
       String lineNumber = getNodeContent(issueElement, "line");
       Resource<?> resource = getResource(filePath);
+      
       Integer line = getIntValue(lineNumber);
       Rule rule = rulesManager.getPluginRule(StyleCopPlugin.KEY, key);
       if (rule == null)
@@ -109,13 +116,30 @@ public class StyleCopResultParser extends AbstractXmlParser
 
   public Resource<?> getResource(String filePath)
   {
-    if (StringUtils.isBlank(filePath) )
-    {
-      return null;
-    }
-    File file = new File(filePath);
-    CSharpFile fileResource = CSharpFile.from(project, file, false);
-    return fileResource;
+  	if (StringUtils.isBlank(filePath)) {
+			return null;
+		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug("Getting resource for path: "+filePath);
+		}
+		
+		
+		File file = new File(filePath);
+		CSharpFile fileResource;
+		if (file.exists()) {
+			try {
+				fileResource = CSharpFile.from(project, file, false);
+			} catch (InvalidResourceException ex) {
+				log.warn("resource error", ex);
+				fileResource = null;
+			}
+		} else {
+			log.error("Unable to ge resource for path "+filePath);
+			fileResource = null;
+		}
+		
+		return fileResource;
   }
 
   /**
