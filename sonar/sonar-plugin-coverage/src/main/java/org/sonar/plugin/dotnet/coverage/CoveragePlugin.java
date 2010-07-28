@@ -30,7 +30,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
 /**
- * The plugin that handles the code coverage with PartCover.
+ * The plugin that handles the code coverage with PartCover or NCover.
  * @author Jose CHILLAN Feb 18, 2010
  */
 public class CoveragePlugin
@@ -40,7 +40,7 @@ public class CoveragePlugin
   /**
    * The plugin key.
    */
-  public static final String KEY = "partcover";
+  public static final String KEY = "coverage";
 
   public CoveragePlugin()
   {
@@ -48,7 +48,7 @@ public class CoveragePlugin
 
   public String getDescription()
   {
-    return "A plugin that compute the code coverage in .Net with Part Cover";
+    return "A plugin that compute the code coverage in .Net with PartCover or NCover";
   }
 
   /**
