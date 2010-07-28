@@ -1,5 +1,6 @@
 package org.sonar.plugin.dotnet.coverage;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
@@ -27,6 +28,11 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 		final boolean result;
 		if (version.startsWith("4.")) {
 			log.debug("Using PartCover 4 report format");
+			result = true;
+		} else if (StringUtils.isEmpty(version) 
+				&& StringUtils.isEmpty(element.getAttribute("ver")) 
+				&& !StringUtils.isEmpty(evaluateAttribute(element, "Assembly/@id")) ){
+			log.debug("After guessing, using PartCover 4 report format");
 			result = true;
 		} else {
 			log.debug("Not using PartCover 4 report format");

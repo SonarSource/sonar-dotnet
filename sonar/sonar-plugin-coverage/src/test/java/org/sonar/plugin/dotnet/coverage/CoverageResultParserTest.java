@@ -52,6 +52,34 @@ public class CoverageResultParserTest {
 	}
 	
 	@Test
+	public void testParsePartCover23NoVersionNumber() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "coverage-report-2.3.no.version.number.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 3;
+		params.fileName = "MoneyBag.cs";
+		params.coveredLines = 114;
+		params.lines = 125;
+		
+		checkParsing(params);
+	}
+	
+	
+	
+	@Test
+	public void testParsePartCover40NoVersionNumber() {
+		ParsingParameters params = new ParsingParameters();
+		params.report = "coverage-report-4.0.no.version.number.xml";
+		params.assemblyName = "Example.Core";
+		params.fileNumber = 2;
+		params.fileName = "Money.cs";
+		params.coveredLines = 24;
+		params.lines = 26;
+		
+		checkParsing(params);
+	}
+	
+	@Test
 	public void testParsePartCover40() {
 		ParsingParameters params = new ParsingParameters();
 		params.report = "coverage-report-4.0.xml";
