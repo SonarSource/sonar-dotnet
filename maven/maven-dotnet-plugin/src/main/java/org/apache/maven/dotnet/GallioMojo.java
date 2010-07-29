@@ -250,7 +250,7 @@ public class GallioMojo extends AbstractUnitTestMojo
     // Note that Local is mandatory to use partcover (maybe we can build a Partcover runner ???)
     arguments.add("/r:" + gallioRunner);
 
-    arguments.add("/report-directory:" + toCommandPath(reportFile.getParent()));
+    arguments.add("/report-directory:" + reportFile.getParent());
     String reportName = reportFile.getName();
     if (reportName.toLowerCase().endsWith(".xml"))
     {

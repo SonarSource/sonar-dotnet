@@ -706,6 +706,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 	 * @param file
 	 *          the file to escape
 	 * @return the escapes file name
+	 * 
 	 */
 	protected String toCommandPath(File file) {
 		String absolutePath;
@@ -715,21 +716,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 			// We try another way of processing
 			absolutePath = file.getAbsolutePath();
 		}
-		return toCommandPath(absolutePath);
-	}
-
-	/**
-	 * Converts a path to a command compatible path, by escaping with quotes if
-	 * necessary.
-	 * 
-	 * @param path
-	 * @return
-	 */
-	protected String toCommandPath(String path) {
-		if (path.indexOf(' ') >= 0) {
-			return '"' + path + '"';
-		}
-		return path;
+		return absolutePath;
 	}
 
 	/**

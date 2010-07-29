@@ -149,7 +149,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
 
 		if (StringUtils.isNotEmpty(gendarmeConfigFile)) {
 			commandArguments.add("--config");
-			commandArguments.add(toCommandPath(gendarmeConfigFile));
+			commandArguments.add(gendarmeConfigFile);
 		}
 
 		// Put in verbose mode if required
