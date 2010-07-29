@@ -118,6 +118,8 @@ public class GallioMojo extends AbstractUnitTestMojo
   protected String        	filter;
 
   private File             	reportFile;
+  
+  private File 							gallioExe;
 
   @Override
   protected void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException
@@ -269,13 +271,12 @@ public class GallioMojo extends AbstractUnitTestMojo
    */
   protected File getGallioExe() throws MojoExecutionException
   {
-    File gallioExe;
     if (gallioDirectory == null)
     {
       gallioDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "Gallio");
       gallioExe = new File(gallioDirectory, gallioExecutable);
     }
-    else
+    else if (gallioExe ==null)
     {
       gallioExe = new File(gallioDirectory, "bin/" + gallioExecutable);
     }
