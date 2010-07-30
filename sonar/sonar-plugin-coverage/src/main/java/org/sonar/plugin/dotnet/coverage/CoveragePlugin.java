@@ -72,7 +72,7 @@ public class CoveragePlugin
 
   public String getName()
   {
-    return "PartCover plugin";
+    return "Coverage plugin";
   }
 
   @Override
