@@ -79,6 +79,7 @@ public class StyleCopRuleParser
         Element ruleElement = (Element) nodes.item(idxRule);
         Element analyzerElement = (Element) ruleElement.getParentNode().getParentNode();
         String ruleName = ruleElement.getAttribute("Name");
+        String priority = ruleElement.getAttribute("SonarPriotiry");
 
         StyleCopRule rule = new StyleCopRule();
         NodeList elements = ruleElement.getElementsByTagName("BooleanProperty");
@@ -98,6 +99,7 @@ public class StyleCopRuleParser
         String category = StringUtils.removeEnd(StringUtils.substringAfterLast(analyzerId, "."), "Rules");
         rule.setAnalyzerId(analyzerId);
         rule.setName(ruleName);
+        rule.setPriority(priority);
         rule.setEnabled(active);
         rule.setCategory(category);
         result.add(rule);

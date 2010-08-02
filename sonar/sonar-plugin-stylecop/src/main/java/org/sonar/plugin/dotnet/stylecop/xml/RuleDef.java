@@ -32,63 +32,71 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * The XML representation of a StlyeCop rule
+ * 
  * @author Jose CHILLAN Apr 6, 2010
  */
 @XmlType(name = "Rule")
-public class RuleDef
-{
-  @XmlAttribute(name = "Name")
-  private String                name;
+public class RuleDef {
+	@XmlAttribute(name = "Name")
+	private String name;
 
-  @XmlElementWrapper(name = "RuleSettings")
-  @XmlElement(name = "BooleanProperty")
-  private List<BooleanProperty> settings;
+	@XmlAttribute(name = "SonarPriority")
+	private String priority = "minor";
 
-  /**
-   * Constructs a @link{RuleDef}.
-   */
-  public RuleDef()
-  {
-  }
+	@XmlElementWrapper(name = "RuleSettings")
+	@XmlElement(name = "BooleanProperty")
+	private List<BooleanProperty> settings;
 
-  /**
-   * Returns the name.
-   * 
-   * @return The name to return.
-   */
-  public String getName()
-  {
-    return this.name;
-  }
+	/**
+	 * Constructs a @link{RuleDef}.
+	 */
+	public RuleDef() {
+	}
 
-  /**
-   * Sets the name.
-   * 
-   * @param name The name to set.
-   */
-  public void setName(String name)
-  {
-    this.name = name;
-  }
+	/**
+	 * Returns the name.
+	 * 
+	 * @return The name to return.
+	 */
+	public String getName() {
+		return this.name;
+	}
 
-  /**
-   * Returns the settings.
-   * 
-   * @return The settings to return.
-   */
-  public List<BooleanProperty> getSettings()
-  {
-    return this.settings;
-  }
+	/**
+	 * Sets the name.
+	 * 
+	 * @param name
+	 *          The name to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  /**
-   * Sets the settings.
-   * 
-   * @param settings The settings to set.
-   */
-  public void setSettings(List<BooleanProperty> settings)
-  {
-    this.settings = settings;
-  }
+	/**
+	 * Returns the settings.
+	 * 
+	 * @return The settings to return.
+	 */
+	public List<BooleanProperty> getSettings() {
+		return this.settings;
+	}
+
+	/**
+	 * Sets the settings.
+	 * 
+	 * @param settings
+	 *          The settings to set.
+	 */
+	public void setSettings(List<BooleanProperty> settings) {
+		this.settings = settings;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
 
 }

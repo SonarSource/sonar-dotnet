@@ -122,7 +122,9 @@ public class StyleCopSensor   extends AbstractDotnetSensor
   {
     try
     {
-      ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+      //ClassLoader contextClassLoader = this.getClass().getClassLoader();  
+      // TODO MIGRATION23 
+    	ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
       InputStream stream = contextClassLoader.getResourceAsStream(STYLECOP_TRANSFO_XSL);
       Source xslSource = new SAXSource(new InputSource(stream));
       Templates templates = TransformerFactory.newInstance().newTemplates(xslSource);

@@ -101,20 +101,19 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
     }
     for (StyleCopRule styleCopRule : styleCopConfig)
     {
-      if (! styleCopRule.isEnabled())
+      if (styleCopRule.isEnabled())
       {
-        // We remove the disabled rules
-        rulesByName.remove(styleCopRule.getName());
-      }
+      	Rule dbRule = rulesByName.get(styleCopRule.getName());
+      	String rawPriority = styleCopRule.getPriority();
+      	RulePriority ruleFailureLevel = RulePriority.MINOR;
+      	if (StringUtils.isNotEmpty(rawPriority)) {
+      		 ruleFailureLevel = RulePriority.valueOfString(rawPriority);
+      	}
+      	ActiveRule activeRule = new ActiveRule(null, dbRule, ruleFailureLevel);
+        result.add(activeRule);
+      } 
     }
     
-    // All stylecop rules have a minor priority for the moment
-    for (Rule dbRule : rulesByName.values())
-    {
-      RulePriority ruleFailureLevel = RulePriority.MINOR;
-      ActiveRule activeRule = new ActiveRule(null, dbRule, ruleFailureLevel);
-      result.add(activeRule);
-    }
     return result;
   }
 
@@ -169,7 +168,9 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
       {
         RuleDef ruleDef = new RuleDef();
         String ruleName = styleCopRule.getName();
+        String priority = styleCopRule.getPriority();
         ruleDef.setName(ruleName);
+        ruleDef.setPriority(priority);
         BooleanProperty property = new BooleanProperty();
         property.setName("Enabled");
         if (styleCopRule.isEnabled())
@@ -212,6 +213,10 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
       String configKey = rule.getConfigKey();
       StyleCopRule styleCopRule = initialRules.get(configKey);
       styleCopRule.setEnabled(true);
+      RulePriority priority = activeRule.getPriority();
+      if (priority != null) {
+      	styleCopRule.setPriority(priority.name().toLowerCase());
+      }
     }
     
     // We populate the result
