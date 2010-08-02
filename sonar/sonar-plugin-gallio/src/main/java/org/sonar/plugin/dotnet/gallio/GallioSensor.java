@@ -69,12 +69,19 @@ public class GallioSensor extends AbstractDotnetSensor {
 	 */
 	@Override
 	public void analyse(Project project, SensorContext context) {
-		// Retrieve the report
-		File report = findReport(project, GALLIO_REPORT_XML);
-		if (report == null) {
-			context.saveMeasure(CoreMetrics.TEST_DATA, 0.0);
-		} else {
-			collect(project, report, context);
+		try {
+			// Retrieve the report
+			File report = findReport(project, GALLIO_REPORT_XML);
+			if (report == null) {
+				log.error("Report not found at location " + GALLIO_REPORT_XML);
+				context.saveMeasure(CoreMetrics.TEST_DATA, 0.0);
+			} else {
+				log.debug("Report found at location " + GALLIO_REPORT_XML);
+				collect(project, report, context);
+			}
+		} catch (RuntimeException ex) {
+			log.error("Error occured in the gallio sensor", ex);
+			throw ex;
 		}
 	}
 
@@ -101,28 +108,41 @@ public class GallioSensor extends AbstractDotnetSensor {
 	private void collect(Project project, File report, SensorContext context) {
 		GallioResultParser parser = new GallioResultParser();
 		List<UnitTestReport> reports = parser.parse(report);
+		if (log.isDebugEnabled()) {
+			log.debug("Found " + reports.size() + " test data");
+		}
 		for (UnitTestReport testReport : reports) {
 			File sourceFile = testReport.getSourceFile();
 			if (sourceFile != null && sourceFile.exists()) {
+				if (log.isDebugEnabled()) {
+					log.debug("Collecting test data for file " + sourceFile);
+				}
 				int testsCount = testReport.getTests() - testReport.getSkipped();
-				CSharpFile testFile = 
-					CSharpFile.from(project, testReport.getSourceFile(), true);
-				saveFileMeasure(testFile, context, testReport, CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
-				saveFileMeasure(testFile, context, testReport, CoreMetrics.TESTS, testsCount);
-				saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_ERRORS, testReport.getErrors());
-				saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_FAILURES, testReport.getFailures());
-				saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
-				saveFileMeasure(testFile, context, testReport, GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
-				int passedTests = testsCount - testReport.getErrors() - testReport.getFailures();
+				CSharpFile testFile = CSharpFile.from(project, testReport
+				    .getSourceFile(), true);
+				saveFileMeasure(testFile, context, testReport,
+				    CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
+				saveFileMeasure(testFile, context, testReport, CoreMetrics.TESTS,
+				    testsCount);
+				saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_ERRORS,
+				    testReport.getErrors());
+				saveFileMeasure(testFile, context, testReport,
+				    CoreMetrics.TEST_FAILURES, testReport.getFailures());
+				saveFileMeasure(testFile, context, testReport,
+				    CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
+				saveFileMeasure(testFile, context, testReport,
+				    GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
+				int passedTests = testsCount - testReport.getErrors()
+				    - testReport.getFailures();
 				if (testsCount > 0) {
 					double percentage = passedTests * 100 / testsCount;
-					saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(percentage));
+					saveFileMeasure(testFile, context, testReport,
+					    CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils
+					        .scaleValue(percentage));
 				}
-				try {
-					saveTestsDetails(testFile, context, testReport);
-				} catch (TransformerException e) {
-					// We discard the exception
-				}
+
+				saveTestsDetails(testFile, context, testReport);
+
 			} else {
 				log.error("Source file not found for test report " + testReport);
 			}
@@ -138,7 +158,7 @@ public class GallioSensor extends AbstractDotnetSensor {
 	 * @throws TransformerException
 	 */
 	private void saveTestsDetails(CSharpFile testFile, SensorContext context,
-	    UnitTestReport fileReport) throws TransformerException {
+	    UnitTestReport fileReport) {
 		StringBuilder testCaseDetails = new StringBuilder(256);
 		testCaseDetails.append("<tests-details>");
 		List<TestCaseDetail> details = fileReport.getDetails();
