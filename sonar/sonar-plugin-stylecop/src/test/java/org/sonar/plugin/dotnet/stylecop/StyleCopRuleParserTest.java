@@ -17,7 +17,7 @@ public class StyleCopRuleParserTest {
 		 List<StyleCopRule> result =
 			 StyleCopRuleParser.parse(new InputStreamReader(stream));
 	
-		 assertEquals(104, result.size());
+		 assertEquals(144, result.size());
 	}
 
 	
