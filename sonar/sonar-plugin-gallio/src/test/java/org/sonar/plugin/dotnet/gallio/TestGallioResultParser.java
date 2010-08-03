@@ -25,7 +25,7 @@
 package org.sonar.plugin.dotnet.gallio;
 
 import java.net.URL;
-import java.util.List;
+import java.util.Collection;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,11 +39,11 @@ public class TestGallioResultParser
     checkReportFile("gallio-report.xml");
   }
 
-  private List<UnitTestReport> checkReportFile(String fileName)
+  private Collection<UnitTestReport> checkReportFile(String fileName)
   {
     GallioResultParser parser = new GallioResultParser();
     URL sampleURL = Thread.currentThread().getContextClassLoader().getResource(fileName);
-    List<UnitTestReport> reports = parser.parse(sampleURL);
+    Collection<UnitTestReport> reports = parser.parse(sampleURL);
     for (UnitTestReport unitTestReport : reports)
     {
       System.out.println("Report : " + unitTestReport);
