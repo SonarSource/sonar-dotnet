@@ -27,8 +27,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
@@ -70,7 +72,7 @@ public class GallioResultParser
    * @param file the Gallio result file
    * @return
    */
-  public List<UnitTestReport> parse(File file)
+  public Set<UnitTestReport> parse(File file)
   {
     try
     {
@@ -88,7 +90,7 @@ public class GallioResultParser
    * @param reportURL
    * @return
    */
-  public List<UnitTestReport> parse(URL reportURL)
+  public Set<UnitTestReport> parse(URL reportURL)
   {
     Map<String, UnitTestReport> reportMap = new HashMap<String, UnitTestReport>();
 
@@ -194,7 +196,7 @@ public class GallioResultParser
     }
 
     // We build the result.
-    List<UnitTestReport> result = new ArrayList<UnitTestReport>(reportMap.values());
+    Set<UnitTestReport> result = new HashSet<UnitTestReport>(reportMap.values());
     return result;
   }
 

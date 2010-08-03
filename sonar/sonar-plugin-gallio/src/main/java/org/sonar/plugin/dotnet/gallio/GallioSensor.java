@@ -24,6 +24,7 @@
 package org.sonar.plugin.dotnet.gallio;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.transform.TransformerException;
@@ -107,7 +108,7 @@ public class GallioSensor extends AbstractDotnetSensor {
 
 	private void collect(Project project, File report, SensorContext context) {
 		GallioResultParser parser = new GallioResultParser();
-		List<UnitTestReport> reports = parser.parse(report);
+		Collection<UnitTestReport> reports = parser.parse(report);
 		if (log.isDebugEnabled()) {
 			log.debug("Found " + reports.size() + " test data");
 		}
