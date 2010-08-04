@@ -75,7 +75,7 @@ public class GallioMojo extends AbstractUnitTestMojo
   /**
    * Name of the Gallio runner to use
    * 
-   * @parameter expression="${gallio.runner}" alias="gallioRunner" default-value="IsolatedAppDomain"
+   * @parameter expression="${gallio.runner}" alias="gallioRunner" default-value="IsolatedProcess"
    */
   protected String         gallioRunner;
 

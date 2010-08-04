@@ -48,6 +48,7 @@ import org.codehaus.plexus.util.cli.Commandline;
  */
 public class CodeCoverageMojo extends GallioMojo {
 	private static final String GALLIO_RUNNER_4_N_COVER = "NCover3";
+	private static final String GALLIO_RUNNER_4_PART_COVER = "IsolatedAppDomain";
 
 	/**
 	 * Name of the resource folder that contains the Partcover exe
@@ -193,6 +194,7 @@ public class CodeCoverageMojo extends GallioMojo {
 
 			executable = getGallioExe();
 		} else {
+			gallioRunner = GALLIO_RUNNER_4_PART_COVER;
 			List<String> testCommandArgs = generateGallioArgs(testedAssemblies);
 			// Extracts PartCover if necessary
 			extractPartCover();
