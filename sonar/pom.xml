@@ -112,7 +112,7 @@
                 <phase>install</phase>
                 <configuration>
                   <tasks>
-                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/sonar-${sonar-build-version}/extensions/plugins" failonerror="false" />
+                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/extensions/plugins" failonerror="false" />
                   </tasks>
                 </configuration>
                 <goals>
