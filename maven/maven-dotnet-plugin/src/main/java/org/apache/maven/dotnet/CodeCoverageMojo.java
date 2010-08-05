@@ -38,7 +38,7 @@ import org.codehaus.plexus.util.cli.Commandline;
 
 /**
  * Generates a coverage report on a .Net project or solution using the unit
- * tests and PartCover
+ * tests and PartCover/NCover
  * 
  * @goal coverage
  * @phase site
