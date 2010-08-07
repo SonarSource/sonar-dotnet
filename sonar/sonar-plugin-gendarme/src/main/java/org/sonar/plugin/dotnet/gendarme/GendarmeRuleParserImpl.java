@@ -2,7 +2,6 @@ package org.sonar.plugin.dotnet.gendarme;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +32,7 @@ public class GendarmeRuleParserImpl extends AbstractXmlParser implements Gendarm
 	}
 	
 	
-	private Set<GendarmeRule> parseRuleConfiguration(String rawConfiguration, String ruleSet, RulePriority rulePriority) {
+  private Set<GendarmeRule> parseRuleConfiguration(String rawConfiguration, String ruleSet, RulePriority rulePriority) {
 		
 		Reader reader = new StringReader(rawConfiguration);
 		Set<GendarmeRule> result = new HashSet<GendarmeRule>();

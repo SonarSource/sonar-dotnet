@@ -25,25 +25,25 @@ import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.xml.sax.InputSource;
 
-public class GendarmeSensor extends AbstractDotnetSensor
-{
-  private final static Logger log                        = LoggerFactory.getLogger(GendarmeSensor.class);
+public class GendarmeSensor extends AbstractDotnetSensor {
+  private final static Logger log = LoggerFactory
+      .getLogger(GendarmeSensor.class);
 
-  private static final String GENDARME_REPORT_XML           = "gendarme-report.xml";
-  private static final String GENDARME_TRANSFO_XSL          = "gendarme-transformation.xsl";
+  private static final String GENDARME_REPORT_XML = "gendarme-report.xml";
+  private static final String GENDARME_TRANSFO_XSL = "gendarme-transformation.xsl";
   private static final String GENDARME_PROCESSED_REPORT_XML = "gendarme-report-processed.xml";
 
-  private RulesManager        rulesManager;
-  private RulesProfile        profile;
-  private GendarmePluginHandler  pluginHandler;
+  private RulesManager rulesManager;
+  private RulesProfile profile;
+  private GendarmePluginHandler pluginHandler;
 
   /**
    * Constructs a @link{GendarmeSensor}.
    * 
    * @param rulesManager
    */
-  public GendarmeSensor(RulesProfile profile, RulesManager rulesManager, GendarmePluginHandler pluginHandler)
-  {
+  public GendarmeSensor(RulesProfile profile, RulesManager rulesManager,
+      GendarmePluginHandler pluginHandler) {
     super();
     this.rulesManager = rulesManager;
     this.profile = profile;
@@ -52,50 +52,49 @@ public class GendarmeSensor extends AbstractDotnetSensor
 
   /**
    * Launches the project analysis/
+   * 
    * @param project
    * @param context
    */
   @Override
-  public void analyse(Project project, SensorContext context)
-  {
+  public void analyse(Project project, SensorContext context) {
     File report = findReport(project, GENDARME_REPORT_XML);
     File dir = getReportsDirectory(project);
 
     // We generate the transformer
     File transformedReport = transformReport(report, dir);
-    if (transformedReport == null)
-    {
+    if (transformedReport == null) {
       return;
     }
-    GendarmeResultParser parser = new GendarmeResultParser(project, context, rulesManager, profile);
-    try
-    {
+    GendarmeResultParser parser = new GendarmeResultParser(project, context,
+        rulesManager, profile);
+    try {
       URL fileURL = transformedReport.toURI().toURL();
       parser.parse(fileURL);
-    }
-    catch (MalformedURLException e)
-    {
+    } catch (MalformedURLException e) {
       log.debug("Error while loading the file: {}\n{}", report, e);
-    }
-    catch (InvalidResourceException ex) {
-  	  log.warn("C# file not referenced in the solution", ex);
+    } catch (InvalidResourceException ex) {
+      log.warn("C# file not referenced in the solution", ex);
     }
   }
 
   /**
    * Transforms the report to a usable format.
+   * 
    * @param report
    * @param dir
    * @return
    */
-  private File transformReport(File report, File dir)
-  {
-    try
-    {
-      ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-      InputStream stream = contextClassLoader.getResourceAsStream(GENDARME_TRANSFO_XSL);
+  private File transformReport(File report, File dir) {
+    try {
+      ClassLoader contextClassLoader = Thread.currentThread()
+          .getContextClassLoader(); // TODO MIGRATION23
+                                    // this.getClass().getClassLoader();
+      InputStream stream = contextClassLoader
+          .getResourceAsStream(GENDARME_TRANSFO_XSL);
       Source xslSource = new SAXSource(new InputSource(stream));
-      Templates templates = TransformerFactory.newInstance().newTemplates(xslSource);
+      Templates templates = TransformerFactory.newInstance().newTemplates(
+          xslSource);
       Transformer transformer = templates.newTransformer();
 
       // We open the report to be processed
@@ -106,10 +105,9 @@ public class GendarmeSensor extends AbstractDotnetSensor
       Result result = new StreamResult(processedReport);
       transformer.transform(xmlSource, result);
       return processedReport;
-    }
-    catch (Exception exc)
-    {
-      log.warn("Error during the processing of the Gendarme report for Sonar", exc);
+    } catch (Exception exc) {
+      log.warn("Error during the processing of the Gendarme report for Sonar",
+          exc);
     }
     return null;
   }
@@ -119,8 +117,7 @@ public class GendarmeSensor extends AbstractDotnetSensor
    * @return
    */
   @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project)
-  {
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
     return pluginHandler;
   }
 

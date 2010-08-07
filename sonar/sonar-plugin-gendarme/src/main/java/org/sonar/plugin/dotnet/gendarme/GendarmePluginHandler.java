@@ -40,46 +40,39 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN May 7, 2009
  */
-public class GendarmePluginHandler
-  extends AbstractDotNetMavenPluginHandler
-{
-	
-	private final static Logger log = LoggerFactory.getLogger(GendarmePluginHandler.class);
-	
-  private final static  String GENDARME_FILE   = "sonar.Gendarme";
-  private final static  String GENDARME_REPORT = "gendarme-report.xml";
+public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
 
-  private RulesProfile        rulesProfile;
+  private final static Logger log = LoggerFactory
+      .getLogger(GendarmePluginHandler.class);
+
+  private final static String GENDARME_FILE = "sonar.Gendarme";
+  private final static String GENDARME_REPORT = "gendarme-report.xml";
+
+  private RulesProfile rulesProfile;
   private GendarmeRuleRepository rulesRepository;
 
   /**
    * Constructs a @link{FxCopPluginHandler}.
    */
-  public GendarmePluginHandler(RulesProfile rulesProfile, GendarmeRuleRepository gendarmeRulesRepository)
-  {
+  public GendarmePluginHandler(RulesProfile rulesProfile,
+      GendarmeRuleRepository gendarmeRulesRepository) {
     this.rulesProfile = rulesProfile;
     this.rulesRepository = gendarmeRulesRepository;
   }
 
-  public String[] getGoals()
-  {
-    return new String[] { "gendarme"
-    };
+  public String[] getGoals() {
+    return new String[] { "gendarme" };
   }
 
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
-    try
-    {
+  public void configure(Project project, MavenPlugin plugin) {
+    try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
       configureParameters(plugin);
       plugin.setParameter("gendarmeReportName", GENDARME_REPORT);
-    }
-    catch (IOException e)
-    {
-    	throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
 
@@ -90,21 +83,23 @@ public class GendarmePluginHandler
    * @param plugin
    * @throws IOException
    */
-  private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException
-  {
-  	List<ActiveRule> activeRules = rulesProfile.getActiveRulesByPlugin(GendarmePlugin.KEY);
-  	if (activeRules==null || activeRules.isEmpty()) {
-  		log.error("Warning, no configuration for Mono Gendarme");
-  	} else {
-  		String gendarmeConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-      File configFile = project.getFileSystem().writeToWorkingDirectory(gendarmeConfiguration, GENDARME_FILE);
+  private void generateConfigurationFile(Project project, MavenPlugin plugin)
+      throws IOException {
+    List<ActiveRule> activeRules = rulesProfile
+        .getActiveRulesByPlugin(GendarmePlugin.KEY);
+    if (activeRules == null || activeRules.isEmpty()) {
+      log.error("Warning, no configuration for Mono Gendarme");
+    } else {
+      String gendarmeConfiguration = rulesRepository
+          .exportConfiguration(rulesProfile);
+      File configFile = project.getFileSystem().writeToWorkingDirectory(
+          gendarmeConfiguration, GENDARME_FILE);
       // Defines the configuration file
       plugin.setParameter("gendarmeConfigFile", configFile.getAbsolutePath());
-  	}
+    }
   }
 
-  public void configureParameters(MavenPlugin plugin)
-  {
+  public void configureParameters(MavenPlugin plugin) {
     // Nothing yet
   }
 }

@@ -5,15 +5,14 @@ import org.sonar.api.BatchExtension;
 import org.sonar.api.ServerExtension;
 
 /**
- * Implementations of this interfaces have the 
- * responsibility of parsing gendarme xml config files
+ * Implementations of this interfaces have the responsibility of parsing
+ * gendarme xml config files
  * 
  * @author Alexandre Victoor
- *
+ * 
  */
 public interface GendarmeRuleParser extends ServerExtension, BatchExtension {
 
-	public Collection<GendarmeRule> parseRuleConfiguration(
-	    String rawConfiguration);
+  public Collection<GendarmeRule> parseRuleConfiguration(String rawConfiguration);
 
 }

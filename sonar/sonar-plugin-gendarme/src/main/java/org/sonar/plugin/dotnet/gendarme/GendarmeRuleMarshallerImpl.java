@@ -34,7 +34,7 @@ public class GendarmeRuleMarshallerImpl implements GendarmeRuleMarshaller {
 		boolean assemblyRulesMapEmpty = true;
 		for (ActiveRule activeRule : rules) {
 
-			if (priority != null && priority != activeRule.getPriority()) {
+      if (priority != null && priority != activeRule.getPriority()) {
 				continue;
 			}
 

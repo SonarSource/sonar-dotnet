@@ -12,7 +12,7 @@ public class GendarmeRule {
   	return priority;
   }
 
-	public void setPriority(RulePriority priority) {
+  public void setPriority(RulePriority priority) {
   	this.priority = priority;
   }
 

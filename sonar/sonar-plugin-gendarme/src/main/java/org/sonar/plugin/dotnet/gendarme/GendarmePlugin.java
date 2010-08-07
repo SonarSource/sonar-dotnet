@@ -5,17 +5,15 @@ import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
-public class GendarmePlugin implements Plugin
-{
+
+public class GendarmePlugin implements Plugin {
   public static final String KEY = "gendarme";
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that collects the Gendarme check results";
   }
 
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GendarmeRuleParserImpl.class);
     list.add(GendarmeRuleMarshallerImpl.class);
@@ -25,19 +23,16 @@ public class GendarmePlugin implements Plugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return KEY;
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "Gendarme Plugin";
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return getKey();
   }
 }
