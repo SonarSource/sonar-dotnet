@@ -30,36 +30,36 @@ import java.util.List;
  */
 public class DotnetCpdPlugin implements Plugin {
 
-	public static final String	KEY									= "dotnet-cpd";
+  public static final String KEY = "dotnet-cpd";
 
-	// The key which uniquely identifies your plugin among all others Sonar
-	// plugins
-	public String getKey() {
+  // The key which uniquely identifies your plugin among all others Sonar
+  // plugins
+  public String getKey() {
 
-		return KEY;
-	}
+    return KEY;
+  }
 
-	public String getName() {
+  public String getName() {
 
-		return "Dotnet cpd plugin";
-	}
+    return "Dotnet cpd plugin";
+  }
 
-	public String getDescription() {
+  public String getDescription() {
 
-		return "Copy/Paste detector for dotnet projects";
-	}
+    return "Copy/Paste detector for dotnet projects";
+  }
 
-	// This is where you're going to declare all your Sonar extensions
-	public List<Class<? extends Extension>> getExtensions() {
+  // This is where you're going to declare all your Sonar extensions
+  public List<Class<? extends Extension>> getExtensions() {
 
-		List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-		list.add(CpdSensor.class);
-		return list;
-	}
+    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
+    list.add(CpdSensor.class);
+    return list;
+  }
 
-	@Override
-	public String toString() {
+  @Override
+  public String toString() {
 
-		return getKey();
-	}
+    return getKey();
+  }
 }

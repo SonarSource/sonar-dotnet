@@ -34,25 +34,24 @@ import org.sonar.plugin.dotnet.core.CSharp;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 
 public class CsCpdMapping implements CpdMapping {
-	
-	private CsLanguage language = new CsLanguage();
-	private final Project	project;
-	
-	public CsCpdMapping(Project project) {
-		this.project = project;
-	}
-	
 
-	public Resource createResource(File file, List<File> sourceDirs) {
-		return CSharpFile.from(project, file, false);
-	}
+  private CsLanguage language = new CsLanguage();
+  private final Project project;
 
-	public Language getLanguage() {
-		return CSharp.INSTANCE;
-	}
+  public CsCpdMapping(Project project) {
+    this.project = project;
+  }
 
-	public Tokenizer getTokenizer() {
-		return language.getTokenizer();
-	}
+  public Resource createResource(File file, List<File> sourceDirs) {
+    return CSharpFile.from(project, file, false);
+  }
+
+  public Language getLanguage() {
+    return CSharp.INSTANCE;
+  }
+
+  public Tokenizer getTokenizer() {
+    return language.getTokenizer();
+  }
 
 }

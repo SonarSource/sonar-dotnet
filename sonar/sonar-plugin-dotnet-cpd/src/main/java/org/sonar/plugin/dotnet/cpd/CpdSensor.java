@@ -52,103 +52,103 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  */
 public class CpdSensor implements Sensor {
 
-	private final static Logger log = LoggerFactory.getLogger(CpdSensor.class);
+  private final static Logger log = LoggerFactory.getLogger(CpdSensor.class);
 
-	public final static String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.minimumTokens";
-	public final static int CPD_MINIMUM_TOKENS_DEFAULT_VALUE = 50;
+  public final static String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.minimumTokens";
+  public final static int CPD_MINIMUM_TOKENS_DEFAULT_VALUE = 50;
 
-	public CpdSensor() {
+  public CpdSensor() {
 
-		// default empty constructor
-	}
+    // default empty constructor
+  }
 
-	private void saveResults(CPD cpd, CpdMapping mapping, Project project,
-	    SensorContext context) throws DotNetProjectException {
+  private void saveResults(CPD cpd, CpdMapping mapping, Project project,
+      SensorContext context) throws DotNetProjectException {
 
-		VisualStudioSolution solution = VisualUtils.getSolution(project);
-		List<VisualStudioProject> projects = solution.getProjects();
-		List<File> sourceDirs = new ArrayList<File>();
-		for (VisualStudioProject visualStudioProject : projects) {
-			sourceDirs.add(visualStudioProject.getDirectory());
-		}
+    VisualStudioSolution solution = VisualUtils.getSolution(project);
+    List<VisualStudioProject> projects = solution.getProjects();
+    List<File> sourceDirs = new ArrayList<File>();
+    for (VisualStudioProject visualStudioProject : projects) {
+      sourceDirs.add(visualStudioProject.getDirectory());
+    }
 
-		CpdAnalyser cpdAnalyser = new CpdAnalyser(context, mapping, sourceDirs);
-		cpdAnalyser.analyse(cpd.getMatches());
-	}
+    CpdAnalyser cpdAnalyser = new CpdAnalyser(context, mapping, sourceDirs);
+    cpdAnalyser.analyse(cpd.getMatches());
+  }
 
-	public boolean shouldExecuteOnProject(Project project) {
-		String packaging = project.getPackaging();
-		// We only accept the "sln" packaging
-		return "sln".equals(packaging);
-	}
+  public boolean shouldExecuteOnProject(Project project) {
+    String packaging = project.getPackaging();
+    // We only accept the "sln" packaging
+    return "sln".equals(packaging);
+  }
 
-	public void analyse(Project project, SensorContext context) {
+  public void analyse(Project project, SensorContext context) {
 
-		try {
-			CpdMapping mapping = getMapping(project);
-			CPD cpd = executeCPD(project, mapping, project.getFileSystem()
-			    .getSourceCharset());
-			saveResults(cpd, mapping, project, context);
-		} catch (Exception e) {
-			throw new CpdException(e);
-		}
-	}
+    try {
+      CpdMapping mapping = getMapping(project);
+      CPD cpd = executeCPD(project, mapping, project.getFileSystem()
+          .getSourceCharset());
+      saveResults(cpd, mapping, project, context);
+    } catch (Exception e) {
+      throw new CpdException(e);
+    }
+  }
 
-	private CpdMapping getMapping(Project project) {
+  private CpdMapping getMapping(Project project) {
 
-		return new CsCpdMapping(project);
-	}
+    return new CsCpdMapping(project);
+  }
 
-	private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding)
-	    throws IOException, DotNetProjectException {
+  private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding)
+      throws IOException, DotNetProjectException {
 
-		CPD cpd = configureCPD(project, mapping, encoding);
-		cpd.go();
-		return cpd;
+    CPD cpd = configureCPD(project, mapping, encoding);
+    cpd.go();
+    return cpd;
 
-	}
+  }
 
-	private CPD configureCPD(Project project, CpdMapping mapping, Charset encoding)
-	    throws IOException, DotNetProjectException {
+  private CPD configureCPD(Project project, CpdMapping mapping, Charset encoding)
+      throws IOException, DotNetProjectException {
 
-		TokenEntry.clearImages();
-		int minTokens = project.getConfiguration().getInt(
-		    CPD_MINIMUM_TOKENS_PROPERTY, CPD_MINIMUM_TOKENS_DEFAULT_VALUE);
+    TokenEntry.clearImages();
+    int minTokens = project.getConfiguration().getInt(
+        CPD_MINIMUM_TOKENS_PROPERTY, CPD_MINIMUM_TOKENS_DEFAULT_VALUE);
 
-		;
-		CPD cpd = new CPD(minTokens, new CsLanguage());
-		cpd.setEncoding(encoding.name());
-		cpd.add(getCsFiles(project));
-		return cpd;
-	}
+    ;
+    CPD cpd = new CPD(minTokens, new CsLanguage());
+    cpd.setEncoding(encoding.name());
+    cpd.add(getCsFiles(project));
+    return cpd;
+  }
 
-	private List<File> getCsFiles(Project project) throws DotNetProjectException {
+  private List<File> getCsFiles(Project project) throws DotNetProjectException {
 
-		VisualStudioSolution solution = VisualUtils.getSolution(project);
-		List<VisualStudioProject> projects = solution.getProjects();
-		FilenameFilter filter = new CsLanguage().getFileFilter();
+    VisualStudioSolution solution = VisualUtils.getSolution(project);
+    List<VisualStudioProject> projects = solution.getProjects();
+    FilenameFilter filter = new CsLanguage().getFileFilter();
 
-		List<File> csFiles = new ArrayList<File>();
+    List<File> csFiles = new ArrayList<File>();
 
-		for (VisualStudioProject visualStudioProject : projects) {
-			if (visualStudioProject.isTest()) {
-				log.debug("skipping test project " + visualStudioProject.getName());
-			} else {
-				Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
-				for (SourceFile sourceFile : sources) {
-					if (filter.accept(sourceFile.getFile().getParentFile(), sourceFile
-					    .getName())) {
-						csFiles.add(sourceFile.getFile());
-					}
-				}
-			}
-		}
-		return csFiles;
-	}
+    for (VisualStudioProject visualStudioProject : projects) {
+      if (visualStudioProject.isTest()) {
+        log.debug("skipping test project " + visualStudioProject.getName());
+      } else {
+        Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
+        for (SourceFile sourceFile : sources) {
+          if (filter.accept(sourceFile.getFile().getParentFile(),
+              sourceFile.getName())) {
+            csFiles.add(sourceFile.getFile());
+          }
+        }
+      }
+    }
+    return csFiles;
+  }
 
-	public String toString() {
+  public String toString() {
 
-		return getClass().getSimpleName();
-	}
+    return getClass().getSimpleName();
+  }
 
 }

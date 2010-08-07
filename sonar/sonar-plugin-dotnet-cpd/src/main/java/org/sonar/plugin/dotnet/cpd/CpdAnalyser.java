@@ -33,110 +33,129 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.*;
 
 /**
- * A CPD analyzer class 
+ * A CPD analyzer class
+ * 
  * @author Alexandre VICTOOR Apr 6, 2010
  */
 public class CpdAnalyser {
-	private static final Logger	LOG	= LoggerFactory.getLogger(CpdAnalyser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CpdAnalyser.class);
 
-	private SensorContext		context;
-	private CpdMapping			cpdMapping;
-	private List<File>			sourceDirs;
+  private SensorContext context;
+  private CpdMapping cpdMapping;
+  private List<File> sourceDirs;
 
-	public CpdAnalyser(SensorContext context, CpdMapping cpdMapping, List<File> sourceDirs) {
+  public CpdAnalyser(SensorContext context, CpdMapping cpdMapping,
+      List<File> sourceDirs) {
 
-		this.cpdMapping = cpdMapping;
-		this.sourceDirs = sourceDirs;
-		this.context = context;
-	}
+    this.cpdMapping = cpdMapping;
+    this.sourceDirs = sourceDirs;
+    this.context = context;
+  }
 
-	public void analyse(Iterator<Match> matches) {
+  public void analyse(Iterator<Match> matches) {
 
-		Map<Resource, DuplicationsData> duplicationsData = new HashMap<Resource, DuplicationsData>();
-		while (matches.hasNext()) {
-			Match match = matches.next();
-			int duplicatedLines = match.getLineCount();
+    Map<Resource, DuplicationsData> duplicationsData = new HashMap<Resource, DuplicationsData>();
+    while (matches.hasNext()) {
+      Match match = matches.next();
+      int duplicatedLines = match.getLineCount();
 
-			TokenEntry firstMark = match.getFirstMark();
-			String filename1 = firstMark.getTokenSrcID();
-			int line1 = firstMark.getBeginLine();
-			Resource file1 = cpdMapping.createResource(new File(filename1), sourceDirs);
-			if (file1 == null) {
-				LOG.warn("CPD - File not found : {}", filename1);
-				continue;
-			}
+      TokenEntry firstMark = match.getFirstMark();
+      String filename1 = firstMark.getTokenSrcID();
+      int line1 = firstMark.getBeginLine();
+      Resource file1 = cpdMapping.createResource(new File(filename1),
+          sourceDirs);
+      if (file1 == null) {
+        LOG.warn("CPD - File not found : {}", filename1);
+        continue;
+      }
 
-			TokenEntry secondMark = match.getSecondMark();
-			String filename2 = secondMark.getTokenSrcID();
-			int line2 = secondMark.getBeginLine();
-			Resource file2 = cpdMapping.createResource(new File(filename2), sourceDirs);
-			if (file2 == null) {
-				LOG.warn("CPD - File not found : {}", filename2);
-				continue;
-			}
+      TokenEntry secondMark = match.getSecondMark();
+      String filename2 = secondMark.getTokenSrcID();
+      int line2 = secondMark.getBeginLine();
+      Resource file2 = cpdMapping.createResource(new File(filename2),
+          sourceDirs);
+      if (file2 == null) {
+        LOG.warn("CPD - File not found : {}", filename2);
+        continue;
+      }
 
-			processClassMeasure(duplicationsData, file2, line2, file1, line1, duplicatedLines);
-			processClassMeasure(duplicationsData, file1, line1, file2, line2, duplicatedLines);
-		}
+      processClassMeasure(duplicationsData, file2, line2, file1, line1,
+          duplicatedLines);
+      processClassMeasure(duplicationsData, file1, line1, file2, line2,
+          duplicatedLines);
+    }
 
-		for (DuplicationsData data : duplicationsData.values()) {
-			data.saveUsing(context);
-		}
-	}
+    for (DuplicationsData data : duplicationsData.values()) {
+      data.saveUsing(context);
+    }
+  }
 
-	private void processClassMeasure(Map<Resource, DuplicationsData> fileContainer, Resource file, int duplicationStartLine, Resource targetFile, int targetDuplicationStartLine, int duplicatedLines) {
+  private void processClassMeasure(
+      Map<Resource, DuplicationsData> fileContainer, Resource file,
+      int duplicationStartLine, Resource targetFile,
+      int targetDuplicationStartLine, int duplicatedLines) {
 
-		if (file != null && targetFile != null) {
-			DuplicationsData data = fileContainer.get(file);
-			if (data == null) {
-				data = new DuplicationsData(file, context);
-				fileContainer.put(file, data);
-			}
-			data.cumulate(targetFile, (double) targetDuplicationStartLine, (double) duplicationStartLine, (double) duplicatedLines);
-		}
-	}
+    if (file != null && targetFile != null) {
+      DuplicationsData data = fileContainer.get(file);
+      if (data == null) {
+        data = new DuplicationsData(file, context);
+        fileContainer.put(file, data);
+      }
+      data.cumulate(targetFile, (double) targetDuplicationStartLine,
+          (double) duplicationStartLine, (double) duplicatedLines);
+    }
+  }
 
-	private class DuplicationsData {
-		protected double			duplicatedLines;
-		protected double			duplicatedBlocks;
-		protected Resource			resource;
-		private SensorContext		context;
-		private List<StringBuilder>	duplicationXMLEntries	= new ArrayList<StringBuilder>();
+  private class DuplicationsData {
+    protected double duplicatedLines;
+    protected double duplicatedBlocks;
+    protected Resource resource;
+    private SensorContext context;
+    private List<StringBuilder> duplicationXMLEntries = new ArrayList<StringBuilder>();
 
-		private DuplicationsData(Resource resource, SensorContext context) {
+    private DuplicationsData(Resource resource, SensorContext context) {
 
-			this.context = context;
-			this.resource = resource;
-		}
+      this.context = context;
+      this.resource = resource;
+    }
 
-		protected void cumulate(Resource targetResource, Double targetDuplicationStartLine, Double duplicationStartLine, Double duplicatedLines) {
+    protected void cumulate(Resource targetResource,
+        Double targetDuplicationStartLine, Double duplicationStartLine,
+        Double duplicatedLines) {
 
-			StringBuilder xml = new StringBuilder();
-			xml.append("<duplication lines=\"").append(duplicatedLines.intValue()).append("\" start=\"").append(duplicationStartLine.intValue()).append("\" target-start=\"").append(targetDuplicationStartLine.intValue()).append(
-					"\" target-resource=\"").append(context.saveResource(targetResource)).append("\"/>");
+      StringBuilder xml = new StringBuilder();
+      xml.append("<duplication lines=\"").append(duplicatedLines.intValue())
+          .append("\" start=\"").append(duplicationStartLine.intValue())
+          .append("\" target-start=\"")
+          .append(targetDuplicationStartLine.intValue())
+          .append("\" target-resource=\"")
+          .append(context.saveResource(targetResource)).append("\"/>");
 
-			duplicationXMLEntries.add(xml);
+      duplicationXMLEntries.add(xml);
 
-			this.duplicatedLines += duplicatedLines;
-			this.duplicatedBlocks++;
-		}
+      this.duplicatedLines += duplicatedLines;
+      this.duplicatedBlocks++;
+    }
 
-		protected void saveUsing(SensorContext context) {
+    protected void saveUsing(SensorContext context) {
 
-			context.saveMeasure(resource, CoreMetrics.DUPLICATED_FILES, 1d);
-			context.saveMeasure(resource, CoreMetrics.DUPLICATED_LINES, duplicatedLines);
-			context.saveMeasure(resource, CoreMetrics.DUPLICATED_BLOCKS, duplicatedBlocks);
-			context.saveMeasure(resource, new Measure(CoreMetrics.DUPLICATIONS_DATA, getDuplicationXMLData()));
-		}
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_FILES, 1d);
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_LINES,
+          duplicatedLines);
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_BLOCKS,
+          duplicatedBlocks);
+      context.saveMeasure(resource, new Measure(CoreMetrics.DUPLICATIONS_DATA,
+          getDuplicationXMLData()));
+    }
 
-		private String getDuplicationXMLData() {
+    private String getDuplicationXMLData() {
 
-			StringBuilder duplicationXML = new StringBuilder("<duplications>");
-			for (StringBuilder xmlEntry : duplicationXMLEntries) {
-				duplicationXML.append(xmlEntry);
-			}
-			duplicationXML.append("</duplications>");
-			return duplicationXML.toString();
-		}
-	}
+      StringBuilder duplicationXML = new StringBuilder("<duplications>");
+      for (StringBuilder xmlEntry : duplicationXMLEntries) {
+        duplicationXML.append(xmlEntry);
+      }
+      duplicationXML.append("</duplications>");
+      return duplicationXML.toString();
+    }
+  }
 }

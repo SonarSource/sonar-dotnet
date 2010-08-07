@@ -22,25 +22,25 @@ package org.sonar.plugin.dotnet.cpd;
 
 public class CpdException extends RuntimeException {
 
-	private static final long	serialVersionUID	= -4297509494429765570L;
+  private static final long serialVersionUID = -4297509494429765570L;
 
-	public CpdException() {
+  public CpdException() {
 
-		super();
-	}
+    super();
+  }
 
-	public CpdException(String s) {
+  public CpdException(String s) {
 
-		super(s);
-	}
+    super(s);
+  }
 
-	public CpdException(String s, Throwable throwable) {
+  public CpdException(String s, Throwable throwable) {
 
-		super(s, throwable);
-	}
+    super(s, throwable);
+  }
 
-	public CpdException(Throwable throwable) {
+  public CpdException(Throwable throwable) {
 
-		super(throwable);
-	}
+    super(throwable);
+  }
 }
