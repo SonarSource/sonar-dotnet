@@ -35,29 +35,21 @@ import org.sonar.api.measures.Metrics;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class CoverageMetrics
-  implements Metrics
-{
+public class CoverageMetrics implements Metrics {
   /**
    * The number of effective lines of code
    */
   public static final Metric ELOC = new Metric("eloc",
-                                               "Effective lines of code",
-                                               "The number of lines of code with statements",
-                                               Metric.ValueType.INT,
-                                               -1,
-                                               false,
-                                               CoreMetrics.DOMAIN_SIZE);
+      "Effective lines of code", "The number of lines of code with statements",
+      Metric.ValueType.INT, -1, false, CoreMetrics.DOMAIN_SIZE);
 
   /**
    * Constructs a @link{CovergeMetrics}.
    */
-  public CoverageMetrics()
-  {
+  public CoverageMetrics() {
   }
 
-  public List<Metric> getMetrics()
-  {
+  public List<Metric> getMetrics() {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(ELOC);
     return metrics;

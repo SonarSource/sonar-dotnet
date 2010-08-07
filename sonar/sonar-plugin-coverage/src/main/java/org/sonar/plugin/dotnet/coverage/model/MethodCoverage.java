@@ -31,16 +31,14 @@ import java.util.List;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class MethodCoverage
-{
-  private String             name;
+public class MethodCoverage {
+  private String name;
   private List<LineCoverage> lines;
 
   /**
    * Constructs a @link{MethodCoverage}.
    */
-  public MethodCoverage()
-  {
+  public MethodCoverage() {
     super();
     lines = new ArrayList<LineCoverage>();
   }
@@ -50,18 +48,17 @@ public class MethodCoverage
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
@@ -70,8 +67,7 @@ public class MethodCoverage
    * 
    * @param lineCoverage
    */
-  public void addLine(LineCoverage lineCoverage)
-  {
+  public void addLine(LineCoverage lineCoverage) {
     lines.add(lineCoverage);
   }
 
@@ -80,18 +76,17 @@ public class MethodCoverage
    * 
    * @return The lines to return.
    */
-  public List<LineCoverage> getLines()
-  {
+  public List<LineCoverage> getLines() {
     return this.lines;
   }
 
   /**
    * Sets the lines.
    * 
-   * @param lines The lines to set.
+   * @param lines
+   *          The lines to set.
    */
-  public void setLines(List<LineCoverage> lines)
-  {
+  public void setLines(List<LineCoverage> lines) {
     this.lines = lines;
   }
 

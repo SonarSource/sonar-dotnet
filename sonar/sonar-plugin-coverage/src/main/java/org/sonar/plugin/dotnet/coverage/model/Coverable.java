@@ -26,18 +26,17 @@ package org.sonar.plugin.dotnet.coverage.model;
 
 /**
  * A Coverable.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public abstract class Coverable
-{
+public abstract class Coverable {
   protected int countLines;
   protected int coveredLines;
 
   /**
    * Constructs a @link{Coverable}.
    */
-  public Coverable()
-  {
+  public Coverable() {
   }
 
   /**
@@ -45,8 +44,7 @@ public abstract class Coverable
    * 
    * @return The countLines to return.
    */
-  public int getCountLines()
-  {
+  public int getCountLines() {
     return this.countLines;
   }
 
@@ -55,22 +53,20 @@ public abstract class Coverable
    * 
    * @return The coveredLines to return.
    */
-  public int getCoveredLines()
-  {
+  public int getCoveredLines() {
     return this.coveredLines;
   }
 
   /**
    * Gets the coverage ratio.
+   * 
    * @return the coverage ratio
    */
-  public double getCoverage()
-  {
-    if (countLines== 0)
-    {
+  public double getCoverage() {
+    if (countLines == 0) {
       return 1.;
     }
-    return Math.round(((double) coveredLines / (double) countLines) * 100)*0.01;
+    return Math.round(((double) coveredLines / (double) countLines) * 100) * 0.01;
   }
 
   /**

@@ -31,16 +31,14 @@ import java.util.HashMap;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class FileCoverage extends CoverableSource
-{
+public class FileCoverage extends CoverableSource {
   private final File file;
   private String assemblyName;
-  
+
   /**
    * Constructs a @link{FileCoverage}.
    */
-  public FileCoverage(File file)
-  {
+  public FileCoverage(File file) {
     this.file = file;
     this.lines = new HashMap<Integer, SourceLine>();
   }
@@ -50,15 +48,15 @@ public class FileCoverage extends CoverableSource
    * 
    * @return The file to return.
    */
-  public File getFile()
-  {
+  public File getFile() {
     return this.file;
   }
 
   @Override
-  public String toString()
-  {
-    return "File(name=" + file.getName() + ", assembly=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + countLines + ", covered=" + coveredLines + ")";
+  public String toString() {
+    return "File(name=" + file.getName() + ", assembly=" + assemblyName
+        + ", coverage=" + getCoverage() + ", lines=" + countLines
+        + ", covered=" + coveredLines + ")";
   }
 
   /**
@@ -66,19 +64,17 @@ public class FileCoverage extends CoverableSource
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
-  
   /**
    * Sets the assemblyName.
    * 
-   * @param assemblyName The assemblyName to set.
+   * @param assemblyName
+   *          The assemblyName to set.
    */
-  public void setAssemblyName(String assemblyName)
-  {
+  public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
   }
 }

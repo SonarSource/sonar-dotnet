@@ -32,33 +32,29 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class CoveragePluginHandler extends AbstractDotNetMavenPluginHandler
-{
+public class CoveragePluginHandler extends AbstractDotNetMavenPluginHandler {
 
   /**
    * Constructs a @link{PartCoverPluginHandler}.
    */
-  public CoveragePluginHandler()
-  {
+  public CoveragePluginHandler() {
   }
 
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
+  public void configure(Project project, MavenPlugin plugin) {
     super.configure(project, plugin);
-    
+
     // We ignore the test failures in Sonar.
     plugin.setParameter("testFailureIgnore", "true");
   }
 
   /**
    * Launches the coverage goal.
+   * 
    * @return
    */
-  public String[] getGoals()
-  {
-    return new String[] { "coverage"
-    };
+  public String[] getGoals() {
+    return new String[] { "coverage" };
   }
 
 }

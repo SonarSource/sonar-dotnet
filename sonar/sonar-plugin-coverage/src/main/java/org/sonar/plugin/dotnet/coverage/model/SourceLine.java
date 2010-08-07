@@ -26,26 +26,23 @@ package org.sonar.plugin.dotnet.coverage.model;
 
 /**
  * A FileLine.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class SourceLine
-{
+public class SourceLine {
   private final int lineNumber;
   private int countVisits;
-  
+
   /**
    * Constructs a @link{FileLine}.
    */
-  public SourceLine(int lineNumber)
-  {
+  public SourceLine(int lineNumber) {
     this.lineNumber = lineNumber;
   }
-  
-  public void update(CoveragePoint point)
-  {
+
+  public void update(CoveragePoint point) {
     int pointVisits = point.getCountVisits();
-    if (pointVisits > countVisits)
-    {
+    if (pointVisits > countVisits) {
       countVisits = pointVisits;
     }
   }
@@ -55,19 +52,16 @@ public class SourceLine
    * 
    * @return The lineNumber to return.
    */
-  public int getLineNumber()
-  {
+  public int getLineNumber() {
     return this.lineNumber;
   }
 
-  
   /**
    * Returns the countVisits.
    * 
    * @return The countVisits to return.
    */
-  public int getCountVisits()
-  {
+  public int getCountVisits() {
     return this.countVisits;
   }
 }

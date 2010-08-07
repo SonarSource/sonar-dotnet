@@ -28,19 +28,18 @@ import java.io.File;
 
 /**
  * The coverage data for a class.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class ClassCoverage extends CoverableSource
-{
+public class ClassCoverage extends CoverableSource {
   private File file;
   private String assemblyName;
   private String fullClassName;
-   
+
   /**
    * Constructs a @link{ClassCoverage}.
    */
-  public ClassCoverage()
-  {
+  public ClassCoverage() {
   }
 
   /**
@@ -48,70 +47,62 @@ public class ClassCoverage extends CoverableSource
    * 
    * @return The file to return.
    */
-  public File getFile()
-  {
+  public File getFile() {
     return this.file;
   }
 
-  
   /**
    * Sets the file.
    * 
-   * @param file The file to set.
+   * @param file
+   *          The file to set.
    */
-  public void setFile(File file)
-  {
+  public void setFile(File file) {
     this.file = file;
   }
 
-  
   /**
    * Returns the assemblyName.
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
-  
   /**
    * Sets the assemblyName.
    * 
-   * @param assemblyName The assemblyName to set.
+   * @param assemblyName
+   *          The assemblyName to set.
    */
-  public void setAssemblyName(String assemblyName)
-  {
+  public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
   }
 
-  
   /**
    * Returns the fullClassName.
    * 
    * @return The fullClassName to return.
    */
-  public String getFullClassName()
-  {
+  public String getFullClassName() {
     return this.fullClassName;
   }
 
-  
   /**
    * Sets the fullClassName.
    * 
-   * @param fullClassName The fullClassName to set.
+   * @param fullClassName
+   *          The fullClassName to set.
    */
-  public void setFullClassName(String fullClassName)
-  {
+  public void setFullClassName(String fullClassName) {
     this.fullClassName = fullClassName;
   }
- 
+
   @Override
-  public String toString()
-  {
-    return "Class(name=" + fullClassName+ ", coverage=" + getCoverage() +", lines=" + countLines + ", covered=" + coveredLines + ")";
+  public String toString() {
+    return "Class(name=" + fullClassName + ", coverage=" + getCoverage()
+        + ", lines=" + countLines + ", covered=" + coveredLines + ")";
   }
-  
+
 }

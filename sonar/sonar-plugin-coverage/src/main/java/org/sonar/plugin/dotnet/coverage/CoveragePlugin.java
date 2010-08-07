@@ -31,32 +31,26 @@ import org.sonar.api.Plugin;
 
 /**
  * The plugin that handles the code coverage with PartCover or NCover.
+ * 
  * @author Jose CHILLAN Feb 18, 2010
  */
-public class CoveragePlugin
-  implements Plugin
-{
+public class CoveragePlugin implements Plugin {
 
   /**
    * The plugin key.
    */
   public static final String KEY = "coverage";
 
-  public CoveragePlugin()
-  {
-  }
-
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that compute the code coverage in .Net with PartCover or NCover";
   }
 
   /**
    * The extentions required by the plugin.
+   * 
    * @return
    */
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(CoverageSensor.class);
     list.add(CoverageMetrics.class);
@@ -65,19 +59,16 @@ public class CoveragePlugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return KEY;
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "Coverage plugin";
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return getKey();
   }
 }

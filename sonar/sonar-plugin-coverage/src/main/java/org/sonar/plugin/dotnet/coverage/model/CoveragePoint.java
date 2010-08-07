@@ -28,8 +28,7 @@ package org.sonar.plugin.dotnet.coverage.model;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class CoveragePoint
-{
+public class CoveragePoint {
   private int countVisits;
   private int startLine;
   private int endLine;
@@ -37,8 +36,7 @@ public class CoveragePoint
   /**
    * Constructs a @link{Point}.
    */
-  public CoveragePoint()
-  {
+  public CoveragePoint() {
   }
 
   /**
@@ -46,18 +44,17 @@ public class CoveragePoint
    * 
    * @return The countVisits to return.
    */
-  public int getCountVisits()
-  {
+  public int getCountVisits() {
     return this.countVisits;
   }
 
   /**
    * Sets the countVisits.
    * 
-   * @param countVisits The countVisits to set.
+   * @param countVisits
+   *          The countVisits to set.
    */
-  public void setCountVisits(int countVisits)
-  {
+  public void setCountVisits(int countVisits) {
     this.countVisits = countVisits;
   }
 
@@ -66,18 +63,17 @@ public class CoveragePoint
    * 
    * @return The startLine to return.
    */
-  public int getStartLine()
-  {
+  public int getStartLine() {
     return this.startLine;
   }
 
   /**
    * Sets the startLine.
    * 
-   * @param startLine The startLine to set.
+   * @param startLine
+   *          The startLine to set.
    */
-  public void setStartLine(int startLine)
-  {
+  public void setStartLine(int startLine) {
     this.startLine = startLine;
   }
 
@@ -86,24 +82,23 @@ public class CoveragePoint
    * 
    * @return The endLine to return.
    */
-  public int getEndLine()
-  {
+  public int getEndLine() {
     return this.endLine;
   }
 
   /**
    * Sets the endLine.
    * 
-   * @param endLine The endLine to set.
+   * @param endLine
+   *          The endLine to set.
    */
-  public void setEndLine(int endLine)
-  {
+  public void setEndLine(int endLine) {
     this.endLine = endLine;
   }
 
   @Override
-  public String toString()
-  {
-    return "Point(start-line=" + startLine + ", end-line=" + endLine + ", visits=" + countVisits +")";
+  public String toString() {
+    return "Point(start-line=" + startLine + ", end-line=" + endLine
+        + ", visits=" + countVisits + ")";
   }
 }

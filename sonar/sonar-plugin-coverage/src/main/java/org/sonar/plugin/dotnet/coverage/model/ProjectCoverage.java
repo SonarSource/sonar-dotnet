@@ -32,66 +32,61 @@ import java.util.Map;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class ProjectCoverage extends Coverable
-{
+public class ProjectCoverage extends Coverable {
   private String assemblyName;
   private Map<File, FileCoverage> files;
 
-  
   /**
    * Constructs a @link{ProjectCoverage}.
    */
-  public ProjectCoverage()
-  {
+  public ProjectCoverage() {
     this.files = new HashMap<File, FileCoverage>();
   }
 
   /**
    * Adds a class coverage in the project
+   * 
    * @param classCoverage
    */
-  public void addFile(FileCoverage fileCoverage)
-  {
+  public void addFile(FileCoverage fileCoverage) {
     File file = fileCoverage.getFile();
     files.put(file, fileCoverage);
   }
+
   /**
    * Returns the assemblyName.
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
   /**
    * Sets the assemblyName.
    * 
-   * @param assemblyName The assemblyName to set.
+   * @param assemblyName
+   *          The assemblyName to set.
    */
-  public void setAssemblyName(String assemblyName)
-  {
+  public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
   }
-  
+
   /**
    * Summarizes the coverage
    */
   @Override
-  public void summarize()
-  {
-    for (FileCoverage fileCoverage : files.values())
-    {
+  public void summarize() {
+    for (FileCoverage fileCoverage : files.values()) {
       countLines += fileCoverage.getCountLines();
       coveredLines += fileCoverage.getCoveredLines();
     }
   }
-  
+
   @Override
-  public String toString()
-  {
-    return "Project(name=" + assemblyName+ ", coverage=" + getCoverage() +", lines=" + countLines + ", covered=" + coveredLines + ")";
+  public String toString() {
+    return "Project(name=" + assemblyName + ", coverage=" + getCoverage()
+        + ", lines=" + countLines + ", covered=" + coveredLines + ")";
   }
-  
+
 }

@@ -47,28 +47,28 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- * A parser for the PartCover XML result file. It supports both version 2.2 and 2.3 of
- * part cover reports that have some differences with elements first letter's case.
+ * A parser for the PartCover XML result file. It supports both version 2.2 and
+ * 2.3 of part cover reports that have some differences with elements first
+ * letter's case.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class CoverageResultParser extends AbstractXmlParser
-{
+public class CoverageResultParser extends AbstractXmlParser {
   /**
    * Generates the logger.
    */
-  private final static Logger log = LoggerFactory.getLogger(CoverageResultParser.class);
-  private final Map<Integer, FileCoverage>   sourceFiles;
+  private final static Logger log = LoggerFactory
+      .getLogger(CoverageResultParser.class);
+  private final Map<Integer, FileCoverage> sourceFiles;
   private final Map<String, ProjectCoverage> projects;
-  private final List<ClassCoverage>          classes;
+  private final List<ClassCoverage> classes;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy strategy;
-  
+
   /**
    * Constructs a @link{PartCoverResultParser}.
    */
-  public CoverageResultParser()
-  {
+  public CoverageResultParser() {
     sourceFiles = new HashMap<Integer, FileCoverage>();
     classes = new ArrayList<ClassCoverage>();
     projects = new HashMap<String, ProjectCoverage>();
@@ -86,30 +86,24 @@ public class CoverageResultParser extends AbstractXmlParser
    * 
    * @param url
    */
-  public void parse(URL url)
-  {
-    try
-    {
+  public void parse(URL url) {
+    try {
       // First define shte version
       defineVersion(url);
-      
+
       // First, all the indexed files are extracted
       extractFiles(url);
 
       // Then we process the coverage details
       processDetail(url);
       // We summarize the files
-      for (FileCoverage fileCoverage : sourceFiles.values())
-      {
+      for (FileCoverage fileCoverage : sourceFiles.values()) {
         fileCoverage.summarize();
       }
-      for (ProjectCoverage project : projects.values())
-      {
+      for (ProjectCoverage project : projects.values()) {
         project.summarize();
       }
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       throw new SonarPluginException("Could not parse the result file", e);
     }
   }
@@ -117,14 +111,14 @@ public class CoverageResultParser extends AbstractXmlParser
   /**
    * Processes the details of the coverage.
    * 
-   * @param file the coverage file report
+   * @param file
+   *          the coverage file report
    */
-  private void processDetail(URL file)
-  {
+  private void processDetail(URL file) {
     // We take the coverage in each method
-    List<Element> methodElements = extractElements(file, strategy.getMethodPath());
-    for (Element methodElement : methodElements)
-    {
+    List<Element> methodElements = extractElements(file,
+        strategy.getMethodPath());
+    for (Element methodElement : methodElements) {
       processMethod(methodElement);
     }
   }
@@ -134,65 +128,60 @@ public class CoverageResultParser extends AbstractXmlParser
    * 
    * @param methodElement
    */
-  private void processMethod(Element methodElement)
-  {
-    NodeList nodes = methodElement.getElementsByTagName(strategy.getPointElement());
+  private void processMethod(Element methodElement) {
+    NodeList nodes = methodElement.getElementsByTagName(strategy
+        .getPointElement());
     List<Element> elements = convertToList(nodes);
     // First we retrieve the file
     FileCoverage fileCoverage = null;
     // First pass for to retrieve the file
-    for (Element pointElement : elements)
-    {
-      if (pointElement.hasAttribute(strategy.getFileIdPointAttribute()))
-      {
-        String fileId = pointElement.getAttribute(strategy.getFileIdPointAttribute());
+    for (Element pointElement : elements) {
+      if (pointElement.hasAttribute(strategy.getFileIdPointAttribute())) {
+        String fileId = pointElement.getAttribute(strategy
+            .getFileIdPointAttribute());
         Integer id = Integer.valueOf(fileId);
         fileCoverage = this.sourceFiles.get(id);
       }
-      if (fileCoverage != null)
-      {
+      if (fileCoverage != null) {
         // The file is found : we skip the remaining
         break;
       }
     }
 
-    if (fileCoverage == null)
-    {
+    if (fileCoverage == null) {
       // No file associated (this should never occur for a consistent result)
       return;
     }
 
     // We extract the assembly
     String assemblyName = strategy.findAssemblyName(methodElement);
-  
+
     ProjectCoverage project = projects.get(assemblyName);
-    if (project == null)
-    {
+    if (project == null) {
       project = new ProjectCoverage();
       project.setAssemblyName(assemblyName);
       projects.put(assemblyName, project);
     }
 
     // We define the assembly name on the file, and add it in the project
-    if (StringUtils.isBlank(fileCoverage.getAssemblyName()))
-    {
+    if (StringUtils.isBlank(fileCoverage.getAssemblyName())) {
       fileCoverage.setAssemblyName(assemblyName);
       project.addFile(fileCoverage);
     }
 
     // Second pass to populate the file
-    for (Element pointElement : elements)
-    {
-      if (!pointElement.hasAttribute(strategy.getStartLinePointAttribute()))
-      {
+    for (Element pointElement : elements) {
+      if (!pointElement.hasAttribute(strategy.getStartLinePointAttribute())) {
         // We skip the elements with no line
         continue;
       }
-      int countVisits = getIntAttribute(pointElement, strategy.getCountVisitsPointAttribute());
-      int startLine = getIntAttribute(pointElement,  strategy.getStartLinePointAttribute());
-      int endLine = getIntAttribute(pointElement, strategy.getEndLinePointAttribute());
-      if (endLine == 0)
-      {
+      int countVisits = getIntAttribute(pointElement,
+          strategy.getCountVisitsPointAttribute());
+      int startLine = getIntAttribute(pointElement,
+          strategy.getStartLinePointAttribute());
+      int endLine = getIntAttribute(pointElement,
+          strategy.getEndLinePointAttribute());
+      if (endLine == 0) {
         endLine = startLine;
       }
       CoveragePoint point = new CoveragePoint();
@@ -201,60 +190,59 @@ public class CoverageResultParser extends AbstractXmlParser
       point.setEndLine(endLine);
 
       // We add the coverage to the file
-      if (fileCoverage != null)
-      {
+      if (fileCoverage != null) {
         fileCoverage.addPoint(point);
       }
     }
   }
 
   /**
-   * This method is necessary due to a silly modification of the schema between partcover 2.2 and 2.3, for which
-   * elements start now with an uppercase letter.
+   * This method is necessary due to a silly modification of the schema between
+   * partcover 2.2 and 2.3, for which elements start now with an uppercase
+   * letter.
+   * 
    * @param file
    */
-  private void defineVersion(URL file)
-  {
+  private void defineVersion(URL file) {
     List<Element> elements = extractElements(file, "/*");
     Element root = elements.get(0);
-    Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies.iterator();
-    while (strategyIterator.hasNext() && strategy==null) {
-	    AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator.next();
-	    if (strategy.isCompatible(root)) {
-	    	this.strategy = strategy;
-	    }
+    Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies
+        .iterator();
+    while (strategyIterator.hasNext() && strategy == null) {
+      AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator
+          .next();
+      if (strategy.isCompatible(root)) {
+        this.strategy = strategy;
+      }
     }
-    if (strategy==null) {
-    	log.warn("XML coverage format unknown, using default strategy");
-    	this.strategy = parsingStrategies.get(0);
+    if (strategy == null) {
+      log.warn("XML coverage format unknown, using default strategy");
+      this.strategy = parsingStrategies.get(0);
     }
-    
+
   }
+
   /**
    * Extracts the files from the file
    * 
-   * @param the url of the file
+   * @param the
+   *          url of the file
    */
 
-  private void extractFiles(URL file)
-  {
+  private void extractFiles(URL file) {
     List<Element> elements = extractElements(file, strategy.getFilePath());
-    for (Element fileElement : elements)
-    {
+    for (Element fileElement : elements) {
       String idStr = fileElement.getAttribute("id");
       Integer id = Integer.valueOf(idStr);
       String filePath = fileElement.getAttribute("url");
       File sourceFile;
-      try
-      {
+      try {
         sourceFile = new File(filePath).getCanonicalFile();
         FileCoverage fileCoverage = new FileCoverage(sourceFile);
         sourceFiles.put(id, fileCoverage);
-      }
-      catch (IOException e)
-      {
+      } catch (IOException e) {
         // We just skip the file
-      	log.debug("bad url", e);
+        log.debug("bad url", e);
       }
     }
   }
@@ -264,8 +252,7 @@ public class CoverageResultParser extends AbstractXmlParser
    * 
    * @return The classes to return.
    */
-  public List<ClassCoverage> getClasses()
-  {
+  public List<ClassCoverage> getClasses() {
     return this.classes;
   }
 
@@ -274,8 +261,7 @@ public class CoverageResultParser extends AbstractXmlParser
    * 
    * @return
    */
-  public List<FileCoverage> getFiles()
-  {
+  public List<FileCoverage> getFiles() {
     return new ArrayList<FileCoverage>(sourceFiles.values());
   }
 
@@ -284,8 +270,7 @@ public class CoverageResultParser extends AbstractXmlParser
    * 
    * @return the project coverage
    */
-  public List<ProjectCoverage> getProjects()
-  {
+  public List<ProjectCoverage> getProjects() {
     return new ArrayList<ProjectCoverage>(projects.values());
   }
 }

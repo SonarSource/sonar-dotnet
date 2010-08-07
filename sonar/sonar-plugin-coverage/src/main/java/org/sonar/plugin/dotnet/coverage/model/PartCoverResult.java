@@ -29,32 +29,30 @@ import java.util.List;
 
 /**
  * A PartCover result.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class PartCoverResult
-{
+public class PartCoverResult {
   private List<ProjectCoverage> projects;
-  
+
   /**
    * Constructs a @link{PartCoverResult}.
    */
-  public PartCoverResult()
-  {
+  public PartCoverResult() {
     projects = new ArrayList<ProjectCoverage>();
   }
 
-  public void addProject(ProjectCoverage project)
-  {
+  public void addProject(ProjectCoverage project) {
     projects.add(project);
   }
+
   /**
    * Returns the projects.
    * 
    * @return The projects to return.
    */
-  public List<ProjectCoverage> getProjects()
-  {
+  public List<ProjectCoverage> getProjects() {
     return this.projects;
   }
-  
+
 }

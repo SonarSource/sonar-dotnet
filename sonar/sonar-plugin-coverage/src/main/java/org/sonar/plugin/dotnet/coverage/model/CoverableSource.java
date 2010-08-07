@@ -29,34 +29,32 @@ import java.util.Map;
 
 /**
  * A Coverable object (mainly a class or file)
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class CoverableSource extends Coverable
-{
+public class CoverableSource extends Coverable {
 
   protected Map<Integer, SourceLine> lines;
+
   /**
    * Constructs a @link{Coverable}.
    */
-  public CoverableSource()
-  {
+  public CoverableSource() {
     lines = new HashMap<Integer, SourceLine>();
   }
 
   /**
    * Adds a line coverage.
+   * 
    * @param lineCoverage
    */
-  public void addPoint(CoveragePoint point)
-  {
+  public void addPoint(CoveragePoint point) {
     int startLine = point.getStartLine();
     int endLine = point.getStartLine();
-    for(int idx = startLine; idx <= endLine; idx++)
-    {
+    for (int idx = startLine; idx <= endLine; idx++) {
       // We add a point for each line
       SourceLine line = lines.get(startLine);
-      if (line == null)
-      {
+      if (line == null) {
         line = new SourceLine(idx);
         lines.put(idx, line);
       }
@@ -68,27 +66,22 @@ public class CoverableSource extends Coverable
    * Summarize the results
    */
   @Override
-  public void summarize()
-  {
+  public void summarize() {
     countLines = lines.size();
     coveredLines = 0;
-    for (SourceLine line : lines.values())
-    {
-      if (line.getCountVisits() > 0)
-      {
+    for (SourceLine line : lines.values()) {
+      if (line.getCountVisits() > 0) {
         coveredLines++;
       }
     }
   }
 
-  
   /**
    * Returns the lines.
    * 
    * @return The lines to return.
    */
-  public Map<Integer, SourceLine> getLines()
-  {
+  public Map<Integer, SourceLine> getLines() {
     return this.lines;
   }
 }

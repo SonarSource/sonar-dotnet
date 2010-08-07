@@ -26,63 +26,55 @@ package org.sonar.plugin.dotnet.coverage.model;
 
 /**
  * Coverage results for a line
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class LineCoverage
-{
+public class LineCoverage {
   private int lineNumber;
   private int visit;
-  
+
   /**
    * Constructs a @link{LineCoverage}.
    */
-  public LineCoverage()
-  {
+  public LineCoverage() {
   }
 
-  
   /**
    * Returns the lineNumber.
    * 
    * @return The lineNumber to return.
    */
-  public int getLineNumber()
-  {
+  public int getLineNumber() {
     return this.lineNumber;
   }
 
-  
   /**
    * Sets the lineNumber.
    * 
-   * @param lineNumber The lineNumber to set.
+   * @param lineNumber
+   *          The lineNumber to set.
    */
-  public void setLineNumber(int lineNumber)
-  {
+  public void setLineNumber(int lineNumber) {
     this.lineNumber = lineNumber;
   }
 
-  
   /**
    * Returns the visit.
    * 
    * @return The visit to return.
    */
-  public int getVisit()
-  {
+  public int getVisit() {
     return this.visit;
   }
 
-  
   /**
    * Sets the visit.
    * 
-   * @param visit The visit to set.
+   * @param visit
+   *          The visit to set.
    */
-  public void setVisit(int visit)
-  {
+  public void setVisit(int visit) {
     this.visit = visit;
   }
-  
-  
+
 }
