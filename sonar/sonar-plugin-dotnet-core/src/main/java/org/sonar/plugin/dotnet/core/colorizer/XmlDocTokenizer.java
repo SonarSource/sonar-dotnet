@@ -4,8 +4,8 @@ import org.sonar.colorizer.InlineDocTokenizer;
 
 public class XmlDocTokenizer extends InlineDocTokenizer {
 
-	public XmlDocTokenizer(String tagBefore, String tagAfter) {
-		super("///", tagBefore, tagAfter);
-	}
+  public XmlDocTokenizer(String tagBefore, String tagAfter) {
+    super("///", tagBefore, tagAfter);
+  }
 
 }

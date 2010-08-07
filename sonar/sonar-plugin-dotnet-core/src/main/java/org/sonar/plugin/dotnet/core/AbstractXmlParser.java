@@ -45,16 +45,14 @@ import org.xml.sax.InputSource;
  * 
  * @author Jose CHILLAN Jun 4, 2009
  */
-public class AbstractXmlParser
-{
+public class AbstractXmlParser {
   protected XPathFactory factory;
-  protected XPath        xpath;
+  protected XPath xpath;
 
   /**
    * Constructs a @link{AbstractXmlParser}.
    */
-  public AbstractXmlParser()
-  {
+  public AbstractXmlParser() {
     factory = XPathFactory.newInstance();
     xpath = factory.newXPath();
   }
@@ -62,8 +60,7 @@ public class AbstractXmlParser
   /**
    * Constructs a @link{AbstractXmlParser}.
    */
-  public AbstractXmlParser(String prefix, String namespace)
-  {
+  public AbstractXmlParser(String prefix, String namespace) {
     factory = XPathFactory.newInstance();
     xpath = factory.newXPath();
     xpath.setNamespaceContext(new DefaultNamespaceContext(prefix, namespace));
@@ -72,24 +69,22 @@ public class AbstractXmlParser
   /**
    * Gets the direct attribute of an element as an integer.
    * 
-   * @param element the element whose attribute will be read
-   * @param attributeName the name of the attribute
+   * @param element
+   *          the element whose attribute will be read
+   * @param attributeName
+   *          the name of the attribute
    * @return the attribute's value, or 0 if not defined
    */
-  public int getIntAttribute(Element element, String attributeName)
-  {
+  public int getIntAttribute(Element element, String attributeName) {
     String value = getAttribute(element, attributeName);
     int result = 0;
-    try
-    {
-      if (value != null)
-      {
-        // We need a double here since source monitor has sometime a strange behaviour
+    try {
+      if (value != null) {
+        // We need a double here since source monitor has sometime a strange
+        // behaviour
         result = (int) Double.parseDouble(value);
       }
-    }
-    catch (NumberFormatException nfe)
-    {
+    } catch (NumberFormatException nfe) {
       // Nothing
     }
     return result;
@@ -102,11 +97,9 @@ public class AbstractXmlParser
    * @param name
    * @return the sub-element or <code>null</code> if their if none
    */
-  public Element getUniqueSubElement(Element element, String name)
-  {
+  public Element getUniqueSubElement(Element element, String name) {
     NodeList subElements = element.getElementsByTagName(name);
-    if (subElements.getLength() == 0)
-    {
+    if (subElements.getLength() == 0) {
       return null;
     }
     Element result = (Element) subElements.item(0);
@@ -120,19 +113,14 @@ public class AbstractXmlParser
    * @param attributeName
    * @return
    */
-  public double getDoubleAttribute(Element element, String attributeName)
-  {
+  public double getDoubleAttribute(Element element, String attributeName) {
     String value = getAttribute(element, attributeName);
     double result = 0;
-    try
-    {
-      if (value != null)
-      {
+    try {
+      if (value != null) {
         result = Double.parseDouble(value);
       }
-    }
-    catch (NumberFormatException nfe)
-    {
+    } catch (NumberFormatException nfe) {
       // Nothing
     }
     return result;
@@ -141,12 +129,12 @@ public class AbstractXmlParser
   /**
    * Reads an attribute defined by a XPath.
    * 
-   * @param element the element from this the value will be extracted
+   * @param element
+   *          the element from this the value will be extracted
    * @param path
    * @return the attribute value, or <code>null</code> if not defined
    */
-  public String getAttribute(Element element, String attributeName)
-  {
+  public String getAttribute(Element element, String attributeName) {
     String result = element.getAttribute(attributeName);
     return result;
   }
@@ -154,44 +142,40 @@ public class AbstractXmlParser
   /**
    * Evaluates an attribute defined by a XPath.
    * 
-   * @param element the element from this the value will be extracted
-   * @param xpath the attribute's xpath
+   * @param element
+   *          the element from this the value will be extracted
+   * @param xpath
+   *          the attribute's xpath
    * @return the attribute value, or <code>null</code> if not defined
    */
-  public String evaluateAttribute(Element element, String xpath)
-  {
-    try
-    {
+  public String evaluateAttribute(Element element, String xpath) {
+    try {
       XPathExpression expression = this.xpath.compile(xpath);
       String result = expression.evaluate(element);
       return result;
-    }
-    catch (XPathExpressionException e)
-    {
+    } catch (XPathExpressionException e) {
       // Nothing
     }
     return null;
   }
-  
+
   /**
    * Extracts the elements matching a XPath in a sax input source.
    * 
-   * @param file the URL of the file to analyse
-   * @param path the xpath of the elements to extract
+   * @param file
+   *          the URL of the file to analyse
+   * @param path
+   *          the xpath of the elements to extract
    * @return a non <code>null</code> list of elements
    */
-  protected List<Element> extractElements(InputSource source, String path)
-  {
+  protected List<Element> extractElements(InputSource source, String path) {
     NodeList nodes;
-    try
-    {
+    try {
       // First, we collect all the files
       XPathExpression expression = xpath.compile(path);
       nodes = (NodeList) expression.evaluate(source, XPathConstants.NODESET);
-    }
-    catch (Exception e)
-    {
-    	throw new RuntimeException(e);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
 
     return convertToList(nodes);
@@ -200,32 +184,31 @@ public class AbstractXmlParser
   /**
    * Extracts the elements matching a XPath in a file.
    * 
-   * @param file the URL of the file to analyse
-   * @param path the xpath of the elements to extract
+   * @param file
+   *          the URL of the file to analyse
+   * @param path
+   *          the xpath of the elements to extract
    * @return a non <code>null</code> list of elements
    */
-  protected List<Element> extractElements(URL file, String path)
-  {
-    try
-    {
+  protected List<Element> extractElements(URL file, String path) {
+    try {
       InputSource source = new InputSource(file.openStream());
       return extractElements(source, path);
-    }
-    catch (IOException e)
-    {
-    	throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
   }
-  
+
   /**
    * Extracts the elements matching a XPath in a file.
    * 
-   * @param file the URL of the file to analyse
-   * @param path the xpath of the elements to extract
+   * @param file
+   *          the URL of the file to analyse
+   * @param path
+   *          the xpath of the elements to extract
    * @return a non <code>null</code> list of elements
    */
-  protected List<Element> extractElements(Reader reader, String path)
-  {
+  protected List<Element> extractElements(Reader reader, String path) {
     InputSource source = new InputSource(reader);
     return extractElements(source, path);
   }
@@ -233,15 +216,14 @@ public class AbstractXmlParser
   /**
    * Converts a {@link NodeList} into an array of {@link Element}s.
    * 
-   * @param nodes the node list to convert
+   * @param nodes
+   *          the node list to convert
    * @return
    */
-  protected List<Element> convertToList(NodeList nodes)
-  {
+  protected List<Element> convertToList(NodeList nodes) {
     int countNode = nodes.getLength();
     List<Element> elements = new ArrayList<Element>();
-    for (int idxNode = 0; idxNode < countNode; idxNode++)
-    {
+    for (int idxNode = 0; idxNode < countNode; idxNode++) {
       elements.add((Element) nodes.item(idxNode));
     }
     return elements;
@@ -250,18 +232,15 @@ public class AbstractXmlParser
   /**
    * Converts a double representation of a time into milliseconds.
    * 
-   * @param attribute the attribute containing the time
+   * @param attribute
+   *          the attribute containing the time
    * @return the number of milliseconds
    */
-  protected int toMillisec(String attribute)
-  {
-    try
-    {
+  protected int toMillisec(String attribute) {
+    try {
       double timeInSec = Double.parseDouble(attribute);
       return (int) Math.round(1000 * timeInSec);
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       return 0;
     }
   }
@@ -272,14 +251,10 @@ public class AbstractXmlParser
    * @param attribute
    * @return the integer value of the attribute, or 0 if the format is invalid.
    */
-  protected int safelyToInteger(String attribute)
-  {
-    try
-    {
+  protected int safelyToInteger(String attribute) {
+    try {
       return Integer.parseInt(attribute);
-    }
-    catch (NumberFormatException e)
-    {
+    } catch (NumberFormatException e) {
       return 0;
     }
   }
@@ -287,16 +262,16 @@ public class AbstractXmlParser
   /**
    * Gets the content of a sub node identified by its tag.
    * 
-   * @param element the parent element
-   * @param tagName the name of the tag to look for
+   * @param element
+   *          the parent element
+   * @param tagName
+   *          the name of the tag to look for
    * @return the tag content, or <code>null</code> if its was not found
    */
-  protected String getNodeContent(Element element, String tagName)
-  {
+  protected String getNodeContent(Element element, String tagName) {
     String result = null;
     NodeList messageNodes = element.getElementsByTagName(tagName);
-    if (messageNodes.getLength() > 0)
-    {
+    if (messageNodes.getLength() > 0) {
       result = messageNodes.item(0).getTextContent();
     }
     return result;

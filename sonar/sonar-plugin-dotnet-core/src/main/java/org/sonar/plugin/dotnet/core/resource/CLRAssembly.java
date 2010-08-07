@@ -39,32 +39,28 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class CLRAssembly extends AbstractCSharpResource<Project>
-{
+public class CLRAssembly extends AbstractCSharpResource<Project> {
   private final VisualStudioProject visualProject;
 
   /**
    * Gets an assembly from its name.
    * 
-   * @param project the solution project that should contains the assembly
-   * @param assemblyName the name of the assembly
+   * @param project
+   *          the solution project that should contains the assembly
+   * @param assemblyName
+   *          the name of the assembly
    * @return a new assembly, or <code>null</code> if the assembly was not found
    */
-  public static CLRAssembly fromName(Project project, String assemblyName)
-  {
-    try
-    {
+  public static CLRAssembly fromName(Project project, String assemblyName) {
+    try {
       VisualStudioSolution solution = VisualUtils.getSolution(project);
 
       VisualStudioProject visualProject = solution.getProject(assemblyName);
-      if (visualProject != null)
-      {
+      if (visualProject != null) {
         CLRAssembly assemblyResource = new CLRAssembly(visualProject);
         return assemblyResource;
       }
-    }
-    catch (DotNetProjectException e)
-    {
+    } catch (DotNetProjectException e) {
       // Do nothing
     }
     return null;
@@ -77,19 +73,14 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
    * @param file
    * @return
    */
-  public static CLRAssembly forFile(Project project, File file)
-  {
-    try
-    {
+  public static CLRAssembly forFile(Project project, File file) {
+    try {
       VisualStudioSolution solution = VisualUtils.getSolution(project);
       VisualStudioProject visualProject = solution.getProjectByLocation(file);
-      if (visualProject != null)
-      {
+      if (visualProject != null) {
         return new CLRAssembly(visualProject);
       }
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       // Nothing special
     }
     return null;
@@ -98,10 +89,10 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
   /**
    * Constructs the assembly from the project.
    * 
-   * @param project the visual project link
+   * @param project
+   *          the visual project link
    */
-  public CLRAssembly(VisualStudioProject project)
-  {
+  public CLRAssembly(VisualStudioProject project) {
     super(SCOPE_SPACE, QUALIFIER_MODULE);
     this.visualProject = project;
     String assemblyName = project.getAssemblyName();
@@ -112,30 +103,31 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
 
   /**
    * Gets the name of the .Net assembly.
+   * 
    * @return the assembly name
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return visualProject.getAssemblyName();
   }
-  
+
   /**
    * @return
    */
   @Override
-  public String getLongName()
-  {
-    return "Assembly " + getAssemblyName();    
+  public String getLongName() {
+    return "Assembly " + getAssemblyName();
   }
+
   /**
    * @param antPattern
    * @return
    */
   @Override
-  public boolean matchFilePattern(String antPattern)
-  {
-    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(antPattern, ".");
-    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix, ".");
+  public boolean matchFilePattern(String antPattern) {
+    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(
+        antPattern, ".");
+    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix,
+        ".");
     return matcher.match(getKey());
   }
 
@@ -144,8 +136,7 @@ public class CLRAssembly extends AbstractCSharpResource<Project>
    * 
    * @return The visualProject to return.
    */
-  public VisualStudioProject getVisualProject()
-  {
+  public VisualStudioProject getVisualProject() {
     return this.visualProject;
   }
 

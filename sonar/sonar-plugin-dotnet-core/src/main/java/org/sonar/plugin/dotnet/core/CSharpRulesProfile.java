@@ -25,11 +25,11 @@
 package org.sonar.plugin.dotnet.core;
 
 /**
- *  Constants for the rule profiles.
+ * Constants for the rule profiles.
+ * 
  * @author Jose CHILLAN Apr 6, 2010
  */
-public class CSharpRulesProfile
-{
+public class CSharpRulesProfile {
   // Default name of the C# Profile
-  public final static String DEFAULT_WAY = "Sonar C# Way"; 
+  public final static String DEFAULT_WAY = "Sonar C# Way";
 }

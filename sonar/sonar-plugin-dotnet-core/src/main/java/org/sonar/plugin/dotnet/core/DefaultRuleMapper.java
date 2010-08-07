@@ -31,13 +31,11 @@ import org.sonar.api.rules.RulePriorityMapper;
  * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class DefaultRuleMapper implements RulePriorityMapper<String, String>
-{
+public class DefaultRuleMapper implements RulePriorityMapper<String, String> {
   /**
    * Constructs a @link{DefaultRuleMapper}.
    */
-  public DefaultRuleMapper()
-  {
+  public DefaultRuleMapper() {
   }
 
   /**
@@ -45,26 +43,20 @@ public class DefaultRuleMapper implements RulePriorityMapper<String, String>
    * @return
    */
   @Override
-  public RulePriority from(String level)
-  {
-    if ("1".equals(level))
-    {
+  public RulePriority from(String level) {
+    if ("1".equals(level)) {
       return RulePriority.BLOCKER;
     }
-    if ("2".equals(level))
-    {
+    if ("2".equals(level)) {
       return RulePriority.CRITICAL;
     }
-    if ("3".equals(level))
-    {
+    if ("3".equals(level)) {
       return RulePriority.MAJOR;
     }
-    if ("4".equals(level))
-    {
+    if ("4".equals(level)) {
       return RulePriority.MINOR;
     }
-    if ("5".equals(level))
-    {
+    if ("5".equals(level)) {
       return RulePriority.INFO;
     }
     return null;
@@ -75,26 +67,20 @@ public class DefaultRuleMapper implements RulePriorityMapper<String, String>
    * @return
    */
   @Override
-  public String to(RulePriority priority)
-  {
-    if (priority.equals(RulePriority.BLOCKER))
-    {
+  public String to(RulePriority priority) {
+    if (priority.equals(RulePriority.BLOCKER)) {
       return "1";
     }
-    if (priority.equals(RulePriority.CRITICAL))
-    {
+    if (priority.equals(RulePriority.CRITICAL)) {
       return "2";
     }
-    if (priority.equals(RulePriority.MAJOR))
-    {
+    if (priority.equals(RulePriority.MAJOR)) {
       return "3";
     }
-    if (priority.equals(RulePriority.MINOR))
-    {
+    if (priority.equals(RulePriority.MINOR)) {
       return "4";
     }
-    if (priority.equals(RulePriority.INFO))
-    {
+    if (priority.equals(RulePriority.INFO)) {
       return "5";
     }
     throw new IllegalArgumentException("Level not supported: " + priority);

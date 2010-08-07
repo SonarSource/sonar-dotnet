@@ -26,10 +26,10 @@ package org.sonar.plugin.dotnet.core.resource;
 
 /**
  * Exception throws when an invalid resource is being created.
+ * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class InvalidResourceException extends RuntimeException
-{
+public class InvalidResourceException extends RuntimeException {
 
   /**
    * serialVersionUID
@@ -39,37 +39,36 @@ public class InvalidResourceException extends RuntimeException
   /**
    * Constructs a @link{InvalidResourceException}.
    */
-  public InvalidResourceException()
-  {
+  public InvalidResourceException() {
   }
 
   /**
    * Constructs a @link{InvalidResourceException}.
+   * 
    * @param message
    */
-  public InvalidResourceException(String message)
-  {
+  public InvalidResourceException(String message) {
     super(message);
 
   }
 
   /**
    * Constructs a @link{InvalidResourceException}.
+   * 
    * @param cause
    */
-  public InvalidResourceException(Throwable cause)
-  {
+  public InvalidResourceException(Throwable cause) {
     super(cause);
 
   }
 
   /**
    * Constructs a @link{InvalidResourceException}.
+   * 
    * @param message
    * @param cause
    */
-  public InvalidResourceException(String message, Throwable cause)
-  {
+  public InvalidResourceException(String message, Throwable cause) {
     super(message, cause);
 
   }

@@ -26,11 +26,10 @@ package org.sonar.plugin.dotnet.core;
 
 /**
  * An exception for xml serialization errors.
+ * 
  * @author Jose CHILLAN May 7, 2009
  */
-public class XmlSerializationException
-  extends RuntimeException
-{
+public class XmlSerializationException extends RuntimeException {
 
   /**
    * serialVersionUID
@@ -40,37 +39,36 @@ public class XmlSerializationException
   /**
    * Constructs a @link{XmlSerializationException}.
    */
-  public XmlSerializationException()
-  {
+  public XmlSerializationException() {
   }
 
   /**
    * Constructs a @link{XmlSerializationException}.
+   * 
    * @param message
    */
-  public XmlSerializationException(String message)
-  {
+  public XmlSerializationException(String message) {
     super(message);
 
   }
 
   /**
    * Constructs a @link{XmlSerializationException}.
+   * 
    * @param cause
    */
-  public XmlSerializationException(Throwable cause)
-  {
+  public XmlSerializationException(Throwable cause) {
     super(cause);
 
   }
 
   /**
    * Constructs a @link{XmlSerializationException}.
+   * 
    * @param message
    * @param cause
    */
-  public XmlSerializationException(String message, Throwable cause)
-  {
+  public XmlSerializationException(String message, Throwable cause) {
     super(message, cause);
 
   }

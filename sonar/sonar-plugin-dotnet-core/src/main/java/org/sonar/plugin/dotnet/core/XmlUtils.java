@@ -44,8 +44,7 @@ import org.w3c.dom.Element;
  * 
  * @author Jose CHILLAN (jose.chillan($)heavenize.org) , 15 august 2006
  */
-public class XmlUtils
-{
+public class XmlUtils {
   /**
    * Marshall an object into a XML Stream
    * 
@@ -53,10 +52,9 @@ public class XmlUtils
    * @param stream
    * @throws XmlSerializationException
    */
-  public static void marshall(Object serialized, OutputStream stream) throws XmlSerializationException
-  {
-    try
-    {
+  public static void marshall(Object serialized, OutputStream stream)
+      throws XmlSerializationException {
+    try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
 
@@ -68,9 +66,7 @@ public class XmlUtils
 
       // Marshal to system output: java to xml
       m.marshal(serialized, stream);
-    }
-    catch (JAXBException x)
-    {
+    } catch (JAXBException x) {
       throw new XmlSerializationException(x);
     }
   }
@@ -82,10 +78,9 @@ public class XmlUtils
    * @param stream
    * @throws XmlSerializationException
    */
-  public static void marshall(Object serialized, Writer writer) throws XmlSerializationException
-  {
-    try
-    {
+  public static void marshall(Object serialized, Writer writer)
+      throws XmlSerializationException {
+    try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
 
@@ -97,12 +92,11 @@ public class XmlUtils
 
       // Marshal to system output: java to xml
       m.marshal(serialized, writer);
-    }
-    catch (JAXBException x)
-    {
+    } catch (JAXBException x) {
       throw new XmlSerializationException(x);
     }
   }
+
   /**
    * Unmarshall an xml stream into an object of given type
    * 
@@ -113,10 +107,9 @@ public class XmlUtils
    * @throws XmlSerializationException
    */
   @SuppressWarnings("unchecked")
-  public static <T> T unmarshall(InputStream stream, Class<T> type) throws XmlSerializationException
-  {
-    try
-    {
+  public static <T> T unmarshall(InputStream stream, Class<T> type)
+      throws XmlSerializationException {
+    try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(type);
 
@@ -126,31 +119,27 @@ public class XmlUtils
       // Marshal to system output: java to xml
       T result = (T) m.unmarshal(stream);
       return result;
-    }
-    catch (JAXBException x)
-    {
-      throw new XmlSerializationException("Impossible to unmarshall and object of type " + type, x);
+    } catch (JAXBException x) {
+      throw new XmlSerializationException(
+          "Impossible to unmarshall and object of type " + type, x);
     }
   }
 
   /**
    * Converts an XML element into a string representation.
+   * 
    * @param violation
    * @return
    */
-  public static String toString(Element violation)
-  {
-    try
-    {
+  public static String toString(Element violation) {
+    try {
       TransformerFactory tf = TransformerFactory.newInstance();
       Transformer trans = tf.newTransformer();
       StringWriter sw = new StringWriter();
       trans.transform(new DOMSource(violation), new StreamResult(sw));
       String xml = sw.toString();
       return xml;
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       return "Could not convert : " + e.getMessage();
     }
   }
@@ -158,7 +147,6 @@ public class XmlUtils
   /**
    * Disabled constructor.
    */
-  private XmlUtils()
-  {
+  private XmlUtils() {
   }
 }

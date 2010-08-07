@@ -48,16 +48,15 @@ import static org.sonar.plugin.dotnet.core.Constant.*;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class CSharpSourceImporter extends AbstractSourceImporter
-{
-  
-  private final static Logger log = LoggerFactory.getLogger(CSharpSourceImporter.class);
-  
+public class CSharpSourceImporter extends AbstractSourceImporter {
+
+  private final static Logger log = LoggerFactory
+      .getLogger(CSharpSourceImporter.class);
+
   /**
    * Constructs the collector.
    */
-  public CSharpSourceImporter()
-  {
+  public CSharpSourceImporter() {
     super(CSharp.INSTANCE);
   }
 
@@ -66,22 +65,17 @@ public class CSharpSourceImporter extends AbstractSourceImporter
    * @param context
    */
   @Override
-  public void analyse(Project project, SensorContext context)
-  {
+  public void analyse(Project project, SensorContext context) {
     VisualStudioSolution solution;
-    try
-    {
+    try {
       solution = VisualUtils.getSolution(project);
-    }
-    catch (DotNetProjectException e1)
-    {
+    } catch (DotNetProjectException e1) {
       return;
     }
     List<VisualStudioProject> projects = solution.getProjects();
 
     // We load the content of all the projects
-    for (VisualStudioProject visualStudioProject : projects)
-    {
+    for (VisualStudioProject visualStudioProject : projects) {
       parseVisualProject(visualStudioProject, context, project);
     }
   }
@@ -93,35 +87,32 @@ public class CSharpSourceImporter extends AbstractSourceImporter
    * @param context
    * @param project
    */
-  private void parseVisualProject(VisualStudioProject visualStudioProject, SensorContext context, Project project)
-  {
+  private void parseVisualProject(VisualStudioProject visualStudioProject,
+      SensorContext context, Project project) {
     boolean unitTest = visualStudioProject.isTest();
-    boolean excludeGeneratedCode = 
-    	project.getConfiguration().getBoolean(SONAR_EXCLUDE_GEN_CODE_KEY, true);
+    boolean excludeGeneratedCode = project.getConfiguration().getBoolean(
+        SONAR_EXCLUDE_GEN_CODE_KEY, true);
     Collection<SourceFile> sourceFiles = visualStudioProject.getSourceFiles();
-    for (SourceFile sourceFile : sourceFiles)
-    {
-      try
-      {
+    for (SourceFile sourceFile : sourceFiles) {
+      try {
         File sourcePath = sourceFile.getFile();
-        if (excludeGeneratedCode && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
-        	// we will not include the generated code
-        	// in the sonar database
-        	log.info("Ignoring generated cs file "+sourcePath);
-        	continue;
+        if (excludeGeneratedCode
+            && GeneratedCodeFilter.INSTANCE.isGenerated(sourcePath.getName())) {
+          // we will not include the generated code
+          // in the sonar database
+          log.info("Ignoring generated cs file " + sourcePath);
+          continue;
         }
         CSharpFile resource = CSharpFile.from(project, sourcePath, unitTest);
-        // Windows may sometime generate endian-recognition characters that are not
+        // Windows may sometime generate endian-recognition characters that are
+        // not
         // supported by the Sonar GUI, so we remove them
         String content = FileUtils.readFileToString(sourcePath, "UTF-8");
-        if (content.startsWith("\uFEFF") || content.startsWith("\uFFFE"))
-        {
+        if (content.startsWith("\uFEFF") || content.startsWith("\uFFFE")) {
           content = content.substring(1);
         }
         context.saveSource(resource, content);
-      }
-      catch (Exception e)
-      {
+      } catch (Exception e) {
         log.debug("Could not import file " + sourceFile, e);
       }
     }

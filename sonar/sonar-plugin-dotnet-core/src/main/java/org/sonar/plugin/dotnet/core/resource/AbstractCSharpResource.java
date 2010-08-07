@@ -34,16 +34,15 @@ import org.sonar.plugin.dotnet.core.CSharp;
  * @author Jose CHILLAN Sep 1, 2009
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractCSharpResource<PARENT extends Resource> extends Resource<PARENT>
-{
-  private String   name;
-  private String   description;
-  private String   scope;
-  private String   qualifier;
+public abstract class AbstractCSharpResource<PARENT extends Resource> extends
+    Resource<PARENT> {
+  private String name;
+  private String description;
+  private String scope;
+  private String qualifier;
   private Language language;
 
-  protected AbstractCSharpResource(String key, String scope, String qualifier)
-  {
+  protected AbstractCSharpResource(String key, String scope, String qualifier) {
 
     this.scope = scope;
     setKey(key);
@@ -57,71 +56,61 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends Re
    * @param scope
    * @param qualifier
    */
-  public AbstractCSharpResource(String scope, String qualifier)
-  {
+  public AbstractCSharpResource(String scope, String qualifier) {
     this.scope = scope;
     setLanguage(CSharp.INSTANCE);
     setQualifier(qualifier);
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public Resource<? extends PARENT> setName(String name)
-  {
+  public Resource<? extends PARENT> setName(String name) {
     this.name = name;
     return this;
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return description;
   }
 
-  public Resource<? extends PARENT> setDescription(String description)
-  {
+  public Resource<? extends PARENT> setDescription(String description) {
     this.description = description;
     return this;
   }
 
-  public String getScope()
-  {
+  public String getScope() {
     return scope;
   }
 
-  public void setQualifier(String qualifier)
-  {
+  public void setQualifier(String qualifier) {
     this.qualifier = qualifier;
   }
 
-  public String getQualifier()
-  {
+  public String getQualifier() {
     return qualifier;
   }
 
-  public Language getLanguage()
-  {
+  public Language getLanguage() {
     return language;
   }
 
-  public Resource<? extends PARENT> setLanguage(Language language)
-  {
+  public Resource<? extends PARENT> setLanguage(Language language) {
     this.language = language;
     return this;
   }
 
-  public PARENT getParent()
-  {
+  public PARENT getParent() {
     return null;
   }
 
   @Override
-  public String toString()
-  {
-    return new ToStringBuilder(this).append("key", getKey()).append("scope", scope).append("qualifier", qualifier).append("name", name)
-                                    .append("language", language).append("description", description).toString();
+  public String toString() {
+    return new ToStringBuilder(this).append("key", getKey())
+        .append("scope", scope).append("qualifier", qualifier)
+        .append("name", name).append("language", language)
+        .append("description", description).toString();
   }
 
 }

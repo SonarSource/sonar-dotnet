@@ -38,58 +38,53 @@ import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
  * 
  * @author Jose CHILLAN Apr 30, 2009
  */
-public class CSharp extends AbstractLanguage
-{
-  private final static Logger  log                  = LoggerFactory.getLogger(CSharp.class);
+public class CSharp extends AbstractLanguage {
+  private final static Logger log = LoggerFactory.getLogger(CSharp.class);
 
-  public static final String   KEY                  = "cs";
-  public static final String   DEFAULT_PACKAGE_NAME = "[default]";
-  public static final String[] SUFFIXES             = { "cs"
-                                                    };
+  public static final String KEY = "cs";
+  public static final String DEFAULT_PACKAGE_NAME = "[default]";
+  public static final String[] SUFFIXES = { "cs" };
 
-  public final static CSharp   INSTANCE             = new CSharp();
+  public final static CSharp INSTANCE = new CSharp();
 
-  public final static String   SCOPE_ASSEMBLY       = "ASS";
-  public final static String   QUALIFIER_ASSEMBLY   = "ASS";
-  public final static String   QUALIFIER_NAMESPACE  = "NMS";
+  public final static String SCOPE_ASSEMBLY = "ASS";
+  public final static String QUALIFIER_ASSEMBLY = "ASS";
+  public final static String QUALIFIER_NAMESPACE = "NMS";
 
   /**
    * Constructs the C# type. Constructs a @link{CSharp}.
    */
-  public CSharp()
-  {
+  public CSharp() {
     super(KEY, "C#");
   }
 
-  public String[] getFileSuffixes()
-  {
+  public String[] getFileSuffixes() {
     return SUFFIXES;
   }
 
   /**
-   * Creates a key for a source file contained in a given assembly. This key is used as a discriminant
-   * in the sonar database (for the PROJECTS table column KEE)
+   * Creates a key for a source file contained in a given assembly. This key is
+   * used as a discriminant in the sonar database (for the PROJECTS table column
+   * KEE)
    * 
-   * @param assembly the assembly object
-   * @param sourcePath the path of the source file
+   * @param assembly
+   *          the assembly object
+   * @param sourcePath
+   *          the path of the source file
    * @return the generated key
    */
-  public static String createKey(CLRAssembly assembly, File sourcePath)
-  {
+  public static String createKey(CLRAssembly assembly, File sourcePath) {
     VisualStudioProject visualProject = assembly.getVisualProject();
     SourceFile sourceFile = visualProject.getFile(sourcePath);
     final String key;
-    if (sourceFile == null)
-    {
+    if (sourceFile == null) {
       log.warn("A source file is not included in the project : " + sourcePath);
       key = null;
-    } 
-    else 
-    {
-    	String assemblyName = assembly.getAssemblyName();
-    	String folder = sourceFile.getFolder();
-    	String fileName = sourceFile.getName();
-    	key = createKey(assemblyName, folder, fileName);
+    } else {
+      String assemblyName = assembly.getAssemblyName();
+      String folder = sourceFile.getFolder();
+      String fileName = sourceFile.getName();
+      key = createKey(assemblyName, folder, fileName);
     }
     return key;
   }
@@ -102,31 +97,30 @@ public class CSharp extends AbstractLanguage
    * @param className
    * @return
    */
-  public static String createKey(String assemblyName, String folder, String fileName)
-  {
+  public static String createKey(String assemblyName, String folder,
+      String fileName) {
     StringBuilder builder = new StringBuilder();
     String keyAssemblyName = assemblyName.toLowerCase();
     builder.append(keyAssemblyName);
-    
-    // Not that spaces and "/" are not supported by the sonar web application and should be removed
-    String canonicalFolder = StringUtils.remove(StringUtils.replace(StringUtils.replace(folder, "\\", "-"), "/", "."), " ");
+
+    // Not that spaces and "/" are not supported by the sonar web application
+    // and should be removed
+    String canonicalFolder = StringUtils.remove(
+        StringUtils.replace(StringUtils.replace(folder, "\\", "-"), "/", "."),
+        " ");
     String processedFolder = StringUtils.removeEnd(canonicalFolder, ".");
     // We add the folder to the assembly name
-    if ((processedFolder != null) || (fileName != null))
-    {
+    if ((processedFolder != null) || (fileName != null)) {
       // This is not just a namespace
       builder.append(":");
-      if (processedFolder != null)
-      {
-        if (StringUtils.isNotBlank(processedFolder))
-        {
+      if (processedFolder != null) {
+        if (StringUtils.isNotBlank(processedFolder)) {
           String keyFolderName = processedFolder.toLowerCase();
           builder.append(keyFolderName);
         }
       }
       // We finish by the file name
-      if (StringUtils.isNotBlank(fileName))
-      {
+      if (StringUtils.isNotBlank(fileName)) {
         builder.append("_");
         String keyFileName = fileName.toLowerCase();
         builder.append(keyFileName);

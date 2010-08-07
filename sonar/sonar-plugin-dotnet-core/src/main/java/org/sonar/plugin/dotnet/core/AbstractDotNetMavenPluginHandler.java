@@ -32,10 +32,11 @@ import org.sonar.api.resources.Project;
 
 /**
  * A base class for the C# maven plugin handlers.
+ * 
  * @author Jose CHILLAN May 5, 2009
  */
-public abstract class AbstractDotNetMavenPluginHandler implements MavenPluginHandler, DependsUponCustomRules 
-{
+public abstract class AbstractDotNetMavenPluginHandler implements
+    MavenPluginHandler, DependsUponCustomRules {
   public static final String GROUP_ID = MavenUtils.GROUP_ID_APACHE_MAVEN;
   public static final String ARTIFACT_ID = "maven-dotnet-plugin";
 
@@ -43,35 +44,30 @@ public abstract class AbstractDotNetMavenPluginHandler implements MavenPluginHan
    * Version of the .Net plugin
    */
   private static final String DOTNET_PLUGIN_VERSION = "0.1";
-  
+
   /**
    * Constructs a @link{AbstractDotNetMavenPluginHandler}.
    */
-  public AbstractDotNetMavenPluginHandler()
-  {
-  }
-  @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
+  public AbstractDotNetMavenPluginHandler() {
   }
 
-  public String getArtifactId()
-  {
+  @Override
+  public void configure(Project project, MavenPlugin plugin) {
+  }
+
+  public String getArtifactId() {
     return ARTIFACT_ID;
   }
 
-  public String getGroupId()
-  {
+  public String getGroupId() {
     return Constant.MAVEN_DOTNET_GROUP_ID;
   }
 
-  public String getVersion()
-  {
+  public String getVersion() {
     return DOTNET_PLUGIN_VERSION;
   }
 
-  public boolean isFixedVersion()
-  {
+  public boolean isFixedVersion() {
     return false;
   }
 

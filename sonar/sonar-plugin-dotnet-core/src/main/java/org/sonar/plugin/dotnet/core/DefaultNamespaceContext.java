@@ -29,44 +29,37 @@ import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 
 /**
- * A NamespaceContext implementation necessary for the parsing of some XML files.
+ * A NamespaceContext implementation necessary for the parsing of some XML
+ * files.
+ * 
  * @author Jose CHILLAN Jul 15, 2009
  */
-public class DefaultNamespaceContext
-  implements NamespaceContext
-{
+public class DefaultNamespaceContext implements NamespaceContext {
   private final String defaultNamespace;
   private final String defaultPrefix;
 
-  public DefaultNamespaceContext(String defaultPrefix, String defaultNamespace)
-  {
+  public DefaultNamespaceContext(String defaultPrefix, String defaultNamespace) {
     this.defaultNamespace = defaultNamespace;
     this.defaultPrefix = defaultPrefix;
-    
+
   }
 
-  public String getNamespaceURI(String prefix)
-  {
-    if (defaultPrefix.equals(prefix))
-    {
+  public String getNamespaceURI(String prefix) {
+    if (defaultPrefix.equals(prefix)) {
       return defaultNamespace;
-    }
-    else if ("xml".equals(prefix))
-    {
+    } else if ("xml".equals(prefix)) {
       return XMLConstants.XML_NS_URI;
     }
     return "";
   }
 
   // This method isn't necessary for XPath processing.
-  public String getPrefix(String uri)
-  {
+  public String getPrefix(String uri) {
     throw new UnsupportedOperationException();
   }
 
   // This method isn't necessary for XPath processing either.
-  public Iterator<?> getPrefixes(String uri)
-  {
+  public Iterator<?> getPrefixes(String uri) {
     throw new UnsupportedOperationException();
   }
 }

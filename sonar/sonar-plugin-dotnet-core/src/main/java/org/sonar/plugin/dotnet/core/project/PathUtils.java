@@ -24,63 +24,62 @@
  */
 package org.sonar.plugin.dotnet.core.project;
 
-
 /**
  * A utility class to compute paths.
+ * 
  * @author Jose CHILLAN Feb 18, 2010
  */
-public class PathUtils
-{
+public class PathUtils {
   /**
    * Computes a relative path between two directories
+   * 
    * @param targetPath
    * @param basePath
    * @param pathSeparator
    * @return
    */
-  public static String getRelativePath(String targetPath, String basePath, 
-     String pathSeparator) {
+  public static String getRelativePath(String targetPath, String basePath,
+      String pathSeparator) {
 
-      // find common path
-      String[] target = targetPath.split(pathSeparator);
-      String[] base = basePath.split(pathSeparator);
+    // find common path
+    String[] target = targetPath.split(pathSeparator);
+    String[] base = basePath.split(pathSeparator);
 
-      String common = "";
-      int commonIndex = 0;
-      for (int i = 0; i < target.length && i < base.length; i++) {
+    String common = "";
+    int commonIndex = 0;
+    for (int i = 0; i < target.length && i < base.length; i++) {
 
-              if (target[i].equals(base[i])) {
-                      common += target[i] + pathSeparator;
-                      commonIndex++;
-              }
+      if (target[i].equals(base[i])) {
+        common += target[i] + pathSeparator;
+        commonIndex++;
       }
+    }
 
-
-      String relative = "";
-      // is the target a child directory of the base directory?
-      // i.e., target = /a/b/c/d, base = /a/b/
-      if (commonIndex == base.length) {
-              relative = "." + pathSeparator + targetPath.substring(common.length());
+    String relative = "";
+    // is the target a child directory of the base directory?
+    // i.e., target = /a/b/c/d, base = /a/b/
+    if (commonIndex == base.length) {
+      relative = "." + pathSeparator + targetPath.substring(common.length());
+    } else {
+      // determine how many directories we have to backtrack
+      for (int i = 1; i <= commonIndex; i++) {
+        relative += ".." + pathSeparator;
       }
-      else {
-              // determine how many directories we have to backtrack
-              for (int i = 1; i <= commonIndex; i++) {
-                      relative += ".." + pathSeparator;
-              }
-              relative += targetPath.substring(common.length());
-      }
+      relative += targetPath.substring(common.length());
+    }
 
-      return relative;
+    return relative;
   }
 
   /**
    * Constructs the relative path between to paths.
+   * 
    * @param targetPath
    * @param basePath
    * @return
    */
   public static String getRelativePath(String targetPath, String basePath) {
-      return getRelativePath(targetPath, basePath, "/");
+    return getRelativePath(targetPath, basePath, "/");
   }
 
 }

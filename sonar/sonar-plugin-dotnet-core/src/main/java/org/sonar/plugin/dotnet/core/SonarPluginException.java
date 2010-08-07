@@ -26,11 +26,10 @@ package org.sonar.plugin.dotnet.core;
 
 /**
  * Base exception for the sonar plugins.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class SonarPluginException
-  extends RuntimeException
-{
+public class SonarPluginException extends RuntimeException {
 
   /**
    * serialVersionUID.
@@ -40,41 +39,40 @@ public class SonarPluginException
   /**
    * Constructs a @link{SonarPluginException}.
    */
-  public SonarPluginException()
-  {
+  public SonarPluginException() {
     super();
-    
+
   }
 
   /**
    * Constructs a @link{SonarPluginException}.
+   * 
    * @param message
    * @param cause
    */
-  public SonarPluginException(String message, Throwable cause)
-  {
+  public SonarPluginException(String message, Throwable cause) {
     super(message, cause);
-    
+
   }
 
   /**
    * Constructs a @link{SonarPluginException}.
+   * 
    * @param message
    */
-  public SonarPluginException(String message)
-  {
+  public SonarPluginException(String message) {
     super(message);
-    
+
   }
 
   /**
    * Constructs a @link{SonarPluginException}.
+   * 
    * @param cause
    */
-  public SonarPluginException(Throwable cause)
-  {
+  public SonarPluginException(Throwable cause) {
     super(cause);
-    
+
   }
 
 }

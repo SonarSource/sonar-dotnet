@@ -35,24 +35,22 @@ import org.sonar.api.resources.Project;
  * 
  * @author Jose CHILLAN Apr 28, 2009
  */
-public abstract class AbstractDotnetSensor
-  implements Sensor, DependsUponMavenPlugin
-{
+public abstract class AbstractDotnetSensor implements Sensor,
+    DependsUponMavenPlugin {
   /**
    * Constructs a @link{AbstractDotnetMavenCollector}.
    */
-  public AbstractDotnetSensor()
-  {
+  public AbstractDotnetSensor() {
   }
 
   /**
    * Gets the report directory for a given project.
    * 
-   * @param pom the project definition
+   * @param pom
+   *          the project definition
    * @return the report directory
    */
-  public File getReportsDirectory(Project project)
-  {
+  public File getReportsDirectory(Project project) {
     File result = project.getFileSystem().getBuildDir();
     return result;
   }
@@ -60,26 +58,24 @@ public abstract class AbstractDotnetSensor
   /**
    * Finds a report file from its name
    * 
-   * @param pom the pom
-   * @param fileName the expected name for the file
+   * @param pom
+   *          the pom
+   * @param fileName
+   *          the expected name for the file
    * @return the report, or <code>null</code> if not found
    */
-  public File findReport(Project project, final String fileName)
-  {
+  public File findReport(Project project, final String fileName) {
     File dir = getReportsDirectory(project);
-    if (dir == null || !dir.isDirectory() || !dir.exists())
-    {
+    if (dir == null || !dir.isDirectory() || !dir.exists()) {
       return null;
     }
     // Looks for a nunit-report.xml file
     File[] listFiles = dir.listFiles(new FilenameFilter() {
-      public boolean accept(File localDir, String name)
-      {
+      public boolean accept(File localDir, String name) {
         return name.equals(fileName);
       }
     });
-    if (listFiles.length > 0)
-    {
+    if (listFiles.length > 0) {
       return listFiles[0];
     }
     return null;
@@ -87,12 +83,12 @@ public abstract class AbstractDotnetSensor
 
   /**
    * Only accepts solution artifact projects.
+   * 
    * @param project
    * @return
    */
   @Override
-  public boolean shouldExecuteOnProject(Project project)
-  {
+  public boolean shouldExecuteOnProject(Project project) {
     String packaging = project.getPackaging();
     // We only accept the "sln" packaging
     return "sln".equals(packaging);

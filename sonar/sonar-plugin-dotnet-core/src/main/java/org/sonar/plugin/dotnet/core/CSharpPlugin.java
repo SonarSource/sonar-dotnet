@@ -32,26 +32,23 @@ import org.sonar.plugin.dotnet.core.colorizer.CSharpColorizerFormat;
 
 /**
  * The plugin that declares the C# language.
+ * 
  * @author Jose CHILLAN May 5, 2009
  */
-public class CSharpPlugin
-  implements Plugin
-{
-  public CSharpPlugin()
-  {
+public class CSharpPlugin implements Plugin {
+  public CSharpPlugin() {
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that declares the CSharp language";
   }
 
   /**
    * Gets the extensions for the C# language
+   * 
    * @return
    */
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     ArrayList<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
     extensions.add(CSharpColorizerFormat.class);
     extensions.add(CSharp.class);
@@ -59,13 +56,11 @@ public class CSharpPlugin
     return extensions;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return "csharp";
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "CSharp plugin";
   }
 

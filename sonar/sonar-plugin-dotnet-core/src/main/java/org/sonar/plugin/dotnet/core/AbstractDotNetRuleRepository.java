@@ -42,20 +42,19 @@ import org.sonar.api.rules.Rule;
  * 
  * @author Jose CHILLAN Jul 16, 2009
  */
-public abstract class AbstractDotNetRuleRepository
-  extends AbstractRulesRepository<CSharp, DefaultRuleMapper>
-  implements ConfigurationImportable
-{
+public abstract class AbstractDotNetRuleRepository extends
+    AbstractRulesRepository<CSharp, DefaultRuleMapper> implements
+    ConfigurationImportable {
   /**
    * Constructs a @link{AbstractDotNetRuleRepository}.
    */
-  public AbstractDotNetRuleRepository()
-  {
+  public AbstractDotNetRuleRepository() {
     super(CSharp.INSTANCE, new DefaultRuleMapper());
   }
-  
+
   /**
-   * A map a of profiles to import, The profile name as key, and the xml profile file name in the classpath
+   * A map a of profiles to import, The profile name as key, and the xml profile
+   * file name in the classpath
    * 
    * @return
    */
@@ -63,16 +62,17 @@ public abstract class AbstractDotNetRuleRepository
 
   /**
    * Gets all the provided profiles.
+   * 
    * @return a list of profiles
    */
-  public List<RulesProfile> getProvidedProfiles()
-  {
+  public List<RulesProfile> getProvidedProfiles() {
     List<RulesProfile> profiles = new ArrayList<RulesProfile>();
 
-    Map<String, String> defaultProfiles = new TreeMap<String, String>(getBuiltInProfiles());
-    for (Map.Entry<String, String> entry : defaultProfiles.entrySet())
-    {
-      RulesProfile providedProfile = loadProvidedProfile(entry.getKey(), getCheckResourcesBase() + entry.getValue());
+    Map<String, String> defaultProfiles = new TreeMap<String, String>(
+        getBuiltInProfiles());
+    for (Map.Entry<String, String> entry : defaultProfiles.entrySet()) {
+      RulesProfile providedProfile = loadProvidedProfile(entry.getKey(),
+          getCheckResourcesBase() + entry.getValue());
       profiles.add(providedProfile);
     }
     return profiles;
@@ -80,29 +80,29 @@ public abstract class AbstractDotNetRuleRepository
 
   /**
    * Loads a provided profile.
-   * @param name the profile name
-   * @param filePath the path of the file containins the profile
+   * 
+   * @param name
+   *          the profile name
+   * @param filePath
+   *          the path of the file containins the profile
    * @return a provided profile.
    */
-  public RulesProfile loadProvidedProfile(String name, String filePath)
-  {
-    try
-    {
+  public RulesProfile loadProvidedProfile(String name, String filePath) {
+    try {
       InputStream profileIn = getClass().getResourceAsStream(filePath);
-      if (profileIn == null)
-      {
+      if (profileIn == null) {
         throw new IOException("Resource " + profileIn + " not found");
       }
       RulesProfile profile = new RulesProfile(name, CSharp.KEY);
       List<Rule> initialReferential = getInitialReferential();
-      List<ActiveRule> configuration = importConfiguration(IOUtils.toString(profileIn, "UTF-8"), initialReferential);
+      List<ActiveRule> configuration = importConfiguration(
+          IOUtils.toString(profileIn, "UTF-8"), initialReferential);
       profile.setActiveRules(configuration);
       return profile;
 
-    }
-    catch (IOException e)
-    {
-      throw new RuntimeException("Configuration file not found for the profile : " + name, e);
+    } catch (IOException e) {
+      throw new RuntimeException(
+          "Configuration file not found for the profile : " + name, e);
     }
   }
 }

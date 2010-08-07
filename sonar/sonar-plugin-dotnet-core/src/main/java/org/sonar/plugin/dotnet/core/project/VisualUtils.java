@@ -32,18 +32,21 @@ import org.sonar.api.resources.Project;
 
 /**
  * Utility classes for Visual Studio projects associated to Maven projects.
+ * 
  * @author Jose CHILLAN May 14, 2009
  */
-public final class VisualUtils
-{
+public final class VisualUtils {
   /**
    * Extracts a visual studio solution if the project is a valid solution.
-   * @param project the maven project from which a solution will be extracted
+   * 
+   * @param project
+   *          the maven project from which a solution will be extracted
    * @return a visual studio solution
-   * @throws DotNetProjectException if the project is not a valid .Net project
+   * @throws DotNetProjectException
+   *           if the project is not a valid .Net project
    */
-  public static VisualStudioSolution getSolution(Project project) throws DotNetProjectException
-  {
+  public static VisualStudioSolution getSolution(Project project)
+      throws DotNetProjectException {
     MavenProject mavenProject = project.getPom();
     return VisualStudioUtils.getVisualSolution(mavenProject, (String) null);
   }

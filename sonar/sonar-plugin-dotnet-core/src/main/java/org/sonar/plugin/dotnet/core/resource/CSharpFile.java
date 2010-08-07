@@ -37,9 +37,8 @@ import org.sonar.plugin.dotnet.core.CSharp;
  * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
-{
-  private String       fileName;
+public class CSharpFile extends AbstractCSharpResource<CSharpFolder> {
+  private String fileName;
   private CSharpFolder folder;
 
   /**
@@ -48,36 +47,37 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    * @param file
    * @return
    */
-  public static CSharpFile from(Project project, File file, boolean unitTest)
-  {
-	if (unitTest) {
-		Log.error("test "+file);
-	}
-	
+  public static CSharpFile from(Project project, File file, boolean unitTest) {
+    if (unitTest) {
+      Log.error("test " + file);
+    }
+
     File directory = file.getParentFile();
     CSharpFolder folder = CSharpFolder.fromDirectory(project, directory);
-    if (folder == null)
-    {
-      Log.warn("Could not find the folder for directory : " + directory + " in project " + project);
+    if (folder == null) {
+      Log.warn("Could not find the folder for directory : " + directory
+          + " in project " + project);
     }
     return new CSharpFile(folder, file, unitTest);
   }
 
   /**
-   * Constructs a @link{CSharpFile} with the associated file, and a flag indicating if the file is a unit test.
+   * Constructs a @link{CSharpFile} with the associated file, and a flag
+   * indicating if the file is a unit test.
    * 
-   * @throws InvalidResourceException in the resource doesn't belong to the assembly
+   * @throws InvalidResourceException
+   *           in the resource doesn't belong to the assembly
    */
-  private CSharpFile(CSharpFolder folder, File file, boolean unitTest)
-  {
-    super(Resource.SCOPE_ENTITY, (unitTest ? Resource.QUALIFIER_UNIT_TEST_CLASS: Resource.QUALIFIER_CLASS));
+  private CSharpFile(CSharpFolder folder, File file, boolean unitTest) {
+    super(Resource.SCOPE_ENTITY, (unitTest ? Resource.QUALIFIER_UNIT_TEST_CLASS
+        : Resource.QUALIFIER_CLASS));
     this.folder = folder;
     this.fileName = file.getName();
     CLRAssembly assembly = folder.getParent();
     String key = CSharp.createKey(assembly, file);
-    if (key == null)
-    {
-      throw new InvalidResourceException("The file " + file + " is not included in the assembly " + assembly.getName());
+    if (key == null) {
+      throw new InvalidResourceException("The file " + file
+          + " is not included in the assembly " + assembly.getName());
     }
     setKey(key);
     setName(fileName);
@@ -87,16 +87,15 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    * @return
    */
   @Override
-  public String getLongName()
-  {
+  public String getLongName() {
     return "File " + fileName;
   }
+
   /**
    * @return
    */
   @Override
-  public CSharpFolder getParent()
-  {
+  public CSharpFolder getParent() {
     return folder;
   }
 
@@ -105,10 +104,11 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    * @return
    */
   @Override
-  public boolean matchFilePattern(String antPattern)
-  {
-    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(antPattern, ".");
-    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix, ".");
+  public boolean matchFilePattern(String antPattern) {
+    String patternWithoutFileSuffix = StringUtils.substringBeforeLast(
+        antPattern, ".");
+    WildcardPattern matcher = WildcardPattern.create(patternWithoutFileSuffix,
+        ".");
     return matcher.match(getKey());
 
   }
@@ -118,8 +118,7 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    * 
    * @return The fileName to return.
    */
-  public String getFileName()
-  {
+  public String getFileName() {
     return this.fileName;
   }
 
@@ -127,8 +126,7 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder>
    * @return
    */
   @Override
-  public String toString()
-  {
+  public String toString() {
     return "CSharpFile(" + folder.getName() + "/" + fileName + ")";
   }
 

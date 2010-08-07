@@ -35,22 +35,21 @@ import org.sonar.plugin.dotnet.core.CSharp;
  * 
  * @author Jose CHILLAN Sep 3, 2009
  */
-public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
-{
+public class CSharpFolder extends AbstractCSharpResource<CLRAssembly> {
   private CLRAssembly assembly;
 
   /**
    * Creates a CSharp folder from a directory.
    * 
-   * @param project the project containing the directory
-   * @param directory the directory to see as a resource
+   * @param project
+   *          the project containing the directory
+   * @param directory
+   *          the directory to see as a resource
    * @return the new folder, or <code>null</code> if a problem occurred
    */
-  public static CSharpFolder fromDirectory(Project project, File directory)
-  {
+  public static CSharpFolder fromDirectory(Project project, File directory) {
     CLRAssembly assembly = CLRAssembly.forFile(project, directory);
-    if (assembly != null)
-    {
+    if (assembly != null) {
       return new CSharpFolder(assembly, directory);
     }
     return null;
@@ -59,11 +58,12 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
   /**
    * Constructs a @link{CSharpFolder} with the containing assembly and location
    * 
-   * @param assembly the assembly that contains the folder
-   * @param file the folder location
+   * @param assembly
+   *          the assembly that contains the folder
+   * @param file
+   *          the folder location
    */
-  public CSharpFolder(CLRAssembly assembly, File directory)
-  {
+  public CSharpFolder(CLRAssembly assembly, File directory) {
     super(SCOPE_SPACE, QUALIFIER_DIRECTORY);
     this.assembly = assembly;
     VisualStudioProject visualProject = assembly.getVisualProject();
@@ -73,13 +73,10 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
     setKey(key);
     String name;
     // Defines the folder name
-    if (StringUtils.isBlank(folder))
-    {
+    if (StringUtils.isBlank(folder)) {
       name = assemblyName + "/";
-    }
-    else
-    {
-      name = assemblyName+ "/" + folder + "/";
+    } else {
+      name = assemblyName + "/" + folder + "/";
     }
     setName("Folder " + name);
   }
@@ -89,8 +86,7 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
    * @return
    */
   @Override
-  public boolean matchFilePattern(String antPattern)
-  {
+  public boolean matchFilePattern(String antPattern) {
     return false;
   }
 
@@ -98,16 +94,15 @@ public class CSharpFolder extends AbstractCSharpResource<CLRAssembly>
    * @return
    */
   @Override
-  public String getLongName()
-  {
+  public String getLongName() {
     return "Folder " + getName();
   }
+
   /**
    * @return
    */
   @Override
-  public CLRAssembly getParent()
-  {
+  public CLRAssembly getParent() {
     return assembly;
   }
 }
