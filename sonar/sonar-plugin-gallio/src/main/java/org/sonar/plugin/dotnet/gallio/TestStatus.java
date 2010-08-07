@@ -26,9 +26,9 @@ package org.sonar.plugin.dotnet.gallio;
 
 /**
  * possible status for a test
+ * 
  * @author Jose CHILLAN Jun 16, 2009
  */
-public enum TestStatus
-{
+public enum TestStatus {
   SUCCESS, FAILED, ERROR, SKIPPED
 }

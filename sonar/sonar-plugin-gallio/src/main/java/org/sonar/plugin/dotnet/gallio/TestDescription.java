@@ -33,20 +33,18 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  * @author Jose CHILLAN Jun 4, 2009
  */
-public class TestDescription
-{
+public class TestDescription {
   private String assemblyName;
   private String namespace;
   private String className;
   private String methodName;
-  private int    line;
-  private File   sourceFile;
+  private int line;
+  private File sourceFile;
 
   /**
    * Constructs a @link{TestDescription}.
    */
-  public TestDescription()
-  {
+  public TestDescription() {
   }
 
   /**
@@ -54,18 +52,17 @@ public class TestDescription
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
   /**
    * Sets the assemblyName.
    * 
-   * @param assemblyName The assemblyName to set.
+   * @param assemblyName
+   *          The assemblyName to set.
    */
-  public void setAssemblyName(String assemblyName)
-  {
+  public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
   }
 
@@ -74,18 +71,17 @@ public class TestDescription
    * 
    * @return The namespace to return.
    */
-  public String getNamespace()
-  {
+  public String getNamespace() {
     return this.namespace;
   }
 
   /**
    * Sets the namespace.
    * 
-   * @param namespace The namespace to set.
+   * @param namespace
+   *          The namespace to set.
    */
-  public void setNamespace(String namespace)
-  {
+  public void setNamespace(String namespace) {
     this.namespace = namespace;
   }
 
@@ -94,18 +90,17 @@ public class TestDescription
    * 
    * @return The className to return.
    */
-  public String getClassName()
-  {
+  public String getClassName() {
     return this.className;
   }
 
   /**
    * Sets the className.
    * 
-   * @param className The className to set.
+   * @param className
+   *          The className to set.
    */
-  public void setClassName(String className)
-  {
+  public void setClassName(String className) {
     this.className = className;
   }
 
@@ -114,68 +109,61 @@ public class TestDescription
    * 
    * @return The methodName to return.
    */
-  public String getMethodName()
-  {
+  public String getMethodName() {
     return this.methodName;
   }
 
   /**
    * Sets the methodName.
    * 
-   * @param methodName The methodName to set.
+   * @param methodName
+   *          The methodName to set.
    */
-  public void setMethodName(String methodName)
-  {
+  public void setMethodName(String methodName) {
     this.methodName = methodName;
   }
 
-  
   /**
    * Returns the line.
    * 
    * @return The line to return.
    */
-  public int getLine()
-  {
+  public int getLine() {
     return this.line;
   }
 
-  
   /**
    * Sets the line.
    * 
-   * @param line The line to set.
+   * @param line
+   *          The line to set.
    */
-  public void setLine(int line)
-  {
+  public void setLine(int line) {
     this.line = line;
   }
 
-  
   /**
    * Returns the sourceFile.
    * 
    * @return The sourceFile to return.
    */
-  public File getSourceFile()
-  {
+  public File getSourceFile() {
     return this.sourceFile;
   }
 
-  
   /**
    * Sets the sourceFile.
    * 
-   * @param sourceFile The sourceFile to set.
+   * @param sourceFile
+   *          The sourceFile to set.
    */
-  public void setSourceFile(File sourceFile)
-  {
+  public void setSourceFile(File sourceFile) {
     this.sourceFile = sourceFile;
   }
 
   @Override
-  public String toString()
-  {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+  public String toString() {
+    return ToStringBuilder.reflectionToString(this,
+        ToStringStyle.SHORT_PREFIX_STYLE);
   }
 }

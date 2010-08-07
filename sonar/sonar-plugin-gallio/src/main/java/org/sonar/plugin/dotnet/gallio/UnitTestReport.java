@@ -32,93 +32,74 @@ import java.util.List;
  * 
  * @author Jose CHILLAN Apr 28, 2009
  */
-public class UnitTestReport
-{
-  private String               assemblyName;
-  private File                 sourceFile;
-  private int                  errors   = 0;
-  private int                  skipped  = 0;
-  private int                  tests    = 0;
-  private int                  timeMS   = 0;
-  private int                  failures = 0;
-  private int                  asserts;
+public class UnitTestReport {
+  private String assemblyName;
+  private File sourceFile;
+  private int errors = 0;
+  private int skipped = 0;
+  private int tests = 0;
+  private int timeMS = 0;
+  private int failures = 0;
+  private int asserts;
   private List<TestCaseDetail> details;
 
-  public UnitTestReport()
-  {
+  public UnitTestReport() {
     details = new ArrayList<TestCaseDetail>();
   }
 
-  public int getErrors()
-  {
+  public int getErrors() {
     return errors;
   }
 
-  public void setErrors(int errors)
-  {
+  public void setErrors(int errors) {
     this.errors = errors;
   }
 
-  public int getSkipped()
-  {
+  public int getSkipped() {
     return skipped;
   }
 
-  public void setSkipped(int skipped)
-  {
+  public void setSkipped(int skipped) {
     this.skipped = skipped;
   }
 
-  public int getTests()
-  {
+  public int getTests() {
     return tests;
   }
 
-  public void setTests(int tests)
-  {
+  public void setTests(int tests) {
     this.tests = tests;
   }
 
-  public int getTimeMS()
-  {
+  public int getTimeMS() {
     return timeMS;
   }
 
-  public void setTimeMS(int timeMS)
-  {
+  public void setTimeMS(int timeMS) {
     this.timeMS = timeMS;
   }
 
-  public int getFailures()
-  {
+  public int getFailures() {
     return failures;
   }
 
-  public void setFailures(int failures)
-  {
+  public void setFailures(int failures) {
     this.failures = failures;
   }
 
-  public List<TestCaseDetail> getDetails()
-  {
+  public List<TestCaseDetail> getDetails() {
     return details;
   }
 
-  public void addDetail(TestCaseDetail detail)
-  {
+  public void addDetail(TestCaseDetail detail) {
     this.details.add(detail);
     tests++;
     TestStatus status = detail.getStatus();
-    if (status == TestStatus.FAILED)
-    {
+    if (status == TestStatus.FAILED) {
       failures++;
-    }
-    else if (status == TestStatus.SKIPPED)
-    {
+    } else if (status == TestStatus.SKIPPED) {
       skipped++;
-    }
-    else if (status == TestStatus.ERROR)
-    {
+    } else if (status == TestStatus.ERROR) {
       errors++;
     }
     // We complete the other indicators
@@ -127,33 +108,17 @@ public class UnitTestReport
   }
 
   @Override
-  public String toString()
-  {
-    return "Assembly="
-           + assemblyName
-           + ", file:"
-           + sourceFile
-           + "(time="
-           + timeMS
-           / 1000.
-           + "s, tests="
-           + tests
-           + ", failures="
-           + failures
-           + ", ignored="
-           + skipped
-           + ", asserts="
-           + asserts
-           + ")";
+  public String toString() {
+    return "Assembly=" + assemblyName + ", file:" + sourceFile + "(time="
+        + timeMS / 1000. + "s, tests=" + tests + ", failures=" + failures
+        + ", ignored=" + skipped + ", asserts=" + asserts + ")";
   }
 
-  public int getAsserts()
-  {
+  public int getAsserts() {
     return this.asserts;
   }
 
-  public void setAsserts(int asserts)
-  {
+  public void setAsserts(int asserts) {
     this.asserts = asserts;
   }
 
@@ -162,66 +127,62 @@ public class UnitTestReport
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
   /**
    * Sets the assemblyName.
    * 
-   * @param assemblyName The assemblyName to set.
+   * @param assemblyName
+   *          The assemblyName to set.
    */
-  public void setAssemblyName(String assemblyName)
-  {
+  public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
   }
 
-  
   /**
    * Returns the sourceFile.
    * 
    * @return The sourceFile to return.
    */
-  public File getSourceFile()
-  {
+  public File getSourceFile() {
     return this.sourceFile;
   }
 
-  
   /**
    * Sets the sourceFile.
    * 
-   * @param sourceFile The sourceFile to set.
+   * @param sourceFile
+   *          The sourceFile to set.
    */
-  public void setSourceFile(File sourceFile)
-  {
+  public void setSourceFile(File sourceFile) {
     this.sourceFile = sourceFile;
   }
 
-	@Override
+  @Override
   public int hashCode() {
-	  final int prime = 31;
-	  int result = 1;
-	  result = prime * result
-	      + ((sourceFile == null) ? 0 : sourceFile.hashCode());
-	  return result;
+    final int prime = 31;
+    int result = 1;
+    result = prime * result
+        + ((sourceFile == null) ? 0 : sourceFile.hashCode());
+    return result;
   }
 
-	@Override
+  @Override
   public boolean equals(Object obj) {
-	  if (this == obj)
-		  return true;
-	  if (obj == null)
-		  return false;
-	  if (getClass() != obj.getClass())
-		  return false;
-	  UnitTestReport other = (UnitTestReport) obj;
-	  if (sourceFile == null) {
-		  if (other.sourceFile != null)
-			  return false;
-	  } else if (!sourceFile.equals(other.sourceFile))
-		  return false;
-	  return true;
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    UnitTestReport other = (UnitTestReport) obj;
+    if (sourceFile == null) {
+      if (other.sourceFile != null)
+        return false;
+    } else if (!sourceFile.equals(other.sourceFile))
+      return false;
+    return true;
   }
 }

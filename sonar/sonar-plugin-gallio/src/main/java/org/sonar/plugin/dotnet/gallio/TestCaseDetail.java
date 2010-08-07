@@ -30,76 +30,63 @@ import java.io.File;
  * 
  * @author Jose CHILLAN Jun 16, 2009
  */
-public class TestCaseDetail
-{
-  private String     name;
+public class TestCaseDetail {
+  private String name;
   private TestStatus status;
-  private String     stackTrace;
-  private String     errorMessage;
-  private int        timeMillis = 0;
-  private int        countAsserts;
-  private File       sourceFile;
+  private String stackTrace;
+  private String errorMessage;
+  private int timeMillis = 0;
+  private int countAsserts;
+  private File sourceFile;
 
   /**
    * Constructs an empty @link{TestCaseDetail}.
    */
-  public TestCaseDetail()
-  {
+  public TestCaseDetail() {
   }
 
-  public String getName()
-  {
+  public String getName() {
     return name;
   }
 
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
-  public String getStackTrace()
-  {
+  public String getStackTrace() {
     return stackTrace;
   }
 
-  public void setStackTrace(String stackTrace)
-  {
+  public void setStackTrace(String stackTrace) {
     this.stackTrace = stackTrace;
   }
 
-  public String getErrorMessage()
-  {
+  public String getErrorMessage() {
     return errorMessage;
   }
 
-  public void setErrorMessage(String errorMessage)
-  {
+  public void setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
   }
 
-  public int getTimeMillis()
-  {
+  public int getTimeMillis() {
     return timeMillis;
   }
 
-  public void setTimeMillis(int timeMS)
-  {
+  public void setTimeMillis(int timeMS) {
     this.timeMillis = timeMS;
   }
 
-  public int getCountAsserts()
-  {
+  public int getCountAsserts() {
     return this.countAsserts;
   }
 
-  public void setCountAsserts(int countAsserts)
-  {
+  public void setCountAsserts(int countAsserts) {
     this.countAsserts = countAsserts;
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return "Test " + name + "(" + status + ", time=" + timeMillis * 0.001 + ")";
   }
 
@@ -108,40 +95,36 @@ public class TestCaseDetail
    * 
    * @return The status to return.
    */
-  public TestStatus getStatus()
-  {
+  public TestStatus getStatus() {
     return this.status;
   }
 
   /**
    * Sets the status.
    * 
-   * @param status The status to set.
+   * @param status
+   *          The status to set.
    */
-  public void setStatus(TestStatus status)
-  {
+  public void setStatus(TestStatus status) {
     this.status = status;
   }
 
-  
   /**
    * Returns the testFile.
    * 
    * @return The testFile to return.
    */
-  public File getSourceFile()
-  {
+  public File getSourceFile() {
     return this.sourceFile;
   }
 
-  
   /**
    * Sets the testFile.
    * 
-   * @param testFile The testFile to set.
+   * @param testFile
+   *          The testFile to set.
    */
-  public void setSourceFile(File testFile)
-  {
+  public void setSourceFile(File testFile) {
     this.sourceFile = testFile;
   }
 

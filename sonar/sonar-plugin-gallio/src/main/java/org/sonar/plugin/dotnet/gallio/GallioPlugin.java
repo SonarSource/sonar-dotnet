@@ -34,23 +34,18 @@ import org.sonar.api.Plugin;
  * 
  * @author Jose CHILLAN Jun 4, 2009
  */
-public class GallioPlugin
-  implements Plugin
-{
+public class GallioPlugin implements Plugin {
   /**
    * Constructs a @link{GallioPlugin}.
    */
-  public GallioPlugin()
-  {
+  public GallioPlugin() {
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that collects the Gallio test results";
   }
 
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GallioSensor.class);
     list.add(GallioMetrics.class);
@@ -58,19 +53,16 @@ public class GallioPlugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return "gallio";
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "Gallio Plugin";
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return getKey();
   }
 

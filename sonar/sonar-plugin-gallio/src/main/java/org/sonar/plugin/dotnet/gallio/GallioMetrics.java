@@ -35,25 +35,18 @@ import org.sonar.api.measures.Metrics;
  * 
  * @author Jose CHILLAN Apr 30, 2009
  */
-public class GallioMetrics implements Metrics
-{
+public class GallioMetrics implements Metrics {
   public static final Metric COUNT_ASSERTS = new Metric("count_asserts",
-                                                        "Count Assert",
-                                                        "The number of asserts performed by the unit tests",
-                                                        Metric.ValueType.INT,
-                                                        -1,
-                                                        false,
-                                                        CoreMetrics.DOMAIN_TESTS);
+      "Count Assert", "The number of asserts performed by the unit tests",
+      Metric.ValueType.INT, -1, false, CoreMetrics.DOMAIN_TESTS);
 
   /**
    * Constructs a @link{GallioMetrics}.
    */
-  public GallioMetrics()
-  {
+  public GallioMetrics() {
   }
 
-  public List<Metric> getMetrics()
-  {
+  public List<Metric> getMetrics() {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(COUNT_ASSERTS);
     return metrics;

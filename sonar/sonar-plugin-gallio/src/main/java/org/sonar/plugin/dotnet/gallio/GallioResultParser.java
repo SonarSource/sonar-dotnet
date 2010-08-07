@@ -41,82 +41,77 @@ import org.w3c.dom.Element;
  * 
  * @author Jose CHILLAN Jun 4, 2009
  */
-public class GallioResultParser
-  extends AbstractXmlParser
-{
+public class GallioResultParser extends AbstractXmlParser {
 
   /**
    * Outcomes for the test
    */
-  public final static String OUTCOME_OK           = "passed";
-  public final static String OUTCOME_FAILURE      = "failed";
-  public final static String OUTCOME_SKIPPED      = "skipped";
+  public final static String OUTCOME_OK = "passed";
+  public final static String OUTCOME_FAILURE = "failed";
+  public final static String OUTCOME_SKIPPED = "skipped";
 
   /**
    * Categories for the test
    */
-  public final static String CATEGORY_IGNORED     = "ignored";
-  public final static String CATEGORY_ERROR       = "error";
+  public final static String CATEGORY_IGNORED = "ignored";
+  public final static String CATEGORY_ERROR = "error";
   public final static String GALLIO_XML_NAMESPACE = "http://www.gallio.org/";
 
   /**
    * Constructs a empty parser.
    */
-  public GallioResultParser()
-  {
+  public GallioResultParser() {
     super("ga", GALLIO_XML_NAMESPACE);
   }
 
   /**
    * Extracts the list of unit tests reports.
-   * @param file the Gallio result file
+   * 
+   * @param file
+   *          the Gallio result file
    * @return
    */
-  public Set<UnitTestReport> parse(File file)
-  {
-    try
-    {
+  public Set<UnitTestReport> parse(File file) {
+    try {
       URL url = file.toURI().toURL();
       return parse(url);
-    }
-    catch (Exception e)
-    {
-      throw new IllegalArgumentException("Could not load report File : " + file, e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException(
+          "Could not load report File : " + file, e);
     }
   }
 
   /**
    * Parses a file identified by its url
+   * 
    * @param reportURL
    * @return
    */
-  public Set<UnitTestReport> parse(URL reportURL)
-  {
+  public Set<UnitTestReport> parse(URL reportURL) {
     Map<String, UnitTestReport> reportMap = new HashMap<String, UnitTestReport>();
 
     // We first build a map of the test ids
     Map<String, TestDescription> tests = new HashMap<String, TestDescription>();
-    try
-    {
-      List<Element> testElements = extractElements(reportURL, "//ga:testModel//ga:test[@isTestCase='true']");
-      for (Element testElement : testElements)
-      {
-        Element codeReferenceElement = getUniqueSubElement(testElement, "codeReference");
-        Element codeLocationElement = getUniqueSubElement(testElement, "codeLocation");
-        if (codeReferenceElement == null)
-        {
+    try {
+      List<Element> testElements = extractElements(reportURL,
+          "//ga:testModel//ga:test[@isTestCase='true']");
+      for (Element testElement : testElements) {
+        Element codeReferenceElement = getUniqueSubElement(testElement,
+            "codeReference");
+        Element codeLocationElement = getUniqueSubElement(testElement,
+            "codeLocation");
+        if (codeReferenceElement == null) {
           continue;
         }
         String id = testElement.getAttribute("id");
         String fullAssembly = codeReferenceElement.getAttribute("assembly");
-        if (StringUtils.isBlank(fullAssembly))
-        {
+        if (StringUtils.isBlank(fullAssembly)) {
           Element parentNode = (Element) testElement.getParentNode();
-          codeReferenceElement = getUniqueSubElement(parentNode, "codeReference");
+          codeReferenceElement = getUniqueSubElement(parentNode,
+              "codeReference");
           codeLocationElement = getUniqueSubElement(parentNode, "codeLocation");
           fullAssembly = codeReferenceElement.getAttribute("assembly");
-          if (fullAssembly == null)
-          {
+          if (fullAssembly == null) {
             // Can't find the location : we skip it
             continue;
           }
@@ -127,8 +122,7 @@ public class GallioResultParser
         String methodName = codeReferenceElement.getAttribute("member");
         File sourceLocation = null;
         int lineNumber = 0;
-        if (codeLocationElement != null)
-        {
+        if (codeLocationElement != null) {
           sourceLocation = new File(codeLocationElement.getAttribute("path"));
           lineNumber = getIntAttribute(codeLocationElement, "line");
         }
@@ -146,31 +140,35 @@ public class GallioResultParser
       }
 
       // Then we parse the results fo the tests.
-      List<Element> testStepsElements = extractElements(reportURL, "//ga:testStepRun/ga:testStep[@isTestCase='true']");
-      for (Element testStepElt : testStepsElements)
-      {
+      List<Element> testStepsElements = extractElements(reportURL,
+          "//ga:testStepRun/ga:testStep[@isTestCase='true']");
+      for (Element testStepElt : testStepsElements) {
         String testId = testStepElt.getAttribute("testId");
         Element testStepRunElement = (Element) testStepElt.getParentNode();
         // We retrieve the description already parsed
-        // NOTE : we can do this in ONE PASS !!! (the data are duplicated from the model)
+        // NOTE : we can do this in ONE PASS !!! (the data are duplicated from
+        // the model)
         TestDescription description = tests.get(testId);
-        if (description == null)
-        {
+        if (description == null) {
           // No associated description : we skip it
           continue;
         }
-        Element resultElement = getUniqueSubElement(testStepRunElement, "result");
+        Element resultElement = getUniqueSubElement(testStepRunElement,
+            "result");
         int countAsserts = getIntAttribute(resultElement, "assertCount");
         double duration = getDoubleAttribute(resultElement, "duration");
         String status = evaluateAttribute(resultElement, "ga:outcome/@status");
-        String category = evaluateAttribute(resultElement, "ga:outcome/@category");
+        String category = evaluateAttribute(resultElement,
+            "ga:outcome/@category");
         TestStatus executionStatus = computeStatus(status, category);
         String message = null;
         String stackTrace = null;
-        if ((executionStatus == TestStatus.FAILED) || (executionStatus == TestStatus.ERROR))
-        {
-          message = evaluateAttribute(testStepRunElement, "ga:testLog//ga:section[@name='Message']/ga:contents/ga:text");
-          stackTrace = evaluateAttribute(testStepRunElement, "ga:testLog//ga:section//ga:marker[@class='StackTrace']/ga:contents/ga:text");
+        if ((executionStatus == TestStatus.FAILED)
+            || (executionStatus == TestStatus.ERROR)) {
+          message = evaluateAttribute(testStepRunElement,
+              "ga:testLog//ga:section[@name='Message']/ga:contents/ga:text");
+          stackTrace = evaluateAttribute(testStepRunElement,
+              "ga:testLog//ga:section//ga:marker[@class='StackTrace']/ga:contents/ga:text");
         }
         File sourceFile = description.getSourceFile();
 
@@ -189,9 +187,7 @@ public class GallioResultParser
         UnitTestReport report = getReport(reportMap, assemblyName, sourcePath);
         report.addDetail(detail);
       }
-    }
-    catch (Exception discarded)
-    {
+    } catch (Exception discarded) {
       // Nothing
     }
 
@@ -207,12 +203,11 @@ public class GallioResultParser
    * @param assemblyName
    * @return
    */
-  private UnitTestReport getReport(Map<String, UnitTestReport> map, String assemblyName, String testPath)
-  {
+  private UnitTestReport getReport(Map<String, UnitTestReport> map,
+      String assemblyName, String testPath) {
     String key = "[" + assemblyName + "]" + testPath;
     UnitTestReport report = map.get(key);
-    if (report == null)
-    {
+    if (report == null) {
       report = new UnitTestReport();
       report.setAssemblyName(assemblyName);
       report.setSourceFile(new File(testPath));
@@ -221,26 +216,17 @@ public class GallioResultParser
     return report;
   }
 
-  private TestStatus computeStatus(String status, String category)
-  {
+  private TestStatus computeStatus(String status, String category) {
     // We convert the Gallio result into 4 status
     TestStatus result = null;
-    if (OUTCOME_OK.equals(status))
-    {
+    if (OUTCOME_OK.equals(status)) {
       result = TestStatus.SUCCESS;
-    }
-    else if (OUTCOME_SKIPPED.equals(status))
-    {
+    } else if (OUTCOME_SKIPPED.equals(status)) {
       result = TestStatus.SKIPPED;
-    }
-    else if (OUTCOME_FAILURE.equals(status))
-    {
-      if (CATEGORY_ERROR.equals(category))
-      {
+    } else if (OUTCOME_FAILURE.equals(status)) {
+      if (CATEGORY_ERROR.equals(category)) {
         result = TestStatus.ERROR;
-      }
-      else
-      {
+      } else {
         result = TestStatus.FAILED;
       }
     }

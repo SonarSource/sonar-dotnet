@@ -33,31 +33,26 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN Feb 16, 2010
  */
-public class GallioMavenPluginHandler extends AbstractDotNetMavenPluginHandler
-{
-  public static final String GROUP_ID    = MavenUtils.GROUP_ID_APACHE_MAVEN;
+public class GallioMavenPluginHandler extends AbstractDotNetMavenPluginHandler {
+  public static final String GROUP_ID = MavenUtils.GROUP_ID_APACHE_MAVEN;
   public static final String ARTIFACT_ID = "maven-dotnet-plugin";
 
   /**
    * Constructs a @link{NUnitMavenPluginHandler}.
    */
-  public GallioMavenPluginHandler()
-  {
+  public GallioMavenPluginHandler() {
   }
 
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
+  public void configure(Project project, MavenPlugin plugin) {
     super.configure(project, plugin);
     // We ignore the test failures in Sonar.
     plugin.setParameter("testFailureIgnore", "true");
   }
 
-  public String[] getGoals()
-  {
+  public String[] getGoals() {
     // We launch the maven "test" goal, which is based on Gallio
-    return new String[] { "test"
-    };
+    return new String[] { "test" };
   }
 
 }
