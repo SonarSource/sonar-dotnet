@@ -34,152 +34,153 @@ import java.util.List;
  * @author Jose CHILLAN Apr 16, 2009
  */
 public class VisualStudioSolution {
-	private File solutionFile;
-	private File solutionDir;
-	private String name;
-	private List<VisualStudioProject> projects;
+  private File solutionFile;
+  private File solutionDir;
+  private String name;
+  private List<VisualStudioProject> projects;
 
-	public VisualStudioSolution(File solutionFile,
-	    List<VisualStudioProject> projects) {
-		this.solutionFile = solutionFile;
-		this.solutionDir = solutionFile.getParentFile();
-		this.projects = projects;
-	}
+  public VisualStudioSolution(File solutionFile,
+      List<VisualStudioProject> projects) {
+    this.solutionFile = solutionFile;
+    this.solutionDir = solutionFile.getParentFile();
+    this.projects = projects;
+  }
 
-	/**
-	 * Gets the project a file belongs to.
-	 * 
-	 * @param file
-	 * @return the project contains the file, or <code>null</code> if none is
-	 *         matching
-	 */
-	public VisualStudioProject getProject(File file) {
-		for (VisualStudioProject project : projects) {
-			if (project.contains(file)) {
-				return project;
-			}
-		}
-		return null;
-	}
+  /**
+   * Gets the project a file belongs to.
+   * 
+   * @param file
+   * @return the project contains the file, or <code>null</code> if none is
+   *         matching
+   */
+  public VisualStudioProject getProject(File file) {
+    for (VisualStudioProject project : projects) {
+      if (project.contains(file)) {
+        return project;
+      }
+    }
+    return null;
+  }
 
-	/**
-	 * Gets the project whose base directory contains the file.
-	 * 
-	 * @param file
-	 *          the file to look for
-	 * @return the associated project, or <code>null</code> if none is matching
-	 */
-	public VisualStudioProject getProjectByLocation(File file) {
-		String canonicalPath;
-		try {
-			canonicalPath = file.getCanonicalPath();
-			for (VisualStudioProject project : projects) {
-				File directory = project.getDirectory();
-				String projectFolderPath = directory.getPath();
-				if (canonicalPath.startsWith(projectFolderPath)) {
-					if (project.isParentDirectoryOf(file)) {
-						return project;
-					}
-				}
-			}
-		} catch (IOException e) {
-			// Nothing
-		}
+  /**
+   * Gets the project whose base directory contains the file.
+   * 
+   * @param file
+   *          the file to look for
+   * @return the associated project, or <code>null</code> if none is matching
+   */
+  public VisualStudioProject getProjectByLocation(File file) {
+    String canonicalPath;
+    try {
+      canonicalPath = file.getCanonicalPath();
+      for (VisualStudioProject project : projects) {
+        File directory = project.getDirectory();
+        String projectFolderPath = directory.getPath();
+        if (canonicalPath.startsWith(projectFolderPath)) {
+          if (project.isParentDirectoryOf(file)) {
+            return project;
+          }
+        }
+      }
+    } catch (IOException e) {
+      // Nothing
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	/**
-	 * Returns the solutionFile.
-	 * 
-	 * @return The solutionFile to return.
-	 */
-	public File getSolutionFile() {
-		return this.solutionFile;
-	}
+  /**
+   * Returns the solutionFile.
+   * 
+   * @return The solutionFile to return.
+   */
+  public File getSolutionFile() {
+    return this.solutionFile;
+  }
 
-	/**
-	 * Returns the solutionDir.
-	 * 
-	 * @return The solutionDir to return.
-	 */
-	public File getSolutionDir() {
-		return this.solutionDir;
-	}
+  /**
+   * Returns the solutionDir.
+   * 
+   * @return The solutionDir to return.
+   */
+  public File getSolutionDir() {
+    return this.solutionDir;
+  }
 
-	/**
-	 * Gets a project by its assembly name.
-	 * 
-	 * @param assemblyName
-	 *          the name of the assembly
-	 * @return the project, or <code>null</code> if not found
-	 */
-	public VisualStudioProject getProject(String assemblyName) {
-		VisualStudioProject result = null;
-		for (VisualStudioProject project : projects) {
-			if (assemblyName.equalsIgnoreCase(project.getAssemblyName())) {
-				result = project;
-				break;
-			}
-		}
-		if (result == null) {
-			// perhaps a web project
-			for (VisualStudioProject project : projects) {
-				if (project.isWebProject() && project.getWebAssemblyNames().contains(assemblyName)) {
-					result = project;
-					break;
-				}
-			}
-		}
-		return result;
-	}
+  /**
+   * Gets a project by its assembly name.
+   * 
+   * @param assemblyName
+   *          the name of the assembly
+   * @return the project, or <code>null</code> if not found
+   */
+  public VisualStudioProject getProject(String assemblyName) {
+    VisualStudioProject result = null;
+    for (VisualStudioProject project : projects) {
+      if (assemblyName.equalsIgnoreCase(project.getAssemblyName())) {
+        result = project;
+        break;
+      }
+    }
+    if (result == null) {
+      // perhaps a web project
+      for (VisualStudioProject project : projects) {
+        if (project.isWebProject()
+            && project.getWebAssemblyNames().contains(assemblyName)) {
+          result = project;
+          break;
+        }
+      }
+    }
+    return result;
+  }
 
-	/**
-	 * Returns the projects.
-	 * 
-	 * @return The projects to return.
-	 */
-	public List<VisualStudioProject> getProjects() {
-		return this.projects;
-	}
+  /**
+   * Returns the projects.
+   * 
+   * @return The projects to return.
+   */
+  public List<VisualStudioProject> getProjects() {
+    return this.projects;
+  }
 
-	/**
-	 * Returns the test projects.
-	 * 
-	 * @return The projects to return.
-	 */
-	public List<VisualStudioProject> getTestProjects() {
-		List<VisualStudioProject> result = new ArrayList<VisualStudioProject>();
-		for (VisualStudioProject visualStudioProject : projects) {
-			if (visualStudioProject.isTest()) {
-				result.add(visualStudioProject);
-			}
-		}
-		return result;
-	}
+  /**
+   * Returns the test projects.
+   * 
+   * @return The projects to return.
+   */
+  public List<VisualStudioProject> getTestProjects() {
+    List<VisualStudioProject> result = new ArrayList<VisualStudioProject>();
+    for (VisualStudioProject visualStudioProject : projects) {
+      if (visualStudioProject.isTest()) {
+        result.add(visualStudioProject);
+      }
+    }
+    return result;
+  }
 
-	@Override
-	public String toString() {
-		return "Solution(path=" + solutionFile + ")";
-	}
+  @Override
+  public String toString() {
+    return "Solution(path=" + solutionFile + ")";
+  }
 
-	/**
-	 * Returns the name.
-	 * 
-	 * @return The name to return.
-	 */
-	public String getName() {
-		return this.name;
-	}
+  /**
+   * Returns the name.
+   * 
+   * @return The name to return.
+   */
+  public String getName() {
+    return this.name;
+  }
 
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *          The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * Sets the name.
+   * 
+   * @param name
+   *          The name to set.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
 }

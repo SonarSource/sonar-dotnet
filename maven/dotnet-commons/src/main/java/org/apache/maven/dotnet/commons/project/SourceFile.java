@@ -32,23 +32,26 @@ import org.codehaus.plexus.util.StringUtils;
  * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class SourceFile
-{
-  private final File                file;
-  private final String              folder;
-  private final String              name;
+public class SourceFile {
+  private final File file;
+  private final String folder;
+  private final String name;
   private final VisualStudioProject project;
 
   /**
    * Constructs a @link{SourceFile}.
    * 
-   * @param file the file canonical path
-   * @param project the project that contains the file
-   * @param folder the relative folder containing the file
-   * @param fileName the file name
+   * @param file
+   *          the file canonical path
+   * @param project
+   *          the project that contains the file
+   * @param folder
+   *          the relative folder containing the file
+   * @param fileName
+   *          the file name
    */
-  public SourceFile(VisualStudioProject project, File file, String folder, String fileName)
-  {
+  public SourceFile(VisualStudioProject project, File file, String folder,
+      String fileName) {
     super();
     this.project = project;
     this.folder = folder;
@@ -61,8 +64,7 @@ public class SourceFile
    * 
    * @return The folder to return.
    */
-  public String getFolder()
-  {
+  public String getFolder() {
     return this.folder;
   }
 
@@ -71,8 +73,7 @@ public class SourceFile
    * 
    * @return The fileName to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
@@ -81,8 +82,7 @@ public class SourceFile
    * 
    * @return The project to return.
    */
-  public VisualStudioProject getProject()
-  {
+  public VisualStudioProject getProject() {
     return this.project;
   }
 
@@ -90,12 +90,10 @@ public class SourceFile
    * @return
    */
   @Override
-  public String toString()
-  {
+  public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("Source(");
-    if (!StringUtils.isEmpty(folder))
-    {
+    if (!StringUtils.isEmpty(folder)) {
       builder.append(folder);
       builder.append("/");
     }
@@ -104,14 +102,12 @@ public class SourceFile
     return builder.toString();
   }
 
-  
   /**
    * Returns the file.
    * 
    * @return The file to return.
    */
-  public File getFile()
-  {
+  public File getFile() {
     return this.file;
   }
 

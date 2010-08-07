@@ -28,18 +28,18 @@ import java.util.Set;
  * Helper to filter generated coe from human written code
  * 
  * @author Alexandre Victoor
- *
+ * 
  */
 public enum GeneratedCodeFilter {
 
-	INSTANCE;
-	
-	private final static Set<String> fileNamesToExclude = 
-		new HashSet<String>(Arrays.asList(new String[]{"Reference.cs"}));
-	
-	public boolean isGenerated(String fileName) {
-		return fileNamesToExclude.contains(fileName) 
-		|| fileName.toLowerCase().contains("designer.");
-	}
-	
+  INSTANCE;
+
+  private final static Set<String> fileNamesToExclude = new HashSet<String>(
+      Arrays.asList(new String[] { "Reference.cs" }));
+
+  public boolean isGenerated(String fileName) {
+    return fileNamesToExclude.contains(fileName)
+        || fileName.toLowerCase().contains("designer.");
+  }
+
 }

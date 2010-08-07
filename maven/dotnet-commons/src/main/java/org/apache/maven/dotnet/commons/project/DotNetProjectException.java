@@ -26,35 +26,30 @@ package org.apache.maven.dotnet.commons.project;
 
 /**
  * Exception for problems occurring during the analysis of a CSharp project.
+ * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class DotNetProjectException
-  extends Exception
-{
+public class DotNetProjectException extends Exception {
 
   /**
    * serialVersionUID
    */
   private static final long serialVersionUID = 30124787008899458L;
 
-  public DotNetProjectException()
-  {
+  public DotNetProjectException() {
   }
 
-  public DotNetProjectException(String message)
-  {
+  public DotNetProjectException(String message) {
     super(message);
 
   }
 
-  public DotNetProjectException(Throwable cause)
-  {
+  public DotNetProjectException(Throwable cause) {
     super(cause);
 
   }
 
-  public DotNetProjectException(String message, Throwable cause)
-  {
+  public DotNetProjectException(String message, Throwable cause) {
     super(message, cause);
 
   }

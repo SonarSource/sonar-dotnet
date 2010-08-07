@@ -29,17 +29,16 @@ package org.apache.maven.dotnet.commons.project;
  * 
  * @author Jose CHILLAN Apr 16, 2009
  */
-public enum ArtifactType
-{
+public enum ArtifactType {
   /**
    * Artifact that corresponds to a .dll.
    */
-  LIBRARY, 
+  LIBRARY,
   /**
    * Artifact that corresponds to a .exe.
    */
   EXECUTABLE,
-  
+
   /**
    * Artifact that corresponds to a web project.
    */

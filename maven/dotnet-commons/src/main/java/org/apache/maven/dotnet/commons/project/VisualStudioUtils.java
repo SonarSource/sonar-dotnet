@@ -55,78 +55,71 @@ import org.xml.sax.InputSource;
  * 
  * @author Jose CHILLAN Aug 14, 2009
  */
-public class VisualStudioUtils
-{
+public class VisualStudioUtils {
   public final static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
   public final static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
-  public final static String VISUAL_PROJECT_NAME_PROPERTY  = "visual.studio.project";
-  public final static String SOLUTION_PACKAGING            = "sln";
+  public final static String VISUAL_PROJECT_NAME_PROPERTY = "visual.studio.project";
+  public final static String SOLUTION_PACKAGING = "sln";
 
   /**
-   * Checks, whether the child directory is a subdirectory of the base directory.
+   * Checks, whether the child directory is a subdirectory of the base
+   * directory.
    * 
-   * @param base the base directory.
-   * @param child the suspected child directory.
+   * @param base
+   *          the base directory.
+   * @param child
+   *          the suspected child directory.
    * @return true, if the child is a subdirectory of the base directory.
-   * @throws IOException if an IOError occured during the test.
+   * @throws IOException
+   *           if an IOError occured during the test.
    */
-  public static boolean isSubDirectory(File base, File child)
-  {
-    try
-    {
+  public static boolean isSubDirectory(File base, File child) {
+    try {
       base = base.getCanonicalFile();
       child = child.getCanonicalFile();
 
       File parentFile = child;
 
       // Checks recursively if "base" is one of the parent of "child"
-      while (parentFile != null)
-      {
-        if (base.equals(parentFile))
-        {
+      while (parentFile != null) {
+        if (base.equals(parentFile)) {
           return true;
         }
         parentFile = parentFile.getParentFile();
       }
-    }
-    catch (IOException ex)
-    {
+    } catch (IOException ex) {
       // This is false
     }
     return false;
   }
 
-  public static VisualStudioSolution getVisualSolution(MavenProject project, String proposedSolutionName) throws DotNetProjectException
-  {
-    if (!SOLUTION_PACKAGING.equals(project.getPackaging()))
-    {
+  public static VisualStudioSolution getVisualSolution(MavenProject project,
+      String proposedSolutionName) throws DotNetProjectException {
+    if (!SOLUTION_PACKAGING.equals(project.getPackaging())) {
       return null;
     }
     String solutionName = proposedSolutionName;
-    if (solutionName == null || StringUtils.isWhitespace(solutionName))
-    {
+    if (solutionName == null || StringUtils.isWhitespace(solutionName)) {
       // No proposed name
-      solutionName = project.getProperties().getProperty(VISUAL_SOLUTION_NAME_PROPERTY);
+      solutionName = project.getProperties().getProperty(
+          VISUAL_SOLUTION_NAME_PROPERTY);
     }
-    if (solutionName == null)
-    {
+    if (solutionName == null) {
       // This is not a solution
       return null;
     }
 
     File solutionFile;
-    try
-    {
-      solutionFile = VisualStudioUtils.getVisualFile(project, solutionName, ".sln", "solution");
-    }
-    catch (DotNetProjectException except)
-    {
-      throw new DotNetProjectException("Could not create a VisualStudio solution", except);
+    try {
+      solutionFile = VisualStudioUtils.getVisualFile(project, solutionName,
+          ".sln", "solution");
+    } catch (DotNetProjectException except) {
+      throw new DotNetProjectException(
+          "Could not create a VisualStudio solution", except);
     }
 
     // No solution defined
-    if (solutionFile == null)
-    {
+    if (solutionFile == null) {
       return null;
     }
     return getVisualSolution(project, solutionFile);
@@ -138,23 +131,21 @@ public class VisualStudioUtils
    * @return
    * @throws DotNetProjectException
    */
-  public static VisualStudioSolution getVisualSolution(MavenProject project, File solutionFile) throws DotNetProjectException
-  {
+  public static VisualStudioSolution getVisualSolution(MavenProject project,
+      File solutionFile) throws DotNetProjectException {
     // We try to build the solution
     VisualStudioSolution solution;
-    try
-    {
+    try {
       solution = VisualStudioUtils.getSolution(solutionFile);
-    }
-    catch (Exception e)
-    {
-      throw new DotNetProjectException("Could not extract the solution information for " + solutionFile, e);
+    } catch (Exception e) {
+      throw new DotNetProjectException(
+          "Could not extract the solution information for " + solutionFile, e);
     }
     List<VisualStudioProject> projects = solution.getProjects();
-    String testProjectPattern = project.getProperties().getProperty(TEST_PROJECT_PATTERN_PROPERTY, "*.Tests");
+    String testProjectPattern = project.getProperties().getProperty(
+        TEST_PROJECT_PATTERN_PROPERTY, "*.Tests");
     // We define for each project if it is a test project
-    for (VisualStudioProject visualStudioProject : projects)
-    {
+    for (VisualStudioProject visualStudioProject : projects) {
       assessTestProject(visualStudioProject, testProjectPattern);
     }
     return solution;
@@ -163,11 +154,10 @@ public class VisualStudioUtils
   /**
    * @param visualStudioProject
    */
-  private static void assessTestProject(VisualStudioProject visualStudioProject, String testProjectPattern)
-  {
+  private static void assessTestProject(
+      VisualStudioProject visualStudioProject, String testProjectPattern) {
     String assemblyName = visualStudioProject.getAssemblyName();
-    if (SelectorUtils.match(testProjectPattern, assemblyName))
-    {
+    if (SelectorUtils.match(testProjectPattern, assemblyName)) {
       visualStudioProject.setTest(true);
     }
   }
@@ -175,28 +165,32 @@ public class VisualStudioUtils
   /**
    * Gets the solution from its folder and name.
    * 
-   * @param baseDirectory the directory containing the solution
-   * @param solutionName the solution name
+   * @param baseDirectory
+   *          the directory containing the solution
+   * @param solutionName
+   *          the solution name
    * @return the generated solution
    * @throws IOException
    * @throws XPathExpressionException
    */
-  public static VisualStudioSolution getSolution(File baseDirectory, String solutionName) throws IOException, DotNetProjectException
-  {
+  public static VisualStudioSolution getSolution(File baseDirectory,
+      String solutionName) throws IOException, DotNetProjectException {
     File solutionFile = new File(baseDirectory, solutionName);
     return getSolution(solutionFile);
   }
 
   /**
-   * @param solutionFile the solution file
+   * @param solutionFile
+   *          the solution file
    * @return a new visual studio solution
    * @throws IOException
    * @throws XPathExpressionException
    */
-  public static VisualStudioSolution getSolution(File solutionFile) throws IOException, DotNetProjectException
-  {
+  public static VisualStudioSolution getSolution(File solutionFile)
+      throws IOException, DotNetProjectException {
     List<VisualStudioProject> projects = getProjects(solutionFile);
-    VisualStudioSolution solution = new VisualStudioSolution(solutionFile, projects);
+    VisualStudioSolution solution = new VisualStudioSolution(solutionFile,
+        projects);
     solution.setName(solutionFile.getName());
     return solution;
   }
@@ -204,24 +198,25 @@ public class VisualStudioUtils
   /**
    * Gets all the projects in a solution.
    * 
-   * @param solutionFile the solution file
+   * @param solutionFile
+   *          the solution file
    * @return a list of projects
    * @throws IOException
    * @throws XPathExpressionException
    */
-  protected static List<VisualStudioProject> getProjects(File solutionFile) throws IOException, DotNetProjectException
-  {
+  protected static List<VisualStudioProject> getProjects(File solutionFile)
+      throws IOException, DotNetProjectException {
     File baseDirectory = solutionFile.getParentFile();
-    
+
     // A pattern to extract the projects from a visual studion solution
     String projectExtractExp = "(Project.*?^EndProject$)";
-    Pattern projectExtractPattern = Pattern.compile(projectExtractExp, Pattern.MULTILINE + Pattern.DOTALL);
+    Pattern projectExtractPattern = Pattern.compile(projectExtractExp,
+        Pattern.MULTILINE + Pattern.DOTALL);
     List<String> projectDefinitions = new ArrayList<String>();
     String solutionContent = FileUtils.fileRead(solutionFile);
     // Extracts all the projects from the solution
     Matcher globalMatcher = projectExtractPattern.matcher(solutionContent);
-    while (globalMatcher.find())
-    {
+    while (globalMatcher.find()) {
       String projectDefinition = globalMatcher.group(1);
       projectDefinitions.add(projectDefinition);
     }
@@ -229,38 +224,35 @@ public class VisualStudioUtils
     // This pattern extracts the projects from a Visual Studio solution
     String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.csproj)\"";
     String webProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*).*?ProjectSection\\(WebsiteProperties\\).*?"
-                           + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
+        + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
     Pattern projectPattern = Pattern.compile(normalProjectExp);
-    Pattern webPattern = Pattern.compile(webProjectExp, Pattern.MULTILINE + Pattern.DOTALL);
+    Pattern webPattern = Pattern.compile(webProjectExp, Pattern.MULTILINE
+        + Pattern.DOTALL);
 
     List<VisualStudioProject> result = new ArrayList<VisualStudioProject>();
-    for (String projectDefinition : projectDefinitions)
-    {
+    for (String projectDefinition : projectDefinitions) {
       // Looks for project files
       Matcher matcher = projectPattern.matcher(projectDefinition);
-      if (matcher.find())
-      {
+      if (matcher.find()) {
         String projectName = matcher.group(1);
         String projectPath = matcher.group(2);
         File projectFile = new File(baseDirectory, projectPath);
-        if (!projectFile.exists())
-        {
-          throw new FileNotFoundException("Could not find the project file: " + projectFile);
+        if (!projectFile.exists()) {
+          throw new FileNotFoundException("Could not find the project file: "
+              + projectFile);
         }
         VisualStudioProject project = getProject(projectFile, projectName);
         result.add(project);
-      }
-      else
-      {
+      } else {
         // Searches the web project
         Matcher webMatcher = webPattern.matcher(projectDefinition);
 
-        if (webMatcher.find())
-        {
+        if (webMatcher.find()) {
           String projectName = webMatcher.group(1);
           String projectPath = webMatcher.group(2);
           File projectRoot = new File(baseDirectory, projectPath);
-          VisualStudioProject project = getWebProject(baseDirectory, projectRoot, projectName, projectDefinition);
+          VisualStudioProject project = getWebProject(baseDirectory,
+              projectRoot, projectName, projectDefinition);
           result.add(project);
         }
       }
@@ -271,59 +263,75 @@ public class VisualStudioUtils
   /**
    * Creates a project from its file
    * 
-   * @param projectFile the project file
+   * @param projectFile
+   *          the project file
    * @return the visual project if possible to define
-   * @throws XPathExpressionException if the project is invalid
+   * @throws XPathExpressionException
+   *           if the project is invalid
    * @throws FileNotFoundException
    */
-  public static VisualStudioProject getProject(File projectFile) throws DotNetProjectException, FileNotFoundException
-  {
+  public static VisualStudioProject getProject(File projectFile)
+      throws DotNetProjectException, FileNotFoundException {
     String projectName = projectFile.getName();
     return getProject(projectFile, projectName);
   }
 
   /**
-   * Generates a list of projects from the path of the visual studio projects files (.csproj)
+   * Generates a list of projects from the path of the visual studio projects
+   * files (.csproj)
    * 
-   * @param projectFile the project file
-   * @param projectName the name of the project
-   * @throws XPathExpressionException if the project .csproj is invalid
-   * @throws FileNotFoundException if the file was not found
+   * @param projectFile
+   *          the project file
+   * @param projectName
+   *          the name of the project
+   * @throws XPathExpressionException
+   *           if the project .csproj is invalid
+   * @throws FileNotFoundException
+   *           if the file was not found
    */
-  public static VisualStudioProject getProject(File projectFile, String projectName) throws DotNetProjectException, FileNotFoundException
-  {
+  public static VisualStudioProject getProject(File projectFile,
+      String projectName) throws DotNetProjectException, FileNotFoundException {
     XPathFactory factory = XPathFactory.newInstance();
     XPath xpath = factory.newXPath();
 
     // This is a workaround to avoid Xerces class-loading issues
-    ClassLoader savedClassloader = Thread.currentThread().getContextClassLoader();
-    Thread.currentThread().setContextClassLoader(xpath.getClass().getClassLoader());
-    try
-    {
+    ClassLoader savedClassloader = Thread.currentThread()
+        .getContextClassLoader();
+    Thread.currentThread().setContextClassLoader(
+        xpath.getClass().getClassLoader());
+    try {
       // We define the namespace prefix for Visual Studio
       xpath.setNamespaceContext(new VisualStudioNamespaceContext());
-      XPathExpression projectTypeExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:OutputType");
-      XPathExpression assemblyNameExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:AssemblyName");
-      XPathExpression rootNamespaceExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:RootNamespace");
-      XPathExpression debugOutputExpression = xpath.compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Debug')]/vst:OutputPath");
+      XPathExpression projectTypeExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:OutputType");
+      XPathExpression assemblyNameExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:AssemblyName");
+      XPathExpression rootNamespaceExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:RootNamespace");
+      XPathExpression debugOutputExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Debug')]/vst:OutputPath");
       XPathExpression releaseOutputExpression = xpath
-                                                     .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
+          .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
       VisualStudioProject project = new VisualStudioProject();
       project.setProjectFile(projectFile);
       project.setName(projectName);
       File projectDir = projectFile.getParentFile();
 
       // Extracts the properties of a Visual Studio Project
-      String typeStr = extractProjectProperty(projectTypeExpression, projectFile);
-      String assemblyName = extractProjectProperty(assemblyNameExpression, projectFile);
-      String rootNamespace = extractProjectProperty(rootNamespaceExpression, projectFile);
-      String debugOutput = extractProjectProperty(debugOutputExpression, projectFile);
-      String releaseOutput = extractProjectProperty(releaseOutputExpression, projectFile);
+      String typeStr = extractProjectProperty(projectTypeExpression,
+          projectFile);
+      String assemblyName = extractProjectProperty(assemblyNameExpression,
+          projectFile);
+      String rootNamespace = extractProjectProperty(rootNamespaceExpression,
+          projectFile);
+      String debugOutput = extractProjectProperty(debugOutputExpression,
+          projectFile);
+      String releaseOutput = extractProjectProperty(releaseOutputExpression,
+          projectFile);
 
       // Assess if the artifact is a library or an executable
       ArtifactType type = ArtifactType.LIBRARY;
-      if (typeStr.toLowerCase().contains("exe"))
-      {
+      if (typeStr.toLowerCase().contains("exe")) {
         type = ArtifactType.EXECUTABLE;
       }
       // The project is populated
@@ -335,32 +343,30 @@ public class VisualStudioUtils
       project.setDebugOutputDir(new File(projectDir, debugOutput));
       project.setReleaseOutputDir(new File(projectDir, releaseOutput));
       return project;
-    }
-    catch (XPathExpressionException xpee)
-    {
-      throw new DotNetProjectException("Error while processing the project " + projectFile, xpee);
-    }
-    finally
-    {
+    } catch (XPathExpressionException xpee) {
+      throw new DotNetProjectException("Error while processing the project "
+          + projectFile, xpee);
+    } finally {
       // Replaces the class loader after usage
       Thread.currentThread().setContextClassLoader(savedClassloader);
     }
   }
 
-  public static VisualStudioProject getWebProject(File solutionRoot, File projectRoot, String projectName, String definition) throws DotNetProjectException, FileNotFoundException
-  {
-    try
-    {
+  public static VisualStudioProject getWebProject(File solutionRoot,
+      File projectRoot, String projectName, String definition)
+      throws DotNetProjectException, FileNotFoundException {
+    try {
       // We define the namespace prefix for Visual Studio
       VisualStudioProject project = new VisualStudioProject();
       project.setName(projectName);
-      
-      
+
       // Extracts the properties of a Visual Studio Project
       String assemblyName = projectName;
       String rootNamespace = "";
-      String debugOutput = extractSolutionProperty("Debug.AspNetCompiler.TargetPath", definition);
-      String releaseOutput = extractSolutionProperty("Release.AspNetCompiler.TargetPath", definition);
+      String debugOutput = extractSolutionProperty(
+          "Debug.AspNetCompiler.TargetPath", definition);
+      String releaseOutput = extractSolutionProperty(
+          "Release.AspNetCompiler.TargetPath", definition);
 
       // Assess if the artifact is a library or an executable
       ArtifactType type = ArtifactType.WEB;
@@ -374,66 +380,62 @@ public class VisualStudioUtils
       project.setDebugOutputDir(new File(solutionRoot, debugOutput));
       project.setReleaseOutputDir(new File(solutionRoot, releaseOutput));
       return project;
-    }
-    catch (Exception e) 
-    {
+    } catch (Exception e) {
       return null;
     }
   }
 
   /**
    * Reads a property from a project
+   * 
    * @param string
    * @param definition
    * @return
    */
-  public static String extractSolutionProperty(String name, String definition)
-  {
+  public static String extractSolutionProperty(String name, String definition) {
     String regexp = name + "\\s*=\\s*\"([^\"]*)";
     Pattern pattern = Pattern.compile(regexp);
     Matcher matcher = pattern.matcher(definition);
-    if (matcher.find())
-    {
+    if (matcher.find()) {
       return matcher.group(1);
     }
     return null;
   }
 
   /**
-   * Gets the relative paths of all the files in a project, as they are defined in the .csproj file.
+   * Gets the relative paths of all the files in a project, as they are defined
+   * in the .csproj file.
    * 
-   * @param project the project file
+   * @param project
+   *          the project file
    * @return a list of the project files
    */
-  public static List<String> getFilesPath(File project)
-  {
+  public static List<String> getFilesPath(File project) {
     List<String> result = new ArrayList<String>();
 
     XPathFactory factory = XPathFactory.newInstance();
     XPath xpath = factory.newXPath();
     // We define the namespace prefix for Visual Studio
     xpath.setNamespaceContext(new VisualStudioNamespaceContext());
-    try
-    {
-      // XPathExpression filesExpression = xpath.compile("/vst:Project/vst:ItemGroup/vst:Compile/[fn:ends-with(@Include, '.cs')]");
-      XPathExpression filesExpression = xpath.compile("/vst:Project/vst:ItemGroup/vst:Compile");
+    try {
+      // XPathExpression filesExpression =
+      // xpath.compile("/vst:Project/vst:ItemGroup/vst:Compile/[fn:ends-with(@Include, '.cs')]");
+      XPathExpression filesExpression = xpath
+          .compile("/vst:Project/vst:ItemGroup/vst:Compile");
       InputSource inputSource = new InputSource(new FileInputStream(project));
-      NodeList nodes = (NodeList) filesExpression.evaluate(inputSource, XPathConstants.NODESET);
+      NodeList nodes = (NodeList) filesExpression.evaluate(inputSource,
+          XPathConstants.NODESET);
       int countNodes = nodes.getLength();
-      for (int idxNode = 0; idxNode < countNodes; idxNode++)
-      {
+      for (int idxNode = 0; idxNode < countNodes; idxNode++) {
         Element compileElement = (Element) nodes.item(idxNode);
         // We filter the files
         String filePath = compileElement.getAttribute("Include");
-        if ((filePath != null) && filePath.endsWith(".cs"))
-        {
+        if ((filePath != null) && filePath.endsWith(".cs")) {
           result.add(filePath);
         }
       }
 
-    }
-    catch (Exception exception)
-    {
+    } catch (Exception exception) {
       // Do nothing
     }
     return result;
@@ -448,17 +450,15 @@ public class VisualStudioUtils
    * @throws XPathExpressionException
    * @throws FileNotFoundException
    */
-  private static String extractProjectProperty(XPathExpression expression, File projectFile) throws DotNetProjectException
-  {
-    try
-    {
+  private static String extractProjectProperty(XPathExpression expression,
+      File projectFile) throws DotNetProjectException {
+    try {
       FileInputStream file = new FileInputStream(projectFile);
       InputSource source = new InputSource(file);
       return expression.evaluate(source);
-    }
-    catch (Exception e)
-    {
-      throw new DotNetProjectException("Could not evaluate the expression " + expression + " on project " + projectFile, e);
+    } catch (Exception e) {
+      throw new DotNetProjectException("Could not evaluate the expression "
+          + expression + " on project " + projectFile, e);
     }
   }
 
@@ -467,8 +467,7 @@ public class VisualStudioUtils
    * 
    * @author Jose CHILLAN Sep 1, 2009
    */
-  private static class VisualStudioNamespaceContext implements NamespaceContext
-  {
+  private static class VisualStudioNamespaceContext implements NamespaceContext {
 
     /**
      * Gets the namespace URI.
@@ -476,8 +475,7 @@ public class VisualStudioUtils
      * @param prefix
      * @return
      */
-    public String getNamespaceURI(String prefix)
-    {
+    public String getNamespaceURI(String prefix) {
       if (prefix == null)
         throw new NullPointerException("Null prefix");
       else if ("vst".equals(prefix))
@@ -488,14 +486,12 @@ public class VisualStudioUtils
     }
 
     // This method isn't necessary for XPath processing.
-    public String getPrefix(String uri)
-    {
+    public String getPrefix(String uri) {
       throw new UnsupportedOperationException();
     }
 
     // This method isn't necessary for XPath processing either.
-    public Iterator<?> getPrefixes(String uri)
-    {
+    public Iterator<?> getPrefixes(String uri) {
       throw new UnsupportedOperationException();
     }
 
@@ -511,58 +507,48 @@ public class VisualStudioUtils
    * @return the visual file
    * @throws DotNetProjectException
    */
-  public static File getVisualFile(MavenProject localProject, String configuredName, final String extension, String fileType)
-                                                                                                                             throws DotNetProjectException
-  {
+  public static File getVisualFile(MavenProject localProject,
+      String configuredName, final String extension, String fileType)
+      throws DotNetProjectException {
     File basedir = localProject.getBasedir();
     File visualFile = null;
     // We look for a defined name
-    if (configuredName != null)
-    {
+    if (configuredName != null) {
       visualFile = checkFileExistence(basedir, configuredName);
-      if (visualFile == null)
-      {
-        throw new DotNetProjectException("Could not find the configured " + fileType + " file " + configuredName);
+      if (visualFile == null) {
+        throw new DotNetProjectException("Could not find the configured "
+            + fileType + " file " + configuredName);
       }
     }
     String fileName;
     // Second : we try a solution having the same name as the artifact id
-    if (visualFile == null)
-    {
+    if (visualFile == null) {
       String artifactId = localProject.getArtifactId();
       fileName = artifactId + extension;
       visualFile = checkFileExistence(basedir, fileName);
     }
     // We have found it
-    if (visualFile != null)
-    {
+    if (visualFile != null) {
       return visualFile;
     }
 
     // Last chance : we scan the folder for a solution
     File[] matchingFiles = basedir.listFiles(new FilenameFilter() {
       @Override
-      public boolean accept(File dir, String name)
-      {
+      public boolean accept(File dir, String name) {
         return name.endsWith(extension);
       }
     });
-    if (matchingFiles.length >= 2)
-    {
-      StringBuilder builder = new StringBuilder("Found multiple "
-                                                + fileType
-                                                + " in the same folder."
-                                                + " Please define the 'visual."
-                                                + fileType
-                                                + ".name' property to select from: ");
-      for (File file : matchingFiles)
-      {
+    if (matchingFiles.length >= 2) {
+      StringBuilder builder = new StringBuilder("Found multiple " + fileType
+          + " in the same folder." + " Please define the 'visual." + fileType
+          + ".name' property to select from: ");
+      for (File file : matchingFiles) {
         builder.append(file.getName()).append(" ");
       }
       throw new DotNetProjectException(builder.toString());
     }
-    if (matchingFiles.length == 1)
-    {
+    if (matchingFiles.length == 1) {
       visualFile = matchingFiles[0];
     }
     return visualFile;
@@ -571,15 +557,16 @@ public class VisualStudioUtils
   /**
    * Checks a file existence in a directory.
    * 
-   * @param basedir the directory containing the file
-   * @param fileName the file name
-   * @return <code>null</code> if the file doesn't exist, the file if it is found
+   * @param basedir
+   *          the directory containing the file
+   * @param fileName
+   *          the file name
+   * @return <code>null</code> if the file doesn't exist, the file if it is
+   *         found
    */
-  public static File checkFileExistence(File basedir, String fileName)
-  {
+  public static File checkFileExistence(File basedir, String fileName) {
     File checkedFile = new File(basedir, fileName);
-    if (checkedFile.exists())
-    {
+    if (checkedFile.exists()) {
       return checkedFile;
     }
     return null;

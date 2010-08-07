@@ -26,21 +26,21 @@ import java.io.FilenameFilter;
  * C# language model for CPD
  * 
  * @author avictoor101408
- *
+ * 
  */
 public class CsLanguage implements Language {
 
-	private final Tokenizer tokenizer = new CsTokenizer(); 
-	private final FilenameFilter filter = new CsFilenameFilter();
-	
-	@Override
-	public FilenameFilter getFileFilter() {
-		return filter;
-	}
+  private final Tokenizer tokenizer = new CsTokenizer();
+  private final FilenameFilter filter = new CsFilenameFilter();
 
-	@Override
-	public Tokenizer getTokenizer() {
-		return tokenizer;
-	}
+  @Override
+  public FilenameFilter getFileFilter() {
+    return filter;
+  }
+
+  @Override
+  public Tokenizer getTokenizer() {
+    return tokenizer;
+  }
 
 }
