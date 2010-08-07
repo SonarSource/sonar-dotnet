@@ -37,13 +37,11 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class StyleCopPluginHandler
-  extends AbstractDotNetMavenPluginHandler
-{
-  public static final String     STYLE_COP_FILE        = "sonar.StyleCop";
-  public static final String     STYLE_COP_REPORT_NAME = "stylecop-report.xml";
+public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
+  public static final String STYLE_COP_FILE = "sonar.StyleCop";
+  public static final String STYLE_COP_REPORT_NAME = "stylecop-report.xml";
 
-  private RulesProfile           rulesProfile;
+  private RulesProfile rulesProfile;
   private StyleCopRuleRepository rulesRepository;
 
   /**
@@ -54,17 +52,15 @@ public class StyleCopPluginHandler
    * @param serverHttpClient
    * @param exclusions
    */
-  public StyleCopPluginHandler(RulesProfile rulesProfile, StyleCopRuleRepository rulesRepository, ServerHttpClient serverHttpClient)
-  {
+  public StyleCopPluginHandler(RulesProfile rulesProfile,
+      StyleCopRuleRepository rulesRepository, ServerHttpClient serverHttpClient) {
     super();
     this.rulesProfile = rulesProfile;
     this.rulesRepository = rulesRepository;
   }
 
-  public String[] getGoals()
-  {
-    return new String[] { "stylecop"
-    };
+  public String[] getGoals() {
+    return new String[] { "stylecop" };
   }
 
   /**
@@ -72,17 +68,13 @@ public class StyleCopPluginHandler
    * @param plugin
    */
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
-    try
-    {
+  public void configure(Project project, MavenPlugin plugin) {
+    try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
       configureParameters(plugin);
       plugin.setParameter("styleCopReportName", STYLE_COP_REPORT_NAME);
-    }
-    catch (IOException e)
-    {
+    } catch (IOException e) {
     }
   }
 
@@ -93,16 +85,17 @@ public class StyleCopPluginHandler
    * @param plugin
    * @throws IOException
    */
-  private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException
-  {
-    String styleCopConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-    File configFile = project.getFileSystem().writeToWorkingDirectory(styleCopConfiguration, STYLE_COP_FILE);
+  private void generateConfigurationFile(Project project, MavenPlugin plugin)
+      throws IOException {
+    String styleCopConfiguration = rulesRepository
+        .exportConfiguration(rulesProfile);
+    File configFile = project.getFileSystem().writeToWorkingDirectory(
+        styleCopConfiguration, STYLE_COP_FILE);
     // Defines the configuration file
     plugin.setParameter("styleCopConfigFile", configFile.getAbsolutePath());
   }
 
-  public void configureParameters(MavenPlugin plugin)
-  {
+  public void configureParameters(MavenPlugin plugin) {
     // Nothing yet
   }
 }

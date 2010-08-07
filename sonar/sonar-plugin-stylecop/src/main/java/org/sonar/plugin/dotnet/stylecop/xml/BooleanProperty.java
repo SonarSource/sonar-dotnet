@@ -28,63 +28,55 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-
 /**
  * A boolean property for StyleCop configuration.
+ * 
  * @author Jose CHILLAN Jul 21, 2009
  */
-@XmlType(name="BooleanProperty")
-public class BooleanProperty
-{
-  @XmlAttribute(name="Name")
+@XmlType(name = "BooleanProperty")
+public class BooleanProperty {
+  @XmlAttribute(name = "Name")
   private String name;
-  
+
   @XmlValue
   private String value;
 
-  
   /**
    * Returns the name.
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
-  
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
-  
   /**
    * Returns the value.
    * 
    * @return The value to return.
    */
-  public String getValue()
-  {
+  public String getValue() {
     return this.value;
   }
 
-  
   /**
    * Sets the value.
    * 
-   * @param value The value to set.
+   * @param value
+   *          The value to set.
    */
-  public void setValue(String value)
-  {
+  public void setValue(String value) {
     this.value = value;
   }
-  
-  
+
 }

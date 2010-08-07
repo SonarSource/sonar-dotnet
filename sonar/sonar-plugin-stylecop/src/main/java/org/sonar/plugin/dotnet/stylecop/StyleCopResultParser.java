@@ -51,14 +51,15 @@ import org.w3c.dom.Element;
  * 
  * @author Jose CHILLAN Sep 24, 2009
  */
-public class StyleCopResultParser extends AbstractXmlParser
-{
-	private final static Logger log = LoggerFactory.getLogger(StyleCopResultParser.class);
-	
-  private Project       project;
+public class StyleCopResultParser extends AbstractXmlParser {
+  private final static Logger log = LoggerFactory
+      .getLogger(StyleCopResultParser.class);
+
+  private Project project;
   private SensorContext context;
-  private RulesManager  rulesManager;
+  private RulesManager rulesManager;
   private RulesProfile profile;
+
   /**
    * Constructs a @link{FxCopResultParser}.
    * 
@@ -67,36 +68,33 @@ public class StyleCopResultParser extends AbstractXmlParser
    * @param rulesManager
    * @param profile
    */
-  public StyleCopResultParser(Project project, SensorContext context, RulesManager rulesManager, RulesProfile profile)
-  {
+  public StyleCopResultParser(Project project, SensorContext context,
+      RulesManager rulesManager, RulesProfile profile) {
     super();
     this.project = project;
     this.context = context;
     this.rulesManager = rulesManager;
     this.profile = profile;
-   }
+  }
 
   /**
    * Parses a processed violation file.
    * 
    * @param stream
    */
-  public void parse(URL url)
-  {
+  public void parse(URL url) {
     List<Element> issues = extractElements(url, "//issue");
     // We add each issue
-    for (Element issueElement : issues)
-    {
+    for (Element issueElement : issues) {
       String filePath = getNodeContent(issueElement, "file");
       String key = getNodeContent(issueElement, "key");
       String message = getNodeContent(issueElement, "message");
       String lineNumber = getNodeContent(issueElement, "line");
       Resource<?> resource = getResource(filePath);
-      
+
       Integer line = getIntValue(lineNumber);
       Rule rule = rulesManager.getPluginRule(StyleCopPlugin.KEY, key);
-      if (rule == null)
-      {
+      if (rule == null) {
         // Skips the non registered rules
         continue;
       }
@@ -104,8 +102,7 @@ public class StyleCopResultParser extends AbstractXmlParser
       Violation violation = new Violation(rule, resource);
       violation.setLineId(line);
       violation.setMessage(message);
-      if (activeRule != null)
-      {
+      if (activeRule != null) {
         // We copy the priority
         violation.setPriority(activeRule.getPriority());
       }
@@ -114,32 +111,30 @@ public class StyleCopResultParser extends AbstractXmlParser
     }
   }
 
-  public Resource<?> getResource(String filePath)
-  {
-  	if (StringUtils.isBlank(filePath)) {
-			return null;
-		}
-		
-		if (log.isDebugEnabled()) {
-			log.debug("Getting resource for path: "+filePath);
-		}
-		
-		
-		File file = new File(filePath);
-		CSharpFile fileResource;
-		if (file.exists()) {
-			try {
-				fileResource = CSharpFile.from(project, file, false);
-			} catch (InvalidResourceException ex) {
-				log.warn("resource error", ex);
-				fileResource = null;
-			}
-		} else {
-			log.error("Unable to ge resource for path "+filePath);
-			fileResource = null;
-		}
-		
-		return fileResource;
+  public Resource<?> getResource(String filePath) {
+    if (StringUtils.isBlank(filePath)) {
+      return null;
+    }
+
+    if (log.isDebugEnabled()) {
+      log.debug("Getting resource for path: " + filePath);
+    }
+
+    File file = new File(filePath);
+    CSharpFile fileResource;
+    if (file.exists()) {
+      try {
+        fileResource = CSharpFile.from(project, file, false);
+      } catch (InvalidResourceException ex) {
+        log.warn("resource error", ex);
+        fileResource = null;
+      }
+    } else {
+      log.error("Unable to ge resource for path " + filePath);
+      fileResource = null;
+    }
+
+    return fileResource;
   }
 
   /**
@@ -148,18 +143,13 @@ public class StyleCopResultParser extends AbstractXmlParser
    * @param lineStr
    * @return
    */
-  protected Integer getIntValue(String lineStr)
-  {
-    if (StringUtils.isBlank(lineStr))
-    {
+  protected Integer getIntValue(String lineStr) {
+    if (StringUtils.isBlank(lineStr)) {
       return null;
     }
-    try
-    {
+    try {
       return (int) ParsingUtils.parseNumber(lineStr);
-    }
-    catch (ParseException ignore)
-    {
+    } catch (ParseException ignore) {
       return null;
     }
   }

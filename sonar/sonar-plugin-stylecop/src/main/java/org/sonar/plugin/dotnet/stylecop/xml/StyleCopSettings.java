@@ -32,13 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The XML representation of StyleCop settings.
+ * 
  * @author Jose CHILLAN Apr 6, 2010
  */
 @XmlRootElement(name = "StyleCopSettings")
-public class StyleCopSettings
-{
+public class StyleCopSettings {
   @XmlAttribute(name = "Version")
-  private String         version = "4.3";
+  private String version = "4.3";
 
   @XmlElementWrapper(name = "Analyzers")
   @XmlElement(name = "Analyzer")
@@ -47,8 +47,7 @@ public class StyleCopSettings
   /**
    * Constructs a @link{StyleCopSettings}.
    */
-  public StyleCopSettings()
-  {
+  public StyleCopSettings() {
   }
 
   /**
@@ -56,18 +55,17 @@ public class StyleCopSettings
    * 
    * @return The version to return.
    */
-  public String getVersion()
-  {
+  public String getVersion() {
     return this.version;
   }
 
   /**
    * Sets the version.
    * 
-   * @param version The version to set.
+   * @param version
+   *          The version to set.
    */
-  public void setVersion(String version)
-  {
+  public void setVersion(String version) {
     this.version = version;
   }
 
@@ -76,18 +74,17 @@ public class StyleCopSettings
    * 
    * @return The analizers to return.
    */
-  public List<Analyzer> getAnalizers()
-  {
+  public List<Analyzer> getAnalizers() {
     return this.analizers;
   }
 
   /**
    * Sets the analizers.
    * 
-   * @param analizers The analizers to set.
+   * @param analizers
+   *          The analizers to set.
    */
-  public void setAnalizers(List<Analyzer> analizers)
-  {
+  public void setAnalizers(List<Analyzer> analizers) {
     this.analizers = analizers;
   }
 

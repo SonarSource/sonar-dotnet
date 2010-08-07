@@ -51,32 +51,28 @@ import org.sonar.plugin.dotnet.stylecop.xml.StyleCopSettings;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class StyleCopRuleRepository extends AbstractDotNetRuleRepository implements ConfigurationExportable
-{
+public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
+    implements ConfigurationExportable {
   /**
    * Constructs a @link{StyleCopRuleRepository}.
    */
-  public StyleCopRuleRepository()
-  {
+  public StyleCopRuleRepository() {
   }
 
   @Override
-  public Map<String, String> getBuiltInProfiles()
-  {
+  public Map<String, String> getBuiltInProfiles() {
     Map<String, String> result = new HashMap<String, String>();
     result.put(CSharpRulesProfile.DEFAULT_WAY, "default-rules.StyleCop");
     return result;
   }
 
   @Override
-  public List<Rule> parseReferential(String fileContent)
-  {
+  public List<Rule> parseReferential(String fileContent) {
     return super.parseReferential(fileContent);
   }
 
   @Override
-  public String getRepositoryResourcesBase()
-  {
+  public String getRepositoryResourcesBase() {
     return "org/sonar/plugin/dotnet/stylecop";
   }
 
@@ -87,65 +83,62 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
    * @param rules
    * @return
    */
-  public List<ActiveRule> importConfiguration(String configuration, List<Rule> rules)
-  {
+  public List<ActiveRule> importConfiguration(String configuration,
+      List<Rule> rules) {
     List<StyleCopRule> styleCopConfig = StyleCopRuleParser.parse(configuration);
 
     List<ActiveRule> result = new ArrayList<ActiveRule>();
     Map<String, Rule> rulesByName = new HashMap<String, Rule>();
-    for (Rule dbRule : rules)
-    {
+    for (Rule dbRule : rules) {
       String configKey = dbRule.getConfigKey();
       String dbName = StringUtils.substringAfter(configKey, "#");
       rulesByName.put(dbName, dbRule);
     }
-    for (StyleCopRule styleCopRule : styleCopConfig)
-    {
-      if (styleCopRule.isEnabled())
-      {
-      	Rule dbRule = rulesByName.get(styleCopRule.getName());
-      	String rawPriority = styleCopRule.getPriority();
-      	RulePriority ruleFailureLevel = RulePriority.MINOR;
-      	if (StringUtils.isNotEmpty(rawPriority)) {
-      		 ruleFailureLevel = RulePriority.valueOfString(rawPriority);
-      	}
-      	ActiveRule activeRule = new ActiveRule(null, dbRule, ruleFailureLevel);
+    for (StyleCopRule styleCopRule : styleCopConfig) {
+      if (styleCopRule.isEnabled()) {
+        Rule dbRule = rulesByName.get(styleCopRule.getName());
+        String rawPriority = styleCopRule.getPriority();
+        RulePriority ruleFailureLevel = RulePriority.MINOR;
+        if (StringUtils.isNotEmpty(rawPriority)) {
+          ruleFailureLevel = RulePriority.valueOfString(rawPriority);
+        }
+        ActiveRule activeRule = new ActiveRule(null, dbRule, ruleFailureLevel);
         result.add(activeRule);
-      } 
+      }
     }
-    
+
     return result;
   }
 
   /**
    * Export the configuration file corresponding to a profile.
+   * 
    * @param activeProfile
    * @return
    */
   @Override
-  public String exportConfiguration(RulesProfile activeProfile)
-  {
-    List<ActiveRule> activeRules = activeProfile.getActiveRulesByPlugin(StyleCopPlugin.KEY);
+  public String exportConfiguration(RulesProfile activeProfile) {
+    List<ActiveRule> activeRules = activeProfile
+        .getActiveRulesByPlugin(StyleCopPlugin.KEY);
     List<StyleCopRule> rules = buildRules(activeRules);
     String xmlModules = buildXmlFromRules(rules);
     return xmlModules;
   }
 
   /**
-   * Generates a XML configuration file corresponding to a given set of stylecop rules.
+   * Generates a XML configuration file corresponding to a given set of stylecop
+   * rules.
+   * 
    * @param rules
    * @return
    */
-  private String buildXmlFromRules(List<StyleCopRule> rules)
-  {
+  private String buildXmlFromRules(List<StyleCopRule> rules) {
     Map<String, List<StyleCopRule>> rulesByAnalyzer = new HashMap<String, List<StyleCopRule>>();
     // We build a map because the style cop settings are grouped by analyzer
-    for (StyleCopRule styleCopRule : rules)
-    {
+    for (StyleCopRule styleCopRule : rules) {
       String analyzerId = styleCopRule.getAnalyzerId();
       List<StyleCopRule> rulesList = rulesByAnalyzer.get(analyzerId);
-      if (rulesList == null)
-      {
+      if (rulesList == null) {
         rulesList = new ArrayList<StyleCopRule>();
         rulesByAnalyzer.put(analyzerId, rulesList);
       }
@@ -154,8 +147,7 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
 
     // The XML Objects are populated
     List<Analyzer> analyzers = new ArrayList<Analyzer>();
-    for (Entry<String, List<StyleCopRule>> entry : rulesByAnalyzer.entrySet())
-    {
+    for (Entry<String, List<StyleCopRule>> entry : rulesByAnalyzer.entrySet()) {
       Analyzer analyzer = new Analyzer();
       String id = entry.getKey();
       analyzer.setId(id);
@@ -164,8 +156,7 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
       analyzer.setRules(analyzerRules);
       // This is not an imbricated loop, but rather another way of
       // browsing the list by grouping the analyzers
-      for (StyleCopRule styleCopRule : styleRules)
-      {
+      for (StyleCopRule styleCopRule : styleRules) {
         RuleDef ruleDef = new RuleDef();
         String ruleName = styleCopRule.getName();
         String priority = styleCopRule.getPriority();
@@ -173,12 +164,9 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
         ruleDef.setPriority(priority);
         BooleanProperty property = new BooleanProperty();
         property.setName("Enabled");
-        if (styleCopRule.isEnabled())
-        {
+        if (styleCopRule.isEnabled()) {
           property.setValue("True");
-        }
-        else
-        {
+        } else {
           property.setValue("False");
         }
         ruleDef.setSettings(Collections.singletonList(property));
@@ -199,15 +187,14 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
 
   /**
    * Builds a list of rules.
+   * 
    * @param activeRulesByPlugin
    * @return
    */
-  private List<StyleCopRule> buildRules(List<ActiveRule> activeRulesByPlugin)
-  {
+  private List<StyleCopRule> buildRules(List<ActiveRule> activeRulesByPlugin) {
     List<StyleCopRule> result = new ArrayList<StyleCopRule>();
     Map<String, StyleCopRule> initialRules = getInitialRules();
-    for (ActiveRule activeRule : activeRulesByPlugin)
-    {
+    for (ActiveRule activeRule : activeRulesByPlugin) {
       // Extracts the rule's date
       Rule rule = activeRule.getRule();
       String configKey = rule.getConfigKey();
@@ -215,10 +202,10 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
       styleCopRule.setEnabled(true);
       RulePriority priority = activeRule.getPriority();
       if (priority != null) {
-      	styleCopRule.setPriority(priority.name().toLowerCase());
+        styleCopRule.setPriority(priority.name().toLowerCase());
       }
     }
-    
+
     // We populate the result
     result.addAll(initialRules.values());
     return result;
@@ -226,11 +213,12 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
 
   /**
    * Generates the stylecop rule for a configuration rule.
-   * @param rule the configuration rule
+   * 
+   * @param rule
+   *          the configuration rule
    * @return
    */
-  private StyleCopRule generateRule(Rule rule)
-  {
+  private StyleCopRule generateRule(Rule rule) {
     String configKey = rule.getConfigKey();
     String analyzerId = StringUtils.substringBefore(configKey, "#");
     String name = StringUtils.substringAfter(configKey, "#");
@@ -247,12 +235,10 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository impleme
    * 
    * @return
    */
-  private Map<String, StyleCopRule> getInitialRules()
-  {
+  private Map<String, StyleCopRule> getInitialRules() {
     Map<String, StyleCopRule> result = new LinkedHashMap<String, StyleCopRule>();
     List<Rule> initialReferential = getInitialReferential();
-    for (Rule rule : initialReferential)
-    {
+    for (Rule rule : initialReferential) {
       StyleCopRule styleCopRule = generateRule(rule);
       String key = rule.getConfigKey();
       result.put(key, styleCopRule);

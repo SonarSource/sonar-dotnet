@@ -32,7 +32,7 @@ public class StyleCopRule {
 	private String analyzerId;
 	private String category;
 	private String name;
-	private String priority;
+  private String priority;
 	private boolean enabled;
 
 	/**

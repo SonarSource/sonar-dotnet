@@ -37,66 +37,66 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "Rule")
 public class RuleDef {
-	@XmlAttribute(name = "Name")
-	private String name;
+  @XmlAttribute(name = "Name")
+  private String name;
 
-	@XmlAttribute(name = "SonarPriority")
-	private String priority = "minor";
+  @XmlAttribute(name = "SonarPriority")
+  private String priority = "minor";
 
-	@XmlElementWrapper(name = "RuleSettings")
-	@XmlElement(name = "BooleanProperty")
-	private List<BooleanProperty> settings;
+  @XmlElementWrapper(name = "RuleSettings")
+  @XmlElement(name = "BooleanProperty")
+  private List<BooleanProperty> settings;
 
-	/**
-	 * Constructs a @link{RuleDef}.
-	 */
-	public RuleDef() {
-	}
+  /**
+   * Constructs a @link{RuleDef}.
+   */
+  public RuleDef() {
+  }
 
-	/**
-	 * Returns the name.
-	 * 
-	 * @return The name to return.
-	 */
-	public String getName() {
-		return this.name;
-	}
+  /**
+   * Returns the name.
+   * 
+   * @return The name to return.
+   */
+  public String getName() {
+    return this.name;
+  }
 
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *          The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * Sets the name.
+   * 
+   * @param name
+   *          The name to set.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 * Returns the settings.
-	 * 
-	 * @return The settings to return.
-	 */
-	public List<BooleanProperty> getSettings() {
-		return this.settings;
-	}
+  /**
+   * Returns the settings.
+   * 
+   * @return The settings to return.
+   */
+  public List<BooleanProperty> getSettings() {
+    return this.settings;
+  }
 
-	/**
-	 * Sets the settings.
-	 * 
-	 * @param settings
-	 *          The settings to set.
-	 */
-	public void setSettings(List<BooleanProperty> settings) {
-		this.settings = settings;
-	}
+  /**
+   * Sets the settings.
+   * 
+   * @param settings
+   *          The settings to set.
+   */
+  public void setSettings(List<BooleanProperty> settings) {
+    this.settings = settings;
+  }
 
-	public String getPriority() {
-		return priority;
-	}
+  public String getPriority() {
+    return priority;
+  }
 
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
+  public void setPriority(String priority) {
+    this.priority = priority;
+  }
 
 }

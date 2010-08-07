@@ -34,28 +34,25 @@ import org.sonar.api.Plugin;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class StyleCopPlugin implements Plugin
-{
+public class StyleCopPlugin implements Plugin {
   public static final String KEY = "stylecop";
 
   /**
    * Constructs a @link{StyleCopPlugin}.
    */
-  public StyleCopPlugin()
-  {
+  public StyleCopPlugin() {
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that collects stylecop warnings";
   }
 
   /**
    * Gets the extensions for the plugin.
+   * 
    * @return
    */
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(StyleCopRuleRepository.class);
     list.add(StyleCopSensor.class);
@@ -63,13 +60,11 @@ public class StyleCopPlugin implements Plugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return "stylecop";
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "StyleCop Plugin";
   }
 

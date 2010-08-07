@@ -41,43 +41,42 @@ import org.xml.sax.InputSource;
 
 /**
  * Parses StyleCop rules configuration file.
+ * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class StyleCopRuleParser
-{
+public class StyleCopRuleParser {
 
   /**
    * Parses the context of FXCop rules.
+   * 
    * @param xml
    * @return
    */
-  public static List<StyleCopRule> parse(String xml)
-  {
+  public static List<StyleCopRule> parse(String xml) {
     StringReader stringReader = new StringReader(xml);
-    List<StyleCopRule> result = parse(stringReader);      
+    List<StyleCopRule> result = parse(stringReader);
     return result;
   }
-  
+
   /**
    * @param reader
    * @return
    */
-  public static List<StyleCopRule> parse(Reader reader)
-  {
+  public static List<StyleCopRule> parse(Reader reader) {
     InputSource source = new InputSource(reader);
     XPathFactory factory = XPathFactory.newInstance();
     XPath xpath = factory.newXPath();
     List<StyleCopRule> result = new ArrayList<StyleCopRule>();
 
-    try
-    {
+    try {
       XPathExpression expression = xpath.compile("//Rule");
-      NodeList nodes = (NodeList) expression.evaluate(source, XPathConstants.NODESET);
+      NodeList nodes = (NodeList) expression.evaluate(source,
+          XPathConstants.NODESET);
       int count = nodes.getLength();
-      for (int idxRule = 0; idxRule < count; idxRule++)
-      {
+      for (int idxRule = 0; idxRule < count; idxRule++) {
         Element ruleElement = (Element) nodes.item(idxRule);
-        Element analyzerElement = (Element) ruleElement.getParentNode().getParentNode();
+        Element analyzerElement = (Element) ruleElement.getParentNode()
+            .getParentNode();
         String ruleName = ruleElement.getAttribute("Name");
         String priority = ruleElement.getAttribute("SonarPriotiry");
 
@@ -85,18 +84,17 @@ public class StyleCopRuleParser
         NodeList elements = ruleElement.getElementsByTagName("BooleanProperty");
         boolean active = true;
         int countBoolean = elements.getLength();
-        for (int idxElement = 0; idxElement < countBoolean; idxElement++)
-        {
+        for (int idxElement = 0; idxElement < countBoolean; idxElement++) {
           Element booleanElement = (Element) elements.item(idxElement);
           String booleanName = booleanElement.getAttribute("Name");
-          if ("Enabled".equals(booleanName))
-          {
+          if ("Enabled".equals(booleanName)) {
             String activeStr = booleanElement.getTextContent();
             active = !activeStr.toLowerCase().contains("false");
           }
         }
         String analyzerId = analyzerElement.getAttribute("AnalyzerId");
-        String category = StringUtils.removeEnd(StringUtils.substringAfterLast(analyzerId, "."), "Rules");
+        String category = StringUtils.removeEnd(
+            StringUtils.substringAfterLast(analyzerId, "."), "Rules");
         rule.setAnalyzerId(analyzerId);
         rule.setName(ruleName);
         rule.setPriority(priority);
@@ -104,9 +102,7 @@ public class StyleCopRuleParser
         rule.setCategory(category);
         result.add(rule);
       }
-    }
-    catch (XPathExpressionException e)
-    {
+    } catch (XPathExpressionException e) {
       // Nothing
     }
 

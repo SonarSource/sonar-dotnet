@@ -50,54 +50,53 @@ import org.xml.sax.InputSource;
 
 /**
  * Extracts the data of a StyleCop report and store them in Sonar.
+ * 
  * @author Jose CHILLAN Apr 6, 2010
  */
-public class StyleCopSensor   extends AbstractDotnetSensor
-{
-  private final static Logger log = LoggerFactory.getLogger(StyleCopSensor.class);
-  public static final String STYLECOP_TRANSFO_XSL          = "stylecop-transformation.xsl";
+public class StyleCopSensor extends AbstractDotnetSensor {
+  private final static Logger log = LoggerFactory
+      .getLogger(StyleCopSensor.class);
+  public static final String STYLECOP_TRANSFO_XSL = "stylecop-transformation.xsl";
   public static final String STYLECOP_PROCESSED_REPORT_XML = "stylecop-report-processed.xml";
 
   private RulesManager rulesManager;
-  private RulesProfile        profile;
+  private RulesProfile profile;
   private StyleCopPluginHandler pluginHandler;
-  
+
   /**
    * Constructs a @link{FxCopCollector}.
+   * 
    * @param rulesManager
    */
-  public StyleCopSensor(RulesManager rulesManager, StyleCopPluginHandler pluginHandler, RulesProfile profile)
-  {
+  public StyleCopSensor(RulesManager rulesManager,
+      StyleCopPluginHandler pluginHandler, RulesProfile profile) {
     super();
     this.rulesManager = rulesManager;
     this.pluginHandler = pluginHandler;
     this.profile = profile;
   }
-  
+
   /**
    * @param project
    * @param context
    */
   @Override
-  public void analyse(Project project, SensorContext context)
-  {
-    File report = findReport(project, StyleCopPluginHandler.STYLE_COP_REPORT_NAME);
+  public void analyse(Project project, SensorContext context) {
+    File report = findReport(project,
+        StyleCopPluginHandler.STYLE_COP_REPORT_NAME);
     File dir = getReportsDirectory(project);
 
     // We generate the transformer
     File transformedReport = transformReport(report, dir);
-    if (transformedReport == null)
-    {
+    if (transformedReport == null) {
       return;
     }
-    StyleCopResultParser parser = new StyleCopResultParser(project, context, rulesManager, profile);
-    try
-    {
+    StyleCopResultParser parser = new StyleCopResultParser(project, context,
+        rulesManager, profile);
+    try {
       URL fileURL = transformedReport.toURI().toURL();
       parser.parse(fileURL);
-    }
-    catch (MalformedURLException e)
-    {
+    } catch (MalformedURLException e) {
       log.debug("Error while parsing the file: {}\n{}", report, e);
     }
   }
@@ -107,27 +106,28 @@ public class StyleCopSensor   extends AbstractDotnetSensor
    * @return
    */
   @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project)
-  {
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
     return pluginHandler;
   }
 
   /**
    * Transforms the report to a usable format.
+   * 
    * @param report
    * @param dir
    * @return
    */
-  private File transformReport(File report, File dir)
-  {
-    try
-    {
-      //ClassLoader contextClassLoader = this.getClass().getClassLoader();  
-      // TODO MIGRATION23 
-    	ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-      InputStream stream = contextClassLoader.getResourceAsStream(STYLECOP_TRANSFO_XSL);
+  private File transformReport(File report, File dir) {
+    try {
+      // ClassLoader contextClassLoader = this.getClass().getClassLoader();
+      // TODO MIGRATION23
+      ClassLoader contextClassLoader = Thread.currentThread()
+          .getContextClassLoader();
+      InputStream stream = contextClassLoader
+          .getResourceAsStream(STYLECOP_TRANSFO_XSL);
       Source xslSource = new SAXSource(new InputSource(stream));
-      Templates templates = TransformerFactory.newInstance().newTemplates(xslSource);
+      Templates templates = TransformerFactory.newInstance().newTemplates(
+          xslSource);
       Transformer transformer = templates.newTransformer();
 
       // We open the report to be processed
@@ -138,10 +138,10 @@ public class StyleCopSensor   extends AbstractDotnetSensor
       Result result = new StreamResult(processedReport);
       transformer.transform(xmlSource, result);
       return processedReport;
-    }
-    catch (Exception exc)
-    {
-      log.warn("Error during the transformation of the StyleCop report for Sonar", exc);
+    } catch (Exception exc) {
+      log.warn(
+          "Error during the transformation of the StyleCop report for Sonar",
+          exc);
     }
     return null;
   }

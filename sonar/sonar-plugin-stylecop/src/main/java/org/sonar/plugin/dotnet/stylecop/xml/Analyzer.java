@@ -36,10 +36,9 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jul 21, 2009
  */
 @XmlType(name = "Analyzer")
-public class Analyzer
-{
+public class Analyzer {
   @XmlAttribute(name = "AnalyzerId")
-  private String        id;
+  private String id;
 
   @XmlElementWrapper(name = "Rules")
   @XmlElement(name = "Rule")
@@ -48,8 +47,7 @@ public class Analyzer
   /**
    * Constructs a @link{Analyser}.
    */
-  public Analyzer()
-  {
+  public Analyzer() {
   }
 
   /**
@@ -57,18 +55,17 @@ public class Analyzer
    * 
    * @return The id to return.
    */
-  public String getId()
-  {
+  public String getId() {
     return this.id;
   }
 
   /**
    * Sets the id.
    * 
-   * @param id The id to set.
+   * @param id
+   *          The id to set.
    */
-  public void setId(String id)
-  {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -77,18 +74,17 @@ public class Analyzer
    * 
    * @return The rules to return.
    */
-  public List<RuleDef> getRules()
-  {
+  public List<RuleDef> getRules() {
     return this.rules;
   }
 
   /**
    * Sets the rules.
    * 
-   * @param rules The rules to set.
+   * @param rules
+   *          The rules to set.
    */
-  public void setRules(List<RuleDef> rules)
-  {
+  public void setRules(List<RuleDef> rules) {
     this.rules = rules;
   }
 
