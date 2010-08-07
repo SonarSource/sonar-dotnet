@@ -25,10 +25,10 @@ package org.sonar.plugin.dotnet.srcmon.model;
 
 /**
  * A base clase for the definition source metrics.
+ * 
  * @author Jose CHILLAN Apr 6, 2010
  */
-public class SourceMetric
-{
+public class SourceMetric {
 
   protected int countLines;
   protected int countBlankLines;
@@ -47,8 +47,7 @@ public class SourceMetric
    * 
    * @return The lines to return.
    */
-  public int getCountLines()
-  {
+  public int getCountLines() {
     return this.countLines;
   }
 
@@ -57,8 +56,7 @@ public class SourceMetric
    * 
    * @return The countStatements to return.
    */
-  public int getCountStatements()
-  {
+  public int getCountStatements() {
     return this.countStatements;
   }
 
@@ -67,8 +65,7 @@ public class SourceMetric
    * 
    * @return The commentLines to return.
    */
-  public int getCommentLines()
-  {
+  public int getCommentLines() {
     return this.commentLines;
   }
 
@@ -77,8 +74,7 @@ public class SourceMetric
    * 
    * @return The documentationLines to return.
    */
-  public int getDocumentationLines()
-  {
+  public int getDocumentationLines() {
     return this.documentationLines;
   }
 
@@ -87,8 +83,7 @@ public class SourceMetric
    * 
    * @return The countClasses to return.
    */
-  public int getCountClasses()
-  {
+  public int getCountClasses() {
     return this.countClasses;
   }
 
@@ -97,8 +92,7 @@ public class SourceMetric
    * 
    * @return The countMethods to return.
    */
-  public int getCountMethods()
-  {
+  public int getCountMethods() {
     return this.countMethods;
   }
 
@@ -107,8 +101,7 @@ public class SourceMetric
    * 
    * @return The countCalls to return.
    */
-  public int getCountCalls()
-  {
+  public int getCountCalls() {
     return this.countCalls;
   }
 
@@ -117,8 +110,7 @@ public class SourceMetric
    * 
    * @return The countMethodStatements to return.
    */
-  public int getCountMethodStatements()
-  {
+  public int getCountMethodStatements() {
     return this.countMethodStatements;
   }
 
@@ -127,8 +119,7 @@ public class SourceMetric
    * 
    * @return The countBlankLines to return.
    */
-  public int getCountBlankLines()
-  {
+  public int getCountBlankLines() {
     return this.countBlankLines;
   }
 
@@ -137,8 +128,7 @@ public class SourceMetric
    * 
    * @return The complexity to return.
    */
-  public int getComplexity()
-  {
+  public int getComplexity() {
     return this.complexity;
   }
 
@@ -147,34 +137,29 @@ public class SourceMetric
    * 
    * @return
    */
-  public double getAverageComplexity()
-  {
-    if (countMethods == 0)
-    {
+  public double getAverageComplexity() {
+    if (countMethods == 0) {
       return 0;
     }
     return ((double) complexity) / countMethods;
   }
 
-  
   /**
    * Returns the countAccessors.
    * 
    * @return The countAccessors to return.
    */
-  public int getCountAccessors()
-  {
+  public int getCountAccessors() {
     return this.countAccessors;
   }
 
-  
   /**
    * Sets the countAccessors.
    * 
-   * @param countAccessors The countAccessors to set.
+   * @param countAccessors
+   *          The countAccessors to set.
    */
-  public void setCountAccessors(int countAccessors)
-  {
+  public void setCountAccessors(int countAccessors) {
     this.countAccessors = countAccessors;
   }
 }

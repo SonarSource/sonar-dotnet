@@ -28,60 +28,57 @@ package org.sonar.plugin.dotnet.srcmon.model;
  * 
  * @author Jose CHILLAN Apr 20, 2010
  */
-public class Distribution
-{
+public class Distribution {
   private final DistributionClassification classification;
-  private final int[]  segments;
+  private final int[] segments;
 
   /**
    * Constructs a @link{Distribution}.
    */
-  public Distribution(DistributionClassification classification)
-  {
+  public Distribution(DistributionClassification classification) {
     this.classification = classification;
     int countClasses = classification.getCountClasses();
     this.segments = new int[countClasses];
   }
-  
+
   /**
    * Adds a value in the distribution
+   * 
    * @param value
    */
-  public void addEntry(int value)
-  {
+  public void addEntry(int value) {
     int segmentNumber = classification.getSegmentNumber(value);
 
     // Increments the segment
     segments[segmentNumber]++;
   }
-  
+
   /**
    * Combines a distribution supposes to contain the same limits.
-   * @param distribution the other distribution to combine
+   * 
+   * @param distribution
+   *          the other distribution to combine
    */
-  public void combine(Distribution distribution)
-  {
-    if (! classification.equals(distribution.classification))
-    {
-      throw new IllegalArgumentException("Impossible to combine two distribution that don't share the same distribution");
+  public void combine(Distribution distribution) {
+    if (!classification.equals(distribution.classification)) {
+      throw new IllegalArgumentException(
+          "Impossible to combine two distribution that don't share the same distribution");
     }
     // Adds the result of both distribution in each segment
-    for (int idx = 0; idx < segments.length; idx++)
-    {
+    for (int idx = 0; idx < segments.length; idx++) {
       segments[idx] += distribution.segments[idx];
     }
   }
-  
+
   /**
    * Generates the sonar representation of the distribution.
-   * @return a sonar database compliant representation of the distribution 
+   * 
+   * @return a sonar database compliant representation of the distribution
    */
-  public String toSonarRepresentation()
-  {
+  public String toSonarRepresentation() {
     StringBuilder buffer = new StringBuilder();
-    int countStops = segments.length -1;
-    for(int idx = 0; idx < countStops; idx++)
-    {
+    int countStops = segments.length - 1;
+    for (int idx = 0; idx < countStops; idx++) {
       int limit = classification.getStop(idx);
       buffer.append(limit);
       buffer.append("=");

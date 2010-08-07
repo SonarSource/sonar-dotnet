@@ -34,25 +34,21 @@ import org.sonar.api.Plugin;
  * 
  * @author Jose CHILLAN Apr 30, 2009
  */
-public class SourceMonitorPlugin implements Plugin
-{
+public class SourceMonitorPlugin implements Plugin {
   public final static String SOURCE_MONITOR_REPORT = "metrics-report.xml";
 
   /**
    * Constructs a @link{SourceMonitorPlugin}.
    */
-  public SourceMonitorPlugin()
-  {
+  public SourceMonitorPlugin() {
   }
 
-  public String getDescription()
-  {
+  public String getDescription() {
     return "A plugin that collects the SourceMonitor metrics";
   }
 
   @Override
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(DotnetSourceMetrics.class);
     list.add(SourceMonitorSensor.class);
@@ -65,13 +61,11 @@ public class SourceMonitorPlugin implements Plugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return "sourcemonitor";
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "SourceMonitor Plugin";
   }
 

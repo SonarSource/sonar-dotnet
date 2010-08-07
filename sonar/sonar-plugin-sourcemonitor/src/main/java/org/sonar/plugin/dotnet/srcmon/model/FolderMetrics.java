@@ -32,12 +32,11 @@ import org.apache.maven.dotnet.commons.project.VisualStudioProject;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class FolderMetrics extends AbstractMeterable
-{
+public class FolderMetrics extends AbstractMeterable {
   private VisualStudioProject project;
-  private File                directory;
-  private String              projectFolder;
-  
+  private File directory;
+  private String projectFolder;
+
   /**
    * Constructs a @link{NamespaceMetrics}.
    * 
@@ -45,8 +44,8 @@ public class FolderMetrics extends AbstractMeterable
    * @param directory
    * @param projectFolder
    */
-  public FolderMetrics(VisualStudioProject project, File directory, String projectFolder)
-  {
+  public FolderMetrics(VisualStudioProject project, File directory,
+      String projectFolder) {
     super();
     this.project = project;
     this.directory = directory;
@@ -58,18 +57,17 @@ public class FolderMetrics extends AbstractMeterable
    * 
    * @return The project to return.
    */
-  public VisualStudioProject getProject()
-  {
+  public VisualStudioProject getProject() {
     return this.project;
   }
 
   /**
    * Sets the project.
    * 
-   * @param project The project to set.
+   * @param project
+   *          The project to set.
    */
-  public void setProject(VisualStudioProject project)
-  {
+  public void setProject(VisualStudioProject project) {
     this.project = project;
   }
 
@@ -78,18 +76,17 @@ public class FolderMetrics extends AbstractMeterable
    * 
    * @return The directory to return.
    */
-  public File getDirectory()
-  {
+  public File getDirectory() {
     return this.directory;
   }
 
   /**
    * Sets the directory.
    * 
-   * @param directory The directory to set.
+   * @param directory
+   *          The directory to set.
    */
-  public void setDirectory(File directory)
-  {
+  public void setDirectory(File directory) {
     this.directory = directory;
   }
 
@@ -98,18 +95,17 @@ public class FolderMetrics extends AbstractMeterable
    * 
    * @return The projectFolder to return.
    */
-  public String getProjectFolder()
-  {
+  public String getProjectFolder() {
     return this.projectFolder;
   }
 
   /**
    * Sets the projectFolder.
    * 
-   * @param projectFolder The projectFolder to set.
+   * @param projectFolder
+   *          The projectFolder to set.
    */
-  public void setProjectFolder(String projectFolder)
-  {
+  public void setProjectFolder(String projectFolder) {
     this.projectFolder = projectFolder;
   }
 }

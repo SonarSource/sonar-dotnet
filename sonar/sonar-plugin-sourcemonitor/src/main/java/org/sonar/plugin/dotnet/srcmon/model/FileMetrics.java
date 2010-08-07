@@ -32,32 +32,27 @@ import java.util.List;
  * 
  * @author Jose CHILLAN May 5, 2009
  */
-public class FileMetrics extends SourceMetric
-{
-  private File               projectDirectory;
-  private File               sourcePath;
+public class FileMetrics extends SourceMetric {
+  private File projectDirectory;
+  private File sourcePath;
   private List<MethodMetric> methods;
-  private double             averageComplexity;
-  private String             className;
-  private String             namespace;
-  private double             percentDocumentationLines;
-  private double             percentCommentLines;
-
+  private double averageComplexity;
+  private String className;
+  private String namespace;
+  private double percentDocumentationLines;
+  private double percentCommentLines;
 
   /**
    * Constructs a @link{FileMetrics}.
    */
-  public FileMetrics()
-  {
+  public FileMetrics() {
     methods = new ArrayList<MethodMetric>();
   }
 
-  public void addMethod(MethodMetric method)
-  {
+  public void addMethod(MethodMetric method) {
     methods.add(method);
     complexity += method.getComplexity();
-    if (method.isAccessor())
-    {
+    if (method.isAccessor()) {
       countAccessors++;
     }
   }
@@ -67,98 +62,97 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The path to return.
    */
-  public File getSourcePath()
-  {
+  public File getSourcePath() {
     return this.sourcePath;
   }
 
   /**
    * Sets the path.
    * 
-   * @param path The path to set.
+   * @param path
+   *          The path to set.
    */
-  public void setSourcePath(File path)
-  {
+  public void setSourcePath(File path) {
     this.sourcePath = path;
   }
 
   /**
    * Sets the lines.
    * 
-   * @param lines The lines to set.
+   * @param lines
+   *          The lines to set.
    */
-  public void setCountLines(int lines)
-  {
+  public void setCountLines(int lines) {
     this.countLines = lines;
   }
 
   /**
    * Sets the countStatements.
    * 
-   * @param countStatements The countStatements to set.
+   * @param countStatements
+   *          The countStatements to set.
    */
-  public void setCountStatements(int countStatements)
-  {
+  public void setCountStatements(int countStatements) {
     this.countStatements = countStatements;
   }
 
   /**
    * Sets the commentLines.
    * 
-   * @param commentLines The commentLines to set.
+   * @param commentLines
+   *          The commentLines to set.
    */
-  public void setCommentLines(int commentLines)
-  {
+  public void setCommentLines(int commentLines) {
     this.commentLines = commentLines;
   }
 
   /**
    * Sets the documentationLines.
    * 
-   * @param documentationLines The documentationLines to set.
+   * @param documentationLines
+   *          The documentationLines to set.
    */
-  public void setDocumentationLines(int documentationLines)
-  {
+  public void setDocumentationLines(int documentationLines) {
     this.documentationLines = documentationLines;
   }
 
   /**
    * Sets the countClasses.
    * 
-   * @param countClasses The countClasses to set.
+   * @param countClasses
+   *          The countClasses to set.
    */
-  public void setCountClasses(int countClasses)
-  {
+  public void setCountClasses(int countClasses) {
     this.countClasses = countClasses;
   }
 
   /**
    * Sets the countMethods.
    * 
-   * @param countMethods The countMethods to set.
+   * @param countMethods
+   *          The countMethods to set.
    */
-  public void setCountMethods(int countMethods)
-  {
+  public void setCountMethods(int countMethods) {
     this.countMethods = countMethods;
   }
 
   /**
    * Sets the countCalls.
    * 
-   * @param countCalls The countCalls to set.
+   * @param countCalls
+   *          The countCalls to set.
    */
-  public void setCountCalls(int countCalls)
-  {
+  public void setCountCalls(int countCalls) {
     this.countCalls = countCalls;
   }
 
   /**
    * Sets the countMethodStatements.
    * 
-   * @param countMethodStatements The countMethodStatements to set.
+   * @param countMethodStatements
+   *          The countMethodStatements to set.
    */
-  public void setCountMethodStatements(int countMethodStatements)
-  {
+  public void setCountMethodStatements(int countMethodStatements) {
     this.countMethodStatements = countMethodStatements;
   }
 
@@ -168,18 +162,17 @@ public class FileMetrics extends SourceMetric
    * @return The averageComplexity to return.
    */
   @Override
-  public double getAverageComplexity()
-  {
+  public double getAverageComplexity() {
     return this.averageComplexity;
   }
 
   /**
    * Sets the averageComplexity.
    * 
-   * @param averageComplexity The averageComplexity to set.
+   * @param averageComplexity
+   *          The averageComplexity to set.
    */
-  public void setAverageComplexity(double averageComplexity)
-  {
+  public void setAverageComplexity(double averageComplexity) {
     this.averageComplexity = averageComplexity;
   }
 
@@ -188,15 +181,14 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The methods to return.
    */
-  public List<MethodMetric> getMethods()
-  {
+  public List<MethodMetric> getMethods() {
     return this.methods;
   }
 
   @Override
-  public String toString()
-  {
-    return "File(lines=" + countLines + ", class=" + className + ", path=" + sourcePath + ")";
+  public String toString() {
+    return "File(lines=" + countLines + ", class=" + className + ", path="
+        + sourcePath + ")";
   }
 
   /**
@@ -204,18 +196,17 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The className to return.
    */
-  public String getClassName()
-  {
+  public String getClassName() {
     return this.className;
   }
 
   /**
    * Sets the className.
    * 
-   * @param className The className to set.
+   * @param className
+   *          The className to set.
    */
-  public void setClassName(String className)
-  {
+  public void setClassName(String className) {
     this.className = className;
   }
 
@@ -224,28 +215,27 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The projectDirectory to return.
    */
-  public File getProjectDirectory()
-  {
+  public File getProjectDirectory() {
     return this.projectDirectory;
   }
 
   /**
    * Sets the projectDirectory.
    * 
-   * @param projectDirectory The projectDirectory to set.
+   * @param projectDirectory
+   *          The projectDirectory to set.
    */
-  public void setProjectDirectory(File projectDirectory)
-  {
+  public void setProjectDirectory(File projectDirectory) {
     this.projectDirectory = projectDirectory;
   }
 
   /**
    * Sets the countBlankLines.
    * 
-   * @param countBlankLines The countBlankLines to set.
+   * @param countBlankLines
+   *          The countBlankLines to set.
    */
-  public void setCountBlankLines(int countBlankLines)
-  {
+  public void setCountBlankLines(int countBlankLines) {
     this.countBlankLines = countBlankLines;
   }
 
@@ -254,18 +244,17 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The namespace to return.
    */
-  public String getNamespace()
-  {
+  public String getNamespace() {
     return this.namespace;
   }
 
   /**
    * Sets the namespace.
    * 
-   * @param namespace The namespace to set.
+   * @param namespace
+   *          The namespace to set.
    */
-  public void setNamespace(String namespace)
-  {
+  public void setNamespace(String namespace) {
     this.namespace = namespace;
   }
 
@@ -274,18 +263,17 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The percentDocumentationLines to return.
    */
-  public double getPercentDocumentationLines()
-  {
+  public double getPercentDocumentationLines() {
     return this.percentDocumentationLines;
   }
 
   /**
    * Sets the percentDocumentationLines.
    * 
-   * @param percentDocumentationLines The percentDocumentationLines to set.
+   * @param percentDocumentationLines
+   *          The percentDocumentationLines to set.
    */
-  public void setPercentDocumentationLines(double percentDocumentationLines)
-  {
+  public void setPercentDocumentationLines(double percentDocumentationLines) {
     this.percentDocumentationLines = percentDocumentationLines;
   }
 
@@ -294,18 +282,17 @@ public class FileMetrics extends SourceMetric
    * 
    * @return The percentCommentLines to return.
    */
-  public double getPercentCommentLines()
-  {
+  public double getPercentCommentLines() {
     return this.percentCommentLines;
   }
 
   /**
    * Sets the percentCommentLines.
    * 
-   * @param percentCommentLines The percentCommentLines to set.
+   * @param percentCommentLines
+   *          The percentCommentLines to set.
    */
-  public void setPercentCommentLines(double percentCommentLines)
-  {
+  public void setPercentCommentLines(double percentCommentLines) {
     this.percentCommentLines = percentCommentLines;
   }
 

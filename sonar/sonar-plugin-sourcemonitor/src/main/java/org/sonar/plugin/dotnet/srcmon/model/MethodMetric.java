@@ -30,23 +30,21 @@ import java.io.File;
  * 
  * @author Jose CHILLAN Apr 6, 2010
  */
-public class MethodMetric
-{
-  private File    file;
-  private String  className;
-  private String  methodName;
-  private int     methodLine;
-  private int     complexity;
-  private int     countStatements;
-  private int     maximumDepth;
-  private int     countCalls;
+public class MethodMetric {
+  private File file;
+  private String className;
+  private String methodName;
+  private int methodLine;
+  private int complexity;
+  private int countStatements;
+  private int maximumDepth;
+  private int countCalls;
   private boolean isAccessor;
 
   /**
    * Constructs a @link{MethodMetric}.
    */
-  public MethodMetric()
-  {
+  public MethodMetric() {
     super();
   }
 
@@ -55,18 +53,17 @@ public class MethodMetric
    * 
    * @return The file to return.
    */
-  public File getFile()
-  {
+  public File getFile() {
     return this.file;
   }
 
   /**
    * Sets the file.
    * 
-   * @param file The file to set.
+   * @param file
+   *          The file to set.
    */
-  public void setFile(File file)
-  {
+  public void setFile(File file) {
     this.file = file;
   }
 
@@ -75,18 +72,17 @@ public class MethodMetric
    * 
    * @return The className to return.
    */
-  public String getClassName()
-  {
+  public String getClassName() {
     return this.className;
   }
 
   /**
    * Sets the className.
    * 
-   * @param className The className to set.
+   * @param className
+   *          The className to set.
    */
-  public void setClassName(String className)
-  {
+  public void setClassName(String className) {
     this.className = className;
   }
 
@@ -95,18 +91,17 @@ public class MethodMetric
    * 
    * @return The methodName to return.
    */
-  public String getMethodName()
-  {
+  public String getMethodName() {
     return this.methodName;
   }
 
   /**
    * Sets the methodName.
    * 
-   * @param methodName The methodName to set.
+   * @param methodName
+   *          The methodName to set.
    */
-  public void setMethodName(String methodName)
-  {
+  public void setMethodName(String methodName) {
     this.methodName = methodName;
   }
 
@@ -115,18 +110,17 @@ public class MethodMetric
    * 
    * @return The methodLine to return.
    */
-  public int getMethodLine()
-  {
+  public int getMethodLine() {
     return this.methodLine;
   }
 
   /**
    * Sets the methodLine.
    * 
-   * @param methodLine The methodLine to set.
+   * @param methodLine
+   *          The methodLine to set.
    */
-  public void setMethodLine(int methodLine)
-  {
+  public void setMethodLine(int methodLine) {
     this.methodLine = methodLine;
   }
 
@@ -135,18 +129,17 @@ public class MethodMetric
    * 
    * @return The complexity to return.
    */
-  public int getComplexity()
-  {
+  public int getComplexity() {
     return this.complexity;
   }
 
   /**
    * Sets the complexity.
    * 
-   * @param complexity The complexity to set.
+   * @param complexity
+   *          The complexity to set.
    */
-  public void setComplexity(int complexity)
-  {
+  public void setComplexity(int complexity) {
     this.complexity = complexity;
   }
 
@@ -155,18 +148,17 @@ public class MethodMetric
    * 
    * @return The countStatements to return.
    */
-  public int getCountStatements()
-  {
+  public int getCountStatements() {
     return this.countStatements;
   }
 
   /**
    * Sets the countStatements.
    * 
-   * @param countStatements The countStatements to set.
+   * @param countStatements
+   *          The countStatements to set.
    */
-  public void setCountStatements(int countStatements)
-  {
+  public void setCountStatements(int countStatements) {
     this.countStatements = countStatements;
   }
 
@@ -175,18 +167,17 @@ public class MethodMetric
    * 
    * @return The maximumDepth to return.
    */
-  public int getMaximumDepth()
-  {
+  public int getMaximumDepth() {
     return this.maximumDepth;
   }
 
   /**
    * Sets the maximumDepth.
    * 
-   * @param maximumDepth The maximumDepth to set.
+   * @param maximumDepth
+   *          The maximumDepth to set.
    */
-  public void setMaximumDepth(int maximumDepth)
-  {
+  public void setMaximumDepth(int maximumDepth) {
     this.maximumDepth = maximumDepth;
   }
 
@@ -195,18 +186,17 @@ public class MethodMetric
    * 
    * @return The countCalls to return.
    */
-  public int getCountCalls()
-  {
+  public int getCountCalls() {
     return this.countCalls;
   }
 
   /**
    * Sets the countCalls.
    * 
-   * @param countCalls The countCalls to set.
+   * @param countCalls
+   *          The countCalls to set.
    */
-  public void setCountCalls(int countCalls)
-  {
+  public void setCountCalls(int countCalls) {
     this.countCalls = countCalls;
   }
 
@@ -215,24 +205,23 @@ public class MethodMetric
    * 
    * @return The accessor to return.
    */
-  public boolean isAccessor()
-  {
+  public boolean isAccessor() {
     return this.isAccessor;
   }
 
   /**
    * Sets the accessor flag.
    * 
-   * @param accessor the accessor flag to set
+   * @param accessor
+   *          the accessor flag to set
    */
-  public void setAccessor(boolean accessor)
-  {
+  public void setAccessor(boolean accessor) {
     this.isAccessor = accessor;
   }
 
   @Override
-  public String toString()
-  {
-    return "method(class=" + className + ", name=" + methodName + ", line=" + methodLine + ", complexity=" + complexity + ")";
+  public String toString() {
+    return "method(class=" + className + ", name=" + methodName + ", line="
+        + methodLine + ", complexity=" + complexity + ")";
   }
 }

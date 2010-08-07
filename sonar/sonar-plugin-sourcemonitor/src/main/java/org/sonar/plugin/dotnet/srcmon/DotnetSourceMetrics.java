@@ -35,38 +35,30 @@ import org.sonar.api.measures.Metrics;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class DotnetSourceMetrics implements Metrics
-{
-  public static final Metric COUNT_STATEMENTS    = new Metric("count_statements",
-                                                              "Total count of statements",
-                                                              "The number of statements in a class or file",
-                                                              Metric.ValueType.INT,
-                                                              -1,
-                                                              false,
-                                                              CoreMetrics.DOMAIN_SIZE);
+public class DotnetSourceMetrics implements Metrics {
+  public static final Metric COUNT_STATEMENTS = new Metric("count_statements",
+      "Total count of statements",
+      "The number of statements in a class or file", Metric.ValueType.INT, -1,
+      false, CoreMetrics.DOMAIN_SIZE);
 
   public static final Metric DOCUMENTATION_LINES = new Metric("doc_lines",
-                                                              "Total lines of documentation",
-                                                              "The number documentation lines in a file",
-                                                              Metric.ValueType.INT,
-                                                              -1,
-                                                              false,
-                                                              CoreMetrics.DOMAIN_DOCUMENTATION);
+      "Total lines of documentation",
+      "The number documentation lines in a file", Metric.ValueType.INT, -1,
+      false, CoreMetrics.DOMAIN_DOCUMENTATION);
 
   /**
    * Constructs a @link{DotnetSourceMetrics}.
    */
-  public DotnetSourceMetrics()
-  {
+  public DotnetSourceMetrics() {
   }
 
   /**
    * Gets the metrics to register.
+   * 
    * @return
    */
   @Override
-  public List<Metric> getMetrics()
-  {
+  public List<Metric> getMetrics() {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(COUNT_STATEMENTS);
     metrics.add(DOCUMENTATION_LINES);

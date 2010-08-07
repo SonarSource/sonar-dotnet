@@ -31,29 +31,29 @@ import java.util.List;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class AbstractMeterable extends SourceMetric
-{
+public class AbstractMeterable extends SourceMetric {
   private List<FileMetrics> files;
-  private Distribution      filesComplexity;
-  private Distribution      methodsComplexity;
+  private Distribution filesComplexity;
+  private Distribution methodsComplexity;
 
   /**
    * Constructs a @link{NamespaceMetrics}.
    */
-  public AbstractMeterable()
-  {
+  public AbstractMeterable() {
     files = new ArrayList<FileMetrics>();
-    this.filesComplexity = new Distribution(DistributionClassification.CLASS_COMPLEXITY);
-    this.methodsComplexity = new Distribution(DistributionClassification.METHOD_COMPLEXITY);
+    this.filesComplexity = new Distribution(
+        DistributionClassification.CLASS_COMPLEXITY);
+    this.methodsComplexity = new Distribution(
+        DistributionClassification.METHOD_COMPLEXITY);
   }
 
   /**
    * Adds a metrics for a file.
    * 
-   * @param file the file metrics
+   * @param file
+   *          the file metrics
    */
-  public void addFile(FileMetrics file)
-  {
+  public void addFile(FileMetrics file) {
     files.add(file);
     countLines += file.getCountLines();
     countBlankLines += file.getCountBlankLines();
@@ -66,13 +66,12 @@ public class AbstractMeterable extends SourceMetric
     countMethodStatements += file.getCountMethodStatements();
     complexity += file.getComplexity();
     countAccessors += file.getCountAccessors();
-    
+
     // Updates the complexity distribution
     int fileComplexity = file.getComplexity();
     filesComplexity.addEntry(fileComplexity);
     List<MethodMetric> methods = file.getMethods();
-    for (MethodMetric methodMetric : methods)
-    {
+    for (MethodMetric methodMetric : methods) {
       int methodComplexity = methodMetric.getComplexity();
       methodsComplexity.addEntry(methodComplexity);
     }
@@ -83,25 +82,25 @@ public class AbstractMeterable extends SourceMetric
    * 
    * @return The files to return.
    */
-  public List<FileMetrics> getFiles()
-  {
+  public List<FileMetrics> getFiles() {
     return this.files;
   }
 
   /**
    * Gets the sonar representation of the class complexity distribution
+   * 
    * @return
    */
-  public String getClassComplexityDistribution()
-  {
+  public String getClassComplexityDistribution() {
     return filesComplexity.toSonarRepresentation();
   }
+
   /**
    * Gets the sonar representation of the class complexity distribution
+   * 
    * @return
    */
-  public String getMethodComplexityDistribution()
-  {
+  public String getMethodComplexityDistribution() {
     return methodsComplexity.toSonarRepresentation();
   }
 

@@ -29,31 +29,27 @@ import java.util.Set;
 
 /**
  * Metrics for a Visual Studio solution.
+ * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class SolutionMetrics
-  extends AbstractMeterable
-{
+public class SolutionMetrics extends AbstractMeterable {
   private Set<String> namespaces;
+
   /**
    * Constructs a @link{SolutionMetrics}.
    */
-  public SolutionMetrics()
-  {
+  public SolutionMetrics() {
     namespaces = new HashSet<String>();
   }
 
-
   @Override
-  public void addFile(FileMetrics file)
-  {
+  public void addFile(FileMetrics file) {
     super.addFile(file);
     String namespace = file.getNamespace();
     namespaces.add(namespace);
   }
-  
-  public int getCountNamespaces()
-  {
+
+  public int getCountNamespaces() {
     return namespaces.size();
   }
 }

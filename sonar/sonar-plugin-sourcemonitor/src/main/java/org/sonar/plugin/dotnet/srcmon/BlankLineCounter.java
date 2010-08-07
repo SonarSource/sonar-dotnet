@@ -36,31 +36,26 @@ import org.apache.commons.lang.StringUtils;
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class BlankLineCounter
-{
+public class BlankLineCounter {
   /**
    * Counts the number of blank lines.
    * 
    * @param file
    * @return the number of blank lines
    */
-  public static int countBlankLines(File file)
-  {
+  public static int countBlankLines(File file) {
     int count = 0;
-    try
-    {
+    try {
       FileInputStream stream = new FileInputStream(file);
-      LineNumberReader reader = new LineNumberReader(new InputStreamReader(stream));
+      LineNumberReader reader = new LineNumberReader(new InputStreamReader(
+          stream));
       String line;
-      while ((line = reader.readLine()) != null)
-      {
-        if (StringUtils.isBlank(line))
-        {
+      while ((line = reader.readLine()) != null) {
+        if (StringUtils.isBlank(line)) {
           count++;
         }
       }
-    }
-    catch (Exception e) // NOPMD
+    } catch (Exception e) // NOPMD
     {
       // Do nothing
     }

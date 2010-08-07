@@ -28,67 +28,72 @@ import java.util.Arrays;
 
 /**
  * A pattern of distribution. It contains the stops that limits the classes.
+ * 
  * @author Jose CHILLAN Apr 22, 2010
  */
-public class DistributionClassification
-{
+public class DistributionClassification {
   private final int[] stops;
 
   /**
    * The Sonar classification used for method complexity
    */
-  public final static DistributionClassification METHOD_COMPLEXITY= new DistributionClassification(1, 2, 4, 6, 8, 10, 12);
-  
+  public final static DistributionClassification METHOD_COMPLEXITY = new DistributionClassification(
+      1, 2, 4, 6, 8, 10, 12);
+
   /**
    * The Sonar classification used for classes complexity
    */
-  public final static DistributionClassification CLASS_COMPLEXITY = new DistributionClassification(0, 5, 10, 20, 30, 60, 90);
+  public final static DistributionClassification CLASS_COMPLEXITY = new DistributionClassification(
+      0, 5, 10, 20, 30, 60, 90);
+
   /**
    * Constructs a @link{DistributionPattern}.
-   * @param stops the limits (stops) for the classification, in ascending order
+   * 
+   * @param stops
+   *          the limits (stops) for the classification, in ascending order
    */
-  public DistributionClassification(int ... stops)
-  {
+  public DistributionClassification(int... stops) {
     super();
     this.stops = stops;
   }
-  
+
   /**
    * Gets the segment number of a value in a distribution classification.
-   * @param value the value to classify
+   * 
+   * @param value
+   *          the value to classify
    * @return
    */
-  public int getSegmentNumber(int value)
-  {
+  public int getSegmentNumber(int value) {
     // Finds the interval for the value
-    for (int idx = 1; idx < stops.length; idx++)
-    {
+    for (int idx = 1; idx < stops.length; idx++) {
       int limit = stops[idx];
-      if (value < limit)
-      {
+      if (value < limit) {
         // The segment has been found
         return idx - 1;
-      }      
+      }
     }
     // This is the last segment
-    return stops.length - 1; 
+    return stops.length - 1;
   }
-  
+
   /**
    * Gets a specific stop value
-   * @param idx the index of the stop
+   * 
+   * @param idx
+   *          the index of the stop
    * @return the value of the stop
    */
-  public int getStop(int idx)
-  {
+  public int getStop(int idx) {
     return stops[idx];
   }
+
   /**
    * Gets the count of classes, including the last unlimited one.
+   * 
    * @return the number of classes for this distribution
    */
-  public int getCountClasses()
-  {
+  public int getCountClasses() {
     return stops.length;
   }
 
@@ -96,8 +101,7 @@ public class DistributionClassification
    * @return
    */
   @Override
-  public int hashCode()
-  {
+  public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + Arrays.hashCode(stops);
@@ -109,8 +113,7 @@ public class DistributionClassification
    * @return
    */
   @Override
-  public boolean equals(Object obj)
-  {
+  public boolean equals(Object obj) {
     if (this == obj)
       return true;
     if (obj == null)
@@ -122,6 +125,5 @@ public class DistributionClassification
       return false;
     return true;
   }
-  
-  
+
 }

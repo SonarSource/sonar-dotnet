@@ -27,21 +27,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Source metrics associated to a Visual Studio project. 
+ * Source metrics associated to a Visual Studio project.
  * 
  * @author Jose CHILLAN May 19, 2009
  */
-public class ProjectMetrics
-  extends AbstractMeterable
-{
-  private String      assemblyName;
+public class ProjectMetrics extends AbstractMeterable {
+  private String assemblyName;
   private Set<String> namespaces;
 
   /**
    * Constructs a @link{ProjectMetrics}.
    */
-  public ProjectMetrics(String assemblyName)
-  {
+  public ProjectMetrics(String assemblyName) {
     this.assemblyName = assemblyName;
     this.namespaces = new HashSet<String>();
   }
@@ -51,21 +48,18 @@ public class ProjectMetrics
    * 
    * @return The assemblyName to return.
    */
-  public String getAssemblyName()
-  {
+  public String getAssemblyName() {
     return this.assemblyName;
   }
 
   @Override
-  public void addFile(FileMetrics file)
-  {
+  public void addFile(FileMetrics file) {
     super.addFile(file);
     String namespace = file.getNamespace();
     namespaces.add(namespace);
   }
-  
-  public int getCountNamespaces()
-  {
+
+  public int getCountNamespaces() {
     return namespaces.size();
   }
 }

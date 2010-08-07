@@ -32,26 +32,22 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN May 5, 2009
  */
-public class SourceMonitorPluginHandler extends AbstractDotNetMavenPluginHandler
-{
+public class SourceMonitorPluginHandler extends
+    AbstractDotNetMavenPluginHandler {
 
   /**
    * Constructs a @link{SourceMonitorPluginHandler}.
    */
-  public SourceMonitorPluginHandler()
-  {
+  public SourceMonitorPluginHandler() {
   }
 
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
+  public void configure(Project project, MavenPlugin plugin) {
     // Do nothing
   }
 
-  public String[] getGoals()
-  {
-    return new String[] { "metrics"
-    };
+  public String[] getGoals() {
+    return new String[] { "metrics" };
   }
 
 }
