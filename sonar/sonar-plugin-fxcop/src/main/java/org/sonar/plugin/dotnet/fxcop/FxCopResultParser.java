@@ -52,101 +52,101 @@ import org.w3c.dom.Element;
  */
 public class FxCopResultParser extends AbstractXmlParser {
 
-	private final static Logger log = LoggerFactory
-	    .getLogger(FxCopResultParser.class);
+  private final static Logger log = LoggerFactory
+      .getLogger(FxCopResultParser.class);
 
-	private Project project;
-	private SensorContext context;
-	private RulesManager rulesManager;
-	private RulesProfile profile;
+  private Project project;
+  private SensorContext context;
+  private RulesManager rulesManager;
+  private RulesProfile profile;
 
-	/**
-	 * Constructs a @link{FxCopResultParser}.
-	 * 
-	 * @param project
-	 * @param context
-	 * @param rulesManager
-	 * @param profile
-	 */
-	public FxCopResultParser(Project project, SensorContext context,
-	    RulesManager rulesManager, RulesProfile profile) {
-		super();
-		this.project = project;
-		this.context = context;
-		this.rulesManager = rulesManager;
-		this.profile = profile;
-	}
+  /**
+   * Constructs a @link{FxCopResultParser}.
+   * 
+   * @param project
+   * @param context
+   * @param rulesManager
+   * @param profile
+   */
+  public FxCopResultParser(Project project, SensorContext context,
+      RulesManager rulesManager, RulesProfile profile) {
+    super();
+    this.project = project;
+    this.context = context;
+    this.rulesManager = rulesManager;
+    this.profile = profile;
+  }
 
-	/**
-	 * Parses a processed violation file.
-	 * 
-	 * @param stream
-	 */
-	public void parse(URL url) {
-		List<Element> issues = extractElements(url, "//issue");
-		// We add each issue
-		for (Element issueElement : issues) {
-			String path = getNodeContent(issueElement, "path");
-			String fileName = getNodeContent(issueElement, "name");
-			String key = getNodeContent(issueElement, "key");
-			String message = getNodeContent(issueElement, "message");
-			String lineNumber = getNodeContent(issueElement, "line");
-			Resource<?> resource = getResource(path, fileName);
-			Integer line = getIntValue(lineNumber);
-			Rule rule = rulesManager.getPluginRule(FxCopPlugin.KEY, key);
-			if (rule == null) {
-				// We skip the rules that were not registered
-				continue;
-			}
-			ActiveRule activeRule = profile.getActiveRule(FxCopPlugin.KEY, key);
-			Violation violation = new Violation(rule, resource);
-			violation.setLineId(line);
-			violation.setMessage(message);
-			if (activeRule != null) {
-				violation.setPriority(activeRule.getPriority());
-			}
+  /**
+   * Parses a processed violation file.
+   * 
+   * @param stream
+   */
+  public void parse(URL url) {
+    List<Element> issues = extractElements(url, "//issue");
+    // We add each issue
+    for (Element issueElement : issues) {
+      String path = getNodeContent(issueElement, "path");
+      String fileName = getNodeContent(issueElement, "name");
+      String key = getNodeContent(issueElement, "key");
+      String message = getNodeContent(issueElement, "message");
+      String lineNumber = getNodeContent(issueElement, "line");
+      Resource<?> resource = getResource(path, fileName);
+      Integer line = getIntValue(lineNumber);
+      Rule rule = rulesManager.getPluginRule(FxCopPlugin.KEY, key);
+      if (rule == null) {
+        // We skip the rules that were not registered
+        continue;
+      }
+      ActiveRule activeRule = profile.getActiveRule(FxCopPlugin.KEY, key);
+      Violation violation = new Violation(rule, resource);
+      violation.setLineId(line);
+      violation.setMessage(message);
+      if (activeRule != null) {
+        violation.setPriority(activeRule.getPriority());
+      }
 
-			// We store the violation
-			context.saveViolation(violation);
-		}
-	}
+      // We store the violation
+      context.saveViolation(violation);
+    }
+  }
 
-	public Resource<?> getResource(String path, String fileName) {
-		if (StringUtils.isBlank(fileName) || StringUtils.isBlank(path)) {
-			return null;
-		}
-		File file = new File(path, fileName);
+  public Resource<?> getResource(String path, String fileName) {
+    if (StringUtils.isBlank(fileName) || StringUtils.isBlank(path)) {
+      return null;
+    }
+    File file = new File(path, fileName);
 
-		CSharpFile fileResource;
-		if (file.exists()) {
-			try {
-				fileResource = CSharpFile.from(project, file, false);
-			} catch (InvalidResourceException ex) {
-				log.warn("resource error", ex);
-				fileResource = null;
-			}
-		} else {
-			log.error("Unable to ge resource for path " + file);
-			fileResource = null;
-		}
+    CSharpFile fileResource;
+    if (file.exists()) {
+      try {
+        fileResource = CSharpFile.from(project, file, false);
+      } catch (InvalidResourceException ex) {
+        log.warn("resource error", ex);
+        fileResource = null;
+      }
+    } else {
+      log.error("Unable to ge resource for path " + file);
+      fileResource = null;
+    }
 
-		return fileResource;
-	}
+    return fileResource;
+  }
 
-	/**
-	 * Extracts the line number.
-	 * 
-	 * @param lineStr
-	 * @return
-	 */
-	protected Integer getIntValue(String lineStr) {
-		if (StringUtils.isBlank(lineStr)) {
-			return null;
-		}
-		try {
-			return (int) ParsingUtils.parseNumber(lineStr);
-		} catch (ParseException ignore) {
-			return null;
-		}
-	}
+  /**
+   * Extracts the line number.
+   * 
+   * @param lineStr
+   * @return
+   */
+  protected Integer getIntValue(String lineStr) {
+    if (StringUtils.isBlank(lineStr)) {
+      return null;
+    }
+    try {
+      return (int) ParsingUtils.parseNumber(lineStr);
+    } catch (ParseException ignore) {
+      return null;
+    }
+  }
 }

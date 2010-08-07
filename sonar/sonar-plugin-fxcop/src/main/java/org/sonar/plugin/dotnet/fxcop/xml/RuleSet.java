@@ -32,43 +32,38 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * The set of rules activated.
+ * 
  * @author Jose CHILLAN Jul 16, 2009
  */
-@XmlType(name="Rules")
-public class RuleSet
-{
-  @XmlElementWrapper(name="RuleFiles")
-  @XmlElement(name="RuleFile")
+@XmlType(name = "Rules")
+public class RuleSet {
+  @XmlElementWrapper(name = "RuleFiles")
+  @XmlElement(name = "RuleFile")
   private List<RuleFile> rules;
-  
+
   /**
    * Constructs a @link{RuleSet}.
    */
-  public RuleSet()
-  {
+  public RuleSet() {
   }
 
-  
   /**
    * Returns the rules.
    * 
    * @return The rules to return.
- */
-  public List<RuleFile> getRules()
-  {
+   */
+  public List<RuleFile> getRules() {
     return this.rules;
   }
 
-  
   /**
    * Sets the rules.
    * 
-   * @param rules The rules to set.
+   * @param rules
+   *          The rules to set.
    */
-  public void setRules(List<RuleFile> rules)
-  {
+  public void setRules(List<RuleFile> rules) {
     this.rules = rules;
   }
-  
-  
+
 }

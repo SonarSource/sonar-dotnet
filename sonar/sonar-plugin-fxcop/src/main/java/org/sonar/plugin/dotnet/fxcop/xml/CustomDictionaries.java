@@ -29,91 +29,81 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * A CustomDictionaries for FxCop options
+ * 
  * @author Jose CHILLAN Jul 2, 2009
  */
-@XmlType(name="CustomDictionaries")
-public class CustomDictionaries
-{
-  @XmlAttribute(name="SearchFxCopDir")
+@XmlType(name = "CustomDictionaries")
+public class CustomDictionaries {
+  @XmlAttribute(name = "SearchFxCopDir")
   private String searchFxCopDir = "True";
 
-  @XmlAttribute(name="SearchUserProfile")
+  @XmlAttribute(name = "SearchUserProfile")
   private String searchUserProfile = "True";
 
-  @XmlAttribute(name="SearchProjectDir")
+  @XmlAttribute(name = "SearchProjectDir")
   private String searchProjectDir = "True";
-  
-  /**
 
+  /**
+   * 
    * Constructs a @link{CustomDictionaries}.
    */
-  public CustomDictionaries()
-  {
+  public CustomDictionaries() {
   }
 
-  
   /**
    * Returns the searchFxCopDir.
    * 
    * @return The searchFxCopDir to return.
    */
-  public String getSearchFxCopDir()
-  {
+  public String getSearchFxCopDir() {
     return this.searchFxCopDir;
   }
 
-  
   /**
    * Sets the searchFxCopDir.
    * 
-   * @param searchFxCopDir The searchFxCopDir to set.
+   * @param searchFxCopDir
+   *          The searchFxCopDir to set.
    */
-  public void setSearchFxCopDir(String searchFxCopDir)
-  {
+  public void setSearchFxCopDir(String searchFxCopDir) {
     this.searchFxCopDir = searchFxCopDir;
   }
 
-  
   /**
    * Returns the searchUserProfile.
    * 
    * @return The searchUserProfile to return.
    */
-  public String getSearchUserProfile()
-  {
+  public String getSearchUserProfile() {
     return this.searchUserProfile;
   }
 
-  
   /**
    * Sets the searchUserProfile.
    * 
-   * @param searchUserProfile The searchUserProfile to set.
+   * @param searchUserProfile
+   *          The searchUserProfile to set.
    */
-  public void setSearchUserProfile(String searchUserProfile)
-  {
+  public void setSearchUserProfile(String searchUserProfile) {
     this.searchUserProfile = searchUserProfile;
   }
 
-  
   /**
    * Returns the searchProjectDir.
    * 
    * @return The searchProjectDir to return.
    */
-  public String getSearchProjectDir()
-  {
+  public String getSearchProjectDir() {
     return this.searchProjectDir;
   }
 
-  
   /**
    * Sets the searchProjectDir.
    * 
-   * @param searchProjectDir The searchProjectDir to set.
+   * @param searchProjectDir
+   *          The searchProjectDir to set.
    */
-  public void setSearchProjectDir(String searchProjectDir)
-  {
+  public void setSearchProjectDir(String searchProjectDir) {
     this.searchProjectDir = searchProjectDir;
   }
 }

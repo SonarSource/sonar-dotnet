@@ -27,24 +27,22 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "ProjectFile")
-public class ProjectFile
-{
+public class ProjectFile {
   @XmlAttribute(name = "Compress")
-  private String compress           = "True";
+  private String compress = "True";
   @XmlAttribute(name = "DefaultTargetCheck")
   private String defaultTargetCheck = "True";
   @XmlAttribute(name = "DefaultRuleCheck")
-  private String defaultRuleCheck   = "True";
+  private String defaultRuleCheck = "True";
   @XmlAttribute(name = "SaveByRuleGroup")
-  private String saveByRuleGroup    = "";
+  private String saveByRuleGroup = "";
   @XmlAttribute(name = "Deterministic")
-  private String deterministic      = "True";
+  private String deterministic = "True";
 
   /**
    * Constructs a @link{ProjectFile}.
    */
-  public ProjectFile()
-  {
+  public ProjectFile() {
   }
 
   /**
@@ -52,18 +50,17 @@ public class ProjectFile
    * 
    * @return The compress to return.
    */
-  public String getCompress()
-  {
+  public String getCompress() {
     return this.compress;
   }
 
   /**
    * Sets the compress.
    * 
-   * @param compress The compress to set.
+   * @param compress
+   *          The compress to set.
    */
-  public void setCompress(String compress)
-  {
+  public void setCompress(String compress) {
     this.compress = compress;
   }
 
@@ -72,18 +69,17 @@ public class ProjectFile
    * 
    * @return The defaultTargetCheck to return.
    */
-  public String getDefaultTargetCheck()
-  {
+  public String getDefaultTargetCheck() {
     return this.defaultTargetCheck;
   }
 
   /**
    * Sets the defaultTargetCheck.
    * 
-   * @param defaultTargetCheck The defaultTargetCheck to set.
+   * @param defaultTargetCheck
+   *          The defaultTargetCheck to set.
    */
-  public void setDefaultTargetCheck(String defaultTargetCheck)
-  {
+  public void setDefaultTargetCheck(String defaultTargetCheck) {
     this.defaultTargetCheck = defaultTargetCheck;
   }
 
@@ -92,18 +88,17 @@ public class ProjectFile
    * 
    * @return The defaultRuleCheck to return.
    */
-  public String getDefaultRuleCheck()
-  {
+  public String getDefaultRuleCheck() {
     return this.defaultRuleCheck;
   }
 
   /**
    * Sets the defaultRuleCheck.
    * 
-   * @param defaultRuleCheck The defaultRuleCheck to set.
+   * @param defaultRuleCheck
+   *          The defaultRuleCheck to set.
    */
-  public void setDefaultRuleCheck(String defaultRuleCheck)
-  {
+  public void setDefaultRuleCheck(String defaultRuleCheck) {
     this.defaultRuleCheck = defaultRuleCheck;
   }
 
@@ -112,18 +107,17 @@ public class ProjectFile
    * 
    * @return The saveByRuleGroup to return.
    */
-  public String getSaveByRuleGroup()
-  {
+  public String getSaveByRuleGroup() {
     return this.saveByRuleGroup;
   }
 
   /**
    * Sets the saveByRuleGroup.
    * 
-   * @param saveByRuleGroup The saveByRuleGroup to set.
+   * @param saveByRuleGroup
+   *          The saveByRuleGroup to set.
    */
-  public void setSaveByRuleGroup(String saveByRuleGroup)
-  {
+  public void setSaveByRuleGroup(String saveByRuleGroup) {
     this.saveByRuleGroup = saveByRuleGroup;
   }
 
@@ -132,18 +126,17 @@ public class ProjectFile
    * 
    * @return The deterministic to return.
    */
-  public String getDeterministic()
-  {
+  public String getDeterministic() {
     return this.deterministic;
   }
 
   /**
    * Sets the deterministic.
    * 
-   * @param deterministic The deterministic to set.
+   * @param deterministic
+   *          The deterministic to set.
    */
-  public void setDeterministic(String deterministic)
-  {
+  public void setDeterministic(String deterministic) {
     this.deterministic = deterministic;
   }
 

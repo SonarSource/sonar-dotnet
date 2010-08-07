@@ -29,64 +29,56 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * A Project or Report for FxCop options.
+ * 
  * @author Jose CHILLAN Jul 2, 2009
  */
-@XmlType(name="Entity")
-public class Entity
-{
-  @XmlAttribute(name="Status")
+@XmlType(name = "Entity")
+public class Entity {
+  @XmlAttribute(name = "Status")
   private String status = "Active";
 
-  @XmlAttribute(name="NewOnly")
+  @XmlAttribute(name = "NewOnly")
   private String newOnly = "False";
-  
-  public Entity()
-  {
+
+  public Entity() {
   }
 
-  
   /**
    * Returns the status.
    * 
    * @return The status to return.
    */
-  public String getStatus()
-  {
+  public String getStatus() {
     return this.status;
   }
 
-  
   /**
    * Sets the status.
    * 
-   * @param status The status to set.
+   * @param status
+   *          The status to set.
    */
-  public void setStatus(String status)
-  {
+  public void setStatus(String status) {
     this.status = status;
   }
 
-  
   /**
    * Returns the newOnly.
    * 
    * @return The newOnly to return.
    */
-  public String getNewOnly()
-  {
+  public String getNewOnly() {
     return this.newOnly;
   }
 
-  
   /**
    * Sets the newOnly.
    * 
-   * @param newOnly The newOnly to set.
+   * @param newOnly
+   *          The newOnly to set.
    */
-  public void setNewOnly(String newOnly)
-  {
+  public void setNewOnly(String newOnly) {
     this.newOnly = newOnly;
   }
-  
-  
+
 }

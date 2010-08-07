@@ -32,8 +32,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jul 2, 2009
  */
 @XmlType(name = "SaveMessages")
-public class SaveMessages
-{
+public class SaveMessages {
   @XmlElement(name = "Project")
   private Entity project;
   @XmlElement(name = "Report")
@@ -44,18 +43,17 @@ public class SaveMessages
    * 
    * @return The project to return.
    */
-  public Entity getProject()
-  {
+  public Entity getProject() {
     return this.project;
   }
 
   /**
    * Sets the project.
    * 
-   * @param project The project to set.
+   * @param project
+   *          The project to set.
    */
-  public void setProject(Entity project)
-  {
+  public void setProject(Entity project) {
     this.project = project;
   }
 
@@ -64,26 +62,24 @@ public class SaveMessages
    * 
    * @return The report to return.
    */
-  public Entity getReport()
-  {
+  public Entity getReport() {
     return this.report;
   }
 
   /**
    * Sets the report.
    * 
-   * @param report The report to set.
+   * @param report
+   *          The report to set.
    */
-  public void setReport(Entity report)
-  {
+  public void setReport(Entity report) {
     this.report = report;
   }
 
   /**
    * Constructs the option;
    */
-  public SaveMessages()
-  {
+  public SaveMessages() {
     project = new Entity();
     report = new Entity();
     project.setStatus("Active, Excluded");

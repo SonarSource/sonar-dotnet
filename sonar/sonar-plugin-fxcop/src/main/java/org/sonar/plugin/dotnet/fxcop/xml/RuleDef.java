@@ -27,65 +27,56 @@ package org.sonar.plugin.dotnet.fxcop.xml;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(name="Rule")
-public class RuleDef
-{
-  @XmlAttribute(name="Name")
+@XmlType(name = "Rule")
+public class RuleDef {
+  @XmlAttribute(name = "Name")
   private String name;
-  
-  @XmlAttribute(name="Enabled")
+
+  @XmlAttribute(name = "Enabled")
   private String enabled = "True";
 
   /**
    * Constructs a @link{RulesDef}.
    */
-  public RuleDef()
-  {
+  public RuleDef() {
   }
 
-  
   /**
    * Returns the name.
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
-  
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
-  
   /**
    * Returns the enabled.
    * 
    * @return The enabled to return.
    */
-  public String getEnabled()
-  {
+  public String getEnabled() {
     return this.enabled;
   }
 
-  
   /**
    * Sets the enabled.
    * 
-   * @param enabled The enabled to set.
+   * @param enabled
+   *          The enabled to set.
    */
-  public void setEnabled(String enabled)
-  {
+  public void setEnabled(String enabled) {
     this.enabled = enabled;
   }
-  
-  
+
 }

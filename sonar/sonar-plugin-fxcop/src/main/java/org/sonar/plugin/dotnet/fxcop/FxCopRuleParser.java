@@ -43,53 +43,51 @@ import org.xml.sax.InputSource;
 
 /**
  * Parser the FXCop rules to populate sonar.
+ * 
  * @author Jose CHILLAN May 7, 2009
  */
-public class FxCopRuleParser
-{
+public class FxCopRuleParser {
   /**
    * Parses the context of FXCop rules.
+   * 
    * @param xml
    * @return
    */
-  public static List<FxCopRule> parse(String xml)
-  {
+  public static List<FxCopRule> parse(String xml) {
     StringReader stringReader = new StringReader(xml);
-    List<FxCopRule> result = parse(stringReader);      
+    List<FxCopRule> result = parse(stringReader);
     return result;
   }
 
   /**
    * Parses a FxCop rule file
+   * 
    * @param reader
    * @return
    */
-  public static List<FxCopRule> parse(Reader reader)
-  {
+  public static List<FxCopRule> parse(Reader reader) {
     InputSource source = new InputSource(reader);
     XPathFactory factory = XPathFactory.newInstance();
     XPath xpath = factory.newXPath();
     List<FxCopRule> result = new ArrayList<FxCopRule>();
     Pattern pattern = Pattern.compile("(\\w+)Rules");
 
-    try
-    {
+    try {
       XPathExpression expression = xpath.compile("//Rule");
-      NodeList nodes = (NodeList) expression.evaluate(source, XPathConstants.NODESET);
+      NodeList nodes = (NodeList) expression.evaluate(source,
+          XPathConstants.NODESET);
       int count = nodes.getLength();
       // For each rule we extract the elements
-      for(int idxRule = 0; idxRule < count; idxRule++)
-      {
+      for (int idxRule = 0; idxRule < count; idxRule++) {
         Element ruleElement = (Element) nodes.item(idxRule);
         Element parent = (Element) ruleElement.getParentNode();
         String scopeName = parent.getAttribute("Name");
         Matcher matcher = pattern.matcher(scopeName);
         String category = "Default";
-        if (matcher.find())
-        {
+        if (matcher.find()) {
           category = matcher.group(1);
         }
-        
+
         FxCopRule rule = new FxCopRule();
         String ruleName = ruleElement.getAttribute("Name");
         String active = ruleElement.getAttribute("Enabled");
@@ -99,13 +97,10 @@ public class FxCopRuleParser
         rule.setFileName(scopeName);
         result.add(rule);
       }
-    }
-    catch (XPathExpressionException e)
-    {
+    } catch (XPathExpressionException e) {
       // Nothing
     }
     return result;
   }
-  
-  
+
 }

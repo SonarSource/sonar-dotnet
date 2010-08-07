@@ -25,58 +25,56 @@ package org.sonar.plugin.dotnet.fxcop.xml;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class ProjectOptions
-{
+public class ProjectOptions {
   @XmlElement(name = "SharedProject")
-  private String             sharedProject               = "True";
+  private String sharedProject = "True";
 
   @XmlElement(name = "Stylesheet")
-  private Stylesheet         stylesheet                  = new Stylesheet();
+  private Stylesheet stylesheet = new Stylesheet();
 
   @XmlElement(name = "SaveMessages")
-  private SaveMessages       saveMessages                = new SaveMessages();
+  private SaveMessages saveMessages = new SaveMessages();
 
   @XmlElement(name = "ProjectFile")
-  private ProjectFile        projectFile                 = new ProjectFile();
+  private ProjectFile projectFile = new ProjectFile();
 
   @XmlElement(name = "EnableMultithreadedLoad")
-  private String             enableMultithreadedLoad     = "True";
+  private String enableMultithreadedLoad = "True";
 
   @XmlElement(name = "EnableMultithreadedAnalysis")
-  private String             enableMultithreadedAnalysis = "True";
+  private String enableMultithreadedAnalysis = "True";
 
   @XmlElement(name = "SourceLookup")
-  private String             sourceLookup                = "True";
+  private String sourceLookup = "True";
 
   @XmlElement(name = "AnalysisExceptionsThreshold")
-  private int                analysisExceptionsThreshold = 10;
+  private int analysisExceptionsThreshold = 10;
 
   @XmlElement(name = "RuleExceptionsThreshold")
-  private int                ruleExceptionsThreshold     = 1;
+  private int ruleExceptionsThreshold = 1;
 
   @XmlElement(name = "Spelling")
-  private Spelling           spelling                    = new Spelling();
+  private Spelling spelling = new Spelling();
 
   @XmlElement(name = "OverrideRuleVisibilities")
-  private String             overrideRuleVisibilities    = "False";
+  private String overrideRuleVisibilities = "False";
 
   @XmlElement(name = "CustomDictionaries")
-  private CustomDictionaries customDictionaries          = new CustomDictionaries();
+  private CustomDictionaries customDictionaries = new CustomDictionaries();
 
   @XmlElement(name = "SearchGlobalAssemblyCache")
-  private String             searchGlobalAssemblyCache   = "False";
+  private String searchGlobalAssemblyCache = "False";
 
   @XmlElement(name = "DeadlockDetectionTimeout")
-  private int                deadlockDetectionTimeout    = 120;
+  private int deadlockDetectionTimeout = 120;
 
   @XmlElement(name = "IgnoreGeneratedCode")
-  private String             ignoreGeneratedCode         = "False";
+  private String ignoreGeneratedCode = "False";
 
   /**
    * Constructs a @link{ProjectOptions}.
    */
-  public ProjectOptions()
-  {
+  public ProjectOptions() {
   }
 
   /**
@@ -84,18 +82,17 @@ public class ProjectOptions
    * 
    * @return The sharedProject to return.
    */
-  public String getSharedProject()
-  {
+  public String getSharedProject() {
     return this.sharedProject;
   }
 
   /**
    * Sets the sharedProject.
    * 
-   * @param sharedProject The sharedProject to set.
+   * @param sharedProject
+   *          The sharedProject to set.
    */
-  public void setSharedProject(String sharedProject)
-  {
+  public void setSharedProject(String sharedProject) {
     this.sharedProject = sharedProject;
   }
 
@@ -104,18 +101,17 @@ public class ProjectOptions
    * 
    * @return The stylesheet to return.
    */
-  public Stylesheet getStylesheet()
-  {
+  public Stylesheet getStylesheet() {
     return this.stylesheet;
   }
 
   /**
    * Sets the stylesheet.
    * 
-   * @param stylesheet The stylesheet to set.
+   * @param stylesheet
+   *          The stylesheet to set.
    */
-  public void setStylesheet(Stylesheet stylesheet)
-  {
+  public void setStylesheet(Stylesheet stylesheet) {
     this.stylesheet = stylesheet;
   }
 
@@ -124,18 +120,17 @@ public class ProjectOptions
    * 
    * @return The saveMessages to return.
    */
-  public SaveMessages getSaveMessages()
-  {
+  public SaveMessages getSaveMessages() {
     return this.saveMessages;
   }
 
   /**
    * Sets the saveMessages.
    * 
-   * @param saveMessages The saveMessages to set.
+   * @param saveMessages
+   *          The saveMessages to set.
    */
-  public void setSaveMessages(SaveMessages saveMessages)
-  {
+  public void setSaveMessages(SaveMessages saveMessages) {
     this.saveMessages = saveMessages;
   }
 
@@ -144,18 +139,17 @@ public class ProjectOptions
    * 
    * @return The projectFile to return.
    */
-  public ProjectFile getProjectFile()
-  {
+  public ProjectFile getProjectFile() {
     return this.projectFile;
   }
 
   /**
    * Sets the projectFile.
    * 
-   * @param projectFile The projectFile to set.
+   * @param projectFile
+   *          The projectFile to set.
    */
-  public void setProjectFile(ProjectFile projectFile)
-  {
+  public void setProjectFile(ProjectFile projectFile) {
     this.projectFile = projectFile;
   }
 
@@ -164,18 +158,17 @@ public class ProjectOptions
    * 
    * @return The enableMultithreadedLoad to return.
    */
-  public String getEnableMultithreadedLoad()
-  {
+  public String getEnableMultithreadedLoad() {
     return this.enableMultithreadedLoad;
   }
 
   /**
    * Sets the enableMultithreadedLoad.
    * 
-   * @param enableMultithreadedLoad The enableMultithreadedLoad to set.
+   * @param enableMultithreadedLoad
+   *          The enableMultithreadedLoad to set.
    */
-  public void setEnableMultithreadedLoad(String enableMultithreadedLoad)
-  {
+  public void setEnableMultithreadedLoad(String enableMultithreadedLoad) {
     this.enableMultithreadedLoad = enableMultithreadedLoad;
   }
 
@@ -184,18 +177,17 @@ public class ProjectOptions
    * 
    * @return The enableMultithreadedAnalysis to return.
    */
-  public String getEnableMultithreadedAnalysis()
-  {
+  public String getEnableMultithreadedAnalysis() {
     return this.enableMultithreadedAnalysis;
   }
 
   /**
    * Sets the enableMultithreadedAnalysis.
    * 
-   * @param enableMultithreadedAnalysis The enableMultithreadedAnalysis to set.
+   * @param enableMultithreadedAnalysis
+   *          The enableMultithreadedAnalysis to set.
    */
-  public void setEnableMultithreadedAnalysis(String enableMultithreadedAnalysis)
-  {
+  public void setEnableMultithreadedAnalysis(String enableMultithreadedAnalysis) {
     this.enableMultithreadedAnalysis = enableMultithreadedAnalysis;
   }
 
@@ -204,18 +196,17 @@ public class ProjectOptions
    * 
    * @return The sourceLookup to return.
    */
-  public String getSourceLookup()
-  {
+  public String getSourceLookup() {
     return this.sourceLookup;
   }
 
   /**
    * Sets the sourceLookup.
    * 
-   * @param sourceLookup The sourceLookup to set.
+   * @param sourceLookup
+   *          The sourceLookup to set.
    */
-  public void setSourceLookup(String sourceLookup)
-  {
+  public void setSourceLookup(String sourceLookup) {
     this.sourceLookup = sourceLookup;
   }
 
@@ -224,18 +215,17 @@ public class ProjectOptions
    * 
    * @return The analysisExceptionsThreshold to return.
    */
-  public int getAnalysisExceptionsThreshold()
-  {
+  public int getAnalysisExceptionsThreshold() {
     return this.analysisExceptionsThreshold;
   }
 
   /**
    * Sets the analysisExceptionsThreshold.
    * 
-   * @param analysisExceptionsThreshold The analysisExceptionsThreshold to set.
+   * @param analysisExceptionsThreshold
+   *          The analysisExceptionsThreshold to set.
    */
-  public void setAnalysisExceptionsThreshold(int analysisExceptionsThreshold)
-  {
+  public void setAnalysisExceptionsThreshold(int analysisExceptionsThreshold) {
     this.analysisExceptionsThreshold = analysisExceptionsThreshold;
   }
 
@@ -244,18 +234,17 @@ public class ProjectOptions
    * 
    * @return The ruleExceptionsThreshold to return.
    */
-  public int getRuleExceptionsThreshold()
-  {
+  public int getRuleExceptionsThreshold() {
     return this.ruleExceptionsThreshold;
   }
 
   /**
    * Sets the ruleExceptionsThreshold.
    * 
-   * @param ruleExceptionsThreshold The ruleExceptionsThreshold to set.
+   * @param ruleExceptionsThreshold
+   *          The ruleExceptionsThreshold to set.
    */
-  public void setRuleExceptionsThreshold(int ruleExceptionsThreshold)
-  {
+  public void setRuleExceptionsThreshold(int ruleExceptionsThreshold) {
     this.ruleExceptionsThreshold = ruleExceptionsThreshold;
   }
 
@@ -264,18 +253,17 @@ public class ProjectOptions
    * 
    * @return The spelling to return.
    */
-  public Spelling getSpelling()
-  {
+  public Spelling getSpelling() {
     return this.spelling;
   }
 
   /**
    * Sets the spelling.
    * 
-   * @param spelling The spelling to set.
+   * @param spelling
+   *          The spelling to set.
    */
-  public void setSpelling(Spelling spelling)
-  {
+  public void setSpelling(Spelling spelling) {
     this.spelling = spelling;
   }
 
@@ -284,18 +272,17 @@ public class ProjectOptions
    * 
    * @return The overrideRuleVisibilities to return.
    */
-  public String getOverrideRuleVisibilities()
-  {
+  public String getOverrideRuleVisibilities() {
     return this.overrideRuleVisibilities;
   }
 
   /**
    * Sets the overrideRuleVisibilities.
    * 
-   * @param overrideRuleVisibilities The overrideRuleVisibilities to set.
+   * @param overrideRuleVisibilities
+   *          The overrideRuleVisibilities to set.
    */
-  public void setOverrideRuleVisibilities(String overrideRuleVisibilities)
-  {
+  public void setOverrideRuleVisibilities(String overrideRuleVisibilities) {
     this.overrideRuleVisibilities = overrideRuleVisibilities;
   }
 
@@ -304,18 +291,17 @@ public class ProjectOptions
    * 
    * @return The customDictionaries to return.
    */
-  public CustomDictionaries getCustomDictionaries()
-  {
+  public CustomDictionaries getCustomDictionaries() {
     return this.customDictionaries;
   }
 
   /**
    * Sets the customDictionaries.
    * 
-   * @param customDictionaries The customDictionaries to set.
+   * @param customDictionaries
+   *          The customDictionaries to set.
    */
-  public void setCustomDictionaries(CustomDictionaries customDictionaries)
-  {
+  public void setCustomDictionaries(CustomDictionaries customDictionaries) {
     this.customDictionaries = customDictionaries;
   }
 
@@ -324,18 +310,17 @@ public class ProjectOptions
    * 
    * @return The searchGlobalAssemblyCache to return.
    */
-  public String getSearchGlobalAssemblyCache()
-  {
+  public String getSearchGlobalAssemblyCache() {
     return this.searchGlobalAssemblyCache;
   }
 
   /**
    * Sets the searchGlobalAssemblyCache.
    * 
-   * @param searchGlobalAssemblyCache The searchGlobalAssemblyCache to set.
+   * @param searchGlobalAssemblyCache
+   *          The searchGlobalAssemblyCache to set.
    */
-  public void setSearchGlobalAssemblyCache(String searchGlobalAssemblyCache)
-  {
+  public void setSearchGlobalAssemblyCache(String searchGlobalAssemblyCache) {
     this.searchGlobalAssemblyCache = searchGlobalAssemblyCache;
   }
 
@@ -344,18 +329,17 @@ public class ProjectOptions
    * 
    * @return The deadlockDetectionTimeout to return.
    */
-  public int getDeadlockDetectionTimeout()
-  {
+  public int getDeadlockDetectionTimeout() {
     return this.deadlockDetectionTimeout;
   }
 
   /**
    * Sets the deadlockDetectionTimeout.
    * 
-   * @param deadlockDetectionTimeout The deadlockDetectionTimeout to set.
+   * @param deadlockDetectionTimeout
+   *          The deadlockDetectionTimeout to set.
    */
-  public void setDeadlockDetectionTimeout(int deadlockDetectionTimeout)
-  {
+  public void setDeadlockDetectionTimeout(int deadlockDetectionTimeout) {
     this.deadlockDetectionTimeout = deadlockDetectionTimeout;
   }
 
@@ -364,18 +348,17 @@ public class ProjectOptions
    * 
    * @return The ignoreGeneratedCode to return.
    */
-  public String getIgnoreGeneratedCode()
-  {
+  public String getIgnoreGeneratedCode() {
     return this.ignoreGeneratedCode;
   }
 
   /**
    * Sets the ignoreGeneratedCode.
    * 
-   * @param ignoreGeneratedCode The ignoreGeneratedCode to set.
+   * @param ignoreGeneratedCode
+   *          The ignoreGeneratedCode to set.
    */
-  public void setIgnoreGeneratedCode(String ignoreGeneratedCode)
-  {
+  public void setIgnoreGeneratedCode(String ignoreGeneratedCode) {
     this.ignoreGeneratedCode = ignoreGeneratedCode;
   }
 }

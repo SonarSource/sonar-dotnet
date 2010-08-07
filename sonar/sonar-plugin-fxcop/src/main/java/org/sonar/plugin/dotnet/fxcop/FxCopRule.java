@@ -25,20 +25,19 @@ package org.sonar.plugin.dotnet.fxcop;
 
 /**
  * Definition of a FXCop rule.
+ * 
  * @author Jose CHILLAN Feb 16, 2010
  */
-public class FxCopRule
-{
-  private String  category;
-  private String  name;
+public class FxCopRule {
+  private String category;
+  private String name;
   private boolean enabled;
-  private String  fileName;
+  private String fileName;
 
   /**
    * Constructs a @link{FxCopRule}.
    */
-  public FxCopRule()
-  {
+  public FxCopRule() {
   }
 
   /**
@@ -46,18 +45,17 @@ public class FxCopRule
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 
@@ -66,25 +64,24 @@ public class FxCopRule
    * 
    * @return The enabled to return.
    */
-  public boolean isEnabled()
-  {
+  public boolean isEnabled() {
     return this.enabled;
   }
 
   /**
    * Sets the enabled.
    * 
-   * @param enabled The enabled to set.
+   * @param enabled
+   *          The enabled to set.
    */
-  public void setEnabled(boolean enabled)
-  {
+  public void setEnabled(boolean enabled) {
     this.enabled = enabled;
   }
 
   @Override
-  public String toString()
-  {
-    return "FxCopRule(name=" + name + ", enabled=" + enabled + ", category=" + category + ")";
+  public String toString() {
+    return "FxCopRule(name=" + name + ", enabled=" + enabled + ", category="
+        + category + ")";
   }
 
   /**
@@ -92,40 +89,36 @@ public class FxCopRule
    * 
    * @return The category to return.
    */
-  public String getCategory()
-  {
+  public String getCategory() {
     return this.category;
   }
 
   /**
    * Sets the category.
    * 
-   * @param category The category to set.
+   * @param category
+   *          The category to set.
    */
-  public void setCategory(String category)
-  {
+  public void setCategory(String category) {
     this.category = category;
   }
 
-  
   /**
    * Returns the fileName.
    * 
    * @return The fileName to return.
    */
-  public String getFileName()
-  {
+  public String getFileName() {
     return this.fileName;
   }
 
-  
   /**
    * Sets the fileName.
    * 
-   * @param fileName The fileName to set.
+   * @param fileName
+   *          The fileName to set.
    */
-  public void setFileName(String fileName)
-  {
+  public void setFileName(String fileName) {
     this.fileName = fileName;
   }
 }

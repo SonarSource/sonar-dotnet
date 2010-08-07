@@ -30,25 +30,23 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "FxCopProject")
 @XmlType(name = "FxCopProject")
-public class FxCopProject
-{
+public class FxCopProject {
   @XmlAttribute(name = "Version")
-  private String         version = "1.36";
+  private String version = "1.36";
 
   @XmlAttribute(name = "Name")
-  private String         name;
+  private String name;
 
   @XmlElement(name = "ProjectOptions")
   private ProjectOptions projectOptions;
 
   @XmlElement(name = "Rules")
-  private RuleSet        rules;
+  private RuleSet rules;
 
   /**
    * Constructs a @link{FxCopReport}.
    */
-  public FxCopProject()
-  {
+  public FxCopProject() {
   }
 
   /**
@@ -56,18 +54,17 @@ public class FxCopProject
    * 
    * @return The projectOptions to return.
    */
-  public ProjectOptions getProjectOptions()
-  {
+  public ProjectOptions getProjectOptions() {
     return this.projectOptions;
   }
 
   /**
    * Sets the projectOptions.
    * 
-   * @param projectOptions The projectOptions to set.
+   * @param projectOptions
+   *          The projectOptions to set.
    */
-  public void setProjectOptions(ProjectOptions projectOptions)
-  {
+  public void setProjectOptions(ProjectOptions projectOptions) {
     this.projectOptions = projectOptions;
   }
 
@@ -76,18 +73,17 @@ public class FxCopProject
    * 
    * @return The rules to return.
    */
-  public RuleSet getRules()
-  {
+  public RuleSet getRules() {
     return this.rules;
   }
 
   /**
    * Sets the rules.
    * 
-   * @param rules The rules to set.
+   * @param rules
+   *          The rules to set.
    */
-  public void setRules(RuleSet rules)
-  {
+  public void setRules(RuleSet rules) {
     this.rules = rules;
   }
 
@@ -96,18 +92,17 @@ public class FxCopProject
    * 
    * @return The version to return.
    */
-  public String getVersion()
-  {
+  public String getVersion() {
     return this.version;
   }
 
   /**
    * Sets the version.
    * 
-   * @param version The version to set.
+   * @param version
+   *          The version to set.
    */
-  public void setVersion(String version)
-  {
+  public void setVersion(String version) {
     this.version = version;
   }
 
@@ -116,18 +111,17 @@ public class FxCopProject
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 }

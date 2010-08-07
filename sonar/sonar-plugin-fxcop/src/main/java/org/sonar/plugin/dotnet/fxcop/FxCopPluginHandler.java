@@ -36,42 +36,34 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * 
  * @author Jose CHILLAN May 7, 2009
  */
-public class FxCopPluginHandler
-  extends AbstractDotNetMavenPluginHandler
-{
-  private static final String FX_COP_FILE   = "sonar.FxCop";
+public class FxCopPluginHandler extends AbstractDotNetMavenPluginHandler {
+  private static final String FX_COP_FILE = "sonar.FxCop";
   private static final String FX_COP_REPORT = "fxcop-report.xml";
 
-  private RulesProfile        rulesProfile;
+  private RulesProfile rulesProfile;
   private FxCopRuleRepository rulesRepository;
 
   /**
    * Constructs a @link{FxCopPluginHandler}.
    */
-  public FxCopPluginHandler(RulesProfile rulesProfile, FxCopRuleRepository fxCopRulesRepository)
-  {
+  public FxCopPluginHandler(RulesProfile rulesProfile,
+      FxCopRuleRepository fxCopRulesRepository) {
     this.rulesProfile = rulesProfile;
     this.rulesRepository = fxCopRulesRepository;
   }
 
-  public String[] getGoals()
-  {
-    return new String[] { "fxcop"
-    };
+  public String[] getGoals() {
+    return new String[] { "fxcop" };
   }
 
   @Override
-  public void configure(Project project, MavenPlugin plugin)
-  {
-    try
-    {
+  public void configure(Project project, MavenPlugin plugin) {
+    try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
       configureParameters(plugin);
       plugin.setParameter("fxCopReportName", FX_COP_REPORT);
-    }
-    catch (IOException e)
-    {
+    } catch (IOException e) {
     }
   }
 
@@ -82,16 +74,17 @@ public class FxCopPluginHandler
    * @param plugin
    * @throws IOException
    */
-  private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException
-  {
-    String fxCopConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-    File configFile = project.getFileSystem().writeToWorkingDirectory(fxCopConfiguration, FX_COP_FILE);
+  private void generateConfigurationFile(Project project, MavenPlugin plugin)
+      throws IOException {
+    String fxCopConfiguration = rulesRepository
+        .exportConfiguration(rulesProfile);
+    File configFile = project.getFileSystem().writeToWorkingDirectory(
+        fxCopConfiguration, FX_COP_FILE);
     // Defines the configuration file
     plugin.setParameter("fxCopConfigFile", configFile.getAbsolutePath());
   }
 
-  public void configureParameters(MavenPlugin plugin)
-  {
+  public void configureParameters(MavenPlugin plugin) {
     // Nothing yet
   }
 }

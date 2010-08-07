@@ -50,27 +50,27 @@ import org.xml.sax.InputSource;
 
 /**
  * Collects the FXCop reporting into sonar.
+ * 
  * @author Jose CHILLAN Feb 16, 2010
  */
-public class FxCopSensor extends AbstractDotnetSensor
-{
-  private final static Logger log                        = LoggerFactory.getLogger(FxCopSensor.class);
+public class FxCopSensor extends AbstractDotnetSensor {
+  private final static Logger log = LoggerFactory.getLogger(FxCopSensor.class);
 
-  private static final String FXCOP_REPORT_XML           = "fxcop-report.xml";
-  private static final String FXCOP_TRANSFO_XSL          = "fxcop-transformation.xsl";
+  private static final String FXCOP_REPORT_XML = "fxcop-report.xml";
+  private static final String FXCOP_TRANSFO_XSL = "fxcop-transformation.xsl";
   private static final String FXCOP_PROCESSED_REPORT_XML = "fxcop-report-processed.xml";
 
-  private RulesManager        rulesManager;
-  private RulesProfile        profile;
-  private FxCopPluginHandler  pluginHandler;
+  private RulesManager rulesManager;
+  private RulesProfile profile;
+  private FxCopPluginHandler pluginHandler;
 
   /**
    * Constructs a @link{FxCopCollector}.
    * 
    * @param rulesManager
    */
-  public FxCopSensor(RulesProfile profile, RulesManager rulesManager, FxCopPluginHandler pluginHandler)
-  {
+  public FxCopSensor(RulesProfile profile, RulesManager rulesManager,
+      FxCopPluginHandler pluginHandler) {
     super();
     this.rulesManager = rulesManager;
     this.profile = profile;
@@ -79,50 +79,48 @@ public class FxCopSensor extends AbstractDotnetSensor
 
   /**
    * Launches the project analysis/
+   * 
    * @param project
    * @param context
    */
   @Override
-  public void analyse(Project project, SensorContext context)
-  {
+  public void analyse(Project project, SensorContext context) {
     File report = findReport(project, FXCOP_REPORT_XML);
     File dir = getReportsDirectory(project);
 
     // We generate the transformer
     File transformedReport = transformReport(report, dir);
-    if (transformedReport == null)
-    {
+    if (transformedReport == null) {
       return;
     }
-    FxCopResultParser parser = new FxCopResultParser(project, context, rulesManager, profile);
-    try
-    {
+    FxCopResultParser parser = new FxCopResultParser(project, context,
+        rulesManager, profile);
+    try {
       URL fileURL = transformedReport.toURI().toURL();
       parser.parse(fileURL);
-    }
-    catch (MalformedURLException e)
-    {
+    } catch (MalformedURLException e) {
       log.debug("Error while loading the file: {}\n{}", report, e);
-    }
-    catch (InvalidResourceException ex) {
-  	  log.warn("C# file not referenced in the solution", ex);
+    } catch (InvalidResourceException ex) {
+      log.warn("C# file not referenced in the solution", ex);
     }
   }
 
   /**
    * Transforms the report to a usable format.
+   * 
    * @param report
    * @param dir
    * @return
    */
-  private File transformReport(File report, File dir)
-  {
-    try
-    {
-      ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-      InputStream stream = contextClassLoader.getResourceAsStream(FXCOP_TRANSFO_XSL);
+  private File transformReport(File report, File dir) {
+    try {
+      ClassLoader contextClassLoader = Thread.currentThread()
+          .getContextClassLoader();
+      InputStream stream = contextClassLoader
+          .getResourceAsStream(FXCOP_TRANSFO_XSL);
       Source xslSource = new SAXSource(new InputSource(stream));
-      Templates templates = TransformerFactory.newInstance().newTemplates(xslSource);
+      Templates templates = TransformerFactory.newInstance().newTemplates(
+          xslSource);
       Transformer transformer = templates.newTransformer();
 
       // We open the report to be processed
@@ -133,9 +131,7 @@ public class FxCopSensor extends AbstractDotnetSensor
       Result result = new StreamResult(processedReport);
       transformer.transform(xmlSource, result);
       return processedReport;
-    }
-    catch (Exception exc)
-    {
+    } catch (Exception exc) {
       log.warn("Error during the processing of the FxCop report for Sonar", exc);
     }
     return null;
@@ -146,8 +142,7 @@ public class FxCopSensor extends AbstractDotnetSensor
    * @return
    */
   @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project)
-  {
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
     return pluginHandler;
   }
 

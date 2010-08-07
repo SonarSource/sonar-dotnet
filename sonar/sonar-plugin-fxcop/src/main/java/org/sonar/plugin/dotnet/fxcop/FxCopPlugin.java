@@ -31,26 +31,23 @@ import org.sonar.api.Plugin;
 
 /**
  * A plugin responsible of FXCop reporting in sonar.
+ * 
  * @author Jose CHILLAN Feb 16, 2010
  */
-public class FxCopPlugin
-  implements Plugin
-{
+public class FxCopPlugin implements Plugin {
   public static final String KEY = "fxcop";
 
   /**
    * Constructs a @link{FxCopPlugin}.
    */
-  public FxCopPlugin()
-  {
+  public FxCopPlugin() {
   }
-  public String getDescription()
-  {
+
+  public String getDescription() {
     return "A plugin that collects the FxCop check results";
   }
 
-  public List<Class<? extends Extension>> getExtensions()
-  {
+  public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(FxCopRuleRepository.class);
     list.add(FxCopSensor.class);
@@ -59,19 +56,16 @@ public class FxCopPlugin
     return list;
   }
 
-  public String getKey()
-  {
+  public String getKey() {
     return KEY;
   }
 
-  public String getName()
-  {
+  public String getName() {
     return "FxCop Plugin";
   }
 
   @Override
-  public String toString()
-  {
+  public String toString() {
     return getKey();
   }
 }

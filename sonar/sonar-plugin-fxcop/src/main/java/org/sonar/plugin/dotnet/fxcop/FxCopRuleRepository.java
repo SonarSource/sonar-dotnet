@@ -49,33 +49,29 @@ import org.sonar.plugin.dotnet.fxcop.xml.RuleSet;
  * 
  * @author Jose CHILLAN May 7, 2009
  */
-public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements ConfigurationExportable
-{
+public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
+    ConfigurationExportable {
 
   /**
    * Constructs a @link{FxCopRuleRepository}.
    */
-  public FxCopRuleRepository()
-  {
+  public FxCopRuleRepository() {
   }
 
   @Override
-  public Map<String, String> getBuiltInProfiles()
-  {
+  public Map<String, String> getBuiltInProfiles() {
     Map<String, String> result = new HashMap<String, String>();
     result.put(CSharpRulesProfile.DEFAULT_WAY, "DefaultRules.FxCop");
     return result;
   }
 
   @Override
-  public List<Rule> parseReferential(String fileContent)
-  {
+  public List<Rule> parseReferential(String fileContent) {
     return super.parseReferential(fileContent);
   }
 
   @Override
-  public String getRepositoryResourcesBase()
-  {
+  public String getRepositoryResourcesBase() {
     return "org/sonar/plugin/dotnet/fxcop";
   }
 
@@ -86,26 +82,23 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
    * @param rules
    * @return the active rules
    */
-  public List<ActiveRule> importConfiguration(String configuration, List<Rule> rules)
-  {
+  public List<ActiveRule> importConfiguration(String configuration,
+      List<Rule> rules) {
     List<FxCopRule> fxcopConfig = FxCopRuleParser.parse(configuration);
 
     List<ActiveRule> result = new ArrayList<ActiveRule>();
     // First we build a map of configured rules
     Map<String, Rule> rulesMap = new HashMap<String, Rule>();
-    for (Rule dbRule : rules)
-    {
+    for (Rule dbRule : rules) {
       String key = dbRule.getKey();
       rulesMap.put(key, dbRule);
     }
 
     // We try to import all the configured rules
-    for (FxCopRule fxCopRule : fxcopConfig)
-    {
+    for (FxCopRule fxCopRule : fxcopConfig) {
       String ruleName = fxCopRule.getName();
       Rule dbRule = rulesMap.get(ruleName);
-      if (dbRule != null)
-      {
+      if (dbRule != null) {
         RulePriority rulePriority = RulePriority.MAJOR;
         ActiveRule activeRule = new ActiveRule(null, dbRule, rulePriority);
         result.add(activeRule);
@@ -115,9 +108,9 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
   }
 
   @Override
-  public String exportConfiguration(RulesProfile activeProfile)
-  {
-    List<ActiveRule> activeRules = activeProfile.getActiveRulesByPlugin(FxCopPlugin.KEY);
+  public String exportConfiguration(RulesProfile activeProfile) {
+    List<ActiveRule> activeRules = activeProfile
+        .getActiveRulesByPlugin(FxCopPlugin.KEY);
     List<FxCopRule> rules = buildRules(activeRules);
     String xmlModules = buildXmlFromRules(rules);
     return xmlModules;
@@ -129,17 +122,14 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
    * @param allRules
    * @return
    */
-  private String buildXmlFromRules(List<FxCopRule> allRules)
-  {
+  private String buildXmlFromRules(List<FxCopRule> allRules) {
     FxCopProject report = new FxCopProject();
     Map<String, List<FxCopRule>> rulesByFile = new HashMap<String, List<FxCopRule>>();
     // We group the rules by filename
-    for (FxCopRule fxCopRule : allRules)
-    {
+    for (FxCopRule fxCopRule : allRules) {
       String fileName = fxCopRule.getFileName();
       List<FxCopRule> rulesList = rulesByFile.get(fileName);
-      if (rulesList == null)
-      {
+      if (rulesList == null) {
         rulesList = new ArrayList<FxCopRule>();
         rulesByFile.put(fileName, rulesList);
       }
@@ -148,8 +138,7 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
 
     // This is the main list
     List<RuleFile> ruleFiles = new ArrayList<RuleFile>();
-    for (Map.Entry<String, List<FxCopRule>> fileEntry : rulesByFile.entrySet())
-    {
+    for (Map.Entry<String, List<FxCopRule>> fileEntry : rulesByFile.entrySet()) {
       RuleFile ruleFile = new RuleFile();
       ruleFile.setEnabled("True");
 
@@ -157,8 +146,7 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
       ruleFile.setName(fileEntry.getKey());
       List<RuleDef> ruleDefinitions = new ArrayList<RuleDef>();
       List<FxCopRule> rules = fileEntry.getValue();
-      for (FxCopRule fxCopRule : rules)
-      {
+      for (FxCopRule fxCopRule : rules) {
         RuleDef currentRule = new RuleDef();
         currentRule.setName(fxCopRule.getName());
         ruleDefinitions.add(currentRule);
@@ -184,12 +172,10 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
    * @param activeRulesByPlugin
    * @return
    */
-  private List<FxCopRule> buildRules(List<ActiveRule> activeRulesByPlugin)
-  {
+  private List<FxCopRule> buildRules(List<ActiveRule> activeRulesByPlugin) {
     List<FxCopRule> result = new ArrayList<FxCopRule>();
 
-    for (ActiveRule activeRule : activeRulesByPlugin)
-    {
+    for (ActiveRule activeRule : activeRulesByPlugin) {
       // Extracts the rule's date
       Rule rule = activeRule.getRule();
       String configKey = rule.getConfigKey();
