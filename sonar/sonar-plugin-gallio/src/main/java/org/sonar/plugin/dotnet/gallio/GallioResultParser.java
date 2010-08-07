@@ -25,7 +25,6 @@ package org.sonar.plugin.dotnet.gallio;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
