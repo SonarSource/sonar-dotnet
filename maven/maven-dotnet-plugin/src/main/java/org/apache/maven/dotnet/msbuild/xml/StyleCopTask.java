@@ -31,190 +31,167 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * A StyleCopTask.
+ * 
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="StyleCopTask", namespace=Constant.NAMESPACE)
-public class StyleCopTask
-{
-  @XmlAttribute(name="ProjectFullPath")
+@XmlType(name = "StyleCopTask", namespace = Constant.NAMESPACE)
+public class StyleCopTask {
+  @XmlAttribute(name = "ProjectFullPath")
   private String fullPath;
-  @XmlAttribute(name="SourceFiles")
+  @XmlAttribute(name = "SourceFiles")
   private String sourceFiles;
-  @XmlAttribute(name="ForceFullAnalysis")
+  @XmlAttribute(name = "ForceFullAnalysis")
   private String forceFullAnalysis;
-  @XmlAttribute(name="TreatErrorsAsWarnings")
+  @XmlAttribute(name = "TreatErrorsAsWarnings")
   private String treatErrorAsWarnings;
-  @XmlAttribute(name="OutputFile")
+  @XmlAttribute(name = "OutputFile")
   private String outputFile;
-  @XmlAttribute(name="OverrideSettingsFile")
+  @XmlAttribute(name = "OverrideSettingsFile")
   private String settingsFile;
-  @XmlAttribute(name="MaxViolationCount")
+  @XmlAttribute(name = "MaxViolationCount")
   private int maxViolationCount;
-  
+
   /**
    * Constructs a @link{StyleCopTask}.
    */
-  public StyleCopTask()
-  {
+  public StyleCopTask() {
     this.forceFullAnalysis = "true";
     this.treatErrorAsWarnings = "true";
     this.maxViolationCount = -1;
   }
 
-  
   /**
    * Returns the fullPath.
    * 
    * @return The fullPath to return.
    */
-  public String getFullPath()
-  {
+  public String getFullPath() {
     return this.fullPath;
   }
 
-  
   /**
    * Sets the fullPath.
    * 
-   * @param fullPath The fullPath to set.
+   * @param fullPath
+   *          The fullPath to set.
    */
-  public void setFullPath(String fullPath)
-  {
+  public void setFullPath(String fullPath) {
     this.fullPath = fullPath;
   }
 
-  
   /**
    * Returns the sourceFiles.
    * 
    * @return The sourceFiles to return.
    */
-  public String getSourceFiles()
-  {
+  public String getSourceFiles() {
     return this.sourceFiles;
   }
 
-  
   /**
    * Sets the sourceFiles.
    * 
-   * @param sourceFiles The sourceFiles to set.
+   * @param sourceFiles
+   *          The sourceFiles to set.
    */
-  public void setSourceFiles(String sourceFiles)
-  {
+  public void setSourceFiles(String sourceFiles) {
     this.sourceFiles = sourceFiles;
   }
 
-  
   /**
    * Returns the forceFullAnalysis.
    * 
    * @return The forceFullAnalysis to return.
    */
-  public String getForceFullAnalysis()
-  {
+  public String getForceFullAnalysis() {
     return this.forceFullAnalysis;
   }
 
-  
   /**
    * Sets the forceFullAnalysis.
    * 
-   * @param forceFullAnalysis The forceFullAnalysis to set.
+   * @param forceFullAnalysis
+   *          The forceFullAnalysis to set.
    */
-  public void setForceFullAnalysis(String forceFullAnalysis)
-  {
+  public void setForceFullAnalysis(String forceFullAnalysis) {
     this.forceFullAnalysis = forceFullAnalysis;
   }
 
-  
   /**
    * Returns the treatErrorAsWarnings.
    * 
    * @return The treatErrorAsWarnings to return.
    */
-  public String getTreatErrorAsWarnings()
-  {
+  public String getTreatErrorAsWarnings() {
     return this.treatErrorAsWarnings;
   }
 
-  
   /**
    * Sets the treatErrorAsWarnings.
    * 
-   * @param treatErrorAsWarnings The treatErrorAsWarnings to set.
+   * @param treatErrorAsWarnings
+   *          The treatErrorAsWarnings to set.
    */
-  public void setTreatErrorAsWarnings(String treatErrorAsWarnings)
-  {
+  public void setTreatErrorAsWarnings(String treatErrorAsWarnings) {
     this.treatErrorAsWarnings = treatErrorAsWarnings;
   }
 
-  
   /**
    * Returns the outputFile.
    * 
    * @return The outputFile to return.
    */
-  public String getOutputFile()
-  {
+  public String getOutputFile() {
     return this.outputFile;
   }
 
-  
   /**
    * Sets the outputFile.
    * 
-   * @param outputFile The outputFile to set.
+   * @param outputFile
+   *          The outputFile to set.
    */
-  public void setOutputFile(String outputFile)
-  {
+  public void setOutputFile(String outputFile) {
     this.outputFile = outputFile;
   }
 
-  
   /**
    * Returns the settingsFile.
    * 
    * @return The settingsFile to return.
    */
-  public String getSettingsFile()
-  {
+  public String getSettingsFile() {
     return this.settingsFile;
   }
 
-  
   /**
    * Sets the settingsFile.
    * 
-   * @param settingsFile The settingsFile to set.
+   * @param settingsFile
+   *          The settingsFile to set.
    */
-  public void setSettingsFile(String settingsFile)
-  {
+  public void setSettingsFile(String settingsFile) {
     this.settingsFile = settingsFile;
   }
 
-  
   /**
    * Returns the maxViolationCount.
    * 
    * @return The maxViolationCount to return.
    */
-  public int getMaxViolationCount()
-  {
+  public int getMaxViolationCount() {
     return this.maxViolationCount;
   }
 
-  
   /**
    * Sets the maxViolationCount.
    * 
-   * @param maxViolationCount The maxViolationCount to set.
+   * @param maxViolationCount
+   *          The maxViolationCount to set.
    */
-  public void setMaxViolationCount(int maxViolationCount)
-  {
+  public void setMaxViolationCount(int maxViolationCount) {
     this.maxViolationCount = maxViolationCount;
   }
-  
-  
+
 }

@@ -60,7 +60,8 @@ import org.codehaus.plexus.util.StringUtils;
  * 
  * @goal cpd
  * @phase site
- * @description generates a report on copy/paste or duplicated code in a C# project or solution
+ * @description generates a report on copy/paste or duplicated code in a C#
+ *              project or solution
  * 
  * 
  * @author avictoor101408
@@ -68,279 +69,287 @@ import org.codehaus.plexus.util.StringUtils;
  */
 public class CpdMojo extends AbstractDotNetMojo {
 
-	/**
-	 * The minimum number of tokens that need to be duplicated before it causes
-	 * a violation.
-	 * 
-	 * @parameter expression="${minimumTokens}" default-value="100"
-	 */
-	private int				minimumTokens;
+  /**
+   * The minimum number of tokens that need to be duplicated before it causes a
+   * violation.
+   * 
+   * @parameter expression="${minimumTokens}" default-value="100"
+   */
+  private int minimumTokens;
 
-	/**
-	 * Skip the CPD report generation. Most useful on the command line via
-	 * "-Dcpd.skip=true".
-	 * 
-	 * @parameter expression="${cpd.skip}" default-value="false"
-	 * @since 2.1
-	 */
-	private boolean			skip;
+  /**
+   * Skip the CPD report generation. Most useful on the command line via
+   * "-Dcpd.skip=true".
+   * 
+   * @parameter expression="${cpd.skip}" default-value="false"
+   * @since 2.1
+   */
+  private boolean skip;
 
-	/**
-	 * The file encoding to use when reading the Java sources.
-	 * 
-	 * @parameter expression="${encoding}"
-	 *            default-value="${project.build.sourceEncoding}"
-	 * @since 2.3
-	 */
-	private String			sourceEncoding;
+  /**
+   * The file encoding to use when reading the Java sources.
+   * 
+   * @parameter expression="${encoding}"
+   *            default-value="${project.build.sourceEncoding}"
+   * @since 2.3
+   */
+  private String sourceEncoding;
 
+  /**
+   * The output directory for the final HTML report. Note that this parameter is
+   * only evaluated if the goal is run directly from the command line or during
+   * the default lifecycle. If the goal is run indirectly as part of a site
+   * generation, the output directory configured in the Maven Site Plugin is
+   * used instead.
+   * 
+   * @parameter expression="${project.reporting.outputDirectory}"
+   * @required
+   */
+  protected File outputReportingDirectory;
 
-	/**
-	 * The output directory for the final HTML report. Note that this parameter
-	 * is only evaluated if the goal is run directly from the command line or
-	 * during the default lifecycle. If the goal is run indirectly as part of a
-	 * site generation, the output directory configured in the Maven Site Plugin
-	 * is used instead.
-	 * 
-	 * @parameter expression="${project.reporting.outputDirectory}"
-	 * @required
-	 */
-	protected File			outputReportingDirectory;
+  /**
+   * Set the output format type, in addition to the HTML report. Must be one of:
+   * "none", "csv", "xml", "txt" or the full class name of the PMD renderer to
+   * use. See the net.sourceforge.pmd.renderers package javadoc for available
+   * renderers. XML is required if the pmd:check goal is being used.
+   * 
+   * @parameter expression="${format}" default-value="xml"
+   */
+  protected String format = "xml";
 
+  /**
+   * Run PMD on the tests.
+   * 
+   * @parameter default-value="false"
+   * @since 2.2
+   */
+  protected boolean includeTests;
 
-	/**
-	 * Set the output format type, in addition to the HTML report. Must be one
-	 * of: "none", "csv", "xml", "txt" or the full class name of the PMD
-	 * renderer to use. See the net.sourceforge.pmd.renderers package javadoc
-	 * for available renderers. XML is required if the pmd:check goal is being
-	 * used.
-	 * 
-	 * @parameter expression="${format}" default-value="xml"
-	 */
-	protected String		format	= "xml";
+  /**
+   * Whether to build an aggregated report at the root, or build individual
+   * reports.
+   * 
+   * @parameter expression="${aggregate}" default-value="false"
+   * @since 2.2
+   */
+  protected boolean aggregate;
 
-	/**
-	 * Run PMD on the tests.
-	 * 
-	 * @parameter default-value="false"
-	 * @since 2.2
-	 */
-	protected boolean		includeTests;
+  /**
+   * @see org.apache.maven.reporting.AbstractMavenReport#getProject()
+   */
+  protected MavenProject getProject() {
 
-	/**
-	 * Whether to build an aggregated report at the root, or build individual
-	 * reports.
-	 * 
-	 * @parameter expression="${aggregate}" default-value="false"
-	 * @since 2.2
-	 */
-	protected boolean		aggregate;
+    return project;
+  }
 
-	/**
-	 * @see org.apache.maven.reporting.AbstractMavenReport#getProject()
-	 */
-	protected MavenProject getProject() {
+  /**
+   * Convenience method to get the list of files where the CPD tool will be
+   * executed
+   * 
+   * @return a List of the files where the PMD tool will be executed
+   * @throws java.io.IOException
+   * @throws MojoExecutionException
+   */
+  protected Map<File, SourceFile> getFilesToProcess()
+      throws MojoExecutionException {
+    Map<File, SourceFile> fileMap = new HashMap<File, SourceFile>();
+    FilenameFilter filter = new CsLanguage().getFileFilter();
+    List<VisualStudioProject> projects = getVisualSolution().getProjects();
+    for (VisualStudioProject visualStudioProject : projects) {
+      if (visualStudioProject.isTest() && !includeTests) {
+        getLog()
+            .debug("skipping test project " + visualStudioProject.getName());
+      } else {
+        Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
+        for (SourceFile sourceFile : sources) {
+          if (filter.accept(sourceFile.getFile().getParentFile(),
+              sourceFile.getName())) {
+            fileMap.put(sourceFile.getFile(), sourceFile);
+          }
+        }
+      }
+    }
+    return fileMap;
+  }
 
-		return project;
-	}
+  /**
+   * @see org.apache.maven.reporting.AbstractMavenReport#canGenerateReport()
+   */
+  public boolean canGenerateReport() {
 
+    if (aggregate && !project.isExecutionRoot()) {
+      return false;
+    }
 
-	/**
-	 * Convenience method to get the list of files where the CPD tool will be
-	 * executed
-	 * 
-	 * @return a List of the files where the PMD tool will be executed
-	 * @throws java.io.IOException
-	 * @throws MojoExecutionException 
-	 */
-	protected Map<File, SourceFile> getFilesToProcess() throws MojoExecutionException {
-		Map<File, SourceFile> fileMap = new HashMap<File, SourceFile>();
-		FilenameFilter filter = new CsLanguage().getFileFilter();
-		List<VisualStudioProject> projects = getVisualSolution().getProjects();
-		for (VisualStudioProject visualStudioProject : projects) {
-			if (visualStudioProject.isTest() && !includeTests) {
-				getLog().debug("skipping test project "+visualStudioProject.getName());
-			} else {
-				Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
-				for (SourceFile sourceFile : sources) {
-					if (filter.accept(sourceFile.getFile().getParentFile(), sourceFile.getName())) {
-						fileMap.put(sourceFile.getFile(), sourceFile);	
-					}
-				}
-			}
-		}		
-		return fileMap;
-	}
+    // if format is XML, we need to output it even if the file list is empty
+    // so the "check" goals can check for failures
+    if ("xml".equals(format)) {
+      return true;
+    }
+    try {
+      Map filesToProcess = getFilesToProcess();
+      if (filesToProcess.isEmpty()) {
+        return false;
+      }
+    } catch (MojoExecutionException e) {
+      getLog().error(e);
+    }
+    return true;
+  }
 
-	/**
-	 * @see org.apache.maven.reporting.AbstractMavenReport#canGenerateReport()
-	 */
-	public boolean canGenerateReport() {
+  /**
+   * @see org.apache.maven.reporting.AbstractMavenReport#getOutputDirectory()
+   */
+  protected String getOutputReportingDirectory() {
 
-		if (aggregate && !project.isExecutionRoot()) {
-			return false;
-		}
+    return outputReportingDirectory.getAbsolutePath();
+  }
 
-		// if format is XML, we need to output it even if the file list is empty
-		// so the "check" goals can check for failures
-		if ("xml".equals(format)) {
-			return true;
-		}
-		try {
-			Map filesToProcess = getFilesToProcess();
-			if (filesToProcess.isEmpty()) {
-				return false;
-			}
-		} catch (MojoExecutionException e) {
-			getLog().error(e);
-		}
-		return true;
-	}
+  /**
+   * @see org.apache.maven.reporting.MavenReport#getName(java.util.Locale)
+   */
+  public String getName(Locale locale) {
 
-	/**
-	 * @see org.apache.maven.reporting.AbstractMavenReport#getOutputDirectory()
-	 */
-	protected String getOutputReportingDirectory() {
+    return getBundle(locale).getString("report.cpd.name");
+  }
 
-		return outputReportingDirectory.getAbsolutePath();
-	}
+  /**
+   * @see org.apache.maven.reporting.MavenReport#getDescription(java.util.Locale)
+   */
+  public String getDescription(Locale locale) {
 
-	/**
-	 * @see org.apache.maven.reporting.MavenReport#getName(java.util.Locale)
-	 */
-	public String getName(Locale locale) {
+    return getBundle(locale).getString("report.cpd.description");
+  }
 
-		return getBundle(locale).getString("report.cpd.name");
-	}
+  /**
+   * @throws MojoExecutionException
+   * @see org.apache.maven.reporting.AbstractMavenReport#executeReport(java.util.Locale)
+   */
+  public void executeReport() throws MojoExecutionException {
 
-	/**
-	 * @see org.apache.maven.reporting.MavenReport#getDescription(java.util.Locale)
-	 */
-	public String getDescription(Locale locale) {
+    if (!skip && canGenerateReport()) {
+      ClassLoader origLoader = Thread.currentThread().getContextClassLoader();
+      try {
+        Thread.currentThread().setContextClassLoader(
+            this.getClass().getClassLoader());
 
-		return getBundle(locale).getString("report.cpd.description");
-	}
+        CPD cpd = new CPD(minimumTokens, new CsLanguage());
+        try {
+          Map<File, SourceFile> files = getFilesToProcess();
 
-	/**
-	 * @throws MojoExecutionException 
-	 * @see org.apache.maven.reporting.AbstractMavenReport#executeReport(java.util.Locale)
-	 */
-	public void executeReport() throws MojoExecutionException {
+          if (StringUtils.isNotEmpty(sourceEncoding)) {
+            cpd.setEncoding(sourceEncoding);
+          } else if (!files.isEmpty()) {
+            getLog()
+                .warn(
+                    "File encoding has not been set, using platform encoding , i.e. build is platform dependent!");
+          }
 
-		if (!skip && canGenerateReport()) {
-			ClassLoader origLoader = Thread.currentThread().getContextClassLoader();
-			try {
-				Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+          Set<File> fileSet = files.keySet();
+          for (File file : fileSet) {
+            cpd.add(file);
+          }
 
-				CPD cpd = new CPD(minimumTokens, new CsLanguage());
-				try {
-					Map<File, SourceFile> files = getFilesToProcess();
-					
-					if (StringUtils.isNotEmpty(sourceEncoding)) {
-						cpd.setEncoding(sourceEncoding);
-					} else if (!files.isEmpty()) {
-						getLog().warn("File encoding has not been set, using platform encoding , i.e. build is platform dependent!");
-					}
-					
-					Set<File> fileSet = files.keySet();
-					for (File file : fileSet) {
-						cpd.add(file);
-					}
-					
-					
-				} catch (UnsupportedEncodingException e) {
-					throw new MojoExecutionException("Encoding '" + sourceEncoding + "' is not supported.", e);
-				}  catch (IOException e) {
-					throw new MojoExecutionException(e.getMessage(), e);
-				}
-				cpd.go();
+        } catch (UnsupportedEncodingException e) {
+          throw new MojoExecutionException("Encoding '" + sourceEncoding
+              + "' is not supported.", e);
+        } catch (IOException e) {
+          throw new MojoExecutionException(e.getMessage(), e);
+        }
+        cpd.go();
 
-				writeNonHtml(cpd);
-				
-			} finally {
-				Thread.currentThread().setContextClassLoader(origLoader);
-			}
+        writeNonHtml(cpd);
 
-		}
-	}
+      } finally {
+        Thread.currentThread().setContextClassLoader(origLoader);
+      }
 
-	void writeNonHtml(CPD cpd) throws MojoExecutionException {
+    }
+  }
 
-		Renderer r = createRenderer();
-		String buffer = r.render(cpd.getMatches());
-		try {
-			outputDirectory.mkdirs();
-			FileOutputStream tStream = new FileOutputStream(new File(outputDirectory, "cpd." + format));
-			Writer writer = new OutputStreamWriter(tStream, "UTF-8");
-			writer.write(buffer, 0, buffer.length());
-			writer.close();
+  void writeNonHtml(CPD cpd) throws MojoExecutionException {
 
-			File siteDir = new File(outputDirectory, "site");
-			siteDir.mkdirs();
-			writer = new FileWriter(new File(siteDir, "cpd." + format));
-			writer.write(buffer, 0, buffer.length());
-			writer.close();
+    Renderer r = createRenderer();
+    String buffer = r.render(cpd.getMatches());
+    try {
+      outputDirectory.mkdirs();
+      FileOutputStream tStream = new FileOutputStream(new File(outputDirectory,
+          "cpd." + format));
+      Writer writer = new OutputStreamWriter(tStream, "UTF-8");
+      writer.write(buffer, 0, buffer.length());
+      writer.close();
 
-		} catch (IOException ioe) {
-			throw new MojoExecutionException(ioe.getMessage(), ioe);
-		}
-	}
+      File siteDir = new File(outputDirectory, "site");
+      siteDir.mkdirs();
+      writer = new FileWriter(new File(siteDir, "cpd." + format));
+      writer.write(buffer, 0, buffer.length());
+      writer.close();
 
-	/**
-	 * @see org.apache.maven.reporting.MavenReport#getOutputName()
-	 */
-	public String getOutputName() {
+    } catch (IOException ioe) {
+      throw new MojoExecutionException(ioe.getMessage(), ioe);
+    }
+  }
 
-		return "cpd";
-	}
+  /**
+   * @see org.apache.maven.reporting.MavenReport#getOutputName()
+   */
+  public String getOutputName() {
 
-	private static ResourceBundle getBundle(Locale locale) {
+    return "cpd";
+  }
 
-		return ResourceBundle.getBundle("cpd-report", locale, CpdReport.class.getClassLoader());
-	}
+  private static ResourceBundle getBundle(Locale locale) {
 
-	/**
-	 * Create and return the correct renderer for the output type.
-	 * 
-	 * @return the renderer based on the configured output
-	 * @throws org.apache.maven.reporting.MavenReportException if no renderer
-	 *             found for the output type
-	 */
-	public Renderer createRenderer() throws MojoExecutionException {
+    return ResourceBundle.getBundle("cpd-report", locale,
+        CpdReport.class.getClassLoader());
+  }
 
-		Renderer renderer = null;
-		if ("xml".equals(format)) {
-			renderer = new XMLRenderer("UTF-8");
-		} else if ("csv".equals(format)) {
-			renderer = new CSVRenderer();
-		} else if (!"".equals(format) && !"none".equals(format)) {
-			try {
-				renderer = (Renderer) Class.forName(format).newInstance();
-			} catch (Exception e) {
-				throw new MojoExecutionException("Can't find the custom format " + format + ": " + e.getClass().getName());
-			}
-		}
+  /**
+   * Create and return the correct renderer for the output type.
+   * 
+   * @return the renderer based on the configured output
+   * @throws org.apache.maven.reporting.MavenReportException
+   *           if no renderer found for the output type
+   */
+  public Renderer createRenderer() throws MojoExecutionException {
 
-		if (renderer == null) {
-			throw new MojoExecutionException("Can't create report with format of " + format);
-		}
+    Renderer renderer = null;
+    if ("xml".equals(format)) {
+      renderer = new XMLRenderer("UTF-8");
+    } else if ("csv".equals(format)) {
+      renderer = new CSVRenderer();
+    } else if (!"".equals(format) && !"none".equals(format)) {
+      try {
+        renderer = (Renderer) Class.forName(format).newInstance();
+      } catch (Exception e) {
+        throw new MojoExecutionException("Can't find the custom format "
+            + format + ": " + e.getClass().getName());
+      }
+    }
 
-		return renderer;
-	}
+    if (renderer == null) {
+      throw new MojoExecutionException("Can't create report with format of "
+          + format);
+    }
 
-	@Override
-	protected void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException {
+    return renderer;
+  }
 
-		Log log = getLog();
-		log.info("executeProject " + visualProject);
-		
-	}
+  @Override
+  protected void executeProject(VisualStudioProject visualProject)
+      throws MojoExecutionException, MojoFailureException {
 
-	@Override
-	protected void executeSolution(VisualStudioSolution visualSolution) throws MojoExecutionException, MojoFailureException {
+    Log log = getLog();
+    log.info("executeProject " + visualProject);
 
-		Log log = getLog();
-		log.info("executeSolution " + visualSolution);
-		executeReport();
-	}
+  }
+
+  @Override
+  protected void executeSolution(VisualStudioSolution visualSolution)
+      throws MojoExecutionException, MojoFailureException {
+
+    Log log = getLog();
+    log.info("executeSolution " + visualSolution);
+    executeReport();
+  }
 }

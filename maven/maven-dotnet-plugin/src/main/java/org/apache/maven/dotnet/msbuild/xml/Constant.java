@@ -26,9 +26,9 @@ package org.apache.maven.dotnet.msbuild.xml;
 
 /**
  * A Constant.
+ * 
  * @author Jose CHILLAN Jan 14, 2010
  */
-public class Constant
-{
+public class Constant {
   public final static String NAMESPACE = "http://schemas.microsoft.com/developer/msbuild/2003";
 }

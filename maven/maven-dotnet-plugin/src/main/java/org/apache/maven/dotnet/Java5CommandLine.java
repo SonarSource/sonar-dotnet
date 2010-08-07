@@ -30,47 +30,39 @@ import org.codehaus.plexus.util.cli.CommandLineException;
 import org.codehaus.plexus.util.cli.Commandline;
 
 /**
- * An updated command line that uses the Java 5+ {@link ProcessBuilder} instead of the old {@link Runtime#exec(String)} method. It avoids
- * all problems due to spaces in executable path in Windows.
+ * An updated command line that uses the Java 5+ {@link ProcessBuilder} instead
+ * of the old {@link Runtime#exec(String)} method. It avoids all problems due to
+ * spaces in executable path in Windows.
  * 
  * @author Jose CHILLAN Mar 25, 2010
  */
-public class Java5CommandLine extends Commandline
-{
+public class Java5CommandLine extends Commandline {
   /**
    * Executes the command.
    */
   @Override
-  public Process execute() throws CommandLineException
-  {
+  public Process execute() throws CommandLineException {
     Process process = null;
 
-    try
-    {
+    try {
       File workingDir = getWorkingDirectory();
-      if (workingDir == null)
-      {
+      if (workingDir == null) {
         ProcessBuilder builder = new ProcessBuilder(getCommandline());
         process = builder.start();
-      }
-      else
-      {
-        if (!workingDir.exists())
-        {
-          throw new CommandLineException("Working directory \"" + workingDir.getPath() + "\" does not exist!");
-        }
-        else if (!workingDir.isDirectory())
-        {
-          throw new CommandLineException("Path \"" + workingDir.getPath() + "\" does not specify a directory.");
+      } else {
+        if (!workingDir.exists()) {
+          throw new CommandLineException("Working directory \""
+              + workingDir.getPath() + "\" does not exist!");
+        } else if (!workingDir.isDirectory()) {
+          throw new CommandLineException("Path \"" + workingDir.getPath()
+              + "\" does not specify a directory.");
         }
 
         ProcessBuilder builder = new ProcessBuilder(getCommandline());
         builder.directory(workingDir);
         process = builder.start();
       }
-    }
-    catch (IOException ex)
-    {
+    } catch (IOException ex) {
       throw new CommandLineException("Error while executing process.", ex);
     }
 

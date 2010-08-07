@@ -35,11 +35,10 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CreateItem", namespace=Constant.NAMESPACE)
-public class CreateItem
-{
+@XmlType(name = "CreateItem", namespace = Constant.NAMESPACE)
+public class CreateItem {
   @XmlAttribute(name = "Include")
-  private String     include;
+  private String include;
 
   @XmlElement(name = "Output")
   private ItemOutput output;
@@ -47,8 +46,7 @@ public class CreateItem
   /**
    * Constructs a @link{CreateItem}.
    */
-  public CreateItem()
-  {
+  public CreateItem() {
   }
 
   /**
@@ -56,18 +54,17 @@ public class CreateItem
    * 
    * @return The include to return.
    */
-  public String getInclude()
-  {
+  public String getInclude() {
     return this.include;
   }
 
   /**
    * Sets the include.
    * 
-   * @param include The include to set.
+   * @param include
+   *          The include to set.
    */
-  public void setInclude(String include)
-  {
+  public void setInclude(String include) {
     this.include = include;
   }
 
@@ -76,18 +73,17 @@ public class CreateItem
    * 
    * @return The output to return.
    */
-  public ItemOutput getOutput()
-  {
+  public ItemOutput getOutput() {
     return this.output;
   }
 
   /**
    * Sets the output.
    * 
-   * @param output The output to set.
+   * @param output
+   *          The output to set.
    */
-  public void setOutput(ItemOutput output)
-  {
+  public void setOutput(ItemOutput output) {
     this.output = output;
   }
 

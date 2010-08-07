@@ -38,70 +38,68 @@ import com.ibm.icu.util.StringTokenizer;
  * 
  * @author Jose CHILLAN Mar 25, 2010
  */
-public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo
-{
+public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
 
   /**
    * Installation directory of the .Net SDK 2.0
    * 
-   * @parameter expression="${dotnet.2.0.sdk.directory}" default-value="C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727"
+   * @parameter expression="${dotnet.2.0.sdk.directory}"
+   *            default-value="C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727"
    */
-  private String   dotnet_2_0_sdk_directory;
-  
+  private String dotnet_2_0_sdk_directory;
+
   /**
    * Installation directory of the .Net SDK 3.5
    * 
-   * @parameter expression="${dotnet.3.5.sdk.directory}" default-value="C:/WINDOWS/Microsoft.NET/Framework/v3.5"
+   * @parameter expression="${dotnet.3.5.sdk.directory}"
+   *            default-value="C:/WINDOWS/Microsoft.NET/Framework/v3.5"
    */
-  private String   dotnet_3_5_sdk_directory;
-  
+  private String dotnet_3_5_sdk_directory;
+
   /**
-   * Version of the MSBuild tool to use, which is the installed version of the SDK. Possible values are 2.0 and 3.5.
+   * Version of the MSBuild tool to use, which is the installed version of the
+   * SDK. Possible values are 2.0 and 3.5.
    * 
    * @parameter expression="${dotnet.tool.version}" default-value="3.5"
    */
   protected String toolVersion;
 
   /**
-   * The build configurations to use for the project or solution, separated by colons as in "Debug,Release".
+   * The build configurations to use for the project or solution, separated by
+   * colons as in "Debug,Release".
    * 
-   * @parameter expression="${msbuild.configurations}" alias="${buildConfigurations}" default-value="Debug"
+   * @parameter expression="${msbuild.configurations}"
+   *            alias="${buildConfigurations}" default-value="Debug"
    */
   protected String buildConfigurations = "Debug";
 
   static {
-	  
+
   }
-  
-  
+
   /**
    * Gets the MSBuild.exe command, depending on the tool version.
    * 
    * @return the File representing the MSBuild.exe command
    * @throws MojoExecutionException
    */
-  protected File getMsBuildCommand() throws MojoExecutionException
-  {
-	
-	  
-	// This may depend on the version in the future
+  protected File getMsBuildCommand() throws MojoExecutionException {
+
+    // This may depend on the version in the future
     String commandName = "MSBuild.exe";
     File executable;
-    if ("3.5".equals(toolVersion))
-    {
+    if ("3.5".equals(toolVersion)) {
       executable = new File(dotnet_3_5_sdk_directory, commandName);
-    }
-    else
-    {
+    } else {
       executable = new File(dotnet_2_0_sdk_directory, commandName);
     }
 
-    if (!executable.exists())
-    {
-      throw new MojoExecutionException("Could not find the MSBuild executable for the version "
-                                       + toolVersion
-                                       + ". Please "
-                                       + "ensure you have properly defined the properties 'dotnet.2.0.sdk.directory' or 'dotnet.3.5.sdk.directory'");
+    if (!executable.exists()) {
+      throw new MojoExecutionException(
+          "Could not find the MSBuild executable for the version "
+              + toolVersion
+              + ". Please "
+              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.directory' or 'dotnet.3.5.sdk.directory'");
     }
     return executable;
   }
@@ -111,13 +109,11 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo
    * 
    * @return a non <code>null</code> list of build configurations
    */
-  protected List<String> getBuildConfigurations()
-  {
+  protected List<String> getBuildConfigurations() {
     StringTokenizer tokenizer = new StringTokenizer(buildConfigurations, ",");
     List<String> result = new ArrayList<String>();
     // Extracts all the configurations
-    while (tokenizer.hasMoreTokens())
-    {
+    while (tokenizer.hasMoreTokens()) {
       String config = tokenizer.nextToken();
       result.add(config.trim());
     }

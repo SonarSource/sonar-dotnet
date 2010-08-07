@@ -36,13 +36,13 @@ import org.apache.maven.plugin.logging.Log;
 
 /**
  * Builds a .Net project of solution using MSBuild
+ * 
  * @goal compile
  * @phase compile
  * @description compiles a .Net project or solution
  * @author Jose CHILLAN Apr 9, 2009
  */
-public class CompileMojo extends AbstractDotNetBuildMojo
-{
+public class CompileMojo extends AbstractDotNetBuildMojo {
   /**
    * A flag to use to force the rebuild of the project or solution.
    * 
@@ -53,42 +53,45 @@ public class CompileMojo extends AbstractDotNetBuildMojo
   /**
    * A flag to disable the pre-build events during a compilation.
    * 
-   * @parameter expression="${maven.dotnet.disable.prebuild.event}" default-value="false" alias="disablePreBuildEvent"
+   * @parameter expression="${maven.dotnet.disable.prebuild.event}"
+   *            default-value="false" alias="disablePreBuildEvent"
    */
   private boolean disablePreBuildEvent;
 
   /**
    * A flag to disable the post build events during a compilation.
    * 
-   * @parameter expression="${maven.dotnet.disable.postbuild.event}" default-value="false" alias="disablePostBuildEvent"
+   * @parameter expression="${maven.dotnet.disable.postbuild.event}"
+   *            default-value="false" alias="disablePostBuildEvent"
    */
   private boolean disablePostBuildEvent;
 
   /**
-   * A flag to disable the pre-link events during a compilation (to activate in VS 2010)
+   * A flag to disable the pre-link events during a compilation (to activate in
+   * VS 2010)
    * 
-   * @parameter expression="${maven.dotnet.disable.prelink.event}" default-value="false" alias="disablePreLinkEvent"
+   * @parameter expression="${maven.dotnet.disable.prelink.event}"
+   *            default-value="false" alias="disablePreLinkEvent"
    */
-  //private boolean disablePreLinkEvent;
+  // private boolean disablePreLinkEvent;
 
   /**
    * Builds a {@link CompileMojo}.
    */
-  public CompileMojo()
-  {
+  public CompileMojo() {
   }
 
   /**
    * Launches the compiling of a visual studio project.
    * 
-   * @param visualProject the project to compile
+   * @param visualProject
+   *          the project to compile
    */
   @Override
-  public void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException
-  {
+  public void executeProject(VisualStudioProject visualProject)
+      throws MojoExecutionException, MojoFailureException {
     // Cannot compile a web project alone
-    if (visualProject.getType() != ArtifactType.WEB)
-    {
+    if (visualProject.getType() != ArtifactType.WEB) {
       File csprojFile = visualProject.getProjectFile();
       launchBuild(csprojFile);
     }
@@ -97,11 +100,12 @@ public class CompileMojo extends AbstractDotNetBuildMojo
   /**
    * Launches the compiling of a visual studio solution.
    * 
-   * @param visualSolution the solution to compile
+   * @param visualSolution
+   *          the solution to compile
    */
   @Override
-  public void executeSolution(VisualStudioSolution visualSolution) throws MojoExecutionException, MojoFailureException
-  {
+  public void executeSolution(VisualStudioSolution visualSolution)
+      throws MojoExecutionException, MojoFailureException {
     File solutionFile = visualSolution.getSolutionFile();
     launchBuild(solutionFile);
   }
@@ -113,60 +117,53 @@ public class CompileMojo extends AbstractDotNetBuildMojo
    * @throws MojoExecutionException
    * @throws MojoFailureException
    */
-  public void launchBuild(File file) throws MojoExecutionException, MojoFailureException
-  {
+  public void launchBuild(File file) throws MojoExecutionException,
+      MojoFailureException {
     File executable = getMsBuildCommand();
-    if (!executable.exists())
-    {
-      throw new MojoExecutionException("Could not find the MSBuild executable for the version "
-                                       + toolVersion
-                                       + ". Please "
-                                       + "ensure you have properly defined the properties 'dotnet.2.0.sdk.dir' or 'dotnet.3.5.sdk.dir'");
+    if (!executable.exists()) {
+      throw new MojoExecutionException(
+          "Could not find the MSBuild executable for the version "
+              + toolVersion
+              + ". Please "
+              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.dir' or 'dotnet.3.5.sdk.dir'");
     }
 
     List<String> configurations = getBuildConfigurations();
-    for (String configuration : configurations)
-    {
+    for (String configuration : configurations) {
 
       List<String> arguments = new ArrayList<String>();
       arguments.add(toCommandPath(file));
       // Activates the build or rebuild
-      if (rebuild)
-      {
+      if (rebuild) {
         arguments.add("/t:Rebuild");
-      }
-      else
-      {
+      } else {
         arguments.add("/t:Build");
       }
 
       // Manages the disabled events
-      if (disablePostBuildEvent)
-      {
+      if (disablePostBuildEvent) {
         // Disable the post build events if required
         arguments.add("/p:PostBuildEvent=\"\"");
-        //arguments.add("/p:PostBuildEventUseInBuild=false");
+        // arguments.add("/p:PostBuildEventUseInBuild=false");
       }
-      if (disablePreBuildEvent)
-      {
+      if (disablePreBuildEvent) {
         // Disable the pre-build events if required
-        //arguments.add("/p:PreBuildEventUseInBuild=false");
+        // arguments.add("/p:PreBuildEventUseInBuild=false");
         arguments.add("/p:PreBuildEvent=\"\"");
       }
-      
+
       // For VS 2010 uncomment those lines
-      //if (disablePreLinkEvent)
-      //{
-        // Disable the pre-link events if required
-        //arguments.add("/p:PreLinkEventUseInBuild=false");
-      //}
+      // if (disablePreLinkEvent)
+      // {
+      // Disable the pre-link events if required
+      // arguments.add("/p:PreLinkEventUseInBuild=false");
+      // }
 
       // Case of disabled debug symbols
-      if (!debug)
-      {
+      if (!debug) {
         arguments.add("/p:DebugSymbols=false");
       }
-      
+
       // Adds the configuration
       arguments.add("/p:Configuration=" + configuration);
 
@@ -174,11 +171,14 @@ public class CompileMojo extends AbstractDotNetBuildMojo
       log.info("Launching the build of " + file);
       log.debug(" - Tool Version  : " + toolVersion);
       log.debug(" - MsBuild exe   : " + executable);
-      log.debug(" - Configuration : " + configuration + (rebuild ? " (force rebuild)" : ""));
+      log.debug(" - Configuration : " + configuration
+          + (rebuild ? " (force rebuild)" : ""));
 
-      // We launch the compile command (the logs are put in debug because they may be verbose)
+      // We launch the compile command (the logs are put in debug because they
+      // may be verbose)
       launchCommand(executable, arguments, "build", 0, true);
-      log.info("Build of " + solutionName + " in configuration " + configuration + " terminated with SUCCESS!");
+      log.info("Build of " + solutionName + " in configuration "
+          + configuration + " terminated with SUCCESS!");
     }
   }
 }

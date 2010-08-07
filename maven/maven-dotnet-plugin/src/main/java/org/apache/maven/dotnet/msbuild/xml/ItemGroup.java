@@ -34,73 +34,65 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * A ItemGroup.
+ * 
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="ItemGroup", namespace=Constant.NAMESPACE)
-public class ItemGroup
-{
-  
-  @XmlElement(type=ProjectItem.class, name="Project")
+@XmlType(name = "ItemGroup", namespace = Constant.NAMESPACE)
+public class ItemGroup {
+
+  @XmlElement(type = ProjectItem.class, name = "Project")
   private List<ProjectItem> projects;
-  
-  @XmlElement(type=ProjectItem.class, name="CSFile")
+
+  @XmlElement(type = ProjectItem.class, name = "CSFile")
   private List<ProjectItem> csFiles;
-  
+
   /**
    * Constructs a @link{ItemGroup}.
    */
-  public ItemGroup()
-  {
+  public ItemGroup() {
     this.projects = new ArrayList<ProjectItem>();
     this.csFiles = new ArrayList<ProjectItem>();
   }
 
-  
   /**
    * Returns the projects.
    * 
    * @return The projects to return.
    */
-  public List<ProjectItem> getProjects()
-  {
+  public List<ProjectItem> getProjects() {
     return this.projects;
   }
 
-  
   /**
    * Sets the projects.
    * 
-   * @param projects The projects to set.
+   * @param projects
+   *          The projects to set.
    */
-  public void setProjects(List<ProjectItem> projects)
-  {
+  public void setProjects(List<ProjectItem> projects) {
     this.projects = projects;
   }
-  
-  public void addProject(String projectPath)
-  {
+
+  public void addProject(String projectPath) {
     ProjectItem project = new ProjectItem();
     project.setInclude(projectPath);
     this.projects.add(project);
-    
+
   }
 
-
-	public List<ProjectItem> getCsFiles() {
-  	return csFiles;
+  public List<ProjectItem> getCsFiles() {
+    return csFiles;
   }
 
-
-	public void setCsFiles(List<ProjectItem> csFiles) {
-  	this.csFiles = csFiles;
+  public void setCsFiles(List<ProjectItem> csFiles) {
+    this.csFiles = csFiles;
   }
-	
-	public void addCsFiles(String path)
-  {
+
+  public void addCsFiles(String path) {
     ProjectItem project = new ProjectItem();
     project.setInclude(path);
     this.csFiles.add(project);
-    
+
   }
 }

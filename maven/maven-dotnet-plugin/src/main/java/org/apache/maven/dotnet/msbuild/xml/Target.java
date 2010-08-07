@@ -36,13 +36,12 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Target", namespace = Constant.NAMESPACE)
-public class Target
-{
-  @XmlAttribute(name="Name")
-  private String       name;
-  
+public class Target {
+  @XmlAttribute(name = "Name")
+  private String name;
+
   @XmlElement(name = "CreateItem")
-  private CreateItem   item;
+  private CreateItem item;
 
   @XmlElement(name = "StyleCopTask")
   private StyleCopTask styleCopTask;
@@ -50,8 +49,7 @@ public class Target
   /**
    * Constructs a @link{Target}.
    */
-  public Target()
-  {
+  public Target() {
   }
 
   /**
@@ -59,18 +57,17 @@ public class Target
    * 
    * @return The item to return.
    */
-  public CreateItem getItem()
-  {
+  public CreateItem getItem() {
     return this.item;
   }
 
   /**
    * Sets the item.
    * 
-   * @param item The item to set.
+   * @param item
+   *          The item to set.
    */
-  public void setItem(CreateItem item)
-  {
+  public void setItem(CreateItem item) {
     this.item = item;
   }
 
@@ -79,40 +76,36 @@ public class Target
    * 
    * @return The styleCopTask to return.
    */
-  public StyleCopTask getStyleCopTask()
-  {
+  public StyleCopTask getStyleCopTask() {
     return this.styleCopTask;
   }
 
   /**
    * Sets the styleCopTask.
    * 
-   * @param styleCopTask The styleCopTask to set.
+   * @param styleCopTask
+   *          The styleCopTask to set.
    */
-  public void setStyleCopTask(StyleCopTask styleCopTask)
-  {
+  public void setStyleCopTask(StyleCopTask styleCopTask) {
     this.styleCopTask = styleCopTask;
   }
 
-  
   /**
    * Returns the name.
    * 
    * @return The name to return.
    */
-  public String getName()
-  {
+  public String getName() {
     return this.name;
   }
 
-  
   /**
    * Sets the name.
    * 
-   * @param name The name to set.
+   * @param name
+   *          The name to set.
    */
-  public void setName(String name)
-  {
+  public void setName(String name) {
     this.name = name;
   }
 

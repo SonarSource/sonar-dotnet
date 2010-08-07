@@ -32,16 +32,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "sourcemonitor_commands")
-public class Configuration
-{
+public class Configuration {
   @XmlElement(name = "write_log")
-  private boolean       log;
+  private boolean log;
 
   @XmlElement(name = "command", type = Command.class)
   private List<Command> commands;
 
-  public Configuration()
-  {
+  public Configuration() {
   }
 
   /**
@@ -49,18 +47,17 @@ public class Configuration
    * 
    * @return The log to return.
    */
-  public boolean isLog()
-  {
+  public boolean isLog() {
     return this.log;
   }
 
   /**
    * Sets the log.
    * 
-   * @param log The log to set.
+   * @param log
+   *          The log to set.
    */
-  public void setLog(boolean log)
-  {
+  public void setLog(boolean log) {
     this.log = log;
   }
 
@@ -69,18 +66,17 @@ public class Configuration
    * 
    * @return The commands to return.
    */
-  public List<Command> getCommands()
-  {
+  public List<Command> getCommands() {
     return this.commands;
   }
 
   /**
    * Sets the commands.
    * 
-   * @param commands The commands to set.
+   * @param commands
+   *          The commands to set.
    */
-  public void setCommands(List<Command> commands)
-  {
+  public void setCommands(List<Command> commands) {
     this.commands = commands;
   }
 }

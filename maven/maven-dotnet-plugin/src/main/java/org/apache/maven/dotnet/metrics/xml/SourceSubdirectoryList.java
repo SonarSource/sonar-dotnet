@@ -30,17 +30,15 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "source_subdirectory_list")
-public class SourceSubdirectoryList
-{
+public class SourceSubdirectoryList {
   @XmlElement(name = "exclude_subdirectories")
-  private boolean  excludeSubdirectories;
+  private boolean excludeSubdirectories;
   @XmlElement(name = "source_subtree")
   private String[] sourceSubTree;
   @XmlElement(name = "source_subdirectory")
   private String[] sourceSubdirectory;
 
-  public SourceSubdirectoryList()
-  {
+  public SourceSubdirectoryList() {
   }
 
   /**
@@ -48,18 +46,17 @@ public class SourceSubdirectoryList
    * 
    * @return The excludeSubdirectories to return.
    */
-  public boolean isExcludeSubdirectories()
-  {
+  public boolean isExcludeSubdirectories() {
     return this.excludeSubdirectories;
   }
 
   /**
    * Sets the excludeSubdirectories.
    * 
-   * @param excludeSubdirectories The excludeSubdirectories to set.
+   * @param excludeSubdirectories
+   *          The excludeSubdirectories to set.
    */
-  public void setExcludeSubdirectories(boolean excludeSubdirectories)
-  {
+  public void setExcludeSubdirectories(boolean excludeSubdirectories) {
     this.excludeSubdirectories = excludeSubdirectories;
   }
 
@@ -68,18 +65,17 @@ public class SourceSubdirectoryList
    * 
    * @return The sourceSubTree to return.
    */
-  public String[] getSourceSubTree()
-  {
+  public String[] getSourceSubTree() {
     return this.sourceSubTree;
   }
 
   /**
    * Sets the sourceSubTree.
    * 
-   * @param sourceSubTree The sourceSubTree to set.
+   * @param sourceSubTree
+   *          The sourceSubTree to set.
    */
-  public void setSourceSubTree(String[] sourceSubTree)
-  {
+  public void setSourceSubTree(String[] sourceSubTree) {
     this.sourceSubTree = sourceSubTree;
   }
 
@@ -88,18 +84,17 @@ public class SourceSubdirectoryList
    * 
    * @return The sourceSubdirectory to return.
    */
-  public String[] getSourceSubdirectory()
-  {
+  public String[] getSourceSubdirectory() {
     return this.sourceSubdirectory;
   }
 
   /**
    * Sets the sourceSubdirectory.
    * 
-   * @param sourceSubdirectory The sourceSubdirectory to set.
+   * @param sourceSubdirectory
+   *          The sourceSubdirectory to set.
    */
-  public void setSourceSubdirectory(String[] sourceSubdirectory)
-  {
+  public void setSourceSubdirectory(String[] sourceSubdirectory) {
     this.sourceSubdirectory = sourceSubdirectory;
   }
 

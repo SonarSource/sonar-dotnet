@@ -41,31 +41,29 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Project", namespace = Constant.NAMESPACE)
 @XmlType(name = "Project")
-public class Project
-{
+public class Project {
   @XmlAttribute(name = "ToolsVersion")
-  private String          toolsVersion = "3.5";
+  private String toolsVersion = "3.5";
 
   @XmlAttribute(name = "DefaultTargets")
-  private String          defaultTargets;
+  private String defaultTargets;
 
-  @XmlElement(name="PropertyGroup")
+  @XmlElement(name = "PropertyGroup")
   private PropertyGroup propertyGroup;
-  
-  @XmlElement(name="UsingTask")
+
+  @XmlElement(name = "UsingTask")
   private UsingTask usingTask;
-  
-  @XmlElement(type=ItemGroup.class, name = "ItemGroup")
+
+  @XmlElement(type = ItemGroup.class, name = "ItemGroup")
   private List<ItemGroup> itemGroups;
 
   @XmlElement(type = Target.class, name = "Target")
-  private List<Target>    targets;
+  private List<Target> targets;
 
   /**
    * Constructs a @link{Project}.
    */
-  public Project()
-  {
+  public Project() {
     this.itemGroups = new ArrayList<ItemGroup>();
     this.targets = new ArrayList<Target>();
   }
@@ -75,18 +73,17 @@ public class Project
    * 
    * @return The toolsVersion to return.
    */
-  public String getToolsVersion()
-  {
+  public String getToolsVersion() {
     return this.toolsVersion;
   }
 
   /**
    * Sets the toolsVersion.
    * 
-   * @param toolsVersion The toolsVersion to set.
+   * @param toolsVersion
+   *          The toolsVersion to set.
    */
-  public void setToolsVersion(String toolsVersion)
-  {
+  public void setToolsVersion(String toolsVersion) {
     this.toolsVersion = toolsVersion;
   }
 
@@ -95,18 +92,17 @@ public class Project
    * 
    * @return The defaultTargets to return.
    */
-  public String getDefaultTargets()
-  {
+  public String getDefaultTargets() {
     return this.defaultTargets;
   }
 
   /**
    * Sets the defaultTargets.
    * 
-   * @param defaultTargets The defaultTargets to set.
+   * @param defaultTargets
+   *          The defaultTargets to set.
    */
-  public void setDefaultTargets(String defaultTargets)
-  {
+  public void setDefaultTargets(String defaultTargets) {
     this.defaultTargets = defaultTargets;
   }
 
@@ -115,18 +111,17 @@ public class Project
    * 
    * @return The targets to return.
    */
-  public List<Target> getTargets()
-  {
+  public List<Target> getTargets() {
     return this.targets;
   }
 
   /**
    * Sets the targets.
    * 
-   * @param targets The targets to set.
+   * @param targets
+   *          The targets to set.
    */
-  public void setTargets(List<Target> targets)
-  {
+  public void setTargets(List<Target> targets) {
     this.targets = targets;
   }
 
@@ -135,72 +130,63 @@ public class Project
    * 
    * @return The itemGroups to return.
    */
-  public List<ItemGroup> getItemGroups()
-  {
+  public List<ItemGroup> getItemGroups() {
     return this.itemGroups;
   }
 
   /**
    * Sets the itemGroups.
    * 
-   * @param itemGroups The itemGroups to set.
+   * @param itemGroups
+   *          The itemGroups to set.
    */
-  public void setItemGroups(List<ItemGroup> itemGroups)
-  {
+  public void setItemGroups(List<ItemGroup> itemGroups) {
     this.itemGroups = itemGroups;
   }
 
-  public void addTarget(Target target)
-  {
+  public void addTarget(Target target) {
     this.targets.add(target);
   }
 
-  public void addItem(ItemGroup group)
-  {
+  public void addItem(ItemGroup group) {
     this.itemGroups.add(group);
   }
 
-  
   /**
    * Returns the propertyGroup.
    * 
    * @return The propertyGroup to return.
    */
-  public PropertyGroup getPropertyGroup()
-  {
+  public PropertyGroup getPropertyGroup() {
     return this.propertyGroup;
   }
 
-  
   /**
    * Sets the propertyGroup.
    * 
-   * @param propertyGroup The propertyGroup to set.
+   * @param propertyGroup
+   *          The propertyGroup to set.
    */
-  public void setPropertyGroup(PropertyGroup propertyGroup)
-  {
+  public void setPropertyGroup(PropertyGroup propertyGroup) {
     this.propertyGroup = propertyGroup;
   }
 
-  
   /**
    * Returns the usingTask.
    * 
    * @return The usingTask to return.
    */
-  public UsingTask getUsingTask()
-  {
+  public UsingTask getUsingTask() {
     return this.usingTask;
   }
 
-  
   /**
    * Sets the usingTask.
    * 
-   * @param usingTask The usingTask to set.
+   * @param usingTask
+   *          The usingTask to set.
    */
-  public void setUsingTask(UsingTask usingTask)
-  {
+  public void setUsingTask(UsingTask usingTask) {
     this.usingTask = usingTask;
   }
 }

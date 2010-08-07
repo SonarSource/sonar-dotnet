@@ -39,28 +39,27 @@ import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Cleans the build objects generated for a .Net project or solution
+ * 
  * @goal clean
  * @phase clean
  * @description clean the build object of a .Net project or solution
- * @author Jose CHILLAN Apr 9, 2009 
+ * @author Jose CHILLAN Apr 9, 2009
  */
-public class CleanMojo extends AbstractDotNetBuildMojo
-{
+public class CleanMojo extends AbstractDotNetBuildMojo {
 
   @Override
-  protected void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException
-  {
+  protected void executeProject(VisualStudioProject visualProject)
+      throws MojoExecutionException, MojoFailureException {
     // Cannot clean a web project alone
-    if (visualProject.getType() != ArtifactType.WEB)
-    {
+    if (visualProject.getType() != ArtifactType.WEB) {
       File csprojFile = visualProject.getProjectFile();
       launchClean(csprojFile);
     }
   }
 
   @Override
-  protected void executeSolution(VisualStudioSolution visualSolution) throws MojoExecutionException, MojoFailureException
-  {
+  protected void executeSolution(VisualStudioSolution visualSolution)
+      throws MojoExecutionException, MojoFailureException {
     File solutionFile = visualSolution.getSolutionFile();
     launchClean(solutionFile);
 
@@ -69,19 +68,20 @@ public class CleanMojo extends AbstractDotNetBuildMojo
   /**
    * Launches the cleaning of a project or solution
    * 
-   * @param file the project or solution file
+   * @param file
+   *          the project or solution file
    * @throws MojoExecutionException
    * @throws MojoFailureException
    */
-  public void launchClean(File file) throws MojoExecutionException, MojoFailureException
-  {
+  public void launchClean(File file) throws MojoExecutionException,
+      MojoFailureException {
     File executable = getMsBuildCommand();
-    if (!executable.exists())
-    {
-      throw new MojoExecutionException("Could not find the MSBuild executable for the version "
-                                       + toolVersion
-                                       + ". Please "
-                                       + "ensure you have properly defined the properties 'dotnet.2.0.sdk.dir' or 'dotnet.3.5.sdk.dir'");
+    if (!executable.exists()) {
+      throw new MojoExecutionException(
+          "Could not find the MSBuild executable for the version "
+              + toolVersion
+              + ". Please "
+              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.dir' or 'dotnet.3.5.sdk.dir'");
     }
 
     Log log = getLog();
@@ -89,35 +89,38 @@ public class CleanMojo extends AbstractDotNetBuildMojo
     log.debug(" - Tool Version  : " + toolVersion);
     log.debug(" - MsBuild exe   : " + executable);
 
-    
     // ASP.NET precompiled directory clean-up
-    List<VisualStudioProject> visualStudioProjects = getVisualSolution().getProjects();
+    List<VisualStudioProject> visualStudioProjects = getVisualSolution()
+        .getProjects();
     for (VisualStudioProject visualStudioProject : visualStudioProjects) {
-	    if (visualStudioProject.isWebProject()) {
-	    	log.info("Cleaning precompiled asp.net dlls for project "+visualStudioProject);
-	    	File precompilationDirectory = visualStudioProject.getWebPrecompilationDirectory();
-	    	try {
-	        FileUtils.cleanDirectory(precompilationDirectory);
+      if (visualStudioProject.isWebProject()) {
+        log.info("Cleaning precompiled asp.net dlls for project "
+            + visualStudioProject);
+        File precompilationDirectory = visualStudioProject
+            .getWebPrecompilationDirectory();
+        try {
+          FileUtils.cleanDirectory(precompilationDirectory);
         } catch (IOException e) {
-	       throw new MojoExecutionException("error while cleaning web project "+visualStudioProject, e);
+          throw new MojoExecutionException("error while cleaning web project "
+              + visualStudioProject, e);
         }
-	    }
+      }
     }
-    
+
     // We clean all configurations
     List<String> configurations = getBuildConfigurations();
-    for (String configuration : configurations)
-    {
+    for (String configuration : configurations) {
       // Launches the clean for each configuration
       List<String> arguments = new ArrayList<String>();
       arguments.add(toCommandPath(file));
       arguments.add("/t:Clean");
       arguments.add("/p:Configuration=" + configuration);
 
-      // We launch the compile command (the logs are put in debug because they may be verbose)
+      // We launch the compile command (the logs are put in debug because they
+      // may be verbose)
       launchCommand(executable, arguments, "clean", 0, true);
     }
-    
+
     log.info("Cleaning done!");
   }
 }

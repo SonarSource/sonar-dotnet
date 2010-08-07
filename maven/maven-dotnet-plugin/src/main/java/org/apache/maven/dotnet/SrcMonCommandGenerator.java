@@ -47,30 +47,28 @@ import org.apache.maven.dotnet.metrics.xml.Export;
 import org.apache.maven.dotnet.metrics.xml.SourceSubdirectoryList;
 import org.apache.maven.plugin.logging.Log;
 
-
 /**
- * Generates the command file for SourceMonitor to be applied to a C# project or solution.
+ * Generates the command file for SourceMonitor to be applied to a C# project or
+ * solution.
  * 
  * @author Jose CHILLAN Apr 7, 2009
  */
-public class SrcMonCommandGenerator
-{
-  private Log          logger;
+public class SrcMonCommandGenerator {
+  private Log logger;
 
-  private File         workDirectory;
+  private File workDirectory;
   /**
    * Path of the source monitor executable.
    */
-  private String       sourceMonitorPath;
-  private String       projectFile;
-  private String       checkPointName;
-  private String       sourcePath;
+  private String sourceMonitorPath;
+  private String projectFile;
+  private String checkPointName;
+  private String sourcePath;
   private List<String> excludedDirectories;
   private List<String> excludedExtensions;
-  private String       generatedFile;
+  private String generatedFile;
 
-  public SrcMonCommandGenerator()
-  {
+  public SrcMonCommandGenerator() {
     this.excludedDirectories = new ArrayList<String>();
     this.excludedExtensions = new ArrayList<String>();
   }
@@ -80,14 +78,13 @@ public class SrcMonCommandGenerator
    * 
    * @throws Exception
    */
-  public void launch() throws Exception
-  {
+  public void launch() throws Exception {
     logInfo("Launching Source Monitor on the project");
 
     File commandFile = generateCommandFile();
 
-    String[] cmdArray = new String[] { sourceMonitorPath, "/C", commandFile.getAbsolutePath()
-    };
+    String[] cmdArray = new String[] { sourceMonitorPath, "/C",
+        commandFile.getAbsolutePath() };
     logDebug("Executing command: " + Arrays.toString(cmdArray));
     Process process = Runtime.getRuntime().exec(cmdArray, null, workDirectory);
 
@@ -101,26 +98,21 @@ public class SrcMonCommandGenerator
    * @throws PropertyException
    * @throws FileNotFoundException
    */
-  protected File generateCommandFile() throws JAXBException, PropertyException, FileNotFoundException
-  {
+  protected File generateCommandFile() throws JAXBException, PropertyException,
+      FileNotFoundException {
     Configuration configuration = new Configuration();
     configuration.setLog(true);
     Command command = new Command();
     command.setProjectFile(projectFile);
     command.setProjectLanguage("C#");
     StringBuilder extensions = new StringBuilder("*.cs");
-    if ((excludedExtensions != null) && (!excludedDirectories.isEmpty()))
-    {
+    if ((excludedExtensions != null) && (!excludedDirectories.isEmpty())) {
       extensions.append("|");
       boolean isFirst = true;
-      for (String exclusion : excludedExtensions)
-      {
-        if (isFirst)
-        {
+      for (String exclusion : excludedExtensions) {
+        if (isFirst) {
           isFirst = false;
-        }
-        else
-        {
+        } else {
           extensions.append(",");
         }
         extensions.append(exclusion.trim());
@@ -131,14 +123,12 @@ public class SrcMonCommandGenerator
     command.setCheckPointName(checkPointName);
     command.setIgnoreHeaderFooters(false);
     command.setIncludeSubdirectories(true);
-    try
-    {
+    try {
       DatatypeFactory factory = DatatypeFactory.newInstance();
-      XMLGregorianCalendar calendar = factory.newXMLGregorianCalendar(new GregorianCalendar());
+      XMLGregorianCalendar calendar = factory
+          .newXMLGregorianCalendar(new GregorianCalendar());
       command.setCheckPointDate(calendar.toXMLFormat().substring(0, 19));
-    }
-    catch (DatatypeConfigurationException e)
-    {
+    } catch (DatatypeConfigurationException e) {
     }
 
     logDebug("Code Metrics report :");
@@ -149,17 +139,17 @@ public class SrcMonCommandGenerator
 
     SourceSubdirectoryList sourceSubdirectoryList = new SourceSubdirectoryList();
     sourceSubdirectoryList.setExcludeSubdirectories(true);
-    //.replace('/', '\\')
-    
+    // .replace('/', '\\')
+
     String[] excludedArray = new String[excludedDirectories.size()];
     // We build the list of excluded directory
-    for (int idxDirectory = 0; idxDirectory < excludedArray.length; idxDirectory++)
-    {
+    for (int idxDirectory = 0; idxDirectory < excludedArray.length; idxDirectory++) {
       String directory = excludedDirectories.get(idxDirectory);
       excludedArray[idxDirectory] = directory.replace('/', '\\');
     }
-    
-    sourceSubdirectoryList.setSourceSubdirectory(new String[]{"obj\\debug", "obj\\release"});
+
+    sourceSubdirectoryList.setSourceSubdirectory(new String[] { "obj\\debug",
+        "obj\\release" });
     sourceSubdirectoryList.setSourceSubTree(excludedArray);
     command.setSubdirectoryList(sourceSubdirectoryList);
     Export export = new Export();
@@ -180,8 +170,7 @@ public class SrcMonCommandGenerator
     // Defines additional properties
     // marshaller.setProperty("com.sun.xml.bind.indentString", "  ");
     // Marshal to system output: java to xml
-    if (!workDirectory.exists())
-    {
+    if (!workDirectory.exists()) {
       // We create the directory if necessary
       workDirectory.mkdir();
     }
@@ -198,18 +187,17 @@ public class SrcMonCommandGenerator
    * 
    * @return The workDirectory to return.
    */
-  public File getWorkDirectory()
-  {
+  public File getWorkDirectory() {
     return this.workDirectory;
   }
 
   /**
    * Sets the workDirectory.
    * 
-   * @param workDirectory The workDirectory to set.
+   * @param workDirectory
+   *          The workDirectory to set.
    */
-  public void setWorkDirectory(File workDirectory)
-  {
+  public void setWorkDirectory(File workDirectory) {
     this.workDirectory = workDirectory;
   }
 
@@ -218,18 +206,17 @@ public class SrcMonCommandGenerator
    * 
    * @return The sourceMonitorPath to return.
    */
-  public String getSourceMonitorPath()
-  {
+  public String getSourceMonitorPath() {
     return this.sourceMonitorPath;
   }
 
   /**
    * Sets the sourceMonitorPath.
    * 
-   * @param sourceMonitorPath The sourceMonitorPath to set.
+   * @param sourceMonitorPath
+   *          The sourceMonitorPath to set.
    */
-  public void setSourceMonitorPath(String sourceMonitorPath)
-  {
+  public void setSourceMonitorPath(String sourceMonitorPath) {
     this.sourceMonitorPath = sourceMonitorPath;
   }
 
@@ -238,18 +225,17 @@ public class SrcMonCommandGenerator
    * 
    * @return The checkPointName to return.
    */
-  public String getCheckPointName()
-  {
+  public String getCheckPointName() {
     return this.checkPointName;
   }
 
   /**
    * Sets the checkPointName.
    * 
-   * @param checkPointName The checkPointName to set.
+   * @param checkPointName
+   *          The checkPointName to set.
    */
-  public void setCheckPointName(String checkPointName)
-  {
+  public void setCheckPointName(String checkPointName) {
     this.checkPointName = checkPointName;
   }
 
@@ -258,18 +244,17 @@ public class SrcMonCommandGenerator
    * 
    * @return The sourcePath to return.
    */
-  public String getSourcePath()
-  {
+  public String getSourcePath() {
     return this.sourcePath;
   }
 
   /**
    * Sets the sourcePath.
    * 
-   * @param sourcePath The sourcePath to set.
+   * @param sourcePath
+   *          The sourcePath to set.
    */
-  public void setSourcePath(String sourcePath)
-  {
+  public void setSourcePath(String sourcePath) {
     this.sourcePath = sourcePath;
   }
 
@@ -278,36 +263,35 @@ public class SrcMonCommandGenerator
    * 
    * @return The excludedDirectories to return.
    */
-  public List<String> getExcludedDirectories()
-  {
+  public List<String> getExcludedDirectories() {
     return this.excludedDirectories;
   }
 
   /**
    * Sets the excludedDirectories.
    * 
-   * @param excludedDirectories The excludedDirectories to set.
+   * @param excludedDirectories
+   *          The excludedDirectories to set.
    */
-  public void setExcludedDirectories(List<String> excludedDirectories)
-  {
+  public void setExcludedDirectories(List<String> excludedDirectories) {
     this.excludedDirectories = excludedDirectories;
   }
 
   /**
    * Add a new directory to exclude (and all its subdirectories)
+   * 
    * @param directory
    */
-  public void addExcludedDirectory(String directory)
-  {
+  public void addExcludedDirectory(String directory) {
     excludedDirectories.add(directory);
   }
 
   /**
    * Adds a new extension to exclude.
+   * 
    * @param extension
    */
-  public void addExcludedExtension(String extension)
-  {
+  public void addExcludedExtension(String extension) {
     excludedExtensions.add(extension);
   }
 
@@ -316,18 +300,17 @@ public class SrcMonCommandGenerator
    * 
    * @return The generatedFile to return.
    */
-  public String getGeneratedFile()
-  {
+  public String getGeneratedFile() {
     return this.generatedFile;
   }
 
   /**
    * Sets the generatedFile.
    * 
-   * @param generatedFile The generatedFile to set.
+   * @param generatedFile
+   *          The generatedFile to set.
    */
-  public void setGeneratedFile(String generatedFile)
-  {
+  public void setGeneratedFile(String generatedFile) {
     this.generatedFile = generatedFile;
   }
 
@@ -336,54 +319,47 @@ public class SrcMonCommandGenerator
    * 
    * @return The projectFile to return.
    */
-  public String getProjectFile()
-  {
+  public String getProjectFile() {
     return this.projectFile;
   }
 
   /**
    * Sets the projectFile.
    * 
-   * @param projectFile The projectFile to set.
+   * @param projectFile
+   *          The projectFile to set.
    */
-  public void setProjectFile(String projectFile)
-  {
+  public void setProjectFile(String projectFile) {
     this.projectFile = projectFile;
   }
 
   /**
    * Sets the logger.
    * 
-   * @param logger The logger to set.
+   * @param logger
+   *          The logger to set.
    */
-  public void setLogger(Log logger)
-  {
+  public void setLogger(Log logger) {
     this.logger = logger;
   }
 
-  private void logDebug(String message)
-  {
-    if (logger != null)
-    {
+  private void logDebug(String message) {
+    if (logger != null) {
       logger.debug(message);
     }
   }
 
-  private void logInfo(String message)
-  {
-    if (logger != null)
-    {
+  private void logInfo(String message) {
+    if (logger != null) {
       logger.info(message);
     }
   }
 
-  public List<String> getExcludedExtensions()
-  {
+  public List<String> getExcludedExtensions() {
     return this.excludedExtensions;
   }
 
-  public void setExcludedExtensions(List<String> excludedExtensions)
-  {
+  public void setExcludedExtensions(List<String> excludedExtensions) {
     this.excludedExtensions = excludedExtensions;
   }
 }

@@ -52,9 +52,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @phase site
  * @description generate a metrics report on a C# project or solution
  */
-public class CodeMetricsMojo
-  extends AbstractDotNetMojo
-{
+public class CodeMetricsMojo extends AbstractDotNetMojo {
   /**
    * Name of the resource folder that contains the StyleCop exe
    */
@@ -62,52 +60,55 @@ public class CodeMetricsMojo
   /**
    * Name of the folder that will contain the extracted StyleCop exe
    */
-  private final static String EXPORT_PATH  = "sourcemonitor-runtime";
+  private final static String EXPORT_PATH = "sourcemonitor-runtime";
 
   /**
-   * Installation directory of the SourceMonitor application 
+   * Installation directory of the SourceMonitor application
    * 
    * @parameter expression="${sourcemonitor.directory}"
    */
-  private File                sourceMonitorDirectory;
+  private File sourceMonitorDirectory;
 
   /**
    * Simple name of the Source Monitor executable
    * 
-   * @parameter expression="${metrics.source.monitor.executable}" default-value="SourceMonitor.exe"
+   * @parameter expression="${metrics.source.monitor.executable}"
+   *            default-value="SourceMonitor.exe"
    */
-  private String              sourceMonitorExecutable;
+  private String sourceMonitorExecutable;
 
   /**
    * List of the sub-trees of the project to excluded from the analysis
    * 
    * @parameter alias=${excludeSubTree}"
    */
-  private String              excludedSubTree;
+  private String excludedSubTree;
 
   /**
-   * List of the excluded extensions for the metrics. For example "*.Designer.cs" which is the default value
+   * List of the excluded extensions for the metrics. For example
+   * "*.Designer.cs" which is the default value
    * 
    * @parameter alias=${excludedExtensions}"
    */
-  private String[] excludedExtensions = {"*.Designer.cs"};
-  
+  private String[] excludedExtensions = { "*.Designer.cs" };
+
   /**
    * Name of the generated metrics report.
    * 
-   * @parameter alias="${metricsReportFileName}" default-value="metrics-report.xml"
+   * @parameter alias="${metricsReportFileName}"
+   *            default-value="metrics-report.xml"
    */
-  private String              reportFileName;
-
+  private String reportFileName;
 
   /**
    * Executes the reporting for a solution
    * 
-   * @param solution the solution to report
+   * @param solution
+   *          the solution to report
    */
   @Override
-  protected void executeSolution(VisualStudioSolution solution) throws MojoExecutionException, MojoFailureException
-  {
+  protected void executeSolution(VisualStudioSolution solution)
+      throws MojoExecutionException, MojoFailureException {
     SrcMonCommandGenerator generator = new SrcMonCommandGenerator();
     generator.setExcludedExtensions(Arrays.asList(excludedExtensions));
     String version = project.getVersion();
@@ -129,38 +130,34 @@ public class CodeMetricsMojo
     File sourceMonitorExe = getExecutable();
     generator.setSourceMonitorPath(sourceMonitorExe.toString());
     generator.setProjectFile(projectFile.toString());
-    
+
     // We exclude all the test projects
     List<VisualStudioProject> testProjects = solution.getTestProjects();
     File solutionDir = solution.getSolutionDir();
-    for (VisualStudioProject visualStudioProject : testProjects)
-    {
+    for (VisualStudioProject visualStudioProject : testProjects) {
       File directory = visualStudioProject.getDirectory();
-      try
-      {
+      try {
         URI directoryUri = directory.getCanonicalFile().toURI();
         URI solutionUri = solutionDir.getCanonicalFile().toURI();
         String relativePath = solutionUri.relativize(directoryUri).getPath();
         generator.addExcludedDirectory(relativePath);
-      }
-      catch (IOException e)
-      {
-        getLog().debug("Could not compute the relative path for the project " + visualStudioProject);
+      } catch (IOException e) {
+        getLog().debug(
+            "Could not compute the relative path for the project "
+                + visualStudioProject);
       }
     }
-    
-    getLog().info("Launching metrics generation for solution " + solution.getName());
-    try
-    {
+
+    getLog().info(
+        "Launching metrics generation for solution " + solution.getName());
+    try {
       File commandFile = generator.generateCommandFile();
       List<String> arguments = new ArrayList<String>();
       arguments.add("/C");
       arguments.add(toCommandPath(commandFile));
       launchCommand(sourceMonitorExe, arguments, "Metrics", 1, debug);
       getLog().info("Metrics generated!");
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       throw new MojoExecutionException("Could not execute source monitor", e);
     }
 
@@ -172,8 +169,8 @@ public class CodeMetricsMojo
    * @throws MojoExecutionException
    */
   @Override
-  protected void executeProject(VisualStudioProject visualProject) throws MojoFailureException, MojoExecutionException
-  {
+  protected void executeProject(VisualStudioProject visualProject)
+      throws MojoFailureException, MojoExecutionException {
     SrcMonCommandGenerator generator = new SrcMonCommandGenerator();
     String version = project.getVersion();
     generator.setCheckPointName(version);
@@ -190,13 +187,11 @@ public class CodeMetricsMojo
     File sourceMonitorExe = getExecutable();
     generator.setSourceMonitorPath(sourceMonitorExe.toString());
     generator.setProjectFile(projectFile.toString());
-    getLog().info("Launching metrics generation for project " + visualProject.getName());
-    try
-    {
+    getLog().info(
+        "Launching metrics generation for project " + visualProject.getName());
+    try {
       generator.launch();
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       throw new MojoExecutionException("Could not execute source monitor", e);
     }
   }
@@ -205,21 +200,21 @@ public class CodeMetricsMojo
    * @throws MojoFailureException
    * @throws MojoExecutionException
    */
-  private File getExecutable() throws MojoFailureException, MojoExecutionException
-  {
-    if (sourceMonitorDirectory == null)
-    {
+  private File getExecutable() throws MojoFailureException,
+      MojoExecutionException {
+    if (sourceMonitorDirectory == null) {
       // We extract the sourcemonitor.exe if the path is not defined
-      sourceMonitorDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "SourceMonitor");
+      sourceMonitorDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH,
+          "SourceMonitor");
     }
-    
+
     File executable = new File(sourceMonitorDirectory, sourceMonitorExecutable);
-    if (!executable.exists())
-    {
+    if (!executable.exists()) {
       getLog().error("Cannot find the SourceMonitor executable :" + executable);
       getLog()
-              .error("Please ensure that SourceMonitor is well installed and that the property "
-                     + "source.monitor.directory is correctly defined or that the source.monitor.executable is correct in your settings.xml");
+          .error(
+              "Please ensure that SourceMonitor is well installed and that the property "
+                  + "source.monitor.directory is correctly defined or that the source.monitor.executable is correct in your settings.xml");
       throw new MojoFailureException("Cannot find the SourceMonitor directory");
     }
     return executable;

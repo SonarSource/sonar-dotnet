@@ -34,9 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UsingTask", namespace=Constant.NAMESPACE)
-public class UsingTask
-{
+@XmlType(name = "UsingTask", namespace = Constant.NAMESPACE)
+public class UsingTask {
   @XmlAttribute(name = "AssemblyFile")
   private String assemblyFile;
 
@@ -46,53 +45,45 @@ public class UsingTask
   /**
    * Constructs a @link{UsingTask}.
    */
-  public UsingTask()
-  {
+  public UsingTask() {
   }
 
-  
   /**
    * Returns the assemblyFile.
    * 
    * @return The assemblyFile to return.
    */
-  public String getAssemblyFile()
-  {
+  public String getAssemblyFile() {
     return this.assemblyFile;
   }
 
-  
   /**
    * Sets the assemblyFile.
    * 
-   * @param assemblyFile The assemblyFile to set.
+   * @param assemblyFile
+   *          The assemblyFile to set.
    */
-  public void setAssemblyFile(String assemblyFile)
-  {
+  public void setAssemblyFile(String assemblyFile) {
     this.assemblyFile = assemblyFile;
   }
 
-  
   /**
    * Returns the taskName.
    * 
    * @return The taskName to return.
    */
-  public String getTaskName()
-  {
+  public String getTaskName() {
     return this.taskName;
   }
 
-  
   /**
    * Sets the taskName.
    * 
-   * @param taskName The taskName to set.
+   * @param taskName
+   *          The taskName to set.
    */
-  public void setTaskName(String taskName)
-  {
+  public void setTaskName(String taskName) {
     this.taskName = taskName;
   }
-  
-  
+
 }

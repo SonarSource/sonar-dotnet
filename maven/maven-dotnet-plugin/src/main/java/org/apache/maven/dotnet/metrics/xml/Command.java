@@ -35,37 +35,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "command")
-public class Command
-{
+public class Command {
   @XmlElement(name = "project_file")
-  private String                 projectFile;
+  private String projectFile;
   @XmlElement(name = "parse_utf8_files")
-  private boolean                parseUtf8;
+  private boolean parseUtf8;
   @XmlElement(name = "project_language")
-  private String                 projectLanguage;
+  private String projectLanguage;
   @XmlElement(name = "source_directory")
-  private String                 sourceDirectory;
+  private String sourceDirectory;
   @XmlElement(name = "checkpoint_name")
-  private String                 checkPointName;
+  private String checkPointName;
 
   @XmlElement(name = "checkpoint_date")
-  private String                 checkPointDate;
+  private String checkPointDate;
 
   @XmlElement(name = "file_extensions")
-  private String                 fileExtensions;
+  private String fileExtensions;
   @XmlElement(name = "include_subdirectories")
-  private boolean                includeSubdirectories;
+  private boolean includeSubdirectories;
   @XmlElement(name = "ignore_headers_footers")
-  private boolean                ignoreHeaderFooters;
+  private boolean ignoreHeaderFooters;
 
   @XmlElement(name = "export")
-  private Export                 export;
+  private Export export;
 
   @XmlElement(name = "source_subdirectory_list")
   private SourceSubdirectoryList subdirectoryList;
 
-  public Command()
-  {
+  public Command() {
     // Parses the utf8 by default
     this.parseUtf8 = true;
   }
@@ -75,18 +73,17 @@ public class Command
    * 
    * @return The projectFile to return.
    */
-  public String getProjectFile()
-  {
+  public String getProjectFile() {
     return this.projectFile;
   }
 
   /**
    * Sets the projectFile.
    * 
-   * @param projectFile The projectFile to set.
+   * @param projectFile
+   *          The projectFile to set.
    */
-  public void setProjectFile(String projectFile)
-  {
+  public void setProjectFile(String projectFile) {
     this.projectFile = projectFile;
   }
 
@@ -95,18 +92,17 @@ public class Command
    * 
    * @return The projectLanguage to return.
    */
-  public String getProjectLanguage()
-  {
+  public String getProjectLanguage() {
     return this.projectLanguage;
   }
 
   /**
    * Sets the projectLanguage.
    * 
-   * @param projectLanguage The projectLanguage to set.
+   * @param projectLanguage
+   *          The projectLanguage to set.
    */
-  public void setProjectLanguage(String projectLanguage)
-  {
+  public void setProjectLanguage(String projectLanguage) {
     this.projectLanguage = projectLanguage;
   }
 
@@ -115,18 +111,17 @@ public class Command
    * 
    * @return The sourceDirectory to return.
    */
-  public String getSourceDirectory()
-  {
+  public String getSourceDirectory() {
     return this.sourceDirectory;
   }
 
   /**
    * Sets the sourceDirectory.
    * 
-   * @param sourceDirectory The sourceDirectory to set.
+   * @param sourceDirectory
+   *          The sourceDirectory to set.
    */
-  public void setSourceDirectory(String sourceDirectory)
-  {
+  public void setSourceDirectory(String sourceDirectory) {
     this.sourceDirectory = sourceDirectory;
   }
 
@@ -135,18 +130,17 @@ public class Command
    * 
    * @return The checkPointName to return.
    */
-  public String getCheckPointName()
-  {
+  public String getCheckPointName() {
     return this.checkPointName;
   }
 
   /**
    * Sets the checkPointName.
    * 
-   * @param checkPointName The checkPointName to set.
+   * @param checkPointName
+   *          The checkPointName to set.
    */
-  public void setCheckPointName(String checkPointName)
-  {
+  public void setCheckPointName(String checkPointName) {
     this.checkPointName = checkPointName;
   }
 
@@ -155,18 +149,17 @@ public class Command
    * 
    * @return The checkPointDate to return.
    */
-  public String getCheckPointDate()
-  {
+  public String getCheckPointDate() {
     return this.checkPointDate;
   }
 
   /**
    * Sets the checkPointDate.
    * 
-   * @param checkPointDate The checkPointDate to set.
+   * @param checkPointDate
+   *          The checkPointDate to set.
    */
-  public void setCheckPointDate(String checkPointDate)
-  {
+  public void setCheckPointDate(String checkPointDate) {
     this.checkPointDate = checkPointDate;
   }
 
@@ -175,18 +168,17 @@ public class Command
    * 
    * @return The fileExtensions to return.
    */
-  public String getFileExtensions()
-  {
+  public String getFileExtensions() {
     return this.fileExtensions;
   }
 
   /**
    * Sets the fileExtensions.
    * 
-   * @param fileExtensions The fileExtensions to set.
+   * @param fileExtensions
+   *          The fileExtensions to set.
    */
-  public void setFileExtensions(String fileExtensions)
-  {
+  public void setFileExtensions(String fileExtensions) {
     this.fileExtensions = fileExtensions;
   }
 
@@ -195,18 +187,17 @@ public class Command
    * 
    * @return The includeSubdirectories to return.
    */
-  public boolean isIncludeSubdirectories()
-  {
+  public boolean isIncludeSubdirectories() {
     return this.includeSubdirectories;
   }
 
   /**
    * Sets the includeSubdirectories.
    * 
-   * @param includeSubdirectories The includeSubdirectories to set.
+   * @param includeSubdirectories
+   *          The includeSubdirectories to set.
    */
-  public void setIncludeSubdirectories(boolean includeSubdirectories)
-  {
+  public void setIncludeSubdirectories(boolean includeSubdirectories) {
     this.includeSubdirectories = includeSubdirectories;
   }
 
@@ -215,18 +206,17 @@ public class Command
    * 
    * @return The ignoreHeaderFooters to return.
    */
-  public boolean isIgnoreHeaderFooters()
-  {
+  public boolean isIgnoreHeaderFooters() {
     return this.ignoreHeaderFooters;
   }
 
   /**
    * Sets the ignoreHeaderFooters.
    * 
-   * @param ignoreHeaderFooters The ignoreHeaderFooters to set.
+   * @param ignoreHeaderFooters
+   *          The ignoreHeaderFooters to set.
    */
-  public void setIgnoreHeaderFooters(boolean ignoreHeaderFooters)
-  {
+  public void setIgnoreHeaderFooters(boolean ignoreHeaderFooters) {
     this.ignoreHeaderFooters = ignoreHeaderFooters;
   }
 
@@ -235,18 +225,17 @@ public class Command
    * 
    * @return The export to return.
    */
-  public Export getExport()
-  {
+  public Export getExport() {
     return this.export;
   }
 
   /**
    * Sets the export.
    * 
-   * @param export The export to set.
+   * @param export
+   *          The export to set.
    */
-  public void setExport(Export export)
-  {
+  public void setExport(Export export) {
     this.export = export;
   }
 
@@ -255,18 +244,17 @@ public class Command
    * 
    * @return The subdirectoryList to return.
    */
-  public SourceSubdirectoryList getSubdirectoryList()
-  {
+  public SourceSubdirectoryList getSubdirectoryList() {
     return this.subdirectoryList;
   }
 
   /**
    * Sets the subdirectoryList.
    * 
-   * @param subdirectoryList The subdirectoryList to set.
+   * @param subdirectoryList
+   *          The subdirectoryList to set.
    */
-  public void setSubdirectoryList(SourceSubdirectoryList subdirectoryList)
-  {
+  public void setSubdirectoryList(SourceSubdirectoryList subdirectoryList) {
     this.subdirectoryList = subdirectoryList;
   }
 
@@ -275,18 +263,17 @@ public class Command
    * 
    * @return The parseUtf8 to return.
    */
-  public boolean isParseUtf8()
-  {
+  public boolean isParseUtf8() {
     return this.parseUtf8;
   }
 
   /**
    * Sets the parseUtf8.
    * 
-   * @param parseUtf8 The parseUtf8 to set.
+   * @param parseUtf8
+   *          The parseUtf8 to set.
    */
-  public void setParseUtf8(boolean parseUtf8)
-  {
+  public void setParseUtf8(boolean parseUtf8) {
     this.parseUtf8 = parseUtf8;
   }
 

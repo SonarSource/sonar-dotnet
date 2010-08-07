@@ -24,8 +24,6 @@
  */
 package org.apache.maven.dotnet;
 
-
-public enum ExportFormat
-{
+public enum ExportFormat {
   INCLUDE_METHOD_METRICS;
 }

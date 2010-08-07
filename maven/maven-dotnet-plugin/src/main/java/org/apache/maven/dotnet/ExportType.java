@@ -24,10 +24,6 @@
  */
 package org.apache.maven.dotnet;
 
-
-public enum ExportType
-{
-  SUMMARY_XML, 
-  DETAILS_XML, 
-  DETAIL_CSV;
+public enum ExportType {
+  SUMMARY_XML, DETAILS_XML, DETAIL_CSV;
 }

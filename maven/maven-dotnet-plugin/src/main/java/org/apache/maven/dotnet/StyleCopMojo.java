@@ -41,20 +41,20 @@ import org.apache.maven.plugin.logging.Log;
 
 /**
  * Generates a quality report for a .Net project or solution using StyleCop
+ * 
  * @goal stylecop
  * @phase site
- * @description generates a StyleCop report on a C# project 
+ * @description generates a StyleCop report on a C# project
  * 
  * @author Jose CHILLAN Apr 14, 2009
  */
-public class StyleCopMojo extends AbstractDotNetBuildMojo
-{
+public class StyleCopMojo extends AbstractDotNetBuildMojo {
   /**
    * Name of the resource folder that contains the StyleCop exe
    */
-  private final static String RESOURCE_DIR        = "stylecop";
-  private final static String EXPORT_PATH         = "stylecop-runtime";
-  private final static String STYLECOP_RULE_FILE  = "default-rules.stylecop";
+  private final static String RESOURCE_DIR = "stylecop";
+  private final static String EXPORT_PATH = "stylecop-runtime";
+  private final static String STYLECOP_RULE_FILE = "default-rules.stylecop";
   private final static String STYLECOP_BUILD_FILE = "stylecop-msbuild.xml";
 
   /**
@@ -62,21 +62,22 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
    * 
    * @parameter expression="${stylecop.directory}"
    */
-  private File                styleCopRoot;
+  private File styleCopRoot;
 
   /**
    * Name of the file that contains the StyleCop rules to use
    * 
    * @parameter alias="${styleCopConfigFile}"
    */
-  private File                styleCopConfigFile;
+  private File styleCopConfigFile;
 
   /**
-   * Name of the generated StyleCop report 
+   * Name of the generated StyleCop report
    * 
-   * @parameter alias="${styleCopReportName}" default-value="stylecop-report.xml"
+   * @parameter alias="${styleCopReportName}"
+   *            default-value="stylecop-report.xml"
    */
-  private String              styleCopReportName;
+  private String styleCopReportName;
 
   /**
    * Name of the file that contains the StyleCop XSL to apply to the report
@@ -90,42 +91,40 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
    * 
    * @parameter expression="${dotnet.configuration}"
    */
-  private String              buildConfiguration;
+  private String buildConfiguration;
 
   /**
    * Patterns for ignored files
    * 
    * @parameter alias="${ignores}"
    */
-  private String[]            ignores;
+  private String[] ignores;
 
-  public StyleCopMojo()
-  {
+  public StyleCopMojo() {
   }
 
   /**
    * Launches the style cop generation for a visual studio project.
    * 
-   * @param visualProject the project
+   * @param visualProject
+   *          the project
    * @throws MojoExecutionException
    * @throws MojoFailureException
    */
   @Override
-  public void executeSolution(VisualStudioSolution solution) throws MojoExecutionException, MojoFailureException
-  {
+  public void executeSolution(VisualStudioSolution solution)
+      throws MojoExecutionException, MojoFailureException {
     File solutionFile = solution.getSolutionFile();
     List<File> analyzedProjects = new ArrayList<File>();
     List<VisualStudioProject> allProjects = solution.getProjects();
-    for (VisualStudioProject visualStudioProject : allProjects)
-    {
-      if (visualStudioProject.isTest())
-      {
+    for (VisualStudioProject visualStudioProject : allProjects) {
+      if (visualStudioProject.isTest()) {
         continue;
       }
       File file = visualStudioProject.getProjectFile();
-      if (file==null) {
-      	// the project is an ASP project without any csproj file
-      	file = visualStudioProject.getDirectory();
+      if (file == null) {
+        // the project is an ASP project without any csproj file
+        file = visualStudioProject.getDirectory();
       }
       analyzedProjects.add(file);
 
@@ -136,16 +135,16 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
   /**
    * Launches the style cop generation for a visual studio project.
    * 
-   * @param visualProject the project
+   * @param visualProject
+   *          the project
    * @throws MojoExecutionException
    * @throws MojoFailureException
    */
   @Override
-  public void executeProject(VisualStudioProject visualProject) throws MojoExecutionException, MojoFailureException
-  {
+  public void executeProject(VisualStudioProject visualProject)
+      throws MojoExecutionException, MojoFailureException {
     // Cannot launch stylecop on a web project alone
-    if (visualProject.getType() != ArtifactType.WEB)
-    {
+    if (visualProject.getType() != ArtifactType.WEB) {
       File projectFile = visualProject.getProjectFile();
       launchReport(projectFile, Collections.singletonList(projectFile));
     }
@@ -157,27 +156,23 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
    * @throws MojoExecutionException
    * @throws MojoFailureException
    */
-  private void launchReport(File solutionFile, List<File> projectFiles) throws MojoExecutionException, MojoFailureException
-  {
+  private void launchReport(File solutionFile, List<File> projectFiles)
+      throws MojoExecutionException, MojoFailureException {
     Log log = getLog();
     extractExecutable();
-    if (buildConfiguration == null)
-    {
-      if (debug)
-      {
+    if (buildConfiguration == null) {
+      if (debug) {
         buildConfiguration = "Debug";
-      }
-      else
-      {
+      } else {
         buildConfiguration = "Release";
       }
     }
 
     File reportDirectory = getReportDirectory();
     // Defines the rule file if necessary
-    if (styleCopConfigFile == null)
-    {
-      styleCopConfigFile = extractResource(reportDirectory, STYLECOP_RULE_FILE, STYLECOP_RULE_FILE, "stylecop rule file");
+    if (styleCopConfigFile == null) {
+      styleCopConfigFile = extractResource(reportDirectory, STYLECOP_RULE_FILE,
+          STYLECOP_RULE_FILE, "stylecop rule file");
     }
 
     // Initializes the parameters
@@ -186,15 +181,12 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
     File msbuildFile = getReportFile(STYLECOP_BUILD_FILE);
 
     // Logs what is generated
-    if (log.isDebugEnabled())
-    {
+    if (log.isDebugEnabled()) {
       log.debug("StyleCop configuration :");
-      if (solutionFile != null)
-      {
+      if (solutionFile != null) {
         log.debug(" - Solution file      : " + solutionFile);
       }
-      if ((projectFiles != null) && (!projectFiles.isEmpty()))
-      {
+      if ((projectFiles != null) && (!projectFiles.isEmpty())) {
         log.debug(" - Project files      :  " + projectFiles);
       }
       log.debug(" - Build Configuration: " + buildConfiguration);
@@ -213,23 +205,19 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
     generator.setVisualSolution(solutionFile);
 
     // Adds the analysed visual studio projects
-    if (projectFiles != null)
-    {
-      for (File projectFile : projectFiles)
-      {
+    if (projectFiles != null) {
+      for (File projectFile : projectFiles) {
         generator.addVisualProject(projectFile);
       }
     }
     // We write into the file (and override the previous one)
-    try
-    {
+    try {
       FileOutputStream msBuildStream = new FileOutputStream(msbuildFile, false);
       generator.generate(msBuildStream);
       msBuildStream.close();
-    }
-    catch (IOException exc)
-    {
-      throw new MojoExecutionException("Could not generate the MSBuild file for StyleCop", exc);
+    } catch (IOException exc) {
+      throw new MojoExecutionException(
+          "Could not generate the MSBuild file for StyleCop", exc);
     }
 
     log.info("StyleCop MsBuild file generated!");
@@ -246,7 +234,8 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
     log.debug(" - Tool Version  : " + toolVersion);
     log.debug(" - MsBuild exe   : " + executable);
 
-    // We launch the compile command (the logs are put in debug because they may be verbose)
+    // We launch the compile command (the logs are put in debug because they may
+    // be verbose)
     launchCommand(executable, arguments, "build", 0, true);
     log.info("StyleCop report generated");
   }
@@ -256,10 +245,8 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo
    * 
    * @throws MojoExecutionException
    */
-  private void extractExecutable() throws MojoExecutionException
-  {
-    if (styleCopRoot == null)
-    {
+  private void extractExecutable() throws MojoExecutionException {
+    if (styleCopRoot == null) {
       styleCopRoot = extractFolder(RESOURCE_DIR, EXPORT_PATH, "StyleCop");
     }
   }

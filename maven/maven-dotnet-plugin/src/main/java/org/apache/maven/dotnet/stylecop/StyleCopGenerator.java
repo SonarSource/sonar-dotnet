@@ -54,21 +54,21 @@ import org.apache.maven.dotnet.msbuild.xml.UsingTask;
  * 
  * @author Jose CHILLAN Jan 19, 2010
  */
-public class StyleCopGenerator
-{
+public class StyleCopGenerator {
   /**
    * STYLE_COP_NAMESPACE
    */
   private static final String STYLE_COP_NAMESPACE = "http://schemas.microsoft.com/developer/msbuild/2003";
 
-  private final static Logger log                 = LogManager.getLogger(StyleCopGenerator.class);
+  private final static Logger log = LogManager
+      .getLogger(StyleCopGenerator.class);
 
-  private File                projectRoot;
-  private File                styleCopRoot;
-  private File                visualSolution;
-  private List<File>          visualProjects;
-  private File                output;
-  private File                settings;
+  private File projectRoot;
+  private File styleCopRoot;
+  private File visualSolution;
+  private List<File> visualProjects;
+  private File output;
+  private File settings;
 
   /**
    * Constructs a @link{StyleCopGenerator}.
@@ -80,8 +80,8 @@ public class StyleCopGenerator
    * @param visualProjects
    * @param output
    */
-  public StyleCopGenerator(File styleCopRoot, File settings, File projectRoot, File visualSolution, List<File> visualProjects, File output)
-  {
+  public StyleCopGenerator(File styleCopRoot, File settings, File projectRoot,
+      File visualSolution, List<File> visualProjects, File output) {
     super();
     this.styleCopRoot = styleCopRoot;
     this.settings = settings;
@@ -94,8 +94,7 @@ public class StyleCopGenerator
   /**
    * Constructs a @link{StyleCopGenerator}.
    */
-  public StyleCopGenerator()
-  {
+  public StyleCopGenerator() {
     this.visualProjects = new ArrayList<File>();
   }
 
@@ -104,8 +103,7 @@ public class StyleCopGenerator
    * 
    * @param stream
    */
-  public void generate(OutputStream stream)
-  {
+  public void generate(OutputStream stream) {
     Project project = new Project();
 
     // Properties used
@@ -135,16 +133,15 @@ public class StyleCopGenerator
     itemOutput.setItemName("SourceAnalysisFiles");
     createItem.setOutput(itemOutput);
 
-    // 
+    //
     ItemGroup group = new ItemGroup();
     // Adds all the projects files
-    for (File visualProject : visualProjects)
-    {
-    	if (visualProject.isDirectory()) {
-    		group.addCsFiles(visualProject+"\\**\\*.cs");
-    	} else {
-    		group.addProject(toWindowsPath(visualProject));
-    	}
+    for (File visualProject : visualProjects) {
+      if (visualProject.isDirectory()) {
+        group.addCsFiles(visualProject + "\\**\\*.cs");
+      } else {
+        group.addProject(toWindowsPath(visualProject));
+      }
     }
 
     // Populates the task
@@ -162,31 +159,26 @@ public class StyleCopGenerator
     XMLOutputFactory xof = XMLOutputFactory.newInstance();
     StringWriter writer = new StringWriter();
     XMLStreamWriter xtw = null;
-    try
-    {
+    try {
       // Gets control of the generated namespaces
       xtw = xof.createXMLStreamWriter(writer);
       xtw.setNamespaceContext(new NamespaceContext() {
 
         @Override
-        public Iterator getPrefixes(String arg0)
-        {
+        public Iterator getPrefixes(String arg0) {
           return null;
         }
 
         @Override
-        public String getPrefix(String arg0)
-        {
-          if (STYLE_COP_NAMESPACE.equals(arg0))
-          {
+        public String getPrefix(String arg0) {
+          if (STYLE_COP_NAMESPACE.equals(arg0)) {
             return "stylecop";
           }
           return null;
         }
 
         @Override
-        public String getNamespaceURI(String arg0)
-        {
+        public String getNamespaceURI(String arg0) {
           return null;
         }
       });
@@ -200,19 +192,22 @@ public class StyleCopGenerator
       m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
       // Marshal to system output: java to xml
       m.marshal(project, xtw);
-    }
-    catch (Exception e)
-    {
+    } catch (Exception e) {
       log.debug("Generation error", e);
     }
     String xmlContent = writer.toString();
-    
-    // Due to a bug of missing feature in JAXB, I could not generate an XML file having the default XML namespace
-    // of stylecop (it defines the objects in a namespace that is not the default). 
-    // The problem is that MSBuild is non fully XML compliant and requires the stylecop namespace as being explicitely
-    // the default one for the file. This is achived by hand-made replacement in hte generated file, hoping for something
+
+    // Due to a bug of missing feature in JAXB, I could not generate an XML file
+    // having the default XML namespace
+    // of stylecop (it defines the objects in a namespace that is not the
+    // default).
+    // The problem is that MSBuild is non fully XML compliant and requires the
+    // stylecop namespace as being explicitely
+    // the default one for the file. This is achived by hand-made replacement in
+    // hte generated file, hoping for something
     // more robust later.
-    String temp = StringUtils.replace(xmlContent, "xmlns=\"\"", "xmlns=\"" + STYLE_COP_NAMESPACE + "\"");
+    String temp = StringUtils.replace(xmlContent, "xmlns=\"\"", "xmlns=\""
+        + STYLE_COP_NAMESPACE + "\"");
     String result = StringUtils.replace(temp, "stylecop:Project", "Project");
     PrintWriter outputWriter = new PrintWriter(stream);
     outputWriter.print(result);
@@ -222,8 +217,7 @@ public class StyleCopGenerator
   /**
    * @return
    */
-  private String toWindowsPath(File file)
-  {
+  private String toWindowsPath(File file) {
     return file.toString();
   }
 
@@ -232,18 +226,17 @@ public class StyleCopGenerator
    * 
    * @return The projectRoot to return.
    */
-  public File getProjectRoot()
-  {
+  public File getProjectRoot() {
     return this.projectRoot;
   }
 
   /**
    * Sets the projectRoot.
    * 
-   * @param projectRoot The projectRoot to set.
+   * @param projectRoot
+   *          The projectRoot to set.
    */
-  public void setProjectRoot(File projectRoot)
-  {
+  public void setProjectRoot(File projectRoot) {
     this.projectRoot = projectRoot;
   }
 
@@ -252,18 +245,17 @@ public class StyleCopGenerator
    * 
    * @return The styleCopRoot to return.
    */
-  public File getStyleCopRoot()
-  {
+  public File getStyleCopRoot() {
     return this.styleCopRoot;
   }
 
   /**
    * Sets the styleCopRoot.
    * 
-   * @param styleCopRoot The styleCopRoot to set.
+   * @param styleCopRoot
+   *          The styleCopRoot to set.
    */
-  public void setStyleCopRoot(File styleCopRoot)
-  {
+  public void setStyleCopRoot(File styleCopRoot) {
     this.styleCopRoot = styleCopRoot;
   }
 
@@ -272,18 +264,17 @@ public class StyleCopGenerator
    * 
    * @return The visualSolution to return.
    */
-  public File getVisualSolution()
-  {
+  public File getVisualSolution() {
     return this.visualSolution;
   }
 
   /**
    * Sets the visualSolution.
    * 
-   * @param visualSolution The visualSolution to set.
+   * @param visualSolution
+   *          The visualSolution to set.
    */
-  public void setVisualSolution(File visualSolution)
-  {
+  public void setVisualSolution(File visualSolution) {
     this.visualSolution = visualSolution;
   }
 
@@ -292,27 +283,26 @@ public class StyleCopGenerator
    * 
    * @return The visualProjects to return.
    */
-  public List<File> getVisualProjects()
-  {
+  public List<File> getVisualProjects() {
     return this.visualProjects;
   }
 
   /**
    * Adds a visual studio project file.
+   * 
    * @param visualProject
    */
-  public void addVisualProject(File visualProject)
-  {
+  public void addVisualProject(File visualProject) {
     this.visualProjects.add(visualProject);
   }
-  
+
   /**
    * Sets the visualProjects.
    * 
-   * @param visualProjects The visualProjects to set.
+   * @param visualProjects
+   *          The visualProjects to set.
    */
-  public void setVisualProjects(List<File> visualProjects)
-  {
+  public void setVisualProjects(List<File> visualProjects) {
     this.visualProjects = visualProjects;
   }
 
@@ -321,18 +311,17 @@ public class StyleCopGenerator
    * 
    * @return The output to return.
    */
-  public File getOutput()
-  {
+  public File getOutput() {
     return this.output;
   }
 
   /**
    * Sets the output.
    * 
-   * @param output The output to set.
+   * @param output
+   *          The output to set.
    */
-  public void setOutput(File output)
-  {
+  public void setOutput(File output) {
     this.output = output;
   }
 
@@ -341,18 +330,17 @@ public class StyleCopGenerator
    * 
    * @return The settings to return.
    */
-  public File getSettings()
-  {
+  public File getSettings() {
     return this.settings;
   }
 
   /**
    * Sets the settings.
    * 
-   * @param settings The settings to set.
+   * @param settings
+   *          The settings to set.
    */
-  public void setSettings(File settings)
-  {
+  public void setSettings(File settings) {
     this.settings = settings;
   }
 

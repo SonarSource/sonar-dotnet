@@ -34,9 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Output", namespace=Constant.NAMESPACE)
-public class ItemOutput
-{
+@XmlType(name = "Output", namespace = Constant.NAMESPACE)
+public class ItemOutput {
   @XmlAttribute(name = "TaskParameter")
   private String taskParameter;
 
@@ -46,8 +45,7 @@ public class ItemOutput
   /**
    * Constructs a @link{ItemOutput}.
    */
-  public ItemOutput()
-  {
+  public ItemOutput() {
   }
 
   /**
@@ -55,18 +53,17 @@ public class ItemOutput
    * 
    * @return The taskParameter to return.
    */
-  public String getTaskParameter()
-  {
+  public String getTaskParameter() {
     return this.taskParameter;
   }
 
   /**
    * Sets the taskParameter.
    * 
-   * @param taskParameter The taskParameter to set.
+   * @param taskParameter
+   *          The taskParameter to set.
    */
-  public void setTaskParameter(String taskParameter)
-  {
+  public void setTaskParameter(String taskParameter) {
     this.taskParameter = taskParameter;
   }
 
@@ -75,18 +72,17 @@ public class ItemOutput
    * 
    * @return The itemName to return.
    */
-  public String getItemName()
-  {
+  public String getItemName() {
     return this.itemName;
   }
 
   /**
    * Sets the itemName.
    * 
-   * @param itemName The itemName to set.
+   * @param itemName
+   *          The itemName to set.
    */
-  public void setItemName(String itemName)
-  {
+  public void setItemName(String itemName) {
     this.itemName = itemName;
   }
 

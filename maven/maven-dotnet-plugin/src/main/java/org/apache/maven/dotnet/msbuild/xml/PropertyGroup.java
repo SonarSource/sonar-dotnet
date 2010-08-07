@@ -34,9 +34,8 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PropertyGroup", namespace=Constant.NAMESPACE)
-public class PropertyGroup
-{
+@XmlType(name = "PropertyGroup", namespace = Constant.NAMESPACE)
+public class PropertyGroup {
   @XmlElement(name = "ProjectRoot")
   private String projectRoot;
 
@@ -46,8 +45,7 @@ public class PropertyGroup
   /**
    * Constructs a @link{PropertyGroup}.
    */
-  public PropertyGroup()
-  {
+  public PropertyGroup() {
   }
 
   /**
@@ -55,18 +53,17 @@ public class PropertyGroup
    * 
    * @return The projectRoot to return.
    */
-  public String getProjectRoot()
-  {
+  public String getProjectRoot() {
     return this.projectRoot;
   }
 
   /**
    * Sets the projectRoot.
    * 
-   * @param projectRoot The projectRoot to set.
+   * @param projectRoot
+   *          The projectRoot to set.
    */
-  public void setProjectRoot(String projectRoot)
-  {
+  public void setProjectRoot(String projectRoot) {
     this.projectRoot = projectRoot;
   }
 
@@ -75,18 +72,17 @@ public class PropertyGroup
    * 
    * @return The styleCopRoot to return.
    */
-  public String getStyleCopRoot()
-  {
+  public String getStyleCopRoot() {
     return this.StyleCopRoot;
   }
 
   /**
    * Sets the styleCopRoot.
    * 
-   * @param styleCopRoot The styleCopRoot to set.
+   * @param styleCopRoot
+   *          The styleCopRoot to set.
    */
-  public void setStyleCopRoot(String styleCopRoot)
-  {
+  public void setStyleCopRoot(String styleCopRoot) {
     StyleCopRoot = styleCopRoot;
   }
 

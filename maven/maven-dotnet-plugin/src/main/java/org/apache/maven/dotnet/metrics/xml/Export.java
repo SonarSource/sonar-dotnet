@@ -30,8 +30,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "export")
-public class Export
-{
+public class Export {
   @XmlElement(name = "export_file")
   private String file;
   @XmlElement(name = "export_type")
@@ -39,9 +38,8 @@ public class Export
   @XmlElement(name = "export_option")
   private String[] options;
 
-  public Export()
-  {
-    this.options = new String[]{"1", "3"};
+  public Export() {
+    this.options = new String[] { "1", "3" };
   }
 
   /**
@@ -49,18 +47,17 @@ public class Export
    * 
    * @return The file to return.
    */
-  public String getFile()
-  {
+  public String getFile() {
     return this.file;
   }
 
   /**
    * Sets the file.
    * 
-   * @param file The file to set.
+   * @param file
+   *          The file to set.
    */
-  public void setFile(String file)
-  {
+  public void setFile(String file) {
     this.file = file;
   }
 
@@ -69,18 +66,17 @@ public class Export
    * 
    * @return The type to return.
    */
-  public String getType()
-  {
+  public String getType() {
     return this.type;
   }
 
   /**
    * Sets the type.
    * 
-   * @param type The type to set.
+   * @param type
+   *          The type to set.
    */
-  public void setType(String type)
-  {
+  public void setType(String type) {
     this.type = type;
   }
 
@@ -89,18 +85,17 @@ public class Export
    * 
    * @return The option
    */
-  public String[] getOptions()
-  {
+  public String[] getOptions() {
     return this.options;
   }
 
   /**
    * Sets the options.
    * 
-   * @param options The options to set.
+   * @param options
+   *          The options to set.
    */
-  public void setFormat(String[] options)
-  {
+  public void setFormat(String[] options) {
     this.options = options;
   }
 

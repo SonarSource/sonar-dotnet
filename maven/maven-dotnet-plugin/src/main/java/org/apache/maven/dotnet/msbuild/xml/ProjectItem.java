@@ -34,17 +34,15 @@ import javax.xml.bind.annotation.XmlType;
  * @author Jose CHILLAN Jan 14, 2010
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ProjectItem", namespace=Constant.NAMESPACE)
-public class ProjectItem
-{
+@XmlType(name = "ProjectItem", namespace = Constant.NAMESPACE)
+public class ProjectItem {
   @XmlAttribute(name = "Include")
   private String include;
 
   /**
    * Constructs a @link{ProjectItem}.
    */
-  public ProjectItem()
-  {
+  public ProjectItem() {
   }
 
   /**
@@ -52,18 +50,17 @@ public class ProjectItem
    * 
    * @return The include to return.
    */
-  public String getInclude()
-  {
+  public String getInclude() {
     return this.include;
   }
 
   /**
    * Sets the include.
    * 
-   * @param include The include to set.
+   * @param include
+   *          The include to set.
    */
-  public void setInclude(String include)
-  {
+  public void setInclude(String include) {
     this.include = include;
   }
 
