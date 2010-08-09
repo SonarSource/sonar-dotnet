@@ -46,6 +46,8 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.SelectorUtils;
 import org.codehaus.plexus.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -56,6 +58,9 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN Aug 14, 2009
  */
 public class VisualStudioUtils {
+  
+  private final static Logger log = LoggerFactory.getLogger(VisualStudioUtils.class);
+  
   public final static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
   public final static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
   public final static String VISUAL_PROJECT_NAME_PROPERTY = "visual.studio.project";
@@ -89,6 +94,9 @@ public class VisualStudioUtils {
       }
     } catch (IOException ex) {
       // This is false
+      if (log.isDebugEnabled()) {
+        log.debug(child + " is not in " + base, ex);
+      }
     }
     return false;
   }
@@ -355,34 +363,31 @@ public class VisualStudioUtils {
   public static VisualStudioProject getWebProject(File solutionRoot,
       File projectRoot, String projectName, String definition)
       throws DotNetProjectException, FileNotFoundException {
-    try {
-      // We define the namespace prefix for Visual Studio
-      VisualStudioProject project = new VisualStudioProject();
-      project.setName(projectName);
 
-      // Extracts the properties of a Visual Studio Project
-      String assemblyName = projectName;
-      String rootNamespace = "";
-      String debugOutput = extractSolutionProperty(
-          "Debug.AspNetCompiler.TargetPath", definition);
-      String releaseOutput = extractSolutionProperty(
-          "Release.AspNetCompiler.TargetPath", definition);
+    // We define the namespace prefix for Visual Studio
+    VisualStudioProject project = new VisualStudioProject();
+    project.setName(projectName);
 
-      // Assess if the artifact is a library or an executable
-      ArtifactType type = ArtifactType.WEB;
+    // Extracts the properties of a Visual Studio Project
+    String assemblyName = projectName;
+    String rootNamespace = "";
+    String debugOutput = extractSolutionProperty(
+        "Debug.AspNetCompiler.TargetPath", definition);
+    String releaseOutput = extractSolutionProperty(
+        "Release.AspNetCompiler.TargetPath", definition);
 
-      // The project is populated
-      project.setProjectFile(null); // No projet file
-      project.setType(ArtifactType.WEB);
-      project.setDirectory(projectRoot);
-      project.setAssemblyName(assemblyName);
-      project.setRootNamespace(rootNamespace);
-      project.setDebugOutputDir(new File(solutionRoot, debugOutput));
-      project.setReleaseOutputDir(new File(solutionRoot, releaseOutput));
-      return project;
-    } catch (Exception e) {
-      return null;
-    }
+    // Assess if the artifact is a library or an executable
+    ArtifactType type = ArtifactType.WEB;
+
+    // The project is populated
+    project.setProjectFile(null); // No projet file
+    project.setType(type);
+    project.setDirectory(projectRoot);
+    project.setAssemblyName(assemblyName);
+    project.setRootNamespace(rootNamespace);
+    project.setDebugOutputDir(new File(solutionRoot, debugOutput));
+    project.setReleaseOutputDir(new File(solutionRoot, releaseOutput));
+    return project;
   }
 
   /**
@@ -418,8 +423,6 @@ public class VisualStudioUtils {
     // We define the namespace prefix for Visual Studio
     xpath.setNamespaceContext(new VisualStudioNamespaceContext());
     try {
-      // XPathExpression filesExpression =
-      // xpath.compile("/vst:Project/vst:ItemGroup/vst:Compile/[fn:ends-with(@Include, '.cs')]");
       XPathExpression filesExpression = xpath
           .compile("/vst:Project/vst:ItemGroup/vst:Compile");
       InputSource inputSource = new InputSource(new FileInputStream(project));
@@ -435,8 +438,12 @@ public class VisualStudioUtils {
         }
       }
 
-    } catch (Exception exception) {
-      // Do nothing
+    } catch (XPathExpressionException exception) {
+      // Should not happen
+      log.error("xpath error", exception);
+    } catch (FileNotFoundException exception) {
+      // Should not happen
+      log.error("project file not found", exception);
     }
     return result;
   }
@@ -476,13 +483,19 @@ public class VisualStudioUtils {
      * @return
      */
     public String getNamespaceURI(String prefix) {
-      if (prefix == null)
-        throw new NullPointerException("Null prefix");
-      else if ("vst".equals(prefix))
-        return "http://schemas.microsoft.com/developer/msbuild/2003";
-      else if ("xml".equals(prefix))
-        return XMLConstants.XML_NS_URI;
-      return XMLConstants.NULL_NS_URI;
+      if (prefix == null) {
+        throw new RuntimeException("Null prefix");
+      }
+      
+      final String result;    
+      if ("vst".equals(prefix)) {
+        result = "http://schemas.microsoft.com/developer/msbuild/2003"; 
+      } else if ("xml".equals(prefix)) {
+        result = XMLConstants.XML_NS_URI;
+      } else {
+        result = XMLConstants.NULL_NS_URI;
+      }
+      return result;
     }
 
     // This method isn't necessary for XPath processing.
