@@ -24,18 +24,14 @@
 package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import net.sourceforge.pmd.util.StringUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -99,6 +95,9 @@ public class VisualStudioProject {
           StringUtils.removeStart(filePath, directoryPath), "\\");
       return folder;
     } catch (IOException e) {
+      if (log.isDebugEnabled()) {
+        log.debug("io exception with file "+file, e);
+      }
       return null;
     }
   }
@@ -328,9 +327,7 @@ public class VisualStudioProject {
     switch (type) {
     case EXECUTABLE:
       return "exe";
-    case LIBRARY:
-      return "dll";
-    case WEB:
+    case LIBRARY: case WEB:
       return "dll";
     }
     return null;
@@ -361,7 +358,7 @@ public class VisualStudioProject {
             SourceFile sourceFile = new SourceFile(this, file, folder, fileName);
             allFiles.put(file, sourceFile);
           } catch (IOException e) {
-            System.out.println("Bad file :" + filePath);
+            log.error("Bad file :" + filePath, e);
           }
         }
 
@@ -422,6 +419,9 @@ public class VisualStudioProject {
       currentFile = file.getCanonicalFile();
     } catch (IOException e) {
       // File not found
+      if (log.isDebugEnabled()) {
+        log.debug("file not found "+file, e);
+      }
       return null;
     }
     // We ensure the source files are loaded
@@ -454,7 +454,7 @@ public class VisualStudioProject {
       getSourceFiles();
       return sourceFiles.containsKey(currentFile);
     } catch (IOException e) {
-      // Nothing
+      log.debug("file error", e);
     }
 
     return false;
