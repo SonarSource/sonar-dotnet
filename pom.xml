@@ -12,14 +12,14 @@
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>parent</artifactId>
   <name>.Net code quality projects</name>
-  <version>0.3</version>
+  <version>0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>A Reactor Project for all the code quality relevant projects</description>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/parent-0.3</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/parent-0.3</developerConnection>
-    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/parent-0.3</url>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
