@@ -440,10 +440,10 @@ public class VisualStudioUtils {
 
     } catch (XPathExpressionException exception) {
       // Should not happen
-      log.error("xpath error", exception);
+      log.debug("xpath error", exception);
     } catch (FileNotFoundException exception) {
       // Should not happen
-      log.error("project file not found", exception);
+      log.debug("project file not found", exception);
     }
     return result;
   }

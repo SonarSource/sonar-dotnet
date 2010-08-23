@@ -28,12 +28,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * A visual studio solution model.
  * 
  * @author Jose CHILLAN Apr 16, 2009
  */
 public class VisualStudioSolution {
+  
+  private final static Logger log = LoggerFactory.getLogger(VisualStudioSolution.class);
+  
   private File solutionFile;
   private File solutionDir;
   private String name;
@@ -83,7 +89,7 @@ public class VisualStudioSolution {
         }
       }
     } catch (IOException e) {
-      // Nothing
+      log.debug("getProjectByLocation i/o exception", e);
     }
 
     return null;
