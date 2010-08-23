@@ -183,9 +183,8 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
     // Logs what is generated
     if (log.isDebugEnabled()) {
       log.debug("StyleCop configuration :");
-      if (solutionFile != null) {
-        log.debug(" - Solution file      : " + solutionFile);
-      }
+      log.debug(" - Solution file      : " + solutionFile);
+      
       if ((projectFiles != null) && (!projectFiles.isEmpty())) {
         log.debug(" - Project files      :  " + projectFiles);
       }

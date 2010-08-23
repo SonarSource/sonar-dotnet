@@ -28,9 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.plexus.util.cli.CommandLineException;
-import org.codehaus.plexus.util.cli.Commandline;
-
 import com.ibm.icu.util.StringTokenizer;
 
 /**
@@ -72,10 +69,6 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
    *            alias="${buildConfigurations}" default-value="Debug"
    */
   protected String buildConfigurations = "Debug";
-
-  static {
-
-  }
 
   /**
    * Gets the MSBuild.exe command, depending on the tool version.

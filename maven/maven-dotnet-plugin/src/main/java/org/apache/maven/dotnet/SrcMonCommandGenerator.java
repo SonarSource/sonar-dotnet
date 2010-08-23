@@ -45,7 +45,8 @@ import org.apache.maven.dotnet.metrics.xml.Command;
 import org.apache.maven.dotnet.metrics.xml.Configuration;
 import org.apache.maven.dotnet.metrics.xml.Export;
 import org.apache.maven.dotnet.metrics.xml.SourceSubdirectoryList;
-import org.apache.maven.plugin.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Generates the command file for SourceMonitor to be applied to a C# project or
@@ -54,7 +55,8 @@ import org.apache.maven.plugin.logging.Log;
  * @author Jose CHILLAN Apr 7, 2009
  */
 public class SrcMonCommandGenerator {
-  private Log logger;
+  
+  private final static Logger logger = LoggerFactory.getLogger(SrcMonCommandGenerator.class);
 
   private File workDirectory;
   /**
@@ -79,13 +81,13 @@ public class SrcMonCommandGenerator {
    * @throws Exception
    */
   public void launch() throws Exception {
-    logInfo("Launching Source Monitor on the project");
+    logger.info("Launching Source Monitor on the project");
 
     File commandFile = generateCommandFile();
 
     String[] cmdArray = new String[] { sourceMonitorPath, "/C",
         commandFile.getAbsolutePath() };
-    logDebug("Executing command: " + Arrays.toString(cmdArray));
+    logger.debug(("Executing command: " + Arrays.toString(cmdArray)));
     Process process = Runtime.getRuntime().exec(cmdArray, null, workDirectory);
 
     // We wait for the execution
@@ -129,13 +131,15 @@ public class SrcMonCommandGenerator {
           .newXMLGregorianCalendar(new GregorianCalendar());
       command.setCheckPointDate(calendar.toXMLFormat().substring(0, 19));
     } catch (DatatypeConfigurationException e) {
+      // should not happen
+      logger.debug("datat type error", e);
     }
 
-    logDebug("Code Metrics report :");
-    logDebug(" - OutputType Project File : " + projectFile);
-    logDebug(" - Source Directory        : " + sourcePath);
-    logDebug(" - Source Monitor path     : " + sourceMonitorPath);
-    logDebug(" - Generated report        : " + generatedFile);
+    logger.debug("Code Metrics report :");
+    logger.debug((" - OutputType Project File : " + projectFile));
+    logger.debug((" - Source Directory        : " + sourcePath));
+    logger.debug((" - Source Monitor path     : " + sourceMonitorPath));
+    logger.debug((" - Generated report        : " + generatedFile));
 
     SourceSubdirectoryList sourceSubdirectoryList = new SourceSubdirectoryList();
     sourceSubdirectoryList.setExcludeSubdirectories(true);
@@ -178,7 +182,7 @@ public class SrcMonCommandGenerator {
     File commandFile = new File(workDirectory, "source-monitor-command.xml");
     OutputStream stream = new FileOutputStream(commandFile);
     marshaller.marshal(configuration, stream);
-    logDebug("Source Monitor command file generated : " + commandFile);
+    logger.debug(("Source Monitor command file generated : " + commandFile));
     return commandFile;
   }
 
@@ -333,27 +337,6 @@ public class SrcMonCommandGenerator {
     this.projectFile = projectFile;
   }
 
-  /**
-   * Sets the logger.
-   * 
-   * @param logger
-   *          The logger to set.
-   */
-  public void setLogger(Log logger) {
-    this.logger = logger;
-  }
-
-  private void logDebug(String message) {
-    if (logger != null) {
-      logger.debug(message);
-    }
-  }
-
-  private void logInfo(String message) {
-    if (logger != null) {
-      logger.info(message);
-    }
-  }
 
   public List<String> getExcludedExtensions() {
     return this.excludedExtensions;

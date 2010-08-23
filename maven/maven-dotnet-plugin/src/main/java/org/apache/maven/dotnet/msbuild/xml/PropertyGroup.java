@@ -40,7 +40,7 @@ public class PropertyGroup {
   private String projectRoot;
 
   @XmlElement(name = "StyleCopRoot")
-  private String StyleCopRoot;
+  private String styleCopRoot;
 
   /**
    * Constructs a @link{PropertyGroup}.
@@ -73,7 +73,7 @@ public class PropertyGroup {
    * @return The styleCopRoot to return.
    */
   public String getStyleCopRoot() {
-    return this.StyleCopRoot;
+    return this.styleCopRoot;
   }
 
   /**
@@ -83,7 +83,7 @@ public class PropertyGroup {
    *          The styleCopRoot to set.
    */
   public void setStyleCopRoot(String styleCopRoot) {
-    StyleCopRoot = styleCopRoot;
+    this.styleCopRoot = styleCopRoot;
   }
 
 }
