@@ -52,7 +52,7 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
   private GendarmeRuleRepository rulesRepository;
 
   /**
-   * Constructs a @link{FxCopPluginHandler}.
+   * Constructs a @link{GendarmePluginHandler}.
    */
   public GendarmePluginHandler(RulesProfile rulesProfile,
       GendarmeRuleRepository gendarmeRulesRepository) {
@@ -69,7 +69,6 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
     try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
-      configureParameters(plugin);
       plugin.setParameter("gendarmeReportName", GENDARME_REPORT);
     } catch (IOException e) {
       throw new RuntimeException(e);
@@ -97,9 +96,5 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
       // Defines the configuration file
       plugin.setParameter("gendarmeConfigFile", configFile.getAbsolutePath());
     }
-  }
-
-  public void configureParameters(MavenPlugin plugin) {
-    // Nothing yet
   }
 }
