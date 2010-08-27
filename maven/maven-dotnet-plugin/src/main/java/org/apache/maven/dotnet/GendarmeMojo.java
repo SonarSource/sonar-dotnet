@@ -1,6 +1,7 @@
 package org.apache.maven.dotnet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.codehaus.plexus.util.FileUtils;
 
 /**
  * Generates a quality report for a .Net project or solution using mono gendarme
@@ -40,6 +42,15 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    * @parameter expression="${gendarme.directory}"
    */
   private File gendarmeDirectory;
+  
+  /**
+   * Location of the dotnet mscorlib.dll file to use when 
+   * analyzing projects with Gendarme. Useful for silverlight 
+   * and compact framework projects. Not needed for standard
+   * dotnet projects.
+   * @parameter expression="${dotnet.mscorlib.dll.file}"
+   */
+  private File mscorlibDllFile;
 
   /**
    * Name of the mono gendarme command line executable.
@@ -70,6 +81,9 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    */
   private boolean verbose;
 
+  /**
+   * The gendarme.exe file 
+   */
   private File executableFile;
 
   /**
@@ -130,6 +144,23 @@ public class GendarmeMojo extends AbstractDotNetMojo {
       log.info("No assembly to check with Gendarme");
       return;
     }
+    
+    if (mscorlibDllFile!=null) {
+      // mscorlib.dll need to be in the same directory
+      // of one of the analyzed assemblies. We take
+      // the first one of the list
+      File destinationDirectory 
+        = assemblies.get(0).getParentFile();
+      try {
+        FileUtils.copyFileToDirectory(mscorlibDllFile, destinationDirectory);
+      } catch (IOException e) {
+        log.error(e);
+        throw new MojoFailureException(
+            "Cannot copy custom mscorlib.dll file to " + destinationDirectory
+           );
+      }
+    }
+    
 
     // We retrieve the required files
     prepareExecutable();
@@ -166,13 +197,13 @@ public class GendarmeMojo extends AbstractDotNetMojo {
   }
 
   /**
-   * Prepares the FxCop executable.
+   * Prepares the Gendarme executable.
    * 
    * @throws MojoExecutionException
    */
   private void prepareExecutable() throws MojoExecutionException {
     if (gendarmeDirectory == null) {
-      gendarmeDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "FxCop");
+      gendarmeDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "Gendarme");
     }
     executableFile = new File(gendarmeDirectory, gendarmeExecutable);
   }

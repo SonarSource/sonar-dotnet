@@ -721,7 +721,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   }
 
   /**
-   * Gets the currenet class loader
+   * Gets the current class loader
    * 
    * @return
    */
