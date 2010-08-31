@@ -52,10 +52,18 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
    *            default-value="C:/WINDOWS/Microsoft.NET/Framework/v3.5"
    */
   private String dotnet_3_5_sdk_directory;
+  
+  /**
+   * Installation directory of the .Net SDK 4.0
+   * 
+   * @parameter expression="${dotnet.4.0.sdk.directory}"
+   *            default-value="C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319"
+   */
+  private String dotnet_4_0_sdk_directory;
 
   /**
    * Version of the MSBuild tool to use, which is the installed version of the
-   * SDK. Possible values are 2.0 and 3.5.
+   * SDK. Possible values are 2.0, 3.5 and 4.0.
    * 
    * @parameter expression="${dotnet.tool.version}" default-value="3.5"
    */
@@ -81,10 +89,12 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
     // This may depend on the version in the future
     String commandName = "MSBuild.exe";
     File executable;
-    if ("3.5".equals(toolVersion)) {
-      executable = new File(dotnet_3_5_sdk_directory, commandName);
-    } else {
+    if ("2.0".equals(toolVersion)) {
       executable = new File(dotnet_2_0_sdk_directory, commandName);
+    } else if ("4.0".equals(toolVersion)) {
+      executable = new File(dotnet_4_0_sdk_directory, commandName);
+    } else {
+      executable = new File(dotnet_3_5_sdk_directory, commandName);
     }
 
     if (!executable.exists()) {
@@ -92,7 +102,8 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
           "Could not find the MSBuild executable for the version "
               + toolVersion
               + ". Please "
-              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.directory' or 'dotnet.3.5.sdk.directory'");
+              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.directory' " 
+              + "or 'dotnet.3.5.sdk.directory' or 'dotnet.4.0.sdk.directory'");
     }
     return executable;
   }
