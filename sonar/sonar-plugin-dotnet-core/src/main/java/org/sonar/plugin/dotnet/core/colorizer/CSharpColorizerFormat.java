@@ -20,20 +20,21 @@ public class CSharpColorizerFormat extends CodeColorizerFormat {
 
   static {
     keywords = new HashSet<String>();
-    keywords.addAll(Arrays.asList(new String[] { "abstract", "add", "as",
-        "ascending", "base", "bool", "break", "by", "byte", "case", "catch",
-        "char", "checked", "class", "const", "continue", "decimal", "default",
-        "delegate", "do", "double", "descending", "else", "enum", "event",
-        "explicit", "extern", "false", "finally", "fixed", "from", "float",
-        "for", "foreach", "get", "group", "goto", "if", "implicit", "in",
-        "int", "into", "interface", "internal", "is", "lock", "long", "join",
-        "let", "namespace", "new", "null", "object", "operator", "orderby",
-        "out", "override", "params", "partial", "private", "protected",
-        "public", "readonly", "ref", "remove", "return", "sbyte", "sealed",
-        "select", "set", "short", "sizeof", "stackalloc", "static", "string",
-        "struct", "switch", "this", "throw", "true", "try", "typeof", "uint",
-        "ulong", "unchecked", "unsafe", "ushort", "using", "value", "virtual",
-        "void", "volatile", "where", "while", "yield" }));
+    keywords.addAll(Arrays.asList(new String[] { "abstract", "add", "alias",
+        "as", "ascending", "base", "bool", "break", "by", "byte", "case",
+        "catch", "char", "checked", "class", "const", "continue", "decimal",
+        "default", "delegate", "descending", "do", "double", "dynamic", "else",
+        "enum", "equals", "event", "explicit", "extern", "false", "finally",
+        "fixed", "float", "for", "foreach", "from", "get", "global", "goto",
+        "group", "if", "implicit", "in", "int", "interface", "internal",
+        "into", "is", "join", "let", "lock", "long", "namespace", "new",
+        "null", "object", "on", "operator", "orderby", "out", "override",
+        "params", "partial", "private", "protected", "public", "readonly",
+        "ref", "remove", "return", "sbyte", "sealed", "select", "set", "short",
+        "sizeof", "stackalloc", "static", "string", "struct", "switch", "this",
+        "throw", "true", "try", "typeof", "uint", "ulong", "unchecked",
+        "unsafe", "ushort", "using", "value", "var", "virtual", "void",
+        "volatile", "where", "while", "yield" }));
   }
 
   public CSharpColorizerFormat() {
