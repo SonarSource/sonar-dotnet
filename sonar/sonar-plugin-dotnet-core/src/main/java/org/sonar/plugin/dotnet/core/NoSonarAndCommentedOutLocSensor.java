@@ -33,6 +33,7 @@ import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.recognizer.CamelCaseDetector;
@@ -49,15 +50,13 @@ import org.sonar.squid.text.Source;
 public class NoSonarAndCommentedOutLocSensor implements Sensor {
 
   private final NoSonarFilter noSonarFilter;
-  private final CSharp cSharp;
 
-  public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter, CSharp cSharp) {
+  public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter) {
     this.noSonarFilter = noSonarFilter;
-    this.cSharp = cSharp;
   }
 
   public void analyse(Project prj, SensorContext context) {
-    List<File> srcFiles = prj.getFileSystem().getSourceFiles(cSharp);
+    List<File> srcFiles = VisualUtils.getCsFiles(prj);
     for (File srcFile : srcFiles) {
       CSharpFile cSharpFile = CSharpFile.from(prj, srcFile, false);
       Source source = analyseSourceCode(srcFile);

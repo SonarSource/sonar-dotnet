@@ -53,6 +53,7 @@ public class CSharpPlugin implements Plugin {
     extensions.add(CSharpColorizerFormat.class);
     extensions.add(CSharp.class);
     extensions.add(CSharpSourceImporter.class);
+    extensions.add(NoSonarAndCommentedOutLocSensor.class);
     return extensions;
   }
 

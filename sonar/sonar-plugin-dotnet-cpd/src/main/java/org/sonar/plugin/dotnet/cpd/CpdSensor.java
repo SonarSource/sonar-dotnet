@@ -118,33 +118,10 @@ public class CpdSensor implements Sensor {
     ;
     CPD cpd = new CPD(minTokens, new CsLanguage());
     cpd.setEncoding(encoding.name());
-    cpd.add(getCsFiles(project));
+    cpd.add(VisualUtils.getCsFiles(project));
     return cpd;
   }
 
-  private List<File> getCsFiles(Project project) throws DotNetProjectException {
-
-    VisualStudioSolution solution = VisualUtils.getSolution(project);
-    List<VisualStudioProject> projects = solution.getProjects();
-    FilenameFilter filter = new CsLanguage().getFileFilter();
-
-    List<File> csFiles = new ArrayList<File>();
-
-    for (VisualStudioProject visualStudioProject : projects) {
-      if (visualStudioProject.isTest()) {
-        log.debug("skipping test project " + visualStudioProject.getName());
-      } else {
-        Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
-        for (SourceFile sourceFile : sources) {
-          if (filter.accept(sourceFile.getFile().getParentFile(),
-              sourceFile.getName())) {
-            csFiles.add(sourceFile.getFile());
-          }
-        }
-      }
-    }
-    return csFiles;
-  }
 
   public String toString() {
 

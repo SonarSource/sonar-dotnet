@@ -24,11 +24,24 @@
  */
 package org.sonar.plugin.dotnet.core.project;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import net.sourceforge.pmd.cpd.CsLanguage;
+
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
+import org.apache.maven.dotnet.commons.project.SourceFile;
+import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
+import org.sonar.api.utils.SonarException;
 
 /**
  * Utility classes for Visual Studio projects associated to Maven projects.
@@ -36,6 +49,9 @@ import org.sonar.api.resources.Project;
  * @author Jose CHILLAN May 14, 2009
  */
 public final class VisualUtils {
+  
+  private final static Logger log = LoggerFactory.getLogger(VisualUtils.class);
+  
   /**
    * Extracts a visual studio solution if the project is a valid solution.
    * 
@@ -50,4 +66,41 @@ public final class VisualUtils {
     MavenProject mavenProject = project.getPom();
     return VisualStudioUtils.getVisualSolution(mavenProject, (String) null);
   }
+  
+  /**
+   * Search all cs files included in the VS solution corresponding to the 
+   * sonar project object argument.
+   * @param project
+   * @return
+   * @throws DotNetProjectException
+   */
+  public static List<File> getCsFiles(Project project) {
+
+    VisualStudioSolution solution;
+    try {
+      solution = VisualUtils.getSolution(project);
+    } catch (DotNetProjectException e) {
+      throw new SonarException(e);
+    }
+    List<VisualStudioProject> projects = solution.getProjects();
+    FilenameFilter filter = new CsLanguage().getFileFilter();
+
+    List<File> csFiles = new ArrayList<File>();
+
+    for (VisualStudioProject visualStudioProject : projects) {
+      if (visualStudioProject.isTest()) {
+        log.debug("skipping test project " + visualStudioProject.getName());
+      } else {
+        Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
+        for (SourceFile sourceFile : sources) {
+          if (filter.accept(sourceFile.getFile().getParentFile(),
+              sourceFile.getName())) {
+            csFiles.add(sourceFile.getFile());
+          }
+        }
+      }
+    }
+    return csFiles;
+  }
+  
 }
