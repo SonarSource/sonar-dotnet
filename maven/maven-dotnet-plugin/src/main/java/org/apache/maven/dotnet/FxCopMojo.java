@@ -39,10 +39,9 @@ import org.apache.maven.plugin.logging.Log;
  * @description generates a FxCop report on a .Net project or solution
  * @author Jose CHILLAN Apr 9, 2009
  */
-public class FxCopMojo extends AbstractDotNetMojo {
+public class FxCopMojo extends AbstractCilRuleBasedMojo {
 
   public final static String DEFAULT_FX_COP_PROJECT = "default-rules.fxcop";
-  public final static String DEFAULT_FX_COP_REPORT_NAME = "fxcop-report.xml";
 
   /**
    * Name of the resource folder that contains the FxCop runtime
@@ -72,21 +71,22 @@ public class FxCopMojo extends AbstractDotNetMojo {
    * 
    * @parameter alias="${fxCopConfigFile}"
    */
-  File fxCopConfigFile;
+  private File fxCopConfigFile;
 
   /**
    * Name of the FxCop report file
    * 
    * @parameter alias="${fxCopReportName}" default-value="fxcop-report.xml"
    */
-  private String fxCopReportName = DEFAULT_FX_COP_REPORT_NAME;
-
+  private String fxCopReportName;
+  
   /**
-   * Enable/disable the verbose mode for FxCop
+   * Name of the FxCop report file for the silverlight projects
    * 
-   * @parameter expression="${verbose}"
+   * @parameter alias="${silverlightFxCopReportName}" default-value="silverlight-fxcop-report.xml"
    */
-  private boolean verbose;
+  private String silverlightFxCopReportName;
+
 
   /**
    * Enable/disable the ignore generated code option
@@ -112,8 +112,13 @@ public class FxCopMojo extends AbstractDotNetMojo {
   @Override
   protected void executeSolution(VisualStudioSolution solution)
       throws MojoFailureException, MojoExecutionException {
-    List<File> checkedAssemblies = extractAssemblies(solution);
-    launchReport(checkedAssemblies);
+    
+    if (solution.isSilverlightUsed()) {
+      List<File> slCheckedAssemblies = extractSilverlightAssemblies(solution);
+      launchReport(slCheckedAssemblies, true);
+    }
+    List<File> checkedAssemblies = extractNonSilverlightAssemblies(solution);
+    launchReport(checkedAssemblies, false);
   }
 
   /**
@@ -139,7 +144,7 @@ public class FxCopMojo extends AbstractDotNetMojo {
       throw new MojoFailureException(
           "Cannot find the generated assembly to launch FxCop " + assembly);
     }
-    launchReport(Collections.singletonList(assembly));
+    launchReport(Collections.singletonList(assembly), visualProject.isSilverlightProject());
   }
 
   /**
@@ -152,7 +157,7 @@ public class FxCopMojo extends AbstractDotNetMojo {
    * @throws MojoFailureException
    *           in case of execution failure
    */
-  protected void launchReport(List<File> assemblies)
+  private void launchReport(List<File> assemblies, boolean silverlightUsed)
       throws MojoExecutionException, MojoFailureException {
     Log log = getLog();
     if (assemblies.isEmpty()) {
@@ -163,10 +168,22 @@ public class FxCopMojo extends AbstractDotNetMojo {
     log.info("Launching FxCop report for " + project.getName());
     // We retrieve the required files
     prepareExecutable();
-    File reportFile = getReportFile(fxCopReportName, DEFAULT_FX_COP_REPORT_NAME);
-
+    
+    
     // We build the command arguments
     List<String> commandArguments = new ArrayList<String>();
+    
+    // things are a little bit different for silverlight
+    final File reportFile;
+    if (silverlightUsed) {
+      reportFile = getReportFile(silverlightFxCopReportName);
+      final File silverlightMscorlibLocation = getSilverlightMscorlibLocation();
+      commandArguments.add("/d:" + toCommandPath(silverlightMscorlibLocation));
+    } else {
+      reportFile = getReportFile(fxCopReportName);
+    }
+
+    
 
     // We define the project file
     log.debug("- Project file : " + fxCopConfigFile);

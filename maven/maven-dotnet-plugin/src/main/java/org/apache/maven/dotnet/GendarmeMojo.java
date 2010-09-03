@@ -23,9 +23,9 @@ import org.codehaus.plexus.util.FileUtils;
  * @author Alexandre Victoor
  * 
  */
-public class GendarmeMojo extends AbstractDotNetMojo {
+public class GendarmeMojo extends AbstractCilRuleBasedMojo {
 
-  public final static String DEFAULT_GENDARME_REPORT_NAME = "gendarme-report.xml";
+  private static final String MSCORLIB_DLL = "mscorlib.dll";
 
   /**
    * Name of the resource folder that contains the mono gendarme runtime
@@ -42,15 +42,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    * @parameter expression="${gendarme.directory}"
    */
   private File gendarmeDirectory;
-  
-  /**
-   * Location of the dotnet mscorlib.dll file to use when 
-   * analyzing projects with Gendarme. Useful for silverlight 
-   * and compact framework projects. Not needed for standard
-   * dotnet projects.
-   * @parameter expression="${dotnet.mscorlib.dll.file}"
-   */
-  private File mscorlibDllFile;
+
 
   /**
    * Name of the mono gendarme command line executable.
@@ -65,7 +57,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    * @parameter alias="${gendarmeReportName}"
    *            default-value="gendarme-report.xml"
    */
-  private String gendarmeReportName = DEFAULT_GENDARME_REPORT_NAME;
+  private String gendarmeReportName;
 
   /**
    * Path to the gendarme config file that specifies rule settings
@@ -74,12 +66,6 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    */
   private String gendarmeConfigFile;
 
-  /**
-   * Enable/disable the verbose mode for gendarme
-   * 
-   * @parameter expression="${verbose}"
-   */
-  private boolean verbose;
 
   /**
    * The gendarme.exe file 
@@ -98,7 +84,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
   protected void executeSolution(VisualStudioSolution solution)
       throws MojoFailureException, MojoExecutionException {
     List<File> checkedAssemblies = extractAssemblies(solution);
-    launchReport(checkedAssemblies);
+    launchReport(checkedAssemblies, solution.isSilverlightUsed());
   }
 
   /**
@@ -124,7 +110,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
       throw new MojoFailureException(
           "Cannot find the generated assembly to launch gendarme " + assembly);
     }
-    launchReport(Collections.singletonList(assembly));
+    launchReport(Collections.singletonList(assembly), visualProject.isSilverlightProject());
   }
 
   /**
@@ -132,27 +118,32 @@ public class GendarmeMojo extends AbstractDotNetMojo {
    * 
    * @param assemblies
    *          the assemblies to check
+   * @param silverlightUsed
+   *          flag that indicates if silverlight is used in one of the assemblies
    * @throws MojoExecutionException
    *           if an execution problem occurred
    * @throws MojoFailureException
    *           in case of execution failure
    */
-  protected void launchReport(List<File> assemblies)
+  private void launchReport(List<File> assemblies, boolean silverlightUsed)
       throws MojoExecutionException, MojoFailureException {
-    Log log = getLog();
+    final Log log = getLog();
     if (assemblies.isEmpty()) {
       log.info("No assembly to check with Gendarme");
       return;
     }
     
-    if (mscorlibDllFile!=null) {
+    if (silverlightUsed) {
       // mscorlib.dll need to be in the same directory
       // of one of the analyzed assemblies. We take
       // the first one of the list
-      File destinationDirectory 
+      final File destinationDirectory 
         = assemblies.get(0).getParentFile();
+      final File silverlightMscorlibLocation = getSilverlightMscorlibLocation();
+      
       try {
-        FileUtils.copyFileToDirectory(mscorlibDllFile, destinationDirectory);
+        File mscorlibFile = new File(silverlightMscorlibLocation, MSCORLIB_DLL);
+        FileUtils.copyFileToDirectory(mscorlibFile, destinationDirectory);
       } catch (IOException e) {
         log.error(e);
         throw new MojoFailureException(
@@ -165,8 +156,7 @@ public class GendarmeMojo extends AbstractDotNetMojo {
     // We retrieve the required files
     prepareExecutable();
 
-    File reportFile = getReportFile(gendarmeReportName,
-        DEFAULT_GENDARME_REPORT_NAME);
+    File reportFile = getReportFile(gendarmeReportName);
 
     // We build the command arguments
     List<String> commandArguments = new ArrayList<String>();
@@ -194,6 +184,12 @@ public class GendarmeMojo extends AbstractDotNetMojo {
 
     launchCommand(executableFile, commandArguments, "gendarme", 1, true);
     log.info("gendarme report generated");
+    
+    // clean up needed
+    if (silverlightUsed) {
+      File destinationDirectory = assemblies.get(0).getParentFile();
+      new File(destinationDirectory, MSCORLIB_DLL).delete();
+    }
   }
 
   /**
