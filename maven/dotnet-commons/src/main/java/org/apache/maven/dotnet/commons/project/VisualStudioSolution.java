@@ -26,6 +26,7 @@ package org.apache.maven.dotnet.commons.project;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -164,6 +165,21 @@ public class VisualStudioSolution {
     }
     return result;
   }
+  
+  /**
+   * Iterate through all the projects off the solution 
+   * seeking for silverlight applications
+   * @return  true if a silverlight application is found
+   */
+  public boolean isSilverlightUsed() {
+    final Iterator<VisualStudioProject> projectIterator = projects.iterator();
+    boolean silverlightFound = false;
+    while (projectIterator.hasNext() && !silverlightFound) {
+      silverlightFound = projectIterator.next().isSilverlightProject();
+    }
+    return silverlightFound;
+  }
+  
 
   @Override
   public String toString() {

@@ -320,6 +320,9 @@ public class VisualStudioUtils {
           .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Debug')]/vst:OutputPath");
       XPathExpression releaseOutputExpression = xpath
           .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
+      XPathExpression silverlightExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
+      
       VisualStudioProject project = new VisualStudioProject();
       project.setProjectFile(projectFile);
       project.setName(projectName);
@@ -327,6 +330,8 @@ public class VisualStudioUtils {
 
       // Extracts the properties of a Visual Studio Project
       String typeStr = extractProjectProperty(projectTypeExpression,
+          projectFile);
+      String silverlightStr = extractProjectProperty(silverlightExpression,
           projectFile);
       String assemblyName = extractProjectProperty(assemblyNameExpression,
           projectFile);
@@ -350,6 +355,11 @@ public class VisualStudioUtils {
       project.setRootNamespace(rootNamespace);
       project.setDebugOutputDir(new File(projectDir, debugOutput));
       project.setReleaseOutputDir(new File(projectDir, releaseOutput));
+      
+      if (Boolean.parseBoolean(silverlightStr)) {
+        project.setSilverlightProject(true);
+      }
+      
       return project;
     } catch (XPathExpressionException xpee) {
       throw new DotNetProjectException("Error while processing the project "

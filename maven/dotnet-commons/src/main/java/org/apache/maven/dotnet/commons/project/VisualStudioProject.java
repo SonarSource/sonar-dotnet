@@ -55,6 +55,7 @@ public class VisualStudioProject {
   private File releaseOutputDir;
   private File directory;
   private boolean test;
+  private boolean silverlightProject;
   private Map<File, SourceFile> sourceFiles;
 
   /**
@@ -521,6 +522,20 @@ public class VisualStudioProject {
           + "bin";
     }
     return new File(precompilationPath);
+  }
+
+  /**
+   * @param silverlightProject true if it is a silverlight project
+   */
+  public void setSilverlightProject(boolean silverlightProject) {
+    this.silverlightProject = silverlightProject;
+  }
+
+  /**
+   * @return true if it is a silverlight project
+   */
+  public boolean isSilverlightProject() {
+    return silverlightProject;
   }
 
 }
