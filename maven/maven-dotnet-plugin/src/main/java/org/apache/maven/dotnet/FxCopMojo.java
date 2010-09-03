@@ -82,20 +82,6 @@ public class FxCopMojo extends AbstractDotNetMojo {
   private String fxCopReportName = DEFAULT_FX_COP_REPORT_NAME;
 
   /**
-   * A set of dll name patterns to include in the analysis
-   * 
-   * @parameter alias="includes"
-   */
-  private String[] includes = { "target/Debug/**/*.dll" };
-
-  /**
-   * A set of dll name patterns to exclude from the analysis
-   * 
-   * @parameter alias="excludes"
-   */
-  private String[] excludes = { "**/obj/**/*" };
-
-  /**
    * Enable/disable the verbose mode for FxCop
    * 
    * @parameter expression="${verbose}"
