@@ -26,6 +26,8 @@ package org.sonar.plugin.dotnet.fxcop;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.maven.MavenPlugin;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
@@ -37,8 +39,10 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * @author Jose CHILLAN May 7, 2009
  */
 public class FxCopPluginHandler extends AbstractDotNetMavenPluginHandler {
+  
+  private final static Logger log = LoggerFactory.getLogger(FxCopPluginHandler.class);
+      
   private static final String FX_COP_FILE = "sonar.FxCop";
-  private static final String FX_COP_REPORT = "fxcop-report.xml";
 
   private RulesProfile rulesProfile;
   private FxCopRuleRepository rulesRepository;
@@ -61,9 +65,8 @@ public class FxCopPluginHandler extends AbstractDotNetMavenPluginHandler {
     try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
-      configureParameters(plugin);
-      plugin.setParameter("fxCopReportName", FX_COP_REPORT);
     } catch (IOException e) {
+      log.error("Error while generating fxcop conf file", e);
     }
   }
 
@@ -83,8 +86,5 @@ public class FxCopPluginHandler extends AbstractDotNetMavenPluginHandler {
     // Defines the configuration file
     plugin.setParameter("fxCopConfigFile", configFile.getAbsolutePath());
   }
-
-  public void configureParameters(MavenPlugin plugin) {
-    // Nothing yet
-  }
+  
 }

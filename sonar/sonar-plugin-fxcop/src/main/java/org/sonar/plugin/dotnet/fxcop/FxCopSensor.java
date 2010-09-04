@@ -57,8 +57,10 @@ public class FxCopSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(FxCopSensor.class);
 
   private static final String FXCOP_REPORT_XML = "fxcop-report.xml";
+  private static final String SL_FXCOP_REPORT_XML = "silverlight-fxcop-report.xml";
   private static final String FXCOP_TRANSFO_XSL = "fxcop-transformation.xsl";
   private static final String FXCOP_PROCESSED_REPORT_XML = "fxcop-report-processed.xml";
+  private static final String SL_FXCOP_PROCESSED_REPORT_XML = "silverlight-fxcop-report-processed.xml";
 
   private RulesManager rulesManager;
   private RulesProfile profile;
@@ -85,24 +87,40 @@ public class FxCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File report = findReport(project, FXCOP_REPORT_XML);
     File dir = getReportsDirectory(project);
+    File report = new File(dir, FXCOP_REPORT_XML);
+    File silverlightReport = new File(dir, SL_FXCOP_REPORT_XML);
+    
+    FxCopResultParser parser 
+      = new FxCopResultParser(project, context, rulesManager, profile);
+    
+    parseReport(report, FXCOP_PROCESSED_REPORT_XML, parser, dir);
+    
+    if (silverlightReport.exists()) {
+      log.info("FxCop Silverlight found");
+      parseReport(silverlightReport, SL_FXCOP_PROCESSED_REPORT_XML, parser, dir);
+    } else {
+      log.info("No FxCop Silverlight found");
+    }
+    
+    
+  }
 
+  private void parseReport(File report, String fxcopProcessedReportXml, FxCopResultParser parser, File workDirectory) { 
     // We generate the transformer
-    File transformedReport = transformReport(report, dir);
+    File transformedReport = transformReport(report, workDirectory, FXCOP_PROCESSED_REPORT_XML);
     if (transformedReport == null) {
       return;
     }
-    FxCopResultParser parser = new FxCopResultParser(project, context,
-        rulesManager, profile);
     try {
       URL fileURL = transformedReport.toURI().toURL();
       parser.parse(fileURL);
     } catch (MalformedURLException e) {
-      log.debug("Error while loading the file: {}\n{}", report, e);
+      log.error("Error while loading the file: {}\n{}", report, e);
     } catch (InvalidResourceException ex) {
-      log.warn("C# file not referenced in the solution", ex);
+      log.error("C# file not referenced in the solution", ex);
     }
+    
   }
 
   /**
@@ -112,7 +130,7 @@ public class FxCopSensor extends AbstractDotnetSensor {
    * @param dir
    * @return
    */
-  private File transformReport(File report, File dir) {
+  private File transformReport(File report, File dir, String targetFileName) {
     try {
       ClassLoader contextClassLoader = Thread.currentThread()
           .getContextClassLoader();
@@ -126,13 +144,13 @@ public class FxCopSensor extends AbstractDotnetSensor {
       // We open the report to be processed
       Source xmlSource = new StreamSource(report);
 
-      File processedReport = new File(dir, FXCOP_PROCESSED_REPORT_XML);
+      File processedReport = new File(dir, targetFileName);
       processedReport.delete();
       Result result = new StreamResult(processedReport);
       transformer.transform(xmlSource, result);
       return processedReport;
     } catch (Exception exc) {
-      log.warn("Error during the processing of the FxCop report for Sonar", exc);
+      log.error("Error during the processing of the FxCop report for Sonar", exc);
     }
     return null;
   }
