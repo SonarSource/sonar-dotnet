@@ -31,7 +31,7 @@ import java.util.List;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers;
 import org.slf4j.LoggerFactory;
@@ -39,46 +39,58 @@ import org.hamcrest.CoreMatchers;
 
 /**
  * Tests for visual studio utilities.
+ * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class TestVisualStudioUtils
-{
-  private final static org.slf4j.Logger log = LoggerFactory.getLogger(TestVisualStudioUtils.class);
+public class TestVisualStudioUtils {
+  private final static org.slf4j.Logger log = LoggerFactory
+      .getLogger(TestVisualStudioUtils.class);
   /**
    * PROJECT_CORE_PATH
    */
   private static final String PROJECT_CORE_PATH = "target/test-classes/solution/Example/Example.Core/Example.Core.csproj";
   private static final String SAMPLE_FILE_PATH = "target/test-classes/solution/Example/Example.Core/Model/SubType.cs";
 
+  private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
+
   @Test
-  public void testReadFiles()
-  {
+  public void testReadFiles() {
     File file = new File(PROJECT_CORE_PATH);
-    System.out.println("File : " + file.getAbsolutePath() + ", exists: " + file.exists());
+    System.out.println("File : " + file.getAbsolutePath() + ", exists: "
+        + file.exists());
     List<String> files = VisualStudioUtils.getFilesPath(file);
     log.debug("Files : " + files);
-    Assert.assertEquals("Bad number of files extracted", 6, files.size());
-  }
-  
-  @Test
-  public void testProjecFiles() throws Exception
-  {
-    File file = new File(PROJECT_CORE_PATH);
-    VisualStudioProject project = VisualStudioUtils.getProject(file);
-    Assert.assertNotNull("Could not retrieve a project ", project);
-    Collection<SourceFile> sourceFiles = project.getSourceFiles();
-    log.debug("Sources : " + sourceFiles);
-    Assert.assertEquals("Bad number of files extracted", 6, sourceFiles.size());
+    assertEquals("Bad number of files extracted", 7, files.size());
   }
 
   @Test
-  public void testProjectFolder() throws Exception
-  {
+  public void testProjecFiles() throws Exception {
+    File file = new File(PROJECT_CORE_PATH);
+    VisualStudioProject project = VisualStudioUtils.getProject(file);
+    assertNotNull("Could not retrieve a project ", project);
+    Collection<SourceFile> sourceFiles = project.getSourceFiles();
+    log.debug("Sources : " + sourceFiles);
+    assertEquals("Bad number of files extracted", 7, sourceFiles.size());
+  }
+
+  @Test
+  public void testProjectFolder() throws Exception {
     File projectFile = new File(PROJECT_CORE_PATH);
     VisualStudioProject project = VisualStudioUtils.getProject(projectFile);
     File sourceFile = new File(SAMPLE_FILE_PATH);
     String relativePath = project.getRelativePath(sourceFile);
-    Assert.assertThat("Invalid relative path", relativePath, CoreMatchers.is(JUnitMatchers.containsString("Model" + File.separator + "SubType.cs")));
+    assertThat(
+        "Invalid relative path",
+        relativePath,
+        CoreMatchers.is(JUnitMatchers.containsString("Model" + File.separator
+            + "SubType.cs")));
+  }
+
+  @Test
+  public void testSilverlightProjecFiles() throws Exception {
+    File file = new File(SILVERLIGHT_PROJECT_PATH);
+    VisualStudioProject project = VisualStudioUtils.getProject(file);
+    assertTrue(project.isSilverlightProject());
   }
 
 }
