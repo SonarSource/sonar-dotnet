@@ -8,6 +8,12 @@ import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoFailureException;
 
+/**
+ * Support class for rule based tools that analyze compiled assemblies.
+ * 
+ * @author Alexandre Victoor
+ *
+ */
 public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
 
   /**
@@ -30,7 +36,7 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
    * Version of Silverlight used in the analysed solution Possible values are 3
    * and 4
    * 
-   * @parameter expression="${dotnet.tool.version}" default-value="4"
+   * @parameter expression="${silverlight.version}" default-value="4"
    */
   protected String silverlightVersion;
 
