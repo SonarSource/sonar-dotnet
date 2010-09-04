@@ -32,6 +32,7 @@ import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.matchers.JUnitMatchers;
 import org.slf4j.LoggerFactory;
@@ -60,7 +61,7 @@ public class TestVisualStudioUtils {
         + file.exists());
     List<String> files = VisualStudioUtils.getFilesPath(file);
     log.debug("Files : " + files);
-    assertEquals("Bad number of files extracted", 7, files.size());
+    assertEquals("Bad number of files extracted", 6, files.size());
   }
 
   @Test
@@ -70,7 +71,7 @@ public class TestVisualStudioUtils {
     assertNotNull("Could not retrieve a project ", project);
     Collection<SourceFile> sourceFiles = project.getSourceFiles();
     log.debug("Sources : " + sourceFiles);
-    assertEquals("Bad number of files extracted", 7, sourceFiles.size());
+    assertEquals("Bad number of files extracted", 6, sourceFiles.size());
   }
 
   @Test
