@@ -22,10 +22,16 @@ package org.sonar.plugin.dotnet.core;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
@@ -49,6 +55,8 @@ import org.sonar.squid.text.Source;
 // The NoSonarFilter must be fed before launching the violation engines
 public class NoSonarAndCommentedOutLocSensor implements Sensor {
 
+	private final static Logger log = LoggerFactory.getLogger(NoSonarAndCommentedOutLocSensor.class);
+	
 	private final NoSonarFilter noSonarFilter;
 
 	public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter) {
@@ -60,27 +68,57 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
 		for (File srcFile : srcFiles) {
 			CSharpFile cSharpFile = CSharpFile.from(prj, srcFile, false);
 			Source source = analyseSourceCode(srcFile);
-			noSonarFilter.addResource(cSharpFile, source.getNoSonarTagLines());
-			context.saveMeasure(
+			if (source!=null) {
+				// TODO HACK for SONARPLUGINS-662
+				noSonarFilter.addResource(cSharpFile, source.getNoSonarTagLines());
+				context.saveMeasure(
 					cSharpFile, 
 					CoreMetrics.COMMENTED_OUT_CODE_LINES,
 			    (double) source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES)
 			  );
+			}
 		}
 	}
+	
+	private boolean containEscapedString(File file) {
+		List<String> lines;
+    try {
+    	boolean result = false;
+	    lines = FileUtils.readLines(file);
+	    final Iterator<String> lineIterator = lines.iterator();
+	    while (lineIterator.hasNext() && !result) {
+	      String line = (String) lineIterator.next();
+	      result = StringUtils.contains(StringUtils.substringAfter(line, "@\""),"\"");
+      }
+			return false;
+    } catch (IOException e) {
+    	throw new SonarException("Unable to read file '" + file.getAbsolutePath()
+			    + "'", e);
+    }
+		
+	}
+	
 
 	protected static Source analyseSourceCode(File file) {
+		Source result = null;
 		try {
-			return new Source(
+			
+			result = new Source(
 					new FileReader(file), 
 					new CodeRecognizer(0.9, new CSharpLanguageFootprint()), 
 					"#region", 
-					"#endregion"
+					"#endregion",
+					"@\""
 				);
 		} catch (FileNotFoundException e) {
 			throw new SonarException("Unable to open file '" + file.getAbsolutePath()
 			    + "'", e);
+		} catch (RuntimeException rEx) {
+			// TODO HACK for SONARPLUGINS-662
+			log.error("error while parsing file '" + file.getAbsolutePath()
+			    + "'", rEx);
 		}
+		return result;
 	}
 
 	@Override

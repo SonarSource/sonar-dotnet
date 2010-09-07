@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.text.Source;
@@ -48,5 +49,18 @@ public class NoSonarAndCommentedOutLocSensorTest {
 
     assertEquals(5, source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES));
   }
+  
+  // TEST for SONARPLUGINS-662
+  @Test
+  @Ignore
+  public void testAnalyseSourceCodeWithMultiLineString() {
+    File cSharpExample = new File(this.getClass().getResource("/CSharpFileExampleWithMultiLineString.cs").getPath());
+    Source source = NoSonarAndCommentedOutLocSensor.analyseSourceCode(cSharpExample);
+    assertEquals(1, source.getNoSonarTagLines().size());
+    assertEquals(10, (int) source.getNoSonarTagLines().iterator().next());
+
+    assertEquals(5, source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES));
+  }
+  
 
 }
