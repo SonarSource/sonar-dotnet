@@ -38,5 +38,15 @@ public class NoSonarAndCommentedOutLocSensorTest {
 
     assertEquals(5, source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES));
   }
+  
+  @Test
+  public void testAnalyseSourceCodeWithRegions() {
+    File cSharpExample = new File(this.getClass().getResource("/CSharpFileExampleWithQuoteInRegion.cs").getPath());
+    Source source = NoSonarAndCommentedOutLocSensor.analyseSourceCode(cSharpExample);
+    assertEquals(1, source.getNoSonarTagLines().size());
+    assertEquals(10, (int) source.getNoSonarTagLines().iterator().next());
+
+    assertEquals(5, source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES));
+  }
 
 }

@@ -67,7 +67,7 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
 
   protected static Source analyseSourceCode(File file) {
     try {
-      return new Source(new FileReader(file), new CodeRecognizer(0.9, new CSharpLanguageFootprint()));
+      return new Source(new FileReader(file), new CodeRecognizer(0.9, new CSharpLanguageFootprint()), "#region");
     } catch (FileNotFoundException e) {
       throw new SonarException("Unable to open file '" + file.getAbsolutePath() + "'", e);
     }
