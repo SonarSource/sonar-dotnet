@@ -49,67 +49,78 @@ import org.sonar.squid.text.Source;
 // The NoSonarFilter must be fed before launching the violation engines
 public class NoSonarAndCommentedOutLocSensor implements Sensor {
 
-  private final NoSonarFilter noSonarFilter;
+	private final NoSonarFilter noSonarFilter;
 
-  public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter) {
-    this.noSonarFilter = noSonarFilter;
-  }
+	public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter) {
+		this.noSonarFilter = noSonarFilter;
+	}
 
-  public void analyse(Project prj, SensorContext context) {
-    List<File> srcFiles = VisualUtils.getCsFiles(prj);
-    for (File srcFile : srcFiles) {
-      CSharpFile cSharpFile = CSharpFile.from(prj, srcFile, false);
-      Source source = analyseSourceCode(srcFile);
-      noSonarFilter.addResource(cSharpFile, source.getNoSonarTagLines());
-      context.saveMeasure(cSharpFile, CoreMetrics.COMMENTED_OUT_CODE_LINES, (double) source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES));
-    }
-  }
+	public void analyse(Project prj, SensorContext context) {
+		List<File> srcFiles = VisualUtils.getCsFiles(prj);
+		for (File srcFile : srcFiles) {
+			CSharpFile cSharpFile = CSharpFile.from(prj, srcFile, false);
+			Source source = analyseSourceCode(srcFile);
+			noSonarFilter.addResource(cSharpFile, source.getNoSonarTagLines());
+			context.saveMeasure(
+					cSharpFile, 
+					CoreMetrics.COMMENTED_OUT_CODE_LINES,
+			    (double) source.getMeasure(Metric.COMMENTED_OUT_CODE_LINES)
+			  );
+		}
+	}
 
-  protected static Source analyseSourceCode(File file) {
-    try {
-      return new Source(new FileReader(file), new CodeRecognizer(0.9, new CSharpLanguageFootprint()), "#region");
-    } catch (FileNotFoundException e) {
-      throw new SonarException("Unable to open file '" + file.getAbsolutePath() + "'", e);
-    }
-  }
+	protected static Source analyseSourceCode(File file) {
+		try {
+			return new Source(
+					new FileReader(file), 
+					new CodeRecognizer(0.9, new CSharpLanguageFootprint()), 
+					"#region", 
+					"#endregion"
+				);
+		} catch (FileNotFoundException e) {
+			throw new SonarException("Unable to open file '" + file.getAbsolutePath()
+			    + "'", e);
+		}
+	}
 
-  @Override
-  public boolean shouldExecuteOnProject(Project prj) {
-    String packaging = prj.getPackaging();
-    // We only accept the "sln" packaging
-    return "sln".equals(packaging);
-  }
+	@Override
+	public boolean shouldExecuteOnProject(Project prj) {
+		String packaging = prj.getPackaging();
+		// We only accept the "sln" packaging
+		return "sln".equals(packaging);
+	}
 
-  private static class CSharpLanguageFootprint implements LanguageFootprint {
+	private static class CSharpLanguageFootprint implements LanguageFootprint {
 
-    private final Set<Detector> detectors = new HashSet<Detector>();
+		private final Set<Detector> detectors = new HashSet<Detector>();
 
-    public CSharpLanguageFootprint() {
-      detectors.add(new EndWithDetector(0.95, '}', ';', '{'));
-      detectors.add(new KeywordsDetector(0.7, "||", "&&"));
-      detectors.add(new KeywordsDetector(0.3, "abstract", "add", "alias",
-          "as", "ascending", "base", "bool", "break", "by", "byte", "case",
-          "catch", "char", "checked", "class", "const", "continue", "decimal",
-          "default", "delegate", "descending", "do", "double", "dynamic", "else",
-          "enum", "equals", "event", "explicit", "extern", "false", "finally",
-          "fixed", "float", "for", "foreach", "from", "get", "global", "goto",
-          "group", "if", "implicit", "in", "int", "interface", "internal",
-          "into", "is", "join", "let", "lock", "long", "namespace", "new",
-          "null", "object", "on", "operator", "orderby", "out", "override",
-          "params", "partial", "private", "protected", "public", "readonly",
-          "ref", "remove", "return", "sbyte", "sealed", "select", "set", "short",
-          "sizeof", "stackalloc", "static", "string", "struct", "switch", "this",
-          "throw", "true", "try", "typeof", "uint", "ulong", "unchecked",
-          "unsafe", "ushort", "using", "value", "var", "virtual", "void",
-          "volatile", "where", "while", "yield"));
-      detectors.add(new ContainsDetector(0.95, "++", "for(", "if(", "while(", "catch(", "switch(", "try{", "else{"));
-      detectors.add(new CamelCaseDetector(0.5));
-    }
+		public CSharpLanguageFootprint() {
+			detectors.add(new EndWithDetector(0.95, '}', ';', '{'));
+			detectors.add(new KeywordsDetector(0.7, "||", "&&"));
+			detectors.add(new KeywordsDetector(0.3, "abstract", "add", "alias", "as",
+			    "ascending", "base", "bool", "break", "by", "byte", "case", "catch",
+			    "char", "checked", "class", "const", "continue", "decimal",
+			    "default", "delegate", "descending", "do", "double", "dynamic",
+			    "else", "enum", "equals", "event", "explicit", "extern", "false",
+			    "finally", "fixed", "float", "for", "foreach", "from", "get",
+			    "global", "goto", "group", "if", "implicit", "in", "int",
+			    "interface", "internal", "into", "is", "join", "let", "lock", "long",
+			    "namespace", "new", "null", "object", "on", "operator", "orderby",
+			    "out", "override", "params", "partial", "private", "protected",
+			    "public", "readonly", "ref", "remove", "return", "sbyte", "sealed",
+			    "select", "set", "short", "sizeof", "stackalloc", "static", "string",
+			    "struct", "switch", "this", "throw", "true", "try", "typeof", "uint",
+			    "ulong", "unchecked", "unsafe", "ushort", "using", "value", "var",
+			    "virtual", "void", "volatile", "where", "while", "yield"));
+			detectors.add(new ContainsDetector(0.95, "++", "for(", "if(", "while(",
+			    "catch(", "switch(", "try{", "else{"));
+			detectors.add(new CamelCaseDetector(0.5));
+		}
 
-    @Override
-    public Set<Detector> getDetectors() {
-      return detectors;
-    }
+		@Override
+		public Set<Detector> getDetectors() {
+			return detectors;
+		}
 
-  }
+	}
 }
