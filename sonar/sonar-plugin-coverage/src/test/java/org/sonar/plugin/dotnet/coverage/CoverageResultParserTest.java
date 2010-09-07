@@ -32,11 +32,37 @@ public class CoverageResultParserTest {
 		params.assemblyName = "Example.Core";
 		params.fileNumber = 4;
 		params.fileName = "Money.cs";
-		params.coveredLines = 45;
-		params.lines = 47;
+		params.coveredLines = 46;
+		params.lines = 48;
 		
 		checkParsing(params);
 	}
+	
+	@Test
+  public void testParsePartCover22Empty() {
+    ParsingParameters params = new ParsingParameters();
+    params.report = "coverage-report-2.2-empty.xml";
+    params.assemblyName = "Example.Core";
+    params.fileNumber = 1;
+    params.fileName = "Money.cs";
+    params.coveredLines = 0;
+    params.lines = 4;
+    
+    checkParsing(params);
+  }
+	
+	@Test
+  public void testParsePartCover22Full() {
+    ParsingParameters params = new ParsingParameters();
+    params.report = "coverage-report-2.2-full.xml";
+    params.assemblyName = "Example.Core";
+    params.fileNumber = 1;
+    params.fileName = "Money.cs";
+    params.coveredLines = 4;
+    params.lines = 4;
+    
+    checkParsing(params);
+  }
 
 	@Test
 	public void testParsePartCover23() {
@@ -73,8 +99,8 @@ public class CoverageResultParserTest {
 		params.assemblyName = "Example.Core";
 		params.fileNumber = 2;
 		params.fileName = "Money.cs";
-		params.coveredLines = 24;
-		params.lines = 26;
+		params.coveredLines = 25;
+		params.lines = 27;
 		
 		checkParsing(params);
 	}
@@ -86,8 +112,8 @@ public class CoverageResultParserTest {
 		params.assemblyName = "Example.Core";
 		params.fileNumber = 2;
 		params.fileName = "Money.cs";
-		params.coveredLines = 24;
-		params.lines = 26;
+		params.coveredLines = 25;
+		params.lines = 27;
 		
 		checkParsing(params);
 	}
@@ -99,8 +125,8 @@ public class CoverageResultParserTest {
 		params.assemblyName = "Example.Core";
 		params.fileNumber = 3;
 		params.fileName = "Money.cs";
-		params.coveredLines = 34;
-		params.lines = 36;
+		params.coveredLines = 35;
+		params.lines = 37;
 		
 		checkParsing(params);
 	}

@@ -50,10 +50,10 @@ public class CoverableSource extends Coverable {
    */
   public void addPoint(CoveragePoint point) {
     int startLine = point.getStartLine();
-    int endLine = point.getStartLine();
+    int endLine = point.getEndLine();
     for (int idx = startLine; idx <= endLine; idx++) {
       // We add a point for each line
-      SourceLine line = lines.get(startLine);
+      SourceLine line = lines.get(idx);
       if (line == null) {
         line = new SourceLine(idx);
         lines.put(idx, line);

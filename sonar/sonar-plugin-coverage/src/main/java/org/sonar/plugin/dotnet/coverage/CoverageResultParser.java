@@ -89,7 +89,7 @@ public class CoverageResultParser extends AbstractXmlParser {
   public void parse(URL url) {
     try {
       // First define shte version
-      defineVersion(url);
+      chooseParsingStrategy(url);
 
       // First, all the indexed files are extracted
       extractFiles(url);
@@ -200,10 +200,12 @@ public class CoverageResultParser extends AbstractXmlParser {
    * This method is necessary due to a silly modification of the schema between
    * partcover 2.2 and 2.3, for which elements start now with an uppercase
    * letter.
+   * Format is a little bit different with partcover4, and NCover use
+   * a different format too.
    * 
    * @param file
    */
-  private void defineVersion(URL file) {
+  private void chooseParsingStrategy(URL file) {
     List<Element> elements = extractElements(file, "/*");
     Element root = elements.get(0);
     Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies
