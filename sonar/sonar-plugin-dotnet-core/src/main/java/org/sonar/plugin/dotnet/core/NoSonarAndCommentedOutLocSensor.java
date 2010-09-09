@@ -80,25 +80,6 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
 		}
 	}
 	
-	private boolean containEscapedString(File file) {
-		List<String> lines;
-    try {
-    	boolean result = false;
-	    lines = FileUtils.readLines(file);
-	    final Iterator<String> lineIterator = lines.iterator();
-	    while (lineIterator.hasNext() && !result) {
-	      String line = (String) lineIterator.next();
-	      result = StringUtils.contains(StringUtils.substringAfter(line, "@\""),"\"");
-      }
-			return false;
-    } catch (IOException e) {
-    	throw new SonarException("Unable to read file '" + file.getAbsolutePath()
-			    + "'", e);
-    }
-		
-	}
-	
-
 	protected static Source analyseSourceCode(File file) {
 		Source result = null;
 		try {
