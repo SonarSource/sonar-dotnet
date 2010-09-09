@@ -1,0 +1,25 @@
+<gendarme>
+  
+  <ruleset name="blocker">
+    <rules include="AvoidLongMethodsRule" from="Gendarme.Rules.Smells.dll"/>
+  </ruleset>
+  
+  <ruleset name="critical">
+    <rules include="AvoidLargeClassesRule | AvoidComplexMethodsRule" from="Gendarme.Rules.Smells.dll">
+      <parameter rule="AvoidComplexMethodsRule" property="SuccessThreshold" value="15" />
+    </rules>
+  </ruleset>
+  
+  <ruleset name="default">
+    
+    <rules include="AvoidCodeDuplicatedInSameClassRule | AvoidCodeDuplicatedInSiblingClassesRule | 
+    AvoidLargeClassesRule | AvoidLongMethodsRule | AvoidLongParameterListsRule | AvoidComplexMethodsRule" 
+    from="Gendarme.Rules.Smells.dll">
+    
+      <parameter rule="AvoidComplexMethodsRule" property="SuccessThreshold" value="15" />
+    
+    </rules>
+    
+  </ruleset>
+
+</gendarme>

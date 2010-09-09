@@ -36,7 +36,7 @@ public class GendarmeRuleParserImpl extends AbstractXmlParser implements Gendarm
 		
 		Reader reader = new StringReader(rawConfiguration);
 		Set<GendarmeRule> result = new HashSet<GendarmeRule>();
-	  List<Element> ruleElements = extractElements(reader, "//ruleset[@name=\""+ruleSet+"\"]/rules");
+	  List<Element> ruleElements = extractElements(reader, "/gendarme/ruleset[@name=\""+ruleSet+"\"]/rules");
 	  for (Element element : ruleElements) {
 	    String assemblyName = element.getAttribute("from");
 	    String rawRuleArray = element.getAttribute("include");
@@ -46,6 +46,16 @@ public class GendarmeRuleParserImpl extends AbstractXmlParser implements Gendarm
 	      GendarmeRule rule = new GendarmeRule();
 	      rule.setId(ruleId);
 	      rule.setPriority(rulePriority);
+	      
+	      List<Element> propElements = 
+	        extractElements(element, "parameter[@rule=\""+StringUtils.trim(ruleName)+"\"]");
+	      
+	      for (Element propElement : propElements) {
+          String name = evaluateAttribute(propElement, "@property");
+          String value = evaluateAttribute(propElement, "@value");
+          rule.addProperty(new RuleProperty(name, value));
+        }
+	      
 	      result.add(rule);
       }
     }

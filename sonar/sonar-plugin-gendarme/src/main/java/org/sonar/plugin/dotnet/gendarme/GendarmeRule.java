@@ -1,5 +1,8 @@
 package org.sonar.plugin.dotnet.gendarme;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sonar.api.rules.RulePriority;
 
 public class GendarmeRule {
@@ -7,6 +10,8 @@ public class GendarmeRule {
 	private RulePriority priority = RulePriority.MAJOR;
 	
 	private String id;
+	
+	private List<RuleProperty> properties = new ArrayList<RuleProperty>();
 	
 	public RulePriority getPriority() {
   	return priority;
@@ -24,7 +29,20 @@ public class GendarmeRule {
   	this.id = id;
   }
 
-	@Override
+	public List<RuleProperty> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(List<RuleProperty> properties) {
+    this.properties = properties;
+  }
+  
+  public void addProperty(RuleProperty property) {
+    properties.add(property);
+  }
+  
+
+  @Override
   public int hashCode() {
 	  final int prime = 31;
 	  int result = 1;
