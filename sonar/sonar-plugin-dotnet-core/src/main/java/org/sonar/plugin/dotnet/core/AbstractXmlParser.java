@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.xpath.XPath;
@@ -36,6 +35,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -46,6 +47,9 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN Jun 4, 2009
  */
 public class AbstractXmlParser {
+  
+  private final static Logger log = LoggerFactory.getLogger(AbstractXmlParser.class);
+  
   protected XPathFactory factory;
   protected XPath xpath;
 
@@ -85,7 +89,7 @@ public class AbstractXmlParser {
         result = (int) Double.parseDouble(value);
       }
     } catch (NumberFormatException nfe) {
-      // Nothing
+      log.debug("int parsing error", nfe);
     }
     return result;
   }
@@ -121,7 +125,7 @@ public class AbstractXmlParser {
         result = Double.parseDouble(value);
       }
     } catch (NumberFormatException nfe) {
-      // Nothing
+      log.debug("double parsing error", nfe);
     }
     return result;
   }
@@ -154,9 +158,26 @@ public class AbstractXmlParser {
       String result = expression.evaluate(element);
       return result;
     } catch (XPathExpressionException e) {
-      // Nothing
+      log.debug("xpath error", e);
     }
     return null;
+  }
+  
+  /**
+   * Evaluate an xpath expression to retrieve child elements of a node
+   * @param element
+   * @param xpath
+   * @return
+   */
+  public List<Element> extractElements(Element element, String xpath) {
+    NodeList nodes;
+    try {
+      XPathExpression expression = this.xpath.compile(xpath);
+      nodes = (NodeList) expression.evaluate(element, XPathConstants.NODESET);
+    } catch (XPathExpressionException e) {
+      throw new RuntimeException(e);
+    }
+    return convertToList(nodes);
   }
 
   /**
@@ -255,6 +276,7 @@ public class AbstractXmlParser {
     try {
       return Integer.parseInt(attribute);
     } catch (NumberFormatException e) {
+      log.debug("int parsing error", e);
       return 0;
     }
   }
