@@ -8,8 +8,10 @@ import java.util.Map;
 
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.ActiveRuleParam;
 import org.sonar.api.rules.ConfigurationExportable;
 import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RuleParam;
 import org.sonar.plugin.dotnet.core.AbstractDotNetRuleRepository;
 import org.sonar.plugin.dotnet.core.CSharpRulesProfile;
 
@@ -66,9 +68,29 @@ public class GendarmeRuleRepository extends AbstractDotNetRuleRepository
         ActiveRule activeRule = new ActiveRule(null, dbRule,
             genRule.getPriority());
         result.add(activeRule);
+       
+        activeRule.setActiveRuleParams(getActiveRuleParams(genRule, dbRule, activeRule));
+        
       }
     }
     return result;
+  }
+  
+  // copy pasted from the PmdRulesRepository class
+  private List<ActiveRuleParam> getActiveRuleParams(GendarmeRule rule, Rule dbRule, ActiveRule activeRule) {
+    List<ActiveRuleParam> activeRuleParams = new ArrayList<ActiveRuleParam>();
+    if (rule.getProperties() != null) {
+      for (RuleProperty property : rule.getProperties()) {
+        if (dbRule.getParams() != null) {
+          for (RuleParam ruleParam : dbRule.getParams()) {
+            if (ruleParam.getKey().equals(property.getName())) {
+              activeRuleParams.add(new ActiveRuleParam(activeRule, ruleParam, property.getValue()));
+            }
+          }
+        }
+      }
+    }
+    return activeRuleParams;
   }
 
 }
