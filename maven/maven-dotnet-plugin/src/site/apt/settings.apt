@@ -36,9 +36,14 @@ Example of maven <<settings.xml>> configuration.
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <!-- Location of the the .Net installations (pick the one you need) -->
+        <!-- Locations of the the .Net installations (pick the one you need) -->
         <dotnet.2.0.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727</dotnet.2.0.sdk.directory>
         <dotnet.3.5.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v3.5</dotnet.3.5.sdk.directory>
+        <dotnet.4.0.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319</dotnet.4.0.sdk.directory>
+        
+        <!-- Locations of the core assemblies for silverlight frameworks  -->
+        <silverlight.3.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v3.0</silverlight.3.mscorlib.location>
+        <silverlight.4.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v4.0</silverlight.4.mscorlib.location>
               
         <!-- Location of the Gallio installation -->
         <gallio.directory>C:/Program Files/Gallio</gallio.directory>

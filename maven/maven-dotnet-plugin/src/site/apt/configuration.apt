@@ -46,8 +46,15 @@ Example of pom.xml for a .Net solution
     and so that those are excluded from code coverage -->
     <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
     
-    <!-- Version of the .Net tools, which may be 2.0 or 3.5 only -->
+    <!-- Version of the .Net tools, which may be 2.0, 3.5 or 4.0 only
+    Default value is 3.5 -->
     <dotnet.tool.version>3.5</dotnet.tool.version>
+    
+    <!-- Version of silverlight in case the analysed solution contains silverlight project 
+    Possible values are 3 and 4
+    Default value is 4 -->
+    <silverlight.version>4</silverlight.version>
+    
   </properties>
   <build>
     <plugins>
