@@ -60,19 +60,4 @@
     <module>maven</module>
     <module>sonar</module>
   </modules>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <!-- TODO Godin: update version in parent -->
-          <groupId>com.mycila.maven-license-plugin</groupId>
-          <artifactId>maven-license-plugin</artifactId>
-          <version>1.6.0</version>
-          <configuration>
-            <skip>true</skip>
-          </configuration>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
