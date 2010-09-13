@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.sonarsource.c</groupId>
+  <artifactId>csharp</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1-SNAPSHOT</version>
+  <name>SonarSource :: C#</name>
+  <parent>
+    <groupId>com.sonarsource.parent</groupId>
+    <artifactId>parent</artifactId>
+    <version>6</version>
+  </parent>
+
+  <properties>
+    <sonar.version>2.2</sonar.version>
+    <sslrVersion>0.10-SNAPSHOT</sslrVersion>
+  </properties>
+
+  <modules>
+    <module>csharp-squid</module>
+  </modules>
+
+  <scm>
+    <connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
+    <developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
+    <url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
+  </scm>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- sonarsource -->
+      <dependency>
+        <groupId>com.sonarsource.sslr</groupId>
+        <artifactId>sslr-api</artifactId>
+        <version>${sslrVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sonarsource.sslr</groupId>
+        <artifactId>sslr-impl</artifactId>
+        <version>${sslrVersion}</version>
+      </dependency>   
+      
+      <!-- sonar open-source -->         
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-channel</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>            
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-squid</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
+
+      <!-- Unit tests --> 
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.collections</groupId>
+        <artifactId>google-collections</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.5.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>1.5.6</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>0.9.15</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>1.1</version>
+      </dependency>  
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>1.7</version>
+      </dependency>      
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-lexer-testing-harness</artifactId>
+      <version>${sslrVersion}</version>
+      <scope>test</scope>
+    </dependency> 
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-parser-testing-harness</artifactId>
+      <version>${sslrVersion}</version>
+      <scope>test</scope>
+    </dependency>    
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.4</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

@@ -1,0 +1,7 @@
+#Mon Sep 13 22:11:17 CEST 2010
+eclipse.preferences.version=1
+projectArtifactId=csharp-squid
+projectBranch=
+projectGroupId=com.sonarsource.c
+sonarServerUrl=http\://nemo.sonarsource.org
+version=1
