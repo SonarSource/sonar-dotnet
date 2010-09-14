@@ -22,9 +22,10 @@
  * Created on Sep 1, 2009
  *
  */
-package org.apache.maven.dotnet.commons;
+package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,24 +44,33 @@ import org.hamcrest.CoreMatchers;
  * 
  * @author Jose CHILLAN Sep 1, 2009
  */
-public class TestVisualStudioUtils {
+public class VisualStudioUtilsTest {
   private final static org.slf4j.Logger log = LoggerFactory
-      .getLogger(TestVisualStudioUtils.class);
+      .getLogger(VisualStudioUtilsTest.class);
   /**
    * PROJECT_CORE_PATH
    */
   private static final String PROJECT_CORE_PATH = "target/test-classes/solution/Example/Example.Core/Example.Core.csproj";
   private static final String SAMPLE_FILE_PATH = "target/test-classes/solution/Example/Example.Core/Model/SubType.cs";
-
+  private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
+  
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
 
   @Test
   public void testReadFiles() {
     File file = new File(PROJECT_CORE_PATH);
-    System.out.println("File : " + file.getAbsolutePath() + ", exists: "
-        + file.exists());
     List<String> files = VisualStudioUtils.getFilesPath(file);
     log.debug("Files : " + files);
+    assertEquals("Bad number of files extracted", 6, files.size());
+  }
+  
+  @Test
+  public void testReadSolution() throws Exception {
+    File file = new File(SOLUTION_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    VisualStudioProject project = solution.getProject("Example.Core");
+    Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 6, files.size());
   }
 

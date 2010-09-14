@@ -26,8 +26,11 @@ package org.apache.maven.dotnet.commons.project;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +54,31 @@ public class VisualStudioSolution {
     this.solutionFile = solutionFile;
     this.solutionDir = solutionFile.getParentFile();
     this.projects = projects;
+    initializeFileAssociations();
+  }
+
+  /**
+   * Clean-up file/project associations in order
+   * to avoid having the same file in several projects.
+   */
+  private void initializeFileAssociations() {
+    Set<File> csFiles = new HashSet<File>();
+    for (VisualStudioProject project : projects) {
+      Set<File> projectFiles = project.getSourceFileMap().keySet();
+      Set<File> projectFilesToRemove = new HashSet<File>(); 
+      for (File file : projectFiles) {
+        if (getProjectByLocation(file)==null) {
+          projectFilesToRemove.add(file);
+        }
+      }
+      // remove files not present in the project directory
+      projectFiles.removeAll(projectFilesToRemove); 
+      
+      // remove files present in other projects
+      projectFiles.removeAll(csFiles);
+      
+      csFiles.addAll(projectFiles);
+    }
   }
 
   /**

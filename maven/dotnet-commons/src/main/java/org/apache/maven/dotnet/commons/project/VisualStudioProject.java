@@ -56,7 +56,7 @@ public class VisualStudioProject {
   private File directory;
   private boolean test;
   private boolean silverlightProject;
-  private Map<File, SourceFile> sourceFiles;
+  private Map<File, SourceFile> sourceFileMap;
 
   /**
    * Builds a {@link VisualStudioProject} ...
@@ -340,41 +340,52 @@ public class VisualStudioProject {
    * @return
    */
   public Collection<SourceFile> getSourceFiles() {
-    if (sourceFiles == null) {
-      Map<File, SourceFile> allFiles = new LinkedHashMap<File, SourceFile>(); // Case
-                                                                              // of
-                                                                              // a
-                                                                              // regular
-                                                                              // project
-      if (projectFile != null) {
-        List<String> filesPath = VisualStudioUtils.getFilesPath(projectFile);
+    if (sourceFileMap == null) {
+      initializeSourceFileMap();
+    }
+    return sourceFileMap.values();
+  }
 
-        for (String filePath : filesPath) {
-          try {
-            // We build the file and retrieves its canonical path
-            File file = new File(directory, filePath).getCanonicalFile();
-            String fileName = file.getName();
-            String folder = StringUtils.replace(StringUtils.removeEnd(
-                StringUtils.removeEnd(filePath, fileName), "\\"), "\\", "/");
-            SourceFile sourceFile = new SourceFile(this, file, folder, fileName);
-            allFiles.put(file, sourceFile);
-          } catch (IOException e) {
-            log.error("Bad file :" + filePath, e);
-          }
-        }
+  private void initializeSourceFileMap() {
+    Map<File, SourceFile> allFiles = new LinkedHashMap<File, SourceFile>(); // Case
+                                                                            // of
+                                                                            // a
+                                                                            // regular
+                                                                            // project
+    if (projectFile != null) {
+      List<String> filesPath = VisualStudioUtils.getFilesPath(projectFile);
 
-      } else {
-        // For web projects, we take all the C# files
-        List<File> csharpFiles = listRecursiveFiles(directory, ".cs");
-        for (File file : csharpFiles) {
-          SourceFile sourceFile = new SourceFile(this, file, file.getParent(),
-              file.getName());
+      for (String filePath : filesPath) {
+        try {
+          // We build the file and retrieves its canonical path
+          File file = new File(directory, filePath).getCanonicalFile();
+          String fileName = file.getName();
+          String folder = StringUtils.replace(StringUtils.removeEnd(
+              StringUtils.removeEnd(filePath, fileName), "\\"), "\\", "/");
+          SourceFile sourceFile = new SourceFile(this, file, folder, fileName);
           allFiles.put(file, sourceFile);
+        } catch (IOException e) {
+          log.error("Bad file :" + filePath, e);
         }
       }
-      this.sourceFiles = allFiles;
+
+    } else {
+      // For web projects, we take all the C# files
+      List<File> csharpFiles = listRecursiveFiles(directory, ".cs");
+      for (File file : csharpFiles) {
+        SourceFile sourceFile = new SourceFile(this, file, file.getParent(),
+            file.getName());
+        allFiles.put(file, sourceFile);
+      }
     }
-    return sourceFiles.values();
+    this.sourceFileMap = allFiles;
+  }
+
+  protected Map<File, SourceFile> getSourceFileMap() {
+    if (sourceFileMap == null) {
+      initializeSourceFileMap();
+    }
+    return sourceFileMap;
   }
 
   /**
@@ -427,7 +438,7 @@ public class VisualStudioProject {
     }
     // We ensure the source files are loaded
     getSourceFiles();
-    return sourceFiles.get(currentFile);
+    return sourceFileMap.get(currentFile);
   }
 
   /**
@@ -453,7 +464,7 @@ public class VisualStudioProject {
       File currentFile = file.getCanonicalFile();
       // We ensure the source files are loaded
       getSourceFiles();
-      return sourceFiles.containsKey(currentFile);
+      return sourceFileMap.containsKey(currentFile);
     } catch (IOException e) {
       log.debug("file error", e);
     }
