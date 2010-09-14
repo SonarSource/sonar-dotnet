@@ -28,7 +28,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.sourceforge.pmd.cpd.CsLanguage;
 
@@ -52,6 +55,10 @@ public final class VisualUtils {
   
   private final static Logger log = LoggerFactory.getLogger(VisualUtils.class);
   
+  // maybe way too complicated since one thread and one solution only during the analysis
+  private final static Map<MavenProject, VisualStudioSolution> solutionCache 
+    = Collections.synchronizedMap(new HashMap<MavenProject, VisualStudioSolution>());
+  
   /**
    * Extracts a visual studio solution if the project is a valid solution.
    * 
@@ -64,7 +71,14 @@ public final class VisualUtils {
   public static VisualStudioSolution getSolution(Project project)
       throws DotNetProjectException {
     MavenProject mavenProject = project.getPom();
-    return VisualStudioUtils.getVisualSolution(mavenProject, (String) null);
+    final VisualStudioSolution solution;
+    if (solutionCache.containsKey(mavenProject)) {
+      solution = solutionCache.get(mavenProject);
+    } else {
+      solution = VisualStudioUtils.getVisualSolution(mavenProject, (String) null);
+      solutionCache.put(mavenProject, solution);
+    }
+    return solution;
   }
   
   /**
