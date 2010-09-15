@@ -65,6 +65,7 @@ public class VisualStudioUtilsTest {
   }
   
   @Test
+  @Ignore
   public void testReadSolution() throws Exception {
     File file = new File(SOLUTION_PATH);
     VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
