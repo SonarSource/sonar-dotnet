@@ -42,6 +42,7 @@ import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.w3c.dom.Element;
 
@@ -120,7 +121,7 @@ public class FxCopResultParser extends AbstractXmlParser {
     CSharpFile fileResource;
     if (file.exists()) {
       try {
-        fileResource = CSharpFile.from(project, file, false);
+        fileResource = CSharpFileLocator.INSTANCE.locate(project, file, false);
       } catch (InvalidResourceException ex) {
         log.warn("resource error", ex);
         fileResource = null;

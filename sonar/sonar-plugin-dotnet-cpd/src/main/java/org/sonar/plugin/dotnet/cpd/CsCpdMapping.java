@@ -32,6 +32,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.CSharp;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class CsCpdMapping implements CpdMapping {
 
@@ -43,7 +44,7 @@ public class CsCpdMapping implements CpdMapping {
   }
 
   public Resource createResource(File file, List<File> sourceDirs) {
-    return CSharpFile.from(project, file, false);
+    return CSharpFileLocator.INSTANCE.locate(project, file, false);
   }
 
   public Language getLanguage() {

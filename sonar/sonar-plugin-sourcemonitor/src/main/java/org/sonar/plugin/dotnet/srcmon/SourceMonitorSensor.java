@@ -46,6 +46,7 @@ import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.core.resource.CSharpFolder;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.sonar.plugin.dotnet.srcmon.model.FileMetrics;
@@ -335,8 +336,11 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
     folderMetrics.addFile(fileMetric);
 
     // We Store the file results
-    CSharpFile sourceFile = CSharpFile.from(project, filePath, false);
-    storeMetrics(project, context, fileMetric, sourceFile);
+    CSharpFile sourceFile = CSharpFileLocator.INSTANCE.locate(project, filePath, false);
+    if (sourceFile != null) {
+      storeMetrics(project, context, fileMetric, sourceFile);
+    }
+    
   }
 
   /**

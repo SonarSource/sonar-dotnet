@@ -47,7 +47,7 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder> {
    * @param file
    * @return
    */
-  public static CSharpFile from(Project project, File file, boolean unitTest) {
+  protected static CSharpFile from(Project project, File file, boolean unitTest) {
     if (unitTest) {
       Log.error("test " + file);
     }

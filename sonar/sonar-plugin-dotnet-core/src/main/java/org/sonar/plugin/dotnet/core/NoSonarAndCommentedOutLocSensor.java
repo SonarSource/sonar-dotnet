@@ -41,6 +41,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.squid.measures.Metric;
 import org.sonar.squid.recognizer.CamelCaseDetector;
 import org.sonar.squid.recognizer.CodeRecognizer;
@@ -66,7 +67,11 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
 	public void analyse(Project prj, SensorContext context) {
 		List<File> srcFiles = VisualUtils.getCsFiles(prj);
 		for (File srcFile : srcFiles) {
-			CSharpFile cSharpFile = CSharpFile.from(prj, srcFile, false);
+		  
+			CSharpFile cSharpFile = CSharpFileLocator.INSTANCE.locate(prj, srcFile, false);
+			if (cSharpFile==null) {
+			  continue;
+			}
 			Source source = analyseSourceCode(srcFile);
 			if (source!=null) {
 				// TODO HACK for SONARPLUGINS-662

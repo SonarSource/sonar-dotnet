@@ -49,6 +49,7 @@ import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.coverage.model.CoverableSource;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
@@ -168,15 +169,18 @@ public class CoverageSensor extends AbstractDotnetSensor {
   private void collectFile(Project project, SensorContext context,
       FileCoverage fileCoverage) {
     File filePath = fileCoverage.getFile();
-    CSharpFile fileResource = CSharpFile.from(project, filePath, false);
-    double coverage = fileCoverage.getCoverage();
-    // We have the effective number of lines here
-    context.saveMeasure(fileResource, CoverageMetrics.ELOC,
-        (double) fileCoverage.getCountLines());
+    CSharpFile fileResource = CSharpFileLocator.INSTANCE.locate(project,
+        filePath, false);
+    if (fileResource != null) {
+      double coverage = fileCoverage.getCoverage();
+      // We have the effective number of lines here
+      context.saveMeasure(fileResource, CoverageMetrics.ELOC,
+          (double) fileCoverage.getCountLines());
 
-    context.saveMeasure(fileResource, CoreMetrics.COVERAGE,
-        convertPercentage(coverage));
-    context.saveMeasure(fileResource, getHitData(fileCoverage));
+      context.saveMeasure(fileResource, CoreMetrics.COVERAGE,
+          convertPercentage(coverage));
+      context.saveMeasure(fileResource, getHitData(fileCoverage));
+    }
   }
 
   /**

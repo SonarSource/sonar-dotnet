@@ -41,6 +41,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * Collects the result of Gallio analysis into sonar.
@@ -119,30 +120,34 @@ public class GallioSensor extends AbstractDotnetSensor {
           log.debug("Collecting test data for file " + sourceFile);
         }
         int testsCount = testReport.getTests() - testReport.getSkipped();
-        CSharpFile testFile = CSharpFile.from(project,
+        CSharpFile testFile = CSharpFileLocator.INSTANCE.locate(project,
             testReport.getSourceFile(), true);
-        saveFileMeasure(testFile, context, testReport,
-            CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
-        saveFileMeasure(testFile, context, testReport, CoreMetrics.TESTS,
-            testsCount);
-        saveFileMeasure(testFile, context, testReport, CoreMetrics.TEST_ERRORS,
-            testReport.getErrors());
-        saveFileMeasure(testFile, context, testReport,
-            CoreMetrics.TEST_FAILURES, testReport.getFailures());
-        saveFileMeasure(testFile, context, testReport,
-            CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
-        saveFileMeasure(testFile, context, testReport,
-            GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
-        int passedTests = testsCount - testReport.getErrors()
-            - testReport.getFailures();
-        if (testsCount > 0) {
-          double percentage = passedTests * 100 / testsCount;
-          saveFileMeasure(testFile, context, testReport,
-              CoreMetrics.TEST_SUCCESS_DENSITY,
-              ParsingUtils.scaleValue(percentage));
-        }
+        if (testFile != null) {
 
-        saveTestsDetails(testFile, context, testReport);
+          saveFileMeasure(testFile, context, testReport,
+              CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
+          saveFileMeasure(testFile, context, testReport, CoreMetrics.TESTS,
+              testsCount);
+          saveFileMeasure(testFile, context, testReport,
+              CoreMetrics.TEST_ERRORS, testReport.getErrors());
+          saveFileMeasure(testFile, context, testReport,
+              CoreMetrics.TEST_FAILURES, testReport.getFailures());
+          saveFileMeasure(testFile, context, testReport,
+              CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
+          saveFileMeasure(testFile, context, testReport,
+              GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
+          int passedTests = testsCount - testReport.getErrors()
+              - testReport.getFailures();
+          if (testsCount > 0) {
+            double percentage = passedTests * 100 / testsCount;
+            saveFileMeasure(testFile, context, testReport,
+                CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils
+                    .scaleValue(percentage));
+          }
+
+          saveTestsDetails(testFile, context, testReport);
+
+        }
 
       } else {
         log.error("Source file not found for test report " + testReport);
@@ -165,18 +170,17 @@ public class GallioSensor extends AbstractDotnetSensor {
     List<TestCaseDetail> details = fileReport.getDetails();
     for (TestCaseDetail detail : details) {
       testCaseDetails.append("<testcase status=\"").append(detail.getStatus())
-          .append("\" time=\"").append(detail.getTimeMillis())
-          .append("\" name=\"").append(detail.getName()).append("\"")
-          .append("\" asserts=\"").append(detail.getCountAsserts())
-          .append("\"");
+          .append("\" time=\"").append(detail.getTimeMillis()).append(
+              "\" name=\"").append(detail.getName()).append("\"").append(
+              "\" asserts=\"").append(detail.getCountAsserts()).append("\"");
       boolean isError = (detail.getStatus() == TestStatus.ERROR);
       if (isError || (detail.getStatus() == TestStatus.FAILED)) {
-        testCaseDetails.append(">")
-            .append(isError ? "<error message=\"" : "<failure message=\"")
-            .append(StringEscapeUtils.escapeXml(detail.getErrorMessage()))
+        testCaseDetails.append(">").append(
+            isError ? "<error message=\"" : "<failure message=\"").append(
+            StringEscapeUtils.escapeXml(detail.getErrorMessage()))
             .append("\">").append("<![CDATA[").append(detail.getStackTrace())
-            .append("]]>").append(isError ? "</error>" : "</failure>")
-            .append("</testcase>");
+            .append("]]>").append(isError ? "</error>" : "</failure>").append(
+                "</testcase>");
       } else {
         testCaseDetails.append("/>");
       }

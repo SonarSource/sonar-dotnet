@@ -40,6 +40,7 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 import static org.sonar.plugin.dotnet.core.Constant.*;
 
@@ -103,7 +104,11 @@ public class CSharpSourceImporter extends AbstractSourceImporter {
           log.info("Ignoring generated cs file " + sourcePath);
           continue;
         }
-        CSharpFile resource = CSharpFile.from(project, sourcePath, unitTest);
+        CSharpFile resource = CSharpFileLocator.INSTANCE.locate(project, sourcePath, unitTest);
+        if (resource == null) {
+        	continue;
+        }
+        
         // Windows may sometime generate endian-recognition characters that are
         // not
         // supported by the Sonar GUI, so we remove them
