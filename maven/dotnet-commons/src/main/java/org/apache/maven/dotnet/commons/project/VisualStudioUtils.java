@@ -244,6 +244,12 @@ public class VisualStudioUtils {
       if (matcher.find()) {
         String projectName = matcher.group(1);
         String projectPath = matcher.group(2);
+        
+        // fix tests on unix system
+        // but should not be necessary
+        // on windows build machines
+        projectPath =  StringUtils.replace(projectPath, '\\', File.separatorChar);
+        
         File projectFile = new File(baseDirectory, projectPath);
         if (!projectFile.exists()) {
           throw new FileNotFoundException("Could not find the project file: "
