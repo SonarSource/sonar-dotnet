@@ -21,11 +21,9 @@
 package org.sonar.plugin.dotnet.cpd;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import net.sourceforge.pmd.cpd.CPD;
@@ -33,11 +31,8 @@ import net.sourceforge.pmd.cpd.CsLanguage;
 import net.sourceforge.pmd.cpd.TokenEntry;
 
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
-import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.CpdMapping;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
@@ -51,8 +46,6 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  * 
  */
 public class CpdSensor implements Sensor {
-
-  private final static Logger log = LoggerFactory.getLogger(CpdSensor.class);
 
   public final static String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.minimumTokens";
   public final static int CPD_MINIMUM_TOKENS_DEFAULT_VALUE = 50;
@@ -118,7 +111,7 @@ public class CpdSensor implements Sensor {
     ;
     CPD cpd = new CPD(minTokens, new CsLanguage());
     cpd.setEncoding(encoding.name());
-    cpd.add(VisualUtils.getCsFiles(project));
+    cpd.add(VisualUtils.buildCsFileList(project));
     return cpd;
   }
 
