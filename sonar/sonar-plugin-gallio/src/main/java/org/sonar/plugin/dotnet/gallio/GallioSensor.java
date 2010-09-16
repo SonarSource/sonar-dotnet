@@ -25,7 +25,9 @@ package org.sonar.plugin.dotnet.gallio;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.transform.TransformerException;
 
@@ -40,6 +42,7 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
@@ -113,9 +116,13 @@ public class GallioSensor extends AbstractDotnetSensor {
     if (log.isDebugEnabled()) {
       log.debug("Found " + reports.size() + " test data");
     }
+    
+    Set<File> knownCsFiles 
+      = new HashSet<File>(VisualUtils.buildCsFileList(project));
+    
     for (UnitTestReport testReport : reports) {
       File sourceFile = testReport.getSourceFile();
-      if (sourceFile != null && sourceFile.exists()) {
+      if (sourceFile != null && sourceFile.exists() && knownCsFiles.contains(sourceFile)) {
         if (log.isDebugEnabled()) {
           log.debug("Collecting test data for file " + sourceFile);
         }
