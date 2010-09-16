@@ -25,7 +25,6 @@
 package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,9 +32,9 @@ import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.matchers.JUnitMatchers.*;
 import org.slf4j.LoggerFactory;
 import org.hamcrest.CoreMatchers;
 
@@ -53,6 +52,8 @@ public class VisualStudioUtilsTest {
   private static final String PROJECT_CORE_PATH = "target/test-classes/solution/Example/Example.Core/Example.Core.csproj";
   private static final String SAMPLE_FILE_PATH = "target/test-classes/solution/Example/Example.Core/Model/SubType.cs";
   private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
+  private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
+  private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
   
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
 
@@ -93,7 +94,7 @@ public class VisualStudioUtilsTest {
     assertThat(
         "Invalid relative path",
         relativePath,
-        CoreMatchers.is(JUnitMatchers.containsString("Model" + File.separator
+        CoreMatchers.is(containsString("Model" + File.separator
             + "SubType.cs")));
   }
 
@@ -104,4 +105,33 @@ public class VisualStudioUtilsTest {
     assertTrue(project.isSilverlightProject());
   }
 
+  @Test
+  public void testReadMessySolution() throws Exception {
+    File file = new File(MESSY_SOLUTION_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    VisualStudioProject project = solution.getProject("MessyTestApplication");
+    Collection<SourceFile> files = project.getSourceFiles();
+    assertEquals("Bad number of files extracted", 3, files.size());
+    VisualStudioProject libProject = solution.getProject("ClassLibrary1");
+    Collection<SourceFile> libFiles = libProject.getSourceFiles();
+    assertEquals("Bad number of files extracted", 2, libFiles.size());
+    
+  }
+  
+  @Test
+  public void testSolutionWithLinks() throws Exception {
+    File file = new File(LINK_SOLUTION_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    List<VisualStudioProject> projects = solution.getProjects();
+    for (VisualStudioProject project : projects) {
+      Collection<SourceFile> files = project.getSourceFiles();
+      assertEquals("Bad number of files extracted", 1, files.size());
+      String name = files.iterator().next().getName();
+      
+      assertThat(name, not(is("AssemblyInfo.cs")));
+    }
+  }
+  
 }
