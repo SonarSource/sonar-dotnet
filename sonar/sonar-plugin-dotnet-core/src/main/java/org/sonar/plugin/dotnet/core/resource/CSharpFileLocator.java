@@ -23,8 +23,10 @@ package org.sonar.plugin.dotnet.core.resource;
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
@@ -35,20 +37,21 @@ public enum CSharpFileLocator {
   
   private final static Logger log = LoggerFactory.getLogger(CSharpFileLocator.class);
   
-  private Set<File> knownCsFiles = Collections.EMPTY_SET;
+  private Map<File, VisualStudioProject> csFilesProjectMap = Collections.EMPTY_MAP;
 
   public void registerProject(Project project) {
 	log.debug("Init C# file locator");  
-	knownCsFiles = new HashSet<File>(VisualUtils.getCsFiles(project));
+	csFilesProjectMap = VisualUtils.buildCsFileProjectMap(project);
   }
   
   public CSharpFile locate(Project project, File file, boolean unitTest) {
-	if (knownCsFiles.isEmpty()) {
+	if (csFilesProjectMap.isEmpty()) {
 	  registerProject(project);
 	}
 	final CSharpFile result;
-	if (knownCsFiles.contains(file)) {
-	  result = CSharpFile.from(project, file, unitTest);
+	if (csFilesProjectMap.containsKey(file)) {
+	  VisualStudioProject visualProject = csFilesProjectMap.get(file);
+	  result = CSharpFile.from(visualProject, file, unitTest);
 	} else {
 		log.debug("file {} ignored (i.e. link file or file not referenced by any project)", file);
 	  result = null;

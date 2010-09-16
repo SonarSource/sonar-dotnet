@@ -26,6 +26,7 @@ package org.sonar.plugin.dotnet.core.resource;
 import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.jfree.util.Log;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
@@ -58,6 +59,17 @@ public class CSharpFile extends AbstractCSharpResource<CSharpFolder> {
       Log.warn("Could not find the folder for directory : " + directory
           + " in project " + project);
     }
+    return new CSharpFile(folder, file, unitTest);
+  }
+  
+  protected static CSharpFile from(VisualStudioProject project, File file, boolean unitTest) {
+    if (unitTest) {
+      Log.error("test " + file);
+    }
+
+    File directory = file.getParentFile();
+    CLRAssembly assembly = new CLRAssembly(project);
+    CSharpFolder folder = new CSharpFolder(assembly, directory);
     return new CSharpFile(folder, file, unitTest);
   }
 

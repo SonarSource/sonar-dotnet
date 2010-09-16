@@ -22,14 +22,10 @@ package org.sonar.plugin.dotnet.core;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Phase;
@@ -65,7 +61,7 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
 	}
 
 	public void analyse(Project prj, SensorContext context) {
-		List<File> srcFiles = VisualUtils.getCsFiles(prj);
+		List<File> srcFiles = VisualUtils.buildCsFileList(prj);
 		for (File srcFile : srcFiles) {
 		  
 			CSharpFile cSharpFile = CSharpFileLocator.INSTANCE.locate(prj, srcFile, false);

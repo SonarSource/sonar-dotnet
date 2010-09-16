@@ -82,13 +82,13 @@ public final class VisualUtils {
   }
   
   /**
-   * Search all cs files included in the VS solution corresponding to the 
+   * Search all cs files (with corresponding VS project) included in the VS solution corresponding to the 
    * sonar project object argument.
    * @param project
    * @return
    * @throws DotNetProjectException
    */
-  public static List<File> getCsFiles(Project project) {
+  public static Map<File, VisualStudioProject> buildCsFileProjectMap(Project project) {
 
     VisualStudioSolution solution;
     try {
@@ -99,7 +99,7 @@ public final class VisualUtils {
     List<VisualStudioProject> projects = solution.getProjects();
     FilenameFilter filter = new CsLanguage().getFileFilter();
 
-    List<File> csFiles = new ArrayList<File>();
+    Map<File, VisualStudioProject> csFiles = new HashMap<File, VisualStudioProject>();
 
     for (VisualStudioProject visualStudioProject : projects) {
       if (visualStudioProject.isTest()) {
@@ -109,12 +109,16 @@ public final class VisualUtils {
         for (SourceFile sourceFile : sources) {
           if (filter.accept(sourceFile.getFile().getParentFile(),
               sourceFile.getName())) {
-            csFiles.add(sourceFile.getFile());
+            csFiles.put(sourceFile.getFile(), visualStudioProject);
           }
         }
       }
     }
     return csFiles;
+  }
+  
+  public static List<File> buildCsFileList(Project project) {
+    return new ArrayList<File>(buildCsFileProjectMap(project).keySet());
   }
   
 }
