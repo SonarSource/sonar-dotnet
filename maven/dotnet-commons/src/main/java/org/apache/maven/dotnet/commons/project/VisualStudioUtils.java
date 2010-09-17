@@ -450,6 +450,11 @@ public class VisualStudioUtils {
         // We filter the files
         String filePath = compileElement.getAttribute("Include");
         if ((filePath != null) && filePath.endsWith(".cs")) {
+          
+          // fix tests on unix system
+          // but should not be necessary
+          // on windows build machines
+          filePath =  StringUtils.replace(filePath, '\\', File.separatorChar);
           result.add(filePath);
         }
       }
