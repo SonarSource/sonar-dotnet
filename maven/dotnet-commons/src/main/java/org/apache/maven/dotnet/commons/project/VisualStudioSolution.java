@@ -81,7 +81,7 @@ public class VisualStudioSolution {
   }
 
   /**
-   * Gets the project a file belongs to.
+   * Gets the project a cs file belongs to.
    * 
    * @param file
    * @return the project contains the file, or <code>null</code> if none is
@@ -97,7 +97,7 @@ public class VisualStudioSolution {
   }
 
   /**
-   * Gets the project whose base directory contains the file.
+   * Gets the project whose base directory contains the file/directory.
    * 
    * @param file
    *          the file to look for

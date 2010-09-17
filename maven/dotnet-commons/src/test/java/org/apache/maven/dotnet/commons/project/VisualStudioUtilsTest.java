@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
@@ -54,7 +55,7 @@ public class VisualStudioUtilsTest {
   private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
   private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
-  
+
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
 
   @Test
@@ -64,7 +65,7 @@ public class VisualStudioUtilsTest {
     log.debug("Files : " + files);
     assertEquals("Bad number of files extracted", 6, files.size());
   }
-  
+
   @Test
   public void testReadSolution() throws Exception {
     File file = new File(SOLUTION_PATH);
@@ -91,11 +92,9 @@ public class VisualStudioUtilsTest {
     VisualStudioProject project = VisualStudioUtils.getProject(projectFile);
     File sourceFile = new File(SAMPLE_FILE_PATH);
     String relativePath = project.getRelativePath(sourceFile);
-    assertThat(
-        "Invalid relative path",
-        relativePath,
-        CoreMatchers.is(containsString("Model" + File.separator
-            + "SubType.cs")));
+    assertThat("Invalid relative path", relativePath,
+        CoreMatchers
+            .is(containsString("Model" + File.separator + "SubType.cs")));
   }
 
   @Test
@@ -116,9 +115,9 @@ public class VisualStudioUtilsTest {
     VisualStudioProject libProject = solution.getProject("ClassLibrary1");
     Collection<SourceFile> libFiles = libProject.getSourceFiles();
     assertEquals("Bad number of files extracted", 2, libFiles.size());
-    
+
   }
-  
+
   @Test
   public void testSolutionWithLinks() throws Exception {
     File file = new File(LINK_SOLUTION_PATH);
@@ -127,11 +126,15 @@ public class VisualStudioUtilsTest {
     List<VisualStudioProject> projects = solution.getProjects();
     for (VisualStudioProject project : projects) {
       Collection<SourceFile> files = project.getSourceFiles();
-      assertEquals("Bad number of files extracted", 1, files.size());
-      String name = files.iterator().next().getName();
+      assertEquals(
+          "Bad number of files extracted for project " + project
+          + " with " + StringUtils.join(files, ";"), 
+          1, 
+          files.size());
       
+      String name = files.iterator().next().getName();
+
       assertThat(name, not(is("AssemblyInfo.cs")));
     }
   }
-  
 }
