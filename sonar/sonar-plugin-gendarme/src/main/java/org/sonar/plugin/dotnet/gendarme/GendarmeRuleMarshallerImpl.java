@@ -32,70 +32,69 @@ import org.sonar.api.rules.RulePriority;
 
 public class GendarmeRuleMarshallerImpl implements GendarmeRuleMarshaller {
 
-	@Override
-	public String marshall(List<ActiveRule> rules) {
-		StringBuilder builder = new StringBuilder();
-		builder.append("<gendarme>");
+  @Override
+  public String marshall(List<ActiveRule> rules) {
+    StringBuilder builder = new StringBuilder();
+    builder.append("<gendarme>");
 
-		builder.append(marshall(rules, null));
+    builder.append(marshall(rules, null));
 
-		RulePriority[] priorities = RulePriority.values();
-		for (RulePriority rulePriority : priorities) {
-			builder.append(marshall(rules, rulePriority));
-		}
+    RulePriority[] priorities = RulePriority.values();
+    for (RulePriority rulePriority : priorities) {
+      builder.append(marshall(rules, rulePriority));
+    }
 
-		builder.append("</gendarme>");
-		return builder.toString();
-	}
+    builder.append("</gendarme>");
+    return builder.toString();
+  }
 
-	private String marshall(List<ActiveRule> rules, RulePriority priority) {
-		StringBuilder builder = new StringBuilder();
+  private String marshall(List<ActiveRule> rules, RulePriority priority) {
+    StringBuilder builder = new StringBuilder();
 
-		Map<String, List<ActiveRule>> assemblyRulesMap = new HashMap<String, List<ActiveRule>>();
-		
-		boolean assemblyRulesMapEmpty = true;
-		for (ActiveRule activeRule : rules) {
+    Map<String, List<ActiveRule>> assemblyRulesMap = new HashMap<String, List<ActiveRule>>();
+
+    boolean assemblyRulesMapEmpty = true;
+    for (ActiveRule activeRule : rules) {
 
       if (priority != null && priority != activeRule.getPriority()) {
-				continue;
-			}
+        continue;
+      }
 
-			String key = activeRule.getConfigKey();
-			String assembly = StringUtils.substringAfter(key, "@");
-			//String ruleName = StringUtils.substringBefore(key, "@");
-			List<ActiveRule> assemblyRules = assemblyRulesMap.get(assembly);
-			if (assemblyRules == null) {
-				assemblyRules = new ArrayList<ActiveRule>();
-				assemblyRulesMap.put(assembly, assemblyRules);
-				assemblyRulesMapEmpty = false;
-			}
-			assemblyRules.add(activeRule);
-		}
+      String key = activeRule.getConfigKey();
+      String assembly = StringUtils.substringAfter(key, "@");
+      // String ruleName = StringUtils.substringBefore(key, "@");
+      List<ActiveRule> assemblyRules = assemblyRulesMap.get(assembly);
+      if (assemblyRules == null) {
+        assemblyRules = new ArrayList<ActiveRule>();
+        assemblyRulesMap.put(assembly, assemblyRules);
+        assemblyRulesMapEmpty = false;
+      }
+      assemblyRules.add(activeRule);
+    }
 
-		if (!assemblyRulesMapEmpty) {
-			if (priority == null) {
-				builder.append("<ruleset name=\"default\">");
-			} else {
-				builder.append("<ruleset name=\"" + priority.name().toLowerCase()
-				    + "\">");
-			}
+    if (!assemblyRulesMapEmpty) {
+      if (priority == null) {
+        builder.append("<ruleset name=\"default\">");
+      } else {
+        builder.append("<ruleset name=\"" + priority.name().toLowerCase()
+            + "\">");
+      }
 
-			for (String assembly : assemblyRulesMap.keySet()) {
-				builder.append("\n<rules include=\"");
-				List<ActiveRule> assemblyRules = assemblyRulesMap.get(assembly);
-				appendRuleList(builder, assemblyRules);
-				builder.append("\" from=\"");
-				builder.append(assembly);
-				builder.append("\">");
-				appendRuleParams(builder, assemblyRules);
-				builder.append("</rules>");
-			}
-			builder.append("</ruleset>");
-		}
-		
+      for (String assembly : assemblyRulesMap.keySet()) {
+        builder.append("\n<rules include=\"");
+        List<ActiveRule> assemblyRules = assemblyRulesMap.get(assembly);
+        appendRuleList(builder, assemblyRules);
+        builder.append("\" from=\"");
+        builder.append(assembly);
+        builder.append("\">");
+        appendRuleParams(builder, assemblyRules);
+        builder.append("</rules>");
+      }
+      builder.append("</ruleset>");
+    }
 
-		return builder.toString();
-	}
+    return builder.toString();
+  }
 
   private void appendRuleParams(StringBuilder builder,
       List<ActiveRule> assemblyRules) {
@@ -106,14 +105,9 @@ public class GendarmeRuleMarshallerImpl implements GendarmeRuleMarshaller {
         String ruleName = StringUtils.substringBefore(key, "@");
         String propertyName = param.getRuleParam().getKey();
         String propertyValue = param.getValue();
-        builder
-          .append("<parameter rule=\"")
-          .append(ruleName)
-          .append("\" property=\"")
-          .append(propertyName)
-          .append("\" value=\"")
-          .append(propertyValue)
-          .append("\" />");
+        builder.append("<parameter rule=\"").append(ruleName)
+            .append("\" property=\"").append(propertyName)
+            .append("\" value=\"").append(propertyValue).append("\" />");
       }
     }
   }
