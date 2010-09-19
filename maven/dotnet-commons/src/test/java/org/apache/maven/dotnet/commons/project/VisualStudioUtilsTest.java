@@ -56,6 +56,7 @@ public class VisualStudioUtilsTest {
   private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
 
+  private static final String SILVERLIGHT_SOLUTION_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
 
   @Test
@@ -102,6 +103,20 @@ public class VisualStudioUtilsTest {
     File file = new File(SILVERLIGHT_PROJECT_PATH);
     VisualStudioProject project = VisualStudioUtils.getProject(file);
     assertTrue(project.isSilverlightProject());
+  }
+  
+  @Test
+  public void testSilverlightSolution() throws Exception {
+    File file = new File(SILVERLIGHT_SOLUTION_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    VisualStudioProject project = solution.getProject("BlankApplication");
+    Collection<SourceFile> files = project.getSourceFiles();
+    assertEquals("Bad number of files extracted", 3, files.size());
+    assertTrue(project.isSilverlightProject());
+    VisualStudioProject libProject = solution.getProject("BlankClassLibrary");
+    Collection<SourceFile> libFiles = libProject.getSourceFiles();
+    assertEquals("Bad number of files extracted", 2, libFiles.size());
   }
 
   @Test
