@@ -97,6 +97,12 @@ public class GendarmeResultParser extends AbstractXmlParser {
           || StringUtils.contains(source, "debugging symbols unavailable")) {
         String assemblyName = StringUtils.substringBefore(
             getNodeContent(issueElement, "assembly-name"), ",");
+        
+        if ("[across all assemblies analyzed]".equals(assemblyName)) {
+          // this one will be ignored... Anyway it barely never happen
+          continue;
+        }
+        
         CLRAssembly assembly = CLRAssembly.fromName(project, assemblyName);
         if (StringUtils.contains(key, "Assembly")) {
           // we assume we have a violation at the
@@ -143,8 +149,15 @@ public class GendarmeResultParser extends AbstractXmlParser {
         }
       } else {
         filePath = StringUtils.substringBefore(source, "(");
-        lineNumber = StringUtils.substring(
-            StringUtils.substringBetween(source, "(", ")"), 1);
+        
+        String lineNumberInfo = StringUtils.substringBetween(source, "(", ")");
+        if (StringUtils.contains(lineNumberInfo, ',')) {
+          // something like (123,34)
+          lineNumber = StringUtils.substringBefore(lineNumberInfo, ",");
+        } else {
+          // something like (~123)
+          lineNumber = StringUtils.substring(lineNumberInfo, 1);
+        }
 
         //
         // we do not care about violations in generated files
@@ -168,7 +181,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
       Resource<?> resource = getResource(filePath);
       Integer line = getIntValue(lineNumber);
       Rule rule = rulesManager.getPluginRule(GendarmePlugin.KEY, key);
-      if (rule == null) {
+      if (rule == null || resource == null) {
         // We skip the rules that were not registered
         continue;
       }
