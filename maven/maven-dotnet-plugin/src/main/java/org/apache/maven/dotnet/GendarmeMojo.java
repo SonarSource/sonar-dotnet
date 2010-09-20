@@ -85,6 +85,20 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
    * @parameter alias="${gendarmeConfig}"
    */
   private String gendarmeConfigFile;
+  
+  /**
+   * confidence [all | [[low | normal | high | total][+|-]],...
+   * Filter defects for the specified confidence levels.
+   * @parameter expression="${gendarme.confidence}" default-value="normal+"
+   */
+  private String confidence;
+  
+  /**
+   * severity [all | [[audit | low | medium | high | critical][+|-]]],...
+   * Filter defects for the specified severity levels.
+   * @parameter expression="${gendarme.confidence}" default-value="all"
+   */
+  private String severity;
 
 
   /**
@@ -162,7 +176,7 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
       final File silverlightMscorlibLocation = getSilverlightMscorlibLocation();
       
       try {
-        File mscorlibFile = new File(silverlightMscorlibLocation, MSCORLIB_DLL);
+        File mscorlibFile = new File(silverlightMscorlibLocation, MSCORLIB_DLL); //NOSONAR field written by plexus/maven
         FileUtils.copyFileToDirectory(mscorlibFile, destinationDirectory);
       } catch (IOException e) {
         log.error(e);
@@ -176,7 +190,7 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
     // We retrieve the required files
     prepareExecutable();
 
-    File reportFile = getReportFile(gendarmeReportName);
+    File reportFile = getReportFile(gendarmeReportName);  //NOSONAR field written by plexus/maven
 
     // We build the command arguments
     List<String> commandArguments = new ArrayList<String>();
@@ -195,6 +209,16 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
     if (verbose) {
       commandArguments.add("--v");
     }
+    
+    // put the severity level param
+    commandArguments.add("--severity");
+    commandArguments.add(severity);
+    
+    // put the confidence level param
+    commandArguments.add("--confidence");
+    commandArguments.add(confidence);
+    
+    
     // Add the assemblies to check
     log.debug("- Scanned assemblies :");
     for (File checkedAssembly : assemblies) {

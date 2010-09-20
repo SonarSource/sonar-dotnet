@@ -90,11 +90,11 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
     String commandName = "MSBuild.exe";
     File executable;
     if ("2.0".equals(toolVersion)) {
-      executable = new File(dotnet_2_0_sdk_directory, commandName);
+      executable = new File(dotnet_2_0_sdk_directory, commandName); //NOSONAR field written by plexus/maven
     } else if ("4.0".equals(toolVersion)) {
-      executable = new File(dotnet_4_0_sdk_directory, commandName);
+      executable = new File(dotnet_4_0_sdk_directory, commandName); //NOSONAR field written by plexus/maven
     } else {
-      executable = new File(dotnet_3_5_sdk_directory, commandName);
+      executable = new File(dotnet_3_5_sdk_directory, commandName); //NOSONAR field written by plexus/maven
     }
 
     if (!executable.exists()) {
