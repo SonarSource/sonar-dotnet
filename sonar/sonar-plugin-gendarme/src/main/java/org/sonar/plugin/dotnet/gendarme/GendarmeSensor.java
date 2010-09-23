@@ -46,8 +46,14 @@ import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.xml.sax.InputSource;
 
 public class GendarmeSensor extends AbstractDotnetSensor {
-  private final static Logger log = LoggerFactory
-      .getLogger(GendarmeSensor.class);
+  
+  private final static Logger log = LoggerFactory.getLogger(GendarmeSensor.class);
+  
+  private static final String GENDARME_MODE_KEY = "sonar.dotnet.gendarme";
+  private static final String GENDARME_DEFAULT_MODE = "enable";
+  private static final String GENDARME_SKIP_MODE = "skip";
+  private static final String GENDARME_REUSE_MODE = "reuseReports";
+  private static final String GENDARME_REPORT_KEY = "sonar.dotnet.gendarme.reportPath";
 
   private static final String GENDARME_REPORT_XML = "gendarme-report.xml";
   private static final String GENDARME_TRANSFO_XSL = "gendarme-transformation.xsl";
@@ -78,7 +84,15 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File report = findReport(project, GENDARME_REPORT_XML);
+    final String reportFileName;
+    if (GENDARME_REUSE_MODE.equals(getGendarmeMode(project))) {
+      reportFileName = project.getConfiguration().getString(GENDARME_REPORT_KEY);
+      log.warn("Using reuse report mode for Mono Gendarme");
+      log.warn("Mono Gendarme profile settings may not have been taken in account");
+    } else {
+      reportFileName = GENDARME_REPORT_XML;
+    }
+    File report = findReport(project, reportFileName);
     File dir = getReportsDirectory(project);
 
     // We generate the transformer
@@ -138,7 +152,25 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    return pluginHandler;
+    String mode = project.getConfiguration().getString(GENDARME_MODE_KEY);
+    final MavenPluginHandler pluginHandlerReturned;
+    if (GENDARME_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = pluginHandler;
+    } else {
+      pluginHandlerReturned = null;
+    }
+    return pluginHandlerReturned;
+  }
+  
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    String mode = getGendarmeMode(project);
+    return super.shouldExecuteOnProject(project) && !GENDARME_SKIP_MODE.equalsIgnoreCase(mode);
+  }
+
+  private String getGendarmeMode(Project project) {
+    String mode = project.getConfiguration().getString(GENDARME_MODE_KEY, GENDARME_DEFAULT_MODE);
+    return mode;
   }
 
 }
