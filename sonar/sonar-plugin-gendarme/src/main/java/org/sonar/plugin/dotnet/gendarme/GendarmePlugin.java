@@ -20,12 +20,36 @@
 
 package org.sonar.plugin.dotnet.gendarme;
 
+import static org.sonar.plugin.dotnet.gendarme.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
+
+
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
+@Properties({
+  @Property(
+      key = GENDARME_MODE_KEY,
+      defaultValue = GENDARME_DEFAULT_MODE,
+      name = "Mono Gendarme activation mode",
+      description = "Possible values : enable, skip, reuseReport",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = GENDARME_REPORT_KEY,
+      defaultValue = GENDARME_REPORT_XML,
+      name = "Name of the Mono Gendarme report file",
+      description = "Name of the Mono Gendarme report file used when reuse report mode is activated",
+      project = true,
+      module = false,
+      global = true)
+})
 public class GendarmePlugin implements Plugin {
   public static final String KEY = "gendarme";
 

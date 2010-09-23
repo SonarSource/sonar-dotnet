@@ -20,6 +20,8 @@
 
 package org.sonar.plugin.dotnet.gendarme;
 
+import static org.sonar.plugin.dotnet.gendarme.Constants.*;
+
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -49,15 +51,6 @@ public class GendarmeSensor extends AbstractDotnetSensor {
   
   private final static Logger log = LoggerFactory.getLogger(GendarmeSensor.class);
   
-  private static final String GENDARME_MODE_KEY = "sonar.dotnet.gendarme";
-  private static final String GENDARME_DEFAULT_MODE = "enable";
-  private static final String GENDARME_SKIP_MODE = "skip";
-  private static final String GENDARME_REUSE_MODE = "reuseReports";
-  private static final String GENDARME_REPORT_KEY = "sonar.dotnet.gendarme.reportPath";
-
-  private static final String GENDARME_REPORT_XML = "gendarme-report.xml";
-  private static final String GENDARME_TRANSFO_XSL = "gendarme-transformation.xsl";
-  private static final String GENDARME_PROCESSED_REPORT_XML = "gendarme-report-processed.xml";
 
   private RulesManager rulesManager;
   private RulesProfile profile;
