@@ -85,8 +85,9 @@ public class GendarmeSensor extends AbstractDotnetSensor {
     } else {
       reportFileName = GENDARME_REPORT_XML;
     }
-    File report = findReport(project, reportFileName);
+    
     File dir = getReportsDirectory(project);
+    File report = new File(dir, reportFileName);
 
     // We generate the transformer
     File transformedReport = transformReport(report, dir);

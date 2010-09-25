@@ -123,7 +123,6 @@ public class GendarmeSensorTest {
   }
 
   @Test
-  @Ignore
   public void testAnalyseReuseDifferentDir() {
     testAnalyseReuse("../working/gendarme-report.xml");
   }
