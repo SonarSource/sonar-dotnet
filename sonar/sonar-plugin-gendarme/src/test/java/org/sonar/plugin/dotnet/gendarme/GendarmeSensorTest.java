@@ -71,7 +71,7 @@ public class GendarmeSensorTest {
     mvnProject.setPackaging("sln");
     mvnProject.getProperties().put(VisualStudioUtils.VISUAL_SOLUTION_NAME_PROPERTY, "Example.sln");
     File pomFile 
-      = new File("src/test/resources/solution/Example/pom.xml");
+      = new File("target/test-classes/solution/Example/pom.xml");
     mvnProject.setFile(pomFile);
     
     // set up sonar project
@@ -83,7 +83,7 @@ public class GendarmeSensorTest {
     when(project.getConfiguration()).thenReturn(configuration);
     ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
     when(project.getFileSystem()).thenReturn(projectFileSystem);
-    when(projectFileSystem.getBuildDir()).thenReturn(new File("src/test/resources/solution/Example/target"));
+    when(projectFileSystem.getBuildDir()).thenReturn(new File("target/test-classes/solution/Example/target"));
     
     // set up rules manager
     Rule dummyRule = mock(Rule.class);
