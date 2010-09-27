@@ -81,7 +81,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
    * @param stream
    */
   public void parse(URL url) {
-    List<Element> issues = extractElements(url, "//issue");
+    List<Element> issues = extractElements(url, "/issues/issue");
     // We add each issue
     for (Element issueElement : issues) {
 
