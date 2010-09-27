@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Core.IMoney Example.Core.IMoney::AddMoney(Example.Core.Money)</location>
+</issue>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Core.IMoney Example.Core.IMoney::AddMoneyBag(Example.Core.MoneyBag)</location>
+</issue>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈56)</source>
+<location>Example.Core.IMoney Example.Core.Money::AddMoney(Example.Core.Money)</location>
+</issue>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈63)</source>
+<location>Example.Core.IMoney Example.Core.Money::AddMoneyBag(Example.Core.MoneyBag)</location>
+</issue>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈78)</source>
+<location>Example.Core.IMoney Example.Core.MoneyBag::AddMoney(Example.Core.Money)</location>
+</issue>
+<issue>
+<key>AvoidRedundancyInMethodNameRule</key>
+<message>Consider renaming method to 'Add'.. This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈83)</source>
+<location>Example.Core.IMoney Example.Core.MoneyBag::AddMoneyBag(Example.Core.MoneyBag)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.IMoney'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈83)</source>
+<location>System.Boolean Example.Core.Money::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.Money'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈85)</source>
+<location>System.Boolean Example.Core.Money::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.IMoney'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈99)</source>
+<location>System.Boolean Example.Core.Money::AltEquals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.Money'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈101)</source>
+<location>System.Boolean Example.Core.Money::AltEquals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.IMoney'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈115)</source>
+<location>System.Boolean Example.Core.MoneyBag::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidRepetitiveCastsRule</key>
+<message>'anObject' is casted 2 times for type 'Example.Core.MoneyBag'.. The method seems to repeat the same cast operation multiple times.Change the logic to ensure the (somewhat expensive) cast is done once.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈118)</source>
+<location>System.Boolean Example.Core.MoneyBag::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>AvoidUnsealedUninheritedInternalTypeRule</key>
+<message>. Due to performance issues, types which are not visible outside of the assembly and which have no derived types should be sealed.You should seal this type, unless you plan to inherit from this type in the near-future.</message>
+<assembly-name>Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Application.Program</location>
+</issue>
+<issue>
+<key>AvoidUnusedParametersRule</key>
+<message>Parameter 'args' of type 'System.String[]' is never used in the method.. The method contains one or more unused parameters.You should remove or use the unused parameters.</message>
+<assembly-name>Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Application/Program.cs(≈31)</source>
+<location>args</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈51)</source>
+<location>m</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈56)</source>
+<location>m</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈63)</source>
+<location>s</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈202)</source>
+<location>m</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈40)</source>
+<location>bag</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈73)</source>
+<location>m</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈182)</source>
+<location>m</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/SampleMeasure.cs(≈74)</source>
+<location>input</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/SampleMeasure.cs(≈79)</source>
+<location>obj</location>
+</issue>
+<issue>
+<key>CheckParametersNullityInVisibleMethodsRule</key>
+<message>. A visible method does not check its parameter(s) for null values.Since the caller is unknown you should always verify all of your parameters to protect yourself.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/SampleMeasure.cs(≈86)</source>
+<location>obj</location>
+</issue>
+<issue>
+<key>ConsiderUsingStaticTypeRule</key>
+<message>. This type contains only static fields and methods and should be static.Change this type into a static type to gain clarity and better error reporting.</message>
+<assembly-name>Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Application.Program</location>
+</issue>
+<issue>
+<key>ImplementEqualsTypeRule</key>
+<message>Implement System.IEquatable&lt;T&gt;. Since this type overrides Equals(object) it is also a good candidate to provide a Equals method for it's own type.Implement the suggested method or interface (2.0) to avoid casting and, for ValueType, boxing penalities.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈41)</source>
+<location>Example.Core.Money</location>
+</issue>
+<issue>
+<key>ImplementEqualsTypeRule</key>
+<message>Implement System.IEquatable&lt;T&gt;. Since this type overrides Equals(object) it is also a good candidate to provide a Equals method for it's own type.Implement the suggested method or interface (2.0) to avoid casting and, for ValueType, boxing penalities.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈40)</source>
+<location>Example.Core.MoneyBag</location>
+</issue>
+<issue>
+<key>ImplementEqualsTypeRule</key>
+<message>Implement System.IEquatable&lt;T&gt;. Since this type overrides Equals(object) it is also a good candidate to provide a Equals method for it's own type.Implement the suggested method or interface (2.0) to avoid casting and, for ValueType, boxing penalities.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/SampleMeasure.cs(≈41)</source>
+<location>Example.Core.SampleMeasure</location>
+</issue>
+<issue>
+<key>MarkAssemblyWithCLSCompliantRule</key>
+<message>. This assembly is not decorated with the [CLSCompliant] attribute.Add this attribute to ease the use (or non-use) of your assembly by CLS consumers.</message>
+<assembly-name>Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</location>
+</issue>
+<issue>
+<key>MarkAssemblyWithCLSCompliantRule</key>
+<message>. This assembly is not decorated with the [CLSCompliant] attribute.Add this attribute to ease the use (or non-use) of your assembly by CLS consumers.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source/>
+<location>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</location>
+</issue>
+<issue>
+<key>ParameterNamesShouldMatchOverriddenMethodRule</key>
+<message>The name of parameter #1 (anObject) does not match the name of the parameter in the overriden method (obj).. This method overrides (or implements) an existing method but does not use the same parameter names as the original.Keep parameter names consistent when overriding a class or implementing an interface.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈78)</source>
+<location>System.Boolean Example.Core.Money::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>ParameterNamesShouldMatchOverriddenMethodRule</key>
+<message>The name of parameter #1 (anObject) does not match the name of the parameter in the overriden method (obj).. This method overrides (or implements) an existing method but does not use the same parameter names as the original.Keep parameter names consistent when overriding a class or implementing an interface.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/MoneyBag.cs(≈112)</source>
+<location>System.Boolean Example.Core.MoneyBag::Equals(System.Object)</location>
+</issue>
+<issue>
+<key>ReviewInconsistentIdentityRule</key>
+<message>GetHashCode uses fields and/or properties not used by the equality methods: fCurrency fAmount . The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.Equals, relational operator, CompareTo methods should use the same fields and getter properties. GetHashCode should use the same fields/properties or a strict subset of them. Clone should use the same fields/properties or a superset of them.</message>
+<assembly-name>Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</assembly-name>
+<source>target/test-classes/solution/Example/Example.Core/Money.cs(≈180)</source>
+<location>System.Int32 Example.Core.Money::GetHashCode()</location>
+</issue>
+</issues>
