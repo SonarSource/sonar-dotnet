@@ -96,7 +96,7 @@ public class FxCopRuleParser {
         FxCopRule rule = new FxCopRule();
         String ruleName = ruleElement.getAttribute("Name");
         String active = ruleElement.getAttribute("Enabled");
-        String priority = ruleElement.getAttribute("SonarPriotiry");
+        String priority = ruleElement.getAttribute("SonarPriority");
         rule.setName(ruleName);
         rule.setEnabled(active.toLowerCase().contains("true"));
         rule.setCategory(category);
