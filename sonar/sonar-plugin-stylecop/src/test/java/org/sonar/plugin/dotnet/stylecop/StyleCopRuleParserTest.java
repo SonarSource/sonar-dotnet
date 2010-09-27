@@ -38,6 +38,7 @@ public class StyleCopRuleParserTest {
 			 StyleCopRuleParser.parse(new InputStreamReader(stream));
 	
 		 assertEquals(144, result.size());
+		 assertEquals("major", result.get(3).getPriority());
 	}
 
 	

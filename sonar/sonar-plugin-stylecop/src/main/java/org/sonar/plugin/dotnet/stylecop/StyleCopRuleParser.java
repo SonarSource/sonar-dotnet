@@ -78,7 +78,7 @@ public class StyleCopRuleParser {
         Element analyzerElement = (Element) ruleElement.getParentNode()
             .getParentNode();
         String ruleName = ruleElement.getAttribute("Name");
-        String priority = ruleElement.getAttribute("SonarPriotiry");
+        String priority = ruleElement.getAttribute("SonarPriority");
 
         StyleCopRule rule = new StyleCopRule();
         NodeList elements = ruleElement.getElementsByTagName("BooleanProperty");
