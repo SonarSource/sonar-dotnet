@@ -48,12 +48,13 @@ public enum CSharpFileLocator {
 	if (csFilesProjectMap.isEmpty()) {
 	  registerProject(project);
 	}
+	File absoluteFile = file.getAbsoluteFile();
 	final CSharpFile result;
-	if (csFilesProjectMap.containsKey(file)) {
-	  VisualStudioProject visualProject = csFilesProjectMap.get(file);
-	  result = CSharpFile.from(visualProject, file, unitTest);
+	if (csFilesProjectMap.containsKey(absoluteFile)) {
+	  VisualStudioProject visualProject = csFilesProjectMap.get(absoluteFile);
+	  result = CSharpFile.from(visualProject, absoluteFile, unitTest);
 	} else {
-		log.debug("file {} ignored (i.e. link file or file not referenced by any project)", file);
+		log.debug("file {} ignored (i.e. link file or file not referenced by any project)", absoluteFile);
 	  result = null;
 	}
 	
