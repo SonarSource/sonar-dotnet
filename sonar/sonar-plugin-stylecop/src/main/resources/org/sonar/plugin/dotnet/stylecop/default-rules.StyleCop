@@ -17,12 +17,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="ConstFieldNamesMustBeginWithUpperCaseLetter"> 
+                <Rule SonarPriority="major" Name="ConstFieldNamesMustBeginWithUpperCaseLetter"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter"> 
+                <Rule SonarPriority="major" Name="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -32,12 +32,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FieldNamesMustBeginWithLowerCaseLetter"> 
+                <Rule SonarPriority="major" Name="FieldNamesMustBeginWithLowerCaseLetter"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="AccessibleFieldsMustBeginWithUpperCaseLetter"> 
+                <Rule SonarPriority="major" Name="AccessibleFieldsMustBeginWithUpperCaseLetter"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -47,12 +47,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FieldNamesMustNotBeginWithUnderscore"> 
+                <Rule SonarPriority="major" Name="FieldNamesMustNotBeginWithUnderscore"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FieldNamesMustNotContainUnderscore"> 
+                <Rule SonarPriority="major" Name="FieldNamesMustNotContainUnderscore"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -106,7 +106,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingParenthesisMustBeSpacedCorrectly"> 
+                <Rule SonarPriority="minor" Name="ClosingParenthesisMustBeSpacedCorrectly"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -116,7 +116,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingSquareBracketsMustBeSpacedCorrectly"> 
+                <Rule SonarPriority="minor" Name="ClosingSquareBracketsMustBeSpacedCorrectly"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -126,7 +126,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingCurlyBracketsMustBeSpacedCorrectly"> 
+                <Rule SonarPriority="minor" Name="ClosingCurlyBracketsMustBeSpacedCorrectly"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -136,7 +136,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingGenericBracketsMustBeSpacedCorrectly"> 
+                <Rule SonarPriority="minor" Name="ClosingGenericBracketsMustBeSpacedCorrectly"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -146,7 +146,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingAttributeBracketsMustBeSpacedCorrectly"> 
+                <Rule SonarPriority="minor" Name="ClosingAttributeBracketsMustBeSpacedCorrectly"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -220,7 +220,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="DocumentationMustContainValidXml"> 
+                <Rule SonarPriority="minor" Name="DocumentationMustContainValidXml"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -330,17 +330,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="DocumentationTextMustNotBeEmpty"> 
+                <Rule SonarPriority="minor" Name="DocumentationTextMustNotBeEmpty"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="info" Name="DocumentationTextMustContainWhitespace"> 
+                <Rule SonarPriority="info" Name="DocumentationTextMustContainWhitespace"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="DocumentationMustMeetCharacterPercentage"> 
+                <Rule SonarPriority="minor" Name="DocumentationMustMeetCharacterPercentage"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -424,12 +424,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="critical" Name="CurlyBracketsMustNotBeOmitted"> 
+                <Rule SonarPriority="critical" Name="CurlyBracketsMustNotBeOmitted"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="AllAccessorsMustBeMultiLineOrSingleLine"> 
+                <Rule SonarPriority="minor" Name="AllAccessorsMustBeMultiLineOrSingleLine"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -444,12 +444,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="CodeMustNotContainMultipleBlankLinesInARow"> 
+                <Rule SonarPriority="major" Name="CodeMustNotContainMultipleBlankLinesInARow"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingCurlyBracketsMustNotBePrecededByBlankLine"> 
+                <Rule SonarPriority="minor" Name="ClosingCurlyBracketsMustNotBePrecededByBlankLine"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -459,7 +459,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ChainedStatementBlocksMustNotBePrecededByBlankLine"> 
+                <Rule SonarPriority="minor" Name="ChainedStatementBlocksMustNotBePrecededByBlankLine"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -474,7 +474,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingCurlyBracketMustBeFollowedByBlankLine"> 
+                <Rule SonarPriority="minor" Name="ClosingCurlyBracketMustBeFollowedByBlankLine"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -498,12 +498,12 @@
         </Analyzer> 
         <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.MaintainabilityRules"> 
             <Rules> 
-                <Rule SonarPriotiry="major" Name="AccessModifierMustBeDeclared"> 
+                <Rule SonarPriority="major" Name="AccessModifierMustBeDeclared"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FieldsMustBePrivate"> 
+                <Rule SonarPriority="major" Name="FieldsMustBePrivate"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -523,17 +523,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FileMayOnlyContainASingleClass"> 
+                <Rule SonarPriority="major" Name="FileMayOnlyContainASingleClass"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="FileMayOnlyContainASingleNamespace"> 
+                <Rule SonarPriority="major" Name="FileMayOnlyContainASingleNamespace"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="StatementMustNotUseUnnecessaryParenthesis"> 
+                <Rule SonarPriority="minor" Name="StatementMustNotUseUnnecessaryParenthesis"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -553,7 +553,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="RemoveUnnecessaryCode"> 
+                <Rule SonarPriority="major" Name="RemoveUnnecessaryCode"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -562,7 +562,7 @@
         </Analyzer> 
         <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules"> 
             <Rules> 
-                <Rule SonarPriotiry="major" Name="CommentsMustContainText"> 
+                <Rule SonarPriority="major" Name="CommentsMustContainText"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -582,12 +582,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingParenthesisMustBeOnLineOfLastParameter"> 
+                <Rule SonarPriority="minor" Name="ClosingParenthesisMustBeOnLineOfLastParameter"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="ClosingParenthesisMustBeOnLineOfOpeningParenthesis"> 
+                <Rule SonarPriority="minor" Name="ClosingParenthesisMustBeOnLineOfOpeningParenthesis"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -642,17 +642,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="info" Name="DoNotPlaceRegionsWithinElements"> 
+                <Rule SonarPriority="info" Name="DoNotPlaceRegionsWithinElements"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="critical" Name="CodeMustNotContainEmptyStatements"> 
+                <Rule SonarPriority="critical" Name="CodeMustNotContainEmptyStatements"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="CodeMustNotContainMultipleStatementsOnOneLine"> 
+                <Rule SonarPriority="major" Name="CodeMustNotContainMultipleStatementsOnOneLine"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -662,17 +662,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="BlockStatementsMustNotContainEmbeddedRegions"> 
+                <Rule SonarPriority="minor" Name="BlockStatementsMustNotContainEmbeddedRegions"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="UseStringEmptyForEmptyStrings"> 
+                <Rule SonarPriority="major" Name="UseStringEmptyForEmptyStrings"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="UseBuiltInTypeAlias"> 
+                <Rule SonarPriority="major" Name="UseBuiltInTypeAlias"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -681,7 +681,7 @@
         </Analyzer> 
         <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.OrderingRules"> 
             <Rules> 
-                <Rule SonarPriotiry="minor" Name="UsingDirectivesMustBePlacedWithinNamespace"> 
+                <Rule SonarPriority="minor" Name="UsingDirectivesMustBePlacedWithinNamespace"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -696,12 +696,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="ConstantsMustAppearBeforeFields"> 
+                <Rule SonarPriority="major" Name="ConstantsMustAppearBeforeFields"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="major" Name="StaticElementsMustAppearBeforeInstanceElements"> 
+                <Rule SonarPriority="major" Name="StaticElementsMustAppearBeforeInstanceElements"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
@@ -731,17 +731,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives"> 
+                <Rule SonarPriority="minor" Name="UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace"> 
+                <Rule SonarPriority="minor" Name="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
                 </Rule> 
-                <Rule SonarPriotiry="minor" Name="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName"> 
+                <Rule SonarPriority="minor" Name="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName"> 
                     <RuleSettings> 
                         <BooleanProperty Name="Enabled">True</BooleanProperty> 
                     </RuleSettings> 
