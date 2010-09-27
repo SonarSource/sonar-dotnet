@@ -99,7 +99,11 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
       String ruleName = fxCopRule.getName();
       Rule dbRule = rulesMap.get(ruleName);
       if (dbRule != null) {
+        String rawPriority = fxCopRule.getPriority();
         RulePriority rulePriority = RulePriority.MAJOR;
+        if (StringUtils.isNotEmpty(rawPriority)) {
+          rulePriority = RulePriority.valueOfString(rawPriority);
+        }
         ActiveRule activeRule = new ActiveRule(null, dbRule, rulePriority);
         result.add(activeRule);
       }
@@ -149,6 +153,7 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
       for (FxCopRule fxCopRule : rules) {
         RuleDef currentRule = new RuleDef();
         currentRule.setName(fxCopRule.getName());
+        currentRule.setPriority(fxCopRule.getPriority());
         ruleDefinitions.add(currentRule);
       }
       ruleFile.setRules(ruleDefinitions);
@@ -188,6 +193,12 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
       fxCopRule.setEnabled(true);
       fxCopRule.setFileName(fileName);
       fxCopRule.setName(name);
+      
+      RulePriority priority = activeRule.getPriority();
+      if (priority != null) {
+        fxCopRule.setPriority(priority.name().toLowerCase());
+      }
+      
       result.add(fxCopRule);
     }
     return result;

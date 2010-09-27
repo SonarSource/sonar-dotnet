@@ -96,10 +96,12 @@ public class FxCopRuleParser {
         FxCopRule rule = new FxCopRule();
         String ruleName = ruleElement.getAttribute("Name");
         String active = ruleElement.getAttribute("Enabled");
+        String priority = ruleElement.getAttribute("SonarPriotiry");
         rule.setName(ruleName);
         rule.setEnabled(active.toLowerCase().contains("true"));
         rule.setCategory(category);
         rule.setFileName(scopeName);
+        rule.setPriority(priority);
         result.add(rule);
       }
     } catch (XPathExpressionException e) {

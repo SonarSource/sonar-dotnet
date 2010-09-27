@@ -34,6 +34,9 @@ public class RuleDef {
 
   @XmlAttribute(name = "Enabled")
   private String enabled = "True";
+  
+  @XmlAttribute(name = "SonarPriority")
+  private String priority = "major";
 
   /**
    * Constructs a @link{RulesDef}.
@@ -77,6 +80,14 @@ public class RuleDef {
    */
   public void setEnabled(String enabled) {
     this.enabled = enabled;
+  }
+
+  public String getPriority() {
+    return priority;
+  }
+
+  public void setPriority(String priority) {
+    this.priority = priority;
   }
 
 }

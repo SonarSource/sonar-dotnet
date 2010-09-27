@@ -33,6 +33,7 @@ public class FxCopRule {
   private String name;
   private boolean enabled;
   private String fileName;
+  private String priority;
 
   /**
    * Constructs a @link{FxCopRule}.
@@ -120,5 +121,21 @@ public class FxCopRule {
    */
   public void setFileName(String fileName) {
     this.fileName = fileName;
+  }
+  
+  /**
+   * Get the sonar priority of this rule
+   * @return the sonar priority
+   */
+  public String getPriority() {
+    return priority;
+  }
+
+  /**
+   * Set the sonar priority of this rule
+   * @param priority  sonar priority
+   */
+  public void setPriority(String priority) {
+    this.priority = priority;
   }
 }
