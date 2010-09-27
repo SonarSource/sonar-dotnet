@@ -94,8 +94,7 @@ public class VisualStudioUtilsTest {
     File sourceFile = new File(SAMPLE_FILE_PATH);
     String relativePath = project.getRelativePath(sourceFile);
     assertThat("Invalid relative path", relativePath,
-        CoreMatchers
-            .is(containsString("Model" + File.separator + "SubType.cs")));
+        containsString("Model" + File.separator + "SubType.cs"));
   }
 
   @Test
