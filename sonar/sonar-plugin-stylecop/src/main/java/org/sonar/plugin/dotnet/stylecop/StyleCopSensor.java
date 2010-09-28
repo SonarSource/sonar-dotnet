@@ -24,6 +24,8 @@
  */
 package org.sonar.plugin.dotnet.stylecop;
 
+import static org.sonar.plugin.dotnet.stylecop.Constants.*;
+
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -56,8 +58,7 @@ import org.xml.sax.InputSource;
 public class StyleCopSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory
       .getLogger(StyleCopSensor.class);
-  public static final String STYLECOP_TRANSFO_XSL = "stylecop-transformation.xsl";
-  public static final String STYLECOP_PROCESSED_REPORT_XML = "stylecop-report-processed.xml";
+  
 
   private RulesManager rulesManager;
   private RulesProfile profile;
@@ -82,8 +83,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File report = findReport(project,
-        StyleCopPluginHandler.STYLE_COP_REPORT_NAME);
+    File report = findReport(project, STYLECOP_REPORT_NAME);
     File dir = getReportsDirectory(project);
 
     // We generate the transformer

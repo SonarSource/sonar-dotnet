@@ -23,17 +23,41 @@
  */
 package org.sonar.plugin.dotnet.stylecop;
 
+import static org.sonar.plugin.dotnet.stylecop.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
 /**
  * Sonar plugin that collects the StyleCop analysis.
  * 
  * @author Jose CHILLAN May 19, 2009
  */
+@Properties({
+  @Property(
+      key = STYLECOP_MODE_KEY,
+      defaultValue = STYLECOP_DEFAULT_MODE,
+      name = "StyleCop activation mode",
+      description = "Possible values : enable, skip, reuseReport",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = STYLECOP_REPORT_KEY,
+      defaultValue = STYLECOP_REPORT_NAME,
+      name = "Name of the FxCop report file",
+      description = "Name of the FxCop report file used when reuse report mode is activated. " +
+          "If several reports need to be analysed (may happen with silverlight), several path " +
+          "may be specified using ';' as a delimiter",
+      project = true,
+      module = false,
+      global = true)
+})
 public class StyleCopPlugin implements Plugin {
   public static final String KEY = "stylecop";
 

@@ -23,9 +23,13 @@
  */
 package org.sonar.plugin.dotnet.stylecop;
 
+import static org.sonar.plugin.dotnet.stylecop.Constants.*;
+
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.maven.MavenPlugin;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
@@ -38,8 +42,10 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
  * @author Jose CHILLAN May 19, 2009
  */
 public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
+  
+  private final static Logger log = LoggerFactory.getLogger(StyleCopPluginHandler.class);
+  
   public static final String STYLE_COP_FILE = "sonar.StyleCop";
-  public static final String STYLE_COP_REPORT_NAME = "stylecop-report.xml";
 
   private RulesProfile rulesProfile;
   private StyleCopRuleRepository rulesRepository;
@@ -73,8 +79,9 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
       configureParameters(plugin);
-      plugin.setParameter("styleCopReportName", STYLE_COP_REPORT_NAME);
+      plugin.setParameter("styleCopReportName", STYLECOP_REPORT_NAME);
     } catch (IOException e) {
+      log.debug("Unexpected error during config phase", e);
     }
   }
 
