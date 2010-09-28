@@ -23,6 +23,9 @@
  */
 package org.sonar.plugin.dotnet.fxcop;
 
+
+import static org.sonar.plugin.dotnet.fxcop.Constants.*;
+
 import java.io.File;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -37,6 +40,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
@@ -55,12 +59,6 @@ import org.xml.sax.InputSource;
  */
 public class FxCopSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(FxCopSensor.class);
-
-  private static final String FXCOP_REPORT_XML = "fxcop-report.xml";
-  private static final String SL_FXCOP_REPORT_XML = "silverlight-fxcop-report.xml";
-  private static final String FXCOP_TRANSFO_XSL = "fxcop-transformation.xsl";
-  private static final String FXCOP_PROCESSED_REPORT_XML = "fxcop-report-processed.xml";
-  private static final String SL_FXCOP_PROCESSED_REPORT_XML = "silverlight-fxcop-report-processed.xml";
 
   private RulesManager rulesManager;
   private RulesProfile profile;
@@ -87,28 +85,37 @@ public class FxCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File dir = getReportsDirectory(project);
-    File report = new File(dir, FXCOP_REPORT_XML);
-    File silverlightReport = new File(dir, SL_FXCOP_REPORT_XML);
     
-    FxCopResultParser parser 
-      = new FxCopResultParser(project, context, rulesManager, profile);
-    
-    parseReport(report, FXCOP_PROCESSED_REPORT_XML, parser, dir);
-    
-    if (silverlightReport.exists()) {
-      log.info("FxCop Silverlight found");
-      parseReport(silverlightReport, SL_FXCOP_PROCESSED_REPORT_XML, parser, dir);
+    final String[] reportFileNames;
+    if (FXCOP_REUSE_MODE.equals(getFxCopMode(project))) {
+      reportFileNames = StringUtils.split(project.getConfiguration().getString(FXCOP_REPORT_KEY),';');
+      log.warn("Using reuse report mode for FxCop");
+      log.warn("FxCop profile settings may not have been taken in account");
     } else {
-      log.info("No FxCop Silverlight found");
+      reportFileNames = new String[]{ FXCOP_REPORT_XML, SL_FXCOP_REPORT_XML};
     }
     
     
+    File dir = getReportsDirectory(project);
+    
+    for (String reportFileName : reportFileNames) {
+      File report = new File(dir, reportFileName);
+      if (report.exists()) {
+        log.info("FxCop report found at location {}", report);
+        FxCopResultParser parser 
+          = new FxCopResultParser(project, context, rulesManager, profile);
+        
+        parseReport(report, parser, dir);
+      } else {
+        log.info("No FxCop report found for path {}", report);
+      }
+    }
   }
 
-  private void parseReport(File report, String fxcopProcessedReportXml, FxCopResultParser parser, File workDirectory) { 
+  private void parseReport(File report, FxCopResultParser parser, File workDirectory) { 
     // We generate the transformer
-    File transformedReport = transformReport(report, workDirectory, FXCOP_PROCESSED_REPORT_XML);
+    File transformedReport 
+      = transformReport(report, workDirectory, report.getName()+FXCOP_PROCESSED_REPORT_SUFFIX);
     if (transformedReport == null) {
       return;
     }
@@ -161,7 +168,25 @@ public class FxCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    return pluginHandler;
+    String mode = project.getConfiguration().getString(FXCOP_MODE_KEY);
+    final MavenPluginHandler pluginHandlerReturned;
+    if (FXCOP_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = pluginHandler;
+    } else {
+      pluginHandlerReturned = null;
+    }
+    return pluginHandlerReturned;
+  }
+  
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    String mode = getFxCopMode(project);
+    return super.shouldExecuteOnProject(project) && !FXCOP_SKIP_MODE.equalsIgnoreCase(mode);
+  }
+
+  private String getFxCopMode(Project project) {
+    String mode = project.getConfiguration().getString(FXCOP_MODE_KEY, FXCOP_DEFAULT_MODE);
+    return mode;
   }
 
 }

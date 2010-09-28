@@ -23,17 +23,41 @@
  */
 package org.sonar.plugin.dotnet.fxcop;
 
+import static org.sonar.plugin.dotnet.fxcop.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
 /**
  * A plugin responsible of FXCop reporting in sonar.
  * 
  * @author Jose CHILLAN Feb 16, 2010
  */
+@Properties({
+  @Property(
+      key = FXCOP_MODE_KEY,
+      defaultValue = FXCOP_DEFAULT_MODE,
+      name = "FxCop activation mode",
+      description = "Possible values : enable, skip, reuseReport",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = FXCOP_REPORT_KEY,
+      defaultValue = FXCOP_REPORT_XML,
+      name = "Name of the FxCop report file",
+      description = "Name of the FxCop report file used when reuse report mode is activated. " +
+      		"If several reports need to be analysed (may happen with silverlight), several path " +
+      		"may be specified using ';' as a delimiter",
+      project = true,
+      module = false,
+      global = true)
+})
 public class FxCopPlugin implements Plugin {
   public static final String KEY = "fxcop";
 
