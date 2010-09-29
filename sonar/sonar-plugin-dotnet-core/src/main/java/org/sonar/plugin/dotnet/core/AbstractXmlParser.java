@@ -23,7 +23,11 @@
  */
 package org.sonar.plugin.dotnet.core;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -213,11 +217,29 @@ public class AbstractXmlParser {
    */
   protected List<Element> extractElements(URL file, String path) {
     try {
-      InputSource source = new InputSource(file.openStream());
-      return extractElements(source, path);
+      return extractElements(file.openStream(), path);
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new SonarPluginException(e);
     }
+  }
+  
+  protected List<Element> extractElements(File inputFile, String path) {
+    try {
+      return extractElements(new FileInputStream(inputFile), path);
+    } catch (FileNotFoundException e) {
+      throw new SonarPluginException(e);
+    }
+  }
+  
+  /**
+   * Extracts the elements matching a XPath in a file.
+   * @param inputStream
+   * @param path
+   * @return
+   */
+  protected List<Element> extractElements(InputStream inputStream, String path) {
+    InputSource source = new InputSource(inputStream);
+    return extractElements(source, path);
   }
 
   /**
