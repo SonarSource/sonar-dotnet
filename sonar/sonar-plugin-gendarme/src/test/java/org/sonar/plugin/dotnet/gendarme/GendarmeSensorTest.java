@@ -30,7 +30,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
@@ -128,9 +127,12 @@ public class GendarmeSensorTest {
   }
 
   @Test
-  @Ignore
   public void testGetMavenPluginHandler() {
-    fail("Not yet implemented");
+    Project project = mock(Project.class);
+    Configuration configuration =  mock(Configuration.class);
+    when(configuration.getString(GENDARME_MODE_KEY, GENDARME_DEFAULT_MODE)).thenReturn(GENDARME_REUSE_MODE);
+    when(project.getConfiguration()).thenReturn(configuration);
+    assertNull(sensor.getMavenPluginHandler(project));
   }
 
 }

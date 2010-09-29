@@ -24,8 +24,6 @@ import static org.sonar.plugin.dotnet.gendarme.Constants.*;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -97,10 +95,7 @@ public class GendarmeSensor extends AbstractDotnetSensor {
     GendarmeResultParser parser = new GendarmeResultParser(project, context,
         rulesManager, profile);
     try {
-      URL fileURL = transformedReport.toURI().toURL();
-      parser.parse(fileURL);
-    } catch (MalformedURLException e) {
-      log.debug("Error while loading the file: {}\n{}", report, e);
+      parser.parse(transformedReport);
     } catch (InvalidResourceException ex) {
       log.warn("C# file not referenced in the solution", ex);
     }
