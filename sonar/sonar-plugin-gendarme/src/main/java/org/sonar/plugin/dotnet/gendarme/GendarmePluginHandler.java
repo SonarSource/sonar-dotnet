@@ -36,7 +36,7 @@ import org.sonar.api.rules.ActiveRule;
 import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
- * Generates the configuration of FXCop goal for Sonar.
+ * Generates the configuration of gendarme goal for Sonar.
  * 
  * @author Jose CHILLAN May 7, 2009
  */
@@ -46,7 +46,7 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
       .getLogger(GendarmePluginHandler.class);
 
   private final static String GENDARME_FILE = "sonar.Gendarme";
-  private final static String GENDARME_REPORT = "gendarme-report.xml";
+  private final static String GENDARME_REPORT = Constants.GENDARME_REPORT_XML;
 
   private RulesProfile rulesProfile;
   private GendarmeRuleRepository rulesRepository;
