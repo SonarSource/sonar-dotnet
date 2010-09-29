@@ -23,17 +23,39 @@
  */
 package org.sonar.plugin.dotnet.gallio;
 
+import static org.sonar.plugin.dotnet.gallio.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
 /**
  * A Unit test plugin for Sonar C# based on the Gallio project..
  * 
  * @author Jose CHILLAN Jun 4, 2009
  */
+@Properties({
+  @Property(
+      key = GALLIO_MODE_KEY,
+      defaultValue = GALLIO_DEFAULT_MODE,
+      name = ".net coverage activation mode",
+      description = "Possible values : enable, skip, reuseReport",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = GALLIO_REPORT_KEY,
+      defaultValue = GALLIO_REPORT_XML,
+      name = "Name of the .net coverage report file",
+      description = "Name of the .net coverage report file used when reuse report mode is activated",
+      project = true,
+      module = false,
+      global = true)
+})
 public class GallioPlugin implements Plugin {
   /**
    * Constructs a @link{GallioPlugin}.
@@ -58,7 +80,7 @@ public class GallioPlugin implements Plugin {
   }
 
   public String getName() {
-    return "Gallio Plugin";
+    return ".NET Gallio";
   }
 
   @Override

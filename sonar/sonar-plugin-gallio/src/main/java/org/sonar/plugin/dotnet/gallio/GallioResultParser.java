@@ -24,7 +24,6 @@
 package org.sonar.plugin.dotnet.gallio;
 
 import java.io.File;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +31,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.w3c.dom.Element;
 
@@ -41,7 +42,9 @@ import org.w3c.dom.Element;
  * @author Jose CHILLAN Jun 4, 2009
  */
 public class GallioResultParser extends AbstractXmlParser {
-
+  
+  private final static Logger log = LoggerFactory.getLogger(GallioResultParser.class);
+  
   /**
    * Outcomes for the test
    */
@@ -66,33 +69,16 @@ public class GallioResultParser extends AbstractXmlParser {
   /**
    * Extracts the list of unit tests reports.
    * 
-   * @param file
-   *          the Gallio result file
-   * @return
-   */
-  public Set<UnitTestReport> parse(File file) {
-    try {
-      URL url = file.toURI().toURL();
-      return parse(url);
-    } catch (Exception e) {
-      throw new IllegalArgumentException(
-          "Could not load report File : " + file, e);
-    }
-  }
-
-  /**
-   * Parses a file identified by its url
-   * 
    * @param reportURL
    * @return
    */
-  public Set<UnitTestReport> parse(URL reportURL) {
+  public Set<UnitTestReport> parse(File report) {
     Map<String, UnitTestReport> reportMap = new HashMap<String, UnitTestReport>();
 
     // We first build a map of the test ids
     Map<String, TestDescription> tests = new HashMap<String, TestDescription>();
     try {
-      List<Element> testElements = extractElements(reportURL,
+      List<Element> testElements = extractElements(report,
           "//ga:testModel//ga:test[@isTestCase='true']");
       for (Element testElement : testElements) {
         Element codeReferenceElement = getUniqueSubElement(testElement,
@@ -139,7 +125,7 @@ public class GallioResultParser extends AbstractXmlParser {
       }
 
       // Then we parse the results fo the tests.
-      List<Element> testStepsElements = extractElements(reportURL,
+      List<Element> testStepsElements = extractElements(report,
           "//ga:testStepRun/ga:testStep[@isTestCase='true']");
       for (Element testStepElt : testStepsElements) {
         String testId = testStepElt.getAttribute("testId");
@@ -183,11 +169,11 @@ public class GallioResultParser extends AbstractXmlParser {
         detail.setErrorMessage(message);
         String assemblyName = description.getAssemblyName();
         String sourcePath = sourceFile.getPath();
-        UnitTestReport report = getReport(reportMap, assemblyName, sourcePath);
-        report.addDetail(detail);
+        UnitTestReport unitReport = getReport(reportMap, assemblyName, sourcePath);
+        unitReport.addDetail(detail);
       }
-    } catch (Exception discarded) {
-      // Nothing
+    } catch (RuntimeException discarded) {
+      log.warn("Unexpected gallio parsing error", discarded);
     }
 
     // We build the result.

@@ -1,4 +1,4 @@
-/**
+/*
  * Maven and Sonar plugin for .Net
  * Copyright (C) 2010 Jose Chillan and Alexandre Victoor
  * mailto: jose.chillan@codehaus.org or alexvictoor@codehaus.org
@@ -18,39 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-/*
- * Created on Jun 18, 2009
- *
- */
 package org.sonar.plugin.dotnet.gallio;
 
-import java.io.File;
-import java.util.Collection;
+public class Constants {
 
-import org.junit.Assert;
-import org.junit.Test;
+  public static final String GALLIO_MODE_KEY = "sonar.dotnet.gallio";
+  public static final String GALLIO_DEFAULT_MODE = "enable";
+  public static final String GALLIO_SKIP_MODE = "skip";
+  public static final String GALLIO_REUSE_MODE = "reuseReport";
+  public static final String GALLIO_REPORT_KEY = "sonar.dotnet.gallio.reportsPath";
 
-public class TestGallioResultParser
-{
+  public static final String GALLIO_REPORT_XML = "gallio-report.xml";
   
-  @Test
-  public void testParsing()
-  {
-    checkReportFile("gallio-report.xml");
-  }
-
-  private Collection<UnitTestReport> checkReportFile(String fileName)
-  {
-    GallioResultParser parser = new GallioResultParser();
-    //URL sampleURL = Thread.currentThread().getContextClassLoader().getResource(fileName);
-    File sampleFile = new File("target/test-classes",fileName);
-    Collection<UnitTestReport> reports = parser.parse(sampleFile);
-    for (UnitTestReport unitTestReport : reports)
-    {
-      System.out.println("Report : " + unitTestReport);
-    }
-    Assert.assertFalse("Could not parse a Gallio report", reports.isEmpty());
-    return reports;
-  }
-
 }
