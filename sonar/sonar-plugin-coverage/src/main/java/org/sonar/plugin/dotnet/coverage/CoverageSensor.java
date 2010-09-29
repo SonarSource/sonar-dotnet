@@ -24,10 +24,9 @@
 package org.sonar.plugin.dotnet.coverage;
 
 import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
+import static org.sonar.plugin.dotnet.coverage.Constants.*;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -56,13 +55,12 @@ import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.coverage.model.SourceLine;
 
 /**
- * Collects the results from a PartCover report. Most of the work is delegator
+ * Collects the results from a PartCover report. Most of the work is delegate
  * to {@link CoverageResultParser}.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
 public class CoverageSensor extends AbstractDotnetSensor {
-  public static final String PART_COVER_REPORT_XML = "coverage-report.xml";
   private final static Logger log = LoggerFactory
       .getLogger(CoverageSensor.class);
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
@@ -84,20 +82,25 @@ public class CoverageSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File report = findReport(project, PART_COVER_REPORT_XML);
-    if (report == null) {
-      return;
+    
+    final String reportFileName;
+    if (COVERAGE_REUSE_MODE.equals(getCoverageMode(project))) {
+      reportFileName = project.getConfiguration().getString(COVERAGE_REPORT_KEY);
+      log.warn("Using reuse report mode for Mono Gendarme");
+      log.warn("Mono Gendarme profile settings may not have been taken in account");
+    } else {
+      reportFileName = COVERAGE_REPORT_XML;
     }
-    CoverageResultParser parser = new CoverageResultParser();
-    URL url;
-    try {
-      url = report.toURI().toURL();
-    } catch (MalformedURLException e) {
-      return;
-    }
+    
+    File dir = getReportsDirectory(project);
+    File report = new File(dir, reportFileName);
 
+    
+    
+    CoverageResultParser parser = new CoverageResultParser();
     // We parse the file
-    parser.parse(url);
+    parser.parse(report);
+    
     List<FileCoverage> files = parser.getFiles();
     List<ProjectCoverage> projects = parser.getProjects();
 
@@ -203,19 +206,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
         PersistenceMode.DATABASE);
     return hitData;
   }
-
-  /**
-   * Gets the plugin handle.
-   * 
-   * @param project
-   *          he project to process.
-   * @return the plugin handler for the project
-   */
-  @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project) {
-    return pluginHandler;
-  }
-
+  
   /**
    * Converts a number to a percentage
    * 
@@ -226,4 +217,33 @@ public class CoverageSensor extends AbstractDotnetSensor {
     return ParsingUtils.scaleValue(percentage.doubleValue() * 100.0);
   }
 
+  /**
+   * Gets the plugin handle.
+   * 
+   * @param project
+   *          he project to process.
+   * @return the plugin handler for the project
+   */
+  @Override
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
+    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY);
+    final MavenPluginHandler pluginHandlerReturned;
+    if (COVERAGE_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = pluginHandler;
+    } else {
+      pluginHandlerReturned = null;
+    }
+    return pluginHandlerReturned;
+  }
+  
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    String mode = getCoverageMode(project);
+    return super.shouldExecuteOnProject(project) && !COVERAGE_SKIP_MODE.equalsIgnoreCase(mode);
+  }
+
+  private String getCoverageMode(Project project) {
+    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY, COVERAGE_DEFAULT_MODE);
+    return mode;
+  }
 }

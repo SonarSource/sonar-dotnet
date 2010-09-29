@@ -23,17 +23,39 @@
  */
 package org.sonar.plugin.dotnet.coverage;
 
+import static org.sonar.plugin.dotnet.coverage.Constants.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
 /**
  * The plugin that handles the code coverage with PartCover or NCover.
  * 
  * @author Jose CHILLAN Feb 18, 2010
  */
+@Properties({
+  @Property(
+      key = COVERAGE_MODE_KEY,
+      defaultValue = COVERAGE_DEFAULT_MODE,
+      name = ".net coverage activation mode",
+      description = "Possible values : enable, skip, reuseReport",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = COVERAGE_REPORT_KEY,
+      defaultValue = COVERAGE_REPORT_XML,
+      name = "Name of the .net coverage report file",
+      description = "Name of the .net coverage report file used when reuse report mode is activated",
+      project = true,
+      module = false,
+      global = true)
+})
 public class CoveragePlugin implements Plugin {
 
   /**
@@ -64,7 +86,7 @@ public class CoveragePlugin implements Plugin {
   }
 
   public String getName() {
-    return "Coverage plugin";
+    return ".NET Coverage";
   }
 
   @Override

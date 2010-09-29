@@ -22,7 +22,7 @@ package org.sonar.plugin.dotnet.coverage;
 
 import static org.junit.Assert.*;
 
-import java.net.URL;
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -41,9 +41,9 @@ public class CoverageResultParserTest {
 		parser = new CoverageResultParser();
 	}
 	
-	private URL buildReportUrl(String fileName) {
-		return getClass().getClassLoader().getResource(fileName);
-	}
+	private File findFile(String fileName) {
+    return new File("target/test-classes", fileName);
+  }
 	
 	@Test
 	public void testParsePartCover22() {
@@ -154,8 +154,8 @@ public class CoverageResultParserTest {
 
 	
 	private void checkParsing(ParsingParameters parameters) {
-	  URL url = buildReportUrl(parameters.report);
-		parser.parse(url);
+	  File file = findFile(parameters.report);
+		parser.parse(file);
 		List<FileCoverage> files = parser.getFiles();
 		List<ProjectCoverage> projects = parser.getProjects();
 		

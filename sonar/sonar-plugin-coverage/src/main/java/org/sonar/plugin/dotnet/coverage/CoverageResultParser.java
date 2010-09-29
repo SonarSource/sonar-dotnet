@@ -25,7 +25,6 @@ package org.sonar.plugin.dotnet.coverage;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,8 +56,8 @@ public class CoverageResultParser extends AbstractXmlParser {
   /**
    * Generates the logger.
    */
-  private final static Logger log = LoggerFactory
-      .getLogger(CoverageResultParser.class);
+  private final static Logger log = LoggerFactory.getLogger(CoverageResultParser.class);
+  
   private final Map<Integer, FileCoverage> sourceFiles;
   private final Map<String, ProjectCoverage> projects;
   private final List<ClassCoverage> classes;
@@ -82,20 +81,20 @@ public class CoverageResultParser extends AbstractXmlParser {
   }
 
   /**
-   * Parses a file given its URL.
+   * Parses a file
    * 
    * @param url
    */
-  public void parse(URL url) {
+  public void parse(File file) {
     try {
       // First define shte version
-      chooseParsingStrategy(url);
+      chooseParsingStrategy(file);
 
       // First, all the indexed files are extracted
-      extractFiles(url);
+      extractFiles(file);
 
       // Then we process the coverage details
-      processDetail(url);
+      processDetail(file);
       // We summarize the files
       for (FileCoverage fileCoverage : sourceFiles.values()) {
         fileCoverage.summarize();
@@ -114,7 +113,7 @@ public class CoverageResultParser extends AbstractXmlParser {
    * @param file
    *          the coverage file report
    */
-  private void processDetail(URL file) {
+  private void processDetail(File file) {
     // We take the coverage in each method
     List<Element> methodElements = extractElements(file,
         strategy.getMethodPath());
@@ -205,7 +204,7 @@ public class CoverageResultParser extends AbstractXmlParser {
    * 
    * @param file
    */
-  private void chooseParsingStrategy(URL file) {
+  private void chooseParsingStrategy(File file) {
     List<Element> elements = extractElements(file, "/*");
     Element root = elements.get(0);
     Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies
@@ -225,13 +224,13 @@ public class CoverageResultParser extends AbstractXmlParser {
   }
 
   /**
-   * Extracts the files from the file
+   * Extracts the source files from the report file
    * 
    * @param the
    *          url of the file
    */
 
-  private void extractFiles(URL file) {
+  private void extractFiles(File file) {
     List<Element> elements = extractElements(file, strategy.getFilePath());
     for (Element fileElement : elements) {
       String idStr = fileElement.getAttribute("id");
