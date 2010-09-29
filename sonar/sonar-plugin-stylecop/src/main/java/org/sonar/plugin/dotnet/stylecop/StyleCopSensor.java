@@ -65,7 +65,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
   private StyleCopPluginHandler pluginHandler;
 
   /**
-   * Constructs a @link{FxCopCollector}.
+   * Constructs a @link{StyleCopSensor}.
    * 
    * @param rulesManager
    */
@@ -83,8 +83,17 @@ public class StyleCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    File report = findReport(project, STYLECOP_REPORT_NAME);
+    final String reportFileName;
+    if (STYLECOP_REUSE_MODE.equals(getStyleCopMode(project))) {
+      reportFileName = project.getConfiguration().getString(STYLECOP_REPORT_KEY);
+      log.warn("Using reuse report mode for StyleCop");
+      log.warn("WARNING : StyleCop rules profile settings may not have been taken in account");
+    } else {
+      reportFileName = STYLECOP_REPORT_NAME;
+    }
+    
     File dir = getReportsDirectory(project);
+    File report = new File(dir, reportFileName);
 
     // We generate the transformer
     File transformedReport = transformReport(report, dir);
@@ -99,15 +108,6 @@ public class StyleCopSensor extends AbstractDotnetSensor {
     } catch (MalformedURLException e) {
       log.debug("Error while parsing the file: {}\n{}", report, e);
     }
-  }
-
-  /**
-   * @param project
-   * @return
-   */
-  @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project) {
-    return pluginHandler;
   }
 
   /**
@@ -144,6 +144,34 @@ public class StyleCopSensor extends AbstractDotnetSensor {
           exc);
     }
     return null;
+  }
+  
+  
+  /**
+   * @param project
+   * @return
+   */
+  @Override
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
+    String mode = project.getConfiguration().getString(STYLECOP_MODE_KEY);
+    final MavenPluginHandler pluginHandlerReturned;
+    if (STYLECOP_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = pluginHandler;
+    } else {
+      pluginHandlerReturned = null;
+    }
+    return pluginHandlerReturned;
+  }
+  
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    String mode = getStyleCopMode(project);
+    return super.shouldExecuteOnProject(project) && !STYLECOP_SKIP_MODE.equalsIgnoreCase(mode);
+  }
+
+  private String getStyleCopMode(Project project) {
+    String mode = project.getConfiguration().getString(STYLECOP_MODE_KEY, STYLECOP_DEFAULT_MODE);
+    return mode;
   }
 
 }
