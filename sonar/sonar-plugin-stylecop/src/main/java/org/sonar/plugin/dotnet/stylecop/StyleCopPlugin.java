@@ -50,10 +50,8 @@ import org.sonar.api.Property;
   @Property(
       key = STYLECOP_REPORT_KEY,
       defaultValue = STYLECOP_REPORT_NAME,
-      name = "Name of the FxCop report file",
-      description = "Name of the FxCop report file used when reuse report mode is activated. " +
-          "If several reports need to be analysed (may happen with silverlight), several path " +
-          "may be specified using ';' as a delimiter",
+      name = "Name of the StyleCop report file",
+      description = "Name of the StyleCop report file used when reuse report mode is activated. ",
       project = true,
       module = false,
       global = true)
@@ -89,7 +87,7 @@ public class StyleCopPlugin implements Plugin {
   }
 
   public String getName() {
-    return "StyleCop Plugin";
+    return ".NET StyleCop";
   }
 
 }

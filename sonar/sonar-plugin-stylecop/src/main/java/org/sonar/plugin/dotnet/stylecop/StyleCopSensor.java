@@ -28,8 +28,6 @@ import static org.sonar.plugin.dotnet.stylecop.Constants.*;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -102,12 +100,8 @@ public class StyleCopSensor extends AbstractDotnetSensor {
     }
     StyleCopResultParser parser = new StyleCopResultParser(project, context,
         rulesManager, profile);
-    try {
-      URL fileURL = transformedReport.toURI().toURL();
-      parser.parse(fileURL);
-    } catch (MalformedURLException e) {
-      log.debug("Error while parsing the file: {}\n{}", report, e);
-    }
+    parser.parse(transformedReport);
+   
   }
 
   /**
