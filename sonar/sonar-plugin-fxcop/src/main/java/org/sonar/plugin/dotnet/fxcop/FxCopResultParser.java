@@ -24,7 +24,6 @@
 package org.sonar.plugin.dotnet.fxcop;
 
 import java.io.File;
-import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 
@@ -83,8 +82,8 @@ public class FxCopResultParser extends AbstractXmlParser {
    * 
    * @param stream
    */
-  public void parse(URL url) {
-    List<Element> issues = extractElements(url, "/issues/issue");
+  public void parse(File file) {
+    List<Element> issues = extractElements(file, "/issues/issue");
     // We add each issue
     for (Element issueElement : issues) {
       String path = getNodeContent(issueElement, "path");

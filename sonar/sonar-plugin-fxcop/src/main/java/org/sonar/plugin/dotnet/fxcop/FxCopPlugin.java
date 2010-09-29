@@ -85,7 +85,7 @@ public class FxCopPlugin implements Plugin {
   }
 
   public String getName() {
-    return "FxCop Plugin";
+    return ".NET FxCop";
   }
 
   @Override

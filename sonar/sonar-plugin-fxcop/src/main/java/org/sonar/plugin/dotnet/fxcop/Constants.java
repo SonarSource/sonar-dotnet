@@ -26,7 +26,7 @@ public class Constants {
   public static final String FXCOP_DEFAULT_MODE = "enable";
   public static final String FXCOP_SKIP_MODE = "skip";
   public static final String FXCOP_REUSE_MODE = "reuseReport";
-  public static final String FXCOP_REPORT_KEY = "sonar.dotnet.fxcop.reportPath";
+  public static final String FXCOP_REPORT_KEY = "sonar.dotnet.fxcop.reportsPath";
 
   public static final String FXCOP_REPORT_XML = "fxcop-report.xml";
   public static final String SL_FXCOP_REPORT_XML = "silverlight-fxcop-report.xml";

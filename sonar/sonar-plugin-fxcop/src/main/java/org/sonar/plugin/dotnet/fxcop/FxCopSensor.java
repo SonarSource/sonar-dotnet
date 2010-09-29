@@ -28,8 +28,6 @@ import static org.sonar.plugin.dotnet.fxcop.Constants.*;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -120,10 +118,7 @@ public class FxCopSensor extends AbstractDotnetSensor {
       return;
     }
     try {
-      URL fileURL = transformedReport.toURI().toURL();
-      parser.parse(fileURL);
-    } catch (MalformedURLException e) {
-      log.error("Error while loading the file: {}\n{}", report, e);
+      parser.parse(transformedReport);
     } catch (InvalidResourceException ex) {
       log.error("C# file not referenced in the solution", ex);
     }

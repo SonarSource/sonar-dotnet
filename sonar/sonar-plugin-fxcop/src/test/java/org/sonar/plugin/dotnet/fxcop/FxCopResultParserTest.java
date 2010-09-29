@@ -26,7 +26,6 @@ import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
@@ -75,7 +74,7 @@ public class FxCopResultParserTest {
   
   @Test
   public void testParse() throws MalformedURLException {
-    parser.parse(new URL("file:src/test/resources/fxcop-report-processed.xml"));
+    parser.parse(new File("src/test/resources","fxcop-report-processed.xml"));
     verify(context,atLeast(27)).saveViolation(any(Violation.class));
   }
 
