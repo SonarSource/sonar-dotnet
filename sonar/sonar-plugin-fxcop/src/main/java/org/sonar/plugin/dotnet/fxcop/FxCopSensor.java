@@ -163,7 +163,7 @@ public class FxCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    String mode = project.getConfiguration().getString(FXCOP_MODE_KEY);
+    String mode = getFxCopMode(project);
     final MavenPluginHandler pluginHandlerReturned;
     if (FXCOP_DEFAULT_MODE.equalsIgnoreCase(mode)) {
       pluginHandlerReturned = pluginHandler;

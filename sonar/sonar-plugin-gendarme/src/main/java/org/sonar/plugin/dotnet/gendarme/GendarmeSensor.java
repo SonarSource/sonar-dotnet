@@ -141,7 +141,7 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    String mode = project.getConfiguration().getString(GENDARME_MODE_KEY);
+    String mode = getGendarmeMode(project);
     final MavenPluginHandler pluginHandlerReturned;
     if (GENDARME_DEFAULT_MODE.equalsIgnoreCase(mode)) {
       pluginHandlerReturned = pluginHandler;

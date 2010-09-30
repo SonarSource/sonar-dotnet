@@ -86,7 +86,7 @@ public class CoveragePlugin implements Plugin {
   }
 
   public String getName() {
-    return ".NET Coverage";
+    return "[.net] Coverage";
   }
 
   @Override

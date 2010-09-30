@@ -23,6 +23,8 @@
  */
 package org.sonar.plugin.dotnet.gallio;
 
+import static org.sonar.plugin.dotnet.gallio.Constants.*;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
@@ -54,60 +56,43 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 public class GallioSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(GallioSensor.class);
 
-  public static final String GALLIO_REPORT_XML = "gallio-report.xml";
+  private MavenPluginHandler pluginHandler;
 
   /**
    * Constructs a @link{GallioCollector}.
    */
-  public GallioSensor() {
+  public GallioSensor(GallioMavenPluginHandler pluginHandler) {
+    this.pluginHandler = pluginHandler;
   }
 
   /**
    * collect
    * 
-   * @param pom
-   * @param context
-   */
-  /**
    * @param project
    * @param context
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    try {
-      // Retrieve the report
-      File report = findReport(project, GALLIO_REPORT_XML);
-      if (report == null) {
-        log.error("Report not found at location " + GALLIO_REPORT_XML);
-        context.saveMeasure(CoreMetrics.TEST_DATA, 0.0);
-      } else {
-        log.debug("Report found at location " + GALLIO_REPORT_XML);
-        collect(project, report, context);
-      }
-    } catch (RuntimeException ex) {
-      log.error("Error occured in the gallio sensor", ex);
-      throw ex;
+
+    final String reportFileName;
+    if (GALLIO_REUSE_MODE.equals(getGallioMode(project))) {
+      reportFileName = project.getConfiguration().getString(GALLIO_REPORT_KEY);
+      log.warn("Using reuse report mode for Gallio (test report)");
+    } else {
+      reportFileName = GALLIO_REPORT_XML;
     }
-  }
 
-  /**
-   * @param project
-   * @return
-   */
-  @Override
-  public MavenPluginHandler getMavenPluginHandler(Project project) {
-    return new GallioMavenPluginHandler();
-  }
+    File dir = getReportsDirectory(project);
+    File report = new File(dir, reportFileName);
 
-  /**
-   * @param project
-   * @return
-   */
-  @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    String packaging = project.getPackaging();
-    // We only accept the "sln" packaging
-    return "sln".equals(packaging);
+    if (report.exists()) {
+      log.debug("Report found at location " + GALLIO_REPORT_XML);
+      collect(project, report, context);
+    } else {
+      log.error("Report not found at location " + GALLIO_REPORT_XML);
+      context.saveMeasure(CoreMetrics.TEST_DATA, 0.0);
+    }
+
   }
 
   private void collect(Project project, File report, SensorContext context) {
@@ -116,16 +101,17 @@ public class GallioSensor extends AbstractDotnetSensor {
     if (log.isDebugEnabled()) {
       log.debug("Found " + reports.size() + " test data");
     }
-    
-    Set<File> knownCsFiles 
-      = new HashSet<File>(VisualUtils.buildCsFileList(project));
-    
+
+    Set<File> csFilesAlreadyTreated = new HashSet<File>();
+
     for (UnitTestReport testReport : reports) {
       File sourceFile = testReport.getSourceFile();
-      if (sourceFile != null && sourceFile.exists() && knownCsFiles.contains(sourceFile)) {
+      if (sourceFile != null && sourceFile.exists()
+          && !csFilesAlreadyTreated.contains(sourceFile)) {
         if (log.isDebugEnabled()) {
           log.debug("Collecting test data for file " + sourceFile);
         }
+        csFilesAlreadyTreated.add(sourceFile);
         int testsCount = testReport.getTests() - testReport.getSkipped();
         CSharpFile testFile = CSharpFileLocator.INSTANCE.locate(project,
             testReport.getSourceFile(), true);
@@ -148,8 +134,8 @@ public class GallioSensor extends AbstractDotnetSensor {
           if (testsCount > 0) {
             double percentage = passedTests * 100 / testsCount;
             saveFileMeasure(testFile, context, testReport,
-                CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils
-                    .scaleValue(percentage));
+                CoreMetrics.TEST_SUCCESS_DENSITY,
+                ParsingUtils.scaleValue(percentage));
           }
 
           saveTestsDetails(testFile, context, testReport);
@@ -177,17 +163,18 @@ public class GallioSensor extends AbstractDotnetSensor {
     List<TestCaseDetail> details = fileReport.getDetails();
     for (TestCaseDetail detail : details) {
       testCaseDetails.append("<testcase status=\"").append(detail.getStatus())
-          .append("\" time=\"").append(detail.getTimeMillis()).append(
-              "\" name=\"").append(detail.getName()).append("\"").append(
-              "\" asserts=\"").append(detail.getCountAsserts()).append("\"");
+          .append("\" time=\"").append(detail.getTimeMillis())
+          .append("\" name=\"").append(detail.getName()).append("\"")
+          .append("\" asserts=\"").append(detail.getCountAsserts())
+          .append("\"");
       boolean isError = (detail.getStatus() == TestStatus.ERROR);
       if (isError || (detail.getStatus() == TestStatus.FAILED)) {
-        testCaseDetails.append(">").append(
-            isError ? "<error message=\"" : "<failure message=\"").append(
-            StringEscapeUtils.escapeXml(detail.getErrorMessage()))
+        testCaseDetails.append(">")
+            .append(isError ? "<error message=\"" : "<failure message=\"")
+            .append(StringEscapeUtils.escapeXml(detail.getErrorMessage()))
             .append("\">").append("<![CDATA[").append(detail.getStackTrace())
-            .append("]]>").append(isError ? "</error>" : "</failure>").append(
-                "</testcase>");
+            .append("]]>").append(isError ? "</error>" : "</failure>")
+            .append("</testcase>");
       } else {
         testCaseDetails.append("/>");
       }
@@ -211,6 +198,39 @@ public class GallioSensor extends AbstractDotnetSensor {
     if (!Double.isNaN(value)) {
       context.saveMeasure(testFile, metric, value);
     }
+  }
+
+  /**
+   * @param project
+   * @return
+   */
+  @Override
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
+    String mode = getGallioMode(project);;
+    final MavenPluginHandler pluginHandlerReturned;
+    if (GALLIO_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = pluginHandler;
+    } else {
+      pluginHandlerReturned = null;
+    }
+    return pluginHandlerReturned;
+  }
+
+  /**
+   * @param project
+   * @return
+   */
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    String mode = getGallioMode(project);
+    return super.shouldExecuteOnProject(project)
+        && !GALLIO_SKIP_MODE.equalsIgnoreCase(mode);
+  }
+
+  private String getGallioMode(Project project) {
+    String mode = project.getConfiguration().getString(GALLIO_MODE_KEY,
+        GALLIO_DEFAULT_MODE);
+    return mode;
   }
 
 }

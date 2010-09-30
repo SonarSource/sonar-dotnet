@@ -86,8 +86,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
     final String reportFileName;
     if (COVERAGE_REUSE_MODE.equals(getCoverageMode(project))) {
       reportFileName = project.getConfiguration().getString(COVERAGE_REPORT_KEY);
-      log.warn("Using reuse report mode for Mono Gendarme");
-      log.warn("Mono Gendarme profile settings may not have been taken in account");
+      log.warn("Using reuse report mode for the dotnet coverage plugin");
     } else {
       reportFileName = COVERAGE_REPORT_XML;
     }
@@ -226,7 +225,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY);
+    String mode = getCoverageMode(project);
     final MavenPluginHandler pluginHandlerReturned;
     if (COVERAGE_DEFAULT_MODE.equalsIgnoreCase(mode)) {
       pluginHandlerReturned = pluginHandler;

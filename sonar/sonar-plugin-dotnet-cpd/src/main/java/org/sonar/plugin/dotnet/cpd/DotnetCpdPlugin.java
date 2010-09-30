@@ -41,7 +41,7 @@ public class DotnetCpdPlugin implements Plugin {
 
   public String getName() {
 
-    return "Dotnet cpd plugin";
+    return "[.net] cpd plugin";
   }
 
   public String getDescription() {

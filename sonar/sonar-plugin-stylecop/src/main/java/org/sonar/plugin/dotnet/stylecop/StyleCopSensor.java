@@ -147,7 +147,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    String mode = project.getConfiguration().getString(STYLECOP_MODE_KEY);
+    String mode = getStyleCopMode(project);
     final MavenPluginHandler pluginHandlerReturned;
     if (STYLECOP_DEFAULT_MODE.equalsIgnoreCase(mode)) {
       pluginHandlerReturned = pluginHandler;

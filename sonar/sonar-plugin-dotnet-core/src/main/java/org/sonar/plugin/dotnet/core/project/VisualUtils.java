@@ -52,13 +52,14 @@ import org.sonar.api.utils.SonarException;
  * @author Jose CHILLAN May 14, 2009
  */
 public final class VisualUtils {
-  
+
   private final static Logger log = LoggerFactory.getLogger(VisualUtils.class);
-  
-  // maybe way too complicated since one thread and one solution only during the analysis
-  private final static Map<MavenProject, VisualStudioSolution> solutionCache 
-    = Collections.synchronizedMap(new HashMap<MavenProject, VisualStudioSolution>());
-  
+
+  // maybe way too complicated since one thread and one solution only during the
+  // analysis
+  private final static Map<MavenProject, VisualStudioSolution> solutionCache = Collections
+      .synchronizedMap(new HashMap<MavenProject, VisualStudioSolution>());
+
   /**
    * Extracts a visual studio solution if the project is a valid solution.
    * 
@@ -75,20 +76,23 @@ public final class VisualUtils {
     if (solutionCache.containsKey(mavenProject)) {
       solution = solutionCache.get(mavenProject);
     } else {
-      solution = VisualStudioUtils.getVisualSolution(mavenProject, (String) null);
+      solution = VisualStudioUtils.getVisualSolution(mavenProject,
+          (String) null);
       solutionCache.put(mavenProject, solution);
     }
     return solution;
   }
-  
+
   /**
-   * Search all cs files (with corresponding VS project) included in the VS solution corresponding to the 
-   * sonar project object argument.
+   * Search all cs files (with corresponding VS project) included in the VS
+   * solution corresponding to the sonar project object argument.
+   * 
    * @param project
    * @return
    * @throws DotNetProjectException
    */
-  public static Map<File, VisualStudioProject> buildCsFileProjectMap(Project project) {
+  public static Map<File, VisualStudioProject> buildCsFileProjectMap(
+      Project project) {
 
     VisualStudioSolution solution;
     try {
@@ -102,23 +106,21 @@ public final class VisualUtils {
     Map<File, VisualStudioProject> csFiles = new HashMap<File, VisualStudioProject>();
 
     for (VisualStudioProject visualStudioProject : projects) {
-      if (visualStudioProject.isTest()) {
-        log.debug("skipping test project " + visualStudioProject.getName());
-      } else {
-        Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
-        for (SourceFile sourceFile : sources) {
-          if (filter.accept(sourceFile.getFile().getParentFile(),
-              sourceFile.getName())) {
-            csFiles.put(sourceFile.getFile(), visualStudioProject);
-          }
+
+      Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
+      for (SourceFile sourceFile : sources) {
+        if (filter.accept(sourceFile.getFile().getParentFile(),
+            sourceFile.getName())) {
+          csFiles.put(sourceFile.getFile(), visualStudioProject);
         }
       }
+
     }
     return csFiles;
   }
-  
+
   public static List<File> buildCsFileList(Project project) {
     return new ArrayList<File>(buildCsFileProjectMap(project).keySet());
   }
-  
+
 }

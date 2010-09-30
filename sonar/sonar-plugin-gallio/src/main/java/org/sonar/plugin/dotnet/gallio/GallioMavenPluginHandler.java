@@ -38,7 +38,7 @@ public class GallioMavenPluginHandler extends AbstractDotNetMavenPluginHandler {
   public static final String ARTIFACT_ID = "maven-dotnet-plugin";
 
   /**
-   * Constructs a @link{NUnitMavenPluginHandler}.
+   * Constructs a @link{GallioMavenPluginHandler}.
    */
   public GallioMavenPluginHandler() {
   }

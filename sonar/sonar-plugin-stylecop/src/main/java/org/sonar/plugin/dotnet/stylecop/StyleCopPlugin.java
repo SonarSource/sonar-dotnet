@@ -87,7 +87,7 @@ public class StyleCopPlugin implements Plugin {
   }
 
   public String getName() {
-    return ".NET StyleCop";
+    return "[.net] StyleCop";
   }
 
 }

@@ -72,6 +72,7 @@ public class GallioPlugin implements Plugin {
     list.add(GallioSensor.class);
     list.add(GallioMetrics.class);
     list.add(UnitTestDecorator.class);
+    list.add(GallioMavenPluginHandler.class);
     return list;
   }
 
@@ -80,7 +81,7 @@ public class GallioPlugin implements Plugin {
   }
 
   public String getName() {
-    return ".NET Gallio";
+    return "[.net] Gallio";
   }
 
   @Override

@@ -72,7 +72,7 @@ public class GendarmePlugin implements Plugin {
   }
 
   public String getName() {
-    return ".NET Gendarme";
+    return "[.net] Gendarme";
   }
 
   @Override
