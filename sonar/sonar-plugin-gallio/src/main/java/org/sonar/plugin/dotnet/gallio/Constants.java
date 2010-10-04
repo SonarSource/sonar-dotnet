@@ -26,7 +26,7 @@ public class Constants {
   public static final String GALLIO_DEFAULT_MODE = "enable";
   public static final String GALLIO_SKIP_MODE = "skip";
   public static final String GALLIO_REUSE_MODE = "reuseReport";
-  public static final String GALLIO_REPORT_KEY = "sonar.dotnet.gallio.reportsPath";
+  public static final String GALLIO_REPORT_KEY = "sonar.dotnet.gallio.reportPath";
 
   public static final String GALLIO_REPORT_XML = "gallio-report.xml";
   

@@ -86,10 +86,10 @@ public class GallioSensor extends AbstractDotnetSensor {
     File report = new File(dir, reportFileName);
 
     if (report.exists()) {
-      log.debug("Report found at location " + GALLIO_REPORT_XML);
+      log.debug("Report found at location " + report);
       collect(project, report, context);
     } else {
-      log.error("Report not found at location " + GALLIO_REPORT_XML);
+      log.error("Report not found at location " + report);
       context.saveMeasure(CoreMetrics.TEST_DATA, 0.0);
     }
 
