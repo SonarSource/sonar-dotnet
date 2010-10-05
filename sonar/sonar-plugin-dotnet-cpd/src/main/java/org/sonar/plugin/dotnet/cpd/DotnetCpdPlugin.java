@@ -20,14 +20,38 @@
 
 package org.sonar.plugin.dotnet.cpd;
 
+
+import static org.sonar.plugin.dotnet.cpd.Constants.*;
+
 import org.sonar.api.Plugin;
 import org.sonar.api.Extension;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class is the container for all others extensions
  */
+@Properties({
+  @Property(
+      key = CPD_MODE_KEY,
+      defaultValue = CPD_DEFAULT_MODE,
+      name = "CPD activation mode for .net",
+      description = "Possible values : enable or skip",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = CPD_MINIMUM_TOKENS_PROPERTY,
+      defaultValue = CPD_MINIMUM_TOKENS_DEFAULT_VALUE+"",
+      name = "Minimum number of token used to detect copy/paste code with CPD",
+      description = "See PMD/CPD documentation",
+      project = true,
+      module = false,
+      global = true)
+})
 public class DotnetCpdPlugin implements Plugin {
 
   public static final String KEY = "dotnet-cpd";

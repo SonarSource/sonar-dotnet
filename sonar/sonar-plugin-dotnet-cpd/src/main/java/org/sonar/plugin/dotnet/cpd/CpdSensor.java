@@ -20,6 +20,7 @@
 
 package org.sonar.plugin.dotnet.cpd;
 
+import static org.sonar.plugin.dotnet.cpd.Constants.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -46,9 +47,6 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  * 
  */
 public class CpdSensor implements Sensor {
-
-  public final static String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.minimumTokens";
-  public final static int CPD_MINIMUM_TOKENS_DEFAULT_VALUE = 50;
 
   public CpdSensor() {
 
