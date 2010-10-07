@@ -9,9 +9,20 @@
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>sonar-plugin-coverage</artifactId>
   <name>Sonar Plugin for PartCover and NCover</name>
+  <packaging>sonar-plugin</packaging>
   <build>
     <plugins>
       <plugin>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-packaging-maven-plugin</artifactId>
+      <version>0.1</version>
+      <extensions>true</extensions>
+      <configuration>
+        <pluginKey>CoveragePlugin</pluginKey>
+        <pluginClass>org.sonar.plugin.dotnet.coverage.CoveragePlugin</pluginClass>
+      </configuration>
+    </plugin>
+    <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
@@ -22,7 +33,7 @@
             </manifestEntries>
           </archive>
         </configuration>
-      </plugin>
+      </plugin> -->  
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
