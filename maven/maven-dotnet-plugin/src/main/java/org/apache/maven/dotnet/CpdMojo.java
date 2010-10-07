@@ -73,7 +73,7 @@ public class CpdMojo extends AbstractDotNetMojo {
    * The minimum number of tokens that need to be duplicated before it causes a
    * violation.
    * 
-   * @parameter expression="${minimumTokens}" default-value="100"
+   * @parameter expression="${minimumTokens}" default-value="50"
    */
   private int minimumTokens;
 
