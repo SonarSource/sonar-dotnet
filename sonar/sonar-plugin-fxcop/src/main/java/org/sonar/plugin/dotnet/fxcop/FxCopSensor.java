@@ -135,9 +135,16 @@ public class FxCopSensor extends AbstractDotnetSensor {
   private File transformReport(File report, File dir, String targetFileName) {
     try {
       ClassLoader contextClassLoader = Thread.currentThread()
-          .getContextClassLoader();
+        .getContextClassLoader();
       InputStream stream = contextClassLoader
+        .getResourceAsStream(FXCOP_TRANSFO_XSL);
+  
+      if (stream==null) {
+        // happens with sonar2.3 classloader mechanism
+        stream = getClass().getClassLoader()
           .getResourceAsStream(FXCOP_TRANSFO_XSL);
+      }
+    
       Source xslSource = new SAXSource(new InputSource(stream));
       Templates templates = TransformerFactory.newInstance().newTemplates(
           xslSource);

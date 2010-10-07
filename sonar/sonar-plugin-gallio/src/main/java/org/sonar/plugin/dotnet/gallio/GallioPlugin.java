@@ -71,7 +71,7 @@ public class GallioPlugin implements Plugin {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GallioSensor.class);
     list.add(GallioMetrics.class);
-    list.add(UnitTestDecorator.class);
+    //list.add(UnitTestDecorator.class);
     list.add(GallioMavenPluginHandler.class);
     return list;
   }
