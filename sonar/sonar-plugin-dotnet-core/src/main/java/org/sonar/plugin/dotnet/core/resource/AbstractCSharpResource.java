@@ -104,6 +104,20 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
   public PARENT getParent() {
     return null;
   }
+  // HACK to avoid classloader issues 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null ||  !getClass().getName().equals(o.getClass().getName()) ) {
+      return false;
+    }
+
+    Resource resource = (Resource) o;
+    return getKey().equals(resource.getKey());
+
+  }
 
   @Override
   public String toString() {
