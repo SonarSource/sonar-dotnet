@@ -9,19 +9,20 @@
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>sonar-plugin-gendarme</artifactId>
   <name>Sonar Plugin for Mono Gendarme</name>
+  <packaging>sonar-plugin</packaging>
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Plugin-Class>org.sonar.plugin.dotnet.gendarme.GendarmePlugin</Plugin-Class>
-            </manifestEntries>
-          </archive>
-        </configuration>
-      </plugin>
+    <plugin>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-packaging-maven-plugin</artifactId>
+      <version>0.1</version>
+      <extensions>true</extensions>
+      <configuration>
+        <pluginKey>GendarmePlugin</pluginKey>
+        <pluginClass>org.sonar.plugin.dotnet.gendarme.GendarmePlugin</pluginClass>
+      </configuration>
+    </plugin>
+    
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>

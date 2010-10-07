@@ -111,10 +111,14 @@ public class GendarmeSensor extends AbstractDotnetSensor {
   private File transformReport(File report, File dir) {
     try {
       ClassLoader contextClassLoader = Thread.currentThread()
-          .getContextClassLoader(); // TODO MIGRATION23
-                                    // this.getClass().getClassLoader();
+        .getContextClassLoader();
       InputStream stream = contextClassLoader
+        .getResourceAsStream(GENDARME_TRANSFO_XSL);
+      if (stream==null) {
+        // happens with sonar2.3 classloader mechanism
+        stream = getClass().getClassLoader()
           .getResourceAsStream(GENDARME_TRANSFO_XSL);
+      }
       Source xslSource = new SAXSource(new InputSource(stream));
       Templates templates = TransformerFactory.newInstance().newTemplates(
           xslSource);
