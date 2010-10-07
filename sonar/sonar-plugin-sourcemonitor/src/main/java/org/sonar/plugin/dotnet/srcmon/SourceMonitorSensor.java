@@ -33,7 +33,6 @@ import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
-import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
@@ -95,7 +94,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
     try {
       solution = VisualUtils.getSolution(project);
     } catch (DotNetProjectException e) {
-      Log.warn("Could not find a solution for project " + project);
+      log.warn("Could not find a solution for project " + project, e);
       return;
     }
 
