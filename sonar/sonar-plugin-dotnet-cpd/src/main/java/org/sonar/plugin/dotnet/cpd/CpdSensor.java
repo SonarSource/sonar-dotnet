@@ -21,102 +21,201 @@
 package org.sonar.plugin.dotnet.cpd;
 
 import static org.sonar.plugin.dotnet.cpd.Constants.*;
+
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.text.ParseException;
 
-import net.sourceforge.pmd.cpd.CPD;
-import net.sourceforge.pmd.cpd.CsLanguage;
-import net.sourceforge.pmd.cpd.TokenEntry;
 
-import org.apache.maven.dotnet.commons.project.DotNetProjectException;
-import org.apache.maven.dotnet.commons.project.VisualStudioProject;
-import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
-import org.sonar.api.batch.CpdMapping;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.maven.DependsUponMavenPlugin;
+import org.sonar.api.batch.maven.MavenPluginHandler;
 import org.sonar.api.resources.Project;
-import org.sonar.plugin.dotnet.core.project.VisualUtils;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.utils.XpathParser;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.utils.ParsingUtils;
+import org.sonar.api.utils.XmlParserException;
+
+
 
 /**
- * Copy/paste from the original CpdSensor of the java cpd plugin.
+ * Mostly Copy/paste from the flex CpdSensor .
  * 
  * @author Alexandre VICTOOR
  * 
  */
-public class CpdSensor implements Sensor {
+public class CpdSensor implements Sensor, DependsUponMavenPlugin {
 
-  public CpdSensor() {
-
-    // default empty constructor
+  private final DotnetCpdPluginHandler dotnetCpdPluginHandler;
+  
+  public CpdSensor(DotnetCpdPluginHandler dotnetCpdPluginHandler) {
+    this.dotnetCpdPluginHandler = dotnetCpdPluginHandler;
   }
-
-  private void saveResults(CPD cpd, CpdMapping mapping, Project project,
-      SensorContext context) throws DotNetProjectException {
-
-    VisualStudioSolution solution = VisualUtils.getSolution(project);
-    List<VisualStudioProject> projects = solution.getProjects();
-    List<File> sourceDirs = new ArrayList<File>();
-    for (VisualStudioProject visualStudioProject : projects) {
-      sourceDirs.add(visualStudioProject.getDirectory());
+  
+  public void analyse(Project project, SensorContext context) {
+    File xmlFile = new File(project.getFileSystem().getBuildDir(), "cpd.xml");
+    collect(xmlFile, project, context);
+  }
+  
+  public MavenPluginHandler getMavenPluginHandler(Project project) {
+    String mode = getCpdMode(project);
+    final MavenPluginHandler pluginHandlerReturned;
+    if (CPD_DEFAULT_MODE.equalsIgnoreCase(mode)) {
+      pluginHandlerReturned = dotnetCpdPluginHandler;
+    } else {
+      pluginHandlerReturned = null;
     }
-
-    CpdAnalyser cpdAnalyser = new CpdAnalyser(context, mapping, sourceDirs);
-    cpdAnalyser.analyse(cpd.getMatches());
+    return pluginHandlerReturned;
   }
-
+  
   public boolean shouldExecuteOnProject(Project project) {
     String packaging = project.getPackaging();
     // We only accept the "sln" packaging
-    return "sln".equals(packaging);
+    String mode = getCpdMode(project);
+    return "sln".equals(packaging) && CPD_DEFAULT_MODE.equalsIgnoreCase(mode);
   }
-
-  public void analyse(Project project, SensorContext context) {
-
+  
+  private String getCpdMode(Project project) {
+    String mode = project.getConfiguration().getString(CPD_MODE_KEY, CPD_DEFAULT_MODE);
+    return mode;
+  }
+  
+  protected void collect(File xmlFile, Project pom, SensorContext context) {
     try {
-      CpdMapping mapping = getMapping(project);
-      CPD cpd = executeCPD(project, mapping, project.getFileSystem()
-          .getSourceCharset());
-      saveResults(cpd, mapping, project, context);
-    } catch (Exception e) {
-      throw new CpdException(e);
+      if (xmlFile != null && xmlFile.exists()) {
+        XpathParser parser = new XpathParser();
+        String xml = readXmlWithoutEncodingErrors(xmlFile);
+        parser.parse(xml);
+
+        NodeList duplications = parser.executeXPathNodeList("/pmd-cpd/duplication");
+        Map<Resource, ClassDuplicationData> duplicationsData = new HashMap<Resource, ClassDuplicationData>();
+        for (int i = 0; i < duplications.getLength(); i++) {
+          Element duplication = (Element) duplications.item(i);
+          NodeList files = parser.executeXPathNodeList(duplication, "file");
+
+          Element fileA = (Element) files.item(0);
+          Element fileB = (Element) files.item(1);
+
+          processClassMeasure(context, duplicationsData, fileB, fileA, duplication, pom);
+          processClassMeasure(context, duplicationsData, fileA, fileB, duplication, pom);
+        }
+
+        for (ClassDuplicationData data : duplicationsData.values()) {
+          data.saveUsing(context);
+        }
+      }
+    } catch (ParseException e) {
+      throw new XmlParserException(e);
     }
   }
 
-  private CpdMapping getMapping(Project project) {
+  private String readXmlWithoutEncodingErrors(File file) {
+    try {
+      // First step : the file is read with system charset encoding. It should resolve the problem in most cases
+      String xml = FileUtils.readFileToString(file);
 
-    return new CsCpdMapping(project);
+      // second step : remove CDATA nodes that contain wrong characters. Those nodes are not needed by the collector.
+      return removeCDataNodes(xml);
+
+    } catch (IOException e) {
+      throw new XmlParserException("can not read the file " + file.getAbsolutePath(), e);
+    }
   }
 
-  private CPD executeCPD(Project project, CpdMapping mapping, Charset encoding)
-      throws IOException, DotNetProjectException {
-
-    CPD cpd = configureCPD(project, mapping, encoding);
-    cpd.go();
-    return cpd;
-
+  String removeCDataNodes(String xml) {
+    String result = xml;
+    String startNode = "<codefragment>";
+    String endNode = "</codefragment>";
+    String[] subs = StringUtils.substringsBetween(xml, startNode, endNode);
+    if (subs != null) {
+      for (String sub : subs) {
+        result = StringUtils.remove(result, startNode + sub + endNode);
+      }
+    }
+    return result;
   }
 
-  private CPD configureCPD(Project project, CpdMapping mapping, Charset encoding)
-      throws IOException, DotNetProjectException {
-
-    TokenEntry.clearImages();
-    int minTokens = project.getConfiguration().getInt(
-        CPD_MINIMUM_TOKENS_PROPERTY, CPD_MINIMUM_TOKENS_DEFAULT_VALUE);
-
-    ;
-    CPD cpd = new CPD(minTokens, new CsLanguage());
-    cpd.setEncoding(encoding.name());
-    cpd.add(VisualUtils.buildCsFileList(project));
-    return cpd;
+  private void processClassMeasure(SensorContext context, Map<Resource, ClassDuplicationData> fileContainer, Element fileEl, Element targetFileEl, Element duplication, Project project) throws ParseException {
+    Resource csFile =  CSharpFileLocator.INSTANCE.locate(project, new File(fileEl.getAttribute("path")), false); 
+    Resource targetCsFile = CSharpFileLocator.INSTANCE.locate(project, new File(targetFileEl.getAttribute("path")), false);
+    if (csFile != null) {
+      ClassDuplicationData data = fileContainer.get(csFile);
+      if (data == null) {
+        data = new ClassDuplicationData(csFile, context);
+        fileContainer.put(csFile, data);
+      }
+      data.cumulate(
+        targetCsFile,
+        ParsingUtils.parseNumber(targetFileEl.getAttribute("line")),
+        ParsingUtils.parseNumber(fileEl.getAttribute("line")),
+        ParsingUtils.parseNumber(duplication.getAttribute("lines"))
+      );
+    }
   }
 
+  private static final class ClassDuplicationData {
+    protected double duplicatedLines;
+    protected double duplicatedBlocks;
+    protected Resource resource;
+    private SensorContext context;
+    private List<StringBuilder> duplicationXMLEntries = new ArrayList<StringBuilder>();
+
+    private ClassDuplicationData(Resource resource, SensorContext context) {
+      this.context = context;
+      this.resource = resource;
+    }
+
+    protected void cumulate(Resource targetResource, Double targetDuplicationStartLine, Double duplicationStartLine, Double duplicatedLines) {
+      Resource resolvedResource = context.getResource(targetResource);
+      if (resolvedResource != null) {
+        StringBuilder xml = new StringBuilder();
+        xml.append("<duplication lines=\"").append(duplicatedLines.intValue())
+          .append("\" start=\"").append(duplicationStartLine.intValue())
+          .append("\" target-start=\"").append(targetDuplicationStartLine.intValue())
+          .append("\" target-resource=\"").append(resolvedResource.getEffectiveKey()).append("\"/>");
+
+        duplicationXMLEntries.add(xml);
+
+        this.duplicatedLines += duplicatedLines;
+        this.duplicatedBlocks++;
+      }
+    }
+
+    protected void saveUsing(SensorContext context) {
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_FILES, 1d);
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_LINES, duplicatedLines);
+      context.saveMeasure(resource, CoreMetrics.DUPLICATED_BLOCKS, duplicatedBlocks);
+      context.saveMeasure(resource, new Measure(CoreMetrics.DUPLICATIONS_DATA, getDuplicationXMLData()));
+    }
+
+    private String getDuplicationXMLData() {
+      StringBuilder duplicationXML = new StringBuilder("<duplications>");
+      for (StringBuilder xmlEntry : duplicationXMLEntries) {
+        duplicationXML.append(xmlEntry);
+      }
+      duplicationXML.append("</duplications>");
+      return duplicationXML.toString();
+    }
+  }
 
   public String toString() {
 
     return getClass().getSimpleName();
   }
+
+ 
 
 }
