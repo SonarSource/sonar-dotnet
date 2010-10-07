@@ -9,12 +9,8 @@
 
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>sonar-plugin-dotnet-cpd</artifactId>
-  <packaging>jar</packaging>
+  <packaging>sonar-plugin</packaging>
   <name>Sonar plugin for dotnet copy/paste detection</name>
-
-  <properties>
-    <sonar.plugin.class>org.sonar.plugin.dotnet.cpd.DotnetCpdPlugin</sonar.plugin.class>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -26,17 +22,7 @@
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-plugin-dotnet-core</artifactId>
     </dependency>
-    <dependency>
-  	  <groupId>pmd</groupId>
-  	  <artifactId>pmd</artifactId>
-      <version>4.2.5</version>
-	</dependency>
-	
-    <!-- 
-    
-    IMPORTANT : only dependencies with test scope can be added to plugins. 
-    
-    -->
+  
 
     <!-- unit tests -->
     <dependency>
@@ -58,16 +44,14 @@
   <build>
     <plugins>
       <plugin>
-        <!-- complete META-INF/MANIFEST.MF -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.2</version>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>0.1</version>
         <configuration>
-          <archive>
-            <manifestEntries>
-              <Plugin-Class>${sonar.plugin.class}</Plugin-Class>
-            </manifestEntries>
-          </archive>
+          <pluginKey>dotnetcpdplugin</pluginKey>
+          <pluginName>DotnetCpdPlugin</pluginName>
+          <pluginClass>org.sonar.plugin.dotnet.cpd.DotnetCpdPlugin</pluginClass>
         </configuration>
       </plugin>
 
