@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
@@ -90,6 +91,12 @@ public class StyleCopResultParser extends AbstractXmlParser {
       String key = getNodeContent(issueElement, "key");
       String message = getNodeContent(issueElement, "message");
       String lineNumber = getNodeContent(issueElement, "line");
+      
+      if (GeneratedCodeFilter.INSTANCE.isGenerated(filePath)) {
+        // skip warnings on generated code
+        continue;
+      }
+      
       Resource<?> resource = getResource(filePath);
 
       Integer line = getIntValue(lineNumber);
