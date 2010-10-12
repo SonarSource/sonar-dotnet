@@ -162,12 +162,25 @@ public class VisualStudioUtils {
   /**
    * @param visualStudioProject
    */
-  private static void assessTestProject(
-      VisualStudioProject visualStudioProject, String testProjectPattern) {
+  public static void assessTestProject(
+      VisualStudioProject visualStudioProject, String testProjectPatterns) {
+    
     String assemblyName = visualStudioProject.getAssemblyName();
-    if (SelectorUtils.match(testProjectPattern, assemblyName)) {
-      visualStudioProject.setTest(true);
+    
+    String[] patterns = StringUtils.split(testProjectPatterns, ";");
+    boolean testFlag = false;
+    for (int i = 0; i < patterns.length; i++) {
+      if (SelectorUtils.match(patterns[i], assemblyName)) {
+        testFlag = true;
+        continue;
+      }
     }
+    
+    if (testFlag) {
+      log.info("The project {} has been qualified as a test project", visualStudioProject.getName());
+    }
+    
+    visualStudioProject.setTest(testFlag);
   }
 
   /**

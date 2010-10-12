@@ -151,4 +151,35 @@ public class VisualStudioUtilsTest {
       assertThat(name, not(is("AssemblyInfo.cs")));
     }
   }
+  
+  @Test
+  public void simpleTestPattern() {
+    VisualStudioProject testProject = new VisualStudioProject();
+    testProject.setAssemblyName("MyProject.Test");
+    VisualStudioProject project = new VisualStudioProject();
+    project.setAssemblyName("MyProject");
+    VisualStudioUtils.assessTestProject(project, "*.Test");
+    VisualStudioUtils.assessTestProject(testProject, "*.Test");
+    assertFalse(project.isTest());
+    assertTrue(testProject.isTest());
+  }
+  
+  @Test
+  public void multipleTestPatterns() {
+    VisualStudioProject testProject = new VisualStudioProject();
+    testProject.setAssemblyName("MyProjectTest");
+    VisualStudioProject secondTestProject = new VisualStudioProject();
+    secondTestProject.setAssemblyName("MyProject.Tests");
+    VisualStudioProject project = new VisualStudioProject();
+    project.setAssemblyName("MyProject");
+    
+    String patterns = "*Test;*.Tests";
+    
+    VisualStudioUtils.assessTestProject(project, patterns);
+    VisualStudioUtils.assessTestProject(testProject, patterns);
+    VisualStudioUtils.assessTestProject(secondTestProject, patterns);
+    assertFalse(project.isTest());
+    assertTrue(testProject.isTest());
+    assertTrue(secondTestProject.isTest());
+  }
 }
