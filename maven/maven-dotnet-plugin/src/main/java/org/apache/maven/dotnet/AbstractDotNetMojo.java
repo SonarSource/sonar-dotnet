@@ -293,13 +293,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    * @param visualStudioProject
    */
   private void assessTestProject(VisualStudioProject visualStudioProject) {
-    String assemblyName = visualStudioProject.getAssemblyName();
-    if (SelectorUtils.match(testProjectPattern, assemblyName)) {
-      getLog().debug(
-          "The project " + visualStudioProject.getName()
-              + " has been qualified as a test project");
-      visualStudioProject.setTest(true);
-    }
+    VisualStudioUtils.assessTestProject(visualStudioProject, testProjectPattern);
   }
 
   /**
