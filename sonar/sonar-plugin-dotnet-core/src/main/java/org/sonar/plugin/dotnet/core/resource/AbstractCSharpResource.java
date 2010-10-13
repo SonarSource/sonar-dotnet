@@ -118,6 +118,11 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
     return getKey().equals(resource.getKey());
 
   }
+  
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
 
   @Override
   public String toString() {
