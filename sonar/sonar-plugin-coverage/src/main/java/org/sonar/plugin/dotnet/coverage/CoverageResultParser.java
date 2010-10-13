@@ -38,7 +38,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
-import org.sonar.plugin.dotnet.coverage.model.ClassCoverage;
 import org.sonar.plugin.dotnet.coverage.model.CoveragePoint;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
@@ -56,11 +55,11 @@ public class CoverageResultParser extends AbstractXmlParser {
   /**
    * Generates the logger.
    */
-  private final static Logger log = LoggerFactory.getLogger(CoverageResultParser.class);
-  
+  private final static Logger log = LoggerFactory
+      .getLogger(CoverageResultParser.class);
+
   private final Map<Integer, FileCoverage> sourceFiles;
   private final Map<String, ProjectCoverage> projects;
-  private final List<ClassCoverage> classes;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy strategy;
 
@@ -69,7 +68,6 @@ public class CoverageResultParser extends AbstractXmlParser {
    */
   public CoverageResultParser() {
     sourceFiles = new HashMap<Integer, FileCoverage>();
-    classes = new ArrayList<ClassCoverage>();
     projects = new HashMap<String, ProjectCoverage>();
     factory = XPathFactory.newInstance();
     xpath = factory.newXPath();
@@ -128,27 +126,26 @@ public class CoverageResultParser extends AbstractXmlParser {
    * @param methodElement
    */
   private void processMethod(Element methodElement) {
-    NodeList nodes = methodElement.getElementsByTagName(strategy
-        .getPointElement());
-    List<Element> elements = convertToList(nodes);
+
     // First we retrieve the file
     FileCoverage fileCoverage = null;
-    // First pass for to retrieve the file
-    for (Element pointElement : elements) {
-      if (pointElement.hasAttribute(strategy.getFileIdPointAttribute())) {
-        String fileId = pointElement.getAttribute(strategy
-            .getFileIdPointAttribute());
-        Integer id = Integer.valueOf(fileId);
-        fileCoverage = this.sourceFiles.get(id);
-      }
-      if (fileCoverage != null) {
-        // The file is found : we skip the remaining
-        break;
-      }
-    }
+    // First pass to retrieve the file
+
+    /*
+     * for (Element pointElement : pointElements) { if
+     * (pointElement.hasAttribute(strategy.getFileIdPointAttribute())) { String
+     * fileId = pointElement.getAttribute(strategy .getFileIdPointAttribute());
+     * Integer id = Integer.valueOf(fileId); fileCoverage =
+     * this.sourceFiles.get(id); } if (fileCoverage != null) { // The file is
+     * found : we skip the remaining break; } }
+     */
+
+    Integer fileId = strategy.findFileId(methodElement);
+    fileCoverage = this.sourceFiles.get(fileId);
 
     if (fileCoverage == null) {
-      // No file associated (this should never occur for a consistent result)
+      // No file associated (this should never occur for a consistent result);
+      log.info("Method coverage data not attached to any file");
       return;
     }
 
@@ -169,38 +166,43 @@ public class CoverageResultParser extends AbstractXmlParser {
     }
 
     // Second pass to populate the file
-    for (Element pointElement : elements) {
-      if (!pointElement.hasAttribute(strategy.getStartLinePointAttribute())) {
-        // We skip the elements with no line
-        continue;
-      }
-      int countVisits = getIntAttribute(pointElement,
-          strategy.getCountVisitsPointAttribute());
-      int startLine = getIntAttribute(pointElement,
-          strategy.getStartLinePointAttribute());
-      int endLine = getIntAttribute(pointElement,
-          strategy.getEndLinePointAttribute());
-      if (endLine == 0) {
-        endLine = startLine;
-      }
-      CoveragePoint point = new CoveragePoint();
-      point.setCountVisits(countVisits);
-      point.setStartLine(startLine);
-      point.setEndLine(endLine);
+    NodeList nodes = methodElement.getElementsByTagName(strategy
+        .getPointElement());
+    List<Element> pointElements = convertToList(nodes);
+    if (pointElements.isEmpty()) {
+      strategy.handleMethodWithoutPoints(methodElement, fileCoverage);
+    } else {
+      for (Element pointElement : pointElements) {
+        if (!pointElement.hasAttribute(strategy.getStartLinePointAttribute())) {
+          // We skip the elements with no line
+          continue;
+        }
+        int countVisits = getIntAttribute(pointElement,
+            strategy.getCountVisitsPointAttribute());
+        int startLine = getIntAttribute(pointElement,
+            strategy.getStartLinePointAttribute());
+        int endLine = getIntAttribute(pointElement,
+            strategy.getEndLinePointAttribute());
+        if (endLine == 0) {
+          endLine = startLine;
+        }
+        CoveragePoint point = new CoveragePoint();
+        point.setCountVisits(countVisits);
+        point.setStartLine(startLine);
+        point.setEndLine(endLine);
 
-      // We add the coverage to the file
-      if (fileCoverage != null) {
+        // We add the coverage to the file
         fileCoverage.addPoint(point);
       }
     }
+
   }
 
   /**
    * This method is necessary due to a silly modification of the schema between
    * partcover 2.2 and 2.3, for which elements start now with an uppercase
-   * letter.
-   * Format is a little bit different with partcover4, and NCover use
-   * a different format too.
+   * letter. Format is a little bit different with partcover4, and NCover use a
+   * different format too.
    * 
    * @param file
    */
@@ -246,15 +248,6 @@ public class CoverageResultParser extends AbstractXmlParser {
         log.debug("bad url", e);
       }
     }
-  }
-
-  /**
-   * Returns the classes.
-   * 
-   * @return The classes to return.
-   */
-  public List<ClassCoverage> getClasses() {
-    return this.classes;
   }
 
   /**

@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugin.dotnet.coverage.CoverageResultParser;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
@@ -126,16 +127,19 @@ public class CoverageResultParserTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testParsePartCover40() {
 		ParsingParameters params = new ParsingParameters();
 		params.report = "coverage-report-4.0.xml";
 		params.assemblyName = "Example.Core";
-		params.fileNumber = 2;
+		params.fileNumber = 3;
 		params.fileName = "Money.cs";
-		params.coveredLines = 25;
-		params.lines = 27;
+		params.coveredLines = 45;
+		params.lines = 215;
 		
 		checkParsing(params);
+		ProjectCoverage projectCoverage = parser.getProjects().get(0);
+		assertEquals(0.18, projectCoverage.getCoverage(),0.0001);
 	}
 	
 	@Test
@@ -171,7 +175,8 @@ public class CoverageResultParserTest {
 		
 		assertEquals(parameters.coveredLines, firstFileCoverage.getCoveredLines());
 		
-		assertEquals(parameters.lines, firstFileCoverage.getLines().size());
+		assertEquals(parameters.lines, firstFileCoverage.getCountLines());
+	
   }
 	
 	public static class ParsingParameters {

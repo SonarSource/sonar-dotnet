@@ -49,7 +49,6 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
-import org.sonar.plugin.dotnet.coverage.model.CoverableSource;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.coverage.model.SourceLine;
@@ -94,7 +93,10 @@ public class CoverageSensor extends AbstractDotnetSensor {
     File dir = getReportsDirectory(project);
     File report = new File(dir, reportFileName);
 
-    
+    if (!report.exists()) {
+      log.info("No Coverage report found for path {}", report);
+      return;
+    }
     
     CoverageResultParser parser = new CoverageResultParser();
     // We parse the file
@@ -193,7 +195,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
    *          the source file result
    * @return a measure to store
    */
-  private Measure getHitData(CoverableSource coverable) {
+  private Measure getHitData(FileCoverage coverable) {
     lineHitsBuilder.clear();
     Map<Integer, SourceLine> lines = coverable.getLines();
     for (SourceLine line : lines.values()) {

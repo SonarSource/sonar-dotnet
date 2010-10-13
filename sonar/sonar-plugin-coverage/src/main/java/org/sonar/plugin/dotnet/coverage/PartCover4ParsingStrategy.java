@@ -23,6 +23,8 @@ package org.sonar.plugin.dotnet.coverage;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 
 public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
@@ -63,4 +65,15 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     return result;
   }
 
+  @Override
+  public void handleMethodWithoutPoints(Element methodElement,
+      FileCoverage fileCoverage) {
+   
+    String rawLineNumber = evaluateAttribute(methodElement, "@linecount");
+    if (!StringUtils.isEmpty(rawLineNumber)) {
+      fileCoverage.addUncoveredLines(Integer.parseInt(rawLineNumber));
+    }
+  }
+  
+ 
 }

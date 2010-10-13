@@ -20,10 +20,17 @@
 
 package org.sonar.plugin.dotnet.coverage;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
+import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 
 public abstract class AbstractParsingStrategy extends AbstractXmlParser {
+  
+  private final static Logger log = LoggerFactory.getLogger(AbstractParsingStrategy.class);
 
   private String filePath;
   private String methodPath;
@@ -33,6 +40,7 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
   private String startLinePointAttribute;
   private String endLinePointAttribute;
   private String fileIdPointAttribute;
+  
 
   public String getFilePath() {
     return filePath;
@@ -51,6 +59,23 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
   }
 
   abstract String findAssemblyName(Element methodElement);
+  
+  /**
+   * Find the file identifier of the source file containing a method
+   * @param methodElement a dom element representing a c# method
+   * @return null if no source file found. Otherwise the source 
+   *              file identifier as an integer value
+   */
+  public Integer findFileId(Element methodElement) {
+    String rawResult = evaluateAttribute(methodElement, ".//@"+fileIdPointAttribute);
+    final Integer result;
+    if (StringUtils.isEmpty(rawResult)) {
+      result = null;
+    } else {
+      result = Integer.parseInt(rawResult); 
+    }
+    return result;
+  }
 
   abstract boolean isCompatible(Element rootElement);
 
@@ -92,6 +117,11 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
 
   public void setFileIdPointAttribute(String fileIdPointAttribute) {
     this.fileIdPointAttribute = fileIdPointAttribute;
+  }
+
+  public void handleMethodWithoutPoints(Element methodElement, FileCoverage fileCoverage) {
+    // should not happen 
+    // except when using partcover2.3 and 4
   }
 
 }

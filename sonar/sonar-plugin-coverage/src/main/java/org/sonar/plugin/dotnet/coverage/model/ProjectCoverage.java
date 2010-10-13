@@ -34,13 +34,12 @@ import java.util.Map;
  */
 public class ProjectCoverage extends Coverable {
   private String assemblyName;
-  private Map<File, FileCoverage> files;
+  private Map<File, FileCoverage> files = new HashMap<File, FileCoverage>();
+  private int uncoveredLines = 0;
 
-  /**
-   * Constructs a @link{ProjectCoverage}.
-   */
-  public ProjectCoverage() {
-    this.files = new HashMap<File, FileCoverage>();
+  
+  public void addUncoveredLines(int lines) {
+    uncoveredLines += lines;
   }
 
   /**
@@ -77,6 +76,7 @@ public class ProjectCoverage extends Coverable {
    */
   @Override
   public void summarize() {
+    countLines = uncoveredLines;
     for (FileCoverage fileCoverage : files.values()) {
       countLines += fileCoverage.getCountLines();
       coveredLines += fileCoverage.getCoveredLines();
