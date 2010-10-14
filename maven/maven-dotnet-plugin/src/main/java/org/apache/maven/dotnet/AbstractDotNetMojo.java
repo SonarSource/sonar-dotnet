@@ -85,7 +85,8 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 
   /**
    * A pattern that will help to figure out if a project is a test project from
-   * its name. The '*' and '?' common jokers are accepted
+   * its name. The '*' and '?' common jokers are accepted. Several patterns may be 
+   * specified using ";" as a delimiter.
    * 
    * @parameter expression="${visual.test.project.pattern}"
    *            default-value="*.Tests"
