@@ -127,7 +127,6 @@ public class CoverageResultParserTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testParsePartCover40() {
 		ParsingParameters params = new ParsingParameters();
 		params.report = "coverage-report-4.0.xml";
@@ -139,7 +138,7 @@ public class CoverageResultParserTest {
 		
 		checkParsing(params);
 		ProjectCoverage projectCoverage = parser.getProjects().get(0);
-		assertEquals(0.18, projectCoverage.getCoverage(),0.0001);
+		assertEquals(0.42, projectCoverage.getCoverage(),0.0001);
 	}
 	
 	@Test
