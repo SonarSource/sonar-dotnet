@@ -43,7 +43,7 @@ Example of pom.xml for a .Net solution
     <visual.studio.solution>Example.sln</visual.studio.solution>
     
     <!-- Name pattern to recognize the test assemblies, so that unit tests are only launched on those,
-    and so that those are excluded from code coverage -->
+    and so that those are excluded from code coverage. Several patterns may be specified using a ";" as delimiter -->
     <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
     
     <!-- Version of the .Net tools, which may be 2.0, 3.5 or 4.0 only
