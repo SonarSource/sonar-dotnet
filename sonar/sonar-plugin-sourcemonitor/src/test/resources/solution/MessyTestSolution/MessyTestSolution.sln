@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessyTestApplication", "MessyTestApplication\MessyTestApplication.csproj", "{F80E174C-E15B-4E10-896A-636DC129110B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "MessyTestApplication\ClassLibrary1\ClassLibrary1.csproj", "{33CB0C7C-3014-472A-8575-4DEDC8444B1D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

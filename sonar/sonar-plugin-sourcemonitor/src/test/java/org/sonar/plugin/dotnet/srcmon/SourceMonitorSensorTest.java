@@ -26,14 +26,20 @@ import static org.junit.Assert.*;
 import java.io.File;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.measures.Metric;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
@@ -73,8 +79,37 @@ public class SourceMonitorSensorTest {
     when(projectFileSystem.getBuildDir()).thenReturn(new File("target/test-classes/solution/MessyTestSolution/target"));
     when(projectFileSystem.getBasedir()).thenReturn(new File("target/test-classes/solution/MessyTestSolution"));
     SensorContext context = mock(SensorContext.class);
-    
+   
     sensor.analyse(project, context);
+    
+    // verify that not measures
+    // for file Money.cs are saved and measures
+    // from Money.cs does not corrupt folder and assembly measures
+    verify(context, atLeastOnce()).saveMeasure(argThat(new IsCorrectResource()), any(Measure.class));
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINES) , argThat(new IsMoneyMeasure()));
   }
 
+  public static class IsCorrectResource extends ArgumentMatcher<Resource<?>> {
+
+    @Override
+    public boolean matches(Object argument) {
+      Resource<?> res = (Resource<?>) argument;
+      return !StringUtils.containsIgnoreCase(res.getLongName(), "money");
+    }
+   
+ }
+  
+  public static class IsMoneyMeasure extends ArgumentMatcher<Double> {
+
+    @Override
+    public boolean matches(Object argument) {
+      Double measure = (Double) argument;
+      boolean result = true;
+      if (measure != null) {
+        result = measure>200; // Money.cs has more than 300 loc
+      }
+      return result;
+    }
+   
+ }
 }

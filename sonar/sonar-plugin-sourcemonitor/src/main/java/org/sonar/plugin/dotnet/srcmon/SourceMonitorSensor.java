@@ -299,12 +299,20 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
 
   private void processFile(Project project, SensorContext context,
       FileMetrics fileMetric) {
-    String assemblyName = "";
-
-    // We count the file in the solution
-    solutionMetrics.addFile(fileMetric);
+    
 
     File filePath = fileMetric.getSourcePath();
+    
+    CSharpFile sourceFile = CSharpFileLocator.INSTANCE.locate(project, filePath, false);
+    if (sourceFile == null) {
+      log.info("Source file not belonging to the analysed solution : {}", filePath);
+      return;
+    }
+    
+    String assemblyName = "";
+    
+    // We count the file in the solution
+    solutionMetrics.addFile(fileMetric);
 
     VisualStudioProject visualProject = solution.getProject(filePath);
     // We combine the files by assembly
@@ -335,10 +343,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
     folderMetrics.addFile(fileMetric);
 
     // We Store the file results
-    CSharpFile sourceFile = CSharpFileLocator.INSTANCE.locate(project, filePath, false);
-    if (sourceFile != null) {
-      storeMetrics(project, context, fileMetric, sourceFile);
-    }
+    storeMetrics(project, context, fileMetric, sourceFile);
     
   }
 
