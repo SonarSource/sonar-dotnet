@@ -26,9 +26,11 @@ package org.apache.maven.dotnet.commons.project;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -54,6 +56,28 @@ public class VisualStudioSolution {
     this.solutionDir = solutionFile.getParentFile();
     this.projects = projects;
     initializeFileAssociations();
+    
+    removeAssemblyNameDuplicates();
+    
+  }
+
+  private void removeAssemblyNameDuplicates() {
+    Map<String, VisualStudioProject> projectMap = new HashMap<String, VisualStudioProject>();
+    for (VisualStudioProject project : projects) {
+      String assemblyName = project.getAssemblyName();
+      if (projectMap.containsKey(assemblyName)) {
+        int i = 1;
+        String newAssemblyName = assemblyName;
+        do {
+          i++;
+          newAssemblyName = assemblyName + "_" + i;
+        } while(projectMap.containsKey(newAssemblyName));
+        project.setAssemblyName(newAssemblyName);
+        projectMap.put(newAssemblyName, project);
+      } else {
+        projectMap.put(assemblyName, project);
+      }
+    }
   }
 
   /**

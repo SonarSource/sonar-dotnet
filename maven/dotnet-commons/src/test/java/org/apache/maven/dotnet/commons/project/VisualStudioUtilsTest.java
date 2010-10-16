@@ -37,7 +37,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.matchers.JUnitMatchers.*;
 import org.slf4j.LoggerFactory;
-import org.hamcrest.CoreMatchers;
 
 /**
  * Tests for visual studio utilities.
@@ -55,6 +54,7 @@ public class VisualStudioUtilsTest {
   private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
   private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
+  private static final String SOLUTION_WITH_DUP_PATH = "target/test-classes/solution/DuplicatesExample/Example.sln";
 
   private static final String SILVERLIGHT_SOLUTION_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
@@ -181,5 +181,15 @@ public class VisualStudioUtilsTest {
     assertFalse(project.isTest());
     assertTrue(testProject.isTest());
     assertTrue(secondTestProject.isTest());
+  }
+  
+  @Test
+  public void testSolutionWithAssemblyNameDuplicates() throws Exception {
+    File file = new File(SOLUTION_WITH_DUP_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    List<VisualStudioProject> projects = solution.getProjects();
+    assertEquals(2, projects.size());
+    assertFalse(projects.get(0).getAssemblyName().equals(projects.get(1).getAssemblyName()));
   }
 }

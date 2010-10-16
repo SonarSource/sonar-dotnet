@@ -50,6 +50,7 @@ public class VisualStudioProject {
   private File projectFile;
   private ArtifactType type;
   private String assemblyName;
+  private String realAssemblyName; // assembly name found in the csproj file no matter what
   private String rootNamespace;
   private File debugOutputDir;
   private File releaseOutputDir;
@@ -158,7 +159,7 @@ public class VisualStudioProject {
    * @return
    */
   private String gerArtifactName() {
-    String generatedFileName = assemblyName + "." + getExtension();
+    String generatedFileName = realAssemblyName + "." + getExtension();
     return generatedFileName;
   }
 
@@ -188,6 +189,9 @@ public class VisualStudioProject {
    */
   public void setAssemblyName(String assemblyName) {
     this.assemblyName = assemblyName;
+    if (StringUtils.isEmpty(realAssemblyName)) {
+      realAssemblyName = assemblyName;
+    }
   }
 
   /**
