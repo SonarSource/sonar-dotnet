@@ -318,11 +318,15 @@ public class SourceMonitorResultParser {
   }
 
   private File toFullPath(String rawFileName) {
+    // fix tests on unix system
+    // but should not be necessary
+    // on windows build machines
+    String rawPortableFileName =  StringUtils.replaceChars(rawFileName, '\\', File.separatorChar);
     File file;
     try {
-      file = new File(baseDir, rawFileName).getCanonicalFile();
+      file = new File(baseDir, rawPortableFileName).getCanonicalFile();
     } catch (IOException e) {
-      file = new File(baseDir, rawFileName);
+      file = new File(baseDir, rawPortableFileName);
     }
     return file;
   }

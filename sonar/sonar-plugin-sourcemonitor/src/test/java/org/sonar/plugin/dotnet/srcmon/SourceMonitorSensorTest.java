@@ -85,7 +85,7 @@ public class SourceMonitorSensorTest {
     // verify that not measures
     // for file Money.cs are saved and measures
     // from Money.cs does not corrupt folder and assembly measures
-    verify(context, atLeastOnce()).saveMeasure((Resource<?>)argThat(new IsCorrectResource()), any(Measure.class));
+    verify(context, atLeastOnce()).saveMeasure(argThat(new IsCorrectResource()), any(Measure.class));
     verify(context, never()).saveMeasure(eq(CoreMetrics.LINES) , argThat(new IsMoneyMeasure()));
   }
 
@@ -93,16 +93,8 @@ public class SourceMonitorSensorTest {
 
     @Override
     public boolean matches(Object argument) {
-      final boolean result;
-      if (argument instanceof Resource<?>) {
-        Resource<?> res = (Resource<?>) argument;
-        result = !StringUtils.containsIgnoreCase(res.getLongName(), "money");
-      } else {
-        // Bamboo build strange behavior
-        // never happen under eclipse / local maven build
-        result = false;
-      }
-      return result;
+      Resource<?> res = (Resource<?>) argument;
+      return !StringUtils.containsIgnoreCase(res.getLongName(), "money");
     }
    
  }
