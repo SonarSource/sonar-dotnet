@@ -85,7 +85,7 @@ public class SourceMonitorSensorTest {
     // verify that not measures
     // for file Money.cs are saved and measures
     // from Money.cs does not corrupt folder and assembly measures
-    verify(context, atLeastOnce()).saveMeasure(argThat(new IsCorrectResource()), any(Measure.class));
+    verify(context, atLeastOnce()).saveMeasure((Resource<?>)argThat(new IsCorrectResource()), any(Measure.class));
     verify(context, never()).saveMeasure(eq(CoreMetrics.LINES) , argThat(new IsMoneyMeasure()));
   }
 
