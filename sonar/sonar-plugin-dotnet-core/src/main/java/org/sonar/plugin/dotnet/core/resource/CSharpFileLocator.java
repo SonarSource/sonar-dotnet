@@ -34,34 +34,34 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
 
 public enum CSharpFileLocator {
   INSTANCE;
-  
-  private final static Logger log = LoggerFactory.getLogger(CSharpFileLocator.class);
-  
+
+  private final static Logger log = LoggerFactory
+      .getLogger(CSharpFileLocator.class);
+
   private Map<File, VisualStudioProject> csFilesProjectMap = Collections.EMPTY_MAP;
 
   public void registerProject(Project project) {
-	log.debug("Init C# file locator");  
-	csFilesProjectMap = VisualUtils.buildCsFileProjectMap(project);
+    log.debug("Init C# file locator");
+    csFilesProjectMap = VisualUtils.buildCsFileProjectMap(project);
   }
-  
+
   public CSharpFile locate(Project project, File file, boolean unitTest) {
-	if (csFilesProjectMap.isEmpty()) {
-	  registerProject(project);
-	}
-	File absoluteFile = file.getAbsoluteFile();
-	final CSharpFile result;
-	if (csFilesProjectMap.containsKey(absoluteFile)) {
-	  VisualStudioProject visualProject = csFilesProjectMap.get(absoluteFile);
-	  result = CSharpFile.from(visualProject, absoluteFile, unitTest);
-	} else {
-		log.debug("file {} ignored (i.e. link file or file not referenced by any project)", absoluteFile);
-	  result = null;
-	}
-	
-	return result;
+    if (csFilesProjectMap.isEmpty()) {
+      registerProject(project);
+    }
+    File absoluteFile = file.getAbsoluteFile();
+    final CSharpFile result;
+    if (csFilesProjectMap.containsKey(absoluteFile)) {
+      VisualStudioProject visualProject = csFilesProjectMap.get(absoluteFile);
+      result = CSharpFile.from(visualProject, absoluteFile, unitTest);
+    } else {
+      log.debug(
+          "file {} ignored (i.e. link file or file not referenced by any project)",
+          absoluteFile);
+      result = null;
+    }
+
+    return result;
   }
-  
-  
-	
-	
+
 }

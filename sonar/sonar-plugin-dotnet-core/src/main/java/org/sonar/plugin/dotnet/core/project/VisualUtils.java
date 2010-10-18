@@ -35,6 +35,7 @@ import java.util.Map;
 
 import net.sourceforge.pmd.cpd.CsLanguage;
 
+import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -43,8 +44,10 @@ import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.resources.DefaultProjectFileSystem;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
+import org.sonar.api.utils.WildcardPattern;
 
 /**
  * Utility classes for Visual Studio projects associated to Maven projects.
@@ -101,26 +104,63 @@ public final class VisualUtils {
       throw new SonarException(e);
     }
     List<VisualStudioProject> projects = solution.getProjects();
-    FilenameFilter filter = new CsLanguage().getFileFilter();
+    FilenameFilter generatedCodeFilter = new CsLanguage().getFileFilter();
 
     Map<File, VisualStudioProject> csFiles = new HashMap<File, VisualStudioProject>();
 
+    WildcardPattern[] patterns 
+      = WildcardPattern.create(project.getExclusionPatterns());
+    
     for (VisualStudioProject visualStudioProject : projects) {
 
       Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
+      
+      ExclusionFilter exclusionFilter 
+        = new ExclusionFilter(visualStudioProject.getDirectory(), patterns);
+      
       for (SourceFile sourceFile : sources) {
-        if (filter.accept(sourceFile.getFile().getParentFile(),
-            sourceFile.getName())) {
+        if (generatedCodeFilter.accept(sourceFile.getFile().getParentFile(), sourceFile.getName())
+            && exclusionFilter.accept(sourceFile.getFile())) {
           csFiles.put(sourceFile.getFile(), visualStudioProject);
         }
       }
-
     }
     return csFiles;
   }
 
   public static List<File> buildCsFileList(Project project) {
     return new ArrayList<File>(buildCsFileProjectMap(project).keySet());
+  }
+  
+  /**
+   * Copy/Pasted from DefaultProjectFileSystem
+   *
+   */
+  private static class ExclusionFilter implements IOFileFilter {
+    File sourceDir;
+    WildcardPattern[] patterns;
+
+    ExclusionFilter(File sourceDir, WildcardPattern[] patterns) {
+      this.sourceDir = sourceDir;
+      this.patterns = patterns;
+    }
+
+    public boolean accept(File file) {
+      String relativePath = DefaultProjectFileSystem.getRelativePath(file, sourceDir);
+      if (relativePath == null) {
+        return false;
+      }
+      for (WildcardPattern pattern : patterns) {
+        if (pattern.match(relativePath)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    public boolean accept(File file, String name) {
+      return accept(file);
+    }
   }
 
 }
