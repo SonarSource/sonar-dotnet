@@ -32,4 +32,8 @@ public class Constants {
   public static final String GENDARME_TRANSFO_XSL = "gendarme-transformation.xsl";
   public static final String GENDARME_PROCESSED_REPORT_XML = "gendarme-report-processed.xml";
   
+  public static final String GENDARME_CONFIDENCE_KEY = "sonar.dotnet.gendarme.confidence";
+  
+  public static final String GENDARME_SEVERITY_KEY = "sonar.dotnet.gendarme.severity";
+  
 }

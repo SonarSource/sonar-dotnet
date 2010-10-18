@@ -23,10 +23,13 @@
  */
 package org.sonar.plugin.dotnet.gendarme;
 
+import static org.sonar.plugin.dotnet.gendarme.Constants.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.maven.MavenPlugin;
@@ -73,6 +76,21 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    
+    String confidence 
+      = project.getConfiguration().getString(GENDARME_CONFIDENCE_KEY);
+    
+    if (!StringUtils.isEmpty(confidence)) {
+      plugin.setParameter("confidence", confidence);
+    }
+    
+    String severity 
+      = project.getConfiguration().getString(GENDARME_SEVERITY_KEY);
+  
+    if (!StringUtils.isEmpty(severity)) {
+      plugin.setParameter("severity", severity);
+    }
+    
   }
 
   /**

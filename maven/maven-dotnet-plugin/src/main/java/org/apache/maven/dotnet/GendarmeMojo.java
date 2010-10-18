@@ -87,16 +87,18 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
   private String gendarmeConfigFile;
   
   /**
-   * confidence [all | [[low | normal | high | total][+|-]],...
    * Filter defects for the specified confidence levels.
+   * confidence [all | [[low | normal | high | total][+|-]],...
+   * 
    * @parameter expression="${gendarme.confidence}" default-value="normal+"
    */
   private String confidence;
   
   /**
-   * severity [all | [[audit | low | medium | high | critical][+|-]]],...
    * Filter defects for the specified severity levels.
-   * @parameter expression="${gendarme.confidence}" default-value="all"
+   * severity [all | [[audit | low | medium | high | critical][+|-]]],...
+   * 
+   * @parameter expression="${gendarme.severity}" default-value="all"
    */
   private String severity;
 

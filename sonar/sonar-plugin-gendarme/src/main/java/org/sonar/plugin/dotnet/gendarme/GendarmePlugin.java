@@ -48,7 +48,27 @@ import org.sonar.api.Plugin;
       description = "Name of the Mono Gendarme report file used when reuse report mode is activated",
       project = true,
       module = false,
-      global = true)
+      global = true),
+  @Property(
+      key = GENDARME_CONFIDENCE_KEY,
+      defaultValue = "normal+",
+      name = "Confidence level used by Mono Gendarme to filter violations",
+      description = "Filter defects for the specified confidence levels : [all | [[low | normal | high | total][+|-]] ",
+      project = true,
+      module = false,
+      global = true),
+  @Property(
+      key = GENDARME_SEVERITY_KEY,
+      defaultValue = "all",
+      name = "Severity threshold used by Mono Gendarme to filter violations",
+      description = "Warning, some rules always fire violation with low severity." +
+      		" This severity notion is not linked to the priority notion of Sonar." +
+      		" Filter defects for the specified severity levels :" +
+      		" [all | [[audit | low | medium | high | critical][+|-]]] ",
+      project = true,
+      module = false,
+      global = true)  
+     
 })
 public class GendarmePlugin implements Plugin {
   public static final String KEY = "gendarme";
