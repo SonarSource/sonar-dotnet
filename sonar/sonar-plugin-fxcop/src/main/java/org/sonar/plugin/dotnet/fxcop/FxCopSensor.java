@@ -27,6 +27,7 @@ package org.sonar.plugin.dotnet.fxcop;
 import static org.sonar.plugin.dotnet.fxcop.Constants.*;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.xml.transform.Result;
@@ -155,7 +156,7 @@ public class FxCopSensor extends AbstractDotnetSensor {
 
       File processedReport = new File(dir, targetFileName);
       processedReport.delete();
-      Result result = new StreamResult(processedReport);
+      Result result = new StreamResult(new FileOutputStream(processedReport));
       transformer.transform(xmlSource, result);
       return processedReport;
     } catch (Exception exc) {
