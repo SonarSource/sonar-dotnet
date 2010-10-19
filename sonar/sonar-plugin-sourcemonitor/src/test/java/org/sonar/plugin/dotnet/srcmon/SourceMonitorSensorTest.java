@@ -21,7 +21,9 @@
 package org.sonar.plugin.dotnet.srcmon;
 
 import static org.mockito.Mockito.*;
+import static org.mockito.AdditionalMatchers.*;
 import static org.junit.Assert.*;
+
 
 import java.io.File;
 
@@ -35,14 +37,9 @@ import org.mockito.ArgumentMatcher;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
-import org.sonar.api.measures.Metric;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RulesManager;
-import org.sonar.api.rules.Violation;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorPluginHandler;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorSensor;
 
@@ -86,7 +83,7 @@ public class SourceMonitorSensorTest {
     // for file Money.cs are saved and measures
     // from Money.cs does not corrupt folder and assembly measures
     verify(context, atLeastOnce()).saveMeasure(argThat(new IsCorrectResource()), any(Measure.class));
-    verify(context, never()).saveMeasure(eq(CoreMetrics.LINES) , argThat(new IsMoneyMeasure()));
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINES) , gt(200d)); // Money.cs has more than 200 loc
   }
 
   public static class IsCorrectResource extends ArgumentMatcher<Resource<?>> {
@@ -95,20 +92,6 @@ public class SourceMonitorSensorTest {
     public boolean matches(Object argument) {
       Resource<?> res = (Resource<?>) argument;
       return !StringUtils.containsIgnoreCase(res.getLongName(), "money");
-    }
-   
- }
-  
-  public static class IsMoneyMeasure extends ArgumentMatcher<Double> {
-
-    @Override
-    public boolean matches(Object argument) {
-      Double measure = (Double) argument;
-      boolean result = true;
-      if (measure != null) {
-        result = measure>200; // Money.cs has more than 300 loc
-      }
-      return result;
     }
    
  }
