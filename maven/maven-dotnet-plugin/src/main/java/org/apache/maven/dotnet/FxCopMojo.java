@@ -58,6 +58,14 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    * @parameter expression="${fxcop.directory}"
    */
   private File fxCopDirectory;
+  
+  /**
+   * Specifies an additional directory to search for assembly dependencies. Useful
+   * in particular when assembly bindings have been used. 
+   * 
+   * @parameter expression="${fxcop.additionalDirectory}"
+   */
+  private File[] fxCopAdditionalDirectories;
 
   /**
    * Name of the FxCop command line executable.
@@ -207,6 +215,12 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
     for (File checkedAssembly : assemblies) {
       log.debug("   o " + checkedAssembly);
       commandArguments.add("/f:" + toCommandPath(checkedAssembly));
+    }
+    // Add additional directories
+    log.debug("- Additional directories :");
+    for (File additionalDirectory : fxCopAdditionalDirectories) {
+      log.debug("   o " + additionalDirectory);
+      commandArguments.add("/d:" + toCommandPath(additionalDirectory));
     }
 
     commandArguments.add("/gac");
