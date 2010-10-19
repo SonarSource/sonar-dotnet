@@ -23,6 +23,7 @@ package org.sonar.plugin.dotnet.gendarme;
 import static org.sonar.plugin.dotnet.gendarme.Constants.*;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.xml.transform.Result;
@@ -129,7 +130,7 @@ public class GendarmeSensor extends AbstractDotnetSensor {
 
       File processedReport = new File(dir, GENDARME_PROCESSED_REPORT_XML);
       processedReport.delete();
-      Result result = new StreamResult(processedReport);
+      Result result = new StreamResult(new FileOutputStream(processedReport));
       transformer.transform(xmlSource, result);
       return processedReport;
     } catch (Exception exc) {
