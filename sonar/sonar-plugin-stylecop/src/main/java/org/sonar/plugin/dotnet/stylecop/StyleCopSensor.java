@@ -27,6 +27,7 @@ package org.sonar.plugin.dotnet.stylecop;
 import static org.sonar.plugin.dotnet.stylecop.Constants.*;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.xml.transform.Result;
@@ -132,7 +133,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
 
       File processedReport = new File(dir, STYLECOP_PROCESSED_REPORT_XML);
       processedReport.delete();
-      Result result = new StreamResult(processedReport);
+      Result result = new StreamResult(new FileOutputStream(processedReport));
       transformer.transform(xmlSource, result);
       return processedReport;
     } catch (Exception exc) {
