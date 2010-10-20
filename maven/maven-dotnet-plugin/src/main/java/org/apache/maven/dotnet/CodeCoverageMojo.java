@@ -208,7 +208,6 @@ public class CodeCoverageMojo extends GallioMojo {
       // Generates the test arguments all in one, in which the quotes needs to
       // be escaped
       StringBuilder targetArgsBuilder = new StringBuilder();
-      targetArgsBuilder.append('"');
       boolean isFirst = true;
       for (String currentArg : testCommandArgs) {
         if (isFirst) {
@@ -219,7 +218,6 @@ public class CodeCoverageMojo extends GallioMojo {
         String escapedArg = escapeQuotes(currentArg);
         targetArgsBuilder.append(escapedArg);
       }
-      targetArgsBuilder.append('"');
       arguments.add("--target-args");
       arguments.add(targetArgsBuilder.toString());
 
@@ -241,6 +239,8 @@ public class CodeCoverageMojo extends GallioMojo {
     }
 
     Commandline commandLine = generateCommandLine(executable, arguments);
+    if (log.isDebugEnabled())
+      log.debug("Test-Command:" + commandLine);
     return commandLine;
   }
 
@@ -251,13 +251,20 @@ public class CodeCoverageMojo extends GallioMojo {
    * @return
    */
   public String escapeQuotes(String input) {
-    StringBuilder result = new StringBuilder();
-    for (int idxChar = 0; idxChar < input.length(); idxChar++) {
+    StringBuilder result = new StringBuilder(input.length());
+    for (int idxChar = 0, len = input.length(); idxChar < len; idxChar++) {
       char currentChar = input.charAt(idxChar);
       if (currentChar == '"') {
         result.append('\\');
+      } else if (idxChar == 0) {
+        result.append("\\\"");
       }
+
       result.append(currentChar);
+
+      if (currentChar != '"' && idxChar == len - 1) {
+        result.append("\\\"");
+      }
     }
     return result.toString();
   }
