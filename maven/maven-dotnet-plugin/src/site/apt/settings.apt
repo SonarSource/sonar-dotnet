@@ -37,32 +37,36 @@ Example of maven <<settings.xml>> configuration.
       </activation>
       <properties>
         <!-- Locations of the the .Net installations (pick the one you need) -->
+        <!-- (below the default values for each dotnet version supported) -->
         <dotnet.2.0.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727</dotnet.2.0.sdk.directory>
         <dotnet.3.5.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v3.5</dotnet.3.5.sdk.directory>
         <dotnet.4.0.sdk.directory>C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319</dotnet.4.0.sdk.directory>
         
         <!-- Locations of the core assemblies for silverlight frameworks  -->
+        <!-- (mandatory only if you need to build/analyse silverlight projects)-->
         <silverlight.3.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v3.0</silverlight.3.mscorlib.location>
         <silverlight.4.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v4.0</silverlight.4.mscorlib.location>
               
         <!-- Location of the Gallio installation -->
         <gallio.directory>C:/Program Files/Gallio</gallio.directory>
 
-        <!-- Location of StyleCop installation-->
-        <stylecop.directory>C:/Program Files/Microsoft StyleCop 4.3.2.1</stylecop.directory>
-
         <!-- Location of FxCop installation-->
-        <fxcop.directory>C:/Program Files/Microsoft FxCop 1.36</fxcop.directory>
+        <fxcop.directory>C:/Program Files/Microsoft FxCop 10.0</fxcop.directory>
 
         <!-- Location of PartCover installation-->
-        <partcover.directory>C:/Program Files/Gubka Bob/PartCover .NET 2</partcover.directory>
+        <partcover.directory>C:/Program Files/PartCover/PartCover .NET 4.0</partcover.directory>
 
         <!-- Location of Source Monitor installation-->
         <sourcemonitor.directory>C:/Program Files/SourceMonitor</sourcemonitor.directory>
         
-        <!-- Location of Gendarme installation-->
+        <!-- Location of Gendarme installation
+        NOT MANDATORY
         <gendarme.directory>C:/Program Files/gendarme-2.6-bin</gendarme.directory>
-        
+        -->
+        <!-- Location of StyleCop installation
+        NOT MANDATORY 
+        <stylecop.directory>C:/Program Files/Microsoft StyleCop 4.3.2.1</stylecop.directory>
+        -->
       </properties>
    </profile>
    ...
