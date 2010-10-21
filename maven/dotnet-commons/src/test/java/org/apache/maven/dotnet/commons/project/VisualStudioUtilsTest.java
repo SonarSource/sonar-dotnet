@@ -75,6 +75,23 @@ public class VisualStudioUtilsTest {
     VisualStudioProject project = solution.getProject("Example.Core");
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 6, files.size());
+    List<BinaryReference> references = project.getBinaryReferences();
+    assertTrue(references.size()>0);
+    
+    BinaryReference systemReference = new BinaryReference();
+    systemReference.setAssemblyName("System.Xml.Linq");
+    systemReference.setVersion("v3.5");
+    
+    assertThat(references, hasItems(systemReference));
+    
+    VisualStudioProject testProject = solution.getProject("Example.Core.Tests");
+    List<BinaryReference> testReferences = testProject.getBinaryReferences();
+    BinaryReference nunitReference = new BinaryReference();
+    nunitReference.setAssemblyName("nunit.core.interfaces");
+    nunitReference.setVersion("2.4.8.0");
+    
+    assertThat(testReferences, hasItems(nunitReference));
+    
   }
 
   @Test

@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,9 +59,12 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN Aug 14, 2009
  */
 public class VisualStudioUtils {
-  
-  private final static Logger log = LoggerFactory.getLogger(VisualStudioUtils.class);
-  
+
+  private static final String VERSION_KEY = ", Version=";
+
+  private final static Logger log = LoggerFactory
+      .getLogger(VisualStudioUtils.class);
+
   public final static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
   public final static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
   public final static String VISUAL_PROJECT_NAME_PROPERTY = "visual.studio.project";
@@ -162,11 +166,11 @@ public class VisualStudioUtils {
   /**
    * @param visualStudioProject
    */
-  public static void assessTestProject(
-      VisualStudioProject visualStudioProject, String testProjectPatterns) {
-    
+  public static void assessTestProject(VisualStudioProject visualStudioProject,
+      String testProjectPatterns) {
+
     String assemblyName = visualStudioProject.getAssemblyName();
-    
+
     String[] patterns = StringUtils.split(testProjectPatterns, ";");
     boolean testFlag = false;
     for (int i = 0; i < patterns.length; i++) {
@@ -175,11 +179,12 @@ public class VisualStudioUtils {
         continue;
       }
     }
-    
+
     if (testFlag) {
-      log.info("The project {} has been qualified as a test project", visualStudioProject.getName());
+      log.info("The project {} has been qualified as a test project",
+          visualStudioProject.getName());
     }
-    
+
     visualStudioProject.setTest(testFlag);
   }
 
@@ -257,12 +262,13 @@ public class VisualStudioUtils {
       if (matcher.find()) {
         String projectName = matcher.group(1);
         String projectPath = matcher.group(2);
-        
+
         // fix tests on unix system
         // but should not be necessary
         // on windows build machines
-        projectPath =  StringUtils.replace(projectPath, '\\', File.separatorChar);
-        
+        projectPath = StringUtils
+            .replace(projectPath, '\\', File.separatorChar);
+
         File projectFile = new File(baseDirectory, projectPath);
         if (!projectFile.exists()) {
           throw new FileNotFoundException("Could not find the project file: "
@@ -341,7 +347,7 @@ public class VisualStudioUtils {
           .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
       XPathExpression silverlightExpression = xpath
           .compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
-      
+
       VisualStudioProject project = new VisualStudioProject();
       project.setProjectFile(projectFile);
       project.setName(projectName);
@@ -374,11 +380,14 @@ public class VisualStudioUtils {
       project.setRootNamespace(rootNamespace);
       project.setDebugOutputDir(new File(projectDir, debugOutput));
       project.setReleaseOutputDir(new File(projectDir, releaseOutput));
-      
+
       if (Boolean.parseBoolean(silverlightStr)) {
         project.setSilverlightProject(true);
       }
-      
+
+      project.setBinaryReferences(getBinaryReferences(xpath, projectFile,
+          project));
+
       return project;
     } catch (XPathExpressionException xpee) {
       throw new DotNetProjectException("Error while processing the project "
@@ -387,6 +396,69 @@ public class VisualStudioUtils {
       // Replaces the class loader after usage
       Thread.currentThread().setContextClassLoader(savedClassloader);
     }
+  }
+
+  private static List<BinaryReference> getBinaryReferences(XPath xpath, File projectFile, VisualStudioProject project)
+      throws DotNetProjectException {
+    List<BinaryReference> result = new ArrayList<BinaryReference>();
+    try {
+
+      XPathExpression targetFwkIdExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:TargetFrameworkIdentifier");
+      XPathExpression targetFwkVersionExpression = xpath
+          .compile("/vst:Project/vst:PropertyGroup/vst:TargetFrameworkVersion");
+
+      String fwkId = extractProjectProperty(targetFwkIdExpression, projectFile);
+      String fwkversion = extractProjectProperty(targetFwkVersionExpression,
+          projectFile);
+      
+      final String systemVersion;
+      if (StringUtils.isEmpty(fwkId)) {
+        systemVersion = fwkversion;
+      } else {
+        systemVersion = fwkId + '.' + fwkversion; 
+      }
+
+      XPathExpression binaryRefExpression = xpath
+          .compile("/vst:Project/vst:ItemGroup/vst:Reference");
+      InputSource inputSource = new InputSource(
+          new FileInputStream(projectFile));
+      NodeList nodes = (NodeList) binaryRefExpression.evaluate(inputSource,
+          XPathConstants.NODESET);
+      int countNodes = nodes.getLength();
+      for (int idxNode = 0; idxNode < countNodes; idxNode++) {
+        Element includeElement = (Element) nodes.item(idxNode);
+        // We filter the files
+        String includeAttr = includeElement.getAttribute("Include");
+        if (StringUtils.isEmpty(includeAttr)) {
+          log.debug("Binary reference ignored, Include attribute missing");
+        } else {
+          BinaryReference reference = new BinaryReference();
+          
+          int versionIndex = includeAttr.indexOf(VERSION_KEY);
+          if (versionIndex == -1) {
+            reference.setAssemblyName(includeAttr);
+            reference.setVersion(systemVersion);
+          } else {
+            String assemblyName = includeAttr.substring(0, versionIndex);
+            int versionEndIndex = includeAttr.indexOf(",", versionIndex+1);
+            String version = includeAttr.substring(versionIndex+VERSION_KEY.length(),
+                versionEndIndex);
+            reference.setAssemblyName(assemblyName);
+            reference.setVersion(version);
+          }
+          result.add(reference);
+        }
+      }
+
+    } catch (XPathExpressionException exception) {
+      // Should not happen
+      log.debug("xpath error", exception);
+    } catch (FileNotFoundException exception) {
+      // Should not happen
+      log.debug("project file not found", exception);
+    }
+    return result;
   }
 
   public static VisualStudioProject getWebProject(File solutionRoot,
@@ -463,11 +535,11 @@ public class VisualStudioUtils {
         // We filter the files
         String filePath = compileElement.getAttribute("Include");
         if ((filePath != null) && filePath.endsWith(".cs")) {
-          
+
           // fix tests on unix system
           // but should not be necessary
           // on windows build machines
-          filePath =  StringUtils.replace(filePath, '\\', File.separatorChar);
+          filePath = StringUtils.replace(filePath, '\\', File.separatorChar);
           result.add(filePath);
         }
       }
@@ -520,10 +592,10 @@ public class VisualStudioUtils {
       if (prefix == null) {
         throw new RuntimeException("Null prefix");
       }
-      
-      final String result;    
+
+      final String result;
       if ("vst".equals(prefix)) {
-        result = "http://schemas.microsoft.com/developer/msbuild/2003"; 
+        result = "http://schemas.microsoft.com/developer/msbuild/2003";
       } else if ("xml".equals(prefix)) {
         result = XMLConstants.XML_NS_URI;
       } else {

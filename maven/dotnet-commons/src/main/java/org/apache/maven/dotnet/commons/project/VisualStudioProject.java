@@ -58,6 +58,8 @@ public class VisualStudioProject {
   private boolean test;
   private boolean silverlightProject;
   private Map<File, SourceFile> sourceFileMap;
+  
+  private List<BinaryReference> binaryReferences = new ArrayList<BinaryReference>();
 
   /**
    * Builds a {@link VisualStudioProject} ...
@@ -321,6 +323,10 @@ public class VisualStudioProject {
    */
   public void setTest(boolean test) {
     this.test = test;
+    for (BinaryReference reference : binaryReferences) {
+      String scope = test ? "test" : "compile";
+      reference.setScope(scope);
+    }
   }
 
   /**
@@ -551,6 +557,14 @@ public class VisualStudioProject {
    */
   public boolean isSilverlightProject() {
     return silverlightProject;
+  }
+
+  public List<BinaryReference> getBinaryReferences() {
+    return binaryReferences;
+  }
+
+  public void setBinaryReferences(List<BinaryReference> binaryReferences) {
+    this.binaryReferences = binaryReferences;
   }
 
 }
