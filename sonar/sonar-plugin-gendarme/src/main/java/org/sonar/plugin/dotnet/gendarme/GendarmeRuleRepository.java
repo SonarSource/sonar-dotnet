@@ -51,6 +51,7 @@ public class GendarmeRuleRepository extends AbstractDotNetRuleRepository
   public Map<String, String> getBuiltInProfiles() {
     Map<String, String> result = new HashMap<String, String>();
     result.put(CSharpRulesProfile.DEFAULT_WAY, "default.gendarme.config.xml");
+    result.put(CSharpRulesProfile.DEFAULT_WAY_V2, "default.gendarme.config.v2.xml");
     return result;
   }
 

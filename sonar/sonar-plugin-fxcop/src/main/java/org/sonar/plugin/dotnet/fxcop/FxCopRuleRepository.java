@@ -62,6 +62,7 @@ public class FxCopRuleRepository extends AbstractDotNetRuleRepository implements
   public Map<String, String> getBuiltInProfiles() {
     Map<String, String> result = new HashMap<String, String>();
     result.put(CSharpRulesProfile.DEFAULT_WAY, "DefaultRules.FxCop");
+    result.put(CSharpRulesProfile.DEFAULT_WAY_V2, "DefaultRules.V2.FxCop");
     return result;
   }
 

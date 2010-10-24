@@ -63,6 +63,7 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
   public Map<String, String> getBuiltInProfiles() {
     Map<String, String> result = new HashMap<String, String>();
     result.put(CSharpRulesProfile.DEFAULT_WAY, "default-rules.StyleCop");
+    result.put(CSharpRulesProfile.DEFAULT_WAY_V2, "default-rules.V2.StyleCop");
     return result;
   }
 
