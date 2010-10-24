@@ -32,4 +32,5 @@ package org.sonar.plugin.dotnet.core;
 public class CSharpRulesProfile {
   // Default name of the C# Profile
   public final static String DEFAULT_WAY = "Sonar C# Way";
+  public final static String DEFAULT_WAY_V2 = "Sonar C# Way V2";
 }
