@@ -80,7 +80,7 @@
     <module>maven-dotnet-runtime</module>
   </modules>
 
-  <profiles>
+  <!--<profiles>
     <profile>
       <id>deploy-local</id>
       <build>
@@ -104,5 +104,5 @@
         </plugins>
       </build>
     </profile>
-  </profiles>
+  </profiles>-->
 </project>
