@@ -4,7 +4,7 @@
   <parent>
     <artifactId>sonar-dotnet</artifactId>
     <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
   </parent>
 
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
