@@ -27,11 +27,14 @@ package org.sonar.plugin.dotnet.core.project;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sourceforge.pmd.cpd.CsLanguage;
 
@@ -108,11 +111,23 @@ public final class VisualUtils {
 
     Map<File, VisualStudioProject> csFiles = new HashMap<File, VisualStudioProject>();
 
+    String[] excludedProjectNames 
+      = project.getConfiguration().getStringArray("sonar.skippedModules");
+    Set<String> excludedProjectNameSet = new HashSet<String>();
+    if (excludedProjectNames!=null) {
+      excludedProjectNameSet.addAll(Arrays.asList(excludedProjectNames));
+    }
+    
     WildcardPattern[] patterns 
       = WildcardPattern.create(project.getExclusionPatterns());
     
     for (VisualStudioProject visualStudioProject : projects) {
-
+      
+      if (excludedProjectNameSet.contains(visualStudioProject.getName())) {
+        log.info("Project {} excluded, C# files of this project will be ignored", visualStudioProject.getName());
+        continue;      
+      }
+      
       Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
       
       ExclusionFilter exclusionFilter 

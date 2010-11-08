@@ -26,16 +26,21 @@ import static org.mockito.Mockito.*;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.resources.Project;
 
 public class VisualUtilsTest {
 
-  @Test
-  public void testBuildCsFileProjectMap() {
+  private Project project;
+  private Configuration configuration;
+  
+  @Before
+  public void configureProject() {
     // set up maven project
     MavenProject mvnProject = new MavenProject();
     mvnProject.setPackaging("sln");
@@ -45,9 +50,15 @@ public class VisualUtilsTest {
     mvnProject.setFile(pomFile);
     
     // set up sonar project
-    Project project = mock(Project.class);
+    project = mock(Project.class);
+    configuration = mock(Configuration.class);
     when(project.getPom()).thenReturn(mvnProject);
+    when(project.getConfiguration()).thenReturn(configuration);
+  }
   
+  
+  @Test
+  public void testBuildCsFileProjectMap() {
     Map<File, VisualStudioProject> csFileMap = VisualUtils.buildCsFileProjectMap(project);
     assertFalse(csFileMap.keySet().isEmpty());
     
@@ -56,18 +67,6 @@ public class VisualUtilsTest {
   
   @Test
   public void testBuildCsFileProjectMapWithExclusion() {
-    // set up maven project
-    MavenProject mvnProject = new MavenProject();
-    mvnProject.setPackaging("sln");
-    mvnProject.getProperties().put(VisualStudioUtils.VISUAL_SOLUTION_NAME_PROPERTY, "Example.sln");
-    File pomFile 
-      = new File("target/test-classes/solution/Example/pom.xml");
-    mvnProject.setFile(pomFile);
-    
-    // set up sonar project
-    Project project = mock(Project.class);
-    when(project.getPom()).thenReturn(mvnProject);
-    
     // filter one cs file
     when(project.getExclusionPatterns()).thenReturn(new String[]{"**/Model/**/*.cs"});
     
@@ -75,6 +74,25 @@ public class VisualUtilsTest {
     assertFalse(csFileMap.keySet().isEmpty());
     assertEquals(9, csFileMap.keySet().size());
     
+  }
+  
+  @Test
+  public void testBuildCsFileProjectMapWithOneModuleExcluded() {
+    // filter one module
+    when(configuration.getStringArray("sonar.skippedModules")).thenReturn(new String[]{"Example.Application"});
+    
+    Map<File, VisualStudioProject> csFileMap = VisualUtils.buildCsFileProjectMap(project);
+    assertFalse(csFileMap.keySet().isEmpty());
+    assertEquals(8, csFileMap.keySet().size());
+  }
+  
+  @Test
+  public void testBuildCsFileProjectMapWithAllModulesExcluded() {
+    // filter one module
+    when(configuration.getStringArray("sonar.skippedModules")).thenReturn(new String[]{"Example.Application", "Example.Core", "Example.Core.Tests"});
+    
+    Map<File, VisualStudioProject> csFileMap = VisualUtils.buildCsFileProjectMap(project);
+    assertTrue(csFileMap.keySet().isEmpty());
   }
 
 }
