@@ -27,6 +27,7 @@ import static org.mockito.Mockito.*;
 import java.io.File;
 import java.net.MalformedURLException;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.junit.Before;
@@ -69,6 +70,9 @@ public class GendarmeResultParserTest {
     Project project = mock(Project.class);
     when(project.getPom()).thenReturn(mvnProject);
 
+    Configuration configuration = mock(Configuration.class);
+    when(project.getConfiguration()).thenReturn(configuration);
+    
     parser = new GendarmeResultParser(project, context, rulesManager, profile);
   }
   
