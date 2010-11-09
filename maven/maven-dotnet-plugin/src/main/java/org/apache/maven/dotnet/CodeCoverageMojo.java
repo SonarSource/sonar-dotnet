@@ -26,7 +26,9 @@ package org.apache.maven.dotnet;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -76,20 +78,21 @@ public class CodeCoverageMojo extends GallioMojo {
   protected String partCoverExecutable;
 
   private File executable;
+  
   /**
    * Namespaces and assemblies excluded from the code coverage. The format is
    * the PartCover format: "[assembly]namespace"
    * 
    * @parameter alias="coverageExcludes"
    */
-  protected String[] coverageExcludes;
+  private String[] coverageExcludes;
 
   /**
    * Name of the coverage report XML file.
    * 
    * @parameter alias="coverageReportName" default-value="coverage-report.xml";
    */
-  protected String coverageReportName;
+  private String coverageReportName;
 
   /**
    * The output file for test.
@@ -97,14 +100,22 @@ public class CodeCoverageMojo extends GallioMojo {
    * @parameter alias="coverageReportFileName"
    *            default-value="coverage-test-report.xml"
    */
-  protected String coverageReportFileName;
+  private String coverageReportFileName;
 
   /**
    * Set this true to use NCover3 instead of PartCover
    * 
    * @parameter expression="${useNCover}"
    */
-  protected boolean useNCover;
+  private boolean useNCover;
+  
+  /**
+   * List of the excluded projects, using ',' as delimiter. C# files
+   * of these projects will be ignored.
+   * 
+   * @parameter expression="${skippedProjects}"
+   */
+  private String skippedProjects;
 
   public CodeCoverageMojo() {
   }
@@ -155,9 +166,15 @@ public class CodeCoverageMojo extends GallioMojo {
       MojoFailureException {
     List<VisualStudioProject> projects = solution.getProjects();
     List<String> coveredAssemblyNames = new ArrayList<String>();
+    
+    Set<String> skippedProjectSet = new HashSet<String>();
+    if (skippedProjects!=null) {
+      skippedProjectSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,",")));
+    }
+    
     // We build the list to of covered assemblies
     for (VisualStudioProject visualProject : projects) {
-      if (!visualProject.isTest()) {
+      if (!visualProject.isTest() && !skippedProjectSet.contains(visualProject.getName()) ) {
         String assemblyName = visualProject.getAssemblyName();
         coveredAssemblyNames.add(assemblyName);
       }

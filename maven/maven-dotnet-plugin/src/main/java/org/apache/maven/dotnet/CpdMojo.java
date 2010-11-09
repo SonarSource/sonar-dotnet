@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -52,6 +53,8 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.pmd.CpdReport;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 /**
  * Maven plugin for dotnet cpd analysis. Contains copy/paste code from class
@@ -133,6 +136,14 @@ public class CpdMojo extends AbstractDotNetMojo {
    * @since 2.2
    */
   protected boolean aggregate;
+  
+  /**
+   * List of the excluded projects, using ',' as delimiter. C# files
+   * of these projects will be ignored.
+   * 
+   * @parameter expression="${skippedProjects}"
+   */
+  private String skippedProjects;
 
   /**
    * @see org.apache.maven.reporting.AbstractMavenReport#getProject()
@@ -154,11 +165,21 @@ public class CpdMojo extends AbstractDotNetMojo {
       throws MojoExecutionException {
     Map<File, SourceFile> fileMap = new HashMap<File, SourceFile>();
     FilenameFilter filter = new CsLanguage().getFileFilter();
+    
+    Set<String> skippedProjectSet = new HashSet<String>();
+    if (skippedProjects!=null) {
+      skippedProjectSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,",")));
+    }
+    
     List<VisualStudioProject> projects = getVisualSolution().getProjects();
     for (VisualStudioProject visualStudioProject : projects) {
       if (visualStudioProject.isTest() && !includeTests) {
         getLog()
             .debug("skipping test project " + visualStudioProject.getName());
+        
+      } else if (skippedProjectSet.contains(visualStudioProject.getName())) {
+        getLog().info("Skipping project " + visualStudioProject.getName());
+        
       } else {
         Collection<SourceFile> sources = visualStudioProject.getSourceFiles();
         for (SourceFile sourceFile : sources) {

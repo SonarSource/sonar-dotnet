@@ -22,11 +22,16 @@ package org.apache.maven.dotnet;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoFailureException;
+
+import edu.emory.mathcs.backport.java.util.Arrays;
 
 /**
  * Support class for rule based tools that analyze compiled assemblies.
@@ -66,6 +71,14 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
    * @parameter expression="${verbose}"
    */
   protected boolean verbose;
+  
+  /**
+   * List of the excluded projects, using ',' as delimiter. No violation on files
+   * of these projects should be reported. 
+   * 
+   * @parameter expression="${skippedProjects}"
+   */
+  private String skippedProjects;
 
   /**
    * @return the directory where to find silverlight mscorlib.dll
@@ -101,12 +114,21 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
       Boolean silverlightFilter) throws MojoFailureException {
     List<VisualStudioProject> projects = solution.getProjects();
     List<File> assemblies = new ArrayList<File>();
-    // We skip all the test assemblies
+    
+    Set<String> skippedProjectSet = new HashSet<String>();
+    if (skippedProjects!=null) {
+      skippedProjectSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,',')));
+    }
+    
     for (VisualStudioProject visualStudioProject : projects) {
       if (visualStudioProject.isTest()) {
+        // We skip all the test assemblies
         getLog().info(
             "Skipping the test project " + visualStudioProject.getName());
 
+      } else if (skippedProjectSet.contains(visualStudioProject.getName())) {
+        getLog().info("Skipping project " + visualStudioProject.getName());
+        
       } else if (visualStudioProject.isWebProject()) {
         // ASP project
         assemblies.addAll(visualStudioProject.getWebAssemblies());
