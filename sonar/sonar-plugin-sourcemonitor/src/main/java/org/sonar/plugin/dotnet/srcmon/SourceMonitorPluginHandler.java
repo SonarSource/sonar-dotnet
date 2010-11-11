@@ -23,8 +23,6 @@
  */
 package org.sonar.plugin.dotnet.srcmon;
 
-import org.sonar.api.batch.maven.MavenPlugin;
-import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
