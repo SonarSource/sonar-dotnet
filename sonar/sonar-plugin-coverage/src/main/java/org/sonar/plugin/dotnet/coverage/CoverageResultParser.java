@@ -130,16 +130,6 @@ public class CoverageResultParser extends AbstractXmlParser {
     // First we retrieve the file
     FileCoverage fileCoverage = null;
     // First pass to retrieve the file
-
-    /*
-     * for (Element pointElement : pointElements) { if
-     * (pointElement.hasAttribute(strategy.getFileIdPointAttribute())) { String
-     * fileId = pointElement.getAttribute(strategy .getFileIdPointAttribute());
-     * Integer id = Integer.valueOf(fileId); fileCoverage =
-     * this.sourceFiles.get(id); } if (fileCoverage != null) { // The file is
-     * found : we skip the remaining break; } }
-     */
-
     Integer fileId = strategy.findFileId(methodElement);
     fileCoverage = this.sourceFiles.get(fileId);
 
