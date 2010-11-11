@@ -130,6 +130,16 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    * @parameter expression="${trace.commands}"
    */
   protected boolean traceCommands = false;
+  
+  /**
+   * List of the excluded projects, using ',' as delimiter. C# files
+   * of these projects will be ignored. No violation on files
+   * of these projects should be reported. 
+   * 
+   * @parameter expression="${skippedProjects}"
+   */
+  protected String skippedProjects;
+  
 
   /**
    * Constructs a @link{AbstractDotNetMojo}.

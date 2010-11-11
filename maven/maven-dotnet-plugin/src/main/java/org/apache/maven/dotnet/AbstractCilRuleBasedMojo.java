@@ -22,6 +22,7 @@ package org.apache.maven.dotnet;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,8 +31,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoFailureException;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 /**
  * Support class for rule based tools that analyze compiled assemblies.
@@ -71,14 +70,6 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
    * @parameter expression="${verbose}"
    */
   protected boolean verbose;
-  
-  /**
-   * List of the excluded projects, using ',' as delimiter. No violation on files
-   * of these projects should be reported. 
-   * 
-   * @parameter expression="${skippedProjects}"
-   */
-  private String skippedProjects;
 
   /**
    * @return the directory where to find silverlight mscorlib.dll

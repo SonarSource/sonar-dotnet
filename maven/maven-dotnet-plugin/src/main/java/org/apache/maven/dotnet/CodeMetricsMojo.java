@@ -38,12 +38,15 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Generates the metrics for a C# project or solution using SourceMonitor
@@ -132,9 +135,22 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
     generator.setProjectFile(projectFile.toString());
 
     // We exclude all the test projects
-    List<VisualStudioProject> testProjects = solution.getTestProjects();
+    List<VisualStudioProject> excludedProjects 
+      = new ArrayList<VisualStudioProject>(solution.getTestProjects());
+    // We exclude also the projects specified as "skipped"
+    if (skippedProjects!=null) {
+      Set<String> skippedProjectNameSet = new HashSet<String>();
+      skippedProjectNameSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,",")));
+      List<VisualStudioProject> projects = solution.getProjects();
+      for (VisualStudioProject visualStudioProject : projects) {
+        if (skippedProjectNameSet.contains(visualStudioProject.getName())) {
+          excludedProjects.add(visualStudioProject);
+        }
+      }
+    }
+    
     File solutionDir = solution.getSolutionDir();
-    for (VisualStudioProject visualStudioProject : testProjects) {
+    for (VisualStudioProject visualStudioProject : excludedProjects) {
       File directory = visualStudioProject.getDirectory();
       try {
         URI directoryUri = directory.getCanonicalFile().toURI();

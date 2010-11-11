@@ -28,10 +28,10 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -53,8 +53,6 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.pmd.CpdReport;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 /**
  * Maven plugin for dotnet cpd analysis. Contains copy/paste code from class

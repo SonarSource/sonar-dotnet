@@ -29,7 +29,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.maven.dotnet.commons.project.ArtifactType;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -38,6 +40,7 @@ import org.apache.maven.dotnet.stylecop.StyleCopGenerator;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Generates a quality report for a .Net project or solution using StyleCop
@@ -117,8 +120,14 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
     File solutionFile = solution.getSolutionFile();
     List<File> analyzedProjects = new ArrayList<File>();
     List<VisualStudioProject> allProjects = solution.getProjects();
+    
+    Set<String> skippedProjectSet = new HashSet<String>();
+    if (skippedProjects!=null) {
+      skippedProjectSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,",")));
+    }
+    
     for (VisualStudioProject visualStudioProject : allProjects) {
-      if (visualStudioProject.isTest()) {
+      if (visualStudioProject.isTest() || skippedProjectSet.contains(visualStudioProject.getName())) {
         continue;
       }
       File file = visualStudioProject.getProjectFile();
