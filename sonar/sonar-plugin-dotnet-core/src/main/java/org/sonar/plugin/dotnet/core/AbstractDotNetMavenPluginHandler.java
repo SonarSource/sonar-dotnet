@@ -24,6 +24,7 @@
  */
 package org.sonar.plugin.dotnet.core;
 
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.batch.maven.DependsUponCustomRules;
 import org.sonar.api.batch.maven.MavenPlugin;
 import org.sonar.api.batch.maven.MavenPluginHandler;
@@ -53,6 +54,12 @@ public abstract class AbstractDotNetMavenPluginHandler implements
 
   @Override
   public void configure(Project project, MavenPlugin plugin) {
+    String[] excludedProjectNames 
+      = project.getConfiguration().getStringArray("sonar.skippedModules");
+    if (excludedProjectNames!=null) {
+      String skippedProjectsParam = StringUtils.join(excludedProjectNames,',');
+      plugin.setParameter("skippedProjects", skippedProjectsParam);
+    }
   }
 
   public String getArtifactId() {
