@@ -46,7 +46,8 @@ public class DotnetCpdPluginHandler extends AbstractDotNetMavenPluginHandler {
   }
 
   @Override
-  public void configure(Project pom, MavenPlugin plugin) {
+  public void configure(Project project, MavenPlugin plugin) {
+    super.configure(project, plugin);
     plugin.setParameter(
       "minimumTokens",
       configuration.getString(

@@ -78,7 +78,6 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
     try {
       super.configure(project, plugin);
       generateConfigurationFile(project, plugin);
-      configureParameters(plugin);
       plugin.setParameter("styleCopReportName", STYLECOP_REPORT_NAME);
     } catch (IOException e) {
       log.debug("Unexpected error during config phase", e);
@@ -100,9 +99,5 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
         styleCopConfiguration, STYLE_COP_FILE);
     // Defines the configuration file
     plugin.setParameter("styleCopConfigFile", configFile.getAbsolutePath());
-  }
-
-  public void configureParameters(MavenPlugin plugin) {
-    // Nothing yet
   }
 }

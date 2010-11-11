@@ -41,11 +41,6 @@ public class SourceMonitorPluginHandler extends
   public SourceMonitorPluginHandler() {
   }
 
-  @Override
-  public void configure(Project project, MavenPlugin plugin) {
-    // Do nothing
-  }
-
   public String[] getGoals() {
     return new String[] { "metrics" };
   }
