@@ -7,7 +7,11 @@ package com.sonar.csharp.parser;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Rule;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 public class CSharpGrammar implements Grammar {
 
   public Rule compilationUnit;

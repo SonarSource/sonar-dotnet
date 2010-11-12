@@ -8,7 +8,11 @@ package com.sonar.csharp.parser;
 
 import com.sonar.csharp.lexer.CSharpLexer;
 import com.sonar.sslr.impl.Parser;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 public class CSharpParser extends Parser<CSharpGrammar> {
 
   public CSharpParser() {

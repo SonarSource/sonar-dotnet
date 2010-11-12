@@ -38,10 +38,10 @@ import com.sonar.sslr.impl.channel.PunctuatorChannel;
 
 public class CSharpLexer extends Lexer {
 
-  private static final String EXP = g("[Ee]" + opt("[+-]") + one2n(DIGIT));
-  private static final String BINARY_EXP = g("[Pp]" + opt("[+-]") + one2n(DIGIT));
-  private static final String FLOAT_SUFFIX = or("f", "F", "l", "L");
-  private static final String INT_SUFFIX = g(or("(u|U)?(ll|LL|l|L)", "(ll|LL|l|L|)(u|U)", "(u|U)"));
+//  private static final String EXP = g("[Ee]" + opt("[+-]") + one2n(DIGIT));
+//  private static final String BINARY_EXP = g("[Pp]" + opt("[+-]") + one2n(DIGIT));
+//  private static final String FLOAT_SUFFIX = or("f", "F", "l", "L");
+//  private static final String INT_SUFFIX = g(or("(u|U)?(ll|LL|l|L)", "(ll|LL|l|L|)(u|U)", "(u|U)"));
 
 
   @Override
@@ -50,19 +50,19 @@ public class CSharpLexer extends Lexer {
     channels.add(new InlineCommentChannel("//"));
     channels.add(new MultilineCommentChannel("/*", "*/"));
 
-    channels.add(regexp(LITERAL, opt("L"), "\"", o2n(or("\\\\.", anyButNot("\""))), "\""));
-    channels.add(regexp(CHARACTER_CONSTANT, opt("L"), "'", one2n(or("\\\\.", anyButNot("'", "\\n"))), "'"));
-
-    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, one2n(DIGIT), "\\.", opt(g(one2n(DIGIT))), opt(EXP), opt(FLOAT_SUFFIX)));
-    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, "\\.", g(one2n(DIGIT)), opt(EXP), opt(FLOAT_SUFFIX)));
-    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, one2n(DIGIT), EXP, opt(FLOAT_SUFFIX)));
-    channels.add(regexp(HEXADECIMAL_FLOATING_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), "\\.", o2n(HEXA_DIGIT), opt(BINARY_EXP),
-        opt(FLOAT_SUFFIX)));
-    channels.add(regexp(HEXADECIMAL_FLOATING_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), BINARY_EXP, opt(FLOAT_SUFFIX)));
-
-    channels.add(regexp(HEXADECIMAL_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), opt(INT_SUFFIX)));
-    channels.add(regexp(DECIMAL_CONSTANT, "[1-9]", o2n(DIGIT), opt(INT_SUFFIX)));
-    channels.add(regexp(OCTAL_CONSTANT, "0", o2n(OCTAL_DIGIT), opt(INT_SUFFIX)));
+//    channels.add(regexp(LITERAL, opt("L"), "\"", o2n(or("\\\\.", anyButNot("\""))), "\""));
+//    channels.add(regexp(CHARACTER_CONSTANT, opt("L"), "'", one2n(or("\\\\.", anyButNot("'", "\\n"))), "'"));
+//
+//    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, one2n(DIGIT), "\\.", opt(g(one2n(DIGIT))), opt(EXP), opt(FLOAT_SUFFIX)));
+//    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, "\\.", g(one2n(DIGIT)), opt(EXP), opt(FLOAT_SUFFIX)));
+//    channels.add(regexp(DECIMAL_FLOATING_CONSTANT, one2n(DIGIT), EXP, opt(FLOAT_SUFFIX)));
+//    channels.add(regexp(HEXADECIMAL_FLOATING_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), "\\.", o2n(HEXA_DIGIT), opt(BINARY_EXP),
+//        opt(FLOAT_SUFFIX)));
+//    channels.add(regexp(HEXADECIMAL_FLOATING_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), BINARY_EXP, opt(FLOAT_SUFFIX)));
+//
+//    channels.add(regexp(HEXADECIMAL_CONSTANT, "0[xX]", one2n(HEXA_DIGIT), opt(INT_SUFFIX)));
+//    channels.add(regexp(DECIMAL_CONSTANT, "[1-9]", o2n(DIGIT), opt(INT_SUFFIX)));
+//    channels.add(regexp(OCTAL_CONSTANT, "0", o2n(OCTAL_DIGIT), opt(INT_SUFFIX)));
 
     channels.add(new IdentifierAndKeywordChannel("[a-zA-Z_][a-zA-Z_0-9]*", true, CSharpKeyword.values()));
     channels.add(new PunctuatorChannel(CSharpPunctuator.values()));

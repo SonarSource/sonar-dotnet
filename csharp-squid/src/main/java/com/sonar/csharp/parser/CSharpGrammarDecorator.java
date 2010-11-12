@@ -1,10 +1,9 @@
-package com.sonar.csharp.parser;
-
 /*
  * Copyright (C) 2010 SonarSource SA
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
+package com.sonar.csharp.parser;
 
 import static com.sonar.csharp.api.CSharpPunctuator.LCURLYBRACE;
 import static com.sonar.csharp.api.CSharpPunctuator.RCURLYBRACE;
@@ -18,7 +17,11 @@ import static com.sonar.sslr.impl.matcher.Matchers.or;
 
 import com.sonar.sslr.api.GrammarDecorator;
 import com.sonar.sslr.impl.GrammarFieldsInitializer;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
   public void decorate(CSharpGrammar cs) {

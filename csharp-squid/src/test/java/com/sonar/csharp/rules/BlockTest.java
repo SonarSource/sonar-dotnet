@@ -14,7 +14,11 @@ import org.junit.Test;
 
 import com.sonar.csharp.parser.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 public class BlockTest {
 
   CSharpParser p = new CSharpParser();

@@ -4,7 +4,11 @@
  * mailto:contact AT sonarsource DOT com
  */
 package com.sonar.csharp.rules;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 import static com.sonar.sslr.test.parser.ParserMatchers.*;
 import static org.junit.Assert.assertThat;
 

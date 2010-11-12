@@ -8,7 +8,11 @@ package com.sonar.csharp.parser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
-
+/**
+ * 
+ * CLASSE ORIGINALE A MODIFIER
+ *
+ */
 public class CSharpParserTest {
   
   @Test
