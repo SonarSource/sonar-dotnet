@@ -50,7 +50,6 @@ import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
-import org.apache.maven.plugin.pmd.CpdReport;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.StringUtils;
 
@@ -225,22 +224,6 @@ public class CpdMojo extends AbstractDotNetMojo {
   }
 
   /**
-   * @see org.apache.maven.reporting.MavenReport#getName(java.util.Locale)
-   */
-  public String getName(Locale locale) {
-
-    return getBundle(locale).getString("report.cpd.name");
-  }
-
-  /**
-   * @see org.apache.maven.reporting.MavenReport#getDescription(java.util.Locale)
-   */
-  public String getDescription(Locale locale) {
-
-    return getBundle(locale).getString("report.cpd.description");
-  }
-
-  /**
    * @throws MojoExecutionException
    * @see org.apache.maven.reporting.AbstractMavenReport#executeReport(java.util.Locale)
    */
@@ -315,12 +298,6 @@ public class CpdMojo extends AbstractDotNetMojo {
   public String getOutputName() {
 
     return "cpd";
-  }
-
-  private static ResourceBundle getBundle(Locale locale) {
-
-    return ResourceBundle.getBundle("cpd-report", locale,
-        CpdReport.class.getClassLoader());
   }
 
   /**
