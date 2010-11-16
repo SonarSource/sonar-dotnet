@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -176,7 +175,7 @@ public class VisualStudioUtils {
     for (int i = 0; i < patterns.length; i++) {
       if (SelectorUtils.match(patterns[i], assemblyName)) {
         testFlag = true;
-        continue;
+        break;
       }
     }
 
