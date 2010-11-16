@@ -186,11 +186,11 @@ public class VisualStudioUtilsTest {
     VisualStudioProject testProject = new VisualStudioProject();
     testProject.setAssemblyName("MyProjectTest");
     VisualStudioProject secondTestProject = new VisualStudioProject();
-    secondTestProject.setAssemblyName("MyProject.Tests");
+    secondTestProject.setAssemblyName("MyProject.IT");
     VisualStudioProject project = new VisualStudioProject();
     project.setAssemblyName("MyProject");
     
-    String patterns = "*Test;*.Tests";
+    String patterns = "*Test;*.IT";
     
     VisualStudioUtils.assessTestProject(project, patterns);
     VisualStudioUtils.assessTestProject(testProject, patterns);
