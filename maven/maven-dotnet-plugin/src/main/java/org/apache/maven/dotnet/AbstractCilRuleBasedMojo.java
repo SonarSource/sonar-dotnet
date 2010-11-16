@@ -110,7 +110,7 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
     if (skippedProjects!=null) {
       skippedProjectSet.addAll(Arrays.asList(StringUtils.split(skippedProjects,',')));
     }
-    
+    boolean webProjectFound = false;
     for (VisualStudioProject visualStudioProject : projects) {
       if (visualStudioProject.isTest()) {
         // We skip all the test assemblies
@@ -123,6 +123,7 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
       } else if (visualStudioProject.isWebProject()) {
         // ASP project
         assemblies.addAll(visualStudioProject.getWebAssemblies());
+        webProjectFound = true;
 
       } else if (silverlightFilter == null
           || silverlightFilter.equals(visualStudioProject
@@ -136,7 +137,48 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
         }
       }
     }
+    
+    if (webProjectFound) {
+      assemblies = removeDuplicatesAssemblies(assemblies);
+    }
     return assemblies;
+  }
+  
+
+  /**
+   * Try to find in a list of assembly files duplicates and remove them.
+   * Algorithm based on file names and file sizes 
+   * @param assemblies
+   */
+  private List<File> removeDuplicatesAssemblies(List<File> assemblies) {
+    List<File> result = new ArrayList<File>();
+    for (File file : assemblies) {
+      if (isAssemblyAlreadyPresent(result, file)) {
+        getLog().info("Skipping file "+file+" referenced somewhere else in the solution");
+      } else {
+        result.add(file);
+      }
+    }
+    return result;
+  }
+  
+  /**
+   * 
+   * @param assemblies
+   * @param fileName
+   * @param fileSize
+   * @return  true if the given file is found in the assembly list. Comparison based on file name, 
+   *          file size and last modification date. 
+   */
+  private boolean isAssemblyAlreadyPresent(List<File> assemblies, File assembly) {
+    for (File file : assemblies) {
+      if (assembly.lastModified()==file.lastModified() 
+          && assembly.length()==file.length() 
+          && assembly.getName().equals(file.getName())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
