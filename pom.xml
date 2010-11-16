@@ -47,6 +47,16 @@
 				<artifactId>sonar-squid</artifactId>
 				<version>${sonar.version}</version>
 			</dependency>
+		    <dependency>
+		      <groupId>org.codehaus.sonar</groupId>
+		      <artifactId>sonar-plugin-api</artifactId>
+		      <version>${sonar.version}</version>
+		    </dependency>
+		    <dependency>
+		      <groupId>org.codehaus.sonar</groupId>
+		      <artifactId>sonar-duplications</artifactId>
+		      <version>${sonar.version}</version>
+		    </dependency>
 			<!-- Other dependencies -->
 			<dependency>
 				<groupId>commons-lang</groupId>
