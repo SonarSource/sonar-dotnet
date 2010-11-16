@@ -3,38 +3,39 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.rules;
+package com.sonar.csharp.parser.rules;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.parser.CSharpParser;
 /**
  * 
  * CLASSE ORIGINALE A MODIFIER
  *
  */
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.assertThat;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import com.sonar.csharp.parser.CSharpGrammar;
-import com.sonar.csharp.parser.CSharpParser;
-
-public class LineTest {
+public class BlockTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.line);
+    p.setRootRule(g.block);
   }
 
   @Test
+  @Ignore
   public void realLife() {
-    assertThat(p, parse("myDialog.Filter = \"something\";"));
-    assertThat(p, notParse("line"));
-    assertThat(p, notParse("line;line"));
-    assertThat(p, notParse("line{;"));
-    assertThat(p, notParse("public class MyClass {}"));
+    assertThat(p, parse("public class MyClass { }"));
+    assertThat(p, parse("MyFirstClass {MySecondClass { } }"));
+    assertThat(p, parse("MyFirstClass {line;lin(); MySecondCl{}}"));
+    assertThat(p, parse("MyFirstClass {MySecondClass { } MySecondCl{ line;} line;}"));
   }
 
 }

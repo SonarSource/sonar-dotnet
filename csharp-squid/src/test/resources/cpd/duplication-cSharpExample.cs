@@ -24,13 +24,31 @@ namespace Windows
         {
             OpenFileDialog myDialog = new OpenFileDialog();
 
-            myDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
+            myDialog.Filter = "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*"; // NOSONAR For testing purposes
             myDialog.CheckFileExists = true;
             myDialog.Multiselect = true;
 
             if (myDialog.ShowDialog() == true)
             {
-                lstFiles.Items.Clear();
+                lstFiles.Items.Clear(); // NOSONAR For testing purposes
+                foreach (string file in myDialog.FileNames)
+                {
+                    lstFiles.Items.Add(file);
+                }                
+            }
+        }
+
+        private void fakeDuplicatedMethof(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog myDialog = new OpenFileDialog();
+
+            myDialog.Filter = "This literal has been changed..."; // NOSONAR For testing purposes
+            myDialog.CheckFileExists = true;
+            myDialog.Multiselect = true;
+
+            if (myDialog.ShowDialog() == true)
+            {
+                lstFiles.Items.Clear(); // NOSONAR For testing purposes
                 foreach (string file in myDialog.FileNames)
                 {
                     lstFiles.Items.Add(file);

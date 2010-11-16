@@ -9,11 +9,16 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
 
 public enum CSharpKeyword implements TokenType {
-  AUTO("auto"), BOOL("_Bool"), BREAK("break"), CASE("case"), CHAR("char"), COMPLEX("_Complex"), CONST("const"), CONTINUE("continue"), DEFAULT(
-      "default"), DO("do"), DOUBLE("double"), ELSE("else"), ENUM("enum"), EXTERN("extern"), FLOAT("float"), FOR("for"), GOTO("goto"), IF(
-      "if"), IMAGINARY("_Imaginary"), INLINE("inline"), INT("int"), LONG("long"), REGISTER("register"), RESTRICT("restrict"), RETURN(
-      "return"), SHORT("short"), SIGNED("signed"), SIZEOF("sizeof"), STATIC("static"), STRUCT("struct"), SWITCH("switch"), TYPEDEF(
-      "typedef"), UNION("union"), UNSIGNED("unsigned"), VOID("void"), VOLATILE("volatile"), WHILE("while");
+  ABSTRACT("abstract"), AS("as"), BASE("base"), BOOL("bool"), BREAK("break"), BYTE("byte"), CASE("case"), CATCH("catch"), CHAR("char"), CHECKED(
+      "checked"), CLASS("class"), CONST("const"), CONTINUE("continue"), DECIMAL("decimal"), DEFAULT("default"), DELEGATE("delegate"), DO(
+      "do"), DOUBLE("double"), ELSE("else"), ENUM("enum"), EVENT("event"), EXPLICIT("explicit"), EXTERN("extern"), FALSE("false"), FINALLY(
+      "finally"), FIXED("fixed"), FLOAT("float"), FOR("for"), FOREACH("foreach"), GOTO("goto"), IF("if"), IMPLICIT("implicit"), IN("in"), INT(
+      "int"), INTERFACE("interface"), INTERNAL("internal"), IS("is"), LOCK("lock"), LONG("long"), NAMESPACE("namespace"), NEW("new"), NULL(
+      "null"), OBJECT("object"), OPERATOR("operator"), OUT("out"), OVERRIDE("override"), PARAMS("params"), PRIVATE("private"), PROTECTED(
+      "protected"), PUBLIC("public"), READONLY("readonly"), REF("ref"), RETURN("return"), SBYTE("sbyte"), SEALED("sealed"), SHORT("short"), SIZEOF(
+      "sizeof"), STACKALLOC("stackalloc"), STATIC("static"), STRING("string"), STRUCT("struct"), SWITCH("switch"), THIS("this"), THROW(
+      "throw"), TRUE("true"), TRY("try"), TYPEOF("typeof"), UINT("uint"), ULONG("ulong"), UNCHECKED("unchecked"), UNSAFE("unsafe"), USHORT(
+      "ushort"), USING("using"), VIRTUAL("virtual"), VOID("void"), VOLATILE("volatile"), WHILE("while");
 
   private final String value;
 

@@ -8,13 +8,13 @@ package com.sonar.csharp.parser;
 
 import com.sonar.csharp.lexer.CSharpLexer;
 import com.sonar.sslr.impl.Parser;
+
 /**
- * 
- * CLASSE ORIGINALE A MODIFIER
- *
+ * Parser for the C# language.
  */
 public class CSharpParser extends Parser<CSharpGrammar> {
 
+  @SuppressWarnings("unchecked")
   public CSharpParser() {
     super(new CSharpGrammar(), new CSharpLexer(), new CSharpGrammarDecorator());
   }

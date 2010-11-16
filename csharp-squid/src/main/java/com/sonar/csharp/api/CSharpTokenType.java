@@ -9,7 +9,8 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
 
 public enum CSharpTokenType implements TokenType {
-  DECIMAL_CONSTANT, OCTAL_CONSTANT,CHARACTER_CONSTANT, HEXADECIMAL_CONSTANT, HEXADECIMAL_FLOATING_CONSTANT, DECIMAL_FLOATING_CONSTANT;
+  INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, PREPROCESSOR;
+   
 
   public String getName() {
     return name();
