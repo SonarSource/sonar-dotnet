@@ -34,6 +34,8 @@ import org.apache.maven.dotnet.commons.project.SourceFile;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import static org.junit.Assert.*;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.matchers.JUnitMatchers.*;
@@ -214,6 +216,7 @@ public class VisualStudioUtilsTest {
   }
   
   @Test
+  @Ignore
   public void testWebSolution() throws Exception {
     File file = new File(WEB_SOLUTION_PATH);
     VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
