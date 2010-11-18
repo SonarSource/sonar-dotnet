@@ -59,6 +59,8 @@ public class VisualStudioUtilsTest {
   private static final String SILVERLIGHT_SOLUTION_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
 
+  private static final String WEB_SOLUTION_PATH = "target/test-classes/solution/web-solution/web-solution.sln";
+  
   @Test
   public void testReadFiles() {
     File file = new File(PROJECT_CORE_PATH);
@@ -208,5 +210,14 @@ public class VisualStudioUtilsTest {
     List<VisualStudioProject> projects = solution.getProjects();
     assertEquals(2, projects.size());
     assertFalse(projects.get(0).getAssemblyName().equals(projects.get(1).getAssemblyName()));
+  }
+  
+  @Test
+  public void testWebSolution() throws Exception {
+    File file = new File(WEB_SOLUTION_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    log.debug("Solution : " + solution);
+    List<VisualStudioProject> projects = solution.getProjects();
+    assertEquals(2, projects.size());
   }
 }
