@@ -27,11 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -52,9 +50,9 @@ public class VisualStudioProject {
   private String assemblyName;
   private String realAssemblyName; // assembly name found in the csproj file no matter what
   private String rootNamespace;
-  private File debugOutputDir;
-  private File releaseOutputDir;
-  private File directory;
+  protected File debugOutputDir;
+  protected File releaseOutputDir;
+  protected File directory;
   private boolean test;
   private boolean silverlightProject;
   private Map<File, SourceFile> sourceFileMap;
@@ -263,7 +261,9 @@ public class VisualStudioProject {
   }
 
   /**
-   * Sets the directory.
+   * Sets the root directory of the project.
+   * For a regular project, this is where is 
+   * located the csproj file. 
    * 
    * @param directory
    *          The directory to set.
@@ -486,65 +486,7 @@ public class VisualStudioProject {
     return (projectFile == null);
   }
 
-  /**
-   * @return null if the project is not a web project, the generated web dll
-   *         names otherwise.
-   */
-  public Set<String> getWebAssemblyNames() {
-    if (!isWebProject()) {
-      return null;
-    }
-    Set<File> assemblies = getWebAssemblies();
-    Set<String> assemblyNames = new HashSet<String>();
-
-    for (File assembly : assemblies) {
-      assemblyNames.add(StringUtils.substringBeforeLast(assembly.getName(),
-          ".dll"));
-    }
-
-    return assemblyNames;
-  }
-
-  /**
-   * @return null if the project is not a web project, the generated web dlls
-   *         otherwise.
-   */
-  public Set<File> getWebAssemblies() {
-    if (!isWebProject()) {
-      return null;
-    }
-    Set<File> result = new HashSet<File>();
-
-    File[] files = getWebPrecompilationDirectory().listFiles();
-
-    for (File file : files) {
-      String name = file.getName();
-      if (StringUtils.endsWith(name, "dll")) {
-        result.add(file);
-      }
-    }
-    return result;
-  }
-
-  /**
-   * @return the directory where asp.net pages are precompiled. null for a non
-   *         web project
-   */
-  public File getWebPrecompilationDirectory() {
-    if (!isWebProject()) {
-      return null;
-    }
-    final String precompilationPath;
-    if (debugOutputDir.list().length == 0) {
-      precompilationPath = releaseOutputDir.getAbsolutePath() + File.separator
-          + "bin";
-    } else {
-      precompilationPath = debugOutputDir.getAbsolutePath() + File.separator
-          + "bin";
-    }
-    return new File(precompilationPath);
-  }
-
+  
   /**
    * @param silverlightProject true if it is a silverlight project
    */

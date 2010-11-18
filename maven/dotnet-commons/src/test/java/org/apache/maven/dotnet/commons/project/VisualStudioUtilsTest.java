@@ -27,6 +27,7 @@ package org.apache.maven.dotnet.commons.project;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.SourceFile;
@@ -219,5 +220,17 @@ public class VisualStudioUtilsTest {
     log.debug("Solution : " + solution);
     List<VisualStudioProject> projects = solution.getProjects();
     assertEquals(2, projects.size());
+    final WebVisualStudioProject webProject;
+    if (projects.get(0) instanceof WebVisualStudioProject) {
+      webProject = (WebVisualStudioProject) projects.get(0);
+    } else {
+      webProject = (WebVisualStudioProject) projects.get(1);
+    }
+    assertEquals(1, webProject.getReferences().size());
+    Set<File> webAssemblies = webProject.getWebAssemblies();
+    for (File assemblyFile : webAssemblies) {
+      assertFalse("ClassLibrary.dll".equals(assemblyFile.getName()));
+    }
+    
   }
 }

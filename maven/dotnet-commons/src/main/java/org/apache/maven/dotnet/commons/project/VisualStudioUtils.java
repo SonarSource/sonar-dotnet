@@ -465,7 +465,7 @@ public class VisualStudioUtils {
       throws DotNetProjectException, FileNotFoundException {
 
     // We define the namespace prefix for Visual Studio
-    VisualStudioProject project = new VisualStudioProject();
+    VisualStudioProject project = new WebVisualStudioProject();
     project.setName(projectName);
 
     // Extracts the properties of a Visual Studio Project
@@ -476,12 +476,9 @@ public class VisualStudioUtils {
     String releaseOutput = extractSolutionProperty(
         "Release.AspNetCompiler.TargetPath", definition);
 
-    // Assess if the artifact is a library or an executable
-    ArtifactType type = ArtifactType.WEB;
+    
 
     // The project is populated
-    project.setProjectFile(null); // No projet file
-    project.setType(type);
     project.setDirectory(projectRoot);
     project.setAssemblyName(assemblyName);
     project.setRootNamespace(rootNamespace);

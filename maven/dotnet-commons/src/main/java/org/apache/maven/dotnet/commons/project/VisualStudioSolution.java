@@ -183,10 +183,12 @@ public class VisualStudioSolution {
     if (result == null) {
       // perhaps a web project
       for (VisualStudioProject project : projects) {
-        if (project.isWebProject()
-            && project.getWebAssemblyNames().contains(assemblyName)) {
-          result = project;
-          break;
+        if (project instanceof WebVisualStudioProject) {
+          WebVisualStudioProject webProject = (WebVisualStudioProject) project;
+          if (webProject.getWebAssemblyNames().contains(assemblyName)) {
+            result = project;
+            break;
+          }
         }
       }
     }
