@@ -27,11 +27,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.maven.dotnet.commons.project.ArtifactType;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
+import org.apache.maven.dotnet.commons.project.WebVisualStudioProject;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
@@ -93,11 +93,12 @@ public class CleanMojo extends AbstractDotNetBuildMojo {
     List<VisualStudioProject> visualStudioProjects = getVisualSolution()
         .getProjects();
     for (VisualStudioProject visualStudioProject : visualStudioProjects) {
-      if (visualStudioProject.isWebProject()) {
-        log.info("Cleaning precompiled asp.net dlls for project "
-            + visualStudioProject);
-        File precompilationDirectory = visualStudioProject
-            .getWebPrecompilationDirectory();
+      if (visualStudioProject instanceof WebVisualStudioProject) {
+        WebVisualStudioProject webProject = (WebVisualStudioProject) visualStudioProject;
+        log.info("Cleaning precompiled asp.net dlls for project " + webProject);
+        File precompilationDirectory 
+          = webProject.getWebPrecompilationDirectory();
+        
         try {
           FileUtils.cleanDirectory(precompilationDirectory);
         } catch (IOException e) {
