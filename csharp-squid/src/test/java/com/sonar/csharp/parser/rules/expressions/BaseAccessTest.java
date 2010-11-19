@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.basic;
+package com.sonar.csharp.parser.rules.expressions;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
@@ -14,26 +14,23 @@ import org.junit.Test;
 import com.sonar.csharp.parser.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class NameSpaceOrTypeNameTest {
+public class BaseAccessTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.namespaceOrTypeName);
+    p.setRootRule(g.baseAccess);
+    g.expressionList.mock();
     g.typeArgumentList.mock();
-    g.qualifiedAliasMember.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("MyClass"));
-    assertThat(p, parse("MyClass typeArgumentList"));
-    assertThat(p, parse("qualifiedAliasMember"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass typeArgumentList"));
-    assertThat(p, parse("A.B.MyClass"));
+    assertThat(p, parse("base.id"));
+    assertThat(p, parse("base.id typeArgumentList"));
+    assertThat(p, parse("base[ expressionList ]"));
   }
 
 }

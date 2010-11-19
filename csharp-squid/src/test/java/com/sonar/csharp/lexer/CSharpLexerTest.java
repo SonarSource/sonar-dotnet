@@ -11,9 +11,11 @@ import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpKeyword;
@@ -28,7 +30,7 @@ public class CSharpLexerTest {
 
   @Before
   public void init() {
-    lexer = new CSharpLexer();
+    lexer = new CSharpLexer(Charset.forName("UTF-8"));
   }
 
   @Test
@@ -54,7 +56,21 @@ public class CSharpLexerTest {
     assertThat(lexer.lex("myId10"), hasToken("myId10", GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("_10Id"), hasToken("_10Id", GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("@myId"), hasToken("@myId", GenericTokenType.IDENTIFIER));
+    assertThat(lexer.lex("a"), hasToken("a", GenericTokenType.IDENTIFIER));
+    assertThat(lexer.lex("A"), hasToken("A", GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("@abstract"), hasToken("@abstract", GenericTokenType.IDENTIFIER));
+  }
+
+  @Test
+  @Ignore
+  public void lexIdentifierWithUnicodeChars() {
+    assertThat(lexer.lex("éléphant"), hasToken("éléphant", GenericTokenType.IDENTIFIER));
+    assertThat(lexer.lex("A‿"), hasToken("A‿", GenericTokenType.IDENTIFIER)); // Char of class Pc: U+203F UNDERTIE
+    assertThat(lexer.lex("A﹏"), hasToken("A﹏", GenericTokenType.IDENTIFIER)); // Char of class Pc: U+FE4F WAVY LOW LINE
+    assertThat(lexer.lex("A؂"), hasToken("A؂", GenericTokenType.IDENTIFIER)); // Char of class Cf: U+0602 ARABIC FOOTNOTE MARKER
+                                                                              // (there's a hidden char here, this is no empty string)
+    assertThat(lexer.lex("A⃕"), hasToken("A⃕", GenericTokenType.IDENTIFIER)); // Char of class Mn: U+20D5 COMBINING CLOCKWISE ARROW ABOVE
+    assertThat(lexer.lex("Aொ"), hasToken("Aொ", GenericTokenType.IDENTIFIER)); // Char of class Mc: U+0BCA TAMIL VOWEL SIGN O
   }
 
   @Test
@@ -78,11 +94,16 @@ public class CSharpLexerTest {
     // regular string literal
     assertThat(lexer.lex("String s =\"\";"), hasToken("\"\"", CSharpTokenType.STRING_LITERAL));
     assertThat(lexer.lex("String s =\"Foo and bar\";"), hasToken("\"Foo and bar\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("String s =\"A string with an escape quote \\\" !\";"),
+        hasToken("\"A string with an escape quote \\\" !\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("String s =\"This is an hexadecimal escape sequence: \\1 !\";"),
+        hasToken("\"This is an hexadecimal escape sequence: \\1 !\"", CSharpTokenType.STRING_LITERAL));
     assertThat(lexer.lex("String s =\"Foo\" and bar\";"), not(hasToken("\"Foo\" and bar\"", CSharpTokenType.STRING_LITERAL)));
     assertThat(lexer.lex("String s =\"Foo\n and bar\";"), not(hasToken(CSharpTokenType.STRING_LITERAL)));
-    assertThat(lexer.lex("String s =\"Foo\\ and bar\";"), not(hasToken(CSharpTokenType.STRING_LITERAL)));
     // verbatim string literal
     assertThat(lexer.lex("@\"Foo \n and \n bar\""), hasToken("@\"Foo \n and \n bar\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("@\"Foo \n and \n bar \n with an escape quote \\\" !\""),
+        hasToken("@\"Foo \n and \n bar \n with an escape quote \\\" !\"", CSharpTokenType.STRING_LITERAL));
   }
 
   @Test
@@ -131,17 +152,16 @@ public class CSharpLexerTest {
 
   @Test
   public void lexCharacterLiteral() {
-    assertThat(lexer.lex("char c ='';"), hasToken("''", CSharpTokenType.CHARACTER_LITERAL));
     assertThat(lexer.lex("char c ='a';"), hasToken("'a'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\n';"), hasToken("'\\n'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\'';"), hasToken("'\\''", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\\\';"), hasToken("'\\\\'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\xABC';"), hasToken("'\\xABC'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\xABC1';"), hasToken("'\\xABC1'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\xABC12';"), hasToken("'\\xABC12'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\xABC123';"), hasToken("'\\xABC123'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\uA1Z';"), hasToken("'\\uA1Z'", CSharpTokenType.CHARACTER_LITERAL));
-//    assertThat(lexer.lex("char c ='\\UA1Z2E3';"), hasToken("'\\UA1Z2E3'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\n';"), hasToken("'\\n'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\'';"), hasToken("'\\''", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\\\';"), hasToken("'\\\\'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\xABC';"), hasToken("'\\xABC'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\xABC1';"), hasToken("'\\xABC1'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\xABC12';"), hasToken("'\\xABC12'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\xABC123';"), hasToken("'\\xABC123'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\uA1Z';"), hasToken("'\\uA1Z'", CSharpTokenType.CHARACTER_LITERAL));
+    assertThat(lexer.lex("char c ='\\UA1Z2E3';"), hasToken("'\\UA1Z2E3'", CSharpTokenType.CHARACTER_LITERAL));
     assertThat(lexer.lex("char c ='\na';"), not(hasToken(CSharpTokenType.CHARACTER_LITERAL)));
   }
 
@@ -154,6 +174,8 @@ public class CSharpLexerTest {
   @Test
   public void testLexCSharpSourceCode() throws FileNotFoundException {
     LexerOutput output = lexer.lex(FileUtils.toFile(getClass().getResource("/lexer/NUnitFramework.cs")));
+    assertThat(output, hasToken("System", GenericTokenType.IDENTIFIER));
+    assertThat(output, hasComment("// Copyright 2007, Charlie Poole"));
   }
 
 }

@@ -31,7 +31,9 @@ public class ClassDeclarationTest {
 
   @Test
   public void testOk() {
-    assertThat(p, parse("public class MyClass { int a; }"));
+    assertThat(p, parse("class MyClass classBody"));
+    assertThat(p, parse("public class MyClass classBody;"));
+    assertThat(p, parse("attributes partial class MyClass typeParameterList classBase typeParameterConstraintsClauses classBody"));
   }
 
 }

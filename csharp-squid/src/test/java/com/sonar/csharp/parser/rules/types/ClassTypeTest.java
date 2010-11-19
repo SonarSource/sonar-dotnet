@@ -3,8 +3,9 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.basic;
+package com.sonar.csharp.parser.rules.types;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -14,26 +15,27 @@ import org.junit.Test;
 import com.sonar.csharp.parser.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class NameSpaceOrTypeNameTest {
+public class ClassTypeTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.namespaceOrTypeName);
-    g.typeArgumentList.mock();
-    g.qualifiedAliasMember.mock();
+    p.setRootRule(g.classType);
+    g.typeName.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("MyClass"));
-    assertThat(p, parse("MyClass typeArgumentList"));
-    assertThat(p, parse("qualifiedAliasMember"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass typeArgumentList"));
-    assertThat(p, parse("A.B.MyClass"));
+    assertThat(p, parse("typeName"));
+    assertThat(p, parse("object"));
+    assertThat(p, parse("string"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse("referenceType rankSpecifier"));
   }
 
 }

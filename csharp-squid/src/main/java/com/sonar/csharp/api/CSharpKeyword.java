@@ -8,6 +8,24 @@ package com.sonar.csharp.api;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.TokenType;
 
+/**
+ * Keywords for the C# language. <br>
+ * <br>
+ * Note: the ECMA specification (part #9.4.3) tells that the following words are <b>not</b> C# keywords, also they have a specific meaning in the
+ * C# language:
+ * <ul>
+ * <li>add</li>
+ * <li>alias</li>
+ * <li>get</li>
+ * <li>global</li>
+ * <li>partial</li>
+ * <li>remove</li>
+ * <li>set</li>
+ * <li>value</li>
+ * <li>where</li>
+ * <li>yield</li>
+ * </ul>
+ */
 public enum CSharpKeyword implements TokenType {
   ABSTRACT("abstract"), AS("as"), BASE("base"), BOOL("bool"), BREAK("break"), BYTE("byte"), CASE("case"), CATCH("catch"), CHAR("char"), CHECKED(
       "checked"), CLASS("class"), CONST("const"), CONTINUE("continue"), DECIMAL("decimal"), DEFAULT("default"), DELEGATE("delegate"), DO(
