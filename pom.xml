@@ -12,8 +12,8 @@
 		<version>6</version>
 	</parent>
 	<properties>
-		<sonar.version>2.2</sonar.version>
-		<sslrVersion>0.9</sslrVersion>
+		<sonar.version>2.4</sonar.version>
+		<sslrVersion>1.1-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
 		<module>csharp-squid</module>
