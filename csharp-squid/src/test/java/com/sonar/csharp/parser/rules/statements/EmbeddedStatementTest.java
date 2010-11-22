@@ -22,6 +22,7 @@ public class EmbeddedStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.embeddedStatement);
+    g.block.mock();
     g.expressionStatement.mock();
     g.selectionStatement.mock();
     g.iterationStatement.mock();
@@ -37,7 +38,7 @@ public class EmbeddedStatementTest {
 
   @Test
   public void testOk() {
-    assertThat(p, parse("{ }"));
+    assertThat(p, parse("block"));
     assertThat(p, parse(";"));
     assertThat(p, parse("expressionStatement"));
     assertThat(p, parse("selectionStatement"));

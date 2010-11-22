@@ -24,15 +24,21 @@ import static com.sonar.csharp.api.CSharpKeyword.DELEGATE;
 import static com.sonar.csharp.api.CSharpKeyword.DO;
 import static com.sonar.csharp.api.CSharpKeyword.DOUBLE;
 import static com.sonar.csharp.api.CSharpKeyword.ELSE;
+import static com.sonar.csharp.api.CSharpKeyword.ENUM;
+import static com.sonar.csharp.api.CSharpKeyword.EVENT;
+import static com.sonar.csharp.api.CSharpKeyword.EXPLICIT;
 import static com.sonar.csharp.api.CSharpKeyword.EXTERN;
+import static com.sonar.csharp.api.CSharpKeyword.FALSE;
 import static com.sonar.csharp.api.CSharpKeyword.FINALLY;
 import static com.sonar.csharp.api.CSharpKeyword.FLOAT;
 import static com.sonar.csharp.api.CSharpKeyword.FOR;
 import static com.sonar.csharp.api.CSharpKeyword.FOREACH;
 import static com.sonar.csharp.api.CSharpKeyword.GOTO;
 import static com.sonar.csharp.api.CSharpKeyword.IF;
+import static com.sonar.csharp.api.CSharpKeyword.IMPLICIT;
 import static com.sonar.csharp.api.CSharpKeyword.IN;
 import static com.sonar.csharp.api.CSharpKeyword.INT;
+import static com.sonar.csharp.api.CSharpKeyword.INTERFACE;
 import static com.sonar.csharp.api.CSharpKeyword.INTERNAL;
 import static com.sonar.csharp.api.CSharpKeyword.IS;
 import static com.sonar.csharp.api.CSharpKeyword.LOCK;
@@ -41,10 +47,14 @@ import static com.sonar.csharp.api.CSharpKeyword.NAMESPACE;
 import static com.sonar.csharp.api.CSharpKeyword.NEW;
 import static com.sonar.csharp.api.CSharpKeyword.NULL;
 import static com.sonar.csharp.api.CSharpKeyword.OBJECT;
+import static com.sonar.csharp.api.CSharpKeyword.OPERATOR;
 import static com.sonar.csharp.api.CSharpKeyword.OUT;
+import static com.sonar.csharp.api.CSharpKeyword.OVERRIDE;
+import static com.sonar.csharp.api.CSharpKeyword.PARAMS;
 import static com.sonar.csharp.api.CSharpKeyword.PRIVATE;
 import static com.sonar.csharp.api.CSharpKeyword.PROTECTED;
 import static com.sonar.csharp.api.CSharpKeyword.PUBLIC;
+import static com.sonar.csharp.api.CSharpKeyword.READONLY;
 import static com.sonar.csharp.api.CSharpKeyword.REF;
 import static com.sonar.csharp.api.CSharpKeyword.RETURN;
 import static com.sonar.csharp.api.CSharpKeyword.SBYTE;
@@ -52,9 +62,11 @@ import static com.sonar.csharp.api.CSharpKeyword.SEALED;
 import static com.sonar.csharp.api.CSharpKeyword.SHORT;
 import static com.sonar.csharp.api.CSharpKeyword.STATIC;
 import static com.sonar.csharp.api.CSharpKeyword.STRING;
+import static com.sonar.csharp.api.CSharpKeyword.STRUCT;
 import static com.sonar.csharp.api.CSharpKeyword.SWITCH;
 import static com.sonar.csharp.api.CSharpKeyword.THIS;
 import static com.sonar.csharp.api.CSharpKeyword.THROW;
+import static com.sonar.csharp.api.CSharpKeyword.TRUE;
 import static com.sonar.csharp.api.CSharpKeyword.TRY;
 import static com.sonar.csharp.api.CSharpKeyword.TYPEOF;
 import static com.sonar.csharp.api.CSharpKeyword.UINT;
@@ -62,7 +74,9 @@ import static com.sonar.csharp.api.CSharpKeyword.ULONG;
 import static com.sonar.csharp.api.CSharpKeyword.UNCHECKED;
 import static com.sonar.csharp.api.CSharpKeyword.USHORT;
 import static com.sonar.csharp.api.CSharpKeyword.USING;
+import static com.sonar.csharp.api.CSharpKeyword.VIRTUAL;
 import static com.sonar.csharp.api.CSharpKeyword.VOID;
+import static com.sonar.csharp.api.CSharpKeyword.VOLATILE;
 import static com.sonar.csharp.api.CSharpKeyword.WHILE;
 import static com.sonar.csharp.api.CSharpPunctuator.ADD_ASSIGN;
 import static com.sonar.csharp.api.CSharpPunctuator.AND;
@@ -117,12 +131,13 @@ import static com.sonar.csharp.api.CSharpTokenType.REAL_LITERAL;
 import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
-import static com.sonar.sslr.impl.matcher.Matchers.bridge;
+import static com.sonar.sslr.impl.matcher.Matchers.isOneOfThem;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
 import static com.sonar.sslr.impl.matcher.Matchers.one2n;
 import static com.sonar.sslr.impl.matcher.Matchers.opt;
 import static com.sonar.sslr.impl.matcher.Matchers.or;
 
+import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.sslr.api.GrammarDecorator;
 import com.sonar.sslr.impl.GrammarFieldsInitializer;
 
@@ -159,81 +174,60 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     // A.2.6 Classes
     classes(g);
 
+    // A.2.7 Struct
+    structs(g);
+
+    // A.2.8 Arrays
+    arrays(g);
+
+    // A.2.9 Interfaces
+    interfaces(g);
+
+    // A.2.10 Enums
+    enums(g);
+
+    // A.2.11 Delegates
+    delegates(g);
+
+    // A.2.12 Attributes
+    attributes(g);
+
     // A.2.13 Generics
     generics(g);
 
   }
 
-  private void generics(CSharpGrammar g) {
-    g.typeArgumentList.is(INFERIOR, g.type, opt(COMMA, g.type), SUPERIOR);
+  private void basicConcepts(CSharpGrammar g) {
+    g.compilationUnit.is(o2n(g.externAliasDirective), o2n(g.usingDirective), opt(g.globalAttributes), o2n(g.namespaceMemberDeclaration));
+    g.namespaceName.is(g.namespaceOrTypeName);
+    g.typeName.is(g.namespaceOrTypeName);
+    g.namespaceOrTypeName.is(
+        one2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), opt(DOT, IDENTIFIER, opt(g.typeArgumentList))),
+        opt(DOT, IDENTIFIER, opt(g.typeArgumentList)));
   }
 
-  private void classes(CSharpGrammar g) {
-    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt("partial"), CLASS, g.identifier, opt(g.typeParameterList),
-        opt(g.classBase), opt(g.typeParameterConstraintsClauses), g.classBody, opt(SEMICOLON));
-    g.classModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC);
-    g.classBody.is(LCURLYBRACE, o2n(g.classMemberDeclaration), RCURLYBRACE);
-    g.parameterModifier.isOr(REF, OUT);
+  private void types(CSharpGrammar g) {
+    g.type.isOr(g.valueType, g.referenceType, g.typeParameter);
+    g.valueType.isOr(g.structType, g.enumType);
+    g.structType.isOr(g.typeName, g.simpleType, g.nullableType);
+    g.simpleType.isOr(g.numericType, BOOL);
+    g.numericType.isOr(g.integralType, g.floatingPointType, DECIMAL);
+    g.integralType.isOr(SBYTE, BYTE, SHORT, USHORT, INT, UINT, LONG, ULONG, CHAR);
+    g.floatingPointType.isOr(FLOAT, DOUBLE);
+    g.enumType.is(g.typeName);
+    g.nullableType.is(g.nonNullableValueType, QUESTION);
+    g.nonNullableValueType.isOr(g.enumType, g.typeName, g.simpleType);
+    g.referenceType.isOr(g.classType, g.interfaceType, g.arrayType, g.delegateType);
+    g.classType.isOr(g.typeName, OBJECT, STRING);
+    g.interfaceType.is(g.typeName);
+    g.arrayType.is(g.nonArrayType, one2n(g.rankSpecifier));
+    g.nonArrayType.isOr(g.valueType, g.classType, g.interfaceType, g.delegateType, g.typeParameter);
+    g.rankSpecifier.is(LBRACKET, o2n(COMMA), RBRACKET);
+    g.delegateType.is(g.typeName);
   }
 
-  private void statements(CSharpGrammar g) {
-    g.statement.isOr(g.labeledStatement, g.declarationStatement, g.embeddedStatement);
-    g.embeddedStatement.isOr(g.block, SEMICOLON, g.expressionStatement, g.selectionStatement, g.iterationStatement, g.jumpStatement,
-        g.tryStatement, g.checkedStatement, g.uncheckedStatement, g.lockStatement, g.usingStatement, g.yieldStatement);
-    g.block.is(bridge(LCURLYBRACE, RCURLYBRACE)); // TODO : uncomment following definition to activate block rule
-    // g.block.is(LCURLYBRACE, o2n(g.statement), RCURLYBRACE);
-    g.labeledStatement.is(g.identifier, COLON, g.statement);
-    g.declarationStatement.is(or(g.localVariableDeclaration, g.localConstantDeclaration), SEMICOLON);
-    g.localVariableDeclaration.is(g.type, g.localVariableDeclarator, o2n(COMMA, g.localVariableDeclarator));
-    g.localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, g.localVariableInitializer));
-    g.localVariableInitializer.isOr(g.expression, g.arrayInitializer);
-    g.localConstantDeclaration.is(CONST, g.type, g.constantDeclarator, o2n(COMMA, g.constantDeclarator));
-    g.constantDeclarator.is(IDENTIFIER, EQUAL, g.constantExpression);
-    g.expressionStatement.is(g.statementExpression, SEMICOLON);
-    g.statementExpression.isOr(g.invocationExpression, g.objectCreationExpression, g.assignment, g.postIncrementExpression,
-        g.postDecrementExpression, g.preIncrementExpression, g.preDecrementExpression);
-    g.selectionStatement.isOr(g.ifStatement, g.switchStatement);
-    g.ifStatement.is(IF, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement, opt(ELSE, g.embeddedStatement));
-    g.switchStatement.is(SWITCH, LPARENTHESIS, g.expression, RPARENTHESIS, LCURLYBRACE, o2n(g.switchSection), RCURLYBRACE);
-    g.switchSection.is(one2n(g.switchLabel), one2n(g.statement));
-    g.switchLabel.isOr(and(CASE, g.constantExpression, COLON), and(DEFAULT, COLON));
-    g.iterationStatement.isOr(g.whileStatement, g.doStatement, g.forStatement, g.foreachStatement);
-    g.whileStatement.is(WHILE, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement);
-    g.doStatement.is(DO, g.embeddedStatement, WHILE, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, SEMICOLON);
-    g.forStatement.is(FOR, LPARENTHESIS, opt(g.forInitializer), SEMICOLON, opt(g.forCondition), SEMICOLON, opt(g.forIterator),
-        RPARENTHESIS, g.embeddedStatement);
-    g.forInitializer.isOr(g.localConstantDeclaration, g.statementExpressionList);
-    g.forCondition.is(g.booleanExpression);
-    g.forIterator.is(g.statementExpressionList);
-    g.statementExpressionList.is(g.statementExpression, o2n(COMMA, g.statementExpression));
-    g.foreachStatement.is(FOREACH, LPARENTHESIS, g.type, IDENTIFIER, IN, g.expression, RPARENTHESIS, g.embeddedStatement);
-    g.jumpStatement.is(g.breakStatement, g.continueStatement, g.gotoStatement, g.returnStatement, g.throwStatement);
-    g.breakStatement.is(BREAK, SEMICOLON);
-    g.continueStatement.is(CONTINUE, SEMICOLON);
-    g.gotoStatement.is(GOTO, or(IDENTIFIER, and(CASE, g.constantExpression), DEFAULT), SEMICOLON);
-    g.returnStatement.is(RETURN, opt(g.expression), SEMICOLON);
-    g.throwStatement.is(THROW, opt(g.expression), SEMICOLON);
-    g.tryStatement.is(TRY, g.block, or(g.catchClauses, and(opt(g.catchClauses), g.finallyClause)));
-    g.catchClauses.isOr(one2n(g.specificCatchClause), and(o2n(g.specificCatchClause), g.generalCatchClause));
-    g.specificCatchClause.is(CATCH, LPARENTHESIS, g.classType, opt(IDENTIFIER), RPARENTHESIS, g.block);
-    g.generalCatchClause.is(CATCH, g.block);
-    g.finallyClause.is(FINALLY, g.block);
-    g.checkedStatement.is(CHECKED, g.block);
-    g.uncheckedStatement.is(UNCHECKED, g.block);
-    g.lockStatement.is(LOCK, LPARENTHESIS, g.expression, RPARENTHESIS, g.embeddedStatement);
-    g.usingStatement.is(USING, LPARENTHESIS, g.resourceAcquisition, RPARENTHESIS, g.embeddedStatement);
-    g.resourceAcquisition.isOr(g.localVariableDeclaration, g.expression);
-    g.yieldStatement.is("yield", or(and(RETURN, g.expression), BREAK), SEMICOLON);
-    g.namespaceDeclaration.is(NAMESPACE, g.qualifiedIdentifier, g.namespaceBody, opt(SEMICOLON));
-    g.qualifiedIdentifier.is(IDENTIFIER, o2n(DOT, IDENTIFIER));
-    g.namespaceBody.is(LCURLYBRACE, o2n(g.externAliasDirective), o2n(g.usingDirective), o2n(g.namespaceMemberDeclaration), RCURLYBRACE);
-    g.externAliasDirective.is(EXTERN, "alias", IDENTIFIER, SEMICOLON);
-    g.usingDirective.isOr(g.usingAliasDirective, g.usingNamespaceDirective);
-    g.usingAliasDirective.is(USING, IDENTIFIER, EQUAL, g.namespaceOrTypeName, SEMICOLON);
-    g.usingNamespaceDirective.is(USING, g.namespaceName, SEMICOLON);
-    g.namespaceMemberDeclaration.isOr(g.namespaceDeclaration, g.typeDeclaration);
-    g.typeDeclaration.isOr(g.classDeclaration, g.structDeclaration, g.interfaceDeclaration, g.enumDeclaration, g.delegateDeclaration);
-    g.qualifiedAliasMember.is(IDENTIFIER, DOUBLE_COLON, IDENTIFIER, opt(g.typeArgumentList));
+  private void variables(CSharpGrammar g) {
+    g.variableReference.is(g.expression);
   }
 
   private void expressions(CSharpGrammar g) {
@@ -261,7 +255,6 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         and(NEW, g.arrayType, g.arrayInitializer));
     g.delegateCreationExpression.is(NEW, g.delegateType, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.typeOfExpression.is(TYPEOF, LPARENTHESIS, or(g.type, g.unboundTypeName, VOID), RPARENTHESIS);
-    g.unboundTypeName.isOr(and(IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(g.genericDimensionSpecifier))); // /////
     g.unboundTypeName.is(
         one2n(IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(g.genericDimensionSpecifier),
             opt(DOT, IDENTIFIER, opt(g.genericDimensionSpecifier))), opt(DOT, IDENTIFIER, opt(g.genericDimensionSpecifier)));
@@ -299,36 +292,227 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.booleanExpression.is(g.expression);
   }
 
-  private void variables(CSharpGrammar g) {
-    g.variableReference.is(g.expression);
+  private void statements(CSharpGrammar g) {
+    g.statement.isOr(g.labeledStatement, g.declarationStatement, g.embeddedStatement);
+    g.embeddedStatement.isOr(g.block, SEMICOLON, g.expressionStatement, g.selectionStatement, g.iterationStatement, g.jumpStatement,
+        g.tryStatement, g.checkedStatement, g.uncheckedStatement, g.lockStatement, g.usingStatement, g.yieldStatement);
+    g.block.is(LCURLYBRACE, o2n(g.statement), RCURLYBRACE);
+    g.labeledStatement.is(g.identifier, COLON, g.statement);
+    g.declarationStatement.is(or(g.localVariableDeclaration, g.localConstantDeclaration), SEMICOLON);
+    g.localVariableDeclaration.is(g.type, g.localVariableDeclarator, o2n(COMMA, g.localVariableDeclarator));
+    g.localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, g.localVariableInitializer));
+    g.localVariableInitializer.isOr(g.expression, g.arrayInitializer);
+    g.localConstantDeclaration.is(CONST, g.type, g.constantDeclarator, o2n(COMMA, g.constantDeclarator));
+    g.constantDeclarator.is(IDENTIFIER, EQUAL, g.constantExpression);
+    g.expressionStatement.is(g.statementExpression, SEMICOLON);
+    g.statementExpression.isOr(g.invocationExpression, g.objectCreationExpression, g.assignment, g.postIncrementExpression,
+        g.postDecrementExpression, g.preIncrementExpression, g.preDecrementExpression);
+    g.selectionStatement.isOr(g.ifStatement, g.switchStatement);
+    g.ifStatement.is(IF, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement, opt(ELSE, g.embeddedStatement));
+    g.switchStatement.is(SWITCH, LPARENTHESIS, g.expression, RPARENTHESIS, LCURLYBRACE, o2n(g.switchSection), RCURLYBRACE);
+    g.switchSection.is(one2n(g.switchLabel), one2n(g.statement));
+    g.switchLabel.isOr(and(CASE, g.constantExpression, COLON), and(DEFAULT, COLON));
+    g.iterationStatement.isOr(g.whileStatement, g.doStatement, g.forStatement, g.foreachStatement);
+    g.whileStatement.is(WHILE, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement);
+    g.doStatement.is(DO, g.embeddedStatement, WHILE, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, SEMICOLON);
+    g.forStatement.is(FOR, LPARENTHESIS, opt(g.forInitializer), SEMICOLON, opt(g.forCondition), SEMICOLON, opt(g.forIterator),
+        RPARENTHESIS, g.embeddedStatement);
+    g.forInitializer.isOr(g.localConstantDeclaration, g.statementExpressionList);
+    g.forCondition.is(g.booleanExpression);
+    g.forIterator.is(g.statementExpressionList);
+    g.statementExpressionList.is(g.statementExpression, o2n(COMMA, g.statementExpression));
+    g.foreachStatement.is(FOREACH, LPARENTHESIS, g.type, IDENTIFIER, IN, g.expression, RPARENTHESIS, g.embeddedStatement);
+    g.jumpStatement.isOr(g.breakStatement, g.continueStatement, g.gotoStatement, g.returnStatement, g.throwStatement);
+    g.breakStatement.is(BREAK, SEMICOLON);
+    g.continueStatement.is(CONTINUE, SEMICOLON);
+    g.gotoStatement.is(GOTO, or(IDENTIFIER, and(CASE, g.constantExpression), DEFAULT), SEMICOLON);
+    g.returnStatement.is(RETURN, opt(g.expression), SEMICOLON);
+    g.throwStatement.is(THROW, opt(g.expression), SEMICOLON);
+    g.tryStatement.is(TRY, g.block, or(and(opt(g.catchClauses), g.finallyClause), g.catchClauses));
+    g.catchClauses.isOr(and(o2n(g.specificCatchClause), g.generalCatchClause), one2n(g.specificCatchClause));
+    g.specificCatchClause.is(CATCH, LPARENTHESIS, g.classType, opt(IDENTIFIER), RPARENTHESIS, g.block);
+    g.generalCatchClause.is(CATCH, g.block);
+    g.finallyClause.is(FINALLY, g.block);
+    g.checkedStatement.is(CHECKED, g.block);
+    g.uncheckedStatement.is(UNCHECKED, g.block);
+    g.lockStatement.is(LOCK, LPARENTHESIS, g.expression, RPARENTHESIS, g.embeddedStatement);
+    g.usingStatement.is(USING, LPARENTHESIS, g.resourceAcquisition, RPARENTHESIS, g.embeddedStatement);
+    g.resourceAcquisition.isOr(g.localVariableDeclaration, g.expression);
+    g.yieldStatement.is("yield", or(and(RETURN, g.expression), BREAK), SEMICOLON);
+    g.namespaceDeclaration.is(NAMESPACE, g.qualifiedIdentifier, g.namespaceBody, opt(SEMICOLON));
+    g.qualifiedIdentifier.is(IDENTIFIER, o2n(DOT, IDENTIFIER));
+    g.namespaceBody.is(LCURLYBRACE, o2n(g.externAliasDirective), o2n(g.usingDirective), o2n(g.namespaceMemberDeclaration), RCURLYBRACE);
+    g.externAliasDirective.is(EXTERN, "alias", IDENTIFIER, SEMICOLON);
+    g.usingDirective.isOr(g.usingAliasDirective, g.usingNamespaceDirective);
+    g.usingAliasDirective.is(USING, IDENTIFIER, EQUAL, g.namespaceOrTypeName, SEMICOLON);
+    g.usingNamespaceDirective.is(USING, g.namespaceName, SEMICOLON);
+    g.namespaceMemberDeclaration.isOr(g.namespaceDeclaration, g.typeDeclaration);
+    g.typeDeclaration.isOr(g.classDeclaration, g.structDeclaration, g.interfaceDeclaration, g.enumDeclaration, g.delegateDeclaration);
+    g.qualifiedAliasMember.is(IDENTIFIER, DOUBLE_COLON, IDENTIFIER, opt(g.typeArgumentList));
   }
 
-  private void types(CSharpGrammar g) {
-    g.type.isOr(g.valueType, g.referenceType, g.typeParameter);
-    g.valueType.isOr(g.structType, g.enumType);
-    g.structType.isOr(g.typeName, g.simpleType, g.nullableType);
-    g.simpleType.isOr(g.numericType, BOOL);
-    g.numericType.isOr(g.integralType, g.floatingPointType, DECIMAL);
-    g.integralType.isOr(SBYTE, BYTE, SHORT, USHORT, INT, UINT, LONG, ULONG, CHAR);
-    g.floatingPointType.isOr(FLOAT, DOUBLE);
-    g.enumType.is(g.typeName);
-    g.nullableType.is(g.nonNullableValueType, QUESTION);
-    g.nonNullableValueType.isOr(g.enumType, g.typeName, g.simpleType);
-    g.referenceType.isOr(g.classType, g.interfaceType, g.arrayType, g.delegateType);
-    g.classType.isOr(g.typeName, OBJECT, STRING);
-    g.interfaceType.is(g.typeName);
-    g.arrayType.is(g.nonArrayType, one2n(g.rankSpecifier));
-    g.nonArrayType.isOr(g.valueType, g.classType, g.interfaceType, g.delegateType, g.typeParameter);
-    g.rankSpecifier.is(LBRACKET, o2n(COMMA), RBRACKET);
-    g.delegateType.is(g.typeName);
+  private void classes(CSharpGrammar g) {
+    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt("partial"), CLASS, g.identifier, opt(g.typeParameterList),
+        opt(g.classBase), opt(g.typeParameterConstraintsClauses), g.classBody, opt(SEMICOLON));
+    g.classModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC);
+    g.classBase.is(COLON, or(and(g.classType, COMMA, g.interfaceTypeList), g.classType, g.interfaceTypeList));
+    g.interfaceTypeList.is(g.interfaceType, o2n(COMMA, g.interfaceType));
+    g.classBody.is(LCURLYBRACE, o2n(g.classMemberDeclaration), RCURLYBRACE);
+    g.classMemberDeclaration.isOr(g.constantDeclaration, g.fieldDeclaration, g.methodDeclaration, g.propertyDeclaration,
+        g.eventDeclaration, g.indexerDeclaration, g.operatorDeclaration, g.constructorDeclaration, g.finalizerDeclaration,
+        g.staticConstructorDeclaration, g.typeDeclaration);
+    g.constantDeclaration.is(opt(g.attributes), o2n(g.constantModifier), CONST, g.type, g.constantDeclarator,
+        o2n(COMMA, g.constantDeclarator), SEMICOLON);
+    g.constantModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+    g.fieldDeclaration.is(opt(g.attributes), o2n(g.fieldModifier), g.type, g.variableDeclarator, o2n(COMMA, g.variableDeclarator),
+        SEMICOLON);
+    g.fieldModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, READONLY, VOLATILE);
+    g.variableDeclarator.is(IDENTIFIER, opt(EQUAL, g.variableInitializer));
+    g.variableInitializer.isOr(g.expression, g.arrayInitializer);
+    g.methodDeclaration.is(g.methodHeader, g.methodBody);
+    g.methodHeader.is(opt(g.attributes), o2n(g.methodModifier), g.returnType, g.memberName, opt(g.typeParameterList), LPARENTHESIS,
+        opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses));
+    g.methodModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
+    g.returnType.isOr(g.type, VOID);
+    g.memberName.isOr(and(g.interfaceType, DOT, IDENTIFIER), IDENTIFIER);
+    g.methodBody.isOr(g.block, SEMICOLON);
+    g.formalParameterList.isOr(and(g.fixedParameters, opt(COMMA, g.parameterArray)), g.parameterArray);
+    g.fixedParameters.is(g.fixedParameter, o2n(COMMA, g.fixedParameter));
+    g.fixedParameter.is(opt(g.attributes), opt(g.parameterModifier), g.type, IDENTIFIER);
+    g.parameterModifier.isOr(REF, OUT);
+    g.parameterArray.is(opt(g.attributes), PARAMS, g.arrayType, IDENTIFIER);
+    g.propertyDeclaration.is(opt(g.attributes), o2n(g.propertyModifier), g.type, g.memberName, LCURLYBRACE, g.accessorDeclarations,
+        RCURLYBRACE);
+    g.propertyModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
+    g.accessorDeclarations.isOr(and(g.getAccessorDeclaration, opt(g.setAccessorDeclaration)),
+        and(g.setAccessorDeclaration, opt(g.getAccessorDeclaration)));
+    g.getAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), "get", g.accessorBody);
+    g.setAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), "set", g.accessorBody);
+    g.accessorModifier.isOr(and(PROTECTED, INTERNAL), and(INTERNAL, PROTECTED), PROTECTED, INTERNAL, PRIVATE);
+    g.accessorBody.isOr(g.block, SEMICOLON);
+    g.eventDeclaration.is(
+        opt(g.attributes),
+        o2n(g.eventModifier),
+        EVENT,
+        g.type,
+        or(and(g.variableDeclarator, opt(COMMA, g.variableDeclarator), SEMICOLON),
+            and(g.memberName, LCURLYBRACE, g.eventAccessorDeclarations, RCURLYBRACE)));
+    g.eventModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
+    g.eventAccessorDeclarations.isOr(and(g.addAccessorDeclaration, g.removeAccessorDeclaration),
+        and(g.removeAccessorDeclaration, g.addAccessorDeclaration));
+    g.addAccessorDeclaration.is(opt(g.attributes), "add", g.block);
+    g.removeAccessorDeclaration.is(opt(g.attributes), "remove", g.block);
+    g.indexerDeclaration.is(opt(g.attributes), o2n(g.indexerModifier), g.indexerDeclarator, LCURLYBRACE, g.accessorDeclarations,
+        RCURLYBRACE);
+    g.indexerModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
+    g.indexerDeclarator.is(g.type, or(THIS, and(g.interfaceType, DOT)), LBRACKET, g.formalParameterList, RBRACKET);
+    g.operatorDeclaration.is(opt(g.attributes), one2n(g.operatorModifier), g.operatorDeclarator, g.operatorBody);
+    g.operatorModifier.isOr(PUBLIC, STATIC, EXTERN);
+    g.operatorDeclarator.isOr(g.unaryOperatorDeclarator, g.binaryOperatorDeclarator, g.conversionOperatorDeclarator);
+    g.unaryOperatorDeclarator.is(g.type, OPERATOR, g.overloadableUnaryOperator, LPARENTHESIS, g.type, IDENTIFIER, RPARENTHESIS);
+    g.overloadableUnaryOperator.isOr(PLUS, MINUS, EXCLAMATION, TILDE, INC_OP, DEC_OP, TRUE, FALSE);
+    g.binaryOperatorDeclarator.is(g.type, OPERATOR, g.overloadableBinaryOperator, LPARENTHESIS, g.type, IDENTIFIER, COMMA, g.type,
+        IDENTIFIER, RPARENTHESIS);
+    g.overloadableBinaryOperator.isOr(PLUS, MINUS, STAR, SLASH, MODULO, AND, OR, XOR, LEFT_OP, RIGHT_OP, EQ_OP, NE_OP, SUPERIOR, INFERIOR,
+        GE_OP, LE_OP);
+    g.conversionOperatorDeclarator.is(or(IMPLICIT, EXPLICIT), OPERATOR, g.type, LPARENTHESIS, g.type, IDENTIFIER, RPARENTHESIS);
+    g.operatorBody.isOr(g.block, SEMICOLON);
+    g.constructorDeclaration.is(opt(g.attributes), o2n(g.constructorModifier), g.constantDeclaration, g.constructorBody);
+    g.constructorModifier.isOr(PUBLIC, PROTECTED, INTERNAL, PRIVATE, EXTERN);
+    g.constructorDeclarator.is(IDENTIFIER, LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.constructorInitializer));
+    g.constructorInitializer.is(COLON, or(BASE, THIS), LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
+    g.constructorBody.is(g.block, SEMICOLON);
+    g.staticConstructorDeclaration.is(opt(g.attributes), g.staticConstructorModifiers, IDENTIFIER, LPARENTHESIS, RPARENTHESIS,
+        g.staticConstructorBody);
+    g.staticConstructorModifiers.isOr(and(opt(EXTERN), STATIC), and(STATIC, opt(EXTERN)));
+    g.staticConstructorBody.is(g.block, SEMICOLON);
+    g.finalizerDeclaration.is(opt(g.attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, g.finalizerBody);
+    g.finalizerBody.is(g.block, SEMICOLON);
   }
 
-  private void basicConcepts(CSharpGrammar g) {
-    g.compilationUnit.is(o2n(g.externAliasDirective), o2n(g.usingDirective), opt(g.globalAttributes), o2n(g.namespaceMemberDeclaration));
-    g.namespaceName.is(g.namespaceOrTypeName);
-    g.typeName.is(g.namespaceOrTypeName);
-    g.namespaceOrTypeName.is(
-        one2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), opt(DOT, IDENTIFIER, opt(g.typeArgumentList))),
-        opt(DOT, IDENTIFIER, opt(g.typeArgumentList)));
+  private void structs(CSharpGrammar g) {
+    g.structDeclaration.is(opt(g.attributes), o2n(g.structModifier), opt("partial"), STRUCT, IDENTIFIER, opt(g.typeParameterList),
+        opt(g.structInterfaces), opt(g.typeParameterConstraintsClauses), g.structBody, opt(SEMICOLON));
+    g.structModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+    g.structInterfaces.is(COLON, g.interfaceTypeList);
+    g.structBody.is(LCURLYBRACE, o2n(g.structMemberDeclaration), RCURLYBRACE);
+    g.structMemberDeclaration.isOr(g.constantDeclaration, g.fieldDeclaration, g.methodDeclaration, g.propertyDeclaration,
+        g.eventDeclaration, g.indexerDeclaration, g.operatorDeclaration, g.constructorDeclaration, g.staticConstructorDeclaration,
+        g.typeDeclaration);
+  }
+
+  private void arrays(CSharpGrammar g) {
+    g.arrayInitializer.is(LCURLYBRACE, or(and(g.variableInitializerList, COMMA), opt(g.variableInitializerList)), RCURLYBRACE);
+    g.variableInitializerList.is(g.variableInitializer, o2n(COMMA, g.variableInitializer));
+  }
+
+  private void interfaces(CSharpGrammar g) {
+    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER, opt(g.typeParameterList),
+        opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(COMMA));
+    g.interfaceModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+    g.interfaceBase.is(COLON, g.interfaceTypeList);
+    g.interfaceBody.is(LCURLYBRACE, o2n(g.interfaceMemberDeclaration), RCURLYBRACE);
+    g.interfaceMemberDeclaration.isOr(g.interfaceMethodDeclaration, g.interfacePropertyDeclaration, g.interfaceEventDeclaration,
+        g.interfaceIndexerDeclaration);
+    g.interfaceMethodDeclaration.is(opt(g.attributes), opt(NEW), g.returnType, IDENTIFIER, opt(g.typeParameterList), LPARENTHESIS,
+        opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses), SEMICOLON);
+    g.interfacePropertyDeclaration.is(opt(g.attributes), opt(NEW), g.type, IDENTIFIER, LCURLYBRACE, g.interfaceAccessors, RCURLYBRACE);
+    g.interfaceAccessors.is(opt(g.attributes),
+        or("get", "set", and("get", SEMICOLON, opt(g.attributes), "set"), and("set", SEMICOLON, opt(g.attributes), "get")), SEMICOLON);
+    g.interfaceEventDeclaration.is(opt(g.attributes), opt(NEW), EVENT, g.type, IDENTIFIER, SEMICOLON);
+    g.interfaceIndexerDeclaration.is(opt(g.attributes), opt(NEW), g.type, THIS, LBRACKET, g.formalParameterList, RBRACKET, LCURLYBRACE,
+        g.interfaceAccessors, RCURLYBRACE);
+  }
+
+  private void enums(CSharpGrammar g) {
+    g.enumDeclaration.is(opt(g.attributes), o2n(g.enumModifier), ENUM, IDENTIFIER, opt(g.enumBase), g.enumBody, opt(SEMICOLON));
+    g.enumBase.is(COLON, g.integralType);
+    g.enumBody.is(LCURLYBRACE, or(opt(g.enumMemberDeclarations), and(g.enumMemberDeclarations, COMMA)), RCURLYBRACE);
+    g.enumModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+    g.enumMemberDeclarations.is(g.enumMemberDeclaration, o2n(COMMA, g.enumMemberDeclaration));
+    g.enumMemberDeclaration.is(opt(g.attributes), IDENTIFIER, opt(EQUAL, g.constantExpression));
+  }
+
+  private void delegates(CSharpGrammar g) {
+    g.delegateDeclaration.is(opt(g.attributes), o2n(g.delegateModifier), DELEGATE, g.returnType, IDENTIFIER, opt(g.typeParameterList),
+        LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses), SEMICOLON);
+    g.delegateModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+  }
+
+  private void attributes(CSharpGrammar g) {
+    g.globalAttributes.is(one2n(g.globalAttributeSection));
+    g.globalAttributeSection.is(LBRACKET, g.globalAttributeTargetSpecifier, g.attributeList, opt(COMMA), RBRACKET);
+    g.globalAttributeTargetSpecifier.is(g.globalAttributeTarget, COLON);
+    g.globalAttributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
+    g.attributes.is(one2n(g.attributeSection));
+    g.attributeSection.is(LBRACKET, g.attributeTargetSpecifier, g.attributeList, opt(COMMA), RBRACKET);
+    g.attributeTargetSpecifier.is(g.attributeTarget, COLON);
+    g.attributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
+    g.attributeList.is(g.attribute, o2n(COMMA, g.attribute));
+    g.attribute.is(g.attributeName, opt(g.attributeArguments));
+    g.attributeName.is(g.typeName);
+    g.attributeArguments.is(LPARENTHESIS,
+        or(opt(g.positionalArgumentList), and(g.positionalArgumentList, COMMA, g.namedArgumentList), g.namedArgumentList), RPARENTHESIS);
+    g.positionalArgumentList.is(g.positionalArgument, o2n(COMMA, g.positionalArgument));
+    g.positionalArgument.is(g.attributeArgumentExpression);
+    g.namedArgumentList.is(g.namedArgument, o2n(COMMA, g.namedArgument));
+    g.attributeArgumentExpression.is(g.expression);
+  }
+
+  private void generics(CSharpGrammar g) {
+    g.typeParameterList.is(INFERIOR, g.typeParameters, SUPERIOR);
+    g.typeParameters.is(opt(g.attributes), g.typeParameter, o2n(COMMA, opt(g.attributes), g.typeParameter));
+    g.typeParameter.is(IDENTIFIER);
+    g.typeArgumentList.is(INFERIOR, g.typeArgument, opt(COMMA, g.typeArgument), SUPERIOR);
+    g.typeArgument.is(g.type);
+    g.typeParameterConstraintsClauses.is(one2n(g.typeParameterConstraintClause));
+    g.typeParameterConstraintClause.is("where", g.typeParameter, COLON, g.typeParamterConstraints);
+    g.typeParamterConstraints.isOr(g.primaryConstraint, g.secondaryConstraints, g.constructorConstraint,
+        and(g.primaryConstraint, COMMA, or(g.secondaryConstraints, g.constructorConstraint)),
+        and(g.secondaryConstraints, COMMA, g.constructorConstraint),
+        and(g.primaryConstraint, COMMA, g.secondaryConstraints, COMMA, g.constructorConstraint));
+    g.primaryConstraint.isOr(g.classType, CLASS, STRUCT);
+    g.secondaryConstraints.is(or(g.interfaceType, g.typeParameter), and(COMMA, or(g.interfaceType, g.typeParameter)));
+    g.constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
   }
 }

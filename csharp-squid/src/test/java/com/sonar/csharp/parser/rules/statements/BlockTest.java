@@ -22,15 +22,14 @@ public class BlockTest {
   @Before
   public void init() {
     p.setRootRule(g.block);
+    g.statement.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("{}"));
-    assertThat(p, parse("{ int a=1; }"));
-    assertThat(p, parse("{ int a=1; int b=1; int c=1; }"));
-    assertThat(p, parse("{ sjkdfg ljjkdfh qsfhlmqkjdf klqjklfzaoirè!çéè'(!ru ùppo rùURZYHTFmezyrfù<aià'ra`^GJFD }"));
-    assertThat(p, parse("{ // This is a comment, and the test fails...\n }"));
+    assertThat(p, parse("{ statement }"));
+    assertThat(p, parse("{ statement statement}"));
   }
 
 }

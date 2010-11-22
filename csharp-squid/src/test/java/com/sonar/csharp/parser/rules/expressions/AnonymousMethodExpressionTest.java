@@ -23,12 +23,13 @@ public class AnonymousMethodExpressionTest {
   public void init() {
     p.setRootRule(g.anonymousMethodExpression);
     g.anonymousMethodSignature.mock();
+    g.block.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("delegate { blabla } "));
-    assertThat(p, parse("delegate anonymousMethodSignature { blabla } "));
+    assertThat(p, parse("delegate block "));
+    assertThat(p, parse("delegate anonymousMethodSignature block "));
   }
 
 }
