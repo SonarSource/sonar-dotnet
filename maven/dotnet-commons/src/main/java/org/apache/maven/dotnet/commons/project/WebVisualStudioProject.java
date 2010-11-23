@@ -28,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
 
 /**
  * Represent a web/asp folder/project
- * Visual Studio handle in a weird way asp projects since ther
+ * Visual Studio handle in a weird way asp projects since there
  * is no csproj files. The description of the project is embedded 
  * in the sln solution file.
  * 
@@ -79,7 +79,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
       return null;
     }
     final String precompilationPath;
-    if (debugOutputDir.list().length == 0) {
+    if (debugOutputDir.list()==null || debugOutputDir.list().length == 0) {
       precompilationPath = releaseOutputDir.getAbsolutePath() + File.separator
           + "bin";
     } else {
