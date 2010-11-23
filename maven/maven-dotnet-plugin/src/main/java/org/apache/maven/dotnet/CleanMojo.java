@@ -100,7 +100,9 @@ public class CleanMojo extends AbstractDotNetBuildMojo {
           = webProject.getWebPrecompilationDirectory();
         
         try {
-          FileUtils.cleanDirectory(precompilationDirectory);
+          if (precompilationDirectory!=null && precompilationDirectory.exists()) {
+            FileUtils.cleanDirectory(precompilationDirectory);
+          }
         } catch (IOException e) {
           throw new MojoExecutionException("error while cleaning web project "
               + visualStudioProject, e);
