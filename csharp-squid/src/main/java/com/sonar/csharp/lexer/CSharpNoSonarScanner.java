@@ -13,7 +13,6 @@ import java.util.Set;
 import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Token;
 
-
 public class CSharpNoSonarScanner {
 
   private final CSharpLexer lexer;
@@ -38,5 +37,5 @@ public class CSharpNoSonarScanner {
     }
     return noSonarTags;
   }
-  
+
 }

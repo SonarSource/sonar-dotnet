@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -38,7 +37,6 @@ public class CSharpPreIntegrationTest {
   }
 
   @Test
-  @Ignore
   public void parseCSharpSource() throws IOException, URISyntaxException {
     parser.parse(cSharpFile);
   }
@@ -53,7 +51,7 @@ public class CSharpPreIntegrationTest {
 
   @SuppressWarnings("unchecked")
   private static Collection<File> listFiles(String path, boolean recursive) throws URISyntaxException {
-    return FileUtils.listFiles(new File((new Object()).getClass().getResource(path).toURI()), new String[] {"cs"}, recursive);
+    return FileUtils.listFiles(new File((new Object()).getClass().getResource(path).toURI()), new String[] { "cs" }, recursive);
   }
 
 }

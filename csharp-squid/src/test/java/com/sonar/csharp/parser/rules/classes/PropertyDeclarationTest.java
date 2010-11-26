@@ -32,7 +32,8 @@ public class PropertyDeclarationTest {
   public void testOk() {
     assertThat(p, parse("type memberName { accessorDeclarations }"));
     assertThat(p, parse("attributes new type memberName { accessorDeclarations }"));
-    assertThat(p, parse("public protected internal private static virtual sealed override abstract extern type memberName { accessorDeclarations }"));
+    assertThat(p,
+        parse("public protected internal private static virtual sealed override abstract extern type memberName { accessorDeclarations }"));
   }
 
 }

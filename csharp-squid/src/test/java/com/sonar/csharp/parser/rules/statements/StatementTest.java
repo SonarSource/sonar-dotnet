@@ -25,7 +25,7 @@ public class StatementTest {
     g.labeledStatement.mock();
     g.declarationStatement.mock();
     g.embeddedStatement.mock();
-    
+
   }
 
   @Test

@@ -36,6 +36,12 @@ public class CSharpParserTest {
     parser.parse(FileUtils.toFile(getClass().getResource("/parser/NUnitFramework.cs")));
   }
 
+  @Test
+  public void testLinqFile() {
+    CSharpParser parser = new CSharpParser();
+    parser.parse(FileUtils.toFile(getClass().getResource("/parser/LinqBridge-1.2.cs")));
+  }
+
   /**
    * Test method used to check if the C# grammar definition (which is the "CSharpGrammarDecorator.java" file) does not have duplicate
    * definition for a single rule. <br>

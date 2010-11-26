@@ -5,6 +5,8 @@
  */
 package com.sonar.csharp.lexer;
 
+import static com.sonar.sslr.api.GenericTokenType.COMMENT;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.ANY_CHAR;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.DIGIT;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.HEXA_DIGIT;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.anyButNot;
@@ -30,8 +32,6 @@ import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
-import com.sonar.sslr.impl.channel.InlineCommentChannel;
-import com.sonar.sslr.impl.channel.MultilineCommentChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 
 /**
@@ -67,8 +67,9 @@ public class CSharpLexer extends Lexer {
   protected ChannelDispatcher<LexerOutput> getChannelDispatcher() {
     @SuppressWarnings("rawtypes")
     List<Channel> channels = new ArrayList<Channel>();
-    channels.add(new InlineCommentChannel("//"));
-    channels.add(new MultilineCommentChannel("/*", "*/"));
+    // Comments
+    channels.add(regexp(COMMENT, "//", o2n("[^\\n\\r]")));
+    channels.add(regexp(COMMENT, "/\\*", ANY_CHAR + "*?", "\\*/"));
     // Literals : Strings
     channels.add(regexp(CSharpTokenType.STRING_LITERAL, "\"", o2n(or("\\\\.", anyButNot("\"", "\\n", "\\r"))), "\""));
     channels.add(regexp(CSharpTokenType.STRING_LITERAL, "@\"", o2n(or("\\\\.", anyButNot("\""))), "\""));

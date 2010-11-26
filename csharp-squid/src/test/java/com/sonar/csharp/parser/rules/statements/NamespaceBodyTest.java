@@ -35,7 +35,9 @@ public class NamespaceBodyTest {
     assertThat(p, parse("{namespaceMemberDeclaration}"));
     assertThat(p, parse("{externAliasDirective namespaceMemberDeclaration}"));
     assertThat(p, parse("{usingDirective usingDirective namespaceMemberDeclaration}"));
-    assertThat(p, parse("{externAliasDirective externAliasDirective usingDirective usingDirective namespaceMemberDeclaration namespaceMemberDeclaration}"));
+    assertThat(
+        p,
+        parse("{externAliasDirective externAliasDirective usingDirective usingDirective namespaceMemberDeclaration namespaceMemberDeclaration}"));
   }
 
 }

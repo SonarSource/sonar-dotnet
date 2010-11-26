@@ -32,5 +32,5 @@ public class LocalVariableDeclarationTest {
     assertThat(p, parse("type id = localVariableInitializer"));
     assertThat(p, parse("type id1, id2 = localVariableInitializer, id3"));
   }
-  
+
 }

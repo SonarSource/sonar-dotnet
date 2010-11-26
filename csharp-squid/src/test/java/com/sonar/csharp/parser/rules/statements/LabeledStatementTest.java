@@ -23,7 +23,7 @@ public class LabeledStatementTest {
   public void init() {
     p.setRootRule(g.labeledStatement);
     g.statement.mock();
-    
+
   }
 
   @Test

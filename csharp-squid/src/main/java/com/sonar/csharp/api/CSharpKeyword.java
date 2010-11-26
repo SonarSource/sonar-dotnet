@@ -11,8 +11,8 @@ import com.sonar.sslr.api.TokenType;
 /**
  * Keywords for the C# language. <br>
  * <br>
- * Note: the ECMA specification (part #9.4.3) tells that the following words are <b>not</b> C# keywords, also they have a specific meaning in the
- * C# language:
+ * Note: the ECMA specification (part #9.4.3) tells that the following words are <b>not</b> C# keywords, also they have a specific meaning
+ * in the C# language:
  * <ul>
  * <li>add</li>
  * <li>alias</li>

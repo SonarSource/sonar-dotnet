@@ -27,7 +27,7 @@ public class JumpStatementTest {
     g.gotoStatement.mock();
     g.returnStatement.mock();
     g.throwStatement.mock();
-    
+
   }
 
   @Test

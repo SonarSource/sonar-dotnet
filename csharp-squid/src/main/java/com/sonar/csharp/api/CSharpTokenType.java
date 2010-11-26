@@ -10,7 +10,6 @@ import com.sonar.sslr.api.TokenType;
 
 public enum CSharpTokenType implements TokenType {
   INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, PREPROCESSOR;
-   
 
   public String getName() {
     return name();

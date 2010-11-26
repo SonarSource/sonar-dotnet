@@ -132,6 +132,8 @@ import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
 import static com.sonar.sslr.impl.matcher.Matchers.isOneOfThem;
+import static com.sonar.sslr.impl.matcher.Matchers.next;
+import static com.sonar.sslr.impl.matcher.Matchers.not;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
 import static com.sonar.sslr.impl.matcher.Matchers.one2n;
 import static com.sonar.sslr.impl.matcher.Matchers.opt;
@@ -405,7 +407,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.indexerDeclaration.is(opt(g.attributes), o2n(g.indexerModifier), g.indexerDeclarator, LCURLYBRACE, g.accessorDeclarations,
         RCURLYBRACE);
     g.indexerModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
-    g.indexerDeclarator.is(g.type, or(THIS, and(g.interfaceType, DOT)), LBRACKET, g.formalParameterList, RBRACKET);
+    g.indexerDeclarator.is(g.type, opt(g.interfaceType, DOT), THIS, LBRACKET, g.formalParameterList, RBRACKET);
     g.operatorDeclaration.is(opt(g.attributes), one2n(g.operatorModifier), g.operatorDeclarator, g.operatorBody);
     g.operatorModifier.isOr(PUBLIC, STATIC, EXTERN);
     g.operatorDeclarator.isOr(g.unaryOperatorDeclarator, g.binaryOperatorDeclarator, g.conversionOperatorDeclarator);
@@ -417,17 +419,17 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         GE_OP, LE_OP);
     g.conversionOperatorDeclarator.is(or(IMPLICIT, EXPLICIT), OPERATOR, g.type, LPARENTHESIS, g.type, IDENTIFIER, RPARENTHESIS);
     g.operatorBody.isOr(g.block, SEMICOLON);
-    g.constructorDeclaration.is(opt(g.attributes), o2n(g.constructorModifier), g.constantDeclaration, g.constructorBody);
+    g.constructorDeclaration.is(opt(g.attributes), o2n(g.constructorModifier), g.constructorDeclarator, g.constructorBody);
     g.constructorModifier.isOr(PUBLIC, PROTECTED, INTERNAL, PRIVATE, EXTERN);
     g.constructorDeclarator.is(IDENTIFIER, LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.constructorInitializer));
     g.constructorInitializer.is(COLON, or(BASE, THIS), LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
-    g.constructorBody.is(g.block, SEMICOLON);
+    g.constructorBody.isOr(g.block, SEMICOLON);
     g.staticConstructorDeclaration.is(opt(g.attributes), g.staticConstructorModifiers, IDENTIFIER, LPARENTHESIS, RPARENTHESIS,
         g.staticConstructorBody);
-    g.staticConstructorModifiers.isOr(and(opt(EXTERN), STATIC), and(STATIC, opt(EXTERN)));
-    g.staticConstructorBody.is(g.block, SEMICOLON);
+    g.staticConstructorModifiers.isOr(and(opt(EXTERN), STATIC, not(next(EXTERN))), and(STATIC, opt(EXTERN)));
+    g.staticConstructorBody.isOr(g.block, SEMICOLON);
     g.finalizerDeclaration.is(opt(g.attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, g.finalizerBody);
-    g.finalizerBody.is(g.block, SEMICOLON);
+    g.finalizerBody.isOr(g.block, SEMICOLON);
   }
 
   private void structs(CSharpGrammar g) {
@@ -448,7 +450,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
   private void interfaces(CSharpGrammar g) {
     g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER, opt(g.typeParameterList),
-        opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(COMMA));
+        opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(SEMICOLON));
     g.interfaceModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     g.interfaceBase.is(COLON, g.interfaceTypeList);
     g.interfaceBody.is(LCURLYBRACE, o2n(g.interfaceMemberDeclaration), RCURLYBRACE);
@@ -458,7 +460,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses), SEMICOLON);
     g.interfacePropertyDeclaration.is(opt(g.attributes), opt(NEW), g.type, IDENTIFIER, LCURLYBRACE, g.interfaceAccessors, RCURLYBRACE);
     g.interfaceAccessors.is(opt(g.attributes),
-        or("get", "set", and("get", SEMICOLON, opt(g.attributes), "set"), and("set", SEMICOLON, opt(g.attributes), "get")), SEMICOLON);
+        or(and("get", SEMICOLON, opt(g.attributes), "set"), and("set", SEMICOLON, opt(g.attributes), "get"), "get", "set"), SEMICOLON);
     g.interfaceEventDeclaration.is(opt(g.attributes), opt(NEW), EVENT, g.type, IDENTIFIER, SEMICOLON);
     g.interfaceIndexerDeclaration.is(opt(g.attributes), opt(NEW), g.type, THIS, LBRACKET, g.formalParameterList, RBRACKET, LCURLYBRACE,
         g.interfaceAccessors, RCURLYBRACE);
@@ -467,7 +469,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   private void enums(CSharpGrammar g) {
     g.enumDeclaration.is(opt(g.attributes), o2n(g.enumModifier), ENUM, IDENTIFIER, opt(g.enumBase), g.enumBody, opt(SEMICOLON));
     g.enumBase.is(COLON, g.integralType);
-    g.enumBody.is(LCURLYBRACE, or(opt(g.enumMemberDeclarations), and(g.enumMemberDeclarations, COMMA)), RCURLYBRACE);
+    g.enumBody.is(LCURLYBRACE, or(and(g.enumMemberDeclarations, COMMA), opt(g.enumMemberDeclarations)), RCURLYBRACE);
     g.enumModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     g.enumMemberDeclarations.is(g.enumMemberDeclaration, o2n(COMMA, g.enumMemberDeclaration));
     g.enumMemberDeclaration.is(opt(g.attributes), IDENTIFIER, opt(EQUAL, g.constantExpression));
@@ -492,10 +494,11 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.attribute.is(g.attributeName, opt(g.attributeArguments));
     g.attributeName.is(g.typeName);
     g.attributeArguments.is(LPARENTHESIS,
-        or(opt(g.positionalArgumentList), and(g.positionalArgumentList, COMMA, g.namedArgumentList), g.namedArgumentList), RPARENTHESIS);
+        or(and(g.positionalArgumentList, COMMA, g.namedArgumentList), g.namedArgumentList, opt(g.positionalArgumentList)), RPARENTHESIS);
     g.positionalArgumentList.is(g.positionalArgument, o2n(COMMA, g.positionalArgument));
     g.positionalArgument.is(g.attributeArgumentExpression);
     g.namedArgumentList.is(g.namedArgument, o2n(COMMA, g.namedArgument));
+    g.namedArgument.is(IDENTIFIER, EQUAL, g.attributeArgumentExpression);
     g.attributeArgumentExpression.is(g.expression);
   }
 
@@ -505,14 +508,13 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.typeParameter.is(IDENTIFIER);
     g.typeArgumentList.is(INFERIOR, g.typeArgument, opt(COMMA, g.typeArgument), SUPERIOR);
     g.typeArgument.is(g.type);
-    g.typeParameterConstraintsClauses.is(one2n(g.typeParameterConstraintClause));
-    g.typeParameterConstraintClause.is("where", g.typeParameter, COLON, g.typeParamterConstraints);
-    g.typeParamterConstraints.isOr(g.primaryConstraint, g.secondaryConstraints, g.constructorConstraint,
+    g.typeParameterConstraintsClauses.is(one2n(g.typeParameterConstraintsClause));
+    g.typeParameterConstraintsClause.is("where", g.typeParameter, COLON, g.typeParameterConstraints);
+    g.typeParameterConstraints.isOr(and(g.primaryConstraint, COMMA, g.secondaryConstraints, COMMA, g.constructorConstraint),
         and(g.primaryConstraint, COMMA, or(g.secondaryConstraints, g.constructorConstraint)),
-        and(g.secondaryConstraints, COMMA, g.constructorConstraint),
-        and(g.primaryConstraint, COMMA, g.secondaryConstraints, COMMA, g.constructorConstraint));
+        and(g.secondaryConstraints, COMMA, g.constructorConstraint), g.primaryConstraint, g.secondaryConstraints, g.constructorConstraint);
     g.primaryConstraint.isOr(g.classType, CLASS, STRUCT);
-    g.secondaryConstraints.is(or(g.interfaceType, g.typeParameter), and(COMMA, or(g.interfaceType, g.typeParameter)));
+    g.secondaryConstraints.is(or(g.interfaceType, g.typeParameter), o2n(COMMA, or(g.interfaceType, g.typeParameter)));
     g.constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
   }
 }

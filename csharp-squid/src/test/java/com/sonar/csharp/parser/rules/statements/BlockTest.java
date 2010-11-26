@@ -22,14 +22,19 @@ public class BlockTest {
   @Before
   public void init() {
     p.setRootRule(g.block);
-    g.statement.mock();
   }
 
   @Test
   public void testOk() {
+    g.statement.mock();
     assertThat(p, parse("{}"));
     assertThat(p, parse("{ statement }"));
     assertThat(p, parse("{ statement statement}"));
+  }
+
+  @Test
+  public void testRealLife() {
+    assertThat(p, parse("{}"));
   }
 
 }

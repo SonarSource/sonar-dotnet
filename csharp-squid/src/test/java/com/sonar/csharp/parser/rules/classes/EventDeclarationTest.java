@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.classes;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -23,16 +24,25 @@ public class EventDeclarationTest {
   public void init() {
     p.setRootRule(g.eventDeclaration);
     g.attributes.mock();
-    g.eventModifier.mock();
-    g.type.mock();g.variableDeclarator.mock();
+    g.type.mock();
+    g.variableDeclarator.mock();
     g.memberName.mock();
     g.eventAccessorDeclarations.mock();
   }
 
   @Test
   public void testOk() {
-    //assertThat(p, parse(""));
-    // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+    assertThat(p, parse("event type variableDeclarator;"));
+    assertThat(p, parse("attributes new event type variableDeclarator, variableDeclarator ;"));
+    assertThat(p, parse("attributes new event type memberName {eventAccessorDeclarations}"));
+    assertThat(p, parse("public protected internal private static virtual sealed override abstract extern event type variableDeclarator;"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse("event type;"));
+    assertThat(p, notParse("attributes eventModifier event type memberName {eventAccessorDeclarations};"));
+    assertThat(p, notParse("attributes eventModifier event type memberName {}"));
   }
 
 }

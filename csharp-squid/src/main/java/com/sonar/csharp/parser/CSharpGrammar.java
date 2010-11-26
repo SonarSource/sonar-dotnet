@@ -47,7 +47,7 @@ public class CSharpGrammar implements Grammar {
   // A.2.4 Expressions
   public Rule argumentList; // LATER
   public Rule argument; // OK
-  public Rule primaryExpression; // LATER
+  public Rule primaryExpression; // OK
   public Rule primaryNoArrayCreationExpression; // LATER
   public Rule simpleName; // OK
   public Rule parenthesizedExpression; // OK
@@ -179,100 +179,100 @@ public class CSharpGrammar implements Grammar {
   public Rule setAccessorDeclaration; // OK
   public Rule accessorModifier; // OK
   public Rule accessorBody; // LATER
-  public Rule eventDeclaration;
-  public Rule eventModifier;
-  public Rule eventAccessorDeclarations;
-  public Rule addAccessorDeclaration;
-  public Rule removeAccessorDeclaration;
-  public Rule indexerDeclaration;
-  public Rule indexerModifier;
-  public Rule indexerDeclarator;
-  public Rule operatorDeclaration;
-  public Rule operatorModifier;
-  public Rule operatorDeclarator;
-  public Rule unaryOperatorDeclarator;
-  public Rule overloadableUnaryOperator;
-  public Rule binaryOperatorDeclarator;
-  public Rule overloadableBinaryOperator;
-  public Rule conversionOperatorDeclarator;
-  public Rule operatorBody;
-  public Rule constructorDeclaration;
-  public Rule constructorModifier;
-  public Rule constructorDeclarator;
-  public Rule constructorInitializer;
-  public Rule constructorBody;
-  public Rule staticConstructorDeclaration;
-  public Rule staticConstructorModifiers;
-  public Rule staticConstructorBody;
-  public Rule finalizerDeclaration;
-  public Rule finalizerBody;
+  public Rule eventDeclaration; // OK
+  public Rule eventModifier; // OK - tested via EventDeclarationTest
+  public Rule eventAccessorDeclarations; // OK
+  public Rule addAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public Rule removeAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public Rule indexerDeclaration; // OK
+  public Rule indexerModifier; // OK - tested via IndexerDeclarationTest
+  public Rule indexerDeclarator; // OK
+  public Rule operatorDeclaration; // OK
+  public Rule operatorModifier; // OK - tested via OperatorDeclarationTest
+  public Rule operatorDeclarator; // OK
+  public Rule unaryOperatorDeclarator; // OK
+  public Rule overloadableUnaryOperator; // OK - tested via UnaryOperatorDeclaration
+  public Rule binaryOperatorDeclarator; // OK
+  public Rule overloadableBinaryOperator; // OK - tested via BinaryOperatorDeclaration
+  public Rule conversionOperatorDeclarator; // OK
+  public Rule operatorBody; // LATER
+  public Rule constructorDeclaration; // OK
+  public Rule constructorModifier; // OK - tested via ConstructorDeclarationTest
+  public Rule constructorDeclarator; // OK
+  public Rule constructorInitializer; // OK
+  public Rule constructorBody; // OK
+  public Rule staticConstructorDeclaration; // OK
+  public Rule staticConstructorModifiers; // OK
+  public Rule staticConstructorBody; // LATER
+  public Rule finalizerDeclaration; // OK
+  public Rule finalizerBody; // LATER
 
   // A.2.7 Struct
-  public Rule structDeclaration;
-  public Rule structModifier;
-  public Rule structInterfaces;
-  public Rule structBody;
-  public Rule structMemberDeclaration;
+  public Rule structDeclaration; // OK
+  public Rule structModifier; // OK - tested via StructDeclarationTest
+  public Rule structInterfaces; // OK
+  public Rule structBody; // OK
+  public Rule structMemberDeclaration; // OK - tested via StructBodyTest
 
-  // A.2.8 Arrays  
+  // A.2.8 Arrays
   public Rule arrayInitializer; // OK
   public Rule variableInitializerList; // OK
 
   // A.2.9 Interfaces
-  public Rule interfaceDeclaration;
-  public Rule interfaceModifier;
-  public Rule interfaceBase;
-  public Rule interfaceBody;
-  public Rule interfaceMemberDeclaration;
-  public Rule interfaceMethodDeclaration;
-  public Rule interfacePropertyDeclaration;
-  public Rule interfaceAccessors;
-  public Rule interfaceEventDeclaration;
-  public Rule interfaceIndexerDeclaration;
+  public Rule interfaceDeclaration; // OK
+  public Rule interfaceModifier; // OK - tested via InterfaceDeclarationTest
+  public Rule interfaceBase; // OK
+  public Rule interfaceBody; // OK
+  public Rule interfaceMemberDeclaration; // OK - tested via InterfaceBodyDeclaration
+  public Rule interfaceMethodDeclaration; // OK
+  public Rule interfacePropertyDeclaration; // OK
+  public Rule interfaceAccessors; // OK
+  public Rule interfaceEventDeclaration; // OK
+  public Rule interfaceIndexerDeclaration; // OK
 
   // A.2.10 Enums
-  public Rule enumDeclaration;
-  public Rule enumBase;
-  public Rule enumBody;
-  public Rule enumModifier;
-  public Rule enumMemberDeclarations;
-  public Rule enumMemberDeclaration;
+  public Rule enumDeclaration; // OK
+  public Rule enumBase; // OK
+  public Rule enumBody; // OK
+  public Rule enumModifier; // OK - tested via EnumDeclarationTest
+  public Rule enumMemberDeclarations; // OK
+  public Rule enumMemberDeclaration; // OK
 
   // A.2.11 Delegates
-  public Rule delegateDeclaration;
-  public Rule delegateModifier;
+  public Rule delegateDeclaration; // OK
+  public Rule delegateModifier; // OK - tested via DelegateDeclarationTest
 
   // A.2.12 Attributes
-  public Rule globalAttributes;
-  public Rule globalAttributeSection;
-  public Rule globalAttributeTargetSpecifier;
+  public Rule globalAttributes; // LATER
+  public Rule globalAttributeSection; // OK
+  public Rule globalAttributeTargetSpecifier; // OK
   public Rule globalAttributeTarget; // OK
-  public Rule attributes;
-  public Rule attributeSection;
-  public Rule attributeTargetSpecifier;
-  public Rule attributeTarget;
-  public Rule attributeList;
-  public Rule attribute;
-  public Rule attributeName;
-  public Rule attributeArguments;
-  public Rule positionalArgumentList;
-  public Rule positionalArgument;
-  public Rule namedArgumentList;
-  public Rule namedArgument;
-  public Rule attributeArgumentExpression;
+  public Rule attributes; // LATER
+  public Rule attributeSection; // OK
+  public Rule attributeTargetSpecifier; // OK
+  public Rule attributeTarget; // OK
+  public Rule attributeList; // OK
+  public Rule attribute; // OK
+  public Rule attributeName; // LATER
+  public Rule attributeArguments; // OK
+  public Rule positionalArgumentList; // OK
+  public Rule positionalArgument; // LATER
+  public Rule namedArgumentList; // OK
+  public Rule namedArgument; // OK
+  public Rule attributeArgumentExpression; // LATER
 
   // A.2.13 Generics
-  public Rule typeParameterList;
-  public Rule typeParameters;
-  public Rule typeParameter;
+  public Rule typeParameterList; // OK
+  public Rule typeParameters; // OK
+  public Rule typeParameter; // OK - tested via TypeParametersTest
   public Rule typeArgumentList; // OK
-  public Rule typeArgument;
-  public Rule typeParameterConstraintsClauses;
-  public Rule typeParameterConstraintClause;
-  public Rule typeParamterConstraints;
-  public Rule primaryConstraint;
-  public Rule secondaryConstraints;
-  public Rule constructorConstraint;
+  public Rule typeArgument; // OK - tested via TypeArgumentListTest
+  public Rule typeParameterConstraintsClauses; // LATER
+  public Rule typeParameterConstraintsClause; // OK
+  public Rule typeParameterConstraints; // OK
+  public Rule primaryConstraint; // OK
+  public Rule secondaryConstraints; // OK
+  public Rule constructorConstraint; // OK
 
   /**
    * ${@inheritDoc}

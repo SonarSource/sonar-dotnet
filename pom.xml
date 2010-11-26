@@ -9,11 +9,11 @@
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
 		<artifactId>parent</artifactId>
-		<version>6</version>
+		<version>8</version>
 	</parent>
 	<properties>
-		<sonar.version>2.4</sonar.version>
-		<sslrVersion>1.1-SNAPSHOT</sslrVersion>
+		<sonar.version>2.5-SNAPSHOT</sonar.version>
+		<sslrVersion>1.2-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
 		<module>csharp-squid</module>

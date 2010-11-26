@@ -29,7 +29,7 @@ public class ExpressionStatementTest {
     g.postDecrementExpression.mock();
     g.preIncrementExpression.mock();
     g.preDecrementExpression.mock();
-    
+
   }
 
   @Test
