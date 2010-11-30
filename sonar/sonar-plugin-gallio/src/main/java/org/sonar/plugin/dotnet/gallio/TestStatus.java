@@ -30,5 +30,17 @@ package org.sonar.plugin.dotnet.gallio;
  * @author Jose CHILLAN Jun 16, 2009
  */
 public enum TestStatus {
-  SUCCESS, FAILED, ERROR, SKIPPED
+  SUCCESS("ok"), FAILED("failure"), ERROR("error"), SKIPPED("skipped");
+
+  /** textual representation of the status in the xml report used by sonar */
+  private final String sonarStatus;
+
+  private TestStatus(String sonarStatus) {
+    this.sonarStatus = sonarStatus;
+  }
+  
+  public String getSonarStatus() {
+    return sonarStatus;
+  }
+  
 }

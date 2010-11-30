@@ -162,11 +162,11 @@ public class GallioSensor extends AbstractDotnetSensor {
     testCaseDetails.append("<tests-details>");
     List<TestCaseDetail> details = fileReport.getDetails();
     for (TestCaseDetail detail : details) {
-      testCaseDetails.append("<testcase status=\"").append(detail.getStatus())
+      testCaseDetails.append("<testcase status=\"").append(detail.getStatus().getSonarStatus())
           .append("\" time=\"").append(detail.getTimeMillis())
-          .append("\" name=\"").append(detail.getName()).append("\"")
-          .append("\" asserts=\"").append(detail.getCountAsserts())
-          .append("\"");
+          .append("\" name=\"").append(detail.getName()).append("\"");
+          //.append("\" asserts=\"").append(detail.getCountAsserts())
+          //.append("\"");
       boolean isError = (detail.getStatus() == TestStatus.ERROR);
       if (isError || (detail.getStatus() == TestStatus.FAILED)) {
         testCaseDetails.append(">")
@@ -182,6 +182,7 @@ public class GallioSensor extends AbstractDotnetSensor {
     testCaseDetails.append("</tests-details>");
     context.saveMeasure(testFile, new Measure(CoreMetrics.TEST_DATA,
         testCaseDetails.toString()));
+    log.error("test detail : " + testCaseDetails);
   }
 
   /**
