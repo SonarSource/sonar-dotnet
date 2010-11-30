@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -37,6 +38,7 @@ public class CSharpPreIntegrationTest {
   }
 
   @Test
+  @Ignore("Trop beau pour être vrai...")
   public void parseCSharpSource() throws IOException, URISyntaxException {
     parser.parse(cSharpFile);
   }

@@ -87,7 +87,8 @@ public class CSharpLexer extends Lexer {
         o2n(or(LETTER_CHAR, DECIMAL_DIGIT_CHAR, CONNECTING_CHAR, COMBINING_CHAR, FORMATTING_CHAR))), true, CSharpKeyword.values()));
     channels.add(new PunctuatorChannel(CSharpPunctuator.values()));
     // Preprocessor directives
-    channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
+    //channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
+    channels.add(new BlackHoleChannel("#[^\\r\\n]*"));
     // Others
     channels.add(new BlackHoleChannel("[ \\t\\r\\n]"));
     // TODO : remove at the end

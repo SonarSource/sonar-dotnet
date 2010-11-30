@@ -11,6 +11,11 @@
 	<name>SonarSource :: C# :: Squid</name>
 
 	<dependencies>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>csharp-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- sonarsource -->
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>

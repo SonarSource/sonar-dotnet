@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser;
+package com.sonar.csharp.api;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Rule;
@@ -14,7 +14,6 @@ import com.sonar.sslr.api.Rule;
 public class CSharpGrammar implements Grammar {
 
   public Rule literal;
-  public Rule identifier;
 
   // A.2.1 Basic concepts
   public Rule compilationUnit; // OK

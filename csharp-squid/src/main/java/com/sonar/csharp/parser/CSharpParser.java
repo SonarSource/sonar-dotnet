@@ -6,6 +6,7 @@
 
 package com.sonar.csharp.parser;
 
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.lexer.CSharpLexer;
 import com.sonar.sslr.impl.Parser;
 

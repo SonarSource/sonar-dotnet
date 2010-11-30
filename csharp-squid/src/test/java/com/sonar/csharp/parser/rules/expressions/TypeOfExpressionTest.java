@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
 public class TypeOfExpressionTest {
@@ -22,15 +22,20 @@ public class TypeOfExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.typeOfExpression);
-    g.type.mock();
-    g.unboundTypeName.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
+    g.unboundTypeName.mock();
     assertThat(p, parse("typeof (type)"));
     assertThat(p, parse("typeof (unboundTypeName)"));
     assertThat(p, parse("typeof (void)"));
+  }
+
+  @Test
+  public void testRealLife() {
+    assertThat(p, parse("typeof (MyClass)"));
   }
 
 }

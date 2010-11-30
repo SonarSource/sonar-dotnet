@@ -16,6 +16,7 @@
 		<sslrVersion>1.2-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
+		<module>csharp-api</module>
 		<module>csharp-squid</module>
 	</modules>
 	<scm>

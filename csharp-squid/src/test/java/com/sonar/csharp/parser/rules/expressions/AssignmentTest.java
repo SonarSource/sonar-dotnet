@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
 public class AssignmentTest {
@@ -23,12 +23,12 @@ public class AssignmentTest {
   @Before
   public void init() {
     p.setRootRule(g.assignment);
-    g.unaryExpression.mock();
-    g.expression.mock();
   }
 
   @Test
   public void testOk() {
+    g.unaryExpression.mock();
+    g.expression.mock();
     assertThat(p, parse("unaryExpression = expression"));
     assertThat(p, parse("unaryExpression += expression"));
     assertThat(p, parse("unaryExpression -= expression"));
@@ -44,10 +44,17 @@ public class AssignmentTest {
 
   @Test
   public void testKo() {
+    g.unaryExpression.mock();
+    g.expression.mock();
     assertThat(p, notParse("unaryExpression != expression"));
     assertThat(p, notParse("unaryExpression == expression"));
     assertThat(p, notParse("unaryExpression >> expression"));
     assertThat(p, notParse("unaryExpression + expression"));
+  }
+
+  @Test
+  public void testRealLife() {
+    assertThat(p, parse("message = \"Hello World\""));
   }
 
 }

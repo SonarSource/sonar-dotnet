@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
 public class LocalVariableDeclarationTest {
@@ -22,15 +22,22 @@ public class LocalVariableDeclarationTest {
   @Before
   public void init() {
     p.setRootRule(g.localVariableDeclaration);
-    g.type.mock();
-    g.localVariableInitializer.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
+    g.localVariableInitializer.mock();
     assertThat(p, parse("type id"));
     assertThat(p, parse("type id = localVariableInitializer"));
     assertThat(p, parse("type id1, id2 = localVariableInitializer, id3"));
+  }
+
+  @Test
+  public void testRealLife() {
+    assertThat(p, parse("int a = 1"));
+    assertThat(p, parse("int a = 1, b, c = 4"));
+    assertThat(p, parse("Message message = \"Hello World\""));
   }
 
 }

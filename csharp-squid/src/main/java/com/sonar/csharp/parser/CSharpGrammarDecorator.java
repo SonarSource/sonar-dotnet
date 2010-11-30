@@ -129,6 +129,7 @@ import static com.sonar.csharp.api.CSharpTokenType.INTEGER_DEC_LITERAL;
 import static com.sonar.csharp.api.CSharpTokenType.INTEGER_HEX_LITERAL;
 import static com.sonar.csharp.api.CSharpTokenType.REAL_LITERAL;
 import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
+import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
 import static com.sonar.sslr.impl.matcher.Matchers.isOneOfThem;
@@ -139,6 +140,7 @@ import static com.sonar.sslr.impl.matcher.Matchers.one2n;
 import static com.sonar.sslr.impl.matcher.Matchers.opt;
 import static com.sonar.sslr.impl.matcher.Matchers.or;
 
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.sslr.api.GrammarDecorator;
 import com.sonar.sslr.impl.GrammarFieldsInitializer;
@@ -156,7 +158,6 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
     // We follow the ECMA specification for the C# language, 4th edition of June 2006
     g.literal.isOr(BOOL, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
-    g.identifier.is(IDENTIFIER);
 
     // A.2.1 Basic concepts
     basicConcepts(g);
@@ -200,12 +201,13 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void basicConcepts(CSharpGrammar g) {
-    g.compilationUnit.is(o2n(g.externAliasDirective), o2n(g.usingDirective), opt(g.globalAttributes), o2n(g.namespaceMemberDeclaration));
+    g.compilationUnit.is(o2n(g.externAliasDirective), o2n(g.usingDirective), opt(g.globalAttributes), o2n(g.namespaceMemberDeclaration),
+        EOF);
     g.namespaceName.is(g.namespaceOrTypeName);
     g.typeName.is(g.namespaceOrTypeName);
-    g.namespaceOrTypeName.is(
-        one2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), opt(DOT, IDENTIFIER, opt(g.typeArgumentList))),
-        opt(DOT, IDENTIFIER, opt(g.typeArgumentList)));
+    g.namespaceOrTypeName.is(o2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), DOT), IDENTIFIER,
+        opt(g.typeArgumentList));
+
   }
 
   private void types(CSharpGrammar g) {
@@ -266,7 +268,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.defaultValueExpression.is(DEFAULT, LPARENTHESIS, g.type, RPARENTHESIS);
     g.anonymousMethodExpression.is(DELEGATE, opt(g.anonymousMethodSignature), g.block);
     g.anonymousMethodSignature.is(LPARENTHESIS, opt(g.anonymousMethodParameter, o2n(COMMA, g.anonymousMethodParameter)), RPARENTHESIS);
-    g.anonymousMethodParameter.is(opt(g.parameterModifier), g.type, g.identifier);
+    g.anonymousMethodParameter.is(opt(g.parameterModifier), g.type, IDENTIFIER);
     g.unaryExpression.isOr(g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression), g.preIncrementExpression,
         g.preDecrementExpression, g.castExpression);
     g.preIncrementExpression.is(INC_OP, g.unaryExpression);
@@ -299,7 +301,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.embeddedStatement.isOr(g.block, SEMICOLON, g.expressionStatement, g.selectionStatement, g.iterationStatement, g.jumpStatement,
         g.tryStatement, g.checkedStatement, g.uncheckedStatement, g.lockStatement, g.usingStatement, g.yieldStatement);
     g.block.is(LCURLYBRACE, o2n(g.statement), RCURLYBRACE);
-    g.labeledStatement.is(g.identifier, COLON, g.statement);
+    g.labeledStatement.is(IDENTIFIER, COLON, g.statement);
     g.declarationStatement.is(or(g.localVariableDeclaration, g.localConstantDeclaration), SEMICOLON);
     g.localVariableDeclaration.is(g.type, g.localVariableDeclarator, o2n(COMMA, g.localVariableDeclarator));
     g.localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, g.localVariableInitializer));
@@ -354,7 +356,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void classes(CSharpGrammar g) {
-    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt("partial"), CLASS, g.identifier, opt(g.typeParameterList),
+    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt("partial"), CLASS, IDENTIFIER, opt(g.typeParameterList),
         opt(g.classBase), opt(g.typeParameterConstraintsClauses), g.classBody, opt(SEMICOLON));
     g.classModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC);
     g.classBase.is(COLON, or(and(g.classType, COMMA, g.interfaceTypeList), g.classType, g.interfaceTypeList));

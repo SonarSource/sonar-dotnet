@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
 public class BlockTest {
@@ -35,6 +35,7 @@ public class BlockTest {
   @Test
   public void testRealLife() {
     assertThat(p, parse("{}"));
+    assertThat(p, parse("{ \n string message = \"Hello World\"; \n }"));
   }
 
 }

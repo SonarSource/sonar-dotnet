@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.parser.CSharpGrammar;
+import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
 public class NameSpaceOrTypeNameTest {
@@ -22,18 +22,24 @@ public class NameSpaceOrTypeNameTest {
   @Before
   public void init() {
     p.setRootRule(g.namespaceOrTypeName);
-    g.typeArgumentList.mock();
-    g.qualifiedAliasMember.mock();
   }
 
   @Test
   public void testOk() {
+    g.typeArgumentList.mock();
+    g.qualifiedAliasMember.mock();
     assertThat(p, parse("MyClass"));
     assertThat(p, parse("MyClass typeArgumentList"));
     assertThat(p, parse("qualifiedAliasMember"));
     assertThat(p, parse("qualifiedAliasMember.MyClass"));
     assertThat(p, parse("qualifiedAliasMember.MyClass typeArgumentList"));
-    assertThat(p, parse("A.B.MyClass"));
+    assertThat(p, parse("A.B.C.MyClass"));
+  }
+
+  @Test
+  public void testRealLife() {
+    assertThat(p, parse("NameSpaceOrTypeNameTest"));
+    assertThat(p, parse("com.sonar.csharp.parser.rules.basic.NameSpaceOrTypeNameTest"));
   }
 
 }
