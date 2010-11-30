@@ -182,7 +182,7 @@ public class GallioSensor extends AbstractDotnetSensor {
     testCaseDetails.append("</tests-details>");
     context.saveMeasure(testFile, new Measure(CoreMetrics.TEST_DATA,
         testCaseDetails.toString()));
-    log.error("test detail : " + testCaseDetails);
+    log.debug("test detail : {}", testCaseDetails);
   }
 
   /**
