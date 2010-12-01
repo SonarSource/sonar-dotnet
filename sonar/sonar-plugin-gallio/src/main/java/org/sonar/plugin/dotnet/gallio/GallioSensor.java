@@ -34,6 +34,7 @@ import java.util.Set;
 import javax.xml.transform.TransformerException;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
@@ -44,7 +45,6 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
-import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
@@ -169,10 +169,11 @@ public class GallioSensor extends AbstractDotnetSensor {
           //.append("\"");
       boolean isError = (detail.getStatus() == TestStatus.ERROR);
       if (isError || (detail.getStatus() == TestStatus.FAILED)) {
+        
         testCaseDetails.append(">")
             .append(isError ? "<error message=\"" : "<failure message=\"")
-            .append(StringEscapeUtils.escapeXml(detail.getErrorMessage()))
-            .append("\">").append("<![CDATA[").append(detail.getStackTrace())
+            .append(detail.getFormatedErrorMessage())
+            .append("\">").append("<![CDATA[").append(detail.getFormatedStackTrace())
             .append("]]>").append(isError ? "</error>" : "</failure>")
             .append("</testcase>");
       } else {

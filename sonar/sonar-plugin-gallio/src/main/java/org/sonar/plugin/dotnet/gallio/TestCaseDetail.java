@@ -25,6 +25,9 @@ package org.sonar.plugin.dotnet.gallio;
 
 import java.io.File;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Details for a test case.
  * 
@@ -56,6 +59,10 @@ public class TestCaseDetail {
   public String getStackTrace() {
     return stackTrace;
   }
+  
+  public String getFormatedStackTrace() {
+    return StringEscapeUtils.escapeXml(stackTrace);
+  }
 
   public void setStackTrace(String stackTrace) {
     this.stackTrace = stackTrace;
@@ -63,6 +70,10 @@ public class TestCaseDetail {
 
   public String getErrorMessage() {
     return errorMessage;
+  }
+  
+  public String getFormatedErrorMessage() {
+    return StringEscapeUtils.escapeXml(StringUtils.remove(errorMessage, "\n\t"));
   }
 
   public void setErrorMessage(String errorMessage) {
