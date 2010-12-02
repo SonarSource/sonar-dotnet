@@ -33,12 +33,4 @@ public class ConstructorInitializerTest {
     assertThat(p, parse(": this ( argumentList )"));
   }
 
-  @Test
-  public void testRealLife() {
-    assertThat(p, parse(": base ( id1, id2 )"));
-    assertThat(p, parse(": base ( \"toto\" )"));
-    assertThat(p, parse(": base ( typeof( Test ) )"));
-    assertThat(p, parse(": base ( )"));
-  }
-
 }

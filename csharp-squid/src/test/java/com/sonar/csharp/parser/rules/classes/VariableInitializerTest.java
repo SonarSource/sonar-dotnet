@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.statements;
+package com.sonar.csharp.parser.rules.classes;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
@@ -14,22 +14,22 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class BlockTest {
+public class VariableInitializerTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.block);
+    p.setRootRule(g.variableInitializer);
   }
 
   @Test
   public void testOk() {
-    g.statement.mock();
-    assertThat(p, parse("{}"));
-    assertThat(p, parse("{ statement }"));
-    assertThat(p, parse("{ statement statement}"));
+    g.expression.mock();
+    g.arrayInitializer.mock();
+    assertThat(p, parse("expression"));
+    assertThat(p, parse("arrayInitializer"));
   }
-
+  
 }

@@ -159,7 +159,7 @@ public class CSharpGrammar implements Grammar {
   public Rule fieldDeclaration; // OK
   public Rule fieldModifier; // OK - tested via FieldDeclarationTest
   public Rule variableDeclarator; // OK
-  public Rule variableInitializer; // LATER
+  public Rule variableInitializer; // OK
   public Rule methodDeclaration; // LATER
   public Rule methodHeader; // OK
   public Rule methodModifier; // OK - tested via MethodHeaderTest

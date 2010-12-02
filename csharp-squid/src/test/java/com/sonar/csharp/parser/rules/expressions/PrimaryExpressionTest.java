@@ -32,9 +32,4 @@ public class PrimaryExpressionTest {
     assertThat(p, parse("primaryNoArrayCreationExpression"));
   }
 
-  @Test
-  public void testRealLife() {
-    assertThat(p, parse("typeof( void )"));
-  }
-
 }
