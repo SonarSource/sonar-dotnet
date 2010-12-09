@@ -32,6 +32,10 @@ public class CSharpMethodVisitor extends CSharpAstVisitor {
     popSourceCode();
   }
 
+  public void beforeLeaveFile(AstNode ast) {
+    
+  }
+  
   private String extractMethodSignature(AstNode astNode) {
     return astNode.findFirstChild(getCSharpGrammar().memberName).getTokenValue() + ":" + astNode.getToken().getLine();
   }

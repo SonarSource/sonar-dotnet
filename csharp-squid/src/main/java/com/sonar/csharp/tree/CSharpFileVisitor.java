@@ -25,4 +25,8 @@ public class CSharpFileVisitor extends CSharpAstVisitor {
     popSourceCode();
   }
 
+  public void beforeLeaveFile(AstNode ast) {
+    
+  }
+
 }
