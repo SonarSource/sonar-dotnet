@@ -32,7 +32,7 @@ public class SourceMonitorResultParserTest {
 
   @Test
   public void testParse() {
-    SourceMonitorResultParser parser = new SourceMonitorResultXpathParser();
+    SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
     File projectDirectory = new File("target/test-classes/solution/MessyTestSolution");
     File reportFile = new File("target/test-classes/solution/MessyTestSolution/target/metrics-report.xml");
     File moneyFile = new File("target/test-classes/solution/MessyTestSolution/MessyTestApplication/Money.cs");
@@ -41,7 +41,7 @@ public class SourceMonitorResultParserTest {
     assertEquals(5, metrics.size());
     FileMetrics firstFile = metrics.get(0);
     assertEquals(62, firstFile.getComplexity());
-    assertEquals(moneyFile.getAbsoluteFile(), firstFile.getSourcePath());
+    assertEquals(moneyFile.getAbsoluteFile(), firstFile.getSourcePath().getAbsoluteFile());
     assertEquals(3, firstFile.getCountClasses());
     assertEquals(29, firstFile.getCommentLines());
     assertEquals(1.77, firstFile.getAverageComplexity(),0.00001D);

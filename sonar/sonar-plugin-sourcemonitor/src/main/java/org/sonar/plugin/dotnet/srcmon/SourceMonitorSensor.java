@@ -87,7 +87,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
   @Override
   public void analyse(Project project, SensorContext context) {
     File report = findReport(project, SourceMonitorPlugin.SOURCE_MONITOR_REPORT);
-    SourceMonitorResultParser parser = new SourceMonitorResultXpathParser();
+    SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
     File basedir = project.getFileSystem().getBasedir();
     List<FileMetrics> files = parser.parse(basedir, report);
 

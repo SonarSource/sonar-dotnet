@@ -52,6 +52,7 @@ import org.xml.sax.InputSource;
  * Parses a source monitor result file
  * 
  * @author Jose CHILLAN May 5, 2009
+ * @deprecated use instead the stax version {@link SourceMonitorResultXpathParser}
  */
 public class SourceMonitorResultXpathParser implements SourceMonitorResultParser {
 

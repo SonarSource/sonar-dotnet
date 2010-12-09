@@ -43,7 +43,7 @@ import org.sonar.plugin.dotnet.srcmon.model.FileMetrics;
 import org.sonar.plugin.dotnet.srcmon.model.MethodMetric;
 
 /**
- * Parses a source monitor result file.
+ * Parses a source monitor result file using a STAX parser
  * 
  */
 public class SourceMonitorResultStaxParser implements SourceMonitorResultParser {
@@ -68,7 +68,8 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     /** Statements per Method */
     M7, 
     /** Average Complexity */
-    M14
+    M14,
+    M8,M9,M10,M11,M12,M13
   }
 
   private enum MethodMetricEnum {
@@ -226,7 +227,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
         try {
           metricId = FileMetricEnum.valueOf(id);
         } catch (IllegalArgumentException iae) {
-          // Unsupported metric
+          log.error("parsing error : " + id, iae);
           continue;
         }
         switch (metricId) {
@@ -256,7 +257,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
           fileMetric.setCountMethodStatements(getIntMetric(metricCursor));
           break;
         case M14:
-          fileMetric.setAverageComplexity(getIntMetric(metricCursor));
+          fileMetric.setAverageComplexity(getDoubleMetric(metricCursor));
           break;
         default:
           break;
@@ -316,11 +317,11 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     while ((childEvent = childCursor.getNext()) != null) {
       if (childEvent.compareTo(SMEvent.START_ELEMENT) == 0) {
         MethodMetricEnum methodMetricEnum;
+        String metricName = childCursor.getLocalName().toUpperCase();
         try {
-          methodMetricEnum = MethodMetricEnum.valueOf(childCursor
-              .getLocalName());
+          methodMetricEnum = MethodMetricEnum.valueOf(metricName);
         } catch (IllegalArgumentException iae) {
-          // unsupported method metric
+          log.error("unsupported method metric : " + metricName, iae);
           continue;
         }
         int metricValue = getIntMetric(childCursor);
@@ -378,7 +379,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
         result = (int) Double.parseDouble(value);
       }
     } catch (NumberFormatException nfe) {
-      // Nothing
+      log.error("int parsing error : " + value, nfe);
     }
     return result;
   }
@@ -398,7 +399,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
         result = Double.parseDouble(value);
       }
     } catch (NumberFormatException nfe) {
-      // Nothing
+      log.error("double parsing error : " + value, nfe);
     }
     return result;
   }
