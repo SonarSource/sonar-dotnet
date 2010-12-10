@@ -41,7 +41,7 @@ public class SourceMonitorResultParserTest {
     assertEquals(5, metrics.size());
     FileMetrics firstFile = metrics.get(0);
     assertEquals(62, firstFile.getComplexity());
-    assertEquals(moneyFile.getAbsoluteFile(), firstFile.getSourcePath().getAbsoluteFile());
+    assertEquals(moneyFile.getName(), firstFile.getSourcePath().getName());
     assertEquals(3, firstFile.getCountClasses());
     assertEquals(29, firstFile.getCommentLines());
     assertEquals(1.77, firstFile.getAverageComplexity(),0.00001D);
