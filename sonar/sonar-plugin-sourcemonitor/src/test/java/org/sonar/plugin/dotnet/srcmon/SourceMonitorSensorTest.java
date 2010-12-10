@@ -90,8 +90,14 @@ public class SourceMonitorSensorTest {
 
     @Override
     public boolean matches(Object argument) {
-      Resource<?> res = (Resource<?>) argument;
-      return !StringUtils.containsIgnoreCase(res.getLongName(), "money");
+      final boolean result;
+      if (argument instanceof Resource<?>) {
+        Resource<?> res = (Resource<?>) argument;
+        result = !StringUtils.containsIgnoreCase(res.getLongName(), "money");
+      } else {
+        result = false;
+      }
+      return result; 
     }
    
  }

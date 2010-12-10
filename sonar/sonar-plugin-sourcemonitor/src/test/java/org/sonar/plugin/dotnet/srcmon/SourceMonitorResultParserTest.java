@@ -23,6 +23,7 @@ package org.sonar.plugin.dotnet.srcmon;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -31,7 +32,7 @@ import org.sonar.plugin.dotnet.srcmon.model.FileMetrics;
 public class SourceMonitorResultParserTest {
 
   @Test
-  public void testParse() {
+  public void testParse() throws IOException {
     SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
     File projectDirectory = new File("target/test-classes/solution/MessyTestSolution");
     File reportFile = new File("target/test-classes/solution/MessyTestSolution/target/metrics-report.xml");
@@ -41,7 +42,7 @@ public class SourceMonitorResultParserTest {
     assertEquals(5, metrics.size());
     FileMetrics firstFile = metrics.get(0);
     assertEquals(62, firstFile.getComplexity());
-    assertEquals(moneyFile.getName(), firstFile.getSourcePath().getName());
+    assertEquals(moneyFile.getCanonicalPath(), firstFile.getSourcePath().getCanonicalPath());
     assertEquals(3, firstFile.getCountClasses());
     assertEquals(29, firstFile.getCommentLines());
     assertEquals(1.77, firstFile.getAverageComplexity(),0.00001D);
