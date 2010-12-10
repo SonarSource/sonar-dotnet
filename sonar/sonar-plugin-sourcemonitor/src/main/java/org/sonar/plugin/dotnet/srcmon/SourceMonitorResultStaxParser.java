@@ -181,10 +181,10 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     fileMetric.setProjectDirectory(projectDirectory);
     fileMetric.setClassName(className);
     fileMetric.setNamespace(namespace);
-    File sourceFile = new File(projectDirectory, rawFileName);
-    fileMetric.setSourcePath(sourceFile);
-
+    
     File path = toFullPath(rawFileName);
+    fileMetric.setSourcePath(path);
+    
     int countBlankLines = BlankLineCounter.countBlankLines(path);
     fileMetric.setCountBlankLines(countBlankLines);
 
