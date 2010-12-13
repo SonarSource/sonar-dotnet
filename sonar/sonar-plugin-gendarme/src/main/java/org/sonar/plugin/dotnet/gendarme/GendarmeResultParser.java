@@ -21,7 +21,6 @@
 package org.sonar.plugin.dotnet.gendarme;
 
 import java.io.File;
-import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,7 +35,6 @@ import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
-import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
@@ -90,7 +88,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
       String location = getNodeContent(issueElement, "location");
 
       final String filePath;
-      final String lineNumber;
+      final Integer lineNumber;
 
       if (StringUtils.isEmpty(source)
           || StringUtils.contains(source, "debugging symbols unavailable")) {
@@ -112,7 +110,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
               + "Properties"
               + File.separator
               + "AssemblyInfo.cs";
-          lineNumber = "";
+          lineNumber = null;
         } else {
           if (StringUtils.containsNone(location, " ")) {
             // we will try to find a cs file that match with the class name
@@ -137,7 +135,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
               continue;
             } else {
               filePath = sourceFile.getFile().getAbsolutePath();
-              lineNumber = "";
+              lineNumber = null;
             }
           } else {
             // this one will be ignored
@@ -147,16 +145,9 @@ public class GendarmeResultParser extends AbstractXmlParser {
           }
         }
       } else {
-        filePath = StringUtils.substringBefore(source, "(");
-        
-        String lineNumberInfo = StringUtils.substringBetween(source, "(", ")");
-        if (StringUtils.contains(lineNumberInfo, ',')) {
-          // something like (123,34)
-          lineNumber = StringUtils.substringBefore(lineNumberInfo, ",");
-        } else {
-          // something like (~123)
-          lineNumber = StringUtils.substring(lineNumberInfo, 1);
-        }
+        DefectLocation defectLocation = DefectLocation.parse(source);
+        filePath = defectLocation.getPath();
+        lineNumber = defectLocation.getLineNumber();
 
         //
         // we do not care about violations in generated files
@@ -167,7 +158,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
         }
       }
 
-      if (StringUtils.isEmpty(lineNumber)
+      if (lineNumber==null
           && StringUtils.contains(location, "::")) {
         // append a more specific location information
         // to the message
@@ -178,7 +169,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
       }
 
       Resource<?> resource = getResource(filePath);
-      Integer line = getIntValue(lineNumber);
+      
       Rule rule = rulesManager.getPluginRule(GendarmePlugin.KEY, key);
       if (rule == null || resource == null) {
         // We skip the rules that were not registered
@@ -186,7 +177,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
       }
       ActiveRule activeRule = profile.getActiveRule(GendarmePlugin.KEY, key);
       Violation violation = new Violation(rule, resource);
-      violation.setLineId(line);
+      violation.setLineId(lineNumber);
       violation.setMessage(message);
       if (activeRule != null) {
         violation.setPriority(activeRule.getPriority());
@@ -223,20 +214,4 @@ public class GendarmeResultParser extends AbstractXmlParser {
     return fileResource;
   }
 
-  /**
-   * Extracts the line number.
-   * 
-   * @param lineStr
-   * @return
-   */
-  protected Integer getIntValue(String lineStr) {
-    if (StringUtils.isBlank(lineStr)) {
-      return null;
-    }
-    try {
-      return (int) ParsingUtils.parseNumber(lineStr);
-    } catch (ParseException ignore) {
-      return null;
-    }
-  }
 }
