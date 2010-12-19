@@ -61,7 +61,7 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
    * 
    * @parameter expression="${gendarme.directory}"
    */
-  private File gendarmeDirectory;
+  private String gendarmeDirectoryPath;
 
 
   /**
@@ -82,7 +82,7 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
   /**
    * Path to the gendarme config file that specifies rule settings
    * 
-   * @parameter alias="${gendarmeConfig}"
+   * @parameter expression="${gendarme.config}"
    */
   private String gendarmeConfigFile;
   
@@ -244,8 +244,11 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
    * @throws MojoExecutionException
    */
   private void prepareExecutable() throws MojoExecutionException {
-    if (gendarmeDirectory == null) {
+    final File gendarmeDirectory; 
+    if (StringUtils.isEmpty(gendarmeDirectoryPath)) {
       gendarmeDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "Gendarme");
+    } else{
+      gendarmeDirectory = new File(gendarmeDirectoryPath);
     }
     executableFile = new File(gendarmeDirectory, gendarmeExecutable);
   }

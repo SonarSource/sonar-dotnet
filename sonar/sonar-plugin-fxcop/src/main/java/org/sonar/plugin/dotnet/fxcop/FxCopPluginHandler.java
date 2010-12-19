@@ -84,7 +84,7 @@ public class FxCopPluginHandler extends AbstractDotNetMavenPluginHandler {
     File configFile = project.getFileSystem().writeToWorkingDirectory(
         fxCopConfiguration, FX_COP_FILE);
     // Defines the configuration file
-    plugin.setParameter("fxCopConfigFile", configFile.getAbsolutePath());
+    plugin.setParameter("fxCopConfigPath", configFile.getAbsolutePath());
   }
   
 }

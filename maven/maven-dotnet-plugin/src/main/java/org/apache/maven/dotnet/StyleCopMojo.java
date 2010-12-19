@@ -65,14 +65,17 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
    * 
    * @parameter expression="${stylecop.directory}"
    */
+  private String styleCopRootPath;
+  
+  /** Stylecop root folder */
   private File styleCopRoot;
 
   /**
    * Name of the file that contains the StyleCop rules to use
    * 
-   * @parameter alias="${styleCopConfigFile}"
+   * @parameter expression="${stylecop.config}"
    */
-  private File styleCopConfigFile;
+  private String styleCopConfigPath;
 
   /**
    * Name of the generated StyleCop report
@@ -179,9 +182,16 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
 
     File reportDirectory = getReportDirectory();
     // Defines the rule file if necessary
-    if (styleCopConfigFile == null) {
+    final File styleCopConfigFile;
+    if (StringUtils.isEmpty(styleCopConfigPath)) {
       styleCopConfigFile = extractResource(reportDirectory, STYLECOP_RULE_FILE,
           STYLECOP_RULE_FILE, "stylecop rule file");
+    } else {
+      styleCopConfigFile = new File(styleCopConfigPath);
+      if (!styleCopConfigFile.exists()) {
+        throw new MojoExecutionException(
+            "Could not find the stylecop project file: " + styleCopConfigFile);
+      }
     }
 
     // Initializes the parameters
@@ -201,7 +211,7 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
       log.debug(" - Config file        : " + styleCopConfigFile);
       log.debug(" - Generated report   : " + reportFile);
       log.debug(" - Excluded files     : " + Arrays.toString(ignores));
-      log.debug(" - StyleCop directory : " + styleCopRoot);
+      log.debug(" - StyleCop directory : " + styleCopRootPath);
     }
 
     // Generates the build file
@@ -254,8 +264,10 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
    * @throws MojoExecutionException
    */
   private void extractExecutable() throws MojoExecutionException {
-    if (styleCopRoot == null) {
+    if (StringUtils.isEmpty(styleCopRootPath)) {
       styleCopRoot = extractFolder(RESOURCE_DIR, EXPORT_PATH, "StyleCop");
+    } else {
+      styleCopRoot = new File(styleCopRootPath);
     }
   }
 }

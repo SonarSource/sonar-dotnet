@@ -98,6 +98,6 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
     File configFile = project.getFileSystem().writeToWorkingDirectory(
         styleCopConfiguration, STYLE_COP_FILE);
     // Defines the configuration file
-    plugin.setParameter("styleCopConfigFile", configFile.getAbsolutePath());
+    plugin.setParameter("styleCopConfigPath", configFile.getAbsolutePath());
   }
 }

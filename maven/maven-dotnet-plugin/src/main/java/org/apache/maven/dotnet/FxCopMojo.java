@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -57,15 +58,18 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    * 
    * @parameter expression="${fxcop.directory}"
    */
+  private String fxCopDirectoryPath;
+  
   private File fxCopDirectory;
   
   /**
-   * Specifies an additional directory to search for assembly dependencies. Useful
-   * in particular when assembly bindings have been used. 
+   * Specifies additional directories to search for assembly dependencies. Useful
+   * in particular when assembly bindings have been used. ';' is used as a 
+   * delimiter between paths.
    * 
-   * @parameter expression="${fxcop.additionalDirectory}"
+   * @parameter expression="${fxcop.additionalDirectories}"
    */
-  private File[] fxCopAdditionalDirectories;
+  private String fxCopAdditionalDirectoryPaths;
 
   /**
    * Name of the FxCop command line executable.
@@ -77,8 +81,10 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
   /**
    * Name of the FxCop configuration that contains the rules to use
    * 
-   * @parameter alias="${fxCopConfigFile}"
+   * @parameter  expression="${fxcop.config}"
    */
+  private String fxCopConfigPath;
+  
   private File fxCopConfigFile;
 
   /**
@@ -217,10 +223,14 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
       commandArguments.add("/f:" + toCommandPath(checkedAssembly));
     }
     // Add additional directories
-    log.debug("- Additional directories :");
-    for (File additionalDirectory : fxCopAdditionalDirectories) {
-      log.debug("   o " + additionalDirectory);
-      commandArguments.add("/d:" + toCommandPath(additionalDirectory));
+    if (!StringUtils.isEmpty(fxCopAdditionalDirectoryPaths)) {
+      log.debug("- Additional directories :");
+      String[] pathArray = StringUtils.split(fxCopAdditionalDirectoryPaths, ';');
+      for (String path : pathArray) {
+        File additionalDirectory = new File(path);
+        log.debug("   o " + additionalDirectory);
+        commandArguments.add("/d:" + toCommandPath(additionalDirectory));
+      }
     }
 
     commandArguments.add("/gac");
@@ -235,18 +245,21 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    * @throws MojoExecutionException
    */
   private void prepareExecutable() throws MojoExecutionException {
-    if (fxCopDirectory == null) {
+    if (StringUtils.isEmpty(fxCopDirectoryPath)) {
       fxCopDirectory = extractFolder(RESOURCE_DIR, EXPORT_PATH, "FxCop");
+    } else {
+      fxCopDirectory = new File(fxCopDirectoryPath);
     }
     executablePath = new File(fxCopDirectory, fxCopExecutable);
   }
 
   protected void prepareFxCopProject() throws MojoExecutionException {
-    if (fxCopConfigFile == null) {
+    if (StringUtils.isEmpty(fxCopConfigPath)) {
       File reportDirectory = getReportDirectory();
       fxCopConfigFile = extractResource(reportDirectory,
           DEFAULT_FX_COP_PROJECT, DEFAULT_FX_COP_PROJECT, "fxcop project");
     } else {
+      fxCopConfigFile = new File(fxCopConfigPath);
       if (!fxCopConfigFile.exists()) {
         throw new MojoExecutionException(
             "Could not find the fxcop project file: " + fxCopConfigFile);
