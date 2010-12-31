@@ -46,6 +46,7 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-plugin-dotnet-core</artifactId>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>

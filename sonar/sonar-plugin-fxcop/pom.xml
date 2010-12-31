@@ -22,17 +22,6 @@
         <pluginClass>org.sonar.plugin.dotnet.fxcop.FxCopPlugin</pluginClass>
       </configuration>
     </plugin>
-     <!-- <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Plugin-Class>org.sonar.plugin.dotnet.fxcop.FxCopPlugin</Plugin-Class>
-            </manifestEntries>
-          </archive>
-        </configuration>
-      </plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -54,6 +43,7 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-plugin-dotnet-core</artifactId>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
