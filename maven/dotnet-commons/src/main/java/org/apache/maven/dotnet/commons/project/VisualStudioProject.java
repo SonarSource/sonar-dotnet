@@ -137,7 +137,7 @@ public class VisualStudioProject {
    * @return
    */
   public File getDebugArtifact() {
-    String generatedFileName = gerArtifactName();
+    String generatedFileName = getArtifactName();
     File result = new File(debugOutputDir, generatedFileName);
     return result;
   }
@@ -148,7 +148,7 @@ public class VisualStudioProject {
    * @return
    */
   public File getReleaseArtifact() {
-    String generatedFileName = gerArtifactName();
+    String generatedFileName = getArtifactName();
     File result = new File(releaseOutputDir, generatedFileName);
     return result;
   }
@@ -158,7 +158,7 @@ public class VisualStudioProject {
    * 
    * @return
    */
-  private String gerArtifactName() {
+  public String getArtifactName() {
     String generatedFileName = realAssemblyName + "." + getExtension();
     return generatedFileName;
   }
