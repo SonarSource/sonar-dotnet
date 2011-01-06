@@ -82,4 +82,18 @@ public class GendarmeResultParserTest {
     verify(context,atLeast(31)).saveViolation(any(Violation.class));
   }
 
+  @Test
+  public void testCanSplitSourcesInPathAndLineNumber() {
+    Object[][] tests = {
+            {new String[] {"C:\\Workspace (Dev)\\Test.cs", ""}, "C:\\Workspace (Dev)\\Test.cs"},
+            {new String[] {"C:\\Workspace (Dev)\\Test.cs", "12"}, "C:\\Workspace (Dev)\\Test.cs(~12)"},
+            {new String[] {"C:\\Workspace (Dev)\\Test.cs", "12"}, "C:\\Workspace (Dev)\\Test.cs(12,15)"},
+            {new String[] {"Test.cs", "20"}, "Test.cs(~20)"},
+            {new String[] {"C:\\Build Env\\Test.cs", "20"}, "C:\\Build Env\\Test.cs(20,21)"},
+    };
+    for (Object[] test : tests) {
+      assertArrayEquals(test[1].toString(), (String[])test[0], 
+              parser.splitIntoPathAndLineNumber(test[1].toString()));
+    }
+  }
 }
