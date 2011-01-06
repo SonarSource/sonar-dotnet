@@ -536,6 +536,11 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
     }
     getLog().debug("Exporting files for " + application);
     String contentFile = resourceDir + "/" + CONTENT_FILE_NAME;
+    
+    if (contentFile==null) {
+      throw new MojoExecutionException(application + " binaries were not found");
+    }
+    
     InputStream contentResource = getClassLoader().getResourceAsStream(
         contentFile);
     LineNumberReader reader = new LineNumberReader(new InputStreamReader(
