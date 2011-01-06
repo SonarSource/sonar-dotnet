@@ -27,6 +27,7 @@ import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
 import static org.sonar.plugin.dotnet.coverage.Constants.*;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -54,8 +55,8 @@ import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.coverage.model.SourceLine;
 
 /**
- * Collects the results from a PartCover report. Most of the work is delegate
- * to {@link CoverageResultParser}.
+ * Collects the results from a PartCover report. Most of the work is delegate to
+ * {@link CoverageResultParser}.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
@@ -81,15 +82,16 @@ public class CoverageSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    
+
     final String reportFileName;
     if (COVERAGE_REUSE_MODE.equals(getCoverageMode(project))) {
-      reportFileName = project.getConfiguration().getString(COVERAGE_REPORT_KEY);
+      reportFileName = project.getConfiguration()
+          .getString(COVERAGE_REPORT_KEY);
       log.warn("Using reuse report mode for the dotnet coverage plugin");
     } else {
       reportFileName = COVERAGE_REPORT_XML;
     }
-    
+
     File dir = getReportsDirectory(project);
     File report = new File(dir, reportFileName);
 
@@ -97,11 +99,16 @@ public class CoverageSensor extends AbstractDotnetSensor {
       log.info("No Coverage report found for path {}", report);
       return;
     }
-    
+
     CoverageResultParser parser = new CoverageResultParser();
+
+    // Configure project exclusions, to avoid that excluded files
+    // are counted in summary reports.
+    parser.setExclusionPatterns(project.getExclusionPatterns());
+
     // We parse the file
     parser.parse(report);
-    
+
     List<FileCoverage> files = parser.getFiles();
     List<ProjectCoverage> projects = parser.getProjects();
 
@@ -207,7 +214,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
         PersistenceMode.DATABASE);
     return hitData;
   }
-  
+
   /**
    * Converts a number to a percentage
    * 
@@ -236,15 +243,17 @@ public class CoverageSensor extends AbstractDotnetSensor {
     }
     return pluginHandlerReturned;
   }
-  
+
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     String mode = getCoverageMode(project);
-    return super.shouldExecuteOnProject(project) && !COVERAGE_SKIP_MODE.equalsIgnoreCase(mode);
+    return super.shouldExecuteOnProject(project)
+        && !COVERAGE_SKIP_MODE.equalsIgnoreCase(mode);
   }
 
   private String getCoverageMode(Project project) {
-    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY, COVERAGE_DEFAULT_MODE);
+    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY,
+        COVERAGE_DEFAULT_MODE);
     return mode;
   }
 }

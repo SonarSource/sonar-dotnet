@@ -23,19 +23,10 @@
  */
 package org.sonar.plugin.dotnet.coverage;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.WildcardPattern;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
 import org.sonar.plugin.dotnet.coverage.model.CoveragePoint;
@@ -43,6 +34,11 @@ import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * A parser for the PartCover XML result file. It supports both version 2.2 and
@@ -62,6 +58,7 @@ public class CoverageResultParser extends AbstractXmlParser {
   private final Map<String, ProjectCoverage> projects;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy strategy;
+  private WildcardPattern[] exclusionPatterns = new WildcardPattern[0];
 
   /**
    * Constructs a @link{PartCoverResultParser}.
@@ -76,6 +73,26 @@ public class CoverageResultParser extends AbstractXmlParser {
     parsingStrategies.add(new PartCover22ParsingStrategy());
     parsingStrategies.add(new PartCover4ParsingStrategy());
     parsingStrategies.add(new NCover3ParsingStrategy());
+  }
+
+  /**
+   * Sets ANT patterns that are used to exclude certain files from the report.
+   * 
+   * @param exclusionPatterns
+   *          A list of ANT styled exclusion patterns.
+   */
+  public void setExclusionPatterns(String... exclusionPatterns) {
+    this.exclusionPatterns = WildcardPattern.create(exclusionPatterns);
+  }
+
+  boolean isSourceFileIncluded(String absoluteSourceFilePath) {
+    for (WildcardPattern pattern : exclusionPatterns) {
+      if (pattern.match(absoluteSourceFilePath)) {
+        log.info("Excluding coverage reports from: " + absoluteSourceFilePath);
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -134,8 +151,12 @@ public class CoverageResultParser extends AbstractXmlParser {
     fileCoverage = this.sourceFiles.get(fileId);
 
     if (fileCoverage == null) {
-      // No file associated (this should never occur for a consistent result);
-      log.info("Method coverage data not attached to any file");
+      if (fileId == null) {
+        // No file associated (this should never occur for a consistent result);
+        // Note: Lowering to debug, as it seems to happen when system methods
+        // are called (and were not excluded)
+        log.debug("Method coverage data not attached to any file");
+      }
       return;
     }
 
@@ -202,8 +223,7 @@ public class CoverageResultParser extends AbstractXmlParser {
     Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies
         .iterator();
     while (strategyIterator.hasNext() && strategy == null) {
-      AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator
-          .next();
+      AbstractParsingStrategy strategy = strategyIterator.next();
       if (strategy.isCompatible(root)) {
         this.strategy = strategy;
       }
@@ -231,6 +251,9 @@ public class CoverageResultParser extends AbstractXmlParser {
       File sourceFile;
       try {
         sourceFile = new File(filePath).getCanonicalFile();
+        if (!isSourceFileIncluded(sourceFile.getPath()))
+          continue;
+
         FileCoverage fileCoverage = new FileCoverage(sourceFile);
         sourceFiles.put(id, fileCoverage);
       } catch (IOException e) {

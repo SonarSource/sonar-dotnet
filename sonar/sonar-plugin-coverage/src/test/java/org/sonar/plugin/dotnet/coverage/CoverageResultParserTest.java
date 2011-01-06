@@ -154,7 +154,24 @@ public class CoverageResultParserTest {
 		checkParsing(params);
 	}
 	
-
+  @Test
+  public void testCanUseExclusionFilters() {
+    parser.setExclusionPatterns("**/*.xy", "**/*Generated*", "*.flat");
+    Object[][] tests = {
+            {false, "test.xy"},
+            {false, "a/test.xy"},
+            {false, "a\\test.xy"},
+            {false, "a/b/test.xy"},
+            {false, "a/b/Generated.Source.cs"},
+            {false, "a/b/designer.Generated.Source.cs"},
+            {true, "a/b/RegularClass.cs"},
+            {true, "a/b/RegularFile.flat"},
+            {false, "RegularFile.flat"},
+    };
+    for (Object[] test : tests) {
+      assertEquals(test[1].toString(), test[0], parser.isSourceFileIncluded(test[1].toString()));
+    }
+  }
 	
 	private void checkParsing(ParsingParameters parameters) {
 	  File file = findFile(parameters.report);
