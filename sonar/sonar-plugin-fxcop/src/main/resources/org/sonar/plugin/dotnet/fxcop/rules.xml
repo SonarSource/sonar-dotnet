@@ -20,6 +20,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
 
 -->
+<!-- 
+Microsoft Public License (Ms-PL)
+This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
+1. Definitions
+The terms "reproduce," "reproduction," "derivative works," and "distribution" have the same meaning here as under U.S. copyright law.
+A "contribution" is the original software, or any additions or changes to the software.
+A "contributor" is any person that distributes its contribution under this license.
+"Licensed patents" are a contributor's patent claims that read directly on its contribution.
+2. Grant of Rights
+(A) Copyright Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free copyright license to reproduce its contribution, prepare derivative works of its contribution, and distribute its contribution or any derivative works that you create.
+(B) Patent Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under its licensed patents to make, have made, use, sell, offer for sale, import, and/or otherwise dispose of its contribution in the software or derivative works of the contribution in the software.
+3. Conditions and Limitations
+(A) No Trademark License- This license does not grant you rights to use any contributors' name, logo, or trademarks.
+(B) If you bring a patent claim against any contributor over patents that you claim are infringed by the software, your patent license from such contributor to the software ends automatically.
+(C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
+(D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
+(E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
+ -->
 
 <rules>
    <rule key="DoNotDeclareStaticMembersOnGenericTypes">
@@ -1717,6 +1735,522 @@
 <category name="Usability"/>
 <description><![CDATA[Call GC.SuppressFinalize to suppress finalization of your instance once Dispose has been called. Objects that implement IDisposable should call SuppressFinalize from the IDisposable.Dispose method to prevent the garbage collector from calling Object.Finalize on an object that does not require it.<br/>
 <a href="http://msdn.microsoft.com/library/ms182269(VS.100).aspx">msdn help page</a>
+]]></description>
+</rule>
+
+
+
+
+
+<rule key="MarkVerbHandlersWithValidateAntiforgeryToken">
+<name>MarkVerbHandlersWithValidateAntiforgeryToken</name>
+<configKey>MarkVerbHandlersWithValidateAntiforgeryToken@$(FxCopDir)\Rules\AspNetMvcSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that verifies that if the ValidateAntiforgeryTokenAttribute is used to protect against Potential CSRF attack in MVC.<br/>The controller action must use the ValidateAntiForgeryTokenAttribute attribute. Info: {0}]]></description>
+</rule>
+<rule key="ControllerActionShouldValidateInput">
+<name>ControllerActionShouldValidateInput</name>
+<configKey>ControllerActionShouldValidateInput@$(FxCopDir)\Rules\AspNetMvcSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies if the ValidateInputAttribute is used properly to protect against XSS attacks.<br/>The ValidateRequestAttribute must be removed or set to true to enable request validation.]]></description>
+</rule>
+<rule key="EnableEventValidationShouldBeTrue">
+<name>EnableEventValidationShouldBeTrue</name>
+<configKey>EnableEventValidationShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableEventValidation is disabled on a certain page.<br/>The EnableEventValidation page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/system.web.ui.page.enableeventvalidation.aspx for more information]]></description>
+</rule>
+<rule key="ValidateRequestShouldBeEnabled">
+<name>ValidateRequestShouldBeEnabled</name>
+<configKey>ValidateRequestShouldBeEnabled@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the ValidateRequest is disabled on a certain page.<br/>The ValidateRequest page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/ydy4x04a.aspx for more information]]></description>
+</rule>
+<rule key="ViewStateEncryptionModeShouldBeAlways">
+<name>ViewStateEncryptionModeShouldBeAlways</name>
+<configKey>ViewStateEncryptionModeShouldBeAlways@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the ViewStateEncryptionMode is not set to Never on a certain page.<br/>The ViewStateEncryptionMode page property needs to be set to Always. Refer to http://msdn.microsoft.com/en-us/library/system.web.configuration.pagessection.viewstateencryptionmode.aspx for more information]]></description>
+</rule>
+<rule key="EnableViewStateMacShouldBeTrue">
+<name>EnableViewStateMacShouldBeTrue</name>
+<configKey>EnableViewStateMacShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableViewStateMac is not set to false on a certain page.<br/>The EnableViewStateMac page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/system.web.configuration.pagessection.enableviewstatemac.aspx for more information]]></description>
+</rule>
+<rule key="EnableViewStateShouldBeTrue">
+<name>EnableViewStateShouldBeTrue</name>
+<configKey>EnableViewStateShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableViewStateRule is not set to false on a certain page.<br/>The EnableViewStateRule page property needs to be set to true or the page cannot benefit from ViewStateUserKey protections against CSRF attacks.]]></description>
+</rule>
+<rule key="ViewStateUserKeyShouldBeSet">
+<name>ViewStateUserKeyShouldBeSet</name>
+<configKey>ViewStateUserKeyShouldBeSet@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies if the ViewStateEncryptionMode directive is not set to Never  on a certain page.<br/>The ViewStateUserKey page property on {0} needs to be set to a unique identifier. Refer to http://msdn.microsoft.com/en-us/library/system.web.ui.page.viewstateuserkey.aspx for more information]]></description>
+</rule>
+<rule key="DebugCompilationMustBeDisabled">
+<name>DebugCompilationMustBeDisabled</name>
+<configKey>DebugCompilationMustBeDisabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that debug compilation is turned off. This eliminates potential performance and security issues related to debug code enabled and additional extensive error messages being returned.<br/>
+      The violation can be fixed by configuring the system.web.compilation debug attribute to false or by leaving the default value.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;compilation debug="false"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5400:DebugCompilationMustBeDisabled", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    ]]></description>
+</rule>
+<rule key="CustomErrorPageShouldBeSpecified">
+<name>CustomErrorPageShouldBeSpecified</name>
+<configKey>CustomErrorPageShouldBeSpecified@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that the CustomErrors section is configured to have a default url for redirecting uses in case of error.<br/>
+      The violation can be fixed by setting the system.web.customErrors mode attribute to On or RemoteOnly.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;customErrors mode="On" defaultRedirect="/Error.aspx"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5401:CustomErrorPageShouldBeSpecified", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/h0hfz6fc(vs.71).aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="FormAuthenticationShouldNotContainFormAuthenticationCredentials">
+<name>FormAuthenticationShouldNotContainFormAuthenticationCredentials</name>
+<configKey>FormAuthenticationShouldNotContainFormAuthenticationCredentials@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that no credentials are specified under the form authentication configuration.<br/>
+      The violation can be resolved by removing the system.web.authentication.forms.credential nodes.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms&gt;
+   &lt;/forms&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5402:FormAuthenticationShouldNotContainFormAuthenticationCredentials, Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/ms998367.aspx ">msdn help page</a>
+]]></description>
+</rule>
+<rule key="EnableCrossAppRedirectsShouldBeTrue">
+<name>EnableCrossAppRedirectsShouldBeTrue</name>
+<configKey>EnableCrossAppRedirectsShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.authentication.forms enableCrossAppRedirects is set to true. The settings indicate if the user should be redirected to another application url after the authentication process. If the setting is false, the authentication process will not allow redirection to another application or host. This helps prevent an attacker to force the user to be redirected to another site during the authentication process. This attack is commonly called Open redirect and is used mostly during phishing attacks.<br/>
+      The violation can be fixed by leaving the system.web.authentication.forms enableCrossAppRedirects to its default value or by setting it to false.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms loginUrl="~/login.aspx" protection="All" requireSSL="true" enableCrossAppRedirects="false"/&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5403:EnableCrossAppRedirectsShouldBeTrue, Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.formsauthentication.enablecrossappredirects.aspx ">msdn help page</a>
+]]></description>
+</rule>
+<rule key="FormAuthenticationProtectionShouldBeAll">
+<name>FormAuthenticationProtectionShouldBeAll</name>
+<configKey>FormAuthenticationProtectionShouldBeAll@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the protection attribute on the system.web.authentication.forms protection is set to All which specifies that the application use both data validation and encryption to help protect the authentication cookie.<br/>
+      The violation can be fixed by leaving the system.web.authentication.forms protection to its default value or by setting it to All.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms loginUrl="~/login.aspx" protection="All" requireSSL="true"/&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5404:FormAuthenticationProtectionShouldBeAll, Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/ms998367.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="FormAuthenticationRequireSSLShouldBeTrue">
+<name>FormAuthenticationRequireSSLShouldBeTrue</name>
+<configKey>FormAuthenticationRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the requireSSL attribute on the system.web.authentication.forms configuration element is set to True which force the authentication cookie to specify the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
+      The violation can be fixed by setting the system.web.authentication.forms requireSSL to true.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms loginUrl="~/login.aspx" protection="All" requireSSL="true"/&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5405:FormAuthenticationRequireSSLShouldBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.formsauthentication.requiressl.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="FormAuthenticationSlidingExpirationShouldBeFalse">
+<name>FormAuthenticationSlidingExpirationShouldBeFalse</name>
+<configKey>FormAuthenticationSlidingExpirationShouldBeFalse@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that if the system.web.authentication.forms slidingExpiration be set to false when the site is being serviced over HTTP. This will force the authentication cookie to have a fix timeout value instead of being refreshed by each request. Since the cookie will traverse over clear text network and can be sniffed, having a fix timeout value on the cookie will limit the amount of time the cookie can be replayed. If the cookie is traversing over HTTPS, it is less likely to be intercepted and having the slidingExpiration setting to True will cause the timeout to be refreshed after each request which gives a better user experience.<br/>
+      The violation can be fixed by setting the system.web.authentication.forms slidingExpiration to false if the application is not being services over HTTPS.
+      
+Examples:
+1. system.web.authentication.forms requireSSL is set to True and slidingExpiration is set to False
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms loginUrl="~/login.aspx" protection="All" requireSSL="true" slidingExpiration="false"/&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+2. system.web.authentication.forms requireSSL is set to True and slidingExpiration is set to True
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms">
+   &lt;forms loginUrl="~/login.aspx" protection="All" requireSSL="true" slidingExpiration="true"/>
+  &lt;/authentication>
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+3. system.web.authentication.forms requireSSL is set to its default value, False, and slidingExpiration is set to false
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authentication mode="Forms"&gt;
+   &lt;forms loginUrl="~/login.aspx" protection="All" slidingExpiration="false"/&gt;
+  &lt;/authentication&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5406:FormAuthenticationSlidingExpirationShouldBeFalse, Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.formsauthentication.requiressl.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="HttpCookiesHttpOnlyCookiesShouldBeTrue">
+<name>HttpCookiesHttpOnlyCookiesShouldBeTrue</name>
+<configKey>HttpCookiesHttpOnlyCookiesShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpCookies httpOnlyCookies configuration is set to True which force all cookies to be sent with the HttpOnly attribute.<br/>
+      The violation can be fixed by setting the system.web.httpCookies httpOnlyCookies to true.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;httpCookies requireSSL="true" httpOnlyCookies="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5407:HttpCookiesHttpOnlyCookiesShouldBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/ms228262.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="HttpCookiesRequireSSLShouldBeTrue">
+<name>HttpCookiesRequireSSLShouldBeTrue</name>
+<configKey>HttpCookiesRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpCookies requireSSL configuration is set to True which force all cookies to be sent with the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
+      The violation can be fixed by setting the system.web.httpCookies requireSSL to true if the application is serviced over HTTPS.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;httpCookies requireSSL="true" httpOnlyCookies="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5408:HttpCookiesRequireSSLShouldBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/ms228262.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="TraceShouldBeDisabled">
+<name>TraceShouldBeDisabled</name>
+<configKey>TraceShouldBeDisabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.trace enabled setting is set to false which disable tracing. It is recommended to disable tracing on production servers to make sure that an attacker cannot gain information from the trace about your application. Trace information can help an attacker probe and compromise your application.<br/>
+      The violation can be fixed by leaving system.web.trace enabled to its default value, false, or by explicitly setting it to false.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;trace enabled="false"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5409:TraceShouldBeDisabled", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/6915t83k.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="AnonymousAccessIsEnabled">
+<name>AnonymousAccessIsEnabled</name>
+<configKey>AnonymousAccessIsEnabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Looks in the web.config file to see if the authorization section allows anonymous access.<br/>
+      The violation can be fixed by including a global deny section for all users by setting the user attribute of the deny section to ? which represent all anonymous users.
+      
+Example :
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;authorization&gt;
+   &lt;allow users="Kim"/&gt;
+   &lt;allow roles="Admins"/&gt;
+   &lt;!-- Deny all anonymous users--&gt;
+   &lt;deny users="?"/&gt;
+  &lt;/authorization&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5410:AnonymousAccessIsEnabled", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/ms998367.aspx ">msdn help page</a>
+]]></description>
+</rule>
+<rule key="RoleManagerCookieProtectionShouldBeAll">
+<name>RoleManagerCookieProtectionShouldBeAll</name>
+<configKey>RoleManagerCookieProtectionShouldBeAll@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.rolemanager cookieProtection is set to All which enforce both the cookie to be encrypted and validated by the server.<br/>
+      The violation can be fixed by leaving system.web.rolemanager cookieProtection to its default value or setting it to All.
+      
+Example :
+<pre>&lt;configuration&gt;
+&lt;system.web&gt; 
+  &lt;roleManager enabled="true" cookieProtection="All"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+.
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5411:RoleManagerCookieProtectionShouldBeAll", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.roles.cookieprotectionvalue.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="RoleManagerCookieRequireSSLShouldBeTrue">
+<name>RoleManagerCookieRequireSSLShouldBeTrue</name>
+<configKey>RoleManagerCookieRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.rolemanager cookieRequireSSL attribute is set to True which force the role manager cookie to specify the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
+      The violation can be fixed by setting the system.web.rolemanager cookieRequireSSL to true.
+      
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;roleManager enabled="true" cookieRequireSSL="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5412:RoleManagerCookieRequireSSLShouldBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.roles.cookierequiressl.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="RoleManagerCookieSlidingExpirationShouldBeFalse">
+<name>RoleManagerCookieSlidingExpirationShouldBeTrue</name>
+<configKey>RoleManagerCookieSlidingExpirationShouldBeFalse@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>
+      The rule verifies that if the system.web.rolemanager cookieSlidingExpiration is set to false when the site is being serviced over HTTP. This will force the authentication cookie to have a fix timeout value instead of being refreshed by each request. Since the cookie will traverse over clear text network and can be sniffed, having a fix timeout value on the cookie will limit the amount of time the cookie can be replayed.
+      If the cookie is traversing over HTTPS, it is less likely to be intercepted and having the cookieSlidingExpiration setting to True will cause the timeout to be refreshed after each request which gives a better user experience.
+    <br/>
+      The violation can be fixed by setting the system.web.rolemanager cookieSlidingExpiration to false when the application is not being serviced over HTTPS.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;roleManager enabled="true" cookieRequireSSL="true" cookieSlidingExpiration="false"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5413:RoleManagerCookieSlidingExpirationShouldBeFalse", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/system.web.security.roles.cookieslidingexpiration.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="PagesEnableViewStateMacShouldBeTrue">
+<name>PagesEnableViewStateMacShouldBeTrue</name>
+<configKey>PagesEnableViewStateMacShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that the viewstate mac is enabled.<br/>
+      The enableViewStateMac should be set to true.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;pages enableViewStateMac="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5414:PagesEnableViewStateMacShouldBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/950xf363.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="PagesEnableEventValidationMustBeTrue">
+<name>PagesEnableEventValidationMustBeTrue</name>
+<configKey>PagesEnableEventValidationMustBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify if event validation is enabled.<br/>
+      The enableEventValidation should be set to true.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;pages enableEventValidation="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5415:PagesEnableEventValidationMustBeTrue", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/950xf363.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="HttpRuntimeEnableHeaderCheckingShouldBeTrue">
+<name>HttpRuntimeEnableHeaderCheckingShouldBeTrue</name>
+<configKey>HttpRuntimeEnableHeaderCheckingShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpRuntime enableHeaderChecking attribute is set to true. From http://msdn.microsoft.com/en-us/library/e1f13641.aspx. The setting indicates whether ASP.NET should check the request header for potential injection attacks. If an attack is detected, ASP.NET responds with an error. This forces ASP.NET to apply the ValidateRequest protection to headers sent by the client. If an attack is detected the application throws HttpRequestValidationException.<br/>
+      The violation can be fixed by leaving system.web.httpRuntime enableHeaderChecking to its default value or setting it to True.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;httpRuntime enableHeaderChecking="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5416:HttpRuntimeEnableHeaderCheckingShouldBeTrue, Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/e1f13641.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="PagesValidateRequestShouldBeEnabled">
+<name>PagesValidateRequestShouldBeEnabled</name>
+<configKey>PagesValidateRequestShouldBeEnabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify that validateRequest is enabled.<br/>
+      The system.web.pages validateRequest attribute should be set to true.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;pages validateRequest="true"/&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5417:PagesValidateRequestShouldBeEnabled", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/950xf363.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="PagesViewStateEncryptionModeShouldBeAlways">
+<name>PagesViewStateEncryptionModeShouldBeAlways</name>
+<configKey>PagesViewStateEncryptionModeShouldBeAlways@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify that the viewstate encryption mode is not configured to never encrypt.<br/>
+      The system.web.pages viewStateEncryptionMode attribute should be set to Always.
+      
+Example:
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;pages viewStateEncryptionMode="Always"/&gt;
+ &lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5418:PagesViewStateEncryptionModeShouldBeAlways", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn.microsoft.com/en-us/library/950xf363.aspx">msdn help page</a>
+]]></description>
+</rule>
+<rule key="CustomErrorsModeShouldBeOn">
+<name>CustomErrorsModeShouldBeOn</name>
+<configKey>CustomErrorsModeShouldBeOn@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
+<category name="Usability"/>
+<description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.customErrors mode is set to On or RemoteOnly. This disable detailed error message returned by ASP.NET to remote users.<br/>
+      The violation can be fixed by setting the system.web.customErrors mode attribute to On or RemoteOnly.
+      
+Example :
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;customErrors mode="On" /&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+or
+ 
+<pre>&lt;configuration&gt;
+&lt;system.web&gt;
+  &lt;customErrors mode="RemoteOnly" /&gt;
+&lt;/system.web&gt;
+&lt;configuration&gt;</pre>
+
+      To suppress this issue you need to add the following SupressMessageAttribute:
+      [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("ASP.NET.Security.Configuration","CA5419:CustomErrorsModeShouldBeOn", Target="/Public/web.config")]
+      Where the Target property is set to the location of the web.config containing the violation.
+    <br/>
+<a href="http://msdn2.microsoft.com/en-us/library/h0hfz6fc(vs.71).aspx ">msdn help page</a>
 ]]></description>
 </rule>
 
