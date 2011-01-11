@@ -220,7 +220,7 @@ public class VisualStudioSolution {
   }
   
   /**
-   * Iterate through all the projects off the solution 
+   * Iterate through all the projects of the solution 
    * seeking for silverlight applications
    * @return  true if a silverlight application is found
    */
@@ -231,6 +231,20 @@ public class VisualStudioSolution {
       silverlightFound = projectIterator.next().isSilverlightProject();
     }
     return silverlightFound;
+  }
+  
+  /**
+   * Iterate through all the projects of the solution 
+   * seeking for asp.net applications
+   * @return  true if an asp.net project is found
+   */
+  public boolean isAspUsed() {
+    final Iterator<VisualStudioProject> projectIterator = projects.iterator();
+    boolean aspFound = false;
+    while (projectIterator.hasNext() && !aspFound) {
+      aspFound = projectIterator.next().isWebProject();
+    }
+    return aspFound;
   }
   
 
