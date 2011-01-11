@@ -129,10 +129,10 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
     
     if (solution.isSilverlightUsed()) {
       List<File> slCheckedAssemblies = extractSilverlightAssemblies(solution);
-      launchReport(slCheckedAssemblies, true);
+      launchReport(slCheckedAssemblies, true, false);
     }
     List<File> checkedAssemblies = extractNonSilverlightAssemblies(solution);
-    launchReport(checkedAssemblies, false);
+    launchReport(checkedAssemblies, false, solution.isAspUsed());
   }
 
   /**
@@ -158,7 +158,11 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
       throw new MojoFailureException(
           "Cannot find the generated assembly to launch FxCop " + assembly);
     }
-    launchReport(Collections.singletonList(assembly), visualProject.isSilverlightProject());
+    launchReport(
+        Collections.singletonList(assembly), 
+        visualProject.isSilverlightProject(), 
+        visualProject.isWebProject()
+      );
   }
 
   /**
@@ -166,12 +170,13 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    * 
    * @param assemblies
    *          the assemblies to check
+   * @param aspUsed TODO
    * @throws MojoExecutionException
    *           if an execution problem occurred
    * @throws MojoFailureException
    *           in case of execution failure
    */
-  private void launchReport(List<File> assemblies, boolean silverlightUsed)
+  private void launchReport(List<File> assemblies, boolean silverlightUsed, boolean aspUsed)
       throws MojoExecutionException, MojoFailureException {
     Log log = getLog();
     if (assemblies.isEmpty()) {
@@ -234,6 +239,11 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
     }
 
     commandArguments.add("/gac");
+    
+    if (aspUsed) {
+      commandArguments.add("/aspnet");
+    }
+    
     // We launch the command (and we accept the reference problems)
     launchCommand(executablePath, commandArguments, "FxCop", 0x200, false);
     log.info("FxCop report generated");
