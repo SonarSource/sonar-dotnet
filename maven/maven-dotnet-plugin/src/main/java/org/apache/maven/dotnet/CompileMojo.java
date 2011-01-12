@@ -65,22 +65,15 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
    *            default-value="false" alias="disablePostBuildEvent"
    */
   private boolean disablePostBuildEvent;
-
-  /**
-   * A flag to disable the pre-link events during a compilation (to activate in
-   * VS 2010)
-   * 
-   * @parameter expression="${maven.dotnet.disable.prelink.event}"
-   *            default-value="false" alias="disablePreLinkEvent"
-   */
-  // private boolean disablePreLinkEvent;
-
+  
   /**
    * Builds a {@link CompileMojo}.
    */
   public CompileMojo() {
   }
 
+
+    
   /**
    * Launches the compiling of a visual studio project.
    * 

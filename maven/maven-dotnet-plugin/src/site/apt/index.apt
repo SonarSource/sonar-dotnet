@@ -36,6 +36,10 @@ Maven Dotnet Plugin
   * {{{./test-mojo.html}dotnet:test}} launch the unit tests. It requires the install of {{{http://www.gallio.org}Gallio}}
 
   * {{{./clean-mojo.html}dotnet:clean}} cleans the .Net build folder
+  	
+  * {{dotnet:install}} install the package into the local repository, for use as a dependency in other projects locally
+	  
+  * {{dotnet:deploy}} copies the final package to the remote repository for sharing with other developers and projects
 
 ** Reporting goals
 
@@ -51,12 +55,30 @@ Maven Dotnet Plugin
 
   * {{{cpd-mojo.html}dotnet:cpd}} generates a report on copy/paste and duplicated code
 
+** Packaging goals
+
+  * {{{./unpack-mojo.html}dotnet:unpack}} download dependencies and unpack SLN (zip) package
+  
+  * {{{./package-mojo.html}dotnet:package}} package in distributable package format SLN (zip)
+  
 ** Other
 
   * {{{help-mojo.html}dotnet:help}} displays help on a specified goal
 
+** Life cycle
 
+  * {{process-resources}}
 
+  * {{compile}}
+  
+  * {{test}}
+
+  * {{package}} 
+  
+  * {{install}} 
+  
+  * {{deploy}} 
+  
 * Examples
 
   {{{./settings.html}Example of settings.xml}} for a machine on which the reporting tools are installed

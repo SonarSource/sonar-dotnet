@@ -119,3 +119,138 @@ Example of pom.xml for a .Net solution
   </build>
 </project>
 ---
+
+  Now an example with dependencies and package settings
+
+---
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.whatever</groupId>
+  <artifactId>my-solution</artifactId>
+  <version>1.2.3-SNAPSHOT</version>
+  <name>My solution</name>
+  <packaging>sln</packaging>
+
+  <properties>
+    <visual.studio.solution>MySolution.sln</visual.studio.solution>
+    <visual.test.project.pattern>*.Tests;*Test</visual.test.project.pattern>
+    <dotnet.tool.version>4.0</dotnet.tool.version>
+    <sonar.language>cs</sonar.language>
+	
+    <!-- Assembly Search Path file name. Should be imported with <Import Project=".\asp.target"/> at the end of csproj files -->
+    <dotnet.asp.file>./asp.target</dotnet.asp.file>
+	
+    <!- Package construction patterns -->	
+    <dotnet.pack.files>
+          files=./test/**/*.*        to-dir=test 
+          files=./Release_Notes.txt  to-dir=.
+          files=./build/dlls/*.*     to-dir=dlls
+    </dotnet.pack.files>	
+  </properties>
+    
+  <dependencies>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>log4net</artifactId>
+        <version>1.2.10</version>
+        <type>sln</type>
+     </dependency>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>my-dep</artifactId>
+        <version>1.0</version>
+        <type>sln</type>
+     </dependency>
+  </dependencies>   
+</project>
+---
+
+  Now an example with dependencies and package settings
+
+---
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.whatever</groupId>
+  <artifactId>my-solution</artifactId>
+  <version>1.2.3-SNAPSHOT</version>
+  <name>My solution</name>
+  <packaging>sln</packaging>
+
+  <properties>
+    <visual.studio.solution>MySolution.sln</visual.studio.solution>
+    <visual.test.project.pattern>*.Tests;*Test</visual.test.project.pattern>
+    <dotnet.tool.version>4.0</dotnet.tool.version>
+    <sonar.language>cs</sonar.language>
+	
+    <!-- Assembly Search Path file name. Should be imported with <Import Project=".\asp.target"/> at the end of csproj files -->
+    <dotnet.asp.file>./asp.target</dotnet.asp.file>
+	
+    <!- Package construction patterns -->	
+    <dotnet.pack.files>
+          files=./test/**/*.*        to-dir=test 
+          files=./Release_Notes.txt  to-dir=.
+          files=./build/dlls/*.*     to-dir=dlls
+    </dotnet.pack.files>	
+  </properties>
+    
+  <dependencies>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>log4net</artifactId>
+        <version>1.2.10</version>
+        <type>sln</type>
+     </dependency>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>my-dep</artifactId>
+        <version>1.0</version>
+        <type>sln</type>
+     </dependency>
+  </dependencies>   
+</project>
+---
+
+  Now an example with dependencies and package settings
+
+---
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.whatever</groupId>
+  <artifactId>my-solution</artifactId>
+  <version>1.2.3-SNAPSHOT</version>
+  <name>My solution</name>
+  <packaging>sln</packaging>
+
+  <properties>
+    <visual.studio.solution>MySolution.sln</visual.studio.solution>
+    <visual.test.project.pattern>*.Tests;*Test</visual.test.project.pattern>
+    <dotnet.tool.version>4.0</dotnet.tool.version>
+    <sonar.language>cs</sonar.language>
+	
+    <!-- Assembly Search Path file name. Should be imported with <Import Project=".\asp.target"/> at the end of csproj files -->
+    <dotnet.asp.file>./asp.target</dotnet.asp.file>
+	
+    <!- Package construction patterns -->	
+    <dotnet.pack.files>
+          files=./test/**/*.*        to-dir=test 
+          files=./Release_Notes.txt  to-dir=.
+          files=./build/dlls/*.*     to-dir=dlls
+    </dotnet.pack.files>	
+  </properties>
+    
+  <dependencies>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>log4net</artifactId>
+        <version>1.2.10</version>
+        <type>sln</type>
+     </dependency>
+     <dependency>
+        <groupId>com.whatever</groupId>
+        <artifactId>my-dep</artifactId>
+        <version>1.0</version>
+        <type>sln</type>
+     </dependency>
+  </dependencies>   
+</project>
+---

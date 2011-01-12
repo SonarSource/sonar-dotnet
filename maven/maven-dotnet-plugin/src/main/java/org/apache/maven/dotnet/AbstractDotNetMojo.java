@@ -147,6 +147,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   public AbstractDotNetMojo() {
   }
 
+  
   /**
    * Launches the MOJO action. <br/>
    * This method checks whether the pom.xml is for a project or a solution and
@@ -713,6 +714,24 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
     return true;
   }
 
+  /**
+   * TODO is it really usefull to keep this method ?
+   * get Property value
+   * 
+   * @return property value
+   */
+  protected String getProperty(String prop) {
+    String value = System.getProperty(prop);
+    if (value == null) {
+      value = project.getProperties().getProperty(prop);
+      if (value != null)
+        getLog().debug("found user property " + prop + "=" + value);
+    } else {
+      getLog().debug("found system property " + prop + "=" + value);
+    }
+    return value;
+  }
+  
   /**
    * A consumer for command outputs.
    * 

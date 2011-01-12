@@ -31,8 +31,12 @@
           <lifecycle>
             <id>default</id>
             <phases>
+              <process-resources>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:unpack</process-resources>
               <compile>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:compile</compile>
               <test>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:test</test>
+              <package>org.codehaus.sonar-plugins.dotnet:maven-dotnet-plugin:package</package>
+              <install>org.apache.maven.plugins:maven-install-plugin:install</install>
+              <deploy>org.apache.maven.plugins:maven-deploy-plugin:deploy</deploy>
             </phases>
           </lifecycle>
           <lifecycle>
