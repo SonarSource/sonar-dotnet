@@ -31,5 +31,10 @@ public class PrimaryExpressionTest {
     assertThat(p, parse("arrayCreationExpression"));
     assertThat(p, parse("primaryNoArrayCreationExpression"));
   }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("typeof(void).OneAttribute"));
+  }
 
 }
