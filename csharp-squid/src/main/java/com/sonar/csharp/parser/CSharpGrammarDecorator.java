@@ -143,7 +143,7 @@ import static com.sonar.sslr.impl.matcher.Matchers.or;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.sslr.api.GrammarDecorator;
-import com.sonar.sslr.impl.GrammarFieldsInitializer;
+import com.sonar.sslr.impl.GrammarRuleLifeCycleManager;
 
 /**
  * Definition of each element of the C# grammar.
@@ -154,10 +154,10 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
    * ${@inheritDoc}
    */
   public void decorate(CSharpGrammar g) {
-    GrammarFieldsInitializer.initializeLeftRecursionRuleFields(g, CSharpGrammar.class);
+    GrammarRuleLifeCycleManager.initializeLeftRecursionRuleFields(g, CSharpGrammar.class);
 
     // We follow the ECMA specification for the C# language, 4th edition of June 2006
-    g.literal.isOr(BOOL, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
+    g.literal.isOr(TRUE, FALSE, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
 
     // A.2.1 Basic concepts
     basicConcepts(g);
