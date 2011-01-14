@@ -27,12 +27,12 @@ import org.sonar.channel.ChannelDispatcher;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.CSharpPunctuator;
 import com.sonar.csharp.api.CSharpTokenType;
-import com.sonar.csharp.lexer.channel.UnknownCharacterChannel;
 import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
+import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
 
 /**
  * Lexer for the C# language.
@@ -87,12 +87,12 @@ public class CSharpLexer extends Lexer {
         o2n(or(LETTER_CHAR, DECIMAL_DIGIT_CHAR, CONNECTING_CHAR, COMBINING_CHAR, FORMATTING_CHAR))), true, CSharpKeyword.values()));
     channels.add(new PunctuatorChannel(CSharpPunctuator.values()));
     // Preprocessor directives
-    //channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
+    // channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
     channels.add(new BlackHoleChannel("#[^\\r\\n]*"));
     // Others
     channels.add(new BlackHoleChannel("[ \\t\\r\\n]"));
     // TODO : remove at the end
-    channels.add(new UnknownCharacterChannel());
+    channels.add(new UnknownCharacterChannel(true));
     return new ChannelDispatcher<LexerOutput>(channels);
   }
 
