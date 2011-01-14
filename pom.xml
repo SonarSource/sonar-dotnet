@@ -12,7 +12,7 @@
 		<version>8</version>
 	</parent>
 	<properties>
-		<sonar.version>2.5-SNAPSHOT</sonar.version>
+		<sonar.version>2.5</sonar.version>
 		<sslrVersion>1.2-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
