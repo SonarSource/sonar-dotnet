@@ -9,6 +9,7 @@ import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
@@ -22,14 +23,20 @@ public class InvocationExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.invocationExpression);
-    g.primaryExpression.mock();
-    g.argumentList.mock();
   }
 
   @Test
   public void testOk() {
+    g.primaryExpression.mock();
+    g.argumentList.mock();
     assertThat(p, parse("primaryExpression()"));
     assertThat(p, parse("primaryExpression(argumentList)"));
   }
 
+  @Test
+  @Ignore("This fails whereas the ExpressionTest#realLife() passes")
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("GetAssemblies()"));
+  }
+  
 }

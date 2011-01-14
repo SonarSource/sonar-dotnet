@@ -9,6 +9,7 @@ import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
@@ -22,20 +23,26 @@ public class MemberAccessTest {
   @Before
   public void init() {
     p.setRootRule(g.memberAccess);
-    g.primaryExpression.mock();
-    g.typeArgumentList.mock();
-    g.predefinedType.mock();
-    g.qualifiedAliasMember.mock();
   }
 
   @Test
   public void testOk() {
+    g.primaryExpression.mock();
+    g.typeArgumentList.mock();
+    g.predefinedType.mock();
+    g.qualifiedAliasMember.mock();
     assertThat(p, parse("primaryExpression.id"));
     assertThat(p, parse("primaryExpression.id typeArgumentList"));
     assertThat(p, parse("predefinedType.id"));
     assertThat(p, parse("predefinedType.id typeArgumentList"));
     assertThat(p, parse("qualifiedAliasMember.id"));
     assertThat(p, parse("qualifiedAliasMember.id typeArgumentList"));
+  }
+  
+  @Test
+  @Ignore("This fails whereas the ExpressionTest#realLife() passes")
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("CurrentDomain.GetAssemblies"));
   }
 
 }

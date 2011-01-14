@@ -22,14 +22,20 @@ public class ForeachStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.foreachStatement);
-    g.type.mock();
-    g.expression.mock();
-    g.embeddedStatement.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
+    g.expression.mock();
+    g.embeddedStatement.mock();
     assertThat(p, parse("foreach ( type id in expression ) embeddedStatement"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("foreach (Assembly assembly in AppDomain) {}"));
+    assertThat(p, parse("foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {}"));
+  }
+  
 }

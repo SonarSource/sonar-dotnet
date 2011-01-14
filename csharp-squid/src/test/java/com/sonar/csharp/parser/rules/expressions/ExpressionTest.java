@@ -22,14 +22,19 @@ public class ExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.expression);
-    g.conditionalExpression.mock();
-    g.assignment.mock();
   }
 
   @Test
   public void testOk() {
+    g.conditionalExpression.mock();
+    g.assignment.mock();
     assertThat(p, parse("conditionalExpression"));
     assertThat(p, parse("assignment"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
+  }
+  
 }

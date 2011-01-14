@@ -55,6 +55,7 @@ public class AssignmentTest {
   @Test
   public void testRealLife() {
     assertThat(p, parse("message = \"Hello World\""));
+    assertThat(p, parse("frameworkAssemblyInitialized = true"));
   }
 
 }
