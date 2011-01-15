@@ -695,7 +695,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   protected File getReportDirectory() {
     String buildPath = project.getBuild().getDirectory();
     File reportDirectory = new File(buildPath);
-    reportDirectory.mkdirs();
+    reportDirectory.mkdirs(); 
     return reportDirectory;
   }
 

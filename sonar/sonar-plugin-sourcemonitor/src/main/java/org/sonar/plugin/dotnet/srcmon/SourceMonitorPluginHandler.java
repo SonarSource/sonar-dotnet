@@ -23,6 +23,8 @@
  */
 package org.sonar.plugin.dotnet.srcmon;
 
+import org.sonar.api.batch.maven.MavenPlugin;
+import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
@@ -33,10 +35,10 @@ import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 public class SourceMonitorPluginHandler extends
     AbstractDotNetMavenPluginHandler {
 
-  /**
-   * Constructs a @link{SourceMonitorPluginHandler}.
-   */
-  public SourceMonitorPluginHandler() {
+  @Override
+  public void configure(Project project, MavenPlugin plugin) {
+      super.configure(project, plugin);
+      plugin.setParameter("reportFileName", SourceMonitorPlugin.SOURCE_MONITOR_REPORT);
   }
 
   public String[] getGoals() {

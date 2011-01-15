@@ -99,9 +99,19 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
    * Name of the generated metrics report.
    * 
    * @parameter alias="${metricsReportFileName}"
+   *            expression="${metrics.report.filename}"
    *            default-value="metrics-report.xml"
    */
   private String reportFileName;
+  
+  /**
+   * Name of the generated metrics report.
+   * 
+   * @parameter expression="${metrics.source.directory}"  
+   *            default-value="${project.basedir}"
+   */
+  private File metricsSrcDirectory;
+  
 
   /**
    * Executes the reporting for a solution
@@ -128,8 +138,7 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
     // The command generator is populated
     generator.setGeneratedFile(outputFile.toString());
     generator.setWorkDirectory(workDirectory);
-    File projectDir = project.getBasedir();
-    generator.setSourcePath(projectDir.toString());
+    generator.setSourcePath(metricsSrcDirectory.toString());
     File sourceMonitorExe = getExecutable();
     generator.setSourceMonitorPath(sourceMonitorExe.toString());
     generator.setProjectFile(projectFile.toString());
