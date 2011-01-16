@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
@@ -65,13 +66,25 @@ public class UnPackMojo extends AbstractDotNetMojo {
   PROP_OFFSET = PROP_PREFIX + "offset",
   DOTNET_DUMP_CSPROJ_VARS = PROP_PREFIX + "asp.file";
 
+  
+  /**
+   * @parameter expression="${dotnet.unpack.root}" 
+   */
   private String unPackRoot;
 
+  /**
+   * @parameter expression="${dotnet.offset}" 
+   */
   private String offset;
+  
+  /**
+   * @parameter expression="${dotnet.asp.file}" 
+   */
+  private String csprojvars;
 
-  static Set<String> dllDirs = new LinkedHashSet<String>();
+  private Set<String> dllDirs = new LinkedHashSet<String>();
 
-  ConsoleLogger consolLogger = new ConsoleLogger(Logger.LEVEL_ERROR, "console");
+  private ConsoleLogger consolLogger = new ConsoleLogger(Logger.LEVEL_ERROR, "console");
 
   /**
    * @parameter default-value="${localRepository}"
@@ -99,12 +112,10 @@ public class UnPackMojo extends AbstractDotNetMojo {
 
     dllDirs.clear();
 
-    unPackRoot = getProperty(PROP_UNPACK_ROOT);
-    if (unPackRoot == null || unPackRoot.length() == 0) {
+    if (StringUtils.isEmpty(unPackRoot)) {
       unPackRoot = localRepository.getBasedir() + File.separator + DOTNET_DIR_NAME + File.separator + LOCAL_DIR_NAME;
     }
 
-    offset = getProperty(PROP_OFFSET);
     if (offset == null) {
       offset = "";
     }
@@ -133,7 +144,6 @@ public class UnPackMojo extends AbstractDotNetMojo {
       }
     }
 
-    String csprojvars = getProperty(DOTNET_DUMP_CSPROJ_VARS);
     if (csprojvars != null) {
       getLog().info("writing variables into file " + csprojvars);
 
