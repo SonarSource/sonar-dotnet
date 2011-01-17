@@ -22,6 +22,10 @@ public class ExpressionStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.expressionStatement);
+  }
+
+  @Test
+  public void testOk() {
     g.invocationExpression.mock();
     g.objectCreationExpression.mock();
     g.assignment.mock();
@@ -29,11 +33,6 @@ public class ExpressionStatementTest {
     g.postDecrementExpression.mock();
     g.preIncrementExpression.mock();
     g.preDecrementExpression.mock();
-
-  }
-
-  @Test
-  public void testOk() {
     assertThat(p, parse("invocationExpression;"));
     assertThat(p, parse("objectCreationExpression;"));
     assertThat(p, parse("assignment;"));
@@ -41,6 +40,11 @@ public class ExpressionStatementTest {
     assertThat(p, parse("postDecrementExpression;"));
     assertThat(p, parse("preIncrementExpression;"));
     assertThat(p, parse("preDecrementExpression;"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("frameIndex++;"));
   }
 
 }

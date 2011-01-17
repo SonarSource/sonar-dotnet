@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.statements;
+package com.sonar.csharp.parser.rules.expressions;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
@@ -14,31 +14,25 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class StatementTest {
+public class PostDecrementExpressionTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.statement);
-
+    p.setRootRule(g.postDecrementExpression);
   }
 
   @Test
   public void testOk() {
-    g.labeledStatement.mock();
-    g.declarationStatement.mock();
-    g.embeddedStatement.mock();
-    assertThat(p, parse("labeledStatement"));
-    assertThat(p, parse("declarationStatement"));
-    assertThat(p, parse("embeddedStatement"));
+    g.primaryExpression.mock();
+    assertThat(p, parse("primaryExpression--"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("Integer i = 15;"));
-    assertThat(p, parse("frameIndex++;"));
+    assertThat(p, parse("frameIndex--"));
   }
 
 }

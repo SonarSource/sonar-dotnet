@@ -22,13 +22,19 @@ public class WhileStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.whileStatement);
-    g.booleanExpression.mock();
-    g.embeddedStatement.mock();
   }
 
   @Test
   public void testOk() {
+    g.booleanExpression.mock();
+    g.embeddedStatement.mock();
     assertThat(p, parse("while ( booleanExpression ) embeddedStatement"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15; }"));
+    assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15;  frameIndex++; }"));
+  }
+  
 }

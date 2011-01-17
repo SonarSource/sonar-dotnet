@@ -31,5 +31,11 @@ public class BlockTest {
     assertThat(p, parse("{ statement }"));
     assertThat(p, parse("{ statement statement}"));
   }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("{ Integer i = 15; }"));
+    assertThat(p, parse("{ Integer i = 15;  frameIndex++; }"));
+  }
 
 }

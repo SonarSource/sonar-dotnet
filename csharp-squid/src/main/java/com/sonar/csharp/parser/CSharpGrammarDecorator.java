@@ -309,8 +309,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.localConstantDeclaration.is(CONST, g.type, g.constantDeclarator, o2n(COMMA, g.constantDeclarator));
     g.constantDeclarator.is(IDENTIFIER, EQUAL, g.constantExpression);
     g.expressionStatement.is(g.statementExpression, SEMICOLON);
-    g.statementExpression.isOr(g.invocationExpression, g.objectCreationExpression, g.assignment, g.postIncrementExpression,
-        g.postDecrementExpression, g.preIncrementExpression, g.preDecrementExpression);
+    g.statementExpression.isOr(g.postIncrementExpression, g.postDecrementExpression, g.preIncrementExpression, g.preDecrementExpression,
+        g.invocationExpression, g.objectCreationExpression, g.assignment);
     g.selectionStatement.isOr(g.ifStatement, g.switchStatement);
     g.ifStatement.is(IF, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement, opt(ELSE, g.embeddedStatement));
     g.switchStatement.is(SWITCH, LPARENTHESIS, g.expression, RPARENTHESIS, LCURLYBRACE, o2n(g.switchSection), RCURLYBRACE);
