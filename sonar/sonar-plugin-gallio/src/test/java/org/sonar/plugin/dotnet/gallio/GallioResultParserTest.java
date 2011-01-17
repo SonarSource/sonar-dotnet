@@ -31,6 +31,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +62,7 @@ public class GallioResultParserTest
 			@Override
 			public boolean apply(UnitTestReport report) {
 				
-				return "cs-failures".equals(report.getAssemblyName()) && "CSharpTest.cs".equals(report.getSourceFile().getName()) && 420==report.getTimeMS();
+				return "cs-failures".equals(report.getAssemblyName()) && StringUtils.contains(report.getSourceFile().getName(), "CSharpTest.cs") && 420==report.getTimeMS();
 			}
 		};
 		
