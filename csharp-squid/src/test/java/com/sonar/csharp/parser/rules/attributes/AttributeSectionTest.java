@@ -22,14 +22,20 @@ public class AttributeSectionTest {
   @Before
   public void init() {
     p.setRootRule(g.attributeSection);
-    g.attributeTargetSpecifier.mock();
-    g.attributeList.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributeTargetSpecifier.mock();
+    g.attributeList.mock();
+    assertThat(p, parse("[attributeList]"));
     assertThat(p, parse("[attributeTargetSpecifier attributeList]"));
     assertThat(p, parse("[attributeTargetSpecifier attributeList , ]"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("[Obsolete(\"Use Fix property\")]"));
   }
 
 }

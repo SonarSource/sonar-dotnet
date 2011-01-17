@@ -22,13 +22,18 @@ public class AttributeListTest {
   @Before
   public void init() {
     p.setRootRule(g.attributeList);
-    g.attribute.mock();
   }
 
   @Test
   public void testOk() {
+    g.attribute.mock();
     assertThat(p, parse("attribute"));
     assertThat(p, parse("attribute, attribute"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("Obsolete(\"Use Fix property\")"));
   }
 
 }

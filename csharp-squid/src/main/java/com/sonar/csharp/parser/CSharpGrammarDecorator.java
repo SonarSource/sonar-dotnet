@@ -489,7 +489,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.globalAttributeTargetSpecifier.is(g.globalAttributeTarget, COLON);
     g.globalAttributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
     g.attributes.is(one2n(g.attributeSection));
-    g.attributeSection.is(LBRACKET, g.attributeTargetSpecifier, g.attributeList, opt(COMMA), RBRACKET);
+    g.attributeSection.is(LBRACKET, opt(g.attributeTargetSpecifier), g.attributeList, opt(COMMA), RBRACKET);
     g.attributeTargetSpecifier.is(g.attributeTarget, COLON);
     g.attributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
     g.attributeList.is(g.attribute, o2n(COMMA, g.attribute));
