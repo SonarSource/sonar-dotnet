@@ -16,7 +16,7 @@ import com.sonar.csharp.parser.CSharpParser;
 
 public class CSharpPreIntegrationFileTest {
 
-  private String filePath = "/integration/NUnit/ClientUtilities/util/NUnitRegistry.cs";
+  private String filePath = "/integration/Log4net/Core/LoggerManager.cs";
   private File cSharpFile;
   private CSharpParser parser = new CSharpParser();
 

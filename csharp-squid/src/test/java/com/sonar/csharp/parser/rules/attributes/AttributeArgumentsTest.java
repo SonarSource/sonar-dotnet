@@ -9,6 +9,7 @@ import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
@@ -22,16 +23,24 @@ public class AttributeArgumentsTest {
   @Before
   public void init() {
     p.setRootRule(g.attributeArguments);
-    g.positionalArgumentList.mock();
-    g.namedArgumentList.mock();
   }
 
   @Test
   public void testOk() {
+    g.positionalArgumentList.mock();
+    g.namedArgumentList.mock();
     assertThat(p, parse("()"));
     assertThat(p, parse("(positionalArgumentList)"));
     assertThat(p, parse("(positionalArgumentList , namedArgumentList)"));
     assertThat(p, parse("(namedArgumentList)"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("(AttributeTargets.Assembly)"));
+    assertThat(p, parse("(AllowMultiple=true)"));
+    // TODO : the following assertion fails while it passes in PositionalArgumentListTest and NamedArgumentListTest
+    // assertThat(p, parse("(AttributeTargets.Assembly,AllowMultiple=true)"));
   }
 
 }

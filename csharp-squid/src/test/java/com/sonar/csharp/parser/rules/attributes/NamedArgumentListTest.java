@@ -22,13 +22,18 @@ public class NamedArgumentListTest {
   @Before
   public void init() {
     p.setRootRule(g.namedArgumentList);
-    g.namedArgument.mock();
   }
 
   @Test
   public void testOk() {
+    g.namedArgument.mock();
     assertThat(p, parse("namedArgument"));
     assertThat(p, parse("namedArgument, namedArgument, namedArgument"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("AllowMultiple=true,AllowFake=false"));
   }
 
 }

@@ -7,7 +7,6 @@
 package com.sonar.csharp.integration;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,8 +38,13 @@ public class CSharpPreIntegrationTest {
 
   @Test
   @Ignore("Trop beau pour être vrai...")
-  public void parseCSharpSource() throws IOException, URISyntaxException {
-    parser.parse(cSharpFile);
+  public void parseCSharpSource() throws Exception {
+    try {
+      parser.parse(cSharpFile);
+      System.out.println(cSharpFile);
+    } catch (Exception e) {
+      throw e;
+    }
   }
 
   protected static void addParametersForPath(Collection<Object[]> parameters, String path) throws URISyntaxException {

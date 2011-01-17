@@ -22,12 +22,17 @@ public class NamedArgumentTest {
   @Before
   public void init() {
     p.setRootRule(g.namedArgument);
-    g.attributeArgumentExpression.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributeArgumentExpression.mock();
     assertThat(p, parse("id = attributeArgumentExpression"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("AllowMultiple=true"));
   }
 
 }

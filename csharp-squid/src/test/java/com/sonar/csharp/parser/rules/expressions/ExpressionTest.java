@@ -35,6 +35,7 @@ public class ExpressionTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("CurrentDomain.GetAssemblies()"));
+    assertThat(p, parse("dbCommand.Dispose()"));
   }
   
 }

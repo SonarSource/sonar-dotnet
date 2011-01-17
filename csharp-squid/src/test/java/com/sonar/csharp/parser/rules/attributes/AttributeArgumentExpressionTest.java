@@ -14,26 +14,26 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class PositionalArgumentListTest {
+public class AttributeArgumentExpressionTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.positionalArgumentList);
+    p.setRootRule(g.attributeArgumentExpression);
   }
 
   @Test
   public void testOk() {
-    g.positionalArgument.mock();
-    assertThat(p, parse("positionalArgument"));
-    assertThat(p, parse("positionalArgument, positionalArgument, positionalArgument"));
+    g.expression.mock();
+    assertThat(p, parse("expression"));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("AttributeTargets.Assembly"));
+    assertThat(p, parse("\"Use Fix property\""));
   }
 
 }

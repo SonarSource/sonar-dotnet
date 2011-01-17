@@ -22,12 +22,12 @@ public class UnaryExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.unaryExpression);
-    g.primaryExpression.mock();
-    g.type.mock();
   }
 
   @Test
   public void testOk() {
+    g.primaryExpression.mock();
+    g.type.mock();
     assertThat(p, parse("primaryExpression"));
     assertThat(p, parse("+primaryExpression"));
     assertThat(p, parse("-primaryExpression"));
@@ -36,6 +36,11 @@ public class UnaryExpressionTest {
     assertThat(p, parse("++primaryExpression"));
     assertThat(p, parse("--primaryExpression"));
     assertThat(p, parse("( type ) primaryExpression"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("(Level)info.GetValue(\"Level\", typeof(Level))"));
   }
 
 }

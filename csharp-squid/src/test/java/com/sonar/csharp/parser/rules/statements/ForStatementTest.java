@@ -39,7 +39,7 @@ public class ForStatementTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("for( int num = count;\n num > 0;\n --num)\n {}"));
-//    assertThat(p, parse("for( int num = count;\n num > 0;\n --num)\n sayHello();"));
+    assertThat(p, parse("for( int num = count;\n num > 0;\n --num)\n  { myClass.sayHello(); } "));
   }
 
 }
