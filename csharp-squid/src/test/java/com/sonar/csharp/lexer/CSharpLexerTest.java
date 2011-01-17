@@ -94,6 +94,7 @@ public class CSharpLexerTest {
   public void lexStringLiteral() {
     // regular string literal
     assertThat(lexer.lex("String s =\"\";"), hasToken("\"\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("String path =\"\\temp\";"), hasToken("\"\\temp\"", CSharpTokenType.STRING_LITERAL));
     assertThat(lexer.lex("String s =\"Foo and bar\";"), hasToken("\"Foo and bar\"", CSharpTokenType.STRING_LITERAL));
     assertThat(lexer.lex("String s =\"A string with an escape quote \\\" !\";"),
         hasToken("\"A string with an escape quote \\\" !\"", CSharpTokenType.STRING_LITERAL));
@@ -103,8 +104,8 @@ public class CSharpLexerTest {
     assertThat(lexer.lex("String s =\"Foo\n and bar\";"), not(hasToken(CSharpTokenType.STRING_LITERAL)));
     // verbatim string literal
     assertThat(lexer.lex("@\"Foo \n and \n bar\""), hasToken("@\"Foo \n and \n bar\"", CSharpTokenType.STRING_LITERAL));
-    assertThat(lexer.lex("@\"Foo \n and \n bar \n with an escape quote \\\" !\""),
-        hasToken("@\"Foo \n and \n bar \n with an escape quote \\\" !\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("@\"Software\\nunit.org\\Nunit-Test\\\""),
+        hasToken("@\"Software\\nunit.org\\Nunit-Test\\\"", CSharpTokenType.STRING_LITERAL));
   }
 
   @Test
