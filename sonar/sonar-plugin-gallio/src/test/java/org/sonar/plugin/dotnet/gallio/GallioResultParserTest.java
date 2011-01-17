@@ -78,7 +78,7 @@ public class GallioResultParserTest
 		assertEquals(6, firstReport.getAsserts());
 		assertEquals(3, firstReport.getFailures());
 		assertEquals(1, firstReport.getSkipped());
-		assertEquals("CSharpTest.cs", firstReport.getSourceFile().getName());
+		assertTrue(StringUtils.contains(firstReport.getSourceFile().getName(),"CSharpTest.cs"));
 		assertEquals(6, firstReport.getTests());
 		assertEquals(420, firstReport.getTimeMS());
 
