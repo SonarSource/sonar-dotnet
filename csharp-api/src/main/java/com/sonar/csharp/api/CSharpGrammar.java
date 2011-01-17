@@ -22,7 +22,7 @@ public class CSharpGrammar implements Grammar {
   public Rule namespaceOrTypeName; // OK
 
   // A.2.2 Types
-  public Rule type; // LATER
+  public Rule type; // OK
   public Rule valueType; // LATER
   public Rule structType; // LATER
   public Rule enumType; // LATER
@@ -32,7 +32,7 @@ public class CSharpGrammar implements Grammar {
   public Rule floatingPointType; // OK - tested via SimpleTypeTest
   public Rule nullableType; // OK
   public Rule nonNullableValueType; // LATER
-  public Rule referenceType; // LATER
+  public Rule referenceType; // OK
   public Rule classType; // OK
   public Rule interfaceType; // LATER
   public Rule arrayType; // OK

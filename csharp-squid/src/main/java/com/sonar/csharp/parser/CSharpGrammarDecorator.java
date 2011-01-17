@@ -211,7 +211,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void types(CSharpGrammar g) {
-    g.type.isOr(g.valueType, g.referenceType, g.typeParameter);
+    g.type.isOr(g.referenceType, g.valueType, g.typeParameter);
     g.valueType.isOr(g.structType, g.enumType);
     g.structType.isOr(g.typeName, g.simpleType, g.nullableType);
     g.simpleType.isOr(g.numericType, BOOL);
@@ -221,7 +221,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.enumType.is(g.typeName);
     g.nullableType.is(g.nonNullableValueType, QUESTION);
     g.nonNullableValueType.isOr(g.enumType, g.typeName, g.simpleType);
-    g.referenceType.isOr(g.classType, g.interfaceType, g.arrayType, g.delegateType);
+    g.referenceType.isOr(g.arrayType, g.classType, g.interfaceType, g.delegateType);
     g.classType.isOr(g.typeName, OBJECT, STRING);
     g.interfaceType.is(g.typeName);
     g.arrayType.is(g.nonArrayType, one2n(g.rankSpecifier));

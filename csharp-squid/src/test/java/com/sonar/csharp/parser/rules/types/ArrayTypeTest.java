@@ -23,17 +23,16 @@ public class ArrayTypeTest {
   @Before
   public void init() {
     p.setRootRule(g.arrayType);
+  }
+
+  @Test
+  public void testOk() {
     g.valueType.mock();
     g.classType.mock();
     g.interfaceType.mock();
     g.delegateType.mock();
     g.typeParameter.mock();
     g.rankSpecifier.mock();
-    g.referenceType.mock();
-  }
-
-  @Test
-  public void testOk() {
     assertThat(p, parse("valueType rankSpecifier"));
     assertThat(p, parse("classType rankSpecifier"));
     assertThat(p, parse("interfaceType rankSpecifier"));
@@ -43,7 +42,19 @@ public class ArrayTypeTest {
 
   @Test
   public void testKo() {
+    g.valueType.mock();
+    g.classType.mock();
+    g.interfaceType.mock();
+    g.delegateType.mock();
+    g.typeParameter.mock();
+    g.rankSpecifier.mock();
+    g.referenceType.mock();
     assertThat(p, notParse("referenceType rankSpecifier"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("AClass[]"));
+  }
+  
 }
