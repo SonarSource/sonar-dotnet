@@ -33,8 +33,6 @@ import java.util.Set;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
@@ -96,7 +94,7 @@ public class GallioSensor extends AbstractDotnetSensor {
   }
 
   private void collect(Project project, File report, SensorContext context) {
-    GallioResultParser parser = new GallioResultParser();
+    GallioResultParser parser = new GallioResultStaxParser();
     Collection<UnitTestReport> reports = parser.parse(report);
     if (log.isDebugEnabled()) {
       log.debug("Found " + reports.size() + " test data");
@@ -117,23 +115,23 @@ public class GallioSensor extends AbstractDotnetSensor {
             testReport.getSourceFile(), true);
         if (testFile != null) {
 
-          saveFileMeasure(testFile, context, testReport,
-              CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
-          saveFileMeasure(testFile, context, testReport, CoreMetrics.TESTS,
+          saveFileMeasure(testFile, context, CoreMetrics.SKIPPED_TESTS,
+              testReport.getSkipped());
+          saveFileMeasure(testFile, context, CoreMetrics.TESTS,
               testsCount);
-          saveFileMeasure(testFile, context, testReport,
-              CoreMetrics.TEST_ERRORS, testReport.getErrors());
-          saveFileMeasure(testFile, context, testReport,
-              CoreMetrics.TEST_FAILURES, testReport.getFailures());
-          saveFileMeasure(testFile, context, testReport,
-              CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
-          saveFileMeasure(testFile, context, testReport,
-              GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
+          saveFileMeasure(testFile, context, CoreMetrics.TEST_ERRORS,
+              testReport.getErrors());
+          saveFileMeasure(testFile, context, CoreMetrics.TEST_FAILURES,
+              testReport.getFailures());
+          saveFileMeasure(testFile, context, CoreMetrics.TEST_EXECUTION_TIME,
+              testReport.getTimeMS());
+          saveFileMeasure(testFile, context, GallioMetrics.COUNT_ASSERTS,
+              testReport.getAsserts());
           int passedTests = testsCount - testReport.getErrors()
-              - testReport.getFailures();
+            - testReport.getFailures();
           if (testsCount > 0) {
-            double percentage = passedTests * 100 / testsCount;
-            saveFileMeasure(testFile, context, testReport,
+            double percentage = (float)passedTests * 100 / (float)testsCount;
+            saveFileMeasure(testFile, context,
                 CoreMetrics.TEST_SUCCESS_DENSITY,
                 ParsingUtils.scaleValue(percentage));
           }
@@ -163,19 +161,19 @@ public class GallioSensor extends AbstractDotnetSensor {
     List<TestCaseDetail> details = fileReport.getDetails();
     for (TestCaseDetail detail : details) {
       testCaseDetails.append("<testcase status=\"").append(detail.getStatus().getSonarStatus())
-          .append("\" time=\"").append(detail.getTimeMillis())
-          .append("\" name=\"").append(detail.getName()).append("\"");
-          //.append("\" asserts=\"").append(detail.getCountAsserts())
-          //.append("\"");
+        .append("\" time=\"").append(detail.getTimeMillis())
+        .append("\" name=\"").append(detail.getName()).append("\"");
+      //.append("\" asserts=\"").append(detail.getCountAsserts())
+      //.append("\"");
       boolean isError = (detail.getStatus() == TestStatus.ERROR);
       if (isError || (detail.getStatus() == TestStatus.FAILED)) {
-        
+
         testCaseDetails.append(">")
-            .append(isError ? "<error message=\"" : "<failure message=\"")
-            .append(detail.getFormatedErrorMessage())
-            .append("\">").append("<![CDATA[").append(detail.getFormatedStackTrace())
-            .append("]]>").append(isError ? "</error>" : "</failure>")
-            .append("</testcase>");
+          .append(isError ? "<error message=\"" : "<failure message=\"")
+          .append(detail.getFormatedErrorMessage())
+          .append("\">").append("<![CDATA[").append(detail.getFormatedStackTrace())
+          .append("]]>").append(isError ? "</error>" : "</failure>")
+          .append("</testcase>");
       } else {
         testCaseDetails.append("/>");
       }
@@ -195,8 +193,8 @@ public class GallioSensor extends AbstractDotnetSensor {
    * @param metric
    * @param value
    */
-  private void saveFileMeasure(CSharpFile testFile, SensorContext context,
-      UnitTestReport fileReport, Metric metric, double value) {
+  private void saveFileMeasure(CSharpFile testFile, SensorContext context, 
+      Metric metric, double value) {
     if (!Double.isNaN(value)) {
       context.saveMeasure(testFile, metric, value);
     }
@@ -208,7 +206,7 @@ public class GallioSensor extends AbstractDotnetSensor {
    */
   @Override
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    String mode = getGallioMode(project);;
+    String mode = getGallioMode(project);
     final MavenPluginHandler pluginHandlerReturned;
     if (GALLIO_DEFAULT_MODE.equalsIgnoreCase(mode)) {
       pluginHandlerReturned = pluginHandler;
@@ -226,7 +224,7 @@ public class GallioSensor extends AbstractDotnetSensor {
   public boolean shouldExecuteOnProject(Project project) {
     String mode = getGallioMode(project);
     return super.shouldExecuteOnProject(project)
-        && !GALLIO_SKIP_MODE.equalsIgnoreCase(mode);
+      && !GALLIO_SKIP_MODE.equalsIgnoreCase(mode);
   }
 
   private String getGallioMode(Project project) {

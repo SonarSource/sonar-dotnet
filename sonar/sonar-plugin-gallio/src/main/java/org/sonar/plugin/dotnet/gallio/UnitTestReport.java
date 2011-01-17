@@ -164,11 +164,19 @@ public class UnitTestReport {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result
-        + ((sourceFile == null) ? 0 : sourceFile.hashCode());
+    result = prime * result + ((assemblyName == null) ? 0 : assemblyName.hashCode());
+    result = prime * result + asserts;
+    result = prime * result + ((details == null) ? 0 : details.hashCode());
+    result = prime * result + errors;
+    result = prime * result + failures;
+    result = prime * result + skipped;
+    result = prime * result + ((sourceFile == null) ? 0 : sourceFile.hashCode());
+    result = prime * result + tests;
+    result = prime * result + timeMS;
     return result;
   }
 
+  @SuppressWarnings("IfStmtsMustUseBraces")
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -178,10 +186,32 @@ public class UnitTestReport {
     if (getClass() != obj.getClass())
       return false;
     UnitTestReport other = (UnitTestReport) obj;
+    if (assemblyName == null) {
+      if (other.assemblyName != null)
+        return false;
+    } else if ( !assemblyName.equals(other.assemblyName))
+      return false;
+    if (asserts != other.asserts)
+      return false;
+    if (details == null) {
+      if (other.details != null)
+        return false;
+    } else if ( !details.equals(other.details))
+      return false;
+    if (errors != other.errors)
+      return false;
+    if (failures != other.failures)
+      return false;
+    if (skipped != other.skipped)
+      return false;
     if (sourceFile == null) {
       if (other.sourceFile != null)
         return false;
-    } else if (!sourceFile.equals(other.sourceFile))
+    } else if ( !sourceFile.equals(other.sourceFile))
+      return false;
+    if (tests != other.tests)
+      return false;
+    if (timeMS != other.timeMS)
       return false;
     return true;
   }
