@@ -35,6 +35,8 @@ public class PrimaryExpressionTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("typeof(void).OneAttribute"));
+    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
+    assertThat(p, parse("dbCommand.Dispose()"));
   }
 
 }
