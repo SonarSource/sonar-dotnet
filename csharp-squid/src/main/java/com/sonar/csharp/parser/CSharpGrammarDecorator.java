@@ -269,8 +269,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.anonymousMethodExpression.is(DELEGATE, opt(g.anonymousMethodSignature), g.block);
     g.anonymousMethodSignature.is(LPARENTHESIS, opt(g.anonymousMethodParameter, o2n(COMMA, g.anonymousMethodParameter)), RPARENTHESIS);
     g.anonymousMethodParameter.is(opt(g.parameterModifier), g.type, IDENTIFIER);
-    g.unaryExpression.isOr(g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression), g.preIncrementExpression,
-        g.preDecrementExpression, g.castExpression);
+    g.unaryExpression.isOr(g.castExpression, g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression), g.preIncrementExpression,
+        g.preDecrementExpression);
     g.preIncrementExpression.is(INC_OP, g.unaryExpression);
     g.preDecrementExpression.is(DEC_OP, g.unaryExpression);
     g.castExpression.is(LPARENTHESIS, g.type, RPARENTHESIS, g.unaryExpression);
