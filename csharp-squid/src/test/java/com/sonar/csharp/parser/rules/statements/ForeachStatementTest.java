@@ -35,6 +35,7 @@ public class ForeachStatementTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("foreach (Assembly assembly in AppDomain) {}"));
+    assertThat(p, parse("foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {}"));
   }
   
 }
