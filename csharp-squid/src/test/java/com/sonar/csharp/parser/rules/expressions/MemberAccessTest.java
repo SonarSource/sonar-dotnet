@@ -40,7 +40,6 @@ public class MemberAccessTest {
   }
   
   @Test
-  @Ignore("This fails whereas the ExpressionTest#realLife() passes")
   public void testRealLife() throws Exception {
     assertThat(p, parse("CurrentDomain.GetAssemblies"));
   }
