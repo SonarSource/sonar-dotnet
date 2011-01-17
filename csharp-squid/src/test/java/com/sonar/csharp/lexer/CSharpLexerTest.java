@@ -7,6 +7,7 @@ package com.sonar.csharp.lexer;
 
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
 import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
@@ -36,9 +37,6 @@ public class CSharpLexerTest {
   @Test
   public void lexInlineComment() {
     assertThat(lexer.lex("// This is a comment"), hasComment("// This is a comment"));
-    // TODO: pbm here
-    // assertThat(lexer.lex(" // This is a comment"), hasComment("// This is a comment"));
-    // assertThat(lexer.lex("int a = 2;  // This is a comment"), hasComment("// This is a comment"));
     assertThat(lexer.lex("// This is a comment // !"), hasComment("// This is a comment // !"));
     assertThat(lexer.lex("int a = 2;  // This is a comment \nint b = 3;"), hasComment("// This is a comment "));
   }
@@ -168,10 +166,9 @@ public class CSharpLexerTest {
   }
 
   @Test
-  @Ignore("Need to wait to handle preprocessing directives...")
   public void lexPreprocessingDirective() {
-    assertThat(lexer.lex("#region Constants"), hasToken("#region Constants", CSharpTokenType.PREPROCESSOR));
-    assertThat(lexer.lex(" #  region Constants\nint a = '1';"), hasToken("#  region Constants", CSharpTokenType.PREPROCESSOR));
+    assertThat(lexer.lex("#region Constants").getPreprocessingTokens().get(0).getValue(), is("#region Constants"));
+    assertThat(lexer.lex(" #  region Constants\nint a = '1';").getPreprocessingTokens().get(0).getValue(), is("#  region Constants"));
   }
 
   @Test
