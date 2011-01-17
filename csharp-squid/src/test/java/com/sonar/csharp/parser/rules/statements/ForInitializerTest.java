@@ -14,31 +14,27 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class ForStatementTest {
+public class ForInitializerTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.forStatement);
+    p.setRootRule(g.forInitializer);
   }
 
   @Test
   public void testOk() {
-    g.forInitializer.mock();
-    g.forCondition.mock();
-    g.forIterator.mock();
-    g.embeddedStatement.mock();
-    assertThat(p, parse("for ( ;; ) embeddedStatement"));
-    assertThat(p, parse("for ( forInitializer;forCondition;forIterator ) embeddedStatement"));
-    assertThat(p, parse("for ( forInitializer;;forIterator ) embeddedStatement"));
-    assertThat(p, parse("for ( ;forCondition; ) embeddedStatement"));
+    g.localVariableDeclaration.mock();
+    g.statementExpressionList.mock();
+    assertThat(p, parse("localVariableDeclaration"));
+    assertThat(p, parse("statementExpressionList"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("for( int num = count; num > 0; --num) sayHello();"));
+    assertThat(p, parse("int num = count"));
   }
 
 }

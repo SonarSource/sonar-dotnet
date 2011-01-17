@@ -321,7 +321,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.doStatement.is(DO, g.embeddedStatement, WHILE, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, SEMICOLON);
     g.forStatement.is(FOR, LPARENTHESIS, opt(g.forInitializer), SEMICOLON, opt(g.forCondition), SEMICOLON, opt(g.forIterator),
         RPARENTHESIS, g.embeddedStatement);
-    g.forInitializer.isOr(g.localConstantDeclaration, g.statementExpressionList);
+    g.forInitializer.isOr(g.localVariableDeclaration, g.statementExpressionList);
     g.forCondition.is(g.booleanExpression);
     g.forIterator.is(g.statementExpressionList);
     g.statementExpressionList.is(g.statementExpression, o2n(COMMA, g.statementExpression));
@@ -496,7 +496,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.attribute.is(g.attributeName, opt(g.attributeArguments));
     g.attributeName.is(g.typeName);
     g.attributeArguments.is(LPARENTHESIS,
-        or(and(g.positionalArgumentList, COMMA, g.namedArgumentList), g.namedArgumentList, opt(g.positionalArgumentList)), RPARENTHESIS);
+        or(g.namedArgumentList, and(g.positionalArgumentList, COMMA, g.namedArgumentList), opt(g.positionalArgumentList)), RPARENTHESIS);
     g.positionalArgumentList.is(g.positionalArgument, o2n(COMMA, g.positionalArgument));
     g.positionalArgument.is(g.attributeArgumentExpression);
     g.namedArgumentList.is(g.namedArgument, o2n(COMMA, g.namedArgument));

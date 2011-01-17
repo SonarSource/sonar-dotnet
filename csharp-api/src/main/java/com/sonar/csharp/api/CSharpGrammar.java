@@ -114,7 +114,7 @@ public class CSharpGrammar implements Grammar {
   public Rule whileStatement; // OK
   public Rule doStatement; // OK
   public Rule forStatement; // OK
-  public Rule forInitializer; // NO NEED
+  public Rule forInitializer; // OK
   public Rule forCondition; // NO NEED
   public Rule forIterator; // NO NEED
   public Rule statementExpressionList; // OK
@@ -258,7 +258,7 @@ public class CSharpGrammar implements Grammar {
   public Rule positionalArgument; // LATER
   public Rule namedArgumentList; // OK
   public Rule namedArgument; // OK
-  public Rule attributeArgumentExpression; // LATER
+  public Rule attributeArgumentExpression; // OK
 
   // A.2.13 Generics
   public Rule typeParameterList; // OK

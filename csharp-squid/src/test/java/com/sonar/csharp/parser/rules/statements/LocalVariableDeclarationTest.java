@@ -38,6 +38,7 @@ public class LocalVariableDeclarationTest {
     assertThat(p, parse("int a = 1"));
     assertThat(p, parse("int a = 1, b, c = 4"));
     assertThat(p, parse("Message message = \"Hello World\""));
+    assertThat(p, parse("int num = count"));
   }
 
 }
