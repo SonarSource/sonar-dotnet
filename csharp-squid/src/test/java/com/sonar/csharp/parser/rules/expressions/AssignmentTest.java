@@ -56,6 +56,8 @@ public class AssignmentTest {
   public void testRealLife() {
     assertThat(p, parse("message = \"Hello World\""));
     assertThat(p, parse("frameworkAssemblyInitialized = true"));
+    // TODO : Seen on the ConstraintOperators.cs file
+    // assertThat(p, parse("left_precedence = right_precedence = 1"));
   }
 
 }
