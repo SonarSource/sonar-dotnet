@@ -27,7 +27,6 @@ import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
 import static org.sonar.plugin.dotnet.coverage.Constants.*;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -185,10 +184,20 @@ public class CoverageSensor extends AbstractDotnetSensor {
     if (fileResource != null) {
       double coverage = fileCoverage.getCoverage();
       // We have the effective number of lines here
+      // TODO Is it really useful ?
       context.saveMeasure(fileResource, CoverageMetrics.ELOC,
           (double) fileCoverage.getCountLines());
+      
+      context.saveMeasure(fileResource, CoreMetrics.LINES_TO_COVER,
+          (double) fileCoverage.getCountLines());
+      
+      context.saveMeasure(fileResource, CoreMetrics.UNCOVERED_LINES,
+          (double) fileCoverage.getCountLines() - fileCoverage.getCoveredLines());
 
       context.saveMeasure(fileResource, CoreMetrics.COVERAGE,
+          convertPercentage(coverage));
+      // TODO LINE_COVERAGE & COVERAGE should not be the same 
+      context.saveMeasure(fileResource, CoreMetrics.LINE_COVERAGE,
           convertPercentage(coverage));
       context.saveMeasure(fileResource, getHitData(fileCoverage));
     }
