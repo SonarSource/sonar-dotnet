@@ -38,6 +38,7 @@ public class TypeTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("AClass"));
     assertThat(p, parse("AClass[]"));
+    assertThat(p, parse("int?"));
   }
 
 }

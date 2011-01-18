@@ -31,7 +31,7 @@ public class CSharpGrammar implements Grammar {
   public Rule integralType; // OK - tested via SimpleTypeTest
   public Rule floatingPointType; // OK - tested via SimpleTypeTest
   public Rule nullableType; // OK
-  public Rule nonNullableValueType; // LATER
+  public Rule nonNullableValueType; // OK - tested via NullableTypeTest
   public Rule referenceType; // OK
   public Rule classType; // OK
   public Rule interfaceType; // LATER

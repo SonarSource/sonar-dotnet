@@ -213,7 +213,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   private void types(CSharpGrammar g) {
     g.type.isOr(g.referenceType, g.valueType, g.typeParameter);
     g.valueType.isOr(g.structType, g.enumType);
-    g.structType.isOr(g.typeName, g.simpleType, g.nullableType);
+    g.structType.isOr(g.nullableType, g.typeName, g.simpleType);
     g.simpleType.isOr(g.numericType, BOOL);
     g.numericType.isOr(g.integralType, g.floatingPointType, DECIMAL);
     g.integralType.isOr(SBYTE, BYTE, SHORT, USHORT, INT, UINT, LONG, ULONG, CHAR);

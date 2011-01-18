@@ -23,13 +23,13 @@ public class NullableTypeTest {
   @Before
   public void init() {
     p.setRootRule(g.nullableType);
-    g.enumType.mock();
-    g.typeName.mock();
-    g.simpleType.mock();
   }
 
   @Test
   public void testOk() {
+    g.enumType.mock();
+    g.typeName.mock();
+    g.simpleType.mock();
     assertThat(p, parse("enumType ?"));
     assertThat(p, parse("typeName ?"));
     assertThat(p, parse("simpleType ?"));
@@ -37,7 +37,13 @@ public class NullableTypeTest {
 
   @Test
   public void testKo() {
+    g.enumType.mock();
     assertThat(p, notParse("enumType"));
+  }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("int?"));
   }
 
 }
