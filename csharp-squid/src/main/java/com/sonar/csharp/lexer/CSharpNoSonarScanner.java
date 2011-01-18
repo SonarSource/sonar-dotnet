@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Token;
 
@@ -23,7 +24,7 @@ public class CSharpNoSonarScanner {
   }
 
   public CSharpNoSonarScanner(Charset charset) {
-    this.lexer = new CSharpLexer(charset);
+    this.lexer = new CSharpLexer(new CSharpConfiguration(charset));
   }
 
   public Set<Integer> scan(File csharpFile) {

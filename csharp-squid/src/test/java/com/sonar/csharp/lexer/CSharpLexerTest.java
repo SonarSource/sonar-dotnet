@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.CSharpPunctuator;
 import com.sonar.csharp.api.CSharpTokenType;
@@ -31,7 +32,7 @@ public class CSharpLexerTest {
 
   @Before
   public void init() {
-    lexer = new CSharpLexer(Charset.forName("UTF-8"));
+    lexer = new CSharpLexer(new CSharpConfiguration(Charset.forName("UTF-8")));
   }
 
   @Test

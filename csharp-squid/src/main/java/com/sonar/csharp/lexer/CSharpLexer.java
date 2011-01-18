@@ -17,13 +17,13 @@ import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.opt;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.or;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.channel.Channel;
 import org.sonar.channel.ChannelDispatcher;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.CSharpPunctuator;
 import com.sonar.csharp.api.CSharpTokenType;
@@ -55,14 +55,14 @@ public class CSharpLexer extends Lexer {
    * ${@inheritDoc}
    */
   public CSharpLexer() {
-    this(Charset.defaultCharset());
+    this(new CSharpConfiguration());
   }
 
   /**
    * ${@inheritDoc}
    */
-  public CSharpLexer(Charset defaultCharset) {
-    super(defaultCharset);
+  public CSharpLexer(CSharpConfiguration configuration) {
+    super(configuration.getCharset());
     setPreprocessors(new Preprocessor[] { new StandardPreprocessorLinePreprocessor() });
   }
 
@@ -90,8 +90,8 @@ public class CSharpLexer extends Lexer {
         o2n(or(LETTER_CHAR, DECIMAL_DIGIT_CHAR, CONNECTING_CHAR, COMBINING_CHAR, FORMATTING_CHAR))), true, CSharpKeyword.values()));
     channels.add(new PunctuatorChannel(CSharpPunctuator.values()));
     // Preprocessor directives
-     channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
-//    channels.add(new BlackHoleChannel("#[^\\r\\n]*"));
+    channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
+    // channels.add(new BlackHoleChannel("#[^\\r\\n]*"));
     // Others
     channels.add(new BlackHoleChannel("[\\s]"));
     // TODO : remove at the end

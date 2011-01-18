@@ -13,6 +13,7 @@ import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.CSharpTokenType;
 import com.sonar.csharp.lexer.CSharpLexer;
 import com.sonar.sslr.api.GenericTokenType;
@@ -31,7 +32,7 @@ public class CSharpCPDTokenizer implements Tokenizer {
   }
 
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
-    CSharpLexer lexer = new CSharpLexer(charset);
+    CSharpLexer lexer = new CSharpLexer(new CSharpConfiguration(charset));
     String fileName = source.getFileName();
     LexerOutput tokens = lexer.lex(new File(fileName));
     for (Token token : tokens.getTokens()) {

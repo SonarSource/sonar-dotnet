@@ -8,6 +8,7 @@ package com.sonar.csharp.integration;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,13 +18,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.parser.CSharpParser;
 
 @RunWith(value = Parameterized.class)
 public class CSharpPreIntegrationTest {
 
   private File cSharpFile = null;
-  private CSharpParser parser = new CSharpParser();
+  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
 
   public CSharpPreIntegrationTest(File f) {
     this.cSharpFile = f;
@@ -37,14 +39,9 @@ public class CSharpPreIntegrationTest {
   }
 
   @Test
-  @Ignore("Trop beau pour être vrai...")
+  @Ignore
   public void parseCSharpSource() throws Exception {
-    try {
-      parser.parse(cSharpFile);
-      System.out.println(cSharpFile);
-    } catch (Exception e) {
-      throw e;
-    }
+    parser.parse(cSharpFile);
   }
 
   protected static void addParametersForPath(Collection<Object[]> parameters, String path) throws URISyntaxException {

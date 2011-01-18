@@ -6,6 +6,7 @@
 
 package com.sonar.csharp.parser;
 
+import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.lexer.CSharpLexer;
 import com.sonar.sslr.impl.Parser;
@@ -19,4 +20,10 @@ public class CSharpParser extends Parser<CSharpGrammar> {
   public CSharpParser() {
     super(new CSharpGrammar(), new CSharpLexer(), new CSharpGrammarDecorator());
   }
+
+  @SuppressWarnings("unchecked")
+  public CSharpParser(CSharpConfiguration configuration) {
+    super(new CSharpGrammar(), new CSharpLexer(configuration), new CSharpGrammarDecorator());
+  }
+  
 }
