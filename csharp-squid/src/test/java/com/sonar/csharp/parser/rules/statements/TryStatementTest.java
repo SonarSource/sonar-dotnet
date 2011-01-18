@@ -22,16 +22,25 @@ public class TryStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.tryStatement);
-    g.block.mock();
-    g.catchClauses.mock();
-    g.finallyClause.mock();
   }
 
   @Test
   public void testOk() {
+    g.block.mock();
+    g.catchClauses.mock();
+    g.finallyClause.mock();
     assertThat(p, parse("try block catchClauses"));
     assertThat(p, parse("try block finallyClause"));
     assertThat(p, parse("try block catchClauses finallyClause"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p,
+        parse("try { myClass.RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
+    // TODO test that when recursion has been fixed in SSLR
+    // assertThat(p,
+    // parse("try { RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
   }
 
 }
