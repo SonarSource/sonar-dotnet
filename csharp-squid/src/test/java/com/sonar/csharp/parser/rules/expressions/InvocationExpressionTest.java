@@ -35,8 +35,7 @@ public class InvocationExpressionTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("GetAssemblies()"));
-    // TODO 2nd fails while it passes in ExpressionTest
-    // assertThat(p, parse("dbCommand.Dispose()"));
+    assertThat(p, parse("dbCommand.Dispose()"));
   }
 
 }

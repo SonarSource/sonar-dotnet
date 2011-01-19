@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
+import com.sonar.sslr.impl.loggers.SslrLogger;
 
 public class MemberAccessTest {
 
@@ -42,8 +43,7 @@ public class MemberAccessTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("CurrentDomain.Assemblies"));
-    // TODO : the following test fails, while it should not according to the grammar
-    //assertThat(p, parse("CurrentDomain.GetAssemblies().Name"));
+    assertThat(p, parse("CurrentDomain.GetAssemblies().Name"));
   }
 
 }
