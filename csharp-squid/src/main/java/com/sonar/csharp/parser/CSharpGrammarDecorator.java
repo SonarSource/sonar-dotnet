@@ -238,10 +238,10 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.argumentList.is(g.argument, o2n(COMMA, g.argument));
     g.argument.isOr(g.expression, and(REF, g.variableReference), and(OUT, g.variableReference));
     g.primaryExpression.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression);
-    g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.elementAccess, g.invocationExpression,
-        g.memberAccess, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression, g.objectCreationExpression,
-        g.delegateCreationExpression, g.typeOfExpression, g.checkedExpression, g.uncheckedExpression, g.defaultValueExpression,
-        g.anonymousMethodExpression);
+    g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.elementAccess, g.memberAccess,
+        g.invocationExpression, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression,
+        g.objectCreationExpression, g.delegateCreationExpression, g.typeOfExpression, g.checkedExpression, g.uncheckedExpression,
+        g.defaultValueExpression, g.anonymousMethodExpression);
     g.simpleName.is(IDENTIFIER, opt(g.typeArgumentList));
     g.parenthesizedExpression.is(LPARENTHESIS, g.expression, RPARENTHESIS);
     g.memberAccess.is(or(g.primaryExpression, g.predefinedType, g.qualifiedAliasMember), DOT, IDENTIFIER, opt(g.typeArgumentList));

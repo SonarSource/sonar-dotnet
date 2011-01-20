@@ -36,6 +36,7 @@ public class InvocationExpressionTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
+    assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message)"));
   }
 
 }

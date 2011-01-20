@@ -40,6 +40,7 @@ public class StatementTest {
     assertThat(p, parse("Integer i = 15;"));
     assertThat(p, parse("frameIndex++;"));
     assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty);"));
+    assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message);"));
   }
 
 }
