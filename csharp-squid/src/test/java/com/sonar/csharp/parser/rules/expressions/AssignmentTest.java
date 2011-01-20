@@ -58,8 +58,7 @@ public class AssignmentTest {
     assertThat(p, parse("frameworkAssemblyInitialized = true"));
     assertThat(p, parse("GetProperties(true)[key] = value"));
     assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty)"));
-    // TODO : Seen on the ConstraintOperators.cs file
-    // assertThat(p, parse("left_precedence = right_precedence = 1"));
+    assertThat(p, parse("m_headFilter = m_tailFilter = filter"));
   }
 
 }

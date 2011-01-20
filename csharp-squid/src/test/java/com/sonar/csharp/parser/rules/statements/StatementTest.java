@@ -41,6 +41,7 @@ public class StatementTest {
     assertThat(p, parse("frameIndex++;"));
     assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty);"));
     assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message);"));
+    assertThat(p, parse("m_headFilter = m_tailFilter = filter;"));
   }
 
 }

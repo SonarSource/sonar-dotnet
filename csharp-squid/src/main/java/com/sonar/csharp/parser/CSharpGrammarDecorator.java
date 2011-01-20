@@ -291,7 +291,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         .is(g.unaryExpression,
             or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
                 RIGHT_ASSIGN), g.expression);
-    g.expression.isOr(g.conditionalExpression, g.assignment);
+    g.expression.isOr(g.assignment, g.conditionalExpression);
     g.constantExpression.is(g.expression);
     g.booleanExpression.is(g.expression);
   }
