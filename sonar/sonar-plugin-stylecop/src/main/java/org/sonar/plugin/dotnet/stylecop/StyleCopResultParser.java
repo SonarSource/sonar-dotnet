@@ -92,19 +92,26 @@ public class StyleCopResultParser extends AbstractXmlParser {
       String message = getNodeContent(issueElement, "message");
       String lineNumber = getNodeContent(issueElement, "line");
       
-      if (GeneratedCodeFilter.INSTANCE.isGenerated(filePath)) {
-        // skip warnings on generated code
-        continue;
+      final Resource<?> resource;
+      if (StringUtils.isEmpty(filePath)) {
+        log.debug("violation without file path");
+        resource = null;
+      } else {
+        resource = CSharpFileLocator.INSTANCE.getResource(project, filePath);
+        if (resource == null) {
+          log.debug("violation on an excluded file {}", file);
+          continue;
+        }
       }
       
-      Resource<?> resource = getResource(filePath);
-
       Integer line = getIntValue(lineNumber);
       Rule rule = rulesManager.getPluginRule(StyleCopPlugin.KEY, key);
       if (rule == null) {
         // Skips the non registered rules
+        log.debug("violation found for an unknown '{}' rule", key);
         continue;
       }
+      
       ActiveRule activeRule = profile.getActiveRule(StyleCopPlugin.KEY, key);
       Violation violation = new Violation(rule, resource);
       violation.setLineId(line);
@@ -116,32 +123,6 @@ public class StyleCopResultParser extends AbstractXmlParser {
       // We store the violation
       context.saveViolation(violation);
     }
-  }
-
-  public Resource<?> getResource(String filePath) {
-    if (StringUtils.isBlank(filePath)) {
-      return null;
-    }
-
-    if (log.isDebugEnabled()) {
-      log.debug("Getting resource for path: " + filePath);
-    }
-
-    File file = new File(filePath);
-    CSharpFile fileResource;
-    if (file.exists()) {
-      try {
-        fileResource = CSharpFileLocator.INSTANCE.locate(project, file, false);
-      } catch (InvalidResourceException ex) {
-        log.warn("resource error", ex);
-        fileResource = null;
-      }
-    } else {
-      log.error("Unable to ge resource for path " + filePath);
-      fileResource = null;
-    }
-
-    return fileResource;
   }
 
   /**
@@ -157,6 +138,9 @@ public class StyleCopResultParser extends AbstractXmlParser {
     try {
       return (int) ParsingUtils.parseNumber(lineStr);
     } catch (ParseException ignore) {
+      if (log.isDebugEnabled()) {
+        log.debug("int parsing error" + lineStr, ignore);
+      }
       return null;
     }
   }

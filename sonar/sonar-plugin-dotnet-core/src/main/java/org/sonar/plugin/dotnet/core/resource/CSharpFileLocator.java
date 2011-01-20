@@ -22,21 +22,24 @@ package org.sonar.plugin.dotnet.core.resource;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 
+/**
+ * Singleton helper used to locate
+ * source files.
+ * @author Alexandre Victoor
+ *
+ */
 public enum CSharpFileLocator {
   INSTANCE;
 
-  private final static Logger log = LoggerFactory
-      .getLogger(CSharpFileLocator.class);
+  private final static Logger log = LoggerFactory.getLogger(CSharpFileLocator.class);
 
   private Map<File, VisualStudioProject> csFilesProjectMap = Collections.EMPTY_MAP;
 
@@ -56,12 +59,45 @@ public enum CSharpFileLocator {
       result = CSharpFile.from(visualProject, absoluteFile, unitTest);
     } else {
       log.debug(
-          "file {} ignored (i.e. link file or file not referenced by any project)",
+          "file {} ignored (i.e. link file, file not referenced by any project, or project/file excluded)",
           absoluteFile);
       result = null;
     }
 
     return result;
+  }
+  
+  private Resource<?> getResource(Project project, File file) {
+    CSharpFile fileResource;
+    if (file.exists()) {
+      try {
+        fileResource = locate(project, file, false);
+      } catch (InvalidResourceException ex) {
+        log.warn("resource error", ex);
+        fileResource = null;
+      }
+    } else {
+      log.error("Unable to ge resource for path {}", file);
+      fileResource = null;
+    }
+
+    return fileResource;
+  }
+  
+  public Resource<?> getResource(Project project, String filePath) {
+    if (log.isDebugEnabled()) {
+      log.debug("Getting resource for path: " + filePath);
+    }
+    File file = new File(filePath);
+    return getResource(project, file);
+  }
+  
+  public Resource<?> getResource(Project project, String path, String fileName) {
+    if (log.isDebugEnabled()) {
+      log.debug("Getting resource for path: " + path + " " + fileName);
+    }
+    File file = new File(path, fileName);
+    return getResource(project, file);
   }
 
 }

@@ -35,6 +35,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -45,6 +47,8 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN May 19, 2009
  */
 public class StyleCopRuleParser {
+  
+  private final static Logger log = LoggerFactory.getLogger(StyleCopRuleParser.class);
 
   /**
    * Parses the context of FXCop rules.
@@ -103,7 +107,7 @@ public class StyleCopRuleParser {
         result.add(rule);
       }
     } catch (XPathExpressionException e) {
-      // Nothing
+      log.debug("Xpath error un stylecop report", e);
     }
 
     return result;

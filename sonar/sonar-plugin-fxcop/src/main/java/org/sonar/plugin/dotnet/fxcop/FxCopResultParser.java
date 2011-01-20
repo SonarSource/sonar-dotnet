@@ -52,8 +52,7 @@ import org.w3c.dom.Element;
  */
 public class FxCopResultParser extends AbstractXmlParser {
 
-  private final static Logger log = LoggerFactory
-      .getLogger(FxCopResultParser.class);
+  private final static Logger log = LoggerFactory.getLogger(FxCopResultParser.class);
 
   private Project project;
   private SensorContext context;
@@ -91,11 +90,24 @@ public class FxCopResultParser extends AbstractXmlParser {
       String key = getNodeContent(issueElement, "key");
       String message = getNodeContent(issueElement, "message");
       String lineNumber = getNodeContent(issueElement, "line");
-      Resource<?> resource = getResource(path, fileName);
+      
+      final Resource<?> resource;
+      if (StringUtils.isBlank(fileName) || StringUtils.isBlank(path)) {
+        log.debug("violation without file path");
+        resource = null;
+      } else {
+        resource = CSharpFileLocator.INSTANCE.getResource(project, path, fileName);
+        if (resource == null) {
+          log.debug("violation on an excluded file {}", file);
+          continue;
+        }
+      }
+      
       Integer line = getIntValue(lineNumber);
       Rule rule = rulesManager.getPluginRule(FxCopPlugin.KEY, key);
       if (rule == null) {
         // We skip the rules that were not registered
+        log.debug("violation found for an unknown '{}' rule", key);
         continue;
       }
       ActiveRule activeRule = profile.getActiveRule(FxCopPlugin.KEY, key);
@@ -109,28 +121,6 @@ public class FxCopResultParser extends AbstractXmlParser {
       // We store the violation
       context.saveViolation(violation);
     }
-  }
-
-  public Resource<?> getResource(String path, String fileName) {
-    if (StringUtils.isBlank(fileName) || StringUtils.isBlank(path)) {
-      return null;
-    }
-    File file = new File(path, fileName);
-
-    CSharpFile fileResource;
-    if (file.exists()) {
-      try {
-        fileResource = CSharpFileLocator.INSTANCE.locate(project, file, false);
-      } catch (InvalidResourceException ex) {
-        log.warn("resource error", ex);
-        fileResource = null;
-      }
-    } else {
-      log.error("Unable to ge resource for path " + file);
-      fileResource = null;
-    }
-
-    return fileResource;
   }
 
   /**

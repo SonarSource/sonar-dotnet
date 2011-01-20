@@ -37,9 +37,7 @@ import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
-import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
-import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.w3c.dom.Element;
 
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
@@ -168,7 +166,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
         }
       }
 
-      Resource<?> resource = getResource(filePath);
+      Resource<?> resource = CSharpFileLocator.INSTANCE.getResource(project, filePath);
       
       Rule rule = rulesManager.getPluginRule(GendarmePlugin.KEY, key);
       if (rule == null || resource == null) {
@@ -186,32 +184,6 @@ public class GendarmeResultParser extends AbstractXmlParser {
       // We store the violation
       context.saveViolation(violation);
     }
-  }
-
-  public Resource<?> getResource(String filePath) {
-    if (StringUtils.isBlank(filePath)) {
-      return null;
-    }
-
-    if (log.isDebugEnabled()) {
-      log.debug("Getting resource for path: " + filePath);
-    }
-
-    File file = new File(filePath);
-    CSharpFile fileResource;
-    if (file.exists()) {
-      try {
-        fileResource = CSharpFileLocator.INSTANCE.locate(project, file, false);
-      } catch (InvalidResourceException ex) {
-        log.warn("resource error", ex);
-        fileResource = null;
-      }
-    } else {
-      log.error("Unable to ge resource for path " + filePath);
-      fileResource = null;
-    }
-
-    return fileResource;
   }
 
 }

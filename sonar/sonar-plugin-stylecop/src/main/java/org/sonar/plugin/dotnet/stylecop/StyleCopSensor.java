@@ -55,8 +55,8 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN Apr 6, 2010
  */
 public class StyleCopSensor extends AbstractDotnetSensor {
-  private final static Logger log = LoggerFactory
-      .getLogger(StyleCopSensor.class);
+  
+  private final static Logger log = LoggerFactory.getLogger(StyleCopSensor.class);
   
 
   private RulesManager rulesManager;
