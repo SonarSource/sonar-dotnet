@@ -380,7 +380,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.returnType.isOr(g.type, VOID);
     // NOTE: g.memberName does not exactly stick to the specification (see page 462 of ECMA specification)
     // Normally it would be: g.memberName.isOr(and(g.interfaceType, DOT, IDENTIFIER), IDENTIFIER);
-    g.memberName.is(g.namespaceOrTypeName);
+    g.memberName.is(o2n(or(g.qualifiedAliasMember, and(or(THIS, IDENTIFIER), opt(g.typeArgumentList))), DOT), or(THIS, IDENTIFIER),
+        opt(g.typeArgumentList), opt(LBRACKET, INT, IDENTIFIER, RBRACKET));
     g.methodBody.isOr(g.block, SEMICOLON);
     g.formalParameterList.isOr(and(g.fixedParameters, opt(COMMA, g.parameterArray)), g.parameterArray);
     g.fixedParameters.is(g.fixedParameter, o2n(COMMA, g.fixedParameter));
