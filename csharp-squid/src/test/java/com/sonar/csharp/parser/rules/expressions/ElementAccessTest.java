@@ -22,14 +22,19 @@ public class ElementAccessTest {
   @Before
   public void init() {
     p.setRootRule(g.elementAccess);
-    g.primaryNoArrayCreationExpression.mock();
-    g.expressionList.mock();
   }
 
   @Test
   public void testOk() {
+    g.primaryNoArrayCreationExpression.mock();
+    g.expressionList.mock();
     assertThat(p, parse("primaryNoArrayCreationExpression[expressionList]"));
     assertThat(p, parse("primaryNoArrayCreationExpression [ expressionList ]"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("GetProperties(true)[key]"));
+  }
+  
 }
