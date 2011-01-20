@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.classes;
+package com.sonar.csharp.parser.rules.types;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
@@ -15,30 +15,31 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class MemberNameTest {
+public class InterfaceTypeTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.memberName);
+    p.setRootRule(g.interfaceType);
   }
 
   @Test
   public void testOk() {
-    g.namespaceOrTypeName.mock();
-    assertThat(p, parse("namespaceOrTypeName"));
+    g.typeName.mock();
+    assertThat(p, parse("typeName"));
   }
 
   @Test
   public void testKo() {
-    assertThat(p, notParse(""));
+    assertThat(p, notParse("object"));
+    assertThat(p, notParse("string"));
   }
-
+  
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("ICollection.CopyTo"));
+    assertThat(p, parse("ICollection"));
   }
 
 }

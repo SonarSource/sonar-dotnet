@@ -378,7 +378,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses));
     g.methodModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     g.returnType.isOr(g.type, VOID);
-    g.memberName.isOr(and(g.interfaceType, DOT, IDENTIFIER), IDENTIFIER);
+    // NOTE: g.memberName does not exactly stick to the specification (see page 462 of ECMA specification)
+    // Normally it would be: g.memberName.isOr(and(g.interfaceType, DOT, IDENTIFIER), IDENTIFIER);
+    g.memberName.is(g.namespaceOrTypeName);
     g.methodBody.isOr(g.block, SEMICOLON);
     g.formalParameterList.isOr(and(g.fixedParameters, opt(COMMA, g.parameterArray)), g.parameterArray);
     g.fixedParameters.is(g.fixedParameter, o2n(COMMA, g.fixedParameter));
@@ -495,7 +497,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.attributeList.is(g.attribute, o2n(COMMA, g.attribute));
     g.attribute.is(g.attributeName, opt(g.attributeArguments));
     g.attributeName.is(g.typeName);
-    // g.attributeArguments does not exactly stick to the specification, as normally a positionalArgument can not appear after a
+    // NOTE: g.attributeArguments does not exactly stick to the specification, as normally a positionalArgument can not appear after a
     // namedArgument (see page 469 of ECMA specification)
     g.attributeArguments.is(LPARENTHESIS,
         opt(or(g.namedArgument, g.positionalArgument), o2n(COMMA, or(g.namedArgument, g.positionalArgument))), RPARENTHESIS);

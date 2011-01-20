@@ -34,7 +34,7 @@ public class CSharpGrammar implements Grammar {
   public Rule nonNullableValueType; // OK - tested via NullableTypeTest
   public Rule referenceType; // OK
   public Rule classType; // OK
-  public Rule interfaceType; // LATER
+  public Rule interfaceType; // OK
   public Rule arrayType; // OK
   public Rule nonArrayType; // LATER
   public Rule rankSpecifier; // OK
