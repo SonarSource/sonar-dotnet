@@ -36,6 +36,7 @@ public class BlockTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("{ Integer i = 15; }"));
     assertThat(p, parse("{ Integer i = 15;  frameIndex++; }"));
+    assertThat(p, parse("{ loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
   }
 
 }

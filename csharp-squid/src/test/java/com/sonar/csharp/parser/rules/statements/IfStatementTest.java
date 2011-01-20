@@ -22,15 +22,19 @@ public class IfStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.ifStatement);
-    g.booleanExpression.mock();
-    g.embeddedStatement.mock();
-
   }
 
   @Test
   public void testOk() {
+    g.booleanExpression.mock();
+    g.embeddedStatement.mock();
     assertThat(p, parse("if ( booleanExpression ) embeddedStatement"));
     assertThat(p, parse("if ( booleanExpression ) embeddedStatement else embeddedStatement"));
+  }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("if (true) { loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
   }
 
 }
