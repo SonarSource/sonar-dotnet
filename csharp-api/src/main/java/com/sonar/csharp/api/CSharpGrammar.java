@@ -254,9 +254,7 @@ public class CSharpGrammar implements Grammar {
   public Rule attribute; // OK
   public Rule attributeName; // LATER
   public Rule attributeArguments; // OK
-  public Rule positionalArgumentList; // OK
   public Rule positionalArgument; // LATER
-  public Rule namedArgumentList; // OK
   public Rule namedArgument; // OK
   public Rule attributeArgumentExpression; // OK
 

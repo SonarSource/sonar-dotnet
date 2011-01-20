@@ -5,11 +5,11 @@
  */
 package com.sonar.csharp.parser.rules.attributes;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
@@ -27,20 +27,27 @@ public class AttributeArgumentsTest {
 
   @Test
   public void testOk() {
-    g.positionalArgumentList.mock();
-    g.namedArgumentList.mock();
+    g.positionalArgument.mock();
+    g.namedArgument.mock();
     assertThat(p, parse("()"));
-    assertThat(p, parse("(positionalArgumentList)"));
-    assertThat(p, parse("(positionalArgumentList , namedArgumentList)"));
-    assertThat(p, parse("(namedArgumentList)"));
+    assertThat(p, parse("(positionalArgument)"));
+    assertThat(p, parse("(namedArgument)"));
+    assertThat(p, parse("(positionalArgument, namedArgument)"));
+    assertThat(p, parse("(positionalArgument, positionalArgument, namedArgument)"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
 
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("(AttributeTargets.Assembly)"));
     assertThat(p, parse("(AllowMultiple=true)"));
-    // TODO : the following assertion fails while it passes in PositionalArgumentListTest and NamedArgumentListTest
-    // assertThat(p, parse("(AttributeTargets.Assembly,AllowMultiple=true)"));
+    assertThat(p, parse("(AllowMultiple=true, AllowMultiple=true)"));
+    assertThat(p, parse("(AttributeTargets.Assembly, AttributeTargets.Assembly)"));
+    assertThat(p, parse("(AttributeTargets.Assembly,AllowMultiple=true)"));
   }
 
 }

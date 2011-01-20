@@ -37,10 +37,7 @@ public class TryStatementTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p,
-        parse("try { myClass.RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
-    // TODO test that when recursion has been fixed in SSLR
-    // assertThat(p,
-    // parse("try { RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
+        parse("try { RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
   }
 
 }

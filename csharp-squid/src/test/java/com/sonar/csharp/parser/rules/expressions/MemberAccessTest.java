@@ -9,12 +9,10 @@ import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
-import com.sonar.sslr.impl.loggers.SslrLogger;
 
 public class MemberAccessTest {
 
@@ -39,7 +37,7 @@ public class MemberAccessTest {
     assertThat(p, parse("qualifiedAliasMember.id"));
     assertThat(p, parse("qualifiedAliasMember.id typeArgumentList"));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("CurrentDomain.Assemblies"));

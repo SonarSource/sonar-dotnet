@@ -238,8 +238,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.argumentList.is(g.argument, o2n(COMMA, g.argument));
     g.argument.isOr(g.expression, and(REF, g.variableReference), and(OUT, g.variableReference));
     g.primaryExpression.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression);
-    g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.invocationExpression,
-        g.elementAccess, g.memberAccess, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression, g.objectCreationExpression,
+    g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.invocationExpression, g.elementAccess,
+        g.memberAccess, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression, g.objectCreationExpression,
         g.delegateCreationExpression, g.typeOfExpression, g.checkedExpression, g.uncheckedExpression, g.defaultValueExpression,
         g.anonymousMethodExpression);
     g.simpleName.is(IDENTIFIER, opt(g.typeArgumentList));
@@ -269,8 +269,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.anonymousMethodExpression.is(DELEGATE, opt(g.anonymousMethodSignature), g.block);
     g.anonymousMethodSignature.is(LPARENTHESIS, opt(g.anonymousMethodParameter, o2n(COMMA, g.anonymousMethodParameter)), RPARENTHESIS);
     g.anonymousMethodParameter.is(opt(g.parameterModifier), g.type, IDENTIFIER);
-    g.unaryExpression.isOr(g.castExpression, g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression), g.preIncrementExpression,
-        g.preDecrementExpression);
+    g.unaryExpression.isOr(g.castExpression, g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression),
+        g.preIncrementExpression, g.preDecrementExpression);
     g.preIncrementExpression.is(INC_OP, g.unaryExpression);
     g.preDecrementExpression.is(DEC_OP, g.unaryExpression);
     g.castExpression.is(LPARENTHESIS, g.type, RPARENTHESIS, g.unaryExpression);
@@ -495,11 +495,11 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.attributeList.is(g.attribute, o2n(COMMA, g.attribute));
     g.attribute.is(g.attributeName, opt(g.attributeArguments));
     g.attributeName.is(g.typeName);
+    // g.attributeArguments does not exactly stick to the specification, as normally a positionalArgument can not appear after a
+    // namedArgument (see page 469 of ECMA specification)
     g.attributeArguments.is(LPARENTHESIS,
-        or(g.namedArgumentList, and(g.positionalArgumentList, COMMA, g.namedArgumentList), opt(g.positionalArgumentList)), RPARENTHESIS);
-    g.positionalArgumentList.is(g.positionalArgument, o2n(COMMA, g.positionalArgument));
+        opt(or(g.namedArgument, g.positionalArgument), o2n(COMMA, or(g.namedArgument, g.positionalArgument))), RPARENTHESIS);
     g.positionalArgument.is(g.attributeArgumentExpression);
-    g.namedArgumentList.is(g.namedArgument, o2n(COMMA, g.namedArgument));
     g.namedArgument.is(IDENTIFIER, EQUAL, g.attributeArgumentExpression);
     g.attributeArgumentExpression.is(g.expression);
   }
