@@ -37,6 +37,7 @@ public class InvocationExpressionTest {
     assertThat(p, parse("GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
     assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message)"));
+    assertThat(p, parse("string.Format(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)"));
   }
 
 }

@@ -75,7 +75,7 @@ public class CSharpLexer extends Lexer {
     channels.add(regexp(COMMENT, "/\\*", ANY_CHAR + "*?", "\\*/"));
     // Literals : Strings
     channels.add(regexp(CSharpTokenType.STRING_LITERAL, "\"", o2n(or("\\\\.", anyButNot("\"", "\\n", "\\r"))), "\""));
-    channels.add(regexp(CSharpTokenType.STRING_LITERAL, "@\"", o2n(anyButNot("\"")), "\""));
+    channels.add(regexp(CSharpTokenType.STRING_LITERAL, "@\"", o2n(or("\"\"", anyButNot("\""))), "\""));
     // Literals : Character
     channels.add(regexp(CSharpTokenType.CHARACTER_LITERAL, "'", one2n(or("\\\\.", anyButNot("'", "\\n", "\\r"))), "'"));
     // Literals : Reals

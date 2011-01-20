@@ -105,6 +105,7 @@ public class CSharpLexerTest {
     assertThat(lexer.lex("@\"Foo \n and \n bar\""), hasToken("@\"Foo \n and \n bar\"", CSharpTokenType.STRING_LITERAL));
     assertThat(lexer.lex("@\"Software\\nunit.org\\Nunit-Test\\\""),
         hasToken("@\"Software\\nunit.org\\Nunit-Test\\\"", CSharpTokenType.STRING_LITERAL));
+    assertThat(lexer.lex("@\"<samepath \"\"{0}\"\" {1}>\""), hasToken("@\"<samepath \"\"{0}\"\" {1}>\"", CSharpTokenType.STRING_LITERAL));
   }
 
   @Test
