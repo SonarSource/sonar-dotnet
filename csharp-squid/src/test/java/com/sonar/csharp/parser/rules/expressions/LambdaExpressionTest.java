@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -14,27 +15,31 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class ObjectCreationExpressionTest {
+public class LambdaExpressionTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.objectCreationExpression);
+    p.setRootRule(g.lambdaExpression);
   }
 
   @Test
   public void testOk() {
-    g.argumentList.mock();
-    g.type.mock();
-    assertThat(p, parse("new type()"));
-    assertThat(p, parse("new type(argumentList)"));
+    g.anonymousFunctionSignature.mock();
+    g.anonymousFunctionBody.mock();
+    assertThat(p, parse("anonymousFunctionSignature => anonymousFunctionBody"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
   
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("new MyClass()"));
+    assertThat(p, parse("(x,y)=>String.Compare(x, y, true)"));
   }
 
 }

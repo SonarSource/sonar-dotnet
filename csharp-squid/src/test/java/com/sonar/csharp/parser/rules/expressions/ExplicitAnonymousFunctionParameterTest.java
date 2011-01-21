@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -14,22 +15,27 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class AnonymousMethodSignatureTest {
+public class ExplicitAnonymousFunctionParameterTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.anonymousMethodSignature);
-    g.anonymousMethodParameter.mock();
+    p.setRootRule(g.explicitAnonymousFunctionParameter);
+    g.anonymousFunctionParameterModifier.mock();
+    g.type.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("()"));
-    assertThat(p, parse("(anonymousMethodParameter)"));
-    assertThat(p, parse("(anonymousMethodParameter, anonymousMethodParameter)"));
+    assertThat(p, parse("type id"));
+    assertThat(p, parse("anonymousFunctionParameterModifier type id"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
 
 }

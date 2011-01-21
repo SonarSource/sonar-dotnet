@@ -95,6 +95,7 @@ import static com.sonar.csharp.api.CSharpPunctuator.EXCLAMATION;
 import static com.sonar.csharp.api.CSharpPunctuator.GE_OP;
 import static com.sonar.csharp.api.CSharpPunctuator.INC_OP;
 import static com.sonar.csharp.api.CSharpPunctuator.INFERIOR;
+import static com.sonar.csharp.api.CSharpPunctuator.LAMBDA;
 import static com.sonar.csharp.api.CSharpPunctuator.LBRACKET;
 import static com.sonar.csharp.api.CSharpPunctuator.LCURLYBRACE;
 import static com.sonar.csharp.api.CSharpPunctuator.LEFT_ASSIGN;
@@ -266,9 +267,6 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.checkedExpression.is(CHECKED, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.uncheckedExpression.is(UNCHECKED, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.defaultValueExpression.is(DEFAULT, LPARENTHESIS, g.type, RPARENTHESIS);
-    g.anonymousMethodExpression.is(DELEGATE, opt(g.anonymousMethodSignature), g.block);
-    g.anonymousMethodSignature.is(LPARENTHESIS, opt(g.anonymousMethodParameter, o2n(COMMA, g.anonymousMethodParameter)), RPARENTHESIS);
-    g.anonymousMethodParameter.is(opt(g.parameterModifier), g.type, IDENTIFIER);
     g.unaryExpression.isOr(g.castExpression, g.primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), g.unaryExpression),
         g.preIncrementExpression, g.preDecrementExpression);
     g.preIncrementExpression.is(INC_OP, g.unaryExpression);
@@ -287,6 +285,17 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.conditionalOrExpression.is(g.conditionalAndExpression, o2n(OR_OP, g.conditionalAndExpression));
     g.nullCoalescingExpression.is(g.conditionalOrExpression, opt(DOUBLE_QUESTION, g.nullCoalescingExpression));
     g.conditionalExpression.is(g.nullCoalescingExpression, opt(QUESTION, g.expression, COLON, g.expression));
+    g.lambdaExpression.is(g.anonymousFunctionSignature, LAMBDA, g.anonymousFunctionBody);
+    g.anonymousMethodExpression.is(DELEGATE, opt(g.explicitAnonymousFunctionSignature), g.block);
+    g.anonymousFunctionSignature.isOr(g.explicitAnonymousFunctionSignature, g.implicitAnonymousFunctionSignature);
+    g.explicitAnonymousFunctionSignature.is(LPARENTHESIS,
+        opt(g.explicitAnonymousFunctionParameter, o2n(COMMA, g.explicitAnonymousFunctionParameter)), RPARENTHESIS);
+    g.explicitAnonymousFunctionParameter.is(opt(g.anonymousFunctionParameterModifier), g.type, IDENTIFIER);
+    g.anonymousFunctionParameterModifier.isOr("ref", "out");
+    g.implicitAnonymousFunctionSignature.isOr(g.implicitAnonymousFunctionParameter,
+        and(LPARENTHESIS, opt(g.implicitAnonymousFunctionParameter, o2n(COMMA, g.implicitAnonymousFunctionParameter)), RPARENTHESIS));
+    g.implicitAnonymousFunctionParameter.is(IDENTIFIER);
+    g.anonymousFunctionBody.isOr(g.expression, g.block);
     g.assignment
         .is(g.unaryExpression,
             or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,

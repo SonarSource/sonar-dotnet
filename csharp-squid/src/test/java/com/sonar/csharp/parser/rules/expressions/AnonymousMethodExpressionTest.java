@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -22,14 +23,19 @@ public class AnonymousMethodExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.anonymousMethodExpression);
-    g.anonymousMethodSignature.mock();
+    g.explicitAnonymousFunctionSignature.mock();
     g.block.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("delegate block "));
-    assertThat(p, parse("delegate anonymousMethodSignature block "));
+    assertThat(p, parse("delegate explicitAnonymousFunctionSignature block "));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
 
 }

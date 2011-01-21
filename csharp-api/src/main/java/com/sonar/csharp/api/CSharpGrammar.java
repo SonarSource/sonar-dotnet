@@ -68,9 +68,6 @@ public class CSharpGrammar implements Grammar {
   public Rule checkedExpression; // OK
   public Rule uncheckedExpression; // OK
   public Rule defaultValueExpression; // OK
-  public Rule anonymousMethodExpression; // OK
-  public Rule anonymousMethodSignature; // OK
-  public Rule anonymousMethodParameter; // OK
   public Rule unaryExpression; // OK
   public Rule preIncrementExpression; // OK - tested via UnaryExpressionTest
   public Rule preDecrementExpression; // OK - tested via UnaryExpressionTest
@@ -87,6 +84,15 @@ public class CSharpGrammar implements Grammar {
   public Rule conditionalOrExpression; // OK
   public Rule nullCoalescingExpression; // OK
   public Rule conditionalExpression; // OK
+  public Rule lambdaExpression; // OK
+  public Rule anonymousMethodExpression; // OK
+  public Rule anonymousFunctionSignature; // OK
+  public Rule explicitAnonymousFunctionSignature; // OK
+  public Rule explicitAnonymousFunctionParameter; // OK
+  public Rule anonymousFunctionParameterModifier; // OK
+  public Rule implicitAnonymousFunctionSignature; // OK
+  public Rule implicitAnonymousFunctionParameter; // OK
+  public Rule anonymousFunctionBody; // OK
   public Rule assignment; // OK
   public Rule expression; // OK
   public Rule constantExpression; // LATER
