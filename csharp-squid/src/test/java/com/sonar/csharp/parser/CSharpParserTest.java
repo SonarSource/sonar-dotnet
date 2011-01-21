@@ -5,33 +5,40 @@
  */
 package com.sonar.csharp.parser;
 
+import java.nio.charset.Charset;
+
 import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import com.sonar.csharp.CSharpConfiguration;
 
 /**
  * Test class for the C# parser
  */
 public class CSharpParserTest {
 
+  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
+
   @Test
   public void testParsingSimpleSourceFile() {
-    CSharpParser parser = new CSharpParser();
     parser.parse(FileUtils.toFile(getClass().getResource("/parser/simpleFile.cs")));
   }
 
   @Test
-  @Ignore
   public void testParsingRealLifeSourceFile() {
-    CSharpParser parser = new CSharpParser();
     parser.parse(FileUtils.toFile(getClass().getResource("/parser/NUnitFramework.cs")));
   }
 
   @Test
   @Ignore
   public void testLinqFile() {
-    CSharpParser parser = new CSharpParser();
     parser.parse(FileUtils.toFile(getClass().getResource("/parser/LinqBridge-1.2.cs")));
+  }
+
+  @Test
+  public void testAllInOneFile() {
+    parser.parse(FileUtils.toFile(getClass().getResource("/parser/cSharpSyntaxAllInOneFile.cs")));
   }
 
 }

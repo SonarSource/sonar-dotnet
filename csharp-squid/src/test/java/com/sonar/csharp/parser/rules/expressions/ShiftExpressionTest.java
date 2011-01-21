@@ -22,14 +22,20 @@ public class ShiftExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.shiftExpression);
-    g.additiveExpression.mock();
   }
 
   @Test
   public void testOk() {
+    g.additiveExpression.mock();
     assertThat(p, parse("additiveExpression"));
     assertThat(p, parse("additiveExpression << additiveExpression "));
     assertThat(p, parse("additiveExpression >> additiveExpression << additiveExpression >> additiveExpression"));
+  }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("i << 5"));
+    assertThat(p, parse("i >> 5"));
   }
 
 }
