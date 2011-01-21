@@ -22,16 +22,22 @@ public class RelationalExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.relationalExpression);
-    g.shiftExpression.mock();
   }
 
   @Test
   public void testOk() {
+    g.shiftExpression.mock();
     assertThat(p, parse("shiftExpression"));
     assertThat(p, parse("shiftExpression < shiftExpression "));
     assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression"));
     assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression is type"));
     assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression as type"));
+    assertThat(p, parse("shiftExpression <= shiftExpression as type > shiftExpression >= shiftExpression"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("arg is double"));
+  }
+  
 }

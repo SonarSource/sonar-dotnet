@@ -22,14 +22,20 @@ public class ConditionalExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.conditionalExpression);
-    g.nullCoalescingExpression.mock();
-    g.expression.mock();
   }
 
   @Test
   public void testOk() {
+    g.nullCoalescingExpression.mock();
+    g.expression.mock();
     assertThat(p, parse("nullCoalescingExpression"));
     assertThat(p, parse("nullCoalescingExpression ? expression : expression"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    // TODO : fail whereas it should be OK
+    // assertThat(p, parse("arg is double ? true : false"));
   }
 
 }

@@ -11,6 +11,8 @@ import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Ignore;
@@ -21,14 +23,34 @@ import org.junit.runners.Parameterized;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.parser.CSharpParser;
 
+/**
+ * Class used to test parsing Log4Net and NUnit C#-based libraries.
+ */
 @RunWith(value = Parameterized.class)
 public class CSharpPreIntegrationTest {
 
   private File cSharpFile = null;
   private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private Set<String> filesToIgnore = new HashSet<String>();
 
   public CSharpPreIntegrationTest(File f) {
     this.cSharpFile = f;
+    populateFilesToIgnoreSet();
+  }
+
+  private void populateFilesToIgnoreSet() {
+    // TODO Files ignored because they have preprocessing instructions that we do not handle yet
+    filesToIgnore.add("PropertiesDictionary.cs");
+    filesToIgnore.add("ReadOnlyPropertiesDictionary.cs");
+    filesToIgnore.add("TestLoaderWatcherTests.cs");
+    filesToIgnore.add("AssemblyWatcher.cs");
+    filesToIgnore.add("DomainAgent.cs");
+    filesToIgnore.add("RemoteTestRunner.cs");
+    filesToIgnore.add("TestThread.cs");
+    filesToIgnore.add("PNUnitTestRunner.cs");
+    filesToIgnore.add("PairwiseTests.cs");
+    // TODO Other reasons
+    filesToIgnore.add("TypeHelperTests.cs"); // cf. unbound-type-name
   }
 
   @Parameterized.Parameters
@@ -41,7 +63,15 @@ public class CSharpPreIntegrationTest {
   @Test
   @Ignore
   public void parseCSharpSource() throws Exception {
-    parser.parse(cSharpFile);
+    if (filesToIgnore.contains(cSharpFile.getName())) {
+      System.out.println("... Ignoring \"" + cSharpFile.getName() + "\" for the moment...");
+      return;
+    }
+    try {
+      parser.parse(cSharpFile);
+    } catch (Exception e) {
+      throw e;
+    }
   }
 
   protected static void addParametersForPath(Collection<Object[]> parameters, String path) throws URISyntaxException {

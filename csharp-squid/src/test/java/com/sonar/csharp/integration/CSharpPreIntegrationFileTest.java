@@ -16,9 +16,12 @@ import org.junit.Test;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.parser.CSharpParser;
 
+/**
+ * Class used to test only one file.
+ */
 public class CSharpPreIntegrationFileTest {
 
-  private String filePath = "/integration/NUnit/tests/test-utilities/TestAssert.cs";
+  private String filePath = "/integration/NUnit/NUnitCore/core/TypeHelper.cs";
   private File cSharpFile;
   private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
 
