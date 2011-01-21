@@ -22,15 +22,21 @@ public class IndexerDeclaratorTest {
   @Before
   public void init() {
     p.setRootRule(g.indexerDeclarator);
-    g.type.mock();
-    g.interfaceType.mock();
-    g.formalParameterList.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
+    g.interfaceType.mock();
+    g.formalParameterList.mock();
     assertThat(p, parse("type this [formalParameterList]"));
     assertThat(p, parse("type interfaceType.this [formalParameterList]"));
   }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("object this[int i]"));
+    assertThat(p, parse("object IList.this[int i]"));
+  }  
 
 }

@@ -22,15 +22,20 @@ public class FixedParameterTest {
   @Before
   public void init() {
     p.setRootRule(g.fixedParameter);
-    g.attributes.mock();
-    g.type.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributes.mock();
+    g.type.mock();
     assertThat(p, parse("type id"));
     assertThat(p, parse("out type id"));
     assertThat(p, parse("attributes ref type id"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("int i"));
   }
 
 }

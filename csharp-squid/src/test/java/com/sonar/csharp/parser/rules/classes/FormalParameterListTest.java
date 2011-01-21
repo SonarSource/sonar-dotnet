@@ -22,15 +22,20 @@ public class FormalParameterListTest {
   @Before
   public void init() {
     p.setRootRule(g.formalParameterList);
-    g.fixedParameters.mock();
-    g.parameterArray.mock();
   }
 
   @Test
   public void testOk() {
+    g.fixedParameters.mock();
+    g.parameterArray.mock();
     assertThat(p, parse("fixedParameters"));
     assertThat(p, parse("parameterArray"));
     assertThat(p, parse("fixedParameters, parameterArray"));
   }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("int i"));
+  } 
 
 }

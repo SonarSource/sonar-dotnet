@@ -33,13 +33,17 @@ public class InterfaceTypeTest {
 
   @Test
   public void testKo() {
+    g.typeName.mock();
     assertThat(p, notParse("object"));
     assertThat(p, notParse("string"));
+    assertThat(p, notParse("this"));
+    assertThat(p, notParse("typeName.this"));
   }
   
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("ICollection"));
+    assertThat(p, notParse("IList.this"));
   }
 
 }

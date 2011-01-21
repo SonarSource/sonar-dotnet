@@ -381,7 +381,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     // NOTE: g.memberName does not exactly stick to the specification (see page 462 of ECMA specification)
     // Normally it would be: g.memberName.isOr(and(g.interfaceType, DOT, IDENTIFIER), IDENTIFIER);
     g.memberName.is(o2n(or(g.qualifiedAliasMember, and(or(THIS, IDENTIFIER), opt(g.typeArgumentList))), DOT), or(THIS, IDENTIFIER),
-        opt(g.typeArgumentList), opt(LBRACKET, INT, IDENTIFIER, RBRACKET));
+        opt(g.typeArgumentList));
     g.methodBody.isOr(g.block, SEMICOLON);
     g.formalParameterList.isOr(and(g.fixedParameters, opt(COMMA, g.parameterArray)), g.parameterArray);
     g.fixedParameters.is(g.fixedParameter, o2n(COMMA, g.fixedParameter));
@@ -412,7 +412,10 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.indexerDeclaration.is(opt(g.attributes), o2n(g.indexerModifier), g.indexerDeclarator, LCURLYBRACE, g.accessorDeclarations,
         RCURLYBRACE);
     g.indexerModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
-    g.indexerDeclarator.is(g.type, opt(g.interfaceType, DOT), THIS, LBRACKET, g.formalParameterList, RBRACKET);
+    // NOTE: g.indexerDeclarator does not exactly stick to the specification. Normally it would be:
+    // g.indexerDeclarator.is(g.type, opt(g.interfaceType, DOT), THIS, LBRACKET, g.formalParameterList, RBRACKET);
+    g.indexerDeclarator.is(g.type, o2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), DOT), THIS, LBRACKET,
+        g.formalParameterList, RBRACKET);
     g.operatorDeclaration.is(opt(g.attributes), one2n(g.operatorModifier), g.operatorDeclarator, g.operatorBody);
     g.operatorModifier.isOr(PUBLIC, STATIC, EXTERN);
     g.operatorDeclarator.isOr(g.unaryOperatorDeclarator, g.binaryOperatorDeclarator, g.conversionOperatorDeclarator);

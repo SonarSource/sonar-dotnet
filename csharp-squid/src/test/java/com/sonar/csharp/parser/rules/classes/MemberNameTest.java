@@ -39,9 +39,6 @@ public class MemberNameTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("ICollection.CopyTo"));
-    // For the next one, which seems quite weird because not written in the ECMA specification, see
-    // http://svn.apache.org/viewvc/logging/log4net/trunk/src/Plugin/PluginCollection.cs?view=markup, line 603
-    assertThat(p, parse("IList.this[int i]"));
   }
 
 }

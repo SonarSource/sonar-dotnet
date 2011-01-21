@@ -22,18 +22,23 @@ public class IndexerDeclarationTest {
   @Before
   public void init() {
     p.setRootRule(g.indexerDeclaration);
-    g.attributes.mock();
-    g.indexerDeclarator.mock();
-    g.accessorDeclarations.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributes.mock();
+    g.indexerDeclarator.mock();
+    g.accessorDeclarations.mock();
     assertThat(p, parse("indexerDeclarator { accessorDeclarations }"));
     assertThat(p, parse("attributes new indexerDeclarator { accessorDeclarations }"));
     assertThat(
         p,
         parse("public protected internal private static virtual sealed override abstract extern indexerDeclarator { accessorDeclarations }"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("object IList.this[int i] { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
   }
 
 }

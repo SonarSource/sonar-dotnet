@@ -38,16 +38,7 @@ public class PropertyDeclarationTest {
 
   @Test
   public void testRealLife() throws Exception {
-    // TODO : see what's the following code really representing in file "/integration/Log4net/Appender/AppenderCollection.cs"
-    // See spec. p 462
-    //
-    // object IList.this[int i]
-    // {
-    // get { return (object)this[i]; }
-    // set { this[i] = (IAppender)value; }
-    // }
-
-    // assertThat(p, parse("object IList.this[int i] { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
+    assertThat(p, parse("object myObject { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
   }
 
 }
