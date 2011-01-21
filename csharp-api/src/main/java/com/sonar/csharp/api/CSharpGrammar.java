@@ -203,8 +203,8 @@ public class CSharpGrammar implements Grammar {
   public Rule staticConstructorDeclaration; // OK
   public Rule staticConstructorModifiers; // OK
   public Rule staticConstructorBody; // LATER
-  public Rule finalizerDeclaration; // OK
-  public Rule finalizerBody; // LATER
+  public Rule destructorDeclaration; // OK
+  public Rule destructorBody; // LATER
 
   // A.2.7 Struct
   public Rule structDeclaration; // OK

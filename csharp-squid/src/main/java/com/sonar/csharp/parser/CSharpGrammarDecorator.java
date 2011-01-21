@@ -363,7 +363,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.interfaceTypeList.is(g.interfaceType, o2n(COMMA, g.interfaceType));
     g.classBody.is(LCURLYBRACE, o2n(g.classMemberDeclaration), RCURLYBRACE);
     g.classMemberDeclaration.isOr(g.constantDeclaration, g.fieldDeclaration, g.methodDeclaration, g.propertyDeclaration,
-        g.eventDeclaration, g.indexerDeclaration, g.operatorDeclaration, g.constructorDeclaration, g.finalizerDeclaration,
+        g.eventDeclaration, g.indexerDeclaration, g.operatorDeclaration, g.constructorDeclaration, g.destructorDeclaration,
         g.staticConstructorDeclaration, g.typeDeclaration);
     g.constantDeclaration.is(opt(g.attributes), o2n(g.constantModifier), CONST, g.type, g.constantDeclarator,
         o2n(COMMA, g.constantDeclarator), SEMICOLON);
@@ -436,8 +436,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         g.staticConstructorBody);
     g.staticConstructorModifiers.isOr(and(opt(EXTERN), STATIC, not(next(EXTERN))), and(STATIC, opt(EXTERN)));
     g.staticConstructorBody.isOr(g.block, SEMICOLON);
-    g.finalizerDeclaration.is(opt(g.attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, g.finalizerBody);
-    g.finalizerBody.isOr(g.block, SEMICOLON);
+    g.destructorDeclaration.is(opt(g.attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, g.destructorBody);
+    g.destructorBody.isOr(g.block, SEMICOLON);
   }
 
   private void structs(CSharpGrammar g) {

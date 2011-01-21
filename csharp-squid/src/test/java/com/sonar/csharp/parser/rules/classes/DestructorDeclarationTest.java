@@ -14,22 +14,22 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class FinalizerDeclarationTest {
+public class DestructorDeclarationTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.finalizerDeclaration);
+    p.setRootRule(g.destructorDeclaration);
     g.attributes.mock();
-    g.finalizerBody.mock();
+    g.destructorBody.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("~ id () finalizerBody"));
-    assertThat(p, parse("attributes extern ~ id () finalizerBody"));
+    assertThat(p, parse("~ id () destructorBody"));
+    assertThat(p, parse("attributes extern ~ id () destructorBody"));
   }
 
 }
