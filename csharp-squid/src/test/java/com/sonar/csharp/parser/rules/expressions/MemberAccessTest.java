@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -35,7 +36,14 @@ public class MemberAccessTest {
     assertThat(p, parse("predefinedType.id"));
     assertThat(p, parse("predefinedType.id typeArgumentList"));
     assertThat(p, parse("qualifiedAliasMember.id"));
-    assertThat(p, parse("qualifiedAliasMember.id typeArgumentList"));
+  }
+
+  @Test
+  public void testKo() {
+    g.qualifiedAliasMember.mock();
+    g.typeArgumentList.mock();
+    assertThat(p, notParse(""));
+    assertThat(p, notParse("qualifiedAliasMember.id typeArgumentList"));
   }
 
   @Test

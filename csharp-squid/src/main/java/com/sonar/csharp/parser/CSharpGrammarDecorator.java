@@ -247,7 +247,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         g.defaultValueExpression, g.anonymousMethodExpression);
     g.simpleName.is(IDENTIFIER, opt(g.typeArgumentList));
     g.parenthesizedExpression.is(LPARENTHESIS, g.expression, RPARENTHESIS);
-    g.memberAccess.is(or(g.primaryExpression, g.predefinedType, g.qualifiedAliasMember), DOT, IDENTIFIER, opt(g.typeArgumentList));
+    g.memberAccess.isOr(and(g.qualifiedAliasMember, DOT, IDENTIFIER),
+        and(or(g.primaryExpression, g.predefinedType), DOT, IDENTIFIER, opt(g.typeArgumentList)));
     g.predefinedType.isOr(BOOL, BYTE, CHAR, DECIMAL, DOUBLE, FLOAT, INT, LONG, OBJECT, SBYTE, SHORT, STRING, UINT, ULONG, USHORT);
     g.invocationExpression.is(g.primaryExpression, LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
     g.elementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.argumentList, RBRACKET);
