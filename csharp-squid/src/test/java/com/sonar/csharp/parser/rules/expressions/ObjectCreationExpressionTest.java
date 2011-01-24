@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -28,8 +29,17 @@ public class ObjectCreationExpressionTest {
   public void testOk() {
     g.argumentList.mock();
     g.type.mock();
+    g.objectOrCollectionInitializer.mock();
     assertThat(p, parse("new type()"));
     assertThat(p, parse("new type(argumentList)"));
+    assertThat(p, parse("new type(argumentList) objectOrCollectionInitializer"));
+    assertThat(p, parse("new type() objectOrCollectionInitializer"));
+    assertThat(p, parse("new type objectOrCollectionInitializer"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
   
   @Test

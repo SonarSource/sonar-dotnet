@@ -14,28 +14,26 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class ExpressionTest {
+public class NonAssignmentExpressionTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.expression);
+    p.setRootRule(g.nonAssignmentExpression);
+    g.conditionalExpression.mock();
+    g.lambdaExpression.mock();
+    // TODO add this when ready
+    // g.queryExpression.mock();
   }
 
   @Test
   public void testOk() {
-    g.nonAssignmentExpression.mock();
-    g.assignment.mock();
-    assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("assignment"));
+    assertThat(p, parse("conditionalExpression"));
+    assertThat(p, parse("lambdaExpression"));
+    // TODO add this when ready
+    // assertThat(p, parse("queryExpression"));
   }
 
-  @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
-    assertThat(p, parse("dbCommand.Dispose()"));
-  }
-  
 }

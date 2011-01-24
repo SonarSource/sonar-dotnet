@@ -251,12 +251,19 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.predefinedType.isOr(BOOL, BYTE, CHAR, DECIMAL, DOUBLE, FLOAT, INT, LONG, OBJECT, SBYTE, SHORT, STRING, UINT, ULONG, USHORT);
     g.invocationExpression.is(g.primaryExpression, LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
     g.elementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.argumentList, RBRACKET);
-    g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.thisAccess.is(THIS);
     g.baseAccess.is(BASE, or(and(DOT, IDENTIFIER, opt(g.typeArgumentList)), and(LBRACKET, g.expressionList, RBRACKET)));
     g.postIncrementExpression.is(g.primaryExpression, INC_OP);
     g.postDecrementExpression.is(g.primaryExpression, DEC_OP);
-    g.objectCreationExpression.is(NEW, g.type, LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
+    g.objectCreationExpression.is(NEW, g.type,
+        or(and(LPARENTHESIS, opt(g.argumentList), RPARENTHESIS, opt(g.objectOrCollectionInitializer)), g.objectOrCollectionInitializer));
+    g.objectOrCollectionInitializer.isOr(g.objectInitializer, g.collectionInitializer);
+    g.objectInitializer.is(LCURLYBRACE, opt(g.memberInitializer), o2n(COMMA, g.memberInitializer), opt(COMMA), RCURLYBRACE);
+    g.memberInitializer.is(IDENTIFIER, EQUAL, g.initializerValue);
+    g.initializerValue.isOr(g.expression, g.objectOrCollectionInitializer);
+    g.collectionInitializer.is(LCURLYBRACE, g.elementInitializer, o2n(COMMA, g.elementInitializer), opt(COMMA), RCURLYBRACE);
+    g.elementInitializer.isOr(g.nonAssignmentExpression, and(LCURLYBRACE, g.expression, RCURLYBRACE));
+    g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.arrayCreationExpression.isOr(
         and(NEW, g.nonArrayType, LBRACKET, g.expressionList, RBRACKET, o2n(g.rankSpecifier), opt(g.arrayInitializer)),
         and(NEW, g.arrayType, g.arrayInitializer));
@@ -305,7 +312,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         .is(g.unaryExpression,
             or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
                 RIGHT_ASSIGN), g.expression);
-    g.expression.isOr(g.assignment, g.conditionalExpression);
+    g.expression.isOr(g.assignment, g.nonAssignmentExpression);
+    g.nonAssignmentExpression.isOr(g.conditionalExpression, g.lambdaExpression/* , g.queryExpression */);
     g.constantExpression.is(g.expression);
     g.booleanExpression.is(g.expression);
   }

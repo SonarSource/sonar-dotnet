@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -14,28 +15,27 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class ExpressionTest {
+public class ObjectOrCollectionInitializerTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.expression);
+    p.setRootRule(g.objectOrCollectionInitializer);
+    g.objectInitializer.mock();
+    g.collectionInitializer.mock();
   }
 
   @Test
   public void testOk() {
-    g.nonAssignmentExpression.mock();
-    g.assignment.mock();
-    assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("assignment"));
+    assertThat(p, parse("objectInitializer"));
+    assertThat(p, parse("collectionInitializer"));
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
-    assertThat(p, parse("dbCommand.Dispose()"));
+  public void testKo() {
+    assertThat(p, notParse(""));
   }
-  
+
 }

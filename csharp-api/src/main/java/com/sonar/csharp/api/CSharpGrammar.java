@@ -56,12 +56,18 @@ public class CSharpGrammar implements Grammar {
   public Rule predefinedType; // OK
   public Rule invocationExpression; // OK
   public Rule elementAccess; // OK
-  public Rule expressionList; // LATER
   public Rule thisAccess; // LATER
   public Rule baseAccess; // OK
   public Rule postIncrementExpression; // OK
   public Rule postDecrementExpression; // OK
   public Rule objectCreationExpression; // OK
+  public Rule objectOrCollectionInitializer; // OK
+  public Rule objectInitializer; // OK
+  public Rule memberInitializer; // OK
+  public Rule initializerValue; // OK
+  public Rule collectionInitializer; // OK
+  public Rule elementInitializer; // OK
+  public Rule expressionList; // LATER
   public Rule arrayCreationExpression; // OK
   public Rule delegateCreationExpression; // OK
   public Rule anonymousObjectCreationExpression; // OK
@@ -100,6 +106,7 @@ public class CSharpGrammar implements Grammar {
   public Rule anonymousFunctionBody; // OK
   public Rule assignment; // OK
   public Rule expression; // OK
+  public Rule nonAssignmentExpression; // OK
   public Rule constantExpression; // LATER
   public Rule booleanExpression; // LATER
 
