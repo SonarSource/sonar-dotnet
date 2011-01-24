@@ -27,34 +27,20 @@ public class ArrayTypeTest {
 
   @Test
   public void testOk() {
-    g.valueType.mock();
-    g.classType.mock();
-    g.interfaceType.mock();
-    g.delegateType.mock();
-    g.typeParameter.mock();
+    g.type.mock();
     g.rankSpecifier.mock();
-    assertThat(p, parse("valueType rankSpecifier"));
-    assertThat(p, parse("classType rankSpecifier"));
-    assertThat(p, parse("interfaceType rankSpecifier"));
-    assertThat(p, parse("delegateType rankSpecifier"));
-    assertThat(p, parse("typeParameter rankSpecifier"));
+    assertThat(p, parse("type rankSpecifier"));
+    assertThat(p, parse("type rankSpecifier rankSpecifier"));
   }
 
   @Test
   public void testKo() {
-    g.valueType.mock();
-    g.classType.mock();
-    g.interfaceType.mock();
-    g.delegateType.mock();
-    g.typeParameter.mock();
-    g.rankSpecifier.mock();
-    g.referenceType.mock();
-    assertThat(p, notParse("referenceType rankSpecifier"));
+    assertThat(p, notParse(""));
   }
 
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("AClass[]"));
   }
-  
+
 }
