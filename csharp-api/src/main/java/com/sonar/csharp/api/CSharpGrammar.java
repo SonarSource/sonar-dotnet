@@ -46,6 +46,8 @@ public class CSharpGrammar implements Grammar {
   // A.2.4 Expressions
   public Rule argumentList; // LATER
   public Rule argument; // OK
+  public Rule argumentName; // OK
+  public Rule argumentValue; // OK
   public Rule primaryExpression; // OK
   public Rule primaryNoArrayCreationExpression; // LATER
   public Rule simpleName; // OK

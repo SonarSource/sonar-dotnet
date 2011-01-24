@@ -15,22 +15,23 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class ArgumentTest {
+public class ArgumentValueTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.argument);
-    g.argumentName.mock();
-    g.argumentValue.mock();
+    p.setRootRule(g.argumentValue);
+    g.expression.mock();
+    g.variableReference.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("argumentValue"));
-    assertThat(p, parse("argumentName argumentValue"));
+    assertThat(p, parse("expression"));
+    assertThat(p, parse("ref variableReference"));
+    assertThat(p, parse("out variableReference"));
   }
 
   @Test

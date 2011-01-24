@@ -237,7 +237,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
   private void expressions(CSharpGrammar g) {
     g.argumentList.is(g.argument, o2n(COMMA, g.argument));
-    g.argument.isOr(g.expression, and(REF, g.variableReference), and(OUT, g.variableReference));
+    g.argument.is(opt(g.argumentName), g.argumentValue);
+    g.argumentName.is(IDENTIFIER, COLON);
+    g.argumentValue.isOr(g.expression, and(REF, g.variableReference), and(OUT, g.variableReference));
     g.primaryExpression.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression);
     g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.elementAccess, g.memberAccess,
         g.invocationExpression, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression,
