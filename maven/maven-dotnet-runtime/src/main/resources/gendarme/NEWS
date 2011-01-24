@@ -1,3 +1,39 @@
+2010-09-05  Version 2.8.0
+
+	First release in the 2.8.x serie which will lead to the 3.0
+	release. Many rules were enhanced and a lot of work was done
+	to make Gendarme adhere to its own rules (self-test).
+
+	This release also includes 10 new rules (221 rules total):
+
+	Gendarme.Rules.BadPractice
+	* PreferParamsArrayForVariableArgumentsRule [Sebastien Pouliot]
+	* PreferTryParseRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Correctness
+	* UseNoInliningWithGetCallingAssemblyRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Design
+	* ProvideTryParseAlternativeRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Design.Generic
+	* AvoidDeclaringCustomDelegatesRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Maintainability
+	* RemoveDependenceOnObsoleteCodeRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Interoperability
+	* CentralizePInvokesIntoNativeMethodsTypeRule [Sebastien Pouliot]
+
+	Gendarme.Rules.Performance
+	* AvoidConcatenatingCharsRule [Sebastien Pouliot]
+	* AvoidLocalDataStoreSlotRule [Sebastien Pouliot]
+	* AvoidRepetitiveCallsToPropertiesRule [Sebastien Pouliot]
+
+	Contributors for this release are:
+	Antoine Vandecreme, JB Evain, Rolf Bjarne Kvinge and Sebastien 
+	Pouliot.
+
 2009-12-20  Version 2.6
 
 	Released just in time for xmas Gendarme 2.6 comes with a lot of

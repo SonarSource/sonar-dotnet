@@ -1,4 +1,6 @@
 AUTHORS
+content.txt
+gd2i.exe
 gendarme-wizard.exe
 gendarme.1
 gendarme.5
@@ -21,10 +23,8 @@ Gendarme.Rules.Security.dll
 Gendarme.Rules.Serialization.dll
 Gendarme.Rules.Smells.dll
 Gendarme.Rules.Ui.dll
-ICSharpCode.SharpZipLib.dll
 MIT.X11
 Mono.Cecil.dll
-Mono.Cecil.Mdb.dll
 Mono.Cecil.Pdb.dll
 NEWS
 README
