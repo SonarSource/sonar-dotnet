@@ -27,7 +27,9 @@ public class PositionalArgumentTest {
   @Test
   public void testOk() {
     g.attributeArgumentExpression.mock();
+    g.argumentName.mock();
     assertThat(p, parse("attributeArgumentExpression"));
+    assertThat(p, parse("argumentName attributeArgumentExpression"));
   }
 
   @Test

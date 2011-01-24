@@ -543,7 +543,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     // namedArgument (see page 469 of ECMA specification)
     g.attributeArguments.is(LPARENTHESIS,
         opt(or(g.namedArgument, g.positionalArgument), o2n(COMMA, or(g.namedArgument, g.positionalArgument))), RPARENTHESIS);
-    g.positionalArgument.is(g.attributeArgumentExpression);
+    g.positionalArgument.is(opt(g.argumentName), g.attributeArgumentExpression);
     g.namedArgument.is(IDENTIFIER, EQUAL, g.attributeArgumentExpression);
     g.attributeArgumentExpression.is(g.expression);
   }
