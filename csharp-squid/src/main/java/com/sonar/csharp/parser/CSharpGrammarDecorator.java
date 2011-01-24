@@ -309,6 +309,21 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         and(LPARENTHESIS, opt(g.implicitAnonymousFunctionParameter, o2n(COMMA, g.implicitAnonymousFunctionParameter)), RPARENTHESIS));
     g.implicitAnonymousFunctionParameter.is(IDENTIFIER);
     g.anonymousFunctionBody.isOr(g.expression, g.block);
+    g.queryExpression.is(g.fromClause, g.queryBody);
+    g.fromClause.is("from", opt(g.type), IDENTIFIER, IN, g.expression);
+    g.queryBody.is(o2n(g.queryBodyClause), g.selectOrGroupClause, opt(g.queryContinuation));
+    g.queryBodyClause.isOr(g.fromClause, g.letClause, g.whereClause, g.joinIntoClause, g.joinClause, g.orderByClause);
+    g.letClause.is("let", IDENTIFIER, EQUAL, g.expression);
+    g.whereClause.is("where", g.booleanExpression);
+    g.joinClause.is("join", opt(g.type), IDENTIFIER, IN, g.expression, "on", g.expression, "equals", g.expression);
+    g.joinIntoClause.is("join", opt(g.type), IDENTIFIER, IN, g.expression, "on", g.expression, "equals", g.expression, "into", IDENTIFIER);
+    g.orderByClause.is("orderby", g.ordering, o2n(COMMA, g.ordering));
+    g.ordering.is(g.expression, opt(g.orderingDirection));
+    g.orderingDirection.isOr("ascending", "descending");
+    g.selectOrGroupClause.isOr(g.selectClause, g.groupClause);
+    g.selectClause.is("select", g.expression);
+    g.groupClause.is("group", g.expression, "by", g.expression);
+    g.queryContinuation.is("into", IDENTIFIER, g.queryBody);
     g.assignment
         .is(g.unaryExpression,
             or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,

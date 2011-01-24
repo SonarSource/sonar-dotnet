@@ -104,6 +104,21 @@ public class CSharpGrammar implements Grammar {
   public Rule implicitAnonymousFunctionSignature; // OK
   public Rule implicitAnonymousFunctionParameter; // OK
   public Rule anonymousFunctionBody; // OK
+  public Rule queryExpression; // OK
+  public Rule fromClause; // OK
+  public Rule queryBody; // OK
+  public Rule queryBodyClause; // OK
+  public Rule letClause; // OK
+  public Rule whereClause; // OK
+  public Rule joinClause; // OK
+  public Rule joinIntoClause; // OK
+  public Rule orderByClause; // OK
+  public Rule ordering; // OK
+  public Rule orderingDirection; // OK
+  public Rule selectOrGroupClause; // OK
+  public Rule selectClause; // OK
+  public Rule groupClause; // OK
+  public Rule queryContinuation; // OK
   public Rule assignment; // OK
   public Rule expression; // OK
   public Rule nonAssignmentExpression; // OK
