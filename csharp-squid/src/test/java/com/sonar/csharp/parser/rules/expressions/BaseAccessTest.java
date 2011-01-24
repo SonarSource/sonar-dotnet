@@ -5,6 +5,7 @@
  */
 package com.sonar.csharp.parser.rules.expressions;
 
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
@@ -23,14 +24,19 @@ public class BaseAccessTest {
   public void init() {
     p.setRootRule(g.baseAccess);
     g.expressionList.mock();
-    g.typeArgumentList.mock();
+    g.argumentList.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("base.id"));
-    assertThat(p, parse("base.id typeArgumentList"));
-    assertThat(p, parse("base[ expressionList ]"));
+    assertThat(p, parse("base[ argumentList ]"));
+  }
+
+  @Test
+  public void testKo() {
+    assertThat(p, notParse(""));
+    assertThat(p, notParse("base.id typeArgumentList"));
   }
 
 }
