@@ -31,6 +31,7 @@ public class ClassTypeTest {
     assertThat(p, parse("typeName"));
     assertThat(p, parse("object"));
     assertThat(p, parse("string"));
+    assertThat(p, parse("dynamic"));
   }
 
   @Test
