@@ -24,13 +24,13 @@ public class ElementInitializerTest {
   public void init() {
     p.setRootRule(g.elementInitializer);
     g.nonAssignmentExpression.mock();
-    g.expressionList.mock();
+    g.expression.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("{expressionList}"));
+    assertThat(p, parse("{expression}"));
   }
 
   @Test
