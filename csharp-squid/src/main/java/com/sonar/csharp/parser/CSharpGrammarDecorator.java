@@ -221,7 +221,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.floatingPointType.isOr(FLOAT, DOUBLE);
     g.enumType.is(g.typeName);
     g.nullableType.is(g.nonNullableValueType, QUESTION);
-    g.nonNullableValueType.isOr(g.enumType, g.typeName, g.simpleType);
+    g.nonNullableValueType.is(g.type);
     g.referenceType.isOr(g.arrayType, g.classType, g.interfaceType, g.delegateType);
     g.classType.isOr(g.typeName, OBJECT, STRING);
     g.interfaceType.is(g.typeName);

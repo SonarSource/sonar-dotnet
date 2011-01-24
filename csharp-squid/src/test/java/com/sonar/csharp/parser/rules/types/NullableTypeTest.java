@@ -27,20 +27,16 @@ public class NullableTypeTest {
 
   @Test
   public void testOk() {
-    g.enumType.mock();
-    g.typeName.mock();
-    g.simpleType.mock();
-    assertThat(p, parse("enumType ?"));
-    assertThat(p, parse("typeName ?"));
-    assertThat(p, parse("simpleType ?"));
+    g.type.mock();
+    assertThat(p, parse("type ?"));
   }
 
   @Test
   public void testKo() {
     g.enumType.mock();
-    assertThat(p, notParse("enumType"));
+    assertThat(p, notParse("type"));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("int?"));
