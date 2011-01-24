@@ -226,7 +226,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.classType.isOr(g.typeName, OBJECT, "dynamic", STRING);
     g.interfaceType.is(g.typeName);
     g.arrayType.is(g.nonArrayType, one2n(g.rankSpecifier));
-    g.nonArrayType.isOr(g.valueType, g.classType, g.interfaceType, g.delegateType, g.typeParameter);
+    g.nonArrayType.isOr(g.type);
     g.rankSpecifier.is(LBRACKET, o2n(COMMA), RBRACKET);
     g.delegateType.is(g.typeName);
   }
