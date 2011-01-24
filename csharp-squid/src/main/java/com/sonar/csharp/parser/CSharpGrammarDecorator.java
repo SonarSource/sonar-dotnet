@@ -495,8 +495,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void interfaces(CSharpGrammar g) {
-    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER, opt(g.variantTypeParameterList),
-        opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(SEMICOLON));
+    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER,
+        opt(g.variantTypeParameterList), opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(SEMICOLON));
     g.interfaceModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     g.variantTypeParameterList.is(INFERIOR, g.variantTypeParameter, o2n(COMMA, g.variantTypeParameter), SUPERIOR);
     g.varianceAnnotation.isOr(IN, OUT);
@@ -533,7 +533,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.globalAttributes.is(one2n(g.globalAttributeSection));
     g.globalAttributeSection.is(LBRACKET, g.globalAttributeTargetSpecifier, g.attributeList, opt(COMMA), RBRACKET);
     g.globalAttributeTargetSpecifier.is(g.globalAttributeTarget, COLON);
-    g.globalAttributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
+    g.globalAttributeTarget.isOr("assembly", "module");
     g.attributes.is(one2n(g.attributeSection));
     g.attributeSection.is(LBRACKET, opt(g.attributeTargetSpecifier), g.attributeList, opt(COMMA), RBRACKET);
     g.attributeTargetSpecifier.is(g.attributeTarget, COLON);

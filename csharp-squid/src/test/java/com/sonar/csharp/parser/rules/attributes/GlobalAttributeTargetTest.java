@@ -27,15 +27,16 @@ public class GlobalAttributeTargetTest {
 
   @Test
   public void testOk() {
-    assertThat(p, parse("myIdentifier"));
-    assertThat(p, parse("public"));
-    assertThat(p, parse("void"));
-    assertThat(p, parse("unchecked"));
+    assertThat(p, parse("assembly"));
+    assertThat(p, parse("module"));
   }
 
   @Test
   public void testKo() {
+    assertThat(p, notParse(""));
     assertThat(p, notParse("10"));
+    assertThat(p, notParse("void"));
+    assertThat(p, notParse("unchecked"));
   }
 
 }
