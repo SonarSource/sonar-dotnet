@@ -54,7 +54,7 @@ Usage of Maven Dotnet Plugin
   
   \* Style Cop 4.4 is bundle with the maven dotnet plugin since version 0.3 .  Thus installation of Style Cop is not mandatory.
   
-  \*\* Gendarme 2.6 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
+  \*\* Gendarme 2.8 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
 
 * Coverage
   
