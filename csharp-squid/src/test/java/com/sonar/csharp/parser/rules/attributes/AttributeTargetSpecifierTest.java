@@ -21,7 +21,7 @@ public class AttributeTargetSpecifierTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.globalAttributeTargetSpecifier);
+    p.setRootRule(g.attributeTargetSpecifier);
     g.attributeTarget.mock();
   }
 
