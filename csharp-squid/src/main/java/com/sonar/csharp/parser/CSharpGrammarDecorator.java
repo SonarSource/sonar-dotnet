@@ -250,7 +250,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.memberAccess.is(or(g.primaryExpression, g.predefinedType, g.qualifiedAliasMember), DOT, IDENTIFIER, opt(g.typeArgumentList));
     g.predefinedType.isOr(BOOL, BYTE, CHAR, DECIMAL, DOUBLE, FLOAT, INT, LONG, OBJECT, SBYTE, SHORT, STRING, UINT, ULONG, USHORT);
     g.invocationExpression.is(g.primaryExpression, LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
-    g.elementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.expressionList, RBRACKET);
+    g.elementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.argumentList, RBRACKET);
     g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.thisAccess.is(THIS);
     g.baseAccess.is(BASE, or(and(DOT, IDENTIFIER, opt(g.typeArgumentList)), and(LBRACKET, g.expressionList, RBRACKET)));

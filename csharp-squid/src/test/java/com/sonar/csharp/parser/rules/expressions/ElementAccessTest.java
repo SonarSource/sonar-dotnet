@@ -27,14 +27,13 @@ public class ElementAccessTest {
   @Test
   public void testOk() {
     g.primaryNoArrayCreationExpression.mock();
-    g.expressionList.mock();
-    assertThat(p, parse("primaryNoArrayCreationExpression[expressionList]"));
-    assertThat(p, parse("primaryNoArrayCreationExpression [ expressionList ]"));
+    g.argumentList.mock();
+    assertThat(p, parse("primaryNoArrayCreationExpression [ argumentList ]"));
   }
 
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("GetProperties(true)[key]"));
   }
-  
+
 }
