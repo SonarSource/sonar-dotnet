@@ -253,6 +253,9 @@ public class CSharpGrammar implements Grammar {
   // A.2.9 Interfaces
   public Rule interfaceDeclaration; // OK
   public Rule interfaceModifier; // OK - tested via InterfaceDeclarationTest
+  public Rule variantTypeParameterList; // OK
+  public Rule variantTypeParameter; // OK
+  public Rule varianceAnnotation; // OK
   public Rule interfaceBase; // OK
   public Rule interfaceBody; // OK
   public Rule interfaceMemberDeclaration; // OK - tested via InterfaceBodyDeclaration

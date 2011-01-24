@@ -495,9 +495,11 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void interfaces(CSharpGrammar g) {
-    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER, opt(g.typeParameterList),
+    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER, opt(g.variantTypeParameterList),
         opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(SEMICOLON));
     g.interfaceModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
+    g.variantTypeParameterList.is(INFERIOR, g.variantTypeParameter, o2n(COMMA, g.variantTypeParameter), SUPERIOR);
+    g.varianceAnnotation.isOr(IN, OUT);
     g.interfaceBase.is(COLON, g.interfaceTypeList);
     g.interfaceBody.is(LCURLYBRACE, o2n(g.interfaceMemberDeclaration), RCURLYBRACE);
     g.interfaceMemberDeclaration.isOr(g.interfaceMethodDeclaration, g.interfacePropertyDeclaration, g.interfaceEventDeclaration,
