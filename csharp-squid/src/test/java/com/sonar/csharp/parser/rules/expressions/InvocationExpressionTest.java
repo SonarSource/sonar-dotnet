@@ -38,6 +38,9 @@ public class InvocationExpressionTest {
     assertThat(p, parse("dbCommand.Dispose()"));
     assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message)"));
     assertThat(p, parse("string.Format(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)"));
+    assertThat(p, parse("new CollectionContainsConstraint().Using<string>( foo)"));
+    // TODO: does not parse here: maybe related to partial support of C# 4.0 => must finish specification before continuing on this
+    // assertThat(p, parse("new CollectionContainsConstraint().Using<string>( (x,y)=>String.Compare(x, y, true) )"));
   }
 
 }
