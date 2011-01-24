@@ -27,15 +27,23 @@ public class AttributeTargetTest {
 
   @Test
   public void testOk() {
-    assertThat(p, parse("myIdentifier"));
-    assertThat(p, parse("public"));
-    assertThat(p, parse("void"));
-    assertThat(p, parse("unchecked"));
+    assertThat(p, parse("field"));
+    assertThat(p, parse("event"));
+    assertThat(p, parse("method"));
+    assertThat(p, parse("param"));
+    assertThat(p, parse("property"));
+    assertThat(p, parse("return"));
+    assertThat(p, parse("type"));
   }
 
   @Test
   public void testKo() {
+    assertThat(p, notParse(""));
     assertThat(p, notParse("10"));
+    assertThat(p, notParse("myIdentifier"));
+    assertThat(p, notParse("public"));
+    assertThat(p, notParse("void"));
+    assertThat(p, notParse("unchecked"));
   }
 
 }

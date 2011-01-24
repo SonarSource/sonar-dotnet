@@ -133,7 +133,6 @@ import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
-import static com.sonar.sslr.impl.matcher.Matchers.isOneOfThem;
 import static com.sonar.sslr.impl.matcher.Matchers.next;
 import static com.sonar.sslr.impl.matcher.Matchers.not;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
@@ -142,7 +141,6 @@ import static com.sonar.sslr.impl.matcher.Matchers.opt;
 import static com.sonar.sslr.impl.matcher.Matchers.or;
 
 import com.sonar.csharp.api.CSharpGrammar;
-import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.sslr.api.GrammarDecorator;
 import com.sonar.sslr.impl.GrammarRuleLifeCycleManager;
 
@@ -537,7 +535,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.attributes.is(one2n(g.attributeSection));
     g.attributeSection.is(LBRACKET, opt(g.attributeTargetSpecifier), g.attributeList, opt(COMMA), RBRACKET);
     g.attributeTargetSpecifier.is(g.attributeTarget, COLON);
-    g.attributeTarget.isOr(IDENTIFIER, isOneOfThem(CSharpKeyword.values()));
+    g.attributeTarget.isOr("field", "event", "method", "param", "property", RETURN, "type");
     g.attributeList.is(g.attribute, o2n(COMMA, g.attribute));
     g.attribute.is(g.attributeName, opt(g.attributeArguments));
     g.attributeName.is(g.typeName);
