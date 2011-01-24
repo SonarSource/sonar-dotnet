@@ -423,8 +423,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.methodBody.isOr(g.block, SEMICOLON);
     g.formalParameterList.isOr(and(g.fixedParameters, opt(COMMA, g.parameterArray)), g.parameterArray);
     g.fixedParameters.is(g.fixedParameter, o2n(COMMA, g.fixedParameter));
-    g.fixedParameter.is(opt(g.attributes), opt(g.parameterModifier), g.type, IDENTIFIER);
-    g.parameterModifier.isOr(REF, OUT);
+    g.fixedParameter.is(opt(g.attributes), opt(g.parameterModifier), g.type, IDENTIFIER, opt(EQUAL, g.expression));
+    g.parameterModifier.isOr(REF, OUT, THIS);
     g.parameterArray.is(opt(g.attributes), PARAMS, g.arrayType, IDENTIFIER);
     g.propertyDeclaration.is(opt(g.attributes), o2n(g.propertyModifier), g.type, g.memberName, LCURLYBRACE, g.accessorDeclarations,
         RCURLYBRACE);

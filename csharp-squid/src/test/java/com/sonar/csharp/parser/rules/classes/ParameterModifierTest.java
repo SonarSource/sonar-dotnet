@@ -15,38 +15,25 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class FixedParameterTest {
+public class ParameterModifierTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.fixedParameter);
+    p.setRootRule(g.parameterModifier);
   }
 
   @Test
   public void testOk() {
-    g.attributes.mock();
-    g.parameterModifier.mock();
-    g.type.mock();
-    g.expression.mock();
-    assertThat(p, parse("type id"));
-    assertThat(p, parse("parameterModifier type id"));
-    assertThat(p, parse("attributes type id"));
-    assertThat(p, parse("attributes parameterModifier type id"));
-    assertThat(p, parse("attributes parameterModifier type id = expression"));
-    assertThat(p, parse("type id = expression"));
+    assertThat(p, parse("ref"));
+    assertThat(p, parse("out"));
+    assertThat(p, parse("this"));
   }
 
   @Test
   public void testKo() throws Exception {
     assertThat(p, notParse(""));
   }
-
-  @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int i"));
-  }
-
 }
