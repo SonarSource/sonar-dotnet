@@ -261,6 +261,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         and(NEW, g.nonArrayType, LBRACKET, g.expressionList, RBRACKET, o2n(g.rankSpecifier), opt(g.arrayInitializer)),
         and(NEW, g.arrayType, g.arrayInitializer));
     g.delegateCreationExpression.is(NEW, g.delegateType, LPARENTHESIS, g.expression, RPARENTHESIS);
+    g.anonymousObjectCreationExpression.is(NEW, g.anonymousObjectInitializer);
+    g.anonymousObjectInitializer.is(LCURLYBRACE, opt(g.memberDeclarator), o2n(COMMA, g.memberDeclarator), opt(COMMA), RCURLYBRACE);
+    g.memberDeclarator.isOr(g.memberAccess, and(IDENTIFIER, EQUAL, g.expression), g.simpleName);
     g.typeOfExpression.is(TYPEOF, LPARENTHESIS, or(g.type, g.unboundTypeName, VOID), RPARENTHESIS);
     g.unboundTypeName.is(
         one2n(IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(g.genericDimensionSpecifier),

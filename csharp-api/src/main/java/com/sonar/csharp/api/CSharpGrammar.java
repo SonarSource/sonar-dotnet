@@ -64,6 +64,9 @@ public class CSharpGrammar implements Grammar {
   public Rule objectCreationExpression; // OK
   public Rule arrayCreationExpression; // OK
   public Rule delegateCreationExpression; // OK
+  public Rule anonymousObjectCreationExpression; // OK
+  public Rule anonymousObjectInitializer; // OK
+  public Rule memberDeclarator; // OK
   public Rule typeOfExpression; // OK
   public Rule unboundTypeName; // OK
   public Rule genericDimensionSpecifier; // OK
