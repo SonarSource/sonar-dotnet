@@ -18,6 +18,7 @@
 	<modules>
 		<module>csharp-api</module>
 		<module>csharp-squid</module>
+		<module>csharp-toolkit</module>
 	</modules>
 	<scm>
 		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
