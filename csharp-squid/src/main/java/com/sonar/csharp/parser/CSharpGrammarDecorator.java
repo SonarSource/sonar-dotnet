@@ -114,8 +114,6 @@ import static com.sonar.csharp.api.CSharpPunctuator.PLUS;
 import static com.sonar.csharp.api.CSharpPunctuator.QUESTION;
 import static com.sonar.csharp.api.CSharpPunctuator.RBRACKET;
 import static com.sonar.csharp.api.CSharpPunctuator.RCURLYBRACE;
-import static com.sonar.csharp.api.CSharpPunctuator.RIGHT_ASSIGN;
-import static com.sonar.csharp.api.CSharpPunctuator.RIGHT_OP;
 import static com.sonar.csharp.api.CSharpPunctuator.RPARENTHESIS;
 import static com.sonar.csharp.api.CSharpPunctuator.SEMICOLON;
 import static com.sonar.csharp.api.CSharpPunctuator.SLASH;
@@ -157,6 +155,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
     // We follow the ECMA specification for the C# language, 4th edition of June 2006
     g.literal.isOr(TRUE, FALSE, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
+    g.rightShift.is(SUPERIOR, SUPERIOR);
+    g.rightShiftAssignment.is(SUPERIOR, GE_OP);
 
     // A.2.1 Basic concepts
     basicConcepts(g);
@@ -284,7 +284,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.castExpression.is(LPARENTHESIS, g.type, RPARENTHESIS, g.unaryExpression);
     g.multiplicativeExpression.is(g.unaryExpression, o2n(or(STAR, SLASH, MODULO), g.unaryExpression));
     g.additiveExpression.is(g.multiplicativeExpression, o2n(or(PLUS, MINUS), g.multiplicativeExpression));
-    g.shiftExpression.is(g.additiveExpression, o2n(or(LEFT_OP, RIGHT_OP), g.additiveExpression));
+    g.shiftExpression.is(g.additiveExpression, o2n(or(LEFT_OP, g.rightShift), g.additiveExpression));
     g.relationalExpression.is(g.shiftExpression,
         o2n(or(and(or(INFERIOR, SUPERIOR, LE_OP, GE_OP), g.shiftExpression), and(or(IS, AS), g.type))));
     g.equalityExpression.is(g.relationalExpression, o2n(or(EQ_OP, NE_OP), g.relationalExpression));
@@ -322,10 +322,10 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.selectClause.is("select", g.expression);
     g.groupClause.is("group", g.expression, "by", g.expression);
     g.queryContinuation.is("into", IDENTIFIER, g.queryBody);
-    g.assignment
-        .is(g.unaryExpression,
-            or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
-                RIGHT_ASSIGN), g.expression);
+    g.assignment.is(
+        g.unaryExpression,
+        or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
+            g.rightShiftAssignment), g.expression);
     g.expression.isOr(g.assignment, g.nonAssignmentExpression);
     g.nonAssignmentExpression.isOr(g.queryExpression, g.conditionalExpression, g.lambdaExpression);
     g.constantExpression.is(g.expression);
@@ -459,8 +459,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.overloadableUnaryOperator.isOr(PLUS, MINUS, EXCLAMATION, TILDE, INC_OP, DEC_OP, TRUE, FALSE);
     g.binaryOperatorDeclarator.is(g.type, OPERATOR, g.overloadableBinaryOperator, LPARENTHESIS, g.type, IDENTIFIER, COMMA, g.type,
         IDENTIFIER, RPARENTHESIS);
-    g.overloadableBinaryOperator.isOr(PLUS, MINUS, STAR, SLASH, MODULO, AND, OR, XOR, LEFT_OP, RIGHT_OP, EQ_OP, NE_OP, SUPERIOR, INFERIOR,
-        GE_OP, LE_OP);
+    g.overloadableBinaryOperator.isOr(PLUS, MINUS, STAR, SLASH, MODULO, AND, OR, XOR, LEFT_OP, g.rightShift, EQ_OP, NE_OP, SUPERIOR,
+        INFERIOR, GE_OP, LE_OP);
     g.conversionOperatorDeclarator.is(or(IMPLICIT, EXPLICIT), OPERATOR, g.type, LPARENTHESIS, g.type, IDENTIFIER, RPARENTHESIS);
     g.operatorBody.isOr(g.block, SEMICOLON);
     g.constructorDeclaration.is(opt(g.attributes), o2n(g.constructorModifier), g.constructorDeclarator, g.constructorBody);

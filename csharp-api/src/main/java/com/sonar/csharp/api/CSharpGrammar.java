@@ -14,6 +14,8 @@ import com.sonar.sslr.api.Rule;
 public class CSharpGrammar implements Grammar {
 
   public Rule literal;
+  public Rule rightShift;
+  public Rule rightShiftAssignment;
 
   // A.2.1 Basic concepts
   public Rule compilationUnit; // OK
