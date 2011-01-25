@@ -22,19 +22,26 @@ public class MethodHeaderTest {
   @Before
   public void init() {
     p.setRootRule(g.methodHeader);
+  }
+
+  @Test
+  public void testOk() {
     g.attributes.mock();
     g.returnType.mock();
     g.memberName.mock();
     g.typeParameterList.mock();
     g.formalParameterList.mock();
     g.typeParameterConstraintsClauses.mock();
-  }
-
-  @Test
-  public void testOk() {
     assertThat(p, parse("returnType memberName ( ) "));
     assertThat(p, parse("attributes new returnType memberName typeParameterList ( formalParameterList ) typeParameterConstraintsClauses"));
     assertThat(p, parse("public protected internal private static virtual sealed override abstract extern returnType memberName ( ) "));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("public partial void OnError()"));
+    // assertThat(p,
+    // parse("public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)"));
   }
 
 }

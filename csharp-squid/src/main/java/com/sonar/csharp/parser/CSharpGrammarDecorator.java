@@ -410,8 +410,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.variableDeclarator.is(IDENTIFIER, opt(EQUAL, g.variableInitializer));
     g.variableInitializer.isOr(g.expression, g.arrayInitializer);
     g.methodDeclaration.is(g.methodHeader, g.methodBody);
-    g.methodHeader.is(opt(g.attributes), o2n(g.methodModifier), g.returnType, g.memberName, opt(g.typeParameterList), LPARENTHESIS,
-        opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses));
+    g.methodHeader.is(opt(g.attributes), o2n(g.methodModifier), opt("partial"), g.returnType, g.memberName, opt(g.typeParameterList),
+        LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses));
     g.methodModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     g.returnType.isOr(g.type, VOID);
     // NOTE: g.memberName does not exactly stick to the specification (see page 462 of ECMA specification)
