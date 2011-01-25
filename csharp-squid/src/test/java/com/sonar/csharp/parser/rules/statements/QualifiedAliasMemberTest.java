@@ -22,13 +22,18 @@ public class QualifiedAliasMemberTest {
   @Before
   public void init() {
     p.setRootRule(g.qualifiedAliasMember);
-    g.typeArgumentList.mock();
   }
 
   @Test
   public void testOk() {
+    g.typeArgumentList.mock();
     assertThat(p, parse("id :: id"));
     assertThat(p, parse("id :: id typeArgumentList"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("Foo::NonExisting"));
   }
 
 }

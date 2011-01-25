@@ -35,6 +35,7 @@ public class AttributeTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("Obsolete(\"Use Fix property\")"));
+    assertThat(p, parse("Foo::NonExisting(var, 5)"));
   }
 
 }

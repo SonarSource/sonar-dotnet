@@ -204,8 +204,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         EOF);
     g.namespaceName.is(g.namespaceOrTypeName);
     g.typeName.is(g.namespaceOrTypeName);
-    g.namespaceOrTypeName.is(o2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), DOT), IDENTIFIER,
-        opt(g.typeArgumentList));
+    g.namespaceOrTypeName.isOr(and(IDENTIFIER, opt(g.typeArgumentList)),
+        and(g.namespaceOrTypeName, DOT, IDENTIFIER, opt(g.typeArgumentList)), g.qualifiedAliasMember);
   }
 
   private void types(CSharpGrammar g) {
