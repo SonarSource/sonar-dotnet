@@ -531,7 +531,7 @@ namespace ConsoleApplication1
             {
                 return !a;
             };
-            //TODO Func<int, int, int> f2 = (a, b) => 0;
+            Func<int, int, int> f2 = (a, b) => 0;
             f2 = (int a, int b) => 1;
             Action a = Blah;
             f2 = () => {};
