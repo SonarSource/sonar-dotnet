@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -39,7 +38,7 @@ public class CSharpPreIntegrationTest {
   }
 
   private void populateFilesToIgnoreSet() {
-    // TODO Files ignored because they have preprocessing instructions that we do not handle yet
+    // XXX Files ignored because they have preprocessing instructions that we do not handle yet
     filesToIgnore.add("PropertiesDictionary.cs");
     filesToIgnore.add("ReadOnlyPropertiesDictionary.cs");
     filesToIgnore.add("TestLoaderWatcherTests.cs");
@@ -49,8 +48,11 @@ public class CSharpPreIntegrationTest {
     filesToIgnore.add("TestThread.cs");
     filesToIgnore.add("PNUnitTestRunner.cs");
     filesToIgnore.add("PairwiseTests.cs");
-    // TODO Other reasons
-    filesToIgnore.add("TypeHelperTests.cs"); // cf. unbound-type-name
+    // XXX Files ignored for other reasons: should fix the parsing issue some day
+    filesToIgnore.add("TypeHelper.cs");
+    filesToIgnore.add("EqualTest.cs");
+    filesToIgnore.add("NullableTypesTests.cs");
+    filesToIgnore.add("ArbitraryConstraintMatching.cs");
   }
 
   @Parameterized.Parameters
@@ -61,7 +63,7 @@ public class CSharpPreIntegrationTest {
   }
 
   @Test
-  @Ignore
+  // @Ignore
   public void parseCSharpSource() throws Exception {
     if (filesToIgnore.contains(cSharpFile.getName())) {
       System.out.println("... Ignoring \"" + cSharpFile.getName() + "\" for the moment...");

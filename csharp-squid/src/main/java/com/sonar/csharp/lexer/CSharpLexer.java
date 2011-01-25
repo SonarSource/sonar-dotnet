@@ -91,10 +91,8 @@ public class CSharpLexer extends Lexer {
     channels.add(new PunctuatorChannel(CSharpPunctuator.values()));
     // Preprocessor directives
     channels.add(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"));
-    // channels.add(new BlackHoleChannel("#[^\\r\\n]*"));
     // Others
     channels.add(new BlackHoleChannel("[\\s]"));
-    // TODO : remove at the end
     channels.add(new UnknownCharacterChannel(true));
     return new ChannelDispatcher<LexerOutput>(channels);
   }

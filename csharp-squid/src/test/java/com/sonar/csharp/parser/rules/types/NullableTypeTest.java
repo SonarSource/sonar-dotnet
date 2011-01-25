@@ -40,6 +40,7 @@ public class NullableTypeTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("int?"));
+    assertThat(p, parse("Color?"));
   }
 
 }
