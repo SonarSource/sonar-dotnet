@@ -47,6 +47,8 @@ public class FixedParameterTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("int i"));
+    assertThat(p, parse("this IEnumerable<TSource> source"));
+    assertThat(p, parse("Func<TSource, int, bool> predicate"));
   }
 
 }

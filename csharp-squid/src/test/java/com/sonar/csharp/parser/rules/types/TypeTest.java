@@ -36,9 +36,12 @@ public class TypeTest {
 
   @Test
   public void testRealLife() throws Exception {
+    assertThat(p, parse("bool"));
     assertThat(p, parse("AClass"));
     assertThat(p, parse("AClass[]"));
     assertThat(p, parse("int?"));
+    assertThat(p, parse("IEnumerable<TSource>"));
+    assertThat(p, parse("Func<TSource, int, bool>"));
   }
 
 }

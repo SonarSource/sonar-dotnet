@@ -36,6 +36,7 @@ public class FormalParameterListTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("int i"));
-  } 
+    assertThat(p, parse("this IEnumerable<TSource> source, Func<TSource, int, bool> predicate"));
+  }
 
 }

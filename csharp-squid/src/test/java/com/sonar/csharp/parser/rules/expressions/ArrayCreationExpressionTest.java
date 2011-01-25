@@ -23,26 +23,33 @@ public class ArrayCreationExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.arrayCreationExpression);
+  }
+
+  @Test
+  public void testOk() {
     g.nonArrayType.mock();
     g.expressionList.mock();
     g.rankSpecifier.mock();
     g.arrayInitializer.mock();
     g.arrayType.mock();
-  }
-
-  @Test
-  public void testOk() {
     assertThat(p, parse("new nonArrayType[expressionList]"));
     assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier"));
     assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier rankSpecifier"));
     assertThat(p, parse("new nonArrayType[expressionList] arrayInitializer"));
     assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier rankSpecifier arrayInitializer"));
     assertThat(p, parse("new arrayType arrayInitializer"));
+    assertThat(p, parse("new rankSpecifier arrayInitializer"));
   }
 
   @Test
   public void testKo() {
+    g.arrayType.mock();
     assertThat(p, notParse("new arrayType"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("new[] { 0, 1, }"));
   }
 
 }

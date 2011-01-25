@@ -22,13 +22,20 @@ public class TypeArgumentListTest {
   @Before
   public void init() {
     p.setRootRule(g.typeArgumentList);
-    g.type.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
     assertThat(p, parse("< type >"));
     assertThat(p, parse("< type, type >"));
+  }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("<TSource>"));
+    assertThat(p, parse("<TSource, AClass>"));
+    assertThat(p, parse("<TSource, int, bool>"));
   }
 
 }

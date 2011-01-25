@@ -264,7 +264,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.arrayCreationExpression.isOr(
         and(NEW, g.nonArrayType, LBRACKET, g.expressionList, RBRACKET, o2n(g.rankSpecifier), opt(g.arrayInitializer)),
-        and(NEW, g.arrayType, g.arrayInitializer));
+        and(NEW, g.arrayType, g.arrayInitializer),
+        and(NEW, g.rankSpecifier, g.arrayInitializer));
     g.delegateCreationExpression.is(NEW, g.delegateType, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.anonymousObjectCreationExpression.is(NEW, g.anonymousObjectInitializer);
     g.anonymousObjectInitializer.is(LCURLYBRACE, opt(g.memberDeclarator), o2n(COMMA, g.memberDeclarator), opt(COMMA), RCURLYBRACE);
@@ -553,7 +554,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.typeParameterList.is(INFERIOR, g.typeParameters, SUPERIOR);
     g.typeParameters.is(opt(g.attributes), g.typeParameter, o2n(COMMA, opt(g.attributes), g.typeParameter));
     g.typeParameter.is(IDENTIFIER);
-    g.typeArgumentList.is(INFERIOR, g.typeArgument, opt(COMMA, g.typeArgument), SUPERIOR);
+    g.typeArgumentList.is(INFERIOR, g.typeArgument, o2n(COMMA, g.typeArgument), SUPERIOR);
     g.typeArgument.is(g.type);
     g.typeParameterConstraintsClauses.is(one2n(g.typeParameterConstraintsClause));
     g.typeParameterConstraintsClause.is("where", g.typeParameter, COLON, g.typeParameterConstraints);

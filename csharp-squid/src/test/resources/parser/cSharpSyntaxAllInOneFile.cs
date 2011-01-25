@@ -53,7 +53,7 @@ namespace My
 {
     using A.B;
  
-    //TODO interface CoContra<out T, in K> { }
+    interface CoContra<out T, in K> { }
     //TODO delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;
  
     //TODO public unsafe partial class A : C, I
@@ -150,8 +150,7 @@ namespace My
             }
             var o1 = new MyObject();
             var o2 = new MyObject(var);
-            //TODO var o3 = new MyObject { A = i };
-            /*TODO
+            var o3 = new MyObject { A = i };
             var o4 = new MyObject(@dynamic)
             {
                 A = 0,
@@ -161,10 +160,9 @@ namespace My
             var o5 = new { A = 0 };
             var dictionaryInitializer = new Dictionary<int, string> 
             { 
-                {1, ""}, 
-                {2, "a"} 
+                //TODO {1, ""}, 
+                //TODO {2, "a"} 
             };
-            */
             float[] a = new float[] 
             {
                 0f,
@@ -175,7 +173,7 @@ namespace My
             int[][,] arr = new int[5][,]; // as opposed to new int[][5,5]
             arr[0] = new int[5,5];  // as opposed to arr[0,0] = new int[5];
             arr[0][0,0] = 47;
-            //TODO int[] arrayTypeInference = new[] { 0, 1, };
+            int[] arrayTypeInference = new[] { 0, 1, };
             switch (3) { }
             switch (i)
             {
@@ -279,7 +277,6 @@ namespace My
                 B = 2,
                 C = 3,
             };
-            /*TODO
             var query = from c in customers
                         let d = c
                         where d != null
@@ -293,7 +290,6 @@ namespace My
             query = from c in customers
                     select c into d
                     select d;
-            */
         }
         ~A()
         {
@@ -301,7 +297,7 @@ namespace My
         private readonly int f1;
         [Obsolete]
         [NonExisting]
-        //TODO [Foo::NonExisting(var, 5)]
+        [Foo::NonExisting(var, 5)]
         [CLSCompliant(false)]
         [Obsolete, System.NonSerialized, NonSerialized, CLSCompliant(true || false & true)]
         private volatile int f2;
@@ -336,7 +332,7 @@ namespace My
         [method: Obsolete]
         [field: Obsolete]
         [event: Obsolete]
-        //TODO public readonly event Event E;
+        //TODO public readonly event Event E; // Seems not possible according to the specification...
         [event: Test]
         public event Action E1
         {
@@ -401,7 +397,7 @@ namespace My
         {
             return first.Add(second);
         }
-        //TODO fixed int field[10];
+        //TODO fixed int field[10]; // unsafe code...
         class C
         {
         }
@@ -461,19 +457,17 @@ namespace ConsoleApplication1
 {
     namespace RecursiveGenericBaseType
     {
-        //TODO class A<T> : B<A<T>, A<T>> where T : A<T>
-        class A
+        class A<T> : B<A<T>, A<T>> where T : A<T>
         {
             protected virtual A<T> M() { }
-            //TODO protected abstract B<A<T>, A<T>> N() { }
-            //TODO static B<A<T>, A<T>> O() { }
+            protected abstract B<A<T>, A<T>> N() { }
+            static B<A<T>, A<T>> O() { }
         }
  
-        //TODO sealed class B<T1, T2> : A<B<T1, T2>>
-        class B
+        sealed class B<T1, T2> : A<B<T1, T2>>
         {
             protected override A<T> M() { }
-            //TODO protected sealed override B<A<T>, A<T>> N() { }
+            protected sealed override B<A<T>, A<T>> N() { }
             new static A<T> O() { }
         }
     }
@@ -503,11 +497,9 @@ namespace ConsoleApplication1
             var x = new Boo.Bar<int>.Foo<object>();
             x.Method<string, string>(" ", 5, new object());
  
-            /*TODO
             var q = from i in new int[] { 1, 2, 3, 4 }
                     where i > 5
                     select i;
-            */
         }
  
         public static implicit operator Test(string s)
@@ -533,17 +525,17 @@ namespace ConsoleApplication1
             int i = 5;
             int? j = 6;
  
-            //TODO Expression<Func<int>> e = () => i;
+            Expression<Func<int>> e = () => i;
             //TODO Expression<Func<bool, Action>> e2 = b => () => { return; };
             Func<bool, bool> f = delegate (bool a)
             {
                 return !a;
             };
             //TODO Func<int, int, int> f2 = (a, b) => 0;
-            //TODO f2 = (int a, int b) => 1;
+            f2 = (int a, int b) => 1;
             Action a = Blah;
-            //TODO f2 = () => {};
-            //TODO f2 = () => {;};
+            f2 = () => {};
+            f2 = () => {;};
         }
  
         delegate Recursive Recursive(Recursive r);
@@ -557,7 +549,7 @@ namespace ConsoleApplication1
                 var result = typeof(IEnumerable<int>);
                 var t = typeof(int?) == typeof(Nullable<int>);
                 t = typeof(IEnumerable<int?[][][]>);
-                //TODO return typeof(IEnumerable<>);
+                //TODO return typeof(IEnumerable<>); // not sure the spec allows this...
             }
             set
             {
@@ -632,18 +624,17 @@ namespace Comments.XmlComments.UndocumentedKeywords
             TypedReference tr = __makeref(c);
             Type t = __reftype(tr);
             //TODO int j = __refvalue(tr, int);
-            //TODO Params(a: t, b: t);
+            Params(a: t, b: t);
             Params(ref c, out c);
         }
         void Params(ref dynamic a, out dynamic b, params dynamic[] c) {}
-        //TODO void Params(out dynamic a = 2, ref dynamic c = default(dynamic), params dynamic[][] c) {}
+        void Params(out dynamic a = 2, ref dynamic c = default(dynamic), params dynamic[][] c) {}
  
         public override string ToString() { return base.ToString(); } 
  
-        //TODO public partial void OnError();
+        public partial void OnError();
  
-        //TODO public partial void method()
-        public void method()
+        public partial void method()
         {
             int?[] a = new int?[5];/*[] bug*/ // YES []
             int[] var = { 1, 2, 3, 4, 5 };/*,;*/
@@ -660,8 +651,8 @@ namespace Comments.XmlComments.UndocumentedKeywords
             i++;/*++*/
             i--;/*--*/
             b = true && false || true;/*&& ||*/
-            //TODO i << 5;/*<<*/
-            //TODO i >> 5;/*>>*/
+            //TODO i << 5;/*<<*/ // not sure it is possible in the spec...
+            //TODO i >> 5;/*>>*/  // not sure it is possible in the spec...
             b = i == i && i != i && i <= i && i >= i;/*= == && != <= >=*/
             i += 5.0;/*+=*/
             i -= i;/*-=*/
@@ -682,7 +673,7 @@ namespace Comments.XmlComments.UndocumentedKeywords
                 p->x = 10;// ->
             }
             */
-            //TODO IO::BinaryReader br = null;
+            IO::BinaryReader br = null;
         }
  
         struct Point { public int X; public int Y; public void ThisAccess() { this = this; } }
