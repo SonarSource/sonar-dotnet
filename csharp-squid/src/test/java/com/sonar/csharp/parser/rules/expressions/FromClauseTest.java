@@ -23,12 +23,12 @@ public class FromClauseTest {
   @Before
   public void init() {
     p.setRootRule(g.fromClause);
-    g.type.mock();
-    g.expression.mock();
   }
 
   @Test
   public void testOk() {
+    g.type.mock();
+    g.expression.mock();
     assertThat(p, parse("from id in expression"));
     assertThat(p, parse("from type id in expression"));
   }
@@ -36,6 +36,12 @@ public class FromClauseTest {
   @Test
   public void testKo() {
     assertThat(p, notParse(""));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("from c in customers"));
+    assertThat(p, parse("from People c in customers"));
   }
 
 }

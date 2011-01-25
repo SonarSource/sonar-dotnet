@@ -23,18 +23,29 @@ public class QueryExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.queryExpression);
-    g.fromClause.mock();
-    g.queryBody.mock();
   }
 
   @Test
   public void testOk() {
+    g.fromClause.mock();
+    g.queryBody.mock();
     assertThat(p, parse("fromClause queryBody"));
   }
 
   @Test
   public void testKo() {
     assertThat(p, notParse(""));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("from c in customers let d = c where d != null "
+        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country"));
+    assertThat(p, parse("from c in customers let d = c where d != null "
+        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
+        + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }"));
   }
 
 }

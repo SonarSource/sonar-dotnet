@@ -23,17 +23,18 @@ public class AnonymousObjectCreationExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.anonymousObjectCreationExpression);
-    g.anonymousObjectInitializer.mock();
   }
 
   @Test
   public void testOk() {
+    g.anonymousObjectInitializer.mock();
     assertThat(p, parse("new anonymousObjectInitializer"));
   }
 
   @Test
   public void testKo() {
     assertThat(p, notParse(""));
+    assertThat(p, parse("new { Country = g.Key, CustCount = g.Count() }"));
   }
 
 }

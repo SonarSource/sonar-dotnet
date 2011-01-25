@@ -206,7 +206,6 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.typeName.is(g.namespaceOrTypeName);
     g.namespaceOrTypeName.is(o2n(or(g.qualifiedAliasMember, and(IDENTIFIER, opt(g.typeArgumentList))), DOT), IDENTIFIER,
         opt(g.typeArgumentList));
-
   }
 
   private void types(CSharpGrammar g) {
@@ -241,8 +240,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.primaryExpression.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression);
     g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.elementAccess, g.memberAccess,
         g.invocationExpression, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression,
-        g.objectCreationExpression, g.delegateCreationExpression, g.typeOfExpression, g.checkedExpression, g.uncheckedExpression,
-        g.defaultValueExpression, g.anonymousMethodExpression);
+        g.objectCreationExpression, g.delegateCreationExpression, g.anonymousObjectCreationExpression, g.typeOfExpression,
+        g.checkedExpression, g.uncheckedExpression, g.defaultValueExpression, g.anonymousMethodExpression);
     g.simpleName.is(IDENTIFIER, opt(g.typeArgumentList));
     g.parenthesizedExpression.is(LPARENTHESIS, g.expression, RPARENTHESIS);
     g.memberAccess.isOr(and(g.qualifiedAliasMember, DOT, IDENTIFIER),
@@ -308,13 +307,14 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.implicitAnonymousFunctionParameter.is(IDENTIFIER);
     g.anonymousFunctionBody.isOr(g.expression, g.block);
     g.queryExpression.is(g.fromClause, g.queryBody);
-    g.fromClause.is("from", opt(g.type), IDENTIFIER, IN, g.expression);
+    g.fromClause.is("from", or(and(g.type, IDENTIFIER), IDENTIFIER), IN, g.expression);
     g.queryBody.is(o2n(g.queryBodyClause), g.selectOrGroupClause, opt(g.queryContinuation));
     g.queryBodyClause.isOr(g.fromClause, g.letClause, g.whereClause, g.joinIntoClause, g.joinClause, g.orderByClause);
     g.letClause.is("let", IDENTIFIER, EQUAL, g.expression);
     g.whereClause.is("where", g.booleanExpression);
-    g.joinClause.is("join", opt(g.type), IDENTIFIER, IN, g.expression, "on", g.expression, "equals", g.expression);
-    g.joinIntoClause.is("join", opt(g.type), IDENTIFIER, IN, g.expression, "on", g.expression, "equals", g.expression, "into", IDENTIFIER);
+    g.joinClause.is("join", or(and(g.type, IDENTIFIER), IDENTIFIER), IN, g.expression, "on", g.expression, "equals", g.expression);
+    g.joinIntoClause.is("join", or(and(g.type, IDENTIFIER), IDENTIFIER), IN, g.expression, "on", g.expression, "equals", g.expression,
+        "into", IDENTIFIER);
     g.orderByClause.is("orderby", g.ordering, o2n(COMMA, g.ordering));
     g.ordering.is(g.expression, opt(g.orderingDirection));
     g.orderingDirection.isOr("ascending", "descending");
@@ -327,7 +327,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
             or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
                 RIGHT_ASSIGN), g.expression);
     g.expression.isOr(g.assignment, g.nonAssignmentExpression);
-    g.nonAssignmentExpression.isOr(g.conditionalExpression, g.lambdaExpression, g.queryExpression);
+    g.nonAssignmentExpression.isOr(g.queryExpression, g.conditionalExpression, g.lambdaExpression);
     g.constantExpression.is(g.expression);
     g.booleanExpression.is(g.expression);
   }
