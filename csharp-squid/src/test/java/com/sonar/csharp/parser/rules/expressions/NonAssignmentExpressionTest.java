@@ -24,16 +24,14 @@ public class NonAssignmentExpressionTest {
     p.setRootRule(g.nonAssignmentExpression);
     g.conditionalExpression.mock();
     g.lambdaExpression.mock();
-    // TODO add this when ready
-    // g.queryExpression.mock();
+    g.queryExpression.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("conditionalExpression"));
     assertThat(p, parse("lambdaExpression"));
-    // TODO add this when ready
-    // assertThat(p, parse("queryExpression"));
+    assertThat(p, parse("queryExpression"));
   }
 
 }
