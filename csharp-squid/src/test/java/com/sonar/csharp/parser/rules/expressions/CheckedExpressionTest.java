@@ -22,12 +22,17 @@ public class CheckedExpressionTest {
   @Before
   public void init() {
     p.setRootRule(g.checkedExpression);
-    g.expression.mock();
   }
 
   @Test
   public void testOk() {
+    g.expression.mock();
     assertThat(p, parse("checked( expression )"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("checked(++i)"));
+  }
+  
 }

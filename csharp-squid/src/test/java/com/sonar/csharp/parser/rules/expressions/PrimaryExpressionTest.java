@@ -37,6 +37,7 @@ public class PrimaryExpressionTest {
     assertThat(p, parse("typeof(void).OneAttribute"));
     assertThat(p, parse("CurrentDomain.GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
+    assertThat(p, parse("checked(++i)"));
   }
 
 }
