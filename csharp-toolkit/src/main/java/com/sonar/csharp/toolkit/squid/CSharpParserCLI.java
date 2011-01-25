@@ -41,6 +41,9 @@ public class CSharpParserCLI {
 
   public CSharpParserCLI(PrintStream out, String... args) {
     this.out = out;
+    if (args.length == 0) {
+      printHelp();
+    }
     for (String argument : args) {
       String keyValue[] = argument.split("=");
       if (keyValue.length != 2) {
@@ -94,9 +97,7 @@ public class CSharpParserCLI {
       }
       numberOfParsedFiles++;
     }
-    out.println();
-    out.println("**********************************************************************************");
-    out.println();
+    printFooter();
     if (numberOfUnparsableFiles != 0) {
       out.println("==> " + numberOfUnparsableFiles + " files (out of " + numberOfFiles
           + ") have not been parsed. Please refer to the \"ParsingErrors.log\" file for more detail.");
@@ -104,26 +105,47 @@ public class CSharpParserCLI {
       out.println("==> SUCCESS: all " + numberOfFiles + " files have been parsed!");
     }
     long endTime = System.currentTimeMillis();
-    out.println("\nParsing time : " + ((double) (endTime - startTime) / 1000) + " seconds ");
+    out.println("\nParsing time : " + ((double) (endTime - startTime) / 1000) + " seconds\n\n");
     err.flush();
     err.close();
   }
 
   private void displayStartingMessage(int numberOfFiles) {
-    out.println("**********************************************************************************");
-    out.println("                     Welcome to Sonar C# Parser");
-    out.println("**********************************************************************************");
-    out.println();
+    printHeader();
     out.println("                   srcDir : " + getSrcDir().getAbsolutePath());
     out.println("   number of source files : " + numberOfFiles);
-    out.println("                  charser : " + getCharset().displayName());
+    out.println("                  charset : " + getCharset().displayName());
     out.println("         astDumpActivated : " + isAstDumpActivated());
     if (isAstDumpActivated()) {
       out.println("                   astDir : " + getAstDir().getAbsolutePath());
     }
+    printFooter();
+  }
+
+  private void printHeader() {
+    out.println("**********************************************************************************");
+    out.println("                     Welcome to Sonar C# Parser");
+    out.println("**********************************************************************************");
+    out.println();
+  }
+
+  private void printFooter() {
     out.println();
     out.println("**********************************************************************************");
     out.println();
+  }
+
+  private void printHelp() {
+    printHeader();
+    out.println("Arguments: ");
+    out.println("           - srcDir=...             : absolute path of the folder that contains the source files");
+    out.println("           - charset=...            : the charset to use");
+    out.println("                                      (optional, defaults to the platform default charset)");
+    out.println("           - astDumpActivated=...   : whether to print out in XML files the Abstract Syntac Tree generated from the source files");
+    out.println("                                      (optional, defaults to \"true\")");
+    out.println("           - astDir=...             : the folder where the XML files will be written to");
+    out.println("                                      (optional, defaults to \"./SonarGeneratedAstDir\")");
+    printFooter();
   }
 
   public File removeAndCreateAstDir() {
