@@ -28,16 +28,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents the code coverage for a visual studio project.
+ * Represents the code coverage for a folder.
  * 
- * @author Jose CHILLAN May 14, 2009
+ * @author Alexandre Victoor
  */
-public class ProjectCoverage extends Coverable {
-  private String assemblyName;
+public class FolderCoverage extends Coverable {
+  private String folderName;
   private Map<File, FileCoverage> files = new HashMap<File, FileCoverage>();
   private int uncoveredLines = 0;
 
- 
   /**
    * Adds a class coverage in the project
    * 
@@ -48,25 +47,7 @@ public class ProjectCoverage extends Coverable {
     files.put(file, fileCoverage);
   }
 
-  /**
-   * Returns the assemblyName.
-   * 
-   * @return The assemblyName to return.
-   */
-  public String getAssemblyName() {
-    return this.assemblyName;
-  }
-
-  /**
-   * Sets the assemblyName.
-   * 
-   * @param assemblyName
-   *          The assemblyName to set.
-   */
-  public void setAssemblyName(String assemblyName) {
-    this.assemblyName = assemblyName;
-  }
-
+ 
   /**
    * Summarizes the coverage
    */
@@ -81,8 +62,16 @@ public class ProjectCoverage extends Coverable {
 
   @Override
   public String toString() {
-    return "Project(name=" + assemblyName + ", coverage=" + getCoverage()
+    return "Folder(name=" + folderName + ", coverage=" + getCoverage()
         + ", lines=" + countLines + ", covered=" + coveredLines + ")";
+  }
+
+  public String getFolderName() {
+    return folderName;
+  }
+
+  public void setFolderName(String folderName) {
+    this.folderName = folderName;
   }
 
 }

@@ -27,8 +27,10 @@ import static org.sonar.plugin.dotnet.core.Constant.SONAR_EXCLUDE_GEN_CODE_KEY;
 import static org.sonar.plugin.dotnet.coverage.Constants.*;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
@@ -43,13 +45,17 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
+import org.sonar.plugin.dotnet.core.resource.CSharpFolder;
+import org.sonar.plugin.dotnet.coverage.model.Coverable;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
+import org.sonar.plugin.dotnet.coverage.model.FolderCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.coverage.model.SourceLine;
 
@@ -141,6 +147,29 @@ public class CoverageSensor extends AbstractDotnetSensor {
     double coverage = Math.round(100. * coveredLines / countLines) * 0.01;
     context.saveMeasure(CoreMetrics.COVERAGE, convertPercentage(coverage));
     context.saveMeasure(CoverageMetrics.ELOC, (double) countLines);
+    
+    final Map<CSharpFolder, FolderCoverage> folderCoverageMap = new HashMap<CSharpFolder, FolderCoverage>();
+    for (FileCoverage fileCoverage : files) {
+      
+      File directory = fileCoverage.getFile().getParentFile();
+      CSharpFolder folderResource = CSharpFolder.fromDirectory(project,
+          directory);
+      FolderCoverage folderCoverage = folderCoverageMap.get(folderResource);
+      if (folderCoverage == null) {
+        folderCoverage = new FolderCoverage();
+        folderCoverage.setFolderName(directory.getName());
+        folderCoverageMap.put(folderResource, folderCoverage);
+      }
+      folderCoverage.addFile(fileCoverage);
+    }
+    Set<CSharpFolder> folders = folderCoverageMap.keySet();
+    for (CSharpFolder cSharpFolder : folders) {
+      FolderCoverage folderCoverage = folderCoverageMap.get(cSharpFolder);
+      folderCoverage.summarize();
+      
+      saveCoverageMeasures(context, folderCoverage, cSharpFolder);
+    }
+    
   }
 
   /**
@@ -182,25 +211,30 @@ public class CoverageSensor extends AbstractDotnetSensor {
     CSharpFile fileResource = CSharpFileLocator.INSTANCE.locate(project,
         filePath, false);
     if (fileResource != null) {
-      double coverage = fileCoverage.getCoverage();
-      // We have the effective number of lines here
-      // TODO Is it really useful ?
-      context.saveMeasure(fileResource, CoverageMetrics.ELOC,
-          (double) fileCoverage.getCountLines());
-      
-      context.saveMeasure(fileResource, CoreMetrics.LINES_TO_COVER,
-          (double) fileCoverage.getCountLines());
-      
-      context.saveMeasure(fileResource, CoreMetrics.UNCOVERED_LINES,
-          (double) fileCoverage.getCountLines() - fileCoverage.getCoveredLines());
-
-      context.saveMeasure(fileResource, CoreMetrics.COVERAGE,
-          convertPercentage(coverage));
-      // TODO LINE_COVERAGE & COVERAGE should not be the same 
-      context.saveMeasure(fileResource, CoreMetrics.LINE_COVERAGE,
-          convertPercentage(coverage));
+      saveCoverageMeasures(context, fileCoverage, fileResource);
       context.saveMeasure(fileResource, getHitData(fileCoverage));
     }
+  }
+
+  private void saveCoverageMeasures(SensorContext context,
+      Coverable coverageData, Resource<?> resource) {
+    double coverage = coverageData.getCoverage();
+    // We have the effective number of lines here
+    // TODO Is it really useful ?
+    context.saveMeasure(resource, CoverageMetrics.ELOC,
+        (double) coverageData.getCountLines());
+    
+    context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER,
+        (double) coverageData.getCountLines());
+    
+    context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES,
+        (double) coverageData.getCountLines() - coverageData.getCoveredLines());
+
+    context.saveMeasure(resource, CoreMetrics.COVERAGE,
+        convertPercentage(coverage));
+    // TODO LINE_COVERAGE & COVERAGE should not be the same 
+    context.saveMeasure(resource, CoreMetrics.LINE_COVERAGE,
+        convertPercentage(coverage));
   }
 
   /**
