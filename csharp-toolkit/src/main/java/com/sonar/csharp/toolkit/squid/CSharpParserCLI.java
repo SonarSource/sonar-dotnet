@@ -142,8 +142,8 @@ public class CSharpParserCLI {
     out.println("           - charset=...            : the charset to use");
     out.println("                                      (optional, defaults to the platform default charset)");
     out.println("           - astDumpActivated=...   : whether to print out in XML files the Abstract Syntac Tree generated from the source files");
-    out.println("                                      (optional, defaults to \"true\")");
-    out.println("           - astDir=...             : the folder where the XML files will be written to");
+    out.println("                                      (optional, defaults to \"false\")");
+    out.println("           - astDir=...             : the folder where the XML files will be written to when dump is activated");
     out.println("                                      (optional, defaults to \"./SonarGeneratedAstDir\")");
     printFooter();
   }
@@ -171,7 +171,7 @@ public class CSharpParserCLI {
     if (configuration.get(Argument.astDumpActivated.name()) != null) {
       return Boolean.parseBoolean((String) configuration.get(Argument.astDumpActivated.name()));
     }
-    return true;
+    return false;
   }
 
   public File getSrcDir() {
