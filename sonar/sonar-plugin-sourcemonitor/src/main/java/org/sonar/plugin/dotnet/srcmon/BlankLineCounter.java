@@ -24,11 +24,13 @@
 package org.sonar.plugin.dotnet.srcmon;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -37,6 +39,10 @@ import org.apache.commons.lang.StringUtils;
  * @author Jose CHILLAN May 19, 2009
  */
 public class BlankLineCounter {
+
+  private final static Logger log = LoggerFactory
+      .getLogger(BlankLineCounter.class);
+
   /**
    * Counts the number of blank lines.
    * 
@@ -46,18 +52,22 @@ public class BlankLineCounter {
   public static int countBlankLines(File file) {
     int count = 0;
     try {
-      FileInputStream stream = new FileInputStream(file);
-      LineNumberReader reader = new LineNumberReader(new InputStreamReader(
-          stream));
-      String line;
-      while ((line = reader.readLine()) != null) {
-        if (StringUtils.isBlank(line)) {
-          count++;
+      Scanner scanner = new Scanner(new FileReader(file));
+      scanner.useDelimiter("\n");
+      try {
+        // first use a Scanner to get each line
+        while (scanner.hasNext()) {
+          String n = scanner.next();
+          n = StringUtils.remove(n, "\t");
+          if (StringUtils.isBlank(n)) {
+            count++;
+          }
         }
+      } finally {
+        scanner.close();
       }
-    } catch (Exception e) // NOPMD
-    {
-      // Do nothing
+    } catch (FileNotFoundException e) {
+      log.error("file not found error while counting blank lines", e);
     }
     return count;
   }

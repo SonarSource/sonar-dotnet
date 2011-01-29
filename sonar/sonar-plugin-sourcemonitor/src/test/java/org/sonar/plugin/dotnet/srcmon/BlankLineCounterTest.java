@@ -23,6 +23,7 @@ package org.sonar.plugin.dotnet.srcmon;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -30,12 +31,19 @@ import org.junit.Test;
 public class BlankLineCounterTest {
 
   @Test
-  @Ignore
-  public void testCountBlankLines() {
+  public void trickyTestCountBlankLines() {
     File csFile 
       = new File("target/test-classes/IIssueModificationService.cs");
     int nbBlanks = BlankLineCounter.countBlankLines(csFile);
     assertEquals(2, nbBlanks);
+  }
+  
+  @Test
+  public void monoTestCountBlankLines() {
+    File csFile 
+      = new File("target/test-classes/Helpers.cs");
+    int nbBlanks = BlankLineCounter.countBlankLines(csFile);
+    assertEquals(4, nbBlanks);
   }
 
 }
