@@ -11,7 +11,6 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceProject;
@@ -23,10 +22,9 @@ import com.sonar.csharp.api.metric.CSharpMetric;
 public class CSharpMethodVisitorTest {
 
   @Test
-  @Ignore("Need to wait to have a real parser...")
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration());
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/simpleFile.cs"));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/NUnitFramework.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
 
     assertThat(project.getInt(CSharpMetric.METHODS), is(14));
