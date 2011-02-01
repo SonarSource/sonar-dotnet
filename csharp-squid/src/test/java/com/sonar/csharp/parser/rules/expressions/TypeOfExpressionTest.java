@@ -36,6 +36,8 @@ public class TypeOfExpressionTest {
   @Test
   public void testRealLife() {
     assertThat(p, parse("typeof (MyClass)"));
+    assertThat(p, parse("typeof (CollectionProxy<>)"));
+    assertThat(p, parse("typeof (List<List<int>>)"));
   }
 
 }

@@ -22,11 +22,11 @@ public class UnboundTypeNameTest {
   @Before
   public void init() {
     p.setRootRule(g.unboundTypeName);
-    g.genericDimensionSpecifier.mock();
   }
 
   @Test
   public void testOk() {
+    g.genericDimensionSpecifier.mock();
     assertThat(p, parse("id"));
     assertThat(p, parse("id genericDimensionSpecifier"));
     assertThat(p, parse("id :: otherId"));
@@ -34,4 +34,10 @@ public class UnboundTypeNameTest {
     assertThat(p, parse("id :: otherId . anotherId genericDimensionSpecifier"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("CollectionProxy<>"));
+    assertThat(p, parse("CollectionProxy<,,>"));
+  }
+  
 }

@@ -131,6 +131,7 @@ import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
+import static com.sonar.sslr.impl.matcher.Matchers.bridge;
 import static com.sonar.sslr.impl.matcher.Matchers.next;
 import static com.sonar.sslr.impl.matcher.Matchers.not;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
@@ -271,7 +272,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.anonymousObjectCreationExpression.is(NEW, g.anonymousObjectInitializer);
     g.anonymousObjectInitializer.is(LCURLYBRACE, opt(g.memberDeclarator), o2n(COMMA, g.memberDeclarator), opt(COMMA), RCURLYBRACE);
     g.memberDeclarator.isOr(g.memberAccess, and(IDENTIFIER, EQUAL, g.expression), g.simpleName);
-    g.typeOfExpression.is(TYPEOF, LPARENTHESIS, or(g.type, g.unboundTypeName, VOID), RPARENTHESIS);
+    // NOTE : g.typeOfExpression does not exactly stick to the specification, but the bridge makes its easier to parse for now.
+    // g.typeOfExpression.is(TYPEOF, LPARENTHESIS, or(g.type, g.unboundTypeName, VOID), RPARENTHESIS);
+    g.typeOfExpression.is(TYPEOF, bridge(LPARENTHESIS, RPARENTHESIS));
     g.unboundTypeName.is(
         one2n(IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(g.genericDimensionSpecifier),
             opt(DOT, IDENTIFIER, opt(g.genericDimensionSpecifier))), opt(DOT, IDENTIFIER, opt(g.genericDimensionSpecifier)));
