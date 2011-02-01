@@ -23,16 +23,17 @@ public class EventDeclarationTest {
   @Before
   public void init() {
     p.setRootRule(g.eventDeclaration);
+  }
+
+  @Test
+  public void testOk() {
     g.attributes.mock();
     g.type.mock();
     g.variableDeclarator.mock();
     g.memberName.mock();
     g.eventAccessorDeclarations.mock();
-  }
-
-  @Test
-  public void testOk() {
     assertThat(p, parse("event type variableDeclarator;"));
+    assertThat(p, parse("event type variableDeclarator, variableDeclarator, variableDeclarator;"));
     assertThat(p, parse("attributes new event type variableDeclarator, variableDeclarator ;"));
     assertThat(p, parse("attributes new event type memberName {eventAccessorDeclarations}"));
     assertThat(p, parse("public protected internal private static virtual sealed override abstract extern event type variableDeclarator;"));
@@ -40,9 +41,19 @@ public class EventDeclarationTest {
 
   @Test
   public void testKo() {
+    g.attributes.mock();
+    g.type.mock();
+    g.variableDeclarator.mock();
+    g.memberName.mock();
+    g.eventAccessorDeclarations.mock();
     assertThat(p, notParse("event type;"));
     assertThat(p, notParse("attributes eventModifier event type memberName {eventAccessorDeclarations};"));
     assertThat(p, notParse("attributes eventModifier event type memberName {}"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("public event EventHandler OnInitLoad, OnFilter, OnReset;"));
   }
 
 }

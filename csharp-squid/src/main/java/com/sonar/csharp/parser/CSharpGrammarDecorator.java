@@ -440,7 +440,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         o2n(g.eventModifier),
         EVENT,
         g.type,
-        or(and(g.variableDeclarator, opt(COMMA, g.variableDeclarator), SEMICOLON),
+        or(and(g.variableDeclarator, o2n(COMMA, g.variableDeclarator), SEMICOLON),
             and(g.memberName, LCURLYBRACE, g.eventAccessorDeclarations, RCURLYBRACE)));
     g.eventModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     g.eventAccessorDeclarations.isOr(and(g.addAccessorDeclaration, g.removeAccessorDeclaration),
