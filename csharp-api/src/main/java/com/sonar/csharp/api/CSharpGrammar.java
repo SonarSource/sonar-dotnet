@@ -25,16 +25,16 @@ public class CSharpGrammar implements Grammar {
 
   // A.2.2 Types
   public Rule type; // OK
-  public Rule valueType; // LATER
-  public Rule structType; // LATER
-  public Rule enumType; // LATER
-  public Rule simpleType; // OK
-  public Rule numericType; // OK - tested via SimpleTypeTest
-  public Rule integralType; // OK - tested via SimpleTypeTest
-  public Rule floatingPointType; // OK - tested via SimpleTypeTest
-  public Rule nullableType; // OK
-  public Rule nonNullableValueType; // OK - tested via NullableTypeTest
-  public Rule referenceType; // OK
+  public Rule valueType; // LATER // NOT NECESSARY
+  public Rule structType; // OK // NOT NECESSARY
+  public Rule enumType; // LATER // NOT NECESSARY
+  public Rule simpleType; // OK // NOT NECESSARY
+  public Rule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
+  public Rule integralType; // OK - tested via SimpleTypeTest 
+  public Rule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
+  public Rule nullableType; // OK // NOT NECESSARY
+  public Rule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
+  public Rule referenceType; // OK // NOT NECESSARY
   public Rule classType; // OK
   public Rule interfaceType; // OK
   public Rule arrayType; // OK

@@ -42,6 +42,7 @@ public class MethodHeaderTest {
     assertThat(p, parse("public partial void OnError()"));
     assertThat(p,
         parse("public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)"));
+    assertThat(p, parse("public bool Contains(RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType)"));
   }
 
 }

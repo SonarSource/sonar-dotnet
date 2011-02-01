@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.parser.rules.classes;
+package com.sonar.csharp.parser.rules.types;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
@@ -14,30 +14,29 @@ import org.junit.Test;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.parser.CSharpParser;
 
-public class FormalParameterListTest {
+public class StructTypeTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.formalParameterList);
+    p.setRootRule(g.structType);
   }
 
   @Test
   public void testOk() {
-    g.fixedParameters.mock();
-    g.parameterArray.mock();
-    assertThat(p, parse("fixedParameters"));
-    assertThat(p, parse("parameterArray"));
-    assertThat(p, parse("fixedParameters, parameterArray"));
+    g.nullableType.mock();
+    g.typeName.mock();
+    g.simpleType.mock();
+    assertThat(p, parse("nullableType"));
+    assertThat(p, parse("typeName"));
+    assertThat(p, parse("simpleType"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("int i"));
-    assertThat(p, parse("this IEnumerable<TSource> source, Func<TSource, int, bool> predicate"));
-    assertThat(p, parse("RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType"));
+    assertThat(p, parse("RequestStatusDto?"));
   }
 
 }

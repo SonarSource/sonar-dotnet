@@ -51,8 +51,9 @@ public class CSharpPreIntegrationTest {
     // XXX Files ignored for other reasons: should fix the parsing issue some day
     filesToIgnore.add("TypeHelper.cs");
     filesToIgnore.add("EqualTest.cs");
-    filesToIgnore.add("NullableTypesTests.cs");
     filesToIgnore.add("ArbitraryConstraintMatching.cs");
+    filesToIgnore.add("Constraint.cs");
+    filesToIgnore.add("ConstraintOperators.cs");
   }
 
   @Parameterized.Parameters

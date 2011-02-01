@@ -42,6 +42,7 @@ public class TypeTest {
     assertThat(p, parse("int?"));
     assertThat(p, parse("IEnumerable<TSource>"));
     assertThat(p, parse("Func<TSource, int, bool>"));
+    assertThat(p, parse("RequestStatusDto?"));
   }
 
 }

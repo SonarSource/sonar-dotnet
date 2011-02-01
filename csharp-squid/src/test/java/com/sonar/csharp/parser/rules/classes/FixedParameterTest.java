@@ -49,6 +49,7 @@ public class FixedParameterTest {
     assertThat(p, parse("int i"));
     assertThat(p, parse("this IEnumerable<TSource> source"));
     assertThat(p, parse("Func<TSource, int, bool> predicate"));
+    assertThat(p, parse("RequestStatusDto? status"));
   }
 
 }

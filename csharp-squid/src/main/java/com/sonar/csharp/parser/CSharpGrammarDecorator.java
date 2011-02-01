@@ -209,7 +209,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void types(CSharpGrammar g) {
-    g.type.isOr(g.referenceType, g.valueType, g.typeParameter);
+    // NOTE: g.type does not exactly stick to the specification: g.nullableType has been added here, whereas it is not present at this level
+    // in the specification of C# 4.0
+    g.type.isOr(g.nullableType, g.referenceType, g.valueType, g.typeParameter);
     g.valueType.isOr(g.structType, g.enumType);
     g.structType.isOr(g.nullableType, g.typeName, g.simpleType);
     g.simpleType.isOr(g.numericType, BOOL);
@@ -264,8 +266,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.arrayCreationExpression.isOr(
         and(NEW, g.nonArrayType, LBRACKET, g.expressionList, RBRACKET, o2n(g.rankSpecifier), opt(g.arrayInitializer)),
-        and(NEW, g.arrayType, g.arrayInitializer),
-        and(NEW, g.rankSpecifier, g.arrayInitializer));
+        and(NEW, g.arrayType, g.arrayInitializer), and(NEW, g.rankSpecifier, g.arrayInitializer));
     g.delegateCreationExpression.is(NEW, g.delegateType, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.anonymousObjectCreationExpression.is(NEW, g.anonymousObjectInitializer);
     g.anonymousObjectInitializer.is(LCURLYBRACE, opt(g.memberDeclarator), o2n(COMMA, g.memberDeclarator), opt(COMMA), RCURLYBRACE);
