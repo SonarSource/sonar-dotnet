@@ -8,7 +8,6 @@ package com.sonar.csharp.parser;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.sonar.csharp.CSharpConfiguration;
@@ -31,7 +30,6 @@ public class CSharpParserTest {
   }
 
   @Test
-  @Ignore
   public void testLinqFile() {
     parser.parse(FileUtils.toFile(getClass().getResource("/parser/LinqBridge-1.2.cs")));
   }

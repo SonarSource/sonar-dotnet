@@ -40,6 +40,7 @@ public class LambdaExpressionTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("(x,y)=>String.Compare(x, y, true)"));
+    assertThat(p, parse("item => item.Id == prdId"));
   }
 
 }

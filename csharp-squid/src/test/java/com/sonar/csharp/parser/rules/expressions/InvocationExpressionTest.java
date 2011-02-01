@@ -40,6 +40,7 @@ public class InvocationExpressionTest {
     assertThat(p, parse("string.Format(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)"));
     assertThat(p, parse("new CollectionContainsConstraint().Using<string>( foo)"));
     assertThat(p, parse("new CollectionContainsConstraint().Using<string>( (x,y)=>String.Compare(x, y, true) )"));
+    assertThat(p, parse("ReferenceProductList.Find(item => item.Id == prdId)"));
   }
 
 }

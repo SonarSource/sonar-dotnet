@@ -23,12 +23,12 @@ public class ArgumentTest {
   @Before
   public void init() {
     p.setRootRule(g.argument);
-    g.argumentName.mock();
-    g.argumentValue.mock();
   }
 
   @Test
   public void testOk() {
+    g.argumentName.mock();
+    g.argumentValue.mock();
     assertThat(p, parse("argumentValue"));
     assertThat(p, parse("argumentName argumentValue"));
   }
@@ -36,6 +36,12 @@ public class ArgumentTest {
   @Test
   public void testKo() throws Exception {
     assertThat(p, notParse(""));
+  }
+  
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("(x,y)=>String.Compare(x, y, true)"));
+    assertThat(p, parse("item => item.Id == prdId"));
   }
 
 }
