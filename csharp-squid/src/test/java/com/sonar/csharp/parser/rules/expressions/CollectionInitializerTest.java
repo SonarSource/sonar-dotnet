@@ -23,11 +23,11 @@ public class CollectionInitializerTest {
   @Before
   public void init() {
     p.setRootRule(g.collectionInitializer);
-    g.elementInitializer.mock();
   }
 
   @Test
   public void testOk() {
+    g.elementInitializer.mock();
     assertThat(p, parse("{elementInitializer}"));
     assertThat(p, parse("{elementInitializer, elementInitializer}"));
     assertThat(p, parse("{elementInitializer, elementInitializer, }"));
@@ -39,4 +39,9 @@ public class CollectionInitializerTest {
     assertThat(p, notParse("{}"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("{ {1, \"\"}  }"));
+  }
+  
 }

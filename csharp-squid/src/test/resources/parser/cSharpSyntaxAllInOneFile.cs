@@ -56,7 +56,7 @@ namespace My
     interface CoContra<out T, in K> { }
     delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;
  
-    //TODO public unsafe partial class A : C, I
+    //TODO-UNSAFE public unsafe partial class A : C, I
     public partial class A : C, I
     {
         [DllImport("kernel32", SetLastError = true)]
@@ -70,7 +70,7 @@ namespace My
         {
         L:
             {
-                //TODO int i = sizeof(int);
+                //TODO-UNSAFE int i = sizeof(int);
                 ++i;
             }
  
@@ -78,7 +78,7 @@ namespace My
       Console.WriteLine(export.iefSupplied.command);
 #endif
             const int? local = int.MaxValue;
-            //TODO const Guid? local0 = new Guid(r.ToString());
+            const Guid? local0 = new Guid(r.ToString());
  
             var привет = local;
             var мир = local;
@@ -160,8 +160,8 @@ namespace My
             var o5 = new { A = 0 };
             var dictionaryInitializer = new Dictionary<int, string> 
             { 
-                //TODO {1, ""}, 
-                //TODO {2, "a"} 
+                {1, ""}, 
+                {2, "a"} 
             };
             float[] a = new float[] 
             {
@@ -241,7 +241,7 @@ namespace My
                 return;
             yield return this.items[3];
             yield break;
-            /*TODO
+            /*TODO-UNSAFE
             fixed (int* p = stackalloc int[100], q = &y)
             {
                 *intref = 1;
@@ -397,7 +397,7 @@ namespace My
         {
             return first.Add(second);
         }
-        //TODO fixed int field[10]; // unsafe code...
+        //TODO-UNSAFE fixed int field[10];
         class C
         {
         }
@@ -526,7 +526,7 @@ namespace ConsoleApplication1
             int? j = 6;
  
             Expression<Func<int>> e = () => i;
-            //TODO Expression<Func<bool, Action>> e2 = b => () => { return; };
+            Expression<Func<bool, Action>> e2 = b => () => { return; };
             Func<bool, bool> f = delegate (bool a)
             {
                 return !a;
@@ -549,7 +549,7 @@ namespace ConsoleApplication1
                 var result = typeof(IEnumerable<int>);
                 var t = typeof(int?) == typeof(Nullable<int>);
                 t = typeof(IEnumerable<int?[][][]>);
-                //TODO return typeof(IEnumerable<>); // not sure the spec allows this...
+                return typeof(IEnumerable<>);
             }
             set
             {
@@ -664,9 +664,9 @@ namespace Comments.XmlComments.UndocumentedKeywords
             i ^= i;/*^=*/
             i <<= i;/*<<=*/
             i >>= i;/*>>=*/
-            //TODO object s = x => x + 1;/*=>*/
+            object s = x => x + 1;/*=>*/
             Point point;
-            /*TODO
+            /*TODO-UNSAFE
             unsafe
             {
                 Point* p = &point;// &

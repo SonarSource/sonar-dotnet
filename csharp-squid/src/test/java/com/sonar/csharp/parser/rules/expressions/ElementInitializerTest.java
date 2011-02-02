@@ -23,20 +23,25 @@ public class ElementInitializerTest {
   @Before
   public void init() {
     p.setRootRule(g.elementInitializer);
-    g.nonAssignmentExpression.mock();
-    g.expression.mock();
   }
 
   @Test
   public void testOk() {
+    g.nonAssignmentExpression.mock();
+    g.expressionList.mock();
     assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("{expression}"));
+    assertThat(p, parse("{expressionList}"));
   }
 
   @Test
   public void testKo() {
     assertThat(p, notParse(""));
     assertThat(p, notParse("{}"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("{1, \"\"}"));
   }
 
 }

@@ -41,10 +41,11 @@ public class ObjectCreationExpressionTest {
   public void testKo() {
     assertThat(p, notParse(""));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("new MyClass()"));
+    assertThat(p, parse("new Dictionary<int, string>  { {1, \"\"}  }"));
   }
 
 }

@@ -263,7 +263,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.memberInitializer.is(IDENTIFIER, EQUAL, g.initializerValue);
     g.initializerValue.isOr(g.expression, g.objectOrCollectionInitializer);
     g.collectionInitializer.is(LCURLYBRACE, g.elementInitializer, o2n(COMMA, g.elementInitializer), opt(COMMA), RCURLYBRACE);
-    g.elementInitializer.isOr(g.nonAssignmentExpression, and(LCURLYBRACE, g.expression, RCURLYBRACE));
+    g.elementInitializer.isOr(g.nonAssignmentExpression, and(LCURLYBRACE, g.expressionList, RCURLYBRACE));
     g.expressionList.is(g.expression, o2n(COMMA, g.expression));
     g.arrayCreationExpression.isOr(
         and(NEW, g.nonArrayType, LBRACKET, g.expressionList, RBRACKET, o2n(g.rankSpecifier), opt(g.arrayInitializer)),
