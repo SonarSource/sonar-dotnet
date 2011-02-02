@@ -23,11 +23,11 @@ public class VariantTypeParameterListTest {
   @Before
   public void init() {
     p.setRootRule(g.variantTypeParameterList);
-    g.variantTypeParameter.mock();
   }
 
   @Test
   public void testOk() {
+    g.variantTypeParameter.mock();
     assertThat(p, parse("<variantTypeParameter>"));
     assertThat(p, parse("<variantTypeParameter, variantTypeParameter>"));
   }
@@ -35,6 +35,11 @@ public class VariantTypeParameterListTest {
   @Test
   public void testKo() {
     assertThat(p, notParse(""));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("<[System.Obsolete()] out T, in K>"));
   }
 
 }

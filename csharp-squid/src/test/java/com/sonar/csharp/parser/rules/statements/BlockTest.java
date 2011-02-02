@@ -38,8 +38,6 @@ public class BlockTest {
     assertThat(p, parse("{ Integer i = 15;  frameIndex++; }"));
     assertThat(p,
         parse("{ loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
-    // TODO this should parse...
-    // assertThat(p, parse("{ checked(i); }"));
   }
 
 }

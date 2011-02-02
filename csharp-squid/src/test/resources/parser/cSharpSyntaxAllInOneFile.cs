@@ -54,7 +54,7 @@ namespace My
     using A.B;
  
     interface CoContra<out T, in K> { }
-    //TODO delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;
+    delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;
  
     //TODO public unsafe partial class A : C, I
     public partial class A : C, I

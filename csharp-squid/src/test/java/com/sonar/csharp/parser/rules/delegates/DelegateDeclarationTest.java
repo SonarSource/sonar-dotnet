@@ -22,18 +22,24 @@ public class DelegateDeclarationTest {
   @Before
   public void init() {
     p.setRootRule(g.delegateDeclaration);
-    g.attributes.mock();
-    g.returnType.mock();
-    g.typeParameterList.mock();
-    g.formalParameterList.mock();
-    g.typeParameterConstraintsClauses.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributes.mock();
+    g.returnType.mock();
+    g.variantTypeParameterList.mock();
+    g.formalParameterList.mock();
+    g.typeParameterConstraintsClauses.mock();
     assertThat(p, parse("delegate returnType id();"));
-    assertThat(p, parse("attributes new delegate returnType id typeParameterList (formalParameterList) typeParameterConstraintsClauses;"));
+    assertThat(p,
+        parse("attributes new delegate returnType id variantTypeParameterList (formalParameterList) typeParameterConstraintsClauses;"));
     assertThat(p, parse("public protected internal private delegate returnType id();"));
+  }
+
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;"));
   }
 
 }

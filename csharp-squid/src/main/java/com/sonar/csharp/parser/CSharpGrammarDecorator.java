@@ -528,8 +528,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void delegates(CSharpGrammar g) {
-    g.delegateDeclaration.is(opt(g.attributes), o2n(g.delegateModifier), DELEGATE, g.returnType, IDENTIFIER, opt(g.typeParameterList),
-        LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses), SEMICOLON);
+    g.delegateDeclaration.is(opt(g.attributes), o2n(g.delegateModifier), DELEGATE, g.returnType, IDENTIFIER,
+        opt(g.variantTypeParameterList), LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses),
+        SEMICOLON);
     g.delegateModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
   }
 
