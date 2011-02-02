@@ -56,8 +56,7 @@ namespace My
     interface CoContra<out T, in K> { }
     delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;
  
-    //TODO-UNSAFE public unsafe partial class A : C, I
-    public partial class A : C, I
+    public unsafe partial class A : C, I
     {
         [DllImport("kernel32", SetLastError = true)]
         static extern bool CreateDirectory(string name, SecurityAttribute sa);
@@ -70,7 +69,7 @@ namespace My
         {
         L:
             {
-                //TODO-UNSAFE int i = sizeof(int);
+                int i = sizeof(int);
                 ++i;
             }
  
@@ -97,8 +96,8 @@ namespace My
  
             bool @bool;
             byte @byte;
-            //TODO char @char = 'c', \u0066 = '\u0066', hexchar = '\x0130', hexchar2 = (char)0xBAD;
-            //TODO string \U00000065 = "\U00000065";
+            //TODO char @char = 'c', \u0066 = '\u0066', hexchar = '\x0130', hexchar2 = (char)0xBAD; // WORK to do on the lexer
+            //TODO string \U00000065 = "\U00000065"; // WORK to do on the lexer
             decimal @decimal = 1.44M;
             @decimal = 1.2m;
             dynamic @dynamic;
@@ -226,11 +225,11 @@ namespace My
             }
             checked
             {
-                //TODO checked(++i);
+                //TODO checked(++i); // don't know why this does not work...
             }
             unchecked
             {
-                //TODO unchecked(++i);
+                //TODO unchecked(++i); // don't know why this does not work...
             }
             lock (sync)
                 process();
@@ -241,7 +240,6 @@ namespace My
                 return;
             yield return this.items[3];
             yield break;
-            /*TODO-UNSAFE
             fixed (int* p = stackalloc int[100], q = &y)
             {
                 *intref = 1;
@@ -254,7 +252,6 @@ namespace My
             {
                 int* p = null;
             }
-            */
             try
             {
                 throw null;
@@ -397,7 +394,7 @@ namespace My
         {
             return first.Add(second);
         }
-        //TODO-UNSAFE fixed int field[10];
+        fixed int field[10];
         class C
         {
         }
@@ -616,14 +613,14 @@ namespace Comments.XmlComments.UndocumentedKeywords
  
     class yield
     {
-        //TODO void Foo<U>(__arglist)
+        //TODO void Foo<U>(__arglist) // Don't know why it's not working...
         void Foo()
         {
             C<U> c = null;
             c.M<int>(5, default(U));
             TypedReference tr = __makeref(c);
             Type t = __reftype(tr);
-            //TODO int j = __refvalue(tr, int);
+            //TODO int j = __refvalue(tr, int); // Don't know why it's not working...
             Params(a: t, b: t);
             Params(ref c, out c);
         }
@@ -651,8 +648,8 @@ namespace Comments.XmlComments.UndocumentedKeywords
             i++;/*++*/
             i--;/*--*/
             b = true && false || true;/*&& ||*/
-            //TODO i << 5;/*<<*/ // not sure it is possible in the spec...
-            //TODO i >> 5;/*>>*/  // not sure it is possible in the spec...
+            //TODO i << 5;/*<<*/ // Not sure it is possible in the spec...
+            //TODO i >> 5;/*>>*/  // Not sure it is possible in the spec...
             b = i == i && i != i && i <= i && i >= i;/*= == && != <= >=*/
             i += 5.0;/*+=*/
             i -= i;/*-=*/
@@ -666,13 +663,11 @@ namespace Comments.XmlComments.UndocumentedKeywords
             i >>= i;/*>>=*/
             object s = x => x + 1;/*=>*/
             Point point;
-            /*TODO-UNSAFE
             unsafe
             {
                 Point* p = &point;// &
                 p->x = 10;// ->
             }
-            */
             IO::BinaryReader br = null;
         }
  

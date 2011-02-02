@@ -16,14 +16,13 @@ import com.sonar.sslr.impl.Parser;
  */
 public class CSharpParser extends Parser<CSharpGrammar> {
 
-  @SuppressWarnings("unchecked")
   public CSharpParser() {
-    super(new CSharpGrammar(), new CSharpLexer(), new CSharpGrammarDecorator());
+    this(new CSharpConfiguration());
   }
 
   @SuppressWarnings("unchecked")
   public CSharpParser(CSharpConfiguration configuration) {
-    super(new CSharpGrammar(), new CSharpLexer(configuration), new CSharpGrammarDecorator());
+    super(new CSharpGrammar(), new CSharpLexer(configuration), new CSharpGrammarDecorator(), new CSharpUnsafeExtensionGrammarDecorator());
   }
-  
+
 }

@@ -13,7 +13,7 @@
 	</parent>
 	<properties>
 		<sonar.version>2.5</sonar.version>
-		<sslrVersion>1.2</sslrVersion>
+		<sslrVersion>1.3-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
 		<module>csharp-api</module>

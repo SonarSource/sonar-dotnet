@@ -30,7 +30,7 @@ public class CSharpGrammar implements Grammar {
   public Rule enumType; // LATER // NOT NECESSARY
   public Rule simpleType; // OK // NOT NECESSARY
   public Rule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
-  public Rule integralType; // OK - tested via SimpleTypeTest 
+  public Rule integralType; // OK - tested via SimpleTypeTest
   public Rule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
   public Rule nullableType; // OK // NOT NECESSARY
   public Rule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
@@ -308,6 +308,9 @@ public class CSharpGrammar implements Grammar {
   public Rule primaryConstraint; // OK
   public Rule secondaryConstraints; // OK
   public Rule constructorConstraint; // OK
+
+  /** Grammar extensions **/
+  public CSharpUnsafeExtensionGrammar unsafe;
 
   /**
    * ${@inheritDoc}
