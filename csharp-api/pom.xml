@@ -10,6 +10,12 @@
 	<artifactId>csharp-api</artifactId>
 	<name>SonarSource :: C# :: API</name>
 
+	<properties>
+		<!-- Excluding the grammar definition classes as they violate lots of quality 
+			rules (like field visibility) -->
+		<sonar.exclusions>**/*Grammar.java</sonar.exclusions>
+	</properties>
+
 	<dependencies>
 		<!-- sonarsource -->
 		<dependency>

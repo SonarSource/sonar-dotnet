@@ -7,7 +7,10 @@ package com.sonar.csharp.toolkit;
 
 import com.sonar.csharp.toolkit.squid.CSharpParserCLI;
 
-public class Toolkit {
+public final class Toolkit {
+
+  private Toolkit() {
+  }
 
   public static void main(String[] args) {
     CSharpParserCLI cli = new CSharpParserCLI(args);

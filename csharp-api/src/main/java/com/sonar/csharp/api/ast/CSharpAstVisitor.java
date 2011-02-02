@@ -27,7 +27,7 @@ import com.sonar.sslr.api.Comments;
 public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
 
   private Stack<SourceCode> sourceCodeStack;
-  protected CSharpGrammar grammar;
+  private CSharpGrammar grammar;
   private Comments comments;
   private File file;
   private List<AstNodeType> astNodeTypesToVisit = new ArrayList<AstNodeType>();

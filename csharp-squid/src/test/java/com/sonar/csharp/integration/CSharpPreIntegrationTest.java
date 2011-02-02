@@ -62,7 +62,6 @@ public class CSharpPreIntegrationTest {
   }
 
   @Test
-  // @Ignore
   public void parseCSharpSource() throws Exception {
     if (filesToIgnore.contains(cSharpFile.getName())) {
       System.out.println("... Ignoring \"" + cSharpFile.getName() + "\" for the moment...");

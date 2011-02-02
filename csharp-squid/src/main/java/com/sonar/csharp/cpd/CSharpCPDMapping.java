@@ -19,13 +19,13 @@ import com.sonar.csharp.CSharpConstants;
 public class CSharpCPDMapping extends AbstractCpdMapping {
 
   private final CSharp csharp;
-  private final boolean ignore_literals;
+  private final boolean ignoreLiterals;
   private final Charset charset;
 
   public CSharpCPDMapping(CSharp csharp, Project project) {
     this.csharp = csharp;
     this.charset = project.getFileSystem().getSourceCharset();
-    ignore_literals = project.getConfiguration().getBoolean(CSharpConstants.CPD_IGNORE_LITERALS_PROPERTY,
+    ignoreLiterals = project.getConfiguration().getBoolean(CSharpConstants.CPD_IGNORE_LITERALS_PROPERTY,
         CSharpConstants.CPD_IGNORE_LITERALS_DEFVALUE);
   }
 
@@ -34,7 +34,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   }
 
   public Tokenizer getTokenizer() {
-    return new CSharpCPDTokenizer(ignore_literals, charset);
+    return new CSharpCPDTokenizer(ignoreLiterals, charset);
   }
 
 }

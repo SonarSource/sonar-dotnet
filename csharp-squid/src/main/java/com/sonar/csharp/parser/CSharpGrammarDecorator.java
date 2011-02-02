@@ -148,6 +148,10 @@ import com.sonar.sslr.impl.GrammarRuleLifeCycleManager;
  */
 public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
+  private static final String SET = "set";
+  private static final String GET = "get";
+  private static final String PARTIAL = "partial";
+
   /**
    * ${@inheritDoc}
    */
@@ -397,7 +401,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void classes(CSharpGrammar g) {
-    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt("partial"), CLASS, IDENTIFIER, opt(g.typeParameterList),
+    g.classDeclaration.is(opt(g.attributes), o2n(g.classModifier), opt(PARTIAL), CLASS, IDENTIFIER, opt(g.typeParameterList),
         opt(g.classBase), opt(g.typeParameterConstraintsClauses), g.classBody, opt(SEMICOLON));
     g.classModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC);
     g.classBase.is(COLON, or(and(g.classType, COMMA, g.interfaceTypeList), g.classType, g.interfaceTypeList));
@@ -415,7 +419,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.variableDeclarator.is(IDENTIFIER, opt(EQUAL, g.variableInitializer));
     g.variableInitializer.isOr(g.expression, g.arrayInitializer);
     g.methodDeclaration.is(g.methodHeader, g.methodBody);
-    g.methodHeader.is(opt(g.attributes), o2n(g.methodModifier), opt("partial"), g.returnType, g.memberName, opt(g.typeParameterList),
+    g.methodHeader.is(opt(g.attributes), o2n(g.methodModifier), opt(PARTIAL), g.returnType, g.memberName, opt(g.typeParameterList),
         LPARENTHESIS, opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses));
     g.methodModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     g.returnType.isOr(g.type, VOID);
@@ -434,8 +438,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.propertyModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     g.accessorDeclarations.isOr(and(g.getAccessorDeclaration, opt(g.setAccessorDeclaration)),
         and(g.setAccessorDeclaration, opt(g.getAccessorDeclaration)));
-    g.getAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), "get", g.accessorBody);
-    g.setAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), "set", g.accessorBody);
+    g.getAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), GET, g.accessorBody);
+    g.setAccessorDeclaration.is(opt(g.attributes), o2n(g.accessorModifier), SET, g.accessorBody);
     g.accessorModifier.isOr(and(PROTECTED, INTERNAL), and(INTERNAL, PROTECTED), PROTECTED, INTERNAL, PRIVATE);
     g.accessorBody.isOr(g.block, SEMICOLON);
     g.eventDeclaration.is(
@@ -482,7 +486,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void structs(CSharpGrammar g) {
-    g.structDeclaration.is(opt(g.attributes), o2n(g.structModifier), opt("partial"), STRUCT, IDENTIFIER, opt(g.typeParameterList),
+    g.structDeclaration.is(opt(g.attributes), o2n(g.structModifier), opt(PARTIAL), STRUCT, IDENTIFIER, opt(g.typeParameterList),
         opt(g.structInterfaces), opt(g.typeParameterConstraintsClauses), g.structBody, opt(SEMICOLON));
     g.structModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     g.structInterfaces.is(COLON, g.interfaceTypeList);
@@ -498,7 +502,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void interfaces(CSharpGrammar g) {
-    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt("partial"), INTERFACE, IDENTIFIER,
+    g.interfaceDeclaration.is(opt(g.attributes), o2n(g.interfaceModifier), opt(PARTIAL), INTERFACE, IDENTIFIER,
         opt(g.variantTypeParameterList), opt(g.interfaceBase), opt(g.typeParameterConstraintsClauses), g.interfaceBody, opt(SEMICOLON));
     g.interfaceModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     g.variantTypeParameterList.is(INFERIOR, g.variantTypeParameter, o2n(COMMA, g.variantTypeParameter), SUPERIOR);
@@ -512,7 +516,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         opt(g.formalParameterList), RPARENTHESIS, opt(g.typeParameterConstraintsClauses), SEMICOLON);
     g.interfacePropertyDeclaration.is(opt(g.attributes), opt(NEW), g.type, IDENTIFIER, LCURLYBRACE, g.interfaceAccessors, RCURLYBRACE);
     g.interfaceAccessors.is(opt(g.attributes),
-        or(and("get", SEMICOLON, opt(g.attributes), "set"), and("set", SEMICOLON, opt(g.attributes), "get"), "get", "set"), SEMICOLON);
+        or(and(GET, SEMICOLON, opt(g.attributes), SET), and(SET, SEMICOLON, opt(g.attributes), GET), GET, SET), SEMICOLON);
     g.interfaceEventDeclaration.is(opt(g.attributes), opt(NEW), EVENT, g.type, IDENTIFIER, SEMICOLON);
     g.interfaceIndexerDeclaration.is(opt(g.attributes), opt(NEW), g.type, THIS, LBRACKET, g.formalParameterList, RBRACKET, LCURLYBRACE,
         g.interfaceAccessors, RCURLYBRACE);

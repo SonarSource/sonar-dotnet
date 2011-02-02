@@ -40,8 +40,7 @@ public class LocalVariableDeclarationTest {
     assertThat(p, parse("Message message = \"Hello World\""));
     assertThat(p, parse("int num = count"));
     assertThat(p, parse("int? num = count"));
-    // TODO This test fails whereas it should pass
-    // assertThat(p, parse("Color? red = Colors.red"));
+    assertThat(p, parse("Color? red = Colors.red"));
   }
 
 }
