@@ -117,7 +117,7 @@
 								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
 							</descriptors>
 							<filters>
-								<filter>src/assembly/filter.properties</filter>
+								<filter>${basedir}/src/assembly/filter.properties</filter>
 							</filters>
 						</configuration>
 					</execution>
