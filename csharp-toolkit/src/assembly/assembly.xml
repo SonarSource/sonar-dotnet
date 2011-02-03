@@ -30,6 +30,7 @@
 				<include>**/*.bat</include>
 			</includes>
 			<filtered>true</filtered>
+			<lineEnding>dos</lineEnding>
 		</fileSet>
 		<fileSet>
 			<outputDirectory>/</outputDirectory>
