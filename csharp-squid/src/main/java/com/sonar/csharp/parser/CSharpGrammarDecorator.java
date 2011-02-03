@@ -158,7 +158,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   public void decorate(CSharpGrammar g) {
     GrammarRuleLifeCycleManager.initializeLeftRecursionRuleFields(g, CSharpGrammar.class);
 
-    // We follow the ECMA specification for the C# language, 4th edition of June 2006
+    // We follow the C# language specification 4.0
     g.literal.isOr(TRUE, FALSE, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
     g.rightShift.is(SUPERIOR, SUPERIOR);
     g.rightShiftAssignment.is(SUPERIOR, GE_OP);
@@ -214,8 +214,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void types(CSharpGrammar g) {
-    // NOTE: g.type does not exactly stick to the specification: g.nullableType has been added here, whereas it is not present at this level
-    // in the specification of C# 4.0
+    // NOTE: g.type does not exactly stick to the specification: g.nullableType has been added here, whereas it is not present in the "type"
+    // rule in the specification of C# 4.0
     g.type.isOr(g.nullableType, g.referenceType, g.valueType, g.typeParameter);
     g.valueType.isOr(g.structType, g.enumType);
     g.structType.isOr(g.nullableType, g.typeName, g.simpleType);

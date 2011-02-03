@@ -38,7 +38,6 @@
 									<includes>commons-io:commons-io</includes>
 									<includes>commons-lang:commons-lang</includes>
 									<includes>com.google.collections:google-collections</includes>
-									<!-- <includes></includes> <includes></includes> -->
 								</includes>
 							</artifactSet>
 							<transformers>
@@ -80,6 +79,8 @@
 											<class classes="public" methods="public">
 												<patternset>
 													<include name="com.sonar.csharp.toolkit.Toolkit" />
+													<include name="com.sonar.sslr.api.**.*" />
+													<include name="com.sonarsource.csharp.api.**.*" />
 												</patternset>
 											</class>
 										</keep>
@@ -97,6 +98,28 @@
 						<goals>
 							<goal>run</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>CSharpToolkit-${pom.version}</finalName>
+							<descriptors>
+								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+							</descriptors>
+							<filters>
+								<filter>src/assembly/filter.properties</filter>
+							</filters>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

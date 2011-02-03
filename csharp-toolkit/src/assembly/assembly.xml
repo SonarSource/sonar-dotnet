@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+	<id>distribution</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<fileSets>
+		<fileSet>
+			<outputDirectory>/bin</outputDirectory>
+			<directory>${basedir}/target</directory>
+			<includes>
+				<include>${project.artifactId}-${project.version}.jar</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/</outputDirectory>
+			<directory>${basedir}/src/assembly/files</directory>
+			<excludes>
+				<exclude>**/*.sh</exclude>
+				<exclude>**/*.bat</exclude>
+			</excludes>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/</outputDirectory>
+			<directory>${basedir}/src/assembly/files</directory>
+			<includes>
+				<include>**/*.bat</include>
+			</includes>
+			<filtered>true</filtered>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>/</outputDirectory>
+			<directory>${basedir}/src/assembly/files</directory>
+			<includes>
+				<include>**/*.sh</include>
+			</includes>
+			<filtered>true</filtered>
+			<lineEnding>unix</lineEnding>
+			<fileMode>755</fileMode>
+		</fileSet>
+	</fileSets>
+
+</assembly>
