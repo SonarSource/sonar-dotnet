@@ -138,8 +138,7 @@ public class VisualStudioProject {
    */
   public File getDebugArtifact() {
     String generatedFileName = getArtifactName();
-    File result = new File(debugOutputDir, generatedFileName);
-    return result;
+    return new File(debugOutputDir, generatedFileName);
   }
 
   /**
@@ -149,8 +148,7 @@ public class VisualStudioProject {
    */
   public File getReleaseArtifact() {
     String generatedFileName = getArtifactName();
-    File result = new File(releaseOutputDir, generatedFileName);
-    return result;
+    return new File(releaseOutputDir, generatedFileName);
   }
 
   /**
@@ -159,8 +157,7 @@ public class VisualStudioProject {
    * @return
    */
   public String getArtifactName() {
-    String generatedFileName = realAssemblyName + "." + getExtension();
-    return generatedFileName;
+    return realAssemblyName + "." + getExtension();
   }
 
   @Override
@@ -335,13 +332,16 @@ public class VisualStudioProject {
    * @return the extension
    */
   public String getExtension() {
+    final String result;
     switch (type) {
-    case EXECUTABLE:
-      return "exe";
-    case LIBRARY: case WEB:
-      return "dll";
+      case EXECUTABLE:
+        result = "exe"; break;
+      case LIBRARY: case WEB:
+        result = "dll"; break;
+      default: 
+        result = null;
     }
-    return null;
+    return result;
   }
 
   /**
