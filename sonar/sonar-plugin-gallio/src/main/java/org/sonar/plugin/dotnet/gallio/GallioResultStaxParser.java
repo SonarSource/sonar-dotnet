@@ -34,6 +34,7 @@ import javax.xml.stream.XMLStreamException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
+import org.codehaus.staxmate.in.SMFilterFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
@@ -50,6 +51,8 @@ import com.google.common.collect.Multimap;
  */
 public class GallioResultStaxParser implements GallioResultParser {
 
+  private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
+  
   private static final String GALLIO_REPORT_PARSING_ERROR = "gallio report parsing error";
   private static final String GALLIO_URI = "http://www.gallio.org/";
   private static final String ASSEMBLY = "assembly";
@@ -69,11 +72,8 @@ public class GallioResultStaxParser implements GallioResultParser {
    * Categories for the test
    */
   private final static String CATEGORY_ERROR = "error";
-  private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
-
-
+  
   private Map<String, TestCaseDetail> testCaseDetailsByTestIds;
-
 
 
   public Set<UnitTestReport> parse(File report) {
@@ -89,22 +89,17 @@ public class GallioResultStaxParser implements GallioResultParser {
       Map<String, TestDescription> testsDetails = new HashMap<String, TestDescription>();
 
       QName testModelTag = new QName(GALLIO_URI, "testModel");
-      SMInputCursor testModelCursor = rootCursor.descendantElementCursor(testModelTag);
+      SMInputCursor testModelCursor = rootCursor.descendantElementCursor();
+      testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testModelTag));
       testModelCursor.advance();
       log.debug("TestModelCursor initialized at : {}", testModelCursor.getLocalName());
       testsDetails = recursiveParseTestsIds(testModelCursor, testsDetails, null, null);
-      testModelCursor.getStreamReader().closeCompletely();
 
-      // Then we get tests results
-      // Due to problems with nested cursors (http://jira.codehaus.org/browse/STAXMATE-40) in staxmate,
-      // we create an other root cursor and parse a second time
-      SMHierarchicCursor secondRootCursor = inf.rootElementCursor(report);
-      secondRootCursor.advance();
       QName testPackageRunTag = new QName(GALLIO_URI, "testPackageRun");
-      SMInputCursor testPackageRunCursor = secondRootCursor.descendantElementCursor(testPackageRunTag);
-      testPackageRunCursor.advance();
+      testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testPackageRunTag));
+      testModelCursor.advance();
       String testId = "";
-      recursiveParseTestsResults(testPackageRunCursor, testId);
+      recursiveParseTestsResults(testModelCursor, testId);
 
       //Finally, we fill the reports
       reports = createUnitTestsReport(testsDetails);
@@ -113,7 +108,7 @@ public class GallioResultStaxParser implements GallioResultParser {
 
 
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return reports;
   }
@@ -132,13 +127,7 @@ public class GallioResultStaxParser implements GallioResultParser {
           String name = currentTest.getAttrValue("name");
           String testCase = currentTest.getAttrValue("isTestCase");
           log.debug("Id : {} & isTestCase : {}", id, testCase);
-          boolean isTestCase = false;
-          if("true".equals(testCase)){
-            isTestCase = true;
-          }
-          else{
-            isTestCase = false;
-          }
+          boolean isTestCase = "true".equals(testCase);
           // We analyse all the tests tags to get usefull informations if the test is a TestCase,
           // and to get their children
           SMInputCursor currentTestChildren = currentTest.descendantElementCursor();
@@ -158,37 +147,11 @@ public class GallioResultStaxParser implements GallioResultParser {
                   //Get the precedent assemblyName if not filled
                   testDescription.setAssemblyName(parentAssemblyName);
                 }
-                if(null != currentTestChildren.getAttrValue(NAMESPACE)){
-                  attributeValue = currentTestChildren.getAttrValue(NAMESPACE);
-                  log.debug("--{} : {}", NAMESPACE, attributeValue);
-                  testDescription.setNamespace(attributeValue);
-                }
-                if(null != currentTestChildren.getAttrValue(TYPE)){
-                  attributeValue = currentTestChildren.getAttrValue(TYPE);
-                  log.debug("--{} : {}", TYPE, attributeValue);
-                  testDescription.setClassName(attributeValue);
-                }
-                if(null != currentTestChildren.getAttrValue(MEMBER)){
-                  attributeValue = currentTestChildren.getAttrValue(MEMBER);
-                  log.debug("--{} : {}", MEMBER, attributeValue);
-                  testDescription.setMethodName(attributeValue);
-                }
+                retrieveCodeReferences(testDescription, currentTestChildren);
               }
               currentTestChildren.getNext();
               if("codeLocation".equals(eltName)){
-                if(null != currentTestChildren.getAttrValue(PATH)){
-                  attributeValue = currentTestChildren.getAttrValue(PATH);
-                  log.debug("--{} : {}", PATH, attributeValue);
-                  File currentSourceFile = new File(attributeValue);
-                  testDescription.setSourceFile(currentSourceFile);
-                  sourceFile = currentSourceFile;
-                }
-                if(null != currentTestChildren.getAttrValue(LINE)){
-                  attributeValue = currentTestChildren.getAttrValue(LINE);
-                  log.debug("--{} : {}", LINE, attributeValue);
-                  int lineNumber = (int) Double.parseDouble(attributeValue);
-                  testDescription.setLine(lineNumber);
-                }
+                sourceFile = retrieveCodeLocation(sourceFile, testDescription, currentTestChildren);
               }
               if(null == testDescription.getSourceFile()){
                 testDescription.setSourceFile(sourceFile);
@@ -209,9 +172,47 @@ public class GallioResultStaxParser implements GallioResultParser {
         }
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return testDetails;
+  }
+
+  private void retrieveCodeReferences(TestDescription testDescription, SMInputCursor currentTestChildren) throws XMLStreamException {
+    String attributeValue;
+    if(null != currentTestChildren.getAttrValue(NAMESPACE)){
+      attributeValue = currentTestChildren.getAttrValue(NAMESPACE);
+      log.debug("--{} : {}", NAMESPACE, attributeValue);
+      testDescription.setNamespace(attributeValue);
+    }
+    if(null != currentTestChildren.getAttrValue(TYPE)){
+      attributeValue = currentTestChildren.getAttrValue(TYPE);
+      log.debug("--{} : {}", TYPE, attributeValue);
+      testDescription.setClassName(attributeValue);
+    }
+    if(null != currentTestChildren.getAttrValue(MEMBER)){
+      attributeValue = currentTestChildren.getAttrValue(MEMBER);
+      log.debug("--{} : {}", MEMBER, attributeValue);
+      testDescription.setMethodName(attributeValue);
+    }
+  }
+
+  private File retrieveCodeLocation(File sourceFile, TestDescription testDescription, SMInputCursor currentTestChildren)
+      throws XMLStreamException {
+    String attributeValue;
+    if(null != currentTestChildren.getAttrValue(PATH)){
+      attributeValue = currentTestChildren.getAttrValue(PATH);
+      log.debug("--{} : {}", PATH, attributeValue);
+      File currentSourceFile = new File(attributeValue);
+      testDescription.setSourceFile(currentSourceFile);
+      sourceFile = currentSourceFile;
+    }
+    if(null != currentTestChildren.getAttrValue(LINE)){
+      attributeValue = currentTestChildren.getAttrValue(LINE);
+      log.debug("--{} : {}", LINE, attributeValue);
+      int lineNumber = Integer.valueOf(attributeValue);
+      testDescription.setLine(lineNumber);
+    }
+    return sourceFile;
   }
 
   private void recursiveParseTestsResults(SMInputCursor rootCursor, String testId){
@@ -250,7 +251,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         currentTestTags.advance();
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
   }
 
@@ -261,7 +262,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         currentTestTags.getNext();
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
   }
 
@@ -300,7 +301,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         return detail;
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return null;
   }
@@ -338,7 +339,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         }
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return detail;
   }
@@ -379,7 +380,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         }
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR,e);
+      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
   }
 
@@ -416,8 +417,7 @@ public class GallioResultStaxParser implements GallioResultParser {
           unitTest.addDetail(testDetail);
         }
         unitTestsReports.put(pathKey, unitTest);
-      }
-      else{
+      } else {
         //Else we create a new report
         UnitTestReport unitTest = new UnitTestReport();
         unitTest.setAssemblyName(testCaseDetailsBySrcKey.get(pathKey).iterator().next().getAssemblyName());

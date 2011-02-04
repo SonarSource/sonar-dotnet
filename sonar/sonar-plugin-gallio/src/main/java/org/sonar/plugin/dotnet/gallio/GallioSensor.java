@@ -74,7 +74,7 @@ public class GallioSensor extends AbstractDotnetSensor {
 
     final String reportFileName;
     if (GALLIO_REUSE_MODE.equals(getGallioMode(project))) {
-      reportFileName = project.getConfiguration().getString(GALLIO_REPORT_KEY);
+      reportFileName = project.getConfiguration().getString(GALLIO_REPORT_KEY, GALLIO_REPORT_XML);
       log.warn("Using reuse report mode for Gallio (test report)");
     } else {
       reportFileName = GALLIO_REPORT_XML;

@@ -62,7 +62,9 @@ public class GallioResultParserTest
 			@Override
 			public boolean apply(UnitTestReport report) {
 				
-				return "cs-failures".equals(report.getAssemblyName()) && StringUtils.contains(report.getSourceFile().getName(), "CSharpTest.cs") && 420==report.getTimeMS();
+				return "cs-failures".equals(report.getAssemblyName())
+				&& StringUtils.contains(report.getSourceFile().getName(), "CSharpTest.cs") 
+				&& 420==report.getTimeMS();
 			}
 		};
 		
