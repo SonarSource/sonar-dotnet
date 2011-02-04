@@ -380,7 +380,7 @@ public class VisualStudioUtils {
       project.setDebugOutputDir(new File(projectDir, debugOutput));
       project.setReleaseOutputDir(new File(projectDir, releaseOutput));
 
-      if (Boolean.parseBoolean(silverlightStr)) {
+      if (StringUtils.isNotEmpty(silverlightStr)) {
         project.setSilverlightProject(true);
       }
 

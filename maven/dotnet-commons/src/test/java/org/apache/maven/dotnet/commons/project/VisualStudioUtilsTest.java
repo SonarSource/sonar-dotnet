@@ -149,6 +149,7 @@ public class VisualStudioUtilsTest {
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 3, files.size());
     VisualStudioProject libProject = solution.getProject("ClassLibrary1");
+    assertFalse(project.isSilverlightProject());
     Collection<SourceFile> libFiles = libProject.getSourceFiles();
     assertEquals("Bad number of files extracted", 2, libFiles.size());
 
