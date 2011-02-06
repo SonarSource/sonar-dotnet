@@ -135,7 +135,7 @@ public class CpdSensor implements Sensor, DependsUponMavenPlugin {
     }
   }
 
-  String removeCDataNodes(String xml) {
+  private String removeCDataNodes(String xml) {
     String result = xml;
     String startNode = "<codefragment>";
     String endNode = "</codefragment>";
@@ -151,7 +151,7 @@ public class CpdSensor implements Sensor, DependsUponMavenPlugin {
   private void processClassMeasure(SensorContext context, Map<Resource, ClassDuplicationData> fileContainer, Element fileEl, Element targetFileEl, Element duplication, Project project) throws ParseException {
     Resource csFile =  CSharpFileLocator.INSTANCE.locate(project, new File(fileEl.getAttribute("path")), false); 
     Resource targetCsFile = CSharpFileLocator.INSTANCE.locate(project, new File(targetFileEl.getAttribute("path")), false);
-    if (csFile != null) {
+    if (csFile != null && targetCsFile != null) {
       ClassDuplicationData data = fileContainer.get(csFile);
       if (data == null) {
         data = new ClassDuplicationData(csFile, context);
