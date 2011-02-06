@@ -18,14 +18,31 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugin.dotnet.coverage;
+package org.sonar.plugin.dotnet.coverage.model;
 
-@Deprecated
-public class PartCover22ParsingStrategy extends PartCover2ParsingStrategy {
+import java.util.List;
 
-  public PartCover22ParsingStrategy() {
-    setFilePath("/*/file");
-    setMethodPath("/*/type/method");
-    setPartcoverExactVersion("2.2");
+/**
+ * Result returned by the parser containing source files and projects coverage
+ * 
+ * @author Maxime SCHNEIDER-DUFEUTRELLE January 26, 2011
+ */
+public class ParserResult {
+
+  private final List<FileCoverage> sourceFiles;
+  private final List<ProjectCoverage> projects;
+
+  public ParserResult(List<ProjectCoverage> projects, List<FileCoverage> sourceFiles){
+    this.projects = projects;
+    this.sourceFiles = sourceFiles;
   }
+
+  public List<FileCoverage> getSourceFiles() {
+    return sourceFiles;
+  }
+
+  public List<ProjectCoverage> getProjects() {
+    return projects;
+  }
+
 }

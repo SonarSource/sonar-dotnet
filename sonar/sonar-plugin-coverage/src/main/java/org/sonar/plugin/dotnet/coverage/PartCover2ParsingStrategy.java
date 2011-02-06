@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
+@Deprecated
 public class PartCover2ParsingStrategy extends PartCoverParsingStrategy {
 
   private final static Logger log = LoggerFactory

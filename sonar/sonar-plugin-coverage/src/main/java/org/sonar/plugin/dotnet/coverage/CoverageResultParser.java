@@ -47,12 +47,12 @@ import java.util.*;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
+@Deprecated
 public class CoverageResultParser extends AbstractXmlParser {
   /**
    * Generates the logger.
    */
-  private final static Logger log = LoggerFactory
-      .getLogger(CoverageResultParser.class);
+  private final static Logger log = LoggerFactory.getLogger(CoverageResultParser.class);
 
   private final Map<Integer, FileCoverage> sourceFiles;
   private final Map<String, ProjectCoverage> projects;

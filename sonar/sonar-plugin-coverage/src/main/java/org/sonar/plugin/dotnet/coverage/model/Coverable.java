@@ -24,20 +24,16 @@
  */
 package org.sonar.plugin.dotnet.coverage.model;
 
+
 /**
  * A Coverable.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
 public abstract class Coverable {
+
   protected int countLines;
   protected int coveredLines;
-
-  /**
-   * Constructs a @link{Coverable}.
-   */
-  public Coverable() {
-  }
 
   /**
    * Returns the countLines.

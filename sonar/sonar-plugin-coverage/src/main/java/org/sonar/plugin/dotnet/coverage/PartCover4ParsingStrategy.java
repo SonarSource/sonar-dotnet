@@ -27,6 +27,7 @@ import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 
+@Deprecated
 public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   private final static Logger log = LoggerFactory

@@ -56,27 +56,34 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFolder;
 import org.sonar.plugin.dotnet.coverage.model.Coverable;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.FolderCoverage;
+import org.sonar.plugin.dotnet.coverage.model.ParserResult;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.sonar.plugin.dotnet.coverage.model.SourceLine;
+import org.sonar.plugin.dotnet.coverage.stax.CoverageResultStaxParser;
 
 /**
- * Collects the results from a PartCover report. Most of the work is delegate to
- * {@link CoverageResultParser}.
+ * Collects the results from a PartCover report. Most of the work is delegate
+ * to {@link CoverageResultStaxParser}.
  * 
- * @author Jose CHILLAN May 14, 2009
+ * @author Jose CHILLAN May 14, 2009,
+ *  updated for Stax version by Maxime SCHNEIDER-DUFEUTRELLE January 26, 2011
  */
 public class CoverageSensor extends AbstractDotnetSensor {
-  private final static Logger log = LoggerFactory
-      .getLogger(CoverageSensor.class);
+  
+  private final static Logger log = LoggerFactory.getLogger(CoverageSensor.class);
+  
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
+  
   private CoveragePluginHandler pluginHandler;
-
+  private CoverageResultStaxParser staxParser;
+  
   /**
    * Constructs the collector Constructs a @link{PartCoverCollector}.
    */
-  public CoverageSensor(CoveragePluginHandler pluginHandler) {
+  public CoverageSensor(CoveragePluginHandler pluginHandler, CoverageResultStaxParser staxParser) {
     this.pluginHandler = pluginHandler;
+    this.staxParser = staxParser;
   }
 
   /**
@@ -105,17 +112,12 @@ public class CoverageSensor extends AbstractDotnetSensor {
       return;
     }
 
-    CoverageResultParser parser = new CoverageResultParser();
-
-    // Configure project exclusions, to avoid that excluded files
-    // are counted in summary reports.
-    parser.setExclusionPatterns(project.getExclusionPatterns());
-
     // We parse the file
-    parser.parse(report);
-
-    List<FileCoverage> files = parser.getFiles();
-    List<ProjectCoverage> projects = parser.getProjects();
+    ParserResult result = staxParser.parse(project, report);
+    
+    List<ProjectCoverage> projects = result.getProjects();
+    List<FileCoverage> files = result.getSourceFiles();
+   
 
     boolean excludeGeneratedCode = project.getConfiguration().getBoolean(
         SONAR_EXCLUDE_GEN_CODE_KEY, true);
@@ -295,8 +297,6 @@ public class CoverageSensor extends AbstractDotnetSensor {
   }
 
   private String getCoverageMode(Project project) {
-    String mode = project.getConfiguration().getString(COVERAGE_MODE_KEY,
-        COVERAGE_DEFAULT_MODE);
-    return mode;
+    return project.getConfiguration().getString(COVERAGE_MODE_KEY, COVERAGE_DEFAULT_MODE);
   }
 }

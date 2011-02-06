@@ -22,6 +22,7 @@ package org.sonar.plugin.dotnet.coverage;
 
 import org.w3c.dom.Element;
 
+@Deprecated
 public class NCover3ParsingStrategy extends AbstractParsingStrategy {
 
   public NCover3ParsingStrategy() {

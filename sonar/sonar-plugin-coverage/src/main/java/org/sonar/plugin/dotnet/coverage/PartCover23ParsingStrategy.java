@@ -20,6 +20,7 @@
 
 package org.sonar.plugin.dotnet.coverage;
 
+@Deprecated
 public class PartCover23ParsingStrategy extends PartCover2ParsingStrategy {
 
   public PartCover23ParsingStrategy() {

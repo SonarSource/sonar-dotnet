@@ -32,6 +32,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.plugin.dotnet.coverage.stax.CoverageResultStaxParser;
 
 /**
  * The plugin that handles the code coverage with PartCover or NCover.
@@ -68,7 +69,7 @@ public class CoveragePlugin implements Plugin {
   }
 
   /**
-   * The extentions required by the plugin.
+   * The extensions required by the plugin.
    * 
    * @return
    */
@@ -77,7 +78,7 @@ public class CoveragePlugin implements Plugin {
     list.add(CoverageSensor.class);
     list.add(CoverageMetrics.class);
     list.add(CoveragePluginHandler.class);
-
+    list.add(CoverageResultStaxParser.class);
     return list;
   }
 

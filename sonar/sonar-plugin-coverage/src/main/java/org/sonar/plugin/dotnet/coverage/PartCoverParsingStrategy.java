@@ -20,6 +20,7 @@
 
 package org.sonar.plugin.dotnet.coverage;
 
+@Deprecated
 public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
 
   public PartCoverParsingStrategy() {

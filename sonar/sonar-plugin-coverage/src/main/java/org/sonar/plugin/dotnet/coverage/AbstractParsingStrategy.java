@@ -25,9 +25,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
-import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 import org.w3c.dom.Element;
 
+@Deprecated
 public abstract class AbstractParsingStrategy extends AbstractXmlParser {
   
   private final static Logger log = LoggerFactory.getLogger(AbstractParsingStrategy.class);
