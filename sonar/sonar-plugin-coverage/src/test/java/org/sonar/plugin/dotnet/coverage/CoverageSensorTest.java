@@ -56,6 +56,7 @@ import org.sonar.plugin.dotnet.coverage.stax.CoverageResultStaxParser;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({CSharpFileLocator.class})
+@Ignore
 public class CoverageSensorTest {
 
   private CoveragePluginHandler pluginHandler;
