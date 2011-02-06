@@ -74,7 +74,6 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
   private final Map<String, ProjectCoverage> projectsByAssemblyName;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy currentStrategy;
-  private WildcardPattern[] exclusionPatterns = new WildcardPattern[0];
 
   /**
    * Constructs a @link{CoverageResultStaxParser}.
@@ -270,32 +269,5 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
       this.currentStrategy = parsingStrategies.get(0);
     }
   }
-  
-  private boolean isSourceFileIncluded(File file) {
-    final String absoluteSourceFilePath;
-    try {
-      absoluteSourceFilePath = file.getCanonicalPath();
-    } catch (IOException e) {
-      throw new SonarPluginException(e);
-    }
-    for (WildcardPattern pattern : exclusionPatterns) {
-      if (pattern.match(absoluteSourceFilePath)) {
-        log.info("Excluding coverage reports from: " + absoluteSourceFilePath);
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  /**
-   * Sets ANT patterns that are used to exclude certain files from the report.
-   * 
-   * @param exclusionPatterns
-   *          A list of ANT styled exclusion patterns.
-   */
-  public void setExclusionPatterns(String... exclusionPatterns) {
-    this.exclusionPatterns = WildcardPattern.create(exclusionPatterns);
-  }
-
 
 }
