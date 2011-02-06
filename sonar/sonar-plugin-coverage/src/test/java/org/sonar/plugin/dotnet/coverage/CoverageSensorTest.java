@@ -36,6 +36,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -55,6 +56,7 @@ import org.sonar.plugin.dotnet.coverage.stax.CoverageResultStaxParser;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({CSharpFileLocator.class})
+@Ignore
 public class CoverageSensorTest {
 
   private CoveragePluginHandler pluginHandler;
