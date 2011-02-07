@@ -135,7 +135,7 @@ import static com.sonar.sslr.impl.matcher.Matchers.bridge;
 import static com.sonar.sslr.impl.matcher.Matchers.next;
 import static com.sonar.sslr.impl.matcher.Matchers.not;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
-import static com.sonar.sslr.impl.matcher.Matchers.one2n;
+import static com.sonar.sslr.impl.matcher.Matchers.*;
 import static com.sonar.sslr.impl.matcher.Matchers.opt;
 import static com.sonar.sslr.impl.matcher.Matchers.or;
 
@@ -224,7 +224,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.integralType.isOr(SBYTE, BYTE, SHORT, USHORT, INT, UINT, LONG, ULONG, CHAR);
     g.floatingPointType.isOr(FLOAT, DOUBLE);
     g.enumType.is(g.typeName);
-    g.nullableType.is(g.nonNullableValueType, QUESTION);
+    g.nullableType.is(g.nonNullableValueType, adjacent(QUESTION));
     g.nonNullableValueType.is(g.type);
     g.referenceType.isOr(g.arrayType, g.classType, g.interfaceType, g.delegateType);
     g.classType.isOr(g.typeName, OBJECT, "dynamic", STRING);

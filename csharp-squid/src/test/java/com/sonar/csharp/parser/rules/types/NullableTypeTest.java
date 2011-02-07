@@ -28,7 +28,7 @@ public class NullableTypeTest {
   @Test
   public void testOk() {
     g.type.mock();
-    assertThat(p, parse("type ?"));
+    assertThat(p, parse("type?"));
   }
 
   @Test
