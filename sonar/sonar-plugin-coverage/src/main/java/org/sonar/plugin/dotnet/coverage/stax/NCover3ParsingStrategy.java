@@ -99,19 +99,14 @@ public class NCover3ParsingStrategy extends AbstractParsingStrategy {
   }
 
   @Override
-  public void handleMethodWithoutPoints(String lineCount, FileCoverage fileCoverage) {
-    log.debug("Unused method for NCover 3");  
-  }
-
-  @Override
   public String getAssemblyReference(){
     log.debug("Unused method for NCover3, return \"\" to avoid null pointer");
     return "";
   }
-  
+
   @Override
   public void setAssemblyReference(String asmRef) {
     log.debug("Unused method for NCover3"); 
   }
-  
+
 }

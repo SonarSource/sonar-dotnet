@@ -21,12 +21,18 @@
 package org.sonar.plugin.dotnet.coverage.stax;
 
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.descendantElements;
+import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeIntValue;
+import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.isAStartElement;
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.nextPosition;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
+import org.sonar.plugin.dotnet.coverage.model.CoveragePoint;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 
 public abstract class AbstractParsingStrategy extends AbstractXmlParser {
@@ -40,13 +46,6 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
   private String fileTag;
   protected String assemblyReference;
 
-  /**
-   * This method is used by PartCover4 to take uncovered lines into account 
-   * 
-   * @param lineCount
-   * @param fileCoverage
-   */
-  abstract void handleMethodWithoutPoints(String lineCount, FileCoverage fileCoverage);
 
   /**
    * Retrieve associated assembly name, depending on the report structure
@@ -104,7 +103,7 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
    * @param assemblyReference
    */
   abstract void setAssemblyReference(String assemblyReference);
-  
+
   public void findPoints(String assemblyName, SMInputCursor docsTag,
       PointParserCallback callback) {
     SMInputCursor classTags = descendantElements(docsTag);
@@ -112,6 +111,88 @@ public abstract class AbstractParsingStrategy extends AbstractXmlParser {
       callback.createProjects(assemblyName, classTags);
     }
   }
+
+  private CoveragePoint createPoint(SMInputCursor pointCursor) {
+
+    CoveragePoint point = new CoveragePoint();
+    int startLine = findAttributeIntValue(pointCursor, getStartLinePointAttribute());
+    int endLine = findAttributeIntValue(pointCursor, getEndLinePointAttribute());
+
+    point.setCountVisits(findAttributeIntValue(pointCursor, getCountVisitsPointAttribute()));
+    point.setStartLine(startLine);
+    point.setEndLine(endLine);
+
+    return point;
+  }
+
+  /**
+   * Parse a method, retrieving all its points
+   * 
+   * @param method : method to parse
+   * @param assemblyName : corresponding assembly name
+   * @param sourceFilesById : map containing the source files
+   */
+  public final FileCoverage parseMethod(SMInputCursor method, String assemblyName, Map<Integer, FileCoverage> sourceFilesById) {
+
+    final FileCoverage fileCoverage;
+    if(isAStartElement(method)){
+
+      initializeVariables(method);
+
+      SMInputCursor pointTag = descendantElements(method);
+      List<CoveragePoint> points = new ArrayList<CoveragePoint>();
+      int fid = 0;
+
+      while(nextPosition(pointTag) != null){
+        setMethodWithPointsToTrue();
+        if(isAStartElement(pointTag) && (findAttributeValue(pointTag, getFileIdPointAttribute()) != null)){
+          CoveragePoint point = createPoint(pointTag);
+          points.add(point);
+          fid = findAttributeIntValue(pointTag, getFileIdPointAttribute());
+        }
+      }
+      fileCoverage = createFileCoverage(sourceFilesById, fid);
+      fillFileCoverage(assemblyName, fileCoverage, points);
+    } else {
+      fileCoverage = null;
+    }
+
+    return fileCoverage;
+  }
+
+  /**
+   * Initialize variables used by PartCover 4
+   * @param method
+   */
+  protected void initializeVariables(SMInputCursor method){};
+
+  /**
+   * Used by PartCover 4 to decide if the method has uncovered lines
+   */
+  protected void setMethodWithPointsToTrue(){};
+
+  /**
+   * Retrieve the fileCoverage to be filled, this method is overrided in the PartCover 4 strategy
+   * @param sourceFilesById
+   * @param fileCoverage
+   * @param fid
+   * @return the fileCoverage
+   */
+  protected FileCoverage createFileCoverage(Map<Integer, FileCoverage> sourceFilesById, int fid){
+    return sourceFilesById.get(Integer.valueOf(fid));
+  }
+
+  protected void fillFileCoverage(String assemblyName, FileCoverage fileCoverage,
+      List<CoveragePoint> points) {
+
+    if(fileCoverage != null){
+      for(CoveragePoint point : points){
+        fileCoverage.addPoint(point);
+      }
+      fileCoverage.setAssemblyName(assemblyName);
+    }
+  }
+
 
   public String getFileTag() {
     return fileTag;

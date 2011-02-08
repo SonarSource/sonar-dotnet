@@ -32,6 +32,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.coverage.stax.CoverageResultStaxParser;
 
 /**
@@ -79,7 +80,8 @@ public class CoveragePlugin implements Plugin {
     list.add(CoverageMetrics.class);
     list.add(CoveragePluginHandler.class);
     list.add(CoverageResultStaxParser.class);
-    return list;
+    list.add(CSharpFileLocator.class);
+    return list; 
   }
 
   public String getKey() {

@@ -41,6 +41,10 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   private Map<String, String> assemblyNamesById;
   private String id;
+  private String lineCount;
+  private String temporaryFileId;
+  private boolean areUncoveredLines;
+  private boolean methodWithPoints;
 
   public PartCover4ParsingStrategy() {
     setModuleTag("Type");
@@ -75,7 +79,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   @Override
   public void saveAssemblyNamesById(SMInputCursor docsTag) {
-    Map<String, String> assemblyNamesById = new HashMap<String, String>();
+    this.assemblyNamesById = new HashMap<String, String>();
     while( "Assembly".equals( findElementName(docsTag) ) ) {
       if( isAStartElement(docsTag) ){
         String name = findAttributeValue(docsTag, "name");
@@ -88,8 +92,40 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     setAssemblyNamesById(assemblyNamesById);
   }
 
+
   @Override
-  public void handleMethodWithoutPoints(String lineCount,
+  protected void initializeVariables(SMInputCursor method){
+    this.lineCount = findAttributeValue(method, "linecount");
+    this.temporaryFileId = findAttributeValue(method, "fid");
+    this.areUncoveredLines = (temporaryFileId != null);
+    this.methodWithPoints = false;
+  }
+
+  @Override
+  protected void setMethodWithPointsToTrue(){
+    this.methodWithPoints = true;
+  }
+
+  @Override
+  protected FileCoverage createFileCoverage(Map<Integer, FileCoverage> sourceFilesById, int fid){
+    FileCoverage fileCoverage = null;
+    if( !this.methodWithPoints && this.areUncoveredLines){
+      fileCoverage = sourceFilesById.get(Integer.valueOf(this.temporaryFileId));
+      handleMethodWithoutPoints(this.lineCount, fileCoverage);
+    }
+    else{
+      fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
+    }
+    return fileCoverage;
+  }
+
+  /**
+   * This method is used by PartCover4 to take uncovered lines into account 
+   * 
+   * @param lineCount
+   * @param fileCoverage
+   */
+  private void handleMethodWithoutPoints(String lineCount,
       FileCoverage fileCoverage) {
     if (!StringUtils.isEmpty(lineCount)) {
       fileCoverage.addUncoveredLines(Integer.parseInt(lineCount));
@@ -120,12 +156,12 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     this.assemblyNamesById = assemblyNamesById;
   }
 
-  public String getId() {
+  private String getId() {
     return id;
   }
 
   public void saveId(String id) {
     this.id = id;
   }
-  
+
 }

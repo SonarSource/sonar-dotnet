@@ -40,8 +40,7 @@ import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 
 public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
 
-  private final static Logger log = LoggerFactory
-  .getLogger(PartCoverParsingStrategy.class);
+  private final static Logger log = LoggerFactory.getLogger(PartCoverParsingStrategy.class);
 
 
   public PartCoverParsingStrategy() {

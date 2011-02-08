@@ -25,7 +25,6 @@ import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValu
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 
 public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy{
 
@@ -47,15 +46,10 @@ public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy
   }
 
   @Override
-  public void handleMethodWithoutPoints(String lineCount, FileCoverage fileCoverage) {
-    log.debug("Unused method for PartCover 2.x");  
-  }
-
-  @Override
   public void saveId(String id) {
     log.debug("Unused method for PartCover 2.x");  
   }
-  
+
   @Override
   public String getAssemblyReference(){
     log.debug("Unused method for PartCover 2.x, return \"\" to avoid null pointer");
@@ -66,5 +60,5 @@ public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy
   public void setAssemblyReference(String asmRef) {
     log.debug("Unused method for PartCover 2.x"); 
   }
-  
+
 }

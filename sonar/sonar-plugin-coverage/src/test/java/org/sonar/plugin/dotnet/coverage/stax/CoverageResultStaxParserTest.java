@@ -20,24 +20,16 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
@@ -45,16 +37,15 @@ import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ParserResult;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({CSharpFileLocator.class})
-@Ignore
 public class CoverageResultStaxParserTest {
 
   private CoverageResultStaxParser parser;
+  private CSharpFileLocator fileLocator;
 
   @Before
   public void setUp() {
-    parser = new CoverageResultStaxParser();
+    fileLocator = mock(CSharpFileLocator.class);
+    parser = new CoverageResultStaxParser(fileLocator);
   }
 
   private File findFile(String fileName) {
@@ -179,7 +170,8 @@ public class CoverageResultStaxParserTest {
   private void checkParsing(ParsingParameters parameters) {
     File file = findFile(parameters.report);
     Project project = mock(Project.class);
-    mockLocator(project);
+    CSharpFile csFile= mock(CSharpFile.class);
+    when(fileLocator.locate(eq(project), any(File.class), eq(false))).thenReturn(csFile);
     ParserResult result = parser.parse(project, file);
     
     List<ProjectCoverage> projects = result.getProjects();
@@ -189,12 +181,12 @@ public class CoverageResultStaxParserTest {
     for (ProjectCoverage projectCoverage : projects) {
       numberOfLinesInProjects += projectCoverage.getCountLines();
     }
-    
+
     int numberOfLinesInFiles = 0;
     for (FileCoverage fileCoverage : files) {
       numberOfLinesInFiles += fileCoverage.getCountLines();
     }
-    
+
     assertEquals("line number in projects and files do not match", numberOfLinesInFiles, numberOfLinesInProjects);
     
     
@@ -215,16 +207,7 @@ public class CoverageResultStaxParserTest {
     assertEquals(parameters.coverage, firstFileCoverage.getCoverage(),0.0001);
     
   }
-  
-  private void mockLocator(Project project) {
-    CSharpFileLocator locator = PowerMockito.mock(CSharpFileLocator.class); 
-    PowerMockito.mockStatic(CSharpFileLocator.class);
-    PowerMockito.when(CSharpFileLocator.values()).thenReturn(new CSharpFileLocator[] { locator }); 
-    Whitebox.setInternalState(CSharpFileLocator.class, "INSTANCE", locator); 
-    CSharpFile csFile= mock(CSharpFile.class);
-    PowerMockito.when(locator.locate(eq(project), any(File.class), eq(false))).thenReturn(csFile);
-  }
-
+ 
   public static class ParsingParameters {
     public String report;
     public String assemblyName;

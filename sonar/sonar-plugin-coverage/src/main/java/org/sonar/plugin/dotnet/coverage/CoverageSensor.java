@@ -75,15 +75,17 @@ public class CoverageSensor extends AbstractDotnetSensor {
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
   
-  private CoveragePluginHandler pluginHandler;
-  private CoverageResultStaxParser staxParser;
+  private final CoveragePluginHandler pluginHandler;
+  private final CoverageResultStaxParser staxParser;
+  private final CSharpFileLocator fileLocator;
   
   /**
    * Constructs the collector Constructs a @link{PartCoverCollector}.
    */
-  public CoverageSensor(CoveragePluginHandler pluginHandler, CoverageResultStaxParser staxParser) {
+  public CoverageSensor(CoveragePluginHandler pluginHandler, CoverageResultStaxParser staxParser, CSharpFileLocator fileLocator) {
     this.pluginHandler = pluginHandler;
     this.staxParser = staxParser;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -210,7 +212,7 @@ public class CoverageSensor extends AbstractDotnetSensor {
   private void collectFile(Project project, SensorContext context,
       FileCoverage fileCoverage) {
     File filePath = fileCoverage.getFile();
-    CSharpFile fileResource = CSharpFileLocator.INSTANCE.locate(project,
+    CSharpFile fileResource = fileLocator.locate(project,
         filePath, false);
     if (fileResource != null) {
       saveCoverageMeasures(context, fileCoverage, fileResource);

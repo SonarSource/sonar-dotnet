@@ -22,14 +22,11 @@ package org.sonar.plugin.dotnet.coverage.stax;
 
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.descendantElements;
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeIntValue;
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findElementName;
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findXMLEvent;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.isAStartElement;
 import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.nextPosition;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,16 +44,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.resources.Project;
-import org.sonar.api.utils.WildcardPattern;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
-import org.sonar.plugin.dotnet.coverage.model.CoveragePoint;
 import org.sonar.plugin.dotnet.coverage.model.FileCoverage;
 import org.sonar.plugin.dotnet.coverage.model.ParserResult;
 import org.sonar.plugin.dotnet.coverage.model.ProjectCoverage;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 
 /**
@@ -70,15 +64,19 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
    */
   private final static Logger log = LoggerFactory.getLogger(CoverageResultStaxParser.class);
 
+  private final CSharpFileLocator fileLocator;
+  
   private Map<Integer, FileCoverage> sourceFilesById;
   private final Map<String, ProjectCoverage> projectsByAssemblyName;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy currentStrategy;
+  
 
   /**
    * Constructs a @link{CoverageResultStaxParser}.
    */
-  public CoverageResultStaxParser() {
+  public CoverageResultStaxParser(CSharpFileLocator fileLocator) {
+    this.fileLocator = fileLocator;
     sourceFilesById = new HashMap<Integer, FileCoverage>();
     projectsByAssemblyName = new HashMap<String, ProjectCoverage>();
     parsingStrategies = new ArrayList<AbstractParsingStrategy>();
@@ -109,17 +107,17 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
 
       // Then all the indexed files are extracted
       sourceFilesById = currentStrategy.findFiles(rootChildCursor);
-      
+
       // filter files according to the exclusion patterns
       sourceFilesById = Maps.filterValues(sourceFilesById, 
           new Predicate<FileCoverage>(){
-            @Override
-              public boolean apply(FileCoverage input) {
-                return CSharpFileLocator.INSTANCE.locate(sonarProject, input.getFile(), false)!=null;
-              }
-           }
+        @Override
+        public boolean apply(FileCoverage input) {
+          return fileLocator.locate(sonarProject, input.getFile(), false)!=null;
+        }
+      }
       );
-      
+
 
       // We finally process the coverage details
       fillProjects(rootChildCursor);
@@ -172,76 +170,19 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
     FileCoverage fileCoverage = null;
     SMInputCursor methodElements = descendantElements(classElements);
     while(nextPosition(methodElements) != null){
-      fileCoverage = parseMethod(methodElements, assemblyName);
-    }
-    if(fileCoverage != null){
-      ProjectCoverage project = new ProjectCoverage();
-      project.setAssemblyName(assemblyName);
-      project.addFile(fileCoverage);
-      projectsByAssemblyName.put(assemblyName, project);
-    }
-  }
-
-  /**
-   * Parse a method, retrieving all its points
-   * 
-   * @param method : method to parse
-   * @param assemblyName : corresponding assembly name
-   */
-  private FileCoverage parseMethod(SMInputCursor method, String assemblyName) {
-
-    FileCoverage fileCoverage = null;
-    if(isAStartElement(method)){
-      String lineCount = findAttributeValue(method, "linecount");
-      String temporaryFileId = findAttributeValue(method, "fid");
-      boolean areUncoveredLines = false;
-      if( temporaryFileId != null ){
-        areUncoveredLines = true;
-      }
-      SMInputCursor pointTag = descendantElements(method);
-      List<CoveragePoint> points = new ArrayList<CoveragePoint>();
-      int fid = 0;
-      int pointCounter = 0;
-      while(nextPosition(pointTag) != null){
-        pointCounter++;
-        if(isAStartElement(pointTag) && (findAttributeValue(pointTag, currentStrategy
-            .getFileIdPointAttribute()) != null)){
-
-          int startLine = findAttributeIntValue(pointTag, currentStrategy
-              .getStartLinePointAttribute());
-          int endLine = findAttributeIntValue(pointTag, currentStrategy
-              .getEndLinePointAttribute());
-
-          CoveragePoint point = new CoveragePoint();
-          point.setCountVisits(findAttributeIntValue(pointTag, currentStrategy
-              .getCountVisitsPointAttribute()));
-          point.setStartLine(startLine);
-          point.setEndLine(endLine);
-          fid = findAttributeIntValue(pointTag, currentStrategy
-              .getFileIdPointAttribute());
-
-          points.add(point);
+      fileCoverage = currentStrategy.parseMethod(methodElements, assemblyName, sourceFilesById);
+      if(fileCoverage != null){
+        final ProjectCoverage project;
+        if( projectsByAssemblyName.containsKey(assemblyName) ){
+          project = projectsByAssemblyName.get(assemblyName);
         }
+        else{
+          project = new ProjectCoverage();
+          project.setAssemblyName(assemblyName);
+          projectsByAssemblyName.put(assemblyName, project);
+        }
+        project.addFile(fileCoverage);
       }
-      if( pointCounter == 0 && areUncoveredLines){
-        fileCoverage = sourceFilesById.get(Integer.valueOf(temporaryFileId));
-        currentStrategy.handleMethodWithoutPoints(lineCount, fileCoverage);
-      }
-      fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
-      fillFileCoverage(assemblyName, fileCoverage, points);
-    }
-    return fileCoverage;
-  }
-
-  private void fillFileCoverage(String assemblyName, FileCoverage fileCoverage,
-      List<CoveragePoint> points) {
-
-    if(fileCoverage != null){
-      for(CoveragePoint point : points){
-        fileCoverage.addPoint(point);
-      }
-      fileCoverage.setAssemblyName(assemblyName);
-      log.debug(" {} points have been added", points.size());
     }
   }
 
