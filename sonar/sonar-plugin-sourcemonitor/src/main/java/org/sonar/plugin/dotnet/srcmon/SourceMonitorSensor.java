@@ -62,20 +62,24 @@ import static org.sonar.plugin.dotnet.core.Constant.*;
  * @author Jose CHILLAN May 5, 2009
  */
 public class SourceMonitorSensor extends AbstractDotnetSensor {
-  private final static Logger log = LoggerFactory
-      .getLogger(SourceMonitorSensor.class);
+  
+  private final static Logger log = LoggerFactory.getLogger(SourceMonitorSensor.class);
 
+  private final SourceMonitorPluginHandler pluginHandler;
+  private final CSharpFileLocator fileLocator;
+  
   private Map<String, ProjectMetrics> projects;
   private Map<File, FolderMetrics> directories;
   private SolutionMetrics solutionMetrics;
-  private SourceMonitorPluginHandler pluginHandler;
   private VisualStudioSolution solution;
+  
 
-  public SourceMonitorSensor(SourceMonitorPluginHandler pluginHandler) {
+  public SourceMonitorSensor(SourceMonitorPluginHandler pluginHandler, CSharpFileLocator fileLocator) {
     this.projects = new HashMap<String, ProjectMetrics>();
     this.directories = new HashMap<File, FolderMetrics>();
     this.solutionMetrics = new SolutionMetrics();
     this.pluginHandler = pluginHandler;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -303,7 +307,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
 
     File filePath = fileMetric.getSourcePath();
     
-    CSharpFile sourceFile = CSharpFileLocator.INSTANCE.locate(project, filePath, false);
+    CSharpFile sourceFile = fileLocator.locate(project, filePath, false);
     if (sourceFile == null) {
       log.info("Source file not belonging to the analysed solution : {}", filePath);
       return;

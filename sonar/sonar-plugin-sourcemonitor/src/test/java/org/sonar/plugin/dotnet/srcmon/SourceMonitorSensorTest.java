@@ -20,6 +20,7 @@
 
 package org.sonar.plugin.dotnet.srcmon;
 
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.AdditionalMatchers.*;
 import static org.junit.Assert.*;
@@ -40,6 +41,8 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
+import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorPluginHandler;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorSensor;
 
@@ -51,7 +54,7 @@ public class SourceMonitorSensorTest {
   @Before
   public void setUp() {
     pluginHandler = mock(SourceMonitorPluginHandler.class);
-    sensor = new SourceMonitorSensor(pluginHandler);
+    sensor = new SourceMonitorSensor(pluginHandler, new CSharpFileLocator());
   }
   
   

@@ -28,6 +28,7 @@ import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * A Sonar plugin for Source Monitor data.
@@ -53,6 +54,7 @@ public class SourceMonitorPlugin implements Plugin {
     list.add(DotnetSourceMetrics.class);
     list.add(SourceMonitorSensor.class);
     list.add(SourceMonitorPluginHandler.class);
+    list.add(CSharpFileLocator.class);
     // list.add(LineOfCodeJob.class);
     // list.add(NonCommendLineOfCodeJob.class);
     // list.add(StatementJob.class);
