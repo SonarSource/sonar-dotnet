@@ -32,6 +32,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * A Unit test plugin for Sonar C# based on the Gallio project..
@@ -73,6 +74,7 @@ public class GallioPlugin implements Plugin {
     list.add(GallioMetrics.class);
     //list.add(UnitTestDecorator.class);
     list.add(GallioMavenPluginHandler.class);
+    list.add(CSharpFileLocator.class);
     return list;
   }
 

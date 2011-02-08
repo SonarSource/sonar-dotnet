@@ -54,13 +54,15 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 public class GallioSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(GallioSensor.class);
 
-  private MavenPluginHandler pluginHandler;
+  private final MavenPluginHandler pluginHandler;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{GallioCollector}.
    */
-  public GallioSensor(GallioMavenPluginHandler pluginHandler) {
+  public GallioSensor(GallioMavenPluginHandler pluginHandler, CSharpFileLocator fileLocator) {
     this.pluginHandler = pluginHandler;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -111,7 +113,7 @@ public class GallioSensor extends AbstractDotnetSensor {
         }
         csFilesAlreadyTreated.add(sourceFile);
         int testsCount = testReport.getTests() - testReport.getSkipped();
-        CSharpFile testFile = CSharpFileLocator.INSTANCE.locate(project,
+        CSharpFile testFile = fileLocator.locate(project,
             testReport.getSourceFile(), true);
         if (testFile != null) {
 
