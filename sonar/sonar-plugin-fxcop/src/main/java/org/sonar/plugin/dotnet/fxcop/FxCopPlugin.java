@@ -32,6 +32,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * A plugin responsible of FXCop reporting in sonar.
@@ -76,6 +77,7 @@ public class FxCopPlugin implements Plugin {
     list.add(FxCopRuleRepository.class);
     list.add(FxCopSensor.class);
     list.add(FxCopPluginHandler.class);
+    list.add(CSharpFileLocator.class);
 
     return list;
   }

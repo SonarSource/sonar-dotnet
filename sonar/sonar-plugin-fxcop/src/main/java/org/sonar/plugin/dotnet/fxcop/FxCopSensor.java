@@ -48,6 +48,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.xml.sax.InputSource;
 
@@ -59,9 +60,10 @@ import org.xml.sax.InputSource;
 public class FxCopSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(FxCopSensor.class);
 
-  private RulesManager rulesManager;
-  private RulesProfile profile;
-  private FxCopPluginHandler pluginHandler;
+  private final RulesManager rulesManager;
+  private final RulesProfile profile;
+  private final FxCopPluginHandler pluginHandler;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{FxCopCollector}.
@@ -69,11 +71,12 @@ public class FxCopSensor extends AbstractDotnetSensor {
    * @param rulesManager
    */
   public FxCopSensor(RulesProfile profile, RulesManager rulesManager,
-      FxCopPluginHandler pluginHandler) {
+      FxCopPluginHandler pluginHandler, CSharpFileLocator fileLocator) {
     super();
     this.rulesManager = rulesManager;
     this.profile = profile;
     this.pluginHandler = pluginHandler;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -102,7 +105,7 @@ public class FxCopSensor extends AbstractDotnetSensor {
       if (report.exists()) {
         log.info("FxCop report found at location {}", report);
         FxCopResultParser parser 
-          = new FxCopResultParser(project, context, rulesManager, profile);
+          = new FxCopResultParser(project, context, rulesManager, profile, fileLocator);
         
         parseReport(report, parser, dir);
       } else {

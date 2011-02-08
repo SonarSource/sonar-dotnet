@@ -21,6 +21,8 @@
 package org.sonar.plugin.dotnet.fxcop;
 
 import static org.sonar.plugin.dotnet.fxcop.Constants.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -39,6 +41,8 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
+import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class FxCopSensorTest {
 
@@ -46,19 +50,27 @@ public class FxCopSensorTest {
   private RulesProfile profile;
   private RulesManager rulesManager;
   private FxCopPluginHandler pluginHandler;
+  private CSharpFileLocator fileLocator;
+  private Project project;
   
   @Before
   public void setUp() {
     pluginHandler = mock(FxCopPluginHandler.class);
     profile = mock(RulesProfile.class);
     rulesManager = mock(RulesManager.class);
-    sensor = new FxCopSensor(profile, rulesManager, pluginHandler);
+    project = mock(Project.class);
+    
+    fileLocator = mock(CSharpFileLocator.class);
+    CSharpFile csFile= mock(CSharpFile.class);
+    when(fileLocator.locate(eq(project), any(File.class), eq(false))).thenReturn(csFile);
+  
+    sensor = new FxCopSensor(profile, rulesManager, pluginHandler, fileLocator);
   }
   
   
   @Test
   public void testShouldExecuteOnProject() {
-    Project project = mock(Project.class);
+    
     Configuration configuration =  mock(Configuration.class);
     when(project.getPackaging()).thenReturn("sln");
     when(project.getConfiguration()).thenReturn(configuration);

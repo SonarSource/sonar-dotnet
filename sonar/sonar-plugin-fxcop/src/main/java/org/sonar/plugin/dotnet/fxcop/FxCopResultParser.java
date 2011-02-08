@@ -54,10 +54,11 @@ public class FxCopResultParser extends AbstractXmlParser {
 
   private final static Logger log = LoggerFactory.getLogger(FxCopResultParser.class);
 
-  private Project project;
-  private SensorContext context;
-  private RulesManager rulesManager;
-  private RulesProfile profile;
+  private final Project project;
+  private final SensorContext context;
+  private final RulesManager rulesManager;
+  private final RulesProfile profile;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{FxCopResultParser}.
@@ -68,12 +69,13 @@ public class FxCopResultParser extends AbstractXmlParser {
    * @param profile
    */
   public FxCopResultParser(Project project, SensorContext context,
-      RulesManager rulesManager, RulesProfile profile) {
+      RulesManager rulesManager, RulesProfile profile, CSharpFileLocator fileLocator) {
     super();
     this.project = project;
     this.context = context;
     this.rulesManager = rulesManager;
     this.profile = profile;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -96,7 +98,7 @@ public class FxCopResultParser extends AbstractXmlParser {
         log.debug("violation without file path");
         resource = null;
       } else {
-        resource = CSharpFileLocator.INSTANCE.getResource(project, path, fileName);
+        resource = fileLocator.getResource(project, path, fileName);
         if (resource == null) {
           log.debug("violation on an excluded file {}", file);
           continue;

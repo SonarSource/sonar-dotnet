@@ -38,6 +38,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
+import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class FxCopResultParserTest {
 
@@ -72,8 +74,7 @@ public class FxCopResultParserTest {
     Configuration configuration = mock(Configuration.class);
     when(project.getConfiguration()).thenReturn(configuration);
     
-
-    parser = new FxCopResultParser(project, context, rulesManager, profile);
+    parser = new FxCopResultParser(project, context, rulesManager, profile, new CSharpFileLocator());
   }
   
   @Test
