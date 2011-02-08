@@ -29,6 +29,7 @@ import java.util.List;
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.plugin.dotnet.core.colorizer.CSharpColorizerFormat;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * The plugin that declares the C# language.
@@ -55,6 +56,7 @@ public class CSharpPlugin implements Plugin {
     extensions.add(CSharpSourceImporter.class);
     extensions.add(NoSonarAndCommentedOutLocSensor.class);
     extensions.add(BinaryDependenciesSensor.class);
+    extensions.add(CSharpFileLocator.class);
     return extensions;
   }
 

@@ -26,6 +26,7 @@ import java.util.Map;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.BatchExtension;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.project.VisualUtils;
@@ -36,9 +37,8 @@ import org.sonar.plugin.dotnet.core.project.VisualUtils;
  * @author Alexandre Victoor
  *
  */
-public enum CSharpFileLocator {
-  INSTANCE;
-
+public class CSharpFileLocator implements BatchExtension {
+  
   private final static Logger log = LoggerFactory.getLogger(CSharpFileLocator.class);
 
   private Map<File, VisualStudioProject> csFilesProjectMap = Collections.EMPTY_MAP;

@@ -56,9 +56,11 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
       .getLogger(NoSonarAndCommentedOutLocSensor.class);
 
   private final NoSonarFilter noSonarFilter;
+  private final CSharpFileLocator fileLocator;
 
-  public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter) {
+  public NoSonarAndCommentedOutLocSensor(NoSonarFilter noSonarFilter, CSharpFileLocator fileLocator) {
     this.noSonarFilter = noSonarFilter;
+    this.fileLocator = fileLocator;
   }
 
   public void analyse(Project prj, SensorContext context) {
@@ -66,7 +68,7 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
     for (File srcFile : srcFiles) {
 
       CSharpFile cSharpFile = 
-        CSharpFileLocator.INSTANCE.locate(prj, srcFile, false);
+        fileLocator.locate(prj, srcFile, false);
       if (cSharpFile == null) {
         continue;
       }

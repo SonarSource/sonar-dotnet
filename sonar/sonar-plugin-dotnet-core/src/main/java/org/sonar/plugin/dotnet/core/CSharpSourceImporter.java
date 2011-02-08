@@ -51,14 +51,16 @@ import static org.sonar.plugin.dotnet.core.Constant.*;
  */
 public class CSharpSourceImporter extends AbstractSourceImporter {
 
-  private final static Logger log = LoggerFactory
-      .getLogger(CSharpSourceImporter.class);
+  private final static Logger log = LoggerFactory.getLogger(CSharpSourceImporter.class);
 
+  private final CSharpFileLocator fileLocator;
+  
   /**
    * Constructs the collector.
    */
-  public CSharpSourceImporter() {
+  public CSharpSourceImporter(CSharpFileLocator fileLocator) {
     super(CSharp.INSTANCE);
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -104,7 +106,7 @@ public class CSharpSourceImporter extends AbstractSourceImporter {
           log.info("Ignoring generated cs file " + sourcePath);
           continue;
         }
-        CSharpFile resource = CSharpFileLocator.INSTANCE.locate(project, sourcePath, unitTest);
+        CSharpFile resource = fileLocator.locate(project, sourcePath, unitTest);
         if (resource == null) {
         	continue;
         }
