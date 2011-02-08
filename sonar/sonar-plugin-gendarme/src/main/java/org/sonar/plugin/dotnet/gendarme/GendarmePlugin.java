@@ -31,6 +31,7 @@ import org.sonar.api.Property;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 @Properties({
   @Property(
@@ -84,6 +85,7 @@ public class GendarmePlugin implements Plugin {
     list.add(GendarmeRuleRepository.class);
     list.add(GendarmeSensor.class);
     list.add(GendarmePluginHandler.class);
+    list.add(CSharpFileLocator.class);
     return list;
   }
 

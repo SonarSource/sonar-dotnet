@@ -43,6 +43,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
 import org.xml.sax.InputSource;
 
@@ -51,9 +52,10 @@ public class GendarmeSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(GendarmeSensor.class);
   
 
-  private RulesManager rulesManager;
-  private RulesProfile profile;
-  private GendarmePluginHandler pluginHandler;
+  private final RulesManager rulesManager;
+  private final RulesProfile profile;
+  private final GendarmePluginHandler pluginHandler;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{GendarmeSensor}.
@@ -61,11 +63,12 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    * @param rulesManager
    */
   public GendarmeSensor(RulesProfile profile, RulesManager rulesManager,
-      GendarmePluginHandler pluginHandler) {
+      GendarmePluginHandler pluginHandler, CSharpFileLocator fileLocator) {
     super();
     this.rulesManager = rulesManager;
     this.profile = profile;
     this.pluginHandler = pluginHandler;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -93,8 +96,8 @@ public class GendarmeSensor extends AbstractDotnetSensor {
     if (transformedReport == null) {
       return;
     }
-    GendarmeResultParser parser = new GendarmeResultParser(project, context,
-        rulesManager, profile);
+    GendarmeResultParser parser 
+      = new GendarmeResultParser(project, context, rulesManager, profile, fileLocator);
     try {
       parser.parse(transformedReport);
     } catch (InvalidResourceException ex) {

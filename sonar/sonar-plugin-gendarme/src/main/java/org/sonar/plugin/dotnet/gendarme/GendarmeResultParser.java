@@ -45,13 +45,13 @@ import org.apache.maven.dotnet.commons.project.SourceFile;
 
 public class GendarmeResultParser extends AbstractXmlParser {
 
-  private final static Logger log = LoggerFactory
-      .getLogger(GendarmeResultParser.class);
+  private final static Logger log = LoggerFactory.getLogger(GendarmeResultParser.class);
 
-  private Project project;
-  private SensorContext context;
-  private RulesManager rulesManager;
-  private RulesProfile profile;
+  private final Project project;
+  private final SensorContext context;
+  private final RulesManager rulesManager;
+  private final RulesProfile profile;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{GendarmeResultParser}.
@@ -62,12 +62,13 @@ public class GendarmeResultParser extends AbstractXmlParser {
    * @param profile
    */
   public GendarmeResultParser(Project project, SensorContext context,
-      RulesManager rulesManager, RulesProfile profile) {
+      RulesManager rulesManager, RulesProfile profile, CSharpFileLocator fileLocator) {
     super();
     this.project = project;
     this.context = context;
     this.rulesManager = rulesManager;
     this.profile = profile;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -166,7 +167,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
         }
       }
 
-      Resource<?> resource = CSharpFileLocator.INSTANCE.getResource(project, filePath);
+      Resource<?> resource = fileLocator.getResource(project, filePath);
       
       Rule rule = rulesManager.getPluginRule(GendarmePlugin.KEY, key);
       if (rule == null || resource == null) {

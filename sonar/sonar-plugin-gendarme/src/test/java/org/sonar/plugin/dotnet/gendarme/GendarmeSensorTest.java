@@ -38,6 +38,7 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class GendarmeSensorTest {
 
@@ -51,7 +52,7 @@ public class GendarmeSensorTest {
     pluginHandler = mock(GendarmePluginHandler.class);
     profile = mock(RulesProfile.class);
     rulesManager = mock(RulesManager.class);
-    sensor = new GendarmeSensor(profile, rulesManager, pluginHandler);
+    sensor = new GendarmeSensor(profile, rulesManager, pluginHandler, new CSharpFileLocator());
   }
   
   
