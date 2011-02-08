@@ -47,6 +47,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.xml.sax.InputSource;
 
 /**
@@ -59,9 +60,10 @@ public class StyleCopSensor extends AbstractDotnetSensor {
   private final static Logger log = LoggerFactory.getLogger(StyleCopSensor.class);
   
 
-  private RulesManager rulesManager;
-  private RulesProfile profile;
-  private StyleCopPluginHandler pluginHandler;
+  private final RulesManager rulesManager;
+  private final RulesProfile profile;
+  private final StyleCopPluginHandler pluginHandler;
+  private final CSharpFileLocator fileLocator;
 
   /**
    * Constructs a @link{StyleCopSensor}.
@@ -69,11 +71,12 @@ public class StyleCopSensor extends AbstractDotnetSensor {
    * @param rulesManager
    */
   public StyleCopSensor(RulesManager rulesManager,
-      StyleCopPluginHandler pluginHandler, RulesProfile profile) {
+      StyleCopPluginHandler pluginHandler, RulesProfile profile, CSharpFileLocator fileLocator) {
     super();
     this.rulesManager = rulesManager;
     this.pluginHandler = pluginHandler;
     this.profile = profile;
+    this.fileLocator = fileLocator;
   }
 
   /**
@@ -100,7 +103,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
       return;
     }
     StyleCopResultParser parser = new StyleCopResultParser(project, context,
-        rulesManager, profile);
+        rulesManager, profile, fileLocator);
     parser.parse(transformedReport);
    
   }

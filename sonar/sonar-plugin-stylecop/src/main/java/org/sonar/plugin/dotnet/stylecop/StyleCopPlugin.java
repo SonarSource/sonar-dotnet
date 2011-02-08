@@ -32,6 +32,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 /**
  * Sonar plugin that collects the StyleCop analysis.
@@ -79,6 +80,7 @@ public class StyleCopPlugin implements Plugin {
     list.add(StyleCopRuleRepository.class);
     list.add(StyleCopSensor.class);
     list.add(StyleCopPluginHandler.class);
+    list.add(CSharpFileLocator.class);
     return list;
   }
 

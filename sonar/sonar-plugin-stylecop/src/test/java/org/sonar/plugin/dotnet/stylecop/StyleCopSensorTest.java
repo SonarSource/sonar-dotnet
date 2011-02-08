@@ -21,6 +21,8 @@
 package org.sonar.plugin.dotnet.stylecop;
 
 import static org.sonar.plugin.dotnet.stylecop.Constants.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -39,6 +41,8 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
+import org.sonar.plugin.dotnet.core.resource.CSharpFile;
+import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class StyleCopSensorTest {
 
@@ -46,13 +50,19 @@ public class StyleCopSensorTest {
   private RulesProfile profile;
   private RulesManager rulesManager;
   private StyleCopPluginHandler pluginHandler;
+  private Project project = mock(Project.class);
   
   @Before
   public void setUp() {
     pluginHandler = mock(StyleCopPluginHandler.class);
     profile = mock(RulesProfile.class);
     rulesManager = mock(RulesManager.class);
-    sensor = new StyleCopSensor(rulesManager, pluginHandler, profile);
+    
+    CSharpFileLocator fileLocator = mock(CSharpFileLocator.class);
+    CSharpFile csFile= mock(CSharpFile.class);
+    when(fileLocator.locate(eq(project), any(File.class), eq(false))).thenReturn(csFile);
+    
+    sensor = new StyleCopSensor(rulesManager, pluginHandler, profile, fileLocator);
   }
   
   
@@ -76,7 +86,6 @@ public class StyleCopSensorTest {
   
   @Test
   public void testShouldExecuteOnProjectWithSkip() {
-    Project project = mock(Project.class);
     Configuration configuration =  mock(Configuration.class);
     when(configuration.getString(STYLECOP_MODE_KEY, STYLECOP_DEFAULT_MODE)).thenReturn(STYLECOP_SKIP_MODE);
     when(project.getPackaging()).thenReturn("sln");
