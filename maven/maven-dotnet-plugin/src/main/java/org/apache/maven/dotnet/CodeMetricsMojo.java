@@ -57,11 +57,11 @@ import org.codehaus.plexus.util.StringUtils;
  */
 public class CodeMetricsMojo extends AbstractDotNetMojo {
   /**
-   * Name of the resource folder that contains the StyleCop exe
+   * Name of the resource folder that contains the SourceMonitor exe
    */
   private final static String RESOURCE_DIR = "metrics";
   /**
-   * Name of the folder that will contain the extracted StyleCop exe
+   * Name of the folder that will contain the extracted SourceMonitor exe
    */
   private final static String EXPORT_PATH = "sourcemonitor-runtime";
 
