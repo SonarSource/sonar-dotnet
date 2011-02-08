@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<sourcemonitor_metrics>
+  <project version="2.6">
+    <project_name>metrics-report.xml</project_name>
+    <project_directory>target\test-classes\solution\MessyTestSolution</project_directory>
+    <project_language>C#</project_language>
+    <ignore_headers_footers>false</ignore_headers_footers>
+    <metric_names name_count="15">
+      <metric_name id="M0" type="number">Lines</metric_name>
+      <metric_name id="M1" type="number">Statements</metric_name>
+      <metric_name id="M2" type="percent" divisor="M1">Percent Comment Lines</metric_name>
+      <metric_name id="M3" type="percent" divisor="M1">Percent Documentation Lines</metric_name>
+      <metric_name id="M4" type="number">Classes, Interfaces, Structs</metric_name>
+      <metric_name id="M5" type="ratio" divisor="M4">Methods per Class</metric_name>
+      <metric_name id="M6" type="ratio" divisor="M5">Calls per Method</metric_name>
+      <metric_name id="M7" type="ratio" divisor="M5">Statements per Method</metric_name>
+      <metric_name id="M8" type="string">Line Number of Most Complex Method</metric_name>
+      <metric_name id="M9" type="string">Name of Most Complex Method</metric_name>
+      <metric_name id="M10" type="maximum">Maximum Complexity</metric_name>
+      <metric_name id="M11" type="string">Line Number of Deepest Block</metric_name>
+      <metric_name id="M12" type="maximum">Maximum Block Depth</metric_name>
+      <metric_name id="M13" type="average" values="block_depths">Average Block Depth</metric_name>
+      <metric_name id="M14" type="average">Average Complexity</metric_name>
+    </metric_names>
+    <checkpoints checkpoint_count="1">
+      <checkpoint checkpoint_name="1.0-SNAPSHOT" modified_complexity="false" checkpoint_date="2010-10-15">
+        <files file_count="5">
+          <file file_name="MessyTestApplication\Money.cs">
+            <metrics metric_count="15">
+              <metric id="M0">387</metric>
+              <metric id="M1">199</metric>
+              <metric id="M2">7.5</metric>
+              <metric id="M3">2.6</metric>
+              <metric id="M4">3</metric>
+              <metric id="M5">11.00</metric>
+              <metric id="M6">3.00</metric>
+              <metric id="M7">4.36</metric>
+              <metric id="M8">94</metric>
+              <metric id="M9">Money.TotoEquals()</metric>
+              <metric id="M10">6</metric>
+              <metric id="M11">84</metric>
+              <metric id="M12">4</metric>
+              <metric id="M13">1.96</metric>
+              <metric id="M14">1.77</metric>
+            </metrics>
+            <method_metrics method_count="35">
+              <method  name="GoodMoney.Add()" line="288">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.AddMoney()" line="293">
+                <complexity>2</complexity>
+                <statements>3</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>3</calls>
+              </method>
+              <method  name="GoodMoney.AddMoneyBag()" line="300">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.Amount.get()" line="308">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="GoodMoney.Currency.get()" line="313">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="GoodMoney.Equals()" line="315">
+                <complexity>5</complexity>
+                <statements>7</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.GetHashCode()" line="334">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.GoodMoney()" line="279">
+                <complexity>1</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="GoodMoney.IsZero.get()" line="342">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="GoodMoney.Multiply()" line="344">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.Negate()" line="350">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="GoodMoney.Subtract()" line="356">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>2</calls>
+              </method>
+              <method  name="GoodMoney.ToString()" line="361">
+                <complexity>1</complexity>
+                <statements>3</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>3</calls>
+              </method>
+              <method  name="InnerData.Id.get()" line="375">
+                <complexity>1</complexity>
+                <statements>0</statements>
+                <maximum_depth>0</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="InnerData.Id.set()" line="375">
+                <complexity>1</complexity>
+                <statements>0</statements>
+                <maximum_depth>0</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="InnerData.name.get()" line="377">
+                <complexity>1</complexity>
+                <statements>0</statements>
+                <maximum_depth>0</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="InnerData.name.set()" line="377">
+                <complexity>1</complexity>
+                <statements>0</statements>
+                <maximum_depth>0</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="InnerData.sayHello()" line="378">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.Add()" line="51">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.AddMoney()" line="56">
+                <complexity>2</complexity>
+                <statements>3</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>3</calls>
+              </method>
+              <method  name="Money.AddMoneyBag()" line="63">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.AltEquals()" line="145">
+                <complexity>5</complexity>
+                <statements>73</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>67</calls>
+              </method>
+              <method  name="Money.Amount.get()" line="71">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="Money.Currency.get()" line="76">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="Money.Equals()" line="78">
+                <complexity>5</complexity>
+                <statements>7</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.GetHashCode()" line="231">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.IsZero.get()" line="239">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>3</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="Money.Money()" line="42">
+                <complexity>1</complexity>
+                <statements>2</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>0</calls>
+              </method>
+              <method  name="Money.Multiply()" line="241">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.Negate()" line="247">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.Subtract()" line="253">
+                <complexity>1</complexity>
+                <statements>1</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>2</calls>
+              </method>
+              <method  name="Money.TataEquals()" line="113">
+                <complexity>5</complexity>
+                <statements>7</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.ToString()" line="258">
+                <complexity>1</complexity>
+                <statements>3</statements>
+                <maximum_depth>2</maximum_depth>
+                <calls>3</calls>
+              </method>
+              <method  name="Money.TotoEquals()" line="94">
+                <complexity>6</complexity>
+                <statements>8</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>1</calls>
+              </method>
+              <method  name="Money.TutuEquals()" line="129">
+                <complexity>5</complexity>
+                <statements>7</statements>
+                <maximum_depth>4</maximum_depth>
+                <calls>1</calls>
+              </method>
+            </method_metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">7</block_depth>
+              <block_depth level="1">35</block_depth>
+              <block_depth level="2">122</block_depth>
+              <block_depth level="3">29</block_depth>
+              <block_depth level="4">6</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="MessyTestApplication\Program.cs">
+            <metrics metric_count="15">
+              <metric id="M0">14</metric>
+              <metric id="M1">7</metric>
+              <metric id="M2">0.0</metric>
+              <metric id="M3">0.0</metric>
+              <metric id="M4">1</metric>
+              <metric id="M5">1.00</metric>
+              <metric id="M6">0.00</metric>
+              <metric id="M7">0.00</metric>
+              <metric id="M8">10</metric>
+              <metric id="M9">Program.Main()</metric>
+              <metric id="M10">1</metric>
+              <metric id="M11">11</metric>
+              <metric id="M12">1</metric>
+              <metric id="M13">0.14</metric>
+              <metric id="M14">1.00</metric>
+            </metrics>
+            <method_metrics method_count="1">
+              <method  name="Program.Main()" line="10">
+                <complexity>1</complexity>
+                <statements>0</statements>
+                <maximum_depth>0</maximum_depth>
+                <calls>0</calls>
+              </method>
+            </method_metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">6</block_depth>
+              <block_depth level="1">1</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="MessyTestApplication\ClassLibrary1\Properties\AssemblyInfo.cs">
+            <metrics metric_count="15">
+              <metric id="M0">36</metric>
+              <metric id="M1">15</metric>
+              <metric id="M2">47.2</metric>
+              <metric id="M3">0.0</metric>
+              <metric id="M4">0</metric>
+              <metric id="M5">0.00</metric>
+              <metric id="M6">0.00</metric>
+              <metric id="M7">0.00</metric>
+              <metric id="M8"></metric>
+              <metric id="M9"></metric>
+              <metric id="M10">0</metric>
+              <metric id="M11">1</metric>
+              <metric id="M12">0</metric>
+              <metric id="M13">0.00</metric>
+              <metric id="M14">0.00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">15</block_depth>
+              <block_depth level="1">0</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="MessyTestApplication\Impl\Class1.cs">
+            <metrics metric_count="15">
+              <metric id="M0">11</metric>
+              <metric id="M1">6</metric>
+              <metric id="M2">0.0</metric>
+              <metric id="M3">0.0</metric>
+              <metric id="M4">1</metric>
+              <metric id="M5">0.00</metric>
+              <metric id="M6">0.00</metric>
+              <metric id="M7">0.00</metric>
+              <metric id="M8"></metric>
+              <metric id="M9"></metric>
+              <metric id="M10">0</metric>
+              <metric id="M11">1</metric>
+              <metric id="M12">0</metric>
+              <metric id="M13">0.00</metric>
+              <metric id="M14">0.00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">6</block_depth>
+              <block_depth level="1">0</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+          <file file_name="MessyTestApplication\Properties\AssemblyInfo.cs">
+            <metrics metric_count="15">
+              <metric id="M0">36</metric>
+              <metric id="M1">15</metric>
+              <metric id="M2">47.2</metric>
+              <metric id="M3">0.0</metric>
+              <metric id="M4">0</metric>
+              <metric id="M5">0.00</metric>
+              <metric id="M6">0.00</metric>
+              <metric id="M7">0.00</metric>
+              <metric id="M8"></metric>
+              <metric id="M9"></metric>
+              <metric id="M10">0</metric>
+              <metric id="M11">1</metric>
+              <metric id="M12">0</metric>
+              <metric id="M13">0.00</metric>
+              <metric id="M14">0.00</metric>
+            </metrics>
+            <block_depths depth_count="10">
+              <block_depth level="0">15</block_depth>
+              <block_depth level="1">0</block_depth>
+              <block_depth level="2">0</block_depth>
+              <block_depth level="3">0</block_depth>
+              <block_depth level="4">0</block_depth>
+              <block_depth level="5">0</block_depth>
+              <block_depth level="6">0</block_depth>
+              <block_depth level="7">0</block_depth>
+              <block_depth level="8">0</block_depth>
+              <block_depth level="9+">0</block_depth>
+            </block_depths>
+          </file>
+        </files>
+      </checkpoint>
+    </checkpoints>
+  </project>
+</sourcemonitor_metrics>
