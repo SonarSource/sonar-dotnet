@@ -31,20 +31,21 @@ import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugin.dotnet.core.CSharp;
-import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 
 public class CsCpdMapping implements CpdMapping {
 
   private CsLanguage language = new CsLanguage();
   private final Project project;
-
-  public CsCpdMapping(Project project) {
+  private final CSharpFileLocator fileLocator; 
+  
+  public CsCpdMapping(Project project, CSharpFileLocator fileLocator) {
     this.project = project;
+    this.fileLocator = fileLocator;
   }
 
   public Resource createResource(File file, List<File> sourceDirs) {
-    return CSharpFileLocator.INSTANCE.locate(project, file, false);
+    return fileLocator.locate(project, file, false);
   }
 
   public Language getLanguage() {

@@ -60,9 +60,11 @@ import org.sonar.api.utils.XmlParserException;
 public class CpdSensor implements Sensor, DependsUponMavenPlugin {
 
   private final DotnetCpdPluginHandler dotnetCpdPluginHandler;
+  private final CSharpFileLocator fileLocator;
   
-  public CpdSensor(DotnetCpdPluginHandler dotnetCpdPluginHandler) {
+  public CpdSensor(DotnetCpdPluginHandler dotnetCpdPluginHandler, CSharpFileLocator fileLocator) {
     this.dotnetCpdPluginHandler = dotnetCpdPluginHandler;
+    this.fileLocator = fileLocator;
   }
   
   public void analyse(Project project, SensorContext context) {
@@ -149,8 +151,8 @@ public class CpdSensor implements Sensor, DependsUponMavenPlugin {
   }
 
   private void processClassMeasure(SensorContext context, Map<Resource, ClassDuplicationData> fileContainer, Element fileEl, Element targetFileEl, Element duplication, Project project) throws ParseException {
-    Resource csFile =  CSharpFileLocator.INSTANCE.locate(project, new File(fileEl.getAttribute("path")), false); 
-    Resource targetCsFile = CSharpFileLocator.INSTANCE.locate(project, new File(targetFileEl.getAttribute("path")), false);
+    Resource csFile =  fileLocator.locate(project, new File(fileEl.getAttribute("path")), false); 
+    Resource targetCsFile = fileLocator.locate(project, new File(targetFileEl.getAttribute("path")), false);
     if (csFile != null && targetCsFile != null) {
       ClassDuplicationData data = fileContainer.get(csFile);
       if (data == null) {
