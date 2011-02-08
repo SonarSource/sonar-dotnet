@@ -22,14 +22,19 @@ public class ReturnStatementTest {
   @Before
   public void init() {
     p.setRootRule(g.returnStatement);
-    g.expression.mock();
 
   }
 
   @Test
   public void testOk() {
+    g.expression.mock();
     assertThat(p, parse("return;"));
     assertThat(p, parse("return expression;"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence;"));
+  }
+  
 }

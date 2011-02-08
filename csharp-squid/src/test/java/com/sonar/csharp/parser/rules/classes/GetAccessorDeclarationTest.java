@@ -22,15 +22,20 @@ public class GetAccessorDeclarationTest {
   @Before
   public void init() {
     p.setRootRule(g.getAccessorDeclaration);
-    g.attributes.mock();
-    g.accessorModifier.mock();
-    g.accessorBody.mock();
   }
 
   @Test
   public void testOk() {
+    g.attributes.mock();
+    g.accessorModifier.mock();
+    g.accessorBody.mock();
     assertThat(p, parse("get accessorBody"));
     assertThat(p, parse("attributes accessorModifier get accessorBody"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; }"));
+  }
+  
 }

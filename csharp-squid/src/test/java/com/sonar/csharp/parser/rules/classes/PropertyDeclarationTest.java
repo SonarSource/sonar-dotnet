@@ -39,6 +39,7 @@ public class PropertyDeclarationTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("object myObject { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
+    assertThat(p, parse("public override int LeftPrecedence { get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; } }"));
   }
 
 }

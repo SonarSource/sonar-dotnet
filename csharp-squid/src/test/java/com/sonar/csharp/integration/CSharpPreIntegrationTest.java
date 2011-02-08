@@ -49,8 +49,6 @@ public class CSharpPreIntegrationTest {
     filesToIgnore.add("PNUnitTestRunner.cs");
     filesToIgnore.add("PairwiseTests.cs");
     // XXX Files ignored because the conditional operator has a problem
-    filesToIgnore.add("TypeHelper.cs");
-    filesToIgnore.add("Constraint.cs");
     filesToIgnore.add("ConstraintOperators.cs");
   }
 
