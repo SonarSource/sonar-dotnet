@@ -48,8 +48,6 @@ public class CSharpPreIntegrationTest {
     filesToIgnore.add("TestThread.cs");
     filesToIgnore.add("PNUnitTestRunner.cs");
     filesToIgnore.add("PairwiseTests.cs");
-    // XXX Files ignored because the conditional operator has a problem
-    filesToIgnore.add("ConstraintOperators.cs");
   }
 
   @Parameterized.Parameters
