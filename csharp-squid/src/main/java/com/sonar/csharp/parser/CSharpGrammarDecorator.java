@@ -130,12 +130,13 @@ import static com.sonar.csharp.api.CSharpTokenType.REAL_LITERAL;
 import static com.sonar.csharp.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
+import static com.sonar.sslr.impl.matcher.Matchers.adjacent;
 import static com.sonar.sslr.impl.matcher.Matchers.and;
 import static com.sonar.sslr.impl.matcher.Matchers.bridge;
 import static com.sonar.sslr.impl.matcher.Matchers.next;
 import static com.sonar.sslr.impl.matcher.Matchers.not;
 import static com.sonar.sslr.impl.matcher.Matchers.o2n;
-import static com.sonar.sslr.impl.matcher.Matchers.*;
+import static com.sonar.sslr.impl.matcher.Matchers.one2n;
 import static com.sonar.sslr.impl.matcher.Matchers.opt;
 import static com.sonar.sslr.impl.matcher.Matchers.or;
 

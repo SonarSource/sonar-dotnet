@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -23,8 +24,8 @@ public class CSharpFileVisitorTest {
 
   @Test
   public void testScanFile() {
-    Squid squid = new Squid(new CSharpConfiguration());
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/NUnitFramework.cs"));
+    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.FILES);
 
     assertThat(project.getInt(CSharpMetric.FILES), is(1));

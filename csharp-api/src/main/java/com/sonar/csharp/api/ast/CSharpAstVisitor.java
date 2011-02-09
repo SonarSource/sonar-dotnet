@@ -114,6 +114,12 @@ public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
    */
   public void visitNode(AstNode astNode) {
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void beforeLeaveFile(AstNode astNode) {
+  }
 
   /**
    * {@inheritDoc}

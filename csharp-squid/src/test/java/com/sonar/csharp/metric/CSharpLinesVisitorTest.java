@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.tree;
+package com.sonar.csharp.metric;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -20,15 +20,15 @@ import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
 
-public class CSharpMethodVisitorTest {
+public class CSharpLinesVisitorTest {
 
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.LINES);
 
-    assertThat(project.getInt(CSharpMetric.METHODS), is(23));
+    assertThat(project.getInt(CSharpMetric.LINES), is(363));
   }
 
   protected File readFile(String path) {

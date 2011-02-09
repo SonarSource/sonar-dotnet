@@ -11,8 +11,14 @@ import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
 
+/**
+ * Visitor that creates file resources and computes the number of files.
+ */
 public class CSharpFileVisitor extends CSharpAstVisitor {
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void visitFile(AstNode astNode) {
     SourceFile cSharpFile = new SourceFile(getFile().getAbsolutePath().replace('\\', '/'), getFile().getName());
@@ -20,13 +26,12 @@ public class CSharpFileVisitor extends CSharpAstVisitor {
     peekSourceCode().setMeasure(CSharpMetric.FILES, 1);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void leaveFile(AstNode astNode) {
     popSourceCode();
-  }
-
-  public void beforeLeaveFile(AstNode ast) {
-    
   }
 
 }

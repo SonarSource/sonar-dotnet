@@ -20,15 +20,15 @@ import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
 
-public class CSharpMethodVisitorTest {
+public class CSharpNamespaceVisitorTest {
 
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.NAMESPACES);
 
-    assertThat(project.getInt(CSharpMetric.METHODS), is(23));
+    assertThat(project.getInt(CSharpMetric.NAMESPACES), is(1));
   }
 
   protected File readFile(String path) {

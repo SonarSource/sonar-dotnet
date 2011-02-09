@@ -24,9 +24,13 @@ import org.sonar.squid.api.SourceCode;
 import com.google.common.collect.Lists;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
+import com.sonar.csharp.metric.CSharpLinesVisitor;
+import com.sonar.csharp.metric.CSharpLocVisitor;
 import com.sonar.csharp.parser.CSharpParser;
+import com.sonar.csharp.tree.CSharpClassVisitor;
 import com.sonar.csharp.tree.CSharpFileVisitor;
 import com.sonar.csharp.tree.CSharpMethodVisitor;
+import com.sonar.csharp.tree.CSharpNamespaceVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.RecognitionException;
@@ -114,7 +118,11 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   public Collection<Class<? extends CSharpAstVisitor>> getVisitorClasses() {
     List<Class<? extends CSharpAstVisitor>> visitors = Lists.newArrayList();
     visitors.add(CSharpFileVisitor.class);
+    visitors.add(CSharpNamespaceVisitor.class);
+    visitors.add(CSharpClassVisitor.class);
     visitors.add(CSharpMethodVisitor.class);
+    visitors.add(CSharpLinesVisitor.class);
+    visitors.add(CSharpLocVisitor.class);
     return visitors;
   }
 }
