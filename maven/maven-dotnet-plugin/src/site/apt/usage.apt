@@ -37,7 +37,7 @@ Usage of Maven Dotnet Plugin
 *-------------------+------------------------+--------------------------+-----+-----------------------------------------------------+
 | MSBuild       | dotnet.3.5.sdk.dir     | .Net sdk install dir     |2.0, 3.5| {{{http://msdn.microsoft.com/en-us/netframework/aa569263.aspx}http://msdn.microsoft.com/en-us/netframework/aa569263.aspx}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
-| Gallio | gallio.directory     | .Net test runner | 3.1 Update 2 + |{{{http://www.gallio.org}http://www.gallio.org}}|
+| Gallio *| gallio.directory     | .Net test runner | 3.1 Update 2 + |{{{http://www.gallio.org}http://www.gallio.org}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | PartCover | partcover.directory     | .Net code coverage| 2.2, 2.3 and 4.0 |{{{http://github.com/sawilde/partcover.net4}http://github.com/sawilde/partcover.net4}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
@@ -47,14 +47,16 @@ Usage of Maven Dotnet Plugin
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | Fx Cop        | fxcop.directory        | .Net code quality reports| 1.36 + | {{{http://www.infoq.com/news/2010/06/FXCop-10}http://www.infoq.com/news/2010/06/FXCop-10}}|
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
-| Style Cop   *   | stylecop.directory     | C# code style report | 4.3+ |{{{http://code.msdn.microsoft.com/sourceanalysis}http://code.msdn.microsoft.com/sourceanalysis}}|
+| Style Cop   **   | stylecop.directory     | C# code style report | 4.3+ |{{{http://code.msdn.microsoft.com/sourceanalysis}http://code.msdn.microsoft.com/sourceanalysis}}|
 *---------------+------------------------+--------------------------+---+-------------------------------------------------------+
-| Mono Gendarme **     | gendarme.directory     | .Net code quality reports | 2.6+ |{{{http://www.mono-project.com/Gendarme}http://www.mono-project.com/Gendarme}}|
+| Mono Gendarme ***     | gendarme.directory     | .Net code quality reports | 2.6+ |{{{http://www.mono-project.com/Gendarme}http://www.mono-project.com/Gendarme}}|
 *---------------+------------------------+--------------------------+---+-------------------------------------------------------+
   
-  \* Style Cop 4.4 is bundle with the maven dotnet plugin since version 0.3 .  Thus installation of Style Cop is not mandatory.
+  \* Gallio 3.2 build 708 32b edition is bundle with the maven dotnet plugin since version 0.5 . Thus installation of Gallio is not mandatory if you are not using a 64bits windows and if there are no nunit/mbunit/mstest compatibility issues.
   
-  \*\* Gendarme 2.8 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
+  \*\* Style Cop 4.4 is bundle with the maven dotnet plugin since version 0.3 .  Thus installation of Style Cop is not mandatory.
+  
+  \*\*\* Gendarme 2.8 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
 
 * Coverage
   

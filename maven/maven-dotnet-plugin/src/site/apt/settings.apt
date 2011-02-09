@@ -47,8 +47,10 @@ Example of maven <<settings.xml>> configuration.
         <silverlight.3.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v3.0</silverlight.3.mscorlib.location>
         <silverlight.4.mscorlib.location>C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/Silverlight/v4.0</silverlight.4.mscorlib.location>
               
-        <!-- Location of the Gallio installation -->
+        <!-- Location of the Gallio installation
+        NOT MANDATORY for 32b systems 
         <gallio.directory>C:/Program Files/Gallio</gallio.directory>
+        -->
 
         <!-- Location of FxCop installation-->
         <fxcop.directory>C:/Program Files/Microsoft FxCop 10.0</fxcop.directory>
