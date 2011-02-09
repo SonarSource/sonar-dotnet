@@ -376,7 +376,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
         // We need a double here since source monitor has sometime a strange
         // behaviour (cursor.getElemIntValue() would fail if value=1.0 for
         // example)
-        result = (int) Double.parseDouble(value);
+        result = (int) Double.parseDouble(value.replace(',', '.'));
       }
     } catch (NumberFormatException nfe) {
       log.error("int parsing error : " + value, nfe);
@@ -396,7 +396,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     double result = 0;
     try {
       if (value != null) {
-        result = Double.parseDouble(value);
+        result = Double.parseDouble(value.replace(',', '.'));
       }
     } catch (NumberFormatException nfe) {
       log.error("double parsing error : " + value, nfe);

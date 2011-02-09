@@ -33,9 +33,24 @@ public class SourceMonitorResultParserTest {
 
   @Test
   public void testParse() throws IOException {
-    SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
-    File projectDirectory = new File("target/test-classes/solution/MessyTestSolution");
     File reportFile = new File("target/test-classes/solution/MessyTestSolution/target/metrics-report.xml");
+    simpleTest(reportFile);
+  }
+  
+  /**
+   * Same as above with a latinlocale where ',' is the decimal delimiter instead of '.'
+   * See http://jira.codehaus.org/browse/SONARPLUGINS-965
+   * @throws IOException
+   */
+  @Test
+  public void testParseLatinLocale() throws IOException {
+    File reportFile = new File("target/test-classes/solution/MessyTestSolution/target/metrics-report-latin.xml");
+    simpleTest(reportFile);
+  }
+
+  private void simpleTest(File reportFile) throws IOException {
+    SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
+    File projectDirectory = new File("target/test-classes/solution/MessyTestSolution");    
     File moneyFile = new File("target/test-classes/solution/MessyTestSolution/MessyTestApplication/Money.cs");
     List<FileMetrics> metrics = parser.parse(projectDirectory, reportFile);
     assertNotNull(metrics);
@@ -55,10 +70,6 @@ public class SourceMonitorResultParserTest {
     assertEquals(4, firstFile.getCountMethodStatements());
     assertEquals(199, firstFile.getCountStatements());
     assertEquals(10, firstFile.getDocumentationLines());
-    
-    // TODO does not seem to be used
-    //assertEquals(0, firstFile.getPercentCommentLines(), 0.00001D);
-    //assertEquals(10, firstFile.getPercentDocumentationLines(), 0.00001D);
   }
 
 }
