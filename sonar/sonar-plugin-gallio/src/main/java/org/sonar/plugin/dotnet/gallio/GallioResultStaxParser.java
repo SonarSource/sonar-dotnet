@@ -39,9 +39,12 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugin.dotnet.core.SonarPluginException;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.*;
 
 /**
  * Stax implementation of the Gallio result report parser
@@ -51,8 +54,6 @@ import com.google.common.collect.Multimap;
  */
 public class GallioResultStaxParser implements GallioResultParser {
 
-  private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
-  
   private static final String GALLIO_REPORT_PARSING_ERROR = "gallio report parsing error";
   private static final String GALLIO_URI = "http://www.gallio.org/";
   private static final String ASSEMBLY = "assembly";
@@ -72,142 +73,150 @@ public class GallioResultStaxParser implements GallioResultParser {
    * Categories for the test
    */
   private final static String CATEGORY_ERROR = "error";
-  
+  private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
+
+
   private Map<String, TestCaseDetail> testCaseDetailsByTestIds;
 
 
+
   public Set<UnitTestReport> parse(File report) {
-    Set<UnitTestReport> reports = new HashSet<UnitTestReport>();
-    testCaseDetailsByTestIds = new HashMap<String, TestCaseDetail>();
     try {
+      testCaseDetailsByTestIds = new HashMap<String, TestCaseDetail>();
       SMInputFactory inf = new SMInputFactory(XMLInputFactory.newInstance());
       SMHierarchicCursor rootCursor = inf.rootElementCursor(report);
-      rootCursor.advance();
-      log.debug("rootCursor is at : {}", rootCursor.getLocalName());
+      advanceCursor(rootCursor);
+      log.debug("rootCursor is at : {}", findElementName(rootCursor));
 
       // We first get the tests ids and put them in a map to get the details later
       Map<String, TestDescription> testsDetails = new HashMap<String, TestDescription>();
 
       QName testModelTag = new QName(GALLIO_URI, "testModel");
-      SMInputCursor testModelCursor = rootCursor.descendantElementCursor();
+      SMInputCursor testModelCursor = descendantElements(rootCursor);
       testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testModelTag));
-      testModelCursor.advance();
-      log.debug("TestModelCursor initialized at : {}", testModelCursor.getLocalName());
+      advanceCursor(testModelCursor);
+      log.debug("TestModelCursor initialized at : {}", findElementName(testModelCursor));
       testsDetails = recursiveParseTestsIds(testModelCursor, testsDetails, null, null);
 
       QName testPackageRunTag = new QName(GALLIO_URI, "testPackageRun");
       testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testPackageRunTag));
-      testModelCursor.advance();
+      advanceCursor(testModelCursor);
       String testId = "";
       recursiveParseTestsResults(testModelCursor, testId);
 
       //Finally, we fill the reports
-      reports = createUnitTestsReport(testsDetails);
+      final Set<UnitTestReport> reports = createUnitTestsReport(testsDetails);
       rootCursor.getStreamReader().closeCompletely();
       log.debug("Parsing ended");
 
-
+      return reports;
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
+      throw new SonarPluginException(GALLIO_REPORT_PARSING_ERROR,e);
     }
-    return reports;
+    
   }
 
   private Map<String, TestDescription> recursiveParseTestsIds(SMInputCursor rootCursor, 
       Map<String, TestDescription> testDetails, File sourceFile, String parentAssemblyName){
-    try {
-      QName testTag = new QName(GALLIO_URI, "test");
-      if(!rootCursor.asEvent().isEndElement()){
-        // Get all the tests
-        SMInputCursor currentTest = rootCursor.descendantElementCursor(testTag);
-        String eltName;
-        while (null != currentTest.getNext()) {
-          TestDescription testDescription = new TestDescription();
-          String id = currentTest.getAttrValue("id");
-          String name = currentTest.getAttrValue("name");
-          String testCase = currentTest.getAttrValue("isTestCase");
-          log.debug("Id : {} & isTestCase : {}", id, testCase);
-          boolean isTestCase = "true".equals(testCase);
-          // We analyse all the tests tags to get usefull informations if the test is a TestCase,
-          // and to get their children
-          SMInputCursor currentTestChildren = currentTest.descendantElementCursor();
-          while (null != currentTestChildren.getNext()){
-            eltName = currentTestChildren.getLocalName();
-            if(isTestCase){
-              testDescription.setMethodName(name);
-              String attributeValue = null;
-              if("codeReference".equals(eltName)){
-                if(null != currentTestChildren.getAttrValue(ASSEMBLY)){
-                  attributeValue = currentTestChildren.getAttrValue(ASSEMBLY);
-                  log.debug("--{} : {}", ASSEMBLY, attributeValue);
-                  testDescription.setAssemblyName(StringUtils.substringBefore(attributeValue, ","));
-                  parentAssemblyName = testDescription.getAssemblyName();
-                }
-                else{
-                  //Get the precedent assemblyName if not filled
-                  testDescription.setAssemblyName(parentAssemblyName);
-                }
-                retrieveCodeReferences(testDescription, currentTestChildren);
-              }
-              currentTestChildren.getNext();
-              if("codeLocation".equals(eltName)){
-                sourceFile = retrieveCodeLocation(sourceFile, testDescription, currentTestChildren);
-              }
-              if(null == testDescription.getSourceFile()){
-                testDescription.setSourceFile(sourceFile);
-              }
-              testDetails.put(id, testDescription);
+    
+    QName testTag = new QName(GALLIO_URI, "test");
+    if(!isAnEndElement(rootCursor)){
+      // Get all the tests
+      SMInputCursor currentTest = descendantSpecifiedElements(rootCursor, testTag);
+      String eltName;
+      while (null != nextPosition(currentTest)) {
+        TestDescription testDescription = new TestDescription();
+        String id = findAttributeValue(currentTest, "id");
+        String name = findAttributeValue(currentTest, "name");
+        String testCase = findAttributeValue(currentTest, "isTestCase");
+        log.debug("Id : {} & isTestCase : {}", id, testCase);
+        boolean isTestCase = "true".equals(testCase);
+        // We analyse all the tests tags to get usefull informations if the test is a TestCase,
+        // and to get their children
+        SMInputCursor currentTestChildren = descendantElements(currentTest);
+        while (null != nextPosition(currentTestChildren)){
+          eltName = findElementName(currentTestChildren);
+          if(isTestCase){
+            testDescription.setMethodName(name);
+            if("codeReference".equals(eltName)){
+              parentAssemblyName = codeReferenceTreatment(parentAssemblyName, testDescription, currentTestChildren);
+              retrieveCodeReferences(testDescription, currentTestChildren);
             }
-            if("codeLocation".equals(eltName) && null != currentTestChildren.getAttrValue(PATH)){
-              File currentSourceFile = new File(currentTestChildren.getAttrValue(PATH));
-              if(currentSourceFile != null){
-                sourceFile = currentSourceFile;
-              }								
+            nextPosition(currentTestChildren);
+            if("codeLocation".equals(eltName)){
+              sourceFile = retrieveCodeLocation(sourceFile, testDescription, currentTestChildren);
             }
-            if("children".equals(eltName)){
-              recursiveParseTestsIds(currentTestChildren, testDetails, sourceFile, parentAssemblyName);
+            if(null == testDescription.getSourceFile()){
+              testDescription.setSourceFile(sourceFile);
             }
-            currentTestChildren.advance();
+            testDetails.put(id, testDescription);
           }
+          sourceFile = evaluatePath(sourceFile, eltName, currentTestChildren);
+          if("children".equals(eltName)){
+            recursiveParseTestsIds(currentTestChildren, testDetails, sourceFile, parentAssemblyName);
+          }
+          advanceCursor(currentTestChildren);
         }
       }
-    }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return testDetails;
   }
 
-  private void retrieveCodeReferences(TestDescription testDescription, SMInputCursor currentTestChildren) throws XMLStreamException {
+  private String codeReferenceTreatment(String parentAssemblyName, TestDescription testDescription, SMInputCursor currentTestChildren) {
     String attributeValue;
-    if(null != currentTestChildren.getAttrValue(NAMESPACE)){
-      attributeValue = currentTestChildren.getAttrValue(NAMESPACE);
+    if(null != findAttributeValue(currentTestChildren, ASSEMBLY)){
+      attributeValue = findAttributeValue(currentTestChildren, ASSEMBLY);
+      log.debug("--{} : {}", ASSEMBLY, attributeValue);
+      testDescription.setAssemblyName(StringUtils.substringBefore(attributeValue, ","));
+      parentAssemblyName = testDescription.getAssemblyName();
+    }
+    else{
+      //Get the precedent assemblyName if not filled
+      testDescription.setAssemblyName(parentAssemblyName);
+    }
+    return parentAssemblyName;
+  }
+
+  private File evaluatePath(File sourceFile, String eltName, SMInputCursor currentTestChildren) {
+    if("codeLocation".equals(eltName) && null != findAttributeValue(currentTestChildren, PATH)){
+      File currentSourceFile = new File(findAttributeValue(currentTestChildren, PATH));
+      if(currentSourceFile != null){
+        sourceFile = currentSourceFile;
+      }								
+    }
+    return sourceFile;
+  }
+
+  private void retrieveCodeReferences(TestDescription testDescription, SMInputCursor currentTestChildren) {
+    String attributeValue;
+    if(null != findAttributeValue(currentTestChildren, NAMESPACE)){
+      attributeValue = findAttributeValue(currentTestChildren, NAMESPACE);
       log.debug("--{} : {}", NAMESPACE, attributeValue);
       testDescription.setNamespace(attributeValue);
     }
-    if(null != currentTestChildren.getAttrValue(TYPE)){
-      attributeValue = currentTestChildren.getAttrValue(TYPE);
+    if(null != findAttributeValue(currentTestChildren, TYPE)){
+      attributeValue = findAttributeValue(currentTestChildren, TYPE);
       log.debug("--{} : {}", TYPE, attributeValue);
       testDescription.setClassName(attributeValue);
     }
-    if(null != currentTestChildren.getAttrValue(MEMBER)){
-      attributeValue = currentTestChildren.getAttrValue(MEMBER);
+    if(null != findAttributeValue(currentTestChildren, MEMBER)){
+      attributeValue = findAttributeValue(currentTestChildren, MEMBER);
       log.debug("--{} : {}", MEMBER, attributeValue);
       testDescription.setMethodName(attributeValue);
     }
   }
 
-  private File retrieveCodeLocation(File sourceFile, TestDescription testDescription, SMInputCursor currentTestChildren)
-      throws XMLStreamException {
+  private File retrieveCodeLocation(File sourceFile, TestDescription testDescription, SMInputCursor currentTestChildren) {
     String attributeValue;
-    if(null != currentTestChildren.getAttrValue(PATH)){
-      attributeValue = currentTestChildren.getAttrValue(PATH);
+    if(null != findAttributeValue(currentTestChildren, PATH)){
+      attributeValue = findAttributeValue(currentTestChildren, PATH);
       log.debug("--{} : {}", PATH, attributeValue);
       File currentSourceFile = new File(attributeValue);
       testDescription.setSourceFile(currentSourceFile);
       sourceFile = currentSourceFile;
     }
-    if(null != currentTestChildren.getAttrValue(LINE)){
-      attributeValue = currentTestChildren.getAttrValue(LINE);
+    if(null != findAttributeValue(currentTestChildren, LINE)){
+      attributeValue = findAttributeValue(currentTestChildren, LINE);
       log.debug("--{} : {}", LINE, attributeValue);
       int lineNumber = Integer.valueOf(attributeValue);
       testDescription.setLine(lineNumber);
@@ -216,92 +225,80 @@ public class GallioResultStaxParser implements GallioResultParser {
   }
 
   private void recursiveParseTestsResults(SMInputCursor rootCursor, String testId){
-    try {
 
-      QName testStepRunTag = new QName(GALLIO_URI, "testStepRun");
-      SMInputCursor currentTestStepRun = rootCursor.descendantElementCursor(testStepRunTag);
-      String eltName = "";
-      while (null != currentTestStepRun.getNext()) {
-        // currentTestTags represents the different tests
-        SMInputCursor currentTestTags = currentTestStepRun.descendantElementCursor();
-        currentTestTags.getNext();
-        eltName = currentTestTags.getLocalName();
-        if("testStep".equals(eltName)){
-          if("true".equals(currentTestTags.getAttrValue("isTestCase"))){
-            if(null != currentTestTags.getAttrValue("testId")){
-              testId = currentTestTags.getAttrValue("testId");
-              log.debug("--testId : {}", testId);
-              log.debug("--isTestCase : {}", currentTestTags.getAttrValue("isTestCase"));
-              currentTestTags.getNext();
-            }
-            while (null != currentTestTags.getNext()) {
-              TestCaseDetail testCaseDetail = parsingTags(currentTestTags, testId);
-              if(null != testCaseDetail) {
-                testCaseDetailsByTestIds.put(testId, testCaseDetail);
-              }
-            }
+    QName testStepRunTag = new QName(GALLIO_URI, "testStepRun");
+    SMInputCursor currentTestStepRun = descendantSpecifiedElements(rootCursor, testStepRunTag);
+    String eltName = "";
+    while (null != nextPosition(currentTestStepRun)) {
+      // currentTestTags represents the different tests
+      SMInputCursor currentTestTags = descendantElements(currentTestStepRun);
+      nextPosition(currentTestTags);
+      eltName = findElementName(currentTestTags);
+      if("testStep".equals(eltName)){
+        if("true".equals(findAttributeValue(currentTestTags, "isTestCase"))){
+          if(null != findAttributeValue(currentTestTags, "testId")){
+            testId = findAttributeValue(currentTestTags, "testId");
+            log.debug("--testId : {}", testId);
+            log.debug("--isTestCase : {}", findAttributeValue(currentTestTags, "isTestCase"));
+            nextPosition(currentTestTags);
           }
-          else{
-            testId = currentTestTags.getAttrValue("testId");
-            while (null != currentTestTags.getNext()) {
-              parseChildren(testId, currentTestTags);
+          while (null != nextPosition(currentTestTags)) {
+            TestCaseDetail testCaseDetail = parsingTags(currentTestTags, testId);
+            if(null != testCaseDetail) {
+              testCaseDetailsByTestIds.put(testId, testCaseDetail);
             }
           }
         }
-        currentTestTags.advance();
+        else{
+          testId = findAttributeValue(currentTestTags, "testId");
+          while (null != nextPosition(currentTestTags)) {
+            parseChildren(testId, currentTestTags);
+          }
+        }
       }
-    }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
+      advanceCursor(currentTestTags);
     }
   }
 
   private void parseChildren(String testId, SMInputCursor currentTestTags){
-    try{
-      if("children".equals(currentTestTags.getLocalName())){
-        recursiveParseTestsResults(currentTestTags, testId);
-        currentTestTags.getNext();
-      }
-    }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
+    if("children".equals(findElementName(currentTestTags))){
+      recursiveParseTestsResults(currentTestTags, testId);
+      nextPosition(currentTestTags);
     }
   }
 
   private TestCaseDetail parsingTags(SMInputCursor currentTestTags, String testId){
 
-    try{
-      parseChildren(testId, currentTestTags);
-      TestCaseDetail detail = new TestCaseDetail();
-      if("result".equals(currentTestTags.getLocalName())){
-        log.debug("Result for test : {}", testId);
+    parseChildren(testId, currentTestTags);
+    TestCaseDetail detail = new TestCaseDetail();
+    if( "result".equals( findElementName(currentTestTags) ) ){
+      log.debug("Result for test : {}", testId);
 
-        String assertCount = currentTestTags.getAttrValue("assertCount");
-        log.debug("---assertCount : {}", assertCount);
-        detail.setCountAsserts((int) Double.parseDouble(assertCount));
+      String assertCount = findAttributeValue(currentTestTags, "assertCount");
+      log.debug("---assertCount : {}", assertCount);
+      detail.setCountAsserts((int) Double.parseDouble(assertCount));
 
-        String duration = currentTestTags.getAttrValue("duration");
-        log.debug("---duration : {}", currentTestTags.getAttrValue("duration"));
-        detail.setTimeMillis((int) Math.round(Double.parseDouble(duration) * 1000.));
+      String duration = findAttributeValue(currentTestTags, "duration");
+      log.debug("---duration : {}", duration);
+      detail.setTimeMillis((int) Math.round(Double.parseDouble(duration) * 1000.));
 
-        SMInputCursor currentTestOutcomeResultCursor = currentTestTags
-        .descendantElementCursor().advance();
-        String status = currentTestOutcomeResultCursor.getAttrValue("status");
-        String category = null;
-        if(null != currentTestOutcomeResultCursor.getAttrValue("category")){
-          category = currentTestOutcomeResultCursor.getAttrValue("category");
-        }
-
-        log.debug("---status : {}", currentTestOutcomeResultCursor.getAttrValue("status"));
-        TestStatus executionStatus = computeStatus(status, category);
-        currentTestTags.getNext();
-        detail.setStatus(executionStatus);
-        if ((executionStatus == TestStatus.FAILED) || 
-            (executionStatus == TestStatus.ERROR)) {
-          detail = getMessages(currentTestTags, detail);
-        }
-        return detail;
+      SMInputCursor currentTestOutcomeResultCursor = descendantElements(currentTestTags);
+      advanceCursor(currentTestOutcomeResultCursor);
+      String status = findAttributeValue(currentTestOutcomeResultCursor, "status");
+      String category = null;
+      if(null != findAttributeValue(currentTestOutcomeResultCursor, "category")){
+        category = findAttributeValue(currentTestOutcomeResultCursor, "category");
       }
-    }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
+
+      log.debug("---status : {}", status);
+      TestStatus executionStatus = computeStatus(status, category);
+      nextPosition(currentTestTags);
+      detail.setStatus(executionStatus);
+      if ((executionStatus == TestStatus.FAILED) || 
+          (executionStatus == TestStatus.ERROR)) {
+        detail = getMessages(currentTestTags, detail);
+      }
+      return detail;
     }
     return null;
   }
@@ -324,22 +321,17 @@ public class GallioResultStaxParser implements GallioResultParser {
   }
 
   private TestCaseDetail getMessages(SMInputCursor currentTestTags, TestCaseDetail detail){
-    try{
-      if("testLog".equals(currentTestTags.getLocalName())){
-        SMInputCursor currentTestLogStreamsTags = currentTestTags.descendantElementCursor();
-        SMEvent streamsTag = currentTestLogStreamsTags.getNext();
-        if(null != streamsTag){
-          log.debug("----streams Tag found : {}", currentTestLogStreamsTags.getLocalName());
-          if(streamsTag.getEventCode() == SMEvent.START_ELEMENT.getEventCode()){
-            log.debug("----Cursor is at <streams> Tag ");
-            SMInputCursor currentTestLogStreamTags = currentTestLogStreamsTags
-            .descendantElementCursor();
-            parseStreams(detail, currentTestLogStreamTags);
-          }
+    if( "testLog".equals( findElementName(currentTestTags) ) ){
+      SMInputCursor currentTestLogStreamsTags = descendantElements(currentTestTags);
+      SMEvent streamsTag = nextPosition(currentTestLogStreamsTags);
+      if(null != streamsTag){
+        log.debug("----streams Tag found : {}", findElementName(currentTestLogStreamsTags));
+        if(streamsTag.getEventCode() == SMEvent.START_ELEMENT.getEventCode()){
+          log.debug("----Cursor is at <streams> Tag ");
+          SMInputCursor currentTestLogStreamTags = descendantElements(currentTestLogStreamsTags);
+          parseStreams(detail, currentTestLogStreamTags);
         }
       }
-    }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
     }
     return detail;
   }
@@ -347,28 +339,28 @@ public class GallioResultStaxParser implements GallioResultParser {
   private void parseStreams(TestCaseDetail detail,
       SMInputCursor currentTestLogStreamTags) {
     try{
-      while (null != currentTestLogStreamTags.getNext()) {
+      while (null != nextPosition(currentTestLogStreamTags)) {
         log.debug("----Cursor is at <stream> Tag ");
-        String streamName = currentTestLogStreamTags.getAttrValue("name");
+        String streamName = findAttributeValue(currentTestLogStreamTags, "name");
         log.debug("----stream name : {}", streamName);
         SMInputCursor currentTestLogStreamSectionsTags = currentTestLogStreamTags
         .descendantElementCursor().advance()
         .descendantElementCursor().advance()
         .descendantElementCursor();
-        while (null != currentTestLogStreamSectionsTags.getNext()) {
-          String sectionName = currentTestLogStreamSectionsTags.getAttrValue("name");
+        while (null != nextPosition(currentTestLogStreamSectionsTags)) {
+          String sectionName = findAttributeValue(currentTestLogStreamSectionsTags, "name");
           log.debug("----section name : {}", sectionName);
           SMInputCursor sectionContentsChild = currentTestLogStreamSectionsTags
           .descendantElementCursor().advance()
           .descendantElementCursor().advance();
-          if("text".equals(sectionContentsChild.getLocalName())){
+          if( "text".equals( findElementName(sectionContentsChild) ) ){
             String message = sectionContentsChild.collectDescendantText();
             log.debug("Error Message is : {}", message);
             detail.setErrorMessage(message);
           }
-          else if("marker".equals(sectionContentsChild.getLocalName())) {
+          else if( "marker".equals( findElementName(sectionContentsChild) ) ) {
             log.debug("-------Marker found ! ");
-            if("StackTrace".equals(sectionContentsChild.getAttrValue("class"))){
+            if( "StackTrace".equals( findAttributeValue(sectionContentsChild, "class") ) ){
               SMInputCursor sectionMarkerTextContent = sectionContentsChild
               .descendantElementCursor().advance()
               .descendantElementCursor().advance();
@@ -380,7 +372,7 @@ public class GallioResultStaxParser implements GallioResultParser {
         }
       }
     }catch(XMLStreamException e){
-      log.error(GALLIO_REPORT_PARSING_ERROR, e);
+      log.error(GALLIO_REPORT_PARSING_ERROR,e);
     }
   }
 
@@ -417,7 +409,8 @@ public class GallioResultStaxParser implements GallioResultParser {
           unitTest.addDetail(testDetail);
         }
         unitTestsReports.put(pathKey, unitTest);
-      } else {
+      }
+      else{
         //Else we create a new report
         UnitTestReport unitTest = new UnitTestReport();
         unitTest.setAssemblyName(testCaseDetailsBySrcKey.get(pathKey).iterator().next().getAssemblyName());
