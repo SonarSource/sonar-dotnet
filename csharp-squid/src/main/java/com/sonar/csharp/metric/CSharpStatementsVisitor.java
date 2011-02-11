@@ -9,23 +9,18 @@ import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Rule;
 
 public class CSharpStatementsVisitor extends CSharpAstVisitor {
 
-  private Rule block = getCSharpGrammar().block;
-
   @Override
   public void init() {
-    CSharpGrammar grammar = getCSharpGrammar();
-    subscribeTo(grammar.labeledStatement, grammar.declarationStatement, grammar.embeddedStatement);
+    CSharpGrammar g = getCSharpGrammar();
+    subscribeTo(g.labeledStatement, g.declarationStatement, g.expressionStatement, g.selectionStatement, g.iterationStatement,
+        g.jumpStatement, g.tryStatement, g.checkedStatement, g.uncheckedStatement, g.lockStatement, g.usingStatement, g.yieldStatement);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (block.equals(node.getFirstChild().getType())) {
-      return;
-    }
     peekSourceCode().add(CSharpMetric.STATEMENTS, 1);
   }
 }
