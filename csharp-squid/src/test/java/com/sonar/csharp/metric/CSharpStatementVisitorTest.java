@@ -20,7 +20,7 @@ import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
 
-public class CSharpStatementsVisitorTest {
+public class CSharpStatementVisitorTest {
 
   @Test
   public void testScanFile() {
@@ -37,7 +37,7 @@ public class CSharpStatementsVisitorTest {
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleFile.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.STATEMENTS);
 
-    assertThat(project.getInt(CSharpMetric.STATEMENTS), is(25));
+    assertThat(project.getInt(CSharpMetric.STATEMENTS), is(16));
   }
 
   protected File readFile(String path) {

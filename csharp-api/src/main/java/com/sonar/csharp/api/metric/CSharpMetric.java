@@ -15,7 +15,7 @@ import org.sonar.squid.measures.SumAggregationFormula;
  * Metrics computed for the C# language.
  */
 public enum CSharpMetric implements MetricDef {
-  FILES, NAMESPACES, CLASSES, METHODS, LINES, LINES_OF_CODE, STATEMENTS, 
+  FILES, NAMESPACES, CLASSES, METHODS, LINES, LINES_OF_CODE, STATEMENTS, ACCESSORS,
   PUBLIC_API, PUBLIC_DOC_API,  COMMENT_BLANK_LINES, COMMENTED_OUT_CODE_LINES, COMMENT_LINES, COMPLEXITY;
 
   private double initValue = 0;

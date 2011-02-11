@@ -1,38 +1,16 @@
-public class Test
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Example.Core
 {
+  /// <summary>A simple Money.</summary>
+  public class Money : IMoney
+  {
+
     private int fAmount;
     private String fCurrency;
-
-	private void test()
-	{
-		// The following comment must not be used for CPD
-		string message = "Hello World";
-	}
-	
-    /// <summary>
-    /// Base implementation of Single operator.
-    /// </summary>
-    
-    private static TSource SingleImpl<TSource>(
-        this IEnumerable<TSource> source,
-        Func<TSource> empty)
-    {
-        CheckNotNull(source, "source");
-
-        using (var e = source.GetEnumerator())
-        {
-            if (e.MoveNext())
-            {
-                var single = e.Current;
-                if (!e.MoveNext())
-                    return single;
-
-                throw new InvalidOperationException();
-            }
-
-            return empty();
-        }
-    }
 
     /// <summary>Constructs a money from the given amount and
     /// currency.</summary>
@@ -87,5 +65,5 @@ public class Test
       }
       return false;
     }
-	
+  }
 }

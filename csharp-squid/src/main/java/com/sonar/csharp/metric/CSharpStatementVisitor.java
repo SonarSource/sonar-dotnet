@@ -10,7 +10,7 @@ import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
 
-public class CSharpStatementsVisitor extends CSharpAstVisitor {
+public class CSharpStatementVisitor extends CSharpAstVisitor {
 
   @Override
   public void init() {

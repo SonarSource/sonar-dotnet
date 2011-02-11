@@ -20,15 +20,24 @@ import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
 
-public class CSharpLinesVisitorTest {
+public class CSharpAccessorVisitorTest {
 
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.LINES);
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.ACCESSORS);
 
-    assertThat(project.getInt(CSharpMetric.LINES), is(363));
+    assertThat(project.getInt(CSharpMetric.ACCESSORS), is(10));
+  }
+
+  @Test
+  public void testScanSimpleFile() {
+    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleFile.cs"));
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.ACCESSORS);
+
+    assertThat(project.getInt(CSharpMetric.ACCESSORS), is(2));
   }
 
   protected File readFile(String path) {

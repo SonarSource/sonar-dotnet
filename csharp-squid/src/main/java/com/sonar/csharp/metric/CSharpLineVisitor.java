@@ -15,7 +15,7 @@ import com.sonar.sslr.api.Token;
 /**
  * Visitor that computes the number of lines of a file.
  */
-public class CSharpLinesVisitor extends CSharpAstVisitor implements AstAndTokenVisitor {
+public class CSharpLineVisitor extends CSharpAstVisitor implements AstAndTokenVisitor {
 
   /**
    * {@inheritDoc}
