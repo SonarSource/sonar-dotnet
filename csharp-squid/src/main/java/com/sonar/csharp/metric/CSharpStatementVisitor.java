@@ -10,8 +10,14 @@ import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
 
+/**
+ * Visitor that computes the number of statements.
+ */
 public class CSharpStatementVisitor extends CSharpAstVisitor {
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void init() {
     CSharpGrammar g = getCSharpGrammar();
@@ -19,6 +25,9 @@ public class CSharpStatementVisitor extends CSharpAstVisitor {
         g.jumpStatement, g.tryStatement, g.checkedStatement, g.uncheckedStatement, g.lockStatement, g.usingStatement, g.yieldStatement);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void visitNode(AstNode node) {
     peekSourceCode().add(CSharpMetric.STATEMENTS, 1);
