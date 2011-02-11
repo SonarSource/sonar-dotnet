@@ -1,0 +1,47 @@
+/*
+ * Copyright (C) 2010 SonarSource SA
+ * All rights reserved
+ * mailto:contact AT sonarsource DOT com
+ */
+package com.sonar.csharp.metric;
+
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.io.File;
+import java.nio.charset.Charset;
+
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+import org.sonar.squid.Squid;
+import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceProject;
+
+import com.sonar.csharp.CSharpAstScanner;
+import com.sonar.csharp.CSharpConfiguration;
+import com.sonar.csharp.api.metric.CSharpMetric;
+
+public class CSharpCommentsAndNoSonarVisitorTest {
+
+  @Test
+  public void testScanSimpleFile() {
+    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleFile-withComments.cs"));
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.values());
+
+    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(6)); // see 2
+    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(12));
+    assertThat(project.getInt(CSharpMetric.COMMENTED_OUT_CODE_LINES), is(5)); // see 6
+
+    SourceFile file = (SourceFile) project.getFirstChild();
+    assertThat(file.getNoSonarTagLines(), hasItem(12));
+    assertThat(file.getNoSonarTagLines(), hasItem(43));
+    assertThat(file.getNoSonarTagLines().size(), is(2));
+  }
+
+  protected File readFile(String path) {
+    return FileUtils.toFile(getClass().getResource(path));
+  }
+
+}

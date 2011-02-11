@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.metric.CSharpAccessorVisitor;
+import com.sonar.csharp.metric.CSharpCommentsAndNoSonarVisitor;
 import com.sonar.csharp.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.metric.CSharpLineVisitor;
 import com.sonar.csharp.metric.CSharpLocVisitor;
@@ -129,6 +130,8 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     visitors.add(CSharpLocVisitor.class);
     visitors.add(CSharpStatementVisitor.class);
     visitors.add(CSharpComplexityVisitor.class);
+
+    visitors.add(CSharpCommentsAndNoSonarVisitor.class);
     return visitors;
   }
 }
