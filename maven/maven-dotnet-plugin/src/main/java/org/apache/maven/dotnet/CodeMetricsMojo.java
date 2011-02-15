@@ -102,7 +102,7 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
    *            expression="${metrics.report.filename}"
    *            default-value="metrics-report.xml"
    */
-  private String reportFileName;
+  private String metricsReportFileName;
   
   /**
    * Root directory of the solution. SourceMonitor will analyse 
@@ -127,8 +127,8 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
     generator.setExcludedExtensions(Arrays.asList(excludedExtensions));
     String version = project.getVersion();
     generator.setCheckPointName(version);
-    File outputFile = getReportFile(reportFileName);
-    File projectFile = getReportFile(this.reportFileName + ".smp");
+    File outputFile = getReportFile(metricsReportFileName);
+    File projectFile = getReportFile(this.metricsReportFileName + ".smp");
 
     // This is the directory where the command file will be generated
     File workDirectory = getReportDirectory();
@@ -159,18 +159,17 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
       }
     }
     
-    File solutionDir = solution.getSolutionDir();
     for (VisualStudioProject visualStudioProject : excludedProjects) {
       File directory = visualStudioProject.getDirectory();
       try {
         URI directoryUri = directory.getCanonicalFile().toURI();
-        URI solutionUri = solutionDir.getCanonicalFile().toURI();
+        URI solutionUri = metricsSrcDirectory.getCanonicalFile().toURI();
         String relativePath = solutionUri.relativize(directoryUri).getPath();
         generator.addExcludedDirectory(relativePath);
       } catch (IOException e) {
         getLog().debug(
-            "Could not compute the relative path for the project "
-                + visualStudioProject);
+          "Could not compute the relative path for the project " + visualStudioProject, 
+          e);
       }
     }
 
@@ -200,8 +199,8 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
     SrcMonCommandGenerator generator = new SrcMonCommandGenerator();
     String version = project.getVersion();
     generator.setCheckPointName(version);
-    File outputFile = getReportFile(reportFileName);
-    File projectFile = getReportFile(this.reportFileName + ".smp");
+    File outputFile = getReportFile(metricsReportFileName);
+    File projectFile = getReportFile(this.metricsReportFileName + ".smp");
 
     // We delete the files before generation
     deleteFiles(outputFile, projectFile);
