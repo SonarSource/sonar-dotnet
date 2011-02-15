@@ -29,6 +29,7 @@ import com.sonar.csharp.metric.CSharpCommentsAndNoSonarVisitor;
 import com.sonar.csharp.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.metric.CSharpLineVisitor;
 import com.sonar.csharp.metric.CSharpLocVisitor;
+import com.sonar.csharp.metric.CSharpPublicApiVisitor;
 import com.sonar.csharp.metric.CSharpStatementVisitor;
 import com.sonar.csharp.parser.CSharpParser;
 import com.sonar.csharp.tree.CSharpClassVisitor;
@@ -130,6 +131,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     visitors.add(CSharpLocVisitor.class);
     visitors.add(CSharpStatementVisitor.class);
     visitors.add(CSharpComplexityVisitor.class);
+    visitors.add(CSharpPublicApiVisitor.class);
 
     visitors.add(CSharpCommentsAndNoSonarVisitor.class);
     return visitors;
