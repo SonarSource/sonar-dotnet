@@ -52,7 +52,7 @@ public class SourceMonitorResultParserTest {
     SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
     File projectDirectory = new File("target/test-classes/solution/MessyTestSolution");    
     File moneyFile = new File("target/test-classes/solution/MessyTestSolution/MessyTestApplication/Money.cs");
-    List<FileMetrics> metrics = parser.parse(projectDirectory, reportFile);
+    List<FileMetrics> metrics = parser.parse(reportFile);
     assertNotNull(metrics);
     assertEquals(5, metrics.size());
     FileMetrics firstFile = metrics.get(0);
