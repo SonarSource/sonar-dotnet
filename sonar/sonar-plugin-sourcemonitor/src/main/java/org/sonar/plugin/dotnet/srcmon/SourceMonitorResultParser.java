@@ -32,6 +32,6 @@ public interface SourceMonitorResultParser {
    * 
    * @param reportFile
    */
-  public abstract List<FileMetrics> parse(File directory, File reportFile);
+  public abstract List<FileMetrics> parse(File reportFile);
 
 }

@@ -106,8 +106,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
    * 
    * @param reportFile
    */
-  public List<FileMetrics> parse(File directory, File reportFile) {
-    this.baseDir = directory;
+  public List<FileMetrics> parse(File reportFile) {
     try {
       XmlStreamHandler parserHandler = new XmlStreamHandler() {
         @Override
@@ -116,14 +115,12 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
           SMInputCursor project = rootCursor.advance()
               .descendantElementCursor("project").advance()
               .childElementCursor();
-          String parentDirectory = "";
 
           while (null != project.getNext()) {
             String curLocation = project.getLocalName();
             if ("project_directory".equals(curLocation)) {
-              parentDirectory = project.collectDescendantText();
+              baseDir = new File(project.collectDescendantText());
             } else if ("checkpoints".equals(curLocation)) {
-              File projectDirectory = new File(parentDirectory);
               SMInputCursor filesCursor = project.descendantElementCursor(
                   "files").advance();
               int fileNb;
@@ -135,7 +132,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
               }
               result = new ArrayList<FileMetrics>(fileNb);
 
-              parseMetrics(projectDirectory, filesCursor.childElementCursor());
+              parseMetrics(filesCursor.childElementCursor());
             }
           }
         }
@@ -149,13 +146,13 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     return result;
   }
 
-  protected void parseMetrics(File projectDirectory, SMInputCursor fileCursor)
+  protected void parseMetrics(SMInputCursor fileCursor)
       throws XMLStreamException {
 
     SMEvent fileEvent;
     while ((fileEvent = fileCursor.getNext()) != null) {
       if (fileEvent.compareTo(SMEvent.START_ELEMENT) == 0) {
-        FileMetrics fileMetrics = createMetrics(projectDirectory, fileCursor);
+        FileMetrics fileMetrics = createMetrics(fileCursor);
         if (log.isDebugEnabled()) {
           log.debug("adding metrics for file " + fileMetrics);
         }
@@ -170,15 +167,15 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
    * @param fileNode
    * @return
    */
-  private FileMetrics createMetrics(File projectDirectory,
-      SMInputCursor fileCursor) throws XMLStreamException {
+  private FileMetrics createMetrics(SMInputCursor fileCursor) 
+    throws XMLStreamException {
+    
     String rawFileName = fileCursor.getAttrValue("file_name");
     String className = StringUtils.removeEnd(rawFileName, ".cs").replace('\\',
         '.');
     String namespace = StringUtils.substringBeforeLast(className, ".");
 
     FileMetrics fileMetric = new FileMetrics();
-    fileMetric.setProjectDirectory(projectDirectory);
     fileMetric.setClassName(className);
     fileMetric.setNamespace(namespace);
     

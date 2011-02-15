@@ -33,7 +33,6 @@ import java.util.List;
  * @author Jose CHILLAN May 5, 2009
  */
 public class FileMetrics extends SourceMetric {
-  private File projectDirectory;
   private File sourcePath;
   private List<MethodMetric> methods;
   private double averageComplexity;
@@ -208,25 +207,6 @@ public class FileMetrics extends SourceMetric {
    */
   public void setClassName(String className) {
     this.className = className;
-  }
-
-  /**
-   * Returns the projectDirectory.
-   * 
-   * @return The projectDirectory to return.
-   */
-  public File getProjectDirectory() {
-    return this.projectDirectory;
-  }
-
-  /**
-   * Sets the projectDirectory.
-   * 
-   * @param projectDirectory
-   *          The projectDirectory to set.
-   */
-  public void setProjectDirectory(File projectDirectory) {
-    this.projectDirectory = projectDirectory;
   }
 
   /**

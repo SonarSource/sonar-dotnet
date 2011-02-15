@@ -73,8 +73,7 @@ public class SourceMonitorResultXpathParser implements SourceMonitorResultParser
    * @see org.sonar.plugin.dotnet.srcmon.SourceMonitorResultParser#parse(java.io.File, java.io.File)
    */
   @Override
-  public List<FileMetrics> parse(File directory, File reportFile) {
-    this.baseDir = directory;
+  public List<FileMetrics> parse(File reportFile) {
     List<FileMetrics> result = new ArrayList<FileMetrics>();
 
     try {
@@ -158,7 +157,6 @@ public class SourceMonitorResultXpathParser implements SourceMonitorResultParser
     result.setCountCalls(countCalls);
     result.setCountMethodStatements(countMethodStatements);
     result.setAverageComplexity(averageComplexity);
-    result.setProjectDirectory(new File(directoryPath));
 
     // Builds the methods
     List<MethodMetric> extractMethods = extractMethods(fileNode, path);
