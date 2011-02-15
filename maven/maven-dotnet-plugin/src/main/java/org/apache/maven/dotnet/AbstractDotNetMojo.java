@@ -483,7 +483,8 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
         }
       }
     } catch (CommandLineException e) {
-      throw new MojoExecutionException("Failure executing commandline, ", e);
+      throw new MojoExecutionException("Failure during the " + reportType
+          + " generation, executing commandline:\n" + commandline, e);
     }
     return commandLineResult;
   }
@@ -538,12 +539,13 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
     getLog().debug("Exporting files for " + application);
     String contentFile = resourceDir + "/" + CONTENT_FILE_NAME;
     
-    if (contentFile==null) {
+    InputStream contentResource = getClassLoader().getResourceAsStream(
+        contentFile);
+    
+    if (contentResource==null) {
       throw new MojoExecutionException(application + " binaries were not found");
     }
     
-    InputStream contentResource = getClassLoader().getResourceAsStream(
-        contentFile);
     LineNumberReader reader = new LineNumberReader(new InputStreamReader(
         contentResource));
     String line = null;
