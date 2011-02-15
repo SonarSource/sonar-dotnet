@@ -26,18 +26,20 @@ public class CSharpPublicApiVisitorTest {
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.PUBLIC_API);
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.PUBLIC_API, CSharpMetric.PUBLIC_DOC_API);
 
     assertThat(project.getInt(CSharpMetric.PUBLIC_API), is(30));
+    assertThat(project.getInt(CSharpMetric.PUBLIC_DOC_API), is(4));
   }
 
   @Test
   public void testScanInterface() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleInterface.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.PUBLIC_API);
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.PUBLIC_API, CSharpMetric.PUBLIC_DOC_API);
 
     assertThat(project.getInt(CSharpMetric.PUBLIC_API), is(3));
+    assertThat(project.getInt(CSharpMetric.PUBLIC_DOC_API), is(1));
   }
 
   protected File readFile(String path) {

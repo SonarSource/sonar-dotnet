@@ -15,6 +15,7 @@ import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Comments;
 
 /**
  * Visitor that computes the number of statements.
@@ -55,21 +56,38 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
   public void visitNode(AstNode node) {
     CSharpGrammar g = getCSharpGrammar();
     AstNodeType nodeType = node.getType();
+    boolean isPublicApi = false;
     if (node.getType().equals(g.interfaceMethodDeclaration) || node.getType().equals(g.interfacePropertyDeclaration)
         || node.getType().equals(g.interfaceEventDeclaration) || node.getType().equals(g.interfaceIndexerDeclaration)) {
       // then we must look at the visibility of the enclosing interface definition
-      checkNodeForPublicModifier(node.findFirstParent(g.interfaceDeclaration), g.interfaceModifier);
-
+      isPublicApi = checkNodeForPublicModifier(node.findFirstParent(g.interfaceDeclaration), g.interfaceModifier);
     } else {
-      checkNodeForPublicModifier(node, modifiersMap.get(nodeType));
+      isPublicApi = checkNodeForPublicModifier(node, modifiersMap.get(nodeType));
+    }
+    if (isPublicApi) {
+      // let's see if it's documented
+      checkNodeForPreviousComments(node);
     }
   }
 
-  private void checkNodeForPublicModifier(AstNode currentNode, AstNodeType wantedChildrenType) {
+  private boolean checkNodeForPublicModifier(AstNode currentNode, AstNodeType wantedChildrenType) {
     List<AstNode> modifiers = currentNode.findDirectChildren(wantedChildrenType);
     for (AstNode astNode : modifiers) {
       if (astNode.getToken().getType().equals(CSharpKeyword.PUBLIC)) {
         peekSourceCode().add(CSharpMetric.PUBLIC_API, 1);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private void checkNodeForPreviousComments(AstNode node) {
+    int currentTokenLine = node.getToken().getLine();
+    int previousTokenLine = node.getToken().getPreviousToken().getLine();
+    Comments comments = getComments();
+    for (int lineIndex = currentTokenLine - 1; lineIndex > previousTokenLine; lineIndex--) {
+      if (comments.getCommentAtLine(lineIndex) != null) {
+        peekSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
         break;
       }
     }
