@@ -59,7 +59,6 @@ public class SourceMonitorSensorTest {
   
   
   @Test
-  @Ignore
   public void test() {
     // set up maven project
     MavenProject mvnProject = new MavenProject();

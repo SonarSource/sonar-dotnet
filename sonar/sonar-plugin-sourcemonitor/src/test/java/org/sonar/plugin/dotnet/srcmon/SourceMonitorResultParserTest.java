@@ -50,12 +50,13 @@ public class SourceMonitorResultParserTest {
 
   private void simpleTest(File reportFile) throws IOException {
     SourceMonitorResultParser parser = new SourceMonitorResultStaxParser();
+    File moneyFile = new File("target/test-classes/solution/MessyTestSolution/MessyTestApplication/Money.cs");
     List<FileMetrics> metrics = parser.parse(reportFile);
     assertNotNull(metrics);
     assertEquals(5, metrics.size());
     FileMetrics firstFile = metrics.get(0);
     assertEquals(62, firstFile.getComplexity());
-    assertTrue(firstFile.getSourcePath().getCanonicalPath().endsWith("Money.cs"));
+    assertEquals(moneyFile.getCanonicalPath(), firstFile.getSourcePath().getCanonicalPath());
     assertEquals(3, firstFile.getCountClasses());
     assertEquals(29, firstFile.getCommentLines());
     assertEquals(1.77, firstFile.getAverageComplexity(),0.00001D);
