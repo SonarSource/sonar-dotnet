@@ -3,7 +3,7 @@
 <sourcemonitor_metrics>
   <project version="2.6">
     <project_name>metrics-report,xml</project_name>
-    <project_directory>target\test-classes\solution\MessyTestSolution</project_directory>
+    <project_directory>target/test-classes/solution/MessyTestSolution</project_directory>
     <project_language>C#</project_language>
     <ignore_headers_footers>false</ignore_headers_footers>
     <metric_names name_count="15">

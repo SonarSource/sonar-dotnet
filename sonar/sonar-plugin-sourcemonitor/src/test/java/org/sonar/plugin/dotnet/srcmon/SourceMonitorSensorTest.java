@@ -41,7 +41,6 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
-import org.sonar.plugin.dotnet.core.resource.CSharpFile;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorPluginHandler;
 import org.sonar.plugin.dotnet.srcmon.SourceMonitorSensor;
