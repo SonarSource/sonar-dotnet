@@ -50,7 +50,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
 
   public CSharpAstScanner(SourceCode project, CSharpConfiguration conf) {
     this.project = project;
-    this.parser = new CSharpParser();
+    this.parser = new CSharpParser(conf);
     this.conf = conf;
   }
 

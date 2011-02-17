@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.cpd;
+package com.sonar.csharp.plugin.cpd;
 
 import java.io.File;
 import java.nio.charset.Charset;

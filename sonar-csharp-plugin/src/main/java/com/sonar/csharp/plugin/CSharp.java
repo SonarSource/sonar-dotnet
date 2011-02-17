@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp;
+package com.sonar.csharp.plugin;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;

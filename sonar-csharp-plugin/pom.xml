@@ -1,0 +1,197 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.sonarsource.csharp</groupId>
+		<artifactId>csharp</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>sonar-csharp-plugin</artifactId>
+	<name>SonarSource :: C# :: Sonar Plugin</name>
+
+	<packaging>sonar-plugin</packaging>
+	<description>Enable analysis and reporting on C# projects.</description>
+	<url>http://www.sonarsource.com/plugins/plugin-csharp</url>
+
+	<properties>
+		<sonar.plugin.class>com.sonar.csharp.plugin.CSharpPlugin</sonar.plugin.class>
+	</properties>
+
+	<dependencies>
+		<!-- C# -->
+		<dependency>
+			<groupId>com.sonarsource.csharp</groupId>
+			<artifactId>csharp-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sonarsource.csharp</groupId>
+			<artifactId>csharp-squid</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- sonarsource -->
+		<dependency>
+			<groupId>com.sonarsource.sslr</groupId>
+			<artifactId>sslr-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sonarsource.sslr</groupId>
+			<artifactId>sslr-impl</artifactId>
+		</dependency>
+
+		<!-- sonar open-source -->
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-duplications</artifactId>
+		</dependency>
+
+
+		<!-- Others -->
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+			<artifactId>dotnet-commons</artifactId>
+			<version>0.5-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-project</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+
+
+		<!-- Unit tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>${project.groupId}:csharp-squid</include>
+									<include>${project.groupId}:csharp-api</include>
+									<include>com.sonarsource.sslr:sslr-impl</include>
+									<include>com.sonarsource.sslr:sslr-api</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginKey>csharp</pluginKey>
+					<pluginName>C#</pluginName>
+					<pluginClass>${sonar.plugin.class}</pluginClass>
+					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
+					<skipDependenciesPackaging>true</skipDependenciesPackaging>
+					<addMavenDescriptor>false</addMavenDescriptor>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>obfuscation</id>
+			<activation>
+				<property>
+					<name>!skipObfuscation</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<dependencies>
+							<dependency>
+								<groupId>yguard</groupId>
+								<artifactId>yguard</artifactId>
+								<version>2.3.0.1</version>
+								<scope>system</scope>
+								<systemPath>${basedir}/lib/yguard-2.3.0.1.jar</systemPath>
+							</dependency>
+						</dependencies>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<configuration>
+									<tasks>
+										<property refid="maven.compile.classpath" name="mvn.classpath" />
+										<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" />
+										<yguard>
+											<inoutpair
+												in="${project.build.directory}/${project.build.finalName}.jar"
+												out="${project.build.directory}/${project.build.finalName}.jar" />
+											<rename logfile="${project.build.directory}/yguard.log.xml"
+												replaceClassNameStrings="true">
+												<keep>
+													<class classes="public" methods="protected" fields="public">
+														<patternset>
+															<include name="com.sonarsource.csharp.plugin.CSharpPlugin" />
+															<include name="com.sonar.csharp.CSharpAstScanner" />
+															<include name="com.sonar.csharp.CSharpConfiguration" />
+															<include name="com.sonar.csharp.CSharpConstants" />
+															<include name="com.sonar.sslr.api.**.*" />
+															<include name="com.sonar.csharp.api.**.*" />
+														</patternset>
+													</class>
+												</keep>
+												<adjust replaceContent="false" replacePath="false"
+													replaceName="false">
+													<include name="**/*.template" />
+													<include name="**/*.xml" />
+												</adjust>
+											</rename>
+											<externalclasses>
+												<pathelement path="${mvn.classpath}" />
+											</externalclasses>
+										</yguard>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

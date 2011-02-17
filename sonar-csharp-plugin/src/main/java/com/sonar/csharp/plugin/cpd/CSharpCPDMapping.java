@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.cpd;
+package com.sonar.csharp.plugin.cpd;
 
 import java.nio.charset.Charset;
 
@@ -13,8 +13,8 @@ import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 
-import com.sonar.csharp.CSharp;
-import com.sonar.csharp.CSharpConstants;
+import com.sonar.csharp.plugin.CSharp;
+import com.sonar.csharp.plugin.CSharpConstants;
 
 public class CSharpCPDMapping extends AbstractCpdMapping {
 
