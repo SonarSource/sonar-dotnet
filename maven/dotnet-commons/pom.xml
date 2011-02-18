@@ -12,18 +12,7 @@
   <packaging>jar</packaging>
   <name>Maven .Net common libraries</name>
   <description>Common tools to process .Net projects and solutions</description>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+ 
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -61,6 +50,10 @@
         <exclusion>
           <groupId>xalan</groupId>
           <artifactId>xalan</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.ibm.icu</groupId>
+          <artifactId>icu4j</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
