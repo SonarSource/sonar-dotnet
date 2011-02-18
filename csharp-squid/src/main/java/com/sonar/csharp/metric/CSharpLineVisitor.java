@@ -22,7 +22,7 @@ public class CSharpLineVisitor extends CSharpAstVisitor implements AstAndTokenVi
    */
   public void visitToken(Token token) {
     if (token.getType() == EOF) {
-      peekSourceCode().setMeasure(CSharpMetric.LINES, token.getLine());
+      peekPhysicalSourceCode().setMeasure(CSharpMetric.LINES, token.getLine());
     }
   }
 }

@@ -33,7 +33,7 @@ public class CSharpLocVisitor extends CSharpAstVisitor implements AstAndTokenVis
    */
   public void visitToken(Token token) {
     if (token.getType() != EOF && lastTokenLine != token.getLine()) {
-      peekSourceCode().add(CSharpMetric.LINES_OF_CODE, 1);
+      peekPhysicalSourceCode().add(CSharpMetric.LINES_OF_CODE, 1);
       lastTokenLine = token.getLine();
     }
   }

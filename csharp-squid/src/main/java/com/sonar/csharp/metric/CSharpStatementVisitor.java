@@ -30,6 +30,6 @@ public class CSharpStatementVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode node) {
-    peekSourceCode().add(CSharpMetric.STATEMENTS, 1);
+    peekPhysicalSourceCode().add(CSharpMetric.STATEMENTS, 1);
   }
 }

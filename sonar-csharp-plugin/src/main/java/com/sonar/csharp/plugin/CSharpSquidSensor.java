@@ -20,14 +20,14 @@ import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
-import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.api.SourceMethod;
 import org.sonar.squid.indexer.QueryByParent;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.csharp.api.squid.CSharpFile;
+import com.sonar.csharp.api.squid.CSharpMethod;
 
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor implements Sensor {
@@ -57,16 +57,16 @@ public final class CSharpSquidSensor implements Sensor {
   }
 
   private void saveMeasures(Squid squid, SensorContext context, Project project) {
-    Collection<SourceCode> squidFiles = squid.search(new QueryByType(SourceFile.class));
+    SourceCode squidProject = squid.getProject();
+    context.saveMeasure(project, CoreMetrics.PACKAGES, squidProject.getDouble(CSharpMetric.NAMESPACES));
+    context.saveMeasure(project, CoreMetrics.CLASSES, squidProject.getDouble(CSharpMetric.CLASSES));
+    context.saveMeasure(project, CoreMetrics.FUNCTIONS, squidProject.getDouble(CSharpMetric.METHODS));
 
+    Collection<SourceCode> squidFiles = squid.search(new QueryByType(CSharpFile.class));
     for (SourceCode squidFile : squidFiles) {
       File sonarFile = org.sonar.api.resources.File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
-
       context.saveMeasure(sonarFile, CoreMetrics.FILES, squidFile.getDouble(CSharpMetric.FILES));
-      context.saveMeasure(sonarFile, CoreMetrics.PACKAGES, squidFile.getDouble(CSharpMetric.NAMESPACES));
-      context.saveMeasure(sonarFile, CoreMetrics.CLASSES, squidFile.getDouble(CSharpMetric.CLASSES));
-      context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(CSharpMetric.METHODS));
       context.saveMeasure(sonarFile, CoreMetrics.LINES, squidFile.getDouble(CSharpMetric.LINES));
       context.saveMeasure(sonarFile, CoreMetrics.NCLOC, squidFile.getDouble(CSharpMetric.LINES_OF_CODE));
       context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, squidFile.getDouble(CSharpMetric.STATEMENTS));
@@ -91,7 +91,7 @@ public final class CSharpSquidSensor implements Sensor {
   }
 
   private void saveMethodComplexityDistribution(SourceCode squidFile, File sonarFile, SensorContext context, Squid squid) {
-    Collection<SourceCode> squidMethods = squid.search(new QueryByParent(squidFile), new QueryByType(SourceMethod.class));
+    Collection<SourceCode> squidMethods = squid.search(new QueryByParent(squidFile), new QueryByType(CSharpMethod.class));
     RangeDistributionBuilder complexityParagraphDistribution = new RangeDistributionBuilder(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION,
         FUNCTIONS_DISTRIB_BOTTOM_LIMITS);
     for (SourceCode squidMethod : squidMethods) {

@@ -5,17 +5,21 @@
  */
 package com.sonar.csharp.tree;
 
-import org.sonar.squid.api.SourceClass;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.csharp.api.squid.CSharpClass;
 import com.sonar.sslr.api.AstNode;
 
 /**
  * Visitor that creates classes resources and computes the number of classes.
  */
 public class CSharpClassVisitor extends CSharpAstVisitor {
+
+  private Map<String, CSharpClass> classesMap = Maps.newHashMap();
 
   /**
    * {@inheritDoc}
@@ -31,9 +35,13 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
   @Override
   public void visitNode(AstNode astNode) {
     String classSignature = extractClassSignature(astNode);
-    SourceClass clazz = new SourceClass(classSignature);
-    clazz.setMeasure(CSharpMetric.CLASSES, 1);
-    addSourceCode(clazz);
+    CSharpClass cSharpClass = classesMap.get(classSignature);
+    if (cSharpClass == null) {
+      cSharpClass = new CSharpClass(classSignature, classSignature);
+      cSharpClass.setMeasure(CSharpMetric.CLASSES, 1);
+      classesMap.put(classSignature, cSharpClass);
+    }
+    addLogicalSourceCode(cSharpClass);
   }
 
   /**
@@ -41,7 +49,7 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
    */
   @Override
   public void leaveNode(AstNode astNode) {
-    popSourceCode();
+    popLogicalSourceCode();
   }
 
   /**

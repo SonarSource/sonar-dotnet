@@ -29,7 +29,7 @@ public class CSharpAccessorVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode node) {
-    peekSourceCode().add(CSharpMetric.ACCESSORS, 1);
+    peekPhysicalSourceCode().add(CSharpMetric.ACCESSORS, 1);
   }
 
 }

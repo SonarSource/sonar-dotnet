@@ -65,10 +65,12 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   }
 
   public CSharpAstScanner scanFiles(Collection<File> files) {
-    Stack<SourceCode> resourcesStack = new Stack<SourceCode>();
-    resourcesStack.add(project);
+    Stack<SourceCode> physicalResourcesStack = new Stack<SourceCode>();
+    Stack<SourceCode> logicalResourcesStack = new Stack<SourceCode>();
+    physicalResourcesStack.add(project);
+    logicalResourcesStack.add(project);
     for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setSourceCodeStack(resourcesStack);
+      visitor.setSourceCodeStacks(physicalResourcesStack, logicalResourcesStack);
       visitor.setGrammar((CSharpGrammar) parser.getGrammar());
       visitor.init();
     }
@@ -79,7 +81,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
         String errorMessage = "Sonar is unable to analyze file : '" + file.getAbsolutePath() + "'";
         if ( !conf.stopSquidOnException()) {
           LOG.error(errorMessage, e);
-          notifyVisitorsOfException(resourcesStack, file, e);
+          notifyVisitorsOfException(physicalResourcesStack, logicalResourcesStack, file, e);
         } else {
           throw new AnalysisException(errorMessage, e);
         }
@@ -91,9 +93,10 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     return this;
   }
 
-  private void notifyVisitorsOfException(Stack<SourceCode> resourcesStack, File file, Exception e) {
+  private void notifyVisitorsOfException(Stack<SourceCode> physicalSourceCodeStack, Stack<SourceCode> logicalSourceCodeStack, File file,
+      Exception e) {
     CSharpFileVisitor filesVisitor = new CSharpFileVisitor();
-    filesVisitor.setSourceCodeStack(resourcesStack);
+    filesVisitor.setSourceCodeStacks(physicalSourceCodeStack, logicalSourceCodeStack);
     filesVisitor.setFile(file);
     filesVisitor.visitFile(null);
     for (CSharpAstVisitor visitor : getVisitors()) {

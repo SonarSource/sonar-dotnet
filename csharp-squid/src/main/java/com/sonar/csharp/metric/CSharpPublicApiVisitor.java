@@ -74,7 +74,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
     List<AstNode> modifiers = currentNode.findDirectChildren(wantedChildrenType);
     for (AstNode astNode : modifiers) {
       if (astNode.getToken().getType().equals(CSharpKeyword.PUBLIC)) {
-        peekSourceCode().add(CSharpMetric.PUBLIC_API, 1);
+        peekPhysicalSourceCode().add(CSharpMetric.PUBLIC_API, 1);
         return true;
       }
     }
@@ -87,7 +87,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
     Comments comments = getComments();
     for (int lineIndex = currentTokenLine - 1; lineIndex > previousTokenLine; lineIndex--) {
       if (comments.getCommentAtLine(lineIndex) != null) {
-        peekSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
+        peekPhysicalSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
         break;
       }
     }
