@@ -25,19 +25,19 @@
 						<configuration>
 							<artifactSet>
 								<includes>
-									<includes>com.sonarsource.csharp:csharp-api</includes>
-									<includes>com.sonarsource.csharp:csharp-squid</includes>
+									<include>com.sonarsource.csharp:csharp-api</include>
+									<include>com.sonarsource.csharp:csharp-squid</include>
 									<include>com.sonarsource.sslr:sslr-impl</include>
 									<include>com.sonarsource.sslr:sslr-api</include>
-									<includes>org.codehaus.sonar:sonar-squid</includes>
-									<includes>org.codehaus.sonar:sonar-channel</includes>
-									<includes>org.slf4j:slf4j-api</includes>
-									<includes>org.slf4j:jcl-over-slf4j</includes>
-									<includes>ch.qos.logback:logback-classic</includes>
-									<includes>ch.qos.logback:logback-core</includes>
-									<includes>commons-io:commons-io</includes>
-									<includes>commons-lang:commons-lang</includes>
-									<includes>com.google.collections:google-collections</includes>
+									<include>org.codehaus.sonar:sonar-squid</include>
+									<include>org.codehaus.sonar:sonar-channel</include>
+									<include>org.slf4j:slf4j-api</include>
+									<include>org.slf4j:jcl-over-slf4j</include>
+									<include>ch.qos.logback:logback-classic</include>
+									<include>ch.qos.logback:logback-core</include>
+									<include>commons-io:commons-io</include>
+									<include>commons-lang:commons-lang</include>
+									<include>com.google.collections:google-collections</include>
 								</includes>
 							</artifactSet>
 							<transformers>
