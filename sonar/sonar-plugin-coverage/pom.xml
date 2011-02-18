@@ -10,9 +10,10 @@
   <artifactId>sonar-plugin-coverage</artifactId>
   <name>Sonar Plugin for PartCover and NCover</name>
   <packaging>sonar-plugin</packaging>
+  
   <build>
     <plugins>
-      <plugin>
+     <plugin>
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-packaging-maven-plugin</artifactId>
       <version>0.1</version>
@@ -21,35 +22,7 @@
         <pluginKey>CoveragePlugin</pluginKey>
         <pluginClass>org.sonar.plugin.dotnet.coverage.CoveragePlugin</pluginClass>
       </configuration>
-    </plugin>
-    <!-- <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Plugin-Class>org.sonar.plugin.dotnet.coverage.CoveragePlugin
-              </Plugin-Class>
-            </manifestEntries>
-          </archive>
-        </configuration>
-      </plugin> -->  
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.7.2</version>
-        <configuration>
-          <useSystemClassLoader>false</useSystemClassLoader>
-        </configuration>
-      </plugin>
+     </plugin>
     </plugins>
   </build>
   <dependencies>
