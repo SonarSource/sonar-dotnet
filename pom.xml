@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
-    <version>6</version>
+    <version>8</version>
     <relativePath>../parent</relativePath>
   </parent>
 
@@ -15,6 +15,11 @@
   <version>0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
   <description>A Reactor Project for all the code quality relevant projects</description>
+  
+  <properties>
+	<jdk.min.version>1.6</jdk.min.version>
+	<animal-sniffer.signature.artifactId>java16</animal-sniffer.signature.artifactId>
+  </properties>
 
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
@@ -54,20 +59,47 @@
         <scope>test</scope>
         <version>1.8.5</version>
       </dependency>
-	  <dependency>
-		<groupId>org.powermock</groupId>
-		<artifactId>powermock-module-junit4</artifactId>
-		<version>1.4.7</version>
-		<scope>test</scope>
-	  </dependency>
-	  <dependency>
-		<groupId>org.powermock</groupId>
-		<artifactId>powermock-api-mockito</artifactId>
-		<version>1.4.7</version>
-		<scope>test</scope>
-	  </dependency>
     </dependencies>
   </dependencyManagement>
+  <build>
+	<plugins>
+	  <plugin>
+        <groupId>com.mycila.maven-license-plugin</groupId>
+        <artifactId>maven-license-plugin</artifactId>
+        <version>1.6.1</version>
+        <executions>
+          <execution>
+            <id>check-license</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>enforce-license-headers</id>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <header>src/license-header.txt</header>
+          <includes>
+            <include>src/main/java/**</include>
+            <include>src/test/java/**</include>
+          </includes>
+          <mapping>
+            <java>SLASHSTAR_STYLE</java>
+          </mapping>
+          <properties>
+            <year>2009</year>
+            <name>SonarSource</name>
+          </properties>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+	 
+	</plugins>
+  </build>
   <modules>
     <module>maven</module>
     <module>sonar</module>
