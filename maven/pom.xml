@@ -44,65 +44,10 @@
       <timezone>+2</timezone>
     </developer>
   </developers>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.codehaus.maven.dotnet</groupId>
-        <artifactId>dotnet-commons</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-        <type>jar</type>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-project</artifactId>
-        <version>2.0.4</version>
-        <type>jar</type>
-      </dependency>
-      <!-- Unit tests -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.5</version>
-        <type>jar</type>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
-        <scope>test</scope>
-        <version>1.7</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+ 
   <modules>
     <module>maven-dotnet-plugin</module>
     <module>dotnet-commons</module>
     <module>maven-dotnet-runtime</module>
   </modules>
-
-  <!--<profiles>
-    <profile>
-      <id>deploy-local</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>install</phase>
-                <configuration>
-                  <tasks>
-                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/sonar-${sonar-build-version}/extensions/plugins" failonerror="false" />
-                  </tasks>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>-->
 </project>
