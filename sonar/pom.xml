@@ -73,20 +73,6 @@
         <artifactId>sonar-squid</artifactId>
         <version>${sonar-build-version}</version>
       </dependency>      
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-project</artifactId>
-        <version>2.0.4</version>
-        <type>jar</type>
-      </dependency>
-      <!-- Unit tests -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.5</version>
-        <type>jar</type>
-        <scope>test</scope>
-      </dependency>
     </dependencies>
   </dependencyManagement>
   <modules>
