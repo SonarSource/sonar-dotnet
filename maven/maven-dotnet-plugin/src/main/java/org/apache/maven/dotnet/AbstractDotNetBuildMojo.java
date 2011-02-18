@@ -26,9 +26,9 @@ package org.apache.maven.dotnet;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import com.ibm.icu.util.StringTokenizer;
 
 /**
  * A base class for all build relevant mojos.
