@@ -20,10 +20,20 @@
 
 package org.sonar.plugin.dotnet.gallio;
 
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.advanceCursor;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.descendantElements;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.descendantSpecifiedElements;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.findElementName;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.isAnEndElement;
+import static org.sonar.plugin.dotnet.gallio.StaxHelper.nextPosition;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,8 +54,6 @@ import org.sonar.plugin.dotnet.core.SonarPluginException;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.*;
-
 /**
  * Stax implementation of the Gallio result report parser
  * 
@@ -62,17 +70,7 @@ public class GallioResultStaxParser implements GallioResultParser {
   private static final String MEMBER = "member";
   private static final String PATH = "path";
   private static final String LINE = "line";
-  /**
-   * Outcomes for the test
-   */
-  private final static String OUTCOME_OK = "passed";
-  private final static String OUTCOME_FAILURE = "failed";
-  private final static String OUTCOME_SKIPPED = "skipped";
-
-  /**
-   * Categories for the test
-   */
-  private final static String CATEGORY_ERROR = "error";
+  
   private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
 
 
@@ -97,7 +95,7 @@ public class GallioResultStaxParser implements GallioResultParser {
       advanceCursor(testModelCursor);
       log.debug("TestModelCursor initialized at : {}", findElementName(testModelCursor));
       testsDetails = recursiveParseTestsIds(testModelCursor, testsDetails, null, null);
-
+      
       QName testPackageRunTag = new QName(GALLIO_URI, "testPackageRun");
       testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testPackageRunTag));
       advanceCursor(testModelCursor);
@@ -111,7 +109,7 @@ public class GallioResultStaxParser implements GallioResultParser {
 
       return reports;
     }catch(XMLStreamException e){
-      throw new SonarPluginException(GALLIO_REPORT_PARSING_ERROR,e);
+      throw new SonarPluginException(GALLIO_REPORT_PARSING_ERROR, e);
     }
     
   }
@@ -291,7 +289,7 @@ public class GallioResultStaxParser implements GallioResultParser {
       }
 
       log.debug("---status : {}", status);
-      TestStatus executionStatus = computeStatus(status, category);
+      TestStatus executionStatus = TestStatus.computeStatus(status, category);
       nextPosition(currentTestTags);
       detail.setStatus(executionStatus);
       if ((executionStatus == TestStatus.FAILED) || 
@@ -301,23 +299,6 @@ public class GallioResultStaxParser implements GallioResultParser {
       return detail;
     }
     return null;
-  }
-
-  private TestStatus computeStatus(String status, String category) {
-    // We convert the Gallio result into 4 status
-    TestStatus result = null;
-    if (OUTCOME_OK.equals(status)) {
-      result = TestStatus.SUCCESS;
-    } else if (OUTCOME_SKIPPED.equals(status)) {
-      result = TestStatus.SKIPPED;
-    } else if (OUTCOME_FAILURE.equals(status)) {
-      if (CATEGORY_ERROR.equals(category)) {
-        result = TestStatus.ERROR;
-      } else {
-        result = TestStatus.FAILED;
-      }
-    }
-    return result;
   }
 
   private TestCaseDetail getMessages(SMInputCursor currentTestTags, TestCaseDetail detail){
@@ -381,13 +362,23 @@ public class GallioResultStaxParser implements GallioResultParser {
     Set<UnitTestReport> result = new HashSet<UnitTestReport>();
     Set<String> testIds = testCaseDetailsByTestIds.keySet();
     //We associate the descriptions with the test details
+    List<String> testsToRemove = new ArrayList<String>();
     for (String testId : testIds) {
       TestDescription description = testsDescriptionByTestIds.get(testId);
       TestCaseDetail testCaseDetail = testCaseDetailsByTestIds.get(testId);
-      testCaseDetail.merge(description);
-      testCaseDetailsByTestIds.put(testId, testCaseDetail);
+      if(description == null){
+        log.warn("Test {} is not considered as a testCase in your xml, there should not be any testStep associated, please check your gallio report. Skipping result", testId);
+        testsToRemove.add(testId);
+      }else{
+        testCaseDetail.merge(description);
+        testCaseDetailsByTestIds.put(testId, testCaseDetail);
+      }
     }
-
+    
+    for(String testToRemove : testsToRemove){
+      testCaseDetailsByTestIds.remove(testToRemove);
+    }
+    
     Collection<TestCaseDetail> testCases = testCaseDetailsByTestIds.values();
     Multimap<String, TestCaseDetail> testCaseDetailsBySrcKey = ArrayListMultimap.create();
     for (TestCaseDetail testCaseDetail : testCases) {
@@ -399,7 +390,7 @@ public class GallioResultStaxParser implements GallioResultParser {
     log.debug("testCaseDetails size : {}", String.valueOf(testCaseDetailsByTestIds.size()));
 
     Set<String> pathKeys = testCaseDetailsBySrcKey.keySet();
-    log.debug("There are {} different pathKeys",String.valueOf(pathKeys.size()));
+    log.debug("There are {} different pathKeys", String.valueOf(pathKeys.size()));
     for (String pathKey : pathKeys) {
       //If the Key already exists in the map, we add the details
       if(unitTestsReports.containsKey(pathKey)){

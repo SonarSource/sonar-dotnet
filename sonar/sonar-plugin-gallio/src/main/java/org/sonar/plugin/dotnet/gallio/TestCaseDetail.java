@@ -154,7 +154,7 @@ public class TestCaseDetail {
   public void merge(TestDescription description) {
     this.sourceFile = description.getSourceFile();
     this.name = description.getMethodName();
-    if(description.getAssemblyName()==null){
+    if(description.getAssemblyName() == null){
       this.assemblyName="AssemblyNotFound";
     }
     else{
@@ -179,7 +179,7 @@ public class TestCaseDetail {
     return result;
   }
 
-  @SuppressWarnings("IfStmtsMustUseBraces")
+  @SuppressWarnings("all")
   @Override
   public boolean equals(Object obj) {
     if (this == obj)

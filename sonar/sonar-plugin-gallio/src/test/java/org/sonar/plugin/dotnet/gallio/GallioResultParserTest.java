@@ -32,31 +32,37 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
-import com.thoughtworks.xstream.XStream;
 
 public class GallioResultParserTest
 {
 
 	private final static Logger log = LoggerFactory.getLogger(GallioResultParserTest.class);
+  private File sourcefile;
+  private GallioResultParser parser;
 	
-	@Test
-	public void testReportParsing()
-	{
-	  String fileName = "gallio-report.xml";
-	  GallioResultParser parser = new GallioResultStaxParser();
-		//URL sampleURL = Thread.currentThread().getContextClassLoader().getResource(fileName);
-		File sampleFile = new File("target/test-classes",fileName);
-		Collection<UnitTestReport> reports = parser.parse(sampleFile);
+  @Before
+	public void setUp() {
+	  sourcefile 
+	    = new File("c:\\HOMEWARE\\codehaus\\dotnet\\maven\\dotnet-commons\\src\\test\\resources\\solution\\Example\\Example.Core.Tests\\TestMoney.cs");
+	  parser = new GallioResultStaxParser();
+	}
+	
+  private Collection<UnitTestReport> parse(String fileName) {
+    File sampleFile = new File("target/test-classes",fileName);
+    return parser.parse(sampleFile);
+  }
+  
+  @Test
+  public void testReportParsing() {
+    Collection<UnitTestReport> reports = parse("gallio-report.xml");
 		
-		if(log.isDebugEnabled()){
-		  log.debug(new XStream().toXML(reports));  
-		}
 		Predicate<UnitTestReport> reportPredicate = new Predicate<UnitTestReport>() {
 			
 			@Override
@@ -89,38 +95,26 @@ public class GallioResultParserTest
   @Test
   public void testReportAndTestCaseDetailsParsing()
 	{
-    String fileName = "gallio-report-multiple.xml";
-    GallioResultParser parser = new GallioResultStaxParser();
-		
-		File sampleFile = new File("target/test-classes",fileName);
-
-		Collection<UnitTestReport> reports = parser.parse(sampleFile);
-    if(log.isDebugEnabled()){
-      log.debug(new XStream().toXML(reports));  
-    }
-		final UnitTestReport randomUnit = new UnitTestReport();
-		randomUnit.setAssemblyName("Example.Core.Tests");
-		randomUnit.setAsserts(33);
-		randomUnit.setErrors(0);
-		randomUnit.setFailures(1);
-		randomUnit.setSkipped(0);
-		randomUnit.setTests(21);
-		randomUnit.setTimeMS(81);
-		
-		Predicate<UnitTestReport> reportPredicate = new Predicate<UnitTestReport>() {
-			@Override
-			public boolean apply(UnitTestReport report) {
-				
-				return randomUnit.getAssemblyName().equals(report.getAssemblyName()) && 33==report.getAsserts() && 21==report.getTests();
-			}
-		};
-		
+    Collection<UnitTestReport> reports = parse("gallio-report-multiple.xml");
+    
 		assertFalse("Could not parse a Gallio report", reports.isEmpty());
-		Iterator<UnitTestReport> it = reports.iterator();
 		
-		assertTrue(it.hasNext());
+
+		final UnitTestReport expectedReport = new UnitTestReport();
+    expectedReport.setAssemblyName("Example.Core.Tests");
+    expectedReport.setAsserts(33);
+    expectedReport.setErrors(0);
+    expectedReport.setFailures(1);
+    expectedReport.setSkipped(0);
+    expectedReport.setTests(21);
+    expectedReport.setTimeMS(81);
+    expectedReport.setSourceFile(sourcefile);
 		
-		UnitTestReport firstReport = Iterators.find(it,reportPredicate);
+    Iterator<UnitTestReport> it = reports.iterator();
+		UnitTestReport firstReport = it.next();
+    assertEquals(expectedReport, firstReport);
+    
+    
 		final TestCaseDetail testCaseDetail = new TestCaseDetail();
 		testCaseDetail.setCountAsserts(3);
 		testCaseDetail.setName("BagMultiply");
@@ -143,5 +137,39 @@ public class GallioResultParserTest
 		assertTrue(Iterators.any(testCaseDetails,testCaseDetailPredicate));
 
 	}
+  
+  @Test
+  public void testReportParsingInconclusive() {
+    Collection<UnitTestReport> reports = parse("gallio-report-inconclusive.xml");
+    assertEquals(1, reports.size());
+    
+    final UnitTestReport expectedReport = new UnitTestReport();
+    expectedReport.setAssemblyName("Example.Core.Tests");
+    expectedReport.setAsserts(32);
+    expectedReport.setErrors(0);
+    expectedReport.setFailures(1);
+    expectedReport.setSkipped(1);
+    expectedReport.setTests(21);
+    expectedReport.setTimeMS(232);
+    expectedReport.setSourceFile(sourcefile);
+    
+    Iterator<UnitTestReport> it = reports.iterator();
+    UnitTestReport firstReport = it.next();
+    assertEquals(expectedReport, firstReport);
 
+  }
+  
+  public static class UnitTestReportpredicate implements Predicate<UnitTestReport> {
+    
+    private final UnitTestReport referenceReport;
+    
+    public UnitTestReportpredicate(UnitTestReport referenceReport) {
+      this.referenceReport = referenceReport;
+    }
+    
+    @Override
+    public boolean apply(UnitTestReport report) {
+      return referenceReport.equals(report);
+    }
+  }
 }

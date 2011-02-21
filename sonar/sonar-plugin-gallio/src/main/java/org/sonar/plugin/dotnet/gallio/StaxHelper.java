@@ -48,7 +48,7 @@ public class StaxHelper {
     try{
       return Integer.valueOf(cursor.getAttrValue(attributeName));
     }catch(XMLStreamException e){
-      throw new SonarPluginException("Error while retrieving attribute value", e);
+      throw new SonarPluginException("Error while retrieving int attribute value", e);
     }
   }
 
@@ -112,7 +112,7 @@ public class StaxHelper {
     try{
       return cursor.descendantElementCursor(specifiedElements);
     }catch(XMLStreamException e){
-      throw new SonarPluginException("Error while trying to get descendant specified elements", e);
+      throw new SonarPluginException("Error while trying to get descendant specified elements " + specifiedElements, e);
     }
   }
 
@@ -120,7 +120,7 @@ public class StaxHelper {
     try{
       return cursor.descendantElementCursor(specifiedElements);
     }catch(XMLStreamException e){
-      throw new SonarPluginException("Error while trying to get descendant specified elements", e);
+      throw new SonarPluginException("Error while trying to get descendant specified elements" + specifiedElements, e);
     }
   }
 

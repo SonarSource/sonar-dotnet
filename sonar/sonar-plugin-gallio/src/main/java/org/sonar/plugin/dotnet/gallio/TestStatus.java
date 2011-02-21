@@ -30,8 +30,21 @@ package org.sonar.plugin.dotnet.gallio;
  * @author Jose CHILLAN Jun 16, 2009
  */
 public enum TestStatus {
-  SUCCESS("ok"), FAILED("failure"), ERROR("error"), SKIPPED("skipped");
+  SUCCESS("ok"), FAILED("failure"), ERROR("error"), SKIPPED("skipped"), INCONCLUSIVE("skipped");
 
+  /**
+   * Outcomes for the test
+   */
+  private final static String OUTCOME_OK = "passed";
+  private final static String OUTCOME_FAILURE = "failed";
+  private final static String OUTCOME_SKIPPED = "skipped";
+  /**
+   * Categories for the test
+   */
+  private final static String CATEGORY_ERROR = "error";
+  
+  
+  
   /** textual representation of the status in the xml report used by sonar */
   private final String sonarStatus;
 
@@ -41,6 +54,30 @@ public enum TestStatus {
   
   public String getSonarStatus() {
     return sonarStatus;
+  }
+  
+  /**
+   * Convert a gallio status & category pair into a TestStatus instance
+   * @param status
+   * @param category
+   * @return
+   */
+  public static TestStatus computeStatus(String status, String category) {
+    final TestStatus result;
+    if (OUTCOME_OK.equals(status)) {
+      result = TestStatus.SUCCESS;
+    } else if (OUTCOME_SKIPPED.equals(status)) {
+      result = TestStatus.SKIPPED;
+    } else if (OUTCOME_FAILURE.equals(status)) {
+      if (CATEGORY_ERROR.equals(category)) {
+        result = TestStatus.ERROR;
+      } else {
+        result = TestStatus.FAILED;
+      }
+    } else {
+      result = TestStatus.INCONCLUSIVE;
+    }
+    return result;
   }
   
 }
