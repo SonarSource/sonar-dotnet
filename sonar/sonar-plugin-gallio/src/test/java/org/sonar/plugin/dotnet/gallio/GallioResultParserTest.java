@@ -50,7 +50,8 @@ public class GallioResultParserTest
   @Before
 	public void setUp() {
 	  sourcefile 
-	    = new File("c:\\HOMEWARE\\codehaus\\dotnet\\maven\\dotnet-commons\\src\\test\\resources\\solution\\Example\\Example.Core.Tests\\TestMoney.cs");
+	    = new File("C:\\HOMEWARE\\codehaus\\dotnet\\maven\\dotnet-commons\\src\\test\\resources\\solution\\Example\\Example.Core.Tests\\TestMoney.cs");
+	                
 	  parser = new GallioResultStaxParser();
 	}
 	
@@ -118,7 +119,7 @@ public class GallioResultParserTest
 		final TestCaseDetail testCaseDetail = new TestCaseDetail();
 		testCaseDetail.setCountAsserts(3);
 		testCaseDetail.setName("BagMultiply");
-		testCaseDetail.setSourceFile(new File("c:\\HOMEWARE\\codehaus\\dotnet\\maven\\dotnet-commons\\src\\test\\resources\\solution\\Example\\Example.Core.Tests\\TestMoney.cs"));
+		testCaseDetail.setSourceFile(sourcefile);
 		testCaseDetail.setStatus(TestStatus.SUCCESS);
 		testCaseDetail.setTimeMillis(17);
 		
