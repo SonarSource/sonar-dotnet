@@ -11,15 +11,45 @@
 
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>parent</artifactId>
-  <name>.Net code quality projects</name>
-  <version>0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <version>0.5-SNAPSHOT</version>
+
+  <name>.Net code quality projects</name>
   <description>A Reactor Project for all the code quality relevant projects</description>
-  
-  <properties>
-	<jdk.min.version>1.6</jdk.min.version>
-	<animal-sniffer.signature.artifactId>java16</animal-sniffer.signature.artifactId>
-  </properties>
+  <inceptionYear>2010</inceptionYear>
+  <licenses>
+    <license>
+      <name>GNU Lesser General Public License (LGPL), v.3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>jose</id>
+      <name>Jose CHILLAN</name>
+      <email>jose.chillan@codehaus.org</email>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <id>alex</id>
+      <name>Alexandre VICTOOR</name>
+      <email>alexvictoor@codehaus.org</email>
+      <roles>
+        <role>architect</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+  </developers>
+
+  <modules>
+    <module>maven</module>
+    <module>sonar</module>
+  </modules>
 
   <scm>
     <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
@@ -30,13 +60,17 @@
     <system>JIRA</system>
     <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
   </issueManagement>
-  <licenses>
-    <license>
-      <name>GNU Lesser General Public License (LGPL), v.3</name>
-      <url>http://www.gnu.org/licenses/lgpl.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+  
+  <properties>
+    <jdk.min.version>1.6</jdk.min.version>
+    <animal-sniffer.signature.artifactId>java16</animal-sniffer.signature.artifactId>
+
+    <!-- License header configuration -->
+    <license.title>Maven and Sonar plugin for .Net</license.title>
+    <license.owner>Jose Chillan and Alexandre Victoor</license.owner>
+    <license.mailto>mailto: jose.chillan@codehaus.org or alexvictoor@codehaus.org</license.mailto>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -61,47 +95,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <build>
-	<plugins>
-	  <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.6.1</version>
-        <executions>
-          <execution>
-            <id>check-license</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>enforce-license-headers</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <header>src/license-header.txt</header>
-          <includes>
-            <include>src/main/java/**</include>
-            <include>src/test/java/**</include>
-          </includes>
-          <mapping>
-            <java>SLASHSTAR_STYLE</java>
-          </mapping>
-          <properties>
-            <year>2009</year>
-            <name>SonarSource</name>
-          </properties>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-	 
-	</plugins>
-  </build>
-  <modules>
-    <module>maven</module>
-    <module>sonar</module>
-  </modules>
 </project>

@@ -6,44 +6,19 @@
     <artifactId>parent</artifactId>
     <version>0.5-SNAPSHOT</version>
   </parent>
+
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>maven-dotnet</artifactId>
-  <name>.Net maven integration</name>
-  <url>http://maven-dotnet-plugin.appspot.com</url>
-  <version>0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <version>0.5-SNAPSHOT</version>
+
+  <name>.Net maven integration</name>
   <description>A Reactor project for the .Net maven integration</description>
+  <url>http://maven-dotnet-plugin.appspot.com</url>
+
   <prerequisites>
     <maven>2.1</maven>
   </prerequisites>
-  <inceptionYear>2009</inceptionYear>
-  <licenses>
-    <license>
-      <name>GNU Lesser General Public License (LGPL), v.3</name>
-      <url>http://www.gnu.org/licenses/lgpl.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>  
-  <developers>
-    <developer>
-      <id>jose</id>
-      <name>Jose CHILLAN</name>
-      <email>jose.chillan@codehaus.org</email>
-      <roles>
-        <role>architect</role>
-      </roles>
-      <timezone>+2</timezone>
-    </developer>
-    <developer>
-      <id>alex</id>
-      <name>Alexandre VICTOOR</name>
-      <email>alexvictoor@codehaus.org</email>
-      <roles>
-        <role>architect</role>
-      </roles>
-      <timezone>+2</timezone>
-    </developer>
-  </developers>
  
   <modules>
     <module>maven-dotnet-plugin</module>
