@@ -20,11 +20,11 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.descendantElements;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeIntValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.isAStartElement;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.nextPosition;
+import static org.sonar.plugin.dotnet.core.StaxHelper.descendantElements;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeIntValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.isAStartElement;
+import static org.sonar.plugin.dotnet.core.StaxHelper.nextPosition;
 
 import java.util.ArrayList;
 import java.util.List;

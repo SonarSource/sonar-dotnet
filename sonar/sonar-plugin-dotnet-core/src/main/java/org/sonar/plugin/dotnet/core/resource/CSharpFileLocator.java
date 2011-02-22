@@ -77,7 +77,7 @@ public class CSharpFileLocator implements BatchExtension {
         fileResource = null;
       }
     } else {
-      log.error("Unable to ge resource for path {}", file);
+      log.error("Unable to get resource for path {}", file);
       fileResource = null;
     }
 
@@ -86,7 +86,7 @@ public class CSharpFileLocator implements BatchExtension {
   
   public Resource<?> getResource(Project project, String filePath) {
     if (log.isDebugEnabled()) {
-      log.debug("Getting resource for path: " + filePath);
+      log.debug("Getting resource for path {}", filePath);
     }
     File file = new File(filePath);
     return getResource(project, file);
@@ -94,7 +94,7 @@ public class CSharpFileLocator implements BatchExtension {
   
   public Resource<?> getResource(Project project, String path, String fileName) {
     if (log.isDebugEnabled()) {
-      log.debug("Getting resource for path: " + path + " " + fileName);
+      log.debug("Getting resource for path {} {}", path, fileName);
     }
     File file = new File(path, fileName);
     return getResource(project, file);

@@ -20,7 +20,7 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
 
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;

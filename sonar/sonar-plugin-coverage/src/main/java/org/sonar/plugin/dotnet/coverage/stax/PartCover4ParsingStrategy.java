@@ -20,10 +20,10 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.advanceCursor;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findElementName;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.isAStartElement;
+import static org.sonar.plugin.dotnet.core.StaxHelper.advanceCursor;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findElementName;
+import static org.sonar.plugin.dotnet.core.StaxHelper.isAStartElement;
 
 import java.util.HashMap;
 import java.util.Map;

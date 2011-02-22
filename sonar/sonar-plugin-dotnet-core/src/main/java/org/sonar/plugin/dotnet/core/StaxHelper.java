@@ -18,8 +18,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugin.dotnet.coverage.stax;
+package org.sonar.plugin.dotnet.core;
 
+import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 
@@ -36,43 +37,43 @@ import org.sonar.plugin.dotnet.core.SonarPluginException;
 public class StaxHelper {
 
   public static String findAttributeValue(SMInputCursor cursor, String attributeName){
-    String attributeValue;
     try{
-      attributeValue = cursor.getAttrValue(attributeName);
+      return cursor.getAttrValue(attributeName);
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while retrieving attribute value", e);
     }
-    return attributeValue;
   }
 
   public static int findAttributeIntValue(SMInputCursor cursor, String attributeName){
-    int attributeValue;
     try{
-      attributeValue = Integer.valueOf(cursor.getAttrValue(attributeName));
+      return Integer.valueOf(cursor.getAttrValue(attributeName));
     }catch(XMLStreamException e){
-      throw new SonarPluginException("Error while retrieving attribute value", e);
+      throw new SonarPluginException("Error while retrieving int attribute value", e);
     }
-    return attributeValue;
   }
-  
+
   public static boolean isAStartElement(SMInputCursor cursor){
-    boolean isStartElement = false;
     try{
-      isStartElement = cursor.asEvent().isStartElement();
+      return cursor.asEvent().isStartElement();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while testing if the cursor were a start element", e);
     }
-    return isStartElement;
   }
 
-  public static String findElementName(SMInputCursor cursor){
-    String elementValue;
+  public static boolean isAnEndElement(SMInputCursor cursor){
     try{
-      elementValue = cursor.getLocalName();
+      return cursor.asEvent().isEndElement();
+    }catch(XMLStreamException e){
+      throw new SonarPluginException("Error while testing if the cursor were a end element", e);
+    }
+  }
+  
+  public static String findElementName(SMInputCursor cursor){
+    try{
+      return cursor.getLocalName();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while retrieving element name", e);
     }
-    return elementValue;
   }
 
   public static void advanceCursor(SMInputCursor cursor){
@@ -84,42 +85,50 @@ public class StaxHelper {
   }
 
   public static SMEvent nextPosition(SMInputCursor cursor){
-    SMEvent nextEvent;
     try{
-      nextEvent = cursor.getNext();
+      return cursor.getNext();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while trying to go to the next cursor position", e);
     }
-    return nextEvent;
   }
 
   public static XMLEvent findXMLEvent(SMInputCursor cursor){
-    XMLEvent itsEvent;
     try{
-      itsEvent = cursor.asEvent();
+      return cursor.asEvent();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while trying to get XMLEvent", e);
     }
-    return itsEvent;
   }
 
   public static SMInputCursor descendantElements(SMInputCursor cursor){
-    SMInputCursor pointTag;
     try{
-      pointTag = cursor.descendantElementCursor();
+      return cursor.descendantElementCursor();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while trying to get descendant elements", e);
     }
-    return pointTag;
+  }
+
+  public static SMInputCursor descendantSpecifiedElements(SMInputCursor cursor, String specifiedElements){
+    try{
+      return cursor.descendantElementCursor(specifiedElements);
+    }catch(XMLStreamException e){
+      throw new SonarPluginException("Error while trying to get descendant specified elements", e);
+    }
+  }
+
+  public static SMInputCursor descendantSpecifiedElements(SMInputCursor cursor, QName specifiedElements){
+    try{
+      return cursor.descendantElementCursor(specifiedElements);
+    }catch(XMLStreamException e){
+      throw new SonarPluginException("Error while trying to get descendant specified elements", e);
+    }
   }
 
   public static String findNextElementName(SMInputCursor cursor){
-    String nextElementName;
     try{
-      nextElementName = cursor.advance().getLocalName();
+      return cursor.advance().getLocalName();
     }catch(XMLStreamException e){
       throw new SonarPluginException("Error while trying to get the next element name", e);
     }
-    return nextElementName;
   }
 }

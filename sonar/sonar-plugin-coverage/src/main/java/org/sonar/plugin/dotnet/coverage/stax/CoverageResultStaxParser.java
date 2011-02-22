@@ -20,11 +20,11 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.descendantElements;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findElementName;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findXMLEvent;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.nextPosition;
+import static org.sonar.plugin.dotnet.core.StaxHelper.descendantElements;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findElementName;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findXMLEvent;
+import static org.sonar.plugin.dotnet.core.StaxHelper.nextPosition;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,12 +65,12 @@ public class CoverageResultStaxParser implements PointParserCallback, BatchExten
   private final static Logger log = LoggerFactory.getLogger(CoverageResultStaxParser.class);
 
   private final CSharpFileLocator fileLocator;
-  
+
   private Map<Integer, FileCoverage> sourceFilesById;
   private final Map<String, ProjectCoverage> projectsByAssemblyName;
   private final List<AbstractParsingStrategy> parsingStrategies;
   private AbstractParsingStrategy currentStrategy;
-  
+
 
   /**
    * Constructs a @link{CoverageResultStaxParser}.

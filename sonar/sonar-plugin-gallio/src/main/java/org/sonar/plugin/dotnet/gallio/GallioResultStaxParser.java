@@ -20,13 +20,13 @@
 
 package org.sonar.plugin.dotnet.gallio;
 
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.advanceCursor;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.descendantElements;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.descendantSpecifiedElements;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.findElementName;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.isAnEndElement;
-import static org.sonar.plugin.dotnet.gallio.StaxHelper.nextPosition;
+import static org.sonar.plugin.dotnet.core.StaxHelper.advanceCursor;
+import static org.sonar.plugin.dotnet.core.StaxHelper.descendantElements;
+import static org.sonar.plugin.dotnet.core.StaxHelper.descendantSpecifiedElements;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findElementName;
+import static org.sonar.plugin.dotnet.core.StaxHelper.isAStartElement;
+import static org.sonar.plugin.dotnet.core.StaxHelper.nextPosition;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -118,11 +118,11 @@ public class GallioResultStaxParser implements GallioResultParser {
       Map<String, TestDescription> testDetails, File sourceFile, String parentAssemblyName){
     
     QName testTag = new QName(GALLIO_URI, "test");
-    if(!isAnEndElement(rootCursor)){
+    if(isAStartElement(rootCursor)){
       // Get all the tests
       SMInputCursor currentTest = descendantSpecifiedElements(rootCursor, testTag);
       String eltName;
-      while (null != nextPosition(currentTest)) {
+      while (null != nextPosition(currentTest) && isAStartElement(currentTest)) {
         TestDescription testDescription = new TestDescription();
         String id = findAttributeValue(currentTest, "id");
         String name = findAttributeValue(currentTest, "name");
@@ -227,7 +227,7 @@ public class GallioResultStaxParser implements GallioResultParser {
     QName testStepRunTag = new QName(GALLIO_URI, "testStepRun");
     SMInputCursor currentTestStepRun = descendantSpecifiedElements(rootCursor, testStepRunTag);
     String eltName = "";
-    while (null != nextPosition(currentTestStepRun)) {
+    while (null != nextPosition(currentTestStepRun) && isAStartElement(currentTestStepRun)) {
       // currentTestTags represents the different tests
       SMInputCursor currentTestTags = descendantElements(currentTestStepRun);
       nextPosition(currentTestTags);
@@ -329,11 +329,14 @@ public class GallioResultStaxParser implements GallioResultParser {
         .descendantElementCursor().advance()
         .descendantElementCursor();
         while (null != nextPosition(currentTestLogStreamSectionsTags)) {
-          String sectionName = findAttributeValue(currentTestLogStreamSectionsTags, "name");
-          log.debug("----section name : {}", sectionName);
-          SMInputCursor sectionContentsChild = currentTestLogStreamSectionsTags
-          .descendantElementCursor().advance()
-          .descendantElementCursor().advance();
+          SMInputCursor sectionContentsChild = currentTestLogStreamSectionsTags;
+          if("section".equals(findElementName(currentTestLogStreamSectionsTags))){
+            String sectionName = findAttributeValue(currentTestLogStreamSectionsTags, "name");
+            log.debug("----section name : {}", sectionName);
+            sectionContentsChild = currentTestLogStreamSectionsTags
+            .descendantElementCursor().advance()
+            .descendantElementCursor().advance();
+          }
           if( "text".equals( findElementName(sectionContentsChild) ) ){
             String message = sectionContentsChild.collectDescendantText();
             log.debug("Error Message is : {}", message);
@@ -350,6 +353,8 @@ public class GallioResultStaxParser implements GallioResultParser {
               detail.setStackTrace(stackTrace);
             }
           }
+          
+          
         }
       }
     }catch(XMLStreamException e){

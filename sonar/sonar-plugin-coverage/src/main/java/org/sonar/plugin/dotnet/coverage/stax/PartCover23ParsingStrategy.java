@@ -20,8 +20,8 @@
 
 package org.sonar.plugin.dotnet.coverage.stax;
 
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findAttributeValue;
-import static org.sonar.plugin.dotnet.coverage.stax.StaxHelper.findElementName;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findAttributeValue;
+import static org.sonar.plugin.dotnet.core.StaxHelper.findElementName;
 
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class PartCover23ParsingStrategy extends PartCover2ParsingStrategy {
 
   private final static Logger log = LoggerFactory
   .getLogger(PartCover23ParsingStrategy.class);
-  
+
   public PartCover23ParsingStrategy() {
     setModuleTag("Type");
     setFileTag("File");
@@ -64,5 +64,5 @@ public class PartCover23ParsingStrategy extends PartCover2ParsingStrategy {
     }
     return result;
   }
-  
+
 }

@@ -160,6 +160,12 @@ public class GallioResultParserTest
 
   }
   
+  @Test
+  public void testSectionBugReportParsing() {
+    Collection<UnitTestReport> reports = parse("gallio-sectionbug-report.xml");
+    assertTrue(reports.size() >= 1);
+  }
+  
   public static class UnitTestReportpredicate implements Predicate<UnitTestReport> {
     
     private final UnitTestReport referenceReport;
