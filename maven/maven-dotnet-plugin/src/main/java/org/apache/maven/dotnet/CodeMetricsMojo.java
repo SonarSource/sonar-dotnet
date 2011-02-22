@@ -108,7 +108,7 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
    * Root directory of the solution. SourceMonitor will analyse 
    * C# source files located in this directory and sub directories.
    * 
-   * @parameter expression="${metrics.source.directory}"  
+   * @parameter expression="${dotnet.source.directory}"  
    *            default-value="${project.basedir}"
    */
   private File metricsSrcDirectory;

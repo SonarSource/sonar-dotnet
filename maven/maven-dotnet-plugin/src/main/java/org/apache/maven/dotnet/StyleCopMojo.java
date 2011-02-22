@@ -105,6 +105,15 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
    * @parameter alias="${ignores}"
    */
   private String[] ignores;
+  
+  /**
+   * Root directory of the solution. Stylecop will analyse 
+   * C# source files located in this directory and sub directories.
+   * 
+   * @parameter expression="${dotnet.source.directory}"  
+   *            default-value="${project.basedir}"
+   */
+  private File projectRoot;
 
   public StyleCopMojo() {
   }
@@ -196,7 +205,6 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
 
     // Initializes the parameters
     File reportFile = getReportFile(styleCopReportName);
-    File projectRoot = solutionFile.getParentFile();
     File msbuildFile = getReportFile(STYLECOP_BUILD_FILE);
 
     // Logs what is generated
