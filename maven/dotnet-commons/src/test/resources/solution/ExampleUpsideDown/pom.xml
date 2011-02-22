@@ -9,7 +9,7 @@
   <properties>
    
 	<!-- source files are elsewhere... -->
-	<metrics.source.directory>../Example</metrics.source.directory>
+	<dotnet.source.directory>../Example</dotnet.source.directory>
 	
     <visual.studio.solution>Example.sln</visual.studio.solution>
     <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
