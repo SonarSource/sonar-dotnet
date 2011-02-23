@@ -137,7 +137,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AbstractTypesShouldNotHaveConstructors">
-<name>Abstract types should not have constructors</name>
+<name>Abstract types should not have constructors (FxCop10)</name>
 <configKey>AbstractTypesShouldNotHaveConstructors@$(FxCopDir)\Rules\DesignRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Public constructors for abstract types do not make sense because you cannot create instances of abstract types.<br/>
@@ -153,7 +153,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAssembliesWithClsCompliant">
-<name>Mark assemblies with CLSCompliantAttribute</name>
+<name>Mark assemblies with CLSCompliantAttribute (FxCop10)</name>
 <configKey>MarkAssembliesWithClsCompliant@$(FxCopDir)\Rules\DesignRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Assemblies should explicitly state their CLS compliance using the CLSCompliant attribute. An assembly without this attribute is not CLS-compliant. Assemblies, modules, and types can be CLS-compliant even if some parts of the assembly, module, or type are not CLS-compliant. The following rules apply: 1) If the element is marked CLSCompliant, any noncompliant members must have the CLSCompliant attribute present with its argument set to false. 2) A comparable CLS-compliant alternative member must be supplied for each member that is not CLS-compliant.<br/>
@@ -169,7 +169,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAssembliesWithAssemblyVersion">
-<name>Mark assemblies with AssemblyVersionAttribute</name>
+<name>Mark assemblies with AssemblyVersionAttribute (FxCop10)</name>
 <configKey>MarkAssembliesWithAssemblyVersion@$(FxCopDir)\Rules\DesignRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Assemblies should use version numbers. The version number is considered part of an assembly's identity. Versioning is applied by means of the AssemblyVersion attribute.<br/>
@@ -177,7 +177,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAssembliesWithComVisible">
-<name>Mark assemblies with ComVisibleAttribute</name>
+<name>Mark assemblies with ComVisibleAttribute (FxCop10)</name>
 <configKey>MarkAssembliesWithComVisible@$(FxCopDir)\Rules\DesignRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[The System.Runtime.InteropServices.ComVisible attribute indicates whether COM clients can use the library. Good design dictates that developers explicitly indicate COM visibility. The default value for this attribute is 'true'. However, the best design is to mark the assembly ComVisible false, and then mark types, interfaces, and individual members as ComVisible true, as appropriate.<br/>
@@ -185,7 +185,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAttributesWithAttributeUsage">
-<name>Mark attributes with AttributeUsageAttribute</name>
+<name>Mark attributes with AttributeUsageAttribute (FxCop10)</name>
 <configKey>MarkAttributesWithAttributeUsage@$(FxCopDir)\Rules\DesignRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[The AttributeUsage attribute specifies the targets that are valid for the attribute (see System.AttributeTargets), whether an attribute can appear on a target more than once, and whether the attribute is inheritable.<br/>
@@ -529,7 +529,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SpecifyMessageBoxOptions">
-<name>Specify MessageBoxOptions</name>
+<name>Specify MessageBoxOptions (FxCop10)</name>
 <configKey>SpecifyMessageBoxOptions@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[In order to run correctly on right-to-left systems, all calls to MessageBox.Show should use the overload that specifies MessageBoxOptions as an argument. Programs should detect whether they are running on a right-to-left system at run-time and pass the appropriate MessageBoxOptions value in order to display correctly.<br/>
@@ -553,7 +553,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SpecifyCultureInfo">
-<name>Specify CultureInfo</name>
+<name>Specify CultureInfo (FxCop10)</name>
 <configKey>SpecifyCultureInfo@$(FxCopDir)\Rules\GlobalizationRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[If an overload exists that takes a CultureInfo argument, it should always be called in favor of an overload that does not. The CultureInfo type contains culture-specific information required for performing numeric and string operations, such as casing, formatting, and string comparisons. In scenarios where conversion and parsing behavior should never change between cultures, specify CultureInfo.InvariantCulture, otherwise, specify CultureInfo.CurrentCulture.<br/>
@@ -609,7 +609,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PInvokeEntryPointsShouldExist">
-<name>P/Invoke entry points should exist</name>
+<name>P/Invoke entry points should exist (FxCop10)</name>
 <configKey>PInvokeEntryPointsShouldExist@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Methods decorated with the DllImport attribute should point to existing unmanaged entry points. There is no compile-time check to ensure that methods decorated with the DllImport attribute actually exist in the referenced unmanaged dll. In the event that an entry point does not exist or the specified argument list is not correct, a runtime exception will be generated.<br/>
@@ -617,7 +617,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PInvokesShouldNotBeVisible">
-<name>P/Invokes should not be visible</name>
+<name>P/Invokes should not be visible (FxCop10)</name>
 <configKey>PInvokesShouldNotBeVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Interop layer should not be public. The DllImport attribute should not be applied to publicly accessible members (public or protected).<br/>
@@ -625,7 +625,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidOverloadsInComVisibleInterfaces">
-<name>Avoid overloads in COM visible interfaces</name>
+<name>Avoid overloads in COM visible interfaces (FxCop10)</name>
 <configKey>AvoidOverloadsInComVisibleInterfaces@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Interfaces that are visible to COM should not define overloads, as they will be renamed and cannot be implemented by Visual Basic 6 clients. COM interfaces cannot contain overloaded methods.<br/>
@@ -633,7 +633,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AutoLayoutTypesShouldNotBeComVisible">
-<name>Auto layout types should not be COM visible</name>
+<name>Auto layout types should not be COM visible (FxCop10)</name>
 <configKey>AutoLayoutTypesShouldNotBeComVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Types that are automatically ordered by the runtime should not be visible to COM. Types that are automatically laid out by the runtime do not have a guaranteed order between versions. This can break COM clients of those types. To ensure compatibility between versions, the type should be explicitly or sequentially ordered.<br/>
@@ -641,7 +641,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CallGetLastErrorImmediatelyAfterPInvoke">
-<name>Call GetLastError immediately after P/Invoke</name>
+<name>Call GetLastError immediately after P/Invoke (FxCop10)</name>
 <configKey>CallGetLastErrorImmediatelyAfterPInvoke@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[The last Win32 error can be reset as a result of making managed calls, due to P/Invokes called by the runtime itself. In order to ensure the correctness of the value returned by GetLastWin32Error, place the call immediately after the relevant platform invoke call in your code.<br/>
@@ -649,7 +649,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ComVisibleTypeBaseTypesShouldBeComVisible">
-<name>COM visible type base types should be COM visible</name>
+<name>COM visible type base types should be COM visible (FxCop10)</name>
 <configKey>ComVisibleTypeBaseTypesShouldBeComVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM visible types should have an object hierarchy that is uniformly COM visible.<br/>
@@ -657,7 +657,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidInt64ArgumentsForVB6Clients">
-<name>Avoid Int64 arguments for Visual Basic 6 clients</name>
+<name>Avoid Int64 arguments for Visual Basic 6 clients (FxCop10)</name>
 <configKey>AvoidInt64ArgumentsForVB6Clients@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM visible types that might be accessed from Microsoft Visual Basic 6 clients should not expose methods with long arguments.<br/>
@@ -665,7 +665,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidStaticMembersInComVisibleTypes">
-<name>Avoid static members in COM visible types</name>
+<name>Avoid static members in COM visible types (FxCop10)</name>
 <configKey>AvoidStaticMembersInComVisibleTypes@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM does not support static methods.<br/>
@@ -673,7 +673,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotUseAutoDualClassInterfaceType">
-<name>Do not use AutoDual ClassInterfaceType</name>
+<name>Do not use AutoDual ClassInterfaceType (FxCop10)</name>
 <configKey>DoNotUseAutoDualClassInterfaceType@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Classes that use the ClassInterfaceType.AutoDual setting might break in later versions if you change the member layout of the class or base classes. ClassInterfaceType.AutoDual should only be used when the versioning limitations are known to be acceptable.<br/>
@@ -681,7 +681,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ComVisibleTypesShouldBeCreatable">
-<name>COM visible types should be creatable</name>
+<name>COM visible types should be creatable (FxCop10)</name>
 <configKey>ComVisibleTypesShouldBeCreatable@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Types with no public default constructor are not COM-creatable. COM does not support parameterized object construction. A type was detected with a public parameterized constructor but no public default constructor. This type is not creatable by COM. If there is an alternate method for creating and passing object instances to COM clients (through a method on another type, for example), this might not be a problem.<br/>
@@ -689,7 +689,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ComRegistrationMethodsShouldBeMatched">
-<name>COM registration methods should be matched</name>
+<name>COM registration methods should be matched (FxCop10)</name>
 <configKey>ComRegistrationMethodsShouldBeMatched@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[If a COM registration method is provided, an unregistration method must also be provided to reverse the operations performed by the registration method. COM registration functions are static methods within a type that are marked with the ComRegisterFunction attribute. All COM registration functions should be matched by a static method within the same type that is marked with the ComUnregisterFunction attribute. This method should reverse any operations completed by the registration function.<br/>
@@ -697,7 +697,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ComRegistrationMethodsShouldNotBeVisible">
-<name>COM registration methods should not be visible</name>
+<name>COM registration methods should not be visible (FxCop10)</name>
 <configKey>ComRegistrationMethodsShouldNotBeVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM registration and unregistration functions should be private or internal. COM registration and unregistration functions are called by the runtime when an assembly is registered or unregistered for use with COM. It is preferred that these methods are not externally visible.<br/>
@@ -705,7 +705,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkComSourceInterfacesAsIDispatch">
-<name>Mark ComSource interfaces as IDispatch</name>
+<name>Mark ComSource interfaces as IDispatch (FxCop10)</name>
 <configKey>MarkComSourceInterfacesAsIDispatch@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM source interfaces should be marked ComInterfaceType.InterfaceIsIDispatch. Visual Basic 6 clients cannot receive events with non-IDispatch interfaces.<br/>
@@ -713,7 +713,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidNonpublicFieldsInComVisibleValueTypes">
-<name>Avoid non-public fields in COM visible value types</name>
+<name>Avoid non-public fields in COM visible value types (FxCop10)</name>
 <configKey>AvoidNonpublicFieldsInComVisibleValueTypes@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[COM visible value types should not expose non-public instance fields. COM visible value types have their non-public instance fields exposed to COM clients.<br/>
@@ -721,7 +721,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkBooleanPInvokeArgumentsWithMarshalAs">
-<name>Mark boolean P/Invoke arguments with MarshalAs</name>
+<name>Mark boolean P/Invoke arguments with MarshalAs (FxCop10)</name>
 <configKey>MarkBooleanPInvokeArgumentsWithMarshalAs@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[All boolean P/Invoke parameters and return types should be explicitly marked with the MarshalAs attribute. By default, the system will marshal all booleans as 4-byte UnmanagedType.Bool. This is the correct behavior for Win32 'BOOL' arguments but incorrect for C++ 'bool' arguments, which should be marshaled as 1-byte UnmanagedType.U1. For code maintainability reasons, always explicitly specify the marshaling information for boolean arguments and return values.<br/>
@@ -729,7 +729,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DeclarePInvokesCorrectly">
-<name>Declare P/Invokes correctly</name>
+<name>Declare P/Invokes correctly (FxCop10)</name>
 <configKey>DeclarePInvokesCorrectly@$(FxCopDir)\Rules\InteroperabilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[P/Invoke methods should be declared correctly to ensure correct runtime behaviors.<br/>
@@ -737,7 +737,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotUseIdleProcessPriority">
-<name>Do not use idle process priority</name>
+<name>Do not use idle process priority (FxCop10)</name>
 <configKey>DoNotUseIdleProcessPriority@$(FxCopDir)\Rules\MobilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Do not set process priority to Idle. Processes with System.Diagnostics.ProcessPriorityClass.Idle will occupy the CPU when it would otherwise be idle, and thereby block standby.<br/>
@@ -745,7 +745,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotUseTimersThatPreventPowerStateChanges">
-<name>Do not use timers that prevent power state changes</name>
+<name>Do not use timers that prevent power state changes (FxCop10)</name>
 <configKey>DoNotUseTimersThatPreventPowerStateChanges@$(FxCopDir)\Rules\MobilityRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Do not poll more often than or utilize timers that fire more frequently than once per second. Higher frequency periodic activity will keep the CPU busy and interfere with power-saving idle timers that turn off the display and hard disks.<br/>
@@ -785,7 +785,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="IdentifiersShouldBeSpelledCorrectly">
-<name>Identifiers should be spelled correctly</name>
+<name>Identifiers should be spelled correctly (FxCop10)</name>
 <configKey>IdentifiersShouldBeSpelledCorrectly@$(FxCopDir)\Rules\NamingRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[The individual words that make up an identifier should not be abbreviated and should be spelled correctly. If this rule generates a false positive on a term that should be recognized, add the word to the FxCop custom dictionary.<br/>
@@ -793,7 +793,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="IdentifiersShouldNotContainUnderscores">
-<name>Identifiers should not contain underscores</name>
+<name>Identifiers should not contain underscores (FxCop10)</name>
 <configKey>IdentifiersShouldNotContainUnderscores@$(FxCopDir)\Rules\NamingRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Do not use underscores when specifying identifiers. Some generated Visual Studio identifiers for applications contain underscore characters. Underscore characters should generally be avoided in public identifiers.<br/>
@@ -809,7 +809,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="IdentifiersShouldBeCasedCorrectly">
-<name>Identifiers should be cased correctly</name>
+<name>Identifiers should be cased correctly (FxCop10)</name>
 <configKey>IdentifiersShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll</configKey>
 <category name="Maintainability"/>
 <description><![CDATA[Type, namespace, and member identifiers are Pascal-cased. Parameter identifiers are camel-cased. Two letter acronyms within these identifiers should be upper-cased, for example, use System.IO instead of System.Io. Acronyms of three or more letters should be Pascal-cased, for example, use System.Xml instead of System.XML. The pascal-casing convention capitalizes the first letter of each word, as in BackColor. The camel-casing convention formats the first letter of the first word in lowercase and capitalizes the first letter of all subsequent words, as in backgroundColor. Although it may be common practice for some two letter acronyms to not be fully capitalized, violations of this rule should not be excluded for this reason. For example, 'DbConnection', is common but incorrect; use DBConnection. A violation of this rule might be required for compatibility with existing, non-managed symbol schemes. In general, however, these symbols should not be visible outside the assembly that uses them.<br/>
@@ -953,7 +953,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="RemoveUnusedLocals">
-<name>Remove unused locals</name>
+<name>Remove unused locals (FxCop10)</name>
 <configKey>RemoveUnusedLocals@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Remove locals that are not used or are only assigned to in method implementations.<br/>
@@ -977,7 +977,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidUncalledPrivateCode">
-<name>Avoid uncalled private code</name>
+<name>Avoid uncalled private code (FxCop10)</name>
 <configKey>AvoidUncalledPrivateCode@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[There is uncalled code that is not externally visible and is not a known runtime entry point. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.<br/>
@@ -985,7 +985,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidUninstantiatedInternalClasses">
-<name>Avoid uninstantiated internal classes</name>
+<name>Avoid uninstantiated internal classes (FxCop10)</name>
 <configKey>AvoidUninstantiatedInternalClasses@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[An internal class was detected that is apparently never instantiated. This rule does not attempt to detect late-bound creation and will generate false positives if instances of a type are only created in this way (for example, by means of Activator.CreateInstance or by passing the type as an argument to a TypeConverter constructor).<br/>
@@ -993,7 +993,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidUnsealedAttributes">
-<name>Avoid unsealed attributes</name>
+<name>Avoid unsealed attributes (FxCop10)</name>
 <configKey>AvoidUnsealedAttributes@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Seal attribute types for improved performance. Sealing attribute types speeds up performance during reflection on custom attributes.<br/>
@@ -1001,7 +1001,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PreferJaggedArraysOverMultidimensional">
-<name>Prefer jagged arrays over multidimensional</name>
+<name>Prefer jagged arrays over multidimensional (FxCop10)</name>
 <configKey>PreferJaggedArraysOverMultidimensional@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Multidimensional arrays can have a negative impact on performance. Use a jagged array if possible.<br/>
@@ -1017,7 +1017,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PropertiesShouldNotReturnArrays">
-<name>Properties should not return arrays</name>
+<name>Properties should not return arrays (FxCop10)</name>
 <configKey>PropertiesShouldNotReturnArrays@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Properties that return arrays are prone to code inefficiencies. Consider using a collection or making this a method. See the design guidelines for more information.<br/>
@@ -1041,7 +1041,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkMembersAsStatic">
-<name>Mark members as static</name>
+<name>Mark members as static (FxCop10)</name>
 <configKey>MarkMembersAsStatic@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Methods which do not access instance data or call instance methods can be marked as static (Shared in Visual Basic). After doing so, the compiler will emit non-virtual call sites to these members which will prevent a check at runtime for each call that ensures the current object pointer is non-null. This can result in a measurable performance gain for performance-sensitive code. In some cases, the failure to access the current object instance represents a correctness issue.<br/>
@@ -1049,7 +1049,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AvoidUnusedPrivateFields">
-<name>Avoid unused private fields</name>
+<name>Avoid unused private fields (FxCop10)</name>
 <configKey>AvoidUnusedPrivateFields@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[Private fields were detected that do not appear to be accessed within the assembly. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.<br/>
@@ -1057,7 +1057,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAssembliesWithNeutralResourcesLanguage">
-<name>Mark assemblies with NeutralResourcesLanguageAttribute</name>
+<name>Mark assemblies with NeutralResourcesLanguageAttribute (FxCop10)</name>
 <configKey>MarkAssembliesWithNeutralResourcesLanguage@$(FxCopDir)\Rules\PerformanceRules.dll</configKey>
 <category name="Efficiency"/>
 <description><![CDATA[The NeutralResourcesLanguage attribute informs the ResourceManager of the language used to render the neutral culture's resources for an assembly. When looking up resources in the same culture as the neutral resources language, the ResourceManager automatically uses the resources located in the main assembly, instead of searching for a satellite assembly with the current user interface culture for the current thread. This will improve lookup performance for the first resource you load and can reduce your working set.<br/>
@@ -1065,7 +1065,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ValueTypeFieldsShouldBePortable">
-<name>Value type fields should be portable</name>
+<name>Value type fields should be portable (FxCop10)</name>
 <configKey>ValueTypeFieldsShouldBePortable@$(FxCopDir)\Rules\PortabilityRules.dll</configKey>
 <category name="Portability"/>
 <description><![CDATA[Structures with explicit layout containing misaligned fields cause crashes on 64-bit platforms.<br/>
@@ -1073,7 +1073,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PInvokeDeclarationsShouldBePortable">
-<name>P/Invoke declarations should be portable</name>
+<name>P/Invoke declarations should be portable (FxCop10)</name>
 <configKey>PInvokeDeclarationsShouldBePortable@$(FxCopDir)\Rules\PortabilityRules.dll</configKey>
 <category name="Portability"/>
 <description><![CDATA[.<br/>
@@ -1081,7 +1081,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="UseOnlyApiFromTargetedFramework">
-<name>Use only API from targeted framework</name>
+<name>Use only API from targeted framework (FxCop10)</name>
 <configKey>UseOnlyApiFromTargetedFramework@$(FxCopDir)\Rules\PortabilityRules.dll</configKey>
 <category name="Portability"/>
 <description><![CDATA[
@@ -1090,7 +1090,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CatchNonClsCompliantExceptionsInGeneralHandlers">
-<name>Catch non-CLSCompliant exceptions in general handlers</name>
+<name>Catch non-CLSCompliant exceptions in general handlers (FxCop10)</name>
 <configKey>CatchNonClsCompliantExceptionsInGeneralHandlers@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Exception handlers which are truly intended to catch all exceptions should handle non-CLSCompliant exceptions if there is a possibility one can be raised. If possible, catch handlers should only catch specific exceptions or exception base types. In circumstances where a handler is required to catch all exceptions (e.g., when a try block wraps arbitrary plug-in code), the handler should also include a generic catch handler (in C#, catch{ ... }) to handle non-CLSCompliant exceptions. It is possible to raise non-CLSCompliant exceptions by modifying and recompiling IL.<br/>
@@ -1098,7 +1098,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewImperativeSecurity">
-<name>Review imperative security</name>
+<name>Review imperative security (FxCop10)</name>
 <configKey>ReviewImperativeSecurity@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Use of imperative demands can lead to unforeseen security problems. The values used to construct a permission should not change within the scope of the demand call. For some components the scope spans from the demand call to end of the method; for others it spans from the demand call until the component is finalized. If the values used to construct the permission are fields or properties, they can be changed within the scope of the demand call. This can lead to race conditions, mutable read-only arrays, and problems with boxed value types.<br/>
@@ -1106,7 +1106,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotDeclareReadOnlyMutableReferenceTypes">
-<name>Do not declare read only mutable reference types</name>
+<name>Do not declare read only mutable reference types (FxCop10)</name>
 <configKey>DoNotDeclareReadOnlyMutableReferenceTypes@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[A read-only declaration for a mutable reference type does not prevent the field's instance data from being modified. For example, a read-only StringBuilder field declaration does not make sense, since the data encapsulated by the StringBuilder can be modified using the read-only reference.<br/>
@@ -1114,7 +1114,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ArrayFieldsShouldNotBeReadOnly">
-<name>Array fields should not be read only</name>
+<name>Array fields should not be read only (FxCop10)</name>
 <configKey>ArrayFieldsShouldNotBeReadOnly@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Read-only fields that reference arrays might not give the intended effect. Setting a field which references an array to read-only prevents the value of the field from being changed. Note that elements in the array can be changed. You can ignore this violation if protecting the contents of the array is not a concern.<br/>
@@ -1122,7 +1122,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SecureAsserts">
-<name>Secure asserts</name>
+<name>Secure asserts (FxCop10)</name>
 <configKey>SecureAsserts@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Asserting a security permission without performing any security checks can leave an exploitable security weakness in your code. A security stack walk stops when a security permission is asserted. If you assert a permission without performing any checks on the caller, the caller might be able to indirectly execute code using your permissions. Asserts without security checks are only permissible when you are certain that the assert cannot be used in a harmful fashion, namely, if the code you call is harmless, or users have no way to pass arbitrary information to code that you call.<br/>
@@ -1130,7 +1130,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewDenyAndPermitOnlyUsage">
-<name>Review deny and permit only usage</name>
+<name>Review deny and permit only usage (FxCop10)</name>
 <configKey>ReviewDenyAndPermitOnlyUsage@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Use of Deny or PermitOnly should be carefully reviewed. Use of Deny or PermitOnly should be carefully considered, as they are not useful in some cases. For example, permissions that are path-based (like FileIOPermission and RegistryPermission) should not be used with Deny, because different paths might actually point to the same location. If callers are granted the right to assert permissions by the security policy, then they can terminate a stack walk before it reaches your Deny or PermitOnly. If a caller has been granted powerful permissions (such as the ability to call unmanaged code), then calling Deny or PermitOnly cannot truly stop it from doing whatever it chooses. Also consider that Deny and PermitOnly do not affect a LinkDemand. For instance, if you deny some permission P and call a method with a LinkDemand for P, the Deny will not affect the result of the LinkDemand.<br/>
@@ -1138,7 +1138,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewDeclarativeSecurityOnValueTypes">
-<name>Review declarative security on value types</name>
+<name>Review declarative security on value types (FxCop10)</name>
 <configKey>ReviewDeclarativeSecurityOnValueTypes@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[A Demand or a LinkDemand on a structure does not prevent creation of an instance of that structure.<br/>
@@ -1146,7 +1146,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewVisibleEventHandlers">
-<name>Review visible event handlers</name>
+<name>Review visible event handlers (FxCop10)</name>
 <configKey>ReviewVisibleEventHandlers@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[It appears that an event handler is externally visible or that an EventArgs parameter is being exposed in a visible method decorated with a security demand. There can be problems exposing sensitive functionality in an event handler function; the security demand might not do what you expect.<br/>
@@ -1154,7 +1154,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PointersShouldNotBeVisible">
-<name>Pointers should not be visible</name>
+<name>Pointers should not be visible (FxCop10)</name>
 <configKey>PointersShouldNotBeVisible@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[IntPtr and UIntPtr fields should be declared as private. Exposing non-private pointers can cause a security weakness.<br/>
@@ -1162,7 +1162,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SecuredTypesShouldNotExposeFields">
-<name>Secured types should not expose fields</name>
+<name>Secured types should not expose fields (FxCop10)</name>
 <configKey>SecuredTypesShouldNotExposeFields@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Fields must be secured with a security check other than LinkDemand.<br/>
@@ -1170,7 +1170,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MethodSecurityShouldBeASupersetOfType">
-<name>Method security should be a superset of type</name>
+<name>Method security should be a superset of type (FxCop10)</name>
 <configKey>MethodSecurityShouldBeASupersetOfType@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[A method has security set at both the type and method levels. This might not have the intended effect. Security actions on the type level are overridden by security actions on the method level. When employing both type-level and method-level security, type-level security actions that are not also on the method will be ignored when the method executes.<br/>
@@ -1178,7 +1178,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CallGCKeepAliveWhenUsingNativeResources">
-<name>Call GC.KeepAlive when using native resources</name>
+<name>Call GC.KeepAlive when using native resources (FxCop10)</name>
 <configKey>CallGCKeepAliveWhenUsingNativeResources@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[If a method uses an IntPtr or UIntPtr field in a class with a finalizer and does not call GC.KeepAlive, a race condition might be introduced.<br/>
@@ -1186,7 +1186,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AptcaMethodsShouldOnlyCallAptcaMethods">
-<name>APTCA methods should only call APTCA methods</name>
+<name>APTCA methods should only call APTCA methods (FxCop10)</name>
 <configKey>AptcaMethodsShouldOnlyCallAptcaMethods@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Methods with the AllowPartiallyTrustedCallersAttribute that call methods without that attribute might unintentionally expose functionality to partially trusted code. When a method has the AllowPartiallyTrustedCallersAttribute set, it is callable by partially trusted code. If it in turn calls methods without the attribute, a partially trusted caller is, in effect, being allowed to execute code that requires full trust. Depending on what full trust code is called and what parameter values are passed through from the partially trusted caller, malicious code might be able to exploit this security weakness.<br/>
@@ -1194,7 +1194,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AptcaTypesShouldOnlyExtendAptcaBaseTypes">
-<name>APTCA types should only extend APTCA base types</name>
+<name>APTCA types should only extend APTCA base types (FxCop10)</name>
 <configKey>AptcaTypesShouldOnlyExtendAptcaBaseTypes@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Types with the AllowPartiallyTrustedCallersAttribute that extend types without that attribute might unintentionally expose functionality in the base type to partially trusted callers. When a type has the AllowPartiallyTrustedCallersAttribute set, it is callable by partially trusted code. If the base type does not have this attribute, it requires callers to be fully trusted. If the derived type exposes protected members in the base type, the base type's data is made accessible to partially trusted callers, creating an exploitable security weakness.<br/>
@@ -1202,7 +1202,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewSuppressUnmanagedCodeSecurityUsage">
-<name>Review SuppressUnmanagedCodeSecurityAttribute usage</name>
+<name>Review SuppressUnmanagedCodeSecurityAttribute usage (FxCop10)</name>
 <configKey>ReviewSuppressUnmanagedCodeSecurityUsage@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Calling a method with the SuppressUnmanagedCodeSecurityAttribute applied to it can create a security weakness. Unmanaged code security checks ensure that all callers in the call stack have permission to execute unmanaged code. Disabling code security for P/Invoke methods allows callers that do not have this permission to breach security. This is acceptable only if the code is completely harmless, or callers have no way to pass arbitrary arguments through to the unmanaged code.<br/>
@@ -1210,7 +1210,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SealMethodsThatSatisfyPrivateInterfaces">
-<name>Seal methods that satisfy private interfaces</name>
+<name>Seal methods that satisfy private interfaces (FxCop10)</name>
 <configKey>SealMethodsThatSatisfyPrivateInterfaces@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Externally visible types that implement non-public interfaces should not be extensible. Types that extend public types with non-public interfaces can override interface members. This can compromise object behavior or create a security vulnerability.<br/>
@@ -1218,7 +1218,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SecureSerializationConstructors">
-<name>Secure serialization constructors</name>
+<name>Secure serialization constructors (FxCop10)</name>
 <configKey>SecureSerializationConstructors@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Serializable types that have a constructor protected by a security demand must apply the same security demands to the serialization constructor. Apply the demand using declarative security.<br/>
@@ -1226,7 +1226,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="StaticConstructorsShouldBePrivate">
-<name>Static constructors should be private</name>
+<name>Static constructors should be private (FxCop10)</name>
 <configKey>StaticConstructorsShouldBePrivate@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Non-private static constructors can cause unexpected behaviors, particularly when executed multiple times. This violation can occur if a type declares static data but has not explicitly  declared a static constructor. In this case, some compilers will generate an externally visible static constructor.<br/>
@@ -1234,7 +1234,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotIndirectlyExposeMethodsWithLinkDemands">
-<name>Do not indirectly expose methods with link demands</name>
+<name>Do not indirectly expose methods with link demands (FxCop10)</name>
 <configKey>DoNotIndirectlyExposeMethodsWithLinkDemands@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Do not wrap a method protected by a LinkDemand with a method that does not perform a security check. A LinkDemand checks the permissions of the immediate caller rather than checking the permissions of all callers in the call stack. In this case, the permissions of the wrapper method will be checked. If the wrapper method does not, itself, check the permissions of callers higher in the call stack, malicious code might be able to execute the wrapped function even though it lacks permission to do so.<br/>
@@ -1242,7 +1242,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="WrapVulnerableFinallyClausesInOuterTry">
-<name>Wrap vulnerable finally clauses in outer try</name>
+<name>Wrap vulnerable finally clauses in outer try (FxCop10)</name>
 <configKey>WrapVulnerableFinallyClausesInOuterTry@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Finally clauses that restore security-related state should be wrapped in an outer try block. This will prevent an exception filter further up the stack from executing before a secure environment can be restored. Exception filters that run code expressions in the first pass after the guarded try blocks and before the associated finally block represent a possible security vulnerability. Examples of vulnerable functionality in finally clauses that should be protected against this include: calls to RevertAssert on an asserted permission, undoing a temporary impersonation, reversing an internal flag that bypasses a security check, and restoring the culture associated with a thread.<br/>
@@ -1250,7 +1250,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TypeLinkDemandsRequireInheritanceDemands">
-<name>Type link demands require inheritance demands</name>
+<name>Type link demands require inheritance demands (FxCop10)</name>
 <configKey>TypeLinkDemandsRequireInheritanceDemands@$(FxCopDir)\Rules\SecurityRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Unsealed types secured by a LinkDemand should also specify an InheritanceDemand. Without an InheritanceDemand, the link demand can be circumvented by overriding a method in a derived class.<br/>
@@ -1258,7 +1258,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ConstantsShouldBeTransparent">
-<name>Security critical constants should be transparent</name>
+<name>Security critical constants should be transparent (FxCop10)</name>
 <configKey>ConstantsShouldBeTransparent@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Compilers inline accesses to constants, and as such transparency enforcement is not done for them since there is no runtime access to the field.  These fields should be security transparent so that code reviewers do not assume that transparent code cannot access the constant.<br/>
@@ -1266,7 +1266,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CriticalTypesMustNotParticipateInTypeEquivalence">
-<name>Security critical types may not participate in type equivalence</name>
+<name>Security critical types may not participate in type equivalence (FxCop10)</name>
 <configKey>CriticalTypesMustNotParticipateInTypeEquivalence@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Type equivalence requires that all participating types, as well as all methods and fields within those types, are transparent or security safe-critical.  The CLR will fail to load any type which violates this rule.<br/>
@@ -1274,7 +1274,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DefaultConstructorsMustHaveConsistentTransparency">
-<name>Default constructors must be at least as critical as base type default constructors</name>
+<name>Default constructors must be at least as critical as base type default constructors (FxCop10)</name>
 <configKey>DefaultConstructorsMustHaveConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[On CoreCLR, if a base type has a public or protected non-transparent default constructor than the derived type must obey default constructor inheritance rules.  The derived type must also have a default constructor and that constructor must be at least as critical as the base type’s default constructor.  If the base type’s default constructor is safe-critical, the derived type’s default constructor must be safe-critical or critical.  If the base type’s default constructor is critical, then the derived type’s default constructor must also be critical.<br/>
@@ -1282,7 +1282,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DelegatesMustBindWithConsistentTransparency">
-<name>Delegates must bind to methods with consistent transparency</name>
+<name>Delegates must bind to methods with consistent transparency (FxCop10)</name>
 <configKey>DelegatesMustBindWithConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Delegate types and the methods that they bind to must have consistent transparency.  Transparent and safe-critical delegates may only bind to other transparent or safe-critical methods.  Similarly, critical delegates may only bind to critical methods.  These binding rules ensure that the only code which can invoke a method via a delegate could have also invoked the same method directly.  It prevents, for instance, transparent code from calling critical code directly via a transparent delegate.<br/>
@@ -1290,7 +1290,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MethodsMustOverrideWithConsistentTransparency">
-<name>Methods must keep consistent transparency when overriding base methods</name>
+<name>Methods must keep consistent transparency when overriding base methods (FxCop10)</name>
 <configKey>MethodsMustOverrideWithConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparency visibility must be preserved between overriding methods and the methods that are being overridden.  If the virtual method being overridden or interface method being implemented is security safe-critical or security transparent, then the overriding method must also be either security safe-critical or security transparent.  Similarly, if the method being overridden is security critical, the overriding method must be security critical.<br/>
@@ -1298,7 +1298,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OverrideLinkDemandsShouldBeIdenticalToBase">
-<name>Override link demands should be identical to base</name>
+<name>Override link demands should be identical to base (FxCop10)</name>
 <configKey>OverrideLinkDemandsShouldBeIdenticalToBase@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[If a virtual method has a LinkDemand, in many cases, so should any override of it, and if an override has a LinkDemand, so should the overridden virtual method. Because it is possible to call any of the overrides of a virtual method explicitly, they should all have the same LinkDemand status or, if not, should be reviewed. This also applies to LinkDemand security checks for methods that part of an interface implementation, because the caller might use an interface-typed reference to access the method.<br/>
@@ -1306,7 +1306,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemands">
-<name>Level 2 assemblies should not contain LinkDemands</name>
+<name>Level 2 assemblies should not contain LinkDemands (FxCop10)</name>
 <configKey>SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[LinkDemands are deprecated in the level 2 security rule set.  Instead of using LinkDemands to enforce JIT time security, SecurityCritical methods, types, and fields should be used instead.<br/>
@@ -1314,7 +1314,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparencyAnnotationsShouldNotConflict">
-<name>Members should not have conflicting transparency annotations</name>
+<name>Members should not have conflicting transparency annotations (FxCop10)</name>
 <configKey>TransparencyAnnotationsShouldNotConflict@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparency attributes are applied from larger scopes inward.  For instance, if a type is marked as entirely security critical, than all methods introduced by the type will also be security critical.  Members should not have transparency annotations which conflict with larger scoped annotations, as these smaller scoped annotations will be ignored by the CLR and can be misleading during a code review.  Methods not introduced by their type, such as virtual methods being overridden from a base type or interface methods being implemented, do have their annotations considered under the level 2 security rule set and are not considered by this rule.<br/>
@@ -1322,7 +1322,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentCodeMustNotUseCriticalAttributes">
-<name>Transparent code may not use security critical attributes</name>
+<name>Transparent code may not use security critical attributes (FxCop10)</name>
 <configKey>TransparentCodeMustNotUseCriticalAttributes@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparent code must not use security critical attributes.  This includes using security critical constructors, properties, or fields of attributes.  Violations of this rule will result in an exception when code attempts to retrieve the custom attributes from the transparent target.<br/>
@@ -1330,7 +1330,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustBeVerifiable">
-<name>Transparent methods must contain only verifiable IL</name>
+<name>Transparent methods must contain only verifiable IL (FxCop10)</name>
 <configKey>TransparentMethodsMustBeVerifiable@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparent code must be fully verifiable.  This rule looks for any use of pointer types to check for unverifiable code, however it is not a complete verifier and PEVerify / transparent must be run on assemblies to ensure that all of their transparent code is verifiable.<br/>
@@ -1338,7 +1338,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotCallNativeCode">
-<name>Transparent methods must not call into native code</name>
+<name>Transparent methods must not call into native code (FxCop10)</name>
 <configKey>TransparentMethodsMustNotCallNativeCode@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparent code may not call native code directly.  This rule looks for any transparent code which calls a method stub (such as a P/Invoke declaration) which is really a direct call into native code.<br/>
@@ -1346,7 +1346,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotCallSuppressUnmanagedCodeSecurityMethods">
-<name>Transparent methods must not call methods with the SuppressUnmanagedCodeSecurity attribute</name>
+<name>Transparent methods must not call methods with the SuppressUnmanagedCodeSecurity attribute (FxCop10)</name>
 <configKey>TransparentMethodsMustNotCallSuppressUnmanagedCodeSecurityMethods@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[P/Invoke and COM interop methods with the SuppressUnmanagedCodeSecurity attribute result in a LinkDemand being done against the calling method.  Since security transparent code may not satisfy LinkDemands, it may also not call methods with SuppressUnmanagedCodeSecurity either on the method itself or on the type containing the method.<br/>
@@ -1354,7 +1354,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotHandleProcessCorruptingExceptions">
-<name>Transparent methods may not use the HandleProcessCorruptingExceptions attribute</name>
+<name>Transparent methods may not use the HandleProcessCorruptingExceptions attribute (FxCop10)</name>
 <configKey>TransparentMethodsMustNotHandleProcessCorruptingExceptions@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[The HandleProcessCorruptingExceptions attribute may only be used by security critical methods, and will not be honored if it is applied to a transparent method.<br/>
@@ -1362,7 +1362,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotReferenceCriticalCode">
-<name>Transparent code must not reference security critical items</name>
+<name>Transparent code must not reference security critical items (FxCop10)</name>
 <configKey>TransparentMethodsMustNotReferenceCriticalCode@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparent code cannot refer to security critical methods, types, or fields.  At runtime these references will result in MemberAccessExceptions or TypeLoadExceptions.<br/>
@@ -1370,7 +1370,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotSatisfyLinkDemands">
-<name>Transparent methods must not satisfy LinkDemands</name>
+<name>Transparent methods must not satisfy LinkDemands (FxCop10)</name>
 <configKey>TransparentMethodsMustNotSatisfyLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Satisfying a LinkDemand is a security sensitive operation which can cause unintentional elevation of privilege.  Security transparent code must not satisfy LinkDemands, since it is not subject to the same security audit requirements as security critical code.  Transparent methods is security rule set level 1 assemblies will cause all LinkDemands they satisfy to be converted to full demands at runtime, which can cause performance problems.  In security rule set level 2 assemblies, transparent methods will fail to JIT if they attempt to satisfy a LinkDemand.<br/>
@@ -1378,7 +1378,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsMustNotUseSecurityAsserts">
-<name>Transparent code may not use security asserts</name>
+<name>Transparent code may not use security asserts (FxCop10)</name>
 <configKey>TransparentMethodsMustNotUseSecurityAsserts@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Transparent code may not use security asserts, since asserting permissions can result in elevating the effective permissions of the call stack.  Transparent code which attempts to assert will receive an InvalidOperationException at runtime.<br/>
@@ -1386,7 +1386,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsShouldNotBeProtectedWithLinkDemands">
-<name>Transparent code should not be protected with LinkDemands</name>
+<name>Transparent code should not be protected with LinkDemands (FxCop10)</name>
 <configKey>TransparentMethodsShouldNotBeProtectedWithLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Security transparent code should not be responsible for verifying the security of an operation, and therefore should not be protected from partial trust callers with LinkDemands.<br/>
@@ -1394,7 +1394,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsShouldNotDemand">
-<name>Transparent methods should not use security demands</name>
+<name>Transparent methods should not use security demands (FxCop10)</name>
 <configKey>TransparentMethodsShouldNotDemand@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Security transparent code should not be responsible for verifying the security of an operation, and therefore should not demand permissions.  Any code which is performing security checks, such as security demands, should be safe-critical instead.<br/>
@@ -1402,7 +1402,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsShouldNotLoadAssembliesFromByteArrays">
-<name>Transparent code should not load assemblies from byte arrays</name>
+<name>Transparent code should not load assemblies from byte arrays (FxCop10)</name>
 <configKey>TransparentMethodsShouldNotLoadAssembliesFromByteArrays@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Assemblies loaded from byte arrays inherit the grant set of the loading assembly.  Since this means that the loaded assembly may be fully trusted, any calls to load from byte array from trusted code should be reviewed to ensure that it is secure.  Transparent code is not subjected to the same audit scrutiny as critical code, and therefore should not load assemblies from byte arrays.<br/>
@@ -1410,7 +1410,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TransparentMethodsShouldNotUseSuppressUnmanagedCodeSecurity">
-<name>Transparent methods should not be decorated with the SuppressUnmanagedCodeSecurityAttribute</name>
+<name>Transparent methods should not be decorated with the SuppressUnmanagedCodeSecurityAttribute (FxCop10)</name>
 <configKey>TransparentMethodsShouldNotUseSuppressUnmanagedCodeSecurity@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[Methods decorated with the SuppressUnmanagedCodeSecurity attribute have an implicit LinkDemand placed upon all of their callers.  This LinkDemand requires that the calling code be security critical.  Marking the method which uses SuppressUnmanagedCodeSecurity as security critical makes this requirement more obvious for callers of the method.<br/>
@@ -1418,7 +1418,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TypesMustBeAtLeastAsCriticalAsBaseTypes">
-<name>Types must be at least as critical as their base types and interfaces</name>
+<name>Types must be at least as critical as their base types and interfaces (FxCop10)</name>
 <configKey>TypesMustBeAtLeastAsCriticalAsBaseTypes@$(FxCopDir)\Rules\SecurityTransparencyRules.dll</configKey>
 <category name="Reliability"/>
 <description><![CDATA[While any type may derive from a transparent type or interface, restrictions apply as to the types that can inherit from or implement safe-critical or critical types.  Only safe-critical or critical types may derive from or implement safe-critical interfaces and base types.  Only critical types may derive from or implement critical interfaces and base types.<br/>
@@ -1426,7 +1426,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ReviewUnusedParameters">
-<name>Review unused parameters</name>
+<name>Review unused parameters (FxCop10)</name>
 <configKey>ReviewUnusedParameters@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Review parameters in non-virtual methods that are not used in the method body to ensure no correctness exists around failure to access them. Unused parameters incur maintenance and performance costs. Sometimes a violation of this rule can point to an implementation bug in the method (i.e. the parameter should actually have been used in the method body). Exclude warnings of this rule if the parameter has to exist because of backward compatibility.<br/>
@@ -1434,7 +1434,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotIgnoreMethodResults">
-<name>Do not ignore method results</name>
+<name>Do not ignore method results (FxCop10)</name>
 <configKey>DoNotIgnoreMethodResults@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[The result of methods that return new instances of strings should be assigned to a variable and subsequently used. If the result of a method that creates a new object, such as String.ToLower(), is not assigned to a variable, the call is wasted.<br/>
@@ -1442,7 +1442,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="RethrowToPreserveStackDetails">
-<name>Rethrow to preserve stack details</name>
+<name>Rethrow to preserve stack details (FxCop10)</name>
 <configKey>RethrowToPreserveStackDetails@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Use the IL rethrow instruction to preserve original stack details when re-raising a caught exception.<br/>
@@ -1450,7 +1450,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotRaiseReservedExceptionTypes">
-<name>Do not raise reserved exception types</name>
+<name>Do not raise reserved exception types (FxCop10)</name>
 <configKey>DoNotRaiseReservedExceptionTypes@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[User code should not create and raise exceptions of certain types that are reserved by the runtime or which are of a too general exception type. Exception types that are too general include Exception, SystemException, and ApplicationException. Exception types that are reserved by the runtime include ThreadAbortException, OutOfMemoryException, ExecutionEngineException, and IndexOutOfRangeException.<br/>
@@ -1458,7 +1458,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="UseManagedEquivalentsOfWin32Api">
-<name>Use managed equivalents of Win32 API</name>
+<name>Use managed equivalents of Win32 API (FxCop10)</name>
 <configKey>UseManagedEquivalentsOfWin32Api@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Use managed equivalents to Win32 API whenever possible.<br/>
@@ -1466,7 +1466,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="InitializeValueTypeStaticFieldsInline">
-<name>Initialize value type static fields inline</name>
+<name>Initialize value type static fields inline (FxCop10)</name>
 <configKey>InitializeValueTypeStaticFieldsInline@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Do not declare explicit static constructors on value types. Initializing static data in explicit static constructors results in a value type that is not marked in metadata as 'beforefieldinit'. In this case, the static constructor is not always guaranteed to be called before instance members on the value type are called.<br/>
@@ -1474,7 +1474,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="InstantiateArgumentExceptionsCorrectly">
-<name>Instantiate argument exceptions correctly</name>
+<name>Instantiate argument exceptions correctly (FxCop10)</name>
 <configKey>InstantiateArgumentExceptionsCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[String arguments passed to constructors of ArgumentException and its derived types should be correct. Types derived from ArgumentException have inconsistent constructor overloads with respect to the message and paramName parameters as compared to ArgumentException.<br/>
@@ -1482,7 +1482,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="NonConstantFieldsShouldNotBeVisible">
-<name>Non-constant fields should not be visible</name>
+<name>Non-constant fields should not be visible (FxCop10)</name>
 <configKey>NonConstantFieldsShouldNotBeVisible@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Static fields should be constant unless you carefully manage access to the field using locks. Using static variables without making them thread safe can compromise execution state. This rule applies to managed code libraries. If the analyzed assembly is an application, it is usually safe to exclude violations of this rule.<br/>
@@ -1490,7 +1490,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotMarkServicedComponentsWithWebMethod">
-<name>Do not mark serviced components with WebMethod</name>
+<name>Do not mark serviced components with WebMethod (FxCop10)</name>
 <configKey>DoNotMarkServicedComponentsWithWebMethod@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Types that extend ServicedComponent should not have the WebMethod attribute applied to members. Marking members of types that extend ServicedComponent with WebMethod is not a supported scenario.<br/>
@@ -1498,7 +1498,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DisposableFieldsShouldBeDisposed">
-<name>Disposable fields should be disposed</name>
+<name>Disposable fields should be disposed (FxCop10)</name>
 <configKey>DisposableFieldsShouldBeDisposed@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[If a type that implements IDisposable owns fields that also implement IDisposable, the encapsulating type's Dispose() implementation should call Dispose() on each disposable field.<br/>
@@ -1506,7 +1506,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotCallOverridableMethodsInConstructors">
-<name>Do not call overridable methods in constructors</name>
+<name>Do not call overridable methods in constructors (FxCop10)</name>
 <configKey>DoNotCallOverridableMethodsInConstructors@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Virtual methods defined on the class should not be called from constructors. If a derived class has overridden the method, the derived class version will be called (before the derived class constructor is called).<br/>
@@ -1514,7 +1514,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DisposableTypesShouldDeclareFinalizer">
-<name>Disposable types should declare finalizer</name>
+<name>Disposable types should declare finalizer (FxCop10)</name>
 <configKey>DisposableTypesShouldDeclareFinalizer@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[If a type implements a Dispose method and has unmanaged resources, it should provide a Finalize method in case Dispose is not explicitly called. The runtime calls the Finalize method or destructor of an object prior to reclaiming its managed resources in a process known as garbage collection. The Finalize method should free any unmanaged resources before they become inaccessible.<br/>
@@ -1522,7 +1522,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotMarkEnumsWithFlags">
-<name>Do not mark enums with FlagsAttribute</name>
+<name>Do not mark enums with FlagsAttribute (FxCop10)</name>
 <configKey>DoNotMarkEnumsWithFlags@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[The enumeration does not appear to contain a consistent set values that can be combined using  the OR (|) and AND (&amp;amp;amp;) operators. Using the Flags attribute on an enumeration suggests that the enumeration values are meant to be combined using the AND and OR operators. Typically, a flags enumeration uses values that are either powers of two, or combine other values that are powers of two.<br/>
@@ -1530,7 +1530,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OverrideGetHashCodeOnOverridingEquals">
-<name>Override GetHashCode on overriding Equals</name>
+<name>Override GetHashCode on overriding Equals (FxCop10)</name>
 <configKey>OverrideGetHashCodeOnOverridingEquals@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[When overriding Equals, you must also override GetHashCode to guarantee correct behavior with hashtables.<br/>
@@ -1538,7 +1538,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotRaiseExceptionsInExceptionClauses">
-<name>Do not raise exceptions in exception clauses</name>
+<name>Do not raise exceptions in exception clauses (FxCop10)</name>
 <configKey>DoNotRaiseExceptionsInExceptionClauses@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Raising exceptions in exception clauses greatly increases the difficulty of debugging. Exceptions raised in finally and fault clauses will hide any exceptions raised in the corresponding try block. If an exception is raised in a filter, it is ignored and treated as if the filter had returned false.<br/>
@@ -1546,7 +1546,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="FinalizersShouldCallBaseClassFinalizer">
-<name>Finalizers should call base class finalizer</name>
+<name>Finalizers should call base class finalizer (FxCop10)</name>
 <configKey>FinalizersShouldCallBaseClassFinalizer@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[The Finalize method should call its base class' Finalize method. This is done automatically with the C# destructor syntax.<br/>
@@ -1554,7 +1554,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="FinalizersShouldBeProtected">
-<name>Finalizers should be protected</name>
+<name>Finalizers should be protected (FxCop10)</name>
 <configKey>FinalizersShouldBeProtected@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Finalize methods should be declared as protected.<br/>
@@ -1562,7 +1562,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotDecreaseInheritedMemberVisibility">
-<name>Do not decrease inherited member visibility</name>
+<name>Do not decrease inherited member visibility (FxCop10)</name>
 <configKey>DoNotDecreaseInheritedMemberVisibility@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[It is incorrect to override a public method from an inherited class with a private implementation, unless the type is sealed or the method is marked final. It is considered bad form to hide a method signature halfway down an inheritance tree.<br/>
@@ -1570,7 +1570,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MembersShouldDifferByMoreThanReturnType">
-<name>Members should differ by more than return type</name>
+<name>Members should differ by more than return type (FxCop10)</name>
 <configKey>MembersShouldDifferByMoreThanReturnType@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Methods in the same type that differ only by return type can be difficult for developers and tools to properly recognize. When extending a type, be sure not to define new methods that differ from base type methods only by type.<br/>
@@ -1578,7 +1578,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OverrideEqualsOnOverloadingOperatorEquals">
-<name>Override Equals on overloading operator equals</name>
+<name>Override Equals on overloading operator equals (FxCop10)</name>
 <configKey>OverrideEqualsOnOverloadingOperatorEquals@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Types that redefine the equality operator should redefine Equals as well to ensure that these members return the same results. This helps ensure that types that rely on Equals (such as ArrayList and Hashtable) behave in a manner that is expected and consistent with the equality operator.<br/>
@@ -1586,7 +1586,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OperatorOverloadsHaveNamedAlternates">
-<name>Operator overloads have named alternates</name>
+<name>Operator overloads have named alternates (FxCop10)</name>
 <configKey>OperatorOverloadsHaveNamedAlternates@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[When redefining operators, implement named methods to provide access to the operator functionality from languages that do not support operator overloading. For example, the functionality of the '+' operator should also be accessible using an 'Add' method.<br/>
@@ -1594,7 +1594,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OperatorsShouldHaveSymmetricalOverloads">
-<name>Operators should have symmetrical overloads</name>
+<name>Operators should have symmetrical overloads (FxCop10)</name>
 <configKey>OperatorsShouldHaveSymmetricalOverloads@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Overload operators that have related meanings so that their behavior is consistent. For example, when overloading the equality operator, you should also overload the inequality operator to ensure they return opposite results for the same input values.<br/>
@@ -1602,7 +1602,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CollectionPropertiesShouldBeReadOnly">
-<name>Collection properties should be read only</name>
+<name>Collection properties should be read only (FxCop10)</name>
 <configKey>CollectionPropertiesShouldBeReadOnly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Properties that return collections should be read-only so that users cannot entirely replace the backing store. Users can still modify the contents of the collection by calling relevant methods on the collection. Note that the XmlSerializer class has special support for deserializing read-only collections. See the XmlSerializer overview for more information.<br/>
@@ -1610,7 +1610,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="DoNotShipUnreleasedResourceFormats">
-<name>Do not ship unreleased resource formats</name>
+<name>Do not ship unreleased resource formats (FxCop10)</name>
 <configKey>DoNotShipUnreleasedResourceFormats@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Resources generated by pre-release versions of the .NET Framework might contain incorrect or incomplete type references. Pre-release versions of the .NET Framework can generate partial or incomplete references to types. Resources built with pre-release software are not guaranteed to work correctly in released versions.<br/>
@@ -1618,7 +1618,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ImplementSerializationConstructors">
-<name>Implement serialization constructors</name>
+<name>Implement serialization constructors (FxCop10)</name>
 <configKey>ImplementSerializationConstructors@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[The constructor signature accepts the same arguments as ISerializable.GetObjectData, namely, a SerializationInfo instance and a StreamingContext instance. The constructor should be protected for non-sealed classes and private for sealed classes. Failure to implement a serialization constructor will cause deserialization to fail, and throw a SerializationException.<br/>
@@ -1626,7 +1626,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="UseParamsForVariableArguments">
-<name>Use params for variable arguments</name>
+<name>Use params for variable arguments (FxCop10)</name>
 <configKey>UseParamsForVariableArguments@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Do not use the varargs calling convention to accept a variable number of arguments. In the managed world, the 'params' and 'ParamArray' keywords provide this functionality..<br/>
@@ -1634,7 +1634,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OverloadOperatorEqualsOnOverridingValueTypeEquals">
-<name>Overload operator equals on overriding ValueType.Equals</name>
+<name>Overload operator equals on overriding ValueType.Equals (FxCop10)</name>
 <configKey>OverloadOperatorEqualsOnOverridingValueTypeEquals@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Value types that redefine System.ValueType.Equals should redefine the equality operator as well to ensure that these members return the same results. This helps ensure that types that rely on Equals (such as ArrayList and Hashtable) behave in a manner that is expected and consistent with the equality operator.<br/>
@@ -1642,7 +1642,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkWindowsFormsEntryPointsWithStaThread">
-<name>Mark Windows Forms entry points with STAThread</name>
+<name>Mark Windows Forms entry points with STAThread (FxCop10)</name>
 <configKey>MarkWindowsFormsEntryPointsWithStaThread@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Assemblies that reference System.Windows.Forms should have the STAThreadAttribute. Failure to apply this attribute will most likely result in an application that does not work. Windows Forms relies on a number of components that use the STA model.<br/>
@@ -1650,7 +1650,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="OperationsShouldNotOverflow">
-<name>Operations should not overflow</name>
+<name>Operations should not overflow (FxCop10)</name>
 <configKey>OperationsShouldNotOverflow@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Arithmetic operations should not be done without first validating the operands to prevent overflow.<br/>
@@ -1658,7 +1658,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="PassSystemUriObjectsInsteadOfStrings">
-<name>Pass System.Uri objects instead of strings</name>
+<name>Pass System.Uri objects instead of strings (FxCop10)</name>
 <configKey>PassSystemUriObjectsInsteadOfStrings@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[If there are two overloads one taking System.Uri and one taking System.String, library code should never call the string-based overload.<br/>
@@ -1666,7 +1666,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkAllNonSerializableFields">
-<name>Mark all non-serializable fields</name>
+<name>Mark all non-serializable fields (FxCop10)</name>
 <configKey>MarkAllNonSerializableFields@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[All fields that cannot be serialized directly should have the NonSerializedAttribute. Types that have the SerializableAttribute should not have fields of types that do not have the SerializableAttribute unless the fields are marked with the NonSerializedAttribute.<br/>
@@ -1674,7 +1674,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CallBaseClassMethodsOnISerializableTypes">
-<name>Call base class methods on ISerializable types</name>
+<name>Call base class methods on ISerializable types (FxCop10)</name>
 <configKey>CallBaseClassMethodsOnISerializableTypes@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Derived ISerializable types must call the base class magic constructor and the base class GetObjectData method.<br/>
@@ -1682,7 +1682,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="MarkISerializableTypesWithSerializable">
-<name>Mark ISerializable types with SerializableAttribute</name>
+<name>Mark ISerializable types with SerializableAttribute (FxCop10)</name>
 <configKey>MarkISerializableTypesWithSerializable@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[The System.Runtime.Serialization.ISerializable interface allows the type to customize its serialization, while the Serializable attribute enables the runtime to recognize the type as being serializable.<br/>
@@ -1690,7 +1690,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ImplementSerializationMethodsCorrectly">
-<name>Implement serialization methods correctly</name>
+<name>Implement serialization methods correctly (FxCop10)</name>
 <configKey>ImplementSerializationMethodsCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Methods marked with OnSerializing, OnSerialized, OnDeserializing, or OnDeserialized, must be non-generic, private, return void (Sub in Visual Studio) and take a single parameter of type StreamingContext.<br/>
@@ -1698,7 +1698,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ProvideDeserializationMethodsForOptionalFields">
-<name>Provide deserialization methods for optional fields</name>
+<name>Provide deserialization methods for optional fields (FxCop10)</name>
 <configKey>ProvideDeserializationMethodsForOptionalFields@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[If a type contains fields attributed as OptionalField, then it should implement the corresponding special deserialization methods.<br/>
@@ -1706,7 +1706,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="ImplementISerializableCorrectly">
-<name>Implement ISerializable correctly</name>
+<name>Implement ISerializable correctly (FxCop10)</name>
 <configKey>ImplementISerializableCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[If a type is assignable to ISerializable, it should implement GetObjectData. For unsealed types, the GetObjectData method should be callable and overridable by derived types.<br/>
@@ -1714,7 +1714,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="TestForNaNCorrectly">
-<name>Test for NaN correctly</name>
+<name>Test for NaN correctly (FxCop10)</name>
 <configKey>TestForNaNCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Direct comparisons against 'Single.NaN' or 'Double.NaN' (not a number) always return true for inequality and false for all other comparisons; use 'Single.IsNaN' or 'Double.IsNaN' to check if a floating point value is NaN.<br/>
@@ -1722,7 +1722,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="AttributeStringLiteralsShouldParseCorrectly">
-<name>Attribute string literals should parse correctly</name>
+<name>Attribute string literals should parse correctly (FxCop10)</name>
 <configKey>AttributeStringLiteralsShouldParseCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Literal strings used as attribute parameters that represent URLs, version numbers, or GUIDs, should have the appropriate format.<br/>
@@ -1730,7 +1730,7 @@ A "contributor" is any person that distributes its contribution under this licen
 ]]></description>
 </rule>
 <rule key="CallGCSuppressFinalizeCorrectly">
-<name>Call GC.SuppressFinalize correctly</name>
+<name>Call GC.SuppressFinalize correctly (FxCop10)</name>
 <configKey>CallGCSuppressFinalizeCorrectly@$(FxCopDir)\Rules\UsageRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[Call GC.SuppressFinalize to suppress finalization of your instance once Dispose has been called. Objects that implement IDisposable should call SuppressFinalize from the IDisposable.Dispose method to prevent the garbage collector from calling Object.Finalize on an object that does not require it.<br/>
@@ -1743,55 +1743,55 @@ A "contributor" is any person that distributes its contribution under this licen
 
 
 <rule key="MarkVerbHandlersWithValidateAntiforgeryToken">
-<name>MarkVerbHandlersWithValidateAntiforgeryToken</name>
+<name>MarkVerbHandlersWithValidateAntiforgeryToken (Fxcop ASP.NET security rules)</name>
 <configKey>MarkVerbHandlersWithValidateAntiforgeryToken@$(FxCopDir)\Rules\AspNetMvcSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that verifies that if the ValidateAntiforgeryTokenAttribute is used to protect against Potential CSRF attack in MVC.<br/>The controller action must use the ValidateAntiForgeryTokenAttribute attribute. Info: {0}]]></description>
 </rule>
 <rule key="ControllerActionShouldValidateInput">
-<name>ControllerActionShouldValidateInput</name>
+<name>ControllerActionShouldValidateInput (Fxcop ASP.NET security rules)</name>
 <configKey>ControllerActionShouldValidateInput@$(FxCopDir)\Rules\AspNetMvcSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies if the ValidateInputAttribute is used properly to protect against XSS attacks.<br/>The ValidateRequestAttribute must be removed or set to true to enable request validation.]]></description>
 </rule>
 <rule key="EnableEventValidationShouldBeTrue">
-<name>EnableEventValidationShouldBeTrue</name>
+<name>EnableEventValidationShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>EnableEventValidationShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableEventValidation is disabled on a certain page.<br/>The EnableEventValidation page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/system.web.ui.page.enableeventvalidation.aspx for more information]]></description>
 </rule>
 <rule key="ValidateRequestShouldBeEnabled">
-<name>ValidateRequestShouldBeEnabled</name>
+<name>ValidateRequestShouldBeEnabled (Fxcop ASP.NET security rules)</name>
 <configKey>ValidateRequestShouldBeEnabled@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the ValidateRequest is disabled on a certain page.<br/>The ValidateRequest page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/ydy4x04a.aspx for more information]]></description>
 </rule>
 <rule key="ViewStateEncryptionModeShouldBeAlways">
-<name>ViewStateEncryptionModeShouldBeAlways</name>
+<name>ViewStateEncryptionModeShouldBeAlways (Fxcop ASP.NET security rules)</name>
 <configKey>ViewStateEncryptionModeShouldBeAlways@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the ViewStateEncryptionMode is not set to Never on a certain page.<br/>The ViewStateEncryptionMode page property needs to be set to Always. Refer to http://msdn.microsoft.com/en-us/library/system.web.configuration.pagessection.viewstateencryptionmode.aspx for more information]]></description>
 </rule>
 <rule key="EnableViewStateMacShouldBeTrue">
-<name>EnableViewStateMacShouldBeTrue</name>
+<name>EnableViewStateMacShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>EnableViewStateMacShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableViewStateMac is not set to false on a certain page.<br/>The EnableViewStateMac page property needs to be set to true. Refer to http://msdn.microsoft.com/en-us/library/system.web.configuration.pagessection.enableviewstatemac.aspx for more information]]></description>
 </rule>
 <rule key="EnableViewStateShouldBeTrue">
-<name>EnableViewStateShouldBeTrue</name>
+<name>EnableViewStateShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>EnableViewStateShouldBeTrue@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Rule that will identify if the EnableViewStateRule is not set to false on a certain page.<br/>The EnableViewStateRule page property needs to be set to true or the page cannot benefit from ViewStateUserKey protections against CSRF attacks.]]></description>
 </rule>
 <rule key="ViewStateUserKeyShouldBeSet">
-<name>ViewStateUserKeyShouldBeSet</name>
+<name>ViewStateUserKeyShouldBeSet (Fxcop ASP.NET security rules)</name>
 <configKey>ViewStateUserKeyShouldBeSet@$(FxCopDir)\Rules\AspNetSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies if the ViewStateEncryptionMode directive is not set to Never  on a certain page.<br/>The ViewStateUserKey page property on {0} needs to be set to a unique identifier. Refer to http://msdn.microsoft.com/en-us/library/system.web.ui.page.viewstateuserkey.aspx for more information]]></description>
 </rule>
 <rule key="DebugCompilationMustBeDisabled">
-<name>DebugCompilationMustBeDisabled</name>
+<name>DebugCompilationMustBeDisabled (Fxcop ASP.NET security rules)</name>
 <configKey>DebugCompilationMustBeDisabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that debug compilation is turned off. This eliminates potential performance and security issues related to debug code enabled and additional extensive error messages being returned.<br/>
@@ -1810,7 +1810,7 @@ Example:
     ]]></description>
 </rule>
 <rule key="CustomErrorPageShouldBeSpecified">
-<name>CustomErrorPageShouldBeSpecified</name>
+<name>CustomErrorPageShouldBeSpecified (Fxcop ASP.NET security rules)</name>
 <configKey>CustomErrorPageShouldBeSpecified@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that the CustomErrors section is configured to have a default url for redirecting uses in case of error.<br/>
@@ -1831,7 +1831,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="FormAuthenticationShouldNotContainFormAuthenticationCredentials">
-<name>FormAuthenticationShouldNotContainFormAuthenticationCredentials</name>
+<name>FormAuthenticationShouldNotContainFormAuthenticationCredentials (Fxcop ASP.NET security rules)</name>
 <configKey>FormAuthenticationShouldNotContainFormAuthenticationCredentials@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that no credentials are specified under the form authentication configuration.<br/>
@@ -1855,7 +1855,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="EnableCrossAppRedirectsShouldBeTrue">
-<name>EnableCrossAppRedirectsShouldBeTrue</name>
+<name>EnableCrossAppRedirectsShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>EnableCrossAppRedirectsShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.authentication.forms enableCrossAppRedirects is set to true. The settings indicate if the user should be redirected to another application url after the authentication process. If the setting is false, the authentication process will not allow redirection to another application or host. This helps prevent an attacker to force the user to be redirected to another site during the authentication process. This attack is commonly called Open redirect and is used mostly during phishing attacks.<br/>
@@ -1878,7 +1878,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="FormAuthenticationProtectionShouldBeAll">
-<name>FormAuthenticationProtectionShouldBeAll</name>
+<name>FormAuthenticationProtectionShouldBeAll (Fxcop ASP.NET security rules)</name>
 <configKey>FormAuthenticationProtectionShouldBeAll@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the protection attribute on the system.web.authentication.forms protection is set to All which specifies that the application use both data validation and encryption to help protect the authentication cookie.<br/>
@@ -1901,7 +1901,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="FormAuthenticationRequireSSLShouldBeTrue">
-<name>FormAuthenticationRequireSSLShouldBeTrue</name>
+<name>FormAuthenticationRequireSSLShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>FormAuthenticationRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the requireSSL attribute on the system.web.authentication.forms configuration element is set to True which force the authentication cookie to specify the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
@@ -1924,7 +1924,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="FormAuthenticationSlidingExpirationShouldBeFalse">
-<name>FormAuthenticationSlidingExpirationShouldBeFalse</name>
+<name>FormAuthenticationSlidingExpirationShouldBeFalse (Fxcop ASP.NET security rules)</name>
 <configKey>FormAuthenticationSlidingExpirationShouldBeFalse@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that if the system.web.authentication.forms slidingExpiration be set to false when the site is being serviced over HTTP. This will force the authentication cookie to have a fix timeout value instead of being refreshed by each request. Since the cookie will traverse over clear text network and can be sniffed, having a fix timeout value on the cookie will limit the amount of time the cookie can be replayed. If the cookie is traversing over HTTPS, it is less likely to be intercepted and having the slidingExpiration setting to True will cause the timeout to be refreshed after each request which gives a better user experience.<br/>
@@ -1966,7 +1966,7 @@ Examples:
 ]]></description>
 </rule>
 <rule key="HttpCookiesHttpOnlyCookiesShouldBeTrue">
-<name>HttpCookiesHttpOnlyCookiesShouldBeTrue</name>
+<name>HttpCookiesHttpOnlyCookiesShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>HttpCookiesHttpOnlyCookiesShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpCookies httpOnlyCookies configuration is set to True which force all cookies to be sent with the HttpOnly attribute.<br/>
@@ -1987,7 +1987,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="HttpCookiesRequireSSLShouldBeTrue">
-<name>HttpCookiesRequireSSLShouldBeTrue</name>
+<name>HttpCookiesRequireSSLShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>HttpCookiesRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpCookies requireSSL configuration is set to True which force all cookies to be sent with the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
@@ -2008,7 +2008,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="TraceShouldBeDisabled">
-<name>TraceShouldBeDisabled</name>
+<name>TraceShouldBeDisabled (Fxcop ASP.NET security rules)</name>
 <configKey>TraceShouldBeDisabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.trace enabled setting is set to false which disable tracing. It is recommended to disable tracing on production servers to make sure that an attacker cannot gain information from the trace about your application. Trace information can help an attacker probe and compromise your application.<br/>
@@ -2029,7 +2029,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="AnonymousAccessIsEnabled">
-<name>AnonymousAccessIsEnabled</name>
+<name>AnonymousAccessIsEnabled (Fxcop ASP.NET security rules)</name>
 <configKey>AnonymousAccessIsEnabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Looks in the web.config file to see if the authorization section allows anonymous access.<br/>
@@ -2055,7 +2055,7 @@ Example :
 ]]></description>
 </rule>
 <rule key="RoleManagerCookieProtectionShouldBeAll">
-<name>RoleManagerCookieProtectionShouldBeAll</name>
+<name>RoleManagerCookieProtectionShouldBeAll (Fxcop ASP.NET security rules)</name>
 <configKey>RoleManagerCookieProtectionShouldBeAll@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.rolemanager cookieProtection is set to All which enforce both the cookie to be encrypted and validated by the server.<br/>
@@ -2076,7 +2076,7 @@ Example :
 ]]></description>
 </rule>
 <rule key="RoleManagerCookieRequireSSLShouldBeTrue">
-<name>RoleManagerCookieRequireSSLShouldBeTrue</name>
+<name>RoleManagerCookieRequireSSLShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>RoleManagerCookieRequireSSLShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.rolemanager cookieRequireSSL attribute is set to True which force the role manager cookie to specify the secure attribute. This indicates the browser to only provide the cookie over SSL.<br/>
@@ -2096,7 +2096,7 @@ Example :
 ]]></description>
 </rule>
 <rule key="RoleManagerCookieSlidingExpirationShouldBeFalse">
-<name>RoleManagerCookieSlidingExpirationShouldBeTrue</name>
+<name>RoleManagerCookieSlidingExpirationShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>RoleManagerCookieSlidingExpirationShouldBeFalse@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>
@@ -2120,7 +2120,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="PagesEnableViewStateMacShouldBeTrue">
-<name>PagesEnableViewStateMacShouldBeTrue</name>
+<name>PagesEnableViewStateMacShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>PagesEnableViewStateMacShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verifies that the viewstate mac is enabled.<br/>
@@ -2141,7 +2141,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="PagesEnableEventValidationMustBeTrue">
-<name>PagesEnableEventValidationMustBeTrue</name>
+<name>PagesEnableEventValidationMustBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>PagesEnableEventValidationMustBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify if event validation is enabled.<br/>
@@ -2162,7 +2162,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="HttpRuntimeEnableHeaderCheckingShouldBeTrue">
-<name>HttpRuntimeEnableHeaderCheckingShouldBeTrue</name>
+<name>HttpRuntimeEnableHeaderCheckingShouldBeTrue (Fxcop ASP.NET security rules)</name>
 <configKey>HttpRuntimeEnableHeaderCheckingShouldBeTrue@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.httpRuntime enableHeaderChecking attribute is set to true. From http://msdn.microsoft.com/en-us/library/e1f13641.aspx. The setting indicates whether ASP.NET should check the request header for potential injection attacks. If an attack is detected, ASP.NET responds with an error. This forces ASP.NET to apply the ValidateRequest protection to headers sent by the client. If an attack is detected the application throws HttpRequestValidationException.<br/>
@@ -2183,7 +2183,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="PagesValidateRequestShouldBeEnabled">
-<name>PagesValidateRequestShouldBeEnabled</name>
+<name>PagesValidateRequestShouldBeEnabled (Fxcop ASP.NET security rules)</name>
 <configKey>PagesValidateRequestShouldBeEnabled@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify that validateRequest is enabled.<br/>
@@ -2204,7 +2204,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="PagesViewStateEncryptionModeShouldBeAlways">
-<name>PagesViewStateEncryptionModeShouldBeAlways</name>
+<name>PagesViewStateEncryptionModeShouldBeAlways (Fxcop ASP.NET security rules)</name>
 <configKey>PagesViewStateEncryptionModeShouldBeAlways@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>Verify that the viewstate encryption mode is not configured to never encrypt.<br/>
@@ -2225,7 +2225,7 @@ Example:
 ]]></description>
 </rule>
 <rule key="CustomErrorsModeShouldBeOn">
-<name>CustomErrorsModeShouldBeOn</name>
+<name>CustomErrorsModeShouldBeOn (Fxcop ASP.NET security rules)</name>
 <configKey>CustomErrorsModeShouldBeOn@$(FxCopDir)\Rules\AspNetConfigurationSecurityRules.dll</configKey>
 <category name="Usability"/>
 <description><![CDATA[This rule is part of the <a href="http://fxcopaspnetsecurity.codeplex.com/">fxcop asp.net security rules</a><br/>The rule verifies that the system.web.customErrors mode is set to On or RemoteOnly. This disable detailed error message returned by ASP.NET to remote users.<br/>
