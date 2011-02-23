@@ -33,6 +33,7 @@ import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,6 +167,29 @@ public class GallioResultParserTest
     assertTrue(reports.size() >= 1);
   }
   
+  @Test
+  @Ignore
+  public void testMbUnitReportParsing() {
+    Collection<UnitTestReport> reports = parse("gallio-report-mbunit-sample.xml");
+    int errors = 0;
+    int failures = 0;
+    int skipped = 0;
+    int tests = 0;
+    for (UnitTestReport unitTestReport : reports) {
+      errors += unitTestReport.getErrors();
+      failures += unitTestReport.getFailures();
+      skipped += unitTestReport.getSkipped();
+      tests += unitTestReport.getTests();
+    }
+    
+    // 64 run, 58 passed, 4 failed (2 error), 2 inconclusive, 3 skipped (2 ignored)
+    assertEquals(64, tests);
+    
+    assertTrue(reports.size() >= 1);
+    
+  }
+  
+  
   public static class UnitTestReportpredicate implements Predicate<UnitTestReport> {
     
     private final UnitTestReport referenceReport;
@@ -179,4 +203,7 @@ public class GallioResultParserTest
       return referenceReport.equals(report);
     }
   }
+  
+ 
+  
 }
