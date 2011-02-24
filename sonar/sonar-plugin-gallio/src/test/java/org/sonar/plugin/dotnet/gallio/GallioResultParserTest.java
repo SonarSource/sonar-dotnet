@@ -33,18 +33,13 @@ import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
 
 public class GallioResultParserTest
 {
 
-	private final static Logger log = LoggerFactory.getLogger(GallioResultParserTest.class);
   private File sourcefile;
   private GallioResultParser parser;
 	
@@ -65,30 +60,19 @@ public class GallioResultParserTest
   public void testReportParsing() {
     Collection<UnitTestReport> reports = parse("gallio-report.xml");
 		
-		Predicate<UnitTestReport> reportPredicate = new Predicate<UnitTestReport>() {
-			
-			@Override
-			public boolean apply(UnitTestReport report) {
-				
-				return "cs-failures".equals(report.getAssemblyName())
-				&& StringUtils.contains(report.getSourceFile().getName(), "CSharpTest.cs") 
-				&& 420==report.getTimeMS();
-			}
-		};
-		
 		assertFalse("Could not parse a Gallio report", reports.isEmpty());
 
 		Iterator<UnitTestReport> it = reports.iterator();
 
 		assertTrue(it.hasNext());
 
-		UnitTestReport firstReport = Iterators.find(it,reportPredicate);
+		UnitTestReport firstReport = it.next();
 
 		assertEquals("cs-failures", firstReport.getAssemblyName());
 		assertEquals(6, firstReport.getAsserts());
 		assertEquals(3, firstReport.getFailures());
 		assertEquals(1, firstReport.getSkipped());
-		assertTrue(StringUtils.contains(firstReport.getSourceFile().getName(),"CSharpTest.cs"));
+		assertTrue(StringUtils.contains(firstReport.getSourceFile().getName(), "CSharpTest.cs"));
 		assertEquals(6, firstReport.getTests());
 		assertEquals(420, firstReport.getTimeMS());
 
@@ -168,7 +152,6 @@ public class GallioResultParserTest
   }
   
   @Test
-  @Ignore
   public void testMbUnitReportParsing() {
     Collection<UnitTestReport> reports = parse("gallio-report-mbunit-sample.xml");
     int errors = 0;
@@ -181,20 +164,23 @@ public class GallioResultParserTest
       skipped += unitTestReport.getSkipped();
       tests += unitTestReport.getTests();
     }
-    
-    // 64 run, 58 passed, 4 failed (2 error), 2 inconclusive, 3 skipped (2 ignored)
-    assertEquals(64, tests);
-    
-    assertTrue(reports.size() >= 1);
+    // There are 13 methods flagged as "Test" in the solution, 1 failure (1 error) and 3 tests skipped
+    assertEquals(13, tests);
+    assertEquals(1, failures);
+    assertEquals(1, errors);
+    assertEquals(3, skipped);
+
+    // There should be 5 reports because there are 5 different test classes
+    assertTrue(reports.size() >= 5);
     
   }
   
   
-  public static class UnitTestReportpredicate implements Predicate<UnitTestReport> {
+  public static class UnitTestReportPredicate implements Predicate<UnitTestReport> {
     
     private final UnitTestReport referenceReport;
     
-    public UnitTestReportpredicate(UnitTestReport referenceReport) {
+    public UnitTestReportPredicate(UnitTestReport referenceReport) {
       this.referenceReport = referenceReport;
     }
     
@@ -203,6 +189,7 @@ public class GallioResultParserTest
       return referenceReport.equals(report);
     }
   }
+  
   
  
   

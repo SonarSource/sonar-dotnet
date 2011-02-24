@@ -70,13 +70,11 @@ public class GallioResultStaxParser implements GallioResultParser {
   private static final String MEMBER = "member";
   private static final String PATH = "path";
   private static final String LINE = "line";
-  
+
   private final static Logger log = LoggerFactory.getLogger(GallioResultStaxParser.class);
 
 
   private Map<String, TestCaseDetail> testCaseDetailsByTestIds;
-
-
 
   public Set<UnitTestReport> parse(File report) {
     try {
@@ -95,7 +93,7 @@ public class GallioResultStaxParser implements GallioResultParser {
       advanceCursor(testModelCursor);
       log.debug("TestModelCursor initialized at : {}", findElementName(testModelCursor));
       testsDetails = recursiveParseTestsIds(testModelCursor, testsDetails, null, null);
-      
+
       QName testPackageRunTag = new QName(GALLIO_URI, "testPackageRun");
       testModelCursor.setFilter(SMFilterFactory.getElementOnlyFilter(testPackageRunTag));
       advanceCursor(testModelCursor);
@@ -111,17 +109,16 @@ public class GallioResultStaxParser implements GallioResultParser {
     }catch(XMLStreamException e){
       throw new SonarPluginException(GALLIO_REPORT_PARSING_ERROR, e);
     }
-    
+
   }
 
   private Map<String, TestDescription> recursiveParseTestsIds(SMInputCursor rootCursor, 
       Map<String, TestDescription> testDetails, File sourceFile, String parentAssemblyName){
-    
+
     QName testTag = new QName(GALLIO_URI, "test");
     if(isAStartElement(rootCursor)){
       // Get all the tests
       SMInputCursor currentTest = descendantSpecifiedElements(rootCursor, testTag);
-      String eltName;
       while (null != nextPosition(currentTest) && isAStartElement(currentTest)) {
         TestDescription testDescription = new TestDescription();
         String id = findAttributeValue(currentTest, "id");
@@ -132,10 +129,12 @@ public class GallioResultStaxParser implements GallioResultParser {
         // We analyse all the tests tags to get usefull informations if the test is a TestCase,
         // and to get their children
         SMInputCursor currentTestChildren = descendantElements(currentTest);
-        while (null != nextPosition(currentTestChildren)){
+        String eltName = null;
+        while (null != nextPosition(currentTestChildren) && !"parameters".equals(eltName)){
           eltName = findElementName(currentTestChildren);
           if(isTestCase){
             testDescription.setMethodName(name);
+            log.debug(eltName);
             if("codeReference".equals(eltName)){
               parentAssemblyName = codeReferenceTreatment(parentAssemblyName, testDescription, currentTestChildren);
               retrieveCodeReferences(testDescription, currentTestChildren);
@@ -287,8 +286,8 @@ public class GallioResultStaxParser implements GallioResultParser {
       if(null != findAttributeValue(currentTestOutcomeResultCursor, "category")){
         category = findAttributeValue(currentTestOutcomeResultCursor, "category");
       }
-
       log.debug("---status : {}", status);
+
       TestStatus executionStatus = TestStatus.computeStatus(status, category);
       nextPosition(currentTestTags);
       detail.setStatus(executionStatus);
@@ -342,7 +341,7 @@ public class GallioResultStaxParser implements GallioResultParser {
             log.debug("Error Message is : {}", message);
             detail.setErrorMessage(message);
           }
-          else if( "marker".equals( findElementName(sectionContentsChild) ) ) {
+          else if( "marker".equals( findElementName(sectionContentsChild) ) && isAStartElement(sectionContentsChild)) {
             log.debug("-------Marker found ! ");
             if( "StackTrace".equals( findAttributeValue(sectionContentsChild, "class") ) ){
               SMInputCursor sectionMarkerTextContent = sectionContentsChild
@@ -353,8 +352,6 @@ public class GallioResultStaxParser implements GallioResultParser {
               detail.setStackTrace(stackTrace);
             }
           }
-          
-          
         }
       }
     }catch(XMLStreamException e){
@@ -372,18 +369,19 @@ public class GallioResultStaxParser implements GallioResultParser {
       TestDescription description = testsDescriptionByTestIds.get(testId);
       TestCaseDetail testCaseDetail = testCaseDetailsByTestIds.get(testId);
       if(description == null){
-        log.warn("Test {} is not considered as a testCase in your xml, there should not be any testStep associated, please check your gallio report. Skipping result", testId);
+        log.debug("Test {} is not considered as a testCase in your xml, there should not be any testStep associated, please check your gallio report. Skipping result", testId);
         testsToRemove.add(testId);
       }else{
         testCaseDetail.merge(description);
         testCaseDetailsByTestIds.put(testId, testCaseDetail);
       }
     }
-    
+
+    log.debug("Tests to be removed {}", testsToRemove.size());
     for(String testToRemove : testsToRemove){
       testCaseDetailsByTestIds.remove(testToRemove);
     }
-    
+
     Collection<TestCaseDetail> testCases = testCaseDetailsByTestIds.values();
     Multimap<String, TestCaseDetail> testCaseDetailsBySrcKey = ArrayListMultimap.create();
     for (TestCaseDetail testCaseDetail : testCases) {
@@ -420,7 +418,7 @@ public class GallioResultStaxParser implements GallioResultParser {
       }
     }
     result.addAll(unitTestsReports.values());
-    log.debug("UnitTestReports contains " + unitTestsReports.size() + " report(s)");
+
     log.debug("The result Set contains " + result.size() + " report(s)");
 
     return result;
