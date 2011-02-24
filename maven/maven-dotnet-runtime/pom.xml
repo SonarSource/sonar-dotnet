@@ -4,7 +4,7 @@
   <parent>
     <artifactId>maven-dotnet</artifactId>
     <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.5</version>
   </parent>
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>maven-dotnet-runtime</artifactId>
