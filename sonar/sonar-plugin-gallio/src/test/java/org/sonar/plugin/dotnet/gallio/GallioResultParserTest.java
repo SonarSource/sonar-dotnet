@@ -33,6 +33,7 @@ import java.util.Iterator;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -173,6 +174,16 @@ public class GallioResultParserTest
     // There should be 5 reports because there are 5 different test classes
     assertTrue(reports.size() >= 5);
     
+  }
+  
+  @Test
+  @Ignore
+  public void testMsTest() {
+    Collection<UnitTestReport> reports = parse("gallio-report-mstest.xml");
+    assertEquals(1, reports.size());
+    UnitTestReport report = reports.iterator().next();
+    assertEquals(1, report.getTests());
+    assertTrue(report.getTimeMS()>25000);
   }
   
   
