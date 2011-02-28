@@ -49,7 +49,7 @@ import org.sonar.plugin.dotnet.srcmon.model.MethodMetric;
 public class SourceMonitorResultStaxParser implements SourceMonitorResultParser {
 
   private final static Logger log = LoggerFactory.getLogger(SourceMonitorResultStaxParser.class);
-  
+
   private enum FileMetricEnum {
     /** Line count */
     M0,
@@ -66,10 +66,9 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     /** Calls per Method */
     M6,
     /** Statements per Method */
-    M7, 
+    M7,
     /** Average Complexity */
-    M14,
-    M8,M9,M10,M11,M12,M13
+    M14, M8, M9, M10, M11, M12, M13
   }
 
   private enum MethodMetricEnum {
@@ -94,8 +93,6 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     CALLS,
   }
 
-  
-
   private static final int INITIAL_CAPACITY = 100;
   private File baseDir;
 
@@ -109,24 +106,20 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
   public List<FileMetrics> parse(File reportFile) {
     try {
       XmlStreamHandler parserHandler = new XmlStreamHandler() {
+
         @Override
-        public void stream(SMHierarchicCursor rootCursor)
-            throws XMLStreamException {
-          SMInputCursor project = rootCursor.advance()
-              .descendantElementCursor("project").advance()
-              .childElementCursor();
+        public void stream(SMHierarchicCursor rootCursor) throws XMLStreamException {
+          SMInputCursor project = rootCursor.advance().descendantElementCursor("project").advance().childElementCursor();
 
           while (null != project.getNext()) {
             String curLocation = project.getLocalName();
             if ("project_directory".equals(curLocation)) {
               baseDir = new File(project.collectDescendantText());
             } else if ("checkpoints".equals(curLocation)) {
-              SMInputCursor filesCursor = project.descendantElementCursor(
-                  "files").advance();
+              SMInputCursor filesCursor = project.descendantElementCursor("files").advance();
               int fileNb;
               try {
-                fileNb = Integer.parseInt(filesCursor
-                    .getAttrValue("file_count"));
+                fileNb = Integer.parseInt(filesCursor.getAttrValue("file_count"));
               } catch (Exception e) {
                 fileNb = INITIAL_CAPACITY;
               }
@@ -146,8 +139,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     return result;
   }
 
-  protected void parseMetrics(SMInputCursor fileCursor)
-      throws XMLStreamException {
+  protected void parseMetrics(SMInputCursor fileCursor) throws XMLStreamException {
 
     SMEvent fileEvent;
     while ((fileEvent = fileCursor.getNext()) != null) {
@@ -167,21 +159,19 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
    * @param fileNode
    * @return
    */
-  private FileMetrics createMetrics(SMInputCursor fileCursor) 
-    throws XMLStreamException {
-    
+  private FileMetrics createMetrics(SMInputCursor fileCursor) throws XMLStreamException {
+
     String rawFileName = fileCursor.getAttrValue("file_name");
-    String className = StringUtils.removeEnd(rawFileName, ".cs").replace('\\',
-        '.');
+    String className = StringUtils.removeEnd(rawFileName, ".cs").replace('\\', '.');
     String namespace = StringUtils.substringBeforeLast(className, ".");
 
     FileMetrics fileMetric = new FileMetrics();
     fileMetric.setClassName(className);
     fileMetric.setNamespace(namespace);
-    
+
     File path = toFullPath(rawFileName);
     fileMetric.setSourcePath(path);
-    
+
     int countBlankLines = BlankLineCounter.countBlankLines(path);
     fileMetric.setCountBlankLines(countBlankLines);
 
@@ -203,8 +193,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     return fileMetric;
   }
 
-  private void extractMethodMetrics(FileMetrics fileMetric,
-      SMInputCursor methodCursor, File file) throws XMLStreamException {
+  private void extractMethodMetrics(FileMetrics fileMetric, SMInputCursor methodCursor, File file) throws XMLStreamException {
     SMEvent methodEvent;
     while ((methodEvent = methodCursor.getNext()) != null) {
       if (methodEvent.compareTo(SMEvent.START_ELEMENT) == 0) {
@@ -214,8 +203,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
 
   }
 
-  private void extractMetrics(FileMetrics fileMetric, SMInputCursor metricCursor)
-      throws XMLStreamException {
+  private void extractMetrics(FileMetrics fileMetric, SMInputCursor metricCursor) throws XMLStreamException {
     SMEvent metricEvent;
     while ((metricEvent = metricCursor.getNext()) != null) {
       if (metricEvent.compareTo(SMEvent.START_ELEMENT) == 0) {
@@ -228,46 +216,43 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
           continue;
         }
         switch (metricId) {
-        case M0:
-          fileMetric.setCountLines(getIntMetric(metricCursor));
-          break;
-        case M1:
-          fileMetric.setCountStatements(getIntMetric(metricCursor));
-          break;
-        case M2:
-          fileMetric.setPercentCommentLines(getDoubleMetric(metricCursor));
-          break;
-        case M3:
-          fileMetric
-              .setPercentDocumentationLines(getDoubleMetric(metricCursor));
-          break;
-        case M4:
-          fileMetric.setCountClasses(getIntMetric(metricCursor));
-          break;
-        case M5:
-          fileMetric.setCountMethods(getIntMetric(metricCursor));
-          break;
-        case M6:
-          fileMetric.setCountCalls(getIntMetric(metricCursor));
-          break;
-        case M7:
-          fileMetric.setCountMethodStatements(getIntMetric(metricCursor));
-          break;
-        case M14:
-          fileMetric.setAverageComplexity(getDoubleMetric(metricCursor));
-          break;
-        default:
-          break;
+          case M0:
+            fileMetric.setCountLines(getIntMetric(metricCursor));
+            break;
+          case M1:
+            fileMetric.setCountStatements(getIntMetric(metricCursor));
+            break;
+          case M2:
+            fileMetric.setPercentCommentLines(getDoubleMetric(metricCursor));
+            break;
+          case M3:
+            fileMetric.setPercentDocumentationLines(getDoubleMetric(metricCursor));
+            break;
+          case M4:
+            fileMetric.setCountClasses(getIntMetric(metricCursor));
+            break;
+          case M5:
+            fileMetric.setCountMethods(getIntMetric(metricCursor));
+            break;
+          case M6:
+            fileMetric.setCountCalls(getIntMetric(metricCursor));
+            break;
+          case M7:
+            fileMetric.setCountMethodStatements(getIntMetric(metricCursor));
+            break;
+          case M14:
+            fileMetric.setAverageComplexity(getDoubleMetric(metricCursor));
+            break;
+          default:
+            break;
         }
       }
     }
 
-    int documentationLines = (int) (fileMetric.getCountLines()
-        * fileMetric.getPercentDocumentationLines() / 100.0);
+    int documentationLines = (int) (fileMetric.getCountLines() * fileMetric.getPercentDocumentationLines() / 100.0);
     fileMetric.setDocumentationLines(documentationLines);
 
-    int commentLines = (int) (fileMetric.getCountLines()
-        * fileMetric.getPercentCommentLines() / 100.0);
+    int commentLines = (int) (fileMetric.getCountLines() * fileMetric.getPercentCommentLines() / 100.0);
     fileMetric.setCommentLines(commentLines);
 
   }
@@ -280,11 +265,9 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
    * @return
    * @throws XMLStreamException
    */
-  private MethodMetric generateMethod(SMInputCursor methodCursor, File file)
-      throws XMLStreamException {
+  private MethodMetric generateMethod(SMInputCursor methodCursor, File file) throws XMLStreamException {
     String rawName = methodCursor.getAttrValue("name");
-    int methodLine = methodCursor.getAttrIntValue(methodCursor.findAttrIndex(
-        null, "line"));
+    int methodLine = methodCursor.getAttrIntValue(methodCursor.findAttrIndex(null, "line"));
     String className;
     String methodName;
 
@@ -292,12 +275,9 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     if (rawName.endsWith(".get()") || rawName.endsWith(".set()")) {
       isAccessor = true;
       String fullPropertyName = StringUtils.substringBeforeLast(rawName, ".");
-      String propertyName = StringUtils.substringAfterLast(fullPropertyName,
-          ".");
+      String propertyName = StringUtils.substringAfterLast(fullPropertyName, ".");
       className = StringUtils.substringBeforeLast(fullPropertyName, ".");
-      methodName = StringUtils.removeEnd(
-          StringUtils.substringAfterLast(rawName, "."), "()")
-          + "_" + propertyName + "()";
+      methodName = StringUtils.removeEnd(StringUtils.substringAfterLast(rawName, "."), "()") + "_" + propertyName + "()";
     } else {
       methodName = StringUtils.substringAfterLast(rawName, ".");
       className = StringUtils.substringBeforeLast(rawName, ".");
@@ -323,18 +303,18 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
         }
         int metricValue = getIntMetric(childCursor);
         switch (methodMetricEnum) {
-        case COMPLEXITY:
-          methodMetrics.setComplexity(metricValue);
-          break;
-        case STATEMENTS:
-          methodMetrics.setCountStatements(metricValue);
-          break;
-        case MAXIMUM_DEPTH:
-          methodMetrics.setMaximumDepth(metricValue);
-          break;
-        case CALLS:
-          methodMetrics.setCountCalls(metricValue);
-          break;
+          case COMPLEXITY:
+            methodMetrics.setComplexity(metricValue);
+            break;
+          case STATEMENTS:
+            methodMetrics.setCountStatements(metricValue);
+            break;
+          case MAXIMUM_DEPTH:
+            methodMetrics.setMaximumDepth(metricValue);
+            break;
+          case CALLS:
+            methodMetrics.setCountCalls(metricValue);
+            break;
         }
       }
     }
@@ -346,8 +326,7 @@ public class SourceMonitorResultStaxParser implements SourceMonitorResultParser 
     // fix tests on unix system
     // but should not be necessary
     // on windows build machines
-    String rawPortableFileName = StringUtils.replaceChars(rawFileName, '\\',
-        File.separatorChar);
+    String rawPortableFileName = StringUtils.replaceChars(rawFileName, '\\', File.separatorChar);
     File file;
     try {
       file = new File(baseDir, rawPortableFileName).getCanonicalFile();
