@@ -29,108 +29,112 @@ package org.sonar.plugin.dotnet.stylecop;
  * @author Jose CHILLAN May 19, 2009
  */
 public class StyleCopRule {
-	private String analyzerId;
-	private String category;
-	private String name;
+
+  private String analyzerId;
+  private String category;
+  private String name;
   private String priority;
-	private boolean enabled;
+  private boolean enabled;
 
-	/**
-	 * Constructs a @link{StyleCopRule}.
-	 */
-	public StyleCopRule() {
-	}
+  /**
+   * Constructs a @link{StyleCopRule}.
+   */
+  public StyleCopRule() {
+  }
 
-	/**
-	 * Returns the category.
-	 * 
-	 * @return The category to return.
-	 */
-	public String getCategory() {
-		return this.category;
-	}
+  /**
+   * Returns the category.
+   * 
+   * @return The category to return.
+   */
+  public String getCategory() {
+    return this.category;
+  }
 
-	/**
-	 * Sets the category.
-	 * 
-	 * @param category
-	 *          The category to set.
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
+  /**
+   * Sets the category.
+   * 
+   * @param category
+   *          The category to set.
+   */
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
-	/**
-	 * Returns the name.
-	 * 
-	 * @return The name to return.
-	 */
-	public String getName() {
-		return this.name;
-	}
+  /**
+   * Returns the name.
+   * 
+   * @return The name to return.
+   */
+  public String getName() {
+    return this.name;
+  }
 
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 *          The name to set.
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * Sets the name.
+   * 
+   * @param name
+   *          The name to set.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 * Returns the enabled.
-	 * 
-	 * @return The enabled to return.
-	 */
-	public boolean isEnabled() {
-		return this.enabled;
-	}
+  /**
+   * Returns the enabled.
+   * 
+   * @return The enabled to return.
+   */
+  public boolean isEnabled() {
+    return this.enabled;
+  }
 
-	/**
-	 * Sets the enabled.
-	 * 
-	 * @param enabled
-	 *          The enabled to set.
-	 */
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+  /**
+   * Sets the enabled.
+   * 
+   * @param enabled
+   *          The enabled to set.
+   */
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
 
-	/**
-	 * Returns the analyzerId.
-	 * 
-	 * @return The analyzerId to return.
-	 */
-	public String getAnalyzerId() {
-		return this.analyzerId;
-	}
+  /**
+   * Returns the analyzerId.
+   * 
+   * @return The analyzerId to return.
+   */
+  public String getAnalyzerId() {
+    return this.analyzerId;
+  }
 
-	/**
-	 * Sets the analyzerId.
-	 * 
-	 * @param analyzerId
-	 *          The analyzerId to set.
-	 */
-	public void setAnalyzerId(String analyzerId) {
-		this.analyzerId = analyzerId;
-	}
+  /**
+   * Sets the analyzerId.
+   * 
+   * @param analyzerId
+   *          The analyzerId to set.
+   */
+  public void setAnalyzerId(String analyzerId) {
+    this.analyzerId = analyzerId;
+  }
 
-	/**
-	 * Get the sonar priority of this rule
-	 * @return the sonar priority
-	 */
-	public String getPriority() {
-		return priority;
-	}
+  /**
+   * Get the sonar priority of this rule
+   * 
+   * @return the sonar priority
+   */
+  public String getPriority() {
+    return priority;
+  }
 
-	/**
-	 * Set the sonar priority of this rule
-	 * @param priority	sonar priority
-	 */
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
+  /**
+   * Set the sonar priority of this rule
+   * 
+   * @param priority
+   *          sonar priority
+   */
+  public void setPriority(String priority) {
+    this.priority = priority;
+  }
 
 }
