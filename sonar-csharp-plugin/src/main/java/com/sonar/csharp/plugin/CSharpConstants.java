@@ -22,9 +22,9 @@ public final class CSharpConstants {
   public static final String FILE_SUFFIXES_KEY = "sonar.csharp.file.suffixes";
   public static final String FILE_SUFFIXES_DEFVALUE = ".cs";
 
-  public static final String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.csharp.minimumTokens";
+  public static final String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.cs.minimumTokens";
 
-  public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.csharp.ignoreLiteral";
+  public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.cs.ignoreLiteral";
   public static final boolean CPD_IGNORE_LITERALS_DEFVALUE = true;
 
   public static final String SONAR_CSHARP_WAY_PROFILE_KEY = "Sonar C# Way";

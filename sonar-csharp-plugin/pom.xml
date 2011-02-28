@@ -17,6 +17,47 @@
 		<sonar.plugin.class>com.sonar.csharp.plugin.CSharpPlugin</sonar.plugin.class>
 	</properties>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>${project.groupId}:csharp-squid</include>
+									<include>${project.groupId}:csharp-api</include>
+									<include>com.sonarsource.sslr:sslr-impl</include>
+									<include>com.sonarsource.sslr:sslr-api</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginKey>csharp</pluginKey>
+					<pluginName>C#</pluginName>
+					<pluginClass>${sonar.plugin.class}</pluginClass>
+					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
+					<skipDependenciesPackaging>true</skipDependenciesPackaging>
+					<addMavenDescriptor>false</addMavenDescriptor>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<!-- C# -->
 		<dependency>
@@ -72,46 +113,6 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<includes>
-									<include>${project.groupId}:csharp-squid</include>
-									<include>${project.groupId}:csharp-api</include>
-									<include>com.sonarsource.sslr:sslr-impl</include>
-									<include>com.sonarsource.sslr:sslr-api</include>
-								</includes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<pluginKey>csharp</pluginKey>
-					<pluginName>C#</pluginName>
-					<pluginClass>${sonar.plugin.class}</pluginClass>
-					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
-					<skipDependenciesPackaging>true</skipDependenciesPackaging>
-					<addMavenDescriptor>false</addMavenDescriptor>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	<profiles>
 		<profile>
 			<id>obfuscation</id>

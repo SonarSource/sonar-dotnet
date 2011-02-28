@@ -6,15 +6,20 @@
 package com.sonar.csharp.tree;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isOneOf;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.squid.Squid;
+import org.sonar.squid.api.SourceClass;
+import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceProject;
+import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
@@ -29,6 +34,9 @@ public class CSharpClassVisitorTest {
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.CLASSES);
 
     assertThat(project.getInt(CSharpMetric.CLASSES), is(3));
+
+    Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceClass.class));
+    assertThat(squidClasses.iterator().next().getKey(), isOneOf("Example.Money", "Example.GoodMoney", "Example.InnerData"));
   }
 
   protected File readFile(String path) {

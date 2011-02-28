@@ -26,11 +26,9 @@ import com.sonar.sslr.api.Comments;
  */
 public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
 
-  private Stack<SourceCode> physicalSourceCodeStack;
-  private Stack<SourceCode> logicalSourceCodeStack;
-  private SourceCode sourceProject;
+  private SourceCode project;
+  private Stack<SourceCode> sourceCodeStack;
   private CSharpGrammar grammar;
-
   private Comments comments;
   private File file;
   private List<AstNodeType> astNodeTypesToVisit = new ArrayList<AstNodeType>();
@@ -52,16 +50,23 @@ public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
     }
   }
 
-  public final void setSourceCodeStacks(Stack<SourceCode> physicalSourceCodeStack, Stack<SourceCode> logicalSourceCodeStack) {
-    this.physicalSourceCodeStack = physicalSourceCodeStack;
-    this.sourceProject = physicalSourceCodeStack.peek();
-    this.logicalSourceCodeStack = logicalSourceCodeStack;
+  /**
+   * Do not use
+   */
+  public final void setSourceCodeStack(Stack<SourceCode> sourceCodeStack) {
+    this.sourceCodeStack = sourceCodeStack;
   }
 
+  /**
+   * Do not use
+   */
   public final void setGrammar(CSharpGrammar grammar) {
     this.grammar = grammar;
   }
 
+  /**
+   * Do not use
+   */
   public final void setComments(Comments comments) {
     this.comments = comments;
   }
@@ -70,30 +75,26 @@ public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
     return comments;
   }
 
-  public final void addPhysicalSourceCode(SourceCode child) {
-    peekPhysicalSourceCode().addChild(child);
-    physicalSourceCodeStack.add(child);
+  /**
+   * Do not use
+   */
+  public final void addSourceCode(SourceCode child) {
+    peekSourceCode().addChild(child);
+    sourceCodeStack.add(child);
   }
 
-  public final void popPhysicalSourceCode() {
-    physicalSourceCodeStack.pop();
+  /**
+   * Do not use
+   */
+  public final void popSourceCode() {
+    sourceCodeStack.pop();
   }
 
-  public final SourceCode peekPhysicalSourceCode() {
-    return physicalSourceCodeStack.peek();
-  }
-
-  public final void addLogicalSourceCode(SourceCode child) {
-    peekLogicalSourceCode().addChild(child);
-    logicalSourceCodeStack.add(child);
-  }
-
-  public final void popLogicalSourceCode() {
-    logicalSourceCodeStack.pop();
-  }
-
-  public final SourceCode peekLogicalSourceCode() {
-    return logicalSourceCodeStack.peek();
+  /**
+   * Do not use
+   */
+  public final SourceCode peekSourceCode() {
+    return sourceCodeStack.peek();
   }
 
   /**
@@ -127,6 +128,9 @@ public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
   public void leaveFile(AstNode astNode) {
   }
 
+  public void onError(Throwable exception) {
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -151,7 +155,18 @@ public abstract class CSharpAstVisitor implements CodeVisitor, AstVisitor {
     return grammar;
   }
 
-  protected SourceCode getSourceProject() {
-    return sourceProject;
+  /**
+   * @return the project
+   */
+  public SourceCode getProject() {
+    return project;
+  }
+
+  /**
+   * @param project
+   *          the project to set
+   */
+  public void setProject(SourceCode project) {
+    this.project = project;
   }
 }

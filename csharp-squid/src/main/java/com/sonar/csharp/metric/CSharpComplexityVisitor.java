@@ -38,7 +38,7 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
     if (node.is(getCSharpGrammar().returnStatement) && isLastReturnStatement(node)) {
       return;
     }
-    peekPhysicalSourceCode().add(CSharpMetric.COMPLEXITY, 1);
+    peekSourceCode().add(CSharpMetric.COMPLEXITY, 1);
   }
 
   private boolean isLastReturnStatement(AstNode node) {

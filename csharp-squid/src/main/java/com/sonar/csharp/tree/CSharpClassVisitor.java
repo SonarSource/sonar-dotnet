@@ -5,13 +5,11 @@
  */
 package com.sonar.csharp.tree;
 
-import java.util.Map;
+import org.sonar.squid.api.SourceClass;
 
-import com.google.common.collect.Maps;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.api.squid.CSharpClass;
 import com.sonar.sslr.api.AstNode;
 
 /**
@@ -19,14 +17,14 @@ import com.sonar.sslr.api.AstNode;
  */
 public class CSharpClassVisitor extends CSharpAstVisitor {
 
-  private Map<String, CSharpClass> classesMap = Maps.newHashMap();
+  private String namespaceName;
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void init() {
-    subscribeTo(getCSharpGrammar().classDeclaration);
+    subscribeTo(getCSharpGrammar().namespaceDeclaration, getCSharpGrammar().classDeclaration);
   }
 
   /**
@@ -34,14 +32,14 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode astNode) {
-    String classSignature = extractClassSignature(astNode);
-    CSharpClass cSharpClass = classesMap.get(classSignature);
-    if (cSharpClass == null) {
-      cSharpClass = new CSharpClass(classSignature, classSignature);
-      cSharpClass.setMeasure(CSharpMetric.CLASSES, 1);
-      classesMap.put(classSignature, cSharpClass);
+    if (astNode.is(getCSharpGrammar().namespaceDeclaration)) {
+      namespaceName = extractNamespaceSignature(astNode);
+    } else {
+      String className = extractClassName(astNode);
+      SourceClass clazz = new SourceClass(extractClassSignature(className), className);
+      clazz.setMeasure(CSharpMetric.CLASSES, 1);
+      addSourceCode(clazz);
     }
-    addLogicalSourceCode(cSharpClass);
   }
 
   /**
@@ -49,14 +47,35 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
    */
   @Override
   public void leaveNode(AstNode astNode) {
-    popLogicalSourceCode();
+    if (astNode.is(getCSharpGrammar().classDeclaration)) {
+      popSourceCode();
+    }
   }
 
   /**
    * {@inheritDoc}
    */
-  private String extractClassSignature(AstNode astNode) {
+  @Override
+  public void leaveFile(AstNode astNode) {
+    namespaceName = null;
+  }
+
+  private String extractClassSignature(String className) {
+    StringBuilder signature = new StringBuilder();
+    if (namespaceName != null) {
+      signature.append(namespaceName);
+      signature.append(".");
+    }
+    signature.append(className);
+    return signature.toString();
+  }
+
+  private String extractClassName(AstNode astNode) {
     return astNode.findFirstChild(CSharpKeyword.CLASS).nextSibling().getTokenValue();
+  }
+
+  private String extractNamespaceSignature(AstNode astNode) {
+    return astNode.findFirstChild(CSharpKeyword.NAMESPACE).nextSibling().getTokenValue();
   }
 
 }

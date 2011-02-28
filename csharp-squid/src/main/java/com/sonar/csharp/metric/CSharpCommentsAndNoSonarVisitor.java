@@ -27,14 +27,13 @@ import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.sslr.api.AstNode;
 
-// TODO Refaire cette classe en utilisant les Tokens Commentaire déjà lexés
 public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpCommentsAndNoSonarVisitor.class);
 
   @Override
   public void leaveFile(AstNode astNode) {
-    SourceFile sourceFile = (SourceFile) peekPhysicalSourceCode();
+    SourceFile sourceFile = (SourceFile) peekSourceCode();
     CodeRecognizer codeRecognizer = new CodeRecognizer(0.94, new CSharpFootprint());
     try {
       Source source = new Source(new FileReader(getFile()), codeRecognizer);

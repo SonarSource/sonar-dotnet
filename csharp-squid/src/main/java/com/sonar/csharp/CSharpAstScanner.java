@@ -29,13 +29,13 @@ import com.sonar.csharp.metric.CSharpCommentsAndNoSonarVisitor;
 import com.sonar.csharp.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.metric.CSharpLineVisitor;
 import com.sonar.csharp.metric.CSharpLocVisitor;
+import com.sonar.csharp.metric.CSharpNamespaceVisitor;
 import com.sonar.csharp.metric.CSharpPublicApiVisitor;
 import com.sonar.csharp.metric.CSharpStatementVisitor;
 import com.sonar.csharp.parser.CSharpParser;
 import com.sonar.csharp.tree.CSharpClassVisitor;
 import com.sonar.csharp.tree.CSharpFileVisitor;
 import com.sonar.csharp.tree.CSharpMethodVisitor;
-import com.sonar.csharp.tree.CSharpNamespaceVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.RecognitionException;
@@ -65,12 +65,11 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   }
 
   public CSharpAstScanner scanFiles(Collection<File> files) {
-    Stack<SourceCode> physicalResourcesStack = new Stack<SourceCode>();
-    Stack<SourceCode> logicalResourcesStack = new Stack<SourceCode>();
-    physicalResourcesStack.add(project);
-    logicalResourcesStack.add(project);
+    Stack<SourceCode> resourcesStack = new Stack<SourceCode>();
+    resourcesStack.add(project);
     for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setSourceCodeStacks(physicalResourcesStack, logicalResourcesStack);
+      visitor.setProject(project);
+      visitor.setSourceCodeStack(resourcesStack);
       visitor.setGrammar((CSharpGrammar) parser.getGrammar());
       visitor.init();
     }
@@ -81,7 +80,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
         String errorMessage = "Sonar is unable to analyze file : '" + file.getAbsolutePath() + "'";
         if ( !conf.stopSquidOnException()) {
           LOG.error(errorMessage, e);
-          notifyVisitorsOfException(physicalResourcesStack, logicalResourcesStack, file, e);
+          notifyVisitorsOfException(resourcesStack, file, e);
         } else {
           throw new AnalysisException(errorMessage, e);
         }
@@ -93,10 +92,9 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     return this;
   }
 
-  private void notifyVisitorsOfException(Stack<SourceCode> physicalSourceCodeStack, Stack<SourceCode> logicalSourceCodeStack, File file,
-      Exception e) {
+  private void notifyVisitorsOfException(Stack<SourceCode> resourcesStack, File file, Exception e) {
     CSharpFileVisitor filesVisitor = new CSharpFileVisitor();
-    filesVisitor.setSourceCodeStacks(physicalSourceCodeStack, logicalSourceCodeStack);
+    filesVisitor.setSourceCodeStack(resourcesStack);
     filesVisitor.setFile(file);
     filesVisitor.visitFile(null);
     for (CSharpAstVisitor visitor : getVisitors()) {

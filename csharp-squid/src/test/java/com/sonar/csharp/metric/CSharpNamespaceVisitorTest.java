@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.tree;
+package com.sonar.csharp.metric;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
