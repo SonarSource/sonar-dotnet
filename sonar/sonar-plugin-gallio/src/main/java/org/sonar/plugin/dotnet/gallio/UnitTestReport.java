@@ -33,6 +33,7 @@ import java.util.List;
  * @author Jose CHILLAN Apr 28, 2009
  */
 public class UnitTestReport {
+
   private String assemblyName;
   private File sourceFile;
   private int errors = 0;
@@ -96,19 +97,20 @@ public class UnitTestReport {
     tests++;
     TestStatus status = detail.getStatus();
     switch (status) {
-    case FAILED:
-      failures++;
-      break;
-    case ERROR:
-      errors++;
-      break;
-    case SKIPPED:case INCONCLUSIVE:
-      skipped++;
-      break;
-    case SUCCESS:
-      break;
+      case FAILED:
+        failures++;
+        break;
+      case ERROR:
+        errors++;
+        break;
+      case SKIPPED:
+      case INCONCLUSIVE:
+        skipped++;
+        break;
+      case SUCCESS:
+        break;
     }
-    
+
     // We complete the other indicators
     asserts += detail.getCountAsserts();
     timeMS += detail.getTimeMillis();
@@ -159,11 +161,10 @@ public class UnitTestReport {
   public void setSourceFile(File sourceFile) {
     this.sourceFile = sourceFile;
   }
-  
+
   @Override
   public String toString() {
-    return "Assembly=" + assemblyName + ", file:" + sourceFile + "(time="
-        + timeMS / 1000. + "s, tests=" + tests + ", failures=" + failures
+    return "Assembly=" + assemblyName + ", file:" + sourceFile + "(time=" + timeMS / 1000. + "s, tests=" + tests + ", failures=" + failures
         + ", ignored=" + skipped + ", asserts=" + asserts + ")";
   }
 
@@ -171,14 +172,12 @@ public class UnitTestReport {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result
-        + ((assemblyName == null) ? 0 : assemblyName.hashCode());
+    result = prime * result + ((assemblyName == null) ? 0 : assemblyName.hashCode());
     result = prime * result + asserts;
     result = prime * result + errors;
     result = prime * result + failures;
     result = prime * result + skipped;
-    result = prime * result
-        + ((sourceFile == null) ? 0 : sourceFile.hashCode());
+    result = prime * result + ((sourceFile == null) ? 0 : sourceFile.hashCode());
     result = prime * result + tests;
     result = prime * result + timeMS;
     return result;
@@ -197,7 +196,7 @@ public class UnitTestReport {
     if (assemblyName == null) {
       if (other.assemblyName != null)
         return false;
-    } else if (!assemblyName.equals(other.assemblyName))
+    } else if ( !assemblyName.equals(other.assemblyName))
       return false;
     if (asserts != other.asserts)
       return false;
@@ -210,7 +209,7 @@ public class UnitTestReport {
     if (sourceFile == null) {
       if (other.sourceFile != null)
         return false;
-    } else if (!sourceFile.equals(other.sourceFile))
+    } else if ( !sourceFile.equals(other.sourceFile))
       return false;
     if (tests != other.tests)
       return false;
