@@ -12,6 +12,7 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
@@ -37,10 +38,11 @@ public class CSharpClassVisitorTest {
     assertThat(project.getInt(CSharpMetric.CLASSES), is(3));
 
     Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceClass.class));
-    Matcher<String> classesKeys = isOneOf("Example.Money", "Example.GoodMoney", "Example.InnerData");
-    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
-    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
-    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
+    Matcher<String> classesKeys = isOneOf("Example.Core.Money", "Example.Core.GoodMoney", "Example.Core.GoodMoney.InnerData");
+    Iterator<SourceCode> classesIterator = squidClasses.iterator();
+    assertThat(classesIterator.next().getKey(), classesKeys);
+    assertThat(classesIterator.next().getKey(), classesKeys);
+    assertThat(classesIterator.next().getKey(), classesKeys);
   }
 
   protected File readFile(String path) {

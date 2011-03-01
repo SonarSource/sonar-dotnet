@@ -5,6 +5,8 @@
  */
 package com.sonar.csharp.tree;
 
+import java.util.Stack;
+
 import org.sonar.squid.api.SourceClass;
 
 import com.sonar.csharp.api.CSharpKeyword;
@@ -18,6 +20,7 @@ import com.sonar.sslr.api.AstNode;
 public class CSharpClassVisitor extends CSharpAstVisitor {
 
   private String namespaceName;
+  private Stack<String> classesNameStack = new Stack<String>();
 
   /**
    * {@inheritDoc}
@@ -36,6 +39,7 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
       namespaceName = extractNamespaceSignature(astNode);
     } else {
       String className = extractClassName(astNode);
+      classesNameStack.push(className);
       SourceClass clazz = new SourceClass(extractClassSignature(className), className);
       clazz.setMeasure(CSharpMetric.CLASSES, 1);
       addSourceCode(clazz);
@@ -49,6 +53,7 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
   public void leaveNode(AstNode astNode) {
     if (astNode.is(getCSharpGrammar().classDeclaration)) {
       popSourceCode();
+      classesNameStack.pop();
     }
   }
 
@@ -71,11 +76,22 @@ public class CSharpClassVisitor extends CSharpAstVisitor {
   }
 
   private String extractClassName(AstNode astNode) {
-    return astNode.findFirstChild(CSharpKeyword.CLASS).nextSibling().getTokenValue();
+    StringBuilder className = new StringBuilder();
+    if ( !classesNameStack.isEmpty()) {
+      className.append(classesNameStack.peek());
+      className.append(".");
+    }
+    className.append(astNode.findFirstChild(CSharpKeyword.CLASS).nextSibling().getTokenValue());
+    return className.toString();
   }
 
   private String extractNamespaceSignature(AstNode astNode) {
-    return astNode.findFirstChild(CSharpKeyword.NAMESPACE).nextSibling().getTokenValue();
+    AstNode qualifiedIdentifierNode = astNode.findFirstChild(CSharpKeyword.NAMESPACE).nextSibling();
+    StringBuilder name = new StringBuilder();
+    for (AstNode child : qualifiedIdentifierNode.getChildren()) {
+      name.append(child.getTokenValue());
+    }
+    return name.toString();
   }
 
 }

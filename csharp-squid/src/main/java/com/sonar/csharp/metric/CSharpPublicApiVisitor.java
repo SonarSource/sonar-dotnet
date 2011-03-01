@@ -83,7 +83,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
 
   private void checkNodeForPreviousComments(AstNode node) {
     int currentTokenLine = node.getToken().getLine();
-    int previousTokenLine = node.getToken().getPreviousToken().getLine();
+    int previousTokenLine = node.getToken().getPreviousToken() == null ? 0 : node.getToken().getPreviousToken().getLine();
     Comments comments = getComments();
     for (int lineIndex = currentTokenLine - 1; lineIndex > previousTokenLine; lineIndex--) {
       if (comments.getCommentAtLine(lineIndex) != null) {
