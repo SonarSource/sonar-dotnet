@@ -3,11 +3,13 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.tree;
+package com.sonar.plugins.csharp.api.tree;
 
 import java.util.HashMap;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
 import org.sonar.squid.api.SourceCode;
@@ -16,14 +18,30 @@ import org.sonar.squid.api.SourceFile;
 import com.google.common.collect.Maps;
 
 /**
- * Map that keeps track of links between logical resources (types and members) and their enclosing source files.
+ * Class that gives links between logical resources (C# types and members) and their enclosing source files. <br/>
+ * It is useful when parsing third-party tool reports that contain references to the logical structure of the code: it is then necessary to
+ * find to which physical file a given logical item belongs to, so that it is possible to save measure or violations to the correct Sonar
+ * resource.
  */
-public class CSharpTreeMap {
+public class CSharpResourcesBridge {
+
+  private final static Logger log = LoggerFactory.getLogger(CSharpResourcesBridge.class);
+
+  private static CSharpResourcesBridge instance;
 
   private HashMap<String, Resource<?>> logicalToPhysicalResourcesMap;
 
-  public CSharpTreeMap() {
+  private CSharpResourcesBridge() {
     logicalToPhysicalResourcesMap = Maps.newHashMap();
+  }
+
+  public static CSharpResourcesBridge getInstance() {
+    if (instance == null) {
+      synchronized (CSharpResourcesBridge.class) {
+        instance = new CSharpResourcesBridge();
+      }
+    }
+    return instance;
   }
 
   /**
@@ -35,6 +53,7 @@ public class CSharpTreeMap {
    *          the Sonar file
    */
   public void indexFile(SourceFile squidFile, File sonarFile) {
+    log.info("Indexing " + squidFile.getName() + " - " + sonarFile.getKey());
     indexChildren(squidFile.getChildren(), sonarFile);
   }
 
@@ -50,8 +69,10 @@ public class CSharpTreeMap {
   /**
    * Returns the physical file that contains the definition of the type referenced by its namespace and its name.
    * 
-   * @param namespaceName the namespace of the type 
-   * @param typeName the type name
+   * @param namespaceName
+   *          the namespace of the type
+   * @param typeName
+   *          the type name
    * @return the resource that contains this type, or NULL if none
    */
   public Resource<?> getFromTypeName(String namespaceName, String typeName) {

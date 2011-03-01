@@ -28,6 +28,7 @@ import org.sonar.squid.indexer.QueryByType;
 import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor implements Sensor {
@@ -64,6 +65,9 @@ public final class CSharpSquidSensor implements Sensor {
     for (SourceCode squidFile : squidFiles) {
       File sonarFile = org.sonar.api.resources.File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
+      
+      CSharpResourcesBridge.getInstance().indexFile((SourceFile)squidFile, sonarFile);
+      
       context.saveMeasure(sonarFile, CoreMetrics.CLASSES, squidFile.getDouble(CSharpMetric.CLASSES));
       context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(CSharpMetric.METHODS));
       context.saveMeasure(sonarFile, CoreMetrics.FILES, squidFile.getDouble(CSharpMetric.FILES));

@@ -5,14 +5,15 @@
  */
 package com.sonar.csharp.plugin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.sonar.api.CoreProperties;
+import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 
-import com.google.common.collect.Lists;
 import com.sonar.csharp.plugin.colorizer.CSharpSourceCodeColorizer;
 import com.sonar.csharp.plugin.cpd.CSharpCPDMapping;
 
@@ -38,9 +39,8 @@ public class CSharpPlugin implements Plugin {
     return "Analysis of C# projects";
   }
 
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-  public List getExtensions() {
-    List extensions = Lists.newArrayList();
+  public List<Class<? extends Extension>> getExtensions() {
+    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
     extensions.add(CSharp.class);
     extensions.add(CSharpCPDMapping.class);
     extensions.add(CSharpSourceCodeColorizer.class);
