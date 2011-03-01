@@ -14,6 +14,7 @@ import java.nio.charset.Charset;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceClass;
@@ -36,7 +37,10 @@ public class CSharpClassVisitorTest {
     assertThat(project.getInt(CSharpMetric.CLASSES), is(3));
 
     Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceClass.class));
-    assertThat(squidClasses.iterator().next().getKey(), isOneOf("Example.Money", "Example.GoodMoney", "Example.InnerData"));
+    Matcher<String> classesKeys = isOneOf("Example.Money", "Example.GoodMoney", "Example.InnerData");
+    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
+    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
+    assertThat(squidClasses.iterator().next().getKey(), classesKeys);
   }
 
   protected File readFile(String path) {
