@@ -58,7 +58,7 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
           StringTokenizer tokenizer = new StringTokenizer(comment, "\n");
           while (tokenizer.hasMoreElements()) {
             String commentLine = tokenizer.nextToken().trim();
-            if (commentLine.isEmpty()) {
+            if (commentLine.length() == 0) {
               sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
             } else if (codeRecognizer.isLineOfCode(commentLine)) {
               sourceFile.add(CSharpMetric.COMMENTED_OUT_CODE_LINES, 1);
