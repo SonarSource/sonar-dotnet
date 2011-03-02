@@ -12,6 +12,7 @@ import com.google.common.collect.Maps;
 import com.sonar.csharp.api.CSharpKeyword;
 import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.csharp.tree.source.SourceClass;
 import com.sonar.csharp.tree.source.SourceType;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
@@ -58,7 +59,12 @@ public class CSharpTypeVisitor extends CSharpAstVisitor {
     } else {
       String typeName = extractTypeName(astNode);
       typeNameStack.push(typeName);
-      SourceType type = new SourceType(extractTypeSignature(typeName), typeName);
+      SourceType type = null;
+      if (currentNodeType.equals(getCSharpGrammar().classDeclaration)) {
+        type = new SourceClass(extractTypeSignature(typeName), typeName);
+      } else {
+        type = new SourceType(extractTypeSignature(typeName), typeName);
+      }
       type.setMeasure(metricMap.get(currentNodeType), 1);
       addSourceCode(type);
     }
