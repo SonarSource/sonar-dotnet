@@ -55,6 +55,9 @@ public class CSharpResourcesBridgeTest {
 
     file = cSharpResourcesBridge.getFromTypeName("Test");
     assertThat(file.getName(), is("simpleFile.cs"));
+
+    file = cSharpResourcesBridge.getFromTypeName("Foo.Struct.InnerClass");
+    assertThat(file.getName(), is("TypesAllInOneFile.cs"));
   }
 
   @Test

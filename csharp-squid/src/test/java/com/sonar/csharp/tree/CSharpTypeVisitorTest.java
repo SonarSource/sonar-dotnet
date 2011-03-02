@@ -12,13 +12,11 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.sonar.squid.Squid;
-import org.sonar.squid.api.SourceClass;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
@@ -26,23 +24,27 @@ import org.sonar.squid.indexer.QueryByType;
 import com.sonar.csharp.CSharpAstScanner;
 import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.csharp.tree.source.SourceType;
 
-public class CSharpClassVisitorTest {
+public class CSharpTypeVisitorTest {
 
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.CLASSES);
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/TypesAllInOneFile.cs"));
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.values());
 
-    assertThat(project.getInt(CSharpMetric.CLASSES), is(3));
+    assertThat(project.getInt(CSharpMetric.CLASSES), is(2));
+    assertThat(project.getInt(CSharpMetric.INTERFACES), is(1));
+    assertThat(project.getInt(CSharpMetric.DELEGATES), is(1));
+    assertThat(project.getInt(CSharpMetric.STRUCTS), is(2));
+    assertThat(project.getInt(CSharpMetric.ENUMS), is(1));
 
-    Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceClass.class));
-    Matcher<String> classesKeys = isOneOf("Example.Core.Money", "Example.Core.GoodMoney", "Example.Core.GoodMoney.InnerData");
-    Iterator<SourceCode> classesIterator = squidClasses.iterator();
-    assertThat(classesIterator.next().getKey(), classesKeys);
-    assertThat(classesIterator.next().getKey(), classesKeys);
-    assertThat(classesIterator.next().getKey(), classesKeys);
+    Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceType.class));
+    Matcher<String> classesKeys = isOneOf("Foo.Class", "Foo.Class.InnerStruct", "Foo.Struct", "Foo.Struct.InnerClass", "Foo.Enum", "Bar.Interface", "Bar.Delegate");
+    for (SourceCode sourceCode : squidClasses) {
+      assertThat(sourceCode.getKey(), classesKeys);
+    }
   }
 
   protected File readFile(String path) {

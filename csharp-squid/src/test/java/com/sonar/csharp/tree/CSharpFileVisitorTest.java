@@ -25,7 +25,7 @@ public class CSharpFileVisitorTest {
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/Money.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.FILES);
 
     assertThat(project.getInt(CSharpMetric.FILES), is(1));

@@ -25,7 +25,7 @@ public class CSharpMethodVisitorTest {
   @Test
   public void testScanFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/Money.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
 
     assertThat(project.getInt(CSharpMetric.METHODS), is(23));
@@ -34,10 +34,10 @@ public class CSharpMethodVisitorTest {
   @Test
   public void testScanSimpleFile() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleFile.cs"));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/simpleFile.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
 
-    assertThat(project.getInt(CSharpMetric.METHODS), is(4));
+    assertThat(project.getInt(CSharpMetric.METHODS), is(1));
   }
 
   protected File readFile(String path) {
