@@ -8,8 +8,6 @@ package com.sonar.plugins.csharp.api.tree;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
 import org.sonar.squid.api.SourceCode;
@@ -24,8 +22,6 @@ import com.google.common.collect.Maps;
  * resource.
  */
 public class CSharpResourcesBridge {
-
-  private final static Logger log = LoggerFactory.getLogger(CSharpResourcesBridge.class);
 
   private static CSharpResourcesBridge instance;
 
@@ -53,7 +49,6 @@ public class CSharpResourcesBridge {
    *          the Sonar file
    */
   public void indexFile(SourceFile squidFile, File sonarFile) {
-    log.info("Indexing " + squidFile.getName() + " - " + sonarFile.getKey());
     indexChildren(squidFile.getChildren(), sonarFile);
   }
 

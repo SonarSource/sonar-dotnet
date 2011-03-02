@@ -13,9 +13,9 @@ import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 
-import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.CSharpTokenType;
-import com.sonar.csharp.lexer.CSharpLexer;
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.lexer.CSharpLexer;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Token;

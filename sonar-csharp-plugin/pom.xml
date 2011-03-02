@@ -150,12 +150,10 @@
 												<keep>
 													<class classes="public" methods="protected" fields="public">
 														<patternset>
-															<include name="com.sonarsource.csharp.plugin.CSharpPlugin" />
-															<include name="com.sonar.csharp.CSharpAstScanner" />
-															<include name="com.sonar.csharp.CSharpConfiguration" />
-															<include name="com.sonar.csharp.CSharpConstants" />
+															<include name="com.sonar.csharp.plugin.CSharpPlugin" />
 															<include name="com.sonar.sslr.api.**.*" />
 															<include name="com.sonar.csharp.api.**.*" />
+															<include name="com.sonar.plugins.csharp.api.**.*" />
 														</patternset>
 													</class>
 												</keep>

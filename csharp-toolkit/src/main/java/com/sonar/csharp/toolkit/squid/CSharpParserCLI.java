@@ -17,8 +17,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 
-import com.sonar.csharp.CSharpConfiguration;
-import com.sonar.csharp.parser.CSharpParser;
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.impl.ast.AstXmlPrinter;
 

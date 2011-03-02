@@ -27,11 +27,11 @@ import org.sonar.squid.indexer.QueryByParent;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.google.common.collect.Lists;
-import com.sonar.csharp.CSharpAstScanner;
-import com.sonar.csharp.CSharpConfiguration;
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.tree.source.SourceClass;
-import com.sonar.csharp.tree.source.SourceMember;
+import com.sonar.csharp.squid.CSharpAstScanner;
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.tree.source.SourceClass;
+import com.sonar.csharp.squid.tree.source.SourceMember;
 import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 
 @Phase(name = Phase.Name.PRE)
