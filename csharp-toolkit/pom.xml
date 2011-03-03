@@ -112,7 +112,7 @@
 						</goals>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>CSharpToolkit-${pom.version}</finalName>
+							<finalName>CSharpToolkit-${project.version}</finalName>
 							<descriptors>
 								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
 							</descriptors>

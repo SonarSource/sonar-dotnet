@@ -11,6 +11,9 @@ import java.util.List;
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
+import com.sonar.csharp.fxcop.maven.FxCopPluginHandler;
+import com.sonar.csharp.fxcop.rules.FxCopRuleRepository;
+
 /**
  */
 public class FxCopPlugin implements Plugin {
@@ -27,6 +30,8 @@ public class FxCopPlugin implements Plugin {
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(FxCopSensor.class);
+    list.add(FxCopRuleRepository.class);
+    list.add(FxCopPluginHandler.class);
     return list;
   }
 

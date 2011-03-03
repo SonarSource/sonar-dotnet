@@ -70,15 +70,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sonarsource.csharp</groupId>
-			<artifactId>csharp-squid</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.csharp</groupId>
 			<artifactId>sonar-csharp-plugin</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 
 		<!-- sonar open-source -->
 		<dependency>
@@ -88,6 +83,11 @@
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
 			<artifactId>sonar-duplications</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-deprecated</artifactId>
+			<version>${sonar.version}</version>
 		</dependency>
 
 		<!-- Unit tests -->
