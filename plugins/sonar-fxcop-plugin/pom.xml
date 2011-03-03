@@ -12,38 +12,20 @@
 	<packaging>sonar-plugin</packaging>
 	<description>Enable C# code analysis by FxCop.</description>
 	<url>http://www.sonarsource.com/plugins/plugin-csharp</url>
-	
+
 	<properties>
 		<sonar.plugin.class>com.sonar.csharp.fxcop.FxCopPlugin</sonar.plugin.class>
 	</properties>
-	
+
 
 	<build>
 		<plugins>
-		<!--  
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<includes>
-									<include>${project.groupId}:csharp-squid</include>
-									<include>${project.groupId}:csharp-api</include>
-									<include>com.sonarsource.sslr:sslr-impl</include>
-									<include>com.sonarsource.sslr:sslr-api</include>
-								</includes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		-->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-shade-plugin</artifactId> 
+				<executions> <execution> <phase>package</phase> <goals> <goal>shade</goal> 
+				</goals> <configuration> <artifactSet> <includes> <include>${project.groupId}:csharp-squid</include> 
+				<include>${project.groupId}:csharp-api</include> <include>com.sonarsource.sslr:sslr-impl</include> 
+				<include>com.sonarsource.sslr:sslr-api</include> </includes> </artifactSet> 
+				</configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-packaging-maven-plugin</artifactId>
@@ -90,6 +72,20 @@
 			<version>${sonar.version}</version>
 		</dependency>
 
+
+		<!-- Until removed... -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.1.12</version>
+		</dependency>
+
+
 		<!-- Unit tests -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -112,5 +108,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>
