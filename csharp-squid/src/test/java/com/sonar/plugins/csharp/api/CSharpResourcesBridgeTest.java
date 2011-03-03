@@ -20,7 +20,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.api.metric.CSharpMetric;
@@ -38,7 +37,7 @@ public class CSharpResourcesBridgeTest {
     cSharpResourcesBridge = CSharpResourcesBridge.getInstance();
     squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanDirectory(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.values());
+    squid.decorateSourceCodeTreeWith(CSharpMetric.values());
 
     Collection<SourceCode> squidFiles = squid.search(new QueryByType(SourceFile.class));
     for (SourceCode squidFile : squidFiles) {
