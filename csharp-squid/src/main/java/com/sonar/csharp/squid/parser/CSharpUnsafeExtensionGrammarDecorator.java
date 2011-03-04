@@ -50,7 +50,7 @@ public class CSharpUnsafeExtensionGrammarDecorator implements GrammarDecorator<C
    */
   public void decorate(CSharpGrammar g) {
     g.unsafe = new CSharpUnsafeExtensionGrammar();
-    GrammarRuleLifeCycleManager.initializeLeftRecursionRuleFields(g.unsafe, CSharpUnsafeExtensionGrammar.class);
+    GrammarRuleLifeCycleManager.initializeRuleFields(g.unsafe, CSharpUnsafeExtensionGrammar.class);
 
     g.classModifier.or(UNSAFE);
     g.structModifier.or(UNSAFE);

@@ -6,6 +6,7 @@
 package com.sonar.csharp.api;
 
 import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.LeftRecursiveRule;
 import com.sonar.sslr.api.Rule;
 
 /**
@@ -13,301 +14,301 @@ import com.sonar.sslr.api.Rule;
  */
 public class CSharpGrammar implements Grammar {
 
-  public Rule literal;
-  public Rule rightShift;
-  public Rule rightShiftAssignment;
+  public LeftRecursiveRule literal;
+  public LeftRecursiveRule rightShift;
+  public LeftRecursiveRule rightShiftAssignment;
 
   // A.2.1 Basic concepts
-  public Rule compilationUnit; // OK
-  public Rule namespaceName; // OK
-  public Rule typeName; // OK
-  public Rule namespaceOrTypeName; // OK
+  public LeftRecursiveRule compilationUnit; // OK
+  public LeftRecursiveRule namespaceName; // OK
+  public LeftRecursiveRule typeName; // OK
+  public LeftRecursiveRule namespaceOrTypeName; // OK
 
   // A.2.2 Types
-  public Rule type; // OK
-  public Rule valueType; // LATER // NOT NECESSARY
-  public Rule structType; // OK // NOT NECESSARY
-  public Rule enumType; // LATER // NOT NECESSARY
-  public Rule simpleType; // OK // NOT NECESSARY
-  public Rule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
-  public Rule integralType; // OK - tested via SimpleTypeTest
-  public Rule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
-  public Rule nullableType; // OK // NOT NECESSARY
-  public Rule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
-  public Rule referenceType; // OK // NOT NECESSARY
-  public Rule classType; // OK
-  public Rule interfaceType; // OK
-  public Rule arrayType; // OK
-  public Rule nonArrayType; // LATER
-  public Rule rankSpecifier; // OK
-  public Rule delegateType; // LATER
+  public LeftRecursiveRule type; // OK
+  public LeftRecursiveRule valueType; // LATER // NOT NECESSARY
+  public LeftRecursiveRule structType; // OK // NOT NECESSARY
+  public LeftRecursiveRule enumType; // LATER // NOT NECESSARY
+  public LeftRecursiveRule simpleType; // OK // NOT NECESSARY
+  public LeftRecursiveRule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
+  public LeftRecursiveRule integralType; // OK - tested via SimpleTypeTest
+  public LeftRecursiveRule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
+  public LeftRecursiveRule nullableType; // OK // NOT NECESSARY
+  public LeftRecursiveRule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
+  public LeftRecursiveRule referenceType; // OK // NOT NECESSARY
+  public LeftRecursiveRule classType; // OK
+  public LeftRecursiveRule interfaceType; // OK
+  public LeftRecursiveRule arrayType; // OK
+  public LeftRecursiveRule nonArrayType; // LATER
+  public LeftRecursiveRule rankSpecifier; // OK
+  public LeftRecursiveRule delegateType; // LATER
 
   // A.2.3 Variables
-  public Rule variableReference; // LATER
+  public LeftRecursiveRule variableReference; // LATER
 
   // A.2.4 Expressions
-  public Rule argumentList; // LATER
-  public Rule argument; // OK
-  public Rule argumentName; // OK
-  public Rule argumentValue; // OK
-  public Rule primaryExpression; // OK
-  public Rule primaryNoArrayCreationExpression; // LATER
-  public Rule simpleName; // OK
-  public Rule parenthesizedExpression; // OK
-  public Rule memberAccess; // OK
-  public Rule predefinedType; // OK
-  public Rule invocationExpression; // OK
-  public Rule elementAccess; // OK
-  public Rule thisAccess; // LATER
-  public Rule baseAccess; // OK
-  public Rule postIncrementExpression; // OK
-  public Rule postDecrementExpression; // OK
-  public Rule objectCreationExpression; // OK
-  public Rule objectOrCollectionInitializer; // OK
-  public Rule objectInitializer; // OK
-  public Rule memberInitializer; // OK
-  public Rule initializerValue; // OK
-  public Rule collectionInitializer; // OK
-  public Rule elementInitializer; // OK
-  public Rule expressionList; // LATER
-  public Rule arrayCreationExpression; // OK
-  public Rule delegateCreationExpression; // OK
-  public Rule anonymousObjectCreationExpression; // OK
-  public Rule anonymousObjectInitializer; // OK
-  public Rule memberDeclarator; // OK
-  public Rule typeOfExpression; // OK
-  public Rule unboundTypeName; // OK
-  public Rule genericDimensionSpecifier; // OK
-  public Rule checkedExpression; // OK
-  public Rule uncheckedExpression; // OK
-  public Rule defaultValueExpression; // OK
-  public Rule unaryExpression; // OK
-  public Rule preIncrementExpression; // OK - tested via UnaryExpressionTest
-  public Rule preDecrementExpression; // OK - tested via UnaryExpressionTest
-  public Rule castExpression; // OK - tested via UnaryExpressionTest
-  public Rule multiplicativeExpression; // OK
-  public Rule additiveExpression; // OK
-  public Rule shiftExpression; // OK
-  public Rule relationalExpression; // OK
-  public Rule equalityExpression; // OK
-  public Rule andExpression; // OK
-  public Rule exclusiveOrExpression; // OK
-  public Rule inclusiveOrExpression; // OK
-  public Rule conditionalAndExpression; // OK
-  public Rule conditionalOrExpression; // OK
-  public Rule nullCoalescingExpression; // OK
-  public Rule conditionalExpression; // OK
-  public Rule lambdaExpression; // OK
-  public Rule anonymousMethodExpression; // OK
-  public Rule anonymousFunctionSignature; // OK
-  public Rule explicitAnonymousFunctionSignature; // OK
-  public Rule explicitAnonymousFunctionParameter; // OK
-  public Rule anonymousFunctionParameterModifier; // OK
-  public Rule implicitAnonymousFunctionSignature; // OK
-  public Rule implicitAnonymousFunctionParameter; // OK
-  public Rule anonymousFunctionBody; // OK
-  public Rule queryExpression; // OK
-  public Rule fromClause; // OK
-  public Rule queryBody; // OK
-  public Rule queryBodyClause; // OK
-  public Rule letClause; // OK
-  public Rule whereClause; // OK
-  public Rule joinClause; // OK
-  public Rule joinIntoClause; // OK
-  public Rule orderByClause; // OK
-  public Rule ordering; // OK
-  public Rule orderingDirection; // OK
-  public Rule selectOrGroupClause; // OK
-  public Rule selectClause; // OK
-  public Rule groupClause; // OK
-  public Rule queryContinuation; // OK
-  public Rule assignment; // OK
-  public Rule expression; // OK
-  public Rule nonAssignmentExpression; // OK
-  public Rule constantExpression; // LATER
-  public Rule booleanExpression; // LATER
+  public LeftRecursiveRule argumentList; // LATER
+  public LeftRecursiveRule argument; // OK
+  public LeftRecursiveRule argumentName; // OK
+  public LeftRecursiveRule argumentValue; // OK
+  public LeftRecursiveRule primaryExpression; // OK
+  public LeftRecursiveRule primaryNoArrayCreationExpression; // LATER
+  public LeftRecursiveRule simpleName; // OK
+  public LeftRecursiveRule parenthesizedExpression; // OK
+  public LeftRecursiveRule memberAccess; // OK
+  public LeftRecursiveRule predefinedType; // OK
+  public LeftRecursiveRule invocationExpression; // OK
+  public LeftRecursiveRule elementAccess; // OK
+  public LeftRecursiveRule thisAccess; // LATER
+  public LeftRecursiveRule baseAccess; // OK
+  public LeftRecursiveRule postIncrementExpression; // OK
+  public LeftRecursiveRule postDecrementExpression; // OK
+  public LeftRecursiveRule objectCreationExpression; // OK
+  public LeftRecursiveRule objectOrCollectionInitializer; // OK
+  public LeftRecursiveRule objectInitializer; // OK
+  public LeftRecursiveRule memberInitializer; // OK
+  public LeftRecursiveRule initializerValue; // OK
+  public LeftRecursiveRule collectionInitializer; // OK
+  public LeftRecursiveRule elementInitializer; // OK
+  public LeftRecursiveRule expressionList; // LATER
+  public LeftRecursiveRule arrayCreationExpression; // OK
+  public LeftRecursiveRule delegateCreationExpression; // OK
+  public LeftRecursiveRule anonymousObjectCreationExpression; // OK
+  public LeftRecursiveRule anonymousObjectInitializer; // OK
+  public LeftRecursiveRule memberDeclarator; // OK
+  public LeftRecursiveRule typeOfExpression; // OK
+  public LeftRecursiveRule unboundTypeName; // OK
+  public LeftRecursiveRule genericDimensionSpecifier; // OK
+  public LeftRecursiveRule checkedExpression; // OK
+  public LeftRecursiveRule uncheckedExpression; // OK
+  public LeftRecursiveRule defaultValueExpression; // OK
+  public LeftRecursiveRule unaryExpression; // OK
+  public LeftRecursiveRule preIncrementExpression; // OK - tested via UnaryExpressionTest
+  public LeftRecursiveRule preDecrementExpression; // OK - tested via UnaryExpressionTest
+  public LeftRecursiveRule castExpression; // OK - tested via UnaryExpressionTest
+  public LeftRecursiveRule multiplicativeExpression; // OK
+  public LeftRecursiveRule additiveExpression; // OK
+  public LeftRecursiveRule shiftExpression; // OK
+  public LeftRecursiveRule relationalExpression; // OK
+  public LeftRecursiveRule equalityExpression; // OK
+  public LeftRecursiveRule andExpression; // OK
+  public LeftRecursiveRule exclusiveOrExpression; // OK
+  public LeftRecursiveRule inclusiveOrExpression; // OK
+  public LeftRecursiveRule conditionalAndExpression; // OK
+  public LeftRecursiveRule conditionalOrExpression; // OK
+  public LeftRecursiveRule nullCoalescingExpression; // OK
+  public LeftRecursiveRule conditionalExpression; // OK
+  public LeftRecursiveRule lambdaExpression; // OK
+  public LeftRecursiveRule anonymousMethodExpression; // OK
+  public LeftRecursiveRule anonymousFunctionSignature; // OK
+  public LeftRecursiveRule explicitAnonymousFunctionSignature; // OK
+  public LeftRecursiveRule explicitAnonymousFunctionParameter; // OK
+  public LeftRecursiveRule anonymousFunctionParameterModifier; // OK
+  public LeftRecursiveRule implicitAnonymousFunctionSignature; // OK
+  public LeftRecursiveRule implicitAnonymousFunctionParameter; // OK
+  public LeftRecursiveRule anonymousFunctionBody; // OK
+  public LeftRecursiveRule queryExpression; // OK
+  public LeftRecursiveRule fromClause; // OK
+  public LeftRecursiveRule queryBody; // OK
+  public LeftRecursiveRule queryBodyClause; // OK
+  public LeftRecursiveRule letClause; // OK
+  public LeftRecursiveRule whereClause; // OK
+  public LeftRecursiveRule joinClause; // OK
+  public LeftRecursiveRule joinIntoClause; // OK
+  public LeftRecursiveRule orderByClause; // OK
+  public LeftRecursiveRule ordering; // OK
+  public LeftRecursiveRule orderingDirection; // OK
+  public LeftRecursiveRule selectOrGroupClause; // OK
+  public LeftRecursiveRule selectClause; // OK
+  public LeftRecursiveRule groupClause; // OK
+  public LeftRecursiveRule queryContinuation; // OK
+  public LeftRecursiveRule assignment; // OK
+  public LeftRecursiveRule expression; // OK
+  public LeftRecursiveRule nonAssignmentExpression; // OK
+  public LeftRecursiveRule constantExpression; // LATER
+  public LeftRecursiveRule booleanExpression; // LATER
 
   // A.2.5 Statement
-  public Rule statement; // OK
-  public Rule embeddedStatement; // OK
-  public Rule block; // BRIDGE TEST ONLY
-  public Rule labeledStatement; // OK
-  public Rule declarationStatement; // OK
-  public Rule localVariableDeclaration; // OK
-  public Rule localVariableDeclarator; // OK - tested via LocalVariableDeclarationTest
-  public Rule localVariableInitializer; // OK
-  public Rule localConstantDeclaration; // OK
-  public Rule constantDeclarator; // OK
-  public Rule expressionStatement; // OK
-  public Rule statementExpression; // OK - tested via ExpressionStatementTest
-  public Rule selectionStatement; // NO NEED
-  public Rule ifStatement; // OK
-  public Rule switchStatement; // OK
-  public Rule switchSection; // OK
-  public Rule switchLabel; // OK
-  public Rule iterationStatement; // OK
-  public Rule whileStatement; // OK
-  public Rule doStatement; // OK
-  public Rule forStatement; // OK
-  public Rule forInitializer; // OK
-  public Rule forCondition; // NO NEED
-  public Rule forIterator; // NO NEED
-  public Rule statementExpressionList; // OK
-  public Rule foreachStatement; // OK
-  public Rule jumpStatement; // OK
-  public Rule breakStatement; // OK
-  public Rule continueStatement; // OK
-  public Rule gotoStatement; // OK
-  public Rule returnStatement; // OK
-  public Rule throwStatement; // OK
-  public Rule tryStatement; // OK
-  public Rule catchClauses; // OK
-  public Rule specificCatchClause; // OK
-  public Rule generalCatchClause; // OK
-  public Rule finallyClause; // OK
-  public Rule checkedStatement; // OK
-  public Rule uncheckedStatement; // OK
-  public Rule lockStatement; // OK
-  public Rule usingStatement; // OK
-  public Rule resourceAcquisition; // OK - tested via UsingStatementTest
-  public Rule yieldStatement; // OK
-  public Rule namespaceDeclaration; // OK
-  public Rule qualifiedIdentifier; // OK
-  public Rule namespaceBody; // OK
-  public Rule externAliasDirective; // OK
-  public Rule usingDirective; // OK
-  public Rule usingAliasDirective; // OK - tested via UsingDirectiveTest
-  public Rule usingNamespaceDirective; // OK - tested via UsingDirectiveTest
-  public Rule namespaceMemberDeclaration; // OK
-  public Rule typeDeclaration; // OK
-  public Rule qualifiedAliasMember; // OK
+  public LeftRecursiveRule statement; // OK
+  public LeftRecursiveRule embeddedStatement; // OK
+  public LeftRecursiveRule block; // BRIDGE TEST ONLY
+  public LeftRecursiveRule labeledStatement; // OK
+  public LeftRecursiveRule declarationStatement; // OK
+  public LeftRecursiveRule localVariableDeclaration; // OK
+  public LeftRecursiveRule localVariableDeclarator; // OK - tested via LocalVariableDeclarationTest
+  public LeftRecursiveRule localVariableInitializer; // OK
+  public LeftRecursiveRule localConstantDeclaration; // OK
+  public LeftRecursiveRule constantDeclarator; // OK
+  public LeftRecursiveRule expressionStatement; // OK
+  public LeftRecursiveRule statementExpression; // OK - tested via ExpressionStatementTest
+  public LeftRecursiveRule selectionStatement; // NO NEED
+  public LeftRecursiveRule ifStatement; // OK
+  public LeftRecursiveRule switchStatement; // OK
+  public LeftRecursiveRule switchSection; // OK
+  public LeftRecursiveRule switchLabel; // OK
+  public LeftRecursiveRule iterationStatement; // OK
+  public LeftRecursiveRule whileStatement; // OK
+  public LeftRecursiveRule doStatement; // OK
+  public LeftRecursiveRule forStatement; // OK
+  public LeftRecursiveRule forInitializer; // OK
+  public LeftRecursiveRule forCondition; // NO NEED
+  public LeftRecursiveRule forIterator; // NO NEED
+  public LeftRecursiveRule statementExpressionList; // OK
+  public LeftRecursiveRule foreachStatement; // OK
+  public LeftRecursiveRule jumpStatement; // OK
+  public LeftRecursiveRule breakStatement; // OK
+  public LeftRecursiveRule continueStatement; // OK
+  public LeftRecursiveRule gotoStatement; // OK
+  public LeftRecursiveRule returnStatement; // OK
+  public LeftRecursiveRule throwStatement; // OK
+  public LeftRecursiveRule tryStatement; // OK
+  public LeftRecursiveRule catchClauses; // OK
+  public LeftRecursiveRule specificCatchClause; // OK
+  public LeftRecursiveRule generalCatchClause; // OK
+  public LeftRecursiveRule finallyClause; // OK
+  public LeftRecursiveRule checkedStatement; // OK
+  public LeftRecursiveRule uncheckedStatement; // OK
+  public LeftRecursiveRule lockStatement; // OK
+  public LeftRecursiveRule usingStatement; // OK
+  public LeftRecursiveRule resourceAcquisition; // OK - tested via UsingStatementTest
+  public LeftRecursiveRule yieldStatement; // OK
+  public LeftRecursiveRule namespaceDeclaration; // OK
+  public LeftRecursiveRule qualifiedIdentifier; // OK
+  public LeftRecursiveRule namespaceBody; // OK
+  public LeftRecursiveRule externAliasDirective; // OK
+  public LeftRecursiveRule usingDirective; // OK
+  public LeftRecursiveRule usingAliasDirective; // OK - tested via UsingDirectiveTest
+  public LeftRecursiveRule usingNamespaceDirective; // OK - tested via UsingDirectiveTest
+  public LeftRecursiveRule namespaceMemberDeclaration; // OK
+  public LeftRecursiveRule typeDeclaration; // OK
+  public LeftRecursiveRule qualifiedAliasMember; // OK
 
   // A.2.6 Classes
-  public Rule classDeclaration; // OK
-  public Rule classModifier; // OK
-  public Rule classBase; // OK
-  public Rule interfaceTypeList; // LATER
-  public Rule classBody; // OK
-  public Rule classMemberDeclaration; // LATER
-  public Rule constantDeclaration; // OK
-  public Rule constantModifier; // OK - tested via ConstantDeclarationTest
-  public Rule fieldDeclaration; // OK
-  public Rule fieldModifier; // OK - tested via FieldDeclarationTest
-  public Rule variableDeclarator; // OK
-  public Rule variableInitializer; // OK
-  public Rule methodDeclaration; // LATER
-  public Rule methodHeader; // OK
-  public Rule methodModifier; // OK - tested via MethodHeaderTest
-  public Rule returnType; // OK
-  public Rule memberName; // OK
-  public Rule methodBody; // LATER
-  public Rule formalParameterList; // OK
-  public Rule fixedParameters; // LATER
-  public Rule fixedParameter; // OK
-  public Rule parameterModifier; // OK - tested via FixedParameterTest
-  public Rule parameterArray; // OK
-  public Rule propertyDeclaration; // OK
-  public Rule propertyModifier; // OK - tested via PropertyDeclarationTest
-  public Rule accessorDeclarations; // OK
-  public Rule getAccessorDeclaration; // OK
-  public Rule setAccessorDeclaration; // OK
-  public Rule accessorModifier; // OK
-  public Rule accessorBody; // LATER
-  public Rule eventDeclaration; // OK
-  public Rule eventModifier; // OK - tested via EventDeclarationTest
-  public Rule eventAccessorDeclarations; // OK
-  public Rule addAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
-  public Rule removeAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
-  public Rule indexerDeclaration; // OK
-  public Rule indexerModifier; // OK - tested via IndexerDeclarationTest
-  public Rule indexerDeclarator; // OK
-  public Rule operatorDeclaration; // OK
-  public Rule operatorModifier; // OK - tested via OperatorDeclarationTest
-  public Rule operatorDeclarator; // OK
-  public Rule unaryOperatorDeclarator; // OK
-  public Rule overloadableUnaryOperator; // OK - tested via UnaryOperatorDeclaration
-  public Rule binaryOperatorDeclarator; // OK
-  public Rule overloadableBinaryOperator; // OK - tested via BinaryOperatorDeclaration
-  public Rule conversionOperatorDeclarator; // OK
-  public Rule operatorBody; // LATER
-  public Rule constructorDeclaration; // OK
-  public Rule constructorModifier; // OK - tested via ConstructorDeclarationTest
-  public Rule constructorDeclarator; // OK
-  public Rule constructorInitializer; // OK
-  public Rule constructorBody; // OK
-  public Rule staticConstructorDeclaration; // OK
-  public Rule staticConstructorModifiers; // OK
-  public Rule staticConstructorBody; // LATER
-  public Rule destructorDeclaration; // OK
-  public Rule destructorBody; // LATER
+  public LeftRecursiveRule classDeclaration; // OK
+  public LeftRecursiveRule classModifier; // OK
+  public LeftRecursiveRule classBase; // OK
+  public LeftRecursiveRule interfaceTypeList; // LATER
+  public LeftRecursiveRule classBody; // OK
+  public LeftRecursiveRule classMemberDeclaration; // LATER
+  public LeftRecursiveRule constantDeclaration; // OK
+  public LeftRecursiveRule constantModifier; // OK - tested via ConstantDeclarationTest
+  public LeftRecursiveRule fieldDeclaration; // OK
+  public LeftRecursiveRule fieldModifier; // OK - tested via FieldDeclarationTest
+  public LeftRecursiveRule variableDeclarator; // OK
+  public LeftRecursiveRule variableInitializer; // OK
+  public LeftRecursiveRule methodDeclaration; // LATER
+  public LeftRecursiveRule methodHeader; // OK
+  public LeftRecursiveRule methodModifier; // OK - tested via MethodHeaderTest
+  public LeftRecursiveRule returnType; // OK
+  public LeftRecursiveRule memberName; // OK
+  public LeftRecursiveRule methodBody; // LATER
+  public LeftRecursiveRule formalParameterList; // OK
+  public LeftRecursiveRule fixedParameters; // LATER
+  public LeftRecursiveRule fixedParameter; // OK
+  public LeftRecursiveRule parameterModifier; // OK - tested via FixedParameterTest
+  public LeftRecursiveRule parameterArray; // OK
+  public LeftRecursiveRule propertyDeclaration; // OK
+  public LeftRecursiveRule propertyModifier; // OK - tested via PropertyDeclarationTest
+  public LeftRecursiveRule accessorDeclarations; // OK
+  public LeftRecursiveRule getAccessorDeclaration; // OK
+  public LeftRecursiveRule setAccessorDeclaration; // OK
+  public LeftRecursiveRule accessorModifier; // OK
+  public LeftRecursiveRule accessorBody; // LATER
+  public LeftRecursiveRule eventDeclaration; // OK
+  public LeftRecursiveRule eventModifier; // OK - tested via EventDeclarationTest
+  public LeftRecursiveRule eventAccessorDeclarations; // OK
+  public LeftRecursiveRule addAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public LeftRecursiveRule removeAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public LeftRecursiveRule indexerDeclaration; // OK
+  public LeftRecursiveRule indexerModifier; // OK - tested via IndexerDeclarationTest
+  public LeftRecursiveRule indexerDeclarator; // OK
+  public LeftRecursiveRule operatorDeclaration; // OK
+  public LeftRecursiveRule operatorModifier; // OK - tested via OperatorDeclarationTest
+  public LeftRecursiveRule operatorDeclarator; // OK
+  public LeftRecursiveRule unaryOperatorDeclarator; // OK
+  public LeftRecursiveRule overloadableUnaryOperator; // OK - tested via UnaryOperatorDeclaration
+  public LeftRecursiveRule binaryOperatorDeclarator; // OK
+  public LeftRecursiveRule overloadableBinaryOperator; // OK - tested via BinaryOperatorDeclaration
+  public LeftRecursiveRule conversionOperatorDeclarator; // OK
+  public LeftRecursiveRule operatorBody; // LATER
+  public LeftRecursiveRule constructorDeclaration; // OK
+  public LeftRecursiveRule constructorModifier; // OK - tested via ConstructorDeclarationTest
+  public LeftRecursiveRule constructorDeclarator; // OK
+  public LeftRecursiveRule constructorInitializer; // OK
+  public LeftRecursiveRule constructorBody; // OK
+  public LeftRecursiveRule staticConstructorDeclaration; // OK
+  public LeftRecursiveRule staticConstructorModifiers; // OK
+  public LeftRecursiveRule staticConstructorBody; // LATER
+  public LeftRecursiveRule destructorDeclaration; // OK
+  public LeftRecursiveRule destructorBody; // LATER
 
   // A.2.7 Struct
-  public Rule structDeclaration; // OK
-  public Rule structModifier; // OK - tested via StructDeclarationTest
-  public Rule structInterfaces; // OK
-  public Rule structBody; // OK
-  public Rule structMemberDeclaration; // OK - tested via StructBodyTest
+  public LeftRecursiveRule structDeclaration; // OK
+  public LeftRecursiveRule structModifier; // OK - tested via StructDeclarationTest
+  public LeftRecursiveRule structInterfaces; // OK
+  public LeftRecursiveRule structBody; // OK
+  public LeftRecursiveRule structMemberDeclaration; // OK - tested via StructBodyTest
 
   // A.2.8 Arrays
-  public Rule arrayInitializer; // OK
-  public Rule variableInitializerList; // OK
+  public LeftRecursiveRule arrayInitializer; // OK
+  public LeftRecursiveRule variableInitializerList; // OK
 
   // A.2.9 Interfaces
-  public Rule interfaceDeclaration; // OK
-  public Rule interfaceModifier; // OK - tested via InterfaceDeclarationTest
-  public Rule variantTypeParameterList; // OK
-  public Rule variantTypeParameter; // OK
-  public Rule varianceAnnotation; // OK
-  public Rule interfaceBase; // OK
-  public Rule interfaceBody; // OK
-  public Rule interfaceMemberDeclaration; // OK - tested via InterfaceBodyDeclaration
-  public Rule interfaceMethodDeclaration; // OK
-  public Rule interfacePropertyDeclaration; // OK
-  public Rule interfaceAccessors; // OK
-  public Rule interfaceEventDeclaration; // OK
-  public Rule interfaceIndexerDeclaration; // OK
+  public LeftRecursiveRule interfaceDeclaration; // OK
+  public LeftRecursiveRule interfaceModifier; // OK - tested via InterfaceDeclarationTest
+  public LeftRecursiveRule variantTypeParameterList; // OK
+  public LeftRecursiveRule variantTypeParameter; // OK
+  public LeftRecursiveRule varianceAnnotation; // OK
+  public LeftRecursiveRule interfaceBase; // OK
+  public LeftRecursiveRule interfaceBody; // OK
+  public LeftRecursiveRule interfaceMemberDeclaration; // OK - tested via InterfaceBodyDeclaration
+  public LeftRecursiveRule interfaceMethodDeclaration; // OK
+  public LeftRecursiveRule interfacePropertyDeclaration; // OK
+  public LeftRecursiveRule interfaceAccessors; // OK
+  public LeftRecursiveRule interfaceEventDeclaration; // OK
+  public LeftRecursiveRule interfaceIndexerDeclaration; // OK
 
   // A.2.10 Enums
-  public Rule enumDeclaration; // OK
-  public Rule enumBase; // OK
-  public Rule enumBody; // OK
-  public Rule enumModifier; // OK - tested via EnumDeclarationTest
-  public Rule enumMemberDeclarations; // OK
-  public Rule enumMemberDeclaration; // OK
+  public LeftRecursiveRule enumDeclaration; // OK
+  public LeftRecursiveRule enumBase; // OK
+  public LeftRecursiveRule enumBody; // OK
+  public LeftRecursiveRule enumModifier; // OK - tested via EnumDeclarationTest
+  public LeftRecursiveRule enumMemberDeclarations; // OK
+  public LeftRecursiveRule enumMemberDeclaration; // OK
 
   // A.2.11 Delegates
-  public Rule delegateDeclaration; // OK
-  public Rule delegateModifier; // OK - tested via DelegateDeclarationTest
+  public LeftRecursiveRule delegateDeclaration; // OK
+  public LeftRecursiveRule delegateModifier; // OK - tested via DelegateDeclarationTest
 
   // A.2.12 Attributes
-  public Rule globalAttributes; // LATER
-  public Rule globalAttributeSection; // OK
-  public Rule globalAttributeTargetSpecifier; // OK
-  public Rule globalAttributeTarget; // OK
-  public Rule attributes; // LATER
-  public Rule attributeSection; // OK
-  public Rule attributeTargetSpecifier; // OK
-  public Rule attributeTarget; // OK
-  public Rule attributeList; // OK
-  public Rule attribute; // OK
-  public Rule attributeName; // LATER
-  public Rule attributeArguments; // OK
-  public Rule positionalArgument; // LATER
-  public Rule namedArgument; // OK
-  public Rule attributeArgumentExpression; // OK
+  public LeftRecursiveRule globalAttributes; // LATER
+  public LeftRecursiveRule globalAttributeSection; // OK
+  public LeftRecursiveRule globalAttributeTargetSpecifier; // OK
+  public LeftRecursiveRule globalAttributeTarget; // OK
+  public LeftRecursiveRule attributes; // LATER
+  public LeftRecursiveRule attributeSection; // OK
+  public LeftRecursiveRule attributeTargetSpecifier; // OK
+  public LeftRecursiveRule attributeTarget; // OK
+  public LeftRecursiveRule attributeList; // OK
+  public LeftRecursiveRule attribute; // OK
+  public LeftRecursiveRule attributeName; // LATER
+  public LeftRecursiveRule attributeArguments; // OK
+  public LeftRecursiveRule positionalArgument; // LATER
+  public LeftRecursiveRule namedArgument; // OK
+  public LeftRecursiveRule attributeArgumentExpression; // OK
 
   // A.2.13 Generics
-  public Rule typeParameterList; // OK
-  public Rule typeParameters; // OK
-  public Rule typeParameter; // OK - tested via TypeParametersTest
-  public Rule typeArgumentList; // OK
-  public Rule typeArgument; // OK - tested via TypeArgumentListTest
-  public Rule typeParameterConstraintsClauses; // LATER
-  public Rule typeParameterConstraintsClause; // OK
-  public Rule typeParameterConstraints; // OK
-  public Rule primaryConstraint; // OK
-  public Rule secondaryConstraints; // OK
-  public Rule constructorConstraint; // OK
+  public LeftRecursiveRule typeParameterList; // OK
+  public LeftRecursiveRule typeParameters; // OK
+  public LeftRecursiveRule typeParameter; // OK - tested via TypeParametersTest
+  public LeftRecursiveRule typeArgumentList; // OK
+  public LeftRecursiveRule typeArgument; // OK - tested via TypeArgumentListTest
+  public LeftRecursiveRule typeParameterConstraintsClauses; // LATER
+  public LeftRecursiveRule typeParameterConstraintsClause; // OK
+  public LeftRecursiveRule typeParameterConstraints; // OK
+  public LeftRecursiveRule primaryConstraint; // OK
+  public LeftRecursiveRule secondaryConstraints; // OK
+  public LeftRecursiveRule constructorConstraint; // OK
 
   /** Grammar extensions **/
   public CSharpUnsafeExtensionGrammar unsafe;

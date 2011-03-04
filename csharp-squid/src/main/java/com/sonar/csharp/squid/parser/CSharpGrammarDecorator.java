@@ -157,7 +157,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
    * ${@inheritDoc}
    */
   public void decorate(CSharpGrammar g) {
-    GrammarRuleLifeCycleManager.initializeLeftRecursionRuleFields(g, CSharpGrammar.class);
+    GrammarRuleLifeCycleManager.initializeRuleFields(g, CSharpGrammar.class);
 
     // We follow the C# language specification 4.0
     g.literal.isOr(TRUE, FALSE, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL);
