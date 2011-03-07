@@ -7,13 +7,11 @@
 package com.sonar.csharp.fxcop.profiles;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.Reader;
 import java.io.StringReader;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,26 +26,24 @@ import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.test.TestUtils;
 
-public class FxCopProfileImporterTest {
+public class SonarWayProfileTest {
 
   private ValidationMessages messages;
   private FxCopProfileImporter importer;
+  private SonarWayProfile sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
     importer = new FxCopProfileImporter(newRuleFinder());
+    importer.importProfile(new StringReader(TestUtils.getResourceContent("/Profiles/SimpleRules.FxCop")), messages);
+    sonarWayProfile = new SonarWayProfile(importer);
   }
 
   @Test
-  public void testImportSimpleProfile() {
-    Reader reader = new StringReader(TestUtils.getResourceContent("/ProfileImporter/SimpleRules.FxCop"));
-    RulesProfile profile = importer.importProfile(reader, messages);
-
+  public void testCreateProfile() {
+    RulesProfile profile = sonarWayProfile.createProfile(messages);
     assertThat(profile.getActiveRules().size(), is(3));
-    assertNotNull(profile.getActiveRuleByConfigKey("fxcop", "AssembliesShouldHaveValidStrongNames@$(FxCopDir)\\Rules\\DesignRules.dll"));
-    assertNotNull(profile.getActiveRuleByConfigKey("fxcop", "UsePropertiesWhereAppropriate@$(FxCopDir)\\Rules\\DesignRules.dll"));
-    assertNotNull(profile.getActiveRuleByConfigKey("fxcop", "AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll"));
     assertThat(messages.hasErrors(), is(false));
   }
 

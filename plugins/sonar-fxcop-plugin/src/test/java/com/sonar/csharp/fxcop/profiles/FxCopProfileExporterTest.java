@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 public class FxCopProfileExporterTest {
 
   @Test
-  public void singleCheckstyleRulesToExport() throws IOException, SAXException {
+  public void testSimpleFxCopRulesToExport() throws IOException, SAXException {
     RulesProfile profile = RulesProfile.create("Sonar C# Way", "cs");
     profile.activateRule(Rule.create("fxcop", "AssembliesShouldHaveValidStrongNames", "Assemblies should have valid strong names")
         .setConfigKey("AssembliesShouldHaveValidStrongNames@$(FxCopDir)\\Rules\\DesignRules.dll"), null);

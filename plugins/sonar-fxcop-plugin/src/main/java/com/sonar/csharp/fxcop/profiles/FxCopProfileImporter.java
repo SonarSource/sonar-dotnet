@@ -18,7 +18,6 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.RuleQuery;
-import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.ValidationMessages;
 
 import com.sonar.csharp.fxcop.Constants;
@@ -41,26 +40,24 @@ public class FxCopProfileImporter extends ProfileImporter {
     RulesProfile profile = RulesProfile.create();
     profile.setLanguage(Constants.LANGUAGE_KEY);
 
-    List<FxCopRule> fxcopConfig = null;
-
     try {
-      fxcopConfig = FxCopRuleParser.parse(IOUtils.toString(reader));
-    } catch (IOException e) {
-      throw new SonarException("Failed to read the profile to import.", e);
-    }
+      List<FxCopRule> fxcopConfig = FxCopRuleParser.parse(IOUtils.toString(reader));
 
-    for (FxCopRule fxCopRule : fxcopConfig) {
-      String ruleName = fxCopRule.getName();
-      Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY).withKey(ruleName));
+      for (FxCopRule fxCopRule : fxcopConfig) {
+        String ruleName = fxCopRule.getName();
+        Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY).withKey(ruleName));
 
-      if (rule != null) {
-        String rawPriority = fxCopRule.getPriority();
-        RulePriority rulePriority = RulePriority.MAJOR;
-        if (StringUtils.isNotEmpty(rawPriority)) {
-          rulePriority = RulePriority.valueOfString(rawPriority);
+        if (rule != null) {
+          String rawPriority = fxCopRule.getPriority();
+          RulePriority rulePriority = RulePriority.MAJOR;
+          if (StringUtils.isNotEmpty(rawPriority)) {
+            rulePriority = RulePriority.valueOfString(rawPriority);
+          }
+          profile.activateRule(rule, rulePriority);
         }
-        profile.activateRule(rule, rulePriority);
       }
+    } catch (IOException e) {
+      messages.addErrorText("Failed to read the profile to import: " + e.getMessage());
     }
 
     return profile;

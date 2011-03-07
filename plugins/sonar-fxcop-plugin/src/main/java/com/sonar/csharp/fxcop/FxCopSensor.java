@@ -54,7 +54,7 @@ public class FxCopSensor implements Sensor, DependsUponMavenPlugin {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return project.getLanguageKey().equals("cs") && "sln".equals(project.getPackaging());
+    return project.getLanguageKey().equals("cs");
   }
 
   public MavenPluginHandler getMavenPluginHandler(Project project) {
