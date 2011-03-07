@@ -72,7 +72,7 @@ public class FxCopProfileExporter extends ProfileExporter {
       fxCopRule.setFileName(fileName);
       fxCopRule.setName(name);
 
-      RulePriority priority = activeRule.getPriority();
+      RulePriority priority = activeRule.getSeverity();
       if (priority != null) {
         fxCopRule.setPriority(priority.name().toLowerCase());
       }
