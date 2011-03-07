@@ -22,13 +22,13 @@ import org.sonar.api.rules.RulePriority;
 import org.sonar.api.utils.SonarException;
 
 import com.sonar.csharp.fxcop.Constants;
-import com.sonar.csharp.fxcop.rules.FxCopRule;
-import com.sonar.csharp.fxcop.utils.XmlUtils;
-import com.sonar.csharp.fxcop.utils.xml.FxCopProject;
-import com.sonar.csharp.fxcop.utils.xml.ProjectOptions;
-import com.sonar.csharp.fxcop.utils.xml.RuleDef;
-import com.sonar.csharp.fxcop.utils.xml.RuleFile;
-import com.sonar.csharp.fxcop.utils.xml.RuleSet;
+import com.sonar.csharp.fxcop.profiles.utils.FxCopRule;
+import com.sonar.csharp.fxcop.profiles.utils.XmlUtils;
+import com.sonar.csharp.fxcop.profiles.xml.FxCopProject;
+import com.sonar.csharp.fxcop.profiles.xml.ProjectOptions;
+import com.sonar.csharp.fxcop.profiles.xml.RuleDef;
+import com.sonar.csharp.fxcop.profiles.xml.RuleFile;
+import com.sonar.csharp.fxcop.profiles.xml.RuleSet;
 
 public class FxCopProfileExporter extends ProfileExporter {
 

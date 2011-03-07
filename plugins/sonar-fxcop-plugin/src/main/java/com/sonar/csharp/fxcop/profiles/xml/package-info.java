@@ -5,7 +5,7 @@
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-package com.sonar.csharp.fxcop.utils.xml;
+package com.sonar.csharp.fxcop.profiles.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

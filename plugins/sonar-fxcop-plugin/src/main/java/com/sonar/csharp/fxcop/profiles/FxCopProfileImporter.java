@@ -22,8 +22,8 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.ValidationMessages;
 
 import com.sonar.csharp.fxcop.Constants;
-import com.sonar.csharp.fxcop.rules.FxCopRule;
-import com.sonar.csharp.fxcop.rules.FxCopRuleParser;
+import com.sonar.csharp.fxcop.profiles.utils.FxCopRule;
+import com.sonar.csharp.fxcop.profiles.utils.FxCopRuleParser;
 
 public class FxCopProfileImporter extends ProfileImporter {
 

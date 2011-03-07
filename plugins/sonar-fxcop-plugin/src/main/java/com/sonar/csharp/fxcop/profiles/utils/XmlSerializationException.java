@@ -8,7 +8,7 @@
  * Created on May 7, 2009
  *
  */
-package com.sonar.csharp.fxcop.utils;
+package com.sonar.csharp.fxcop.profiles.utils;
 
 /**
  * An exception for xml serialization errors.

@@ -31,11 +31,11 @@ import org.sonar.api.batch.maven.DependsUponMavenPlugin;
 import org.sonar.api.batch.maven.MavenPluginHandler;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
-import org.sonar.api.rules.RulesManager;
+import org.sonar.api.rules.RuleFinder;
 import org.xml.sax.InputSource;
 
 import com.sonar.csharp.fxcop.maven.FxCopPluginHandler;
-import com.sonar.csharp.fxcop.utils.FxCopResultParser;
+import com.sonar.csharp.fxcop.results.FxCopResultParser;
 
 /**
  * Collects the FXCop reporting into sonar.
@@ -43,12 +43,12 @@ import com.sonar.csharp.fxcop.utils.FxCopResultParser;
 public class FxCopSensor implements Sensor, DependsUponMavenPlugin {
 
   private final static Logger log = LoggerFactory.getLogger(FxCopSensor.class);
-  private RulesManager rulesManager;
+  private RuleFinder ruleFinder;
   private RulesProfile profile;
   private FxCopPluginHandler pluginHandler;
 
-  public FxCopSensor(RulesProfile profile, RulesManager rulesManager, FxCopPluginHandler pluginHandler) {
-    this.rulesManager = rulesManager;
+  public FxCopSensor(RulesProfile profile, RuleFinder ruleFinder, FxCopPluginHandler pluginHandler) {
+    this.ruleFinder = ruleFinder;
     this.profile = profile;
     this.pluginHandler = pluginHandler;
   }
@@ -58,7 +58,7 @@ public class FxCopSensor implements Sensor, DependsUponMavenPlugin {
   }
 
   public MavenPluginHandler getMavenPluginHandler(Project project) {
-    // TODO: must handle the activation or not through the properties
+    // TODO: must not use the Maven plugin anymore, but launch the analysis manually
     return pluginHandler;
   }
 
@@ -66,26 +66,14 @@ public class FxCopSensor implements Sensor, DependsUponMavenPlugin {
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    log.info("----------> Executin FxCop...");
-    // Resource<?> file = CSharpResourcesBridge.getInstance().getFromTypeName("Example.Core", "Money");
-
-    final String[] reportFileNames;
-    // if (FXCOP_REUSE_MODE.equals(getFxCopMode(project))) {
-    // reportFileNames = StringUtils.split(project.getConfiguration().getString(FXCOP_REPORT_KEY),';');
-    // log.warn("Using reuse report mode for FxCop");
-    // log.warn("FxCop profile settings may not have been taken in account");
-    // } else {
-    reportFileNames = new String[] { FXCOP_REPORT_XML, SL_FXCOP_REPORT_XML };
-    // }
-
+    final String[] reportFileNames = new String[] { FXCOP_REPORT_XML, SL_FXCOP_REPORT_XML };
     File dir = project.getFileSystem().getBuildDir();
 
     for (String reportFileName : reportFileNames) {
       File report = new File(dir, reportFileName);
       if (report.exists()) {
         log.info("FxCop report found at location {}", report);
-        FxCopResultParser parser = new FxCopResultParser(project, context, rulesManager, profile);
-
+        FxCopResultParser parser = new FxCopResultParser(project, context, ruleFinder, profile);
         parseReport(report, parser, dir);
       } else {
         log.info("No FxCop report found for path {}", report);

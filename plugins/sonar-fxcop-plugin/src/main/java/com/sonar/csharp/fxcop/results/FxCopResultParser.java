@@ -7,7 +7,7 @@
 /*
  * Created on Sep 24, 2009
  */
-package com.sonar.csharp.fxcop.utils;
+package com.sonar.csharp.fxcop.results;
 
 import java.io.File;
 import java.text.ParseException;
@@ -22,7 +22,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RulesManager;
+import org.sonar.api.rules.RuleFinder;
+import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.ParsingUtils;
 import org.w3c.dom.Element;
@@ -38,7 +39,7 @@ public class FxCopResultParser extends AbstractXmlParser {
 
   private final Project project;
   private final SensorContext context;
-  private final RulesManager rulesManager;
+  private final RuleFinder ruleFinder;
   private final RulesProfile profile;
 
   /**
@@ -49,11 +50,11 @@ public class FxCopResultParser extends AbstractXmlParser {
    * @param rulesManager
    * @param profile
    */
-  public FxCopResultParser(Project project, SensorContext context, RulesManager rulesManager, RulesProfile profile) {
+  public FxCopResultParser(Project project, SensorContext context, RuleFinder ruleFinder, RulesProfile profile) {
     super();
     this.project = project;
     this.context = context;
-    this.rulesManager = rulesManager;
+    this.ruleFinder = ruleFinder;
     this.profile = profile;
   }
 
@@ -85,18 +86,18 @@ public class FxCopResultParser extends AbstractXmlParser {
       }
 
       Integer line = getIntValue(lineNumber);
-      Rule rule = rulesManager.getPluginRule(Constants.PLUGIN_KEY, key);
+      Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY).withKey(key));
       if (rule == null) {
         // We skip the rules that were not registered
         log.debug("violation found for an unknown '{}' rule", key);
         continue;
       }
       ActiveRule activeRule = profile.getActiveRule(Constants.PLUGIN_KEY, key);
-      Violation violation = new Violation(rule, resource);
+      Violation violation = Violation.create(activeRule, resource);
       violation.setLineId(line);
       violation.setMessage(message);
       if (activeRule != null) {
-        violation.setPriority(activeRule.getPriority());
+        violation.setSeverity(activeRule.getSeverity());
       }
 
       // We store the violation

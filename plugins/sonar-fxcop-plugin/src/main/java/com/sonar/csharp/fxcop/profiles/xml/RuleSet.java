@@ -8,7 +8,7 @@
  * Created on Jul 16, 2009
  *
  */
-package com.sonar.csharp.fxcop.utils.xml;
+package com.sonar.csharp.fxcop.profiles.xml;
 
 import java.util.List;
 

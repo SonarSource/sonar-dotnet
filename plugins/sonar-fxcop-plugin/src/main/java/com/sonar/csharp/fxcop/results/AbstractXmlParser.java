@@ -7,7 +7,7 @@
 /*
  * Created on Jun 4, 2009
  */
-package com.sonar.csharp.fxcop.utils;
+package com.sonar.csharp.fxcop.results;
 
 import java.io.File;
 import java.io.FileInputStream;

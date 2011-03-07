@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.fxcop.rules;
+package com.sonar.csharp.fxcop.profiles.utils;
 
 import java.io.Reader;
 import java.io.StringReader;
