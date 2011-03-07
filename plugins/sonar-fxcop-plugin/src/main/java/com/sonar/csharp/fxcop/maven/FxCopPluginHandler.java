@@ -10,6 +10,7 @@
 package com.sonar.csharp.fxcop.maven;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
@@ -22,7 +23,7 @@ import org.sonar.api.batch.maven.MavenUtils;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 
-import com.sonar.csharp.fxcop.rules.FxCopRuleRepository;
+import com.sonar.csharp.fxcop.profiles.FxCopProfileExporter;
 
 /**
  * Generates the configuration of FXCop goal for Sonar.
@@ -38,14 +39,14 @@ public class FxCopPluginHandler implements MavenPluginHandler, DependsUponCustom
   private static final String DOTNET_PLUGIN_VERSION = "0.5";
 
   private RulesProfile rulesProfile;
-  private FxCopRuleRepository rulesRepository;
+  private FxCopProfileExporter profileExporter;
 
   /**
    * Constructs a @link{FxCopPluginHandler}.
    */
-  public FxCopPluginHandler(RulesProfile rulesProfile, FxCopRuleRepository fxCopRulesRepository) {
+  public FxCopPluginHandler(RulesProfile rulesProfile, FxCopProfileExporter fxCopProfileExporter) {
     this.rulesProfile = rulesProfile;
-    this.rulesRepository = fxCopRulesRepository;
+    this.profileExporter = fxCopProfileExporter;
   }
 
   public void configure(Project project, MavenPlugin plugin) {
@@ -89,8 +90,12 @@ public class FxCopPluginHandler implements MavenPluginHandler, DependsUponCustom
    * @throws IOException
    */
   private void generateConfigurationFile(Project project, MavenPlugin plugin) throws IOException {
-    String fxCopConfiguration = rulesRepository.exportConfiguration(rulesProfile);
-    File configFile = project.getFileSystem().writeToWorkingDirectory(fxCopConfiguration, FX_COP_FILE);
+    File configFile = new File(project.getFileSystem().getSonarWorkingDirectory(), FX_COP_FILE);
+    FileWriter writer = new FileWriter(configFile);
+    profileExporter.exportProfile(rulesProfile, writer);
+    writer.flush();
+    writer.close();
+
     // Defines the configuration file
     plugin.setParameter("fxCopConfigPath", configFile.getAbsolutePath());
   }

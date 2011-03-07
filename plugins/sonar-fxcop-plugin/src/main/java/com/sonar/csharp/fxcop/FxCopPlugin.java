@@ -12,6 +12,7 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
 import com.sonar.csharp.fxcop.maven.FxCopPluginHandler;
+import com.sonar.csharp.fxcop.profiles.FxCopProfileExporter;
 import com.sonar.csharp.fxcop.profiles.FxCopProfileImporter;
 import com.sonar.csharp.fxcop.profiles.SonarWay2Profile;
 import com.sonar.csharp.fxcop.profiles.SonarWayProfile;
@@ -41,6 +42,7 @@ public class FxCopPlugin implements Plugin {
     // Rules and profiles
     list.add(FxCopRuleRepository.class);
     list.add(FxCopProfileImporter.class);
+    list.add(FxCopProfileExporter.class);
     list.add(SonarWayProfile.class);
     list.add(SonarWay2Profile.class);
 
