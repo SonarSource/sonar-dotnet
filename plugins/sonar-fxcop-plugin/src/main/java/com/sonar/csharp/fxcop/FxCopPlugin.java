@@ -12,35 +12,41 @@ import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
 
 import com.sonar.csharp.fxcop.maven.FxCopPluginHandler;
-import com.sonar.csharp.fxcop.rules.FxCopRuleRepository;
+import com.sonar.csharp.fxcop.profiles.FxCopProfileImporter;
+import com.sonar.csharp.fxcop.profiles.SonarWay2Profile;
+import com.sonar.csharp.fxcop.profiles.SonarWayProfile;
 
 /**
  */
 public class FxCopPlugin implements Plugin {
 
-  public static final String KEY = "fxcop";
+  public String getKey() {
+    return Constants.PLUGIN_KEY;
+  }
 
-  public FxCopPlugin() {
+  public String getName() {
+    return Constants.PLUGIN_NAME;
   }
 
   public String getDescription() {
-    return "A plugin that collects the FxCop check results";
+    return "FxCop is an application that analyzes managed code assemblies (code that targets the .NET Framework common language runtime) "
+        + "and reports information about the assemblies, such as possible design, localization, performance, and security improvements. "
+        + "You can find more by going to the <a href='http://msdn.microsoft.com/en-us/library/bb429476(v=VS.80).aspx'>FxCop web site</a>.";
   }
 
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(FxCopSensor.class);
+
+    // Rules and profiles
     list.add(FxCopRuleRepository.class);
-    list.add(FxCopPluginHandler.class);
+    list.add(FxCopProfileImporter.class);
+    list.add(SonarWayProfile.class);
+    list.add(SonarWay2Profile.class);
+
+    list.add(FxCopPluginHandler.class); // TODO remove later
+    list.add(FxCopExecutor.class);
     return list;
-  }
-
-  public String getKey() {
-    return KEY;
-  }
-
-  public String getName() {
-    return "C# FxCop";
   }
 
   @Override

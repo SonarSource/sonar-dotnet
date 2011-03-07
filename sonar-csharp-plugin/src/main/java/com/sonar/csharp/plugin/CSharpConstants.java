@@ -13,9 +13,6 @@ public final class CSharpConstants {
   public static final String PLUGIN_KEY = "csharp";
   public static final String PLUGIN_NAME = "C#";
 
-  public static final String REPOSITORY_KEY = PLUGIN_KEY;
-  public static final String REPOSITORY_NAME = PLUGIN_NAME;
-
   public static final String LANGUAGE_KEY = "cs";
   public static final String LANGUAGE_NAME = "C#";
 

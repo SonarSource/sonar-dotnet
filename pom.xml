@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sonarsource.csharp</groupId>
 	<artifactId>csharp</artifactId>
@@ -51,16 +52,16 @@
 				<artifactId>sonar-squid</artifactId>
 				<version>${sonar.version}</version>
 			</dependency>
-		    <dependency>
-		      <groupId>org.codehaus.sonar</groupId>
-		      <artifactId>sonar-plugin-api</artifactId>
-		      <version>${sonar.version}</version>
-		    </dependency>
-		    <dependency>
-		      <groupId>org.codehaus.sonar</groupId>
-		      <artifactId>sonar-duplications</artifactId>
-		      <version>${sonar.version}</version>
-		    </dependency>
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-plugin-api</artifactId>
+				<version>${sonar.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-duplications</artifactId>
+				<version>${sonar.version}</version>
+			</dependency>
 			<!-- Other dependencies -->
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -102,6 +103,11 @@
 				<groupId>com.sonarsource.sslr</groupId>
 				<artifactId>sslr-parser-testing-harness</artifactId>
 				<version>${sslrVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-testing-harness</artifactId>
+				<version>${sonar.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

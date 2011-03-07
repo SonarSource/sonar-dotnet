@@ -25,6 +25,7 @@ import org.sonar.api.rules.ConfigurationImportable;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulePriority;
 
+import com.sonar.csharp.fxcop.Constants;
 import com.sonar.csharp.fxcop.FxCopPlugin;
 import com.sonar.csharp.fxcop.utils.XmlUtils;
 import com.sonar.csharp.fxcop.utils.xml.FxCopProject;
@@ -145,7 +146,7 @@ public class FxCopRuleRepository extends AbstractRulesRepository<Language, Defau
   }
 
   public String exportConfiguration(RulesProfile activeProfile) {
-    List<ActiveRule> activeRules = activeProfile.getActiveRulesByPlugin(FxCopPlugin.KEY);
+    List<ActiveRule> activeRules = activeProfile.getActiveRulesByPlugin(Constants.PLUGIN_KEY);
     List<FxCopRule> rules = buildRules(activeRules);
     String xmlModules = buildXmlFromRules(rules);
     return xmlModules;
