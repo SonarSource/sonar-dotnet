@@ -3,11 +3,6 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-
-/*
- * Created on May 7, 2009
- *
- */
 package com.sonar.csharp.fxcop.profiles.utils;
 
 /**

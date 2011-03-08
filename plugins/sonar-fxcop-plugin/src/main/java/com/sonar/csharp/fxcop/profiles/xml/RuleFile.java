@@ -3,11 +3,6 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-
-/*
- * Created on Jul 2, 2009
- *
- */
 package com.sonar.csharp.fxcop.profiles.xml;
 
 import java.util.List;

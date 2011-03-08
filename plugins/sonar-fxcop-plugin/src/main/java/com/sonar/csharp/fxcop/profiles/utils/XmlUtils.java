@@ -3,10 +3,6 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-
-/*
- * Created on May 7, 2009
- */
 package com.sonar.csharp.fxcop.profiles.utils;
 
 import java.io.InputStream;
@@ -24,7 +20,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Element;
-
 
 /**
  * XML serialization utility class based on JAXB 2.x .
