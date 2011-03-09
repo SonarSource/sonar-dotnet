@@ -8,15 +8,12 @@ package com.sonar.csharp.plugin;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.configuration.Configuration;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
@@ -41,7 +38,7 @@ public final class CSharpSquidSensor implements Sensor {
   private final static Number[] CLASS_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
   private CSharp cSharp;
 
-  public CSharpSquidSensor(RulesProfile profile, CSharp cSharp, Configuration configuration, NoSonarFilter noSonarFilter) {
+  public CSharpSquidSensor(CSharp cSharp) {
     this.cSharp = cSharp;
   }
 
@@ -65,8 +62,7 @@ public final class CSharpSquidSensor implements Sensor {
   }
 
   private CSharpConfiguration createParserConfiguration(Project project) {
-    CSharpConfiguration conf = new CSharpConfiguration(project.getFileSystem().getSourceCharset());
-    return conf;
+    return new CSharpConfiguration(project.getFileSystem().getSourceCharset());
   }
 
   private void saveMeasures(Squid squid, SensorContext context, Project project) {

@@ -20,7 +20,7 @@ import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.ValidationMessages;
 
-import com.sonar.csharp.fxcop.Constants;
+import com.sonar.csharp.fxcop.FxCopConstants;
 import com.sonar.csharp.fxcop.profiles.utils.FxCopRule;
 import com.sonar.csharp.fxcop.profiles.utils.FxCopRuleParser;
 
@@ -29,8 +29,8 @@ public class FxCopProfileImporter extends ProfileImporter {
   private final RuleFinder ruleFinder;
 
   public FxCopProfileImporter(RuleFinder ruleFinder) {
-    super(Constants.REPOSITORY_KEY, Constants.PLUGIN_NAME);
-    setSupportedLanguages(Constants.LANGUAGE_KEY);
+    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.PLUGIN_NAME);
+    setSupportedLanguages(FxCopConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
   }
 
@@ -38,14 +38,14 @@ public class FxCopProfileImporter extends ProfileImporter {
   @Override
   public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
     RulesProfile profile = RulesProfile.create();
-    profile.setLanguage(Constants.LANGUAGE_KEY);
+    profile.setLanguage(FxCopConstants.LANGUAGE_KEY);
 
     try {
       List<FxCopRule> fxcopConfig = FxCopRuleParser.parse(IOUtils.toString(reader));
 
       for (FxCopRule fxCopRule : fxcopConfig) {
         String ruleName = fxCopRule.getName();
-        Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY).withKey(ruleName));
+        Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(FxCopConstants.REPOSITORY_KEY).withKey(ruleName));
 
         if (rule != null) {
           String rawPriority = fxCopRule.getPriority();

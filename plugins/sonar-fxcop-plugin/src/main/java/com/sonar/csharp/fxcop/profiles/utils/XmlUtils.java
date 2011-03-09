@@ -95,8 +95,7 @@ public class XmlUtils {
       Unmarshaller m = jc.createUnmarshaller();
 
       // Marshal to system output: java to xml
-      T result = (T) m.unmarshal(stream);
-      return result;
+      return (T) m.unmarshal(stream);
     } catch (JAXBException x) {
       throw new XmlSerializationException("Impossible to unmarshall and object of type " + type, x);
     }
@@ -114,8 +113,7 @@ public class XmlUtils {
       Transformer trans = tf.newTransformer();
       StringWriter sw = new StringWriter();
       trans.transform(new DOMSource(violation), new StreamResult(sw));
-      String xml = sw.toString();
-      return xml;
+      return sw.toString();
     } catch (Exception e) {
       return "Could not convert : " + e.getMessage();
     }

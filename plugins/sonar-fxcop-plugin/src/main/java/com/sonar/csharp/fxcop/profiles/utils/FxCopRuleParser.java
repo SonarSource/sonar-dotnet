@@ -39,8 +39,7 @@ public class FxCopRuleParser {
    */
   public static List<FxCopRule> parse(String xml) {
     StringReader stringReader = new StringReader(xml);
-    List<FxCopRule> result = parse(stringReader);
-    return result;
+    return parse(stringReader);
   }
 
   /**

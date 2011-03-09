@@ -24,8 +24,8 @@ public class FxCopRuleRepository extends RuleRepository {
   private XMLRuleParser xmlRuleParser;
 
   public FxCopRuleRepository(ServerFileSystem fileSystem, XMLRuleParser xmlRuleParser) {
-    super(Constants.REPOSITORY_KEY, Constants.LANGUAGE_KEY);
-    setName(Constants.REPOSITORY_NAME);
+    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.LANGUAGE_KEY);
+    setName(FxCopConstants.REPOSITORY_NAME);
     this.fileSystem = fileSystem;
     this.xmlRuleParser = xmlRuleParser;
   }
@@ -34,7 +34,7 @@ public class FxCopRuleRepository extends RuleRepository {
   public List<Rule> createRules() {
     List<Rule> rules = new ArrayList<Rule>();
     rules.addAll(xmlRuleParser.parse(getClass().getResourceAsStream("/com/sonar/csharp/fxcop/rules/rules.xml")));
-    for (File userExtensionXml : fileSystem.getExtensions(Constants.REPOSITORY_KEY, "xml")) {
+    for (File userExtensionXml : fileSystem.getExtensions(FxCopConstants.REPOSITORY_KEY, "xml")) {
       rules.addAll(xmlRuleParser.parse(userExtensionXml));
     }
     return rules;

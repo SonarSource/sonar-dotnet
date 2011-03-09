@@ -10,31 +10,54 @@ import java.util.List;
 
 import org.sonar.api.Extension;
 import org.sonar.api.Plugin;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
 
-import com.sonar.csharp.fxcop.maven.FxCopPluginHandler;
 import com.sonar.csharp.fxcop.profiles.FxCopProfileExporter;
 import com.sonar.csharp.fxcop.profiles.FxCopProfileImporter;
 import com.sonar.csharp.fxcop.profiles.SonarWay2Profile;
 import com.sonar.csharp.fxcop.profiles.SonarWayProfile;
+import com.sonar.csharp.fxcop.runner.FxCopRunner;
 
 /**
+ * Main class of the FxCop plugin.
  */
+@Properties({
+    @Property(key = FxCopConstants.EXECUTABLE_KEY, defaultValue = FxCopConstants.EXECUTABLE_DEFVALUE, name = "FxCop executable",
+        description = "Absolute path of the FxCop program.", global = true, project = true),
+    @Property(key = FxCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = FxCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
+        name = "FxCop program timeout", description = "Maximum number of minutes before the FxCop program will be stopped.", global = true,
+        project = true),
+    @Property(key = FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = "", name = "Assemblies to scan",
+        description = "Comma-seperated list of paths of assemblies that must be scanned.", global = false, project = true) })
 public class FxCopPlugin implements Plugin {
 
+  /**
+   * {@inheritDoc}
+   */
   public String getKey() {
-    return Constants.PLUGIN_KEY;
+    return FxCopConstants.PLUGIN_KEY;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public String getName() {
-    return Constants.PLUGIN_NAME;
+    return FxCopConstants.PLUGIN_NAME;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public String getDescription() {
     return "FxCop is an application that analyzes managed code assemblies (code that targets the .NET Framework common language runtime) "
         + "and reports information about the assemblies, such as possible design, localization, performance, and security improvements. "
         + "You can find more by going to the <a href='http://msdn.microsoft.com/en-us/library/bb429476(v=VS.80).aspx'>FxCop web site</a>.";
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(FxCopSensor.class);
@@ -46,11 +69,14 @@ public class FxCopPlugin implements Plugin {
     list.add(SonarWayProfile.class);
     list.add(SonarWay2Profile.class);
 
-    list.add(FxCopPluginHandler.class); // TODO remove later
-    list.add(FxCopExecutor.class);
+    // Running FxCop
+    list.add(FxCopRunner.class);
     return list;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public String toString() {
     return getKey();

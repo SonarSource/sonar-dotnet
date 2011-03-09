@@ -21,7 +21,7 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulePriority;
 import org.sonar.api.utils.SonarException;
 
-import com.sonar.csharp.fxcop.Constants;
+import com.sonar.csharp.fxcop.FxCopConstants;
 import com.sonar.csharp.fxcop.profiles.utils.FxCopRule;
 import com.sonar.csharp.fxcop.profiles.utils.XmlUtils;
 import com.sonar.csharp.fxcop.profiles.xml.FxCopProject;
@@ -33,13 +33,13 @@ import com.sonar.csharp.fxcop.profiles.xml.RuleSet;
 public class FxCopProfileExporter extends ProfileExporter {
 
   public FxCopProfileExporter() {
-    super(Constants.REPOSITORY_KEY, Constants.PLUGIN_NAME);
-    setSupportedLanguages(Constants.LANGUAGE_KEY);
+    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.PLUGIN_NAME);
+    setSupportedLanguages(FxCopConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }
 
   public void exportProfile(RulesProfile profile, Writer writer) {
-    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(Constants.REPOSITORY_KEY);
+    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(FxCopConstants.REPOSITORY_KEY);
     List<FxCopRule> rules = buildRules(activeRules);
     String xmlModules = buildXmlFromRules(rules);
     try {
@@ -129,8 +129,7 @@ public class FxCopProfileExporter extends ProfileExporter {
 
     CharArrayWriter writer = new CharArrayWriter();
     XmlUtils.marshall(report, writer);
-    String config = writer.toString();
-    return config;
+    return writer.toString();
   }
 
 }

@@ -31,7 +31,7 @@ import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
 
-import com.sonar.csharp.fxcop.Constants;
+import com.sonar.csharp.fxcop.FxCopConstants;
 import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 
 /**
@@ -40,6 +40,12 @@ import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 public class FxCopResultParser {
 
   private final static Logger log = LoggerFactory.getLogger(FxCopResultParser.class);
+  private final static String NAMESPACE = "Namespace";
+  private final static String MESSAGE = "Message";
+  private final static String MODULE = "Module";
+  private final static String NAME = "Name";
+  private final static String TYPENAME = "TypeName";
+  private final static String LINE = "Line";
 
   private Project project;
   private SensorContext context;
@@ -94,15 +100,14 @@ public class FxCopResultParser {
     xmlFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.FALSE);
     xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
     xmlFactory.setProperty(XMLInputFactory.IS_VALIDATING, Boolean.FALSE);
-    SMInputFactory inputFactory = new SMInputFactory(xmlFactory);
-    return inputFactory;
+    return new SMInputFactory(xmlFactory);
   }
 
   private void parseNamespacesBloc(SMInputCursor cursor) throws XMLStreamException {
     // Cursor in on <Namespaces>
-    SMInputCursor namespacesCursor = cursor.advance().childElementCursor("Namespace");
+    SMInputCursor namespacesCursor = cursor.advance().childElementCursor(NAMESPACE);
     while (namespacesCursor.getNext() != null) {
-      SMInputCursor messagesCursor = namespacesCursor.descendantElementCursor("Message");
+      SMInputCursor messagesCursor = namespacesCursor.descendantElementCursor(MESSAGE);
       while (messagesCursor.getNext() != null) {
         createViolationFromMessage(messagesCursor);
       }
@@ -111,7 +116,7 @@ public class FxCopResultParser {
 
   private void parseTargetsBloc(SMInputCursor cursor) throws XMLStreamException {
     // Cursor on <Targets>
-    SMInputCursor modulesCursor = cursor.advance().descendantElementCursor("Module");
+    SMInputCursor modulesCursor = cursor.advance().descendantElementCursor(MODULE);
     while (modulesCursor.getNext() != null) {
       parseModuleMessagesBloc(modulesCursor);
     }
@@ -122,7 +127,7 @@ public class FxCopResultParser {
     SMInputCursor moduleChildrenCursor = cursor.childElementCursor();
     if (moduleChildrenCursor.getNext() != null) {
       // We are on <Messages>, look for <Message>
-      SMInputCursor messagesCursor = moduleChildrenCursor.childElementCursor("Message");
+      SMInputCursor messagesCursor = moduleChildrenCursor.childElementCursor(MESSAGE);
       while (messagesCursor.getNext() != null) {
         createViolationFromMessage(messagesCursor);
       }
@@ -131,7 +136,7 @@ public class FxCopResultParser {
       // We are on <Namespaces>, get <Namespace>
       SMInputCursor namespaceCursor = moduleChildrenCursor.childElementCursor();
       while (namespaceCursor.getNext() != null) {
-        String namespaceName = namespaceCursor.getAttrValue("Name");
+        String namespaceName = namespaceCursor.getAttrValue(NAME);
         SMInputCursor typeCursor = namespaceCursor.childElementCursor().advance().childElementCursor();
         while (typeCursor.getNext() != null) {
           parseTypeBloc(namespaceName, typeCursor);
@@ -142,22 +147,22 @@ public class FxCopResultParser {
 
   private void parseTypeBloc(String namespaceName, SMInputCursor cursor) throws XMLStreamException {
     // Cursor on <Type>
-    String typeName = cursor.getAttrValue("Name");
+    String typeName = cursor.getAttrValue(NAME);
     Resource<?> resource = resourcesBridge.getFromTypeName(namespaceName, typeName);
-    SMInputCursor messagesCursor = cursor.descendantElementCursor("Message");
+    SMInputCursor messagesCursor = cursor.descendantElementCursor(MESSAGE);
     while (messagesCursor.getNext() != null) {
       // Cursor on <Message>
       if (messagesCursor.getCurrEvent() == SMEvent.START_ELEMENT) {
 
-        Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY)
-            .withKey(messagesCursor.getAttrValue("TypeName")));
+        Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(FxCopConstants.REPOSITORY_KEY)
+            .withKey(messagesCursor.getAttrValue(TYPENAME)));
         if (currentRule != null) {
           // look for all potential issues
           SMInputCursor issueCursor = messagesCursor.childElementCursor();
           while (issueCursor.getNext() != null) {
             // Cursor on Issue
             Violation violation = Violation.create(currentRule, resource);
-            String lineNumber = issueCursor.getAttrValue("Line");
+            String lineNumber = issueCursor.getAttrValue(LINE);
             if (lineNumber != null) {
               violation.setLineId(Integer.parseInt(lineNumber));
             }
@@ -166,7 +171,7 @@ public class FxCopResultParser {
             context.saveViolation(violation);
           }
         } else {
-          log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue("TypeName"));
+          log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
         }
 
       }
@@ -174,8 +179,8 @@ public class FxCopResultParser {
   }
 
   private void createViolationFromMessage(SMInputCursor messagesCursor) throws XMLStreamException {
-    Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(Constants.REPOSITORY_KEY)
-        .withKey(messagesCursor.getAttrValue("TypeName")));
+    Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(FxCopConstants.REPOSITORY_KEY)
+        .withKey(messagesCursor.getAttrValue(TYPENAME)));
     if (currentRule != null) {
       // the violation is saved at project level, not on a specific resource
       Violation violation = Violation.create(currentRule, project);
@@ -183,11 +188,13 @@ public class FxCopResultParser {
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {
-      log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue("TypeName"));
+      log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
     }
   }
 
   /**
+   * Sets the encoding to use to parse the result file
+   * 
    * @param encoding
    *          the encoding to set
    */
