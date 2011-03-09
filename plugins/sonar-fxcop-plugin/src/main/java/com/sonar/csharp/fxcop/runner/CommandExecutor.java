@@ -67,7 +67,7 @@ public class CommandExecutor {
       final Process finalProcess = process;
       Callable<Integer> call = new Callable<Integer>() {
 
-        public Integer call() throws Exception {
+        public Integer call() throws Exception { // NOSONAR The "throws Exception" is part of this API
           finalProcess.waitFor();
           return finalProcess.exitValue();
         }
@@ -104,7 +104,7 @@ public class CommandExecutor {
 
   static class StreamGobbler extends Thread {
 
-    InputStream is;
+    private InputStream is;
 
     StreamGobbler(InputStream is) {
       this.is = is;

@@ -23,8 +23,8 @@ import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.squid.CSharpAstScanner;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 
 public class CSharpResourcesBridgeTest {

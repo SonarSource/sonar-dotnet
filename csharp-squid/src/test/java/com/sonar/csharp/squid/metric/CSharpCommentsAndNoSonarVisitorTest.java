@@ -19,9 +19,9 @@ import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceProject;
 
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.squid.CSharpAstScanner;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.metric.CSharpCommentsAndNoSonarVisitor;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 public class CSharpCommentsAndNoSonarVisitorTest {
 

@@ -49,10 +49,10 @@ public class FxCopCommandTest {
     fxCopCommand = new FxCopCommand(configuration, projectFileSystem);
     fxCopCommand.setFxCopConfigFile(fakeFxCopProgramFile);
     String[] commands = fxCopCommand.toArray();
-    assertThat(commands[1], endsWith("/Runner/FakeFxCopConfigFile.xml"));
+    assertThat(commands[1], endsWith("FakeFxCopConfigFile.xml"));
     assertThat(commands[2], endsWith("fxcop-report.xml"));
-    assertThat(commands[3], endsWith("FakeAssemblies/Fake1.assembly"));
-    assertThat(commands[4], endsWith("FakeAssemblies/Fake2.assembly"));
+    assertThat(commands[3], endsWith("Fake1.assembly"));
+    assertThat(commands[4], endsWith("Fake2.assembly"));
   }
 
   @Test(expected = IllegalStateException.class)

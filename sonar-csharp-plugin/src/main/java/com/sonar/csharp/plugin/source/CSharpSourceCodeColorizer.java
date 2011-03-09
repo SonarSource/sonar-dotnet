@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.plugin.colorizer;
+package com.sonar.csharp.plugin.source;
 
 import java.util.ArrayList;
 import java.util.List;

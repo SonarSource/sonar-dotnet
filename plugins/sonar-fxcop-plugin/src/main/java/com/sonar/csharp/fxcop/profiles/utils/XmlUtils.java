@@ -24,7 +24,10 @@ import org.w3c.dom.Element;
 /**
  * XML serialization utility class based on JAXB 2.x .
  */
-public class XmlUtils {
+public final class XmlUtils {
+
+  private XmlUtils() {
+  }
 
   /**
    * Marshall an object into a XML Stream
@@ -33,7 +36,7 @@ public class XmlUtils {
    * @param stream
    * @throws XmlSerializationException
    */
-  public static void marshall(Object serialized, OutputStream stream) throws XmlSerializationException {
+  public static void marshall(Object serialized, OutputStream stream) {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
@@ -42,7 +45,7 @@ public class XmlUtils {
       Marshaller m = jc.createMarshaller();
 
       // Enable formatted xml output
-      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.valueOf(true));
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
       // Marshal to system output: java to xml
       m.marshal(serialized, stream);
@@ -58,7 +61,7 @@ public class XmlUtils {
    * @param stream
    * @throws XmlSerializationException
    */
-  public static void marshall(Object serialized, Writer writer) throws XmlSerializationException {
+  public static void marshall(Object serialized, Writer writer) {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
@@ -67,7 +70,7 @@ public class XmlUtils {
       Marshaller m = jc.createMarshaller();
 
       // Enable formatted xml output
-      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.valueOf(true));
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
       // Marshal to system output: java to xml
       m.marshal(serialized, writer);
@@ -86,7 +89,7 @@ public class XmlUtils {
    * @throws XmlSerializationException
    */
   @SuppressWarnings("unchecked")
-  public static <T> T unmarshall(InputStream stream, Class<T> type) throws XmlSerializationException {
+  public static <T> T unmarshall(InputStream stream, Class<T> type) {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(type);
@@ -117,11 +120,5 @@ public class XmlUtils {
     } catch (Exception e) {
       return "Could not convert : " + e.getMessage();
     }
-  }
-
-  /**
-   * Disabled constructor.
-   */
-  private XmlUtils() {
   }
 }

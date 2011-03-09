@@ -39,13 +39,13 @@ import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
  */
 public class FxCopResultParser {
 
-  private final static Logger log = LoggerFactory.getLogger(FxCopResultParser.class);
-  private final static String NAMESPACE = "Namespace";
-  private final static String MESSAGE = "Message";
-  private final static String MODULE = "Module";
-  private final static String NAME = "Name";
-  private final static String TYPENAME = "TypeName";
-  private final static String LINE = "Line";
+  private static final Logger LOG = LoggerFactory.getLogger(FxCopResultParser.class);
+  private static final String NAMESPACE = "Namespace";
+  private static final String MESSAGE = "Message";
+  private static final String MODULE = "Module";
+  private static final String NAME = "Name";
+  private static final String TYPENAME = "TypeName";
+  private static final String LINE = "Line";
 
   private Project project;
   private SensorContext context;
@@ -63,6 +63,7 @@ public class FxCopResultParser {
    */
   public FxCopResultParser(Project project, SensorContext context, RuleFinder ruleFinder, CSharpResourcesBridge resourcesBridge) {
     super();
+    this.project = project;
     this.context = context;
     this.ruleFinder = ruleFinder;
     this.resourcesBridge = resourcesBridge;
@@ -171,7 +172,7 @@ public class FxCopResultParser {
             context.saveViolation(violation);
           }
         } else {
-          log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
+          LOG.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
         }
 
       }
@@ -188,7 +189,7 @@ public class FxCopResultParser {
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {
-      log.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
+      LOG.debug("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
     }
   }
 

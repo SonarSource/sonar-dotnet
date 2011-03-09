@@ -54,12 +54,16 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
       return false;
     }
     AstNodeType parentType = parent.getParent().getType();
-    if (parentType.equals(getCSharpGrammar().methodBody) || parentType.equals(getCSharpGrammar().accessorBody)
-        || parentType.equals(getCSharpGrammar().addAccessorDeclaration) || parentType.equals(getCSharpGrammar().removeAccessorDeclaration)
-        || parentType.equals(getCSharpGrammar().operatorBody) || parentType.equals(getCSharpGrammar().constructorBody)
-        || parentType.equals(getCSharpGrammar().destructorBody) || parentType.equals(getCSharpGrammar().staticConstructorBody)) {
+    if (isMemberBloc(parentType)) {
       return true;
     }
     return false;
+  }
+
+  private boolean isMemberBloc(AstNodeType parentType) {
+    return parentType.equals(getCSharpGrammar().methodBody) || parentType.equals(getCSharpGrammar().accessorBody)
+        || parentType.equals(getCSharpGrammar().addAccessorDeclaration) || parentType.equals(getCSharpGrammar().removeAccessorDeclaration)
+        || parentType.equals(getCSharpGrammar().operatorBody) || parentType.equals(getCSharpGrammar().constructorBody)
+        || parentType.equals(getCSharpGrammar().destructorBody) || parentType.equals(getCSharpGrammar().staticConstructorBody);
   }
 }

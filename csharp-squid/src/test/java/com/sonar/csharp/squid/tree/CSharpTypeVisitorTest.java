@@ -22,8 +22,8 @@ import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.squid.CSharpAstScanner;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.csharp.squid.tree.source.SourceType;
 
 public class CSharpTypeVisitorTest {

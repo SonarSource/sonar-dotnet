@@ -14,8 +14,9 @@ import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 
-import com.sonar.csharp.plugin.colorizer.CSharpSourceCodeColorizer;
 import com.sonar.csharp.plugin.cpd.CSharpCPDMapping;
+import com.sonar.csharp.plugin.source.CSharpSourceCodeColorizer;
+import com.sonar.csharp.plugin.source.CSharpSourceImporter;
 
 @Properties({
     @Property(key = CSharpConstants.CPD_MINIMUM_TOKENS_PROPERTY, defaultValue = "" + CoreProperties.CPD_MINIMUM_TOKENS_DEFAULT_VALUE,

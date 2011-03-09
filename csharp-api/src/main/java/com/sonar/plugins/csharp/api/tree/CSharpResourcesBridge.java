@@ -5,7 +5,7 @@
  */
 package com.sonar.plugins.csharp.api.tree;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.sonar.api.resources.File;
@@ -25,7 +25,7 @@ public class CSharpResourcesBridge {
 
   private static CSharpResourcesBridge instance;
 
-  private HashMap<String, Resource<?>> logicalToPhysicalResourcesMap;
+  private Map<String, Resource<?>> logicalToPhysicalResourcesMap;
 
   private CSharpResourcesBridge() {
     logicalToPhysicalResourcesMap = Maps.newHashMap();

@@ -25,8 +25,8 @@ import org.sonar.squid.indexer.QueryByType;
 
 import com.google.common.collect.Lists;
 import com.sonar.csharp.api.metric.CSharpMetric;
-import com.sonar.csharp.squid.CSharpAstScanner;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.csharp.squid.tree.source.SourceClass;
 import com.sonar.csharp.squid.tree.source.SourceMember;
 import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
@@ -34,8 +34,8 @@ import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor implements Sensor {
 
-  private final static Number[] METHOD_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12 };
-  private final static Number[] CLASS_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
+  private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12 };
+  private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
   private CSharp cSharp;
 
   public CSharpSquidSensor(CSharp cSharp) {

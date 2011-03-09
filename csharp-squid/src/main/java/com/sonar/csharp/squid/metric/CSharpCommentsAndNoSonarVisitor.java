@@ -35,10 +35,8 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
    * {@inheritDoc}
    */
   public void visitToken(Token token) {
-    if (firstLineOfCodeIndex == -1) {
-      if ( !token.getType().equals(GenericTokenType.UNKNOWN_CHAR)) {
-        firstLineOfCodeIndex = token.getLine();
-      }
+    if (firstLineOfCodeIndex == -1 && !token.getType().equals(GenericTokenType.UNKNOWN_CHAR)) {
+      firstLineOfCodeIndex = token.getLine();
     }
   }
 

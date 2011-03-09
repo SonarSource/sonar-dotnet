@@ -27,9 +27,12 @@ import org.xml.sax.InputSource;
 /**
  * Parser the FXCop rules to populate sonar.
  */
-public class FxCopRuleParser {
+public final class FxCopRuleParser {
 
-  private final static Logger log = LoggerFactory.getLogger(FxCopRuleParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FxCopRuleParser.class);
+
+  private FxCopRuleParser() {
+  }
 
   /**
    * Parses the context of FXCop rules.
@@ -83,7 +86,7 @@ public class FxCopRuleParser {
       }
     } catch (XPathExpressionException e) {
       // should not occur
-      log.error("xpath exception while parsing fxcop config file", e);
+      LOG.error("xpath exception while parsing fxcop config file", e);
     }
     return result;
   }

@@ -30,7 +30,7 @@ import com.sonar.plugins.csharp.api.tree.CSharpResourcesBridge;
  */
 public class FxCopSensor implements Sensor {
 
-  private static final Logger log = LoggerFactory.getLogger(FxCopSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
   private static final String FXCOP_RULES_FILE = "sonar.FxCop";
 
   private ProjectFileSystem fileSystem;
@@ -100,12 +100,12 @@ public class FxCopSensor implements Sensor {
     for (String reportFileName : reportFileNames) {
       File report = new File(dir, reportFileName);
       if (report.exists()) {
-        log.info("FxCop report found at location {}", report);
+        LOG.info("FxCop report found at location {}", report);
         FxCopResultParser parser = new FxCopResultParser(project, context, ruleFinder, CSharpResourcesBridge.getInstance());
         parser.setEncoding(fileSystem.getSourceCharset());
         parser.parse(report);
       } else {
-        log.info("No FxCop report found for path {}", report);
+        LOG.info("No FxCop report found for path {}", report);
       }
     }
   }

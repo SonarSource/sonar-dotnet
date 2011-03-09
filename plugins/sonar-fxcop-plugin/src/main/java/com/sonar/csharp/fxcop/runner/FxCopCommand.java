@@ -22,7 +22,7 @@ import com.sonar.csharp.fxcop.FxCopConstants;
  */
 public class FxCopCommand {
 
-  private static final Logger log = LoggerFactory.getLogger(FxCopCommand.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FxCopCommand.class);
 
   private ProjectFileSystem fileSystem;
   private int timeoutMinutes = FxCopConstants.TIMEOUT_MINUTES_DEFVALUE;
@@ -78,18 +78,18 @@ public class FxCopCommand {
 
     List<String> command = new ArrayList<String>();
 
-    log.debug("- FxCop program      : " + fxCopCommand);
+    LOG.debug("- FxCop program      : " + fxCopCommand);
     command.add(fxCopCommand);
 
-    log.debug("- Project file       : " + fxCopConfigFile);
+    LOG.debug("- Project file       : " + fxCopConfigFile);
     command.add("/p:" + fxCopConfigFile.getAbsolutePath());
 
-    log.debug("- Report file        : " + reportFile);
+    LOG.debug("- Report file        : " + reportFile);
     command.add("/out:" + reportFile.getAbsolutePath());
 
-    log.debug("- Scanned assemblies :");
+    LOG.debug("- Scanned assemblies :");
     for (File checkedAssembly : assemblyFilesToScan) {
-      log.debug("   o " + checkedAssembly);
+      LOG.debug("   o " + checkedAssembly);
       command.add("/f:" + checkedAssembly.getAbsolutePath());
     }
 
@@ -105,7 +105,7 @@ public class FxCopCommand {
       String assemblyPath = assembliesToScan[i].trim();
       File assembly = new File(basedir, assemblyPath);
       if (assembly == null || !assembly.exists()) {
-        log.warn("The following assembly is supposed to be analyzed, but it can't be found: " + assemblyPath);
+        LOG.warn("The following assembly is supposed to be analyzed, but it can't be found: " + assemblyPath);
       } else {
         assemblies.add(assembly);
       }
