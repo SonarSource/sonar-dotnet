@@ -30,9 +30,16 @@ public final class FxCopConstants {
   public static final String EXECUTABLE_KEY = "sonar.fxcop.executable";
   public static final String EXECUTABLE_DEFVALUE = "C:/Program Files/Microsoft FxCop 10.0/FxCopCmd.exe";
 
+  public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.fxcop.assemblies";
+  public static final String ASSEMBLIES_TO_SCAN_DEFVALUE = "";
+
+  public static final String ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY = "sonar.fxcop.assemblyDependencyDirectories";
+  public static final String ASSEMBLY_DEPENDENCY_DIRECTORIES_DEFVALUE = "";
+  
+  public static final String IGNORE_GENERATED_CODE_KEY = "sonar.fxcop.ignoreGeneratedCode";
+  public static final boolean IGNORE_GENERATED_CODE_DEFVALUE = true;
+
   public static final String TIMEOUT_MINUTES_KEY = "sonar.fxcop.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 10;
-
-  public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.fxcop.assemblies";
 
 }

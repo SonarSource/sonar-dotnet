@@ -24,12 +24,18 @@ import com.sonar.csharp.fxcop.runner.FxCopRunner;
  */
 @Properties({
     @Property(key = FxCopConstants.EXECUTABLE_KEY, defaultValue = FxCopConstants.EXECUTABLE_DEFVALUE, name = "FxCop executable",
-        description = "Absolute path of the FxCop program.", global = true, project = true),
+        description = "Absolute path of the FxCop program.", global = true, project = false),
+    @Property(key = FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = FxCopConstants.ASSEMBLIES_TO_SCAN_DEFVALUE,
+        name = "Assemblies to scan", description = "Comma-seperated list of paths of assemblies that must be scanned.", global = false,
+        project = true),
+    @Property(key = FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY,
+        defaultValue = FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_DEFVALUE, name = "Assembly dependency directories",
+        description = "Comma-seperated list of folders to search for assembly dependencies.", global = true, project = true),
+    @Property(key = FxCopConstants.IGNORE_GENERATED_CODE_KEY, defaultValue = FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE + "",
+        name = "Ignore generated code", description = "Suppress analysis results against generated code.", global = true, project = true),
     @Property(key = FxCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = FxCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
         name = "FxCop program timeout", description = "Maximum number of minutes before the FxCop program will be stopped.", global = true,
-        project = true),
-    @Property(key = FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = "", name = "Assemblies to scan",
-        description = "Comma-seperated list of paths of assemblies that must be scanned.", global = false, project = true) })
+        project = true) })
 public class FxCopPlugin implements Plugin {
 
   /**

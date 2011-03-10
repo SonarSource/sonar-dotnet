@@ -46,6 +46,7 @@ public class FxCopCommandTest {
   @Test
   public void testToArray() throws Exception {
     configuration.addProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, "FakeAssemblies/Fake1.assembly, FakeAssemblies/Fake2.assembly");
+    configuration.addProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, "FakeDepFolder, UnexistingFolder");
     fxCopCommand = new FxCopCommand(configuration, projectFileSystem);
     fxCopCommand.setFxCopConfigFile(fakeFxCopProgramFile);
     String[] commands = fxCopCommand.toArray();
@@ -53,6 +54,26 @@ public class FxCopCommandTest {
     assertThat(commands[2], endsWith("fxcop-report.xml"));
     assertThat(commands[3], endsWith("Fake1.assembly"));
     assertThat(commands[4], endsWith("Fake2.assembly"));
+    assertThat(commands[5], endsWith("FakeDepFolder"));
+    assertThat(commands[6], endsWith("/igc"));
+    assertThat(commands[7], endsWith("/to:600"));
+    assertThat(commands[8], endsWith("/gac"));
+  }
+
+  @Test
+  public void testToArrayWithOtherCustomParams() throws Exception {
+    configuration.addProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, "FakeAssemblies/Fake1.assembly, FakeAssemblies/Fake2.assembly");
+    configuration.addProperty(FxCopConstants.IGNORE_GENERATED_CODE_KEY, "false");
+    configuration.addProperty(FxCopConstants.TIMEOUT_MINUTES_KEY, "100");
+    fxCopCommand = new FxCopCommand(configuration, projectFileSystem);
+    fxCopCommand.setFxCopConfigFile(fakeFxCopProgramFile);
+    String[] commands = fxCopCommand.toArray();
+    assertThat(commands[1], endsWith("FakeFxCopConfigFile.xml"));
+    assertThat(commands[2], endsWith("fxcop-report.xml"));
+    assertThat(commands[3], endsWith("Fake1.assembly"));
+    assertThat(commands[4], endsWith("Fake2.assembly"));
+    assertThat(commands[5], endsWith("/to:6000"));
+    assertThat(commands[6], endsWith("/gac"));
   }
 
   @Test(expected = IllegalStateException.class)

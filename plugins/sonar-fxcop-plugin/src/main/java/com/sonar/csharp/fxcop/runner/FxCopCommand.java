@@ -25,11 +25,15 @@ public class FxCopCommand {
   private static final Logger LOG = LoggerFactory.getLogger(FxCopCommand.class);
 
   private ProjectFileSystem fileSystem;
-  private int timeoutMinutes = FxCopConstants.TIMEOUT_MINUTES_DEFVALUE;
-  private String fxCopCommand;
-  private File fxCopConfigFile;
+  private String fxCopExecutable;
   private String[] assembliesToScan;
-  private List<File> assemblyFilesToScan;
+  private String[] assemblyDependencyDirectories;
+  private boolean ignoreGeneratedCode;
+  private int timeoutMinutes = FxCopConstants.TIMEOUT_MINUTES_DEFVALUE;
+
+  private List<File> assemblyToScanFiles;
+  private List<File> assemblyDependencyDirectoriesFiles;
+  private File fxCopConfigFile;
   private File reportFile;
 
   /**
@@ -42,9 +46,12 @@ public class FxCopCommand {
    */
   public FxCopCommand(Configuration configuration, ProjectFileSystem fileSystem) {
     this.fileSystem = fileSystem;
-    this.timeoutMinutes = configuration.getInt(FxCopConstants.TIMEOUT_MINUTES_KEY, FxCopConstants.TIMEOUT_MINUTES_DEFVALUE);
-    this.fxCopCommand = configuration.getString(FxCopConstants.EXECUTABLE_KEY, FxCopConstants.EXECUTABLE_DEFVALUE);
+    this.fxCopExecutable = configuration.getString(FxCopConstants.EXECUTABLE_KEY, FxCopConstants.EXECUTABLE_DEFVALUE);
     this.assembliesToScan = configuration.getStringArray(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY);
+    this.assemblyDependencyDirectories = configuration.getStringArray(FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY);
+    this.ignoreGeneratedCode = configuration.getBoolean(FxCopConstants.IGNORE_GENERATED_CODE_KEY,
+        FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE);
+    this.timeoutMinutes = configuration.getInt(FxCopConstants.TIMEOUT_MINUTES_KEY, FxCopConstants.TIMEOUT_MINUTES_DEFVALUE);
     reportFile = new File(fileSystem.getBuildDir(), FxCopConstants.FXCOP_REPORT_XML);
   }
 
@@ -73,51 +80,66 @@ public class FxCopCommand {
    * @return the array of strings that represent the command to launch.
    */
   public String[] toArray() {
-    assemblyFilesToScan = getAssembliesToScan();
+    // assemblyToScanFiles = getAssembliesToScan();
+    assemblyToScanFiles = getAsListOfFiles(assembliesToScan);
+    assemblyDependencyDirectoriesFiles = getAsListOfFiles(assemblyDependencyDirectories);
     validate();
 
     List<String> command = new ArrayList<String>();
 
-    LOG.debug("- FxCop program      : " + fxCopCommand);
-    command.add(fxCopCommand);
+    LOG.debug("- FxCop program         : " + fxCopExecutable);
+    command.add(fxCopExecutable);
 
-    LOG.debug("- Project file       : " + fxCopConfigFile);
+    LOG.debug("- Project file          : " + fxCopConfigFile);
     command.add("/p:" + fxCopConfigFile.getAbsolutePath());
 
-    LOG.debug("- Report file        : " + reportFile);
+    LOG.debug("- Report file           : " + reportFile);
     command.add("/out:" + reportFile.getAbsolutePath());
 
-    LOG.debug("- Scanned assemblies :");
-    for (File checkedAssembly : assemblyFilesToScan) {
+    LOG.debug("- Scanned assemblies    :");
+    for (File checkedAssembly : assemblyToScanFiles) {
       LOG.debug("   o " + checkedAssembly);
       command.add("/f:" + checkedAssembly.getAbsolutePath());
     }
+
+    LOG.debug("- Assembly dependencies :");
+    for (File assemblyDependencyDir : assemblyDependencyDirectoriesFiles) {
+      LOG.debug("   o " + assemblyDependencyDir);
+      command.add("/d:" + assemblyDependencyDir.getAbsolutePath());
+    }
+
+    if (ignoreGeneratedCode) {
+      LOG.debug("- Ignoring generated code");
+      command.add("/igc");
+    }
+
+    command.add("/to:" + timeoutMinutes * 60);
 
     command.add("/gac");
 
     return command.toArray(new String[command.size()]);
   }
 
-  private List<File> getAssembliesToScan() {
-    List<File> assemblies = Lists.newArrayList();
+  private List<File> getAsListOfFiles(String[] fileArray) {
+    List<File> fileList = Lists.newArrayList();
     File basedir = fileSystem.getBasedir();
-    for (int i = 0; i < assembliesToScan.length; i++) {
-      String assemblyPath = assembliesToScan[i].trim();
-      File assembly = new File(basedir, assemblyPath);
-      if (assembly == null || !assembly.exists()) {
-        LOG.warn("The following assembly is supposed to be analyzed, but it can't be found: " + assemblyPath);
+    for (int i = 0; i < fileArray.length; i++) {
+      String filePath = fileArray[i].trim();
+      File file = new File(basedir, filePath);
+      if (file == null || !file.exists()) {
+        LOG.warn("The following resource can't be found: " + filePath);
       } else {
-        assemblies.add(assembly);
+        fileList.add(file);
       }
     }
-    return assemblies;
+    return fileList;
   }
 
   private void validate() {
     if (fxCopConfigFile == null || !fxCopConfigFile.exists()) {
       throw new IllegalStateException("The FxCop configuration file does not exist.");
     }
-    if (assemblyFilesToScan.isEmpty()) {
+    if (assemblyToScanFiles.isEmpty()) {
       throw new IllegalStateException(
           "No assembly to scan. Please check your project's FxCop plugin configuration ('sonar.fxcop.assemblies' property).");
     }
