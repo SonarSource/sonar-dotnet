@@ -20,7 +20,7 @@ import com.sonar.csharp.squid.parser.CSharpParser;
  */
 public class CSharpPreIntegrationFileTest {
 
-  private String filePath = "/parser/simpleFile.cs";
+  private String filePath = "/parser/cSharpSyntaxAllInOneFile.cs";
   private File cSharpFile;
   private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
 
