@@ -4,7 +4,8 @@
 	<parent>
 		<groupId>com.sonarsource.csharp</groupId>
 		<artifactId>csharp</artifactId>
-		<version>0.1-SNAPSHOT</version>
+		<version>0.7-SNAPSHOT</version>
+		<relativePath>../..</relativePath>
 	</parent>
 	<artifactId>sonar-fxcop-plugin</artifactId>
 	<name>SonarSource :: C# :: Sonar FxCop Plugin</name>

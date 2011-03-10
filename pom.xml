@@ -5,7 +5,7 @@
 	<groupId>com.sonarsource.csharp</groupId>
 	<artifactId>csharp</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.7-SNAPSHOT</version>
 	<name>SonarSource :: C#</name>
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
