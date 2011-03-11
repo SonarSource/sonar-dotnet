@@ -66,8 +66,9 @@ public final class CSharpSquidSensor implements Sensor {
   }
 
   private void saveMeasures(Squid squid, SensorContext context, Project project) {
-    SourceCode squidProject = squid.getProject();
-    context.saveMeasure(project, CoreMetrics.PACKAGES, squidProject.getDouble(CSharpMetric.NAMESPACES));
+    // TODO should add real C# metrics, and not bind Namespaces to Packages
+    // SourceCode squidProject = squid.getProject();
+    // context.saveMeasure(project, CoreMetrics.PACKAGES, squidProject.getDouble(CSharpMetric.NAMESPACES));
 
     Collection<SourceCode> squidFiles = squid.search(new QueryByType(SourceFile.class));
     for (SourceCode squidFile : squidFiles) {
