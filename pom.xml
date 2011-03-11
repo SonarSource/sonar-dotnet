@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
 		<artifactId>parent</artifactId>
-		<version>8</version>
+		<version>9</version>
 	</parent>
 	<properties>
 		<sonar.version>2.6</sonar.version>
