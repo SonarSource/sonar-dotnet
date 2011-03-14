@@ -122,8 +122,7 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
     List<ActiveRule> activeRules = activeProfile
         .getActiveRulesByPlugin(StyleCopPlugin.KEY);
     List<StyleCopRule> rules = buildRules(activeRules);
-    String xmlModules = buildXmlFromRules(rules);
-    return xmlModules;
+    return buildXmlFromRules(rules);
   }
 
   /**
@@ -182,8 +181,7 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
 
     CharArrayWriter writer = new CharArrayWriter();
     XmlUtils.marshall(settings, writer);
-    String config = writer.toString();
-    return config;
+    return writer.toString();
   }
 
   /**

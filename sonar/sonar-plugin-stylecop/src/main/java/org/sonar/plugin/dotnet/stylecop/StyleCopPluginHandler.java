@@ -92,7 +92,7 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
    * @throws IOException
    */
   private void generateConfigurationFile(Project project, MavenPlugin plugin)
-      throws IOException {
+    throws IOException {
     String styleCopConfiguration = rulesRepository
         .exportConfiguration(rulesProfile);
     File configFile = project.getFileSystem().writeToWorkingDirectory(

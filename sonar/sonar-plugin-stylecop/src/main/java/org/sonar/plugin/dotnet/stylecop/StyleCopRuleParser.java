@@ -58,8 +58,7 @@ public class StyleCopRuleParser {
    */
   public static List<StyleCopRule> parse(String xml) {
     StringReader stringReader = new StringReader(xml);
-    List<StyleCopRule> result = parse(stringReader);
-    return result;
+    return parse(stringReader);
   }
 
   /**

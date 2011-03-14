@@ -27,28 +27,26 @@ package org.sonar.plugin.dotnet.stylecop;
 import static org.sonar.plugin.dotnet.stylecop.Constants.*;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Templates;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+import java.text.ParseException;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.maven.MavenPluginHandler;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
+import org.sonar.api.rules.Violation;
+import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
-import org.xml.sax.InputSource;
+import org.sonar.plugin.dotnet.stylecop.stax.StyleCopResultStaxParser;
 
 /**
  * Extracts the data of a StyleCop report and store them in Sonar.
@@ -56,11 +54,12 @@ import org.xml.sax.InputSource;
  * @author Jose CHILLAN Apr 6, 2010
  */
 public class StyleCopSensor extends AbstractDotnetSensor {
-  
+
   private final static Logger log = LoggerFactory.getLogger(StyleCopSensor.class);
-  
+
 
   private final RulesManager rulesManager;
+  private final StyleCopResultStaxParser styleCopResultStaxParser;
   private final RulesProfile profile;
   private final StyleCopPluginHandler pluginHandler;
   private final CSharpFileLocator fileLocator;
@@ -70,10 +69,11 @@ public class StyleCopSensor extends AbstractDotnetSensor {
    * 
    * @param rulesManager
    */
-  public StyleCopSensor(RulesManager rulesManager,
+  public StyleCopSensor(RulesManager rulesManager, StyleCopResultStaxParser styleCopResultStaxParser,
       StyleCopPluginHandler pluginHandler, RulesProfile profile, CSharpFileLocator fileLocator) {
     super();
     this.rulesManager = rulesManager;
+    this.styleCopResultStaxParser = styleCopResultStaxParser;
     this.pluginHandler = pluginHandler;
     this.profile = profile;
     this.fileLocator = fileLocator;
@@ -89,65 +89,60 @@ public class StyleCopSensor extends AbstractDotnetSensor {
     if (STYLECOP_REUSE_MODE.equals(getStyleCopMode(project))) {
       reportFileName = project.getConfiguration().getString(STYLECOP_REPORT_KEY);
       log.warn("Using reuse report mode for StyleCop");
-      log.warn("WARNING : StyleCop rules profile settings may not have been taken in account");
+      log.warn("WARNING : StyleCop rules profile settings may not have been taken into account");
     } else {
       reportFileName = STYLECOP_REPORT_NAME;
     }
-    
+
     File dir = getReportsDirectory(project);
     File report = new File(dir, reportFileName);
 
-    // We generate the transformer
-    File transformedReport = transformReport(report, dir);
-    if (transformedReport == null) {
-      return;
-    }
-    StyleCopResultParser parser = new StyleCopResultParser(project, context,
-        rulesManager, profile, fileLocator);
-    parser.parse(transformedReport);
-   
-  }
+    List<StyleCopViolation> violations = styleCopResultStaxParser.parse(report);
+    for (StyleCopViolation styleCopViolation : violations) {
 
-  /**
-   * Transforms the report to a usable format.
-   * 
-   * @param report
-   * @param dir
-   * @return
-   */
-  private File transformReport(File report, File dir) {
-    try {
-      ClassLoader contextClassLoader = Thread.currentThread()
-        .getContextClassLoader();
-      InputStream stream = contextClassLoader
-        .getResourceAsStream(STYLECOP_TRANSFO_XSL);
-      if (stream==null) {
-        // happens with sonar2.3 classloader mechanism
-        stream = getClass().getClassLoader()
-          .getResourceAsStream(STYLECOP_TRANSFO_XSL);
+      final Resource<?> resource;
+
+      String lineNumber = styleCopViolation.getLineNumber();
+      String filePath = styleCopViolation.getFilePath();
+      String key = styleCopViolation.getKey();
+      String message = styleCopViolation.getMessage();
+
+      if (StringUtils.isEmpty(filePath)) {
+        log.debug("violation without file path");
+        resource = null;
       }
-      Source xslSource = new SAXSource(new InputSource(stream));
-      Templates templates = TransformerFactory.newInstance().newTemplates(
-          xslSource);
-      Transformer transformer = templates.newTransformer();
+      else {
+        resource = fileLocator.getResource(project, filePath);
+        if (resource == null) {
+          log.info("violation on an excluded file '{}'", filePath);
+          continue;
+        }
+      }
 
-      // We open the report to be processed
-      Source xmlSource = new StreamSource(report);
+      Rule rule = rulesManager.getPluginRule(StyleCopPlugin.KEY, key);
+      if (rule == null) {
+        // Skips the non registered rules
+        log.info("violation found for an unknown '{}' rule", key);
+        continue;
+      }
 
-      File processedReport = new File(dir, STYLECOP_PROCESSED_REPORT_XML);
-      processedReport.delete();
-      Result result = new StreamResult(new FileOutputStream(processedReport));
-      transformer.transform(xmlSource, result);
-      return processedReport;
-    } catch (Exception exc) {
-      log.warn(
-          "Error during the transformation of the StyleCop report for Sonar",
-          exc);
+      log.debug("Retrieving active rule corresponding to the violation key {}", key);
+      ActiveRule activeRule = profile.getActiveRule(StyleCopPlugin.KEY, key);
+      Violation violation = new Violation(rule, resource);
+      Integer line = getIntValue(lineNumber);
+
+      violation.setLineId(line);
+      violation.setMessage(message);
+      if (activeRule != null) {
+        // We copy the priority
+        violation.setPriority(activeRule.getPriority());
+      }
+      // We save the violation
+      context.saveViolation(violation);
     }
-    return null;
+
   }
-  
-  
+
   /**
    * @param project
    * @return
@@ -163,7 +158,7 @@ public class StyleCopSensor extends AbstractDotnetSensor {
     }
     return pluginHandlerReturned;
   }
-  
+
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     String mode = getStyleCopMode(project);
@@ -171,8 +166,27 @@ public class StyleCopSensor extends AbstractDotnetSensor {
   }
 
   private String getStyleCopMode(Project project) {
-    String mode = project.getConfiguration().getString(STYLECOP_MODE_KEY, STYLECOP_DEFAULT_MODE);
-    return mode;
+    return project.getConfiguration().getString(STYLECOP_MODE_KEY, STYLECOP_DEFAULT_MODE);
+  }
+
+  /**
+   * Extracts the line number.
+   * 
+   * @param lineStr
+   * @return
+   */
+  protected Integer getIntValue(String lineStr) {
+    if (StringUtils.isBlank(lineStr)) {
+      return null;
+    }
+    try {
+      return (int) ParsingUtils.parseNumber(lineStr);
+    } catch (ParseException ignore) {
+      if (log.isDebugEnabled()) {
+        log.debug("int parsing error" + lineStr, ignore);
+      }
+      return null;
+    }
   }
 
 }
