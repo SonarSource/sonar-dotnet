@@ -21,65 +21,64 @@
 package org.sonar.plugin.dotnet.gendarme;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
 
+import java.util.List;
 import java.io.File;
 import java.net.MalformedURLException;
 
-import org.apache.commons.configuration.Configuration;
-import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
-import org.apache.maven.project.MavenProject;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Project;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RulesManager;
-import org.sonar.api.rules.Violation;
-import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
+import org.sonar.plugin.dotnet.gendarme.model.Issue;
+import org.sonar.plugin.dotnet.gendarme.stax.GendarmeResultStaxParser;
 
 public class GendarmeResultParserTest {
 
-  private GendarmeResultParser parser;
-  private RulesProfile profile;
-  private RulesManager rulesManager;
-  private SensorContext context;
-  
-  @Before
-  public void setUp() {
-    profile = mock(RulesProfile.class);
-    
-    
-    // set up rules manager
-    rulesManager = mock(RulesManager.class);
-    Rule dummyRule = mock(Rule.class);
-    when(rulesManager.getPluginRule(eq(GendarmePlugin.KEY), anyString())).thenReturn(dummyRule);
-    
-    context = mock(SensorContext.class);
-    
-    // set up maven project
-    MavenProject mvnProject = new MavenProject();
-    mvnProject.setPackaging("sln");
-    mvnProject.getProperties().put(VisualStudioUtils.VISUAL_SOLUTION_NAME_PROPERTY, "Example.sln");
-    File pomFile 
-      = new File("target/test-classes/solution/Example/pom.xml");
-    mvnProject.setFile(pomFile);
-    
-    // set up sonar project
-    Project project = mock(Project.class);
-    when(project.getPom()).thenReturn(mvnProject);
+  private static final String NAME = "AvoidRedundancyInMethodNameRule";
+  private static final String PROBLEM = "This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.";
+  private static final String SOLUTION = "Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).";
+  private static final String ASSEMBLY = "Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+  private static final String LOCATION = "Example.Core.IMoney Example.Core.IMoney::AddMoney(Example.Core.Money)";
+  private static final String SOURCE = "";
 
-    Configuration configuration = mock(Configuration.class);
-    when(project.getConfiguration()).thenReturn(configuration);
-    
-    parser = new GendarmeResultParser(project, context, rulesManager, profile, new CSharpFileLocator());
+  private GendarmeResultStaxParser parserStax;
+
+  @Before
+  public void setUp() {    
+
+    parserStax = new GendarmeResultStaxParser();
+
   }
-  
+
   @Test
-  public void testParse() throws MalformedURLException {
-    parser.parse(new File("target/test-classes","gendarme-report-processed.xml"));
-    verify(context,atLeast(31)).saveViolation(any(Violation.class));
+  public void testStaxParse() throws MalformedURLException {
+
+    List<Issue> issues = parserStax.parse(new File("target/test-classes", "gendarme-report.xml"));
+    Issue firstIssue = issues.get(0);
+    Issue secondIssue = issues.get(1);
+
+    // There are 33 issues in the gendarme-report.xml
+    assertEquals(33, issues.size());
+
+    assertNotNull( firstIssue );
+    assertNotNull( secondIssue );
+
+    // First and second issues should have the same Problem message and Solution message
+    // But not the same Location
+    assertEquals( NAME, firstIssue.getName() );
+    assertEquals( PROBLEM, firstIssue.getProblem() );
+    assertEquals( SOLUTION, firstIssue.getSolution() );
+    assertEquals( ASSEMBLY, firstIssue.getAssembly() );
+    assertEquals( LOCATION, firstIssue.getLocation() );
+    assertEquals( SOURCE, firstIssue.getSource() );
+
+    assertEquals( PROBLEM, secondIssue.getProblem() );
+    assertEquals( SOLUTION, secondIssue.getSolution() );
+    assertNotSame( LOCATION, secondIssue.getLocation() );
+
+    for (Issue issue : issues) {
+      assertNotNull( issue );
+      assertNotNull( issue.getName() );
+    }
+
   }
 }

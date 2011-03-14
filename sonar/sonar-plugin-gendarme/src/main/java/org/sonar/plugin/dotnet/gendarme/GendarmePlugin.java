@@ -63,9 +63,9 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
       defaultValue = "all",
       name = "Severity threshold used by Mono Gendarme to filter violations",
       description = "Warning, some rules always fire violation with low severity." +
-      		" This severity notion is not linked to the priority notion of Sonar." +
-      		" Filter defects for the specified severity levels :" +
-      		" [all | [[audit | low | medium | high | critical][+|-]]] ",
+        " This severity notion is not linked to the priority notion of Sonar." +
+        " Filter defects for the specified severity levels :" +
+        " [all | [[audit | low | medium | high | critical][+|-]]] ",
       project = true,
       module = false,
       global = true)  

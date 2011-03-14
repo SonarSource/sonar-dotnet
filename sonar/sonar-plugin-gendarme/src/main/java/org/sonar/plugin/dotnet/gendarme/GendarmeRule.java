@@ -70,6 +70,7 @@ public class GendarmeRule {
   }
 
   @Override
+  @SuppressWarnings("all")
   public boolean equals(Object obj) {
     if (this == obj)
       return true;

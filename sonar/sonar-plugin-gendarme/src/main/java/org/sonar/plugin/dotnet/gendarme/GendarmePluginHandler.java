@@ -101,7 +101,7 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
    * @throws IOException
    */
   private void generateConfigurationFile(Project project, MavenPlugin plugin)
-      throws IOException {
+    throws IOException {
     List<ActiveRule> activeRules = rulesProfile
         .getActiveRulesByPlugin(GendarmePlugin.KEY);
     if (activeRules == null || activeRules.isEmpty()) {

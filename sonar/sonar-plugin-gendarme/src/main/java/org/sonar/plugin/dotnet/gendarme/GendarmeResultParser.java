@@ -43,6 +43,11 @@ import org.w3c.dom.Element;
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
 import org.apache.maven.dotnet.commons.project.SourceFile;
 
+/**
+ * @Deprecated Since 0.6 (Stax version of the parser)
+ *
+ */
+@Deprecated
 public class GendarmeResultParser extends AbstractXmlParser {
 
   private final static Logger log = LoggerFactory.getLogger(GendarmeResultParser.class);
@@ -93,22 +98,22 @@ public class GendarmeResultParser extends AbstractXmlParser {
           || StringUtils.contains(source, "debugging symbols unavailable")) {
         String assemblyName = StringUtils.substringBefore(
             getNodeContent(issueElement, "assembly-name"), ",");
-        
+
         if ("[across all assemblies analyzed]".equals(assemblyName)) {
           // this one will be ignored... Anyway it barely never happen
           continue;
         }
-        
+
         CLRAssembly assembly = CLRAssembly.fromName(project, assemblyName);
         if (StringUtils.contains(key, "Assembly")) {
           // we assume we have a violation at the
           // assembly level
           filePath = assembly.getVisualProject().getDirectory()
-              .getAbsolutePath()
-              + File.separator
-              + "Properties"
-              + File.separator
-              + "AssemblyInfo.cs";
+          .getAbsolutePath()
+            + File.separator
+            + "Properties"
+            + File.separator
+            + "AssemblyInfo.cs";
           lineNumber = null;
         } else {
           if (StringUtils.containsNone(location, " ")) {
@@ -116,7 +121,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
             final String className = StringUtils.substringBeforeLast(
                 StringUtils.substringAfterLast(location, "."), "/");
             Collection<SourceFile> sourceFiles = assembly.getVisualProject()
-                .getSourceFiles();
+              .getSourceFiles();
 
             SourceFile sourceFile = null;
             for (SourceFile currentSourceFile : sourceFiles) {
@@ -130,7 +135,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
             if (sourceFile == null) {
               // this one will be ignored
               log.info("ignoring gendarme violation {} {} {}", new Object[] {
-                  key, source, message });
+                key, source, message });
               continue;
             } else {
               filePath = sourceFile.getFile().getAbsolutePath();
@@ -139,7 +144,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
           } else {
             // this one will be ignored
             log.info("ignoring gendarme violation {} {} {}", new Object[] {
-                key, source, message });
+              key, source, message });
             continue;
           }
         }
@@ -168,7 +173,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
       }
 
       Resource<?> resource = fileLocator.getResource(project, filePath);
-      
+
       Rule rule = rulesManager.getPluginRule(GendarmePlugin.KEY, key);
       if (rule == null || resource == null) {
         // We skip the rules that were not registered
@@ -182,7 +187,7 @@ public class GendarmeResultParser extends AbstractXmlParser {
         violation.setPriority(activeRule.getPriority());
       }
 
-      // We store the violation
+      // We save the violation
       context.saveViolation(violation);
     }
   }

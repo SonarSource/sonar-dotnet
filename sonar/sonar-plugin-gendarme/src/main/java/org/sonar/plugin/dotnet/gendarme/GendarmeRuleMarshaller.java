@@ -36,5 +36,5 @@ import org.sonar.api.rules.ActiveRule;
 public interface GendarmeRuleMarshaller extends ServerExtension, BatchExtension {
 
   public String marshall(List<ActiveRule> rules);
-	
+
 }
