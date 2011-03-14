@@ -24,10 +24,10 @@
 package org.apache.maven.dotnet;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.StringTokenizer;
-
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
@@ -71,7 +71,7 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
 
   /**
    * The build configurations to use for the project or solution, separated by
-   * colons as in "Debug,Release".
+   * colons or semi-colons as in "Debug,Release".
    * 
    * @parameter expression="${msbuild.configurations}"
    *            alias="${buildConfigurations}" default-value="Debug"
@@ -114,12 +114,11 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
    * @return a non <code>null</code> list of build configurations
    */
   protected List<String> getBuildConfigurations() {
-    StringTokenizer tokenizer = new StringTokenizer(buildConfigurations, ",");
-    List<String> result = new ArrayList<String>();
-    // Extracts all the configurations
-    while (tokenizer.hasMoreTokens()) {
-      String config = tokenizer.nextToken();
-      result.add(config.trim());
+    final List<String> result;
+    if (StringUtils.isEmpty(buildConfigurations)) {
+      result = Collections.EMPTY_LIST;
+    } else {
+      result = Arrays.asList(StringUtils.split(buildConfigurations, ",; "));
     }
     return result;
   }

@@ -64,7 +64,7 @@ import org.codehaus.plexus.util.StringUtils;
  *              project or solution
  * 
  * 
- * @author avictoor101408
+ * @author Alexandre Victoor
  * 
  */
 public class CpdMojo extends AbstractDotNetMojo {

@@ -76,13 +76,6 @@ public class CleanMojo extends AbstractDotNetBuildMojo {
   public void launchClean(File file) throws MojoExecutionException,
       MojoFailureException {
     File executable = getMsBuildCommand();
-    if (!executable.exists()) {
-      throw new MojoExecutionException(
-          "Could not find the MSBuild executable for the version "
-              + toolVersion
-              + ". Please "
-              + "ensure you have properly defined the properties 'dotnet.2.0.sdk.dir' or 'dotnet.3.5.sdk.dir'");
-    }
 
     Log log = getLog();
     log.info("Launching the cleaning of " + file);
