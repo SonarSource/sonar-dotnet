@@ -251,9 +251,9 @@ public class CoverageResultParser extends AbstractXmlParser {
       File sourceFile;
       try {
         sourceFile = new File(filePath).getCanonicalFile();
-        if (!isSourceFileIncluded(sourceFile.getPath()))
+        if (!isSourceFileIncluded(sourceFile.getPath())){
           continue;
-
+        }
         FileCoverage fileCoverage = new FileCoverage(sourceFile);
         sourceFiles.put(id, fileCoverage);
       } catch (IOException e) {

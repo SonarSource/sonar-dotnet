@@ -108,7 +108,7 @@ public class CSharpSourceImporter extends AbstractSourceImporter {
         }
         CSharpFile resource = fileLocator.locate(project, sourcePath, unitTest);
         if (resource == null) {
-        	continue;
+          continue;
         }
         
         // Windows may sometime generate endian-recognition characters that are

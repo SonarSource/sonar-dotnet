@@ -28,14 +28,14 @@ import org.sonar.api.resources.Project;
 import org.sonar.plugin.dotnet.core.AbstractDotNetMavenPluginHandler;
 
 /**
- * Configures the maven partcover plugin.
+ * Configures the maven coverage plugin.
  * 
  * @author Jose CHILLAN May 14, 2009
  */
 public class CoveragePluginHandler extends AbstractDotNetMavenPluginHandler {
 
   /**
-   * Constructs a @link{PartCoverPluginHandler}.
+   * Constructs a @link{CoveragePluginHandler}.
    */
   public CoveragePluginHandler() {
   }
@@ -46,6 +46,9 @@ public class CoveragePluginHandler extends AbstractDotNetMavenPluginHandler {
 
     // We ignore the test failures in Sonar.
     plugin.setParameter("testFailureIgnore", "true");
+    // injection of the default value in order to avoid strange behavior 
+    // (i.e. gallio report erasing a source monitor report)
+    plugin.setParameter("reportFileName", "gallio-report.xml");
   }
 
   /**

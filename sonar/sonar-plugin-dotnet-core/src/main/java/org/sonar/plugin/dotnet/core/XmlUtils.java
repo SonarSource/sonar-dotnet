@@ -53,7 +53,7 @@ public class XmlUtils {
    * @throws XmlSerializationException
    */
   public static void marshall(Object serialized, OutputStream stream)
-      throws XmlSerializationException {
+    throws XmlSerializationException {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
@@ -79,7 +79,7 @@ public class XmlUtils {
    * @throws XmlSerializationException
    */
   public static void marshall(Object serialized, Writer writer)
-      throws XmlSerializationException {
+    throws XmlSerializationException {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(serialized.getClass());
@@ -108,7 +108,7 @@ public class XmlUtils {
    */
   @SuppressWarnings("unchecked")
   public static <T> T unmarshall(InputStream stream, Class<T> type)
-      throws XmlSerializationException {
+    throws XmlSerializationException {
     try {
       // Establish a jaxb context
       JAXBContext jc = JAXBContext.newInstance(type);

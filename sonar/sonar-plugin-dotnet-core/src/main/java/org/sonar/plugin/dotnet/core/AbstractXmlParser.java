@@ -110,8 +110,7 @@ public class AbstractXmlParser {
     if (subElements.getLength() == 0) {
       return null;
     }
-    Element result = (Element) subElements.item(0);
-    return result;
+    return (Element) subElements.item(0);
   }
 
   /**
@@ -143,8 +142,7 @@ public class AbstractXmlParser {
    * @return the attribute value, or <code>null</code> if not defined
    */
   public String getAttribute(Element element, String attributeName) {
-    String result = element.getAttribute(attributeName);
-    return result;
+    return element.getAttribute(attributeName);
   }
 
   /**
@@ -202,7 +200,6 @@ public class AbstractXmlParser {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-
     return convertToList(nodes);
   }
 

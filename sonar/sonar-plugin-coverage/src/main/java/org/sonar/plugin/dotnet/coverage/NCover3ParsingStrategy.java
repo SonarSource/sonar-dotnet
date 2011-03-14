@@ -39,8 +39,7 @@ public class NCover3ParsingStrategy extends AbstractParsingStrategy {
   String findAssemblyName(Element methodElement) {
     Element moduleElement = (Element) methodElement.getParentNode()
         .getParentNode();
-    String assemblyName = moduleElement.getAttribute("assembly");
-    return assemblyName;
+    return moduleElement.getAttribute("assembly");
   }
 
   @Override

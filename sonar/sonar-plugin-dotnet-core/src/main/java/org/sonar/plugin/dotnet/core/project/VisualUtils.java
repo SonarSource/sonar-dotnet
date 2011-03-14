@@ -76,7 +76,7 @@ public final class VisualUtils {
    *           if the project is not a valid .Net project
    */
   public static VisualStudioSolution getSolution(Project project)
-      throws DotNetProjectException {
+    throws DotNetProjectException {
     MavenProject mavenProject = project.getPom();
     final VisualStudioSolution solution;
     if (solutionCache.containsKey(mavenProject)) {
