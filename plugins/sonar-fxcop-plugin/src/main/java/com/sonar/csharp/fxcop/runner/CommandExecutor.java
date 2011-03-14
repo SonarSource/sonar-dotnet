@@ -26,6 +26,8 @@ import org.sonar.api.utils.SonarException;
 
 /**
  * Utility class that make it easier to run external tools.
+ * 
+ * TODO : remove this class in favour of the equivalent one (in "org.sonar.api.utils.command") when upgrading the dependency to Sonar 2.7
  */
 public class CommandExecutor {
 

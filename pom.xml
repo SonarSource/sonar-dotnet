@@ -22,6 +22,7 @@
 		<module>csharp-toolkit</module>
 		<module>sonar-csharp-plugin</module>
 		<module>plugins/sonar-fxcop-plugin</module>
+		<module>integration-tests</module>
 	</modules>
 	<scm>
 		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
