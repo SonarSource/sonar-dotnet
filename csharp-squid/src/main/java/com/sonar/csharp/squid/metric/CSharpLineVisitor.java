@@ -7,8 +7,9 @@ package com.sonar.csharp.squid.metric;
 
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 
-import com.sonar.csharp.api.ast.CSharpAstVisitor;
-import com.sonar.csharp.api.metric.CSharpMetric;
+import org.sonar.plugins.csharp.api.CSharpMetric;
+
+import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.Token;
 

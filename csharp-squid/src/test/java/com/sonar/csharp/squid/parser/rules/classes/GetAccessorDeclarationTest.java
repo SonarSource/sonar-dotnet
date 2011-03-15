@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class GetAccessorDeclarationTest {
@@ -37,5 +37,5 @@ public class GetAccessorDeclarationTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; }"));
   }
-  
+
 }

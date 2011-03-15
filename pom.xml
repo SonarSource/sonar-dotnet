@@ -14,14 +14,13 @@
 	</parent>
 	<properties>
 		<sonar.version>2.6</sonar.version>
+		<csharp.core.version>0.7-SNAPSHOT</csharp.core.version>
 		<sslrVersion>1.3-SNAPSHOT</sslrVersion>
 	</properties>
 	<modules>
-		<module>csharp-api</module>
 		<module>csharp-squid</module>
 		<module>csharp-toolkit</module>
-		<module>sonar-csharp-plugin</module>
-		<module>plugins/sonar-fxcop-plugin</module>
+		<module>sonar-csharp-squid-plugin</module>
 		<module>integration-tests</module>
 	</modules>
 	<scm>
@@ -43,6 +42,11 @@
 				<version>${sslrVersion}</version>
 			</dependency>
 			<!-- sonar open-source -->
+			<dependency>
+				<groupId>org.codehaus.sonar-plugins.csharp</groupId>
+				<artifactId>sonar-csharp-core-plugin</artifactId>
+				<version>${csharp.core.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-channel</artifactId>

@@ -6,8 +6,8 @@
 
 package com.sonar.csharp.squid.parser;
 
-import com.sonar.csharp.api.CSharpGrammar;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.lexer.CSharpLexer;
 import com.sonar.sslr.impl.Parser;
 

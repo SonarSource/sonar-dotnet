@@ -5,10 +5,10 @@
  */
 package com.sonar.csharp.squid.tree;
 
+import org.sonar.plugins.csharp.api.CSharpMetric;
 import org.sonar.squid.api.SourceFile;
 
-import com.sonar.csharp.api.ast.CSharpAstVisitor;
-import com.sonar.csharp.api.metric.CSharpMetric;
+import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
 
 /**

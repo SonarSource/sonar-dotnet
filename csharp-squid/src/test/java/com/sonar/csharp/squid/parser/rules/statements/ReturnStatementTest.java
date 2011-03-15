@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class ReturnStatementTest {
@@ -36,5 +36,5 @@ public class ReturnStatementTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence;"));
   }
-  
+
 }

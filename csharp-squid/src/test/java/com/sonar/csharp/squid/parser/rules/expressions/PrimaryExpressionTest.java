@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class PrimaryExpressionTest {
@@ -31,7 +31,7 @@ public class PrimaryExpressionTest {
     assertThat(p, parse("arrayCreationExpression"));
     assertThat(p, parse("primaryNoArrayCreationExpression"));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("typeof(void).OneAttribute"));

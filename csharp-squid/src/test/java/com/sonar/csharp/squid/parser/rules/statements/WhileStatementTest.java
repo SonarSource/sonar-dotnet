@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class WhileStatementTest {
@@ -36,5 +36,5 @@ public class WhileStatementTest {
     assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15; }"));
     assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15;  frameIndex++; }"));
   }
-  
+
 }

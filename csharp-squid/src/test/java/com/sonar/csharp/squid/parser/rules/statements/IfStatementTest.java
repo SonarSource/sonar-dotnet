@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class IfStatementTest {
@@ -31,10 +31,12 @@ public class IfStatementTest {
     assertThat(p, parse("if ( booleanExpression ) embeddedStatement"));
     assertThat(p, parse("if ( booleanExpression ) embeddedStatement else embeddedStatement"));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("if (true) { loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
+    assertThat(
+        p,
+        parse("if (true) { loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
   }
 
 }

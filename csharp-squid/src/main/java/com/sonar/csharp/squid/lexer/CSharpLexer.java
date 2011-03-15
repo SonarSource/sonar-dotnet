@@ -23,10 +23,10 @@ import java.util.List;
 import org.sonar.channel.Channel;
 import org.sonar.channel.ChannelDispatcher;
 
-import com.sonar.csharp.api.CSharpKeyword;
-import com.sonar.csharp.api.CSharpPunctuator;
-import com.sonar.csharp.api.CSharpTokenType;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.api.CSharpPunctuator;
+import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.csharp.squid.lexer.preprocessors.StandardPreprocessorLinePreprocessor;
 import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Preprocessor;

@@ -22,9 +22,9 @@ import org.sonar.squid.api.CodeScanner;
 import org.sonar.squid.api.SourceCode;
 
 import com.google.common.collect.Lists;
-import com.sonar.csharp.api.CSharpGrammar;
-import com.sonar.csharp.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.squid.metric.CSharpAccessorVisitor;
 import com.sonar.csharp.squid.metric.CSharpCommentsAndNoSonarVisitor;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;

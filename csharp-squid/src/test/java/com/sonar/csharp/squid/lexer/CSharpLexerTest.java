@@ -19,11 +19,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpKeyword;
-import com.sonar.csharp.api.CSharpPunctuator;
-import com.sonar.csharp.api.CSharpTokenType;
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.lexer.CSharpLexer;
+import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.api.CSharpPunctuator;
+import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.LexerOutput;
 

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class PropertyDeclarationTest {
@@ -39,7 +39,9 @@ public class PropertyDeclarationTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("object myObject { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
-    assertThat(p, parse("public override int LeftPrecedence { get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; } }"));
+    assertThat(
+        p,
+        parse("public override int LeftPrecedence { get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; } }"));
   }
 
 }

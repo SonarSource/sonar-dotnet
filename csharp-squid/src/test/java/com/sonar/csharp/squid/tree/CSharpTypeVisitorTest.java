@@ -16,15 +16,15 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
 import org.junit.Test;
+import org.sonar.plugins.csharp.api.CSharpMetric;
+import org.sonar.plugins.csharp.api.source.SourceType;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
-import com.sonar.csharp.api.metric.CSharpMetric;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.csharp.squid.tree.source.SourceType;
 
 public class CSharpTypeVisitorTest {
 
@@ -41,7 +41,8 @@ public class CSharpTypeVisitorTest {
     assertThat(project.getInt(CSharpMetric.ENUMS), is(1));
 
     Collection<SourceCode> squidClasses = squid.search(new QueryByType(SourceType.class));
-    Matcher<String> classesKeys = isOneOf("Foo.Class", "Foo.Class.InnerStruct", "Foo.Struct", "Foo.Struct.InnerClass", "Foo.Enum", "Bar.Interface", "Bar.Delegate");
+    Matcher<String> classesKeys = isOneOf("Foo.Class", "Foo.Class.InnerStruct", "Foo.Struct", "Foo.Struct.InnerClass", "Foo.Enum",
+        "Bar.Interface", "Bar.Delegate");
     for (SourceCode sourceCode : squidClasses) {
       assertThat(sourceCode.getKey(), classesKeys);
     }

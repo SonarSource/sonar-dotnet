@@ -11,7 +11,6 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.parser.CSharpParser;
 
 /**
  * Test class for the C# parser

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class ArgumentTest {
@@ -37,7 +37,7 @@ public class ArgumentTest {
   public void testKo() throws Exception {
     assertThat(p, notParse(""));
   }
-  
+
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("(x,y)=>String.Compare(x, y, true)"));

@@ -25,7 +25,7 @@
 						<configuration>
 							<artifactSet>
 								<includes>
-									<include>com.sonarsource.csharp:csharp-api</include>
+									<include>org.codehaus.sonar-plugins.csharp:sonar-csharp-core-plugin</include>
 									<include>com.sonarsource.csharp:csharp-squid</include>
 									<include>com.sonarsource.sslr:sslr-impl</include>
 									<include>com.sonarsource.sslr:sslr-api</include>
@@ -80,7 +80,7 @@
 												<patternset>
 													<include name="com.sonar.csharp.toolkit.Toolkit" />
 													<include name="com.sonar.sslr.api.**.*" />
-													<include name="com.sonarsource.csharp.api.**.*" />
+													<include name="org.sonar.plugins.csharp.api.**.*" />
 												</patternset>
 											</class>
 										</keep>
@@ -128,11 +128,6 @@
 
 	<dependencies>
 		<!-- C# -->
-		<dependency>
-			<groupId>com.sonarsource.csharp</groupId>
-			<artifactId>csharp-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>com.sonarsource.csharp</groupId>
 			<artifactId>csharp-squid</artifactId>

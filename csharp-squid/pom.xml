@@ -11,11 +11,6 @@
 	<name>SonarSource :: C# :: Squid</name>
 
 	<dependencies>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>csharp-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<!-- sonarsource -->
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>
@@ -26,6 +21,10 @@
 			<artifactId>sslr-impl</artifactId>
 		</dependency>
 		<!-- sonar open-source -->
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.csharp</groupId>
+			<artifactId>sonar-csharp-core-plugin</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
 			<artifactId>sonar-channel</artifactId>

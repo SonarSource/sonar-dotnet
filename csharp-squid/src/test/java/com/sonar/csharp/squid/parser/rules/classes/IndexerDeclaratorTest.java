@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sonar.csharp.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
 public class IndexerDeclaratorTest {
@@ -37,6 +37,6 @@ public class IndexerDeclaratorTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("object this[int i]"));
     assertThat(p, parse("object IList.this[int i]"));
-  }  
+  }
 
 }
