@@ -28,6 +28,10 @@
 		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
 		<url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
 	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.sonarsource.com/browse/CSHARP</url>
+	</issueManagement>
 	<dependencyManagement>
 		<dependencies>
 			<!-- sonarsource -->

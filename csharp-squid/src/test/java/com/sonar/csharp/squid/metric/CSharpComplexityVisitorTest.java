@@ -40,6 +40,15 @@ public class CSharpComplexityVisitorTest {
     assertThat(project.getInt(CSharpMetric.COMPLEXITY), is(15));
   }
 
+  @Test
+  public void testRealLifeFile() {
+    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
+    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/BasicConfigurator.cs"));
+    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.values());
+
+    assertThat(project.getInt(CSharpMetric.COMPLEXITY), is(6));
+  }
+
   protected File readFile(String path) {
     return FileUtils.toFile(getClass().getResource(path));
   }

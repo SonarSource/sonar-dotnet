@@ -43,7 +43,6 @@
 			<plugin>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<pluginKey>csharpsquid</pluginKey>

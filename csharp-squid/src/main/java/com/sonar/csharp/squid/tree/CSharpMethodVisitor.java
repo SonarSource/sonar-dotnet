@@ -45,7 +45,7 @@ public class CSharpMethodVisitor extends CSharpAstVisitor {
   }
 
   private String extractMethodSignature(AstNode astNode) {
-    return astNode.findFirstChild(getCSharpGrammar().memberName).getTokenValue();
+    return astNode.findFirstChild(getCSharpGrammar().memberName).getTokenValue() + ":" + astNode.getTokenLine();
   }
 
 }

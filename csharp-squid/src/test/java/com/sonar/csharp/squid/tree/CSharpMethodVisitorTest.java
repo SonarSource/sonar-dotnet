@@ -32,12 +32,12 @@ public class CSharpMethodVisitorTest {
   }
 
   @Test
-  public void testScanSimpleFile() {
+  public void testScanSimpleFileWithMethodsWithSameName() {
     Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanFile(readFile("/tree/simpleFile.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.METHODS);
 
-    assertThat(project.getInt(CSharpMetric.METHODS), is(1));
+    assertThat(project.getInt(CSharpMetric.METHODS), is(2));
   }
 
   protected File readFile(String path) {
