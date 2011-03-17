@@ -38,6 +38,7 @@ public class PrimaryExpressionTest {
     assertThat(p, parse("CurrentDomain.GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
     assertThat(p, parse("checked(++i)"));
+    assertThat(p, parse("base.GetService<T>()"));
   }
 
 }

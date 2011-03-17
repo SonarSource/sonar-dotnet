@@ -39,4 +39,10 @@ public class BaseAccessTest {
     assertThat(p, notParse("base.id typeArgumentList"));
   }
 
+  @Test
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("base.GetService"));
+    assertThat(p, parse("base.GetService<T>"));
+  }
+
 }
