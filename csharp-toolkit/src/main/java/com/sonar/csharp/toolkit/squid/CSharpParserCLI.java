@@ -14,6 +14,7 @@ import java.io.PrintStream;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 
@@ -26,8 +27,6 @@ public class CSharpParserCLI {
 
   private Properties configuration = new Properties();
   private final PrintStream out;
-  private PrintStream err;
-  private int numberOfFiles = 0;
   private int numberOfParsedFiles = 0;
   private int numberOfUnparsableFiles = 0;
 
@@ -60,6 +59,7 @@ public class CSharpParserCLI {
     }
     File errorLog = new File("ParsingErrors.log");
     errorLog.delete();
+    PrintStream err = null;
     try {
       err = new PrintStream(errorLog);
     } catch (FileNotFoundException e) {
@@ -72,7 +72,7 @@ public class CSharpParserCLI {
     @SuppressWarnings("unchecked")
     Collection<File> srcFiles = FileUtils.listFiles(getSrcDir(), new String[] { "cs" }, true);
 
-    numberOfFiles = srcFiles.size();
+    int numberOfFiles = srcFiles.size();
 
     displayStartingMessage(numberOfFiles);
     long startTime = System.currentTimeMillis();
@@ -105,7 +105,7 @@ public class CSharpParserCLI {
       out.println("==> SUCCESS: all " + numberOfFiles + " files have been parsed!");
     }
     long endTime = System.currentTimeMillis();
-    out.println("\nParsing time : " + ((double) (endTime - startTime) / 1000) + " seconds\n\n");
+    out.println("\nParsing time : " + TimeUnit.MILLISECONDS.toSeconds(endTime - startTime) + " seconds\n\n");
     err.flush();
     err.close();
   }
