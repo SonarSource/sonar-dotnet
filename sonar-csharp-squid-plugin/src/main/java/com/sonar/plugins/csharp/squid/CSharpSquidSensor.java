@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.sonar.api.batch.Phase;
+import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
@@ -39,9 +40,13 @@ public final class CSharpSquidSensor implements Sensor {
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12 };
   private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
   private CSharp cSharp;
+  private CSharpResourcesBridge cSharpResourcesBridge;
+  private ResourceCreationLock resourceCreationLock;
 
-  public CSharpSquidSensor(CSharp cSharp) {
+  public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock) {
     this.cSharp = cSharp;
+    this.cSharpResourcesBridge = cSharpResourcesBridge;
+    this.resourceCreationLock = resourceCreationLock;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
@@ -77,7 +82,7 @@ public final class CSharpSquidSensor implements Sensor {
       File sonarFile = org.sonar.api.resources.File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
       // Fill the resource bridge API that can be used by other C# plugins to map logical resources to physical ones
-      CSharpResourcesBridge.getInstance().indexFile((SourceFile) squidFile, sonarFile);
+      cSharpResourcesBridge.indexFile((SourceFile) squidFile, sonarFile);
 
       context.saveMeasure(sonarFile, CoreMetrics.CLASSES, squidFile.getDouble(CSharpMetric.CLASSES));
       context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, squidFile.getDouble(CSharpMetric.METHODS));
@@ -96,6 +101,10 @@ public final class CSharpSquidSensor implements Sensor {
       saveClassComplexityDistribution(squidFile, sonarFile, context, squid);
       saveMethodComplexityDistribution(squidFile, sonarFile, context, squid);
     }
+
+    // and lock everything to prevent future modifications
+    cSharpResourcesBridge.lock();
+    resourceCreationLock.lock();
   }
 
   private void saveClassComplexityDistribution(SourceCode squidFile, File sonarFile, SensorContext context, Squid squid) {

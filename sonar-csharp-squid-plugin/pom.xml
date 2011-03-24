@@ -46,7 +46,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<pluginKey>csharpsquid</pluginKey>
-					<pluginName>C# - Squid</pluginName>
+					<pluginName>C# Squid</pluginName>
 					<pluginClass>${sonar.plugin.class}</pluginClass>
 					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
 					<skipDependenciesPackaging>true</skipDependenciesPackaging>

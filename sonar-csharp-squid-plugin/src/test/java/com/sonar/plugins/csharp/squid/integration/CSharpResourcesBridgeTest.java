@@ -35,7 +35,7 @@ public class CSharpResourcesBridgeTest {
 
   @BeforeClass
   public static void init() {
-    cSharpResourcesBridge = CSharpResourcesBridge.getInstance();
+    cSharpResourcesBridge = new CSharpResourcesBridge();
     squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
     squid.register(CSharpAstScanner.class).scanDirectory(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()));
     squid.decorateSourceCodeTreeWith(CSharpMetric.values());
