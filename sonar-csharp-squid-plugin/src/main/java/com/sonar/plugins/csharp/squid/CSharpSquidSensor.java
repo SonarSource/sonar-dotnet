@@ -79,7 +79,7 @@ public final class CSharpSquidSensor implements Sensor {
 
     Collection<SourceCode> squidFiles = squid.search(new QueryByType(SourceFile.class));
     for (SourceCode squidFile : squidFiles) {
-      File sonarFile = org.sonar.api.resources.File.fromIOFile(new java.io.File(squidFile.getKey()), project);
+      File sonarFile = File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
       // Fill the resource bridge API that can be used by other C# plugins to map logical resources to physical ones
       cSharpResourcesBridge.indexFile((SourceFile) squidFile, sonarFile);

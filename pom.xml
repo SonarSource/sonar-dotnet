@@ -12,6 +12,7 @@
 		<artifactId>parent</artifactId>
 		<version>9</version>
 	</parent>
+	<description>SonarSource C# modules for the C# ecosystem</description>
 	<properties>
 		<sonar.version>2.6</sonar.version>
 		<csharp.core.version>0.7-SNAPSHOT</csharp.core.version>
