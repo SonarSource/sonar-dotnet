@@ -8,6 +8,7 @@ package com.sonar.plugins.csharp.squid;
 import java.util.Collection;
 import java.util.List;
 
+import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.Sensor;
@@ -34,6 +35,7 @@ import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
+@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor implements Sensor {
 
