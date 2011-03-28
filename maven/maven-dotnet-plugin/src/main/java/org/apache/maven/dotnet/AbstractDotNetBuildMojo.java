@@ -31,7 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 
 /**
- * A base class for all build relevant mojos.
+ * A base class for all MsBuild relevant mojos.
  * 
  * @author Jose CHILLAN Mar 25, 2010
  */
@@ -70,21 +70,12 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
   protected String toolVersion;
 
   /**
-   * The build configurations to use for the project or solution, separated by
-   * colons or semi-colons as in "Debug,Release".
-   * 
-   * @parameter expression="${msbuild.configurations}"
-   *            alias="${buildConfigurations}" default-value="Debug"
-   */
-  protected String buildConfigurations = "Debug";
-
-  /**
    * Gets the MSBuild.exe command, depending on the tool version.
    * 
    * @return the File representing the MSBuild.exe command
    * @throws MojoExecutionException
    */
-  protected File getMsBuildCommand() throws MojoExecutionException {
+  protected final File getMsBuildCommand() throws MojoExecutionException {
 
     // This may depend on the version in the future
     String commandName = "MSBuild.exe";
@@ -113,7 +104,7 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
    * 
    * @return a non <code>null</code> list of build configurations
    */
-  protected List<String> getBuildConfigurations() {
+  protected final List<String> getBuildConfigurations() {
     final List<String> result;
     if (StringUtils.isEmpty(buildConfigurations)) {
       result = Collections.EMPTY_LIST;

@@ -146,7 +146,7 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
       // }
 
       // Case of disabled debug symbols
-      if (!debug) {
+      if (!generatePdb) {
         arguments.add("/p:DebugSymbols=false");
       }
 
@@ -162,7 +162,7 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
 
       // We launch the compile command (the logs are put in debug because they
       // may be verbose)
-      launchCommand(executable, arguments, "build", 0, true);
+      launchCommand(executable, arguments, "build", 0);
       log.info("Build of " + solutionName + " in configuration "
           + configuration + " terminated with SUCCESS!");
     }

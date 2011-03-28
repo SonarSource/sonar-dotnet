@@ -172,8 +172,7 @@ public class GallioMojo extends AbstractUnitTestMojo
         testedAssemblies);
 
     String commandName = getCommandName();
-    int result = launchCommand(commandLine, commandName, 16, false,
-        throwsFailure);
+    int result = launchCommand(commandLine, commandName, 16, throwsFailure);
     if (result == GALLIO_NO_TEST_EXIT_CODE) {
       log.warn("No test has been found in assemblies : " + testedAssemblies);
     } else if ((result != 0) && testFailureIgnore) {

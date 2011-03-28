@@ -114,7 +114,7 @@ public class CleanMojo extends AbstractDotNetBuildMojo {
 
       // We launch the compile command (the logs are put in debug because they
       // may be verbose)
-      launchCommand(executable, arguments, "clean", 0, true);
+      launchCommand(executable, arguments, "clean", 0);
     }
 
     log.info("Cleaning done!");

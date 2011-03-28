@@ -228,7 +228,7 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
       commandArguments.add(toCommandPath(checkedAssembly));
     }
 
-    launchCommand(executableFile, commandArguments, "gendarme", 1, true);
+    launchCommand(executableFile, commandArguments, "gendarme", 1);
     log.info("gendarme report generated");
     
     // clean up needed

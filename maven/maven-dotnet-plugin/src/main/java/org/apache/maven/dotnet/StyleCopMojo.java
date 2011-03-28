@@ -86,20 +86,6 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
   private String styleCopReportName;
 
   /**
-   * Name of the file that contains the StyleCop XSL to apply to the report
-   * 
-   * @parameter alias="${styleCopXsl}"
-   */
-  // private File styleCopXslFile;
-
-  /**
-   * Build configuration to check.
-   * 
-   * @parameter expression="${dotnet.configuration}"
-   */
-  private String buildConfiguration;
-
-  /**
    * Patterns for ignored files
    * 
    * @parameter alias="${ignores}"
@@ -115,8 +101,6 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
    */
   private File projectRoot;
 
-  public StyleCopMojo() {
-  }
 
   /**
    * Launches the style cop generation for a visual studio project.
@@ -181,13 +165,6 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
       throws MojoExecutionException, MojoFailureException {
     Log log = getLog();
     extractExecutable();
-    if (buildConfiguration == null) {
-      if (debug) {
-        buildConfiguration = "Debug";
-      } else {
-        buildConfiguration = "Release";
-      }
-    }
 
     File reportDirectory = getReportDirectory();
     // Defines the rule file if necessary
@@ -215,7 +192,6 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
       if ((projectFiles != null) && (!projectFiles.isEmpty())) {
         log.debug(" - Project files      :  " + projectFiles);
       }
-      log.debug(" - Build Configuration: " + buildConfiguration);
       log.debug(" - Config file        : " + styleCopConfigFile);
       log.debug(" - Generated report   : " + reportFile);
       log.debug(" - Excluded files     : " + Arrays.toString(ignores));
@@ -262,7 +238,7 @@ public class StyleCopMojo extends AbstractDotNetBuildMojo {
 
     // We launch the compile command (the logs are put in debug because they may
     // be verbose)
-    launchCommand(executable, arguments, "build", 0, true);
+    launchCommand(executable, arguments, "build", 0);
     log.info("StyleCop report generated");
   }
 

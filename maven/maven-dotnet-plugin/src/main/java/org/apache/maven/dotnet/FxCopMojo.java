@@ -245,7 +245,7 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
     }
     
     // We launch the command (and we accept the reference problems)
-    launchCommand(executablePath, commandArguments, "FxCop", 0x200, false);
+    launchCommand(executablePath, commandArguments, "FxCop", 0x200);
     log.info("FxCop report generated");
   }
 

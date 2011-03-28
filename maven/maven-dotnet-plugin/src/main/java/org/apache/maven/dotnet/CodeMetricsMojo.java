@@ -180,7 +180,7 @@ public class CodeMetricsMojo extends AbstractDotNetMojo {
       List<String> arguments = new ArrayList<String>();
       arguments.add("/C");
       arguments.add(toCommandPath(commandFile));
-      launchCommand(sourceMonitorExe, arguments, "Metrics", 1, debug);
+      launchCommand(sourceMonitorExe, arguments, "Metrics", 1);
       getLog().info("Metrics generated!");
     } catch (Exception e) {
       throw new MojoExecutionException("Could not execute source monitor", e);

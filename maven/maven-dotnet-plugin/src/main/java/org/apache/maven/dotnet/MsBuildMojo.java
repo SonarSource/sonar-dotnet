@@ -84,7 +84,7 @@ public class MsBuildMojo extends AbstractDotNetBuildMojo {
     
     File executable = getMsBuildCommand();
     
-    launchCommand(executable, msbuildParameters, "build", 0, true);
+    launchCommand(executable, msbuildParameters, "build", 0);
   }
   
   @Override

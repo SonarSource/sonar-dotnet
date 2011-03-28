@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
@@ -92,11 +93,20 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   protected String testProjectPattern;
 
   /**
+   * The build configurations to use for the project or solution, separated by
+   * colons or semi-colons as in "Debug,Release".
+   * 
+   * @parameter expression="${msbuild.configurations}"
+   *            alias="${buildConfigurations}" default-value="Debug"
+   */
+  protected String buildConfigurations = "Debug";
+  
+  /**
    * Defines if the build should generate debug symbols (typically .pdb files)
    * 
    * @parameter expression="${maven.compiler.debug}" default-value="true"
    */
-  protected boolean debug;
+  protected boolean generatePdb;
 
   /**
    * Defines if the plugin can use the maven-dotnet-runtime artifact to export
@@ -317,13 +327,17 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   protected File getGeneratedAssembly(VisualStudioProject visualProject)
       throws MojoFailureException {
     File assembly;
-    if (debug) {
+    if (isDebugCompilationEnable()) {
       assembly = visualProject.getDebugArtifact();
     } else {
       assembly = visualProject.getReleaseArtifact();
     }
 
     return assembly;
+  }
+  
+  private boolean isDebugCompilationEnable() {
+    return StringUtils.containsIgnoreCase(buildConfigurations, "debug");
   }
 
   /**
@@ -371,21 +385,14 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 
   /**
    * Launches a command line, redirecting the stream to the maven logs.
-   * 
    * @param reportType
    *          a display type for the report
    * @param acceptedMask
    *          a mask for the exit code of the command that is accepted (put 0 if
    *          you don't know)
-   * @param redirectLogsToDebug
-   *          <code>true</code> if the logs of the executable have to be
-   *          directed to the debug. This is useful if the executable is
-   *          verbose, to avoid to log useless messages in case of success.
    * @param commandline
    *          the command ready to be executed
-   * @param redirectLogsToDebug
-   *          <code>true</code> if the log of the command should be put in
-   *          debug. This is useful for the case of verbose executables
+   * 
    * @return the status of the command after execution
    * @throws MojoExecutionException
    *           if the execution command could not be launched for any reason
@@ -393,33 +400,26 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    *           if the command status after execution is not satisfying
    */
   protected int launchCommand(File executable, List<String> arguments,
-      String reportType, int acceptedMask, boolean redirectLogsToDebug)
+      String reportType, int acceptedMask)
       throws MojoExecutionException, MojoFailureException {
     Commandline commandline = generateCommandLine(executable, arguments);
     return launchCommand(commandline, reportType, acceptedMask,
-        redirectLogsToDebug, true);
+        true);
   }
 
   /**
    * Launches a command line, redirecting the stream to the maven logs
-   * 
+   * @param commandline
+   *          the command ready to be executed
    * @param reportType
    *          a display type for the report
    * @param acceptedMask
    *          a mask for the exit code of the command that is accepted (put 0 if
    *          you don't know)
-   * @param redirectLogsToDebug
-   *          <code>true</code> if the logs of the executable have to be
-   *          directed to the debug. This is useful if the executable is
-   *          verbose, to avoid to log useless messages in case of success.
-   * @param commandline
-   *          the command ready to be executed
-   * @param redirectLogsToDebug
-   *          <code>true</code> if the log of the command should be put in
-   *          debug. This is useful for the case of verbose executables
    * @param throwsFailure
    *          <code>true</code> if the method should throw an exception in case
    *          of failure
+   * 
    * @return the status of the command after execution
    * @throws MojoExecutionException
    *           if the execution command could not be launched for any reason
@@ -428,14 +428,13 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    *           throwsFailure parameter is not false
    */
   protected int launchCommand(Commandline commandline, String reportType,
-      int acceptedMask, boolean redirectLogsToDebug, boolean throwsFailure)
+      int acceptedMask, boolean throwsFailure)
       throws MojoExecutionException, MojoFailureException {
     int commandLineResult;
     Log log = getLog();
     String[] commandLineElements = commandline.getCommandline();
 
-    CommandStreamConsumer systemOut = new CommandStreamConsumer(log,
-        redirectLogsToDebug);
+    CommandStreamConsumer systemOut = new CommandStreamConsumer(log);
 
     try {
       // Execute the commandline
@@ -467,10 +466,8 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
         throw new MojoExecutionException("Please add the executable for "
             + reportType + " to your path");
       } else if ((commandLineResult & (~acceptedMask)) != 0) {
-        // If the debug level was not enabled, and the logs were redirected to
-        // debug,
-        // we display them in case of error
-        if (!log.isDebugEnabled() && redirectLogsToDebug) {
+        
+        if (log.isWarnEnabled()) {
           log.warn("FAILURE !!!");
           log.warn("Launched command : " + commandline);
           log.warn("");
@@ -726,14 +723,12 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
     private static final String COMMAND_NOT_FOUND_FRAGMENT = "is not recognized as an internal or external command";
 
     private boolean commandNotFound;
-    private boolean debug;
     private StringBuilder consumedLines = new StringBuilder();
 
     private Log log;
 
-    private CommandStreamConsumer(Log log, boolean debug) {
+    private CommandStreamConsumer(Log log) {
       this.log = log;
-      this.debug = debug;
     }
 
     /**
@@ -745,11 +740,8 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
     public void consumeLine(String line) {
       consumedLines.append(line + "\n");
 
-      if (debug) {
-        log.debug(line);
-      } else {
-        log.info(line);
-      }
+      log.info(line);
+     
       if (line.contains(COMMAND_NOT_FOUND_FRAGMENT)) {
         commandNotFound = true;
       }
