@@ -148,6 +148,7 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
       // Case of disabled debug symbols
       if (!generatePdb) {
         arguments.add("/p:DebugSymbols=false");
+        arguments.add("/p:DebugType=None");
       }
 
       // Adds the configuration
