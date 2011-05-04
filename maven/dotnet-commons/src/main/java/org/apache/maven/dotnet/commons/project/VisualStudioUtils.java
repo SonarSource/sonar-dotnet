@@ -29,8 +29,11 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -213,11 +216,37 @@ public class VisualStudioUtils {
    */
   public static VisualStudioSolution getSolution(File solutionFile)
       throws IOException, DotNetProjectException {
-    List<VisualStudioProject> projects = getProjects(solutionFile);
+    
+    String solutionContent = FileUtils.fileRead(solutionFile);
+    List<String> buildConfigurations = getBuildConfigurations(solutionContent);
+    
+    List<VisualStudioProject> projects = getProjects(solutionFile, solutionContent, buildConfigurations);
     VisualStudioSolution solution = new VisualStudioSolution(solutionFile,
         projects);
+    solution.setBuildConfigurations(buildConfigurations);
     solution.setName(solutionFile.getName());
     return solution;
+  }
+
+  private static List<String> getBuildConfigurations(String solutionContent) {
+    // A pattern to extract the build configurations from a visual studio solution
+    String confExtractExp = "(\tGlobalSection\\(SolutionConfigurationPlatforms\\).*?^\tEndGlobalSection$)";
+    Pattern confExtractPattern = Pattern.compile(confExtractExp,
+        Pattern.MULTILINE + Pattern.DOTALL);
+    List<String> buildConfigurations = new ArrayList<String>();
+    // Extracts all the projects from the solution
+    Matcher blockMatcher = confExtractPattern.matcher(solutionContent);
+    if (blockMatcher.find()) {
+      String buildConfigurationBlock = blockMatcher.group(1);
+      String buildConfExtractExp = " = (.*)\\|";
+      Pattern buildConfExtractPattern = Pattern.compile(buildConfExtractExp);
+      Matcher buildConfMatcher = buildConfExtractPattern.matcher(buildConfigurationBlock);
+      while (buildConfMatcher.find()) {
+        String buildConfiguration = buildConfMatcher.group(1);
+        buildConfigurations.add(buildConfiguration);
+      }
+    }
+    return buildConfigurations;
   }
 
   /**
@@ -225,11 +254,13 @@ public class VisualStudioUtils {
    * 
    * @param solutionFile
    *          the solution file
+   * @param solutionContent
+   *          the text content of the solution file
    * @return a list of projects
    * @throws IOException
    * @throws XPathExpressionException
    */
-  protected static List<VisualStudioProject> getProjects(File solutionFile)
+  private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<String> buildConfigurations)
       throws IOException, DotNetProjectException {
     File baseDirectory = solutionFile.getParentFile();
 
@@ -238,7 +269,6 @@ public class VisualStudioUtils {
     Pattern projectExtractPattern = Pattern.compile(projectExtractExp,
         Pattern.MULTILINE + Pattern.DOTALL);
     List<String> projectDefinitions = new ArrayList<String>();
-    String solutionContent = FileUtils.fileRead(solutionFile);
     // Extracts all the projects from the solution
     Matcher globalMatcher = projectExtractPattern.matcher(solutionContent);
     while (globalMatcher.find()) {
@@ -273,7 +303,7 @@ public class VisualStudioUtils {
           throw new FileNotFoundException("Could not find the project file: "
               + projectFile);
         }
-        VisualStudioProject project = getProject(projectFile, projectName);
+        VisualStudioProject project = getProject(projectFile, projectName, buildConfigurations);
         result.add(project);
       } else {
         // Searches the web project
@@ -305,7 +335,7 @@ public class VisualStudioUtils {
   public static VisualStudioProject getProject(File projectFile)
       throws DotNetProjectException, FileNotFoundException {
     String projectName = projectFile.getName();
-    return getProject(projectFile, projectName);
+    return getProject(projectFile, projectName, null);
   }
 
   /**
@@ -322,7 +352,13 @@ public class VisualStudioUtils {
    *           if the file was not found
    */
   public static VisualStudioProject getProject(File projectFile,
-      String projectName) throws DotNetProjectException, FileNotFoundException {
+      String projectName, List<String> buildConfigurations) throws DotNetProjectException, FileNotFoundException {
+    
+    VisualStudioProject project = new VisualStudioProject();
+    project.setProjectFile(projectFile);
+    project.setName(projectName);
+    File projectDir = projectFile.getParentFile();
+    
     XPathFactory factory = XPathFactory.newInstance();
     XPath xpath = factory.newXPath();
 
@@ -334,6 +370,19 @@ public class VisualStudioUtils {
     try {
       // We define the namespace prefix for Visual Studio
       xpath.setNamespaceContext(new VisualStudioNamespaceContext());
+      
+      if (buildConfigurations != null) {
+        Map<String, File> buildConfOutputDirMap = new HashMap<String, File>();
+        for (String config : buildConfigurations) {
+          XPathExpression configOutputExpression 
+            = xpath.compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'"+config+"')]/vst:OutputPath");
+          String configOutput = extractProjectProperty(configOutputExpression, projectFile);
+          buildConfOutputDirMap.put(config, new File(projectDir, configOutput));
+        }
+        project.setBuildConfOutputDirMap(buildConfOutputDirMap);
+      }
+      
+      
       XPathExpression projectTypeExpression = xpath
           .compile("/vst:Project/vst:PropertyGroup/vst:OutputType");
       XPathExpression assemblyNameExpression = xpath
@@ -346,11 +395,6 @@ public class VisualStudioUtils {
           .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
       XPathExpression silverlightExpression = xpath
           .compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
-
-      VisualStudioProject project = new VisualStudioProject();
-      project.setProjectFile(projectFile);
-      project.setName(projectName);
-      File projectDir = projectFile.getParentFile();
 
       // Extracts the properties of a Visual Studio Project
       String typeStr = extractProjectProperty(projectTypeExpression,
@@ -624,7 +668,7 @@ public class VisualStudioUtils {
    */
   public static File getVisualFile(MavenProject localProject,
       String configuredName, final String extension, String fileType)
-      throws DotNetProjectException {
+    throws DotNetProjectException {
     File basedir = localProject.getBasedir();
     File visualFile = null;
     // We look for a defined name

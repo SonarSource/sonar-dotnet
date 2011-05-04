@@ -26,6 +26,7 @@ package org.apache.maven.dotnet.commons.project;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -52,6 +53,9 @@ public class VisualStudioProject {
   private String rootNamespace;
   protected File debugOutputDir;
   protected File releaseOutputDir;
+  
+  private Map<String, File> buildConfOutputDirMap;
+  
   protected File directory;
   private boolean test;
   private boolean silverlightProject;
@@ -150,6 +154,22 @@ public class VisualStudioProject {
     String generatedFileName = getArtifactName();
     return new File(releaseOutputDir, generatedFileName);
   }
+  
+  public File getArtifact(String buildConfigurations) {
+    final File artifact;
+    if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
+      artifact = getDebugArtifact();
+    } else if (buildConfOutputDirMap==null){
+      // no custom build conf, debug not wanted, get the release one
+      artifact = getReleaseArtifact();
+    } else {
+      // get the first one found
+      String buildConfiguration 
+        = Arrays.asList(StringUtils.split(buildConfigurations, ",; ")).get(0);
+      artifact = new File(buildConfOutputDirMap.get(buildConfiguration), getArtifactName());
+    }
+    return artifact;
+  }
 
   /**
    * Gets the name of the artifact.
@@ -210,15 +230,7 @@ public class VisualStudioProject {
     this.rootNamespace = rootNamespace;
   }
 
-  /**
-   * Returns the debugOutputDir.
-   * 
-   * @return The debugOutputDir to return.
-   */
-  public File getDebugOutputDir() {
-    return this.debugOutputDir;
-  }
-
+ 
   /**
    * Sets the debugOutputDir.
    * 
@@ -229,14 +241,7 @@ public class VisualStudioProject {
     this.debugOutputDir = debugOutputDir;
   }
 
-  /**
-   * Returns the releaseOutputDir.
-   * 
-   * @return The releaseOutputDir to return.
-   */
-  public File getReleaseOutputDir() {
-    return this.releaseOutputDir;
-  }
+ 
 
   /**
    * Sets the releaseOutputDir.
@@ -507,6 +512,11 @@ public class VisualStudioProject {
 
   public void setBinaryReferences(List<BinaryReference> binaryReferences) {
     this.binaryReferences = binaryReferences;
+  }
+
+  
+  public void setBuildConfOutputDirMap(Map<String, File> buildConfOutputDirMap) {
+    this.buildConfOutputDirMap = buildConfOutputDirMap;
   }
 
 }

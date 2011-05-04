@@ -49,6 +49,7 @@ public class VisualStudioSolution {
   private File solutionDir;
   private String name;
   private List<VisualStudioProject> projects;
+  private List<String> buildConfigurations;
 
   public VisualStudioSolution(File solutionFile,
       List<VisualStudioProject> projects) {
@@ -246,12 +247,6 @@ public class VisualStudioSolution {
     }
     return aspFound;
   }
-  
-
-  @Override
-  public String toString() {
-    return "Solution(path=" + solutionFile + ")";
-  }
 
   /**
    * Returns the name.
@@ -270,6 +265,21 @@ public class VisualStudioSolution {
    */
   public void setName(String name) {
     this.name = name;
+  }
+
+  
+  public List<String> getBuildConfigurations() {
+    return buildConfigurations;
+  }
+
+  
+  public void setBuildConfigurations(List<String> buildConfigurations) {
+    this.buildConfigurations = buildConfigurations;
+  }
+  
+  @Override
+  public String toString() {
+    return "Solution(path=" + solutionFile + ")";
   }
 
 }
