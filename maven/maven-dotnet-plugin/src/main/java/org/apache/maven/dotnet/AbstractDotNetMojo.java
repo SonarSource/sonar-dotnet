@@ -326,19 +326,10 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    */
   protected File getGeneratedAssembly(VisualStudioProject visualProject)
       throws MojoFailureException {
-    File assembly;
-    if (isDebugCompilationEnable()) {
-      assembly = visualProject.getDebugArtifact();
-    } else {
-      assembly = visualProject.getReleaseArtifact();
-    }
-
-    return assembly;
+    
+    return visualProject.getArtifact(buildConfigurations);
   }
   
-  private boolean isDebugCompilationEnable() {
-    return StringUtils.containsIgnoreCase(buildConfigurations, "debug");
-  }
 
   /**
    * Deletes a set of file before generation
