@@ -25,6 +25,7 @@
 package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -58,6 +59,7 @@ public class VisualStudioUtilsTest {
   private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
   private static final String SOLUTION_WITH_DUP_PATH = "target/test-classes/solution/DuplicatesExample/Example.sln";
+  private static final String SOLUTION_WITH_CUSTOM_BUILD_PATH = "target/test-classes/solution/CustomBuild/CustomBuild.sln";
 
   private static final String SILVERLIGHT_SOLUTION_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
@@ -70,6 +72,27 @@ public class VisualStudioUtilsTest {
     List<String> files = VisualStudioUtils.getFilesPath(file);
     log.debug("Files : " + files);
     assertEquals("Bad number of files extracted", 6, files.size());
+  }
+  
+  @Test
+  public void testSolutionWithCustomBuild() throws Exception {
+    File file = new File(SOLUTION_WITH_CUSTOM_BUILD_PATH);
+    VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
+    List<String> buildConfigurations = solution.getBuildConfigurations();
+    assertEquals(3, buildConfigurations.size());
+    assertTrue(buildConfigurations.contains("Debug"));
+    assertTrue(buildConfigurations.contains("Release"));
+    assertTrue(buildConfigurations.contains("CustomCompil"));
+    
+    assertEquals(1, solution.getProjects().size());
+    VisualStudioProject project = solution.getProjects().get(0);
+    
+    // Debug configuration should be the preferred one 
+    assertTrue(project.getArtifact("CustomCompil;Debug").getAbsolutePath().contains("Debug"));
+    
+    assertTrue(project.getArtifact("CustomCompil").getAbsolutePath().contains("CustomCompil"));
+    assertTrue(project.getArtifact("CustomCompil").getAbsolutePath().endsWith(project.getName()+".dll"));
+    
   }
 
   @Test
