@@ -95,11 +95,13 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   /**
    * The build configurations to use for the project or solution, separated by
    * colons or semi-colons as in "Debug,Release".
+   * Default value is "Debug". If value is "ALL", all the build configurations defined
+   * in the sln file will be used.
    * 
    * @parameter expression="${msbuild.configurations}"
    *            alias="${buildConfigurations}" default-value="Debug"
    */
-  protected String buildConfigurations = "Debug";
+  protected String buildConfigurations;
   
   /**
    * Defines if the build should generate debug symbols (typically .pdb files)
@@ -197,6 +199,11 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
                 + "properly configured Visual Studio solution.\nPlease ensure you have a '.sln' file in "
                 + project.getBasedir());
       }
+      
+      if ("ALL".equals(buildConfigurations)) {
+        buildConfigurations = StringUtils.join(visualSolution.getBuildConfigurations(),',');
+      }
+      
       executeSolution(visualSolution);
       return;
     }
