@@ -83,7 +83,7 @@ public class DefectLocation {
     try {
       return (int) ParsingUtils.parseNumber(lineStr);
     } catch (ParseException ignore) {
-      log.info("Int parsing error", ignore);
+      log.debug("Int parsing error", ignore);
       return null;
     }
   }
