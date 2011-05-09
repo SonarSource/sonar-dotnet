@@ -148,6 +148,13 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
         if (assemblyDirectories.containsKey(projectName)) {
           File assemblyDirectory 
             = new File(visualStudioProject.getDirectory(), assemblyDirectories.get(projectName));
+          
+          if (!assemblyDirectory.exists()) {
+            // path specified in pom should be absolute, 
+            // not relative to the project root directory
+            assemblyDirectory = new File(assemblyDirectories.get(projectName));
+          }
+          
           assembly 
             = new File(assemblyDirectory, visualStudioProject.getArtifactName());
         } else {
