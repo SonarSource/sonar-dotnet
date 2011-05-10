@@ -485,6 +485,10 @@ public class VisualStudioUtils {
           } else {
             String assemblyName = includeAttr.substring(0, versionIndex);
             int versionEndIndex = includeAttr.indexOf(",", versionIndex+1);
+            if (versionEndIndex<0) {
+              versionEndIndex = includeAttr.length();
+            }
+            
             String version = includeAttr.substring(versionIndex+VERSION_KEY.length(),
                 versionEndIndex);
             reference.setAssemblyName(assemblyName);

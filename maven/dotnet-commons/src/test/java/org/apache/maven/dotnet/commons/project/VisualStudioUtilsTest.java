@@ -25,7 +25,6 @@
 package org.apache.maven.dotnet.commons.project;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -119,6 +118,14 @@ public class VisualStudioUtilsTest {
     nunitReference.setVersion("2.4.8.0");
     
     assertThat(testReferences, hasItems(nunitReference));
+    
+    // same test with the core nunit reference, defined a litle bit differently in 
+    // the csproj file
+    BinaryReference nunitCoreReference = new BinaryReference();
+    nunitCoreReference.setAssemblyName("nunit.core");
+    nunitCoreReference.setVersion("2.4.8.0");
+    
+    assertThat(testReferences, hasItems(nunitCoreReference));
     
   }
 
@@ -254,7 +261,7 @@ public class VisualStudioUtilsTest {
       webProject = (WebVisualStudioProject) projects.get(1);
     }
     assertEquals(1, webProject.getReferences().size());
-    Set<File> webAssemblies = webProject.getWebAssemblies();
+    Set<File> webAssemblies = webProject.getWebAssemblies(null);
     for (File assemblyFile : webAssemblies) {
       assertFalse("ClassLibrary.dll".equals(assemblyFile.getName()));
     }
