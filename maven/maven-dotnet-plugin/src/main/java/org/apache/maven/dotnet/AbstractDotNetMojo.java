@@ -32,7 +32,9 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
@@ -151,6 +153,18 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    * @parameter expression="${skippedProjects}"
    */
   protected String skippedProjects;
+
+  /**
+   * Locations of the assemblies that should be analysed in case default location
+   * should not be used. Actually AOP tools such as PostSharp mess up the cil and 
+   * may provoke false positives. 
+   * Project names should be used as keys. Values should be the path to the wanted DLLs. 
+   * If the assembly of the "Cache" project is located in the "compile" directory instead 
+   * of usual "bin/Debug", you can add in the configuration section of the plugin something 
+   * like &lt;assemblyDirectories\&gt;&lt;Cache&gt;compile&lt;/Cache&gt;&lt;/assemblyDirectories&gt; 
+   * @parameter
+   */
+  protected Map<String, String> assemblyDirectories = new HashMap<String, String>();
   
 
   /**
@@ -202,6 +216,10 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
       
       if ("ALL".equals(buildConfigurations)) {
         buildConfigurations = StringUtils.join(visualSolution.getBuildConfigurations(),',');
+      }
+      
+      if (assemblyDirectories != null ) {
+        visualSolution.overrideAssemblyDirectories(assemblyDirectories);
       }
       
       executeSolution(visualSolution);
@@ -322,21 +340,6 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
   private void assessTestProject(VisualStudioProject visualStudioProject) {
     VisualStudioUtils.assessTestProject(visualStudioProject, testProjectPattern);
   }
-
-  /**
-   * Gets the generated assembly according to the run configuration
-   * 
-   * @param visualProject
-   *          the visual project
-   * @return the generated assembly
-   * @throws MojoFailureException
-   */
-  protected File getGeneratedAssembly(VisualStudioProject visualProject)
-      throws MojoFailureException {
-    
-    return visualProject.getArtifact(buildConfigurations);
-  }
-  
 
   /**
    * Deletes a set of file before generation

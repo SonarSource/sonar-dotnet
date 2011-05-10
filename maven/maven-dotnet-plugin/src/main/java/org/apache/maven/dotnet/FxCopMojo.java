@@ -152,7 +152,7 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
               + visualProject.getName());
       return;
     }
-    File assembly = getGeneratedAssembly(visualProject);
+    File assembly = visualProject.getArtifact(buildConfigurations);
     if (!assembly.exists()) {
       // No assembly found
       throw new MojoFailureException(

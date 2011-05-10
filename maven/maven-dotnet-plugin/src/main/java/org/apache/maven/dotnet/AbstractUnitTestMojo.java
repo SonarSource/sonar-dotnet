@@ -53,7 +53,7 @@ public abstract class AbstractUnitTestMojo extends AbstractDotNetMojo {
     List<File> testAssemblies = new ArrayList<File>();
 
     for (VisualStudioProject visualProject : projects) {
-      File generatedAssembly = getGeneratedAssembly(visualProject);
+      File generatedAssembly = visualProject.getArtifact(buildConfigurations);
       if (generatedAssembly.exists()) {
         testAssemblies.add(generatedAssembly);
       } else {

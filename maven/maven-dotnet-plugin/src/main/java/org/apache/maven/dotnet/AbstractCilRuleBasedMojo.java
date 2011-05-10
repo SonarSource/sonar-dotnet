@@ -23,10 +23,8 @@ package org.apache.maven.dotnet;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -74,18 +72,6 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
    */
   protected boolean verbose;
   
-  /**
-   * Locations of the assemblies that should be analysed in case default location
-   * should not be used. Actually AOP tools such as PostSharp mess up the cil and 
-   * may provoke false positives. 
-   * Project names should be used as keys. Values should be the path to the wanted DLLs. 
-   * If the assembly of the "Cache" project is located in the "compile" directory instead 
-   * of usual "bin/Debug", you can add in the configuration section of the plugin something 
-   * like &lt;assemblyDirectories\&gt;&lt;Cache&gt;compile&lt;/Cache&gt;&lt;/assemblyDirectories&gt; 
-   * @parameter
-   */
-  private Map<String, String> assemblyDirectories = new HashMap<String, String>();
-
   /**
    * @return the directory where to find silverlight mscorlib.dll
    * @throws MojoFailureException 
@@ -138,28 +124,13 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
       } else if (visualStudioProject instanceof WebVisualStudioProject) {
         // ASP project
         WebVisualStudioProject webProject = (WebVisualStudioProject)visualStudioProject;
-        assemblies.addAll(webProject.getWebAssemblies());
+        assemblies.addAll(webProject.getWebAssemblies(buildConfigurations));
 
       } else if (silverlightFilter == null
           || silverlightFilter.equals(visualStudioProject
               .isSilverlightProject())) {
-        final String projectName = visualStudioProject.getName();
-        final File assembly;
-        if (assemblyDirectories.containsKey(projectName)) {
-          File assemblyDirectory 
-            = new File(visualStudioProject.getDirectory(), assemblyDirectories.get(projectName));
-          
-          if (!assemblyDirectory.exists()) {
-            // path specified in pom should be absolute, 
-            // not relative to the project root directory
-            assemblyDirectory = new File(assemblyDirectories.get(projectName));
-          }
-          
-          assembly 
-            = new File(assemblyDirectory, visualStudioProject.getArtifactName());
-        } else {
-          assembly = getGeneratedAssembly(visualStudioProject);
-        }
+        
+        final File assembly = visualStudioProject.getArtifact(buildConfigurations);
         
         if (assembly.exists()) {
           assemblies.add(assembly);
