@@ -45,10 +45,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
    * @return null if the project is not a web project, the generated web dlls
    *         otherwise.
    */
-  public Set<File> getWebAssemblies() {
-    if (!isWebProject()) {
-      return null;
-    }
+  public Set<File> getWebAssemblies(String buildConfigurations) {
     Set<File> result = new HashSet<File>();
     
     // we need to exclude all the dll files
@@ -59,7 +56,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
       exclusions.add(file.getName());
     }
 
-    File[] files = getWebPrecompilationDirectory().listFiles();
+    File[] files = getWebPrecompilationDirectory(buildConfigurations).listFiles();
 
     for (File file : files) {
       String name = file.getName();
@@ -71,33 +68,21 @@ public class WebVisualStudioProject extends VisualStudioProject {
   }
 
   /**
+   * @param buildConfigurations Visual Studio build configurations 
+   *                            used to generate the project
    * @return the directory where asp.net pages are precompiled. null for a non
    *         web project
    */
-  public File getWebPrecompilationDirectory() {
-    if (!isWebProject()) {
-      return null;
-    }
-    final String precompilationPath;
-    if (debugOutputDir.list()==null || debugOutputDir.list().length == 0) {
-      precompilationPath = releaseOutputDir.getAbsolutePath() + File.separator
-          + "bin";
-    } else {
-      precompilationPath = debugOutputDir.getAbsolutePath() + File.separator
-          + "bin";
-    }
-    return new File(precompilationPath);
+  public File getWebPrecompilationDirectory(String buildConfigurations) {
+    return new File(getArtifactDirectory(buildConfigurations), "bin");
   }
   
   /**
-   * @return null if the project is not a web project, the generated web dll
+   * @return the generated web dll
    *         names otherwise.
    */
   public Set<String> getWebAssemblyNames() {
-    if (!isWebProject()) {
-      return null;
-    }
-    Set<File> assemblies = getWebAssemblies();
+    Set<File> assemblies = getWebAssemblies(null);
     Set<String> assemblyNames = new HashSet<String>();
 
     for (File assembly : assemblies) {

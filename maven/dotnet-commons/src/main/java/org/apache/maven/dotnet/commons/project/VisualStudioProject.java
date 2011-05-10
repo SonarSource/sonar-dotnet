@@ -54,6 +54,9 @@ public class VisualStudioProject {
   protected File debugOutputDir;
   protected File releaseOutputDir;
   
+  /** Output directory specified from maven */
+  protected String forcedOutputDir;
+  
   private Map<String, File> buildConfOutputDirMap;
   
   protected File directory;
@@ -136,39 +139,51 @@ public class VisualStudioProject {
   }
 
   /**
-   * Gets the debug generated artifact.
+   * Provides the location of the generated artifact(s) of this project
+   * according to the build configuration(s) used.
    * 
+   * @param buildConfigurations Visual Studio build configurations 
+   *                            used to generate the project
    * @return
    */
-  public File getDebugArtifact() {
-    String generatedFileName = getArtifactName();
-    return new File(debugOutputDir, generatedFileName);
-  }
-
-  /**
-   * Gets the release generated artifact.
-   * 
-   * @return
-   */
-  public File getReleaseArtifact() {
-    String generatedFileName = getArtifactName();
-    return new File(releaseOutputDir, generatedFileName);
-  }
-  
-  public File getArtifact(String buildConfigurations) {
-    final File artifact;
-    if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
-      artifact = getDebugArtifact();
+  protected final File getArtifactDirectory(String buildConfigurations) {
+    final File artifactDirectory;
+    if (StringUtils.isNotEmpty(forcedOutputDir)) {
+      // first trying to use forcedOutputDir as a relative path
+      File assemblyDirectory = new File(directory, forcedOutputDir);
+    
+      if (!assemblyDirectory.exists()) {
+        // path specified "forcedOutputDir" should be absolute, 
+        // not relative to the project root directory
+        assemblyDirectory = new File(forcedOutputDir);
+      }
+      
+      artifactDirectory = assemblyDirectory;
+      
+    } else if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
+      artifactDirectory = debugOutputDir;
     } else if (buildConfOutputDirMap==null){
       // no custom build conf, debug not wanted, get the release one
-      artifact = getReleaseArtifact();
+      artifactDirectory = releaseOutputDir;
     } else {
       // get the first one found
       String buildConfiguration 
         = Arrays.asList(StringUtils.split(buildConfigurations, ",; ")).get(0);
-      artifact = new File(buildConfOutputDirMap.get(buildConfiguration), getArtifactName());
+      artifactDirectory = buildConfOutputDirMap.get(buildConfiguration);
     }
-    return artifact;
+    return artifactDirectory;
+  }
+  
+  /**
+   * Gets the generated assembly according to the build configurations
+   * 
+   * @param buildConfigurations Visual Studio build configurations 
+   *                            used to generate the project
+   * @return 
+   */
+  public File getArtifact(String buildConfigurations) {
+    final File artifactDirectory = getArtifactDirectory(buildConfigurations);
+    return new File(artifactDirectory, getArtifactName());
   }
 
   /**
@@ -517,6 +532,11 @@ public class VisualStudioProject {
   
   public void setBuildConfOutputDirMap(Map<String, File> buildConfOutputDirMap) {
     this.buildConfOutputDirMap = buildConfOutputDirMap;
+  }
+
+  
+  public void setForcedOutputDir(String forcedOutputDir) {
+    this.forcedOutputDir = forcedOutputDir;
   }
 
 }
