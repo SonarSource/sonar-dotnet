@@ -23,23 +23,18 @@ package org.sonar.plugin.dotnet.gendarme;
 import static org.sonar.plugin.dotnet.gendarme.Constants.*;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Templates;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.GeneratedCodeFilter;
+import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.SourceFile;
+import org.apache.maven.dotnet.commons.project.VisualStudioProject;
+import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
@@ -52,12 +47,10 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulesManager;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugin.dotnet.core.AbstractDotnetSensor;
+import org.sonar.plugin.dotnet.core.project.VisualUtils;
 import org.sonar.plugin.dotnet.core.resource.CLRAssembly;
 import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
 import org.sonar.plugin.dotnet.core.resource.InvalidResourceException;
-import org.sonar.plugin.dotnet.gendarme.model.Issue;
-import org.sonar.plugin.dotnet.gendarme.stax.GendarmeResultStaxParser;
-import org.xml.sax.InputSource;
 
 public class GendarmeSensor extends AbstractDotnetSensor {
 
@@ -68,6 +61,7 @@ public class GendarmeSensor extends AbstractDotnetSensor {
   private final RulesProfile profile;
   private final GendarmePluginHandler pluginHandler;
   private final CSharpFileLocator fileLocator;
+  private final GendarmeResultParser resultParser;
 
   /**
    * Constructs a @link{GendarmeSensor}.
@@ -75,12 +69,13 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    * @param rulesManager
    */
   public GendarmeSensor(RulesProfile profile, RulesManager rulesManager,
-      GendarmePluginHandler pluginHandler, CSharpFileLocator fileLocator) {
+      GendarmePluginHandler pluginHandler, CSharpFileLocator fileLocator, GendarmeResultParser resultParser) {
     super();
     this.rulesManager = rulesManager;
     this.profile = profile;
     this.pluginHandler = pluginHandler;
     this.fileLocator = fileLocator;
+    this.resultParser = resultParser;
   }
 
   /**
@@ -91,70 +86,49 @@ public class GendarmeSensor extends AbstractDotnetSensor {
    */
   @Override
   public void analyse(Project project, SensorContext context) {
-    final String reportFileName;
+    final File dir = getReportsDirectory(project);
+    final List<File> reports = new ArrayList<File>();
+    
     if (GENDARME_REUSE_MODE.equals(getGendarmeMode(project))) {
-      reportFileName = project.getConfiguration().getString(GENDARME_REPORT_KEY);
+      String reportFileNames = project.getConfiguration().getString(GENDARME_REPORT_KEY);
       log.warn("Using reuse report mode for Mono Gendarme");
       log.warn("Mono Gendarme profile settings may not have been taken in account");
+      List<String> reportList = Arrays.asList(StringUtils.split(reportFileNames,",;"));
+      for (String reportName : reportList) {
+        File report = new File(dir, reportName);
+        if (!report.exists()) {
+          report = new File(reportName);
+        }
+        reports.add(report);
+      }
     } else {
-      reportFileName = GENDARME_REPORT_XML;
+      try {
+        VisualStudioSolution solution = VisualUtils.getSolution(project);
+        List<VisualStudioProject> projects = solution.getProjects();
+        for (VisualStudioProject visualStudioProject : projects) {
+          String projectGendarmeReportName 
+            = MessageFormat.format(Constants.GENDARME_REPORT_XML, visualStudioProject.getName());
+          File report = new File(dir, projectGendarmeReportName);
+          reports.add(report);
+        }
+      } catch (DotNetProjectException e) {
+        log.error("Solution parsing error", e);
+        return;
+      }
     }
 
-    File dir = getReportsDirectory(project);
-    File report = new File(dir, reportFileName);
-
-    GendarmeResultStaxParser parser 
-      = new GendarmeResultStaxParser();
-    try {
-      List<Issue> issues = parser.parse(report);
-      log.debug("Parsing ended. Start saving measures...");
+    for (File report : reports) {
+      final List<Issue> issues = resultParser.parse(report);
+      log.debug("Parsing ended for report {}. Start saving measures...", report);
       for (Issue issue : issues) {
-        saveViolations(issue, project, context);
+        try {
+          saveViolations(issue, project, context);
+        } catch (InvalidResourceException ex) {
+          log.warn("C# file not referenced in the solution", ex);
+        }
       }
-
-    } catch (InvalidResourceException ex) {
-      log.warn("C# file not referenced in the solution", ex);
     }
-  }
-
-  /**
-   * @Deprecated Since 0.6 (Stax version of the parser)
-   * Transforms the report to a usable format.
-   * 
-   * @param report
-   * @param dir
-   * @return
-   */
-  @Deprecated
-  private File transformReport(File report, File dir) {
-    try {
-      ClassLoader contextClassLoader = Thread.currentThread()
-        .getContextClassLoader();
-      InputStream stream = contextClassLoader
-        .getResourceAsStream(GENDARME_TRANSFO_XSL);
-      if (stream==null) {
-        // happens with sonar2.3 classloader mechanism
-        stream = getClass().getClassLoader()
-          .getResourceAsStream(GENDARME_TRANSFO_XSL);
-      }
-      Source xslSource = new SAXSource(new InputSource(stream));
-      Templates templates = TransformerFactory.newInstance().newTemplates(
-        xslSource);
-      Transformer transformer = templates.newTransformer();
-
-      // We open the report to be processed
-      Source xmlSource = new StreamSource(report);
-
-      File processedReport = new File(dir, GENDARME_PROCESSED_REPORT_XML);
-      processedReport.delete();
-      Result result = new StreamResult(new FileOutputStream(processedReport));
-      transformer.transform(xmlSource, result);
-      return processedReport;
-    } catch (Exception exc) {
-      log.warn("Error during the processing of the Gendarme report for Sonar",
-          exc);
-    }
-    return null;
+     
   }
 
   /**

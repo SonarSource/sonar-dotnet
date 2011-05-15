@@ -80,14 +80,14 @@ public class GendarmePluginHandler extends AbstractDotNetMavenPluginHandler {
     String confidence 
       = project.getConfiguration().getString(GENDARME_CONFIDENCE_KEY);
     
-    if (!StringUtils.isEmpty(confidence)) {
+    if (StringUtils.isNotEmpty(confidence)) {
       plugin.setParameter("confidence", confidence);
     }
     
     String severity 
       = project.getConfiguration().getString(GENDARME_SEVERITY_KEY);
   
-    if (!StringUtils.isEmpty(severity)) {
+    if (StringUtils.isNotEmpty(severity)) {
       plugin.setParameter("severity", severity);
     }
     

@@ -28,9 +28,7 @@ public class Constants {
   public static final String GENDARME_REUSE_MODE = "reuseReport";
   public static final String GENDARME_REPORT_KEY = "sonar.dotnet.gendarme.reportPath";
 
-  public static final String GENDARME_REPORT_XML = "gendarme-report.xml";
-  public static final String GENDARME_TRANSFO_XSL = "gendarme-transformation.xsl";
-  public static final String GENDARME_PROCESSED_REPORT_XML = "gendarme-report-processed.xml";
+  public static final String GENDARME_REPORT_XML = "gendarme-report-{0}.xml";
   
   public static final String GENDARME_CONFIDENCE_KEY = "sonar.dotnet.gendarme.confidence";
   

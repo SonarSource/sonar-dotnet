@@ -66,7 +66,7 @@ public class GendarmeSensorTest {
     fileLocator = mock(CSharpFileLocator.class);
     when(fileLocator.getResource(eq(project), anyString())).thenReturn((Resource)csFile);
     
-    sensor = new GendarmeSensor(profile, rulesManager, pluginHandler, fileLocator);
+    sensor = new GendarmeSensor(profile, rulesManager, pluginHandler, fileLocator, new GendarmeResultStaxParser());
   }
 
 

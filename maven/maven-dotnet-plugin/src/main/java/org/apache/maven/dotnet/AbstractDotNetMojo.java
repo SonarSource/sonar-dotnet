@@ -191,7 +191,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 
     // Here we should add : if the project is a "sln" packaging, then launch for
     // the solution
-    if (VisualStudioUtils.SOLUTION_PACKAGING.equals(project.getPackaging())) {
+    if (VisualStudioUtils.SOLUTION_PACKAGING.equals(project.getPackaging()) || "netpack".equals(project.getPackaging())) {
       VisualStudioSolution visualSolution = null;
       try {
         visualSolution = VisualStudioUtils.getVisualSolution(project,
@@ -200,7 +200,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
         throw new MojoExecutionException(
             "The solution for project "
                 + project.getArtifactId()
-                + " is not a"
+                + " is not a "
                 + "properly configured Visual Studio solution.\nPlease ensure you have a '.sln' file in "
                 + project.getBasedir(), e);
 
@@ -209,7 +209,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
         throw new MojoExecutionException(
             "The solution for project "
                 + project.getArtifactId()
-                + " is not a"
+                + " is not a "
                 + "properly configured Visual Studio solution.\nPlease ensure you have a '.sln' file in "
                 + project.getBasedir());
       }
@@ -221,6 +221,8 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
       if (assemblyDirectories != null ) {
         visualSolution.overrideAssemblyDirectories(assemblyDirectories);
       }
+      
+      visualSolution.filterProjects(skippedProjects);
       
       executeSolution(visualSolution);
       return;

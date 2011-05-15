@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugin.dotnet.gendarme.stax;
+package org.sonar.plugin.dotnet.gendarme;
 
 import static org.sonar.plugin.dotnet.core.StaxHelper.advanceCursor;
 import static org.sonar.plugin.dotnet.core.StaxHelper.descendantElements;
@@ -40,9 +40,9 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.BatchExtension;
 import org.sonar.plugin.dotnet.core.AbstractXmlParser;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
-import org.sonar.plugin.dotnet.gendarme.model.Issue;
 
 /**
  * Parser Gendarme using Stax
@@ -50,16 +50,14 @@ import org.sonar.plugin.dotnet.gendarme.model.Issue;
  * @author Maxime Schneider-Dufeutrelle
  *
  */
-public class GendarmeResultStaxParser extends AbstractXmlParser {
+public class GendarmeResultStaxParser extends AbstractXmlParser implements GendarmeResultParser, BatchExtension {
 
   private final static Logger log = LoggerFactory.getLogger(GendarmeResultStaxParser.class);
 
-  /**
-   * Parses a Gendarme violation file.
-   * 
-   * @param file
-   * @return a list of issues corresponding to the reported violations
+  /* (non-Javadoc)
+   * @see org.sonar.plugin.dotnet.gendarme.GendarmeResultParser#parse(java.io.File)
    */
+  @Override
   public List<Issue> parse(File file) {
 
     try{

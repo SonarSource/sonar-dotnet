@@ -28,8 +28,6 @@ import java.net.MalformedURLException;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.plugin.dotnet.gendarme.model.Issue;
-import org.sonar.plugin.dotnet.gendarme.stax.GendarmeResultStaxParser;
 
 public class GendarmeResultParserTest {
 
@@ -40,7 +38,7 @@ public class GendarmeResultParserTest {
   private static final String LOCATION = "Example.Core.IMoney Example.Core.IMoney::AddMoney(Example.Core.Money)";
   private static final String SOURCE = "";
 
-  private GendarmeResultStaxParser parserStax;
+  private GendarmeResultParser parserStax;
 
   @Before
   public void setUp() {    

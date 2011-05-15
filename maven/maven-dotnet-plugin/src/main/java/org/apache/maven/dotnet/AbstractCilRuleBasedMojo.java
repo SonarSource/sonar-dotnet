@@ -124,7 +124,7 @@ public abstract class AbstractCilRuleBasedMojo extends AbstractDotNetMojo {
       } else if (visualStudioProject instanceof WebVisualStudioProject) {
         // ASP project
         WebVisualStudioProject webProject = (WebVisualStudioProject)visualStudioProject;
-        assemblies.addAll(webProject.getWebAssemblies(buildConfigurations));
+        assemblies.addAll(webProject.getGeneratedAssemblies(buildConfigurations));
 
       } else if (silverlightFilter == null
           || silverlightFilter.equals(visualStudioProject

@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugin.dotnet.gendarme.model;
+package org.sonar.plugin.dotnet.gendarme;
 
 /**
  * This class was made to modelize issues provided by gendarme reports

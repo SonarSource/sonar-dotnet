@@ -54,7 +54,7 @@ public class PackMojo extends AbstractDotNetMojo {
   PACK_FILES_ATTR = " files=",
   DOTNET_DIR_NAME = "dotnet",
   PROP_PREFIX = DOTNET_DIR_NAME + ".", 
-  PROP_PACK_FILES = PROP_PREFIX + "pack.files", ARCHIVE_BASE_NAME = "example", ARCHIVE_EXTENSION = "sln";
+  PROP_PACK_FILES = PROP_PREFIX + "pack.files", ARCHIVE_BASE_NAME = "example", ARCHIVE_EXTENSION = "netpack";
 
   final static int DEFAULT_FILE_PERMISSIONS = 0644;
 

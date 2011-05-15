@@ -45,8 +45,8 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
   @Property(
       key = GENDARME_REPORT_KEY,
       defaultValue = GENDARME_REPORT_XML,
-      name = "Name of the Mono Gendarme report file",
-      description = "Name of the Mono Gendarme report file used when reuse report mode is activated",
+      name = "Names of the Mono Gendarme report files",
+      description = "Names of the Mono Gendarme report files, using ',' or ';' as separator, used when reuse report mode is activated",
       project = true,
       module = false,
       global = true),
@@ -85,6 +85,7 @@ public class GendarmePlugin implements Plugin {
     list.add(GendarmeRuleRepository.class);
     list.add(GendarmeSensor.class);
     list.add(GendarmePluginHandler.class);
+    list.add(GendarmeResultStaxParser.class);
     list.add(CSharpFileLocator.class);
     return list;
   }
