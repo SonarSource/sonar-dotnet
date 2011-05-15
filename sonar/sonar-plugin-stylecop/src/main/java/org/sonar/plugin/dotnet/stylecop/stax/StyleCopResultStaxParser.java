@@ -38,13 +38,14 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.BatchExtension;
 import org.sonar.plugin.dotnet.core.SonarPluginException;
 import org.sonar.plugin.dotnet.stylecop.StyleCopViolation;
 
 
-public class StyleCopResultStaxParser {
-  private final static Logger log = LoggerFactory
-  .getLogger(StyleCopResultStaxParser.class);
+public class StyleCopResultStaxParser implements BatchExtension {
+  
+  private final static Logger log = LoggerFactory.getLogger(StyleCopResultStaxParser.class);
 
   /**
    * Parses a StyleCop report.
