@@ -42,10 +42,10 @@ public class WebVisualStudioProject extends VisualStudioProject {
   }
 
   /**
-   * @return null if the project is not a web project, the generated web dlls
-   *         otherwise.
+   * @return the generated web dlls
+   *         
    */
-  public Set<File> getWebAssemblies(String buildConfigurations) {
+  public Set<File> getGeneratedAssemblies(String buildConfigurations) {
     Set<File> result = new HashSet<File>();
     
     // we need to exclude all the dll files
@@ -82,7 +82,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
    *         names otherwise.
    */
   public Set<String> getWebAssemblyNames() {
-    Set<File> assemblies = getWebAssemblies(null);
+    Set<File> assemblies = getGeneratedAssemblies(null);
     Set<String> assemblyNames = new HashSet<String>();
 
     for (File assembly : assemblies) {

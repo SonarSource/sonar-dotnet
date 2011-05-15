@@ -261,7 +261,7 @@ public class VisualStudioUtilsTest {
       webProject = (WebVisualStudioProject) projects.get(1);
     }
     assertEquals(1, webProject.getReferences().size());
-    Set<File> webAssemblies = webProject.getWebAssemblies(null);
+    Set<File> webAssemblies = webProject.getGeneratedAssemblies(null);
     for (File assemblyFile : webAssemblies) {
       assertFalse("ClassLibrary.dll".equals(assemblyFile.getName()));
     }

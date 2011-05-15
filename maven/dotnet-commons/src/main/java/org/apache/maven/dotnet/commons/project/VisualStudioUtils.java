@@ -109,7 +109,7 @@ public class VisualStudioUtils {
 
   public static VisualStudioSolution getVisualSolution(MavenProject project,
       String proposedSolutionName) throws DotNetProjectException {
-    if (!SOLUTION_PACKAGING.equals(project.getPackaging())) {
+    if (!SOLUTION_PACKAGING.equals(project.getPackaging()) && !"netpack".equals(project.getPackaging())) {
       return null;
     }
     String solutionName = proposedSolutionName;
