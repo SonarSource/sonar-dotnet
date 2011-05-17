@@ -106,10 +106,12 @@ public class GendarmeSensor extends AbstractDotnetSensor {
         VisualStudioSolution solution = VisualUtils.getSolution(project);
         List<VisualStudioProject> projects = solution.getProjects();
         for (VisualStudioProject visualStudioProject : projects) {
-          String projectGendarmeReportName 
-            = MessageFormat.format(Constants.GENDARME_REPORT_XML, visualStudioProject.getName());
-          File report = new File(dir, projectGendarmeReportName);
-          reports.add(report);
+          if (!visualStudioProject.isTest()) {
+            String projectGendarmeReportName 
+              = MessageFormat.format(Constants.GENDARME_REPORT_XML, visualStudioProject.getName());
+            File report = new File(dir, projectGendarmeReportName);
+            reports.add(report);
+          }
         }
       } catch (DotNetProjectException e) {
         log.error("Solution parsing error", e);
