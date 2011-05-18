@@ -92,6 +92,13 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
   private String gendarmeConfigFile;
   
   /**
+   * Path to the gendarme ignore config file
+   * 
+   * @parameter expression="${gendarme.ignore}"
+   */
+  private String gendarmeIgnoreFile;
+  
+  /**
    * Filter defects for the specified confidence levels.
    * confidence [all | [[low | normal | high | total][+|-]],...
    * 
@@ -224,6 +231,11 @@ public class GendarmeMojo extends AbstractCilRuleBasedMojo {
     if (StringUtils.isNotEmpty(gendarmeConfigFile)) {
       commandArguments.add("--config");
       commandArguments.add(gendarmeConfigFile);
+    }
+    
+    if (StringUtils.isNotEmpty(gendarmeIgnoreFile)) {
+      commandArguments.add("--ignore");
+      commandArguments.add(gendarmeIgnoreFile);
     }
 
     // Put in verbose mode if required
