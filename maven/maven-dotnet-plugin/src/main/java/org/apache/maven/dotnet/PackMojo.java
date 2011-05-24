@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -48,15 +49,12 @@ import org.codehaus.plexus.util.FileUtils;
 public class PackMojo extends AbstractDotNetMojo {
 
     
-  final static String WINDOWS_FILE_SEP = "\\",
-  UNIX_FILE_SEP = "/",
-  PACK_TO_DIR_ATTR = " to-dir=",
-  PACK_FILES_ATTR = " files=",
-  DOTNET_DIR_NAME = "dotnet",
-  PROP_PREFIX = DOTNET_DIR_NAME + ".", 
-  PROP_PACK_FILES = PROP_PREFIX + "pack.files", ARCHIVE_BASE_NAME = "example", ARCHIVE_EXTENSION = "netpack";
+  private final static String WINDOWS_FILE_SEP = "\\";
+  private final static String UNIX_FILE_SEP = "/";
+  private final static String PACK_TO_DIR_ATTR = " to-dir=";
+  private final static String PACK_FILES_ATTR = " files=";
 
-  final static int DEFAULT_FILE_PERMISSIONS = 0644;
+  private final static int DEFAULT_FILE_PERMISSIONS = 0644;
 
 
   private File tmpDir;
@@ -82,7 +80,7 @@ public class PackMojo extends AbstractDotNetMojo {
     tmpDir = new File(project.getBuild().getDirectory());
     if (packFiles == null) {
       getLog().info("No file to pack");
-      createArtifactFile();
+      archive = createArtifactFile();
       try {
         archive.createNewFile();
       } catch (IOException e) {
@@ -118,7 +116,7 @@ public class PackMojo extends AbstractDotNetMojo {
 
   private void createArchive() throws MojoExecutionException {
     getLog().info("Create archive ");
-    createArtifactFile();
+    archive = createArtifactFile();
     try {
       ZipArchiver zip = new ZipArchiver();
       zip.setDestFile(archive);
@@ -132,10 +130,10 @@ public class PackMojo extends AbstractDotNetMojo {
     }
   }
 
-  private void createArtifactFile() {
-    archive = new File(tmpDir + File.separator + project.getArtifact().getArtifactId() + "-" + project.getArtifact().getVersion() + "."
-        + ARCHIVE_EXTENSION);
-    
+  private File createArtifactFile() {
+    Artifact artifact = project.getArtifact();
+    String archiveFileName = artifact.getArtifactId() + "-" + artifact.getVersion() + "." + artifact.getArtifactHandler().getPackaging();
+    return new File(tmpDir, archiveFileName);
   }
 
   /**
