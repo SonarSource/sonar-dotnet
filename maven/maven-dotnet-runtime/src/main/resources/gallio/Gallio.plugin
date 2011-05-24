@@ -430,6 +430,10 @@
                serviceId="Gallio.FormattingRule"
                componentType="Gallio.Runtime.Formatting.TypeFormattingRule, Gallio" />
 
+    <component componentId="Gallio.MemberInfoFormattingRule"
+               serviceId="Gallio.FormattingRule"
+               componentType="Gallio.Runtime.Formatting.MemberInfoFormattingRule, Gallio" />
+
     <component componentId="Gallio.XPathNavigableFormattingRule"
                serviceId="Gallio.FormattingRule"
                componentType="Gallio.Runtime.Formatting.XPathNavigableFormattingRule, Gallio" />

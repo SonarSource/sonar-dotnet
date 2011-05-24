@@ -86,6 +86,8 @@ MbUnit40.dll
 MbUnit40.pdb
 MbUnit40.plugin
 MbUnit40.xml
+NHamcrest.dll
+NHamcrest.pdb
 WeifenLuo.WinFormsUI.Docking.dll
 AutoCAD/Gallio.AutoCAD.dll
 AutoCAD/Gallio.AutoCAD.plugin
@@ -772,6 +774,32 @@ NUnit/v2.5.3/nunit.util.dll
 NUnit/v2.5.3/Readme.txt
 NUnit/v2.5.3/addins/NUnit Addins Readme.txt
 NUnit/v2.5.3/Resources/NUnit.ico
+PartCover/Gallio.PartCoverIntegration.dll
+PartCover/Gallio.PartCoverIntegration.plugin
+PartCover/libs/PartCover/app.ico
+PartCover/libs/PartCover/Credits.txt
+PartCover/libs/PartCover/Interop.PartCover.dll
+PartCover/libs/PartCover/licence.txt
+PartCover/libs/PartCover/log4net.dll
+PartCover/libs/PartCover/PartCover.Browser.Api.dll
+PartCover/libs/PartCover/PartCover.Browser.exe
+PartCover/libs/PartCover/PartCover.Browser.exe.config
+PartCover/libs/PartCover/PartCover.dll
+PartCover/libs/PartCover/PartCover.exe
+PartCover/libs/PartCover/PartCover.exe.config
+PartCover/libs/PartCover/PartCover.Framework.dll
+PartCover/libs/PartCover/PartCover.Registration.exe
+PartCover/libs/PartCover/PartCover.Registration.exe.config
+PartCover/libs/PartCover/PartViewer.dll
+PartCover/libs/PartCover/xslt/Report By Assembly.xslt
+PartCover/libs/PartCover/xslt/Report By Class.xslt
+PartCover/libs/ReportGenerator/ICSharpCode.NRefactory.dll
+PartCover/libs/ReportGenerator/LICENSE.txt
+PartCover/libs/ReportGenerator/log4net.dll
+PartCover/libs/ReportGenerator/Readme.txt
+PartCover/libs/ReportGenerator/ReportGenerator.exe
+PartCover/libs/ReportGenerator/ReportGenerator.exe.config
+PartCover/Resources/PartCover.ico
 ReSharper/v3.1/Gallio.ReSharperRunner31.dll
 ReSharper/v3.1/Gallio.ReSharperRunner31.plugin
 ReSharper/v3.1/Resources/resharper.ico

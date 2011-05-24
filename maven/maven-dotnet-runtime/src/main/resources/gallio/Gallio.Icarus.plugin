@@ -24,18 +24,63 @@
   </files>
 
   <services>
+    
     <service serviceId="Gallio.Icarus.OptionsController" 
              serviceType="Gallio.Icarus.Controllers.Interfaces.IOptionsController, Gallio.Icarus" />
 
     <service serviceId="Gallio.Icarus.Package" 
              serviceType="Gallio.Icarus.IPackage, Gallio.Icarus" />
+			 
+    <service serviceId="Gallio.Icarus.WindowManager.WindowManager" 
+             serviceType="Gallio.Icarus.WindowManager.IWindowManager, Gallio.Icarus" />
+
+    <service serviceId="Gallio.Icarus.WindowManager.MenuManager"
+             serviceType="Gallio.Icarus.WindowManager.IMenuManager, Gallio.Icarus" />
+
+    <service serviceId="Gallio.Icarus.Runtime.PluginScanner" 
+             serviceType="Gallio.Icarus.Runtime.IPluginScanner, Gallio.Icarus" />
+
+    <service serviceId="Gallio.Icarus.TreeBuilders.TreeBuilder"
+             serviceType="Gallio.Icarus.TreeBuilders.ITreeBuilder, Gallio.Icarus" />
+    
   </services>
 
   <components>
+  
     <component componentId="Gallio.Icarus.Controllers.OptionsController" 
                serviceId="Gallio.Icarus.OptionsController"
                componentType="Gallio.Icarus.Controllers.OptionsController, Gallio.Icarus" />
   
+    <component componentId="Gallio.Icarus.WindowManager.WindowManager" 
+               serviceId="Gallio.Icarus.WindowManager.WindowManager"
+               componentType="Gallio.Icarus.WindowManager.WindowManager, Gallio.Icarus" />
+
+    <component componentId="Gallio.Icarus.WindowManager.MenuManager"
+               serviceId="Gallio.Icarus.WindowManager.MenuManager"
+               componentType="Gallio.Icarus.WindowManager.MenuManager, Gallio.Icarus" />
+    
+    <component componentId="Gallio.Icarus.Runtime.DefaultConventionScanner" 
+               serviceId="Gallio.Icarus.Runtime.PluginScanner"
+               componentType="Gallio.Icarus.Runtime.DefaultConventionScanner, Gallio.Icarus" />
+    
+    <!-- Tree builders -->
+
+    <component componentId="Gallio.Icarus.TreeBuilders.NamespaceTreeBuilder"
+               serviceId="Gallio.Icarus.TreeBuilders.TreeBuilder"
+               componentType="Gallio.Icarus.TreeBuilders.NamespaceTreeBuilder, Gallio.Icarus">
+      <traits>
+        <priority>1</priority>
+      </traits>
+    </component>
+
+    <component componentId="Gallio.Icarus.TreeBuilders.MetadataTreeBuilder"
+               serviceId="Gallio.Icarus.TreeBuilders.TreeBuilder"
+               componentType="Gallio.Icarus.TreeBuilders.MetadataTreeBuilder, Gallio.Icarus">
+      <traits>
+        <priority>1</priority>
+      </traits>
+    </component>
+    
     <!-- Control panel -->
 
     <component componentId="Gallio.Icarus.ControlPanel.RootPaneProvider"

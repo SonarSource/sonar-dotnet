@@ -844,10 +844,11 @@
             http://martinfowler.com/eaaDev/EventAggregator.html
             </summary>
         </member>
-        <member name="M:Gallio.UI.Events.IEventAggregator.Send``1(``0)">
+        <member name="M:Gallio.UI.Events.IEventAggregator.Send``1(System.Object,``0)">
             <summary>
              Send an event to all interested parties (synchronous).
             </summary>
+            <param name="sender">The sender of the message.</param>
             <param name="message">The message to send.</param>
             <typeparam name="T">The type of event.</typeparam>
         </member>
@@ -857,7 +858,7 @@
             </summary>
             <param name="serviceLocator">A service locator used to find registered handlers.</param>
         </member>
-        <member name="M:Gallio.UI.Events.EventAggregator.Send``1(``0)">
+        <member name="M:Gallio.UI.Events.EventAggregator.Send``1(System.Object,``0)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.UI.Events.EventHandlerProxy`1">
@@ -886,6 +887,21 @@
             <param name="target">The handler to proxy for.</param>
         </member>
         <member name="M:Gallio.UI.Events.EventHandlerProxy`1.Handle(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.Equals(Gallio.UI.Events.EventHandlerProxy{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.op_Equality(Gallio.UI.Events.EventHandlerProxy{`0},Gallio.UI.Events.EventHandlerProxy{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.op_Inequality(Gallio.UI.Events.EventHandlerProxy{`0},Gallio.UI.Events.EventHandlerProxy{`0})">
             <inheritdoc />
         </member>
         <member name="T:Gallio.UI.Menus.MenuCommand">
@@ -1236,6 +1252,12 @@
             Creates a test step run viewer.
             </summary>
         </member>
+        <member name="M:Gallio.UI.Reports.TestStepRunViewer.OnLoad(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.UserControl.Load"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
         <member name="M:Gallio.UI.Reports.TestStepRunViewer.Clear">
             <summary>
             Clears the contents of the report viewer and discards all cached content.
@@ -1306,11 +1328,6 @@
         <member name="T:Gallio.UI.Tree.Nodes.ThreeStateNode">
             <summary>
              A three-state node.
-            </summary>
-        </member>
-        <member name="M:Gallio.UI.Tree.Nodes.ThreeStateNode.#ctor">
-            <summary>
-             Default ctor.
             </summary>
         </member>
         <member name="M:Gallio.UI.Tree.Nodes.ThreeStateNode.#ctor(System.String)">
