@@ -49,13 +49,13 @@ Usage of Maven Dotnet Plugin
 *-------------------+------------------------+--------------------------+-----+----------------------------------------------------+
 | Style Cop   *  | stylecop.directory     | C# code style report | 4.3+ |{{{http://code.msdn.microsoft.com/sourceanalysis}http://code.msdn.microsoft.com/sourceanalysis}}|
 *---------------+------------------------+--------------------------+---+-------------------------------------------------------+
-| Mono Gendarme **     | gendarme.directory     | .Net code quality reports | 2.6+ |{{{http://www.mono-project.com/Gendarme}http://www.mono-project.com/Gendarme}}|
+| Mono Gendarme **     | gendarme.directory     | .Net code quality reports | 2.10+ |{{{http://www.mono-project.com/Gendarme}http://www.mono-project.com/Gendarme}}|
 *---------------+------------------------+--------------------------+---+-------------------------------------------------------+
   
   
   \* Style Cop 4.4 is bundle with the maven dotnet plugin since version 0.3 .  Thus installation of Style Cop is not mandatory.
   
-  \*\* Gendarme 2.8 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
+  \*\* Gendarme 2.10 is bundle with the maven dotnet plugin. Thus installation of Gendarme is not mandatory.
 
 * Coverage
   
