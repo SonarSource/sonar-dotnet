@@ -1,3 +1,88 @@
+2011-01-10  Version 2.10
+
+	There were two major events in the last release cycle. The first was
+	the release (and adoption) of Cecil/light. The second was Mono 
+	participation in "Google Code In 2010" where many Gendarme tasks were
+	claimed (and completed) by students.
+
+	Release highlights:
+
+	* Gendarme now use cecil/light, the new version of Mono.Cecil [JB Evain]
+
+	* A new tool, FxCopMapper, is also available to produce compatibility
+	maps (documentation) between Gendarme and FxCop rules [Yuri Stuken]
+
+	* Rules / projects templates for Visual Studio .NET [Nicholas Rioux]
+
+	* '.ignore' files now support @filename entries, which allow you to 
+	include several .ignore files from a master .ignore file [Sebastien 
+	Pouliot]
+
+	New rules includes:
+
+	Gendarme.Rules.BadPractice
+	* UseFileOpenOnlyWithFileAccessRule [Yuri Stuken]
+
+	Gendarme.Rules.Design
+	* EnumaratorsShouldBeStronglyTypedRule [Yuri Stuken]
+	* ListsAreStronglyTypedRule [Yuri Stuken]
+	* PreferUriOverStringRule [Nicholas Rioux]
+	* StronglyTypeICollectionMembersRule [Yuri Stuken]
+
+	Gendarme.Rules.Design.Generic
+	* AvoidExcessiveParametersOnGenericTypesRule [Nicholas Rioux]
+	* DoNotDeclareStaticMembersOnGenericTypesRule [Nicholas Rioux]
+	* DoNotExposeGenericListsRule [Nicholas Rioux]
+
+	Gendarme.Rules.Globalization (new in 2.10)
+	* AvoidUnusedInternalResourceRule [Antoine Vandecreme]
+	* SatelliteResourceMismatchRule [Antoine Vandecreme]
+
+	Gendarme.Rules.Interoperability.Com (new in 2.10)
+	* AutoLayoutTypesShouldNotBeComVisibleRule [Yuri Stuken]
+	* AvoidInt64ArgumentsInComVisibleMethodsRule [Yuri Stuken]
+	* AvoidNonPublicFieldsInComVisibleValueTypesRule [N Lum]
+	* AvoidOverloadsInComVisibleInterfacesRule [N Lum]
+	* AvoidStaticMembersInComVisibleTypesRule [Yuri Stuken]
+	* ComVisibleShouldInheritFromComVisibleRule [N Lum]
+	* ComVisibleTypesShouldBeCreatableRule [Nicholas Rioux]
+	* DoNotUseAutoDualClassInterfaceTypeRule [Yuri Stuken]
+	* MarkComSourceInterfacesAsIDispatchRule [Nicholas Rioux]
+	* ReviewComRegistrationMethodsRule [Yuri Stuken]
+
+	Gendarme.Rules.Performance
+	* AvoidUnnecessaryOverridesRule [N Lum]
+	* PreferInterfaceConstraintOnGenericParameterForPrimitiveInterfaceRule [Julien Hoarau]
+
+	Gendarme.Rules.Maintainability
+	* ReviewMisleadingFieldNamesRule [N Lum]
+	* VariableNamesShouldNotMatchFieldNamesRule [N Lum]
+
+	Gendarme.Rules.Ui
+	* AddMatchingArrangeMeasureOverrideRule [Nicholas Rioux]
+
+	Gendarme.Rules.NUnit (new in 2.10)
+	* ProvideMessageOnAssertCallsRule [Yuri Stuken]
+	* MissingEngineDependencyRule [Yuri Stuken]
+	* TestMethodsMustBePublicRule [Yuri Stuken]
+	* UnitTestsMissingTestFixtureRule [Yuri Stuken]
+
+	Gendarme.Rules.Gendarme (new in 2.10)
+	* DefectsMustBeReportedRule [Yuri Stuken]
+	* DoNotThrowExceptionRule [Yuri Stuken]
+	* ReviewAttributesOnRulesRule [Yuri Stuken]
+	* UseCorrectSuffixRule [Yuri Stuken]
+
+	Most of the new assemblies (i.e. Gendarme.Rules.Interoperability.Com,
+	Gendarme.Rules.NUnit and Gendarme.Rules.Gendarme) are "speciality 
+	rules" and, like Gendarme.Rules.Smells, are not part of the 'default' 
+	set of the console runner. Enable them (in rules.xml) if/when your 
+	projects requires them.
+
+	Contributors for this release are:
+	Andres G. Aragoneses, Antoine Vandecreme, JB Evain, Julien Hoarau, 
+	N Lum, Nicolas Rioux, Sebastien Pouliot and Yuri Stuken
+
 2010-09-05  Version 2.8.0
 
 	First release in the 2.8.x serie which will lead to the 3.0

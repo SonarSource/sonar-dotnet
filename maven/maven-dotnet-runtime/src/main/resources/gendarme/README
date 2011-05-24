@@ -26,4 +26,4 @@ http://build.mono-project.com/index.aspx?lane=mono-trunk
 * Visual Studio solutions and projects files (usable by both MonoDevelop
 and Visual Studio .NET 2008) are NOT always up to date with Makefiles. 
 This depends on the developer making changes and his personal access to 
-the developing environments.
+the developing environments. (Please see the README.vsnet file.)

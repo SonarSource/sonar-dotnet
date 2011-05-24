@@ -12,7 +12,7 @@
 .if t .sp .5v
 .if n .sp
 ..
-.TH Gendarme "Gendarme 2.8.0.0"
+.TH Gendarme "Gendarme 2.10.0.0"
 .SH NAME
 Gendarme \- Rule-based code analysis for Mono.
 
@@ -36,6 +36,9 @@ T: - is used to filter out a namespace qualified type name.
 .RS
 M: - is used to filter out a method. It must contain the full method name as it appears in the report.
 .RE
+
+An ignore-file can be generated automatically (using gd2i) from a XML 
+defect list produced by \fIGendarme\fP.
 
 .TP
 .I rules.xml
@@ -69,12 +72,12 @@ for a rule edit the config file, add a switch using the rule's name, and set the
 value to 1.
 
 .SH COPYRIGHT
-Copyright (C) 2005-2009 Novell, Inc (http://www.novell.com)
+Copyright (C) 2005-2010 Novell, Inc (http://www.novell.com)
 .SH MAILING LISTS
 Mailing lists are listed at the
 http://groups.google.com/group/gendarme
 .SH WEB SITE
 http://www.mono-project.com/Gendarme
 .SH SEE ALSO
-.BR gendarme(1)
+.BR gendarme(1), gd2i(1)
 

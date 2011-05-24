@@ -1,5 +1,4 @@
 AUTHORS
-content.txt
 gd2i.exe
 gendarme-wizard.exe
 gendarme.1
@@ -13,9 +12,13 @@ Gendarme.Rules.Design.dll
 Gendarme.Rules.Design.Generic.dll
 Gendarme.Rules.Design.Linq.dll
 Gendarme.Rules.Exceptions.dll
+Gendarme.Rules.Gendarme.dll
+Gendarme.Rules.Globalization.dll
+Gendarme.Rules.Interoperability.Com.dll
 Gendarme.Rules.Interoperability.dll
 Gendarme.Rules.Maintainability.dll
 Gendarme.Rules.Naming.dll
+Gendarme.Rules.NUnit.dll
 Gendarme.Rules.Performance.dll
 Gendarme.Rules.Portability.dll
 Gendarme.Rules.Security.Cas.dll
@@ -25,6 +28,7 @@ Gendarme.Rules.Smells.dll
 Gendarme.Rules.Ui.dll
 MIT.X11
 Mono.Cecil.dll
+Mono.Cecil.Mdb.dll
 Mono.Cecil.Pdb.dll
 NEWS
 README
