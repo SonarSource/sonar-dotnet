@@ -214,7 +214,7 @@ public class VisualStudioUtils {
    * @throws XPathExpressionException
    */
   public static VisualStudioSolution getSolution(File solutionFile)
-      throws IOException, DotNetProjectException {
+    throws IOException, DotNetProjectException {
     
     String solutionContent = FileUtils.fileRead(solutionFile);
     List<String> buildConfigurations = getBuildConfigurations(solutionContent);
