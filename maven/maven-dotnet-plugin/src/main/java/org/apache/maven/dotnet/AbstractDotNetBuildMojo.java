@@ -68,6 +68,16 @@ public abstract class AbstractDotNetBuildMojo extends AbstractDotNetMojo {
    * @parameter expression="${dotnet.tool.version}" default-value="3.5"
    */
   protected String toolVersion;
+  
+  /**
+   * Flag that indicates if parallel builds are activated. When equals to true, 
+   * "/m" MsBuild option is added to the command line and MsBuild will try to 
+   * use all available cpu cores.
+   * 
+   * @parameter expression="${dotnet.parallel.build}" default-value="false"
+   */
+  protected boolean parallelBuild;
+
 
   /**
    * Gets the MSBuild.exe command, depending on the tool version.

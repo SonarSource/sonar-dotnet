@@ -125,6 +125,10 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
       } else {
         arguments.add("/t:Build");
       }
+      
+      if (parallelBuild) {
+        arguments.add("/m");
+      }
 
       // Manages the disabled events
       if (disablePostBuildEvent) {

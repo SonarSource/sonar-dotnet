@@ -74,6 +74,10 @@ public class MsBuildMojo extends AbstractDotNetBuildMojo {
     List<String> msbuildParameters = new ArrayList<String>();
     msbuildParameters.add(toCommandPath(scriptFile));
    
+    if (parallelBuild) {
+      msbuildParameters.add("/m");
+    }
+    
     if (!StringUtils.isEmpty(target)) {
       msbuildParameters.add("/t:"+target);
     }
