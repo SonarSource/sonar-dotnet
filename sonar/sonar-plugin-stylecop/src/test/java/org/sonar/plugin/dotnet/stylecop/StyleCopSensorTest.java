@@ -34,7 +34,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.apache.maven.project.MavenProject;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
@@ -142,12 +141,6 @@ public class StyleCopSensorTest {
   @Test
   public void testAnalyseReuseDifferentDir() {
     testAnalyseReuse("../working/stylecop-report.xml");
-  }
-
-  @Test
-  @Ignore
-  public void testGetMavenPluginHandler() {
-    fail("Not yet implemented");
   }
 
   private List<StyleCopViolation> buildStyleCopViolationResultParser(){
