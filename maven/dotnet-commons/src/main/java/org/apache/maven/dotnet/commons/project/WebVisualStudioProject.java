@@ -49,7 +49,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
     Set<File> result = new HashSet<File>();
     
     // we need to exclude all the dll files
-    // that correspond to 
+    // that correspond to references
     Set<String> exclusions = new HashSet<String>();
     Set<File> references = getReferences();
     for (File file : references) {
@@ -97,7 +97,7 @@ public class WebVisualStudioProject extends VisualStudioProject {
    * @return  the dll files that correspond to VS references
    */
   public Set<File> getReferences() {
-    File binDirectory = new File(directory, "bin");
+    File binDirectory = new File(directory, "Bin");
     Set<File> result = new HashSet<File>();
     if (binDirectory.exists()) {
       File[] files = binDirectory.listFiles();
