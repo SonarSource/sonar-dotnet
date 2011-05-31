@@ -247,7 +247,6 @@ public class VisualStudioUtilsTest {
   }
   
   @Test
-  @Ignore
   public void testWebSolution() throws Exception {
     File file = new File(WEB_SOLUTION_PATH);
     VisualStudioSolution solution = VisualStudioUtils.getSolution(file);
