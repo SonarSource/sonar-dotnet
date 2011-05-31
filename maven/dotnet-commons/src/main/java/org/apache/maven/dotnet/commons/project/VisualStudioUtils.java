@@ -261,7 +261,8 @@ public class VisualStudioUtils {
    * @throws XPathExpressionException
    */
   private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<String> buildConfigurations)
-      throws IOException, DotNetProjectException {
+    throws IOException, DotNetProjectException {
+    
     File baseDirectory = solutionFile.getParentFile();
 
     // A pattern to extract the projects from a visual studion solution
@@ -333,7 +334,8 @@ public class VisualStudioUtils {
    * @throws FileNotFoundException
    */
   public static VisualStudioProject getProject(File projectFile)
-      throws DotNetProjectException, FileNotFoundException {
+    throws DotNetProjectException, FileNotFoundException {
+    
     String projectName = projectFile.getName();
     return getProject(projectFile, projectName, null);
   }
