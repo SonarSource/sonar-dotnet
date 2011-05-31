@@ -47,7 +47,7 @@ public class GallioResultParserTest
   @Before
 	public void setUp() {
 	  sourcefile 
-	    = new File("C:\\HOMEWARE\\codehaus\\dotnet\\maven\\dotnet-commons\\src\\test\\resources\\solution\\Example\\Example.Core.Tests\\TestMoney.cs");
+	    = new File("Example\\Example.Core.Tests\\TestMoney.cs");
 	                
 	  parser = new GallioResultStaxParser();
 	}
@@ -176,6 +176,9 @@ public class GallioResultParserTest
     
   }
   
+  /**
+   * Test for jira ticket SONARPLUGINS-1005
+   */
   @Test
   @Ignore
   public void testMsTest() {
