@@ -125,7 +125,7 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    */
   @Override
   protected void executeSolution(VisualStudioSolution solution)
-      throws MojoFailureException, MojoExecutionException {
+    throws MojoFailureException, MojoExecutionException {
     
     if (solution.isSilverlightUsed()) {
       List<File> slCheckedAssemblies = extractSilverlightAssemblies(solution);
@@ -145,7 +145,7 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    */
   @Override
   protected void executeProject(VisualStudioProject visualProject)
-      throws MojoFailureException, MojoExecutionException {
+    throws MojoFailureException, MojoExecutionException {
     if (visualProject.isTest()) {
       getLog().info(
           "No FxCop report generated for the test project "
@@ -162,7 +162,7 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
         Collections.singletonList(assembly), 
         visualProject.isSilverlightProject(), 
         visualProject.isWebProject()
-      );
+    );
   }
 
   /**
@@ -170,14 +170,15 @@ public class FxCopMojo extends AbstractCilRuleBasedMojo {
    * 
    * @param assemblies
    *          the assemblies to check
-   * @param aspUsed TODO
+   * @param aspUsed 
+   *          flag that indicates that the solution contains a web folder
    * @throws MojoExecutionException
    *           if an execution problem occurred
    * @throws MojoFailureException
    *           in case of execution failure
    */
   private void launchReport(List<File> assemblies, boolean silverlightUsed, boolean aspUsed)
-      throws MojoExecutionException, MojoFailureException {
+    throws MojoExecutionException, MojoFailureException {
     Log log = getLog();
     if (assemblies.isEmpty()) {
       log.info("No assembly to check with FxCop");

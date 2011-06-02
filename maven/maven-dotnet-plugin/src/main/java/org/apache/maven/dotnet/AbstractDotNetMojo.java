@@ -191,7 +191,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
 
     // Here we should add : if the project is a "sln" packaging, then launch for
     // the solution
-    if (VisualStudioUtils.SOLUTION_PACKAGING.equals(project.getPackaging()) || "netpack".equals(project.getPackaging())) {
+    if (VisualStudioUtils.SOLUTION_PACKAGINGS.contains(project.getPackaging())) {
       VisualStudioSolution visualSolution = null;
       try {
         visualSolution = VisualStudioUtils.getVisualSolution(project,
@@ -404,7 +404,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    */
   protected int launchCommand(File executable, List<String> arguments,
       String reportType, int acceptedMask)
-      throws MojoExecutionException, MojoFailureException {
+    throws MojoExecutionException, MojoFailureException {
     Commandline commandline = generateCommandLine(executable, arguments);
     return launchCommand(commandline, reportType, acceptedMask,
         true);
@@ -432,7 +432,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    */
   protected int launchCommand(Commandline commandline, String reportType,
       int acceptedMask, boolean throwsFailure)
-      throws MojoExecutionException, MojoFailureException {
+    throws MojoExecutionException, MojoFailureException {
     int commandLineResult;
     Log log = getLog();
     String[] commandLineElements = commandline.getCommandline();
@@ -580,7 +580,7 @@ public abstract class AbstractDotNetMojo extends AbstractMojo {
    */
   protected void extractResources(File destinationDirectory,
       String resourceDirectory, List<String> resourceNames, String application)
-      throws MojoExecutionException {
+    throws MojoExecutionException {
     if (!destinationDirectory.exists()) {
       destinationDirectory.mkdirs();
     }
