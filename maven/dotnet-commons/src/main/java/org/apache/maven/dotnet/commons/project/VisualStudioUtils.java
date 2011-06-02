@@ -29,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +71,7 @@ public class VisualStudioUtils {
   public final static String TEST_PROJECT_PATTERN_PROPERTY = "visual.test.project.pattern";
   public final static String VISUAL_SOLUTION_NAME_PROPERTY = "visual.studio.solution";
   public final static String VISUAL_PROJECT_NAME_PROPERTY = "visual.studio.project";
-  public final static String SOLUTION_PACKAGING = "sln";
+  public final static Collection<String> SOLUTION_PACKAGINGS = Arrays.asList("sln", "netpack");
 
   /**
    * Checks, whether the child directory is a subdirectory of the base
@@ -108,7 +110,7 @@ public class VisualStudioUtils {
 
   public static VisualStudioSolution getVisualSolution(MavenProject project,
       String proposedSolutionName) throws DotNetProjectException {
-    if (!SOLUTION_PACKAGING.equals(project.getPackaging()) && !"netpack".equals(project.getPackaging())) {
+    if (!SOLUTION_PACKAGINGS.contains(project.getPackaging())) {
       return null;
     }
     String solutionName = proposedSolutionName;
@@ -429,8 +431,7 @@ public class VisualStudioUtils {
         project.setSilverlightProject(true);
       }
 
-      project.setBinaryReferences(getBinaryReferences(xpath, projectFile,
-          project));
+      project.setBinaryReferences(getBinaryReferences(xpath, projectFile));
 
       return project;
     } catch (XPathExpressionException xpee) {
@@ -442,7 +443,7 @@ public class VisualStudioUtils {
     }
   }
 
-  private static List<BinaryReference> getBinaryReferences(XPath xpath, File projectFile, VisualStudioProject project)
+  private static List<BinaryReference> getBinaryReferences(XPath xpath, File projectFile)
       throws DotNetProjectException {
     List<BinaryReference> result = new ArrayList<BinaryReference>();
     try {
@@ -511,7 +512,7 @@ public class VisualStudioUtils {
 
   public static VisualStudioProject getWebProject(File solutionRoot,
       File projectRoot, String projectName, String definition)
-      throws DotNetProjectException, FileNotFoundException {
+    throws DotNetProjectException, FileNotFoundException {
 
     // We define the namespace prefix for Visual Studio
     VisualStudioProject project = new WebVisualStudioProject();

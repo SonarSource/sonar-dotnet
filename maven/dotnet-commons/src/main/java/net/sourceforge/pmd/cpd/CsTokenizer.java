@@ -26,7 +26,6 @@ import java.util.List;
 /**
  * Code of the AbstractTokenizer adapted to the C# language. It was impossible
  * to extend AbstractTokenizer, some private methods could not be overridden.
- * TODO clean up
  * 
  * @author Alexandre Victoor
  */
@@ -36,7 +35,6 @@ public class CsTokenizer implements Tokenizer {
                                     // children classes
   private List<String> ignorableCharacter; // List<String>, should be setted by
                                            // children classes
-  // FIXME:Maybe an array of 'char' would be better for perfomance ?
   private List<String> ignorableStmt; // List<String>, should be setted by
                                       // children classes
 
@@ -49,9 +47,7 @@ public class CsTokenizer implements Tokenizer {
 
   private boolean downcaseString = true;
 
-  private boolean lineComment = false;
   private boolean multipleLineComment = false;
-  private boolean importLine = false;
   private boolean namespaceRead = false;
 
   public CsTokenizer() {
@@ -83,10 +79,10 @@ public class CsTokenizer implements Tokenizer {
     for (this.lineNumber = 0; lineNumber < this.code.size(); lineNumber++) {
       this.currentLine = this.code.get(this.lineNumber);
       int loc = 0;
-      lineComment = false;
-      importLine = false;
+      boolean lineComment = false;
+      boolean importLine = false;
       while (loc < currentLine.length()) {
-        StringBuffer token = new StringBuffer();
+        StringBuilder token = new StringBuilder();
         loc = getTokenFromLine(token, loc);
 
         if (lineComment || multipleLineComment || importLine) {
@@ -106,10 +102,9 @@ public class CsTokenizer implements Tokenizer {
           }
 
           if (downcaseString) {
-            token = new StringBuffer(token.toString().toLowerCase());
+            token = new StringBuilder(token.toString().toLowerCase());
           }
-          if (CPD.debugEnable)
-            System.out.println("Token added:" + token.toString());
+          
           tokenEntries.add(new TokenEntry(token.toString(), tokens
               .getFileName(), lineNumber));
 
@@ -119,7 +114,7 @@ public class CsTokenizer implements Tokenizer {
     tokenEntries.add(TokenEntry.getEOF());
   }
 
-  private int getTokenFromLine(StringBuffer token, int loc) {
+  private int getTokenFromLine(StringBuilder token, int loc) {
     for (int j = loc; j < this.currentLine.length(); j++) {
       char tok = this.currentLine.charAt(j);
       if (!Character.isWhitespace(tok) && !ignoreCharacter(tok)) {
@@ -143,24 +138,25 @@ public class CsTokenizer implements Tokenizer {
     return loc + 1;
   }
 
-  private int parseString(StringBuffer token, int loc, char stringDelimiter) {
+  private int parseString(StringBuilder token, int loc, char stringDelimiter) {
     boolean escaped = false;
     boolean done = false;
     char tok = ' '; // this will be replaced.
     while ((loc < currentLine.length()) && !done) {
       tok = currentLine.charAt(loc);
-      if (escaped && tok == stringDelimiter) // Found an escaped string
+      if (escaped && tok == stringDelimiter) { // Found an escaped string
         escaped = false;
-      else if (tok == stringDelimiter && (token.length() > 0)) // We are done,
+      } else if (tok == stringDelimiter && (token.length() > 0)) { // We are done,
                                                                // we found the
                                                                // end of the
                                                                // string...
         done = true;
-      else if (tok == '\\') // Found an escaped char
+      } else if (tok == '\\') {// Found an escaped char
         escaped = true;
-      else
+      } else {
         // Adding char...
         escaped = false;
+      }
       // Adding char to String:" + token.toString());
       token.append(tok);
       loc++;
