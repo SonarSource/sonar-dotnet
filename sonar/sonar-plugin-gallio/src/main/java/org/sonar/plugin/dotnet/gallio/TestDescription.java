@@ -42,12 +42,6 @@ public class TestDescription {
   private File sourceFile;
 
   /**
-   * Constructs a @link{TestDescription}.
-   */
-  public TestDescription() {
-  }
-
-  /**
    * Returns the assemblyName.
    * 
    * @return The assemblyName to return.

@@ -40,12 +40,6 @@ public class GallioMetrics implements Metrics {
       "Count Assert", "The number of asserts performed by the unit tests",
       Metric.ValueType.INT, -1, false, CoreMetrics.DOMAIN_TESTS);
 
-  /**
-   * Constructs a @link{GallioMetrics}.
-   */
-  public GallioMetrics() {
-  }
-
   public List<Metric> getMetrics() {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(COUNT_ASSERTS);

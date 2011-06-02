@@ -33,6 +33,6 @@ import java.util.Set;
  */
 public interface GallioResultParser {
 
-  public abstract Set<UnitTestReport> parse(File report);
+  Set<UnitTestReport> parse(File report);
 
 }

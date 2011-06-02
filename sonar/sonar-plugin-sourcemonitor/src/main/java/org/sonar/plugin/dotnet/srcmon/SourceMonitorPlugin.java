@@ -55,11 +55,6 @@ public class SourceMonitorPlugin implements Plugin {
     list.add(SourceMonitorSensor.class);
     list.add(SourceMonitorPluginHandler.class);
     list.add(CSharpFileLocator.class);
-    // list.add(LineOfCodeJob.class);
-    // list.add(NonCommendLineOfCodeJob.class);
-    // list.add(StatementJob.class);
-    // list.add(ComplexityJob.class);
-
     return list;
   }
 

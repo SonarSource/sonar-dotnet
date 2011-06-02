@@ -37,12 +37,6 @@ public class GallioMavenPluginHandler extends AbstractDotNetMavenPluginHandler {
   public static final String GROUP_ID = MavenUtils.GROUP_ID_APACHE_MAVEN;
   public static final String ARTIFACT_ID = "maven-dotnet-plugin";
 
-  /**
-   * Constructs a @link{GallioMavenPluginHandler}.
-   */
-  public GallioMavenPluginHandler() {
-  }
-
   @Override
   public void configure(Project project, MavenPlugin plugin) {
     super.configure(project, plugin);

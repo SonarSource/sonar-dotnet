@@ -140,16 +140,15 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
 
     storeFolderMetrics(project, context);
     storeProjectMetrics(project, context);
-    storeSolutionMetrics(project, context);
+    storeSolutionMetrics(context);
   }
 
   /**
    * Stores the metrics at the solution level.
    * 
-   * @param project
    * @param context
    */
-  private void storeSolutionMetrics(Project project, SensorContext context) {
+  private void storeSolutionMetrics(SensorContext context) {
     int countLines = solutionMetrics.getCountLines();
     int ncloc = countLines - solutionMetrics.getCommentLines()
         - solutionMetrics.getDocumentationLines()
@@ -207,7 +206,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
     for (ProjectMetrics metrics : projects.values()) {
       String assemblyName = metrics.getAssemblyName();
       CLRAssembly resource = CLRAssembly.fromName(project, assemblyName);
-      storeMetrics(project, context, metrics, resource);
+      storeMetrics(context, metrics, resource);
       context.saveMeasure(resource, CoreMetrics.PACKAGES,
           (double) metrics.getCountNamespaces());
 
@@ -236,7 +235,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
       CSharpFolder folderResource = CSharpFolder.fromDirectory(project,
           directory);
       // We store the metrics for each folder
-      storeMetrics(project, context, metrics, folderResource);
+      storeMetrics(context, metrics, folderResource);
 
       // Adds distributions
       String classDistrib = solutionMetrics.getClassComplexityDistribution();
@@ -258,7 +257,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
    * @param metric
    * @param resource
    */
-  private void storeMetrics(Project project, SensorContext context,
+  private void storeMetrics(SensorContext context,
       SourceMetric metric, Resource<?> resource) {
     int countLines = metric.getCountLines();
     int ncloc = countLines - metric.getCommentLines()
@@ -347,7 +346,7 @@ public class SourceMonitorSensor extends AbstractDotnetSensor {
     folderMetrics.addFile(fileMetric);
 
     // We Store the file results
-    storeMetrics(project, context, fileMetric, sourceFile);
+    storeMetrics(context, fileMetric, sourceFile);
     
   }
 

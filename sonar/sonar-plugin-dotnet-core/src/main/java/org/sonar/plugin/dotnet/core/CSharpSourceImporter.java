@@ -72,7 +72,8 @@ public class CSharpSourceImporter extends AbstractSourceImporter {
     VisualStudioSolution solution;
     try {
       solution = VisualUtils.getSolution(project);
-    } catch (DotNetProjectException e1) {
+    } catch (DotNetProjectException e) {
+      log.error("Solution parsing error", e);
       return;
     }
     List<VisualStudioProject> projects = solution.getProjects();

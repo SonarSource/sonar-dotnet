@@ -46,12 +46,6 @@ public abstract class AbstractDotNetMavenPluginHandler implements
    */
   private static final String DOTNET_PLUGIN_VERSION = "0.1";
 
-  /**
-   * Constructs a @link{AbstractDotNetMavenPluginHandler}.
-   */
-  public AbstractDotNetMavenPluginHandler() {
-  }
-
   @Override
   public void configure(Project project, MavenPlugin plugin) {
     String[] excludedProjectNames 

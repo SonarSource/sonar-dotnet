@@ -26,6 +26,7 @@ import org.apache.maven.dotnet.commons.project.BinaryReference;
 import org.apache.maven.dotnet.commons.project.DotNetProjectException;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
+import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -84,8 +85,7 @@ public class BinaryDependenciesSensor implements Sensor {
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     String packaging = project.getPackaging();
-    // We only accept the "sln" packaging
-    return "sln".equals(packaging);
+    return VisualStudioUtils.SOLUTION_PACKAGINGS.contains(packaging);
   }
 
 }

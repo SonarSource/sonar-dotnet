@@ -20,6 +20,9 @@
 
 package org.sonar.plugin.dotnet.stylecop;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * This class was made to modelize violations provided by StyleCop reports
  * 
@@ -74,46 +77,13 @@ public class StyleCopViolation {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((filePath == null) ? 0 : filePath.hashCode());
-    result = prime * result + ((key == null) ? 0 : key.hashCode());
-    result = prime * result + ((lineNumber == null) ? 0 : lineNumber.hashCode());
-    result = prime * result + ((message == null) ? 0 : message.hashCode());
-    return result;
+    return HashCodeBuilder.reflectionHashCode(this);
   }
 
   @Override
   @SuppressWarnings("all")
   public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    StyleCopViolation other = (StyleCopViolation) obj;
-    if (filePath == null) {
-      if (other.filePath != null)
-        return false;
-    } else if ( !filePath.equals(other.filePath))
-      return false;
-    if (key == null) {
-      if (other.key != null)
-        return false;
-    } else if ( !key.equals(other.key))
-      return false;
-    if (lineNumber == null) {
-      if (other.lineNumber != null)
-        return false;
-    } else if ( !lineNumber.equals(other.lineNumber))
-      return false;
-    if (message == null) {
-      if (other.message != null)
-        return false;
-    } else if ( !message.equals(other.message))
-      return false;
-    return true;
+    return EqualsBuilder.reflectionEquals(this, obj);
   }
 
 }

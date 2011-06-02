@@ -62,6 +62,7 @@ import com.google.common.collect.Multimap;
  */
 public class GallioResultStaxParser implements GallioResultParser {
 
+  private static final String LOG_PATTERN = "--{} : {}";
   private static final String GALLIO_REPORT_PARSING_ERROR = "gallio report parsing error";
   private static final String GALLIO_URI = "http://www.gallio.org/";
   private static final String ASSEMBLY = "assembly";
@@ -163,7 +164,7 @@ public class GallioResultStaxParser implements GallioResultParser {
     String attributeValue;
     if(null != findAttributeValue(currentTestChildren, ASSEMBLY)){
       attributeValue = findAttributeValue(currentTestChildren, ASSEMBLY);
-      log.debug("--{} : {}", ASSEMBLY, attributeValue);
+      log.debug(LOG_PATTERN, ASSEMBLY, attributeValue);
       testDescription.setAssemblyName(StringUtils.substringBefore(attributeValue, ","));
       parentAssemblyName = testDescription.getAssemblyName();
     }
@@ -188,17 +189,17 @@ public class GallioResultStaxParser implements GallioResultParser {
     String attributeValue;
     if(null != findAttributeValue(currentTestChildren, NAMESPACE)){
       attributeValue = findAttributeValue(currentTestChildren, NAMESPACE);
-      log.debug("--{} : {}", NAMESPACE, attributeValue);
+      log.debug(LOG_PATTERN, NAMESPACE, attributeValue);
       testDescription.setNamespace(attributeValue);
     }
     if(null != findAttributeValue(currentTestChildren, TYPE)){
       attributeValue = findAttributeValue(currentTestChildren, TYPE);
-      log.debug("--{} : {}", TYPE, attributeValue);
+      log.debug(LOG_PATTERN, TYPE, attributeValue);
       testDescription.setClassName(attributeValue);
     }
     if(null != findAttributeValue(currentTestChildren, MEMBER)){
       attributeValue = findAttributeValue(currentTestChildren, MEMBER);
-      log.debug("--{} : {}", MEMBER, attributeValue);
+      log.debug(LOG_PATTERN, MEMBER, attributeValue);
       testDescription.setMethodName(attributeValue);
     }
   }
@@ -207,14 +208,14 @@ public class GallioResultStaxParser implements GallioResultParser {
     String attributeValue;
     if(null != findAttributeValue(currentTestChildren, PATH)){
       attributeValue = findAttributeValue(currentTestChildren, PATH);
-      log.debug("--{} : {}", PATH, attributeValue);
+      log.debug(LOG_PATTERN, PATH, attributeValue);
       File currentSourceFile = new File(attributeValue);
       testDescription.setSourceFile(currentSourceFile);
       sourceFile = currentSourceFile;
     }
     if(null != findAttributeValue(currentTestChildren, LINE)){
       attributeValue = findAttributeValue(currentTestChildren, LINE);
-      log.debug("--{} : {}", LINE, attributeValue);
+      log.debug(LOG_PATTERN, LINE, attributeValue);
       int lineNumber = Integer.valueOf(attributeValue);
       testDescription.setLine(lineNumber);
     }

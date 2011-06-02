@@ -40,14 +40,12 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
   private String description;
   private String scope;
   private String qualifier;
-  private Language language;
 
   protected AbstractCSharpResource(String key, String scope, String qualifier) {
 
     this.scope = scope;
     setKey(key);
-    setLanguage(CSharp.INSTANCE);
-    setQualifier(qualifier);
+    this.qualifier = qualifier;
   }
 
   /**
@@ -58,8 +56,7 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
    */
   public AbstractCSharpResource(String scope, String qualifier) {
     this.scope = scope;
-    setLanguage(CSharp.INSTANCE);
-    setQualifier(qualifier);
+    this.qualifier = qualifier;
   }
 
   public String getName() {
@@ -84,21 +81,12 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
     return scope;
   }
 
-  public void setQualifier(String qualifier) {
-    this.qualifier = qualifier;
-  }
-
   public String getQualifier() {
     return qualifier;
   }
 
   public Language getLanguage() {
-    return language;
-  }
-
-  public Resource<? extends PARENT> setLanguage(Language language) {
-    this.language = language;
-    return this;
+    return CSharp.INSTANCE;
   }
 
   public PARENT getParent() {
@@ -128,7 +116,7 @@ public abstract class AbstractCSharpResource<PARENT extends Resource> extends
   public String toString() {
     return new ToStringBuilder(this).append("key", getKey())
         .append("scope", scope).append("qualifier", qualifier)
-        .append("name", name).append("language", language)
+        .append("name", name)
         .append("description", description).toString();
   }
 

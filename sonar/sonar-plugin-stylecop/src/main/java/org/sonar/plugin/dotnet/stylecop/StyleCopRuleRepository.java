@@ -53,11 +53,6 @@ import org.sonar.plugin.dotnet.stylecop.xml.StyleCopSettings;
  */
 public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
     implements ConfigurationExportable {
-  /**
-   * Constructs a @link{StyleCopRuleRepository}.
-   */
-  public StyleCopRuleRepository() {
-  }
 
   @Override
   public Map<String, String> getBuiltInProfiles() {
@@ -65,11 +60,6 @@ public class StyleCopRuleRepository extends AbstractDotNetRuleRepository
     result.put(CSharpRulesProfile.DEFAULT_WAY, "default-rules.StyleCop");
     result.put(CSharpRulesProfile.DEFAULT_WAY_V2, "default-rules.V2.StyleCop");
     return result;
-  }
-
-  @Override
-  public List<Rule> parseReferential(String fileContent) {
-    return super.parseReferential(fileContent);
   }
 
   @Override

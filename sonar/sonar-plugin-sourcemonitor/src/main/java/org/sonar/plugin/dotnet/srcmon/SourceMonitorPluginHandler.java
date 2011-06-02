@@ -37,8 +37,8 @@ public class SourceMonitorPluginHandler extends
 
   @Override
   public void configure(Project project, MavenPlugin plugin) {
-      super.configure(project, plugin);
-      plugin.setParameter("metricsReportFileName", SourceMonitorPlugin.SOURCE_MONITOR_REPORT);
+    super.configure(project, plugin);
+    plugin.setParameter("metricsReportFileName", SourceMonitorPlugin.SOURCE_MONITOR_REPORT);
   }
 
   public String[] getGoals() {

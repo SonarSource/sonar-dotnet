@@ -156,69 +156,9 @@ public class TestCaseDetail {
     this.name = description.getMethodName();
     if(description.getAssemblyName() == null){
       this.assemblyName="AssemblyNotFound";
+    } else{
+      this.assemblyName = description.getAssemblyName();
     }
-    else{
-      this.assemblyName = description.getAssemblyName();  	  
-    }
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + countAsserts;
-    result = prime * result
-      + ((errorMessage == null) ? 0 : errorMessage.hashCode());
-    result = prime * result + ((name == null) ? 0 : name.hashCode());
-    result = prime * result
-      + ((sourceFile == null) ? 0 : sourceFile.hashCode());
-    result = prime * result
-      + ((stackTrace == null) ? 0 : stackTrace.hashCode());
-    result = prime * result + ((status == null) ? 0 : status.hashCode());
-    result = prime * result + timeMillis;
-    return result;
-  }
-
-  @SuppressWarnings("all")
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    TestCaseDetail other = (TestCaseDetail) obj;
-    if (countAsserts != other.countAsserts)
-      return false;
-    if (errorMessage == null) {
-      if (other.errorMessage != null)
-        return false;
-    } else if (!errorMessage.equals(other.errorMessage))
-      return false;
-    if (name == null) {
-      if (other.name != null)
-        return false;
-    } else if (!name.equals(other.name))
-      return false;
-    if (sourceFile == null) {
-      if (other.sourceFile != null)
-        return false;
-    } else if (!sourceFile.equals(other.sourceFile))
-      return false;
-    if (stackTrace == null) {
-      if (other.stackTrace != null)
-        return false;
-    } else if (!stackTrace.equals(other.stackTrace))
-      return false;
-    if (status == null) {
-      if (other.status != null)
-        return false;
-    } else if (!status.equals(other.status))
-      return false;
-    if (timeMillis != other.timeMillis)
-      return false;
-    return true;
   }
 
 }

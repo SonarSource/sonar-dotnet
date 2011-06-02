@@ -55,12 +55,9 @@ public class StyleCopPluginHandler extends AbstractDotNetMavenPluginHandler {
    * 
    * @param rulesProfile
    * @param rulesRepository
-   * @param serverHttpClient
    * @param exclusions
    */
-  public StyleCopPluginHandler(RulesProfile rulesProfile,
-      StyleCopRuleRepository rulesRepository, ServerHttpClient serverHttpClient) {
-    super();
+  public StyleCopPluginHandler(RulesProfile rulesProfile, StyleCopRuleRepository rulesRepository) {
     this.rulesProfile = rulesProfile;
     this.rulesRepository = rulesRepository;
   }

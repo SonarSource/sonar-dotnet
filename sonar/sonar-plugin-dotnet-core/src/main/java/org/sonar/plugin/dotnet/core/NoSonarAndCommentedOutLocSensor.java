@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Phase;
@@ -103,8 +104,7 @@ public class NoSonarAndCommentedOutLocSensor implements Sensor {
   @Override
   public boolean shouldExecuteOnProject(Project prj) {
     String packaging = prj.getPackaging();
-    // We only accept the "sln" packaging
-    return "sln".equals(packaging);
+    return VisualStudioUtils.SOLUTION_PACKAGINGS.contains(packaging);
   }
 
   private static class CSharpLanguageFootprint implements LanguageFootprint {

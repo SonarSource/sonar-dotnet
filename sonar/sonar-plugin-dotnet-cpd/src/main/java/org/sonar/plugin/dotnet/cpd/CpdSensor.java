@@ -44,6 +44,7 @@ import org.w3c.dom.NodeList;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.utils.ParsingUtils;
@@ -85,9 +86,9 @@ public class CpdSensor implements Sensor, DependsUponMavenPlugin {
   
   public boolean shouldExecuteOnProject(Project project) {
     String packaging = project.getPackaging();
-    // We only accept the "sln" packaging
     String mode = getCpdMode(project);
-    return "sln".equals(packaging) && CPD_DEFAULT_MODE.equalsIgnoreCase(mode);
+    return VisualStudioUtils.SOLUTION_PACKAGINGS.contains(packaging) 
+      && CPD_DEFAULT_MODE.equalsIgnoreCase(mode);
   }
   
   private String getCpdMode(Project project) {

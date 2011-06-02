@@ -102,18 +102,14 @@ public class GallioResultParserTest
     assertEquals(expectedReport, firstReport);
     
     
-		final TestCaseDetail testCaseDetail = new TestCaseDetail();
-		testCaseDetail.setCountAsserts(3);
-		testCaseDetail.setName("BagMultiply");
-		testCaseDetail.setSourceFile(sourcefile);
-		testCaseDetail.setStatus(TestStatus.SUCCESS);
-		testCaseDetail.setTimeMillis(17);
-		
 		Predicate<TestCaseDetail> testCaseDetailPredicate = new Predicate<TestCaseDetail>() {
 			@Override
 			public boolean apply(TestCaseDetail testDetail) {
-				
-				return testCaseDetail.equals(testDetail);
+				return "BagMultiply".equals(testDetail.getName()) 
+				  && 3 == testDetail.getCountAsserts() 
+				  && sourcefile.equals(testDetail.getSourceFile())
+				  && TestStatus.SUCCESS == testDetail.getStatus()
+				  && 17 == testDetail.getTimeMillis();
 			}
 		};
 		

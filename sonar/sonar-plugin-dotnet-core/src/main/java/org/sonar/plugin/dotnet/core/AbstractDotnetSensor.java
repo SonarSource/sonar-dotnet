@@ -26,6 +26,7 @@ package org.sonar.plugin.dotnet.core;
 import java.io.File;
 import java.io.FilenameFilter;
 
+import org.apache.maven.dotnet.commons.project.VisualStudioUtils;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.maven.DependsUponMavenPlugin;
 import org.sonar.api.resources.Project;
@@ -37,11 +38,6 @@ import org.sonar.api.resources.Project;
  */
 public abstract class AbstractDotnetSensor implements Sensor,
     DependsUponMavenPlugin {
-  /**
-   * Constructs a @link{AbstractDotnetMavenCollector}.
-   */
-  public AbstractDotnetSensor() {
-  }
 
   /**
    * Gets the report directory for a given project.
@@ -51,8 +47,7 @@ public abstract class AbstractDotnetSensor implements Sensor,
    * @return the report directory
    */
   public File getReportsDirectory(Project project) {
-    File result = project.getFileSystem().getBuildDir();
-    return result;
+    return project.getFileSystem().getBuildDir();
   }
 
   /**
@@ -90,8 +85,8 @@ public abstract class AbstractDotnetSensor implements Sensor,
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     String packaging = project.getPackaging();
-    // We only accept the "sln" packaging
-    return "sln".equals(packaging);
+    // We only accept the "sln" packaging and the "netpack" packaging
+    return VisualStudioUtils.SOLUTION_PACKAGINGS.contains(packaging);
   }
 
 }

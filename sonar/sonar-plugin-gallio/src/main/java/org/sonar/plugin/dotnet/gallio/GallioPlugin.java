@@ -58,12 +58,7 @@ import org.sonar.plugin.dotnet.core.resource.CSharpFileLocator;
       global = true)
 })
 public class GallioPlugin implements Plugin {
-  /**
-   * Constructs a @link{GallioPlugin}.
-   */
-  public GallioPlugin() {
-  }
-
+  
   public String getDescription() {
     return "A plugin that collects the Gallio test results";
   }
@@ -72,7 +67,6 @@ public class GallioPlugin implements Plugin {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GallioSensor.class);
     list.add(GallioMetrics.class);
-    //list.add(UnitTestDecorator.class);
     list.add(GallioMavenPluginHandler.class);
     list.add(CSharpFileLocator.class);
     return list;
