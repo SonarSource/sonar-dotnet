@@ -31,7 +31,7 @@ Example of pom.xml for a .Net solution
   <artifactId>example</artifactId>
    <version>1.0-SNAPSHOT</version>
   <name>Example Solution .Net</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <!-- 
@@ -92,7 +92,7 @@ Example of pom.xml for a .Net solution
   <artifactId>my-solution</artifactId>
   <version>1.2.3-SNAPSHOT</version>
   <name>My solution</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <visual.studio.solution>MySolution.sln</visual.studio.solution>
@@ -129,7 +129,7 @@ Example of pom.xml for a .Net solution
   <artifactId>my-solution</artifactId>
   <version>1.2.3-SNAPSHOT</version>
   <name>My solution</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <visual.studio.solution>MySolution.sln</visual.studio.solution>
@@ -174,7 +174,7 @@ Example of pom.xml for a .Net solution
   <artifactId>my-solution</artifactId>
   <version>1.2.3-SNAPSHOT</version>
   <name>My solution</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <visual.studio.solution>MySolution.sln</visual.studio.solution>
@@ -219,7 +219,7 @@ Example of pom.xml for a .Net solution
   <artifactId>my-solution</artifactId>
   <version>1.2.3-SNAPSHOT</version>
   <name>My solution</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <visual.studio.solution>MySolution.sln</visual.studio.solution>
