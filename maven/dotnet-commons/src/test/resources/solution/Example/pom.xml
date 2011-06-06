@@ -4,7 +4,7 @@
   <artifactId>example</artifactId>
    <version>1.0-SNAPSHOT</version>
   <name>Example Solution .Net for Maven</name>
-  <packaging>sln</packaging>
+  <packaging>netpack</packaging>
 
   <properties>
     <!-- NOTE : the versions and parameters may be defined as properties 
