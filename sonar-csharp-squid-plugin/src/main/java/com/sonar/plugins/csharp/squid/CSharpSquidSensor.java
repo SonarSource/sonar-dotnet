@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
-import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
@@ -26,6 +25,7 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.CSharpMetric;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 import org.sonar.plugins.csharp.api.source.SourceClass;
 import org.sonar.plugins.csharp.api.source.SourceMember;
 import org.sonar.squid.Squid;
@@ -40,30 +40,21 @@ import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
 @Phase(name = Phase.Name.PRE)
-public final class CSharpSquidSensor implements Sensor {
-  
+public final class CSharpSquidSensor extends AbstractCSharpSensor {
+
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12 };
   private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = { 0, 5, 10, 20, 30, 60, 90 };
   private CSharp cSharp;
   private CSharpResourcesBridge cSharpResourcesBridge;
   private ResourceCreationLock resourceCreationLock;
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
 
   public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    super(microsoftWindowsEnvironment);
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
-    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
-  }
-
-  public boolean shouldExecuteOnProject(Project project) {
-    if (project.isRoot()) {
-      return false;
-    }
-    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey())
-        && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isTest();
   }
 
   public void analyse(Project project, SensorContext context) {
@@ -116,6 +107,7 @@ public final class CSharpSquidSensor implements Sensor {
     }
 
     // and lock everything to prevent future modifications
+    LOG.debug("Locking the C# Resource Bridge and the Sonar Index: future modifications won't be possible.");
     cSharpResourcesBridge.lock();
     resourceCreationLock.lock();
   }
