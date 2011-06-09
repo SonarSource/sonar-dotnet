@@ -10,9 +10,6 @@ public final class CSharpSquidConstants {
   private CSharpSquidConstants() {
   }
 
-  public static final String PLUGIN_KEY = "csharp-squid";
-  public static final String PLUGIN_NAME = "C# Squid";
-
   public static final String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.cs.minimumTokens";
 
   public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.cs.ignoreLiteral";

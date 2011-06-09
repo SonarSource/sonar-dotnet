@@ -10,9 +10,9 @@ import java.util.List;
 
 import org.sonar.api.CoreProperties;
 import org.sonar.api.Extension;
-import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.SonarPlugin;
 
 import com.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 import com.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
@@ -25,19 +25,7 @@ import com.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
     @Property(key = CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY, defaultValue = CSharpSquidConstants.CPD_IGNORE_LITERALS_DEFVALUE
         + "", name = "Ignore literals", description = "if true, CPD ignores literal value differences when evaluating a duplicate block. "
         + "This means that 'my first text'; and 'my second text'; will be seen as equivalent.", project = true, global = true) })
-public class CSharpSquidPlugin implements Plugin {
-
-  public String getKey() {
-    return CSharpSquidConstants.PLUGIN_KEY;
-  }
-
-  public String getName() {
-    return CSharpSquidConstants.PLUGIN_NAME;
-  }
-
-  public String getDescription() {
-    return "Analysis of C# projects";
-  }
+public class CSharpSquidPlugin extends SonarPlugin {
 
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
