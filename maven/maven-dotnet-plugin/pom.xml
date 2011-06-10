@@ -51,12 +51,12 @@
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>dotnet-commons</artifactId>
-      <version>0.7-SNAPSHOT</version>
+      <version>0.6</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>maven-dotnet-runtime</artifactId>
-      <version>0.7-SNAPSHOT</version>
+      <version>0.6</version>
       <optional>true</optional>
     </dependency>
     <dependency>
