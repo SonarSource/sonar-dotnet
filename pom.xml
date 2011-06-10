@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.codehaus.sonar-plugins</groupId>
+		<artifactId>parent</artifactId>
+		<version>9</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
+	<groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+	<artifactId>parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+
+	<name>Sonar .NET Ecosystem</name>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+	<organization>
+		<name>Codehaus Sonar Plugins</name>
+		<url>http://sonar-plugins.codehaus.org/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>fabemn</id>
+			<name>Fabrice Bellingard</name>
+		</developer>
+		<developer>
+			<id>alex</id>
+			<name>Alexandre Victoor</name>
+		</developer>
+		<developer>
+			<id>jose</id>
+			<name>Jose Chillan</name>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>maven</module>
+		<module>sonar</module>
+		<module>tools</module>
+	</modules>
+
+	<scm>
+		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
+		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
+		<url>http://svn.sonar-plugins.codehaus.org</url>
+	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>http://ci.codehaus.org/browse/SONAR-DOTNET</url>
+	</ciManagement>
+
+	<properties>
+		<license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
+		<jdk.min.version>1.5</jdk.min.version>
+		<sonar.buildVersion>2.9-SNAPSHOT</sonar.buildVersion>
+	</properties>
+
+</project>

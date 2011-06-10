@@ -2,43 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
-		<groupId>org.codehaus.sonar-plugins</groupId>
+		<groupId>org.codehaus.sonar-plugins.dotnet</groupId>
 		<artifactId>parent</artifactId>
-		<version>9</version>
-		<relativePath>../../parent</relativePath>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1</version>
 
 	<name>.NET tools</name>
-	<inceptionYear>2011</inceptionYear>
-	<!--  
-	<url>http://docs.codehaus.org/display/SONAR/XXXXXXX</url>
-	-->
-	<organization>
-		<name>Codehaus Sonar Plugins</name>
-		<url>http://sonar-plugins.codehaus.org/</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>fabemn</id>
-			<name>Fabrice Bellingard</name>
-		</developer>
-		<developer>
-			<id>alex</id>
-			<name>Alexandre Victoor</name>
-		</developer>
-		<developer>
-			<id>jose</id>
-			<name>Jose Chillan</name>
-		</developer>
-	</developers>
 
 	<modules>
 		<module>dotnet-tools-commons</module>
@@ -48,23 +22,9 @@
 	</modules>
 
 	<scm>
-		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/csharp/tools</connection>
-		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/csharp/tools</developerConnection>
-		<url>http://svn.sonar-plugins.codehaus.org</url>
+		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</connection>
+		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</developerConnection>
 	</scm>
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14696</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Bamboo</system>
-		<url>http://ci.codehaus.org/browse/SONAR-CSHARP</url>
-	</ciManagement>
-
-	<properties>
-		<license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
-		<jdk.min.version>1.5</jdk.min.version>
-	</properties>
 
 	<dependencies>
 		<!-- Unit tests -->
@@ -100,7 +60,7 @@
 			<dependency>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-plugin-api</artifactId>
-				<version>2.7</version>
+				<version>${sonar.buildVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-lang</groupId>
@@ -136,7 +96,7 @@
 			<dependency>
 				<groupId>org.codehaus.sonar</groupId>
 				<artifactId>sonar-testing-harness</artifactId>
-				<version>2.7</version>
+				<version>${sonar.buildVersion}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hamcrest</groupId>
