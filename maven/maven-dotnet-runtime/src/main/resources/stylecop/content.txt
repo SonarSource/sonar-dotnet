@@ -1,8 +1,0 @@
-license.txt
-Microsoft.SourceAnalysis.Targets
-Microsoft.StyleCop.CSharp.dll
-Microsoft.StyleCop.CSharp.Rules.dll
-Microsoft.StyleCop.dll
-Microsoft.StyleCop.Targets
-Settings.StyleCop
-StyleCopSettingsEditor.exe
