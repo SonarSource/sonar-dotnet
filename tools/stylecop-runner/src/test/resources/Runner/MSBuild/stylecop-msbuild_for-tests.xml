@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="StyleCopLaunch" ToolsVersion="3.5">
+    <PropertyGroup>
+        <ProjectRoot>SOLUTIONDIR</ProjectRoot>
+        <StyleCopRoot>StyleCopDir</StyleCopRoot>
+    </PropertyGroup>
+    <UsingTask TaskName="StyleCopTask" AssemblyFile="$(StyleCopRoot)\Microsoft.StyleCop.dll"></UsingTask>
+    <ItemGroup>
+        <Project Include="PROJECT.csproj"></Project>
+    </ItemGroup>
+    <Target Name="StyleCopLaunch">
+        <CreateItem Include="%(Project.RootDir)%(Project.Directory)**\*.cs">
+            <Output ItemName="SourceAnalysisFiles" TaskParameter="Include"></Output>
+        </CreateItem>
+        <StyleCopTask MaxViolationCount="-1" OverrideSettingsFile="STYLECOPRULEFILE"
+            OutputFile="REPORTFILE"
+            TreatErrorsAsWarnings="true" ForceFullAnalysis="true"
+            SourceFiles="@(SourceAnalysisFiles);@(CSFile)"
+            ProjectFullPath="SOLUTIONFILE.sln"></StyleCopTask>
+    </Target>
+</Project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="StyleCopLaunch" ToolsVersion="3.5">
+    <PropertyGroup>
+        <ProjectRoot>C:\Sonar\Projects\CSharp\Resources\OSS-Projects\Log4net</ProjectRoot>
+        <StyleCopRoot>C:/Program Files/Microsoft StyleCop 4.4.0.14</StyleCopRoot>
+    </PropertyGroup>
+    <UsingTask TaskName="StyleCopTask" AssemblyFile="$(StyleCopRoot)\Microsoft.StyleCop.dll"></UsingTask>
+    <ItemGroup>
+        <Project Include="C:\Sonar\Projects\CSharp\Resources\OSS-Projects\Log4net\src\log4net.csproj"></Project>
+    </ItemGroup>
+    <Target Name="StyleCopLaunch">
+        <CreateItem Include="%(Project.RootDir)%(Project.Directory)**\*.cs">
+            <Output ItemName="SourceAnalysisFiles" TaskParameter="Include"></Output>
+        </CreateItem>
+        <StyleCopTask MaxViolationCount="-1" OverrideSettingsFile="/styleCopRuleFile"
+            OutputFile="/reportFile"
+            TreatErrorsAsWarnings="true" ForceFullAnalysis="true"
+            SourceFiles="@(SourceAnalysisFiles);@(CSFile)"
+            ProjectFullPath="C:\Sonar\Projects\CSharp\Resources\OSS-Projects\Log4net\src\log4net.sln"></StyleCopTask>
+    </Target>
+</Project>
