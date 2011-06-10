@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gendarme-output date="30/03/2011 08:29:52">
+  <files>
+    <file Name="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">C:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Application\bin\Debug\Example.Application.exe</file>
+    <file Name="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">C:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\bin\Debug\Example.Core.dll</file>
+  </files>
+  <rules>
+    <rule Name="AddMissingTypeInheritanceDemandRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.AddMissingTypeInheritanceDemandRule(2.10)">Gendarme.Rules.Security.Cas.AddMissingTypeInheritanceDemandRule</rule>
+    <rule Name="DoNotExposeFieldsInSecuredTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.DoNotExposeFieldsInSecuredTypeRule(2.10)">Gendarme.Rules.Security.Cas.DoNotExposeFieldsInSecuredTypeRule</rule>
+    <rule Name="DoNotExposeMethodsProtectedByLinkDemandRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.DoNotExposeMethodsProtectedByLinkDemandRule(2.10)">Gendarme.Rules.Security.Cas.DoNotExposeMethodsProtectedByLinkDemandRule</rule>
+    <rule Name="DoNotReduceTypeSecurityOnMethodsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.DoNotReduceTypeSecurityOnMethodsRule(2.10)">Gendarme.Rules.Security.Cas.DoNotReduceTypeSecurityOnMethodsRule</rule>
+    <rule Name="ReviewSealedTypeWithInheritanceDemandRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.ReviewSealedTypeWithInheritanceDemandRule(2.10)">Gendarme.Rules.Security.Cas.ReviewSealedTypeWithInheritanceDemandRule</rule>
+    <rule Name="ReviewSuppressUnmanagedCodeSecurityUsageRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.ReviewSuppressUnmanagedCodeSecurityUsageRule(2.10)">Gendarme.Rules.Security.Cas.ReviewSuppressUnmanagedCodeSecurityUsageRule</rule>
+    <rule Name="SecureGetObjectDataOverridesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.Cas.SecureGetObjectDataOverridesRule(2.10)">Gendarme.Rules.Security.Cas.SecureGetObjectDataOverridesRule</rule>
+    <rule Name="AvoidArgumentExceptionDefaultConstructorRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.AvoidArgumentExceptionDefaultConstructorRule(2.10)">Gendarme.Rules.Exceptions.AvoidArgumentExceptionDefaultConstructorRule</rule>
+    <rule Name="AvoidThrowingBasicExceptionsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.AvoidThrowingBasicExceptionsRule(2.10)">Gendarme.Rules.Exceptions.AvoidThrowingBasicExceptionsRule</rule>
+    <rule Name="DoNotDestroyStackTraceRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.DoNotDestroyStackTraceRule(2.10)">Gendarme.Rules.Exceptions.DoNotDestroyStackTraceRule</rule>
+    <rule Name="DoNotThrowInUnexpectedLocationRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.DoNotThrowInUnexpectedLocationRule(2.10)">Gendarme.Rules.Exceptions.DoNotThrowInUnexpectedLocationRule</rule>
+    <rule Name="DoNotThrowReservedExceptionRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.DoNotThrowReservedExceptionRule(2.10)">Gendarme.Rules.Exceptions.DoNotThrowReservedExceptionRule</rule>
+    <rule Name="DoNotSwallowErrorsCatchingNonSpecificExceptionsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.DoNotSwallowErrorsCatchingNonSpecificExceptionsRule(2.10)">Gendarme.Rules.Exceptions.DoNotSwallowErrorsCatchingNonSpecificExceptionsRule</rule>
+    <rule Name="ExceptionShouldBeVisibleRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.ExceptionShouldBeVisibleRule(2.10)">Gendarme.Rules.Exceptions.ExceptionShouldBeVisibleRule</rule>
+    <rule Name="InstantiateArgumentExceptionCorrectlyRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule(2.10)">Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule</rule>
+    <rule Name="MissingExceptionConstructorsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Exceptions.MissingExceptionConstructorsRule(2.10)">Gendarme.Rules.Exceptions.MissingExceptionConstructorsRule</rule>
+    <rule Name="SystemWindowsFormsExecutableTargetRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.UI.SystemWindowsFormsExecutableTargetRule(2.10)">Gendarme.Rules.UI.SystemWindowsFormsExecutableTargetRule</rule>
+    <rule Name="UseSTAThreadAttributeOnSWFEntryPointsRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.UI.UseSTAThreadAttributeOnSWFEntryPointsRule(2.10)">Gendarme.Rules.UI.UseSTAThreadAttributeOnSWFEntryPointsRule</rule>
+    <rule Name="AvoidMethodWithUnusedGenericTypeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Generic.AvoidMethodWithUnusedGenericTypeRule(2.10)">Gendarme.Rules.Design.Generic.AvoidMethodWithUnusedGenericTypeRule</rule>
+    <rule Name="DoNotExposeNestedGenericSignaturesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule(2.10)">Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule</rule>
+    <rule Name="ImplementGenericCollectionInterfacesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Generic.ImplementGenericCollectionInterfacesRule(2.10)">Gendarme.Rules.Design.Generic.ImplementGenericCollectionInterfacesRule</rule>
+    <rule Name="PreferGenericsOverRefObjectRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Generic.PreferGenericsOverRefObjectRule(2.10)">Gendarme.Rules.Design.Generic.PreferGenericsOverRefObjectRule</rule>
+    <rule Name="UseGenericEventHandlerRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Generic.UseGenericEventHandlerRule(2.10)">Gendarme.Rules.Design.Generic.UseGenericEventHandlerRule</rule>
+    <rule Name="AbstractTypesShouldNotHavePublicConstructorsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AbstractTypesShouldNotHavePublicConstructorsRule(2.10)">Gendarme.Rules.Design.AbstractTypesShouldNotHavePublicConstructorsRule</rule>
+    <rule Name="AttributeArgumentsShouldHaveAccessorsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AttributeArgumentsShouldHaveAccessorsRule(2.10)">Gendarme.Rules.Design.AttributeArgumentsShouldHaveAccessorsRule</rule>
+    <rule Name="AvoidMultidimensionalIndexerRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidMultidimensionalIndexerRule(2.10)">Gendarme.Rules.Design.AvoidMultidimensionalIndexerRule</rule>
+    <rule Name="AvoidPropertiesWithoutGetAccessorRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidPropertiesWithoutGetAccessorRule(2.10)">Gendarme.Rules.Design.AvoidPropertiesWithoutGetAccessorRule</rule>
+    <rule Name="AvoidVisibleFieldsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidVisibleFieldsRule(2.10)">Gendarme.Rules.Design.AvoidVisibleFieldsRule</rule>
+    <rule Name="AvoidRefAndOutParametersRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidRefAndOutParametersRule(2.10)">Gendarme.Rules.Design.AvoidRefAndOutParametersRule</rule>
+    <rule Name="AvoidSmallNamespaceRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidSmallNamespaceRule(2.10)">Gendarme.Rules.Design.AvoidSmallNamespaceRule</rule>
+    <rule Name="AvoidVisibleNestedTypesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidVisibleNestedTypesRule(2.10)">Gendarme.Rules.Design.AvoidVisibleNestedTypesRule</rule>
+    <rule Name="ConsiderAddingInterfaceRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderAddingInterfaceRule(2.10)">Gendarme.Rules.Design.ConsiderAddingInterfaceRule</rule>
+    <rule Name="ConsiderConvertingFieldToNullableRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderConvertingFieldToNullableRule(2.10)">Gendarme.Rules.Design.ConsiderConvertingFieldToNullableRule</rule>
+    <rule Name="ConsiderConvertingMethodToPropertyRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule(2.10)">Gendarme.Rules.Design.ConsiderConvertingMethodToPropertyRule</rule>
+    <rule Name="ConsiderUsingStaticTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)">Gendarme.Rules.Design.ConsiderUsingStaticTypeRule</rule>
+    <rule Name="DeclareEventHandlersCorrectlyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.DeclareEventHandlersCorrectlyRule(2.10)">Gendarme.Rules.Design.DeclareEventHandlersCorrectlyRule</rule>
+    <rule Name="DisposableTypesShouldHaveFinalizerRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.DisposableTypesShouldHaveFinalizerRule(2.10)">Gendarme.Rules.Design.DisposableTypesShouldHaveFinalizerRule</rule>
+    <rule Name="DoNotDeclareVirtualMethodsInSealedTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.DoNotDeclareVirtualMethodsInSealedTypeRule(2.10)">Gendarme.Rules.Design.DoNotDeclareVirtualMethodsInSealedTypeRule</rule>
+    <rule Name="DoNotDeclareProtectedMembersInSealedTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.DoNotDeclareProtectedMembersInSealedTypeRule(2.10)">Gendarme.Rules.Design.DoNotDeclareProtectedMembersInSealedTypeRule</rule>
+    <rule Name="EnsureSymmetryForOverloadedOperatorsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.EnsureSymmetryForOverloadedOperatorsRule(2.10)">Gendarme.Rules.Design.EnsureSymmetryForOverloadedOperatorsRule</rule>
+    <rule Name="EnumsShouldDefineAZeroValueRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.EnumsShouldDefineAZeroValueRule(2.10)">Gendarme.Rules.Design.EnumsShouldDefineAZeroValueRule</rule>
+    <rule Name="EnumsShouldUseInt32Rule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.EnumsShouldUseInt32Rule(2.10)">Gendarme.Rules.Design.EnumsShouldUseInt32Rule</rule>
+    <rule Name="FinalizersShouldBeProtectedRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.FinalizersShouldBeProtectedRule(2.10)">Gendarme.Rules.Design.FinalizersShouldBeProtectedRule</rule>
+    <rule Name="FlagsShouldNotDefineAZeroValueRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.FlagsShouldNotDefineAZeroValueRule(2.10)">Gendarme.Rules.Design.FlagsShouldNotDefineAZeroValueRule</rule>
+    <rule Name="ImplementEqualsAndGetHashCodeInPairRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ImplementEqualsAndGetHashCodeInPairRule(2.10)">Gendarme.Rules.Design.ImplementEqualsAndGetHashCodeInPairRule</rule>
+    <rule Name="ImplementIComparableCorrectlyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ImplementIComparableCorrectlyRule(2.10)">Gendarme.Rules.Design.ImplementIComparableCorrectlyRule</rule>
+    <rule Name="InternalNamespacesShouldNotExposeTypesRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.InternalNamespacesShouldNotExposeTypesRule(2.10)">Gendarme.Rules.Design.InternalNamespacesShouldNotExposeTypesRule</rule>
+    <rule Name="MainShouldNotBePublicRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MainShouldNotBePublicRule(2.10)">Gendarme.Rules.Design.MainShouldNotBePublicRule</rule>
+    <rule Name="MarkAssemblyWithAssemblyVersionRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithAssemblyVersionRule(2.10)">Gendarme.Rules.Design.MarkAssemblyWithAssemblyVersionRule</rule>
+    <rule Name="MarkAssemblyWithCLSCompliantRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule(2.10)">Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule</rule>
+    <rule Name="MarkAssemblyWithComVisibleRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithComVisibleRule(2.10)">Gendarme.Rules.Design.MarkAssemblyWithComVisibleRule</rule>
+    <rule Name="MissingAttributeUsageOnCustomAttributeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MissingAttributeUsageOnCustomAttributeRule(2.10)">Gendarme.Rules.Design.MissingAttributeUsageOnCustomAttributeRule</rule>
+    <rule Name="OperatorEqualsShouldBeOverloadedRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.OperatorEqualsShouldBeOverloadedRule(2.10)">Gendarme.Rules.Design.OperatorEqualsShouldBeOverloadedRule</rule>
+    <rule Name="OverrideEqualsMethodRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.OverrideEqualsMethodRule(2.10)">Gendarme.Rules.Design.OverrideEqualsMethodRule</rule>
+    <rule Name="PreferEventsOverMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.PreferEventsOverMethodsRule(2.10)">Gendarme.Rules.Design.PreferEventsOverMethodsRule</rule>
+    <rule Name="PreferIntegerOrStringForIndexersRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.PreferIntegerOrStringForIndexersRule(2.10)">Gendarme.Rules.Design.PreferIntegerOrStringForIndexersRule</rule>
+    <rule Name="PreferXmlAbstractionsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.PreferXmlAbstractionsRule(2.10)">Gendarme.Rules.Design.PreferXmlAbstractionsRule</rule>
+    <rule Name="ProvideAlternativeNamesForOperatorOverloadsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ProvideAlternativeNamesForOperatorOverloadsRule(2.10)">Gendarme.Rules.Design.ProvideAlternativeNamesForOperatorOverloadsRule</rule>
+    <rule Name="TypesShouldBeInsideNamespacesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.TypesShouldBeInsideNamespacesRule(2.10)">Gendarme.Rules.Design.TypesShouldBeInsideNamespacesRule</rule>
+    <rule Name="TypesWithDisposableFieldsShouldBeDisposableRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.TypesWithDisposableFieldsShouldBeDisposableRule(2.10)">Gendarme.Rules.Design.TypesWithDisposableFieldsShouldBeDisposableRule</rule>
+    <rule Name="TypesWithNativeFieldsShouldBeDisposableRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.TypesWithNativeFieldsShouldBeDisposableRule(2.10)">Gendarme.Rules.Design.TypesWithNativeFieldsShouldBeDisposableRule</rule>
+    <rule Name="UseFlagsAttributeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.UseFlagsAttributeRule(2.10)">Gendarme.Rules.Design.UseFlagsAttributeRule</rule>
+    <rule Name="UseCorrectDisposeSignaturesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.UseCorrectDisposeSignaturesRule(2.10)">Gendarme.Rules.Design.UseCorrectDisposeSignaturesRule</rule>
+    <rule Name="ImplementICloneableCorrectlyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ImplementICloneableCorrectlyRule(2.10)">Gendarme.Rules.Design.ImplementICloneableCorrectlyRule</rule>
+    <rule Name="AvoidExtensionMethodOnSystemObjectRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule(2.10)">Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule</rule>
+    <rule Name="AvoidComplexMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Maintainability.AvoidComplexMethodsRule(2.10)">Gendarme.Rules.Maintainability.AvoidComplexMethodsRule</rule>
+    <rule Name="AvoidDeepInheritanceTreeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Maintainability.AvoidDeepInheritanceTreeRule(2.10)">Gendarme.Rules.Maintainability.AvoidDeepInheritanceTreeRule</rule>
+    <rule Name="AvoidUnnecessarySpecializationRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule(2.10)">Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule</rule>
+    <rule Name="ConsiderUsingStopwatchRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Maintainability.ConsiderUsingStopwatchRule(2.10)">Gendarme.Rules.Maintainability.ConsiderUsingStopwatchRule</rule>
+    <rule Name="PreferStringIsNullOrEmptyRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Maintainability.PreferStringIsNullOrEmptyRule(2.10)">Gendarme.Rules.Maintainability.PreferStringIsNullOrEmptyRule</rule>
+    <rule Name="CallBaseMethodsOnISerializableTypesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.CallBaseMethodsOnISerializableTypesRule(2.10)">Gendarme.Rules.Serialization.CallBaseMethodsOnISerializableTypesRule</rule>
+    <rule Name="DeserializeOptionalFieldRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.DeserializeOptionalFieldRule(2.10)">Gendarme.Rules.Serialization.DeserializeOptionalFieldRule</rule>
+    <rule Name="ImplementISerializableCorrectlyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.ImplementISerializableCorrectlyRule(2.10)">Gendarme.Rules.Serialization.ImplementISerializableCorrectlyRule</rule>
+    <rule Name="MarkAllNonSerializableFieldsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.MarkAllNonSerializableFieldsRule(2.10)">Gendarme.Rules.Serialization.MarkAllNonSerializableFieldsRule</rule>
+    <rule Name="MarkEnumerationsAsSerializableRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.MarkEnumerationsAsSerializableRule(2.10)">Gendarme.Rules.Serialization.MarkEnumerationsAsSerializableRule</rule>
+    <rule Name="MissingSerializableAttributeOnISerializableTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule(2.10)">Gendarme.Rules.Serialization.MissingSerializableAttributeOnISerializableTypeRule</rule>
+    <rule Name="MissingSerializationConstructorRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.MissingSerializationConstructorRule(2.10)">Gendarme.Rules.Serialization.MissingSerializationConstructorRule</rule>
+    <rule Name="UseCorrectSignatureForSerializationMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.UseCorrectSignatureForSerializationMethodsRule(2.10)">Gendarme.Rules.Serialization.UseCorrectSignatureForSerializationMethodsRule</rule>
+    <rule Name="AvoidRedundancyInMethodNameRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.AvoidRedundancyInMethodNameRule(2.10)">Gendarme.Rules.Naming.AvoidRedundancyInMethodNameRule</rule>
+    <rule Name="AvoidRedundancyInTypeNameRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.AvoidRedundancyInTypeNameRule(2.10)">Gendarme.Rules.Naming.AvoidRedundancyInTypeNameRule</rule>
+    <rule Name="AvoidNonAlphanumericIdentifierRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.AvoidNonAlphanumericIdentifierRule(2.10)">Gendarme.Rules.Naming.AvoidNonAlphanumericIdentifierRule</rule>
+    <rule Name="DoNotPrefixEventsWithAfterOrBeforeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.DoNotPrefixEventsWithAfterOrBeforeRule(2.10)">Gendarme.Rules.Naming.DoNotPrefixEventsWithAfterOrBeforeRule</rule>
+    <rule Name="DoNotPrefixValuesWithEnumNameRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.DoNotPrefixValuesWithEnumNameRule(2.10)">Gendarme.Rules.Naming.DoNotPrefixValuesWithEnumNameRule</rule>
+    <rule Name="DoNotUseReservedInEnumValueNamesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.DoNotUseReservedInEnumValueNamesRule(2.10)">Gendarme.Rules.Naming.DoNotUseReservedInEnumValueNamesRule</rule>
+    <rule Name="ParameterNamesShouldMatchOverriddenMethodRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule(2.10)">Gendarme.Rules.Naming.ParameterNamesShouldMatchOverriddenMethodRule</rule>
+    <rule Name="UseCorrectCasingRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.UseCorrectCasingRule(2.10)">Gendarme.Rules.Naming.UseCorrectCasingRule</rule>
+    <rule Name="UseCorrectPrefixRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.UseCorrectPrefixRule(2.10)">Gendarme.Rules.Naming.UseCorrectPrefixRule</rule>
+    <rule Name="UsePluralNameInEnumFlagsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.UsePluralNameInEnumFlagsRule(2.10)">Gendarme.Rules.Naming.UsePluralNameInEnumFlagsRule</rule>
+    <rule Name="UsePreferredTermsRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.UsePreferredTermsRule(2.10)">Gendarme.Rules.Naming.UsePreferredTermsRule</rule>
+    <rule Name="UseSingularNameInEnumsUnlessAreFlagsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.UseSingularNameInEnumsUnlessAreFlagsRule(2.10)">Gendarme.Rules.Naming.UseSingularNameInEnumsUnlessAreFlagsRule</rule>
+    <rule Name="DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule(2.10)">Gendarme.Rules.Interoperability.DelegatesPassedToNativeCodeMustIncludeExceptionHandlingRule</rule>
+    <rule Name="DoNotAssumeIntPtrSizeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.DoNotAssumeIntPtrSizeRule(2.10)">Gendarme.Rules.Interoperability.DoNotAssumeIntPtrSizeRule</rule>
+    <rule Name="GetLastErrorMustBeCalledRightAfterPInvokeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.GetLastErrorMustBeCalledRightAfterPInvokeRule(2.10)">Gendarme.Rules.Interoperability.GetLastErrorMustBeCalledRightAfterPInvokeRule</rule>
+    <rule Name="MarshalBooleansInPInvokeDeclarationsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.MarshalBooleansInPInvokeDeclarationsRule(2.10)">Gendarme.Rules.Interoperability.MarshalBooleansInPInvokeDeclarationsRule</rule>
+    <rule Name="MarshalStringsInPInvokeDeclarationsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.MarshalStringsInPInvokeDeclarationsRule(2.10)">Gendarme.Rules.Interoperability.MarshalStringsInPInvokeDeclarationsRule</rule>
+    <rule Name="PInvokeShouldNotBeVisibleRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.PInvokeShouldNotBeVisibleRule(2.10)">Gendarme.Rules.Interoperability.PInvokeShouldNotBeVisibleRule</rule>
+    <rule Name="UseManagedAlternativesToPInvokeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Interoperability.UseManagedAlternativesToPInvokeRule(2.10)">Gendarme.Rules.Interoperability.UseManagedAlternativesToPInvokeRule</rule>
+    <rule Name="AvoidLargeNumberOfLocalVariablesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidLargeNumberOfLocalVariablesRule(2.10)">Gendarme.Rules.Performance.AvoidLargeNumberOfLocalVariablesRule</rule>
+    <rule Name="AvoidLargeStructureRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidLargeStructureRule(2.10)">Gendarme.Rules.Performance.AvoidLargeStructureRule</rule>
+    <rule Name="AvoidReturningArraysOnPropertiesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidReturningArraysOnPropertiesRule(2.10)">Gendarme.Rules.Performance.AvoidReturningArraysOnPropertiesRule</rule>
+    <rule Name="AvoidTypeGetTypeForConstantStringsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidTypeGetTypeForConstantStringsRule(2.10)">Gendarme.Rules.Performance.AvoidTypeGetTypeForConstantStringsRule</rule>
+    <rule Name="AvoidUncalledPrivateCodeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule(2.10)">Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule</rule>
+    <rule Name="AvoidUninstantiatedInternalClassesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule(2.10)">Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule</rule>
+    <rule Name="AvoidUnneededCallsOnStringRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnneededCallsOnStringRule(2.10)">Gendarme.Rules.Performance.AvoidUnneededCallsOnStringRule</rule>
+    <rule Name="AvoidUnneededFieldInitializationRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnneededFieldInitializationRule(2.10)">Gendarme.Rules.Performance.AvoidUnneededFieldInitializationRule</rule>
+    <rule Name="AvoidUnneededUnboxingRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnneededUnboxingRule(2.10)">Gendarme.Rules.Performance.AvoidUnneededUnboxingRule</rule>
+    <rule Name="AvoidUnsealedConcreteAttributesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnsealedConcreteAttributesRule(2.10)">Gendarme.Rules.Performance.AvoidUnsealedConcreteAttributesRule</rule>
+    <rule Name="AvoidUnusedParametersRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnusedParametersRule(2.10)">Gendarme.Rules.Performance.AvoidUnusedParametersRule</rule>
+    <rule Name="AvoidUnusedPrivateFieldsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule(2.10)">Gendarme.Rules.Performance.AvoidUnusedPrivateFieldsRule</rule>
+    <rule Name="CompareWithEmptyStringEfficientlyRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.CompareWithEmptyStringEfficientlyRule(2.10)">Gendarme.Rules.Performance.CompareWithEmptyStringEfficientlyRule</rule>
+    <rule Name="ConsiderCustomAccessorsForNonVisibleEventsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.ConsiderCustomAccessorsForNonVisibleEventsRule(2.10)">Gendarme.Rules.Performance.ConsiderCustomAccessorsForNonVisibleEventsRule</rule>
+    <rule Name="DoNotIgnoreMethodResultRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.DoNotIgnoreMethodResultRule(2.10)">Gendarme.Rules.Performance.DoNotIgnoreMethodResultRule</rule>
+    <rule Name="RemoveUnneededFinalizerRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.RemoveUnneededFinalizerRule(2.10)">Gendarme.Rules.Performance.RemoveUnneededFinalizerRule</rule>
+    <rule Name="UseSuppressFinalizeOnIDisposableTypeWithFinalizerRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.UseSuppressFinalizeOnIDisposableTypeWithFinalizerRule(2.10)">Gendarme.Rules.Performance.UseSuppressFinalizeOnIDisposableTypeWithFinalizerRule</rule>
+    <rule Name="ImplementEqualsTypeRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.ImplementEqualsTypeRule(2.10)">Gendarme.Rules.Performance.ImplementEqualsTypeRule</rule>
+    <rule Name="MathMinMaxCandidateRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.MathMinMaxCandidateRule(2.10)">Gendarme.Rules.Performance.MathMinMaxCandidateRule</rule>
+    <rule Name="OverrideValueTypeDefaultsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.OverrideValueTypeDefaultsRule(2.10)">Gendarme.Rules.Performance.OverrideValueTypeDefaultsRule</rule>
+    <rule Name="PreferCharOverloadRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.PreferCharOverloadRule(2.10)">Gendarme.Rules.Performance.PreferCharOverloadRule</rule>
+    <rule Name="PreferLiteralOverInitOnlyFieldsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.PreferLiteralOverInitOnlyFieldsRule(2.10)">Gendarme.Rules.Performance.PreferLiteralOverInitOnlyFieldsRule</rule>
+    <rule Name="RemoveUnusedLocalVariablesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.RemoveUnusedLocalVariablesRule(2.10)">Gendarme.Rules.Performance.RemoveUnusedLocalVariablesRule</rule>
+    <rule Name="ReviewLinqMethodRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.ReviewLinqMethodRule(2.10)">Gendarme.Rules.Performance.ReviewLinqMethodRule</rule>
+    <rule Name="UseIsOperatorRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.UseIsOperatorRule(2.10)">Gendarme.Rules.Performance.UseIsOperatorRule</rule>
+    <rule Name="UseStringEmptyRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.UseStringEmptyRule(2.10)">Gendarme.Rules.Performance.UseStringEmptyRule</rule>
+    <rule Name="UseTypeEmptyTypesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.UseTypeEmptyTypesRule(2.10)">Gendarme.Rules.Performance.UseTypeEmptyTypesRule</rule>
+    <rule Name="AttributeStringLiteralsShouldParseCorrectlyRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.AttributeStringLiteralsShouldParseCorrectlyRule(2.10)">Gendarme.Rules.Correctness.AttributeStringLiteralsShouldParseCorrectlyRule</rule>
+    <rule Name="AvoidConstructorsInStaticTypesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.AvoidConstructorsInStaticTypesRule(2.10)">Gendarme.Rules.Correctness.AvoidConstructorsInStaticTypesRule</rule>
+    <rule Name="AvoidFloatingPointEqualityRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule(2.10)">Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule</rule>
+    <rule Name="DoNotRecurseInEqualityRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.DoNotRecurseInEqualityRule(2.10)">Gendarme.Rules.Correctness.DoNotRecurseInEqualityRule</rule>
+    <rule Name="BadRecursiveInvocationRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.BadRecursiveInvocationRule(2.10)">Gendarme.Rules.Correctness.BadRecursiveInvocationRule</rule>
+    <rule Name="CallingEqualsWithNullArgRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.CallingEqualsWithNullArgRule(2.10)">Gendarme.Rules.Correctness.CallingEqualsWithNullArgRule</rule>
+    <rule Name="DisposableFieldsShouldBeDisposedRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule(2.10)">Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule</rule>
+    <rule Name="DoNotRoundIntegersRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.DoNotRoundIntegersRule(2.10)">Gendarme.Rules.Correctness.DoNotRoundIntegersRule</rule>
+    <rule Name="DoNotCompareWithNaNRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.DoNotCompareWithNaNRule(2.10)">Gendarme.Rules.Correctness.DoNotCompareWithNaNRule</rule>
+    <rule Name="EnsureLocalDisposalRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.EnsureLocalDisposalRule(2.10)">Gendarme.Rules.Correctness.EnsureLocalDisposalRule</rule>
+    <rule Name="FinalizersShouldCallBaseClassFinalizerRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.FinalizersShouldCallBaseClassFinalizerRule(2.10)">Gendarme.Rules.Correctness.FinalizersShouldCallBaseClassFinalizerRule</rule>
+    <rule Name="ReviewInconsistentIdentityRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule(2.10)">Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule</rule>
+    <rule Name="MethodCanBeMadeStaticRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.MethodCanBeMadeStaticRule(2.10)">Gendarme.Rules.Correctness.MethodCanBeMadeStaticRule</rule>
+    <rule Name="ProvideCorrectArgumentsToFormattingMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule(2.10)">Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule</rule>
+    <rule Name="ProvideCorrectRegexPatternRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ProvideCorrectRegexPatternRule(2.10)">Gendarme.Rules.Correctness.ProvideCorrectRegexPatternRule</rule>
+    <rule Name="ProvideValidXmlStringRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ProvideValidXmlStringRule(2.10)">Gendarme.Rules.Correctness.ProvideValidXmlStringRule</rule>
+    <rule Name="ProvideValidXPathExpressionRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ProvideValidXPathExpressionRule(2.10)">Gendarme.Rules.Correctness.ProvideValidXPathExpressionRule</rule>
+    <rule Name="ReviewCastOnIntegerDivisionRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewCastOnIntegerDivisionRule(2.10)">Gendarme.Rules.Correctness.ReviewCastOnIntegerDivisionRule</rule>
+    <rule Name="ReviewCastOnIntegerMultiplicationRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewCastOnIntegerMultiplicationRule(2.10)">Gendarme.Rules.Correctness.ReviewCastOnIntegerMultiplicationRule</rule>
+    <rule Name="ReviewDoubleAssignmentRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewDoubleAssignmentRule(2.10)">Gendarme.Rules.Correctness.ReviewDoubleAssignmentRule</rule>
+    <rule Name="ReviewSelfAssignmentRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewSelfAssignmentRule(2.10)">Gendarme.Rules.Correctness.ReviewSelfAssignmentRule</rule>
+    <rule Name="ReviewUselessControlFlowRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewUselessControlFlowRule(2.10)">Gendarme.Rules.Correctness.ReviewUselessControlFlowRule</rule>
+    <rule Name="ReviewUseOfInt64BitsToDoubleRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewUseOfInt64BitsToDoubleRule(2.10)">Gendarme.Rules.Correctness.ReviewUseOfInt64BitsToDoubleRule</rule>
+    <rule Name="ReviewUseOfModuloOneOnIntegersRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewUseOfModuloOneOnIntegersRule(2.10)">Gendarme.Rules.Correctness.ReviewUseOfModuloOneOnIntegersRule</rule>
+    <rule Name="UseValueInPropertySetterRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.UseValueInPropertySetterRule(2.10)">Gendarme.Rules.Correctness.UseValueInPropertySetterRule</rule>
+    <rule Name="AvoidLongMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Smells.AvoidLongMethodsRule(2.10)">Gendarme.Rules.Smells.AvoidLongMethodsRule</rule>
+    <rule Name="AvoidLongParameterListsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Smells.AvoidLongParameterListsRule(2.10)">Gendarme.Rules.Smells.AvoidLongParameterListsRule</rule>
+    <rule Name="AvoidSwitchStatementsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Smells.AvoidSwitchStatementsRule(2.10)">Gendarme.Rules.Smells.AvoidSwitchStatementsRule</rule>
+    <rule Name="ArrayFieldsShouldNotBeReadOnlyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.ArrayFieldsShouldNotBeReadOnlyRule(2.10)">Gendarme.Rules.Security.ArrayFieldsShouldNotBeReadOnlyRule</rule>
+    <rule Name="DoNotShortCircuitCertificateCheckRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.DoNotShortCircuitCertificateCheckRule(2.10)">Gendarme.Rules.Security.DoNotShortCircuitCertificateCheckRule</rule>
+    <rule Name="NativeFieldsShouldNotBeVisibleRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.NativeFieldsShouldNotBeVisibleRule(2.10)">Gendarme.Rules.Security.NativeFieldsShouldNotBeVisibleRule</rule>
+    <rule Name="StaticConstructorsShouldBePrivateRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Security.StaticConstructorsShouldBePrivateRule(2.10)">Gendarme.Rules.Security.StaticConstructorsShouldBePrivateRule</rule>
+    <rule Name="AvoidAssemblyVersionMismatchRule" Type="Assembly" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.AvoidAssemblyVersionMismatchRule(2.10)">Gendarme.Rules.BadPractice.AvoidAssemblyVersionMismatchRule</rule>
+    <rule Name="AvoidCallingProblematicMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule(2.10)">Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule</rule>
+    <rule Name="AvoidVisibleConstantFieldRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.AvoidVisibleConstantFieldRule(2.10)">Gendarme.Rules.BadPractice.AvoidVisibleConstantFieldRule</rule>
+    <rule Name="CheckNewExceptionWithoutThrowingRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.CheckNewExceptionWithoutThrowingRule(2.10)">Gendarme.Rules.BadPractice.CheckNewExceptionWithoutThrowingRule</rule>
+    <rule Name="CheckNewThreadWithoutStartRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.CheckNewThreadWithoutStartRule(2.10)">Gendarme.Rules.BadPractice.CheckNewThreadWithoutStartRule</rule>
+    <rule Name="CloneMethodShouldNotReturnNullRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.CloneMethodShouldNotReturnNullRule(2.10)">Gendarme.Rules.BadPractice.CloneMethodShouldNotReturnNullRule</rule>
+    <rule Name="ConstructorShouldNotCallVirtualMethodsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule(2.10)">Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule</rule>
+    <rule Name="DisableDebuggingCodeRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.DisableDebuggingCodeRule(2.10)">Gendarme.Rules.BadPractice.DisableDebuggingCodeRule</rule>
+    <rule Name="DoNotForgetNotImplementedMethodsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.DoNotForgetNotImplementedMethodsRule(2.10)">Gendarme.Rules.BadPractice.DoNotForgetNotImplementedMethodsRule</rule>
+    <rule Name="DoNotUseEnumIsAssignableFromRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.DoNotUseEnumIsAssignableFromRule(2.10)">Gendarme.Rules.BadPractice.DoNotUseEnumIsAssignableFromRule</rule>
+    <rule Name="DoNotUseGetInterfaceToCheckAssignabilityRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.DoNotUseGetInterfaceToCheckAssignabilityRule(2.10)">Gendarme.Rules.BadPractice.DoNotUseGetInterfaceToCheckAssignabilityRule</rule>
+    <rule Name="EqualsShouldHandleNullArgRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.EqualsShouldHandleNullArgRule(2.10)">Gendarme.Rules.BadPractice.EqualsShouldHandleNullArgRule</rule>
+    <rule Name="GetEntryAssemblyMayReturnNullRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.GetEntryAssemblyMayReturnNullRule(2.10)">Gendarme.Rules.BadPractice.GetEntryAssemblyMayReturnNullRule</rule>
+    <rule Name="ObsoleteMessagesShouldNotBeEmptyRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.ObsoleteMessagesShouldNotBeEmptyRule(2.10)">Gendarme.Rules.BadPractice.ObsoleteMessagesShouldNotBeEmptyRule</rule>
+    <rule Name="OnlyUseDisposeForIDisposableTypesRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.OnlyUseDisposeForIDisposableTypesRule(2.10)">Gendarme.Rules.BadPractice.OnlyUseDisposeForIDisposableTypesRule</rule>
+    <rule Name="PreferEmptyInstanceOverNullRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.PreferEmptyInstanceOverNullRule(2.10)">Gendarme.Rules.BadPractice.PreferEmptyInstanceOverNullRule</rule>
+    <rule Name="PreferSafeHandleRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.PreferSafeHandleRule(2.10)">Gendarme.Rules.BadPractice.PreferSafeHandleRule</rule>
+    <rule Name="ReplaceIncompleteOddnessCheckRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.ReplaceIncompleteOddnessCheckRule(2.10)">Gendarme.Rules.BadPractice.ReplaceIncompleteOddnessCheckRule</rule>
+    <rule Name="ToStringShouldNotReturnNullRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.BadPractice.ToStringShouldNotReturnNullRule(2.10)">Gendarme.Rules.BadPractice.ToStringShouldNotReturnNullRule</rule>
+    <rule Name="DoNotLockOnThisOrTypesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoNotLockOnThisOrTypesRule(2.10)">Gendarme.Rules.Concurrency.DoNotLockOnThisOrTypesRule</rule>
+    <rule Name="DoNotLockOnWeakIdentityObjectsRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoNotLockOnWeakIdentityObjectsRule(2.10)">Gendarme.Rules.Concurrency.DoNotLockOnWeakIdentityObjectsRule</rule>
+    <rule Name="DoNotUseMethodImplOptionsSynchronizedRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoNotUseMethodImplOptionsSynchronizedRule(2.10)">Gendarme.Rules.Concurrency.DoNotUseMethodImplOptionsSynchronizedRule</rule>
+    <rule Name="DoNotUseThreadStaticWithInstanceFieldsRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoNotUseThreadStaticWithInstanceFieldsRule(2.10)">Gendarme.Rules.Concurrency.DoNotUseThreadStaticWithInstanceFieldsRule</rule>
+    <rule Name="DoNotUseLockedRegionOutsideMethodRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoNotUseLockedRegionOutsideMethodRule(2.10)">Gendarme.Rules.Concurrency.DoNotUseLockedRegionOutsideMethodRule</rule>
+    <rule Name="DoubleCheckLockingRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.DoubleCheckLockingRule(2.10)">Gendarme.Rules.Concurrency.DoubleCheckLockingRule</rule>
+    <rule Name="NonConstantStaticFieldsShouldNotBeVisibleRule" Type="Type" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.NonConstantStaticFieldsShouldNotBeVisibleRule(2.10)">Gendarme.Rules.Concurrency.NonConstantStaticFieldsShouldNotBeVisibleRule</rule>
+    <rule Name="ProtectCallToEventDelegatesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.ProtectCallToEventDelegatesRule(2.10)">Gendarme.Rules.Concurrency.ProtectCallToEventDelegatesRule</rule>
+    <rule Name="ReviewLockUsedOnlyForOperationsOnVariablesRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.ReviewLockUsedOnlyForOperationsOnVariablesRule(2.10)">Gendarme.Rules.Concurrency.ReviewLockUsedOnlyForOperationsOnVariablesRule</rule>
+    <rule Name="WriteStaticFieldFromInstanceMethodRule" Type="Method" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Concurrency.WriteStaticFieldFromInstanceMethodRule(2.10)">Gendarme.Rules.Concurrency.WriteStaticFieldFromInstanceMethodRule</rule>
+  </rules>
+  <results>
+    <rule Name="AvoidRedundancyInMethodNameRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Naming.AvoidRedundancyInMethodNameRule(2.10)">
+      <problem>This method's name includes the type name of the first parameter. This usually makes an API more verbose and less future-proof than necessary.</problem>
+      <solution>Remove the type from the method name, move the method into the parameter's type, or create an extension method (if using C#).</solution>
+      <target Name="Example.Core.IMoney Example.Core.IMoney::AddMoney(Example.Core.Money)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.IMoney::AddMoney(Example.Core.Money)" Source="">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="Example.Core.IMoney Example.Core.IMoney::AddMoneyBag(Example.Core.MoneyBag)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.IMoney::AddMoneyBag(Example.Core.MoneyBag)" Source="">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="Example.Core.IMoney Example.Core.Money::AddMoney(Example.Core.Money)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.Money::AddMoney(Example.Core.Money)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\Money.cs(≈56)">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="Example.Core.IMoney Example.Core.Money::AddMoneyBag(Example.Core.MoneyBag)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.Money::AddMoneyBag(Example.Core.MoneyBag)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\Money.cs(≈63)">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="Example.Core.IMoney Example.Core.MoneyBag::AddMoney(Example.Core.Money)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.MoneyBag::AddMoney(Example.Core.Money)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\MoneyBag.cs(≈78)">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="Example.Core.IMoney Example.Core.MoneyBag::AddMoneyBag(Example.Core.MoneyBag)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Core.IMoney Example.Core.MoneyBag::AddMoneyBag(Example.Core.MoneyBag)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\MoneyBag.cs(≈83)">Consider renaming method to 'Add'.</defect>
+      </target>
+      <target Name="System.Void Example.Core.MoneyBag::AppendMoney(Example.Core.Money)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Low" Confidence="High" Location="System.Void Example.Core.MoneyBag::AppendMoney(Example.Core.Money)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\MoneyBag.cs(≈93)">Consider renaming method to 'Append'.</defect>
+      </target>
+    </rule>
+    <rule Name="AvoidSmallNamespaceRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.AvoidSmallNamespaceRule(2.10)">
+      <problem>This namespaces contains very few visible types.</problem>
+      <solution>Consider merging this namespace with its parent or a sibling.</solution>
+      <target Name="Example.Core" Assembly="[across all assemblies analyzed]">
+        <defect Severity="Low" Confidence="Total" Location="Example.Core" Source="">Only 4 visible types are defined inside this namespace.</defect>
+      </target>
+      <target Name="Example.Core.Model" Assembly="[across all assemblies analyzed]">
+        <defect Severity="Low" Confidence="Total" Location="Example.Core.Model" Source="">Only 1 visible types are defined inside this namespace.</defect>
+      </target>
+    </rule>
+    <rule Name="AvoidSwitchStatementsRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Smells.AvoidSwitchStatementsRule(2.10)">
+      <problem>The problem with switch statements is the duplication.  You may find the same switch in several places.</problem>
+      <solution>You should consider polymorphism.</solution>
+      <target Name="System.String Example.Core.SampleMeasure::Compute()" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Low" Confidence="Total" Location="System.String Example.Core.SampleMeasure::Compute()" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\SampleMeasure.cs(52,9)"></defect>
+      </target>
+    </rule>
+    <rule Name="AvoidUnusedParametersRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.AvoidUnusedParametersRule(2.10)">
+      <problem>The method contains one or more unused parameters.</problem>
+      <solution>You should remove or use the unused parameters.</solution>
+      <target Name="System.Void Example.Application.Program::Main(System.String[])" Assembly="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="Normal" Location="args" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Application\Program.cs(≈31)">Parameter 'args' of type 'System.String[]' is never used in the method.</defect>
+      </target>
+    </rule>
+    <rule Name="ConsiderUsingStaticTypeRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.ConsiderUsingStaticTypeRule(2.10)">
+      <problem>This type contains only static fields and methods and should be static.</problem>
+      <solution>Change this type into a static type to gain clarity and better error reporting.</solution>
+      <target Name="Example.Application.Program" Assembly="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="High" Location="Example.Application.Program" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Application\Program.cs(≈31)"></defect>
+      </target>
+    </rule>
+    <rule Name="ImplementEqualsTypeRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Performance.ImplementEqualsTypeRule(2.10)">
+      <problem>Since this type overrides Equals(object) it is also a good candidate to provide a Equals method for it's own type.</problem>
+      <solution>Implement the suggested method or interface (2.0) to avoid casting and, for ValueType, boxing penalities.</solution>
+      <target Name="Example.Core.Money" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="Total" Location="Example.Core.Money" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\Money.cs(≈41)">Implement System.IEquatable&lt;T&gt;</defect>
+      </target>
+      <target Name="Example.Core.MoneyBag" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="Total" Location="Example.Core.MoneyBag" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\MoneyBag.cs(≈40)">Implement System.IEquatable&lt;T&gt;</defect>
+      </target>
+      <target Name="Example.Core.SampleMeasure" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Medium" Confidence="Total" Location="Example.Core.SampleMeasure" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\SampleMeasure.cs(≈41)">Implement System.IEquatable&lt;T&gt;</defect>
+      </target>
+    </rule>
+    <rule Name="MarkAssemblyWithCLSCompliantRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Design.MarkAssemblyWithCLSCompliantRule(2.10)">
+      <problem>This assembly is not decorated with the [CLSCompliant] attribute.</problem>
+      <solution>Add this attribute to ease the use (or non-use) of your assembly by CLS consumers.</solution>
+      <target Name="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Assembly="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="High" Confidence="Total" Location="Example.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Source=""></defect>
+      </target>
+      <target Name="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="High" Confidence="Total" Location="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" Source=""></defect>
+      </target>
+    </rule>
+    <rule Name="MarkEnumerationsAsSerializableRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Serialization.MarkEnumerationsAsSerializableRule(2.10)">
+      <problem>An enumeration, even if not decorated with [Serializable], is always serializable.</problem>
+      <solution>For better source code readability always decorate enumerations with [Serializable].</solution>
+      <target Name="Example.Core.SampleMeasure/Possible" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Low" Confidence="Total" Location="Example.Core.SampleMeasure/Possible" Source=""></defect>
+      </target>
+    </rule>
+    <rule Name="MethodCanBeMadeStaticRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.MethodCanBeMadeStaticRule(2.10)">
+      <problem>This method does not use any instance fields, properties or methods and can be made static.</problem>
+      <solution>Make the method static.</solution>
+      <target Name="System.String Example.Core.SampleMeasure::Compute(System.Int32)" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="Low" Confidence="Total" Location="System.String Example.Core.SampleMeasure::Compute(System.Int32)" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\SampleMeasure.cs(≈69)"></defect>
+      </target>
+    </rule>
+    <rule Name="ReviewInconsistentIdentityRule" Uri="https://github.com/spouliot/gendarme/wiki/Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule(2.10)">
+      <problem>The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.</problem>
+      <solution>Equals, relational operator, CompareTo methods should use the same fields and getter properties. GetHashCode should use the same fields/properties or a strict subset of them. Clone should use the same fields/properties or a superset of them.</solution>
+      <target Name="Example.Core.Money" Assembly="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <defect Severity="High" Confidence="Normal" Location="System.Int32 Example.Core.Money::GetHashCode()" Source="c:\Sonar\Projects\CSharp\Resources\FromCodehaus\Example\Example.Core\Money.cs(≈94)">GetHashCode uses fields and/or properties not used by the equality methods: fCurrency fAmount</defect>
+      </target>
+    </rule>
+  </results>
+</gendarme-output>

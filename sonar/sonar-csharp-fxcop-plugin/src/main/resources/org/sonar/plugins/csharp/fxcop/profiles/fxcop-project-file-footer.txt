@@ -1,0 +1,3 @@
+        </RuleFiles>
+    </Rules>
+</FxCopProject>

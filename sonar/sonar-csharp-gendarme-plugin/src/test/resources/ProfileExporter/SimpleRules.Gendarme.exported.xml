@@ -1,0 +1,26 @@
+<gendarme>
+    <ruleset name="default">
+        <rules include="DoNotUseLockedRegionOutsideMethodRule" from="Gendarme.Rules.Concurrency.dll">
+        </rules>
+        <rules include="AvoidLongMethodsRule | AvoidLargeClassesRule | AvoidCodeDuplicatedInSameClassRule | AvoidComplexMethodsRule" from="Gendarme.Rules.Smells.dll">
+            <parameter rule="AvoidComplexMethodsRule" property="SuccessThreshold" value="13" />
+        </rules>
+    </ruleset>
+    <ruleset name="info">
+        <rules include="DoNotUseLockedRegionOutsideMethodRule" from="Gendarme.Rules.Concurrency.dll">
+        </rules>
+    </ruleset>
+    <ruleset name="major">
+        <rules include="AvoidCodeDuplicatedInSameClassRule" from="Gendarme.Rules.Smells.dll">
+        </rules>
+    </ruleset>
+    <ruleset name="critical">
+        <rules include="AvoidLargeClassesRule | AvoidComplexMethodsRule" from="Gendarme.Rules.Smells.dll">
+            <parameter rule="AvoidComplexMethodsRule" property="SuccessThreshold" value="13" />
+        </rules>
+    </ruleset>
+    <ruleset name="blocker">
+        <rules include="AvoidLongMethodsRule" from="Gendarme.Rules.Smells.dll">
+        </rules>
+    </ruleset>
+</gendarme>

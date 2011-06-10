@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.codehaus.sonar-plugins.csharp</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.7</version>
+	</parent>
+
+	<artifactId>sonar-csharp-gendarme-plugin</artifactId>
+	<packaging>sonar-plugin</packaging>
+
+	<name>Sonar C# Plugin :: Gendarme</name>
+	<description>Plugin that runs Gendarme analyses to check C# sources against rule violations.</description>
+
+	<properties>
+		<sonar.pluginKey>csharpgendarme</sonar.pluginKey>
+		<sonar.pluginName>C# Gendarme</sonar.pluginName>
+		<sonar.pluginClass>org.sonar.plugins.csharp.gendarme.GendarmePlugin</sonar.pluginClass>
+		<sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>org.codehaus.sonar-plugins.dotnet.tools:*</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- .NET tools -->
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+			<artifactId>dotnet-tools-commons</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+			<artifactId>gendarme-runner</artifactId>
+			<version>${dotnet.tools}</version>
+		</dependency>
+
+		<!-- sonar open-source -->
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.csharp</groupId>
+			<artifactId>sonar-csharp-core-plugin</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-duplications</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

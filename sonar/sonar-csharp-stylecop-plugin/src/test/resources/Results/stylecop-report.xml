@@ -1,0 +1,19 @@
+<StyleCopViolations>
+	<Violation Section="Root.log4net" LineNumber="24"
+		Source="C:\MyProject\src\Class1.cs" RuleNamespace="Microsoft.StyleCop.CSharp.NamingRules"
+		Rule="ElementMustBeginWithUpperCaseLetter" RuleId="SA1300">namespace names begin with an upper-case letter: foo.</Violation>
+	<Violation Section="Root.log4net.Appender.AdoNetAppender.ActivateOptions"
+		LineNumber="384" Source="C:\MyProject\src\db\Class2.cs"
+		RuleNamespace="Microsoft.StyleCop.CSharp.MaintainabilityRules" Rule="StatementMustNotUseUnnecessaryParenthesis"
+		RuleId="SA1119">The line contains unnecessary parenthesis.</Violation>
+	<!-- Other false violations that allow to test different cases -->
+	<!-- No line number -->
+	<Violation Section="Root.log4net" Source="C:\MyProject\src\Class3.cs" RuleNamespace="Microsoft.StyleCop.CSharp.NamingRules"
+		Rule="ElementMustBeginWithUpperCaseLetter" RuleId="SA1300">namespace names begin with an upper-case letter: foo.</Violation>
+	<!-- Wrong resource path -->
+	<Violation Section="Root.log4net" Source="C:\WrongPath\Class4.cs" RuleNamespace="Microsoft.StyleCop.CSharp.NamingRules"
+		Rule="ElementMustBeginWithUpperCaseLetter" RuleId="SA1300">namespace names begin with an upper-case letter: foo.</Violation>
+	<!-- Rule does not exist -->
+	<Violation Section="Root.log4net" Source="C:\MyProject\src\Class4.cs" RuleNamespace="Foo"
+		Rule="FAKE-RULE" RuleId="SA1300">namespace names begin with an upper-case letter: foo.</Violation>
+</StyleCopViolations>

@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+
+    Sonar C# Plugin :: StyleCop
+    Copyright (C) 2010 SonarSource, Jose Chillan and Alexandre Victoor
+
+    Sonar is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 3 of the License, or (at your option) any later version.
+
+    Sonar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with Sonar; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+
+-->
+<rules>
+    <rule key="ElementMustBeginWithUpperCaseLetter">
+        <name>Element must begin with upper case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Element must begin with upper case letter</description>
+    </rule>
+    <rule key="ElementMustBeginWithLowerCaseLetter">
+        <name>Element must begin with lower case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#ElementMustBeginWithLowerCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Element must begin with lower case letter</description>
+    </rule>
+    <rule key="InterfaceNamesMustBeginWithI">
+        <name>Interface names must begin with i</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#InterfaceNamesMustBeginWithI</configKey>
+        <category name="Usability"/>
+        <description>Interface names must begin with i</description>
+    </rule>
+    <rule key="ConstFieldNamesMustBeginWithUpperCaseLetter">
+        <name>Const field names must begin with upper case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#ConstFieldNamesMustBeginWithUpperCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Const field names must begin with upper case letter</description>
+    </rule>
+    <rule key="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter">
+        <name>Non private readonly fields must begin with upper case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Non private readonly fields must begin with upper case letter</description>
+    </rule>
+    <rule key="FieldNamesMustNotUseHungarianNotation">
+        <name>Field names must not use hungarian notation</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#FieldNamesMustNotUseHungarianNotation</configKey>
+        <category name="Usability"/>
+        <description>Field names must not use hungarian notation</description>
+    </rule>
+    <rule key="FieldNamesMustBeginWithLowerCaseLetter">
+        <name>Field names must begin with lower case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#FieldNamesMustBeginWithLowerCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Field names must begin with lower case letter</description>
+    </rule>
+    <rule key="AccessibleFieldsMustBeginWithUpperCaseLetter">
+        <name>Accessible fields must begin with upper case letter</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#AccessibleFieldsMustBeginWithUpperCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Accessible fields must begin with upper case letter</description>
+    </rule>
+    <rule key="VariableNamesMustNotBePrefixed">
+        <name>Variable names must not be prefixed</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#VariableNamesMustNotBePrefixed</configKey>
+        <category name="Usability"/>
+        <description>Variable names must not be prefixed</description>
+    </rule>
+    <rule key="FieldNamesMustNotBeginWithUnderscore">
+        <name>Field names must not begin with underscore</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#FieldNamesMustNotBeginWithUnderscore</configKey>
+        <category name="Usability"/>
+        <description>Field names must not begin with underscore</description>
+    </rule>
+    <rule key="FieldNamesMustNotContainUnderscore">
+        <name>Field names must not contain underscore</name>
+        <configKey>Microsoft.StyleCop.CSharp.NamingRules#FieldNamesMustNotContainUnderscore</configKey>
+        <category name="Usability"/>
+        <description>Field names must not contain underscore</description>
+    </rule>
+    <rule key="ElementsMustBeDocumented">
+        <name>Elements must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementsMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Elements must be documented</description>
+    </rule>
+    <rule key="PartialElementsMustBeDocumented">
+        <name>Partial elements must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#PartialElementsMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Partial elements must be documented</description>
+    </rule>
+    <rule key="EnumerationItemsMustBeDocumented">
+        <name>Enumeration items must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#EnumerationItemsMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Enumeration items must be documented</description>
+    </rule>
+    <rule key="DocumentationMustContainValidXml">
+        <name>Documentation must contain valid xml</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationMustContainValidXml</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation must contain valid xml</description>
+    </rule>
+    <rule key="ElementDocumentationMustHaveSummary">
+        <name>Element documentation must have summary</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementDocumentationMustHaveSummary</configKey>
+        <category name="Maintainability"/>
+        <description>Element documentation must have summary</description>
+    </rule>
+    <rule key="PartialElementDocumentationMustHaveSummary">
+        <name>Partial element documentation must have summary</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#PartialElementDocumentationMustHaveSummary</configKey>
+        <category name="Maintainability"/>
+        <description>Partial element documentation must have summary</description>
+    </rule>
+    <rule key="ElementDocumentationMustHaveSummaryText">
+        <name>Element documentation must have summary text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementDocumentationMustHaveSummaryText</configKey>
+        <category name="Maintainability"/>
+        <description>Element documentation must have summary text</description>
+    </rule>
+    <rule key="PartialElementDocumentationMustHaveSummaryText">
+        <name>Partial element documentation must have summary text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#PartialElementDocumentationMustHaveSummaryText</configKey>
+        <category name="Maintainability"/>
+        <description>Partial element documentation must have summary text</description>
+    </rule>
+    <rule key="ElementDocumentationMustNotHaveDefaultSummary">
+        <name>Element documentation must not have default summary</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementDocumentationMustNotHaveDefaultSummary</configKey>
+        <category name="Maintainability"/>
+        <description>Element documentation must not have default summary</description>
+    </rule>
+    <rule key="ElementParametersMustBeDocumented">
+        <name>Element parameters must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementParametersMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Element parameters must be documented</description>
+    </rule>
+    <rule key="ElementParameterDocumentationMustMatchElementParameters">
+        <name>Element parameter documentation must match element parameters</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementParameterDocumentationMustMatchElementParameters</configKey>
+        <category name="Maintainability"/>
+        <description>Element parameter documentation must match element parameters</description>
+    </rule>
+    <rule key="ElementParameterDocumentationMustDeclareParameterName">
+        <name>Element parameter documentation must declare parameter name</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementParameterDocumentationMustDeclareParameterName</configKey>
+        <category name="Maintainability"/>
+        <description>Element parameter documentation must declare parameter name</description>
+    </rule>
+    <rule key="ElementParameterDocumentationMustHaveText">
+        <name>Element parameter documentation must have text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementParameterDocumentationMustHaveText</configKey>
+        <category name="Maintainability"/>
+        <description>Element parameter documentation must have text</description>
+    </rule>
+    <rule key="ElementReturnValueMustBeDocumented">
+        <name>Element return value must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementReturnValueMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Element return value must be documented</description>
+    </rule>
+    <rule key="ElementReturnValueDocumentationMustHaveText">
+        <name>Element return value documentation must have text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementReturnValueDocumentationMustHaveText</configKey>
+        <category name="Maintainability"/>
+        <description>Element return value documentation must have text</description>
+    </rule>
+    <rule key="VoidReturnValueMustNotBeDocumented">
+        <name>Void return value must not be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#VoidReturnValueMustNotBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Void return value must not be documented</description>
+    </rule>
+    <rule key="GenericTypeParametersMustBeDocumented">
+        <name>Generic type parameters must be documented</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#GenericTypeParametersMustBeDocumented</configKey>
+        <category name="Maintainability"/>
+        <description>Generic type parameters must be documented</description>
+    </rule>
+    <rule key="GenericTypeParametersMustBeDocumentedPartialClass">
+        <name>Generic type parameters must be documented partial class</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#GenericTypeParametersMustBeDocumentedPartialClass</configKey>
+        <category name="Maintainability"/>
+        <description>Generic type parameters must be documented partial class</description>
+    </rule>
+    <rule key="GenericTypeParameterDocumentationMustMatchTypeParameters">
+        <name>Generic type parameter documentation must match type parameters</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#GenericTypeParameterDocumentationMustMatchTypeParameters</configKey>
+        <category name="Maintainability"/>
+        <description>Generic type parameter documentation must match type parameters</description>
+    </rule>
+    <rule key="GenericTypeParameterDocumentationMustDeclareParameterName">
+        <name>Generic type parameter documentation must declare parameter name</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#GenericTypeParameterDocumentationMustDeclareParameterName</configKey>
+        <category name="Maintainability"/>
+        <description>Generic type parameter documentation must declare parameter name</description>
+    </rule>
+    <rule key="GenericTypeParameterDocumentationMustHaveText">
+        <name>Generic type parameter documentation must have text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#GenericTypeParameterDocumentationMustHaveText</configKey>
+        <category name="Maintainability"/>
+        <description>Generic type parameter documentation must have text</description>
+    </rule>
+    <rule key="PropertySummaryDocumentationMustMatchAccessors">
+        <name>Property summary documentation must match accessors</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#PropertySummaryDocumentationMustMatchAccessors</configKey>
+        <category name="Maintainability"/>
+        <description>Property summary documentation must match accessors</description>
+    </rule>
+    <rule key="PropertySummaryDocumentationMustOmitSetAccessorWithRestrictedAccess">
+        <name>Property summary documentation must omit set accessor with restricted access</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#PropertySummaryDocumentationMustOmitSetAccessorWithRestrictedAccess</configKey>
+        <category name="Maintainability"/>
+        <description>Property summary documentation must omit set accessor with restricted access</description>
+    </rule>
+    <rule key="ElementDocumentationMustNotBeCopiedAndPasted">
+        <name>Element documentation must not be copied and pasted</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ElementDocumentationMustNotBeCopiedAndPasted</configKey>
+        <category name="Maintainability"/>
+        <description>Element documentation must not be copied and pasted</description>
+    </rule>
+    <rule key="SingleLineCommentsMustNotUseDocumentationStyleSlashes">
+        <name>Single line comments must not use documentation style slashes</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#SingleLineCommentsMustNotUseDocumentationStyleSlashes</configKey>
+        <category name="Maintainability"/>
+        <description>Single line comments must not use documentation style slashes</description>
+    </rule>
+    <rule key="DocumentationTextMustNotBeEmpty">
+        <name>Documentation text must not be empty</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationTextMustNotBeEmpty</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation text must not be empty</description>
+    </rule>
+    <rule key="DocumentationTextMustContainWhitespace">
+        <name>Documentation text must contain whitespace</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationTextMustContainWhitespace</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation text must contain whitespace</description>
+    </rule>
+    <rule key="DocumentationMustMeetCharacterPercentage">
+        <name>Documentation must meet character percentage</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationMustMeetCharacterPercentage</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation must meet character percentage</description>
+    </rule>
+    <rule key="DocumentationTextMustMeetMinimumCharacterLength">
+        <name>Documentation text must meet minimum character length</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationTextMustMeetMinimumCharacterLength</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation text must meet minimum character length</description>
+    </rule>
+    <rule key="ConstructorSummaryDocumentationMustBeginWithStandardText">
+        <name>Constructor summary documentation must begin with standard text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#ConstructorSummaryDocumentationMustBeginWithStandardText</configKey>
+        <category name="Maintainability"/>
+        <description>Constructor summary documentation must begin with standard text</description>
+    </rule>
+    <rule key="DestructorSummaryDocumentationMustBeginWithStandardText">
+        <name>Destructor summary documentation must begin with standard text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DestructorSummaryDocumentationMustBeginWithStandardText</configKey>
+        <category name="Maintainability"/>
+        <description>Destructor summary documentation must begin with standard text</description>
+    </rule>
+    <rule key="DocumentationHeadersMustNotContainBlankLines">
+        <name>Documentation headers must not contain blank lines</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#DocumentationHeadersMustNotContainBlankLines</configKey>
+        <category name="Maintainability"/>
+        <description>Documentation headers must not contain blank lines</description>
+    </rule>
+    <rule key="IncludedDocumentationXPathDoesNotExist">
+        <name>Included documentation x path does not exist</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#IncludedDocumentationXPathDoesNotExist</configKey>
+        <category name="Maintainability"/>
+        <description>Included documentation x path does not exist</description>
+    </rule>
+    <rule key="IncludeNodeDoesNotContainValidFileAndPath">
+        <name>Include node does not contain valid file and path</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#IncludeNodeDoesNotContainValidFileAndPath</configKey>
+        <category name="Maintainability"/>
+        <description>Include node does not contain valid file and path</description>
+    </rule>
+    <rule key="FileMustHaveHeader">
+        <name>File must have header</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileMustHaveHeader</configKey>
+        <category name="Maintainability"/>
+        <description>File must have header</description>
+    </rule>
+    <rule key="FileHeaderMustShowCopyright">
+        <name>File header must show copyright</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileHeaderMustShowCopyright</configKey>
+        <category name="Maintainability"/>
+        <description>File header must show copyright</description>
+    </rule>
+    <rule key="FileHeaderMustHaveCopyrightText">
+        <name>File header must have copyright text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileHeaderMustHaveCopyrightText</configKey>
+        <category name="Maintainability"/>
+        <description>File header must have copyright text</description>
+    </rule>
+    <rule key="FileHeaderMustContainFileName">
+        <name>File header must contain file name</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileHeaderMustContainFileName</configKey>
+        <category name="Maintainability"/>
+        <description>File header must contain file name</description>
+    </rule>
+    <rule key="FileHeaderFileNameDocumentationMustMatchFileName">
+        <name>File header file name documentation must match file name</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileHeaderFileNameDocumentationMustMatchFileName</configKey>
+        <category name="Maintainability"/>
+        <description>File header file name documentation must match file name</description>
+    </rule>
+    <rule key="FileHeaderMustHaveValidCompanyText">
+        <name>File header must have valid company text</name>
+        <configKey>Microsoft.StyleCop.CSharp.DocumentationRules#FileHeaderMustHaveValidCompanyText</configKey>
+        <category name="Maintainability"/>
+        <description>File header must have valid company text</description>
+    </rule>
+    <rule key="CurlyBracketsForMultiLineStatementsMustNotShareLine">
+        <name>Curly brackets for multi line statements must not share line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#CurlyBracketsForMultiLineStatementsMustNotShareLine</configKey>
+        <category name="Usability"/>
+        <description>Curly brackets for multi line statements must not share line</description>
+    </rule>
+    <rule key="StatementMustNotBeOnSingleLine">
+        <name>Statement must not be on single line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#StatementMustNotBeOnSingleLine</configKey>
+        <category name="Usability"/>
+        <description>Statement must not be on single line</description>
+    </rule>
+    <rule key="ElementMustNotBeOnSingleLine">
+        <name>Element must not be on single line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ElementMustNotBeOnSingleLine</configKey>
+        <category name="Usability"/>
+        <description>Element must not be on single line</description>
+    </rule>
+    <rule key="CurlyBracketsMustNotBeOmitted">
+        <name>Curly brackets must not be omitted</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#CurlyBracketsMustNotBeOmitted</configKey>
+        <category name="Usability"/>
+        <description>Curly brackets must not be omitted</description>
+    </rule>
+    <rule key="AllAccessorsMustBeMultiLineOrSingleLine">
+        <name>All accessors must be multi line or single line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#AllAccessorsMustBeMultiLineOrSingleLine</configKey>
+        <category name="Usability"/>
+        <description>All accessors must be multi line or single line</description>
+    </rule>
+    <rule key="OpeningCurlyBracketsMustNotBeFollowedByBlankLine">
+        <name>Opening curly brackets must not be followed by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#OpeningCurlyBracketsMustNotBeFollowedByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Opening curly brackets must not be followed by blank line</description>
+    </rule>
+    <rule key="ElementDocumentationHeadersMustNotBeFollowedByBlankLine">
+        <name>Element documentation headers must not be followed by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ElementDocumentationHeadersMustNotBeFollowedByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Element documentation headers must not be followed by blank line</description>
+    </rule>
+    <rule key="CodeMustNotContainMultipleBlankLinesInARow">
+        <name>Code must not contain multiple blank lines in a row</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#CodeMustNotContainMultipleBlankLinesInARow</configKey>
+        <category name="Usability"/>
+        <description>Code must not contain multiple blank lines in a row</description>
+    </rule>
+    <rule key="ClosingCurlyBracketsMustNotBePrecededByBlankLine">
+        <name>Closing curly brackets must not be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ClosingCurlyBracketsMustNotBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Closing curly brackets must not be preceded by blank line</description>
+    </rule>
+    <rule key="OpeningCurlyBracketsMustNotBePrecededByBlankLine">
+        <name>Opening curly brackets must not be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#OpeningCurlyBracketsMustNotBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Opening curly brackets must not be preceded by blank line</description>
+    </rule>
+    <rule key="ChainedStatementBlocksMustNotBePrecededByBlankLine">
+        <name>Chained statement blocks must not be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ChainedStatementBlocksMustNotBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Chained statement blocks must not be preceded by blank line</description>
+    </rule>
+    <rule key="WhileDoFooterMustNotBePrecededByBlankLine">
+        <name>While do footer must not be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#WhileDoFooterMustNotBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>While do footer must not be preceded by blank line</description>
+    </rule>
+    <rule key="SingleLineCommentsMustNotBeFollowedByBlankLine">
+        <name>Single line comments must not be followed by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#SingleLineCommentsMustNotBeFollowedByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Single line comments must not be followed by blank line</description>
+    </rule>
+    <rule key="ClosingCurlyBracketMustBeFollowedByBlankLine">
+        <name>Closing curly bracket must be followed by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ClosingCurlyBracketMustBeFollowedByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Closing curly bracket must be followed by blank line</description>
+    </rule>
+    <rule key="ElementDocumentationHeaderMustBePrecededByBlankLine">
+        <name>Element documentation header must be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ElementDocumentationHeaderMustBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Element documentation header must be preceded by blank line</description>
+    </rule>
+    <rule key="SingleLineCommentMustBePrecededByBlankLine">
+        <name>Single line comment must be preceded by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#SingleLineCommentMustBePrecededByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Single line comment must be preceded by blank line</description>
+    </rule>
+    <rule key="ElementsMustBeSeparatedByBlankLine">
+        <name>Elements must be separated by blank line</name>
+        <configKey>Microsoft.StyleCop.CSharp.LayoutRules#ElementsMustBeSeparatedByBlankLine</configKey>
+        <category name="Usability"/>
+        <description>Elements must be separated by blank line</description>
+    </rule>
+    <rule key="AccessModifierMustBeDeclared">
+        <name>Access modifier must be declared</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#AccessModifierMustBeDeclared</configKey>
+        <category name="Maintainability"/>
+        <description>Access modifier must be declared</description>
+    </rule>
+    <rule key="FieldsMustBePrivate">
+        <name>Fields must be private</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#FieldsMustBePrivate</configKey>
+        <category name="Maintainability"/>
+        <description>Fields must be private</description>
+    </rule>
+    <rule key="CodeAnalysisSuppressionMustHaveJustification">
+        <name>Code analysis suppression must have justification</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#CodeAnalysisSuppressionMustHaveJustification</configKey>
+        <category name="Maintainability"/>
+        <description>Code analysis suppression must have justification</description>
+    </rule>
+    <rule key="DebugAssertMustProvideMessageText">
+        <name>Debug assert must provide message text</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#DebugAssertMustProvideMessageText</configKey>
+        <category name="Maintainability"/>
+        <description>Debug assert must provide message text</description>
+    </rule>
+    <rule key="DebugFailMustProvideMessageText">
+        <name>Debug fail must provide message text</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#DebugFailMustProvideMessageText</configKey>
+        <category name="Maintainability"/>
+        <description>Debug fail must provide message text</description>
+    </rule>
+    <rule key="FileMayOnlyContainASingleClass">
+        <name>File may only contain a single class</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#FileMayOnlyContainASingleClass</configKey>
+        <category name="Maintainability"/>
+        <description>File may only contain a single class</description>
+    </rule>
+    <rule key="FileMayOnlyContainASingleNamespace">
+        <name>File may only contain a single namespace</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#FileMayOnlyContainASingleNamespace</configKey>
+        <category name="Maintainability"/>
+        <description>File may only contain a single namespace</description>
+    </rule>
+    <rule key="StatementMustNotUseUnnecessaryParenthesis">
+        <name>Statement must not use unnecessary parenthesis</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#StatementMustNotUseUnnecessaryParenthesis</configKey>
+        <category name="Maintainability"/>
+        <description>Statement must not use unnecessary parenthesis</description>
+    </rule>
+    <rule key="ArithmeticExpressionsMustDeclarePrecedence">
+        <name>Arithmetic expressions must declare precedence</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#ArithmeticExpressionsMustDeclarePrecedence</configKey>
+        <category name="Maintainability"/>
+        <description>Arithmetic expressions must declare precedence</description>
+    </rule>
+    <rule key="ConditionalExpressionsMustDeclarePrecedence">
+        <name>Conditional expressions must declare precedence</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#ConditionalExpressionsMustDeclarePrecedence</configKey>
+        <category name="Maintainability"/>
+        <description>Conditional expressions must declare precedence</description>
+    </rule>
+    <rule key="RemoveDelegateParenthesisWhenPossible">
+        <name>Remove delegate parenthesis when possible</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#RemoveDelegateParenthesisWhenPossible</configKey>
+        <category name="Maintainability"/>
+        <description>Remove delegate parenthesis when possible</description>
+    </rule>
+    <rule key="RemoveUnnecessaryCode">
+        <name>Remove unnecessary code</name>
+        <configKey>Microsoft.StyleCop.CSharp.MaintainabilityRules#RemoveUnnecessaryCode</configKey>
+        <category name="Maintainability"/>
+        <description>Remove unnecessary code</description>
+    </rule>
+    <rule key="UsingDirectivesMustBePlacedWithinNamespace">
+        <name>Using directives must be placed within namespace</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#UsingDirectivesMustBePlacedWithinNamespace</configKey>
+        <category name="Usability"/>
+        <description>Using directives must be placed within namespace</description>
+    </rule>
+    <rule key="ElementsMustAppearInTheCorrectOrder">
+        <name>Elements must appear in the correct order</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#ElementsMustAppearInTheCorrectOrder</configKey>
+        <category name="Usability"/>
+        <description>Elements must appear in the correct order</description>
+    </rule>
+    <rule key="ElementsMustBeOrderedByAccess">
+        <name>Elements must be ordered by access</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#ElementsMustBeOrderedByAccess</configKey>
+        <category name="Usability"/>
+        <description>Elements must be ordered by access</description>
+    </rule>
+    <rule key="ConstantsMustAppearBeforeFields">
+        <name>Constants must appear before fields</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#ConstantsMustAppearBeforeFields</configKey>
+        <category name="Usability"/>
+        <description>Constants must appear before fields</description>
+    </rule>
+    <rule key="StaticElementsMustAppearBeforeInstanceElements">
+        <name>Static elements must appear before instance elements</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#StaticElementsMustAppearBeforeInstanceElements</configKey>
+        <category name="Usability"/>
+        <description>Static elements must appear before instance elements</description>
+    </rule>
+    <rule key="DeclarationKeywordsMustFollowOrder">
+        <name>Declaration keywords must follow order</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#DeclarationKeywordsMustFollowOrder</configKey>
+        <category name="Usability"/>
+        <description>Declaration keywords must follow order</description>
+    </rule>
+    <rule key="ProtectedMustComeBeforeInternal">
+        <name>Protected must come before internal</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#ProtectedMustComeBeforeInternal</configKey>
+        <category name="Usability"/>
+        <description>Protected must come before internal</description>
+    </rule>
+    <rule key="PropertyAccessorsMustFollowOrder">
+        <name>Property accessors must follow order</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#PropertyAccessorsMustFollowOrder</configKey>
+        <category name="Usability"/>
+        <description>Property accessors must follow order</description>
+    </rule>
+    <rule key="EventAccessorsMustFollowOrder">
+        <name>Event accessors must follow order</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#EventAccessorsMustFollowOrder</configKey>
+        <category name="Usability"/>
+        <description>Event accessors must follow order</description>
+    </rule>
+    <rule key="SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives">
+        <name>System using directives must be placed before other using directives</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives</configKey>
+        <category name="Usability"/>
+        <description>System using directives must be placed before other using directives</description>
+    </rule>
+    <rule key="UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives">
+        <name>Using alias directives must be placed after other using directives</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives</configKey>
+        <category name="Usability"/>
+        <description>Using alias directives must be placed after other using directives</description>
+    </rule>
+    <rule key="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace">
+        <name>Using directives must be ordered alphabetically by namespace</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#UsingDirectivesMustBeOrderedAlphabeticallyByNamespace</configKey>
+        <category name="Usability"/>
+        <description>Using directives must be ordered alphabetically by namespace</description>
+    </rule>
+    <rule key="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName">
+        <name>Using alias directives must be ordered alphabetically by alias name</name>
+        <configKey>Microsoft.StyleCop.CSharp.OrderingRules#UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName</configKey>
+        <category name="Usability"/>
+        <description>Using alias directives must be ordered alphabetically by alias name</description>
+    </rule>
+    <rule key="CommentsMustContainText">
+        <name>Comments must contain text</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#CommentsMustContainText</configKey>
+        <category name="Maintainability"/>
+        <description>Comments must contain text</description>
+    </rule>
+    <rule key="DoNotPrefixCallsWithBaseUnlessLocalImplementationExists">
+        <name>Do not prefix calls with base unless local implementation exists</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#DoNotPrefixCallsWithBaseUnlessLocalImplementationExists</configKey>
+        <category name="Maintainability"/>
+        <description>Do not prefix calls with base unless local implementation exists</description>
+    </rule>
+    <rule key="PrefixLocalCallsWithThis">
+        <name>Prefix local calls with this</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#PrefixLocalCallsWithThis</configKey>
+        <category name="Maintainability"/>
+        <description>Prefix local calls with this</description>
+    </rule>
+    <rule key="OpeningParenthesisMustBeOnDeclarationLine">
+        <name>Opening parenthesis must be on declaration line</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#OpeningParenthesisMustBeOnDeclarationLine</configKey>
+        <category name="Maintainability"/>
+        <description>Opening parenthesis must be on declaration line</description>
+    </rule>
+    <rule key="ClosingParenthesisMustBeOnLineOfLastParameter">
+        <name>Closing parenthesis must be on line of last parameter</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ClosingParenthesisMustBeOnLineOfLastParameter</configKey>
+        <category name="Maintainability"/>
+        <description>Closing parenthesis must be on line of last parameter</description>
+    </rule>
+    <rule key="ClosingParenthesisMustBeOnLineOfOpeningParenthesis">
+        <name>Closing parenthesis must be on line of opening parenthesis</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ClosingParenthesisMustBeOnLineOfOpeningParenthesis</configKey>
+        <category name="Maintainability"/>
+        <description>Closing parenthesis must be on line of opening parenthesis</description>
+    </rule>
+    <rule key="CommaMustBeOnSameLineAsPreviousParameter">
+        <name>Comma must be on same line as previous parameter</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#CommaMustBeOnSameLineAsPreviousParameter</configKey>
+        <category name="Maintainability"/>
+        <description>Comma must be on same line as previous parameter</description>
+    </rule>
+    <rule key="ParameterListMustFollowDeclaration">
+        <name>Parameter list must follow declaration</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ParameterListMustFollowDeclaration</configKey>
+        <category name="Maintainability"/>
+        <description>Parameter list must follow declaration</description>
+    </rule>
+    <rule key="ParameterMustFollowComma">
+        <name>Parameter must follow comma</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ParameterMustFollowComma</configKey>
+        <category name="Maintainability"/>
+        <description>Parameter must follow comma</description>
+    </rule>
+    <rule key="SplitParametersMustStartOnLineAfterDeclaration">
+        <name>Split parameters must start on line after declaration</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#SplitParametersMustStartOnLineAfterDeclaration</configKey>
+        <category name="Maintainability"/>
+        <description>Split parameters must start on line after declaration</description>
+    </rule>
+    <rule key="ParametersMustBeOnSameLineOrSeparateLines">
+        <name>Parameters must be on same line or separate lines</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ParametersMustBeOnSameLineOrSeparateLines</configKey>
+        <category name="Maintainability"/>
+        <description>Parameters must be on same line or separate lines</description>
+    </rule>
+    <rule key="ParameterMustNotSpanMultipleLines">
+        <name>Parameter must not span multiple lines</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#ParameterMustNotSpanMultipleLines</configKey>
+        <category name="Maintainability"/>
+        <description>Parameter must not span multiple lines</description>
+    </rule>
+    <rule key="QueryClauseMustFollowPreviousClause">
+        <name>Query clause must follow previous clause</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#QueryClauseMustFollowPreviousClause</configKey>
+        <category name="Maintainability"/>
+        <description>Query clause must follow previous clause</description>
+    </rule>
+    <rule key="QueryClausesMustBeOnSeparateLinesOrAllOnOneLine">
+        <name>Query clauses must be on separate lines or all on one line</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#QueryClausesMustBeOnSeparateLinesOrAllOnOneLine</configKey>
+        <category name="Maintainability"/>
+        <description>Query clauses must be on separate lines or all on one line</description>
+    </rule>
+    <rule key="QueryClauseMustBeginOnNewLineWhenPreviousClauseSpansMultipleLines">
+        <name>Query clause must begin on new line when previous clause spans multiple lines</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#QueryClauseMustBeginOnNewLineWhenPreviousClauseSpansMultipleLines</configKey>
+        <category name="Maintainability"/>
+        <description>Query clause must begin on new line when previous clause spans multiple lines</description>
+    </rule>
+    <rule key="QueryClausesSpanningMultipleLinesMustBeginOnOwnLine">
+        <name>Query clauses spanning multiple lines must begin on own line</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#QueryClausesSpanningMultipleLinesMustBeginOnOwnLine</configKey>
+        <category name="Maintainability"/>
+        <description>Query clauses spanning multiple lines must begin on own line</description>
+    </rule>
+    <rule key="DoNotPlaceRegionsWithinElements">
+        <name>Do not place regions within elements</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#DoNotPlaceRegionsWithinElements</configKey>
+        <category name="Maintainability"/>
+        <description>Do not place regions within elements</description>
+    </rule>
+    <rule key="CodeMustNotContainEmptyStatements">
+        <name>Code must not contain empty statements</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#CodeMustNotContainEmptyStatements</configKey>
+        <category name="Maintainability"/>
+        <description>Code must not contain empty statements</description>
+    </rule>
+    <rule key="CodeMustNotContainMultipleStatementsOnOneLine">
+        <name>Code must not contain multiple statements on one line</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#CodeMustNotContainMultipleStatementsOnOneLine</configKey>
+        <category name="Maintainability"/>
+        <description>Code must not contain multiple statements on one line</description>
+    </rule>
+    <rule key="BlockStatementsMustNotContainEmbeddedComments">
+        <name>Block statements must not contain embedded comments</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#BlockStatementsMustNotContainEmbeddedComments</configKey>
+        <category name="Maintainability"/>
+        <description>Block statements must not contain embedded comments</description>
+    </rule>
+    <rule key="BlockStatementsMustNotContainEmbeddedRegions">
+        <name>Block statements must not contain embedded regions</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#BlockStatementsMustNotContainEmbeddedRegions</configKey>
+        <category name="Maintainability"/>
+        <description>Block statements must not contain embedded regions</description>
+    </rule>
+    <rule key="UseStringEmptyForEmptyStrings">
+        <name>Use string empty for empty strings</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#UseStringEmptyForEmptyStrings</configKey>
+        <category name="Maintainability"/>
+        <description>Use string empty for empty strings</description>
+    </rule>
+    <rule key="UseBuiltInTypeAlias">
+        <name>Use built in type alias</name>
+        <configKey>Microsoft.StyleCop.CSharp.ReadabilityRules#UseBuiltInTypeAlias</configKey>
+        <category name="Maintainability"/>
+        <description>Use built in type alias</description>
+    </rule>
+    <rule key="KeywordsMustBeSpacedCorrectly">
+        <name>Keywords must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Keywords must be spaced correctly</description>
+    </rule>
+    <rule key="CommasMustBeSpacedCorrectly">
+        <name>Commas must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#CommasMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Commas must be spaced correctly</description>
+    </rule>
+    <rule key="SemicolonsMustBeSpacedCorrectly">
+        <name>Semicolons must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#SemicolonsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Semicolons must be spaced correctly</description>
+    </rule>
+    <rule key="SymbolsMustBeSpacedCorrectly">
+        <name>Symbols must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#SymbolsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Symbols must be spaced correctly</description>
+    </rule>
+    <rule key="DocumentationLinesMustBeginWithSingleSpace">
+        <name>Documentation lines must begin with single space</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#DocumentationLinesMustBeginWithSingleSpace</configKey>
+        <category name="Usability"/>
+        <description>Documentation lines must begin with single space</description>
+    </rule>
+    <rule key="SingleLineCommentsMustBeginWithSingleSpace">
+        <name>Single line comments must begin with single space</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#SingleLineCommentsMustBeginWithSingleSpace</configKey>
+        <category name="Usability"/>
+        <description>Single line comments must begin with single space</description>
+    </rule>
+    <rule key="PreprocessorKeywordsMustNotBePrecededBySpace">
+        <name>Preprocessor keywords must not be preceded by space</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#PreprocessorKeywordsMustNotBePrecededBySpace</configKey>
+        <category name="Usability"/>
+        <description>Preprocessor keywords must not be preceded by space</description>
+    </rule>
+    <rule key="OperatorKeywordMustBeFollowedBySpace">
+        <name>Operator keyword must be followed by space</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OperatorKeywordMustBeFollowedBySpace</configKey>
+        <category name="Usability"/>
+        <description>Operator keyword must be followed by space</description>
+    </rule>
+    <rule key="OpeningParenthesisMustBeSpacedCorrectly">
+        <name>Opening parenthesis must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OpeningParenthesisMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Opening parenthesis must be spaced correctly</description>
+    </rule>
+    <rule key="ClosingParenthesisMustBeSpacedCorrectly">
+        <name>Closing parenthesis must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ClosingParenthesisMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Closing parenthesis must be spaced correctly</description>
+    </rule>
+    <rule key="OpeningSquareBracketsMustBeSpacedCorrectly">
+        <name>Opening square brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OpeningSquareBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Opening square brackets must be spaced correctly</description>
+    </rule>
+    <rule key="ClosingSquareBracketsMustBeSpacedCorrectly">
+        <name>Closing square brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ClosingSquareBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Closing square brackets must be spaced correctly</description>
+    </rule>
+    <rule key="OpeningCurlyBracketsMustBeSpacedCorrectly">
+        <name>Opening curly brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OpeningCurlyBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Opening curly brackets must be spaced correctly</description>
+    </rule>
+    <rule key="ClosingCurlyBracketsMustBeSpacedCorrectly">
+        <name>Closing curly brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ClosingCurlyBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Closing curly brackets must be spaced correctly</description>
+    </rule>
+    <rule key="OpeningGenericBracketsMustBeSpacedCorrectly">
+        <name>Opening generic brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OpeningGenericBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Opening generic brackets must be spaced correctly</description>
+    </rule>
+    <rule key="ClosingGenericBracketsMustBeSpacedCorrectly">
+        <name>Closing generic brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ClosingGenericBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Closing generic brackets must be spaced correctly</description>
+    </rule>
+    <rule key="OpeningAttributeBracketsMustBeSpacedCorrectly">
+        <name>Opening attribute brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#OpeningAttributeBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Opening attribute brackets must be spaced correctly</description>
+    </rule>
+    <rule key="ClosingAttributeBracketsMustBeSpacedCorrectly">
+        <name>Closing attribute brackets must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ClosingAttributeBracketsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Closing attribute brackets must be spaced correctly</description>
+    </rule>
+    <rule key="NullableTypeSymbolsMustNotBePrecededBySpace">
+        <name>Nullable type symbols must not be preceded by space</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#NullableTypeSymbolsMustNotBePrecededBySpace</configKey>
+        <category name="Usability"/>
+        <description>Nullable type symbols must not be preceded by space</description>
+    </rule>
+    <rule key="MemberAccessSymbolsMustBeSpacedCorrectly">
+        <name>Member access symbols must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#MemberAccessSymbolsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Member access symbols must be spaced correctly</description>
+    </rule>
+    <rule key="IncrementDecrementSymbolsMustBeSpacedCorrectly">
+        <name>Increment decrement symbols must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#IncrementDecrementSymbolsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Increment decrement symbols must be spaced correctly</description>
+    </rule>
+    <rule key="NegativeSignsMustBeSpacedCorrectly">
+        <name>Negative signs must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#NegativeSignsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Negative signs must be spaced correctly</description>
+    </rule>
+    <rule key="PositiveSignsMustBeSpacedCorrectly">
+        <name>Positive signs must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#PositiveSignsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Positive signs must be spaced correctly</description>
+    </rule>
+    <rule key="DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly">
+        <name>Dereference and access of symbols must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Dereference and access of symbols must be spaced correctly</description>
+    </rule>
+    <rule key="ColonsMustBeSpacedCorrectly">
+        <name>Colons must be spaced correctly</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#ColonsMustBeSpacedCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Colons must be spaced correctly</description>
+    </rule>
+    <rule key="CodeMustNotContainMultipleWhitespaceInARow">
+        <name>Code must not contain multiple whitespace in a row</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#CodeMustNotContainMultipleWhitespaceInARow</configKey>
+        <category name="Usability"/>
+        <description>Code must not contain multiple whitespace in a row</description>
+    </rule>
+    <rule key="CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation">
+        <name>Code must not contain space after new keyword in implicitly typed array allocation</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation</configKey>
+        <category name="Usability"/>
+        <description>Code must not contain space after new keyword in implicitly typed array allocation</description>
+    </rule>
+    <rule key="TabsMustNotBeUsed">
+        <name>Tabs must not be used</name>
+        <configKey>Microsoft.StyleCop.CSharp.SpacingRules#TabsMustNotBeUsed</configKey>
+        <category name="Usability"/>
+        <description>Tabs must not be used</description>
+    </rule>
+</rules>

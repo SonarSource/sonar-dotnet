@@ -1,0 +1,36 @@
+<StyleCopSettings Version="4.3"> 
+    <Analyzers> 
+        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules"> 
+            <Rules> 
+                <Rule Name="ElementMustBeginWithUpperCaseLetter"> 
+                    <RuleSettings> 
+                        <BooleanProperty Name="Enabled">True</BooleanProperty> 
+                    </RuleSettings> 
+                </Rule> 
+                <Rule Name="ElementMustBeginWithLowerCaseLetter"> 
+                    <RuleSettings> 
+                        <BooleanProperty Name="Enabled">False</BooleanProperty> 
+                    </RuleSettings> 
+                </Rule>
+            </Rules> 
+        </Analyzer> 
+        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.SpacingRules"> 
+            <Rules> 
+                <Rule Name="KeywordsMustBeSpacedCorrectly"> 
+                    <RuleSettings> 
+                        <BooleanProperty Name="Enabled">True</BooleanProperty> 
+                    </RuleSettings> 
+                </Rule>
+            </Rules> 
+        </Analyzer>
+		<Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.LayoutRules">
+      		<Rules>
+        		<Rule Name="CurlyBracketsForMultiLineStatementsMustNotShareLine">
+          			<RuleSettings>
+            			<BooleanProperty Name="Enabled">False</BooleanProperty>
+          			</RuleSettings>
+        		</Rule>
+            </Rules> 
+        </Analyzer>
+    </Analyzers> 
+</StyleCopSettings> 

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.codehaus.sonar-plugins</groupId>
+		<artifactId>parent</artifactId>
+		<version>9</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
+	<groupId>org.codehaus.sonar-plugins.csharp</groupId>
+	<artifactId>parent</artifactId>
+	<packaging>pom</packaging>
+	<version>0.7</version>
+
+	<name>Sonar C# Plugin</name>
+	<inceptionYear>2010</inceptionYear>
+	<url>http://docs.codehaus.org/display/SONAR/XXXXXXX</url>
+	<organization>
+		<name>Codehaus Sonar Plugins</name>
+		<url>http://sonar-plugins.codehaus.org/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>fabemn</id>
+			<name>Fabrice Bellingard</name>
+		</developer>
+		<developer>
+			<id>alex</id>
+			<name>Alexandre Victoor</name>
+		</developer>
+		<developer>
+			<id>jose</id>
+			<name>Jose Chillan</name>
+		</developer>
+	</developers>
+
+	<modules>
+		<!-- TODO: remove this line when the component will be extracted -->
+		<module>tools</module>
+
+		<module>sonar-csharp-core-plugin</module>
+		<module>sonar-csharp-fxcop-plugin</module>
+		<module>sonar-csharp-stylecop-plugin</module>
+		<module>sonar-csharp-gendarme-plugin</module>
+	</modules>
+
+	<scm>
+		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/csharp</connection>
+		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/csharp</developerConnection>
+		<url>http://svn.sonar-plugins.codehaus.org</url>
+	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/14696</url>
+	</issueManagement>
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>http://ci.codehaus.org/browse/SONAR-CSHARP</url>
+	</ciManagement>
+
+	<properties>
+		<license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
+		<jdk.min.version>1.5</jdk.min.version>
+		<sonar.buildVersion>2.9-SNAPSHOT</sonar.buildVersion>
+		<dotnet.tools>0.1</dotnet.tools>
+	</properties>
+
+	<dependencies>
+		<!-- Unit tests -->
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-testing-harness</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- .NET tools -->
+			<dependency>
+				<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+				<artifactId>dotnet-tools-commons</artifactId>
+				<version>${dotnet.tools}</version>
+			</dependency>
+			<!-- sonar open-source -->
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-plugin-api</artifactId>
+				<version>${sonar.buildVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-squid</artifactId>
+				<version>${sonar.buildVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-duplications</artifactId>
+				<version>${sonar.buildVersion}</version>
+			</dependency>
+			<!-- Other dependencies -->
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.4</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.collections</groupId>
+				<artifactId>google-collections</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.5.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.5.6</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>0.9.15</version>
+			</dependency>
+			<!-- Unit tests -->
+			<dependency>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-testing-harness</artifactId>
+				<version>${sonar.buildVersion}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>1.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-core</artifactId>
+				<version>3.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FxCopProject Version="1.36">
+    <ProjectOptions>
+        <SharedProject>True</SharedProject>
+        <SaveMessages>
+            <Project NewOnly="False" Status="Active, Excluded"/>
+            <Report NewOnly="False" Status="Active"/>
+        </SaveMessages>
+        <ProjectFile Deterministic="True" SaveByRuleGroup="" DefaultRuleCheck="True" DefaultTargetCheck="True" Compress="True"/>
+        <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+        <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+        <SourceLookup>True</SourceLookup>
+        <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+        <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+        <Spelling Locale="en-US"/>
+        <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+        <CustomDictionaries SearchProjectDir="True" SearchUserProfile="True" SearchFxCopDir="True"/>
+        <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+    </ProjectOptions>
+    <Rules>
+        <RuleFiles>
