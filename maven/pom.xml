@@ -66,10 +66,8 @@
 	</issueManagement>
 
 	<properties>
-		<!--  
 		<jdk.min.version>1.6</jdk.min.version>
 		<animal-sniffer.signature.artifactId>java16</animal-sniffer.signature.artifactId>
-		--> 
 
 		<!-- License header configuration -->
 		<license.title>Maven and Sonar plugin for .Net</license.title>
