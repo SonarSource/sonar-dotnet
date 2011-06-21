@@ -93,11 +93,12 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     root.resetSourceDirs();
     LOG.debug("- Root Project: {}", root.getName());
     String workDir = root.getWorkDir().getAbsolutePath().substring(root.getBaseDir().getAbsolutePath().length() + 1);
+    Properties rootProps = enhanceRootProperties(root);
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
       if ( !vsProject.isTest()) {
-        ProjectDefinition subProject = ProjectDefinition.create((Properties) root.getProperties().clone())
-            .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir))
+        ProjectDefinition subProject = ProjectDefinition.create((Properties) rootProps.clone()).setBaseDir(vsProject.getDirectory())
+            .setWorkDir(new File(vsProject.getDirectory(), workDir))
             .setKey(StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName()))
             .setVersion(root.getVersion()).setName(vsProject.getName()).setSourceDirs(".")
             .addContainerExtension(microsoftWindowsEnvironment);
@@ -110,6 +111,15 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
         root.addSubProject(subProject);
       }
     }
+  }
+
+  protected Properties enhanceRootProperties(ProjectDefinition root) {
+    Properties props = root.getProperties();
+    if (StringUtils.isBlank(props.getProperty("sonar.sourceEncoding"))) {
+      LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
+      props.put("sonar.sourceEncoding", "UTF-8");
+    }
+    return props;
   }
 
   private void retrieveMicrosoftWindowsEnvironmentConfig() {

@@ -21,6 +21,7 @@
 package org.sonar.plugins.csharp.core;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -81,6 +82,15 @@ public class VisualStudioProjectBuilderTest {
     root.setKey("groupId:artifactId");
     reactor = new ProjectReactor(root);
     projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+  }
+
+  @Test
+  public void testExtractRootProperties() throws Exception {
+    root.getProperties().put("fake", "foo");
+    assertThat(root.getProperties().getProperty("sonar.sourceEncoding"), nullValue());
+    Properties props = projectBuilder.enhanceRootProperties(root);
+    assertThat(props.getProperty("fake"), is("foo"));
+    assertThat(props.getProperty("sonar.sourceEncoding"), is("UTF-8"));
   }
 
   @Test(expected = SonarException.class)
