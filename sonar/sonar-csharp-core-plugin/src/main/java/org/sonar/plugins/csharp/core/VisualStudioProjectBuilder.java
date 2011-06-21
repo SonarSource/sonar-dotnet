@@ -132,12 +132,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     // Silverlight folder
     File silverlightDirectory = new File(configuration.getString(CSharpConstants.getSilverlightDirKey(silverlightVersion),
         CSharpConstants.getSilverlightDirDefaultValue(silverlightVersion)));
-    if ( !silverlightDirectory.isDirectory()) {
-      throw new SonarException("The following Silverlight directory does not exist, please check your plugin configuration: "
-          + silverlightDirectory.getPath());
-    } else {
-      microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
-    }
+    microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }
 
   private void createVisualStudioSolution(File baseDir) {

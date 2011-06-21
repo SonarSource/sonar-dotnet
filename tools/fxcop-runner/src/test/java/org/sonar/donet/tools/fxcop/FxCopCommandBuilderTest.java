@@ -145,6 +145,26 @@ public class FxCopCommandBuilderTest {
     assertThat(commands[4], endsWith("SilverlightFolder"));
   }
 
+  @Test(expected = FxCopException.class)
+  public void testToCommandForSilverlightProjectWithoutSilverlightFolder() throws Exception {
+    when(vsProject.isSilverlightProject()).thenReturn(true);
+    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(vsProject).setExecutable(fakeFxCopExecutable)
+        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
+        .setAssemblyDependencyDirectories("FakeDepFolder", "UnexistingFolder").setSilverlightFolder(null);
+
+    fxCopCommandBuilder.toCommand();
+  }
+
+  @Test(expected = FxCopException.class)
+  public void testToCommandForSilverlightProjectWithInexistingSilverlightFolder() throws Exception {
+    when(vsProject.isSilverlightProject()).thenReturn(true);
+    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(vsProject).setExecutable(fakeFxCopExecutable)
+        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
+        .setAssemblyDependencyDirectories("FakeDepFolder", "UnexistingFolder").setSilverlightFolder(new File("Foo"));
+
+    fxCopCommandBuilder.toCommand();
+  }
+
   @Test
   public void testToCommandWithSpecifiedAssemblies() throws Exception {
     FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(vsProject).setExecutable(fakeFxCopExecutable)

@@ -108,6 +108,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
    *          the dotnetVersion to set
    */
   public void setDotnetVersion(String dotnetVersion) {
+    checkIfLocked();
     this.dotnetVersion = dotnetVersion;
   }
 
@@ -156,6 +157,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
    *          the silverlightVersion to set
    */
   public void setSilverlightVersion(String silverlightVersion) {
+    checkIfLocked();
     this.silverlightVersion = silverlightVersion;
   }
 
@@ -175,6 +177,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
    *          the silverlightDirectory to set
    */
   public void setSilverlightDirectory(File silverlightDirectory) {
+    checkIfLocked();
     this.silverlightDirectory = silverlightDirectory;
   }
 

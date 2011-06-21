@@ -194,7 +194,7 @@ public final class FxCopCommandBuilder {
    * 
    * @return the Command that represent the command to launch.
    */
-  public Command toCommand() {
+  public Command toCommand() throws FxCopException {
     List<File> assemblyToScanFiles = getAssembliesToScan();
     List<File> assemblyDependencyDirectoriesFiles = getAsListOfFiles(assemblyDependencyDirectories);
     validate(assemblyToScanFiles);
@@ -221,6 +221,10 @@ public final class FxCopCommandBuilder {
     }
 
     if (isSilverlightUsed()) {
+      if (silverlightFolder == null || !silverlightFolder.isDirectory()) {
+        throw new FxCopException("The following Silverlight directory does not exist, please check your plugin configuration: "
+            + (silverlightFolder == null ? "NULL" : silverlightFolder.getPath()));
+      }
       LOG.debug("   o [Silverlight] " + silverlightFolder.getAbsolutePath());
       command.addArgument("/d:" + silverlightFolder.getAbsolutePath());
     }
