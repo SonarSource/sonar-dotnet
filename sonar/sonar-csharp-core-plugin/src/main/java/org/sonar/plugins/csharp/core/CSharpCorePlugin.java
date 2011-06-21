@@ -62,7 +62,11 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
         defaultValue = CSharpConstants.SOLUTION_FILE_DEFVALUE,
         name = "Solution to analyse",
         description = "Relative path to the \".sln\" file that represents the solution to analyse. If none provided, a \".sln\" file will be searched at the root of the project.",
-        global = false, project = true) })
+        global = false, project = true),
+    @Property(key = CSharpConstants.EXCLUDE_GENERATED_CODE_KEY, defaultValue = CSharpConstants.EXCLUDE_GENERATED_CODE_DEFVALUE + "",
+        name = "Exclude generated code",
+        description = "Set to false to include generated code like 'Reference.cs' files or '*.designer.cs' files.", global = true,
+        project = true) })
 public class CSharpCorePlugin extends SonarPlugin {
 
   /**

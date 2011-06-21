@@ -115,9 +115,20 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   protected Properties enhanceRootProperties(ProjectDefinition root) {
     Properties props = root.getProperties();
+    // Handling encoding
     if (StringUtils.isBlank(props.getProperty("sonar.sourceEncoding"))) {
       LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
-      props.put("sonar.sourceEncoding", "UTF-8");
+      props.setProperty("sonar.sourceEncoding", "UTF-8");
+    }
+    // Handling exclusions
+    if (configuration.getBoolean(CSharpConstants.EXCLUDE_GENERATED_CODE_KEY, CSharpConstants.EXCLUDE_GENERATED_CODE_DEFVALUE)) {
+      String exclusions = props.getProperty("sonar.exclusions", "");
+      StringBuilder newExclusions = new StringBuilder(exclusions);
+      if ( !StringUtils.isEmpty(exclusions)) {
+        newExclusions.append(",");
+      }
+      newExclusions.append(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE);
+      props.setProperty("sonar.exclusions", newExclusions.toString());
     }
     return props;
   }

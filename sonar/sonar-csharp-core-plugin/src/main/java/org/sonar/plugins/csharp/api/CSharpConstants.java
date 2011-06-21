@@ -42,6 +42,8 @@ public final class CSharpConstants {
 
   public static final String CSHARP_CORE_EXECUTED = "C# Core executed";
 
+  public static final String DEFAULT_FILES_TO_EXCLUDE = "**/Reference.cs,**/*.designer.cs";
+
   // ----------- Plugin Configuration Properties ----------- //
 
   public static final String DOTNET_2_0_SDK_DIR_KEY = "sonar.dotnet.2.0.sdk.directory";
@@ -70,6 +72,9 @@ public final class CSharpConstants {
 
   public static final String SOLUTION_FILE_KEY = "sonar.dotnet.visualstudio.solution.file";
   public static final String SOLUTION_FILE_DEFVALUE = "";
+
+  public static final String EXCLUDE_GENERATED_CODE_KEY = "sonar.dotnet.excludeGeneratedCode";
+  public static final boolean EXCLUDE_GENERATED_CODE_DEFVALUE = true;
 
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
