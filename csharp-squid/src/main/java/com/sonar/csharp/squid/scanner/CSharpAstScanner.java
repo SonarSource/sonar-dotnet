@@ -35,7 +35,7 @@ import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
 import com.sonar.csharp.squid.metric.CSharpStatementVisitor;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.csharp.squid.tree.CSharpFileVisitor;
-import com.sonar.csharp.squid.tree.CSharpMethodVisitor;
+import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
 import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AuditListener;
@@ -127,7 +127,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     visitors.add(CSharpFileVisitor.class);
     visitors.add(CSharpNamespaceVisitor.class);
     visitors.add(CSharpTypeVisitor.class);
-    visitors.add(CSharpMethodVisitor.class);
+    visitors.add(CSharpMemberVisitor.class);
     visitors.add(CSharpAccessorVisitor.class);
     visitors.add(CSharpLineVisitor.class);
     visitors.add(CSharpLocVisitor.class);

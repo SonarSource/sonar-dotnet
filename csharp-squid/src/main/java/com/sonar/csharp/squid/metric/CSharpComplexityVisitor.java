@@ -12,23 +12,23 @@ import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 
 /**
  * Visitor that computes the McCabe complexity.
  */
 public class CSharpComplexityVisitor extends CSharpAstVisitor {
 
+  private CSharpGrammar g;
+
   /**
    * {@inheritDoc}
    */
   @Override
   public void init() {
-    CSharpGrammar g = getCSharpGrammar();
+    g = getCSharpGrammar();
     subscribeTo(g.ifStatement, g.switchStatement, g.labeledStatement, g.whileStatement, g.doStatement, g.forStatement, g.returnStatement,
-        g.methodDeclaration, g.getAccessorDeclaration, g.setAccessorDeclaration, g.addAccessorDeclaration, g.removeAccessorDeclaration,
-        g.operatorDeclaration, g.constructorDeclaration, g.destructorDeclaration, g.staticConstructorDeclaration, CSharpPunctuator.AND_OP,
-        CSharpPunctuator.OR_OP, CSharpKeyword.CASE);
+        g.methodBody, g.accessorBody, g.addAccessorDeclaration, g.removeAccessorDeclaration, g.operatorBody, g.constructorBody,
+        g.destructorBody, g.staticConstructorBody, CSharpPunctuator.AND_OP, CSharpPunctuator.OR_OP, CSharpKeyword.CASE);
   }
 
   /**
@@ -36,7 +36,12 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(getCSharpGrammar().returnStatement) && isLastReturnStatement(node)) {
+    if (node.hasChildren() && node.getChild(0).is(CSharpPunctuator.SEMICOLON)) {
+      // this is an empty declaration
+      return;
+    }
+    if (node.is(g.returnStatement) && isLastReturnStatement(node)) {
+      // last return of a block, do not count +1
       return;
     }
     peekSourceCode().add(CSharpMetric.COMPLEXITY, 1);
@@ -45,8 +50,7 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
   private boolean isLastReturnStatement(AstNode node) {
     AstNode currentNode = node;
     AstNode parent = currentNode.getParent();
-    AstNodeType blockType = getCSharpGrammar().block;
-    while ( !parent.getType().equals(blockType)) {
+    while ( !parent.is(g.block)) {
       currentNode = parent;
       parent = currentNode.getParent();
     }
@@ -54,17 +58,15 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
     if ( !currentNode.nextSibling().is(CSharpPunctuator.RCURLYBRACE)) {
       return false;
     }
-    AstNodeType parentType = parent.getParent().getType();
-    if (isMemberBloc(parentType)) {
+    if (isMemberBloc(parent.getParent())) {
       return true;
     }
     return false;
   }
 
-  private boolean isMemberBloc(AstNodeType parentType) {
-    return parentType.equals(getCSharpGrammar().methodBody) || parentType.equals(getCSharpGrammar().accessorBody)
-        || parentType.equals(getCSharpGrammar().addAccessorDeclaration) || parentType.equals(getCSharpGrammar().removeAccessorDeclaration)
-        || parentType.equals(getCSharpGrammar().operatorBody) || parentType.equals(getCSharpGrammar().constructorBody)
-        || parentType.equals(getCSharpGrammar().destructorBody) || parentType.equals(getCSharpGrammar().staticConstructorBody);
+  private boolean isMemberBloc(AstNode parent) {
+    return parent.is(g.methodBody) || parent.is(g.accessorBody) || parent.is(g.addAccessorDeclaration)
+        || parent.is(g.removeAccessorDeclaration) || parent.is(g.operatorBody) || parent.is(g.constructorBody)
+        || parent.is(g.destructorBody) || parent.is(g.staticConstructorBody);
   }
 }

@@ -28,7 +28,7 @@ public class CSharpComplexityVisitorTest {
     squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
     SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.COMPLEXITY);
 
-    assertThat(project.getInt(CSharpMetric.COMPLEXITY), is(76));
+    assertThat(project.getInt(CSharpMetric.COMPLEXITY), is(72));
   }
 
   @Test
