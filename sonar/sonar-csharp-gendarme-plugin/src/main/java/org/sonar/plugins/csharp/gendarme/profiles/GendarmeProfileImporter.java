@@ -56,7 +56,7 @@ public class GendarmeProfileImporter extends ProfileImporter {
   private RuleQuery ruleQuery;
 
   public GendarmeProfileImporter(RuleFinder ruleFinder) {
-    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.PLUGIN_NAME);
+    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
     this.ruleQuery = RuleQuery.create().withRepositoryKey(GendarmeConstants.REPOSITORY_KEY);

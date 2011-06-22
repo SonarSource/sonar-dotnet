@@ -51,7 +51,7 @@ public class FxCopProfileExporter extends ProfileExporter {
   private static final String FXCOP_PROJECT_FILE_FOOTER = "fxcop-project-file-footer.txt";
 
   public FxCopProfileExporter() {
-    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.PLUGIN_NAME);
+    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }

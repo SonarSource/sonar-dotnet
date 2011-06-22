@@ -28,15 +28,11 @@ public final class FxCopConstants {
   private FxCopConstants() {
   }
 
-  public static final String PLUGIN_KEY = "csharpfxcop";
-  public static final String PLUGIN_NAME = "C# FxCop";
-
-  public static final String REPOSITORY_KEY = PLUGIN_KEY;
+  public static final String REPOSITORY_KEY = "fxcop";
   public static final String REPOSITORY_NAME = "FxCop";
 
   public static final String FXCOP_RULES_FILE = "sonar.FxCop";
   public static final String FXCOP_REPORT_XML = "fxcop-report.xml";
-  public static final String SL_FXCOP_REPORT_XML = "silverlight-fxcop-report.xml";
 
   // ----------- Plugin Configuration Properties ----------- //
   public static final String EXECUTABLE_KEY = "sonar.fxcop.executable";

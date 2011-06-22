@@ -46,7 +46,7 @@ public class FxCopProfileImporter extends ProfileImporter {
   private RuleFinder ruleFinder;
 
   public FxCopProfileImporter(RuleFinder ruleFinder) {
-    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.PLUGIN_NAME);
+    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
   }

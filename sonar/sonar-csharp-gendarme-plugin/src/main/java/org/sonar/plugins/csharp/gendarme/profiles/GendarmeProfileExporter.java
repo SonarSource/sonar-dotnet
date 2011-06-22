@@ -43,7 +43,7 @@ import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 public class GendarmeProfileExporter extends ProfileExporter {
 
   public GendarmeProfileExporter() {
-    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.PLUGIN_NAME);
+    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }

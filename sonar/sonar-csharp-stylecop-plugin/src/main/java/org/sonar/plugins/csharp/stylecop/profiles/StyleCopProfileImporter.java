@@ -46,7 +46,7 @@ public class StyleCopProfileImporter extends ProfileImporter {
   private RuleFinder ruleFinder;
 
   public StyleCopProfileImporter(RuleFinder ruleFinder) {
-    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.PLUGIN_NAME);
+    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
   }

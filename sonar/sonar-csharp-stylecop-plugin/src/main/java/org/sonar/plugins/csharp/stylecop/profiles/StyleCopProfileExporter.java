@@ -48,7 +48,7 @@ import com.google.common.collect.Maps;
 public class StyleCopProfileExporter extends ProfileExporter {
 
   public StyleCopProfileExporter() {
-    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.PLUGIN_NAME);
+    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }
