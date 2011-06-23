@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.csharp.api;
+package org.sonar.plugins.csharp.api.squid;
 
 import org.sonar.squid.measures.AggregationFormula;
 import org.sonar.squid.measures.CalculatedMetricFormula;

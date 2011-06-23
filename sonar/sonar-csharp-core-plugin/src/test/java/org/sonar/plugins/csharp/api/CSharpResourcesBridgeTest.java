@@ -30,8 +30,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
-import org.sonar.plugins.csharp.api.source.SourceMember;
-import org.sonar.plugins.csharp.api.source.SourceType;
+import org.sonar.plugins.csharp.api.squid.source.SourceMember;
+import org.sonar.plugins.csharp.api.squid.source.SourceType;
 import org.sonar.squid.api.SourceFile;
 
 public class CSharpResourcesBridgeTest {

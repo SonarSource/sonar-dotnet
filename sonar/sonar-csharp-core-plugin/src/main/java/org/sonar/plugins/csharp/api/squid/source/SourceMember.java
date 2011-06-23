@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.csharp.api.source;
+package org.sonar.plugins.csharp.api.squid.source;
 
 import org.sonar.squid.api.SourceCode;
 
