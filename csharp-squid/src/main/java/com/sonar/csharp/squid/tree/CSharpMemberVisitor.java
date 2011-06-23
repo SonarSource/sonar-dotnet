@@ -5,9 +5,9 @@
  */
 package com.sonar.csharp.squid.tree;
 
-import org.sonar.plugins.csharp.api.CSharpMetric;
-import org.sonar.plugins.csharp.api.source.SourceMember;
-import org.sonar.plugins.csharp.api.source.SourceType;
+import org.sonar.plugins.csharp.api.squid.CSharpMetric;
+import org.sonar.plugins.csharp.api.squid.source.SourceMember;
+import org.sonar.plugins.csharp.api.squid.source.SourceType;
 
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpPunctuator;

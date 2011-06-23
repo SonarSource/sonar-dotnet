@@ -8,7 +8,7 @@ package com.sonar.csharp.squid.metric;
 import java.util.List;
 import java.util.Map;
 
-import org.sonar.plugins.csharp.api.CSharpMetric;
+import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 
 import com.google.common.collect.Maps;
 import com.sonar.csharp.squid.api.CSharpGrammar;

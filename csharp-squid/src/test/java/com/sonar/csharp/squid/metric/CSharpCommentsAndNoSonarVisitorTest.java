@@ -14,7 +14,7 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.plugins.csharp.api.CSharpMetric;
+import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceProject;

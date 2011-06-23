@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.sonar.plugins.csharp.api.CSharpMetric;
+import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.recognizer.CodeRecognizer;
 import org.sonar.squid.recognizer.ContainsDetector;
