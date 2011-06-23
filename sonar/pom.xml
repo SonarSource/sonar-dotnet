@@ -19,6 +19,7 @@
 		<module>sonar-csharp-fxcop-plugin</module>
 		<module>sonar-csharp-stylecop-plugin</module>
 		<module>sonar-csharp-gendarme-plugin</module>
+		<module>sonar-csharp-gallio-plugin</module>
 	</modules>
 
 	<scm>
