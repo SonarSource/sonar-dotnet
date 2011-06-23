@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
 		<artifactId>parent</artifactId>
-		<version>9</version>
+		<version>10</version>
 	</parent>
 	<description>SonarSource C# modules for the C# ecosystem</description>
 	<properties>
