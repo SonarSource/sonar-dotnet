@@ -88,14 +88,20 @@ public class GallioSensor extends AbstractTestCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    String workDir = fileSystem.getSonarWorkingDirectory().getAbsolutePath()
-        .substring(fileSystem.getBasedir().getAbsolutePath().length() + 1);
+    String reportPath = null;
+    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
+      reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, "");
+      LOG.info("Reusing Gallio report: " + reportPath);
+    } else {
+      String workDir = fileSystem.getSonarWorkingDirectory().getAbsolutePath()
+          .substring(fileSystem.getBasedir().getAbsolutePath().length() + 1);
+      reportPath = workDir + "/" + GallioConstants.GALLIO_REPORT_XML;
+    }
 
-    File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), workDir + "/"
-        + GallioConstants.GALLIO_REPORT_XML);
-
+    File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);
     if ( !reportFile.isFile()) {
       LOG.warn("No report file found for: " + reportFile.getAbsolutePath());
+      context.saveMeasure(CoreMetrics.TESTS, 0.0);
       return;
     }
 
