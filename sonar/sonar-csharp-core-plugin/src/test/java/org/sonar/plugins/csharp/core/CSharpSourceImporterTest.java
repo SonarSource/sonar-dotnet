@@ -30,34 +30,16 @@ import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.resources.Java;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
-
-import com.google.common.collect.Lists;
 
 public class CSharpSourceImporterTest {
 
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private CSharp language;
   private CSharpSourceImporter importer;
 
   @Before
   public void init() {
-    VisualStudioProject project1 = mock(VisualStudioProject.class);
-    when(project1.getName()).thenReturn("Project #1");
-    VisualStudioProject project2 = mock(VisualStudioProject.class);
-    when(project2.getName()).thenReturn("Project Test");
-    when(project2.isTest()).thenReturn(true);
-    VisualStudioSolution solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(project1, project2));
-
-    microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
-    microsoftWindowsEnvironment.setCurrentSolution(solution);
-
     language = mock(CSharp.class);
-
-    importer = new CSharpSourceImporter(language, microsoftWindowsEnvironment);
+    importer = new CSharpSourceImporter(language);
   }
 
   @Test
@@ -77,17 +59,17 @@ public class CSharpSourceImporterTest {
   }
 
   @Test
-  public void testShouldNotExecuteOnTestProject() {
-    Project project = mock(Project.class);
-    when(project.getName()).thenReturn("Project Test");
-    when(project.getLanguage()).thenReturn(language);
-    assertFalse(importer.shouldExecuteOnProject(project));
-  }
-
-  @Test
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguage()).thenReturn(language);
+    assertTrue(importer.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldExecuteOnTestProject() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project Test");
     when(project.getLanguage()).thenReturn(language);
     assertTrue(importer.shouldExecuteOnProject(project));
   }

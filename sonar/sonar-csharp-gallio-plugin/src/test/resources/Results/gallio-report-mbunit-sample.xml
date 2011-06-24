@@ -1,0 +1,2730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gallio.org/">
+  <testPackage shadowCopy="false" debug="false">
+    <files>
+      <file>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.dll</file>
+    </files>
+    <hintDirectories />
+    <excludedFrameworkIds />
+    <properties />
+  </testPackage>
+  <testModel>
+    <test id="c2722843734a7a54" name="Root" fullName="" isTestCase="false">
+      <codeReference />
+      <codeLocation />
+      <metadata>
+        <entry key="TestKind">
+          <value>Root</value>
+        </entry>
+      </metadata>
+      <children>
+        <test id="df87b37df545676c" name="MbUnit.Samples" fullName="MbUnit.Samples" isTestCase="false">
+          <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL" />
+          <metadata>
+            <entry key="TestKind">
+              <value>MbUnit v3 Assembly</value>
+            </entry>
+            <entry key="File">
+              <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL</value>
+            </entry>
+            <entry key="CodeBase">
+              <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL</value>
+            </entry>
+            <entry key="Copyright">
+              <value>Copyright © 2005-2010 Gallio Project - http://www.gallio.org/</value>
+            </entry>
+            <entry key="Description">
+              <value>Sample MbUnit tests for demonstration purposes.</value>
+            </entry>
+            <entry key="Product">
+              <value>MbUnit</value>
+            </entry>
+            <entry key="Title">
+              <value>MbUnit.Samples</value>
+            </entry>
+            <entry key="Version">
+              <value>0.0.0.0</value>
+            </entry>
+            <entry key="Framework">
+              <value>MbUnit v3.2 build 708</value>
+            </entry>
+          </metadata>
+          <children>
+            <test id="13d39989c5c84ef1" name="SampleCollectionTest" fullName="MbUnit.Samples/SampleCollectionTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="d288a8c00996722f" name="CollectionTests" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="4d00c04bd87d1ccb" name="OutcomeDemo" fullName="MbUnit.Samples/OutcomeDemo" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+                <entry key="XmlDocumentation">
+                  <value>&lt;summary&gt;
+This test fixture demonstrates how you can cause tests to return different
+outcomes.
+&lt;/summary&gt;
+&lt;remarks&gt;
+Notice how we use methods like &lt;see cref="M:MbUnit.Framework.Assert.Fail" /&gt;, &lt;see cref="M:MbUnit.Framework.Assert.Inconclusive" /&gt;
+and &lt;see cref="M:MbUnit.Framework.Assert.Terminate(Gallio.Model.TestOutcome)" /&gt; to influence the outcome of the test.
+&lt;/remarks&gt;</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="624a824a6620be6c" name="Failed" fullName="MbUnit.Samples/OutcomeDemo/Failed" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Failed" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="43" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="a60e8f91962849bd" name="Passed" fullName="MbUnit.Samples/OutcomeDemo/Passed" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Passed" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="38" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="2e2381ea7f9c475d" name="Inconclusive" fullName="MbUnit.Samples/OutcomeDemo/Inconclusive" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Inconclusive" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="49" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="1988f4b17b399e40" name="RowsWithDifferentOutcomes" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters>
+                    <parameter id="1988f4b17b399e40@status" name="status">
+                      <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" parameter="status" />
+                      <codeLocation />
+                      <metadata />
+                    </parameter>
+                    <parameter id="1988f4b17b399e40@category" name="category">
+                      <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" parameter="category" />
+                      <codeLocation />
+                      <metadata />
+                    </parameter>
+                  </parameters>
+                </test>
+                <test id="386f985d5144e30f" name="Terminate" fullName="MbUnit.Samples/OutcomeDemo/Terminate" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Terminate" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="60" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="d80fe79e50922320" name="Skipped" fullName="MbUnit.Samples/OutcomeDemo/Skipped" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Skipped" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="55" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                    <entry key="IgnoreReason">
+                      <value>Skipped</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="ffd6007d6d63365" name="SampleExceptionTest" fullName="MbUnit.Samples/SampleExceptionTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="4d41b35c662c939e" name="ExceptionTests" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="9bc49ebb96484d57" name="SampleComparableTest" fullName="MbUnit.Samples/SampleComparableTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="3971771d84aa3b24" name="ComparisonTests" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="a55572ba83ce3cbe" name="TestLogDemo" fullName="MbUnit.Samples/TestLogDemo" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+                <entry key="XmlDocumentation">
+                  <value>&lt;summary&gt;
+This test fixture demonstrates some interesting features of the test log
+mechanism such as separating output into distinct "streams", creating
+nested sections, and embedding attachments.
+&lt;/summary&gt;</value>
+                </entry>
+                <entry key="Description">
+                  <value>Demonstrate the rich test logging features.</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="dbe781fdeb81d391" name="Sections" fullName="MbUnit.Samples/TestLogDemo/Sections" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="Sections" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="41" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                    <entry key="XmlDocumentation">
+                      <value>&lt;summary&gt;
+This demo writes messages to the test log grouped into sections.
+&lt;/summary&gt;</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="741696e4521d6154" name="Markers" fullName="MbUnit.Samples/TestLogDemo/Markers" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="Markers" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="58" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                    <entry key="XmlDocumentation">
+                      <value>&lt;summary&gt;
+This demo uses markers to attach semantic content to messages written
+to the test log.  The test report formatter transforms this information
+into styles, links and other presentation artifacts.
+&lt;/summary&gt;</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="25f9862ed841a653" name="MultipleStreams" fullName="MbUnit.Samples/TestLogDemo/MultipleStreams" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="MultipleStreams" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="91" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                    <entry key="XmlDocumentation">
+                      <value>&lt;summary&gt;
+This demo shows how different parts of the log can be isolated into
+separate log streams.  Gallio sends some output to built-in log
+streams automatically.  You can write to these built-in log streams
+or create log streams of your own.
+&lt;/summary&gt;</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="7e7c8491fc4acce1" name="EmbeddedImages" fullName="MbUnit.Samples/TestLogDemo/EmbeddedImages" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="EmbeddedImages" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="77" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                    <entry key="XmlDocumentation">
+                      <value>&lt;summary&gt;
+This demo embeds an image into the report.
+&lt;/summary&gt;</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="7831369c155a9a93" name="SampleListTest" fullName="MbUnit.Samples/SampleListTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="888ddc736b81064e" name="ListTests" fullName="MbUnit.Samples/SampleListTest/ListTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="af76e0bfae1e889a" name="SampleEquatableTest" fullName="MbUnit.Samples/SampleEquatableTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="1a3c04de10b78d72" name="EqualityTests" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="ac225b11c6b5de6" name="CustomComparerTest" fullName="MbUnit.Samples/CustomComparerTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomComparers" type="MbUnit.Samples.CustomComparers.CustomComparerTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomComparer.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="1deb02c4e3ed151d" name="Test" fullName="MbUnit.Samples/CustomComparerTest/Test" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomComparers" type="MbUnit.Samples.CustomComparers.CustomComparerTest" member="Test" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomComparer.cs" line="56" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="bc07f8c6f73fc9ac" name="SampleImmutableTest" fullName="MbUnit.Samples/SampleImmutableTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Immutability" type="MbUnit.Samples.ContractVerifiers.Immutability.SampleImmutableTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Immutability\SampleImmutable.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="295189f665b0ccc0" name="ImmutabilityTests" fullName="MbUnit.Samples/SampleImmutableTest/ImmutabilityTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Immutability" type="MbUnit.Samples.ContractVerifiers.Immutability.SampleImmutableTest" member="ImmutabilityTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Immutability\SampleImmutable.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="557f94049974f772" name="CustomEqualityComparerTest" fullName="MbUnit.Samples/CustomEqualityComparerTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomEqualityComparers" type="MbUnit.Samples.CustomEqualityComparers.CustomEqualityComparerTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomEqualityComparer.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="28de8af79f75e67c" name="Test" fullName="MbUnit.Samples/CustomEqualityComparerTest/Test" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomEqualityComparers" type="MbUnit.Samples.CustomEqualityComparers.CustomEqualityComparerTest" member="Test" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomEqualityComparer.cs" line="56" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="a4dd8cc3173cd393" name="RainbowFixture" fullName="MbUnit.Samples/RainbowFixture" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="d84a6f526f7771c7" name="ColorfulTest" fullName="MbUnit.Samples/RainbowFixture/ColorfulTest" isTestCase="true">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" member="ColorfulTest" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" line="35" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters>
+                    <parameter id="d84a6f526f7771c7@pen" name="pen">
+                      <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" member="ColorfulTest" parameter="pen" />
+                      <codeLocation />
+                      <metadata />
+                    </parameter>
+                  </parameters>
+                </test>
+              </children>
+              <parameters />
+            </test>
+            <test id="f869b2bed3557b17" name="SampleAccessorTest" fullName="MbUnit.Samples/SampleAccessorTest" isTestCase="false">
+              <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" />
+              <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="7e2d4fe602a74290" name="MagnitudeAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/MagnitudeAccessorTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="MagnitudeAccessorTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="3cfd72e1d43571fe" name="TextAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/TextAccessorTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="TextAccessorTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+                <test id="8de777b0330b3535" name="WhenAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/WhenAccessorTests" isTestCase="false">
+                  <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="WhenAccessorTests" />
+                  <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Suite</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+          </children>
+          <parameters />
+        </test>
+      </children>
+      <parameters />
+    </test>
+    <annotations>
+      <annotation type="warning" message="The test was ignored.&#xA;Reason: Skipped">
+        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="55" />
+        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Skipped" />
+      </annotation>
+    </annotations>
+  </testModel>
+  <testPackageRun startTime="2011-02-23T19:01:10.8412812+01:00" endTime="2011-02-23T19:01:17.9345772+01:00">
+    <testStepRun startTime="2011-02-23T19:01:16.1690652+01:00" endTime="2011-02-23T19:01:17.9345772+01:00">
+      <testStep id="968008945e027222" name="Root" fullName="" testId="c2722843734a7a54" isPrimary="true" isTestCase="false" isDynamic="false">
+        <codeReference />
+        <codeLocation />
+        <metadata>
+          <entry key="TestKind">
+            <value>Root</value>
+          </entry>
+        </metadata>
+      </testStep>
+      <children>
+        <testStepRun startTime="2011-02-23T19:01:16.2471852+01:00" endTime="2011-02-23T19:01:17.8877052+01:00">
+          <testStep id="e6741135d114f541" name="MbUnit.Samples" fullName="MbUnit.Samples" testId="df87b37df545676c" isPrimary="true" isTestCase="false" isDynamic="false">
+            <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL" />
+            <metadata>
+              <entry key="TestKind">
+                <value>MbUnit v3 Assembly</value>
+              </entry>
+              <entry key="File">
+                <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL</value>
+              </entry>
+              <entry key="CodeBase">
+                <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\bin\MbUnit.Samples.DLL</value>
+              </entry>
+              <entry key="Copyright">
+                <value>Copyright © 2005-2010 Gallio Project - http://www.gallio.org/</value>
+              </entry>
+              <entry key="Description">
+                <value>Sample MbUnit tests for demonstration purposes.</value>
+              </entry>
+              <entry key="Product">
+                <value>MbUnit</value>
+              </entry>
+              <entry key="Title">
+                <value>MbUnit.Samples</value>
+              </entry>
+              <entry key="Version">
+                <value>0.0.0.0</value>
+              </entry>
+              <entry key="Framework">
+                <value>MbUnit v3.2 build 708</value>
+              </entry>
+            </metadata>
+          </testStep>
+          <children>
+            <testStepRun startTime="2011-02-23T19:01:16.2628092+01:00" endTime="2011-02-23T19:01:16.3253052+01:00">
+              <testStep id="8fcd03dd8f4d6a4" name="CustomComparerTest" fullName="MbUnit.Samples/CustomComparerTest" testId="ac225b11c6b5de6" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomComparers" type="MbUnit.Samples.CustomComparers.CustomComparerTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomComparer.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:16.2784332+01:00" endTime="2011-02-23T19:01:16.3096812+01:00">
+                  <testStep id="c505566c47a100ce" name="Test" fullName="MbUnit.Samples/CustomComparerTest/Test" testId="1deb02c4e3ed151d" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomComparers" type="MbUnit.Samples.CustomComparers.CustomComparerTest" member="Test" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomComparer.cs" line="56" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="2" duration="0.0312443">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="2" duration="0.046351699999999996">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:16.3253052+01:00" endTime="2011-02-23T19:01:16.3409292+01:00">
+              <testStep id="d45f377dbe0cec09" name="CustomEqualityComparerTest" fullName="MbUnit.Samples/CustomEqualityComparerTest" testId="557f94049974f772" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomEqualityComparers" type="MbUnit.Samples.CustomEqualityComparers.CustomEqualityComparerTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomEqualityComparer.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:16.3253052+01:00" endTime="2011-02-23T19:01:16.3409292+01:00">
+                  <testStep id="6d7fcc27124b0abd" name="Test" fullName="MbUnit.Samples/CustomEqualityComparerTest/Test" testId="28de8af79f75e67c" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomEqualityComparers" type="MbUnit.Samples.CustomEqualityComparers.CustomEqualityComparerTest" member="Test" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomComparers\CustomEqualityComparer.cs" line="56" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="2" duration="0.0057066999999999994">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="2" duration="0.0087149999999999988">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:16.3409292+01:00" endTime="2011-02-23T19:01:17.2002492+01:00">
+              <testStep id="3da7ff7797cb8b91" name="OutcomeDemo" fullName="MbUnit.Samples/OutcomeDemo" testId="4d00c04bd87d1ccb" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                  <entry key="XmlDocumentation">
+                    <value>&lt;summary&gt;
+This test fixture demonstrates how you can cause tests to return different
+outcomes.
+&lt;/summary&gt;
+&lt;remarks&gt;
+Notice how we use methods like &lt;see cref="M:MbUnit.Framework.Assert.Fail" /&gt;, &lt;see cref="M:MbUnit.Framework.Assert.Inconclusive" /&gt;
+and &lt;see cref="M:MbUnit.Framework.Assert.Terminate(Gallio.Model.TestOutcome)" /&gt; to influence the outcome of the test.
+&lt;/remarks&gt;</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:16.3409292+01:00" endTime="2011-02-23T19:01:16.9815132+01:00">
+                  <testStep id="11e0e640655f23c9" name="Failed" fullName="MbUnit.Samples/OutcomeDemo/Failed" testId="624a824a6620be6c" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Failed" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="43" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.6417077">
+                    <outcome status="failed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Failures">
+                        <body>
+                          <contents>
+                            <marker class="AssertionFailure">
+                              <contents>
+                                <section name="An assertion failed.">
+                                  <contents>
+                                    <text><![CDATA[Failed for demonstration purposes.
+
+]]></text>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at MbUnit.Samples.FeatureDemos.OutcomeDemo.Failed() in ]]></text>
+                                        <marker class="CodeLocation">
+                                          <contents>
+                                            <text><![CDATA[C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs:line 44]]></text>
+                                          </contents>
+                                          <attributes>
+                                            <attribute name="line" value="44" />
+                                            <attribute name="path" value="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" />
+                                          </attributes>
+                                        </marker>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                    <text><![CDATA[
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                              <attributes />
+                            </marker>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:16.9815132+01:00" endTime="2011-02-23T19:01:17.0127612+01:00">
+                  <testStep id="8ee7854ce67a5394" name="Inconclusive" fullName="MbUnit.Samples/OutcomeDemo/Inconclusive" testId="2e2381ea7f9c475d" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Inconclusive" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="49" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0202806">
+                    <outcome status="inconclusive" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Warnings">
+                        <body>
+                          <contents>
+                            <section name="Execute">
+                              <contents>
+                                <marker class="Exception">
+                                  <contents>
+                                    <marker class="ExceptionType">
+                                      <contents>
+                                        <text><![CDATA[Gallio.Framework.TestInconclusiveException]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                    <text><![CDATA[: ]]></text>
+                                    <marker class="ExceptionMessage">
+                                      <contents>
+                                        <text><![CDATA[Inconclusive for demonstration purposes.]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                    <text><![CDATA[
+]]></text>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at MbUnit.Samples.FeatureDemos.OutcomeDemo.Inconclusive() in ]]></text>
+                                        <marker class="CodeLocation">
+                                          <contents>
+                                            <text><![CDATA[C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs:line 50]]></text>
+                                          </contents>
+                                          <attributes>
+                                            <attribute name="line" value="50" />
+                                            <attribute name="path" value="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" />
+                                          </attributes>
+                                        </marker>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                  <attributes />
+                                </marker>
+                              </contents>
+                            </section>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.0127612+01:00" endTime="2011-02-23T19:01:17.0127612+01:00">
+                  <testStep id="1750124e2ae3de51" name="Passed" fullName="MbUnit.Samples/OutcomeDemo/Passed" testId="a60e8f91962849bd" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Passed" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="38" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.001267">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.0127612+01:00" endTime="2011-02-23T19:01:17.1846252+01:00">
+                  <testStep id="ac3339c0fc664a18" name="RowsWithDifferentOutcomes" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes" testId="1988f4b17b399e40" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.1377532+01:00" endTime="2011-02-23T19:01:17.1377532+01:00">
+                      <testStep id="9d844de44716adc5" name="RowsWithDifferentOutcomes({Passed}, null)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Passed}, null)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0013043">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Log">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.1533772+01:00" endTime="2011-02-23T19:01:17.1533772+01:00">
+                      <testStep id="76e6670990c12d07" name="RowsWithDifferentOutcomes({Failed}, null)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Failed}, null)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0003313">
+                        <outcome status="failed" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.1533772+01:00" endTime="2011-02-23T19:01:17.1533772+01:00">
+                      <testStep id="1bfa752fafa5f3d0" name="RowsWithDifferentOutcomes({Inconclusive}, null)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Inconclusive}, null)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0002992">
+                        <outcome status="inconclusive" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Warnings">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.1533772+01:00" endTime="2011-02-23T19:01:17.1690012+01:00">
+                      <testStep id="bbc65a4b8c732c44" name="RowsWithDifferentOutcomes({Failed}, &quot;error&quot;)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Failed}, &quot;error&quot;)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.00033319999999999997">
+                        <outcome status="failed" category="error" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Failures">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.1690012+01:00" endTime="2011-02-23T19:01:17.1690012+01:00">
+                      <testStep id="7883d4017d645f0e" name="RowsWithDifferentOutcomes({Skipped}, &quot;ignored&quot;)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Skipped}, &quot;ignored&quot;)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.00031759999999999997">
+                        <outcome status="skipped" category="ignored" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Warnings">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.1690012+01:00" endTime="2011-02-23T19:01:17.1846252+01:00">
+                      <testStep id="932ed9b81ca84f17" name="RowsWithDifferentOutcomes({Skipped}, null)" fullName="MbUnit.Samples/OutcomeDemo/RowsWithDifferentOutcomes/RowsWithDifferentOutcomes({Skipped}, null)" testId="1988f4b17b399e40" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="RowsWithDifferentOutcomes" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="72" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0002915">
+                        <outcome status="skipped" />
+                      </result>
+                      <testLog>
+                        <streams>
+                          <stream name="Warnings">
+                            <body>
+                              <contents>
+                                <section name="Execute">
+                                  <contents>
+                                    <text><![CDATA[Terminated for demonstration purposes.
+]]></text>
+                                  </contents>
+                                </section>
+                              </contents>
+                            </body>
+                          </stream>
+                        </streams>
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="0" duration="0.14649289999999998">
+                    <outcome status="failed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.1846252+01:00" endTime="2011-02-23T19:01:17.1846252+01:00">
+                  <testStep id="2c2c5ba60e87ae30" name="Skipped" fullName="MbUnit.Samples/OutcomeDemo/Skipped" testId="d80fe79e50922320" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Skipped" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="55" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                      <entry key="IgnoreReason">
+                        <value>Skipped</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0005572">
+                    <outcome status="skipped" category="ignored" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Warnings">
+                        <body>
+                          <contents>
+                            <section name="Initialize">
+                              <contents>
+                                <text><![CDATA[The test was ignored.
+Reason: Skipped
+]]></text>
+                              </contents>
+                            </section>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.1846252+01:00" endTime="2011-02-23T19:01:17.2002492+01:00">
+                  <testStep id="10c7b0ad773a65fa" name="Terminate" fullName="MbUnit.Samples/OutcomeDemo/Terminate" testId="386f985d5144e30f" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.OutcomeDemo" member="Terminate" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" line="60" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0033894999999999997">
+                    <outcome status="failed" category="error" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Failures">
+                        <body>
+                          <contents>
+                            <section name="Execute">
+                              <contents>
+                                <marker class="Exception">
+                                  <contents>
+                                    <marker class="ExceptionType">
+                                      <contents>
+                                        <text><![CDATA[Gallio.Framework.TestTerminatedException]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                    <text><![CDATA[: ]]></text>
+                                    <marker class="ExceptionMessage">
+                                      <contents>
+                                        <text><![CDATA[Terminated for demonstration purposes.]]></text>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                    <text><![CDATA[
+]]></text>
+                                    <marker class="StackTrace">
+                                      <contents>
+                                        <text><![CDATA[   at MbUnit.Samples.FeatureDemos.OutcomeDemo.Terminate() in ]]></text>
+                                        <marker class="CodeLocation">
+                                          <contents>
+                                            <text><![CDATA[C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs:line 61]]></text>
+                                          </contents>
+                                          <attributes>
+                                            <attribute name="line" value="61" />
+                                            <attribute name="path" value="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\OutcomeDemo.cs" />
+                                          </attributes>
+                                        </marker>
+                                      </contents>
+                                      <attributes />
+                                    </marker>
+                                  </contents>
+                                  <attributes />
+                                </marker>
+                              </contents>
+                            </section>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="0" duration="0.8318715">
+                <outcome status="failed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.2002492+01:00" endTime="2011-02-23T19:01:17.3252412+01:00">
+              <testStep id="843cce9619950e71" name="RainbowFixture" fullName="MbUnit.Samples/RainbowFixture" testId="a4dd8cc3173cd393" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.2158732+01:00" endTime="2011-02-23T19:01:17.3252412+01:00">
+                  <testStep id="b74c37d7bef53c00" name="ColorfulTest" fullName="MbUnit.Samples/RainbowFixture/ColorfulTest" testId="d84a6f526f7771c7" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" member="ColorfulTest" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" line="35" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.2939932+01:00" endTime="2011-02-23T19:01:17.3096172+01:00">
+                      <testStep id="5f6585a0b776bdb8" name="ColorfulTest({System.Drawing.Pen: Alignment = {Center}, Brush = {System.Drawing.SolidBrush: Color = {Color [A=255, R=255, G=0, B=0]}}, Color = {Color [Red]}, CompoundArray = [], DashCap = {Flat}, DashOffset = 0f, DashStyle = {Solid}, EndCap = {Flat}, LineJoin = {Miter}, MiterLimit = 10f, PenType = {SolidColor}, StartCap = {Flat}, Transform = {System.Drawing.Drawing2D.Matrix: Elements = [1f, 0f, 0f, 1f, 0f, 0f], IsIdentity = true, IsInvertible = true, OffsetX = 0f, OffsetY = 0f}, Width = 1f})" fullName="MbUnit.Samples/RainbowFixture/ColorfulTest/ColorfulTest({System.Drawing.Pen: Alignment = {Center}, Brush = {System.Drawing.SolidBrush: Color = {Color [A=255, R=255, G=0, B=0]}}, Color = {Color [Red]}, CompoundArray = [], DashCap = {Flat}, DashOffset = 0f, DashStyle = {Solid}, EndCap = {Flat}, LineJoin = {Miter}, MiterLimit = 10f, PenType = {SolidColor}, StartCap = {Flat}, Transform = {System.Drawing.Drawing2D.Matrix: Elements = [1f, 0f, 0f, 1f, 0f, 0f], IsIdentity = true, IsInvertible = true, OffsetX = 0f, OffsetY = 0f}, Width = 1f})" testId="d84a6f526f7771c7" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" member="ColorfulTest" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" line="35" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="0.0001751">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.3096172+01:00" endTime="2011-02-23T19:01:17.3252412+01:00">
+                      <testStep id="a295267aa6e35c32" name="ColorfulTest({System.Drawing.Pen: Alignment = {Center}, Brush = {System.Drawing.SolidBrush: Color = {Color [A=255, R=0, G=0, B=255]}}, Color = {Color [Blue]}, CompoundArray = [], DashCap = {Flat}, DashOffset = 0f, DashStyle = {Solid}, EndCap = {Flat}, LineJoin = {Miter}, MiterLimit = 10f, PenType = {SolidColor}, StartCap = {Flat}, Transform = {System.Drawing.Drawing2D.Matrix: Elements = [1f, 0f, 0f, 1f, 0f, 0f], IsIdentity = true, IsInvertible = true, OffsetX = 0f, OffsetY = 0f}, Width = 1f})" fullName="MbUnit.Samples/RainbowFixture/ColorfulTest/ColorfulTest({System.Drawing.Pen: Alignment = {Center}, Brush = {System.Drawing.SolidBrush: Color = {Color [A=255, R=0, G=0, B=255]}}, Color = {Color [Blue]}, CompoundArray = [], DashCap = {Flat}, DashOffset = 0f, DashStyle = {Solid}, EndCap = {Flat}, LineJoin = {Miter}, MiterLimit = 10f, PenType = {SolidColor}, StartCap = {Flat}, Transform = {System.Drawing.Drawing2D.Matrix: Elements = [1f, 0f, 0f, 1f, 0f, 0f], IsIdentity = true, IsInvertible = true, OffsetX = 0f, OffsetY = 0f}, Width = 1f})" testId="d84a6f526f7771c7" isPrimary="false" isTestCase="true" isDynamic="false">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.CustomConverters" type="MbUnit.Samples.CustomConverters.RainbowFixture" member="ColorfulTest" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\CustomConverters\CustomConverter.cs" line="35" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="0" duration="7.14E-05">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="0" duration="0.1459633">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="0" duration="0.1499123">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.3252412+01:00" endTime="2011-02-23T19:01:17.4658572+01:00">
+              <testStep id="1874751382466463" name="SampleAccessorTest" fullName="MbUnit.Samples/SampleAccessorTest" testId="f869b2bed3557b17" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.3721132+01:00" endTime="2011-02-23T19:01:17.4346092+01:00">
+                  <testStep id="bece600e47c96679" name="MagnitudeAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/MagnitudeAccessorTests" testId="7e2d4fe602a74290" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="MagnitudeAccessorTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.3721132+01:00" endTime="2011-02-23T19:01:17.4346092+01:00">
+                      <testStep id="53897d5d741472df" name="SetValidValues" fullName="MbUnit.Samples/SampleAccessorTest/MagnitudeAccessorTests/SetValidValues" testId="7e2d4fe602a74290" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="MagnitudeAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="29" duration="0.0311987">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="29" duration="0.0456534">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.4346092+01:00" endTime="2011-02-23T19:01:17.4502332+01:00">
+                  <testStep id="2fc670e0fbdc24f6" name="TextAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/TextAccessorTests" testId="3cfd72e1d43571fe" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="TextAccessorTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.4346092+01:00" endTime="2011-02-23T19:01:17.4346092+01:00">
+                      <testStep id="9b57cd2f51016522" name="SetValidValues" fullName="MbUnit.Samples/SampleAccessorTest/TextAccessorTests/SetValidValues" testId="3cfd72e1d43571fe" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="TextAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="21" duration="0.0072438">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4346092+01:00" endTime="2011-02-23T19:01:17.4502332+01:00">
+                      <testStep id="5b48c76490bce600" name="SetInvalidValues" fullName="MbUnit.Samples/SampleAccessorTest/TextAccessorTests/SetInvalidValues" testId="3cfd72e1d43571fe" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="TextAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="11" duration="0.0047856999999999995">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4502332+01:00" endTime="2011-02-23T19:01:17.4502332+01:00">
+                      <testStep id="89b4d4f8572cdcfc" name="SetNullValue" fullName="MbUnit.Samples/SampleAccessorTest/TextAccessorTests/SetNullValue" testId="3cfd72e1d43571fe" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="TextAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="10" duration="0.0016143">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="42" duration="0.0207007">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.4502332+01:00" endTime="2011-02-23T19:01:17.4658572+01:00">
+                  <testStep id="45102820efff1ffe" name="WhenAccessorTests" fullName="MbUnit.Samples/SampleAccessorTest/WhenAccessorTests" testId="8de777b0330b3535" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="WhenAccessorTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.4502332+01:00" endTime="2011-02-23T19:01:17.4658572+01:00">
+                      <testStep id="6b53a8ab5764a320" name="SetValidValues" fullName="MbUnit.Samples/SampleAccessorTest/WhenAccessorTests/SetValidValues" testId="8de777b0330b3535" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="WhenAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="23" duration="0.0393065">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4658572+01:00" endTime="2011-02-23T19:01:17.4658572+01:00">
+                      <testStep id="a194cd2de7a3019b" name="SetInvalidValues" fullName="MbUnit.Samples/SampleAccessorTest/WhenAccessorTests/SetInvalidValues" testId="8de777b0330b3535" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Accessor" type="MbUnit.Samples.ContractVerifiers.Accessor.SampleAccessorTest" member="WhenAccessorTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Accessor\SampleAccessor.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="19" duration="0.0038515">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="42" duration="0.0465149">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="113" duration="0.1562527">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.4658572+01:00" endTime="2011-02-23T19:01:17.5596012+01:00">
+              <testStep id="e4cfd3acb3f8d7e5" name="SampleCollectionTest" fullName="MbUnit.Samples/SampleCollectionTest" testId="13d39989c5c84ef1" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.4814812+01:00" endTime="2011-02-23T19:01:17.5596012+01:00">
+                  <testStep id="ae0718d8b923424f" name="CollectionTests" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests" testId="d288a8c00996722f" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.4814812+01:00" endTime="2011-02-23T19:01:17.4814812+01:00">
+                      <testStep id="4aeb4b61d398e504" name="VerifyReadOnlyProperty" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/VerifyReadOnlyProperty" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0053265">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4971052+01:00" endTime="2011-02-23T19:01:17.4971052+01:00">
+                      <testStep id="58db0337e59d3917" name="AddNullArgument" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/AddNullArgument" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.002858">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4971052+01:00" endTime="2011-02-23T19:01:17.4971052+01:00">
+                      <testStep id="e79d3e32f0bb103a" name="RemoveNullArgument" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/RemoveNullArgument" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0003984">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.4971052+01:00" endTime="2011-02-23T19:01:17.4971052+01:00">
+                      <testStep id="5d183fa2ec7c380" name="ContainsNullArgument" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/ContainsNullArgument" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0003588">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5127292+01:00" endTime="2011-02-23T19:01:17.5127292+01:00">
+                      <testStep id="93fd13d883d4aa92" name="ClearItems" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/ClearItems" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="6" duration="0.0066643">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5127292+01:00" endTime="2011-02-23T19:01:17.5127292+01:00">
+                      <testStep id="17a2be7bc221ae6b" name="RemoveItems" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/RemoveItems" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="76" duration="0.010425199999999999">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5127292+01:00" endTime="2011-02-23T19:01:17.5127292+01:00">
+                      <testStep id="1196f380c5280ea0" name="AddItems" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/AddItems" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="52" duration="0.002578">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5127292+01:00" endTime="2011-02-23T19:01:17.5439772+01:00">
+                      <testStep id="e9c0bc107cc252aa" name="CopyTo" fullName="MbUnit.Samples/SampleCollectionTest/CollectionTests/CopyTo" testId="d288a8c00996722f" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Collection" type="MbUnit.Samples.ContractVerifiers.Collection.SampleCollectionTest" member="CollectionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Collection\SampleCollection.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="64" duration="0.0386491">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="214" duration="0.0768117">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="214" duration="0.0820378">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.5596012+01:00" endTime="2011-02-23T19:01:17.6064732+01:00">
+              <testStep id="f398a185de8b5860" name="SampleComparableTest" fullName="MbUnit.Samples/SampleComparableTest" testId="9bc49ebb96484d57" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.5596012+01:00" endTime="2011-02-23T19:01:17.6064732+01:00">
+                  <testStep id="f7fb3ceb8bbb3c9e" name="ComparisonTests" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests" testId="3971771d84aa3b24" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.5752252+01:00" endTime="2011-02-23T19:01:17.5752252+01:00">
+                      <testStep id="2f073a52ab362795" name="ComparableCompareTo" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests/ComparableCompareTo" testId="3971771d84aa3b24" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="63" duration="0.007947">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5752252+01:00" endTime="2011-02-23T19:01:17.5908492+01:00">
+                      <testStep id="e93b8f91b8309b55" name="OperatorGreaterThan" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests/OperatorGreaterThan" testId="3971771d84aa3b24" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="75" duration="0.0056156">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5908492+01:00" endTime="2011-02-23T19:01:17.5908492+01:00">
+                      <testStep id="cd43701bc58def41" name="OperatorGreaterThanOrEqual" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests/OperatorGreaterThanOrEqual" testId="3971771d84aa3b24" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="75" duration="0.0005735">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5908492+01:00" endTime="2011-02-23T19:01:17.5908492+01:00">
+                      <testStep id="d57c4f1af0511491" name="OperatorLessThan" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests/OperatorLessThan" testId="3971771d84aa3b24" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="75" duration="0.0005491">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.5908492+01:00" endTime="2011-02-23T19:01:17.6064732+01:00">
+                      <testStep id="bda51c65e015afb9" name="OperatorLessThanOrEqual" fullName="MbUnit.Samples/SampleComparableTest/ComparisonTests/OperatorLessThanOrEqual" testId="3971771d84aa3b24" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Comparison" type="MbUnit.Samples.ContractVerifiers.Comparison.SampleComparableTest" member="ComparisonTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Comparison\SampleComparable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="75" duration="0.0005134">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="363" duration="0.0259843">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="363" duration="0.0344176">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.6064732+01:00" endTime="2011-02-23T19:01:17.6533452+01:00">
+              <testStep id="94493b6d9a90ec7f" name="SampleEquatableTest" fullName="MbUnit.Samples/SampleEquatableTest" testId="af76e0bfae1e889a" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.6064732+01:00" endTime="2011-02-23T19:01:17.6533452+01:00">
+                  <testStep id="543e29951d43aba6" name="EqualityTests" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests" testId="1a3c04de10b78d72" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.6220972+01:00" endTime="2011-02-23T19:01:17.6377212+01:00">
+                      <testStep id="7f55a78e8cdf5bae" name="ObjectEquals" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests/ObjectEquals" testId="1a3c04de10b78d72" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="71" duration="0.0060019999999999995">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.6377212+01:00" endTime="2011-02-23T19:01:17.6377212+01:00">
+                      <testStep id="903118662902b955" name="HashCode" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests/HashCode" testId="1a3c04de10b78d72" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="11" duration="0.0020839">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.6377212+01:00" endTime="2011-02-23T19:01:17.6377212+01:00">
+                      <testStep id="a56556028bee2a73" name="EquatableEquals" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests/EquatableEquals" testId="1a3c04de10b78d72" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="71" duration="0.00138">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.6377212+01:00" endTime="2011-02-23T19:01:17.6533452+01:00">
+                      <testStep id="104fab8ce3e4018a" name="OperatorEquals" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests/OperatorEquals" testId="1a3c04de10b78d72" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="91" duration="0.0008435">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.6533452+01:00" endTime="2011-02-23T19:01:17.6533452+01:00">
+                      <testStep id="b02853889599739b" name="OperatorNotEquals" fullName="MbUnit.Samples/SampleEquatableTest/EqualityTests/OperatorNotEquals" testId="1a3c04de10b78d72" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Equality" type="MbUnit.Samples.ContractVerifiers.Equality.SampleEquatableTest" member="EqualityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Equality\SampleEquatable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="91" duration="0.0007821">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="335" duration="0.046238999999999995">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="335" duration="0.050996799999999995">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.6533452+01:00" endTime="2011-02-23T19:01:17.7158412+01:00">
+              <testStep id="5379c862b8199dfc" name="SampleExceptionTest" fullName="MbUnit.Samples/SampleExceptionTest" testId="ffd6007d6d63365" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.6689692+01:00" endTime="2011-02-23T19:01:17.7158412+01:00">
+                  <testStep id="99e83e3f27aa36f1" name="ExceptionTests" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests" testId="4d41b35c662c939e" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.6689692+01:00" endTime="2011-02-23T19:01:17.6689692+01:00">
+                      <testStep id="e31c7f525d6a1596" name="HasSerializableAttribute" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests/HasSerializableAttribute" testId="4d41b35c662c939e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="1" duration="0.0008252">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.6689692+01:00" endTime="2011-02-23T19:01:17.6689692+01:00">
+                      <testStep id="4b3ccc9e803c3105" name="HasSerializationConstructor" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests/HasSerializationConstructor" testId="4d41b35c662c939e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="2" duration="0.0009174">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7002172+01:00" endTime="2011-02-23T19:01:17.7002172+01:00">
+                      <testStep id="192611b5633cf1d6" name="DefaultConstructor" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests/DefaultConstructor" testId="4d41b35c662c939e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="10" duration="0.0076977">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7002172+01:00" endTime="2011-02-23T19:01:17.7002172+01:00">
+                      <testStep id="2b34160e12cc5aba" name="MessageConstructor" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests/MessageConstructor" testId="4d41b35c662c939e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="26" duration="0.00071269999999999992">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7002172+01:00" endTime="2011-02-23T19:01:17.7158412+01:00">
+                      <testStep id="4e42c303104b8543" name="MessageAndInnerExceptionConstructor" fullName="MbUnit.Samples/SampleExceptionTest/ExceptionTests/MessageAndInnerExceptionConstructor" testId="4d41b35c662c939e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Exception" type="MbUnit.Samples.ContractVerifiers.Exception.SampleExceptionTest" member="ExceptionTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Exception\SampleException.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="50" duration="0.0013843">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="89" duration="0.017537999999999998">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="89" duration="0.0209929">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.7158412+01:00" endTime="2011-02-23T19:01:17.7314652+01:00">
+              <testStep id="f77ce37149dc73b7" name="SampleImmutableTest" fullName="MbUnit.Samples/SampleImmutableTest" testId="bc07f8c6f73fc9ac" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Immutability" type="MbUnit.Samples.ContractVerifiers.Immutability.SampleImmutableTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Immutability\SampleImmutable.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.7158412+01:00" endTime="2011-02-23T19:01:17.7314652+01:00">
+                  <testStep id="cb16b04b45285083" name="ImmutabilityTests" fullName="MbUnit.Samples/SampleImmutableTest/ImmutabilityTests" testId="295189f665b0ccc0" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Immutability" type="MbUnit.Samples.ContractVerifiers.Immutability.SampleImmutableTest" member="ImmutabilityTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Immutability\SampleImmutable.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.7314652+01:00" endTime="2011-02-23T19:01:17.7314652+01:00">
+                      <testStep id="9596c5fbdea4d765" name="AreAllFieldsReadOnly" fullName="MbUnit.Samples/SampleImmutableTest/ImmutabilityTests/AreAllFieldsReadOnly" testId="295189f665b0ccc0" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.Immutability" type="MbUnit.Samples.ContractVerifiers.Immutability.SampleImmutableTest" member="ImmutabilityTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\Immutability\SampleImmutable.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="9" duration="0.0055086">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="9" duration="0.0084105">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="9" duration="0.0341418">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.7314652+01:00" endTime="2011-02-23T19:01:17.8252092+01:00">
+              <testStep id="e6ab05bb21c34bb2" name="SampleListTest" fullName="MbUnit.Samples/SampleListTest" testId="7831369c155a9a93" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.7314652+01:00" endTime="2011-02-23T19:01:17.8252092+01:00">
+                  <testStep id="aa90a65e04570082" name="ListTests" fullName="MbUnit.Samples/SampleListTest/ListTests" testId="888ddc736b81064e" isPrimary="true" isTestCase="false" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Suite</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children>
+                    <testStepRun startTime="2011-02-23T19:01:17.7314652+01:00" endTime="2011-02-23T19:01:17.7470892+01:00">
+                      <testStep id="b38fbeb358319dff" name="VerifyReadOnlyProperty" fullName="MbUnit.Samples/SampleListTest/ListTests/VerifyReadOnlyProperty" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0007918">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7470892+01:00" endTime="2011-02-23T19:01:17.7470892+01:00">
+                      <testStep id="e0e069a69fa6fca6" name="AddNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/AddNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.00019229999999999999">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7470892+01:00" endTime="2011-02-23T19:01:17.7470892+01:00">
+                      <testStep id="36c33cb6b7b7b9aa" name="RemoveNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/RemoveNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.00023249999999999999">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7470892+01:00" endTime="2011-02-23T19:01:17.7627132+01:00">
+                      <testStep id="6aba7fe2e38f75bd" name="ContainsNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/ContainsNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.00020649999999999998">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7627132+01:00" endTime="2011-02-23T19:01:17.7627132+01:00">
+                      <testStep id="91300d78493c0d74" name="ClearItems" fullName="MbUnit.Samples/SampleListTest/ListTests/ClearItems" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="6" duration="0.0004192">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7627132+01:00" endTime="2011-02-23T19:01:17.7627132+01:00">
+                      <testStep id="15966b5eaa8fbe25" name="RemoveItems" fullName="MbUnit.Samples/SampleListTest/ListTests/RemoveItems" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="76" duration="0.0007838">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7627132+01:00" endTime="2011-02-23T19:01:17.7783372+01:00">
+                      <testStep id="790e3c41dbef22fb" name="AddItems" fullName="MbUnit.Samples/SampleListTest/ListTests/AddItems" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="52" duration="0.000401">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7783372+01:00" endTime="2011-02-23T19:01:17.7783372+01:00">
+                      <testStep id="a32f29acc527e95e" name="CopyTo" fullName="MbUnit.Samples/SampleListTest/ListTests/CopyTo" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="64" duration="0.0008591">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7783372+01:00" endTime="2011-02-23T19:01:17.7783372+01:00">
+                      <testStep id="df07f0ceb10ab856" name="InsertNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/InsertNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0015432">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7783372+01:00" endTime="2011-02-23T19:01:17.7939612+01:00">
+                      <testStep id="f1d835e858937439" name="IndexOfNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/IndexOfNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="4" duration="0.0003412">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7939612+01:00" endTime="2011-02-23T19:01:17.7939612+01:00">
+                      <testStep id="6121db102928aa7" name="IndexerSetNullArgument" fullName="MbUnit.Samples/SampleListTest/ListTests/IndexerSetNullArgument" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="6" duration="0.0007932">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7939612+01:00" endTime="2011-02-23T19:01:17.7939612+01:00">
+                      <testStep id="613612b7808249ee" name="InsertItems" fullName="MbUnit.Samples/SampleListTest/ListTests/InsertItems" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="152" duration="0.0066114">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.7939612+01:00" endTime="2011-02-23T19:01:17.8095852+01:00">
+                      <testStep id="84d58f856557dd13" name="InsertItemsAtInvalidIndex" fullName="MbUnit.Samples/SampleListTest/ListTests/InsertItemsAtInvalidIndex" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="29" duration="0.017876799999999998">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.8095852+01:00" endTime="2011-02-23T19:01:17.8095852+01:00">
+                      <testStep id="5f2d5ea58c07a387" name="RemoveItemsAt" fullName="MbUnit.Samples/SampleListTest/ListTests/RemoveItemsAt" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="52" duration="0.0014177999999999999">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.8095852+01:00" endTime="2011-02-23T19:01:17.8095852+01:00">
+                      <testStep id="eda4659d8112522f" name="RemoveItemsAtInvalidIndex" fullName="MbUnit.Samples/SampleListTest/ListTests/RemoveItemsAtInvalidIndex" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="9" duration="0.003134">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.8095852+01:00" endTime="2011-02-23T19:01:17.8252092+01:00">
+                      <testStep id="80fa41a82de0e96b" name="GetSetItemsWithIndexer" fullName="MbUnit.Samples/SampleListTest/ListTests/GetSetItemsWithIndexer" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="34" duration="0.0035667999999999997">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.8252092+01:00" endTime="2011-02-23T19:01:17.8252092+01:00">
+                      <testStep id="baab85b215e562b0" name="IndexOfItem" fullName="MbUnit.Samples/SampleListTest/ListTests/IndexOfItem" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="52" duration="0.0057329">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                    <testStepRun startTime="2011-02-23T19:01:17.8252092+01:00" endTime="2011-02-23T19:01:17.8252092+01:00">
+                      <testStep id="ad9b3af0674a92ff" name="GetItemsAtInvalidIndex" fullName="MbUnit.Samples/SampleListTest/ListTests/GetItemsAtInvalidIndex" testId="888ddc736b81064e" isPrimary="false" isTestCase="true" isDynamic="true">
+                        <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.ContractVerifiers.List" type="MbUnit.Samples.ContractVerifiers.List.SampleListTest" member="ListTests" />
+                        <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\ContractVerifiers\List\SampleList.Test.cs" />
+                        <metadata>
+                          <entry key="TestKind">
+                            <value>Test</value>
+                          </entry>
+                        </metadata>
+                      </testStep>
+                      <children />
+                      <result assertCount="9" duration="0.0030138">
+                        <outcome status="passed" />
+                      </result>
+                      <testLog>
+                        <streams />
+                        <attachments />
+                      </testLog>
+                    </testStepRun>
+                  </children>
+                  <result assertCount="565" duration="0.058457499999999996">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams />
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="565" duration="0.0630226">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+            <testStepRun startTime="2011-02-23T19:01:17.8408332+01:00" endTime="2011-02-23T19:01:17.8877052+01:00">
+              <testStep id="928e5f136260a04e" name="TestLogDemo" fullName="MbUnit.Samples/TestLogDemo" testId="a55572ba83ce3cbe" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" />
+                <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                  <entry key="XmlDocumentation">
+                    <value>&lt;summary&gt;
+This test fixture demonstrates some interesting features of the test log
+mechanism such as separating output into distinct "streams", creating
+nested sections, and embedding attachments.
+&lt;/summary&gt;</value>
+                  </entry>
+                  <entry key="Description">
+                    <value>Demonstrate the rich test logging features.</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-23T19:01:17.8408332+01:00" endTime="2011-02-23T19:01:17.8564572+01:00">
+                  <testStep id="a8730503d54437b0" name="EmbeddedImages" fullName="MbUnit.Samples/TestLogDemo/EmbeddedImages" testId="7e7c8491fc4acce1" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="EmbeddedImages" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="77" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                      <entry key="XmlDocumentation">
+                        <value>&lt;summary&gt;
+This demo embeds an image into the report.
+&lt;/summary&gt;</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.078377599999999992">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Log">
+                        <body>
+                          <contents>
+                            <text><![CDATA[This log contains an embedded image.
+]]></text>
+                            <embed attachmentName="MbUnit Logo" />
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments>
+                      <attachment name="MbUnit Logo" contentType="image/png" type="binary" contentPath="gallio-report\a8730503d54437b0\MbUnit Logo.png" contentDisposition="link" />
+                    </attachments>
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.8564572+01:00" endTime="2011-02-23T19:01:17.8564572+01:00">
+                  <testStep id="3e056dca19247e7e" name="Markers" fullName="MbUnit.Samples/TestLogDemo/Markers" testId="741696e4521d6154" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="Markers" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="58" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                      <entry key="XmlDocumentation">
+                        <value>&lt;summary&gt;
+This demo uses markers to attach semantic content to messages written
+to the test log.  The test report formatter transforms this information
+into styles, links and other presentation artifacts.
+&lt;/summary&gt;</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0017632">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Log">
+                        <body>
+                          <contents>
+                            <text><![CDATA[We can write text within markers to modify the presentation.
+The following text appears within a 'Highlight' marker and will be highlighted in the formatted test report.
+]]></text>
+                            <marker class="Highlight">
+                              <contents>
+                                <text><![CDATA[This is important!
+]]></text>
+                              </contents>
+                              <attributes />
+                            </marker>
+                            <text><![CDATA[The following text contains a 'Link' marker to create a link to a Url.
+]]></text>
+                            <marker class="Link">
+                              <contents>
+                                <text><![CDATA[Click to go to mbunit.com
+]]></text>
+                              </contents>
+                              <attributes>
+                                <attribute name="url" value="http://www.mbunit.com" />
+                              </attributes>
+                            </marker>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.8720812+01:00" endTime="2011-02-23T19:01:17.8720812+01:00">
+                  <testStep id="566fba956e8d30f4" name="MultipleStreams" fullName="MbUnit.Samples/TestLogDemo/MultipleStreams" testId="25f9862ed841a653" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="MultipleStreams" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="91" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                      <entry key="XmlDocumentation">
+                        <value>&lt;summary&gt;
+This demo shows how different parts of the log can be isolated into
+separate log streams.  Gallio sends some output to built-in log
+streams automatically.  You can write to these built-in log streams
+or create log streams of your own.
+&lt;/summary&gt;</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0050812">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="ConsoleError">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Console error messages go into the 'ConsoleError' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="ConsoleOutput">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Console output messages go into the 'ConsoleOutput' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="DebugTrace">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Debug...
+... and Trace messages go into the 'DebugTrace' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="Warnings">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Warnings go into the 'Warnings' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="Failures">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Failures go into the 'Failures' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="Log">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Log messages go into the 'Log' stream.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                      <stream name="My Custom Log">
+                        <body>
+                          <contents>
+                            <text><![CDATA[Log messages can also go into a custom stream of your choice.
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+                <testStepRun startTime="2011-02-23T19:01:17.8720812+01:00" endTime="2011-02-23T19:01:17.8877052+01:00">
+                  <testStep id="233e60bcdd9e9c3b" name="Sections" fullName="MbUnit.Samples/TestLogDemo/Sections" testId="dbe781fdeb81d391" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="MbUnit.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="MbUnit.Samples.FeatureDemos" type="MbUnit.Samples.FeatureDemos.TestLogDemo" member="Sections" />
+                    <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\MbUnit.Samples\FeatureDemos\TestLogDemo.cs" line="41" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                      <entry key="XmlDocumentation">
+                        <value>&lt;summary&gt;
+This demo writes messages to the test log grouped into sections.
+&lt;/summary&gt;</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0.0014311">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="Log">
+                        <body>
+                          <contents>
+                            <text><![CDATA[This text appears outside of any section.
+]]></text>
+                            <section name="A Section">
+                              <contents>
+                                <text><![CDATA[This text appears within a section called 'A Section'.
+Sections are useful for grouping related output to make it easier to read.
+]]></text>
+                              </contents>
+                            </section>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="0" duration="0.0947354">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+          </children>
+          <result assertCount="1692" duration="1.6151141999999998">
+            <outcome status="failed" />
+          </result>
+          <testLog>
+            <streams />
+            <attachments />
+          </testLog>
+        </testStepRun>
+      </children>
+      <result assertCount="1692" duration="7.0825562999999994">
+        <outcome status="failed" />
+      </result>
+      <testLog>
+        <streams />
+        <attachments />
+      </testLog>
+    </testStepRun>
+    <statistics assertCount="1692" duration="7.0927928" runCount="64" passedCount="58" failedCount="4" inconclusiveCount="2" skippedCount="3" testCount="67" stepCount="92">
+      <outcomeSummaries>
+        <outcomeSummary count="58">
+          <outcome status="passed" />
+        </outcomeSummary>
+        <outcomeSummary count="2">
+          <outcome status="failed" />
+        </outcomeSummary>
+        <outcomeSummary count="2">
+          <outcome status="inconclusive" />
+        </outcomeSummary>
+        <outcomeSummary count="2">
+          <outcome status="failed" category="error" />
+        </outcomeSummary>
+        <outcomeSummary count="2">
+          <outcome status="skipped" category="ignored" />
+        </outcomeSummary>
+        <outcomeSummary count="1">
+          <outcome status="skipped" />
+        </outcomeSummary>
+      </outcomeSummaries>
+    </statistics>
+  </testPackageRun>
+  <logEntries>
+    <logEntry severity="info" message="Host started at 23/02/11 7:01:11 PM." />
+    <logEntry severity="info" message="Running under CLR v4.0.30319 runtime." />
+    <logEntry severity="debug" message="Listening for connections on IPC port: 'IsolatedProcessHost.3e4995e9bb0c6f60'" />
+    <logEntry severity="debug" message="Disabled plugin 'Gallio.VisualStudio.Shell90': The plugin enable condition was not satisfied.  Please note that this is the intended behavior for plugins that must be hosted inside third party applications in order to work.  Enable condition: '${process:DEVENV.EXE_V9.0} or ${process:VSTESTHOST.EXE_V9.0} or ${process:MSTEST.EXE_V9.0} or ${framework:NET35}'." />
+    <logEntry severity="debug" message="Disabled plugin 'Gallio.VisualStudio.Tip90': The plugin depends on another disabled plugin: 'Gallio.VisualStudio.Shell90'." />
+    <logEntry severity="info" message="Host stopped at 23/02/11 7:01:17 PM." />
+    <logEntry severity="info" message="Host process exited with code: 0" />
+  </logEntries>
+</report>

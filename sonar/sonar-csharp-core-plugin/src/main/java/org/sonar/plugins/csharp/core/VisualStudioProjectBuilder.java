@@ -96,20 +96,25 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     Properties rootProps = enhanceRootProperties(root);
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
-      if ( !vsProject.isTest()) {
-        ProjectDefinition subProject = ProjectDefinition.create((Properties) rootProps.clone()).setBaseDir(vsProject.getDirectory())
-            .setWorkDir(new File(vsProject.getDirectory(), workDir))
-            .setKey(StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName()))
-            .setVersion(root.getVersion()).setName(vsProject.getName()).setSourceDirs(".")
-            .addContainerExtension(microsoftWindowsEnvironment);
+      ProjectDefinition subProject = ProjectDefinition.create((Properties) rootProps.clone()).setBaseDir(vsProject.getDirectory())
+          .setWorkDir(new File(vsProject.getDirectory(), workDir))
+          .setKey(StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName()))
+          .setVersion(root.getVersion()).setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
 
+      if (vsProject.isTest()) {
+        subProject.setTestDirs(".");
+        for (org.sonar.plugins.csharp.api.visualstudio.SourceFile sourceFile : vsProject.getSourceFiles()) {
+          subProject.addTestFiles(sourceFile.getFile());
+        }
+      } else {
+        subProject.setSourceDirs(".");
         for (org.sonar.plugins.csharp.api.visualstudio.SourceFile sourceFile : vsProject.getSourceFiles()) {
           subProject.addSourceFiles(sourceFile.getFile());
         }
-
-        LOG.debug("  - Adding Sub Project => {}", subProject.getName());
-        root.addSubProject(subProject);
       }
+
+      LOG.debug("  - Adding Sub Project => {}", subProject.getName());
+      root.addSubProject(subProject);
     }
   }
 

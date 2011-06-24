@@ -42,6 +42,7 @@ public class GallioPlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
+    extensions.add(GallioMetrics.class);
     extensions.add(GallioSensor.class);
 
     return extensions;

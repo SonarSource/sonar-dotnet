@@ -41,6 +41,7 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
@@ -50,7 +51,7 @@ import com.google.common.collect.Lists;
  * Collects the FXCop reporting into sonar.
  */
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class FxCopSensor extends AbstractCSharpSensor {
+public class FxCopSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 

@@ -21,13 +21,16 @@ package org.sonar.plugins.csharp.api.sensor;
 
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 
 /**
- * Abstract Sensor for C# plugins.
+ * This sensor gets executed on every C# sub-projects, but not on the root project (= the solution). <br/>
+ * <br/>
+ * Super class of {@link AbstractRegularCSharpSensor} and {@link AbstractTestCSharpSensor}.
  */
 public abstract class AbstractCSharpSensor implements Sensor {
 
@@ -50,13 +53,24 @@ public abstract class AbstractCSharpSensor implements Sensor {
     if (project.isRoot()) {
       return false;
     }
-    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey()) && !getVSProject(project).isTest();
+    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
   }
 
   /**
    * {@inheritDoc}
    */
   public abstract void analyse(Project project, SensorContext context);
+
+  /**
+   * Returns the Sonar file representation ({@link File}) of the given file, if that file exists in the given project.
+   * 
+   * @param file
+   *          the real file
+   * @param project
+   *          the project
+   * @return the Sonar resource if it exists in this project, or null if not.
+   */
+  public abstract File fromIOFile(java.io.File file, Project project);
 
   /**
    * Returns the Visual Studio Project corresponding to the given Sonar Project.

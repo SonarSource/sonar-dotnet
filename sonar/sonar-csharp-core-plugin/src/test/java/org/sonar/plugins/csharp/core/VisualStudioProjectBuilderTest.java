@@ -21,9 +21,11 @@
 package org.sonar.plugins.csharp.core;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Properties;
@@ -57,9 +59,9 @@ public class VisualStudioProjectBuilderTest {
 
   @BeforeClass
   public static void initResources() {
-    fakeSdkDir = new File("Sonar/SDK");
+    fakeSdkDir = new File("target/sonar/SDK");
     fakeSdkDir.mkdirs();
-    fakeSilverlightDir = new File("Sonar/Silverlight");
+    fakeSilverlightDir = new File("target/sonar/Silverlight");
     fakeSilverlightDir.mkdirs();
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
   }
@@ -150,7 +152,7 @@ public class VisualStudioProjectBuilderTest {
     assertThat(microsoftWindowsEnvironment.getCurrentProject("Example.Application").getSourceFiles().size(), is(2));
     assertThat(microsoftWindowsEnvironment.getCurrentProject("Example.Core").getSourceFiles().size(), is(6));
     // check the multi-module definition is correct
-    assertThat(reactor.getRoot().getSubProjects().size(), is(2));
+    assertThat(reactor.getRoot().getSubProjects().size(), is(3));
     assertThat(reactor.getRoot().getSourceFiles().size(), is(0));
     ProjectDefinition subProject = reactor.getRoot().getSubProjects().get(0);
     VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject("Example.Application");
@@ -159,6 +161,12 @@ public class VisualStudioProjectBuilderTest {
     assertThat(subProject.getVersion(), is("1.0"));
     assertThat(subProject.getBaseDir(), is(vsProject.getDirectory()));
     assertThat(subProject.getWorkDir(), is(new File(vsProject.getDirectory(), "WORK-DIR")));
+    assertThat(subProject.getSourceDirs().iterator().next(), notNullValue());
+    assertTrue(subProject.getTestDirs().isEmpty());
+    ProjectDefinition testSubProject = reactor.getRoot().getSubProjects().get(2);
+    assertThat(testSubProject.getName(), is("Example.Core.Tests"));
+    assertThat(testSubProject.getTestDirs().iterator().next(), notNullValue());
+    assertTrue(testSubProject.getSourceDirs().isEmpty());
   }
 
   @Test

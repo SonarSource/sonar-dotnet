@@ -17,30 +17,40 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.plugins.csharp.api.sensor;
 
-package org.sonar.plugins.csharp.core;
-
-import org.sonar.api.batch.AbstractSourceImporter;
-import org.sonar.api.batch.DependedUpon;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
-import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 /**
- * Simple source code importer for C# projects.
+ * Abstract Sensor for C# plugins that will be executed on every sub-project that is not a test project.
  */
-@DependedUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class CSharpSourceImporter extends AbstractSourceImporter {
+public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
 
-  public CSharpSourceImporter(CSharp cSharp) {
-    super(cSharp);
+  /**
+   * Creates an {@link AbstractRegularCSharpSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
+   * 
+   * @param microsoftWindowsEnvironment
+   *          the {@link MicrosoftWindowsEnvironment}
+   */
+  protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    super(microsoftWindowsEnvironment);
   }
 
-  @Override
+  /**
+   * {@inheritDoc}
+   */
   public boolean shouldExecuteOnProject(Project project) {
-    if (project.isRoot()) {
-      return false;
-    }
-    return super.shouldExecuteOnProject(project);
+    return super.shouldExecuteOnProject(project) && !getVSProject(project).isTest();
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public File fromIOFile(java.io.File file, Project project) {
+    return File.fromIOFile(file, project);
+  }
+
 }

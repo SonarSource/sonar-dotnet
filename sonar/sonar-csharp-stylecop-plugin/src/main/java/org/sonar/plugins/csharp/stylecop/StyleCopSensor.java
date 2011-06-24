@@ -41,6 +41,7 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 
 import com.google.common.collect.Lists;
@@ -49,7 +50,7 @@ import com.google.common.collect.Lists;
  * Collects the StyleCop reporting into sonar.
  */
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class StyleCopSensor extends AbstractCSharpSensor {
+public class StyleCopSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
 

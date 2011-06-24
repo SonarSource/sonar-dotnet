@@ -40,7 +40,7 @@ import org.sonar.dotnet.tools.gendarme.GendarmeRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 
@@ -50,7 +50,7 @@ import com.google.common.collect.Lists;
  * Collects the Gendarme reporting into sonar.
  */
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class GendarmeSensor extends AbstractCSharpSensor {
+public class GendarmeSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 

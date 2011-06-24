@@ -1,0 +1,1252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.gallio.org/">
+  <testPackage shadowCopy="false" debug="false">
+    <files>
+      <file>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.dll</file>
+    </files>
+    <hintDirectories />
+    <excludedFrameworkIds />
+    <properties />
+  </testPackage>
+  <testModel>
+    <test id="c2722843734a7a54" name="Root" fullName="" isTestCase="false">
+      <codeReference />
+      <codeLocation />
+      <metadata>
+        <entry key="TestKind">
+          <value>Root</value>
+        </entry>
+      </metadata>
+      <children>
+        <test id="9b2bd0f4d25af47" name="TestProject1" fullName="TestProject1" isTestCase="false">
+          <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL" />
+          <metadata>
+            <entry key="TestKind">
+              <value>Assembly</value>
+            </entry>
+            <entry key="CodeBase">
+              <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL</value>
+            </entry>
+            <entry key="Company">
+              <value>PICARDIE</value>
+            </entry>
+            <entry key="Copyright">
+              <value>PICARDIE</value>
+            </entry>
+            <entry key="FileVersion">
+              <value>1.0.0.0</value>
+            </entry>
+            <entry key="Product">
+              <value>TestProject1</value>
+            </entry>
+            <entry key="Title">
+              <value>TestProject1</value>
+            </entry>
+            <entry key="Version">
+              <value>1.0.0.0</value>
+            </entry>
+            <entry key="Framework">
+              <value>MSTest v10.0.0.0</value>
+            </entry>
+            <entry key="File">
+              <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL</value>
+            </entry>
+          </metadata>
+          <children>
+            <test id="979804d88da48529" name="UnitTest1" fullName="TestProject1/UnitTest1" isTestCase="false">
+              <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="TestProject1" type="TestProject1.UnitTest1" />
+              <codeLocation path="c:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\UnitTest1.cs" />
+              <metadata>
+                <entry key="TestKind">
+                  <value>Fixture</value>
+                </entry>
+              </metadata>
+              <children>
+                <test id="d30cfe7d4c22c8cd" name="TestMethod1" fullName="TestProject1/UnitTest1/TestMethod1" isTestCase="true">
+                  <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="TestProject1" type="TestProject1.UnitTest1" member="TestMethod1" />
+                  <codeLocation path="c:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\UnitTest1.cs" line="14" />
+                  <metadata>
+                    <entry key="TestKind">
+                      <value>Test</value>
+                    </entry>
+                  </metadata>
+                  <children />
+                  <parameters />
+                </test>
+              </children>
+              <parameters />
+            </test>
+          </children>
+          <parameters />
+        </test>
+      </children>
+      <parameters />
+    </test>
+    <annotations />
+  </testModel>
+  <testPackageRun startTime="2011-02-24T18:57:52.7052527+01:00" endTime="2011-02-24T18:58:16.8591837+01:00">
+    <testStepRun startTime="2011-02-24T18:58:05.6415107+01:00" endTime="2011-02-24T18:58:16.8591837+01:00">
+      <testStep id="e8cdb3dbe8e59bb8" name="Root" fullName="" testId="c2722843734a7a54" isPrimary="true" isTestCase="false" isDynamic="false">
+        <codeReference />
+        <codeLocation />
+        <metadata>
+          <entry key="TestKind">
+            <value>Root</value>
+          </entry>
+        </metadata>
+      </testStep>
+      <children>
+        <testStepRun startTime="2011-02-24T18:58:05.6571342+01:00" endTime="2011-02-24T18:58:16.8279367+01:00">
+          <testStep id="ec7eb3cdf0af16b9" name="TestProject1" fullName="TestProject1" testId="9b2bd0f4d25af47" isPrimary="true" isTestCase="false" isDynamic="false">
+            <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <codeLocation path="C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL" />
+            <metadata>
+              <entry key="TestKind">
+                <value>Assembly</value>
+              </entry>
+              <entry key="CodeBase">
+                <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL</value>
+              </entry>
+              <entry key="Company">
+                <value>SOCIETE GENERALE</value>
+              </entry>
+              <entry key="Copyright">
+                <value>Copyright © SOCIETE GENERALE 2011</value>
+              </entry>
+              <entry key="FileVersion">
+                <value>1.0.0.0</value>
+              </entry>
+              <entry key="Product">
+                <value>TestProject1</value>
+              </entry>
+              <entry key="Title">
+                <value>TestProject1</value>
+              </entry>
+              <entry key="Version">
+                <value>1.0.0.0</value>
+              </entry>
+              <entry key="Framework">
+                <value>MSTest v10.0.0.0</value>
+              </entry>
+              <entry key="File">
+                <value>C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug\TestProject1.DLL</value>
+              </entry>
+            </metadata>
+          </testStep>
+          <children>
+            <testStepRun startTime="2011-02-24T18:58:16.0311382+01:00" endTime="2011-02-24T18:58:16.4373492+01:00">
+              <testStep id="ded6468b4d8b31a0" name="UnitTest1" fullName="TestProject1/UnitTest1" testId="979804d88da48529" isPrimary="true" isTestCase="false" isDynamic="false">
+                <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="TestProject1" type="TestProject1.UnitTest1" />
+                <codeLocation path="c:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\UnitTest1.cs" />
+                <metadata>
+                  <entry key="TestKind">
+                    <value>Fixture</value>
+                  </entry>
+                </metadata>
+              </testStep>
+              <children>
+                <testStepRun startTime="2011-02-24T18:58:16.0311382+01:00" endTime="2011-02-24T18:58:16.2029967+01:00">
+                  <testStep id="8deb3a789c6ab40d" name="TestMethod1" fullName="TestProject1/UnitTest1/TestMethod1" testId="d30cfe7d4c22c8cd" isPrimary="true" isTestCase="true" isDynamic="false">
+                    <codeReference assembly="TestProject1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" namespace="TestProject1" type="TestProject1.UnitTest1" member="TestMethod1" />
+                    <codeLocation path="c:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\UnitTest1.cs" line="14" />
+                    <metadata>
+                      <entry key="TestKind">
+                        <value>Test</value>
+                      </entry>
+                    </metadata>
+                  </testStep>
+                  <children />
+                  <result assertCount="0" duration="0">
+                    <outcome status="passed" />
+                  </result>
+                  <testLog>
+                    <streams>
+                      <stream name="ConsoleOutput">
+                        <body>
+                          <contents>
+                            <text><![CDATA[hello MSTEST 0
+hello MSTEST 1
+hello MSTEST 2
+hello MSTEST 3
+hello MSTEST 4
+hello MSTEST 5
+hello MSTEST 6
+hello MSTEST 7
+hello MSTEST 8
+hello MSTEST 9
+hello MSTEST 10
+hello MSTEST 11
+hello MSTEST 12
+hello MSTEST 13
+hello MSTEST 14
+hello MSTEST 15
+hello MSTEST 16
+hello MSTEST 17
+hello MSTEST 18
+hello MSTEST 19
+hello MSTEST 20
+hello MSTEST 21
+hello MSTEST 22
+hello MSTEST 23
+hello MSTEST 24
+hello MSTEST 25
+hello MSTEST 26
+hello MSTEST 27
+hello MSTEST 28
+hello MSTEST 29
+hello MSTEST 30
+hello MSTEST 31
+hello MSTEST 32
+hello MSTEST 33
+hello MSTEST 34
+hello MSTEST 35
+hello MSTEST 36
+hello MSTEST 37
+hello MSTEST 38
+hello MSTEST 39
+hello MSTEST 40
+hello MSTEST 41
+hello MSTEST 42
+hello MSTEST 43
+hello MSTEST 44
+hello MSTEST 45
+hello MSTEST 46
+hello MSTEST 47
+hello MSTEST 48
+hello MSTEST 49
+hello MSTEST 50
+hello MSTEST 51
+hello MSTEST 52
+hello MSTEST 53
+hello MSTEST 54
+hello MSTEST 55
+hello MSTEST 56
+hello MSTEST 57
+hello MSTEST 58
+hello MSTEST 59
+hello MSTEST 60
+hello MSTEST 61
+hello MSTEST 62
+hello MSTEST 63
+hello MSTEST 64
+hello MSTEST 65
+hello MSTEST 66
+hello MSTEST 67
+hello MSTEST 68
+hello MSTEST 69
+hello MSTEST 70
+hello MSTEST 71
+hello MSTEST 72
+hello MSTEST 73
+hello MSTEST 74
+hello MSTEST 75
+hello MSTEST 76
+hello MSTEST 77
+hello MSTEST 78
+hello MSTEST 79
+hello MSTEST 80
+hello MSTEST 81
+hello MSTEST 82
+hello MSTEST 83
+hello MSTEST 84
+hello MSTEST 85
+hello MSTEST 86
+hello MSTEST 87
+hello MSTEST 88
+hello MSTEST 89
+hello MSTEST 90
+hello MSTEST 91
+hello MSTEST 92
+hello MSTEST 93
+hello MSTEST 94
+hello MSTEST 95
+hello MSTEST 96
+hello MSTEST 97
+hello MSTEST 98
+hello MSTEST 99
+hello MSTEST 100
+hello MSTEST 101
+hello MSTEST 102
+hello MSTEST 103
+hello MSTEST 104
+hello MSTEST 105
+hello MSTEST 106
+hello MSTEST 107
+hello MSTEST 108
+hello MSTEST 109
+hello MSTEST 110
+hello MSTEST 111
+hello MSTEST 112
+hello MSTEST 113
+hello MSTEST 114
+hello MSTEST 115
+hello MSTEST 116
+hello MSTEST 117
+hello MSTEST 118
+hello MSTEST 119
+hello MSTEST 120
+hello MSTEST 121
+hello MSTEST 122
+hello MSTEST 123
+hello MSTEST 124
+hello MSTEST 125
+hello MSTEST 126
+hello MSTEST 127
+hello MSTEST 128
+hello MSTEST 129
+hello MSTEST 130
+hello MSTEST 131
+hello MSTEST 132
+hello MSTEST 133
+hello MSTEST 134
+hello MSTEST 135
+hello MSTEST 136
+hello MSTEST 137
+hello MSTEST 138
+hello MSTEST 139
+hello MSTEST 140
+hello MSTEST 141
+hello MSTEST 142
+hello MSTEST 143
+hello MSTEST 144
+hello MSTEST 145
+hello MSTEST 146
+hello MSTEST 147
+hello MSTEST 148
+hello MSTEST 149
+hello MSTEST 150
+hello MSTEST 151
+hello MSTEST 152
+hello MSTEST 153
+hello MSTEST 154
+hello MSTEST 155
+hello MSTEST 156
+hello MSTEST 157
+hello MSTEST 158
+hello MSTEST 159
+hello MSTEST 160
+hello MSTEST 161
+hello MSTEST 162
+hello MSTEST 163
+hello MSTEST 164
+hello MSTEST 165
+hello MSTEST 166
+hello MSTEST 167
+hello MSTEST 168
+hello MSTEST 169
+hello MSTEST 170
+hello MSTEST 171
+hello MSTEST 172
+hello MSTEST 173
+hello MSTEST 174
+hello MSTEST 175
+hello MSTEST 176
+hello MSTEST 177
+hello MSTEST 178
+hello MSTEST 179
+hello MSTEST 180
+hello MSTEST 181
+hello MSTEST 182
+hello MSTEST 183
+hello MSTEST 184
+hello MSTEST 185
+hello MSTEST 186
+hello MSTEST 187
+hello MSTEST 188
+hello MSTEST 189
+hello MSTEST 190
+hello MSTEST 191
+hello MSTEST 192
+hello MSTEST 193
+hello MSTEST 194
+hello MSTEST 195
+hello MSTEST 196
+hello MSTEST 197
+hello MSTEST 198
+hello MSTEST 199
+hello MSTEST 200
+hello MSTEST 201
+hello MSTEST 202
+hello MSTEST 203
+hello MSTEST 204
+hello MSTEST 205
+hello MSTEST 206
+hello MSTEST 207
+hello MSTEST 208
+hello MSTEST 209
+hello MSTEST 210
+hello MSTEST 211
+hello MSTEST 212
+hello MSTEST 213
+hello MSTEST 214
+hello MSTEST 215
+hello MSTEST 216
+hello MSTEST 217
+hello MSTEST 218
+hello MSTEST 219
+hello MSTEST 220
+hello MSTEST 221
+hello MSTEST 222
+hello MSTEST 223
+hello MSTEST 224
+hello MSTEST 225
+hello MSTEST 226
+hello MSTEST 227
+hello MSTEST 228
+hello MSTEST 229
+hello MSTEST 230
+hello MSTEST 231
+hello MSTEST 232
+hello MSTEST 233
+hello MSTEST 234
+hello MSTEST 235
+hello MSTEST 236
+hello MSTEST 237
+hello MSTEST 238
+hello MSTEST 239
+hello MSTEST 240
+hello MSTEST 241
+hello MSTEST 242
+hello MSTEST 243
+hello MSTEST 244
+hello MSTEST 245
+hello MSTEST 246
+hello MSTEST 247
+hello MSTEST 248
+hello MSTEST 249
+hello MSTEST 250
+hello MSTEST 251
+hello MSTEST 252
+hello MSTEST 253
+hello MSTEST 254
+hello MSTEST 255
+hello MSTEST 256
+hello MSTEST 257
+hello MSTEST 258
+hello MSTEST 259
+hello MSTEST 260
+hello MSTEST 261
+hello MSTEST 262
+hello MSTEST 263
+hello MSTEST 264
+hello MSTEST 265
+hello MSTEST 266
+hello MSTEST 267
+hello MSTEST 268
+hello MSTEST 269
+hello MSTEST 270
+hello MSTEST 271
+hello MSTEST 272
+hello MSTEST 273
+hello MSTEST 274
+hello MSTEST 275
+hello MSTEST 276
+hello MSTEST 277
+hello MSTEST 278
+hello MSTEST 279
+hello MSTEST 280
+hello MSTEST 281
+hello MSTEST 282
+hello MSTEST 283
+hello MSTEST 284
+hello MSTEST 285
+hello MSTEST 286
+hello MSTEST 287
+hello MSTEST 288
+hello MSTEST 289
+hello MSTEST 290
+hello MSTEST 291
+hello MSTEST 292
+hello MSTEST 293
+hello MSTEST 294
+hello MSTEST 295
+hello MSTEST 296
+hello MSTEST 297
+hello MSTEST 298
+hello MSTEST 299
+hello MSTEST 300
+hello MSTEST 301
+hello MSTEST 302
+hello MSTEST 303
+hello MSTEST 304
+hello MSTEST 305
+hello MSTEST 306
+hello MSTEST 307
+hello MSTEST 308
+hello MSTEST 309
+hello MSTEST 310
+hello MSTEST 311
+hello MSTEST 312
+hello MSTEST 313
+hello MSTEST 314
+hello MSTEST 315
+hello MSTEST 316
+hello MSTEST 317
+hello MSTEST 318
+hello MSTEST 319
+hello MSTEST 320
+hello MSTEST 321
+hello MSTEST 322
+hello MSTEST 323
+hello MSTEST 324
+hello MSTEST 325
+hello MSTEST 326
+hello MSTEST 327
+hello MSTEST 328
+hello MSTEST 329
+hello MSTEST 330
+hello MSTEST 331
+hello MSTEST 332
+hello MSTEST 333
+hello MSTEST 334
+hello MSTEST 335
+hello MSTEST 336
+hello MSTEST 337
+hello MSTEST 338
+hello MSTEST 339
+hello MSTEST 340
+hello MSTEST 341
+hello MSTEST 342
+hello MSTEST 343
+hello MSTEST 344
+hello MSTEST 345
+hello MSTEST 346
+hello MSTEST 347
+hello MSTEST 348
+hello MSTEST 349
+hello MSTEST 350
+hello MSTEST 351
+hello MSTEST 352
+hello MSTEST 353
+hello MSTEST 354
+hello MSTEST 355
+hello MSTEST 356
+hello MSTEST 357
+hello MSTEST 358
+hello MSTEST 359
+hello MSTEST 360
+hello MSTEST 361
+hello MSTEST 362
+hello MSTEST 363
+hello MSTEST 364
+hello MSTEST 365
+hello MSTEST 366
+hello MSTEST 367
+hello MSTEST 368
+hello MSTEST 369
+hello MSTEST 370
+hello MSTEST 371
+hello MSTEST 372
+hello MSTEST 373
+hello MSTEST 374
+hello MSTEST 375
+hello MSTEST 376
+hello MSTEST 377
+hello MSTEST 378
+hello MSTEST 379
+hello MSTEST 380
+hello MSTEST 381
+hello MSTEST 382
+hello MSTEST 383
+hello MSTEST 384
+hello MSTEST 385
+hello MSTEST 386
+hello MSTEST 387
+hello MSTEST 388
+hello MSTEST 389
+hello MSTEST 390
+hello MSTEST 391
+hello MSTEST 392
+hello MSTEST 393
+hello MSTEST 394
+hello MSTEST 395
+hello MSTEST 396
+hello MSTEST 397
+hello MSTEST 398
+hello MSTEST 399
+hello MSTEST 400
+hello MSTEST 401
+hello MSTEST 402
+hello MSTEST 403
+hello MSTEST 404
+hello MSTEST 405
+hello MSTEST 406
+hello MSTEST 407
+hello MSTEST 408
+hello MSTEST 409
+hello MSTEST 410
+hello MSTEST 411
+hello MSTEST 412
+hello MSTEST 413
+hello MSTEST 414
+hello MSTEST 415
+hello MSTEST 416
+hello MSTEST 417
+hello MSTEST 418
+hello MSTEST 419
+hello MSTEST 420
+hello MSTEST 421
+hello MSTEST 422
+hello MSTEST 423
+hello MSTEST 424
+hello MSTEST 425
+hello MSTEST 426
+hello MSTEST 427
+hello MSTEST 428
+hello MSTEST 429
+hello MSTEST 430
+hello MSTEST 431
+hello MSTEST 432
+hello MSTEST 433
+hello MSTEST 434
+hello MSTEST 435
+hello MSTEST 436
+hello MSTEST 437
+hello MSTEST 438
+hello MSTEST 439
+hello MSTEST 440
+hello MSTEST 441
+hello MSTEST 442
+hello MSTEST 443
+hello MSTEST 444
+hello MSTEST 445
+hello MSTEST 446
+hello MSTEST 447
+hello MSTEST 448
+hello MSTEST 449
+hello MSTEST 450
+hello MSTEST 451
+hello MSTEST 452
+hello MSTEST 453
+hello MSTEST 454
+hello MSTEST 455
+hello MSTEST 456
+hello MSTEST 457
+hello MSTEST 458
+hello MSTEST 459
+hello MSTEST 460
+hello MSTEST 461
+hello MSTEST 462
+hello MSTEST 463
+hello MSTEST 464
+hello MSTEST 465
+hello MSTEST 466
+hello MSTEST 467
+hello MSTEST 468
+hello MSTEST 469
+hello MSTEST 470
+hello MSTEST 471
+hello MSTEST 472
+hello MSTEST 473
+hello MSTEST 474
+hello MSTEST 475
+hello MSTEST 476
+hello MSTEST 477
+hello MSTEST 478
+hello MSTEST 479
+hello MSTEST 480
+hello MSTEST 481
+hello MSTEST 482
+hello MSTEST 483
+hello MSTEST 484
+hello MSTEST 485
+hello MSTEST 486
+hello MSTEST 487
+hello MSTEST 488
+hello MSTEST 489
+hello MSTEST 490
+hello MSTEST 491
+hello MSTEST 492
+hello MSTEST 493
+hello MSTEST 494
+hello MSTEST 495
+hello MSTEST 496
+hello MSTEST 497
+hello MSTEST 498
+hello MSTEST 499
+hello MSTEST 500
+hello MSTEST 501
+hello MSTEST 502
+hello MSTEST 503
+hello MSTEST 504
+hello MSTEST 505
+hello MSTEST 506
+hello MSTEST 507
+hello MSTEST 508
+hello MSTEST 509
+hello MSTEST 510
+hello MSTEST 511
+hello MSTEST 512
+hello MSTEST 513
+hello MSTEST 514
+hello MSTEST 515
+hello MSTEST 516
+hello MSTEST 517
+hello MSTEST 518
+hello MSTEST 519
+hello MSTEST 520
+hello MSTEST 521
+hello MSTEST 522
+hello MSTEST 523
+hello MSTEST 524
+hello MSTEST 525
+hello MSTEST 526
+hello MSTEST 527
+hello MSTEST 528
+hello MSTEST 529
+hello MSTEST 530
+hello MSTEST 531
+hello MSTEST 532
+hello MSTEST 533
+hello MSTEST 534
+hello MSTEST 535
+hello MSTEST 536
+hello MSTEST 537
+hello MSTEST 538
+hello MSTEST 539
+hello MSTEST 540
+hello MSTEST 541
+hello MSTEST 542
+hello MSTEST 543
+hello MSTEST 544
+hello MSTEST 545
+hello MSTEST 546
+hello MSTEST 547
+hello MSTEST 548
+hello MSTEST 549
+hello MSTEST 550
+hello MSTEST 551
+hello MSTEST 552
+hello MSTEST 553
+hello MSTEST 554
+hello MSTEST 555
+hello MSTEST 556
+hello MSTEST 557
+hello MSTEST 558
+hello MSTEST 559
+hello MSTEST 560
+hello MSTEST 561
+hello MSTEST 562
+hello MSTEST 563
+hello MSTEST 564
+hello MSTEST 565
+hello MSTEST 566
+hello MSTEST 567
+hello MSTEST 568
+hello MSTEST 569
+hello MSTEST 570
+hello MSTEST 571
+hello MSTEST 572
+hello MSTEST 573
+hello MSTEST 574
+hello MSTEST 575
+hello MSTEST 576
+hello MSTEST 577
+hello MSTEST 578
+hello MSTEST 579
+hello MSTEST 580
+hello MSTEST 581
+hello MSTEST 582
+hello MSTEST 583
+hello MSTEST 584
+hello MSTEST 585
+hello MSTEST 586
+hello MSTEST 587
+hello MSTEST 588
+hello MSTEST 589
+hello MSTEST 590
+hello MSTEST 591
+hello MSTEST 592
+hello MSTEST 593
+hello MSTEST 594
+hello MSTEST 595
+hello MSTEST 596
+hello MSTEST 597
+hello MSTEST 598
+hello MSTEST 599
+hello MSTEST 600
+hello MSTEST 601
+hello MSTEST 602
+hello MSTEST 603
+hello MSTEST 604
+hello MSTEST 605
+hello MSTEST 606
+hello MSTEST 607
+hello MSTEST 608
+hello MSTEST 609
+hello MSTEST 610
+hello MSTEST 611
+hello MSTEST 612
+hello MSTEST 613
+hello MSTEST 614
+hello MSTEST 615
+hello MSTEST 616
+hello MSTEST 617
+hello MSTEST 618
+hello MSTEST 619
+hello MSTEST 620
+hello MSTEST 621
+hello MSTEST 622
+hello MSTEST 623
+hello MSTEST 624
+hello MSTEST 625
+hello MSTEST 626
+hello MSTEST 627
+hello MSTEST 628
+hello MSTEST 629
+hello MSTEST 630
+hello MSTEST 631
+hello MSTEST 632
+hello MSTEST 633
+hello MSTEST 634
+hello MSTEST 635
+hello MSTEST 636
+hello MSTEST 637
+hello MSTEST 638
+hello MSTEST 639
+hello MSTEST 640
+hello MSTEST 641
+hello MSTEST 642
+hello MSTEST 643
+hello MSTEST 644
+hello MSTEST 645
+hello MSTEST 646
+hello MSTEST 647
+hello MSTEST 648
+hello MSTEST 649
+hello MSTEST 650
+hello MSTEST 651
+hello MSTEST 652
+hello MSTEST 653
+hello MSTEST 654
+hello MSTEST 655
+hello MSTEST 656
+hello MSTEST 657
+hello MSTEST 658
+hello MSTEST 659
+hello MSTEST 660
+hello MSTEST 661
+hello MSTEST 662
+hello MSTEST 663
+hello MSTEST 664
+hello MSTEST 665
+hello MSTEST 666
+hello MSTEST 667
+hello MSTEST 668
+hello MSTEST 669
+hello MSTEST 670
+hello MSTEST 671
+hello MSTEST 672
+hello MSTEST 673
+hello MSTEST 674
+hello MSTEST 675
+hello MSTEST 676
+hello MSTEST 677
+hello MSTEST 678
+hello MSTEST 679
+hello MSTEST 680
+hello MSTEST 681
+hello MSTEST 682
+hello MSTEST 683
+hello MSTEST 684
+hello MSTEST 685
+hello MSTEST 686
+hello MSTEST 687
+hello MSTEST 688
+hello MSTEST 689
+hello MSTEST 690
+hello MSTEST 691
+hello MSTEST 692
+hello MSTEST 693
+hello MSTEST 694
+hello MSTEST 695
+hello MSTEST 696
+hello MSTEST 697
+hello MSTEST 698
+hello MSTEST 699
+hello MSTEST 700
+hello MSTEST 701
+hello MSTEST 702
+hello MSTEST 703
+hello MSTEST 704
+hello MSTEST 705
+hello MSTEST 706
+hello MSTEST 707
+hello MSTEST 708
+hello MSTEST 709
+hello MSTEST 710
+hello MSTEST 711
+hello MSTEST 712
+hello MSTEST 713
+hello MSTEST 714
+hello MSTEST 715
+hello MSTEST 716
+hello MSTEST 717
+hello MSTEST 718
+hello MSTEST 719
+hello MSTEST 720
+hello MSTEST 721
+hello MSTEST 722
+hello MSTEST 723
+hello MSTEST 724
+hello MSTEST 725
+hello MSTEST 726
+hello MSTEST 727
+hello MSTEST 728
+hello MSTEST 729
+hello MSTEST 730
+hello MSTEST 731
+hello MSTEST 732
+hello MSTEST 733
+hello MSTEST 734
+hello MSTEST 735
+hello MSTEST 736
+hello MSTEST 737
+hello MSTEST 738
+hello MSTEST 739
+hello MSTEST 740
+hello MSTEST 741
+hello MSTEST 742
+hello MSTEST 743
+hello MSTEST 744
+hello MSTEST 745
+hello MSTEST 746
+hello MSTEST 747
+hello MSTEST 748
+hello MSTEST 749
+hello MSTEST 750
+hello MSTEST 751
+hello MSTEST 752
+hello MSTEST 753
+hello MSTEST 754
+hello MSTEST 755
+hello MSTEST 756
+hello MSTEST 757
+hello MSTEST 758
+hello MSTEST 759
+hello MSTEST 760
+hello MSTEST 761
+hello MSTEST 762
+hello MSTEST 763
+hello MSTEST 764
+hello MSTEST 765
+hello MSTEST 766
+hello MSTEST 767
+hello MSTEST 768
+hello MSTEST 769
+hello MSTEST 770
+hello MSTEST 771
+hello MSTEST 772
+hello MSTEST 773
+hello MSTEST 774
+hello MSTEST 775
+hello MSTEST 776
+hello MSTEST 777
+hello MSTEST 778
+hello MSTEST 779
+hello MSTEST 780
+hello MSTEST 781
+hello MSTEST 782
+hello MSTEST 783
+hello MSTEST 784
+hello MSTEST 785
+hello MSTEST 786
+hello MSTEST 787
+hello MSTEST 788
+hello MSTEST 789
+hello MSTEST 790
+hello MSTEST 791
+hello MSTEST 792
+hello MSTEST 793
+hello MSTEST 794
+hello MSTEST 795
+hello MSTEST 796
+hello MSTEST 797
+hello MSTEST 798
+hello MSTEST 799
+hello MSTEST 800
+hello MSTEST 801
+hello MSTEST 802
+hello MSTEST 803
+hello MSTEST 804
+hello MSTEST 805
+hello MSTEST 806
+hello MSTEST 807
+hello MSTEST 808
+hello MSTEST 809
+hello MSTEST 810
+hello MSTEST 811
+hello MSTEST 812
+hello MSTEST 813
+hello MSTEST 814
+hello MSTEST 815
+hello MSTEST 816
+hello MSTEST 817
+hello MSTEST 818
+hello MSTEST 819
+hello MSTEST 820
+hello MSTEST 821
+hello MSTEST 822
+hello MSTEST 823
+hello MSTEST 824
+hello MSTEST 825
+hello MSTEST 826
+hello MSTEST 827
+hello MSTEST 828
+hello MSTEST 829
+hello MSTEST 830
+hello MSTEST 831
+hello MSTEST 832
+hello MSTEST 833
+hello MSTEST 834
+hello MSTEST 835
+hello MSTEST 836
+hello MSTEST 837
+hello MSTEST 838
+hello MSTEST 839
+hello MSTEST 840
+hello MSTEST 841
+hello MSTEST 842
+hello MSTEST 843
+hello MSTEST 844
+hello MSTEST 845
+hello MSTEST 846
+hello MSTEST 847
+hello MSTEST 848
+hello MSTEST 849
+hello MSTEST 850
+hello MSTEST 851
+hello MSTEST 852
+hello MSTEST 853
+hello MSTEST 854
+hello MSTEST 855
+hello MSTEST 856
+hello MSTEST 857
+hello MSTEST 858
+hello MSTEST 859
+hello MSTEST 860
+hello MSTEST 861
+hello MSTEST 862
+hello MSTEST 863
+hello MSTEST 864
+hello MSTEST 865
+hello MSTEST 866
+hello MSTEST 867
+hello MSTEST 868
+hello MSTEST 869
+hello MSTEST 870
+hello MSTEST 871
+hello MSTEST 872
+hello MSTEST 873
+hello MSTEST 874
+hello MSTEST 875
+hello MSTEST 876
+hello MSTEST 877
+hello MSTEST 878
+hello MSTEST 879
+hello MSTEST 880
+hello MSTEST 881
+hello MSTEST 882
+hello MSTEST 883
+hello MSTEST 884
+hello MSTEST 885
+hello MSTEST 886
+hello MSTEST 887
+hello MSTEST 888
+hello MSTEST 889
+hello MSTEST 890
+hello MSTEST 891
+hello MSTEST 892
+hello MSTEST 893
+hello MSTEST 894
+hello MSTEST 895
+hello MSTEST 896
+hello MSTEST 897
+hello MSTEST 898
+hello MSTEST 899
+hello MSTEST 900
+hello MSTEST 901
+hello MSTEST 902
+hello MSTEST 903
+hello MSTEST 904
+hello MSTEST 905
+hello MSTEST 906
+hello MSTEST 907
+hello MSTEST 908
+hello MSTEST 909
+hello MSTEST 910
+hello MSTEST 911
+hello MSTEST 912
+hello MSTEST 913
+hello MSTEST 914
+hello MSTEST 915
+hello MSTEST 916
+hello MSTEST 917
+hello MSTEST 918
+hello MSTEST 919
+hello MSTEST 920
+hello MSTEST 921
+hello MSTEST 922
+hello MSTEST 923
+hello MSTEST 924
+hello MSTEST 925
+hello MSTEST 926
+hello MSTEST 927
+hello MSTEST 928
+hello MSTEST 929
+hello MSTEST 930
+hello MSTEST 931
+hello MSTEST 932
+hello MSTEST 933
+hello MSTEST 934
+hello MSTEST 935
+hello MSTEST 936
+hello MSTEST 937
+hello MSTEST 938
+hello MSTEST 939
+hello MSTEST 940
+hello MSTEST 941
+hello MSTEST 942
+hello MSTEST 943
+hello MSTEST 944
+hello MSTEST 945
+hello MSTEST 946
+hello MSTEST 947
+hello MSTEST 948
+hello MSTEST 949
+hello MSTEST 950
+hello MSTEST 951
+hello MSTEST 952
+hello MSTEST 953
+hello MSTEST 954
+hello MSTEST 955
+hello MSTEST 956
+hello MSTEST 957
+hello MSTEST 958
+hello MSTEST 959
+hello MSTEST 960
+hello MSTEST 961
+hello MSTEST 962
+hello MSTEST 963
+hello MSTEST 964
+hello MSTEST 965
+hello MSTEST 966
+hello MSTEST 967
+hello MSTEST 968
+hello MSTEST 969
+hello MSTEST 970
+hello MSTEST 971
+hello MSTEST 972
+hello MSTEST 973
+hello MSTEST 974
+hello MSTEST 975
+hello MSTEST 976
+hello MSTEST 977
+hello MSTEST 978
+hello MSTEST 979
+hello MSTEST 980
+hello MSTEST 981
+hello MSTEST 982
+hello MSTEST 983
+hello MSTEST 984
+hello MSTEST 985
+hello MSTEST 986
+hello MSTEST 987
+hello MSTEST 988
+hello MSTEST 989
+hello MSTEST 990
+hello MSTEST 991
+hello MSTEST 992
+hello MSTEST 993
+hello MSTEST 994
+hello MSTEST 995
+hello MSTEST 996
+hello MSTEST 997
+hello MSTEST 998
+hello MSTEST 999
+]]></text>
+                          </contents>
+                        </body>
+                      </stream>
+                    </streams>
+                    <attachments />
+                  </testLog>
+                </testStepRun>
+              </children>
+              <result assertCount="0" duration="0">
+                <outcome status="passed" />
+              </result>
+              <testLog>
+                <streams />
+                <attachments />
+              </testLog>
+            </testStepRun>
+          </children>
+          <result assertCount="0" duration="11.1790469">
+            <outcome status="passed" />
+          </result>
+          <testLog>
+            <streams>
+              <stream name="MSTest Output">
+                <body>
+                  <contents>
+                    <text><![CDATA[Loading C:\Temp\Gallio\MSTestAdapter\acgmrurh.cee\tests.runconfig...
+Loading C:\Temp\Gallio\MSTestAdapter\acgmrurh.cee\tests.vsmdi...
+
+Search path(s) for tests:
+C:\HOMEWARE\gallio-3.2.708\samples\MbUnit\Unit Testing\TestProject1\bin\Debug
+C:\Temp\Gallio\MSTestAdapter\acgmrurh.cee
+Search path(s) for default test settings:
+C:\Temp\Gallio\MSTestAdapter\acgmrurh.cee
+
+Starting execution...
+
+Results               Top Level Tests
+-------               ---------------
+Passed                (SelectedTests/)TestProject1.UnitTest1.TestMethod1
+1/1 test(s) Passed
+
+Summary
+-------
+Test Run Completed.
+  Passed  1
+  ---------
+  Total   1
+Results file:  C:\Temp\Gallio\MSTestAdapter\acgmrurh.cee\tests.trx
+Test Settings: Gallio Test Run
+]]></text>
+                  </contents>
+                </body>
+              </stream>
+            </streams>
+            <attachments />
+          </testLog>
+        </testStepRun>
+      </children>
+      <result assertCount="0" duration="24.1504194">
+        <outcome status="passed" />
+      </result>
+      <testLog>
+        <streams />
+        <attachments />
+      </testLog>
+    </testStepRun>
+    <statistics assertCount="0" duration="24.1608075" runCount="1" passedCount="1" failedCount="0" inconclusiveCount="0" skippedCount="0" testCount="1" stepCount="4">
+      <outcomeSummaries>
+        <outcomeSummary count="1">
+          <outcome status="passed" />
+        </outcomeSummary>
+      </outcomeSummaries>
+    </statistics>
+  </testPackageRun>
+  <logEntries>
+    <logEntry severity="info" message="Host started at 24/02/11 6:57:53 PM." />
+    <logEntry severity="info" message="Running under CLR v4.0.30319 runtime." />
+    <logEntry severity="debug" message="Listening for connections on IPC port: 'IsolatedProcessHost.e50b795ad2774618'" />
+    <logEntry severity="debug" message="Disabled plugin 'Gallio.VisualStudio.Shell90': The plugin enable condition was not satisfied.  Please note that this is the intended behavior for plugins that must be hosted inside third party applications in order to work.  Enable condition: '${process:DEVENV.EXE_V9.0} or ${process:VSTESTHOST.EXE_V9.0} or ${process:MSTEST.EXE_V9.0} or ${framework:NET35}'." />
+    <logEntry severity="debug" message="Disabled plugin 'Gallio.VisualStudio.Tip90': The plugin depends on another disabled plugin: 'Gallio.VisualStudio.Shell90'." />
+    <logEntry severity="info" message="Host stopped at 24/02/11 6:58:16 PM." />
+    <logEntry severity="info" message="Host process exited with code: 0" />
+  </logEntries>
+</report>

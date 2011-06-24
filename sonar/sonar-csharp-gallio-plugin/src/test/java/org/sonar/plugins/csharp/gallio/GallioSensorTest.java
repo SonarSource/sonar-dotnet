@@ -71,7 +71,7 @@ public class GallioSensorTest {
     GallioSensor sensor = new GallioSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
-    when(project.getName()).thenReturn("Project #1");
+    when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
 

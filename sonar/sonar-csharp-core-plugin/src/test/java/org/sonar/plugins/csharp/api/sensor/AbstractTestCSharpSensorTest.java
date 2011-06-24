@@ -20,26 +20,29 @@
 
 package org.sonar.plugins.csharp.api.sensor;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
 
-public class AbstractCSharpSensorTest {
+public class AbstractTestCSharpSensorTest {
 
-  class FakeSensor extends AbstractCSharpSensor {
+  class FakeSensor extends AbstractTestCSharpSensor {
 
     public FakeSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(microsoftWindowsEnvironment);
@@ -47,11 +50,6 @@ public class AbstractCSharpSensorTest {
 
     @Override
     public void analyse(Project project, SensorContext context) {
-    }
-
-    @Override
-    public File fromIOFile(java.io.File file, Project project) {
-      return null;
     }
   }
 
@@ -76,34 +74,7 @@ public class AbstractCSharpSensorTest {
   }
 
   @Test
-  public void testGetVSProject() {
-    Project project = mock(Project.class);
-    when(project.getName()).thenReturn("Project #1");
-    assertEquals(sensor.getVSProject(project), vsProject1);
-  }
-
-  @Test
-  public void testGetMicrosoftWindowsEnvironment() {
-    assertEquals(sensor.getMicrosoftWindowsEnvironment(), microsoftWindowsEnvironment);
-  }
-
-  @Test
-  public void testShouldNotExecuteOnRootProject() {
-    Project project = mock(Project.class);
-    when(project.isRoot()).thenReturn(true);
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnOtherLanguageProject() {
-    Project project = mock(Project.class);
-    when(project.getName()).thenReturn("Project #1");
-    when(project.getLanguageKey()).thenReturn("java");
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldExecuteEvenOnTestProject() {
+  public void testShouldExecuteOnTestProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -111,11 +82,21 @@ public class AbstractCSharpSensorTest {
   }
 
   @Test
-  public void testShouldExecuteOnNormalProject() {
+  public void testShouldNotExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    assertTrue(sensor.shouldExecuteOnProject(project));
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testFromFile() throws Exception {
+    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
+    when(fileSystem.getTestDirs()).thenReturn(Lists.newArrayList(new File("toto")));
+    Project project = mock(Project.class);
+    when(project.getFileSystem()).thenReturn(fileSystem);
+
+    assertThat(sensor.fromIOFile(new File("toto/tata/fake.cs"), project).getKey(), is("tata/fake.cs"));
   }
 
 }
