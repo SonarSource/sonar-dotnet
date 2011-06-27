@@ -50,6 +50,11 @@
 			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
 			<artifactId>dotnet-tools-commons</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+			<artifactId>gallio-runner</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- sonar open-source -->
 		<dependency>
 			<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>

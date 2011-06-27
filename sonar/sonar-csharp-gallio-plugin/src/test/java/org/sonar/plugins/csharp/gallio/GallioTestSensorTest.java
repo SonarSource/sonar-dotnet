@@ -39,7 +39,7 @@ import org.sonar.test.TestUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public class GallioSensorTest {
+public class GallioTestSensorTest {
 
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
@@ -68,7 +68,7 @@ public class GallioSensorTest {
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    GallioSensor sensor = new GallioSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    GallioExecutionSensor sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
@@ -76,7 +76,7 @@ public class GallioSensorTest {
     assertTrue(sensor.shouldExecuteOnProject(project));
 
     conf.addProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
-    sensor = new GallioSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 }

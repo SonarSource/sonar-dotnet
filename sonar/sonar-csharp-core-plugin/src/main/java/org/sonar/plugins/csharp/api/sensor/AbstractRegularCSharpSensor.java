@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp.api.sensor;
 
-import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
@@ -43,14 +42,6 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
    */
   public boolean shouldExecuteOnProject(Project project) {
     return super.shouldExecuteOnProject(project) && !getVSProject(project).isTest();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public File fromIOFile(java.io.File file, Project project) {
-    return File.fromIOFile(file, project);
   }
 
 }

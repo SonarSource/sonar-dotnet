@@ -33,6 +33,7 @@ import org.apache.commons.lang.StringUtils;
  * @author Jose CHILLAN Jun 16, 2009
  */
 public class TestCaseDetail {
+
   private String name;
   private TestStatus status;
   private String stackTrace;
@@ -41,7 +42,6 @@ public class TestCaseDetail {
   private int countAsserts;
   private File sourceFile;
   private String assemblyName;
-
 
   /**
    * Constructs an empty @link{TestCaseDetail}.
@@ -153,9 +153,9 @@ public class TestCaseDetail {
   public void merge(TestDescription description) {
     this.sourceFile = description.getSourceFile();
     this.name = description.getMethodName();
-    if(description.getAssemblyName() == null){
-      this.assemblyName="AssemblyNotFound";
-    } else{
+    if (description.getAssemblyName() == null) {
+      this.assemblyName = "AssemblyNotFound";
+    } else {
       this.assemblyName = description.getAssemblyName();
     }
   }

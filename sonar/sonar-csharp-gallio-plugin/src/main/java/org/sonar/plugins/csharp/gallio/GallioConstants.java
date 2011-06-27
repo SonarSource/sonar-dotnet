@@ -29,7 +29,17 @@ public final class GallioConstants {
 
   public static final String GALLIO_REPORT_XML = "gallio-report.xml";
 
+  public static final String GALLIO_EXECUTED = "Gallio executed";
+
   // ----------- Plugin Configuration Properties ----------- //
+  public static final String INSTALL_FOLDER_KEY = "sonar.gallio.installDirectory";
+  public static final String INSTALL_FOLDER_DEFVALUE = "C:/Program Files/Gallio";
+
+  public static final String FILTER_KEY = "sonar.gallio.filter";
+  public static final String FILTER_DEFVALUE = "";
+
+  public static final String TIMEOUT_MINUTES_KEY = "sonar.gallio.timeoutMinutes";
+  public static final int TIMEOUT_MINUTES_DEFVALUE = 30;
 
   public static final String MODE = "sonar.gallio.mode";
   public static final String MODE_SKIP = "skip";

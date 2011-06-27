@@ -48,7 +48,6 @@ public abstract class AbstractTestCSharpSensor extends AbstractCSharpSensor {
   /**
    * {@inheritDoc}
    */
-  @Override
   public File fromIOFile(java.io.File file, Project project) {
     return File.fromIOFile(file, project.getFileSystem().getTestDirs());
   }

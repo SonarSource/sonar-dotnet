@@ -33,6 +33,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Jose CHILLAN Jun 4, 2009
  */
 public class TestDescription {
+
   private String assemblyName;
   private String namespace;
   private String className;
@@ -156,7 +157,6 @@ public class TestDescription {
 
   @Override
   public String toString() {
-    return ToStringBuilder.reflectionToString(this,
-        ToStringStyle.SHORT_PREFIX_STYLE);
+    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
   }
 }

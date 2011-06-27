@@ -35,7 +35,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
 
   private static final long MINUTES_TO_MILLISECONDS = 60000;
 
-  private File gallioInstallationFolder;
+  private File gallioExecutable;
   private boolean ignoreTestFailures;
 
   private GallioRunner() {
@@ -45,14 +45,14 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
    * Creates a new {@link GallioRunner} object for the given executable file. If the executable file does not exist, then the embedded one
    * will be used.
    * 
-   * @param gallioInstallDir
-   *          the full path of Gallio installation Folder.
+   * @param gallioPath
+   *          the full path of Gallio executable. For instance: "C:/Program Files/Gallio/bin/Gallio.Echo.exe".
    * @param ignoreTestFailures
    *          set to true if the execution of Gallio should not throw an exception in case of test failures
    */
-  public static GallioRunner create(String gallioInstallDir, boolean ignoreTestFailures) throws GallioException {
+  public static GallioRunner create(String gallioPath, boolean ignoreTestFailures) {
     GallioRunner runner = new GallioRunner();
-    runner.gallioInstallationFolder = new File(gallioInstallDir);
+    runner.gallioExecutable = new File(gallioPath);
     runner.ignoreTestFailures = ignoreTestFailures;
     return runner;
   }
@@ -67,7 +67,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
    */
   public GallioCommandBuilder createCommandBuilder(VisualStudioSolution solution) {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(gallioInstallationFolder);
+    builder.setExecutable(gallioExecutable);
     return builder;
   }
 

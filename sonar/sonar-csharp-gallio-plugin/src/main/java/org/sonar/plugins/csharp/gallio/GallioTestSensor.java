@@ -38,27 +38,27 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
+import org.sonar.plugins.csharp.gallio.results.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.UnitTestReport;
 
 /**
- * Collects the FXCop reporting into sonar.
+ * Gets the execution test report from Gallio and pushes data from it into sonar.
  */
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class GallioSensor extends AbstractTestCSharpSensor {
+@DependsUpon(GallioConstants.GALLIO_EXECUTED)
+public class GallioTestSensor extends AbstractTestCSharpSensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(GallioSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(GallioTestSensor.class);
 
   private ProjectFileSystem fileSystem;
   private CSharpConfiguration configuration;
   private String executionMode;
 
   /**
-   * Constructs a {@link GallioSensor}.
+   * Constructs a {@link GallioTestSensor}.
    * 
    * @param fileSystem
    * @param ruleFinder
@@ -66,7 +66,7 @@ public class GallioSensor extends AbstractTestCSharpSensor {
    * @param profileExporter
    * @param rulesProfile
    */
-  public GallioSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
+  public GallioTestSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
     this.fileSystem = fileSystem;

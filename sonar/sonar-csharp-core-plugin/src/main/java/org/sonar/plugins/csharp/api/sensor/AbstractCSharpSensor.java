@@ -70,7 +70,9 @@ public abstract class AbstractCSharpSensor implements Sensor {
    *          the project
    * @return the Sonar resource if it exists in this project, or null if not.
    */
-  public abstract File fromIOFile(java.io.File file, Project project);
+  public File fromIOFile(java.io.File file, Project project) {
+    return File.fromIOFile(file, project);
+  }
 
   /**
    * Returns the Visual Studio Project corresponding to the given Sonar Project.

@@ -21,7 +21,7 @@
  * Created on Jun 18, 2009
  *
  */
-package org.sonar.plugins.csharp.gallio;
+package org.sonar.plugins.csharp.gallio.results;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,6 +35,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.sonar.plugins.csharp.gallio.results.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.UnitTestReport;

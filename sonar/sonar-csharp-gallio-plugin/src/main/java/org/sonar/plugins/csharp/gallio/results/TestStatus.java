@@ -41,22 +41,21 @@ public enum TestStatus {
    * Categories for the test
    */
   private final static String CATEGORY_ERROR = "error";
-  
-  
-  
+
   /** textual representation of the status in the xml report used by sonar */
   private final String sonarStatus;
 
   private TestStatus(String sonarStatus) {
     this.sonarStatus = sonarStatus;
   }
-  
+
   public String getSonarStatus() {
     return sonarStatus;
   }
-  
+
   /**
    * Convert a gallio status & category pair into a TestStatus instance
+   * 
    * @param status
    * @param category
    * @return
@@ -78,5 +77,5 @@ public enum TestStatus {
     }
     return result;
   }
-  
+
 }

@@ -38,10 +38,8 @@ public final class GallioCommandBuilder {
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 
-  private static final String GALLIO_EXE = "Gallio.Echo.exe";
-
   private VisualStudioSolution solution;
-  private File gallioInstallationFolder;
+  private File gallioExecutable;
   private File gallioReportFile;
   private String filter;
   private String buildConfigurations = "Debug";
@@ -65,12 +63,12 @@ public final class GallioCommandBuilder {
   /**
    * Sets the install dir for Gallio
    * 
-   * @param gallioInstallDir
+   * @param gallioExecutable
    *          the executable
    * @return the current builder
    */
-  public GallioCommandBuilder setInstallationFolder(File gallioInstallDir) {
-    this.gallioInstallationFolder = gallioInstallDir;
+  public GallioCommandBuilder setExecutable(File gallioExecutable) {
+    this.gallioExecutable = gallioExecutable;
     return this;
   }
 
@@ -120,8 +118,8 @@ public final class GallioCommandBuilder {
     List<File> testAssemblies = findTestAssemblies();
     validate(testAssemblies);
 
-    LOG.debug("- Gallio folder : " + gallioInstallationFolder);
-    Command command = Command.create(new File(gallioInstallationFolder, GALLIO_EXE).getAbsolutePath());
+    LOG.debug("- Gallio folder : " + gallioExecutable);
+    Command command = Command.create(gallioExecutable.getAbsolutePath());
 
     LOG.debug("- Runner              : IsolatedProcess");
     command.addArgument("/r:IsolatedProcess");
@@ -180,11 +178,8 @@ public final class GallioCommandBuilder {
   }
 
   protected void validate(List<File> testAssemblies) throws GallioException {
-    if (gallioInstallationFolder == null || !gallioInstallationFolder.isDirectory()) {
-      throw new GallioException("Gallio installation directory does not exist: " + gallioInstallationFolder);
-    }
-    if ( !new File(gallioInstallationFolder, GALLIO_EXE).isFile()) {
-      throw new GallioException("Gallio executable cannot be found in the following folder:" + gallioInstallationFolder);
+    if (gallioExecutable == null || !gallioExecutable.isFile()) {
+      throw new GallioException("Gallio executable cannot be found at the following location:" + gallioExecutable);
     }
     if (gallioReportFile == null) {
       throw new GallioException("Gallio report file has not been specified.");

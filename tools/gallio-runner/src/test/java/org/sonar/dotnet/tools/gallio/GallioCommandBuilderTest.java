@@ -53,7 +53,7 @@ public class GallioCommandBuilderTest {
   @Test
   public void testToCommandForSolution() throws Exception {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeProg"));
+    builder.setExecutable(TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe"));
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.xml"));
     Command command = builder.toCommand();
 
@@ -76,7 +76,7 @@ public class GallioCommandBuilderTest {
     when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject));
 
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeProg"));
+    builder.setExecutable(TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe"));
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.xml"));
     builder.setFilter("FooFilter");
     builder.setBuildConfigurations("Release");
@@ -96,7 +96,7 @@ public class GallioCommandBuilderTest {
   @Test(expected = GallioException.class)
   public void testNoConfigFile() throws Exception {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeProg"));
+    builder.setExecutable(TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe"));
     builder.toCommand();
   }
 
@@ -107,23 +107,9 @@ public class GallioCommandBuilderTest {
   }
 
   @Test(expected = GallioException.class)
-  public void testUnexistingInstallDir() throws Exception {
+  public void testUnexistingGallioExe() throws Exception {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/UnexistingProgDir"));
-    builder.toCommand();
-  }
-
-  @Test(expected = GallioException.class)
-  public void testInstallDirNotDir() throws Exception {
-    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe"));
-    builder.toCommand();
-  }
-
-  @Test(expected = GallioException.class)
-  public void testWrongInstallDir() throws Exception {
-    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeAssemblies"));
+    builder.setExecutable(TestUtils.getResource("/Runner/UnexistingProgDir/Gallio.Echo.exe"));
     builder.toCommand();
   }
 
@@ -134,7 +120,7 @@ public class GallioCommandBuilderTest {
     solution = mock(VisualStudioSolution.class);
     when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject));
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-    builder.setInstallationFolder(TestUtils.getResource("/Runner/FakeProg"));
+    builder.setExecutable(TestUtils.getResource("/Runner/FakeProg"));
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.xml"));
     builder.toCommand();
   }

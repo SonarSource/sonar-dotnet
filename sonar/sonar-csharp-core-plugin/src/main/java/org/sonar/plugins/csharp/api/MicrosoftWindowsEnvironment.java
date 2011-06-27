@@ -43,13 +43,15 @@ import com.google.common.collect.Maps;
 public class MicrosoftWindowsEnvironment implements BatchExtension {
 
   private boolean locked;
-
+  // static configuration elements that are fed at the beginning of an analysis and that do not change afterwards
   private String dotnetVersion;
   private File dotnetSdkDirectory;
   private String silverlightVersion;
   private File silverlightDirectory;
   private VisualStudioSolution currentSolution;
   private Map<String, VisualStudioProject> projectsByName;
+  // dynamic elements that will change during analysis
+  private boolean testExecutionDone = false;
 
   public MicrosoftWindowsEnvironment() {
     projectsByName = Maps.newHashMap();
@@ -179,6 +181,22 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
   public void setSilverlightDirectory(File silverlightDirectory) {
     checkIfLocked();
     this.silverlightDirectory = silverlightDirectory;
+  }
+
+  /**
+   * Tells whether tests have already been executed or not.
+   * 
+   * @return true if tests have already been executed.
+   */
+  public boolean isTestExecutionDone() {
+    return testExecutionDone;
+  }
+
+  /**
+   * Call this method once the tests have been executed and their reports generated.
+   */
+  public void setTestExecutionDone() {
+    this.testExecutionDone = true;
   }
 
 }
