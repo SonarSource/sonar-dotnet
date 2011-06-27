@@ -24,7 +24,7 @@ import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.plugins.csharp.api.squid.source.SourceClass;
 import org.sonar.plugins.csharp.api.squid.source.SourceMember;
@@ -40,7 +40,7 @@ import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
 @Phase(name = Phase.Name.PRE)
-public final class CSharpSquidSensor extends AbstractCSharpSensor {
+public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = { 1, 2, 4, 6, 8, 10, 12 };
