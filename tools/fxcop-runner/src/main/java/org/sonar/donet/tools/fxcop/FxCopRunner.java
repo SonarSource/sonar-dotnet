@@ -34,6 +34,8 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopRunner.class);
 
+  private static final String FXCOP_EXECUTABLE = "FxCopCmd.exe";
+  
   private static final long MINUTES_TO_MILLISECONDS = 60000;
 
   private File fxCopExecutable;
@@ -45,11 +47,11 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
    * Creates a new {@link FxCopRunner} object for the given executable file.
    * 
    * @param fxCopPath
-   *          the full path of the executable. For instance: "C:/Program Files/Microsoft FxCop 10.0/FxCopCmd.exe".
+   *          the full path of the fxcop install directory. For instance: "C:/Program Files/Microsoft FxCop 10.0".
    */
   public static FxCopRunner create(String fxCopPath) throws FxCopException {
     FxCopRunner runner = new FxCopRunner();
-    runner.fxCopExecutable = new File(fxCopPath);
+    runner.fxCopExecutable = new File(fxCopPath, FXCOP_EXECUTABLE);
     return runner;
   }
 

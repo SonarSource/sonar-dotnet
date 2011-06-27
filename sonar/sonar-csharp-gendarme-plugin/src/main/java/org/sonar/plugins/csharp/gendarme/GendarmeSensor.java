@@ -108,8 +108,8 @@ public class GendarmeSensor extends AbstractRegularCSharpSensor {
       File gendarmeConfigFile = generateConfigurationFile();
       // run Gendarme
       try {
-        GendarmeRunner runner = GendarmeRunner.create(configuration.getString(GendarmeConstants.EXECUTABLE_KEY,
-            GendarmeConstants.EXECUTABLE_DEFVALUE), fileSystem.getSonarWorkingDirectory().getAbsolutePath());
+        GendarmeRunner runner = GendarmeRunner.create(configuration.getString(GendarmeConstants.INSTALL_DIR_KEY,
+            GendarmeConstants.INSTALL_DIR_DEFVALUE), fileSystem.getSonarWorkingDirectory().getAbsolutePath());
         launchGendarme(project, runner, gendarmeConfigFile);
       } catch (GendarmeException e) {
         throw new SonarException("Gendarme execution failed.", e);

@@ -37,7 +37,7 @@ import org.sonar.plugins.csharp.gendarme.results.GendarmeViolationMaker;
  * Main class of the Gendarme plugin.
  */
 @Properties({
-    @Property(key = GendarmeConstants.EXECUTABLE_KEY, defaultValue = GendarmeConstants.EXECUTABLE_DEFVALUE, name = "Gendarme executable",
+    @Property(key = GendarmeConstants.INSTALL_DIR_KEY, defaultValue = GendarmeConstants.INSTALL_DIR_DEFVALUE, name = "Gendarme executable",
         description = "Absolute path of the Gendarme program.", global = true, project = false),
     @Property(key = GendarmeConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = GendarmeConstants.ASSEMBLIES_TO_SCAN_DEFVALUE,
         name = "Assemblies to scan", description = "Comma-seperated list of paths of assemblies that should be scanned. "

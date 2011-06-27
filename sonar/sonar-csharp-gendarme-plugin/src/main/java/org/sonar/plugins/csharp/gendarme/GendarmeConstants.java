@@ -35,8 +35,8 @@ public final class GendarmeConstants {
   public static final String GENDARME_REPORT_XML = "gendarme-report.xml";
 
   // ----------- Plugin Configuration Properties ----------- //
-  public static final String EXECUTABLE_KEY = "sonar.gendarme.installDirectory";
-  public static final String EXECUTABLE_DEFVALUE = "C:/Program Files/gendarme-2.10-bin/gendarme.exe";
+  public static final String INSTALL_DIR_KEY = "sonar.gendarme.installDirectory";
+  public static final String INSTALL_DIR_DEFVALUE = "C:/Program Files/gendarme-2.10-bin";
 
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.gendarme.assemblies";
   public static final String ASSEMBLIES_TO_SCAN_DEFVALUE = "";

@@ -39,6 +39,7 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeRunner.class);
 
+  private static final String GENDARME_EXECUTABLE = "gendarme.exe";
   private static final long MINUTES_TO_MILLISECONDS = 60000;
   private static final String EMBEDDED_VERSION = "2.10";
 
@@ -53,7 +54,7 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
    * will be used.
    * 
    * @param gendarmePath
-   *          the full path of the executable. For instance: "C:/Program Files/gendarme-2.10-bin/gendarme.exe". May be null: in this case,
+   *          the full path of the gendarme install directory. For instance: "C:/Program Files/gendarme-2.10-bin". May be null: in this case,
    *          the embedded Gendarme executable will be used.
    * @param tempFolder
    *          the temporary folder where the embedded Gendarme executable will be copied if the gendarmePath does not point to a valid
@@ -62,8 +63,7 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
   public static GendarmeRunner create(String gendarmePath, String tempFolder) throws GendarmeException {
     GendarmeRunner runner = new GendarmeRunner();
 
-    File executable = new File(gendarmePath);
-    runner.gendarmeExecutable = executable;
+    File executable = new File(gendarmePath, GENDARME_EXECUTABLE);
     if ( !executable.exists() || !executable.isFile()) {
       LOG.info("Gendarme executable not found: '{}'. The embedded version ({}) will be used instead.", executable.getAbsolutePath(),
           EMBEDDED_VERSION);
@@ -71,11 +71,12 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
         URL executableURL = GendarmeRunner.class.getResource("/gendarme-" + EMBEDDED_VERSION + "-bin");
         File extractedFolder = ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!")
             .substring(5), "gendarme-" + EMBEDDED_VERSION + "-bin", tempFolder);
-        runner.gendarmeExecutable = new File(extractedFolder, "gendarme.exe");
+        executable = new File(extractedFolder, GENDARME_EXECUTABLE);
       } catch (IOException e) {
         throw new GendarmeException("Could not extract the embedded Gendarme executable: " + e.getMessage(), e);
       }
     }
+    runner.gendarmeExecutable = executable;
 
     return runner;
   }

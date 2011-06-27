@@ -109,7 +109,7 @@ public class FxCopSensor extends AbstractRegularCSharpSensor {
       File fxCopConfigFile = generateConfigurationFile();
       // and run FxCop
       try {
-        FxCopRunner runner = FxCopRunner.create(configuration.getString(FxCopConstants.EXECUTABLE_KEY, FxCopConstants.EXECUTABLE_DEFVALUE));
+        FxCopRunner runner = FxCopRunner.create(configuration.getString(FxCopConstants.INSTALL_DIR_KEY, FxCopConstants.INSTALL_DIR_DEFVALUE));
         launchFxCop(project, runner, fxCopConfigFile);
       } catch (FxCopException e) {
         throw new SonarException("FxCop execution failed.", e);
