@@ -12,7 +12,7 @@
 	<artifactId>parent</artifactId>
 	<packaging>pom</packaging>
 
-	<name>Sonar C# Plugin</name>
+	<name>Sonar C# Plugins</name>
 
 	<modules>
 		<module>sonar-csharp-core-plugin</module>
