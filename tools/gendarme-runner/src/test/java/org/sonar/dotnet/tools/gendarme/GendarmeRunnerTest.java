@@ -54,8 +54,9 @@ public class GendarmeRunnerTest {
     when(vsProject.getArtifactDirectory("Debug")).thenReturn(TestUtils.getResource("/runner/FakeAssemblies"));
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
 
-    fakeExecPath = TestUtils.getResource("/runner/FakeGendarmeExecutable.txt").getAbsolutePath();
-    runner = GendarmeRunner.create(fakeExecPath, new File("target/sonar/tempFolder").getAbsolutePath());
+    fakeExecPath = TestUtils.getResource("/runner/FakeProg/gendarme.exe").getAbsolutePath();
+    runner = GendarmeRunner.create(TestUtils.getResource("/runner/FakeProg").getAbsolutePath(),
+        new File("target/sonar/tempFolder").getAbsolutePath());
   }
 
   @Test

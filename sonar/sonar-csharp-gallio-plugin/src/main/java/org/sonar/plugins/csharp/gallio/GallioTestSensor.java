@@ -80,7 +80,7 @@ public class GallioTestSensor extends AbstractTestCSharpSensor {
   public boolean shouldExecuteOnProject(Project project) {
     boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
     if (skipMode) {
-      LOG.info("Gallio plugin won't execute as it is set to 'skip' mode.");
+      LOG.info("Gallio report analysis won't execute as it is set to 'skip' mode.");
     }
 
     return super.shouldExecuteOnProject(project) && !skipMode;

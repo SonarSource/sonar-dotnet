@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
 
 public class FxCopRunnerTest {
 
-  private static File fakeFxCopExecutable;
+  private static File fakeFxCopInstallDir;
   private static File fakeFxCopConfigFile;
   private static File fakeFxCopReportFile;
   private VisualStudioSolution solution;
@@ -46,7 +46,7 @@ public class FxCopRunnerTest {
 
   @BeforeClass
   public static void initStatic() throws Exception {
-    fakeFxCopExecutable = TestUtils.getResource("/Runner/FakeProg/FxCopCmd.exe");
+    fakeFxCopInstallDir = TestUtils.getResource("/Runner/FakeProg");
     fakeFxCopConfigFile = TestUtils.getResource("/Runner/FakeFxCopConfigFile.xml");
     fakeFxCopReportFile = new File("target/sonar/FxCop/fxcop-report.xml");
   }
@@ -64,20 +64,20 @@ public class FxCopRunnerTest {
 
   @Test
   public void testCreateCommandBuilderForSolution() throws Exception {
-    FxCopRunner runner = FxCopRunner.create(fakeFxCopExecutable.getAbsolutePath());
+    FxCopRunner runner = FxCopRunner.create(fakeFxCopInstallDir.getAbsolutePath());
     FxCopCommandBuilder builder = runner.createCommandBuilder(solution);
     builder.setConfigFile(fakeFxCopConfigFile);
     builder.setReportFile(fakeFxCopReportFile);
-    assertThat(builder.toCommand().getExecutable(), is(fakeFxCopExecutable.getAbsolutePath()));
+    assertThat(builder.toCommand().getExecutable(), is(new File(fakeFxCopInstallDir, "FxCopCmd.exe").getAbsolutePath()));
   }
 
   @Test
   public void testCreateCommandBuilderForProject() throws Exception {
-    FxCopRunner runner = FxCopRunner.create(fakeFxCopExecutable.getAbsolutePath());
+    FxCopRunner runner = FxCopRunner.create(fakeFxCopInstallDir.getAbsolutePath());
     FxCopCommandBuilder builder = runner.createCommandBuilder(vsProject);
     builder.setConfigFile(fakeFxCopConfigFile);
     builder.setReportFile(fakeFxCopReportFile);
-    assertThat(builder.toCommand().getExecutable(), is(fakeFxCopExecutable.getAbsolutePath()));
+    assertThat(builder.toCommand().getExecutable(), is(new File(fakeFxCopInstallDir, "FxCopCmd.exe").getAbsolutePath()));
   }
 
 }

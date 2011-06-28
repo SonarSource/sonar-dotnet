@@ -93,14 +93,14 @@ public class VisualStudioProjectBuilderTest {
     Properties props = projectBuilder.enhanceRootProperties(root);
     assertThat(props.getProperty("fake"), is("foo"));
     assertThat(props.getProperty("sonar.sourceEncoding"), is("UTF-8"));
-    assertThat(props.getProperty("sonar.exclusions"), is("**/Reference.cs,**/*.designer.cs"));
+    assertThat(props.getProperty("sonar.exclusions"), is(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
   }
 
   @Test
   public void testEnhanceRootPropertiesWithDefinedSonarExclusions() throws Exception {
     root.getProperties().put("sonar.exclusions", "**/Foo.cs,Toto.cs");
     Properties props = projectBuilder.enhanceRootProperties(root);
-    assertThat(props.getProperty("sonar.exclusions"), is("**/Foo.cs,Toto.cs,**/Reference.cs,**/*.designer.cs"));
+    assertThat(props.getProperty("sonar.exclusions"), is("**/Foo.cs,Toto.cs," + CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
   }
 
   @Test

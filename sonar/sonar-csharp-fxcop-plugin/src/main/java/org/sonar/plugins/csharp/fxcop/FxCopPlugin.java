@@ -35,8 +35,8 @@ import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfile;
  * Main class of the FxCop plugin.
  */
 @Properties({
-    @Property(key = FxCopConstants.INSTALL_DIR_KEY, defaultValue = FxCopConstants.INSTALL_DIR_DEFVALUE, name = "FxCop executable",
-        description = "Absolute path of the FxCop program.", global = true, project = false),
+    @Property(key = FxCopConstants.INSTALL_DIR_KEY, defaultValue = FxCopConstants.INSTALL_DIR_DEFVALUE, name = "FxCop install directory",
+        description = "Absolute path of the FxCop installation folder.", global = true, project = false),
     @Property(key = FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = "", name = "Assemblies to scan",
         description = "Comma-seperated list of paths of assemblies that should be scanned. "
             + "If empty, the plugin will try to get this list from the Visual Studio 'csproj' files (if any).", global = false,

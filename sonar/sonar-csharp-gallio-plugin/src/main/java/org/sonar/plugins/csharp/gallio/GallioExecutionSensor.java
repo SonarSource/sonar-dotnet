@@ -74,15 +74,15 @@ public class GallioExecutionSensor extends AbstractCSharpSensor {
    */
   public boolean shouldExecuteOnProject(Project project) {
     if (GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode)) {
-      LOG.info("Gallio plugin won't execute as it is set to 'skip' mode.");
+      LOG.info("Gallio won't execute as it is set to 'skip' mode.");
       return false;
     }
     if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
-      LOG.info("Gallio plugin won't execute as it is set to 'reuseReport' mode.");
+      LOG.info("Gallio won't execute as it is set to 'reuseReport' mode.");
       return false;
     }
     if (getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
-      LOG.info("Gallio plugin won't execute as test execution has already been done.");
+      LOG.info("Gallio won't execute as test execution has already been done.");
       return false;
     }
 
