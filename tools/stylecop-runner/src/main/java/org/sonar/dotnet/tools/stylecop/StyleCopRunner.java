@@ -70,22 +70,30 @@ public class StyleCopRunner { // NOSONAR : can't mock it otherwise
     StyleCopRunner runner = new StyleCopRunner();
     File dotnetSdkDir = new File(dotnetSdkPath);
     runner.dotnetSdkFolder = dotnetSdkDir;
-    File styleCopDir = new File(styleCopPath);
-    runner.styleCopFolder = styleCopDir;
 
+    File styleCopDir = new File(styleCopPath);
     if ( !styleCopDir.exists() || !styleCopDir.isDirectory()) {
       LOG.info("StyleCop install folder not found: '{}'. The embedded version ({}) will be used instead.", styleCopDir.getAbsolutePath(),
           EMBEDDED_VERSION);
-      try {
-        URL executableURL = StyleCopRunner.class.getResource("/StyleCop-" + EMBEDDED_VERSION);
-        runner.styleCopFolder = ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!")
-            .substring(5), "StyleCop-" + EMBEDDED_VERSION, tempFolder);
-      } catch (IOException e) {
-        throw new StyleCopException("Could not extract the embedded StyleCop executable: " + e.getMessage(), e);
+      styleCopDir = new File(tempFolder, "StyleCop-" + EMBEDDED_VERSION);
+      if ( !styleCopDir.isDirectory()) {
+        LOG.info("Extracting StyleCop binaries in {}", tempFolder);
+        extractStyleCopBinaries(tempFolder);
       }
     }
+    runner.styleCopFolder = styleCopDir;
 
     return runner;
+  }
+
+  protected static void extractStyleCopBinaries(String tempFolder) throws StyleCopException {
+    try {
+      URL executableURL = StyleCopRunner.class.getResource("/StyleCop-" + EMBEDDED_VERSION);
+      ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!").substring(5), "StyleCop-"
+          + EMBEDDED_VERSION, tempFolder);
+    } catch (IOException e) {
+      throw new StyleCopException("Could not extract the embedded StyleCop executable: " + e.getMessage(), e);
+    }
   }
 
   /**

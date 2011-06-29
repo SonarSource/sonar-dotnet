@@ -50,6 +50,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
   private File silverlightDirectory;
   private VisualStudioSolution currentSolution;
   private Map<String, VisualStudioProject> projectsByName;
+  private String workDir;
   // dynamic elements that will change during analysis
   private boolean testExecutionDone = false;
 
@@ -197,6 +198,26 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
    */
   public void setTestExecutionDone() {
     this.testExecutionDone = true;
+  }
+
+  /**
+   * Returns the working directory that must be used during the Sonar analysis. For example, it is "target/sonar" if Maven runner is used,
+   * or ".sonar" if the Java runner is used.
+   * 
+   * @return the working directory
+   */
+  public String getWorkingDirectory() {
+    return workDir;
+  }
+
+  /**
+   * Sets the working directory used during the Sonar analysis.
+   * 
+   * @param workDir
+   *          the working directory
+   */
+  public void setWorkingDirectory(String workDir) {
+    this.workDir = workDir;
   }
 
 }

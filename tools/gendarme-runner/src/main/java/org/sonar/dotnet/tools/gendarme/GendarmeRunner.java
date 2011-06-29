@@ -54,8 +54,8 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
    * will be used.
    * 
    * @param gendarmePath
-   *          the full path of the gendarme install directory. For instance: "C:/Program Files/gendarme-2.10-bin". May be null: in this case,
-   *          the embedded Gendarme executable will be used.
+   *          the full path of the gendarme install directory. For instance: "C:/Program Files/gendarme-2.10-bin". May be null: in this
+   *          case, the embedded Gendarme executable will be used.
    * @param tempFolder
    *          the temporary folder where the embedded Gendarme executable will be copied if the gendarmePath does not point to a valid
    *          executable
@@ -67,18 +67,25 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
     if ( !executable.exists() || !executable.isFile()) {
       LOG.info("Gendarme executable not found: '{}'. The embedded version ({}) will be used instead.", executable.getAbsolutePath(),
           EMBEDDED_VERSION);
-      try {
-        URL executableURL = GendarmeRunner.class.getResource("/gendarme-" + EMBEDDED_VERSION + "-bin");
-        File extractedFolder = ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!")
-            .substring(5), "gendarme-" + EMBEDDED_VERSION + "-bin", tempFolder);
-        executable = new File(extractedFolder, GENDARME_EXECUTABLE);
-      } catch (IOException e) {
-        throw new GendarmeException("Could not extract the embedded Gendarme executable: " + e.getMessage(), e);
+      executable = new File(tempFolder, "gendarme-" + EMBEDDED_VERSION + "-bin/" + GENDARME_EXECUTABLE);
+      if ( !executable.isFile()) {
+        LOG.info("Extracting Gendarme binaries in {}", tempFolder);
+        extractGendarmeBinaries(tempFolder);
       }
     }
     runner.gendarmeExecutable = executable;
 
     return runner;
+  }
+
+  protected static void extractGendarmeBinaries(String tempFolder) throws GendarmeException {
+    try {
+      URL executableURL = GendarmeRunner.class.getResource("/gendarme-" + EMBEDDED_VERSION + "-bin");
+      ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!").substring(5), "gendarme-"
+          + EMBEDDED_VERSION + "-bin", tempFolder);
+    } catch (IOException e) {
+      throw new GendarmeException("Could not extract the embedded Gendarme executable: " + e.getMessage(), e);
+    }
   }
 
   /**

@@ -145,6 +145,7 @@ public class VisualStudioProjectBuilderTest {
     assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory().getAbsolutePath(), is(fakeSdkDir.getAbsolutePath()));
     assertThat(microsoftWindowsEnvironment.getSilverlightVersion(), is("4"));
     assertThat(microsoftWindowsEnvironment.getSilverlightDirectory().getAbsolutePath(), is(fakeSilverlightDir.getAbsolutePath()));
+    assertThat(microsoftWindowsEnvironment.getWorkingDirectory(), is("WORK-DIR"));
     // check that the solution is built
     VisualStudioSolution solution = microsoftWindowsEnvironment.getCurrentSolution();
     assertNotNull(solution);

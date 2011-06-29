@@ -80,11 +80,11 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       // Then create the Visual Studio Solution object from the ".sln" file
       createVisualStudioSolution(root.getBaseDir());
 
-      // lock the MicrosoftWindowsEnvironment object so that nobody can modify it afterwards
-      microsoftWindowsEnvironment.lock();
-
       // And finally create the Sonar projects definition
       createMultiProjectStructure(root);
+
+      // lock the MicrosoftWindowsEnvironment object so that nobody can modify it afterwards
+      microsoftWindowsEnvironment.lock();
     }
   }
 
@@ -93,6 +93,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     root.resetSourceDirs();
     LOG.debug("- Root Project: {}", root.getName());
     String workDir = root.getWorkDir().getAbsolutePath().substring(root.getBaseDir().getAbsolutePath().length() + 1);
+    microsoftWindowsEnvironment.setWorkingDirectory(workDir);
     Properties rootProps = enhanceRootProperties(root);
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {

@@ -40,7 +40,6 @@ import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 
@@ -108,9 +107,11 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
       File styleCopConfigFile = generateConfigurationFile();
       // run StyleCop
       try {
-        StyleCopRunner runner = StyleCopRunner.create(configuration.getString(StyleCopConstants.INSTALL_DIR_KEY,
-            StyleCopConstants.INSTALL_DIR_DEFVALUE), getMicrosoftWindowsEnvironment().getDotnetSdkDirectory().getAbsolutePath(), fileSystem
-            .getSonarWorkingDirectory().getAbsolutePath());
+        File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
+            .getWorkingDirectory());
+        StyleCopRunner runner = StyleCopRunner.create(
+            configuration.getString(StyleCopConstants.INSTALL_DIR_KEY, StyleCopConstants.INSTALL_DIR_DEFVALUE),
+            getMicrosoftWindowsEnvironment().getDotnetSdkDirectory().getAbsolutePath(), tempDir.getAbsolutePath());
         launchStyleCop(project, runner, styleCopConfigFile);
       } catch (StyleCopException e) {
         throw new SonarException("StyleCop execution failed.", e);

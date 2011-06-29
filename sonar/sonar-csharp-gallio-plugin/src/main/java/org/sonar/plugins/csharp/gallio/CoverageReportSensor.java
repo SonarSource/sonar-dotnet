@@ -31,7 +31,6 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
@@ -55,7 +54,6 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
 
-  private ProjectFileSystem fileSystem;
   private CSharpConfiguration configuration;
   private String executionMode;
 
@@ -66,10 +64,8 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public CoverageReportSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
-    this.fileSystem = fileSystem;
     this.configuration = configuration;
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
   }
@@ -93,9 +89,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "");
       LOG.info("Reusing Gallio coverage report: " + reportPath);
     } else {
-      String workDir = fileSystem.getSonarWorkingDirectory().getAbsolutePath()
-          .substring(fileSystem.getBasedir().getAbsolutePath().length() + 1);
-      reportPath = workDir + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
+      reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
     }
 
     File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);

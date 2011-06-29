@@ -35,7 +35,6 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
@@ -53,7 +52,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
 
-  private ProjectFileSystem fileSystem;
   private CSharpConfiguration configuration;
   private String executionMode;
 
@@ -64,10 +62,8 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public TestReportSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
-    this.fileSystem = fileSystem;
     this.configuration = configuration;
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
   }
@@ -91,9 +87,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
       reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, "");
       LOG.info("Reusing Gallio report: " + reportPath);
     } else {
-      String workDir = fileSystem.getSonarWorkingDirectory().getAbsolutePath()
-          .substring(fileSystem.getBasedir().getAbsolutePath().length() + 1);
-      reportPath = workDir + "/" + GallioConstants.GALLIO_REPORT_XML;
+      reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML;
     }
 
     File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);

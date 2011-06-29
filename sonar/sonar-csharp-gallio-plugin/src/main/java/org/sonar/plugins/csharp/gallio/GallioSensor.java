@@ -27,7 +27,6 @@ import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.gallio.GallioCommandBuilder;
 import org.sonar.dotnet.tools.gallio.GallioException;
@@ -48,7 +47,6 @@ public class GallioSensor extends AbstractCSharpSensor {
 
   private static final String GALLIO_EXE = "bin/Gallio.Echo.exe";
 
-  private ProjectFileSystem fileSystem;
   private CSharpConfiguration configuration;
   private String executionMode;
 
@@ -59,10 +57,8 @@ public class GallioSensor extends AbstractCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public GallioSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public GallioSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
-    this.fileSystem = fileSystem;
     this.configuration = configuration;
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
   }
@@ -95,10 +91,8 @@ public class GallioSensor extends AbstractCSharpSensor {
       GallioRunner runner = GallioRunner.create(gallioExe.getAbsolutePath(), false);
       GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
 
-      String workDir = fileSystem.getSonarWorkingDirectory().getAbsolutePath()
-          .substring(fileSystem.getBasedir().getAbsolutePath().length() + 1);
-      File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), workDir + "/"
-          + GallioConstants.GALLIO_REPORT_XML);
+      File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
+          .getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML);
 
       builder.setReportFile(reportFile);
       builder.setFilter(configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE));
