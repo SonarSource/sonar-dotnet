@@ -50,6 +50,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   private final CSharpConfiguration conf;
 
   public CSharpAstScanner(SourceCode project, CSharpConfiguration conf) {
+    super();
     this.project = project;
     this.parser = new CSharpParser(conf);
     this.conf = conf;
@@ -118,7 +119,6 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     }
     AstWalker astWalker = new AstWalker(getVisitors());
     astWalker.walkAndVisit(ast);
-    astWalker = null;
   }
 
   @Override

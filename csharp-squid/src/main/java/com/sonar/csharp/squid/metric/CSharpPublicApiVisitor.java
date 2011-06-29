@@ -44,7 +44,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
     modifiersMap.put(g.indexerDeclarator, g.indexerModifier);
     modifiersMap.put(g.operatorDeclaration, g.operatorModifier);
 
-    subscribeTo(modifiersMap.keySet().toArray(new AstNodeType[] {}));
+    subscribeTo(modifiersMap.keySet().toArray(new AstNodeType[modifiersMap.keySet().size()]));
     // and we need to add interface members that are special cases (they do not have modifiers, they inherit the visibility of their
     // enclosing interface definition)
     subscribeTo(g.interfaceMethodDeclaration, g.interfacePropertyDeclaration, g.interfaceEventDeclaration, g.interfaceIndexerDeclaration);

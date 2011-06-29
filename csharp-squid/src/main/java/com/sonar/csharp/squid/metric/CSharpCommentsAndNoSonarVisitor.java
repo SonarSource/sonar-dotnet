@@ -82,7 +82,7 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
     return comment;
   }
 
-  class CSharpFootprint implements LanguageFootprint {
+  static class CSharpFootprint implements LanguageFootprint {
 
     private final Set<Detector> detectors = new HashSet<Detector>();
 

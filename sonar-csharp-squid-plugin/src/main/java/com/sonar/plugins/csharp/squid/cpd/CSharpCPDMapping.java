@@ -23,6 +23,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   private final Charset charset;
 
   public CSharpCPDMapping(CSharp csharp, Project project) {
+    super();
     this.csharp = csharp;
     this.charset = project.getFileSystem().getSourceCharset();
     ignoreLiterals = project.getConfiguration().getBoolean(CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY,
