@@ -58,19 +58,19 @@ public final class ZipUtils {
     File destinationFolder = new File(outputDirectory);
     destinationFolder.mkdirs();
 
-    BufferedInputStream is = null;
-    BufferedOutputStream dest = null;
-    try {
-      ZipFile zip = new ZipFile(new File(archivePath));
-      Enumeration<?> zipFileEntries = zip.entries();
-      // Process each entry
-      while (zipFileEntries.hasMoreElements()) {
-        ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
-        String currentEntry = entry.getName();
-        if (currentEntry.startsWith(folderToExtract)) {
-          File destFile = new File(destinationFolder, currentEntry);
-          destFile.getParentFile().mkdirs();
-          if ( !entry.isDirectory()) {
+    ZipFile zip = new ZipFile(new File(archivePath));
+    Enumeration<?> zipFileEntries = zip.entries();
+    // Process each entry
+    while (zipFileEntries.hasMoreElements()) {
+      ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
+      String currentEntry = entry.getName();
+      if (currentEntry.startsWith(folderToExtract)) {
+        File destFile = new File(destinationFolder, currentEntry);
+        destFile.getParentFile().mkdirs();
+        if ( !entry.isDirectory()) {
+          BufferedInputStream is = null;
+          BufferedOutputStream dest = null;
+          try {
             is = new BufferedInputStream(zip.getInputStream(entry));
             int currentByte;
             // establish buffer for writing file
@@ -84,15 +84,15 @@ public final class ZipUtils {
             while ((currentByte = is.read(data, 0, BUFFER_SIZE)) != -1) {
               dest.write(data, 0, currentByte);
             }
+          } finally {
+            if (dest != null) {
+              dest.flush();
+            }
+            IOUtils.closeQuietly(dest);
+            IOUtils.closeQuietly(is);
           }
         }
       }
-    } finally {
-      if (dest != null) {
-        dest.flush();
-      }
-      IOUtils.closeQuietly(dest);
-      IOUtils.closeQuietly(is);
     }
     return new File(destinationFolder, folderToExtract);
   }
