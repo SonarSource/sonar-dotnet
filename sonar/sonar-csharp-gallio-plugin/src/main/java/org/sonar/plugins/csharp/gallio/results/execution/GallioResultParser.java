@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.gallio.results;
+package org.sonar.plugins.csharp.gallio.results.execution;
 
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.advanceCursor;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
@@ -49,6 +49,10 @@ import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestDescription;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
+import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;

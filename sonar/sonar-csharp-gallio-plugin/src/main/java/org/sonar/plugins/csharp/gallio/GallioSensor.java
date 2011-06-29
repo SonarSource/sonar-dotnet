@@ -38,13 +38,13 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 
 /**
- * Executes Gallio to generate test reports.
+ * Executes Gallio only once in the Solution directory to generate test execution and coverage reports.
  */
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-@DependedUpon(GallioConstants.GALLIO_EXECUTED)
-public class GallioExecutionSensor extends AbstractCSharpSensor {
+@DependedUpon(GallioConstants.BARRIER_GALLIO_EXECUTED)
+public class GallioSensor extends AbstractCSharpSensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(GallioExecutionSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(GallioSensor.class);
 
   private static final String GALLIO_EXE = "bin/Gallio.Echo.exe";
 
@@ -53,15 +53,13 @@ public class GallioExecutionSensor extends AbstractCSharpSensor {
   private String executionMode;
 
   /**
-   * Constructs a {@link GallioExecutionSensor}.
+   * Constructs a {@link GallioSensor}.
    * 
    * @param fileSystem
-   * @param ruleFinder
-   * @param fxCopRunner
-   * @param profileExporter
-   * @param rulesProfile
+   * @param configuration
+   * @param microsoftWindowsEnvironment
    */
-  public GallioExecutionSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
+  public GallioSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
     this.fileSystem = fileSystem;

@@ -21,7 +21,7 @@
  * Created on Jun 16, 2009
  *
  */
-package org.sonar.plugins.csharp.gallio.results;
+package org.sonar.plugins.csharp.gallio.results.execution.model;
 
 /**
  * possible status for a test

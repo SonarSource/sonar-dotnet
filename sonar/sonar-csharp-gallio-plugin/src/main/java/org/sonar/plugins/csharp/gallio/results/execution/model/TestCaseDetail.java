@@ -20,7 +20,7 @@
 /*
  * Created on Apr 28, 2009
  */
-package org.sonar.plugins.csharp.gallio.results;
+package org.sonar.plugins.csharp.gallio.results.execution.model;
 
 import java.io.File;
 

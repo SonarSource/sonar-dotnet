@@ -21,7 +21,7 @@
  * Created on Jun 18, 2009
  *
  */
-package org.sonar.plugins.csharp.gallio.results;
+package org.sonar.plugins.csharp.gallio.results.execution;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,10 +35,9 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.sonar.plugins.csharp.gallio.results.GallioResultParser;
-import org.sonar.plugins.csharp.gallio.results.TestCaseDetail;
-import org.sonar.plugins.csharp.gallio.results.TestStatus;
-import org.sonar.plugins.csharp.gallio.results.UnitTestReport;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
+import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import org.sonar.test.TestUtils;
 
 import com.google.common.base.Predicate;
@@ -57,7 +56,7 @@ public class GallioResultParserTest {
   }
 
   private Collection<UnitTestReport> parse(String fileName) {
-    return parser.parse(TestUtils.getResource("/Results/" + fileName));
+    return parser.parse(TestUtils.getResource("/Results/execution/" + fileName));
   }
 
   @Test

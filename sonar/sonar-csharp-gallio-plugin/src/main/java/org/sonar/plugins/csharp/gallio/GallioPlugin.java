@@ -45,7 +45,9 @@ import org.sonar.api.SonarPlugin;
     @Property(key = GallioConstants.MODE, defaultValue = "", name = "Gallio activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = true, project = true),
     @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
-        description = "Name of the Gallio report file used when reuse report mode is activated.", global = true, project = true) })
+        description = "Name of the Gallio report file used when reuse report mode is activated.", global = true, project = true),
+    @Property(key = GallioConstants.REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the Gallio coverage report files",
+        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = true, project = true) })
 public class GallioPlugin extends SonarPlugin {
 
   /**
@@ -53,9 +55,10 @@ public class GallioPlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
-    extensions.add(GallioMetrics.class);
-    extensions.add(GallioExecutionSensor.class);
-    extensions.add(GallioTestSensor.class);
+    extensions.add(TestMetrics.class);
+    extensions.add(GallioSensor.class);
+    extensions.add(TestReportSensor.class);
+    extensions.add(CoverageReportSensor.class);
 
     return extensions;
   }

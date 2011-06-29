@@ -20,16 +20,17 @@
 package org.sonar.plugins.csharp.gallio;
 
 /**
- * Constants of the FxCop plugin.
+ * Constants of the Gallio plugin.
  */
 public final class GallioConstants {
 
   private GallioConstants() {
   }
 
-  public static final String GALLIO_REPORT_XML = "gallio-report.xml";
+  public static final String BARRIER_GALLIO_EXECUTED = "Gallio executed";
 
-  public static final String GALLIO_EXECUTED = "Gallio executed";
+  public static final String GALLIO_REPORT_XML = "gallio-report.xml";
+  public static final String GALLIO_COVERAGE_REPORT_XML = "coverage-report.xml";
 
   // ----------- Plugin Configuration Properties ----------- //
   public static final String INSTALL_FOLDER_KEY = "sonar.gallio.installDirectory";
@@ -46,5 +47,6 @@ public final class GallioConstants {
   public static final String MODE_REUSE_REPORT = "reuseReport";
 
   public static final String REPORTS_PATH_KEY = "sonar.gallio.reports.path";
+  public static final String REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.coverage.reports.path";
 
 }

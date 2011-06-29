@@ -39,13 +39,12 @@ import org.sonar.test.TestUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public class GallioExecutionSensorTest {
+public class TestReportSensorTest {
 
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject1;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
-  private Project project;
 
   @Before
   public void init() {
@@ -64,42 +63,20 @@ public class GallioExecutionSensorTest {
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
-
-    project = mock(Project.class);
-    when(project.getLanguageKey()).thenReturn("cs");
   }
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    GallioExecutionSensor sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    GallioSensor sensor = new GallioSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project Test");
+    when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
-  }
 
-  @Test
-  public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
-    Configuration conf = new BaseConfiguration();
     conf.addProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
-    GallioExecutionSensor sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnProjectIfReuseReports() throws Exception {
-    Configuration conf = new BaseConfiguration();
-    conf.addProperty(GallioConstants.MODE, GallioConstants.MODE_REUSE_REPORT);
-    GallioExecutionSensor sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnProjectTestsAlreadyExecuted() throws Exception {
-    microsoftWindowsEnvironment.setTestExecutionDone();
-    Configuration conf = new BaseConfiguration();
-    GallioExecutionSensor sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    sensor = new GallioExecutionSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new GallioSensor(fileSystem, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 }

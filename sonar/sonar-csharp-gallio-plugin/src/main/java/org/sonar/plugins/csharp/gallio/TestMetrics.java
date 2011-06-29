@@ -28,20 +28,25 @@ import org.sonar.api.measures.Metrics;
 import org.sonar.api.measures.SumChildValuesFormula;
 
 /**
- * Metrics specific to the Gallio plugin that don't exist in base Sonar.
+ * Test-related metrics that don't exist in Sonar Core for the moment.
  * 
  * @author Fabrice Bellingard, June 22, 2011
  * @author Jose CHILLAN Apr 30, 2009
  */
-public class GallioMetrics implements Metrics {
+public class TestMetrics implements Metrics {
 
   public static final Metric COUNT_ASSERTS = new Metric.Builder("count_asserts", "Count Assert", Metric.ValueType.INT)
       .setDescription("The number of asserts performed by the unit tests").setDirection(Metric.DIRECTION_BETTER).setQualitative(false)
       .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new SumChildValuesFormula(true)).create();
 
+  public static final Metric ELOC = new Metric.Builder("eloc", "Effective lines of code", Metric.ValueType.INT)
+      .setDescription("The number of lines of code with statements").setDirection(Metric.DIRECTION_WORST).setQualitative(false)
+      .setDomain(CoreMetrics.DOMAIN_SIZE).setFormula(new SumChildValuesFormula(true)).create();
+
   public List<Metric> getMetrics() {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(COUNT_ASSERTS);
+    metrics.add(ELOC);
     return metrics;
   }
 

@@ -40,33 +40,31 @@ import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
-import org.sonar.plugins.csharp.gallio.results.GallioResultParser;
-import org.sonar.plugins.csharp.gallio.results.TestCaseDetail;
-import org.sonar.plugins.csharp.gallio.results.TestStatus;
-import org.sonar.plugins.csharp.gallio.results.UnitTestReport;
+import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
+import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
+import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 
 /**
  * Gets the execution test report from Gallio and pushes data from it into sonar.
  */
-@DependsUpon(GallioConstants.GALLIO_EXECUTED)
-public class GallioTestSensor extends AbstractTestCSharpSensor {
+@DependsUpon(GallioConstants.BARRIER_GALLIO_EXECUTED)
+public class TestReportSensor extends AbstractTestCSharpSensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(GallioTestSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
 
   private ProjectFileSystem fileSystem;
   private CSharpConfiguration configuration;
   private String executionMode;
 
   /**
-   * Constructs a {@link GallioTestSensor}.
+   * Constructs a {@link TestReportSensor}.
    * 
    * @param fileSystem
-   * @param ruleFinder
-   * @param fxCopRunner
-   * @param profileExporter
-   * @param rulesProfile
+   * @param configuration
+   * @param microsoftWindowsEnvironment
    */
-  public GallioTestSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
+  public TestReportSensor(ProjectFileSystem fileSystem, CSharpConfiguration configuration,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment);
     this.fileSystem = fileSystem;
@@ -100,7 +98,7 @@ public class GallioTestSensor extends AbstractTestCSharpSensor {
 
     File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);
     if ( !reportFile.isFile()) {
-      LOG.warn("No report file found for: " + reportFile.getAbsolutePath());
+      LOG.warn("No Gallio report file found for: " + reportFile.getAbsolutePath());
       context.saveMeasure(CoreMetrics.TESTS, 0.0);
       return;
     }
@@ -132,7 +130,7 @@ public class GallioTestSensor extends AbstractTestCSharpSensor {
           saveFileMeasure(testFile, context, CoreMetrics.TEST_ERRORS, testReport.getErrors());
           saveFileMeasure(testFile, context, CoreMetrics.TEST_FAILURES, testReport.getFailures());
           saveFileMeasure(testFile, context, CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
-          saveFileMeasure(testFile, context, GallioMetrics.COUNT_ASSERTS, testReport.getAsserts());
+          saveFileMeasure(testFile, context, TestMetrics.COUNT_ASSERTS, testReport.getAsserts());
           int passedTests = testsCount - testReport.getErrors() - testReport.getFailures();
           if (testsCount > 0) {
             double percentage = (float) passedTests * 100 / (float) testsCount;
