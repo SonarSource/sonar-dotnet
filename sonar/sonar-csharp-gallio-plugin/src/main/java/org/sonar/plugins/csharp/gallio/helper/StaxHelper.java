@@ -32,7 +32,10 @@ import org.sonar.api.utils.SonarException;
  * 
  * @author Maxime SCHNEIDER-DUFEUTRELLE January 31, 2011
  */
-public class StaxHelper {
+public final class StaxHelper {
+
+  private StaxHelper() {
+  }
 
   // Retrieve the value of the given name attribute
   public static String findAttributeValue(SMInputCursor cursor, String attributeName) {

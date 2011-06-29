@@ -32,11 +32,11 @@ import java.util.Map;
  * @author Jose CHILLAN May 14, 2009
  */
 public class FileCoverage extends Coverable {
+
   private final File file;
   private String assemblyName;
   private Map<Integer, SourceLine> lines = new HashMap<Integer, SourceLine>();
   private int uncoveredLines = 0;
-
 
   /**
    * Constructs a @link{FileCoverage}.
@@ -45,10 +45,10 @@ public class FileCoverage extends Coverable {
     this.file = file;
     this.lines = new HashMap<Integer, SourceLine>();
   }
-  
+
   /**
-   * Increase the counter of uncovered lines. Usually happens
-   * wih partcover4 when a whole method has not been tested
+   * Increase the counter of uncovered lines. Usually happens wih partcover4 when a whole method has not been tested
+   * 
    * @param lines
    */
   public void addUncoveredLines(int lines) {
@@ -107,11 +107,11 @@ public class FileCoverage extends Coverable {
    */
   @Override
   public void summarize() {
-    countLines = lines.size() + uncoveredLines;
-    coveredLines = 0;
+    setCountLines(lines.size() + uncoveredLines);
+    setCoveredLines(0);
     for (SourceLine line : lines.values()) {
       if (line.getCountVisits() > 0) {
-        coveredLines++;
+        increaseCoveredLines(1);
       }
     }
   }
@@ -124,12 +124,10 @@ public class FileCoverage extends Coverable {
   public Map<Integer, SourceLine> getLines() {
     return this.lines;
   }
- 
 
   @Override
   public String toString() {
-    return "File(name=" + file.getName() + ", assembly=" + assemblyName
-        + ", coverage=" + getCoverage() + ", lines=" + countLines
-        + ", covered=" + coveredLines + ")";
+    return "File(name=" + file.getName() + ", assembly=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + getCountLines()
+        + ", covered=" + getCoveredLines() + ")";
   }
 }

@@ -116,8 +116,8 @@ public class GallioResultParser {
   }
 
   private Map<String, TestDescription> recursiveParseTestsIds(SMInputCursor rootCursor, Map<String, TestDescription> testDetails,
-      File sourceFile, String parentAssemblyName) {
-
+      File source, String parentAssemblyName) {
+    File sourceFile = source;
     QName testTag = new QName(GALLIO_URI, "test");
     if (isAStartElement(rootCursor)) {
       // Get all the tests
@@ -163,20 +163,22 @@ public class GallioResultParser {
   }
 
   private String codeReferenceTreatment(String parentAssemblyName, TestDescription testDescription, SMInputCursor currentTestChildren) {
+    String assemblyName = parentAssemblyName;
     String attributeValue;
     if (null != findAttributeValue(currentTestChildren, ASSEMBLY)) {
       attributeValue = findAttributeValue(currentTestChildren, ASSEMBLY);
       LOG.debug(LOG_PATTERN, ASSEMBLY, attributeValue);
       testDescription.setAssemblyName(StringUtils.substringBefore(attributeValue, ","));
-      parentAssemblyName = testDescription.getAssemblyName();
+      assemblyName = testDescription.getAssemblyName();
     } else {
       // Get the precedent assemblyName if not filled
-      testDescription.setAssemblyName(parentAssemblyName);
+      testDescription.setAssemblyName(assemblyName);
     }
-    return parentAssemblyName;
+    return assemblyName;
   }
 
-  private File evaluatePath(File sourceFile, String eltName, SMInputCursor currentTestChildren) {
+  private File evaluatePath(File source, String eltName, SMInputCursor currentTestChildren) {
+    File sourceFile = source;
     if ("codeLocation".equals(eltName) && null != findAttributeValue(currentTestChildren, PATH)) {
       File currentSourceFile = new File(findAttributeValue(currentTestChildren, PATH));
       if (currentSourceFile != null) {
@@ -205,7 +207,8 @@ public class GallioResultParser {
     }
   }
 
-  private File retrieveCodeLocation(File sourceFile, TestDescription testDescription, SMInputCursor currentTestChildren) {
+  private File retrieveCodeLocation(File source, TestDescription testDescription, SMInputCursor currentTestChildren) {
+    File sourceFile = source;
     String attributeValue;
     if (null != findAttributeValue(currentTestChildren, PATH)) {
       attributeValue = findAttributeValue(currentTestChildren, PATH);
@@ -224,7 +227,7 @@ public class GallioResultParser {
   }
 
   private void recursiveParseTestsResults(SMInputCursor rootCursor, String testId) {
-
+    String currentTestId = testId;
     QName testStepRunTag = new QName(GALLIO_URI, "testStepRun");
     SMInputCursor currentTestStepRun = descendantSpecifiedElements(rootCursor, testStepRunTag);
     String eltName = "";
@@ -236,21 +239,21 @@ public class GallioResultParser {
       if ("testStep".equals(eltName)) {
         if ("true".equals(findAttributeValue(currentTestTags, "isTestCase"))) {
           if (null != findAttributeValue(currentTestTags, "testId")) {
-            testId = findAttributeValue(currentTestTags, "testId");
-            LOG.debug("--testId : {}", testId);
+            currentTestId = findAttributeValue(currentTestTags, "testId");
+            LOG.debug("--testId : {}", currentTestId);
             LOG.debug("--isTestCase : {}", findAttributeValue(currentTestTags, "isTestCase"));
             nextPosition(currentTestTags);
           }
           while (null != nextPosition(currentTestTags)) {
-            TestCaseDetail testCaseDetail = parsingTags(currentTestTags, testId);
+            TestCaseDetail testCaseDetail = parsingTags(currentTestTags, currentTestId);
             if (null != testCaseDetail) {
-              testCaseDetailsByTestIds.put(testId, testCaseDetail);
+              testCaseDetailsByTestIds.put(currentTestId, testCaseDetail);
             }
           }
         } else {
-          testId = findAttributeValue(currentTestTags, "testId");
+          currentTestId = findAttributeValue(currentTestTags, "testId");
           while (null != nextPosition(currentTestTags)) {
-            parseChildren(testId, currentTestTags);
+            parseChildren(currentTestId, currentTestTags);
           }
         }
       }

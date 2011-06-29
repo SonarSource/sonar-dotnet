@@ -32,6 +32,7 @@ import java.util.Map;
  * @author Alexandre Victoor
  */
 public class FolderCoverage extends Coverable {
+
   private String folderName;
   private Map<File, FileCoverage> files = new HashMap<File, FileCoverage>();
   private int uncoveredLines = 0;
@@ -46,23 +47,22 @@ public class FolderCoverage extends Coverable {
     files.put(file, fileCoverage);
   }
 
- 
   /**
    * Summarizes the coverage
    */
   @Override
   public void summarize() {
-    countLines = uncoveredLines;
+    setCountLines(uncoveredLines);
     for (FileCoverage fileCoverage : files.values()) {
-      countLines += fileCoverage.getCountLines();
-      coveredLines += fileCoverage.getCoveredLines();
+      increaseCountLines(fileCoverage.getCountLines());
+      increaseCoveredLines(fileCoverage.getCoveredLines());
     }
   }
 
   @Override
   public String toString() {
-    return "Folder(name=" + folderName + ", coverage=" + getCoverage()
-        + ", lines=" + countLines + ", covered=" + coveredLines + ")";
+    return "Folder(name=" + folderName + ", coverage=" + getCoverage() + ", lines=" + getCountLines() + ", covered=" + getCoveredLines()
+        + ")";
   }
 
   public String getFolderName() {

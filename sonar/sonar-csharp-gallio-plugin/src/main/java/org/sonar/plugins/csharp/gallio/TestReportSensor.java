@@ -25,8 +25,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.transform.TransformerException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -144,7 +142,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param testFile
    * @param context
    * @param fileReport
-   * @throws TransformerException
    */
   private void saveTestsDetails(org.sonar.api.resources.File testFile, SensorContext context, UnitTestReport fileReport) {
     StringBuilder testCaseDetails = new StringBuilder(256);

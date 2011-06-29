@@ -23,7 +23,6 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage.model;
 
-
 /**
  * A Coverable.
  * 
@@ -31,8 +30,8 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
  */
 public abstract class Coverable {
 
-  protected int countLines;
-  protected int coveredLines;
+  private int countLines;
+  private int coveredLines;
 
   /**
    * Returns the countLines.
@@ -44,12 +43,48 @@ public abstract class Coverable {
   }
 
   /**
+   * Sets the new number of count lines
+   * 
+   * @param countLines
+   */
+  protected void setCountLines(int countLines) {
+    this.countLines = countLines;
+  }
+
+  /**
+   * Increases the number of count lines
+   * 
+   * @param numberOfLinesToAdd
+   */
+  protected void increaseCountLines(int numberOfLinesToAdd) {
+    this.countLines += numberOfLinesToAdd;
+  }
+
+  /**
    * Returns the coveredLines.
    * 
    * @return The coveredLines to return.
    */
   public int getCoveredLines() {
     return this.coveredLines;
+  }
+
+  /**
+   * Sets the new number of covered lines
+   * 
+   * @param coveredLines
+   */
+  protected void setCoveredLines(int coveredLines) {
+    this.coveredLines = coveredLines;
+  }
+
+  /**
+   * Increases the number of covered lines
+   * 
+   * @param numberOfLinesToAdd
+   */
+  protected void increaseCoveredLines(int coveredLines) {
+    this.coveredLines += coveredLines;
   }
 
   /**

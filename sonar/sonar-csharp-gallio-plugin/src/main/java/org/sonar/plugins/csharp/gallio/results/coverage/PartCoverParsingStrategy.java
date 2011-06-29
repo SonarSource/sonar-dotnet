@@ -39,7 +39,7 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
 public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
 
-  private final static Logger LOG = LoggerFactory.getLogger(PartCoverParsingStrategy.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PartCoverParsingStrategy.class);
 
   public PartCoverParsingStrategy() {
     setPointElement("pt");

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 public class PartCover22ParsingStrategy extends PartCover2ParsingStrategy {
 
-  private final static Logger LOG = LoggerFactory.getLogger(PartCover22ParsingStrategy.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PartCover22ParsingStrategy.class);
 
   public PartCover22ParsingStrategy() {
     setModuleTag("type");

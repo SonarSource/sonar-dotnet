@@ -40,7 +40,7 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
 public class NCover3ParsingStrategy extends AbstractParsingStrategy {
 
-  private final static Logger LOG = LoggerFactory.getLogger(NCover3ParsingStrategy.class);
+  private static final Logger LOG = LoggerFactory.getLogger(NCover3ParsingStrategy.class);
 
   public NCover3ParsingStrategy() {
     setPointElement("seqpnt");

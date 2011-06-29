@@ -73,10 +73,10 @@ public class ProjectCoverage extends Coverable {
    */
   @Override
   public void summarize() {
-    countLines = uncoveredLines;
+    setCountLines(uncoveredLines);
     for (FileCoverage fileCoverage : files.values()) {
-      countLines += fileCoverage.getCountLines();
-      coveredLines += fileCoverage.getCoveredLines();
+      increaseCountLines(fileCoverage.getCountLines());
+      increaseCoveredLines(fileCoverage.getCoveredLines());
     }
   }
 
@@ -91,7 +91,8 @@ public class ProjectCoverage extends Coverable {
 
   @Override
   public String toString() {
-    return "Project(name=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + countLines + ", covered=" + coveredLines + ")";
+    return "Project(name=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + getCountLines() + ", covered=" + getCoveredLines()
+        + ")";
   }
 
 }

@@ -60,27 +60,6 @@ public class CoverageResultParserTest {
     parser = new CoverageResultParser(context);
   }
 
-  // TODO REMOVE THIS TEST
-  @Test
-  public void test() throws Exception {
-    when(project.getName()).thenReturn("Example.Core");
-    
-    File file = TestUtils.getResource("/coverage-report-NEW.xml");
-    ParserResult result = parser.parse(project, file);
-    
-    System.out.println("--------------- " + project.getName());
-    ProjectCoverage currentProjectCoverage = null;
-    for (ProjectCoverage projectCoverage : result.getProjects()) {
-      System.out.println("... " + projectCoverage.getAssemblyName());
-      if (project.getName().equals(projectCoverage.getAssemblyName())) {
-        currentProjectCoverage = projectCoverage;
-        break;
-      }
-    }
-    System.out.println("-> Found: " + currentProjectCoverage);
-    
-  }
-  
   @Test
   public void testParsePartCover22() {
     ParsingParameters params = new ParsingParameters();

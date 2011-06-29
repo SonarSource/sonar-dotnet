@@ -34,13 +34,13 @@ public enum TestStatus {
   /**
    * Outcomes for the test
    */
-  private final static String OUTCOME_OK = "passed";
-  private final static String OUTCOME_FAILURE = "failed";
-  private final static String OUTCOME_SKIPPED = "skipped";
+  private static final String OUTCOME_OK = "passed";
+  private static final String OUTCOME_FAILURE = "failed";
+  private static final String OUTCOME_SKIPPED = "skipped";
   /**
    * Categories for the test
    */
-  private final static String CATEGORY_ERROR = "error";
+  private static final String CATEGORY_ERROR = "error";
 
   /** textual representation of the status in the xml report used by sonar */
   private final String sonarStatus;

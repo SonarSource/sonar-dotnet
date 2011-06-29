@@ -62,7 +62,7 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
   /**
    * Generates the logger.
    */
-  private final static Logger LOG = LoggerFactory.getLogger(CoverageResultParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageResultParser.class);
 
   private SensorContext context;
   private Map<Integer, FileCoverage> sourceFilesById;

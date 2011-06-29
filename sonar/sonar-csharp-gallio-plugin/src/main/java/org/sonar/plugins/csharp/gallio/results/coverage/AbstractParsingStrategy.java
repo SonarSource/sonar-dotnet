@@ -42,7 +42,7 @@ public abstract class AbstractParsingStrategy {
   private String fileIdPointAttribute;
   private String moduleTag;
   private String fileTag;
-  protected String assemblyReference;
+  private String assemblyReference;
 
   /**
    * Retrieve associated assembly name, depending on the report structure
@@ -89,14 +89,18 @@ public abstract class AbstractParsingStrategy {
    * 
    * @return the reference to the assembly
    */
-  abstract String getAssemblyReference();
+  public String getAssemblyReference() {
+    return assemblyReference;
+  }
 
   /**
    * Save the reference to the assembly. This method is only used with PartCover4.
    * 
    * @param assemblyReference
    */
-  abstract void setAssemblyReference(String assemblyReference);
+  public void setAssemblyReference(String asmRef) {
+    this.assemblyReference = asmRef;
+  }
 
   public void findPoints(String assemblyName, SMInputCursor docsTag, PointParserCallback callback) {
     SMInputCursor classTags = descendantElements(docsTag);

@@ -154,8 +154,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       int countVisits = line.getCountVisits();
       lineHitsBuilder.add(Integer.toString(lineNumber), countVisits);
     }
-    Measure hitData = lineHitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
-    return hitData;
+    return lineHitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
   }
 
   protected double convertPercentage(Number percentage) {

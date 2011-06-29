@@ -40,7 +40,6 @@ import org.sonar.donet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
@@ -109,7 +108,8 @@ public class FxCopSensor extends AbstractRegularCSharpSensor {
       File fxCopConfigFile = generateConfigurationFile();
       // and run FxCop
       try {
-        FxCopRunner runner = FxCopRunner.create(configuration.getString(FxCopConstants.INSTALL_DIR_KEY, FxCopConstants.INSTALL_DIR_DEFVALUE));
+        FxCopRunner runner = FxCopRunner.create(configuration
+            .getString(FxCopConstants.INSTALL_DIR_KEY, FxCopConstants.INSTALL_DIR_DEFVALUE));
         launchFxCop(project, runner, fxCopConfigFile);
       } catch (FxCopException e) {
         throw new SonarException("FxCop execution failed.", e);

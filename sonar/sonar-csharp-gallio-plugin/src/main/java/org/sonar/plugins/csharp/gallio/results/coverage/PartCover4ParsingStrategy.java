@@ -35,7 +35,7 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
 public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
-  private final static Logger LOG = LoggerFactory.getLogger(PartCover4ParsingStrategy.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PartCover4ParsingStrategy.class);
 
   private Map<String, String> assemblyNamesById;
   private String id;
@@ -129,16 +129,6 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
   @Override
   public void findPoints(String assemblyName, SMInputCursor docsTag, PointParserCallback callback) {
     callback.createProjects(assemblyName, docsTag);
-  }
-
-  @Override
-  public String getAssemblyReference() {
-    return assemblyReference;
-  }
-
-  @Override
-  public void setAssemblyReference(String asmRef) {
-    this.assemblyReference = asmRef;
   }
 
   public Map<String, String> getAssemblyNamesById() {
