@@ -37,7 +37,7 @@ import com.google.common.collect.Lists;
 public class GallioRunnerTest {
 
   private static GallioRunner runner;
-  private static String fakeExecPath;
+  private static String fakeExecInstallPath;
   private static VisualStudioSolution solution;
 
   @BeforeClass
@@ -49,16 +49,15 @@ public class GallioRunnerTest {
     solution = mock(VisualStudioSolution.class);
     when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
 
-    fakeExecPath = TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe").getAbsolutePath();
-    runner = GallioRunner.create(fakeExecPath, false);
+    fakeExecInstallPath = TestUtils.getResource("/Runner/FakeProg").getAbsolutePath();
+    runner = GallioRunner.create(fakeExecInstallPath, false);
   }
 
   @Test
   public void testCreateCommandBuilderForSolution() throws Exception {
     GallioCommandBuilder builder = runner.createCommandBuilder(solution);
-    builder.setExecutable(TestUtils.getResource("/Runner/FakeProg/Gallio.Echo.exe"));
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.xml"));
-    assertThat(builder.toCommand().getExecutable(), is(fakeExecPath));
+    assertThat(builder.toCommand().getExecutable(), is(new File(fakeExecInstallPath, "bin/Gallio.Echo.exe").getAbsolutePath()));
   }
 
 }

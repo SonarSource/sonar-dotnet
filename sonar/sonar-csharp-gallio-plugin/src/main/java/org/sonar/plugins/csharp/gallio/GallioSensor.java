@@ -45,8 +45,6 @@ public class GallioSensor extends AbstractCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioSensor.class);
 
-  private static final String GALLIO_EXE = "bin/Gallio.Echo.exe";
-
   private CSharpConfiguration configuration;
   private String executionMode;
 
@@ -86,9 +84,8 @@ public class GallioSensor extends AbstractCSharpSensor {
   @Override
   public void analyse(Project project, SensorContext context) {
     try {
-      File gallioExe = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE),
-          GALLIO_EXE);
-      GallioRunner runner = GallioRunner.create(gallioExe.getAbsolutePath(), false);
+      File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE));
+      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), false);
       GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
 
       File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()

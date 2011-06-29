@@ -33,6 +33,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioRunner.class);
 
+  private static final String GALLIO_EXECUTABLE = "bin/Gallio.Echo.exe";
   private static final long MINUTES_TO_MILLISECONDS = 60000;
 
   private File gallioExecutable;
@@ -46,13 +47,13 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
    * will be used.
    * 
    * @param gallioPath
-   *          the full path of Gallio executable. For instance: "C:/Program Files/Gallio/bin/Gallio.Echo.exe".
+   *          the full path of Gallio installation directory. For instance: "C:/Program Files/Gallio".
    * @param ignoreTestFailures
    *          set to true if the execution of Gallio should not throw an exception in case of test failures
    */
   public static GallioRunner create(String gallioPath, boolean ignoreTestFailures) {
     GallioRunner runner = new GallioRunner();
-    runner.gallioExecutable = new File(gallioPath);
+    runner.gallioExecutable = new File(gallioPath, GALLIO_EXECUTABLE);
     runner.ignoreTestFailures = ignoreTestFailures;
     return runner;
   }

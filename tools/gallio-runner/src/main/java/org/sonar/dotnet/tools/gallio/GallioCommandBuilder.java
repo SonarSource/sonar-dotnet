@@ -39,10 +39,11 @@ public final class GallioCommandBuilder {
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 
   private VisualStudioSolution solution;
+  private String buildConfigurations = "Debug";
+  // Information needed for simple Gallio execution
   private File gallioExecutable;
   private File gallioReportFile;
   private String filter;
-  private String buildConfigurations = "Debug";
 
   private GallioCommandBuilder() {
   }
