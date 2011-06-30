@@ -37,6 +37,7 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.DotNetToolsException;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.visualstudio.ModelFactory;
+import org.sonar.plugins.csharp.api.visualstudio.SourceFile;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
 
@@ -104,12 +105,12 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
       if (vsProject.isTest()) {
         subProject.setTestDirs(".");
-        for (org.sonar.plugins.csharp.api.visualstudio.SourceFile sourceFile : vsProject.getSourceFiles()) {
+        for (SourceFile sourceFile : vsProject.getSourceFiles()) {
           subProject.addTestFiles(sourceFile.getFile());
         }
       } else {
         subProject.setSourceDirs(".");
-        for (org.sonar.plugins.csharp.api.visualstudio.SourceFile sourceFile : vsProject.getSourceFiles()) {
+        for (SourceFile sourceFile : vsProject.getSourceFiles()) {
           subProject.addSourceFiles(sourceFile.getFile());
         }
       }
@@ -159,6 +160,10 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     // Silverlight folder
     File silverlightDirectory = new File(configuration.getString(CSharpConstants.getSilverlightDirKey(silverlightVersion),
         CSharpConstants.getSilverlightDirDefaultValue(silverlightVersion)));
+    if ( !silverlightDirectory.isDirectory()) {
+    	throw new SonarException("The following silverlight SDK directory does not exist, please check your plugin configuration: "
+    	          + silverlightDirectory.getPath());
+    }
     microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }
 
@@ -183,17 +188,18 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   private File findSlnFile(File baseDir) {
     String slnFilePath = configuration.getString(CSharpConstants.SOLUTION_FILE_KEY, CSharpConstants.SOLUTION_FILE_DEFVALUE);
-    File slnFile = null;
-    if ( !StringUtils.isEmpty(slnFilePath)) {
-      slnFile = new File(baseDir, slnFilePath);
-      if ( !slnFile.isFile()) {
-        LOG.warn("The specified '.sln' path does not point to an existing file: " + slnFile.getAbsolutePath());
-        return null;
-      }
-    }
-    if (slnFile == null) {
+    final File slnFile;
+    if (StringUtils.isEmpty(slnFilePath)) {
       LOG.info("No '.sln' file found or specified: trying to find one...");
-      slnFile = searchForSlnFile(baseDir);
+      slnFile = searchForSlnFile(baseDir);	
+    } else {
+      final File confSlnFile = new File(baseDir, slnFilePath);
+      if ( confSlnFile.isFile()) {
+    	  slnFile = confSlnFile;
+      } else {
+    	slnFile = null;  
+        LOG.warn("The specified '.sln' path does not point to an existing file: " + confSlnFile.getAbsolutePath());
+      }
     }
     return slnFile;
   }

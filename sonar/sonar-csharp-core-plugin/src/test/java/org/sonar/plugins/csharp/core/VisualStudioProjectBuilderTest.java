@@ -50,7 +50,7 @@ public class VisualStudioProjectBuilderTest {
 
   private static File fakeSdkDir;
   private static File fakeSilverlightDir;
-  private static MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private ProjectReactor reactor;
   private ProjectDefinition root;
   private File solutionBaseDir;
@@ -63,7 +63,6 @@ public class VisualStudioProjectBuilderTest {
     fakeSdkDir.mkdirs();
     fakeSilverlightDir = new File("target/sonar/Silverlight");
     fakeSilverlightDir.mkdirs();
-    microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
   }
 
   @AfterClass
@@ -74,10 +73,11 @@ public class VisualStudioProjectBuilderTest {
 
   @Before
   public void initBuilder() {
+	microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     conf = new BaseConfiguration();
-    conf.addProperty("sonar.language", "cs");
-    conf.addProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, fakeSdkDir.getAbsolutePath());
-    conf.addProperty(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, fakeSilverlightDir.getAbsolutePath());
+    conf.setProperty("sonar.language", "cs");
+    conf.setProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, fakeSdkDir.getAbsolutePath());
+    conf.setProperty(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, fakeSilverlightDir.getAbsolutePath());
     solutionBaseDir = TestUtils.getResource("/solution/Example");
     root = ProjectDefinition.create(new Properties()).setBaseDir(solutionBaseDir).setWorkDir(new File(solutionBaseDir, "WORK-DIR"));
     root.setVersion("1.0");
@@ -105,7 +105,7 @@ public class VisualStudioProjectBuilderTest {
 
   @Test
   public void testEnhanceRootPropertiesWithGeneratedCodeNotExcluded() throws Exception {
-    conf.addProperty("sonar.dotnet.excludeGeneratedCode", Boolean.FALSE);
+    conf.setProperty("sonar.dotnet.excludeGeneratedCode", Boolean.FALSE);
     projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     root.getProperties().put("sonar.exclusions", "**/Foo.cs,Toto.cs");
     Properties props = projectBuilder.enhanceRootProperties(root);
@@ -114,31 +114,27 @@ public class VisualStudioProjectBuilderTest {
 
   @Test(expected = SonarException.class)
   public void testNotValidSdkDir() throws Exception {
-    conf = new BaseConfiguration();
-    conf.addProperty("sonar.language", "cs");
-    conf.addProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, "foo");
+    conf.setProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, "foo");
     projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
   }
 
   @Test(expected = SonarException.class)
   public void testNotValidSilverlightDir() throws Exception {
-    conf = new BaseConfiguration();
-    conf.addProperty("sonar.language", "cs");
-    conf.addProperty(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, "foo");
+    conf.setProperty(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, "foo");
     projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
   }
 
   @Test(expected = SonarException.class)
   public void testNonExistingSlnFile() throws Exception {
-    conf.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "NonExistingFile.sln");
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "NonExistingFile.sln");
     projectBuilder.build(reactor);
   }
 
   @Test
   public void testCorrectlyConfiguredProject() throws Exception {
-    conf.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "Example.sln");
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "Example.sln");
     projectBuilder.build(reactor);
     // check that the configuration is OK
     assertThat(microsoftWindowsEnvironment.getDotnetVersion(), is("4.0"));
@@ -172,8 +168,8 @@ public class VisualStudioProjectBuilderTest {
 
   @Test
   public void testNoSpecifiedSlnFileButOneFound() throws Exception {
-    conf.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
-    projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), new MicrosoftWindowsEnvironment());
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
+    projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
     assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory().getAbsolutePath(), is(fakeSdkDir.getAbsolutePath()));
     VisualStudioSolution solution = microsoftWindowsEnvironment.getCurrentSolution();
@@ -183,14 +179,14 @@ public class VisualStudioProjectBuilderTest {
 
   @Test(expected = SonarException.class)
   public void testNoSpecifiedSlnFileButNoneFound() throws Exception {
-    conf.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
     root.setBaseDir(TestUtils.getResource("/solution"));
     projectBuilder.build(reactor);
   }
 
   @Test(expected = SonarException.class)
   public void testNoSpecifiedSlnFileButTooManyFound() throws Exception {
-    conf.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "");
     root.setBaseDir(TestUtils.getResource("/solution/FakeSolutionWithTwoSlnFiles"));
     projectBuilder.build(reactor);
   }
