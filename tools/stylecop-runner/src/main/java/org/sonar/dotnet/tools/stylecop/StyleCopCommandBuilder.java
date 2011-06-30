@@ -140,7 +140,9 @@ public final class StyleCopCommandBuilder {
     LOG.debug("- Target to run         : StyleCopLaunch");
     command.addArgument("/target:StyleCopLaunch");
 
-    command.addArgument("/noconsolelogger");
+    if (!LOG.isDebugEnabled()) {
+      command.addArgument("/noconsolelogger");
+    }
 
     LOG.debug("- MSBuild file          : " + msBuildFile.getAbsolutePath());
     command.addArgument(msBuildFile.getAbsolutePath());
