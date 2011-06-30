@@ -23,10 +23,11 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
+ * Model class for dotnet binary dependencies.
+ * These objects are created using the information 
+ * contained in the csproj files. 
  * 
- * @author Fabrice BELLINGARD
- * @author Jose CHILLAN
- * 
+ * @author Alexandre Victoor
  */
 public class BinaryReference {
 
