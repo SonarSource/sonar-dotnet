@@ -171,7 +171,7 @@ public class GendarmeViolationMakerTest {
 
   @Test
   public void testCreateViolationWithSourceInfoAndOnlyLine() throws Exception {
-    violationMaker.setCurrentSource("C:\\Sonar\\Example\\Example.Core\\Money.cs(≈56)");
+    violationMaker.setCurrentSource("C:\\Sonar\\Example\\Example.Core\\Money.cs(~56)");
     Violation violation = violationMaker.createViolation();
     assertThat(violation.getResource().getKey(), is("Example.Core/Money.cs"));
     assertThat(violation.getLineId(), is(56));
