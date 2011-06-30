@@ -84,15 +84,28 @@ public class GallioSensor extends AbstractCSharpSensor {
   @Override
   public void analyse(Project project, SensorContext context) {
     try {
+      // create runner
       File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE));
-      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), false);
+      File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
+          .getWorkingDirectory());
+      if ( !workDir.exists()) {
+        workDir.mkdirs();
+      }
+      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), false);
       GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
 
-      File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-          .getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML);
-
-      builder.setReportFile(reportFile);
+      // Add info for Gallio execution
+      builder.setReportFile(new File(workDir, GallioConstants.GALLIO_REPORT_XML));
       builder.setFilter(configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE));
+      // Add info for coverage execution
+      builder.setCoverageReportFile(new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML));
+      builder.setCoverageTool(configuration.getString(GallioConstants.COVERAGE_TOOL_KEY, GallioConstants.COVERAGE_TOOL_DEFVALUE));
+      builder.setCoverageExcludes(configuration
+          .getString(GallioConstants.COVERAGE_EXCLUDES_KEY, GallioConstants.COVERAGE_EXCLUDES_DEFVALUE));
+      builder.setPartCoverInstallDirectory(new File(configuration.getString(GallioConstants.PART_COVER_INSTALL_KEY,
+          GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
+
+      // and execute finally
       runner.execute(builder, configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE));
     } catch (GallioException e) {
       throw new SonarException("Gallio execution failed.", e);

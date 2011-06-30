@@ -23,9 +23,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
- * Model class for dotnet binary dependencies.
- * These objects are created using the information 
- * contained in the csproj files. 
+ * Model class for dotnet binary dependencies. These objects are created using the information contained in the csproj files.
  * 
  * @author Alexandre Victoor
  */

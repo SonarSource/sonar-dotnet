@@ -31,7 +31,7 @@ public class ParserResult {
   private final List<FileCoverage> sourceFiles;
   private final List<ProjectCoverage> projects;
 
-  public ParserResult(List<ProjectCoverage> projects, List<FileCoverage> sourceFiles){
+  public ParserResult(List<ProjectCoverage> projects, List<FileCoverage> sourceFiles) {
     this.projects = projects;
     this.sourceFiles = sourceFiles;
   }

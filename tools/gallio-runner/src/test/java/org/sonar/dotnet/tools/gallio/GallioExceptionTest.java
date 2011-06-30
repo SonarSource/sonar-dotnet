@@ -35,6 +35,8 @@ public class GallioExceptionTest {
     assertThat(
         new GallioException(10).getMessage(),
         is("Gallio analysis failed: invalid arguments were supplied on the command line. Please contact the support on 'user@sonar.codehaus.org'."));
+    assertThat(new GallioException(10000).getMessage(),
+        is("Gallio analysis failed: a fatal runtime exception occurred. Check the result file to potentially know more about it."));
   }
 
   @Test

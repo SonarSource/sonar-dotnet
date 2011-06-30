@@ -33,12 +33,6 @@ import org.sonar.api.SonarPlugin;
 @Properties({
     @Property(key = GallioConstants.INSTALL_FOLDER_KEY, defaultValue = GallioConstants.INSTALL_FOLDER_DEFVALUE,
         name = "Gallio install directory", description = "Absolute path of the Gallio installation folder.", global = true, project = false),
-    @Property(
-        key = GallioConstants.FILTER_KEY,
-        defaultValue = GallioConstants.FILTER_DEFVALUE,
-        name = "Test filter",
-        description = "Filter that can be used to execute only a specific test category (i.e. CategotyName:unit to consider only tests from the 'unit' category).",
-        global = true, project = true),
     @Property(key = GallioConstants.TIMEOUT_MINUTES_KEY, defaultValue = GallioConstants.TIMEOUT_MINUTES_DEFVALUE + "",
         name = "Gallio program timeout", description = "Maximum number of minutes before the Gallio program will be stopped.",
         global = true, project = true),
@@ -46,8 +40,29 @@ import org.sonar.api.SonarPlugin;
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = true, project = true),
     @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
         description = "Name of the Gallio report file used when reuse report mode is activated.", global = true, project = true),
+    @Property(
+        key = GallioConstants.FILTER_KEY,
+        defaultValue = GallioConstants.FILTER_DEFVALUE,
+        name = "Test filter",
+        description = "Filter that can be used to execute only a specific test category (i.e. CategotyName:unit to consider only tests from the 'unit' category).",
+        global = true, project = true),
+    @Property(
+        key = GallioConstants.COVERAGE_TOOL_KEY,
+        defaultValue = GallioConstants.COVERAGE_TOOL_DEFVALUE,
+        name = "Coverage tool",
+        description = "Coverage tool used by Gallio: it currently can be 'PartCover' (default), 'NCover' or 'none' (= means no coverage analysis will be done).",
+        global = true, project = true),
+    @Property(key = GallioConstants.PART_COVER_INSTALL_KEY, defaultValue = GallioConstants.PART_COVER_INSTALL_DEFVALUE,
+        name = "PartCover install directory", description = "Absolute path of the PartCover installation folder.", global = true,
+        project = false),
     @Property(key = GallioConstants.REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the Gallio coverage report files",
-        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = true, project = true) })
+        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = true, project = true),
+    @Property(
+        key = GallioConstants.COVERAGE_EXCLUDES_KEY,
+        defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,
+        name = "Coverage excludes",
+        description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. The format for an exclusion is the PartCover format: '[assembly]namespace'.",
+        global = true, project = true) })
 public class GallioPlugin extends SonarPlugin {
 
   /**

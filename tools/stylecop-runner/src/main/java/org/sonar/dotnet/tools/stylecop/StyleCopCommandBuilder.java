@@ -140,7 +140,7 @@ public final class StyleCopCommandBuilder {
     LOG.debug("- Target to run         : StyleCopLaunch");
     command.addArgument("/target:StyleCopLaunch");
 
-    if (!LOG.isDebugEnabled()) {
+    if ( !LOG.isDebugEnabled()) {
       command.addArgument("/noconsolelogger");
     }
 

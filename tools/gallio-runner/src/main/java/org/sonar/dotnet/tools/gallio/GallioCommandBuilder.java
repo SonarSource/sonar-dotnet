@@ -20,6 +20,7 @@
 package org.sonar.dotnet.tools.gallio;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -38,12 +39,21 @@ public final class GallioCommandBuilder {
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 
+  private static final String DEFAULT_GALLIO_RUNNER = "IsolatedProcess";
+  private static final String PART_COVER_EXE = "PartCover.exe";
+
   private VisualStudioSolution solution;
   private String buildConfigurations = "Debug";
   // Information needed for simple Gallio execution
   private File gallioExecutable;
   private File gallioReportFile;
   private String filter;
+  // Information needed for coverage execution
+  private File workDir;
+  private CoverageTool coverageTool;
+  private File partCoverInstallDirectory;
+  private String coverageExcludes;
+  private File coverageReportFile;
 
   private GallioCommandBuilder() {
   }
@@ -111,47 +121,212 @@ public final class GallioCommandBuilder {
   }
 
   /**
+   * Set the working directory
+   * 
+   * @param workDir
+   *          the working directory
+   */
+  public GallioCommandBuilder setWorkDir(File workDir) {
+    this.workDir = workDir;
+    return this;
+  }
+
+  /**
+   * Sets the coverage tool to use, given its name (insensitive, for instance "ncover" or "NCover"). If none corresponding to the given name
+   * is found, or if an empty string is passed, then no coverage tool will be used and no coverage report will be generated. <br>
+   * <br/>
+   * To know which tools are currently supported, check {@link CoverageTool}
+   * 
+   * @see CoverageTool
+   * @param coverageToolName
+   *          the name of the tool
+   */
+  public GallioCommandBuilder setCoverageTool(String coverageToolName) {
+    this.coverageTool = CoverageTool.findFromName(coverageToolName);
+    return this;
+  }
+
+  /**
+   * Sets PartCover installation directory.
+   * 
+   * @param partCoverInstallDirectory
+   *          the install dir
+   */
+  public GallioCommandBuilder setPartCoverInstallDirectory(File partCoverInstallDirectory) {
+    this.partCoverInstallDirectory = partCoverInstallDirectory;
+    return this;
+  }
+
+  /**
+   * Sets the namespaces and assemblies excluded from the code coverage, seperated by a comma. The format for an exclusion is the PartCover
+   * format: "[assembly]namespace".
+   * 
+   * @param coverageExcludes
+   *          the excludes
+   */
+  public GallioCommandBuilder setCoverageExcludes(String coverageExcludes) {
+    this.coverageExcludes = coverageExcludes;
+    return this;
+  }
+
+  /**
+   * Sets the coverage report file to generate
+   * 
+   * @param coverageReportFile
+   *          the report file
+   * @return the current builder
+   */
+  public GallioCommandBuilder setCoverageReportFile(File coverageReportFile) {
+    this.coverageReportFile = coverageReportFile;
+    return this;
+  }
+
+  /**
    * Transforms this command object into a Command object that can be passed to the CommandExecutor.
    * 
    * @return the Command object that represents the command to launch.
    */
   public Command toCommand() throws GallioException {
     List<File> testAssemblies = findTestAssemblies();
-    validate(testAssemblies);
+    validateGallioInfo(testAssemblies);
 
-    LOG.debug("- Gallio folder : " + gallioExecutable);
-    Command command = Command.create(gallioExecutable.getAbsolutePath());
+    Command command = createCommand();
+    List<String> gallioArguments = generateGallioArguments(testAssemblies);
 
-    LOG.debug("- Runner              : IsolatedProcess");
-    command.addArgument("/r:IsolatedProcess");
-
-    File reportDirectory = gallioReportFile.getParentFile();
-    LOG.debug("- Report directory    : " + reportDirectory.getAbsolutePath());
-    command.addArgument("/report-directory:" + reportDirectory.getAbsolutePath());
-
-    String reportName = trimFileReportName();
-    LOG.debug("- Report file         : " + reportName);
-    command.addArgument("/report-name-format:" + reportName);
-
-    command.addArgument("/report-type:Xml");
-
-    if (StringUtils.isNotEmpty(filter)) {
-      LOG.debug("- Filter              : " + filter);
-      command.addArgument("/f:" + filter);
-    }
-
-    LOG.debug("- Test assemblies     :");
-    for (File testAssembly : testAssemblies) {
-      LOG.debug("   o " + testAssembly);
-      command.addArgument(testAssembly.getAbsolutePath());
+    if (CoverageTool.PARTCOVER.equals(coverageTool)) {
+      addPartCoverArguments(command, gallioArguments);
+    } else {
+      command.addArguments(gallioArguments);
     }
 
     return command;
   }
 
-  private String trimFileReportName() {
+  protected Command createCommand() throws GallioException {
+    Command command = null;
+    LOG.debug("- Gallio executable   : " + gallioExecutable);
+
+    if (CoverageTool.PARTCOVER.equals(coverageTool)) {
+      // In case of PartCover, the executable is not Gallio but PartCover itself
+      File partCoverExecutable = new File(partCoverInstallDirectory, PART_COVER_EXE);
+      validatePartCoverInfo(partCoverExecutable);
+      LOG.debug("- PartCover executable: " + partCoverExecutable);
+      command = Command.create(partCoverExecutable.getAbsolutePath());
+    } else {
+      command = Command.create(gallioExecutable.getAbsolutePath());
+    }
+    return command;
+  }
+
+  protected List<String> generateGallioArguments(List<File> testAssemblies) {
+    List<String> gallioArguments = Lists.newArrayList();
+
+    String runner = DEFAULT_GALLIO_RUNNER;
+    if (coverageTool != null) {
+      runner = coverageTool.getGallioRunner();
+    }
+    LOG.debug("- Runner              : " + runner);
+    gallioArguments.add("/r:" + runner);
+
+    File reportDirectory = gallioReportFile.getParentFile();
+    LOG.debug("- Report directory    : " + reportDirectory.getAbsolutePath());
+    gallioArguments.add("/report-directory:" + reportDirectory.getAbsolutePath());
+
+    String reportName = trimFileReportName();
+    LOG.debug("- Report file         : " + reportName);
+    gallioArguments.add("/report-name-format:" + reportName);
+
+    gallioArguments.add("/report-type:Xml");
+
+    if (StringUtils.isNotEmpty(filter)) {
+      LOG.debug("- Filter              : " + filter);
+      gallioArguments.add("/f:" + filter);
+    }
+
+    LOG.debug("- Test assemblies     :");
+    for (File testAssembly : testAssemblies) {
+      LOG.debug("   o " + testAssembly);
+      gallioArguments.add(testAssembly.getAbsolutePath());
+    }
+    return gallioArguments;
+  }
+
+  protected void addPartCoverArguments(Command command, List<String> gallioArguments) {
+    command.addArgument("--target");
+    command.addArgument(gallioExecutable.getAbsolutePath());
+    command.addArgument("--target-work-dir");
+    command.addArgument(workDir.getAbsolutePath());
+    command.addArgument("--target-args");
+    command.addArgument(escapeGallioArguments(gallioArguments));
+
+    // We add all the covered assemblies
+    for (String assemblyName : listCoveredAssemblies()) {
+      command.addArgument("--include");
+      command.addArgument("[" + assemblyName + "]*");
+    }
+
+    // We add all the configured exclusions
+    if ( !StringUtils.isEmpty(coverageExcludes)) {
+      for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
+        command.addArgument("--exclude");
+        command.addArgument(exclusion.trim());
+      }
+    }
+    command.addArgument("--output");
+    command.addArgument(coverageReportFile.getAbsolutePath());
+  }
+
+  protected List<String> listCoveredAssemblies() {
+    List<String> coveredAssemblyNames = new ArrayList<String>();
+    for (VisualStudioProject visualProject : solution.getProjects()) {
+      if ( !visualProject.isTest()) {
+        coveredAssemblyNames.add(visualProject.getAssemblyName());
+      }
+    }
+    return coveredAssemblyNames;
+  }
+
+  // TODO : try to refactor this
+  protected String escapeGallioArguments(List<String> gallioArguments) {
+    StringBuilder targetArgsBuilder = new StringBuilder();
+    boolean isFirst = true;
+    for (String currentArg : gallioArguments) {
+      if (isFirst) {
+        isFirst = false;
+      } else {
+        targetArgsBuilder.append(' ');
+      }
+      String escapedArg = escapeQuotes(currentArg);
+      targetArgsBuilder.append(escapedArg);
+    }
+    return targetArgsBuilder.toString();
+  }
+
+  /*
+   * Escapes the quotes of a string. TODO : try to refactor this
+   */
+  protected String escapeQuotes(String input) {
+    StringBuilder result = new StringBuilder(input.length());
+    for (int idxChar = 0, len = input.length(); idxChar < len; idxChar++) {
+      char currentChar = input.charAt(idxChar);
+      if (currentChar == '"') {
+        result.append('\\');
+      } else if (idxChar == 0) {
+        result.append("\\\"");
+      }
+
+      result.append(currentChar);
+
+      if (currentChar != '"' && idxChar == len - 1) {
+        result.append("\\\"");
+      }
+    }
+    return result.toString();
+  }
+
+  protected String trimFileReportName() {
     String reportName = gallioReportFile.getName();
-    if (reportName.toLowerCase().endsWith(".xml")) {
+    if (StringUtils.endsWithIgnoreCase(reportName, ".xml")) {
       // We remove the terminal .xml that will be added by the Gallio runner
       reportName = reportName.substring(0, reportName.length() - 4);
     }
@@ -178,7 +353,7 @@ public final class GallioCommandBuilder {
     }
   }
 
-  protected void validate(List<File> testAssemblies) throws GallioException {
+  protected void validateGallioInfo(List<File> testAssemblies) throws GallioException {
     if (gallioExecutable == null || !gallioExecutable.isFile()) {
       throw new GallioException("Gallio executable cannot be found at the following location:" + gallioExecutable);
     }
@@ -187,6 +362,18 @@ public final class GallioCommandBuilder {
     }
     if (testAssemblies.isEmpty()) {
       throw new GallioException("No test assembly was found. Please check your project's Gallio plugin configuration.");
+    }
+  }
+
+  protected void validatePartCoverInfo(File partCoverExecutable) throws GallioException {
+    if (partCoverExecutable == null || !partCoverExecutable.isFile()) {
+      throw new GallioException("PartCover executable cannot be found at the following location:" + partCoverExecutable);
+    }
+    if (workDir == null || !workDir.isDirectory()) {
+      throw new GallioException("The working directory cannot be found at the following location:" + partCoverExecutable);
+    }
+    if (coverageReportFile == null) {
+      throw new GallioException("Gallio coverage report file has not been specified.");
     }
   }
 }

@@ -29,6 +29,7 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
  * @author Jose CHILLAN May 14, 2009
  */
 public class SourceLine {
+
   private final int lineNumber;
   private int countVisits;
 

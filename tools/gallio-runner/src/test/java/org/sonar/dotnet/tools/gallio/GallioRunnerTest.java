@@ -38,6 +38,7 @@ public class GallioRunnerTest {
 
   private static GallioRunner runner;
   private static String fakeExecInstallPath;
+  private static String workDir;
   private static VisualStudioSolution solution;
 
   @BeforeClass
@@ -49,8 +50,9 @@ public class GallioRunnerTest {
     solution = mock(VisualStudioSolution.class);
     when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
 
-    fakeExecInstallPath = TestUtils.getResource("/Runner/FakeProg").getAbsolutePath();
-    runner = GallioRunner.create(fakeExecInstallPath, false);
+    fakeExecInstallPath = TestUtils.getResource("/Runner/FakeProg/Gallio").getAbsolutePath();
+    workDir = TestUtils.getResource("/Runner").getAbsolutePath();
+    runner = GallioRunner.create(fakeExecInstallPath, workDir, false);
   }
 
   @Test

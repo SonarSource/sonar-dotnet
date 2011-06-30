@@ -73,7 +73,7 @@ public class VisualStudioProjectBuilderTest {
 
   @Before
   public void initBuilder() {
-	microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     conf = new BaseConfiguration();
     conf.setProperty("sonar.language", "cs");
     conf.setProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, fakeSdkDir.getAbsolutePath());

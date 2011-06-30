@@ -329,7 +329,7 @@ public final class ModelFactory {
 
       // Assess if the artifact is a library or an executable
       ArtifactType type = ArtifactType.LIBRARY;
-      if (typeStr.toLowerCase().contains("exe")) {
+      if (StringUtils.containsIgnoreCase(typeStr, "exe")) {
         type = ArtifactType.EXECUTABLE;
       }
       // The project is populated

@@ -35,7 +35,7 @@ public final class FxCopConstants {
   public static final String FXCOP_REPORT_XML = "fxcop-report.xml";
 
   // ----------- Plugin Configuration Properties ----------- //
-  public static final String INSTALL_DIR_KEY = "sonar.fxcop.executable";
+  public static final String INSTALL_DIR_KEY = "sonar.fxcop.installDirectory";
   public static final String INSTALL_DIR_DEFVALUE = "C:/Program Files/Microsoft FxCop 10.0";
 
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.fxcop.assemblies";

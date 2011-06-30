@@ -28,6 +28,7 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
  * @author Jose CHILLAN May 14, 2009
  */
 public class CoveragePoint {
+
   private int countVisits;
   private int startLine;
   private int endLine;
@@ -97,7 +98,6 @@ public class CoveragePoint {
 
   @Override
   public String toString() {
-    return "Point(start-line=" + startLine + ", end-line=" + endLine
-        + ", visits=" + countVisits + ")";
+    return "Point(start-line=" + startLine + ", end-line=" + endLine + ", visits=" + countVisits + ")";
   }
 }

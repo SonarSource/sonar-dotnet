@@ -63,23 +63,23 @@ public class CSharpConfiguration implements BatchExtension {
     newToPreviousParamMap.put(CSharpConstants.SOLUTION_FILE_KEY, "visual.studio.solution");
 
     // FxCop OLD parameters
-    newToPreviousParamMap.put("sonar.fxcop.assemblyDependencyDirectories", "fxcop.additionalDirectories");
-    newToPreviousParamMap.put("sonar.fxcop.ignoreGeneratedCode", "fxcop.ignore.generated.code");
+    newToPreviousParamMap.put("sonar.fxcop.installDirectory", "fxcop.directory");
     newToPreviousParamMap.put("sonar.fxcop.mode", "sonar.dotnet.fxcop");
     newToPreviousParamMap.put("sonar.fxcop.reports.path", "sonar.dotnet.fxcop.reportsPath");
-    //fxcop.directory
-    
+    newToPreviousParamMap.put("sonar.fxcop.assemblyDependencyDirectories", "fxcop.additionalDirectories");
+    newToPreviousParamMap.put("sonar.fxcop.ignoreGeneratedCode", "fxcop.ignore.generated.code");
+
     // Gendarme OLD parameters
-    newToPreviousParamMap.put("sonar.gendarme.confidence", "gendarme.confidence");
+    newToPreviousParamMap.put("sonar.gendarme.installDirectory", "gendarme.directory");
     newToPreviousParamMap.put("sonar.gendarme.mode", "sonar.dotnet.gendarme");
     newToPreviousParamMap.put("sonar.gendarme.reports.path", "sonar.dotnet.gendarme.reportPath");
-    newToPreviousParamMap.put("sonar.gendarme.installDirectory", "gendarme.directory");
-    
+    newToPreviousParamMap.put("sonar.gendarme.confidence", "gendarme.confidence");
+
     // StyleCop OLD parameters
+    newToPreviousParamMap.put("sonar.stylecop.installDirectory", "stylecop.directory");
     newToPreviousParamMap.put("sonar.stylecop.mode", "sonar.dotnet.stylecop");
     newToPreviousParamMap.put("sonar.stylecop.reports.path", "sonar.dotnet.stylecop.reportPath");
-    newToPreviousParamMap.put("sonar.stylecop.installDirectory", "stylecop.directory");
-    
+
     // Gallio OLD parameters
     newToPreviousParamMap.put("sonar.gallio.installDirectory", "gallio.directory");
     newToPreviousParamMap.put("sonar.gallio.mode", "sonar.dotnet.gallio");

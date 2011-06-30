@@ -30,8 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 
 /**
- * This class was made to avoid try/catch blocks everywhere 
- * for the XMLStreamException when collecting data and manipulating cursors
+ * This class was made to avoid try/catch blocks everywhere for the XMLStreamException when collecting data and manipulating cursors
  * 
  * @author Maxime SCHNEIDER-DUFEUTRELLE January 31, 2011
  */
@@ -39,18 +38,18 @@ public final class StaxHelper {
 
   private StaxHelper() {
   }
-	
+
   private static final Logger LOG = LoggerFactory.getLogger(StaxHelper.class);
 
   // Retrieve the value of the given name attribute
   public static String findAttributeValue(SMInputCursor cursor, String attributeName) {
     try {
       final String attributValue;
-      if(isAStartElement(cursor)){
+      if (isAStartElement(cursor)) {
         attributValue = cursor.getAttrValue(attributeName);
-      } else{
-    	// should not happen
-    	LOG.warn("Trying to get an attribute value in the wrong position "+cursor);  
+      } else {
+        // should not happen
+        LOG.warn("Trying to get an attribute value in the wrong position " + cursor);
         attributValue = null;
       }
       return attributValue;

@@ -21,17 +21,16 @@ package org.sonar.plugins.csharp.gallio.results.coverage;
 
 import org.codehaus.staxmate.in.SMInputCursor;
 
-
 /**
- * Give the possibility to call methods using class variables in the strategies
- * In this case, it happens because of a different XML structure in PartCover4
+ * Give the possibility to call methods using class variables in the strategies In this case, it happens because of a different XML
+ * structure in PartCover4
  * 
  * @author Maxime SCHNEIDER-DUFEUTRELLE January 27, 2011
- *
+ * 
  */
 
 public interface PointParserCallback {
-  
+
   void createProjects(String assemblyName, SMInputCursor cursor);
-  
+
 }

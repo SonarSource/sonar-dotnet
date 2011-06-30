@@ -39,6 +39,15 @@ public final class GallioConstants {
   public static final String FILTER_KEY = "sonar.gallio.filter";
   public static final String FILTER_DEFVALUE = "";
 
+  public static final String PART_COVER_INSTALL_KEY = "sonar.partcover.installDirectory";
+  public static final String PART_COVER_INSTALL_DEFVALUE = "C:/Program Files/PartCover/PartCover .NET 4.0";
+
+  public static final String COVERAGE_TOOL_KEY = "sonar.gallio.coverage.tool";
+  public static final String COVERAGE_TOOL_DEFVALUE = "PartCover";
+
+  public static final String COVERAGE_EXCLUDES_KEY = "sonar.gallio.coverage.excludes";
+  public static final String COVERAGE_EXCLUDES_DEFVALUE = "";
+
   public static final String TIMEOUT_MINUTES_KEY = "sonar.gallio.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 30;
 

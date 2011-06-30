@@ -35,7 +35,7 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
   private static final Logger LOG = LoggerFactory.getLogger(FxCopRunner.class);
 
   private static final String FXCOP_EXECUTABLE = "FxCopCmd.exe";
-  
+
   private static final long MINUTES_TO_MILLISECONDS = 60000;
 
   private File fxCopExecutable;

@@ -442,15 +442,13 @@ public class VisualStudioProject {
     List<File> result = new ArrayList<File>();
     File[] content = dir.listFiles();
     if (content != null) {
-      String extensionLowCase = extension.toLowerCase();
       for (File file : content) {
         if (file.isDirectory()) {
           List<File> matching = listRecursiveFiles(file, extension);
           result.addAll(matching);
         } else {
           // Look for matching file names
-          String fileName = file.getName().toLowerCase();
-          if (fileName.endsWith(extensionLowCase)) {
+          if (StringUtils.endsWithIgnoreCase(file.getName(), extension)) {
             result.add(file);
           }
         }

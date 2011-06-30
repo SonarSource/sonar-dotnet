@@ -161,8 +161,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     File silverlightDirectory = new File(configuration.getString(CSharpConstants.getSilverlightDirKey(silverlightVersion),
         CSharpConstants.getSilverlightDirDefaultValue(silverlightVersion)));
     if ( !silverlightDirectory.isDirectory()) {
-    	throw new SonarException("The following silverlight SDK directory does not exist, please check your plugin configuration: "
-    	          + silverlightDirectory.getPath());
+      throw new SonarException("The following silverlight SDK directory does not exist, please check your plugin configuration: "
+          + silverlightDirectory.getPath());
     }
     microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }
@@ -191,13 +191,13 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     final File slnFile;
     if (StringUtils.isEmpty(slnFilePath)) {
       LOG.info("No '.sln' file found or specified: trying to find one...");
-      slnFile = searchForSlnFile(baseDir);	
+      slnFile = searchForSlnFile(baseDir);
     } else {
       final File confSlnFile = new File(baseDir, slnFilePath);
-      if ( confSlnFile.isFile()) {
-    	  slnFile = confSlnFile;
+      if (confSlnFile.isFile()) {
+        slnFile = confSlnFile;
       } else {
-    	slnFile = null;  
+        slnFile = null;
         LOG.warn("The specified '.sln' path does not point to an existing file: " + confSlnFile.getAbsolutePath());
       }
     }
