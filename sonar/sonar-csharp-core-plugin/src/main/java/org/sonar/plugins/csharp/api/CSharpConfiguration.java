@@ -84,6 +84,10 @@ public class CSharpConfiguration implements BatchExtension {
     newToPreviousParamMap.put("sonar.gallio.installDirectory", "gallio.directory");
     newToPreviousParamMap.put("sonar.gallio.mode", "sonar.dotnet.gallio");
     newToPreviousParamMap.put("sonar.gallio.reports.path", "sonar.dotnet.gallio.reportPath");
+    newToPreviousParamMap.put("sonar.gallio.filter", "gallio.filter");
+
+    // PartCover OLD parameters
+    newToPreviousParamMap.put("sonar.partcover.installDirectory", "partcover.executable");
 
   }
 

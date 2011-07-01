@@ -155,22 +155,18 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     }
     // Silverlight version
     String silverlightVersion = configuration.getString(CSharpConstants.SILVERLIGHT_VERSION_KEY,
-      CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE);
+        CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE);
     microsoftWindowsEnvironment.setSilverlightVersion(silverlightVersion);
-    
     // Silverlight folder
     String defaultSilverlightPath = CSharpConstants.getSilverlightDirDefaultValue(silverlightVersion);
-    String silverlightDirkey = CSharpConstants.getSilverlightDirKey(silverlightVersion);
-    String silverlightPath = 
-      configuration.getString(silverlightDirkey, defaultSilverlightPath);
+    String silverlightPath = configuration.getString(CSharpConstants.getSilverlightDirKey(silverlightVersion), defaultSilverlightPath);
     File silverlightDirectory = new File(silverlightPath);
-    
     if (defaultSilverlightPath.equals(silverlightPath)) {
       // default value used, no validity check
       LOG.debug("Default silverlight path will be used");
     } else if ( !silverlightDirectory.isDirectory()) {
       throw new SonarException("The following silverlight SDK directory does not exist, please check your plugin configuration: "
-        + silverlightDirectory.getPath());
+          + silverlightDirectory.getPath());
     }
     microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }

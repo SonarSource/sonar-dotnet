@@ -38,6 +38,12 @@ public class CoverageToolTest {
   }
 
   @Test
+  public void testGetName() throws Exception {
+    assertThat(CoverageTool.NCOVER.getName(), is("NCover"));
+    assertThat(CoverageTool.PARTCOVER.getName(), is("PartCover"));
+  }
+
+  @Test
   public void testGetRunner() throws Exception {
     assertThat(CoverageTool.NCOVER.getGallioRunner(), is("NCover3"));
     assertThat(CoverageTool.PARTCOVER.getGallioRunner(), is("IsolatedAppDomain"));

@@ -195,6 +195,8 @@ public final class GallioCommandBuilder {
 
     if (CoverageTool.PARTCOVER.equals(coverageTool)) {
       addPartCoverArguments(command, gallioArguments);
+    } else if (CoverageTool.NCOVER.equals(coverageTool)) {
+      addNCoverArguments(command, gallioArguments);
     } else {
       command.addArguments(gallioArguments);
     }
@@ -223,29 +225,30 @@ public final class GallioCommandBuilder {
 
     String runner = DEFAULT_GALLIO_RUNNER;
     if (coverageTool != null) {
+      LOG.debug("- Coverage tool       : {}", coverageTool.getName());
       runner = coverageTool.getGallioRunner();
     }
-    LOG.debug("- Runner              : " + runner);
+    LOG.debug("- Runner              : {}", runner);
     gallioArguments.add("/r:" + runner);
 
     File reportDirectory = gallioReportFile.getParentFile();
-    LOG.debug("- Report directory    : " + reportDirectory.getAbsolutePath());
+    LOG.debug("- Report directory    : {}", reportDirectory.getAbsolutePath());
     gallioArguments.add("/report-directory:" + reportDirectory.getAbsolutePath());
 
     String reportName = trimFileReportName();
-    LOG.debug("- Report file         : " + reportName);
+    LOG.debug("- Report file         : {}", reportName);
     gallioArguments.add("/report-name-format:" + reportName);
 
     gallioArguments.add("/report-type:Xml");
 
     if (StringUtils.isNotEmpty(filter)) {
-      LOG.debug("- Filter              : " + filter);
+      LOG.debug("- Filter              : {}", filter);
       gallioArguments.add("/f:" + filter);
     }
 
     LOG.debug("- Test assemblies     :");
     for (File testAssembly : testAssemblies) {
-      LOG.debug("   o " + testAssembly);
+      LOG.debug("   o {}", testAssembly);
       gallioArguments.add(testAssembly.getAbsolutePath());
     }
     return gallioArguments;
@@ -274,6 +277,12 @@ public final class GallioCommandBuilder {
     }
     command.addArgument("--output");
     command.addArgument(coverageReportFile.getAbsolutePath());
+  }
+
+  private void addNCoverArguments(Command command, List<String> gallioArguments) {
+    command.addArguments(gallioArguments);
+    command.addArgument("/runner-property:NCoverCoverageFile=" + coverageReportFile.getAbsolutePath());
+    command.addArgument("/runner-property:NCoverArguments=//ias " + StringUtils.join(listCoveredAssemblies().toArray(), ";"));
   }
 
   protected List<String> listCoveredAssemblies() {

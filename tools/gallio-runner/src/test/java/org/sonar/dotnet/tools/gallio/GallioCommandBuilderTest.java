@@ -160,6 +160,29 @@ public class GallioCommandBuilderTest {
     assertThat(commands[13], is("Bar"));
   }
 
+  @Test
+  public void testToCommandForSolutionWithNCoverParams() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setCoverageTool("NCover");
+    builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands.length, is(8));
+    assertThat(commands[0], is("/r:NCover3"));
+    assertThat(commands[1], endsWith("gallio-report-folder"));
+    assertThat(commands[2], is("/report-name-format:gallio-report"));
+    assertThat(commands[3], is("/report-type:Xml"));
+    assertThat(commands[4], endsWith("Fake1.assembly"));
+    assertThat(commands[5], endsWith("Fake2.assembly"));
+    assertThat(commands[6], startsWith("/runner-property:NCoverCoverageFile="));
+    assertThat(commands[6], endsWith("coverage-report.xml"));
+    assertThat(commands[7], is("/runner-property:NCoverArguments=//ias Project1;Project2"));
+  }
+
   @Test(expected = GallioException.class)
   public void testToCommandNoConfigFile() throws Exception {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);

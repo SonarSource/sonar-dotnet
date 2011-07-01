@@ -34,17 +34,19 @@ public enum CoverageTool {
   /**
    * "PartCover" tool
    */
-  PARTCOVER("IsolatedAppDomain"),
+  PARTCOVER("PartCover", "IsolatedAppDomain"),
   /**
    * "NCover" tool
    */
-  NCOVER("NCover3");
+  NCOVER("NCover", "NCover3");
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageTool.class);
 
+  private String name;
   private String gallioRunner;
 
-  private CoverageTool(String correspondingGallioRunner) {
+  private CoverageTool(String toolName, String correspondingGallioRunner) {
+    this.name = toolName;
     this.gallioRunner = correspondingGallioRunner;
   }
 
@@ -55,6 +57,15 @@ public enum CoverageTool {
    */
   public String getGallioRunner() {
     return gallioRunner;
+  }
+
+  /**
+   * Returns the name of the coverage tool.
+   * 
+   * @return the name
+   */
+  public String getName() {
+    return name;
   }
 
   /**
@@ -69,7 +80,9 @@ public enum CoverageTool {
     try {
       tool = CoverageTool.valueOf(name.toUpperCase());
     } catch (IllegalArgumentException e) {
-      LOG.warn("Tried to get a CoverageTool with name {}, but such a tool is not supported.", name);
+      if ( !"none".equalsIgnoreCase(name)) {
+        LOG.warn("Tried to get a CoverageTool with name {}, but such a tool is not supported.", name);
+      }
     }
     return tool;
   }
