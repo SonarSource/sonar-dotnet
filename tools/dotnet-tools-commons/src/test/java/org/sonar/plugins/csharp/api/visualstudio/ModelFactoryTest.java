@@ -249,11 +249,6 @@ public class ModelFactoryTest {
 
   @Test
   public void testWebSolution() throws Exception {
-    if ('/' == File.separatorChar) {
-      // test does not work on linux boxes
-      return;
-    }
-
     File file = new File(WEB_SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
     log.debug("Solution : " + solution);

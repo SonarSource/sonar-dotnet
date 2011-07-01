@@ -248,6 +248,9 @@ public final class ModelFactory {
         if (webMatcher.find()) {
           String projectName = webMatcher.group(1);
           String projectPath = webMatcher.group(2);
+          if (projectPath.endsWith("\\")) {
+            projectPath = StringUtils.chop(projectPath);
+          }
           File projectRoot = new File(baseDirectory, projectPath);
           VisualStudioProject project = getWebProject(baseDirectory, projectRoot, projectName, projectDefinition);
           result.add(project);
