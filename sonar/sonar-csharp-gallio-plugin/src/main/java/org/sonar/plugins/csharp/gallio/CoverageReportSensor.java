@@ -35,7 +35,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.Coverable;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
@@ -47,15 +46,12 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
  * Gets the coverage test report and pushes data from it into sonar.
  */
 @DependsUpon(GallioConstants.BARRIER_GALLIO_EXECUTED)
-public class CoverageReportSensor extends AbstractRegularCSharpSensor {
+public class CoverageReportSensor extends AbstractPostGallioSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageReportSensor.class);
 
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
-
-  private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link CoverageReportSensor}.
@@ -65,28 +61,19 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * @param microsoftWindowsEnvironment
    */
   public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
-    this.configuration = configuration;
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    super(configuration, microsoftWindowsEnvironment);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("Gallio coverage report analysis won't execute as it is set to 'skip' mode.");
-    }
-
-    return super.shouldExecuteOnProject(project) && !skipMode;
+  @Override
+  protected String getAnalysisName() {
+    return "Coverage report analysis";
   }
 
   @Override
   public void analyse(Project project, SensorContext context) {
     String reportPath = null;
-    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
-      reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "");
+    if (GallioConstants.MODE_REUSE_REPORT.equals(getExecutionMode())) {
+      reportPath = getConfiguration().getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "");
       LOG.info("Reusing Gallio coverage report: " + reportPath);
     } else {
       reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;

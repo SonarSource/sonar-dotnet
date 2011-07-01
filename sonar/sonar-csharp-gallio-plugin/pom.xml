@@ -11,7 +11,7 @@
 	<packaging>sonar-plugin</packaging>
 
 	<name>Sonar C# Plugin :: Gallio</name>
-	<description>Plugin that executes unit tests using Gallio.</description>
+	<description>Plugin that executes unit tests and computes code coverage.</description>
 
 	<properties>
 		<sonar.pluginKey>csharpgallio</sonar.pluginKey>

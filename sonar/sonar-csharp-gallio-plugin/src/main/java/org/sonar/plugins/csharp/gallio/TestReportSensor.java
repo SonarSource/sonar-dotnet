@@ -36,7 +36,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
@@ -46,12 +45,9 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
  * Gets the execution test report from Gallio and pushes data from it into sonar.
  */
 @DependsUpon(GallioConstants.BARRIER_GALLIO_EXECUTED)
-public class TestReportSensor extends AbstractTestCSharpSensor {
+public class TestReportSensor extends AbstractPostGallioSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
-
-  private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link TestReportSensor}.
@@ -61,28 +57,19 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param microsoftWindowsEnvironment
    */
   public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
-    this.configuration = configuration;
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    super(configuration, microsoftWindowsEnvironment);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("Gallio report analysis won't execute as it is set to 'skip' mode.");
-    }
-
-    return super.shouldExecuteOnProject(project) && !skipMode;
+  @Override
+  protected String getAnalysisName() {
+    return "Test report analysis";
   }
 
   @Override
   public void analyse(Project project, SensorContext context) {
     String reportPath = null;
-    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
-      reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, "");
+    if (GallioConstants.MODE_REUSE_REPORT.equals(getExecutionMode())) {
+      reportPath = getConfiguration().getString(GallioConstants.REPORTS_PATH_KEY, "");
       LOG.info("Reusing Gallio report: " + reportPath);
     } else {
       reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML;
