@@ -22,10 +22,10 @@
 -->
 
 <PartCoverReport ver="2.2.0.34630" exitCode="0">
-  <file id="1" url="c:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
-  <file id="2" url="c:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" />
-  <file id="3" url="c:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs" />
-  <file id="4" url="c:\Work\CodeQuality\Temp\Example\Example.Core\SampleNop.cs" />
+  <file id="1" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
+  <file id="2" url="C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" />
+  <file id="3" url="C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs" />
+  <file id="4" url="C:\Work\CodeQuality\Temp\Example\Example.Core\SampleNop.cs" />
   <type asm="Example.Core" name="Example.Core.Model.SubType" flags="1048577">
     <method name=".ctor" sig="void  ()" flags="6278" iflags="0">
       <code>

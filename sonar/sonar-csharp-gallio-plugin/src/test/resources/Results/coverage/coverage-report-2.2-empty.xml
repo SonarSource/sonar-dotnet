@@ -22,7 +22,7 @@
 -->
 
 <PartCoverReport ver="2.2.0.34630" exitCode="0">
-  <file id="1" url="c:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
+  <file id="1" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
  
  
   <type asm="Example.Core" name="Example.Core.MoneyBag" flags="1048577">

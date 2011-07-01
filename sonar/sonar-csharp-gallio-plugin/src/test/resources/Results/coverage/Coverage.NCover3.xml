@@ -4,9 +4,9 @@
   <rebasedpaths />
   <filters />
   <documents>
-    <doc id="2" excluded="false" url="c:\HOMEWARE\dotnet-codehaus\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\Money.cs" cs="1A6B8A5540131C9A0A16C0B26C44EA93" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
-    <doc id="3" excluded="false" url="c:\HOMEWARE\dotnet-codehaus\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\MoneyBag.cs" cs="640396D45EFC436371C092AD3B9DE09A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
-    <doc id="4" excluded="false" url="c:\HOMEWARE\dotnet-codehaus\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\SampleMeasure.cs" cs="A61BE6A940102DDBACDAE5E1A013BEA9" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
+    <doc id="2" excluded="false" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" cs="1A6B8A5540131C9A0A16C0B26C44EA93" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
+    <doc id="3" excluded="false" url="C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" cs="640396D45EFC436371C092AD3B9DE09A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
+    <doc id="4" excluded="false" url="C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs" cs="A61BE6A940102DDBACDAE5E1A013BEA9" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="26" nid="0" />
     <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
   </documents>
   <module moduleId="26" name="C:\HOMEWARE\dotnet-codehaus\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" assembly="Example.Core" assemblyIdentity="Example.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">

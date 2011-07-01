@@ -54,7 +54,7 @@ public class CoverageResultParserTest {
     context = mock(SensorContext.class);
     when(context.isIndexed(any(Resource.class), eq(false))).thenReturn(true);
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("")));
+    when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Work\\CodeQuality\\Temp\\Example")));
     project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(fileSystem);
     parser = new CoverageResultParser(context);

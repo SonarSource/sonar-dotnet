@@ -1,8 +1,8 @@
 <PartCoverReport version="4.0" date="2010-10-13T23:16:13.5070393+02:00">
- <File id="1" url="c:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\Money.cs" />
- <File id="2" url="c:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\MoneyBag.cs" />
- <File id="3" url="c:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\SampleMeasure.cs" />
- <Assembly id="1" name="Example.Core" module="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" domain="IsolatedAppDomainHost" domainIdx="1" />
+ <File id="1" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
+ <File id="2" url="C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" />
+ <File id="3" url="C:\Work\CodeQuality\Temp\Example\Example.Core\SampleMeasure.cs" />
+ <Assembly id="1" name="Example.Core" module="C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" domain="IsolatedAppDomainHost" domainIdx="1" />
  <Type asmref="1" name="Example.Core.Model.SubType" flags="0">
   <Method name="get_Name" sig="string  ()" bodysize="23" linecount="0" seqcount="0" flags="0" iflags="0" />
   <Method name="set_Name" sig="void  (string)" bodysize="9" linecount="0" seqcount="0" flags="0" iflags="0" />

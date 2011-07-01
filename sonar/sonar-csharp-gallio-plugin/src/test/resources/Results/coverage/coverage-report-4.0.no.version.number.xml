@@ -1,7 +1,7 @@
 <PartCoverReport date="2010-07-16T00:12:36.2725954+02:00">
- <File id="1" url="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\Money.cs" />
- <File id="2" url="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core\MoneyBag.cs" />
- <Assembly id="1" name="Example.Core" module="C:\work\sonar-plugin-svn\dotnet\maven\dotnet-commons\src\test\resources\solution\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" domain="IsolatedAppDomainHost" domainIdx="1" />
+ <File id="1" url="C:\Work\CodeQuality\Temp\Example\Example.Core\Money.cs" />
+ <File id="2" url="C:\Work\CodeQuality\Temp\Example\Example.Core\MoneyBag.cs" />
+ <Assembly id="1" name="Example.Core" module="C:\Work\CodeQuality\Temp\Example\Example.Core.Tests\bin\Debug\Example.Core.dll" domain="IsolatedAppDomainHost" domainIdx="1" />
  <Type asmref="1" name="Example.Core.Money" flags="0">
   <Method name=".ctor" sig="void  (int, string)" bodysize="22" flags="0" iflags="0">
    <pt visit="153" pos="0" len="6" fid="1" sl="42" sc="5" el="42" ec="46" />
