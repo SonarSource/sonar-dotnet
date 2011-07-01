@@ -155,10 +155,10 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     }
     // Silverlight version
     String silverlightVersion = configuration.getString(CSharpConstants.SILVERLIGHT_VERSION_KEY,
-        CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE);
+      CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE);
     microsoftWindowsEnvironment.setSilverlightVersion(silverlightVersion);
-    // Silverlight folder
     
+    // Silverlight folder
     String defaultSilverlightPath = CSharpConstants.getSilverlightDirDefaultValue(silverlightVersion);
     String silverlightDirkey = CSharpConstants.getSilverlightDirKey(silverlightVersion);
     String silverlightPath = 
