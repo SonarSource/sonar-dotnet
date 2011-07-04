@@ -75,7 +75,7 @@ public class CoverageDecorator implements Decorator {
   @SuppressWarnings("rawtypes")
   public void decorate(Resource resource, DecoratorContext context) {
     if (ResourceUtils.isFile(resource) && context.getMeasure(CoreMetrics.COVERAGE) == null) {
-      LOG.info("Coverage metrics have not been set on '{}': default values will be inserted.", resource.getName());
+      LOG.debug("Coverage metrics have not been set on '{}': default values will be inserted.", resource.getName());
       context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
       context.saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
       // for LINES_TO_COVER and UNCOVERED_LINES, we use NCLOC as an approximation

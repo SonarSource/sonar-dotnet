@@ -28,37 +28,19 @@ import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
-import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
-public class AbstractPostGallioSensorTest {
-
-  private class FooSensor extends AbstractPostGallioSensor {
-
-    public FooSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(configuration, microsoftWindowsEnvironment);
-    }
-
-    @Override
-    public void analyse(Project project, SensorContext context) {
-    }
-
-    @Override
-    protected String getAnalysisName() {
-      return "Foo analysis";
-    }
-  }
+public class CoverageReportSensorTest {
 
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject1;
+  private VisualStudioProject vsTestProject2;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private Project project;
 
@@ -66,14 +48,12 @@ public class AbstractPostGallioSensorTest {
   public void init() {
     vsProject1 = mock(VisualStudioProject.class);
     when(vsProject1.getName()).thenReturn("Project #1");
-    when(vsProject1.getGeneratedAssemblies("Debug")).thenReturn(
-        Sets.newHashSet(TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")));
-    VisualStudioProject testProject2 = mock(VisualStudioProject.class);
-    when(testProject2.getName()).thenReturn("Project Test");
-    when(testProject2.isTest()).thenReturn(true);
+    vsTestProject2 = mock(VisualStudioProject.class);
+    when(vsTestProject2.getName()).thenReturn("Project Test #2");
+    when(vsTestProject2.isTest()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, testProject2));
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(testProject2));
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2));
+    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2));
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
@@ -85,17 +65,8 @@ public class AbstractPostGallioSensorTest {
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
-    microsoftWindowsEnvironment.setTestExecutionDone();
     Configuration conf = new BaseConfiguration();
-    FooSensor sensor = new FooSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    assertTrue(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnProjectIfTestsNotExecutedButReuseReports() throws Exception {
-    Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_REUSE_REPORT);
-    FooSensor sensor = new FooSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    CoverageReportSensor sensor = new CoverageReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
 
@@ -103,14 +74,15 @@ public class AbstractPostGallioSensorTest {
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
-    FooSensor sensor = new FooSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    CoverageReportSensor sensor = new CoverageReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
-  public void testShouldNotExecuteOnProjectIfTestsNotExecutedAndNotReuseReports() throws Exception {
+  public void testShouldNotExecuteOnProjectIfTestProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    FooSensor sensor = new FooSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    CoverageReportSensor sensor = new CoverageReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    when(project.getName()).thenReturn("Project Test #2");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 }

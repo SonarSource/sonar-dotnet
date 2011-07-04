@@ -24,8 +24,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -35,10 +33,12 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
+import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
-public class GallioSensorTest {
+public class TestReportSensorTest {
 
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject1;
@@ -62,13 +62,13 @@ public class GallioSensorTest {
 
     project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
-    when(project.getName()).thenReturn("Project #1");
+    when(project.getName()).thenReturn("Project Test #2");
   }
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
 
@@ -76,31 +76,15 @@ public class GallioSensorTest {
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
-    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
-  public void testShouldNotExecuteOnProjectIfReuseReports() throws Exception {
+  public void testShouldNotExecuteOnProjectIfNotTestProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_REUSE_REPORT);
-    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnProjectTestsAlreadyExecuted() throws Exception {
-    microsoftWindowsEnvironment.setTestExecutionDone();
-    Configuration conf = new BaseConfiguration();
-    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testShouldNotExecuteOnProjectIfNoTests() throws Exception {
-    when(solution.getTestProjects()).thenReturn(new ArrayList<VisualStudioProject>());
-    Configuration conf = new BaseConfiguration();
-    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    when(project.getName()).thenReturn("Project #1");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 }

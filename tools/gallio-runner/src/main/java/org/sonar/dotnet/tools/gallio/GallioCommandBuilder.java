@@ -255,15 +255,21 @@ public final class GallioCommandBuilder {
   }
 
   protected void addPartCoverArguments(Command command, List<String> gallioArguments) {
+    // DEBUG info has already been printed out for "--target"
     command.addArgument("--target");
     command.addArgument(gallioExecutable.getAbsolutePath());
+
+    LOG.debug("- Working directory   : {}", workDir.getAbsolutePath());
     command.addArgument("--target-work-dir");
     command.addArgument(workDir.getAbsolutePath());
+
+    // DEBUG info has already been printed out for "--target-args"
     command.addArgument("--target-args");
     command.addArgument(escapeGallioArguments(gallioArguments));
 
     // We add all the covered assemblies
     for (String assemblyName : listCoveredAssemblies()) {
+      LOG.debug("- Partcover include   : [{}]*", assemblyName);
       command.addArgument("--include");
       command.addArgument("[" + assemblyName + "]*");
     }
@@ -271,18 +277,26 @@ public final class GallioCommandBuilder {
     // We add all the configured exclusions
     if ( !StringUtils.isEmpty(coverageExcludes)) {
       for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
+        LOG.debug("- Partcover exclude   : {}", exclusion.trim());
         command.addArgument("--exclude");
         command.addArgument(exclusion.trim());
       }
     }
+
+    LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("--output");
     command.addArgument(coverageReportFile.getAbsolutePath());
   }
 
   private void addNCoverArguments(Command command, List<String> gallioArguments) {
     command.addArguments(gallioArguments);
+
+    LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("/runner-property:NCoverCoverageFile=" + coverageReportFile.getAbsolutePath());
-    command.addArgument("/runner-property:NCoverArguments=//ias " + StringUtils.join(listCoveredAssemblies().toArray(), ";"));
+
+    String coveredAssemblies = StringUtils.join(listCoveredAssemblies().toArray(), ";");
+    LOG.debug("- NCover arguments    : {}", coveredAssemblies);
+    command.addArgument("/runner-property:NCoverArguments=//ias " + coveredAssemblies);
   }
 
   protected List<String> listCoveredAssemblies() {
@@ -357,7 +371,6 @@ public final class GallioCommandBuilder {
   protected void addAssembly(List<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     File assembly = visualStudioProject.getArtifact(buildConfigurations);
     if (assembly != null && assembly.isFile()) {
-      LOG.debug(" - Found {}", assembly.getAbsolutePath());
       assemblyFileList.add(assembly);
     }
   }

@@ -95,7 +95,7 @@ public class GallioSensor extends AbstractCSharpSensor {
       if ( !workDir.exists()) {
         workDir.mkdirs();
       }
-      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), false);
+      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
       GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
 
       // Add info for Gallio execution
