@@ -100,14 +100,7 @@ public class CoverageReportSensor extends AbstractPostGallioSensor {
       }
     }
 
-    if (currentProjectCoverage == null) {
-      context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
-    } else {
-      LOG.debug("Saving coverage information for project {}", currentProjectCoverage.getAssemblyName());
-      // Save data at project level
-      context.saveMeasure(project, CoreMetrics.COVERAGE, convertPercentage(currentProjectCoverage.getCoverage()));
-      context.saveMeasure(project, TestMetrics.ELOC, (double) currentProjectCoverage.getCountLines());
-
+    if (currentProjectCoverage != null) {
       // Save data for each file
       for (FileCoverage fileCoverage : currentProjectCoverage.getFileCoverageCollection()) {
         org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
@@ -126,7 +119,7 @@ public class CoverageReportSensor extends AbstractPostGallioSensor {
     context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
     context.saveMeasure(resource, CoreMetrics.COVERAGE, convertPercentage(coverage));
-    // TODO LINE_COVERAGE & COVERAGE should not be the same
+    // LINE_COVERAGE & COVERAGE should not be the same: need to have BRANCH_COVERAGE
     context.saveMeasure(resource, CoreMetrics.LINE_COVERAGE, convertPercentage(coverage));
   }
 
