@@ -69,9 +69,11 @@ public class GallioCommandBuilderTest {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
     builder.setExecutable(GALLIO_EXE);
     builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
     Command command = builder.toCommand();
 
     assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
+    assertThat(command.getDirectory(), is(WORK_DIR));
     String[] commands = command.getArguments().toArray(new String[] {});
     assertThat(commands.length, is(6));
     assertThat(commands[0], is("/r:IsolatedProcess"));
@@ -92,6 +94,7 @@ public class GallioCommandBuilderTest {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
     builder.setExecutable(GALLIO_EXE);
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.XmL")); // we use here mixed case on purpose
+    builder.setWorkDir(WORK_DIR);
     builder.setFilter("FooFilter");
     builder.setBuildConfigurations("Release");
     Command command = builder.toCommand();
@@ -165,6 +168,7 @@ public class GallioCommandBuilderTest {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
     builder.setExecutable(GALLIO_EXE);
     builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
     builder.setCoverageTool("NCover");
     builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
     Command command = builder.toCommand();
@@ -230,8 +234,6 @@ public class GallioCommandBuilderTest {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
     builder.setExecutable(GALLIO_EXE);
     builder.setReportFile(GALLIO_REPORT_FILE);
-    builder.setCoverageTool("PartCover");
-    builder.setPartCoverInstallDirectory(PART_COVER_INSTALL_DIR);
     builder.toCommand();
   }
 

@@ -48,8 +48,8 @@ public final class GallioCommandBuilder {
   private File gallioExecutable;
   private File gallioReportFile;
   private String filter;
-  // Information needed for coverage execution
   private File workDir;
+  // Information needed for coverage execution
   private CoverageTool coverageTool;
   private File partCoverInstallDirectory;
   private String coverageExcludes;
@@ -217,6 +217,9 @@ public final class GallioCommandBuilder {
     } else {
       command = Command.create(gallioExecutable.getAbsolutePath());
     }
+
+    command.setDirectory(workDir);
+
     return command;
   }
 
@@ -382,6 +385,9 @@ public final class GallioCommandBuilder {
     if (gallioReportFile == null) {
       throw new GallioException("Gallio report file has not been specified.");
     }
+    if (workDir == null || !workDir.isDirectory()) {
+      throw new GallioException("The working directory cannot be found at the following location:" + workDir);
+    }
     if (testAssemblies.isEmpty()) {
       throw new GallioException("No test assembly was found. Please check your project's Gallio plugin configuration.");
     }
@@ -390,9 +396,6 @@ public final class GallioCommandBuilder {
   protected void validatePartCoverInfo(File partCoverExecutable) throws GallioException {
     if (partCoverExecutable == null || !partCoverExecutable.isFile()) {
       throw new GallioException("PartCover executable cannot be found at the following location:" + partCoverExecutable);
-    }
-    if (workDir == null || !workDir.isDirectory()) {
-      throw new GallioException("The working directory cannot be found at the following location:" + partCoverExecutable);
     }
     if (coverageReportFile == null) {
       throw new GallioException("Gallio coverage report file has not been specified.");
