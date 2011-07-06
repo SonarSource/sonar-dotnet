@@ -1,0 +1,56 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sonar-csharp-rules-plugin</artifactId>
+	<packaging>sonar-plugin</packaging>
+
+	<name>Sonar C# Plugin :: Rules</name>
+	<description>Sets of C# checks that implement rules to follow in C# developments.</description>
+
+	<properties>
+		<sonar.pluginKey>csharprules</sonar.pluginKey>
+		<sonar.pluginName>C# Rules</sonar.pluginName>
+		<sonar.pluginClass>org.sonar.plugins.csharp.checks.CSharpChecksPlugin</sonar.pluginClass>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<configuration>
+					<basePlugin>csharp</basePlugin>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- SonarSource dependencies -->
+		<dependency>
+			<groupId>com.sonarsource.csharp</groupId>
+			<artifactId>sonar-csharp-squid-plugin</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- sonar open-source -->
+		<dependency>
+			<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+			<artifactId>sonar-csharp-core-plugin</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

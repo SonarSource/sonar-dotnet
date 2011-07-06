@@ -46,9 +46,9 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 
 public class CoverageDecoratorTest {
 

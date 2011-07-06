@@ -23,9 +23,9 @@ import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 
 /**
  * This sensor gets executed on every C# sub-projects, but not on the root project (= the solution). <br/>

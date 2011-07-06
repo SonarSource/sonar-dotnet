@@ -31,9 +31,9 @@ import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
 

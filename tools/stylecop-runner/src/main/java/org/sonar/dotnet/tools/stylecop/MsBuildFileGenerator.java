@@ -28,8 +28,8 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
 

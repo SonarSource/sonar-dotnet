@@ -18,32 +18,7 @@
 		<sonar.pluginKey>csharp</sonar.pluginKey>
 		<sonar.pluginName>C# Core</sonar.pluginName>
 		<sonar.pluginClass>org.sonar.plugins.csharp.core.CSharpCorePlugin</sonar.pluginClass>
-		<sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
 	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<includes>
-									<include>org.codehaus.sonar-plugins.dotnet.tools:*</include>
-								</includes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 
 	<dependencies>
 		<!-- .NET tools -->
@@ -55,14 +30,17 @@
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
 			<artifactId>sonar-plugin-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
 			<artifactId>sonar-squid</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
 			<artifactId>sonar-duplications</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

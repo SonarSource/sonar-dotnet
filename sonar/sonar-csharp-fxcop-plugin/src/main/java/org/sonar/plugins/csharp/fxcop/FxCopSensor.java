@@ -34,14 +34,14 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
-import org.sonar.donet.tools.fxcop.FxCopCommandBuilder;
-import org.sonar.donet.tools.fxcop.FxCopException;
-import org.sonar.donet.tools.fxcop.FxCopRunner;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
+import org.sonar.dotnet.tools.fxcop.FxCopException;
+import org.sonar.dotnet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
 import com.google.common.collect.Lists;

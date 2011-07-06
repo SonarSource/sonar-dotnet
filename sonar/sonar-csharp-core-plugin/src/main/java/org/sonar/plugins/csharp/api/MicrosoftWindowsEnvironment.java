@@ -26,8 +26,8 @@ import java.util.Map;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.squid.api.SourceFile;
 
 import com.google.common.collect.Maps;
@@ -59,7 +59,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
   }
 
   /**
-   * After invoking this method, the {@link CSharpResourcesBridge} class won't be able to index files anymore: if
+   * After invoking this method, the {@link MicrosoftWindowsEnvironment} class won't be able to index files anymore: if
    * {@link #indexFile(SourceFile, File)} is called, a {@link IllegalStateException} will be thrown.
    */
   public void lock() {

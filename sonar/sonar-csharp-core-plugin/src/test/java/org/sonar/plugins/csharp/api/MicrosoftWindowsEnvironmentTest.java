@@ -26,8 +26,8 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
 

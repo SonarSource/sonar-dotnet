@@ -24,7 +24,7 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.CommandExecutor;
-import org.sonar.plugins.csharp.api.visualstudio.VisualStudioSolution;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 /**
  * Class that runs the Gallio program.

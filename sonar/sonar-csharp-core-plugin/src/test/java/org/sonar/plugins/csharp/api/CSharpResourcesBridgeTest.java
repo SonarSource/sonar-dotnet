@@ -30,9 +30,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
-import org.sonar.plugins.csharp.api.squid.source.SourceMember;
-import org.sonar.plugins.csharp.api.squid.source.SourceType;
+import org.sonar.squid.api.SourceClass;
 import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceMethod;
 
 public class CSharpResourcesBridgeTest {
 
@@ -41,9 +41,9 @@ public class CSharpResourcesBridgeTest {
   @BeforeClass
   public static void init() {
     SourceFile sourceFile = new SourceFile("/temp/Fake.cs", "Fake.cs");
-    SourceType sourceType = new SourceType("MyNamespace.MyClass", "MyClass");
-    SourceType sourceTypeWithoutNamespace = new SourceType("MyClassWithoutNamespace", "MyClassWithoutNamespace");
-    SourceMember sourceMember = new SourceMember(sourceType, "GetFoo", 0);
+    SourceClass sourceType = new SourceClass("MyNamespace.MyClass", "MyClass");
+    SourceClass sourceTypeWithoutNamespace = new SourceClass("MyClassWithoutNamespace", "MyClassWithoutNamespace");
+    SourceMethod sourceMember = new SourceMethod(sourceType, "GetFoo", 0);
     sourceFile.addChild(sourceType);
     sourceFile.addChild(sourceTypeWithoutNamespace);
     sourceType.addChild(sourceMember);
