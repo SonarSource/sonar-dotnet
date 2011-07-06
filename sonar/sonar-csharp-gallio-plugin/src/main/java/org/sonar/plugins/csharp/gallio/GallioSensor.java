@@ -77,7 +77,8 @@ public class GallioSensor extends AbstractCSharpSensor {
       LOG.info("Gallio won't execute as test execution has already been done.");
       return false;
     }
-    if (getMicrosoftWindowsEnvironment().getCurrentSolution().getTestProjects().isEmpty()) {
+    if (getMicrosoftWindowsEnvironment().getCurrentSolution() != null
+        && getMicrosoftWindowsEnvironment().getCurrentSolution().getTestProjects().isEmpty()) {
       LOG.info("Gallio won't execute as there are no test projects.");
       return false;
     }

@@ -103,4 +103,14 @@ public class GallioSensorTest {
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
+
+  @Test
+  public void testShouldNotExecuteOnNotCSharpProject() throws Exception {
+    // Non C# project will have an empty MicrosoftWindowsEnvironement with no solution
+    microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    when(project.getLanguageKey()).thenReturn("fortran");
+    Configuration conf = new BaseConfiguration();
+    GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
 }
