@@ -5,13 +5,12 @@
  */
 package com.sonar.csharp.squid.tree;
 
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
-import org.sonar.plugins.csharp.api.squid.source.SourceMember;
-import org.sonar.plugins.csharp.api.squid.source.SourceType;
-
 import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
+import com.sonar.csharp.squid.api.source.SourceMember;
+import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.sslr.api.AstNode;
 
 /**

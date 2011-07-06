@@ -8,13 +8,12 @@ package com.sonar.csharp.squid.tree;
 import java.util.Map;
 import java.util.Stack;
 
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
-import org.sonar.plugins.csharp.api.squid.source.SourceClass;
-import org.sonar.plugins.csharp.api.squid.source.SourceType;
-
 import com.google.common.collect.Maps;
 import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
+import com.sonar.csharp.squid.api.source.SourceClass;
+import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 

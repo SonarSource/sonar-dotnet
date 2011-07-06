@@ -25,9 +25,6 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
-import org.sonar.plugins.csharp.api.squid.source.SourceClass;
-import org.sonar.plugins.csharp.api.squid.source.SourceMember;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
@@ -36,6 +33,9 @@ import org.sonar.squid.indexer.QueryByType;
 
 import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.api.source.SourceClass;
+import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)

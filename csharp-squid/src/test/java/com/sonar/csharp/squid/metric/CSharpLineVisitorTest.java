@@ -13,11 +13,11 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceProject;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 public class CSharpLineVisitorTest {

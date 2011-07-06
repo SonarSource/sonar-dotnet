@@ -18,13 +18,11 @@
 		</license>
 	</licenses>
 
-	<properties>
-		<sonar.plugin.class>com.sonar.plugins.csharp.squid.CSharpSquidPlugin</sonar.plugin.class>
-	</properties>
-
 	<build>
 		<plugins>
 			<plugin>
+				<!-- Need to use the shade plugin because obfuscation must be done on 
+					C# Squid and SSLR classes -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<executions>
@@ -52,10 +50,11 @@
 				<configuration>
 					<pluginKey>csharpsquid</pluginKey>
 					<pluginName>C# Squid</pluginName>
-					<pluginClass>${sonar.plugin.class}</pluginClass>
+					<pluginClass>com.sonar.plugins.csharp.squid.CSharpSquidPlugin</pluginClass>
 					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
 					<skipDependenciesPackaging>true</skipDependenciesPackaging>
 					<addMavenDescriptor>false</addMavenDescriptor>
+					<basePlugin>csharp</basePlugin>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -153,6 +152,7 @@
 														<patternset>
 															<include
 																name="com.sonar.plugins.csharp.squid.CSharpSquidPlugin" />
+															<include name="com.sonar.csharp.squid.api.**.*" />
 															<include name="com.sonar.sslr.api.**.*" />
 														</patternset>
 													</class>

@@ -16,14 +16,14 @@ import java.util.Collection;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
 import org.junit.Test;
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
-import org.sonar.plugins.csharp.api.squid.source.SourceType;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 public class CSharpTypeVisitorTest {

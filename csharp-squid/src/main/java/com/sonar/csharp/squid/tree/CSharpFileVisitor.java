@@ -5,9 +5,9 @@
  */
 package com.sonar.csharp.squid.tree;
 
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.squid.api.SourceFile;
 
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
 

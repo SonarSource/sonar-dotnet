@@ -19,13 +19,13 @@ import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.indexer.QueryByType;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 
 public class CSharpResourcesBridgeTest {

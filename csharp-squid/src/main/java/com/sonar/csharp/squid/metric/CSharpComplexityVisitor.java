@@ -5,10 +5,9 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import org.sonar.plugins.csharp.api.squid.CSharpMetric;
-
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
