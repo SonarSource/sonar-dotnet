@@ -37,9 +37,9 @@ import org.sonar.api.SonarPlugin;
         name = "Gallio program timeout", description = "Maximum number of minutes before the Gallio program will be stopped.",
         global = true, project = true),
     @Property(key = GallioConstants.MODE, defaultValue = "", name = "Gallio activation mode",
-        description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = true, project = true),
+        description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
-        description = "Name of the Gallio report file used when reuse report mode is activated.", global = true, project = true),
+        description = "Name of the Gallio report file used when reuse report mode is activated.", global = false, project = false),
     @Property(
         key = GallioConstants.FILTER_KEY,
         defaultValue = GallioConstants.FILTER_DEFVALUE,
@@ -56,7 +56,7 @@ import org.sonar.api.SonarPlugin;
         name = "PartCover install directory", description = "Absolute path of the PartCover installation folder.", global = true,
         project = false),
     @Property(key = GallioConstants.REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the Gallio coverage report files",
-        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = true, project = true),
+        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = false, project = false),
     @Property(
         key = GallioConstants.COVERAGE_EXCLUDES_KEY,
         defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,

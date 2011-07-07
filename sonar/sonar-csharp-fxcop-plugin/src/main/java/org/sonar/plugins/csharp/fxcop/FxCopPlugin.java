@@ -49,9 +49,9 @@ import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfile;
         name = "FxCop program timeout", description = "Maximum number of minutes before the FxCop program will be stopped.", global = true,
         project = true),
     @Property(key = FxCopConstants.MODE, defaultValue = "", name = "FxCop activation mode",
-        description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = true, project = true),
+        description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = FxCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the FxCop report files",
-        description = "Name of the FxCop report file used when reuse report mode is activated.", global = true, project = true) })
+        description = "Name of the FxCop report file used when reuse report mode is activated.", global = false, project = false) })
 public class FxCopPlugin extends SonarPlugin {
 
   /**
