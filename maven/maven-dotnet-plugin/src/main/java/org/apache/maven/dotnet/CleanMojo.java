@@ -82,10 +82,22 @@ public class CleanMojo extends AbstractDotNetBuildMojo {
     log.debug(" - Tool Version  : " + toolVersion);
     log.debug(" - MsBuild exe   : " + executable);
 
-    // ASP.NET precompiled directory clean-up
+    
     List<VisualStudioProject> visualStudioProjects = getVisualSolution()
         .getProjects();
     for (VisualStudioProject visualStudioProject : visualStudioProjects) {
+      // sonar work directory clean-up
+      File sonarWorkDir = new File(visualStudioProject.getDirectory(), "target");
+      if (sonarWorkDir.isDirectory()) {
+    	  log.info("Delete Sonar working directory : "+sonarWorkDir);
+    	  try {
+			FileUtils.deleteDirectory(sonarWorkDir);
+		} catch (IOException e) {
+			throw new MojoExecutionException("error while cleaning project " 
+			    + visualStudioProject, e);
+		}
+      }
+      // ASP.NET precompiled directory clean-up
       if (visualStudioProject instanceof WebVisualStudioProject) {
         WebVisualStudioProject webProject = (WebVisualStudioProject) visualStudioProject;
         log.info("Cleaning precompiled asp.net dlls for project " + webProject);
