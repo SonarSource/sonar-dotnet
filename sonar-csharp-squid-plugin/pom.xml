@@ -11,7 +11,7 @@
 	<packaging>sonar-plugin</packaging>
 
 	<description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
-	<url>http://www.sonarsource.com/plugins/plugin-csharp</url>
+	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
 	<licenses>
 		<license>
 			<name>SonarSource - Freeware</name>
