@@ -32,6 +32,11 @@ public class CSharpSquidPlugin extends SonarPlugin {
     extensions.add(CSharpCPDMapping.class);
     extensions.add(CSharpSourceCodeColorizer.class);
     extensions.add(CSharpSquidSensor.class);
+
+    // rules
+    extensions.add(CSharpRuleRepository.class);
+    extensions.add(CSharpRuleProfile.class);
+
     return extensions;
   }
 }

@@ -27,8 +27,8 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
   @Override
   public void init() {
     g = getCSharpGrammar();
-    subscribeTo(g.methodBody, g.constructorBody, g.staticConstructorBody, g.destructorBody, g.accessorBody, g.addAccessorDeclaration,
-        g.removeAccessorDeclaration, g.operatorBody);
+    subscribeTo(g.methodDeclaration, g.constructorBody, g.staticConstructorBody, g.destructorBody, g.accessorBody,
+        g.addAccessorDeclaration, g.removeAccessorDeclaration, g.operatorBody);
   }
 
   /**
@@ -42,8 +42,8 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
     }
 
     String memberSignature = "";
-    if (astNode.is(g.methodBody)) {
-      memberSignature = extractMethodSignature(astNode);
+    if (astNode.is(g.methodDeclaration)) {
+      memberSignature = extractMethodSignature(astNode.findFirstChild(g.methodBody));
     } else if (astNode.is(g.accessorBody)) {
       memberSignature = extractPropertySignature(astNode);
     } else if (astNode.is(g.addAccessorDeclaration)) {
