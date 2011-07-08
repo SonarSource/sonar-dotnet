@@ -12,6 +12,7 @@
 
 	<name>Sonar C# Plugin :: Rules</name>
 	<description>Sets of C# checks that implement rules to follow in C# developments.</description>
+	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
 
 	<properties>
 		<sonar.pluginKey>csharprules</sonar.pluginKey>

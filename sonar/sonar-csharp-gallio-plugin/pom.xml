@@ -12,6 +12,7 @@
 
 	<name>Sonar C# Plugin :: Gallio</name>
 	<description>Plugin that executes unit tests and computes code coverage.</description>
+	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
 
 	<properties>
 		<sonar.pluginKey>csharpgallio</sonar.pluginKey>

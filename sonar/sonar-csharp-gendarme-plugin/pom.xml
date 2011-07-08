@@ -12,6 +12,7 @@
 
 	<name>Sonar C# Plugin :: Gendarme</name>
 	<description>Plugin that runs Gendarme analyses to check C# sources against rule violations.</description>
+	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
 
 	<properties>
 		<sonar.pluginKey>csharpgendarme</sonar.pluginKey>
