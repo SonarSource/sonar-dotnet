@@ -17,26 +17,25 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.checks;
+package org.sonar.plugins.csharp.checks.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
-import org.sonar.api.Extension;
-import org.sonar.api.SonarPlugin;
-import org.sonar.plugins.csharp.checks.impl.MethodComplexityCheck;
+import org.junit.Test;
+import org.sonar.plugins.csharp.checks.CheckUtils;
+import org.sonar.squid.api.CheckMessage;
 
-/**
- * Class that declares all the C# checks implemented in this plugin.
- */
-public class CSharpChecksPlugin extends SonarPlugin {
+public class MethodComplexityCheckTest {
 
-  /**
-   * {@inheritDoc}
-   */
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> checksList = new ArrayList<Class<? extends Extension>>();
-    checksList.add(MethodComplexityCheck.class);
-    return checksList;
+  @Test
+  public void testCheck() {
+    MethodComplexityCheck check = new MethodComplexityCheck();
+    check.setMaximumMethodComplexityThreshold(2);
+    CheckMessage message = CheckUtils.extractViolation("/checks/methodComplexity.cs", check);
+
+    assertThat(message.getLine(), is(12));
+    assertThat(message.formatDefaultMessage(), containsString("Method has a complexity of 7 which is greater than 2 authorized."));
   }
 }

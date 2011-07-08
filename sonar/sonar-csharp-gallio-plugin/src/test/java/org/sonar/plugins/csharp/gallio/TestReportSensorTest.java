@@ -33,10 +33,8 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class TestReportSensorTest {
 

@@ -34,14 +34,12 @@
 
 	<dependencies>
 		<!-- SonarSource dependencies -->
-		<!--  
 		<dependency>
 			<groupId>com.sonarsource.csharp</groupId>
 			<artifactId>sonar-csharp-squid-plugin</artifactId>
 			<version>${project.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		-->
 		<!-- sonar open-source -->
 		<dependency>
 			<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
