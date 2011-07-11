@@ -61,7 +61,7 @@
 	<properties>
 		<license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
 		<jdk.min.version>1.5</jdk.min.version>
-		<sonar.buildVersion>2.9-SNAPSHOT</sonar.buildVersion>
+		<sonar.buildVersion>2.9-RC1</sonar.buildVersion>
 		<!-- Force version of sonar-packaging plugin as long as it is not updated 
 			in the Plugins parent POM -->
 		<version.sonar-packaging.plugin>1.1</version.sonar-packaging.plugin>
