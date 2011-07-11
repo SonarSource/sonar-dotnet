@@ -15,7 +15,7 @@
 	<description>SonarSource C# modules for the C# ecosystem</description>
 	<properties>
 		<sonar.version>2.9-RC1</sonar.version>
-		<csharp.core.version>1.0-SNAPSHOT</csharp.core.version>
+		<csharp.core.version>1.0-RC1</csharp.core.version>
 		<sslrVersion>1.3</sslrVersion>
 	</properties>
 	<modules>
