@@ -25,10 +25,11 @@
 								<includes>
 									<include>org.codehaus.sonar-plugins.csharp:sonar-csharp-core-plugin</include>
 									<include>com.sonarsource.csharp:csharp-squid</include>
-									<include>com.sonarsource.sslr:sslr-impl</include>
-									<include>com.sonarsource.sslr:sslr-api</include>
+									<include>com.sonarsource.sslr:*</include>
+									<include>com.sonarsource.ssdk:*</include>
 									<include>org.codehaus.sonar:sonar-squid</include>
 									<include>org.codehaus.sonar:sonar-channel</include>
+									<include>org.codehaus.sonar:sonar-colorizer</include>
 									<include>org.slf4j:slf4j-api</include>
 									<include>org.slf4j:jcl-over-slf4j</include>
 									<include>ch.qos.logback:logback-classic</include>
@@ -134,6 +135,10 @@
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>
 			<artifactId>sslr-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.sonarsource.ssdk</groupId>
+			<artifactId>ssdk-gui</artifactId>
 		</dependency>
 		<!-- Others -->
 		<dependency>

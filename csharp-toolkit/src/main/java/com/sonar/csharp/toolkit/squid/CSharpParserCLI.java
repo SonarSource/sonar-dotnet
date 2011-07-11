@@ -46,13 +46,18 @@ public class CSharpParserCLI {
     for (String argument : args) {
       String keyValue[] = argument.split("=");
       if (keyValue.length != 2) {
-        throw new IllegalArgumentException("Argument '" + argument + "' in't in desired format 'key=value'");
+        printHelp();
+      } else {
+        configuration.put(keyValue[0], keyValue[1]);
       }
-      configuration.put(keyValue[0], keyValue[1]);
     }
   }
 
   public void parseAndDumpAst() {
+    if (configuration.isEmpty()) {
+      return;
+    }
+
     File astDir = null;
     if (isAstDumpActivated()) {
       astDir = removeAndCreateAstDir();

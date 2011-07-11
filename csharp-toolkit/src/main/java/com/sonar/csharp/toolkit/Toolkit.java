@@ -6,6 +6,7 @@
 package com.sonar.csharp.toolkit;
 
 import com.sonar.csharp.toolkit.squid.CSharpParserCLI;
+import com.sonar.csharp.toolkit.squid.CSharpSsdkGui;
 
 public final class Toolkit {
 
@@ -13,7 +14,11 @@ public final class Toolkit {
   }
 
   public static void main(String[] args) {
-    CSharpParserCLI cli = new CSharpParserCLI(args);
-    cli.parseAndDumpAst();
+    if (args.length == 0) {
+      CSharpSsdkGui.main(args);
+    } else {
+      CSharpParserCLI cli = new CSharpParserCLI(args);
+      cli.parseAndDumpAst();
+    }
   }
 }

@@ -13,6 +13,15 @@
 
 
 
+The C# Toolkit offers 2 functionalities:
+
+- a simple GUI that shows the Abstract Syntax Tree (AST) of a given C# file 
+- a command-line parser that can:
+	- parse several files/folders at a time
+	- dump the AST of the parsed C# files into XML files
+
+
+
 Requirements
 ************
 
@@ -27,7 +36,11 @@ Quick guide to set up the C# Toolkit
 1- Unzip the archive in an installation directory
 
 
-2- Create the SONAR_TOOLKIT environment variable that must point to the "bin" folder located in
+2- If you just want to use the GUI, then double-click on the JAR file located in the bin folder.
+   Otherwise, follow the next steps.
+
+
+3- Create the SONAR_TOOLKIT environment variable that must point to the "bin" folder located in
    the installation directory. 
    Please use double-quotes if the installation directory contains spaces.
 	
@@ -37,18 +50,13 @@ Quick guide to set up the C# Toolkit
 		- Ex.: export SONAR_TOOLKIT="/opt/programs/CSharpToolkit/bin"
 
 
-3- Add this SONAR_TOOLKIT variable to your PATH
+4- Add this SONAR_TOOLKIT variable to your PATH
 
 	- On Windows: set PATH=%SONAR_TOOLKIT%;%PATH%
 	- On Unix/Linux/Mac: export PATH=$SONAR_TOOLKIT:$PATH
 
 
-
-How to tun the C# Toolkit
-*************************
-
-Once you've set up the C# Toolkit as described above, you can analyze C# files 
-using the command: 
+5- Run the parser on the command line :
 
 	- On Windows: sonar-parse srcDir="MyProjet/src" charset=UTF-8
 	- On Unix/Linux/Mac: auto-control.sh MY-FILE srcDir="MyProjet/src" charset=UTF-8
