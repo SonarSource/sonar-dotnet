@@ -56,12 +56,12 @@ public class CoverageDecorator implements Decorator {
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    if (project.isRoot()) {
+    if (project.isRoot() || !CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey())) {
       return false;
     }
     boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
     boolean isTestProject = microsoftWindowsEnvironment.getCurrentProject(project.getName()).isTest();
-    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey()) && !isTestProject && !skipMode;
+    return !isTestProject && !skipMode;
   }
 
   @DependedUpon

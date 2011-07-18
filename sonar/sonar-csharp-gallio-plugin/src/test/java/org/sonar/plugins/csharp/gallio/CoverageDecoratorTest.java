@@ -118,6 +118,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testShouldNotExecuteOnNotCSharpProject() throws Exception {
     when(project.getLanguageKey()).thenReturn("java");
+    microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
     CoverageDecorator decorator = createDecorator();
     assertFalse(decorator.shouldExecuteOnProject(project));
   }
