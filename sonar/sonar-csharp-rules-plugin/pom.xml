@@ -37,7 +37,7 @@
 		<dependency>
 			<groupId>com.sonarsource.csharp</groupId>
 			<artifactId>sonar-csharp-squid-plugin</artifactId>
-			<version>${project.version}</version>
+			<version>1.0-RC1</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- sonar open-source -->
