@@ -66,7 +66,9 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
     @Property(key = CSharpConstants.EXCLUDE_GENERATED_CODE_KEY, defaultValue = CSharpConstants.EXCLUDE_GENERATED_CODE_DEFVALUE + "",
         name = "Exclude generated code",
         description = "Set to false to include generated code like 'Reference.cs' files or '*.designer.cs' files.", global = true,
-        project = true) })
+        project = true),
+    @Property(key = CSharpConstants.BUILD_CONFIGURATIONS_KEY, defaultValue = CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE,
+        name = "Build configurations", description = "Comma-seperated list of build configurations to use.", global = true, project = true) })
 public class CSharpCorePlugin extends SonarPlugin {
 
   /**

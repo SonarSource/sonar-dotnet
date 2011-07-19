@@ -76,6 +76,9 @@ public final class CSharpConstants {
   public static final String EXCLUDE_GENERATED_CODE_KEY = "sonar.dotnet.excludeGeneratedCode";
   public static final boolean EXCLUDE_GENERATED_CODE_DEFVALUE = true;
 
+  public static final String BUILD_CONFIGURATIONS_KEY = "sonar.dotnet.buildConfigurations";
+  public static final String BUILD_CONFIGURATIONS_DEFVALUE = "Debug";
+
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
    * 

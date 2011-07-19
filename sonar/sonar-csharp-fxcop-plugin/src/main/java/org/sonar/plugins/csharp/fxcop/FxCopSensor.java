@@ -145,6 +145,8 @@ public class FxCopSensor extends AbstractRegularCSharpSensor {
     builder.setAssemblyDependencyDirectories(configuration.getStringArray(FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY));
     builder.setIgnoreGeneratedCode(configuration.getBoolean(FxCopConstants.IGNORE_GENERATED_CODE_KEY,
         FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE));
+    builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
     int timeout = configuration.getInt(FxCopConstants.TIMEOUT_MINUTES_KEY, FxCopConstants.TIMEOUT_MINUTES_DEFVALUE);
     builder.setTimeoutMinutes(timeout);
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());

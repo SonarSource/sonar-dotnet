@@ -146,6 +146,8 @@ public class GendarmeSensor extends AbstractRegularCSharpSensor {
         .getString(GendarmeConstants.GENDARME_CONFIDENCE_KEY, GendarmeConstants.GENDARME_CONFIDENCE_DEFVALUE));
     builder.setSeverity("all");
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());
+    builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
     runner.execute(builder, configuration.getInt(GendarmeConstants.TIMEOUT_MINUTES_KEY, GendarmeConstants.TIMEOUT_MINUTES_DEFVALUE));
   }
 
