@@ -1,128 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.codehaus.sonar-plugins</groupId>
-		<artifactId>parent</artifactId>
-		<version>10</version>
-		<relativePath>../parent</relativePath>
-	</parent>
+  <parent>
+    <groupId>org.codehaus.sonar-plugins</groupId>
+    <artifactId>parent</artifactId>
+    <version>10</version>
+    <relativePath>../parent</relativePath>
+  </parent>
 
-	<groupId>org.codehaus.sonar-plugins.dotnet</groupId>
-	<artifactId>parent</artifactId>
-	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
+  <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+  <artifactId>parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
 
-	<name>Sonar .NET Ecosystem</name>
-	<inceptionYear>2010</inceptionYear>
-	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
-	<organization>
-		<name>Codehaus Sonar Plugins</name>
-		<url>http://sonar-plugins.codehaus.org/</url>
-	</organization>
+  <name>Sonar .NET Ecosystem</name>
+  <inceptionYear>2010</inceptionYear>
+  <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+  <organization>
+    <name>Codehaus Sonar Plugins</name>
+    <url>http://sonar-plugins.codehaus.org/</url>
+  </organization>
 
-	<developers>
-		<developer>
-			<id>fabemn</id>
-			<name>Fabrice Bellingard</name>
-		</developer>
-		<developer>
-			<id>alex</id>
-			<name>Alexandre Victoor</name>
-		</developer>
-		<developer>
-			<id>jose</id>
-			<name>Jose Chillan</name>
-		</developer>
-	</developers>
+  <developers>
+    <developer>
+      <id>fabemn</id>
+      <name>Fabrice Bellingard</name>
+    </developer>
+    <developer>
+      <id>alex</id>
+      <name>Alexandre Victoor</name>
+    </developer>
+    <developer>
+      <id>jose</id>
+      <name>Jose Chillan</name>
+    </developer>
+  </developers>
 
-	<modules>
-		<module>maven</module>
-		<module>sonar</module>
-		<module>tools</module>
-	</modules>
+  <modules>
+    <module>maven</module>
+    <module>sonar</module>
+    <module>tools</module>
+  </modules>
 
-	<scm>
-		<connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
-		<developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
-		<url>http://svn.sonar-plugins.codehaus.org</url>
-	</scm>
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
-	</issueManagement>
-	<ciManagement>
-		<system>Bamboo</system>
-		<url>http://ci.codehaus.org/browse/SONAR-DOTNET</url>
-	</ciManagement>
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet</developerConnection>
+    <url>http://svn.sonar-plugins.codehaus.org</url>
+  </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
+  </issueManagement>
+  <ciManagement>
+    <system>Bamboo</system>
+    <url>http://ci.codehaus.org/browse/SONAR-DOTNET</url>
+  </ciManagement>
 
-	<properties>
-		<license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
-		<jdk.min.version>1.5</jdk.min.version>
-		<sonar.buildVersion>2.9</sonar.buildVersion>
-	</properties>
+  <properties>
+    <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
+    <jdk.min.version>1.5</jdk.min.version>
+    <sonar.buildVersion>2.9</sonar.buildVersion>
+  </properties>
 
-	<profiles>
-		<profile>
-			<id>m2e</id>
-			<activation>
-				<!-- This profile is active only when used from Eclipse m2e and is used 
-					only to store settings. -->
-				<property>
-					<name>m2e.version</name>
-				</property>
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.m2e</groupId>
-							<artifactId>lifecycle-mapping</artifactId>
-							<version>1.0.0</version>
-							<configuration>
-								<lifecycleMappingMetadata>
-									<pluginExecutions>
-										<pluginExecution>
-											<pluginExecutionFilter>
-												<groupId>
-													com.mycila.maven-license-plugin
-												</groupId>
-												<artifactId>
-													maven-license-plugin
-												</artifactId>
-												<versionRange>
-													[1.9.0,)
-												</versionRange>
-												<goals>
-													<goal>check</goal>
-												</goals>
-											</pluginExecutionFilter>
-											<action>
-												<ignore />
-											</action>
-										</pluginExecution>
-										<pluginExecution>
-											<pluginExecutionFilter>
-												<groupId>org.codehaus.sonar</groupId>
-												<artifactId>sonar-packaging-maven-plugin</artifactId>
-												<versionRange>[1.0,)</versionRange>
-												<goals>
-													<goal>check-dependencies</goal>
-												</goals>
-											</pluginExecutionFilter>
-											<action>
-												<ignore />
-											</action>
-										</pluginExecution>
-									</pluginExecutions>
-								</lifecycleMappingMetadata>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
+  <profiles>
+    <profile>
+      <id>m2e</id>
+      <activation>
+        <!-- This profile is active only when used from Eclipse m2e and is 
+          used only to store settings. -->
+        <property>
+          <name>m2e.version</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.eclipse.m2e</groupId>
+              <artifactId>lifecycle-mapping</artifactId>
+              <version>1.0.0</version>
+              <configuration>
+                <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>
+                          com.mycila.maven-license-plugin
+                        </groupId>
+                        <artifactId>
+                          maven-license-plugin
+                        </artifactId>
+                        <versionRange>
+                          [1.9.0,)
+                        </versionRange>
+                        <goals>
+                          <goal>check</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                    <pluginExecution>
+                      <pluginExecutionFilter>
+                        <groupId>org.codehaus.sonar</groupId>
+                        <artifactId>sonar-packaging-maven-plugin</artifactId>
+                        <versionRange>[1.0,)</versionRange>
+                        <goals>
+                          <goal>check-dependencies</goal>
+                        </goals>
+                      </pluginExecutionFilter>
+                      <action>
+                        <ignore />
+                      </action>
+                    </pluginExecution>
+                  </pluginExecutions>
+                </lifecycleMappingMetadata>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

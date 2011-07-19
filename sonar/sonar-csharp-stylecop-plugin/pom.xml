@@ -1,61 +1,62 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
-	<artifactId>sonar-csharp-stylecop-plugin</artifactId>
-	<packaging>sonar-plugin</packaging>
+  <artifactId>sonar-csharp-stylecop-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
 
-	<name>Sonar C# Plugin :: StyleCop</name>
-	<description>Plugin that runs StyleCop analyses to check C# sources against rule violations.</description>
-	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+  <name>Sonar C# Plugin :: StyleCop</name>
+  <description>Plugin that runs StyleCop analyses to check C# sources against rule violations.</description>
+  <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
 
-	<properties>
-		<sonar.pluginKey>csharpstylecop</sonar.pluginKey>
-		<sonar.pluginName>C# StyleCop</sonar.pluginName>
-		<sonar.pluginClass>org.sonar.plugins.csharp.stylecop.StyleCopPlugin</sonar.pluginClass>
-	</properties>
+  <properties>
+    <sonar.pluginKey>csharpstylecop</sonar.pluginKey>
+    <sonar.pluginName>C# StyleCop</sonar.pluginName>
+    <sonar.pluginClass>org.sonar.plugins.csharp.stylecop.StyleCopPlugin</sonar.pluginClass>
+  </properties>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<configuration>
-					<basePlugin>csharp</basePlugin>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <configuration>
+          <basePlugin>csharp</basePlugin>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<dependencies>
-		<!-- .NET tools -->
-		<dependency>
-			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
-			<artifactId>stylecop-runner</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
-			<artifactId>dotnet-tools-commons</artifactId>
-			<scope>provided</scope>
-		</dependency>
+  <dependencies>
+    <!-- .NET tools -->
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+      <artifactId>stylecop-runner</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
+      <artifactId>dotnet-tools-commons</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-		<!-- sonar open-source -->
-		<dependency>
-			<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-			<artifactId>sonar-csharp-core-plugin</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
-			<artifactId>sonar-plugin-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+    <!-- sonar open-source -->
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+      <artifactId>sonar-csharp-core-plugin</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
 </project>
