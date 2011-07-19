@@ -72,8 +72,7 @@
     <!-- License header configuration -->
     <license.title>Maven and Sonar plugin for .Net</license.title>
     <license.owner>Jose Chillan and Alexandre Victoor</license.owner>
-    <license.mailto>mailto: jose.chillan@codehaus.org or
-      alexvictoor@codehaus.org</license.mailto>
+    <license.mailto>mailto: jose.chillan@codehaus.org or alexvictoor@codehaus.org</license.mailto>
   </properties>
 
   <dependencyManagement>
