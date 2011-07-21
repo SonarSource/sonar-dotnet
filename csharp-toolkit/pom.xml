@@ -71,11 +71,11 @@
 									<inoutpair in="${project.build.directory}/${project.build.finalName}.${project.packaging}" out="${project.build.directory}/${project.build.finalName}.jar" />
 									<rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
 										<keep>
-											<class classes="public" methods="public">
+											<class classes="public" methods="protected" fields="public">
 												<patternset>
 													<include name="com.sonar.csharp.toolkit.Toolkit" />
 													<include name="com.sonar.sslr.api.**.*" />
-													<include name="org.sonar.plugins.csharp.api.**.*" />
+													<include name="com.sonar.csharp.squid.api.**.*" />
 												</patternset>
 											</class>
 										</keep>
