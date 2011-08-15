@@ -1,0 +1,1204 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<report xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.gallio.org/">
+
+  <testPackage shadowCopy="false" debug="false">
+
+    <files>
+
+      <file>D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.dll</file>
+
+    </files>
+
+    <hintDirectories />
+
+    <excludedFrameworkIds />
+
+    <properties />
+
+  </testPackage>
+
+  <testModel>
+
+    <test id="c2722843734a7a54" name="Root" fullName="" isTestCase="false">
+
+      <codeReference />
+
+      <codeLocation />
+
+      <metadata>
+
+        <entry key="TestKind">
+
+          <value>Root</value>
+
+        </entry>
+
+      </metadata>
+
+      <children>
+
+        <test id="caedd57f6516dd41" name="CriticalSoftware.NemoCoded.CalculationsModule.Tests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests" isTestCase="false">
+
+          <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+          <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+          <metadata>
+
+            <entry key="TestKind">
+
+              <value>NUnit v2.5.4+ Assembly</value>
+
+            </entry>
+
+            <entry key="CodeBase">
+
+              <value>D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL</value>
+
+            </entry>
+
+            <entry key="Copyright">
+
+              <value>Copyright © Critical Software 2011</value>
+
+            </entry>
+
+            <entry key="Description">
+
+              <value>Calculations Module Unit Test Library</value>
+
+            </entry>
+
+            <entry key="Product">
+
+              <value>Critical Software Device Control and Acquisition Service</value>
+
+            </entry>
+
+            <entry key="Title">
+
+              <value>CriticalSoftware.NemoCoded.CalculationsModule.Tests</value>
+
+            </entry>
+
+            <entry key="Version">
+
+              <value>1.0.0.26679</value>
+
+            </entry>
+
+            <entry key="Framework">
+
+              <value>NUnit v2.5.7.10213</value>
+
+            </entry>
+
+            <entry key="File">
+
+              <value>D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL</value>
+
+            </entry>
+
+          </metadata>
+
+          <children>
+
+            <test id="3e4d2cc01b65e6cb" name="CriticalSoftware" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware" isTestCase="false">
+
+              <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+              <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+              <metadata>
+
+                <entry key="TestKind">
+
+                  <value>Suite</value>
+
+                </entry>
+
+              </metadata>
+
+              <children>
+
+                <test id="456b9e038dbd1841" name="NemoCoded" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded" isTestCase="false">
+
+                  <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                  <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                  <metadata>
+
+                    <entry key="TestKind">
+
+                      <value>Suite</value>
+
+                    </entry>
+
+                  </metadata>
+
+                  <children>
+
+                    <test id="4125ab5bc2eebb67" name="CalculationsModule" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule" isTestCase="false">
+
+                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                      <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                      <metadata>
+
+                        <entry key="TestKind">
+
+                          <value>Suite</value>
+
+                        </entry>
+
+                      </metadata>
+
+                      <children>
+
+                        <test id="1acd8d7484493ee5" name="Expressions" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions" isTestCase="false">
+
+                          <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                          <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                          <metadata>
+
+                            <entry key="TestKind">
+
+                              <value>Suite</value>
+
+                            </entry>
+
+                          </metadata>
+
+                          <children>
+
+                            <test id="1cea631be4d68e03" name="Tests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests" isTestCase="false">
+
+                              <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                              <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                              <metadata>
+
+                                <entry key="TestKind">
+
+                                  <value>Suite</value>
+
+                                </entry>
+
+                              </metadata>
+
+                              <children>
+
+                                <test id="f388b3ceeb554a27" name="ExpressionCalculatorTests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests" isTestCase="false">
+
+                                  <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" />
+
+                                  <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" />
+
+                                  <metadata>
+
+                                    <entry key="TestKind">
+
+                                      <value>Fixture</value>
+
+                                    </entry>
+
+                                  </metadata>
+
+                                  <children>
+
+                                    <test id="8d83771fa00893f" name="CalculateFunctionExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateFunctionExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateFunctionExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="52" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="35b2bcb4bb6c3a24" name="CalculateParameterExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateParameterExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateParameterExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="39" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="ad392c5ab45fe171" name="CalculateParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateParenthesesExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateParenthesesExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="27" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="a7dae42856235dea" name="CalculateSimpleExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateSimpleExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateSimpleExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="15" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                  </children>
+
+                                  <parameters />
+
+                                </test>
+
+                                <test id="f2c5f0a074044af8" name="ParserTests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests" isTestCase="false">
+
+                                  <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" />
+
+                                  <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" />
+
+                                  <metadata>
+
+                                    <entry key="TestKind">
+
+                                      <value>Fixture</value>
+
+                                    </entry>
+
+                                  </metadata>
+
+                                  <children>
+
+                                    <test id="c94835752e70d884" name="CreateSimpleExpressionTest" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/CreateSimpleExpressionTest" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="CreateSimpleExpressionTest" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="41" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="6b1ea466f0de7ca8" name="GetErrorOnParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/GetErrorOnParenthesesExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="GetErrorOnParenthesesExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="32" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="5cc6ca6c08e0a7c1" name="ParseParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/ParseParenthesesExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="ParseParenthesesExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="24" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                    <test id="7a845954b15996cc" name="ParseSimpleExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/ParseSimpleExpression" isTestCase="true">
+
+                                      <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="ParseSimpleExpression" />
+
+                                      <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="16" />
+
+                                      <metadata>
+
+                                        <entry key="TestKind">
+
+                                          <value>Test</value>
+
+                                        </entry>
+
+                                      </metadata>
+
+                                      <children />
+
+                                      <parameters />
+
+                                    </test>
+
+                                  </children>
+
+                                  <parameters />
+
+                                </test>
+
+                              </children>
+
+                              <parameters />
+
+                            </test>
+
+                          </children>
+
+                          <parameters />
+
+                        </test>
+
+                      </children>
+
+                      <parameters />
+
+                    </test>
+
+                  </children>
+
+                  <parameters />
+
+                </test>
+
+              </children>
+
+              <parameters />
+
+            </test>
+
+          </children>
+
+          <parameters />
+
+        </test>
+
+      </children>
+
+      <parameters />
+
+    </test>
+
+    <annotations />
+
+  </testModel>
+
+  <testPackageRun startTime="2011-08-11T15:49:42.8348255+01:00" endTime="2011-08-11T15:49:45.6088255+01:00">
+
+    <testStepRun startTime="2011-08-11T15:49:45.0428255+01:00" endTime="2011-08-11T15:49:45.6098255+01:00">
+
+      <testStep id="22acc8ddbac135a8" name="Root" fullName="" testId="c2722843734a7a54" isPrimary="true" isTestCase="false" isDynamic="false">
+
+        <codeReference />
+
+        <codeLocation />
+
+        <metadata>
+
+          <entry key="TestKind">
+
+            <value>Root</value>
+
+          </entry>
+
+        </metadata>
+
+      </testStep>
+
+      <children>
+
+        <testStepRun startTime="2011-08-11T15:49:45.1608255+01:00" endTime="2011-08-11T15:49:45.4068255+01:00">
+
+          <testStep id="d395642065b316d4" name="CriticalSoftware.NemoCoded.CalculationsModule.Tests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests" testId="caedd57f6516dd41" isPrimary="true" isTestCase="false" isDynamic="false">
+
+            <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+            <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+            <metadata>
+
+              <entry key="TestKind">
+
+                <value>NUnit v2.5.4+ Assembly</value>
+
+              </entry>
+
+              <entry key="CodeBase">
+
+                <value>D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL</value>
+
+              </entry>
+
+              <entry key="Copyright">
+
+                <value>Copyright © Critical Software 2011</value>
+
+              </entry>
+
+              <entry key="Description">
+
+                <value>Calculations Module Unit Test Library</value>
+
+              </entry>
+
+              <entry key="Product">
+
+                <value>Critical Software Device Control and Acquisition Service</value>
+
+              </entry>
+
+              <entry key="Title">
+
+                <value>CriticalSoftware.NemoCoded.CalculationsModule.Tests</value>
+
+              </entry>
+
+              <entry key="Version">
+
+                <value>1.0.0.26679</value>
+
+              </entry>
+
+              <entry key="Framework">
+
+                <value>NUnit v2.5.7.10213</value>
+
+              </entry>
+
+              <entry key="File">
+
+                <value>D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL</value>
+
+              </entry>
+
+            </metadata>
+
+          </testStep>
+
+          <children>
+
+            <testStepRun startTime="2011-08-11T15:49:45.1678255+01:00" endTime="2011-08-11T15:49:45.4058255+01:00">
+
+              <testStep id="9780f0e41fcff78a" name="CriticalSoftware" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware" testId="3e4d2cc01b65e6cb" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                <metadata>
+
+                  <entry key="TestKind">
+
+                    <value>Suite</value>
+
+                  </entry>
+
+                </metadata>
+
+              </testStep>
+
+              <children>
+
+                <testStepRun startTime="2011-08-11T15:49:45.1688255+01:00" endTime="2011-08-11T15:49:45.4048255+01:00">
+
+                  <testStep id="c9c5804a8cd9669" name="NemoCoded" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded" testId="456b9e038dbd1841" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                    <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                    <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                    <metadata>
+
+                      <entry key="TestKind">
+
+                        <value>Suite</value>
+
+                      </entry>
+
+                    </metadata>
+
+                  </testStep>
+
+                  <children>
+
+                    <testStepRun startTime="2011-08-11T15:49:45.1708255+01:00" endTime="2011-08-11T15:49:45.4028255+01:00">
+
+                      <testStep id="1023e9154e83fc90" name="CalculationsModule" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule" testId="4125ab5bc2eebb67" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                        <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                        <metadata>
+
+                          <entry key="TestKind">
+
+                            <value>Suite</value>
+
+                          </entry>
+
+                        </metadata>
+
+                      </testStep>
+
+                      <children>
+
+                        <testStepRun startTime="2011-08-11T15:49:45.1728255+01:00" endTime="2011-08-11T15:49:45.4018255+01:00">
+
+                          <testStep id="d205a11cdffe6a76" name="Expressions" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions" testId="1acd8d7484493ee5" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                            <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                            <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                            <metadata>
+
+                              <entry key="TestKind">
+
+                                <value>Suite</value>
+
+                              </entry>
+
+                            </metadata>
+
+                          </testStep>
+
+                          <children>
+
+                            <testStepRun startTime="2011-08-11T15:49:45.1738255+01:00" endTime="2011-08-11T15:49:45.4018255+01:00">
+
+                              <testStep id="b84ba257fa489806" name="Tests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests" testId="1cea631be4d68e03" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                                <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" />
+
+                                <codeLocation path="D:\build-server\integration-build\source\CriticalSoftware\NemoCoded\bin\CriticalSoftware.NemoCoded.CalculationsModule.Tests.DLL" />
+
+                                <metadata>
+
+                                  <entry key="TestKind">
+
+                                    <value>Suite</value>
+
+                                  </entry>
+
+                                </metadata>
+
+                              </testStep>
+
+                              <children>
+
+                                <testStepRun startTime="2011-08-11T15:49:45.1758255+01:00" endTime="2011-08-11T15:49:45.3838255+01:00">
+
+                                  <testStep id="5e2bd3f095c2ec38" name="ExpressionCalculatorTests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests" testId="f388b3ceeb554a27" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                                    <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" />
+
+                                    <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" />
+
+                                    <metadata>
+
+                                      <entry key="TestKind">
+
+                                        <value>Fixture</value>
+
+                                      </entry>
+
+                                    </metadata>
+
+                                  </testStep>
+
+                                  <children>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.1818255+01:00" endTime="2011-08-11T15:49:45.3328255+01:00">
+
+                                      <testStep id="51c944c1a6b50220" name="CalculateFunctionExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateFunctionExpression" testId="8d83771fa00893f" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateFunctionExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="52" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.1433374">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3698255+01:00" endTime="2011-08-11T15:49:45.3768255+01:00">
+
+                                      <testStep id="5daa9ef28afae6d8" name="CalculateParameterExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateParameterExpression" testId="35b2bcb4bb6c3a24" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateParameterExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="39" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.0006343">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3778255+01:00" endTime="2011-08-11T15:49:45.3798255+01:00">
+
+                                      <testStep id="860aa94b09d9230e" name="CalculateParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateParenthesesExpression" testId="ad392c5ab45fe171" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateParenthesesExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="27" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.0006379">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3808255+01:00" endTime="2011-08-11T15:49:45.3828255+01:00">
+
+                                      <testStep id="14f4f8e1d4fa4a95" name="CalculateSimpleExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ExpressionCalculatorTests/CalculateSimpleExpression" testId="a7dae42856235dea" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ExpressionCalculatorTests" member="CalculateSimpleExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ExpressionCalculatorTests.cs" line="15" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.00056359999999999993">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                  </children>
+
+                                  <result assertCount="4" duration="0.1966856">
+
+                                    <outcome status="passed" />
+
+                                  </result>
+
+                                  <testLog>
+
+                                    <streams />
+
+                                    <attachments />
+
+                                  </testLog>
+
+                                </testStepRun>
+
+                                <testStepRun startTime="2011-08-11T15:49:45.3858255+01:00" endTime="2011-08-11T15:49:45.3998255+01:00">
+
+                                  <testStep id="fb7c93a32cefa811" name="ParserTests" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests" testId="f2c5f0a074044af8" isPrimary="true" isTestCase="false" isDynamic="false">
+
+                                    <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" />
+
+                                    <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" />
+
+                                    <metadata>
+
+                                      <entry key="TestKind">
+
+                                        <value>Fixture</value>
+
+                                      </entry>
+
+                                    </metadata>
+
+                                  </testStep>
+
+                                  <children>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3868255+01:00" endTime="2011-08-11T15:49:45.3888255+01:00">
+
+                                      <testStep id="6a95f7281c1784fa" name="CreateSimpleExpressionTest" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/CreateSimpleExpressionTest" testId="c94835752e70d884" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="CreateSimpleExpressionTest" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="41" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.0005399">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3898255+01:00" endTime="2011-08-11T15:49:45.3928255+01:00">
+
+                                      <testStep id="784558ce1c147ef7" name="GetErrorOnParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/GetErrorOnParenthesesExpression" testId="6b1ea466f0de7ca8" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="GetErrorOnParenthesesExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="32" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.0028212999999999997">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3938255+01:00" endTime="2011-08-11T15:49:45.3958255+01:00">
+
+                                      <testStep id="7c5313be9122599" name="ParseParenthesesExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/ParseParenthesesExpression" testId="5cc6ca6c08e0a7c1" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="ParseParenthesesExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="24" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.000868">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                    <testStepRun startTime="2011-08-11T15:49:45.3968255+01:00" endTime="2011-08-11T15:49:45.3988255+01:00">
+
+                                      <testStep id="a6b42b02d4db7f1a" name="ParseSimpleExpression" fullName="CriticalSoftware.NemoCoded.CalculationsModule.Tests/CriticalSoftware/NemoCoded/CalculationsModule/Expressions/Tests/ParserTests/ParseSimpleExpression" testId="7a845954b15996cc" isPrimary="true" isTestCase="true" isDynamic="false">
+
+                                        <codeReference assembly="CriticalSoftware.NemoCoded.CalculationsModule.Tests, Version=1.0.0.26679, Culture=neutral, PublicKeyToken=null" namespace="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests" type="CriticalSoftware.NemoCoded.CalculationsModule.Expressions.Tests.ParserTests" member="ParseSimpleExpression" />
+
+                                        <codeLocation path="d:\build-server\integration-build\source\CriticalSoftware\NemoCoded\CalculationsModule\Tests\ParserTests.cs" line="16" />
+
+                                        <metadata>
+
+                                          <entry key="TestKind">
+
+                                            <value>Test</value>
+
+                                          </entry>
+
+                                        </metadata>
+
+                                      </testStep>
+
+                                      <children />
+
+                                      <result assertCount="1" duration="0.0007456">
+
+                                        <outcome status="passed" />
+
+                                      </result>
+
+                                      <testLog>
+
+                                        <streams />
+
+                                        <attachments />
+
+                                      </testLog>
+
+                                    </testStepRun>
+
+                                  </children>
+
+                                  <result assertCount="4" duration="0.0127006">
+
+                                    <outcome status="passed" />
+
+                                  </result>
+
+                                  <testLog>
+
+                                    <streams />
+
+                                    <attachments />
+
+                                  </testLog>
+
+                                </testStepRun>
+
+                              </children>
+
+                              <result assertCount="8" duration="0.2215548">
+
+                                <outcome status="passed" />
+
+                              </result>
+
+                              <testLog>
+
+                                <streams />
+
+                                <attachments />
+
+                              </testLog>
+
+                            </testStepRun>
+
+                          </children>
+
+                          <result assertCount="8" duration="0.22291">
+
+                            <outcome status="passed" />
+
+                          </result>
+
+                          <testLog>
+
+                            <streams />
+
+                            <attachments />
+
+                          </testLog>
+
+                        </testStepRun>
+
+                      </children>
+
+                      <result assertCount="8" duration="0.22415169999999998">
+
+                        <outcome status="passed" />
+
+                      </result>
+
+                      <testLog>
+
+                        <streams />
+
+                        <attachments />
+
+                      </testLog>
+
+                    </testStepRun>
+
+                  </children>
+
+                  <result assertCount="8" duration="0.2252853">
+
+                    <outcome status="passed" />
+
+                  </result>
+
+                  <testLog>
+
+                    <streams />
+
+                    <attachments />
+
+                  </testLog>
+
+                </testStepRun>
+
+              </children>
+
+              <result assertCount="8" duration="0.22743649999999999">
+
+                <outcome status="passed" />
+
+              </result>
+
+              <testLog>
+
+                <streams />
+
+                <attachments />
+
+              </testLog>
+
+            </testStepRun>
+
+          </children>
+
+          <result assertCount="8" duration="0.2286811">
+
+            <outcome status="passed" />
+
+          </result>
+
+          <testLog>
+
+            <streams />
+
+            <attachments />
+
+          </testLog>
+
+        </testStepRun>
+
+      </children>
+
+      <result assertCount="8" duration="2.7694224">
+
+        <outcome status="passed" />
+
+      </result>
+
+      <testLog>
+
+        <streams />
+
+        <attachments />
+
+      </testLog>
+
+    </testStepRun>
+
+    <statistics assertCount="8" duration="2.7849492" runCount="8" passedCount="8" failedCount="0" inconclusiveCount="0" skippedCount="0" testCount="8" stepCount="17">
+
+      <outcomeSummaries>
+
+        <outcomeSummary count="8">
+
+          <outcome status="passed" />
+
+        </outcomeSummary>
+
+      </outcomeSummaries>
+
+    </statistics>
+
+  </testPackageRun>
+
+  <logEntries>
+
+    <logEntry severity="error" message="An unhandled exception occurred.&#xD;&#xA;System.AppDomainUnloadedException: Attempted to access an unloaded AppDomain.&#xD;&#xA;" />
+
+  </logEntries>
+
+</report>
