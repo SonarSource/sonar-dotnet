@@ -49,6 +49,27 @@ public class MicrosoftWindowsEnvironmentTest {
     assertThat(microsoftWindowsEnvironment.getCurrentProject("Project #2"), is(project2));
   }
 
+  @Test
+  public void testIndexOfProjectsWithSonarBranch() {
+    VisualStudioProject project1 = mock(VisualStudioProject.class);
+    when(project1.getName()).thenReturn("Project #1");
+    VisualStudioProject project2 = mock(VisualStudioProject.class);
+    when(project2.getName()).thenReturn("Project #2");
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(project1, project2));
+
+    CSharpConfiguration configuration = mock(CSharpConfiguration.class);
+    when(configuration.getString("sonar.branch", "")).thenReturn("FooBranch");
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment(configuration);
+    microsoftWindowsEnvironment.setCurrentSolution(solution);
+    assertThat(microsoftWindowsEnvironment.getCurrentSolution(), is(solution));
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Project #1"), is(project1));
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Project #2"), is(project2));
+    // and check with the branch name
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Project #1 FooBranch"), is(project1));
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Project #2 FooBranch"), is(project2));
+  }
+
   @Test(expected = SonarException.class)
   public void testLock() throws Exception {
     MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();

@@ -23,6 +23,7 @@ package org.sonar.plugins.csharp.api;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.utils.SonarException;
@@ -42,6 +43,7 @@ import com.google.common.collect.Maps;
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class MicrosoftWindowsEnvironment implements BatchExtension {
 
+  private CSharpConfiguration configuration;
   private boolean locked;
   // static configuration elements that are fed at the beginning of an analysis and that do not change afterwards
   private String dotnetVersion;
@@ -55,6 +57,11 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
   private boolean testExecutionDone = false;
 
   public MicrosoftWindowsEnvironment() {
+    this(null);
+  }
+
+  public MicrosoftWindowsEnvironment(CSharpConfiguration configuration) {
+    this.configuration = configuration;
     projectsByName = Maps.newHashMap();
   }
 
@@ -92,6 +99,15 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
     this.currentSolution = currentSolution;
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
       projectsByName.put(vsProject.getName(), vsProject);
+    }
+    if (configuration != null) {
+      String sonarBranch = configuration.getString("sonar.branch", "");
+      if ( !StringUtils.isEmpty(sonarBranch)) {
+        // we also reference the projects with the name that Sonar gives when 'sonar.branch' is used
+        for (VisualStudioProject vsProject : currentSolution.getProjects()) {
+          projectsByName.put(vsProject.getName() + " " + sonarBranch, vsProject);
+        }
+      }
     }
   }
 
