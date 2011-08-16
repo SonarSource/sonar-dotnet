@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -78,6 +79,20 @@ public class CoverageDecoratorTest {
     verify(context, times(1)).saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
     verify(context, times(1)).saveMeasure(CoreMetrics.LINES_TO_COVER, 100.0);
     verify(context, times(1)).saveMeasure(CoreMetrics.UNCOVERED_LINES, 100.0);
+  }
+
+  // http://jira.codehaus.org/browse/SONARPLUGINS-1268
+  @Test
+  public void testDecorateWithNoNCLOC() throws Exception {
+    CoverageDecorator decorator = createDecorator();
+    Resource<?> projectResource = new File("Foo");
+    DecoratorContext context = mock(DecoratorContext.class);
+    when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(null);
+    decorator.decorate(projectResource, context);
+    verify(context, times(1)).saveMeasure(CoreMetrics.COVERAGE, 0.0);
+    verify(context, times(1)).saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINES_TO_COVER), anyDouble());
+    verify(context, never()).saveMeasure(eq(CoreMetrics.UNCOVERED_LINES), anyDouble());
   }
 
   @Test

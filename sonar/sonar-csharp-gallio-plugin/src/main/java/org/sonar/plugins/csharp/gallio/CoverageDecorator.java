@@ -28,6 +28,7 @@ import org.sonar.api.batch.Decorator;
 import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
@@ -79,9 +80,11 @@ public class CoverageDecorator implements Decorator {
       context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
       context.saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
       // for LINES_TO_COVER and UNCOVERED_LINES, we use NCLOC as an approximation
-      double ncloc = context.getMeasure(CoreMetrics.NCLOC).getValue();
-      context.saveMeasure(CoreMetrics.LINES_TO_COVER, ncloc);
-      context.saveMeasure(CoreMetrics.UNCOVERED_LINES, ncloc);
+      Measure ncloc = context.getMeasure(CoreMetrics.NCLOC);
+      if (ncloc != null) {
+        context.saveMeasure(CoreMetrics.LINES_TO_COVER, ncloc.getValue());
+        context.saveMeasure(CoreMetrics.UNCOVERED_LINES, ncloc.getValue());
+      }
     }
   }
 
