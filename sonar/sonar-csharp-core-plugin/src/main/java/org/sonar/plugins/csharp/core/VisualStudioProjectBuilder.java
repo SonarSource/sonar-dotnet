@@ -98,10 +98,15 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     Properties rootProps = enhanceRootProperties(root);
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
+      String projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
+      if (projectKey.equals(root.getKey())) {
+        throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
+            + "'). Please set a unique 'sonar.projectKey' for the solution.");
+      }
+
       ProjectDefinition subProject = ProjectDefinition.create((Properties) rootProps.clone()).setBaseDir(vsProject.getDirectory())
-          .setWorkDir(new File(vsProject.getDirectory(), workDir))
-          .setKey(StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName()))
-          .setVersion(root.getVersion()).setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
+          .setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey).setVersion(root.getVersion())
+          .setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
 
       if (vsProject.isTest()) {
         subProject.setTestDirs(".");
