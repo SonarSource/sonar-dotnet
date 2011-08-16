@@ -41,7 +41,9 @@ public final class StaxHelper {
 
   private static final Logger LOG = LoggerFactory.getLogger(StaxHelper.class);
 
-  // Retrieve the value of the given name attribute
+  /**
+   * Retrieve the value of the given name attribute
+   */
   public static String findAttributeValue(SMInputCursor cursor, String attributeName) {
     try {
       final String attributValue;
@@ -58,7 +60,9 @@ public final class StaxHelper {
     }
   }
 
-  // Retrieve the integer value of the given name attribute
+  /**
+   * Retrieve the integer value of the given name attribute
+   */
   public static int findAttributeIntValue(SMInputCursor cursor, String attributeName) {
     try {
       return Integer.valueOf(cursor.getAttrValue(attributeName));
@@ -67,7 +71,9 @@ public final class StaxHelper {
     }
   }
 
-  // Check if the cursor is positioned at a start element
+  /**
+   * Check if the cursor is positioned at a start element
+   */
   public static boolean isAStartElement(SMInputCursor cursor) {
     try {
       return cursor.asEvent().isStartElement();
@@ -76,7 +82,9 @@ public final class StaxHelper {
     }
   }
 
-  // Check if the cursor is positioned at an end element
+  /**
+   * Check if the cursor is positioned at an end element
+   */
   public static boolean isAnEndElement(SMInputCursor cursor) {
     try {
       return cursor.asEvent().isEndElement();
@@ -85,7 +93,9 @@ public final class StaxHelper {
     }
   }
 
-  // Retrieve current element's name
+  /**
+   * Retrieve current element's name
+   */
   public static String findElementName(SMInputCursor cursor) {
     try {
       return cursor.getLocalName();
@@ -94,7 +104,9 @@ public final class StaxHelper {
     }
   }
 
-  // Move the cursor forward
+  /**
+   * Move the cursor forward
+   */
   public static void advanceCursor(SMInputCursor cursor) {
     try {
       cursor.advance();
@@ -103,7 +115,9 @@ public final class StaxHelper {
     }
   }
 
-  // Get the next cursor's position
+  /**
+   * Get the next cursor's position
+   */
   public static SMEvent nextPosition(SMInputCursor cursor) {
     try {
       return cursor.getNext();
@@ -112,7 +126,9 @@ public final class StaxHelper {
     }
   }
 
-  // Retrieve the corresponding element's event
+  /**
+   * Retrieve the corresponding element's event
+   */
   public static XMLEvent findXMLEvent(SMInputCursor cursor) {
     try {
       return cursor.asEvent();
@@ -121,7 +137,9 @@ public final class StaxHelper {
     }
   }
 
-  // Get the descendant elements
+  /**
+   * Get the descendant elements
+   */
   public static SMInputCursor descendantElements(SMInputCursor cursor) {
     try {
       return cursor.descendantElementCursor();
@@ -130,7 +148,9 @@ public final class StaxHelper {
     }
   }
 
-  // Get the descendant elements matching the given name
+  /**
+   * Get the descendant elements matching the given name
+   */
   public static SMInputCursor descendantSpecifiedElements(SMInputCursor cursor, String specifiedElements) {
     try {
       return cursor.descendantElementCursor(specifiedElements);
@@ -139,7 +159,9 @@ public final class StaxHelper {
     }
   }
 
-  // Get the descendant elements matching the given QName
+  /**
+   * Get the descendant elements matching the given QName
+   */
   public static SMInputCursor descendantSpecifiedElements(SMInputCursor cursor, QName specifiedElements) {
     try {
       return cursor.descendantElementCursor(specifiedElements);
@@ -148,7 +170,9 @@ public final class StaxHelper {
     }
   }
 
-  // Retrieve next element's name
+  /**
+   * Retrieve next element's name
+   */
   public static String findNextElementName(SMInputCursor cursor) {
     try {
       return cursor.advance().getLocalName();

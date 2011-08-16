@@ -53,8 +53,14 @@ public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
   public Map<Integer, FileCoverage> findFiles(SMInputCursor docsTag) {
     Map<Integer, FileCoverage> files = new HashMap<Integer, FileCoverage>();
     try {
-      while ( !(this.getFileTag()).equals(findNextElementName(docsTag))) {
-        LOG.debug("Retrieving files");
+      try {
+        while ( !(this.getFileTag()).equals(findNextElementName(docsTag))) {
+          LOG.debug("Moving cursor before retrieving files data");
+        }
+      } catch (SonarException ex) {
+    	  LOG.error("***\nThe PartCover report found was empty." +
+			" Check out the log of PartCover execution to find out why.\n***\n", ex);
+    	  return files;
       }
       while ((this.getFileTag()).equals(findElementName(docsTag))) {
         if (isAStartElement(docsTag)) {

@@ -171,6 +171,13 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
+  
+  @Test
+  public void parseEmptyPartCoverReport() {
+	File file = TestUtils.getResource("/Results/coverage/empty-partcover-report.xml");
+	ParserResult result = parser.parse(project, file);
+	assertTrue(result.getSourceFiles().isEmpty());
+  }
 
   private void checkParsing(ParsingParameters parameters) {
     File file = TestUtils.getResource("/Results/coverage/" + parameters.report);
