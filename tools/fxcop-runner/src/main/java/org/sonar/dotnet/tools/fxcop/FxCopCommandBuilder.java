@@ -32,9 +32,9 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import com.google.common.collect.Lists;
 
 /**
- * Class used to build the command line to run Gendarme.
+ * Class used to build the command line to run FxCop.
  */
-public final class FxCopCommandBuilder {
+public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopCommandBuilder.class);
   private static final int DEFAULT_TIMEOUT = 10;

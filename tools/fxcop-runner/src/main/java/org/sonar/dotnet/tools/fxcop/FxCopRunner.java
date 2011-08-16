@@ -96,7 +96,7 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
   public void execute(FxCopCommandBuilder fxCopCommandBuilder, int timeoutMinutes) throws FxCopException {
     LOG.debug("Executing FxCop program...");
     int exitCode = CommandExecutor.create().execute(fxCopCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
-    if (exitCode != 0) {
+    if (exitCode != 0 && exitCode != 512) {
       throw new FxCopException("FxCop execution failed with return code '" + exitCode
           + "'. Check FxCop documentation for more information.");
     }
