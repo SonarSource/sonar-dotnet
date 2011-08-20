@@ -61,7 +61,8 @@ public class CSharpConfiguration implements BatchExtension {
     newToPreviousParamMap.put(CSharpConstants.SILVERLIGHT_VERSION_KEY, "silverlight.version");
     newToPreviousParamMap.put(CSharpConstants.TEST_PROJET_PATTERN_KEY, "visual.test.project.pattern");
     newToPreviousParamMap.put(CSharpConstants.SOLUTION_FILE_KEY, "visual.studio.solution");
-
+    newToPreviousParamMap.put(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "msbuild.configurations");
+    
     // FxCop OLD parameters
     newToPreviousParamMap.put("sonar.fxcop.installDirectory", "fxcop.directory");
     newToPreviousParamMap.put("sonar.fxcop.mode", "sonar.dotnet.fxcop");
