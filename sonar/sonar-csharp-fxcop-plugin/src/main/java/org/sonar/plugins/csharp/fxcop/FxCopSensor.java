@@ -41,7 +41,7 @@ import org.sonar.dotnet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
 import com.google.common.collect.Lists;
@@ -50,7 +50,7 @@ import com.google.common.collect.Lists;
  * Collects the FXCop reporting into sonar.
  */
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class FxCopSensor extends AbstractRegularCSharpSensor {
+public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
@@ -58,7 +58,6 @@ public class FxCopSensor extends AbstractRegularCSharpSensor {
   private RulesProfile rulesProfile;
   private FxCopProfileExporter profileExporter;
   private FxCopResultParser fxCopResultParser;
-  private CSharpConfiguration configuration;
   private String executionMode;
 
   /**
@@ -72,12 +71,11 @@ public class FxCopSensor extends AbstractRegularCSharpSensor {
    */
   public FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
       FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
+    super(microsoftWindowsEnvironment, configuration, "FxCop");
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.fxCopResultParser = fxCopResultParser;
-    this.configuration = configuration;
     this.executionMode = configuration.getString(FxCopConstants.MODE, "");
   }
 

@@ -53,7 +53,7 @@ public class AbstractRegularCSharpSensorTest {
     }
   }
 
-  private FakeSensor sensor;
+  private AbstractCSharpSensor sensor;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private VisualStudioProject vsProject1;
 
