@@ -306,6 +306,7 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
   private List<File> getAsListOfFiles(String[] fileArray) {
     List<File> fileList = Lists.newArrayList();
     File basedir = (vsProject == null) ? solution.getSolutionDir() : vsProject.getDirectory();
+    LOG.debug("Using " + basedir + " as base dir when searching FxCop reference directories");
     for (int i = 0; i < fileArray.length; i++) {
       String filePath = fileArray[i].trim();
       File file = new File(basedir, filePath);
