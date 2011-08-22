@@ -39,7 +39,8 @@ import org.sonar.api.SonarPlugin;
     @Property(key = GallioConstants.MODE, defaultValue = "", name = "Gallio activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
-        description = "Name of the Gallio report file used when reuse report mode is activated.", global = false, project = false),
+        description = "Path to the Gallio report file used when reuse report mode is activated. "
+            + "This path must be relative to the solution base directory.", global = false, project = false),
     @Property(
         key = GallioConstants.FILTER_KEY,
         defaultValue = GallioConstants.FILTER_DEFVALUE,
@@ -56,13 +57,11 @@ import org.sonar.api.SonarPlugin;
         name = "PartCover install directory", description = "Absolute path of the PartCover installation folder.", global = true,
         project = false),
     @Property(key = GallioConstants.REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the Gallio coverage report files",
-        description = "Name of the Gallio coverage report file used when reuse report mode is activated.", global = false, project = false),
-    @Property(
-        key = GallioConstants.COVERAGE_EXCLUDES_KEY,
-        defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,
-        name = "Coverage excludes",
-        description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. The format for an exclusion is the PartCover format: '[assembly]namespace'.",
-        global = true, project = true) })
+        description = "Path to the Gallio coverage report file used when reuse report mode is activated. "
+            + "This path must be relative to the solution base directory.", global = false, project = false),
+    @Property(key = GallioConstants.COVERAGE_EXCLUDES_KEY, defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,
+        name = "Coverage excludes", description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. "
+            + "The format for an exclusion is the PartCover format: '[assembly]namespace'.", global = true, project = true) })
 public class GallioPlugin extends SonarPlugin {
 
   /**
