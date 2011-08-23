@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sonarsource.csharp</groupId>
 	<artifactId>csharp</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>SonarSource :: C#</name>
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
@@ -26,9 +25,9 @@
 		<module>integration-tests</module>
 	</modules>
 	<scm>
-		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
-		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
-		<url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
+		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.0</connection>
+		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.0</developerConnection>
+		<url>https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.0</url>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
@@ -171,7 +170,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

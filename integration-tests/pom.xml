@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.sonarsource.csharp</groupId>
 		<artifactId>csharp</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 	<artifactId>integration-tests</artifactId>
 	<name>SonarSource :: C# :: Integration Tests</name>
