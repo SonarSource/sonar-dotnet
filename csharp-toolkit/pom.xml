@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.sonarsource.csharp</groupId>
 		<artifactId>csharp</artifactId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>csharp-toolkit</artifactId>
 	<name>SonarSource :: C# :: Toolkit</name>
