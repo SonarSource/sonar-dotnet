@@ -22,6 +22,7 @@ package org.sonar.plugins.csharp.gallio;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -33,6 +34,8 @@ import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
@@ -110,9 +113,22 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   protected void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
     CoverageResultParser parser = new CoverageResultParser(context);
     ParserResult result = parser.parse(project, reportFile);
+    
+    VisualStudioSolution solution 
+      = getMicrosoftWindowsEnvironment().getCurrentSolution();
+    
     ProjectCoverage currentProjectCoverage = null;
     for (ProjectCoverage projectCoverage : result.getProjects()) {
-      if (project.getName().equals(projectCoverage.getAssemblyName())) {
+      VisualStudioProject vsProject 
+        = solution.getProject(projectCoverage.getAssemblyName());
+      String branch = project.getBranch();
+      final String vsProjectName;
+      if (StringUtils.isEmpty(branch)) {
+        vsProjectName = vsProject.getName(); 
+      } else {
+        vsProjectName = vsProject.getName() + " " +project.getBranch();
+      }
+      if (project.getName().equals(vsProjectName)) {
         currentProjectCoverage = projectCoverage;
         break;
       }
