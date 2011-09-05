@@ -57,6 +57,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
 
+  private CoverageResultParser parser;
   private CSharpConfiguration configuration;
   private String executionMode;
 
@@ -67,10 +68,11 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CoverageResultParser parser) {
     super(microsoftWindowsEnvironment);
     this.configuration = configuration;
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    this.parser = parser;
   }
 
   /**
@@ -111,7 +113,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   }
 
   protected void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
-    CoverageResultParser parser = new CoverageResultParser(context);
+
     ParserResult result = parser.parse(project, reportFile);
     
     VisualStudioSolution solution 
