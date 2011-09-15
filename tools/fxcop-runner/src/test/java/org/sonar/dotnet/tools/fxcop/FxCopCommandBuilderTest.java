@@ -139,8 +139,8 @@ public class FxCopCommandBuilderTest {
     String[] commands = command.getArguments().toArray(new String[] {});
     assertThat(commands[0], endsWith("FakeFxCopConfigFile.xml"));
     assertThat(commands[1], endsWith("fxcop-report.xml"));
-    assertThat(commands[2], endsWith("Fake1.assembly"));
-    assertThat(commands[3], endsWith("Fake2.assembly"));
+    assertThat(commands[2], endsWith(".assembly"));
+    assertThat(commands[3], endsWith(".assembly"));
     assertThat(commands[4], endsWith("FakeDepFolder"));
     assertThat(commands[5], endsWith("/igc"));
     assertThat(commands[6], endsWith("/to:600"));
