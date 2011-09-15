@@ -65,18 +65,9 @@ public class FxCopRunnerTest {
   }
 
   @Test
-  public void testCreateCommandBuilderForSolution() throws Exception {
-    FxCopRunner runner = FxCopRunner.create(fakeFxCopInstallDir.getAbsolutePath());
-    FxCopCommandBuilder builder = runner.createCommandBuilder(solution);
-    builder.setConfigFile(fakeFxCopConfigFile);
-    builder.setReportFile(fakeFxCopReportFile);
-    assertThat(builder.toCommand().getExecutable(), is(new File(fakeFxCopInstallDir, "FxCopCmd.exe").getAbsolutePath()));
-  }
-
-  @Test
   public void testCreateCommandBuilderForProject() throws Exception {
     FxCopRunner runner = FxCopRunner.create(fakeFxCopInstallDir.getAbsolutePath());
-    FxCopCommandBuilder builder = runner.createCommandBuilder(vsProject);
+    FxCopCommandBuilder builder = runner.createCommandBuilder(solution, vsProject);
     builder.setConfigFile(fakeFxCopConfigFile);
     builder.setReportFile(fakeFxCopReportFile);
     assertThat(builder.toCommand().getExecutable(), is(new File(fakeFxCopInstallDir, "FxCopCmd.exe").getAbsolutePath()));

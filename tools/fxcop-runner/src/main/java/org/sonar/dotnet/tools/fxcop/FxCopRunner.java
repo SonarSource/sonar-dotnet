@@ -55,30 +55,17 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
     return runner;
   }
 
+  
   /**
    * Creates a pre-configured {@link FxCopCommandBuilder} that needs to be completed before running the
    * {@link #execute(FxCopCommandBuilder, int)} method.
+   * @param solution  the current VS solution
+   * @param project   the VS project to analyse
    * 
-   * @param solution
-   *          the solution to analyse
    * @return the command to complete.
    */
-  public FxCopCommandBuilder createCommandBuilder(VisualStudioSolution solution) {
-    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(solution);
-    builder.setExecutable(fxCopExecutable);
-    return builder;
-  }
-
-  /**
-   * Creates a pre-configured {@link FxCopCommandBuilder} that needs to be completed before running the
-   * {@link #execute(FxCopCommandBuilder, int)} method.
-   * 
-   * @param project
-   *          the VS project to analyse
-   * @return the command to complete.
-   */
-  public FxCopCommandBuilder createCommandBuilder(VisualStudioProject project) {
-    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(project);
+  public FxCopCommandBuilder createCommandBuilder(VisualStudioSolution solution, VisualStudioProject project) {
+    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(solution, project);
     builder.setExecutable(fxCopExecutable);
     return builder;
   }

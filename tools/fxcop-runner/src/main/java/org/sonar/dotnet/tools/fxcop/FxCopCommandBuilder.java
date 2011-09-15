@@ -20,12 +20,13 @@
 package org.sonar.dotnet.tools.fxcop;
 
 import java.io.File;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
@@ -56,27 +57,17 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
   }
 
   /**
-   * Constructs a {@link FxCopCommandBuilder} object for the given Visual Studio solution.
-   * 
-   * @param solution
-   *          the solution to analyse
-   * @return a Gendarme builder for this solution
-   */
-  public static FxCopCommandBuilder createBuilder(VisualStudioSolution solution) {
-    FxCopCommandBuilder builder = new FxCopCommandBuilder();
-    builder.solution = solution;
-    return builder;
-  }
-
-  /**
    * Constructs a {@link FxCopCommandBuilder} object for the given Visual Studio project.
-   * 
+   * @param solution 
+   *          the current VS solution
    * @param project
    *          the VS project to analyse
-   * @return a Gendarme builder for this project
+   * 
+   * @return a FxCop builder for this project
    */
-  public static FxCopCommandBuilder createBuilder(VisualStudioProject project) {
+  public static FxCopCommandBuilder createBuilder(VisualStudioSolution solution, VisualStudioProject project) {
     FxCopCommandBuilder builder = new FxCopCommandBuilder();
+    builder.solution = solution;
     builder.vsProject = project;
     return builder;
   }
@@ -195,8 +186,9 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
    * @return the Command that represent the command to launch.
    */
   public Command toCommand() throws FxCopException {
-    List<File> assemblyToScanFiles = getAssembliesToScan();
-    List<File> assemblyDependencyDirectoriesFiles = getAsListOfFiles(assemblyDependencyDirectories);
+    Collection<File> assemblyToScanFiles = findAssembliesToScan();
+    Collection<File> assemblyDependencyDirectoriesFiles 
+      = FileFinder.findDirectories(solution, vsProject, assemblyDependencyDirectories);
     validate(assemblyToScanFiles);
 
     LOG.debug("- FxCop program         : " + fxCopExecutable);
@@ -256,44 +248,24 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
   }
 
   private boolean isSilverlightUsed() {
-    boolean isSilverlightUsed = false;
-    if (vsProject != null) {
-      isSilverlightUsed = vsProject.isSilverlightProject();
-    } else if (solution != null) {
-      isSilverlightUsed = solution.isSilverlightUsed();
-    }
+    boolean isSilverlightUsed = vsProject.isSilverlightProject();
     return isSilverlightUsed;
   }
 
-  private List<File> getAssembliesToScan() {
-    List<File> assemblyFileList = null;
+  private Collection<File> findAssembliesToScan() {
+    final Collection<File> assemblyFiles;
     if (assembliesToScan.length == 0) {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
-      assemblyFileList = findAssembliesToScan();
+      assemblyFiles = Lists.newArrayList();
+      addProjectAssembly(assemblyFiles, vsProject);
     } else {
       // Some assemblies have been specified: let's analyze them
-      assemblyFileList = getAsListOfFiles(assembliesToScan);
+      assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
     }
-    return assemblyFileList;
+    return assemblyFiles;
   }
 
-  private List<File> findAssembliesToScan() {
-    List<File> assemblyFileList = Lists.newArrayList();
-    if (vsProject != null) {
-      addProjectAssembly(assemblyFileList, vsProject);
-    } else if (solution != null) {
-      for (VisualStudioProject visualStudioProject : solution.getProjects()) {
-        if ( !visualStudioProject.isTest()) {
-          addProjectAssembly(assemblyFileList, visualStudioProject);
-        }
-      }
-    } else {
-      throw new IllegalStateException("No .NET solution or project has been given to the FxCop command builder.");
-    }
-    return assemblyFileList;
-  }
-
-  private void addProjectAssembly(List<File> assemblyFileList, VisualStudioProject visualStudioProject) {
+  private void addProjectAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     Set<File> assemblies = visualStudioProject.getGeneratedAssemblies(buildConfigurations);
     for (File assembly : assemblies) {
       if (assembly != null && assembly.isFile()) {
@@ -303,23 +275,7 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
     }
   }
 
-  private List<File> getAsListOfFiles(String[] fileArray) {
-    List<File> fileList = Lists.newArrayList();
-    File basedir = (vsProject == null) ? solution.getSolutionDir() : vsProject.getDirectory();
-    LOG.debug("Using " + basedir + " as base dir when searching FxCop reference directories");
-    for (int i = 0; i < fileArray.length; i++) {
-      String filePath = fileArray[i].trim();
-      File file = new File(basedir, filePath);
-      if (file == null || !file.exists()) {
-        LOG.warn("The following resource can't be found: " + filePath);
-      } else {
-        fileList.add(file);
-      }
-    }
-    return fileList;
-  }
-
-  private void validate(List<File> assemblyToScanFiles) {
+  private void validate(Collection<File> assemblyToScanFiles) {
     if (fxCopConfigFile == null || !fxCopConfigFile.exists()) {
       throw new IllegalStateException("The FxCop configuration file does not exist.");
     }
