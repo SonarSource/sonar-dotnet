@@ -112,6 +112,9 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
             .getWorkingDirectory());
         GendarmeRunner runner = GendarmeRunner.create(
             configuration.getString(GendarmeConstants.INSTALL_DIR_KEY, GendarmeConstants.INSTALL_DIR_DEFVALUE), tempDir.getAbsolutePath());
+        
+        
+        
         launchGendarme(project, runner, gendarmeConfigFile);
       } catch (GendarmeException e) {
         throw new SonarException("Gendarme execution failed.", e);
@@ -139,7 +142,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
   }
 
   protected void launchGendarme(Project project, GendarmeRunner runner, File gendarmeConfigFile) throws GendarmeException {
-    GendarmeCommandBuilder builder = runner.createCommandBuilder(getVSProject(project));
+    GendarmeCommandBuilder builder = runner.createCommandBuilder(getVSSolution(), getVSProject(project));
     builder.setConfigFile(gendarmeConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), GendarmeConstants.GENDARME_REPORT_XML));
     builder.setConfidence(configuration
@@ -148,6 +151,8 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());
     builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
+    builder.setAssembliesToScan(configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY));
+    
     runner.execute(builder, configuration.getInt(GendarmeConstants.TIMEOUT_MINUTES_KEY, GendarmeConstants.TIMEOUT_MINUTES_DEFVALUE));
   }
 
@@ -157,7 +162,11 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
       File targetDir = fileSystem.getBuildDir();
       String[] reportsPath = configuration.getStringArray(GendarmeConstants.REPORTS_PATH_KEY);
       for (int i = 0; i < reportsPath.length; i++) {
-        reportFiles.add(new File(targetDir, reportsPath[i]));
+        File reportFile = new File(reportsPath[i]);
+        if (!reportFile.isAbsolute()) {
+          reportFile = new File(targetDir, reportsPath[i]);
+        }
+        reportFiles.add(reportFile);
       }
       if (reportFiles.isEmpty()) {
         LOG.warn("No report to analyse whereas Gendame runs in 'reuseReport' mode. Please specify at least on report to analyse.");

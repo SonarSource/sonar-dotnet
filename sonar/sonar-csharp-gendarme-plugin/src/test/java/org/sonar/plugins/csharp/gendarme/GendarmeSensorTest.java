@@ -70,13 +70,15 @@ public class GendarmeSensorTest {
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  
+  private VisualStudioProject vsProject;
 
   @Before
   public void init() throws Exception {
     fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
 
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    vsProject = mock(VisualStudioProject.class);
     when(vsProject.getName()).thenReturn("Project #1");
     when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")));
@@ -105,8 +107,8 @@ public class GendarmeSensorTest {
         microsoftWindowsEnvironment);
 
     GendarmeRunner runner = mock(GendarmeRunner.class);
-    when(runner.createCommandBuilder(any(VisualStudioProject.class))).thenReturn(
-        GendarmeCommandBuilder.createBuilder(solution).setExecutable(new File("gendarme.exe")));
+    when(runner.createCommandBuilder(solution, vsProject)).thenReturn(
+        GendarmeCommandBuilder.createBuilder(solution, vsProject).setExecutable(new File("gendarme.exe")));
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
