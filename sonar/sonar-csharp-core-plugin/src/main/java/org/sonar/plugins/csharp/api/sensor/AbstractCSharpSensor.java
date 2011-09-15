@@ -19,11 +19,15 @@
  */
 package org.sonar.plugins.csharp.api.sensor;
 
+import java.util.Collection;
+
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
@@ -84,6 +88,10 @@ public abstract class AbstractCSharpSensor implements Sensor {
   protected VisualStudioProject getVSProject(Project project) {
     return microsoftWindowsEnvironment.getCurrentProject(project.getName());
   }
+  
+  protected VisualStudioSolution getVSSolution() {
+    return microsoftWindowsEnvironment.getCurrentSolution();
+  }
 
   /**
    * Returns the {@link MicrosoftWindowsEnvironment} object.
@@ -92,6 +100,12 @@ public abstract class AbstractCSharpSensor implements Sensor {
    */
   protected MicrosoftWindowsEnvironment getMicrosoftWindowsEnvironment() {
     return microsoftWindowsEnvironment;
+  }
+  
+  protected Collection<java.io.File> findFiles(Project project, String... queries) {
+    VisualStudioSolution vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
+    VisualStudioProject vsProject = getVSProject(project);
+    return FileFinder.findFiles(vsSolution, vsProject, queries);
   }
 
 }

@@ -20,11 +20,12 @@
 package org.sonar.plugins.csharp.api.sensor;
 
 import java.io.File;
-import java.util.Set;
+import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
@@ -54,10 +55,19 @@ public abstract class AbstractCilRuleBasedCSharpSensor extends AbstractRegularCS
   public boolean shouldExecuteOnProject(Project project) {
     final boolean result;
     if (super.shouldExecuteOnProject(project)) {
-      final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
-          CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+      
       final VisualStudioProject visualProject = getVSProject(project);
-      final Set<File> assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+      
+      final Collection<File> assemblies;
+      String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+      if (assemblyPatterns == null || assemblyPatterns.length == 0) {  
+        final String buildConfigurations 
+          = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY, CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+        assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+      } else {
+        assemblies = findFiles(project, assemblyPatterns);
+      }
+      
       if (assemblies.isEmpty()) {
         LOG.info("No assembly to check with " + toolName);
         result = false;

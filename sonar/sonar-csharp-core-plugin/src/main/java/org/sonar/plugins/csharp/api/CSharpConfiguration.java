@@ -69,6 +69,7 @@ public class CSharpConfiguration implements BatchExtension {
     newToPreviousParamMap.put("sonar.fxcop.reports.path", "sonar.dotnet.fxcop.reportsPath");
     newToPreviousParamMap.put("sonar.fxcop.assemblyDependencyDirectories", "fxcop.additionalDirectories");
     newToPreviousParamMap.put("sonar.fxcop.ignoreGeneratedCode", "fxcop.ignore.generated.code");
+    newToPreviousParamMap.put("sonar.dotnet.assemblies", "sonar.fxcop.assemblies");
 
     // Gendarme OLD parameters
     newToPreviousParamMap.put("sonar.gendarme.installDirectory", "gendarme.directory");
@@ -117,21 +118,39 @@ public class CSharpConfiguration implements BatchExtension {
   public String[] getStringArray(String key) {
     // look if this key existed before
     String previousKey = newToPreviousParamMap.get(key);
-    if (StringUtils.isNotBlank(previousKey)) {
+    final String[] resultArray;
+    if (StringUtils.isBlank(previousKey)) {
+      // if this key wasn't used before, or if no value for was for it, 
+      // use the value of the current key
+      String[] result = configuration.getStringArray(key);
+      if (result.length == 0) {
+        resultArray = result;
+      } else {
+        // in the previous .NET plugin, parameters used to be split with a semi-colon
+        resultArray = splitUsingSemiColon(result);
+      }
+    } else {
       String[] result = configuration.getStringArray(previousKey);
-      if (result.length != 0) {
+      if (result.length == 0) {
+        result = configuration.getStringArray(key);
+        resultArray = splitUsingSemiColon(result);
+      } else {
         // a former parameter has been specified, let's take this value
         logInfo(result, previousKey);
         // in the previous .NET plugin, parameters used to be split with a semi-colon
-        Collection<String> resultCollection = Lists.newArrayList();
-        for (int i = 0; i < result.length; i++) {
-          resultCollection.addAll(Arrays.asList(StringUtils.split(result[i], ';')));
-        }
-        return resultCollection.toArray(new String[resultCollection.size()]);
+        resultArray = splitUsingSemiColon(result);
       }
     }
-    // if this key wasn't used before, or if no value for was for it, use the value of the current key
-    return configuration.getStringArray(key);
+    
+    return resultArray;
+  }
+  
+  private String[] splitUsingSemiColon(String[] strings) {
+    Collection<String> resultCollection = Lists.newArrayList();
+    for (int i = 0; i < strings.length; i++) {
+      resultCollection.addAll(Arrays.asList(StringUtils.split(strings[i], ';')));
+    }
+    return resultCollection.toArray(new String[resultCollection.size()]);
   }
 
   /**
