@@ -68,6 +68,13 @@ public class FileFinderTest {
   }
   
   @Test
+  public void testFindSubDirectoriesWithNull() {
+    Collection<File> result = FileFinder.findDirectories(solution, project, (String[])null);
+    assertNotNull(result);
+    assertTrue(result.isEmpty());
+  }
+  
+  @Test
   public void testFindAbsoluteFile() {
     File expectedCsFile = TestUtils.getResource("/solution/MessyTestSolution/MessyTestApplication/Program.cs");
     Collection<File> result = FileFinder.findFiles(solution, project, expectedCsFile.getAbsolutePath());
@@ -75,6 +82,34 @@ public class FileFinderTest {
     File csFile = result.iterator().next();
     assertTrue(csFile.exists());
     assertEquals("Program.cs", csFile.getName());
+  }
+  
+  @Test
+  public void testFindAbsoluteFileWithPatternOutsideSolution() {
+    File outsideDir = TestUtils.getResource("/solution/BlankSilverlightSolution");
+    String pattern = outsideDir.getAbsolutePath() + "/**/*Info.cs";
+    Collection<File> result = FileFinder.findFiles(solution, project, pattern);
+    assertEquals(2, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("AssemblyInfo.cs", csFile.getName());
+  }
+  
+  @Test
+  public void testFindRelativeFileWithPatternOutsideSolution() {
+    String pattern = "../../BlankSilverlightSolution/**/*Info.cs";
+    Collection<File> result = FileFinder.findFiles(solution, project, pattern);
+    assertEquals(2, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("AssemblyInfo.cs", csFile.getName());
+  }
+  
+  @Test
+  public void testFindFilesWithBadPattern() {
+    Collection<File> result = FileFinder.findFiles(solution, project, "../toto/**/*.cs");
+    assertNotNull(result);
+    assertTrue(result.isEmpty());
   }
   
   @Test

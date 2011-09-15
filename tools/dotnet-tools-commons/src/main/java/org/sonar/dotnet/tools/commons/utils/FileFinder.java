@@ -24,6 +24,7 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -87,6 +88,7 @@ public class FileFinder {
   }
 
   /**
+   * TODO clean up the code 
    * Find files that match the given patterns
    * 
    * @param currentSolution
@@ -100,14 +102,16 @@ public class FileFinder {
   @SuppressWarnings("unchecked")
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, VisualStudioProject currentProject, String... patternArray) {
 
+    if (patternArray==null || patternArray.length==0) {
+      return Collections.EMPTY_LIST;
+    }
+    
     File solutionDir = currentSolution.getSolutionDir();
     String solutionPath = solutionDir.getAbsolutePath();
 
     File projectDir = currentProject.getDirectory();
-    String projectPath = projectDir.getAbsolutePath();
 
     Set<File> result = new HashSet<File>();
-    List<WildcardPattern> projectPatterns = new ArrayList<WildcardPattern>();
     List<WildcardPattern> solutionPatterns = new ArrayList<WildcardPattern>();
     for (String pattern : patternArray) {
       if (StringUtils.startsWithIgnoreCase(pattern, "$(SolutionDir)")) {
@@ -116,20 +120,50 @@ public class FileFinder {
       } else {
         File file = new File(pattern);
         if (file.exists()) {
+          // pattern is an absolute path
           result.add(file);
         } else {
-          String patternAfterSubst = StringUtils.replaceChars(pattern, '\\', '/');
-          projectPatterns.add(WildcardPattern.create(patternAfterSubst));
+          file = new File(projectDir, pattern);
+          if (file.exists()) {
+            // pattern is a relative path from the project root
+            result.add(file);
+          } else {
+            // wildcard are used
+            String rootPath = StringUtils.substringBefore(pattern, "*");
+            File rootDir = new File(rootPath);
+            if (rootDir.exists() && rootDir.isAbsolute()) {
+              // prefix is an absolute path 
+              String patternAfterSubst 
+                = StringUtils.replaceChars(rootDir.getAbsolutePath() + "*" + StringUtils.substringAfter(pattern, "*"), '\\', '/');
+              IOFileFilter externalFilter = new PatternFilter(null, WildcardPattern.create(patternAfterSubst));
+              listFiles(result, rootDir, externalFilter);
+            } else {
+              String patternAfterSubst = StringUtils.replaceChars(pattern, '\\', '/');
+              rootDir = projectDir;
+              while (StringUtils.startsWith(patternAfterSubst, "../")) {
+                rootDir = rootDir.getParentFile();
+                patternAfterSubst = StringUtils.substringAfter(patternAfterSubst, "../");
+              }
+              if (new File(rootDir, patternAfterSubst).exists()) {
+                // there was .. in the pattern but no *
+                result.add(new File(rootDir, patternAfterSubst));
+              } else {
+                // pattern with *
+                patternAfterSubst 
+                  = StringUtils.replaceChars(rootDir.getAbsolutePath() + File.separator + StringUtils.substringBefore(patternAfterSubst, "*") + "*" + StringUtils.substringAfter(patternAfterSubst, "*"), '\\', '/');
+                
+                IOFileFilter externalFilter = new PatternFilter(null, WildcardPattern.create(patternAfterSubst));
+                listFiles(result, rootDir, externalFilter);
+              }
+            }
+          }
         }
 
       }
     }
 
-    IOFileFilter solutionFilter = new PatternFilter(solutionPatterns, null);
+    IOFileFilter solutionFilter = new PatternFilter(null, solutionPatterns);
     listFiles(result, solutionDir, solutionFilter);
-
-    IOFileFilter projectFilter = new PatternFilter(projectPatterns, projectPath);
-    listFiles(result, projectDir, projectFilter);
 
     if (LOG.isDebugEnabled()) {
       if (result.isEmpty()) {
@@ -160,9 +194,14 @@ public class FileFinder {
     private final WildcardPattern[] patterns;
     private final String prefix;
 
-    public PatternFilter(List<WildcardPattern> patterns, String prefix) {
-      this.patterns = patterns.toArray(new WildcardPattern[patterns.size()]);
+    public PatternFilter(String prefix, List<WildcardPattern> patterns) {
       this.prefix = prefix;
+      this.patterns = patterns.toArray(new WildcardPattern[patterns.size()]);
+    }
+    
+    public PatternFilter(String prefix, WildcardPattern... patterns) {
+      this.prefix = prefix;
+      this.patterns = patterns;
     }
 
     public boolean accept(File paramFile) {
