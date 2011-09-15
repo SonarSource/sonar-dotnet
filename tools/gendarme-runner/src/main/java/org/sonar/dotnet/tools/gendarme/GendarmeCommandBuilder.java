@@ -21,13 +21,14 @@ package org.sonar.dotnet.tools.gendarme;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
@@ -49,6 +50,7 @@ public final class GendarmeCommandBuilder {
   private File gendarmeConfigFile;
   private File gendarmeReportFile;
   private String buildConfigurations = "Debug";
+  private String[] assembliesToScan = new String[] {};
 
   private GendarmeCommandBuilder() {
   }
@@ -58,23 +60,14 @@ public final class GendarmeCommandBuilder {
    * 
    * @param solution
    *          the solution to analyse
+   *  @param project
+   *          the VS project to analyse
+   *          
    * @return a Gendarme builder for this solution
    */
-  public static GendarmeCommandBuilder createBuilder(VisualStudioSolution solution) {
+  public static GendarmeCommandBuilder createBuilder(VisualStudioSolution solution, VisualStudioProject project) {
     GendarmeCommandBuilder builder = new GendarmeCommandBuilder();
     builder.solution = solution;
-    return builder;
-  }
-
-  /**
-   * Constructs a {@link GendarmeCommandBuilder} object for the given Visual Studio project.
-   * 
-   * @param project
-   *          the VS project to analyse
-   * @return a Gendarme builder for this project
-   */
-  public static GendarmeCommandBuilder createBuilder(VisualStudioProject project) {
-    GendarmeCommandBuilder builder = new GendarmeCommandBuilder();
     builder.vsProject = project;
     return builder;
   }
@@ -162,6 +155,19 @@ public final class GendarmeCommandBuilder {
     this.buildConfigurations = buildConfigurations;
     return this;
   }
+  
+  /**
+   * Sets the assemblies to scan if the information should not be taken from the VS configuration files.
+   * 
+   * @param assembliesToScan
+   *          the assemblies to scan
+   * @return the current builder
+   */
+  public GendarmeCommandBuilder setAssembliesToScan(String... assembliesToScan) {
+    this.assembliesToScan = assembliesToScan;
+    return this;
+  }
+  
 
   protected String getBuildConfigurations() {
     return buildConfigurations;
@@ -173,7 +179,7 @@ public final class GendarmeCommandBuilder {
    * @return the Command object that represents the command to launch.
    */
   public Command toCommand() throws GendarmeException {
-    List<File> assemblyToScanFiles = findAssembliesToScan();
+    Collection<File> assemblyToScanFiles = findAssembliesToScan();
     validate(assemblyToScanFiles);
 
     LOG.debug("- Gendarme program    : " + gendarmeExecutable);
@@ -229,23 +235,20 @@ public final class GendarmeCommandBuilder {
     }
   }
 
-  protected List<File> findAssembliesToScan() {
-    List<File> assemblyFileList = Lists.newArrayList();
-    if (vsProject != null) {
-      addProjectAssembly(assemblyFileList, vsProject);
-    } else if (solution != null) {
-      for (VisualStudioProject visualStudioProject : solution.getProjects()) {
-        if ( !visualStudioProject.isTest()) {
-          addProjectAssembly(assemblyFileList, visualStudioProject);
-        }
-      }
+  private Collection<File> findAssembliesToScan() {
+    final Collection<File> assemblyFiles;
+    if (assembliesToScan.length == 0) {
+      LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
+      assemblyFiles = Lists.newArrayList();
+      addProjectAssembly(assemblyFiles, vsProject);
     } else {
-      throw new IllegalStateException("No .NET solution or project has been given to the Gendarme command builder.");
+      // Some assemblies have been specified: let's analyze them
+      assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
     }
-    return assemblyFileList;
+    return assemblyFiles;
   }
 
-  protected void addProjectAssembly(List<File> assemblyFileList, VisualStudioProject visualStudioProject) {
+  private void addProjectAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     Set<File> assemblies = visualStudioProject.getGeneratedAssemblies(buildConfigurations);
     for (File assembly : assemblies) {
       if (assembly != null && assembly.isFile()) {
@@ -254,8 +257,10 @@ public final class GendarmeCommandBuilder {
       }
     }
   }
+  
+  
 
-  protected void validate(List<File> assemblyToScanFiles) {
+  protected void validate(Collection<File> assemblyToScanFiles) {
     if (gendarmeConfigFile == null || !gendarmeConfigFile.exists()) {
       throw new IllegalStateException("The Gendarme configuration file does not exist.");
     }

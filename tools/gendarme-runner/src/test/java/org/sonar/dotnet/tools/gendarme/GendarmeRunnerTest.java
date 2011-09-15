@@ -60,16 +60,8 @@ public class GendarmeRunnerTest {
   }
 
   @Test
-  public void testCreateCommandBuilderForSolution() throws Exception {
-    GendarmeCommandBuilder builder = runner.createCommandBuilder(solution);
-    builder.setConfigFile(TestUtils.getResource("/runner/FakeGendarmeConfigFile.xml"));
-    builder.setReportFile(new File("gendarme-report.xml"));
-    assertThat(builder.toCommand().getExecutable(), is(fakeExecPath));
-  }
-
-  @Test
   public void testCreateCommandBuilderForProject() throws Exception {
-    GendarmeCommandBuilder builder = runner.createCommandBuilder(vsProject);
+    GendarmeCommandBuilder builder = runner.createCommandBuilder(solution, vsProject);
     builder.setConfigFile(TestUtils.getResource("/runner/FakeGendarmeConfigFile.xml"));
     builder.setReportFile(new File("gendarme-report.xml"));
     assertThat(builder.toCommand().getExecutable(), is(fakeExecPath));
@@ -78,7 +70,7 @@ public class GendarmeRunnerTest {
   @Test
   public void testDeleteSilverlightFile() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);
-    GendarmeCommandBuilder builder = runner.createCommandBuilder(vsProject);
+    GendarmeCommandBuilder builder = runner.createCommandBuilder(solution, vsProject);
     builder.setConfigFile(TestUtils.getResource("/runner/FakeGendarmeConfigFile.xml"));
     builder.setReportFile(new File("gendarme-report.xml"));
     builder.setSilverlightFolder(TestUtils.getResource("/runner/SilverlightFolder"));

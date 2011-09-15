@@ -94,28 +94,17 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
    * 
    * @param solution
    *          the solution to analyse
-   * @return the command to complete.
-   */
-  public GendarmeCommandBuilder createCommandBuilder(VisualStudioSolution solution) {
-    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(solution);
-    builder.setExecutable(gendarmeExecutable);
-    return builder;
-  }
-
-  /**
-   * Creates a pre-configured {@link GendarmeCommandBuilder} that needs to be completed before running the
-   * {@link #execute(GendarmeCommandBuilder, int)} method.
-   * 
    * @param project
    *          the VS project to analyse
    * @return the command to complete.
    */
-  public GendarmeCommandBuilder createCommandBuilder(VisualStudioProject project) {
+  public GendarmeCommandBuilder createCommandBuilder(VisualStudioSolution solution, VisualStudioProject project) {
     this.vsProject = project;
-    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(project);
+    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(solution, project);
     builder.setExecutable(gendarmeExecutable);
     return builder;
   }
+
 
   /**
    * Executes the given Gendarme command.
