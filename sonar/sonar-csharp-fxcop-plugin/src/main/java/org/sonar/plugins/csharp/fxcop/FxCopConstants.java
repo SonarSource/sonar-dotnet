@@ -38,7 +38,7 @@ public final class FxCopConstants {
   public static final String INSTALL_DIR_KEY = "sonar.fxcop.installDirectory";
   public static final String INSTALL_DIR_DEFVALUE = "C:/Program Files/Microsoft FxCop 10.0";
 
-  public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.fxcop.assemblies";
+  public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.dotnet.assemblies";
 
   public static final String ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY = "sonar.fxcop.assemblyDependencyDirectories";
 

@@ -35,6 +35,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
 import org.sonar.dotnet.tools.fxcop.FxCopException;
 import org.sonar.dotnet.tools.fxcop.FxCopRunner;
@@ -83,6 +84,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
+    
     boolean skipMode = FxCopConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
     if (skipMode) {
       LOG.info("FxCop plugin won't execute as it is set to 'skip' mode.");
@@ -135,11 +137,12 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
   }
 
   protected void launchFxCop(Project project, FxCopRunner runner, File fxCopConfigFile) throws FxCopException {
+    VisualStudioSolution vsSolution = getVSSolution();
     VisualStudioProject vsProject = getVSProject(project);
-    FxCopCommandBuilder builder = runner.createCommandBuilder(vsProject);
+    FxCopCommandBuilder builder = runner.createCommandBuilder(vsSolution, vsProject);
     builder.setConfigFile(fxCopConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), FxCopConstants.FXCOP_REPORT_XML));
-    builder.setAssembliesToScan(configuration.getStringArray(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY));
+    builder.setAssembliesToScan(configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY));
     builder.setAssemblyDependencyDirectories(configuration.getStringArray(FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY));
     builder.setIgnoreGeneratedCode(configuration.getBoolean(FxCopConstants.IGNORE_GENERATED_CODE_KEY,
         FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE));
@@ -157,7 +160,11 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
       File targetDir = fileSystem.getBuildDir();
       String[] reportsPath = configuration.getStringArray(FxCopConstants.REPORTS_PATH_KEY);
       for (int i = 0; i < reportsPath.length; i++) {
-        reportFiles.add(new File(targetDir, reportsPath[i]));
+        File reportFile = new File(reportsPath[i]);
+        if (!reportFile.isAbsolute()) {
+          reportFile = new File(targetDir, reportsPath[i]);
+        }
+        reportFiles.add(reportFile);
       }
       if (reportFiles.isEmpty()) {
         LOG.warn("No report to analyse whereas FxCop runs in 'reuseReport' mode. Please specify at least on report to analyse.");

@@ -25,15 +25,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -92,6 +85,7 @@ public class FxCopSensorTest {
 
   @Test
   public void testExecuteWithoutRule() throws Exception {
+	 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
     FxCopSensor sensor = new FxCopSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
@@ -108,8 +102,8 @@ public class FxCopSensorTest {
         microsoftWindowsEnvironment);
 
     FxCopRunner runner = mock(FxCopRunner.class);
-    when(runner.createCommandBuilder(any(VisualStudioProject.class))).thenReturn(
-        FxCopCommandBuilder.createBuilder(vsProject1).setExecutable(new File("FxCopCmd.exe")));
+    when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(
+        FxCopCommandBuilder.createBuilder(null, vsProject1).setExecutable(new File("FxCopCmd.exe")));
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
@@ -132,6 +126,21 @@ public class FxCopSensorTest {
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
+  @Test
+  public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
+    FxCopSensor sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Sensor"));
+    when(vsProject1.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
+    
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("cs");
+   
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }  
+  
   @Test
   public void testAnalyseResults() throws Exception {
     FxCopResultParser parser = mock(FxCopResultParser.class);
