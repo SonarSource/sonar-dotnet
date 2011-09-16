@@ -39,6 +39,9 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 /**
  * Helper class to easily find files using ant style patterns, relative or absolute paths.
+ * $(SolutionDir) can be used to specify the folder where the cisual studio sln file is located.
+ * "../" can be used to climb in the folder tree.
+ * Absolute and relative paths are both supported.
  * 
  * @author Alexandre Victoor
  * 
@@ -51,9 +54,9 @@ public class FileFinder {
    * Find files that match the given patterns
    * 
    * @param currentSolution
-   *          The VS solution being analysed by sonar
+   *          The VS solution being analyzed by sonar
    * @param currentProject
-   *          The VS project being analysed
+   *          The VS project being analyzed
    * @param patterns
    *          A list of paths or ant style patterns delimited by a comma or a semi-comma
    * @return The files found on the filesystem
@@ -67,9 +70,9 @@ public class FileFinder {
    * Find directories that match the given patterns
    * 
    * @param currentSolution
-   *          The VS solution being analysed by sonar
+   *          The VS solution being analyzed by sonar
    * @param currentProject
-   *          The VS project being analysed
+   *          The VS project being analyzed
    * @param patternArray
    *          A list of paths or ant style patterns
    * @return The directories found on the filesystem
@@ -90,9 +93,9 @@ public class FileFinder {
    * Find files that match the given patterns
    * 
    * @param currentSolution
-   *          The VS solution being analysed by sonar
+   *          The VS solution being analyzed by sonar
    * @param currentProject
-   *          The VS project being analysed
+   *          The VS project being analyzed
    * @param patternArray
    *          A list of paths or ant style patterns
    * @return The files found on the filesystem
@@ -144,14 +147,21 @@ public class FileFinder {
     return result;
   }
   
-  private static File browse(File workDir, String path) {
+  public static File browse(File workDir, String path) {
     if (StringUtils.isEmpty(path)) {
       return workDir;
     }
-    File file = new File(workDir, path);
-    if (!file.exists()) {
-      file = new File(path);
+    File file = new File(path);
+    if (!file.exists() || !file.isAbsolute()) {
+      File currentWorkDir = workDir;
+      String currentPath = path;
+      while (StringUtils.startsWith(currentPath, "../")) {
+        currentWorkDir = currentWorkDir.getParentFile();
+        currentPath = StringUtils.substringAfter(currentPath, "../");
+      }
+      file = new File(currentWorkDir, currentPath);
     }
+    
     return file;
   }
 
