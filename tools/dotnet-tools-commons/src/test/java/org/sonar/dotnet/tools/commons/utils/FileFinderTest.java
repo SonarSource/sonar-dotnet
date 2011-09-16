@@ -138,5 +138,15 @@ public class FileFinderTest {
       assertTrue(file.exists());
     }
   }
+  
+  @Test
+  public void testPatternWithSubstitutionOutsideSolution() {
+    Collection<File> result = 
+      FileFinder.findFiles(solution, project, "$(SolutionDir)/../BlankSilverlightSolution/**/*Info.cs");
+    assertEquals(2, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("AssemblyInfo.cs", csFile.getName());
+  }
 
 }
