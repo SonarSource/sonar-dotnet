@@ -132,45 +132,6 @@ public class GendarmeSensorTest {
   }
 
   @Test
-  public void testAnalyseResults() throws Exception {
-    GendarmeResultParser parser = mock(GendarmeResultParser.class);
-    GendarmeSensor sensor = new GendarmeSensor(null, null, null, parser, new CSharpConfiguration(new BaseConfiguration()),
-        microsoftWindowsEnvironment);
-
-    File tempFile = File.createTempFile("foo", null);
-    List<File> reports = Lists.newArrayList(tempFile, new File("bar"));
-    sensor.analyseResults(reports);
-    tempFile.delete();
-    verify(parser).parse(tempFile);
-  }
-
-  @Test
-  public void testGetReportFilesList() throws Exception {
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File("target/sonar"));
-    Configuration conf = new BaseConfiguration();
-    GendarmeSensor sensor = new GendarmeSensor(fileSystem, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
-    Collection<File> reportFiles = sensor.getReportFilesList();
-    assertThat(reportFiles.size(), is(1));
-    assertThat(reportFiles, hasItems(new File("target/sonar", GendarmeConstants.GENDARME_REPORT_XML)));
-  }
-
-  @Test
-  public void testGetReportFilesListInReuseMode() throws Exception {
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getBuildDir()).thenReturn(new File("target"));
-    Configuration conf = new BaseConfiguration();
-    conf.addProperty(GendarmeConstants.MODE, GendarmeConstants.MODE_REUSE_REPORT);
-    conf.addProperty(GendarmeConstants.REPORTS_PATH_KEY, "foo.xml,folder/bar.xml");
-    GendarmeSensor sensor = new GendarmeSensor(fileSystem, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
-    Collection<File> reportFiles = sensor.getReportFilesList();
-    assertThat(reportFiles.size(), is(2));
-    assertThat(reportFiles, hasItems(new File("target/foo.xml"), new File("target/folder/bar.xml")));
-  }
-
-  @Test
   public void testGenerateConfigurationFile() throws Exception {
     File sonarDir = new File("target/sonar");
     sonarDir.mkdirs();
