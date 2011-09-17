@@ -23,7 +23,6 @@ package org.sonar.plugins.csharp.fxcop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -34,6 +33,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
@@ -45,7 +45,6 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
-import com.google.common.collect.Lists;
 
 /**
  * Collects the FXCop reporting into sonar.
@@ -86,10 +85,11 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
   public boolean shouldExecuteOnProject(Project project) {
     
     boolean skipMode = FxCopConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
+    boolean reuseMode = FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
     if (skipMode) {
       LOG.info("FxCop plugin won't execute as it is set to 'skip' mode.");
     }
-    return super.shouldExecuteOnProject(project) && !skipMode;
+    return reuseMode || (super.shouldExecuteOnProject(project) && !skipMode);
   }
 
   /**
@@ -102,8 +102,13 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     }
 
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
-
-    if ( !FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    final File reportFile;
+    File sonarDir = fileSystem.getSonarWorkingDirectory();
+    if (FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+      String reportPath 
+        = configuration.getString(FxCopConstants.REPORTS_PATH_KEY, FxCopConstants.FXCOP_REPORT_XML);
+      reportFile = FileFinder.browse(sonarDir, reportPath);
+    } else {
       // prepare config file for FxCop
       File fxCopConfigFile = generateConfigurationFile();
       // and run FxCop
@@ -114,11 +119,11 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
       } catch (FxCopException e) {
         throw new SonarException("FxCop execution failed.", e);
       }
+      reportFile = new File(sonarDir, FxCopConstants.FXCOP_REPORT_XML);
     }
 
     // and analyse results
-    Collection<File> reportFiles = getReportFilesList();
-    analyseResults(reportFiles);
+    analyseResults(reportFile);
   }
 
   protected File generateConfigurationFile() {
@@ -154,36 +159,12 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     runner.execute(builder, timeout);
   }
 
-  protected Collection<File> getReportFilesList() {
-    Collection<File> reportFiles = Lists.newArrayList();
-    if (FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      File targetDir = fileSystem.getBuildDir();
-      String[] reportsPath = configuration.getStringArray(FxCopConstants.REPORTS_PATH_KEY);
-      for (int i = 0; i < reportsPath.length; i++) {
-        File reportFile = new File(reportsPath[i]);
-        if (!reportFile.isAbsolute()) {
-          reportFile = new File(targetDir, reportsPath[i]);
-        }
-        reportFiles.add(reportFile);
-      }
-      if (reportFiles.isEmpty()) {
-        LOG.warn("No report to analyse whereas FxCop runs in 'reuseReport' mode. Please specify at least on report to analyse.");
-      }
+  private void analyseResults(File reportFile) {
+    if (reportFile.exists()) {
+      LOG.debug("FxCop report found at location {}", reportFile);
+      fxCopResultParser.parse(reportFile);
     } else {
-      File sonarDir = fileSystem.getSonarWorkingDirectory();
-      reportFiles.add(new File(sonarDir, FxCopConstants.FXCOP_REPORT_XML));
-    }
-    return reportFiles;
-  }
-
-  protected void analyseResults(Collection<File> reportFiles) {
-    for (File reportFile : reportFiles) {
-      if (reportFile.exists()) {
-        LOG.debug("FxCop report found at location {}", reportFile);
-        fxCopResultParser.parse(reportFile);
-      } else {
-        LOG.warn("No FxCop report found for path {}", reportFile);
-      }
+      LOG.warn("No FxCop report found for path {}", reportFile);
     }
   }
 
