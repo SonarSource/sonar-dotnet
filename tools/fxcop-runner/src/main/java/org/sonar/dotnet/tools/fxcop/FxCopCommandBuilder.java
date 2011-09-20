@@ -248,8 +248,7 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
   }
 
   private boolean isSilverlightUsed() {
-    boolean isSilverlightUsed = vsProject.isSilverlightProject();
-    return isSilverlightUsed;
+    return vsProject.isSilverlightProject();
   }
 
   private Collection<File> findAssembliesToScan() {

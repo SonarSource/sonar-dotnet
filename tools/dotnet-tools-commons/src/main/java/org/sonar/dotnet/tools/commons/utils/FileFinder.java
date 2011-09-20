@@ -46,10 +46,15 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
  * @author Alexandre Victoor
  * 
  */
-public class FileFinder {
+public final class FileFinder {
 
+  private static final String PARENT_DIRECTORY_PATH_PREFIX = "../";
   private static final Logger LOG = LoggerFactory.getLogger(FileFinder.class);
 
+  
+  private FileFinder() {
+  }
+  
   /**
    * Find files that match the given patterns
    * 
@@ -115,9 +120,9 @@ public class FileFinder {
         workDir = currentSolution.getSolutionDir();
         currentPattern = StringUtils.substringAfter(currentPattern, "$(SolutionDir)/");
       }
-      while (StringUtils.startsWith(currentPattern, "../")) {
+      while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY_PATH_PREFIX)) {
         workDir = workDir.getParentFile();
-        currentPattern = StringUtils.substringAfter(currentPattern, "../");
+        currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY_PATH_PREFIX);
       }
       if (StringUtils.contains(currentPattern,'*')) {
         String prefix = StringUtils.substringBefore(currentPattern, "*");
@@ -155,9 +160,9 @@ public class FileFinder {
     if (!file.exists() || !file.isAbsolute()) {
       File currentWorkDir = workDir;
       String currentPath = path;
-      while (StringUtils.startsWith(currentPath, "../")) {
+      while (StringUtils.startsWith(currentPath, PARENT_DIRECTORY_PATH_PREFIX)) {
         currentWorkDir = currentWorkDir.getParentFile();
-        currentPath = StringUtils.substringAfter(currentPath, "../");
+        currentPath = StringUtils.substringAfter(currentPath, PARENT_DIRECTORY_PATH_PREFIX);
       }
       file = new File(currentWorkDir, currentPath);
     }
