@@ -79,8 +79,8 @@ public class CoverageReportSensorTest {
     CoverageReportSensor sensor = buildSensor();
     
     microsoftWindowsEnvironment.setTestExecutionDone();
-    microsoftWindowsEnvironment.setWorkingDirectory(".");
     File solutionDir = TestUtils.getResource("/Results/coverage/");
+    microsoftWindowsEnvironment.setWorkingDirectory(solutionDir.getAbsolutePath());
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
     
