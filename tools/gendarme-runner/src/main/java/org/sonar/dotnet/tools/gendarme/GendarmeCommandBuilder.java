@@ -109,7 +109,8 @@ public final class GendarmeCommandBuilder {
   }
 
   /**
-   * Sets the Silverlight folder
+   * Sets the Silverlight folder where is located the
+   * Silverlight version of mscorlib.
    * 
    * @param silverlightFolder
    *          the Silverlight folder
