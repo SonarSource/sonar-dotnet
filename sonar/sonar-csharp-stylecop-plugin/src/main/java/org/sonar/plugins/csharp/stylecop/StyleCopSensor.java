@@ -152,28 +152,6 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     return configFile;
   }
 
-  protected Collection<File> getReportFilesList() {
-    Collection<File> reportFiles = Lists.newArrayList();
-    if (StyleCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      File targetDir = fileSystem.getBuildDir();
-      String[] reportsPath = configuration.getStringArray(StyleCopConstants.REPORTS_PATH_KEY);
-      for (int i = 0; i < reportsPath.length; i++) {
-        File reportFile = new File(reportsPath[i]);
-        if (!reportFile.isAbsolute()) {
-          reportFile = new File(targetDir, reportsPath[i]);
-        }
-        reportFiles.add(reportFile);
-      }
-      if (reportFiles.isEmpty()) {
-        LOG.warn("No report to analyse whereas StyleCop runs in 'reuseReport' mode. Please specify at least on report to analyse.");
-      }
-    } else {
-      File sonarDir = fileSystem.getSonarWorkingDirectory();
-      reportFiles.add(new File(sonarDir, StyleCopConstants.STYLECOP_REPORT_XML));
-    }
-    return reportFiles;
-  }
-  
   private void analyseResults(File reportFile) {
     if (reportFile.exists()) {
       LOG.debug("StyleCop report found at location {}", reportFile);

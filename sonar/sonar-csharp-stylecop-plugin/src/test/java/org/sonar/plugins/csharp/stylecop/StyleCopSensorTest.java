@@ -80,32 +80,6 @@ public class StyleCopSensorTest {
   }
 
   @Test
-  public void testGetReportFilesList() throws Exception {
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File("target/sonar"));
-    Configuration conf = new BaseConfiguration();
-    StyleCopSensor sensor = new StyleCopSensor(fileSystem, null, null, null, new CSharpConfiguration(conf), null);
-
-    Collection<File> reportFiles = sensor.getReportFilesList();
-    assertThat(reportFiles.size(), is(1));
-    assertThat(reportFiles, hasItems(new File("target/sonar", StyleCopConstants.STYLECOP_REPORT_XML)));
-  }
-
-  @Test
-  public void testGetReportFilesListInReuseMode() throws Exception {
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getBuildDir()).thenReturn(new File("target"));
-    Configuration conf = new BaseConfiguration();
-    conf.addProperty(StyleCopConstants.MODE, StyleCopConstants.MODE_REUSE_REPORT);
-    conf.addProperty(StyleCopConstants.REPORTS_PATH_KEY, "foo.xml,folder/bar.xml");
-    StyleCopSensor sensor = new StyleCopSensor(fileSystem, null, null, null, new CSharpConfiguration(conf), null);
-
-    Collection<File> reportFiles = sensor.getReportFilesList();
-    assertThat(reportFiles.size(), is(2));
-    assertThat(reportFiles, hasItems(new File("target/foo.xml"), new File("target/folder/bar.xml")));
-  }
-
-  @Test
   public void testGenerateConfigurationFile() throws Exception {
     File sonarDir = new File("target/sonar");
     sonarDir.mkdirs();
