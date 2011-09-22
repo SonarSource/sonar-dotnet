@@ -39,7 +39,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 /**
  * Helper class to easily find files using ant style patterns, relative or absolute paths.
- * $(SolutionDir) can be used to specify the folder where the cisual studio sln file is located.
+ * $(SolutionDir) can be used to specify the folder where the visual studio sln file is located.
  * "../" can be used to climb in the folder tree.
  * Absolute and relative paths are both supported.
  * 
@@ -48,7 +48,8 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
  */
 public final class FileFinder {
 
-  private static final String PARENT_DIRECTORY_PATH_PREFIX = "../";
+  private static final String SOLUTION_DIR_KEY = "$(SolutionDir)/";
+  private static final String PARENT_DIRECTORY = "../";
   private static final Logger LOG = LoggerFactory.getLogger(FileFinder.class);
 
   
@@ -114,15 +115,15 @@ public final class FileFinder {
 
     Set<File> result = new HashSet<File>();
     for (String pattern : patternArray) {
-      String currentPattern = StringUtils.replaceChars(pattern, '\\', '/');
+      String currentPattern = convertSlash(pattern);
       File workDir = currentProject.getDirectory();
-      if (StringUtils.startsWith(pattern, "$(SolutionDir)/")) {
+      if (StringUtils.startsWith(pattern, SOLUTION_DIR_KEY)) {
         workDir = currentSolution.getSolutionDir();
-        currentPattern = StringUtils.substringAfter(currentPattern, "$(SolutionDir)/");
+        currentPattern = StringUtils.substringAfter(currentPattern, SOLUTION_DIR_KEY);
       }
-      while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY_PATH_PREFIX)) {
+      while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY)) {
         workDir = workDir.getParentFile();
-        currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY_PATH_PREFIX);
+        currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY);
       }
       if (StringUtils.contains(currentPattern,'*')) {
         String prefix = StringUtils.substringBefore(currentPattern, "*");
@@ -160,9 +161,9 @@ public final class FileFinder {
     if (!file.exists() || !file.isAbsolute()) {
       File currentWorkDir = workDir;
       String currentPath = path;
-      while (StringUtils.startsWith(currentPath, PARENT_DIRECTORY_PATH_PREFIX)) {
+      while (StringUtils.startsWith(currentPath, PARENT_DIRECTORY)) {
         currentWorkDir = currentWorkDir.getParentFile();
-        currentPath = StringUtils.substringAfter(currentPath, PARENT_DIRECTORY_PATH_PREFIX);
+        currentPath = StringUtils.substringAfter(currentPath, PARENT_DIRECTORY);
       }
       file = new File(currentWorkDir, currentPath);
     }
@@ -184,6 +185,10 @@ public final class FileFinder {
       listFiles(files, subDirectory, filter);
     }
   }
+  
+  private static String convertSlash(String path) {
+    return StringUtils.replaceChars(path, '\\', '/');
+  }
 
   private static class PatternFilter implements IOFileFilter {
 
@@ -191,14 +196,14 @@ public final class FileFinder {
 
     public PatternFilter(File workDir, String pattern) {
       String absolutePathPattern = workDir.getAbsolutePath() + "/" + pattern;
-      absolutePathPattern = StringUtils.replaceChars(absolutePathPattern, '\\', '/');
+      absolutePathPattern = convertSlash(absolutePathPattern);
       this.pattern = WildcardPattern.create(absolutePathPattern);
     }
 
     public boolean accept(File paramFile) {
       String absolutePath = paramFile.getAbsolutePath();
       final String path = absolutePath;
-      return pattern.match(StringUtils.replaceChars(path, '\\', '/'));
+      return pattern.match(convertSlash(path));
     }
 
     public boolean accept(File dir, String name) {
