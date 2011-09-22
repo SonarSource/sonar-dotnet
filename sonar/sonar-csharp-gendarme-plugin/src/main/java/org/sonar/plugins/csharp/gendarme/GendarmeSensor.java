@@ -104,8 +104,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     final File reportFile;
     File sonarDir = fileSystem.getSonarWorkingDirectory();
     if (GendarmeConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath 
-        = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, GendarmeConstants.GENDARME_REPORT_XML);
+      String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, GendarmeConstants.GENDARME_REPORT_XML);
       reportFile = FileFinder.browse(sonarDir, reportPath);
     } else {
       // prepare config file for Gendarme
@@ -116,9 +115,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
             .getWorkingDirectory());
         GendarmeRunner runner = GendarmeRunner.create(
             configuration.getString(GendarmeConstants.INSTALL_DIR_KEY, GendarmeConstants.INSTALL_DIR_DEFVALUE), tempDir.getAbsolutePath());
-        
-        
-        
+
         launchGendarme(project, runner, gendarmeConfigFile);
       } catch (GendarmeException e) {
         throw new SonarException("Gendarme execution failed.", e);
@@ -155,8 +152,16 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());
     builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
-    builder.setAssembliesToScan(configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY));
-    
+
+    String[] assemblies = configuration.getStringArray("sonar.gendarme.assemblies");
+    if (assemblies == null || assemblies.length == 0) {
+      assemblies = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+    } else {
+      LOG.warn("Using deprecated key 'sonar.gendarme.assemblies', you should use instead " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+    }
+
+    builder.setAssembliesToScan(assemblies);
+
     runner.execute(builder, configuration.getInt(GendarmeConstants.TIMEOUT_MINUTES_KEY, GendarmeConstants.TIMEOUT_MINUTES_DEFVALUE));
   }
 
