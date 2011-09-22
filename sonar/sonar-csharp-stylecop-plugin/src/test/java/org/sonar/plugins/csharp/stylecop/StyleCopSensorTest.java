@@ -80,18 +80,6 @@ public class StyleCopSensorTest {
   }
 
   @Test
-  public void testAnalyseResults() throws Exception {
-    StyleCopResultParser parser = mock(StyleCopResultParser.class);
-    StyleCopSensor sensor = new StyleCopSensor(null, null, null, parser, new CSharpConfiguration(new BaseConfiguration()), null);
-
-    File tempFile = File.createTempFile("foo", null);
-    List<File> reports = Lists.newArrayList(tempFile, new File("bar"));
-    sensor.analyseResults(reports);
-    tempFile.delete();
-    verify(parser).parse(tempFile);
-  }
-
-  @Test
   public void testGetReportFilesList() throws Exception {
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(new File("target/sonar"));

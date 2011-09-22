@@ -34,6 +34,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
@@ -101,8 +102,13 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     }
 
     styleCopResultParser.setEncoding(fileSystem.getSourceCharset());
+    final File reportFile;
+    File sonarDir = fileSystem.getSonarWorkingDirectory();
 
-    if ( !StyleCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (StyleCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+      String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, StyleCopConstants.STYLECOP_REPORT_XML);
+      reportFile = FileFinder.browse(sonarDir, reportPath);
+    } else {
       // prepare config file for StyleCop
       File styleCopConfigFile = generateConfigurationFile();
       // run StyleCop
@@ -116,11 +122,11 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
       } catch (StyleCopException e) {
         throw new SonarException("StyleCop execution failed.", e);
       }
+      reportFile = new File(sonarDir, StyleCopConstants.STYLECOP_REPORT_XML);
     }
 
     // and analyse results
-    Collection<File> reportFiles = getReportFilesList();
-    analyseResults(reportFiles);
+    analyseResults(reportFile);
   }
 
   protected void launchStyleCop(Project project, StyleCopRunner runner, File styleCopConfigFile) throws StyleCopException {
@@ -152,7 +158,11 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
       File targetDir = fileSystem.getBuildDir();
       String[] reportsPath = configuration.getStringArray(StyleCopConstants.REPORTS_PATH_KEY);
       for (int i = 0; i < reportsPath.length; i++) {
-        reportFiles.add(new File(targetDir, reportsPath[i]));
+        File reportFile = new File(reportsPath[i]);
+        if (!reportFile.isAbsolute()) {
+          reportFile = new File(targetDir, reportsPath[i]);
+        }
+        reportFiles.add(reportFile);
       }
       if (reportFiles.isEmpty()) {
         LOG.warn("No report to analyse whereas StyleCop runs in 'reuseReport' mode. Please specify at least on report to analyse.");
@@ -163,16 +173,13 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     }
     return reportFiles;
   }
-
-  protected void analyseResults(Collection<File> reportFiles) {
-    for (File reportFile : reportFiles) {
-      if (reportFile.exists()) {
-        LOG.debug("StyleCop report found at location {}", reportFile);
-        styleCopResultParser.parse(reportFile);
-      } else {
-        LOG.warn("No StyleCop report found for path {}", reportFile);
-      }
+  
+  private void analyseResults(File reportFile) {
+    if (reportFile.exists()) {
+      LOG.debug("StyleCop report found at location {}", reportFile);
+      styleCopResultParser.parse(reportFile);
+    } else {
+      LOG.warn("No StyleCop report found for path {}", reportFile);
     }
   }
-
 }
