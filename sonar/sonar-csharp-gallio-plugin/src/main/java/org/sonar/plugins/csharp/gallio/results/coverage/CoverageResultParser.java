@@ -107,12 +107,11 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
 
       // Then all the indexed files are extracted
       sourceFilesById = currentStrategy.findFiles(rootChildCursor);
-      
+
       if (sourceFilesById.isEmpty()) {
         // no source, ther is no point to parse further
-    	return new ParserResult(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        return new ParserResult(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
       }
-      
 
       // filter files according to the exclusion patterns
       sourceFilesById = Maps.filterValues(sourceFilesById, new Predicate<FileCoverage>() {

@@ -34,6 +34,7 @@ import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
@@ -89,20 +90,22 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    String reportPath = null;
+    
+    File workDir = new File(getMicrosoftWindowsEnvironment().getWorkingDirectory());
+    final File reportFile;
     if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
-      reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "");
-      LOG.info("Reusing Gallio coverage report: " + reportPath);
+      String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+      reportFile = FileFinder.browse(workDir, reportPath);
+      LOG.info("Reusing Gallio coverage report: " + reportFile);
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
         return;
       }
-      reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
+      reportFile = new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
     }
-
-    File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);
+     
     if ( !reportFile.isFile()) {
       LOG.warn("No Gallio coverage report file found for: " + reportFile.getAbsolutePath());
       return;
