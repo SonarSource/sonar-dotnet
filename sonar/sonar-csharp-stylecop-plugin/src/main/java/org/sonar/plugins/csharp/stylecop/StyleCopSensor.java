@@ -23,7 +23,6 @@ package org.sonar.plugins.csharp.stylecop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -43,8 +42,6 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
-
-import com.google.common.collect.Lists;
 
 /**
  * Collects the StyleCop reporting into sonar.
