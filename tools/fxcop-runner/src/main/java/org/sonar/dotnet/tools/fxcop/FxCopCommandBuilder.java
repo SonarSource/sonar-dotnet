@@ -21,37 +21,30 @@ package org.sonar.dotnet.tools.fxcop;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.CilToolCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-import com.google.common.collect.Lists;
 
 /**
  * Class used to build the command line to run FxCop.
  */
-public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked otherwise
+public class FxCopCommandBuilder extends CilToolCommandBuilderSupport { // NOSONAR Not final, because can't be mocked otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopCommandBuilder.class);
   private static final int DEFAULT_TIMEOUT = 10;
   private static final int MINUTES_TO_SECONDS = 60;
-
-  private VisualStudioSolution solution;
-  private VisualStudioProject vsProject;
-  private File fxCopExecutable;
-  private File fxCopConfigFile;
-  private File fxCopReportFile;
+  
   private File silverlightFolder;
-  private String[] assembliesToScan = new String[] {};
   private String[] assemblyDependencyDirectories = new String[] {};
   private boolean ignoreGeneratedCode;
   private int timeoutMinutes = DEFAULT_TIMEOUT;
-  private String buildConfigurations = "Debug";
+  
 
   private FxCopCommandBuilder() {
   }
@@ -61,7 +54,7 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
    * @param solution 
    *          the current VS solution
    * @param project
-   *          the VS project to analyse
+   *          the VS project to analyze
    * 
    * @return a FxCop builder for this project
    */
@@ -73,63 +66,13 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
   }
 
   /**
-   * Sets the executable
-   * 
-   * @param fxCopExecutable
-   *          the executable
-   * @return the current builder
-   */
-  public FxCopCommandBuilder setExecutable(File fxCopExecutable) {
-    this.fxCopExecutable = fxCopExecutable;
-    return this;
-  }
-
-  /**
-   * Sets FxCop configuration file that must be used to perform the analysis. It is mandatory.
-   * 
-   * @param fxCopConfigFile
-   *          the file
-   * @return the current builder
-   */
-  public FxCopCommandBuilder setConfigFile(File fxCopConfigFile) {
-    this.fxCopConfigFile = fxCopConfigFile;
-    return this;
-  }
-
-  /**
-   * Sets the report file to generate
-   * 
-   * @param reportFile
-   *          the report file
-   * @return the current builder
-   */
-  public FxCopCommandBuilder setReportFile(File reportFile) {
-    this.fxCopReportFile = reportFile;
-    return this;
-  }
-
-  /**
    * Sets the Silverlight folder
    * 
    * @param silverlightFolder
    *          the Silverlight folder
-   * @return the current builder
    */
-  public FxCopCommandBuilder setSilverlightFolder(File silverlightFolder) {
+  public void setSilverlightFolder(File silverlightFolder) {
     this.silverlightFolder = silverlightFolder;
-    return this;
-  }
-
-  /**
-   * Sets the assemblies to scan if the information should not be taken from the VS configuration files.
-   * 
-   * @param assembliesToScan
-   *          the assemblies to scan
-   * @return the current builder
-   */
-  public FxCopCommandBuilder setAssembliesToScan(String... assembliesToScan) {
-    this.assembliesToScan = assembliesToScan;
-    return this;
   }
 
   /**
@@ -137,11 +80,10 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
    * 
    * @param assemblyDependencyDirectories
    *          the folders containing the dependencies
-   * @return the current builder
+   * 
    */
-  public FxCopCommandBuilder setAssemblyDependencyDirectories(String... assemblyDependencyDirectories) {
+  public void setAssemblyDependencyDirectories(String... assemblyDependencyDirectories) {
     this.assemblyDependencyDirectories = assemblyDependencyDirectories;
-    return this;
   }
 
   /**
@@ -149,11 +91,10 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
    * 
    * @param ignoreGeneratedCode
    *          true to ignore generated code
-   * @return the current builder
+   * 
    */
-  public FxCopCommandBuilder setIgnoreGeneratedCode(boolean ignoreGeneratedCode) {
+  public void setIgnoreGeneratedCode(boolean ignoreGeneratedCode) {
     this.ignoreGeneratedCode = ignoreGeneratedCode;
-    return this;
   }
 
   /**
@@ -161,24 +102,11 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
    * 
    * @param timeout
    *          the timeout
-   * @return the current builder
    */
-  public FxCopCommandBuilder setTimeoutMinutes(int timeout) {
+  public void setTimeoutMinutes(int timeout) {
     this.timeoutMinutes = timeout;
-    return this;
   }
 
-  /**
-   * Sets the build configurations. By default, it is "Debug".
-   * 
-   * @param buildConfigurations
-   *          the build configurations
-   * @return the current builder
-   */
-  public FxCopCommandBuilder setBuildConfigurations(String buildConfigurations) {
-    this.buildConfigurations = buildConfigurations;
-    return this;
-  }
 
   /**
    * Transforms this command object into a array of string that can be passed to the CommandExecutor.
@@ -191,14 +119,14 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
       = FileFinder.findDirectories(solution, vsProject, assemblyDependencyDirectories);
     validate(assemblyToScanFiles);
 
-    LOG.debug("- FxCop program         : " + fxCopExecutable);
-    Command command = Command.create(fxCopExecutable.getAbsolutePath());
+    LOG.debug("- FxCop program         : " + executable);
+    Command command = Command.create(executable.getAbsolutePath());
 
-    LOG.debug("- Project file          : " + fxCopConfigFile);
-    command.addArgument("/p:" + fxCopConfigFile.getAbsolutePath());
+    LOG.debug("- Project file          : " + configFile);
+    command.addArgument("/p:" + configFile.getAbsolutePath());
 
-    LOG.debug("- Report file           : " + fxCopReportFile);
-    command.addArgument("/out:" + fxCopReportFile.getAbsolutePath());
+    LOG.debug("- Report file           : " + reportFile);
+    command.addArgument("/out:" + reportFile.getAbsolutePath());
 
     LOG.debug("- Scanned assemblies    :");
     for (File checkedAssembly : assemblyToScanFiles) {
@@ -249,39 +177,6 @@ public class FxCopCommandBuilder { // NOSONAR Not final, because can't be mocked
 
   private boolean isSilverlightUsed() {
     return vsProject.isSilverlightProject();
-  }
-
-  private Collection<File> findAssembliesToScan() {
-    final Collection<File> assemblyFiles;
-    if (assembliesToScan.length == 0) {
-      LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
-      assemblyFiles = Lists.newArrayList();
-      addProjectAssembly(assemblyFiles, vsProject);
-    } else {
-      // Some assemblies have been specified: let's analyze them
-      assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
-    }
-    return assemblyFiles;
-  }
-
-  private void addProjectAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
-    Set<File> assemblies = visualStudioProject.getGeneratedAssemblies(buildConfigurations);
-    for (File assembly : assemblies) {
-      if (assembly != null && assembly.isFile()) {
-        LOG.debug(" - Found {}", assembly.getAbsolutePath());
-        assemblyFileList.add(assembly);
-      }
-    }
-  }
-
-  private void validate(Collection<File> assemblyToScanFiles) {
-    if (fxCopConfigFile == null || !fxCopConfigFile.exists()) {
-      throw new IllegalStateException("The FxCop configuration file does not exist.");
-    }
-    if (assemblyToScanFiles.isEmpty()) {
-      throw new IllegalStateException(
-          "No assembly to scan. Please check your project's FxCop plugin configuration ('sonar.fxcop.assemblies' property).");
-    }
   }
 
 }

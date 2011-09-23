@@ -47,6 +47,7 @@ public class FxCopCommandBuilderTest {
   private static File silverlightFolder;
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject;
+  private FxCopCommandBuilder fxCopCommandBuilder;
 
   @BeforeClass
   public static void initStatic() throws Exception {
@@ -65,13 +66,18 @@ public class FxCopCommandBuilderTest {
     when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Runner"));
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
     when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Runner"));
+    fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject);
+    fxCopCommandBuilder.setExecutable(fakeFxCopExecutable);
+    fxCopCommandBuilder.setTimeoutMinutes(10);
+    fxCopCommandBuilder.setConfigFile(fakeFxCopConfigFile);
+    fxCopCommandBuilder.setReportFile(fakeFxCopReportFile);
+    fxCopCommandBuilder.setIgnoreGeneratedCode(true);
   }
 
   @Test
   public void testToCommandForVSProject() throws Exception {
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
 
     Command command = fxCopCommandBuilder.toCommand();
     assertThat(toUnixStyle(command.getExecutable()), endsWith("/Runner/FakeProg/FxCopCmd.exe"));
@@ -88,9 +94,8 @@ public class FxCopCommandBuilderTest {
   @Test
   public void testToCommandForWebVSProject() throws Exception {
     when(vsProject.isWebProject()).thenReturn(true);
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
 
     String[] commands = fxCopCommandBuilder.toCommand().getArguments().toArray(new String[] {});
     assertThat(commands[7], endsWith("/aspnet"));
@@ -99,9 +104,9 @@ public class FxCopCommandBuilderTest {
   @Test
   public void testToCommandForSilverlightProject() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder").setSilverlightFolder(silverlightFolder);
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+    fxCopCommandBuilder.setSilverlightFolder(silverlightFolder);
 
     String[] commands = fxCopCommandBuilder.toCommand().getArguments().toArray(new String[] {});
     assertThat(commands[4], endsWith("SilverlightFolder"));
@@ -110,9 +115,9 @@ public class FxCopCommandBuilderTest {
   @Test(expected = FxCopException.class)
   public void testToCommandForSilverlightProjectWithoutSilverlightFolder() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder").setSilverlightFolder(null);
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+    fxCopCommandBuilder.setSilverlightFolder(null);
 
     fxCopCommandBuilder.toCommand();
   }
@@ -120,19 +125,18 @@ public class FxCopCommandBuilderTest {
   @Test(expected = FxCopException.class)
   public void testToCommandForSilverlightProjectWithInexistingSilverlightFolder() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder").setSilverlightFolder(new File("Foo"));
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+    fxCopCommandBuilder.setSilverlightFolder(new File("Foo"));
 
     fxCopCommandBuilder.toCommand();
   }
 
   @Test
   public void testToCommandWithSpecifiedAssemblies() throws Exception {
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(10).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(true)
-        .setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder")
-        .setAssembliesToScan("FakeAssemblies/Fake1.assembly", "FakeAssemblies/Fake2.assembly");
+
+    fxCopCommandBuilder.setAssemblyDependencyDirectories("$(SolutionDir)/FakeDepFolder", "UnexistingFolder");
+    fxCopCommandBuilder.setAssembliesToScan("FakeAssemblies/Fake1.assembly", "FakeAssemblies/Fake2.assembly");
 
     Command command = fxCopCommandBuilder.toCommand();
     assertThat(toUnixStyle(command.getExecutable()), endsWith("/Runner/FakeProg/FxCopCmd.exe"));
@@ -149,9 +153,9 @@ public class FxCopCommandBuilderTest {
 
   @Test
   public void testToCommandWithOtherCustomParams() throws Exception {
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setTimeoutMinutes(1000).setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile).setIgnoreGeneratedCode(false)
-        .setBuildConfigurations("Debug");
+    fxCopCommandBuilder.setTimeoutMinutes(1000);
+    fxCopCommandBuilder.setIgnoreGeneratedCode(false);
+    fxCopCommandBuilder.setBuildConfigurations("Debug");
 
     Command command = fxCopCommandBuilder.toCommand();
     assertThat(toUnixStyle(command.getExecutable()), endsWith("/Runner/FakeProg/FxCopCmd.exe"));
@@ -164,22 +168,12 @@ public class FxCopCommandBuilderTest {
   }
 
   @Test(expected = IllegalStateException.class)
-  public void testToCommandWithNoConfigAndNonExistingReleseAssembly() throws Exception {
-    when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
-        Sets.newHashSet(TestUtils.getResource("/Runner/FakeAssemblies/Unexisting.assembly")));
-
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setConfigFile(fakeFxCopConfigFile).setReportFile(fakeFxCopReportFile);
-
-    fxCopCommandBuilder.toCommand();
-  }
-
-  @Test(expected = IllegalStateException.class)
   public void testToCommandWithNoConfigFile() throws Exception {
     when(vsProject.isTest()).thenReturn(true);
 
-    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject).setExecutable(fakeFxCopExecutable)
-        .setReportFile(fakeFxCopReportFile);
+    FxCopCommandBuilder fxCopCommandBuilder = FxCopCommandBuilder.createBuilder(solution, vsProject);
+    fxCopCommandBuilder.setExecutable(fakeFxCopExecutable);
+    fxCopCommandBuilder.setReportFile(fakeFxCopReportFile);
 
     fxCopCommandBuilder.toCommand();
   }
