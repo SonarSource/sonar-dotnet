@@ -22,35 +22,27 @@ package org.sonar.dotnet.tools.gendarme;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.CilToolCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-import com.google.common.collect.Lists;
 
 /**
  * Class used to build the command line to run Gendarme.
  */
-public final class GendarmeCommandBuilder {
+public final class GendarmeCommandBuilder extends CilToolCommandBuilderSupport {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeCommandBuilder.class);
 
-  private VisualStudioSolution solution;
-  private VisualStudioProject vsProject;
-  private File gendarmeExecutable;
+
   private File silverlightFolder;
   private String gendarmeConfidence = "normal+";
   private String gendarmeSeverity = "all";
-  private File gendarmeConfigFile;
-  private File gendarmeReportFile;
-  private String buildConfigurations = "Debug";
-  private String[] assembliesToScan = new String[] {};
 
   private GendarmeCommandBuilder() {
   }
@@ -59,9 +51,9 @@ public final class GendarmeCommandBuilder {
    * Constructs a {@link GendarmeCommandBuilder} object for the given Visual Studio solution.
    * 
    * @param solution
-   *          the solution to analyse
+   *          the solution to analyze
    *  @param project
-   *          the VS project to analyse
+   *          the VS project to analyze
    *          
    * @return a Gendarme builder for this solution
    */
@@ -73,52 +65,14 @@ public final class GendarmeCommandBuilder {
   }
 
   /**
-   * Sets the executable
-   * 
-   * @param gendarmeExecutable
-   *          the executable
-   * @return the current builder
-   */
-  public GendarmeCommandBuilder setExecutable(File gendarmeExecutable) {
-    this.gendarmeExecutable = gendarmeExecutable;
-    return this;
-  }
-
-  /**
-   * Sets the configuration file to use
-   * 
-   * @param gendarmeConfigFile
-   *          the config file
-   * @return the current builder
-   */
-  public GendarmeCommandBuilder setConfigFile(File gendarmeConfigFile) {
-    this.gendarmeConfigFile = gendarmeConfigFile;
-    return this;
-  }
-
-  /**
-   * Sets the report file to generate
-   * 
-   * @param reportFile
-   *          the report file
-   * @return the current builder
-   */
-  public GendarmeCommandBuilder setReportFile(File reportFile) {
-    this.gendarmeReportFile = reportFile;
-    return this;
-  }
-
-  /**
    * Sets the Silverlight folder where is located the
    * Silverlight version of mscorlib.
    * 
    * @param silverlightFolder
    *          the Silverlight folder
-   * @return the current builder
    */
-  public GendarmeCommandBuilder setSilverlightFolder(File silverlightFolder) {
+  public void setSilverlightFolder(File silverlightFolder) {
     this.silverlightFolder = silverlightFolder;
-    return this;
   }
 
   /**
@@ -128,9 +82,9 @@ public final class GendarmeCommandBuilder {
    *          the confidence level
    * @return the current builder
    */
-  public GendarmeCommandBuilder setConfidence(String gendarmeConfidence) {
+  public void setConfidence(String gendarmeConfidence) {
     this.gendarmeConfidence = gendarmeConfidence;
-    return this;
+    
   }
 
   /**
@@ -138,37 +92,12 @@ public final class GendarmeCommandBuilder {
    * 
    * @param gendarmeSeverity
    *          the severity level
-   * @return the current builder
+   * 
    */
-  public GendarmeCommandBuilder setSeverity(String gendarmeSeverity) {
+  public void setSeverity(String gendarmeSeverity) {
     this.gendarmeSeverity = gendarmeSeverity;
-    return this;
   }
 
-  /**
-   * Sets the build configurations. By default, it is "Debug".
-   * 
-   * @param buildConfigurations
-   *          the build configurations
-   * @return the current builder
-   */
-  public GendarmeCommandBuilder setBuildConfigurations(String buildConfigurations) {
-    this.buildConfigurations = buildConfigurations;
-    return this;
-  }
-  
-  /**
-   * Sets the assemblies to scan if the information should not be taken from the VS configuration files.
-   * 
-   * @param assembliesToScan
-   *          the assemblies to scan
-   * @return the current builder
-   */
-  public GendarmeCommandBuilder setAssembliesToScan(String... assembliesToScan) {
-    this.assembliesToScan = assembliesToScan;
-    return this;
-  }
-  
 
   protected String getBuildConfigurations() {
     return buildConfigurations;
@@ -183,16 +112,16 @@ public final class GendarmeCommandBuilder {
     Collection<File> assemblyToScanFiles = findAssembliesToScan();
     validate(assemblyToScanFiles);
 
-    LOG.debug("- Gendarme program    : " + gendarmeExecutable);
-    Command command = Command.create(gendarmeExecutable.getAbsolutePath());
+    LOG.debug("- Gendarme program    : " + executable);
+    Command command = Command.create(executable.getAbsolutePath());
 
-    LOG.debug("- Config file         : " + gendarmeConfigFile);
+    LOG.debug("- Config file         : " + configFile);
     command.addArgument("--config");
-    command.addArgument(gendarmeConfigFile.getAbsolutePath());
+    command.addArgument(configFile.getAbsolutePath());
 
-    LOG.debug("- Report file         : " + gendarmeReportFile);
+    LOG.debug("- Report file         : " + reportFile);
     command.addArgument("--xml");
-    command.addArgument(gendarmeReportFile.getAbsolutePath());
+    command.addArgument(reportFile.getAbsolutePath());
 
     LOG.debug("- Quiet output");
     command.addArgument("--quiet");
@@ -235,38 +164,5 @@ public final class GendarmeCommandBuilder {
       throw new GendarmeException("Cannot copy Silverlight 'mscorlib.dll' file to " + destinationDirectory, e);
     }
   }
-
-  private Collection<File> findAssembliesToScan() {
-    final Collection<File> assemblyFiles;
-    if (assembliesToScan.length == 0) {
-      LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
-      assemblyFiles = Lists.newArrayList();
-      addProjectAssembly(assemblyFiles, vsProject);
-    } else {
-      // Some assemblies have been specified: let's analyze them
-      assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
-    }
-    return assemblyFiles;
-  }
-
-  private void addProjectAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
-    Set<File> assemblies = visualStudioProject.getGeneratedAssemblies(buildConfigurations);
-    for (File assembly : assemblies) {
-      if (assembly != null && assembly.isFile()) {
-        LOG.debug(" - Found {}", assembly.getAbsolutePath());
-        assemblyFileList.add(assembly);
-      }
-    }
-  }
   
-  
-
-  protected void validate(Collection<File> assemblyToScanFiles) {
-    if (gendarmeConfigFile == null || !gendarmeConfigFile.exists()) {
-      throw new IllegalStateException("The Gendarme configuration file does not exist.");
-    }
-    if (assemblyToScanFiles.isEmpty()) {
-      throw new IllegalStateException("No assembly to scan. Please check your project's Gendarme plugin configuration.");
-    }
-  }
 }
