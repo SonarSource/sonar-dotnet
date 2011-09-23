@@ -107,8 +107,9 @@ public class GendarmeSensorTest {
         microsoftWindowsEnvironment);
 
     GendarmeRunner runner = mock(GendarmeRunner.class);
-    when(runner.createCommandBuilder(solution, vsProject)).thenReturn(
-        GendarmeCommandBuilder.createBuilder(solution, vsProject).setExecutable(new File("gendarme.exe")));
+    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(solution, vsProject);
+    builder.setExecutable(new File("gendarme.exe"));
+    when(runner.createCommandBuilder(solution, vsProject)).thenReturn(builder);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
