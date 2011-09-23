@@ -102,8 +102,9 @@ public class FxCopSensorTest {
         microsoftWindowsEnvironment);
 
     FxCopRunner runner = mock(FxCopRunner.class);
-    when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(
-        FxCopCommandBuilder.createBuilder(null, vsProject1).setExecutable(new File("FxCopCmd.exe")));
+    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
+    builder.setExecutable(new File("FxCopCmd.exe"));
+    when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
