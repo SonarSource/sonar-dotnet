@@ -82,6 +82,7 @@ public class CSharpCorePlugin extends SonarPlugin {
     // Project Builder for .NET projects
     extensions.add(VisualStudioProjectBuilder.class);
     extensions.add(MicrosoftWindowsEnvironment.class);
+    extensions.add(CSharpProjectInitializer.class);
 
     // Utility class shared amongst all the C# plugin ecosystem through API
     extensions.add(CSharpResourcesBridge.class);

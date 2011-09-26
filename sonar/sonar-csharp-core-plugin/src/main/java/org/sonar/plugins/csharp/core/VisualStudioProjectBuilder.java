@@ -95,7 +95,6 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     LOG.debug("- Root Project: {}", root.getName());
     String workDir = root.getWorkDir().getAbsolutePath().substring(root.getBaseDir().getAbsolutePath().length() + 1);
     microsoftWindowsEnvironment.setWorkingDirectory(workDir);
-    Properties rootProps = enhanceRootProperties(root);
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
       String projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
@@ -104,9 +103,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
             + "'). Please set a unique 'sonar.projectKey' for the solution.");
       }
 
-      ProjectDefinition subProject = ProjectDefinition.create((Properties) rootProps.clone()).setBaseDir(vsProject.getDirectory())
-          .setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey).setVersion(root.getVersion())
-          .setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
+      ProjectDefinition subProject = ProjectDefinition.create((Properties) root.getProperties().clone())
+          .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
+          .setVersion(root.getVersion()).setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
 
       if (vsProject.isTest()) {
         subProject.setTestDirs(".");
@@ -123,26 +122,6 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       LOG.debug("  - Adding Sub Project => {}", subProject.getName());
       root.addSubProject(subProject);
     }
-  }
-
-  protected Properties enhanceRootProperties(ProjectDefinition root) {
-    Properties props = root.getProperties();
-    // Handling encoding
-    if (StringUtils.isBlank(props.getProperty("sonar.sourceEncoding"))) {
-      LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
-      props.setProperty("sonar.sourceEncoding", "UTF-8");
-    }
-    // Handling exclusions
-    if (configuration.getBoolean(CSharpConstants.EXCLUDE_GENERATED_CODE_KEY, CSharpConstants.EXCLUDE_GENERATED_CODE_DEFVALUE)) {
-      String exclusions = props.getProperty("sonar.exclusions", "");
-      StringBuilder newExclusions = new StringBuilder(exclusions);
-      if ( !StringUtils.isEmpty(exclusions)) {
-        newExclusions.append(",");
-      }
-      newExclusions.append(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE);
-      props.setProperty("sonar.exclusions", newExclusions.toString());
-    }
-    return props;
   }
 
   private void retrieveMicrosoftWindowsEnvironmentConfig() {

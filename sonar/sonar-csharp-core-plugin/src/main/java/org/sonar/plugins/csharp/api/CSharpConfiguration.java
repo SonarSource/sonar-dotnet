@@ -62,7 +62,7 @@ public class CSharpConfiguration implements BatchExtension {
     newToPreviousParamMap.put(CSharpConstants.TEST_PROJET_PATTERN_KEY, "visual.test.project.pattern");
     newToPreviousParamMap.put(CSharpConstants.SOLUTION_FILE_KEY, "visual.studio.solution");
     newToPreviousParamMap.put(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "msbuild.configurations");
-    
+
     // FxCop OLD parameters
     newToPreviousParamMap.put("sonar.fxcop.installDirectory", "fxcop.directory");
     newToPreviousParamMap.put("sonar.fxcop.mode", "sonar.dotnet.fxcop");
@@ -94,6 +94,13 @@ public class CSharpConfiguration implements BatchExtension {
   }
 
   /**
+   * @see Configuration#setProperty(String, Object)
+   */
+  public void setProperty(String key, Object value) {
+    configuration.setProperty(key, value);
+  }
+
+  /**
    * @see Configuration#getString(String, String)
    */
   public String getString(String key, String defaultValue) {
@@ -120,7 +127,7 @@ public class CSharpConfiguration implements BatchExtension {
     String previousKey = newToPreviousParamMap.get(key);
     final String[] resultArray;
     if (StringUtils.isBlank(previousKey)) {
-      // if this key wasn't used before, or if no value for was for it, 
+      // if this key wasn't used before, or if no value for was for it,
       // use the value of the current key
       String[] result = configuration.getStringArray(key);
       if (result.length == 0) {
@@ -141,10 +148,10 @@ public class CSharpConfiguration implements BatchExtension {
         resultArray = splitUsingSemiColon(result);
       }
     }
-    
+
     return resultArray;
   }
-  
+
   private String[] splitUsingSemiColon(String[] strings) {
     Collection<String> resultCollection = Lists.newArrayList();
     for (int i = 0; i < strings.length; i++) {

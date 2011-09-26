@@ -42,7 +42,7 @@ public final class CSharpConstants {
 
   public static final String CSHARP_CORE_EXECUTED = "C# Core executed";
 
-  public static final String DEFAULT_FILES_TO_EXCLUDE = "**/Reference.cs,**/*.designer.cs,**/*.Designer.cs";
+  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] { "**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs" };
 
   // ----------- Plugin Configuration Properties ----------- //
 
@@ -78,7 +78,7 @@ public final class CSharpConstants {
 
   public static final String BUILD_CONFIGURATIONS_KEY = "sonar.dotnet.buildConfigurations";
   public static final String BUILD_CONFIGURATIONS_DEFVALUE = "Debug";
-  
+
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.dotnet.assemblies";
 
   /**

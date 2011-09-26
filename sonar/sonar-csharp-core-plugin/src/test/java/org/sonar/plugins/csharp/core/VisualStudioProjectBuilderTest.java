@@ -22,7 +22,6 @@ package org.sonar.plugins.csharp.core;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -84,32 +83,6 @@ public class VisualStudioProjectBuilderTest {
     root.setKey("groupId:artifactId");
     reactor = new ProjectReactor(root);
     projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-  }
-
-  @Test
-  public void testEnhanceRootProperties() throws Exception {
-    root.getProperties().put("fake", "foo");
-    assertThat(root.getProperties().getProperty("sonar.sourceEncoding"), nullValue());
-    Properties props = projectBuilder.enhanceRootProperties(root);
-    assertThat(props.getProperty("fake"), is("foo"));
-    assertThat(props.getProperty("sonar.sourceEncoding"), is("UTF-8"));
-    assertThat(props.getProperty("sonar.exclusions"), is(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
-  }
-
-  @Test
-  public void testEnhanceRootPropertiesWithDefinedSonarExclusions() throws Exception {
-    root.getProperties().put("sonar.exclusions", "**/Foo.cs,Toto.cs");
-    Properties props = projectBuilder.enhanceRootProperties(root);
-    assertThat(props.getProperty("sonar.exclusions"), is("**/Foo.cs,Toto.cs," + CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
-  }
-
-  @Test
-  public void testEnhanceRootPropertiesWithGeneratedCodeNotExcluded() throws Exception {
-    conf.setProperty("sonar.dotnet.excludeGeneratedCode", Boolean.FALSE);
-    projectBuilder = new VisualStudioProjectBuilder(reactor, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-    root.getProperties().put("sonar.exclusions", "**/Foo.cs,Toto.cs");
-    Properties props = projectBuilder.enhanceRootProperties(root);
-    assertThat(props.getProperty("sonar.exclusions"), is("**/Foo.cs,Toto.cs"));
   }
 
   @Test(expected = SonarException.class)
