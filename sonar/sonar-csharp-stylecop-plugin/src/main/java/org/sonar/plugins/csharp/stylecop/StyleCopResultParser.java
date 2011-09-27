@@ -123,6 +123,8 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
       violation.setMessage(violationsCursor.collectDescendantText().trim());
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
+    } else {
+      LOG.debug("Violation could not be saved, associated resource not indexed " + sonarFile);
     }
   }
 
