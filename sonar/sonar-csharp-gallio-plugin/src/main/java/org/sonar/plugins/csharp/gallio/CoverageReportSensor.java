@@ -91,7 +91,8 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   @Override
   public void analyse(Project project, SensorContext context) {
     
-    File workDir = new File(getMicrosoftWindowsEnvironment().getWorkingDirectory());
+    final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
+        .getWorkingDirectory());
     final File reportFile;
     if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
       String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
