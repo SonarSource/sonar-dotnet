@@ -27,6 +27,7 @@ import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
+import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 
 /**
  * C# Gallio plugin class.
@@ -74,6 +75,7 @@ public class GallioPlugin extends SonarPlugin {
 
     // Parser(s)
     extensions.add(CoverageResultParser.class);
+    extensions.add(GallioResultParser.class);
     
     // Sensors
     extensions.add(GallioSensor.class);

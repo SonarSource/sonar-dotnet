@@ -34,6 +34,7 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.ParsingUtils;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
@@ -52,6 +53,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
 
   private CSharpConfiguration configuration;
   private String executionMode;
+  private GallioResultParser parser;
 
   /**
    * Constructs a {@link TestReportSensor}.
@@ -60,10 +62,11 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, GallioResultParser parser) {
     super(microsoftWindowsEnvironment);
     this.configuration = configuration;
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    this.parser = parser;
   }
 
   /**
@@ -80,9 +83,13 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    String reportPath = null;
+    
+    final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
+        .getWorkingDirectory());
+    final File reportFile;
     if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
-      reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, "");
+      String reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, GallioConstants.GALLIO_REPORT_XML);
+      reportFile = FileFinder.browse(workDir, reportPath);
       LOG.info("Reusing Gallio report: " + reportPath);
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
@@ -90,10 +97,9 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
         LOG.info("Test report analysis won't execute as Gallio was not executed.");
         return;
       }
-      reportPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML;
+      reportFile = new File(workDir, GallioConstants.GALLIO_REPORT_XML);
     }
 
-    File reportFile = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), reportPath);
     if ( !reportFile.isFile()) {
       LOG.warn("No Gallio report file found for: " + reportFile.getAbsolutePath());
       context.saveMeasure(CoreMetrics.TESTS, 0.0);
@@ -104,7 +110,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   }
 
   private void collect(Project project, File report, SensorContext context) {
-    GallioResultParser parser = new GallioResultParser();
     Collection<UnitTestReport> reports = parser.parse(report);
     if (LOG.isDebugEnabled()) {
       LOG.debug("Found " + reports.size() + " test data");

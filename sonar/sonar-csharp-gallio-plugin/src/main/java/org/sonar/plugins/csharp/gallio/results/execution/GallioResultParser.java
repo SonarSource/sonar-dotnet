@@ -48,6 +48,7 @@ import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.BatchExtension;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestDescription;
@@ -63,7 +64,7 @@ import com.google.common.collect.Multimap;
  * @author Maxime SCHNEIDER-DUFEUTRELLE
  * 
  */
-public class GallioResultParser {
+public class GallioResultParser implements BatchExtension {
 
   private static final String LOG_PATTERN = "--{} : {}";
   private static final String GALLIO_REPORT_PARSING_ERROR = "gallio report parsing error";

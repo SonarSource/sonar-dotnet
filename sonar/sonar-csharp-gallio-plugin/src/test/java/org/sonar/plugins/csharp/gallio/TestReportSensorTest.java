@@ -21,18 +21,34 @@ package org.sonar.plugins.csharp.gallio;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
+import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
+import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
+import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
 
@@ -43,6 +59,7 @@ public class TestReportSensorTest {
   private VisualStudioProject vsTestProject2;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private Project project;
+  private GallioResultParser parser;
 
   @Before
   public void init() {
@@ -61,12 +78,35 @@ public class TestReportSensorTest {
     project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project Test #2");
+    
+    parser = mock(GallioResultParser.class); // create the parser before the sensor
+  }
+  
+  @Test
+  public void testAnalyseEmpty() {
+    
+    Configuration conf = new BaseConfiguration();
+    TestReportSensor sensor = buildSensor(conf);
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/execution/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    when(parser.parse(any(File.class))).thenReturn(Collections.EMPTY_SET);
+
+    SensorContext context = mock(SensorContext.class);
+    
+    sensor.analyse(project, context);
+    
+    verify(parser).parse(any(File.class));
   }
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = buildSensor(conf);
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
 
@@ -74,15 +114,19 @@ public class TestReportSensorTest {
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
-    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = buildSensor(conf);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
   public void testShouldNotExecuteOnProjectIfNotTestProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    TestReportSensor sensor = new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    TestReportSensor sensor = buildSensor(conf);
     when(project.getName()).thenReturn("Project #1");
     assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+  
+  private TestReportSensor buildSensor(Configuration conf) {
+    return new TestReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment, parser);
   }
 }
