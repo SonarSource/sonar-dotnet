@@ -44,4 +44,12 @@
       </plugin>
     </plugins>
   </build>
+  
+  <!-- Info added to check that the C# plugin works correctly with the SCM plugin -->
+  <scm>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</developerConnection>
+    <url>http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</url>
+  </scm>
+  
 </project>
