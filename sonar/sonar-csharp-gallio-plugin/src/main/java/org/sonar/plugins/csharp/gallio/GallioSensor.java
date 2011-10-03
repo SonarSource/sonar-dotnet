@@ -102,6 +102,9 @@ public class GallioSensor extends AbstractCSharpSensor {
       // Add info for Gallio execution
       builder.setReportFile(new File(workDir, GallioConstants.GALLIO_REPORT_XML));
       builder.setFilter(configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE));
+      
+      builder.setGallioRunnerType(configuration.getString(GallioConstants.RUNNER_TYPE_KEY, null));
+      
       // Add info for coverage execution
       builder.setCoverageReportFile(new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML));
       builder.setCoverageTool(configuration.getString(GallioConstants.COVERAGE_TOOL_KEY, GallioConstants.COVERAGE_TOOL_DEFVALUE));

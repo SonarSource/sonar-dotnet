@@ -31,6 +31,8 @@ public final class GallioConstants {
 
   public static final String GALLIO_REPORT_XML = "gallio-report.xml";
   public static final String GALLIO_COVERAGE_REPORT_XML = "coverage-report.xml";
+  
+  public static final String RUNNER_TYPE_KEY = "sonar.gallio.runner";
 
   // ----------- Plugin Configuration Properties ----------- //
   public static final String INSTALL_FOLDER_KEY = "sonar.gallio.installDirectory";
