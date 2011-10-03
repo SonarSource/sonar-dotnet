@@ -39,7 +39,7 @@ public final class GallioCommandBuilder {
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 
-  private static final String DEFAULT_GALLIO_RUNNER = "IsolatedProcess";
+  private static final GallioRunnerType DEFAULT_GALLIO_RUNNER = GallioRunnerType.ISOLATED_PROCESS;
   private static final String PART_COVER_EXE = "PartCover.exe";
 
   private VisualStudioSolution solution;
@@ -49,6 +49,7 @@ public final class GallioCommandBuilder {
   private File gallioReportFile;
   private String filter;
   private File workDir;
+  private GallioRunnerType gallioRunnerType;
   // Information needed for coverage execution
   private CoverageTool coverageTool;
   private File partCoverInstallDirectory;
@@ -78,9 +79,8 @@ public final class GallioCommandBuilder {
    *          the executable
    * @return the current builder
    */
-  public GallioCommandBuilder setExecutable(File gallioExecutable) {
+  public void setExecutable(File gallioExecutable) {
     this.gallioExecutable = gallioExecutable;
-    return this;
   }
 
   /**
@@ -90,9 +90,8 @@ public final class GallioCommandBuilder {
    *          the report file
    * @return the current builder
    */
-  public GallioCommandBuilder setReportFile(File reportFile) {
+  public void setReportFile(File reportFile) {
     this.gallioReportFile = reportFile;
-    return this;
   }
 
   /**
@@ -103,9 +102,8 @@ public final class GallioCommandBuilder {
    *          the filter for Gallio
    * @return the current builder
    */
-  public GallioCommandBuilder setFilter(String gallioFilter) {
+  public void setFilter(String gallioFilter) {
     this.filter = gallioFilter;
-    return this;
   }
 
   /**
@@ -115,9 +113,8 @@ public final class GallioCommandBuilder {
    *          the build configurations
    * @return the current builder
    */
-  public GallioCommandBuilder setBuildConfigurations(String buildConfigurations) {
+  public void setBuildConfigurations(String buildConfigurations) {
     this.buildConfigurations = buildConfigurations;
-    return this;
   }
 
   /**
@@ -126,9 +123,8 @@ public final class GallioCommandBuilder {
    * @param workDir
    *          the working directory
    */
-  public GallioCommandBuilder setWorkDir(File workDir) {
+  public void setWorkDir(File workDir) {
     this.workDir = workDir;
-    return this;
   }
 
   /**
@@ -141,9 +137,20 @@ public final class GallioCommandBuilder {
    * @param coverageToolName
    *          the name of the tool
    */
-  public GallioCommandBuilder setCoverageTool(String coverageToolName) {
+  public void setCoverageTool(String coverageToolName) {
     this.coverageTool = CoverageTool.findFromName(coverageToolName);
-    return this;
+  }
+  
+  /**
+   * Set the Gallio runner type in order to specify how the test 
+   * executions will be isolated from each others.  
+   * @param runner
+   */
+  public void setGallioRunnerType(String runner) {
+    if (StringUtils.isEmpty(runner)) {
+      return;
+    }
+    this.gallioRunnerType = GallioRunnerType.parse(runner);
   }
 
   /**
@@ -152,9 +159,8 @@ public final class GallioCommandBuilder {
    * @param partCoverInstallDirectory
    *          the install dir
    */
-  public GallioCommandBuilder setPartCoverInstallDirectory(File partCoverInstallDirectory) {
+  public void setPartCoverInstallDirectory(File partCoverInstallDirectory) {
     this.partCoverInstallDirectory = partCoverInstallDirectory;
-    return this;
   }
 
   /**
@@ -164,9 +170,8 @@ public final class GallioCommandBuilder {
    * @param coverageExcludes
    *          the excludes
    */
-  public GallioCommandBuilder setCoverageExcludes(String coverageExcludes) {
+  public void setCoverageExcludes(String coverageExcludes) {
     this.coverageExcludes = coverageExcludes;
-    return this;
   }
 
   /**
@@ -176,9 +181,8 @@ public final class GallioCommandBuilder {
    *          the report file
    * @return the current builder
    */
-  public GallioCommandBuilder setCoverageReportFile(File coverageReportFile) {
+  public void setCoverageReportFile(File coverageReportFile) {
     this.coverageReportFile = coverageReportFile;
-    return this;
   }
 
   /**
@@ -226,13 +230,16 @@ public final class GallioCommandBuilder {
   protected List<String> generateGallioArguments(List<File> testAssemblies) {
     List<String> gallioArguments = Lists.newArrayList();
 
-    String runner = DEFAULT_GALLIO_RUNNER;
+    GallioRunnerType runner = DEFAULT_GALLIO_RUNNER;
     if (coverageTool != null) {
       LOG.debug("- Coverage tool       : {}", coverageTool.getName());
       runner = coverageTool.getGallioRunner();
     }
+    if (gallioRunnerType != null) {
+      runner = gallioRunnerType;
+    }
     LOG.debug("- Runner              : {}", runner);
-    gallioArguments.add("/r:" + runner);
+    gallioArguments.add("/r:" + runner.getValue());
 
     File reportDirectory = gallioReportFile.getParentFile();
     LOG.debug("- Report directory    : {}", reportDirectory.getAbsolutePath());

@@ -30,22 +30,27 @@ import org.slf4j.LoggerFactory;
  * </ul>
  */
 public enum CoverageTool {
+  
+  /**
+   * No coverage tool
+   */
+  NONE(null, null),
 
   /**
    * "PartCover" tool
    */
-  PARTCOVER("PartCover", "IsolatedAppDomain"),
+  PARTCOVER("PartCover", GallioRunnerType.ISOLATED_APP_DOMAIN),
   /**
    * "NCover" tool
    */
-  NCOVER("NCover", "NCover3");
+  NCOVER("NCover", GallioRunnerType.NCOVER);
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageTool.class);
 
   private String name;
-  private String gallioRunner;
+  private GallioRunnerType gallioRunner;
 
-  private CoverageTool(String toolName, String correspondingGallioRunner) {
+  private CoverageTool(String toolName, GallioRunnerType correspondingGallioRunner) {
     this.name = toolName;
     this.gallioRunner = correspondingGallioRunner;
   }
@@ -55,7 +60,7 @@ public enum CoverageTool {
    * 
    * @return the name of the runner
    */
-  public String getGallioRunner() {
+  public GallioRunnerType getGallioRunner() {
     return gallioRunner;
   }
 
@@ -76,13 +81,12 @@ public enum CoverageTool {
    * @return the coverage tool if one is found, otherwise null
    */
   public static CoverageTool findFromName(String name) {
-    CoverageTool tool = null;
+    final CoverageTool tool;
     try {
       tool = CoverageTool.valueOf(name.toUpperCase());
     } catch (IllegalArgumentException e) {
-      if ( !"none".equalsIgnoreCase(name)) {
-        LOG.warn("Tried to get a CoverageTool with name {}, but such a tool is not supported.", name);
-      }
+      LOG.error("Tried to get a CoverageTool with name {}, but such a tool is not supported.", name);
+      throw e;
     }
     return tool;
   }

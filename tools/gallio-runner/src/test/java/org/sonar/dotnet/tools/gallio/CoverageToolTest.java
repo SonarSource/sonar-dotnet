@@ -28,25 +28,28 @@ import org.junit.Test;
 public class CoverageToolTest {
 
   @Test
-  public void testFindFromName() throws Exception {
+  public void testFindFromName() {
     assertThat(CoverageTool.findFromName("PartCover"), is(CoverageTool.PARTCOVER));
   }
 
-  @Test
-  public void testFindFromWrongName() throws Exception {
+  @Test(expected=IllegalArgumentException.class)
+  public void testFindFromWrongName() {
     assertThat(CoverageTool.findFromName("UnexistingTool"), nullValue());
   }
 
   @Test
-  public void testGetName() throws Exception {
+  public void testGetName() {
     assertThat(CoverageTool.NCOVER.getName(), is("NCover"));
     assertThat(CoverageTool.PARTCOVER.getName(), is("PartCover"));
   }
 
+  /**
+   * TODO : Are these tests really useful ?
+   */
   @Test
-  public void testGetRunner() throws Exception {
-    assertThat(CoverageTool.NCOVER.getGallioRunner(), is("NCover3"));
-    assertThat(CoverageTool.PARTCOVER.getGallioRunner(), is("IsolatedAppDomain"));
+  public void testGetRunner() {
+    assertThat(CoverageTool.NCOVER.getGallioRunner().getValue(), is("NCover3"));
+    assertThat(CoverageTool.PARTCOVER.getGallioRunner().getValue(), is("IsolatedAppDomain"));
   }
 
 }
