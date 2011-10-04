@@ -60,6 +60,16 @@ public abstract class AbstractCSharpSensor implements Sensor {
     this.toolName = toolName;
     this.executionMode = executionMode;
   }
+  
+  /**
+   * TODO remove ASAP after having updated the squid plugin
+   * @param microsoftWindowsEnvironment
+   */
+  protected AbstractCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
+    this.toolName = "Squid C#";
+    this.executionMode = "";
+  }
 
   /**
    * {@inheritDoc}
