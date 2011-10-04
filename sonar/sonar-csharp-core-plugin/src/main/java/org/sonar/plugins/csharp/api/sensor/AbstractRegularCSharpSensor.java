@@ -36,6 +36,14 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
   protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
     super(microsoftWindowsEnvironment, toolName, executionMode);
   }
+  
+  /**
+   * TODO remove ASAP after having updated the squid plugin
+   * @param microsoftWindowsEnvironment
+   */
+  protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    super(microsoftWindowsEnvironment,  "Squid C#", "");
+  }
 
   /**
    * {@inheritDoc}
