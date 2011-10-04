@@ -68,18 +68,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     this.parser = parser;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = MODE_SKIP.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("Test report analysis won't execute as it is set to 'skip' mode.");
-    }
-
-    return super.shouldExecuteOnProject(project) && !skipMode;
-  }
-
   @Override
   public void analyse(Project project, SensorContext context) {
     
