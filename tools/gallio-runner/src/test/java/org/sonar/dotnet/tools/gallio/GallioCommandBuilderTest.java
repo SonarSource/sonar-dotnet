@@ -97,12 +97,13 @@ public class GallioCommandBuilderTest {
     builder.setWorkDir(WORK_DIR);
     builder.setFilter("FooFilter");
     builder.setBuildConfigurations("Release");
+    builder.setGallioRunnerType("Local");
     Command command = builder.toCommand();
 
     assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
     String[] commands = command.getArguments().toArray(new String[] {});
     assertThat(commands.length, is(6));
-    assertThat(commands[0], is("/r:IsolatedProcess"));
+    assertThat(commands[0], is("/r:Local"));
     assertThat(commands[1], endsWith("gallio-report-folder"));
     assertThat(commands[2], is("/report-name-format:gallio-report"));
     assertThat(commands[3], is("/report-type:Xml"));
@@ -246,6 +247,12 @@ public class GallioCommandBuilderTest {
     builder.setPartCoverInstallDirectory(PART_COVER_INSTALL_DIR);
     builder.setWorkDir(WORK_DIR);
     builder.toCommand();
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testBadRunnerArg() {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setGallioRunnerType("whatever");
   }
 
 }

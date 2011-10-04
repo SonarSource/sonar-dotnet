@@ -20,7 +20,10 @@
 package org.sonar.dotnet.tools.gallio;
 
 /**
- * Runner types supported by the Gallio command line
+ * Runner types supported by the Gallio command line.
+ * See the official Gallio doc : 
+ * http://www.gallio.org/wiki/doku.php?id=tools:gallio_test_runners
+ * 
  * @author Alexandre Victoor
  */
 public enum GallioRunnerType {
