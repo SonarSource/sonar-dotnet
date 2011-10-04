@@ -34,15 +34,15 @@ public abstract class AbstractTestCSharpSensor extends AbstractCSharpSensor {
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
-  protected AbstractTestCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
+  protected AbstractTestCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
+    super(microsoftWindowsEnvironment, toolName, executionMode);
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    return super.shouldExecuteOnProject(project) && getVSProject(project).isTest();
+    return isTestProject(project) && super.shouldExecuteOnProject(project);
   }
 
   /**

@@ -42,8 +42,6 @@ public final class StyleCopConstants {
   public static final int TIMEOUT_MINUTES_DEFVALUE = 10;
 
   public static final String MODE = "sonar.stylecop.mode";
-  public static final String MODE_SKIP = "skip";
-  public static final String MODE_REUSE_REPORT = "reuseReport";
 
   public static final String REPORTS_PATH_KEY = "sonar.stylecop.reports.path";
 

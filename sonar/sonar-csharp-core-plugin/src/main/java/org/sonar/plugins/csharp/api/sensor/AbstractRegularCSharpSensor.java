@@ -26,22 +26,22 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
  * Abstract Sensor for C# plugins that will be executed on every sub-project that is not a test project.
  */
 public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
-
+ 
   /**
    * Creates an {@link AbstractRegularCSharpSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
    * 
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
-  protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
+  protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
+    super(microsoftWindowsEnvironment, toolName, executionMode);
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    return super.shouldExecuteOnProject(project) && !getVSProject(project).isTest();
+    return !isTestProject(project) && super.shouldExecuteOnProject(project) ;
   }
 
 }

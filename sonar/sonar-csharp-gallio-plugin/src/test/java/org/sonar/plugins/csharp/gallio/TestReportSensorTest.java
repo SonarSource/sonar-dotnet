@@ -113,7 +113,7 @@ public class TestReportSensorTest {
   @Test
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
+    conf.setProperty(GallioConstants.MODE, TestReportSensor.MODE_SKIP);
     TestReportSensor sensor = buildSensor(conf);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }

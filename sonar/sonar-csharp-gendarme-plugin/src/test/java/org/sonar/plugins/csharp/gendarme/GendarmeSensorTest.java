@@ -58,6 +58,7 @@ import org.sonar.dotnet.tools.gendarme.GendarmeCommandBuilder;
 import org.sonar.dotnet.tools.gendarme.GendarmeRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.test.TestUtils;
@@ -127,7 +128,7 @@ public class GendarmeSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
 
-    conf.addProperty(GendarmeConstants.MODE, GendarmeConstants.MODE_SKIP);
+    conf.addProperty(GendarmeConstants.MODE, AbstractRegularCSharpSensor.MODE_SKIP);
     sensor = new GendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }

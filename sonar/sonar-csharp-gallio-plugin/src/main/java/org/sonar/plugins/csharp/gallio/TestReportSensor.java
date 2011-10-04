@@ -63,9 +63,8 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param microsoftWindowsEnvironment
    */
   public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, GallioResultParser parser) {
-    super(microsoftWindowsEnvironment);
+    super(microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE, ""));
     this.configuration = configuration;
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
     this.parser = parser;
   }
 
@@ -73,7 +72,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
+    boolean skipMode = MODE_SKIP.equalsIgnoreCase(executionMode);
     if (skipMode) {
       LOG.info("Test report analysis won't execute as it is set to 'skip' mode.");
     }
@@ -87,7 +86,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
         .getWorkingDirectory());
     final File reportFile;
-    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
+    if (MODE_REUSE_REPORT.equals(executionMode)) {
       String reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, GallioConstants.GALLIO_REPORT_XML);
       reportFile = FileFinder.browse(workDir, reportPath);
       LOG.info("Reusing Gallio report: " + reportPath);

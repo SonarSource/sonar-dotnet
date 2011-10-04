@@ -21,6 +21,8 @@ package org.sonar.plugins.csharp.api.sensor;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
@@ -37,8 +39,15 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
  * Super class of {@link AbstractRegularCSharpSensor} and {@link AbstractTestCSharpSensor}.
  */
 public abstract class AbstractCSharpSensor implements Sensor {
+  
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractCSharpSensor.class);
 
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  public static final String MODE_SKIP = "skip";
+  public static final String MODE_REUSE_REPORT = "reuseReport";
+  
+  private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  protected final String toolName;
+  protected final String executionMode;
 
   /**
    * Creates an {@link AbstractCSharpSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
@@ -46,8 +55,10 @@ public abstract class AbstractCSharpSensor implements Sensor {
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
-  protected AbstractCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  protected AbstractCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
+    this.toolName = toolName;
+    this.executionMode = executionMode;
   }
 
   /**
@@ -57,6 +68,12 @@ public abstract class AbstractCSharpSensor implements Sensor {
     if (project.isRoot()) {
       return false;
     }
+    boolean skipMode = MODE_SKIP.equalsIgnoreCase(executionMode);
+    if (skipMode) {
+      LOG.info("{} plugin won't execute as it is set to 'skip' mode.", toolName);
+      return false;
+    }
+    
     return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
   }
 
@@ -87,6 +104,22 @@ public abstract class AbstractCSharpSensor implements Sensor {
    */
   protected VisualStudioProject getVSProject(Project project) {
     return microsoftWindowsEnvironment.getCurrentProject(project.getName());
+  }
+  
+  /**
+   * Is the current project a test project ?
+   * @param project
+   * @return
+   */
+  protected boolean isTestProject(Project project) {
+    VisualStudioProject vsProject = getVSProject(project);
+    final boolean result;
+    if (vsProject==null) {
+      result = false; // probably the root project, solution level
+    } else {
+      result = vsProject.isTest();
+    }
+    return result;
   }
   
   protected VisualStudioSolution getVSSolution() {

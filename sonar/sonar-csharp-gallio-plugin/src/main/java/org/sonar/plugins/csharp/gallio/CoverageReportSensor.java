@@ -60,7 +60,6 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   private CoverageResultParser parser;
   private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link CoverageReportSensor}.
@@ -70,22 +69,9 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * @param microsoftWindowsEnvironment
    */
   public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CoverageResultParser parser) {
-    super(microsoftWindowsEnvironment);
+    super(microsoftWindowsEnvironment, "Coverage", configuration.getString(GallioConstants.MODE, ""));
     this.configuration = configuration;
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
     this.parser = parser;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("Coverage report analysis won't execute as it is set to 'skip' mode.");
-    }
-
-    return super.shouldExecuteOnProject(project) && !skipMode;
   }
 
   @Override
@@ -94,7 +80,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
         .getWorkingDirectory());
     final File reportFile;
-    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
+    if (MODE_REUSE_REPORT.equals(executionMode)) {
       String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
       reportFile = FileFinder.browse(workDir, reportPath);
       LOG.info("Reusing Gallio coverage report: " + reportFile);

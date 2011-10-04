@@ -117,7 +117,7 @@ public class CoverageReportSensorTest {
 
   @Test
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
+    conf.setProperty(GallioConstants.MODE, CoverageReportSensor.MODE_SKIP);
     CoverageReportSensor sensor = buildSensor();
     assertFalse(sensor.shouldExecuteOnProject(project));
   }

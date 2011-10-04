@@ -50,6 +50,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
 import org.sonar.dotnet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
+import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 import org.sonar.test.TestUtils;
@@ -122,8 +123,31 @@ public class FxCopSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
 
-    conf.addProperty(FxCopConstants.MODE, FxCopConstants.MODE_SKIP);
+    conf.addProperty(FxCopConstants.MODE, FxCopSensor.MODE_SKIP);
     sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+  
+  @Test
+  public void testShouldNotExecuteOnTestProject() throws Exception {
+    Configuration conf = new BaseConfiguration();
+    FxCopSensor sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project Test");
+    when(project.getLanguageKey()).thenReturn("cs");
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+  
+  @Test
+  public void testShouldNotExecuteOnTestProjectOnReuseMode() throws Exception {
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
+    FxCopSensor sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project Test");
+    when(project.getLanguageKey()).thenReturn("cs");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 

@@ -70,25 +70,12 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
    */
   public GendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter profileExporter,
       GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment, configuration, "Gendarme");
+    super(microsoftWindowsEnvironment, configuration, "Gendarme", configuration.getString(GendarmeConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.gendarmeResultParser = gendarmeResultParser;
     this.configuration = configuration;
-    this.executionMode = configuration.getString(GendarmeConstants.MODE, "");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = GendarmeConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    boolean reuseMode = GendarmeConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("Gendarme plugin won't execute as it is set to 'skip' mode.");
-    }
-    return reuseMode || (super.shouldExecuteOnProject(project) && !skipMode);
   }
 
   /**
@@ -103,7 +90,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     gendarmeResultParser.setEncoding(fileSystem.getSourceCharset());
     final File reportFile;
     File sonarDir = fileSystem.getSonarWorkingDirectory();
-    if (GendarmeConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, GendarmeConstants.GENDARME_REPORT_XML);
       reportFile = FileFinder.browse(sonarDir, reportPath);
     } else {

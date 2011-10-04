@@ -50,6 +50,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 
 public class CoverageDecoratorTest {
 
@@ -148,7 +149,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
+    conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_SKIP);
     CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(decorator.shouldExecuteOnProject(project));
   }

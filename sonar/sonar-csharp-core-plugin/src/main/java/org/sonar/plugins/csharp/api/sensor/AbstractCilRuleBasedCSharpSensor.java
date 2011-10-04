@@ -32,20 +32,20 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 /**
  * Support classes for sensor of tools inspecting compiled code.
+ * 
  * @author Alexandre Victoor
- *
+ * 
  */
 public abstract class AbstractCilRuleBasedCSharpSensor extends AbstractRegularCSharpSensor {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(AbstractCilRuleBasedCSharpSensor.class);
 
   protected final CSharpConfiguration configuration;
-  private final String toolName;
 
-  protected AbstractCilRuleBasedCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration, String toolName) {
-    super(microsoftWindowsEnvironment);
+  protected AbstractCilRuleBasedCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration,
+      String toolName, String executionMode) {
+    super(microsoftWindowsEnvironment, toolName, executionMode);
     this.configuration = configuration;
-    this.toolName = toolName;
   }
 
   /**
@@ -54,24 +54,29 @@ public abstract class AbstractCilRuleBasedCSharpSensor extends AbstractRegularCS
   public boolean shouldExecuteOnProject(Project project) {
     final boolean result;
     if (super.shouldExecuteOnProject(project)) {
-      
-      final VisualStudioProject visualProject = getVSProject(project);
-      
-      final Collection<File> assemblies;
-      String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
-      if (assemblyPatterns == null || assemblyPatterns.length == 0) {  
-        final String buildConfigurations 
-          = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY, CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
-        assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
-      } else {
-        assemblies = findFiles(project, assemblyPatterns);
-      }
-      
-      if (assemblies.isEmpty()) {
-        LOG.info("No assembly to check with " + toolName);
-        result = false;
-      } else {
+
+      boolean reuseMode = MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
+      if (reuseMode) {
         result = true;
+      } else {
+
+        final VisualStudioProject visualProject = getVSProject(project);
+        final Collection<File> assemblies;
+        String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+        if (assemblyPatterns == null || assemblyPatterns.length == 0) {
+          final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+              CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+        } else {
+          assemblies = findFiles(project, assemblyPatterns);
+        }
+
+        if (assemblies.isEmpty()) {
+          LOG.info("No assembly to check with " + toolName);
+          result = false;
+        } else {
+          result = true;
+        }
       }
     } else {
       result = false;

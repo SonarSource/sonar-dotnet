@@ -49,7 +49,7 @@ public class AbstractCilRuleBasedCSharpSensorTest {
   class FakeSensor extends AbstractCilRuleBasedCSharpSensor {
 
     public FakeSensor() {
-      super(microsoftWindowsEnvironment, configurationMock, "SomeEngine");
+      super(microsoftWindowsEnvironment, configurationMock, "SomeEngine", "");
     }
 
     @Override

@@ -54,8 +54,7 @@ public final class GallioConstants {
   public static final int TIMEOUT_MINUTES_DEFVALUE = 30;
 
   public static final String MODE = "sonar.gallio.mode";
-  public static final String MODE_SKIP = "skip";
-  public static final String MODE_REUSE_REPORT = "reuseReport";
+
 
   public static final String REPORTS_PATH_KEY = "sonar.gallio.reports.path";
   public static final String REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.coverage.reports.path";

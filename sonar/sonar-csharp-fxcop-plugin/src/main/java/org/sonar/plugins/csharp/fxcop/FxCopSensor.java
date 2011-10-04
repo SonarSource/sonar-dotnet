@@ -58,7 +58,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
   private RulesProfile rulesProfile;
   private FxCopProfileExporter profileExporter;
   private FxCopResultParser fxCopResultParser;
-  private String executionMode;
+  
 
   /**
    * Constructs a {@link FxCopSensor}.
@@ -71,26 +71,15 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
    */
   public FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
       FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment, configuration, "FxCop");
+    super(microsoftWindowsEnvironment, configuration, "FxCop", configuration.getString(FxCopConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.fxCopResultParser = fxCopResultParser;
-    this.executionMode = configuration.getString(FxCopConstants.MODE, "");
+    
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    
-    boolean skipMode = FxCopConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    boolean reuseMode = FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("FxCop plugin won't execute as it is set to 'skip' mode.");
-    }
-    return reuseMode || (super.shouldExecuteOnProject(project) && !skipMode);
-  }
+  
 
   /**
    * {@inheritDoc}
@@ -104,7 +93,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
     final File reportFile;
     File sonarDir = fileSystem.getSonarWorkingDirectory();
-    if (FxCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath 
         = configuration.getString(FxCopConstants.REPORTS_PATH_KEY, FxCopConstants.FXCOP_REPORT_XML);
       reportFile = FileFinder.browse(sonarDir, reportPath);
@@ -122,7 +111,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
       reportFile = new File(sonarDir, FxCopConstants.FXCOP_REPORT_XML);
     }
 
-    // and analyse results
+    // and analyze results
     analyseResults(reportFile);
   }
 

@@ -74,7 +74,7 @@ public class StyleCopSensorTest {
     when(project.getName()).thenReturn("Project #1");
     assertTrue(sensor.shouldExecuteOnProject(project));
 
-    conf.addProperty(StyleCopConstants.MODE, StyleCopConstants.MODE_SKIP);
+    conf.addProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
     sensor = new StyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }

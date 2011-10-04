@@ -45,7 +45,7 @@ public class AbstractTestCSharpSensorTest {
   class FakeSensor extends AbstractTestCSharpSensor {
 
     public FakeSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(microsoftWindowsEnvironment);
+      super(microsoftWindowsEnvironment, "Fake", "");
     }
 
     @Override

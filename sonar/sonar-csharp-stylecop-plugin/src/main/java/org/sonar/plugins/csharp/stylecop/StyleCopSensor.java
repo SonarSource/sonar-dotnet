@@ -69,24 +69,12 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
    */
   public StyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
       StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
+    super(microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.styleCopResultParser = styleCopResultParser;
     this.configuration = configuration;
-    this.executionMode = configuration.getString(StyleCopConstants.MODE, "");
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public boolean shouldExecuteOnProject(Project project) {
-    boolean skipMode = StyleCopConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
-    if (skipMode) {
-      LOG.info("StyleCop plugin won't execute as it is set to 'skip' mode.");
-    }
-    return super.shouldExecuteOnProject(project) && !skipMode;
   }
 
   /**
@@ -102,7 +90,7 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     final File reportFile;
     File sonarDir = fileSystem.getSonarWorkingDirectory();
 
-    if (StyleCopConstants.MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, StyleCopConstants.STYLECOP_REPORT_XML);
       reportFile = FileFinder.browse(sonarDir, reportPath);
     } else {

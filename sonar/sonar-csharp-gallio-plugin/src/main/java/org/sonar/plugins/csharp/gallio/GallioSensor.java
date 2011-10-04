@@ -46,7 +46,6 @@ public class GallioSensor extends AbstractCSharpSensor {
   private static final Logger LOG = LoggerFactory.getLogger(GallioSensor.class);
 
   private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link GallioSensor}.
@@ -56,20 +55,15 @@ public class GallioSensor extends AbstractCSharpSensor {
    * @param microsoftWindowsEnvironment
    */
   public GallioSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment);
+    super(microsoftWindowsEnvironment, "Gallio", configuration.getString(GallioConstants.MODE, ""));
     this.configuration = configuration;
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    if (GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode)) {
-      LOG.info("Gallio won't execute as it is set to 'skip' mode.");
-      return false;
-    }
-    if (GallioConstants.MODE_REUSE_REPORT.equals(executionMode)) {
+    if (MODE_REUSE_REPORT.equals(executionMode)) {
       LOG.info("Gallio won't execute as it is set to 'reuseReport' mode.");
       return false;
     }

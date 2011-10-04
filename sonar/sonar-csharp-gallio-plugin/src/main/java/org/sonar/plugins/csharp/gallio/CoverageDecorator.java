@@ -36,6 +36,7 @@ import org.sonar.api.resources.ResourceUtils;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 
 /**
  * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage
@@ -60,7 +61,7 @@ public class CoverageDecorator implements Decorator {
     if (project.isRoot() || !CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey())) {
       return false;
     }
-    boolean skipMode = GallioConstants.MODE_SKIP.equalsIgnoreCase(executionMode);
+    boolean skipMode = AbstractCSharpSensor.MODE_SKIP.equalsIgnoreCase(executionMode);
     boolean isTestProject = microsoftWindowsEnvironment.getCurrentProject(project.getName()).isTest();
     return !isTestProject && !skipMode;
   }

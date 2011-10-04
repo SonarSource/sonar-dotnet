@@ -75,7 +75,7 @@ public class GallioSensorTest {
   @Test
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_SKIP);
+    conf.setProperty(GallioConstants.MODE, GallioSensor.MODE_SKIP);
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
@@ -83,7 +83,7 @@ public class GallioSensorTest {
   @Test
   public void testShouldNotExecuteOnProjectIfReuseReports() throws Exception {
     Configuration conf = new BaseConfiguration();
-    conf.setProperty(GallioConstants.MODE, GallioConstants.MODE_REUSE_REPORT);
+    conf.setProperty(GallioConstants.MODE, GallioSensor.MODE_REUSE_REPORT);
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
