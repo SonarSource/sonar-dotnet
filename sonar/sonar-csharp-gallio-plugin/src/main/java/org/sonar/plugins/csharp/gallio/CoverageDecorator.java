@@ -80,11 +80,15 @@ public class CoverageDecorator implements Decorator {
       LOG.debug("Coverage metrics have not been set on '{}': default values will be inserted.", resource.getName());
       context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
       context.saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
-      // for LINES_TO_COVER and UNCOVERED_LINES, we use NCLOC as an approximation
+      // for LINES_TO_COVER and UNCOVERED_LINES, we use NCLOC and STATEMENTS as an approximation
       Measure ncloc = context.getMeasure(CoreMetrics.NCLOC);
       if (ncloc != null) {
-        context.saveMeasure(CoreMetrics.LINES_TO_COVER, ncloc.getValue());
-        context.saveMeasure(CoreMetrics.UNCOVERED_LINES, ncloc.getValue());
+        Measure sts = context.getMeasure(CoreMetrics.STATEMENTS);
+        double lines = Math.min(ncloc.getValue(), sts.getValue());
+        if (lines > 0d) {
+          context.saveMeasure(CoreMetrics.LINES_TO_COVER, lines);
+          context.saveMeasure(CoreMetrics.UNCOVERED_LINES, lines);
+        }
       }
     }
   }

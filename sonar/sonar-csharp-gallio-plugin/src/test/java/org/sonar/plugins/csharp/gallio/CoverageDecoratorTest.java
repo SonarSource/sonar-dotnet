@@ -75,6 +75,7 @@ public class CoverageDecoratorTest {
     Resource<?> projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(new Measure(CoreMetrics.NCLOC, 100.0));
+    when(context.getMeasure(CoreMetrics.STATEMENTS)).thenReturn(new Measure(CoreMetrics.STATEMENTS, 101.0));
     decorator.decorate(projectResource, context);
     verify(context, times(1)).saveMeasure(CoreMetrics.COVERAGE, 0.0);
     verify(context, times(1)).saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
