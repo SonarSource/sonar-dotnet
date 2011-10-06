@@ -52,7 +52,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
 
   private CSharpConfiguration configuration;
-  private String executionMode;
   private GallioResultParser parser;
 
   /**
@@ -77,7 +76,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     if (MODE_REUSE_REPORT.equals(executionMode)) {
       String reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, GallioConstants.GALLIO_REPORT_XML);
       reportFile = FileFinder.browse(workDir, reportPath);
-      LOG.info("Reusing Gallio report: " + reportPath);
+      LOG.info("Reusing Gallio report: " + reportFile);
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
