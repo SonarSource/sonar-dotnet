@@ -26,7 +26,7 @@ package org.apache.maven.dotnet;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.commons.lang.StringUtils;
 import org.apache.maven.dotnet.commons.project.ArtifactType;
 import org.apache.maven.dotnet.commons.project.VisualStudioProject;
 import org.apache.maven.dotnet.commons.project.VisualStudioSolution;
@@ -65,6 +65,16 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
    *            default-value="false" alias="disablePostBuildEvent"
    */
   private boolean disablePostBuildEvent;
+  
+  /**
+   * The target platforms for the compilation. Comma may be used to specify several platforms.
+   * This parameter is not mandatory.
+   * 
+   *  @parameter expression="${msbuild.platforms}"
+   *            alias="${platforms}" default-value="Any CPU"
+   * 
+   */
+  private String platforms; 
   
   /**
    * Builds a {@link CompileMojo}.
@@ -158,18 +168,28 @@ public class CompileMojo extends AbstractDotNetBuildMojo {
       // Adds the configuration
       arguments.add("/p:Configuration=" + configuration);
 
-      Log log = getLog();
-      log.info("Launching the build of " + file);
-      log.debug(" - Tool Version  : " + toolVersion);
-      log.debug(" - MsBuild exe   : " + executable);
-      log.debug(" - Configuration : " + configuration
-          + (rebuild ? " (force rebuild)" : ""));
+      String[] platformArray = StringUtils.split(platforms, ",;");
+      for (String platform : platformArray) {
+        List<String> platformArguments = new ArrayList<String>(arguments);
+        
+        platformArguments.add("/p:Platform=" + platform ); 
+        
+        Log log = getLog();
+        log.info("Launching the build of " + file);
+        log.debug(" - Tool Version  : " + toolVersion);
+        log.debug(" - MsBuild exe   : " + executable);
+        log.debug(" - Configuration : " + configuration
+            + (rebuild ? " (force rebuild)" : ""));
 
-      // We launch the compile command (the logs are put in debug because they
-      // may be verbose)
-      launchCommand(executable, arguments, "build", 0);
-      log.info("Build of " + solutionName + " in configuration "
-          + configuration + " terminated with SUCCESS!");
+        // We launch the compile command (the logs are put in debug because they
+        // may be verbose)
+        launchCommand(executable, platformArguments, "build", 0);
+        log.info("Build of " + solutionName + " in configuration "
+            + configuration + " terminated with SUCCESS!");
+      }
+      
+      
+      
     }
   }
 }
