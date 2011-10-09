@@ -21,16 +21,20 @@ package org.sonar.dotnet.tools.gallio;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * Class used to build the command line to run Gallio.
@@ -56,6 +60,8 @@ public final class GallioCommandBuilder {
   private String coverageExcludes;
   private File coverageReportFile;
 
+  private String[] testAssemblyPatterns = new String[] {};
+  
   private GallioCommandBuilder() {
   }
 
@@ -71,6 +77,12 @@ public final class GallioCommandBuilder {
     builder.solution = solution;
     return builder;
   }
+   
+  public void setTestAssemblyPatterns(String... testAssemblyPatterns) {
+    this.testAssemblyPatterns = testAssemblyPatterns;
+  }
+
+  
 
   /**
    * Sets the install dir for Gallio
@@ -367,25 +379,38 @@ public final class GallioCommandBuilder {
   }
 
   protected List<File> findTestAssemblies() throws GallioException {
-    List<File> assemblyFileList = Lists.newArrayList();
+    Set<File> assemblyFiles = Sets.newHashSet();
     if (solution != null) {
-      for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
-        addAssembly(assemblyFileList, visualStudioProject);
+      if (testAssemblyPatterns.length == 0) {
+        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
+          addAssembly(assemblyFiles, visualStudioProject);
+        }
+      } else {
+        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
+          Collection<File> projectTestAssemblies 
+            = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
+          if (projectTestAssemblies.isEmpty()) {
+            addAssembly(assemblyFiles, visualStudioProject);
+          } else {
+            assemblyFiles.addAll(projectTestAssemblies);
+          }
+        }
       }
+      
     } else {
       throw new GallioException("No .NET solution or project has been given to the Gallio command builder.");
     }
-    return assemblyFileList;
+    return Lists.newArrayList(assemblyFiles);
   }
 
-  protected void addAssembly(List<File> assemblyFileList, VisualStudioProject visualStudioProject) {
+  protected void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     File assembly = visualStudioProject.getArtifact(buildConfigurations);
     if (assembly != null && assembly.isFile()) {
       assemblyFileList.add(assembly);
     }
   }
 
-  protected void validateGallioInfo(List<File> testAssemblies) throws GallioException {
+  protected void validateGallioInfo(Collection<File> testAssemblies) throws GallioException {
     if (gallioExecutable == null || !gallioExecutable.isFile()) {
       throw new GallioException("Gallio executable cannot be found at the following location:" + gallioExecutable);
     }

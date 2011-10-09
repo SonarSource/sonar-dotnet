@@ -22,6 +22,7 @@ package org.sonar.dotnet.tools.gallio;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -57,8 +58,10 @@ public class GallioCommandBuilderTest {
     when(vsProject2.getAssemblyName()).thenReturn("Project2");
     VisualStudioProject vsTestProject1 = mock(VisualStudioProject.class);
     when(vsTestProject1.getArtifact("Debug")).thenReturn(FAKE_ASSEMBLY_1);
+    when(vsTestProject1.getDirectory()).thenReturn(WORK_DIR);
     VisualStudioProject vsTestProject2 = mock(VisualStudioProject.class);
     when(vsTestProject2.getArtifact("Debug")).thenReturn(FAKE_ASSEMBLY_2);
+    when(vsTestProject2.getDirectory()).thenReturn(WORK_DIR);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
     when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsTestProject1, vsTestProject2));
@@ -80,8 +83,55 @@ public class GallioCommandBuilderTest {
     assertThat(commands[1], endsWith("gallio-report-folder"));
     assertThat(commands[2], is("/report-name-format:gallio-report"));
     assertThat(commands[3], is("/report-type:Xml"));
-    assertThat(commands[4], endsWith("Fake1.assembly"));
-    assertThat(commands[5], endsWith("Fake2.assembly"));
+    assertThat(commands[4], endsWith("assembly"));
+    assertThat(commands[5], endsWith("assembly"));
+  }
+  
+  @Test
+  public void testToCommandForSolutionWithPattern() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
+    builder.setTestAssemblyPatterns("../FakeAssemblies2/*.assembly");
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
+    assertThat(command.getDirectory(), is(WORK_DIR));
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands.length, is(6));
+    assertThat(commands[0], is("/r:IsolatedProcess"));
+    assertThat(commands[1], endsWith("gallio-report-folder"));
+    assertThat(commands[2], is("/report-name-format:gallio-report"));
+    assertThat(commands[3], is("/report-type:Xml"));
+    // check that the assemblies found are those from FakeAssemblies2
+    assertThat(commands[4], endsWith("b.assembly"));
+    assertThat(commands[5], endsWith("b.assembly"));
+  }
+  
+  @Test
+  public void testToCommandForSolutionWithBadPattern() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
+    builder.setTestAssemblyPatterns("FakeAssemblies2/*.assembly");
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
+    assertThat(command.getDirectory(), is(WORK_DIR));
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands.length, is(6));
+    assertThat(commands[0], is("/r:IsolatedProcess"));
+    assertThat(commands[1], endsWith("gallio-report-folder"));
+    assertThat(commands[2], is("/report-name-format:gallio-report"));
+    assertThat(commands[3], is("/report-type:Xml"));
+    // check that the assemblies found are not those from FakeAssemblies2
+    // but the default ones from FakeAssemblies
+    assertThat(commands[4], not(endsWith("b.assembly")));
+    assertThat(commands[4], endsWith(".assembly"));
+    assertThat(commands[5], not(endsWith("b.assembly")));
+    assertThat(commands[5], endsWith(".assembly"));
   }
 
   @Test
@@ -133,8 +183,8 @@ public class GallioCommandBuilderTest {
     assertThat(commands[5], startsWith("\\\"/r:IsolatedAppDomain\\\" \\\"/report-directory:"));
     assertThat(commands[5],
         containsString("gallio-report-folder\\\" \\\"/report-name-format:gallio-report\\\" \\\"/report-type:Xml\\\" \\\""));
-    assertThat(commands[5], containsString("Fake1.assembly\\\" \\\""));
-    assertThat(commands[5], endsWith("Fake2.assembly\\\""));
+    assertThat(commands[5], containsString(".assembly\\\" \\\""));
+    assertThat(commands[5], endsWith(".assembly\\\""));
     assertThat(commands[6], is("--include"));
     assertThat(commands[7], is("[Project1]*"));
     assertThat(commands[8], is("--include"));
@@ -181,8 +231,8 @@ public class GallioCommandBuilderTest {
     assertThat(commands[1], endsWith("gallio-report-folder"));
     assertThat(commands[2], is("/report-name-format:gallio-report"));
     assertThat(commands[3], is("/report-type:Xml"));
-    assertThat(commands[4], endsWith("Fake1.assembly"));
-    assertThat(commands[5], endsWith("Fake2.assembly"));
+    assertThat(commands[4], endsWith(".assembly"));
+    assertThat(commands[5], endsWith(".assembly"));
     assertThat(commands[6], startsWith("/runner-property:NCoverCoverageFile="));
     assertThat(commands[6], endsWith("coverage-report.xml"));
     assertThat(commands[7], is("/runner-property:NCoverArguments=//ias Project1;Project2"));
