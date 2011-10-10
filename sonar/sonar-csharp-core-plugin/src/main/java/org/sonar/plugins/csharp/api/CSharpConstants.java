@@ -42,7 +42,7 @@ public final class CSharpConstants {
 
   public static final String CSHARP_CORE_EXECUTED = "C# Core executed";
 
-  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] { "**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs" };
+  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] { "**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs" };
 
   // ----------- Plugin Configuration Properties ----------- //
 
