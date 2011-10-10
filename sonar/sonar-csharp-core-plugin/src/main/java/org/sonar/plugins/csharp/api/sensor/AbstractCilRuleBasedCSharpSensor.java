@@ -61,14 +61,18 @@ public abstract class AbstractCilRuleBasedCSharpSensor extends AbstractRegularCS
       } else {
 
         final VisualStudioProject visualProject = getVSProject(project);
-        final Collection<File> assemblies;
-        String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+        Collection<File> assemblies;
+        final String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+        final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+            CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
         if (assemblyPatterns == null || assemblyPatterns.length == 0) {
-          final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
-              CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
           assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
         } else {
           assemblies = findFiles(project, assemblyPatterns);
+          if (assemblies.isEmpty()) {
+            // fall back to the default VS output folder
+            assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+          }
         }
 
         if (assemblies.isEmpty()) {
