@@ -1,182 +1,181 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.sonarsource.csharp</groupId>
-		<artifactId>csharp</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>sonar-csharp-squid-plugin</artifactId>
-	<name>SonarSource :: C# :: Sonar C# Squid Plugin</name>
-	<packaging>sonar-plugin</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sonarsource.csharp</groupId>
+    <artifactId>csharp</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>sonar-csharp-squid-plugin</artifactId>
+  <name>SonarSource :: C# :: Sonar C# Squid Plugin</name>
+  <packaging>sonar-plugin</packaging>
 
-	<description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
-	<url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
-	<licenses>
-		<license>
-			<name>SonarSource - Freeware</name>
-		</license>
-	</licenses>
+  <description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
+  <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+  <licenses>
+    <license>
+      <name>SonarSource - Freeware</name>
+    </license>
+  </licenses>
 
-	<build>
-		<plugins>
-			<plugin>
-				<!-- Need to use the shade plugin because obfuscation must be done on 
-					C# Squid and SSLR classes -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<includes>
-									<include>${project.groupId}:csharp-squid</include>
-									<include>com.sonarsource.sslr:sslr-impl</include>
-									<include>com.sonarsource.sslr:sslr-api</include>
-								</includes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<pluginKey>csharpsquid</pluginKey>
-					<pluginName>C# Squid</pluginName>
-					<pluginClass>com.sonar.plugins.csharp.squid.CSharpSquidPlugin</pluginClass>
-					<pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
-					<skipDependenciesPackaging>true</skipDependenciesPackaging>
-					<addMavenDescriptor>false</addMavenDescriptor>
-					<basePlugin>csharp</basePlugin>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <!-- Need to use the shade plugin because obfuscation must be done on
+              C# Squid and SSLR classes -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>${project.groupId}:csharp-squid</include>
+                  <include>com.sonarsource.sslr:sslr-impl</include>
+                  <include>com.sonarsource.sslr:sslr-api</include>
+                </includes>
+              </artifactSet>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginKey>csharpsquid</pluginKey>
+          <pluginName>C# Squid</pluginName>
+          <pluginClass>com.sonar.plugins.csharp.squid.CSharpSquidPlugin</pluginClass>
+          <pluginTermsConditionsUrl>http://dist.sonarsource.com/SonarSource_Terms_And_Conditions.pdf</pluginTermsConditionsUrl>
+          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <addMavenDescriptor>false</addMavenDescriptor>
+          <basePlugin>csharp</basePlugin>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<dependencies>
-		<!-- sonarsource -->
-		<dependency>
-			<groupId>com.sonarsource.csharp</groupId>
-			<artifactId>csharp-squid</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-impl</artifactId>
-		</dependency>
+  <dependencies>
+    <!-- sonarsource -->
+    <dependency>
+      <groupId>com.sonarsource.csharp</groupId>
+      <artifactId>csharp-squid</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-impl</artifactId>
+    </dependency>
 
-		<!-- sonar open-source -->
-		<dependency>
-			<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-			<artifactId>sonar-csharp-core-plugin</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
-			<artifactId>sonar-plugin-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
-			<artifactId>sonar-duplications</artifactId>
-		</dependency>
+    <!-- sonar open-source -->
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+      <artifactId>sonar-csharp-core-plugin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-duplications</artifactId>
+    </dependency>
 
-		<!-- Unit tests -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
-	<profiles>
-		<profile>
-			<id>obfuscation</id>
-			<activation>
-				<property>
-					<name>!skipObfuscation</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<dependencies>
-							<dependency>
-								<groupId>yguard</groupId>
-								<artifactId>yguard</artifactId>
-								<version>2.3.0.1</version>
-								<scope>system</scope>
-								<systemPath>${basedir}/lib/yguard-2.3.0.1.jar</systemPath>
-							</dependency>
-						</dependencies>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<configuration>
-									<tasks>
-										<property refid="maven.compile.classpath" name="mvn.classpath" />
-										<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" />
-										<yguard>
-											<inoutpair in="${project.build.directory}/${project.build.finalName}.jar" out="${project.build.directory}/${project.build.finalName}.jar" />
-											<rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
-												<keep>
-													<class classes="public" methods="protected" fields="public">
-														<patternset>
-															<include name="com.sonar.plugins.csharp.squid.CSharpSquidPlugin" />
-															<!-- APIs should not be obfuscated -->
-															<include name="com.sonar.csharp.squid.api.**.*" />
-															<include name="com.sonar.sslr.api.**.*" />
-															<!-- Class used to create Custom Checks -->
-															<include name="com.sonar.plugins.csharp.squid.check.CSharpCheck" />
-															<!-- These 2 C# Squid classes are used to test Custom Checks -->
-															<include name="com.sonar.csharp.squid.CSharpConfiguration" />
-															<include name="com.sonar.csharp.squid.scanner.CSharpAstScanner" />
-														</patternset>
-													</class>
-												</keep>
-												<adjust replaceContent="false" replacePath="false" replaceName="false">
-													<include name="**/*.template" />
-													<include name="**/*.xml" />
-												</adjust>
-											</rename>
-											<externalclasses>
-												<pathelement path="${mvn.classpath}" />
-											</externalclasses>
-										</yguard>
-									</tasks>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+  <profiles>
+    <profile>
+      <id>obfuscation</id>
+      <activation>
+        <property>
+          <name>!skipObfuscation</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>com.yworks</groupId>
+                <artifactId>yguard</artifactId>
+                <version>2.3.0.1</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <configuration>
+                  <tasks>
+                    <property refid="maven.compile.classpath" name="mvn.classpath"/>
+                    <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask"/>
+                    <yguard>
+                      <inoutpair in="${project.build.directory}/${project.build.finalName}.jar" out="${project.build.directory}/${project.build.finalName}.jar"/>
+                      <rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
+                        <keep>
+                          <class classes="public" methods="protected" fields="public">
+                            <patternset>
+                              <include name="com.sonar.plugins.csharp.squid.CSharpSquidPlugin"/>
+                              <!-- APIs should not be obfuscated -->
+                              <include name="com.sonar.csharp.squid.api.**.*"/>
+                              <include name="com.sonar.sslr.api.**.*"/>
+                              <!-- Class used to create Custom Checks -->
+                              <include name="com.sonar.plugins.csharp.squid.check.CSharpCheck"/>
+                              <!-- These 2 C# Squid classes are used to test Custom Checks -->
+                              <include name="com.sonar.csharp.squid.CSharpConfiguration"/>
+                              <include name="com.sonar.csharp.squid.scanner.CSharpAstScanner"/>
+                            </patternset>
+                          </class>
+                        </keep>
+                        <adjust replaceContent="false" replacePath="false" replaceName="false">
+                          <include name="**/*.template"/>
+                          <include name="**/*.xml"/>
+                        </adjust>
+                      </rename>
+                      <externalclasses>
+                        <pathelement path="${mvn.classpath}"/>
+                      </externalclasses>
+                    </yguard>
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -1,178 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.sonarsource.csharp</groupId>
-		<artifactId>csharp</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>csharp-toolkit</artifactId>
-	<name>SonarSource :: C# :: Toolkit</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sonarsource.csharp</groupId>
+    <artifactId>csharp</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>csharp-toolkit</artifactId>
+  <name>SonarSource :: C# :: Toolkit</name>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<includes>
-									<include>org.codehaus.sonar-plugins.csharp:sonar-csharp-core-plugin</include>
-									<include>com.sonarsource.csharp:csharp-squid</include>
-									<include>com.sonarsource.sslr:*</include>
-									<include>com.sonarsource.ssdk:*</include>
-									<include>org.codehaus.sonar:sonar-squid</include>
-									<include>org.codehaus.sonar:sonar-channel</include>
-									<include>org.codehaus.sonar:sonar-colorizer</include>
-									<include>org.slf4j:slf4j-api</include>
-									<include>org.slf4j:jcl-over-slf4j</include>
-									<include>ch.qos.logback:logback-classic</include>
-									<include>ch.qos.logback:logback-core</include>
-									<include>commons-io:commons-io</include>
-									<include>commons-lang:commons-lang</include>
-									<include>com.google.collections:google-collections</include>
-								</includes>
-							</artifactSet>
-							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.sonar.csharp.toolkit.Toolkit</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- YGuard : Java bytecode obfuscator See http://www.yworks.com/products/yguard -->
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>yguard</groupId>
-						<artifactId>yguard</artifactId>
-						<version>2.3.0.1</version>
-						<scope>system</scope>
-						<systemPath>${basedir}/lib/yguard-2.3.0.1.jar</systemPath>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<configuration>
-							<tasks>
-								<property refid="maven.compile.classpath" name="mvn.classpath" />
-								<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" />
-								<yguard>
-									<inoutpair in="${project.build.directory}/${project.build.finalName}.${project.packaging}" out="${project.build.directory}/${project.build.finalName}.jar" />
-									<rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
-										<keep>
-											<class classes="public" methods="protected" fields="public">
-												<patternset>
-													<include name="com.sonar.csharp.toolkit.Toolkit" />
-													<include name="com.sonar.sslr.api.**.*" />
-													<include name="com.sonar.csharp.squid.api.**.*" />
-												</patternset>
-											</class>
-										</keep>
-										<adjust replaceContent="false" replacePath="false" replaceName="false">
-											<include name="**/*.xml" />
-										</adjust>
-									</rename>
-									<externalclasses>
-										<pathelement path="${mvn.classpath}" />
-									</externalclasses>
-								</yguard>
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<finalName>CSharpToolkit-${project.version}</finalName>
-							<descriptors>
-								<descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
-							</descriptors>
-							<filters>
-								<filter>${basedir}/src/assembly/filter.properties</filter>
-							</filters>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <artifactSet>
+                <includes>
+                  <include>org.codehaus.sonar-plugins.csharp:sonar-csharp-core-plugin</include>
+                  <include>com.sonarsource.csharp:csharp-squid</include>
+                  <include>com.sonarsource.sslr:*</include>
+                  <include>com.sonarsource.ssdk:*</include>
+                  <include>org.codehaus.sonar:sonar-squid</include>
+                  <include>org.codehaus.sonar:sonar-channel</include>
+                  <include>org.codehaus.sonar:sonar-colorizer</include>
+                  <include>org.slf4j:slf4j-api</include>
+                  <include>org.slf4j:jcl-over-slf4j</include>
+                  <include>ch.qos.logback:logback-classic</include>
+                  <include>ch.qos.logback:logback-core</include>
+                  <include>commons-io:commons-io</include>
+                  <include>commons-lang:commons-lang</include>
+                  <include>com.google.collections:google-collections</include>
+                </includes>
+              </artifactSet>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>com.sonar.csharp.toolkit.Toolkit</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- YGuard : Java bytecode obfuscator See http://www.yworks.com/products/yguard -->
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <dependencies>
+          <dependency>
+            <groupId>com.yworks</groupId>
+            <artifactId>yguard</artifactId>
+            <version>2.3.0.1</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <configuration>
+              <tasks>
+                <property refid="maven.compile.classpath" name="mvn.classpath"/>
+                <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask"/>
+                <yguard>
+                  <inoutpair in="${project.build.directory}/${project.build.finalName}.${project.packaging}" out="${project.build.directory}/${project.build.finalName}.jar"/>
+                  <rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
+                    <keep>
+                      <class classes="public" methods="protected" fields="public">
+                        <patternset>
+                          <include name="com.sonar.csharp.toolkit.Toolkit"/>
+                          <include name="com.sonar.sslr.api.**.*"/>
+                          <include name="com.sonar.csharp.squid.api.**.*"/>
+                        </patternset>
+                      </class>
+                    </keep>
+                    <adjust replaceContent="false" replacePath="false" replaceName="false">
+                      <include name="**/*.xml"/>
+                    </adjust>
+                  </rename>
+                  <externalclasses>
+                    <pathelement path="${mvn.classpath}"/>
+                  </externalclasses>
+                </yguard>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>CSharpToolkit-${project.version}</finalName>
+              <descriptors>
+                <descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+              </descriptors>
+              <filters>
+                <filter>${basedir}/src/assembly/filter.properties</filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
-	<dependencies>
-		<!-- C# -->
-		<dependency>
-			<groupId>com.sonarsource.csharp</groupId>
-			<artifactId>csharp-squid</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<!-- sonarsource -->
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.ssdk</groupId>
-			<artifactId>ssdk-gui</artifactId>
-		</dependency>
-		<!-- Others -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<!-- Unit tests -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+  <dependencies>
+    <!-- C# -->
+    <dependency>
+      <groupId>com.sonarsource.csharp</groupId>
+      <artifactId>csharp-squid</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- sonarsource -->
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-impl</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sonarsource.ssdk</groupId>
+      <artifactId>ssdk-gui</artifactId>
+    </dependency>
+    <!-- Others -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <!-- Unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 
 </project>
