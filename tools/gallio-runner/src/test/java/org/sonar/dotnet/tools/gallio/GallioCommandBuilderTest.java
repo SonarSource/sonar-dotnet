@@ -222,6 +222,7 @@ public class GallioCommandBuilderTest {
     builder.setWorkDir(WORK_DIR);
     builder.setCoverageTool("NCover");
     builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
+    builder.setCoverageExcludes("");
     Command command = builder.toCommand();
 
     assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));

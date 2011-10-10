@@ -316,7 +316,16 @@ public final class GallioCommandBuilder {
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("/runner-property:NCoverCoverageFile=" + coverageReportFile.getAbsolutePath());
 
-    String coveredAssemblies = StringUtils.join(listCoveredAssemblies().toArray(), ";");
+    List<String> coveredAssembliesList = listCoveredAssemblies();
+    for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
+      LOG.debug("- NCover POTENTIAL exclude   : {}", exclusion.trim());
+      if(coveredAssembliesList.contains(exclusion.trim())) {
+        LOG.debug("- NCover ACTUAL exclude   : {}", exclusion.trim());
+        coveredAssembliesList.remove(exclusion.trim());
+      }
+    }
+    
+    String coveredAssemblies = StringUtils.join(coveredAssembliesList.toArray(), ";");
     LOG.debug("- NCover arguments    : {}", coveredAssemblies);
     command.addArgument("/runner-property:NCoverArguments=//ias " + coveredAssemblies);
   }
