@@ -155,6 +155,8 @@ public class FxCopSensorTest {
   public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
+    conf.setProperty(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "DummyBuildConf"); // we simulate no generated assemblies
+    
     FxCopSensor sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Sensor"));
     when(vsProject1.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
