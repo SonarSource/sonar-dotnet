@@ -61,7 +61,8 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, GallioResultParser parser) {
+  public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
+      GallioResultParser parser) {
     super(microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE, ""));
     this.configuration = configuration;
     this.parser = parser;
@@ -69,30 +70,36 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    
-    final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-        .getWorkingDirectory());
-    final File reportFile;
+    File testReportFile = findTestReportToAnalyse();
+    if (testReportFile == null) {
+      return;
+    }
+    if ( !testReportFile.isFile()) {
+      LOG.warn("No Gallio report file found for: " + testReportFile.getAbsolutePath());
+      context.saveMeasure(CoreMetrics.TESTS, 0.0);
+      return;
+    }
+
+    collect(project, testReportFile, context);
+  }
+
+  protected File findTestReportToAnalyse() {
+    File reportFile = null;
+    File solutionDir = getVSSolution().getSolutionDir();
+    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_REPORT_XML;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, GallioConstants.GALLIO_REPORT_XML);
-      reportFile = FileFinder.browse(workDir, reportPath);
+      String reportPath = configuration.getString(GallioConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      reportFile = FileFinder.browse(solutionDir, reportPath);
       LOG.info("Reusing Gallio report: " + reportFile);
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Test report analysis won't execute as Gallio was not executed.");
-        return;
+      } else {
+        reportFile = new File(solutionDir, reportDefaultPath);
       }
-      reportFile = new File(workDir, GallioConstants.GALLIO_REPORT_XML);
     }
-
-    if ( !reportFile.isFile()) {
-      LOG.warn("No Gallio report file found for: " + reportFile.getAbsolutePath());
-      context.saveMeasure(CoreMetrics.TESTS, 0.0);
-      return;
-    }
-
-    collect(project, reportFile, context);
+    return reportFile;
   }
 
   private void collect(Project project, File report, SensorContext context) {

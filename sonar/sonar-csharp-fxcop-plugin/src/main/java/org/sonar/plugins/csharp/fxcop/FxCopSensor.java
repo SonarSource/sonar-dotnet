@@ -45,7 +45,6 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
-
 /**
  * Collects the FXCop reporting into sonar.
  */
@@ -58,7 +57,6 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
   private RulesProfile rulesProfile;
   private FxCopProfileExporter profileExporter;
   private FxCopResultParser fxCopResultParser;
-  
 
   /**
    * Constructs a {@link FxCopSensor}.
@@ -76,10 +74,8 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.fxCopResultParser = fxCopResultParser;
-    
-  }
 
-  
+  }
 
   /**
    * {@inheritDoc}
@@ -91,12 +87,14 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     }
 
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
+
     final File reportFile;
-    File sonarDir = fileSystem.getSonarWorkingDirectory();
+    File projectDir = project.getFileSystem().getBasedir();
+    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + FxCopConstants.FXCOP_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath 
-        = configuration.getString(FxCopConstants.REPORTS_PATH_KEY, FxCopConstants.FXCOP_REPORT_XML);
-      reportFile = FileFinder.browse(sonarDir, reportPath);
+      String reportPath = configuration.getString(FxCopConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      reportFile = FileFinder.browse(projectDir, reportPath);
+      LOG.info("Reusing FxCop report: " + reportFile);
     } else {
       // prepare config file for FxCop
       File fxCopConfigFile = generateConfigurationFile();
@@ -108,7 +106,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
       } catch (FxCopException e) {
         throw new SonarException("FxCop execution failed.", e);
       }
-      reportFile = new File(sonarDir, FxCopConstants.FXCOP_REPORT_XML);
+      reportFile = new File(projectDir, reportDefaultPath);
     }
 
     // and analyze results

@@ -68,7 +68,8 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * @param configuration
    * @param microsoftWindowsEnvironment
    */
-  public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CoverageResultParser parser) {
+  public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
+      CoverageResultParser parser) {
     super(microsoftWindowsEnvironment, "Coverage", configuration.getString(GallioConstants.MODE, ""));
     this.configuration = configuration;
     this.parser = parser;
@@ -76,49 +77,52 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    
-    final File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-        .getWorkingDirectory());
-    final File reportFile;
+    File coverageReportFile = findCoverageReportToAnalyse();
+    if (coverageReportFile == null) {
+      return;
+    }
+    if ( !coverageReportFile.isFile()) {
+      LOG.warn("No Gallio coverage report file found for: " + coverageReportFile.getAbsolutePath());
+      return;
+    }
+
+    // We parse the file and save the results
+    parseAndSaveCoverageResults(project, context, coverageReportFile);
+  }
+
+  protected java.io.File findCoverageReportToAnalyse() {
+    File reportFile = null;
+    File solutionDir = getVSSolution().getSolutionDir();
+    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-      reportFile = FileFinder.browse(workDir, reportPath);
+      String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, reportDefaultPath);
+      reportFile = FileFinder.browse(solutionDir, reportPath);
       LOG.info("Reusing Gallio coverage report: " + reportFile);
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
-        return;
+      } else {
+        reportFile = new File(solutionDir, reportDefaultPath);
       }
-      reportFile = new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
     }
-     
-    if ( !reportFile.isFile()) {
-      LOG.warn("No Gallio coverage report file found for: " + reportFile.getAbsolutePath());
-      return;
-    }
-
-    // We parse the file and save the results
-    parseAndSaveCoverageResults(project, context, reportFile);
+    return reportFile;
   }
 
   protected void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
-
     ParserResult result = parser.parse(project, reportFile);
-    
-    VisualStudioSolution solution 
-      = getMicrosoftWindowsEnvironment().getCurrentSolution();
-    
+
+    VisualStudioSolution solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
+
     ProjectCoverage currentProjectCoverage = null;
     for (ProjectCoverage projectCoverage : result.getProjects()) {
-      VisualStudioProject vsProject 
-        = solution.getProject(projectCoverage.getAssemblyName());
+      VisualStudioProject vsProject = solution.getProject(projectCoverage.getAssemblyName());
       String branch = project.getBranch();
       final String vsProjectName;
       if (StringUtils.isEmpty(branch)) {
-        vsProjectName = vsProject.getName(); 
+        vsProjectName = vsProject.getName();
       } else {
-        vsProjectName = vsProject.getName() + " " +project.getBranch();
+        vsProjectName = vsProject.getName() + " " + project.getBranch();
       }
       if (project.getName().equals(vsProjectName)) {
         currentProjectCoverage = projectCoverage;

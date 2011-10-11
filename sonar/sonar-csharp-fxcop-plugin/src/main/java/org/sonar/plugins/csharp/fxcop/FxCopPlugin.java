@@ -51,7 +51,8 @@ import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfile;
     @Property(key = FxCopConstants.MODE, defaultValue = "", name = "FxCop activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = FxCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the FxCop report files",
-        description = "Name of the FxCop report file used when reuse report mode is activated.", global = false, project = false) })
+        description = "Name of the FxCop report file used when reuse report mode is activated. "
+            + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false) })
 public class FxCopPlugin extends SonarPlugin {
 
   /**

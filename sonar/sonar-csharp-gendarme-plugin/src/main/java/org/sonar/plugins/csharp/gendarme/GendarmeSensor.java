@@ -57,7 +57,6 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
   private GendarmeProfileExporter profileExporter;
   private GendarmeResultParser gendarmeResultParser;
   private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link GendarmeSensor}.
@@ -89,10 +88,12 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
 
     gendarmeResultParser.setEncoding(fileSystem.getSourceCharset());
     final File reportFile;
-    File sonarDir = fileSystem.getSonarWorkingDirectory();
+    File projectDir = project.getFileSystem().getBasedir();
+    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GendarmeConstants.GENDARME_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, GendarmeConstants.GENDARME_REPORT_XML);
-      reportFile = FileFinder.browse(sonarDir, reportPath);
+      String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      reportFile = FileFinder.browse(projectDir, reportPath);
+      LOG.info("Reusing Gendarme report: " + reportFile);
     } else {
       // prepare config file for Gendarme
       File gendarmeConfigFile = generateConfigurationFile();
@@ -107,7 +108,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
       } catch (GendarmeException e) {
         throw new SonarException("Gendarme execution failed.", e);
       }
-      reportFile = new File(sonarDir, GendarmeConstants.GENDARME_REPORT_XML);
+      reportFile = new File(projectDir, reportDefaultPath);
     }
 
     // and analyse results

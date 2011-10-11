@@ -44,7 +44,8 @@ import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileImporter;
     @Property(key = StyleCopConstants.MODE, defaultValue = "", name = "StyleCop activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = StyleCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the StyleCop report files",
-        description = "Name of the StyleCop report file used when reuse report mode is activated.", global = false, project = false) })
+        description = "Name of the StyleCop report file used when reuse report mode is activated. "
+            + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false) })
 public class StyleCopPlugin extends SonarPlugin {
 
   /**

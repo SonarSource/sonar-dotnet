@@ -56,7 +56,6 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
   private StyleCopProfileExporter profileExporter;
   private StyleCopResultParser styleCopResultParser;
   private CSharpConfiguration configuration;
-  private String executionMode;
 
   /**
    * Constructs a {@link StyleCopSensor}.
@@ -88,11 +87,12 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
 
     styleCopResultParser.setEncoding(fileSystem.getSourceCharset());
     final File reportFile;
-    File sonarDir = fileSystem.getSonarWorkingDirectory();
-
+    File projectDir = project.getFileSystem().getBasedir();
+    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + StyleCopConstants.STYLECOP_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, StyleCopConstants.STYLECOP_REPORT_XML);
-      reportFile = FileFinder.browse(sonarDir, reportPath);
+      String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      reportFile = FileFinder.browse(projectDir, reportPath);
+      LOG.info("Reusing StyleCop report: " + reportFile);
     } else {
       // prepare config file for StyleCop
       File styleCopConfigFile = generateConfigurationFile();
@@ -107,7 +107,7 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
       } catch (StyleCopException e) {
         throw new SonarException("StyleCop execution failed.", e);
       }
-      reportFile = new File(sonarDir, StyleCopConstants.STYLECOP_REPORT_XML);
+      reportFile = new File(projectDir, reportDefaultPath);
     }
 
     // and analyse results

@@ -53,7 +53,8 @@ import org.sonar.plugins.csharp.gendarme.results.GendarmeViolationMaker;
     @Property(key = GendarmeConstants.MODE, defaultValue = "", name = "Gendarme activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = GendarmeConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gendarme report files",
-        description = "Name of the Gendarme report file used when reuse report mode is activated.", global = false, project = false) })
+        description = "Name of the Gendarme report file used when reuse report mode is activated. "
+            + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false) })
 public class GendarmePlugin extends SonarPlugin {
 
   /**
