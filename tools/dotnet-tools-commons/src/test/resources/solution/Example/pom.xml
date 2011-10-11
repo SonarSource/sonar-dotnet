@@ -14,6 +14,8 @@
     <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
     <dotnet.tool.version>3.5</dotnet.tool.version>
     <sonar.language>cs</sonar.language>
+    <!-- Info added to check that the C# plugin works correctly with the SCM plugin -->
+    <sonar.scm.url>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</sonar.scm.url>
   </properties>
   <build>
     <plugins>
@@ -44,12 +46,5 @@
       </plugin>
     </plugins>
   </build>
-  
-  <!-- Info added to check that the C# plugin works correctly with the SCM plugin -->
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</developerConnection>
-    <url>http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools/dotnet-tools-commons/src/test/resources/solution/Example</url>
-  </scm>
   
 </project>
