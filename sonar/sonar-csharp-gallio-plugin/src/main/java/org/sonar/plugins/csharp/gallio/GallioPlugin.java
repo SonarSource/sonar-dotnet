@@ -63,7 +63,8 @@ import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
             + "This path must be relative to the solution base directory.", global = false, project = false),
     @Property(key = GallioConstants.COVERAGE_EXCLUDES_KEY, defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,
         name = "Coverage excludes", description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. "
-            + "The format for an exclusion is the PartCover format: '[assembly]namespace'.", global = true, project = true) })
+            + "For PartCover, the format for an exclusion is : '[assembly]namespace'. "
+            + "For NCover, the format is just the name of the assemblies to exclude.", global = true, project = true) })
 public class GallioPlugin extends SonarPlugin {
 
   /**
@@ -76,7 +77,7 @@ public class GallioPlugin extends SonarPlugin {
     // Parser(s)
     extensions.add(CoverageResultParser.class);
     extensions.add(GallioResultParser.class);
-    
+
     // Sensors
     extensions.add(GallioSensor.class);
     extensions.add(TestReportSensor.class);
