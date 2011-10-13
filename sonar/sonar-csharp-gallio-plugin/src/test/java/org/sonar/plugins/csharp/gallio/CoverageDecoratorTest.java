@@ -83,16 +83,54 @@ public class CoverageDecoratorTest {
     verify(context, times(1)).saveMeasure(CoreMetrics.UNCOVERED_LINES, 100.0);
   }
 
-  // http://jira.codehaus.org/browse/SONARPLUGINS-1268
   @Test
-  public void testDecorateWithNoNCLOC() throws Exception {
+  public void testDecorateWithNoCoverage() throws Exception {
     CoverageDecorator decorator = createDecorator();
     Resource<?> projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
-    when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(null);
+    Measure ncloc = mock(Measure.class);
+    when(ncloc.getValue()).thenReturn(42d);
+    when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(ncloc);
+    Measure sts = mock(Measure.class);
+    when(sts.getValue()).thenReturn(36d);
+    when(context.getMeasure(CoreMetrics.STATEMENTS)).thenReturn(sts);
     decorator.decorate(projectResource, context);
     verify(context, times(1)).saveMeasure(CoreMetrics.COVERAGE, 0.0);
     verify(context, times(1)).saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
+    verify(context, times(1)).saveMeasure(CoreMetrics.LINES_TO_COVER, 36d);
+    verify(context, times(1)).saveMeasure(CoreMetrics.UNCOVERED_LINES, 36d);
+  }
+  
+  @Test
+  public void testDecorateWithNoCoverageNoStatement() throws Exception {
+    // could be an interface or an enum
+    CoverageDecorator decorator = createDecorator();
+    Resource<?> projectResource = new File("Foo");
+    DecoratorContext context = mock(DecoratorContext.class);
+    Measure ncloc = mock(Measure.class);
+    when(ncloc.getValue()).thenReturn(42d);
+    when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(ncloc);
+    Measure sts = mock(Measure.class);
+    when(sts.getValue()).thenReturn(0d);
+    when(context.getMeasure(CoreMetrics.STATEMENTS)).thenReturn(sts);
+    decorator.decorate(projectResource, context);
+    verify(context, never()).saveMeasure(eq(CoreMetrics.COVERAGE), anyDouble());
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINE_COVERAGE), anyDouble());
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINES_TO_COVER), anyDouble());
+    verify(context, never()).saveMeasure(eq(CoreMetrics.UNCOVERED_LINES), anyDouble());
+  }
+  
+  @Test
+  public void testDecorateWithNoCLOC() throws Exception {
+    CoverageDecorator decorator = createDecorator();
+    Resource<?> projectResource = new File("Foo");
+    DecoratorContext context = mock(DecoratorContext.class);
+    Measure ncloc = mock(Measure.class);
+    when(ncloc.getValue()).thenReturn(42d);
+    when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(null);
+    decorator.decorate(projectResource, context);
+    verify(context, never()).saveMeasure(eq(CoreMetrics.COVERAGE), anyDouble());
+    verify(context, never()).saveMeasure(eq(CoreMetrics.LINE_COVERAGE), anyDouble());
     verify(context, never()).saveMeasure(eq(CoreMetrics.LINES_TO_COVER), anyDouble());
     verify(context, never()).saveMeasure(eq(CoreMetrics.UNCOVERED_LINES), anyDouble());
   }
