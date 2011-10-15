@@ -1,5 +1,5 @@
 /*
- * .NET tools :: Commons
+ * Sonar C# Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
