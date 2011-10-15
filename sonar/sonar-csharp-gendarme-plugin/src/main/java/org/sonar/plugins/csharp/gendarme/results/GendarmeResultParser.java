@@ -38,7 +38,7 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.utils.AbstractStaxParser;
+import org.sonar.plugins.csharp.core.AbstractStaxParser;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 
 /**
