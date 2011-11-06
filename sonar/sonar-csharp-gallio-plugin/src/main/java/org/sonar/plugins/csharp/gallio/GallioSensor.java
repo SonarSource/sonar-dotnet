@@ -107,6 +107,8 @@ public class GallioSensor extends AbstractCSharpSensor {
           .getString(GallioConstants.COVERAGE_EXCLUDES_KEY, GallioConstants.COVERAGE_EXCLUDES_DEFVALUE));
       builder.setPartCoverInstallDirectory(new File(configuration.getString(GallioConstants.PART_COVER_INSTALL_KEY,
           GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
+      builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY,
+          GallioConstants.OPEN_COVER_INSTALL_DEFVALUE)));
       builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
           CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
 

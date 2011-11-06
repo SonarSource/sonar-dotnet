@@ -44,6 +44,7 @@ public class GallioCommandBuilderTest {
   private static final File GALLIO_EXE = TestUtils.getResource("/Runner/FakeProg/Gallio/bin/Gallio.Echo.exe");
   private static final File GALLIO_REPORT_FILE = new File("target/sonar/gallio-report-folder/gallio-report.xml");
   private static final File PART_COVER_INSTALL_DIR = TestUtils.getResource("/Runner/FakeProg/PartCover");
+  private static final File OPEN_COVER_INSTALL_DIR = TestUtils.getResource("/Runner/FakeProg/OpenCover");
   private static final File GALLIO_COVERAGE_REPORT_FILE = new File("target/sonar/gallio-report-folder/coverage-report.xml");
   private static final File FAKE_ASSEMBLY_2 = TestUtils.getResource("/Runner/FakeAssemblies/Fake2.assembly");
   private static final File FAKE_ASSEMBLY_1 = TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly");
@@ -191,6 +192,43 @@ public class GallioCommandBuilderTest {
     assertThat(commands[9], is("[Project2]*"));
     assertThat(commands[10], is("--output"));
     assertThat(commands[11], endsWith("coverage-report.xml"));
+  }
+  
+  @Test
+  public void testToCommandForSolutionWithOpenCoverWithMinimumParams() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setCoverageTool("OpenCover");
+    builder.setOpenCoverInstallDirectory(OPEN_COVER_INSTALL_DIR);
+    builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("OpenCover.Console.exe"));
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands.length, is(7));
+    int i = 0;
+    assertThat(commands[i], is("-register:user"));
+    i++;
+    assertThat(commands[i], startsWith("-target:"));
+    assertThat(commands[i], endsWith("Gallio.Echo.exe"));
+    i++;
+    assertThat(commands[i], is("-targetdir:"+WORK_DIR.getAbsolutePath()));
+    i++;
+    assertThat(commands[i], startsWith("\"-targetargs"));
+    assertThat(commands[i], containsString("\\\"/r:IsolatedAppDomain\\\" \\\"/report-directory:"));
+    assertThat(commands[i],
+        containsString("gallio-report-folder\\\" \\\"/report-name-format:gallio-report\\\" \\\"/report-type:Xml\\\" \\\""));
+    assertThat(commands[i], containsString(".assembly\\\" \\\""));
+    assertThat(commands[i], endsWith(".assembly\\\"\""));
+    i++;
+    assertThat(commands[i], is("\"-filter:+[Project1]* +[Project2]* \""));
+    i++;
+    assertThat(commands[i], is("-mergebyhash"));
+    i++;
+    assertThat(commands[i], startsWith("-output:"));
+    assertThat(commands[i], endsWith("coverage-report.xml"));
   }
 
   @Test

@@ -27,7 +27,9 @@ import org.slf4j.LoggerFactory;
  * <ul>
  * <li>PartCover</li>
  * <li>NCover</li>
+ * <li>OpenCover</li>
  * </ul>
+ * 
  */
 public enum CoverageTool {
   
@@ -43,7 +45,12 @@ public enum CoverageTool {
   /**
    * "NCover" tool
    */
-  NCOVER("NCover", GallioRunnerType.NCOVER);
+  NCOVER("NCover", GallioRunnerType.NCOVER),
+  
+  /**
+   * "OpenCover" tool
+   */
+  OPENCOVER("OpenCover", GallioRunnerType.ISOLATED_APP_DOMAIN);
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageTool.class);
 
