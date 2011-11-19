@@ -1,39 +1,39 @@
-/*
- * Sonar C# Plugin :: Gallio
- * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
- * dev@sonar.codehaus.org
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 3 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
- */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findXMLEvent;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import org.codehaus.staxmate.in.SMFilterFactory;
 import org.codehaus.staxmate.in.SMInputCursor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.SensorContext;
+import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 
-public abstract class AbstractParsingStrategy {
+import com.google.common.base.Predicate;
+import com.google.common.collect.Maps;
+
+public abstract class AbstractParsingStrategy implements CoverageResultParsingStrategy {
+
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractParsingStrategy.class);
+
+  private Map<Integer, FileCoverage> sourceFilesById = new HashMap<Integer, FileCoverage>();
+  private Map<String, ProjectCoverage> projectsByAssemblyName = new HashMap<String, ProjectCoverage>();
 
   private String pointElement;
   private String countVisitsPointAttribute;
@@ -69,14 +69,6 @@ public abstract class AbstractParsingStrategy {
   abstract void saveId(String assemblyId);
 
   /**
-   * Help to retrieve from which version the xml is coming from and choose the right strategy
-   * 
-   * @param rootCursor
-   * @return true if the strategy matches the version, else false
-   */
-  abstract boolean isCompatible(SMInputCursor rootCursor);
-
-  /**
    * Retrieve the source files
    * 
    * @param documentElements
@@ -102,10 +94,10 @@ public abstract class AbstractParsingStrategy {
     this.assemblyReference = asmRef;
   }
 
-  public void findPoints(String assemblyName, SMInputCursor docsTag, PointParserCallback callback) {
+  public void findPoints(String assemblyName, SMInputCursor docsTag) {
     SMInputCursor classTags = descendantElements(docsTag);
     while (nextPosition(classTags) != null) {
-      callback.createProjects(assemblyName, classTags);
+      createProjects(assemblyName, classTags);
     }
   }
 
@@ -250,6 +242,80 @@ public abstract class AbstractParsingStrategy {
 
   public void setFileIdPointAttribute(String fileIdPointAttribute) {
     this.fileIdPointAttribute = fileIdPointAttribute;
+  }
+
+  public ParserResult parse(final SensorContext context, final Project sonarProject, SMInputCursor root) {
+
+    SMInputCursor rootChildCursor = descendantElements(root);
+
+    // Then all the indexed files are extracted
+    sourceFilesById = findFiles(rootChildCursor);
+
+    if (sourceFilesById.isEmpty()) {
+      // no source, ther is no point to parse further
+      return new ParserResult(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+    }
+
+    // filter files according to the exclusion patterns
+    sourceFilesById = Maps.filterValues(sourceFilesById, new Predicate<FileCoverage>() {
+
+      public boolean apply(FileCoverage input) {
+        return context.isIndexed(org.sonar.api.resources.File.fromIOFile(input.getFile(), sonarProject), false);
+      }
+    });
+
+    // We finally process the coverage details
+    fillProjects(rootChildCursor);
+
+    List<ProjectCoverage> projects = new ArrayList<ProjectCoverage>(projectsByAssemblyName.values());
+    List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(sourceFilesById.values());
+    return new ParserResult(projects, sourceFiles);
+  }
+
+  /**
+   * Processes the details of the coverage
+   * 
+   * @param rootChildCursor
+   *          cursor positioned to get the method elements
+   */
+  private void fillProjects(SMInputCursor rootChildCursor) {
+
+    // Because of a different structure in PartCover 4, we need to get the assemblies first
+    // if the report is from PartCover 4
+    saveAssemblyNamesById(rootChildCursor);
+
+    // Sets the cursor to the tags "Type" for PartCover and "Module" for NCover
+    rootChildCursor.setFilter(SMFilterFactory.getElementOnlyFilter(getModuleTag()));
+    do {
+      if (findXMLEvent(rootChildCursor) != null) {
+
+        saveId(findAttributeValue(rootChildCursor, getAssemblyReference()));
+
+        String assemblyName = findAssemblyName(rootChildCursor);
+        LOG.debug("AssemblyName: {}", assemblyName);
+
+        findPoints(assemblyName, rootChildCursor);
+      }
+    } while (nextPosition(rootChildCursor) != null);
+  }
+
+  public void createProjects(String assemblyName, SMInputCursor classElements) {
+    FileCoverage fileCoverage = null;
+    SMInputCursor methodElements = descendantElements(classElements);
+    while (nextPosition(methodElements) != null) {
+      fileCoverage = parseMethod(methodElements, assemblyName, sourceFilesById);
+      if (fileCoverage != null) {
+        final ProjectCoverage project;
+        if (projectsByAssemblyName.containsKey(assemblyName)) {
+          project = projectsByAssemblyName.get(assemblyName);
+        } else {
+          project = new ProjectCoverage();
+          project.setAssemblyName(assemblyName);
+          projectsByAssemblyName.put(assemblyName, project);
+        }
+        project.addFile(fileCoverage);
+      }
+    }
   }
 
 }

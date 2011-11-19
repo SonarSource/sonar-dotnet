@@ -35,7 +35,6 @@ public class PartCover23ParsingStrategy extends PartCover2ParsingStrategy {
     setFileTag("File");
   }
 
-  @Override
   public boolean isCompatible(SMInputCursor rootCursor) {
     boolean result = false;
     String version = findAttributeValue(rootCursor, "ver");

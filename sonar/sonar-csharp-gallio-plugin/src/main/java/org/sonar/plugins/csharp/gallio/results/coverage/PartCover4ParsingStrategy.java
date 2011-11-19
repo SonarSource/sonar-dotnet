@@ -55,7 +55,6 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     return getAssemblyNamesById().get(getId());
   }
 
-  @Override
   public boolean isCompatible(SMInputCursor rootCursor) {
     boolean result = false;
     String version = findAttributeValue(rootCursor, "version");
@@ -127,8 +126,8 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
   }
 
   @Override
-  public void findPoints(String assemblyName, SMInputCursor docsTag, PointParserCallback callback) {
-    callback.createProjects(assemblyName, docsTag);
+  public void findPoints(String assemblyName, SMInputCursor docsTag) {
+    createProjects(assemblyName, docsTag);
   }
 
   public Map<String, String> getAssemblyNamesById() {

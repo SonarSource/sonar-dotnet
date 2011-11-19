@@ -21,6 +21,9 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Result returned by the parser containing source files and projects coverage
  * 
@@ -28,12 +31,23 @@ import java.util.List;
  */
 public class ParserResult {
 
+  private static final Logger LOG = LoggerFactory.getLogger(ParserResult.class);
+  
   private final List<FileCoverage> sourceFiles;
   private final List<ProjectCoverage> projects;
 
   public ParserResult(List<ProjectCoverage> projects, List<FileCoverage> sourceFiles) {
     this.projects = projects;
     this.sourceFiles = sourceFiles;
+    
+    // We summarize the files
+    for (FileCoverage file : sourceFiles) {
+      file.summarize();
+    }
+    for (ProjectCoverage project : projects) {
+      LOG.debug("Summarize project: {}", project);
+      project.summarize();
+    }
   }
 
   public List<FileCoverage> getSourceFiles() {

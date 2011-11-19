@@ -58,7 +58,7 @@ import com.google.common.collect.Maps;
  * 
  * @author Maxime SCHNEIDER-DUFEUTRELLE January 26, 2011
  */
-public class CoverageResultParser implements PointParserCallback, BatchExtension {
+public class CoverageResultParser implements BatchExtension {
 
   /**
    * Generates the logger.
@@ -68,8 +68,10 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
   private SensorContext context;
   private Map<Integer, FileCoverage> sourceFilesById;
   private final Map<String, ProjectCoverage> projectsByAssemblyName;
-  private final List<AbstractParsingStrategy> parsingStrategies;
-  private AbstractParsingStrategy currentStrategy;
+  //private final List<AbstractParsingStrategy> parsingStrategies;
+  private final List<CoverageResultParsingStrategy> parsingStrategies;
+  //private AbstractParsingStrategy currentStrategy;
+  private CoverageResultParsingStrategy currentStrategy;
 
   /**
    * Constructs a @link{CoverageResultStaxParser}.
@@ -78,11 +80,13 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
     this.context = context;
     sourceFilesById = new HashMap<Integer, FileCoverage>();
     projectsByAssemblyName = new HashMap<String, ProjectCoverage>();
-    parsingStrategies = new ArrayList<AbstractParsingStrategy>();
+    //parsingStrategies = new ArrayList<AbstractParsingStrategy>();
+    parsingStrategies = new ArrayList<CoverageResultParsingStrategy>();
     parsingStrategies.add(new PartCover23ParsingStrategy());
     parsingStrategies.add(new PartCover22ParsingStrategy());
     parsingStrategies.add(new PartCover4ParsingStrategy());
     parsingStrategies.add(new NCover3ParsingStrategy());
+    parsingStrategies.add(new OpenCoverParsingStrategy());
   }
 
   /**
@@ -94,15 +98,23 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
    */
   public ParserResult parse(final Project sonarProject, final File file) {
 
+    final SMHierarchicCursor rootCursor;
+    final SMInputCursor root; 
     try {
       SMInputFactory inf = new SMInputFactory(XMLInputFactory.newInstance());
-      SMHierarchicCursor rootCursor = inf.rootElementCursor(file);
-      SMInputCursor root = rootCursor.advance();
-
+      rootCursor = inf.rootElementCursor(file);
+      root = rootCursor.advance();
+    } catch (XMLStreamException e) {
+      throw new SonarException("Could not parse the result file", e);
+    }
+      
       LOG.debug("\nrootCursor is at : {}", findElementName(rootCursor));
       // First define the version
       chooseParsingStrategy(root);
-
+      
+      return currentStrategy.parse(context, sonarProject, root);
+      
+      /*
       SMInputCursor rootChildCursor = descendantElements(root);
 
       // Then all the indexed files are extracted
@@ -137,7 +149,8 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
     }
     List<ProjectCoverage> projects = new ArrayList<ProjectCoverage>(projectsByAssemblyName.values());
     List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(sourceFilesById.values());
-    return new ParserResult(projects, sourceFiles);
+    return new ParserResult(projects, sourceFiles);*/
+      
   }
 
   /**
@@ -146,7 +159,7 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
    * @param rootChildCursor
    *          cursor positioned to get the method elements
    */
-  private void fillProjects(SMInputCursor rootChildCursor) {
+  /*private void fillProjects(SMInputCursor rootChildCursor) {
 
     // Because of a different structure in PartCover 4, we need to get the assemblies first
     // if the report is from PartCover 4
@@ -184,7 +197,7 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
         project.addFile(fileCoverage);
       }
     }
-  }
+  }*/
 
   /**
    * This method is necessary due to a modification of the schema between partcover 2.2 and 2.3, for which elements start now with an
@@ -195,9 +208,10 @@ public class CoverageResultParser implements PointParserCallback, BatchExtension
    */
   private void chooseParsingStrategy(SMInputCursor root) {
 
-    Iterator<AbstractParsingStrategy> strategyIterator = parsingStrategies.iterator();
+    Iterator<CoverageResultParsingStrategy> strategyIterator = parsingStrategies.iterator();
     while (strategyIterator.hasNext()) {
-      AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator.next();
+     // AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator.next();
+      CoverageResultParsingStrategy strategy = strategyIterator.next();
       if (strategy.isCompatible(root)) {
         this.currentStrategy = strategy;
       }

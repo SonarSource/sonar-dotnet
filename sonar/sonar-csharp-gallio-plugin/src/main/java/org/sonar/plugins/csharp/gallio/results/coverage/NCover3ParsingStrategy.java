@@ -80,7 +80,6 @@ public class NCover3ParsingStrategy extends AbstractParsingStrategy {
     return files;
   }
 
-  @Override
   public boolean isCompatible(SMInputCursor rootCursor) {
     return "coverage".equals(findElementName(rootCursor));
   }

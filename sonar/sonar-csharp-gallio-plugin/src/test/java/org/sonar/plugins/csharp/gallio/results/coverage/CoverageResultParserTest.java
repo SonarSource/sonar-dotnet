@@ -173,6 +173,20 @@ public class CoverageResultParserTest {
   }
   
   @Test
+  public void testParseOpenCover() {
+    ParsingParameters params = new ParsingParameters();
+    params.report = "Coverage.OpenCover.xml";
+    params.assemblyName = "Example.Core";
+    params.fileNumber = 3;
+    params.fileName = "Money.cs";
+    params.coveredLines = 45;
+    params.lines = 47;
+    params.coverage = 0.96;
+
+    checkParsing(params);
+  }
+  
+  @Test
   public void parseEmptyPartCoverReport() {
 	File file = TestUtils.getResource("/Results/coverage/empty-partcover-report.xml");
 	ParserResult result = parser.parse(project, file);

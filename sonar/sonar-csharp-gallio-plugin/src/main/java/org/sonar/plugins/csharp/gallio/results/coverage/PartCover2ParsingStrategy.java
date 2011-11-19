@@ -29,10 +29,6 @@ public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy
 
   private static final Logger LOG = LoggerFactory.getLogger(PartCover2ParsingStrategy.class);
 
-  protected PartCover2ParsingStrategy() {
-    super();
-  }
-
   @Override
   public String findAssemblyName(SMInputCursor typeTag) {
     return findAttributeValue(typeTag, "asm");

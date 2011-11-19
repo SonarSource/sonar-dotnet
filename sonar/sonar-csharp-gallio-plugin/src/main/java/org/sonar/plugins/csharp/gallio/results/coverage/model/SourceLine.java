@@ -31,7 +31,7 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
 public class SourceLine {
 
   private final int lineNumber;
-  private int countVisits;
+  private int countVisits = 0;
 
   /**
    * Constructs a @link{FileLine}.
@@ -42,9 +42,7 @@ public class SourceLine {
 
   public void update(CoveragePoint point) {
     int pointVisits = point.getCountVisits();
-    if (pointVisits > countVisits) {
-      countVisits = pointVisits;
-    }
+    countVisits = countVisits + pointVisits;
   }
 
   /**
