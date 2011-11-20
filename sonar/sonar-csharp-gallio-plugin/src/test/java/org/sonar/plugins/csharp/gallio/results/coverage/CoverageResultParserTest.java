@@ -27,6 +27,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -42,6 +43,8 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 import org.sonar.test.TestUtils;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.inject.internal.util.Lists;
 
 public class CoverageResultParserTest {
@@ -174,7 +177,6 @@ public class CoverageResultParserTest {
   }
   
   @Test
-  @Ignore
   public void testParseOpenCover() {
     ParsingParameters params = new ParsingParameters();
     params.report = "Coverage.OpenCover.xml";
@@ -195,7 +197,7 @@ public class CoverageResultParserTest {
 	assertTrue(result.getSourceFiles().isEmpty());
   }
 
-  private void checkParsing(ParsingParameters parameters) {
+  private void checkParsing(final ParsingParameters parameters) {
     File file = TestUtils.getResource("/Results/coverage/" + parameters.report);
     ParserResult result = parser.parse(project, file);
 
@@ -214,13 +216,25 @@ public class CoverageResultParserTest {
 
     assertEquals("line number in projects and files do not match", numberOfLinesInFiles, numberOfLinesInProjects);
 
-    ProjectCoverage firstProjectCoverage = projects.get(0);
-
+    Collection<ProjectCoverage> projectsFound = Collections2.filter(projects, new Predicate<ProjectCoverage>() {
+      public boolean apply(ProjectCoverage input) {
+   
+        return StringUtils.equals(parameters.assemblyName, input.getAssemblyName());
+      }
+    });
+    assertEquals(1, projectsFound.size());
+    
+    Collection<FileCoverage> filesFound = Collections2.filter(files, new Predicate<FileCoverage>() {
+      public boolean apply(FileCoverage input) {
+   
+        return StringUtils.equals(input.getFile().getName(), parameters.fileName);
+      }
+    });
+    assertEquals(1, filesFound.size());
+    
     assertEquals(parameters.fileNumber, files.size());
 
-    assertEquals(parameters.assemblyName, firstProjectCoverage.getAssemblyName());
-
-    FileCoverage firstFileCoverage = files.get(0);
+    FileCoverage firstFileCoverage = filesFound.iterator().next();
 
     assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), parameters.fileName));
 
