@@ -227,7 +227,7 @@ public class CoverageResultParserTest {
     Collection<FileCoverage> filesFound = Collections2.filter(files, new Predicate<FileCoverage>() {
       public boolean apply(FileCoverage input) {
    
-        return StringUtils.equals(input.getFile().getName(), parameters.fileName);
+        return StringUtils.contains(input.getFile().getName(), parameters.fileName);
       }
     });
     assertEquals(1, filesFound.size());
@@ -235,8 +235,6 @@ public class CoverageResultParserTest {
     assertEquals(parameters.fileNumber, files.size());
 
     FileCoverage firstFileCoverage = filesFound.iterator().next();
-
-    assertTrue(StringUtils.contains(firstFileCoverage.getFile().getName(), parameters.fileName));
 
     assertEquals(parameters.coveredLines, firstFileCoverage.getCoveredLines());
 
