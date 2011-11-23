@@ -85,20 +85,13 @@ public class CoverageReportSensorTest {
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
     
     List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>();
-    List<ProjectCoverage> projects = new ArrayList<ProjectCoverage>();
-    ParserResult parserResult = new ParserResult(projects, sourceFiles);
-    when(parser.parse(eq(project), any(File.class))).thenReturn(parserResult);
+    when(parser.parse(eq(project), any(File.class))).thenReturn(sourceFiles);
 
-    
-    ProjectCoverage projectCoverage = mock(ProjectCoverage.class);
-    when(projectCoverage.getAssemblyName()).thenReturn("MyAssembly");
-    projects.add(projectCoverage);
-    
+   
     SensorContext context = mock(SensorContext.class);
     
     sensor.analyse(project, context);
-    
-    verify(projectCoverage).getFileCoverageCollection();
+   
   }
   
   @Test

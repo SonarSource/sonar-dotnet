@@ -34,7 +34,6 @@ import java.util.Map;
 public class FileCoverage extends Coverable {
 
   private final File file;
-  private String assemblyName;
   private Map<Integer, SourceLine> lines = new HashMap<Integer, SourceLine>();
   private int uncoveredLines = 0;
 
@@ -62,25 +61,6 @@ public class FileCoverage extends Coverable {
    */
   public File getFile() {
     return this.file;
-  }
-
-  /**
-   * Returns the assemblyName.
-   * 
-   * @return The assemblyName to return.
-   */
-  public String getAssemblyName() {
-    return this.assemblyName;
-  }
-
-  /**
-   * Sets the assemblyName.
-   * 
-   * @param assemblyName
-   *          The assemblyName to set.
-   */
-  public void setAssemblyName(String assemblyName) {
-    this.assemblyName = assemblyName;
   }
 
   /**
@@ -127,7 +107,7 @@ public class FileCoverage extends Coverable {
 
   @Override
   public String toString() {
-    return "File(name=" + file.getName() + ", assembly=" + assemblyName + ", coverage=" + getCoverage() + ", lines=" + getCountLines()
+    return "File(name=" + file.getName() + ", coverage=" + getCoverage() + ", lines=" + getCountLines()
         + ", covered=" + getCoveredLines() + ")";
   }
 }

@@ -39,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
@@ -203,7 +204,6 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
       for (CoveragePoint point : points) {
         fileCoverage.addPoint(point);
       }
-      fileCoverage.setAssemblyName(assemblyName);
     }
   }
 
@@ -263,7 +263,7 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
     this.fileIdPointAttribute = fileIdPointAttribute;
   }
 
-  public ParserResult parse(final SensorContext context, final Project sonarProject, SMInputCursor root) {
+  public List<FileCoverage> parse(final SensorContext context, VisualStudioSolution solution, final Project sonarProject, SMInputCursor root) {
 
     SMInputCursor rootChildCursor = descendantElements(root);
 
@@ -272,7 +272,7 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
 
     if (sourceFilesById.isEmpty()) {
       // no source, ther is no point to parse further
-      return new ParserResult(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+      return Collections.EMPTY_LIST;
     }
 
     // filter files according to the exclusion patterns
@@ -288,7 +288,7 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
 
     List<ProjectCoverage> projects = new ArrayList<ProjectCoverage>(projectsByAssemblyName.values());
     List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(sourceFilesById.values());
-    return new ParserResult(projects, sourceFiles);
+    return sourceFiles;
   }
 
   /**

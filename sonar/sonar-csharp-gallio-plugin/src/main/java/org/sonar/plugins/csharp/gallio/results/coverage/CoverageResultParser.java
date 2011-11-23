@@ -19,25 +19,18 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findXMLEvent;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
-import org.codehaus.staxmate.in.SMFilterFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
@@ -46,12 +39,13 @@ import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
+import com.google.common.collect.Lists;
 
 /**
  * Parses a coverage report using Stax
@@ -66,21 +60,16 @@ public class CoverageResultParser implements BatchExtension {
   private static final Logger LOG = LoggerFactory.getLogger(CoverageResultParser.class);
 
   private SensorContext context;
-  private Map<Integer, FileCoverage> sourceFilesById;
-  private final Map<String, ProjectCoverage> projectsByAssemblyName;
-  //private final List<AbstractParsingStrategy> parsingStrategies;
+  private VisualStudioSolution solution;
   private final List<CoverageResultParsingStrategy> parsingStrategies;
-  //private AbstractParsingStrategy currentStrategy;
   private CoverageResultParsingStrategy currentStrategy;
 
   /**
    * Constructs a @link{CoverageResultStaxParser}.
    */
-  public CoverageResultParser(SensorContext context) {
+  public CoverageResultParser(SensorContext context, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     this.context = context;
-    sourceFilesById = new HashMap<Integer, FileCoverage>();
-    projectsByAssemblyName = new HashMap<String, ProjectCoverage>();
-    //parsingStrategies = new ArrayList<AbstractParsingStrategy>();
+    this.solution = microsoftWindowsEnvironment.getCurrentSolution();
     parsingStrategies = new ArrayList<CoverageResultParsingStrategy>();
     parsingStrategies.add(new PartCover23ParsingStrategy());
     parsingStrategies.add(new PartCover22ParsingStrategy());
@@ -96,10 +85,10 @@ public class CoverageResultParser implements BatchExtension {
    *          : the file to parse
    * 
    */
-  public ParserResult parse(final Project sonarProject, final File file) {
+  public List<FileCoverage> parse(final Project sonarProject, final File file) {
 
     final SMHierarchicCursor rootCursor;
-    final SMInputCursor root; 
+    final SMInputCursor root;
     try {
       SMInputFactory inf = new SMInputFactory(XMLInputFactory.newInstance());
       rootCursor = inf.rootElementCursor(file);
@@ -107,98 +96,39 @@ public class CoverageResultParser implements BatchExtension {
     } catch (XMLStreamException e) {
       throw new SonarException("Could not parse the result file", e);
     }
-      
-      LOG.debug("\nrootCursor is at : {}", findElementName(rootCursor));
-      // First define the version
-      chooseParsingStrategy(root);
-      
-      return currentStrategy.parse(context, sonarProject, root);
-      
-      /*
-      SMInputCursor rootChildCursor = descendantElements(root);
 
-      // Then all the indexed files are extracted
-      sourceFilesById = currentStrategy.findFiles(rootChildCursor);
+    LOG.debug("\nrootCursor is at : {}", findElementName(rootCursor));
+    // First define the version
+    chooseParsingStrategy(root);
 
-      if (sourceFilesById.isEmpty()) {
-        // no source, ther is no point to parse further
-        return new ParserResult(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
-      }
-
-      // filter files according to the exclusion patterns
-      sourceFilesById = Maps.filterValues(sourceFilesById, new Predicate<FileCoverage>() {
-
-        public boolean apply(FileCoverage input) {
-          return context.isIndexed(org.sonar.api.resources.File.fromIOFile(input.getFile(), sonarProject), false);
-        }
-      });
-
-      // We finally process the coverage details
-      fillProjects(rootChildCursor);
-
-      // We summarize the files
-      for (FileCoverage fileCoverage : sourceFilesById.values()) {
-        fileCoverage.summarize();
-      }
-      for (ProjectCoverage project : projectsByAssemblyName.values()) {
-        LOG.debug("Summarize project: {}", project);
-        project.summarize();
-      }
-    } catch (XMLStreamException e) {
-      throw new SonarException("Could not parse the result file", e);
-    }
-    List<ProjectCoverage> projects = new ArrayList<ProjectCoverage>(projectsByAssemblyName.values());
-    List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(sourceFilesById.values());
-    return new ParserResult(projects, sourceFiles);*/
-      
-  }
-
-  /**
-   * Processes the details of the coverage
-   * 
-   * @param rootChildCursor
-   *          cursor positioned to get the method elements
-   */
-  /*private void fillProjects(SMInputCursor rootChildCursor) {
-
-    // Because of a different structure in PartCover 4, we need to get the assemblies first
-    // if the report is from PartCover 4
-    currentStrategy.saveAssemblyNamesById(rootChildCursor);
-
-    // Sets the cursor to the tags "Type" for PartCover and "Module" for NCover
-    rootChildCursor.setFilter(SMFilterFactory.getElementOnlyFilter(currentStrategy.getModuleTag()));
-    do {
-      if (findXMLEvent(rootChildCursor) != null) {
-
-        currentStrategy.saveId(findAttributeValue(rootChildCursor, currentStrategy.getAssemblyReference()));
-
-        String assemblyName = currentStrategy.findAssemblyName(rootChildCursor);
-        LOG.debug("AssemblyName: {}", assemblyName);
-
-        currentStrategy.findPoints(assemblyName, rootChildCursor, this);
-      }
-    } while (nextPosition(rootChildCursor) != null);
-  }
-
-  public void createProjects(String assemblyName, SMInputCursor classElements) {
-    FileCoverage fileCoverage = null;
-    SMInputCursor methodElements = descendantElements(classElements);
-    while (nextPosition(methodElements) != null) {
-      fileCoverage = currentStrategy.parseMethod(methodElements, assemblyName, sourceFilesById);
-      if (fileCoverage != null) {
-        final ProjectCoverage project;
-        if (projectsByAssemblyName.containsKey(assemblyName)) {
-          project = projectsByAssemblyName.get(assemblyName);
+    List<FileCoverage> fileCoverages = currentStrategy.parse(context, solution, sonarProject, root);
+    
+    // We filter the files that belong to the current projet
+    // and we summarize them
+    List<FileCoverage> result = Lists.newArrayList();
+    String currentProjectName = sonarProject.getName();
+    String branch = sonarProject.getBranch();
+    for (FileCoverage fileCoverage : fileCoverages) {
+      VisualStudioProject vsProject = solution.getProject(fileCoverage.getFile());
+      if (vsProject == null) {
+        LOG.debug("Coverage report contains a reference to a cs file outside the solution {}", fileCoverage.getFile());
+      } else {
+        final String vsProjectName;
+        if (StringUtils.isEmpty(branch)) {
+          vsProjectName = vsProject.getName();
         } else {
-          project = new ProjectCoverage();
-          project.setAssemblyName(assemblyName);
-          projectsByAssemblyName.put(assemblyName, project);
+          vsProjectName = vsProject.getName() + " " + branch;
         }
-        project.addFile(fileCoverage);
+        if (currentProjectName.equals(vsProjectName)) {
+          fileCoverage.summarize();
+          result.add(fileCoverage);
+        }
       }
     }
-  }*/
-
+    
+    return result;
+  }
+  
   /**
    * This method is necessary due to a modification of the schema between partcover 2.2 and 2.3, for which elements start now with an
    * uppercase letter. Format is a little bit different with partcover4, and NCover use a different format too.
@@ -210,7 +140,6 @@ public class CoverageResultParser implements BatchExtension {
 
     Iterator<CoverageResultParsingStrategy> strategyIterator = parsingStrategies.iterator();
     while (strategyIterator.hasNext()) {
-     // AbstractParsingStrategy strategy = (AbstractParsingStrategy) strategyIterator.next();
       CoverageResultParsingStrategy strategy = strategyIterator.next();
       if (strategy.isCompatible(root)) {
         this.currentStrategy = strategy;
@@ -221,5 +150,4 @@ public class CoverageResultParser implements BatchExtension {
       this.currentStrategy = parsingStrategies.get(0);
     }
   }
-
 }

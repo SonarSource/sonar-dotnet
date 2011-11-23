@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp.gallio;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -110,29 +111,11 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   }
 
   protected void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
-    ParserResult result = parser.parse(project, reportFile);
+    List<FileCoverage> result = parser.parse(project, reportFile);
 
-    VisualStudioSolution solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
-
-    ProjectCoverage currentProjectCoverage = null;
-    for (ProjectCoverage projectCoverage : result.getProjects()) {
-      VisualStudioProject vsProject = solution.getProject(projectCoverage.getAssemblyName());
-      String branch = project.getBranch();
-      final String vsProjectName;
-      if (StringUtils.isEmpty(branch)) {
-        vsProjectName = vsProject.getName();
-      } else {
-        vsProjectName = vsProject.getName() + " " + project.getBranch();
-      }
-      if (project.getName().equals(vsProjectName)) {
-        currentProjectCoverage = projectCoverage;
-        break;
-      }
-    }
-
-    if (currentProjectCoverage != null) {
+    if (result != null) {
       // Save data for each file
-      for (FileCoverage fileCoverage : currentProjectCoverage.getFileCoverageCollection()) {
+      for (FileCoverage fileCoverage : result) {
         org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
         if (context.isIndexed(sonarFile, false)) {
           LOG.debug("- Saving coverage information for file {}", sonarFile.getKey());

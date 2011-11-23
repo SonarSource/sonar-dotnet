@@ -38,6 +38,9 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
@@ -52,6 +55,8 @@ public class CoverageResultParserTest {
   private CoverageResultParser parser;
   private SensorContext context;
   private Project project;
+  private VisualStudioSolution solution;
+  
 
   @Before
   public void setUp() {
@@ -61,7 +66,19 @@ public class CoverageResultParserTest {
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Work\\CodeQuality\\Temp\\Example")));
     project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(fileSystem);
-    parser = new CoverageResultParser(context);
+    when(project.getName()).thenReturn("Example.Core");
+    
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Example.Core");
+    
+    solution = mock(VisualStudioSolution.class);
+    when(solution.getProject(any(File.class))).thenReturn(vsProject);
+   
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment =  mock(MicrosoftWindowsEnvironment.class);
+    when(microsoftWindowsEnvironment.getCurrentSolution()).thenReturn(solution);
+    
+    
+    parser = new CoverageResultParser(context, microsoftWindowsEnvironment);
   }
 
   @Test
@@ -192,38 +209,20 @@ public class CoverageResultParserTest {
   
   @Test
   public void parseEmptyPartCoverReport() {
-	File file = TestUtils.getResource("/Results/coverage/empty-partcover-report.xml");
-	ParserResult result = parser.parse(project, file);
-	assertTrue(result.getSourceFiles().isEmpty());
+    File file = TestUtils.getResource("/Results/coverage/empty-partcover-report.xml");
+    List<FileCoverage> result = parser.parse(project, file);
+    assertTrue(result.isEmpty());
   }
 
   private void checkParsing(final ParsingParameters parameters) {
     File file = TestUtils.getResource("/Results/coverage/" + parameters.report);
-    ParserResult result = parser.parse(project, file);
-
-    List<ProjectCoverage> projects = result.getProjects();
-    List<FileCoverage> files = result.getSourceFiles();
-
-    int numberOfLinesInProjects = 0;
-    for (ProjectCoverage projectCoverage : projects) {
-      numberOfLinesInProjects += projectCoverage.getCountLines();
-    }
+    List<FileCoverage> files = parser.parse(project, file);
 
     int numberOfLinesInFiles = 0;
     for (FileCoverage fileCoverage : files) {
       numberOfLinesInFiles += fileCoverage.getCountLines();
     }
 
-    assertEquals("line number in projects and files do not match", numberOfLinesInFiles, numberOfLinesInProjects);
-
-    Collection<ProjectCoverage> projectsFound = Collections2.filter(projects, new Predicate<ProjectCoverage>() {
-      public boolean apply(ProjectCoverage input) {
-   
-        return StringUtils.equals(parameters.assemblyName, input.getAssemblyName());
-      }
-    });
-    assertEquals(1, projectsFound.size());
-    
     Collection<FileCoverage> filesFound = Collections2.filter(files, new Predicate<FileCoverage>() {
       public boolean apply(FileCoverage input) {
    
