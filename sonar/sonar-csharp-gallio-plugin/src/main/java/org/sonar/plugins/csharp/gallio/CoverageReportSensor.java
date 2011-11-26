@@ -36,16 +36,12 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.Coverable;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
 
 /**

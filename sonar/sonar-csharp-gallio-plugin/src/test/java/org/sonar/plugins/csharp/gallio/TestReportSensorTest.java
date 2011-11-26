@@ -22,15 +22,12 @@ package org.sonar.plugins.csharp.gallio;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -42,12 +39,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
-import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;

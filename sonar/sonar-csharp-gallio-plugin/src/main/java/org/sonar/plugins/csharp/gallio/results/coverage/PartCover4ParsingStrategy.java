@@ -19,40 +19,29 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.advanceCursor;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
 public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   private static final Logger LOG = LoggerFactory.getLogger(PartCover4ParsingStrategy.class);
 
-  private Map<String, String> assemblyNamesById;
-  private String id;
-  private String lineCount;
-  private String temporaryFileId;
-  private boolean areUncoveredLines;
-  private boolean methodWithPoints;
-
   public PartCover4ParsingStrategy() {
     setModuleTag("Type");
     setFileTag("File");
-    setAssemblyReference("asmref");
-  }
-
-  @Override
-  public String findAssemblyName(SMInputCursor typeTag) {
-    return getAssemblyNamesById().get(getId());
   }
 
   public boolean isCompatible(SMInputCursor rootCursor) {
@@ -72,45 +61,47 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     }
     return result;
   }
+  
+  /**
+   * Parse a method, retrieving all its points
+   * 
+   * @param method
+   *          : method to parse
+   * @param assemblyName
+   *          : corresponding assembly name
+   * @param sourceFilesById
+   *          : map containing the source files
+   */
+  public void parseMethod(SMInputCursor method) {
 
-  @Override
-  public void saveAssemblyNamesById(SMInputCursor docsTag) {
-    this.assemblyNamesById = new HashMap<String, String>();
-    while ("Assembly".equals(findElementName(docsTag))) {
-      if (isAStartElement(docsTag)) {
-        String name = findAttributeValue(docsTag, "name");
-        String assemblyId = findAttributeValue(docsTag, "id");
-        LOG.debug("Adding assembly {} with its id ({}) in the map", name, assemblyId);
-        assemblyNamesById.put(assemblyId, name);
+    if (isAStartElement(method)) {
+
+      String lineCount = findAttributeValue(method, "linecount");
+      String temporaryFileId = findAttributeValue(method, "fid");
+      boolean areUncoveredLines = (temporaryFileId != null);
+      boolean methodWithPoints = false;
+
+      SMInputCursor pointTag = descendantElements(method);
+      List<CoveragePoint> points = new ArrayList<CoveragePoint>();
+      int fid = 0;
+
+      while (nextPosition(pointTag) != null) {
+        methodWithPoints = true;
+        if (isAStartElement(pointTag) && (findAttributeValue(pointTag, getFileIdPointAttribute()) != null)) {
+          CoveragePoint point = createPoint(pointTag);
+          points.add(point);
+          fid = findAttributeIntValue(pointTag, getFileIdPointAttribute());
+        }
       }
-      advanceCursor(docsTag);
-    }
-    setAssemblyNamesById(assemblyNamesById);
-  }
-
-  @Override
-  protected void initializeVariables(SMInputCursor method) {
-    this.lineCount = findAttributeValue(method, "linecount");
-    this.temporaryFileId = findAttributeValue(method, "fid");
-    this.areUncoveredLines = (temporaryFileId != null);
-    this.methodWithPoints = false;
-  }
-
-  @Override
-  protected void setMethodWithPointsToTrue() {
-    this.methodWithPoints = true;
-  }
-
-  @Override
-  protected FileCoverage createFileCoverage(Map<Integer, FileCoverage> sourceFilesById, int fid) {
-    FileCoverage fileCoverage = null;
-    if ( !this.methodWithPoints && this.areUncoveredLines) {
-      fileCoverage = sourceFilesById.get(Integer.valueOf(this.temporaryFileId));
-      handleMethodWithoutPoints(this.lineCount, fileCoverage);
-    } else {
-      fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
-    }
-    return fileCoverage;
+      final FileCoverage fileCoverage;
+      if ( !methodWithPoints && areUncoveredLines) {
+        fileCoverage = sourceFilesById.get(Integer.valueOf(temporaryFileId));
+        handleMethodWithoutPoints(lineCount, fileCoverage);
+      } else {
+        fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
+      }
+      fillFileCoverage(fileCoverage, points);
+    } 
   }
 
   /**
@@ -126,24 +117,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
   }
 
   @Override
-  public void findPoints(String assemblyName, SMInputCursor docsTag) {
-    createProjects(assemblyName, docsTag);
+  public void findPoints(SMInputCursor docsTag) {
+    createProjects(docsTag);
   }
-
-  public Map<String, String> getAssemblyNamesById() {
-    return assemblyNamesById;
-  }
-
-  private void setAssemblyNamesById(Map<String, String> assemblyNamesById) {
-    this.assemblyNamesById = assemblyNamesById;
-  }
-
-  private String getId() {
-    return id;
-  }
-
-  public void saveId(String id) {
-    this.id = id;
-  }
-
 }

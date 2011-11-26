@@ -38,8 +38,6 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;

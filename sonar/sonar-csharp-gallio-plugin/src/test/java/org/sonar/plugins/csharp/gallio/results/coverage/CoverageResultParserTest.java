@@ -32,7 +32,6 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
@@ -42,8 +41,6 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ParserResult;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.ProjectCoverage;
 import org.sonar.test.TestUtils;
 
 import com.google.common.base.Predicate;

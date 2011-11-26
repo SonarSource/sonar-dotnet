@@ -19,40 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-
-import org.codehaus.staxmate.in.SMInputCursor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy {
-
-  private static final Logger LOG = LoggerFactory.getLogger(PartCover2ParsingStrategy.class);
-
-  @Override
-  public String findAssemblyName(SMInputCursor typeTag) {
-    return findAttributeValue(typeTag, "asm");
-  }
-
-  @Override
-  public void saveAssemblyNamesById(SMInputCursor docsTag) {
-    LOG.debug("Creating a map with assembly names would be useless with PartCover 2.x version");
-  }
-
-  @Override
-  public void saveId(String id) {
-    LOG.debug("Unused method for PartCover 2.x");
-  }
-
-  @Override
-  public String getAssemblyReference() {
-    LOG.debug("Unused method for PartCover 2.x, return \"\" to avoid null pointer");
-    return "";
-  }
-
-  @Override
-  public void setAssemblyReference(String asmRef) {
-    LOG.debug("Unused method for PartCover 2.x");
-  }
 
 }

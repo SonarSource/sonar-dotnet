@@ -52,11 +52,6 @@ public class NCover3ParsingStrategy extends AbstractParsingStrategy {
   }
 
   @Override
-  public String findAssemblyName(SMInputCursor docTag) {
-    return findAttributeValue(docTag, "assembly");
-  }
-
-  @Override
   public Map<Integer, FileCoverage> findFiles(SMInputCursor docsTag) {
     Map<Integer, FileCoverage> files = new HashMap<Integer, FileCoverage>();
     try {
@@ -82,27 +77,6 @@ public class NCover3ParsingStrategy extends AbstractParsingStrategy {
 
   public boolean isCompatible(SMInputCursor rootCursor) {
     return "coverage".equals(findElementName(rootCursor));
-  }
-
-  @Override
-  public void saveAssemblyNamesById(SMInputCursor docsTag) {
-    LOG.debug("Unused method for NCover 3");
-  }
-
-  @Override
-  public void saveId(String id) {
-    LOG.debug("Unused method for NCover 3");
-  }
-
-  @Override
-  public String getAssemblyReference() {
-    LOG.debug("Unused method for NCover3, return \"\" to avoid null pointer");
-    return "";
-  }
-
-  @Override
-  public void setAssemblyReference(String asmRef) {
-    LOG.debug("Unused method for NCover3");
   }
 
 }
