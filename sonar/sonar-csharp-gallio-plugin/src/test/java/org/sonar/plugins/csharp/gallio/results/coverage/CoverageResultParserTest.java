@@ -66,10 +66,10 @@ public class CoverageResultParserTest {
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Work\\CodeQuality\\Temp\\Example")));
     project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(fileSystem);
-    when(project.getName()).thenReturn("Example.Core");
+    when(project.getName()).thenReturn("Example.CoreX"); // we check that assembly/project names are not taken in account (SONARPLUGINS-1517)
     
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getName()).thenReturn("Example.Core");
+    when(vsProject.getName()).thenReturn("Example.CoreX");
     
     solution = mock(VisualStudioSolution.class);
     when(solution.getProject(any(File.class))).thenReturn(vsProject);
