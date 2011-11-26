@@ -235,7 +235,7 @@ public final class GallioCommandBuilder {
   }
 
   protected Command createCommand() throws GallioException {
-    Command command = null;
+    final Command command;
     LOG.debug("- Gallio executable   : " + gallioExecutable);
 
     if (CoverageTool.PARTCOVER.equals(coverageTool)) {
