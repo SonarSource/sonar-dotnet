@@ -79,7 +79,7 @@ public class GendarmeViolationMaker implements BatchExtension {
    * @return the created violation
    */
   public Violation createViolation() {
-    Resource<?> resource = null;
+    final Resource<?> resource;
     Integer line = null;
     if (StringUtils.isEmpty(currentSource)) {
       // No source information, need to detect the corresponding resource through the CSharpResourceBridge
