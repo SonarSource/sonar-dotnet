@@ -23,8 +23,7 @@ package org.sonar.plugins.csharp.gendarme.results;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 
@@ -39,6 +38,7 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 import com.google.common.collect.Lists;
 
@@ -63,13 +63,13 @@ public class GendarmeViolationMakerTest {
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
     when(project.getFileSystem()).thenReturn(fileSystem);
-    context = mock(SensorContext.class);
     resourcesBridge = createFakeBridge();
-    violationMaker = new GendarmeViolationMaker(project, context, resourcesBridge);
   }
 
   @Before
   public void reinitViolationMaker() {
+    context = mock(SensorContext.class);
+    violationMaker = new GendarmeViolationMaker(mock(MicrosoftWindowsEnvironment.class), project, context, resourcesBridge);
     violationMaker.setCurrentRule(aRule);
     violationMaker.setCurrentDefaultViolationMessage("Default Message");
     violationMaker.setCurrentTargetName("Example.Core.IMoney Example.Core.Money::AddMoney(Example.Core.Money)");
@@ -150,6 +150,14 @@ public class GendarmeViolationMakerTest {
     assertThat(violation.getResource().getKey(), is("Example.Core/Money.cs"));
     assertNull(violation.getLineId());
     assertThat(violation.getMessage(), is("Message"));
+  }
+  
+  @Test
+  public void testCreateViolationOutsideProject() throws Exception {
+    violationMaker.setCurrentSource("C:\\Outside\\Example\\Example.Core\\Money.cs");
+    Violation violation = violationMaker.createViolation();
+    assertNull(violation);
+    verifyZeroInteractions(context);
   }
 
   @Test

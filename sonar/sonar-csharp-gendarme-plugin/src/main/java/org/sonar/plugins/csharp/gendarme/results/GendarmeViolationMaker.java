@@ -33,6 +33,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 import com.google.common.collect.Maps;
 
@@ -43,9 +44,10 @@ public class GendarmeViolationMaker implements BatchExtension {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeViolationMaker.class);
 
-  private Project project;
-  private SensorContext context;
-  private CSharpResourcesBridge resourcesBridge;
+  private final Project project;
+  private final SensorContext context;
+  private final CSharpResourcesBridge resourcesBridge;
+  private final MicrosoftWindowsEnvironment env;
 
   private Map<Rule, String> rulesTypeMap = Maps.newHashMap();
   private static final String TYPE_METHOD = "Method";
@@ -66,8 +68,9 @@ public class GendarmeViolationMaker implements BatchExtension {
    * @param rulesManager
    * @param profile
    */
-  public GendarmeViolationMaker(Project project, SensorContext context, CSharpResourcesBridge resourcesBridge) {
+  public GendarmeViolationMaker(MicrosoftWindowsEnvironment env, Project project, SensorContext context, CSharpResourcesBridge resourcesBridge) {
     super();
+    this.env = env;
     this.project = project;
     this.context = context;
     this.resourcesBridge = resourcesBridge;
@@ -93,6 +96,7 @@ public class GendarmeViolationMaker implements BatchExtension {
       resource = File.fromIOFile(new java.io.File(defectLocation.getPath()), project);
       line = defectLocation.getLineNumber();
     }
+    
     return createViolationOnResource(resource, line);
   }
 
@@ -122,6 +126,11 @@ public class GendarmeViolationMaker implements BatchExtension {
   }
 
   private Violation createViolationOnResource(Resource<?> resource, Integer lineNumber) {
+    if (StringUtils.isNotEmpty(currentSource) && resource == null) {
+      LOG.info("Ignoring violation on file outside current project ({})", currentSource);
+      return null;
+    }
+    
     Violation violation = Violation.create(currentRule, resource);
     if (lineNumber != null) {
       violation.setLineId(lineNumber);
