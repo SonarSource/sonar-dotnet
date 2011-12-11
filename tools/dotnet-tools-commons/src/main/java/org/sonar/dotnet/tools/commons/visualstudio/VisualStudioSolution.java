@@ -37,6 +37,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.resources.Project;
 
 /**
  * A visual studio solution model.
@@ -168,6 +169,24 @@ public class VisualStudioSolution {
     }
     return null;
   }
+  
+  public VisualStudioProject getProjectFromSonarProject(Project sonarProject) {
+    String currentProjectName = sonarProject.getName();
+    String branch = sonarProject.getBranch();
+    for (VisualStudioProject project : projects) {
+      final String vsProjectName;
+      if (StringUtils.isEmpty(branch)) {
+        vsProjectName = project.getName();
+      } else {
+        vsProjectName = project.getName() + " " + branch;
+      }
+      if (currentProjectName.equals(vsProjectName)) {
+        return project;
+      }
+    }
+    return null;
+  }
+  
 
   /**
    * Gets the project whose base directory contains the file/directory.
