@@ -187,7 +187,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
             String path = issueCursor.getAttrValue("Path");
             String file = issueCursor.getAttrValue("File");
             if (StringUtils.isNotEmpty(path) && StringUtils.isNotEmpty(file)) {
-              File sourceFile = new File(path, file);
+              File sourceFile = new File(path, file).getAbsoluteFile();
               VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
               if (vsProject.equals(currentVsProject)) {
                 resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);

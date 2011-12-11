@@ -101,7 +101,7 @@ public class GendarmeViolationMaker implements BatchExtension {
     } else {
       // Too easy, let's use the source information
       DefectLocation defectLocation = DefectLocation.parse(currentSource);
-      java.io.File sourceFile = new java.io.File(defectLocation.getPath());
+      java.io.File sourceFile = new java.io.File(defectLocation.getPath()).getAbsoluteFile();
       VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
       if (vsProject.equals(currentVsProject)) {
         resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
