@@ -104,23 +104,14 @@ public class CoverageResultParser implements BatchExtension {
     // We filter the files that belong to the current projet
     // and we summarize them
     List<FileCoverage> result = Lists.newArrayList();
-    String currentProjectName = sonarProject.getName();
-    String branch = sonarProject.getBranch();
+    VisualStudioProject currentVsProject = solution.getProjectFromSonarProject(sonarProject);
     for (FileCoverage fileCoverage : fileCoverages) {
       VisualStudioProject vsProject = solution.getProject(fileCoverage.getFile());
       if (vsProject == null) {
         LOG.debug("Coverage report contains a reference to a cs file outside the solution {}", fileCoverage.getFile());
-      } else {
-        final String vsProjectName;
-        if (StringUtils.isEmpty(branch)) {
-          vsProjectName = vsProject.getName();
-        } else {
-          vsProjectName = vsProject.getName() + " " + branch;
-        }
-        if (currentProjectName.equals(vsProjectName)) {
-          fileCoverage.summarize();
-          result.add(fileCoverage);
-        }
+      } else if (currentVsProject.equals(vsProject)) {
+        fileCoverage.summarize();
+        result.add(fileCoverage);
       }
     }
     

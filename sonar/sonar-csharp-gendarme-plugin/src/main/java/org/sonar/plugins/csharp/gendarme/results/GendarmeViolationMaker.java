@@ -32,8 +32,11 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.Violation;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 
 import com.google.common.collect.Maps;
 
@@ -44,10 +47,13 @@ public class GendarmeViolationMaker implements BatchExtension {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeViolationMaker.class);
 
+  private final VisualStudioSolution vsSolution;
+  private final VisualStudioProject vsProject;
   private final Project project;
   private final SensorContext context;
   private final CSharpResourcesBridge resourcesBridge;
-  private final MicrosoftWindowsEnvironment env;
+  private final ResourceHelper resourceHelper;
+  
 
   private Map<Rule, String> rulesTypeMap = Maps.newHashMap();
   private static final String TYPE_METHOD = "Method";
@@ -68,12 +74,14 @@ public class GendarmeViolationMaker implements BatchExtension {
    * @param rulesManager
    * @param profile
    */
-  public GendarmeViolationMaker(MicrosoftWindowsEnvironment env, Project project, SensorContext context, CSharpResourcesBridge resourcesBridge) {
+  public GendarmeViolationMaker(MicrosoftWindowsEnvironment env, Project project, SensorContext context, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
-    this.env = env;
+    this.vsSolution = env.getCurrentSolution();
+    this.vsProject = vsSolution.getProjectFromSonarProject(project);
     this.project = project;
     this.context = context;
     this.resourcesBridge = resourcesBridge;
+    this.resourceHelper = resourceHelper;
   }
 
   /**
@@ -93,7 +101,14 @@ public class GendarmeViolationMaker implements BatchExtension {
     } else {
       // Too easy, let's use the source information
       DefectLocation defectLocation = DefectLocation.parse(currentSource);
-      resource = File.fromIOFile(new java.io.File(defectLocation.getPath()), project);
+      java.io.File sourceFile = new java.io.File(defectLocation.getPath());
+      VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
+      if (vsProject.equals(currentVsProject)) {
+        resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+      } else {
+        LOG.debug("Ignoring file outside current project : {}", sourceFile);
+        resource = null;
+      }
       line = defectLocation.getLineNumber();
     }
     
@@ -128,6 +143,10 @@ public class GendarmeViolationMaker implements BatchExtension {
   private Violation createViolationOnResource(Resource<?> resource, Integer lineNumber) {
     if (StringUtils.isNotEmpty(currentSource) && resource == null) {
       LOG.info("Ignoring violation on file outside current project ({})", currentSource);
+      return null;
+    }
+    if (resource!=null && !resourceHelper.isResourceInProject(resource, project)) {
+      LOG.info("Ignoring violation on file outside current project ({})", resource.getKey());
       return null;
     }
     

@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
@@ -43,7 +44,11 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 import org.sonar.plugins.csharp.core.AbstractStaxParser;
 
 /**
@@ -62,10 +67,13 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   private static final String TYPENAME = "TypeName";
   private static final String LINE = "Line";
 
-  private Project project;
-  private SensorContext context;
-  private RuleFinder ruleFinder;
-  private CSharpResourcesBridge resourcesBridge;
+  private final VisualStudioSolution vsSolution;
+  private final VisualStudioProject vsProject;
+  private final Project project;
+  private final SensorContext context;
+  private final RuleFinder ruleFinder;
+  private final CSharpResourcesBridge resourcesBridge;
+  private final ResourceHelper resourceHelper;
 
   /**
    * Constructs a @link{FxCopResultParser}.
@@ -75,12 +83,15 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
    * @param rulesManager
    * @param profile
    */
-  public FxCopResultParser(Project project, SensorContext context, RuleFinder ruleFinder, CSharpResourcesBridge resourcesBridge) {
+  public FxCopResultParser(MicrosoftWindowsEnvironment env, Project project, SensorContext context, RuleFinder ruleFinder, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
+    this.vsSolution = env.getCurrentSolution();
+    this.vsProject = vsSolution.getProjectFromSonarProject(project);
     this.project = project;
     this.context = context;
     this.ruleFinder = ruleFinder;
     this.resourcesBridge = resourcesBridge;
+    this.resourceHelper = resourceHelper;
   }
 
   /**
@@ -159,7 +170,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   private void parseTypeBloc(String namespaceName, SMInputCursor cursor) throws XMLStreamException {
     // Cursor on <Type>
     String typeName = cursor.getAttrValue(NAME);
-    Resource<?> resource = resourcesBridge.getFromTypeName(namespaceName, typeName);
+    Resource<?> typeResource = resourcesBridge.getFromTypeName(namespaceName, typeName);
     SMInputCursor messagesCursor = cursor.descendantElementCursor(MESSAGE);
     while (messagesCursor.getNext() != null) {
       // Cursor on <Message>
@@ -171,15 +182,40 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
           // look for all potential issues
           SMInputCursor issueCursor = messagesCursor.childElementCursor();
           while (issueCursor.getNext() != null) {
-            // Cursor on Issue
-            Violation violation = Violation.create(currentRule, resource);
-            String lineNumber = issueCursor.getAttrValue(LINE);
-            if (lineNumber != null) {
-              violation.setLineId(Integer.parseInt(lineNumber));
+            final Resource<?> resource;
+            final boolean saveViolation;
+            String path = issueCursor.getAttrValue("Path");
+            String file = issueCursor.getAttrValue("File");
+            if (StringUtils.isNotEmpty(path) && StringUtils.isNotEmpty(file)) {
+              File sourceFile = new File(path, file);
+              VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
+              if (vsProject.equals(currentVsProject)) {
+                resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+                saveViolation = true;
+              } else {
+                LOG.debug("Ignoring file outside current project : {}", sourceFile);
+                resource = null;
+                saveViolation = false;
+              }
+            } else if (typeResource==null || resourceHelper.isResourceInProject(typeResource, project)) {
+              resource = typeResource;
+              saveViolation = true;
+            } else {
+              resource = null;
+              saveViolation = false;
             }
-            violation.setMessage(issueCursor.collectDescendantText().trim());
-            violation.setSeverity(currentRule.getSeverity());
-            context.saveViolation(violation);
+            
+            if (saveViolation) {
+              // Cursor on Issue
+              Violation violation = Violation.create(currentRule, resource);
+              String lineNumber = issueCursor.getAttrValue(LINE);
+              if (lineNumber != null) {
+                violation.setLineId(Integer.parseInt(lineNumber));
+              }
+              violation.setMessage(issueCursor.collectDescendantText().trim());
+              violation.setSeverity(currentRule.getSeverity());
+              context.saveViolation(violation);
+            }
           }
         } else {
           LOG.warn("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));

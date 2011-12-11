@@ -37,12 +37,21 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.resources.Project;
+import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 import org.sonar.test.TestUtils;
+
+import com.google.common.collect.Lists;
 
 public class FxCopResultParserTest {
 
@@ -60,7 +69,22 @@ public class FxCopResultParserTest {
   public void init() {
     context = mock(SensorContext.class);
     resourcesBridge = mock(CSharpResourcesBridge.class);
-    parser = new FxCopResultParser(null, context, newRuleFinder(), resourcesBridge);
+    
+    Project project = mock(Project.class);
+    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
+    when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
+    when(project.getFileSystem()).thenReturn(fileSystem);
+    
+    MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(env.getCurrentSolution()).thenReturn(solution);
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(solution.getProjectFromSonarProject(any(Project.class))).thenReturn(vsProject);
+    when(solution.getProject(any(File.class))).thenReturn(vsProject);
+    ResourceHelper resourceHelper = mock(ResourceHelper.class);
+    when(resourceHelper.isResourceInProject(any(Resource.class), any(Project.class))).thenReturn(true);
+ 
+    parser = new FxCopResultParser(env, project, context, newRuleFinder(), resourcesBridge, resourceHelper);
     parser.setEncoding(Charset.forName("UTF-8"));
   }
 

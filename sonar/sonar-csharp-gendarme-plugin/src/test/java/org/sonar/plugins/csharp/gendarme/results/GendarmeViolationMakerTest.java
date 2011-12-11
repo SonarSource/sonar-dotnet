@@ -23,6 +23,7 @@ package org.sonar.plugins.csharp.gendarme.results;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
@@ -37,8 +38,11 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.Violation;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 
 import com.google.common.collect.Lists;
 
@@ -46,9 +50,11 @@ import com.google.common.collect.Lists;
 public class GendarmeViolationMakerTest {
 
   private static GendarmeViolationMaker violationMaker;
+  private static ResourceHelper resourceHelper;
   private static Project project;
   private static SensorContext context;
   private static CSharpResourcesBridge resourcesBridge;
+  private static MicrosoftWindowsEnvironment env; 
   private static Rule aRule;
   private static Resource aFileIMoney;
   private static Resource aFileMoney;
@@ -59,17 +65,27 @@ public class GendarmeViolationMakerTest {
     aFileIMoney = new org.sonar.api.resources.File("IMoney");
     aFileMoney = new org.sonar.api.resources.File("Money");
 
+    env = mock(MicrosoftWindowsEnvironment.class);
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(env.getCurrentSolution()).thenReturn(solution);
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(solution.getProjectFromSonarProject(any(Project.class))).thenReturn(vsProject);
+    when(solution.getProject(any(File.class))).thenReturn(vsProject);
+    
     project = mock(Project.class);
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
     when(project.getFileSystem()).thenReturn(fileSystem);
     resourcesBridge = createFakeBridge();
+    
+    resourceHelper = mock(ResourceHelper.class);
+    when(resourceHelper.isResourceInProject(any(Resource.class), eq(project))).thenReturn(true);
   }
 
   @Before
   public void reinitViolationMaker() {
     context = mock(SensorContext.class);
-    violationMaker = new GendarmeViolationMaker(mock(MicrosoftWindowsEnvironment.class), project, context, resourcesBridge);
+    violationMaker = new GendarmeViolationMaker(env, project, context, resourcesBridge, resourceHelper);
     violationMaker.setCurrentRule(aRule);
     violationMaker.setCurrentDefaultViolationMessage("Default Message");
     violationMaker.setCurrentTargetName("Example.Core.IMoney Example.Core.Money::AddMoney(Example.Core.Money)");

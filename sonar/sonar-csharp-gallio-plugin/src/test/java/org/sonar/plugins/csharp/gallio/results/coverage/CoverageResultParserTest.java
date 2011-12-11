@@ -70,6 +70,7 @@ public class CoverageResultParserTest {
     
     solution = mock(VisualStudioSolution.class);
     when(solution.getProject(any(File.class))).thenReturn(vsProject);
+    when(solution.getProjectFromSonarProject(eq(project))).thenReturn(vsProject);
    
     MicrosoftWindowsEnvironment microsoftWindowsEnvironment =  mock(MicrosoftWindowsEnvironment.class);
     when(microsoftWindowsEnvironment.getCurrentSolution()).thenReturn(solution);
