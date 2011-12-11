@@ -499,6 +499,9 @@ public class VisualStudioProject {
    * @return <code>true</code> if the project contains the file
    */
   public boolean contains(File file) {
+    if (file==null || !file.exists()) {
+      return false;
+    }
     try {
       File currentFile = file.getCanonicalFile();
       // We ensure the source files are loaded
