@@ -50,12 +50,12 @@ public class CSharpConfigurationTest {
 
     // new params
     configuration.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "NEW-foo.sln");
-    configuration.addProperty(CSharpConstants.TEST_PROJET_PATTERN_KEY, "NEW-foo*Test");
+    configuration.addProperty(CSharpConstants.TEST_PROJECT_PATTERN_KEY, "NEW-foo*Test");
     configuration.addProperty(CSharpConstants.DOTNET_VERSION_KEY, "NEW-bar1");
     configuration.addProperty(CSharpConstants.SILVERLIGHT_VERSION_KEY, "NEW-bar2");
 
     assertThat(cSharpConfiguration.getString(CSharpConstants.SOLUTION_FILE_KEY, CSharpConstants.SOLUTION_FILE_DEFVALUE), is("foo.sln"));
-    assertThat(cSharpConfiguration.getString(CSharpConstants.TEST_PROJET_PATTERN_KEY, CSharpConstants.TEST_PROJET_PATTERN_DEFVALUE),
+    assertThat(cSharpConfiguration.getString(CSharpConstants.TEST_PROJECT_PATTERN_KEY, CSharpConstants.TEST_PROJECT_PATTERN_DEFVALUE),
         is("foo*Test"));
     assertThat(cSharpConfiguration.getString(CSharpConstants.DOTNET_VERSION_KEY, CSharpConstants.DOTNET_VERSION_DEFVALUE), is("bar1"));
     assertThat(cSharpConfiguration.getString(CSharpConstants.SILVERLIGHT_VERSION_KEY, CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE),
@@ -71,13 +71,13 @@ public class CSharpConfigurationTest {
 
     // new params
     configuration.addProperty(CSharpConstants.SOLUTION_FILE_KEY, "NEW-foo.sln");
-    configuration.addProperty(CSharpConstants.TEST_PROJET_PATTERN_KEY, "NEW-foo*Test");
+    configuration.addProperty(CSharpConstants.TEST_PROJECT_PATTERN_KEY, "NEW-foo*Test");
     configuration.addProperty(CSharpConstants.DOTNET_VERSION_KEY, "NEW-bar1");
     configuration.addProperty(CSharpConstants.SILVERLIGHT_VERSION_KEY, "NEW-bar2");
     configuration.addProperty("some.new.param", "NEW-param");
 
     assertThat(cSharpConfiguration.getString(CSharpConstants.SOLUTION_FILE_KEY, CSharpConstants.SOLUTION_FILE_DEFVALUE), is("foo.sln"));
-    assertThat(cSharpConfiguration.getString(CSharpConstants.TEST_PROJET_PATTERN_KEY, CSharpConstants.TEST_PROJET_PATTERN_DEFVALUE),
+    assertThat(cSharpConfiguration.getString(CSharpConstants.TEST_PROJECT_PATTERN_KEY, CSharpConstants.TEST_PROJECT_PATTERN_DEFVALUE),
         is("foo*Test"));
     assertThat(cSharpConfiguration.getString(CSharpConstants.DOTNET_VERSION_KEY, CSharpConstants.DOTNET_VERSION_DEFVALUE), is("NEW-bar1"));
     assertThat(cSharpConfiguration.getString(CSharpConstants.SILVERLIGHT_VERSION_KEY, CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE),

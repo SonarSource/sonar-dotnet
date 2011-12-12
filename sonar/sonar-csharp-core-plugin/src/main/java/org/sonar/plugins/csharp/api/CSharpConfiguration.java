@@ -44,7 +44,7 @@ public class CSharpConfiguration implements BatchExtension {
 
   private Configuration configuration;
 
-  private Map<String, String> newToPreviousParamMap = Maps.newHashMap();
+  private Map<String, Object> newToPreviousParamMap = Maps.newHashMap();
 
   /**
    * Creates a new {@link CSharpConfiguration} object that will use the inner {@link Configuration} object to retrieve the required key
@@ -57,11 +57,16 @@ public class CSharpConfiguration implements BatchExtension {
     this.configuration = configuration;
 
     // Core OLD parameters
-    newToPreviousParamMap.put(CSharpConstants.DOTNET_VERSION_KEY, "dotnet.tool.version");
-    newToPreviousParamMap.put(CSharpConstants.SILVERLIGHT_VERSION_KEY, "silverlight.version");
-    newToPreviousParamMap.put(CSharpConstants.TEST_PROJET_PATTERN_KEY, "visual.test.project.pattern");
+    newToPreviousParamMap.put(CSharpConstants.TEST_PROJECT_PATTERN_KEY, Lists.newArrayList("visual.test.project.pattern", "sonar.donet.visualstudio.testProjectPattern"));
     newToPreviousParamMap.put(CSharpConstants.SOLUTION_FILE_KEY, "visual.studio.solution");
     newToPreviousParamMap.put(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "msbuild.configurations");
+    newToPreviousParamMap.put(CSharpConstants.DOTNET_2_0_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_2_0_SDK_DIR_KEY);
+    newToPreviousParamMap.put(CSharpConstants.DOTNET_3_5_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_3_5_SDK_DIR_KEY);
+    newToPreviousParamMap.put(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_4_0_SDK_DIR_KEY);
+    newToPreviousParamMap.put(CSharpConstants.SILVERLIGHT_3_MSCORLIB_LOCATION_KEY, CSharpConstants.MVN_SILVERLIGHT_3_MSCORLIB_LOCATION_KEY);
+    newToPreviousParamMap.put(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, CSharpConstants.MVN_SILVERLIGHT_4_MSCORLIB_LOCATION_KEY);
+    newToPreviousParamMap.put(CSharpConstants.DOTNET_VERSION_KEY, CSharpConstants.MVN_DOTNET_VERSION_KEY);
+    newToPreviousParamMap.put(CSharpConstants.SILVERLIGHT_VERSION_KEY, CSharpConstants.MVN_SILVERLIGHT_VERSION_KEY);
 
     // FxCop OLD parameters
     newToPreviousParamMap.put("sonar.fxcop.installDirectory", "fxcop.directory");
@@ -104,19 +109,37 @@ public class CSharpConfiguration implements BatchExtension {
    * @see Configuration#getString(String, String)
    */
   public String getString(String key, String defaultValue) {
-    String result = null;
     // look if this key existed before
-    String previousKey = newToPreviousParamMap.get(key);
+    Object rawPreviousKeys = newToPreviousParamMap.get(key);
+    if (rawPreviousKeys instanceof String) {
+      String conf = getConfig((String)rawPreviousKeys);
+      if (StringUtils.isNotBlank(conf)) {
+        return conf;
+      }
+    } else if (rawPreviousKeys instanceof Collection<?>) {
+      // should be a collection
+      Collection<String> prevousKeys = (Collection<String>)rawPreviousKeys;
+      for (String previousKey : prevousKeys) {
+        String conf = getConfig((String)previousKey);
+        if (StringUtils.isNotBlank(conf)) {
+          return conf;
+        }
+      } 
+    }
+    // if this key wasn't used before, or if no value for was for it, use the value of the current key
+    return configuration.getString(key, defaultValue);
+  }
+  
+  private String getConfig(String previousKey) {
     if (StringUtils.isNotBlank(previousKey)) {
-      result = configuration.getString(previousKey);
+      String result = configuration.getString(previousKey);
       if (StringUtils.isNotBlank(result)) {
         // a former parameter has been specified, let's take this value
         logInfo(result, previousKey);
         return result;
       }
     }
-    // if this key wasn't used before, or if no value for was for it, use the value of the current key
-    return configuration.getString(key, defaultValue);
+    return null;
   }
 
   /**
@@ -124,7 +147,7 @@ public class CSharpConfiguration implements BatchExtension {
    */
   public String[] getStringArray(String key) {
     // look if this key existed before
-    String previousKey = newToPreviousParamMap.get(key);
+    String previousKey = (String)newToPreviousParamMap.get(key);
     final String[] resultArray;
     if (StringUtils.isBlank(previousKey)) {
       // if this key wasn't used before, or if no value for was for it,
@@ -166,7 +189,7 @@ public class CSharpConfiguration implements BatchExtension {
   public boolean getBoolean(String key, boolean defaultValue) {
     boolean result = false;
     // look if this key existed before
-    String previousKey = newToPreviousParamMap.get(key);
+    String previousKey = (String)newToPreviousParamMap.get(key);
     if (StringUtils.isNotBlank(previousKey) && configuration.containsKey(previousKey)) {
       result = configuration.getBoolean(previousKey);
       // a former parameter has been specified, let's take this value
@@ -183,7 +206,7 @@ public class CSharpConfiguration implements BatchExtension {
   public int getInt(String key, int defaultValue) {
     int result = -1;
     // look if this key existed before
-    String previousKey = newToPreviousParamMap.get(key);
+    String previousKey = (String)newToPreviousParamMap.get(key);
     if (StringUtils.isNotBlank(previousKey) && configuration.containsKey(previousKey)) {
       result = configuration.getInt(previousKey);
       // a former parameter has been specified, let's take this value

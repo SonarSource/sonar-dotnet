@@ -55,7 +55,7 @@ import org.sonar.plugins.csharp.api.ResourceHelper;
     @Property(key = CSharpConstants.SILVERLIGHT_VERSION_KEY, defaultValue = CSharpConstants.SILVERLIGHT_VERSION_DEFVALUE,
         name = "Silverlight version", description = "Default version of the Silverlight framework that must be used.", global = true,
         project = true),
-    @Property(key = CSharpConstants.TEST_PROJET_PATTERN_KEY, defaultValue = CSharpConstants.TEST_PROJET_PATTERN_DEFVALUE,
+    @Property(key = CSharpConstants.TEST_PROJECT_PATTERN_KEY, defaultValue = CSharpConstants.TEST_PROJECT_PATTERN_DEFVALUE,
         name = "Test project names", description = "Pattern that check project names to identify test projects.", global = true,
         project = true),
     @Property(

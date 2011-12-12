@@ -163,8 +163,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     LOG.info("The following 'sln' file has been found and will be used: " + slnFile.getAbsolutePath());
 
     try {
-      ModelFactory.setTestProjectNamePattern(configuration.getString(CSharpConstants.TEST_PROJET_PATTERN_KEY,
-          CSharpConstants.TEST_PROJET_PATTERN_DEFVALUE));
+      ModelFactory.setTestProjectNamePattern(configuration.getString(CSharpConstants.TEST_PROJECT_PATTERN_KEY,
+          CSharpConstants.TEST_PROJECT_PATTERN_DEFVALUE));
       VisualStudioSolution solution = ModelFactory.getSolution(slnFile);
       microsoftWindowsEnvironment.setCurrentSolution(solution);
     } catch (IOException e) {

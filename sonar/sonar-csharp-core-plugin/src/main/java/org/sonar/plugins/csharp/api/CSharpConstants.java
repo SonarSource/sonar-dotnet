@@ -20,6 +20,7 @@
 
 package org.sonar.plugins.csharp.api;
 
+import java.util.Collection;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -47,28 +48,35 @@ public final class CSharpConstants {
   // ----------- Plugin Configuration Properties ----------- //
 
   public static final String DOTNET_2_0_SDK_DIR_KEY = "sonar.dotnet.2.0.sdk.directory";
+  public static final String MVN_DOTNET_2_0_SDK_DIR_KEY = "dotnet.2.0.sdk.directory";
   public static final String DOTNET_2_0_SDK_DIR_DEFVALUE = "C:/WINDOWS/Microsoft.NET/Framework/v2.0.50727";
 
   public static final String DOTNET_3_5_SDK_DIR_KEY = "sonar.dotnet.3.5.sdk.directory";
+  public static final String MVN_DOTNET_3_5_SDK_DIR_KEY = "dotnet.3.5.sdk.directory";
   public static final String DOTNET_3_5_SDK_DIR_DEFVALUE = "C:/WINDOWS/Microsoft.NET/Framework/v3.5";
 
   public static final String DOTNET_4_0_SDK_DIR_KEY = "sonar.dotnet.4.0.sdk.directory";
+  public static final String MVN_DOTNET_4_0_SDK_DIR_KEY = "dotnet.4.0.sdk.directory";
   public static final String DOTNET_4_0_SDK_DIR_DEFVALUE = "C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319";
 
   public static final String DOTNET_VERSION_KEY = "sonar.dotnet.version";
+  public static final String MVN_DOTNET_VERSION_KEY = "dotnet.tool.version";
   public static final String DOTNET_VERSION_DEFVALUE = "4.0";
 
   public static final String SILVERLIGHT_3_MSCORLIB_LOCATION_KEY = "sonar.silverlight.3.mscorlib.location";
+  public static final String MVN_SILVERLIGHT_3_MSCORLIB_LOCATION_KEY = "silverlight.3.mscorlib.location";
   public static final String SILVERLIGHT_3_MSCORLIB_LOCATION_DEFVALUE = "C:/Program Files/Reference Assemblies/Microsoft/Framework/Silverlight/v3.0";
 
   public static final String SILVERLIGHT_4_MSCORLIB_LOCATION_KEY = "sonar.silverlight.4.mscorlib.location";
+  public static final String MVN_SILVERLIGHT_4_MSCORLIB_LOCATION_KEY = "silverlight.4.mscorlib.location";
   public static final String SILVERLIGHT_4_MSCORLIB_LOCATION_DEFVALUE = "C:/Program Files/Reference Assemblies/Microsoft/Framework/Silverlight/v4.0";
 
   public static final String SILVERLIGHT_VERSION_KEY = "sonar.silverlight.version";
+  public static final String MVN_SILVERLIGHT_VERSION_KEY = "silverlight.version";
   public static final String SILVERLIGHT_VERSION_DEFVALUE = "4";
 
-  public static final String TEST_PROJET_PATTERN_KEY = "sonar.donet.visualstudio.testProjectPattern";
-  public static final String TEST_PROJET_PATTERN_DEFVALUE = "*.Tests";
+  public static final String TEST_PROJECT_PATTERN_KEY = "sonar.dotnet.visualstudio.testProjectPattern";
+  public static final String TEST_PROJECT_PATTERN_DEFVALUE = "*.Tests";
 
   public static final String SOLUTION_FILE_KEY = "sonar.dotnet.visualstudio.solution.file";
   public static final String SOLUTION_FILE_DEFVALUE = "";
