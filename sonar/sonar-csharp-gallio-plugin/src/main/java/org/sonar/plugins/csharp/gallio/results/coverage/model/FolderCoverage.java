@@ -30,6 +30,7 @@ import java.util.Map;
  * Represents the code coverage for a folder.
  * 
  * @author Alexandre Victoor
+ * @deprecated used anymore ?
  */
 public class FolderCoverage extends Coverable {
 

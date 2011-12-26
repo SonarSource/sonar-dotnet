@@ -17,6 +17,7 @@
     <sonar.pluginKey>csharpgallio</sonar.pluginKey>
     <sonar.pluginName>C# Gallio</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.gallio.GallioPlugin</sonar.pluginClass>
+    <powermock.version>1.4.10</powermock.version>
   </properties>
 
   <build>
@@ -55,6 +56,20 @@
       <artifactId>sonar-plugin-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+   </dependency>
+   <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+   </dependency>
+    
   </dependencies>
 
 </project>

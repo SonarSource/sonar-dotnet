@@ -101,7 +101,7 @@ public class CoverageResultParser implements BatchExtension {
 
     List<FileCoverage> fileCoverages = currentStrategy.parse(context, solution, sonarProject, root);
     
-    // We filter the files that belong to the current projet
+    // We filter the files that belong to the current project
     // and we summarize them
     List<FileCoverage> result = Lists.newArrayList();
     VisualStudioProject currentVsProject = solution.getProjectFromSonarProject(sonarProject);

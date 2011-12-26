@@ -23,7 +23,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -87,7 +86,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     parseAndSaveCoverageResults(project, context, coverageReportFile);
   }
 
-  protected java.io.File findCoverageReportToAnalyse() {
+  private java.io.File findCoverageReportToAnalyse() {
     File reportFile = null;
     File solutionDir = getVSSolution().getSolutionDir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
@@ -106,7 +105,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     return reportFile;
   }
 
-  protected void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
+  private void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
     List<FileCoverage> result = parser.parse(project, reportFile);
 
     if (result != null) {
@@ -122,7 +121,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     }
   }
 
-  protected void saveCoverageMeasures(SensorContext context, Coverable coverageData, Resource<?> resource) {
+  private void saveCoverageMeasures(SensorContext context, Coverable coverageData, Resource<?> resource) {
     double coverage = coverageData.getCoverage();
     context.saveMeasure(resource, TestMetrics.ELOC, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
@@ -135,7 +134,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   /*
    * Generates a measure that contains the visits of each line of the source file.
    */
-  protected Measure getHitData(FileCoverage coverable) {
+  private Measure getHitData(FileCoverage coverable) {
     lineHitsBuilder.clear();
     Map<Integer, SourceLine> lines = coverable.getLines();
     for (SourceLine line : lines.values()) {
@@ -146,7 +145,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     return lineHitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
   }
 
-  protected double convertPercentage(Number percentage) {
+  private double convertPercentage(Number percentage) {
     return ParsingUtils.scaleValue(percentage.doubleValue() * 100.0);
   }
 
