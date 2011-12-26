@@ -75,7 +75,7 @@ public class StyleCopResultParserTest {
     parser.parse(resultFile);
 
     // Verify calls on context to save violations
-    verify(context, times(3)).saveViolation(any(Violation.class));
+    verify(context, times(4)).saveViolation(any(Violation.class));
   }
 
   private RuleFinder newRuleFinder() {
