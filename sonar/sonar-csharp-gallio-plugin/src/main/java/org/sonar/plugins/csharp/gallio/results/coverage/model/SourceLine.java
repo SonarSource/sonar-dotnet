@@ -44,6 +44,13 @@ public class SourceLine {
     int pointVisits = point.getCountVisits();
     countVisits = countVisits + pointVisits;
   }
+  
+  public void update(SourceLine line) {
+    if (line.getLineNumber() != lineNumber) {
+      throw new IllegalArgumentException();
+    }
+    countVisits += line.getCountVisits();
+  }
 
   /**
    * Returns the lineNumber.

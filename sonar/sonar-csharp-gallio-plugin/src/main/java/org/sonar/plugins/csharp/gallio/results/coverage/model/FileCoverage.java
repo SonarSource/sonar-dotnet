@@ -31,11 +31,13 @@ import java.util.Map;
  * 
  * @author Jose CHILLAN May 14, 2009
  */
-public class FileCoverage extends Coverable {
+public class FileCoverage {
 
   private final File file;
   private Map<Integer, SourceLine> lines = new HashMap<Integer, SourceLine>();
   private int uncoveredLines = 0;
+  private int countLines;
+  private int coveredLines;
 
   /**
    * Constructs a @link{FileCoverage}.
@@ -43,6 +45,19 @@ public class FileCoverage extends Coverable {
   public FileCoverage(File file) {
     this.file = file;
     this.lines = new HashMap<Integer, SourceLine>();
+  }
+  
+  public void merge(FileCoverage coverage) {
+    for (SourceLine line : coverage.lines.values()) {
+      SourceLine existingLine = lines.get(line.getLineNumber());
+      if (existingLine==null) {
+        lines.put(line.getLineNumber(), line);
+      } else {
+        existingLine.update(line);
+      }
+      summarize();
+    }
+    
   }
 
   /**
@@ -85,13 +100,12 @@ public class FileCoverage extends Coverable {
   /**
    * Summarize the results
    */
-  @Override
   public void summarize() {
-    setCountLines(lines.size() + uncoveredLines);
-    setCoveredLines(0);
+    countLines = lines.size() + uncoveredLines;
+    coveredLines = 0;
     for (SourceLine line : lines.values()) {
       if (line.getCountVisits() > 0) {
-        increaseCoveredLines(1);
+        this.coveredLines += 1;
       }
     }
   }
@@ -105,7 +119,37 @@ public class FileCoverage extends Coverable {
     return this.lines;
   }
 
-  @Override
+  /**
+   * Returns the countLines.
+   * 
+   * @return The countLines to return.
+   */
+  public int getCountLines() {
+    return this.countLines;
+  }
+  
+  /**
+   * Returns the coveredLines.
+   * 
+   * @return The coveredLines to return.
+   */
+  public int getCoveredLines() {
+    return this.coveredLines;
+  }
+
+  /**
+   * Gets the coverage ratio.
+   * 
+   * @return the coverage ratio
+   */
+  public double getCoverage() {
+    if (countLines == 0) {
+      return 1.;
+    }
+    return Math.round(((double) coveredLines / (double) countLines) * 100) * 0.01;
+  }
+  
+
   public String toString() {
     return "File(name=" + file.getName() + ", coverage=" + getCoverage() + ", lines=" + getCountLines()
         + ", covered=" + getCoveredLines() + ")";

@@ -39,7 +39,6 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.Coverable;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
 
@@ -121,8 +120,9 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     }
   }
 
-  private void saveCoverageMeasures(SensorContext context, Coverable coverageData, Resource<?> resource) {
+  private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource<?> resource) {
     double coverage = coverageData.getCoverage();
+   
     context.saveMeasure(resource, TestMetrics.ELOC, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
