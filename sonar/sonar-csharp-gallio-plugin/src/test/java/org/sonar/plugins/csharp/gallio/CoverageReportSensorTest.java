@@ -42,6 +42,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.test.TestUtils;
@@ -154,6 +155,54 @@ public class CoverageReportSensorTest {
    
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)42));
   }
+  
+  
+  @Test
+  public void testReuseTwoReports() {
+    parser = mock(CoverageResultParser.class); // create the parser before the sensor
+    conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "report1.xml,report2.xml");
+    sensor = buildSensor();
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/coverage/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    List<FileCoverage> firstCoverageList = new ArrayList<FileCoverage>();
+    List<FileCoverage> secondCoverageList = new ArrayList<FileCoverage>();
+    when(parser.parse(eq(project), any(File.class))).thenReturn(firstCoverageList, secondCoverageList);
+
+    context = mock(SensorContext.class);
+
+    File fakeSourceFile = new File("dummy.cs");
+    
+    FileCoverage firstFileCoverage = mock(FileCoverage.class);
+    when(firstFileCoverage.getCoverage()).thenReturn(0.15);
+    when(firstFileCoverage.getFile()).thenReturn(fakeSourceFile);
+    firstCoverageList.add(firstFileCoverage);
+    
+    FileCoverage secondFileCoverage = mock(FileCoverage.class);
+    when(secondFileCoverage.getCoverage()).thenReturn(0.36);
+    when(firstFileCoverage.getFile()).thenReturn(fakeSourceFile);
+    secondCoverageList.add(secondFileCoverage);
+
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
+    
+    when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
+    
+    SensorContext context = mock(SensorContext.class);
+    when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
+    
+    sensor.analyse(project, context);
+   
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)15));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)36));
+  }
+  
   
   @Test
   public void testAnalyseWithBranch() {

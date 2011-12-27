@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp.gallio;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,10 @@ import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * Gets the coverage test report and pushes data from it into sonar.
@@ -72,50 +77,60 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    File coverageReportFile = findCoverageReportToAnalyse();
-    if (coverageReportFile == null) {
-      return;
-    }
-    if ( !coverageReportFile.isFile()) {
-      LOG.warn("No Gallio coverage report file found for: " + coverageReportFile.getAbsolutePath());
+    Collection<File> coverageReportFiles = findCoverageReportsToAnalyse();
+    if (coverageReportFiles.isEmpty()) {
       return;
     }
 
     // We parse the file and save the results
-    parseAndSaveCoverageResults(project, context, coverageReportFile);
+    parseAndSaveCoverageResults(project, context, coverageReportFiles);
   }
-
-  private java.io.File findCoverageReportToAnalyse() {
-    File reportFile = null;
+  
+  private Collection<File> findCoverageReportsToAnalyse() {
+    Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String reportPath = configuration.getString(GallioConstants.REPORTS_COVERAGE_PATH_KEY, reportDefaultPath);
-      reportFile = FileFinder.browse(solutionDir, reportPath);
-      LOG.info("Reusing Gallio coverage report: " + reportFile);
+      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_COVERAGE_PATH_KEY, reportDefaultPath);
+      reportFiles = FileFinder.findFiles(getVSSolution(), getMicrosoftWindowsEnvironment().getWorkingDirectory(), reportPath);
+      LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
       } else {
-        reportFile = new File(solutionDir, reportDefaultPath);
+        File reportFile = new File(solutionDir, reportDefaultPath);
+        if (reportFile.isFile()) {
+          reportFiles = Lists.newArrayList(reportFile);
+        } else {
+          LOG.warn("No Gallio coverage report file found for: " + reportFile.getAbsolutePath());
+        }
       }
     }
-    return reportFile;
+    return reportFiles;
   }
 
-  private void parseAndSaveCoverageResults(Project project, SensorContext context, File reportFile) {
-    List<FileCoverage> result = parser.parse(project, reportFile);
-
-    if (result != null) {
-      // Save data for each file
-      for (FileCoverage fileCoverage : result) {
-        org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
-        if (context.isIndexed(sonarFile, false)) {
-          LOG.debug("- Saving coverage information for file {}", sonarFile.getKey());
-          saveCoverageMeasures(context, fileCoverage, sonarFile);
-          context.saveMeasure(sonarFile, getHitData(fileCoverage));
+  private void parseAndSaveCoverageResults(Project project, SensorContext context, Collection<File> reportFiles) {
+    Map<File, FileCoverage> fileCoverageMap = Maps.newHashMap();
+    for (File report : reportFiles) {
+      List<FileCoverage> coverages = parser.parse(project, report);
+      for (FileCoverage fileCoverage : coverages) {
+        File file = fileCoverage.getFile();
+        if (fileCoverageMap.containsKey(file)) {
+          fileCoverageMap.get(file).merge(fileCoverage);
+        } else {
+          fileCoverageMap.put(file, fileCoverage);
         }
+      }
+    }
+    
+    // Save data for each file
+    for (FileCoverage fileCoverage : fileCoverageMap.values()) {
+      org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
+      if (context.isIndexed(sonarFile, false)) {
+        LOG.debug("- Saving coverage information for file {}", sonarFile.getKey());
+        saveCoverageMeasures(context, fileCoverage, sonarFile);
+        context.saveMeasure(sonarFile, getHitData(fileCoverage));
       }
     }
   }

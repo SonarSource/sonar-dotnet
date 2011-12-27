@@ -174,6 +174,14 @@ public class CSharpConfiguration implements BatchExtension {
 
     return resultArray;
   }
+  
+  public String[] getStringArray(String key, String defaultValue) {
+    String[] result = getStringArray(key);
+    if (result.length == 0) {
+      result = new String[] { defaultValue };
+    }
+    return result;
+  }
 
   private String[] splitUsingSemiColon(String[] strings) {
     Collection<String> resultCollection = Lists.newArrayList();

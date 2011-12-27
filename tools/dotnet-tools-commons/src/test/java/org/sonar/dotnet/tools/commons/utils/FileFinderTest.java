@@ -58,6 +58,26 @@ public class FileFinderTest {
   }
   
   @Test
+  public void testFindFilesUsingWorkDir() {
+    File workDir = TestUtils.getResource("/solution/Example/Example.Core/Model");
+    Collection<File> result = FileFinder.findFiles(solution, workDir, "SubType.cs");
+    assertEquals(1, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("SubType.cs", csFile.getName());
+  }
+  
+  @Test
+  public void testFindFilesUsingWorkPath() {
+    String workPath = "Example.Core/Model";
+    Collection<File> result = FileFinder.findFiles(solution, workPath, "SubType.cs");
+    assertEquals(1, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("SubType.cs", csFile.getName());
+  }
+  
+  @Test
   public void testFindSubDirectories() {
     Collection<File> result = FileFinder.findDirectories(solution, project, "**/*");
     assertFalse(result.isEmpty());

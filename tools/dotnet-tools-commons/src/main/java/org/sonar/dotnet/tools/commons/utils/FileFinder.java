@@ -106,8 +106,38 @@ public final class FileFinder {
    *          A list of paths or ant style patterns
    * @return The files found on the filesystem
    */
-  @SuppressWarnings("unchecked")
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, VisualStudioProject currentProject, String... patternArray) {
+    return findFiles(currentSolution, currentProject.getDirectory(), patternArray);
+  }
+  
+  /**
+   * Find files that match the given patterns
+   * 
+   * @param currentSolution
+   *          The VS solution being analyzed by sonar
+   * @param defaultWorkPath
+   *          A working path that may be relative to solution root directory
+   * @param patternArray
+   *          A list of paths or ant style patterns
+   * @return The files found on the filesystem
+   */
+  public static Collection<File> findFiles(VisualStudioSolution currentSolution, String defaultWorkPath, String... patternArray) {
+    return findFiles(currentSolution, new File(currentSolution.getSolutionDir(), defaultWorkPath), patternArray);
+  }
+  
+  /**
+   * Find files that match the given patterns
+   * 
+   * @param currentSolution
+   *          The VS solution being analyzed by sonar
+   * @param defaultWorkDir
+   *          A working directory
+   * @param patternArray
+   *          A list of paths or ant style patterns
+   * @return The files found on the filesystem
+   */
+  @SuppressWarnings("unchecked")
+  public static Collection<File> findFiles(VisualStudioSolution currentSolution, File defaultWorkDir, String... patternArray) {
 
     if (patternArray==null || patternArray.length==0) {
       return Collections.EMPTY_LIST;
@@ -116,7 +146,7 @@ public final class FileFinder {
     Set<File> result = new HashSet<File>();
     for (String pattern : patternArray) {
       String currentPattern = convertSlash(pattern);
-      File workDir = currentProject.getDirectory();
+      File workDir = defaultWorkDir;
       if (StringUtils.startsWith(pattern, SOLUTION_DIR_KEY)) {
         workDir = currentSolution.getSolutionDir();
         currentPattern = StringUtils.substringAfter(currentPattern, SOLUTION_DIR_KEY);
@@ -152,6 +182,7 @@ public final class FileFinder {
 
     return result;
   }
+  
   
   public static File browse(File workDir, String path) {
     if (StringUtils.isEmpty(path)) {
