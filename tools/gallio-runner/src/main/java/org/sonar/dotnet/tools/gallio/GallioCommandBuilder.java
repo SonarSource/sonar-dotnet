@@ -39,7 +39,7 @@ import com.google.common.collect.Sets;
 /**
  * Class used to build the command line to run Gallio.
  */
-public final class GallioCommandBuilder {
+public class GallioCommandBuilder {
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 
@@ -48,7 +48,6 @@ public final class GallioCommandBuilder {
   private static final String OPEN_COVER_EXE = "OpenCover.Console.exe";
 
   private VisualStudioSolution solution;
-  private String buildConfigurations = "Debug";
   // Information needed for simple Gallio execution
   private File gallioExecutable;
   private File gallioReportFile;
@@ -61,8 +60,9 @@ public final class GallioCommandBuilder {
   private File openCoverInstallDirectory;
   private String coverageExcludes;
   private File coverageReportFile;
+  
+  private List<File> testAssemblies;
 
-  private String[] testAssemblyPatterns = new String[] {};
   
   private GallioCommandBuilder() {
   }
@@ -79,13 +79,13 @@ public final class GallioCommandBuilder {
     builder.solution = solution;
     return builder;
   }
-   
-  public void setTestAssemblyPatterns(String... testAssemblyPatterns) {
-    this.testAssemblyPatterns = testAssemblyPatterns;
-  }
-
   
 
+  
+  public void setTestAssemblies(List<File> testAssemblies) {
+    this.testAssemblies = testAssemblies;
+  }
+   
   /**
    * Sets the install dir for Gallio
    * 
@@ -118,17 +118,6 @@ public final class GallioCommandBuilder {
    */
   public void setFilter(String gallioFilter) {
     this.filter = gallioFilter;
-  }
-
-  /**
-   * Sets the build configurations. By default, it is "Debug".
-   * 
-   * @param buildConfigurations
-   *          the build configurations
-   * @return the current builder
-   */
-  public void setBuildConfigurations(String buildConfigurations) {
-    this.buildConfigurations = buildConfigurations;
   }
 
   /**
@@ -215,7 +204,6 @@ public final class GallioCommandBuilder {
    * @return the Command object that represents the command to launch.
    */
   public Command toCommand() throws GallioException {
-    List<File> testAssemblies = findTestAssemblies();
     validateGallioInfo(testAssemblies);
 
     Command command = createCommand();
@@ -438,38 +426,6 @@ public final class GallioCommandBuilder {
       reportName = reportName.substring(0, reportName.length() - 4);
     }
     return reportName;
-  }
-
-  protected List<File> findTestAssemblies() throws GallioException {
-    Set<File> assemblyFiles = Sets.newHashSet();
-    if (solution != null) {
-      if (testAssemblyPatterns.length == 0) {
-        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
-          addAssembly(assemblyFiles, visualStudioProject);
-        }
-      } else {
-        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
-          Collection<File> projectTestAssemblies 
-            = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
-          if (projectTestAssemblies.isEmpty()) {
-            addAssembly(assemblyFiles, visualStudioProject);
-          } else {
-            assemblyFiles.addAll(projectTestAssemblies);
-          }
-        }
-      }
-      
-    } else {
-      throw new GallioException("No .NET solution or project has been given to the Gallio command builder.");
-    }
-    return Lists.newArrayList(assemblyFiles);
-  }
-
-  protected void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
-    File assembly = visualStudioProject.getArtifact(buildConfigurations);
-    if (assembly != null && assembly.isFile()) {
-      assemblyFileList.add(assembly);
-    }
   }
 
   protected void validateGallioInfo(Collection<File> testAssemblies) throws GallioException {

@@ -25,6 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.File;
+import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,15 +41,15 @@ public class GallioRunnerTest {
   private static String fakeExecInstallPath;
   private static String workDir;
   private static VisualStudioSolution solution;
+  private static List<File> testAsssemblies;
 
   @BeforeClass
   public static void initData() {
-    VisualStudioProject vsProject1 = mock(VisualStudioProject.class);
-    when(vsProject1.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
-    VisualStudioProject vsProject2 = mock(VisualStudioProject.class);
-    when(vsProject2.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake2.assembly"));
     solution = mock(VisualStudioSolution.class);
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
+    testAsssemblies = Lists.newArrayList(
+        TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"),
+        TestUtils.getResource("/Runner/FakeAssemblies/Fake2.assembly")
+    );
 
     fakeExecInstallPath = TestUtils.getResource("/Runner/FakeProg/Gallio").getAbsolutePath();
     workDir = TestUtils.getResource("/Runner").getAbsolutePath();
@@ -59,6 +60,7 @@ public class GallioRunnerTest {
   public void testCreateCommandBuilderForSolution() throws Exception {
     GallioCommandBuilder builder = runner.createCommandBuilder(solution);
     builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.xml"));
+    builder.setTestAssemblies(testAsssemblies);
     assertThat(builder.toCommand().getExecutable(), is(new File(fakeExecInstallPath, "bin/Gallio.Echo.exe").getAbsolutePath()));
   }
 

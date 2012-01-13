@@ -20,6 +20,10 @@
 package org.sonar.plugins.csharp.gallio;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +32,9 @@ import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.gallio.GallioCommandBuilder;
 import org.sonar.dotnet.tools.gallio.GallioException;
 import org.sonar.dotnet.tools.gallio.GallioRunner;
@@ -35,6 +42,9 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * Executes Gallio only once in the Solution directory to generate test execution and coverage reports.
@@ -79,47 +89,116 @@ public class GallioSensor extends AbstractCSharpSensor {
 
     return super.shouldExecuteOnProject(project);
   }
+  
+  
+  private void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
+    String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+    File assembly = visualStudioProject.getArtifact(buildConfigurations);
+    if (assembly != null && assembly.isFile()) {
+      assemblyFileList.add(assembly);
+    }
+  }
+  
+  private List<File> findTestAssemblies(VisualStudioSolution solution, String[] testAssemblyPatterns) throws GallioException {
+    Set<File> assemblyFiles = Sets.newHashSet();
+    if (solution != null) {
+      if (testAssemblyPatterns.length == 0) {
+        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
+          addAssembly(assemblyFiles, visualStudioProject);
+        }
+      } else {
+        for (VisualStudioProject visualStudioProject : solution.getTestProjects()) {
+          Collection<File> projectTestAssemblies 
+            = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
+          if (projectTestAssemblies.isEmpty()) {
+            addAssembly(assemblyFiles, visualStudioProject);
+          } else {
+            assemblyFiles.addAll(projectTestAssemblies);
+          }
+        }
+      }
+      
+    } else {
+      throw new GallioException("No .NET solution or project has been given to the Gallio command builder.");
+    }
+    return Lists.newArrayList(assemblyFiles);
+  }
 
   @Override
   public void analyse(Project project, SensorContext context) {
+    
+    VisualStudioSolution solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
+    
+    File workDir = 
+      new File(solution.getSolutionDir(), getMicrosoftWindowsEnvironment().getWorkingDirectory());
+    if ( !workDir.exists()) {
+      workDir.mkdirs();
+    }
+    
+    String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
+    boolean safeMode = configuration.getBoolean(GallioConstants.SAFE_MODE, false);
+    int timeout = configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE);
+    
     try {
-      // create runner
-      File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE));
-      File workDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-          .getWorkingDirectory());
-      if ( !workDir.exists()) {
-        workDir.mkdirs();
+      
+      List<File> testAssemblies = findTestAssemblies(solution, testAssemblyPatterns);
+      
+      if (safeMode) {
+        for (File assembly : testAssemblies) {
+          File gallioReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_REPORT_XML);
+          File coverageReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+          GallioRunner runner = createRunner(project, context, workDir);
+          GallioCommandBuilder builder = createBuilder(runner, Collections.singletonList(assembly), gallioReportFile, coverageReportFile);
+          runner.execute(builder, timeout);
+        }
+      } else {
+        File gallioReportFile = new File(workDir, GallioConstants.GALLIO_REPORT_XML);
+        File coverageReportFile = new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+        GallioRunner runner = createRunner(project, context, workDir);
+        GallioCommandBuilder builder = createBuilder(runner, testAssemblies, gallioReportFile, coverageReportFile);
+        runner.execute(builder, timeout);
       }
-      GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
-      GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
-
-      // Add info for Gallio execution
-      builder.setReportFile(new File(workDir, GallioConstants.GALLIO_REPORT_XML));
-      builder.setFilter(configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE));
-      
-      builder.setGallioRunnerType(configuration.getString(GallioConstants.RUNNER_TYPE_KEY, null));
-      builder.setTestAssemblyPatterns(configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY));
-      
-      // Add info for coverage execution
-      builder.setCoverageReportFile(new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML));
-      builder.setCoverageTool(configuration.getString(GallioConstants.COVERAGE_TOOL_KEY, GallioConstants.COVERAGE_TOOL_DEFVALUE));
-      builder.setCoverageExcludes(configuration
-          .getString(GallioConstants.COVERAGE_EXCLUDES_KEY, GallioConstants.COVERAGE_EXCLUDES_DEFVALUE));
-      builder.setPartCoverInstallDirectory(new File(configuration.getString(GallioConstants.PART_COVER_INSTALL_KEY,
-          GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
-      builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY,
-          GallioConstants.OPEN_COVER_INSTALL_DEFVALUE)));
-      builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
-          CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
-
-      // and execute finally
-      runner.execute(builder, configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE));
     } catch (GallioException e) {
       throw new SonarException("Gallio execution failed.", e);
     }
 
     // tell that tests were executed so that no other project tries to launch them a second time
     getMicrosoftWindowsEnvironment().setTestExecutionDone();
+    
+  }
+  
+  private GallioRunner createRunner(Project project, SensorContext context, File workDir) {
+    // create runner
+    File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE)); 
+    GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
+    return runner;
+  }
+  
+  private GallioCommandBuilder createBuilder(GallioRunner runner, List<File> testAssemblies, File gallioReportFile, File coverageReportFile) {
+    GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
+
+    // Add info for Gallio execution
+    builder.setReportFile(gallioReportFile);
+    builder.setFilter(configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE));
+
+    builder.setGallioRunnerType(configuration.getString(GallioConstants.RUNNER_TYPE_KEY, null));
+    builder.setTestAssemblies(testAssemblies);
+    //builder.setTestAssemblyPatterns(configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY));
+
+    // Add info for coverage execution
+    builder.setCoverageReportFile(coverageReportFile);
+    builder.setCoverageTool(configuration.getString(GallioConstants.COVERAGE_TOOL_KEY, GallioConstants.COVERAGE_TOOL_DEFVALUE));
+    builder.setCoverageExcludes(configuration
+        .getString(GallioConstants.COVERAGE_EXCLUDES_KEY, GallioConstants.COVERAGE_EXCLUDES_DEFVALUE));
+    builder.setPartCoverInstallDirectory(new File(configuration.getString(GallioConstants.PART_COVER_INSTALL_KEY,
+        GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
+    builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY,
+        GallioConstants.OPEN_COVER_INSTALL_DEFVALUE)));
+    /*builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));*/
+
+    return builder;
   }
 
 }
