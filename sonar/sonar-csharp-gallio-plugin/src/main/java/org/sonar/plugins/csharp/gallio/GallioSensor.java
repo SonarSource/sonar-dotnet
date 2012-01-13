@@ -184,7 +184,6 @@ public class GallioSensor extends AbstractCSharpSensor {
 
     builder.setGallioRunnerType(configuration.getString(GallioConstants.RUNNER_TYPE_KEY, null));
     builder.setTestAssemblies(testAssemblies);
-    //builder.setTestAssemblyPatterns(configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY));
 
     // Add info for coverage execution
     builder.setCoverageReportFile(coverageReportFile);
@@ -195,8 +194,6 @@ public class GallioSensor extends AbstractCSharpSensor {
         GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
     builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY,
         GallioConstants.OPEN_COVER_INSTALL_DEFVALUE)));
-    /*builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
-        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));*/
 
     return builder;
   }

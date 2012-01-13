@@ -85,28 +85,31 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     // We parse the file and save the results
     parseAndSaveCoverageResults(project, context, coverageReportFiles);
   }
-  
+
   private Collection<File> findCoverageReportsToAnalyse() {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
+    String workDir = getMicrosoftWindowsEnvironment().getWorkingDirectory();
     if (MODE_REUSE_REPORT.equals(executionMode)) {
       String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-      reportFiles = FileFinder.findFiles(getVSSolution(), getMicrosoftWindowsEnvironment().getWorkingDirectory(), reportPath);
+      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, reportPath);
       LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
+    } else if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
+      // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
+      LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
+    } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)){
+      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+      LOG.info("(Safe mode) Parsing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
-      if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
-        // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
-        LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
+      String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
+      File reportFile = new File(solutionDir, reportDefaultPath);
+      if (reportFile.isFile()) {
+        reportFiles = Lists.newArrayList(reportFile);
       } else {
-        String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
-        File reportFile = new File(solutionDir, reportDefaultPath);
-        if (reportFile.isFile()) {
-          reportFiles = Lists.newArrayList(reportFile);
-        } else {
-          LOG.warn("No Gallio coverage report file found for: " + reportFile.getAbsolutePath());
-        }
+        LOG.warn("No Gallio coverage report file found for: " + reportFile.getAbsolutePath());
       }
     }
+
     return reportFiles;
   }
 
@@ -123,7 +126,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
         }
       }
     }
-    
+
     // Save data for each file
     for (FileCoverage fileCoverage : fileCoverageMap.values()) {
       org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
@@ -137,7 +140,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource<?> resource) {
     double coverage = coverageData.getCoverage();
-   
+
     context.saveMeasure(resource, TestMetrics.ELOC, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
     context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
