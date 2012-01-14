@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
+<coverage profilerVersion="3.4.18.6937" driverVersion="3.4.18.6937" exportversion="3" viewdisplayname="" startTime="2011-12-05T15:31:59.7989004Z" measureTime="2011-12-05T15:32:01.9762301Z" projectName="New Project" buildid="04d0895d-ce55-4e6f-8873-a89cd06392bf" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="New Project" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+  <rebasedpaths />
+  <filters />
+  <documents>
+    <doc id="2" excluded="false" url="C:\Work\CodeQuality\Temp\Example\Business\BO.cs" cs="1B437CC7706D4494D4919A3A6D57E1F0" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="28" nid="0" />
+    <doc id="1" excluded="false" url="C:\Work\CodeQuality\Temp\Example\BusinessTests\TestBO.cs" cs="3D7A07056198729899D5953834268338" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="27" nid="0" />
+    <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
+  </documents>
+  <module moduleId="28" name="C:\Users\Vincent\Desktop\TestSonar\Business\BusinessTests\bin\Release\Business.dll" assembly="Business" assemblyIdentity="Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="Business.BO" signature="Business.BO" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+      </method>
+      <method name="Add" signature="Add(System.Int32 left,System.Int32 right) : System.Int32" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="12" el="12" c="13" ec="33" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="1" o="3" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="27" name="C:\Users\Vincent\Desktop\TestSonar\Business\BusinessTests\bin\Release\BusinessTests.dll" assembly="BusinessTests" assemblyIdentity="BusinessTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="BusinessTests.TestBO" signature="BusinessTests.TestBO" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="17" el="17" c="9" ec="24" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="1" o="6" l="22" el="22" c="9" ec="10" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+      <method name="get_TestContext" signature="get_TestContext() : Microsoft.VisualStudio.TestTools.UnitTesting.TestContext" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="0" l="34" el="34" c="17" ec="44" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+      <method name="set_TestContext" signature="set_TestContext(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext value) : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="38" el="38" c="17" ec="45" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="1" o="7" l="39" el="39" c="13" ec="14" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+      <method name="TestBOAdd" signature="TestBOAdd() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="0" l="45" el="45" c="13" ec="32" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="6" l="46" el="46" c="13" ec="48" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="1" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="1" o="15" l="47" el="47" c="9" ec="10" ex="false" fl="65536" doc="1" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="2" name="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\QTAgent32.exe" assembly="QTAgent32" assemblyIdentity="QTAgent32, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" nid="0">
+    <class name="Microsoft.VisualStudio.TestTools.Agent.AgentProcess" signature="Microsoft.VisualStudio.TestTools.Agent.AgentProcess" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor(System.String agentKey,System.Int32 hostProcessId,System.String hostIpcPortName) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="71" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="CheckLogSize" signature="CheckLogSize(System.Object o) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="12" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="CloseChannel" signature="CloseChannel() : void" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="1A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="CreateChannel" signature="CreateChannel() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="GetAgentProcessProxy" signature="GetAgentProcessProxy() : Microsoft.VisualStudio.TestTools.Agent.ITestAgentProcessProxy" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="C8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="CB" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="InitializeLifetimeService" signature="InitializeLifetimeService() : System.Object" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="Main" signature="Main(System.String[] args) : void [static]" excluded="false" instrumented="false" cc="9" vc="0" nid="0">
+        <seqpnt vc="0" o="93" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="A3" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="AD" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="BD" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="C7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="D7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="E1" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="E3" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="FC" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="10D" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="128" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="18F" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="Microsoft.VisualStudio.TestTools.Agent.IAgentProcess.Shutdown" signature="Microsoft.VisualStudio.TestTools.Agent.IAgentProcess.Shutdown() : void" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="19" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="25" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="Microsoft.VisualStudio.TestTools.Agent.ITestAgentProcess.GetTestAgentObject" signature="Microsoft.VisualStudio.TestTools.Agent.ITestAgentProcess.GetTestAgentObject() : Microsoft.VisualStudio.TestTools.Agent.IAgentObject" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="ParentProcessExited" signature="ParentProcessExited(System.Object sender,System.EventArgs args) : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0" />
+      <method name="Run" signature="Run() : void" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="0" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+  </module>
+</coverage>

@@ -70,6 +70,7 @@ public class CoverageReportSensorTest {
     when(vsProject1.getName()).thenReturn("Project 1");
     vsTestProject2 = mock(VisualStudioProject.class);
     when(vsTestProject2.getName()).thenReturn("Project Test 2");
+    when(vsTestProject2.getAssemblyName()).thenReturn("AssemblyTest2");
     when(vsTestProject2.isTest()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2));
@@ -172,7 +173,7 @@ public class CoverageReportSensorTest {
     
     List<FileCoverage> coverageList = new ArrayList<FileCoverage>();
     
-    File defaultReportFile = new File(solutionDir, "Project Test 2.coverage-report.xml"); 
+    File defaultReportFile = new File(solutionDir, "AssemblyTest2.coverage-report.xml"); 
     when(parser.parse(eq(project), eq(defaultReportFile))).thenReturn(coverageList);
 
     context = mock(SensorContext.class);

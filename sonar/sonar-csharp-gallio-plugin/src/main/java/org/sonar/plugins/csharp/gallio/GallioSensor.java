@@ -148,14 +148,14 @@ public class GallioSensor extends AbstractCSharpSensor {
         for (File assembly : testAssemblies) {
           File gallioReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_REPORT_XML);
           File coverageReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-          GallioRunner runner = createRunner(project, context, workDir);
+          GallioRunner runner = createRunner(workDir);
           GallioCommandBuilder builder = createBuilder(runner, Collections.singletonList(assembly), gallioReportFile, coverageReportFile);
           runner.execute(builder, timeout);
         }
       } else {
         File gallioReportFile = new File(workDir, GallioConstants.GALLIO_REPORT_XML);
         File coverageReportFile = new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-        GallioRunner runner = createRunner(project, context, workDir);
+        GallioRunner runner = createRunner(workDir);
         GallioCommandBuilder builder = createBuilder(runner, testAssemblies, gallioReportFile, coverageReportFile);
         runner.execute(builder, timeout);
       }
@@ -168,7 +168,7 @@ public class GallioSensor extends AbstractCSharpSensor {
     
   }
   
-  private GallioRunner createRunner(Project project, SensorContext context, File workDir) {
+  private GallioRunner createRunner(File workDir) {
     // create runner
     File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE)); 
     GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);

@@ -71,9 +71,10 @@ public class TestReportSensorTest {
   @Before
   public void init() {
     vsProject1 = mock(VisualStudioProject.class);
-    when(vsProject1.getName()).thenReturn("Project #1");
+    when(vsProject1.getName()).thenReturn("Project 1");
     vsTestProject2 = mock(VisualStudioProject.class);
-    when(vsTestProject2.getName()).thenReturn("Project Test #2");
+    when(vsTestProject2.getName()).thenReturn("Project Test 2");
+    when(vsTestProject2.getAssemblyName()).thenReturn("AssemblyTest2");
     when(vsTestProject2.isTest()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2));
@@ -84,7 +85,7 @@ public class TestReportSensorTest {
 
     project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
-    when(project.getName()).thenReturn("Project Test #2");
+    when(project.getName()).thenReturn("Project Test 2");
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getTestDirs()).thenReturn(Collections.singletonList(TestUtils.getResource(".")));
     when(project.getFileSystem()).thenReturn(fileSystem);
@@ -182,6 +183,45 @@ public class TestReportSensorTest {
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_ERRORS), eq((double)1));
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)0));
+    
+  }
+  
+  @Test
+  public void testAnalyseUsingSafeMode() {
+    
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(GallioConstants.SAFE_MODE, true);
+    
+    TestReportSensor sensor = buildSensor(conf);
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/execution/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    UnitTestReport testReport = buildUnitTestReport(TestStatus.SUCCESS, null, null);
+    
+    File reportFile = new File(solutionDir, "AssemblyTest2.gallio-report.xml");
+    
+    when(parser.parse(eq(reportFile))).thenReturn(Collections.singleton(testReport));
+
+    SensorContext context = mock(SensorContext.class);
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
+    
+    when(org.sonar.api.resources.File.fromIOFile(eq(fakeTestSourceFile), anyList())).thenReturn(sonarFile);
+    
+    
+    sensor.analyse(project, context);
+    
+    verify(parser).parse(any(File.class));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TESTS), eq((double)1));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_EXECUTION_TIME), eq((double)42));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_ERRORS), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));
     
   }
   
