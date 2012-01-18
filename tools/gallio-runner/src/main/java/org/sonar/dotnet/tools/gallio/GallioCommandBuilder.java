@@ -23,23 +23,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * Class used to build the command line to run Gallio.
  */
-public class GallioCommandBuilder {
+public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
 
   private static final Logger LOG = LoggerFactory.getLogger(GallioCommandBuilder.class);
 

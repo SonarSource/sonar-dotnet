@@ -171,8 +171,7 @@ public class GallioSensor extends AbstractCSharpSensor {
   private GallioRunner createRunner(File workDir) {
     // create runner
     File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE)); 
-    GallioRunner runner = GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
-    return runner;
+    return GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
   }
   
   private GallioCommandBuilder createBuilder(GallioRunner runner, List<File> testAssemblies, File gallioReportFile, File coverageReportFile) {
