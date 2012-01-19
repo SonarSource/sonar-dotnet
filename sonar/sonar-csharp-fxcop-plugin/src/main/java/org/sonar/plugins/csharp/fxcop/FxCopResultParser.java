@@ -68,12 +68,12 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   private static final String LINE = "Line";
 
   private final VisualStudioSolution vsSolution;
-  private final VisualStudioProject vsProject;
-  private final Project project;
-  private final SensorContext context;
-  private final RuleFinder ruleFinder;
-  private final CSharpResourcesBridge resourcesBridge;
-  private final ResourceHelper resourceHelper;
+  private VisualStudioProject vsProject;
+  private Project project;
+  private SensorContext context;
+  private RuleFinder ruleFinder;
+  private CSharpResourcesBridge resourcesBridge;
+  private ResourceHelper resourceHelper;
 
   /**
    * Constructs a @link{FxCopResultParser}.
@@ -86,6 +86,10 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   public FxCopResultParser(MicrosoftWindowsEnvironment env, Project project, SensorContext context, RuleFinder ruleFinder, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
     this.vsSolution = env.getCurrentSolution();
+    if (vsSolution==null) {
+      // not a C# project
+      return;
+    }
     this.vsProject = vsSolution.getProjectFromSonarProject(project);
     this.project = project;
     this.context = context;

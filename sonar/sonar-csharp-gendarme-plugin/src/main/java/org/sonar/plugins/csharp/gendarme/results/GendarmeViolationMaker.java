@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
@@ -48,11 +47,11 @@ public class GendarmeViolationMaker implements BatchExtension {
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeViolationMaker.class);
 
   private final VisualStudioSolution vsSolution;
-  private final VisualStudioProject vsProject;
-  private final Project project;
-  private final SensorContext context;
-  private final CSharpResourcesBridge resourcesBridge;
-  private final ResourceHelper resourceHelper;
+  private VisualStudioProject vsProject;
+  private Project project;
+  private SensorContext context;
+  private CSharpResourcesBridge resourcesBridge;
+  private ResourceHelper resourceHelper;
   
 
   private Map<Rule, String> rulesTypeMap = Maps.newHashMap();
@@ -77,6 +76,10 @@ public class GendarmeViolationMaker implements BatchExtension {
   public GendarmeViolationMaker(MicrosoftWindowsEnvironment env, Project project, SensorContext context, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
     this.vsSolution = env.getCurrentSolution();
+    if (vsSolution==null) {
+      // not a C# project
+      return;
+    }
     this.vsProject = vsSolution.getProjectFromSonarProject(project);
     this.project = project;
     this.context = context;
