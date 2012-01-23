@@ -87,9 +87,10 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
     String workDir = getMicrosoftWindowsEnvironment().getWorkingDirectory();
+    String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_REPORT_XML;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_PATH_KEY, GallioConstants.GALLIO_REPORT_XML);
-      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, reportPath);
+      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
       LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
       if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
@@ -99,7 +100,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
         reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + GallioConstants.GALLIO_REPORT_XML);
         LOG.info("(Safe mode) Parsing Gallio reports: " + Joiner.on(" ; ").join(reportFiles));
       } else {
-        String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_REPORT_XML;
         File reportFile = new File(solutionDir, reportDefaultPath);
         if (reportFile.isFile()) {
           reportFiles = Lists.newArrayList(reportFile);

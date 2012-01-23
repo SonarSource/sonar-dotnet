@@ -90,9 +90,10 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
     String workDir = getMicrosoftWindowsEnvironment().getWorkingDirectory();
+    String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_COVERAGE_PATH_KEY, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, reportPath);
+      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_COVERAGE_PATH_KEY, reportDefaultPath);
+      reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
       LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
       // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
@@ -101,7 +102,6 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
       LOG.info("(Safe mode) Parsing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
-      String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
       File reportFile = new File(solutionDir, reportDefaultPath);
       if (reportFile.isFile()) {
         reportFiles = Lists.newArrayList(reportFile);
