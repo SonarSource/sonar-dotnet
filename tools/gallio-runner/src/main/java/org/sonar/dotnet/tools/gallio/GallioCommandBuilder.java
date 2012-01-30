@@ -55,7 +55,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private CoverageTool coverageTool;
   private File partCoverInstallDirectory;
   private File openCoverInstallDirectory;
-  private String coverageExcludes;
+  private String[] coverageExcludes;
   private File coverageReportFile;
   
   private List<File> testAssemblies;
@@ -180,7 +180,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
    * @param coverageExcludes
    *          the excludes
    */
-  public void setCoverageExcludes(String coverageExcludes) {
+  public void setCoverageExcludes(String[] coverageExcludes) {
     this.coverageExcludes = coverageExcludes;
   }
 
@@ -302,8 +302,8 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
 
     // We add all the configured exclusions
-    if ( !StringUtils.isEmpty(coverageExcludes)) {
-      for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
+    if (coverageExcludes!=null) {
+      for (String exclusion : coverageExcludes) {
         LOG.debug("- Partcover exclude   : {}", exclusion.trim());
         command.addArgument("--exclude");
         command.addArgument(exclusion.trim());
@@ -333,8 +333,8 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
 
     // We add all the configured exclusions
-    if (StringUtils.isNotEmpty(coverageExcludes)) {
-      for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
+    if (coverageExcludes!=null) {
+      for (String exclusion : coverageExcludes) {
         LOG.debug("- Opencover exclude   : {}", exclusion.trim());
         filterBuilder.append("-[" + exclusion.trim() + "]* ");
       }
@@ -355,11 +355,13 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     command.addArgument("/runner-property:NCoverCoverageFile=" + coverageReportFile.getAbsolutePath());
 
     List<String> coveredAssembliesList = listCoveredAssemblies();
-    for (String exclusion : StringUtils.split(coverageExcludes, ",")) {
-      LOG.debug("- NCover POTENTIAL exclude   : {}", exclusion.trim());
-      if(coveredAssembliesList.contains(exclusion.trim())) {
-        LOG.debug("- NCover ACTUAL exclude   : {}", exclusion.trim());
-        coveredAssembliesList.remove(exclusion.trim());
+    if (coverageExcludes!=null) {
+      for (String exclusion : coverageExcludes) {
+        LOG.debug("- NCover POTENTIAL exclude   : {}", exclusion.trim());
+        if(coveredAssembliesList.contains(exclusion.trim())) {
+          LOG.debug("- NCover ACTUAL exclude   : {}", exclusion.trim());
+          coveredAssembliesList.remove(exclusion.trim());
+        }
       }
     }
     

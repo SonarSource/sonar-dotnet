@@ -66,7 +66,7 @@ import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
     @Property(key = GallioConstants.REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the Gallio coverage report files",
         description = "Path to the Gallio coverage report file used when reuse report mode is activated. "
             + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),
-    @Property(key = GallioConstants.COVERAGE_EXCLUDES_KEY, defaultValue = GallioConstants.COVERAGE_EXCLUDES_DEFVALUE,
+    @Property(key = GallioConstants.COVERAGE_EXCLUDES_KEY, 
         name = "Coverage excludes", description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. "
             + "For PartCover, the format for an exclusion is : '[assembly]namespace'. "
             + "For NCover, the format is just the name of the assemblies to exclude.", global = true, project = true) })

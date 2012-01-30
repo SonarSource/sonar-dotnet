@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 import java.io.File;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
@@ -245,7 +246,7 @@ public class GallioCommandBuilderTest {
     builder.setPartCoverInstallDirectory(PART_COVER_INSTALL_DIR);
     builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
     builder.setWorkDir(WORK_DIR);
-    builder.setCoverageExcludes("Foo, Bar");
+    builder.setCoverageExcludes(StringUtils.split("Foo, Bar", ','));
     Command command = builder.toCommand();
 
     assertThat(command.getExecutable(), endsWith("PartCover.exe"));
@@ -266,7 +267,7 @@ public class GallioCommandBuilderTest {
     builder.setWorkDir(WORK_DIR);
     builder.setCoverageTool("NCover");
     builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
-    builder.setCoverageExcludes("");
+    builder.setCoverageExcludes(null);
     Command command = builder.toCommand();
 
     assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
