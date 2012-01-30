@@ -52,4 +52,20 @@ public class ResourceHelper implements BatchExtension {
     return result;
   }
   
+  public Project findParentProject(Resource<?> resource) {
+    final Project result;
+    if (resource instanceof Project) {
+      result = (Project)resource;
+    } else {
+      Resource<?> parent = sensorContext.getParent(resource);
+      if (parent==null) {
+        // should not happen
+        result = null;
+      } else {
+        result = findParentProject(parent);
+      }
+    }
+    return result;
+  }
+  
 }

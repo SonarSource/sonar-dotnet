@@ -178,7 +178,12 @@ public class CSharpConfiguration implements BatchExtension {
   public String[] getStringArray(String key, String defaultValue) {
     String[] result = getStringArray(key);
     if (result.length == 0) {
-      result = new String[] { defaultValue };
+      if (StringUtils.isEmpty(defaultValue)) {
+        result = new String[] { };
+      } else {
+        result = new String[] { defaultValue };
+      }
+      
     }
     return result;
   }

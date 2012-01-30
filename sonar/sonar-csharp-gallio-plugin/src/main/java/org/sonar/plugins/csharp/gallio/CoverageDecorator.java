@@ -20,7 +20,10 @@
 package org.sonar.plugins.csharp.gallio;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +36,15 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.resources.ResourceUtils;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+
+import com.google.common.collect.Sets;
 
 /**
  * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage
@@ -48,10 +56,23 @@ public class CoverageDecorator implements Decorator {
 
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private String executionMode;
+  private Set<String> excludedAssemblies;
+  private VisualStudioSolution vsSolution;
+  private ResourceHelper resourceHelper;
 
-  public CoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+  public CoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
+    this.vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    String[] exclusions = configuration.getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY);
+    if (exclusions==null) {
+      this.excludedAssemblies 
+        = Collections.EMPTY_SET;
+    } else {
+      this.excludedAssemblies 
+        = Sets.newHashSet(exclusions);
+    }
+    this.resourceHelper = resourceHelper;
   }
 
   /**
@@ -77,6 +98,9 @@ public class CoverageDecorator implements Decorator {
   @SuppressWarnings("rawtypes")
   public void decorate(Resource resource, DecoratorContext context) {
     if (ResourceUtils.isFile(resource) && context.getMeasure(CoreMetrics.COVERAGE) == null) {
+      if (isExcludedFromCoverage(resource)) {
+        return;
+      }
       // for LINES_TO_COVER and UNCOVERED_LINES, we use NCLOC and STATEMENTS as an approximation
       Measure ncloc = context.getMeasure(CoreMetrics.NCLOC);
       if (ncloc != null) {
@@ -91,6 +115,16 @@ public class CoverageDecorator implements Decorator {
         }
       }
     }
+  }
+
+  private boolean isExcludedFromCoverage(Resource resource) {
+    if (excludedAssemblies.isEmpty()) {
+      return false;
+    }
+    Project project = resourceHelper.findParentProject(resource);
+    VisualStudioProject vsProject 
+      = vsSolution.getProjectFromSonarProject(project);
+    return excludedAssemblies.contains(vsProject.getName());
   }
 
 }

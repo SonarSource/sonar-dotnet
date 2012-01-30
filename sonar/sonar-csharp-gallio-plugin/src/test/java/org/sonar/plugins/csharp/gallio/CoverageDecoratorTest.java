@@ -50,6 +50,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.csharp.api.ResourceHelper;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 
 public class CoverageDecoratorTest {
@@ -57,6 +58,7 @@ public class CoverageDecoratorTest {
   private Project project;
   private VisualStudioProject vsProject;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  private ResourceHelper resourceHelper;
 
   @Before
   public void init() {
@@ -64,9 +66,14 @@ public class CoverageDecoratorTest {
     when(project.getLanguageKey()).thenReturn("cs");
 
     vsProject = mock(VisualStudioProject.class);
+    
+    resourceHelper = mock(ResourceHelper.class);
+    when(resourceHelper.findParentProject(any(Resource.class))).thenReturn(project);
 
     microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
     when(microsoftWindowsEnvironment.getCurrentProject(anyString())).thenReturn(vsProject);
+    
+    
   }
 
   @Test
@@ -189,7 +196,7 @@ public class CoverageDecoratorTest {
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_SKIP);
-    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, null);
     assertFalse(decorator.shouldExecuteOnProject(project));
   }
 
@@ -202,7 +209,7 @@ public class CoverageDecoratorTest {
 
   private CoverageDecorator createDecorator() {
     Configuration conf = new BaseConfiguration();
-    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, resourceHelper);
     return decorator;
   }
 }
