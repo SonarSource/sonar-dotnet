@@ -41,7 +41,8 @@ import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
     @Property(key = GallioConstants.MODE, defaultValue = "", name = "Gallio activation mode",
         description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
     @Property(key = GallioConstants.SAFE_MODE, defaultValue = "false", name = "Gallio safe mode",
-        description = "When set to true, gallio is launched once per test assembly of the analysed solution. Otherwise gallio is launched once for the whole solution", global = true, project = true),
+        description = "When set to true, gallio is launched once per test assembly of the analysed solution. " +
+        		"Otherwise gallio is launched once for the whole solution", global = true, project = true),
     @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
         description = "Path to the Gallio report file used when reuse report mode is activated. "
             + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),

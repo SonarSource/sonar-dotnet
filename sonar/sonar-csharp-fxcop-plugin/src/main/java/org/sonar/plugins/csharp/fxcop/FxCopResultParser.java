@@ -83,10 +83,11 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
    * @param rulesManager
    * @param profile
    */
-  public FxCopResultParser(MicrosoftWindowsEnvironment env, Project project, SensorContext context, RuleFinder ruleFinder, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
+  public FxCopResultParser(MicrosoftWindowsEnvironment env, Project project, SensorContext context, RuleFinder ruleFinder,
+      CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
     this.vsSolution = env.getCurrentSolution();
-    if (vsSolution==null) {
+    if (vsSolution == null) {
       // not a C# project
       return;
     }
@@ -184,47 +185,51 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
             .withKey(messagesCursor.getAttrValue(TYPENAME)));
         if (currentRule != null) {
           // look for all potential issues
-          SMInputCursor issueCursor = messagesCursor.childElementCursor();
-          while (issueCursor.getNext() != null) {
-            final Resource<?> resource;
-            final boolean saveViolation;
-            String path = issueCursor.getAttrValue("Path");
-            String file = issueCursor.getAttrValue("File");
-            if (StringUtils.isNotEmpty(path) && StringUtils.isNotEmpty(file)) {
-              File sourceFile = new File(path, file).getAbsoluteFile();
-              VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
-              if (vsProject.equals(currentVsProject)) {
-                resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
-                saveViolation = true;
-              } else {
-                LOG.debug("Ignoring file outside current project : {}", sourceFile);
-                resource = null;
-                saveViolation = false;
-              }
-            } else if (typeResource==null || resourceHelper.isResourceInProject(typeResource, project)) {
-              resource = typeResource;
-              saveViolation = true;
-            } else {
-              resource = null;
-              saveViolation = false;
-            }
-            
-            if (saveViolation) {
-              // Cursor on Issue
-              Violation violation = Violation.create(currentRule, resource);
-              String lineNumber = issueCursor.getAttrValue(LINE);
-              if (lineNumber != null) {
-                violation.setLineId(Integer.parseInt(lineNumber));
-              }
-              violation.setMessage(issueCursor.collectDescendantText().trim());
-              violation.setSeverity(currentRule.getSeverity());
-              context.saveViolation(violation);
-            }
-          }
+          searchForViolations(messagesCursor, typeResource, currentRule);
         } else {
           LOG.warn("Could not find the following rule in the FxCop rule repository: " + messagesCursor.getAttrValue(TYPENAME));
         }
 
+      }
+    }
+  }
+
+  protected void searchForViolations(SMInputCursor messagesCursor, Resource<?> typeResource, Rule currentRule) throws XMLStreamException {
+    SMInputCursor issueCursor = messagesCursor.childElementCursor();
+    while (issueCursor.getNext() != null) {
+      final Resource<?> resource;
+      final boolean saveViolation;
+      String path = issueCursor.getAttrValue("Path");
+      String file = issueCursor.getAttrValue("File");
+      if (StringUtils.isNotEmpty(path) && StringUtils.isNotEmpty(file)) {
+        File sourceFile = new File(path, file).getAbsoluteFile();
+        VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
+        if (vsProject.equals(currentVsProject)) {
+          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+          saveViolation = true;
+        } else {
+          LOG.debug("Ignoring file outside current project : {}", sourceFile);
+          resource = null;
+          saveViolation = false;
+        }
+      } else if (typeResource == null || resourceHelper.isResourceInProject(typeResource, project)) {
+        resource = typeResource;
+        saveViolation = true;
+      } else {
+        resource = null;
+        saveViolation = false;
+      }
+
+      if (saveViolation) {
+        // Cursor on Issue
+        Violation violation = Violation.create(currentRule, resource);
+        String lineNumber = issueCursor.getAttrValue(LINE);
+        if (lineNumber != null) {
+          violation.setLineId(Integer.parseInt(lineNumber));
+        }
+        violation.setMessage(issueCursor.collectDescendantText().trim());
+        violation.setSeverity(currentRule.getSeverity());
+        context.saveViolation(violation);
       }
     }
   }

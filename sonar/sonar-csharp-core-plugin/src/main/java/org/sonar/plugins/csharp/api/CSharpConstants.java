@@ -20,7 +20,6 @@
 
 package org.sonar.plugins.csharp.api;
 
-import java.util.Collection;
 import java.util.Map;
 
 import com.google.common.collect.Maps;

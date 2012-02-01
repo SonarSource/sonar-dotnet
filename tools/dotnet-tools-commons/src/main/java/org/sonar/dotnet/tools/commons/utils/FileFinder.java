@@ -52,10 +52,9 @@ public final class FileFinder {
   private static final String PARENT_DIRECTORY = "../";
   private static final Logger LOG = LoggerFactory.getLogger(FileFinder.class);
 
-  
   private FileFinder() {
   }
-  
+
   /**
    * Find files that match the given patterns
    * 
@@ -109,7 +108,7 @@ public final class FileFinder {
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, VisualStudioProject currentProject, String... patternArray) {
     return findFiles(currentSolution, currentProject.getDirectory(), patternArray);
   }
-  
+
   /**
    * Find files that match the given patterns
    * 
@@ -124,7 +123,7 @@ public final class FileFinder {
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, String defaultWorkPath, String... patternArray) {
     return findFiles(currentSolution, new File(currentSolution.getSolutionDir(), defaultWorkPath), patternArray);
   }
-  
+
   /**
    * Find files that match the given patterns
    * 
@@ -139,7 +138,7 @@ public final class FileFinder {
   @SuppressWarnings("unchecked")
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, File defaultWorkDir, String... patternArray) {
 
-    if (patternArray==null || patternArray.length==0) {
+    if (patternArray == null || patternArray.length == 0) {
       return Collections.EMPTY_LIST;
     }
 
@@ -155,35 +154,37 @@ public final class FileFinder {
         workDir = workDir.getParentFile();
         currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY);
       }
-      if (StringUtils.contains(currentPattern,'*')) {
+      if (StringUtils.contains(currentPattern, '*')) {
         String prefix = StringUtils.substringBefore(currentPattern, "*");
         if (StringUtils.contains(prefix, '/')) {
           workDir = browse(workDir, prefix);
           currentPattern = "*" + StringUtils.substringAfter(currentPattern, "*");
         }
-        IOFileFilter externalFilter 
-          = new PatternFilter(workDir, currentPattern);
+        IOFileFilter externalFilter = new PatternFilter(workDir, currentPattern);
         listFiles(result, workDir, externalFilter);
-        
+
       } else {
         result.add(browse(workDir, currentPattern));
       }
     }
-    
+
+    logResults(result, patternArray);
+
+    return result;
+  }
+
+  protected static void logResults(Set<File> result, String... patternArray) {
     if (LOG.isDebugEnabled()) {
       if (result.isEmpty()) {
         LOG.warn("No file found using pattern(s) " + StringUtils.join(patternArray, ','));
       } else {
-        LOG.debug("The following files have been found using pattern(s) " 
-            + StringUtils.join(patternArray, ',') + "\n"
-            + StringUtils.join(result, "\n  "));
+        LOG.debug("The following files have been found using pattern(s) "
+          + StringUtils.join(patternArray, ',') + "\n"
+          + StringUtils.join(result, "\n  "));
       }
     }
-
-    return result;
   }
-  
-  
+
   public static File browse(File workDir, String path) {
     if (StringUtils.isEmpty(path)) {
       return workDir;
@@ -198,7 +199,7 @@ public final class FileFinder {
       }
       file = new File(currentWorkDir, currentPath);
     }
-    
+
     return file;
   }
 
@@ -206,7 +207,7 @@ public final class FileFinder {
     if (!directory.exists() || directory.isFile()) {
       return;
     }
-    
+
     File[] found = directory.listFiles((FileFilter) filter);
     if (found != null) {
       files.addAll(Arrays.asList(found));
@@ -216,7 +217,7 @@ public final class FileFinder {
       listFiles(files, subDirectory, filter);
     }
   }
-  
+
   private static String convertSlash(String path) {
     return StringUtils.replaceChars(path, '\\', '/');
   }
