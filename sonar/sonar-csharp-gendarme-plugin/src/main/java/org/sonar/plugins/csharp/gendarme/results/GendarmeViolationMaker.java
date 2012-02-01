@@ -145,11 +145,11 @@ public class GendarmeViolationMaker implements BatchExtension {
 
   private Violation createViolationOnResource(Resource<?> resource, Integer lineNumber) {
     if (StringUtils.isNotEmpty(currentSource) && resource == null) {
-      LOG.info("Ignoring violation on file outside current project ({})", currentSource);
+      LOG.debug("Ignoring violation on file outside current project ({})", currentSource);
       return null;
     }
     if (resource!=null && !resourceHelper.isResourceInProject(resource, project)) {
-      LOG.info("Ignoring violation on file outside current project ({})", resource.getKey());
+      LOG.debug("Ignoring violation on file outside current project ({})", resource.getKey());
       return null;
     }
     
