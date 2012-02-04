@@ -114,7 +114,11 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   private void collect(Project project, Collection<File> reportFiles, SensorContext context) {
     Set<UnitTestReport> reports = Sets.newHashSet();
     for (File reportFile : reportFiles) {
-      reports.addAll(parser.parse(reportFile));
+      if (reportFile.exists()) {
+        reports.addAll(parser.parse(reportFile));
+      } else {
+        LOG.error("Test report \"{}\" not found", reportFile);
+      }
     }
     
     if (LOG.isDebugEnabled()) {

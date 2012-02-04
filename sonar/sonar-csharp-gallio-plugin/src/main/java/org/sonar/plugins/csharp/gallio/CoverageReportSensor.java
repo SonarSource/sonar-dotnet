@@ -116,14 +116,18 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
   private void parseAndSaveCoverageResults(Project project, SensorContext context, Collection<File> reportFiles) {
     Map<File, FileCoverage> fileCoverageMap = Maps.newHashMap();
     for (File report : reportFiles) {
-      List<FileCoverage> coverages = parser.parse(project, report);
-      for (FileCoverage fileCoverage : coverages) {
-        File file = fileCoverage.getFile();
-        if (fileCoverageMap.containsKey(file)) {
-          fileCoverageMap.get(file).merge(fileCoverage);
-        } else {
-          fileCoverageMap.put(file, fileCoverage);
+      if (report.exists()) {
+        List<FileCoverage> coverages = parser.parse(project, report);
+        for (FileCoverage fileCoverage : coverages) {
+          File file = fileCoverage.getFile();
+          if (fileCoverageMap.containsKey(file)) {
+            fileCoverageMap.get(file).merge(fileCoverage);
+          } else {
+            fileCoverageMap.put(file, fileCoverage);
+          }
         }
+      } else {
+        LOG.error("Coverage report \"{}\" not found", report);
       }
     }
 

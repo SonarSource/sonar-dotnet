@@ -22,10 +22,7 @@ package org.sonar.plugins.csharp.gallio;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.Collections;
@@ -230,7 +227,7 @@ public class TestReportSensorTest {
     
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
-    conf.setProperty(GallioConstants.REPORTS_PATH_KEY, "gallio-report-reuse.xml");
+    conf.setProperty(GallioConstants.REPORTS_PATH_KEY, "gallio-report.xml");
     
     TestReportSensor sensor = buildSensor(conf);
     
@@ -242,7 +239,7 @@ public class TestReportSensorTest {
     
     UnitTestReport testReport = buildUnitTestReport(TestStatus.SUCCESS, null, null);
     
-    File reportFile = new File(solutionDir, "gallio-report-reuse.xml");
+    File reportFile = new File(solutionDir, "gallio-report.xml");
     
     when(parser.parse(eq(reportFile))).thenReturn(Collections.singleton(testReport));
 
@@ -263,6 +260,41 @@ public class TestReportSensorTest {
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));
     
+  }
+  
+  @Test
+  public void testAnalyseWithReuseReportNotFound() {
+    
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GallioConstants.REPORTS_PATH_KEY, "gallio-report-bad.xml");
+    
+    TestReportSensor sensor = buildSensor(conf);
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/execution/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    UnitTestReport testReport = buildUnitTestReport(TestStatus.SUCCESS, null, null);
+    
+    File reportFile = new File(solutionDir, "gallio-report-bad.xml");
+    
+    when(parser.parse(eq(reportFile))).thenReturn(Collections.singleton(testReport));
+
+    SensorContext context = mock(SensorContext.class);
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
+    
+    when(org.sonar.api.resources.File.fromIOFile(eq(fakeTestSourceFile), anyList())).thenReturn(sonarFile);
+    
+    
+    sensor.analyse(project, context);
+    
+    verifyNoMoreInteractions(parser);
+    verifyNoMoreInteractions(context);
   }
   
   private UnitTestReport buildUnitTestReport(TestStatus status, String errorMsg, String stack) {

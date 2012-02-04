@@ -287,6 +287,29 @@ public class CoverageReportSensorTest {
   
   
   @Test
+  public void testReuseReportNotFound() {
+    parser = mock(CoverageResultParser.class); // create the parser before the sensor
+    conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "report-bad.xml");
+    sensor = buildSensor();
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/coverage/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    context = mock(SensorContext.class);
+
+
+    sensor.analyse(project, context);
+    
+    verifyNoMoreInteractions(parser);
+    verifyNoMoreInteractions(context);
+  }
+  
+  
+  @Test
   public void testAnalyseWithBranch() {
     when(project.getBranch()).thenReturn("ProductionWhatever");
     when(project.getName()).thenReturn("Project #1 ProductionWhatever");
