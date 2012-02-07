@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
     <artifactId>dotnet</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
 
   <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
@@ -22,9 +22,9 @@
   </modules>
 
   <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/parent</url>
+    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/tags/dotnet-1.2/tools</connection>
+    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/dotnet-1.2/tools</developerConnection>
+    <url>scm:svn:https://svn.codehaus.org/sonar-plugins/tags/dotnet-1.2/parent</url>
   </scm>
 
   <dependencies>

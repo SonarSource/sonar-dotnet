@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
     <artifactId>parent</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
 
   <artifactId>gendarme-runner</artifactId>
