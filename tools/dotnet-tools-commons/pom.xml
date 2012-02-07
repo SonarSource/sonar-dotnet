@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
     <artifactId>parent</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
   </parent>
 
   <artifactId>dotnet-tools-commons</artifactId>
