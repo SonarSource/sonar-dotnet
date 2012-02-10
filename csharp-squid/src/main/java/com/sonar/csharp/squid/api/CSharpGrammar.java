@@ -129,58 +129,58 @@ public class CSharpGrammar implements Grammar {
   public LeftRecursiveRule booleanExpression; // LATER
 
   // A.2.5 Statement
-  public LeftRecursiveRule statement; // OK
-  public LeftRecursiveRule embeddedStatement; // OK
-  public LeftRecursiveRule block; // BRIDGE TEST ONLY
-  public LeftRecursiveRule labeledStatement; // OK
-  public LeftRecursiveRule declarationStatement; // OK
+  public Rule statement; // OK
+  public Rule embeddedStatement; // OK
+  public Rule block; // BRIDGE TEST ONLY
+  public Rule labeledStatement; // OK
+  public Rule declarationStatement; // OK
   public Rule localVariableDeclaration; // OK
   public Rule localVariableDeclarator; // OK - tested via LocalVariableDeclarationTest
   public Rule localVariableInitializer; // OK
   public Rule localConstantDeclaration; // OK
   public Rule constantDeclarator; // OK
-  public LeftRecursiveRule expressionStatement; // OK
-  public LeftRecursiveRule statementExpression; // OK - tested via ExpressionStatementTest
-  public LeftRecursiveRule selectionStatement; // NO NEED
-  public LeftRecursiveRule ifStatement; // OK
-  public LeftRecursiveRule switchStatement; // OK
-  public LeftRecursiveRule switchSection; // OK
+  public Rule expressionStatement; // OK
+  public Rule statementExpression; // OK - tested via ExpressionStatementTest
+  public Rule selectionStatement; // NO NEED
+  public Rule ifStatement; // OK
+  public Rule switchStatement; // OK
+  public Rule switchSection; // OK
   public Rule switchLabel; // OK
-  public LeftRecursiveRule iterationStatement; // OK
-  public LeftRecursiveRule whileStatement; // OK
-  public LeftRecursiveRule doStatement; // OK
-  public LeftRecursiveRule forStatement; // OK
+  public Rule iterationStatement; // OK
+  public Rule whileStatement; // OK
+  public Rule doStatement; // OK
+  public Rule forStatement; // OK
   public Rule forInitializer; // OK
   public Rule forCondition; // NO NEED
   public Rule forIterator; // NO NEED
-  public LeftRecursiveRule statementExpressionList; // OK
-  public LeftRecursiveRule foreachStatement; // OK
+  public Rule statementExpressionList; // OK
+  public Rule foreachStatement; // OK
   public Rule jumpStatement; // OK
   public Rule breakStatement; // OK
   public Rule continueStatement; // OK
   public Rule gotoStatement; // OK
   public Rule returnStatement; // OK
   public Rule throwStatement; // OK
-  public LeftRecursiveRule tryStatement; // OK
-  public LeftRecursiveRule catchClauses; // OK
-  public LeftRecursiveRule specificCatchClause; // OK
-  public LeftRecursiveRule generalCatchClause; // OK
-  public LeftRecursiveRule finallyClause; // OK
-  public LeftRecursiveRule checkedStatement; // OK
-  public LeftRecursiveRule uncheckedStatement; // OK
-  public LeftRecursiveRule lockStatement; // OK
-  public LeftRecursiveRule usingStatement; // OK
-  public LeftRecursiveRule resourceAcquisition; // OK - tested via UsingStatementTest
-  public LeftRecursiveRule yieldStatement; // OK
-  public LeftRecursiveRule namespaceDeclaration; // OK
+  public Rule tryStatement; // OK
+  public Rule catchClauses; // OK
+  public Rule specificCatchClause; // OK
+  public Rule generalCatchClause; // OK
+  public Rule finallyClause; // OK
+  public Rule checkedStatement; // OK
+  public Rule uncheckedStatement; // OK
+  public Rule lockStatement; // OK
+  public Rule usingStatement; // OK
+  public Rule resourceAcquisition; // OK - tested via UsingStatementTest
+  public Rule yieldStatement; // OK
+  public Rule namespaceDeclaration; // OK
   public Rule qualifiedIdentifier; // OK
-  public LeftRecursiveRule namespaceBody; // OK
+  public Rule namespaceBody; // OK
   public Rule externAliasDirective; // OK
   public Rule usingDirective; // OK
   public Rule usingAliasDirective; // OK - tested via UsingDirectiveTest
   public Rule usingNamespaceDirective; // OK - tested via UsingDirectiveTest
-  public LeftRecursiveRule namespaceMemberDeclaration; // OK
-  public LeftRecursiveRule typeDeclaration; // OK
+  public Rule namespaceMemberDeclaration; // OK
+  public Rule typeDeclaration; // OK
   public Rule qualifiedAliasMember; // OK
 
   // A.2.6 Classes
