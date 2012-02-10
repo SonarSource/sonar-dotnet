@@ -184,45 +184,45 @@ public class CSharpGrammar implements Grammar {
   public Rule qualifiedAliasMember; // OK
 
   // A.2.6 Classes
-  public LeftRecursiveRule classDeclaration; // OK
+  public Rule classDeclaration; // OK
   public Rule classModifier; // OK
   public Rule classBase; // OK
   public Rule interfaceTypeList; // LATER
-  public LeftRecursiveRule classBody; // OK
-  public LeftRecursiveRule classMemberDeclaration; // LATER
+  public Rule classBody; // OK
+  public Rule classMemberDeclaration; // LATER
   public Rule constantDeclaration; // OK
   public Rule constantModifier; // OK - tested via ConstantDeclarationTest
   public Rule fieldDeclaration; // OK
   public Rule fieldModifier; // OK - tested via FieldDeclarationTest
   public Rule variableDeclarator; // OK
   public Rule variableInitializer; // OK
-  public LeftRecursiveRule methodDeclaration; // LATER
+  public Rule methodDeclaration; // LATER
   public Rule methodHeader; // OK
   public Rule methodModifier; // OK - tested via MethodHeaderTest
-  public LeftRecursiveRule returnType; // OK
+  public Rule returnType; // OK
   public Rule memberName; // OK
-  public LeftRecursiveRule methodBody; // LATER
+  public Rule methodBody; // LATER
   public Rule formalParameterList; // OK
   public Rule fixedParameters; // LATER
   public Rule fixedParameter; // OK
   public Rule parameterModifier; // OK - tested via FixedParameterTest
   public Rule parameterArray; // OK
-  public LeftRecursiveRule propertyDeclaration; // OK
+  public Rule propertyDeclaration; // OK
   public Rule propertyModifier; // OK - tested via PropertyDeclarationTest
-  public LeftRecursiveRule accessorDeclarations; // OK
-  public LeftRecursiveRule getAccessorDeclaration; // OK
-  public LeftRecursiveRule setAccessorDeclaration; // OK
+  public Rule accessorDeclarations; // OK
+  public Rule getAccessorDeclaration; // OK
+  public Rule setAccessorDeclaration; // OK
   public Rule accessorModifier; // OK
-  public LeftRecursiveRule accessorBody; // LATER
-  public LeftRecursiveRule eventDeclaration; // OK
+  public Rule accessorBody; // LATER
+  public Rule eventDeclaration; // OK
   public Rule eventModifier; // OK - tested via EventDeclarationTest
-  public LeftRecursiveRule eventAccessorDeclarations; // OK
-  public LeftRecursiveRule addAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
-  public LeftRecursiveRule removeAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
-  public LeftRecursiveRule indexerDeclaration; // OK
+  public Rule eventAccessorDeclarations; // OK
+  public Rule addAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public Rule removeAccessorDeclaration; // OK - tested via EventAccessorDeclarationTest
+  public Rule indexerDeclaration; // OK
   public Rule indexerModifier; // OK - tested via IndexerDeclarationTest
   public Rule indexerDeclarator; // OK
-  public LeftRecursiveRule operatorDeclaration; // OK
+  public Rule operatorDeclaration; // OK
   public Rule operatorModifier; // OK - tested via OperatorDeclarationTest
   public Rule operatorDeclarator; // OK
   public Rule unaryOperatorDeclarator; // OK
