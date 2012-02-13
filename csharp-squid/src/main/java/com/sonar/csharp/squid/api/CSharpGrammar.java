@@ -89,44 +89,44 @@ public class CSharpGrammar implements Grammar {
   public LeftRecursiveRule multiplicativeExpression; // OK
   public LeftRecursiveRule additiveExpression; // OK
   public LeftRecursiveRule shiftExpression; // OK
-  public LeftRecursiveRule relationalExpression; // OK
-  public LeftRecursiveRule equalityExpression; // OK
-  public LeftRecursiveRule andExpression; // OK
-  public LeftRecursiveRule exclusiveOrExpression; // OK
-  public LeftRecursiveRule inclusiveOrExpression; // OK
-  public LeftRecursiveRule conditionalAndExpression; // OK
-  public LeftRecursiveRule conditionalOrExpression; // OK
-  public LeftRecursiveRule nullCoalescingExpression; // OK
-  public LeftRecursiveRule conditionalExpression; // OK
-  public LeftRecursiveRule lambdaExpression; // OK
-  public LeftRecursiveRule anonymousMethodExpression; // OK
+  public Rule relationalExpression; // OK
+  public Rule equalityExpression; // OK
+  public Rule andExpression; // OK
+  public Rule exclusiveOrExpression; // OK
+  public Rule inclusiveOrExpression; // OK
+  public Rule conditionalAndExpression; // OK
+  public Rule conditionalOrExpression; // OK
+  public Rule nullCoalescingExpression; // OK
+  public Rule conditionalExpression; // OK
+  public Rule lambdaExpression; // OK
+  public Rule anonymousMethodExpression; // OK
   public Rule anonymousFunctionSignature; // OK
   public Rule explicitAnonymousFunctionSignature; // OK
   public Rule explicitAnonymousFunctionParameter; // OK
   public Rule anonymousFunctionParameterModifier; // OK
   public Rule implicitAnonymousFunctionSignature; // OK
   public Rule implicitAnonymousFunctionParameter; // OK
-  public LeftRecursiveRule anonymousFunctionBody; // OK
-  public LeftRecursiveRule queryExpression; // OK
-  public LeftRecursiveRule fromClause; // OK
-  public LeftRecursiveRule queryBody; // OK
-  public LeftRecursiveRule queryBodyClause; // OK
-  public LeftRecursiveRule letClause; // OK
-  public LeftRecursiveRule whereClause; // OK
-  public LeftRecursiveRule joinClause; // OK
-  public LeftRecursiveRule joinIntoClause; // OK
-  public LeftRecursiveRule orderByClause; // OK
-  public LeftRecursiveRule ordering; // OK
-  public LeftRecursiveRule orderingDirection; // OK
-  public LeftRecursiveRule selectOrGroupClause; // OK
-  public LeftRecursiveRule selectClause; // OK
-  public LeftRecursiveRule groupClause; // OK
-  public LeftRecursiveRule queryContinuation; // OK
-  public LeftRecursiveRule assignment; // OK
-  public LeftRecursiveRule expression; // OK
-  public LeftRecursiveRule nonAssignmentExpression; // OK
-  public LeftRecursiveRule constantExpression; // LATER
-  public LeftRecursiveRule booleanExpression; // LATER
+  public Rule anonymousFunctionBody; // OK
+  public Rule queryExpression; // OK
+  public Rule fromClause; // OK
+  public Rule queryBody; // OK
+  public Rule queryBodyClause; // OK
+  public Rule letClause; // OK
+  public Rule whereClause; // OK
+  public Rule joinClause; // OK
+  public Rule joinIntoClause; // OK
+  public Rule orderByClause; // OK
+  public Rule ordering; // OK
+  public Rule orderingDirection; // OK
+  public Rule selectOrGroupClause; // OK
+  public Rule selectClause; // OK
+  public Rule groupClause; // OK
+  public Rule queryContinuation; // OK
+  public Rule assignment; // OK
+  public Rule expression; // OK
+  public Rule nonAssignmentExpression; // OK
+  public Rule constantExpression; // LATER
+  public Rule booleanExpression; // LATER
 
   // A.2.5 Statement
   public Rule statement; // OK
