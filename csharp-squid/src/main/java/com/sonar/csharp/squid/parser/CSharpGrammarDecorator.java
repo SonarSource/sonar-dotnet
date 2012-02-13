@@ -471,8 +471,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.operatorModifier.or(UNSAFE);
     g.constructorModifier.or(UNSAFE);
 
-    // g.unsafe.destructorDeclaration.is(opt(g.attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS,
-    // g.destructorBody);
+    g.destructorDeclaration.or(opt(g.attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, g.destructorBody);
     g.staticConstructorModifiers.override(o2n(or(EXTERN, UNSAFE)), STATIC, o2n(or(EXTERN, UNSAFE)));
     g.embeddedStatement.or(or(g.unsafeStatement, g.fixedStatement));
     g.unsafeStatement.is(UNSAFE, g.block);
