@@ -36,7 +36,6 @@ public class CSharpGrammar implements Grammar {
   public Rule typePrimary;
   public Rule nullableType; // OK // NOT NECESSARYY
   public Rule arrayType; // OK
-  public Rule typePostfix;
   public Rule type; // OK
 
   public Rule nonArrayType; // LATER
@@ -315,9 +314,8 @@ public class CSharpGrammar implements Grammar {
   public Rule constructorConstraint; // OK
 
   // A.3 Unsafe code
-  // public Rule destructorDeclaration; // OK
   public Rule unsafeStatement; // OK
-  public LeftRecursiveRule pointerType; // OK, LeftRecursiveRule required
+  public Rule pointerType; // OK, LeftRecursiveRule required
   public Rule pointerIndirectionExpression; // OK
   public Rule pointerMemberAccess; // OK
   public Rule pointerElementAccess; // OK

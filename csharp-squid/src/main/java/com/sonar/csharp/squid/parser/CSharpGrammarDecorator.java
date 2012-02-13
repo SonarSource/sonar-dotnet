@@ -112,20 +112,29 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
             g.typeName
         )).skip();
     g.nullableType.is(g.typePrimary, adjacent(QUESTION));
+    g.pointerType.is( // Moved from unsafe code to remove the left recursions
+        or(
+            g.nullableType,
+            g.typePrimary,
+            VOID
+        ),
+        STAR
+        );
     g.arrayType.is(
         or(
+            g.pointerType,
             g.nullableType,
             g.typePrimary
         ),
         g.rankSpecifiers
         );
-    g.typePostfix.is(
+    g.type.is(
         or(
             g.arrayType,
+            g.pointerType,
             g.nullableType,
             g.typePrimary
-        )).skip();
-    g.type.is(g.typePostfix);
+        ));
 
     g.nonNullableValueType.is(not(g.nullableType), g.type);
     g.nonArrayType.is(not(g.arrayType), g.type);
@@ -495,8 +504,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.staticConstructorModifiers.override(o2n(or(EXTERN, UNSAFE)), STATIC, o2n(or(EXTERN, UNSAFE)));
     g.embeddedStatement.or(or(g.unsafeStatement, g.fixedStatement));
     g.unsafeStatement.is(UNSAFE, g.block);
-    g.type.orBefore(g.pointerType);
-    g.pointerType.is(or(g.type, VOID), STAR);
+
+    // pointerType was moved to the types part in order to remove the left recursions
+
     // NOTE : g.unsafe.pointerElementAccess deactivated here because it shadows the "g.elementAccess" in the main grammar...
     // Need to look into that later.
     g.primaryNoArrayCreationExpression.or(or(g.pointerMemberAccess, /* g.unsafe.pointerElementAccess, */g.sizeOfExpression));
