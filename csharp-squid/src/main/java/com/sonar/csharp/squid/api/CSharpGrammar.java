@@ -22,26 +22,26 @@ public class CSharpGrammar implements Grammar {
   public Rule compilationUnit; // OK
   public Rule namespaceName; // OK
   public Rule typeName; // OK
-  public LeftRecursiveRule namespaceOrTypeName; // OK
+  public LeftRecursiveRule namespaceOrTypeName; // OK, LeftRecursiveRule required
 
   // A.2.2 Types
-  public LeftRecursiveRule type; // OK
-  public LeftRecursiveRule valueType; // LATER // NOT NECESSARY
-  public LeftRecursiveRule structType; // OK // NOT NECESSARY
-  public LeftRecursiveRule enumType; // LATER // NOT NECESSARY
+  public LeftRecursiveRule type; // OK, LeftRecursiveRule required
+  public Rule valueType; // LATER // NOT NECESSARY
+  public Rule structType; // OK // NOT NECESSARY
+  public Rule enumType; // LATER // NOT NECESSARY
   public Rule simpleType; // OK // NOT NECESSARY
   public Rule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
   public Rule integralType; // OK - tested via SimpleTypeTest
   public Rule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
-  public LeftRecursiveRule nullableType; // OK // NOT NECESSARY
-  public LeftRecursiveRule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
-  public LeftRecursiveRule referenceType; // OK // NOT NECESSARY
-  public LeftRecursiveRule classType; // OK
-  public LeftRecursiveRule interfaceType; // OK
-  public LeftRecursiveRule arrayType; // OK
-  public LeftRecursiveRule nonArrayType; // LATER
+  public LeftRecursiveRule nullableType; // OK // NOT NECESSARYK, LeftRecursiveRule required
+  public Rule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
+  public Rule referenceType; // OK // NOT NECESSARY
+  public Rule classType; // OK
+  public Rule interfaceType; // OK
+  public LeftRecursiveRule arrayType; // OK, LeftRecursiveRule required
+  public Rule nonArrayType; // LATER
   public Rule rankSpecifier; // OK
-  public LeftRecursiveRule delegateType; // LATER
+  public Rule delegateType; // LATER
 
   // A.2.3 Variables
   public Rule variableReference; // LATER

@@ -15,7 +15,7 @@ public class CSharpUnsafeExtensionGrammar {
 
   public Rule destructorDeclaration; // OK
   public Rule unsafeStatement; // OK
-  public LeftRecursiveRule pointerType; // OK
+  public LeftRecursiveRule pointerType; // OK, LeftRecursiveRule required
   public Rule pointerIndirectionExpression; // OK
   public Rule pointerMemberAccess; // OK
   public Rule pointerElementAccess; // OK
