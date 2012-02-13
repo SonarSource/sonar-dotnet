@@ -21,6 +21,7 @@
 	<modules>
 		<module>csharp-squid</module>
 		<module>csharp-toolkit</module>
+    <module>csharp-ssdk</module>
 		<module>sonar-csharp-squid-plugin</module>
 		<module>integration-tests</module>
 	</modules>
@@ -51,6 +52,11 @@
 				<artifactId>ssdk-gui</artifactId>
 				<version>${ssdkVersion}</version>
 			</dependency>
+    <dependency>
+      <groupId>com.sonarsource.csharp</groupId>
+      <artifactId>csharp-squid</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 			<!-- sonar open-source -->
 			<dependency>
 				<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>

@@ -65,7 +65,6 @@
     <dependency>
       <groupId>com.sonarsource.csharp</groupId>
       <artifactId>csharp-squid</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.sonarsource.sslr</groupId>
