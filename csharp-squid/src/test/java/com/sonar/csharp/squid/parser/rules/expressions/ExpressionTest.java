@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +36,11 @@ public class ExpressionTest {
   public void testRealLife() throws Exception {
     assertThat(p, parse("CurrentDomain.GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
+    assertThat(p, parse("p.field++.ToString()"));
+    assertThat(p, parse("a++.ToString().ToString()"));
+    assertThat(p, parse("int.Parse(\"42\")"));
+    assertThat(p, parse("int.Parse(\"42\").ToString()"));
+    assertThat(p, parse("int.MaxValue"));
   }
 
 }
