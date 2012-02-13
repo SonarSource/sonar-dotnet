@@ -51,7 +51,7 @@ public class CSharpGrammar implements Grammar {
   public Rule argument; // OK
   public Rule argumentName; // OK
   public Rule argumentValue; // OK
-  public Rule primaryExpression; // OK
+  public LeftRecursiveRule primaryExpression; // OK
   public LeftRecursiveRule primaryNoArrayCreationExpression; // LATER, LeftRecursiveRule required
   public Rule simpleName; // OK
   public Rule parenthesizedExpression; // OK
