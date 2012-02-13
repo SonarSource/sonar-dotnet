@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +21,13 @@ public class FixedStatementTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.unsafe.fixedStatement);
+    p.setRootRule(g.fixedStatement);
   }
 
   @Test
   public void testOk() {
-    g.unsafe.pointerType.mock();
-    g.unsafe.fixedPointerDeclarator.mock();
+    g.pointerType.mock();
+    g.fixedPointerDeclarator.mock();
     g.embeddedStatement.mock();
     assertThat(p, parse("fixed(pointerType fixedPointerDeclarator) embeddedStatement"));
     assertThat(p, parse("fixed(pointerType fixedPointerDeclarator, fixedPointerDeclarator, fixedPointerDeclarator) embeddedStatement"));

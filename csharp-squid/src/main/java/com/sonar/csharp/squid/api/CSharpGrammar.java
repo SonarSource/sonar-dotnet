@@ -310,8 +310,22 @@ public class CSharpGrammar implements Grammar {
   public Rule secondaryConstraints; // OK
   public Rule constructorConstraint; // OK
 
-  /** Grammar extensions **/
-  public CSharpUnsafeExtensionGrammar unsafe;
+  // A.3 Unsafe code
+  // public Rule destructorDeclaration; // OK
+  public Rule unsafeStatement; // OK
+  public LeftRecursiveRule pointerType; // OK, LeftRecursiveRule required
+  public Rule pointerIndirectionExpression; // OK
+  public Rule pointerMemberAccess; // OK
+  public Rule pointerElementAccess; // OK
+  public Rule addressOfExpression; // OK
+  public Rule sizeOfExpression; // OK
+  public Rule fixedStatement; // OK
+  public Rule fixedPointerDeclarator; // OK
+  public Rule fixedPointerInitializer; // OK
+  public Rule fixedSizeBufferDeclaration; // OK
+  public Rule fixedSizeBufferModifier; // OK
+  public Rule fixedSizeBufferDeclarator; // OK
+  public Rule stackallocInitializer; // OK
 
   /**
    * ${@inheritDoc}

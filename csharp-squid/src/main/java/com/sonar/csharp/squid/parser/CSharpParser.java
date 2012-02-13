@@ -22,7 +22,7 @@ public class CSharpParser extends Parser<CSharpGrammar> {
 
   @SuppressWarnings("unchecked")
   public CSharpParser(CSharpConfiguration configuration) {
-    super(new CSharpGrammar(), new CSharpLexer(configuration), new CSharpGrammarDecorator(), new CSharpUnsafeExtensionGrammarDecorator());
+    super(new CSharpGrammar(), new CSharpLexer(configuration), new CSharpGrammarDecorator());
   }
 
 }

@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +21,12 @@ public class FixedPointerDeclaratorTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.unsafe.fixedPointerDeclarator);
+    p.setRootRule(g.fixedPointerDeclarator);
   }
 
   @Test
   public void testOk() {
-    g.unsafe.fixedPointerInitializer.mock();
+    g.fixedPointerInitializer.mock();
     assertThat(p, parse("id = fixedPointerInitializer"));
   }
 

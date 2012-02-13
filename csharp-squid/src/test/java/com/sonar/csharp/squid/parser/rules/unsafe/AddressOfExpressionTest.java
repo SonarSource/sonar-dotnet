@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class AddressOfExpressionTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.unsafe.addressOfExpression);
+    p.setRootRule(g.addressOfExpression);
     g.unaryExpression.mock();
   }
 

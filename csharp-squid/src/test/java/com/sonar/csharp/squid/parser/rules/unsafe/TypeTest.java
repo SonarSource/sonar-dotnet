@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class TypeTest {
 
   @Test
   public void testOk() {
-    g.unsafe.pointerType.mock();
+    g.pointerType.mock();
     assertThat(p, parse("pointerType"));
   }
 

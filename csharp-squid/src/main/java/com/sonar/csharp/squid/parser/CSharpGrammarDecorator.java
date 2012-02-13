@@ -74,6 +74,9 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     // A.2.13 Generics
     generics(g);
 
+    // A.3 Unsafe code
+    unsafe(g);
+
   }
 
   private void basicConcepts(CSharpGrammar g) {
@@ -454,4 +457,48 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.secondaryConstraints.is(or(g.interfaceType, g.typeParameter), o2n(COMMA, or(g.interfaceType, g.typeParameter)));
     g.constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
   }
+
+  private void unsafe(CSharpGrammar g) {
+    g.classModifier.or(UNSAFE);
+    g.structModifier.or(UNSAFE);
+    g.interfaceModifier.or(UNSAFE);
+    g.delegateModifier.or(UNSAFE);
+    g.fieldModifier.or(UNSAFE);
+    g.methodModifier.or(UNSAFE);
+    g.propertyModifier.or(UNSAFE);
+    g.eventModifier.or(UNSAFE);
+    g.indexerModifier.or(UNSAFE);
+    g.operatorModifier.or(UNSAFE);
+    g.constructorModifier.or(UNSAFE);
+
+    // g.unsafe.destructorDeclaration.is(opt(g.attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS,
+    // g.destructorBody);
+    g.staticConstructorModifiers.override(o2n(or(EXTERN, UNSAFE)), STATIC, o2n(or(EXTERN, UNSAFE)));
+    g.embeddedStatement.or(or(g.unsafeStatement, g.fixedStatement));
+    g.unsafeStatement.is(UNSAFE, g.block);
+    g.type.orBefore(g.pointerType);
+    g.pointerType.is(or(g.type, VOID), STAR);
+    // NOTE : g.unsafe.pointerElementAccess deactivated here because it shadows the "g.elementAccess" in the main grammar...
+    // Need to look into that later.
+    g.primaryNoArrayCreationExpression.or(or(g.pointerMemberAccess, /* g.unsafe.pointerElementAccess, */g.sizeOfExpression));
+    g.unaryExpression.or(or(g.pointerIndirectionExpression, g.addressOfExpression));
+    g.pointerIndirectionExpression.is(STAR, g.unaryExpression);
+    g.pointerMemberAccess.is(g.primaryExpression, PTR_OP, IDENTIFIER);
+    g.pointerElementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.expression, RBRACKET);
+    g.addressOfExpression.is(AND, g.unaryExpression);
+    g.sizeOfExpression.is(SIZEOF, LPARENTHESIS, g.type, RPARENTHESIS);
+    g.fixedStatement.is(FIXED, LPARENTHESIS, g.pointerType, g.fixedPointerDeclarator,
+        o2n(COMMA, g.fixedPointerDeclarator), RPARENTHESIS, g.embeddedStatement);
+    g.fixedPointerDeclarator.is(IDENTIFIER, EQUAL, g.fixedPointerInitializer);
+    // NOTE : g.stackallocInitializer should not be here according to the specifications, but it seems it can in reality
+    g.fixedPointerInitializer.isOr(and(AND, g.variableReference), g.stackallocInitializer, g.expression);
+    g.structMemberDeclaration.or(g.fixedSizeBufferDeclaration);
+    g.fixedSizeBufferDeclaration.is(opt(g.attributes), o2n(g.fixedSizeBufferModifier), FIXED, g.type,
+        one2n(g.fixedSizeBufferDeclarator), SEMICOLON);
+    g.fixedSizeBufferModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE);
+    g.fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, g.constantExpression, RBRACKET);
+    g.localVariableInitializer.or(g.stackallocInitializer);
+    g.stackallocInitializer.is(STACKALLOC, g.type, LBRACKET, g.expression, RBRACKET);
+  }
+
 }
