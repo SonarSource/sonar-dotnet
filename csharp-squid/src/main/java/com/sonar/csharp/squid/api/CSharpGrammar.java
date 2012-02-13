@@ -47,48 +47,48 @@ public class CSharpGrammar implements Grammar {
   public Rule variableReference; // LATER
 
   // A.2.4 Expressions
-  public LeftRecursiveRule argumentList; // LATER
-  public LeftRecursiveRule argument; // OK
-  public LeftRecursiveRule argumentName; // OK
-  public LeftRecursiveRule argumentValue; // OK
-  public LeftRecursiveRule primaryExpression; // OK
-  public LeftRecursiveRule primaryNoArrayCreationExpression; // LATER
+  public Rule argumentList; // LATER
+  public Rule argument; // OK
+  public Rule argumentName; // OK
+  public Rule argumentValue; // OK
+  public Rule primaryExpression; // OK
+  public LeftRecursiveRule primaryNoArrayCreationExpression; // LATER, LeftRecursiveRule required
   public Rule simpleName; // OK
-  public LeftRecursiveRule parenthesizedExpression; // OK
-  public LeftRecursiveRule memberAccess; // OK
+  public Rule parenthesizedExpression; // OK
+  public LeftRecursiveRule memberAccess; // OK, LeftRecursiveRule required
   public Rule predefinedType; // OK
-  public LeftRecursiveRule invocationExpression; // OK
-  public LeftRecursiveRule elementAccess; // OK
+  public LeftRecursiveRule invocationExpression; // OK, LeftRecursiveRule required
+  public LeftRecursiveRule elementAccess; // OK, LeftRecursiveRule required
   public Rule thisAccess; // LATER
   public Rule baseAccess; // OK
-  public LeftRecursiveRule postIncrementExpression; // OK
-  public LeftRecursiveRule postDecrementExpression; // OK
-  public LeftRecursiveRule objectCreationExpression; // OK
-  public LeftRecursiveRule objectOrCollectionInitializer; // OK
-  public LeftRecursiveRule objectInitializer; // OK
-  public LeftRecursiveRule memberInitializer; // OK
-  public LeftRecursiveRule initializerValue; // OK
-  public LeftRecursiveRule collectionInitializer; // OK
-  public LeftRecursiveRule elementInitializer; // OK
-  public LeftRecursiveRule expressionList; // LATER
-  public LeftRecursiveRule arrayCreationExpression; // OK
-  public LeftRecursiveRule delegateCreationExpression; // OK
-  public LeftRecursiveRule anonymousObjectCreationExpression; // OK
-  public LeftRecursiveRule anonymousObjectInitializer; // OK
-  public LeftRecursiveRule memberDeclarator; // OK
-  public LeftRecursiveRule typeOfExpression; // OK
+  public LeftRecursiveRule postIncrementExpression; // OK, LeftRecursiveRule required
+  public LeftRecursiveRule postDecrementExpression; // OK, LeftRecursiveRule required
+  public Rule objectCreationExpression; // OK
+  public Rule objectOrCollectionInitializer; // OK
+  public Rule objectInitializer; // OK
+  public Rule memberInitializer; // OK
+  public Rule initializerValue; // OK
+  public Rule collectionInitializer; // OK
+  public Rule elementInitializer; // OK
+  public Rule expressionList; // LATER
+  public Rule arrayCreationExpression; // OK
+  public Rule delegateCreationExpression; // OK
+  public Rule anonymousObjectCreationExpression; // OK
+  public Rule anonymousObjectInitializer; // OK
+  public Rule memberDeclarator; // OK
+  public Rule typeOfExpression; // OK
   public Rule unboundTypeName; // OK
   public Rule genericDimensionSpecifier; // OK
-  public LeftRecursiveRule checkedExpression; // OK
-  public LeftRecursiveRule uncheckedExpression; // OK
-  public LeftRecursiveRule defaultValueExpression; // OK
-  public LeftRecursiveRule unaryExpression; // OK
-  public LeftRecursiveRule preIncrementExpression; // OK - tested via UnaryExpressionTest
-  public LeftRecursiveRule preDecrementExpression; // OK - tested via UnaryExpressionTest
-  public LeftRecursiveRule castExpression; // OK - tested via UnaryExpressionTest
-  public LeftRecursiveRule multiplicativeExpression; // OK
-  public LeftRecursiveRule additiveExpression; // OK
-  public LeftRecursiveRule shiftExpression; // OK
+  public Rule checkedExpression; // OK
+  public Rule uncheckedExpression; // OK
+  public Rule defaultValueExpression; // OK
+  public Rule unaryExpression; // OK
+  public Rule preIncrementExpression; // OK - tested via UnaryExpressionTest
+  public Rule preDecrementExpression; // OK - tested via UnaryExpressionTest
+  public Rule castExpression; // OK - tested via UnaryExpressionTest
+  public Rule multiplicativeExpression; // OK
+  public Rule additiveExpression; // OK
+  public Rule shiftExpression; // OK
   public Rule relationalExpression; // OK
   public Rule equalityExpression; // OK
   public Rule andExpression; // OK
