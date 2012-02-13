@@ -243,11 +243,11 @@ public class CSharpGrammar implements Grammar {
   public Rule destructorBody; // LATER
 
   // A.2.7 Struct
-  public LeftRecursiveRule structDeclaration; // OK
+  public Rule structDeclaration; // OK
   public Rule structModifier; // OK - tested via StructDeclarationTest
   public Rule structInterfaces; // OK
-  public LeftRecursiveRule structBody; // OK
-  public LeftRecursiveRule structMemberDeclaration; // OK - tested via StructBodyTest
+  public Rule structBody; // OK
+  public Rule structMemberDeclaration; // OK - tested via StructBodyTest
 
   // A.2.8 Arrays
   public Rule arrayInitializer; // OK
