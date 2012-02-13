@@ -22,7 +22,7 @@ public class CSharpGrammar implements Grammar {
   public Rule compilationUnit; // OK
   public Rule namespaceName; // OK
   public Rule typeName; // OK
-  public LeftRecursiveRule namespaceOrTypeName; // OK, LeftRecursiveRule required
+  public Rule namespaceOrTypeName; // OK
 
   // A.2.2 Types
   public LeftRecursiveRule type; // OK, LeftRecursiveRule required

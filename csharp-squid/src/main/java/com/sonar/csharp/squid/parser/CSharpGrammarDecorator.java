@@ -5,140 +5,11 @@
  */
 package com.sonar.csharp.squid.parser;
 
-import static com.sonar.csharp.squid.api.CSharpKeyword.ABSTRACT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.AS;
-import static com.sonar.csharp.squid.api.CSharpKeyword.BASE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.BOOL;
-import static com.sonar.csharp.squid.api.CSharpKeyword.BREAK;
-import static com.sonar.csharp.squid.api.CSharpKeyword.BYTE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CASE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CATCH;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CHAR;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CHECKED;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CLASS;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CONST;
-import static com.sonar.csharp.squid.api.CSharpKeyword.CONTINUE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.DECIMAL;
-import static com.sonar.csharp.squid.api.CSharpKeyword.DEFAULT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.DELEGATE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.DO;
-import static com.sonar.csharp.squid.api.CSharpKeyword.DOUBLE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.ELSE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.ENUM;
-import static com.sonar.csharp.squid.api.CSharpKeyword.EVENT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.EXPLICIT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.EXTERN;
-import static com.sonar.csharp.squid.api.CSharpKeyword.FALSE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.FINALLY;
-import static com.sonar.csharp.squid.api.CSharpKeyword.FLOAT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.FOR;
-import static com.sonar.csharp.squid.api.CSharpKeyword.FOREACH;
-import static com.sonar.csharp.squid.api.CSharpKeyword.GOTO;
-import static com.sonar.csharp.squid.api.CSharpKeyword.IF;
-import static com.sonar.csharp.squid.api.CSharpKeyword.IMPLICIT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.IN;
-import static com.sonar.csharp.squid.api.CSharpKeyword.INT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.INTERFACE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.INTERNAL;
-import static com.sonar.csharp.squid.api.CSharpKeyword.IS;
-import static com.sonar.csharp.squid.api.CSharpKeyword.LOCK;
-import static com.sonar.csharp.squid.api.CSharpKeyword.LONG;
-import static com.sonar.csharp.squid.api.CSharpKeyword.NAMESPACE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.NEW;
-import static com.sonar.csharp.squid.api.CSharpKeyword.NULL;
-import static com.sonar.csharp.squid.api.CSharpKeyword.OBJECT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.OPERATOR;
-import static com.sonar.csharp.squid.api.CSharpKeyword.OUT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.OVERRIDE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.PARAMS;
-import static com.sonar.csharp.squid.api.CSharpKeyword.PRIVATE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.PROTECTED;
-import static com.sonar.csharp.squid.api.CSharpKeyword.PUBLIC;
-import static com.sonar.csharp.squid.api.CSharpKeyword.READONLY;
-import static com.sonar.csharp.squid.api.CSharpKeyword.REF;
-import static com.sonar.csharp.squid.api.CSharpKeyword.RETURN;
-import static com.sonar.csharp.squid.api.CSharpKeyword.SBYTE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.SEALED;
-import static com.sonar.csharp.squid.api.CSharpKeyword.SHORT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.STATIC;
-import static com.sonar.csharp.squid.api.CSharpKeyword.STRING;
-import static com.sonar.csharp.squid.api.CSharpKeyword.STRUCT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.SWITCH;
-import static com.sonar.csharp.squid.api.CSharpKeyword.THIS;
-import static com.sonar.csharp.squid.api.CSharpKeyword.THROW;
-import static com.sonar.csharp.squid.api.CSharpKeyword.TRUE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.TRY;
-import static com.sonar.csharp.squid.api.CSharpKeyword.TYPEOF;
-import static com.sonar.csharp.squid.api.CSharpKeyword.UINT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.ULONG;
-import static com.sonar.csharp.squid.api.CSharpKeyword.UNCHECKED;
-import static com.sonar.csharp.squid.api.CSharpKeyword.USHORT;
-import static com.sonar.csharp.squid.api.CSharpKeyword.USING;
-import static com.sonar.csharp.squid.api.CSharpKeyword.VIRTUAL;
-import static com.sonar.csharp.squid.api.CSharpKeyword.VOID;
-import static com.sonar.csharp.squid.api.CSharpKeyword.VOLATILE;
-import static com.sonar.csharp.squid.api.CSharpKeyword.WHILE;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.ADD_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.AND;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.AND_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.AND_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.COLON;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.COMMA;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.DEC_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.DIV_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.DOT;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.DOUBLE_COLON;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.DOUBLE_QUESTION;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.EQUAL;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.EQ_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.EXCLAMATION;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.GE_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.INC_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.INFERIOR;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LAMBDA;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LBRACKET;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LCURLYBRACE;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LEFT_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LEFT_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LE_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.LPARENTHESIS;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.MINUS;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.MODULO;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.MOD_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.MUL_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.NE_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.OR;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.OR_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.OR_OP;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.PLUS;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.QUESTION;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.RBRACKET;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.RCURLYBRACE;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.RPARENTHESIS;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.SEMICOLON;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.SLASH;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.STAR;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.SUB_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.SUPERIOR;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.TILDE;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.XOR;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.XOR_ASSIGN;
-import static com.sonar.csharp.squid.api.CSharpTokenType.CHARACTER_LITERAL;
-import static com.sonar.csharp.squid.api.CSharpTokenType.INTEGER_DEC_LITERAL;
-import static com.sonar.csharp.squid.api.CSharpTokenType.INTEGER_HEX_LITERAL;
-import static com.sonar.csharp.squid.api.CSharpTokenType.REAL_LITERAL;
-import static com.sonar.csharp.squid.api.CSharpTokenType.STRING_LITERAL;
-import static com.sonar.sslr.api.GenericTokenType.EOF;
-import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
-import static com.sonar.sslr.impl.matcher.Matchers.adjacent;
-import static com.sonar.sslr.impl.matcher.Matchers.and;
-import static com.sonar.sslr.impl.matcher.Matchers.bridge;
-import static com.sonar.sslr.impl.matcher.Matchers.next;
-import static com.sonar.sslr.impl.matcher.Matchers.not;
-import static com.sonar.sslr.impl.matcher.Matchers.o2n;
-import static com.sonar.sslr.impl.matcher.Matchers.one2n;
-import static com.sonar.sslr.impl.matcher.Matchers.opt;
-import static com.sonar.sslr.impl.matcher.Matchers.or;
+import static com.sonar.csharp.squid.api.CSharpKeyword.*;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.*;
+import static com.sonar.csharp.squid.api.CSharpTokenType.*;
+import static com.sonar.sslr.api.GenericTokenType.*;
+import static com.sonar.sslr.impl.matcher.Matchers.*;
 
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.sslr.api.GrammarDecorator;
@@ -210,8 +81,14 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
         EOF);
     g.namespaceName.is(g.namespaceOrTypeName);
     g.typeName.is(g.namespaceOrTypeName);
-    g.namespaceOrTypeName.isOr(and(IDENTIFIER, opt(g.typeArgumentList)),
-        and(g.namespaceOrTypeName, DOT, IDENTIFIER, opt(g.typeArgumentList)), g.qualifiedAliasMember);
+    g.namespaceOrTypeName.is(
+        or(
+            g.qualifiedAliasMember,
+            and(IDENTIFIER, opt(g.typeArgumentList))
+        ),
+        o2n(
+            DOT, IDENTIFIER, opt(g.typeArgumentList)
+        ));
   }
 
   private void types(CSharpGrammar g) {
