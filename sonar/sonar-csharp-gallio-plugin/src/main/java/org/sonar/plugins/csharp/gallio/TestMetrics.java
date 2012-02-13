@@ -36,8 +36,12 @@ import org.sonar.api.measures.SumChildValuesFormula;
 public class TestMetrics implements Metrics {
 
   public static final Metric COUNT_ASSERTS = new Metric.Builder("count_asserts", "Count Assert", Metric.ValueType.INT)
-      .setDescription("The number of asserts performed by the unit tests").setDirection(Metric.DIRECTION_BETTER).setQualitative(false)
+      .setDescription("The number of asserts performed by the unit tests").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
       .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new SumChildValuesFormula(true)).create();
+
+  public static final Metric ASSERT_PER_TEST = new Metric.Builder("assert_per_test", "Assert per Test", Metric.ValueType.FLOAT)
+  .setDescription("The average number of asserts per test").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
+  .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new AverageAssertFormula()).create();
 
   public static final Metric ELOC = new Metric.Builder("eloc", "Effective lines of code", Metric.ValueType.INT)
       .setDescription("The number of lines of code with statements").setDirection(Metric.DIRECTION_WORST).setQualitative(false)
@@ -47,6 +51,7 @@ public class TestMetrics implements Metrics {
     ArrayList<Metric> metrics = new ArrayList<Metric>();
     metrics.add(COUNT_ASSERTS);
     metrics.add(ELOC);
+    metrics.add(ASSERT_PER_TEST);
     return metrics;
   }
 
