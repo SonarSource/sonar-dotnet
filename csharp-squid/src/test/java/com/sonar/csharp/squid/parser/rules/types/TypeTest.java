@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.types;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,16 +22,6 @@ public class TypeTest {
   @Before
   public void init() {
     p.setRootRule(g.type);
-  }
-
-  @Test
-  public void testOk() {
-    g.valueType.mock();
-    g.referenceType.mock();
-    g.typeParameter.mock();
-    assertThat(p, parse("valueType"));
-    assertThat(p, parse("referenceType"));
-    assertThat(p, parse("typeParameter"));
   }
 
   @Test

@@ -95,24 +95,44 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void types(CSharpGrammar g) {
-    // NOTE: g.type does not exactly stick to the specification: g.nullableType has been added here, whereas it is not present in the "type"
-    // rule in the specification of C# 4.0
-    g.type.isOr(g.nullableType, g.referenceType, g.valueType, g.typeParameter);
-    g.valueType.isOr(g.structType, g.enumType);
-    g.structType.isOr(g.nullableType, g.typeName, g.simpleType);
     g.simpleType.isOr(g.numericType, BOOL);
     g.numericType.isOr(g.integralType, g.floatingPointType, DECIMAL);
     g.integralType.isOr(SBYTE, BYTE, SHORT, USHORT, INT, UINT, LONG, ULONG, CHAR);
     g.floatingPointType.isOr(FLOAT, DOUBLE);
-    g.enumType.is(g.typeName);
-    g.nullableType.is(g.nonNullableValueType, adjacent(QUESTION));
-    g.nonNullableValueType.is(g.type);
-    g.referenceType.isOr(g.arrayType, g.classType, g.interfaceType, g.delegateType);
-    g.classType.isOr(g.typeName, OBJECT, "dynamic", STRING);
-    g.interfaceType.is(g.typeName);
-    g.arrayType.is(g.nonArrayType, one2n(g.rankSpecifier));
-    g.nonArrayType.isOr(g.type);
+
     g.rankSpecifier.is(LBRACKET, o2n(COMMA), RBRACKET);
+    g.rankSpecifiers.is(one2n(g.rankSpecifier));
+
+    g.typePrimary.is(
+        or(
+            g.simpleType,
+            "dynamic",
+            OBJECT,
+            STRING,
+            g.typeName
+        )).skip();
+    g.nullableType.is(g.typePrimary, adjacent(QUESTION));
+    g.arrayType.is(
+        or(
+            g.nullableType,
+            g.typePrimary
+        ),
+        g.rankSpecifiers
+        );
+    g.typePostfix.is(
+        or(
+            g.arrayType,
+            g.nullableType,
+            g.typePrimary
+        )).skip();
+    g.type.is(g.typePostfix);
+
+    g.nonNullableValueType.is(not(g.nullableType), g.type);
+    g.nonArrayType.is(not(g.arrayType), g.type);
+
+    g.classType.isOr("dynamic", OBJECT, STRING, g.typeName);
+    g.interfaceType.is(g.typeName);
+    g.enumType.is(g.typeName);
     g.delegateType.is(g.typeName);
   }
 

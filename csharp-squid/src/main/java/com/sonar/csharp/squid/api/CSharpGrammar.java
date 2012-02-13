@@ -25,23 +25,27 @@ public class CSharpGrammar implements Grammar {
   public Rule namespaceOrTypeName; // OK
 
   // A.2.2 Types
-  public LeftRecursiveRule type; // OK, LeftRecursiveRule required
-  public Rule valueType; // LATER // NOT NECESSARY
-  public Rule structType; // OK // NOT NECESSARY
-  public Rule enumType; // LATER // NOT NECESSARY
   public Rule simpleType; // OK // NOT NECESSARY
   public Rule numericType; // OK - tested via SimpleTypeTest // NOT NECESSARY
   public Rule integralType; // OK - tested via SimpleTypeTest
   public Rule floatingPointType; // OK - tested via SimpleTypeTest // NOT NECESSARY
-  public LeftRecursiveRule nullableType; // OK // NOT NECESSARYK, LeftRecursiveRule required
-  public Rule nonNullableValueType; // OK - tested via NullableTypeTest // NOT NECESSARY
-  public Rule referenceType; // OK // NOT NECESSARY
-  public Rule classType; // OK
-  public Rule interfaceType; // OK
-  public LeftRecursiveRule arrayType; // OK, LeftRecursiveRule required
-  public Rule nonArrayType; // LATER
+
   public Rule rankSpecifier; // OK
-  public Rule delegateType; // LATER
+  public Rule rankSpecifiers;
+
+  public Rule typePrimary;
+  public Rule nullableType; // OK // NOT NECESSARYY
+  public Rule arrayType; // OK
+  public Rule typePostfix;
+  public Rule type; // OK
+
+  public Rule nonArrayType; // LATER
+  public Rule nonNullableValueType;
+
+  public Rule classType; // OK, type bin
+  public Rule interfaceType; // OK, type bin
+  public Rule enumType; // LATER // NOT NECESSARY, type bin
+  public Rule delegateType; // LATER, type bin
 
   // A.2.3 Variables
   public Rule variableReference; // LATER
