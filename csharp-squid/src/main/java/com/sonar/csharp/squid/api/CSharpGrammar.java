@@ -250,8 +250,8 @@ public class CSharpGrammar implements Grammar {
   public LeftRecursiveRule structMemberDeclaration; // OK - tested via StructBodyTest
 
   // A.2.8 Arrays
-  public LeftRecursiveRule arrayInitializer; // OK
-  public LeftRecursiveRule variableInitializerList; // OK
+  public Rule arrayInitializer; // OK
+  public Rule variableInitializerList; // OK
 
   // A.2.9 Interfaces
   public Rule interfaceDeclaration; // OK
