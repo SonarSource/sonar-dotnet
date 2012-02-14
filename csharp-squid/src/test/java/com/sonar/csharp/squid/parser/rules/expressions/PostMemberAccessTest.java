@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,26 +14,27 @@ import org.junit.Test;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
-public class ElementAccessTest {
+public class PostMemberAccessTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.elementAccess);
+    p.setRootRule(g.postMemberAccess);
   }
 
   @Test
   public void testOk() {
-    g.primaryNoArrayCreationExpression.mock();
-    g.argumentList.mock();
-    assertThat(p, parse("primaryNoArrayCreationExpression [ argumentList ]"));
+    g.primaryExpression.mock();
+    g.typeArgumentList.mock();
+    assertThat(p, parse(".id"));
+    assertThat(p, parse(".id typeArgumentList"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("GetProperties(true)[key]"));
+    assertThat(p, parse(".MaxValue"));
   }
 
 }

@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,20 +26,8 @@ public class ExpressionStatementTest {
 
   @Test
   public void testOk() {
-    g.invocationExpression.mock();
-    g.objectCreationExpression.mock();
-    g.assignment.mock();
-    g.postIncrementExpression.mock();
-    g.postDecrementExpression.mock();
-    g.preIncrementExpression.mock();
-    g.preDecrementExpression.mock();
-    assertThat(p, parse("invocationExpression;"));
-    assertThat(p, parse("objectCreationExpression;"));
-    assertThat(p, parse("assignment;"));
-    assertThat(p, parse("postIncrementExpression;"));
-    assertThat(p, parse("postDecrementExpression;"));
-    assertThat(p, parse("preIncrementExpression;"));
-    assertThat(p, parse("preDecrementExpression;"));
+    g.expression.mock();
+    assertThat(p, parse("expression;"));
   }
 
   @Test

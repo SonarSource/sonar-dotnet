@@ -150,28 +150,63 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
   }
 
   private void expressions(CSharpGrammar g) {
+    g.primaryExpressionPrimary.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression).skip();
+    g.primaryNoArrayCreationExpression.is(
+        or(
+            g.parenthesizedExpression,
+            g.memberAccess,
+            g.thisAccess,
+            g.baseAccess,
+            g.objectCreationExpression,
+            g.delegateCreationExpression,
+            g.anonymousObjectCreationExpression,
+            g.typeOfExpression,
+            g.checkedExpression,
+            g.uncheckedExpression,
+            g.defaultValueExpression,
+            g.anonymousMethodExpression,
+            g.literal,
+            g.simpleName
+        ));
+
+    g.postMemberAccess.is(DOT, IDENTIFIER, opt(g.typeArgumentList));
+    g.postElementAccess.is(LBRACKET, g.argumentList, RBRACKET);
+    g.postPointerMemberAccess.is(PTR_OP, IDENTIFIER);
+    g.postIncrement.is(INC_OP);
+    g.postDecrement.is(DEC_OP);
+    g.postInvocation.is(LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
+
+    g.postfixExpression.is(
+        g.primaryExpressionPrimary,
+        one2n(
+        or(
+            g.postMemberAccess,
+            g.postElementAccess,
+            g.postPointerMemberAccess,
+            g.postIncrement,
+            g.postDecrement,
+            g.postInvocation
+        )
+        ));
+    g.primaryExpression.is(
+        or(
+            g.postfixExpression,
+            g.primaryExpressionPrimary
+        ));
+
     g.argumentList.is(g.argument, o2n(COMMA, g.argument));
     g.argument.is(opt(g.argumentName), g.argumentValue);
     g.argumentName.is(IDENTIFIER, COLON);
     g.argumentValue.isOr(g.expression, and(REF, g.variableReference), and(OUT, g.variableReference));
-    g.primaryExpression.isOr(g.arrayCreationExpression, g.primaryNoArrayCreationExpression);
-    g.primaryNoArrayCreationExpression.isOr(g.literal, g.simpleName, g.parenthesizedExpression, g.elementAccess, g.memberAccess,
-        g.invocationExpression, g.thisAccess, g.baseAccess, g.postIncrementExpression, g.postDecrementExpression,
-        g.objectCreationExpression, g.delegateCreationExpression, g.anonymousObjectCreationExpression, g.typeOfExpression,
-        g.checkedExpression, g.uncheckedExpression, g.defaultValueExpression, g.anonymousMethodExpression);
     g.simpleName.is(IDENTIFIER, opt(g.typeArgumentList));
     g.parenthesizedExpression.is(LPARENTHESIS, g.expression, RPARENTHESIS);
     g.memberAccess.isOr(and(g.qualifiedAliasMember, DOT, IDENTIFIER),
-        and(or(g.primaryExpression, g.predefinedType), DOT, IDENTIFIER, opt(g.typeArgumentList)));
+        and(g.predefinedType, DOT, IDENTIFIER, opt(g.typeArgumentList)));
     g.predefinedType.isOr(BOOL, BYTE, CHAR, DECIMAL, DOUBLE, FLOAT, INT, LONG, OBJECT, SBYTE, SHORT, STRING, UINT, ULONG, USHORT);
-    g.invocationExpression.is(g.primaryExpression, LPARENTHESIS, opt(g.argumentList), RPARENTHESIS);
-    g.elementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.argumentList, RBRACKET);
     g.thisAccess.is(THIS);
     // NOTE: g.baseAccess does not exactly stick to the specification: "opt(g.typeArgumentList)" has been added here, whereas it is not
     // present in the "base-access" rule in the specification of C# 4.0
     g.baseAccess.is(BASE, or(and(DOT, IDENTIFIER, opt(g.typeArgumentList)), and(LBRACKET, g.argumentList, RBRACKET)));
-    g.postIncrementExpression.is(g.primaryExpression, INC_OP);
-    g.postDecrementExpression.is(g.primaryExpression, DEC_OP);
     g.objectCreationExpression.is(NEW, g.type,
         or(and(LPARENTHESIS, opt(g.argumentList), RPARENTHESIS, opt(g.objectOrCollectionInitializer)), g.objectOrCollectionInitializer));
     g.objectOrCollectionInitializer.isOr(g.objectInitializer, g.collectionInitializer);
@@ -265,9 +300,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.localVariableInitializer.isOr(g.expression, g.arrayInitializer);
     g.localConstantDeclaration.is(CONST, g.type, g.constantDeclarator, o2n(COMMA, g.constantDeclarator));
     g.constantDeclarator.is(IDENTIFIER, EQUAL, g.constantExpression);
-    g.expressionStatement.is(g.statementExpression, SEMICOLON);
-    g.statementExpression.isOr(g.postIncrementExpression, g.postDecrementExpression, g.preIncrementExpression, g.preDecrementExpression,
-        g.assignment, g.invocationExpression, g.objectCreationExpression);
+    /* NOTE This rule is relaxed to accept any expression */
+    g.expressionStatement.is(g.expression, SEMICOLON);
     g.selectionStatement.isOr(g.ifStatement, g.switchStatement);
     g.ifStatement.is(IF, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement, opt(ELSE, g.embeddedStatement));
     g.switchStatement.is(SWITCH, LPARENTHESIS, g.expression, RPARENTHESIS, LCURLYBRACE, o2n(g.switchSection), RCURLYBRACE);
@@ -281,7 +315,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.forInitializer.isOr(g.localVariableDeclaration, g.statementExpressionList);
     g.forCondition.is(g.booleanExpression);
     g.forIterator.is(g.statementExpressionList);
-    g.statementExpressionList.is(g.statementExpression, o2n(COMMA, g.statementExpression));
+    g.statementExpressionList.is(g.expression, o2n(COMMA, g.expression));
     g.foreachStatement.is(FOREACH, LPARENTHESIS, g.type, IDENTIFIER, IN, g.expression, RPARENTHESIS, g.embeddedStatement);
     g.jumpStatement.isOr(g.breakStatement, g.continueStatement, g.gotoStatement, g.returnStatement, g.throwStatement);
     g.breakStatement.is(BREAK, SEMICOLON);
@@ -506,13 +540,13 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.unsafeStatement.is(UNSAFE, g.block);
 
     // pointerType was moved to the types part in order to remove the left recursions
+    // pointerMemberAccess was moved to the expressions part (as postPointerMemberAccess) in order to remove the left recursions
 
     // NOTE : g.unsafe.pointerElementAccess deactivated here because it shadows the "g.elementAccess" in the main grammar...
     // Need to look into that later.
-    g.primaryNoArrayCreationExpression.or(or(g.pointerMemberAccess, /* g.unsafe.pointerElementAccess, */g.sizeOfExpression));
+    g.primaryNoArrayCreationExpression.or(or(/* g.unsafe.pointerElementAccess, */g.sizeOfExpression));
     g.unaryExpression.or(or(g.pointerIndirectionExpression, g.addressOfExpression));
     g.pointerIndirectionExpression.is(STAR, g.unaryExpression);
-    g.pointerMemberAccess.is(g.primaryExpression, PTR_OP, IDENTIFIER);
     g.pointerElementAccess.is(g.primaryNoArrayCreationExpression, LBRACKET, g.expression, RBRACKET);
     g.addressOfExpression.is(AND, g.unaryExpression);
     g.sizeOfExpression.is(SIZEOF, LPARENTHESIS, g.type, RPARENTHESIS);

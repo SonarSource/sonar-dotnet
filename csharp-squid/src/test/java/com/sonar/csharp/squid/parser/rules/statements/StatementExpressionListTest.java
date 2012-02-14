@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +22,13 @@ public class StatementExpressionListTest {
   @Before
   public void init() {
     p.setRootRule(g.statementExpressionList);
-    g.statementExpression.mock();
+    g.expression.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("statementExpression"));
-    assertThat(p, parse("statementExpression,statementExpression,statementExpression"));
+    assertThat(p, parse("expression"));
+    assertThat(p, parse("expression,expression,expression"));
   }
 
 }

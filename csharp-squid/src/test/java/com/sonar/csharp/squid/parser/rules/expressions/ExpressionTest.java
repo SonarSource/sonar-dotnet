@@ -37,10 +37,15 @@ public class ExpressionTest {
     assertThat(p, parse("CurrentDomain.GetAssemblies()"));
     assertThat(p, parse("dbCommand.Dispose()"));
     assertThat(p, parse("p.field++.ToString()"));
+    assertThat(p, parse("this.Id++"));
     assertThat(p, parse("a++.ToString().ToString()"));
     assertThat(p, parse("int.Parse(\"42\")"));
     assertThat(p, parse("int.Parse(\"42\").ToString()"));
     assertThat(p, parse("int.MaxValue"));
+    assertThat(p, parse("new []{12, 13}"));
+    assertThat(p, parse("new []{12, 13}.ToString()"));
+    assertThat(p, parse("new[] { 12, 13 }.Length"));
+    assertThat(p, parse("new[] { 12, 13 }[0]"));
   }
 
 }

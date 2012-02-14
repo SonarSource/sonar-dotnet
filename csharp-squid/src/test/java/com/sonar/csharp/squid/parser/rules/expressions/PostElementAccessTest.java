@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,25 +14,25 @@ import org.junit.Test;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
-public class PostIncrementExpressionTest {
+public class PostElementAccessTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.postIncrementExpression);
+    p.setRootRule(g.postElementAccess);
   }
 
   @Test
   public void testOk() {
-    g.primaryExpression.mock();
-    assertThat(p, parse("primaryExpression++"));
+    g.argumentList.mock();
+    assertThat(p, parse("[ argumentList ]"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("frameIndex++"));
+    assertThat(p, parse("[key]"));
   }
 
 }

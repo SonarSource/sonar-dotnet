@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.squid.parser.rules.unsafe;
+package com.sonar.csharp.squid.parser.rules.expressions;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.*;
 import static org.junit.Assert.*;
@@ -21,13 +21,12 @@ public class PointerMemberAccessTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.pointerMemberAccess);
-    g.primaryExpression.mock();
+    p.setRootRule(g.postPointerMemberAccess);
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("primaryExpression -> id"));
+    assertThat(p, parse("-> id"));
   }
 
   @Test

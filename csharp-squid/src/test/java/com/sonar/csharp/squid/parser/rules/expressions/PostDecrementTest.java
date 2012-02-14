@@ -3,7 +3,7 @@
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
-package com.sonar.csharp.squid.parser.rules.unsafe;
+package com.sonar.csharp.squid.parser.rules.expressions;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.*;
 import static org.junit.Assert.*;
@@ -14,25 +14,24 @@ import org.junit.Test;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
-public class PrimaryNoArrayCreationExpressionTest {
+public class PostDecrementTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.primaryNoArrayCreationExpression);
-    g.sizeOfExpression.mock();
+    p.setRootRule(g.postDecrement);
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("sizeOfExpression"));
+    assertThat(p, parse("--"));
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void testRealLife() throws Exception {
+    assertThat(p, parse("--"));
   }
 
 }

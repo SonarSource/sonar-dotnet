@@ -6,7 +6,6 @@
 package com.sonar.csharp.squid.api;
 
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.api.LeftRecursiveRule;
 import com.sonar.sslr.api.Rule;
 
 /**
@@ -35,6 +34,7 @@ public class CSharpGrammar implements Grammar {
 
   public Rule typePrimary;
   public Rule nullableType; // OK // NOT NECESSARYY
+  public Rule pointerType; // OK, moved from unsafe code to remove the left recursions
   public Rule arrayType; // OK
   public Rule type; // OK
 
@@ -50,22 +50,29 @@ public class CSharpGrammar implements Grammar {
   public Rule variableReference; // LATER
 
   // A.2.4 Expressions
+  public Rule primaryExpressionPrimary; // LATER
+  public Rule primaryNoArrayCreationExpression; // LATER
+  public Rule postElementAccess; // OK
+  public Rule postMemberAccess; // OK
+
+  public Rule postInvocation; // OK
+  public Rule postIncrement; // OK
+  public Rule postDecrement; // OK
+  public Rule postPointerMemberAccess; // OK, moved from unsafe code to remove the left recursions, originally pointerMemberAccess
+
+  public Rule postfixExpression; // OK
+  public Rule primaryExpression; // OK
+
   public Rule argumentList; // LATER
   public Rule argument; // OK
   public Rule argumentName; // OK
   public Rule argumentValue; // OK
-  public LeftRecursiveRule primaryExpression; // OK, LeftRecursiveRule required
-  public LeftRecursiveRule primaryNoArrayCreationExpression; // LATER, LeftRecursiveRule required
   public Rule simpleName; // OK
   public Rule parenthesizedExpression; // OK
-  public LeftRecursiveRule memberAccess; // OK, LeftRecursiveRule required
+  public Rule memberAccess; // OK, last part of the rule is in postMemberAccess
   public Rule predefinedType; // OK
-  public LeftRecursiveRule invocationExpression; // OK, LeftRecursiveRule required
-  public LeftRecursiveRule elementAccess; // OK, LeftRecursiveRule required
   public Rule thisAccess; // LATER
   public Rule baseAccess; // OK
-  public LeftRecursiveRule postIncrementExpression; // OK, LeftRecursiveRule required
-  public LeftRecursiveRule postDecrementExpression; // OK, LeftRecursiveRule required
   public Rule objectCreationExpression; // OK
   public Rule objectOrCollectionInitializer; // OK
   public Rule objectInitializer; // OK
@@ -143,7 +150,6 @@ public class CSharpGrammar implements Grammar {
   public Rule localConstantDeclaration; // OK
   public Rule constantDeclarator; // OK
   public Rule expressionStatement; // OK
-  public Rule statementExpression; // OK - tested via ExpressionStatementTest
   public Rule selectionStatement; // NO NEED
   public Rule ifStatement; // OK
   public Rule switchStatement; // OK
@@ -315,9 +321,9 @@ public class CSharpGrammar implements Grammar {
 
   // A.3 Unsafe code
   public Rule unsafeStatement; // OK
-  public Rule pointerType; // OK, LeftRecursiveRule required
+  // pointerType was moved to the types part in order to remove the left recursions
   public Rule pointerIndirectionExpression; // OK
-  public Rule pointerMemberAccess; // OK
+  // pointerMemberAccess was moved to the expressions part (as postPointerMemberAccess) in order to remove the left recursions
   public Rule pointerElementAccess; // OK
   public Rule addressOfExpression; // OK
   public Rule sizeOfExpression; // OK

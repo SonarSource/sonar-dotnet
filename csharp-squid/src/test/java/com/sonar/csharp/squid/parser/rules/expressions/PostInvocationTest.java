@@ -14,37 +14,33 @@ import org.junit.Test;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 
-public class MemberAccessTest {
+public class PostInvocationTest {
 
   CSharpParser p = new CSharpParser();
   CSharpGrammar g = p.getGrammar();
 
   @Before
   public void init() {
-    p.setRootRule(g.memberAccess);
+    p.setRootRule(g.postInvocation);
   }
 
   @Test
   public void testOk() {
-    g.typeArgumentList.mock();
-    g.predefinedType.mock();
-    g.qualifiedAliasMember.mock();
-    assertThat(p, parse("predefinedType.id"));
-    assertThat(p, parse("predefinedType.id typeArgumentList"));
-    assertThat(p, parse("qualifiedAliasMember.id"));
-  }
-
-  @Test
-  public void testKo() {
-    g.qualifiedAliasMember.mock();
-    g.typeArgumentList.mock();
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("qualifiedAliasMember.id typeArgumentList"));
+    g.argumentList.mock();
+    assertThat(p, parse("()"));
+    assertThat(p, parse("(argumentList)"));
   }
 
   @Test
   public void testRealLife() throws Exception {
-    assertThat(p, parse("int.MaxValue"));
+    assertThat(p, parse("()"));
+    assertThat(p, parse("()"));
+    assertThat(p, parse("(formatException.Message)"));
+    assertThat(p, parse("(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)"));
+    assertThat(p, parse("( foo)"));
+    assertThat(p, parse("( (x,y)=>String.Compare(x, y, true) )"));
+    assertThat(p, parse("(item => item.Id == prdId)"));
+    assertThat(p, parse("()"));
   }
 
 }
