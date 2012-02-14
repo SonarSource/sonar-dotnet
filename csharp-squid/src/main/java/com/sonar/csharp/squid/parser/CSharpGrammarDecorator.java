@@ -222,7 +222,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.delegateCreationExpression.is(NEW, g.delegateType, LPARENTHESIS, g.expression, RPARENTHESIS);
     g.anonymousObjectCreationExpression.is(NEW, g.anonymousObjectInitializer);
     g.anonymousObjectInitializer.is(LCURLYBRACE, opt(g.memberDeclarator), o2n(COMMA, g.memberDeclarator), opt(COMMA), RCURLYBRACE);
-    g.memberDeclarator.isOr(g.memberAccess, and(IDENTIFIER, EQUAL, g.expression), g.simpleName);
+    // NOTE Rule memberDeclarator is relaxed to accept any expression
+    g.memberDeclarator.is(opt(IDENTIFIER, EQUAL), g.expression);
     // NOTE : g.typeOfExpression does not exactly stick to the specification, but the bridge makes its easier to parse for now.
     // g.typeOfExpression.is(TYPEOF, LPARENTHESIS, or(g.type, g.unboundTypeName, VOID), RPARENTHESIS);
     g.typeOfExpression.is(TYPEOF, bridge(LPARENTHESIS, RPARENTHESIS));
@@ -300,7 +301,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
     g.localVariableInitializer.isOr(g.expression, g.arrayInitializer);
     g.localConstantDeclaration.is(CONST, g.type, g.constantDeclarator, o2n(COMMA, g.constantDeclarator));
     g.constantDeclarator.is(IDENTIFIER, EQUAL, g.constantExpression);
-    /* NOTE This rule is relaxed to accept any expression */
+    // NOTE Rule expressionStatement is relaxed to accept any expression
     g.expressionStatement.is(g.expression, SEMICOLON);
     g.selectionStatement.isOr(g.ifStatement, g.switchStatement);
     g.ifStatement.is(IF, LPARENTHESIS, g.booleanExpression, RPARENTHESIS, g.embeddedStatement, opt(ELSE, g.embeddedStatement));

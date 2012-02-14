@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,16 +22,13 @@ public class MemberDeclaratorTest {
   @Before
   public void init() {
     p.setRootRule(g.memberDeclarator);
-    g.simpleName.mock();
-    g.memberAccess.mock();
     g.expression.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("simpleName"));
-    assertThat(p, parse("memberAccess"));
     assertThat(p, parse("id = expression"));
+    assertThat(p, parse("expression"));
   }
 
   @Test

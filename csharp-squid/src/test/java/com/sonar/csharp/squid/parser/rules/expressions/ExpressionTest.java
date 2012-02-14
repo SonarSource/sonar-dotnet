@@ -46,6 +46,11 @@ public class ExpressionTest {
     assertThat(p, parse("new []{12, 13}.ToString()"));
     assertThat(p, parse("new[] { 12, 13 }.Length"));
     assertThat(p, parse("new[] { 12, 13 }[0]"));
+    assertThat(p, parse("db.Users"));
+    assertThat(p, parse("new { name }"));
+    assertThat(p, parse("new { name, foo }"));
+    assertThat(p, parse("new { user.Name, user.Role.Name }"));
+    assertThat(p, parse("from user in db.Users select new { user.Name, RoleName = user.Role.Name }"));
   }
 
 }

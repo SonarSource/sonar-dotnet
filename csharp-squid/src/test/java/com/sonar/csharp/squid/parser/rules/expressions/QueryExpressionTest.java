@@ -5,9 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +45,7 @@ public class QueryExpressionTest {
         + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
         + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
         + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }"));
+    assertThat(p, parse("from user in db.Users select new { user.Name, RoleName = user.Role.Name }"));
   }
 
 }

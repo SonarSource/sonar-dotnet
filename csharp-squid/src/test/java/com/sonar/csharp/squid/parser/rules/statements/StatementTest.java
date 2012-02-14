@@ -5,8 +5,8 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +42,6 @@ public class StatementTest {
     assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty);"));
     assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message);"));
     assertThat(p, parse("m_headFilter = m_tailFilter = filter;"));
+    assertThat(p, parse("var query = from user in db.Users select new { user.Name, RoleName = user.Role.Name };"));
   }
-
 }
