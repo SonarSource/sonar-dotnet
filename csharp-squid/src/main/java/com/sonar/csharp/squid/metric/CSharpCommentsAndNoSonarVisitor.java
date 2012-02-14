@@ -6,25 +6,19 @@
 package com.sonar.csharp.squid.metric;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.recognizer.CodeRecognizer;
-import org.sonar.squid.recognizer.ContainsDetector;
-import org.sonar.squid.recognizer.Detector;
-import org.sonar.squid.recognizer.EndWithDetector;
-import org.sonar.squid.recognizer.KeywordsDetector;
-import org.sonar.squid.recognizer.LanguageFootprint;
+import org.sonar.squid.recognizer.*;
 
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
 
 public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements AstAndTokenVisitor {
 
@@ -35,35 +29,33 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
    * {@inheritDoc}
    */
   public void visitToken(Token token) {
-    if (firstLineOfCodeIndex == -1 && !token.getType().equals(GenericTokenType.UNKNOWN_CHAR)) {
-      firstLineOfCodeIndex = token.getLine();
-    }
-  }
-
-  @Override
-  public void leaveFile(AstNode astNode) {
-    SourceFile sourceFile = (SourceFile) peekSourceCode();
+    SourceFile sourceFile = peekSourceCode() instanceof SourceFile ? (SourceFile) peekSourceCode() : peekSourceCode().getParent(
+        SourceFile.class);
     CodeRecognizer codeRecognizer = new CodeRecognizer(0.94, new CSharpFootprint());
 
-    for (Iterator<Token> iterator = getComments().iterator(); iterator.hasNext();) {
-      Token commentToken = (Token) iterator.next();
-      // if the comment is not located before the first code token, we consider this is a header of the file and ignore it
-      if (commentToken.getLine() >= firstLineOfCodeIndex) {
-        String comment = cleanComment(commentToken.getValue());
-        if (comment.length() == 0) {
-          sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
-        } else {
-          StringTokenizer tokenizer = new StringTokenizer(comment, "\n");
-          while (tokenizer.hasMoreElements()) {
-            String commentLine = tokenizer.nextToken().trim();
-            if (commentLine.length() == 0) {
-              sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
-            } else if (codeRecognizer.isLineOfCode(commentLine)) {
-              sourceFile.add(CSharpMetric.COMMENTED_OUT_CODE_LINES, 1);
-            } else if (commentLine.indexOf(NOSONAR_TAG) != -1) {
-              sourceFile.addNoSonarTagLine(commentToken.getLine());
-            } else {
-              sourceFile.add(CSharpMetric.COMMENT_LINES, 1);
+    if (firstLineOfCodeIndex == -1 && !token.getType().equals(GenericTokenType.UNKNOWN_CHAR)) {
+      firstLineOfCodeIndex = token.getLine();
+    } else {
+      for (Trivia trivia : token.getTrivia()) {
+        if (trivia.isComment()) {
+          Token commentToken = trivia.getToken();
+
+          String comment = cleanComment(commentToken.getValue());
+          if (comment.length() == 0) {
+            sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
+          } else {
+            StringTokenizer tokenizer = new StringTokenizer(comment, "\n");
+            while (tokenizer.hasMoreElements()) {
+              String commentLine = tokenizer.nextToken().trim();
+              if (commentLine.length() == 0) {
+                sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
+              } else if (codeRecognizer.isLineOfCode(commentLine)) {
+                sourceFile.add(CSharpMetric.COMMENTED_OUT_CODE_LINES, 1);
+              } else if (commentLine.indexOf(NOSONAR_TAG) != -1) {
+                sourceFile.addNoSonarTagLine(commentToken.getLine());
+              } else {
+                sourceFile.add(CSharpMetric.COMMENT_LINES, 1);
+              }
             }
           }
         }

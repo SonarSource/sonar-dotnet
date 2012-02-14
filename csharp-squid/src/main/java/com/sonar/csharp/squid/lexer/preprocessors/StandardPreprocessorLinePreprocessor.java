@@ -6,19 +6,27 @@
 
 package com.sonar.csharp.squid.lexer.preprocessors;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.api.CSharpTokenType;
-import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Preprocessor;
+import com.sonar.sslr.api.PreprocessorAction;
 import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
 
 public class StandardPreprocessorLinePreprocessor extends Preprocessor {
 
-  public boolean process(Token token, LexerOutput output) {
+  @Override
+  public PreprocessorAction process(List<Token> tokens) {
+    Token token = tokens.get(0);
+
     if (token.getType() == CSharpTokenType.PREPROCESSOR) {
-      output.addPreprocessingToken(token);
-      return true;
+      return new PreprocessorAction(1, Lists.newArrayList(Trivia.createSkippedText(token)), new ArrayList<Token>());
+    } else {
+      return PreprocessorAction.NO_OPERATION;
     }
-    return false;
   }
 
 }

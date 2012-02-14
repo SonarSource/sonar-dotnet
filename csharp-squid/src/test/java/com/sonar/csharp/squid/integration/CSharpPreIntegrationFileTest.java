@@ -13,16 +13,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.impl.Parser;
 
 /**
  * Class used to test only one file.
  */
 public class CSharpPreIntegrationFileTest {
 
-  private String filePath = "/parser/cSharpSyntaxAllInOneFile.cs";
+  private final String filePath = "/parser/cSharpSyntaxAllInOneFile.cs";
   private File cSharpFile;
-  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
 
   @Before
   public void init() throws Exception {

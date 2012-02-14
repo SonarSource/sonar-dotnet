@@ -23,7 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.impl.Parser;
 
 /**
  * Class used to test parsing Log4Net and NUnit C#-based libraries.
@@ -34,7 +36,7 @@ public class CSharpIntegrationMain {
   private static final Logger logger = LoggerFactory.getLogger(CSharpIntegrationMain.class);
 
   private File cSharpFile = null;
-  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
   private static List<Throwable> exceptions = new ArrayList<Throwable>();
 
   public CSharpIntegrationMain(File f) {

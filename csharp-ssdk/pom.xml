@@ -15,20 +15,25 @@
     </dependency>
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-api</artifactId>
+			<artifactId>sslr-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-impl</artifactId>
+			<artifactId>sslr-devkit</artifactId>
 		</dependency>
-    <dependency>
-      <groupId>com.sonarsource.ssdk</groupId>
-      <artifactId>ssdk-gui</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency> 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+      <scope>test</scope>
+		</dependency>
   </dependencies>
 
 </project>

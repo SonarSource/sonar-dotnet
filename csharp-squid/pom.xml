@@ -17,14 +17,10 @@
 
 	<dependencies>
 		<!-- sonarsource -->
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-impl</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>com.sonarsource.sslr</groupId>
+      <artifactId>sslr-core</artifactId>
+    </dependency>
 		<!-- sonar open-source -->
 		<dependency>
 			<groupId>org.codehaus.sonar</groupId>
@@ -51,15 +47,23 @@
 			<groupId>com.google.collections</groupId>
 			<artifactId>google-collections</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
 		<!-- Unit tests -->
 		<dependency>
-			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-lexer-testing-harness</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sonarsource.sslr</groupId>
-			<artifactId>sslr-parser-testing-harness</artifactId>
+			<artifactId>sslr-testing-harness</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

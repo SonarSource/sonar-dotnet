@@ -15,7 +15,7 @@ public final class CSharpSsdkGui {
 
   public static void main(String[] args) {
     System.setProperty("com.apple.mrj.application.apple.menu.about.name", "SSDK");
-    SsdkGui ssdkGui = new SsdkGui(new CSharpParser(), CSharpSourceCodeColorizer.getTokenizers());
+    SsdkGui ssdkGui = new SsdkGui(CSharpParser.create(), CSharpSourceCodeColorizer.getTokenizers());
     ssdkGui.setVisible(true);
     ssdkGui.setSize(1000, 800);
     ssdkGui.setTitle("C# : SonarSource Development Kit");

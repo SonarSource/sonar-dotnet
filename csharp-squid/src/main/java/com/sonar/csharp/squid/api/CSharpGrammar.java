@@ -11,7 +11,7 @@ import com.sonar.sslr.api.Rule;
 /**
  * Listing of the syntactic elements of the C# grammar
  */
-public class CSharpGrammar implements Grammar {
+public abstract class CSharpGrammar extends Grammar {
 
   public Rule literal;
   public Rule rightShift;
@@ -338,6 +338,7 @@ public class CSharpGrammar implements Grammar {
   /**
    * ${@inheritDoc}
    */
+  @Override
   public Rule getRootRule() {
     return compilationUnit;
   }

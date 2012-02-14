@@ -15,14 +15,14 @@ import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
-import com.sonar.sslr.api.Comments;
+import com.sonar.sslr.api.Trivia;
 
 /**
  * Visitor that computes the number of statements.
  */
 public class CSharpPublicApiVisitor extends CSharpAstVisitor {
 
-  private Map<AstNodeType, AstNodeType> modifiersMap = Maps.newHashMap();
+  private final Map<AstNodeType, AstNodeType> modifiersMap = Maps.newHashMap();
 
   /**
    * {@inheritDoc}
@@ -82,11 +82,8 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
   }
 
   private void checkNodeForPreviousComments(AstNode node) {
-    int currentTokenLine = node.getToken().getLine();
-    int previousTokenLine = node.getToken().getPreviousToken() == null ? 0 : node.getToken().getPreviousToken().getLine();
-    Comments comments = getComments();
-    for (int lineIndex = currentTokenLine - 1; lineIndex > previousTokenLine; lineIndex--) {
-      if (comments.getCommentAtLine(lineIndex) != null) {
+    for (Trivia trivia : node.getToken().getTrivia()) {
+      if (trivia.isComment()) {
         peekSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
         break;
       }

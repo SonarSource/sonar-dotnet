@@ -85,7 +85,7 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
   }
 
   private String extractPropertySignature(AstNode astNode) {
-    StringBuilder signature = new StringBuilder(astNode.getToken().getPreviousToken().getValue());
+    StringBuilder signature = new StringBuilder(astNode.previousSibling().getLastToken().getValue());
     signature.append("_");
     AstNode delcarationNode = astNode.getParent().getParent().getParent();
     if (delcarationNode.is(g.indexerDeclaration)) {

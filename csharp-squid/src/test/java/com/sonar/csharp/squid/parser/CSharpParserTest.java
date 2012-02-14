@@ -11,13 +11,15 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.sslr.impl.Parser;
 
 /**
  * Test class for the C# parser
  */
 public class CSharpParserTest {
 
-  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
 
   @Test
   public void testParsingSimpleSourceFile() {

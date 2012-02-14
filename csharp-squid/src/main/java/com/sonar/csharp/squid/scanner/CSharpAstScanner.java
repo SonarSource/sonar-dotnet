@@ -25,14 +25,7 @@ import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
-import com.sonar.csharp.squid.metric.CSharpAccessorVisitor;
-import com.sonar.csharp.squid.metric.CSharpCommentsAndNoSonarVisitor;
-import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
-import com.sonar.csharp.squid.metric.CSharpLineVisitor;
-import com.sonar.csharp.squid.metric.CSharpLocVisitor;
-import com.sonar.csharp.squid.metric.CSharpNamespaceVisitor;
-import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
-import com.sonar.csharp.squid.metric.CSharpStatementVisitor;
+import com.sonar.csharp.squid.metric.*;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.csharp.squid.tree.CSharpFileVisitor;
 import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
@@ -40,19 +33,20 @@ import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.ast.AstWalker;
 
 public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpAstScanner.class);
-  private SourceCode project;
-  private final CSharpParser parser;
+  private final SourceCode project;
+  private final Parser<CSharpGrammar> parser;
   private final CSharpConfiguration conf;
 
   public CSharpAstScanner(SourceCode project, CSharpConfiguration conf) {
     super();
     this.project = project;
-    this.parser = new CSharpParser(conf);
+    this.parser = CSharpParser.create(conf);
     this.conf = conf;
   }
 
@@ -72,7 +66,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     for (CSharpAstVisitor visitor : getVisitors()) {
       visitor.setProject(project);
       visitor.setSourceCodeStack(resourcesStack);
-      visitor.setGrammar((CSharpGrammar) parser.getGrammar());
+      visitor.setGrammar(parser.getGrammar());
       visitor.init();
     }
     for (File file : files) {
@@ -102,9 +96,9 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
     for (CSharpAstVisitor visitor : getVisitors()) {
       if (visitor instanceof AuditListener) {
         if (e instanceof RecognitionException) {
-          ((AuditListener) visitor).addRecognitionException((RecognitionException) e);
+          ((AuditListener) visitor).processRecognitionException((RecognitionException) e);
         } else {
-          ((AuditListener) visitor).addException(e);
+          ((AuditListener) visitor).processException(e);
         }
       }
     }
@@ -114,7 +108,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   private void parseAndVisitFile(File file) {
     AstNode ast = parser.parse(file);
     for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setComments(parser.getLexerOutput().getComments());
+      visitor.setComments(null); /* FIXME Trivias should be used! */
       visitor.setFile(file);
     }
     AstWalker astWalker = new AstWalker(getVisitors());

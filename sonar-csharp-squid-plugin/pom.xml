@@ -35,8 +35,9 @@
               <artifactSet>
                 <includes>
                   <include>${project.groupId}:csharp-squid</include>
-                  <include>com.sonarsource.sslr:sslr-impl</include>
-                  <include>com.sonarsource.sslr:sslr-api</include>
+                  <include>com.sonarsource.sslr:sslr-core</include>
+                  <include>com.sonarsource.sslr:sslr-squid-bridge</include>
+                  <include>com.sonarsource.license:license-api</include>
                 </includes>
               </artifactSet>
             </configuration>
@@ -68,11 +69,7 @@
     </dependency>
     <dependency>
       <groupId>com.sonarsource.sslr</groupId>
-      <artifactId>sslr-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sonarsource.sslr</groupId>
-      <artifactId>sslr-impl</artifactId>
+      <artifactId>sslr-core</artifactId>
     </dependency>
 
     <!-- sonar open-source -->

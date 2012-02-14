@@ -5,14 +5,13 @@
  */
 package com.sonar.csharp.squid.lexer;
 
-import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
-import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertThat;
+import static com.sonar.sslr.test.lexer.LexerMatchers.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -24,15 +23,16 @@ import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.LexerOutput;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 
 public class CSharpLexerTest {
 
-  private CSharpLexer lexer;
+  private Lexer lexer;
 
   @Before
   public void init() {
-    lexer = new CSharpLexer(new CSharpConfiguration(Charset.forName("UTF-8")));
+    lexer = CSharpLexer.create(new CSharpConfiguration(Charset.forName("UTF-8")));
   }
 
   @Test
@@ -84,9 +84,9 @@ public class CSharpLexerTest {
 
   @Test
   public void lexOperatorsAndPonctuators() {
-    LexerOutput output = lexer.lex("int a = 2;");
-    assertThat(output, hasToken("=", CSharpPunctuator.EQUAL));
-    assertThat(output, hasToken(";", CSharpPunctuator.SEMICOLON));
+    List<Token> tokens = lexer.lex("int a = 2;");
+    assertThat(tokens, hasToken("=", CSharpPunctuator.EQUAL));
+    assertThat(tokens, hasToken(";", CSharpPunctuator.SEMICOLON));
   }
 
   @Test
@@ -168,16 +168,16 @@ public class CSharpLexerTest {
   }
 
   @Test
-  public void lexPreprocessingDirective() {
-    assertThat(lexer.lex("#region Constants").getPreprocessingTokens().get(0).getValue(), is("#region Constants"));
-    assertThat(lexer.lex(" #  region Constants\nint a = '1';").getPreprocessingTokens().get(0).getValue(), is("#  region Constants"));
+  public void lexPreprocessingDirectiveWithTrivia() {
+    assertThat(lexer.lex("#region Constants").get(0).getTrivia().get(0).getToken().getValue(), is("#region Constants"));
+    assertThat(lexer.lex(" #  region Constants\nint a = '1';").get(0).getTrivia().get(0).getToken().getValue(), is("#  region Constants"));
   }
 
   @Test
   public void testLexCSharpSourceCode() throws FileNotFoundException {
-    LexerOutput output = lexer.lex(FileUtils.toFile(getClass().getResource("/lexer/NUnitFramework.cs")));
-    assertThat(output, hasToken("System", GenericTokenType.IDENTIFIER));
-    assertThat(output, hasComment("// Copyright 2007, Charlie Poole"));
+    List<Token> tokens = lexer.lex(FileUtils.toFile(getClass().getResource("/lexer/NUnitFramework.cs")));
+    assertThat(tokens, hasToken("System", GenericTokenType.IDENTIFIER));
+    assertThat(tokens, hasComment("// Copyright 2007, Charlie Poole"));
   }
 
 }

@@ -17,9 +17,9 @@ import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.csharp.squid.lexer.CSharpLexer;
 import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.LexerOutput;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.TokenType;
+import com.sonar.sslr.impl.Lexer;
 
 public class CSharpCPDTokenizer implements Tokenizer {
 
@@ -32,10 +32,9 @@ public class CSharpCPDTokenizer implements Tokenizer {
   }
 
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
-    CSharpLexer lexer = new CSharpLexer(new CSharpConfiguration(charset));
+    Lexer lexer = CSharpLexer.create(new CSharpConfiguration(charset));
     String fileName = source.getFileName();
-    LexerOutput tokens = lexer.lex(new File(fileName));
-    for (Token token : tokens.getTokens()) {
+    for (Token token : lexer.lex(new File(fileName))) {
       if (isElligibleForDuplicationDetection(token)) {
         TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
         cpdTokens.add(cpdToken);

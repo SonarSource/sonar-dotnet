@@ -20,7 +20,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.impl.Parser;
 
 /**
  * Class used to test parsing Log4Net and NUnit C#-based libraries.
@@ -29,8 +31,8 @@ import com.sonar.csharp.squid.parser.CSharpParser;
 public class CSharpPreIntegrationTest {
 
   private File cSharpFile = null;
-  private CSharpParser parser = new CSharpParser(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private Set<String> filesToIgnore = new HashSet<String>();
+  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Set<String> filesToIgnore = new HashSet<String>();
 
   public CSharpPreIntegrationTest(File f) {
     this.cSharpFile = f;
@@ -80,7 +82,7 @@ public class CSharpPreIntegrationTest {
 
   @SuppressWarnings("unchecked")
   private static Collection<File> listFiles(String path, boolean recursive) throws URISyntaxException {
-    return FileUtils.listFiles(new File((new Object()).getClass().getResource(path).toURI()), new String[] { "cs" }, recursive);
+    return FileUtils.listFiles(new File(new Object().getClass().getResource(path).toURI()), new String[] { "cs" }, recursive);
   }
 
 }
