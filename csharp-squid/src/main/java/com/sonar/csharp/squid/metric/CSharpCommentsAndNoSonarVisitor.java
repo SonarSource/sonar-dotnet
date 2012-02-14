@@ -5,6 +5,8 @@
  */
 package com.sonar.csharp.squid.metric;
 
+import static com.sonar.sslr.api.GenericTokenType.*;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -16,14 +18,19 @@ import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 
 public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements AstAndTokenVisitor {
 
   private static final String NOSONAR_TAG = "NOSONAR";
-  private int firstLineOfCodeIndex = -1;
+  private boolean seenFirstToken;
+
+  @Override
+  public void visitFile(AstNode astNode) {
+    seenFirstToken = false;
+  }
 
   /**
    * {@inheritDoc}
@@ -33,32 +40,34 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
         SourceFile.class);
     CodeRecognizer codeRecognizer = new CodeRecognizer(0.94, new CSharpFootprint());
 
-    if (firstLineOfCodeIndex == -1 && !token.getType().equals(GenericTokenType.UNKNOWN_CHAR)) {
-      firstLineOfCodeIndex = token.getLine();
-    } else {
-      for (Trivia trivia : token.getTrivia()) {
-        if (trivia.isComment()) {
-          Token commentToken = trivia.getToken();
+    if ( !seenFirstToken && !UNKNOWN_CHAR.equals(token.getType())) {
+      seenFirstToken = true;
+      return;
+    }
 
-          String comment = cleanComment(commentToken.getValue());
-          if (comment.length() == 0) {
-            sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
-          } else {
-            StringTokenizer tokenizer = new StringTokenizer(comment, "\n");
-            while (tokenizer.hasMoreElements()) {
-              String commentLine = tokenizer.nextToken().trim();
-              if (commentLine.length() == 0) {
-                sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
-              } else if (codeRecognizer.isLineOfCode(commentLine)) {
-                sourceFile.add(CSharpMetric.COMMENTED_OUT_CODE_LINES, 1);
-              } else if (commentLine.indexOf(NOSONAR_TAG) != -1) {
-                sourceFile.addNoSonarTagLine(commentToken.getLine());
-              } else {
-                sourceFile.add(CSharpMetric.COMMENT_LINES, 1);
-              }
+    for (Trivia trivia : token.getTrivia()) {
+      if (trivia.isComment()) {
+        Token commentToken = trivia.getToken();
+        String comment = cleanComment(commentToken.getValue());
+
+        if (comment.length() == 0) {
+          sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
+        } else {
+          StringTokenizer tokenizer = new StringTokenizer(comment, "\n");
+          while (tokenizer.hasMoreElements()) {
+            String commentLine = tokenizer.nextToken().trim();
+            if (commentLine.length() == 0) {
+              sourceFile.add(CSharpMetric.COMMENT_BLANK_LINES, 1);
+            } else if (codeRecognizer.isLineOfCode(commentLine)) {
+              sourceFile.add(CSharpMetric.COMMENTED_OUT_CODE_LINES, 1);
+            } else if (commentLine.indexOf(NOSONAR_TAG) != -1) {
+              sourceFile.addNoSonarTagLine(commentToken.getLine());
+            } else {
+              sourceFile.add(CSharpMetric.COMMENT_LINES, 1);
             }
           }
         }
+
       }
     }
   }
