@@ -178,7 +178,7 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
 
     g.postfixExpression.is(
         g.primaryExpressionPrimary,
-        one2n(
+        o2n(
         or(
             g.postMemberAccess,
             g.postElementAccess,
@@ -187,12 +187,8 @@ public class CSharpGrammarDecorator implements GrammarDecorator<CSharpGrammar> {
             g.postDecrement,
             g.postInvocation
         )
-        ));
-    g.primaryExpression.is(
-        or(
-            g.postfixExpression,
-            g.primaryExpressionPrimary
-        ));
+        )).skipIfOneChild();
+    g.primaryExpression.is(g.postfixExpression);
 
     g.argumentList.is(g.argument, o2n(COMMA, g.argument));
     g.argument.is(opt(g.argumentName), g.argumentValue);
