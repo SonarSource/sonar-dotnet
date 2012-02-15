@@ -6,21 +6,6 @@ package com.sonar.csharp.squid.scanner;
  * mailto:contact AT sonarsource DOT com
  */
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.squid.api.AnalysisException;
-import org.sonar.squid.api.CodeScanner;
-import org.sonar.squid.api.SourceCode;
-
 import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
@@ -35,6 +20,20 @@ import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.RecognitionException;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.ast.AstWalker;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.squid.api.AnalysisException;
+import org.sonar.squid.api.CodeScanner;
+import org.sonar.squid.api.SourceCode;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Stack;
 
 public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
 
@@ -74,7 +73,7 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
         parseAndVisitFile(file);
       } catch (Exception e) {
         String errorMessage = "Sonar is unable to analyze file : '" + file.getAbsolutePath() + "'";
-        if ( !conf.stopSquidOnException()) {
+        if (!conf.stopSquidOnException()) {
           LOG.error(errorMessage, e);
           notifyVisitorsOfException(resourcesStack, file, e);
         } else {
@@ -108,7 +107,6 @@ public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
   private void parseAndVisitFile(File file) {
     AstNode ast = parser.parse(file);
     for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setComments(null); /* FIXME Trivias should be used! */
       visitor.setFile(file);
     }
     AstWalker astWalker = new AstWalker(getVisitors());
