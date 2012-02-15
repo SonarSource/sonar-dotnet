@@ -5,6 +5,8 @@
  */
 package com.sonar.csharp.squid.parser;
 
+import com.sonar.csharp.squid.api.CSharpGrammar;
+
 import static com.sonar.csharp.squid.api.CSharpKeyword.*;
 import static com.sonar.csharp.squid.api.CSharpPunctuator.*;
 import static com.sonar.csharp.squid.api.CSharpTokenType.*;
@@ -12,8 +14,6 @@ import static com.sonar.sslr.api.GenericTokenType.*;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.*;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.*;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.*;
-
-import com.sonar.csharp.squid.api.CSharpGrammar;
 
 /**
  * Definition of each element of the C# grammar.
