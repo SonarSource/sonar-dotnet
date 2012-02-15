@@ -6,11 +6,7 @@
 
 package com.sonar.csharp.squid.api;
 
-import org.sonar.squid.measures.AggregationFormula;
-import org.sonar.squid.measures.CalculatedMetricFormula;
-import org.sonar.squid.measures.MetricDef;
-import org.sonar.squid.measures.NoAggregationFormula;
-import org.sonar.squid.measures.SumAggregationFormula;
+import org.sonar.squid.measures.*;
 
 /**
  * Metrics computed for the C# language.
@@ -18,28 +14,13 @@ import org.sonar.squid.measures.SumAggregationFormula;
 public enum CSharpMetric implements MetricDef {
   FILES, NAMESPACES, CLASSES, INTERFACES, DELEGATES, STRUCTS, ENUMS, METHODS, LINES, LINES_OF_CODE, STATEMENTS, ACCESSORS, COMPLEXITY, COMMENT_BLANK_LINES, COMMENTED_OUT_CODE_LINES, COMMENT_LINES, PUBLIC_API, PUBLIC_DOC_API;
 
-  private double initValue = 0;
+  private final double initValue = 0;
 
-  private CalculatedMetricFormula formula = null;
+  private final CalculatedMetricFormula formula = null;
 
-  private AggregationFormula aggregationFormula = new SumAggregationFormula();
+  private final AggregationFormula aggregationFormula = new SumAggregationFormula();
 
-  private boolean aggregateIfThereIsAlreadyAValue = true;
-
-  CSharpMetric() {
-  }
-
-  CSharpMetric(boolean aggregateIfThereIsAlreadyAValue) {
-    this.aggregateIfThereIsAlreadyAValue = aggregateIfThereIsAlreadyAValue;
-  }
-
-  CSharpMetric(AggregationFormula aggregationFormula) {
-    this.aggregationFormula = aggregationFormula;
-  }
-
-  CSharpMetric(CalculatedMetricFormula formula) {
-    this.formula = formula;
-  }
+  private final boolean aggregateIfThereIsAlreadyAValue = true;
 
   public double getInitValue() {
     return initValue;

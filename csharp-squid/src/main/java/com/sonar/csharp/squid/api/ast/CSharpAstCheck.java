@@ -5,14 +5,13 @@
  */
 package com.sonar.csharp.squid.api.ast;
 
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.CodeCheck;
 import org.sonar.squid.api.SourceFile;
-
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
 
 /**
  * Base class to implement a C# check. A check is simply a CSharpAstVisitor with some additional methods to log messages.
@@ -43,7 +42,6 @@ public abstract class CSharpAstCheck extends CSharpAstVisitor implements CodeChe
    */
   protected final void log(String messageText, Token token, Object... messageParameters) {
     CheckMessage message = new CheckMessage(this, messageText, messageParameters);
-    message = new CheckMessage(this, messageText, messageParameters);
     message.setLine(token.getLine());
     log(message);
   }
@@ -77,4 +75,5 @@ public abstract class CSharpAstCheck extends CSharpAstVisitor implements CodeChe
   public final String getKey() {
     return getClass().getSimpleName();
   }
+
 }
