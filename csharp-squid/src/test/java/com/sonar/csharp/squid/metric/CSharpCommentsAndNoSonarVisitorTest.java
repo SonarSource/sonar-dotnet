@@ -25,31 +25,17 @@ import static org.junit.Assert.*;
 public class CSharpCommentsAndNoSonarVisitorTest {
 
   @Test
-  public void testCleanComment() throws Exception {
-    CSharpCommentsAndNoSonarVisitor commentsAndNoSonarVisitor = new CSharpCommentsAndNoSonarVisitor();
-    assertThat(commentsAndNoSonarVisitor.cleanComment("/*"), is(""));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("//"), is(""));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("/////   "), is(""));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("/* foo"), is("foo"));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("// foo"), is("foo"));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("///// foo"), is("foo"));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("foo */"), is("foo"));
-    assertThat(commentsAndNoSonarVisitor.cleanComment("*/"), is(""));
-  }
-
-  @Test
   public void testScanSimpleFile() {
     AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(2));
-    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(10));
-    assertThat(project.getInt(CSharpMetric.COMMENTED_OUT_CODE_LINES), is(5));
+    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(12));
+    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(14));
 
     SourceFile file = (SourceFile) project.getFirstChild();
-    assertThat(file.getNoSonarTagLines(), hasItem(17));
-    assertThat(file.getNoSonarTagLines(), hasItem(48));
+    assertThat(file.getNoSonarTagLines(), hasItem(24));
+    assertThat(file.getNoSonarTagLines(), hasItem(55));
     assertThat(file.getNoSonarTagLines().size(), is(2));
   }
 

@@ -8,6 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/*
+
+
+*/
+
+/* a */ /* b */ /* c */ /* d */
+
 namespace Example.Core
 {
   /// <summary>A simple Money.</summary>
@@ -34,7 +41,7 @@ namespace Example.Core
       return m.AddMoney(this);
     }
 
-	/*
+  /*
     public IMoney AddMoney(Money m)
     {
       if (m.Currency.Equals(Currency))
@@ -72,9 +79,9 @@ namespace Example.Core
           && Amount == aMoney.Amount;
       }
       /*
-      	And this is the end.
-      	
-      	Full stop.
+        And this is the end.
+
+        Full stop.
       */
       return false;
     }

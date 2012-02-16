@@ -17,6 +17,7 @@ import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import com.sonar.sslr.squid.SquidAstVisitorContextImpl;
+import com.sonar.sslr.squid.metrics.CommentsVisitor;
 import org.sonar.squid.api.SourceProject;
 
 public final class CSharpAstScanner {
@@ -61,13 +62,12 @@ public final class CSharpAstScanner {
     builder.setFilesMetric(CSharpMetric.FILES);
 
     /* Metrics */
-    /*
-     * builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder().withCommentMetric(CSharpMetric.COMMENT_LINES)
-     * .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
-     * .withNoSonar(true)
-     * .withIgnoreHeaderComment(true)
-     * .build());
-     */
+    builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder().withCommentMetric(CSharpMetric.COMMENT_LINES)
+        .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
+        .withNoSonar(true)
+        .withIgnoreHeaderComment(true)
+        .build());
+
     /* Visitors */
     builder.withSquidAstVisitor(new CSharpTypeVisitor());
     builder.withSquidAstVisitor(new CSharpMemberVisitor());
@@ -77,7 +77,7 @@ public final class CSharpAstScanner {
     builder.withSquidAstVisitor(new CSharpStatementVisitor());
     builder.withSquidAstVisitor(new CSharpComplexityVisitor());
     builder.withSquidAstVisitor(new CSharpPublicApiVisitor());
-    builder.withSquidAstVisitor(new CSharpCommentsAndNoSonarVisitor());
+    // builder.withSquidAstVisitor(new CSharpCommentsAndNoSonarVisitor());
 
     /* External visitors (typically Check ones) */
     for (SquidAstVisitor<CSharpGrammar> visitor : visitors) {
