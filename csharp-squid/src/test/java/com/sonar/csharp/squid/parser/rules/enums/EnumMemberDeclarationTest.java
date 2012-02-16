@@ -5,18 +5,17 @@
  */
 package com.sonar.csharp.squid.parser.rules.enums;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 public class EnumMemberDeclarationTest {
 
@@ -27,14 +26,14 @@ public class EnumMemberDeclarationTest {
   public void init() {
     p.setRootRule(g.enumMemberDeclaration);
     g.attributes.mock();
-    g.constantExpression.mock();
+    g.expression.mock();
   }
 
   @Test
   public void testOk() {
     assertThat(p, parse("id"));
-    assertThat(p, parse("id = constantExpression"));
-    assertThat(p, parse("attributes id = constantExpression"));
+    assertThat(p, parse("id = expression"));
+    assertThat(p, parse("attributes id = expression"));
   }
 
 }

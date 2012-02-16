@@ -161,7 +161,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             anonymousMethodExpression,
             literal,
             simpleName
-        ));
+        )).skip();
 
     postMemberAccess.is(DOT, IDENTIFIER, opt(typeArgumentList));
     postElementAccess.is(LBRACKET, argumentList, RBRACKET);
@@ -224,24 +224,32 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     checkedExpression.is(CHECKED, LPARENTHESIS, expression, RPARENTHESIS);
     uncheckedExpression.is(UNCHECKED, LPARENTHESIS, expression, RPARENTHESIS);
     defaultValueExpression.is(DEFAULT, LPARENTHESIS, type, RPARENTHESIS);
-    unaryExpression.isOr(castExpression, primaryExpression, and(or(PLUS, MINUS, EXCLAMATION, TILDE), unaryExpression),
-        preIncrementExpression, preDecrementExpression);
-    preIncrementExpression.is(INC_OP, unaryExpression);
-    preDecrementExpression.is(DEC_OP, unaryExpression);
-    castExpression.is(LPARENTHESIS, type, RPARENTHESIS, unaryExpression);
-    multiplicativeExpression.is(unaryExpression, o2n(or(STAR, SLASH, MODULO), unaryExpression));
-    additiveExpression.is(multiplicativeExpression, o2n(or(PLUS, MINUS), multiplicativeExpression));
-    shiftExpression.is(additiveExpression, o2n(or(LEFT_OP, rightShift), additiveExpression));
-    relationalExpression.is(shiftExpression,
-        o2n(or(and(or(INFERIOR, SUPERIOR, LE_OP, GE_OP), shiftExpression), and(or(IS, AS), type))));
-    equalityExpression.is(relationalExpression, o2n(or(EQ_OP, NE_OP), relationalExpression));
-    andExpression.is(equalityExpression, o2n(AND, equalityExpression));
-    exclusiveOrExpression.is(andExpression, o2n(XOR, andExpression));
-    inclusiveOrExpression.is(exclusiveOrExpression, o2n(OR, exclusiveOrExpression));
-    conditionalAndExpression.is(inclusiveOrExpression, o2n(AND_OP, inclusiveOrExpression));
-    conditionalOrExpression.is(conditionalAndExpression, o2n(OR_OP, conditionalAndExpression));
-    nullCoalescingExpression.is(conditionalOrExpression, opt(DOUBLE_QUESTION, nullCoalescingExpression));
-    conditionalExpression.is(nullCoalescingExpression, opt(QUESTION, expression, COLON, expression));
+
+    unaryExpression.is(
+        or(
+            and(LPARENTHESIS, type, RPARENTHESIS, unaryExpression),
+            primaryExpression,
+            and(or(MINUS, EXCLAMATION, INC_OP, DEC_OP, TILDE, PLUS), unaryExpression)
+        )).skipIfOneChild();
+
+    multiplicativeExpression.is(unaryExpression, o2n(or(STAR, SLASH, MODULO), unaryExpression)).skipIfOneChild();
+    additiveExpression.is(multiplicativeExpression, o2n(or(PLUS, MINUS), multiplicativeExpression)).skipIfOneChild();
+    shiftExpression.is(additiveExpression, o2n(or(LEFT_OP, rightShift), additiveExpression)).skipIfOneChild();
+    relationalExpression.is(
+        shiftExpression,
+        o2n(
+        or(
+            and(or(INFERIOR, SUPERIOR, LE_OP, GE_OP), shiftExpression),
+            and(or(IS, AS), type))
+        )).skipIfOneChild();
+    equalityExpression.is(relationalExpression, o2n(or(EQ_OP, NE_OP), relationalExpression)).skipIfOneChild();
+    andExpression.is(equalityExpression, o2n(AND, equalityExpression)).skipIfOneChild();
+    exclusiveOrExpression.is(andExpression, o2n(XOR, andExpression)).skipIfOneChild();
+    inclusiveOrExpression.is(exclusiveOrExpression, o2n(OR, exclusiveOrExpression)).skipIfOneChild();
+    conditionalAndExpression.is(inclusiveOrExpression, o2n(AND_OP, inclusiveOrExpression)).skipIfOneChild();
+    conditionalOrExpression.is(conditionalAndExpression, o2n(OR_OP, conditionalAndExpression)).skipIfOneChild();
+    nullCoalescingExpression.is(conditionalOrExpression, opt(DOUBLE_QUESTION, nullCoalescingExpression)).skipIfOneChild();
+    conditionalExpression.is(nullCoalescingExpression, opt(QUESTION, expression, COLON, expression)).skipIfOneChild();
     lambdaExpression.is(anonymousFunctionSignature, LAMBDA, anonymousFunctionBody);
     anonymousMethodExpression.is(DELEGATE, opt(explicitAnonymousFunctionSignature), block);
     anonymousFunctionSignature.isOr(explicitAnonymousFunctionSignature, implicitAnonymousFunctionSignature);
@@ -258,7 +266,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     queryBody.is(o2n(queryBodyClause), selectOrGroupClause, opt(queryContinuation));
     queryBodyClause.isOr(fromClause, letClause, whereClause, joinIntoClause, joinClause, orderByClause);
     letClause.is("let", IDENTIFIER, EQUAL, expression);
-    whereClause.is("where", booleanExpression);
+    whereClause.is("where", expression);
     joinClause.is("join", or(and(type, IDENTIFIER), IDENTIFIER), IN, expression, "on", expression, "equals", expression);
     joinIntoClause.is("join", or(and(type, IDENTIFIER), IDENTIFIER), IN, expression, "on", expression, "equals", expression,
         "into", IDENTIFIER);
@@ -273,10 +281,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         unaryExpression,
         or(EQUAL, ADD_ASSIGN, SUB_ASSIGN, MUL_ASSIGN, DIV_ASSIGN, MOD_ASSIGN, AND_ASSIGN, OR_ASSIGN, XOR_ASSIGN, LEFT_ASSIGN,
             rightShiftAssignment), expression);
+    nonAssignmentExpression.isOr(lambdaExpression, queryExpression, conditionalExpression).skip();
     expression.isOr(assignment, nonAssignmentExpression);
-    nonAssignmentExpression.isOr(lambdaExpression, queryExpression, conditionalExpression);
-    constantExpression.is(expression);
-    booleanExpression.is(expression);
   }
 
   private void statements() {
@@ -290,28 +296,28 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, localVariableInitializer));
     localVariableInitializer.isOr(expression, arrayInitializer);
     localConstantDeclaration.is(CONST, type, constantDeclarator, o2n(COMMA, constantDeclarator));
-    constantDeclarator.is(IDENTIFIER, EQUAL, constantExpression);
+    constantDeclarator.is(IDENTIFIER, EQUAL, expression);
     // NOTE Rule expressionStatement is relaxed to accept any expression
     expressionStatement.is(expression, SEMICOLON);
     selectionStatement.isOr(ifStatement, switchStatement);
-    ifStatement.is(IF, LPARENTHESIS, booleanExpression, RPARENTHESIS, embeddedStatement, opt(ELSE, embeddedStatement));
+    ifStatement.is(IF, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement, opt(ELSE, embeddedStatement));
     switchStatement.is(SWITCH, LPARENTHESIS, expression, RPARENTHESIS, LCURLYBRACE, o2n(switchSection), RCURLYBRACE);
     switchSection.is(one2n(switchLabel), one2n(statement));
-    switchLabel.isOr(and(CASE, constantExpression, COLON), and(DEFAULT, COLON));
+    switchLabel.isOr(and(CASE, expression, COLON), and(DEFAULT, COLON));
     iterationStatement.isOr(whileStatement, doStatement, forStatement, foreachStatement);
-    whileStatement.is(WHILE, LPARENTHESIS, booleanExpression, RPARENTHESIS, embeddedStatement);
-    doStatement.is(DO, embeddedStatement, WHILE, LPARENTHESIS, booleanExpression, RPARENTHESIS, SEMICOLON);
+    whileStatement.is(WHILE, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
+    doStatement.is(DO, embeddedStatement, WHILE, LPARENTHESIS, expression, RPARENTHESIS, SEMICOLON);
     forStatement.is(FOR, LPARENTHESIS, opt(forInitializer), SEMICOLON, opt(forCondition), SEMICOLON, opt(forIterator),
         RPARENTHESIS, embeddedStatement);
     forInitializer.isOr(localVariableDeclaration, statementExpressionList);
-    forCondition.is(booleanExpression);
+    forCondition.is(expression);
     forIterator.is(statementExpressionList);
     statementExpressionList.is(expression, o2n(COMMA, expression));
     foreachStatement.is(FOREACH, LPARENTHESIS, type, IDENTIFIER, IN, expression, RPARENTHESIS, embeddedStatement);
     jumpStatement.isOr(breakStatement, continueStatement, gotoStatement, returnStatement, throwStatement);
     breakStatement.is(BREAK, SEMICOLON);
     continueStatement.is(CONTINUE, SEMICOLON);
-    gotoStatement.is(GOTO, or(IDENTIFIER, and(CASE, constantExpression), DEFAULT), SEMICOLON);
+    gotoStatement.is(GOTO, or(IDENTIFIER, and(CASE, expression), DEFAULT), SEMICOLON);
     returnStatement.is(RETURN, opt(expression), SEMICOLON);
     throwStatement.is(THROW, opt(expression), SEMICOLON);
     tryStatement.is(TRY, block, or(and(opt(catchClauses), finallyClause), catchClauses));
@@ -465,7 +471,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     enumBody.is(LCURLYBRACE, or(and(enumMemberDeclarations, COMMA), opt(enumMemberDeclarations)), RCURLYBRACE);
     enumModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE);
     enumMemberDeclarations.is(enumMemberDeclaration, o2n(COMMA, enumMemberDeclaration));
-    enumMemberDeclaration.is(opt(attributes), IDENTIFIER, opt(EQUAL, constantExpression));
+    enumMemberDeclaration.is(opt(attributes), IDENTIFIER, opt(EQUAL, expression));
   }
 
   private void delegates() {
@@ -550,7 +556,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     fixedSizeBufferDeclaration.is(opt(attributes), o2n(fixedSizeBufferModifier), FIXED, type,
         one2n(fixedSizeBufferDeclarator), SEMICOLON);
     fixedSizeBufferModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE);
-    fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, constantExpression, RBRACKET);
+    fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, expression, RBRACKET);
     localVariableInitializer.or(stackallocInitializer);
     stackallocInitializer.is(STACKALLOC, type, LBRACKET, expression, RBRACKET);
   }

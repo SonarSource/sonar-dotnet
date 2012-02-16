@@ -5,18 +5,17 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 public class LocalConstantDeclarationTest {
 
@@ -27,19 +26,19 @@ public class LocalConstantDeclarationTest {
   public void init() {
     p.setRootRule(g.localConstantDeclaration);
     g.type.mock();
-    g.constantExpression.mock();
+    g.expression.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("const type id = constantExpression"));
-    assertThat(p, parse("const type id1 = constantExpression, id2 = constantExpression"));
+    assertThat(p, parse("const type id = expression"));
+    assertThat(p, parse("const type id1 = expression, id2 = expression"));
   }
 
   @Test
   public void testKo() {
     assertThat(p, notParse("const type id"));
-    assertThat(p, notParse("const type id1 = constantExpression, id2"));
+    assertThat(p, notParse("const type id1 = expression, id2"));
   }
 
 }

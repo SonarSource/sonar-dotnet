@@ -5,18 +5,17 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 public class WhereClauseTest {
 
@@ -26,12 +25,12 @@ public class WhereClauseTest {
   @Before
   public void init() {
     p.setRootRule(g.whereClause);
-    g.booleanExpression.mock();
+    g.expression.mock();
   }
 
   @Test
   public void testOk() {
-    assertThat(p, parse("where booleanExpression"));
+    assertThat(p, parse("where expression"));
   }
 
   @Test

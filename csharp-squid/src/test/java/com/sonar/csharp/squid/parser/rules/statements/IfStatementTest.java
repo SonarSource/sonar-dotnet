@@ -5,18 +5,17 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.*;
+import static org.junit.Assert.*;
 
 public class IfStatementTest {
 
@@ -30,10 +29,10 @@ public class IfStatementTest {
 
   @Test
   public void testOk() {
-    g.booleanExpression.mock();
+    g.expression.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("if ( booleanExpression ) embeddedStatement"));
-    assertThat(p, parse("if ( booleanExpression ) embeddedStatement else embeddedStatement"));
+    assertThat(p, parse("if ( expression ) embeddedStatement"));
+    assertThat(p, parse("if ( expression ) embeddedStatement else embeddedStatement"));
   }
 
   @Test
