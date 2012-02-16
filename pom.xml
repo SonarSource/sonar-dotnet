@@ -19,6 +19,7 @@
 	</properties>
 	<modules>
 		<module>csharp-squid</module>
+		<module>csharp-checks</module>
     <module>csharp-ssdk</module>
 		<module>sonar-csharp-squid-plugin</module>
 		<module>integration-tests</module>
@@ -81,6 +82,11 @@
 				<artifactId>sonar-duplications</artifactId>
 				<version>${sonar.version}</version>
 			</dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-check-api</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>   
 			<!-- Other dependencies -->
 			<dependency>
 				<groupId>commons-lang</groupId>
