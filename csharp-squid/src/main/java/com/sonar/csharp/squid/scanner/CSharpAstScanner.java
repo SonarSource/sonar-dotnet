@@ -8,10 +8,8 @@ package com.sonar.csharp.squid.scanner;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.metric.CSharpAccessorVisitor;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
-import com.sonar.csharp.squid.metric.CSharpStatementVisitor;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
 import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
@@ -21,6 +19,7 @@ import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import com.sonar.sslr.squid.SquidAstVisitorContextImpl;
 import com.sonar.sslr.squid.metrics.CommentsVisitor;
+import com.sonar.sslr.squid.metrics.CounterVisitor;
 import com.sonar.sslr.squid.metrics.LinesOfCodeVisitor;
 import com.sonar.sslr.squid.metrics.LinesVisitor;
 import org.sonar.squid.api.SourceProject;
@@ -74,12 +73,22 @@ public final class CSharpAstScanner {
         .withNoSonar(true)
         .withIgnoreHeaderComment(true)
         .build());
+    builder.withSquidAstVisitor(CounterVisitor
+        .<CSharpGrammar> builder()
+        .setMetricDef(CSharpMetric.STATEMENTS)
+        .subscribeTo(parser.getGrammar().labeledStatement, parser.getGrammar().declarationStatement, parser.getGrammar().expressionStatement,
+            parser.getGrammar().selectionStatement, parser.getGrammar().iterationStatement, parser.getGrammar().jumpStatement, parser.getGrammar().tryStatement,
+            parser.getGrammar().checkedStatement, parser.getGrammar().uncheckedStatement, parser.getGrammar().lockStatement, parser.getGrammar().usingStatement,
+            parser.getGrammar().yieldStatement).build());
+    builder.withSquidAstVisitor(CounterVisitor
+        .<CSharpGrammar> builder()
+        .setMetricDef(CSharpMetric.ACCESSORS)
+        .subscribeTo(parser.getGrammar().getAccessorDeclaration, parser.getGrammar().setAccessorDeclaration, parser.getGrammar().addAccessorDeclaration,
+            parser.getGrammar().removeAccessorDeclaration).build());
 
     /* Visitors */
     builder.withSquidAstVisitor(new CSharpTypeVisitor());
     builder.withSquidAstVisitor(new CSharpMemberVisitor());
-    builder.withSquidAstVisitor(new CSharpAccessorVisitor());
-    builder.withSquidAstVisitor(new CSharpStatementVisitor());
     builder.withSquidAstVisitor(new CSharpComplexityVisitor());
     builder.withSquidAstVisitor(new CSharpPublicApiVisitor());
 
