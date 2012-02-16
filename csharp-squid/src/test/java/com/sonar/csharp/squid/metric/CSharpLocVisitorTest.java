@@ -32,6 +32,15 @@ public class CSharpLocVisitorTest {
     assertThat(project.getInt(CSharpMetric.LINES_OF_CODE), is(278));
   }
 
+  @Test
+  public void multiLineToken() {
+    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFile(readFile("/metric/locMultiLineToken.cs"));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+
+    assertThat(project.getInt(CSharpMetric.LINES_OF_CODE), is(15));
+  }
+
   protected File readFile(String path) {
     return FileUtils.toFile(getClass().getResource(path));
   }
