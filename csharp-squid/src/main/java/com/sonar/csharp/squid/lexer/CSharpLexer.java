@@ -5,8 +5,6 @@
  */
 package com.sonar.csharp.squid.lexer;
 
-import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.*;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
@@ -17,6 +15,8 @@ import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
+
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.*;
 
 /**
  * Lexer for the C# language.
@@ -69,7 +69,7 @@ public final class CSharpLexer {
         .withChannel(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"))
         // Others
         .withChannel(new BlackHoleChannel("[\\s]"))
-        .withChannel(new UnknownCharacterChannel(true))
+        .withChannel(new UnknownCharacterChannel(true)) /* Used to handle to BOM? */
 
         .withPreprocessor(new StandardPreprocessorLinePreprocessor())
 
