@@ -35,6 +35,7 @@
               <artifactSet>
                 <includes>
                   <include>${project.groupId}:csharp-squid</include>
+                  <include>${project.groupId}:csharp-checks</include>
                   <include>com.sonarsource.sslr:sslr-core</include>
                   <include>com.sonarsource.sslr:sslr-squid-bridge</include>
                   <include>com.sonarsource.license:license-api</include>
