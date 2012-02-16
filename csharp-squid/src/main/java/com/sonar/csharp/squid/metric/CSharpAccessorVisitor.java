@@ -7,20 +7,20 @@ package com.sonar.csharp.squid.metric;
 
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.squid.SquidAstVisitor;
 
 /**
  * Visitor that computes the number of accessors.
  */
-public class CSharpAccessorVisitor extends CSharpAstVisitor {
+public class CSharpAccessorVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void init() {
-    CSharpGrammar g = getCSharpGrammar();
+    CSharpGrammar g = getContext().getGrammar();
     subscribeTo(g.getAccessorDeclaration, g.setAccessorDeclaration, g.addAccessorDeclaration, g.removeAccessorDeclaration);
   }
 
@@ -29,7 +29,7 @@ public class CSharpAccessorVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode node) {
-    peekSourceCode().add(CSharpMetric.ACCESSORS, 1);
+    getContext().peekSourceCode().add(CSharpMetric.ACCESSORS, 1);
   }
 
 }

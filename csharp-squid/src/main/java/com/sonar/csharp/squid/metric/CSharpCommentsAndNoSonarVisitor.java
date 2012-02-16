@@ -5,24 +5,24 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import static com.sonar.sslr.api.GenericTokenType.*;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import com.sonar.sslr.squid.SquidAstVisitor;
+import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.recognizer.*;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.sonar.squid.api.SourceFile;
-import org.sonar.squid.recognizer.*;
+import static com.sonar.sslr.api.GenericTokenType.*;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
-import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
-import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.Trivia;
-
-public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements AstAndTokenVisitor {
+public class CSharpCommentsAndNoSonarVisitor extends SquidAstVisitor<CSharpGrammar> implements AstAndTokenVisitor {
 
   private static final String NOSONAR_TAG = "NOSONAR";
   private boolean seenFirstToken;
@@ -36,11 +36,11 @@ public class CSharpCommentsAndNoSonarVisitor extends CSharpAstVisitor implements
    * {@inheritDoc}
    */
   public void visitToken(Token token) {
-    SourceFile sourceFile = peekSourceCode() instanceof SourceFile ? (SourceFile) peekSourceCode() : peekSourceCode().getParent(
+    SourceFile sourceFile = getContext().peekSourceCode() instanceof SourceFile ? (SourceFile) getContext().peekSourceCode() : getContext().peekSourceCode().getParent(
         SourceFile.class);
     CodeRecognizer codeRecognizer = new CodeRecognizer(0.94, new CSharpFootprint());
 
-    if ( !seenFirstToken && !UNKNOWN_CHAR.equals(token.getType())) {
+    if (!seenFirstToken && !UNKNOWN_CHAR.equals(token.getType())) {
       seenFirstToken = true;
       return;
     }

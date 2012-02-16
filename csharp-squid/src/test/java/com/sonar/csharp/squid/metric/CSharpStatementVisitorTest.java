@@ -5,37 +5,38 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.squid.AstScanner;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+import org.sonar.squid.api.SourceProject;
+import org.sonar.squid.indexer.QueryByType;
 
 import java.io.File;
 import java.nio.charset.Charset;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-import org.sonar.squid.Squid;
-import org.sonar.squid.api.SourceProject;
-
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 public class CSharpStatementVisitorTest {
 
   @Test
   public void testScanFile() {
-    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.STATEMENTS);
+    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFile(readFile("/metric/Money.cs"));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
     assertThat(project.getInt(CSharpMetric.STATEMENTS), is(144));
   }
 
   @Test
   public void testScanSimpleFile() {
-    Squid squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanFile(readFile("/metric/simpleFile.cs"));
-    SourceProject project = squid.decorateSourceCodeTreeWith(CSharpMetric.STATEMENTS);
+    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFile(readFile("/metric/simpleFile.cs"));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
     assertThat(project.getInt(CSharpMetric.STATEMENTS), is(16));
   }

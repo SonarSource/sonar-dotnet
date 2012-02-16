@@ -8,16 +8,16 @@ package com.sonar.csharp.squid.tree;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.squid.SquidAstVisitor;
 
 /**
  * Visitor that creates member resources (= methods, property accessors, event accessors, indexer accessors, operators, constructors,
  * finalizers) and computes the number of members.
  */
-public class CSharpMemberVisitor extends CSharpAstVisitor {
+public class CSharpMemberVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   private CSharpGrammar g;
 
@@ -26,7 +26,7 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
    */
   @Override
   public void init() {
-    g = getCSharpGrammar();
+    g = getContext().getGrammar();
     subscribeTo(g.methodDeclaration, g.constructorBody, g.staticConstructorBody, g.destructorBody, g.accessorBody,
         g.addAccessorDeclaration, g.removeAccessorDeclaration, g.operatorBody);
   }
@@ -63,9 +63,9 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
       throw new IllegalStateException("The current AST node is not supported by this visitor.");
     }
 
-    SourceMember member = new SourceMember((SourceType) peekSourceCode(), memberSignature, astNode.getTokenLine());
+    SourceMember member = new SourceMember((SourceType) getContext().peekSourceCode(), memberSignature, astNode.getTokenLine());
     member.setMeasure(CSharpMetric.METHODS, 1);
-    addSourceCode(member);
+    getContext().addSourceCode(member);
   }
 
   /**
@@ -77,7 +77,7 @@ public class CSharpMemberVisitor extends CSharpAstVisitor {
       // this was an empty declaration
       return;
     }
-    popSourceCode();
+    getContext().popSourceCode();
   }
 
   private String extractMethodSignature(AstNode astNode) {

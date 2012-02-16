@@ -1,133 +1,91 @@
-package com.sonar.csharp.squid.scanner;
-
 /*
  * Copyright (C) 2010 SonarSource SA
  * All rights reserved
  * mailto:contact AT sonarsource DOT com
  */
+package com.sonar.csharp.squid.scanner;
 
-import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
+import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.*;
 import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.csharp.squid.tree.CSharpFileVisitor;
 import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
 import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AuditListener;
-import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.api.CommentAnalyser;
 import com.sonar.sslr.impl.Parser;
-import com.sonar.sslr.impl.ast.AstWalker;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.squid.api.AnalysisException;
-import org.sonar.squid.api.CodeScanner;
-import org.sonar.squid.api.SourceCode;
+import com.sonar.sslr.squid.AstScanner;
+import com.sonar.sslr.squid.SquidAstVisitor;
+import com.sonar.sslr.squid.SquidAstVisitorContextImpl;
+import org.sonar.squid.api.SourceProject;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Stack;
+public final class CSharpAstScanner {
 
-public class CSharpAstScanner extends CodeScanner<CSharpAstVisitor> {
-
-  private static final Logger LOG = LoggerFactory.getLogger(CSharpAstScanner.class);
-  private final SourceCode project;
-  private final Parser<CSharpGrammar> parser;
-  private final CSharpConfiguration conf;
-
-  public CSharpAstScanner(SourceCode project, CSharpConfiguration conf) {
-    super();
-    this.project = project;
-    this.parser = CSharpParser.create(conf);
-    this.conf = conf;
+  private CSharpAstScanner() {
   }
 
-  public CSharpAstScanner scanFile(File cSharpFile) {
-    return scanFiles(Arrays.asList(cSharpFile));
-  }
+  public static AstScanner<CSharpGrammar> create(CSharpConfiguration conf, SquidAstVisitor<CSharpGrammar>... visitors) {
 
-  public CSharpAstScanner scanDirectory(File directory) {
-    @SuppressWarnings("unchecked")
-    Collection<File> files = FileUtils.listFiles(directory, new SuffixFileFilter("cs"), FileFilterUtils.directoryFileFilter());
-    return scanFiles(files);
-  }
+    final SquidAstVisitorContextImpl<CSharpGrammar> context = new SquidAstVisitorContextImpl<CSharpGrammar>(new SourceProject("C# Project"));
+    final Parser<CSharpGrammar> parser = CSharpParser.create(conf);
 
-  public CSharpAstScanner scanFiles(Collection<File> files) {
-    Stack<SourceCode> resourcesStack = new Stack<SourceCode>();
-    resourcesStack.add(project);
-    for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setProject(project);
-      visitor.setSourceCodeStack(resourcesStack);
-      visitor.setGrammar(parser.getGrammar());
-      visitor.init();
-    }
-    for (File file : files) {
-      try {
-        parseAndVisitFile(file);
-      } catch (Exception e) {
-        String errorMessage = "Sonar is unable to analyze file : '" + file.getAbsolutePath() + "'";
-        if (!conf.stopSquidOnException()) {
-          LOG.error(errorMessage, e);
-          notifyVisitorsOfException(resourcesStack, file, e);
-        } else {
-          throw new AnalysisException(errorMessage, e);
+    AstScanner.Builder<CSharpGrammar> builder = AstScanner.<CSharpGrammar> builder(context).setBaseParser(parser);
+
+    /* Metrics */
+    builder.withMetrics(CSharpMetric.values());
+
+    /* Comments */
+    builder.setCommentAnalyser(
+        new CommentAnalyser() {
+
+          @Override
+          public boolean isBlank(String line) {
+            for (int i = 0; i < line.length(); i++) {
+              if (Character.isLetterOrDigit(line.charAt(i))) {
+                return false;
+              }
+            }
+
+            return true;
+          }
+
+          @Override
+          public String getContents(String comment) {
+            return comment.startsWith("//") ? comment.substring(2) : comment.substring(2, comment.length() - 2);
+          }
+
         }
-      }
+        );
+
+    /* Files */
+    builder.setFilesMetric(CSharpMetric.FILES);
+
+    /* Metrics */
+    /*
+     * builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder().withCommentMetric(CSharpMetric.COMMENT_LINES)
+     * .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
+     * .withNoSonar(true)
+     * .withIgnoreHeaderComment(true)
+     * .build());
+     */
+    /* Visitors */
+    builder.withSquidAstVisitor(new CSharpNamespaceVisitor());
+    builder.withSquidAstVisitor(new CSharpTypeVisitor());
+    builder.withSquidAstVisitor(new CSharpMemberVisitor());
+    builder.withSquidAstVisitor(new CSharpAccessorVisitor());
+    builder.withSquidAstVisitor(new CSharpLineVisitor());
+    builder.withSquidAstVisitor(new CSharpLocVisitor());
+    builder.withSquidAstVisitor(new CSharpStatementVisitor());
+    builder.withSquidAstVisitor(new CSharpComplexityVisitor());
+    builder.withSquidAstVisitor(new CSharpPublicApiVisitor());
+    builder.withSquidAstVisitor(new CSharpCommentsAndNoSonarVisitor());
+
+    /* External visitors (typically Check ones) */
+    for (SquidAstVisitor<CSharpGrammar> visitor : visitors) {
+      builder.withSquidAstVisitor(visitor);
     }
-    for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.destroy();
-    }
-    return this;
+
+    return builder.build();
   }
 
-  private void notifyVisitorsOfException(Stack<SourceCode> resourcesStack, File file, Exception e) {
-    CSharpFileVisitor filesVisitor = new CSharpFileVisitor();
-    filesVisitor.setSourceCodeStack(resourcesStack);
-    filesVisitor.setFile(file);
-    filesVisitor.visitFile(null);
-    for (CSharpAstVisitor visitor : getVisitors()) {
-      if (visitor instanceof AuditListener) {
-        if (e instanceof RecognitionException) {
-          ((AuditListener) visitor).processRecognitionException((RecognitionException) e);
-        } else {
-          ((AuditListener) visitor).processException(e);
-        }
-      }
-    }
-    filesVisitor.leaveFile(null);
-  }
-
-  private void parseAndVisitFile(File file) {
-    AstNode ast = parser.parse(file);
-    for (CSharpAstVisitor visitor : getVisitors()) {
-      visitor.setFile(file);
-    }
-    AstWalker astWalker = new AstWalker(getVisitors());
-    astWalker.walkAndVisit(ast);
-  }
-
-  @Override
-  public Collection<Class<? extends CSharpAstVisitor>> getVisitorClasses() {
-    List<Class<? extends CSharpAstVisitor>> visitors = Lists.newArrayList();
-    visitors.add(CSharpFileVisitor.class);
-    visitors.add(CSharpNamespaceVisitor.class);
-    visitors.add(CSharpTypeVisitor.class);
-    visitors.add(CSharpMemberVisitor.class);
-    visitors.add(CSharpAccessorVisitor.class);
-    visitors.add(CSharpLineVisitor.class);
-    visitors.add(CSharpLocVisitor.class);
-    visitors.add(CSharpStatementVisitor.class);
-    visitors.add(CSharpComplexityVisitor.class);
-    visitors.add(CSharpPublicApiVisitor.class);
-
-    visitors.add(CSharpCommentsAndNoSonarVisitor.class);
-    return visitors;
-  }
 }

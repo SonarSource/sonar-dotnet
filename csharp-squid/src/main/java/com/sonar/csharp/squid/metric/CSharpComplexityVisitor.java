@@ -9,13 +9,13 @@ import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.squid.SquidAstVisitor;
 
 /**
  * Visitor that computes the McCabe complexity.
  */
-public class CSharpComplexityVisitor extends CSharpAstVisitor {
+public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   private CSharpGrammar g;
 
@@ -24,7 +24,7 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
    */
   @Override
   public void init() {
-    g = getCSharpGrammar();
+    g = getContext().getGrammar();
     subscribeTo(g.ifStatement, g.switchStatement, g.labeledStatement, g.whileStatement, g.doStatement, g.forStatement, g.returnStatement,
         g.methodBody, g.accessorBody, g.addAccessorDeclaration, g.removeAccessorDeclaration, g.operatorBody, g.constructorBody,
         g.destructorBody, g.staticConstructorBody, CSharpPunctuator.AND_OP, CSharpPunctuator.OR_OP, CSharpKeyword.CASE);
@@ -43,18 +43,18 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
       // last return of a block, do not count +1
       return;
     }
-    peekSourceCode().add(CSharpMetric.COMPLEXITY, 1);
+    getContext().peekSourceCode().add(CSharpMetric.COMPLEXITY, 1);
   }
 
   private boolean isLastReturnStatement(AstNode node) {
     AstNode currentNode = node;
     AstNode parent = currentNode.getParent();
-    while ( !parent.is(g.block)) {
+    while (!parent.is(g.block)) {
       currentNode = parent;
       parent = currentNode.getParent();
     }
     // here, parent is a block
-    if ( !currentNode.nextSibling().is(CSharpPunctuator.RCURLYBRACE)) {
+    if (!currentNode.nextSibling().is(CSharpPunctuator.RCURLYBRACE)) {
       return false;
     }
     if (isMemberBloc(parent.getParent())) {
@@ -65,7 +65,7 @@ public class CSharpComplexityVisitor extends CSharpAstVisitor {
 
   private boolean isMemberBloc(AstNode parent) {
     return parent.is(g.methodBody) || parent.is(g.accessorBody) || parent.is(g.addAccessorDeclaration)
-        || parent.is(g.removeAccessorDeclaration) || parent.is(g.operatorBody) || parent.is(g.constructorBody)
-        || parent.is(g.destructorBody) || parent.is(g.staticConstructorBody);
+      || parent.is(g.removeAccessorDeclaration) || parent.is(g.operatorBody) || parent.is(g.constructorBody)
+      || parent.is(g.destructorBody) || parent.is(g.staticConstructorBody);
   }
 }

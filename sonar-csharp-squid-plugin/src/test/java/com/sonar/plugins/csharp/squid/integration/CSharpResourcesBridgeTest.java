@@ -5,14 +5,13 @@
  */
 package com.sonar.plugins.csharp.squid.integration;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.nio.charset.Charset;
-import java.util.Collection;
-
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.squid.AstScanner;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,11 +21,15 @@ import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
+import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import java.nio.charset.Charset;
+import java.util.Collection;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class CSharpResourcesBridgeTest {
 
@@ -36,11 +39,12 @@ public class CSharpResourcesBridgeTest {
   @BeforeClass
   public static void init() {
     cSharpResourcesBridge = new CSharpResourcesBridge();
-    squid = new Squid(new CSharpConfiguration(Charset.forName("UTF-8")));
-    squid.register(CSharpAstScanner.class).scanDirectory(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()));
-    squid.decorateSourceCodeTreeWith(CSharpMetric.values());
+    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFiles(FileUtils.listFiles(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()), new SuffixFileFilter("cs"),
+        FileFilterUtils.directoryFileFilter()));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    Collection<SourceCode> squidFiles = squid.search(new QueryByType(SourceFile.class));
+    Collection<SourceCode> squidFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     for (SourceCode squidFile : squidFiles) {
       File sonarFile = mock(File.class);
       when(sonarFile.getName()).thenReturn(squidFile.getName());

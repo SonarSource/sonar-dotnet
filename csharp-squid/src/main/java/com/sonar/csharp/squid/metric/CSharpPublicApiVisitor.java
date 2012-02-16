@@ -5,22 +5,22 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Trivia;
+import com.sonar.sslr.squid.SquidAstVisitor;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Visitor that computes the number of statements.
  */
-public class CSharpPublicApiVisitor extends CSharpAstVisitor {
+public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   private final Map<AstNodeType, AstNodeType> modifiersMap = Maps.newHashMap();
 
@@ -29,7 +29,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
    */
   @Override
   public void init() {
-    CSharpGrammar g = getCSharpGrammar();
+    CSharpGrammar g = getContext().getGrammar();
     modifiersMap.put(g.classDeclaration, g.classModifier);
     modifiersMap.put(g.structDeclaration, g.structModifier);
     modifiersMap.put(g.interfaceDeclaration, g.interfaceModifier);
@@ -54,11 +54,11 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode node) {
-    CSharpGrammar g = getCSharpGrammar();
+    CSharpGrammar g = getContext().getGrammar();
     AstNodeType nodeType = node.getType();
     boolean isPublicApi = false;
     if (node.getType().equals(g.interfaceMethodDeclaration) || node.getType().equals(g.interfacePropertyDeclaration)
-        || node.getType().equals(g.interfaceEventDeclaration) || node.getType().equals(g.interfaceIndexerDeclaration)) {
+      || node.getType().equals(g.interfaceEventDeclaration) || node.getType().equals(g.interfaceIndexerDeclaration)) {
       // then we must look at the visibility of the enclosing interface definition
       isPublicApi = checkNodeForPublicModifier(node.findFirstParent(g.interfaceDeclaration), g.interfaceModifier);
     } else {
@@ -74,7 +74,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
     List<AstNode> modifiers = currentNode.findDirectChildren(wantedChildrenType);
     for (AstNode astNode : modifiers) {
       if (astNode.getToken().getType().equals(CSharpKeyword.PUBLIC)) {
-        peekSourceCode().add(CSharpMetric.PUBLIC_API, 1);
+        getContext().peekSourceCode().add(CSharpMetric.PUBLIC_API, 1);
         return true;
       }
     }
@@ -84,7 +84,7 @@ public class CSharpPublicApiVisitor extends CSharpAstVisitor {
   private void checkNodeForPreviousComments(AstNode node) {
     for (Trivia trivia : node.getToken().getTrivia()) {
       if (trivia.isComment()) {
-        peekSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
+        getContext().peekSourceCode().add(CSharpMetric.PUBLIC_DOC_API, 1);
         break;
       }
     }

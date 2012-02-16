@@ -5,21 +5,22 @@
  */
 package com.sonar.csharp.squid.metric;
 
+import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.ast.CSharpAstVisitor;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.squid.SquidAstVisitor;
 
 /**
  * Visitor that creates namespace (<=>package) resources and computes the number of namespace.
  */
-public class CSharpNamespaceVisitor extends CSharpAstVisitor {
+public class CSharpNamespaceVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void init() {
-    subscribeTo(getCSharpGrammar().namespaceDeclaration);
+    subscribeTo(getContext().getGrammar().namespaceDeclaration);
   }
 
   /**
@@ -27,7 +28,7 @@ public class CSharpNamespaceVisitor extends CSharpAstVisitor {
    */
   @Override
   public void visitNode(AstNode astNode) {
-    getProject().setMeasure(CSharpMetric.NAMESPACES, 1);
+    getContext().peekSourceCode().setMeasure(CSharpMetric.NAMESPACES, 1);
   }
 
 }
