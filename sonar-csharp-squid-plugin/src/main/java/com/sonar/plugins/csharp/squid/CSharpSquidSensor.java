@@ -57,8 +57,6 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   private final CSharp cSharp;
   private final CSharpResourcesBridge cSharpResourcesBridge;
   private final ResourceCreationLock resourceCreationLock;
-  private final CSharpCheck[] checks;
-  private final RulesProfile profile;
 
   private final AnnotationCheckFactory annotationCheckFactory;
   private Project project;
@@ -76,8 +74,6 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
-    this.profile = profile;
-    this.checks = cSharpChecks;
 
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);

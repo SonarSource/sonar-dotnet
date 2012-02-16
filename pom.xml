@@ -56,6 +56,11 @@
         <artifactId>csharp-squid</artifactId>
         <version>${project.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.sonarsource.csharp</groupId>
+        <artifactId>csharp-checks</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 			<!-- sonar open-source -->
 			<dependency>
 				<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>

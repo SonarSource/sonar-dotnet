@@ -5,47 +5,40 @@
  */
 package com.sonar.plugins.csharp.squid;
 
-import java.util.List;
-
+import com.sonar.csharp.checks.CheckList;
+import com.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.api.rules.AnnotationRuleParser;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleRepository;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
-import com.sonar.plugins.csharp.squid.check.CSharpCheck;
+import java.util.Collection;
+import java.util.List;
 
-/**
- * C# rule repository fed by all the {@link CSharpCheck} found by the container.
- * 
- */
 public class CSharpRuleRepository extends RuleRepository {
 
-  private CSharpCheck[] checks;
+  /* We have to put those in our own repository, see http://jira.codehaus.org/browse/SONAR-3157 */
+  private final CSharpCheck[] customerProvidedChecks;
 
-  /**
-   * Creates a {@link CSharpRuleRepository}
-   */
   public CSharpRuleRepository() {
-    this(new CSharpCheck[] {});
+    this(new CSharpCheck[0]);
   }
 
-  /**
-   * Creates a {@link CSharpRuleRepository}
-   * 
-   * @param checks
-   *          the C# checks provided by the container
-   */
-  public CSharpRuleRepository(CSharpCheck[] checks) {
+  public CSharpRuleRepository(CSharpCheck[] customerProvidedChecks) {
     super(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY);
     setName(CSharpSquidConstants.REPOSITORY_NAME);
-    this.checks = checks;
+    this.customerProvidedChecks = customerProvidedChecks;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List<Rule> createRules() {
-    return new AnnotationRuleParser().parse(getKey(), CSharpCheck.toCollection(checks));
+    return new AnnotationRuleParser().parse(getKey(), getChecks());
   }
+
+  public Collection<Class> getChecks() {
+    Collection<Class> allChecks = CSharpCheck.toCollection(customerProvidedChecks);
+    allChecks.addAll(CheckList.getChecks());
+    return allChecks;
+  }
+
 }

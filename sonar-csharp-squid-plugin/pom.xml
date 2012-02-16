@@ -68,6 +68,10 @@
       <artifactId>csharp-squid</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.sonarsource.csharp</groupId>
+      <artifactId>csharp-checks</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.sonarsource.sslr</groupId>
       <artifactId>sslr-core</artifactId>
     </dependency>
