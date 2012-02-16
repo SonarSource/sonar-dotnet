@@ -69,7 +69,6 @@ public final class CSharpAstScanner {
      * .build());
      */
     /* Visitors */
-    builder.withSquidAstVisitor(new CSharpNamespaceVisitor());
     builder.withSquidAstVisitor(new CSharpTypeVisitor());
     builder.withSquidAstVisitor(new CSharpMemberVisitor());
     builder.withSquidAstVisitor(new CSharpAccessorVisitor());
