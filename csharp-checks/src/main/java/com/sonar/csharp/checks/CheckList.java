@@ -16,7 +16,7 @@ public final class CheckList {
 
   public static List<Class> getChecks() {
     return Lists.<Class> newArrayList(
-        CommentedCodeCheck.class,
+        // CommentedCodeCheck.class,
         ParsingErrorCheck.class
         );
   }

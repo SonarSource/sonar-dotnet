@@ -72,23 +72,24 @@ public final class CSharpAstScanner {
     /* Metrics */
     builder.withSquidAstVisitor(new LinesVisitor<CSharpGrammar>(CSharpMetric.LINES));
     builder.withSquidAstVisitor(new LinesOfCodeVisitor<CSharpGrammar>(CSharpMetric.LINES_OF_CODE));
-    builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder().withCommentMetric(CSharpMetric.COMMENT_LINES)
+    builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder()
+        .withCommentMetric(CSharpMetric.COMMENT_LINES)
         .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
         .withNoSonar(true)
         .withIgnoreHeaderComment(true)
         .build());
-    builder.withSquidAstVisitor(CounterVisitor
-        .<CSharpGrammar> builder()
+    builder.withSquidAstVisitor(CounterVisitor.<CSharpGrammar> builder()
         .setMetricDef(CSharpMetric.STATEMENTS)
         .subscribeTo(parser.getGrammar().labeledStatement, parser.getGrammar().declarationStatement, parser.getGrammar().expressionStatement,
             parser.getGrammar().selectionStatement, parser.getGrammar().iterationStatement, parser.getGrammar().jumpStatement, parser.getGrammar().tryStatement,
             parser.getGrammar().checkedStatement, parser.getGrammar().uncheckedStatement, parser.getGrammar().lockStatement, parser.getGrammar().usingStatement,
-            parser.getGrammar().yieldStatement).build());
-    builder.withSquidAstVisitor(CounterVisitor
-        .<CSharpGrammar> builder()
+            parser.getGrammar().yieldStatement)
+        .build());
+    builder.withSquidAstVisitor(CounterVisitor.<CSharpGrammar> builder()
         .setMetricDef(CSharpMetric.ACCESSORS)
         .subscribeTo(parser.getGrammar().getAccessorDeclaration, parser.getGrammar().setAccessorDeclaration, parser.getGrammar().addAccessorDeclaration,
-            parser.getGrammar().removeAccessorDeclaration).build());
+            parser.getGrammar().removeAccessorDeclaration)
+        .build());
 
     /* Visitors */
     builder.withSquidAstVisitor(new CSharpComplexityVisitor());
