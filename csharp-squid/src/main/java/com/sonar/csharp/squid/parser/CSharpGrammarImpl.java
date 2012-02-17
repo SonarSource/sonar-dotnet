@@ -105,7 +105,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             STRING,
             typeName
         )).skip();
-    nullableType.is(typePrimary, adjacent(QUESTION));
+    nullableType.is(typePrimary, QUESTION, not(and(expression, COLON)));
     pointerType.is( // Moved from unsafe code to remove the left recursions
         or(
             nullableType,
