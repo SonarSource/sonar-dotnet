@@ -215,7 +215,6 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     // NOTE Rule memberDeclarator is relaxed to accept any expression
     memberDeclarator.is(opt(IDENTIFIER, EQUAL), expression);
     // NOTE : typeOfExpression does not exactly stick to the specification, but the bridge makes its easier to parse for now.
-    // typeOfExpression.is(TYPEOF, LPARENTHESIS, or(type, unboundTypeName, VOID), RPARENTHESIS);
     typeOfExpression.is(TYPEOF, bridge(LPARENTHESIS, RPARENTHESIS));
     unboundTypeName.is(
         one2n(IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(genericDimensionSpecifier),
@@ -367,7 +366,6 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     methodModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     returnType.isOr(type, VOID);
     // NOTE: memberName does not exactly stick to the specification (see page 462 of ECMA specification)
-    // Normally it would be: memberName.isOr(and(interfaceType, DOT, IDENTIFIER), IDENTIFIER);
     memberName.is(o2n(or(qualifiedAliasMember, and(or(THIS, IDENTIFIER), opt(typeArgumentList))), DOT), or(THIS, IDENTIFIER),
         opt(typeArgumentList));
     methodBody.isOr(block, SEMICOLON);
@@ -401,7 +399,6 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         RCURLYBRACE);
     indexerModifier.isOr(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN);
     // NOTE: indexerDeclarator does not exactly stick to the specification. Normally it would be:
-    // indexerDeclarator.is(type, opt(interfaceType, DOT), THIS, LBRACKET, formalParameterList, RBRACKET);
     indexerDeclarator.is(type, o2n(or(qualifiedAliasMember, and(IDENTIFIER, opt(typeArgumentList))), DOT), THIS, LBRACKET,
         formalParameterList, RBRACKET);
     operatorDeclaration.is(opt(attributes), one2n(operatorModifier), operatorDeclarator, operatorBody);

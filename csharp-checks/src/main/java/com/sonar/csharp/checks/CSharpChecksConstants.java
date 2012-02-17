@@ -7,7 +7,7 @@ package com.sonar.csharp.checks;
 
 public final class CSharpChecksConstants {
 
-  public final static String SONAR_CSHARP_WAY_PROFILE_KEY = "Sonar C# Way";
+  public static final String SONAR_CSHARP_WAY_PROFILE_KEY = "Sonar C# Way";
 
   private CSharpChecksConstants() {
   }
