@@ -22,7 +22,6 @@
 		<module>csharp-checks</module>
     <module>csharp-ssdk</module>
 		<module>sonar-csharp-squid-plugin</module>
-		<module>integration-tests</module>
 	</modules>
 	<scm>
 		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
