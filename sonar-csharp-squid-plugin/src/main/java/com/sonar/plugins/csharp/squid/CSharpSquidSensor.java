@@ -6,6 +6,7 @@
 package com.sonar.plugins.csharp.squid;
 
 import com.google.common.collect.Lists;
+import com.sonar.csharp.checks.CheckList;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
@@ -76,6 +77,7 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
     this.resourceCreationLock = resourceCreationLock;
 
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
+    allChecks.addAll(CheckList.getChecks());
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);
   }
 
