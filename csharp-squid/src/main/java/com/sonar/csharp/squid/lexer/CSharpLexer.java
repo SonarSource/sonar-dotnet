@@ -10,6 +10,7 @@ import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.csharp.squid.lexer.preprocessors.StandardPreprocessorLinePreprocessor;
+import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.channel.BlackHoleChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
@@ -40,8 +41,8 @@ public final class CSharpLexer {
     return create(new CSharpConfiguration());
   }
 
-  public static Lexer create(CSharpConfiguration conf) {
-    return Lexer.builder()
+  public static Lexer create(CSharpConfiguration conf, Preprocessor... preprocessors) {
+    Lexer.Builder builder = Lexer.builder()
         .withCharset(conf.getCharset())
 
         .withFailIfNoChannelToConsumeOneCharacter(true)
@@ -69,11 +70,17 @@ public final class CSharpLexer {
         .withChannel(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"))
         // Others
         .withChannel(new BlackHoleChannel("[\\s]"))
-        .withChannel(new UnknownCharacterChannel(true)) /* Used to handle to BOM? */
+        .withChannel(new UnknownCharacterChannel(true)); /* Used to handle to BOM? */
 
-        .withPreprocessor(new StandardPreprocessorLinePreprocessor())
+    if (preprocessors.length > 0) {
+      for (Preprocessor preprocessor : preprocessors) {
+        builder.withPreprocessor(preprocessor);
+      }
+    } else {
+      builder.withPreprocessor(new StandardPreprocessorLinePreprocessor());
+    }
 
-        .build();
+    return builder.build();
   }
 
 }
