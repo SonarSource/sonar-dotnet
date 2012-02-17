@@ -1,0 +1,31 @@
+<p>
+Where it is required for sections of source code not to be compiled then this should be achieved by use of conditional compilation (e.g. #if construct with a comment).
+Using start and end comment markers for this purpose is dangerous because C# does not support nested comments, and any comments already existing in the section of code would change the effect.
+</p>
+
+<p>
+The following code snippet illustrates this rule:
+</p>
+
+<pre>
+using System;
+
+class Program
+{
+  // This line is fine, but the following is not
+  //int Id = 0;
+
+  /*
+  The following line is bad
+
+  void Test() { int dirId = this.Id++; }
+
+  No violation on the following line, because there is at most one violation per comment
+  MyMethod();
+  */
+
+  static void Main(string[] args)
+  {
+  }
+}
+</pre>
