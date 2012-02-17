@@ -6,7 +6,10 @@
 
 package com.sonar.csharp.squid.api;
 
-import org.sonar.squid.measures.*;
+import org.sonar.squid.measures.AggregationFormula;
+import org.sonar.squid.measures.CalculatedMetricFormula;
+import org.sonar.squid.measures.MetricDef;
+import org.sonar.squid.measures.SumAggregationFormula;
 
 /**
  * Metrics computed for the C# language.
@@ -15,55 +18,32 @@ public enum CSharpMetric implements MetricDef {
   FILES, CLASSES, INTERFACES, DELEGATES, STRUCTS, ENUMS, METHODS, LINES, LINES_OF_CODE, STATEMENTS, ACCESSORS, COMPLEXITY, COMMENT_BLANK_LINES,
   COMMENTED_OUT_CODE_LINES, COMMENT_LINES, PUBLIC_API, PUBLIC_DOC_API;
 
-  private final double initValue = 0;
-
-  private final CalculatedMetricFormula formula = null;
-
-  private final AggregationFormula aggregationFormula = new SumAggregationFormula();
-
-  private final boolean aggregateIfThereIsAlreadyAValue = true;
-
   public double getInitValue() {
-    return initValue;
+    return 0;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public String getName() {
     return name();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public boolean isCalculatedMetric() {
-    return formula != null;
+    return false;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public boolean aggregateIfThereIsAlreadyAValue() {
-    return aggregateIfThereIsAlreadyAValue;
+    return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public boolean isThereAggregationFormula() {
-    return !(aggregationFormula instanceof NoAggregationFormula);
+    return true;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public CalculatedMetricFormula getCalculatedMetricFormula() {
-    return formula;
+    return null;
   }
 
   public AggregationFormula getAggregationFormula() {
-    return aggregationFormula;
+    return new SumAggregationFormula();
   }
 
 }
