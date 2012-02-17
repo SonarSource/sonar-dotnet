@@ -7,6 +7,7 @@ package com.sonar.plugins.csharp.squid.cpd;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.api.*;
 import com.sonar.sslr.impl.Parser;
@@ -25,10 +26,14 @@ public class IgnoreUsingDirectivePreprocessor extends Preprocessor {
 
   @Override
   public PreprocessorAction process(List<Token> tokens) {
-    try {
-      AstNode usingDirectiveNode = this.parser.parse(tokens);
-      return new PreprocessorAction(usingDirectiveNode.getToIndex(), new ArrayList<Trivia>(), new ArrayList<Token>());
-    } catch (RecognitionException re) {
+    if (tokens.get(0).getType() == CSharpKeyword.USING) {
+      try {
+        AstNode usingDirectiveNode = this.parser.parse(tokens);
+        return new PreprocessorAction(usingDirectiveNode.getToIndex(), new ArrayList<Trivia>(), new ArrayList<Token>());
+      } catch (RecognitionException re) {
+        return PreprocessorAction.NO_OPERATION;
+      }
+    } else {
       return PreprocessorAction.NO_OPERATION;
     }
   }
