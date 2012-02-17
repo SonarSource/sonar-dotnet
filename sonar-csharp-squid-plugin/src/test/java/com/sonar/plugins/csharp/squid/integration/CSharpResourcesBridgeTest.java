@@ -13,7 +13,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
@@ -62,13 +61,6 @@ public class CSharpResourcesBridgeTest {
 
     file = cSharpResourcesBridge.getFromTypeName("Foo.Struct.InnerClass");
     assertThat(file.getName(), is("TypesAllInOneFile.cs"));
-  }
-
-  @Test
-  @Ignore("For the moment, method key ends with ':XXX', where 'XXX' is the line number.")
-  public void testGetFromMember() {
-    Resource<?> file = cSharpResourcesBridge.getFromMemberName("NUnit.Core.NUnitFramework#GetIgnoreReason");
-    assertThat(file.getName(), is("NUnitFramework.cs"));
   }
 
 }

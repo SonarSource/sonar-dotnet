@@ -5,19 +5,6 @@
  */
 package com.sonar.csharp.squid.lexer;
 
-import static com.sonar.sslr.test.lexer.LexerMatchers.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-import java.nio.charset.Charset;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
@@ -25,6 +12,17 @@ import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.impl.Lexer;
+import org.apache.commons.io.FileUtils;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
+import java.util.List;
+
+import static com.sonar.sslr.test.lexer.LexerMatchers.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 public class CSharpLexerTest {
 
@@ -62,7 +60,6 @@ public class CSharpLexerTest {
   }
 
   @Test
-  @Ignore
   public void lexIdentifierWithUnicodeChars() {
     assertThat(lexer.lex("éléphant"), hasToken("éléphant", GenericTokenType.IDENTIFIER));
     assertThat(lexer.lex("A‿"), hasToken("A‿", GenericTokenType.IDENTIFIER)); // Char of class Pc: U+203F UNDERTIE
