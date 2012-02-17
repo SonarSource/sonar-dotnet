@@ -65,6 +65,10 @@ public final class CSharpAstScanner {
     /* Files */
     builder.setFilesMetric(CSharpMetric.FILES);
 
+    /* Tree */
+    builder.withSquidAstVisitor(new CSharpTypeVisitor());
+    builder.withSquidAstVisitor(new CSharpMemberVisitor());
+
     /* Metrics */
     builder.withSquidAstVisitor(new LinesVisitor<CSharpGrammar>(CSharpMetric.LINES));
     builder.withSquidAstVisitor(new LinesOfCodeVisitor<CSharpGrammar>(CSharpMetric.LINES_OF_CODE));
@@ -87,8 +91,6 @@ public final class CSharpAstScanner {
             parser.getGrammar().removeAccessorDeclaration).build());
 
     /* Visitors */
-    builder.withSquidAstVisitor(new CSharpTypeVisitor());
-    builder.withSquidAstVisitor(new CSharpMemberVisitor());
     builder.withSquidAstVisitor(new CSharpComplexityVisitor());
     builder.withSquidAstVisitor(new CSharpPublicApiVisitor());
 
