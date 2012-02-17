@@ -5,21 +5,20 @@
  */
 package com.sonar.plugins.csharp.squid.cpd;
 
-import java.io.File;
-import java.nio.charset.Charset;
-
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpTokenType;
+import com.sonar.csharp.squid.lexer.CSharpLexer;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.impl.Lexer;
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpTokenType;
-import com.sonar.csharp.squid.lexer.CSharpLexer;
-import com.sonar.sslr.api.GenericTokenType;
-import com.sonar.sslr.api.Token;
-import com.sonar.sslr.api.TokenType;
-import com.sonar.sslr.impl.Lexer;
+import java.io.File;
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.api.GenericTokenType.*;
 
 public class CSharpCPDTokenizer implements Tokenizer {
 
@@ -32,20 +31,19 @@ public class CSharpCPDTokenizer implements Tokenizer {
   }
 
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
-    Lexer lexer = CSharpLexer.create(new CSharpConfiguration(charset));
+    CSharpConfiguration conf = new CSharpConfiguration(charset);
+    Lexer lexer = CSharpLexer.create(conf, new IgnoreUsingDirectivePreprocessor(conf));
+
     String fileName = source.getFileName();
     for (Token token : lexer.lex(new File(fileName))) {
-      if (isElligibleForDuplicationDetection(token)) {
-        TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
-        cpdTokens.add(cpdToken);
+      if (token.getType() == EOF) {
+        break;
       }
+
+      TokenEntry cpdToken = new TokenEntry(getTokenImage(token), fileName, token.getLine());
+      cpdTokens.add(cpdToken);
     }
     cpdTokens.add(TokenEntry.getEOF());
-  }
-
-  private boolean isElligibleForDuplicationDetection(Token token) {
-    TokenType type = token.getType();
-    return type != GenericTokenType.COMMENT && type != GenericTokenType.EOL && type != GenericTokenType.EOF;
   }
 
   private String getTokenImage(Token token) {

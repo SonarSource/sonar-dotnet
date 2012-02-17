@@ -5,22 +5,21 @@
  */
 package com.sonar.plugins.csharp.squid.cpd;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import net.sourceforge.pmd.cpd.SourceCode;
+import net.sourceforge.pmd.cpd.Tokens;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 
-import net.sourceforge.pmd.cpd.SourceCode;
-import net.sourceforge.pmd.cpd.Tokens;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 public class CSharpCpdTokenizerTest {
 
-  private CSharpCPDTokenizer tokenizer = new CSharpCPDTokenizer(true, Charset.defaultCharset());
+  private final CSharpCPDTokenizer tokenizer = new CSharpCPDTokenizer(true, Charset.defaultCharset());
 
   @Test
   public void testTokenize() throws FileNotFoundException {
@@ -35,6 +34,16 @@ public class CSharpCpdTokenizerTest {
   @Test
   public void testExclusionOfComments() throws FileNotFoundException {
     SourceCode source = new SourceCode(new SourceCode.FileCodeLoader(readFile("/cpd/only-comments.cs"), Charset.defaultCharset()
+        .displayName()));
+    Tokens tokens = new Tokens();
+    tokenizer.tokenize(source, tokens);
+
+    assertThat(tokens.size(), is(1));
+  }
+
+  @Test
+  public void usingDirectiveIgnored() throws FileNotFoundException {
+    SourceCode source = new SourceCode(new SourceCode.FileCodeLoader(readFile("/cpd/usingDirective.cs"), Charset.defaultCharset()
         .displayName()));
     Tokens tokens = new Tokens();
     tokenizer.tokenize(source, tokens);
