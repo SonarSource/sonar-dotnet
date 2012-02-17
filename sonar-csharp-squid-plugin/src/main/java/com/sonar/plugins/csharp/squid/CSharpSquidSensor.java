@@ -23,6 +23,7 @@ import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
+import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
@@ -55,26 +56,29 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12};
   private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
+
   private final CSharp cSharp;
   private final CSharpResourcesBridge cSharpResourcesBridge;
   private final ResourceCreationLock resourceCreationLock;
-
+  private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
+
   private Project project;
   private SensorContext context;
   private AstScanner<CSharpGrammar> scanner;
 
   public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile) {
-    this(cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, new CSharpCheck[] {});
+      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter) {
+    this(cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, new CSharpCheck[] {});
   }
 
   public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, CSharpCheck[] cSharpChecks) {
+      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, CSharpCheck[] cSharpChecks) {
     super(microsoftWindowsEnvironment);
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
+    this.noSonarFilter = noSonarFilter;
 
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
     allChecks.addAll(CheckList.getChecks());
@@ -118,6 +122,9 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
 
       /* Fill the resource bridge API that can be used by other C# plugins to map logical resources to physical ones */
       cSharpResourcesBridge.indexFile(squidFile, sonarFile);
+
+      /* No Sonar */
+      noSonarFilter.addResource(sonarFile, squidFile.getNoSonarTagLines());
 
       /* Classes complexity distribution */
       saveClassesComplexityDistribution(sonarFile, squidFile);
