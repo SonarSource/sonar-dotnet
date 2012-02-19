@@ -28,6 +28,7 @@ import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
+import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
 
 /**
  * C# Gallio plugin class.
@@ -91,6 +92,9 @@ public class GallioPlugin extends SonarPlugin {
 
     // Decorators
     extensions.add(CoverageDecorator.class);
+    
+    // Widget
+    extensions.add(GallioRubyWidget.class);
 
     return extensions;
   }

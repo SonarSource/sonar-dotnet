@@ -1,0 +1,26 @@
+<%
+  count_asserts=measure('count_asserts')
+  assert_per_test=measure('assert_per_test')
+  
+  if assert_per_test
+%>
+<table width="100%">
+	<tr>
+		<td valign="top" width="50%" nowrap>
+<div class="dashbox">
+<p>
+    <span class="big"><%= format_measure(count_asserts, :suffix => ' Asserts', :url => url_for_drilldown('count_asserts'), :default => '-') %></span>
+    <%= dashboard_configuration.selected_period? ? format_variation(count_asserts) : trend_icon(count_asserts) -%>
+</p>
+</td>
+<td valign="top" width="50%" nowrap>
+<div class="dashbox">
+<p>
+    <span class="big"><%= format_measure(assert_per_test, :suffix => ' Assert/Test', :url => url_for_drilldown('assert_per_test'), :default => '-') %></span>
+    <%= dashboard_configuration.selected_period? ? format_variation(assert_per_test) : trend_icon(assert_per_test) -%>
+</p>
+</div>
+</td>
+</tr>
+</table>
+<% end %>

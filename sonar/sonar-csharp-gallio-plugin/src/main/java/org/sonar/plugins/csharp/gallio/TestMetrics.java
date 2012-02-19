@@ -35,11 +35,11 @@ import org.sonar.api.measures.SumChildValuesFormula;
  */
 public class TestMetrics implements Metrics {
 
-  public static final Metric COUNT_ASSERTS = new Metric.Builder("count_asserts", "Count Assert", Metric.ValueType.INT)
-      .setDescription("The number of asserts performed by the unit tests").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
+  public static final Metric COUNT_ASSERTS = new Metric.Builder("count_asserts", "Asserts Counted", Metric.ValueType.INT)
+      .setDescription("The average number of assertions performed by unit tests").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
       .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new SumChildValuesFormula(true)).create();
 
-  public static final Metric ASSERT_PER_TEST = new Metric.Builder("assert_per_test", "Assert per Test", Metric.ValueType.FLOAT)
+  public static final Metric ASSERT_PER_TEST = new Metric.Builder("assert_per_test", "Asserts per Test", Metric.ValueType.FLOAT)
   .setDescription("The average number of asserts per test").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
   .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new AverageAssertFormula()).create();
 
