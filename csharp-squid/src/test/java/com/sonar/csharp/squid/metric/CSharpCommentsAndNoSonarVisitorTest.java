@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 public class CSharpCommentsAndNoSonarVisitorTest {
 
   @Test
-  public void testScanSimpleFile() {
+  public void testWithIgnoreHeaderComments() {
     AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
@@ -37,6 +37,19 @@ public class CSharpCommentsAndNoSonarVisitorTest {
     assertThat(file.getNoSonarTagLines(), hasItem(24));
     assertThat(file.getNoSonarTagLines(), hasItem(55));
     assertThat(file.getNoSonarTagLines().size(), is(2));
+  }
+
+  @Test
+  public void testWithoutIgnoreHeaderComments() {
+    CSharpConfiguration conf = new CSharpConfiguration(Charset.forName("UTF-8"));
+    conf.setIgnoreHeaderComments(false);
+
+    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(conf);
+    scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+
+    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(14));
+    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(17));
   }
 
   protected File readFile(String path) {

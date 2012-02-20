@@ -16,5 +16,6 @@ public final class CSharpSquidConstants {
   public static final String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.cs.minimumTokens";
   public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.cs.ignoreLiteral";
   public static final boolean CPD_IGNORE_LITERALS_DEFVALUE = true;
+  public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
 
 }

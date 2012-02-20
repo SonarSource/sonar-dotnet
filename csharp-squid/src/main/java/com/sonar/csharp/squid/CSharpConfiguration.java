@@ -11,12 +11,22 @@ import org.sonar.squid.api.SquidConfiguration;
 
 public class CSharpConfiguration extends SquidConfiguration {
 
+  private boolean ignoreHeaderComments = true;
+
   public CSharpConfiguration(Charset charset) {
     super(charset);
   }
 
   public CSharpConfiguration() {
     super();
+  }
+
+  public void setIgnoreHeaderComments(boolean ignoreHeaderComments) {
+    this.ignoreHeaderComments = ignoreHeaderComments;
+  }
+
+  public boolean getIgnoreHeaderComments() {
+    return ignoreHeaderComments;
   }
 
 }

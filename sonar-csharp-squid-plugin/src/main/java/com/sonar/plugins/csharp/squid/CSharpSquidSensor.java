@@ -109,7 +109,9 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   }
 
   private CSharpConfiguration createParserConfiguration(Project project) {
-    return new CSharpConfiguration(project.getFileSystem().getSourceCharset());
+    CSharpConfiguration conf = new CSharpConfiguration(project.getFileSystem().getSourceCharset());
+    conf.setIgnoreHeaderComments(project.getConfiguration().getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS, true));
+    return conf;
   }
 
   private void saveMeasures(Collection<SourceCode> sourceFiles) {

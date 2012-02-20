@@ -76,7 +76,7 @@ public final class CSharpAstScanner {
         .withCommentMetric(CSharpMetric.COMMENT_LINES)
         .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
         .withNoSonar(true)
-        .withIgnoreHeaderComment(true)
+        .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
         .build());
     builder.withSquidAstVisitor(CounterVisitor.<CSharpGrammar> builder()
         .setMetricDef(CSharpMetric.STATEMENTS)
