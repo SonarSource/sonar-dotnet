@@ -30,8 +30,8 @@ public class CSharpCommentsAndNoSonarVisitorTest {
     scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(12));
-    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(14));
+    assertThat(project.getInt(CSharpMetric.COMMENT_BLANK_LINES), is(13));
+    assertThat(project.getInt(CSharpMetric.COMMENT_LINES), is(17));
 
     SourceFile file = (SourceFile) project.getFirstChild();
     assertThat(file.getNoSonarTagLines(), hasItem(24));
