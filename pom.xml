@@ -13,7 +13,7 @@
 	</parent>
 	<description>SonarSource C# modules for the C# ecosystem</description>
 	<properties>
-		<sonar.version>2.9</sonar.version>
+		<sonar.version>2.10</sonar.version>
 		<csharp.core.version>1.0</csharp.core.version>
 		<sslrVersion>1.9-SNAPSHOT</sslrVersion>
 	</properties>
