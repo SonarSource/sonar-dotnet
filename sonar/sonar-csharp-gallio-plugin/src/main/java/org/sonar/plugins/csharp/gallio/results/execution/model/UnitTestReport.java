@@ -42,6 +42,12 @@ public class UnitTestReport {
   private int failures = 0;
   private int asserts;
   private List<TestCaseDetail> details;
+  
+  public void merge(UnitTestReport report) {
+    for (TestCaseDetail detail : report.details) {
+      addDetail(detail);
+    }
+  }
 
   public UnitTestReport() {
     details = new ArrayList<TestCaseDetail>();

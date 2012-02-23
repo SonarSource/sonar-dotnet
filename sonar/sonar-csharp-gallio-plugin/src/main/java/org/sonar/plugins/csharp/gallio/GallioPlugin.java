@@ -92,6 +92,7 @@ public class GallioPlugin extends SonarPlugin {
 
     // Decorators
     extensions.add(CoverageDecorator.class);
+    extensions.add(ItCoverageDecorator.class);
     
     // Widget
     extensions.add(GallioRubyWidget.class);

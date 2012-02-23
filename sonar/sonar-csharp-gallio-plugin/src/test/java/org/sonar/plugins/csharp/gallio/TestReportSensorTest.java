@@ -64,6 +64,7 @@ public class TestReportSensorTest {
   private GallioResultParser parser;
   
   private File fakeTestSourceFile = TestUtils.getResource("FakeTest.cs");
+  private File fakeItTestSourceFile = TestUtils.getResource("FakeItTest.cs");
 
   @Before
   public void init() {
@@ -146,6 +147,49 @@ public class TestReportSensorTest {
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));
     
+  }
+  
+  @Test
+  public void testAnalyseItResultsToo() {
+    
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(GallioConstants.IT_MODE, "active");
+    TestReportSensor sensor = buildSensor(conf);
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/execution/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    UnitTestReport testReport = buildUnitTestReport(TestStatus.SUCCESS, null, null);
+    
+    File defaultReportFile = new File(solutionDir, "gallio-report.xml");
+    
+    when(parser.parse(eq(defaultReportFile))).thenReturn(Collections.singleton(testReport));
+    
+    UnitTestReport itReport = buildIntegTestReport(TestStatus.SUCCESS, null, null);
+    
+    File defaultItReportFile = new File(solutionDir, "it-gallio-report.xml");
+    
+    when(parser.parse(eq(defaultItReportFile))).thenReturn(Collections.singleton(itReport));
+
+    SensorContext context = mock(SensorContext.class);
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    org.sonar.api.resources.File sonarTestFile = mock(org.sonar.api.resources.File.class);
+    
+    when(org.sonar.api.resources.File.fromIOFile(eq(fakeTestSourceFile), anyList())).thenReturn(sonarTestFile);
+    
+    
+    sensor.analyse(project, context);
+    
+    verify(parser, times(2)).parse(any(File.class));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TESTS), eq((double)2));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_EXECUTION_TIME), eq((double)462));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_ERRORS), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));    
   }
   
   @Test
@@ -304,6 +348,23 @@ public class TestReportSensorTest {
     TestCaseDetail detail = new TestCaseDetail();
     detail.setCountAsserts(32);
     detail.setTimeMillis(42);
+    detail.setStatus(status);
+    
+    //only valid when status not succes
+    detail.setErrorMessage(errorMsg);
+    detail.setStackTrace(stack);
+    
+    testReport.addDetail(detail);
+    return testReport;
+  }
+  
+  private UnitTestReport buildIntegTestReport(TestStatus status, String errorMsg, String stack) {
+    UnitTestReport testReport = new UnitTestReport();
+    testReport.setAssemblyName("MyAssembly");
+    testReport.setSourceFile(fakeTestSourceFile);
+    TestCaseDetail detail = new TestCaseDetail();
+    detail.setCountAsserts(20);
+    detail.setTimeMillis(420);
     detail.setStatus(status);
     
     //only valid when status not succes

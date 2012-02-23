@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
@@ -45,6 +47,7 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -84,12 +87,23 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   }
   
   protected Collection<File> findTestReportsToAnalyse() {
+    Collection<File> reports = Lists.newArrayList();
+    reports.addAll(findReportsToAnalyse(executionMode, GallioConstants.GALLIO_REPORT_XML, GallioConstants.REPORTS_PATH_KEY));
+    String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
+    if (!"skip".equals(itExecutionMode)) {
+      reports.addAll(findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_REPORTS_PATH_KEY));
+    }
+    
+    return reports;
+  }
+  
+  private Collection<File> findReportsToAnalyse(String executionMode, String reportFileName, String reportPathKey) {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
     String workDir = getMicrosoftWindowsEnvironment().getWorkingDirectory();
-    String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_REPORT_XML;
+    String reportDefaultPath = workDir + "/" + reportFileName;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      String[] reportPath = configuration.getStringArray(reportPathKey, reportDefaultPath);
       reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
       LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
@@ -97,7 +111,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Test report analysis won't execute as Gallio was not executed.");
       } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)){
-        reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + GallioConstants.GALLIO_REPORT_XML);
+        reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + reportFileName);
         LOG.info("(Safe mode) Parsing Gallio reports: " + Joiner.on(" ; ").join(reportFiles));
       } else {
         File reportFile = new File(solutionDir, reportDefaultPath);
@@ -112,22 +126,40 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   }
   
   private void collect(Project project, Collection<File> reportFiles, SensorContext context) {
-    Set<UnitTestReport> reports = Sets.newHashSet();
+    /*Set<UnitTestReport> reports = Sets.newHashSet();
     for (File reportFile : reportFiles) {
       if (reportFile.exists()) {
         reports.addAll(parser.parse(reportFile));
       } else {
         LOG.error("Test report \"{}\" not found", reportFile);
       }
+    }*/
+    
+    
+    Map<File, UnitTestReport> fileTestMap = Maps.newHashMap();
+    for (File report : reportFiles) {
+      if (report.exists()) {
+        Collection<UnitTestReport> tests = parser.parse(report);
+        for (UnitTestReport test : tests) {
+          File file = test.getSourceFile();
+          if (fileTestMap.containsKey(file)) {
+            fileTestMap.get(file).merge(test);
+          } else {
+            fileTestMap.put(file, test);
+          }
+        }
+      } else {
+        LOG.error("Coverage report \"{}\" not found", report);
+      }
     }
     
     if (LOG.isDebugEnabled()) {
-      LOG.debug("Found " + reports.size() + " test data");
+      LOG.debug("Found " + fileTestMap.size() + " test data");
     }
 
     Set<File> csFilesAlreadyTreated = new HashSet<File>();
 
-    for (UnitTestReport testReport : reports) {
+    for (UnitTestReport testReport : fileTestMap.values()) {
       File sourceFile = testReport.getSourceFile();
       if (sourceFile != null && sourceFile.exists() && !csFilesAlreadyTreated.contains(sourceFile)) {
         if (LOG.isDebugEnabled()) {

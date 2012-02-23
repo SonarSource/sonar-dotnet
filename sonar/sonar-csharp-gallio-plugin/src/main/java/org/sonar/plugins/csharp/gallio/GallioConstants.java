@@ -56,8 +56,7 @@ public final class GallioConstants {
   public static final String MODE = "sonar.gallio.mode";
   
   public static final String SAFE_MODE = "sonar.gallio.safe.mode";
-
-
+  
   public static final String REPORTS_PATH_KEY = "sonar.gallio.reports.path";
   public static final String REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.coverage.reports.path";
   
@@ -66,5 +65,27 @@ public final class GallioConstants {
   public static final String OPEN_COVER_INSTALL_KEY = "sonar.opencover.installDirectory";
 
   public static final String OPEN_COVER_INSTALL_DEFVALUE = "C:/Program Files/OpenCover/";
+  
+  
+  
+  //
+  // Integration tests constants
+  //
+  
+  public static final String IT_GALLIO_REPORT_XML = "it-gallio-report.xml";
+  public static final String IT_GALLIO_COVERAGE_REPORT_XML = "it-coverage-report.xml";
+  
+  public static final String IT_FILTER_KEY = "sonar.gallio.it.filter";
+  public static final String IT_FILTER_DEFVALUE = "";
+
+  public static final String IT_MODE = "sonar.gallio.it.mode";
+  
+  public static final String IT_REPORTS_PATH_KEY = "sonar.gallio.it.reports.path";
+  public static final String IT_REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.it.coverage.reports.path";
+  
+  public static final String IT_TEST_ASSEMBLIES_KEY = "sonar.dotnet.it.assemblies";
+  
+
+  
 
 }
