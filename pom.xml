@@ -60,7 +60,7 @@
   <properties>
     <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
     <jdk.min.version>1.5</jdk.min.version>
-    <sonar.buildVersion>2.9</sonar.buildVersion>
+    <sonar.buildVersion>2.12</sonar.buildVersion>
   </properties>
 
   <profiles>
