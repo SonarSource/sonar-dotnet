@@ -1,7 +1,22 @@
+<p>Here are the main reasons why commented code is a code smell:</p>
+
+<ul>
+  <li>It always raises more questions than it gives answers</li>
+  <li>Everybody will forget very quickly how relevant the commented code is</li>
+  <li>This is distraction when going down the code as it stops the flow of eyes</li>
+  <li>It is a bad SCM engine : Subversion, CVS and Git are really more trustworthy !</li>
+  <li>The simple fact of understanding why code was commented out in the first place can take a lot of time</li>
+</ul>
+
 <p>
-Where it is required for sections of source code not to be compiled then this should be achieved by use of conditional compilation (e.g. #if construct with a comment).
-Using start and end comment markers for this purpose is dangerous because C# does not support nested comments, and any comments already existing in the section of code would change the effect.
+If some code must be conditionally compiled, then the preprocessor's #if should be used, as in:
 </p>
+
+<pre>
+#if DEBUG
+  Console.WriteLine("Debug mode is activated!");
+#endif
+</pre>
 
 <p>
 The following code snippet illustrates this rule:
