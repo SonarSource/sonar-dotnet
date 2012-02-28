@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.sonarsource.csharp</groupId>
     <artifactId>csharp</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
   </parent>
   <artifactId>sonar-csharp-squid-plugin</artifactId>
   <name>SonarSource :: C# :: Sonar C# Squid Plugin</name>
@@ -138,33 +137,33 @@
                 <phase>package</phase>
                 <configuration>
                   <tasks>
-                    <property refid="maven.compile.classpath" name="mvn.classpath"/>
-                    <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask"/>
+                    <property refid="maven.compile.classpath" name="mvn.classpath" />
+                    <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" />
                     <yguard>
-                      <inoutpair in="${project.build.directory}/${project.build.finalName}.jar" out="${project.build.directory}/${project.build.finalName}.jar"/>
+                      <inoutpair in="${project.build.directory}/${project.build.finalName}.jar" out="${project.build.directory}/${project.build.finalName}.jar" />
                       <rename logfile="${project.build.directory}/yguard.log.xml" replaceClassNameStrings="true">
                         <keep>
                           <class classes="public" methods="protected" fields="public">
                             <patternset>
-                              <include name="com.sonar.plugins.csharp.squid.CSharpSquidPlugin"/>
+                              <include name="com.sonar.plugins.csharp.squid.CSharpSquidPlugin" />
                               <!-- APIs should not be obfuscated -->
-                              <include name="com.sonar.csharp.squid.api.**.*"/>
-                              <include name="com.sonar.sslr.api.**.*"/>
+                              <include name="com.sonar.csharp.squid.api.**.*" />
+                              <include name="com.sonar.sslr.api.**.*" />
                               <!-- Class used to create Custom Checks -->
-                              <include name="com.sonar.plugins.csharp.squid.check.CSharpCheck"/>
+                              <include name="com.sonar.plugins.csharp.squid.check.CSharpCheck" />
                               <!-- These 2 C# Squid classes are used to test Custom Checks -->
-                              <include name="com.sonar.csharp.squid.CSharpConfiguration"/>
-                              <include name="com.sonar.csharp.squid.scanner.CSharpAstScanner"/>
+                              <include name="com.sonar.csharp.squid.CSharpConfiguration" />
+                              <include name="com.sonar.csharp.squid.scanner.CSharpAstScanner" />
                             </patternset>
                           </class>
                         </keep>
                         <adjust replaceContent="false" replacePath="false" replaceName="false">
-                          <include name="**/*.template"/>
-                          <include name="**/*.xml"/>
+                          <include name="**/*.template" />
+                          <include name="**/*.xml" />
                         </adjust>
                       </rename>
                       <externalclasses>
-                        <pathelement path="${mvn.classpath}"/>
+                        <pathelement path="${mvn.classpath}" />
                       </externalclasses>
                     </yguard>
                   </tasks>
