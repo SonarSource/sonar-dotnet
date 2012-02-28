@@ -4,7 +4,7 @@
 	<groupId>com.sonarsource.csharp</groupId>
 	<artifactId>csharp</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>SonarSource :: C#</name>
 	<parent>
 		<groupId>com.sonarsource.parent</groupId>
@@ -24,9 +24,9 @@
 		<module>sonar-csharp-squid-plugin</module>
 	</modules>
 	<scm>
-		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.1</connection>
-		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.1</developerConnection>
-		<url>https://subversion.assembla.com/svn/sonarsourcecode/tags/csharp-1.1</url>
+		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
+		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
+		<url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
