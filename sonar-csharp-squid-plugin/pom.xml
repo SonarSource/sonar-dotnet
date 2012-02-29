@@ -9,6 +9,10 @@
   <name>SonarSource :: C# :: Sonar C# Squid Plugin</name>
   <packaging>sonar-plugin</packaging>
 
+  <properties>
+    <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
+  </properties>
+
   <description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
   <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
   <licenses>

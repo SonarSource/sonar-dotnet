@@ -10,9 +10,7 @@
   <name>SonarSource :: C# :: Squid</name>
 
   <properties>
-    <!-- The grammar declaration classes violate lots of rules to make the
-      code more readable -->
-    <sonar.exclusions>**/*Grammar.java</sonar.exclusions>
+    <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
   </properties>
 
   <dependencies>

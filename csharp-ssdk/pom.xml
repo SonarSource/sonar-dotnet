@@ -8,6 +8,10 @@
   <artifactId>csharp-ssdk</artifactId>
   <name>SonarSource :: C# :: SSDK</name>
 
+  <properties>
+    <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
