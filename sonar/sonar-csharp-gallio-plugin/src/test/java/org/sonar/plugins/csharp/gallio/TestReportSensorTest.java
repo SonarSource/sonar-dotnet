@@ -193,6 +193,61 @@ public class TestReportSensorTest {
   }
   
   @Test
+  public void testAnalyseItResultsTooOnTwoSourceFiles() {
+    
+    Configuration conf = new BaseConfiguration();
+    conf.setProperty(GallioConstants.IT_MODE, "active");
+    TestReportSensor sensor = buildSensor(conf);
+    
+    microsoftWindowsEnvironment.setTestExecutionDone();
+    File solutionDir = TestUtils.getResource("/Results/execution/");
+    microsoftWindowsEnvironment.setWorkingDirectory("");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
+    
+    UnitTestReport testReport = buildUnitTestReport(TestStatus.SUCCESS, null, null);
+    
+    File defaultReportFile = new File(solutionDir, "gallio-report.xml");
+    
+    when(parser.parse(eq(defaultReportFile))).thenReturn(Collections.singleton(testReport));
+    
+    UnitTestReport itReport = buildIntegTestReport(TestStatus.SUCCESS, null, null);
+    itReport.setSourceFile(fakeItTestSourceFile);
+    
+    File defaultItReportFile = new File(solutionDir, "it-gallio-report.xml");
+    
+    when(parser.parse(eq(defaultItReportFile))).thenReturn(Collections.singleton(itReport));
+
+    SensorContext context = mock(SensorContext.class);
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    
+    org.sonar.api.resources.File sonarTestFile = mock(org.sonar.api.resources.File.class);
+    when(org.sonar.api.resources.File.fromIOFile(eq(fakeTestSourceFile), anyList())).thenReturn(sonarTestFile);
+    
+    org.sonar.api.resources.File sonarItTestFile = mock(org.sonar.api.resources.File.class);
+    when(org.sonar.api.resources.File.fromIOFile(eq(fakeItTestSourceFile), anyList())).thenReturn(sonarItTestFile);
+    
+    
+    
+    
+    sensor.analyse(project, context);
+    
+    verify(parser, times(2)).parse(any(File.class));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TESTS), eq((double)1));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_EXECUTION_TIME), eq((double)42));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_ERRORS), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarTestFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));
+    
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarItTestFile), eq(CoreMetrics.TESTS), eq((double)1));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarItTestFile), eq(CoreMetrics.TEST_EXECUTION_TIME), eq((double)420));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarItTestFile), eq(CoreMetrics.TEST_ERRORS), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarItTestFile), eq(CoreMetrics.TEST_FAILURES), eq((double)0));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarItTestFile), eq(CoreMetrics.TEST_SUCCESS_DENSITY), eq((double)100));
+  }
+  
+  @Test
   public void testAnalyseWithError() {
     
     Configuration conf = new BaseConfiguration();

@@ -57,6 +57,9 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
+  
+  private final PropertiesBuilder<String, Integer> itLineHitsBuilder = new PropertiesBuilder<String, Integer>(
+      CoreMetrics.IT_COVERAGE_LINE_HITS_DATA);
 
   private CoverageResultParser parser;
   private CSharpConfiguration configuration;
@@ -77,30 +80,51 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    Collection<File> coverageReportFiles = findCoverageReportsToAnalyse();
+    analyseUnitCoverage(project, context);
+    analyseIntegCoverage(project, context);
+  }
+  
+  public void analyseUnitCoverage(Project project, SensorContext context) {
+    Collection<File> coverageReportFiles 
+      = findReportsToAnalyse(executionMode, GallioConstants.GALLIO_COVERAGE_REPORT_XML, GallioConstants.REPORTS_COVERAGE_PATH_KEY);
     if (coverageReportFiles.isEmpty()) {
       return;
     }
 
     // We parse the file and save the results
-    parseAndSaveCoverageResults(project, context, coverageReportFiles);
+    parseAndSaveCoverageResults(project, context, coverageReportFiles, false);
+  }
+  
+  public void analyseIntegCoverage(Project project, SensorContext context) {
+    String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
+    if ("skip".equals(itExecutionMode)) {
+      return;
+    }
+    Collection<File> coverageReportFiles 
+      = findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML, GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY);
+    if (coverageReportFiles.isEmpty()) {
+      return;
+    }
+
+    // We parse the file and save the results
+    parseAndSaveCoverageResults(project, context, coverageReportFiles, true);
   }
 
-  private Collection<File> findCoverageReportsToAnalyse() {
+  private Collection<File> findReportsToAnalyse(String executionMode, String reportFileName, String reportPathKey) {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
     String workDir = getMicrosoftWindowsEnvironment().getWorkingDirectory();
-    String reportDefaultPath = workDir + "/" + GallioConstants.GALLIO_COVERAGE_REPORT_XML;
+    String reportDefaultPath = workDir + "/" + reportFileName;
     if (MODE_REUSE_REPORT.equals(executionMode)) {
-      String[] reportPath = configuration.getStringArray(GallioConstants.REPORTS_COVERAGE_PATH_KEY, reportDefaultPath);
+      String[] reportPath = configuration.getStringArray(reportPathKey, reportDefaultPath);
       reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
-      LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
+      LOG.info("Reusing Gallio it coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
       // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
-      LOG.info("Coverage report analysis won't execute as Gallio was not executed.");
+      LOG.info("It Coverage report analysis won't execute as Gallio was not executed.");
     } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)){
-      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-      LOG.info("(Safe mode) Parsing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
+      reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + reportFileName);
+      LOG.info("(Safe mode) Parsing Gallio it coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
       File reportFile = new File(solutionDir, reportDefaultPath);
       if (reportFile.isFile()) {
@@ -113,7 +137,8 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     return reportFiles;
   }
 
-  private void parseAndSaveCoverageResults(Project project, SensorContext context, Collection<File> reportFiles) {
+
+  private void parseAndSaveCoverageResults(Project project, SensorContext context, Collection<File> reportFiles, boolean it) {
     Map<File, FileCoverage> fileCoverageMap = Maps.newHashMap();
     for (File report : reportFiles) {
       if (report.exists()) {
@@ -136,27 +161,37 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(fileCoverage.getFile(), project);
       if (context.isIndexed(sonarFile, false)) {
         LOG.debug("- Saving coverage information for file {}", sonarFile.getKey());
-        saveCoverageMeasures(context, fileCoverage, sonarFile);
-        context.saveMeasure(sonarFile, getHitData(fileCoverage));
+        saveCoverageMeasures(context, fileCoverage, sonarFile, it);
+        context.saveMeasure(sonarFile, getHitData(fileCoverage, it));
       }
     }
   }
 
-  private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource<?> resource) {
+  private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource<?> resource, boolean it) {
     double coverage = coverageData.getCoverage();
 
-    context.saveMeasure(resource, TestMetrics.ELOC, (double) coverageData.getCountLines());
-    context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
-    context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
-    context.saveMeasure(resource, CoreMetrics.COVERAGE, convertPercentage(coverage));
-    // LINE_COVERAGE & COVERAGE should not be the same: need to have BRANCH_COVERAGE
-    context.saveMeasure(resource, CoreMetrics.LINE_COVERAGE, convertPercentage(coverage));
+    if (it) {
+      context.saveMeasure(resource, CoreMetrics.IT_LINES_TO_COVER, (double) coverageData.getCountLines());
+      context.saveMeasure(resource, CoreMetrics.IT_UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
+      context.saveMeasure(resource, CoreMetrics.IT_COVERAGE, convertPercentage(coverage));
+      // LINE_COVERAGE & COVERAGE should not be the same: need to have BRANCH_COVERAGE
+      context.saveMeasure(resource, CoreMetrics.IT_LINE_COVERAGE, convertPercentage(coverage));
+    } else {
+      context.saveMeasure(resource, TestMetrics.ELOC, (double) coverageData.getCountLines());
+      context.saveMeasure(resource, CoreMetrics.LINES_TO_COVER, (double) coverageData.getCountLines());
+      context.saveMeasure(resource, CoreMetrics.UNCOVERED_LINES, (double) coverageData.getCountLines() - coverageData.getCoveredLines());
+      context.saveMeasure(resource, CoreMetrics.COVERAGE, convertPercentage(coverage));
+      // LINE_COVERAGE & COVERAGE should not be the same: need to have BRANCH_COVERAGE
+      context.saveMeasure(resource, CoreMetrics.LINE_COVERAGE, convertPercentage(coverage));
+    }
   }
 
   /*
    * Generates a measure that contains the visits of each line of the source file.
    */
-  private Measure getHitData(FileCoverage coverable) {
+  private Measure getHitData(FileCoverage coverable, boolean it) {
+    PropertiesBuilder<String, Integer> lineHitsBuilder = it ? itLineHitsBuilder : this.lineHitsBuilder;
+    
     lineHitsBuilder.clear();
     Map<Integer, SourceLine> lines = coverable.getLines();
     for (SourceLine line : lines.values()) {

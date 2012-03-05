@@ -39,7 +39,6 @@ import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
@@ -48,7 +47,6 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 /**
  * Gets the execution test report from Gallio and pushes data from it into sonar.
@@ -126,15 +124,6 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
   }
   
   private void collect(Project project, Collection<File> reportFiles, SensorContext context) {
-    /*Set<UnitTestReport> reports = Sets.newHashSet();
-    for (File reportFile : reportFiles) {
-      if (reportFile.exists()) {
-        reports.addAll(parser.parse(reportFile));
-      } else {
-        LOG.error("Test report \"{}\" not found", reportFile);
-      }
-    }*/
-    
     
     Map<File, UnitTestReport> fileTestMap = Maps.newHashMap();
     for (File report : reportFiles) {

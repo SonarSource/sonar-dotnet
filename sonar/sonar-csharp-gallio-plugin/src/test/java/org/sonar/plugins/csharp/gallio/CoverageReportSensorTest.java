@@ -63,6 +63,7 @@ public class CoverageReportSensorTest {
   private SensorContext context;
   private CoverageReportSensor sensor;
   private List<FileCoverage> sourceFiles;
+  private List<FileCoverage> itSourceFiles;
 
   @Before
   public void init() {
@@ -98,10 +99,13 @@ public class CoverageReportSensorTest {
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
     
-    File defaultReportFile = new File(solutionDir, "coverage-report.xml"); 
-    
+    File defaultReportFile = new File(solutionDir, "coverage-report.xml");
     sourceFiles = new ArrayList<FileCoverage>();
     when(parser.parse(eq(project), eq(defaultReportFile))).thenReturn(sourceFiles);
+    
+    File defaultItReportFile = new File(solutionDir, "it-coverage-report.xml"); 
+    itSourceFiles = new ArrayList<FileCoverage>();
+    when(parser.parse(eq(project), eq(defaultItReportFile))).thenReturn(itSourceFiles);
 
     context = mock(SensorContext.class);
   }
@@ -157,6 +161,36 @@ public class CoverageReportSensorTest {
     sensor.analyse(project, context);
    
     verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)42));
+  }
+  
+  @Test
+  public void testAnalyseIndexedFileWithIntegTests() {
+    setUpEnv();
+    conf.setProperty(GallioConstants.IT_MODE, "active");
+
+    FileCoverage fileCoverage = mock(FileCoverage.class);
+    sourceFiles.add(fileCoverage);
+    when(fileCoverage.getCoverage()).thenReturn(0.42);
+    
+    FileCoverage itFileCoverage = mock(FileCoverage.class);
+    itSourceFiles.add(itFileCoverage);
+    when(itFileCoverage.getCoverage()).thenReturn(0.36);
+    
+    
+    
+    
+    PowerMockito.mockStatic(org.sonar.api.resources.File.class);
+    org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
+    
+    when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
+    
+    SensorContext context = mock(SensorContext.class);
+    when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
+    
+    sensor.analyse(project, context);
+   
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)42));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.IT_COVERAGE), eq((double)36));
   }
   
   @Test
