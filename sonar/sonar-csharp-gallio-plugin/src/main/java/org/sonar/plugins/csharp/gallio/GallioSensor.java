@@ -57,6 +57,14 @@ public class GallioSensor extends AbstractCSharpSensor {
 
   private CSharpConfiguration configuration;
 
+  private VisualStudioSolution solution;
+
+  private File workDir;
+
+  private boolean safeMode;
+
+  private int timeout;
+
   /**
    * Constructs a {@link GallioSensor}.
    * 
@@ -128,33 +136,50 @@ public class GallioSensor extends AbstractCSharpSensor {
   @Override
   public void analyse(Project project, SensorContext context) {
     
-    VisualStudioSolution solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
+    solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
     
-    File workDir = 
-      new File(solution.getSolutionDir(), getMicrosoftWindowsEnvironment().getWorkingDirectory());
+    workDir = new File(solution.getSolutionDir(), getMicrosoftWindowsEnvironment().getWorkingDirectory());
     if ( !workDir.exists()) {
       workDir.mkdirs();
     }
     
-    String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
-    boolean safeMode = configuration.getBoolean(GallioConstants.SAFE_MODE, false);
-    int timeout = configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE);
+    safeMode = configuration.getBoolean(GallioConstants.SAFE_MODE, false);
+    timeout = configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE);
     
+    String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
+    
+    executeRunner(testAssemblyPatterns, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+    
+    String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
+    if ("active".equals(itExecutionMode)) {
+      String[] itAssemblyPatterns = configuration.getStringArray(GallioConstants.IT_TEST_ASSEMBLIES_KEY);
+      if (itAssemblyPatterns.length == 0) {
+        itAssemblyPatterns = testAssemblyPatterns;
+      }
+      executeRunner(itAssemblyPatterns, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML);
+    }
+
+    // tell that tests were executed so that no other project tries to launch them a second time
+    getMicrosoftWindowsEnvironment().setTestExecutionDone();
+    
+  }
+
+  private void executeRunner(String[] assemblyPatterns, String reportFileName, String coverageReportFileName) {
     try {
       
-      List<File> testAssemblies = findTestAssemblies(solution, testAssemblyPatterns);
+      List<File> testAssemblies = findTestAssemblies(solution, assemblyPatterns);
       
       if (safeMode) {
         for (File assembly : testAssemblies) {
-          File gallioReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_REPORT_XML);
-          File coverageReportFile = new File(workDir, assembly.getName() + "." + GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+          File gallioReportFile = new File(workDir, assembly.getName() + "." + reportFileName);
+          File coverageReportFile = new File(workDir, assembly.getName() + "." + coverageReportFileName);
           GallioRunner runner = createRunner(workDir);
           GallioCommandBuilder builder = createBuilder(runner, Collections.singletonList(assembly), gallioReportFile, coverageReportFile);
           runner.execute(builder, timeout);
         }
       } else {
-        File gallioReportFile = new File(workDir, GallioConstants.GALLIO_REPORT_XML);
-        File coverageReportFile = new File(workDir, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+        File gallioReportFile = new File(workDir, reportFileName);
+        File coverageReportFile = new File(workDir, coverageReportFileName);
         GallioRunner runner = createRunner(workDir);
         GallioCommandBuilder builder = createBuilder(runner, testAssemblies, gallioReportFile, coverageReportFile);
         runner.execute(builder, timeout);
@@ -162,10 +187,6 @@ public class GallioSensor extends AbstractCSharpSensor {
     } catch (GallioException e) {
       throw new SonarException("Gallio execution failed.", e);
     }
-
-    // tell that tests were executed so that no other project tries to launch them a second time
-    getMicrosoftWindowsEnvironment().setTestExecutionDone();
-    
   }
   
   private GallioRunner createRunner(File workDir) {
