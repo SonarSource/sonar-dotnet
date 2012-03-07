@@ -20,7 +20,7 @@
 	<modules>
 		<module>csharp-squid</module>
 		<module>csharp-checks</module>
-    <module>csharp-ssdk</module>
+    <module>csharp-devkit</module>
 		<module>sonar-csharp-squid-plugin</module>
 	</modules>
 	<scm>

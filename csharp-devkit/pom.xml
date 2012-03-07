@@ -5,8 +5,8 @@
     <artifactId>csharp</artifactId>
     <version>1.2-SNAPSHOT</version>
   </parent>
-  <artifactId>csharp-ssdk</artifactId>
-  <name>SonarSource :: C# :: SSDK</name>
+  <artifactId>csharp-devkit</artifactId>
+  <name>SonarSource :: C# :: Devkit</name>
 
   <properties>
     <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>

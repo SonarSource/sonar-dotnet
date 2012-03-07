@@ -4,14 +4,13 @@
  * mailto:contact AT sonarsource DOT com
  */
 
-package com.sonar.csharp.ssdk;
+package com.sonar.csharp.devkit;
+
+import com.sonar.csharp.squid.api.CSharpKeyword;
+import org.sonar.colorizer.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.sonar.colorizer.*;
-
-import com.sonar.csharp.squid.api.CSharpKeyword;
 
 public final class CSharpSourceCodeColorizer {
 
