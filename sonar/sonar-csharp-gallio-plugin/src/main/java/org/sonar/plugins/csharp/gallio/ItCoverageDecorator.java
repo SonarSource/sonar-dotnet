@@ -63,7 +63,7 @@ public class ItCoverageDecorator implements Decorator {
   public ItCoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
     this.vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    this.executionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
     String[] exclusions = configuration.getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY);
     if (exclusions==null) {
       this.excludedAssemblies 

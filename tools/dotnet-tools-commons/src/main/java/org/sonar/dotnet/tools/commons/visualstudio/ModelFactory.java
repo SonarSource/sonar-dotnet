@@ -63,10 +63,15 @@ public final class ModelFactory {
   private static final Logger LOG = LoggerFactory.getLogger(ModelFactory.class);
   private static final String VERSION_KEY = ", Version=";
 
-  /*
+  /**
    * Pattern used to define if a project is a test project or not
    */
   private static String testProjectNamePattern = "*.Tests";
+  
+  /**
+   * Pattern used to define if a project is an integ test project or not
+   */
+  private static String integTestProjectNamePattern = null;
 
   private ModelFactory() {
   }
@@ -79,6 +84,10 @@ public final class ModelFactory {
    */
   public static void setTestProjectNamePattern(String testProjectNamePattern) {
     ModelFactory.testProjectNamePattern = testProjectNamePattern;
+  }
+  
+  public static void setIntegTestProjectNamePattern(String testProjectNamePattern) {
+    ModelFactory.integTestProjectNamePattern = testProjectNamePattern;
   }
 
   /**
@@ -116,11 +125,38 @@ public final class ModelFactory {
 
   /**
    * @param visualStudioProject
+   * @param integTestProjectPatterns TODO
    */
-  protected static void assessTestProject(VisualStudioProject visualStudioProject, String testProjectPatterns) {
+  protected static void assessTestProject(VisualStudioProject visualStudioProject, String testProjectPatterns, String integTestProjectPatterns) {
 
     String assemblyName = visualStudioProject.getAssemblyName();
 
+    boolean testFlag = nameMatchPatterns(assemblyName, testProjectPatterns);
+    boolean integTestFlag = nameMatchPatterns(assemblyName, integTestProjectPatterns);
+    
+    
+    if (testFlag) {
+      visualStudioProject.setUnitTest(true);
+      if (StringUtils.isEmpty(integTestProjectPatterns)) {
+        visualStudioProject.setIntegTest(true);
+      }
+    }
+    
+    if (integTestFlag) {
+      visualStudioProject.setIntegTest(true);
+    }
+    
+    
+    
+    if (testFlag || integTestFlag) {
+      LOG.info("The project '{}' has been qualified as a test project.", visualStudioProject.getName());
+    }
+  }
+  
+  private static boolean nameMatchPatterns(String assemblyName, String testProjectPatterns) {
+    if (StringUtils.isEmpty(testProjectPatterns)) {
+      return false;
+    }
     String[] patterns = StringUtils.split(testProjectPatterns, ";");
     boolean testFlag = false;
 
@@ -130,13 +166,9 @@ public final class ModelFactory {
         break;
       }
     }
-
-    if (testFlag) {
-      LOG.info("The project '{}' has been qualified as a test project.", visualStudioProject.getName());
-    }
-
-    visualStudioProject.setTest(testFlag);
+    return testFlag;
   }
+  
 
   /**
    * Gets the solution from its folder and name.
@@ -350,7 +382,7 @@ public final class ModelFactory {
 
       project.setBinaryReferences(getBinaryReferences(xpath, projectFile));
 
-      assessTestProject(project, testProjectNamePattern);
+      assessTestProject(project, testProjectNamePattern, integTestProjectNamePattern);
 
       return project;
     } catch (XPathExpressionException xpee) {

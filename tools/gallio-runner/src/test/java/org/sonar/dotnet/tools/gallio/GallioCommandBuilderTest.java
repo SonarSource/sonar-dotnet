@@ -66,7 +66,7 @@ public class GallioCommandBuilderTest {
     when(vsTestProject2.getDirectory()).thenReturn(WORK_DIR);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsTestProject1, vsTestProject2));
+    when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsTestProject1, vsTestProject2));
   }
 
   @Test
@@ -309,7 +309,7 @@ public class GallioCommandBuilderTest {
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
     when(vsProject.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Unexisting.assembly"));
     solution = mock(VisualStudioSolution.class);
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject));
+    when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsProject));
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
     builder.setExecutable(TestUtils.getResource("/Runner/FakeProg"));
     builder.setReportFile(GALLIO_REPORT_FILE);

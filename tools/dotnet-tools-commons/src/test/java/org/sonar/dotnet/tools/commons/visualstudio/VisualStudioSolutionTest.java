@@ -61,18 +61,18 @@ public class VisualStudioSolutionTest {
   }
   
   @Test
-  public void testGetTestProjects() throws Exception {
-    VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
-    List<VisualStudioProject> testProjects = solution.getTestProjects();
-    assertEquals(1, testProjects.size());
-  }
+    public void testGetUnitTestProjects() throws Exception {
+      VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
+      List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
+      assertEquals(1, testProjects.size());
+    }
   
   @Test
-  public void testGetTestProjectsNoTest() throws Exception {
-    VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SILVERLIGHT_SOLUTION_PATH));
-    List<VisualStudioProject> testProjects = solution.getTestProjects();
-    assertEquals(0, testProjects.size());
-  }
+    public void testGetUnitTestProjectsNoTest() throws Exception {
+      VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SILVERLIGHT_SOLUTION_PATH));
+      List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
+      assertEquals(0, testProjects.size());
+    }
   
   @Test
   public void testIsAspUsed() throws Exception {

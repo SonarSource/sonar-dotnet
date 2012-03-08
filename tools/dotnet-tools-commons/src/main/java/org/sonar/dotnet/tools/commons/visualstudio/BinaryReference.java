@@ -31,7 +31,7 @@ public class BinaryReference {
 
   private String assemblyName;
   private String version;
-  private String scope;
+  private String scope = "compile";
 
   public String getAssemblyName() {
     return assemblyName;

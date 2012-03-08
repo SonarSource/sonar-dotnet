@@ -218,8 +218,8 @@ public class ModelFactoryTest {
     testProject.setAssemblyName("MyProject.Test");
     VisualStudioProject project = new VisualStudioProject();
     project.setAssemblyName("MyProject");
-    ModelFactory.assessTestProject(project, "*.Test");
-    ModelFactory.assessTestProject(testProject, "*.Test");
+    ModelFactory.assessTestProject(project, "*.Test", null);
+    ModelFactory.assessTestProject(testProject, "*.Test", null);
     assertFalse(project.isTest());
     assertTrue(testProject.isTest());
   }
@@ -235,12 +235,40 @@ public class ModelFactoryTest {
 
     String patterns = "*Test;*.IT";
 
-    ModelFactory.assessTestProject(project, patterns);
-    ModelFactory.assessTestProject(testProject, patterns);
-    ModelFactory.assessTestProject(secondTestProject, patterns);
+    ModelFactory.assessTestProject(project, patterns, null);
+    ModelFactory.assessTestProject(testProject, patterns, null);
+    ModelFactory.assessTestProject(secondTestProject, patterns, null);
     assertFalse(project.isTest());
     assertTrue(testProject.isTest());
     assertTrue(secondTestProject.isTest());
+    assertTrue(testProject.isUnitTest());
+    assertTrue(secondTestProject.isUnitTest());
+    assertTrue(testProject.isIntegTest());
+    assertTrue(secondTestProject.isIntegTest());
+  }
+  
+  @Test
+  public void integTestPatterns() {
+    VisualStudioProject testProject = new VisualStudioProject();
+    testProject.setAssemblyName("MyProjectTest");
+    VisualStudioProject secondTestProject = new VisualStudioProject();
+    secondTestProject.setAssemblyName("MyProject.IT");
+    VisualStudioProject project = new VisualStudioProject();
+    project.setAssemblyName("MyProject");
+
+    String unitPatterns = "*Test";
+    String integPatterns = "*.IT";
+
+    ModelFactory.assessTestProject(project, unitPatterns, integPatterns);
+    ModelFactory.assessTestProject(testProject, unitPatterns, integPatterns);
+    ModelFactory.assessTestProject(secondTestProject, unitPatterns, integPatterns);
+    assertFalse(project.isTest());
+    assertTrue(testProject.isTest());
+    assertTrue(secondTestProject.isTest());
+    assertTrue(testProject.isUnitTest());
+    assertFalse(secondTestProject.isUnitTest());
+    assertFalse(testProject.isIntegTest());
+    assertTrue(secondTestProject.isIntegTest());
   }
 
   @Test

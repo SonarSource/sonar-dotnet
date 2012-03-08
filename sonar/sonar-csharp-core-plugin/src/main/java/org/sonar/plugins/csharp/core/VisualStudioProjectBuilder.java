@@ -165,6 +165,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     try {
       ModelFactory.setTestProjectNamePattern(configuration.getString(CSharpConstants.TEST_PROJECT_PATTERN_KEY,
           CSharpConstants.TEST_PROJECT_PATTERN_DEFVALUE));
+      ModelFactory.setIntegTestProjectNamePattern(configuration.getString(CSharpConstants.IT_PROJECT_PATTERN_KEY,
+          CSharpConstants.IT_PROJECT_PATTERN_DEFVALUE));
       VisualStudioSolution solution = ModelFactory.getSolution(slnFile);
       microsoftWindowsEnvironment.setCurrentSolution(solution);
     } catch (IOException e) {

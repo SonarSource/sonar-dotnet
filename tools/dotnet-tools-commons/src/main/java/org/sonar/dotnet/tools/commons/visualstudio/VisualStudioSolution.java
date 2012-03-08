@@ -271,14 +271,29 @@ public class VisualStudioSolution {
   }
 
   /**
-   * Returns the test projects.
+   * Returns the unit test projects.
    * 
    * @return The projects to return.
    */
-  public List<VisualStudioProject> getTestProjects() {
+  public List<VisualStudioProject> getUnitTestProjects() {
     List<VisualStudioProject> result = new ArrayList<VisualStudioProject>();
     for (VisualStudioProject visualStudioProject : projects) {
-      if (visualStudioProject.isTest()) {
+      if (visualStudioProject.isUnitTest()) {
+        result.add(visualStudioProject);
+      }
+    }
+    return result;
+  }
+  
+  /**
+   * Returns the integ test projects.
+   * 
+   * @return The projects to return.
+   */
+  public List<VisualStudioProject> getIntegTestProjects() {
+    List<VisualStudioProject> result = new ArrayList<VisualStudioProject>();
+    for (VisualStudioProject visualStudioProject : projects) {
+      if (visualStudioProject.isIntegTest()) {
         result.add(visualStudioProject);
       }
     }

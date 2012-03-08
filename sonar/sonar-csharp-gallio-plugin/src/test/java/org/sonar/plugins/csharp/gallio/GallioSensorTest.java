@@ -83,7 +83,7 @@ public class GallioSensorTest {
     
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2, vsTestProject3));
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2, vsTestProject3));
+    when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2, vsTestProject3));
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
@@ -243,7 +243,7 @@ public class GallioSensorTest {
 
   @Test
   public void testShouldNotExecuteOnProjectIfNoTests() throws Exception {
-    when(solution.getTestProjects()).thenReturn(new ArrayList<VisualStudioProject>());
+    when(solution.getUnitTestProjects()).thenReturn(new ArrayList<VisualStudioProject>());
     Configuration conf = new BaseConfiguration();
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));

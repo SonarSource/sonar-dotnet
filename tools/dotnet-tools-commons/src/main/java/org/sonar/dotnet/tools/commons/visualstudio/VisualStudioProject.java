@@ -60,11 +60,14 @@ public class VisualStudioProject {
   private String forcedOutputDir;
   private Map<String, File> buildConfOutputDirMap;
   private File directory;
-  private boolean test;
   private boolean silverlightProject;
   private Map<File, SourceFile> sourceFileMap;
 
   private List<BinaryReference> binaryReferences = new ArrayList<BinaryReference>();
+
+  private boolean unitTest;
+
+  private boolean integTest;
 
   /**
    * Builds a {@link VisualStudioProject} ...
@@ -210,7 +213,7 @@ public class VisualStudioProject {
 
   @Override
   public String toString() {
-    return "Project(name=" + name + ", type=" + type + ", test=" + test + ", directory=" + directory + ", file=" + projectFile
+    return "Project(name=" + name + ", type=" + type + ", directory=" + directory + ", file=" + projectFile
         + ", assemblyName=" + assemblyName + ", rootNamespace=" + rootNamespace + ", debugDir=" + debugOutputDir + ", releaseDir="
         + releaseOutputDir + ")";
   }
@@ -339,26 +342,36 @@ public class VisualStudioProject {
   }
 
   /**
-   * Returns the test.
-   * 
-   * @return The test to return.
+   * @return true if the project contains tests (unit or integ).
    */
   public boolean isTest() {
-    return this.test;
+    return unitTest || integTest;
+  }
+  
+  public boolean isUnitTest() {
+    return this.unitTest;
+  }
+  
+  public boolean isIntegTest() {
+    return this.integTest;
   }
 
-  /**
-   * Sets the test.
-   * 
-   * @param test
-   *          The test to set.
-   */
-  void setTest(boolean test) {
-    this.test = test;
+  
+  void setUnitTest(boolean test) {
+    this.unitTest = test;
+    configTestScope();
+  }
+ 
+  private void configTestScope() {
     for (BinaryReference reference : binaryReferences) {
-      String scope = test ? "test" : "compile";
+      String scope = isTest() ? "test" : "compile";
       reference.setScope(scope);
     }
+  }
+  
+  void setIntegTest(boolean test) {
+    this.integTest = test;
+    configTestScope();
   }
 
   /**

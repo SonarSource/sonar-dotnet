@@ -76,6 +76,9 @@ public final class CSharpConstants {
 
   public static final String TEST_PROJECT_PATTERN_KEY = "sonar.dotnet.visualstudio.testProjectPattern";
   public static final String TEST_PROJECT_PATTERN_DEFVALUE = "*.Tests";
+  
+  public static final String IT_PROJECT_PATTERN_KEY = "sonar.dotnet.visualstudio.itProjectPattern";
+  public static final String IT_PROJECT_PATTERN_DEFVALUE = "";
 
   public static final String SOLUTION_FILE_KEY = "sonar.dotnet.visualstudio.solution.file";
   public static final String SOLUTION_FILE_DEFVALUE = "";

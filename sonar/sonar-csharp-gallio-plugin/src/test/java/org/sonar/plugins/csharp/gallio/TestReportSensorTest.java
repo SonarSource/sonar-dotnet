@@ -76,7 +76,7 @@ public class TestReportSensorTest {
     when(vsTestProject2.isTest()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2));
-    when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2));
+    when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2));
     
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
