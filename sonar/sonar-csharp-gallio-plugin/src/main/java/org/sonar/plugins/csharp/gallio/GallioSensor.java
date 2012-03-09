@@ -109,12 +109,12 @@ public class GallioSensor extends AbstractCSharpSensor {
     }
   }
   
-  private List<File> findTestAssemblies(boolean filterUnitTests, String[] testAssemblyPatterns) throws GallioException {
+  private List<File> findTestAssemblies(boolean it, String[] testAssemblyPatterns) throws GallioException {
     Set<File> assemblyFiles = Sets.newHashSet();
     if (solution != null) {
       
       Collection<VisualStudioProject> testProjects 
-        = filterUnitTests ? solution.getUnitTestProjects() : solution.getIntegTestProjects();  
+        = it ? solution.getIntegTestProjects(): solution.getUnitTestProjects();  
       if (testAssemblyPatterns.length == 0) {
         for (VisualStudioProject visualStudioProject : testProjects) {
           addAssembly(assemblyFiles, visualStudioProject);
@@ -153,21 +153,13 @@ public class GallioSensor extends AbstractCSharpSensor {
     String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
     String gallioFilter = configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE);
     
-    executeRunner(true, testAssemblyPatterns, gallioFilter, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
+    executeRunner(false, testAssemblyPatterns, gallioFilter, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
     
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
     if ("active".equals(itExecutionMode)) {
       String[] itAssemblyPatterns = configuration.getStringArray(GallioConstants.IT_TEST_ASSEMBLIES_KEY);
       String itGallioFilter = configuration.getString(GallioConstants.IT_FILTER_KEY, GallioConstants.FILTER_DEFVALUE);
-      if (itAssemblyPatterns.length == 0 && StringUtils.isEmpty(itGallioFilter)) {
-        // unit and integration tests should not e the same !
-        throw new SonarException(
-            "Integration testing needs at least one of the following properties:\n" 
-            + GallioConstants.IT_TEST_ASSEMBLIES_KEY + "\n" 
-            + GallioConstants.IT_FILTER_KEY
-        );
-      }
-      executeRunner(false, itAssemblyPatterns, itGallioFilter, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML);
+      executeRunner(true, itAssemblyPatterns, itGallioFilter, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML);
     }
 
     // tell that tests were executed so that no other project tries to launch them a second time
@@ -175,10 +167,10 @@ public class GallioSensor extends AbstractCSharpSensor {
     
   }
 
-  private void executeRunner(boolean filterUnitTests, String[] assemblyPatterns, String gallioFilter, String reportFileName, String coverageReportFileName) {
+  private void executeRunner(boolean it, String[] assemblyPatterns, String gallioFilter, String reportFileName, String coverageReportFileName) {
     try {
       
-      List<File> testAssemblies = findTestAssemblies(filterUnitTests, assemblyPatterns);
+      List<File> testAssemblies = findTestAssemblies(it, assemblyPatterns);
       
       if (safeMode) {
         for (File assembly : testAssemblies) {

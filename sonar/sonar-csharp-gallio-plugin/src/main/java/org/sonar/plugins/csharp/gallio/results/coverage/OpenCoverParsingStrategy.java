@@ -46,9 +46,9 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
 
   private static final Logger LOG = LoggerFactory.getLogger(OpenCoverParsingStrategy.class);
   
-  private Map<Integer, File> fileRegistry = Maps.newHashMap();
+  private Map<Integer, File> fileRegistry;
   
-  private Map<File, FileCoverage> fileCoverageRegistry = Maps.newHashMap(); 
+  private Map<File, FileCoverage> fileCoverageRegistry; 
   
   
   public boolean isCompatible(SMInputCursor rootCursor) {
@@ -57,6 +57,9 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
 
   public List<FileCoverage> parse(SensorContext ctx, VisualStudioSolution solution, Project sonarProject, SMInputCursor cursor) {
 
+    fileRegistry = Maps.newHashMap();
+    fileCoverageRegistry = Maps.newHashMap();
+    
     try {
       cursor = cursor.childElementCursor().advance().childElementCursor();
       while (cursor.getNext() != null) {
