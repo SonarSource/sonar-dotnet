@@ -163,7 +163,7 @@ public class CoverageDecoratorTest {
 
   @Test
   public void testDependedUponMetrics() throws Exception {
-    CoverageDecorator decorator = createDecorator();
+    UnitCoverageDecorator decorator = createDecorator();
 
     List<Metric> metrics = Arrays.asList(CoreMetrics.COVERAGE, CoreMetrics.LINE_COVERAGE, CoreMetrics.LINES_TO_COVER,
         CoreMetrics.UNCOVERED_LINES);
@@ -196,7 +196,7 @@ public class CoverageDecoratorTest {
   public void testShouldNotExecuteOnProjectIfSkip() throws Exception {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_SKIP);
-    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, null);
+    CoverageDecorator decorator = new UnitCoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, null);
     assertFalse(decorator.shouldExecuteOnProject(project));
   }
 
@@ -207,9 +207,9 @@ public class CoverageDecoratorTest {
     assertFalse(decorator.shouldExecuteOnProject(project));
   }
 
-  private CoverageDecorator createDecorator() {
+  private UnitCoverageDecorator createDecorator() {
     Configuration conf = new BaseConfiguration();
-    CoverageDecorator decorator = new CoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, resourceHelper);
+    UnitCoverageDecorator decorator = new UnitCoverageDecorator(new CSharpConfiguration(conf), microsoftWindowsEnvironment, resourceHelper);
     return decorator;
   }
 }

@@ -30,32 +30,28 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
 
-/**
- * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage
- * report file.
- */
-public class ItCoverageDecorator extends CoverageDecorator {
 
-  public ItCoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
+public class UnitCoverageDecorator extends CoverageDecorator {
+
+  public UnitCoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
       ResourceHelper resourceHelper) {
     
     super(configuration, microsoftWindowsEnvironment, resourceHelper);
     
-    this.executionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
-    this.testMetric = CoreMetrics.IT_COVERAGE;
+    this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    this.testMetric = CoreMetrics.COVERAGE;
+  }
+  
+  @DependedUpon
+  public List<Metric> generatesCoverageMetrics() {
+    return Arrays.asList(CoreMetrics.COVERAGE, CoreMetrics.LINE_COVERAGE, CoreMetrics.LINES_TO_COVER, CoreMetrics.UNCOVERED_LINES);
   }
 
   @Override
   protected void handleUncoveredResource(DecoratorContext context, double lines) {
-    context.saveMeasure(CoreMetrics.IT_COVERAGE, 0.0);
-    context.saveMeasure(CoreMetrics.IT_LINE_COVERAGE, 0.0);
-    context.saveMeasure(CoreMetrics.IT_LINES_TO_COVER, lines);
-    context.saveMeasure(CoreMetrics.IT_UNCOVERED_LINES, lines);
+    context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
+    context.saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
+    context.saveMeasure(CoreMetrics.LINES_TO_COVER, lines);
+    context.saveMeasure(CoreMetrics.UNCOVERED_LINES, lines);
   }
-
-  @DependedUpon
-  public List<Metric> generatesCoverageMetrics() {
-    return Arrays.asList(CoreMetrics.IT_COVERAGE, CoreMetrics.IT_LINE_COVERAGE, CoreMetrics.IT_LINES_TO_COVER, CoreMetrics.IT_UNCOVERED_LINES);
-  }
-
 }

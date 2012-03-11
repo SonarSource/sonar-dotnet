@@ -19,17 +19,13 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Decorator;
 import org.sonar.api.batch.DecoratorContext;
-import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.Metric;
@@ -50,20 +46,21 @@ import com.google.common.collect.Sets;
  * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage
  * report file.
  */
-public class CoverageDecorator implements Decorator {
+public abstract class CoverageDecorator implements Decorator {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageDecorator.class);
 
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
-  private String executionMode;
-  private Set<String> excludedAssemblies;
-  private VisualStudioSolution vsSolution;
-  private ResourceHelper resourceHelper;
+  protected MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  protected String executionMode;
+  protected Set<String> excludedAssemblies;
+  protected VisualStudioSolution vsSolution;
+  protected ResourceHelper resourceHelper;
+  protected Metric testMetric;
 
-  public CoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
+  protected CoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
     this.vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
-    this.executionMode = configuration.getString(GallioConstants.MODE, "");
+    //this.executionMode = configuration.getString(GallioConstants.MODE, "");
     String[] exclusions = configuration.getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY);
     if (exclusions==null) {
       this.excludedAssemblies 
@@ -87,17 +84,12 @@ public class CoverageDecorator implements Decorator {
     return !isTestProject && !skipMode;
   }
 
-  @DependedUpon
-  public List<Metric> generatesCoverageMetrics() {
-    return Arrays.asList(CoreMetrics.COVERAGE, CoreMetrics.LINE_COVERAGE, CoreMetrics.LINES_TO_COVER, CoreMetrics.UNCOVERED_LINES);
-  }
-
   /**
    * {@inheritDoc}
    */
   @SuppressWarnings("rawtypes")
   public void decorate(Resource resource, DecoratorContext context) {
-    if (ResourceUtils.isFile(resource) && context.getMeasure(CoreMetrics.COVERAGE) == null) {
+    if (ResourceUtils.isFile(resource) && context.getMeasure(testMetric) == null) {
       if (isExcludedFromCoverage(resource)) {
         return;
       }
@@ -108,14 +100,13 @@ public class CoverageDecorator implements Decorator {
         double lines = Math.min(ncloc.getValue(), sts.getValue());
         if (lines > 0d) {
           LOG.debug("Coverage metrics have not been set on '{}': default values will be inserted.", resource.getName());
-          context.saveMeasure(CoreMetrics.COVERAGE, 0.0);
-          context.saveMeasure(CoreMetrics.LINE_COVERAGE, 0.0);
-          context.saveMeasure(CoreMetrics.LINES_TO_COVER, lines);
-          context.saveMeasure(CoreMetrics.UNCOVERED_LINES, lines);
+          handleUncoveredResource(context, lines);
         }
       }
     }
   }
+  
+  protected abstract void handleUncoveredResource(DecoratorContext context, double lines); 
 
   private boolean isExcludedFromCoverage(Resource resource) {
     if (excludedAssemblies.isEmpty()) {

@@ -71,7 +71,26 @@ import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
     @Property(key = GallioConstants.COVERAGE_EXCLUDES_KEY, 
         name = "Coverage excludes", description = "Comma-separated list of namespaces and assemblies excluded from the code coverage. "
             + "For PartCover, the format for an exclusion is : '[assembly]namespace'. "
-            + "For NCover, the format is just the name of the assemblies to exclude.", global = true, project = true) })
+            + "For NCover, the format is just the name of the assemblies to exclude.", global = true, project = true),
+            
+    @Property(key = GallioConstants.IT_MODE, defaultValue = "", 
+        name = "Gallio integration tests activation mode", description = "Possible values : empty (means 'skip'), " +
+        		"'active', 'skip' and 'reuseReport'.", 
+        global = false, project = false),
+    @Property(key = GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the IT Gallio coverage report files",
+            description = "Path to the Gallio coverage report file used when reuse report mode is activated for integration tests. "
+                + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),
+    @Property(key = GallioConstants.IT_REPORTS_PATH_KEY, defaultValue = "", name = "Name of the IT Gallio report files",
+            description = "Path to the Gallio report file used when reuse report mode is activated for integration tests. "
+                + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),
+    @Property(
+        key = GallioConstants.IT_FILTER_KEY,
+        defaultValue = GallioConstants.IT_FILTER_DEFVALUE,
+        name = "Integration test filter",
+        description = "Filter that can be used to execute only a specific integration test category (i.e. CategotyName:integ to consider only tests from the 'integ' category).",
+        global = true, project = true),
+                
+})
 public class GallioPlugin extends SonarPlugin {
 
   /**
@@ -91,7 +110,7 @@ public class GallioPlugin extends SonarPlugin {
     extensions.add(CoverageReportSensor.class);
 
     // Decorators
-    extensions.add(CoverageDecorator.class);
+    extensions.add(UnitCoverageDecorator.class);
     extensions.add(ItCoverageDecorator.class);
     
     // Widget
