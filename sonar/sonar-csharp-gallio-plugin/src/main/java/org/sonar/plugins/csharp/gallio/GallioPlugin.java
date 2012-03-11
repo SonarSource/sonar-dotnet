@@ -88,7 +88,7 @@ import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
         defaultValue = GallioConstants.IT_FILTER_DEFVALUE,
         name = "Integration test filter",
         description = "Filter that can be used to execute only a specific integration test category (i.e. CategotyName:integ to consider only tests from the 'integ' category).",
-        global = true, project = true),
+        global = true, project = true)
                 
 })
 public class GallioPlugin extends SonarPlugin {
