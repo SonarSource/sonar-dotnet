@@ -21,6 +21,10 @@ package org.sonar.dotnet.tools.commons.visualstudio;
 
 import java.util.UUID;
 
+/**
+ * TODO dead code ?
+ *
+ */
 public class ProjectReference {
 
   private String path; 

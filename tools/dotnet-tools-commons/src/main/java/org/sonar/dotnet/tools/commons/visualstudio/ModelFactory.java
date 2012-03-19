@@ -393,8 +393,10 @@ public final class ModelFactory {
   // ???
       Thread.currentThread().setContextClassLoader(savedClassloader);
 
+      /* TODO dead code ?
       project.setProjectReferences(getProjectReferences(xpath, projectFile,
           project));
+*/
 
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]
