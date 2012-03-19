@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -259,6 +260,16 @@ public class VisualStudioSolution {
       }
     }
     return result;
+  }
+
+  public VisualStudioProject getProject(UUID projectGuid) {
+    for (VisualStudioProject p : projects) {
+      if (p.getProjectGuid().equals(projectGuid)) {
+        return p;
+      }
+    }
+
+    return null;
   }
 
   /**

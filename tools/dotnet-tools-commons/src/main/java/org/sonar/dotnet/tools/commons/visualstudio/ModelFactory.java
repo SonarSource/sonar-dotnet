@@ -27,10 +27,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -268,7 +270,7 @@ public final class ModelFactory {
         String projectPath = StringUtils.replace(matcher.group(2), "\\", File.separatorChar + "");
 
         File projectFile = new File(baseDirectory, projectPath);
-        if ( !projectFile.exists()) {
+        if (!projectFile.exists()) {
           throw new FileNotFoundException("Could not find the project file: " + projectFile);
         }
         VisualStudioProject project = getProject(projectFile, projectName, buildConfigurations);
@@ -353,6 +355,7 @@ public final class ModelFactory {
       XPathExpression releaseOutputExpression = xpath
           .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
       XPathExpression silverlightExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
+      XPathExpression projectGuidExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:ProjectGuid");
 
       // Extracts the properties of a Visual Studio Project
       String typeStr = extractProjectProperty(projectTypeExpression, projectFile);
@@ -361,6 +364,10 @@ public final class ModelFactory {
       String rootNamespace = extractProjectProperty(rootNamespaceExpression, projectFile);
       String debugOutput = extractProjectProperty(debugOutputExpression, projectFile);
       String releaseOutput = extractProjectProperty(releaseOutputExpression, projectFile);
+      String projectGuid = extractProjectProperty(projectGuidExpression, projectFile);
+
+      // because the GUID starts with { and ends with }, remove these characters
+      projectGuid = projectGuid.substring(1, projectGuid.length() - 2);
 
       // Assess if the artifact is a library or an executable
       ArtifactType type = ArtifactType.LIBRARY;
@@ -368,6 +375,7 @@ public final class ModelFactory {
         type = ArtifactType.EXECUTABLE;
       }
       // The project is populated
+      project.setProjectGuid(UUID.fromString(projectGuid));
       project.setProjectFile(projectFile);
       project.setType(type);
       project.setDirectory(projectDir);
@@ -382,6 +390,43 @@ public final class ModelFactory {
 
       project.setBinaryReferences(getBinaryReferences(xpath, projectFile));
 
+  // ???
+      Thread.currentThread().setContextClassLoader(savedClassloader);
+
+      project.setProjectReferences(getProjectReferences(xpath, projectFile,
+          project));
+
+      // Get all source files to find the assembly version
+      // [assembly: AssemblyVersion("1.0.0.0")]
+      Collection<SourceFile> sourceFiles = project.getSourceFiles();
+
+      String version = null;
+
+      // first parse: in general, it's in the "Properties\AssemblyInfo.cs"
+      for (SourceFile file : sourceFiles)
+      {
+        if (file.getName().equalsIgnoreCase("assemblyinfo.cs"))
+        {
+          version = tryToGetVersion(file);
+
+          if (version != null) {
+            break;
+          }
+        }
+      }
+
+      // second parse: try to read all files
+      for (SourceFile file : sourceFiles)
+      {
+        version = tryToGetVersion(file);
+
+        if (version != null) {
+          break;
+        }
+      }
+
+      project.setAssemblyVersion(version);
+
       assessTestProject(project, testProjectNamePattern, integTestProjectNamePattern);
 
       return project;
@@ -391,6 +436,27 @@ public final class ModelFactory {
       // Replaces the class loader after usage
       Thread.currentThread().setContextClassLoader(savedClassloader);
     }
+  }
+
+  private static String tryToGetVersion(SourceFile file) {
+    String content;
+    try {
+      content = org.apache.commons.io.FileUtils.readFileToString(file.getFile(), "UTF-8");
+      if (content.startsWith("\uFEFF") || content.startsWith("\uFFFE")) {
+        content = content.substring(1);
+      }
+
+      Pattern p = Pattern.compile("^[^/]*\\[assembly:\\sAssemblyVersion\\(\"([^\"]*)\"\\)\\].*$", Pattern.MULTILINE);
+      Matcher m = p.matcher(content);
+      if (m.find())
+      {
+        return m.group(1);
+      }
+
+    } catch (IOException e) {
+      LOG.warn("Not able to read the file " + file.getFile().getAbsolutePath() + " to find project version", e);
+    }
+    return null;
   }
 
   private static List<BinaryReference> getBinaryReferences(XPath xpath, File projectFile) throws DotNetToolsException {
@@ -438,6 +504,48 @@ public final class ModelFactory {
             reference.setAssemblyName(assemblyName);
             reference.setVersion(version);
           }
+          result.add(reference);
+        }
+      }
+
+    } catch (XPathExpressionException exception) {
+      // Should not happen
+      LOG.debug("xpath error", exception);
+    } catch (FileNotFoundException exception) {
+      // Should not happen
+      LOG.debug("project file not found", exception);
+    }
+    return result;
+  }
+
+  private static List<ProjectReference> getProjectReferences(XPath xpath, File projectFile, VisualStudioProject project) throws DotNetToolsException {
+    List<ProjectReference> result = new ArrayList<ProjectReference>();
+    try {
+
+      XPathExpression projectRefExpression = xpath.compile("/vst:Project/vst:ItemGroup/vst:ProjectReference");
+
+      InputSource inputSource = new InputSource(new FileInputStream(projectFile));
+      NodeList nodes = (NodeList) projectRefExpression.evaluate(inputSource, XPathConstants.NODESET);
+
+      int countNodes = nodes.getLength();
+      for (int idxNode = 0; idxNode < countNodes; idxNode++) {
+        Element includeElement = (Element) nodes.item(idxNode);
+        // We filter the files
+        String includeAttr = includeElement.getAttribute("Include");
+        if (StringUtils.isEmpty(includeAttr)) {
+          LOG.debug("Project reference ignored, Include attribute missing");
+        } else {
+          ProjectReference reference = new ProjectReference();
+
+          String projectPath = projectFile.getParent() + "\\" + includeAttr;
+          File referencedProjectFile = new File(projectPath);
+
+          VisualStudioProject referencedProject = getProject(referencedProjectFile);
+
+          reference.setName(referencedProject.getName());
+          reference.setPath(referencedProject.getDirectory().getPath());
+          reference.setGuid(referencedProject.getProjectGuid());
+
           result.add(reference);
         }
       }
