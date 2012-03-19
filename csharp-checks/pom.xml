@@ -1,17 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>com.sonarsource.csharp</groupId>
     <artifactId>csharp</artifactId>
     <version>1.2-SNAPSHOT</version>
   </parent>
+
   <artifactId>csharp-checks</artifactId>
+
   <name>SonarSource :: C# :: Checks</name>
 
   <properties>
     <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -41,12 +44,12 @@
       <groupId>com.sonarsource.sslr</groupId>
       <artifactId>sslr-squid-bridge</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>com.sonarsource.sslr</groupId>
       <artifactId>sslr-testing-harness</artifactId>
-      <scope>test</scope>        
-    </dependency>  
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

@@ -1,40 +1,47 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.sonarsource.csharp</groupId>
-	<artifactId>csharp</artifactId>
-	<packaging>pom</packaging>
-	<version>1.2-SNAPSHOT</version>
-	<name>SonarSource :: C#</name>
-	<parent>
-		<groupId>com.sonarsource.parent</groupId>
-		<artifactId>parent</artifactId>
-		<version>13</version>
-	</parent>
-	<description>SonarSource C# modules for the C# ecosystem</description>
-	<properties>
-		<sonar.version>2.11</sonar.version>
-		<csharp.core.version>1.2</csharp.core.version>
-		<sslrVersion>1.9</sslrVersion>
-	</properties>
-	<modules>
-		<module>csharp-squid</module>
-		<module>csharp-checks</module>
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.sonarsource.parent</groupId>
+    <artifactId>parent</artifactId>
+    <version>13</version>
+  </parent>
+
+  <groupId>com.sonarsource.csharp</groupId>
+  <artifactId>csharp</artifactId>
+  <version>1.2-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>SonarSource :: C#</name>
+  <description>SonarSource C# modules for the C# ecosystem</description>
+
+  <modules>
+    <module>csharp-squid</module>
+    <module>csharp-checks</module>
     <module>csharp-devkit</module>
-		<module>sonar-csharp-squid-plugin</module>
-	</modules>
-	<scm>
-		<connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
-		<developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
-		<url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
-	</scm>
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.sonarsource.com/browse/CSHARP</url>
-	</issueManagement>
-	<dependencyManagement>
-		<dependencies>
-			<!-- sonarsource -->
+    <module>sonar-csharp-squid-plugin</module>
+  </modules>
+
+  <scm>
+    <connection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</connection>
+    <developerConnection>scm:svn:https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</developerConnection>
+    <url>https://subversion.assembla.com/svn/sonarsourcecode/trunk/csharp</url>
+  </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.sonarsource.com/browse/CSHARP</url>
+  </issueManagement>
+
+  <properties>
+    <sonar.version>2.11</sonar.version>
+    <csharp.core.version>1.2</csharp.core.version>
+    <sslrVersion>1.9</sslrVersion>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- sonarsource -->
       <dependency>
         <groupId>com.sonarsource.sslr</groupId>
         <artifactId>sslr-core</artifactId>
@@ -60,139 +67,141 @@
         <artifactId>csharp-checks</artifactId>
         <version>${project.version}</version>
       </dependency>
-			<!-- sonar open-source -->
-			<dependency>
-				<groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-				<artifactId>sonar-csharp-core-plugin</artifactId>
-				<version>${csharp.core.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-channel</artifactId>
-				<version>${sonar.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-squid</artifactId>
-				<version>${sonar.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-plugin-api</artifactId>
-				<version>${sonar.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-duplications</artifactId>
-				<version>${sonar.version}</version>
-			</dependency>
+      <!-- sonar open-source -->
+      <dependency>
+        <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
+        <artifactId>sonar-csharp-core-plugin</artifactId>
+        <version>${csharp.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-channel</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-squid</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-plugin-api</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-duplications</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-check-api</artifactId>
         <version>${sonar.version}</version>
       </dependency>   
-			<!-- Other dependencies -->
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.4</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>1.4</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.collections</groupId>
-				<artifactId>google-collections</artifactId>
-				<version>1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>1.5.6</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>1.5.6</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>0.9.15</version>
-			</dependency>
+      <!-- Other dependencies -->
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.4</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.4</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.collections</groupId>
+        <artifactId>google-collections</artifactId>
+        <version>1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.5.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>1.5.6</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>0.9.15</version>
+      </dependency>
       <dependency>
         <groupId>ch.qos.logback</groupId>
         <artifactId>logback-core</artifactId>
         <version>0.9.15</version>
       </dependency>
-			<!-- Unit tests -->
+      <!-- Unit tests -->
       <dependency>
         <groupId>com.sonarsource.sslr</groupId>
         <artifactId>sslr-testing-harness</artifactId>
         <version>${sslrVersion}</version>
         <scope>test</scope>
-      </dependency> 
-			<dependency>
-				<groupId>org.codehaus.sonar</groupId>
-				<artifactId>sonar-testing-harness</artifactId>
-				<version>${sonar.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.7</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hamcrest</groupId>
-				<artifactId>hamcrest-all</artifactId>
-				<version>1.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-all</artifactId>
-				<version>1.7</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<build>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.codehaus.sonar
-										</groupId>
-										<artifactId>
-											sonar-packaging-maven-plugin
-										</artifactId>
-										<versionRange>
-											[1.1,)
-										</versionRange>
-										<goals>
-											<goal>
-												check-dependencies
-											</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-testing-harness</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-all</artifactId>
+        <version>1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-all</artifactId>
+        <version>1.7</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>
+                      org.codehaus.sonar
+                    </groupId>
+                    <artifactId>
+                      sonar-packaging-maven-plugin
+                    </artifactId>
+                    <versionRange>
+                      [1.1,)
+                    </versionRange>
+                    <goals>
+                      <goal>
+                        check-dependencies
+                      </goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
 </project>
