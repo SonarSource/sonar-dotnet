@@ -63,7 +63,6 @@ import org.xml.sax.InputSource;
 public final class ModelFactory {
 
   private static final Logger LOG = LoggerFactory.getLogger(ModelFactory.class);
-  private static final String VERSION_KEY = ", Version=";
 
   /**
    * Pattern used to define if a project is a test project or not
@@ -388,15 +387,9 @@ public final class ModelFactory {
         project.setSilverlightProject(true);
       }
 
-      project.setBinaryReferences(getBinaryReferences(xpath, projectFile));
-
   // ???
       Thread.currentThread().setContextClassLoader(savedClassloader);
 
-      /* TODO dead code ?
-      project.setProjectReferences(getProjectReferences(xpath, projectFile,
-          project));
-*/
 
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]
@@ -459,107 +452,6 @@ public final class ModelFactory {
       LOG.warn("Not able to read the file " + file.getFile().getAbsolutePath() + " to find project version", e);
     }
     return null;
-  }
-
-  private static List<BinaryReference> getBinaryReferences(XPath xpath, File projectFile) throws DotNetToolsException {
-    List<BinaryReference> result = new ArrayList<BinaryReference>();
-    try {
-
-      XPathExpression targetFwkIdExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:TargetFrameworkIdentifier");
-      XPathExpression targetFwkVersionExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:TargetFrameworkVersion");
-
-      String fwkId = extractProjectProperty(targetFwkIdExpression, projectFile);
-      String fwkversion = extractProjectProperty(targetFwkVersionExpression, projectFile);
-
-      final String systemVersion;
-      if (StringUtils.isEmpty(fwkId)) {
-        systemVersion = fwkversion;
-      } else {
-        systemVersion = fwkId + '.' + fwkversion;
-      }
-
-      XPathExpression binaryRefExpression = xpath.compile("/vst:Project/vst:ItemGroup/vst:Reference");
-      InputSource inputSource = new InputSource(new FileInputStream(projectFile));
-      NodeList nodes = (NodeList) binaryRefExpression.evaluate(inputSource, XPathConstants.NODESET);
-      int countNodes = nodes.getLength();
-      for (int idxNode = 0; idxNode < countNodes; idxNode++) {
-        Element includeElement = (Element) nodes.item(idxNode);
-        // We filter the files
-        String includeAttr = includeElement.getAttribute("Include");
-        if (StringUtils.isEmpty(includeAttr)) {
-          LOG.debug("Binary reference ignored, Include attribute missing");
-        } else {
-          BinaryReference reference = new BinaryReference();
-
-          int versionIndex = includeAttr.indexOf(VERSION_KEY);
-          if (versionIndex == -1) {
-            reference.setAssemblyName(includeAttr);
-            reference.setVersion(systemVersion);
-          } else {
-            String assemblyName = includeAttr.substring(0, versionIndex);
-            int versionEndIndex = includeAttr.indexOf(",", versionIndex + 1);
-            if (versionEndIndex < 0) {
-              versionEndIndex = includeAttr.length();
-            }
-
-            String version = includeAttr.substring(versionIndex + VERSION_KEY.length(), versionEndIndex);
-            reference.setAssemblyName(assemblyName);
-            reference.setVersion(version);
-          }
-          result.add(reference);
-        }
-      }
-
-    } catch (XPathExpressionException exception) {
-      // Should not happen
-      LOG.debug("xpath error", exception);
-    } catch (FileNotFoundException exception) {
-      // Should not happen
-      LOG.debug("project file not found", exception);
-    }
-    return result;
-  }
-
-  private static List<ProjectReference> getProjectReferences(XPath xpath, File projectFile, VisualStudioProject project) throws DotNetToolsException {
-    List<ProjectReference> result = new ArrayList<ProjectReference>();
-    try {
-
-      XPathExpression projectRefExpression = xpath.compile("/vst:Project/vst:ItemGroup/vst:ProjectReference");
-
-      InputSource inputSource = new InputSource(new FileInputStream(projectFile));
-      NodeList nodes = (NodeList) projectRefExpression.evaluate(inputSource, XPathConstants.NODESET);
-
-      int countNodes = nodes.getLength();
-      for (int idxNode = 0; idxNode < countNodes; idxNode++) {
-        Element includeElement = (Element) nodes.item(idxNode);
-        // We filter the files
-        String includeAttr = includeElement.getAttribute("Include");
-        if (StringUtils.isEmpty(includeAttr)) {
-          LOG.debug("Project reference ignored, Include attribute missing");
-        } else {
-          ProjectReference reference = new ProjectReference();
-
-          String projectPath = projectFile.getParent() + "\\" + includeAttr;
-          File referencedProjectFile = new File(projectPath);
-
-          VisualStudioProject referencedProject = getProject(referencedProjectFile);
-
-          reference.setName(referencedProject.getName());
-          reference.setPath(referencedProject.getDirectory().getPath());
-          reference.setGuid(referencedProject.getProjectGuid());
-
-          result.add(reference);
-        }
-      }
-
-    } catch (XPathExpressionException exception) {
-      // Should not happen
-      LOG.debug("xpath error", exception);
-    } catch (FileNotFoundException exception) {
-      // Should not happen
-      LOG.debug("project file not found", exception);
-    }
-    return result;
   }
 
   public static VisualStudioProject getWebProject(File solutionRoot, File projectRoot, String projectName, String definition)

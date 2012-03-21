@@ -66,9 +66,6 @@ public class VisualStudioProject {
   private boolean silverlightProject;
   private Map<File, SourceFile> sourceFileMap;
 
-  private List<BinaryReference> binaryReferences = new ArrayList<BinaryReference>();
-  private List<ProjectReference> projectReferences = new ArrayList<ProjectReference>();
-
   private boolean unitTest;
 
   private boolean integTest;
@@ -378,19 +375,10 @@ public class VisualStudioProject {
   
   void setUnitTest(boolean test) {
     this.unitTest = test;
-    configTestScope();
-  }
- 
-  private void configTestScope() {
-    for (BinaryReference reference : binaryReferences) {
-      String scope = isTest() ? "test" : "compile";
-      reference.setScope(scope);
-    }
   }
   
   void setIntegTest(boolean test) {
     this.integTest = test;
-    configTestScope();
   }
 
   /**
@@ -564,23 +552,7 @@ public class VisualStudioProject {
   public boolean isSilverlightProject() {
     return silverlightProject;
   }
-
-  public List<BinaryReference> getBinaryReferences() {
-    return binaryReferences;
-  }
-
-  public List<ProjectReference> getProjectReferences() {
-    return projectReferences;
-  }
-
-  void setBinaryReferences(List<BinaryReference> binaryReferences) {
-    this.binaryReferences = binaryReferences;
-  }
-
-  public void setProjectReferences(List<ProjectReference> projectReferences) {
-    this.projectReferences = projectReferences;
-  }
-
+  
   void setBuildConfOutputDirMap(Map<String, File> buildConfOutputDirMap) {
     this.buildConfOutputDirMap = buildConfOutputDirMap;
   }

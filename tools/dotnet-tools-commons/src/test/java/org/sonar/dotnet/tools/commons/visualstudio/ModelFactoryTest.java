@@ -31,7 +31,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.matchers.JUnitMatchers.containsString;
-import static org.junit.matchers.JUnitMatchers.hasItems;
 
 import java.io.File;
 import java.util.Collection;
@@ -41,7 +40,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
-import org.sonar.dotnet.tools.commons.visualstudio.BinaryReference;
 import org.sonar.dotnet.tools.commons.visualstudio.ModelFactory;
 import org.sonar.dotnet.tools.commons.visualstudio.SourceFile;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
@@ -110,35 +108,6 @@ public class ModelFactoryTest {
     VisualStudioProject project = solution.getProject("Example.Core");
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 6, files.size());
-    List<BinaryReference> references = project.getBinaryReferences();
-    assertTrue(references.size() > 0);
-
-    BinaryReference systemReference = new BinaryReference();
-    systemReference.setAssemblyName("System.Xml.Linq");
-    systemReference.setVersion("v3.5");
-    systemReference.setScope("compile");
-
-    assertThat(references, hasItems(systemReference));
-
-    VisualStudioProject testProject = solution.getProject("Example.Core.Tests");
-    assertThat(testProject.isTest(), is(true));
-    List<BinaryReference> testReferences = testProject.getBinaryReferences();
-    BinaryReference nunitReference = new BinaryReference();
-    nunitReference.setAssemblyName("nunit.core.interfaces");
-    nunitReference.setVersion("2.4.8.0");
-    nunitReference.setScope("test");
-
-    assertThat(testReferences, hasItems(nunitReference));
-
-    // same test with the core nunit reference, defined a litle bit differently in
-    // the csproj file
-    BinaryReference nunitCoreReference = new BinaryReference();
-    nunitCoreReference.setAssemblyName("nunit.core");
-    nunitCoreReference.setVersion("2.4.8.0");
-    nunitCoreReference.setScope("test");
-
-    assertThat(testReferences, hasItems(nunitCoreReference));
-
   }
 
   @Test
