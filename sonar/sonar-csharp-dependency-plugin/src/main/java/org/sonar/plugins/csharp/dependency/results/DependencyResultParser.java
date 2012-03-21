@@ -54,24 +54,22 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
   private CSharpResourcesBridge csharpResourcesBridge;
 
   private SensorContext context;
+  
+  private String scope;
 
   public DependencyResultParser(CSharpResourcesBridge csharpResourcesBridge) {
     super();
     this.csharpResourcesBridge = csharpResourcesBridge;
   }
 
-  public Project getProject() {
-    return project;
+  public void setScope(String scope) {
+    this.scope = scope;
   }
 
   public void setProject(Project project) {
     this.project = project;
   }
-
-  public SensorContext getContext() {
-    return context;
-  }
-
+  
   public void setContext(SensorContext context) {
     this.context = context;
   }
@@ -87,7 +85,7 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
       parseAssemblyBlocs(assemblyCursor);
       cursor.getStreamReader().closeCompletely();
     } catch (XMLStreamException e) {
-      throw new SonarException("Error while reading Gendarme result file: " + file.getAbsolutePath(), e);
+      throw new SonarException("Error while reading dependencyparser result file: " + file.getAbsolutePath(), e);
     } catch (FileNotFoundException e) {
       throw new SonarException("Cannot find DependencyParser result file: " + file.getAbsolutePath(), e);
     } finally {
@@ -108,9 +106,8 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
 
         // ignore references from another project of the solution, because we will resolve that later
         if (from instanceof Project && !from.equals(this.project)) {
-          from = null; // what is the point of assigning null ?
-        }
-        else {
+          from = null; // TODO what is the point of assigning null ?
+        } else {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
             if (childCursor.getLocalName().equals("References")) {
@@ -138,7 +135,7 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
 
         // keep the dependency in cache
         Dependency dependency = new Dependency(from, to);
-        dependency.setUsage("compile"); // TODO could be test as well
+        dependency.setUsage(scope);
         dependency.setWeight(1);
         context.saveDependency(dependency);
         
@@ -224,8 +221,8 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
     // if not found in the solution, get the binary
     if (result == null) {
 
-      Library library = new Library(name, version);
-      library.setName(name + " " + version); // TODO do we need the version twice ?
+      Library library = new Library(name, version); // key, version
+      library.setName(name);
       result = context.getResource(library);
 
       // not already exists, save it

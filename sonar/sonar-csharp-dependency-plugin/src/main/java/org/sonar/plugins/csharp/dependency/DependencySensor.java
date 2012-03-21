@@ -63,6 +63,9 @@ public class DependencySensor extends AbstractCSharpSensor {
     dependencyParserResultParser.setContext(context);
     dependencyParserResultParser.setEncoding(fileSystem.getSourceCharset());
     dependencyParserResultParser.setProject(project);
+    
+    String scope = isTestProject(project) ? "test" : "compile";
+    dependencyParserResultParser.setScope(scope);
 
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();

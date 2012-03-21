@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dependencies name="Example.Core" version="1.0.0.0">
+  <Assembly name="Example.Core" version="1.0.0.0">
+    <References>
+      <Reference name="mscorlib" fullName="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="2.0.0.0" />
+    </References>
+    <TypeReferences>
+      <From fullname="Example.Core.Dummy" />
+      <From fullname="Example.Core.IMoney">
+        <To fullname="Example.Core.Money" />
+        <To fullname="Example.Core.MoneyBag" />
+      </From>
+      <From fullname="Example.Core.Model.SubType" />
+      <From fullname="Example.Core.Money">
+        <To fullname="Example.Core.IMoney" />
+        <To fullname="Example.Core.MoneyBag" />
+      </From>
+      <From fullname="Example.Core.MoneyBag">
+        <To fullname="Example.Core.IMoney" />
+        <To fullname="Example.Core.Money" />
+      </From>
+      <From fullname="Example.Core.SampleMeasure/Possible" />
+      <From fullname="Example.Core.SampleMeasure" />
+    </TypeReferences>
+  </Assembly>
+</Dependencies>

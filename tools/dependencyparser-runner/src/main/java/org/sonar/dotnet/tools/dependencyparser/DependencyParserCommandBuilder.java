@@ -31,7 +31,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 
 /**
- * Class used to build the command line to run Gendarme.
+ * Class used to build the command line to run the dependencyparser tool.
  */
 public final class DependencyParserCommandBuilder extends CilToolCommandBuilderSupport {
 
