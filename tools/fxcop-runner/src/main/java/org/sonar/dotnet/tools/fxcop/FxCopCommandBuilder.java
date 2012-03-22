@@ -25,7 +25,7 @@ import java.util.Collection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.CilToolCommandBuilderSupport;
+import org.sonar.dotnet.tools.commons.CilRuleEngineCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
@@ -34,7 +34,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 /**
  * Class used to build the command line to run FxCop.
  */
-public class FxCopCommandBuilder extends CilToolCommandBuilderSupport { // NOSONAR Not final, because can't be mocked otherwise
+public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { // NOSONAR Not final, because can't be mocked otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopCommandBuilder.class);
   private static final int DEFAULT_TIMEOUT = 10;

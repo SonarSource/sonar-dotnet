@@ -27,7 +27,7 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.CilToolCommandBuilderSupport;
+import org.sonar.dotnet.tools.commons.CilRuleEngineCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
@@ -35,7 +35,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 /**
  * Class used to build the command line to run Gendarme.
  */
-public final class GendarmeCommandBuilder extends CilToolCommandBuilderSupport {
+public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSupport {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeCommandBuilder.class);
 
