@@ -45,7 +45,7 @@ public abstract class CilToolCommandBuilderSupport {
   
   protected VisualStudioSolution solution;
   protected VisualStudioProject vsProject;
-  protected File configFile;
+  
   protected File executable;
   protected String buildConfigurations = "Debug";
   protected File reportFile;
@@ -78,25 +78,14 @@ public abstract class CilToolCommandBuilderSupport {
   }
   
   /**
-   * Set the configuration file that must be used to perform the analysis. It is mandatory.
-   * 
-   * @param configFile
-   *          the file
-   * @return the current builder
-   */
-  public void setConfigFile(File configFile) {
-    this.configFile = configFile;
-  }
-  
-  /**
    * Sets the executable
    * 
    * @param executable
    *          the executable
    * 
    */
-  public void setExecutable(File fxCopExecutable) {
-    this.executable = fxCopExecutable;
+  public void setExecutable(File executable) {
+    this.executable = executable;
   }
   
   /**
@@ -129,9 +118,6 @@ public abstract class CilToolCommandBuilderSupport {
   }
   
   protected void validate(Collection<File> assemblyToScanFiles) {
-    if (configFile == null || !configFile.exists()) {
-      throw new IllegalStateException("The configuration file does not exist.");
-    }
     if (assemblyToScanFiles.isEmpty()) {
       throw new IllegalStateException(
           "No assembly to scan. Please check your project's FxCop plugin configuration ('sonar.dotnet.assemblies' property).");
