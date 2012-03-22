@@ -86,10 +86,4 @@ public final class DependencyParserCommandBuilder extends CilToolCommandBuilderS
 
     return command;
   }
-  
-  @Override
-  protected void validate(Collection<File> assemblyToScanFiles) {
-    // don't validate
-    // TODO why not validate ?
-  }
 }

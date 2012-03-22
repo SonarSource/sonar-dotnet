@@ -20,56 +20,66 @@
 package org.sonar.dotnet.tools.dependencyparser;
 
 /**
- * Exception generated for DependencyParser execution.
- * TODO refactor add more exception classes
+ * Exceptions generated for DependencyParser execution.
  */
-public class DependencyParserException extends Exception {
+public abstract class DependencyParserException extends Exception {
 
-  private static final long serialVersionUID = -8744090490644930724L;
-
+  private static final long serialVersionUID = 1L;
+  
+  private static final String ERROR_MSG = "DependencyParser analysis failed: ";
   private static final int IO_ERROR = 2;
   private static final int CONFIG_ERROR = 3;
   private static final int UNKNOWN_ERROR = 4;
 
-  /**
-   * Creates a new exception with the message corresponding to the given exit code.
-   * 
-   * @param exitCode
-   *          the exit code
-   */
-  public DependencyParserException(int exitCode) {
-    super("DependencyParser analysis failed: " + getSpecificMessage(exitCode));
-  }
-
-  private static String getSpecificMessage(int exitCode) {
-    String specificMessage = "";
+  public static DependencyParserException createFromCode(int exitCode) {
+    final DependencyParserException ex;
     switch (exitCode) {
       case IO_ERROR:
-        specificMessage = "execution was interrupted by I/O errors (e.g. missing files).";
+        ex = new IODependencyParserException();
         break;
       case CONFIG_ERROR:
-        specificMessage = "errors found in the (default or user supplied) configuration files.";
+        ex = new ConfigDependencyParserException();
         break;
       case UNKNOWN_ERROR:
       default:
-        specificMessage = "execution was interrupted by a non-handled exception. This is likely a bug inside DependencyParser...";
+        ex = new UnknownDependencyParserException();
         break;
     }
-    return specificMessage;
+    return ex;
   }
 
   /**
    * {@inheritDoc}
    */
-  public DependencyParserException(String message) {
+  protected DependencyParserException(String message) {
     super(message);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public DependencyParserException(String message, Throwable cause) {
-    super(message, cause);
+  public static class IODependencyParserException extends DependencyParserException {
+
+    private static final long serialVersionUID = 1L;
+
+    public IODependencyParserException() {
+      super(ERROR_MSG + "execution was interrupted by I/O errors (e.g. missing files).");
+    }
+  }
+  
+  public static class ConfigDependencyParserException extends DependencyParserException {
+
+    private static final long serialVersionUID = 1L;
+
+    public ConfigDependencyParserException() {
+      super(ERROR_MSG + "errors found in the (default or user supplied) configuration files.");
+    }
+  }
+  
+  public static class UnknownDependencyParserException extends DependencyParserException {
+
+    private static final long serialVersionUID = 1L;
+
+    public UnknownDependencyParserException() {
+      super(ERROR_MSG + "execution was interrupted by a non-handled exception. This is likely a bug inside DependencyParser...");
+    }
   }
 
 }

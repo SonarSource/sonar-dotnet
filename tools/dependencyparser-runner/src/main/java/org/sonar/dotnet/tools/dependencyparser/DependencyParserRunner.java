@@ -26,6 +26,7 @@ import java.net.URL;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.dotnet.tools.commons.utils.ZipUtils;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
@@ -82,7 +83,7 @@ public class DependencyParserRunner { // NOSONAR : can't mock it otherwise
       ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!").substring(5), "dependencyparser-"
           + EMBEDDED_VERSION, tempFolder);
     } catch (IOException e) {
-      throw new DependencyParserException("Could not extract the embedded DependencyParser executable: " + e.getMessage(), e);
+      throw new SonarException("Could not extract the embedded DependencyParser executable", e);
     }
   }
 
@@ -112,11 +113,11 @@ public class DependencyParserRunner { // NOSONAR : can't mock it otherwise
    *           if DependencyParser fails to execute
    */
   public void execute(DependencyParserCommandBuilder dependencyParserCommandBuilder, int timeoutMinutes) throws DependencyParserException {
-    LOG.debug("Executing Gendarme program...");
+    LOG.debug("Executing Dependecyparser program...");
 
     int exitCode = CommandExecutor.create().execute(dependencyParserCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
     if (exitCode != 0) {
-      throw new DependencyParserException(exitCode);
+      throw DependencyParserException.createFromCode(exitCode);
     }
   }
 
