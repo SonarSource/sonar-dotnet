@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import org.apache.commons.io.IOUtils;
@@ -45,55 +46,36 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.core.AbstractStaxParser;
 
-public class DependencyResultParser extends AbstractStaxParser implements BatchExtension {
+public class DependencyResultParser implements BatchExtension {
 
   private static final Logger LOG = LoggerFactory.getLogger(DependencyResultParser.class);
 
-  private Project project;
+  private final CSharpResourcesBridge csharpResourcesBridge;
 
-  private CSharpResourcesBridge csharpResourcesBridge;
-
-  private SensorContext context;
+  private final SensorContext context;
   
-  private String scope;
-
-  public DependencyResultParser(CSharpResourcesBridge csharpResourcesBridge) {
+  private final Project project;
+ 
+  public DependencyResultParser(CSharpResourcesBridge csharpResourcesBridge, Project project, SensorContext context) {
     super();
     this.csharpResourcesBridge = csharpResourcesBridge;
-  }
-
-  public void setScope(String scope) {
-    this.scope = scope;
-  }
-
-  public void setProject(Project project) {
+    this.context = context;
     this.project = project;
   }
   
-  public void setContext(SensorContext context) {
-    this.context = context;
-  }
-
-  @Override
-  public void parse(File file) {
-    SMInputFactory inputFactory = initStax();
-    FileInputStream fileInputStream = null;
+  public void parse(String scope, File file) {
+    SMInputFactory inputFactory = new SMInputFactory(XMLInputFactory.newInstance());;
     try {
-      fileInputStream = new FileInputStream(file);
-      SMHierarchicCursor cursor = inputFactory.rootElementCursor(new InputStreamReader(fileInputStream, getEncoding()));
+      SMHierarchicCursor cursor = inputFactory.rootElementCursor(file);
       SMInputCursor assemblyCursor = cursor.advance().descendantElementCursor("Assembly");
-      parseAssemblyBlocs(assemblyCursor);
+      parseAssemblyBlocs(scope, assemblyCursor);
       cursor.getStreamReader().closeCompletely();
     } catch (XMLStreamException e) {
       throw new SonarException("Error while reading dependencyparser result file: " + file.getAbsolutePath(), e);
-    } catch (FileNotFoundException e) {
-      throw new SonarException("Cannot find DependencyParser result file: " + file.getAbsolutePath(), e);
-    } finally {
-      IOUtils.closeQuietly(fileInputStream);
-    }
+    } 
   }
 
-  private void parseAssemblyBlocs(SMInputCursor cursor) throws XMLStreamException {
+  private void parseAssemblyBlocs(String scope, SMInputCursor cursor) throws XMLStreamException {
 
     // Cursor is on <Assembly>
     while (cursor.getNext() != null) {
@@ -105,14 +87,14 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
         Resource<?> from = getResource(assemblyName, assemblyVersion);
 
         // ignore references from another project of the solution, because we will resolve that later
-        if (from instanceof Project && !from.equals(this.project)) {
+        if (from instanceof Project && !from.equals(project)) {
           from = null; // TODO what is the point of assigning null ?
         } else {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
             if (childCursor.getLocalName().equals("References")) {
               SMInputCursor referenceCursor = childCursor.childElementCursor();
-              parseReferenceBlock(referenceCursor, from);
+              parseReferenceBlock(scope, referenceCursor, from);
             }
             else if (childCursor.getLocalName().equals("TypeReferences")) {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
@@ -124,7 +106,7 @@ public class DependencyResultParser extends AbstractStaxParser implements BatchE
     }
   }
 
-  private void parseReferenceBlock(SMInputCursor cursor, Resource<?> from) throws XMLStreamException {
+  private void parseReferenceBlock(String scope, SMInputCursor cursor, Resource<?> from) throws XMLStreamException {
     // Cursor is on <Reference>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {

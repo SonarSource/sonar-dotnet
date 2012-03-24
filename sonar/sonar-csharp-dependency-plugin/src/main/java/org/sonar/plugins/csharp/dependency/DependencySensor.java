@@ -58,15 +58,6 @@ public class DependencySensor extends AbstractCSharpSensor {
   }
 
   public void analyse(Project project, SensorContext context) {
-
-    // TODO use construction injection instead
-    dependencyParserResultParser.setContext(context);
-    dependencyParserResultParser.setEncoding(fileSystem.getSourceCharset());
-    dependencyParserResultParser.setProject(project);
-    
-    String scope = isTestProject(project) ? "test" : "compile";
-    dependencyParserResultParser.setScope(scope);
-
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + DependencyConstants.DEPENDENCYPARSER_REPORT_XML;
@@ -91,13 +82,10 @@ public class DependencySensor extends AbstractCSharpSensor {
     }
 
     // and analyse results
-    analyseResults(reportFile);
-  }
-
-  private void analyseResults(File reportFile) {
     if (reportFile.exists()) {
       LOG.debug("DependencyParser report found at location {}", reportFile);
-      dependencyParserResultParser.parse(reportFile);
+      String scope = isTestProject(project) ? "test" : "compile";
+      dependencyParserResultParser.parse(scope, reportFile);
     } else {
       LOG.warn("No DependencyParser report found for path {}", reportFile);
     }

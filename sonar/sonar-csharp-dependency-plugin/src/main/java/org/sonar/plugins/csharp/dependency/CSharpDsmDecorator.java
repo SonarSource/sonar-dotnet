@@ -45,7 +45,8 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import com.google.common.collect.Lists;
 
 /**
- * TODO doc
+ * Copy/pasted from the original DSM descorator.
+ * Should be removed when the deisgn API will be multi language
  */
 public class CSharpDsmDecorator implements Decorator {
 
