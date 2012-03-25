@@ -21,14 +21,10 @@
 package org.sonar.plugins.csharp.dependency.results;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
@@ -44,7 +40,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.core.AbstractStaxParser;
 
 public class DependencyResultParser implements BatchExtension {
 
@@ -64,7 +59,7 @@ public class DependencyResultParser implements BatchExtension {
   }
   
   public void parse(String scope, File file) {
-    SMInputFactory inputFactory = new SMInputFactory(XMLInputFactory.newInstance());;
+    SMInputFactory inputFactory = new SMInputFactory(XMLInputFactory.newInstance());
     try {
       SMHierarchicCursor cursor = inputFactory.rootElementCursor(file);
       SMInputCursor assemblyCursor = cursor.advance().descendantElementCursor("Assembly");
@@ -92,13 +87,13 @@ public class DependencyResultParser implements BatchExtension {
         } else {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
-            if (childCursor.getLocalName().equals("References")) {
+            if ("References".equals(childCursor.getLocalName())) {
               SMInputCursor referenceCursor = childCursor.childElementCursor();
               parseReferenceBlock(scope, referenceCursor, from);
             }
-            else if (childCursor.getLocalName().equals("TypeReferences")) {
+            else if ("TypeReferences".equals(childCursor.getLocalName())) {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
-              parseTypeReferenceBlock(typeReferenceCursor, from);
+              parseTypeReferenceBlock(typeReferenceCursor);
             }
           }
         }
@@ -126,7 +121,7 @@ public class DependencyResultParser implements BatchExtension {
     }
   }
 
-  private void parseTypeReferenceBlock(SMInputCursor cursor, Resource<?> from) throws XMLStreamException {
+  private void parseTypeReferenceBlock(SMInputCursor cursor) throws XMLStreamException {
     // Cursor is on <From>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
