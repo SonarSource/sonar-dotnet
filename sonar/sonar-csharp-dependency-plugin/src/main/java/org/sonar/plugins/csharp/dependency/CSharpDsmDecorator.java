@@ -42,11 +42,10 @@ import org.sonar.graph.Edge;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
-import com.google.common.collect.Lists;
 
 /**
  * Copy/pasted from the original DSM descorator.
- * Should be removed when the deisgn API will be multi language
+ * Should be removed when the design API will be multi language
  */
 public class CSharpDsmDecorator implements Decorator {
 
