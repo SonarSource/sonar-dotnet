@@ -53,7 +53,7 @@ public class DependencyParserRunner { // NOSONAR : can't mock it otherwise
    * will be used.
    * 
    * @param dependencyParserPath
-   *          the full path of the gendarme install directory. For instance: "C:/Program Files/DependencyParser". May be null: in this
+   *          the full path of the dependencyparser install directory. For instance: "C:/Program Files/DependencyParser". May be null: in this
    *          case, the embedded DependencyParser executable will be used.
    * @param tempFolder
    *          the temporary folder where the embedded DependencyParser executable will be copied if the dependencyParserPath does not point to a valid
