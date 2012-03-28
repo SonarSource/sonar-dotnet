@@ -39,7 +39,10 @@ import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 public class DependencyResultParser implements BatchExtension {
 
@@ -50,12 +53,24 @@ public class DependencyResultParser implements BatchExtension {
   private final SensorContext context;
   
   private final Project project;
+  
+  private final VisualStudioSolution vsSolution;
+  
+  private final VisualStudioProject vsProject;
  
-  public DependencyResultParser(CSharpResourcesBridge csharpResourcesBridge, Project project, SensorContext context) {
+  public DependencyResultParser(MicrosoftWindowsEnvironment env, CSharpResourcesBridge csharpResourcesBridge, Project project, SensorContext context) {
     super();
     this.csharpResourcesBridge = csharpResourcesBridge;
     this.context = context;
     this.project = project;
+    vsSolution = env.getCurrentSolution();
+    if (vsSolution==null) {
+      // not a C# project
+      vsProject = null;
+    } else {
+      vsProject = vsSolution.getProjectFromSonarProject(project);
+      
+    }
   }
   
   public void parse(String scope, File file) {
@@ -79,12 +94,21 @@ public class DependencyResultParser implements BatchExtension {
         String assemblyName = cursor.getAttrValue("name");
         String assemblyVersion = cursor.getAttrValue("version");
 
-        Resource<?> from = getResource(assemblyName, assemblyVersion);
-
-        // ignore references from another project of the solution, because we will resolve that later
-        if (from instanceof Project && !from.equals(project)) {
-          from = null; // TODO what is the point of assigning null ?
+        final Resource<?> from;
+        VisualStudioProject vsProjectFromReport = vsSolution.getProject(assemblyName);
+        if (vsProject.equals(vsProjectFromReport)) {
+          // direct dependencies of current project
+          from = project;
+        } else if (vsProjectFromReport==null) {
+          // indirect dependencies
+          from = getResource(assemblyName, assemblyVersion);
         } else {
+          // dependencies of other projects from the same solution
+          // (covered by the analysis of these same projects)
+          from = null;
+        }
+       
+        if (from!=null) {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
             if ("References".equals(childCursor.getLocalName())) {

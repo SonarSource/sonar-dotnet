@@ -21,7 +21,6 @@
 package org.sonar.plugins.csharp.dependency.results;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
@@ -33,7 +32,10 @@ import org.mockito.ArgumentCaptor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
 
@@ -53,20 +55,28 @@ public class DependencyResultParserTest {
     Project rootProject = mock(Project.class);
     when(project.getParent()).thenReturn(rootProject);
     
-    parser = new DependencyResultParser(bridge, project, context);
+    VisualStudioSolution vsSolution = mock(VisualStudioSolution.class);
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsSolution.getProject("Example.Core")).thenReturn(vsProject);
+    when(vsSolution.getProjectFromSonarProject(project)).thenReturn(vsProject);
+    
+    MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
+    when(env.getCurrentSolution()).thenReturn(vsSolution);
+    parser = new DependencyResultParser(env , bridge, project, context);
   }
   
   @Test
   public void testParse() {
     File report = TestUtils.getResource("/dependencyparser-report.xml");
+    
+    
+    
     parser.parse("compile", report);
     
     ArgumentCaptor<Library> libCaptor = ArgumentCaptor.forClass(Library.class);
-    verify(context, times(2)).getResource(libCaptor.capture());
-    List<Library> libraries = libCaptor.getAllValues();
-    for (Library library : libraries) {
-      assertTrue("Example.Core".equals(library.getName()) || "mscorlib".equals(library.getName()));
-    }
+    verify(context, times(1)).getResource(libCaptor.capture());
+    Library library = libCaptor.getValue();
+    assertEquals("mscorlib", library.getName());
     
     ArgumentCaptor<String> classCaptor = ArgumentCaptor.forClass(String.class);
     verify(bridge, atLeast(3)).getFromTypeName(classCaptor.capture());
