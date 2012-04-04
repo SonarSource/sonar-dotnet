@@ -98,7 +98,11 @@ public final class StaxHelper {
    */
   public static String findElementName(SMInputCursor cursor) {
     try {
-      return cursor.getLocalName();
+      if (cursor.getCurrEvent() == null) {
+        return null;
+      } else {
+        return cursor.getLocalName();
+      }
     } catch (XMLStreamException e) {
       throw new SonarException("Error while retrieving element name", e);
     }

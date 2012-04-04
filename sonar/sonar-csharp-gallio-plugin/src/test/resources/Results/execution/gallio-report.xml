@@ -313,9 +313,7 @@ All Rights Reserved.</value>
                             <body>
                               <contents>
                                 <section name="Message">
-                                  <contents>
-                                    <text><![CDATA[System.DivideByZeroException : Attempted to divide by zero.]]></text>
-                                  </contents>
+                                  <contents />
                                 </section>
                                 <section name="Stack Trace">
                                   <contents>

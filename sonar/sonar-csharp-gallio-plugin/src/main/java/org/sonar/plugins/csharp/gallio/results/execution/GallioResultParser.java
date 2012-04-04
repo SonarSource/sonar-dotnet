@@ -130,7 +130,7 @@ public class GallioResultParser implements BatchExtension {
         String testCase = findAttributeValue(currentTest, "isTestCase");
         LOG.debug("Id : {} & isTestCase : {}", id, testCase);
         boolean isTestCase = "true".equals(testCase);
-        // We analyse all the tests tags to get usefull informations if the test is a TestCase,
+        // We analyse all the tests tags to get useful informations if the test is a TestCase,
         // and to get their children
         SMInputCursor currentTestChildren = descendantElements(currentTest);
         String eltName = null;

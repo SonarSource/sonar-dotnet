@@ -46,8 +46,8 @@ import com.google.common.collect.Iterators;
 public class GallioResultParserTest {
 
   private File sourcefile;
-  private GallioResultParser parser;
-
+  private GallioResultParser parser;  
+  
   @Before
   public void setUp() {
     sourcefile = new File("Example\\Example.Core.Tests\\TestMoney.cs");
