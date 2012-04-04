@@ -19,10 +19,12 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
+
 /**
  * Exception generated for Gendarme execution.
  */
-public class GendarmeException extends Exception {
+public class GendarmeException extends DotNetToolsException {
 
   private static final long serialVersionUID = -8744090490644930724L;
 
@@ -51,7 +53,8 @@ public class GendarmeException extends Exception {
         break;
       case UNKNOWN_ERROR:
       default:
-        specificMessage = "execution was interrupted by a non-handled exception. This is likely a bug inside Gendarme and should be reported on Novell's bugzilla (http://bugzilla.novell.com) or on the mailing-list.";
+        specificMessage = "execution was interrupted by a non-handled exception. " +
+          "This is likely a bug inside Gendarme and should be reported on Novell's bugzilla (http://bugzilla.novell.com) or on the mailing-list.";
         break;
     }
     return specificMessage;

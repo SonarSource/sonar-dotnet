@@ -46,6 +46,20 @@ import com.google.common.collect.Maps;
 
 public abstract class AbstractParsingStrategy implements CoverageResultParsingStrategy {
 
+  private final class IsFileIndexedPredicate implements Predicate<FileCoverage> {
+    private final Project sonarProject;
+    private final SensorContext context;
+
+    private IsFileIndexedPredicate(Project sonarProject, SensorContext context) {
+      this.sonarProject = sonarProject;
+      this.context = context;
+    }
+
+    public boolean apply(FileCoverage input) {
+      return context.isIndexed(org.sonar.api.resources.File.fromIOFile(input.getFile(), sonarProject), false);
+    }
+  }
+
   protected Map<Integer, FileCoverage> sourceFilesById = new HashMap<Integer, FileCoverage>();
 
   private String pointElement;
@@ -193,18 +207,12 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
     }
 
     // filter files according to the exclusion patterns
-    sourceFilesById = Maps.filterValues(sourceFilesById, new Predicate<FileCoverage>() {
-
-      public boolean apply(FileCoverage input) {
-        return context.isIndexed(org.sonar.api.resources.File.fromIOFile(input.getFile(), sonarProject), false);
-      }
-    });
+    sourceFilesById = Maps.filterValues(sourceFilesById, new IsFileIndexedPredicate(sonarProject, context));
 
     // We finally process the coverage details
     fillProjects(rootChildCursor);
 
-    List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(sourceFilesById.values());
-    return sourceFiles;
+    return new ArrayList<FileCoverage>(sourceFilesById.values());
   }
 
   /**

@@ -126,7 +126,7 @@ public final class ModelFactory {
 
   /**
    * @param visualStudioProject
-   * @param integTestProjectPatterns TODO
+   * @param integTestProjectPatterns
    */
   protected static void assessTestProject(VisualStudioProject visualStudioProject, String testProjectPatterns, String integTestProjectPatterns) {
 
@@ -387,40 +387,14 @@ public final class ModelFactory {
         project.setSilverlightProject(true);
       }
 
-  // ???
+      // ???
       Thread.currentThread().setContextClassLoader(savedClassloader);
 
 
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]
       Collection<SourceFile> sourceFiles = project.getSourceFiles();
-
-      String version = null;
-
-      // first parse: in general, it's in the "Properties\AssemblyInfo.cs"
-      for (SourceFile file : sourceFiles)
-      {
-        if (file.getName().equalsIgnoreCase("assemblyinfo.cs"))
-        {
-          version = tryToGetVersion(file);
-
-          if (version != null) {
-            break;
-          }
-        }
-      }
-
-      // second parse: try to read all files
-      for (SourceFile file : sourceFiles)
-      {
-        version = tryToGetVersion(file);
-
-        if (version != null) {
-          break;
-        }
-      }
-
-      project.setAssemblyVersion(version);
+      project.setAssemblyVersion(findAssemblyVersion(sourceFiles));
 
       assessTestProject(project, testProjectNamePattern, integTestProjectNamePattern);
 
@@ -431,6 +405,29 @@ public final class ModelFactory {
       // Replaces the class loader after usage
       Thread.currentThread().setContextClassLoader(savedClassloader);
     }
+  }
+
+  protected static String findAssemblyVersion(Collection<SourceFile> sourceFiles) {
+    String version = null;
+
+    // first parse: in general, it's in the "Properties\AssemblyInfo.cs"
+    for (SourceFile file : sourceFiles) {
+      if ("assemblyinfo.cs".equalsIgnoreCase(file.getName())) {
+        version = tryToGetVersion(file);
+        if (version != null) {
+          break;
+        }
+      }
+    }
+
+    // second parse: try to read all files
+    for (SourceFile file : sourceFiles) {
+      version = tryToGetVersion(file);
+      if (version != null) {
+        break;
+      }
+    }
+    return version;
   }
 
   private static String tryToGetVersion(SourceFile file) {

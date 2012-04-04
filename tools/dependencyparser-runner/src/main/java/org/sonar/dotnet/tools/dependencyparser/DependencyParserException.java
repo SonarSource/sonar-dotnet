@@ -19,10 +19,12 @@
  */
 package org.sonar.dotnet.tools.dependencyparser;
 
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
+
 /**
  * Exceptions generated for DependencyParser execution.
  */
-public abstract class DependencyParserException extends Exception {
+public abstract class DependencyParserException extends DotNetToolsException {
 
   private static final long serialVersionUID = 1L;
   

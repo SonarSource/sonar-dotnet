@@ -42,7 +42,6 @@ import org.sonar.graph.Edge;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
-
 /**
  * Copy/pasted from the original DSM descorator.
  * Should be removed when the design API will be multi language
@@ -50,7 +49,7 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 public class CSharpDsmDecorator implements Decorator {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpDsmDecorator.class);
-  
+
   // hack as long as DecoratorContext does not implement SonarIndex
   private SonarIndex index;
 
@@ -62,28 +61,30 @@ public class CSharpDsmDecorator implements Decorator {
     return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
   }
 
+  @SuppressWarnings("rawtypes")
   public void decorate(final Resource resource, DecoratorContext context) {
-    if (shouldDecorateResource(resource, context)) {
+    if (shouldDecorateResource(context)) {
       Collection<Resource> subResources = getSubResources(context);
-      
+
       Dsm<Resource> dsm = getDsm(subResources);
-      
+
       Measure measure = new Measure(CoreMetrics.DEPENDENCY_MATRIX, DsmSerializer.serialize(dsm));
-      //Measure measure = new Measure(CoreMetrics.DEPENDENCY_MATRIX, (String)null);
       measure.setPersistenceMode(PersistenceMode.DATABASE);
       context.saveMeasure(measure);
     }
   }
 
+  @SuppressWarnings("rawtypes")
   private Collection<Resource> getSubResources(DecoratorContext context) {
     List<Resource> result = new ArrayList<Resource>();
-    for(DecoratorContext childContext : context.getChildren()){
+    for (DecoratorContext childContext : context.getChildren()) {
       result.add(childContext.getResource());
     }
-    
+
     return result;
   }
 
+  @SuppressWarnings("rawtypes")
   private Dsm<Resource> getDsm(Collection<Resource> subResources) {
     CycleDetector<Resource> cycleDetector = new CycleDetector<Resource>(index, subResources);
     Set<Cycle> cycles = cycleDetector.getCycles();
@@ -92,15 +93,15 @@ public class CSharpDsmDecorator implements Decorator {
     Set<Edge> feedbackEdges = solver.getEdges();
 
     Dsm<Resource> dsm = new Dsm<Resource>(index, subResources, feedbackEdges);
-    try{
-    DsmTopologicalSorter.sort(dsm);
-    }catch(IllegalStateException ise){
+    try {
+      DsmTopologicalSorter.sort(dsm);
+    } catch (IllegalStateException ise) {
       LOG.warn("Dsm sort", ise);
     }
     return dsm;
   }
 
-  private boolean shouldDecorateResource(Resource resource, DecoratorContext context) {
+  private boolean shouldDecorateResource(DecoratorContext context) {
     return context.getMeasure(CoreMetrics.DEPENDENCY_MATRIX) == null;
   }
 }

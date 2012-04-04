@@ -83,7 +83,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     }
     collect(project, testReportFiles, context);
   }
-  
+
   protected Collection<File> findTestReportsToAnalyse() {
     Collection<File> reports = Lists.newArrayList();
     reports.addAll(findReportsToAnalyse(executionMode, GallioConstants.GALLIO_REPORT_XML, GallioConstants.REPORTS_PATH_KEY));
@@ -91,10 +91,10 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     if (!"skip".equals(itExecutionMode)) {
       reports.addAll(findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_REPORTS_PATH_KEY));
     }
-    
+
     return reports;
   }
-  
+
   private Collection<File> findReportsToAnalyse(String executionMode, String reportFileName, String reportPathKey) {
     Collection<File> reportFiles = Lists.newArrayList();
     File solutionDir = getVSSolution().getSolutionDir();
@@ -105,10 +105,10 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
       reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
       LOG.info("Reusing Gallio coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
-      if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
+      if (!getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
         // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
         LOG.info("Test report analysis won't execute as Gallio was not executed.");
-      } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)){
+      } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)) {
         reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + reportFileName);
         LOG.info("(Safe mode) Parsing Gallio reports: " + Joiner.on(" ; ").join(reportFiles));
       } else {
@@ -122,58 +122,60 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
     }
     return reportFiles;
   }
-  
+
   private void collect(Project project, Collection<File> reportFiles, SensorContext context) {
-    
     Map<File, UnitTestReport> fileTestMap = Maps.newHashMap();
     for (File report : reportFiles) {
       if (report.exists()) {
         Collection<UnitTestReport> tests = parser.parse(report);
         for (UnitTestReport test : tests) {
-          File file = test.getSourceFile();
-          if (fileTestMap.containsKey(file)) {
-            fileTestMap.get(file).merge(test);
-          } else {
-            fileTestMap.put(file, test);
-          }
+          collectTest(test, fileTestMap);
         }
       } else {
         LOG.error("Coverage report \"{}\" not found", report);
       }
     }
-    
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("Found " + fileTestMap.size() + " test data");
-    }
+    LOG.debug("Found {} test data", fileTestMap.size());
 
     Set<File> csFilesAlreadyTreated = new HashSet<File>();
 
     for (UnitTestReport testReport : fileTestMap.values()) {
-      File sourceFile = testReport.getSourceFile();
-      if (sourceFile != null && sourceFile.exists() && !csFilesAlreadyTreated.contains(sourceFile)) {
-        if (LOG.isDebugEnabled()) {
-          LOG.debug("Collecting test data for file " + sourceFile);
+      saveFileMeasures(testReport, project, context, csFilesAlreadyTreated);
+    }
+  }
+
+  protected void saveFileMeasures(UnitTestReport testReport, Project project, SensorContext context, Set<File> csFilesAlreadyTreated) {
+    File sourceFile = testReport.getSourceFile();
+    if (sourceFile != null && sourceFile.exists() && !csFilesAlreadyTreated.contains(sourceFile)) {
+      LOG.debug("Collecting test data for file {}", sourceFile);
+      csFilesAlreadyTreated.add(sourceFile);
+      int testsCount = testReport.getTests() - testReport.getSkipped();
+      org.sonar.api.resources.File testFile = fromIOFile(sourceFile, project);
+      if (testFile != null) {
+        saveFileMeasure(testFile, context, CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
+        saveFileMeasure(testFile, context, CoreMetrics.TESTS, testsCount);
+        saveFileMeasure(testFile, context, CoreMetrics.TEST_ERRORS, testReport.getErrors());
+        saveFileMeasure(testFile, context, CoreMetrics.TEST_FAILURES, testReport.getFailures());
+        saveFileMeasure(testFile, context, CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
+        saveFileMeasure(testFile, context, TestMetrics.COUNT_ASSERTS, testReport.getAsserts());
+        int passedTests = testsCount - testReport.getErrors() - testReport.getFailures();
+        if (testsCount > 0) {
+          double percentage = (float) passedTests * 100 / (float) testsCount;
+          saveFileMeasure(testFile, context, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(percentage));
         }
-        csFilesAlreadyTreated.add(sourceFile);
-        int testsCount = testReport.getTests() - testReport.getSkipped();
-        org.sonar.api.resources.File testFile = fromIOFile(sourceFile, project);
-        if (testFile != null) {
-          saveFileMeasure(testFile, context, CoreMetrics.SKIPPED_TESTS, testReport.getSkipped());
-          saveFileMeasure(testFile, context, CoreMetrics.TESTS, testsCount);
-          saveFileMeasure(testFile, context, CoreMetrics.TEST_ERRORS, testReport.getErrors());
-          saveFileMeasure(testFile, context, CoreMetrics.TEST_FAILURES, testReport.getFailures());
-          saveFileMeasure(testFile, context, CoreMetrics.TEST_EXECUTION_TIME, testReport.getTimeMS());
-          saveFileMeasure(testFile, context, TestMetrics.COUNT_ASSERTS, testReport.getAsserts());
-          int passedTests = testsCount - testReport.getErrors() - testReport.getFailures();
-          if (testsCount > 0) {
-            double percentage = (float) passedTests * 100 / (float) testsCount;
-            saveFileMeasure(testFile, context, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(percentage));
-          }
-          saveTestsDetails(testFile, context, testReport);
-        }
-      } else {
-        LOG.error("Source file not found for test report " + testReport);
+        saveTestsDetails(testFile, context, testReport);
       }
+    } else {
+      LOG.error("Source file not found for test report " + testReport);
+    }
+  }
+
+  protected void collectTest(UnitTestReport test, Map<File, UnitTestReport> fileTestMap) {
+    File file = test.getSourceFile();
+    if (fileTestMap.containsKey(file)) {
+      fileTestMap.get(file).merge(test);
+    } else {
+      fileTestMap.put(file, test);
     }
   }
 
@@ -216,7 +218,7 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    * @param value
    */
   private void saveFileMeasure(org.sonar.api.resources.File testFile, SensorContext context, Metric metric, double value) {
-    if ( !Double.isNaN(value)) {
+    if (!Double.isNaN(value)) {
       context.saveMeasure(testFile, metric, value);
     }
   }

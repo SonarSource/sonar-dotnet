@@ -19,10 +19,12 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
+
 /**
  * Exception generated for Gallio execution.
  */
-public class GallioException extends Exception {
+public class GallioException extends DotNetToolsException {
 
   private static final long serialVersionUID = 4671247905622433478L;
 

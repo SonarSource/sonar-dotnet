@@ -31,10 +31,13 @@ import org.sonar.api.measures.MeasureUtils;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.ResourceUtils;
 
-
 /**
  * Strongly inspired by class AverageComplexityFormula
  * Formula used to produce measures for metric ASSERT_PER_TEST
+ * 
+ * TODO: remove this class in favor of AverageFormula introduced in Sonar 2.15 
+ * (but only once the .NET ecosystem depends on Sonar 2.15+, no need to increase 
+ * the minimum requirement on Sonar version just for that.)
  * 
  * @author Alexandre Victoor
  *
@@ -42,14 +45,14 @@ import org.sonar.api.resources.ResourceUtils;
 public class AverageAssertFormula implements Formula {
 
   public List<Metric> dependsUponMetrics() {
-    return Arrays.asList(new Metric[] { TestMetrics.COUNT_ASSERTS, CoreMetrics.TESTS });
+    return Arrays.asList(new Metric[] {TestMetrics.COUNT_ASSERTS, CoreMetrics.TESTS});
   }
 
   public Measure calculate(FormulaData data, FormulaContext context) {
     if (!(shouldDecorateResource(data, context))) {
       return null;
     }
-    
+
     if (ResourceUtils.isFile(context.getResource())) {
       Double tests = MeasureUtils.getValue(data.getMeasure(CoreMetrics.TESTS), null);
       Double asserts = MeasureUtils.getValue(data.getMeasure(TestMetrics.COUNT_ASSERTS), null);
@@ -60,7 +63,7 @@ public class AverageAssertFormula implements Formula {
       double totalTests = 0.0D;
       double totalAsserts = 0.0D;
       boolean hasApplicableChildren = false;
-   
+
       for (FormulaData childrenData : data.getChildren()) {
         Double childrenByTests = MeasureUtils.getValue(childrenData.getMeasure(CoreMetrics.TESTS), null);
         Double childrenAsserts = MeasureUtils.getValue(childrenData.getMeasure(TestMetrics.COUNT_ASSERTS), null);
@@ -76,7 +79,7 @@ public class AverageAssertFormula implements Formula {
     }
     return null;
   }
-  
+
   private boolean shouldDecorateResource(FormulaData data, FormulaContext context) {
     return (!(MeasureUtils.hasValue(data.getMeasure(context.getTargetMetric()))));
   }

@@ -67,7 +67,7 @@ public final class DependencyParserCommandBuilder extends CilToolCommandBuilderS
    * 
    * @return the Command object that represents the command to launch.
    */
-  public Command toCommand() throws DependencyParserException {
+  public Command toCommand() {
     Collection<File> assemblyToScanFiles = findAssembliesToScan();
     validate(assemblyToScanFiles);
 

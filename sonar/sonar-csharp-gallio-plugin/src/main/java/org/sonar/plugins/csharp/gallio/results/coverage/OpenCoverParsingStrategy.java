@@ -82,8 +82,7 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
       throw new SonarException(e);
     }
     
-    List<FileCoverage> sourceFiles = new ArrayList<FileCoverage>(fileCoverageRegistry.values());
-    return sourceFiles;
+    return new ArrayList<FileCoverage>(fileCoverageRegistry.values());
   }
   
   private void parseClassesBloc(SMInputCursor cursor) throws XMLStreamException {

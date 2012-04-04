@@ -190,16 +190,16 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    * Generates a measure that contains the visits of each line of the source file.
    */
   private Measure getHitData(FileCoverage coverable, boolean it) {
-    PropertiesBuilder<String, Integer> lineHitsBuilder = it ? itLineHitsBuilder : this.lineHitsBuilder;
+    PropertiesBuilder<String, Integer> hitsBuilder = it ? itLineHitsBuilder : this.lineHitsBuilder;
     
-    lineHitsBuilder.clear();
+    hitsBuilder.clear();
     Map<Integer, SourceLine> lines = coverable.getLines();
     for (SourceLine line : lines.values()) {
       int lineNumber = line.getLineNumber();
       int countVisits = line.getCountVisits();
-      lineHitsBuilder.add(Integer.toString(lineNumber), countVisits);
+      hitsBuilder.add(Integer.toString(lineNumber), countVisits);
     }
-    return lineHitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
+    return hitsBuilder.build().setPersistenceMode(PersistenceMode.DATABASE);
   }
 
   private double convertPercentage(Number percentage) {

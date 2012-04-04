@@ -50,7 +50,8 @@ public class DependencySensor extends AbstractCSharpSensor {
 
   private DependencyResultParser dependencyParserResultParser;
 
-  public DependencySensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration, DependencyResultParser dependencyParserResultParser) {
+  public DependencySensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration,
+      DependencyResultParser dependencyParserResultParser) {
     super(microsoftWindowsEnvironment, "DependencyParser", configuration.getString(DependencyConstants.MODE, ""));
     this.configuration = configuration;
     this.dependencyParserResultParser = dependencyParserResultParser;

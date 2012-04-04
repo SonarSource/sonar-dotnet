@@ -60,7 +60,6 @@ public abstract class CoverageDecorator implements Decorator {
   protected CoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
     this.vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
-    //this.executionMode = configuration.getString(GallioConstants.MODE, "");
     String[] exclusions = configuration.getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY);
     if (exclusions==null) {
       this.excludedAssemblies 

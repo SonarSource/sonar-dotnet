@@ -53,7 +53,7 @@ public abstract class CilToolCommandBuilderSupport {
   protected String[] assembliesToScan = new String[] {};
   
   
-  public abstract Command toCommand() throws Exception;
+  public abstract Command toCommand() throws DotNetToolsException;
   
   /**
    * Set the assemblies to scan if the information should not be taken from the VS configuration files.

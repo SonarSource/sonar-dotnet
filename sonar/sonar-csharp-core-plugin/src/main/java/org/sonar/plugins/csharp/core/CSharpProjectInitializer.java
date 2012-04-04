@@ -56,8 +56,6 @@ public class CSharpProjectInitializer extends Initializer {
       String[] exclusions = projectConfiguration.getStringArray("sonar.exclusions");
       Object[] newExclusions = ArrayUtils.addAll(exclusions, CSharpConstants.DEFAULT_FILES_TO_EXCLUDE);
       projectConfiguration.setProperty("sonar.exclusions", newExclusions);
-      // TODO : remove the following line once SONAR-2827 has been fixed
-      project.setExclusionPatterns(Arrays.asList(newExclusions).toArray(new String[newExclusions.length]));
     }
   }
 

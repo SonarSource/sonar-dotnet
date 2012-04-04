@@ -103,7 +103,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
             + "'). Please set a unique 'sonar.projectKey' for the solution.");
       }
 
-      ProjectDefinition subProject = ProjectDefinition.create((Properties) root.getProperties().clone())
+      ProjectDefinition subProject = ProjectDefinition.create().setProperties((Properties) root.getProperties().clone())
           .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
           .setVersion(root.getVersion()).setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
 

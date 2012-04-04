@@ -19,10 +19,12 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
+
 /**
  * Exception generated for StyleCop execution.
  */
-public class StyleCopException extends Exception {
+public class StyleCopException extends DotNetToolsException {
 
   private static final long serialVersionUID = -8744090490644930724L;
 

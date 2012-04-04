@@ -27,7 +27,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.util.Properties;
 
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -78,7 +77,7 @@ public class VisualStudioProjectBuilderTest {
     conf.setProperty(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, fakeSdkDir.getAbsolutePath());
     conf.setProperty(CSharpConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, fakeSilverlightDir.getAbsolutePath());
     solutionBaseDir = TestUtils.getResource("/solution/Example");
-    root = ProjectDefinition.create(new Properties()).setBaseDir(solutionBaseDir).setWorkDir(new File(solutionBaseDir, "WORK-DIR"));
+    root = ProjectDefinition.create().setBaseDir(solutionBaseDir).setWorkDir(new File(solutionBaseDir, "WORK-DIR"));
     root.setVersion("1.0");
     root.setKey("groupId:artifactId");
     reactor = new ProjectReactor(root);
