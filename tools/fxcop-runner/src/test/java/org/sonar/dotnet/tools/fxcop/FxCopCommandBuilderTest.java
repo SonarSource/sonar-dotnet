@@ -32,8 +32,6 @@ import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
-import org.sonar.dotnet.tools.fxcop.FxCopException;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;

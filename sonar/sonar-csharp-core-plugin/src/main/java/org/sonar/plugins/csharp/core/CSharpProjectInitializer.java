@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.core;
 
-import java.util.Arrays;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;

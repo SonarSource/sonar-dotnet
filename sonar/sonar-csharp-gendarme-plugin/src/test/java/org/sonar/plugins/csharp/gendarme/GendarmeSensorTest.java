@@ -20,10 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme;
 
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
@@ -39,8 +36,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -60,7 +55,6 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
-import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;

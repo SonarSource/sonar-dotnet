@@ -22,14 +22,12 @@ package org.sonar.dotnet.tools.gallio;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.util.List;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 

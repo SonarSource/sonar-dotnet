@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

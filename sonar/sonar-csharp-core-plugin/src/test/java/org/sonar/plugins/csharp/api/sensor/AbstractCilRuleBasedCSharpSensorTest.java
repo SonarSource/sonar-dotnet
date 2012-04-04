@@ -19,9 +19,15 @@
  */
 package org.sonar.plugins.csharp.api.sensor;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.api.CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
+import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE;
+import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_KEY;
 
 import java.io.File;
 import java.util.Collections;
@@ -30,11 +36,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import static org.sonar.plugins.csharp.api.CSharpConstants.*;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 import com.google.common.collect.Lists;

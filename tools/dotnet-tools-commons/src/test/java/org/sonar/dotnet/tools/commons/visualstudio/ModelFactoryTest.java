@@ -40,11 +40,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
-import org.sonar.dotnet.tools.commons.visualstudio.ModelFactory;
-import org.sonar.dotnet.tools.commons.visualstudio.SourceFile;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioWebProject;
 
 /**
  * Tests for visual studio utilities.
