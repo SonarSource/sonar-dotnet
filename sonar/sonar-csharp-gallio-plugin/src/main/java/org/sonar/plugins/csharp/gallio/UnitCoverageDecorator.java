@@ -30,18 +30,17 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
 
-
 public class UnitCoverageDecorator extends CoverageDecorator {
 
   public UnitCoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
       ResourceHelper resourceHelper) {
-    
+
     super(configuration, microsoftWindowsEnvironment, resourceHelper);
-    
+
     this.executionMode = configuration.getString(GallioConstants.MODE, "");
     this.testMetric = CoreMetrics.COVERAGE;
   }
-  
+
   @DependedUpon
   public List<Metric> generatesCoverageMetrics() {
     return Arrays.asList(CoreMetrics.COVERAGE, CoreMetrics.LINE_COVERAGE, CoreMetrics.LINES_TO_COVER, CoreMetrics.UNCOVERED_LINES);

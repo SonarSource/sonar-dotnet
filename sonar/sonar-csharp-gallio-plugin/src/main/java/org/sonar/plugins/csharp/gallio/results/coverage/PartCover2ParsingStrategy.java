@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-
 public abstract class PartCover2ParsingStrategy extends PartCoverParsingStrategy {
 
 }

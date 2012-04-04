@@ -84,22 +84,22 @@ public class GendarmeProfileImporterTest {
         RuleQuery query = (RuleQuery) iom.getArguments()[0];
         Rule rule = null;
         if (StringUtils.equals(query.getConfigKey(), "AvoidLongMethodsRule@Gendarme.Rules.Smells.dll")
-            || StringUtils.equals(query.getKey(), "AvoidLongMethodsRule")) {
+          || StringUtils.equals(query.getKey(), "AvoidLongMethodsRule")) {
           rule = Rule.create(query.getRepositoryKey(), "AvoidLongMethodsRule", "AvoidLongMethodsRule").setConfigKey(
               "AvoidLongMethodsRule@Gendarme.Rules.Smells.dll");
 
         } else if (StringUtils.equals(query.getConfigKey(), "AvoidLargeClassesRule@Gendarme.Rules.Smells.dll")
-            || StringUtils.equals(query.getKey(), "AvoidLargeClassesRule")) {
+          || StringUtils.equals(query.getKey(), "AvoidLargeClassesRule")) {
           rule = Rule.create(query.getRepositoryKey(), "AvoidLargeClassesRule", "AvoidLargeClassesRule").setConfigKey(
               "AvoidLargeClassesRule@Gendarme.Rules.Smells.dll");
 
         } else if (StringUtils.equals(query.getConfigKey(), "AvoidCodeDuplicatedInSameClassRule@Gendarme.Rules.Smells.dll")
-            || StringUtils.equals(query.getKey(), "AvoidCodeDuplicatedInSameClassRule")) {
+          || StringUtils.equals(query.getKey(), "AvoidCodeDuplicatedInSameClassRule")) {
           rule = Rule.create(query.getRepositoryKey(), "AvoidCodeDuplicatedInSameClassRule", "AvoidCodeDuplicatedInSameClassRule")
               .setConfigKey("AvoidCodeDuplicatedInSameClassRule@Gendarme.Rules.Smells.dll");
 
         } else if (StringUtils.equals(query.getConfigKey(), "AvoidComplexMethodsRule@Gendarme.Rules.Smells.dll")
-            || StringUtils.equals(query.getKey(), "AvoidComplexMethodsRule")) {
+          || StringUtils.equals(query.getKey(), "AvoidComplexMethodsRule")) {
           rule = Rule.create(query.getRepositoryKey(), "AvoidComplexMethodsRule", "AvoidComplexMethodsRule").setConfigKey(
               "AvoidComplexMethodsRule@Gendarme.Rules.Smells.dll");
           rule.createParameter("SuccessThreshold");

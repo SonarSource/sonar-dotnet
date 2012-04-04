@@ -24,25 +24,22 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
-
 public class ResourceHelper implements BatchExtension {
-  
+
   private final SensorContext sensorContext;
-  
- 
+
   public ResourceHelper(SensorContext sensorContext) {
     this.sensorContext = sensorContext;
   }
 
-
   public boolean isResourceInProject(Resource<?> resource, Project project) {
     final boolean result;
-    
+
     if (resource instanceof Project) {
       result = resource.getEffectiveKey().equals(project.getEffectiveKey());
     } else {
       Resource<?> parent = sensorContext.getParent(resource);
-      if (parent==null) {
+      if (parent == null) {
         // should not happen
         result = false;
       } else {
@@ -51,14 +48,14 @@ public class ResourceHelper implements BatchExtension {
     }
     return result;
   }
-  
+
   public Project findParentProject(Resource<?> resource) {
     final Project result;
     if (resource instanceof Project) {
-      result = (Project)resource;
+      result = (Project) resource;
     } else {
       Resource<?> parent = sensorContext.getParent(resource);
-      if (parent==null) {
+      if (parent == null) {
         // should not happen
         result = null;
       } else {
@@ -67,5 +64,5 @@ public class ResourceHelper implements BatchExtension {
     }
     return result;
   }
-  
+
 }

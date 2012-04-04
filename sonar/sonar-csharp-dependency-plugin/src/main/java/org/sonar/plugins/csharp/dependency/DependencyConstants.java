@@ -24,15 +24,15 @@ public final class DependencyConstants {
 
   private DependencyConstants() {
   }
-  
+
   public static final String DEPENDENCYPARSER_REPORT_XML = "dependencyparser-report.xml";
-  
+
   public static final String INSTALL_DIR_KEY = "sonar.dependencyparser.installDirectory";
-  
+
   public static final String TIMEOUT_MINUTES_KEY = "sonar.dependencyparser.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 10;
-  
+
   public static final String MODE = "sonar.dependencyparser.mode";
-  
+
   public static final String REPORTS_PATH_KEY = "sonar.dependencyparser.reports.path";
 }

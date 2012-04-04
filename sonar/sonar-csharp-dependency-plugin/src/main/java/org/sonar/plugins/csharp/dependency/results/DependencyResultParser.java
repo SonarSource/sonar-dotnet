@@ -51,28 +51,28 @@ public class DependencyResultParser implements BatchExtension {
   private final CSharpResourcesBridge csharpResourcesBridge;
 
   private final SensorContext context;
-  
+
   private final Project project;
-  
+
   private final VisualStudioSolution vsSolution;
-  
+
   private final VisualStudioProject vsProject;
- 
+
   public DependencyResultParser(MicrosoftWindowsEnvironment env, CSharpResourcesBridge csharpResourcesBridge, Project project, SensorContext context) {
     super();
     this.csharpResourcesBridge = csharpResourcesBridge;
     this.context = context;
     this.project = project;
     vsSolution = env.getCurrentSolution();
-    if (vsSolution==null) {
+    if (vsSolution == null) {
       // not a C# project
       vsProject = null;
     } else {
       vsProject = vsSolution.getProjectFromSonarProject(project);
-      
+
     }
   }
-  
+
   public void parse(String scope, File file) {
     SMInputFactory inputFactory = new SMInputFactory(XMLInputFactory.newInstance());
     try {
@@ -82,7 +82,7 @@ public class DependencyResultParser implements BatchExtension {
       cursor.getStreamReader().closeCompletely();
     } catch (XMLStreamException e) {
       throw new SonarException("Error while reading dependencyparser result file: " + file.getAbsolutePath(), e);
-    } 
+    }
   }
 
   private void parseAssemblyBlocs(String scope, SMInputCursor cursor) throws XMLStreamException {
@@ -99,7 +99,7 @@ public class DependencyResultParser implements BatchExtension {
         if (vsProject.equals(vsProjectFromReport)) {
           // direct dependencies of current project
           from = project;
-        } else if (vsProjectFromReport==null) {
+        } else if (vsProjectFromReport == null) {
           // indirect dependencies
           from = getResource(assemblyName, assemblyVersion);
         } else {
@@ -107,8 +107,8 @@ public class DependencyResultParser implements BatchExtension {
           // (covered by the analysis of these same projects)
           from = null;
         }
-       
-        if (from!=null) {
+
+        if (from != null) {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
             if ("References".equals(childCursor.getLocalName())) {
@@ -139,7 +139,7 @@ public class DependencyResultParser implements BatchExtension {
         dependency.setUsage(scope);
         dependency.setWeight(1);
         context.saveDependency(dependency);
-        
+
         LOG.info("Saving dependency from " + from.getName() + " to " + to.getName());
       }
     }
@@ -167,20 +167,20 @@ public class DependencyResultParser implements BatchExtension {
               toResource = context.getResource(toResource);
 
               // get the parent folder
-              Resource<?> fromParentFolderResource = (Resource<?>)fromResource.getParent();
-              Resource<?> toParentFolderResource = (Resource<?>)toResource.getParent();
-              
+              Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
+              Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
+
               // find the folder to folder dependency
               Dependency folderDependency = findDependency(fromParentFolderResource, toParentFolderResource);
-              if(folderDependency == null){
+              if (folderDependency == null) {
                 folderDependency = new Dependency(fromParentFolderResource, toParentFolderResource);
                 folderDependency.setUsage("USES");
               }
-              
+
               // save it
-              folderDependency.setWeight(folderDependency.getWeight()+1);
+              folderDependency.setWeight(folderDependency.getWeight() + 1);
               context.saveDependency(folderDependency);
-              
+
               // save the file to file dependency
               Dependency fileDependency = new Dependency(fromResource, toResource);
               fileDependency.setParent(folderDependency);
@@ -193,14 +193,14 @@ public class DependencyResultParser implements BatchExtension {
       }
     }
   }
-  
-  private Dependency findDependency(Resource<?> from, Resource<?> to){
-    for(Dependency d : context.getDependencies()){
-      if(d.getFrom().equals(from) && d.getTo().equals(to)){
+
+  private Dependency findDependency(Resource<?> from, Resource<?> to) {
+    for (Dependency d : context.getDependencies()) {
+      if (d.getFrom().equals(from) && d.getTo().equals(to)) {
         return d;
       }
     }
-    
+
     return null;
   }
 

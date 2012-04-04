@@ -170,7 +170,7 @@ public class VisualStudioSolution {
     }
     return null;
   }
-  
+
   public VisualStudioProject getProjectFromSonarProject(Project sonarProject) {
     String currentProjectName = sonarProject.getName();
     String branch = sonarProject.getBranch();
@@ -187,7 +187,6 @@ public class VisualStudioSolution {
     }
     return null;
   }
-  
 
   /**
    * Gets the project whose base directory contains the file/directory.
@@ -295,7 +294,7 @@ public class VisualStudioSolution {
     }
     return result;
   }
-  
+
   /**
    * Returns the integ test projects.
    * 

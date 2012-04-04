@@ -32,7 +32,7 @@ public class CoverageToolTest {
     assertThat(CoverageTool.findFromName("PartCover"), is(CoverageTool.PARTCOVER));
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testFindFromWrongName() {
     assertThat(CoverageTool.findFromName("UnexistingTool"), nullValue());
   }

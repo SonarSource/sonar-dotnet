@@ -61,7 +61,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     }
     return result;
   }
-  
+
   /**
    * Parse a method, retrieving all its points
    * 
@@ -94,14 +94,14 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
         }
       }
       final FileCoverage fileCoverage;
-      if ( !methodWithPoints && areUncoveredLines) {
+      if (!methodWithPoints && areUncoveredLines) {
         fileCoverage = sourceFilesById.get(Integer.valueOf(temporaryFileId));
         handleMethodWithoutPoints(lineCount, fileCoverage);
       } else {
         fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
       }
       fillFileCoverage(fileCoverage, points);
-    } 
+    }
   }
 
   /**
@@ -111,7 +111,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
    * @param fileCoverage
    */
   private void handleMethodWithoutPoints(String lineCount, FileCoverage fileCoverage) {
-    if ( !StringUtils.isEmpty(lineCount)) {
+    if (!StringUtils.isEmpty(lineCount)) {
       fileCoverage.addUncoveredLines(Integer.parseInt(lineCount));
     }
   }

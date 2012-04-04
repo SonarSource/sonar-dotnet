@@ -47,7 +47,7 @@ public class GallioRunnerTest {
     testAsssemblies = Lists.newArrayList(
         TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"),
         TestUtils.getResource("/Runner/FakeAssemblies/Fake2.assembly")
-    );
+        );
 
     fakeExecInstallPath = TestUtils.getResource("/Runner/FakeProg/Gallio").getAbsolutePath();
     workDir = TestUtils.getResource("/Runner").getAbsolutePath();

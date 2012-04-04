@@ -30,17 +30,17 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.dependency.results.DependencyResultParser;
 
 @Properties({
-  @Property(key = DependencyConstants.INSTALL_DIR_KEY, 
-      name = "DependencyParser install directory", description = "Absolute path of the DependencyParser installation folder.", global = true,
-      project = false),
+  @Property(key = DependencyConstants.INSTALL_DIR_KEY,
+    name = "DependencyParser install directory", description = "Absolute path of the DependencyParser installation folder.", global = true,
+    project = false),
   @Property(key = DependencyConstants.TIMEOUT_MINUTES_KEY, defaultValue = DependencyConstants.TIMEOUT_MINUTES_DEFVALUE + "",
-      name = "DependencyParser program timeout", description = "Maximum number of minutes before the DependencyParser program will be stopped.",
-      global = true, project = true),
+    name = "DependencyParser program timeout", description = "Maximum number of minutes before the DependencyParser program will be stopped.",
+    global = true, project = true),
   @Property(key = DependencyConstants.MODE, defaultValue = "", name = "DependencyParser activation mode",
-      description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
+    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
   @Property(key = DependencyConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the DependencyParser report files",
-      description = "Name of the DependencyParser report file used when reuse report mode is activated. "
-          + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false) })
+    description = "Name of the DependencyParser report file used when reuse report mode is activated. "
+      + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false)})
 public class DependencyPlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
@@ -48,10 +48,10 @@ public class DependencyPlugin extends SonarPlugin {
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(DependencySensor.class);
-    
+
     list.add(DependencyResultParser.class);
     list.add(CSharpDsmDecorator.class);
-    
+
     return list;
   }
 }

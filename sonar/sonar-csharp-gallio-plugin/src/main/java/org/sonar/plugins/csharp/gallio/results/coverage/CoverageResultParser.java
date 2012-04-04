@@ -100,7 +100,7 @@ public class CoverageResultParser implements BatchExtension {
     chooseParsingStrategy(root);
 
     List<FileCoverage> fileCoverages = currentStrategy.parse(context, solution, sonarProject, root);
-    
+
     // We filter the files that belong to the current project
     // and we summarize them
     List<FileCoverage> result = Lists.newArrayList();
@@ -114,10 +114,10 @@ public class CoverageResultParser implements BatchExtension {
         result.add(fileCoverage);
       }
     }
-    
+
     return result;
   }
-  
+
   /**
    * This method is necessary due to a modification of the schema between partcover 2.2 and 2.3, for which elements start now with an
    * uppercase letter. Format is a little bit different with partcover4, and NCover use a different format too.

@@ -27,7 +27,7 @@ import org.sonar.dotnet.tools.commons.DotNetToolsException;
 public abstract class DependencyParserException extends DotNetToolsException {
 
   private static final long serialVersionUID = 1L;
-  
+
   private static final String ERROR_MSG = "DependencyParser analysis failed: ";
   private static final int IO_ERROR = 2;
   private static final int CONFIG_ERROR = 3;
@@ -65,7 +65,7 @@ public abstract class DependencyParserException extends DotNetToolsException {
       super(ERROR_MSG + "execution was interrupted by I/O errors (e.g. missing files).");
     }
   }
-  
+
   public static class ConfigDependencyParserException extends DependencyParserException {
 
     private static final long serialVersionUID = 1L;
@@ -74,7 +74,7 @@ public abstract class DependencyParserException extends DotNetToolsException {
       super(ERROR_MSG + "errors found in the (default or user supplied) configuration files.");
     }
   }
-  
+
   public static class UnknownDependencyParserException extends DependencyParserException {
 
     private static final long serialVersionUID = 1L;

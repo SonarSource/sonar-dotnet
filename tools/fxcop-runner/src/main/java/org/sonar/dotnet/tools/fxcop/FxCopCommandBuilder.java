@@ -30,7 +30,6 @@ import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-
 /**
  * Class used to build the command line to run FxCop.
  */
@@ -39,12 +38,11 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
   private static final Logger LOG = LoggerFactory.getLogger(FxCopCommandBuilder.class);
   private static final int DEFAULT_TIMEOUT = 10;
   private static final int MINUTES_TO_SECONDS = 60;
-  
+
   private File silverlightFolder;
   private String[] assemblyDependencyDirectories = new String[] {};
   private boolean ignoreGeneratedCode;
   private int timeoutMinutes = DEFAULT_TIMEOUT;
-  
 
   private FxCopCommandBuilder() {
   }
@@ -107,7 +105,6 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
     this.timeoutMinutes = timeout;
   }
 
-
   /**
    * Transforms this command object into a array of string that can be passed to the CommandExecutor.
    * 
@@ -115,8 +112,7 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
    */
   public Command toCommand() throws FxCopException {
     Collection<File> assemblyToScanFiles = findAssembliesToScan();
-    Collection<File> assemblyDependencyDirectoriesFiles 
-      = FileFinder.findDirectories(solution, vsProject, assemblyDependencyDirectories);
+    Collection<File> assemblyDependencyDirectoriesFiles = FileFinder.findDirectories(solution, vsProject, assemblyDependencyDirectories);
     validate(assemblyToScanFiles);
 
     LOG.debug("- FxCop program         : " + executable);
@@ -143,7 +139,7 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
     if (isSilverlightUsed()) {
       if (silverlightFolder == null || !silverlightFolder.isDirectory()) {
         throw new FxCopException("The following Silverlight directory does not exist, please check your plugin configuration: "
-            + (silverlightFolder == null ? "NULL" : silverlightFolder.getPath()));
+          + (silverlightFolder == null ? "NULL" : silverlightFolder.getPath()));
       }
       LOG.debug("   o [Silverlight] " + silverlightFolder.getAbsolutePath());
       command.addArgument("/d:" + silverlightFolder.getAbsolutePath());

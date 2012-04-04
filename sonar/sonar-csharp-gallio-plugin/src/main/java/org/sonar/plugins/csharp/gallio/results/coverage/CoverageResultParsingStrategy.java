@@ -27,11 +27,10 @@ import org.sonar.api.resources.Project;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
-
 public interface CoverageResultParsingStrategy {
 
   public boolean isCompatible(SMInputCursor rootCursor);
-  
+
   public List<FileCoverage> parse(SensorContext ctx, VisualStudioSolution solution, Project sonarProject, SMInputCursor cursor);
-  
+
 }

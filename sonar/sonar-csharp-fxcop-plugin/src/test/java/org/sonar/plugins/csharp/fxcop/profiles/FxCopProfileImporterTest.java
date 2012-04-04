@@ -77,17 +77,17 @@ public class FxCopProfileImporterTest {
         RuleQuery query = (RuleQuery) iom.getArguments()[0];
         Rule rule = null;
         if (StringUtils.equals(query.getConfigKey(), "AssembliesShouldHaveValidStrongNames@$(FxCopDir)\\Rules\\DesignRules.dll")
-            || StringUtils.equals(query.getKey(), "AssembliesShouldHaveValidStrongNames")) {
+          || StringUtils.equals(query.getKey(), "AssembliesShouldHaveValidStrongNames")) {
           rule = Rule.create(query.getRepositoryKey(), "AssembliesShouldHaveValidStrongNames", "Assemblies should have valid strong names")
               .setConfigKey("AssembliesShouldHaveValidStrongNames@$(FxCopDir)\\Rules\\DesignRules.dll");
 
         } else if (StringUtils.equals(query.getConfigKey(), "UsePropertiesWhereAppropriate@$(FxCopDir)\\Rules\\DesignRules.dll")
-            || StringUtils.equals(query.getKey(), "UsePropertiesWhereAppropriate")) {
+          || StringUtils.equals(query.getKey(), "UsePropertiesWhereAppropriate")) {
           rule = Rule.create(query.getRepositoryKey(), "UsePropertiesWhereAppropriate", "Use properties where appropriate").setConfigKey(
               "UsePropertiesWhereAppropriate@$(FxCopDir)\\Rules\\DesignRules.dll");
 
         } else if (StringUtils.equals(query.getConfigKey(), "AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll")
-            || StringUtils.equals(query.getKey(), "AvoidDuplicateAccelerators")) {
+          || StringUtils.equals(query.getKey(), "AvoidDuplicateAccelerators")) {
           rule = Rule.create(query.getRepositoryKey(), "AvoidDuplicateAccelerators", "Avoid duplicate accelerators").setConfigKey(
               "AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll");
         }

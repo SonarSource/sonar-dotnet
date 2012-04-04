@@ -42,7 +42,7 @@ public class UnitTestReport {
   private int failures = 0;
   private int asserts;
   private List<TestCaseDetail> details;
-  
+
   public void merge(UnitTestReport report) {
     for (TestCaseDetail detail : report.details) {
       addDetail(detail);
@@ -170,7 +170,7 @@ public class UnitTestReport {
   @Override
   public String toString() {
     return "Assembly=" + assemblyName + ", file:" + sourceFile + "(time=" + timeMS / 1000. + "s, tests=" + tests + ", failures=" + failures
-        + ", ignored=" + skipped + ", asserts=" + asserts + ")";
+      + ", ignored=" + skipped + ", asserts=" + asserts + ")";
   }
 
   @Override
@@ -201,7 +201,7 @@ public class UnitTestReport {
     if (assemblyName == null) {
       if (other.assemblyName != null)
         return false;
-    } else if ( !assemblyName.equals(other.assemblyName))
+    } else if (!assemblyName.equals(other.assemblyName))
       return false;
     if (asserts != other.asserts)
       return false;
@@ -214,7 +214,7 @@ public class UnitTestReport {
     if (sourceFile == null) {
       if (other.sourceFile != null)
         return false;
-    } else if ( !sourceFile.equals(other.sourceFile))
+    } else if (!sourceFile.equals(other.sourceFile))
       return false;
     if (tests != other.tests)
       return false;

@@ -46,8 +46,8 @@ import com.google.common.collect.Iterators;
 public class GallioResultParserTest {
 
   private File sourcefile;
-  private GallioResultParser parser;  
-  
+  private GallioResultParser parser;
+
   @Before
   public void setUp() {
     sourcefile = new File("Example\\Example.Core.Tests\\TestMoney.cs");
@@ -105,8 +105,8 @@ public class GallioResultParserTest {
 
       public boolean apply(TestCaseDetail testDetail) {
         return "BagMultiply".equals(testDetail.getName()) && 3 == testDetail.getCountAsserts()
-            && sourcefile.equals(testDetail.getSourceFile()) && TestStatus.SUCCESS == testDetail.getStatus()
-            && 17 == testDetail.getTimeMillis();
+          && sourcefile.equals(testDetail.getSourceFile()) && TestStatus.SUCCESS == testDetail.getStatus()
+          && 17 == testDetail.getTimeMillis();
       }
     };
 

@@ -61,12 +61,10 @@ public abstract class CoverageDecorator implements Decorator {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
     this.vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
     String[] exclusions = configuration.getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY);
-    if (exclusions==null) {
-      this.excludedAssemblies 
-        = Collections.EMPTY_SET;
+    if (exclusions == null) {
+      this.excludedAssemblies = Collections.EMPTY_SET;
     } else {
-      this.excludedAssemblies 
-        = Sets.newHashSet(exclusions);
+      this.excludedAssemblies = Sets.newHashSet(exclusions);
     }
     this.resourceHelper = resourceHelper;
   }
@@ -104,16 +102,15 @@ public abstract class CoverageDecorator implements Decorator {
       }
     }
   }
-  
-  protected abstract void handleUncoveredResource(DecoratorContext context, double lines); 
+
+  protected abstract void handleUncoveredResource(DecoratorContext context, double lines);
 
   private boolean isExcludedFromCoverage(Resource resource) {
     if (excludedAssemblies.isEmpty()) {
       return false;
     }
     Project project = resourceHelper.findParentProject(resource);
-    VisualStudioProject vsProject 
-      = vsSolution.getProjectFromSonarProject(project);
+    VisualStudioProject vsProject = vsSolution.getProjectFromSonarProject(project);
     return excludedAssemblies.contains(vsProject.getName());
   }
 

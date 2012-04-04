@@ -67,7 +67,7 @@ public final class ZipUtils {
       if (currentEntry.startsWith(folderToExtract)) {
         File destFile = new File(destinationFolder, currentEntry);
         destFile.getParentFile().mkdirs();
-        if ( !entry.isDirectory()) {
+        if (!entry.isDirectory()) {
           BufferedInputStream is = null;
           BufferedOutputStream dest = null;
           try {

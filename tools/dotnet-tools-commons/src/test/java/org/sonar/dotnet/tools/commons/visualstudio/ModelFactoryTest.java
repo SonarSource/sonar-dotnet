@@ -210,7 +210,7 @@ public class ModelFactoryTest {
     assertTrue(testProject.isIntegTest());
     assertTrue(secondTestProject.isIntegTest());
   }
-  
+
   @Test
   public void integTestPatterns() {
     VisualStudioProject testProject = new VisualStudioProject();

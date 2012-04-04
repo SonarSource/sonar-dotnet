@@ -66,14 +66,13 @@ public class CoverageDecoratorTest {
     when(project.getLanguageKey()).thenReturn("cs");
 
     vsProject = mock(VisualStudioProject.class);
-    
+
     resourceHelper = mock(ResourceHelper.class);
     when(resourceHelper.findParentProject(any(Resource.class))).thenReturn(project);
 
     microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
     when(microsoftWindowsEnvironment.getCurrentProject(anyString())).thenReturn(vsProject);
-    
-    
+
   }
 
   @Test
@@ -107,7 +106,7 @@ public class CoverageDecoratorTest {
     verify(context, times(1)).saveMeasure(CoreMetrics.LINES_TO_COVER, 36d);
     verify(context, times(1)).saveMeasure(CoreMetrics.UNCOVERED_LINES, 36d);
   }
-  
+
   @Test
   public void testDecorateWithNoCoverageNoStatement() throws Exception {
     // could be an interface or an enum
@@ -126,7 +125,7 @@ public class CoverageDecoratorTest {
     verify(context, never()).saveMeasure(eq(CoreMetrics.LINES_TO_COVER), anyDouble());
     verify(context, never()).saveMeasure(eq(CoreMetrics.UNCOVERED_LINES), anyDouble());
   }
-  
+
   @Test
   public void testDecorateWithNoCLOC() throws Exception {
     CoverageDecorator decorator = createDecorator();

@@ -33,9 +33,8 @@ import org.junit.Test;
 import org.sonar.api.resources.Project;
 import org.sonar.test.TestUtils;
 
-
 public class VisualStudioSolutionTest {
-  
+
   private static final String SOLUTION_PATH = "/solution/Example/Example.sln";
   private static final String SILVERLIGHT_SOLUTION_PATH = "/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String WEB_SOLUTION_PATH = "/solution/web-solution/web-solution.sln";
@@ -47,7 +46,7 @@ public class VisualStudioSolutionTest {
     VisualStudioProject project = solution.getProject(sourceFile);
     assertEquals("Example.Core", project.getName());
   }
-  
+
   @Test
   public void testGetProjectWithFileOutside() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
@@ -55,7 +54,7 @@ public class VisualStudioSolutionTest {
     VisualStudioProject project = solution.getProject(sourceFile);
     assertNull(project);
   }
-  
+
   @Test
   public void testGetProjectWithFakeFile() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
@@ -63,45 +62,45 @@ public class VisualStudioSolutionTest {
     VisualStudioProject project = solution.getProject(sourceFile);
     assertNull(project);
   }
-  
+
   @Test
-    public void testGetUnitTestProjects() throws Exception {
-      VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
-      List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
-      assertEquals(1, testProjects.size());
-    }
-  
+  public void testGetUnitTestProjects() throws Exception {
+    VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
+    List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
+    assertEquals(1, testProjects.size());
+  }
+
   @Test
-    public void testGetUnitTestProjectsNoTest() throws Exception {
-      VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SILVERLIGHT_SOLUTION_PATH));
-      List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
-      assertEquals(0, testProjects.size());
-    }
-  
+  public void testGetUnitTestProjectsNoTest() throws Exception {
+    VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SILVERLIGHT_SOLUTION_PATH));
+    List<VisualStudioProject> testProjects = solution.getUnitTestProjects();
+    assertEquals(0, testProjects.size());
+  }
+
   @Test
   public void testIsAspUsed() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
     assertFalse(solution.isAspUsed());
   }
-  
+
   @Test
   public void testIsAspUsedOk() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(WEB_SOLUTION_PATH));
     assertTrue(solution.isAspUsed());
   }
-  
+
   @Test
   public void testIsSilverlightUsed() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
     assertFalse(solution.isSilverlightUsed());
   }
-  
+
   @Test
   public void testIsSilverlightUsedOk() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SILVERLIGHT_SOLUTION_PATH));
     assertTrue(solution.isSilverlightUsed());
   }
-  
+
   @Test
   public void testGetProjectFromSonarProject() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));
@@ -110,7 +109,7 @@ public class VisualStudioSolutionTest {
     VisualStudioProject vsProject = solution.getProjectFromSonarProject(project);
     assertEquals("Example.Application", vsProject.getName());
   }
-  
+
   @Test
   public void testGetProjectFromSonarProjectWithBranch() throws Exception {
     VisualStudioSolution solution = ModelFactory.getSolution(TestUtils.getResource(SOLUTION_PATH));

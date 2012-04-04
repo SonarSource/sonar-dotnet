@@ -75,12 +75,12 @@ public class StyleCopProfileImporterTest {
         RuleQuery query = (RuleQuery) iom.getArguments()[0];
         Rule rule = null;
         if (StringUtils.equals(query.getConfigKey(), "Microsoft.StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter")
-            || StringUtils.equals(query.getKey(), "ElementMustBeginWithUpperCaseLetter")) {
+          || StringUtils.equals(query.getKey(), "ElementMustBeginWithUpperCaseLetter")) {
           rule = Rule.create(query.getRepositoryKey(), "ElementMustBeginWithUpperCaseLetter", "Element must begin with upper case letter")
               .setConfigKey("Microsoft.StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter");
 
         } else if (StringUtils.equals(query.getConfigKey(), "Microsoft.StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly")
-            || StringUtils.equals(query.getKey(), "KeywordsMustBeSpacedCorrectly")) {
+          || StringUtils.equals(query.getKey(), "KeywordsMustBeSpacedCorrectly")) {
           rule = Rule.create(query.getRepositoryKey(), "KeywordsMustBeSpacedCorrectly", "Keywords must be spaced correctly").setConfigKey(
               "Microsoft.StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly");
 

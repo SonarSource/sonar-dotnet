@@ -33,8 +33,8 @@ import com.sonar.plugins.csharp.squid.check.CSharpCheck;
 import com.sonar.sslr.api.AstNode;
 
 @Rule(key = "CSharp.MethodComplexity", name = "Avoid too complex methods", priority = Priority.MAJOR,
-    description = "<p>The cyclomatic complexity of a method should not exceed a defined threshold. "
-        + "Complex code can perform poorly and will in any case be difficult to understand and therefore to maintain.</p>")
+  description = "<p>The cyclomatic complexity of a method should not exceed a defined threshold. "
+    + "Complex code can perform poorly and will in any case be difficult to understand and therefore to maintain.</p>")
 @BelongsToProfile(title = CSharpConstants.CSHARP_WAY_PROFILE, priority = Priority.MAJOR)
 public class MethodComplexityCheck extends CSharpCheck {
 
@@ -43,7 +43,7 @@ public class MethodComplexityCheck extends CSharpCheck {
   private final static int DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD = 20;
 
   @RuleProperty(key = "maximumMethodComplexityThreshold", description = "The maximum authorized complexity in methods.", defaultValue = ""
-      + DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD)
+    + DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD)
   private int maximumMethodComplexityThreshold = DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD;
 
   @Override

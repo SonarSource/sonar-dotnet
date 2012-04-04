@@ -42,7 +42,7 @@ public final class CSharpConstants {
 
   public static final String CSHARP_CORE_EXECUTED = "C# Core executed";
 
-  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] { "**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs" };
+  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] {"**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs"};
 
   // ----------- Plugin Configuration Properties ----------- //
 
@@ -76,7 +76,7 @@ public final class CSharpConstants {
 
   public static final String TEST_PROJECT_PATTERN_KEY = "sonar.dotnet.visualstudio.testProjectPattern";
   public static final String TEST_PROJECT_PATTERN_DEFVALUE = "*.Tests";
-  
+
   public static final String IT_PROJECT_PATTERN_KEY = "sonar.dotnet.visualstudio.itProjectPattern";
   public static final String IT_PROJECT_PATTERN_DEFVALUE = "";
 

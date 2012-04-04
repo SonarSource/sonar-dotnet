@@ -35,12 +35,11 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
-
 public class FileFinderTest {
 
   private VisualStudioSolution solution;
   private VisualStudioProject project;
-  
+
   @Before
   public void setUp() {
     solution = mock(VisualStudioSolution.class);
@@ -49,9 +48,9 @@ public class FileFinderTest {
     File projectDir = TestUtils.getResource("/solution/Example/Example.Core");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(project.getDirectory()).thenReturn(projectDir);
-    
+
   }
-  
+
   @Test
   public void testFindFiles() {
     Collection<File> result = FileFinder.findFiles(solution, project, "Model\\SubType.cs");
@@ -60,7 +59,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("SubType.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindFilesUsingWorkDir() {
     File workDir = TestUtils.getResource("/solution/Example/Example.Core/Model");
@@ -70,7 +69,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("SubType.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindFilesUsingWorkPath() {
     String workPath = "Example.Core/Model";
@@ -80,7 +79,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("SubType.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindSubDirectories() {
     Collection<File> result = FileFinder.findDirectories(solution, project, "**/*");
@@ -90,14 +89,14 @@ public class FileFinderTest {
       assertTrue(file.isDirectory());
     }
   }
-  
+
   @Test
   public void testFindSubDirectoriesWithNull() {
-    Collection<File> result = FileFinder.findDirectories(solution, project, (String[])null);
+    Collection<File> result = FileFinder.findDirectories(solution, project, (String[]) null);
     assertNotNull(result);
     assertTrue(result.isEmpty());
   }
-  
+
   @Test
   public void testFindAbsoluteFile() {
     File expectedCsFile = TestUtils.getResource("/solution/MessyTestSolution/MessyTestApplication/Program.cs");
@@ -107,7 +106,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("Program.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindAbsoluteFileWithPatternOutsideSolution() {
     File outsideDir = TestUtils.getResource("/solution/BlankSilverlightSolution");
@@ -118,7 +117,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("AssemblyInfo.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindRelativeFileWithPatternOutsideSolution() {
     String pattern = "../../BlankSilverlightSolution/**/*Info.cs";
@@ -128,14 +127,14 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("AssemblyInfo.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindFilesWithBadPattern() {
     Collection<File> result = FileFinder.findFiles(solution, project, "../toto/**/*.cs");
     assertNotNull(result);
     assertTrue(result.isEmpty());
   }
-  
+
   @Test
   public void testFindFilesWithPattern() {
     Collection<File> result = FileFinder.findFiles(solution, project, "**/*.cs");
@@ -144,7 +143,7 @@ public class FileFinderTest {
       assertTrue(file.exists());
     }
   }
-  
+
   @Test
   public void testFindFilesWithMultiplePatterns() {
     Collection<File> result = FileFinder.findFiles(solution, project, "S*.cs;**/*Money.cs");
@@ -153,7 +152,7 @@ public class FileFinderTest {
       assertTrue(file.exists());
     }
   }
-  
+
   @Test
   public void testPatternWithSubstitution() {
     Collection<File> result = FileFinder.findFiles(solution, project, "$(SolutionDir)/Example.Core/*.cs");
@@ -162,11 +161,11 @@ public class FileFinderTest {
       assertTrue(file.exists());
     }
   }
-  
+
   @Test
   public void testPatternWithSubstitutionOutsideSolution() {
-    Collection<File> result = 
-      FileFinder.findFiles(solution, project, "$(SolutionDir)/../BlankSilverlightSolution/**/*Info.cs");
+    Collection<File> result =
+        FileFinder.findFiles(solution, project, "$(SolutionDir)/../BlankSilverlightSolution/**/*Info.cs");
     assertEquals(2, result.size());
     File csFile = result.iterator().next();
     assertTrue(csFile.exists());

@@ -57,7 +57,7 @@ public class GendarmeViolationMakerTest {
   private static Project project;
   private static SensorContext context;
   private static CSharpResourcesBridge resourcesBridge;
-  private static MicrosoftWindowsEnvironment env; 
+  private static MicrosoftWindowsEnvironment env;
   private static Rule aRule;
   private static Resource aFileIMoney;
   private static Resource aFileMoney;
@@ -74,13 +74,13 @@ public class GendarmeViolationMakerTest {
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
     when(solution.getProjectFromSonarProject(any(Project.class))).thenReturn(vsProject);
     when(solution.getProject(any(File.class))).thenReturn(vsProject);
-    
+
     project = mock(Project.class);
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
     when(project.getFileSystem()).thenReturn(fileSystem);
     resourcesBridge = createFakeBridge();
-    
+
     resourceHelper = mock(ResourceHelper.class);
     when(resourceHelper.isResourceInProject(any(Resource.class), eq(project))).thenReturn(true);
   }
@@ -170,7 +170,7 @@ public class GendarmeViolationMakerTest {
     assertNull(violation.getLineId());
     assertThat(violation.getMessage(), is("Message"));
   }
-  
+
   @Test
   public void testCreateViolationOutsideProject() throws Exception {
     violationMaker.setCurrentSource("C:\\Outside\\Example\\Example.Core\\Money.cs");

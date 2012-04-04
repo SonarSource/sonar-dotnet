@@ -28,11 +28,11 @@ package org.sonar.dotnet.tools.gallio;
  */
 public enum GallioRunnerType {
 
-  ISOLATED_APP_DOMAIN("IsolatedAppDomain"), 
-  ISOLATED_PROCESS("IsolatedProcess"), 
-  LOCAL("Local"), 
+  ISOLATED_APP_DOMAIN("IsolatedAppDomain"),
+  ISOLATED_PROCESS("IsolatedProcess"),
+  LOCAL("Local"),
   NCOVER("NCover3");
-  
+
   private final String value;
 
   private GallioRunnerType(String value) {
@@ -42,7 +42,7 @@ public enum GallioRunnerType {
   public String getValue() {
     return value;
   }
-  
+
   public static GallioRunnerType parse(String param) {
     GallioRunnerType[] values = GallioRunnerType.values();
     for (GallioRunnerType gallioRunnerType : values) {
@@ -52,5 +52,5 @@ public enum GallioRunnerType {
     }
     throw new IllegalArgumentException(param + " is not a valid Gallio runner type");
   }
-  
+
 }

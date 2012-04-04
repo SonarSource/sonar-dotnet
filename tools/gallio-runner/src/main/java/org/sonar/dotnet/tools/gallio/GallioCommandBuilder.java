@@ -57,10 +57,9 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private File openCoverInstallDirectory;
   private String[] coverageExcludes;
   private File coverageReportFile;
-  
+
   private List<File> testAssemblies;
 
-  
   private GallioCommandBuilder() {
   }
 
@@ -76,13 +75,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     builder.solution = solution;
     return builder;
   }
-  
 
-  
   public void setTestAssemblies(List<File> testAssemblies) {
     this.testAssemblies = testAssemblies;
   }
-   
+
   /**
    * Sets the install dir for Gallio
    * 
@@ -140,7 +137,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setCoverageTool(String coverageToolName) {
     this.coverageTool = CoverageTool.findFromName(coverageToolName);
   }
-  
+
   /**
    * Set the Gallio runner type in order to specify how the test 
    * executions will be isolated from each others.  
@@ -162,7 +159,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setPartCoverInstallDirectory(File partCoverInstallDirectory) {
     this.partCoverInstallDirectory = partCoverInstallDirectory;
   }
-  
+
   /**
    * Sets OpenCover installation directory.
    * 
@@ -302,7 +299,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
 
     // We add all the configured exclusions
-    if (coverageExcludes!=null) {
+    if (coverageExcludes != null) {
       for (String exclusion : coverageExcludes) {
         LOG.debug("- Partcover exclude   : {}", exclusion.trim());
         command.addArgument("--exclude");
@@ -314,7 +311,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     command.addArgument("--output");
     command.addArgument(coverageReportFile.getAbsolutePath());
   }
-  
+
   private void addOpenCoverArguments(Command command, List<String> gallioArguments) {
     command.addArgument("-register:user");
     command.addArgument("-target:" + gallioExecutable.getAbsolutePath());
@@ -325,7 +322,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     command.addArgument("\"-targetargs:" + escapeGallioArguments(gallioArguments) + "\"");
 
     final StringBuilder filterBuilder = new StringBuilder("\"-filter:");
-    
+
     // We add all the covered assemblies
     for (String assemblyName : listCoveredAssemblies()) {
       LOG.debug("- Opencover include   : [{}]*", assemblyName);
@@ -333,7 +330,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
 
     // We add all the configured exclusions
-    if (coverageExcludes!=null) {
+    if (coverageExcludes != null) {
       for (String exclusion : coverageExcludes) {
         LOG.debug("- Opencover exclude   : {}", exclusion.trim());
         filterBuilder.append("-[" + exclusion.trim() + "]* ");
@@ -341,11 +338,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
     filterBuilder.append("\"");
     command.addArgument(filterBuilder.toString());
-    
+
     command.addArgument("-mergebyhash");
 
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
-    command.addArgument("-output:"+coverageReportFile.getAbsolutePath());
+    command.addArgument("-output:" + coverageReportFile.getAbsolutePath());
   }
 
   private void addNCoverArguments(Command command, List<String> gallioArguments) {
@@ -355,16 +352,16 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     command.addArgument("/runner-property:NCoverCoverageFile=" + coverageReportFile.getAbsolutePath());
 
     List<String> coveredAssembliesList = listCoveredAssemblies();
-    if (coverageExcludes!=null) {
+    if (coverageExcludes != null) {
       for (String exclusion : coverageExcludes) {
         LOG.debug("- NCover POTENTIAL exclude   : {}", exclusion.trim());
-        if(coveredAssembliesList.contains(exclusion.trim())) {
+        if (coveredAssembliesList.contains(exclusion.trim())) {
           LOG.debug("- NCover ACTUAL exclude   : {}", exclusion.trim());
           coveredAssembliesList.remove(exclusion.trim());
         }
       }
     }
-    
+
     String coveredAssemblies = StringUtils.join(coveredAssembliesList.toArray(), ";");
     LOG.debug("- NCover arguments    : {}", coveredAssemblies);
     command.addArgument("/runner-property:NCoverArguments=//ias " + coveredAssemblies);
@@ -373,7 +370,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   protected List<String> listCoveredAssemblies() {
     List<String> coveredAssemblyNames = new ArrayList<String>();
     for (VisualStudioProject visualProject : solution.getProjects()) {
-      if ( !visualProject.isTest()) {
+      if (!visualProject.isTest()) {
         coveredAssemblyNames.add(visualProject.getAssemblyName());
       }
     }

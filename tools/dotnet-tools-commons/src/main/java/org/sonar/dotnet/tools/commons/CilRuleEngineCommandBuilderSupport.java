@@ -22,11 +22,10 @@ package org.sonar.dotnet.tools.commons;
 import java.io.File;
 import java.util.Collection;
 
-
 public abstract class CilRuleEngineCommandBuilderSupport extends CilToolCommandBuilderSupport {
 
   protected File configFile;
-  
+
   /**
    * Set the configuration file that must be used to perform the analysis. It is mandatory.
    * 

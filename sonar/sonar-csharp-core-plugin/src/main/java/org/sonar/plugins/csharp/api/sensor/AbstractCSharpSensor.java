@@ -39,12 +39,12 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
  * Super class of {@link AbstractRegularCSharpSensor} and {@link AbstractTestCSharpSensor}.
  */
 public abstract class AbstractCSharpSensor implements Sensor {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(AbstractCSharpSensor.class);
 
   public static final String MODE_SKIP = "skip";
   public static final String MODE_REUSE_REPORT = "reuseReport";
-  
+
   private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   protected final String toolName;
   protected final String executionMode;
@@ -73,7 +73,7 @@ public abstract class AbstractCSharpSensor implements Sensor {
       LOG.info("{} plugin won't execute as it is set to 'skip' mode.", toolName);
       return false;
     }
-    
+
     return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
   }
 
@@ -105,7 +105,7 @@ public abstract class AbstractCSharpSensor implements Sensor {
   protected VisualStudioProject getVSProject(Project project) {
     return microsoftWindowsEnvironment.getCurrentProject(project.getName());
   }
-  
+
   /**
    * Is the current project a test project ?
    * @param project
@@ -114,14 +114,14 @@ public abstract class AbstractCSharpSensor implements Sensor {
   protected boolean isTestProject(Project project) {
     VisualStudioProject vsProject = getVSProject(project);
     final boolean result;
-    if (vsProject==null) {
+    if (vsProject == null) {
       result = false; // probably the root project, solution level
     } else {
       result = vsProject.isTest();
     }
     return result;
   }
-  
+
   protected VisualStudioSolution getVSSolution() {
     return microsoftWindowsEnvironment.getCurrentSolution();
   }
@@ -134,7 +134,7 @@ public abstract class AbstractCSharpSensor implements Sensor {
   protected MicrosoftWindowsEnvironment getMicrosoftWindowsEnvironment() {
     return microsoftWindowsEnvironment;
   }
-  
+
   protected Collection<java.io.File> findFiles(Project project, String... queries) {
     VisualStudioSolution vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
     VisualStudioProject vsProject = getVSProject(project);

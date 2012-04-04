@@ -98,7 +98,7 @@ public class VisualStudioProject {
 
       String filePath = canonicalFile.getPath();
       String directoryPath = canonicalDirectory.getPath();
-      if ( !filePath.startsWith(directoryPath)) {
+      if (!filePath.startsWith(directoryPath)) {
         // The file is not in the directory
         return null;
       }
@@ -137,6 +137,7 @@ public class VisualStudioProject {
   public ArtifactType getType() {
     return this.type;
   }
+
   public UUID getProjectGuid() {
     return projectGuid;
   }
@@ -222,8 +223,8 @@ public class VisualStudioProject {
   @Override
   public String toString() {
     return "Project(name=" + name + ", type=" + type + ", directory=" + directory + ", file=" + projectFile
-        + ", assemblyName=" + assemblyName + ", rootNamespace=" + rootNamespace + ", debugDir=" + debugOutputDir + ", releaseDir="
-        + releaseOutputDir + ")";
+      + ", assemblyName=" + assemblyName + ", rootNamespace=" + rootNamespace + ", debugDir=" + debugOutputDir + ", releaseDir="
+      + releaseOutputDir + ")";
   }
 
   /**
@@ -363,20 +364,19 @@ public class VisualStudioProject {
   public boolean isTest() {
     return unitTest || integTest;
   }
-  
+
   public boolean isUnitTest() {
     return this.unitTest;
   }
-  
+
   public boolean isIntegTest() {
     return this.integTest;
   }
 
-  
   void setUnitTest(boolean test) {
     this.unitTest = test;
   }
-  
+
   void setIntegTest(boolean test) {
     this.integTest = test;
   }
@@ -552,7 +552,7 @@ public class VisualStudioProject {
   public boolean isSilverlightProject() {
     return silverlightProject;
   }
-  
+
   void setBuildConfOutputDirMap(Map<String, File> buildConfOutputDirMap) {
     this.buildConfOutputDirMap = buildConfOutputDirMap;
   }

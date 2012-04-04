@@ -45,12 +45,11 @@ import com.google.common.collect.Maps;
 public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
 
   private static final Logger LOG = LoggerFactory.getLogger(OpenCoverParsingStrategy.class);
-  
+
   private Map<Integer, File> fileRegistry;
-  
-  private Map<File, FileCoverage> fileCoverageRegistry; 
-  
-  
+
+  private Map<File, FileCoverage> fileCoverageRegistry;
+
   public boolean isCompatible(SMInputCursor rootCursor) {
     return "CoverageSession".equals(findElementName(rootCursor));
   }
@@ -59,7 +58,7 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
 
     fileRegistry = Maps.newHashMap();
     fileCoverageRegistry = Maps.newHashMap();
-    
+
     try {
       cursor = cursor.childElementCursor().advance().childElementCursor();
       while (cursor.getNext() != null) {
@@ -68,7 +67,7 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
           if ("Files".equals(moduleChildrenCursor.getQName().getLocalPart())) {
             fileRegistry = Maps.newHashMap();
             SMInputCursor fileCursor = moduleChildrenCursor.childElementCursor();
-            while (fileCursor.getNext() != null) { 
+            while (fileCursor.getNext() != null) {
               int uid = Integer.valueOf(fileCursor.getAttrValue("uid"));
               File sourceFile = new File(fileCursor.getAttrValue("fullPath"));
               fileRegistry.put(uid, sourceFile);
@@ -81,22 +80,20 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
     } catch (XMLStreamException e) {
       throw new SonarException(e);
     }
-    
+
     return new ArrayList<FileCoverage>(fileCoverageRegistry.values());
   }
-  
+
   private void parseClassesBloc(SMInputCursor cursor) throws XMLStreamException {
-    SMInputCursor classCursor 
-      = cursor.childElementCursor(); 
+    SMInputCursor classCursor = cursor.childElementCursor();
     while (classCursor.getNext() != null) {
-      SMInputCursor methodCursor 
-        = classCursor.childElementCursor("Methods").advance().childElementCursor(); 
+      SMInputCursor methodCursor = classCursor.childElementCursor("Methods").advance().childElementCursor();
       while (methodCursor.getNext() != null) {
         parseMethodBloc(methodCursor);
       }
     }
   }
-  
+
   private void parseMethodBloc(SMInputCursor cursor) throws XMLStreamException {
     SMInputCursor methodCursor = cursor.childElementCursor();
     FileCoverage fileCoverage = null;
@@ -105,13 +102,13 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
         int fileId = Integer.valueOf(methodCursor.getAttrValue("uid"));
         File sourceFile = fileRegistry.get(fileId);
         fileCoverage = fileCoverageRegistry.get(sourceFile);
-        if (fileCoverage==null) {
+        if (fileCoverage == null) {
           fileCoverage = new FileCoverage(sourceFile);
           fileCoverageRegistry.put(sourceFile, fileCoverage);
         }
       } else if ("SequencePoints".equals(methodCursor.getLocalName())) {
         Collection<CoveragePoint> points = parseSequencePointsBloc(methodCursor);
-        if (fileCoverage==null) {
+        if (fileCoverage == null) {
           LOG.debug("Coverage point not associated to any source file");
         } else {
           for (CoveragePoint point : points) {
@@ -121,7 +118,7 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
       }
     }
   }
-  
+
   private Collection<CoveragePoint> parseSequencePointsBloc(SMInputCursor cursor) throws XMLStreamException {
     SMInputCursor pointCursor = cursor.childElementCursor();
     List<CoveragePoint> result = Lists.newArrayList();

@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public enum CoverageTool {
-  
+
   /**
    * No coverage tool
    */
@@ -46,7 +46,7 @@ public enum CoverageTool {
    * "NCover" tool
    */
   NCOVER("NCover", GallioRunnerType.NCOVER),
-  
+
   /**
    * "OpenCover" tool
    */

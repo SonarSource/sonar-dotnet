@@ -33,7 +33,7 @@ public class FileCoverageTest {
     point.setStartLine(3);
     point.setEndLine(10);
     firstCoverage.addPoint(point);
-    
+
     FileCoverage secondCoverage = new FileCoverage(null);
     point = new CoveragePoint();
     point.setCountVisits(3);
@@ -45,16 +45,16 @@ public class FileCoverageTest {
     point.setStartLine(9);
     point.setEndLine(20);
     secondCoverage.addPoint(point);
-    
+
     firstCoverage.merge(secondCoverage);
-    
+
     assertEquals(18, firstCoverage.getCountLines());
     assertEquals(13, firstCoverage.getCoveredLines());
-    assertEquals(13d/18d, firstCoverage.getCoverage(), 0.01d);
-    
+    assertEquals(13d / 18d, firstCoverage.getCoverage(), 0.01d);
+
     SourceLine intersectionLine = firstCoverage.getLines().get(8);
     assertEquals(5, intersectionLine.getCountVisits());
-    
+
     SourceLine disjunctionLine = firstCoverage.getLines().get(4);
     assertEquals(2, disjunctionLine.getCountVisits());
   }

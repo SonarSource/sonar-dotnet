@@ -65,7 +65,7 @@ public class GendarmeSensorTest {
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
-  
+
   private VisualStudioProject vsProject;
 
   @Before

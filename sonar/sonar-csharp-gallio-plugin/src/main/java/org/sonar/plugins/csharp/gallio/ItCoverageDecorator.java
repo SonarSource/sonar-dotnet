@@ -38,9 +38,9 @@ public class ItCoverageDecorator extends CoverageDecorator {
 
   public ItCoverageDecorator(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
       ResourceHelper resourceHelper) {
-    
+
     super(configuration, microsoftWindowsEnvironment, resourceHelper);
-    
+
     this.executionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
     this.testMetric = CoreMetrics.IT_COVERAGE;
   }

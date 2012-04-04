@@ -65,7 +65,7 @@ public class MsBuildFileGeneratorTest {
 
   @Test
   public void testGenerateFile() {
-    if ( !outputFolder.exists()) {
+    if (!outputFolder.exists()) {
       outputFolder.mkdirs();
     }
     generator.generateFile(outputFolder, null);

@@ -46,18 +46,18 @@ public class FileCoverage {
     this.file = file;
     this.lines = new HashMap<Integer, SourceLine>();
   }
-  
+
   public void merge(FileCoverage coverage) {
     for (SourceLine line : coverage.lines.values()) {
       SourceLine existingLine = lines.get(line.getLineNumber());
-      if (existingLine==null) {
+      if (existingLine == null) {
         lines.put(line.getLineNumber(), line);
       } else {
         existingLine.update(line);
       }
       summarize();
     }
-    
+
   }
 
   /**
@@ -127,7 +127,7 @@ public class FileCoverage {
   public int getCountLines() {
     return this.countLines;
   }
-  
+
   /**
    * Returns the coveredLines.
    * 
@@ -148,10 +148,9 @@ public class FileCoverage {
     }
     return Math.round(((double) coveredLines / (double) countLines) * 100) * 0.01;
   }
-  
 
   public String toString() {
     return "File(name=" + file.getName() + ", coverage=" + getCoverage() + ", lines=" + getCountLines()
-        + ", covered=" + getCoveredLines() + ")";
+      + ", covered=" + getCoveredLines() + ")";
   }
 }

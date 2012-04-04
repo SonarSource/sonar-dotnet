@@ -90,15 +90,14 @@ public class GallioSensor extends AbstractCSharpSensor {
       return false;
     }
     if (getMicrosoftWindowsEnvironment().getCurrentSolution() != null
-        && getMicrosoftWindowsEnvironment().getCurrentSolution().getUnitTestProjects().isEmpty()) {
+      && getMicrosoftWindowsEnvironment().getCurrentSolution().getUnitTestProjects().isEmpty()) {
       LOG.info("Gallio won't execute as there are no test projects.");
       return false;
     }
 
     return super.shouldExecuteOnProject(project);
   }
-  
-  
+
   private void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
@@ -107,21 +106,19 @@ public class GallioSensor extends AbstractCSharpSensor {
       assemblyFileList.add(assembly);
     }
   }
-  
+
   private List<File> findTestAssemblies(boolean it, String[] testAssemblyPatterns) throws GallioException {
     Set<File> assemblyFiles = Sets.newHashSet();
     if (solution != null) {
-      
-      Collection<VisualStudioProject> testProjects 
-        = it ? solution.getIntegTestProjects(): solution.getUnitTestProjects();  
+
+      Collection<VisualStudioProject> testProjects = it ? solution.getIntegTestProjects() : solution.getUnitTestProjects();
       if (testAssemblyPatterns.length == 0) {
         for (VisualStudioProject visualStudioProject : testProjects) {
           addAssembly(assemblyFiles, visualStudioProject);
         }
       } else {
         for (VisualStudioProject visualStudioProject : testProjects) {
-          Collection<File> projectTestAssemblies 
-            = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
+          Collection<File> projectTestAssemblies = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
           if (projectTestAssemblies.isEmpty()) {
             addAssembly(assemblyFiles, visualStudioProject);
           } else {
@@ -129,7 +126,7 @@ public class GallioSensor extends AbstractCSharpSensor {
           }
         }
       }
-      
+
     } else {
       throw new GallioException("No .NET solution or project has been given to the Gallio command builder.");
     }
@@ -138,22 +135,22 @@ public class GallioSensor extends AbstractCSharpSensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    
+
     solution = getMicrosoftWindowsEnvironment().getCurrentSolution();
-    
+
     workDir = new File(solution.getSolutionDir(), getMicrosoftWindowsEnvironment().getWorkingDirectory());
-    if ( !workDir.exists()) {
+    if (!workDir.exists()) {
       workDir.mkdirs();
     }
-    
+
     safeMode = configuration.getBoolean(GallioConstants.SAFE_MODE, false);
     timeout = configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE);
-    
+
     String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
     String gallioFilter = configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE);
-    
+
     executeRunner(false, testAssemblyPatterns, gallioFilter, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
-    
+
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
     if ("active".equals(itExecutionMode)) {
       String[] itAssemblyPatterns = configuration.getStringArray(GallioConstants.IT_TEST_ASSEMBLIES_KEY);
@@ -163,14 +160,14 @@ public class GallioSensor extends AbstractCSharpSensor {
 
     // tell that tests were executed so that no other project tries to launch them a second time
     getMicrosoftWindowsEnvironment().setTestExecutionDone();
-    
+
   }
 
   private void executeRunner(boolean it, String[] assemblyPatterns, String gallioFilter, String reportFileName, String coverageReportFileName) {
     try {
-      
+
       List<File> testAssemblies = findTestAssemblies(it, assemblyPatterns);
-      
+
       if (safeMode) {
         for (File assembly : testAssemblies) {
           File gallioReportFile = new File(workDir, assembly.getName() + "." + reportFileName);
@@ -190,13 +187,13 @@ public class GallioSensor extends AbstractCSharpSensor {
       throw new SonarException("Gallio execution failed.", e);
     }
   }
-  
+
   private GallioRunner createRunner(File workDir) {
     // create runner
-    File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE)); 
+    File gallioInstallDir = new File(configuration.getString(GallioConstants.INSTALL_FOLDER_KEY, GallioConstants.INSTALL_FOLDER_DEFVALUE));
     return GallioRunner.create(gallioInstallDir.getAbsolutePath(), workDir.getAbsolutePath(), true);
   }
-  
+
   private GallioCommandBuilder createBuilder(GallioRunner runner, List<File> testAssemblies, String gallioFilter, File gallioReportFile, File coverageReportFile) {
     GallioCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution());
 

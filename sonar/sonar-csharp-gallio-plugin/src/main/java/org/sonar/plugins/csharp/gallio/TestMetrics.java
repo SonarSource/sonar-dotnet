@@ -40,8 +40,8 @@ public class TestMetrics implements Metrics {
       .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new SumChildValuesFormula(true)).create();
 
   public static final Metric ASSERT_PER_TEST = new Metric.Builder("assert_per_test", "Asserts per Test", Metric.ValueType.FLOAT)
-  .setDescription("The average number of asserts per test").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
-  .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new AverageAssertFormula()).create();
+      .setDescription("The average number of asserts per test").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
+      .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new AverageAssertFormula()).create();
 
   public static final Metric ELOC = new Metric.Builder("eloc", "Effective lines of code", Metric.ValueType.INT)
       .setDescription("The number of lines of code with statements").setDirection(Metric.DIRECTION_WORST).setQualitative(false)

@@ -29,7 +29,6 @@ import org.sonar.dotnet.tools.commons.CilToolCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-
 /**
  * Class used to build the command line to run the dependencyparser tool.
  */
@@ -57,7 +56,6 @@ public final class DependencyParserCommandBuilder extends CilToolCommandBuilderS
     return builder;
   }
 
-
   protected String getBuildConfigurations() {
     return buildConfigurations;
   }
@@ -72,7 +70,7 @@ public final class DependencyParserCommandBuilder extends CilToolCommandBuilderS
     validate(assemblyToScanFiles);
 
     File assembly = this.vsProject.getArtifact(this.getBuildConfigurations());
-    
+
     LOG.debug("- DependencyParser program    : " + executable);
     Command command = Command.create(executable.getAbsolutePath());
 

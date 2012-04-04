@@ -100,7 +100,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       String projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
       if (projectKey.equals(root.getKey())) {
         throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
-            + "'). Please set a unique 'sonar.projectKey' for the solution.");
+          + "'). Please set a unique 'sonar.projectKey' for the solution.");
       }
 
       ProjectDefinition subProject = ProjectDefinition.create().setProperties((Properties) root.getProperties().clone())
@@ -117,11 +117,13 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
         for (SourceFile sourceFile : vsProject.getSourceFiles()) {
           subProject.addSourceFiles(sourceFile.getFile());
         }
-        
-        /* TODO not used
-        for(BinaryReference ref : vsProject.getBinaryReferences()){
-          subProject.addLibrary(ref.getAssemblyName()+ " zozo");
-        }*/
+
+        /*
+         * TODO not used
+         * for(BinaryReference ref : vsProject.getBinaryReferences()){
+         * subProject.addLibrary(ref.getAssemblyName()+ " zozo");
+         * }
+         */
       }
 
       LOG.debug("  - Adding Sub Project => {}", subProject.getName());
@@ -136,9 +138,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     // .NET SDK folder
     File dotnetSdkDirectory = new File(configuration.getString(CSharpConstants.getDotnetSdkDirKey(dotnetVersion),
         CSharpConstants.getDotnetSdkDirDefaultValue(dotnetVersion)));
-    if ( !dotnetSdkDirectory.isDirectory()) {
+    if (!dotnetSdkDirectory.isDirectory()) {
       throw new SonarException("The following .NET SDK directory does not exist, please check your plugin configuration: "
-          + dotnetSdkDirectory.getPath());
+        + dotnetSdkDirectory.getPath());
     } else {
       microsoftWindowsEnvironment.setDotnetSdkDirectory(dotnetSdkDirectory);
     }
@@ -153,9 +155,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     if (defaultSilverlightPath.equals(silverlightPath)) {
       // default value used, no validity check
       LOG.debug("Default silverlight path will be used");
-    } else if ( !silverlightDirectory.isDirectory()) {
+    } else if (!silverlightDirectory.isDirectory()) {
       throw new SonarException("The following silverlight SDK directory does not exist, please check your plugin configuration: "
-          + silverlightDirectory.getPath());
+        + silverlightDirectory.getPath());
     }
     microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }
@@ -202,12 +204,12 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
   private File searchForSlnFile(File baseDir) {
     File slnFile = null;
     @SuppressWarnings("unchecked")
-    Collection<File> foundSlnFiles = FileUtils.listFiles(baseDir, new String[] { "sln" }, false);
+    Collection<File> foundSlnFiles = FileUtils.listFiles(baseDir, new String[] {"sln"}, false);
     if (foundSlnFiles.isEmpty()) {
       LOG.warn("No '.sln' file specified, and none found at the root of the project: " + baseDir.getAbsolutePath());
     } else if (foundSlnFiles.size() > 1) {
       LOG.warn("More than one '.sln' file found at the root of the project: please tell which one to use via the configuration ("
-          + CSharpConstants.SOLUTION_FILE_KEY + ").");
+        + CSharpConstants.SOLUTION_FILE_KEY + ").");
     } else {
       slnFile = foundSlnFiles.iterator().next();
     }

@@ -57,7 +57,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.COVERAGE_LINE_HITS_DATA);
-  
+
   private final PropertiesBuilder<String, Integer> itLineHitsBuilder = new PropertiesBuilder<String, Integer>(
       CoreMetrics.IT_COVERAGE_LINE_HITS_DATA);
 
@@ -83,10 +83,9 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     analyseUnitCoverage(project, context);
     analyseIntegCoverage(project, context);
   }
-  
+
   public void analyseUnitCoverage(Project project, SensorContext context) {
-    Collection<File> coverageReportFiles 
-      = findReportsToAnalyse(executionMode, GallioConstants.GALLIO_COVERAGE_REPORT_XML, GallioConstants.REPORTS_COVERAGE_PATH_KEY);
+    Collection<File> coverageReportFiles = findReportsToAnalyse(executionMode, GallioConstants.GALLIO_COVERAGE_REPORT_XML, GallioConstants.REPORTS_COVERAGE_PATH_KEY);
     if (coverageReportFiles.isEmpty()) {
       return;
     }
@@ -94,14 +93,13 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
     // We parse the file and save the results
     parseAndSaveCoverageResults(project, context, coverageReportFiles, false);
   }
-  
+
   public void analyseIntegCoverage(Project project, SensorContext context) {
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE, "skip");
     if ("skip".equals(itExecutionMode)) {
       return;
     }
-    Collection<File> coverageReportFiles 
-      = findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML, GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY);
+    Collection<File> coverageReportFiles = findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML, GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY);
     if (coverageReportFiles.isEmpty()) {
       return;
     }
@@ -119,10 +117,10 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       String[] reportPath = configuration.getStringArray(reportPathKey, reportDefaultPath);
       reportFiles = FileFinder.findFiles(getVSSolution(), solutionDir, reportPath);
       LOG.info("Reusing Gallio it coverage reports: " + Joiner.on(" ; ").join(reportFiles));
-    } else if ( !getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
+    } else if (!getMicrosoftWindowsEnvironment().isTestExecutionDone()) {
       // This means that we are not in REUSE or SKIP mode, but for some reasons execution has not been done => skip the analysis
       LOG.info("It Coverage report analysis won't execute as Gallio was not executed.");
-    } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)){
+    } else if (configuration.getBoolean(GallioConstants.SAFE_MODE, false)) {
       reportFiles = FileFinder.findFiles(getVSSolution(), workDir, "*." + reportFileName);
       LOG.info("(Safe mode) Parsing Gallio it coverage reports: " + Joiner.on(" ; ").join(reportFiles));
     } else {
@@ -136,7 +134,6 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
 
     return reportFiles;
   }
-
 
   private void parseAndSaveCoverageResults(Project project, SensorContext context, Collection<File> reportFiles, boolean it) {
     Map<File, FileCoverage> fileCoverageMap = Maps.newHashMap();
@@ -191,7 +188,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    */
   private Measure getHitData(FileCoverage coverable, boolean it) {
     PropertiesBuilder<String, Integer> hitsBuilder = it ? itLineHitsBuilder : this.lineHitsBuilder;
-    
+
     hitsBuilder.clear();
     Map<Integer, SourceLine> lines = coverable.getLines();
     for (SourceLine line : lines.values()) {

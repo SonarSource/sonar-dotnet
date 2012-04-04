@@ -53,7 +53,6 @@ public class CoverageResultParserTest {
   private SensorContext context;
   private Project project;
   private VisualStudioSolution solution;
-  
 
   @Before
   public void setUp() {
@@ -63,19 +62,19 @@ public class CoverageResultParserTest {
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Work\\CodeQuality\\Temp\\Example")));
     project = mock(Project.class);
     when(project.getFileSystem()).thenReturn(fileSystem);
-    when(project.getName()).thenReturn("Example.CoreX"); // we check that assembly/project names are not taken in account (SONARPLUGINS-1517)
-    
+    when(project.getName()).thenReturn("Example.CoreX"); // we check that assembly/project names are not taken in account
+                                                         // (SONARPLUGINS-1517)
+
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
     when(vsProject.getName()).thenReturn("Example.CoreX");
-    
+
     solution = mock(VisualStudioSolution.class);
     when(solution.getProject(any(File.class))).thenReturn(vsProject);
     when(solution.getProjectFromSonarProject(eq(project))).thenReturn(vsProject);
-   
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment =  mock(MicrosoftWindowsEnvironment.class);
+
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
     when(microsoftWindowsEnvironment.getCurrentSolution()).thenReturn(solution);
-    
-    
+
     parser = new CoverageResultParser(context, microsoftWindowsEnvironment);
   }
 
@@ -190,7 +189,7 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
-  
+
   @Test
   public void testParseOpenCover() {
     ParsingParameters params = new ParsingParameters();
@@ -204,7 +203,7 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
-  
+
   @Test
   public void parseEmptyPartCoverReport() {
     File file = TestUtils.getResource("/Results/coverage/empty-partcover-report.xml");
@@ -223,12 +222,12 @@ public class CoverageResultParserTest {
 
     Collection<FileCoverage> filesFound = Collections2.filter(files, new Predicate<FileCoverage>() {
       public boolean apply(FileCoverage input) {
-   
+
         return StringUtils.contains(input.getFile().getName(), parameters.fileName);
       }
     });
     assertEquals(1, filesFound.size());
-    
+
     assertEquals(parameters.fileNumber, files.size());
 
     FileCoverage firstFileCoverage = filesFound.iterator().next();

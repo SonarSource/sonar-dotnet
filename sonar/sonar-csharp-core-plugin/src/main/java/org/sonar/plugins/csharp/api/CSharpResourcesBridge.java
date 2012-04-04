@@ -103,7 +103,7 @@ public class CSharpResourcesBridge implements BatchExtension {
    */
   public Resource<?> getFromTypeName(String namespaceName, String typeName) {
     StringBuilder typeFullName = new StringBuilder();
-    if ( !StringUtils.isEmpty(namespaceName)) {
+    if (!StringUtils.isEmpty(namespaceName)) {
       typeFullName.append(namespaceName);
       typeFullName.append(".");
     }

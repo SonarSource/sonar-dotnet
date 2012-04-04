@@ -55,7 +55,6 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
     return runner;
   }
 
-  
   /**
    * Creates a pre-configured {@link FxCopCommandBuilder} that needs to be completed before running the
    * {@link #execute(FxCopCommandBuilder, int)} method.
@@ -85,7 +84,7 @@ public class FxCopRunner { // NOSONAR : can't mock it otherwise
     int exitCode = CommandExecutor.create().execute(fxCopCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
     if (exitCode != 0 && exitCode != 512) {
       throw new FxCopException("FxCop execution failed with return code '" + exitCode
-          + "'. Check FxCop documentation for more information.");
+        + "'. Check FxCop documentation for more information.");
     }
   }
 

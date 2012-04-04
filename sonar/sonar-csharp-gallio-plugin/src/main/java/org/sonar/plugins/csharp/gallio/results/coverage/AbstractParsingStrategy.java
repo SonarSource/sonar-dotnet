@@ -111,7 +111,6 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
 
     if (isAStartElement(method)) {
 
-
       SMInputCursor pointTag = descendantElements(method);
       List<CoveragePoint> points = new ArrayList<CoveragePoint>();
       int fid = 0;
@@ -125,7 +124,7 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
       }
       FileCoverage fileCoverage = sourceFilesById.get(Integer.valueOf(fid));
       fillFileCoverage(fileCoverage, points);
-    } 
+    }
   }
 
   protected void fillFileCoverage(FileCoverage fileCoverage, List<CoveragePoint> points) {

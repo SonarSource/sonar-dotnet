@@ -112,24 +112,24 @@ public class CSharpConfiguration implements BatchExtension {
     // look if this key existed before
     Object rawPreviousKeys = newToPreviousParamMap.get(key);
     if (rawPreviousKeys instanceof String) {
-      String conf = getConfig((String)rawPreviousKeys);
+      String conf = getConfig((String) rawPreviousKeys);
       if (StringUtils.isNotBlank(conf)) {
         return conf;
       }
     } else if (rawPreviousKeys instanceof Collection<?>) {
       // should be a collection
-      Collection<String> prevousKeys = (Collection<String>)rawPreviousKeys;
+      Collection<String> prevousKeys = (Collection<String>) rawPreviousKeys;
       for (String previousKey : prevousKeys) {
-        String conf = getConfig((String)previousKey);
+        String conf = getConfig((String) previousKey);
         if (StringUtils.isNotBlank(conf)) {
           return conf;
         }
-      } 
+      }
     }
     // if this key wasn't used before, or if no value for was for it, use the value of the current key
     return configuration.getString(key, defaultValue);
   }
-  
+
   private String getConfig(String previousKey) {
     if (StringUtils.isNotBlank(previousKey)) {
       String result = configuration.getString(previousKey);
@@ -147,7 +147,7 @@ public class CSharpConfiguration implements BatchExtension {
    */
   public String[] getStringArray(String key) {
     // look if this key existed before
-    String previousKey = (String)newToPreviousParamMap.get(key);
+    String previousKey = (String) newToPreviousParamMap.get(key);
     final String[] resultArray;
     if (StringUtils.isBlank(previousKey)) {
       // if this key wasn't used before, or if no value for was for it,
@@ -174,16 +174,16 @@ public class CSharpConfiguration implements BatchExtension {
 
     return resultArray;
   }
-  
+
   public String[] getStringArray(String key, String defaultValue) {
     String[] result = getStringArray(key);
     if (result.length == 0) {
       if (StringUtils.isEmpty(defaultValue)) {
-        result = new String[] { };
+        result = new String[] {};
       } else {
-        result = new String[] { defaultValue };
+        result = new String[] {defaultValue};
       }
-      
+
     }
     return result;
   }
@@ -202,7 +202,7 @@ public class CSharpConfiguration implements BatchExtension {
   public boolean getBoolean(String key, boolean defaultValue) {
     boolean result = false;
     // look if this key existed before
-    String previousKey = (String)newToPreviousParamMap.get(key);
+    String previousKey = (String) newToPreviousParamMap.get(key);
     if (StringUtils.isNotBlank(previousKey) && configuration.containsKey(previousKey)) {
       result = configuration.getBoolean(previousKey);
       // a former parameter has been specified, let's take this value
@@ -219,7 +219,7 @@ public class CSharpConfiguration implements BatchExtension {
   public int getInt(String key, int defaultValue) {
     int result = -1;
     // look if this key existed before
-    String previousKey = (String)newToPreviousParamMap.get(key);
+    String previousKey = (String) newToPreviousParamMap.get(key);
     if (StringUtils.isNotBlank(previousKey) && configuration.containsKey(previousKey)) {
       result = configuration.getInt(previousKey);
       // a former parameter has been specified, let's take this value

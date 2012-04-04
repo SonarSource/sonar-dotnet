@@ -93,7 +93,7 @@ public class SourceFile {
   public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append("Source(");
-    if ( !StringUtils.isEmpty(folder)) {
+    if (!StringUtils.isEmpty(folder)) {
       builder.append(folder);
       builder.append("/");
     }

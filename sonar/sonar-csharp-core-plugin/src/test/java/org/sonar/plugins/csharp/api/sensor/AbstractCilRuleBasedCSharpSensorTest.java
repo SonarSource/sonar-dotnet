@@ -43,8 +43,6 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 import com.google.common.collect.Lists;
 
-
-
 public class AbstractCilRuleBasedCSharpSensorTest {
 
   class FakeSensor extends AbstractCilRuleBasedCSharpSensor {
@@ -52,7 +50,7 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     public FakeSensor() {
       super(microsoftWindowsEnvironment, configurationMock, "SomeEngine", "");
     }
-    
+
     public FakeSensor(String executionMode) {
       super(microsoftWindowsEnvironment, configurationMock, "SomeEngine", executionMode);
     }
@@ -81,7 +79,7 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     microsoftWindowsEnvironment.setCurrentSolution(solution);
 
     configurationMock = mock(CSharpConfiguration.class);
-    
+
     sensor = new FakeSensor();
   }
 
@@ -92,14 +90,14 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldNotExecuteOnRootProject() {
     Project project = mock(Project.class);
     when(project.isRoot()).thenReturn(true);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldNotExecuteOnRootProjectOnReuseMode() {
     sensor = new FakeSensor(FakeSensor.MODE_REUSE_REPORT);
@@ -107,7 +105,7 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     when(project.isRoot()).thenReturn(true);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldExecuteOnNormalProjectOnReuseMode() {
     sensor = new FakeSensor(FakeSensor.MODE_REUSE_REPORT);
@@ -115,10 +113,10 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
-          BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldExecuteOnRootProject() {
     Project project = mock(Project.class);
@@ -132,37 +130,35 @@ public class AbstractCilRuleBasedCSharpSensorTest {
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
-          BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
-    
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+
     when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldNotExecuteOnNormalProjectWithoutAssemblies() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
-          BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
-    
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldExecuteOnNormalProjectWithBadPattern() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
-          BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     when(configurationMock.getString(eq(ASSEMBLIES_TO_SCAN_KEY),
         anyString())).thenReturn("foo/bar/whatever/*.dll");
-    
+
     when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
-  
-  
 
 }

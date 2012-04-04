@@ -31,14 +31,12 @@ import org.sonar.dotnet.tools.commons.CilRuleEngineCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-
 /**
  * Class used to build the command line to run Gendarme.
  */
 public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSupport {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeCommandBuilder.class);
-
 
   private File silverlightFolder;
   private String gendarmeConfidence = "normal+";
@@ -84,7 +82,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
    */
   public void setConfidence(String gendarmeConfidence) {
     this.gendarmeConfidence = gendarmeConfidence;
-    
+
   }
 
   /**
@@ -97,7 +95,6 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
   public void setSeverity(String gendarmeSeverity) {
     this.gendarmeSeverity = gendarmeSeverity;
   }
-
 
   protected String getBuildConfigurations() {
     return buildConfigurations;
@@ -155,7 +152,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
     File destinationDirectory = vsProject.getArtifactDirectory(buildConfigurations);
     if (destinationDirectory == null) {
       throw new GendarmeException("Impossible to copy Silverlight Mscorlib.dll as there is no existing artifact "
-          + "directory for the build configuration: " + buildConfigurations);
+        + "directory for the build configuration: " + buildConfigurations);
     }
     try {
       LOG.debug("Copy Silverlight Mscorlib.dll file ");
@@ -164,5 +161,5 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
       throw new GendarmeException("Cannot copy Silverlight 'mscorlib.dll' file to " + destinationDirectory, e);
     }
   }
-  
+
 }

@@ -68,7 +68,7 @@ public final class ModelFactory {
    * Pattern used to define if a project is a test project or not
    */
   private static String testProjectNamePattern = "*.Tests";
-  
+
   /**
    * Pattern used to define if a project is an integ test project or not
    */
@@ -86,7 +86,7 @@ public final class ModelFactory {
   public static void setTestProjectNamePattern(String testProjectNamePattern) {
     ModelFactory.testProjectNamePattern = testProjectNamePattern;
   }
-  
+
   public static void setIntegTestProjectNamePattern(String testProjectNamePattern) {
     ModelFactory.integTestProjectNamePattern = testProjectNamePattern;
   }
@@ -134,26 +134,23 @@ public final class ModelFactory {
 
     boolean testFlag = nameMatchPatterns(assemblyName, testProjectPatterns);
     boolean integTestFlag = nameMatchPatterns(assemblyName, integTestProjectPatterns);
-    
-    
+
     if (testFlag) {
       visualStudioProject.setUnitTest(true);
       if (StringUtils.isEmpty(integTestProjectPatterns)) {
         visualStudioProject.setIntegTest(true);
       }
     }
-    
+
     if (integTestFlag) {
       visualStudioProject.setIntegTest(true);
     }
-    
-    
-    
+
     if (testFlag || integTestFlag) {
       LOG.info("The project '{}' has been qualified as a test project.", visualStudioProject.getName());
     }
   }
-  
+
   private static boolean nameMatchPatterns(String assemblyName, String testProjectPatterns) {
     if (StringUtils.isEmpty(testProjectPatterns)) {
       return false;
@@ -169,7 +166,6 @@ public final class ModelFactory {
     }
     return testFlag;
   }
-  
 
   /**
    * Gets the solution from its folder and name.
@@ -256,7 +252,7 @@ public final class ModelFactory {
     // This pattern extracts the projects from a Visual Studio solution
     String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.csproj)\"";
     String webProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*).*?ProjectSection\\(WebsiteProperties\\).*?"
-        + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
+      + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
     Pattern projectPattern = Pattern.compile(normalProjectExp);
     Pattern webPattern = Pattern.compile(webProjectExp, Pattern.MULTILINE + Pattern.DOTALL);
 
@@ -340,7 +336,7 @@ public final class ModelFactory {
         Map<String, File> buildConfOutputDirMap = new HashMap<String, File>();
         for (String config : buildConfigurations) {
           XPathExpression configOutputExpression = xpath.compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'" + config
-              + "')]/vst:OutputPath");
+            + "')]/vst:OutputPath");
           String configOutput = extractProjectProperty(configOutputExpression, projectFile);
           buildConfOutputDirMap.put(config, new File(projectDir, configOutput));
         }
@@ -389,7 +385,6 @@ public final class ModelFactory {
 
       // ???
       Thread.currentThread().setContextClassLoader(savedClassloader);
-
 
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]

@@ -88,7 +88,7 @@ public class FxCopSensorTest {
 
   @Test
   public void testExecuteWithoutRule() throws Exception {
-	 
+
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
     FxCopSensor sensor = new FxCopSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
@@ -129,7 +129,7 @@ public class FxCopSensorTest {
     sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldNotExecuteOnTestProject() throws Exception {
     Configuration conf = new BaseConfiguration();
@@ -140,7 +140,7 @@ public class FxCopSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldNotExecuteOnTestProjectOnReuseMode() throws Exception {
     Configuration conf = new BaseConfiguration();
@@ -158,17 +158,17 @@ public class FxCopSensorTest {
     Configuration conf = new BaseConfiguration();
     conf.setProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
     conf.setProperty(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "DummyBuildConf"); // we simulate no generated assemblies
-    
+
     FxCopSensor sensor = new FxCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Sensor"));
     when(vsProject1.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
-    
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-   
+
     assertFalse(sensor.shouldExecuteOnProject(project));
-  }  
+  }
 
   @Test
   public void testGenerateConfigurationFile() throws Exception {

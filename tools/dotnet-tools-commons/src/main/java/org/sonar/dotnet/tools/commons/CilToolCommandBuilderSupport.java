@@ -31,8 +31,6 @@ import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-
-
 /**
  * Support class for the cil based rule engines
  * 
@@ -40,21 +38,20 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
  *
  */
 public abstract class CilToolCommandBuilderSupport {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(CilToolCommandBuilderSupport.class);
-  
+
   protected VisualStudioSolution solution;
   protected VisualStudioProject vsProject;
-  
+
   protected File executable;
   protected String buildConfigurations = "Debug";
   protected File reportFile;
 
   protected String[] assembliesToScan = new String[] {};
-  
-  
+
   public abstract Command toCommand() throws DotNetToolsException;
-  
+
   /**
    * Set the assemblies to scan if the information should not be taken from the VS configuration files.
    * 
@@ -65,7 +62,7 @@ public abstract class CilToolCommandBuilderSupport {
   public void setAssembliesToScan(String... assembliesToScan) {
     this.assembliesToScan = assembliesToScan;
   }
-  
+
   /**
    * Set the build configurations. By default, it is "Debug".
    * 
@@ -76,7 +73,7 @@ public abstract class CilToolCommandBuilderSupport {
   public void setBuildConfigurations(String buildConfigurations) {
     this.buildConfigurations = buildConfigurations;
   }
-  
+
   /**
    * Sets the executable
    * 
@@ -87,7 +84,7 @@ public abstract class CilToolCommandBuilderSupport {
   public void setExecutable(File executable) {
     this.executable = executable;
   }
-  
+
   /**
    * Sets the report file to generate
    * 
@@ -96,12 +93,12 @@ public abstract class CilToolCommandBuilderSupport {
    * 
    */
   public void setReportFile(File reportFile) {
-    this.reportFile = reportFile; 
+    this.reportFile = reportFile;
   }
-  
+
   protected Collection<File> findAssembliesToScan() {
     Collection<File> assemblyFiles;
-    
+
     if (assembliesToScan.length == 0) {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
       assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations);
@@ -109,14 +106,14 @@ public abstract class CilToolCommandBuilderSupport {
       // Some assemblies have been specified: let's analyze them
       assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
       if (assemblyFiles.isEmpty()) {
-        LOG.warn("No assembly found using patterns " + StringUtils.join(assembliesToScan,','));
+        LOG.warn("No assembly found using patterns " + StringUtils.join(assembliesToScan, ','));
         LOG.warn("Fallback to 'csproj' files to find which should be analyzed.");
         assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations);
       }
     }
     return assemblyFiles;
   }
-  
+
   protected void validate(Collection<File> assemblyToScanFiles) {
     if (assemblyToScanFiles.isEmpty()) {
       throw new IllegalStateException(

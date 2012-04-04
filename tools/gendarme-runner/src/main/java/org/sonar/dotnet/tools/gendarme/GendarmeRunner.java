@@ -64,11 +64,11 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
     GendarmeRunner runner = new GendarmeRunner();
 
     File executable = new File(gendarmePath, GENDARME_EXECUTABLE);
-    if ( !executable.exists() || !executable.isFile()) {
+    if (!executable.exists() || !executable.isFile()) {
       LOG.info("Gendarme executable not found: '{}'. The embedded version ({}) will be used instead.", executable.getAbsolutePath(),
           EMBEDDED_VERSION);
       executable = new File(tempFolder, "gendarme-" + EMBEDDED_VERSION + "-bin/" + GENDARME_EXECUTABLE);
-      if ( !executable.isFile()) {
+      if (!executable.isFile()) {
         LOG.info("Extracting Gendarme binaries in {}", tempFolder);
         extractGendarmeBinaries(tempFolder);
       }
@@ -82,7 +82,7 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
     try {
       URL executableURL = GendarmeRunner.class.getResource("/gendarme-" + EMBEDDED_VERSION + "-bin");
       ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!").substring(5), "gendarme-"
-          + EMBEDDED_VERSION + "-bin", tempFolder);
+        + EMBEDDED_VERSION + "-bin", tempFolder);
     } catch (IOException e) {
       throw new GendarmeException("Could not extract the embedded Gendarme executable: " + e.getMessage(), e);
     }
@@ -104,7 +104,6 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
     builder.setExecutable(gendarmeExecutable);
     return builder;
   }
-
 
   /**
    * Executes the given Gendarme command.

@@ -69,12 +69,12 @@ public class FxCopResultParserTest {
   public void init() {
     context = mock(SensorContext.class);
     resourcesBridge = mock(CSharpResourcesBridge.class);
-    
+
     Project project = mock(Project.class);
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
     when(project.getFileSystem()).thenReturn(fileSystem);
-    
+
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     VisualStudioSolution solution = mock(VisualStudioSolution.class);
     when(env.getCurrentSolution()).thenReturn(solution);
@@ -83,7 +83,7 @@ public class FxCopResultParserTest {
     when(solution.getProject(any(File.class))).thenReturn(vsProject);
     ResourceHelper resourceHelper = mock(ResourceHelper.class);
     when(resourceHelper.isResourceInProject(any(Resource.class), any(Project.class))).thenReturn(true);
- 
+
     parser = new FxCopResultParser(env, project, context, newRuleFinder(), resourcesBridge, resourceHelper);
     parser.setEncoding(Charset.forName("UTF-8"));
   }

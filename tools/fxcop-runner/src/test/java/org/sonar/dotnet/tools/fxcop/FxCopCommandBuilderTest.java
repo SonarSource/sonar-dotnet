@@ -98,7 +98,7 @@ public class FxCopCommandBuilderTest {
     String[] commands = fxCopCommandBuilder.toCommand().getArguments().toArray(new String[] {});
     assertThat(commands[7], endsWith("/aspnet"));
   }
-  
+
   @Test
   public void testToCommandForSilverlightProject() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);

@@ -81,7 +81,7 @@ public class DependencyParserRunner { // NOSONAR : can't mock it otherwise
     try {
       URL executableURL = DependencyParserRunner.class.getResource("/dependencyparser-" + EMBEDDED_VERSION);
       ZipUtils.extractArchiveFolderIntoDirectory(StringUtils.substringBefore(executableURL.getFile(), "!").substring(5), "dependencyparser-"
-          + EMBEDDED_VERSION, tempFolder);
+        + EMBEDDED_VERSION, tempFolder);
     } catch (IOException e) {
       throw new SonarException("Could not extract the embedded DependencyParser executable", e);
     }

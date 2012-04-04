@@ -35,17 +35,17 @@ import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileImporter;
  * Main class of the StyleCop plugin.
  */
 @Properties({
-    @Property(key = StyleCopConstants.INSTALL_DIR_KEY, defaultValue = StyleCopConstants.INSTALL_DIR_DEFVALUE,
-        name = "StyleCop install directory", description = "Absolute path of the StyleCop program install directory.", global = true,
-        project = false),
-    @Property(key = StyleCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
-        name = "StyleCop program timeout", description = "Maximum number of minutes before the StyleCop program will be stopped.",
-        global = true, project = true),
-    @Property(key = StyleCopConstants.MODE, defaultValue = "", name = "StyleCop activation mode",
-        description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
-    @Property(key = StyleCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the StyleCop report files",
-        description = "Name of the StyleCop report file used when reuse report mode is activated. "
-            + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false) })
+  @Property(key = StyleCopConstants.INSTALL_DIR_KEY, defaultValue = StyleCopConstants.INSTALL_DIR_DEFVALUE,
+    name = "StyleCop install directory", description = "Absolute path of the StyleCop program install directory.", global = true,
+    project = false),
+  @Property(key = StyleCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
+    name = "StyleCop program timeout", description = "Maximum number of minutes before the StyleCop program will be stopped.",
+    global = true, project = true),
+  @Property(key = StyleCopConstants.MODE, defaultValue = "", name = "StyleCop activation mode",
+    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
+  @Property(key = StyleCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the StyleCop report files",
+    description = "Name of the StyleCop report file used when reuse report mode is activated. "
+      + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false)})
 public class StyleCopPlugin extends SonarPlugin {
 
   /**

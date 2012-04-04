@@ -60,7 +60,7 @@ import com.google.common.collect.Lists;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(org.sonar.api.resources.File.class)
 public class CoverageReportSensorTest {
-  
+
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject1;
   private VisualStudioProject vsTestProject2;
@@ -92,85 +92,82 @@ public class CoverageReportSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
   }
-  
+
   private CoverageReportSensor buildSensor() {
     return new CoverageReportSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment, parser);
   }
-  
+
   private void setUpEnv() {
     parser = mock(CoverageResultParser.class); // create the parser before the sensor
     sensor = buildSensor();
-    
+
     microsoftWindowsEnvironment.setTestExecutionDone();
     File solutionDir = TestUtils.getResource("/Results/coverage/");
     microsoftWindowsEnvironment.setWorkingDirectory("");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
-    
+
     File defaultReportFile = new File(solutionDir, "coverage-report.xml");
     sourceFiles = new ArrayList<FileCoverage>();
     when(parser.parse(eq(project), eq(defaultReportFile))).thenReturn(sourceFiles);
-    
-    File defaultItReportFile = new File(solutionDir, "it-coverage-report.xml"); 
+
+    File defaultItReportFile = new File(solutionDir, "it-coverage-report.xml");
     itSourceFiles = new ArrayList<FileCoverage>();
     when(parser.parse(eq(project), eq(defaultItReportFile))).thenReturn(itSourceFiles);
 
     context = mock(SensorContext.class);
   }
-  
+
   @Test
   public void testAnalyse() {
     setUpEnv();
-    
+
     sensor.analyse(project, context);
-   
+
   }
-  
-  
+
   @Test
   public void testAnalyseNotIndexedFile() {
     setUpEnv();
 
     FileCoverage fileCoverage = mock(FileCoverage.class);
     sourceFiles.add(fileCoverage);
-    
-    
+
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(false);
-    
+
     sensor.analyse(project, context);
-   
+
     verify(context, only()).isIndexed(eq(sonarFile), anyBoolean());
   }
-  
+
   @Test
   public void testAnalyseIndexedFile() {
     setUpEnv();
 
     FileCoverage fileCoverage = mock(FileCoverage.class);
     sourceFiles.add(fileCoverage);
-    
+
     when(fileCoverage.getCoverage()).thenReturn(0.42);
-    
-    
+
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
-    
+
     sensor.analyse(project, context);
-   
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)42));
+
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 42));
   }
-  
+
   @Test
   public void testAnalyseIndexedFileWithIntegTests() {
     setUpEnv();
@@ -179,120 +176,116 @@ public class CoverageReportSensorTest {
     FileCoverage fileCoverage = mock(FileCoverage.class);
     sourceFiles.add(fileCoverage);
     when(fileCoverage.getCoverage()).thenReturn(0.42);
-    
+
     FileCoverage itFileCoverage = mock(FileCoverage.class);
     itSourceFiles.add(itFileCoverage);
     when(itFileCoverage.getCoverage()).thenReturn(0.36);
-    
-    
-    
-    
+
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
-    
+
     sensor.analyse(project, context);
-   
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)42));
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.IT_COVERAGE), eq((double)36));
+
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 42));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.IT_COVERAGE), eq((double) 36));
   }
-  
+
   @Test
   public void testAnalyseIndexedFileInSafeMode() {
     parser = mock(CoverageResultParser.class); // create the parser before the sensor
     conf.setProperty(GallioConstants.SAFE_MODE, true);
     sensor = buildSensor();
-    
+
     microsoftWindowsEnvironment.setTestExecutionDone();
     File solutionDir = TestUtils.getResource("/Results/coverage/");
     microsoftWindowsEnvironment.setWorkingDirectory("");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
-    
+
     List<FileCoverage> coverageList = new ArrayList<FileCoverage>();
-    
-    File defaultReportFile = new File(solutionDir, "AssemblyTest2.coverage-report.xml"); 
+
+    File defaultReportFile = new File(solutionDir, "AssemblyTest2.coverage-report.xml");
     when(parser.parse(eq(project), eq(defaultReportFile))).thenReturn(coverageList);
 
     context = mock(SensorContext.class);
 
     File fakeSourceFile = new File("dummy.cs");
-    
+
     FileCoverage firstFileCoverage = mock(FileCoverage.class);
     when(firstFileCoverage.getCoverage()).thenReturn(0.15);
     when(firstFileCoverage.getFile()).thenReturn(fakeSourceFile);
     coverageList.add(firstFileCoverage);
-    
-    
+
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
-    
+
     sensor.analyse(project, context);
-   
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)15));  }
-  
+
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 15));
+  }
+
   @Test
   public void testReuseReportWithDefaultLocation() {
     parser = mock(CoverageResultParser.class); // create the parser before the sensor
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
     sensor = buildSensor();
-    
+
     microsoftWindowsEnvironment.setTestExecutionDone();
     File solutionDir = TestUtils.getResource("/Results/coverage/");
     microsoftWindowsEnvironment.setWorkingDirectory("");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
-    
+
     List<FileCoverage> coverageList = new ArrayList<FileCoverage>();
-    
-    File defaultReportFile = new File(solutionDir, "coverage-report.xml"); 
+
+    File defaultReportFile = new File(solutionDir, "coverage-report.xml");
     when(parser.parse(eq(project), eq(defaultReportFile))).thenReturn(coverageList);
 
     context = mock(SensorContext.class);
 
     File fakeSourceFile = new File("dummy.cs");
-    
+
     FileCoverage firstFileCoverage = mock(FileCoverage.class);
     when(firstFileCoverage.getCoverage()).thenReturn(0.15);
     when(firstFileCoverage.getFile()).thenReturn(fakeSourceFile);
     coverageList.add(firstFileCoverage);
-    
-    
+
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
-    
+
     sensor.analyse(project, context);
-   
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)15));
+
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 15));
   }
-  
+
   @Test
   public void testReuseTwoReports() {
     parser = mock(CoverageResultParser.class); // create the parser before the sensor
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
     conf.setProperty(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "report1.xml,report2.xml");
     sensor = buildSensor();
-    
+
     microsoftWindowsEnvironment.setTestExecutionDone();
     File solutionDir = TestUtils.getResource("/Results/coverage/");
     microsoftWindowsEnvironment.setWorkingDirectory("");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
-    
+
     List<FileCoverage> firstCoverageList = new ArrayList<FileCoverage>();
     List<FileCoverage> secondCoverageList = new ArrayList<FileCoverage>();
     when(parser.parse(eq(project), any(File.class))).thenReturn(firstCoverageList, secondCoverageList);
@@ -301,63 +294,58 @@ public class CoverageReportSensorTest {
 
     File fakeSourceFile = new File("dummy.cs");
     File fakeSourceFile2 = new File("dummy2.cs");
-    
+
     FileCoverage firstFileCoverage = mock(FileCoverage.class);
     when(firstFileCoverage.getCoverage()).thenReturn(0.15);
     when(firstFileCoverage.getFile()).thenReturn(fakeSourceFile);
     firstCoverageList.add(firstFileCoverage);
-    
+
     FileCoverage secondFileCoverage = mock(FileCoverage.class);
     when(secondFileCoverage.getCoverage()).thenReturn(0.36);
     when(secondFileCoverage.getFile()).thenReturn(fakeSourceFile2);
     secondCoverageList.add(secondFileCoverage);
 
-    
     PowerMockito.mockStatic(org.sonar.api.resources.File.class);
     org.sonar.api.resources.File sonarFile = mock(org.sonar.api.resources.File.class);
-    
+
     when(org.sonar.api.resources.File.fromIOFile(any(File.class), eq(project))).thenReturn(sonarFile);
-    
+
     SensorContext context = mock(SensorContext.class);
     when(context.isIndexed(eq(sonarFile), anyBoolean())).thenReturn(true);
-    
+
     sensor.analyse(project, context);
-   
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)15));
-    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double)36));
+
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 15));
+    verify(context, atLeastOnce()).saveMeasure(eq(sonarFile), eq(CoreMetrics.COVERAGE), eq((double) 36));
   }
-  
-  
+
   @Test
   public void testReuseReportNotFound() {
     parser = mock(CoverageResultParser.class); // create the parser before the sensor
     conf.setProperty(GallioConstants.MODE, AbstractCSharpSensor.MODE_REUSE_REPORT);
     conf.setProperty(GallioConstants.REPORTS_COVERAGE_PATH_KEY, "report-bad.xml");
     sensor = buildSensor();
-    
+
     microsoftWindowsEnvironment.setTestExecutionDone();
     File solutionDir = TestUtils.getResource("/Results/coverage/");
     microsoftWindowsEnvironment.setWorkingDirectory("");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(solution.getProject("MyAssembly")).thenReturn(vsProject1);
-    
+
     context = mock(SensorContext.class);
 
-
     sensor.analyse(project, context);
-    
+
     verifyNoMoreInteractions(parser);
     verifyNoMoreInteractions(context);
   }
-  
-  
+
   @Test
   public void testAnalyseWithBranch() {
     when(project.getBranch()).thenReturn("ProductionWhatever");
     when(project.getName()).thenReturn("Project #1 ProductionWhatever");
     testAnalyse();
   }
-  
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
@@ -378,5 +366,5 @@ public class CoverageReportSensorTest {
     when(project.getName()).thenReturn("Project Test 2");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
 }

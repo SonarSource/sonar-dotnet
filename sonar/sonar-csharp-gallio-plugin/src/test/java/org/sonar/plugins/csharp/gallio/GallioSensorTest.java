@@ -71,22 +71,22 @@ public class GallioSensorTest {
     when(vsProject1.getName()).thenReturn("Project #1");
     when(vsProject1.getArtifact("Debug")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")
-    );
-    
+        );
+
     vsTestProject2 = mock(VisualStudioProject.class);
     when(vsTestProject2.getName()).thenReturn("Project Test #2");
     when(vsTestProject2.getArtifact("Debug")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake2.assembly")
-    );
+        );
     when(vsTestProject2.isTest()).thenReturn(true);
-    
+
     vsTestProject3 = mock(VisualStudioProject.class);
     when(vsTestProject3.getName()).thenReturn("Project Test #3");
     when(vsTestProject3.getArtifact("Debug")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake3.assembly")
-    );
+        );
     when(vsTestProject3.isTest()).thenReturn(true);
-    
+
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsTestProject2, vsTestProject3));
     when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsTestProject2, vsTestProject3));
@@ -98,55 +98,53 @@ public class GallioSensorTest {
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
   }
-  
+
   @Test
   public void testAnalyse() throws Exception {
     SensorContext context = mock(SensorContext.class);
     microsoftWindowsEnvironment.setWorkingDirectory("coverage");
     File solutionDir = TestUtils.getResource("/Results/");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
-    
+
     GallioRunner runner = mock(GallioRunner.class);
     GallioCommandBuilder builder = mock(GallioCommandBuilder.class);
     when(runner.createCommandBuilder(solution)).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GallioRunner.class);
     when(GallioRunner.create(anyString(), anyString(), anyBoolean())).thenReturn(runner);
-    
-    
+
     Configuration conf = new BaseConfiguration();
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);
-    
+
     // One call with two assemblies
     ArgumentCaptor<List> testAssembliesCaptor = ArgumentCaptor.forClass(List.class);
     verify(builder).setTestAssemblies(testAssembliesCaptor.capture());
     assertEquals(2, testAssembliesCaptor.getValue().size());
   }
-  
+
   @Test
   public void testAnalyseSafeMode() throws Exception {
     SensorContext context = mock(SensorContext.class);
     microsoftWindowsEnvironment.setWorkingDirectory("coverage");
     File solutionDir = TestUtils.getResource("/Results/");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
-    
+
     GallioRunner runner = mock(GallioRunner.class);
     GallioCommandBuilder builder = mock(GallioCommandBuilder.class);
     when(runner.createCommandBuilder(solution)).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GallioRunner.class);
     when(GallioRunner.create(anyString(), anyString(), anyBoolean())).thenReturn(runner);
-    
-    
+
     Configuration conf = new BaseConfiguration();
     // safe mode activation
     conf.setProperty(GallioConstants.SAFE_MODE, "true");
-    
+
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);
-    
-    // Two calls with a single assembly each time 
+
+    // Two calls with a single assembly each time
     ArgumentCaptor<List> testAssembliesCaptor = ArgumentCaptor.forClass(List.class);
     verify(builder, times(2)).setTestAssemblies(testAssembliesCaptor.capture());
     List<List> assemblyLists = testAssembliesCaptor.getAllValues();
@@ -154,60 +152,58 @@ public class GallioSensorTest {
       assertEquals(1, list.size());
     }
   }
-  
+
   @Test
   public void testAnalyseWithPattern() throws Exception {
     SensorContext context = mock(SensorContext.class);
     microsoftWindowsEnvironment.setWorkingDirectory("coverage");
     File solutionDir = TestUtils.getResource("/Results/");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
-    
+
     GallioRunner runner = mock(GallioRunner.class);
     GallioCommandBuilder builder = mock(GallioCommandBuilder.class);
     when(runner.createCommandBuilder(solution)).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GallioRunner.class);
     when(GallioRunner.create(anyString(), anyString(), anyBoolean())).thenReturn(runner);
-    
-    
+
     Configuration conf = new BaseConfiguration();
     // pattern used to find test assemblies
     conf.setProperty(GallioConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake3.*");
-    
+
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);
-    
+
     // One call with only one assembly
     ArgumentCaptor<List> testAssembliesCaptor = ArgumentCaptor.forClass(List.class);
     verify(builder).setTestAssemblies(testAssembliesCaptor.capture());
     assertEquals(1, testAssembliesCaptor.getValue().size());
   }
-  
+
   @Test
   public void testAnalyseWithPatternAndSafeMode() throws Exception {
     SensorContext context = mock(SensorContext.class);
     microsoftWindowsEnvironment.setWorkingDirectory("coverage");
     File solutionDir = TestUtils.getResource("/Results/");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
-    
+
     GallioRunner runner = mock(GallioRunner.class);
     GallioCommandBuilder builder = mock(GallioCommandBuilder.class);
     when(runner.createCommandBuilder(solution)).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GallioRunner.class);
     when(GallioRunner.create(anyString(), anyString(), anyBoolean())).thenReturn(runner);
-    
-    
+
     Configuration conf = new BaseConfiguration();
     // safe mode activation
     conf.setProperty(GallioConstants.SAFE_MODE, "true");
     // pattern used to find test assemblies
     conf.setProperty(GallioConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake*.assembly");
-    
+
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);
-    
-    // Three calls with a single assembly each time 
+
+    // Three calls with a single assembly each time
     ArgumentCaptor<List> testAssembliesCaptor = ArgumentCaptor.forClass(List.class);
     verify(builder, times(3)).setTestAssemblies(testAssembliesCaptor.capture());
     List<List> assemblyLists = testAssembliesCaptor.getAllValues();

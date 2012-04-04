@@ -94,7 +94,7 @@ public class GendarmeProfileExporter extends ProfileExporter {
       assemblyRules.add(activeRule);
     }
 
-    if ( !assemblyRulesMapEmpty) {
+    if (!assemblyRulesMapEmpty) {
       if (priority == null) {
         writer.append("    <ruleset name=\"default\">\n");
       } else {

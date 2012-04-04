@@ -52,7 +52,6 @@ public class GendarmeViolationMaker implements BatchExtension {
   private SensorContext context;
   private CSharpResourcesBridge resourcesBridge;
   private ResourceHelper resourceHelper;
-  
 
   private Map<Rule, String> rulesTypeMap = Maps.newHashMap();
   private static final String TYPE_METHOD = "Method";
@@ -76,7 +75,7 @@ public class GendarmeViolationMaker implements BatchExtension {
   public GendarmeViolationMaker(MicrosoftWindowsEnvironment env, Project project, SensorContext context, CSharpResourcesBridge resourcesBridge, ResourceHelper resourceHelper) {
     super();
     this.vsSolution = env.getCurrentSolution();
-    if (vsSolution==null) {
+    if (vsSolution == null) {
       // not a C# project
       return;
     }
@@ -114,7 +113,7 @@ public class GendarmeViolationMaker implements BatchExtension {
       }
       line = defectLocation.getLineNumber();
     }
-    
+
     return createViolationOnResource(resource, line);
   }
 
@@ -148,11 +147,11 @@ public class GendarmeViolationMaker implements BatchExtension {
       LOG.debug("Ignoring violation on file outside current project ({})", currentSource);
       return null;
     }
-    if (resource!=null && !resourceHelper.isResourceInProject(resource, project)) {
+    if (resource != null && !resourceHelper.isResourceInProject(resource, project)) {
       LOG.debug("Ignoring violation on file outside current project ({})", resource.getKey());
       return null;
     }
-    
+
     Violation violation = Violation.create(currentRule, resource);
     if (lineNumber != null) {
       violation.setLineId(lineNumber);

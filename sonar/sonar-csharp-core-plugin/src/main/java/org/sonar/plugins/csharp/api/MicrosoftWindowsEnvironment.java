@@ -102,7 +102,7 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
     }
     if (configuration != null) {
       String sonarBranch = configuration.getString("sonar.branch", "");
-      if ( !StringUtils.isEmpty(sonarBranch)) {
+      if (!StringUtils.isEmpty(sonarBranch)) {
         // we also reference the projects with the name that Sonar gives when 'sonar.branch' is used
         for (VisualStudioProject vsProject : currentSolution.getProjects()) {
           projectsByName.put(vsProject.getName() + " " + sonarBranch, vsProject);
