@@ -20,7 +20,6 @@
 package org.sonar.dotnet.tools.dependencyparser;
 
 import java.io.File;
-import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 /**
  * Class used to build the command line to run the dependencyparser tool.
  */
-public final class DependencyParserCommandBuilder extends CilToolCommandBuilderSupport {
+public class DependencyParserCommandBuilder extends CilToolCommandBuilderSupport { // NOSONAR Not final, because can't be mocked otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(DependencyParserCommandBuilder.class);
 
@@ -65,11 +64,13 @@ public final class DependencyParserCommandBuilder extends CilToolCommandBuilderS
    * 
    * @return the Command object that represents the command to launch.
    */
-  public Command toCommand() {
-    Collection<File> assemblyToScanFiles = findAssembliesToScan();
-    validate(assemblyToScanFiles);
-
-    File assembly = this.vsProject.getArtifact(this.getBuildConfigurations());
+  public Command toCommand() throws DependencyParserException {
+    // The dependency parser can analyse only 1 assembly at once for the moment
+    // In the future, this should be improved to do like FxCop or Gendarme and to be able to use "sonar.dotnet.assemblies"
+    File assembly = vsProject.getArtifact(getBuildConfigurations());
+    if (assembly == null || !assembly.exists()) {
+      throw new DependencyParserException("Assembly to scan not found for project: " + vsProject.getName());
+    }
 
     LOG.debug("- DependencyParser program    : " + executable);
     Command command = Command.create(executable.getAbsolutePath());

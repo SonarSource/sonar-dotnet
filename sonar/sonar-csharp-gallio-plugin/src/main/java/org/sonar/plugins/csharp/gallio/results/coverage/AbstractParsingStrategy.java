@@ -45,7 +45,7 @@ import com.google.common.collect.Maps;
 
 public abstract class AbstractParsingStrategy implements CoverageResultParsingStrategy {
 
-  private final class IsFileIndexedPredicate implements Predicate<FileCoverage> {
+  private final static class IsFileIndexedPredicate implements Predicate<FileCoverage> {
     private final Project sonarProject;
     private final SensorContext context;
 
