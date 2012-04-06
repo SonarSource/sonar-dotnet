@@ -35,10 +35,10 @@ import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.graph.Cycle;
-import org.sonar.graph.CycleDetector;
 import org.sonar.graph.Dsm;
 import org.sonar.graph.DsmTopologicalSorter;
 import org.sonar.graph.Edge;
+import org.sonar.graph.IncrementalCyclesAndFESSolver;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
@@ -86,7 +86,7 @@ public class CSharpDsmDecorator implements Decorator {
 
   @SuppressWarnings("rawtypes")
   private Dsm<Resource> getDsm(Collection<Resource> subResources) {
-    CycleDetector<Resource> cycleDetector = new CycleDetector<Resource>(index, subResources);
+    IncrementalCyclesAndFESSolver<Resource> cycleDetector = new IncrementalCyclesAndFESSolver<Resource>(index, subResources);
     Set<Cycle> cycles = cycleDetector.getCycles();
 
     MinimumFeedbackEdgeSetSolver solver = new MinimumFeedbackEdgeSetSolver(cycles);

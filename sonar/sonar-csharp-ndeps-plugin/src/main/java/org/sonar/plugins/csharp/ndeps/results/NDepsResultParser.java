@@ -160,11 +160,6 @@ public class NDepsResultParser implements BatchExtension {
 
             // check if the source is not filtered
             if (fromResource != null && toResource != null) {
-
-              // get the real resource
-              fromResource = context.getResource(fromResource);
-              toResource = context.getResource(toResource);
-
               // get the parent folder
               Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
               Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
@@ -179,6 +174,7 @@ public class NDepsResultParser implements BatchExtension {
               // save it
               folderDependency.setWeight(folderDependency.getWeight() + 1);
               context.saveDependency(folderDependency);
+              LOG.debug("Saving dependency from {} to {}", fromParentFolderResource.getName(), toParentFolderResource.getName());
 
               // save the file to file dependency
               Dependency fileDependency = new Dependency(fromResource, toResource);
@@ -186,6 +182,7 @@ public class NDepsResultParser implements BatchExtension {
               fileDependency.setUsage("USES");
               fileDependency.setWeight(1);
               context.saveDependency(fileDependency);
+              LOG.debug("Saving dependency from {} to {}", fromResource.getName(), toResource.getName());
             }
           }
         }
