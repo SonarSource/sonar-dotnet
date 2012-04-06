@@ -41,6 +41,7 @@ import org.sonar.graph.Edge;
 import org.sonar.graph.IncrementalCyclesAndFESSolver;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.csharp.ndeps.internal.DsmSerializer;
 
 /**
  * Copy/pasted from the original DSM descorator.
