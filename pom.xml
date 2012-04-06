@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
-    <version>11</version>
+    <version>12</version>
     <relativePath>../parent</relativePath>
   </parent>
 
@@ -60,6 +60,7 @@
   <properties>
     <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
     <jdk.min.version>1.5</jdk.min.version>
+    <animal-sniffer.signature.artifactId>java15</animal-sniffer.signature.artifactId>
     <sonar.buildVersion>2.12</sonar.buildVersion>
     <sonar.skippedModules>maven-dotnet</sonar.skippedModules>
   </properties>
