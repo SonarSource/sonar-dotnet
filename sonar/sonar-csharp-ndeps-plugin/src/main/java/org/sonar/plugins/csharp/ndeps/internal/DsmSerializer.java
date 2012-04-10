@@ -24,10 +24,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.graph.Dsm;
 import org.sonar.graph.DsmCell;
 
-/**
- * TODO doc !
- *
- */
+@SuppressWarnings("rawtypes")
 public final class DsmSerializer {
 
   private Dsm dsm;

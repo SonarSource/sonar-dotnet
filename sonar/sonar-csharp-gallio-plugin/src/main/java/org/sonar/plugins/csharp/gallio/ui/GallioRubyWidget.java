@@ -27,7 +27,7 @@ import org.sonar.api.web.WidgetCategory;
 
 @UserRole(UserRole.USER)
 @Description("Show gallio specific metrics on test quality")
-@WidgetCategory("Tests")
+@WidgetCategory({"Tests", "C#"})
 public class GallioRubyWidget extends AbstractRubyTemplate implements RubyRailsWidget {
 
   public String getId() {
@@ -40,6 +40,6 @@ public class GallioRubyWidget extends AbstractRubyTemplate implements RubyRailsW
 
   @Override
   protected String getTemplatePath() {
-    return "/gallio.html.erb";
+    return "/org/sonar/plugins/csharp/gallio/ui/gallio.html.erb";
   }
 }

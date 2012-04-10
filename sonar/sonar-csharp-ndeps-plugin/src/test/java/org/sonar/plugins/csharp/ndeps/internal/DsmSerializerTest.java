@@ -33,6 +33,7 @@ import java.io.IOException;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class DsmSerializerTest {
   @Test
   public void serializeEmptyDsm() throws IOException {
