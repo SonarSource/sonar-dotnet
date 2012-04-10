@@ -142,10 +142,6 @@ public class VisualStudioProject {
     return projectGuid;
   }
 
-  public void setProjectGuid(UUID projectGuid) {
-    this.projectGuid = projectGuid;
-  }
-
   /**
    * Provides the location of the generated artifact(s) of this project according to the build configuration(s) used.
    * 
@@ -240,7 +236,7 @@ public class VisualStudioProject {
     return this.assemblyVersion;
   }
 
-  public void setAssemblyVersion(String assemblyVersion) {
+  void setAssemblyVersion(String assemblyVersion) {
     this.assemblyVersion = assemblyVersion;
   }
 
@@ -346,6 +342,16 @@ public class VisualStudioProject {
    */
   void setProjectFile(File projectFile) {
     this.projectFile = projectFile;
+  }
+
+  /**
+   * Sets the projectGuid.
+   * 
+   * @param projectGuid 
+   *          The projectGuid to set.
+   */
+  void setProjectGuid(UUID projectGuid) {
+    this.projectGuid = projectGuid;
   }
 
   /**

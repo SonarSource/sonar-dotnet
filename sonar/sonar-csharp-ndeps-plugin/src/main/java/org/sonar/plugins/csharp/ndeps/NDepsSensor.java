@@ -82,6 +82,10 @@ public class NDepsSensor extends AbstractCSharpSensor {
     }
 
     // and analyse results
+    analyseResults(project, reportFile);
+  }
+
+  protected void analyseResults(Project project, final File reportFile) {
     if (reportFile.exists()) {
       LOG.debug("NDeps report found at location {}", reportFile);
       String scope = isTestProject(project) ? "test" : "compile";
@@ -91,7 +95,7 @@ public class NDepsSensor extends AbstractCSharpSensor {
     }
   }
 
-  private void launchNDeps(Project project, NDepsRunner runner) throws NDepsException {
+  protected void launchNDeps(Project project, NDepsRunner runner) throws NDepsException {
     NDepsCommandBuilder builder = runner.createCommandBuilder(getVSSolution(), getVSProject(project));
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), NDepsConstants.DEPENDENCYPARSER_REPORT_XML));
     builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,

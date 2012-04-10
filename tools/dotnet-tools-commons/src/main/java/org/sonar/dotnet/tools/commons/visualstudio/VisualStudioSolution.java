@@ -357,7 +357,12 @@ public class VisualStudioSolution {
     this.name = name;
   }
 
-  List<String> getBuildConfigurations() {
+  /**
+   * Returns the build configurations.
+   * 
+   * @return the list of build configurations.
+   */
+  public List<String> getBuildConfigurations() {
     return buildConfigurations;
   }
 
