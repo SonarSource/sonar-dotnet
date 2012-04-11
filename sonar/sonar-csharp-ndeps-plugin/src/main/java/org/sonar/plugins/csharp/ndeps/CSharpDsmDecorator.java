@@ -34,6 +34,7 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.api.resources.ResourceUtils;
 import org.sonar.graph.Cycle;
 import org.sonar.graph.Dsm;
 import org.sonar.graph.DsmTopologicalSorter;
@@ -41,6 +42,7 @@ import org.sonar.graph.Edge;
 import org.sonar.graph.IncrementalCyclesAndFESSolver;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.ndeps.internal.DsmSerializer;
 
 /**
@@ -51,15 +53,19 @@ public class CSharpDsmDecorator implements Decorator {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpDsmDecorator.class);
 
+  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   // hack as long as DecoratorContext does not implement SonarIndex
   private SonarIndex index;
 
-  public CSharpDsmDecorator(SonarIndex index) {
+  public CSharpDsmDecorator(SonarIndex index, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     this.index = index;
+    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
+    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey())
+      && !project.isRoot()
+      && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isWebProject();
   }
 
   @SuppressWarnings("rawtypes")
@@ -68,7 +74,6 @@ public class CSharpDsmDecorator implements Decorator {
       Collection<Resource> subResources = getSubResources(context);
 
       Dsm<Resource> dsm = getDsm(subResources);
-
       Measure measure = new Measure(CoreMetrics.DEPENDENCY_MATRIX, DsmSerializer.serialize(dsm));
       measure.setPersistenceMode(PersistenceMode.DATABASE);
       context.saveMeasure(measure);
@@ -103,6 +108,9 @@ public class CSharpDsmDecorator implements Decorator {
   }
 
   private boolean shouldDecorateResource(DecoratorContext context) {
-    return context.getMeasure(CoreMetrics.DEPENDENCY_MATRIX) == null;
+    Resource<?> resource = context.getResource();
+    return (ResourceUtils.isModuleProject(resource) || ResourceUtils.isDirectory(resource))
+      && context.getMeasure(CoreMetrics.DEPENDENCY_MATRIX) == null;
   }
+
 }

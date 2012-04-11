@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -49,6 +51,7 @@ public class NDepsSensorTest {
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject1;
   private VisualStudioProject vsProject2;
+  private VisualStudioProject vsProject3;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private CSharpConfiguration configuration;
   private NDepsResultParser nDepsResultParser;
@@ -65,8 +68,11 @@ public class NDepsSensorTest {
     vsProject2 = mock(VisualStudioProject.class);
     when(vsProject2.getName()).thenReturn("Project Test");
     when(vsProject2.isTest()).thenReturn(true);
+    vsProject3 = mock(VisualStudioProject.class);
+    when(vsProject3.getName()).thenReturn("Web project");
+    when(vsProject3.isWebProject()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2, vsProject3));
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
@@ -76,6 +82,24 @@ public class NDepsSensorTest {
     nDepsSensor = new NDepsSensor(fileSystem, microsoftWindowsEnvironment, configuration, nDepsResultParser);
 
     reportFile = TestUtils.getResource("/ndeps-report.xml");
+  }
+
+  @Test
+  public void shouldExecuteOnProject() throws Exception {
+    Project project = new Project("");
+    project.setLanguageKey("cs");
+    project.setParent(project);
+    project.setName("Project #1");
+    assertThat(nDepsSensor.shouldExecuteOnProject(project), is(true));
+  }
+
+  @Test
+  public void shouldNotExecuteOnWebProject() throws Exception {
+    Project project = new Project("");
+    project.setLanguageKey("cs");
+    project.setParent(project);
+    project.setName("Web project");
+    assertThat(nDepsSensor.shouldExecuteOnProject(project), is(false));
   }
 
   @Test

@@ -85,7 +85,6 @@ public class NDepsResultParser implements BatchExtension {
   }
 
   private void parseAssemblyBlocs(String scope, SMInputCursor cursor) throws XMLStreamException {
-
     // Cursor is on <Assembly>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
@@ -165,16 +164,7 @@ public class NDepsResultParser implements BatchExtension {
               Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
 
               // find the folder to folder dependency
-              Dependency folderDependency = findDependency(fromParentFolderResource, toParentFolderResource);
-              if (folderDependency == null) {
-                folderDependency = new Dependency(fromParentFolderResource, toParentFolderResource);
-                folderDependency.setUsage("USES");
-              }
-
-              // save it
-              folderDependency.setWeight(folderDependency.getWeight() + 1);
-              context.saveDependency(folderDependency);
-              LOG.debug("Saving dependency from {} to {}", fromParentFolderResource.getName(), toParentFolderResource.getName());
+              Dependency folderDependency = findFolderDependency(fromParentFolderResource, toParentFolderResource);
 
               // save the file to file dependency
               Dependency fileDependency = new Dependency(fromResource, toResource);
@@ -188,6 +178,20 @@ public class NDepsResultParser implements BatchExtension {
         }
       }
     }
+  }
+
+  private Dependency findFolderDependency(Resource<?> fromParentFolderResource, Resource<?> toParentFolderResource) {
+    Dependency folderDependency = findDependency(fromParentFolderResource, toParentFolderResource);
+    if (folderDependency == null) {
+      folderDependency = new Dependency(fromParentFolderResource, toParentFolderResource);
+      folderDependency.setUsage("USES");
+    }
+
+    // save it
+    folderDependency.setWeight(folderDependency.getWeight() + 1);
+    context.saveDependency(folderDependency);
+    LOG.debug("Saving dependency from {} to {}", fromParentFolderResource.getName(), toParentFolderResource.getName());
+    return folderDependency;
   }
 
   private Dependency findDependency(Resource<?> from, Resource<?> to) {

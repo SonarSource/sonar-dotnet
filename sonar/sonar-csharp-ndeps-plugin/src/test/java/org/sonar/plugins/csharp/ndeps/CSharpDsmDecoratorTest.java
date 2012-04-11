@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -31,6 +33,10 @@ import org.junit.Test;
 import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
+import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 /*
  * Not too much test effort here as CSharpDsmDecorator will be removed once the design part of Sonar will be available in the API.
@@ -39,29 +45,94 @@ public class CSharpDsmDecoratorTest {
 
   private CSharpDsmDecorator dsmDecorator;
   private DecoratorContext context;
+  private Resource<?> resource;
+  private VisualStudioProject vsProject;
 
   @Before
   public void init() {
-    dsmDecorator = new CSharpDsmDecorator(null);
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
+    vsProject = mock(VisualStudioProject.class);
+    when(microsoftWindowsEnvironment.getCurrentProject("Foo")).thenReturn(vsProject);
+
+    dsmDecorator = new CSharpDsmDecorator(null, microsoftWindowsEnvironment);
+    resource = mock(Resource.class);
+    when(resource.getScope()).thenReturn("DIR");
     context = mock(DecoratorContext.class);
+    when(context.getResource()).thenReturn(resource);
   }
 
   @Test
-  public void shouldNotBeExecuted() {
+  public void testShouldNotExecuteOnNoCSharpProject() throws Exception {
+    Project p = new Project("");
+    assertThat(dsmDecorator.shouldExecuteOnProject(p), is(false));
+  }
+
+  @Test
+  public void testShouldNotExecuteOnRootProject() throws Exception {
+    Project p = new Project("");
+    p.setLanguageKey("cs");
+    assertThat(dsmDecorator.shouldExecuteOnProject(p), is(false));
+  }
+
+  @Test
+  public void testShouldExecute() throws Exception {
+    Project p = new Project("");
+    p.setLanguageKey("cs");
+    p.setName("Foo");
+    p.setParent(p);
+    assertThat(dsmDecorator.shouldExecuteOnProject(p), is(true));
+  }
+
+  @Test
+  public void testShouldNotExecuteOnWebProject() throws Exception {
+    Project p = new Project("");
+    p.setLanguageKey("cs");
+    p.setName("Foo");
+    p.setParent(p);
+    when(vsProject.isWebProject()).thenReturn(true);
+    assertThat(dsmDecorator.shouldExecuteOnProject(p), is(false));
+  }
+
+  @Test
+  public void shouldNotBeExecutedIfDsmAlreadyComputed() {
     // given that
     when(context.getMeasure(CoreMetrics.DEPENDENCY_MATRIX)).thenReturn(new Measure(CoreMetrics.DEPENDENCY_MATRIX, "..."));
 
     // when
-    dsmDecorator.decorate(null, context);
+    dsmDecorator.decorate(resource, context);
 
     // then
     verify(context, never()).saveMeasure(any(Measure.class));
   }
 
   @Test
-  public void shouldExecute() throws Exception {
+  public void shouldNotBeExecutedIfFile() {
+    // given that
+    when(resource.getScope()).thenReturn("FIL");
+
     // when
-    dsmDecorator.decorate(null, context);
+    dsmDecorator.decorate(resource, context);
+
+    // then
+    verify(context, never()).saveMeasure(any(Measure.class));
+  }
+
+  @Test
+  public void shouldExecuteIfDirAndDsmNotComputed() throws Exception {
+    // when
+    dsmDecorator.decorate(resource, context);
+
+    // then
+    verify(context, times(1)).saveMeasure(any(Measure.class));
+  }
+
+  @Test
+  public void shouldExecuteIfModuleAndDsmNotComputed() throws Exception {
+    // given that
+    when(resource.getQualifier()).thenReturn("BRC");
+
+    // when
+    dsmDecorator.decorate(resource, context);
 
     // then
     verify(context, times(1)).saveMeasure(any(Measure.class));

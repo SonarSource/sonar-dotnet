@@ -57,6 +57,11 @@ public class NDepsSensor extends AbstractCSharpSensor {
     this.fileSystem = fileSystem;
   }
 
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    return super.shouldExecuteOnProject(project) && !getVSProject(project).isWebProject();
+  }
+
   public void analyse(Project project, SensorContext context) {
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();
