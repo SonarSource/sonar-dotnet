@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.sonarsource.csharp</groupId>
     <artifactId>csharp</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>sonar-csharp-squid-plugin</artifactId>
@@ -182,6 +182,7 @@
                               <!-- APIs should not be obfuscated -->
                               <include name="com.sonar.csharp.squid.api.**.*" />
                               <include name="com.sonar.sslr.api.**.*" />
+                              <include name="com.sonar.sslr.squid.**.*" />
                               <!-- Class used to create Custom Checks -->
                               <include name="com.sonar.plugins.csharp.squid.check.CSharpCheck" />
                               <!-- These 2 C# Squid classes are used to test Custom Checks -->
