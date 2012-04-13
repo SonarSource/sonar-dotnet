@@ -19,8 +19,7 @@
     <module>sonar-csharp-stylecop-plugin</module>
     <module>sonar-csharp-gendarme-plugin</module>
     <module>sonar-csharp-gallio-plugin</module>
-	<module>sonar-csharp-ndeps-plugin</module>
-    <module>sonar-csharp-rules-plugin</module>
+    <module>sonar-csharp-ndeps-plugin</module>
   </modules>
 
   <scm>
@@ -59,12 +58,6 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>xerces</groupId>
-      <artifactId>xercesImpl</artifactId>
-      <version>2.8.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -155,6 +148,19 @@
 
   <profiles>
     <profile>
+      <!-- The C# Rules Plugin depends on C# Squid which is not open-source -->
+      <!-- so it can't be built on Codehaus. We use this profile for Bamboo -->
+      <id>oss-build</id>
+      <activation>
+        <property>
+          <name>!oss-build</name>
+        </property>
+      </activation>
+      <modules>
+        <module>sonar-csharp-rules-plugin</module>
+      </modules>
+    </profile>
+    <profile>
       <id>deploy-local</id>
       <build>
         <plugins>
@@ -166,7 +172,8 @@
                 <phase>install</phase>
                 <configuration>
                   <tasks>
-                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/extensions/plugins" failonerror="false" />
+                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/extensions/plugins"
+                      failonerror="false" />
                   </tasks>
                 </configuration>
                 <goals>
