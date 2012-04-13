@@ -42,6 +42,11 @@
       <artifactId>sonar-duplications</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
 </project>
