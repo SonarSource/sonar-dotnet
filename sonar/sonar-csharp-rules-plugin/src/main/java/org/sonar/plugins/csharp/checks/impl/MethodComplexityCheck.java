@@ -49,13 +49,13 @@ public class MethodComplexityCheck extends CSharpCheck {
   @Override
   public void init() {
     LOG.debug("... Init MethodComplexityCheck with max value to {}", maximumMethodComplexityThreshold);
-    subscribeTo(getCSharpGrammar().methodBody);
+    subscribeTo(getContext().getGrammar().methodBody);
   }
 
   public void leaveNode(AstNode node) {
-    SourceMember method = (SourceMember) peekSourceCode();
+    SourceMember method = (SourceMember) getContext().peekSourceCode();
     if (method.getInt(CSharpMetric.COMPLEXITY) > maximumMethodComplexityThreshold) {
-      log("Method has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.", node,
+      getContext().createLineViolation(this, "Method has a complexity of {0,number,integer} which is greater than {1,number,integer} authorized.", node,
           method.getInt(CSharpMetric.COMPLEXITY), maximumMethodComplexityThreshold);
     }
   }

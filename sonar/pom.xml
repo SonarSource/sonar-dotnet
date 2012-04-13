@@ -20,10 +20,7 @@
     <module>sonar-csharp-gendarme-plugin</module>
     <module>sonar-csharp-gallio-plugin</module>
 	<module>sonar-csharp-ndeps-plugin</module>
-    <!-- Will enable the Rules plugin once the C# Squid Plugin has been released -->
-    <!-- 
-    <module>sonar-csharp-rules-plugin</module> 
-    -->
+    <module>sonar-csharp-rules-plugin</module>
   </modules>
 
   <scm>
