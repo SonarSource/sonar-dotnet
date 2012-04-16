@@ -19,11 +19,6 @@
  */
 package org.sonar.plugins.csharp.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Properties;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -40,6 +35,11 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Properties;
 
 /**
  * Project Builder created and executed once per build to override the project definition, based on the Visual Studio files found in the
@@ -117,13 +117,6 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
         for (SourceFile sourceFile : vsProject.getSourceFiles()) {
           subProject.addSourceFiles(sourceFile.getFile());
         }
-
-        /*
-         * TODO not used
-         * for(BinaryReference ref : vsProject.getBinaryReferences()){
-         * subProject.addLibrary(ref.getAssemblyName()+ " zozo");
-         * }
-         */
       }
 
       LOG.debug("  - Adding Sub Project => {}", subProject.getName());

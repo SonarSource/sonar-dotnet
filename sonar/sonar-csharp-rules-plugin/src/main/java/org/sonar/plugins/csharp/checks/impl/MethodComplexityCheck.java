@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.checks.impl;
 
+import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.api.source.SourceMember;
+import com.sonar.plugins.csharp.squid.check.CSharpCheck;
+import com.sonar.sslr.api.AstNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.check.BelongsToProfile;
@@ -26,11 +30,6 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-
-import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.source.SourceMember;
-import com.sonar.plugins.csharp.squid.check.CSharpCheck;
-import com.sonar.sslr.api.AstNode;
 
 @Rule(key = "CSharp.MethodComplexity", name = "Avoid too complex methods", priority = Priority.MAJOR,
   description = "<p>The cyclomatic complexity of a method should not exceed a defined threshold. "
@@ -40,7 +39,7 @@ public class MethodComplexityCheck extends CSharpCheck {
 
   private static final Logger LOG = LoggerFactory.getLogger(MethodComplexityCheck.class);
 
-  private final static int DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD = 20;
+  private static final int DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD = 20;
 
   @RuleProperty(key = "maximumMethodComplexityThreshold", description = "The maximum authorized complexity in methods.", defaultValue = ""
     + DEFAULT_MAXIMUM_METHOD_COMPLEXITY_THRESHOLD)
