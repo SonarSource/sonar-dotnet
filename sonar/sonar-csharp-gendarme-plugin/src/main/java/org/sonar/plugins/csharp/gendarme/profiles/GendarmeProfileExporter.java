@@ -37,6 +37,8 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 
+import com.google.common.collect.Maps;
+
 /**
  * Class that allows to export a Sonar profile into a Gendarme rule definition file.
  */
@@ -74,7 +76,8 @@ public class GendarmeProfileExporter extends ProfileExporter {
   }
 
   private void marshall(Writer writer, List<ActiveRule> rules, RulePriority priority) throws IOException {
-    Map<String, List<ActiveRule>> assemblyRulesMap = new HashMap<String, List<ActiveRule>>();
+    // Note that TreeMap is used to guarantee stable order, and thus to pass tests under both JDK 1.5 and JDK 1.6
+    Map<String, List<ActiveRule>> assemblyRulesMap = Maps.newTreeMap();
 
     boolean assemblyRulesMapEmpty = true;
     for (ActiveRule activeRule : rules) {

@@ -129,7 +129,8 @@ public class StyleCopProfileExporter extends ProfileExporter {
   }
 
   private Map<String, List<StyleCopRule>> groupStyleCopRulesByAnalyzer(List<StyleCopRule> rules) {
-    Map<String, List<StyleCopRule>> rulesByAnalyzer = new HashMap<String, List<StyleCopRule>>();
+    // Note that TreeMap is used to guarantee stable order, and thus to pass tests under both JDK 1.5 and JDK 1.6
+    Map<String, List<StyleCopRule>> rulesByAnalyzer = Maps.newTreeMap();
     for (StyleCopRule styleCopRule : rules) {
       String analyzerId = styleCopRule.getAnalyzerId();
       List<StyleCopRule> rulesList = rulesByAnalyzer.get(analyzerId);

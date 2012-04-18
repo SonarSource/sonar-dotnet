@@ -1,209 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <StyleCopSettings Version="4.3">
     <Analyzers>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules">
-            <Rules>
-                <Rule Name="ElementMustBeginWithUpperCaseLetter" SonarPriority="major">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">True</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ElementMustBeginWithLowerCaseLetter" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="InterfaceNamesMustBeginWithI" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ConstFieldNamesMustBeginWithUpperCaseLetter" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="FieldNamesMustNotUseHungarianNotation" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="FieldNamesMustBeginWithLowerCaseLetter" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="AccessibleFieldsMustBeginWithUpperCaseLetter" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="VariableNamesMustNotBePrefixed" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="FieldNamesMustNotBeginWithUnderscore" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="FieldNamesMustNotContainUnderscore" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-            </Rules>
-        </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.SpacingRules">
-            <Rules>
-                <Rule Name="KeywordsMustBeSpacedCorrectly" SonarPriority="minor">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">True</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="CommasMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="SemicolonsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="SymbolsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="DocumentationLinesMustBeginWithSingleSpace" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="SingleLineCommentsMustBeginWithSingleSpace" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="PreprocessorKeywordsMustNotBePrecededBySpace" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OperatorKeywordMustBeFollowedBySpace" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OpeningParenthesisMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ClosingParenthesisMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OpeningSquareBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ClosingSquareBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OpeningCurlyBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ClosingCurlyBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OpeningGenericBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ClosingGenericBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="OpeningAttributeBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ClosingAttributeBracketsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="NullableTypeSymbolsMustNotBePrecededBySpace" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="MemberAccessSymbolsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="IncrementDecrementSymbolsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="NegativeSignsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="PositiveSignsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="ColonsMustBeSpacedCorrectly" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="CodeMustNotContainMultipleWhitespaceInARow" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-                <Rule Name="TabsMustNotBeUsed" SonarPriority="">
-                    <RuleSettings>
-                        <BooleanProperty Name="Enabled">False</BooleanProperty>
-                    </RuleSettings>
-                </Rule>
-            </Rules>
-        </Analyzer>
         <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.DocumentationRules">
             <Rules>
                 <Rule Name="ElementsMustBeDocumented" SonarPriority="">
@@ -561,6 +358,134 @@
                 </Rule>
             </Rules>
         </Analyzer>
+        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules">
+            <Rules>
+                <Rule Name="ElementMustBeginWithUpperCaseLetter" SonarPriority="major">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">True</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementMustBeginWithLowerCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="InterfaceNamesMustBeginWithI" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ConstFieldNamesMustBeginWithUpperCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustNotUseHungarianNotation" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustBeginWithLowerCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="AccessibleFieldsMustBeginWithUpperCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="VariableNamesMustNotBePrefixed" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustNotBeginWithUnderscore" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FieldNamesMustNotContainUnderscore" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+        </Analyzer>
+        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.OrderingRules">
+            <Rules>
+                <Rule Name="UsingDirectivesMustBePlacedWithinNamespace" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementsMustAppearInTheCorrectOrder" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementsMustBeOrderedByAccess" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ConstantsMustAppearBeforeFields" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="StaticElementsMustAppearBeforeInstanceElements" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DeclarationKeywordsMustFollowOrder" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ProtectedMustComeBeforeInternal" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PropertyAccessorsMustFollowOrder" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="EventAccessorsMustFollowOrder" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+        </Analyzer>
         <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules">
             <Rules>
                 <Rule Name="CommentsMustContainText" SonarPriority="">
@@ -680,69 +605,144 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.OrderingRules">
+        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.SpacingRules">
             <Rules>
-                <Rule Name="UsingDirectivesMustBePlacedWithinNamespace" SonarPriority="">
+                <Rule Name="KeywordsMustBeSpacedCorrectly" SonarPriority="minor">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">True</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="CommasMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="ElementsMustAppearInTheCorrectOrder" SonarPriority="">
+                <Rule Name="SemicolonsMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="ElementsMustBeOrderedByAccess" SonarPriority="">
+                <Rule Name="SymbolsMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="ConstantsMustAppearBeforeFields" SonarPriority="">
+                <Rule Name="DocumentationLinesMustBeginWithSingleSpace" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="StaticElementsMustAppearBeforeInstanceElements" SonarPriority="">
+                <Rule Name="SingleLineCommentsMustBeginWithSingleSpace" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="DeclarationKeywordsMustFollowOrder" SonarPriority="">
+                <Rule Name="PreprocessorKeywordsMustNotBePrecededBySpace" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="ProtectedMustComeBeforeInternal" SonarPriority="">
+                <Rule Name="OperatorKeywordMustBeFollowedBySpace" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="PropertyAccessorsMustFollowOrder" SonarPriority="">
+                <Rule Name="OpeningParenthesisMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="EventAccessorsMustFollowOrder" SonarPriority="">
+                <Rule Name="ClosingParenthesisMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives" SonarPriority="">
+                <Rule Name="OpeningSquareBracketsMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="UsingAliasDirectivesMustBePlacedAfterOtherUsingDirectives" SonarPriority="">
+                <Rule Name="ClosingSquareBracketsMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="UsingDirectivesMustBeOrderedAlphabeticallyByNamespace" SonarPriority="">
+                <Rule Name="OpeningCurlyBracketsMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName" SonarPriority="">
+                <Rule Name="ClosingCurlyBracketsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="OpeningGenericBracketsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ClosingGenericBracketsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="OpeningAttributeBracketsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ClosingAttributeBracketsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="NullableTypeSymbolsMustNotBePrecededBySpace" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="MemberAccessSymbolsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="IncrementDecrementSymbolsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="NegativeSignsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PositiveSignsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ColonsMustBeSpacedCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="CodeMustNotContainMultipleWhitespaceInARow" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="TabsMustNotBeUsed" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
