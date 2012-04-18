@@ -326,8 +326,9 @@ public final class ModelFactory {
     XPath xpath = factory.newXPath();
 
     // This is a workaround to avoid Xerces class-loading issues
-    ClassLoader savedClassloader = Thread.currentThread().getContextClassLoader();
-    Thread.currentThread().setContextClassLoader(xpath.getClass().getClassLoader());
+    // TODO Godin: this code seems useless and prevents successful execution of tests under JDK 1.5, however we should verify that it can be safely removed
+    // ClassLoader savedClassloader = Thread.currentThread().getContextClassLoader();
+    // Thread.currentThread().setContextClassLoader(xpath.getClass().getClassLoader());
     try {
       // We define the namespace prefix for Visual Studio
       xpath.setNamespaceContext(new VisualStudioNamespaceContext());
@@ -384,7 +385,7 @@ public final class ModelFactory {
       }
 
       // ???
-      Thread.currentThread().setContextClassLoader(savedClassloader);
+      //Thread.currentThread().setContextClassLoader(savedClassloader);
 
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]
@@ -398,7 +399,7 @@ public final class ModelFactory {
       throw new DotNetToolsException("Error while processing the project " + projectFile, xpee);
     } finally {
       // Replaces the class loader after usage
-      Thread.currentThread().setContextClassLoader(savedClassloader);
+      // Thread.currentThread().setContextClassLoader(savedClassloader);
     }
   }
 
