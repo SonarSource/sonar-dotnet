@@ -22,6 +22,24 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.WildcardPattern;
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,24 +53,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.utils.WildcardPattern;
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
 /**
  * Utility classes for the parsing of a Visual Studio project
@@ -326,9 +326,6 @@ public final class ModelFactory {
     XPath xpath = factory.newXPath();
 
     // This is a workaround to avoid Xerces class-loading issues
-    // TODO Godin: this code seems useless and prevents successful execution of tests under JDK 1.5, however we should verify that it can be safely removed
-    // ClassLoader savedClassloader = Thread.currentThread().getContextClassLoader();
-    // Thread.currentThread().setContextClassLoader(xpath.getClass().getClassLoader());
     try {
       // We define the namespace prefix for Visual Studio
       xpath.setNamespaceContext(new VisualStudioNamespaceContext());
@@ -384,9 +381,6 @@ public final class ModelFactory {
         project.setSilverlightProject(true);
       }
 
-      // ???
-      //Thread.currentThread().setContextClassLoader(savedClassloader);
-
       // Get all source files to find the assembly version
       // [assembly: AssemblyVersion("1.0.0.0")]
       Collection<SourceFile> sourceFiles = project.getSourceFiles();
@@ -397,9 +391,6 @@ public final class ModelFactory {
       return project;
     } catch (XPathExpressionException xpee) {
       throw new DotNetToolsException("Error while processing the project " + projectFile, xpee);
-    } finally {
-      // Replaces the class loader after usage
-      // Thread.currentThread().setContextClassLoader(savedClassloader);
     }
   }
 
