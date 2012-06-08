@@ -7,13 +7,144 @@ package com.sonar.csharp.squid.parser;
 
 import com.sonar.csharp.squid.api.CSharpGrammar;
 
-import static com.sonar.csharp.squid.api.CSharpKeyword.*;
-import static com.sonar.csharp.squid.api.CSharpPunctuator.*;
-import static com.sonar.csharp.squid.api.CSharpTokenType.*;
-import static com.sonar.sslr.api.GenericTokenType.*;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.*;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.*;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.*;
+import static com.sonar.csharp.squid.api.CSharpKeyword.ABSTRACT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.AS;
+import static com.sonar.csharp.squid.api.CSharpKeyword.BASE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.BOOL;
+import static com.sonar.csharp.squid.api.CSharpKeyword.BREAK;
+import static com.sonar.csharp.squid.api.CSharpKeyword.BYTE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CASE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CATCH;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CHAR;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CHECKED;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CLASS;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CONST;
+import static com.sonar.csharp.squid.api.CSharpKeyword.CONTINUE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.DECIMAL;
+import static com.sonar.csharp.squid.api.CSharpKeyword.DEFAULT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.DELEGATE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.DO;
+import static com.sonar.csharp.squid.api.CSharpKeyword.DOUBLE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.ELSE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.ENUM;
+import static com.sonar.csharp.squid.api.CSharpKeyword.EVENT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.EXPLICIT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.EXTERN;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FALSE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FINALLY;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FIXED;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FLOAT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FOR;
+import static com.sonar.csharp.squid.api.CSharpKeyword.FOREACH;
+import static com.sonar.csharp.squid.api.CSharpKeyword.GOTO;
+import static com.sonar.csharp.squid.api.CSharpKeyword.IF;
+import static com.sonar.csharp.squid.api.CSharpKeyword.IMPLICIT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.IN;
+import static com.sonar.csharp.squid.api.CSharpKeyword.INT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.INTERFACE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.INTERNAL;
+import static com.sonar.csharp.squid.api.CSharpKeyword.IS;
+import static com.sonar.csharp.squid.api.CSharpKeyword.LOCK;
+import static com.sonar.csharp.squid.api.CSharpKeyword.LONG;
+import static com.sonar.csharp.squid.api.CSharpKeyword.NAMESPACE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.NEW;
+import static com.sonar.csharp.squid.api.CSharpKeyword.NULL;
+import static com.sonar.csharp.squid.api.CSharpKeyword.OBJECT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.OPERATOR;
+import static com.sonar.csharp.squid.api.CSharpKeyword.OUT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.OVERRIDE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.PARAMS;
+import static com.sonar.csharp.squid.api.CSharpKeyword.PRIVATE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.PROTECTED;
+import static com.sonar.csharp.squid.api.CSharpKeyword.PUBLIC;
+import static com.sonar.csharp.squid.api.CSharpKeyword.READONLY;
+import static com.sonar.csharp.squid.api.CSharpKeyword.REF;
+import static com.sonar.csharp.squid.api.CSharpKeyword.RETURN;
+import static com.sonar.csharp.squid.api.CSharpKeyword.SBYTE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.SEALED;
+import static com.sonar.csharp.squid.api.CSharpKeyword.SHORT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.SIZEOF;
+import static com.sonar.csharp.squid.api.CSharpKeyword.STACKALLOC;
+import static com.sonar.csharp.squid.api.CSharpKeyword.STATIC;
+import static com.sonar.csharp.squid.api.CSharpKeyword.STRING;
+import static com.sonar.csharp.squid.api.CSharpKeyword.STRUCT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.SWITCH;
+import static com.sonar.csharp.squid.api.CSharpKeyword.THIS;
+import static com.sonar.csharp.squid.api.CSharpKeyword.THROW;
+import static com.sonar.csharp.squid.api.CSharpKeyword.TRUE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.TRY;
+import static com.sonar.csharp.squid.api.CSharpKeyword.TYPEOF;
+import static com.sonar.csharp.squid.api.CSharpKeyword.UINT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.ULONG;
+import static com.sonar.csharp.squid.api.CSharpKeyword.UNCHECKED;
+import static com.sonar.csharp.squid.api.CSharpKeyword.UNSAFE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.USHORT;
+import static com.sonar.csharp.squid.api.CSharpKeyword.USING;
+import static com.sonar.csharp.squid.api.CSharpKeyword.VIRTUAL;
+import static com.sonar.csharp.squid.api.CSharpKeyword.VOID;
+import static com.sonar.csharp.squid.api.CSharpKeyword.VOLATILE;
+import static com.sonar.csharp.squid.api.CSharpKeyword.WHILE;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.ADD_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.AND;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.AND_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.AND_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.COLON;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.COMMA;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.DEC_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.DIV_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.DOT;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.DOUBLE_COLON;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.DOUBLE_QUESTION;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.EQUAL;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.EQ_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.EXCLAMATION;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.GE_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.INC_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.INFERIOR;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LAMBDA;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LBRACKET;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LCURLYBRACE;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LEFT_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LEFT_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LE_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.LPARENTHESIS;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.MINUS;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.MODULO;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.MOD_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.MUL_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.NE_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.OR;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.OR_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.OR_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.PLUS;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.PTR_OP;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.QUESTION;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.RBRACKET;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.RCURLYBRACE;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.RPARENTHESIS;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.SEMICOLON;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.SLASH;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.STAR;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.SUB_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.SUPERIOR;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.TILDE;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.XOR;
+import static com.sonar.csharp.squid.api.CSharpPunctuator.XOR_ASSIGN;
+import static com.sonar.csharp.squid.api.CSharpTokenType.CHARACTER_LITERAL;
+import static com.sonar.csharp.squid.api.CSharpTokenType.INTEGER_DEC_LITERAL;
+import static com.sonar.csharp.squid.api.CSharpTokenType.INTEGER_HEX_LITERAL;
+import static com.sonar.csharp.squid.api.CSharpTokenType.REAL_LITERAL;
+import static com.sonar.csharp.squid.api.CSharpTokenType.STRING_LITERAL;
+import static com.sonar.sslr.api.GenericTokenType.EOF;
+import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.bridge;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.next;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.not;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.and;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.one2n;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.opt;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.or;
 
 /**
  * Definition of each element of the C# grammar.
@@ -160,7 +291,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             defaultValueExpression,
             anonymousMethodExpression,
             literal,
-            simpleName
+            simpleName,
+            unsafe(or(/* unsafe.pointerElementAccess, */sizeOfExpression))
         )).skip();
 
     postMemberAccess.is(DOT, IDENTIFIER, opt(typeArgumentList));
@@ -228,7 +360,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         or(
             and(LPARENTHESIS, type, RPARENTHESIS, unaryExpression),
             primaryExpression,
-            and(or(MINUS, EXCLAMATION, INC_OP, DEC_OP, TILDE, PLUS), unaryExpression)
+            and(or(MINUS, EXCLAMATION, INC_OP, DEC_OP, TILDE, PLUS), unaryExpression),
+            unsafe(or(pointerIndirectionExpression, addressOfExpression))
         )).skipIfOneChild();
 
     multiplicativeExpression.is(unaryExpression, o2n(or(STAR, SLASH, MODULO), unaryExpression)).skipIfOneChild();
@@ -293,7 +426,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     declarationStatement.is(or(localVariableDeclaration, localConstantDeclaration), SEMICOLON);
     localVariableDeclaration.is(type, localVariableDeclarator, o2n(COMMA, localVariableDeclarator));
     localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, localVariableInitializer));
-    localVariableInitializer.is(or(expression, arrayInitializer));
+    localVariableInitializer.is(or(expression, arrayInitializer, unsafe(stackallocInitializer)));
     localConstantDeclaration.is(CONST, type, constantDeclarator, o2n(COMMA, constantDeclarator));
     constantDeclarator.is(IDENTIFIER, EQUAL, expression);
     // NOTE Rule expressionStatement is relaxed to accept any expression
@@ -345,7 +478,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
   private void classes() {
     classDeclaration.is(opt(attributes), o2n(classModifier), opt(PARTIAL), CLASS, IDENTIFIER, opt(typeParameterList),
         opt(classBase), opt(typeParameterConstraintsClauses), classBody, opt(SEMICOLON));
-    classModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC));
+    classModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, ABSTRACT, SEALED, STATIC, UNSAFE));
     classBase.is(COLON, or(and(classType, COMMA, interfaceTypeList), classType, interfaceTypeList));
     interfaceTypeList.is(interfaceType, o2n(COMMA, interfaceType));
     classBody.is(LCURLYBRACE, o2n(classMemberDeclaration), RCURLYBRACE);
@@ -357,13 +490,13 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     constantModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE));
     fieldDeclaration.is(opt(attributes), o2n(fieldModifier), type, variableDeclarator, o2n(COMMA, variableDeclarator),
         SEMICOLON);
-    fieldModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, READONLY, VOLATILE));
+    fieldModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, READONLY, VOLATILE, UNSAFE));
     variableDeclarator.is(IDENTIFIER, opt(EQUAL, variableInitializer));
     variableInitializer.is(or(expression, arrayInitializer));
     methodDeclaration.is(methodHeader, methodBody);
     methodHeader.is(opt(attributes), o2n(methodModifier), opt(PARTIAL), returnType, memberName, opt(typeParameterList),
         LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(typeParameterConstraintsClauses)).skip();
-    methodModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN));
+    methodModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN, UNSAFE));
     returnType.is(or(type, VOID));
     // NOTE: memberName does not exactly stick to the specification (see page 462 of ECMA specification)
     memberName.is(o2n(or(qualifiedAliasMember, and(or(THIS, IDENTIFIER), opt(typeArgumentList))), DOT), or(THIS, IDENTIFIER),
@@ -376,7 +509,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     parameterArray.is(opt(attributes), PARAMS, arrayType, IDENTIFIER);
     propertyDeclaration.is(opt(attributes), o2n(propertyModifier), type, memberName, LCURLYBRACE, accessorDeclarations,
         RCURLYBRACE);
-    propertyModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN));
+    propertyModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN, UNSAFE));
     accessorDeclarations.is(or(and(getAccessorDeclaration, opt(setAccessorDeclaration)),
         and(setAccessorDeclaration, opt(getAccessorDeclaration))));
     getAccessorDeclaration.is(opt(attributes), o2n(accessorModifier), GET, accessorBody);
@@ -390,19 +523,19 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         type,
         or(and(variableDeclarator, o2n(COMMA, variableDeclarator), SEMICOLON),
             and(memberName, LCURLYBRACE, eventAccessorDeclarations, RCURLYBRACE)));
-    eventModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN));
+    eventModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN, UNSAFE));
     eventAccessorDeclarations.is(or(and(addAccessorDeclaration, removeAccessorDeclaration),
         and(removeAccessorDeclaration, addAccessorDeclaration)));
     addAccessorDeclaration.is(opt(attributes), "add", block);
     removeAccessorDeclaration.is(opt(attributes), "remove", block);
     indexerDeclaration.is(opt(attributes), o2n(indexerModifier), indexerDeclarator, LCURLYBRACE, accessorDeclarations,
         RCURLYBRACE);
-    indexerModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN));
+    indexerModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, STATIC, VIRTUAL, SEALED, OVERRIDE, ABSTRACT, EXTERN, UNSAFE));
     // NOTE: indexerDeclarator does not exactly stick to the specification. Normally it would be:
     indexerDeclarator.is(type, o2n(or(qualifiedAliasMember, and(IDENTIFIER, opt(typeArgumentList))), DOT), THIS, LBRACKET,
         formalParameterList, RBRACKET);
     operatorDeclaration.is(opt(attributes), one2n(operatorModifier), operatorDeclarator, operatorBody);
-    operatorModifier.is(or(PUBLIC, STATIC, EXTERN));
+    operatorModifier.is(or(PUBLIC, STATIC, EXTERN, UNSAFE));
     operatorDeclarator.is(or(unaryOperatorDeclarator, binaryOperatorDeclarator, conversionOperatorDeclarator));
     unaryOperatorDeclarator.is(type, OPERATOR, overloadableUnaryOperator, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
     overloadableUnaryOperator.is(or(PLUS, MINUS, EXCLAMATION, TILDE, INC_OP, DEC_OP, TRUE, FALSE));
@@ -413,7 +546,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     conversionOperatorDeclarator.is(or(IMPLICIT, EXPLICIT), OPERATOR, type, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
     operatorBody.is(or(block, SEMICOLON));
     constructorDeclaration.is(opt(attributes), o2n(constructorModifier), constructorDeclarator, constructorBody);
-    constructorModifier.is(or(PUBLIC, PROTECTED, INTERNAL, PRIVATE, EXTERN));
+    constructorModifier.is(or(PUBLIC, PROTECTED, INTERNAL, PRIVATE, EXTERN, UNSAFE));
     constructorDeclarator.is(IDENTIFIER, LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(constructorInitializer));
     constructorInitializer.is(COLON, or(BASE, THIS), LPARENTHESIS, opt(argumentList), RPARENTHESIS);
     constructorBody.is(or(block, SEMICOLON));
@@ -428,12 +561,12 @@ public class CSharpGrammarImpl extends CSharpGrammar {
   private void structs() {
     structDeclaration.is(opt(attributes), o2n(structModifier), opt(PARTIAL), STRUCT, IDENTIFIER, opt(typeParameterList),
         opt(structInterfaces), opt(typeParameterConstraintsClauses), structBody, opt(SEMICOLON));
-    structModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE));
+    structModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE));
     structInterfaces.is(COLON, interfaceTypeList);
     structBody.is(LCURLYBRACE, o2n(structMemberDeclaration), RCURLYBRACE);
     structMemberDeclaration.is(or(constantDeclaration, fieldDeclaration, methodDeclaration, propertyDeclaration,
         eventDeclaration, indexerDeclaration, operatorDeclaration, constructorDeclaration, staticConstructorDeclaration,
-        typeDeclaration));
+        typeDeclaration, unsafe(fixedSizeBufferDeclaration)));
   }
 
   private void arrays() {
@@ -444,7 +577,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
   private void interfaces() {
     interfaceDeclaration.is(opt(attributes), o2n(interfaceModifier), opt(PARTIAL), INTERFACE, IDENTIFIER,
         opt(variantTypeParameterList), opt(interfaceBase), opt(typeParameterConstraintsClauses), interfaceBody, opt(SEMICOLON));
-    interfaceModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE));
+    interfaceModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE));
     variantTypeParameterList.is(INFERIOR, variantTypeParameter, o2n(COMMA, variantTypeParameter), SUPERIOR);
     variantTypeParameter.is(opt(attributes), opt(varianceAnnotation), typeParameter);
     varianceAnnotation.is(or(IN, OUT));
@@ -475,7 +608,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     delegateDeclaration.is(opt(attributes), o2n(delegateModifier), DELEGATE, returnType, IDENTIFIER,
         opt(variantTypeParameterList), LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(typeParameterConstraintsClauses),
         SEMICOLON);
-    delegateModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE));
+    delegateModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE));
   }
 
   private void attributes() {
@@ -515,22 +648,34 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
   }
 
-  private void unsafe() {
-    classModifier.or(UNSAFE);
-    structModifier.or(UNSAFE);
-    interfaceModifier.or(UNSAFE);
-    delegateModifier.or(UNSAFE);
-    fieldModifier.or(UNSAFE);
-    methodModifier.or(UNSAFE);
-    propertyModifier.or(UNSAFE);
-    eventModifier.or(UNSAFE);
-    indexerModifier.or(UNSAFE);
-    operatorModifier.or(UNSAFE);
-    constructorModifier.or(UNSAFE);
+  /**
+   * Syntactic sugar to highlight constructs, which were moved from {@link unsafe}
+   * to get rid of call to {@link com.sonar.sslr.api.Rule#or} (removed in SSLR 1.13).
+   */
+  private Object unsafe(Object matcher) {
+    return matcher;
+  }
 
-    destructorDeclaration.or(opt(attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody);
+  private void unsafe() {
+    // classModifier.or(UNSAFE);
+    // structModifier.or(UNSAFE);
+    // interfaceModifier.or(UNSAFE);
+    // delegateModifier.or(UNSAFE);
+    // fieldModifier.or(UNSAFE);
+    // methodModifier.or(UNSAFE);
+    // propertyModifier.or(UNSAFE);
+    // eventModifier.or(UNSAFE);
+    // indexerModifier.or(UNSAFE);
+    // operatorModifier.or(UNSAFE);
+    // constructorModifier.or(UNSAFE);
+
+    destructorDeclaration.override(or(
+        and(opt(attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody),
+        and(opt(attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody)));
     staticConstructorModifiers.override(o2n(or(EXTERN, UNSAFE)), STATIC, o2n(or(EXTERN, UNSAFE)));
-    embeddedStatement.or(or(unsafeStatement, fixedStatement));
+    embeddedStatement.override(or(block, SEMICOLON, expressionStatement, selectionStatement, iterationStatement, jumpStatement,
+        tryStatement, checkedStatement, uncheckedStatement, lockStatement, usingStatement, yieldStatement,
+        unsafeStatement, fixedStatement));
     unsafeStatement.is(UNSAFE, block);
 
     // pointerType was moved to the types part in order to remove the left recursions
@@ -538,8 +683,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
 
     // NOTE : unsafe.pointerElementAccess deactivated here because it shadows the "elementAccess" in the main grammar...
     // Need to look into that later.
-    primaryNoArrayCreationExpression.or(or(/* unsafe.pointerElementAccess, */sizeOfExpression));
-    unaryExpression.or(or(pointerIndirectionExpression, addressOfExpression));
+    // primaryNoArrayCreationExpression.or(or(/* unsafe.pointerElementAccess, */sizeOfExpression));
+    // unaryExpression.or(or(pointerIndirectionExpression, addressOfExpression));
     pointerIndirectionExpression.is(STAR, unaryExpression);
     pointerElementAccess.is(primaryNoArrayCreationExpression, LBRACKET, expression, RBRACKET);
     addressOfExpression.is(AND, unaryExpression);
@@ -549,12 +694,12 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     fixedPointerDeclarator.is(IDENTIFIER, EQUAL, fixedPointerInitializer);
     // NOTE : stackallocInitializer should not be here according to the specifications, but it seems it can in reality
     fixedPointerInitializer.is(or(and(AND, variableReference), stackallocInitializer, expression));
-    structMemberDeclaration.or(fixedSizeBufferDeclaration);
+    // structMemberDeclaration.or(fixedSizeBufferDeclaration);
     fixedSizeBufferDeclaration.is(opt(attributes), o2n(fixedSizeBufferModifier), FIXED, type,
         one2n(fixedSizeBufferDeclarator), SEMICOLON);
     fixedSizeBufferModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE));
     fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, expression, RBRACKET);
-    localVariableInitializer.or(stackallocInitializer);
+    // localVariableInitializer.or(stackallocInitializer);
     stackallocInitializer.is(STACKALLOC, type, LBRACKET, expression, RBRACKET);
   }
 
