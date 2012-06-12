@@ -292,6 +292,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             anonymousMethodExpression,
             literal,
             simpleName,
+            // NOTE : unsafe.pointerElementAccess deactivated here because it shadows the "elementAccess" in the main grammar...
+            // Need to look into that later.
             unsafe(or(/* unsafe.pointerElementAccess, */sizeOfExpression))
         )).skip();
 
@@ -657,18 +659,6 @@ public class CSharpGrammarImpl extends CSharpGrammar {
   }
 
   private void unsafe() {
-    // classModifier.or(UNSAFE);
-    // structModifier.or(UNSAFE);
-    // interfaceModifier.or(UNSAFE);
-    // delegateModifier.or(UNSAFE);
-    // fieldModifier.or(UNSAFE);
-    // methodModifier.or(UNSAFE);
-    // propertyModifier.or(UNSAFE);
-    // eventModifier.or(UNSAFE);
-    // indexerModifier.or(UNSAFE);
-    // operatorModifier.or(UNSAFE);
-    // constructorModifier.or(UNSAFE);
-
     destructorDeclaration.override(or(
         and(opt(attributes), opt(EXTERN), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody),
         and(opt(attributes), o2n(or(EXTERN, UNSAFE)), TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody)));
@@ -677,14 +667,6 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         tryStatement, checkedStatement, uncheckedStatement, lockStatement, usingStatement, yieldStatement,
         unsafeStatement, fixedStatement));
     unsafeStatement.is(UNSAFE, block);
-
-    // pointerType was moved to the types part in order to remove the left recursions
-    // pointerMemberAccess was moved to the expressions part (as postPointerMemberAccess) in order to remove the left recursions
-
-    // NOTE : unsafe.pointerElementAccess deactivated here because it shadows the "elementAccess" in the main grammar...
-    // Need to look into that later.
-    // primaryNoArrayCreationExpression.or(or(/* unsafe.pointerElementAccess, */sizeOfExpression));
-    // unaryExpression.or(or(pointerIndirectionExpression, addressOfExpression));
     pointerIndirectionExpression.is(STAR, unaryExpression);
     pointerElementAccess.is(primaryNoArrayCreationExpression, LBRACKET, expression, RBRACKET);
     addressOfExpression.is(AND, unaryExpression);
@@ -694,12 +676,10 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     fixedPointerDeclarator.is(IDENTIFIER, EQUAL, fixedPointerInitializer);
     // NOTE : stackallocInitializer should not be here according to the specifications, but it seems it can in reality
     fixedPointerInitializer.is(or(and(AND, variableReference), stackallocInitializer, expression));
-    // structMemberDeclaration.or(fixedSizeBufferDeclaration);
     fixedSizeBufferDeclaration.is(opt(attributes), o2n(fixedSizeBufferModifier), FIXED, type,
         one2n(fixedSizeBufferDeclarator), SEMICOLON);
     fixedSizeBufferModifier.is(or(NEW, PUBLIC, PROTECTED, INTERNAL, PRIVATE, UNSAFE));
     fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, expression, RBRACKET);
-    // localVariableInitializer.or(stackallocInitializer);
     stackallocInitializer.is(STACKALLOC, type, LBRACKET, expression, RBRACKET);
   }
 
