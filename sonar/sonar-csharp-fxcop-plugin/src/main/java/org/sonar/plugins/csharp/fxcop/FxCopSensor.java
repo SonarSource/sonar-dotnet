@@ -23,6 +23,8 @@ package org.sonar.plugins.csharp.fxcop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -44,6 +46,8 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
+
+import com.google.common.base.Joiner;
 
 /**
  * Collects the FXCop reporting into sonar.
@@ -88,13 +92,14 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
 
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
 
-    final File reportFile;
-    File projectDir = project.getFileSystem().getBasedir();
+    final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + FxCopConstants.FXCOP_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(FxCopConstants.REPORTS_PATH_KEY, reportDefaultPath);
-      reportFile = FileFinder.browse(projectDir, reportPath);
-      LOG.info("Reusing FxCop report: " + reportFile);
+      VisualStudioSolution vsSolution = getVSSolution();
+      VisualStudioProject vsProject = getVSProject(project);
+      reportFiles = FileFinder.findFiles(vsSolution, vsProject, reportPath);
+      LOG.info("Reusing FxCop reports: " + Joiner.on(" ").join(reportFiles));
     } else {
       // prepare config file for FxCop
       File fxCopConfigFile = generateConfigurationFile();
@@ -106,11 +111,14 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
       } catch (FxCopException e) {
         throw new SonarException("FxCop execution failed.", e);
       }
-      reportFile = new File(projectDir, reportDefaultPath);
+      File projectDir = fileSystem.getBasedir();
+      reportFiles = Collections.singleton(new File(projectDir, reportDefaultPath));
     }
 
     // and analyze results
-    analyseResults(reportFile);
+    for (File reportFile : reportFiles) {
+      analyseResults(reportFile);
+    }
   }
 
   protected File generateConfigurationFile() {
