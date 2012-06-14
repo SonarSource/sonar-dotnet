@@ -23,6 +23,8 @@ package org.sonar.plugins.csharp.gendarme;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -34,6 +36,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.gendarme.GendarmeCommandBuilder;
 import org.sonar.dotnet.tools.gendarme.GendarmeException;
 import org.sonar.dotnet.tools.gendarme.GendarmeRunner;
@@ -43,6 +47,8 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
+
+import com.google.common.base.Joiner;
 
 /**
  * Collects the Gendarme reporting into sonar.
@@ -87,13 +93,14 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     }
 
     gendarmeResultParser.setEncoding(fileSystem.getSourceCharset());
-    final File reportFile;
-    File projectDir = project.getFileSystem().getBasedir();
+    final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GendarmeConstants.GENDARME_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY, reportDefaultPath);
-      reportFile = FileFinder.browse(projectDir, reportPath);
-      LOG.info("Reusing Gendarme report: " + reportFile);
+      VisualStudioSolution vsSolution = getVSSolution();
+      VisualStudioProject vsProject = getVSProject(project);
+      reportFiles = FileFinder.findFiles(vsSolution, vsProject, reportPath);
+      LOG.info("Reusing Gendarme report: " + Joiner.on(" ").join(reportFiles));
     } else {
       // prepare config file for Gendarme
       File gendarmeConfigFile = generateConfigurationFile();
@@ -108,11 +115,14 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
       } catch (GendarmeException e) {
         throw new SonarException("Gendarme execution failed.", e);
       }
-      reportFile = new File(projectDir, reportDefaultPath);
+      File projectDir = fileSystem.getBasedir();
+      reportFiles = Collections.singleton(new File(projectDir, reportDefaultPath));
     }
 
-    // and analyse results
-    analyseResults(reportFile);
+    // and analyze results
+    for (File reportFile : reportFiles) {
+      analyseResults(reportFile);
+    }
   }
 
   protected File generateConfigurationFile() {
