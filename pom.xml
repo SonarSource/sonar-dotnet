@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>14</version>
+    <version>15</version>
   </parent>
 
   <groupId>com.sonarsource.csharp</groupId>
