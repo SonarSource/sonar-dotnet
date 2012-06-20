@@ -74,6 +74,7 @@ public class CoverageResultParser implements BatchExtension {
     parsingStrategies.add(new PartCover4ParsingStrategy());
     parsingStrategies.add(new NCover3ParsingStrategy());
     parsingStrategies.add(new OpenCoverParsingStrategy());
+    parsingStrategies.add(new DotCoverParsingStrategy());
   }
 
   /**

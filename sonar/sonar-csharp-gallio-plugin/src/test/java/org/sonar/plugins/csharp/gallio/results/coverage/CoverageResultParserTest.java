@@ -203,6 +203,20 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
+  
+  @Test
+  public void testParseDotCover() {
+    ParsingParameters params = new ParsingParameters();
+    params.report = "Coverage.DotCover.xml";
+    params.assemblyName = "Example.Core";
+    params.fileNumber = 5;
+    params.fileName = "money.cs";
+    params.coveredLines = 45;
+    params.lines = 48;
+    params.coverage = 0.94;
+
+    checkParsing(params);
+  }
 
   @Test
   public void parseEmptyPartCoverReport() {
