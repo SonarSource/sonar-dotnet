@@ -56,8 +56,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.inject.internal.util.Lists;
 
-//@RunWith(PowerMockRunner.class)
-//@PrepareForTest({File.class, DotCoverParsingStrategy.class})
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({File.class, DotCoverParsingStrategy.class})
 public class CoverageResultParserTest {
 
   private CoverageResultParser parser;
@@ -216,7 +216,6 @@ public class CoverageResultParserTest {
   }
   
   @Test
-  @Ignore
   public void testParseDotCover() throws Exception {
     ParsingParameters params = new ParsingParameters();
     params.report = "Coverage.DotCover.xml";
@@ -232,7 +231,6 @@ public class CoverageResultParserTest {
   }
   
   @Test
-  @Ignore
   public void testParseDotCoverWithInnerType() throws Exception {
     ParsingParameters params = new ParsingParameters();
     params.report = "Coverage.DotCover.InnerType.xml";
@@ -277,7 +275,7 @@ public class CoverageResultParserTest {
   }
 
   private void checkParsing(final ParsingParameters parameters) {
-    File file = TestUtils.getResource("/results/coverage/" + parameters.report);
+    File file = TestUtils.getResource("/Results/coverage/" + parameters.report);
     List<FileCoverage> files = parser.parse(project, file);
 
     int numberOfLinesInFiles = 0;
