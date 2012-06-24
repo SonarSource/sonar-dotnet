@@ -31,6 +31,7 @@ import org.sonar.api.utils.command.Command;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 /**
@@ -383,13 +384,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
 
     // We add all the configured exclusions
-    /* TODO
     if (coverageExcludes != null) {
-      for (String exclusion : coverageExcludes) {
-        LOG.debug("- Opencover exclude   : {}", exclusion.trim());
-        filterBuilder.append("-[" + exclusion.trim() + "]* ");
-      }
-    }*/
+      String exclusion = Joiner.on(';').join(coverageExcludes); // HACK ';' should not be a splitter in CsharpConfiguration 
+      LOG.debug("- dotCover exclude   : {}", exclusion);
+      filterBuilder.append(exclusion);
+    }
     
     command.addArgument(filterBuilder.toString());
 
