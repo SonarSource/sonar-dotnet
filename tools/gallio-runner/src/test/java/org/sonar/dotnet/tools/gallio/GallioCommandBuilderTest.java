@@ -37,6 +37,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 public class GallioCommandBuilderTest {
@@ -45,6 +46,7 @@ public class GallioCommandBuilderTest {
   private static final File GALLIO_REPORT_FILE = new File("target/sonar/gallio-report-folder/gallio-report.xml");
   private static final File PART_COVER_INSTALL_DIR = TestUtils.getResource("/Runner/FakeProg/PartCover");
   private static final File OPEN_COVER_INSTALL_DIR = TestUtils.getResource("/Runner/FakeProg/OpenCover");
+  private static final File DOT_COVER_INSTALL_DIR = TestUtils.getResource("/Runner/FakeProg/dotCover");
   private static final File GALLIO_COVERAGE_REPORT_FILE = new File("target/sonar/gallio-report-folder/coverage-report.xml");
   private static final File FAKE_ASSEMBLY_2 = TestUtils.getResource("/Runner/FakeAssemblies/Fake2.assembly");
   private static final File FAKE_ASSEMBLY_1 = TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly");
@@ -88,87 +90,6 @@ public class GallioCommandBuilderTest {
     assertThat(commands[4], endsWith("assembly"));
     assertThat(commands[5], endsWith("assembly"));
   }
-
-  /*
-   * @Test
-   * public void testToCommandForSolutionWithPattern() throws Exception {
-   * GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-   * builder.setExecutable(GALLIO_EXE);
-   * builder.setReportFile(GALLIO_REPORT_FILE);
-   * builder.setWorkDir(WORK_DIR);
-   * builder.setTestAssemblyPatterns("../FakeAssemblies2/*.assembly");
-   * Command command = builder.toCommand();
-   * 
-   * assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
-   * assertThat(command.getDirectory(), is(WORK_DIR));
-   * String[] commands = command.getArguments().toArray(new String[] {});
-   * assertThat(commands.length, is(6));
-   * assertThat(commands[0], is("/r:IsolatedProcess"));
-   * assertThat(commands[1], endsWith("gallio-report-folder"));
-   * assertThat(commands[2], is("/report-name-format:gallio-report"));
-   * assertThat(commands[3], is("/report-type:Xml"));
-   * // check that the assemblies found are those from FakeAssemblies2
-   * assertThat(commands[4], endsWith("b.assembly"));
-   * assertThat(commands[5], endsWith("b.assembly"));
-   * }
-   */
-
-  /*
-   * @Test
-   * public void testToCommandForSolutionWithBadPattern() throws Exception {
-   * GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-   * builder.setExecutable(GALLIO_EXE);
-   * builder.setReportFile(GALLIO_REPORT_FILE);
-   * builder.setWorkDir(WORK_DIR);
-   * builder.setTestAssemblyPatterns("FakeAssemblies2/*.assembly");
-   * Command command = builder.toCommand();
-   * 
-   * assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
-   * assertThat(command.getDirectory(), is(WORK_DIR));
-   * String[] commands = command.getArguments().toArray(new String[] {});
-   * assertThat(commands.length, is(6));
-   * assertThat(commands[0], is("/r:IsolatedProcess"));
-   * assertThat(commands[1], endsWith("gallio-report-folder"));
-   * assertThat(commands[2], is("/report-name-format:gallio-report"));
-   * assertThat(commands[3], is("/report-type:Xml"));
-   * // check that the assemblies found are not those from FakeAssemblies2
-   * // but the default ones from FakeAssemblies
-   * assertThat(commands[4], not(endsWith("b.assembly")));
-   * assertThat(commands[4], endsWith(".assembly"));
-   * assertThat(commands[5], not(endsWith("b.assembly")));
-   * assertThat(commands[5], endsWith(".assembly"));
-   * }
-   */
-
-  /*
-   * @Test
-   * public void testToCommandForSolutionWithMoreParams() throws Exception {
-   * VisualStudioProject vsProject = mock(VisualStudioProject.class);
-   * when(vsProject.getArtifact("Release")).thenReturn(FAKE_ASSEMBLY_2);
-   * solution = mock(VisualStudioSolution.class);
-   * when(solution.getTestProjects()).thenReturn(Lists.newArrayList(vsProject));
-   * 
-   * GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
-   * builder.setTestAssemblies(Lists.newArrayList(FAKE_ASSEMBLY_1, FAKE_ASSEMBLY_2));
-   * builder.setExecutable(GALLIO_EXE);
-   * builder.setReportFile(new File("target/sonar/gallio-report-folder/gallio-report.XmL")); // we use here mixed case on purpose
-   * builder.setWorkDir(WORK_DIR);
-   * builder.setFilter("FooFilter");
-   * //builder.setBuildConfigurations("Release");
-   * builder.setGallioRunnerType("Local");
-   * Command command = builder.toCommand();
-   * 
-   * assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
-   * String[] commands = command.getArguments().toArray(new String[] {});
-   * assertThat(commands.length, is(6));
-   * assertThat(commands[0], is("/r:Local"));
-   * assertThat(commands[1], endsWith("gallio-report-folder"));
-   * assertThat(commands[2], is("/report-name-format:gallio-report"));
-   * assertThat(commands[3], is("/report-type:Xml"));
-   * assertThat(commands[4], endsWith("/f:FooFilter"));
-   * assertThat(commands[5], endsWith("Fake2.assembly"));
-   * }
-   */
 
   @Test
   public void testToCommandForSolutionWithPartCoverWithMinimumParams() throws Exception {
@@ -239,6 +160,31 @@ public class GallioCommandBuilderTest {
     i++;
     assertThat(commands[i], startsWith("-output:"));
     assertThat(commands[i], endsWith("coverage-report.xml"));
+  }
+  
+  @Test
+  public void testToCommandForSolutionWithDotCoverWithMinimumParams() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setTestAssemblies(Lists.newArrayList(FAKE_ASSEMBLY_1, FAKE_ASSEMBLY_2));
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setCoverageTool("dotCover");
+    builder.setDotCoverInstallDirectory(DOT_COVER_INSTALL_DIR);
+    builder.setCoverageReportFile(GALLIO_COVERAGE_REPORT_FILE);
+    builder.setWorkDir(WORK_DIR);
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("dotCover.exe"));
+    String commands = Joiner.on(" ").join(command.getArguments());
+    assertThat(commands, containsString("Gallio.Echo.exe"));
+    assertThat(commands, containsString("/r:Local"));
+    assertThat(commands, containsString("/TargetWorkingDir=" + WORK_DIR.getAbsolutePath()));
+    assertThat(commands,
+        containsString("gallio-report-folder\\\" \\\"/report-name-format:gallio-report\\\" \\\"/report-type:Xml\\\" \\\""));
+    
+    assertThat(commands, containsString("/Filters=+:module=Project1;class=*;function=*;+:module=Project2;class=*;function=*;"));
+    
+    assertThat(commands, endsWith("coverage-report.xml"));
   }
 
   @Test

@@ -21,20 +21,22 @@ package org.sonar.plugins.csharp.gallio.results.coverage.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Test;
 
 public class FileCoverageTest {
 
   @Test
   public void shouldMergeCoverage() {
-    FileCoverage firstCoverage = new FileCoverage(null);
+    FileCoverage firstCoverage = new FileCoverage(new File("somesourcefile.cs"));
     CoveragePoint point = new CoveragePoint();
     point.setCountVisits(2);
     point.setStartLine(3);
     point.setEndLine(10);
     firstCoverage.addPoint(point);
 
-    FileCoverage secondCoverage = new FileCoverage(null);
+    FileCoverage secondCoverage = new FileCoverage(new File("someotherfile.cs"));
     point = new CoveragePoint();
     point.setCountVisits(3);
     point.setStartLine(7);

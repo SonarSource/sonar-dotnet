@@ -213,6 +213,8 @@ public class GallioSensor extends AbstractCSharpSensor {
         GallioConstants.PART_COVER_INSTALL_DEFVALUE)));
     builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY,
         GallioConstants.OPEN_COVER_INSTALL_DEFVALUE)));
+    builder.setDotCoverInstallDirectory(new File(configuration.getString(GallioConstants.DOT_COVER_INSTALL_KEY,
+        GallioConstants.DOT_COVER_INSTALL_DEFVALUE)));
 
     return builder;
   }

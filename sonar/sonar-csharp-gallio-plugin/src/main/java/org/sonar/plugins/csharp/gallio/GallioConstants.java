@@ -65,6 +65,10 @@ public final class GallioConstants {
   public static final String OPEN_COVER_INSTALL_KEY = "sonar.opencover.installDirectory";
 
   public static final String OPEN_COVER_INSTALL_DEFVALUE = "C:/Program Files/OpenCover/";
+  
+  public static final String DOT_COVER_INSTALL_KEY = "sonar.dotcover.installDirectory";
+
+  public static final String DOT_COVER_INSTALL_DEFVALUE = "C:/Program Files/JetBrains/dotCover/v1.2/Bin";
 
   //
   // Integration tests constants

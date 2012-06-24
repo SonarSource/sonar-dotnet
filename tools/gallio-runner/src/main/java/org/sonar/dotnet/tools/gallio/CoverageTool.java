@@ -48,6 +48,11 @@ public enum CoverageTool {
   NCOVER("NCover", GallioRunnerType.NCOVER),
 
   /**
+   * Jetbrains "dotCover" tool
+   */
+  DOTCOVER("dotCover", GallioRunnerType.LOCAL),
+  
+  /**
    * "OpenCover" tool
    */
   OPENCOVER("OpenCover", GallioRunnerType.ISOLATED_APP_DOMAIN);

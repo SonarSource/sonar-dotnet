@@ -1,383 +1,426 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Root Name="Root" CoveredStatements="190" TotalStatements="276" CoveragePercent="69" ReportType="TeamCityXML" DotCoverVersion="1.2.384.4">
-  <Assembly Name="Example.Core" CoveredStatements="190" TotalStatements="276" CoveragePercent="69">
-    <Namespace Name="Example.Core.Model" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
-      <Type Name="SubType" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
-        <Member Name="DoNothing():System.Void" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
-          <Statement FileIndex="729" Line="33" Column="5" EndLine="33" EndColumn="6" Covered="False" />
-          <Statement FileIndex="729" Line="35" Column="5" EndLine="35" EndColumn="6" Covered="False" />
-        </Member>
+<Root Name="Root" CoveredStatements="190" TotalStatements="315" CoveragePercent="60" ReportType="TeamCityXML" DotCoverVersion="1.2.384.4">
+  <Assembly Name="Example.Core" CoveredStatements="190" TotalStatements="315" CoveragePercent="60">
+    <Namespace Name="Example.Core.Model" CoveredStatements="0" TotalStatements="54" CoveragePercent="0">
+      <Type Name="SubType" CoveredStatements="0" TotalStatements="54" CoveragePercent="0">
+        <Type Name="Alex3" CoveredStatements="0" TotalStatements="54" CoveragePercent="0">
+          <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="0" TotalStatements="54" CoveragePercent="0">
+            <Statement FileIndex="728" Line="34" Column="5" EndLine="34" EndColumn="6" Covered="False" />
+            <Statement FileIndex="728" Line="37" Column="7" EndLine="37" EndColumn="26" Covered="False" />
+            <Statement FileIndex="728" Line="38" Column="3" EndLine="38" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="39" Column="3" EndLine="39" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="40" Column="3" EndLine="40" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="41" Column="3" EndLine="41" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="42" Column="3" EndLine="42" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="43" Column="3" EndLine="43" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="44" Column="3" EndLine="44" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="45" Column="3" EndLine="45" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="46" Column="3" EndLine="46" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="47" Column="3" EndLine="47" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="48" Column="3" EndLine="48" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="49" Column="3" EndLine="49" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="50" Column="3" EndLine="50" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="51" Column="3" EndLine="51" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="52" Column="3" EndLine="52" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="53" Column="3" EndLine="53" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="54" Column="3" EndLine="54" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="55" Column="3" EndLine="55" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="56" Column="3" EndLine="56" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="57" Column="3" EndLine="57" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="58" Column="3" EndLine="58" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="59" Column="3" EndLine="59" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="60" Column="3" EndLine="60" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="61" Column="3" EndLine="61" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="62" Column="3" EndLine="62" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="63" Column="3" EndLine="63" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="64" Column="3" EndLine="64" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="65" Column="3" EndLine="65" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="66" Column="3" EndLine="66" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="67" Column="3" EndLine="67" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="68" Column="3" EndLine="68" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="69" Column="3" EndLine="69" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="70" Column="3" EndLine="70" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="71" Column="3" EndLine="71" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="72" Column="3" EndLine="72" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="73" Column="3" EndLine="73" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="74" Column="3" EndLine="74" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="75" Column="3" EndLine="75" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="76" Column="3" EndLine="76" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="77" Column="3" EndLine="77" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="78" Column="3" EndLine="78" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="79" Column="3" EndLine="79" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="80" Column="3" EndLine="80" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="81" Column="3" EndLine="81" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="82" Column="3" EndLine="82" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="83" Column="3" EndLine="83" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="84" Column="3" EndLine="84" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="85" Column="3" EndLine="85" EndColumn="22" Covered="False" />
+            <Statement FileIndex="728" Line="86" Column="3" EndLine="86" EndColumn="16" Covered="False" />
+            <Statement FileIndex="728" Line="88" Column="7" EndLine="88" EndColumn="33" Covered="False" />
+            <Statement FileIndex="728" Line="89" Column="7" EndLine="89" EndColumn="20" Covered="False" />
+            <Statement FileIndex="728" Line="90" Column="5" EndLine="90" EndColumn="6" Covered="False" />
+          </Member>
+        </Type>
         <Member Name="get_Name():System.String" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Member Name="set_Name(System.String):System.Void" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       </Type>
     </Namespace>
-    <Namespace Name="Example.Core" CoveredStatements="190" TotalStatements="274" CoveragePercent="69">
-      <Type Name="Dummy" CoveredStatements="0" TotalStatements="22" CoveragePercent="0">
-        <Member Name="FooBar():System.Void" CoveredStatements="0" TotalStatements="22" CoveragePercent="0">
-          <Statement FileIndex="728" Line="11" Column="9" EndLine="11" EndColumn="10" Covered="False" />
-          <Statement FileIndex="728" Line="12" Column="13" EndLine="12" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="13" Column="13" EndLine="13" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="14" Column="13" EndLine="14" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="15" Column="13" EndLine="15" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="16" Column="13" EndLine="16" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="17" Column="13" EndLine="17" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="18" Column="13" EndLine="18" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="19" Column="13" EndLine="19" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="20" Column="13" EndLine="20" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="21" Column="13" EndLine="21" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="22" Column="13" EndLine="22" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="23" Column="13" EndLine="23" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="24" Column="13" EndLine="24" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="25" Column="13" EndLine="25" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="26" Column="13" EndLine="26" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="27" Column="13" EndLine="27" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="28" Column="13" EndLine="28" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="29" Column="13" EndLine="29" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="30" Column="13" EndLine="30" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="31" Column="13" EndLine="31" EndColumn="86" Covered="False" />
-          <Statement FileIndex="728" Line="32" Column="9" EndLine="32" EndColumn="10" Covered="False" />
+    <Namespace Name="Example.Core" CoveredStatements="190" TotalStatements="261" CoveragePercent="73">
+      <Type Name="Alex" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+        <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <Statement FileIndex="729" Line="145" Column="5" EndLine="145" EndColumn="6" Covered="False" />
+          <Statement FileIndex="729" Line="148" Column="7" EndLine="148" EndColumn="26" Covered="False" />
+          <Statement FileIndex="729" Line="149" Column="3" EndLine="149" EndColumn="16" Covered="False" />
+          <Statement FileIndex="729" Line="150" Column="7" EndLine="150" EndColumn="33" Covered="False" />
+          <Statement FileIndex="729" Line="151" Column="7" EndLine="151" EndColumn="20" Covered="False" />
+          <Statement FileIndex="729" Line="152" Column="5" EndLine="152" EndColumn="6" Covered="False" />
         </Member>
       </Type>
       <Type Name="SampleMeasure" CoveredStatements="0" TotalStatements="43" CoveragePercent="0">
         <Member Name="Compute(System.Int32):System.String" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
-          <Statement FileIndex="732" Line="70" Column="5" EndLine="70" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="71" Column="7" EndLine="71" EndColumn="43" Covered="False" />
-          <Statement FileIndex="732" Line="72" Column="5" EndLine="72" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="70" Column="5" EndLine="70" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="71" Column="7" EndLine="71" EndColumn="43" Covered="False" />
+          <Statement FileIndex="731" Line="72" Column="5" EndLine="72" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="Compute(System.String):System.String" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
-          <Statement FileIndex="732" Line="75" Column="5" EndLine="75" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="76" Column="7" EndLine="76" EndColumn="39" Covered="False" />
-          <Statement FileIndex="732" Line="77" Column="5" EndLine="77" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="75" Column="5" EndLine="75" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="76" Column="7" EndLine="76" EndColumn="39" Covered="False" />
+          <Statement FileIndex="731" Line="77" Column="5" EndLine="77" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="GetHashCode():System.Int32" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
-          <Statement FileIndex="732" Line="95" Column="5" EndLine="95" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="97" Column="7" EndLine="97" EndColumn="8" Covered="False" />
-          <Statement FileIndex="732" Line="98" Column="9" EndLine="98" EndColumn="50" Covered="False" />
-          <Statement FileIndex="732" Line="100" Column="5" EndLine="100" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="95" Column="5" EndLine="95" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="97" Column="7" EndLine="97" EndColumn="8" Covered="False" />
+          <Statement FileIndex="731" Line="98" Column="9" EndLine="98" EndColumn="50" Covered="False" />
+          <Statement FileIndex="731" Line="100" Column="5" EndLine="100" EndColumn="6" Covered="False" />
         </Member>
         <Member Name=".ctor():System.Void" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
-          <Statement FileIndex="732" Line="42" Column="5" EndLine="42" EndColumn="27" Covered="False" />
-          <Statement FileIndex="732" Line="43" Column="5" EndLine="43" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="44" Column="7" EndLine="44" EndColumn="16" Covered="False" />
-          <Statement FileIndex="732" Line="45" Column="7" EndLine="45" EndColumn="27" Covered="False" />
-          <Statement FileIndex="732" Line="46" Column="5" EndLine="46" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="42" Column="5" EndLine="42" EndColumn="27" Covered="False" />
+          <Statement FileIndex="731" Line="43" Column="5" EndLine="43" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="44" Column="7" EndLine="44" EndColumn="16" Covered="False" />
+          <Statement FileIndex="731" Line="45" Column="7" EndLine="45" EndColumn="27" Covered="False" />
+          <Statement FileIndex="731" Line="46" Column="5" EndLine="46" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="Equals(Example.Core.SampleMeasure):System.Boolean" CoveredStatements="0" TotalStatements="7" CoveragePercent="0">
-          <Statement FileIndex="732" Line="80" Column="5" EndLine="80" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="81" Column="7" EndLine="81" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="81" Column="39" EndLine="81" EndColumn="52" Covered="False" />
-          <Statement FileIndex="732" Line="82" Column="7" EndLine="82" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="82" Column="39" EndLine="82" EndColumn="51" Covered="False" />
-          <Statement FileIndex="732" Line="83" Column="7" EndLine="83" EndColumn="61" Covered="False" />
-          <Statement FileIndex="732" Line="84" Column="5" EndLine="84" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="80" Column="5" EndLine="80" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="81" Column="7" EndLine="81" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="81" Column="39" EndLine="81" EndColumn="52" Covered="False" />
+          <Statement FileIndex="731" Line="82" Column="7" EndLine="82" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="82" Column="39" EndLine="82" EndColumn="51" Covered="False" />
+          <Statement FileIndex="731" Line="83" Column="7" EndLine="83" EndColumn="61" Covered="False" />
+          <Statement FileIndex="731" Line="84" Column="5" EndLine="84" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="0" TotalStatements="9" CoveragePercent="0">
-          <Statement FileIndex="732" Line="87" Column="5" EndLine="87" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="88" Column="7" EndLine="88" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="88" Column="39" EndLine="88" EndColumn="52" Covered="False" />
-          <Statement FileIndex="732" Line="89" Column="7" EndLine="89" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="89" Column="39" EndLine="89" EndColumn="51" Covered="False" />
-          <Statement FileIndex="732" Line="90" Column="7" EndLine="90" EndColumn="51" Covered="False" />
-          <Statement FileIndex="732" Line="90" Column="52" EndLine="90" EndColumn="65" Covered="False" />
-          <Statement FileIndex="732" Line="91" Column="7" EndLine="91" EndColumn="42" Covered="False" />
-          <Statement FileIndex="732" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="87" Column="5" EndLine="87" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="88" Column="7" EndLine="88" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="88" Column="39" EndLine="88" EndColumn="52" Covered="False" />
+          <Statement FileIndex="731" Line="89" Column="7" EndLine="89" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="89" Column="39" EndLine="89" EndColumn="51" Covered="False" />
+          <Statement FileIndex="731" Line="90" Column="7" EndLine="90" EndColumn="51" Covered="False" />
+          <Statement FileIndex="731" Line="90" Column="52" EndLine="90" EndColumn="65" Covered="False" />
+          <Statement FileIndex="731" Line="91" Column="7" EndLine="91" EndColumn="42" Covered="False" />
+          <Statement FileIndex="731" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="Compute():System.String" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
-          <Statement FileIndex="732" Line="49" Column="5" EndLine="49" EndColumn="6" Covered="False" />
-          <Statement FileIndex="732" Line="50" Column="12" EndLine="50" EndColumn="24" Covered="False" />
-          <Statement FileIndex="732" Line="51" Column="7" EndLine="51" EndColumn="8" Covered="False" />
-          <Statement FileIndex="732" Line="52" Column="9" EndLine="52" EndColumn="24" Covered="False" />
-          <Statement FileIndex="732" Line="55" Column="13" EndLine="55" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="57" Column="13" EndLine="57" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="59" Column="13" EndLine="59" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="61" Column="13" EndLine="61" EndColumn="38" Covered="False" />
-          <Statement FileIndex="732" Line="63" Column="13" EndLine="63" EndColumn="27" Covered="False" />
-          <Statement FileIndex="732" Line="50" Column="25" EndLine="50" EndColumn="35" Covered="False" />
-          <Statement FileIndex="732" Line="66" Column="7" EndLine="66" EndColumn="21" Covered="False" />
-          <Statement FileIndex="732" Line="67" Column="5" EndLine="67" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="49" Column="5" EndLine="49" EndColumn="6" Covered="False" />
+          <Statement FileIndex="731" Line="50" Column="12" EndLine="50" EndColumn="24" Covered="False" />
+          <Statement FileIndex="731" Line="51" Column="7" EndLine="51" EndColumn="8" Covered="False" />
+          <Statement FileIndex="731" Line="52" Column="9" EndLine="52" EndColumn="24" Covered="False" />
+          <Statement FileIndex="731" Line="55" Column="13" EndLine="55" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="57" Column="13" EndLine="57" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="59" Column="13" EndLine="59" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="61" Column="13" EndLine="61" EndColumn="38" Covered="False" />
+          <Statement FileIndex="731" Line="63" Column="13" EndLine="63" EndColumn="27" Covered="False" />
+          <Statement FileIndex="731" Line="50" Column="25" EndLine="50" EndColumn="35" Covered="False" />
+          <Statement FileIndex="731" Line="66" Column="7" EndLine="66" EndColumn="21" Covered="False" />
+          <Statement FileIndex="731" Line="67" Column="5" EndLine="67" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="get_Size():System.Int32" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
         <Member Name="set_Size(System.Int32):System.Void" CoveredStatements="0" TotalStatements="0" CoveragePercent="0" />
       </Type>
-      <Type Name="Money" CoveredStatements="50" TotalStatements="55" CoveragePercent="91">
-        <Member Name="get_bbbIsZero():System.Boolean" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
-          <Statement FileIndex="730" Line="106" Column="11" EndLine="106" EndColumn="12" Covered="False" />
-          <Statement FileIndex="730" Line="106" Column="13" EndLine="106" EndColumn="32" Covered="False" />
-          <Statement FileIndex="730" Line="106" Column="33" EndLine="106" EndColumn="34" Covered="False" />
-        </Member>
+      <Type Name="Money" CoveredStatements="50" TotalStatements="58" CoveragePercent="86">
+        <Type Name="Alex2" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+          <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+            <Statement FileIndex="729" Line="132" Column="5" EndLine="132" EndColumn="6" Covered="False" />
+            <Statement FileIndex="729" Line="135" Column="7" EndLine="135" EndColumn="26" Covered="False" />
+            <Statement FileIndex="729" Line="136" Column="3" EndLine="136" EndColumn="16" Covered="False" />
+            <Statement FileIndex="729" Line="137" Column="7" EndLine="137" EndColumn="33" Covered="False" />
+            <Statement FileIndex="729" Line="138" Column="7" EndLine="138" EndColumn="20" Covered="False" />
+            <Statement FileIndex="729" Line="139" Column="5" EndLine="139" EndColumn="6" Covered="False" />
+          </Member>
+        </Type>
         <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="8" TotalStatements="10" CoveragePercent="80">
-          <Statement FileIndex="730" Line="79" Column="5" EndLine="79" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="82" Column="7" EndLine="82" EndColumn="18" Covered="True" />
-          <Statement FileIndex="730" Line="83" Column="9" EndLine="83" EndColumn="32" Covered="False" />
-          <Statement FileIndex="730" Line="84" Column="11" EndLine="84" EndColumn="44" Covered="False" />
-          <Statement FileIndex="730" Line="85" Column="7" EndLine="85" EndColumn="29" Covered="True" />
-          <Statement FileIndex="730" Line="86" Column="7" EndLine="86" EndColumn="8" Covered="True" />
-          <Statement FileIndex="730" Line="87" Column="47" EndLine="87" EndColumn="80" Covered="True" />
-          <Statement FileIndex="730" Line="88" Column="9" EndLine="89" EndColumn="38" Covered="True" />
-          <Statement FileIndex="730" Line="91" Column="7" EndLine="91" EndColumn="20" Covered="True" />
-          <Statement FileIndex="730" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="True" />
-        </Member>
-        <Member Name="Negate():Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="116" Column="5" EndLine="116" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="118" Column="7" EndLine="118" EndColumn="43" Covered="True" />
-          <Statement FileIndex="730" Line="119" Column="5" EndLine="119" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="79" Column="5" EndLine="79" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="82" Column="7" EndLine="82" EndColumn="18" Covered="True" />
+          <Statement FileIndex="729" Line="83" Column="9" EndLine="83" EndColumn="32" Covered="False" />
+          <Statement FileIndex="729" Line="84" Column="11" EndLine="84" EndColumn="44" Covered="False" />
+          <Statement FileIndex="729" Line="85" Column="7" EndLine="85" EndColumn="29" Covered="True" />
+          <Statement FileIndex="729" Line="86" Column="7" EndLine="86" EndColumn="8" Covered="True" />
+          <Statement FileIndex="729" Line="87" Column="9" EndLine="87" EndColumn="40" Covered="True" />
+          <Statement FileIndex="729" Line="88" Column="9" EndLine="89" EndColumn="38" Covered="True" />
+          <Statement FileIndex="729" Line="91" Column="7" EndLine="91" EndColumn="20" Covered="True" />
+          <Statement FileIndex="729" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Subtract(Example.Core.IMoney):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="122" Column="5" EndLine="122" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="123" Column="7" EndLine="123" EndColumn="30" Covered="True" />
-          <Statement FileIndex="730" Line="124" Column="5" EndLine="124" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="117" Column="5" EndLine="117" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="118" Column="7" EndLine="118" EndColumn="30" Covered="True" />
+          <Statement FileIndex="729" Line="119" Column="5" EndLine="119" EndColumn="6" Covered="True" />
+        </Member>
+        <Member Name="Negate():Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+          <Statement FileIndex="729" Line="111" Column="5" EndLine="111" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="113" Column="7" EndLine="113" EndColumn="43" Covered="True" />
+          <Statement FileIndex="729" Line="114" Column="5" EndLine="114" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="get_IsZero():System.Boolean" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="101" Column="11" EndLine="101" EndColumn="12" Covered="True" />
-          <Statement FileIndex="730" Line="101" Column="13" EndLine="101" EndColumn="32" Covered="True" />
-          <Statement FileIndex="730" Line="101" Column="33" EndLine="101" EndColumn="34" Covered="True" />
+          <Statement FileIndex="729" Line="101" Column="11" EndLine="101" EndColumn="12" Covered="True" />
+          <Statement FileIndex="729" Line="101" Column="13" EndLine="101" EndColumn="32" Covered="True" />
+          <Statement FileIndex="729" Line="101" Column="33" EndLine="101" EndColumn="34" Covered="True" />
         </Member>
         <Member Name="get_Currency():System.String" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="75" Column="11" EndLine="75" EndColumn="12" Covered="True" />
-          <Statement FileIndex="730" Line="75" Column="13" EndLine="75" EndColumn="30" Covered="True" />
-          <Statement FileIndex="730" Line="75" Column="31" EndLine="75" EndColumn="32" Covered="True" />
+          <Statement FileIndex="729" Line="75" Column="11" EndLine="75" EndColumn="12" Covered="True" />
+          <Statement FileIndex="729" Line="75" Column="13" EndLine="75" EndColumn="30" Covered="True" />
+          <Statement FileIndex="729" Line="75" Column="31" EndLine="75" EndColumn="32" Covered="True" />
         </Member>
         <Member Name="get_Amount():System.Int32" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="70" Column="11" EndLine="70" EndColumn="12" Covered="True" />
-          <Statement FileIndex="730" Line="70" Column="13" EndLine="70" EndColumn="28" Covered="True" />
-          <Statement FileIndex="730" Line="70" Column="29" EndLine="70" EndColumn="30" Covered="True" />
-        </Member>
-        <Member Name="AddMoneyBag(Example.Core.MoneyBag):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="64" Column="5" EndLine="64" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="65" Column="7" EndLine="65" EndColumn="31" Covered="True" />
-          <Statement FileIndex="730" Line="66" Column="5" EndLine="66" EndColumn="6" Covered="True" />
-        </Member>
-        <Member Name="Add(Example.Core.IMoney):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="52" Column="5" EndLine="52" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="53" Column="7" EndLine="53" EndColumn="31" Covered="True" />
-          <Statement FileIndex="730" Line="54" Column="5" EndLine="54" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="70" Column="11" EndLine="70" EndColumn="12" Covered="True" />
+          <Statement FileIndex="729" Line="70" Column="13" EndLine="70" EndColumn="28" Covered="True" />
+          <Statement FileIndex="729" Line="70" Column="29" EndLine="70" EndColumn="30" Covered="True" />
         </Member>
         <Member Name="Multiply(System.Int32):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="110" Column="5" EndLine="110" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="112" Column="7" EndLine="112" EndColumn="51" Covered="True" />
-          <Statement FileIndex="730" Line="113" Column="5" EndLine="113" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="105" Column="5" EndLine="105" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="107" Column="7" EndLine="107" EndColumn="51" Covered="True" />
+          <Statement FileIndex="729" Line="108" Column="5" EndLine="108" EndColumn="6" Covered="True" />
+        </Member>
+        <Member Name="Add(Example.Core.IMoney):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+          <Statement FileIndex="729" Line="52" Column="5" EndLine="52" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="53" Column="7" EndLine="53" EndColumn="31" Covered="True" />
+          <Statement FileIndex="729" Line="54" Column="5" EndLine="54" EndColumn="6" Covered="True" />
+        </Member>
+        <Member Name="AddMoneyBag(Example.Core.MoneyBag):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
+          <Statement FileIndex="729" Line="64" Column="5" EndLine="64" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="65" Column="7" EndLine="65" EndColumn="31" Covered="True" />
+          <Statement FileIndex="729" Line="66" Column="5" EndLine="66" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="GetHashCode():System.Int32" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="730" Line="95" Column="5" EndLine="95" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="96" Column="7" EndLine="96" EndColumn="48" Covered="True" />
-          <Statement FileIndex="730" Line="97" Column="5" EndLine="97" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="95" Column="5" EndLine="95" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="96" Column="7" EndLine="96" EndColumn="48" Covered="True" />
+          <Statement FileIndex="729" Line="97" Column="5" EndLine="97" EndColumn="6" Covered="True" />
         </Member>
         <Member Name=".ctor(System.Int32,System.String):System.Void" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
-          <Statement FileIndex="730" Line="42" Column="5" EndLine="42" EndColumn="46" Covered="True" />
-          <Statement FileIndex="730" Line="43" Column="5" EndLine="43" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="44" Column="7" EndLine="44" EndColumn="24" Covered="True" />
-          <Statement FileIndex="730" Line="45" Column="7" EndLine="45" EndColumn="28" Covered="True" />
-          <Statement FileIndex="730" Line="46" Column="5" EndLine="46" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="42" Column="5" EndLine="42" EndColumn="46" Covered="True" />
+          <Statement FileIndex="729" Line="43" Column="5" EndLine="43" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="44" Column="7" EndLine="44" EndColumn="24" Covered="True" />
+          <Statement FileIndex="729" Line="45" Column="7" EndLine="45" EndColumn="28" Covered="True" />
+          <Statement FileIndex="729" Line="46" Column="5" EndLine="46" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="ToString():System.String" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
-          <Statement FileIndex="730" Line="127" Column="5" EndLine="127" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="129" Column="7" EndLine="129" EndColumn="50" Covered="True" />
-          <Statement FileIndex="730" Line="131" Column="7" EndLine="131" EndColumn="58" Covered="True" />
-          <Statement FileIndex="730" Line="132" Column="7" EndLine="132" EndColumn="32" Covered="True" />
-          <Statement FileIndex="730" Line="133" Column="5" EndLine="133" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="122" Column="5" EndLine="122" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="124" Column="7" EndLine="124" EndColumn="50" Covered="True" />
+          <Statement FileIndex="729" Line="126" Column="7" EndLine="126" EndColumn="58" Covered="True" />
+          <Statement FileIndex="729" Line="127" Column="7" EndLine="127" EndColumn="32" Covered="True" />
+          <Statement FileIndex="729" Line="128" Column="5" EndLine="128" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="AddMoney(Example.Core.Money):Example.Core.IMoney" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
-          <Statement FileIndex="730" Line="57" Column="5" EndLine="57" EndColumn="6" Covered="True" />
-          <Statement FileIndex="730" Line="58" Column="7" EndLine="58" EndColumn="39" Covered="True" />
-          <Statement FileIndex="730" Line="59" Column="9" EndLine="59" EndColumn="55" Covered="True" />
-          <Statement FileIndex="730" Line="60" Column="7" EndLine="60" EndColumn="36" Covered="True" />
-          <Statement FileIndex="730" Line="61" Column="5" EndLine="61" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="57" Column="5" EndLine="57" EndColumn="6" Covered="True" />
+          <Statement FileIndex="729" Line="58" Column="7" EndLine="58" EndColumn="39" Covered="True" />
+          <Statement FileIndex="729" Line="59" Column="9" EndLine="59" EndColumn="55" Covered="True" />
+          <Statement FileIndex="729" Line="60" Column="7" EndLine="60" EndColumn="36" Covered="True" />
+          <Statement FileIndex="729" Line="61" Column="5" EndLine="61" EndColumn="6" Covered="True" />
         </Member>
       </Type>
       <Type Name="MoneyBag" CoveredStatements="140" TotalStatements="154" CoveragePercent="91">
         <Member Name="ToString():System.String" CoveredStatements="0" TotalStatements="11" CoveragePercent="0">
-          <Statement FileIndex="731" Line="187" Column="5" EndLine="187" EndColumn="6" Covered="False" />
-          <Statement FileIndex="731" Line="188" Column="7" EndLine="188" EndColumn="50" Covered="False" />
-          <Statement FileIndex="731" Line="189" Column="7" EndLine="189" EndColumn="26" Covered="False" />
-          <Statement FileIndex="731" Line="190" Column="7" EndLine="190" EndColumn="14" Covered="False" />
-          <Statement FileIndex="731" Line="190" Column="27" EndLine="190" EndColumn="34" Covered="False" />
-          <Statement FileIndex="731" Line="190" Column="16" EndLine="190" EndColumn="23" Covered="False" />
-          <Statement FileIndex="731" Line="191" Column="9" EndLine="191" EndColumn="26" Covered="False" />
-          <Statement FileIndex="731" Line="190" Column="24" EndLine="190" EndColumn="26" Covered="False" />
-          <Statement FileIndex="731" Line="192" Column="7" EndLine="192" EndColumn="26" Covered="False" />
-          <Statement FileIndex="731" Line="193" Column="7" EndLine="193" EndColumn="32" Covered="False" />
-          <Statement FileIndex="731" Line="194" Column="5" EndLine="194" EndColumn="6" Covered="False" />
+          <Statement FileIndex="730" Line="187" Column="5" EndLine="187" EndColumn="6" Covered="False" />
+          <Statement FileIndex="730" Line="188" Column="7" EndLine="188" EndColumn="50" Covered="False" />
+          <Statement FileIndex="730" Line="189" Column="7" EndLine="189" EndColumn="26" Covered="False" />
+          <Statement FileIndex="730" Line="190" Column="7" EndLine="190" EndColumn="14" Covered="False" />
+          <Statement FileIndex="730" Line="190" Column="27" EndLine="190" EndColumn="34" Covered="False" />
+          <Statement FileIndex="730" Line="190" Column="16" EndLine="190" EndColumn="23" Covered="False" />
+          <Statement FileIndex="730" Line="191" Column="9" EndLine="191" EndColumn="26" Covered="False" />
+          <Statement FileIndex="730" Line="190" Column="24" EndLine="190" EndColumn="26" Covered="False" />
+          <Statement FileIndex="730" Line="192" Column="7" EndLine="192" EndColumn="26" Covered="False" />
+          <Statement FileIndex="730" Line="193" Column="7" EndLine="193" EndColumn="32" Covered="False" />
+          <Statement FileIndex="730" Line="194" Column="5" EndLine="194" EndColumn="6" Covered="False" />
         </Member>
         <Member Name="Equals(System.Object):System.Boolean" CoveredStatements="17" TotalStatements="20" CoveragePercent="85">
-          <Statement FileIndex="731" Line="113" Column="5" EndLine="113" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="114" Column="7" EndLine="114" EndColumn="18" Covered="True" />
-          <Statement FileIndex="731" Line="115" Column="9" EndLine="115" EndColumn="32" Covered="False" />
-          <Statement FileIndex="731" Line="116" Column="11" EndLine="116" EndColumn="44" Covered="False" />
-          <Statement FileIndex="731" Line="118" Column="7" EndLine="118" EndColumn="32" Covered="True" />
-          <Statement FileIndex="731" Line="119" Column="7" EndLine="119" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="120" Column="9" EndLine="120" EndColumn="49" Covered="True" />
-          <Statement FileIndex="731" Line="121" Column="9" EndLine="121" EndColumn="54" Covered="True" />
-          <Statement FileIndex="731" Line="122" Column="11" EndLine="122" EndColumn="24" Covered="False" />
-          <Statement FileIndex="731" Line="124" Column="9" EndLine="124" EndColumn="16" Covered="True" />
-          <Statement FileIndex="731" Line="124" Column="29" EndLine="124" EndColumn="36" Covered="True" />
-          <Statement FileIndex="731" Line="124" Column="18" EndLine="124" EndColumn="25" Covered="True" />
-          <Statement FileIndex="731" Line="125" Column="9" EndLine="125" EndColumn="10" Covered="True" />
-          <Statement FileIndex="731" Line="126" Column="11" EndLine="126" EndColumn="38" Covered="True" />
-          <Statement FileIndex="731" Line="127" Column="13" EndLine="127" EndColumn="26" Covered="True" />
-          <Statement FileIndex="731" Line="128" Column="9" EndLine="128" EndColumn="10" Covered="True" />
-          <Statement FileIndex="731" Line="124" Column="26" EndLine="124" EndColumn="28" Covered="True" />
-          <Statement FileIndex="731" Line="129" Column="9" EndLine="129" EndColumn="21" Covered="True" />
-          <Statement FileIndex="731" Line="131" Column="7" EndLine="131" EndColumn="20" Covered="True" />
-          <Statement FileIndex="731" Line="132" Column="5" EndLine="132" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="113" Column="5" EndLine="113" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="114" Column="7" EndLine="114" EndColumn="18" Covered="True" />
+          <Statement FileIndex="730" Line="115" Column="9" EndLine="115" EndColumn="32" Covered="False" />
+          <Statement FileIndex="730" Line="116" Column="11" EndLine="116" EndColumn="44" Covered="False" />
+          <Statement FileIndex="730" Line="118" Column="7" EndLine="118" EndColumn="32" Covered="True" />
+          <Statement FileIndex="730" Line="119" Column="7" EndLine="119" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="120" Column="9" EndLine="120" EndColumn="49" Covered="True" />
+          <Statement FileIndex="730" Line="121" Column="9" EndLine="121" EndColumn="54" Covered="True" />
+          <Statement FileIndex="730" Line="122" Column="11" EndLine="122" EndColumn="24" Covered="False" />
+          <Statement FileIndex="730" Line="124" Column="9" EndLine="124" EndColumn="16" Covered="True" />
+          <Statement FileIndex="730" Line="124" Column="29" EndLine="124" EndColumn="36" Covered="True" />
+          <Statement FileIndex="730" Line="124" Column="18" EndLine="124" EndColumn="25" Covered="True" />
+          <Statement FileIndex="730" Line="125" Column="9" EndLine="125" EndColumn="10" Covered="True" />
+          <Statement FileIndex="730" Line="126" Column="11" EndLine="126" EndColumn="38" Covered="True" />
+          <Statement FileIndex="730" Line="127" Column="13" EndLine="127" EndColumn="26" Covered="True" />
+          <Statement FileIndex="730" Line="128" Column="9" EndLine="128" EndColumn="10" Covered="True" />
+          <Statement FileIndex="730" Line="124" Column="26" EndLine="124" EndColumn="28" Covered="True" />
+          <Statement FileIndex="730" Line="129" Column="9" EndLine="129" EndColumn="21" Covered="True" />
+          <Statement FileIndex="730" Line="131" Column="7" EndLine="131" EndColumn="20" Covered="True" />
+          <Statement FileIndex="730" Line="132" Column="5" EndLine="132" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Add(Example.Core.IMoney):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="731" Line="74" Column="5" EndLine="74" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="75" Column="7" EndLine="75" EndColumn="34" Covered="True" />
-          <Statement FileIndex="731" Line="76" Column="5" EndLine="76" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="74" Column="5" EndLine="74" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="75" Column="7" EndLine="75" EndColumn="34" Covered="True" />
+          <Statement FileIndex="730" Line="76" Column="5" EndLine="76" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="AddMoney(Example.Core.Money):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="731" Line="79" Column="5" EndLine="79" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="80" Column="7" EndLine="80" EndColumn="49" Covered="True" />
-          <Statement FileIndex="731" Line="81" Column="5" EndLine="81" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="79" Column="5" EndLine="79" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="80" Column="7" EndLine="80" EndColumn="49" Covered="True" />
+          <Statement FileIndex="730" Line="81" Column="5" EndLine="81" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="AddMoneyBag(Example.Core.MoneyBag):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="731" Line="84" Column="5" EndLine="84" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="85" Column="7" EndLine="85" EndColumn="49" Covered="True" />
-          <Statement FileIndex="731" Line="86" Column="5" EndLine="86" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="84" Column="5" EndLine="84" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="85" Column="7" EndLine="85" EndColumn="49" Covered="True" />
+          <Statement FileIndex="730" Line="86" Column="5" EndLine="86" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Subtract(Example.Core.IMoney):Example.Core.IMoney" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="731" Line="183" Column="5" EndLine="183" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="184" Column="7" EndLine="184" EndColumn="30" Covered="True" />
-          <Statement FileIndex="731" Line="185" Column="5" EndLine="185" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="183" Column="5" EndLine="183" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="184" Column="7" EndLine="184" EndColumn="30" Covered="True" />
+          <Statement FileIndex="730" Line="185" Column="5" EndLine="185" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="get_IsZero():System.Boolean" CoveredStatements="3" TotalStatements="3" CoveragePercent="100">
-          <Statement FileIndex="731" Line="153" Column="11" EndLine="153" EndColumn="12" Covered="True" />
-          <Statement FileIndex="731" Line="153" Column="13" EndLine="153" EndColumn="39" Covered="True" />
-          <Statement FileIndex="731" Line="153" Column="40" EndLine="153" EndColumn="41" Covered="True" />
+          <Statement FileIndex="730" Line="153" Column="11" EndLine="153" EndColumn="12" Covered="True" />
+          <Statement FileIndex="730" Line="153" Column="13" EndLine="153" EndColumn="39" Covered="True" />
+          <Statement FileIndex="730" Line="153" Column="40" EndLine="153" EndColumn="41" Covered="True" />
         </Member>
         <Member Name=".ctor():System.Void" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
-          <Statement FileIndex="731" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
-          <Statement FileIndex="731" Line="43" Column="5" EndLine="43" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="44" Column="5" EndLine="44" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="45" Column="5" EndLine="45" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
+          <Statement FileIndex="730" Line="43" Column="5" EndLine="43" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="44" Column="5" EndLine="44" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="45" Column="5" EndLine="45" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Contains(Example.Core.Money):System.Boolean" CoveredStatements="4" TotalStatements="4" CoveragePercent="100">
-          <Statement FileIndex="731" Line="108" Column="5" EndLine="108" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="109" Column="7" EndLine="109" EndColumn="44" Covered="True" />
-          <Statement FileIndex="731" Line="110" Column="7" EndLine="110" EndColumn="40" Covered="True" />
-          <Statement FileIndex="731" Line="111" Column="5" EndLine="111" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="108" Column="5" EndLine="108" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="109" Column="7" EndLine="109" EndColumn="44" Covered="True" />
+          <Statement FileIndex="730" Line="110" Column="7" EndLine="110" EndColumn="40" Covered="True" />
+          <Statement FileIndex="730" Line="111" Column="5" EndLine="111" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Simplify():Example.Core.IMoney" CoveredStatements="5" TotalStatements="5" CoveragePercent="100">
-          <Statement FileIndex="731" Line="177" Column="5" EndLine="177" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="178" Column="7" EndLine="178" EndColumn="30" Covered="True" />
-          <Statement FileIndex="731" Line="179" Column="9" EndLine="179" EndColumn="35" Covered="True" />
-          <Statement FileIndex="731" Line="180" Column="7" EndLine="180" EndColumn="19" Covered="True" />
-          <Statement FileIndex="731" Line="181" Column="5" EndLine="181" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="177" Column="5" EndLine="177" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="178" Column="7" EndLine="178" EndColumn="30" Covered="True" />
+          <Statement FileIndex="730" Line="179" Column="9" EndLine="179" EndColumn="35" Covered="True" />
+          <Statement FileIndex="730" Line="180" Column="7" EndLine="180" EndColumn="19" Covered="True" />
+          <Statement FileIndex="730" Line="181" Column="5" EndLine="181" EndColumn="6" Covered="True" />
         </Member>
         <Member Name=".ctor(Example.Core.Money,Example.Core.Money):System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
-          <Statement FileIndex="731" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
-          <Statement FileIndex="731" Line="55" Column="5" EndLine="55" EndColumn="40" Covered="True" />
-          <Statement FileIndex="731" Line="56" Column="5" EndLine="56" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="57" Column="7" EndLine="57" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="58" Column="7" EndLine="58" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="59" Column="5" EndLine="59" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
+          <Statement FileIndex="730" Line="55" Column="5" EndLine="55" EndColumn="40" Covered="True" />
+          <Statement FileIndex="730" Line="56" Column="5" EndLine="56" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="57" Column="7" EndLine="57" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="58" Column="7" EndLine="58" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="59" Column="5" EndLine="59" EndColumn="6" Covered="True" />
         </Member>
         <Member Name=".ctor(Example.Core.Money,Example.Core.MoneyBag):System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
-          <Statement FileIndex="731" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
-          <Statement FileIndex="731" Line="61" Column="5" EndLine="61" EndColumn="43" Covered="True" />
-          <Statement FileIndex="731" Line="62" Column="5" EndLine="62" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="63" Column="7" EndLine="63" EndColumn="22" Covered="True" />
-          <Statement FileIndex="731" Line="64" Column="7" EndLine="64" EndColumn="22" Covered="True" />
-          <Statement FileIndex="731" Line="65" Column="5" EndLine="65" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
+          <Statement FileIndex="730" Line="61" Column="5" EndLine="61" EndColumn="43" Covered="True" />
+          <Statement FileIndex="730" Line="62" Column="5" EndLine="62" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="63" Column="7" EndLine="63" EndColumn="22" Covered="True" />
+          <Statement FileIndex="730" Line="64" Column="7" EndLine="64" EndColumn="22" Covered="True" />
+          <Statement FileIndex="730" Line="65" Column="5" EndLine="65" EndColumn="6" Covered="True" />
         </Member>
         <Member Name=".ctor(Example.Core.MoneyBag,Example.Core.MoneyBag):System.Void" CoveredStatements="6" TotalStatements="6" CoveragePercent="100">
-          <Statement FileIndex="731" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
-          <Statement FileIndex="731" Line="67" Column="5" EndLine="67" EndColumn="46" Covered="True" />
-          <Statement FileIndex="731" Line="68" Column="5" EndLine="68" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="69" Column="7" EndLine="69" EndColumn="21" Covered="True" />
-          <Statement FileIndex="731" Line="70" Column="7" EndLine="70" EndColumn="21" Covered="True" />
-          <Statement FileIndex="731" Line="71" Column="5" EndLine="71" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
+          <Statement FileIndex="730" Line="67" Column="5" EndLine="67" EndColumn="46" Covered="True" />
+          <Statement FileIndex="730" Line="68" Column="5" EndLine="68" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="69" Column="7" EndLine="69" EndColumn="21" Covered="True" />
+          <Statement FileIndex="730" Line="70" Column="7" EndLine="70" EndColumn="21" Covered="True" />
+          <Statement FileIndex="730" Line="71" Column="5" EndLine="71" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="AppendBag(Example.Core.MoneyBag):System.Void" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
-          <Statement FileIndex="731" Line="89" Column="5" EndLine="89" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="90" Column="7" EndLine="90" EndColumn="14" Covered="True" />
-          <Statement FileIndex="731" Line="90" Column="27" EndLine="90" EndColumn="39" Covered="True" />
-          <Statement FileIndex="731" Line="90" Column="16" EndLine="90" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="91" Column="9" EndLine="91" EndColumn="24" Covered="True" />
-          <Statement FileIndex="731" Line="90" Column="24" EndLine="90" EndColumn="26" Covered="True" />
-          <Statement FileIndex="731" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="89" Column="5" EndLine="89" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="90" Column="7" EndLine="90" EndColumn="14" Covered="True" />
+          <Statement FileIndex="730" Line="90" Column="27" EndLine="90" EndColumn="39" Covered="True" />
+          <Statement FileIndex="730" Line="90" Column="16" EndLine="90" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="91" Column="9" EndLine="91" EndColumn="24" Covered="True" />
+          <Statement FileIndex="730" Line="90" Column="24" EndLine="90" EndColumn="26" Covered="True" />
+          <Statement FileIndex="730" Line="92" Column="5" EndLine="92" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="FindMoney(System.String):Example.Core.Money" CoveredStatements="11" TotalStatements="11" CoveragePercent="100">
-          <Statement FileIndex="731" Line="134" Column="5" EndLine="134" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="135" Column="7" EndLine="135" EndColumn="14" Covered="True" />
-          <Statement FileIndex="731" Line="135" Column="27" EndLine="135" EndColumn="34" Covered="True" />
-          <Statement FileIndex="731" Line="135" Column="16" EndLine="135" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="136" Column="7" EndLine="136" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="137" Column="9" EndLine="137" EndColumn="41" Covered="True" />
-          <Statement FileIndex="731" Line="138" Column="11" EndLine="138" EndColumn="20" Covered="True" />
-          <Statement FileIndex="731" Line="139" Column="7" EndLine="139" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="135" Column="24" EndLine="135" EndColumn="26" Covered="True" />
-          <Statement FileIndex="731" Line="140" Column="7" EndLine="140" EndColumn="19" Covered="True" />
-          <Statement FileIndex="731" Line="141" Column="5" EndLine="141" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="134" Column="5" EndLine="134" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="135" Column="7" EndLine="135" EndColumn="14" Covered="True" />
+          <Statement FileIndex="730" Line="135" Column="27" EndLine="135" EndColumn="34" Covered="True" />
+          <Statement FileIndex="730" Line="135" Column="16" EndLine="135" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="136" Column="7" EndLine="136" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="137" Column="9" EndLine="137" EndColumn="41" Covered="True" />
+          <Statement FileIndex="730" Line="138" Column="11" EndLine="138" EndColumn="20" Covered="True" />
+          <Statement FileIndex="730" Line="139" Column="7" EndLine="139" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="135" Column="24" EndLine="135" EndColumn="26" Covered="True" />
+          <Statement FileIndex="730" Line="140" Column="7" EndLine="140" EndColumn="19" Covered="True" />
+          <Statement FileIndex="730" Line="141" Column="5" EndLine="141" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="GetHashCode():System.Int32" CoveredStatements="11" TotalStatements="11" CoveragePercent="100">
-          <Statement FileIndex="731" Line="143" Column="5" EndLine="143" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="144" Column="7" EndLine="144" EndColumn="20" Covered="True" />
-          <Statement FileIndex="731" Line="145" Column="7" EndLine="145" EndColumn="14" Covered="True" />
-          <Statement FileIndex="731" Line="145" Column="27" EndLine="145" EndColumn="34" Covered="True" />
-          <Statement FileIndex="731" Line="145" Column="16" EndLine="145" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="146" Column="7" EndLine="146" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="147" Column="9" EndLine="147" EndColumn="33" Covered="True" />
-          <Statement FileIndex="731" Line="148" Column="7" EndLine="148" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="145" Column="24" EndLine="145" EndColumn="26" Covered="True" />
-          <Statement FileIndex="731" Line="149" Column="7" EndLine="149" EndColumn="19" Covered="True" />
-          <Statement FileIndex="731" Line="150" Column="5" EndLine="150" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="143" Column="5" EndLine="143" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="144" Column="7" EndLine="144" EndColumn="20" Covered="True" />
+          <Statement FileIndex="730" Line="145" Column="7" EndLine="145" EndColumn="14" Covered="True" />
+          <Statement FileIndex="730" Line="145" Column="27" EndLine="145" EndColumn="34" Covered="True" />
+          <Statement FileIndex="730" Line="145" Column="16" EndLine="145" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="146" Column="7" EndLine="146" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="147" Column="9" EndLine="147" EndColumn="33" Covered="True" />
+          <Statement FileIndex="730" Line="148" Column="7" EndLine="148" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="145" Column="24" EndLine="145" EndColumn="26" Covered="True" />
+          <Statement FileIndex="730" Line="149" Column="7" EndLine="149" EndColumn="19" Covered="True" />
+          <Statement FileIndex="730" Line="150" Column="5" EndLine="150" EndColumn="6" Covered="True" />
         </Member>
         <Member Name=".ctor(Example.Core.Money[]):System.Void" CoveredStatements="11" TotalStatements="11" CoveragePercent="100">
-          <Statement FileIndex="731" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
-          <Statement FileIndex="731" Line="46" Column="5" EndLine="46" EndColumn="33" Covered="True" />
-          <Statement FileIndex="731" Line="47" Column="5" EndLine="47" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="48" Column="12" EndLine="48" EndColumn="22" Covered="True" />
-          <Statement FileIndex="731" Line="49" Column="7" EndLine="49" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="50" Column="9" EndLine="50" EndColumn="28" Covered="True" />
-          <Statement FileIndex="731" Line="51" Column="11" EndLine="51" EndColumn="31" Covered="True" />
-          <Statement FileIndex="731" Line="52" Column="7" EndLine="52" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="48" Column="39" EndLine="48" EndColumn="42" Covered="True" />
-          <Statement FileIndex="731" Line="48" Column="23" EndLine="48" EndColumn="37" Covered="True" />
-          <Statement FileIndex="731" Line="53" Column="5" EndLine="53" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="41" Column="5" EndLine="41" EndColumn="50" Covered="True" />
+          <Statement FileIndex="730" Line="46" Column="5" EndLine="46" EndColumn="33" Covered="True" />
+          <Statement FileIndex="730" Line="47" Column="5" EndLine="47" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="48" Column="12" EndLine="48" EndColumn="22" Covered="True" />
+          <Statement FileIndex="730" Line="49" Column="7" EndLine="49" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="50" Column="9" EndLine="50" EndColumn="28" Covered="True" />
+          <Statement FileIndex="730" Line="51" Column="11" EndLine="51" EndColumn="31" Covered="True" />
+          <Statement FileIndex="730" Line="52" Column="7" EndLine="52" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="48" Column="39" EndLine="48" EndColumn="42" Covered="True" />
+          <Statement FileIndex="730" Line="48" Column="23" EndLine="48" EndColumn="37" Covered="True" />
+          <Statement FileIndex="730" Line="53" Column="5" EndLine="53" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Negate():Example.Core.IMoney" CoveredStatements="11" TotalStatements="11" CoveragePercent="100">
-          <Statement FileIndex="731" Line="168" Column="5" EndLine="168" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="169" Column="7" EndLine="169" EndColumn="40" Covered="True" />
-          <Statement FileIndex="731" Line="170" Column="7" EndLine="170" EndColumn="14" Covered="True" />
-          <Statement FileIndex="731" Line="170" Column="27" EndLine="170" EndColumn="34" Covered="True" />
-          <Statement FileIndex="731" Line="170" Column="16" EndLine="170" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="171" Column="7" EndLine="171" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="172" Column="9" EndLine="172" EndColumn="47" Covered="True" />
-          <Statement FileIndex="731" Line="173" Column="7" EndLine="173" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="170" Column="24" EndLine="170" EndColumn="26" Covered="True" />
-          <Statement FileIndex="731" Line="174" Column="7" EndLine="174" EndColumn="21" Covered="True" />
-          <Statement FileIndex="731" Line="175" Column="5" EndLine="175" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="168" Column="5" EndLine="168" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="169" Column="7" EndLine="169" EndColumn="40" Covered="True" />
+          <Statement FileIndex="730" Line="170" Column="7" EndLine="170" EndColumn="14" Covered="True" />
+          <Statement FileIndex="730" Line="170" Column="27" EndLine="170" EndColumn="34" Covered="True" />
+          <Statement FileIndex="730" Line="170" Column="16" EndLine="170" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="171" Column="7" EndLine="171" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="172" Column="9" EndLine="172" EndColumn="47" Covered="True" />
+          <Statement FileIndex="730" Line="173" Column="7" EndLine="173" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="170" Column="24" EndLine="170" EndColumn="26" Covered="True" />
+          <Statement FileIndex="730" Line="174" Column="7" EndLine="174" EndColumn="21" Covered="True" />
+          <Statement FileIndex="730" Line="175" Column="5" EndLine="175" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="AppendMoney(Example.Core.Money):System.Void" CoveredStatements="12" TotalStatements="12" CoveragePercent="100">
-          <Statement FileIndex="731" Line="94" Column="5" EndLine="94" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="95" Column="7" EndLine="95" EndColumn="47" Covered="True" />
-          <Statement FileIndex="731" Line="96" Column="7" EndLine="96" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="97" Column="7" EndLine="97" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="98" Column="9" EndLine="98" EndColumn="29" Covered="True" />
-          <Statement FileIndex="731" Line="99" Column="9" EndLine="99" EndColumn="16" Covered="True" />
-          <Statement FileIndex="731" Line="101" Column="7" EndLine="101" EndColumn="27" Covered="True" />
-          <Statement FileIndex="731" Line="102" Column="7" EndLine="102" EndColumn="36" Covered="True" />
-          <Statement FileIndex="731" Line="103" Column="7" EndLine="103" EndColumn="22" Covered="True" />
-          <Statement FileIndex="731" Line="104" Column="9" EndLine="104" EndColumn="16" Covered="True" />
-          <Statement FileIndex="731" Line="105" Column="7" EndLine="105" EndColumn="24" Covered="True" />
-          <Statement FileIndex="731" Line="106" Column="5" EndLine="106" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="94" Column="5" EndLine="94" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="95" Column="7" EndLine="95" EndColumn="47" Covered="True" />
+          <Statement FileIndex="730" Line="96" Column="7" EndLine="96" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="97" Column="7" EndLine="97" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="98" Column="9" EndLine="98" EndColumn="29" Covered="True" />
+          <Statement FileIndex="730" Line="99" Column="9" EndLine="99" EndColumn="16" Covered="True" />
+          <Statement FileIndex="730" Line="101" Column="7" EndLine="101" EndColumn="27" Covered="True" />
+          <Statement FileIndex="730" Line="102" Column="7" EndLine="102" EndColumn="36" Covered="True" />
+          <Statement FileIndex="730" Line="103" Column="7" EndLine="103" EndColumn="22" Covered="True" />
+          <Statement FileIndex="730" Line="104" Column="9" EndLine="104" EndColumn="16" Covered="True" />
+          <Statement FileIndex="730" Line="105" Column="7" EndLine="105" EndColumn="24" Covered="True" />
+          <Statement FileIndex="730" Line="106" Column="5" EndLine="106" EndColumn="6" Covered="True" />
         </Member>
         <Member Name="Multiply(System.Int32):Example.Core.IMoney" CoveredStatements="14" TotalStatements="14" CoveragePercent="100">
-          <Statement FileIndex="731" Line="156" Column="5" EndLine="156" EndColumn="6" Covered="True" />
-          <Statement FileIndex="731" Line="157" Column="7" EndLine="157" EndColumn="40" Covered="True" />
-          <Statement FileIndex="731" Line="158" Column="7" EndLine="158" EndColumn="23" Covered="True" />
-          <Statement FileIndex="731" Line="159" Column="7" EndLine="159" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="160" Column="9" EndLine="160" EndColumn="16" Covered="True" />
-          <Statement FileIndex="731" Line="160" Column="29" EndLine="160" EndColumn="36" Covered="True" />
-          <Statement FileIndex="731" Line="160" Column="18" EndLine="160" EndColumn="25" Covered="True" />
-          <Statement FileIndex="731" Line="161" Column="9" EndLine="161" EndColumn="10" Covered="True" />
-          <Statement FileIndex="731" Line="162" Column="11" EndLine="162" EndColumn="57" Covered="True" />
-          <Statement FileIndex="731" Line="163" Column="9" EndLine="163" EndColumn="10" Covered="True" />
-          <Statement FileIndex="731" Line="160" Column="26" EndLine="160" EndColumn="28" Covered="True" />
-          <Statement FileIndex="731" Line="164" Column="7" EndLine="164" EndColumn="8" Covered="True" />
-          <Statement FileIndex="731" Line="165" Column="7" EndLine="165" EndColumn="21" Covered="True" />
-          <Statement FileIndex="731" Line="166" Column="5" EndLine="166" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="156" Column="5" EndLine="156" EndColumn="6" Covered="True" />
+          <Statement FileIndex="730" Line="157" Column="7" EndLine="157" EndColumn="40" Covered="True" />
+          <Statement FileIndex="730" Line="158" Column="7" EndLine="158" EndColumn="23" Covered="True" />
+          <Statement FileIndex="730" Line="159" Column="7" EndLine="159" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="160" Column="9" EndLine="160" EndColumn="16" Covered="True" />
+          <Statement FileIndex="730" Line="160" Column="29" EndLine="160" EndColumn="36" Covered="True" />
+          <Statement FileIndex="730" Line="160" Column="18" EndLine="160" EndColumn="25" Covered="True" />
+          <Statement FileIndex="730" Line="161" Column="9" EndLine="161" EndColumn="10" Covered="True" />
+          <Statement FileIndex="730" Line="162" Column="11" EndLine="162" EndColumn="57" Covered="True" />
+          <Statement FileIndex="730" Line="163" Column="9" EndLine="163" EndColumn="10" Covered="True" />
+          <Statement FileIndex="730" Line="160" Column="26" EndLine="160" EndColumn="28" Covered="True" />
+          <Statement FileIndex="730" Line="164" Column="7" EndLine="164" EndColumn="8" Covered="True" />
+          <Statement FileIndex="730" Line="165" Column="7" EndLine="165" EndColumn="21" Covered="True" />
+          <Statement FileIndex="730" Line="166" Column="5" EndLine="166" EndColumn="6" Covered="True" />
         </Member>
       </Type>
     </Namespace>
@@ -1109,9 +1152,8 @@
   <File Name="c:\server\projects\mbunit v3.2\work\src\gallio\gallio\properties\resources.designer.cs" Index="725" />
   <File Name="c:\server\projects\mbunit v3.2\work\src\gallio\gallio\common\collections\treeutils.cs" Index="726" />
   <File Name="c:\foobar\example\example.core.tests\testmoney.cs" Index="727" />
-  <File Name="c:\foobar\example\example.core\dummy.cs" Index="728" />
-  <File Name="c:\foobar\example\example.core\model\subtype.cs" Index="729" />
-  <File Name="c:\foobar\example\example.core\money.cs" Index="730" />
-  <File Name="c:\foobar\example\example.core\moneybag.cs" Index="731" />
-  <File Name="c:\foobar\example\example.core\samplemeasure.cs" Index="732" />
+  <File Name="c:\foobar\example\example.core\model\subtype.cs" Index="728" />
+  <File Name="c:\foobar\example\example.core\money.cs" Index="729" />
+  <File Name="c:\foobar\example\example.core\moneybag.cs" Index="730" />
+  <File Name="c:\foobar\example\example.core\samplemeasure.cs" Index="731" />
 </Root>

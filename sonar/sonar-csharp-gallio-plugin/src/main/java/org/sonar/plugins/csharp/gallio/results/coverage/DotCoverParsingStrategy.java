@@ -22,6 +22,7 @@ package org.sonar.plugins.csharp.gallio.results.coverage;
 import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -69,11 +70,9 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
       cursor = cursor.childElementCursor();
       while (cursor.getNext() != null) {
         if ("File".equals(cursor.getQName().getLocalPart())) {
-          int fileIndex = Integer.valueOf(cursor.getAttrValue("Index"));
-          File sourceFile = new File(cursor.getAttrValue("Name"));
-          fileRegistry.put(fileIndex, sourceFile);
+          parseFileBloc(cursor);
         } else if ("Assembly".equals(cursor.getQName().getLocalPart())) {
-          parseAssemblyBloc(cursor);
+          parseAndSearchMemberBloc(cursor);
         }
       }
     } catch (XMLStreamException e) {
@@ -93,36 +92,49 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
   
     return result;
   }
+  
+  private void parseFileBloc(SMInputCursor cursor) throws XMLStreamException {
+    int fileIndex = Integer.valueOf(cursor.getAttrValue("Index"));
+    try {
+      File sourceFile = new File(cursor.getAttrValue("Name")).getCanonicalFile();
+      fileRegistry.put(fileIndex, sourceFile);
+    } catch (IOException e) {
+      throw new SonarException("Sourcefile referenced in dotCover report not found", e);
+    }
+    
+  }
 
-  private void parseAssemblyBloc(SMInputCursor cursor) throws XMLStreamException {
-    SMInputCursor namespaceCursor = cursor.childElementCursor();
-    while (namespaceCursor.getNext() != null) {
-      SMInputCursor typeCursor = namespaceCursor.childElementCursor();
-      while (typeCursor.getNext() != null) {
-        SMInputCursor memberCursor = typeCursor.childElementCursor();
-        while (memberCursor.getNext() != null) {
-          SMInputCursor statementCursor = memberCursor.childElementCursor();
-          while (statementCursor.getNext() != null) {
-            int startLine = Integer.valueOf(statementCursor.getAttrValue("Line"));
-            int endLine = Integer.valueOf(statementCursor.getAttrValue("EndLine"));
-            final int visits;
-            if ("True".equals(statementCursor.getAttrValue("Covered"))) {
-              visits = 1; // we cannot know the exact number of visit with dotcover
-            } else {
-              visits = 0;
-            }
-            CoveragePoint point = new CoveragePoint();
-            point.setCountVisits(visits);
-            point.setStartLine(startLine);
-            point.setEndLine(endLine);
-            
-            int fileIndex = Integer.valueOf(statementCursor.getAttrValue("FileIndex"));
-            coveragePointRegistry.put(fileIndex, point);
-             
-          }
-        }
+  private void parseAndSearchMemberBloc(SMInputCursor cursor) throws XMLStreamException {
+    if ("Member".equals(cursor.getLocalName())) {
+      parseMemberBloc(cursor);
+    } else {
+      SMInputCursor childCursor = cursor.childElementCursor();
+      while (childCursor.getNext() != null) {
+        parseAndSearchMemberBloc(childCursor);
       }
     }
+  }
+  
+  private void parseMemberBloc(SMInputCursor memberCursor) throws XMLStreamException {
+      SMInputCursor statementCursor = memberCursor.childElementCursor();
+      while (statementCursor.getNext() != null) {
+        int startLine = Integer.valueOf(statementCursor.getAttrValue("Line"));
+        int endLine = Integer.valueOf(statementCursor.getAttrValue("EndLine"));
+        final int visits;
+        if ("True".equals(statementCursor.getAttrValue("Covered"))) {
+          visits = 1; // we cannot know the exact number of visit with dotcover
+        } else {
+          visits = 0;
+        }
+        CoveragePoint point = new CoveragePoint();
+        point.setCountVisits(visits);
+        point.setStartLine(startLine);
+        point.setEndLine(endLine);
+        
+        int fileIndex = Integer.valueOf(statementCursor.getAttrValue("FileIndex"));
+        coveragePointRegistry.put(fileIndex, point);
+         
+      }
   }
 
 }

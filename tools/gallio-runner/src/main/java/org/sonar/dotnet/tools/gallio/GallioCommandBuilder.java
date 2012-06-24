@@ -43,6 +43,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private static final GallioRunnerType DEFAULT_GALLIO_RUNNER = GallioRunnerType.ISOLATED_PROCESS;
   private static final String PART_COVER_EXE = "PartCover.exe";
   private static final String OPEN_COVER_EXE = "OpenCover.Console.exe";
+  private static final String DOT_COVER_EXE = "dotCover.exe";
 
   private VisualStudioSolution solution;
   // Information needed for simple Gallio execution
@@ -55,6 +56,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private CoverageTool coverageTool;
   private File partCoverInstallDirectory;
   private File openCoverInstallDirectory;
+  private File dotCoverInstallDirectory;
   private String[] coverageExcludes;
   private File coverageReportFile;
 
@@ -169,6 +171,16 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setOpenCoverInstallDirectory(File openCoverInstallDirectory) {
     this.openCoverInstallDirectory = openCoverInstallDirectory;
   }
+  
+  /**
+   * Sets dotCover installation directory.
+   * 
+   * @param dotCoverInstallDirectory
+   *          the install dir
+   */
+  public void setDotCoverInstallDirectory(File dotCoverInstallDirectory) {
+    this.dotCoverInstallDirectory = dotCoverInstallDirectory;
+  }
 
   /**
    * Sets the namespaces and assemblies excluded from the code coverage, seperated by a comma. The format for an exclusion is the PartCover
@@ -209,6 +221,8 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
       addNCoverArguments(command, gallioArguments);
     } else if (CoverageTool.OPENCOVER.equals(coverageTool)) {
       addOpenCoverArguments(command, gallioArguments);
+    } else if (CoverageTool.DOTCOVER.equals(coverageTool)) {
+      addDotCoverArguments(command, gallioArguments);
     } else {
       command.addArguments(gallioArguments);
     }
@@ -229,6 +243,12 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     } else if (CoverageTool.OPENCOVER.equals(coverageTool)) {
       // samething with opencover
       File openCoverExecutable = new File(openCoverInstallDirectory, OPEN_COVER_EXE);
+      validateCoverExecutable(openCoverExecutable, coverageTool);
+      LOG.debug("- OpenCover executable: {}", openCoverExecutable);
+      command = Command.create(openCoverExecutable.getAbsolutePath());
+    } else if (CoverageTool.DOTCOVER.equals(coverageTool)) {
+      // and again with dotcover
+      File openCoverExecutable = new File(dotCoverInstallDirectory, DOT_COVER_EXE);
       validateCoverExecutable(openCoverExecutable, coverageTool);
       LOG.debug("- OpenCover executable: {}", openCoverExecutable);
       command = Command.create(openCoverExecutable.getAbsolutePath());
@@ -343,6 +363,40 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
 
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("-output:" + coverageReportFile.getAbsolutePath());
+  }
+  
+  private void addDotCoverArguments(Command command, List<String> gallioArguments) {
+    command.addArgument("a");
+    command.addArgument("/TargetExecutable=" + gallioExecutable.getAbsolutePath());
+
+    LOG.debug("- Working directory   : {}", workDir.getAbsolutePath());
+    command.addArgument("/TargetWorkingDir=" + workDir.getAbsolutePath());
+
+    command.addArgument("\"/TargetArguments=" + escapeGallioArguments(gallioArguments) + "\"");
+
+    final StringBuilder filterBuilder = new StringBuilder("/Filters=");
+
+    // We add all the covered assemblies
+    for (String assemblyName : listCoveredAssemblies()) {
+      LOG.debug("- dotCover include: ", assemblyName);
+      filterBuilder.append("+:module=" + assemblyName + ";class=*;function=*;");
+    }
+
+    // We add all the configured exclusions
+    /* TODO
+    if (coverageExcludes != null) {
+      for (String exclusion : coverageExcludes) {
+        LOG.debug("- Opencover exclude   : {}", exclusion.trim());
+        filterBuilder.append("-[" + exclusion.trim() + "]* ");
+      }
+    }*/
+    
+    command.addArgument(filterBuilder.toString());
+
+    command.addArgument("/ReportType=TeamCityXML");
+
+    LOG.debug("- Coverage report: {}", coverageReportFile.getAbsolutePath());
+    command.addArgument("/Output=" + coverageReportFile.getAbsolutePath());
   }
 
   private void addNCoverArguments(Command command, List<String> gallioArguments) {
