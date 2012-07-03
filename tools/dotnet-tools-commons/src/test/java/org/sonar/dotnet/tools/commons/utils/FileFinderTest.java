@@ -127,6 +127,18 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("AssemblyInfo.cs", csFile.getName());
   }
+  
+  @Test
+  public void testFindRelativeFileWithPatternOutsideSolutionAndProjectName() {
+    String pattern = "../../$(ProjectName)/**/*Info.cs";
+    when(project.getName()).thenReturn("BlankSilverlightSolution");
+    
+    Collection<File> result = FileFinder.findFiles(solution, project, pattern);
+    assertEquals(2, result.size());
+    File csFile = result.iterator().next();
+    assertTrue(csFile.exists());
+    assertEquals("AssemblyInfo.cs", csFile.getName());
+  }
 
   @Test
   public void testFindFilesWithBadPattern() {

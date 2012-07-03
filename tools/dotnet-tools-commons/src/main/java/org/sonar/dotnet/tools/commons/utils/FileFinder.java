@@ -49,6 +49,11 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 public final class FileFinder {
 
   private static final String SOLUTION_DIR_KEY = "$(SolutionDir)/";
+  private static final String PROJECT_NAME_KEY = "$(ProjectName)";
+  private static final String ASSEMBLY_NAME_KEY = "$(AssemblyName)";
+  private static final String ASSEMBLY_VERSION_KEY = "$(AssemblyVersion)";
+  private static final String OUTPUT_TYPE_KEY = "$(OutputType)";
+  private static final String ROOT_NAMESPACE_KEY = "$(RootNamespace)";
   private static final String PARENT_DIRECTORY = "../";
   private static final Logger LOG = LoggerFactory.getLogger(FileFinder.class);
 
@@ -106,7 +111,25 @@ public final class FileFinder {
    * @return The files found on the filesystem
    */
   public static Collection<File> findFiles(VisualStudioSolution currentSolution, VisualStudioProject currentProject, String... patternArray) {
-    return findFiles(currentSolution, currentProject.getDirectory(), patternArray);
+    String[] patternArrayProcessed;
+    if (patternArray == null || patternArray.length == 0) {
+      patternArrayProcessed = null;
+    } else {
+      patternArrayProcessed = new String[patternArray.length];
+      for (int i = 0; i < patternArray.length; i++) {
+        patternArrayProcessed[i] = process(patternArray[i], currentProject);
+      }
+    }  
+    return findFiles(currentSolution, currentProject.getDirectory(), patternArrayProcessed);
+  }
+
+  private static String process(String pattern, VisualStudioProject currentProject) {
+    String output = StringUtils.replace(pattern, ASSEMBLY_NAME_KEY, currentProject.getRealAssemblyName());
+    output = StringUtils.replace(output, PROJECT_NAME_KEY, currentProject.getName());
+    output = StringUtils.replace(output, ASSEMBLY_VERSION_KEY, currentProject.getAssemblyVersion());
+    output = StringUtils.replace(output, OUTPUT_TYPE_KEY, currentProject.getExtension());
+    output = StringUtils.replace(output, ROOT_NAMESPACE_KEY, currentProject.getRootNamespace());
+    return output;
   }
 
   /**

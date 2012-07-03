@@ -567,4 +567,9 @@ public class VisualStudioProject {
     this.forcedOutputDir = forcedOutputDir;
   }
 
+  
+  public String getRealAssemblyName() {
+    return realAssemblyName;
+  }
+
 }
