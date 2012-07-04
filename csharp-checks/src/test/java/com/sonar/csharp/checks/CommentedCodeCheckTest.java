@@ -5,21 +5,25 @@
  */
 package com.sonar.csharp.checks;
 
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import static com.sonar.csharp.checks.ResourceParser.*;
-import static com.sonar.sslr.test.squid.CheckMatchers.*;
+import static com.sonar.csharp.checks.ResourceParser.scanFile;
 
 public class CommentedCodeCheckTest {
 
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
+
   @Test
-  public void testCheck() {
-    setCurrentSourceFile(scanFile("/checks/commentedCode.cs", new CommentedCodeCheck()));
+  public void detected() {
+    SourceFile file = scanFile("/checks/commentedCode.cs", new CommentedCodeCheck());
 
-    assertNumberOfViolations(2);
-
-    assertViolation().atLine(6).withMessage("Sections of code should not be \"commented out\".");
-    assertViolation().atLine(11);
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(6).withMessage("Sections of code should not be \"commented out\".")
+        .next().atLine(11);
   }
 
 }

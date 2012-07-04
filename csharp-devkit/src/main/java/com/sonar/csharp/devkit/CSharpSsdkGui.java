@@ -6,7 +6,7 @@
 package com.sonar.csharp.devkit;
 
 import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonarsource.sdk.SsdkGui;
+import com.sonar.sslr.devkit.SsdkGui;
 
 public final class CSharpSsdkGui {
 

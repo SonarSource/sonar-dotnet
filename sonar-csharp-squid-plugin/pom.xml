@@ -39,8 +39,8 @@
               <includes>
                 <include>${project.groupId}:csharp-squid</include>
                 <include>${project.groupId}:csharp-checks</include>
-                <include>com.sonarsource.sslr:sslr-core</include>
-                <include>com.sonarsource.sslr:sslr-squid-bridge</include>
+                <include>org.codehaus.sonar.sslr:sslr-core</include>
+                <include>org.codehaus.sonar.sslr-squid-bridge:sslr-squid-bridge</include>
                 <include>com.sonarsource.license:license-api</include>
               </includes>
               <rules>
@@ -105,7 +105,7 @@
       <artifactId>csharp-checks</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sonarsource.sslr</groupId>
+      <groupId>org.codehaus.sonar.sslr</groupId>
       <artifactId>sslr-core</artifactId>
     </dependency>
 

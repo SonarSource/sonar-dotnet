@@ -36,24 +36,25 @@
   <properties>
     <sonar.version>2.11</sonar.version>
     <csharp.core.version>1.2</csharp.core.version>
-    <sslrVersion>1.9</sslrVersion>
+    <sslrVersion>1.13</sslrVersion>
+    <squidBridgeVersion>2.2</squidBridgeVersion>
   </properties>
 
   <dependencyManagement>
     <dependencies>
       <!-- sonarsource -->
       <dependency>
-        <groupId>com.sonarsource.sslr</groupId>
+        <groupId>org.codehaus.sonar.sslr</groupId>
         <artifactId>sslr-core</artifactId>
         <version>${sslrVersion}</version>
       </dependency>
       <dependency>
-        <groupId>com.sonarsource.sslr</groupId>
+        <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
         <artifactId>sslr-squid-bridge</artifactId>
-        <version>${sslrVersion}</version>
+        <version>${squidBridgeVersion}</version>
       </dependency>
       <dependency>
-        <groupId>com.sonarsource.sslr</groupId>
+        <groupId>org.codehaus.sonar.sslr</groupId>
         <artifactId>sslr-devkit</artifactId>
         <version>${sslrVersion}</version>
       </dependency>   
@@ -136,7 +137,7 @@
       </dependency>
       <!-- Unit tests -->
       <dependency>
-        <groupId>com.sonarsource.sslr</groupId>
+        <groupId>org.codehaus.sonar.sslr</groupId>
         <artifactId>sslr-testing-harness</artifactId>
         <version>${sslrVersion}</version>
         <scope>test</scope>

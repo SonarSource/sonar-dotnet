@@ -5,18 +5,25 @@
  */
 package com.sonar.csharp.checks;
 
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
 import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import static com.sonar.csharp.checks.ResourceParser.*;
-import static com.sonar.sslr.test.squid.CheckMatchers.*;
-import static org.hamcrest.Matchers.*;
+import static com.sonar.csharp.checks.ResourceParser.scanFile;
+import static org.hamcrest.Matchers.containsString;
 
 public class ParsingErrorCheckTest {
 
-  @Test
-  public void testCheck() {
-    setCurrentSourceFile(scanFile("/checks/parsingError.cs", new ParsingErrorCheck()));
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
-    assertOnlyOneViolation().atLine(8).withMessage(containsString("DOT expected but \"}\" [RCURLYBRACE] found"));
+  @Test
+  public void detected() {
+    SourceFile file = scanFile("/checks/parsingError.cs", new ParsingErrorCheck());
+
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(8).withMessageThat(containsString("DOT expected but \"}\" [RCURLYBRACE] found"));
   }
+
 }

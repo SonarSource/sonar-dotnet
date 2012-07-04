@@ -19,11 +19,11 @@
   <dependencies>
     <!-- sonarsource -->
     <dependency>
-      <groupId>com.sonarsource.sslr</groupId>
+      <groupId>org.codehaus.sonar.sslr</groupId>
       <artifactId>sslr-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.sonarsource.sslr</groupId>
+      <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
       <artifactId>sslr-squid-bridge</artifactId>
     </dependency>
     <!-- sonar open-source -->
@@ -67,7 +67,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.sonarsource.sslr</groupId>
+      <groupId>org.codehaus.sonar.sslr</groupId>
       <artifactId>sslr-testing-harness</artifactId>
       <scope>test</scope>
     </dependency>
