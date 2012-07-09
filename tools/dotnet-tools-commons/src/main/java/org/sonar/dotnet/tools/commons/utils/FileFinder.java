@@ -187,7 +187,10 @@ public final class FileFinder {
         listFiles(result, workDir, externalFilter);
 
       } else {
-        result.add(browse(workDir, currentPattern));
+        File file = browse(workDir, currentPattern);
+        if (file.exists()) {
+          result.add(browse(workDir, currentPattern));
+        }
       }
     }
 

@@ -59,6 +59,12 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("SubType.cs", csFile.getName());
   }
+  
+  @Test
+  public void testFindFilesWithBoggusPath() {
+    Collection<File> result = FileFinder.findFiles(solution, project, "Model\\SubTypeX.cs");
+    assertEquals(0, result.size());
+  }
 
   @Test
   public void testFindFilesUsingWorkDir() {
