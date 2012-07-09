@@ -38,6 +38,8 @@
     <csharp.core.version>1.2</csharp.core.version>
     <sslrVersion>1.14</sslrVersion>
     <squidBridgeVersion>2.2</squidBridgeVersion>
+
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
   </properties>
 
   <dependencyManagement>
