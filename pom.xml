@@ -36,7 +36,7 @@
   <properties>
     <sonar.version>2.11</sonar.version>
     <csharp.core.version>1.2</csharp.core.version>
-    <sslrVersion>1.13</sslrVersion>
+    <sslrVersion>1.14</sslrVersion>
     <squidBridgeVersion>2.2</squidBridgeVersion>
   </properties>
 

@@ -6,6 +6,7 @@
 package com.sonar.csharp.squid.parser;
 
 import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.sslr.impl.matcher.GrammarFunctions;
 
 import static com.sonar.csharp.squid.api.CSharpKeyword.ABSTRACT;
 import static com.sonar.csharp.squid.api.CSharpKeyword.AS;
@@ -202,6 +203,8 @@ public class CSharpGrammarImpl extends CSharpGrammar {
 
     // A.3 Unsafe code
     unsafe();
+
+    GrammarFunctions.enableMemoizationOfMatchesForAllRules(this);
   }
 
   private void basicConcepts() {
