@@ -391,6 +391,7 @@ public class TestReportSensorTest {
     sensor.analyse(project, context);
 
     verifyNoMoreInteractions(parser);
+    verify(context, times(1)).saveMeasure(CoreMetrics.TESTS, 0.0);
     verifyNoMoreInteractions(context);
   }
 
