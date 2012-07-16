@@ -137,6 +137,41 @@ public class VisualStudioProjectBuilderTest {
     assertThat(testSubProject.getTestDirs().iterator().next(), notNullValue());
     assertTrue(testSubProject.getSourceDirs().isEmpty());
   }
+  
+  @Test
+  public void testCorrectlyConfiguredProjectInSafeMode() throws Exception {
+    conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "Example.sln");
+    conf.setProperty(CSharpConstants.KEY_GENERATION_STRATEGY_KEY, "safe");
+    projectBuilder.build(reactor);
+    // check that the configuration is OK
+    assertThat(microsoftWindowsEnvironment.getDotnetVersion(), is("4.0"));
+    assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory().getAbsolutePath(), is(fakeSdkDir.getAbsolutePath()));
+    assertThat(microsoftWindowsEnvironment.getSilverlightVersion(), is("4"));
+    assertThat(microsoftWindowsEnvironment.getSilverlightDirectory().getAbsolutePath(), is(fakeSilverlightDir.getAbsolutePath()));
+    assertThat(microsoftWindowsEnvironment.getWorkingDirectory(), is("WORK-DIR"));
+    // check that the solution is built
+    VisualStudioSolution solution = microsoftWindowsEnvironment.getCurrentSolution();
+    assertNotNull(solution);
+    assertThat(solution.getProjects().size(), is(3));
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Example.Application").getSourceFiles().size(), is(2));
+    assertThat(microsoftWindowsEnvironment.getCurrentProject("Example.Core").getSourceFiles().size(), is(6));
+    // check the multi-module definition is correct
+    assertThat(reactor.getRoot().getSubProjects().size(), is(3));
+    assertThat(reactor.getRoot().getSourceFiles().size(), is(0));
+    ProjectDefinition subProject = reactor.getRoot().getSubProjects().get(0);
+    VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject("Example.Application");
+    assertThat(subProject.getName(), is("Example.Application"));
+    assertThat(subProject.getKey(), is("groupId:artifactId:Example.Application"));
+    assertThat(subProject.getVersion(), is("1.0"));
+    assertThat(subProject.getBaseDir(), is(vsProject.getDirectory()));
+    assertThat(subProject.getWorkDir(), is(new File(vsProject.getDirectory(), "WORK-DIR")));
+    assertThat(subProject.getSourceDirs().iterator().next(), notNullValue());
+    assertTrue(subProject.getTestDirs().isEmpty());
+    ProjectDefinition testSubProject = reactor.getRoot().getSubProjects().get(2);
+    assertThat(testSubProject.getName(), is("Example.Core.Tests"));
+    assertThat(testSubProject.getTestDirs().iterator().next(), notNullValue());
+    assertTrue(testSubProject.getSourceDirs().isEmpty());
+  }
 
   @Test
   public void testNoSpecifiedSlnFileButOneFound() throws Exception {

@@ -90,6 +90,8 @@ public final class CSharpConstants {
   public static final String BUILD_CONFIGURATIONS_DEFVALUE = "Debug";
 
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.dotnet.assemblies";
+  
+  public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
 
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
