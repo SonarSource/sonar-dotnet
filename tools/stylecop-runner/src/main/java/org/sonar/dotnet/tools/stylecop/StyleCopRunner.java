@@ -39,7 +39,7 @@ public class StyleCopRunner { // NOSONAR : can't mock it otherwise
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopRunner.class);
 
   private static final long MINUTES_TO_MILLISECONDS = 60000;
-  private static final String EMBEDDED_VERSION = "4.4.0.14";
+  private static final String EMBEDDED_VERSION = "4.7.34.0";
 
   private File styleCopFolder;
   private File dotnetSdkFolder;

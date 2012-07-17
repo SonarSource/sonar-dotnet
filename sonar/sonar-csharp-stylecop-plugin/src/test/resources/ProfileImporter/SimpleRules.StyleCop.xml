@@ -1,6 +1,6 @@
-<StyleCopSettings Version="4.3"> 
+<StyleCopSettings Version="105"> 
     <Analyzers> 
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules"> 
+        <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules"> 
             <Rules> 
                 <Rule Name="ElementMustBeginWithUpperCaseLetter"> 
                     <RuleSettings> 
@@ -14,7 +14,7 @@
                 </Rule>
             </Rules> 
         </Analyzer> 
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.SpacingRules"> 
+        <Analyzer AnalyzerId="StyleCop.CSharp.SpacingRules"> 
             <Rules> 
                 <Rule Name="KeywordsMustBeSpacedCorrectly"> 
                     <RuleSettings> 
@@ -23,7 +23,7 @@
                 </Rule>
             </Rules> 
         </Analyzer>
-		<Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.LayoutRules">
+		<Analyzer AnalyzerId="StyleCop.CSharp.LayoutRules">
       		<Rules>
         		<Rule Name="CurlyBracketsForMultiLineStatementsMustNotShareLine">
           			<RuleSettings>

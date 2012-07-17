@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<StyleCopSettings Version="4.3">
-    <Analyzers>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.DocumentationRules">
+<StyleCopSettings Version="105">
+ <GlobalSettings>
+    <BooleanProperty Name="WriteCache">False</BooleanProperty>
+    <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
+    <IntegerProperty Name="MaxViolationCount">-1</IntegerProperty>
+  </GlobalSettings>
+    <Analyzers> 
+        <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
             <Rules>
                 <Rule Name="ElementsMustBeDocumented" SonarPriority="">
                     <RuleSettings>
@@ -205,7 +210,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.LayoutRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.LayoutRules">
             <Rules>
                 <Rule Name="CurlyBracketsForMultiLineStatementsMustNotShareLine" SonarPriority="">
                     <RuleSettings>
@@ -294,7 +299,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.MaintainabilityRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.MaintainabilityRules">
             <Rules>
                 <Rule Name="AccessModifierMustBeDeclared" SonarPriority="">
                     <RuleSettings>
@@ -358,7 +363,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.NamingRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
             <Rules>
                 <Rule Name="ElementMustBeginWithUpperCaseLetter" SonarPriority="major">
                     <RuleSettings>
@@ -417,7 +422,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.OrderingRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">
             <Rules>
                 <Rule Name="UsingDirectivesMustBePlacedWithinNamespace" SonarPriority="">
                     <RuleSettings>
@@ -486,7 +491,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.ReadabilityRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">
             <Rules>
                 <Rule Name="CommentsMustContainText" SonarPriority="">
                     <RuleSettings>
@@ -605,7 +610,7 @@
                 </Rule>
             </Rules>
         </Analyzer>
-        <Analyzer AnalyzerId="Microsoft.StyleCop.CSharp.SpacingRules">
+        <Analyzer AnalyzerId="StyleCop.CSharp.SpacingRules">
             <Rules>
                 <Rule Name="KeywordsMustBeSpacedCorrectly" SonarPriority="minor">
                     <RuleSettings>

@@ -71,7 +71,12 @@ public class StyleCopProfileExporter extends ProfileExporter {
 
   private void printStartOfFile(Writer writer) throws IOException {
     writer.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-    writer.append("<StyleCopSettings Version=\"4.3\">\n");
+    writer.append("  <StyleCopSettings Version=\"105\">\n");
+    writer.append("    <GlobalSettings>\n");
+    writer.append("      <BooleanProperty Name=\"WriteCache\">False</BooleanProperty>\n");
+    writer.append("      <BooleanProperty Name=\"AutoCheckForUpdate\">False</BooleanProperty>\n");
+    writer.append("      <IntegerProperty Name=\"MaxViolationCount\">-1</IntegerProperty>\n");
+    writer.append("    </GlobalSettings>\n");
     writer.append("    <Analyzers>\n");
   }
 

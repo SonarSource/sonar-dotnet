@@ -38,10 +38,10 @@ public class StyleCopProfileExporterTest {
     RulesProfile profile = RulesProfile.create("Sonar C# Way", "cs");
     profile.activateRule(
         Rule.create(StyleCopConstants.REPOSITORY_KEY, "ElementMustBeginWithUpperCaseLetter", "Element must begin with upper case letter")
-            .setConfigKey("Microsoft.StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter"), null);
+            .setConfigKey("StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter"), null);
     profile.activateRule(
         Rule.create(StyleCopConstants.REPOSITORY_KEY, "KeywordsMustBeSpacedCorrectly", "Keywords must be spaced correctly")
-            .setConfigKey("Microsoft.StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly").setSeverity(RulePriority.MINOR), null);
+            .setConfigKey("StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly").setSeverity(RulePriority.MINOR), null);
 
     StringWriter writer = new StringWriter();
     new StyleCopProfileExporter().exportProfile(profile, writer);

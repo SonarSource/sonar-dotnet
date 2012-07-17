@@ -4,7 +4,7 @@
         <ProjectRoot>SOLUTIONDIR</ProjectRoot>
         <StyleCopRoot>StyleCopDir</StyleCopRoot>
     </PropertyGroup>
-    <UsingTask TaskName="StyleCopTask" AssemblyFile="$(StyleCopRoot)\Microsoft.StyleCop.dll"></UsingTask>
+    <UsingTask TaskName="StyleCopTask" AssemblyFile="$(StyleCopRoot)\StyleCop.dll"></UsingTask>
     <ItemGroup>
         <Project Include="PROJECT.csproj"></Project>
     </ItemGroup>

@@ -93,7 +93,7 @@ public class MsBuildFileGenerator {
     StringEscapeUtils.escapeXml(writer, styleCopFolder.getAbsolutePath());
     writer.append("</StyleCopRoot>\n");
     writer.append("    </PropertyGroup>\n");
-    writer.append("    <UsingTask TaskName=\"StyleCopTask\" AssemblyFile=\"$(StyleCopRoot)\\Microsoft.StyleCop.dll\"></UsingTask>\n");
+    writer.append("    <UsingTask TaskName=\"StyleCopTask\" AssemblyFile=\"$(StyleCopRoot)\\StyleCop.dll\"></UsingTask>\n");
     writer.append("    <ItemGroup>\n");
     generateProjectList(writer, vsProjects);
     writer.append("    </ItemGroup>\n");
