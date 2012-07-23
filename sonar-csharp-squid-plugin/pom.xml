@@ -169,7 +169,7 @@
               <execution>
                 <phase>package</phase>
                 <configuration>
-                  <tasks>
+                  <target>
                     <property refid="maven.compile.classpath" name="mvn.classpath" />
                     <taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" />
                     <yguard>
@@ -200,7 +200,7 @@
                         <pathelement path="${mvn.classpath}" />
                       </externalclasses>
                     </yguard>
-                  </tasks>
+                  </target>
                 </configuration>
                 <goals>
                   <goal>run</goal>
