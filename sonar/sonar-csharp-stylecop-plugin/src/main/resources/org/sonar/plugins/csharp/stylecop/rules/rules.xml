@@ -884,4 +884,72 @@
         <category name="Usability"/>
         <description>Tabs must not be used</description>
     </rule>
+    
+    
+    <!-- New StyleCop 4.7 rules -->
+    <rule key="InheritDocMustBeUsedWithInheritingClass">
+        <name>Inherit doc must be used with inheriting class</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#InheritDocMustBeUsedWithInheritingClass</configKey>
+        <category name="Usability"/>
+        <description>Inherit doc must be used with inheriting class</description>
+    </rule>
+    <rule key="FileHeaderFileNameDocumentationMustMatchTypeName">
+        <name>File header file name documentation must match type name</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#FileHeaderFileNameDocumentationMustMatchTypeName</configKey>
+        <category name="Usability"/>
+        <description>File header file name documentation must match type name</description>
+    </rule>
+    
+    <rule key="CodeMustNotContainBlankLinesAtStartOfFile">
+        <name>Code must not contain blank lines at start of file</name>
+        <configKey>StyleCop.CSharp.LayoutRules#CodeMustNotContainBlankLinesAtStartOfFile</configKey>
+        <category name="Usability"/>
+        <description>Code must not contain blank lines at start of file</description>
+    </rule>
+    <rule key="CodeMustNotContainBlankLinesAtEndOfFile">
+        <name>Code must not contain blank lines at end of file</name>
+        <configKey>StyleCop.CSharp.LayoutRules#CodeMustNotContainBlankLinesAtEndOfFile</configKey>
+        <category name="Usability"/>
+        <description>Code must not contain blank lines at end of file</description>
+    </rule>
+    
+    <rule key="AttributeConstructorMustNotUseUnnecessaryParenthesis">
+        <name>Attribute constructor must not use unnecessary parenthesis</name>
+        <configKey>StyleCop.CSharp.MaintainabilityRules#AttributeConstructorMustNotUseUnnecessaryParenthesis</configKey>
+        <category name="Usability"/>
+        <description>Attribute constructor must not use unnecessary parenthesis</description>
+    </rule>
+    
+    <rule key="StaticReadonlyFieldsMustBeginWithUpperCaseLetter">
+        <name>Static readonly fields must begin with upper case letter</name>
+        <configKey>StyleCop.CSharp.NamingRules#StaticReadonlyFieldsMustBeginWithUpperCaseLetter</configKey>
+        <category name="Usability"/>
+        <description>Static readonly fields must begin with upper case letter</description>
+    </rule>
+    
+    <rule key="StaticReadonlyElementsMustAppearBeforeStaticNonReadonlyElements">
+        <name>Static readonly elements must appear before static non readonly elements</name>
+        <configKey>StyleCop.CSharp.OrderingRules#StaticReadonlyElementsMustAppearBeforeStaticNonReadonlyElements</configKey>
+        <category name="Usability"/>
+        <description>Static readonly elements must appear before static non readonly elements</description>
+    </rule>
+    <rule key="InstanceReadonlyElementsMustAppearBeforeInstanceNonReadonlyElements">
+        <name>Instance readonly elements must appear before instance non readonly elements</name>
+        <configKey>StyleCop.CSharp.OrderingRules#InstanceReadonlyElementsMustAppearBeforeInstanceNonReadonlyElements</configKey>
+        <category name="Usability"/>
+        <description>Instance readonly elements must appear before instance non readonly elements</description>
+    </rule>
+    
+    <rule key="UseShorthandForNullableTypes">
+        <name>Use shorthand for nullable types</name>
+        <configKey>StyleCop.CSharp.ReadabilityRules#UseShorthandForNullableTypes</configKey>
+        <category name="Usability"/>
+        <description>Use shorthand for nullable types</description>
+    </rule>
+    <rule key="PrefixCallsCorrectly">
+        <name>Prefix calls correctly</name>
+        <configKey>StyleCop.CSharp.ReadabilityRules#PrefixCallsCorrectly</configKey>
+        <category name="Usability"/>
+        <description>Prefix calls correctly</description>
+    </rule>
 </rules>
