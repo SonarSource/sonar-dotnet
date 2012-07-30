@@ -41,6 +41,8 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.core.AbstractStaxParser;
 
 /**
@@ -50,9 +52,10 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopResultParser.class);
 
-  private Project project;
-  private SensorContext context;
-  private RuleFinder ruleFinder;
+  private final Project project;
+  private final SensorContext context;
+  private final RuleFinder ruleFinder; 
+  private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
 
   /**
    * Constructs a @link{StyleCopResultParser}.
@@ -62,11 +65,12 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
    * @param rulesManager
    * @param profile
    */
-  public StyleCopResultParser(Project project, SensorContext context, RuleFinder ruleFinder) {
+  public StyleCopResultParser(Project project, SensorContext context, RuleFinder ruleFinder, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super();
     this.project = project;
     this.context = context;
     this.ruleFinder = ruleFinder;
+    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
   }
 
   /**
@@ -95,8 +99,11 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
 
   private void parseStyleCopViolationsBloc(SMInputCursor violationsCursor) throws XMLStreamException {
     // Cursor in on <Violations>
+    VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject(project.getName());
+    String repositoryKey = 
+      vsProject.isTest() ? StyleCopConstants.TEST_REPOSITORY_KEY : StyleCopConstants.REPOSITORY_KEY;
+    RuleQuery ruleQuery = RuleQuery.create().withRepositoryKey(repositoryKey);
     StringBuffer configKey = new StringBuffer();
-    RuleQuery ruleQuery = RuleQuery.create().withRepositoryKey(StyleCopConstants.REPOSITORY_KEY);
     while (violationsCursor.getNext() != null) {
       configKey.setLength(0);
       configKey.append(violationsCursor.getAttrValue("RuleNamespace"));
@@ -112,9 +119,16 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
   }
 
   private void createViolation(SMInputCursor violationsCursor, Rule currentRule) throws XMLStreamException {
-    org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(new File(violationsCursor.getAttrValue("Source")),
-        project);
-    if (context.isIndexed(sonarFile, false)) {
+    File sourceFile = new File(violationsCursor.getAttrValue("Source"));
+    VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject(project.getName());
+    if (vsProject.contains(sourceFile)) {
+      final org.sonar.api.resources.File sonarFile;
+      if (vsProject.isTest()) {
+        sonarFile = org.sonar.api.resources.File.fromIOFile(sourceFile, project.getFileSystem().getTestDirs());
+      } else {
+        sonarFile = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+      }
+    
       Violation violation = Violation.create(currentRule, sonarFile);
       String lineNumber = violationsCursor.getAttrValue("LineNumber");
       if (lineNumber != null) {
@@ -124,7 +138,7 @@ public class StyleCopResultParser extends AbstractStaxParser implements BatchExt
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {
-      LOG.debug("Violation could not be saved, associated resource not indexed " + sonarFile);
+      LOG.debug("Violation could not be saved, associated file not referenced " + sourceFile);
     }
   }
 

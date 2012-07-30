@@ -23,7 +23,6 @@ package org.sonar.plugins.csharp.stylecop.profiles;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,10 +57,14 @@ public class StyleCopProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
+    exportProfile(StyleCopConstants.REPOSITORY_KEY, profile, writer);
+  }
+  
+  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
       printStartOfFile(writer);
 
-      printRules(profile, writer);
+      printRules(repositoryKey, profile, writer);
 
       printEndOfFile(writer);
     } catch (IOException e) {
@@ -85,7 +88,7 @@ public class StyleCopProfileExporter extends ProfileExporter {
     writer.append("</StyleCopSettings>");
   }
 
-  private void printRules(RulesProfile profile, Writer writer) throws IOException {
+  private void printRules(String repositoryKey, RulesProfile profile, Writer writer) throws IOException {
     List<ActiveRule> activeRules = profile.getActiveRulesByRepository(StyleCopConstants.REPOSITORY_KEY);
     List<StyleCopRule> rules = transformIntoStyleCopRules(activeRules);
 

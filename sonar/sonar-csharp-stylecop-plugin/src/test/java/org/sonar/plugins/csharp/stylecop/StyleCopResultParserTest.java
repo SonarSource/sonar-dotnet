@@ -43,6 +43,8 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
@@ -63,8 +65,13 @@ public class StyleCopResultParserTest {
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\MyProject\\src")));
     when(project.getFileSystem()).thenReturn(fileSystem);
+    
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.contains(any(File.class))).thenReturn(true);
+    MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
+    when(env.getCurrentProject(null)).thenReturn(vsProject);
 
-    parser = new StyleCopResultParser(project, context, newRuleFinder());
+    parser = new StyleCopResultParser(project, context, newRuleFinder(), env);
     parser.setEncoding(Charset.forName("UTF-8"));
 
     resultFile = TestUtils.getResource("/Results/stylecop-report.xml");

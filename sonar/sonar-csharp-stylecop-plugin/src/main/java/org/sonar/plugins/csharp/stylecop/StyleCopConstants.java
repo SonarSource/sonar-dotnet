@@ -29,7 +29,9 @@ public final class StyleCopConstants {
   }
 
   public static final String REPOSITORY_KEY = "stylecop";
+  public static final String TEST_REPOSITORY_KEY = "stylecop-test";
   public static final String REPOSITORY_NAME = "StyleCop";
+  public static final String TEST_REPOSITORY_NAME = "StyleCop Unit Tests";
 
   public static final String STYLECOP_RULES_FILE = "sonar.StyleCop";
   public static final String STYLECOP_REPORT_XML = "stylecop-report.xml";

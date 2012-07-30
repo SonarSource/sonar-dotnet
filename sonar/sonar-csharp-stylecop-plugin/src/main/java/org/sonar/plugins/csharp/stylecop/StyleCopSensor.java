@@ -27,18 +27,17 @@ import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
@@ -46,8 +45,7 @@ import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 /**
  * Collects the StyleCop reporting into sonar.
  */
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class StyleCopSensor extends AbstractRegularCSharpSensor {
+public abstract class StyleCopSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
 
@@ -75,12 +73,14 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     this.styleCopResultParser = styleCopResultParser;
     this.configuration = configuration;
   }
+  
+  protected abstract String getRepositoryKey();
 
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(StyleCopConstants.REPOSITORY_KEY).isEmpty()) {
+    if (rulesProfile.getActiveRulesByRepository(getRepositoryKey()).isEmpty()) {
       LOG.warn("/!\\ SKIP StyleCop analysis: no rule defined for StyleCop in the \"{}\" profil.", rulesProfile.getName());
       return;
     }
@@ -127,7 +127,7 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(rulesProfile, writer);
+      profileExporter.exportProfile(getRepositoryKey(), rulesProfile, writer);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the StyleCop configuration file by exporting the Sonar rules.", e);

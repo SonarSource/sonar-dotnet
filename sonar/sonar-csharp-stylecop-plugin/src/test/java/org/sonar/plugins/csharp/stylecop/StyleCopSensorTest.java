@@ -61,15 +61,72 @@ public class StyleCopSensorTest {
     microsoftWindowsEnvironment.setCurrentSolution(solution);
 
     Configuration conf = new BaseConfiguration();
-    StyleCopSensor sensor = new StyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    StyleCopSensor sensor = new RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
     assertTrue(sensor.shouldExecuteOnProject(project));
+  }
+  
+  @Test
+  public void testShouldNotExecuteOnSkippedProject() throws Exception {
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Project #1");
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
 
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    microsoftWindowsEnvironment.setCurrentSolution(solution);
+
+    Configuration conf = new BaseConfiguration();
     conf.addProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
-    sensor = new StyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    StyleCopSensor sensor = new RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(project.getName()).thenReturn("Project #1");
+    
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+  
+  @Test
+  public void testShouldNotExecuteOnTestProject() throws Exception {
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Project #1");
+    when(vsProject.isTest()).thenReturn(true);
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
+
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    microsoftWindowsEnvironment.setCurrentSolution(solution);
+
+    Configuration conf = new BaseConfiguration();
+    StyleCopSensor sensor = new RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(project.getName()).thenReturn("Project #1");
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+  
+  @Test
+  public void testSensorShouldNotExecuteOnRegularProject() throws Exception {
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Project #1");
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
+
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    microsoftWindowsEnvironment.setCurrentSolution(solution);
+
+    Configuration conf = new BaseConfiguration();
+    StyleCopSensor sensor = new UnitTestsStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+
+    Project project = mock(Project.class);
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(project.getName()).thenReturn("Project #1");
+
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
@@ -88,7 +145,7 @@ public class StyleCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    StyleCopSensor sensor = new StyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
+    StyleCopSensor sensor = new RegularStyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         null);
 
     sensor.generateConfigurationFile();
@@ -111,7 +168,7 @@ public class StyleCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    StyleCopSensor sensor = new StyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
+    StyleCopSensor sensor = new RegularStyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         null);
 
     sensor.generateConfigurationFile();

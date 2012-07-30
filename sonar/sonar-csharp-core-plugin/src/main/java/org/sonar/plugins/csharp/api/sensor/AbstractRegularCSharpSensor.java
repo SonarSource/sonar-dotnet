@@ -26,7 +26,7 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
  * Abstract Sensor for C# plugins that will be executed on every sub-project that is not a test project.
  */
 public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
-
+  
   /**
    * Creates an {@link AbstractRegularCSharpSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
    * 
@@ -36,7 +36,7 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
   protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
     super(microsoftWindowsEnvironment, toolName, executionMode);
   }
-
+  
   /**
    * TODO remove ASAP after having updated the squid plugin
    * @param microsoftWindowsEnvironment
@@ -44,12 +44,16 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
   protected AbstractRegularCSharpSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment, "Squid C#", "");
   }
+  
+  protected boolean isTestSensor() {
+    return false;
+  }
 
   /**
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    return !isTestProject(project) && super.shouldExecuteOnProject(project);
+    return (!isTestProject(project) ^ isTestSensor()) && super.shouldExecuteOnProject(project);
   }
 
 }
