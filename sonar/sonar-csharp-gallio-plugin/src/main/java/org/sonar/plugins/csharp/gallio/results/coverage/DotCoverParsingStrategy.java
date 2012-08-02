@@ -47,7 +47,7 @@ import com.google.common.collect.Multimap;
 public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
 
   private static final Logger LOG = LoggerFactory.getLogger(DotCoverParsingStrategy.class);
-  
+
   private Map<Integer, File> fileRegistry;
   private Multimap<Integer, CoveragePoint> coveragePointRegistry;
 
@@ -78,7 +78,7 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
     } catch (XMLStreamException e) {
       throw new SonarException(e);
     }
-    
+
     List<FileCoverage> result = Lists.newArrayList();
     for (int fileIndex : coveragePointRegistry.keySet()) {
       File sourceFile = fileRegistry.get(fileIndex);
@@ -89,10 +89,10 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
       }
       result.add(fileCoverage);
     }
-  
+
     return result;
   }
-  
+
   private void parseFileBloc(SMInputCursor cursor) throws XMLStreamException {
     int fileIndex = Integer.valueOf(cursor.getAttrValue("Index"));
     try {
@@ -101,7 +101,7 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
     } catch (IOException e) {
       throw new SonarException("Sourcefile referenced in dotCover report not found", e);
     }
-    
+
   }
 
   private void parseAndSearchMemberBloc(SMInputCursor cursor) throws XMLStreamException {
@@ -114,27 +114,27 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
       }
     }
   }
-  
+
   private void parseMemberBloc(SMInputCursor memberCursor) throws XMLStreamException {
-      SMInputCursor statementCursor = memberCursor.childElementCursor();
-      while (statementCursor.getNext() != null) {
-        int startLine = Integer.valueOf(statementCursor.getAttrValue("Line"));
-        int endLine = Integer.valueOf(statementCursor.getAttrValue("EndLine"));
-        final int visits;
-        if ("True".equals(statementCursor.getAttrValue("Covered"))) {
-          visits = 1; // we cannot know the exact number of visit with dotcover
-        } else {
-          visits = 0;
-        }
-        CoveragePoint point = new CoveragePoint();
-        point.setCountVisits(visits);
-        point.setStartLine(startLine);
-        point.setEndLine(endLine);
-        
-        int fileIndex = Integer.valueOf(statementCursor.getAttrValue("FileIndex"));
-        coveragePointRegistry.put(fileIndex, point);
-         
+    SMInputCursor statementCursor = memberCursor.childElementCursor();
+    while (statementCursor.getNext() != null) {
+      int startLine = Integer.valueOf(statementCursor.getAttrValue("Line"));
+      int endLine = Integer.valueOf(statementCursor.getAttrValue("EndLine"));
+      final int visits;
+      if ("True".equals(statementCursor.getAttrValue("Covered"))) {
+        visits = 1; // we cannot know the exact number of visit with dotcover
+      } else {
+        visits = 0;
       }
+      CoveragePoint point = new CoveragePoint();
+      point.setCountVisits(visits);
+      point.setStartLine(startLine);
+      point.setEndLine(endLine);
+
+      int fileIndex = Integer.valueOf(statementCursor.getAttrValue("FileIndex"));
+      coveragePointRegistry.put(fileIndex, point);
+
+    }
   }
 
 }
