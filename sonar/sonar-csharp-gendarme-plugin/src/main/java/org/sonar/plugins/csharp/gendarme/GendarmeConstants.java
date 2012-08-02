@@ -29,7 +29,9 @@ public final class GendarmeConstants {
   }
 
   public static final String REPOSITORY_KEY = "gendarme";
+  public static final String TEST_REPOSITORY_KEY = "gendarme-test";
   public static final String REPOSITORY_NAME = "Gendarme";
+  public static final String TEST_REPOSITORY_NAME = "Gendarme Unit Tests";
 
   public static final String GENDARME_RULES_FILE = "sonar.Gendarme";
   public static final String GENDARME_REPORT_XML = "gendarme-report.xml";

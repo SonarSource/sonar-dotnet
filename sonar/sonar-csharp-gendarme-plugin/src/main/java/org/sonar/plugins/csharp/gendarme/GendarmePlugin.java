@@ -62,10 +62,12 @@ public class GendarmePlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(GendarmeSensor.class);
+    list.add(RegularGendarmeSensor.class);
+    list.add(UnitTestsGendarmeSensor.class);
 
     // Rules and profiles
     list.add(GendarmeRuleRepository.class);
+    list.add(GendarmeUnitTestsRuleRepository.class);
     list.add(GendarmeProfileImporter.class);
     list.add(GendarmeProfileExporter.class);
     list.add(SonarWayProfile.class);

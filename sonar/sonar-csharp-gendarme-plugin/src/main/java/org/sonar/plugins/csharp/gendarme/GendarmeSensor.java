@@ -29,7 +29,6 @@ import java.util.Collections;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
@@ -53,8 +52,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the Gendarme reporting into sonar.
  */
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
+public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 
@@ -83,11 +81,13 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     this.configuration = configuration;
   }
 
+  protected abstract String getRepositoryKey();
+  
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(GendarmeConstants.REPOSITORY_KEY).isEmpty()) {
+    if (rulesProfile.getActiveRulesByRepository(getRepositoryKey()).isEmpty()) {
       LOG.warn("/!\\ SKIP Gendarme analysis: no rule defined for Gendarme in the \"{}\" profil.", rulesProfile.getName());
       return;
     }
@@ -130,7 +130,7 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(rulesProfile, writer);
+      profileExporter.exportProfile(getRepositoryKey(), rulesProfile, writer);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the Gendarme configuration file by exporting the Sonar rules.", e);

@@ -36,9 +36,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Maps;
@@ -53,8 +57,15 @@ public class GendarmeResultParserTest {
   @Before
   public void init() {
     violationMaker = mock(GendarmeViolationMaker.class);
+    
+    MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
+    Project project = mock(Project.class);
+    VisualStudioSolution solution = mock(VisualStudioSolution.class);
+    when(env.getCurrentSolution()).thenReturn(solution);
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(solution.getProjectFromSonarProject(project)).thenReturn(vsProject);
 
-    parser = new GendarmeResultParser(newRuleFinder(), violationMaker);
+    parser = new GendarmeResultParser(env, project, newRuleFinder(), violationMaker);
     parser.setEncoding(Charset.forName("UTF-8"));
     resultFile = TestUtils.getResource("/Results/gendarme-report.xml");
   }

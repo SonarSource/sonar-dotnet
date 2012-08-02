@@ -34,10 +34,14 @@ import org.codehaus.staxmate.in.SMEvent;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.BatchExtension;
+import org.sonar.api.resources.Project;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.SonarException;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.core.AbstractStaxParser;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 
@@ -48,7 +52,9 @@ public class GendarmeResultParser extends AbstractStaxParser implements BatchExt
 
   private RuleFinder ruleFinder;
   private GendarmeViolationMaker gendarmeViolationMaker;
-
+  private String repositoryKey;
+  private VisualStudioProject vsProject;
+  private VisualStudioSolution vsSolution;
   /**
    * Constructs a @link{GendarmeResultParser}.
    * 
@@ -57,8 +63,17 @@ public class GendarmeResultParser extends AbstractStaxParser implements BatchExt
    * @param rulesManager
    * @param profile
    */
-  public GendarmeResultParser(RuleFinder ruleFinder, GendarmeViolationMaker gendarmeViolationMaker) {
+  public GendarmeResultParser(MicrosoftWindowsEnvironment env, Project project, RuleFinder ruleFinder, GendarmeViolationMaker gendarmeViolationMaker) {
     super();
+    
+    vsSolution = env.getCurrentSolution();
+    if (vsSolution == null) {
+      // not a C# project
+      return;
+    }
+
+    this.vsProject = vsSolution.getProjectFromSonarProject(project);
+    
     this.ruleFinder = ruleFinder;
     this.gendarmeViolationMaker = gendarmeViolationMaker;
   }
@@ -70,6 +85,10 @@ public class GendarmeResultParser extends AbstractStaxParser implements BatchExt
    *          the file to parse
    */
   public void parse(File file) {
+    this.repositoryKey = 
+      vsProject.isTest() ? GendarmeConstants.TEST_REPOSITORY_KEY : GendarmeConstants.REPOSITORY_KEY;
+    
+    
     SMInputFactory inputFactory = initStax();
     FileInputStream fileInputStream = null;
     try {
@@ -88,7 +107,7 @@ public class GendarmeResultParser extends AbstractStaxParser implements BatchExt
   }
 
   private void parseRuleBlocs(SMInputCursor cursor) throws XMLStreamException {
-    RuleQuery ruleQuery = RuleQuery.create().withRepositoryKey(GendarmeConstants.REPOSITORY_KEY);
+    RuleQuery ruleQuery = RuleQuery.create().withRepositoryKey(repositoryKey);
     // Cursor is on <rule>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {

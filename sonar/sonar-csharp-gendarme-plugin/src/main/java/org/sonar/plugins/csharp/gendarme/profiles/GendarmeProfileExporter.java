@@ -23,7 +23,6 @@ package org.sonar.plugins.csharp.gendarme.profiles;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,8 +54,12 @@ public class GendarmeProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
+    exportProfile(GendarmeConstants.REPOSITORY_KEY, profile, writer);
+  }
+  
+  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
-      printRules(writer, profile.getActiveRulesByRepository(GendarmeConstants.REPOSITORY_KEY));
+      printRules(writer, profile.getActiveRulesByRepository(repositoryKey));
     } catch (IOException e) {
       throw new SonarException("Error while generating the Gendarme profile to export: " + profile, e);
     }
