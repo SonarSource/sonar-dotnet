@@ -61,10 +61,14 @@ public class FxCopProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
+    exportProfile(FxCopConstants.REPOSITORY_KEY, profile, writer);
+  }
+  
+  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
       printIntoWriter(writer, FXCOP_PROJECT_FILE_HEADER);
 
-      printRules(profile, writer);
+      printRules(repositoryKey, profile, writer);
 
       printIntoWriter(writer, FXCOP_PROJECT_FILE_FOOTER);
     } catch (IOException e) {
@@ -72,8 +76,8 @@ public class FxCopProfileExporter extends ProfileExporter {
     }
   }
 
-  private void printRules(RulesProfile profile, Writer writer) throws IOException {
-    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(FxCopConstants.REPOSITORY_KEY);
+  private void printRules(String repositoryKey, RulesProfile profile, Writer writer) throws IOException {
+    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(repositoryKey);
     List<FxCopRule> rules = transformIntoFxCopRules(activeRules);
 
     // We group the rules by RuleFile names

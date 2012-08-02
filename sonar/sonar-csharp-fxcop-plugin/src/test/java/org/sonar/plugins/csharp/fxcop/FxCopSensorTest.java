@@ -109,7 +109,7 @@ public class FxCopSensorTest {
   }
   
   private void initializeSensor() {
-    sensor = new FxCopSensor(
+    sensor = new RegularFxCopSensor(
         fileSystem, 
         rulesProfile, 
         profileExporter, 
@@ -125,7 +125,7 @@ public class FxCopSensorTest {
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
-    FxCopSensor sensor = new FxCopSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
+    FxCopSensor sensor = new RegularFxCopSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
@@ -279,7 +279,7 @@ public class FxCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    FxCopSensor sensor = new FxCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
+    FxCopSensor sensor = new RegularFxCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     sensor.generateConfigurationFile();

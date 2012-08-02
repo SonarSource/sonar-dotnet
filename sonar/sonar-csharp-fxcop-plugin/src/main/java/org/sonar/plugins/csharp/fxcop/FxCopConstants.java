@@ -29,7 +29,9 @@ public final class FxCopConstants {
   }
 
   public static final String REPOSITORY_KEY = "fxcop";
+  public static final String TEST_REPOSITORY_KEY = "fxcop-test";
   public static final String REPOSITORY_NAME = "FxCop";
+  public static final String TEST_REPOSITORY_NAME = "FxCop Unit Tests";
 
   public static final String FXCOP_RULES_FILE = "sonar.FxCop";
   public static final String FXCOP_REPORT_XML = "fxcop-report.xml";

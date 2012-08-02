@@ -74,6 +74,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   private RuleFinder ruleFinder;
   private CSharpResourcesBridge resourcesBridge;
   private ResourceHelper resourceHelper;
+  private String repositoryKey;
 
   /**
    * Constructs a @link{FxCopResultParser}.
@@ -92,6 +93,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
       return;
     }
     this.vsProject = vsSolution.getProjectFromSonarProject(project);
+    
     this.project = project;
     this.context = context;
     this.ruleFinder = ruleFinder;
@@ -106,6 +108,10 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
    *          the file to parse
    */
   public void parse(File file) {
+    
+    this.repositoryKey = 
+      vsProject.isTest() ? FxCopConstants.TEST_REPOSITORY_KEY : FxCopConstants.REPOSITORY_KEY;
+    
     SMInputFactory inputFactory = initStax();
     FileInputStream fileInputStream = null;
     try {
@@ -181,7 +187,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
       // Cursor on <Message>
       if (messagesCursor.getCurrEvent() == SMEvent.START_ELEMENT) {
 
-        Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(FxCopConstants.REPOSITORY_KEY)
+        Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(repositoryKey)
             .withKey(messagesCursor.getAttrValue(TYPENAME)));
         if (currentRule != null) {
           // look for all potential issues
@@ -235,7 +241,7 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
   }
 
   private void createViolationFromMessageAtProjectLevel(SMInputCursor messagesCursor) throws XMLStreamException {
-    Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(FxCopConstants.REPOSITORY_KEY)
+    Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(repositoryKey)
         .withKey(messagesCursor.getAttrValue(TYPENAME)));
     if (currentRule != null) {
       // the violation is saved at project level, not on a specific resource

@@ -52,8 +52,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the FXCop reporting into sonar.
  */
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
+public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
@@ -80,12 +79,14 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     this.fxCopResultParser = fxCopResultParser;
 
   }
+  
+  protected abstract String getRepositoryKey();
 
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(FxCopConstants.REPOSITORY_KEY).isEmpty()) {
+    if (rulesProfile.getActiveRulesByRepository(getRepositoryKey()).isEmpty()) {
       LOG.warn("/!\\ SKIP FxCop analysis: no rule defined for FxCop in the \"{}\" profil.", rulesProfile.getName());
       return;
     }
@@ -126,7 +127,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(rulesProfile, writer);
+      profileExporter.exportProfile(getRepositoryKey(), rulesProfile, writer);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the FxCop configuration file by exporting the Sonar rules.", e);
