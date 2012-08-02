@@ -33,7 +33,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;

@@ -52,10 +52,10 @@ public class StyleCopUnitTestsRuleRepository extends RuleRepository {
     rules
         .addAll(xmlRuleParser.parse(StyleCopUnitTestsRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules-unit-tests.xml")));
     
-    /* TODO
-    for (File userExtensionXml : fileSystem.getExtensions(StyleCopConstants.REPOSITORY_KEY, "xml")) {
+    
+    for (File userExtensionXml : fileSystem.getExtensions(StyleCopConstants.TEST_REPOSITORY_KEY, "xml")) {
       rules.addAll(xmlRuleParser.parse(userExtensionXml));
-    }*/
+    }
     return rules;
   }
 }
