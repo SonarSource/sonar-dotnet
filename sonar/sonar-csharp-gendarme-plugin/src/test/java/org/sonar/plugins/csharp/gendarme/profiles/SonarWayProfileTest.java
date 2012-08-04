@@ -39,13 +39,13 @@ import org.sonar.api.utils.ValidationMessages;
 public class SonarWayProfileTest {
 
   private ValidationMessages messages;
-  private GendarmeProfileImporter importer;
+  private GendarmeProfileImporter.RegularGendarmeProfileImporter importer;
   private SonarWayProfile sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new GendarmeProfileImporter(newRuleFinder());
+    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
     sonarWayProfile = new SonarWayProfile(importer);
   }
 

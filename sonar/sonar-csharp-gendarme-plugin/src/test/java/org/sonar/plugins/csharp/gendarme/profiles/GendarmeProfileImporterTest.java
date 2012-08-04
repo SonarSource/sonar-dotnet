@@ -52,7 +52,7 @@ public class GendarmeProfileImporterTest {
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new GendarmeProfileImporter(newRuleFinder());
+    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
   }
 
   @Test

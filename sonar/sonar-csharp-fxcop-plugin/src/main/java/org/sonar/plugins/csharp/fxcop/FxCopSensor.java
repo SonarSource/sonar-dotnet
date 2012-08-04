@@ -52,7 +52,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the FXCop reporting into sonar.
  */
-public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
+public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
@@ -61,6 +61,26 @@ public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
   private FxCopProfileExporter profileExporter;
   private FxCopResultParser fxCopResultParser;
 
+  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  public static class RegularFxCopSensor extends FxCopSensor {
+    public RegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.RegularFxCopProfileExporter profileExporter,
+        FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
+    }
+  }
+  
+  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  public static class UnitTestsFxCopSensor extends FxCopSensor {
+    public UnitTestsFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.UnitTestsFxCopProfileExporter profileExporter,
+        FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
+    }
+    @Override
+    protected boolean isTestSensor() {
+      return true;
+    }
+  }
+  
   /**
    * Constructs a {@link FxCopSensor}.
    * 
@@ -70,7 +90,7 @@ public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
    * @param profileExporter
    * @param rulesProfile
    */
-  public FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
+  protected FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
       FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment, configuration, "FxCop", configuration.getString(FxCopConstants.MODE, ""));
     this.fileSystem = fileSystem;
@@ -80,13 +100,11 @@ public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
 
   }
   
-  protected abstract String getRepositoryKey();
-
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(getRepositoryKey()).isEmpty()) {
+    if (rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty()) {
       LOG.warn("/!\\ SKIP FxCop analysis: no rule defined for FxCop in the \"{}\" profil.", rulesProfile.getName());
       return;
     }
@@ -127,7 +145,7 @@ public abstract class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(getRepositoryKey(), rulesProfile, writer);
+      profileExporter.exportProfile(rulesProfile, writer);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the FxCop configuration file by exporting the Sonar rules.", e);

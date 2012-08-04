@@ -81,7 +81,7 @@ public class GendarmeSensorTest {
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private RulesProfile rulesProfile;
   private GendarmeResultParser resultParser;
-  private GendarmeProfileExporter profileExporter;
+  private GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter;
   private GendarmeSensor sensor;
   private Configuration conf;
 
@@ -111,7 +111,7 @@ public class GendarmeSensorTest {
     
     resultParser = mock(GendarmeResultParser.class);
     
-    profileExporter = mock(GendarmeProfileExporter.class);
+    profileExporter = mock(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
     
     conf = new BaseConfiguration();
     
@@ -119,7 +119,7 @@ public class GendarmeSensorTest {
   }
   
   private void initializeSensor() {
-    sensor = new RegularGendarmeSensor(
+    sensor = new GendarmeSensor.RegularGendarmeSensor(
         fileSystem, 
         rulesProfile, 
         profileExporter, 
@@ -133,7 +133,7 @@ public class GendarmeSensorTest {
   public void testExecuteWithoutRule() throws Exception {
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
-    GendarmeSensor sensor = new RegularGendarmeSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
@@ -143,7 +143,7 @@ public class GendarmeSensorTest {
 
   @Test
   public void testLaunchGendarme() throws Exception {
-    GendarmeSensor sensor = new RegularGendarmeSensor(fileSystem, null, null, null, new CSharpConfiguration(new BaseConfiguration()),
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(fileSystem, null, null, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     GendarmeRunner runner = mock(GendarmeRunner.class);
@@ -220,7 +220,7 @@ public class GendarmeSensorTest {
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    GendarmeSensor sensor = new RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
@@ -228,7 +228,7 @@ public class GendarmeSensorTest {
     assertTrue(sensor.shouldExecuteOnProject(project));
 
     conf.addProperty(GendarmeConstants.MODE, AbstractRegularCSharpSensor.MODE_SKIP);
-    sensor = new RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new GendarmeSensor.RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
   
@@ -285,7 +285,7 @@ public class GendarmeSensorTest {
     sonarDir.mkdirs();
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(sonarDir);
-    GendarmeProfileExporter profileExporter = mock(GendarmeProfileExporter.class);
+    GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter = mock(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
     doAnswer(new Answer<Object>() {
 
       public Object answer(InvocationOnMock invocation) throws IOException {
@@ -294,7 +294,7 @@ public class GendarmeSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    GendarmeSensor sensor = new RegularGendarmeSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     sensor.generateConfigurationFile();

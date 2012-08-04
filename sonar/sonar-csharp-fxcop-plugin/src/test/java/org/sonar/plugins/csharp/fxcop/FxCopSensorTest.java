@@ -58,6 +58,7 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
+import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter.RegularFxCopProfileExporter;
 import org.sonar.test.TestUtils;
 
 import com.google.common.collect.Lists;
@@ -73,7 +74,7 @@ public class FxCopSensorTest {
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private RulesProfile rulesProfile;
   private FxCopResultParser resultParser;
-  private FxCopProfileExporter profileExporter;
+  private FxCopProfileExporter.RegularFxCopProfileExporter profileExporter;
   private FxCopSensor sensor;
   private Configuration conf;
 
@@ -101,7 +102,7 @@ public class FxCopSensorTest {
     
     resultParser = mock(FxCopResultParser.class);
     
-    profileExporter = mock(FxCopProfileExporter.class);
+    profileExporter = mock(FxCopProfileExporter.RegularFxCopProfileExporter.class);
     
     conf = new BaseConfiguration();
     
@@ -109,7 +110,7 @@ public class FxCopSensorTest {
   }
   
   private void initializeSensor() {
-    sensor = new RegularFxCopSensor(
+    sensor = new FxCopSensor.RegularFxCopSensor(
         fileSystem, 
         rulesProfile, 
         profileExporter, 
@@ -125,7 +126,7 @@ public class FxCopSensorTest {
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
-    FxCopSensor sensor = new RegularFxCopSensor(null, rulesProfile, null, null, new CSharpConfiguration(new BaseConfiguration()),
+    FxCopSensor sensor = new FxCopSensor.RegularFxCopSensor(null, rulesProfile, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
@@ -270,7 +271,7 @@ public class FxCopSensorTest {
     sonarDir.mkdirs();
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(sonarDir);
-    FxCopProfileExporter profileExporter = mock(FxCopProfileExporter.class);
+    FxCopProfileExporter.RegularFxCopProfileExporter profileExporter = mock(FxCopProfileExporter.RegularFxCopProfileExporter.class);
     doAnswer(new Answer<Object>() {
 
       public Object answer(InvocationOnMock invocation) throws IOException {
@@ -279,7 +280,7 @@ public class FxCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    FxCopSensor sensor = new RegularFxCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
+    FxCopSensor sensor = new FxCopSensor.RegularFxCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(new BaseConfiguration()),
         microsoftWindowsEnvironment);
 
     sensor.generateConfigurationFile();

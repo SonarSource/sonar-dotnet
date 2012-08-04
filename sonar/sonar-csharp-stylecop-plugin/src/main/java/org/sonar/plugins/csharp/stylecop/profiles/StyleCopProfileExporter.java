@@ -45,9 +45,21 @@ import com.google.common.collect.Maps;
  * Class that allows to export a Sonar profile into a StyleCop rule definition file.
  */
 public class StyleCopProfileExporter extends ProfileExporter {
+  
+  public static class RegularStyleCopProfileExporter extends StyleCopProfileExporter {
+    public RegularStyleCopProfileExporter() {
+      super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
+    }
+  }
+  
+  public static class UnitTestsStyleCopProfileExporter extends StyleCopProfileExporter {
+    public UnitTestsStyleCopProfileExporter() {
+      super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME);
+    }
+  }
 
-  public StyleCopProfileExporter() {
-    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
+  protected StyleCopProfileExporter(String repositoryKey, String repositoryName) {
+    super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }
@@ -57,14 +69,10 @@ public class StyleCopProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
-    exportProfile(StyleCopConstants.REPOSITORY_KEY, profile, writer);
-  }
-  
-  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
       printStartOfFile(writer);
 
-      printRules(repositoryKey, profile, writer);
+      printRules(getKey(), profile, writer);
 
       printEndOfFile(writer);
     } catch (IOException e) {

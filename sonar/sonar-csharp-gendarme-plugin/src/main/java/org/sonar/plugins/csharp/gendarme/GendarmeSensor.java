@@ -29,6 +29,7 @@ import java.util.Collections;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
@@ -52,7 +53,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the Gendarme reporting into sonar.
  */
-public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
+public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 
@@ -61,6 +62,26 @@ public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
   private GendarmeProfileExporter profileExporter;
   private GendarmeResultParser gendarmeResultParser;
   private CSharpConfiguration configuration;
+  
+  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  public static class RegularGendarmeSensor extends GendarmeSensor {
+    public RegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter,
+        GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
+    }
+  }
+  
+  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  public static class UnitTestsGendarmeSensor extends GendarmeSensor {
+    public UnitTestsGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.UnitTestsGendarmeProfileExporter profileExporter,
+        GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
+    }
+    @Override
+    protected boolean isTestSensor() {
+      return true;
+    }
+  }
 
   /**
    * Constructs a {@link GendarmeSensor}.
@@ -71,7 +92,7 @@ public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
    * @param profileExporter
    * @param rulesProfile
    */
-  public GendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter profileExporter,
+  protected GendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter profileExporter,
       GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(microsoftWindowsEnvironment, configuration, "Gendarme", configuration.getString(GendarmeConstants.MODE, ""));
     this.fileSystem = fileSystem;
@@ -80,14 +101,12 @@ public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     this.gendarmeResultParser = gendarmeResultParser;
     this.configuration = configuration;
   }
-
-  protected abstract String getRepositoryKey();
   
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(getRepositoryKey()).isEmpty()) {
+    if (rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty()) {
       LOG.warn("/!\\ SKIP Gendarme analysis: no rule defined for Gendarme in the \"{}\" profil.", rulesProfile.getName());
       return;
     }
@@ -130,7 +149,7 @@ public abstract class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(getRepositoryKey(), rulesProfile, writer);
+      profileExporter.exportProfile(rulesProfile, writer);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the Gendarme configuration file by exporting the Sonar rules.", e);

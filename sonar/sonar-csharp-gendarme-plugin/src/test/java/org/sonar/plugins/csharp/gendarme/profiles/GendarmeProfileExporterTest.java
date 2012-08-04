@@ -57,7 +57,7 @@ public class GendarmeProfileExporterTest {
     activeRule.setParameter("SuccessThreshold", "13");
 
     StringWriter writer = new StringWriter();
-    new GendarmeProfileExporter().exportProfile(profile, writer);
+    new GendarmeProfileExporter.RegularGendarmeProfileExporter().exportProfile(profile, writer);
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.Gendarme.exported.xml"), writer.toString());
   }
 

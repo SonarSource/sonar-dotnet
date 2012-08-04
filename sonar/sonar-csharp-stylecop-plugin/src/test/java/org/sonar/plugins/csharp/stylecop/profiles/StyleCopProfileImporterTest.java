@@ -51,7 +51,7 @@ public class StyleCopProfileImporterTest {
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new StyleCopProfileImporter(newRuleFinder());
+    importer = new StyleCopProfileImporter.RegularStyleCopProfileImporter(newRuleFinder());
   }
 
   @Test

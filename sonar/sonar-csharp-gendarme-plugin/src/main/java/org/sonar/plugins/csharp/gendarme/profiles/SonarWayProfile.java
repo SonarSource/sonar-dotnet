@@ -31,7 +31,7 @@ public final class SonarWayProfile extends ProfileDefinition {
 
   private GendarmeProfileImporter profileImporter;
 
-  public SonarWayProfile(GendarmeProfileImporter profileImporter) {
+  public SonarWayProfile(GendarmeProfileImporter.RegularGendarmeProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

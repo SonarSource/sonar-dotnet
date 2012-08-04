@@ -51,7 +51,7 @@ public class FxCopProfileImporterTest {
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new FxCopProfileImporter(newRuleFinder());
+    importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
   }
 
   @Test

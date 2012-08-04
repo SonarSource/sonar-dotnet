@@ -43,8 +43,20 @@ import com.google.common.collect.Maps;
  */
 public class GendarmeProfileExporter extends ProfileExporter {
 
-  public GendarmeProfileExporter() {
-    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
+  public static class RegularGendarmeProfileExporter extends GendarmeProfileExporter {
+    public RegularGendarmeProfileExporter() {
+      super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
+    }
+  }
+  
+  public static class UnitTestsGendarmeProfileExporter extends GendarmeProfileExporter {
+    public UnitTestsGendarmeProfileExporter() {
+      super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME);
+    }
+  }
+  
+  protected GendarmeProfileExporter(String repositoryKey, String repositoryName) {
+    super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }
@@ -54,12 +66,8 @@ public class GendarmeProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
-    exportProfile(GendarmeConstants.REPOSITORY_KEY, profile, writer);
-  }
-  
-  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
-      printRules(writer, profile.getActiveRulesByRepository(repositoryKey));
+      printRules(writer, profile.getActiveRulesByRepository(getKey()));
     } catch (IOException e) {
       throw new SonarException("Error while generating the Gendarme profile to export: " + profile, e);
     }

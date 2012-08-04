@@ -44,7 +44,7 @@ public class FxCopProfileExporterTest {
         .setConfigKey("AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll"), null);
 
     StringWriter writer = new StringWriter();
-    new FxCopProfileExporter().exportProfile(profile, writer);
+    new FxCopProfileExporter.RegularFxCopProfileExporter().exportProfile(profile, writer);
 
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.FxCop.exported.xml"), writer.toString());
   }

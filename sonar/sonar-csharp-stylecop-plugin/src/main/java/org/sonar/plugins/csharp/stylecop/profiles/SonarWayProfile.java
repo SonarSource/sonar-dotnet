@@ -31,7 +31,7 @@ public final class SonarWayProfile extends ProfileDefinition {
 
   private StyleCopProfileImporter profileImporter;
 
-  public SonarWayProfile(StyleCopProfileImporter profileImporter) {
+  public SonarWayProfile(StyleCopProfileImporter.RegularStyleCopProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

@@ -44,9 +44,21 @@ import org.sonar.plugins.csharp.stylecop.profiles.utils.StyleCopRuleParser;
 public class StyleCopProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
+  
+  public static class RegularStyleCopProfileImporter extends StyleCopProfileImporter {
+    public RegularStyleCopProfileImporter(RuleFinder ruleFinder) {
+      super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME, ruleFinder);
+    }
+  }
+  
+  public static class UnitTestsStyleCopProfileImporter extends StyleCopProfileImporter {
+    public UnitTestsStyleCopProfileImporter(RuleFinder ruleFinder) {
+      super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME, ruleFinder);
+    }
+  }
 
-  public StyleCopProfileImporter(RuleFinder ruleFinder) {
-    super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
+  protected StyleCopProfileImporter(String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
+    super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
   }
@@ -65,7 +77,7 @@ public class StyleCopProfileImporter extends ProfileImporter {
       for (StyleCopRule styleCopRule : styleCopConfig) {
         if (styleCopRule.isEnabled()) {
           String ruleName = styleCopRule.getName();
-          Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(StyleCopConstants.REPOSITORY_KEY).withKey(ruleName));
+          Rule rule = ruleFinder.find(RuleQuery.create().withRepositoryKey(getKey()).withKey(ruleName));
 
           if (rule != null) {
             String rawPriority = styleCopRule.getPriority();

@@ -55,14 +55,16 @@ public class StyleCopPlugin extends SonarPlugin {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     
     //list.add(StyleCopSensor.class);
-    list.add(RegularStyleCopSensor.class);
-    list.add(UnitTestsStyleCopSensor.class);
+    list.add(StyleCopSensor.RegularStyleCopSensor.class);
+    list.add(StyleCopSensor.UnitTestsStyleCopSensor.class);
 
     // Rules and profiles
     list.add(StyleCopRuleRepository.class);
     list.add(StyleCopUnitTestsRuleRepository.class);
-    list.add(StyleCopProfileImporter.class);
-    list.add(StyleCopProfileExporter.class);
+    list.add(StyleCopProfileImporter.RegularStyleCopProfileImporter.class);
+    list.add(StyleCopProfileImporter.UnitTestsStyleCopProfileImporter.class);
+    list.add(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
+    list.add(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class);
     list.add(SonarWayProfile.class);
 
     // Running StyleCop

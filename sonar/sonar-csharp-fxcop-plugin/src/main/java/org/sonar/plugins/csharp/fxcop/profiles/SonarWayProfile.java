@@ -31,7 +31,7 @@ public final class SonarWayProfile extends ProfileDefinition {
 
   private FxCopProfileImporter profileImporter;
 
-  public SonarWayProfile(FxCopProfileImporter profileImporter) {
+  public SonarWayProfile(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

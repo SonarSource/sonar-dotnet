@@ -44,7 +44,7 @@ public class StyleCopProfileExporterTest {
             .setConfigKey("StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly").setSeverity(RulePriority.MINOR), null);
 
     StringWriter writer = new StringWriter();
-    new StyleCopProfileExporter().exportProfile(profile, writer);
+    new StyleCopProfileExporter.RegularStyleCopProfileExporter().exportProfile(profile, writer);
 
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.StyleCop.exported.xml"), writer.toString());
   }

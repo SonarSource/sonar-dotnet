@@ -50,8 +50,21 @@ public class FxCopProfileExporter extends ProfileExporter {
   private static final String FXCOP_PROJECT_FILE_HEADER = "fxcop-project-file-header.txt";
   private static final String FXCOP_PROJECT_FILE_FOOTER = "fxcop-project-file-footer.txt";
 
-  public FxCopProfileExporter() {
-    super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
+  public static class RegularFxCopProfileExporter extends FxCopProfileExporter {
+    public RegularFxCopProfileExporter() {
+      super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
+    }
+  }
+  
+  public static class UnitTestsFxCopProfileExporter extends FxCopProfileExporter {
+    public UnitTestsFxCopProfileExporter() {
+      super(FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME);
+    }
+  }
+  
+  
+  protected FxCopProfileExporter(String repositoryKey, String repositoryName) {
+    super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     setMimeType("application/xml");
   }
@@ -61,14 +74,10 @@ public class FxCopProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
-    exportProfile(FxCopConstants.REPOSITORY_KEY, profile, writer);
-  }
-  
-  public void exportProfile(String repositoryKey, RulesProfile profile, Writer writer) {
     try {
       printIntoWriter(writer, FXCOP_PROJECT_FILE_HEADER);
 
-      printRules(repositoryKey, profile, writer);
+      printRules(profile, writer);
 
       printIntoWriter(writer, FXCOP_PROJECT_FILE_FOOTER);
     } catch (IOException e) {
@@ -76,8 +85,8 @@ public class FxCopProfileExporter extends ProfileExporter {
     }
   }
 
-  private void printRules(String repositoryKey, RulesProfile profile, Writer writer) throws IOException {
-    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(repositoryKey);
+  private void printRules(RulesProfile profile, Writer writer) throws IOException {
+    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(getKey());
     List<FxCopRule> rules = transformIntoFxCopRules(activeRules);
 
     // We group the rules by RuleFile names

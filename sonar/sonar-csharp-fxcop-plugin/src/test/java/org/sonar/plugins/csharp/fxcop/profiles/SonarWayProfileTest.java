@@ -39,13 +39,13 @@ import org.sonar.api.utils.ValidationMessages;
 public class SonarWayProfileTest {
 
   private ValidationMessages messages;
-  private FxCopProfileImporter importer;
+  private FxCopProfileImporter.RegularFxCopProfileImporter importer;
   private SonarWayProfile sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new FxCopProfileImporter(newRuleFinder());
+    importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
     sonarWayProfile = new SonarWayProfile(importer);
   }
 

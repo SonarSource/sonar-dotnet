@@ -54,12 +54,24 @@ public class GendarmeProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
   private RuleQuery ruleQuery;
+  
+  public static class RegularGendarmeProfileImporter extends GendarmeProfileImporter {
+    public RegularGendarmeProfileImporter(RuleFinder ruleFinder) {
+      super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME, ruleFinder);
+    }
+  }
+  
+  public static class UnitTestsGendarmeProfileImporter extends GendarmeProfileImporter {
+    public UnitTestsGendarmeProfileImporter(RuleFinder ruleFinder) {
+      super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME, ruleFinder);
+    }
+  }
 
-  public GendarmeProfileImporter(RuleFinder ruleFinder) {
-    super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
+  protected GendarmeProfileImporter(String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
+    super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
     this.ruleFinder = ruleFinder;
-    this.ruleQuery = RuleQuery.create().withRepositoryKey(GendarmeConstants.REPOSITORY_KEY);
+    this.ruleQuery = RuleQuery.create().withRepositoryKey(repositoryKey);
   }
 
   /**
