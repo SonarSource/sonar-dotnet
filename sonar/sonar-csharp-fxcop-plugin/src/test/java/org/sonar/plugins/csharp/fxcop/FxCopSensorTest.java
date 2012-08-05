@@ -130,8 +130,7 @@ public class FxCopSensorTest {
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
-    sensor.analyse(project, null);
-    verify(project, never()).getName();
+    assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test

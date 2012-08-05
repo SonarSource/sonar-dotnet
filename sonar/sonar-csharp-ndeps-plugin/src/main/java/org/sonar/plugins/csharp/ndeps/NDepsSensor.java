@@ -29,37 +29,53 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.ndeps.NDepsCommandBuilder;
 import org.sonar.dotnet.tools.ndeps.NDepsException;
 import org.sonar.dotnet.tools.ndeps.NDepsRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class NDepsSensor extends AbstractCSharpSensor {
+public class NDepsSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(NDepsSensor.class);
-
-  private CSharpConfiguration configuration;
 
   private ProjectFileSystem fileSystem;
 
   private NDepsResultParser nDepsResultParser;
+  
+  private boolean testSensor;
 
   public NDepsSensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration,
       NDepsResultParser nDepsResultParser) {
-    super(microsoftWindowsEnvironment, "NDeps", configuration.getString(NDepsConstants.MODE, ""));
-    this.configuration = configuration;
+    super(configuration, microsoftWindowsEnvironment, "NDeps", configuration.getString(NDepsConstants.MODE, ""));
     this.nDepsResultParser = nDepsResultParser;
     this.fileSystem = fileSystem;
+  }
+  
+  @Override
+  protected boolean isCilSensor() {
+    return true;
+  }
+  
+  @Override
+  protected boolean isTestSensor() {
+    return testSensor;
   }
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return super.shouldExecuteOnProject(project) && !getVSProject(project).isWebProject();
+    VisualStudioProject vsProject = getVSProject(project);
+    if (vsProject==null) {
+      // we must be at solution level
+      return false;
+    }
+    testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects 
+    return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
 
   public void analyse(Project project, SensorContext context) {

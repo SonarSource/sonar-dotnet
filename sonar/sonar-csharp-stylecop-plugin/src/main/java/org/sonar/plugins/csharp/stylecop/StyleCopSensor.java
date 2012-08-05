@@ -40,13 +40,13 @@ import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 
 /**
  * Collects the StyleCop reporting into sonar.
  */
-public class StyleCopSensor extends AbstractRegularCSharpSensor {
+public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
 
@@ -81,7 +81,7 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
 
   protected StyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
       StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE, ""));
+    super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
@@ -93,11 +93,7 @@ public class StyleCopSensor extends AbstractRegularCSharpSensor {
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty()) {
-      LOG.warn("/!\\ SKIP StyleCop analysis: no rule defined for StyleCop in the \"{}\" profil.", rulesProfile.getName());
-      return;
-    }
-
+   
     styleCopResultParser.setEncoding(fileSystem.getSourceCharset());
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();

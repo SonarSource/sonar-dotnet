@@ -137,8 +137,7 @@ public class GendarmeSensorTest {
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
-    sensor.analyse(project, null);
-    verify(project, never()).getName();
+    assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
@@ -220,7 +219,7 @@ public class GendarmeSensorTest {
   @Test
   public void testShouldExecuteOnProject() throws Exception {
     Configuration conf = new BaseConfiguration();
-    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
@@ -228,7 +227,7 @@ public class GendarmeSensorTest {
     assertTrue(sensor.shouldExecuteOnProject(project));
 
     conf.addProperty(GendarmeConstants.MODE, AbstractRegularCSharpSensor.MODE_SKIP);
-    sensor = new GendarmeSensor.RegularGendarmeSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
   

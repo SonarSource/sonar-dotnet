@@ -38,7 +38,7 @@ import org.sonar.api.utils.ParsingUtils;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractTestCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
@@ -52,11 +52,10 @@ import com.google.common.collect.Maps;
  * Gets the execution test report from Gallio and pushes data from it into sonar.
  */
 @DependsUpon(GallioConstants.BARRIER_GALLIO_EXECUTED)
-public class TestReportSensor extends AbstractTestCSharpSensor {
+public class TestReportSensor extends AbstractRegularCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
 
-  private CSharpConfiguration configuration;
   private GallioResultParser parser;
 
   /**
@@ -68,11 +67,15 @@ public class TestReportSensor extends AbstractTestCSharpSensor {
    */
   public TestReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
       GallioResultParser parser) {
-    super(microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE, ""));
-    this.configuration = configuration;
+    super(configuration, microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE, ""));
     this.parser = parser;
   }
-
+  
+  @Override
+  protected boolean isTestSensor() {
+    return true;
+  }
+  
   @Override
   public void analyse(Project project, SensorContext context) {
     Collection<File> testReportFiles = findTestReportsToAnalyse();

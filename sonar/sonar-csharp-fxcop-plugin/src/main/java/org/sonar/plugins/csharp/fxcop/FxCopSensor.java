@@ -44,7 +44,7 @@ import org.sonar.dotnet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
 import com.google.common.base.Joiner;
@@ -52,7 +52,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the FXCop reporting into sonar.
  */
-public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
+public class FxCopSensor extends AbstractRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
@@ -81,6 +81,11 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
     }
   }
   
+  @Override
+  protected boolean isCilSensor() {
+    return true;
+  }
+  
   /**
    * Constructs a {@link FxCopSensor}.
    * 
@@ -92,7 +97,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
    */
   protected FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
       FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment, configuration, "FxCop", configuration.getString(FxCopConstants.MODE, ""));
+    super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "FxCop", configuration.getString(FxCopConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
@@ -104,11 +109,7 @@ public class FxCopSensor extends AbstractCilRuleBasedCSharpSensor {
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty()) {
-      LOG.warn("/!\\ SKIP FxCop analysis: no rule defined for FxCop in the \"{}\" profil.", rulesProfile.getName());
-      return;
-    }
-
+    
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
 
     final Collection<File> reportFiles;

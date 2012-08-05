@@ -44,7 +44,7 @@ import org.sonar.dotnet.tools.gendarme.GendarmeRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractCilRuleBasedCSharpSensor;
+import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 
@@ -53,7 +53,7 @@ import com.google.common.base.Joiner;
 /**
  * Collects the Gendarme reporting into sonar.
  */
-public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
+public class GendarmeSensor extends AbstractRuleBasedCSharpSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 
@@ -61,7 +61,6 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
   private RulesProfile rulesProfile;
   private GendarmeProfileExporter profileExporter;
   private GendarmeResultParser gendarmeResultParser;
-  private CSharpConfiguration configuration;
   
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class RegularGendarmeSensor extends GendarmeSensor {
@@ -82,6 +81,11 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
       return true;
     }
   }
+  
+  @Override
+  protected boolean isCilSensor() {
+    return true;
+  }
 
   /**
    * Constructs a {@link GendarmeSensor}.
@@ -94,23 +98,18 @@ public class GendarmeSensor extends AbstractCilRuleBasedCSharpSensor {
    */
   protected GendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter profileExporter,
       GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(microsoftWindowsEnvironment, configuration, "Gendarme", configuration.getString(GendarmeConstants.MODE, ""));
+    super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "Gendarme", configuration.getString(GendarmeConstants.MODE, ""));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.gendarmeResultParser = gendarmeResultParser;
-    this.configuration = configuration;
   }
   
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    if (rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty()) {
-      LOG.warn("/!\\ SKIP Gendarme analysis: no rule defined for Gendarme in the \"{}\" profil.", rulesProfile.getName());
-      return;
-    }
-
+    
     gendarmeResultParser.setEncoding(fileSystem.getSourceCharset());
     final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GendarmeConstants.GENDARME_REPORT_XML;

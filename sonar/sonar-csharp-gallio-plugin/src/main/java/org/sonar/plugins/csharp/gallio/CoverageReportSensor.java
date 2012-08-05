@@ -62,7 +62,6 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
       CoreMetrics.IT_COVERAGE_LINE_HITS_DATA);
 
   private CoverageResultParser parser;
-  private CSharpConfiguration configuration;
 
   /**
    * Constructs a {@link CoverageReportSensor}.
@@ -73,8 +72,7 @@ public class CoverageReportSensor extends AbstractRegularCSharpSensor {
    */
   public CoverageReportSensor(CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
       CoverageResultParser parser) {
-    super(microsoftWindowsEnvironment, "Coverage", configuration.getString(GallioConstants.MODE, ""));
-    this.configuration = configuration;
+    super(configuration, microsoftWindowsEnvironment, "Coverage", configuration.getString(GallioConstants.MODE, ""));
     this.parser = parser;
   }
 

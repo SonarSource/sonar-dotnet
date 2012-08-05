@@ -21,13 +21,10 @@ package org.sonar.plugins.csharp.ndeps;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,6 +62,7 @@ public class NDepsSensorTest {
 
     vsProject1 = mock(VisualStudioProject.class);
     when(vsProject1.getName()).thenReturn("Project #1");
+    when(vsProject1.getGeneratedAssemblies(anyString())).thenReturn(Collections.singleton(new File("toto.dll")));
     vsProject2 = mock(VisualStudioProject.class);
     when(vsProject2.getName()).thenReturn("Project Test");
     when(vsProject2.isTest()).thenReturn(true);
@@ -99,6 +97,15 @@ public class NDepsSensorTest {
     project.setLanguageKey("cs");
     project.setParent(project);
     project.setName("Web project");
+    assertThat(nDepsSensor.shouldExecuteOnProject(project), is(false));
+  }
+  
+  @Test
+  public void shouldNotExecuteOnRootProject() throws Exception {
+    Project project = new Project("");
+    project.setLanguageKey("cs");
+    project.setParent(project);
+    project.setName("Root project");
     assertThat(nDepsSensor.shouldExecuteOnProject(project), is(false));
   }
 

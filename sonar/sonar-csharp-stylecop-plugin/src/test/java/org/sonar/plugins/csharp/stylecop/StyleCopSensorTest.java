@@ -23,6 +23,7 @@ package org.sonar.plugins.csharp.stylecop;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,15 +31,18 @@ import static org.mockito.Mockito.when;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
@@ -49,20 +53,40 @@ import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import com.google.common.collect.Lists;
 
 public class StyleCopSensorTest {
+  
+  private VisualStudioSolution solution;
+  private VisualStudioProject vsProject;
+  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  private RulesProfile rulesProfile;
+  private Configuration conf;
+  private StyleCopSensor sensor;
+  
+  @Before
+  public void init() {
+    vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Project #1");
+    solution = mock(VisualStudioSolution.class);
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
+    microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
+    microsoftWindowsEnvironment.setCurrentSolution(solution);
+    
+    rulesProfile = mock(RulesProfile.class);
+    when(rulesProfile.getActiveRulesByRepository(anyString()))
+      .thenReturn(Collections.singletonList(new ActiveRule()));
+    
+    conf = new BaseConfiguration();
+  }
+  
+  private void initializeSensor() {
+    sensor = new StyleCopSensor.RegularStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+  }
+  private void initializeTestSensor() {
+    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+  }
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getName()).thenReturn("Project #1");
-    VisualStudioSolution solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
-
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
-    microsoftWindowsEnvironment.setCurrentSolution(solution);
-
-    Configuration conf = new BaseConfiguration();
-    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
+    initializeSensor();
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
@@ -71,18 +95,9 @@ public class StyleCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnSkippedProject() throws Exception {
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getName()).thenReturn("Project #1");
-    VisualStudioSolution solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
-
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
-    microsoftWindowsEnvironment.setCurrentSolution(solution);
-
-    Configuration conf = new BaseConfiguration();
     conf.addProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
-    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
+    initializeSensor();
+    
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
@@ -92,18 +107,10 @@ public class StyleCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProject() throws Exception {
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getName()).thenReturn("Project #1");
+    
     when(vsProject.isTest()).thenReturn(true);
-    VisualStudioSolution solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
-
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
-    microsoftWindowsEnvironment.setCurrentSolution(solution);
-
-    Configuration conf = new BaseConfiguration();
-    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
+    initializeSensor();
+    
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
@@ -111,18 +118,9 @@ public class StyleCopSensorTest {
   }
 
   @Test
-  public void testSensorShouldNotExecuteOnRegularProject() throws Exception {
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getName()).thenReturn("Project #1");
-    VisualStudioSolution solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
-
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
-    microsoftWindowsEnvironment.setCurrentSolution(solution);
-
-    Configuration conf = new BaseConfiguration();
-    StyleCopSensor sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, null, null, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
-
+  public void testUnitTestsSensorShouldNotExecuteOnRegularProject() throws Exception {
+    initializeTestSensor();
+    
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");

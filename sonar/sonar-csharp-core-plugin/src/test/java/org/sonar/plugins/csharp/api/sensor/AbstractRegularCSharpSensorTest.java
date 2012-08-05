@@ -24,10 +24,16 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.api.CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
+import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE;
+import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_KEY;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +42,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
 import com.google.common.collect.Lists;
@@ -45,7 +52,27 @@ public class AbstractRegularCSharpSensorTest {
   class FakeSensor extends AbstractRegularCSharpSensor {
 
     public FakeSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(microsoftWindowsEnvironment, "FakeTool", "");
+      super(configurationMock, microsoftWindowsEnvironment, "FakeTool", "");
+    }
+
+    @Override
+    public void analyse(Project project, SensorContext context) {
+    }
+  }
+
+  class FakeCilSensor extends AbstractRegularCSharpSensor {
+
+    public FakeCilSensor() {
+      super(configurationMock, microsoftWindowsEnvironment, "SomeEngine", "");
+    }
+
+    public FakeCilSensor(String executionMode) {
+      super(configurationMock, microsoftWindowsEnvironment, "SomeEngine", executionMode);
+    }
+
+    @Override
+    protected boolean isCilSensor() {
+      return true;
     }
 
     @Override
@@ -54,8 +81,10 @@ public class AbstractRegularCSharpSensorTest {
   }
 
   private AbstractCSharpSensor sensor;
+  private AbstractCSharpSensor cilSensor;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private VisualStudioProject vsProject1;
+  private CSharpConfiguration configurationMock;
 
   @Before
   public void init() {
@@ -69,8 +98,12 @@ public class AbstractRegularCSharpSensorTest {
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
+    
+    configurationMock = mock(CSharpConfiguration.class);
 
     sensor = new FakeSensor(microsoftWindowsEnvironment);
+    cilSensor = new FakeCilSensor();
+    
   }
 
   @Test
@@ -98,5 +131,77 @@ public class AbstractRegularCSharpSensorTest {
 
     assertThat(sensor.fromIOFile(new File("toto/tata/fake.cs"), project).getKey(), is("tata/fake.cs"));
   }
+  
+  @Test
+  public void testShouldCilSensorNotExecuteOnTestProject() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project Test");
+    when(project.getLanguageKey()).thenReturn("cs");
+    assertFalse(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorNotExecuteOnRootProject() {
+    Project project = mock(Project.class);
+    when(project.isRoot()).thenReturn(true);
+    assertFalse(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorNotExecuteOnRootProjectOnReuseMode() {
+    cilSensor = new FakeCilSensor(FakeSensor.MODE_REUSE_REPORT);
+    Project project = mock(Project.class);
+    when(project.isRoot()).thenReturn(true);
+    assertFalse(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorExecuteOnNormalProjectOnReuseMode() {
+    cilSensor = new FakeCilSensor(FakeSensor.MODE_REUSE_REPORT);
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+    assertTrue(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorExecuteOnNormalProject() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+
+    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
+    assertTrue(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorNotExecuteOnNormalProjectWithoutAssemblies() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+
+    assertFalse(cilSensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldCilSensorExecuteOnNormalProjectWithBadPattern() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("cs");
+    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+        BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
+    when(configurationMock.getString(eq(ASSEMBLIES_TO_SCAN_KEY),
+        anyString())).thenReturn("foo/bar/whatever/*.dll");
+
+    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
+    assertTrue(cilSensor.shouldExecuteOnProject(project));
+  }
+
 
 }
