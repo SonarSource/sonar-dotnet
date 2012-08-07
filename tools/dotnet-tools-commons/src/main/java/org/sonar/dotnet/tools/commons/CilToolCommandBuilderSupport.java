@@ -46,6 +46,7 @@ public abstract class CilToolCommandBuilderSupport {
 
   protected File executable;
   protected String buildConfigurations = "Debug";
+  protected String buildPlatform;
   protected File reportFile;
 
   protected String[] assembliesToScan = new String[] {};
@@ -75,6 +76,14 @@ public abstract class CilToolCommandBuilderSupport {
   }
 
   /**
+   * Set the platform used for the build. Typical values are "Any CPU", "x86" and "x64"
+   * @param buildPlatform
+   */
+  public void setBuildPlatform(String buildPlatform) {
+    this.buildPlatform = buildPlatform;
+  }
+
+  /**
    * Sets the executable
    * 
    * @param executable
@@ -101,14 +110,14 @@ public abstract class CilToolCommandBuilderSupport {
 
     if (assembliesToScan.length == 0) {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
-      assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations);
+      assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
     } else {
       // Some assemblies have been specified: let's analyze them
       assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
       if (assemblyFiles.isEmpty()) {
         LOG.warn("No assembly found using patterns " + StringUtils.join(assembliesToScan, ','));
         LOG.warn("Fallback to 'csproj' files to find which should be analyzed.");
-        assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations);
+        assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
       }
     }
     return assemblyFiles;
@@ -117,7 +126,7 @@ public abstract class CilToolCommandBuilderSupport {
   protected void validate(Collection<File> assemblyToScanFiles) {
     if (assemblyToScanFiles.isEmpty()) {
       throw new IllegalStateException(
-          "No assembly to scan. Please check your project's FxCop plugin configuration ('sonar.dotnet.assemblies' property).");
+          "No assembly to scan. Please check your project plugin configuration ('sonar.dotnet.assemblies' property).");
     }
   }
 }
