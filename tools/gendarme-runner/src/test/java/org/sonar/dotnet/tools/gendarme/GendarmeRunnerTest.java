@@ -49,9 +49,9 @@ public class GendarmeRunnerTest {
   public void initData() throws Exception {
     vsProject = mock(VisualStudioProject.class);
     solution = mock(VisualStudioSolution.class);
-    when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/runner/FakeAssemblies/Fake1.assembly")));
-    when(vsProject.getArtifactDirectory("Debug")).thenReturn(TestUtils.getResource("/runner/FakeAssemblies"));
+    when(vsProject.getArtifactDirectory("Debug", null)).thenReturn(TestUtils.getResource("/runner/FakeAssemblies"));
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
 
     fakeExecPath = TestUtils.getResource("/runner/FakeProg/gendarme.exe").getAbsolutePath();
@@ -80,7 +80,7 @@ public class GendarmeRunnerTest {
     assertThat(copiedSilverlightAssembly, notNullValue());
     assertTrue(copiedSilverlightAssembly.isFile());
 
-    runner.cleanupFiles("Debug");
+    runner.cleanupFiles("Debug", null);
     assertFalse(copiedSilverlightAssembly.exists());
   }
 

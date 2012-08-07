@@ -124,15 +124,15 @@ public class GendarmeRunner { // NOSONAR : can't mock it otherwise
         throw new GendarmeException(exitCode);
       }
     } finally {
-      cleanupFiles(gendarmeCommandBuilder.getBuildConfigurations());
+      cleanupFiles(gendarmeCommandBuilder.getBuildConfigurations(), gendarmeCommandBuilder.getBuildPlatform());
     }
   }
 
-  protected void cleanupFiles(String buildConfigurations) {
+  protected void cleanupFiles(String buildConfigurations, String buildPlatform) {
     if (vsProject != null && vsProject.isSilverlightProject()) {
       // need to remove the Silverlight mscorlib.dll
       LOG.debug("Delete Silverlight Mscorlib.dll file");
-      FileUtils.deleteQuietly(new File(vsProject.getArtifactDirectory(buildConfigurations), "mscorlib.dll"));
+      FileUtils.deleteQuietly(new File(vsProject.getArtifactDirectory(buildConfigurations, buildPlatform), "mscorlib.dll"));
     }
   }
 

@@ -33,6 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.visualstudio.BuildConfiguration;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
@@ -60,10 +61,10 @@ public class GallioCommandBuilderTest {
     VisualStudioProject vsProject2 = mock(VisualStudioProject.class);
     when(vsProject2.getAssemblyName()).thenReturn("Project2");
     VisualStudioProject vsTestProject1 = mock(VisualStudioProject.class);
-    when(vsTestProject1.getArtifact("Debug")).thenReturn(FAKE_ASSEMBLY_1);
+    when(vsTestProject1.getArtifact("Debug", "Any CPU")).thenReturn(FAKE_ASSEMBLY_1);
     when(vsTestProject1.getDirectory()).thenReturn(WORK_DIR);
     VisualStudioProject vsTestProject2 = mock(VisualStudioProject.class);
-    when(vsTestProject2.getArtifact("Debug")).thenReturn(FAKE_ASSEMBLY_2);
+    when(vsTestProject2.getArtifact("Debug", "Any CPU")).thenReturn(FAKE_ASSEMBLY_2);
     when(vsTestProject2.getDirectory()).thenReturn(WORK_DIR);
     solution = mock(VisualStudioSolution.class);
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, vsProject2));
@@ -258,7 +259,7 @@ public class GallioCommandBuilderTest {
   @Test(expected = GallioException.class)
   public void testToCommandNoTestAssembly() throws Exception {
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Unexisting.assembly"));
+    when(vsProject.getArtifact("Debug", "Any CPU")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Unexisting.assembly"));
     solution = mock(VisualStudioSolution.class);
     when(solution.getUnitTestProjects()).thenReturn(Lists.newArrayList(vsProject));
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);

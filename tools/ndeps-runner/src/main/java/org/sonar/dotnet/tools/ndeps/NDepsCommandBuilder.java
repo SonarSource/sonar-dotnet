@@ -55,10 +55,6 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
     return builder;
   }
 
-  protected String getBuildConfigurations() {
-    return buildConfigurations;
-  }
-
   /**
    * Transforms this command object into a Command object that can be passed to the CommandExecutor.
    * 
@@ -66,7 +62,7 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
    */
   public Command toCommand() throws NDepsException {
     // NDeps should be improved to do like FxCop or Gendarme and to be able to use "sonar.dotnet.assemblies"
-    File assembly = vsProject.getArtifact(getBuildConfigurations());
+    File assembly = vsProject.getArtifact(buildConfigurations, buildPlatform);
     if (assembly == null || !assembly.exists()) {
       throw new NDepsException("Assembly to scan not found for project: " + vsProject.getName());
     }

@@ -69,20 +69,20 @@ public class GallioSensorTest {
   public void init() {
     vsProject1 = mock(VisualStudioProject.class);
     when(vsProject1.getName()).thenReturn("Project #1");
-    when(vsProject1.getArtifact("Debug")).thenReturn(
+    when(vsProject1.getArtifact("Debug", "Any CPU")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")
         );
 
     vsTestProject2 = mock(VisualStudioProject.class);
     when(vsTestProject2.getName()).thenReturn("Project Test #2");
-    when(vsTestProject2.getArtifact("Debug")).thenReturn(
+    when(vsTestProject2.getArtifact("Debug", "Any CPU")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake2.assembly")
         );
     when(vsTestProject2.isTest()).thenReturn(true);
 
     vsTestProject3 = mock(VisualStudioProject.class);
     when(vsTestProject3.getName()).thenReturn("Project Test #3");
-    when(vsTestProject3.getArtifact("Debug")).thenReturn(
+    when(vsTestProject3.getArtifact("Debug", "Any CPU")).thenReturn(
         TestUtils.getResource("/Sensor/FakeAssemblies/Fake3.assembly")
         );
     when(vsTestProject3.isTest()).thenReturn(true);

@@ -93,7 +93,7 @@ public class GendarmeSensorTest {
 
     vsProject = mock(VisualStudioProject.class);
     when(vsProject.getName()).thenReturn("Project #1");
-    when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
+    when(vsProject.getGeneratedAssemblies("Debug", "Any CPU")).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")));
     VisualStudioProject project2 = mock(VisualStudioProject.class);
     when(project2.getName()).thenReturn("Project Test");

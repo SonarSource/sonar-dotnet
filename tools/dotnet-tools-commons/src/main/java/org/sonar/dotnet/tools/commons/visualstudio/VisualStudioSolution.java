@@ -54,7 +54,7 @@ public class VisualStudioSolution {
   private File solutionDir;
   private String name;
   private List<VisualStudioProject> projects;
-  private List<String> buildConfigurations;
+  private List<BuildConfiguration> buildConfigurations;
 
   public VisualStudioSolution(File solutionFile, List<VisualStudioProject> projects) {
     this.solutionFile = solutionFile;
@@ -362,11 +362,11 @@ public class VisualStudioSolution {
    * 
    * @return the list of build configurations.
    */
-  public List<String> getBuildConfigurations() {
+  public List<BuildConfiguration> getBuildConfigurations() {
     return buildConfigurations;
   }
 
-  void setBuildConfigurations(List<String> buildConfigurations) {
+  void setBuildConfigurations(List<BuildConfiguration> buildConfigurations) {
     this.buildConfigurations = buildConfigurations;
   }
 

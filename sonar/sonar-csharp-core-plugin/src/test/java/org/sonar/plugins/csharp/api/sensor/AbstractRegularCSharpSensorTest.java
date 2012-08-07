@@ -174,7 +174,7 @@ public class AbstractRegularCSharpSensorTest {
     when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
         BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
 
-    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
+    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE, null)).thenReturn(Collections.singleton(new File("toto")));
     assertTrue(cilSensor.shouldExecuteOnProject(project));
   }
 
@@ -199,7 +199,7 @@ public class AbstractRegularCSharpSensorTest {
     when(configurationMock.getString(eq(ASSEMBLIES_TO_SCAN_KEY),
         anyString())).thenReturn("foo/bar/whatever/*.dll");
 
-    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(Collections.singleton(new File("toto")));
+    when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE, null)).thenReturn(Collections.singleton(new File("toto")));
     assertTrue(cilSensor.shouldExecuteOnProject(project));
   }
 

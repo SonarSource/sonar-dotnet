@@ -85,7 +85,7 @@ public class FxCopSensorTest {
 
     vsProject1 = mock(VisualStudioProject.class);
     when(vsProject1.getName()).thenReturn("Project #1");
-    when(vsProject1.getGeneratedAssemblies("Debug")).thenReturn(
+    when(vsProject1.getGeneratedAssemblies("Debug", "Any CPU")).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")));
     VisualStudioProject project2 = mock(VisualStudioProject.class);
     when(project2.getName()).thenReturn("Project Test");

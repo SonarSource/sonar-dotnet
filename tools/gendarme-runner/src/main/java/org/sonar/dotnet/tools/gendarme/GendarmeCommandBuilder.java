@@ -99,6 +99,10 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
   protected String getBuildConfigurations() {
     return buildConfigurations;
   }
+  
+  protected String getBuildPlatform() {
+    return buildPlatform;
+  }
 
   /**
    * Transforms this command object into a Command object that can be passed to the CommandExecutor.
@@ -149,7 +153,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
     if (silverlightAssembly == null || !silverlightAssembly.isFile()) {
       throw new GendarmeException("Could not find Silverlight Mscorlib.dll assembly. Please check your settings.");
     }
-    File destinationDirectory = vsProject.getArtifactDirectory(buildConfigurations);
+    File destinationDirectory = vsProject.getArtifactDirectory(buildConfigurations, buildPlatform);
     if (destinationDirectory == null) {
       throw new GendarmeException("Impossible to copy Silverlight Mscorlib.dll as there is no existing artifact "
         + "directory for the build configuration: " + buildConfigurations);

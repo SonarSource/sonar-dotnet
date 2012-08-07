@@ -59,7 +59,7 @@ public class FxCopCommandBuilderTest {
   public void init() throws Exception {
     solution = mock(VisualStudioSolution.class);
     vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly")));
     when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Runner"));
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));

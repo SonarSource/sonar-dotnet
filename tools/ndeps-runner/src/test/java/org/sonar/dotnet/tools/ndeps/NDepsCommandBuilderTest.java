@@ -57,7 +57,7 @@ public class NDepsCommandBuilderTest {
   @Before
   public void init() throws Exception {
     vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    when(vsProject.getArtifact("Debug", null)).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
     nDepsCommandBuilder = NDepsCommandBuilder.createBuilder(null, vsProject);
     nDepsCommandBuilder.setExecutable(nDepsExecutable);
     nDepsCommandBuilder.setReportFile(nDepsReportFile);
@@ -76,7 +76,7 @@ public class NDepsCommandBuilderTest {
 
   @Test
   public void testToCommandWithNoAssembly() throws Exception {
-    when(vsProject.getArtifact("Debug")).thenReturn(null);
+    when(vsProject.getArtifact("Debug", null)).thenReturn(null);
 
     thrown.expect(NDepsException.class);
     thrown.expectMessage("Assembly to scan not found for project");
@@ -85,7 +85,7 @@ public class NDepsCommandBuilderTest {
 
   @Test
   public void testToCommandWithUnexistingAssembly() throws Exception {
-    when(vsProject.getArtifact("Debug")).thenReturn(new File("target/sonar/Deps/unexisting-assembly.dll"));
+    when(vsProject.getArtifact("Debug", null)).thenReturn(new File("target/sonar/Deps/unexisting-assembly.dll"));
 
     thrown.expect(NDepsException.class);
     thrown.expectMessage("Assembly to scan not found for project");

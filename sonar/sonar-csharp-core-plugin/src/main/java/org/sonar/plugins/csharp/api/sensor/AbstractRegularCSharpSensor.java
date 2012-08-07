@@ -89,13 +89,15 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
         final String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
         final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
             CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+        final String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+            CSharpConstants.BUILD_PLATFORM_DEFVALUE);
         if (assemblyPatterns == null || assemblyPatterns.length == 0) {
-          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
         } else {
           assemblies = findFiles(project, assemblyPatterns);
           if (assemblies.isEmpty()) {
             // fall back to the default VS output folder
-            assemblies = visualProject.getGeneratedAssemblies(buildConfigurations);
+            assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
           }
         }
 

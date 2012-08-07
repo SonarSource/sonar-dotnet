@@ -193,7 +193,7 @@ public final class ModelFactory {
   public static VisualStudioSolution getSolution(File solutionFile) throws IOException, DotNetToolsException {
 
     String solutionContent = FileUtils.readFileToString(solutionFile);
-    List<String> buildConfigurations = getBuildConfigurations(solutionContent);
+    List<BuildConfiguration> buildConfigurations = getBuildConfigurations(solutionContent);
 
     List<VisualStudioProject> projects = getProjects(solutionFile, solutionContent, buildConfigurations);
     VisualStudioSolution solution = new VisualStudioSolution(solutionFile, projects);
@@ -202,21 +202,22 @@ public final class ModelFactory {
     return solution;
   }
 
-  private static List<String> getBuildConfigurations(String solutionContent) {
+  private static List<BuildConfiguration> getBuildConfigurations(String solutionContent) {
     // A pattern to extract the build configurations from a visual studio solution
     String confExtractExp = "(\tGlobalSection\\(SolutionConfigurationPlatforms\\).*?^\tEndGlobalSection$)";
     Pattern confExtractPattern = Pattern.compile(confExtractExp, Pattern.MULTILINE + Pattern.DOTALL);
-    List<String> buildConfigurations = new ArrayList<String>();
+    List<BuildConfiguration> buildConfigurations = new ArrayList<BuildConfiguration>();
     // Extracts all the projects from the solution
     Matcher blockMatcher = confExtractPattern.matcher(solutionContent);
     if (blockMatcher.find()) {
       String buildConfigurationBlock = blockMatcher.group(1);
-      String buildConfExtractExp = " = (.*)\\|";
+      String buildConfExtractExp = " = (.*)\\|(.*)";
       Pattern buildConfExtractPattern = Pattern.compile(buildConfExtractExp);
       Matcher buildConfMatcher = buildConfExtractPattern.matcher(buildConfigurationBlock);
       while (buildConfMatcher.find()) {
         String buildConfiguration = buildConfMatcher.group(1);
-        buildConfigurations.add(buildConfiguration);
+        String platform = buildConfMatcher.group(2);
+        buildConfigurations.add(new BuildConfiguration(buildConfiguration, platform));
       }
     }
     return buildConfigurations;
@@ -233,7 +234,7 @@ public final class ModelFactory {
    * @throws IOException
    * @throws DotNetToolsException
    */
-  private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<String> buildConfigurations)
+  private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<BuildConfiguration> buildConfigurations)
       throws IOException, DotNetToolsException {
 
     File baseDirectory = solutionFile.getParentFile();
@@ -314,7 +315,7 @@ public final class ModelFactory {
    * @throws FileNotFoundException
    *           if the file was not found
    */
-  public static VisualStudioProject getProject(File projectFile, String projectName, List<String> buildConfigurations)
+  public static VisualStudioProject getProject(File projectFile, String projectName, List<BuildConfiguration> buildConfigurations)
       throws FileNotFoundException, DotNetToolsException {
 
     VisualStudioProject project = new VisualStudioProject();
@@ -331,8 +332,8 @@ public final class ModelFactory {
       xpath.setNamespaceContext(new VisualStudioNamespaceContext());
 
       if (buildConfigurations != null) {
-        Map<String, File> buildConfOutputDirMap = new HashMap<String, File>();
-        for (String config : buildConfigurations) {
+        Map<BuildConfiguration, File> buildConfOutputDirMap = new HashMap<BuildConfiguration, File>();
+        for (BuildConfiguration config : buildConfigurations) {
           XPathExpression configOutputExpression = xpath.compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'" + config
             + "')]/vst:OutputPath");
           String configOutput = extractProjectProperty(configOutputExpression, projectFile);
@@ -374,8 +375,9 @@ public final class ModelFactory {
       project.setDirectory(projectDir);
       project.setAssemblyName(assemblyName);
       project.setRootNamespace(rootNamespace);
-      project.setDebugOutputDir(new File(projectDir, debugOutput));
-      project.setReleaseOutputDir(new File(projectDir, releaseOutput));
+      // TODO remove
+      //project.setDebugOutputDir(new File(projectDir, debugOutput));
+      //project.setReleaseOutputDir(new File(projectDir, releaseOutput));
 
       if (StringUtils.isNotEmpty(silverlightStr)) {
         project.setSilverlightProject(true);
@@ -455,8 +457,12 @@ public final class ModelFactory {
     project.setDirectory(projectRoot);
     project.setAssemblyName(assemblyName);
     project.setRootNamespace(rootNamespace);
-    project.setDebugOutputDir(new File(solutionRoot, debugOutput));
-    project.setReleaseOutputDir(new File(solutionRoot, releaseOutput));
+    
+    Map<BuildConfiguration, File> buildConfOutputDirMap = new HashMap<BuildConfiguration, File>();
+    buildConfOutputDirMap.put(new BuildConfiguration("Debug"), new File(solutionRoot, debugOutput));
+    buildConfOutputDirMap.put(new BuildConfiguration("Release"), new File(solutionRoot, releaseOutput));
+    project.setBuildConfOutputDirMap(buildConfOutputDirMap);
+    
     return project;
   }
 

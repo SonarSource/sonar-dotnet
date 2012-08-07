@@ -101,7 +101,9 @@ public class GallioSensor extends AbstractCSharpSensor {
   private void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
     String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
-    File assembly = visualStudioProject.getArtifact(buildConfigurations);
+    String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+        CSharpConstants.BUILD_PLATFORM_DEFVALUE);
+    File assembly = visualStudioProject.getArtifact(buildConfigurations, buildPlatform);
     if (assembly != null && assembly.isFile()) {
       assemblyFileList.add(assembly);
     }

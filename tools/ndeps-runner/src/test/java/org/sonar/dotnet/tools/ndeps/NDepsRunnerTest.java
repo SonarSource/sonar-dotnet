@@ -57,7 +57,7 @@ public class NDepsRunnerTest {
   @Before
   public void initData() throws Exception {
     vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getArtifact("Debug")).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    when(vsProject.getArtifact("Debug", null)).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
     when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Runner"));
     runner = NDepsRunner.create(fakeNDepsInstallDir.getAbsolutePath(), new File("target/sonar/tempFolder").getAbsolutePath());
   }

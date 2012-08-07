@@ -78,20 +78,20 @@ public class ModelFactoryTest {
   public void testSolutionWithCustomBuild() throws Exception {
     File file = new File(SOLUTION_WITH_CUSTOM_BUILD_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    List<String> buildConfigurations = solution.getBuildConfigurations();
+    List<BuildConfiguration> buildConfigurations = solution.getBuildConfigurations();
     assertEquals(3, buildConfigurations.size());
-    assertTrue(buildConfigurations.contains("Debug"));
-    assertTrue(buildConfigurations.contains("Release"));
-    assertTrue(buildConfigurations.contains("CustomCompil"));
+    assertTrue(buildConfigurations.contains(new BuildConfiguration("Debug")));
+    assertTrue(buildConfigurations.contains(new BuildConfiguration("Release")));
+    assertTrue(buildConfigurations.contains(new BuildConfiguration("CustomCompil")));
 
     assertEquals(1, solution.getProjects().size());
     VisualStudioProject project = solution.getProjects().get(0);
 
     // Debug configuration should be the preferred one
-    assertTrue(project.getArtifact("CustomCompil;Debug").getAbsolutePath().contains("Debug"));
+    assertTrue(project.getArtifact("CustomCompil;Debug", "Any CPU").getAbsolutePath().contains("Debug"));
 
-    assertTrue(project.getArtifact("CustomCompil").getAbsolutePath().contains("CustomCompil"));
-    assertTrue(project.getArtifact("CustomCompil").getAbsolutePath().endsWith(project.getName() + ".dll"));
+    assertTrue(project.getArtifact("CustomCompil", "Any CPU").getAbsolutePath().contains("CustomCompil"));
+    assertTrue(project.getArtifact("CustomCompil", "Any CPU").getAbsolutePath().endsWith(project.getName() + ".dll"));
 
   }
 
@@ -259,7 +259,7 @@ public class ModelFactoryTest {
       webProject = (VisualStudioWebProject) projects.get(1);
     }
     assertEquals(1, webProject.getReferences().size());
-    Set<File> webAssemblies = webProject.getGeneratedAssemblies(null);
+    Set<File> webAssemblies = webProject.getGeneratedAssemblies(null, null);
     for (File assemblyFile : webAssemblies) {
       assertFalse("ClassLibrary.dll".equals(assemblyFile.getName()));
     }

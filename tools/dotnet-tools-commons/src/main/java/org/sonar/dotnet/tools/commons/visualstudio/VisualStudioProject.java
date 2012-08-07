@@ -57,11 +57,11 @@ public class VisualStudioProject {
   private String realAssemblyName; // assembly name found in the csproj file no matter what
   private String rootNamespace;
   private UUID projectGuid;
-  private File debugOutputDir;
+  // private File debugOutputDir;
   private File releaseOutputDir;
   /** Output directory specified from maven */
   private String forcedOutputDir;
-  private Map<String, File> buildConfOutputDirMap;
+  private Map<BuildConfiguration, File> buildConfOutputDirMap;
   private File directory;
   private boolean silverlightProject;
   private Map<File, SourceFile> sourceFileMap;
@@ -98,7 +98,7 @@ public class VisualStudioProject {
 
       String filePath = canonicalFile.getPath();
       String directoryPath = canonicalDirectory.getPath();
-      if (!filePath.startsWith(directoryPath)) {
+      if ( !filePath.startsWith(directoryPath)) {
         // The file is not in the directory
         return null;
       }
@@ -147,15 +147,17 @@ public class VisualStudioProject {
    * 
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
+   * @param buildPlatform
+   *          Platform used to build the project. Typical values are "Any CPU", "x86" and "x64"
    * @return
    */
-  public File getArtifactDirectory(String buildConfigurations) {
+  public File getArtifactDirectory(String buildConfigurations, String buildPlatform) {
     File artifactDirectory = null;
     if (StringUtils.isNotEmpty(forcedOutputDir)) {
       // first trying to use forcedOutputDir as a relative path
       File assemblyDirectory = new File(directory, forcedOutputDir);
 
-      if (!assemblyDirectory.exists()) {
+      if ( !assemblyDirectory.exists()) {
         // path specified "forcedOutputDir" should be absolute,
         // not relative to the project root directory
         assemblyDirectory = new File(forcedOutputDir);
@@ -163,15 +165,24 @@ public class VisualStudioProject {
 
       artifactDirectory = assemblyDirectory;
 
-    } else if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
-      artifactDirectory = debugOutputDir;
-    } else if (buildConfOutputDirMap == null) {
-      // no custom build conf, debug not wanted, get the release one
-      artifactDirectory = releaseOutputDir;
     } else {
-      // get the first one found
-      String buildConfiguration = Arrays.asList(StringUtils.split(buildConfigurations, ",; ")).get(0);
+      final BuildConfiguration buildConfiguration;
+
+      if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
+        buildConfiguration = new BuildConfiguration("Debug", buildPlatform);
+      } else {
+        // get the first one found
+        String buildName = Arrays.asList(StringUtils.split(buildConfigurations, ",; ")).get(0);
+        buildConfiguration = new BuildConfiguration(buildName, buildPlatform);
+      }
       artifactDirectory = buildConfOutputDirMap.get(buildConfiguration);
+      if (artifactDirectory == null) {
+        // just take the first one found...
+        artifactDirectory = buildConfOutputDirMap.values().iterator().next();
+        LOG.debug("Fallback to directory {} for project {}", artifactDirectory, name);
+      } else {
+        LOG.debug("Using directory " + artifactDirectory + " for project " + name + " with buildconfiguration " + buildConfiguration);
+      }
     }
     return artifactDirectory;
   }
@@ -183,8 +194,8 @@ public class VisualStudioProject {
    *          Visual Studio build configurations used to generate the project
    * @return
    */
-  public File getArtifact(String buildConfigurations) {
-    File artifactDirectory = getArtifactDirectory(buildConfigurations);
+  public File getArtifact(String buildConfigurations, String buildPlatform) {
+    File artifactDirectory = getArtifactDirectory(buildConfigurations, buildPlatform);
     return new File(artifactDirectory, getArtifactName());
   }
 
@@ -196,9 +207,9 @@ public class VisualStudioProject {
    *          Visual Studio build configurations used to generate the project
    * @return a Set of the generated assembly files. If no files found, the set will be empty.
    */
-  public Set<File> getGeneratedAssemblies(String buildConfigurations) {
+  public Set<File> getGeneratedAssemblies(String buildConfigurations, String platform) {
     Set<File> result = Sets.newHashSet();
-    File assembly = getArtifact(buildConfigurations);
+    File assembly = getArtifact(buildConfigurations, platform);
     if (assembly.exists()) {
       result.add(assembly);
     } else {
@@ -214,13 +225,6 @@ public class VisualStudioProject {
    */
   public String getArtifactName() {
     return realAssemblyName + "." + getExtension();
-  }
-
-  @Override
-  public String toString() {
-    return "Project(name=" + name + ", type=" + type + ", directory=" + directory + ", file=" + projectFile
-      + ", assemblyName=" + assemblyName + ", rootNamespace=" + rootNamespace + ", debugDir=" + debugOutputDir + ", releaseDir="
-      + releaseOutputDir + ")";
   }
 
   /**
@@ -277,9 +281,9 @@ public class VisualStudioProject {
    * 
    * @return The debugOutputDir to return.
    */
-  public File getDebugOutputDir() {
-    return this.debugOutputDir;
-  }
+  /*
+   * public File getDebugOutputDir() { return this.debugOutputDir; }
+   */
 
   /**
    * Sets the debugOutputDir.
@@ -287,9 +291,9 @@ public class VisualStudioProject {
    * @param debugOutputDir
    *          The debugOutputDir to set.
    */
-  void setDebugOutputDir(File debugOutputDir) {
-    this.debugOutputDir = debugOutputDir;
-  }
+  /*
+   * void setDebugOutputDir(File debugOutputDir) { this.debugOutputDir = debugOutputDir; }
+   */
 
   /**
    * Sets the releaseOutputDir.
@@ -297,9 +301,9 @@ public class VisualStudioProject {
    * @param releaseOutputDir
    *          The releaseOutputDir to set.
    */
-  void setReleaseOutputDir(File releaseOutputDir) {
-    this.releaseOutputDir = releaseOutputDir;
-  }
+  /*
+   * void setReleaseOutputDir(File releaseOutputDir) { this.releaseOutputDir = releaseOutputDir; }
+   */
 
   /**
    * Returns the directory.
@@ -347,7 +351,7 @@ public class VisualStudioProject {
   /**
    * Sets the projectGuid.
    * 
-   * @param projectGuid 
+   * @param projectGuid
    *          The projectGuid to set.
    */
   void setProjectGuid(UUID projectGuid) {
@@ -559,7 +563,7 @@ public class VisualStudioProject {
     return silverlightProject;
   }
 
-  void setBuildConfOutputDirMap(Map<String, File> buildConfOutputDirMap) {
+  void setBuildConfOutputDirMap(Map<BuildConfiguration, File> buildConfOutputDirMap) {
     this.buildConfOutputDirMap = buildConfOutputDirMap;
   }
 
@@ -567,9 +571,14 @@ public class VisualStudioProject {
     this.forcedOutputDir = forcedOutputDir;
   }
 
-  
   public String getRealAssemblyName() {
     return realAssemblyName;
+  }
+
+  @Override
+  public String toString() {
+    return "Project(name=" + name + ", type=" + type + ", directory=" + directory + ", file=" + projectFile + ", assemblyName="
+        + assemblyName + ", rootNamespace=" + rootNamespace + ")";
   }
 
 }

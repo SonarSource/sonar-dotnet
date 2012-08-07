@@ -42,7 +42,8 @@ public class VisualStudioWebProject extends VisualStudioProject {
    * @return the generated web dlls
    * 
    */
-  public Set<File> getGeneratedAssemblies(String buildConfigurations) {
+  @Override
+  public Set<File> getGeneratedAssemblies(String buildConfigurations, String buildPlatform) {
     Set<File> result = new HashSet<File>();
 
     // we need to exclude all the dll files
@@ -53,7 +54,7 @@ public class VisualStudioWebProject extends VisualStudioProject {
       exclusions.add(file.getName());
     }
 
-    File precompilationDirectory = getWebPrecompilationDirectory(buildConfigurations);
+    File precompilationDirectory = getWebPrecompilationDirectory(buildConfigurations, buildPlatform);
     if (precompilationDirectory != null && precompilationDirectory.isDirectory()) {
       File[] files = precompilationDirectory.listFiles();
       for (File file : files) {
@@ -72,15 +73,15 @@ public class VisualStudioWebProject extends VisualStudioProject {
    *          Visual Studio build configurations used to generate the project
    * @return the directory where asp.net pages are precompiled. null for a non web project
    */
-  public File getWebPrecompilationDirectory(String buildConfigurations) {
-    return new File(getArtifactDirectory(buildConfigurations), "bin");
+  public File getWebPrecompilationDirectory(String buildConfigurations, String buildPlatform) {
+    return new File(getArtifactDirectory(buildConfigurations, buildPlatform), "bin");
   }
 
   /**
    * @return the generated web dll names otherwise.
    */
   public Set<String> getWebAssemblyNames() {
-    Set<File> assemblies = getGeneratedAssemblies(null);
+    Set<File> assemblies = getGeneratedAssemblies(null, null);
     Set<String> assemblyNames = new HashSet<String>();
 
     for (File assembly : assemblies) {

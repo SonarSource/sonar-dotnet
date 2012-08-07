@@ -49,9 +49,9 @@ public class GendarmeCommandBuilderTest {
   public static void initData() {
     vsProject = mock(VisualStudioProject.class);
     solution = mock(VisualStudioSolution.class);
-    when(vsProject.getGeneratedAssemblies("Debug")).thenReturn(
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/runner/FakeAssemblies/Fake1.assembly")));
-    when(vsProject.getArtifactDirectory("Debug")).thenReturn(TestUtils.getResource("/runner/FakeAssemblies"));
+    when(vsProject.getArtifactDirectory("Debug", null)).thenReturn(TestUtils.getResource("/runner/FakeAssemblies"));
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
   }
 
@@ -107,7 +107,7 @@ public class GendarmeCommandBuilderTest {
   @Test(expected = GendarmeException.class)
   public void testToCommandForSilverlightProjectWithWrongArtifactDirectory() throws Exception {
     when(vsProject.isSilverlightProject()).thenReturn(true);
-    when(vsProject.getArtifactDirectory("Debug")).thenReturn(TestUtils.getResource("/runner/UnexistingDirectory"));
+    when(vsProject.getArtifactDirectory("Debug", null)).thenReturn(TestUtils.getResource("/runner/UnexistingDirectory"));
 
     GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(solution, vsProject);
     builder.setExecutable(new File("gendarme.exe"));
