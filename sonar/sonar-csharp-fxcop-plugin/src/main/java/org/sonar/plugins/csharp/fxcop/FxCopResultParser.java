@@ -211,7 +211,11 @@ public class FxCopResultParser extends AbstractStaxParser implements BatchExtens
         File sourceFile = new File(path, file).getAbsoluteFile();
         VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
         if (vsProject.equals(currentVsProject)) {
-          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+          if (vsProject.isTest()) {
+            resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project.getFileSystem().getTestDirs());
+          } else {
+            resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+          }
           saveViolation = true;
         } else {
           LOG.debug("Ignoring file outside current project : {}", sourceFile);

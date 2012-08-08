@@ -166,12 +166,14 @@ public class GendarmeSensor extends AbstractRuleBasedCSharpSensor {
         .getString(GendarmeConstants.GENDARME_CONFIDENCE_KEY, GendarmeConstants.GENDARME_CONFIDENCE_DEFVALUE));
     builder.setSeverity("all");
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());
-    builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+    builder.setBuildConfiguration(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
+    builder.setBuildPlatform(configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+        CSharpConstants.BUILD_PLATFORM_DEFVALUE));
 
     String[] assemblies = configuration.getStringArray("sonar.gendarme.assemblies");
     if (assemblies == null || assemblies.length == 0) {
-      assemblies = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+      assemblies = getAssemblyPatterns();
     } else {
       LOG.warn("Using deprecated key 'sonar.gendarme.assemblies', you should use instead " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
     }

@@ -57,8 +57,6 @@ public class VisualStudioProject {
   private String realAssemblyName; // assembly name found in the csproj file no matter what
   private String rootNamespace;
   private UUID projectGuid;
-  // private File debugOutputDir;
-  private File releaseOutputDir;
   /** Output directory specified from maven */
   private String forcedOutputDir;
   private Map<BuildConfiguration, File> buildConfOutputDirMap;

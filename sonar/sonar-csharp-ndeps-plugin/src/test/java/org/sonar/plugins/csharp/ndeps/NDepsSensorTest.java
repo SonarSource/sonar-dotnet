@@ -131,7 +131,7 @@ public class NDepsSensorTest {
 
   @Test
   public void shouldLaunchNDeps() throws Exception {
-    when(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY, CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn("Release");
+    when(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY, CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn("Release");
     when(configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY, NDepsConstants.TIMEOUT_MINUTES_DEFVALUE)).thenReturn(3);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");

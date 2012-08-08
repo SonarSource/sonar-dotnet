@@ -74,6 +74,12 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
       // we must be at solution level
       return false;
     }
+    if (getAssemblyPatterns()!=null && getAssemblyPatterns().length>0) {
+      LOG.warn("Skipping NDeps analysis, NDeps cannot work properly " +
+      		"when assembly locations are specified using " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+      return false;
+    }
+    
     testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects 
     return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
@@ -119,8 +125,10 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
   protected void launchNDeps(Project project, NDepsRunner runner) throws NDepsException {
     NDepsCommandBuilder builder = runner.createCommandBuilder(getVSSolution(), getVSProject(project));
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), NDepsConstants.DEPENDENCYPARSER_REPORT_XML));
-    builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+    builder.setBuildConfiguration(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
+    builder.setBuildPlatform(configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+        CSharpConstants.BUILD_PLATFORM_DEFVALUE));
 
     runner.execute(builder, configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY, NDepsConstants.TIMEOUT_MINUTES_DEFVALUE));
   }

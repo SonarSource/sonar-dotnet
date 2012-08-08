@@ -99,7 +99,7 @@ public class GallioSensor extends AbstractCSharpSensor {
   }
 
   private void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
-    String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+    String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
     String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
         CSharpConstants.BUILD_PLATFORM_DEFVALUE);
@@ -148,7 +148,7 @@ public class GallioSensor extends AbstractCSharpSensor {
     safeMode = configuration.getBoolean(GallioConstants.SAFE_MODE, false);
     timeout = configuration.getInt(GallioConstants.TIMEOUT_MINUTES_KEY, GallioConstants.TIMEOUT_MINUTES_DEFVALUE);
 
-    String[] testAssemblyPatterns = configuration.getStringArray(GallioConstants.TEST_ASSEMBLIES_KEY);
+    String[] testAssemblyPatterns = configuration.getStringArray(CSharpConstants.TEST_ASSEMBLIES_KEY);
     String gallioFilter = configuration.getString(GallioConstants.FILTER_KEY, GallioConstants.FILTER_DEFVALUE);
 
     executeRunner(false, testAssemblyPatterns, gallioFilter, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);

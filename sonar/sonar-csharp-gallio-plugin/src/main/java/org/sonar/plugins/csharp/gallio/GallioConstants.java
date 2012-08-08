@@ -60,8 +60,6 @@ public final class GallioConstants {
   public static final String REPORTS_PATH_KEY = "sonar.gallio.reports.path";
   public static final String REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.coverage.reports.path";
 
-  public static final String TEST_ASSEMBLIES_KEY = "sonar.dotnet.test.assemblies";
-
   public static final String OPEN_COVER_INSTALL_KEY = "sonar.opencover.installDirectory";
 
   public static final String OPEN_COVER_INSTALL_DEFVALUE = "C:/Program Files/OpenCover/";

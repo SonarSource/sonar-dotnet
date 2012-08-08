@@ -266,7 +266,7 @@ public class GendarmeSensorTest {
   public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
   
     conf.setProperty(GendarmeConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
-    conf.setProperty(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "DummyBuildConf"); // we simulate no generated assemblies
+    conf.setProperty(CSharpConstants.BUILD_CONFIGURATION_KEY, "DummyBuildConf"); // we simulate no generated assemblies
 
     when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Sensor"));
     when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));

@@ -56,10 +56,10 @@ public class CSharpConfiguration implements BatchExtension {
   public CSharpConfiguration(Configuration configuration) {
     this.configuration = configuration;
 
-    // Core OLD parameters
+    // Core OLD/Maven parameters
     newToPreviousParamMap.put(CSharpConstants.TEST_PROJECT_PATTERN_KEY, Lists.newArrayList("visual.test.project.pattern", "sonar.donet.visualstudio.testProjectPattern"));
     newToPreviousParamMap.put(CSharpConstants.SOLUTION_FILE_KEY, "visual.studio.solution");
-    newToPreviousParamMap.put(CSharpConstants.BUILD_CONFIGURATIONS_KEY, "msbuild.configurations");
+    newToPreviousParamMap.put(CSharpConstants.BUILD_CONFIGURATION_KEY, "msbuild.configurations");
     newToPreviousParamMap.put(CSharpConstants.DOTNET_2_0_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_2_0_SDK_DIR_KEY);
     newToPreviousParamMap.put(CSharpConstants.DOTNET_3_5_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_3_5_SDK_DIR_KEY);
     newToPreviousParamMap.put(CSharpConstants.DOTNET_4_0_SDK_DIR_KEY, CSharpConstants.MVN_DOTNET_4_0_SDK_DIR_KEY);

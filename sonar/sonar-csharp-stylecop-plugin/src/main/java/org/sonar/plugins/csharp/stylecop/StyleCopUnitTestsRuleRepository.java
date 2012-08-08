@@ -50,7 +50,7 @@ public class StyleCopUnitTestsRuleRepository extends RuleRepository {
   public List<Rule> createRules() {
     List<Rule> rules = new ArrayList<Rule>();
     rules
-        .addAll(xmlRuleParser.parse(StyleCopUnitTestsRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules-unit-tests.xml")));
+        .addAll(xmlRuleParser.parse(StyleCopUnitTestsRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules.xml")));
     
     
     for (File userExtensionXml : fileSystem.getExtensions(StyleCopConstants.TEST_REPOSITORY_KEY, "xml")) {

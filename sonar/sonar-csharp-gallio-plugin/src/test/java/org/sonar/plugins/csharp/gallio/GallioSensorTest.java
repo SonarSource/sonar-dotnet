@@ -49,6 +49,7 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.gallio.GallioCommandBuilder;
 import org.sonar.dotnet.tools.gallio.GallioRunner;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
+import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
@@ -169,7 +170,7 @@ public class GallioSensorTest {
 
     Configuration conf = new BaseConfiguration();
     // pattern used to find test assemblies
-    conf.setProperty(GallioConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake3.*");
+    conf.setProperty(CSharpConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake3.*");
 
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);
@@ -198,7 +199,7 @@ public class GallioSensorTest {
     // safe mode activation
     conf.setProperty(GallioConstants.SAFE_MODE, "true");
     // pattern used to find test assemblies
-    conf.setProperty(GallioConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake*.assembly");
+    conf.setProperty(CSharpConstants.TEST_ASSEMBLIES_KEY, "$(SolutionDir)/../**/Fake*.assembly");
 
     GallioSensor sensor = new GallioSensor(new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     sensor.analyse(project, context);

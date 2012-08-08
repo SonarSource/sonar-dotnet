@@ -153,7 +153,7 @@ public class FxCopCommandBuilderTest {
   public void testToCommandWithOtherCustomParams() throws Exception {
     fxCopCommandBuilder.setTimeoutMinutes(1000);
     fxCopCommandBuilder.setIgnoreGeneratedCode(false);
-    fxCopCommandBuilder.setBuildConfigurations("Debug");
+    fxCopCommandBuilder.setBuildConfiguration("Debug");
 
     Command command = fxCopCommandBuilder.toCommand();
     assertThat(toUnixStyle(command.getExecutable()), endsWith("/Runner/FakeProg/FxCopCmd.exe"));

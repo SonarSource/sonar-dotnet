@@ -67,6 +67,11 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
   protected boolean isCilSensor() {
     return false;
   }
+  
+  protected final String[] getAssemblyPatterns() {
+    String key = isTestSensor() ? CSharpConstants.TEST_ASSEMBLIES_KEY :  CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
+    return configuration.getStringArray(key);
+  } 
 
   /**
    * {@inheritDoc}
@@ -86,8 +91,9 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
 
         final VisualStudioProject visualProject = getVSProject(project);
         Collection<File> assemblies;
-        final String[] assemblyPatterns = configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
-        final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+     
+        final String[] assemblyPatterns = getAssemblyPatterns();
+        final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
             CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
         final String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
             CSharpConstants.BUILD_PLATFORM_DEFVALUE);

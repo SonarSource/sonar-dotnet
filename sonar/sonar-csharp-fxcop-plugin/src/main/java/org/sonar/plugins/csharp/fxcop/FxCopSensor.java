@@ -162,12 +162,17 @@ public class FxCopSensor extends AbstractRuleBasedCSharpSensor {
     FxCopCommandBuilder builder = runner.createCommandBuilder(vsSolution, vsProject);
     builder.setConfigFile(fxCopConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), FxCopConstants.FXCOP_REPORT_XML));
-    builder.setAssembliesToScan(configuration.getStringArray(CSharpConstants.ASSEMBLIES_TO_SCAN_KEY));
+    
+    builder.setAssembliesToScan(getAssemblyPatterns());
+    
+    
     builder.setAssemblyDependencyDirectories(configuration.getStringArray(FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY));
     builder.setIgnoreGeneratedCode(configuration.getBoolean(FxCopConstants.IGNORE_GENERATED_CODE_KEY,
         FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE));
-    builder.setBuildConfigurations(configuration.getString(CSharpConstants.BUILD_CONFIGURATIONS_KEY,
+    builder.setBuildConfiguration(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
         CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
+    builder.setBuildPlatform(configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+        CSharpConstants.BUILD_PLATFORM_DEFVALUE));
     int timeout = configuration.getInt(FxCopConstants.TIMEOUT_MINUTES_KEY, FxCopConstants.TIMEOUT_MINUTES_DEFVALUE);
     builder.setTimeoutMinutes(timeout);
     builder.setSilverlightFolder(getMicrosoftWindowsEnvironment().getSilverlightDirectory());

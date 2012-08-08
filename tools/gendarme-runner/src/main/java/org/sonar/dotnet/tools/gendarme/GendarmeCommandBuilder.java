@@ -97,7 +97,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
   }
 
   protected String getBuildConfigurations() {
-    return buildConfigurations;
+    return buildConfiguration;
   }
   
   protected String getBuildPlatform() {
@@ -153,10 +153,10 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
     if (silverlightAssembly == null || !silverlightAssembly.isFile()) {
       throw new GendarmeException("Could not find Silverlight Mscorlib.dll assembly. Please check your settings.");
     }
-    File destinationDirectory = vsProject.getArtifactDirectory(buildConfigurations, buildPlatform);
+    File destinationDirectory = vsProject.getArtifactDirectory(buildConfiguration, buildPlatform);
     if (destinationDirectory == null) {
       throw new GendarmeException("Impossible to copy Silverlight Mscorlib.dll as there is no existing artifact "
-        + "directory for the build configuration: " + buildConfigurations);
+        + "directory for the build configuration: " + buildConfiguration);
     }
     try {
       LOG.debug("Copy Silverlight Mscorlib.dll file ");

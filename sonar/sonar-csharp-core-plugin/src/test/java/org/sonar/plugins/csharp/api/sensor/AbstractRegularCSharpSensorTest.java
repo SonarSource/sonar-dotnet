@@ -30,7 +30,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.csharp.api.CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
 import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE;
-import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_KEY;
+import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATION_KEY;
 
 import java.io.File;
 import java.util.Collections;
@@ -161,7 +161,7 @@ public class AbstractRegularCSharpSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+    when(configurationMock.getString(BUILD_CONFIGURATION_KEY,
         BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     assertTrue(cilSensor.shouldExecuteOnProject(project));
   }
@@ -171,7 +171,7 @@ public class AbstractRegularCSharpSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+    when(configurationMock.getString(BUILD_CONFIGURATION_KEY,
         BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
 
     when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE, null)).thenReturn(Collections.singleton(new File("toto")));
@@ -183,7 +183,7 @@ public class AbstractRegularCSharpSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+    when(configurationMock.getString(BUILD_CONFIGURATION_KEY,
         BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
 
     assertFalse(cilSensor.shouldExecuteOnProject(project));
@@ -194,7 +194,7 @@ public class AbstractRegularCSharpSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    when(configurationMock.getString(BUILD_CONFIGURATIONS_KEY,
+    when(configurationMock.getString(BUILD_CONFIGURATION_KEY,
         BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     when(configurationMock.getString(eq(ASSEMBLIES_TO_SCAN_KEY),
         anyString())).thenReturn("foo/bar/whatever/*.dll");

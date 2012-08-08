@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <rules>
-	<rule key="DoNotDeclareStaticMembersOnGenericTypesUnitTestRule">
+	<rule key="DoNotDeclareStaticMembersOnGenericTypes">
 		<name><![CDATA[Do not declare static members on generic types]]></name>
 		<configKey><![CDATA[DoNotDeclareStaticMembersOnGenericTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -9,7 +9,7 @@
 <a href="http://msdn.microsoft.com/library/ms182139(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypesThatOwnDisposableFieldsShouldBeDisposableUnitTestRule">
+	<rule key="TypesThatOwnDisposableFieldsShouldBeDisposable">
 		<name><![CDATA[Types that own disposable fields should be disposable]]></name>
 		<configKey><![CDATA[TypesThatOwnDisposableFieldsShouldBeDisposable@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -18,7 +18,7 @@
 <a href="http://msdn.microsoft.com/library/ms182172(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotExposeGenericListsUnitTestRule">
+	<rule key="DoNotExposeGenericLists">
 		<name><![CDATA[Do not expose generic lists]]></name>
 		<configKey><![CDATA[DoNotExposeGenericLists@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -27,7 +27,7 @@
 <a href="http://msdn.microsoft.com/library/ms182142(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseGenericEventHandlerInstancesUnitTestRule">
+	<rule key="UseGenericEventHandlerInstances">
 		<name><![CDATA[Use generic event handler instances]]></name>
 		<configKey><![CDATA[UseGenericEventHandlerInstances@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -36,7 +36,7 @@
 <a href="http://msdn.microsoft.com/library/ms182178(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="GenericMethodsShouldProvideTypeParameterUnitTestRule">
+	<rule key="GenericMethodsShouldProvideTypeParameter">
 		<name><![CDATA[Generic methods should provide type parameter]]></name>
 		<configKey><![CDATA[GenericMethodsShouldProvideTypeParameter@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -45,7 +45,7 @@
 <a href="http://msdn.microsoft.com/library/ms182150(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidExcessiveParametersOnGenericTypesUnitTestRule">
+	<rule key="AvoidExcessiveParametersOnGenericTypes">
 		<name><![CDATA[Avoid excessive parameters on generic types]]></name>
 		<configKey><![CDATA[AvoidExcessiveParametersOnGenericTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -54,7 +54,7 @@
 <a href="http://msdn.microsoft.com/library/ms182129(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotNestGenericTypesInMemberSignaturesUnitTestRule">
+	<rule key="DoNotNestGenericTypesInMemberSignatures">
 		<name><![CDATA[Do not nest generic types in member signatures]]></name>
 		<configKey><![CDATA[DoNotNestGenericTypesInMemberSignatures@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -63,7 +63,7 @@
 <a href="http://msdn.microsoft.com/library/ms182144(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseGenericsWhereAppropriateUnitTestRule">
+	<rule key="UseGenericsWhereAppropriate">
 		<name><![CDATA[Use generics where appropriate]]></name>
 		<configKey><![CDATA[UseGenericsWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -72,7 +72,7 @@
 <a href="http://msdn.microsoft.com/library/ms182179(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="EnumsShouldHaveZeroValueUnitTestRule">
+	<rule key="EnumsShouldHaveZeroValue">
 		<name><![CDATA[Enums should have zero value]]></name>
 		<configKey><![CDATA[EnumsShouldHaveZeroValue@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -81,7 +81,7 @@
 <a href="http://msdn.microsoft.com/library/ms182149(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DeclareEventHandlersCorrectlyUnitTestRule">
+	<rule key="DeclareEventHandlersCorrectly">
 		<name><![CDATA[Declare event handlers correctly]]></name>
 		<configKey><![CDATA[DeclareEventHandlersCorrectly@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -90,7 +90,7 @@
 <a href="http://msdn.microsoft.com/library/ms182133(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CollectionsShouldImplementGenericInterfaceUnitTestRule">
+	<rule key="CollectionsShouldImplementGenericInterface">
 		<name><![CDATA[Collections should implement generic interface]]></name>
 		<configKey><![CDATA[CollectionsShouldImplementGenericInterface@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -99,7 +99,7 @@
 <a href="http://msdn.microsoft.com/library/ms182132(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ConsiderPassingBaseTypesAsParametersUnitTestRule">
+	<rule key="ConsiderPassingBaseTypesAsParameters">
 		<name><![CDATA[Consider passing base types as parameters]]></name>
 		<configKey><![CDATA[ConsiderPassingBaseTypesAsParameters@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -108,7 +108,7 @@
 <a href="http://msdn.microsoft.com/library/3hk32yyz(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AbstractTypesShouldNotHaveConstructorsUnitTestRule">
+	<rule key="AbstractTypesShouldNotHaveConstructors">
 		<name><![CDATA[Abstract types should not have constructors (FxCop10)]]></name>
 		<configKey><![CDATA[AbstractTypesShouldNotHaveConstructors@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -117,7 +117,7 @@
 <a href="http://msdn.microsoft.com/library/ms182126(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverloadOperatorEqualsOnOverloadingAddAndSubtractUnitTestRule">
+	<rule key="OverloadOperatorEqualsOnOverloadingAddAndSubtract">
 		<name><![CDATA[Overload operator equals on overloading add and subtract]]></name>
 		<configKey><![CDATA[OverloadOperatorEqualsOnOverloadingAddAndSubtract@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -126,7 +126,7 @@
 <a href="http://msdn.microsoft.com/library/ms182164(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAssembliesWithClsCompliantUnitTestRule">
+	<rule key="MarkAssembliesWithClsCompliant">
 		<name><![CDATA[Mark assemblies with CLSCompliantAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[MarkAssembliesWithClsCompliant@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -135,7 +135,7 @@
 <a href="http://msdn.microsoft.com/library/ms182156(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AssembliesShouldHaveValidStrongNamesUnitTestRule">
+	<rule key="AssembliesShouldHaveValidStrongNames">
 		<name><![CDATA[Assemblies should have valid strong names]]></name>
 		<configKey><![CDATA[AssembliesShouldHaveValidStrongNames@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -144,7 +144,7 @@
 <a href="http://msdn.microsoft.com/library/ms182127(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAssembliesWithAssemblyVersionUnitTestRule">
+	<rule key="MarkAssembliesWithAssemblyVersion">
 		<name><![CDATA[Mark assemblies with AssemblyVersionAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[MarkAssembliesWithAssemblyVersion@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -153,7 +153,7 @@
 <a href="http://msdn.microsoft.com/library/ms182155(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAssembliesWithComVisibleUnitTestRule">
+	<rule key="MarkAssembliesWithComVisible">
 		<name><![CDATA[Mark assemblies with ComVisibleAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[MarkAssembliesWithComVisible@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -162,7 +162,7 @@
 <a href="http://msdn.microsoft.com/library/ms182157(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAttributesWithAttributeUsageUnitTestRule">
+	<rule key="MarkAttributesWithAttributeUsage">
 		<name><![CDATA[Mark attributes with AttributeUsageAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[MarkAttributesWithAttributeUsage@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -171,7 +171,7 @@
 <a href="http://msdn.microsoft.com/library/ms182158(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DefineAccessorsForAttributeArgumentsUnitTestRule">
+	<rule key="DefineAccessorsForAttributeArguments">
 		<name><![CDATA[Define accessors for attribute arguments]]></name>
 		<configKey><![CDATA[DefineAccessorsForAttributeArguments@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -180,7 +180,7 @@
 <a href="http://msdn.microsoft.com/library/ms182136(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidNamespacesWithFewTypesUnitTestRule">
+	<rule key="AvoidNamespacesWithFewTypes">
 		<name><![CDATA[Avoid namespaces with few types]]></name>
 		<configKey><![CDATA[AvoidNamespacesWithFewTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -189,7 +189,7 @@
 <a href="http://msdn.microsoft.com/library/ms182130(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidOutParametersUnitTestRule">
+	<rule key="AvoidOutParameters">
 		<name><![CDATA[Avoid out parameters]]></name>
 		<configKey><![CDATA[AvoidOutParameters@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -198,7 +198,7 @@
 <a href="http://msdn.microsoft.com/library/ms182131(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IndexersShouldNotBeMultidimensionalUnitTestRule">
+	<rule key="IndexersShouldNotBeMultidimensional">
 		<name><![CDATA[Indexers should not be multidimensional]]></name>
 		<configKey><![CDATA[IndexersShouldNotBeMultidimensional@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -207,7 +207,7 @@
 <a href="http://msdn.microsoft.com/library/ms182152(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UsePropertiesWhereAppropriateUnitTestRule">
+	<rule key="UsePropertiesWhereAppropriate">
 		<name><![CDATA[Use properties where appropriate]]></name>
 		<configKey><![CDATA[UsePropertiesWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -216,7 +216,7 @@
 <a href="http://msdn.microsoft.com/library/ms182181(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReplaceRepetitiveArgumentsWithParamsArrayUnitTestRule">
+	<rule key="ReplaceRepetitiveArgumentsWithParamsArray">
 		<name><![CDATA[Replace repetitive arguments with params array]]></name>
 		<configKey><![CDATA[ReplaceRepetitiveArgumentsWithParamsArray@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -225,7 +225,7 @@
 <a href="http://msdn.microsoft.com/library/ms182167(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DefaultParametersShouldNotBeUsedUnitTestRule">
+	<rule key="DefaultParametersShouldNotBeUsed">
 		<name><![CDATA[Default parameters should not be used]]></name>
 		<configKey><![CDATA[DefaultParametersShouldNotBeUsed@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -234,7 +234,7 @@
 <a href="http://msdn.microsoft.com/library/ms182135(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkEnumsWithFlagsUnitTestRule">
+	<rule key="MarkEnumsWithFlags">
 		<name><![CDATA[Mark enums with FlagsAttribute]]></name>
 		<configKey><![CDATA[MarkEnumsWithFlags@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -243,7 +243,7 @@
 <a href="http://msdn.microsoft.com/library/ms182159(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="EnumStorageShouldBeInt32UnitTestRule">
+	<rule key="EnumStorageShouldBeInt32">
 		<name><![CDATA[Enum storage should be Int32]]></name>
 		<configKey><![CDATA[EnumStorageShouldBeInt32@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -252,7 +252,7 @@
 <a href="http://msdn.microsoft.com/library/ms182147(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseEventsWhereAppropriateUnitTestRule">
+	<rule key="UseEventsWhereAppropriate">
 		<name><![CDATA[Use events where appropriate]]></name>
 		<configKey><![CDATA[UseEventsWhereAppropriate@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -261,7 +261,7 @@
 <a href="http://msdn.microsoft.com/library/ms182177(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotCatchGeneralExceptionTypesUnitTestRule">
+	<rule key="DoNotCatchGeneralExceptionTypes">
 		<name><![CDATA[Do not catch general exception types]]></name>
 		<configKey><![CDATA[DoNotCatchGeneralExceptionTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -270,7 +270,7 @@
 <a href="http://msdn.microsoft.com/library/ms182137(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ImplementStandardExceptionConstructorsUnitTestRule">
+	<rule key="ImplementStandardExceptionConstructors">
 		<name><![CDATA[Implement standard exception constructors]]></name>
 		<configKey><![CDATA[ImplementStandardExceptionConstructors@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -279,7 +279,7 @@
 <a href="http://msdn.microsoft.com/library/ms182151(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="InterfaceMethodsShouldBeCallableByChildTypesUnitTestRule">
+	<rule key="InterfaceMethodsShouldBeCallableByChildTypes">
 		<name><![CDATA[Interface methods should be callable by child types]]></name>
 		<configKey><![CDATA[InterfaceMethodsShouldBeCallableByChildTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -288,7 +288,7 @@
 <a href="http://msdn.microsoft.com/library/ms182153(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="NestedTypesShouldNotBeVisibleUnitTestRule">
+	<rule key="NestedTypesShouldNotBeVisible">
 		<name><![CDATA[Nested types should not be visible]]></name>
 		<configKey><![CDATA[NestedTypesShouldNotBeVisible@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -297,7 +297,7 @@
 <a href="http://msdn.microsoft.com/library/ms182162(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ICollectionImplementationsHaveStronglyTypedMembersUnitTestRule">
+	<rule key="ICollectionImplementationsHaveStronglyTypedMembers">
 		<name><![CDATA[ICollection implementations have strongly typed members]]></name>
 		<configKey><![CDATA[ICollectionImplementationsHaveStronglyTypedMembers@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -306,7 +306,7 @@
 <a href="http://msdn.microsoft.com/library/49stb304(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverrideMethodsOnComparableTypesUnitTestRule">
+	<rule key="OverrideMethodsOnComparableTypes">
 		<name><![CDATA[Override methods on comparable types]]></name>
 		<configKey><![CDATA[OverrideMethodsOnComparableTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -315,7 +315,7 @@
 <a href="http://msdn.microsoft.com/library/ms182163(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="EnumeratorsShouldBeStronglyTypedUnitTestRule">
+	<rule key="EnumeratorsShouldBeStronglyTyped">
 		<name><![CDATA[Enumerators should be strongly typed]]></name>
 		<configKey><![CDATA[EnumeratorsShouldBeStronglyTyped@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -324,7 +324,7 @@
 <a href="http://msdn.microsoft.com/library/ms182148(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ListsAreStronglyTypedUnitTestRule">
+	<rule key="ListsAreStronglyTyped">
 		<name><![CDATA[Lists are strongly typed]]></name>
 		<configKey><![CDATA[ListsAreStronglyTyped@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -333,7 +333,7 @@
 <a href="http://msdn.microsoft.com/library/ms182154(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidEmptyInterfacesUnitTestRule">
+	<rule key="AvoidEmptyInterfaces">
 		<name><![CDATA[Avoid empty interfaces]]></name>
 		<configKey><![CDATA[AvoidEmptyInterfaces@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -342,7 +342,7 @@
 <a href="http://msdn.microsoft.com/library/ms182128(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ProvideObsoleteAttributeMessageUnitTestRule">
+	<rule key="ProvideObsoleteAttributeMessage">
 		<name><![CDATA[Provide ObsoleteAttribute message]]></name>
 		<configKey><![CDATA[ProvideObsoleteAttributeMessage@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -351,7 +351,7 @@
 <a href="http://msdn.microsoft.com/library/ms182166(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseIntegralOrStringArgumentForIndexersUnitTestRule">
+	<rule key="UseIntegralOrStringArgumentForIndexers">
 		<name><![CDATA[Use integral or string argument for indexers]]></name>
 		<configKey><![CDATA[UseIntegralOrStringArgumentForIndexers@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -360,7 +360,7 @@
 <a href="http://msdn.microsoft.com/library/ms182180(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PropertiesShouldNotBeWriteOnlyUnitTestRule">
+	<rule key="PropertiesShouldNotBeWriteOnly">
 		<name><![CDATA[Properties should not be write only]]></name>
 		<configKey><![CDATA[PropertiesShouldNotBeWriteOnly@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -369,7 +369,7 @@
 <a href="http://msdn.microsoft.com/library/ms182165(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotPassTypesByReferenceUnitTestRule">
+	<rule key="DoNotPassTypesByReference">
 		<name><![CDATA[Do not pass types by reference]]></name>
 		<configKey><![CDATA[DoNotPassTypesByReference@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -378,7 +378,7 @@
 <a href="http://msdn.microsoft.com/library/ms182146(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotOverloadOperatorEqualsOnReferenceTypesUnitTestRule">
+	<rule key="DoNotOverloadOperatorEqualsOnReferenceTypes">
 		<name><![CDATA[Do not overload operator equals on reference types]]></name>
 		<configKey><![CDATA[DoNotOverloadOperatorEqualsOnReferenceTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -387,7 +387,7 @@
 <a href="http://msdn.microsoft.com/library/ms182145(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotDeclareProtectedMembersInSealedTypesUnitTestRule">
+	<rule key="DoNotDeclareProtectedMembersInSealedTypes">
 		<name><![CDATA[Do not declare protected members in sealed types]]></name>
 		<configKey><![CDATA[DoNotDeclareProtectedMembersInSealedTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -396,7 +396,7 @@
 <a href="http://msdn.microsoft.com/library/ms182138(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotDeclareVirtualMembersInSealedTypesUnitTestRule">
+	<rule key="DoNotDeclareVirtualMembersInSealedTypes">
 		<name><![CDATA[Do not declare virtual members in sealed types]]></name>
 		<configKey><![CDATA[DoNotDeclareVirtualMembersInSealedTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -405,7 +405,7 @@
 <a href="http://msdn.microsoft.com/library/ms182140(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypesThatOwnNativeResourcesShouldBeDisposableUnitTestRule">
+	<rule key="TypesThatOwnNativeResourcesShouldBeDisposable">
 		<name><![CDATA[Types that own native resources should be disposable]]></name>
 		<configKey><![CDATA[TypesThatOwnNativeResourcesShouldBeDisposable@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -414,7 +414,7 @@
 <a href="http://msdn.microsoft.com/library/ms182173(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DeclareTypesInNamespacesUnitTestRule">
+	<rule key="DeclareTypesInNamespaces">
 		<name><![CDATA[Declare types in namespaces]]></name>
 		<configKey><![CDATA[DeclareTypesInNamespaces@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -423,7 +423,7 @@
 <a href="http://msdn.microsoft.com/library/ms182134(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotDeclareVisibleInstanceFieldsUnitTestRule">
+	<rule key="DoNotDeclareVisibleInstanceFields">
 		<name><![CDATA[Do not declare visible instance fields]]></name>
 		<configKey><![CDATA[DoNotDeclareVisibleInstanceFields@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -432,7 +432,7 @@
 <a href="http://msdn.microsoft.com/library/ms182141(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="StaticHolderTypesShouldBeSealedUnitTestRule">
+	<rule key="StaticHolderTypesShouldBeSealed">
 		<name><![CDATA[Static holder types should be sealed]]></name>
 		<configKey><![CDATA[StaticHolderTypesShouldBeSealed@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -441,7 +441,7 @@
 <a href="http://msdn.microsoft.com/library/ms182168(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="StaticHolderTypesShouldNotHaveConstructorsUnitTestRule">
+	<rule key="StaticHolderTypesShouldNotHaveConstructors">
 		<name><![CDATA[Static holder types should not have constructors]]></name>
 		<configKey><![CDATA[StaticHolderTypesShouldNotHaveConstructors@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -450,7 +450,7 @@
 <a href="http://msdn.microsoft.com/library/ms182169(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UriParametersShouldNotBeStringsUnitTestRule">
+	<rule key="UriParametersShouldNotBeStrings">
 		<name><![CDATA[URI parameters should not be strings]]></name>
 		<configKey><![CDATA[UriParametersShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -459,7 +459,7 @@
 <a href="http://msdn.microsoft.com/library/ms182174(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UriReturnValuesShouldNotBeStringsUnitTestRule">
+	<rule key="UriReturnValuesShouldNotBeStrings">
 		<name><![CDATA[URI return values should not be strings]]></name>
 		<configKey><![CDATA[UriReturnValuesShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -468,7 +468,7 @@
 <a href="http://msdn.microsoft.com/library/ms182176(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UriPropertiesShouldNotBeStringsUnitTestRule">
+	<rule key="UriPropertiesShouldNotBeStrings">
 		<name><![CDATA[URI properties should not be strings]]></name>
 		<configKey><![CDATA[UriPropertiesShouldNotBeStrings@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -477,7 +477,7 @@
 <a href="http://msdn.microsoft.com/library/ms182175(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="StringUriOverloadsCallSystemUriOverloadsUnitTestRule">
+	<rule key="StringUriOverloadsCallSystemUriOverloads">
 		<name><![CDATA[String URI overloads call System.Uri overloads]]></name>
 		<configKey><![CDATA[StringUriOverloadsCallSystemUriOverloads@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -486,7 +486,7 @@
 <a href="http://msdn.microsoft.com/library/ms182170(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypesShouldNotExtendCertainBaseTypesUnitTestRule">
+	<rule key="TypesShouldNotExtendCertainBaseTypes">
 		<name><![CDATA[Types should not extend certain base types]]></name>
 		<configKey><![CDATA[TypesShouldNotExtendCertainBaseTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -495,7 +495,7 @@
 <a href="http://msdn.microsoft.com/library/ms182171(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MembersShouldNotExposeCertainConcreteTypesUnitTestRule">
+	<rule key="MembersShouldNotExposeCertainConcreteTypes">
 		<name><![CDATA[Members should not expose certain concrete types]]></name>
 		<configKey><![CDATA[MembersShouldNotExposeCertainConcreteTypes@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -504,7 +504,7 @@
 <a href="http://msdn.microsoft.com/library/ms182160(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MovePInvokesToNativeMethodsClassUnitTestRule">
+	<rule key="MovePInvokesToNativeMethodsClass">
 		<name><![CDATA[Move P/Invokes to NativeMethods class]]></name>
 		<configKey><![CDATA[MovePInvokesToNativeMethodsClass@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -513,7 +513,7 @@
 <a href="http://msdn.microsoft.com/library/ms182161(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotHideBaseClassMethodsUnitTestRule">
+	<rule key="DoNotHideBaseClassMethods">
 		<name><![CDATA[Do not hide base class methods]]></name>
 		<configKey><![CDATA[DoNotHideBaseClassMethods@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -522,7 +522,7 @@
 <a href="http://msdn.microsoft.com/library/ms182143(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ImplementIDisposableCorrectlyUnitTestRule">
+	<rule key="ImplementIDisposableCorrectly">
 		<name><![CDATA[Implement IDisposable correctly]]></name>
 		<configKey><![CDATA[ImplementIDisposableCorrectly@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -531,7 +531,7 @@
 <a href="http://msdn.microsoft.com/library/ms244737(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ExceptionsShouldBePublicUnitTestRule">
+	<rule key="ExceptionsShouldBePublic">
 		<name><![CDATA[Exceptions should be public]]></name>
 		<configKey><![CDATA[ExceptionsShouldBePublic@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -540,7 +540,7 @@
 <a href="http://msdn.microsoft.com/library/bb264484(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotRaiseExceptionsInUnexpectedLocationsUnitTestRule">
+	<rule key="DoNotRaiseExceptionsInUnexpectedLocations">
 		<name><![CDATA[Do not raise exceptions in unexpected locations]]></name>
 		<configKey><![CDATA[DoNotRaiseExceptionsInUnexpectedLocations@$(FxCopDir)\Rules\DesignRules.dll
 		]]></configKey>
@@ -549,7 +549,7 @@
 <a href="http://msdn.microsoft.com/library/bb386039(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SpecifyMessageBoxOptionsUnitTestRule">
+	<rule key="SpecifyMessageBoxOptions">
 		<name><![CDATA[Specify MessageBoxOptions (FxCop10)]]></name>
 		<configKey><![CDATA[SpecifyMessageBoxOptions@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -558,7 +558,7 @@
 <a href="http://msdn.microsoft.com/library/ms182191(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidDuplicateAcceleratorsUnitTestRule">
+	<rule key="AvoidDuplicateAccelerators">
 		<name><![CDATA[Avoid duplicate accelerators]]></name>
 		<configKey><![CDATA[AvoidDuplicateAccelerators@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -567,7 +567,7 @@
 <a href="http://msdn.microsoft.com/library/ms182185(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotHardcodeLocaleSpecificStringsUnitTestRule">
+	<rule key="DoNotHardcodeLocaleSpecificStrings">
 		<name><![CDATA[Do not hardcode locale specific strings]]></name>
 		<configKey><![CDATA[DoNotHardcodeLocaleSpecificStrings@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -576,7 +576,7 @@
 <a href="http://msdn.microsoft.com/library/ms182186(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SpecifyCultureInfoUnitTestRule">
+	<rule key="SpecifyCultureInfo">
 		<name><![CDATA[Specify CultureInfo (FxCop10)]]></name>
 		<configKey><![CDATA[SpecifyCultureInfo@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -585,7 +585,7 @@
 <a href="http://msdn.microsoft.com/library/ms182189(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SpecifyIFormatProviderUnitTestRule">
+	<rule key="SpecifyIFormatProvider">
 		<name><![CDATA[Specify IFormatProvider]]></name>
 		<configKey><![CDATA[SpecifyIFormatProvider@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -594,7 +594,7 @@
 <a href="http://msdn.microsoft.com/library/ms182190(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SetLocaleForDataTypesUnitTestRule">
+	<rule key="SetLocaleForDataTypes">
 		<name><![CDATA[Set locale for data types]]></name>
 		<configKey><![CDATA[SetLocaleForDataTypes@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -603,7 +603,7 @@
 <a href="http://msdn.microsoft.com/library/ms182188(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SpecifyMarshalingForPInvokeStringArgumentsUnitTestRule">
+	<rule key="SpecifyMarshalingForPInvokeStringArguments">
 		<name><![CDATA[Specify marshaling for P/Invoke string arguments]]></name>
 		<configKey><![CDATA[SpecifyMarshalingForPInvokeStringArguments@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -612,7 +612,7 @@
 <a href="http://msdn.microsoft.com/library/ms182319(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SpecifyStringComparisonUnitTestRule">
+	<rule key="SpecifyStringComparison">
 		<name><![CDATA[Specify StringComparison]]></name>
 		<configKey><![CDATA[SpecifyStringComparison@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -621,7 +621,7 @@
 <a href="http://msdn.microsoft.com/library/bb386080(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="NormalizeStringsToUppercaseUnitTestRule">
+	<rule key="NormalizeStringsToUppercase">
 		<name><![CDATA[Normalize strings to uppercase]]></name>
 		<configKey><![CDATA[NormalizeStringsToUppercase@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -630,7 +630,7 @@
 <a href="http://msdn.microsoft.com/library/bb386042(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseOrdinalStringComparisonUnitTestRule">
+	<rule key="UseOrdinalStringComparison">
 		<name><![CDATA[Use ordinal StringComparison]]></name>
 		<configKey><![CDATA[UseOrdinalStringComparison@$(FxCopDir)\Rules\GlobalizationRules.dll
 		]]></configKey>
@@ -639,7 +639,7 @@
 <a href="http://msdn.microsoft.com/library/bb385972(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PInvokeEntryPointsShouldExistUnitTestRule">
+	<rule key="PInvokeEntryPointsShouldExist">
 		<name><![CDATA[P/Invoke entry points should exist (FxCop10)]]></name>
 		<configKey><![CDATA[PInvokeEntryPointsShouldExist@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -648,7 +648,7 @@
 <a href="http://msdn.microsoft.com/library/ms182208(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PInvokesShouldNotBeVisibleUnitTestRule">
+	<rule key="PInvokesShouldNotBeVisible">
 		<name><![CDATA[P/Invokes should not be visible (FxCop10)]]></name>
 		<configKey><![CDATA[PInvokesShouldNotBeVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -657,7 +657,7 @@
 <a href="http://msdn.microsoft.com/library/ms182209(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidOverloadsInComVisibleInterfacesUnitTestRule">
+	<rule key="AvoidOverloadsInComVisibleInterfaces">
 		<name><![CDATA[Avoid overloads in COM visible interfaces (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidOverloadsInComVisibleInterfaces@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -666,7 +666,7 @@
 <a href="http://msdn.microsoft.com/library/ms182197(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AutoLayoutTypesShouldNotBeComVisibleUnitTestRule">
+	<rule key="AutoLayoutTypesShouldNotBeComVisible">
 		<name><![CDATA[Auto layout types should not be COM visible (FxCop10)]]></name>
 		<configKey><![CDATA[AutoLayoutTypesShouldNotBeComVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -675,7 +675,7 @@
 <a href="http://msdn.microsoft.com/library/ms182194(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CallGetLastErrorImmediatelyAfterPInvokeUnitTestRule">
+	<rule key="CallGetLastErrorImmediatelyAfterPInvoke">
 		<name><![CDATA[Call GetLastError immediately after P/Invoke (FxCop10)]]></name>
 		<configKey><![CDATA[CallGetLastErrorImmediatelyAfterPInvoke@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -684,7 +684,7 @@
 <a href="http://msdn.microsoft.com/library/ms182199(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ComVisibleTypeBaseTypesShouldBeComVisibleUnitTestRule">
+	<rule key="ComVisibleTypeBaseTypesShouldBeComVisible">
 		<name><![CDATA[COM visible type base types should be COM visible (FxCop10)
 		]]></name>
 		<configKey><![CDATA[ComVisibleTypeBaseTypesShouldBeComVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll
@@ -694,7 +694,7 @@
 <a href="http://msdn.microsoft.com/library/ms182202(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidInt64ArgumentsForVB6ClientsUnitTestRule">
+	<rule key="AvoidInt64ArgumentsForVB6Clients">
 		<name><![CDATA[Avoid Int64 arguments for Visual Basic 6 clients (FxCop10)
 		]]></name>
 		<configKey><![CDATA[AvoidInt64ArgumentsForVB6Clients@$(FxCopDir)\Rules\InteroperabilityRules.dll
@@ -704,7 +704,7 @@
 <a href="http://msdn.microsoft.com/library/ms182195(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidStaticMembersInComVisibleTypesUnitTestRule">
+	<rule key="AvoidStaticMembersInComVisibleTypes">
 		<name><![CDATA[Avoid static members in COM visible types (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidStaticMembersInComVisibleTypes@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -713,7 +713,7 @@
 <a href="http://msdn.microsoft.com/library/ms182198(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotUseAutoDualClassInterfaceTypeUnitTestRule">
+	<rule key="DoNotUseAutoDualClassInterfaceType">
 		<name><![CDATA[Do not use AutoDual ClassInterfaceType (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotUseAutoDualClassInterfaceType@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -722,7 +722,7 @@
 <a href="http://msdn.microsoft.com/library/ms182205(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ComVisibleTypesShouldBeCreatableUnitTestRule">
+	<rule key="ComVisibleTypesShouldBeCreatable">
 		<name><![CDATA[COM visible types should be creatable (FxCop10)]]></name>
 		<configKey><![CDATA[ComVisibleTypesShouldBeCreatable@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -731,7 +731,7 @@
 <a href="http://msdn.microsoft.com/library/ms182203(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ComRegistrationMethodsShouldBeMatchedUnitTestRule">
+	<rule key="ComRegistrationMethodsShouldBeMatched">
 		<name><![CDATA[COM registration methods should be matched (FxCop10)]]></name>
 		<configKey><![CDATA[ComRegistrationMethodsShouldBeMatched@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -740,7 +740,7 @@
 <a href="http://msdn.microsoft.com/library/ms182200(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ComRegistrationMethodsShouldNotBeVisibleUnitTestRule">
+	<rule key="ComRegistrationMethodsShouldNotBeVisible">
 		<name><![CDATA[COM registration methods should not be visible (FxCop10)]]></name>
 		<configKey><![CDATA[ComRegistrationMethodsShouldNotBeVisible@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -749,7 +749,7 @@
 <a href="http://msdn.microsoft.com/library/ms182201(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkComSourceInterfacesAsIDispatchUnitTestRule">
+	<rule key="MarkComSourceInterfacesAsIDispatch">
 		<name><![CDATA[Mark ComSource interfaces as IDispatch (FxCop10)]]></name>
 		<configKey><![CDATA[MarkComSourceInterfacesAsIDispatch@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -758,7 +758,7 @@
 <a href="http://msdn.microsoft.com/library/ms182207(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidNonpublicFieldsInComVisibleValueTypesUnitTestRule">
+	<rule key="AvoidNonpublicFieldsInComVisibleValueTypes">
 		<name><![CDATA[Avoid non-public fields in COM visible value types (FxCop10)
 		]]></name>
 		<configKey><![CDATA[AvoidNonpublicFieldsInComVisibleValueTypes@$(FxCopDir)\Rules\InteroperabilityRules.dll
@@ -768,7 +768,7 @@
 <a href="http://msdn.microsoft.com/library/ms182196(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkBooleanPInvokeArgumentsWithMarshalAsUnitTestRule">
+	<rule key="MarkBooleanPInvokeArgumentsWithMarshalAs">
 		<name><![CDATA[Mark boolean P/Invoke arguments with MarshalAs (FxCop10)]]></name>
 		<configKey><![CDATA[MarkBooleanPInvokeArgumentsWithMarshalAs@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -777,7 +777,7 @@
 <a href="http://msdn.microsoft.com/library/ms182206(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DeclarePInvokesCorrectlyUnitTestRule">
+	<rule key="DeclarePInvokesCorrectly">
 		<name><![CDATA[Declare P/Invokes correctly (FxCop10)]]></name>
 		<configKey><![CDATA[DeclarePInvokesCorrectly@$(FxCopDir)\Rules\InteroperabilityRules.dll
 		]]></configKey>
@@ -786,7 +786,7 @@
 <a href="http://msdn.microsoft.com/library/ms182204(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotUseIdleProcessPriorityUnitTestRule">
+	<rule key="DoNotUseIdleProcessPriority">
 		<name><![CDATA[Do not use idle process priority (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotUseIdleProcessPriority@$(FxCopDir)\Rules\MobilityRules.dll
 		]]></configKey>
@@ -795,7 +795,7 @@
 <a href="http://msdn.microsoft.com/library/ms182219(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotUseTimersThatPreventPowerStateChangesUnitTestRule">
+	<rule key="DoNotUseTimersThatPreventPowerStateChanges">
 		<name><![CDATA[Do not use timers that prevent power state changes (FxCop10)
 		]]></name>
 		<configKey><![CDATA[DoNotUseTimersThatPreventPowerStateChanges@$(FxCopDir)\Rules\MobilityRules.dll
@@ -805,7 +805,7 @@
 <a href="http://msdn.microsoft.com/library/ms182230(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotNameEnumValuesReservedUnitTestRule">
+	<rule key="DoNotNameEnumValuesReserved">
 		<name><![CDATA[Do not name enum values 'Reserved']]></name>
 		<configKey><![CDATA[DoNotNameEnumValuesReserved@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -814,7 +814,7 @@
 <a href="http://msdn.microsoft.com/library/ms182236(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ResourceStringCompoundWordsShouldBeCasedCorrectlyUnitTestRule">
+	<rule key="ResourceStringCompoundWordsShouldBeCasedCorrectly">
 		<name><![CDATA[Resource string compound words should be cased correctly]]></name>
 		<configKey><![CDATA[ResourceStringCompoundWordsShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -823,7 +823,7 @@
 <a href="http://msdn.microsoft.com/library/bb264481(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CompoundWordsShouldBeCasedCorrectlyUnitTestRule">
+	<rule key="CompoundWordsShouldBeCasedCorrectly">
 		<name><![CDATA[Compound words should be cased correctly]]></name>
 		<configKey><![CDATA[CompoundWordsShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -832,7 +832,7 @@
 <a href="http://msdn.microsoft.com/library/bb264474(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ResourceStringsShouldBeSpelledCorrectlyUnitTestRule">
+	<rule key="ResourceStringsShouldBeSpelledCorrectly">
 		<name><![CDATA[Resource strings should be spelled correctly]]></name>
 		<configKey><![CDATA[ResourceStringsShouldBeSpelledCorrectly@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -841,7 +841,7 @@
 <a href="http://msdn.microsoft.com/library/bb264483(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldBeSpelledCorrectlyUnitTestRule">
+	<rule key="IdentifiersShouldBeSpelledCorrectly">
 		<name><![CDATA[Identifiers should be spelled correctly (FxCop10)]]></name>
 		<configKey><![CDATA[IdentifiersShouldBeSpelledCorrectly@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -850,7 +850,7 @@
 <a href="http://msdn.microsoft.com/library/bb264492(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldNotContainUnderscoresUnitTestRule">
+	<rule key="IdentifiersShouldNotContainUnderscores">
 		<name><![CDATA[Identifiers should not contain underscores (FxCop10)]]></name>
 		<configKey><![CDATA[IdentifiersShouldNotContainUnderscores@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -859,7 +859,7 @@
 <a href="http://msdn.microsoft.com/library/ms182245(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldDifferByMoreThanCaseUnitTestRule">
+	<rule key="IdentifiersShouldDifferByMoreThanCase">
 		<name><![CDATA[Identifiers should differ by more than case]]></name>
 		<configKey><![CDATA[IdentifiersShouldDifferByMoreThanCase@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -868,7 +868,7 @@
 <a href="http://msdn.microsoft.com/library/ms182242(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldBeCasedCorrectlyUnitTestRule">
+	<rule key="IdentifiersShouldBeCasedCorrectly">
 		<name><![CDATA[Identifiers should be cased correctly (FxCop10)]]></name>
 		<configKey><![CDATA[IdentifiersShouldBeCasedCorrectly@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -877,7 +877,7 @@
 <a href="http://msdn.microsoft.com/library/ms182240(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldHaveCorrectSuffixUnitTestRule">
+	<rule key="IdentifiersShouldHaveCorrectSuffix">
 		<name><![CDATA[Identifiers should have correct suffix]]></name>
 		<configKey><![CDATA[IdentifiersShouldHaveCorrectSuffix@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -886,7 +886,7 @@
 <a href="http://msdn.microsoft.com/library/ms182244(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldNotHaveIncorrectSuffixUnitTestRule">
+	<rule key="IdentifiersShouldNotHaveIncorrectSuffix">
 		<name><![CDATA[Identifiers should not have incorrect suffix]]></name>
 		<configKey><![CDATA[IdentifiersShouldNotHaveIncorrectSuffix@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -895,7 +895,7 @@
 <a href="http://msdn.microsoft.com/library/ms182247(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotPrefixEnumValuesWithTypeNameUnitTestRule">
+	<rule key="DoNotPrefixEnumValuesWithTypeName">
 		<name><![CDATA[Do not prefix enum values with type name]]></name>
 		<configKey><![CDATA[DoNotPrefixEnumValuesWithTypeName@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -904,7 +904,7 @@
 <a href="http://msdn.microsoft.com/library/ms182237(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="EventsShouldNotHaveBeforeOrAfterPrefixUnitTestRule">
+	<rule key="EventsShouldNotHaveBeforeOrAfterPrefix">
 		<name><![CDATA[Events should not have before or after prefix]]></name>
 		<configKey><![CDATA[EventsShouldNotHaveBeforeOrAfterPrefix@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -913,7 +913,7 @@
 <a href="http://msdn.microsoft.com/library/ms182238(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="FlagsEnumsShouldHavePluralNamesUnitTestRule">
+	<rule key="FlagsEnumsShouldHavePluralNames">
 		<name><![CDATA[Flags enums should have plural names]]></name>
 		<configKey><![CDATA[FlagsEnumsShouldHavePluralNames@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -922,7 +922,7 @@
 <a href="http://msdn.microsoft.com/library/bb264486(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldHaveCorrectPrefixUnitTestRule">
+	<rule key="IdentifiersShouldHaveCorrectPrefix">
 		<name><![CDATA[Identifiers should have correct prefix]]></name>
 		<configKey><![CDATA[IdentifiersShouldHaveCorrectPrefix@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -931,7 +931,7 @@
 <a href="http://msdn.microsoft.com/library/ms182243(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldNotMatchKeywordsUnitTestRule">
+	<rule key="IdentifiersShouldNotMatchKeywords">
 		<name><![CDATA[Identifiers should not match keywords]]></name>
 		<configKey><![CDATA[IdentifiersShouldNotMatchKeywords@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -940,7 +940,7 @@
 <a href="http://msdn.microsoft.com/library/ms182248(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OnlyFlagsEnumsShouldHavePluralNamesUnitTestRule">
+	<rule key="OnlyFlagsEnumsShouldHavePluralNames">
 		<name><![CDATA[Only FlagsAttribute enums should have plural names]]></name>
 		<configKey><![CDATA[OnlyFlagsEnumsShouldHavePluralNames@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -949,7 +949,7 @@
 <a href="http://msdn.microsoft.com/library/bb264487(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ParameterNamesShouldNotMatchMemberNamesUnitTestRule">
+	<rule key="ParameterNamesShouldNotMatchMemberNames">
 		<name><![CDATA[Parameter names should not match member names]]></name>
 		<configKey><![CDATA[ParameterNamesShouldNotMatchMemberNames@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -958,7 +958,7 @@
 <a href="http://msdn.microsoft.com/library/ms182252(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldNotContainTypeNamesUnitTestRule">
+	<rule key="IdentifiersShouldNotContainTypeNames">
 		<name><![CDATA[Identifiers should not contain type names]]></name>
 		<configKey><![CDATA[IdentifiersShouldNotContainTypeNames@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -967,7 +967,7 @@
 <a href="http://msdn.microsoft.com/library/bb531486(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PropertyNamesShouldNotMatchGetMethodsUnitTestRule">
+	<rule key="PropertyNamesShouldNotMatchGetMethods">
 		<name><![CDATA[Property names should not match get methods]]></name>
 		<configKey><![CDATA[PropertyNamesShouldNotMatchGetMethods@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -976,7 +976,7 @@
 <a href="http://msdn.microsoft.com/library/ms182253(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="IdentifiersShouldNotHaveIncorrectPrefixUnitTestRule">
+	<rule key="IdentifiersShouldNotHaveIncorrectPrefix">
 		<name><![CDATA[Identifiers should not have incorrect prefix]]></name>
 		<configKey><![CDATA[IdentifiersShouldNotHaveIncorrectPrefix@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -985,7 +985,7 @@
 <a href="http://msdn.microsoft.com/library/ms182246(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypeNamesShouldNotMatchNamespacesUnitTestRule">
+	<rule key="TypeNamesShouldNotMatchNamespaces">
 		<name><![CDATA[Type names should not match namespaces]]></name>
 		<configKey><![CDATA[TypeNamesShouldNotMatchNamespaces@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -994,7 +994,7 @@
 <a href="http://msdn.microsoft.com/library/ms182257(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ParameterNamesShouldMatchBaseDeclarationUnitTestRule">
+	<rule key="ParameterNamesShouldMatchBaseDeclaration">
 		<name><![CDATA[Parameter names should match base declaration]]></name>
 		<configKey><![CDATA[ParameterNamesShouldMatchBaseDeclaration@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -1003,7 +1003,7 @@
 <a href="http://msdn.microsoft.com/library/ms182251(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UsePreferredTermsUnitTestRule">
+	<rule key="UsePreferredTerms">
 		<name><![CDATA[Use preferred terms]]></name>
 		<configKey><![CDATA[UsePreferredTerms@$(FxCopDir)\Rules\NamingRules.dll
 		]]></configKey>
@@ -1012,7 +1012,7 @@
 <a href="http://msdn.microsoft.com/library/ms182258(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotCastUnnecessarilyUnitTestRule">
+	<rule key="DoNotCastUnnecessarily">
 		<name><![CDATA[Do not cast unnecessarily]]></name>
 		<configKey><![CDATA[DoNotCastUnnecessarily@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1021,7 +1021,7 @@
 <a href="http://msdn.microsoft.com/library/ms182271(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseLiteralsWhereAppropriateUnitTestRule">
+	<rule key="UseLiteralsWhereAppropriate">
 		<name><![CDATA[Use literals where appropriate]]></name>
 		<configKey><![CDATA[UseLiteralsWhereAppropriate@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1030,7 +1030,7 @@
 <a href="http://msdn.microsoft.com/library/ms182280(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="RemoveUnusedLocalsUnitTestRule">
+	<rule key="RemoveUnusedLocals">
 		<name><![CDATA[Remove unused locals (FxCop10)]]></name>
 		<configKey><![CDATA[RemoveUnusedLocals@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1039,7 +1039,7 @@
 <a href="http://msdn.microsoft.com/library/ms182278(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidExcessiveLocalsUnitTestRule">
+	<rule key="AvoidExcessiveLocals">
 		<name><![CDATA[Avoid excessive locals]]></name>
 		<configKey><![CDATA[AvoidExcessiveLocals@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1048,7 +1048,7 @@
 <a href="http://msdn.microsoft.com/library/ms182263(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="InitializeReferenceTypeStaticFieldsInlineUnitTestRule">
+	<rule key="InitializeReferenceTypeStaticFieldsInline">
 		<name><![CDATA[Initialize reference type static fields inline]]></name>
 		<configKey><![CDATA[InitializeReferenceTypeStaticFieldsInline@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1057,7 +1057,7 @@
 <a href="http://msdn.microsoft.com/library/ms182275(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidUncalledPrivateCodeUnitTestRule">
+	<rule key="AvoidUncalledPrivateCode">
 		<name><![CDATA[Avoid uncalled private code (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidUncalledPrivateCode@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1066,7 +1066,7 @@
 <a href="http://msdn.microsoft.com/library/ms182264(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidUninstantiatedInternalClassesUnitTestRule">
+	<rule key="AvoidUninstantiatedInternalClasses">
 		<name><![CDATA[Avoid uninstantiated internal classes (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidUninstantiatedInternalClasses@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1075,7 +1075,7 @@
 <a href="http://msdn.microsoft.com/library/ms182265(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidUnsealedAttributesUnitTestRule">
+	<rule key="AvoidUnsealedAttributes">
 		<name><![CDATA[Avoid unsealed attributes (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidUnsealedAttributes@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1084,7 +1084,7 @@
 <a href="http://msdn.microsoft.com/library/ms182267(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PreferJaggedArraysOverMultidimensionalUnitTestRule">
+	<rule key="PreferJaggedArraysOverMultidimensional">
 		<name><![CDATA[Prefer jagged arrays over multidimensional (FxCop10)]]></name>
 		<configKey><![CDATA[PreferJaggedArraysOverMultidimensional@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1093,7 +1093,7 @@
 <a href="http://msdn.microsoft.com/library/ms182277(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverrideEqualsAndOperatorEqualsOnValueTypesUnitTestRule">
+	<rule key="OverrideEqualsAndOperatorEqualsOnValueTypes">
 		<name><![CDATA[Override equals and operator equals on value types]]></name>
 		<configKey><![CDATA[OverrideEqualsAndOperatorEqualsOnValueTypes@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1102,7 +1102,7 @@
 <a href="http://msdn.microsoft.com/library/ms182276(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PropertiesShouldNotReturnArraysUnitTestRule">
+	<rule key="PropertiesShouldNotReturnArrays">
 		<name><![CDATA[Properties should not return arrays (FxCop10)]]></name>
 		<configKey><![CDATA[PropertiesShouldNotReturnArrays@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1111,7 +1111,7 @@
 <a href="http://msdn.microsoft.com/library/0fss9skc(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TestForEmptyStringsUsingStringLengthUnitTestRule">
+	<rule key="TestForEmptyStringsUsingStringLength">
 		<name><![CDATA[Test for empty strings using string length]]></name>
 		<configKey><![CDATA[TestForEmptyStringsUsingStringLength@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1120,7 +1120,7 @@
 <a href="http://msdn.microsoft.com/library/ms182279(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="RemoveEmptyFinalizersUnitTestRule">
+	<rule key="RemoveEmptyFinalizers">
 		<name><![CDATA[Remove empty finalizers]]></name>
 		<configKey><![CDATA[RemoveEmptyFinalizers@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1129,7 +1129,7 @@
 <a href="http://msdn.microsoft.com/library/bb264476(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkMembersAsStaticUnitTestRule">
+	<rule key="MarkMembersAsStatic">
 		<name><![CDATA[Mark members as static (FxCop10)]]></name>
 		<configKey><![CDATA[MarkMembersAsStatic@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1138,7 +1138,7 @@
 <a href="http://msdn.microsoft.com/library/ms245046(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AvoidUnusedPrivateFieldsUnitTestRule">
+	<rule key="AvoidUnusedPrivateFields">
 		<name><![CDATA[Avoid unused private fields (FxCop10)]]></name>
 		<configKey><![CDATA[AvoidUnusedPrivateFields@$(FxCopDir)\Rules\PerformanceRules.dll
 		]]></configKey>
@@ -1147,7 +1147,7 @@
 <a href="http://msdn.microsoft.com/library/ms245042(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAssembliesWithNeutralResourcesLanguageUnitTestRule">
+	<rule key="MarkAssembliesWithNeutralResourcesLanguage">
 		<name><![CDATA[Mark assemblies with NeutralResourcesLanguageAttribute (FxCop10)
 		]]></name>
 		<configKey><![CDATA[MarkAssembliesWithNeutralResourcesLanguage@$(FxCopDir)\Rules\PerformanceRules.dll
@@ -1157,7 +1157,7 @@
 <a href="http://msdn.microsoft.com/library/bb385967(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ValueTypeFieldsShouldBePortableUnitTestRule">
+	<rule key="ValueTypeFieldsShouldBePortable">
 		<name><![CDATA[Value type fields should be portable (FxCop10)]]></name>
 		<configKey><![CDATA[ValueTypeFieldsShouldBePortable@$(FxCopDir)\Rules\PortabilityRules.dll
 		]]></configKey>
@@ -1166,7 +1166,7 @@
 <a href="http://msdn.microsoft.com/library/ms182285(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PInvokeDeclarationsShouldBePortableUnitTestRule">
+	<rule key="PInvokeDeclarationsShouldBePortable">
 		<name><![CDATA[P/Invoke declarations should be portable (FxCop10)]]></name>
 		<configKey><![CDATA[PInvokeDeclarationsShouldBePortable@$(FxCopDir)\Rules\PortabilityRules.dll
 		]]></configKey>
@@ -1175,7 +1175,7 @@
 <a href="http://msdn.microsoft.com/library/ms182284(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseOnlyApiFromTargetedFrameworkUnitTestRule">
+	<rule key="UseOnlyApiFromTargetedFramework">
 		<name><![CDATA[Use only API from targeted framework (FxCop10)]]></name>
 		<configKey><![CDATA[UseOnlyApiFromTargetedFramework@$(FxCopDir)\Rules\PortabilityRules.dll
 		]]></configKey>
@@ -1185,7 +1185,7 @@
 <a href="http://msdn.microsoft.com/library/cc667408(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CatchNonClsCompliantExceptionsInGeneralHandlersUnitTestRule">
+	<rule key="CatchNonClsCompliantExceptionsInGeneralHandlers">
 		<name><![CDATA[Catch non-CLSCompliant exceptions in general handlers (FxCop10)
 		]]></name>
 		<configKey><![CDATA[CatchNonClsCompliantExceptionsInGeneralHandlers@$(FxCopDir)\Rules\SecurityRules.dll
@@ -1195,7 +1195,7 @@
 <a href="http://msdn.microsoft.com/library/bb264489(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewImperativeSecurityUnitTestRule">
+	<rule key="ReviewImperativeSecurity">
 		<name><![CDATA[Review imperative security (FxCop10)]]></name>
 		<configKey><![CDATA[ReviewImperativeSecurity@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1204,7 +1204,7 @@
 <a href="http://msdn.microsoft.com/library/ms182309(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotDeclareReadOnlyMutableReferenceTypesUnitTestRule">
+	<rule key="DoNotDeclareReadOnlyMutableReferenceTypes">
 		<name><![CDATA[Do not declare read only mutable reference types (FxCop10)
 		]]></name>
 		<configKey><![CDATA[DoNotDeclareReadOnlyMutableReferenceTypes@$(FxCopDir)\Rules\SecurityRules.dll
@@ -1214,7 +1214,7 @@
 <a href="http://msdn.microsoft.com/library/ms182302(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ArrayFieldsShouldNotBeReadOnlyUnitTestRule">
+	<rule key="ArrayFieldsShouldNotBeReadOnly">
 		<name><![CDATA[Array fields should not be read only (FxCop10)]]></name>
 		<configKey><![CDATA[ArrayFieldsShouldNotBeReadOnly@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1223,7 +1223,7 @@
 <a href="http://msdn.microsoft.com/library/ms182299(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SecureAssertsUnitTestRule">
+	<rule key="SecureAsserts">
 		<name><![CDATA[Secure asserts (FxCop10)]]></name>
 		<configKey><![CDATA[SecureAsserts@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1232,7 +1232,7 @@
 <a href="http://msdn.microsoft.com/library/ms182314(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewDenyAndPermitOnlyUsageUnitTestRule">
+	<rule key="ReviewDenyAndPermitOnlyUsage">
 		<name><![CDATA[Review deny and permit only usage (FxCop10)]]></name>
 		<configKey><![CDATA[ReviewDenyAndPermitOnlyUsage@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1241,7 +1241,7 @@
 <a href="http://msdn.microsoft.com/library/ms182308(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewDeclarativeSecurityOnValueTypesUnitTestRule">
+	<rule key="ReviewDeclarativeSecurityOnValueTypes">
 		<name><![CDATA[Review declarative security on value types (FxCop10)]]></name>
 		<configKey><![CDATA[ReviewDeclarativeSecurityOnValueTypes@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1250,7 +1250,7 @@
 <a href="http://msdn.microsoft.com/library/ms182307(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewVisibleEventHandlersUnitTestRule">
+	<rule key="ReviewVisibleEventHandlers">
 		<name><![CDATA[Review visible event handlers (FxCop10)]]></name>
 		<configKey><![CDATA[ReviewVisibleEventHandlers@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1259,7 +1259,7 @@
 <a href="http://msdn.microsoft.com/library/ms182312(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PointersShouldNotBeVisibleUnitTestRule">
+	<rule key="PointersShouldNotBeVisible">
 		<name><![CDATA[Pointers should not be visible (FxCop10)]]></name>
 		<configKey><![CDATA[PointersShouldNotBeVisible@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1268,7 +1268,7 @@
 <a href="http://msdn.microsoft.com/library/ms182306(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SecuredTypesShouldNotExposeFieldsUnitTestRule">
+	<rule key="SecuredTypesShouldNotExposeFields">
 		<name><![CDATA[Secured types should not expose fields (FxCop10)]]></name>
 		<configKey><![CDATA[SecuredTypesShouldNotExposeFields@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1277,7 +1277,7 @@
 <a href="http://msdn.microsoft.com/library/ms182318(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MethodSecurityShouldBeASupersetOfTypeUnitTestRule">
+	<rule key="MethodSecurityShouldBeASupersetOfType">
 		<name><![CDATA[Method security should be a superset of type (FxCop10)]]></name>
 		<configKey><![CDATA[MethodSecurityShouldBeASupersetOfType@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1286,7 +1286,7 @@
 <a href="http://msdn.microsoft.com/library/ms182304(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CallGCKeepAliveWhenUsingNativeResourcesUnitTestRule">
+	<rule key="CallGCKeepAliveWhenUsingNativeResources">
 		<name><![CDATA[Call GC.KeepAlive when using native resources (FxCop10)]]></name>
 		<configKey><![CDATA[CallGCKeepAliveWhenUsingNativeResources@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1295,7 +1295,7 @@
 <a href="http://msdn.microsoft.com/library/ms182300(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AptcaMethodsShouldOnlyCallAptcaMethodsUnitTestRule">
+	<rule key="AptcaMethodsShouldOnlyCallAptcaMethods">
 		<name><![CDATA[APTCA methods should only call APTCA methods (FxCop10)]]></name>
 		<configKey><![CDATA[AptcaMethodsShouldOnlyCallAptcaMethods@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1304,7 +1304,7 @@
 <a href="http://msdn.microsoft.com/library/ms182297(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AptcaTypesShouldOnlyExtendAptcaBaseTypesUnitTestRule">
+	<rule key="AptcaTypesShouldOnlyExtendAptcaBaseTypes">
 		<name><![CDATA[APTCA types should only extend APTCA base types (FxCop10)]]></name>
 		<configKey><![CDATA[AptcaTypesShouldOnlyExtendAptcaBaseTypes@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1313,7 +1313,7 @@
 <a href="http://msdn.microsoft.com/library/ms182298(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewSuppressUnmanagedCodeSecurityUsageUnitTestRule">
+	<rule key="ReviewSuppressUnmanagedCodeSecurityUsage">
 		<name><![CDATA[Review SuppressUnmanagedCodeSecurityAttribute usage (FxCop10)
 		]]></name>
 		<configKey><![CDATA[ReviewSuppressUnmanagedCodeSecurityUsage@$(FxCopDir)\Rules\SecurityRules.dll
@@ -1323,7 +1323,7 @@
 <a href="http://msdn.microsoft.com/library/ms182311(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SealMethodsThatSatisfyPrivateInterfacesUnitTestRule">
+	<rule key="SealMethodsThatSatisfyPrivateInterfaces">
 		<name><![CDATA[Seal methods that satisfy private interfaces (FxCop10)]]></name>
 		<configKey><![CDATA[SealMethodsThatSatisfyPrivateInterfaces@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1332,7 +1332,7 @@
 <a href="http://msdn.microsoft.com/library/ms182313(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SecureSerializationConstructorsUnitTestRule">
+	<rule key="SecureSerializationConstructors">
 		<name><![CDATA[Secure serialization constructors (FxCop10)]]></name>
 		<configKey><![CDATA[SecureSerializationConstructors@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1341,7 +1341,7 @@
 <a href="http://msdn.microsoft.com/library/ms182317(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="StaticConstructorsShouldBePrivateUnitTestRule">
+	<rule key="StaticConstructorsShouldBePrivate">
 		<name><![CDATA[Static constructors should be private (FxCop10)]]></name>
 		<configKey><![CDATA[StaticConstructorsShouldBePrivate@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1350,7 +1350,7 @@
 <a href="http://msdn.microsoft.com/library/ms182320(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotIndirectlyExposeMethodsWithLinkDemandsUnitTestRule">
+	<rule key="DoNotIndirectlyExposeMethodsWithLinkDemands">
 		<name><![CDATA[Do not indirectly expose methods with link demands (FxCop10)
 		]]></name>
 		<configKey><![CDATA[DoNotIndirectlyExposeMethodsWithLinkDemands@$(FxCopDir)\Rules\SecurityRules.dll
@@ -1360,7 +1360,7 @@
 <a href="http://msdn.microsoft.com/library/ms182303(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="WrapVulnerableFinallyClausesInOuterTryUnitTestRule">
+	<rule key="WrapVulnerableFinallyClausesInOuterTry">
 		<name><![CDATA[Wrap vulnerable finally clauses in outer try (FxCop10)]]></name>
 		<configKey><![CDATA[WrapVulnerableFinallyClausesInOuterTry@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1369,7 +1369,7 @@
 <a href="http://msdn.microsoft.com/library/ms182322(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypeLinkDemandsRequireInheritanceDemandsUnitTestRule">
+	<rule key="TypeLinkDemandsRequireInheritanceDemands">
 		<name><![CDATA[Type link demands require inheritance demands (FxCop10)]]></name>
 		<configKey><![CDATA[TypeLinkDemandsRequireInheritanceDemands@$(FxCopDir)\Rules\SecurityRules.dll
 		]]></configKey>
@@ -1378,7 +1378,7 @@
 <a href="http://msdn.microsoft.com/library/ms182321(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ConstantsShouldBeTransparentUnitTestRule">
+	<rule key="ConstantsShouldBeTransparent">
 		<name><![CDATA[Security critical constants should be transparent (FxCop10)
 		]]></name>
 		<configKey><![CDATA[ConstantsShouldBeTransparent@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1388,7 +1388,7 @@
 <a href="http://msdn.microsoft.com/library/dd997446(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CriticalTypesMustNotParticipateInTypeEquivalenceUnitTestRule">
+	<rule key="CriticalTypesMustNotParticipateInTypeEquivalence">
 		<name><![CDATA[Security critical types may not participate in type equivalence
 			(FxCop10)]]></name>
 		<configKey><![CDATA[CriticalTypesMustNotParticipateInTypeEquivalence@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1398,7 +1398,7 @@
 <a href="http://msdn.microsoft.com/library/dd997564(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DefaultConstructorsMustHaveConsistentTransparencyUnitTestRule">
+	<rule key="DefaultConstructorsMustHaveConsistentTransparency">
 		<name><![CDATA[Default constructors must be at least as critical as base type
 			default constructors (FxCop10)]]></name>
 		<configKey><![CDATA[DefaultConstructorsMustHaveConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1408,7 +1408,7 @@
 <a href="http://msdn.microsoft.com/library/dd983956(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DelegatesMustBindWithConsistentTransparencyUnitTestRule">
+	<rule key="DelegatesMustBindWithConsistentTransparency">
 		<name><![CDATA[Delegates must bind to methods with consistent transparency
 			(FxCop10)]]></name>
 		<configKey><![CDATA[DelegatesMustBindWithConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1418,7 +1418,7 @@
 <a href="http://msdn.microsoft.com/library/dd997710(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MethodsMustOverrideWithConsistentTransparencyUnitTestRule">
+	<rule key="MethodsMustOverrideWithConsistentTransparency">
 		<name><![CDATA[Methods must keep consistent transparency when overriding base
 			methods (FxCop10)]]></name>
 		<configKey><![CDATA[MethodsMustOverrideWithConsistentTransparency@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1428,7 +1428,7 @@
 <a href="http://msdn.microsoft.com/library/dd997447(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverrideLinkDemandsShouldBeIdenticalToBaseUnitTestRule">
+	<rule key="OverrideLinkDemandsShouldBeIdenticalToBase">
 		<name><![CDATA[Override link demands should be identical to base (FxCop10)
 		]]></name>
 		<configKey><![CDATA[OverrideLinkDemandsShouldBeIdenticalToBase@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1438,7 +1438,7 @@
 <a href="http://msdn.microsoft.com/library/ms182305(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemandsUnitTestRule">
+	<rule key="SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemands">
 		<name><![CDATA[Level 2 assemblies should not contain LinkDemands (FxCop10)
 		]]></name>
 		<configKey><![CDATA[SecurityRuleSetLevel2MethodsShouldNotBeProtectedWithLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1448,7 +1448,7 @@
 <a href="http://msdn.microsoft.com/library/dd997569(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparencyAnnotationsShouldNotConflictUnitTestRule">
+	<rule key="TransparencyAnnotationsShouldNotConflict">
 		<name><![CDATA[Members should not have conflicting transparency annotations
 			(FxCop10)]]></name>
 		<configKey><![CDATA[TransparencyAnnotationsShouldNotConflict@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1458,17 +1458,17 @@
 <a href="http://msdn.microsoft.com/library/bb264493(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentCodeMustNotUseCriticalAttributesUnitTestRule">
+	<rule key="TransparentCodeMustNotUseCriticalAttributes">
 		<name><![CDATA[Transparent code may not use security critical attributes
 			(FxCop10)]]></name>
 		<configKey><![CDATA[TransparentCodeMustNotUseCriticalAttributes@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
 		]]></configKey>
 		<category name="Reliability" />
 		<description><![CDATA[Transparent code must not use security critical attributes.  This includes using security critical constructors, properties, or fields of attributes.  Violations of this rule will result in an exception when code attempts to retrieve the custom attributes from the transparent target.<br/>
-<a href="http://msdn.microsoft.com/library/UnitTestRule">msdn help page</a>
+<a href="http://msdn.microsoft.com/library/">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustBeVerifiableUnitTestRule">
+	<rule key="TransparentMethodsMustBeVerifiable">
 		<name><![CDATA[Transparent methods must contain only verifiable IL (FxCop10)
 		]]></name>
 		<configKey><![CDATA[TransparentMethodsMustBeVerifiable@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1478,7 +1478,7 @@
 <a href="http://msdn.microsoft.com/library/dd983954(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustNotCallNativeCodeUnitTestRule">
+	<rule key="TransparentMethodsMustNotCallNativeCode">
 		<name><![CDATA[Transparent methods must not call into native code (FxCop10)
 		]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotCallNativeCode@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1489,7 +1489,7 @@
 ]]></description>
 	</rule>
 	<rule
-		key="TransparentMethodsMustNotCallSuppressUnmanagedCodeSecurityMethodsUnitTestRule">
+		key="TransparentMethodsMustNotCallSuppressUnmanagedCodeSecurityMethods">
 		<name><![CDATA[Transparent methods must not call methods with the
 			SuppressUnmanagedCodeSecurity attribute (FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotCallSuppressUnmanagedCodeSecurityMethods@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1499,7 +1499,7 @@
 <a href="http://msdn.microsoft.com/library/dd997711(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustNotHandleProcessCorruptingExceptionsUnitTestRule">
+	<rule key="TransparentMethodsMustNotHandleProcessCorruptingExceptions">
 		<name><![CDATA[Transparent methods may not use the
 			HandleProcessCorruptingExceptions attribute (FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotHandleProcessCorruptingExceptions@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1509,7 +1509,7 @@
 <a href="http://msdn.microsoft.com/library/dd997565(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustNotReferenceCriticalCodeUnitTestRule">
+	<rule key="TransparentMethodsMustNotReferenceCriticalCode">
 		<name><![CDATA[Transparent code must not reference security critical items
 			(FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotReferenceCriticalCode@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1519,7 +1519,7 @@
 <a href="http://msdn.microsoft.com/library/bb264475(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustNotSatisfyLinkDemandsUnitTestRule">
+	<rule key="TransparentMethodsMustNotSatisfyLinkDemands">
 		<name><![CDATA[Transparent methods must not satisfy LinkDemands (FxCop10)
 		]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotSatisfyLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1529,7 +1529,7 @@
 <a href="http://msdn.microsoft.com/library/dd997445(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsMustNotUseSecurityAssertsUnitTestRule">
+	<rule key="TransparentMethodsMustNotUseSecurityAsserts">
 		<name><![CDATA[Transparent code may not use security asserts (FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsMustNotUseSecurityAsserts@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
 		]]></configKey>
@@ -1538,7 +1538,7 @@
 <a href="http://msdn.microsoft.com/library/bb264482(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsShouldNotBeProtectedWithLinkDemandsUnitTestRule">
+	<rule key="TransparentMethodsShouldNotBeProtectedWithLinkDemands">
 		<name><![CDATA[Transparent code should not be protected with LinkDemands
 			(FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsShouldNotBeProtectedWithLinkDemands@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1548,7 +1548,7 @@
 <a href="http://msdn.microsoft.com/library/dd997567(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsShouldNotDemandUnitTestRule">
+	<rule key="TransparentMethodsShouldNotDemand">
 		<name><![CDATA[Transparent methods should not use security demands (FxCop10)
 		]]></name>
 		<configKey><![CDATA[TransparentMethodsShouldNotDemand@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1558,7 +1558,7 @@
 <a href="http://msdn.microsoft.com/library/dd997566(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsShouldNotLoadAssembliesFromByteArraysUnitTestRule">
+	<rule key="TransparentMethodsShouldNotLoadAssembliesFromByteArrays">
 		<name><![CDATA[Transparent code should not load assemblies from byte arrays
 			(FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsShouldNotLoadAssembliesFromByteArrays@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1568,7 +1568,7 @@
 <a href="http://msdn.microsoft.com/library/dd997568(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TransparentMethodsShouldNotUseSuppressUnmanagedCodeSecurityUnitTestRule">
+	<rule key="TransparentMethodsShouldNotUseSuppressUnmanagedCodeSecurity">
 		<name><![CDATA[Transparent methods should not be decorated with the
 			SuppressUnmanagedCodeSecurityAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[TransparentMethodsShouldNotUseSuppressUnmanagedCodeSecurity@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1578,7 +1578,7 @@
 <a href="http://msdn.microsoft.com/library/dd997570(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TypesMustBeAtLeastAsCriticalAsBaseTypesUnitTestRule">
+	<rule key="TypesMustBeAtLeastAsCriticalAsBaseTypes">
 		<name><![CDATA[Types must be at least as critical as their base types and
 			interfaces (FxCop10)]]></name>
 		<configKey><![CDATA[TypesMustBeAtLeastAsCriticalAsBaseTypes@$(FxCopDir)\Rules\SecurityTransparencyRules.dll
@@ -1588,7 +1588,7 @@
 <a href="http://msdn.microsoft.com/library/dd997443(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ReviewUnusedParametersUnitTestRule">
+	<rule key="ReviewUnusedParameters">
 		<name><![CDATA[Review unused parameters (FxCop10)]]></name>
 		<configKey><![CDATA[ReviewUnusedParameters@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1597,7 +1597,7 @@
 <a href="http://msdn.microsoft.com/library/ms182268(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotIgnoreMethodResultsUnitTestRule">
+	<rule key="DoNotIgnoreMethodResults">
 		<name><![CDATA[Do not ignore method results (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotIgnoreMethodResults@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1606,7 +1606,7 @@
 <a href="http://msdn.microsoft.com/library/ms182273(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="RethrowToPreserveStackDetailsUnitTestRule">
+	<rule key="RethrowToPreserveStackDetails">
 		<name><![CDATA[Rethrow to preserve stack details (FxCop10)]]></name>
 		<configKey><![CDATA[RethrowToPreserveStackDetails@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1615,7 +1615,7 @@
 <a href="http://msdn.microsoft.com/library/ms182363(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotRaiseReservedExceptionTypesUnitTestRule">
+	<rule key="DoNotRaiseReservedExceptionTypes">
 		<name><![CDATA[Do not raise reserved exception types (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotRaiseReservedExceptionTypes@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1624,7 +1624,7 @@
 <a href="http://msdn.microsoft.com/library/ms182338(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseManagedEquivalentsOfWin32ApiUnitTestRule">
+	<rule key="UseManagedEquivalentsOfWin32Api">
 		<name><![CDATA[Use managed equivalents of Win32 API (FxCop10)]]></name>
 		<configKey><![CDATA[UseManagedEquivalentsOfWin32Api@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1633,7 +1633,7 @@
 <a href="http://msdn.microsoft.com/library/ms182365(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="InitializeValueTypeStaticFieldsInlineUnitTestRule">
+	<rule key="InitializeValueTypeStaticFieldsInline">
 		<name><![CDATA[Initialize value type static fields inline (FxCop10)]]></name>
 		<configKey><![CDATA[InitializeValueTypeStaticFieldsInline@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1642,7 +1642,7 @@
 <a href="http://msdn.microsoft.com/library/ms182346(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="InstantiateArgumentExceptionsCorrectlyUnitTestRule">
+	<rule key="InstantiateArgumentExceptionsCorrectly">
 		<name><![CDATA[Instantiate argument exceptions correctly (FxCop10)]]></name>
 		<configKey><![CDATA[InstantiateArgumentExceptionsCorrectly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1651,7 +1651,7 @@
 <a href="http://msdn.microsoft.com/library/ms182347(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="NonConstantFieldsShouldNotBeVisibleUnitTestRule">
+	<rule key="NonConstantFieldsShouldNotBeVisible">
 		<name><![CDATA[Non-constant fields should not be visible (FxCop10)]]></name>
 		<configKey><![CDATA[NonConstantFieldsShouldNotBeVisible@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1660,7 +1660,7 @@
 <a href="http://msdn.microsoft.com/library/ms182353(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotMarkServicedComponentsWithWebMethodUnitTestRule">
+	<rule key="DoNotMarkServicedComponentsWithWebMethod">
 		<name><![CDATA[Do not mark serviced components with WebMethod (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotMarkServicedComponentsWithWebMethod@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1669,7 +1669,7 @@
 <a href="http://msdn.microsoft.com/library/ms182336(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DisposableFieldsShouldBeDisposedUnitTestRule">
+	<rule key="DisposableFieldsShouldBeDisposed">
 		<name><![CDATA[Disposable fields should be disposed (FxCop10)]]></name>
 		<configKey><![CDATA[DisposableFieldsShouldBeDisposed@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1678,7 +1678,7 @@
 <a href="http://msdn.microsoft.com/library/ms182328(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotCallOverridableMethodsInConstructorsUnitTestRule">
+	<rule key="DoNotCallOverridableMethodsInConstructors">
 		<name><![CDATA[Do not call overridable methods in constructors (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotCallOverridableMethodsInConstructors@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1687,7 +1687,7 @@
 <a href="http://msdn.microsoft.com/library/ms182331(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DisposableTypesShouldDeclareFinalizerUnitTestRule">
+	<rule key="DisposableTypesShouldDeclareFinalizer">
 		<name><![CDATA[Disposable types should declare finalizer (FxCop10)]]></name>
 		<configKey><![CDATA[DisposableTypesShouldDeclareFinalizer@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1696,7 +1696,7 @@
 <a href="http://msdn.microsoft.com/library/ms182329(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotMarkEnumsWithFlagsUnitTestRule">
+	<rule key="DoNotMarkEnumsWithFlags">
 		<name><![CDATA[Do not mark enums with FlagsAttribute (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotMarkEnumsWithFlags@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1705,7 +1705,7 @@
 <a href="http://msdn.microsoft.com/library/ms182335(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverrideGetHashCodeOnOverridingEqualsUnitTestRule">
+	<rule key="OverrideGetHashCodeOnOverridingEquals">
 		<name><![CDATA[Override GetHashCode on overriding Equals (FxCop10)]]></name>
 		<configKey><![CDATA[OverrideGetHashCodeOnOverridingEquals@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1714,7 +1714,7 @@
 <a href="http://msdn.microsoft.com/library/ms182358(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotRaiseExceptionsInExceptionClausesUnitTestRule">
+	<rule key="DoNotRaiseExceptionsInExceptionClauses">
 		<name><![CDATA[Do not raise exceptions in exception clauses (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotRaiseExceptionsInExceptionClauses@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1723,7 +1723,7 @@
 <a href="http://msdn.microsoft.com/library/bb386041(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="FinalizersShouldCallBaseClassFinalizerUnitTestRule">
+	<rule key="FinalizersShouldCallBaseClassFinalizer">
 		<name><![CDATA[Finalizers should call base class finalizer (FxCop10)]]></name>
 		<configKey><![CDATA[FinalizersShouldCallBaseClassFinalizer@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1732,7 +1732,7 @@
 <a href="http://msdn.microsoft.com/library/ms182341(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="FinalizersShouldBeProtectedUnitTestRule">
+	<rule key="FinalizersShouldBeProtected">
 		<name><![CDATA[Finalizers should be protected (FxCop10)]]></name>
 		<configKey><![CDATA[FinalizersShouldBeProtected@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1741,7 +1741,7 @@
 <a href="http://msdn.microsoft.com/library/ms182340(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotDecreaseInheritedMemberVisibilityUnitTestRule">
+	<rule key="DoNotDecreaseInheritedMemberVisibility">
 		<name><![CDATA[Do not decrease inherited member visibility (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotDecreaseInheritedMemberVisibility@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1750,7 +1750,7 @@
 <a href="http://msdn.microsoft.com/library/ms182332(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MembersShouldDifferByMoreThanReturnTypeUnitTestRule">
+	<rule key="MembersShouldDifferByMoreThanReturnType">
 		<name><![CDATA[Members should differ by more than return type (FxCop10)]]></name>
 		<configKey><![CDATA[MembersShouldDifferByMoreThanReturnType@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1759,7 +1759,7 @@
 <a href="http://msdn.microsoft.com/library/ms182352(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverrideEqualsOnOverloadingOperatorEqualsUnitTestRule">
+	<rule key="OverrideEqualsOnOverloadingOperatorEquals">
 		<name><![CDATA[Override Equals on overloading operator equals (FxCop10)]]></name>
 		<configKey><![CDATA[OverrideEqualsOnOverloadingOperatorEquals@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1768,7 +1768,7 @@
 <a href="http://msdn.microsoft.com/library/ms182357(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OperatorOverloadsHaveNamedAlternatesUnitTestRule">
+	<rule key="OperatorOverloadsHaveNamedAlternates">
 		<name><![CDATA[Operator overloads have named alternates (FxCop10)]]></name>
 		<configKey><![CDATA[OperatorOverloadsHaveNamedAlternates@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1777,7 +1777,7 @@
 <a href="http://msdn.microsoft.com/library/ms182355(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OperatorsShouldHaveSymmetricalOverloadsUnitTestRule">
+	<rule key="OperatorsShouldHaveSymmetricalOverloads">
 		<name><![CDATA[Operators should have symmetrical overloads (FxCop10)]]></name>
 		<configKey><![CDATA[OperatorsShouldHaveSymmetricalOverloads@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1786,7 +1786,7 @@
 <a href="http://msdn.microsoft.com/library/ms182356(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CollectionPropertiesShouldBeReadOnlyUnitTestRule">
+	<rule key="CollectionPropertiesShouldBeReadOnly">
 		<name><![CDATA[Collection properties should be read only (FxCop10)]]></name>
 		<configKey><![CDATA[CollectionPropertiesShouldBeReadOnly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1795,7 +1795,7 @@
 <a href="http://msdn.microsoft.com/library/ms182327(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="DoNotShipUnreleasedResourceFormatsUnitTestRule">
+	<rule key="DoNotShipUnreleasedResourceFormats">
 		<name><![CDATA[Do not ship unreleased resource formats (FxCop10)]]></name>
 		<configKey><![CDATA[DoNotShipUnreleasedResourceFormats@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1804,7 +1804,7 @@
 <a href="http://msdn.microsoft.com/library/ms182339(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ImplementSerializationConstructorsUnitTestRule">
+	<rule key="ImplementSerializationConstructors">
 		<name><![CDATA[Implement serialization constructors (FxCop10)]]></name>
 		<configKey><![CDATA[ImplementSerializationConstructors@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1813,7 +1813,7 @@
 <a href="http://msdn.microsoft.com/library/ms182343(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="UseParamsForVariableArgumentsUnitTestRule">
+	<rule key="UseParamsForVariableArguments">
 		<name><![CDATA[Use params for variable arguments (FxCop10)]]></name>
 		<configKey><![CDATA[UseParamsForVariableArguments@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1822,7 +1822,7 @@
 <a href="http://msdn.microsoft.com/library/ms182366(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OverloadOperatorEqualsOnOverridingValueTypeEqualsUnitTestRule">
+	<rule key="OverloadOperatorEqualsOnOverridingValueTypeEquals">
 		<name><![CDATA[Overload operator equals on overriding ValueType.Equals
 			(FxCop10)]]></name>
 		<configKey><![CDATA[OverloadOperatorEqualsOnOverridingValueTypeEquals@$(FxCopDir)\Rules\UsageRules.dll
@@ -1832,7 +1832,7 @@
 <a href="http://msdn.microsoft.com/library/ms182359(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkWindowsFormsEntryPointsWithStaThreadUnitTestRule">
+	<rule key="MarkWindowsFormsEntryPointsWithStaThread">
 		<name><![CDATA[Mark Windows Forms entry points with STAThread (FxCop10)]]></name>
 		<configKey><![CDATA[MarkWindowsFormsEntryPointsWithStaThread@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1841,7 +1841,7 @@
 <a href="http://msdn.microsoft.com/library/ms182351(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="OperationsShouldNotOverflowUnitTestRule">
+	<rule key="OperationsShouldNotOverflow">
 		<name><![CDATA[Operations should not overflow (FxCop10)]]></name>
 		<configKey><![CDATA[OperationsShouldNotOverflow@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1850,7 +1850,7 @@
 <a href="http://msdn.microsoft.com/library/ms182354(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="PassSystemUriObjectsInsteadOfStringsUnitTestRule">
+	<rule key="PassSystemUriObjectsInsteadOfStrings">
 		<name><![CDATA[Pass System.Uri objects instead of strings (FxCop10)]]></name>
 		<configKey><![CDATA[PassSystemUriObjectsInsteadOfStrings@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1859,7 +1859,7 @@
 <a href="http://msdn.microsoft.com/library/ms182360(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkAllNonSerializableFieldsUnitTestRule">
+	<rule key="MarkAllNonSerializableFields">
 		<name><![CDATA[Mark all non-serializable fields (FxCop10)]]></name>
 		<configKey><![CDATA[MarkAllNonSerializableFields@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1868,7 +1868,7 @@
 <a href="http://msdn.microsoft.com/library/ms182349(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CallBaseClassMethodsOnISerializableTypesUnitTestRule">
+	<rule key="CallBaseClassMethodsOnISerializableTypes">
 		<name><![CDATA[Call base class methods on ISerializable types (FxCop10)]]></name>
 		<configKey><![CDATA[CallBaseClassMethodsOnISerializableTypes@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1877,7 +1877,7 @@
 <a href="http://msdn.microsoft.com/library/ms182326(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="MarkISerializableTypesWithSerializableUnitTestRule">
+	<rule key="MarkISerializableTypesWithSerializable">
 		<name><![CDATA[Mark ISerializable types with SerializableAttribute (FxCop10)
 		]]></name>
 		<configKey><![CDATA[MarkISerializableTypesWithSerializable@$(FxCopDir)\Rules\UsageRules.dll
@@ -1887,7 +1887,7 @@
 <a href="http://msdn.microsoft.com/library/ms182350(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ImplementSerializationMethodsCorrectlyUnitTestRule">
+	<rule key="ImplementSerializationMethodsCorrectly">
 		<name><![CDATA[Implement serialization methods correctly (FxCop10)]]></name>
 		<configKey><![CDATA[ImplementSerializationMethodsCorrectly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1896,7 +1896,7 @@
 <a href="http://msdn.microsoft.com/library/ms182344(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ProvideDeserializationMethodsForOptionalFieldsUnitTestRule">
+	<rule key="ProvideDeserializationMethodsForOptionalFields">
 		<name><![CDATA[Provide deserialization methods for optional fields (FxCop10)
 		]]></name>
 		<configKey><![CDATA[ProvideDeserializationMethodsForOptionalFields@$(FxCopDir)\Rules\UsageRules.dll
@@ -1906,7 +1906,7 @@
 <a href="http://msdn.microsoft.com/library/ms182362(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="ImplementISerializableCorrectlyUnitTestRule">
+	<rule key="ImplementISerializableCorrectly">
 		<name><![CDATA[Implement ISerializable correctly (FxCop10)]]></name>
 		<configKey><![CDATA[ImplementISerializableCorrectly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1915,7 +1915,7 @@
 <a href="http://msdn.microsoft.com/library/ms182342(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="TestForNaNCorrectlyUnitTestRule">
+	<rule key="TestForNaNCorrectly">
 		<name><![CDATA[Test for NaN correctly (FxCop10)]]></name>
 		<configKey><![CDATA[TestForNaNCorrectly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>
@@ -1924,7 +1924,7 @@
 <a href="http://msdn.microsoft.com/library/bb264491(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="AttributeStringLiteralsShouldParseCorrectlyUnitTestRule">
+	<rule key="AttributeStringLiteralsShouldParseCorrectly">
 		<name><![CDATA[Attribute string literals should parse correctly (FxCop10)
 		]]></name>
 		<configKey><![CDATA[AttributeStringLiteralsShouldParseCorrectly@$(FxCopDir)\Rules\UsageRules.dll
@@ -1934,7 +1934,7 @@
 <a href="http://msdn.microsoft.com/library/bb264490(VS.100).aspx">msdn help page</a>
 ]]></description>
 	</rule>
-	<rule key="CallGCSuppressFinalizeCorrectlyUnitTestRule">
+	<rule key="CallGCSuppressFinalizeCorrectly">
 		<name><![CDATA[Call GC.SuppressFinalize correctly (FxCop10)]]></name>
 		<configKey><![CDATA[CallGCSuppressFinalizeCorrectly@$(FxCopDir)\Rules\UsageRules.dll
 		]]></configKey>

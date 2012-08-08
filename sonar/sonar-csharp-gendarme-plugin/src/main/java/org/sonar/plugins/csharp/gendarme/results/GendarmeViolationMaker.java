@@ -106,7 +106,11 @@ public class GendarmeViolationMaker implements BatchExtension {
       java.io.File sourceFile = new java.io.File(defectLocation.getPath()).getAbsoluteFile();
       VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
       if (vsProject.equals(currentVsProject)) {
-        resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+        if (vsProject.isTest()) {
+          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project.getFileSystem().getTestDirs());
+        } else {
+          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+        }
       } else {
         LOG.debug("Ignoring file outside current project : {}", sourceFile);
         resource = null;

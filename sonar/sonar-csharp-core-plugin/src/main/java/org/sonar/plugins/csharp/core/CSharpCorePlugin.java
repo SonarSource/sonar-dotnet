@@ -68,7 +68,7 @@ import org.sonar.plugins.csharp.api.ResourceHelper;
     name = "Exclude generated code",
     description = "Set to false to include generated code like 'Reference.cs' files or '*.designer.cs' files.", global = true,
     project = true),
-  @Property(key = CSharpConstants.BUILD_CONFIGURATIONS_KEY, defaultValue = CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE,
+  @Property(key = CSharpConstants.BUILD_CONFIGURATION_KEY, defaultValue = CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE,
     name = "Build configurations", description = "Comma-seperated list of build configurations to use.", global = true, project = true),
   @Property(key = CSharpConstants.KEY_GENERATION_STRATEGY_KEY, defaultValue = "",
     name = "Resource key generation strategy", description = "Strategy to generate sonar resource keys. Default value is standard. If you encounter " +

@@ -345,9 +345,7 @@ public final class ModelFactory {
       XPathExpression projectTypeExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:OutputType");
       XPathExpression assemblyNameExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:AssemblyName");
       XPathExpression rootNamespaceExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:RootNamespace");
-      XPathExpression debugOutputExpression = xpath.compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Debug')]/vst:OutputPath");
-      XPathExpression releaseOutputExpression = xpath
-          .compile("/vst:Project/vst:PropertyGroup[contains(@Condition,'Release')]/vst:OutputPath");
+     
       XPathExpression silverlightExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
       XPathExpression projectGuidExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:ProjectGuid");
 
@@ -356,8 +354,6 @@ public final class ModelFactory {
       String silverlightStr = extractProjectProperty(silverlightExpression, projectFile);
       String assemblyName = extractProjectProperty(assemblyNameExpression, projectFile);
       String rootNamespace = extractProjectProperty(rootNamespaceExpression, projectFile);
-      String debugOutput = extractProjectProperty(debugOutputExpression, projectFile);
-      String releaseOutput = extractProjectProperty(releaseOutputExpression, projectFile);
       String projectGuid = extractProjectProperty(projectGuidExpression, projectFile);
 
       // because the GUID starts with { and ends with }, remove these characters
@@ -375,9 +371,6 @@ public final class ModelFactory {
       project.setDirectory(projectDir);
       project.setAssemblyName(assemblyName);
       project.setRootNamespace(rootNamespace);
-      // TODO remove
-      //project.setDebugOutputDir(new File(projectDir, debugOutput));
-      //project.setReleaseOutputDir(new File(projectDir, releaseOutput));
 
       if (StringUtils.isNotEmpty(silverlightStr)) {
         project.setSilverlightProject(true);

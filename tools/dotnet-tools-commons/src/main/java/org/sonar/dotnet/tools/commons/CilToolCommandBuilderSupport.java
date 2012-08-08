@@ -45,7 +45,7 @@ public abstract class CilToolCommandBuilderSupport {
   protected VisualStudioProject vsProject;
 
   protected File executable;
-  protected String buildConfigurations = "Debug";
+  protected String buildConfiguration = "Debug";
   protected String buildPlatform;
   protected File reportFile;
 
@@ -71,8 +71,8 @@ public abstract class CilToolCommandBuilderSupport {
    *          the build configurations
    *          
    */
-  public void setBuildConfigurations(String buildConfigurations) {
-    this.buildConfigurations = buildConfigurations;
+  public void setBuildConfiguration(String buildConfiguration) {
+    this.buildConfiguration = buildConfiguration;
   }
 
   /**
@@ -110,14 +110,14 @@ public abstract class CilToolCommandBuilderSupport {
 
     if (assembliesToScan.length == 0) {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
-      assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
+      assemblyFiles = vsProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
     } else {
       // Some assemblies have been specified: let's analyze them
       assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);
       if (assemblyFiles.isEmpty()) {
         LOG.warn("No assembly found using patterns " + StringUtils.join(assembliesToScan, ','));
         LOG.warn("Fallback to 'csproj' files to find which should be analyzed.");
-        assemblyFiles = vsProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
+        assemblyFiles = vsProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
       }
     }
     return assemblyFiles;
