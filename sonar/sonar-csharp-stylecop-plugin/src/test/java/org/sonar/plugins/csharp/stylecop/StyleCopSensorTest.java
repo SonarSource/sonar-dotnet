@@ -60,9 +60,11 @@ public class StyleCopSensorTest {
   private RulesProfile rulesProfile;
   private Configuration conf;
   private StyleCopSensor sensor;
+  private Project project;
   
   @Before
   public void init() {
+    project = mock(Project.class);
     vsProject = mock(VisualStudioProject.class);
     when(vsProject.getName()).thenReturn("Project #1");
     solution = mock(VisualStudioSolution.class);
@@ -121,7 +123,6 @@ public class StyleCopSensorTest {
   public void testUnitTestsSensorShouldNotExecuteOnRegularProject() throws Exception {
     initializeTestSensor();
     
-    Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
 
@@ -146,7 +147,7 @@ public class StyleCopSensorTest {
     StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(
         new BaseConfiguration()), null);
 
-    sensor.generateConfigurationFile();
+    sensor.generateConfigurationFile(project);
     File report = new File(sonarDir, StyleCopConstants.STYLECOP_RULES_FILE);
     assertTrue(report.exists());
     report.delete();
@@ -169,7 +170,7 @@ public class StyleCopSensorTest {
     StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(fileSystem, null, profileExporter, null, new CSharpConfiguration(
         new BaseConfiguration()), null);
 
-    sensor.generateConfigurationFile();
+    sensor.generateConfigurationFile(project);
   }
 
 }

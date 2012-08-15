@@ -20,9 +20,13 @@
 
 package org.sonar.plugins.csharp.stylecop.profiles;
 
+import static org.mockito.Mockito.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Rule;
@@ -32,10 +36,13 @@ import org.sonar.test.TestUtils;
 import org.xml.sax.SAXException;
 
 public class StyleCopProfileExporterTest {
-
-  @Test
-  public void testSimpleStyleCopRulesToExport() throws IOException, SAXException {
-    RulesProfile profile = RulesProfile.create("Sonar C# Way", "cs");
+  
+  private RulesProfile profile;
+  
+  @Before
+  public void setUp() {
+    
+    profile = RulesProfile.create("Sonar C# Way", "cs");
     profile.activateRule(
         Rule.create(StyleCopConstants.REPOSITORY_KEY, "ElementMustBeginWithUpperCaseLetter", "Element must begin with upper case letter")
             .setConfigKey("StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter"), null);
@@ -43,10 +50,31 @@ public class StyleCopProfileExporterTest {
         Rule.create(StyleCopConstants.REPOSITORY_KEY, "KeywordsMustBeSpacedCorrectly", "Keywords must be spaced correctly")
             .setConfigKey("StyleCop.CSharp.SpacingRules#KeywordsMustBeSpacedCorrectly").setSeverity(RulePriority.MINOR), null);
 
+  }
+  
+
+  @Test
+  public void should_generate_a_simple_stylecop_conf() throws IOException, SAXException {
+   
     StringWriter writer = new StringWriter();
     new StyleCopProfileExporter.RegularStyleCopProfileExporter().exportProfile(profile, writer);
 
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.StyleCop.exported.xml"), writer.toString());
+  }
+  
+  @Test
+  public void should_generate_a_stylecop_conf_with_analyzer_settings() throws IOException, SAXException {
+    File analyzersSettings = TestUtils.getResource("/Settings.StyleCop");
+    StringWriter writer = new StringWriter();
+    new StyleCopProfileExporter.RegularStyleCopProfileExporter().exportProfile(profile, writer, analyzersSettings);
+
+    TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.AnalyzerSettings.StyleCop.exported.xml"), writer.toString());
+  }
+
+
+  public void testParseAnalyzerSettings()
+  {
+  
   }
 
 }

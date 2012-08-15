@@ -46,5 +46,7 @@ public final class StyleCopConstants {
   public static final String MODE = "sonar.stylecop.mode";
 
   public static final String REPORTS_PATH_KEY = "sonar.stylecop.reports.path";
+  
+  public static final String ANALYZERS_SETTINGS_PATH_KEY = "sonar.stylecop.analyzers.settings";
 
 }

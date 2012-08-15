@@ -23,8 +23,10 @@ package org.sonar.plugins.csharp.stylecop;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -104,7 +106,7 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
       LOG.info("Reusing StyleCop report: " + reportFile);
     } else {
       // prepare config file for StyleCop
-      File styleCopConfigFile = generateConfigurationFile();
+      File styleCopConfigFile = generateConfigurationFile(project);
       // run StyleCop
       try {
         File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
@@ -131,12 +133,13 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
     runner.execute(builder, configuration.getInt(StyleCopConstants.TIMEOUT_MINUTES_KEY, StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE));
   }
 
-  protected File generateConfigurationFile() {
+  protected File generateConfigurationFile(Project project) {
     File configFile = new File(fileSystem.getSonarWorkingDirectory(), StyleCopConstants.STYLECOP_RULES_FILE);
+    File analyzersSettings = findAnalyzersSettings(project);
     FileWriter writer = null;
     try {
       writer = new FileWriter(configFile);
-      profileExporter.exportProfile(rulesProfile, writer);
+      profileExporter.exportProfile(rulesProfile, writer, analyzersSettings);
       writer.flush();
     } catch (IOException e) {
       throw new SonarException("Error while generating the StyleCop configuration file by exporting the Sonar rules.", e);
@@ -144,6 +147,26 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
       IOUtils.closeQuietly(writer);
     }
     return configFile;
+  }
+
+  private File findAnalyzersSettings(Project project) {
+    String settingsPath = configuration.getString(StyleCopConstants.ANALYZERS_SETTINGS_PATH_KEY, null);
+    if (StringUtils.isEmpty(settingsPath)) {
+      return null;
+    } 
+    
+    Collection<File> settingsFiles = FileFinder.findFiles(getVSSolution(), getVSProject(project), settingsPath);
+    final File result;
+    if (settingsFiles.isEmpty()) {
+      LOG.error("StyleCop analyzers settings not found");
+      result = null;
+    } else {
+      if (settingsFiles.size()>1) {
+        LOG.warn("Multiple StyleCop analyzers settings found, only the first one will be used");
+      }
+      result = settingsFiles.iterator().next();
+    }
+    return result;
   }
 
   private void analyseResults(File reportFile) {
