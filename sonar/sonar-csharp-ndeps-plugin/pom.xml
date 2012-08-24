@@ -11,7 +11,7 @@
 
   <name>Sonar C# Plugin :: NDeps</name>
   <description>Plugin that runs NDeps to construct Dependency Matrix.</description>
-  <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+  <url>http://docs.codehaus.org/display/SONAR/C-Sharp+Plugins+Ecosystem</url>
 
   <properties>
     <sonar.pluginKey>csharpndeps</sonar.pluginKey>
