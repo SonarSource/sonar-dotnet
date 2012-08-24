@@ -12,7 +12,7 @@
 
   <name>SonarSource :: C# :: Sonar C# Squid Plugin</name>
   <description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
-  <url>http://docs.codehaus.org/display/SONAR/C+Sharp+plugin</url>
+  <url>http://docs.codehaus.org/display/SONAR/C-Sharp+Plugins+Ecosystem</url>
 
   <licenses>
     <license>
