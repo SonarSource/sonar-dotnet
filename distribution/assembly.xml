@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly>
+  <id>distribution</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>true</includeBaseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <outputDirectory>.</outputDirectory>
+      <useTransitiveDependencies>false</useTransitiveDependencies>
+      <includes>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-core-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-fxcop-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-gallio-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-gendarme-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-ndeps-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-squid-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-stylecop-plugin</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+</assembly>

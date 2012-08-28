@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Sonar C# Squid Plugin
+ * Sonar C# Plugin :: C# Squid :: Sonar Plugin
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *

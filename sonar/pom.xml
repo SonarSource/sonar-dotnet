@@ -37,6 +37,11 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest-all</artifactId>
       <scope>test</scope>
@@ -81,12 +86,12 @@
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-duplications</artifactId>
         <version>${sonar.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-channel</artifactId>
         <version>${sonar.version}</version>
-      </dependency>    
+      </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-check-api</artifactId>
@@ -133,6 +138,11 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.easytesting</groupId>
+        <artifactId>fest-assert</artifactId>
+        <version>1.4</version>
       </dependency>
       <dependency>
         <groupId>org.hamcrest</groupId>
