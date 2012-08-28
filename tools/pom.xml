@@ -62,7 +62,7 @@
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-plugin-api</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <dependency>
         <groupId>commons-lang</groupId>
@@ -98,7 +98,7 @@
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-testing-harness</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <dependency>
         <groupId>org.hamcrest</groupId>

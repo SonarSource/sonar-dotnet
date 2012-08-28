@@ -61,7 +61,7 @@
 
   <properties>
     <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
-    <sonar.buildVersion>3.1</sonar.buildVersion>
+    <sonar.version>2.12</sonar.version>
     <sonar.skippedModules>maven-dotnet</sonar.skippedModules>
   </properties>
 

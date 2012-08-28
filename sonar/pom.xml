@@ -20,6 +20,7 @@
     <module>sonar-csharp-gendarme-plugin</module>
     <module>sonar-csharp-gallio-plugin</module>
     <module>sonar-csharp-ndeps-plugin</module>
+    <module>sonar-csharp-squid</module>
   </modules>
 
   <scm>
@@ -74,17 +75,17 @@
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-plugin-api</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-squid</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-duplications</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <!-- Other dependencies -->
       <dependency>
@@ -121,7 +122,7 @@
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-testing-harness</artifactId>
-        <version>${sonar.buildVersion}</version>
+        <version>${sonar.version}</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>
