@@ -22,12 +22,6 @@
     <module>ndeps-runner</module>
   </modules>
 
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/tools</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/parent</url>
-  </scm>
-
   <dependencies>
     <!-- Unit tests -->
     <dependency>

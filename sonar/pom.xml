@@ -20,14 +20,9 @@
     <module>sonar-csharp-gendarme-plugin</module>
     <module>sonar-csharp-gallio-plugin</module>
     <module>sonar-csharp-ndeps-plugin</module>
+    <module>sonar-csharp-rules-plugin</module>
     <module>sonar-csharp-squid</module>
   </modules>
-
-  <scm>
-    <connection>scm:svn:http://svn.codehaus.org/sonar-plugins/trunk/dotnet/sonar</connection>
-    <developerConnection>scm:svn:https://svn.codehaus.org/sonar-plugins/trunk/dotnet/sonar</developerConnection>
-    <url>http://svn.sonar-plugins.codehaus.org/parent</url>
-  </scm>
 
   <dependencies>
     <!-- Unit tests -->
@@ -71,7 +66,7 @@
         <artifactId>dotnet-tools-commons</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <!-- sonar open-source -->
+      <!-- Sonar -->
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-plugin-api</artifactId>
@@ -85,6 +80,16 @@
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-duplications</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>      
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-channel</artifactId>
+        <version>${sonar.version}</version>
+      </dependency>    
+      <dependency>
+        <groupId>org.codehaus.sonar</groupId>
+        <artifactId>sonar-check-api</artifactId>
         <version>${sonar.version}</version>
       </dependency>
       <!-- Other dependencies -->
@@ -146,46 +151,5 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <profiles>
-  <!--
-  Committing this profile during the merge of closed source plugin
-    <profile>
-      <id>oss-build</id>
-      <activation>
-        <property>
-          <name>!oss-build</name>
-        </property>
-      </activation>
-      <modules>
-        <module>sonar-csharp-rules-plugin</module>
-      </modules>
-    </profile>
-    -->
-    <profile>
-      <id>deploy-local</id>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <version>1.3</version>
-            <executions>
-              <execution>
-                <phase>install</phase>
-                <configuration>
-                  <tasks>
-                    <copy file="${project.build.directory}/${project.build.finalName}.jar" todir="${sonar-base-dir}/extensions/plugins" failonerror="false" />
-                  </tasks>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 
 </project>
