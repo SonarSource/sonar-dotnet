@@ -23,6 +23,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>jarjar-maven-plugin</artifactId>
+        <version>1.6</version>
         <executions>
           <execution>
             <phase>package</phase>
