@@ -147,9 +147,9 @@
   </dependencyManagement>
 
   <profiles>
+  <!--
+  Committing this profile during the merge of closed source plugin
     <profile>
-      <!-- The C# Rules Plugin depends on C# Squid which is not open-source -->
-      <!-- so it can't be built on Codehaus. We use this profile for Bamboo -->
       <id>oss-build</id>
       <activation>
         <property>
@@ -160,6 +160,7 @@
         <module>sonar-csharp-rules-plugin</module>
       </modules>
     </profile>
+    -->
     <profile>
       <id>deploy-local</id>
       <build>
