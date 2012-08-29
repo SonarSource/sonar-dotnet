@@ -12,7 +12,7 @@
 
   <name>Sonar C# Plugin :: C# Squid :: Sonar Plugin</name>
   <description>Plugin that parses C# source code, computes metrics, detects copy-paste and adds other various functionalities for C# projects.</description>
-  <url>http://docs.codehaus.org/display/SONAR/C-Sharp+Plugins+Ecosystem</url>
+  <url>http://docs.codehaus.org/display/SONAR/C%23+Plugins+Ecosystem</url>
 
   <properties>
     <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
