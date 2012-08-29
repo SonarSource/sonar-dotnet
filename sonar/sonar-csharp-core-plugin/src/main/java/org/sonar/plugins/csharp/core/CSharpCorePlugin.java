@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -33,6 +30,9 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * C# Core plugin class.
@@ -71,10 +71,10 @@ import org.sonar.plugins.csharp.api.ResourceHelper;
   @Property(key = CSharpConstants.BUILD_CONFIGURATION_KEY, defaultValue = CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE,
     name = "Build configuration", description = "Build configurations used to build the solution.", global = true, project = true),
   @Property(key = CSharpConstants.BUILD_PLATFORM_KEY, defaultValue = CSharpConstants.BUILD_PLATFORM_DEFVALUE,
-    name = "Build platform", description = "Build platform used to build the solution.", global = true, project = true),  
+    name = "Build platform", description = "Build platform used to build the solution.", global = true, project = true),
   @Property(key = CSharpConstants.KEY_GENERATION_STRATEGY_KEY, defaultValue = "",
     name = "Resource key generation strategy", description = "Strategy to generate sonar resource keys. Default value is standard. If you encounter " +
-    		"any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true)  
+      "any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true)
 })
 public class CSharpCorePlugin extends SonarPlugin {
 
@@ -97,6 +97,9 @@ public class CSharpCorePlugin extends SonarPlugin {
 
     // Sensors
     extensions.add(CSharpSourceImporter.class);
+
+    // Common Rules
+    extensions.add(CSharpCommonRulesEngineProvider.class);
 
     return extensions;
   }
