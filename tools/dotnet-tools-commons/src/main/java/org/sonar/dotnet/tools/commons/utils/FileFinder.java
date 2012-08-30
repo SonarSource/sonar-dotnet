@@ -19,15 +19,6 @@
  */
 package org.sonar.dotnet.tools.commons.utils;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.lang.StringUtils;
@@ -36,6 +27,15 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.WildcardPattern;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Helper class to easily find files using ant style patterns, relative or absolute paths.
@@ -119,7 +119,7 @@ public final class FileFinder {
       for (int i = 0; i < patternArray.length; i++) {
         patternArrayProcessed[i] = process(patternArray[i], currentProject);
       }
-    }  
+    }
     return findFiles(currentSolution, currentProject.getDirectory(), patternArrayProcessed);
   }
 
@@ -200,14 +200,11 @@ public final class FileFinder {
   }
 
   protected static void logResults(Set<File> result, String... patternArray) {
-    if (LOG.isDebugEnabled()) {
-      if (result.isEmpty()) {
-        LOG.warn("No file found using pattern(s) " + StringUtils.join(patternArray, ','));
-      } else {
-        LOG.debug("The following files have been found using pattern(s) "
-          + StringUtils.join(patternArray, ',') + "\n"
-          + StringUtils.join(result, "\n  "));
-      }
+    if (result.isEmpty()) {
+      LOG.warn("No file found using pattern(s) " + StringUtils.join(patternArray, ','));
+    } else {
+      LOG.debug("The following files have been found using pattern(s): {}\n{}",
+          StringUtils.join(patternArray, ','), StringUtils.join(result, "\n  - "));
     }
   }
 
