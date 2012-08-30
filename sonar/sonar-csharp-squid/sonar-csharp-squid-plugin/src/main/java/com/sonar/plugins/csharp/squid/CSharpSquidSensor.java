@@ -26,10 +26,11 @@ import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceMember;
+import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.plugins.csharp.squid.check.CSharpCheck;
 import com.sonar.sslr.squid.AstScanner;
-import com.sonar.sslr.squid.checks.SquidCheck;
+import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -39,6 +40,7 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
 import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
@@ -76,23 +78,26 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   private final ResourceCreationLock resourceCreationLock;
   private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
+  private final FileLinesContextFactory fileLinesContextFactory;
 
   private Project project;
   private SensorContext context;
   private AstScanner<CSharpGrammar> scanner;
 
   public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter) {
-    this(cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, new CSharpCheck[] {});
+      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
+    this(cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[] {});
   }
 
   public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, CSharpCheck[] cSharpChecks) {
+      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+      CSharpCheck[] cSharpChecks) {
     super(microsoftWindowsEnvironment);
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
     this.noSonarFilter = noSonarFilter;
+    this.fileLinesContextFactory = fileLinesContextFactory;
 
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
     allChecks.addAll(CheckList.getChecks());
@@ -100,13 +105,16 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public void analyse(Project project, SensorContext context) {
     this.project = project;
     this.context = context;
 
-    Collection<SquidCheck> squidChecks = annotationCheckFactory.getChecks();
-    scanner = CSharpAstScanner.create(createParserConfiguration(project),
-        squidChecks.toArray(new SquidCheck[squidChecks.size()]));
+    Collection<SquidAstVisitor<CSharpGrammar>> squidChecks = annotationCheckFactory.getChecks();
+    List<SquidAstVisitor<CSharpGrammar>> visitors = Lists.newArrayList(squidChecks);
+    // TODO: remove the following line & class once SSLR Squid bridge computes NCLOC_DATA_KEY & COMMENT_LINES_DATA_KEY
+    visitors.add(new CSharpFileLinesVisitor(project, fileLinesContextFactory));
+    scanner = CSharpAstScanner.create(createParserConfiguration(project), (SquidAstVisitor<CSharpGrammar>[]) visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(getFilesToAnalyse(project));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
