@@ -20,11 +20,7 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collection;
-
+import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -36,6 +32,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
@@ -44,6 +42,12 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Collects the StyleCop reporting into sonar.
@@ -57,8 +61,7 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
   private StyleCopProfileExporter profileExporter;
   private StyleCopResultParser styleCopResultParser;
   private CSharpConfiguration configuration;
-  
-  
+
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class RegularStyleCopSensor extends StyleCopSensor {
 
@@ -67,14 +70,15 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
       super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
   }
-  
+
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class UnitTestsStyleCopSensor extends StyleCopSensor {
     public UnitTestsStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.UnitTestsStyleCopProfileExporter profileExporter,
         StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      
+
       super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
+
     @Override
     protected boolean isTestSensor() {
       return true;
@@ -95,15 +99,17 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-   
+
     styleCopResultParser.setEncoding(fileSystem.getSourceCharset());
-    final File reportFile;
+    final Collection<File> reportFiles;
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + StyleCopConstants.STYLECOP_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, reportDefaultPath);
-      reportFile = FileFinder.browse(projectDir, reportPath);
-      LOG.info("Reusing StyleCop report: " + reportFile);
+      VisualStudioSolution vsSolution = getVSSolution();
+      VisualStudioProject vsProject = getVSProject(project);
+      reportFiles = FileFinder.findFiles(vsSolution, vsProject, reportPath);
+      LOG.info("Reusing StyleCop report: " + Joiner.on(" ").join(reportFiles));
     } else {
       // prepare config file for StyleCop
       File styleCopConfigFile = generateConfigurationFile(project);
@@ -118,11 +124,13 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
       } catch (StyleCopException e) {
         throw new SonarException("StyleCop execution failed.", e);
       }
-      reportFile = new File(projectDir, reportDefaultPath);
+      reportFiles = Collections.singleton(new File(projectDir, reportDefaultPath));
     }
 
     // and analyse results
-    analyseResults(reportFile);
+    for (File reportFile : reportFiles) {
+      analyseResults(reportFile);
+    }
   }
 
   protected void launchStyleCop(Project project, StyleCopRunner runner, File styleCopConfigFile) throws StyleCopException {
@@ -153,15 +161,15 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
     String settingsPath = configuration.getString(StyleCopConstants.ANALYZERS_SETTINGS_PATH_KEY, null);
     if (StringUtils.isEmpty(settingsPath)) {
       return null;
-    } 
-    
+    }
+
     Collection<File> settingsFiles = FileFinder.findFiles(getVSSolution(), getVSProject(project), settingsPath);
     final File result;
     if (settingsFiles.isEmpty()) {
       LOG.error("StyleCop analyzers settings not found");
       result = null;
     } else {
-      if (settingsFiles.size()>1) {
+      if (settingsFiles.size() > 1) {
         LOG.warn("Multiple StyleCop analyzers settings found, only the first one will be used");
       }
       result = settingsFiles.iterator().next();
