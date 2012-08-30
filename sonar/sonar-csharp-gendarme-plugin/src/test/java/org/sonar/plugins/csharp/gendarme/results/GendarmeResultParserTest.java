@@ -20,18 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme.results;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.nio.charset.Charset;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
@@ -45,7 +34,17 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
-import com.google.common.collect.Maps;
+import java.io.File;
+import java.nio.charset.Charset;
+import java.util.Map;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class GendarmeResultParserTest {
 
@@ -57,7 +56,7 @@ public class GendarmeResultParserTest {
   @Before
   public void init() {
     violationMaker = mock(GendarmeViolationMaker.class);
-    
+
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     Project project = mock(Project.class);
     VisualStudioSolution solution = mock(VisualStudioSolution.class);

@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.csharp.api.sensor;
 
-import java.io.File;
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
@@ -30,16 +27,19 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
+import java.io.File;
+import java.util.Collection;
+
 /**
  * Abstract Sensor for C# plugins that will be executed on every sub-project.
  * Should be renamed... (not so easy to do so since squid is closed source)
  */
 public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(AbstractRegularCSharpSensor.class);
-  
+
   protected final CSharpConfiguration configuration;
-  
+
   /**
    * Creates an {@link AbstractRegularCSharpSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
    * 
@@ -50,7 +50,7 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
     super(microsoftWindowsEnvironment, toolName, executionMode);
     this.configuration = configuration;
   }
-  
+
   /**
    * TODO remove ASAP after having updated the squid plugin
    * @param microsoftWindowsEnvironment
@@ -59,19 +59,19 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
     super(microsoftWindowsEnvironment, "Squid C#", "");
     configuration = null;
   }
-  
+
   protected boolean isTestSensor() {
     return false;
   }
-  
+
   protected boolean isCilSensor() {
     return false;
   }
-  
+
   protected final String[] getAssemblyPatterns() {
-    String key = isTestSensor() ? CSharpConstants.TEST_ASSEMBLIES_KEY :  CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
+    String key = isTestSensor() ? CSharpConstants.TEST_ASSEMBLIES_KEY : CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
     return configuration.getStringArray(key);
-  } 
+  }
 
   /**
    * {@inheritDoc}
@@ -80,40 +80,40 @@ public abstract class AbstractRegularCSharpSensor extends AbstractCSharpSensor {
   public boolean shouldExecuteOnProject(Project project) {
     return super.shouldExecuteOnProject(project) && (isTestProject(project) == isTestSensor()) && (!isCilSensor() || assembliesFound(project));
   }
-  
+
   private boolean assembliesFound(Project project) {
     final boolean result;
 
-      boolean reuseMode = MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
-      if (reuseMode) {
-        result = true;
+    boolean reuseMode = MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
+    if (reuseMode) {
+      result = true;
+    } else {
+
+      final VisualStudioProject visualProject = getVSProject(project);
+      Collection<File> assemblies;
+
+      final String[] assemblyPatterns = getAssemblyPatterns();
+      final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
+          CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
+      final String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
+          CSharpConstants.BUILD_PLATFORM_DEFVALUE);
+      if (assemblyPatterns == null || assemblyPatterns.length == 0) {
+        assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
       } else {
-
-        final VisualStudioProject visualProject = getVSProject(project);
-        Collection<File> assemblies;
-     
-        final String[] assemblyPatterns = getAssemblyPatterns();
-        final String buildConfigurations = configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
-            CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE);
-        final String buildPlatform = configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
-            CSharpConstants.BUILD_PLATFORM_DEFVALUE);
-        if (assemblyPatterns == null || assemblyPatterns.length == 0) {
-          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
-        } else {
-          assemblies = findFiles(project, assemblyPatterns);
-          if (assemblies.isEmpty()) {
-            // fall back to the default VS output folder
-            assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
-          }
-        }
-
+        assemblies = findFiles(project, assemblyPatterns);
         if (assemblies.isEmpty()) {
-          LOG.warn("No assembly to check with " + toolName);
-          result = false;
-        } else {
-          result = true;
+          // fall back to the default VS output folder
+          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
         }
       }
+
+      if (assemblies.isEmpty()) {
+        LOG.warn("No assembly to check with " + toolName);
+        result = false;
+      } else {
+        result = true;
+      }
+    }
     return result;
   }
 

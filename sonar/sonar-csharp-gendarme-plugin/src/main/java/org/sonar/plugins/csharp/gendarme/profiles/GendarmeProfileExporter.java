@@ -20,12 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme.profiles;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
@@ -36,7 +31,11 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 
-import com.google.common.collect.Maps;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class that allows to export a Sonar profile into a Gendarme rule definition file.
@@ -48,13 +47,13 @@ public class GendarmeProfileExporter extends ProfileExporter {
       super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
     }
   }
-  
+
   public static class UnitTestsGendarmeProfileExporter extends GendarmeProfileExporter {
     public UnitTestsGendarmeProfileExporter() {
       super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME);
     }
   }
-  
+
   protected GendarmeProfileExporter(String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);

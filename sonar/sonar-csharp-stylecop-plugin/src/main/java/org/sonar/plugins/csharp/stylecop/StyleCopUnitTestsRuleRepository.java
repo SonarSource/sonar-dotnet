@@ -20,15 +20,15 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleRepository;
 import org.sonar.api.rules.XMLRuleParser;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Loads the StyleCop rules configuration file.
@@ -51,8 +51,7 @@ public class StyleCopUnitTestsRuleRepository extends RuleRepository {
     List<Rule> rules = new ArrayList<Rule>();
     rules
         .addAll(xmlRuleParser.parse(StyleCopUnitTestsRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules.xml")));
-    
-    
+
     for (File userExtensionXml : fileSystem.getExtensions(StyleCopConstants.TEST_REPOSITORY_KEY, "xml")) {
       rules.addAll(xmlRuleParser.parse(userExtensionXml));
     }

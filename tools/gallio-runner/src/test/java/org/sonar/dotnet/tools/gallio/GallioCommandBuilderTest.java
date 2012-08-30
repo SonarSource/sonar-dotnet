@@ -19,6 +19,18 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.test.TestUtils;
+
+import java.io.File;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
@@ -26,20 +38,6 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.io.File;
-
-import org.apache.commons.lang.StringUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.visualstudio.BuildConfiguration;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.test.TestUtils;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
 
 public class GallioCommandBuilderTest {
 
@@ -162,7 +160,7 @@ public class GallioCommandBuilderTest {
     assertThat(commands[i], startsWith("-output:"));
     assertThat(commands[i], endsWith("coverage-report.xml"));
   }
-  
+
   @Test
   public void testToCommandForSolutionWithDotCoverWithMinimumParams() throws Exception {
     GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
@@ -182,9 +180,9 @@ public class GallioCommandBuilderTest {
     assertThat(commands, containsString("/TargetWorkingDir=" + WORK_DIR.getAbsolutePath()));
     assertThat(commands,
         containsString("gallio-report-folder\\\" \\\"/report-name-format:gallio-report\\\" \\\"/report-type:Xml\\\" \\\""));
-    
+
     assertThat(commands, containsString("/Filters=+:module=Project1;class=*;function=*;+:module=Project2;class=*;function=*;"));
-    
+
     assertThat(commands, endsWith("coverage-report.xml"));
   }
 

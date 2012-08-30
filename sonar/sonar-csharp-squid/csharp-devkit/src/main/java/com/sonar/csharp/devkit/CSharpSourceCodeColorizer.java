@@ -20,7 +20,12 @@
 package com.sonar.csharp.devkit;
 
 import com.sonar.csharp.squid.api.CSharpKeyword;
-import org.sonar.colorizer.*;
+import org.sonar.colorizer.CDocTokenizer;
+import org.sonar.colorizer.CppDocTokenizer;
+import org.sonar.colorizer.KeywordsTokenizer;
+import org.sonar.colorizer.LiteralTokenizer;
+import org.sonar.colorizer.RegexpTokenizer;
+import org.sonar.colorizer.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;

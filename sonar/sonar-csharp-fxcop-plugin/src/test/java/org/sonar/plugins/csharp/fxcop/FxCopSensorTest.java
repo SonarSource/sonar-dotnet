@@ -20,20 +20,8 @@
 
 package org.sonar.plugins.csharp.fxcop;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -58,11 +46,25 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
-import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter.RegularFxCopProfileExporter;
 import org.sonar.test.TestUtils;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({FxCopRunner.class, FileFinder.class})
@@ -95,31 +97,30 @@ public class FxCopSensorTest {
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
-    
+
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
-      .thenReturn(Collections.singletonList(new ActiveRule()));
-    
+        .thenReturn(Collections.singletonList(new ActiveRule()));
+
     resultParser = mock(FxCopResultParser.class);
-    
+
     profileExporter = mock(FxCopProfileExporter.RegularFxCopProfileExporter.class);
-    
+
     conf = new BaseConfiguration();
-    
+
     initializeSensor();
   }
-  
+
   private void initializeSensor() {
     sensor = new FxCopSensor.RegularFxCopSensor(
-        fileSystem, 
-        rulesProfile, 
-        profileExporter, 
-        resultParser, 
+        fileSystem,
+        rulesProfile,
+        profileExporter,
+        resultParser,
         new CSharpConfiguration(conf),
         microsoftWindowsEnvironment
-    );
+        );
   }
-  
 
   @Test
   public void testExecuteWithoutRule() throws Exception {
@@ -145,28 +146,27 @@ public class FxCopSensorTest {
     sensor.launchFxCop(project, runner, TestUtils.getResource("/Sensor/FakeFxCopConfigFile.xml"));
     verify(runner).execute(any(FxCopCommandBuilder.class), eq(10));
   }
-  
+
   @Test
   public void testShouldLaunchFxCop() throws Exception {
     FxCopRunner runner = mock(FxCopRunner.class);
     FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
     builder.setExecutable(new File("FxCopCmd.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(FxCopRunner.class);
     when(FxCopRunner.create(anyString())).thenReturn(runner);
-    
-     
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    
+
     SensorContext context = mock(SensorContext.class);
-    
+
     sensor.analyse(project, context);
-    
+
     verify(runner).execute(any(FxCopCommandBuilder.class), eq(10));
   }
-  
+
   @Test
   public void testShouldAnalyseReusedReports() throws Exception {
     conf.addProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
@@ -176,30 +176,28 @@ public class FxCopSensorTest {
     FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
     builder.setExecutable(new File("FxCopCmd.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(FxCopRunner.class);
     when(FxCopRunner.create(anyString())).thenReturn(runner);
-    
+
     File fakeReport = TestUtils.getResource("/Sensor/FakeFxCopConfigFile.xml");
     PowerMockito.mockStatic(FileFinder.class);
     when(FileFinder.findFiles(solution, vsProject1, "**/*.xml"))
-      .thenReturn(Lists.newArrayList(fakeReport, fakeReport));
-     
+        .thenReturn(Lists.newArrayList(fakeReport, fakeReport));
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    
+
     SensorContext context = mock(SensorContext.class);
-    
+
     sensor.analyse(project, context);
-    
+
     verify(resultParser, times(2)).parse(any(File.class));
   }
-  
-  
-  
+
   @Test
   public void testShouldReuseReports() throws Exception {
-  
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -210,16 +208,16 @@ public class FxCopSensorTest {
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
-   
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldSkipProject() throws Exception {
-    
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -230,7 +228,7 @@ public class FxCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProject() throws Exception {
- 
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -239,9 +237,9 @@ public class FxCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProjectOnReuseMode() throws Exception {
-    
+
     conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
-    
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -250,7 +248,7 @@ public class FxCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
-  
+
     conf.setProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
     conf.setProperty(CSharpConstants.BUILD_CONFIGURATION_KEY, "DummyBuildConf"); // we simulate no generated assemblies
 

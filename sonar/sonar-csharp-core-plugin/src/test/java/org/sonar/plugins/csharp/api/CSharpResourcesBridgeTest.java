@@ -20,12 +20,6 @@
 
 package org.sonar.plugins.csharp.api;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.resources.File;
@@ -33,6 +27,12 @@ import org.sonar.api.resources.Resource;
 import org.sonar.squid.api.SourceClass;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceMethod;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CSharpResourcesBridgeTest {
 

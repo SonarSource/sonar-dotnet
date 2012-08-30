@@ -22,9 +22,9 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
-import java.io.File;
-
 import org.apache.commons.lang.StringUtils;
+
+import java.io.File;
 
 /**
  * A source file included in a CSharp project.

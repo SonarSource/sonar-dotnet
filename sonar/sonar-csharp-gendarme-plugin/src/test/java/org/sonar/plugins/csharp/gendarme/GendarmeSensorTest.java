@@ -20,25 +20,8 @@
 
 package org.sonar.plugins.csharp.gendarme;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -67,14 +50,28 @@ import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.test.TestUtils;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({GendarmeRunner.class, FileFinder.class})
 public class GendarmeSensorTest {
-  
+
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject;
@@ -104,29 +101,29 @@ public class GendarmeSensorTest {
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
     microsoftWindowsEnvironment.setWorkingDirectory("target");
-    
+
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
-      .thenReturn(Collections.singletonList(new ActiveRule()));
-    
+        .thenReturn(Collections.singletonList(new ActiveRule()));
+
     resultParser = mock(GendarmeResultParser.class);
-    
+
     profileExporter = mock(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
-    
+
     conf = new BaseConfiguration();
-    
+
     initializeSensor();
   }
-  
+
   private void initializeSensor() {
     sensor = new GendarmeSensor.RegularGendarmeSensor(
-        fileSystem, 
-        rulesProfile, 
-        profileExporter, 
-        resultParser, 
+        fileSystem,
+        rulesProfile,
+        profileExporter,
+        resultParser,
         new CSharpConfiguration(conf),
         microsoftWindowsEnvironment
-    );
+        );
   }
 
   @Test
@@ -155,28 +152,27 @@ public class GendarmeSensorTest {
     sensor.launchGendarme(project, runner, TestUtils.getResource("/Sensor/FakeGendarmeConfigFile.xml"));
     verify(runner).execute(any(GendarmeCommandBuilder.class), eq(10));
   }
-  
+
   @Test
   public void testShouldLaunchGendarme() throws Exception {
     GendarmeRunner runner = mock(GendarmeRunner.class);
     GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(null, vsProject);
     builder.setExecutable(new File("Gendarme.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GendarmeRunner.class);
     when(GendarmeRunner.create(anyString(), anyString())).thenReturn(runner);
-    
-     
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    
+
     SensorContext context = mock(SensorContext.class);
-    
+
     sensor.analyse(project, context);
-    
+
     verify(runner).execute(any(GendarmeCommandBuilder.class), eq(10));
   }
-  
+
   @Test
   public void testShouldAnalyseReusedReports() throws Exception {
     conf.addProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_REUSE_REPORT);
@@ -186,28 +182,28 @@ public class GendarmeSensorTest {
     GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(null, vsProject);
     builder.setExecutable(new File("FxCopCmd.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
-    
+
     PowerMockito.mockStatic(GendarmeRunner.class);
     when(GendarmeRunner.create(anyString(), anyString())).thenReturn(runner);
-    
+
     File fakeReport = TestUtils.getResource("/Sensor/FakeGendarmeConfigFile.xml");
     PowerMockito.mockStatic(FileFinder.class);
     when(FileFinder.findFiles(solution, vsProject, "**/*.xml"))
-      .thenReturn(Lists.newArrayList(fakeReport, fakeReport));
-     
+        .thenReturn(Lists.newArrayList(fakeReport, fakeReport));
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    
+
     SensorContext context = mock(SensorContext.class);
-    
+
     sensor.analyse(project, context);
-    
+
     verify(resultParser, times(2)).parse(any(File.class));
   }
-  
+
   @Test
   public void testShouldReuseReports() throws Exception {
-  
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -230,10 +226,10 @@ public class GendarmeSensorTest {
     sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
-  
+
   @Test
   public void testShouldSkipProject() throws Exception {
-    
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -244,7 +240,7 @@ public class GendarmeSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProject() throws Exception {
- 
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -253,9 +249,9 @@ public class GendarmeSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProjectOnReuseMode() throws Exception {
-    
+
     conf.setProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_REUSE_REPORT);
-    
+
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguageKey()).thenReturn("cs");
@@ -264,7 +260,7 @@ public class GendarmeSensorTest {
 
   @Test
   public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
-  
+
     conf.setProperty(GendarmeConstants.ASSEMBLIES_TO_SCAN_KEY, new String[] {"**/*.whatever"});
     conf.setProperty(CSharpConstants.BUILD_CONFIGURATION_KEY, "DummyBuildConf"); // we simulate no generated assemblies
 

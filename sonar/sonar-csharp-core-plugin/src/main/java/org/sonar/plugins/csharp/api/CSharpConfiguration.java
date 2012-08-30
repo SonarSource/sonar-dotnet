@@ -20,18 +20,17 @@
 
 package org.sonar.plugins.csharp.api;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.utils.Logs;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Class that reads configuration related to all the C# plugins. It can be injected via the constructor.<br/>

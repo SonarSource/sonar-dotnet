@@ -20,12 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme.profiles;
 
-import java.io.Reader;
-import java.util.Map;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.stax2.XMLInputFactory2;
 import org.codehaus.staxmate.SMInputFactory;
@@ -42,7 +37,11 @@ import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 
-import com.google.common.collect.Maps;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+
+import java.io.Reader;
+import java.util.Map;
 
 /**
  * Class that allows to import Gendarme rule definition files into a Sonar Rule Profile
@@ -54,13 +53,13 @@ public class GendarmeProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
   private RuleQuery ruleQuery;
-  
+
   public static class RegularGendarmeProfileImporter extends GendarmeProfileImporter {
     public RegularGendarmeProfileImporter(RuleFinder ruleFinder) {
       super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME, ruleFinder);
     }
   }
-  
+
   public static class UnitTestsGendarmeProfileImporter extends GendarmeProfileImporter {
     public UnitTestsGendarmeProfileImporter(RuleFinder ruleFinder) {
       super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME, ruleFinder);

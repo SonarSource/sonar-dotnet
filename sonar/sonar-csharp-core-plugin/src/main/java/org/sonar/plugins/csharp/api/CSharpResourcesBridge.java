@@ -20,9 +20,7 @@
 
 package org.sonar.plugins.csharp.api;
 
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +30,8 @@ import org.sonar.api.resources.Resource;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class that gives links between logical resources (C# types and members) and their enclosing source files. <br/>

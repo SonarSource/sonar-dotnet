@@ -20,18 +20,17 @@
 
 package org.sonar.dotnet.tools.commons.support;
 
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
-
-import java.io.File;
-import java.util.Collection;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.DotNetToolsException;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+
+import java.io.File;
+import java.util.Collection;
 
 /**
  * Support class for the cil based rule engines

@@ -23,14 +23,13 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-
 public class BuildConfiguration {
 
-  public static final String DEFAULT_PLATFORM = "Any CPU"; 
-  
+  public static final String DEFAULT_PLATFORM = "Any CPU";
+
   private final String name;
   private final String platform;
-  
+
   public BuildConfiguration(String name, String platform) {
     this.name = name;
     if (StringUtils.isEmpty(platform)) {
@@ -38,9 +37,9 @@ public class BuildConfiguration {
     } else {
       this.platform = platform;
     }
-    
+
   }
-  
+
   public BuildConfiguration(String name) {
     this.name = name;
     this.platform = DEFAULT_PLATFORM;
@@ -50,7 +49,6 @@ public class BuildConfiguration {
     return name;
   }
 
-  
   public String getPlatform() {
     return platform;
   }
@@ -69,5 +67,5 @@ public class BuildConfiguration {
   public String toString() {
     return StringUtils.remove(name + "|" + platform, " ");
   }
-  
+
 }

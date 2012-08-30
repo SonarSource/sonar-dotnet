@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.csharp.core;
 
-import java.io.File;
-import java.nio.charset.Charset;
+import org.codehaus.stax2.XMLInputFactory2;
+import org.codehaus.staxmate.SMInputFactory;
 
 import javax.xml.stream.XMLInputFactory;
 
-import org.codehaus.stax2.XMLInputFactory2;
-import org.codehaus.staxmate.SMInputFactory;
+import java.io.File;
+import java.nio.charset.Charset;
 
 public abstract class AbstractStaxParser {
 

@@ -32,7 +32,7 @@ import net.sourceforge.pmd.cpd.Tokens;
 import java.io.File;
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.api.GenericTokenType.*;
+import static com.sonar.sslr.api.GenericTokenType.EOF;
 
 public class CSharpCPDTokenizer implements Tokenizer {
 

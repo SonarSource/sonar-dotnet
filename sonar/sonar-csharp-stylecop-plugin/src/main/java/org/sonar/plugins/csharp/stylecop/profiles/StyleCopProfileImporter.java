@@ -20,10 +20,6 @@
 
 package org.sonar.plugins.csharp.stylecop.profiles;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.profiles.ProfileImporter;
@@ -38,19 +34,23 @@ import org.sonar.plugins.csharp.stylecop.StyleCopConstants;
 import org.sonar.plugins.csharp.stylecop.profiles.utils.StyleCopRule;
 import org.sonar.plugins.csharp.stylecop.profiles.utils.StyleCopRuleParser;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.util.List;
+
 /**
  * Class that allows to import StyleCop rule definition files into a Sonar Rule Profile
  */
 public class StyleCopProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
-  
+
   public static class RegularStyleCopProfileImporter extends StyleCopProfileImporter {
     public RegularStyleCopProfileImporter(RuleFinder ruleFinder) {
       super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME, ruleFinder);
     }
   }
-  
+
   public static class UnitTestsStyleCopProfileImporter extends StyleCopProfileImporter {
     public UnitTestsStyleCopProfileImporter(RuleFinder ruleFinder) {
       super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME, ruleFinder);

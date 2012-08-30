@@ -345,7 +345,7 @@ public final class ModelFactory {
       XPathExpression projectTypeExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:OutputType");
       XPathExpression assemblyNameExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:AssemblyName");
       XPathExpression rootNamespaceExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:RootNamespace");
-     
+
       XPathExpression silverlightExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:SilverlightApplication");
       XPathExpression projectGuidExpression = xpath.compile("/vst:Project/vst:PropertyGroup/vst:ProjectGuid");
 
@@ -450,12 +450,12 @@ public final class ModelFactory {
     project.setDirectory(projectRoot);
     project.setAssemblyName(assemblyName);
     project.setRootNamespace(rootNamespace);
-    
+
     Map<BuildConfiguration, File> buildConfOutputDirMap = new HashMap<BuildConfiguration, File>();
     buildConfOutputDirMap.put(new BuildConfiguration("Debug"), new File(solutionRoot, debugOutput));
     buildConfOutputDirMap.put(new BuildConfiguration("Release"), new File(solutionRoot, releaseOutput));
     project.setBuildConfOutputDirMap(buildConfOutputDirMap);
-    
+
     return project;
   }
 

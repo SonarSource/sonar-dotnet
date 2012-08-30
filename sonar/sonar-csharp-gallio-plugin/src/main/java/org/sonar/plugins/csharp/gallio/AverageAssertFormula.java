@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Formula;
 import org.sonar.api.measures.FormulaContext;
@@ -30,6 +27,9 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.MeasureUtils;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.ResourceUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Strongly inspired by class AverageComplexityFormula

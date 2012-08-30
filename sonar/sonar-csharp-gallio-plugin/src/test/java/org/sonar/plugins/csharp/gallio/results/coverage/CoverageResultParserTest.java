@@ -19,24 +19,13 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.*;
-import static org.mockito.AdditionalMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.net.URI;
-import java.util.Collection;
-import java.util.List;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.inject.internal.util.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.internal.matchers.Not;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
@@ -52,9 +41,17 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.test.TestUtils;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.inject.internal.util.Lists;
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.AdditionalMatchers.not;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({File.class, DotCoverParsingStrategy.class})
@@ -214,7 +211,7 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
-  
+
   @Test
   public void testParseDotCover() throws Exception {
     ParsingParameters params = new ParsingParameters();
@@ -226,10 +223,10 @@ public class CoverageResultParserTest {
     params.lines = 48;
     params.coverage = 0.94;
     mockIoFileForDotCover();
-      
+
     checkParsing(params);
   }
-  
+
   @Test
   public void testParseDotCoverWithInnerType() throws Exception {
     ParsingParameters params = new ParsingParameters();
@@ -244,28 +241,27 @@ public class CoverageResultParserTest {
 
     checkParsing(params);
   }
-  
+
   private void mockIoFileForDotCover() throws Exception {
     File sourceFileMock = mock(File.class);
     when(sourceFileMock.getCanonicalFile()).thenReturn(sourceFileMock);
     when(sourceFileMock.getName()).thenReturn("Money.cs");
     PowerMockito
-      .whenNew(File.class)
-      .withParameterTypes(String.class)
-      .withArguments(eq("c:\\foobar\\example\\example.core\\money.cs"))
-      .thenReturn(sourceFileMock);
-    
+        .whenNew(File.class)
+        .withParameterTypes(String.class)
+        .withArguments(eq("c:\\foobar\\example\\example.core\\money.cs"))
+        .thenReturn(sourceFileMock);
+
     PowerMockito
-      .whenNew(File.class)
-      .withParameterTypes(String.class)
-      .withArguments(not(eq("c:\\foobar\\example\\example.core\\money.cs")))
-      .thenAnswer(new Answer<File>() {
-        public File answer(InvocationOnMock invocation) throws Throwable {
-          return new File((String)(invocation.getArguments())[0]);
-        }
-       });
+        .whenNew(File.class)
+        .withParameterTypes(String.class)
+        .withArguments(not(eq("c:\\foobar\\example\\example.core\\money.cs")))
+        .thenAnswer(new Answer<File>() {
+          public File answer(InvocationOnMock invocation) throws Throwable {
+            return new File((String) (invocation.getArguments())[0]);
+          }
+        });
   }
-  
 
   @Test
   public void parseEmptyPartCoverReport() {

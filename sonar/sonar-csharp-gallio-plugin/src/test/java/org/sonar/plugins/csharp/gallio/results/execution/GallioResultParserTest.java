@@ -23,14 +23,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.execution;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.util.Collection;
-import java.util.Iterator;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +33,13 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import org.sonar.test.TestUtils;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
+import java.io.File;
+import java.util.Collection;
+import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GallioResultParserTest {
 

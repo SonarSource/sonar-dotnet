@@ -19,19 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findXMLEvent;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Maps;
 import org.codehaus.staxmate.in.SMFilterFactory;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.SensorContext;
@@ -40,8 +29,18 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findXMLEvent;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 public abstract class AbstractParsingStrategy implements CoverageResultParsingStrategy {
 

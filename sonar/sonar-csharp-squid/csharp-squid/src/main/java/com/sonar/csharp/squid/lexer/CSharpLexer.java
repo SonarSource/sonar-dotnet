@@ -31,7 +31,17 @@ import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
 
-import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.*;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.ANY_CHAR;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.DIGIT;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.HEXA_DIGIT;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.anyButNot;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.commentRegexp;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.g;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.o2n;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.one2n;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.opt;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.or;
+import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.regexp;
 
 /**
  * Lexer for the C# language.

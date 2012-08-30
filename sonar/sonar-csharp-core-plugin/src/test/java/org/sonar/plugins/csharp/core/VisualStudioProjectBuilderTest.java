@@ -20,14 +20,6 @@
 
 package org.sonar.plugins.csharp.core;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.AfterClass;
@@ -43,6 +35,14 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
+
+import java.io.File;
+
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class VisualStudioProjectBuilderTest {
 
@@ -137,7 +137,7 @@ public class VisualStudioProjectBuilderTest {
     assertThat(testSubProject.getTestDirs().iterator().next(), notNullValue());
     assertTrue(testSubProject.getSourceDirs().isEmpty());
   }
-  
+
   @Test
   public void testCorrectlyConfiguredProjectInSafeMode() throws Exception {
     conf.setProperty(CSharpConstants.SOLUTION_FILE_KEY, "Example.sln");

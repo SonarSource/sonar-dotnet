@@ -19,13 +19,9 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -44,9 +40,12 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Gets the execution test report from Gallio and pushes data from it into sonar.
@@ -70,12 +69,12 @@ public class TestReportSensor extends AbstractRegularCSharpSensor {
     super(configuration, microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE, ""));
     this.parser = parser;
   }
-  
+
   @Override
   protected boolean isTestSensor() {
     return true;
   }
-  
+
   @Override
   public void analyse(Project project, SensorContext context) {
     Collection<File> testReportFiles = findTestReportsToAnalyse();

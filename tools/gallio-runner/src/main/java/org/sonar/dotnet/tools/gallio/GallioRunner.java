@@ -19,12 +19,12 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+
+import java.io.File;
 
 /**
  * Class that runs the Gallio program.

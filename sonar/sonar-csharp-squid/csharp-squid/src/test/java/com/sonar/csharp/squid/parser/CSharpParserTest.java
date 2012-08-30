@@ -19,14 +19,13 @@
  */
 package com.sonar.csharp.squid.parser;
 
-import java.nio.charset.Charset;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.sslr.impl.Parser;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
 
 /**
  * Test class for the C# parser

@@ -40,9 +40,10 @@ import org.sonar.squid.indexer.QueryByType;
 import java.nio.charset.Charset;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class CSharpResourcesBridgeTest {
 

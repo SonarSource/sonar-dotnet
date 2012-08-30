@@ -19,19 +19,18 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-
-import java.io.File;
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
-import com.google.common.collect.Lists;
+import java.io.File;
+import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class GallioRunnerTest {
 

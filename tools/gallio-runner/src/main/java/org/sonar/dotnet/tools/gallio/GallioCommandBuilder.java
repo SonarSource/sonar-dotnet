@@ -19,11 +19,8 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +28,10 @@ import org.sonar.api.utils.command.Command;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Class used to build the command line to run Gallio.
@@ -172,7 +171,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setOpenCoverInstallDirectory(File openCoverInstallDirectory) {
     this.openCoverInstallDirectory = openCoverInstallDirectory;
   }
-  
+
   /**
    * Sets dotCover installation directory.
    * 
@@ -365,7 +364,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("-output:" + coverageReportFile.getAbsolutePath());
   }
-  
+
   private void addDotCoverArguments(Command command, List<String> gallioArguments) {
     command.addArgument("a");
     command.addArgument("/TargetExecutable=" + gallioExecutable.getAbsolutePath());
@@ -385,11 +384,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
 
     // We add all the configured exclusions
     if (coverageExcludes != null) {
-      String exclusion = Joiner.on(';').join(coverageExcludes); // HACK ';' should not be a splitter in CsharpConfiguration 
+      String exclusion = Joiner.on(';').join(coverageExcludes); // HACK ';' should not be a splitter in CsharpConfiguration
       LOG.debug("- dotCover exclude   : {}", exclusion);
       filterBuilder.append(exclusion);
     }
-    
+
     command.addArgument(filterBuilder.toString());
 
     command.addArgument("/ReportType=TeamCityXML");

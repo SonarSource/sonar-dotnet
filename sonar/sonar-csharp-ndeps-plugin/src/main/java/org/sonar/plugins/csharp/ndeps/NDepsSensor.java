@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -39,6 +37,8 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 
+import java.io.File;
+
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
 public class NDepsSensor extends AbstractRegularCSharpSensor {
 
@@ -47,7 +47,7 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
   private ProjectFileSystem fileSystem;
 
   private NDepsResultParser nDepsResultParser;
-  
+
   private boolean testSensor;
 
   public NDepsSensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration,
@@ -56,12 +56,12 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
     this.nDepsResultParser = nDepsResultParser;
     this.fileSystem = fileSystem;
   }
-  
+
   @Override
   protected boolean isCilSensor() {
     return true;
   }
-  
+
   @Override
   protected boolean isTestSensor() {
     return testSensor;
@@ -70,17 +70,17 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     VisualStudioProject vsProject = getVSProject(project);
-    if (vsProject==null) {
+    if (vsProject == null) {
       // we must be at solution level
       return false;
     }
-    if (getAssemblyPatterns()!=null && getAssemblyPatterns().length>0) {
+    if (getAssemblyPatterns() != null && getAssemblyPatterns().length > 0) {
       LOG.warn("Skipping NDeps analysis, NDeps cannot work properly " +
-      		"when assembly locations are specified using " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+        "when assembly locations are specified using " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
       return false;
     }
-    
-    testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects 
+
+    testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects
     return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
 

@@ -23,6 +23,15 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
+import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
@@ -31,15 +40,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.matchers.JUnitMatchers.containsString;
-
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
-import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 /**
  * Tests for visual studio utilities.

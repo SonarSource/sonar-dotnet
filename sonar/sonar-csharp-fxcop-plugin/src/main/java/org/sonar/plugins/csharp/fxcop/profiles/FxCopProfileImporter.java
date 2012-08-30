@@ -20,10 +20,6 @@
 
 package org.sonar.plugins.csharp.fxcop.profiles;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.profiles.ProfileImporter;
@@ -38,19 +34,23 @@ import org.sonar.plugins.csharp.fxcop.FxCopConstants;
 import org.sonar.plugins.csharp.fxcop.profiles.utils.FxCopRule;
 import org.sonar.plugins.csharp.fxcop.profiles.utils.FxCopRuleParser;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.util.List;
+
 /**
  * Class that allows to import FxCop rule definition files into a Sonar Rule Profile
  */
 public class FxCopProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
-  
+
   public static class RegularFxCopProfileImporter extends FxCopProfileImporter {
     public RegularFxCopProfileImporter(RuleFinder ruleFinder) {
       super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME, ruleFinder);
     }
   }
-  
+
   public static class UnitTestsFxCopProfileImporter extends FxCopProfileImporter {
     public UnitTestsFxCopProfileImporter(RuleFinder ruleFinder) {
       super(FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME, ruleFinder);

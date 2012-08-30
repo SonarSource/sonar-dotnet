@@ -20,12 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-
+import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +43,11 @@ import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 
-import com.google.common.base.Joiner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Collects the Gendarme reporting into sonar.
@@ -61,7 +60,7 @@ public class GendarmeSensor extends AbstractRuleBasedCSharpSensor {
   private RulesProfile rulesProfile;
   private GendarmeProfileExporter profileExporter;
   private GendarmeResultParser gendarmeResultParser;
-  
+
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class RegularGendarmeSensor extends GendarmeSensor {
     public RegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter,
@@ -69,19 +68,20 @@ public class GendarmeSensor extends AbstractRuleBasedCSharpSensor {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
   }
-  
+
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class UnitTestsGendarmeSensor extends GendarmeSensor {
     public UnitTestsGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.UnitTestsGendarmeProfileExporter profileExporter,
         GendarmeResultParser gendarmeResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
+
     @Override
     protected boolean isTestSensor() {
       return true;
     }
   }
-  
+
   @Override
   protected boolean isCilSensor() {
     return true;
@@ -104,12 +104,12 @@ public class GendarmeSensor extends AbstractRuleBasedCSharpSensor {
     this.profileExporter = profileExporter;
     this.gendarmeResultParser = gendarmeResultParser;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    
+
     gendarmeResultParser.setEncoding(fileSystem.getSourceCharset());
     final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GendarmeConstants.GENDARME_REPORT_XML;

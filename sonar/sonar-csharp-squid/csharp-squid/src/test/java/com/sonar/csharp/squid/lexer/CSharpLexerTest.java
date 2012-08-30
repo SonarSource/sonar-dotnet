@@ -34,9 +34,11 @@ import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import static com.sonar.sslr.test.lexer.LexerMatchers.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static com.sonar.sslr.test.lexer.LexerMatchers.hasComment;
+import static com.sonar.sslr.test.lexer.LexerMatchers.hasToken;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 
 public class CSharpLexerTest {
 

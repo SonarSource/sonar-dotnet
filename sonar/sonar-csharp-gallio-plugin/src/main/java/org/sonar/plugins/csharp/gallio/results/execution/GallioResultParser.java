@@ -19,27 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.execution;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.advanceCursor;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantSpecifiedElements;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
@@ -55,8 +36,26 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.TestDescription;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.advanceCursor;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantSpecifiedElements;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 /**
  * Gallio result report parser.

@@ -20,12 +20,12 @@
 
 package org.sonar.plugins.csharp.fxcop.profiles;
 
-import java.io.InputStreamReader;
-
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+
+import java.io.InputStreamReader;
 
 public final class SonarWayProfile extends ProfileDefinition {
 

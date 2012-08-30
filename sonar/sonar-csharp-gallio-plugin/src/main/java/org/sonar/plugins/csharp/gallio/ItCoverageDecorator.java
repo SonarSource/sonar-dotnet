@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.measures.CoreMetrics;
@@ -29,6 +26,9 @@ import org.sonar.api.measures.Metric;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage

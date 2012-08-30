@@ -19,18 +19,17 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.parse;
+import static org.junit.Assert.assertThat;
 
 public class GenericDimensionSpecifierTest {
 

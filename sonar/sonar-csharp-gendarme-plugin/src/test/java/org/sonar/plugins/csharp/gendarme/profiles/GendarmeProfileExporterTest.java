@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.gendarme.profiles;
 
-import java.io.IOException;
-import java.io.StringWriter;
-
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
@@ -31,6 +28,9 @@ import org.sonar.api.rules.RulePriority;
 import org.sonar.plugins.csharp.gendarme.GendarmeConstants;
 import org.sonar.test.TestUtils;
 import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 public class GendarmeProfileExporterTest {
 

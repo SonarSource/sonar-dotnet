@@ -19,15 +19,15 @@
  */
 package com.sonar.csharp.squid.lexer.preprocessors;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.api.CSharpTokenType;
 import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.api.PreprocessorAction;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StandardPreprocessorLinePreprocessor extends Preprocessor {
 

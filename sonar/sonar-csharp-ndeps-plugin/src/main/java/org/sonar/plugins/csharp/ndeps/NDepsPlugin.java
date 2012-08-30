@@ -19,14 +19,14 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Properties({
   @Property(key = NDepsConstants.INSTALL_DIR_KEY,

@@ -19,16 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +31,15 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import javax.xml.stream.XMLStreamException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
 
 public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
 

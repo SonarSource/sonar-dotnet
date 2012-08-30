@@ -29,7 +29,12 @@ import com.sonar.sslr.squid.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-import org.sonar.squid.recognizer.*;
+import org.sonar.squid.recognizer.CodeRecognizer;
+import org.sonar.squid.recognizer.ContainsDetector;
+import org.sonar.squid.recognizer.Detector;
+import org.sonar.squid.recognizer.EndWithDetector;
+import org.sonar.squid.recognizer.KeywordsDetector;
+import org.sonar.squid.recognizer.LanguageFootprint;
 
 import java.util.Set;
 import java.util.regex.Pattern;

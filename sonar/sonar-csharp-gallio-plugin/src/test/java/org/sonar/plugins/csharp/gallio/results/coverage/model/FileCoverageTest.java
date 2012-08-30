@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage.model;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.io.File;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class FileCoverageTest {
 

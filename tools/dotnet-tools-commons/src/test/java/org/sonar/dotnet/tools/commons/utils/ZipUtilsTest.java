@@ -19,17 +19,17 @@
  */
 package org.sonar.dotnet.tools.commons.utils;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.junit.Test;
+import org.sonar.test.TestUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.junit.Test;
-import org.sonar.test.TestUtils;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class ZipUtilsTest {
 

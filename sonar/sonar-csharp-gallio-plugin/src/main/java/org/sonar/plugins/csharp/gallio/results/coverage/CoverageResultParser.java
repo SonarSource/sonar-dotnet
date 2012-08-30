@@ -19,16 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
-
+import com.google.common.collect.Lists;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
 import org.codehaus.staxmate.in.SMInputCursor;
@@ -43,7 +34,15 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
-import com.google.common.collect.Lists;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
 
 /**
  * Parses a coverage report using Stax

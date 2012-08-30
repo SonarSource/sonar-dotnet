@@ -19,14 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import static junit.framework.Assert.assertNull;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.measures.CoreMetrics;
@@ -35,7 +28,13 @@ import org.sonar.api.measures.FormulaData;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.JavaFile;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+
+import static junit.framework.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AverageAssertFormulaTest {
 

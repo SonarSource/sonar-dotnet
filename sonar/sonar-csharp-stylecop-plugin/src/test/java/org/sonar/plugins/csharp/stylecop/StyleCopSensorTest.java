@@ -20,19 +20,7 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collections;
-
+import com.google.common.collect.Lists;
 import org.apache.commons.configuration.BaseConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
@@ -50,10 +38,21 @@ import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 
-import com.google.common.collect.Lists;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collections;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class StyleCopSensorTest {
-  
+
   private VisualStudioSolution solution;
   private VisualStudioProject vsProject;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
@@ -61,7 +60,7 @@ public class StyleCopSensorTest {
   private Configuration conf;
   private StyleCopSensor sensor;
   private Project project;
-  
+
   @Before
   public void init() {
     project = mock(Project.class);
@@ -71,19 +70,22 @@ public class StyleCopSensorTest {
     when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject));
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
-    
+
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
-      .thenReturn(Collections.singletonList(new ActiveRule()));
-    
+        .thenReturn(Collections.singletonList(new ActiveRule()));
+
     conf = new BaseConfiguration();
   }
-  
+
   private void initializeSensor() {
-    sensor = new StyleCopSensor.RegularStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new StyleCopSensor.RegularStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, new CSharpConfiguration(conf),
+        microsoftWindowsEnvironment);
   }
+
   private void initializeTestSensor() {
-    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, new CSharpConfiguration(conf), microsoftWindowsEnvironment);
+    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, new CSharpConfiguration(
+        conf), microsoftWindowsEnvironment);
   }
 
   @Test
@@ -99,7 +101,7 @@ public class StyleCopSensorTest {
   public void testShouldNotExecuteOnSkippedProject() throws Exception {
     conf.addProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
     initializeSensor();
-    
+
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
@@ -109,10 +111,10 @@ public class StyleCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnTestProject() throws Exception {
-    
+
     when(vsProject.isTest()).thenReturn(true);
     initializeSensor();
-    
+
     Project project = mock(Project.class);
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
@@ -122,7 +124,7 @@ public class StyleCopSensorTest {
   @Test
   public void testUnitTestsSensorShouldNotExecuteOnRegularProject() throws Exception {
     initializeTestSensor();
-    
+
     when(project.getLanguageKey()).thenReturn("cs");
     when(project.getName()).thenReturn("Project #1");
 

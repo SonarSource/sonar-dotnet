@@ -19,6 +19,15 @@
  */
 package com.sonar.csharp.squid.integration;
 
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.impl.Parser;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
@@ -26,16 +35,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
 
 /**
  * Class used to test parsing Log4Net and NUnit C#-based libraries.
@@ -89,13 +88,13 @@ public class CSharpPreIntegrationTest {
     Collection<File> files;
     files = listFiles(path, true);
     for (File file : files) {
-      parameters.add(new Object[] { file });
+      parameters.add(new Object[] {file});
     }
   }
 
   @SuppressWarnings("unchecked")
   private static Collection<File> listFiles(String path, boolean recursive) throws URISyntaxException {
-    return FileUtils.listFiles(new File(new Object().getClass().getResource(path).toURI()), new String[] { "cs" }, recursive);
+    return FileUtils.listFiles(new File(new Object().getClass().getResource(path).toURI()), new String[] {"cs"}, recursive);
   }
 
 }

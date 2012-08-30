@@ -22,6 +22,11 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.resources.Project;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,11 +39,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.resources.Project;
 
 /**
  * A visual studio solution model.

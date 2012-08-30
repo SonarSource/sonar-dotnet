@@ -19,9 +19,7 @@
  */
 package com.sonar.plugins.csharp.squid.colorizer;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.sonar.csharp.squid.api.CSharpKeyword;
 import org.sonar.api.web.CodeColorizerFormat;
 import org.sonar.colorizer.CDocTokenizer;
 import org.sonar.colorizer.CppDocTokenizer;
@@ -31,7 +29,8 @@ import org.sonar.colorizer.RegexpTokenizer;
 import org.sonar.colorizer.Tokenizer;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CSharpSourceCodeColorizer extends CodeColorizerFormat {
 

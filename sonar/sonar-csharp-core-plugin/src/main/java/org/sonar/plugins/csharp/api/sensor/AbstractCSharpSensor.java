@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.api.sensor;
 
-import java.util.Collection;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -32,6 +30,8 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+
+import java.util.Collection;
 
 /**
  * This sensor gets executed on every C# sub-projects, but not on the root project (= the solution). <br/>

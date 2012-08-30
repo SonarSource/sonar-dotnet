@@ -19,11 +19,11 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.apache.commons.lang.StringUtils;
 
 /**
  * Represent a web/asp folder/project Visual Studio handle in a weird way asp projects since there is no csproj files. The description of

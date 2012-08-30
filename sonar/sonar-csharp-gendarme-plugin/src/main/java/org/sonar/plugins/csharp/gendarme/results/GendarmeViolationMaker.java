@@ -20,8 +20,7 @@
 
 package org.sonar.plugins.csharp.gendarme.results;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +36,7 @@ import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
 
 /**
  * Creates violations based on a set of information, normally given by the {@link GendarmeResultParser}.

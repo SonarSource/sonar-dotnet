@@ -19,9 +19,9 @@
  */
 package com.sonar.csharp.squid;
 
-import java.nio.charset.Charset;
-
 import org.sonar.squid.api.SquidConfiguration;
+
+import java.nio.charset.Charset;
 
 public class CSharpConfiguration extends SquidConfiguration {
 

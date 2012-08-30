@@ -36,8 +36,9 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.Assert.assertThat;
 
 public class CSharpMemberVisitorTest {
 

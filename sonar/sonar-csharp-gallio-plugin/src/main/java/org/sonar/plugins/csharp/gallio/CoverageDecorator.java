@@ -19,9 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.Collections;
-import java.util.Set;
-
+import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Decorator;
@@ -40,7 +38,8 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.ResourceHelper;
 import org.sonar.plugins.csharp.api.sensor.AbstractCSharpSensor;
 
-import com.google.common.collect.Sets;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Decorates resources that do not have coverage metrics because they were not touched by any test, and thus not present in the coverage

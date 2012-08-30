@@ -19,13 +19,7 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
-
-import java.io.File;
-import java.util.Collections;
-
+import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.resources.Project;
@@ -40,7 +34,17 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 import org.sonar.test.TestUtils;
 
-import com.google.common.collect.Lists;
+import java.io.File;
+import java.util.Collections;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class NDepsSensorTest {
 
@@ -99,7 +103,7 @@ public class NDepsSensorTest {
     project.setName("Web project");
     assertThat(nDepsSensor.shouldExecuteOnProject(project), is(false));
   }
-  
+
   @Test
   public void shouldNotExecuteOnRootProject() throws Exception {
     Project project = new Project("");

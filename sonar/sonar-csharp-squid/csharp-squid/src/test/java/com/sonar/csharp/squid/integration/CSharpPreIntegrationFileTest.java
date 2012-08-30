@@ -19,16 +19,15 @@
  */
 package com.sonar.csharp.squid.integration;
 
-import java.io.File;
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.File;
+import java.nio.charset.Charset;
 
 /**
  * Class used to test only one file.

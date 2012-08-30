@@ -20,11 +20,10 @@
 
 package org.sonar.plugins.csharp.api;
 
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.sonar.dotnet.tools.commons.visualstudio.BuildConfiguration;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
 
 /**
  * Constants for the C# language.
@@ -90,15 +89,14 @@ public final class CSharpConstants {
 
   public static final String BUILD_CONFIGURATION_KEY = "sonar.dotnet.buildConfiguration";
   public static final String BUILD_CONFIGURATIONS_DEFVALUE = "Debug";
-  
+
   public static final String BUILD_PLATFORM_KEY = "sonar.dotnet.buildPlatform";
   public static final String BUILD_PLATFORM_DEFVALUE = BuildConfiguration.DEFAULT_PLATFORM;
 
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.dotnet.assemblies";
-  
+
   public static final String TEST_ASSEMBLIES_KEY = "sonar.dotnet.test.assemblies";
 
-  
   public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
 
   /**

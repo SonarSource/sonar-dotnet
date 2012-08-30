@@ -20,12 +20,12 @@
 
 package org.sonar.plugins.csharp.gendarme.results;
 
-import java.text.ParseException;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.ParsingUtils;
+
+import java.text.ParseException;
 
 /**
  * This class represents the location of a defect, i.e. a source file path and a line number

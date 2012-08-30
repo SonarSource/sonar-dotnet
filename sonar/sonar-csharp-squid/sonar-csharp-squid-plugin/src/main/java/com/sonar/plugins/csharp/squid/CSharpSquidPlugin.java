@@ -21,7 +21,11 @@ package com.sonar.plugins.csharp.squid;
 
 import com.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 import com.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
-import org.sonar.api.*;
+import org.sonar.api.CoreProperties;
+import org.sonar.api.Extension;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
+import org.sonar.api.SonarPlugin;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.Metrics;
 import org.sonar.api.measures.SumChildValuesFormula;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Test-related metrics that don't exist in Sonar Core for the moment.

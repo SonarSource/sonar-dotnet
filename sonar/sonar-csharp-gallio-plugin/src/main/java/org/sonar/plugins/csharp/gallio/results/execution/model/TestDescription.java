@@ -22,10 +22,10 @@
  */
 package org.sonar.plugins.csharp.gallio.results.execution.model;
 
-import java.io.File;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+
+import java.io.File;
 
 /**
  * Full description of a unit test.

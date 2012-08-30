@@ -20,15 +20,15 @@
 
 package org.sonar.plugins.csharp.gendarme;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleRepository;
 import org.sonar.api.rules.XMLRuleParser;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Loads the Gendarme rules configuration file.

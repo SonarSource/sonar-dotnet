@@ -19,18 +19,18 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.*;
-import static org.junit.Assert.*;
-
-import java.nio.charset.Charset;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.impl.Parser;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+
+import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
+import static com.sonar.sslr.test.parser.ParserMatchers.parse;
+import static org.junit.Assert.assertThat;
 
 public class QueryExpressionTest {
 
@@ -57,12 +57,12 @@ public class QueryExpressionTest {
   @Test
   public void testRealLife() throws Exception {
     assertThat(p, parse("from c in customers let d = c where d != null "
-        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
-        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country"));
+      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country"));
     assertThat(p, parse("from c in customers let d = c where d != null "
-        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
-        + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
-        + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }"));
+      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
+      + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }"));
     assertThat(p, parse("from user in db.Users select new { user.Name, RoleName = user.Role.Name }"));
   }
 

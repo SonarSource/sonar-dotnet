@@ -19,13 +19,13 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
-import java.io.File;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+
+import java.io.File;
 
 /**
  * Class used to build the command line to run StyleCop.

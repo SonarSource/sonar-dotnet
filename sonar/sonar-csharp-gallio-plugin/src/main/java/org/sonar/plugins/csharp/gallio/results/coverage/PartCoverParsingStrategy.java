@@ -19,23 +19,23 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findNextElementName;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
+import org.codehaus.staxmate.in.SMInputCursor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.staxmate.in.SMInputCursor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findElementName;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findNextElementName;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 public abstract class PartCoverParsingStrategy extends AbstractParsingStrategy {
 

@@ -20,6 +20,20 @@
 
 package org.sonar.plugins.csharp.api.sensor;
 
+import com.google.common.collect.Lists;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.batch.SensorContext;
+import org.sonar.api.resources.Project;
+import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.csharp.api.CSharpConfiguration;
+import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+
+import java.io.File;
+import java.util.Collections;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -31,21 +45,6 @@ import static org.mockito.Mockito.when;
 import static org.sonar.plugins.csharp.api.CSharpConstants.ASSEMBLIES_TO_SCAN_KEY;
 import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE;
 import static org.sonar.plugins.csharp.api.CSharpConstants.BUILD_CONFIGURATION_KEY;
-
-import java.io.File;
-import java.util.Collections;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.api.batch.SensorContext;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-
-import com.google.common.collect.Lists;
 
 public class AbstractRegularCSharpSensorTest {
 
@@ -98,12 +97,12 @@ public class AbstractRegularCSharpSensorTest {
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
-    
+
     configurationMock = mock(CSharpConfiguration.class);
 
     sensor = new FakeSensor(microsoftWindowsEnvironment);
     cilSensor = new FakeCilSensor();
-    
+
   }
 
   @Test
@@ -131,7 +130,7 @@ public class AbstractRegularCSharpSensorTest {
 
     assertThat(sensor.fromIOFile(new File("toto/tata/fake.cs"), project).getKey(), is("tata/fake.cs"));
   }
-  
+
   @Test
   public void testShouldCilSensorNotExecuteOnTestProject() {
     Project project = mock(Project.class);
@@ -202,6 +201,5 @@ public class AbstractRegularCSharpSensorTest {
     when(vsProject1.getGeneratedAssemblies(BUILD_CONFIGURATIONS_DEFVALUE, null)).thenReturn(Collections.singleton(new File("toto")));
     assertTrue(cilSensor.shouldExecuteOnProject(project));
   }
-
 
 }

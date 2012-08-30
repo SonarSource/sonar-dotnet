@@ -19,6 +19,17 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.test.TestUtils;
+
+import java.io.File;
+
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -27,18 +38,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.io.File;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.test.TestUtils;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class GendarmeCommandBuilderTest {
 

@@ -19,21 +19,21 @@
  */
 package org.sonar.dotnet.tools.commons.utils;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
+import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.test.TestUtils;
+
+import java.io.File;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import java.io.File;
-import java.util.Collection;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.test.TestUtils;
 
 public class FileFinderTest {
 
@@ -59,7 +59,7 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("SubType.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindFilesWithBoggusPath() {
     Collection<File> result = FileFinder.findFiles(solution, project, "Model\\SubTypeX.cs");
@@ -133,12 +133,12 @@ public class FileFinderTest {
     assertTrue(csFile.exists());
     assertEquals("AssemblyInfo.cs", csFile.getName());
   }
-  
+
   @Test
   public void testFindRelativeFileWithPatternOutsideSolutionAndProjectName() {
     String pattern = "../../$(ProjectName)/**/*Info.cs";
     when(project.getName()).thenReturn("BlankSilverlightSolution");
-    
+
     Collection<File> result = FileFinder.findFiles(solution, project, pattern);
     assertEquals(2, result.size());
     File csFile = result.iterator().next();

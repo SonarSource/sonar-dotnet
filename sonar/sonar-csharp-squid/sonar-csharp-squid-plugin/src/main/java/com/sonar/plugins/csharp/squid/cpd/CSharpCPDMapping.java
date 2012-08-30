@@ -19,16 +19,14 @@
  */
 package com.sonar.plugins.csharp.squid.cpd;
 
-import java.nio.charset.Charset;
-
+import com.sonar.plugins.csharp.squid.CSharpSquidConstants;
 import net.sourceforge.pmd.cpd.Tokenizer;
-
 import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
 
-import com.sonar.plugins.csharp.squid.CSharpSquidConstants;
+import java.nio.charset.Charset;
 
 public class CSharpCPDMapping extends AbstractCpdMapping {
 

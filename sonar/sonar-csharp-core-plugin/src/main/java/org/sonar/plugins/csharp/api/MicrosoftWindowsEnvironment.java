@@ -20,9 +20,7 @@
 
 package org.sonar.plugins.csharp.api;
 
-import java.io.File;
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
@@ -31,7 +29,8 @@ import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.squid.api.SourceFile;
 
-import com.google.common.collect.Maps;
+import java.io.File;
+import java.util.Map;
 
 /**
  * Class used to share information, between C# plugins, about Windows and Visual Studio elements, such as:

@@ -51,7 +51,7 @@ public enum CoverageTool {
    * Jetbrains "dotCover" tool
    */
   DOTCOVER("dotCover", GallioRunnerType.LOCAL),
-  
+
   /**
    * "OpenCover" tool
    */

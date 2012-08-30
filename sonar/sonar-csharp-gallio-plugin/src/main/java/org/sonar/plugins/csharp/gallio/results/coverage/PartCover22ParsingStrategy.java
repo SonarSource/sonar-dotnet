@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
 
 public class PartCover22ParsingStrategy extends PartCover2ParsingStrategy {
 

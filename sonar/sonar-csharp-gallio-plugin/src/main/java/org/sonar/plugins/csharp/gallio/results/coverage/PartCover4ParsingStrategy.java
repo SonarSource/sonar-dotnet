@@ -19,21 +19,21 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
-import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.descendantElements;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeIntValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.findAttributeValue;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.isAStartElement;
+import static org.sonar.plugins.csharp.gallio.helper.StaxHelper.nextPosition;
 
 public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 

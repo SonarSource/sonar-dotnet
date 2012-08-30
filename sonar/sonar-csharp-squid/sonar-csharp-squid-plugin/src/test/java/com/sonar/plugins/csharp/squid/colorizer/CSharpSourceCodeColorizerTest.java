@@ -19,8 +19,9 @@
  */
 package com.sonar.plugins.csharp.squid.colorizer;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+import org.sonar.colorizer.CodeColorizer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,9 +29,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-import org.sonar.colorizer.CodeColorizer;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.assertThat;
 
 public class CSharpSourceCodeColorizerTest {
 

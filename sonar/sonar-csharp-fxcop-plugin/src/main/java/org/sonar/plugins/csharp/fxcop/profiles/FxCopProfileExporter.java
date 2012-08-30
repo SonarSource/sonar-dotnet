@@ -20,15 +20,6 @@
 
 package org.sonar.plugins.csharp.fxcop.profiles;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
@@ -41,6 +32,15 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.fxcop.FxCopConstants;
 import org.sonar.plugins.csharp.fxcop.profiles.utils.FxCopRule;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class that allows to export a Sonar profile into a FxCop rule definition file.
@@ -55,14 +55,13 @@ public class FxCopProfileExporter extends ProfileExporter {
       super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
     }
   }
-  
+
   public static class UnitTestsFxCopProfileExporter extends FxCopProfileExporter {
     public UnitTestsFxCopProfileExporter() {
       super(FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME);
     }
   }
-  
-  
+
   protected FxCopProfileExporter(String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);

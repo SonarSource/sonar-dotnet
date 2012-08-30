@@ -20,12 +20,7 @@
 
 package org.sonar.plugins.csharp.fxcop;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-
+import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +42,11 @@ import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 
-import com.google.common.base.Joiner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Collects the FXCop reporting into sonar.
@@ -68,24 +67,25 @@ public class FxCopSensor extends AbstractRuleBasedCSharpSensor {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
   }
-  
+
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class UnitTestsFxCopSensor extends FxCopSensor {
     public UnitTestsFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.UnitTestsFxCopProfileExporter profileExporter,
         FxCopResultParser fxCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
+
     @Override
     protected boolean isTestSensor() {
       return true;
     }
   }
-  
+
   @Override
   protected boolean isCilSensor() {
     return true;
   }
-  
+
   /**
    * Constructs a {@link FxCopSensor}.
    * 
@@ -104,12 +104,12 @@ public class FxCopSensor extends AbstractRuleBasedCSharpSensor {
     this.fxCopResultParser = fxCopResultParser;
 
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void analyse(Project project, SensorContext context) {
-    
+
     fxCopResultParser.setEncoding(fileSystem.getSourceCharset());
 
     final Collection<File> reportFiles;
@@ -162,10 +162,9 @@ public class FxCopSensor extends AbstractRuleBasedCSharpSensor {
     FxCopCommandBuilder builder = runner.createCommandBuilder(vsSolution, vsProject);
     builder.setConfigFile(fxCopConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), FxCopConstants.FXCOP_REPORT_XML));
-    
+
     builder.setAssembliesToScan(getAssemblyPatterns());
-    
-    
+
     builder.setAssemblyDependencyDirectories(configuration.getStringArray(FxCopConstants.ASSEMBLY_DEPENDENCY_DIRECTORIES_KEY));
     builder.setIgnoreGeneratedCode(configuration.getBoolean(FxCopConstants.IGNORE_GENERATED_CODE_KEY,
         FxCopConstants.IGNORE_GENERATED_CODE_DEFVALUE));

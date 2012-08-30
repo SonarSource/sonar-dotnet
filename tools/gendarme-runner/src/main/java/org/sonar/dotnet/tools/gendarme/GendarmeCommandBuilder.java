@@ -19,18 +19,17 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
-import org.sonar.dotnet.tools.commons.support.CilRuleEngineCommandBuilderSupport;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.dotnet.tools.commons.support.CilRuleEngineCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Class used to build the command line to run Gendarme.
@@ -100,7 +99,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
   protected String getBuildConfigurations() {
     return buildConfiguration;
   }
-  
+
   protected String getBuildPlatform() {
     return buildPlatform;
   }

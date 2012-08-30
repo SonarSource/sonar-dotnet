@@ -22,10 +22,10 @@
  */
 package org.sonar.plugins.csharp.gallio.results.execution.model;
 
-import java.io.File;
-
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+
+import java.io.File;
 
 /**
  * Details for a test case.

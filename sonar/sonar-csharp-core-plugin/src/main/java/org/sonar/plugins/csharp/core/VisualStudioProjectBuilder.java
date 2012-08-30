@@ -97,7 +97,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     microsoftWindowsEnvironment.setWorkingDirectory(workDir);
 
     boolean safeMode = "safe".equalsIgnoreCase(configuration.getString(CSharpConstants.KEY_GENERATION_STRATEGY_KEY, ""));
-    
+
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
       final String projectKey;
       if (safeMode) {
@@ -105,7 +105,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       } else {
         projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
       }
-           
+
       if (projectKey.equals(root.getKey())) {
         throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
           + "'). Please set a unique 'sonar.projectKey' for the solution.");

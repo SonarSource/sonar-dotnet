@@ -20,15 +20,15 @@
 
 package org.sonar.plugins.csharp.fxcop.profiles;
 
-import java.io.IOException;
-import java.io.StringWriter;
-
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Rule;
 import org.sonar.plugins.csharp.fxcop.FxCopConstants;
 import org.sonar.test.TestUtils;
 import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.StringWriter;
 
 public class FxCopProfileExporterTest {
 
