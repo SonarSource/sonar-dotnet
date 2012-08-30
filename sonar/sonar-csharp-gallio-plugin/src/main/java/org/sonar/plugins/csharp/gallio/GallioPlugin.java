@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -29,6 +26,9 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * C# Gallio plugin class.
@@ -57,7 +57,8 @@ import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
     key = GallioConstants.COVERAGE_TOOL_KEY,
     defaultValue = GallioConstants.COVERAGE_TOOL_DEFVALUE,
     name = "Coverage tool",
-    description = "Coverage tool used by Gallio: it currently can be 'PartCover' (default), 'OpenCover', 'NCover', 'dotCover' or 'none' (= means no coverage analysis will be done).",
+    description = "Coverage tool used by Gallio: it currently can be 'PartCover' (default), " +
+      "'OpenCover', 'NCover', 'dotCover' or 'none' (= means no coverage analysis will be done).",
     global = true, project = true),
   @Property(key = GallioConstants.PART_COVER_INSTALL_KEY, defaultValue = GallioConstants.PART_COVER_INSTALL_DEFVALUE,
     name = "PartCover install directory", description = "Absolute path of the PartCover installation folder.", global = true,
@@ -90,7 +91,8 @@ import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
     key = GallioConstants.IT_FILTER_KEY,
     defaultValue = GallioConstants.IT_FILTER_DEFVALUE,
     name = "Integration test filter",
-    description = "Filter that can be used to execute only a specific integration test category (i.e. CategotyName:integ to consider only tests from the 'integ' category).",
+    description = "Filter that can be used to execute only a specific integration test category " +
+      "(i.e. CategotyName:integ to consider only tests from the 'integ' category).",
     global = true, project = true)
 
 })

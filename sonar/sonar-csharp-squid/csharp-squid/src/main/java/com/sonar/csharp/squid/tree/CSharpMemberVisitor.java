@@ -55,6 +55,13 @@ public class CSharpMemberVisitor extends SquidAstVisitor<CSharpGrammar> {
       return;
     }
 
+    String memberSignature = defineMemberSignature(astNode);
+    SourceMember member = new SourceMember((SourceType) getContext().peekSourceCode(), memberSignature, astNode.getTokenLine());
+    member.setMeasure(CSharpMetric.METHODS, 1);
+    getContext().addSourceCode(member);
+  }
+
+  private String defineMemberSignature(AstNode astNode) {
     String memberSignature = "";
     if (astNode.is(g.methodDeclaration)) {
       memberSignature = extractMethodSignature(astNode.findFirstChild(g.methodBody));
@@ -76,10 +83,7 @@ public class CSharpMemberVisitor extends SquidAstVisitor<CSharpGrammar> {
     } else {
       throw new IllegalStateException("The current AST node is not supported by this visitor.");
     }
-
-    SourceMember member = new SourceMember((SourceType) getContext().peekSourceCode(), memberSignature, astNode.getTokenLine());
-    member.setMeasure(CSharpMetric.METHODS, 1);
-    getContext().addSourceCode(member);
+    return memberSignature;
   }
 
   /**

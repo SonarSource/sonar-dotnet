@@ -19,18 +19,18 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import java.util.List;
-
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 
+import java.util.List;
+
 public interface CoverageResultParsingStrategy {
 
-  public boolean isCompatible(SMInputCursor rootCursor);
+  boolean isCompatible(SMInputCursor rootCursor);
 
-  public List<FileCoverage> parse(SensorContext ctx, VisualStudioSolution solution, Project sonarProject, SMInputCursor cursor);
+  List<FileCoverage> parse(SensorContext ctx, VisualStudioSolution solution, Project sonarProject, SMInputCursor cursor);
 
 }

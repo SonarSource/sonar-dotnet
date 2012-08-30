@@ -19,13 +19,14 @@
  */
 package org.sonar.dotnet.tools.fxcop;
 
+import org.sonar.dotnet.tools.commons.support.CilRuleEngineCommandBuilderSupport;
+
 import java.io.File;
 import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.CilRuleEngineCommandBuilderSupport;
 import org.sonar.dotnet.tools.commons.utils.FileFinder;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;

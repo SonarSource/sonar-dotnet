@@ -22,6 +22,11 @@
  */
 package org.sonar.dotnet.tools.commons.visualstudio;
 
+import com.google.common.collect.Sets;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,12 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.Sets;
 
 /**
  * A dot net project extracted from a solution
@@ -96,7 +95,7 @@ public class VisualStudioProject {
 
       String filePath = canonicalFile.getPath();
       String directoryPath = canonicalDirectory.getPath();
-      if ( !filePath.startsWith(directoryPath)) {
+      if (!filePath.startsWith(directoryPath)) {
         // The file is not in the directory
         return null;
       }
@@ -155,7 +154,7 @@ public class VisualStudioProject {
       // first trying to use forcedOutputDir as a relative path
       File assemblyDirectory = new File(directory, forcedOutputDir);
 
-      if ( !assemblyDirectory.exists()) {
+      if (!assemblyDirectory.exists()) {
         // path specified "forcedOutputDir" should be absolute,
         // not relative to the project root directory
         assemblyDirectory = new File(forcedOutputDir);
@@ -273,35 +272,6 @@ public class VisualStudioProject {
   void setRootNamespace(String rootNamespace) {
     this.rootNamespace = rootNamespace;
   }
-
-  /**
-   * Returns the debugOutputDir.
-   * 
-   * @return The debugOutputDir to return.
-   */
-  /*
-   * public File getDebugOutputDir() { return this.debugOutputDir; }
-   */
-
-  /**
-   * Sets the debugOutputDir.
-   * 
-   * @param debugOutputDir
-   *          The debugOutputDir to set.
-   */
-  /*
-   * void setDebugOutputDir(File debugOutputDir) { this.debugOutputDir = debugOutputDir; }
-   */
-
-  /**
-   * Sets the releaseOutputDir.
-   * 
-   * @param releaseOutputDir
-   *          The releaseOutputDir to set.
-   */
-  /*
-   * void setReleaseOutputDir(File releaseOutputDir) { this.releaseOutputDir = releaseOutputDir; }
-   */
 
   /**
    * Returns the directory.
@@ -576,7 +546,7 @@ public class VisualStudioProject {
   @Override
   public String toString() {
     return "Project(name=" + name + ", type=" + type + ", directory=" + directory + ", file=" + projectFile + ", assemblyName="
-        + assemblyName + ", rootNamespace=" + rootNamespace + ")";
+      + assemblyName + ", rootNamespace=" + rootNamespace + ")";
   }
 
 }

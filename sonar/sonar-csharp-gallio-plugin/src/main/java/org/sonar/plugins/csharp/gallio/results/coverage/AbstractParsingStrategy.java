@@ -55,6 +55,9 @@ public abstract class AbstractParsingStrategy implements CoverageResultParsingSt
     }
 
     public boolean apply(FileCoverage input) {
+      if (input == null) {
+        return false;
+      }
       return context.isIndexed(org.sonar.api.resources.File.fromIOFile(input.getFile(), sonarProject), false);
     }
   }

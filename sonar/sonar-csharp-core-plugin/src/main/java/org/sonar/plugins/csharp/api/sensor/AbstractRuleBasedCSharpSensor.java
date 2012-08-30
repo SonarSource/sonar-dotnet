@@ -27,31 +27,31 @@ import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharpConfiguration;
 import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 
-
 public abstract class AbstractRuleBasedCSharpSensor extends AbstractRegularCSharpSensor {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(AbstractRuleBasedCSharpSensor.class);
-  
+
   protected final RulesProfile rulesProfile;
   private final ProfileExporter profileExporter;
 
-  protected AbstractRuleBasedCSharpSensor(CSharpConfiguration configuration, RulesProfile rulesProfile, ProfileExporter profileExporter, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
+  protected AbstractRuleBasedCSharpSensor(CSharpConfiguration configuration, RulesProfile rulesProfile, ProfileExporter profileExporter,
+      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
     super(configuration, microsoftWindowsEnvironment, toolName, executionMode);
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
     return super.shouldExecuteOnProject(project) && (isToolEnableInProfile());
   }
-  
+
   private boolean isToolEnableInProfile() {
     boolean result = !rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty();
     if (!result) {
-      LOG.warn("/!\\ SKIP "+ toolName + " analysis: no rule defined for " + toolName + " in the \"{}\" profile.", rulesProfile.getName());
+      LOG.warn("/!\\ SKIP " + toolName + " analysis: no rule defined for " + toolName + " in the \"{}\" profile.", rulesProfile.getName());
     }
     return result;
   }

@@ -53,8 +53,6 @@ public class StyleCopPlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-
-    // list.add(StyleCopSensor.class);
     list.add(StyleCopSensor.RegularStyleCopSensor.class);
 
     // Rules and profiles

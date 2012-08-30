@@ -20,21 +20,7 @@
 
 package org.sonar.plugins.csharp.stylecop.profiles;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -57,21 +43,34 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import com.google.common.collect.Maps;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class that allows to export a Sonar profile into a StyleCop rule definition file.
  */
 public class StyleCopProfileExporter extends ProfileExporter {
-  
+
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopProfileExporter.class);
-  
+
   public static class RegularStyleCopProfileExporter extends StyleCopProfileExporter {
     public RegularStyleCopProfileExporter() {
       super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME);
     }
   }
-  
+
   public static class UnitTestsStyleCopProfileExporter extends StyleCopProfileExporter {
     public UnitTestsStyleCopProfileExporter() {
       super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME);
@@ -89,7 +88,7 @@ public class StyleCopProfileExporter extends ProfileExporter {
    */
   @Override
   public void exportProfile(RulesProfile profile, Writer writer) {
-    
+
     try {
       printStartOfFile(writer);
 
@@ -100,9 +99,8 @@ public class StyleCopProfileExporter extends ProfileExporter {
       throw new SonarException("Error while generating the StyleCop profile to export: " + profile, e);
     }
   }
-  
-public void exportProfile(RulesProfile profile, Writer writer, File analyzersSettings) {
-    
+
+  public void exportProfile(RulesProfile profile, Writer writer, File analyzersSettings) {
     try {
       printStartOfFile(writer);
 
@@ -113,7 +111,6 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
       throw new SonarException("Error while generating the StyleCop profile to export: " + profile, e);
     }
   }
-  
 
   private void printStartOfFile(Writer writer) throws IOException {
     writer.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
@@ -132,12 +129,12 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
   }
 
   private void printRules(String repositoryKey, RulesProfile profile, Writer writer, File analyzersSettings) throws IOException {
-    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(StyleCopConstants.REPOSITORY_KEY);
+    List<ActiveRule> activeRules = profile.getActiveRulesByRepository(repositoryKey);
     List<StyleCopRule> rules = transformIntoStyleCopRules(activeRules);
 
     // We group the rules by analyzer/assembly names
     Map<String, List<StyleCopRule>> rulesByAnalyzer = groupStyleCopRulesByAnalyzer(rules);
-    // We parse the settings to get settings by analyzers 
+    // We parse the settings to get settings by analyzers
     Map<String, String> settingsByAnalyzer = parseAnalyzerSettings(analyzersSettings);
     // And then print out each rule
     for (String analyzerId : rulesByAnalyzer.keySet()) {
@@ -148,7 +145,7 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
 
   private Map<String, String> parseAnalyzerSettings(File analyzersSettings) {
     Map<String, String> result = Maps.newHashMap();
-    if (analyzersSettings==null) {
+    if (analyzersSettings == null) {
       LOG.info("No custom analyzers settings");
       return result;
     }
@@ -157,39 +154,40 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
       XPath xpath = factory.newXPath();
       XPathExpression expression = xpath.compile("//AnalyzerSettings");
       InputSource inputSource = new InputSource(new FileInputStream(analyzersSettings));
-    
-      NodeList nodeList = (NodeList)expression.evaluate(inputSource, XPathConstants.NODESET);
-      for(int i=0; i<nodeList.getLength(); i++) {
+
+      NodeList nodeList = (NodeList) expression.evaluate(inputSource, XPathConstants.NODESET);
+      for (int i = 0; i < nodeList.getLength(); i++) {
         Node settingsNode = nodeList.item(i);
-        Element analyzerNode = (Element)settingsNode.getParentNode();
+        Element analyzerNode = (Element) settingsNode.getParentNode();
         String analyzerId = analyzerNode.getAttribute("AnalyzerId");
         StringBuilder builder = new StringBuilder();
         writeNode(builder, settingsNode);
         result.put(analyzerId, builder.toString());
       }
-    
+
     } catch (XPathExpressionException e) {
-      new SonarException("Wrong StyleCop analyzer settings format", e);
+      throw new SonarException("Wrong StyleCop analyzer settings format", e);
     } catch (FileNotFoundException e) {
-      new SonarException("StyleCop analyzer settings file not found", e);
+      throw new SonarException("StyleCop analyzer settings file not found", e);
     }
     return result;
   }
-  
+
   private static void writeNode(StringBuilder builder, Node node) {
     switch (node.getNodeType()) {
-    case Node.ELEMENT_NODE:
-      writeElement(builder, (Element) node);
-      break;
-    case Node.TEXT_NODE: case Node.CDATA_SECTION_NODE:
-      builder.append(((CharacterData)node).getData());
-      break;
-    default:
-      LOG.debug("node ignored {}", node);
-      break;
+      case Node.ELEMENT_NODE:
+        writeElement(builder, (Element) node);
+        break;
+      case Node.TEXT_NODE:
+      case Node.CDATA_SECTION_NODE:
+        builder.append(((CharacterData) node).getData());
+        break;
+      default:
+        LOG.debug("node ignored {}", node);
+        break;
     }
   }
-  
+
   private static void writeElement(StringBuilder builder, Element elt) {
     builder.append("<").append(elt.getTagName());
     NamedNodeMap nm = elt.getAttributes();
@@ -201,7 +199,7 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
     NodeList list = elt.getChildNodes();
     for (int i = 0; i < list.getLength(); i++) {
       writeNode(builder, list.item(i));
-    } 
+    }
     builder.append("</").append(elt.getTagName()).append(">");
   }
 
@@ -265,7 +263,7 @@ public void exportProfile(RulesProfile profile, Writer writer, File analyzersSet
       printRule(writer, styleCopRule);
     }
     writer.append("            </Rules>\n");
-    if (StringUtils.isNotEmpty(analyzerSettings)){
+    if (StringUtils.isNotEmpty(analyzerSettings)) {
       writer.append("            ").append(analyzerSettings).append("\n");
     }
     writer.append("        </Analyzer>\n");
