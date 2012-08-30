@@ -332,15 +332,15 @@
         <category name="Usability"/>
         <description>Curly brackets for multi line statements must not share line</description>
     </rule>
-    <rule key="StatementMustNotBeOnSingleLine">
+    <rule key="StatementMustNotBeOnASingleLine">
         <name>Statement must not be on single line</name>
-        <configKey>StyleCop.CSharp.LayoutRules#StatementMustNotBeOnSingleLine</configKey>
+        <configKey>StyleCop.CSharp.LayoutRules#StatementMustNotBeOnASingleLine</configKey>
         <category name="Usability"/>
         <description>Statement must not be on single line</description>
     </rule>
-    <rule key="ElementMustNotBeOnSingleLine">
+    <rule key="ElementMustNotBeOnASingleLine">
         <name>Element must not be on single line</name>
-        <configKey>StyleCop.CSharp.LayoutRules#ElementMustNotBeOnSingleLine</configKey>
+        <configKey>StyleCop.CSharp.LayoutRules#ElementMustNotBeOnASingleLine</configKey>
         <category name="Usability"/>
         <description>Element must not be on single line</description>
     </rule>
@@ -350,9 +350,9 @@
         <category name="Usability"/>
         <description>Curly brackets must not be omitted</description>
     </rule>
-    <rule key="AllAccessorsMustBeMultiLineOrSingleLine">
+    <rule key="AllAccessorsMustBeSingleLineOrMultiLine">
         <name>All accessors must be multi line or single line</name>
-        <configKey>StyleCop.CSharp.LayoutRules#AllAccessorsMustBeMultiLineOrSingleLine</configKey>
+        <configKey>StyleCop.CSharp.LayoutRules#AllAccessorsMustBeSingleLineOrMultiLine</configKey>
         <category name="Usability"/>
         <description>All accessors must be multi line or single line</description>
     </rule>
@@ -854,9 +854,9 @@
         <category name="Usability"/>
         <description>Positive signs must be spaced correctly</description>
     </rule>
-    <rule key="DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly">
+    <rule key="DereferenceAndAccessOfMustBeSpacedCorrectly">
         <name>Dereference and access of symbols must be spaced correctly</name>
-        <configKey>StyleCop.CSharp.SpacingRules#DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly</configKey>
+        <configKey>StyleCop.CSharp.SpacingRules#DereferenceAndAccessOfMustBeSpacedCorrectly</configKey>
         <category name="Usability"/>
         <description>Dereference and access of symbols must be spaced correctly</description>
     </rule>
