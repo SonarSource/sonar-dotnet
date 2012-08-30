@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.gendarme;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -32,6 +29,9 @@ import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileImporter;
 import org.sonar.plugins.csharp.gendarme.profiles.SonarWayProfile;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeViolationMaker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main class of the Gendarme plugin.
@@ -63,16 +63,18 @@ public class GendarmePlugin extends SonarPlugin {
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(GendarmeSensor.RegularGendarmeSensor.class);
-    list.add(GendarmeSensor.UnitTestsGendarmeSensor.class);
 
     // Rules and profiles
     list.add(GendarmeRuleRepository.class);
-    list.add(GendarmeUnitTestsRuleRepository.class);
     list.add(GendarmeProfileImporter.RegularGendarmeProfileImporter.class);
-    list.add(GendarmeProfileImporter.UnitTestsGendarmeProfileImporter.class);
     list.add(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
-    list.add(GendarmeProfileExporter.UnitTestsGendarmeProfileExporter.class);
     list.add(SonarWayProfile.class);
+
+    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
+    // list.add(GendarmeSensor.UnitTestsGendarmeSensor.class);
+    // list.add(GendarmeUnitTestsRuleRepository.class);
+    // list.add(GendarmeProfileImporter.UnitTestsGendarmeProfileImporter.class);
+    // list.add(GendarmeProfileExporter.UnitTestsGendarmeProfileExporter.class);
 
     // Running Gendarme
     list.add(GendarmeResultParser.class);

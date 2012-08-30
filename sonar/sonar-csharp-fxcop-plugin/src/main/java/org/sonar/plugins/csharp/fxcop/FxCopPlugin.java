@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.fxcop;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -30,6 +27,9 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileImporter;
 import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main class of the FxCop plugin.
@@ -61,16 +61,18 @@ public class FxCopPlugin extends SonarPlugin {
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(FxCopSensor.RegularFxCopSensor.class);
-    list.add(FxCopSensor.UnitTestsFxCopSensor.class);
 
     // Rules and profiles
     list.add(FxCopRuleRepository.class);
-    list.add(FxCopUnitTestsRuleRepository.class);
     list.add(FxCopProfileImporter.RegularFxCopProfileImporter.class);
-    list.add(FxCopProfileImporter.UnitTestsFxCopProfileImporter.class);
     list.add(FxCopProfileExporter.RegularFxCopProfileExporter.class);
-    list.add(FxCopProfileExporter.UnitTestsFxCopProfileExporter.class);
     list.add(SonarWayProfile.class);
+
+    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
+    // list.add(FxCopSensor.UnitTestsFxCopSensor.class);
+    // list.add(FxCopUnitTestsRuleRepository.class);
+    // list.add(FxCopProfileImporter.UnitTestsFxCopProfileImporter.class);
+    // list.add(FxCopProfileExporter.UnitTestsFxCopProfileExporter.class);
 
     // Running FxCop
     list.add(FxCopResultParser.class);

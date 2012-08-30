@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -30,6 +27,9 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.stylecop.profiles.SonarWayProfile;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileImporter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main class of the StyleCop plugin.
@@ -53,19 +53,21 @@ public class StyleCopPlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    
-    //list.add(StyleCopSensor.class);
+
+    // list.add(StyleCopSensor.class);
     list.add(StyleCopSensor.RegularStyleCopSensor.class);
-    list.add(StyleCopSensor.UnitTestsStyleCopSensor.class);
 
     // Rules and profiles
     list.add(StyleCopRuleRepository.class);
-    list.add(StyleCopUnitTestsRuleRepository.class);
     list.add(StyleCopProfileImporter.RegularStyleCopProfileImporter.class);
-    list.add(StyleCopProfileImporter.UnitTestsStyleCopProfileImporter.class);
     list.add(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
-    list.add(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class);
     list.add(SonarWayProfile.class);
+
+    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
+    // list.add(StyleCopSensor.UnitTestsStyleCopSensor.class);
+    // list.add(StyleCopUnitTestsRuleRepository.class);
+    // list.add(StyleCopProfileImporter.UnitTestsStyleCopProfileImporter.class);
+    // list.add(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class);
 
     // Running StyleCop
     list.add(StyleCopResultParser.class);
