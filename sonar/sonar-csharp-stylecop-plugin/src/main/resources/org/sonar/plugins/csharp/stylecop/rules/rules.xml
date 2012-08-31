@@ -899,6 +899,54 @@
         <category name="Usability"/>
         <description>File header file name documentation must match type name</description>
     </rule>
+    <rule key="PropertyDocumentationMustHaveValueText">
+        <name>The Xml header documentation for a C# property contains an empty "value" tag.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#PropertyDocumentationMustHaveValueText</configKey>
+        <category name="Usability"/>
+        <description>The Xml header documentation for a C# property contains an empty "value" tag.</description>
+    </rule>
+    <rule key="FileHeaderCompanyNameTextMustMatch">
+        <name>File header company name text must match the appropriate company name.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#FileHeaderCompanyNameTextMustMatch</configKey>
+        <category name="Usability"/>
+        <description>File header company name text must match the appropriate company name.</description>
+    </rule>
+    <rule key="IncludedDocumentationFileDoesNotExist">
+        <name>An included Xml documentation file does not exist.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#IncludedDocumentationFileDoesNotExist</configKey>
+        <category name="Usability"/>
+        <description>An included Xml documentation file does not exist.</description>
+    </rule>
+    <rule key="PropertyDocumentationMustHaveValue">
+        <name>The Xml header documentation for a C# property does not contain a "value" tag.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#PropertyDocumentationMustHaveValue</configKey>
+        <category name="Usability"/>
+        <description>The Xml header documentation for a C# property does not contain a "value" tag.</description>
+    </rule>
+    <rule key="FileHeaderCopyrightTextMustMatch">
+        <name>The file header at the top of a C# code file does not contain the appropriate copyright text.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#FileHeaderCopyrightTextMustMatch</configKey>
+        <category name="Usability"/>
+        <description>The file header at the top of a C# code file does not contain the appropriate copyright text.</description>
+    </rule>
+    <rule key="FileHeaderMustHaveSummary">
+        <name>The file header at the top of a C# code file does not contain a filled-in summary tag.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#FileHeaderMustHaveSummary</configKey>
+        <category name="Usability"/>
+        <description>The file header at the top of a C# code file does not contain a filled-in summary tag.</description>
+    </rule>
+    <rule key="DocumentationTextMustBeginWithACapitalLetter">
+        <name>A section of the Xml header documentation for a C# element does not begin with a capital letter.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#DocumentationTextMustBeginWithACapitalLetter</configKey>
+        <category name="Usability"/>
+        <description>A section of the Xml header documentation for a C# element does not begin with a capital letter.</description>
+    </rule>
+    <rule key="DocumentationTextMustEndWithAPeriod">
+        <name>A section of the Xml header documentation for a C# element does not end with a period.</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#DocumentationTextMustEndWithAPeriod</configKey>
+        <category name="Usability"/>
+        <description>A section of the Xml header documentation for a C# element does not end with a period (also known as a full stop).</description>
+    </rule>
     
     <rule key="CodeMustNotContainBlankLinesAtStartOfFile">
         <name>Code must not contain blank lines at start of file</name>
@@ -939,6 +987,12 @@
         <category name="Usability"/>
         <description>Instance readonly elements must appear before instance non readonly elements</description>
     </rule>
+    <rule key="PartialElementsMustDeclareAccess">
+        <name>Partial elements must have an access modifier</name>
+        <configKey>StyleCop.CSharp.OrderingRules#PartialElementsMustDeclareAccess</configKey>
+        <category name="Usability"/>
+        <description>The partial element does not have an access modifier defined. StyleCop may not be able to determine the correct placement of the elements in the file. Please declare an access modifier for all partial elements.</description>
+    </rule>
     
     <rule key="UseShorthandForNullableTypes">
         <name>Use shorthand for nullable types</name>
@@ -951,5 +1005,11 @@
         <configKey>StyleCop.CSharp.ReadabilityRules#PrefixCallsCorrectly</configKey>
         <category name="Usability"/>
         <description>Prefix calls correctly</description>
+    </rule>
+    <rule key="DoNotUseRegions">
+        <name>Do not use regions</name>
+        <configKey>StyleCop.CSharp.ReadabilityRules#DoNotUseRegions</configKey>
+        <category name="Usability"/>
+        <description>The C# code contains a region.</description>
     </rule>
 </rules>
