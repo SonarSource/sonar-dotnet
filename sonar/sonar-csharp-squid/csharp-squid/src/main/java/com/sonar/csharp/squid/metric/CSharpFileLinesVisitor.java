@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Visitor that computes the number of statements.
+ * Visitor that computes the CoreMetrics.NCLOC_DATA_KEY & CoreMetrics.COMMENT_LINES_DATA_KEY metrics used by the DevCockpit.
  */
 public class CSharpFileLinesVisitor extends SquidAstVisitor<CSharpGrammar> implements AstAndTokenVisitor {
 
@@ -55,15 +55,12 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<CSharpGrammar> imple
 
   @Override
   public void visitFile(AstNode astNode) {
-    super.visitFile(astNode);
     File sonarFile = File.fromIOFile(getContext().getFile(), project);
     fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
   }
 
   @Override
   public void leaveFile(AstNode astNode) {
-    super.leaveFile(astNode);
-
     int fileLength = getContext().peekSourceCode().getInt(CSharpMetric.LINES);
 
     for (int line = 1; line <= fileLength; line++) {
