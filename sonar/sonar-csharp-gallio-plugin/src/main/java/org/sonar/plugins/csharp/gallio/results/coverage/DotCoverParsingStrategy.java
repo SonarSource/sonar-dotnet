@@ -81,12 +81,14 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
     List<FileCoverage> result = Lists.newArrayList();
     for (int fileIndex : coveragePointRegistry.keySet()) {
       File sourceFile = fileRegistry.get(fileIndex);
-      FileCoverage fileCoverage = new FileCoverage(sourceFile);
-      Collection<CoveragePoint> points = coveragePointRegistry.get(fileIndex);
-      for (CoveragePoint point : points) {
-        fileCoverage.addPoint(point);
+      if (sourceFile != null) {
+        FileCoverage fileCoverage = new FileCoverage(sourceFile);
+        Collection<CoveragePoint> points = coveragePointRegistry.get(fileIndex);
+        for (CoveragePoint point : points) {
+          fileCoverage.addPoint(point);
+        }
+        result.add(fileCoverage);
       }
-      result.add(fileCoverage);
     }
 
     return result;
@@ -94,11 +96,12 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
 
   private void parseFileBloc(SMInputCursor cursor) throws XMLStreamException {
     int fileIndex = Integer.valueOf(cursor.getAttrValue("Index"));
+    String name = cursor.getAttrValue("Name");
     try {
-      File sourceFile = new File(cursor.getAttrValue("Name")).getCanonicalFile();
+      File sourceFile = new File(name).getCanonicalFile();
       fileRegistry.put(fileIndex, sourceFile);
     } catch (IOException e) {
-      throw new SonarException("Sourcefile referenced in dotCover report not found", e);
+      LOG.warn("Issue with path to source file referenced in dotCover report " + name, e);
     }
 
   }
