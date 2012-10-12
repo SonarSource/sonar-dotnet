@@ -52,7 +52,7 @@
   </scm>
   <issueManagement>
     <system>JIRA</system>
-    <url>http://jira.codehaus.org/browse/SONARPLUGINS/component/13985</url>
+    <url>http://jira.codehaus.org/browse/SONARDOTNT</url>
   </issueManagement>
   <ciManagement>
     <system>Cloudbees</system>
