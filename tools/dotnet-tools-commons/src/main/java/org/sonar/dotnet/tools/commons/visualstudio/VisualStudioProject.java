@@ -23,13 +23,13 @@
 package org.sonar.dotnet.tools.commons.visualstudio;
 
 import com.google.common.collect.Sets;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -392,6 +392,7 @@ public class VisualStudioProject {
     return sourceFileMap.values();
   }
 
+  @SuppressWarnings("unchecked")
   private void initializeSourceFileMap() {
     Map<File, SourceFile> allFiles = new LinkedHashMap<File, SourceFile>(); // Case of a regular project
     if (projectFile != null) {
@@ -411,8 +412,8 @@ public class VisualStudioProject {
       }
 
     } else {
-      // For web projects, we take all the C# files
-      List<File> csharpFiles = listRecursiveFiles(directory, ".cs");
+      // For web projects, we take all the C# & VB files
+      Collection<File> csharpFiles = FileUtils.listFiles(directory, new String[] {"cs", "vb"}, true);
       for (File file : csharpFiles) {
         SourceFile sourceFile = new SourceFile(this, file, file.getParent(), file.getName());
         allFiles.put(file, sourceFile);
@@ -426,33 +427,6 @@ public class VisualStudioProject {
       initializeSourceFileMap();
     }
     return sourceFileMap;
-  }
-
-  /**
-   * Recursively lists the files of a directory
-   * 
-   * @param dir
-   *          the directory to list
-   * @param extension
-   * @return
-   */
-  private List<File> listRecursiveFiles(File dir, String extension) {
-    List<File> result = new ArrayList<File>();
-    File[] content = dir.listFiles();
-    if (content != null) {
-      for (File file : content) {
-        if (file.isDirectory()) {
-          List<File> matching = listRecursiveFiles(file, extension);
-          result.addAll(matching);
-        } else {
-          // Look for matching file names
-          if (StringUtils.endsWithIgnoreCase(file.getName(), extension)) {
-            result.add(file);
-          }
-        }
-      }
-    }
-    return result;
   }
 
   /**

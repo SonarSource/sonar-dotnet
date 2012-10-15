@@ -251,7 +251,7 @@ public final class ModelFactory {
     }
 
     // This pattern extracts the projects from a Visual Studio solution
-    String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.csproj)\"";
+    String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.\\w+proj)\"";
     String webProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*).*?ProjectSection\\(WebsiteProperties\\).*?"
       + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
     Pattern projectPattern = Pattern.compile(normalProjectExp);
@@ -305,7 +305,7 @@ public final class ModelFactory {
   }
 
   /**
-   * Generates a list of projects from the path of the visual studio projects files (.csproj)
+   * Generates a list of projects from the path of the visual studio projects files (.*proj)
    * 
    * @param projectFile
    *          the project file
@@ -392,9 +392,9 @@ public final class ModelFactory {
   protected static String findAssemblyVersion(Collection<SourceFile> sourceFiles) {
     String version = null;
 
-    // first parse: in general, it's in the "Properties\AssemblyInfo.cs"
+    // first parse: in general, it's in the "Properties\AssemblyInfo.*"
     for (SourceFile file : sourceFiles) {
-      if ("assemblyinfo.cs".equalsIgnoreCase(file.getName())) {
+      if (StringUtils.startsWithIgnoreCase(file.getName(), "assemblyinfo")) {
         version = tryToGetVersion(file);
         if (version != null) {
           break;
@@ -420,7 +420,8 @@ public final class ModelFactory {
         content = content.substring(1);
       }
 
-      Pattern p = Pattern.compile("^[^/]*\\[assembly:\\sAssemblyVersion\\(\"([^\"]*)\"\\)\\].*$", Pattern.MULTILINE);
+      // Search for AssemblyVersion("...") which is not in a comment line (which starts by / in C# or ' in VB)
+      Pattern p = Pattern.compile("^[^/']*AssemblyVersion\\(\"([^\"]*)\"\\).*$", Pattern.MULTILINE);
       Matcher m = p.matcher(content);
       if (m.find())
       {
@@ -477,7 +478,7 @@ public final class ModelFactory {
   }
 
   /**
-   * Gets the relative paths of all the files in a project, as they are defined in the .csproj file.
+   * Gets the relative paths of all the files in a project, as they are defined in the .*proj file.
    * 
    * @param project
    *          the project file
@@ -499,11 +500,7 @@ public final class ModelFactory {
         Element compileElement = (Element) nodes.item(idxNode);
         // We filter the files
         String filePath = compileElement.getAttribute("Include");
-        if ((filePath != null) && filePath.endsWith(".cs")) {
-
-          // fix tests on unix system
-          // but should not be necessary
-          // on windows build machines
+        if (filePath != null) {
           filePath = StringUtils.replace(filePath, "\\", File.separatorChar + "");
           result.add(filePath);
         }
@@ -539,7 +536,7 @@ public final class ModelFactory {
   }
 
   /**
-   * A Namespace context specialized for the handling of csproj files
+   * A Namespace context specialized for the handling of .*proj files
    * 
    * @author Jose CHILLAN Sep 1, 2009
    */

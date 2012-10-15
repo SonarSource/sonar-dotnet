@@ -25,13 +25,13 @@ package org.sonar.dotnet.tools.commons.visualstudio;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
@@ -49,10 +49,6 @@ import static org.junit.matchers.JUnitMatchers.containsString;
  */
 public class ModelFactoryTest {
 
-  private static final org.slf4j.Logger log = LoggerFactory.getLogger(ModelFactoryTest.class);
-  /**
-   * PROJECT_CORE_PATH
-   */
   private static final String PROJECT_CORE_PATH = "target/test-classes/solution/Example/Example.Core/Example.Core.csproj";
   private static final String SAMPLE_FILE_PATH = "target/test-classes/solution/Example/Example.Core/Model/SubType.cs";
   private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
@@ -60,6 +56,7 @@ public class ModelFactoryTest {
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
   private static final String SOLUTION_WITH_DUP_PATH = "target/test-classes/solution/DuplicatesExample/Example.sln";
   private static final String SOLUTION_WITH_CUSTOM_BUILD_PATH = "target/test-classes/solution/CustomBuild/CustomBuild.sln";
+  private static final String SOLUTION_WITH_MULTIPLE_LANGUAGES_PATH = "target/test-classes/solution/MultiLanguageSolution/MultiLanguage.sln";
 
   private static final String SILVERLIGHT_SOLUTION_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankSilverlightSolution.sln";
   private static final String SILVERLIGHT_PROJECT_PATH = "target/test-classes/solution/BlankSilverlightSolution/BlankApplication/BlankApplication.csproj";
@@ -70,7 +67,6 @@ public class ModelFactoryTest {
   public void testReadFiles() {
     File file = new File(PROJECT_CORE_PATH);
     List<String> files = ModelFactory.getFilesPath(file);
-    log.debug("Files : " + files);
     assertEquals("Bad number of files extracted", 6, files.size());
   }
 
@@ -99,7 +95,6 @@ public class ModelFactoryTest {
   public void testReadSolution() throws Exception {
     File file = new File(SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     VisualStudioProject project = solution.getProject("Example.Core");
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 6, files.size());
@@ -111,7 +106,6 @@ public class ModelFactoryTest {
     VisualStudioProject project = ModelFactory.getProject(file);
     assertNotNull("Could not retrieve a project ", project);
     Collection<SourceFile> sourceFiles = project.getSourceFiles();
-    log.debug("Sources : " + sourceFiles);
     assertEquals("Bad number of files extracted", 6, sourceFiles.size());
   }
 
@@ -135,7 +129,6 @@ public class ModelFactoryTest {
   public void testSilverlightSolution() throws Exception {
     File file = new File(SILVERLIGHT_SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     VisualStudioProject project = solution.getProject("BlankApplication");
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 3, files.size());
@@ -149,7 +142,6 @@ public class ModelFactoryTest {
   public void testReadMessySolution() throws Exception {
     File file = new File(MESSY_SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     VisualStudioProject project = solution.getProject("MessyTestApplication");
     Collection<SourceFile> files = project.getSourceFiles();
     assertEquals("Bad number of files extracted", 3, files.size());
@@ -164,7 +156,6 @@ public class ModelFactoryTest {
   public void testSolutionWithLinks() throws Exception {
     File file = new File(LINK_SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     List<VisualStudioProject> projects = solution.getProjects();
     for (VisualStudioProject project : projects) {
       Collection<SourceFile> files = project.getSourceFiles();
@@ -239,7 +230,6 @@ public class ModelFactoryTest {
   public void testSolutionWithAssemblyNameDuplicates() throws Exception {
     File file = new File(SOLUTION_WITH_DUP_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     List<VisualStudioProject> projects = solution.getProjects();
     assertEquals(2, projects.size());
     assertFalse(projects.get(0).getAssemblyName().equals(projects.get(1).getAssemblyName()));
@@ -249,19 +239,34 @@ public class ModelFactoryTest {
   public void testWebSolution() throws Exception {
     File file = new File(WEB_SOLUTION_PATH);
     VisualStudioSolution solution = ModelFactory.getSolution(file);
-    log.debug("Solution : " + solution);
     List<VisualStudioProject> projects = solution.getProjects();
-    assertEquals(2, projects.size());
-    final VisualStudioWebProject webProject;
-    if (projects.get(0) instanceof VisualStudioWebProject) {
-      webProject = (VisualStudioWebProject) projects.get(0);
-    } else {
-      webProject = (VisualStudioWebProject) projects.get(1);
-    }
-    assertEquals(1, webProject.getReferences().size());
+    assertThat(projects.size()).isEqualTo(2);
+
+    VisualStudioWebProject webProject = (VisualStudioWebProject) projects.get(1);
+    assertThat(webProject.getReferences().size()).isEqualTo(1);
     Set<File> webAssemblies = webProject.getGeneratedAssemblies(null, null);
     for (File assemblyFile : webAssemblies) {
-      assertFalse("ClassLibrary.dll".equals(assemblyFile.getName()));
+      assertThat(assemblyFile.getName()).isNotEqualTo("ClassLibrary.dll");
     }
+    // all C# and VB files should be referenced: 6 C# in "App_code" folder + 2 "C# ASPX" and 1 VB in root folder
+    assertThat(webProject.getSourceFiles().size()).isEqualTo(9);
+  }
+
+  @Test
+  public void testSolutionWithMultipleLanguages() throws Exception {
+    File file = new File(SOLUTION_WITH_MULTIPLE_LANGUAGES_PATH);
+    VisualStudioSolution solution = ModelFactory.getSolution(file);
+    List<VisualStudioProject> projects = solution.getProjects();
+    assertEquals(2, projects.size());
+
+    // C# Project
+    VisualStudioProject csProj = projects.get(0);
+    assertThat(csProj.getName()).isEqualTo("CSharpLib");
+    assertThat(csProj.getAssemblyVersion()).isEqualTo("1.0.0.0");
+
+    // VB Project
+    VisualStudioProject vbProj = projects.get(1);
+    assertThat(vbProj.getName()).isEqualTo("VBLib");
+    assertThat(vbProj.getAssemblyVersion()).isEqualTo("2.0.0.0");
   }
 }
