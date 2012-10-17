@@ -52,8 +52,9 @@ import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
@@ -67,7 +68,7 @@ import java.util.Set;
 
 @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
 @Phase(name = Phase.Name.PRE)
-public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
+public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12};
@@ -84,15 +85,16 @@ public final class CSharpSquidSensor extends AbstractRegularCSharpSensor {
   private SensorContext context;
   private AstScanner<CSharpGrammar> scanner;
 
-  public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
+  public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[] {});
+    this(dotNetConfiguration, cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory,
+        new CSharpCheck[] {});
   }
 
-  public CSharpSquidSensor(CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
+  public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
       CSharpCheck[] cSharpChecks) {
-    super(microsoftWindowsEnvironment);
+    super(cSharp, dotNetConfiguration, microsoftWindowsEnvironment, "Squid C#", "");
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;

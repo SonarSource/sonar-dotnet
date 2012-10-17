@@ -48,7 +48,7 @@ public class CSharpProjectInitializer extends Initializer {
 
   @Override
   public void execute(Project project) {
-    // Handling encoding
+    // Handling encoding => TODO : should we still do that now that we said that the Sonar Runner must not force the encoding???
     if (StringUtils.isBlank(configuration.getString("sonar.sourceEncoding"))) {
       LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
       configuration.setProperty("sonar.sourceEncoding", "UTF-8");

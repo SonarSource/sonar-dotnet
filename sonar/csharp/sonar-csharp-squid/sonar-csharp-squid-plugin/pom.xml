@@ -56,7 +56,6 @@
           <pluginClass>com.sonar.plugins.csharp.squid.CSharpSquidPlugin</pluginClass>
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <addMavenDescriptor>false</addMavenDescriptor>
-          <basePlugin>csharp</basePlugin>
         </configuration>
       </plugin>
       <plugin>
@@ -104,8 +103,12 @@
 
     <!-- sonar open-source -->
     <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+      <artifactId>sonar-dotnet-plugin</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-      <artifactId>sonar-csharp-core-plugin</artifactId>
+      <artifactId>sonar-csharp-plugin</artifactId>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
