@@ -7,20 +7,19 @@
     <version>1.5-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
 
-  <name>Sonar C# Plugins</name>
+  <name>Sonar .NET Plugins</name>
 
   <modules>
+    <module>dotnet/sonar-dotnet-plugin</module>
     <module>sonar-csharp-core-plugin</module>
     <module>sonar-csharp-fxcop-plugin</module>
     <module>sonar-csharp-stylecop-plugin</module>
     <module>sonar-csharp-gendarme-plugin</module>
     <module>sonar-csharp-gallio-plugin</module>
     <module>sonar-csharp-ndeps-plugin</module>
-    <module>sonar-csharp-rules-plugin</module>
     <module>sonar-csharp-squid</module>
   </modules>
 
@@ -101,12 +100,12 @@
       <dependency>
         <groupId>commons-lang</groupId>
         <artifactId>commons-lang</artifactId>
-        <version>2.4</version>
+        <version>2.6</version>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
-        <version>1.4</version>
+        <version>2.0.1</version>
       </dependency>
       <dependency>
         <groupId>com.google.collections</groupId>
