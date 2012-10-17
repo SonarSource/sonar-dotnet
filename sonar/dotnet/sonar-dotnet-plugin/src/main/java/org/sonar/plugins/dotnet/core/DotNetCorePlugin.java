@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.core;
 
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
+
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
@@ -26,7 +28,6 @@ import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.ResourceHelper;
 
 import java.util.ArrayList;
 import java.util.List;

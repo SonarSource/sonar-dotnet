@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.dotnet.api;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.commons.configuration.Configuration;
@@ -95,6 +96,20 @@ public class DotNetConfiguration implements BatchExtension {
     // PartCover OLD parameters
     newToPreviousParamMap.put("sonar.partcover.installDirectory", "partcover.directory");
 
+  }
+
+  /**
+   * Sets a property on the underlying {@link Settings} object
+   */
+  public void setProperty(String key, String value) {
+    settings.setProperty(key, value);
+  }
+
+  /**
+   * Sets a string-array property on the underlying {@link Settings} object
+   */
+  public void setProperty(String key, String[] values) {
+    settings.setProperty(key, Joiner.on(',').join(values));
   }
 
   /**

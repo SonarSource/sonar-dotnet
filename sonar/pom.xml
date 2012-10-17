@@ -14,7 +14,7 @@
 
   <modules>
     <module>dotnet/sonar-dotnet-plugin</module>
-    <module>sonar-csharp-core-plugin</module>
+    <module>csharp/sonar-csharp-plugin</module>
     <module>sonar-csharp-fxcop-plugin</module>
     <module>sonar-csharp-stylecop-plugin</module>
     <module>sonar-csharp-gendarme-plugin</module>
