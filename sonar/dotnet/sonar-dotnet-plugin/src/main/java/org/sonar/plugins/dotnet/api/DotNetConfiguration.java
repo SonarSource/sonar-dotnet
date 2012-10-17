@@ -25,6 +25,7 @@ import com.google.common.collect.Maps;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
+import org.sonar.api.ServerExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.config.Settings;
 import org.sonar.api.utils.Logs;
@@ -40,7 +41,7 @@ import java.util.Map;
  * previous .NET plugin parameter names.
  */
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
-public class DotNetConfiguration implements BatchExtension {
+public class DotNetConfiguration implements BatchExtension, ServerExtension {
 
   private Settings settings;
 

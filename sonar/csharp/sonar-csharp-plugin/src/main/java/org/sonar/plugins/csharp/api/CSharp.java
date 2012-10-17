@@ -20,23 +20,23 @@
 
 package org.sonar.plugins.csharp.api;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 /**
  * Class that defines the C# language.
  */
 public class CSharp extends AbstractLanguage {
 
-  private Configuration configuration;
+  private DotNetConfiguration configuration;
 
   /**
    * Constructs a {@link CSharp} language object with the given configuration.
    * 
    * @param configuration
    */
-  public CSharp(Configuration configuration) {
+  public CSharp(DotNetConfiguration configuration) {
     super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
     this.configuration = configuration;
   }
