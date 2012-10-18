@@ -20,7 +20,7 @@
 /**
  * 
  */
-package org.sonar.plugins.dotnet.api.exceptions;
+package org.sonar.plugins.dotnet.api.tools;
 
 /**
  * Exception class for the .NET Tools

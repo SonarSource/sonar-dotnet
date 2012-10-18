@@ -22,7 +22,7 @@
  */
 package org.sonar.plugins.dotnet.api.visualstudio;
 
-import org.sonar.plugins.dotnet.api.exceptions.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;

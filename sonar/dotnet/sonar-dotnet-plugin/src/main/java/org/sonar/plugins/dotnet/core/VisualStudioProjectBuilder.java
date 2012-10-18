@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.exceptions.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
 
 import org.sonar.plugins.dotnet.api.visualstudio.ModelFactory;
 import org.sonar.plugins.dotnet.api.visualstudio.SourceFile;

@@ -1,5 +1,5 @@
 /*
- * .NET tools :: StyleCop Runner
+ * Sonar .NET Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,29 +17,32 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.dotnet.tools.stylecop;
+package org.sonar.plugins.dotnet.api.tools;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import java.io.File;
+import java.util.Collection;
 
-/**
- * Exception generated for StyleCop execution.
- */
-public class StyleCopException extends DotNetToolsException {
+public abstract class CilRuleEngineCommandBuilderSupport extends CilToolCommandBuilderSupport {
 
-  private static final long serialVersionUID = -8744090490644930724L;
+  protected File configFile;
 
   /**
-   * {@inheritDoc}
+   * Set the configuration file that must be used to perform the analysis. It is mandatory.
+   * 
+   * @param configFile
+   *          the file
+   * @return the current builder
    */
-  public StyleCopException(String message) {
-    super(message);
+  public void setConfigFile(File configFile) {
+    this.configFile = configFile;
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public StyleCopException(String message, Throwable cause) {
-    super(message, cause);
+  @Override
+  protected void validate(Collection<File> assemblyToScanFiles) {
+    if (configFile == null || !configFile.exists()) {
+      throw new IllegalStateException("The configuration file does not exist.");
+    }
+    super.validate(assemblyToScanFiles);
   }
 
 }
