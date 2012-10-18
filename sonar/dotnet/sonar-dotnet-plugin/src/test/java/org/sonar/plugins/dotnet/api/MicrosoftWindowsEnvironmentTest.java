@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.dotnet.api;
 
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+
 import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;

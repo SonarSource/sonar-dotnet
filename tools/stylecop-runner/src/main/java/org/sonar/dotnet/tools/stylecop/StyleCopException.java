@@ -19,7 +19,7 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.exceptions.DotNetToolsException;
 
 /**
  * Exception generated for StyleCop execution.

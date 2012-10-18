@@ -20,6 +20,8 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
@@ -33,8 +35,7 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{341CE766-9DC8-4825-8CA4-74D66A8B5FD2}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{C4564238-A3D9-4537-A640-7BA87F234FF7}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite/", "{C4564238-A3D9-4537-A640-7BA87F234FF7}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
 		ProjectReferences = "{341CE766-9DC8-4825-8CA4-74D66A8B5FD2}|ClassLibrary.dll;"
@@ -13,7 +13,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{C45
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
+		Debug.AspNetCompiler.Debug = "False"
 		Release.AspNetCompiler.VirtualPath = "/WebSite"
 		Release.AspNetCompiler.PhysicalPath = "WebSite\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite\"

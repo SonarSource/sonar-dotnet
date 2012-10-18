@@ -19,13 +19,14 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.CommandExecutor;
-import org.sonar.dotnet.tools.commons.utils.ZipUtils;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.utils.ZipUtils;
 
 import java.io.File;
 import java.io.IOException;

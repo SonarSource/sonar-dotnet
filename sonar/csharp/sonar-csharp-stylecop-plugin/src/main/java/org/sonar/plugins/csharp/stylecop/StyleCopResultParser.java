@@ -20,6 +20,8 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+
 import org.apache.commons.io.IOUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMHierarchicCursor;
@@ -34,9 +36,8 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.core.AbstractStaxParser;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.utils.AbstractStaxParser;
 
 import javax.xml.stream.XMLStreamException;
 

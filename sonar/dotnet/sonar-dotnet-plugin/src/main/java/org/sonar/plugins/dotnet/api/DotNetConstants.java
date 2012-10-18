@@ -19,8 +19,9 @@
  */
 package org.sonar.plugins.dotnet.api;
 
+import org.sonar.plugins.dotnet.api.visualstudio.BuildConfiguration;
+
 import com.google.common.collect.Maps;
-import org.sonar.dotnet.tools.commons.visualstudio.BuildConfiguration;
 
 import java.util.Map;
 

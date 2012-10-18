@@ -4,6 +4,7 @@
     <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
     <artifactId>parent</artifactId>
     <version>1.5-SNAPSHOT</version>
+    <relativePath>../..</relativePath>
   </parent>
 
   <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
@@ -20,18 +21,6 @@
     <sonar.pluginClass>org.sonar.plugins.csharp.stylecop.StyleCopPlugin</sonar.pluginClass>
   </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.sonar</groupId>
-        <artifactId>sonar-packaging-maven-plugin</artifactId>
-        <configuration>
-          <basePlugin>csharp</basePlugin>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <!-- .NET tools -->
     <dependency>
@@ -39,16 +28,17 @@
       <artifactId>stylecop-runner</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
-      <artifactId>dotnet-tools-commons</artifactId>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- sonar open-source -->
     <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+      <artifactId>sonar-dotnet-plugin</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
-      <artifactId>sonar-csharp-core-plugin</artifactId>
+      <artifactId>sonar-csharp-plugin</artifactId>
       <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>

@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.dotnet.core;
 
+import org.sonar.plugins.dotnet.api.exceptions.DotNetToolsException;
+
+import org.sonar.plugins.dotnet.api.visualstudio.ModelFactory;
+import org.sonar.plugins.dotnet.api.visualstudio.SourceFile;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -27,11 +34,6 @@ import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
-import org.sonar.dotnet.tools.commons.visualstudio.ModelFactory;
-import org.sonar.dotnet.tools.commons.visualstudio.SourceFile;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;

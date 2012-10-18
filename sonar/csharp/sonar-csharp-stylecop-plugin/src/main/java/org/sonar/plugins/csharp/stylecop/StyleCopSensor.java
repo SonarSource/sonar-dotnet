@@ -20,6 +20,9 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+
 import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -31,17 +34,16 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.utils.FileFinder;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
-import org.sonar.plugins.csharp.api.CSharpConfiguration;
+import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRuleBasedCSharpSensor;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractRuleBasedDotNetSensor;
+import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -52,7 +54,7 @@ import java.util.Collections;
 /**
  * Collects the StyleCop reporting into sonar.
  */
-public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
+public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
 
@@ -60,23 +62,24 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
   private RulesProfile rulesProfile;
   private StyleCopProfileExporter profileExporter;
   private StyleCopResultParser styleCopResultParser;
-  private CSharpConfiguration configuration;
+  private DotNetConfiguration configuration;
 
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class RegularStyleCopSensor extends StyleCopSensor {
 
-    public RegularStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter,
-        StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
+    public RegularStyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter,
+        StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(cSharp, fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
   }
 
   @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
   public static class UnitTestsStyleCopSensor extends StyleCopSensor {
-    public UnitTestsStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.UnitTestsStyleCopProfileExporter profileExporter,
-        StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    public UnitTestsStyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile,
+        StyleCopProfileExporter.UnitTestsStyleCopProfileExporter profileExporter,
+        StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
 
-      super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
+      super(cSharp, fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
 
     @Override
@@ -85,9 +88,9 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
     }
   }
 
-  protected StyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
-      StyleCopResultParser styleCopResultParser, CSharpConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE, ""));
+  protected StyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
+      StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    super(cSharp, configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
@@ -105,7 +108,10 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + StyleCopConstants.STYLECOP_REPORT_XML;
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY);
+      if (StringUtils.isBlank(reportPath)) {
+        reportPath = reportDefaultPath;
+      }
       VisualStudioSolution vsSolution = getVSSolution();
       VisualStudioProject vsProject = getVSProject(project);
       reportFiles = FileFinder.findFiles(vsSolution, vsProject, reportPath);
@@ -118,7 +124,7 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
         File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
             .getWorkingDirectory());
         StyleCopRunner runner = StyleCopRunner.create(
-            configuration.getString(StyleCopConstants.INSTALL_DIR_KEY, StyleCopConstants.INSTALL_DIR_DEFVALUE),
+            configuration.getString(StyleCopConstants.INSTALL_DIR_KEY),
             getMicrosoftWindowsEnvironment().getDotnetSdkDirectory().getAbsolutePath(), tempDir.getAbsolutePath());
         launchStyleCop(project, runner, styleCopConfigFile);
       } catch (StyleCopException e) {
@@ -138,7 +144,7 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
         getVSProject(project));
     builder.setConfigFile(styleCopConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), StyleCopConstants.STYLECOP_REPORT_XML));
-    runner.execute(builder, configuration.getInt(StyleCopConstants.TIMEOUT_MINUTES_KEY, StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE));
+    runner.execute(builder, configuration.getInt(StyleCopConstants.TIMEOUT_MINUTES_KEY));
   }
 
   protected File generateConfigurationFile(Project project) {
@@ -158,7 +164,7 @@ public class StyleCopSensor extends AbstractRuleBasedCSharpSensor {
   }
 
   private File findAnalyzersSettings(Project project) {
-    String settingsPath = configuration.getString(StyleCopConstants.ANALYZERS_SETTINGS_PATH_KEY, null);
+    String settingsPath = configuration.getString(StyleCopConstants.ANALYZERS_SETTINGS_PATH_KEY);
     if (StringUtils.isEmpty(settingsPath)) {
       return null;
     }
