@@ -23,9 +23,9 @@ import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
-import org.sonar.dotnet.tools.commons.support.CilRuleEngineCommandBuilderSupport;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.tools.CilRuleEngineCommandBuilderSupport;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.IOException;

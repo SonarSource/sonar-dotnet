@@ -13,8 +13,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>dotnet-tools-commons</artifactId>
+      <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+      <artifactId>sonar-dotnet-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
