@@ -18,35 +18,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp.api;
 
-import org.sonar.api.Extension;
-import org.sonar.api.SonarPlugin;
-import org.sonar.plugins.csharp.api.CSharp;
+import org.junit.Test;
+import org.sonar.api.config.Settings;
+import org.sonar.plugins.csharp.core.CSharpCorePlugin;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.fest.assertions.Assertions.assertThat;
 
-/**
- * C# Core plugin class.
- */
-public class CSharpCorePlugin extends SonarPlugin {
+public class CSharpTest {
 
-  /**
-   * {@inheritDoc}
-   */
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
+  @Test
+  public void shouldGetDefaultFileSuffixes() {
+    Settings settings = Settings.createForComponent(new CSharpCorePlugin());
+    CSharp cSharp = new CSharp(new DotNetConfiguration(settings));
 
-    extensions.add(CSharp.class);
-    extensions.add(CSharpProjectInitializer.class);
-
-    // Sensors
-    extensions.add(CSharpSourceImporter.class);
-
-    // Common Rules
-    extensions.add(CSharpCommonRulesEngineProvider.class);
-
-    return extensions;
+    assertThat(cSharp.getFileSuffixes()).containsOnly("cs");
   }
+
 }

@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: Core
+ * Sonar C# Plugin :: C# Squid :: Sonar Plugin
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,8 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
-package org.sonar.plugins.csharp.api;
+package com.sonar.plugins.csharp.squid;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
@@ -27,6 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
+import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
 
@@ -39,7 +40,7 @@ import java.util.Set;
  * find to which physical file a given logical item belongs to, so that it is possible to save measure or violations to the correct Sonar
  * resource.
  */
-public class CSharpResourcesBridge implements BatchExtension {
+public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBridge {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpResourcesBridge.class);
   private Map<String, Resource<?>> logicalToPhysicalResourcesMap = Maps.newHashMap();
@@ -92,13 +93,14 @@ public class CSharpResourcesBridge implements BatchExtension {
   }
 
   /**
-   * Returns the physical file that contains the definition of the type referenced by its namespace and its name.
-   * 
-   * @param namespaceName
-   *          the namespace of the type
-   * @param typeName
-   *          the type name
-   * @return the resource that contains this type, or NULL if none
+   * {@inheritDoc}
+   */
+  public String getLanguageKey() {
+    return CSharpConstants.LANGUAGE_KEY;
+  }
+
+  /**
+   * {@inheritDoc}
    */
   public Resource<?> getFromTypeName(String namespaceName, String typeName) {
     StringBuilder typeFullName = new StringBuilder();
@@ -111,25 +113,14 @@ public class CSharpResourcesBridge implements BatchExtension {
   }
 
   /**
-   * Returns the physical file that contains the definition of the type referenced by its full name.
-   * 
-   * @param typeFullName
-   *          the type full name
-   * @return the resource that contains this type, or NULL if none
+   * {@inheritDoc}
    */
   public Resource<?> getFromTypeName(String typeFullName) {
     return logicalToPhysicalResourcesMap.get(typeFullName);
   }
 
   /**
-   * /!\ Do not use for the moment! <br>
-   * <br>
-   * For the moment, method key ends with ':XXXX', where 'XXXX' is the line number, so this API does not work. <br>
-   * <br>
-   * TODO: Need to work on that.
-   * 
-   * @param memberFullName
-   * @return
+   * {@inheritDoc}
    */
   public Resource<?> getFromMemberName(String memberFullName) {
     return logicalToPhysicalResourcesMap.get(memberFullName);

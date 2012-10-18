@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: Core
+ * Sonar C# Plugin :: C# Squid :: Sonar Plugin
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,8 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
-package org.sonar.plugins.csharp.api;
+package com.sonar.plugins.csharp.squid;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,6 +27,7 @@ import org.sonar.squid.api.SourceClass;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceMethod;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
@@ -53,6 +53,11 @@ public class CSharpResourcesBridgeTest {
 
     cSharpResourcesBridge = new CSharpResourcesBridge();
     cSharpResourcesBridge.indexFile(sourceFile, sonarFile);
+  }
+
+  @Test
+  public void shouldReturnCSharpKey() {
+    assertThat(cSharpResourcesBridge.getLanguageKey()).isEqualTo("cs");
   }
 
   @Test

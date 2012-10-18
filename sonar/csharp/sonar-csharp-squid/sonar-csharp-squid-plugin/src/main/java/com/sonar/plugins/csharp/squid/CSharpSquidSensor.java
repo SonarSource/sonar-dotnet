@@ -51,7 +51,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;

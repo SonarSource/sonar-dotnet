@@ -53,6 +53,9 @@ public class CSharpSquidPlugin extends SonarPlugin {
     extensions.add(CSharpSourceCodeColorizer.class);
     extensions.add(CSharpSquidSensor.class);
 
+    // Bridge used by any of the C# plugins
+    extensions.add(CSharpResourcesBridge.class);
+
     // rules
     extensions.add(CSharpRuleRepository.class);
     extensions.add(CSharpRuleProfile.class);
