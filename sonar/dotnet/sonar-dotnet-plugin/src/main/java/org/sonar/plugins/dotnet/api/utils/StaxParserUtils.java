@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: Core
+ * Sonar .NET Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,25 +17,22 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.plugins.dotnet.api.utils;
 
-package org.sonar.plugins.csharp.api;
+import org.codehaus.stax2.XMLInputFactory2;
+import org.codehaus.staxmate.SMInputFactory;
 
-/**
- * Constants for the C# language.
- */
-public final class CSharpConstants {
+import javax.xml.stream.XMLInputFactory;
 
-  private CSharpConstants() {
+public final class StaxParserUtils {
+
+  public static SMInputFactory initStax() {
+    XMLInputFactory xmlFactory = XMLInputFactory2.newInstance();
+    xmlFactory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
+    xmlFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.FALSE);
+    xmlFactory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+    xmlFactory.setProperty(XMLInputFactory.IS_VALIDATING, Boolean.FALSE);
+    return new SMInputFactory(xmlFactory);
   }
-
-  public static final String LANGUAGE_KEY = "cs";
-  public static final String LANGUAGE_NAME = "C#";
-
-  public static final String FILE_SUFFIXES_KEY = "sonar.csharp.file.suffixes";
-  public static final String FILE_SUFFIXES_DEFVALUE = "cs";
-
-  public static final String CSHARP_WAY_PROFILE = "Sonar C# Way";
-
-  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] {"**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs"};
 
 }

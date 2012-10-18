@@ -19,15 +19,15 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
-
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +86,7 @@ public class DotNetCorePlugin extends SonarPlugin {
     extensions.add(DotNetConfiguration.class);
     extensions.add(VisualStudioProjectBuilder.class);
     extensions.add(MicrosoftWindowsEnvironment.class);
+    extensions.add(DotNetResourceBridges.class);
 
     // Utility class shared amongst all the .NET plugin ecosystem through API
     extensions.add(ResourceHelper.class);

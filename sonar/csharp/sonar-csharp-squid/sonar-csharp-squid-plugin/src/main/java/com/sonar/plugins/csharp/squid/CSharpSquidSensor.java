@@ -52,6 +52,7 @@ import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
@@ -65,13 +66,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+@DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12};
   private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
+  private static final String[] SUPPORTED_LANGUAGES = new String[] {CSharpConstants.LANGUAGE_KEY};
 
   private final CSharp cSharp;
   private final CSharpResourcesBridge cSharpResourcesBridge;
@@ -93,7 +95,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
   public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
       CSharpCheck[] cSharpChecks) {
-    super(cSharp, dotNetConfiguration, microsoftWindowsEnvironment, "Squid C#", "");
+    super(dotNetConfiguration, microsoftWindowsEnvironment, "Squid C#", "");
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
@@ -105,6 +107,17 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getSupportedLanguages() {
+    return SUPPORTED_LANGUAGES;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   @SuppressWarnings("unchecked")
   public void analyse(Project project, SensorContext context) {

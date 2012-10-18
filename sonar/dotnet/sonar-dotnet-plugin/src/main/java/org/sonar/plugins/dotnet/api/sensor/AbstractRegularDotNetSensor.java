@@ -19,15 +19,13 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 
 import java.io.File;
 import java.util.Collection;
@@ -48,9 +46,9 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
-  protected AbstractRegularDotNetSensor(Language language, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName,
+  protected AbstractRegularDotNetSensor(DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName,
       String executionMode) {
-    super(language, microsoftWindowsEnvironment, toolName, executionMode);
+    super(microsoftWindowsEnvironment, toolName, executionMode);
     this.configuration = configuration;
   }
 

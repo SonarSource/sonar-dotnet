@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -37,13 +34,15 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.stylecop.StyleCopCommandBuilder;
 import org.sonar.dotnet.tools.stylecop.StyleCopException;
 import org.sonar.dotnet.tools.stylecop.StyleCopRunner;
-import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRuleBasedDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -57,6 +56,7 @@ import java.util.Collections;
 public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
+  private static final String[] SUPPORTED_LANGUAGES = new String[] {CSharpConstants.LANGUAGE_KEY};
 
   private ProjectFileSystem fileSystem;
   private RulesProfile rulesProfile;
@@ -64,22 +64,22 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
   private StyleCopResultParser styleCopResultParser;
   private DotNetConfiguration configuration;
 
-  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class RegularStyleCopSensor extends StyleCopSensor {
 
-    public RegularStyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter,
+    public RegularStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter,
         StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(cSharp, fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
+      super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
   }
 
-  @DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
+  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class UnitTestsStyleCopSensor extends StyleCopSensor {
-    public UnitTestsStyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile,
+    public UnitTestsStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile,
         StyleCopProfileExporter.UnitTestsStyleCopProfileExporter profileExporter,
         StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
 
-      super(cSharp, fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
+      super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
     }
 
     @Override
@@ -88,9 +88,9 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
     }
   }
 
-  protected StyleCopSensor(CSharp cSharp, ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
+  protected StyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
       StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    super(cSharp, configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE));
+    super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
@@ -101,9 +101,16 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
   /**
    * {@inheritDoc}
    */
+  @Override
+  public String[] getSupportedLanguages() {
+    return SUPPORTED_LANGUAGES;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public void analyse(Project project, SensorContext context) {
 
-    styleCopResultParser.setEncoding(fileSystem.getSourceCharset());
     final Collection<File> reportFiles;
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + StyleCopConstants.STYLECOP_REPORT_XML;

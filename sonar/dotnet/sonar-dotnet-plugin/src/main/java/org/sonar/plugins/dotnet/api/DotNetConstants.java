@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.dotnet.api;
 
-import org.sonar.plugins.dotnet.api.visualstudio.BuildConfiguration;
-
 import com.google.common.collect.Maps;
+import org.sonar.plugins.dotnet.api.visualstudio.BuildConfiguration;
 
 import java.util.Map;
 
@@ -32,6 +31,8 @@ public final class DotNetConstants {
 
   private DotNetConstants() {
   }
+
+  public static final String CORE_PLUGIN_EXECUTED = "Core executed";
 
   // ----------- Plugin Configuration Properties ----------- //
 

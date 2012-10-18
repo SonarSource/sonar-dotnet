@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +26,8 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -41,7 +40,12 @@ public class AbstractDotNetSensorTest {
   class FakeSensor extends AbstractDotNetSensor {
 
     public FakeSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(new FakeLanguage(), microsoftWindowsEnvironment, "Fake", "");
+      super(microsoftWindowsEnvironment, "Fake", "");
+    }
+
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"fake"};
     }
 
     @Override
@@ -105,7 +109,7 @@ public class AbstractDotNetSensorTest {
   public void testShouldExecuteEvenOnTestProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
-    when(project.getLanguageKey()).thenReturn("cs");
+    when(project.getLanguageKey()).thenReturn("fake");
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
 
@@ -113,8 +117,16 @@ public class AbstractDotNetSensorTest {
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    when(project.getLanguageKey()).thenReturn("cs");
+    when(project.getLanguageKey()).thenReturn("fake");
     assertTrue(sensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldNotExecuteOnNonSupportedLanguage() {
+    Project project = mock(Project.class);
+    when(project.getName()).thenReturn("Project #1");
+    when(project.getLanguageKey()).thenReturn("java");
+    assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
 }

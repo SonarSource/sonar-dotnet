@@ -20,9 +20,6 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +31,11 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -61,7 +59,6 @@ public class StyleCopSensorTest {
   private DotNetConfiguration conf;
   private Settings settings;
   private StyleCopSensor sensor;
-  private CSharp csharp;
   private Project project;
 
   @Before
@@ -76,7 +73,6 @@ public class StyleCopSensorTest {
 
     settings = Settings.createForComponent(new StyleCopPlugin());
     conf = new DotNetConfiguration(settings);
-    csharp = new CSharp(conf);
 
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
@@ -85,12 +81,12 @@ public class StyleCopSensorTest {
   }
 
   private void initializeSensor() {
-    sensor = new StyleCopSensor.RegularStyleCopSensor(csharp, null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, conf,
+    sensor = new StyleCopSensor.RegularStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, conf,
         microsoftWindowsEnvironment);
   }
 
   private void initializeTestSensor() {
-    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(csharp, null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, conf,
+    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, conf,
         microsoftWindowsEnvironment);
   }
 
@@ -152,7 +148,7 @@ public class StyleCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(csharp, fileSystem, null, profileExporter, null, conf, null);
+    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(fileSystem, null, profileExporter, null, conf, null);
 
     sensor.generateConfigurationFile(project);
     File report = new File(sonarDir, StyleCopConstants.STYLECOP_RULES_FILE);
@@ -174,7 +170,7 @@ public class StyleCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(csharp, fileSystem, null, profileExporter, null, conf, null);
+    StyleCopSensor sensor = new StyleCopSensor.RegularStyleCopSensor(fileSystem, null, profileExporter, null, conf, null);
 
     sensor.generateConfigurationFile(project);
   }

@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
@@ -35,9 +34,9 @@ public abstract class AbstractRuleBasedDotNetSensor extends AbstractRegularDotNe
   protected final RulesProfile rulesProfile;
   private final ProfileExporter profileExporter;
 
-  protected AbstractRuleBasedDotNetSensor(Language language, DotNetConfiguration configuration, RulesProfile rulesProfile, ProfileExporter profileExporter,
+  protected AbstractRuleBasedDotNetSensor(DotNetConfiguration configuration, RulesProfile rulesProfile, ProfileExporter profileExporter,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
-    super(language, configuration, microsoftWindowsEnvironment, toolName, executionMode);
+    super(configuration, microsoftWindowsEnvironment, toolName, executionMode);
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
   }

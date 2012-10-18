@@ -19,18 +19,16 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.util.Collection;
 
@@ -46,7 +44,6 @@ public abstract class AbstractDotNetSensor implements Sensor {
   public static final String MODE_SKIP = "skip";
   public static final String MODE_REUSE_REPORT = "reuseReport";
 
-  private final Language language;
   private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   protected final String toolName;
   protected final String executionMode;
@@ -57,8 +54,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
-  protected AbstractDotNetSensor(Language language, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
-    this.language = language;
+  protected AbstractDotNetSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName, String executionMode) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
     this.toolName = toolName;
     this.executionMode = executionMode;
@@ -77,8 +73,24 @@ public abstract class AbstractDotNetSensor implements Sensor {
       return false;
     }
 
-    return language.getKey().equals(project.getLanguageKey());
+    return isLanguageSupported(project.getLanguageKey());
   }
+
+  private boolean isLanguageSupported(String languageKey) {
+    for (String key : getSupportedLanguages()) {
+      if (key.equals(languageKey)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Must return the list of supported languages.
+   * 
+   * @return the keys of the supported languages.
+   */
+  public abstract String[] getSupportedLanguages();
 
   /**
    * {@inheritDoc}

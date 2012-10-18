@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +27,8 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.util.Collections;
@@ -50,7 +49,12 @@ public class AbstractRegularDotNetSensorTest {
   class FakeSensor extends AbstractRegularDotNetSensor {
 
     public FakeSensor(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(new FakeLanguage(), configurationMock, microsoftWindowsEnvironment, "FakeTool", "");
+      super(configurationMock, microsoftWindowsEnvironment, "FakeTool", "");
+    }
+
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
     }
 
     @Override
@@ -61,11 +65,16 @@ public class AbstractRegularDotNetSensorTest {
   class FakeCilSensor extends AbstractRegularDotNetSensor {
 
     public FakeCilSensor() {
-      super(new FakeLanguage(), configurationMock, microsoftWindowsEnvironment, "SomeEngine", "");
+      super(configurationMock, microsoftWindowsEnvironment, "SomeEngine", "");
     }
 
     public FakeCilSensor(String executionMode) {
-      super(new FakeLanguage(), configurationMock, microsoftWindowsEnvironment, "SomeEngine", executionMode);
+      super(configurationMock, microsoftWindowsEnvironment, "SomeEngine", executionMode);
+    }
+
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
     }
 
     @Override

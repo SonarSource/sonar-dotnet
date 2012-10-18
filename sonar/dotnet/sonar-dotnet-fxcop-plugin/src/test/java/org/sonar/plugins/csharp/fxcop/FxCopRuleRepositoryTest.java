@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: Core
+ * Sonar .NET Plugin :: FxCop
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,25 +17,26 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
+package org.sonar.plugins.csharp.fxcop;
 
-package org.sonar.plugins.csharp.api;
+import org.junit.Test;
+import org.sonar.api.platform.ServerFileSystem;
+import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.XMLRuleParser;
 
-/**
- * Constants for the C# language.
- */
-public final class CSharpConstants {
+import java.util.List;
 
-  private CSharpConstants() {
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+
+public class FxCopRuleRepositoryTest {
+
+  @Test
+  public void loadRepositoryFromXml() {
+    ServerFileSystem fileSystem = mock(ServerFileSystem.class);
+    FxCopRuleRepository repository = new FxCopRuleRepository(fileSystem, new XMLRuleParser());
+    List<Rule> rules = repository.createRules();
+    assertThat(rules.size(), is(240));
   }
-
-  public static final String LANGUAGE_KEY = "cs";
-  public static final String LANGUAGE_NAME = "C#";
-
-  public static final String FILE_SUFFIXES_KEY = "sonar.csharp.file.suffixes";
-  public static final String FILE_SUFFIXES_DEFVALUE = "cs";
-
-  public static final String CSHARP_WAY_PROFILE = "Sonar C# Way";
-
-  public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] {"**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs"};
-
 }
