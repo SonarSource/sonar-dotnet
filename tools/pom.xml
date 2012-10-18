@@ -15,9 +15,9 @@
 
   <modules>
     <module>stylecop-runner</module>
+    <module>fxcop-runner</module>
   <!--  
     <module>dotnet-tools-commons</module>
-    <module>fxcop-runner</module>
     <module>gendarme-runner</module>
     <module>gallio-runner</module>
     <module>ndeps-runner</module>
