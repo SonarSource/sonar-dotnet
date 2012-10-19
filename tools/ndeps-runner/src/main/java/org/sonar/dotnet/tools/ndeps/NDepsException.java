@@ -19,7 +19,7 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
 
 /**
  * Exceptions generated for DependencyParser execution.
