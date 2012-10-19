@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.sonar.api.config.Settings;
 import org.sonar.plugins.dotnet.core.DotNetCorePlugin;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -94,15 +93,6 @@ public class DotNetConfigurationTest {
     assertTrue(dotNetConfiguration.getBoolean("sonar.fxcop.ignoreGeneratedCode"));
     assertThat(dotNetConfiguration.getStringArray("sonar.fxcop.assemblyDependencyDirectories")[0], is("foo"));
     assertThat(dotNetConfiguration.getStringArray("sonar.fxcop.assemblyDependencyDirectories")[1], is("bar"));
-  }
-
-  @Test
-  public void testSetProperty() {
-    dotNetConfiguration.setProperty("foo", "bar");
-    assertThat(dotNetConfiguration.getString("foo")).isEqualTo("bar");
-
-    dotNetConfiguration.setProperty("foo", new String[] {"bar1", "bar2", "bar3"});
-    assertThat(dotNetConfiguration.getString("foo")).isEqualTo("bar1,bar2,bar3");
   }
 
 }

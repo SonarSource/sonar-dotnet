@@ -101,7 +101,7 @@ public class StyleCopSensorTest {
 
   @Test
   public void testShouldNotExecuteOnSkippedProject() throws Exception {
-    conf.setProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
+    settings.setProperty(StyleCopConstants.MODE, StyleCopSensor.MODE_SKIP);
     initializeSensor();
 
     Project project = mock(Project.class);

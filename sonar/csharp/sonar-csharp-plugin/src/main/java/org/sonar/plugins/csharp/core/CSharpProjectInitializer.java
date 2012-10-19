@@ -19,14 +19,15 @@
  */
 package org.sonar.plugins.csharp.core;
 
+import com.google.common.base.Joiner;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Initializer;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 
 /**
@@ -35,10 +36,10 @@ import org.sonar.plugins.dotnet.api.DotNetConstants;
 public class CSharpProjectInitializer extends Initializer {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpProjectInitializer.class);
-  private DotNetConfiguration configuration;
+  private Settings projectSettings;
 
-  public CSharpProjectInitializer(DotNetConfiguration configuration) {
-    this.configuration = configuration;
+  public CSharpProjectInitializer(Settings settings) {
+    this.projectSettings = settings;
   }
 
   @Override
@@ -48,18 +49,32 @@ public class CSharpProjectInitializer extends Initializer {
 
   @Override
   public void execute(Project project) {
-    // Handling encoding => TODO : should we still do that now that we said that the Sonar Runner must not force the encoding???
-    if (StringUtils.isBlank(configuration.getString("sonar.sourceEncoding"))) {
+    if (StringUtils.isBlank(projectSettings.getString("sonar.sourceEncoding"))) {
       LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
-      configuration.setProperty("sonar.sourceEncoding", "UTF-8");
+      projectSettings.setProperty("sonar.sourceEncoding", "UTF-8");
+
+      // To be removed
+      setPropertyOnDeprecatedConfiguration(project, "sonar.sourceEncoding", "UTF-8");
     }
 
     // Handling exclusions
-    if (configuration.getBoolean(DotNetConstants.EXCLUDE_GENERATED_CODE_KEY)) {
-      String[] exclusions = configuration.getStringArray("sonar.exclusions");
+    if (projectSettings.getBoolean(DotNetConstants.EXCLUDE_GENERATED_CODE_KEY)) {
+      String[] exclusions = projectSettings.getStringArray("sonar.exclusions");
       String[] newExclusions = (String[]) ArrayUtils.addAll(exclusions, CSharpConstants.DEFAULT_FILES_TO_EXCLUDE);
-      configuration.setProperty("sonar.exclusions", newExclusions);
+      projectSettings.setProperty("sonar.exclusions", Joiner.on(',').join(newExclusions));
+
+      // To be removed
+      setPropertyOnDeprecatedConfiguration(project, "sonar.exclusions", newExclusions);
     }
+  }
+
+  // We must still use the Apache Configuration object as it is still used by Sonar in some cases, notably
+  // the ones that this class handles:
+  // - project.getFileSystem().getSourceCharset()
+  // - exclusions
+  // TODO: remove all this code when Apache Configuration has completely been removed
+  private void setPropertyOnDeprecatedConfiguration(Project project, String key, Object value) {
+    project.getConfiguration().setProperty(key, value);
   }
 
 }
