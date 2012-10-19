@@ -19,7 +19,7 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
-import org.sonar.dotnet.tools.commons.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
 
 /**
  * Exception generated for Gallio execution.

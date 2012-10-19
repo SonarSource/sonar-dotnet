@@ -22,7 +22,7 @@ package org.sonar.dotnet.tools.gallio;
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
