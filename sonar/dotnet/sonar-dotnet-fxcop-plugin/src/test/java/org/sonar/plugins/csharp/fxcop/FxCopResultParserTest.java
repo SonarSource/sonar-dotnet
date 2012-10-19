@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
@@ -64,7 +63,6 @@ public class FxCopResultParserTest {
   private Rule compoundWordsShouldBeCasedCorrectlyRule;
   private Rule doNotCastUnnecessarilyRule;
   private Rule parameterNamesShouldMatchBaseDeclarationRule;
-  private Language language;
 
   @Before
   public void init() {
@@ -73,14 +71,12 @@ public class FxCopResultParserTest {
     when(resourcesBridge.getLanguageKey()).thenReturn("cs");
     DotNetResourceBridges bridges = new DotNetResourceBridges(new DotNetResourceBridge[] {resourcesBridge});
 
-    language = mock(Language.class);
-    when(language.getKey()).thenReturn("cs");
-
     Project project = mock(Project.class);
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("C:\\Sonar\\Example")));
     when(fileSystem.getSourceCharset()).thenReturn(Charset.forName("UTF-8"));
     when(project.getFileSystem()).thenReturn(fileSystem);
+    when(project.getLanguageKey()).thenReturn("cs");
 
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     VisualStudioSolution solution = mock(VisualStudioSolution.class);
@@ -97,7 +93,7 @@ public class FxCopResultParserTest {
   @Test
   public void testParseFile1() throws Exception {
     resultFile = TestUtils.getResource("/Results/fxcop-report-1.xml");
-    parser.parse(resultFile, language);
+    parser.parse(resultFile);
 
     // Verify calls on C# Resource bridge
     verify(resourcesBridge).getFromTypeName(eq("Example.Core"), eq("IMoney"));
@@ -109,7 +105,7 @@ public class FxCopResultParserTest {
   @Test
   public void testParseFile2() throws Exception {
     resultFile = TestUtils.getResource("/Results/fxcop-report-2.xml");
-    parser.parse(resultFile, language);
+    parser.parse(resultFile);
 
     // Verify calls on C# Resource bridge
     verify(resourcesBridge, times(1)).getFromTypeName(eq("Example.Core"), eq("Money"));

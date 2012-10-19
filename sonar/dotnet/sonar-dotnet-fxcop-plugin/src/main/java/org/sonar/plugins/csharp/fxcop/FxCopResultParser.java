@@ -29,7 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
@@ -73,7 +72,6 @@ public class FxCopResultParser implements BatchExtension {
   private Project project;
   private SensorContext context;
   private RuleFinder ruleFinder;
-  private DotNetResourceBridges dotNetResourceBridges;
   private DotNetResourceBridge resourceBridge;
   private ResourceHelper resourceHelper;
   private String repositoryKey;
@@ -100,7 +98,7 @@ public class FxCopResultParser implements BatchExtension {
     this.context = context;
     this.ruleFinder = ruleFinder;
     this.resourceHelper = resourceHelper;
-    this.dotNetResourceBridges = dotNetResourceBridges;
+    this.resourceBridge = dotNetResourceBridges.getBridge(project.getLanguageKey());
   }
 
   /**
@@ -109,8 +107,7 @@ public class FxCopResultParser implements BatchExtension {
    * @param file
    *          the file to parse
    */
-  public void parse(File file, Language language) {
-    this.resourceBridge = dotNetResourceBridges.getBridge(language.getKey());
+  public void parse(File file) {
 
     this.repositoryKey =
         vsProject.isTest() ? FxCopConstants.TEST_REPOSITORY_KEY : FxCopConstants.REPOSITORY_KEY;

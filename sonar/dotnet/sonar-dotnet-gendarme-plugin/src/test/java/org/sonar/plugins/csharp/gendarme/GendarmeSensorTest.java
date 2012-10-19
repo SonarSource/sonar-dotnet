@@ -1,5 +1,5 @@
 /*
- * Sonar .NET Plugin :: FxCop
+ * Sonar .NET Plugin :: Gendarme
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.fxcop;
+package org.sonar.plugins.csharp.gendarme;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -33,16 +33,17 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.ActiveRule;
-import org.sonar.dotnet.tools.fxcop.FxCopCommandBuilder;
-import org.sonar.dotnet.tools.fxcop.FxCopRunner;
-import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
+import org.sonar.dotnet.tools.gendarme.GendarmeCommandBuilder;
+import org.sonar.dotnet.tools.gendarme.GendarmeRunner;
+import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
+import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
@@ -68,56 +69,54 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({FxCopRunner.class, FileFinder.class})
-public class FxCopSensorTest {
+@PrepareForTest({GendarmeRunner.class, FileFinder.class})
+public class GendarmeSensorTest {
 
   private ProjectFileSystem fileSystem;
   private VisualStudioSolution solution;
-  private VisualStudioProject vsProject1;
+  private VisualStudioProject vsProject;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private RulesProfile rulesProfile;
-  private FxCopResultParser resultParser;
-  private FxCopProfileExporter.RegularFxCopProfileExporter profileExporter;
-  private FxCopSensor sensor;
+  private GendarmeResultParser resultParser;
+  private GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter;
+  private GendarmeSensor sensor;
   private Settings conf;
-  private Language language;
 
   @Before
-  public void init() {
+  public void init() throws Exception {
+
     fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
 
-    language = mock(Language.class);
-    when(language.getKey()).thenReturn("cs");
-
-    vsProject1 = mock(VisualStudioProject.class);
-    when(vsProject1.getName()).thenReturn("Project #1");
-    when(vsProject1.getGeneratedAssemblies("Debug", "Any CPU")).thenReturn(
+    vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getName()).thenReturn("Project #1");
+    when(vsProject.getGeneratedAssemblies("Debug", "Any CPU")).thenReturn(
         Sets.newHashSet(TestUtils.getResource("/Sensor/FakeAssemblies/Fake1.assembly")));
     VisualStudioProject project2 = mock(VisualStudioProject.class);
     when(project2.getName()).thenReturn("Project Test");
     when(project2.isTest()).thenReturn(true);
     solution = mock(VisualStudioSolution.class);
-    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject1, project2));
+    when(solution.getProjects()).thenReturn(Lists.newArrayList(vsProject, project2));
 
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
+    microsoftWindowsEnvironment.setWorkingDirectory("target");
 
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
         .thenReturn(Collections.singletonList(new ActiveRule()));
 
-    resultParser = mock(FxCopResultParser.class);
+    resultParser = mock(GendarmeResultParser.class);
 
-    profileExporter = mock(FxCopProfileExporter.RegularFxCopProfileExporter.class);
+    profileExporter = mock(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
 
-    conf = new Settings(new PropertyDefinitions(new DotNetCorePlugin(), new FxCopPlugin()));
+    conf = new Settings(new PropertyDefinitions(new DotNetCorePlugin(), new GendarmePlugin()));
 
     initializeSensor();
   }
 
   private void initializeSensor() {
-    sensor = new FxCopSensor.RegularFxCopSensor(
+    sensor = new GendarmeSensor.RegularGendarmeSensor(
         fileSystem,
         rulesProfile,
         profileExporter,
@@ -129,10 +128,9 @@ public class FxCopSensorTest {
 
   @Test
   public void testExecuteWithoutRule() throws Exception {
-
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString())).thenReturn(new ArrayList<ActiveRule>());
-    FxCopSensor sensor = new FxCopSensor.RegularFxCopSensor(null, rulesProfile, profileExporter, null, new DotNetConfiguration(conf),
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new DotNetConfiguration(conf),
         microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
@@ -140,27 +138,30 @@ public class FxCopSensorTest {
   }
 
   @Test
-  public void testLaunchFxCop() throws Exception {
-    FxCopRunner runner = mock(FxCopRunner.class);
-    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
-    builder.setExecutable(new File("FxCopCmd.exe"));
-    when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
+  public void testLaunchGendarme() throws Exception {
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(fileSystem, null, null, null, new DotNetConfiguration(conf),
+        microsoftWindowsEnvironment);
+
+    GendarmeRunner runner = mock(GendarmeRunner.class);
+    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(solution, vsProject);
+    builder.setExecutable(new File("gendarme.exe"));
+    when(runner.createCommandBuilder(solution, vsProject)).thenReturn(builder);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
-    sensor.launchFxCop(project, runner, TestUtils.getResource("/Sensor/FakeFxCopConfigFile.xml"));
-    verify(runner).execute(any(FxCopCommandBuilder.class), eq(10));
+    sensor.launchGendarme(project, runner, TestUtils.getResource("/Sensor/FakeGendarmeConfigFile.xml"));
+    verify(runner).execute(any(GendarmeCommandBuilder.class), eq(10));
   }
 
   @Test
-  public void testShouldLaunchFxCop() throws Exception {
-    FxCopRunner runner = mock(FxCopRunner.class);
-    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
-    builder.setExecutable(new File("FxCopCmd.exe"));
+  public void testShouldLaunchGendarme() throws Exception {
+    GendarmeRunner runner = mock(GendarmeRunner.class);
+    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(null, vsProject);
+    builder.setExecutable(new File("Gendarme.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
 
-    PowerMockito.mockStatic(FxCopRunner.class);
-    when(FxCopRunner.create(anyString())).thenReturn(runner);
+    PowerMockito.mockStatic(GendarmeRunner.class);
+    when(GendarmeRunner.create(anyString(), anyString())).thenReturn(runner);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
@@ -169,30 +170,29 @@ public class FxCopSensorTest {
 
     sensor.analyse(project, context);
 
-    verify(runner).execute(any(FxCopCommandBuilder.class), eq(10));
+    verify(runner).execute(any(GendarmeCommandBuilder.class), eq(10));
   }
 
   @Test
   public void testShouldAnalyseReusedReports() throws Exception {
-    conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
-    conf.setProperty(FxCopConstants.REPORTS_PATH_KEY, "**/*.xml");
+    conf.setProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GendarmeConstants.REPORTS_PATH_KEY, "**/*.xml");
     initializeSensor();
-    FxCopRunner runner = mock(FxCopRunner.class);
-    FxCopCommandBuilder builder = FxCopCommandBuilder.createBuilder(null, vsProject1);
+    GendarmeRunner runner = mock(GendarmeRunner.class);
+    GendarmeCommandBuilder builder = GendarmeCommandBuilder.createBuilder(null, vsProject);
     builder.setExecutable(new File("FxCopCmd.exe"));
     when(runner.createCommandBuilder(eq(solution), any(VisualStudioProject.class))).thenReturn(builder);
 
-    PowerMockito.mockStatic(FxCopRunner.class);
-    when(FxCopRunner.create(anyString())).thenReturn(runner);
+    PowerMockito.mockStatic(GendarmeRunner.class);
+    when(GendarmeRunner.create(anyString(), anyString())).thenReturn(runner);
 
-    File fakeReport = TestUtils.getResource("/Sensor/FakeFxCopConfigFile.xml");
+    File fakeReport = TestUtils.getResource("/Sensor/FakeGendarmeConfigFile.xml");
     PowerMockito.mockStatic(FileFinder.class);
-    when(FileFinder.findFiles(solution, vsProject1, "**/*.xml"))
+    when(FileFinder.findFiles(solution, vsProject, "**/*.xml"))
         .thenReturn(Lists.newArrayList(fakeReport, fakeReport));
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
-    when(project.getLanguage()).thenReturn(language);
 
     SensorContext context = mock(SensorContext.class);
 
@@ -207,18 +207,23 @@ public class FxCopSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_REUSE_REPORT);
     initializeSensor();
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
   public void testShouldExecuteOnProject() throws Exception {
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new DotNetConfiguration(conf), microsoftWindowsEnvironment);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
+
+    conf.setProperty(GendarmeConstants.MODE, AbstractRegularDotNetSensor.MODE_SKIP);
+    sensor = new GendarmeSensor.RegularGendarmeSensor(null, rulesProfile, profileExporter, null, new DotNetConfiguration(conf), microsoftWindowsEnvironment);
+    assertFalse(sensor.shouldExecuteOnProject(project));
   }
 
   @Test
@@ -227,7 +232,7 @@ public class FxCopSensorTest {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
-    conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_SKIP);
+    conf.setProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_SKIP);
     initializeSensor();
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
@@ -244,7 +249,7 @@ public class FxCopSensorTest {
   @Test
   public void testShouldNotExecuteOnTestProjectOnReuseMode() throws Exception {
 
-    conf.setProperty(FxCopConstants.MODE, FxCopSensor.MODE_REUSE_REPORT);
+    conf.setProperty(GendarmeConstants.MODE, GendarmeSensor.MODE_REUSE_REPORT);
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
@@ -255,11 +260,11 @@ public class FxCopSensorTest {
   @Test
   public void testShouldNotExecuteOnProjectUsingPatterns() throws Exception {
 
-    conf.setProperty(FxCopConstants.ASSEMBLIES_TO_SCAN_KEY, "**/*.whatever");
+    conf.setProperty(GendarmeConstants.ASSEMBLIES_TO_SCAN_KEY, "**/*.whatever");
     conf.setProperty(DotNetConstants.BUILD_CONFIGURATION_KEY, "DummyBuildConf"); // we simulate no generated assemblies
 
     when(solution.getSolutionDir()).thenReturn(TestUtils.getResource("/Sensor"));
-    when(vsProject1.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
+    when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Sensor"));
 
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
@@ -274,7 +279,7 @@ public class FxCopSensorTest {
     sonarDir.mkdirs();
     ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
     when(fileSystem.getSonarWorkingDirectory()).thenReturn(sonarDir);
-    FxCopProfileExporter.RegularFxCopProfileExporter profileExporter = mock(FxCopProfileExporter.RegularFxCopProfileExporter.class);
+    GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter = mock(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
     doAnswer(new Answer<Object>() {
 
       public Object answer(InvocationOnMock invocation) throws IOException {
@@ -283,11 +288,11 @@ public class FxCopSensorTest {
         return null;
       }
     }).when(profileExporter).exportProfile((RulesProfile) anyObject(), (FileWriter) anyObject());
-    FxCopSensor sensor = new FxCopSensor.RegularFxCopSensor(fileSystem, null, profileExporter, null, new DotNetConfiguration(conf),
+    GendarmeSensor sensor = new GendarmeSensor.RegularGendarmeSensor(fileSystem, null, profileExporter, null, new DotNetConfiguration(conf),
         microsoftWindowsEnvironment);
 
     sensor.generateConfigurationFile();
-    File report = new File(sonarDir, FxCopConstants.FXCOP_RULES_FILE);
+    File report = new File(sonarDir, GendarmeConstants.GENDARME_RULES_FILE);
     assertTrue(report.exists());
     report.delete();
   }

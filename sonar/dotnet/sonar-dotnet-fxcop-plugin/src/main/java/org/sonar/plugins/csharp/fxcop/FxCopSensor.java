@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
@@ -146,7 +145,7 @@ public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
 
     // and analyze results
     for (File reportFile : reportFiles) {
-      analyseResults(reportFile, project.getLanguage());
+      analyseResults(reportFile);
     }
   }
 
@@ -184,10 +183,10 @@ public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
     runner.execute(builder, timeout);
   }
 
-  private void analyseResults(File reportFile, Language language) {
+  private void analyseResults(File reportFile) {
     if (reportFile.exists()) {
       LOG.debug("FxCop report found at location {}", reportFile);
-      fxCopResultParser.parse(reportFile, language);
+      fxCopResultParser.parse(reportFile);
     } else {
       LOG.warn("No FxCop report found for path {}", reportFile);
     }
