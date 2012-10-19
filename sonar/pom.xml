@@ -16,11 +16,11 @@
     <module>dotnet/sonar-dotnet-plugin</module>
     <module>dotnet/sonar-dotnet-fxcop-plugin</module>
     <module>dotnet/sonar-dotnet-gendarme-plugin</module>
+    <module>dotnet/sonar-dotnet-gallio-plugin</module>
     <module>csharp/sonar-csharp-plugin</module>
     <module>csharp/sonar-csharp-squid</module>
     <module>csharp/sonar-csharp-stylecop-plugin</module>
     <!--  
-    <module>sonar-csharp-gallio-plugin</module>
     <module>sonar-csharp-ndeps-plugin</module>
     -->
   </modules>

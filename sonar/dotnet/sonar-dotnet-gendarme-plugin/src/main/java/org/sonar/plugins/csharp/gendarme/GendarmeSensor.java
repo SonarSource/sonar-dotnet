@@ -76,12 +76,18 @@ public class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected boolean isTestSensor() {
       return true;
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected boolean isCilSensor() {
     return true;
