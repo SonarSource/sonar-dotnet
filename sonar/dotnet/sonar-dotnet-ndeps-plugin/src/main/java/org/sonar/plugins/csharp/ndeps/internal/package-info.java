@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,19 +17,8 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.ndeps;
-
-import org.junit.Test;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
-public class NDepsPluginTest {
-
-  @Test
-  public void shouldDeclareCorrectExtensions() {
-    NDepsPlugin plugin = new NDepsPlugin();
-    assertThat(plugin.getExtensions().size(), is(3));
-  }
-
-}
+/**
+ * This package currently duplicates files from Sonar.
+ * It should be removed when the Design/DSM related classes are promoted into Sonar API.
+ */
+package org.sonar.plugins.csharp.ndeps.internal;

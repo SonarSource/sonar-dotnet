@@ -13,16 +13,19 @@
   <name>Sonar .NET Plugins</name>
 
   <modules>
+    <!-- Core .NET Plugin -->
     <module>dotnet/sonar-dotnet-plugin</module>
+    <!-- Plugins that can run on multiple .NET languages -->
     <module>dotnet/sonar-dotnet-fxcop-plugin</module>
     <module>dotnet/sonar-dotnet-gendarme-plugin</module>
     <module>dotnet/sonar-dotnet-gallio-plugin</module>
+    <module>dotnet/sonar-dotnet-ndeps-plugin</module>
+    
+    <!-- Core C# Plugin -->
     <module>csharp/sonar-csharp-plugin</module>
+    <!-- Plugins that can run only on C# projects -->
     <module>csharp/sonar-csharp-squid</module>
     <module>csharp/sonar-csharp-stylecop-plugin</module>
-    <!--  
-    <module>sonar-csharp-ndeps-plugin</module>
-    -->
   </modules>
 
   <dependencies>
@@ -66,12 +69,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- .NET tools -->
-      <dependency>
-        <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
-        <artifactId>dotnet-tools-commons</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <!-- Sonar -->
       <dependency>
         <groupId>org.codehaus.sonar</groupId>

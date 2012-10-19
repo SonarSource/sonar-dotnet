@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
@@ -26,21 +27,21 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.utils.FileFinder;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
 import org.sonar.dotnet.tools.ndeps.NDepsCommandBuilder;
 import org.sonar.dotnet.tools.ndeps.NDepsException;
 import org.sonar.dotnet.tools.ndeps.NDepsRunner;
-import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.csharp.api.sensor.AbstractRegularCSharpSensor;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
+import org.sonar.plugins.dotnet.api.utils.FileFinder;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 
 import java.io.File;
 
-@DependsUpon(CSharpConstants.CSHARP_CORE_EXECUTED)
-public class NDepsSensor extends AbstractRegularCSharpSensor {
+@DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
+public class NDepsSensor extends AbstractRegularDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(NDepsSensor.class);
 
@@ -50,23 +51,35 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
 
   private boolean testSensor;
 
-  public NDepsSensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, CSharpConfiguration configuration,
+  /**
+   * Constructor
+   */
+  public NDepsSensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, DotNetConfiguration configuration,
       NDepsResultParser nDepsResultParser) {
-    super(configuration, microsoftWindowsEnvironment, "NDeps", configuration.getString(NDepsConstants.MODE, ""));
+    super(configuration, microsoftWindowsEnvironment, "NDeps", configuration.getString(NDepsConstants.MODE));
     this.nDepsResultParser = nDepsResultParser;
     this.fileSystem = fileSystem;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected boolean isCilSensor() {
     return true;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected boolean isTestSensor() {
     return testSensor;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     VisualStudioProject vsProject = getVSProject(project);
@@ -76,7 +89,7 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
     }
     if (getAssemblyPatterns() != null && getAssemblyPatterns().length > 0) {
       LOG.warn("Skipping NDeps analysis, NDeps cannot work properly " +
-        "when assembly locations are specified using " + CSharpConstants.ASSEMBLIES_TO_SCAN_KEY);
+        "when assembly locations are specified using " + DotNetConstants.ASSEMBLIES_TO_SCAN_KEY);
       return false;
     }
 
@@ -84,13 +97,28 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
     return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getSupportedLanguages() {
+    return NDepsConstants.SUPPORTED_LANGUAGES;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void analyse(Project project, SensorContext context) {
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + NDepsConstants.DEPENDENCYPARSER_REPORT_XML;
 
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
-      String reportPath = configuration.getString(NDepsConstants.REPORTS_PATH_KEY, reportDefaultPath);
+      String reportPath = configuration.getString(NDepsConstants.REPORTS_PATH_KEY);
+      if (StringUtils.isEmpty(reportPath)) {
+        reportPath = reportDefaultPath;
+      }
       reportFile = FileFinder.browse(projectDir, reportPath);
       LOG.info("Reusing NDeps report: " + reportFile);
     } else {
@@ -98,8 +126,7 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
       try {
         File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
             .getWorkingDirectory());
-        NDepsRunner runner = NDepsRunner.create(
-            configuration.getString(NDepsConstants.INSTALL_DIR_KEY, ""), tempDir.getAbsolutePath());
+        NDepsRunner runner = NDepsRunner.create(configuration.getString(NDepsConstants.INSTALL_DIR_KEY), tempDir.getAbsolutePath());
 
         launchNDeps(project, runner);
       } catch (NDepsException e) {
@@ -125,12 +152,10 @@ public class NDepsSensor extends AbstractRegularCSharpSensor {
   protected void launchNDeps(Project project, NDepsRunner runner) throws NDepsException {
     NDepsCommandBuilder builder = runner.createCommandBuilder(getVSSolution(), getVSProject(project));
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), NDepsConstants.DEPENDENCYPARSER_REPORT_XML));
-    builder.setBuildConfiguration(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY,
-        CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE));
-    builder.setBuildPlatform(configuration.getString(CSharpConstants.BUILD_PLATFORM_KEY,
-        CSharpConstants.BUILD_PLATFORM_DEFVALUE));
+    builder.setBuildConfiguration(configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY));
+    builder.setBuildPlatform(configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY));
 
-    runner.execute(builder, configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY, NDepsConstants.TIMEOUT_MINUTES_DEFVALUE));
+    runner.execute(builder, configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY));
   }
 
 }

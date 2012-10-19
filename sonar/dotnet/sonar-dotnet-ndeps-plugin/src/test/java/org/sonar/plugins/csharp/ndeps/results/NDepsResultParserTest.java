@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -29,10 +29,11 @@ import org.sonar.api.design.Dependency;
 import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
@@ -52,7 +53,7 @@ import static org.mockito.Mockito.when;
 public class NDepsResultParserTest {
 
   private NDepsResultParser parser;
-  private CSharpResourcesBridge bridge;
+  private DotNetResourceBridge resourcesBridge;
   private SensorContext context;
   private Project project;
 
@@ -61,25 +62,28 @@ public class NDepsResultParserTest {
     project = mock(Project.class);
     Project rootProject = mock(Project.class);
     when(project.getParent()).thenReturn(rootProject);
+    when(project.getLanguageKey()).thenReturn("cs");
 
     VisualStudioSolution vsSolution = mock(VisualStudioSolution.class);
     VisualStudioProject vsProject = mock(VisualStudioProject.class);
     when(vsSolution.getProject("Example.Core")).thenReturn(vsProject);
     when(vsSolution.getProjectFromSonarProject(project)).thenReturn(vsProject);
 
-    bridge = mock(CSharpResourcesBridge.class);
-    when(bridge.getFromTypeName(anyString())).thenAnswer(new Answer<Resource<?>>() {
+    resourcesBridge = mock(DotNetResourceBridge.class);
+    when(resourcesBridge.getFromTypeName(anyString())).thenAnswer(new Answer<Resource<?>>() {
       public Resource<?> answer(InvocationOnMock invocation) throws Throwable {
         org.sonar.api.resources.File file = new org.sonar.api.resources.File("Example.Core:" + (String) invocation.getArguments()[0]);
         return file;
       }
     });
+    when(resourcesBridge.getLanguageKey()).thenReturn("cs");
+    DotNetResourceBridges bridges = new DotNetResourceBridges(new DotNetResourceBridge[] {resourcesBridge});
 
     context = mock(SensorContext.class);
 
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     when(env.getCurrentSolution()).thenReturn(vsSolution);
-    parser = new NDepsResultParser(env, bridge, project, context);
+    parser = new NDepsResultParser(env, bridges, project, context);
   }
 
   @Test
@@ -96,7 +100,7 @@ public class NDepsResultParserTest {
 
     ArgumentCaptor<String> classCaptor = ArgumentCaptor.forClass(String.class);
     // getFromTypeName is called twice per "to" dependencies, and there are 6 "to" dependencies
-    verify(bridge, times(6 * 2)).getFromTypeName(classCaptor.capture());
+    verify(resourcesBridge, times(6 * 2)).getFromTypeName(classCaptor.capture());
     List<String> classNames = classCaptor.getAllValues();
     assertTrue(classNames.contains("Example.Core.IMoney"));
     assertTrue(classNames.contains("Example.Core.Money"));

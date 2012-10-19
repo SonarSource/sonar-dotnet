@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -33,10 +33,11 @@ import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.SonarException;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
-import org.sonar.plugins.csharp.api.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
+import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -47,7 +48,7 @@ public class NDepsResultParser implements BatchExtension {
 
   private static final Logger LOG = LoggerFactory.getLogger(NDepsResultParser.class);
 
-  private final CSharpResourcesBridge csharpResourcesBridge;
+  private final DotNetResourceBridge resourceBridge;
 
   private final SensorContext context;
 
@@ -57,9 +58,9 @@ public class NDepsResultParser implements BatchExtension {
 
   private final VisualStudioProject vsProject;
 
-  public NDepsResultParser(MicrosoftWindowsEnvironment env, CSharpResourcesBridge csharpResourcesBridge, Project project, SensorContext context) {
+  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context) {
     super();
-    this.csharpResourcesBridge = csharpResourcesBridge;
+    this.resourceBridge = bridges.getBridge(project.getLanguageKey());
     this.context = context;
     this.project = project;
     vsSolution = env.getCurrentSolution();
@@ -154,8 +155,8 @@ public class NDepsResultParser implements BatchExtension {
           if (toCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
             String toType = toCursor.getAttrValue("fullname");
 
-            Resource<?> fromResource = csharpResourcesBridge.getFromTypeName(fromType);
-            Resource<?> toResource = csharpResourcesBridge.getFromTypeName(toType);
+            Resource<?> fromResource = resourceBridge.getFromTypeName(fromType);
+            Resource<?> toResource = resourceBridge.getFromTypeName(toType);
 
             // check if the source is not filtered
             if (fromResource != null && toResource != null) {

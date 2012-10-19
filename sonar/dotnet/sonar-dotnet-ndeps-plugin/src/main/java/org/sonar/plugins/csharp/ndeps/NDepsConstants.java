@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -34,4 +34,19 @@ public final class NDepsConstants {
   public static final String MODE = "sonar.ndeps.mode";
 
   public static final String REPORTS_PATH_KEY = "sonar.ndeps.reports.path";
+
+  public static final String[] SUPPORTED_LANGUAGES = new String[] {"cs", "vbnet"};
+
+  //
+  // Utility method
+  //
+
+  public static boolean isLanguageSupported(String languageKey) {
+    for (String key : SUPPORTED_LANGUAGES) {
+      if (key.equals(languageKey)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

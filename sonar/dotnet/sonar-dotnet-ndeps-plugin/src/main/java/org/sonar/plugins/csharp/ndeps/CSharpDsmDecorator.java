@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -36,9 +36,8 @@ import org.sonar.graph.DsmTopologicalSorter;
 import org.sonar.graph.Edge;
 import org.sonar.graph.IncrementalCyclesAndFESSolver;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.ndeps.internal.DsmSerializer;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,7 +62,7 @@ public class CSharpDsmDecorator implements Decorator {
   }
 
   public boolean shouldExecuteOnProject(Project project) {
-    return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey())
+    return NDepsConstants.isLanguageSupported(project.getLanguageKey())
       && !project.isRoot()
       && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isWebProject();
   }

@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: NDeps
+ * Sonar .NET Plugin :: NDeps
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -22,16 +22,19 @@ package org.sonar.plugins.csharp.ndeps;
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.api.config.PropertyDefinitions;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioProject;
-import org.sonar.dotnet.tools.commons.visualstudio.VisualStudioSolution;
 import org.sonar.dotnet.tools.ndeps.NDepsCommandBuilder;
 import org.sonar.dotnet.tools.ndeps.NDepsRunner;
-import org.sonar.plugins.csharp.api.CSharpConfiguration;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.core.DotNetCorePlugin;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
@@ -54,7 +57,7 @@ public class NDepsSensorTest {
   private VisualStudioProject vsProject2;
   private VisualStudioProject vsProject3;
   private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
-  private CSharpConfiguration configuration;
+  private Settings configuration;
   private NDepsResultParser nDepsResultParser;
   private NDepsSensor nDepsSensor;
   private File reportFile;
@@ -79,9 +82,10 @@ public class NDepsSensorTest {
     microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.setCurrentSolution(solution);
 
-    configuration = mock(CSharpConfiguration.class);
+    configuration = new Settings(new PropertyDefinitions(new DotNetCorePlugin(), new NDepsPlugin()));
+
     nDepsResultParser = mock(NDepsResultParser.class);
-    nDepsSensor = new NDepsSensor(fileSystem, microsoftWindowsEnvironment, configuration, nDepsResultParser);
+    nDepsSensor = new NDepsSensor(fileSystem, microsoftWindowsEnvironment, new DotNetConfiguration(configuration), nDepsResultParser);
 
     reportFile = TestUtils.getResource("/ndeps-report.xml");
   }
@@ -135,8 +139,8 @@ public class NDepsSensorTest {
 
   @Test
   public void shouldLaunchNDeps() throws Exception {
-    when(configuration.getString(CSharpConstants.BUILD_CONFIGURATION_KEY, CSharpConstants.BUILD_CONFIGURATIONS_DEFVALUE)).thenReturn("Release");
-    when(configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY, NDepsConstants.TIMEOUT_MINUTES_DEFVALUE)).thenReturn(3);
+    configuration.setProperty(DotNetConstants.BUILD_CONFIGURATION_KEY, "Release");
+    configuration.setProperty(NDepsConstants.TIMEOUT_MINUTES_KEY, 3);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
 
