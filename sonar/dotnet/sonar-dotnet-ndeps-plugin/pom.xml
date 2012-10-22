@@ -16,7 +16,7 @@
 
   <properties>
     <sonar.pluginKey>dotnetndeps</sonar.pluginKey>
-    <sonar.pluginName>C# NDeps</sonar.pluginName>
+    <sonar.pluginName>.NET NDeps</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.ndeps.NDepsPlugin</sonar.pluginClass>
   </properties>
 

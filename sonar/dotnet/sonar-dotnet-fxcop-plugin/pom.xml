@@ -16,7 +16,7 @@
 
   <properties>
     <sonar.pluginKey>dotnetfxcop</sonar.pluginKey>
-    <sonar.pluginName>INET FxCop</sonar.pluginName>
+    <sonar.pluginName>.NET FxCop</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.fxcop.FxCopPlugin</sonar.pluginClass>
     <powermock.version>1.4.10</powermock.version>
   </properties>
