@@ -27,7 +27,7 @@ import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
 /**
- * Creates the Sonar C# Way profile using the C# checks found by the container.
+ * Creates the Sonar way profile using the C# checks found by the container.
  */
 public class CSharpRuleProfile extends ProfileDefinition {
 

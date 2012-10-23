@@ -34,7 +34,7 @@ public final class CSharpConstants {
   public static final String FILE_SUFFIXES_KEY = "sonar.csharp.file.suffixes";
   public static final String FILE_SUFFIXES_DEFVALUE = "cs";
 
-  public static final String CSHARP_WAY_PROFILE = "Sonar C# Way";
+  public static final String CSHARP_WAY_PROFILE = "Sonar way";
 
   public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] {"**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs"};
 

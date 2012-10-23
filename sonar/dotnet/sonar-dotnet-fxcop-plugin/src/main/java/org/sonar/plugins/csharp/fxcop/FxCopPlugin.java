@@ -25,7 +25,8 @@ import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileImporter;
-import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfile;
+import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfileCSharp;
+import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfileVBNet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +63,11 @@ public class FxCopPlugin extends SonarPlugin {
     list.add(FxCopSensor.RegularFxCopSensor.class);
 
     // Rules and profiles
-    list.add(FxCopRuleRepository.class);
+    list.add(FxCopRuleRepositoryProvider.class);
     list.add(FxCopProfileImporter.RegularFxCopProfileImporter.class);
     list.add(FxCopProfileExporter.RegularFxCopProfileExporter.class);
-    list.add(SonarWayProfile.class);
+    list.add(SonarWayProfileCSharp.class);
+    list.add(SonarWayProfileVBNet.class);
 
     // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
     // list.add(FxCopSensor.UnitTestsFxCopSensor.class);

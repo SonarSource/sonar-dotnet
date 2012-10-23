@@ -21,7 +21,7 @@ package com.sonar.csharp.checks;
 
 public final class CSharpChecksConstants {
 
-  public static final String SONAR_CSHARP_WAY_PROFILE_KEY = "Sonar C# Way";
+  public static final String SONAR_CSHARP_WAY_PROFILE_KEY = "Sonar way";
 
   private CSharpChecksConstants() {
   }

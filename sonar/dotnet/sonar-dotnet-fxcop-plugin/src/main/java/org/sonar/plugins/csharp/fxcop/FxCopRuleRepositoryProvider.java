@@ -19,39 +19,41 @@
  */
 package org.sonar.plugins.csharp.fxcop;
 
+import org.sonar.api.ExtensionProvider;
+import org.sonar.api.ServerExtension;
 import org.sonar.api.platform.ServerFileSystem;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleRepository;
 import org.sonar.api.rules.XMLRuleParser;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loads the FXCop rules configuration file.
+ * Creates FXCop rule repositories for every language supported by FxCop.
  */
-public class FxCopRuleRepository extends RuleRepository {
+public class FxCopRuleRepositoryProvider extends ExtensionProvider implements ServerExtension {
 
-  private String repositoryKey;
   private ServerFileSystem fileSystem;
   private XMLRuleParser xmlRuleParser;
 
-  public FxCopRuleRepository(String repoKey, String languageKey, ServerFileSystem fileSystem, XMLRuleParser xmlRuleParser) {
-    super(repoKey, languageKey);
-    setName(FxCopConstants.REPOSITORY_NAME);
-    this.repositoryKey = repoKey;
+  public FxCopRuleRepositoryProvider(ServerFileSystem fileSystem) {
     this.fileSystem = fileSystem;
-    this.xmlRuleParser = xmlRuleParser;
+    this.xmlRuleParser = new XMLRuleParser();
   }
 
   @Override
-  public List<Rule> createRules() {
-    List<Rule> rules = new ArrayList<Rule>();
-    rules.addAll(xmlRuleParser.parse(FxCopRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/fxcop/rules/rules.xml")));
-    for (File userExtensionXml : fileSystem.getExtensions(repositoryKey, "xml")) {
-      rules.addAll(xmlRuleParser.parse(userExtensionXml));
+  public Object provide() {
+    List<FxCopRuleRepository> extensions = new ArrayList<FxCopRuleRepository>();
+
+    for (String languageKey : FxCopConstants.SUPPORTED_LANGUAGES) {
+      String repoKey = FxCopConstants.REPOSITORY_KEY;
+      if (!"cs".equals(languageKey)) {
+        // every repository key should be "fxcop-<language_key>", except for C# for which it is simply "fxcop" (for backward compatibility)
+        repoKey += "-" + languageKey;
+      }
+      extensions.add(new FxCopRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser));
     }
-    return rules;
+
+    return extensions;
   }
+
 }

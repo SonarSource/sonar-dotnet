@@ -33,7 +33,7 @@ public class FxCopProfileExporterTest {
 
   @Test
   public void testSimpleFxCopRulesToExport() throws IOException, SAXException {
-    RulesProfile profile = RulesProfile.create("Sonar C# Way", "cs");
+    RulesProfile profile = RulesProfile.create("Sonar way", "cs");
     profile.activateRule(
         Rule.create(FxCopConstants.REPOSITORY_KEY, "AssembliesShouldHaveValidStrongNames", "Assemblies should have valid strong names")
             .setConfigKey("AssembliesShouldHaveValidStrongNames@$(FxCopDir)\\Rules\\DesignRules.dll"), null);

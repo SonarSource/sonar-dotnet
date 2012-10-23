@@ -39,18 +39,18 @@ public class SonarWayProfileTest {
 
   private ValidationMessages messages;
   private FxCopProfileImporter.RegularFxCopProfileImporter importer;
-  private SonarWayProfile sonarWayProfile;
+  private SonarWayProfileCSharp sonarWayProfileCSharp;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
     importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
-    sonarWayProfile = new SonarWayProfile(importer);
+    sonarWayProfileCSharp = new SonarWayProfileCSharp(importer);
   }
 
   @Test
   public void testCreateProfile() {
-    RulesProfile profile = sonarWayProfile.createProfile(messages);
+    RulesProfile profile = sonarWayProfileCSharp.createProfile(messages);
     assertThat(profile.getActiveRules().size(), is(92));
     assertThat(messages.hasErrors(), is(false));
   }

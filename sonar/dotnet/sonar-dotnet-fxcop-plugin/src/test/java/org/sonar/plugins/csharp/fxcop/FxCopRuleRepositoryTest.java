@@ -35,7 +35,7 @@ public class FxCopRuleRepositoryTest {
   @Test
   public void loadRepositoryFromXml() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    FxCopRuleRepository repository = new FxCopRuleRepository(fileSystem, new XMLRuleParser());
+    FxCopRuleRepository repository = new FxCopRuleRepository("", "", fileSystem, new XMLRuleParser());
     List<Rule> rules = repository.createRules();
     assertThat(rules.size(), is(240));
   }

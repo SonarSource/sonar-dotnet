@@ -40,7 +40,7 @@ public class StyleCopProfileExporterTest {
   @Before
   public void setUp() {
 
-    profile = RulesProfile.create("Sonar C# Way", "cs");
+    profile = RulesProfile.create("Sonar way", "cs");
     profile.activateRule(
         Rule.create(StyleCopConstants.REPOSITORY_KEY, "ElementMustBeginWithUpperCaseLetter", "Element must begin with upper case letter")
             .setConfigKey("StyleCop.CSharp.NamingRules#ElementMustBeginWithUpperCaseLetter"), null);

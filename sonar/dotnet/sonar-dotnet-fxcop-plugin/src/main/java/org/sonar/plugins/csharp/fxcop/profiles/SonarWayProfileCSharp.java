@@ -25,20 +25,19 @@ import org.sonar.api.utils.ValidationMessages;
 
 import java.io.InputStreamReader;
 
-public final class SonarWayProfile extends ProfileDefinition {
+public final class SonarWayProfileCSharp extends ProfileDefinition {
 
   private FxCopProfileImporter profileImporter;
 
-  public SonarWayProfile(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
+  public SonarWayProfileCSharp(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 
   public RulesProfile createProfile(ValidationMessages messages) {
     RulesProfile profile = profileImporter.importProfile(
-        new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/fxcop/rules/DefaultRules.FxCop")), messages);
-    // TODO : This class should create a Sonar Way for each .NET language, not only C#
+        new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/fxcop/rules/DefaultRules-cs.FxCop")), messages);
     profile.setLanguage("cs");
-    profile.setName("Sonar C# Way");
+    profile.setName("Sonar way");
     return profile;
   }
 }

@@ -35,7 +35,7 @@ public class GendarmeProfileExporterTest {
 
   @Test
   public void testSimpleGendarmeRulesToExport() throws IOException, SAXException {
-    RulesProfile profile = RulesProfile.create("Sonar C# Way", "cs");
+    RulesProfile profile = RulesProfile.create("Sonar way", "cs");
     profile.activateRule(
         Rule.create(GendarmeConstants.REPOSITORY_KEY, "DoNotUseLockedRegionOutsideMethodRule", "DoNotUseLockedRegionOutsideMethodRule")
             .setConfigKey("DoNotUseLockedRegionOutsideMethodRule@Gendarme.Rules.Concurrency.dll"), RulePriority.INFO);
