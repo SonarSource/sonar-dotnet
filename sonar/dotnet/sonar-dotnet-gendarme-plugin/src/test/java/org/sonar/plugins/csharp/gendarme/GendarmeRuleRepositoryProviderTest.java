@@ -21,22 +21,29 @@ package org.sonar.plugins.csharp.gendarme;
 
 import org.junit.Test;
 import org.sonar.api.platform.ServerFileSystem;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.XMLRuleParser;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class GendarmeRuleRepositoryTest {
+public class GendarmeRuleRepositoryProviderTest {
 
+  @SuppressWarnings("unchecked")
   @Test
-  public void loadRepositoryFromXml() {
+  public void shouldCreateRepositoriesForEachSupportedLanguage() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser());
-    List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(216));
+    GendarmeRuleRepositoryProvider provider = new GendarmeRuleRepositoryProvider(fileSystem);
+
+    List<GendarmeRuleRepository> extensions = (List<GendarmeRuleRepository>) provider.provide();
+    assertThat(extensions.size()).isEqualTo(2);
+
+    GendarmeRuleRepository repo1 = extensions.get(0);
+    assertThat(repo1.getLanguage()).isEqualTo("cs");
+    assertThat(repo1.getKey()).isEqualTo("gendarme");
+
+    GendarmeRuleRepository repo2 = extensions.get(1);
+    assertThat(repo2.getLanguage()).isEqualTo("vbnet");
+    assertThat(repo2.getKey()).isEqualTo("gendarme-vbnet");
   }
 }

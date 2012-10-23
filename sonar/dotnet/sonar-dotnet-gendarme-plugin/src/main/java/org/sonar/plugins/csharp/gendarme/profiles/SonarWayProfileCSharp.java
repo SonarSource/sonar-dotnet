@@ -17,26 +17,28 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.gendarme;
+package org.sonar.plugins.csharp.gendarme.profiles;
 
-import org.junit.Test;
-import org.sonar.api.platform.ServerFileSystem;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.XMLRuleParser;
+import org.sonar.api.profiles.ProfileDefinition;
+import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.utils.ValidationMessages;
 
-import java.util.List;
+import java.io.InputStreamReader;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+public final class SonarWayProfileCSharp extends ProfileDefinition {
 
-public class GendarmeRuleRepositoryTest {
+  private GendarmeProfileImporter profileImporter;
 
-  @Test
-  public void loadRepositoryFromXml() {
-    ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser());
-    List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(216));
+  public SonarWayProfileCSharp(GendarmeProfileImporter.RegularGendarmeProfileImporter profileImporter) {
+    this.profileImporter = profileImporter;
+  }
+
+  public RulesProfile createProfile(ValidationMessages messages) {
+    RulesProfile profile = profileImporter.importProfile(
+        new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/gendarme/rules/DefaultRules.Gendarme-cs.xml")),
+        messages);
+    profile.setLanguage("cs");
+    profile.setName("Sonar way");
+    return profile;
   }
 }

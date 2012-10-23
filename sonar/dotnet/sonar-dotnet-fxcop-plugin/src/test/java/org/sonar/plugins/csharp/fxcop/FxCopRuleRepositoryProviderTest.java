@@ -1,5 +1,5 @@
 /*
- * Sonar .NET Plugin :: Gendarme
+ * Sonar .NET Plugin :: FxCop
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,26 +17,33 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.gendarme;
+package org.sonar.plugins.csharp.fxcop;
 
 import org.junit.Test;
 import org.sonar.api.platform.ServerFileSystem;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.XMLRuleParser;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class GendarmeRuleRepositoryTest {
+public class FxCopRuleRepositoryProviderTest {
 
+  @SuppressWarnings("unchecked")
   @Test
-  public void loadRepositoryFromXml() {
+  public void shouldCreateRepositoriesForEachSupportedLanguage() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser());
-    List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(216));
+    FxCopRuleRepositoryProvider provider = new FxCopRuleRepositoryProvider(fileSystem);
+
+    List<FxCopRuleRepository> extensions = (List<FxCopRuleRepository>) provider.provide();
+    assertThat(extensions.size()).isEqualTo(2);
+
+    FxCopRuleRepository repo1 = extensions.get(0);
+    assertThat(repo1.getLanguage()).isEqualTo("cs");
+    assertThat(repo1.getKey()).isEqualTo("fxcop");
+
+    FxCopRuleRepository repo2 = extensions.get(1);
+    assertThat(repo2.getLanguage()).isEqualTo("vbnet");
+    assertThat(repo2.getKey()).isEqualTo("fxcop-vbnet");
   }
 }

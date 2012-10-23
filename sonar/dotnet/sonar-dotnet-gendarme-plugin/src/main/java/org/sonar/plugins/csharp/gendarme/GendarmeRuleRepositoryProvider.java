@@ -19,40 +19,42 @@
  */
 package org.sonar.plugins.csharp.gendarme;
 
+import org.sonar.api.ExtensionProvider;
+import org.sonar.api.ServerExtension;
 import org.sonar.api.platform.ServerFileSystem;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleRepository;
 import org.sonar.api.rules.XMLRuleParser;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Loads the Gendarme rules configuration file.
+ * Creates FXCop rule repositories for every language supported by FxCop.
  */
-public class GendarmeRuleRepository extends RuleRepository {
+public class GendarmeRuleRepositoryProvider extends ExtensionProvider implements ServerExtension {
 
-  private String repositoryKey;
   private ServerFileSystem fileSystem;
   private XMLRuleParser xmlRuleParser;
 
-  public GendarmeRuleRepository(String repoKey, String languageKey, ServerFileSystem fileSystem, XMLRuleParser xmlRuleParser) {
-    super(repoKey, languageKey);
-    setName(GendarmeConstants.REPOSITORY_NAME);
+  public GendarmeRuleRepositoryProvider(ServerFileSystem fileSystem) {
     this.fileSystem = fileSystem;
-    this.xmlRuleParser = xmlRuleParser;
-    this.repositoryKey = repoKey;
+    this.xmlRuleParser = new XMLRuleParser();
   }
 
   @Override
-  public List<Rule> createRules() {
-    List<Rule> rules = new ArrayList<Rule>();
-    rules
-        .addAll(xmlRuleParser.parse(GendarmeRuleRepository.class.getResourceAsStream("/org/sonar/plugins/csharp/gendarme/rules/rules.xml")));
-    for (File userExtensionXml : fileSystem.getExtensions(repositoryKey, "xml")) {
-      rules.addAll(xmlRuleParser.parse(userExtensionXml));
+  public Object provide() {
+    List<GendarmeRuleRepository> extensions = new ArrayList<GendarmeRuleRepository>();
+
+    for (String languageKey : GendarmeConstants.SUPPORTED_LANGUAGES) {
+      String repoKey = GendarmeConstants.REPOSITORY_KEY;
+      if (!"cs".equals(languageKey)) {
+        // every repository key should be "gendarme-<language_key>", except for C# for which it is simply "fxcop" (for backward
+        // compatibility)
+        repoKey += "-" + languageKey;
+      }
+      extensions.add(new GendarmeRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser));
     }
-    return rules;
+
+    return extensions;
   }
+
 }

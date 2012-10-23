@@ -25,7 +25,8 @@ import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileExporter;
 import org.sonar.plugins.csharp.gendarme.profiles.GendarmeProfileImporter;
-import org.sonar.plugins.csharp.gendarme.profiles.SonarWayProfile;
+import org.sonar.plugins.csharp.gendarme.profiles.SonarWayProfileCSharp;
+import org.sonar.plugins.csharp.gendarme.profiles.SonarWayProfileVbNet;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeViolationMaker;
 
@@ -64,10 +65,11 @@ public class GendarmePlugin extends SonarPlugin {
     list.add(GendarmeSensor.RegularGendarmeSensor.class);
 
     // Rules and profiles
-    list.add(GendarmeRuleRepository.class);
+    list.add(GendarmeRuleRepositoryProvider.class);
     list.add(GendarmeProfileImporter.RegularGendarmeProfileImporter.class);
     list.add(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
-    list.add(SonarWayProfile.class);
+    list.add(SonarWayProfileCSharp.class);
+    list.add(SonarWayProfileVbNet.class);
 
     // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
     // list.add(GendarmeSensor.UnitTestsGendarmeSensor.class);

@@ -1,5 +1,5 @@
 /*
- * Sonar .NET Plugin :: FxCop
+ * Sonar .NET Plugin :: Gendarme
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.fxcop.profiles;
+package org.sonar.plugins.csharp.gendarme.profiles;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,29 +29,32 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.ValidationMessages;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SonarWayProfileTest {
+public class SonarWayProfileCSharpTest {
 
   private ValidationMessages messages;
-  private FxCopProfileImporter.RegularFxCopProfileImporter importer;
-  private SonarWayProfileCSharp sonarWayProfileCSharp;
+  private GendarmeProfileImporter.RegularGendarmeProfileImporter importer;
+  private SonarWayProfileCSharp sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
-    sonarWayProfileCSharp = new SonarWayProfileCSharp(importer);
+    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
+    sonarWayProfile = new SonarWayProfileCSharp(importer);
   }
 
   @Test
   public void testCreateProfile() {
-    RulesProfile profile = sonarWayProfileCSharp.createProfile(messages);
-    assertThat(profile.getActiveRules().size(), is(92));
+    RulesProfile profile = sonarWayProfile.createProfile(messages);
+    assertThat(profile.getLanguage()).isEqualTo("cs");
+    assertThat(profile.getName()).isEqualTo("Sonar way");
+    assertThat(profile.getActiveRules().size(), is(185));
     assertThat(messages.hasErrors(), is(false));
   }
 

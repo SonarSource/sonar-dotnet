@@ -1,5 +1,5 @@
 /*
- * Sonar .NET Plugin :: Gendarme
+ * Sonar .NET Plugin :: FxCop
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.gendarme.profiles;
+package org.sonar.plugins.csharp.fxcop.profiles;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,29 +29,32 @@ import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.utils.ValidationMessages;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SonarWayProfileTest {
+public class SonarWayProfileVbNetTest {
 
   private ValidationMessages messages;
-  private GendarmeProfileImporter.RegularGendarmeProfileImporter importer;
-  private SonarWayProfile sonarWayProfile;
+  private FxCopProfileImporter.RegularFxCopProfileImporter importer;
+  private SonarWayProfileVbNet sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
-    sonarWayProfile = new SonarWayProfile(importer);
+    importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
+    sonarWayProfile = new SonarWayProfileVbNet(importer);
   }
 
   @Test
   public void testCreateProfile() {
     RulesProfile profile = sonarWayProfile.createProfile(messages);
-    assertThat(profile.getActiveRules().size(), is(185));
+    assertThat(profile.getLanguage()).isEqualTo("vbnet");
+    assertThat(profile.getName()).isEqualTo("Sonar way");
+    assertThat(profile.getActiveRules().size(), is(92));
     assertThat(messages.hasErrors(), is(false));
   }
 

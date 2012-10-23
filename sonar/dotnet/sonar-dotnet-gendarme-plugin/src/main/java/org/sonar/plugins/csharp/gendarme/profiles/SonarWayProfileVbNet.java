@@ -1,5 +1,5 @@
 /*
- * Sonar .NET Plugin :: FxCop
+ * Sonar .NET Plugin :: Gendarme
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.fxcop.profiles;
+package org.sonar.plugins.csharp.gendarme.profiles;
 
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
@@ -27,15 +27,16 @@ import java.io.InputStreamReader;
 
 public final class SonarWayProfileVbNet extends ProfileDefinition {
 
-  private FxCopProfileImporter profileImporter;
+  private GendarmeProfileImporter profileImporter;
 
-  public SonarWayProfileVbNet(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
+  public SonarWayProfileVbNet(GendarmeProfileImporter.RegularGendarmeProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 
   public RulesProfile createProfile(ValidationMessages messages) {
     RulesProfile profile = profileImporter.importProfile(
-        new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/fxcop/rules/DefaultRules-vbnet.FxCop")), messages);
+        new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/gendarme/rules/DefaultRules.Gendarme-vbnet.xml")),
+        messages);
     profile.setLanguage("vbnet");
     profile.setName("Sonar way");
     return profile;
