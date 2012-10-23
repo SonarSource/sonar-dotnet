@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<StyleCopSettings Version="105">
- <GlobalSettings>
-    <BooleanProperty Name="WriteCache">False</BooleanProperty>
-    <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
-    <IntegerProperty Name="MaxViolationCount">-1</IntegerProperty>
-  </GlobalSettings>
-    <Analyzers> 
+  <StyleCopSettings Version="105">
+    <GlobalSettings>
+      <BooleanProperty Name="WriteCache">False</BooleanProperty>
+      <BooleanProperty Name="AutoCheckForUpdate">False</BooleanProperty>
+      <IntegerProperty Name="MaxViolationCount">-1</IntegerProperty>
+    </GlobalSettings>
+    <Analyzers>
+        <Analyzer AnalyzerId="StyleCop.CSharp.CsParser">
+            <Rules>
+                <Rule Name="SyntaxException" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="AllAccessorsMustBeMultiLineOrSingleLine" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+            </Rules>
+        </Analyzer>
         <Analyzer AnalyzerId="StyleCop.CSharp.DocumentationRules">
             <Rules>
                 <Rule Name="ElementsMustBeDocumented" SonarPriority="">
@@ -208,11 +222,66 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
+                <Rule Name="InheritDocMustBeUsedWithInheritingClass" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FileHeaderFileNameDocumentationMustMatchTypeName" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PropertyDocumentationMustHaveValueText" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FileHeaderCompanyNameTextMustMatch" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="IncludedDocumentationFileDoesNotExist" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PropertyDocumentationMustHaveValue" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FileHeaderCopyrightTextMustMatch" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="FileHeaderMustHaveSummary" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DocumentationTextMustBeginWithACapitalLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DocumentationTextMustEndWithAPeriod" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementDocumentationMustBeSpelledCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
             </Rules>
             <AnalyzerSettings>
-        		<StringProperty Name="CompanyName">acme</StringProperty>
-        		<StringProperty Name="Copyright">blabla</StringProperty>
-      		</AnalyzerSettings>
+        <StringProperty Name="CompanyName">acme</StringProperty>
+        <StringProperty Name="Copyright">blabla</StringProperty>
+      </AnalyzerSettings>
         </Analyzer>
         <Analyzer AnalyzerId="StyleCop.CSharp.LayoutRules">
             <Rules>
@@ -221,12 +290,12 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="StatementMustNotBeOnSingleLine" SonarPriority="">
+                <Rule Name="StatementMustNotBeOnASingleLine" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="ElementMustNotBeOnSingleLine" SonarPriority="">
+                <Rule Name="ElementMustNotBeOnASingleLine" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
@@ -236,7 +305,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="AllAccessorsMustBeMultiLineOrSingleLine" SonarPriority="">
+                <Rule Name="AllAccessorsMustBeSingleLineOrMultiLine" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
@@ -297,6 +366,26 @@
                     </RuleSettings>
                 </Rule>
                 <Rule Name="ElementsMustBeSeparatedByBlankLine" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="CodeMustNotContainBlankLinesAtStartOfFile" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="CodeMustNotContainBlankLinesAtEndOfFile" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="ElementMustNotBeOnSingleLine" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="StatementMustNotBeOnSingleLine" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
@@ -365,6 +454,11 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
+                <Rule Name="AttributeConstructorMustNotUseUnnecessaryParenthesis" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
             </Rules>
         </Analyzer>
         <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
@@ -424,12 +518,17 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
+                <Rule Name="StaticReadonlyFieldsMustBeginWithUpperCaseLetter" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
             </Rules>
-        	<AnalyzerSettings>
-        		<CollectionProperty Name="Hungarian">
-          			<Value>kt</Value>
-        		</CollectionProperty>
-      		</AnalyzerSettings>
+            <AnalyzerSettings>
+        <CollectionProperty Name="Hungarian">
+          <Value>kt</Value>
+        </CollectionProperty>
+      </AnalyzerSettings>
         </Analyzer>
         <Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">
             <Rules>
@@ -494,6 +593,21 @@
                     </RuleSettings>
                 </Rule>
                 <Rule Name="UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="StaticReadonlyElementsMustAppearBeforeStaticNonReadonlyElements" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="InstanceReadonlyElementsMustAppearBeforeInstanceNonReadonlyElements" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PartialElementsMustDeclareAccess" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
@@ -617,6 +731,21 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
+                <Rule Name="UseShorthandForNullableTypes" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="PrefixCallsCorrectly" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
+                <Rule Name="DoNotUseRegions" SonarPriority="">
+                    <RuleSettings>
+                        <BooleanProperty Name="Enabled">False</BooleanProperty>
+                    </RuleSettings>
+                </Rule>
             </Rules>
         </Analyzer>
         <Analyzer AnalyzerId="StyleCop.CSharp.SpacingRules">
@@ -736,7 +865,7 @@
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>
                 </Rule>
-                <Rule Name="DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly" SonarPriority="">
+                <Rule Name="DereferenceAndAccessOfMustBeSpacedCorrectly" SonarPriority="">
                     <RuleSettings>
                         <BooleanProperty Name="Enabled">False</BooleanProperty>
                     </RuleSettings>

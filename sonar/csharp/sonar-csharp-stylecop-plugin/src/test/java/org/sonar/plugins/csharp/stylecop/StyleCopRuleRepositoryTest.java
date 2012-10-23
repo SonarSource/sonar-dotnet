@@ -38,6 +38,6 @@ public class StyleCopRuleRepositoryTest {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
     StyleCopRuleRepository repository = new StyleCopRuleRepository(fileSystem, new XMLRuleParser());
     List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(144));
+    assertThat(rules.size(), is(169));
   }
 }

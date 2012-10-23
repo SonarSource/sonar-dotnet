@@ -884,8 +884,8 @@
         <category name="Usability"/>
         <description>Tabs must not be used</description>
     </rule>
-    
-    
+
+
     <!-- New StyleCop 4.7 rules -->
     <rule key="InheritDocMustBeUsedWithInheritingClass">
         <name>Inherit doc must be used with inheriting class</name>
@@ -947,7 +947,7 @@
         <category name="Usability"/>
         <description>A section of the Xml header documentation for a C# element does not end with a period (also known as a full stop).</description>
     </rule>
-    
+
     <rule key="CodeMustNotContainBlankLinesAtStartOfFile">
         <name>Code must not contain blank lines at start of file</name>
         <configKey>StyleCop.CSharp.LayoutRules#CodeMustNotContainBlankLinesAtStartOfFile</configKey>
@@ -960,21 +960,21 @@
         <category name="Usability"/>
         <description>Code must not contain blank lines at end of file</description>
     </rule>
-    
+
     <rule key="AttributeConstructorMustNotUseUnnecessaryParenthesis">
         <name>Attribute constructor must not use unnecessary parenthesis</name>
         <configKey>StyleCop.CSharp.MaintainabilityRules#AttributeConstructorMustNotUseUnnecessaryParenthesis</configKey>
         <category name="Usability"/>
         <description>Attribute constructor must not use unnecessary parenthesis</description>
     </rule>
-    
+
     <rule key="StaticReadonlyFieldsMustBeginWithUpperCaseLetter">
         <name>Static readonly fields must begin with upper case letter</name>
         <configKey>StyleCop.CSharp.NamingRules#StaticReadonlyFieldsMustBeginWithUpperCaseLetter</configKey>
         <category name="Usability"/>
         <description>Static readonly fields must begin with upper case letter</description>
     </rule>
-    
+
     <rule key="StaticReadonlyElementsMustAppearBeforeStaticNonReadonlyElements">
         <name>Static readonly elements must appear before static non readonly elements</name>
         <configKey>StyleCop.CSharp.OrderingRules#StaticReadonlyElementsMustAppearBeforeStaticNonReadonlyElements</configKey>
@@ -993,7 +993,7 @@
         <category name="Usability"/>
         <description>The partial element does not have an access modifier defined. StyleCop may not be able to determine the correct placement of the elements in the file. Please declare an access modifier for all partial elements.</description>
     </rule>
-    
+
     <rule key="UseShorthandForNullableTypes">
         <name>Use shorthand for nullable types</name>
         <configKey>StyleCop.CSharp.ReadabilityRules#UseShorthandForNullableTypes</configKey>
@@ -1011,5 +1011,35 @@
         <configKey>StyleCop.CSharp.ReadabilityRules#DoNotUseRegions</configKey>
         <category name="Usability"/>
         <description>The C# code contains a region.</description>
+    </rule>
+    <rule key="ElementMustNotBeOnSingleLine">
+        <name>Use multiple lines for enum definition</name>
+        <configKey>StyleCop.CSharp.LayoutRules#ElementMustNotBeOnSingleLine</configKey>
+        <category name="Usability"/>
+        <description>The enum must not be placed on a single line. The opening and closing curly brackets must each be placed on their own line.</description>
+    </rule>
+    <rule key="StatementMustNotBeOnSingleLine">
+        <name>Use multiple lines for statement</name>
+        <configKey>StyleCop.CSharp.LayoutRules#StatementMustNotBeOnSingleLine</configKey>
+        <category name="Maintainability"/>
+        <description>A statement containing curly brackets must not be placed on a single line. The opening and closing curly brackets must each be placed on their own line.</description>
+    </rule>
+    <rule key="SyntaxException">
+        <name>A syntax error has been discovered</name>
+        <configKey>StyleCop.CSharp.CsParser#SyntaxException</configKey>
+        <category name="Maintainability"/>
+        <description>A syntax error has been discovered in file - see name within message.</description>
+    </rule>
+    <rule key="AllAccessorsMustBeMultiLineOrSingleLine">
+        <name>Use single line for accessors</name>
+        <configKey>StyleCop.CSharp.CsParser#AllAccessorsMustBeMultiLineOrSingleLine</configKey>
+        <category name="Maintainability"/>
+        <description>A violation of this rule occurs when the accessors within a property, indexer or event are not consistently written on a single line or on multiple lines. This rule is intended to increase the readability of the code by requiring all of the accessors within an element to be formatted in the same way</description>
+    </rule>
+    <rule key="ElementDocumentationMustBeSpelledCorrectly">
+        <name>Element documentation must be spelled correctly</name>
+        <configKey>StyleCop.CSharp.DocumentationRules#ElementDocumentationMustBeSpelledCorrectly</configKey>
+        <category name="Maintainability"/>
+        <description>The element documentation for the element must not contains spelling mistakes or unrecognized words.</description>
     </rule>
 </rules>
