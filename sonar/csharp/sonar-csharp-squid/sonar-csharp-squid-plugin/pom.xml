@@ -36,6 +36,8 @@
                 <include>${project.groupId}:csharp-checks</include>
                 <include>org.codehaus.sonar.sslr:sslr-core</include>
                 <include>org.codehaus.sonar.sslr-squid-bridge:sslr-squid-bridge</include>
+                <include>org.codehaus.sonar.sslr:sslr-xpath</include>
+                <include>jaxen:jaxen</include>
               </includes>
               <rules>
                 <keep>
@@ -72,8 +74,8 @@
               <rules>
                 <requireFilesSize>
                   <!-- Do not forget to check correctness of those numbers, when obfuscation disabled -->
-                  <maxsize>300000</maxsize>
-                  <minsize>100000</minsize>
+                  <maxsize>600000</maxsize>
+                  <minsize>300000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

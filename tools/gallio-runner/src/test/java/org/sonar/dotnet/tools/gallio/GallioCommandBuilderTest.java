@@ -302,4 +302,25 @@ public class GallioCommandBuilderTest {
     builder.setGallioRunnerType("whatever");
   }
 
+  @Test
+  public void testToCommandForSolutionWithoutCoverage() throws Exception {
+    GallioCommandBuilder builder = GallioCommandBuilder.createBuilder(solution);
+    builder.setTestAssemblies(Lists.newArrayList(FAKE_ASSEMBLY_1, FAKE_ASSEMBLY_2));
+    builder.setExecutable(GALLIO_EXE);
+    builder.setReportFile(GALLIO_REPORT_FILE);
+    builder.setCoverageTool(GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY);
+    builder.setWorkDir(WORK_DIR);
+    Command command = builder.toCommand();
+
+    assertThat(command.getExecutable(), endsWith("Gallio.Echo.exe"));
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands.length, is(6));
+    assertThat(commands[0], is("/r:IsolatedProcess"));
+    assertThat(commands[1], endsWith("gallio-report-folder"));
+    assertThat(commands[2], is("/report-name-format:gallio-report"));
+    assertThat(commands[3], is("/report-type:Xml"));
+    assertThat(commands[4], endsWith(".assembly"));
+    assertThat(commands[5], endsWith(".assembly"));
+  }
+
 }

@@ -29,33 +29,33 @@ import org.slf4j.LoggerFactory;
  * <li>NCover</li>
  * <li>OpenCover</li>
  * </ul>
- * 
+ *
  */
 public enum CoverageTool {
 
   /**
    * No coverage tool
    */
-  NONE(null, null),
+  NONE(GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY, GallioRunnerType.ISOLATED_PROCESS),
 
   /**
    * "PartCover" tool
    */
-  PARTCOVER("PartCover", GallioRunnerType.ISOLATED_APP_DOMAIN),
+  PARTCOVER(GallioRunnerConstants.COVERAGE_TOOL_PARTCOVER_KEY, GallioRunnerType.ISOLATED_APP_DOMAIN),
   /**
    * "NCover" tool
    */
-  NCOVER("NCover", GallioRunnerType.NCOVER),
+  NCOVER(GallioRunnerConstants.COVERAGE_TOOL_NCOVER_KEY, GallioRunnerType.NCOVER),
 
   /**
    * Jetbrains "dotCover" tool
    */
-  DOTCOVER("dotCover", GallioRunnerType.LOCAL),
+  DOTCOVER(GallioRunnerConstants.COVERAGE_TOOL_DOTCOVER_KEY, GallioRunnerType.LOCAL),
 
   /**
    * "OpenCover" tool
    */
-  OPENCOVER("OpenCover", GallioRunnerType.ISOLATED_APP_DOMAIN);
+  OPENCOVER(GallioRunnerConstants.COVERAGE_TOOL_OPENCOVER_KEY, GallioRunnerType.ISOLATED_APP_DOMAIN);
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageTool.class);
 
@@ -69,7 +69,7 @@ public enum CoverageTool {
 
   /**
    * Returns the Gallio runner used for this coverage tool
-   * 
+   *
    * @return the name of the runner
    */
   public GallioRunnerType getGallioRunner() {
@@ -78,7 +78,7 @@ public enum CoverageTool {
 
   /**
    * Returns the name of the coverage tool.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -87,7 +87,7 @@ public enum CoverageTool {
 
   /**
    * Returns the coverage tool corresponding to the given name (case insensitive), or null if none found.
-   * 
+   *
    * @param name
    *          the name of the tool
    * @return the coverage tool if one is found, otherwise null

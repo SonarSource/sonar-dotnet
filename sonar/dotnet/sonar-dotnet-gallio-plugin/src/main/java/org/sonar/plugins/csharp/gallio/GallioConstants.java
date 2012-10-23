@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
+
 /**
  * Constants of the Gallio plugin.
  */
@@ -47,7 +49,7 @@ public final class GallioConstants {
   public static final String PART_COVER_INSTALL_DEFVALUE = "C:/Program Files/PartCover/PartCover .NET 4.0";
 
   public static final String COVERAGE_TOOL_KEY = "sonar.gallio.coverage.tool";
-  public static final String COVERAGE_TOOL_DEFVALUE = "PartCover";
+  public static final String COVERAGE_TOOL_DEFVALUE = GallioRunnerConstants.COVERAGE_TOOL_PARTCOVER_KEY;
 
   public static final String COVERAGE_EXCLUDES_KEY = "sonar.gallio.coverage.excludes";
   public static final String COVERAGE_EXCLUDES_DEFVALUE = null;

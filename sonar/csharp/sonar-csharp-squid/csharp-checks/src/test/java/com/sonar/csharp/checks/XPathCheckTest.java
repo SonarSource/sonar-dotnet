@@ -19,21 +19,24 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.collect.Lists;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import static com.sonar.csharp.checks.ResourceParser.scanFile;
 
-public final class CheckList {
+public class XPathCheckTest {
 
-  private CheckList() {
-  }
+  @Test
+  public void check() {
+    XPathCheck check = new XPathCheck();
+    check.xpathQuery = "//IDENTIFIER[string-length(@tokenValue) >= 10]";
+    check.message = "Avoid identifiers which are too long!";
 
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        CommentedCodeCheck.class,
-        ParsingErrorCheck.class,
-        XPathCheck.class
-        );
+    SourceFile file = scanFile("/checks/xpath.cs", check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(7).withMessage("Avoid identifiers which are too long!")
+        .noMore();
   }
 
 }

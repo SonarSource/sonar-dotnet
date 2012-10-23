@@ -22,7 +22,9 @@ package org.sonar.plugins.csharp.gallio;
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
@@ -59,7 +61,13 @@ import java.util.List;
     name = "Coverage tool",
     description = "Coverage tool used by Gallio: it currently can be 'PartCover' (default), " +
       "'OpenCover', 'NCover', 'dotCover' or 'none' (= means no coverage analysis will be done).",
-    global = true, project = true),
+    global = true, project = true,
+    type = PropertyType.SINGLE_SELECT_LIST,
+    options = {GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY,
+      GallioRunnerConstants.COVERAGE_TOOL_DOTCOVER_KEY,
+      GallioRunnerConstants.COVERAGE_TOOL_NCOVER_KEY,
+      GallioRunnerConstants.COVERAGE_TOOL_OPENCOVER_KEY,
+      GallioRunnerConstants.COVERAGE_TOOL_PARTCOVER_KEY}),
   @Property(key = GallioConstants.PART_COVER_INSTALL_KEY, defaultValue = GallioConstants.PART_COVER_INSTALL_DEFVALUE,
     name = "PartCover install directory", description = "Absolute path of the PartCover installation folder.", global = true,
     project = false),
