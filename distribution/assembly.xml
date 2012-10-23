@@ -10,11 +10,12 @@
       <outputDirectory>.</outputDirectory>
       <useTransitiveDependencies>false</useTransitiveDependencies>
       <includes>
-        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-core-plugin</include>
-        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-fxcop-plugin</include>
-        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-gallio-plugin</include>
-        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-gendarme-plugin</include>
-        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-ndeps-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet:sonar-dotnet-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet:sonar-dotnet-fxcop-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet:sonar-dotnet-gendarme-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet:sonar-dotnet-ndeps-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet:sonar-dotnet-gallio-plugin</include>
+        <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-plugin</include>
         <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-squid-plugin</include>
         <include>org.codehaus.sonar-plugins.dotnet.csharp:sonar-csharp-stylecop-plugin</include>
       </includes>
