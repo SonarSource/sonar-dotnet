@@ -38,7 +38,7 @@
   </developers>
 
   <modules>
-    <!-- We need to decide what to do this this module... 
+    <!-- We need to decide what to do with this module...
     <module>maven</module>
     -->
     <module>sonar</module>
