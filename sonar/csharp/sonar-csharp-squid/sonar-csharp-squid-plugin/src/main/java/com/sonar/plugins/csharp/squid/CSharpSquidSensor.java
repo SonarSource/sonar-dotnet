@@ -24,7 +24,6 @@ import com.sonar.csharp.checks.CheckList;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
@@ -72,7 +71,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12};
-  private static final Number[] CLASS_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
+  private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
   private static final String[] SUPPORTED_LANGUAGES = new String[] {CSharpConstants.LANGUAGE_KEY};
 
   private final CSharp cSharp;
@@ -146,7 +145,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private CSharpConfiguration createParserConfiguration(Project project) {
     CSharpConfiguration conf = new CSharpConfiguration(project.getFileSystem().getSourceCharset());
-    conf.setIgnoreHeaderComments(project.getConfiguration().getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS, true));
+    conf.setIgnoreHeaderComments(configuration.getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS));
     return conf;
   }
 
@@ -164,8 +163,8 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
       /* No Sonar */
       noSonarFilter.addResource(sonarFile, squidFile.getNoSonarTagLines());
 
-      /* Classes complexity distribution */
-      saveClassesComplexityDistribution(sonarFile, squidFile);
+      /* Files complexity distribution */
+      saveFilesComplexityDistribution(sonarFile, squidFile);
 
       /* Methods complexity distribution */
       saveMethodsComplexityDistribution(sonarFile, squidFile);
@@ -205,7 +204,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     if (messages != null) {
       for (CheckMessage message : messages) {
         @SuppressWarnings("unchecked")
-        Violation violation = Violation.create(annotationCheckFactory.getActiveRule(message.getChecker()), sonarFile);
+        Violation violation = Violation.create(annotationCheckFactory.getActiveRule(message.getCheck()), sonarFile);
         violation.setLineId(message.getLine());
         violation.setMessage(message.getText(Locale.ENGLISH));
         context.saveViolation(violation);
@@ -213,16 +212,10 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     }
   }
 
-  private void saveClassesComplexityDistribution(File sonarFile, SourceFile squidFile) {
-    Collection<SourceCode> squidClasses = scanner.getIndex().search(new QueryByParent(squidFile), new QueryByType(SourceClass.class));
-    RangeDistributionBuilder complexityClassDistribution = new RangeDistributionBuilder(CoreMetrics.CLASS_COMPLEXITY_DISTRIBUTION,
-        CLASS_DISTRIB_BOTTOM_LIMITS);
-
-    for (SourceCode squidClass : squidClasses) {
-      complexityClassDistribution.add(squidClass.getDouble(CSharpMetric.COMPLEXITY));
-    }
-
-    context.saveMeasure(sonarFile, complexityClassDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+  private void saveFilesComplexityDistribution(File sonarFile, SourceFile squidFile) {
+    RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, FILES_DISTRIB_BOTTOM_LIMITS);
+    complexityDistribution.add(squidFile.getDouble(CSharpMetric.COMPLEXITY));
+    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
   }
 
   private void saveMethodsComplexityDistribution(File sonarFile, SourceFile squidFile) {
