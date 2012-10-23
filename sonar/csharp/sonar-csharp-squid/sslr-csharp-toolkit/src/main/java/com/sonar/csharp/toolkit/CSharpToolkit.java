@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Devkit
+ * Sonar C# Plugin :: C# Squid :: Toolkit
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,22 +17,22 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.devkit;
+package com.sonar.csharp.toolkit;
 
 import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.devkit.SsdkGui;
+import org.sonar.sslr.toolkit.Toolkit;
 
-public final class CSharpSsdkGui {
+public final class CSharpToolkit {
 
-  private CSharpSsdkGui() {
+  private CSharpToolkit() {
   }
 
   public static void main(String[] args) {
-    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "SSDK");
-    SsdkGui ssdkGui = new SsdkGui(CSharpParser.create(), CSharpSourceCodeColorizer.getTokenizers());
-    ssdkGui.setVisible(true);
-    ssdkGui.setSize(1000, 800);
-    ssdkGui.setTitle("C# : SonarSource Development Kit");
+    Toolkit toolkit = new Toolkit(CSharpParser.create(),
+        CSharpSourceCodeColorizer.getTokenizers(),
+        "SSLR :: C# :: Toolkit");
+
+    toolkit.run();
   }
 
 }

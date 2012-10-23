@@ -18,12 +18,12 @@
   <modules>
     <module>csharp-squid</module>
     <module>csharp-checks</module>
-    <module>csharp-devkit</module>
+    <module>sslr-csharp-toolkit</module>
     <module>sonar-csharp-squid-plugin</module>
   </modules>
 
   <properties>
-    <sslrVersion>1.14</sslrVersion>
+    <sslrVersion>1.15</sslrVersion>
     <squidBridgeVersion>2.2</squidBridgeVersion>
 
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
@@ -31,7 +31,7 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- C# Squid --> 
+      <!-- C# Squid -->
       <dependency>
         <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
         <artifactId>csharp-squid</artifactId>
@@ -42,13 +42,13 @@
         <artifactId>csharp-checks</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <!-- C# Core --> 
+      <!-- C# Core -->
       <dependency>
         <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
         <artifactId>sonar-csharp-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <!-- .NET Core --> 
+      <!-- .NET Core -->
       <dependency>
         <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
         <artifactId>sonar-dotnet-plugin</artifactId>
@@ -67,7 +67,7 @@
       </dependency>
       <dependency>
         <groupId>org.codehaus.sonar.sslr</groupId>
-        <artifactId>sslr-devkit</artifactId>
+        <artifactId>sslr-toolkit</artifactId>
         <version>${sslrVersion}</version>
       </dependency>
       <!-- Tests -->

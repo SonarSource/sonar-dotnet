@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Devkit
+ * Sonar C# Plugin :: C# Squid :: Toolkit
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.devkit;
+package com.sonar.csharp.toolkit;
 
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import org.sonar.colorizer.CDocTokenizer;
