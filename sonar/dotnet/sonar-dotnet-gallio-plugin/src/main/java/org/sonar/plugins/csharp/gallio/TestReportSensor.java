@@ -37,6 +37,7 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
@@ -59,7 +60,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
 
   /**
    * Constructs a {@link TestReportSensor}.
-   * 
+   *
    * @param fileSystem
    * @param configuration
    * @param microsoftWindowsEnvironment
@@ -103,7 +104,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
     Collection<File> reports = Lists.newArrayList();
     reports.addAll(findReportsToAnalyse(executionMode, GallioConstants.GALLIO_REPORT_XML, GallioConstants.REPORTS_PATH_KEY));
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE_KEY);
-    if (!"skip".equals(itExecutionMode)) {
+    if (!AbstractDotNetSensor.MODE_SKIP.equals(itExecutionMode)) {
       reports.addAll(findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_REPORTS_PATH_KEY));
     }
 
@@ -196,7 +197,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
 
   /**
    * Stores the test details in XML format.
-   * 
+   *
    * @param testFile
    * @param context
    * @param fileReport
@@ -225,7 +226,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
 
   /**
    * Saves the measure the a test file.
-   * 
+   *
    * @param project
    * @param context
    * @param fileReport

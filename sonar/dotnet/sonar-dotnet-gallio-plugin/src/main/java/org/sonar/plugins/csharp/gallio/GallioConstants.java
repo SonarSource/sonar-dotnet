@@ -84,7 +84,8 @@ public final class GallioConstants {
   public static final String IT_FILTER_DEFVALUE = "";
 
   public static final String IT_MODE_KEY = "sonar.gallio.it.mode";
-  public static final String IT_MODE_DEFVALUE = "skip";
+
+  public static final String IT_MODE_ACTIVE = "active";
 
   public static final String IT_REPORTS_PATH_KEY = "sonar.gallio.it.reports.path";
   public static final String IT_REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.it.coverage.reports.path";

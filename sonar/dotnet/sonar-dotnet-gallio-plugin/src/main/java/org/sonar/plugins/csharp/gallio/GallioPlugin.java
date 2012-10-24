@@ -28,6 +28,7 @@ import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
+import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +41,15 @@ import java.util.List;
     name = "Gallio install directory", description = "Absolute path of the Gallio installation folder.", global = true, project = false),
   @Property(key = GallioConstants.TIMEOUT_MINUTES_KEY, defaultValue = GallioConstants.TIMEOUT_MINUTES_DEFVALUE + "",
     name = "Gallio program timeout", description = "Maximum number of minutes before the Gallio program will be stopped.",
-    global = true, project = true),
+    global = true, project = true, type = PropertyType.INTEGER),
   @Property(key = GallioConstants.MODE, defaultValue = "", name = "Gallio activation mode",
-    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
+    description = "Possible values : Default (means active), 'skip' and 'reuseReport'.",
+    global = false, project = false, type = PropertyType.SINGLE_SELECT_LIST,
+    options = {AbstractDotNetSensor.MODE_SKIP, AbstractDotNetSensor.MODE_REUSE_REPORT}),
   @Property(key = GallioConstants.SAFE_MODE_KEY, defaultValue = GallioConstants.SAFE_MODE_DEFVALUE + "", name = "Gallio safe mode",
     description = "When set to true, gallio is launched once per test assembly of the analysed solution. " +
-      "Otherwise gallio is launched once for the whole solution", global = true, project = true),
+      "Otherwise gallio is launched once for the whole solution", global = true, project = true,
+    type = PropertyType.BOOLEAN),
   @Property(key = GallioConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gallio report files",
     description = "Path to the Gallio report file used when reuse report mode is activated. "
       + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),
@@ -85,10 +89,11 @@ import java.util.List;
       + "For PartCover, the format for an exclusion is : '[assembly]namespace'. "
       + "For NCover, the format is just the name of the assemblies to exclude.", global = true, project = true),
 
-  @Property(key = GallioConstants.IT_MODE_KEY, defaultValue = GallioConstants.IT_MODE_DEFVALUE,
-    name = "Gallio integration tests activation mode", description = "Possible values : empty (means 'skip'), " +
+  @Property(key = GallioConstants.IT_MODE_KEY, defaultValue = AbstractDotNetSensor.MODE_SKIP,
+    name = "Gallio integration tests activation mode", description = "Possible values : Default (means 'skip'), " +
       "'active', 'skip' and 'reuseReport'.",
-    global = false, project = false),
+    global = false, project = false, type = PropertyType.SINGLE_SELECT_LIST,
+    options = {GallioConstants.IT_MODE_ACTIVE, AbstractDotNetSensor.MODE_SKIP, AbstractDotNetSensor.MODE_REUSE_REPORT}),
   @Property(key = GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY, defaultValue = "", name = "Name of the IT Gallio coverage report files",
     description = "Path to the Gallio coverage report file used when reuse report mode is activated for integration tests. "
       + "This can be an absolute path, or a path relative to the solution base directory.", global = false, project = false),

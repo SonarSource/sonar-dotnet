@@ -22,6 +22,7 @@ package org.sonar.plugins.dotnet.core;
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
@@ -65,7 +66,7 @@ import java.util.List;
   @Property(key = DotNetConstants.EXCLUDE_GENERATED_CODE_KEY, defaultValue = DotNetConstants.EXCLUDE_GENERATED_CODE_DEFVALUE + "",
     name = "Exclude generated code",
     description = "Set to false to include generated code like 'Reference.cs' files or '*.designer.cs' files.", global = true,
-    project = true),
+    project = true, type = PropertyType.BOOLEAN),
   @Property(key = DotNetConstants.BUILD_CONFIGURATION_KEY, defaultValue = DotNetConstants.BUILD_CONFIGURATIONS_DEFVALUE,
     name = "Build configuration", description = "Build configurations used to build the solution.", global = true, project = true),
   @Property(key = DotNetConstants.BUILD_PLATFORM_KEY, defaultValue = DotNetConstants.BUILD_PLATFORM_DEFVALUE,

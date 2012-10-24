@@ -50,7 +50,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
 
   /**
    * Creates an {@link AbstractDotNetSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
-   * 
+   *
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
@@ -87,7 +87,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
 
   /**
    * Must return the list of supported languages.
-   * 
+   *
    * @return the keys of the supported languages.
    */
   public abstract String[] getSupportedLanguages();
@@ -99,7 +99,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
 
   /**
    * Returns the Sonar file representation ({@link File}) of the given file, if that file exists in the given project.
-   * 
+   *
    * @param file
    *          the real file
    * @param project
@@ -112,7 +112,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
 
   /**
    * Returns the Visual Studio Project corresponding to the given Sonar Project.
-   * 
+   *
    * @param project
    *          the Sonar Project
    * @return the VS Project
@@ -143,7 +143,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
 
   /**
    * Returns the {@link MicrosoftWindowsEnvironment} object.
-   * 
+   *
    * @return the {@link MicrosoftWindowsEnvironment}
    */
   protected MicrosoftWindowsEnvironment getMicrosoftWindowsEnvironment() {

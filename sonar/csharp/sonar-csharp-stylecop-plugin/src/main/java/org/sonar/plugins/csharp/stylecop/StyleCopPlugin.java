@@ -23,10 +23,12 @@ package org.sonar.plugins.csharp.stylecop;
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.stylecop.profiles.SonarWayProfile;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileImporter;
+import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +42,10 @@ import java.util.List;
     project = false),
   @Property(key = StyleCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
     name = "StyleCop program timeout", description = "Maximum number of minutes before the StyleCop program will be stopped.",
-    global = true, project = true),
+    global = true, project = true, type = PropertyType.INTEGER),
   @Property(key = StyleCopConstants.MODE, defaultValue = "", name = "StyleCop activation mode",
-    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false),
+    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false,
+    type = PropertyType.SINGLE_SELECT_LIST, options = {AbstractDotNetSensor.MODE_SKIP, AbstractDotNetSensor.MODE_REUSE_REPORT}),
   @Property(key = StyleCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the StyleCop report files",
     description = "Name of the StyleCop report file used when reuse report mode is activated. "
       + "This can be an absolute path, or a path relative to each project base directory.", global = false, project = false)})

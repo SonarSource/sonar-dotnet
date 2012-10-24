@@ -66,7 +66,7 @@ public class GallioSensor extends AbstractDotNetSensor {
 
   /**
    * Constructs a {@link GallioSensor}.
-   * 
+   *
    * @param fileSystem
    * @param configuration
    * @param microsoftWindowsEnvironment
@@ -162,7 +162,7 @@ public class GallioSensor extends AbstractDotNetSensor {
     executeRunner(false, testAssemblyPatterns, gallioFilter, GallioConstants.GALLIO_REPORT_XML, GallioConstants.GALLIO_COVERAGE_REPORT_XML);
 
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE_KEY);
-    if ("active".equals(itExecutionMode)) {
+    if (GallioConstants.IT_MODE_ACTIVE.equals(itExecutionMode)) {
       String[] itAssemblyPatterns = configuration.getStringArray(GallioConstants.IT_TEST_ASSEMBLIES_KEY);
       String itGallioFilter = configuration.getString(GallioConstants.IT_FILTER_KEY);
       executeRunner(true, itAssemblyPatterns, itGallioFilter, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML);

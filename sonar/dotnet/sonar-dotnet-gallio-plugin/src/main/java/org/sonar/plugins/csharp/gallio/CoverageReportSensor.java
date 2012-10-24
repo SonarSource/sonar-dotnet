@@ -39,6 +39,7 @@ import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
@@ -112,7 +113,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
 
   public void analyseIntegCoverage(Project project, SensorContext context) {
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE_KEY);
-    if ("skip".equals(itExecutionMode)) {
+    if (AbstractDotNetSensor.MODE_SKIP.equals(itExecutionMode)) {
       return;
     }
     Collection<File> coverageReportFiles = findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_COVERAGE_REPORT_XML, GallioConstants.IT_REPORTS_COVERAGE_PATH_KEY);
