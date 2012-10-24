@@ -30,6 +30,7 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
@@ -205,6 +206,13 @@ public class CoverageDecoratorTest {
   public void testShouldNotExecuteOnTestProject() throws Exception {
     when(vsProject.isTest()).thenReturn(true);
     CoverageDecorator decorator = createDecorator();
+    assertFalse(decorator.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldNotExecuteIfCoverageToolIsNone() throws Exception {
+    conf.setProperty(GallioConstants.COVERAGE_TOOL_KEY, GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY);
+    CoverageDecorator decorator = new UnitCoverageDecorator(new DotNetConfiguration(conf), microsoftWindowsEnvironment, null);
     assertFalse(decorator.shouldExecuteOnProject(project));
   }
 

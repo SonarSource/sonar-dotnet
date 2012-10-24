@@ -33,6 +33,7 @@ import org.sonar.api.measures.PropertiesBuilder;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.ParsingUtils;
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
@@ -64,7 +65,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
 
   /**
    * Constructs a {@link CoverageReportSensor}.
-   * 
+   *
    * @param fileSystem
    * @param configuration
    * @param microsoftWindowsEnvironment
@@ -81,6 +82,13 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
   @Override
   public String[] getSupportedLanguages() {
     return GallioConstants.SUPPORTED_LANGUAGES;
+  }
+
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    boolean coverageToolIsNone = GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY.equals(
+        configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
+    return super.shouldExecuteOnProject(project) && !coverageToolIsNone;
   }
 
   /**

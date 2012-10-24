@@ -31,6 +31,7 @@ import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.resources.Project;
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
@@ -366,6 +367,13 @@ public class CoverageReportSensorTest {
   public void testShouldNotExecuteOnProjectIfTestProject() throws Exception {
     CoverageReportSensor sensor = buildSensor();
     when(project.getName()).thenReturn("Project Test 2");
+    assertFalse(sensor.shouldExecuteOnProject(project));
+  }
+
+  @Test
+  public void testShouldNotExecuteIfCoverageToolIsNone() throws Exception {
+    conf.setProperty(GallioConstants.COVERAGE_TOOL_KEY, GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY);
+    CoverageReportSensor sensor = buildSensor();
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
 

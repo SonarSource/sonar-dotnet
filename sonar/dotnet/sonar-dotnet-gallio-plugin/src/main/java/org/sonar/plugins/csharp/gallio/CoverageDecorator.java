@@ -30,6 +30,7 @@ import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.resources.ResourceUtils;
+import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
@@ -54,6 +55,7 @@ public abstract class CoverageDecorator implements Decorator {
   protected VisualStudioSolution vsSolution;
   protected ResourceHelper resourceHelper;
   protected Metric testMetric;
+  protected DotNetConfiguration configuration;
 
   protected CoverageDecorator(DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, ResourceHelper resourceHelper) {
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
@@ -65,6 +67,7 @@ public abstract class CoverageDecorator implements Decorator {
       this.excludedAssemblies = Sets.newHashSet(exclusions);
     }
     this.resourceHelper = resourceHelper;
+    this.configuration = configuration;
   }
 
   /**
@@ -76,7 +79,9 @@ public abstract class CoverageDecorator implements Decorator {
     }
     boolean skipMode = AbstractDotNetSensor.MODE_SKIP.equalsIgnoreCase(executionMode);
     boolean isTestProject = microsoftWindowsEnvironment.getCurrentProject(project.getName()).isTest();
-    return !isTestProject && !skipMode;
+    boolean coverageToolIsNone = GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY.equals(
+        configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
+    return !isTestProject && !skipMode && !coverageToolIsNone;
   }
 
   /**
