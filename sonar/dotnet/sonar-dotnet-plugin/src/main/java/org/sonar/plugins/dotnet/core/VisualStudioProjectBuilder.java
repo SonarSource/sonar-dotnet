@@ -19,13 +19,6 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
-
-import org.sonar.plugins.dotnet.api.visualstudio.ModelFactory;
-import org.sonar.plugins.dotnet.api.visualstudio.SourceFile;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -37,6 +30,11 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.visualstudio.ModelFactory;
+import org.sonar.plugins.dotnet.api.visualstudio.SourceFile;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.IOException;
@@ -124,7 +122,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
       ProjectDefinition subProject = ProjectDefinition.create().setProperties(subprojectProperties)
           .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
-          .setVersion(root.getVersion()).setName(vsProject.getName()).addContainerExtension(microsoftWindowsEnvironment);
+          .setVersion(root.getVersion()).setName(vsProject.getName());
 
       if (vsProject.isTest()) {
         subProject.setTestDirs(".");
