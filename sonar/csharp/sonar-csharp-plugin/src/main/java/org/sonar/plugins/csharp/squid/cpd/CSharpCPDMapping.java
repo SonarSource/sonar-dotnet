@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Sonar Plugin
+ * Sonar C# Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,14 +17,14 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.plugins.csharp.squid.cpd;
+package org.sonar.plugins.csharp.squid.cpd;
 
-import com.sonar.plugins.csharp.squid.CSharpSquidConstants;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
+import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
 
 import java.nio.charset.Charset;
 

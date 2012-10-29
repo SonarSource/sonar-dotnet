@@ -19,13 +19,9 @@
     <module>csharp-squid</module>
     <module>csharp-checks</module>
     <module>sslr-csharp-toolkit</module>
-    <module>sonar-csharp-squid-plugin</module>
   </modules>
 
   <properties>
-    <sslrVersion>1.15</sslrVersion>
-    <squidBridgeVersion>2.2</squidBridgeVersion>
-
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
   </properties>
 

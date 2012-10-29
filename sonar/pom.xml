@@ -28,6 +28,12 @@
     <module>csharp/sonar-csharp-stylecop-plugin</module>
   </modules>
 
+  <properties>
+    <sslrVersion>1.15</sslrVersion>
+    <squidBridgeVersion>2.2</squidBridgeVersion>
+    <sonarCommonRules>1.0.1</sonarCommonRules>
+  </properties>
+
   <dependencies>
     <!-- Unit tests -->
     <dependency>

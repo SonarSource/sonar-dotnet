@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Sonar Plugin
+ * Sonar C# Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.plugins.csharp.squid;
+package org.sonar.plugins.csharp.squid;
 
 import com.google.common.collect.Lists;
 import com.sonar.csharp.checks.CheckList;
@@ -27,7 +27,6 @@ import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.plugins.csharp.squid.check.CSharpCheck;
 import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
@@ -50,6 +49,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;

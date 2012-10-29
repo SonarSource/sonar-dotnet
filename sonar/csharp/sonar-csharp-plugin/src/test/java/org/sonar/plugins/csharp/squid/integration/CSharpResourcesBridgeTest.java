@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Sonar Plugin
+ * Sonar C# Plugin :: Core
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,12 +17,11 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.plugins.csharp.squid.integration;
+package org.sonar.plugins.csharp.squid.integration;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.plugins.csharp.squid.CSharpResourcesBridge;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -31,6 +30,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
+import org.sonar.plugins.csharp.squid.CSharpResourcesBridge;
 import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
