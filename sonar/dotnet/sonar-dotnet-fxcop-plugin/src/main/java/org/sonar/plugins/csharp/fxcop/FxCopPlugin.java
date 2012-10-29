@@ -64,12 +64,16 @@ public class FxCopPlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(FxCopSensor.RegularFxCopSensor.class);
+    // sensors
+    list.add(FxCopSensor.CSharpRegularFxCopSensor.class);
+    list.add(FxCopSensor.VbNetRegularFxCopSensor.class);
 
     // Rules and profiles
     list.add(FxCopRuleRepositoryProvider.class);
-    list.add(FxCopProfileImporter.RegularFxCopProfileImporter.class);
-    list.add(FxCopProfileExporter.RegularFxCopProfileExporter.class);
+    list.add(FxCopProfileExporter.CSharpRegularFxCopProfileExporter.class);
+    list.add(FxCopProfileExporter.VbNetRegularFxCopProfileExporter.class);
+    list.add(FxCopProfileImporter.CSharpRegularFxCopProfileImporter.class);
+    list.add(FxCopProfileImporter.VbNetRegularFxCopProfileImporter.class);
     list.add(SonarWayProfileCSharp.class);
     list.add(SonarWayProfileVbNet.class);
 

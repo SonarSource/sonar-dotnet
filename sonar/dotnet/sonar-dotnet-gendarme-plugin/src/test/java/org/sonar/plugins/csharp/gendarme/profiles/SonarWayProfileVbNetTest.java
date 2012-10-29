@@ -39,13 +39,13 @@ import static org.mockito.Mockito.when;
 public class SonarWayProfileVbNetTest {
 
   private ValidationMessages messages;
-  private GendarmeProfileImporter.RegularGendarmeProfileImporter importer;
+  private GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter importer;
   private SonarWayProfileVbNet sonarWayProfile;
 
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
+    importer = new GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter(newRuleFinder());
     sonarWayProfile = new SonarWayProfileVbNet(importer);
   }
 
@@ -55,6 +55,7 @@ public class SonarWayProfileVbNetTest {
     assertThat(profile.getLanguage()).isEqualTo("vbnet");
     assertThat(profile.getName()).isEqualTo("Sonar way");
     assertThat(profile.getActiveRules().size(), is(185));
+    assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("gendarme-vbnet");
     assertThat(messages.hasErrors(), is(false));
   }
 

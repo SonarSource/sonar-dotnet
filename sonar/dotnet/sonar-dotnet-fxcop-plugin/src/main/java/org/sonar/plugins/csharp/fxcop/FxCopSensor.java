@@ -51,7 +51,7 @@ import java.util.Collections;
 /**
  * Collects the FXCop reporting into sonar.
  */
-public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
+public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
@@ -61,13 +61,38 @@ public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
   private FxCopResultParser fxCopResultParser;
 
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
-  public static class RegularFxCopSensor extends FxCopSensor {
-    public RegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.RegularFxCopProfileExporter profileExporter,
+  public static class CSharpRegularFxCopSensor extends FxCopSensor {
+    public CSharpRegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.CSharpRegularFxCopProfileExporter profileExporter,
         FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
+    }
   }
 
+  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
+  public static class VbNetRegularFxCopSensor extends FxCopSensor {
+    public VbNetRegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.VbNetRegularFxCopProfileExporter profileExporter,
+        FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"vbnet"};
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929)
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class UnitTestsFxCopSensor extends FxCopSensor {
     public UnitTestsFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.UnitTestsFxCopProfileExporter profileExporter,
@@ -81,6 +106,14 @@ public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
     @Override
     protected boolean isTestSensor() {
       return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
     }
   }
 
@@ -109,14 +142,6 @@ public class FxCopSensor extends AbstractRuleBasedDotNetSensor {
     this.profileExporter = profileExporter;
     this.fxCopResultParser = fxCopResultParser;
 
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String[] getSupportedLanguages() {
-    return FxCopConstants.SUPPORTED_LANGUAGES;
   }
 
   /**

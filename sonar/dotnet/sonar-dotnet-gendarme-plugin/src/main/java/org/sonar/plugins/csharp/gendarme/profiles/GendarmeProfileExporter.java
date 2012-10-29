@@ -40,21 +40,28 @@ import java.util.Map;
  */
 public class GendarmeProfileExporter extends ProfileExporter {
 
-  public static class RegularGendarmeProfileExporter extends GendarmeProfileExporter {
-    public RegularGendarmeProfileExporter() {
-      super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
+  public static class CSharpRegularGendarmeProfileExporter extends GendarmeProfileExporter {
+    public CSharpRegularGendarmeProfileExporter() {
+      super("cs", GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME);
     }
   }
 
+  public static class VbNetRegularGendarmeProfileExporter extends GendarmeProfileExporter {
+    public VbNetRegularGendarmeProfileExporter() {
+      super("vbnet", GendarmeConstants.REPOSITORY_KEY + "-vbnet", GendarmeConstants.REPOSITORY_NAME);
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
   public static class UnitTestsGendarmeProfileExporter extends GendarmeProfileExporter {
     public UnitTestsGendarmeProfileExporter() {
-      super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME);
+      super("update-when-SONARPLUGINS-929-activated", GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME);
     }
   }
 
-  protected GendarmeProfileExporter(String repositoryKey, String repositoryName) {
+  protected GendarmeProfileExporter(String languageKey, String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
-    setSupportedLanguages(GendarmeConstants.SUPPORTED_LANGUAGES);
+    setSupportedLanguages(languageKey);
     setMimeType("application/xml");
   }
 

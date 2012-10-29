@@ -29,7 +29,7 @@ public final class SonarWayProfileCSharp extends ProfileDefinition {
 
   private GendarmeProfileImporter profileImporter;
 
-  public SonarWayProfileCSharp(GendarmeProfileImporter.RegularGendarmeProfileImporter profileImporter) {
+  public SonarWayProfileCSharp(GendarmeProfileImporter.CSharpRegularGendarmeProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

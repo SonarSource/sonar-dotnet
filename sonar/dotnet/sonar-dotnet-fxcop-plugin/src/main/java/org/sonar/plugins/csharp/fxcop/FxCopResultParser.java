@@ -109,8 +109,12 @@ public class FxCopResultParser implements BatchExtension {
    */
   public void parse(File file) {
 
-    this.repositoryKey =
+    repositoryKey =
         vsProject.isTest() ? FxCopConstants.TEST_REPOSITORY_KEY : FxCopConstants.REPOSITORY_KEY;
+    if (!"cs".equals(project.getLanguageKey())) {
+      // every repository key should be "fxcop-<language_key>", except for C# for which it is simply "fxcop" (for backward compatibility)
+      repositoryKey += "-" + project.getLanguageKey();
+    }
 
     SMInputFactory inputFactory = StaxParserUtils.initStax();
     FileInputStream fileInputStream = null;

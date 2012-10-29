@@ -29,7 +29,7 @@ public final class SonarWayProfileCSharp extends ProfileDefinition {
 
   private FxCopProfileImporter profileImporter;
 
-  public SonarWayProfileCSharp(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
+  public SonarWayProfileCSharp(FxCopProfileImporter.CSharpRegularFxCopProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

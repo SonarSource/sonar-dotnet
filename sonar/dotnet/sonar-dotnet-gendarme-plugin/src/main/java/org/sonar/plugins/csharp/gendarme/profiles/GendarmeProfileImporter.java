@@ -51,23 +51,32 @@ public class GendarmeProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
   private RuleQuery ruleQuery;
+  private String languageKey;
 
-  public static class RegularGendarmeProfileImporter extends GendarmeProfileImporter {
-    public RegularGendarmeProfileImporter(RuleFinder ruleFinder) {
-      super(GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME, ruleFinder);
+  public static class CSharpRegularGendarmeProfileImporter extends GendarmeProfileImporter {
+    public CSharpRegularGendarmeProfileImporter(RuleFinder ruleFinder) {
+      super("cs", GendarmeConstants.REPOSITORY_KEY, GendarmeConstants.REPOSITORY_NAME, ruleFinder);
     }
   }
 
+  public static class VbNetRegularGendarmeProfileImporter extends GendarmeProfileImporter {
+    public VbNetRegularGendarmeProfileImporter(RuleFinder ruleFinder) {
+      super("vbnet", GendarmeConstants.REPOSITORY_KEY + "-vbnet", GendarmeConstants.REPOSITORY_NAME, ruleFinder);
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
   public static class UnitTestsGendarmeProfileImporter extends GendarmeProfileImporter {
     public UnitTestsGendarmeProfileImporter(RuleFinder ruleFinder) {
-      super(GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME, ruleFinder);
+      super("update-when-SONARPLUGINS-929-activated", GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME, ruleFinder);
     }
   }
 
-  protected GendarmeProfileImporter(String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
+  protected GendarmeProfileImporter(String languageKey, String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
     super(repositoryKey, repositoryName);
-    setSupportedLanguages(GendarmeConstants.SUPPORTED_LANGUAGES);
+    setSupportedLanguages(languageKey);
     this.ruleFinder = ruleFinder;
+    this.languageKey = languageKey;
     this.ruleQuery = RuleQuery.create().withRepositoryKey(repositoryKey);
   }
 
@@ -77,6 +86,7 @@ public class GendarmeProfileImporter extends ProfileImporter {
   @Override
   public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
     RulesProfile profile = RulesProfile.create();
+    profile.setLanguage(languageKey);
 
     SMInputFactory inputFactory = initStax();
     try {

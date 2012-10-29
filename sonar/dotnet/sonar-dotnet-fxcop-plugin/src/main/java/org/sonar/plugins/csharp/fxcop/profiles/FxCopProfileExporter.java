@@ -48,21 +48,28 @@ public class FxCopProfileExporter extends ProfileExporter {
   private static final String FXCOP_PROJECT_FILE_HEADER = "fxcop-project-file-header.txt";
   private static final String FXCOP_PROJECT_FILE_FOOTER = "fxcop-project-file-footer.txt";
 
-  public static class RegularFxCopProfileExporter extends FxCopProfileExporter {
-    public RegularFxCopProfileExporter() {
-      super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
+  public static class CSharpRegularFxCopProfileExporter extends FxCopProfileExporter {
+    public CSharpRegularFxCopProfileExporter() {
+      super("cs", FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME);
     }
   }
 
+  public static class VbNetRegularFxCopProfileExporter extends FxCopProfileExporter {
+    public VbNetRegularFxCopProfileExporter() {
+      super("vbnet", FxCopConstants.REPOSITORY_KEY + "-vbnet", FxCopConstants.REPOSITORY_NAME);
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
   public static class UnitTestsFxCopProfileExporter extends FxCopProfileExporter {
     public UnitTestsFxCopProfileExporter() {
-      super(FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME);
+      super("update-when-SONARPLUGINS-929-activated", FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME);
     }
   }
 
-  protected FxCopProfileExporter(String repositoryKey, String repositoryName) {
+  protected FxCopProfileExporter(String languageKey, String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
-    setSupportedLanguages(FxCopConstants.SUPPORTED_LANGUAGES);
+    setSupportedLanguages(languageKey);
     setMimeType("application/xml");
   }
 

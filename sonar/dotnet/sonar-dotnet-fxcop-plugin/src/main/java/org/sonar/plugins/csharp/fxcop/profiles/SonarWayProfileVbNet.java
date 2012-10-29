@@ -29,7 +29,7 @@ public final class SonarWayProfileVbNet extends ProfileDefinition {
 
   private FxCopProfileImporter profileImporter;
 
-  public SonarWayProfileVbNet(FxCopProfileImporter.RegularFxCopProfileImporter profileImporter) {
+  public SonarWayProfileVbNet(FxCopProfileImporter.VbNetRegularFxCopProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 

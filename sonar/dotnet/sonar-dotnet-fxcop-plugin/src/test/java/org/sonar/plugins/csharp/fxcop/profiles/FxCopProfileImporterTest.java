@@ -35,6 +35,7 @@ import org.sonar.test.TestUtils;
 import java.io.Reader;
 import java.io.StringReader;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -50,7 +51,7 @@ public class FxCopProfileImporterTest {
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new FxCopProfileImporter.RegularFxCopProfileImporter(newRuleFinder());
+    importer = new FxCopProfileImporter.CSharpRegularFxCopProfileImporter(newRuleFinder());
   }
 
   @Test
@@ -66,6 +67,19 @@ public class FxCopProfileImporterTest {
     assertNotNull(profile.getActiveRuleByConfigKey(FxCopConstants.REPOSITORY_KEY,
         "AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll"));
     assertThat(messages.hasErrors(), is(false));
+    // check the name of the repo
+    assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("fxcop");
+  }
+
+  @Test
+  public void shouldCreateImporterForVbNet() {
+    importer = new FxCopProfileImporter.VbNetRegularFxCopProfileImporter(newRuleFinder());
+
+    Reader reader = new StringReader(TestUtils.getResourceContent("/ProfileImporter/SimpleRules.FxCop.xml"));
+    RulesProfile profile = importer.importProfile(reader, messages);
+
+    // check the name of the repo
+    assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("fxcop-vbnet");
   }
 
   private RuleFinder newRuleFinder() {

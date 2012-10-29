@@ -31,6 +31,8 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 public class GendarmeProfileExporterTest {
 
   @Test
@@ -56,8 +58,20 @@ public class GendarmeProfileExporterTest {
     activeRule.setParameter("SuccessThreshold", "13");
 
     StringWriter writer = new StringWriter();
-    new GendarmeProfileExporter.RegularGendarmeProfileExporter().exportProfile(profile, writer);
+    GendarmeProfileExporter exporter = new GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter();
+    assertThat(exporter.getKey()).isEqualTo("gendarme");
+    assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
+
+    exporter.exportProfile(profile, writer);
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.Gendarme.exported.xml"), writer.toString());
+  }
+
+  @Test
+  public void testExporterForVbNet() {
+    GendarmeProfileExporter exporter = new GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter();
+    // just test the differences with C#
+    assertThat(exporter.getKey()).isEqualTo("gendarme-vbnet");
+    assertThat(exporter.getSupportedLanguages()).containsOnly("vbnet");
   }
 
 }

@@ -52,7 +52,7 @@ import java.util.Collections;
 /**
  * Collects the Gendarme reporting into sonar.
  */
-public class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
+public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 
@@ -62,18 +62,51 @@ public class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
   private GendarmeResultParser gendarmeResultParser;
 
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
-  public static class RegularGendarmeSensor extends GendarmeSensor {
-    public RegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.RegularGendarmeProfileExporter profileExporter,
+  public static class CSharpRegularGendarmeSensor extends GendarmeSensor {
+    public CSharpRegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter profileExporter,
         GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
+    }
   }
 
+  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
+  public static class VbNetRegularGendarmeSensor extends GendarmeSensor {
+    public VbNetRegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter profileExporter,
+        GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"vbnet"};
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929)
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class UnitTestsGendarmeSensor extends GendarmeSensor {
     public UnitTestsGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.UnitTestsGendarmeProfileExporter profileExporter,
         GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String[] getSupportedLanguages() {
+      return new String[] {"cs"};
     }
 
     /**
@@ -109,14 +142,6 @@ public class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
     this.rulesProfile = rulesProfile;
     this.profileExporter = profileExporter;
     this.gendarmeResultParser = gendarmeResultParser;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String[] getSupportedLanguages() {
-    return GendarmeConstants.SUPPORTED_LANGUAGES;
   }
 
   /**

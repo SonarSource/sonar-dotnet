@@ -65,12 +65,16 @@ public class GendarmePlugin extends SonarPlugin {
    */
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(GendarmeSensor.RegularGendarmeSensor.class);
+    // sensors
+    list.add(GendarmeSensor.CSharpRegularGendarmeSensor.class);
+    list.add(GendarmeSensor.VbNetRegularGendarmeSensor.class);
 
     // Rules and profiles
     list.add(GendarmeRuleRepositoryProvider.class);
-    list.add(GendarmeProfileImporter.RegularGendarmeProfileImporter.class);
-    list.add(GendarmeProfileExporter.RegularGendarmeProfileExporter.class);
+    list.add(GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter.class);
+    list.add(GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter.class);
+    list.add(GendarmeProfileImporter.CSharpRegularGendarmeProfileImporter.class);
+    list.add(GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter.class);
     list.add(SonarWayProfileCSharp.class);
     list.add(SonarWayProfileVbNet.class);
 

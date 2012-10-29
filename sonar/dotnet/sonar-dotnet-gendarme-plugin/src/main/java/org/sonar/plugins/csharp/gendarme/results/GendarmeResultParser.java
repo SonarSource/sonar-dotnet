@@ -88,6 +88,10 @@ public class GendarmeResultParser implements BatchExtension {
   public void parse(File file) {
     this.repositoryKey =
         vsProject.isTest() ? GendarmeConstants.TEST_REPOSITORY_KEY : GendarmeConstants.REPOSITORY_KEY;
+    if (!"cs".equals(project.getLanguageKey())) {
+      // every repository key should be "fxcop-<language_key>", except for C# for which it is simply "fxcop" (for backward compatibility)
+      repositoryKey += "-" + project.getLanguageKey();
+    }
 
     SMInputFactory inputFactory = StaxParserUtils.initStax();
     FileInputStream fileInputStream = null;

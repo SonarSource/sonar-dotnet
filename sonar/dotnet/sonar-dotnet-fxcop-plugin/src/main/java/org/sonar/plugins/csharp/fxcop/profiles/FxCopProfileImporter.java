@@ -42,23 +42,32 @@ import java.util.List;
 public class FxCopProfileImporter extends ProfileImporter {
 
   private RuleFinder ruleFinder;
+  private String languageKey;
 
-  public static class RegularFxCopProfileImporter extends FxCopProfileImporter {
-    public RegularFxCopProfileImporter(RuleFinder ruleFinder) {
-      super(FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME, ruleFinder);
+  public static class CSharpRegularFxCopProfileImporter extends FxCopProfileImporter {
+    public CSharpRegularFxCopProfileImporter(RuleFinder ruleFinder) {
+      super("cs", FxCopConstants.REPOSITORY_KEY, FxCopConstants.REPOSITORY_NAME, ruleFinder);
     }
   }
 
+  public static class VbNetRegularFxCopProfileImporter extends FxCopProfileImporter {
+    public VbNetRegularFxCopProfileImporter(RuleFinder ruleFinder) {
+      super("vbnet", FxCopConstants.REPOSITORY_KEY + "-vbnet", FxCopConstants.REPOSITORY_NAME, ruleFinder);
+    }
+  }
+
+  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
   public static class UnitTestsFxCopProfileImporter extends FxCopProfileImporter {
     public UnitTestsFxCopProfileImporter(RuleFinder ruleFinder) {
-      super(FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME, ruleFinder);
+      super("update-when-SONARPLUGINS-929-activated", FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME, ruleFinder);
     }
   }
 
-  protected FxCopProfileImporter(String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
+  protected FxCopProfileImporter(String languageKey, String repositoryKey, String repositoryName, RuleFinder ruleFinder) {
     super(repositoryKey, repositoryName);
-    setSupportedLanguages(FxCopConstants.SUPPORTED_LANGUAGES);
+    setSupportedLanguages(languageKey);
     this.ruleFinder = ruleFinder;
+    this.languageKey = languageKey;
   }
 
   /**
@@ -67,6 +76,7 @@ public class FxCopProfileImporter extends ProfileImporter {
   @Override
   public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
     RulesProfile profile = RulesProfile.create();
+    profile.setLanguage(languageKey);
 
     try {
       List<FxCopRule> fxcopConfig = FxCopRuleParser.parse(IOUtils.toString(reader));

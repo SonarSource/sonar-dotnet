@@ -29,6 +29,8 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import static org.fest.assertions.Assertions.assertThat;
+
 public class FxCopProfileExporterTest {
 
   @Test
@@ -43,9 +45,20 @@ public class FxCopProfileExporterTest {
         .setConfigKey("AvoidDuplicateAccelerators@$(FxCopDir)\\Rules\\GlobalizationRules.dll"), null);
 
     StringWriter writer = new StringWriter();
-    new FxCopProfileExporter.RegularFxCopProfileExporter().exportProfile(profile, writer);
+    FxCopProfileExporter exporter = new FxCopProfileExporter.CSharpRegularFxCopProfileExporter();
+    assertThat(exporter.getKey()).isEqualTo("fxcop");
+    assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
 
+    exporter.exportProfile(profile, writer);
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/ProfileExporter/SimpleRules.FxCop.exported.xml"), writer.toString());
+  }
+
+  @Test
+  public void testExporterForVbNet() {
+    FxCopProfileExporter exporter = new FxCopProfileExporter.VbNetRegularFxCopProfileExporter();
+    // just test the differences with C#
+    assertThat(exporter.getKey()).isEqualTo("fxcop-vbnet");
+    assertThat(exporter.getSupportedLanguages()).containsOnly("vbnet");
   }
 
 }

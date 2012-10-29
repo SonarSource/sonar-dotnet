@@ -36,6 +36,7 @@ import org.sonar.test.TestUtils;
 import java.io.Reader;
 import java.io.StringReader;
 
+import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -51,7 +52,7 @@ public class GendarmeProfileImporterTest {
   @Before
   public void before() {
     messages = ValidationMessages.create();
-    importer = new GendarmeProfileImporter.RegularGendarmeProfileImporter(newRuleFinder());
+    importer = new GendarmeProfileImporter.CSharpRegularGendarmeProfileImporter(newRuleFinder());
   }
 
   @Test
@@ -73,6 +74,19 @@ public class GendarmeProfileImporterTest {
     assertNotNull(rule);
     assertThat(rule.getParameter("SuccessThreshold"), is("25"));
     assertThat(messages.hasErrors(), is(false));
+    // check the name of the repo
+    assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("gendarme");
+  }
+
+  @Test
+  public void shouldCreateImporterForVbNet() {
+    importer = new GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter(newRuleFinder());
+
+    Reader reader = new StringReader(TestUtils.getResourceContent("/ProfileImporter/SimpleRules.Gendarme.xml"));
+    RulesProfile profile = importer.importProfile(reader, messages);
+
+    // check the name of the repo
+    assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("gendarme-vbnet");
   }
 
   private RuleFinder newRuleFinder() {

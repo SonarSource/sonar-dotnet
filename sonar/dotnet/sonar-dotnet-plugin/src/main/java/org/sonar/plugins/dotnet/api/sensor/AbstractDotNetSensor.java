@@ -64,7 +64,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    if (project.isRoot()) {
+    if (project.isRoot() || !isLanguageSupported(project.getLanguageKey())) {
       return false;
     }
     boolean skipMode = MODE_SKIP.equalsIgnoreCase(executionMode);
@@ -73,7 +73,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
       return false;
     }
 
-    return isLanguageSupported(project.getLanguageKey());
+    return true;
   }
 
   private boolean isLanguageSupported(String languageKey) {

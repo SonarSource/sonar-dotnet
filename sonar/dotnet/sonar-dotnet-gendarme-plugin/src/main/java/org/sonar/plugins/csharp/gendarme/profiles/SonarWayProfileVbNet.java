@@ -29,7 +29,7 @@ public final class SonarWayProfileVbNet extends ProfileDefinition {
 
   private GendarmeProfileImporter profileImporter;
 
-  public SonarWayProfileVbNet(GendarmeProfileImporter.RegularGendarmeProfileImporter profileImporter) {
+  public SonarWayProfileVbNet(GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter profileImporter) {
     this.profileImporter = profileImporter;
   }
 
