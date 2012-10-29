@@ -40,6 +40,7 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.csharp.core.CSharpCorePlugin;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 
@@ -56,7 +57,7 @@ public class CSharpSquidSensorTest {
 
   @Before
   public void init() {
-    DotNetConfiguration dotNetConfiguration = new DotNetConfiguration(new Settings(new PropertyDefinitions(CSharpSquidPlugin.class)));
+    DotNetConfiguration dotNetConfiguration = new DotNetConfiguration(new Settings(new PropertyDefinitions(CSharpCorePlugin.class)));
     CSharp language = new CSharp(dotNetConfiguration);
     CSharpResourcesBridge cSharpResourcesBridge = mock(CSharpResourcesBridge.class);
     ResourceCreationLock resourceCreationLock = mock(ResourceCreationLock.class);
