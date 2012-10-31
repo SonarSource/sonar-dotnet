@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
+import org.sonar.api.measures.AverageFormula;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.Metrics;
@@ -41,7 +42,7 @@ public class TestMetrics implements Metrics {
 
   public static final Metric ASSERT_PER_TEST = new Metric.Builder("assert_per_test", "Asserts per Test", Metric.ValueType.FLOAT)
       .setDescription("The average number of asserts per test").setDirection(Metric.DIRECTION_BETTER).setQualitative(true)
-      .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(new AverageAssertFormula()).create();
+      .setDomain(CoreMetrics.DOMAIN_TESTS).setFormula(AverageFormula.create(TestMetrics.COUNT_ASSERTS, CoreMetrics.TESTS)).create();
 
   public static final Metric ELOC = new Metric.Builder("eloc", "Effective lines of code", Metric.ValueType.INT)
       .setDescription("The number of lines of code with statements").setDirection(Metric.DIRECTION_WORST).setQualitative(false)
