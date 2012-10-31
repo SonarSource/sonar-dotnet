@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import org.codehaus.staxmate.in.SMFilterFactory;
@@ -27,7 +29,6 @@ import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.util.ArrayList;
 import java.util.Collections;

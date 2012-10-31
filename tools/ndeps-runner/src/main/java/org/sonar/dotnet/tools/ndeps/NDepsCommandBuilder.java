@@ -19,12 +19,13 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.tools.CilToolCommandBuilderSupport;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 

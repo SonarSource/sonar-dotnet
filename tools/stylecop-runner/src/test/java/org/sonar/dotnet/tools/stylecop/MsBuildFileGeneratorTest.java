@@ -19,8 +19,8 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 
 import com.google.common.collect.Lists;
 import org.junit.Before;

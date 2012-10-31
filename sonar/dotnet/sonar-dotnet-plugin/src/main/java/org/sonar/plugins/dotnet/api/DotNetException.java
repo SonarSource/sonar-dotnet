@@ -17,29 +17,39 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-/*
- * Created on Apr 16, 2009
- *
+/**
+ * 
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api;
 
 /**
- * Possible types of .Net Artifact.
+ * Generic exception class for the .NET Ecosystem
  * 
- * @author Jose CHILLAN Apr 16, 2009
  */
-public enum ArtifactType {
-  /**
-   * Artifact that corresponds to a .dll.
-   */
-  LIBRARY,
-  /**
-   * Artifact that corresponds to a .exe.
-   */
-  EXECUTABLE,
+public class DotNetException extends Exception {
+
+  private static final long serialVersionUID = -2730236966462112505L;
 
   /**
-   * Artifact that corresponds to a web project.
+   * Creates a {@link DotNetException}
+   * 
+   * @param message
+   *          the message
+   * @param cause
+   *          the cause
    */
-  WEB
+  public DotNetException(String message, Throwable cause) {
+    super(message, cause);
+  }
+
+  /**
+   * Creates a {@link DotNetException}
+   * 
+   * @param cause
+   *          the cause
+   */
+  public DotNetException(String cause) {
+    super(cause);
+  }
+
 }

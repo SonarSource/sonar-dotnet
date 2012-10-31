@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,10 +41,7 @@ import org.sonar.plugins.csharp.gallio.results.execution.model.TestCaseDetail;
 import org.sonar.plugins.csharp.gallio.results.execution.model.TestStatus;
 import org.sonar.plugins.csharp.gallio.results.execution.model.UnitTestReport;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 import org.sonar.plugins.dotnet.core.DotNetCorePlugin;
 import org.sonar.test.TestUtils;
 

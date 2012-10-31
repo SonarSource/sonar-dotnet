@@ -20,7 +20,7 @@
 /*
  * Created on Sep 1, 2009
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api.microsoft;
 
 import org.apache.commons.lang.StringUtils;
 

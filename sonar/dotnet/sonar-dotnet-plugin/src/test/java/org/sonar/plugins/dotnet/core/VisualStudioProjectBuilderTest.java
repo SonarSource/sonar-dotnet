@@ -19,8 +19,10 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -32,7 +34,6 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

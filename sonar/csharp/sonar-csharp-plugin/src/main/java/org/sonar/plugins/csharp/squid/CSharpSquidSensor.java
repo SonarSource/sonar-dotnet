@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.squid;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+
 import com.google.common.collect.Lists;
 import com.sonar.csharp.checks.CheckList;
 import com.sonar.csharp.squid.CSharpConfiguration;
@@ -52,7 +54,6 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;

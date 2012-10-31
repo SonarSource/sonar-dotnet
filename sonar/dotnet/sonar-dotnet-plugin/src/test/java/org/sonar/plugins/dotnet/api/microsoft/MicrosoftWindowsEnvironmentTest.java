@@ -17,10 +17,15 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.dotnet.api;
+package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+
+
 
 import com.google.common.collect.Lists;
 import org.junit.Test;

@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.gendarme.results;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.collect.Maps;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,9 +33,6 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

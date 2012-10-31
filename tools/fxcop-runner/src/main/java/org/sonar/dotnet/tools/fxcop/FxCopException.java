@@ -19,12 +19,12 @@
  */
 package org.sonar.dotnet.tools.fxcop;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.DotNetException;
 
 /**
  * Exception generated for FxCop execution.
  */
-public class FxCopException extends DotNetToolsException {
+public class FxCopException extends DotNetException {
 
   private static final long serialVersionUID = 7839955810053355345L;
 

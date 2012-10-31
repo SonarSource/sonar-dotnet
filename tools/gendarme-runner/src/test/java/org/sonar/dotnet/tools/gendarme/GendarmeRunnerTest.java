@@ -19,12 +19,13 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

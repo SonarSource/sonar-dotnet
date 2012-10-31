@@ -20,9 +20,9 @@
 /*
  * Created on Apr 16, 2009
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.DotNetException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -177,9 +177,9 @@ public final class ModelFactory {
    *          the solution name
    * @return the generated solution
    * @throws IOException
-   * @throws DotNetToolsException
+   * @throws DotNetException
    */
-  public static VisualStudioSolution getSolution(File baseDirectory, String solutionName) throws IOException, DotNetToolsException {
+  public static VisualStudioSolution getSolution(File baseDirectory, String solutionName) throws IOException, DotNetException {
     File solutionFile = new File(baseDirectory, solutionName);
     return getSolution(solutionFile);
   }
@@ -189,9 +189,9 @@ public final class ModelFactory {
    *          the solution file
    * @return a new visual studio solution
    * @throws IOException
-   * @throws DotNetToolsException
+   * @throws DotNetException
    */
-  public static VisualStudioSolution getSolution(File solutionFile) throws IOException, DotNetToolsException {
+  public static VisualStudioSolution getSolution(File solutionFile) throws IOException, DotNetException {
 
     String solutionContent = FileUtils.readFileToString(solutionFile);
     List<BuildConfiguration> buildConfigurations = getBuildConfigurations(solutionContent);
@@ -233,10 +233,10 @@ public final class ModelFactory {
    *          the text content of the solution file
    * @return a list of projects
    * @throws IOException
-   * @throws DotNetToolsException
+   * @throws DotNetException
    */
   private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<BuildConfiguration> buildConfigurations)
-      throws IOException, DotNetToolsException {
+      throws IOException, DotNetException {
 
     File baseDirectory = solutionFile.getParentFile();
 
@@ -297,10 +297,10 @@ public final class ModelFactory {
    * @param projectFile
    *          the project file
    * @return the visual project if possible to define
-   * @throws DotNetToolsException
+   * @throws DotNetException
    * @throws FileNotFoundException
    */
-  public static VisualStudioProject getProject(File projectFile) throws FileNotFoundException, DotNetToolsException {
+  public static VisualStudioProject getProject(File projectFile) throws FileNotFoundException, DotNetException {
     String projectName = projectFile.getName();
     return getProject(projectFile, projectName, null);
   }
@@ -312,12 +312,12 @@ public final class ModelFactory {
    *          the project file
    * @param projectName
    *          the name of the project
-   * @throws DotNetToolsException
+   * @throws DotNetException
    * @throws FileNotFoundException
    *           if the file was not found
    */
   public static VisualStudioProject getProject(File projectFile, String projectName, List<BuildConfiguration> buildConfigurations)
-      throws FileNotFoundException, DotNetToolsException {
+      throws FileNotFoundException, DotNetException {
 
     VisualStudioProject project = new VisualStudioProject();
     project.setProjectFile(projectFile);
@@ -386,7 +386,7 @@ public final class ModelFactory {
 
       return project;
     } catch (XPathExpressionException xpee) {
-      throw new DotNetToolsException("Error while processing the project " + projectFile, xpee);
+      throw new DotNetException("Error while processing the project " + projectFile, xpee);
     }
   }
 
@@ -523,16 +523,16 @@ public final class ModelFactory {
    * @param expression
    * @param projectFile
    * @return
-   * @throws DotNetToolsException
+   * @throws DotNetException
    * @throws FileNotFoundException
    */
-  private static String extractProjectProperty(XPathExpression expression, File projectFile) throws DotNetToolsException {
+  private static String extractProjectProperty(XPathExpression expression, File projectFile) throws DotNetException {
     try {
       FileInputStream file = new FileInputStream(projectFile);
       InputSource source = new InputSource(file);
       return expression.evaluate(source);
     } catch (Exception e) {
-      throw new DotNetToolsException("Could not evaluate the expression " + expression + " on project " + projectFile, e);
+      throw new DotNetException("Could not evaluate the expression " + expression + " on project " + projectFile, e);
     }
   }
 

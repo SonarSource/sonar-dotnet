@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Decorator;
@@ -37,7 +39,6 @@ import org.sonar.graph.Edge;
 import org.sonar.graph.IncrementalCyclesAndFESSolver;
 import org.sonar.graph.MinimumFeedbackEdgeSetSolver;
 import org.sonar.plugins.csharp.ndeps.internal.DsmSerializer;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 
 import java.util.ArrayList;
 import java.util.Collection;

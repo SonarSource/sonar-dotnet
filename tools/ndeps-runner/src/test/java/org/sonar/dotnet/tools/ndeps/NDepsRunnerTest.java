@@ -19,13 +19,14 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.utils.command.Command;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

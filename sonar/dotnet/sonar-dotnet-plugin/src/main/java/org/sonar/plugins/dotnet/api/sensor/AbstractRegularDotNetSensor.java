@@ -19,13 +19,14 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 
 import java.io.File;
 import java.util.Collection;

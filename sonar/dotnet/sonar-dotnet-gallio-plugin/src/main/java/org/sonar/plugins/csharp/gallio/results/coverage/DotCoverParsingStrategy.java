@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -31,7 +33,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.CoveragePoint;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import javax.xml.stream.XMLStreamException;
 

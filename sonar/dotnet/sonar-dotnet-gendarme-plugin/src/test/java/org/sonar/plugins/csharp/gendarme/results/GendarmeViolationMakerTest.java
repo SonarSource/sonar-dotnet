@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.gendarme.results;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import com.google.common.collect.Lists;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,10 +36,7 @@ import org.sonar.api.rules.RulePriority;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 

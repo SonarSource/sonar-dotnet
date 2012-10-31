@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
@@ -35,9 +39,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;

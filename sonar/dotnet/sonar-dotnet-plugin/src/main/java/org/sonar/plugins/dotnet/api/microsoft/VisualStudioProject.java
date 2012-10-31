@@ -20,7 +20,7 @@
 /*
  * Created on Apr 16, 2009
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api.microsoft;
 
 import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;

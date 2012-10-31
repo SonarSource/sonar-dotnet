@@ -19,14 +19,15 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.SonarException;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.plugins.dotnet.api.utils.ZipUtils;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.IOException;

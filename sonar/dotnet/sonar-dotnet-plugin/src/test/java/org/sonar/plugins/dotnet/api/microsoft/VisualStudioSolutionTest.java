@@ -17,7 +17,11 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api.microsoft;
+
+import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 
 import org.junit.Test;
 import org.sonar.api.resources.Project;

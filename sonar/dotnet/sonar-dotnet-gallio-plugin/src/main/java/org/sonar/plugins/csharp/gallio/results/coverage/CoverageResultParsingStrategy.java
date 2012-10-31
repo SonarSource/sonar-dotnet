@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import org.codehaus.staxmate.in.SMInputCursor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.util.List;
 

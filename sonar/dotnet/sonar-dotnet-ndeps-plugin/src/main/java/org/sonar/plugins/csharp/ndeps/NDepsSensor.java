@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,10 +36,8 @@ import org.sonar.dotnet.tools.ndeps.NDepsRunner;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
 
 import java.io.File;
 

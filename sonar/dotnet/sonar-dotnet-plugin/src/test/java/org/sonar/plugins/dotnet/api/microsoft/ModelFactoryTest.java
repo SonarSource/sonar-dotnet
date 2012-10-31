@@ -21,7 +21,14 @@
  * Created on Sep 1, 2009
  *
  */
-package org.sonar.plugins.dotnet.api.visualstudio;
+package org.sonar.plugins.dotnet.api.microsoft;
+
+import org.sonar.plugins.dotnet.api.microsoft.BuildConfiguration;
+import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
+import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioWebProject;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;

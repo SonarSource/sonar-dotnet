@@ -19,13 +19,16 @@
  */
 package org.sonar.plugins.dotnet.api.tools;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
+import org.sonar.plugins.dotnet.api.DotNetException;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.util.Collection;
@@ -50,7 +53,7 @@ public abstract class CilToolCommandBuilderSupport {
 
   protected String[] assembliesToScan = new String[] {};
 
-  public abstract Command toCommand() throws DotNetToolsException;
+  public abstract Command toCommand() throws DotNetException;
 
   /**
    * Set the assemblies to scan if the information should not be taken from the VS configuration files.

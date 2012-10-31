@@ -19,12 +19,12 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.DotNetException;
 
 /**
  * Exception generated for Gendarme execution.
  */
-public class GendarmeException extends DotNetToolsException {
+public class GendarmeException extends DotNetException {
 
   private static final long serialVersionUID = -8744090490644930724L;
 

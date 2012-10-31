@@ -17,15 +17,15 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.dotnet.api;
+package org.sonar.plugins.dotnet.api.microsoft;
+
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.util.Map;

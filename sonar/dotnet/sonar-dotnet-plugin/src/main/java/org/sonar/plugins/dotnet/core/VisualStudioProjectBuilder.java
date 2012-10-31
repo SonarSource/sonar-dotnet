@@ -19,6 +19,15 @@
  */
 package org.sonar.plugins.dotnet.core;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
+import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
+import org.sonar.plugins.dotnet.api.DotNetException;
+
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -29,12 +38,6 @@ import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
-import org.sonar.plugins.dotnet.api.visualstudio.ModelFactory;
-import org.sonar.plugins.dotnet.api.visualstudio.SourceFile;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.visualstudio.VisualStudioSolution;
 
 import java.io.File;
 import java.io.IOException;
@@ -179,7 +182,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       microsoftWindowsEnvironment.setCurrentSolution(solution);
     } catch (IOException e) {
       throw new SonarException("Error occured while reading Visual Studio files.", e);
-    } catch (DotNetToolsException e) {
+    } catch (DotNetException e) {
       throw new SonarException("Error occured while reading Visual Studio files.", e);
     }
   }

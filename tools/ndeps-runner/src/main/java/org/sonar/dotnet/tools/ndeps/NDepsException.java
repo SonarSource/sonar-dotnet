@@ -19,12 +19,12 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
-import org.sonar.plugins.dotnet.api.tools.DotNetToolsException;
+import org.sonar.plugins.dotnet.api.DotNetException;
 
 /**
  * Exceptions generated for DependencyParser execution.
  */
-public class NDepsException extends DotNetToolsException {
+public class NDepsException extends DotNetException {
 
   private static final long serialVersionUID = 1L;
 

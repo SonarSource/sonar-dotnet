@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -38,7 +40,6 @@ import org.sonar.plugins.csharp.gallio.results.coverage.CoverageResultParser;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.SourceLine;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-import org.sonar.plugins.dotnet.api.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;

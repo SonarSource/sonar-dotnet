@@ -17,39 +17,29 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-/**
- * 
+/*
+ * Created on Apr 16, 2009
+ *
  */
-package org.sonar.plugins.dotnet.api.tools;
+package org.sonar.plugins.dotnet.api.microsoft;
 
 /**
- * Exception class for the .NET Tools
+ * Possible types of .Net Artifact.
  * 
+ * @author Jose CHILLAN Apr 16, 2009
  */
-public class DotNetToolsException extends Exception {
-
-  private static final long serialVersionUID = -2730236966462112505L;
+public enum ArtifactType {
+  /**
+   * Artifact that corresponds to a .dll.
+   */
+  LIBRARY,
+  /**
+   * Artifact that corresponds to a .exe.
+   */
+  EXECUTABLE,
 
   /**
-   * Creates a {@link DotNetToolsException}
-   * 
-   * @param message
-   *          the message
-   * @param cause
-   *          the cause
+   * Artifact that corresponds to a web project.
    */
-  public DotNetToolsException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-  /**
-   * Creates a {@link DotNetToolsException}
-   * 
-   * @param cause
-   *          the cause
-   */
-  public DotNetToolsException(String cause) {
-    super(cause);
-  }
-
+  WEB
 }
