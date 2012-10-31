@@ -26,23 +26,23 @@ import org.sonar.api.rules.RuleRepository;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 public class CSharpRuleRepository extends RuleRepository {
 
   /* We have to put those in our own repository, see http://jira.codehaus.org/browse/SONAR-3157 */
-  private final CSharpCheck[] customerProvidedChecks;
+  private final CSharpCheck[] customChecks;
 
   public CSharpRuleRepository() {
     this(new CSharpCheck[0]);
   }
 
-  public CSharpRuleRepository(CSharpCheck[] customerProvidedChecks) {
+  public CSharpRuleRepository(CSharpCheck[] providedChecks) {
     super(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY);
     setName(CSharpSquidConstants.REPOSITORY_NAME);
-    this.customerProvidedChecks = Arrays.copyOfRange(customerProvidedChecks, 0, customerProvidedChecks.length);
+    this.customChecks = new CSharpCheck[providedChecks.length];
+    System.arraycopy(providedChecks, 0, this.customChecks, 0, providedChecks.length);
   }
 
   @Override
@@ -51,7 +51,7 @@ public class CSharpRuleRepository extends RuleRepository {
   }
 
   public Collection<Class> getChecks() {
-    Collection<Class> allChecks = CSharpCheck.toCollection(customerProvidedChecks);
+    Collection<Class> allChecks = CSharpCheck.toCollection(customChecks);
     allChecks.addAll(CheckList.getChecks());
     return allChecks;
   }
