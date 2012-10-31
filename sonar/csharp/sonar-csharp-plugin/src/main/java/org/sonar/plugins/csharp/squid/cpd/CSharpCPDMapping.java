@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp.squid.cpd;
 
 import net.sourceforge.pmd.cpd.Tokenizer;
 import org.sonar.api.batch.AbstractCpdMapping;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
@@ -34,12 +35,11 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   private final boolean ignoreLiterals;
   private final Charset charset;
 
-  public CSharpCPDMapping(CSharp csharp, Project project) {
+  public CSharpCPDMapping(CSharp csharp, Project project, Settings settings) {
     super();
     this.csharp = csharp;
     this.charset = project.getFileSystem().getSourceCharset();
-    ignoreLiterals = project.getConfiguration().getBoolean(CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY,
-        CSharpSquidConstants.CPD_IGNORE_LITERALS_DEFVALUE);
+    ignoreLiterals = settings.getBoolean(CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY);
   }
 
   public Language getLanguage() {

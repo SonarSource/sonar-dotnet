@@ -114,6 +114,8 @@ public class UnitTestReport {
         break;
       case SUCCESS:
         break;
+      default:
+        // do nothing
     }
 
     // We complete the other indicators

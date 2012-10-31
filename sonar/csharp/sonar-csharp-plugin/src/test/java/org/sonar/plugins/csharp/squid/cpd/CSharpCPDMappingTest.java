@@ -19,14 +19,15 @@
  */
 package org.sonar.plugins.csharp.squid.cpd;
 
-import org.apache.commons.configuration.BaseConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.csharp.api.CSharp;
+import org.sonar.plugins.csharp.core.CSharpCorePlugin;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -38,18 +39,21 @@ public class CSharpCPDMappingTest {
   @Mock
   private Project project;
   @Mock
-  private ProjectFileSystem projectFileSystem;;
+  private ProjectFileSystem projectFileSystem;
+
+  private Settings settings;
 
   @Before
   public void init() {
     MockitoAnnotations.initMocks(this);
     when(project.getFileSystem()).thenReturn(projectFileSystem);
-    when(project.getConfiguration()).thenReturn(new BaseConfiguration());
+
+    settings = Settings.createForComponent(new CSharpCorePlugin());
   }
 
   @Test
   public void test() {
-    CSharpCPDMapping mapping = new CSharpCPDMapping(language, project);
+    CSharpCPDMapping mapping = new CSharpCPDMapping(language, project, settings);
 
     assertThat(mapping.getLanguage()).isSameAs(language);
     assertThat(mapping.getTokenizer()).isInstanceOf(CSharpCPDTokenizer.class);
