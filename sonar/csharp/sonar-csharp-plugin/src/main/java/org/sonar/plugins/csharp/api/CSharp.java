@@ -46,7 +46,7 @@ public class CSharp extends AbstractLanguage {
    */
   public String[] getFileSuffixes() {
     String[] suffixes = configuration.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
-    if (suffixes == null || suffixes.length == 0) {
+    if (suffixes.length == 0) {
       suffixes = StringUtils.split(CSharpConstants.FILE_SUFFIXES_DEFVALUE, ",");
     }
     return suffixes;
