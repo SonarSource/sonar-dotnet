@@ -26,6 +26,10 @@ import javax.xml.stream.XMLInputFactory;
 
 public final class StaxParserUtils {
 
+  // hide constructor for utility class
+  private StaxParserUtils() {
+  }
+
   public static SMInputFactory initStax() {
     XMLInputFactory xmlFactory = XMLInputFactory2.newInstance();
     xmlFactory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
