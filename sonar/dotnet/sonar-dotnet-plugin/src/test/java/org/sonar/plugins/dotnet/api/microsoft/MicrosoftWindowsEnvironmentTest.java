@@ -19,19 +19,11 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-
-
-
 import com.google.common.collect.Lists;
 import org.junit.Test;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -81,19 +73,6 @@ public class MicrosoftWindowsEnvironmentTest {
     MicrosoftWindowsEnvironment microsoftWindowsEnvironment = new MicrosoftWindowsEnvironment();
     microsoftWindowsEnvironment.lock();
     microsoftWindowsEnvironment.setCurrentSolution(null);
-  }
-
-  @Test
-  public void shouldTellIfDotNetLanguage() {
-    // TRUE
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage("cs")).isTrue();
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage("vbnet")).isTrue();
-
-    // FALSE
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage(null)).isFalse();
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage("")).isFalse();
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage("java")).isFalse();
-    assertThat(MicrosoftWindowsEnvironment.isDotNetLanguage("vb")).isFalse();
   }
 
 }

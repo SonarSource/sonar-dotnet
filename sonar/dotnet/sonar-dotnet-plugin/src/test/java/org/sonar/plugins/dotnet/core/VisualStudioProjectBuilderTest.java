@@ -19,11 +19,6 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
-
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -34,9 +29,15 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Properties;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -44,6 +45,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class VisualStudioProjectBuilderTest {
 
@@ -86,9 +89,15 @@ public class VisualStudioProjectBuilderTest {
   }
 
   @Test
+  public void testNoDotNetProject() {
+    settings.setProperty("sonar.language", "foo");
+    projectBuilder.build(reactor);
+    assertThat(reactor.getRoot().getSubProjects()).isEmpty();
+  }
+
+  @Test
   public void testNotValidSdkDir() throws Exception {
     settings.setProperty(DotNetConstants.DOTNET_4_0_SDK_DIR_KEY, "foo");
-    projectBuilder = new VisualStudioProjectBuilder(reactor, new DotNetConfiguration(settings), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
     // a warning must have been logged, but the value is ketp as is
     assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory()).isEqualTo(new File("foo"));
@@ -97,7 +106,6 @@ public class VisualStudioProjectBuilderTest {
   @Test
   public void testNotValidSilverlightDir() throws Exception {
     settings.setProperty(DotNetConstants.SILVERLIGHT_4_MSCORLIB_LOCATION_KEY, "foo");
-    projectBuilder = new VisualStudioProjectBuilder(reactor, new DotNetConfiguration(settings), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
     // a warning must have been logged, but the value is ketp as is
     assertThat(microsoftWindowsEnvironment.getSilverlightDirectory()).isEqualTo(new File("foo"));
@@ -181,12 +189,24 @@ public class VisualStudioProjectBuilderTest {
   @Test
   public void testNoSpecifiedSlnFileButOneFound() throws Exception {
     settings.setProperty(DotNetConstants.SOLUTION_FILE_KEY, "");
-    projectBuilder = new VisualStudioProjectBuilder(reactor, new DotNetConfiguration(settings), microsoftWindowsEnvironment);
     projectBuilder.build(reactor);
     assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory().getAbsolutePath(), is(fakeSdkDir.getAbsolutePath()));
     VisualStudioSolution solution = microsoftWindowsEnvironment.getCurrentSolution();
     assertNotNull(solution);
     assertThat(solution.getProjects().size(), is(3));
+  }
+
+  @Test
+  public void shouldNotOverrideLanguagePropertyIfNoFile() {
+    VisualStudioProject vsProject = mock(VisualStudioProject.class);
+    when(vsProject.getSourceFiles()).thenReturn(new ArrayList<SourceFile>());
+
+    Properties props = new Properties();
+    props.setProperty("sonar.language", "foo");
+
+    projectBuilder.overrideSonarLanguageProperty(vsProject, props);
+
+    assertThat(props.getProperty("sonar.language")).isEqualTo("foo");
   }
 
   @Test(expected = SonarException.class)

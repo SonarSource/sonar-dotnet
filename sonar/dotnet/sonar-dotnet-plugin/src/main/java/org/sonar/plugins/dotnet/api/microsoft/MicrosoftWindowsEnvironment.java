@@ -19,13 +19,12 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 import java.io.File;
 import java.util.Map;
@@ -39,8 +38,6 @@ import java.util.Map;
  */
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class MicrosoftWindowsEnvironment implements BatchExtension {
-
-  private static final String[] DOTNET_LANGUAGE_KEYS = new String[] {"cs", "vbnet"};
 
   private DotNetConfiguration configuration;
   private boolean locked;
@@ -233,24 +230,6 @@ public class MicrosoftWindowsEnvironment implements BatchExtension {
    */
   public void setWorkingDirectory(String workDir) {
     this.workDir = workDir;
-  }
-
-  /**
-   * Returns true only if the given language Sonar key represents a .NET language. 
-   * 
-   * Currently supported languages: 
-   * <ul>
-   * <li>C# (key "cs")</li>
-   * <li>VB.NET (key "vbnet")</li>
-   * </ul>
-   */
-  public static boolean isDotNetLanguage(String languageKey) {
-    for (int i = 0; i < DOTNET_LANGUAGE_KEYS.length; i++) {
-      if (DOTNET_LANGUAGE_KEYS[i].equals(languageKey)) {
-        return true;
-      }
-    }
-    return false;
   }
 
 }

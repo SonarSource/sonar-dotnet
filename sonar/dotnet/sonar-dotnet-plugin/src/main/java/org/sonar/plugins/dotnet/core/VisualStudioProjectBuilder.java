@@ -19,15 +19,6 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
-import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
-import org.sonar.plugins.dotnet.api.DotNetException;
-
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -38,6 +29,12 @@ import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.utils.SonarException;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.DotNetException;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
+import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 
 import java.io.File;
 import java.io.IOException;
@@ -74,7 +71,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   @Override
   protected void build(ProjectReactor reactor) {
-    if (MicrosoftWindowsEnvironment.isDotNetLanguage(configuration.getString("sonar.language"))) {
+    if (DotNetLanguages.isDotNetLanguage(configuration.getString("sonar.language"))) {
       LOG.debug("Executing VisualStudioProjectBuilder");
       ProjectDefinition root = reactor.getRoot();
 
@@ -115,13 +112,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       }
 
       Properties subprojectProperties = (Properties) root.getProperties().clone();
-
-      // BEGIN - This is currently a hack => should write this in a better way
-      Collection<SourceFile> sourceFiles = vsProject.getSourceFiles();
-      if (!sourceFiles.isEmpty() && sourceFiles.iterator().next().getName().endsWith(".vb")) {
-        subprojectProperties.setProperty("sonar.language", "vbnet");
-      }
-      // END of hack
+      overrideSonarLanguageProperty(vsProject, subprojectProperties);
 
       ProjectDefinition subProject = ProjectDefinition.create().setProperties(subprojectProperties)
           .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
@@ -141,6 +132,19 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
       LOG.debug("  - Adding Sub Project => {}", subProject.getName());
       root.addSubProject(subProject);
+    }
+  }
+
+  protected void overrideSonarLanguageProperty(VisualStudioProject vsProject, Properties subprojectProperties) {
+    Collection<SourceFile> sourceFiles = vsProject.getSourceFiles();
+    if (!sourceFiles.isEmpty()) {
+      for (SourceFile sourceFile : sourceFiles) {
+        String key = DotNetLanguages.getLanguageKeyFromFileExtension(StringUtils.substringAfterLast(sourceFile.getName(), "."));
+        if (key != null) {
+          subprojectProperties.setProperty("sonar.language", key);
+          return;
+        }
+      }
     }
   }
 
