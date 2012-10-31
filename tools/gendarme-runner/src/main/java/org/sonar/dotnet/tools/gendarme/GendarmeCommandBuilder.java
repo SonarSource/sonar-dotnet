@@ -19,13 +19,12 @@
  */
 package org.sonar.dotnet.tools.gendarme;
 
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.tools.CilRuleEngineCommandBuilderSupport;
 
 import java.io.File;

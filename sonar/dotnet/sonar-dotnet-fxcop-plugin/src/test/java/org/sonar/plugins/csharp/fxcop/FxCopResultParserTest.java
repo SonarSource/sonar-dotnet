@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.csharp.fxcop;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
@@ -39,6 +35,9 @@ import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
 import org.sonar.test.TestUtils;
 

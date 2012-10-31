@@ -19,11 +19,10 @@
  */
 package org.sonar.dotnet.tools.stylecop;
 
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

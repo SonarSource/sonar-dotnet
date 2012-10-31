@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.csharp.fxcop;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Before;
@@ -46,6 +42,9 @@ import org.sonar.dotnet.tools.fxcop.FxCopRunner;
 import org.sonar.plugins.csharp.fxcop.profiles.FxCopProfileExporter;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 import org.sonar.plugins.dotnet.core.DotNetCorePlugin;
 import org.sonar.test.TestUtils;

@@ -19,15 +19,14 @@
  */
 package org.sonar.dotnet.tools.gallio;
 
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;

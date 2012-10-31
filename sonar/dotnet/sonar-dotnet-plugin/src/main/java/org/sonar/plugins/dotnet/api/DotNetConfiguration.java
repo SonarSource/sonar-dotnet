@@ -21,7 +21,6 @@ package org.sonar.plugins.dotnet.api;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.ServerExtension;
@@ -47,7 +46,7 @@ public class DotNetConfiguration implements BatchExtension, ServerExtension {
   private Map<String, Object> newToPreviousParamMap = Maps.newHashMap();
 
   /**
-   * Creates a new {@link DotNetConfiguration} object that will use the inner {@link Configuration} object to retrieve the required key
+   * Creates a new {@link DotNetConfiguration} object that will use the inner {@link Settings} object to retrieve the required key
    * values, taking into account the name of the previous .NET plugin parameters.
    * 
    * @param configuration
