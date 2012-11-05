@@ -6,7 +6,6 @@
     <groupId>org.codehaus.sonar-plugins</groupId>
     <artifactId>parent</artifactId>
     <version>13</version>
-    <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
