@@ -22,13 +22,12 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.DotNetException;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.WildcardPattern;
+import org.sonar.plugins.dotnet.api.DotNetException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -251,8 +250,10 @@ public final class ModelFactory {
       projectDefinitions.add(projectDefinition);
     }
 
-    // This pattern extracts the projects from a Visual Studio solution
-    String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.\\w+proj)\"";
+    // This pattern extracts the projects from a Visual Studio solution:
+    // 1. normal projects (currently only csproj and vbproj)
+    String normalProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*)\"\\s*,\\s*\"([^\"]*?\\.(cs|vb)proj)\"";
+    // 2. web projects which have a different declaration structure
     String webProjectExp = "\\s*Project\\([^\\)]*\\)\\s*=\\s*\"([^\"]*).*?ProjectSection\\(WebsiteProperties\\).*?"
       + "Debug\\.AspNetCompiler\\.PhysicalPath\\s*=\\s*\"([^\"]*)";
     Pattern projectPattern = Pattern.compile(normalProjectExp);
