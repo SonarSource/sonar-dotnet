@@ -19,24 +19,21 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
 import java.util.Collection;
 
 /**
- * This sensor gets executed on every C# sub-projects, but not on the root project (= the solution). <br/>
- * <br/>
- * Super class of {@link AbstractRegularDotNetSensor} and {@link AbstractTestCSharpSensor}.
+ * Sensors that extends this class get executed on every .NET sub-projects, but not on the root project (= the solution).
  */
 public abstract class AbstractDotNetSensor implements Sensor {
 

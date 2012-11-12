@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * C# Core plugin class.
+ * .NET Core plugin class.
  */
 @Properties({
   @Property(key = DotNetConstants.DOTNET_2_0_SDK_DIR_KEY, defaultValue = DotNetConstants.DOTNET_2_0_SDK_DIR_DEFVALUE,

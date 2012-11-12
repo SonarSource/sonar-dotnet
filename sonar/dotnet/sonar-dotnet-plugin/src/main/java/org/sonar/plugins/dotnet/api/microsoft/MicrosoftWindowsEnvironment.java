@@ -30,7 +30,7 @@ import java.io.File;
 import java.util.Map;
 
 /**
- * Class used to share information, between C# plugins, about Windows and Visual Studio elements, such as:
+ * Class used to share information, between .NET plugins, about Windows and Visual Studio elements, such as:
  * <ul>
  * <li>the environment settings (.NET SDK directory for instance),</li>
  * <li>the current Visual Studio solution that is being analyzed.</li>

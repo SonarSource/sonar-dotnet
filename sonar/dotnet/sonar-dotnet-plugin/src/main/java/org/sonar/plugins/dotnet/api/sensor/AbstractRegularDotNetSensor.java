@@ -19,21 +19,19 @@
  */
 package org.sonar.plugins.dotnet.api.sensor;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 
 import java.io.File;
 import java.util.Collection;
 
 /**
- * Abstract Sensor for C# plugins that will be executed on every sub-project.
- * Should be renamed... (not so easy to do so since squid is closed source)
+ * Sensors that extends this class get executed on every non-test .NET sub-projects.
  */
 public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
 

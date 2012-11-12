@@ -58,7 +58,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
    * @param reactor
    *          the reactor
    * @param configuration
-   *          the shared C# configuration
+   *          the shared .NET configuration
    * @param microsoftWindowsEnvironment
    *          the shared Microsoft Windows Environment
    */
