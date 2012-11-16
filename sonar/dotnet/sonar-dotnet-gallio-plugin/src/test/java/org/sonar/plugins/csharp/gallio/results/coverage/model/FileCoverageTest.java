@@ -31,7 +31,13 @@ public class FileCoverageTest {
   public void shouldMergeCoverage() {
     FileCoverage firstCoverage = new FileCoverage(new File("somesourcefile.cs"));
     CoveragePoint point = new CoveragePoint();
-    point.setCountVisits(2);
+    point.setCountVisits(1);
+    point.setStartLine(2);
+    point.setEndLine(2);
+    firstCoverage.addPoint(point);
+
+    point = new CoveragePoint();
+    point.setCountVisits(0);
     point.setStartLine(3);
     point.setEndLine(10);
     firstCoverage.addPoint(point);
@@ -39,25 +45,32 @@ public class FileCoverageTest {
     FileCoverage secondCoverage = new FileCoverage(new File("someotherfile.cs"));
     point = new CoveragePoint();
     point.setCountVisits(3);
-    point.setStartLine(7);
+    point.setStartLine(3);
     point.setEndLine(15);
     secondCoverage.addPoint(point);
+
     point = new CoveragePoint();
     point.setCountVisits(0);
     point.setStartLine(9);
     point.setEndLine(20);
     secondCoverage.addPoint(point);
 
+    point = new CoveragePoint();
+    point.setCountVisits(4);
+    point.setStartLine(21);
+    point.setEndLine(21);
+    secondCoverage.addPoint(point);
+
     firstCoverage.merge(secondCoverage);
 
-    assertEquals(18, firstCoverage.getCountLines());
-    assertEquals(13, firstCoverage.getCoveredLines());
-    assertEquals(13d / 18d, firstCoverage.getCoverage(), 0.01d);
+    assertEquals(4, firstCoverage.getCountLines());
+    assertEquals(3, firstCoverage.getCoveredLines());
+    assertEquals(3d / 4d, firstCoverage.getCoverage(), 0.01d);
 
-    SourceLine intersectionLine = firstCoverage.getLines().get(8);
-    assertEquals(5, intersectionLine.getCountVisits());
+    SourceLine intersectionLine = firstCoverage.getLines().get(3);
+    assertEquals(3, intersectionLine.getCountVisits());
 
-    SourceLine disjunctionLine = firstCoverage.getLines().get(4);
-    assertEquals(2, disjunctionLine.getCountVisits());
+    SourceLine newLine = firstCoverage.getLines().get(21);
+    assertEquals(4, newLine.getCountVisits());
   }
 }

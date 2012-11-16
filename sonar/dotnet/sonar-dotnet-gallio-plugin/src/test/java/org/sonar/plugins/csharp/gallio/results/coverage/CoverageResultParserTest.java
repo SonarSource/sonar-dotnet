@@ -95,8 +95,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 4;
     params.fileName = "Money.cs";
-    params.coveredLines = 46;
-    params.lines = 48;
+    params.coveredLines = 45;
+    params.lines = 47;
     params.coverage = 0.96;
 
     checkParsing(params);
@@ -110,7 +110,7 @@ public class CoverageResultParserTest {
     params.fileNumber = 1;
     params.fileName = "Money.cs";
     params.coveredLines = 0;
-    params.lines = 4;
+    params.lines = 1;
     params.coverage = 0;
 
     checkParsing(params);
@@ -123,8 +123,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 1;
     params.fileName = "Money.cs";
-    params.coveredLines = 4;
-    params.lines = 4;
+    params.coveredLines = 1;
+    params.lines = 1;
     params.coverage = 1.0;
 
     checkParsing(params);
@@ -165,9 +165,9 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 2;
     params.fileName = "Money.cs";
-    params.coveredLines = 25;
-    params.lines = 27;
-    params.coverage = 0.93;
+    params.coveredLines = 24;
+    params.lines = 26;
+    params.coverage = 0.92;
 
     checkParsing(params);
   }
@@ -179,8 +179,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 3;
     params.fileName = "Money.cs";
-    params.coveredLines = 45;
-    params.lines = 215;
+    params.coveredLines = 44;
+    params.lines = 214;
     params.coverage = 0.21;
 
     checkParsing(params);
@@ -193,9 +193,9 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 3;
     params.fileName = "Money.cs";
-    params.coveredLines = 35;
-    params.lines = 37;
-    params.coverage = 0.95;
+    params.coveredLines = 34;
+    params.lines = 36;
+    params.coverage = 0.94;
 
     checkParsing(params);
   }
@@ -207,8 +207,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 3;
     params.fileName = "Money.cs";
-    params.coveredLines = 45;
-    params.lines = 47;
+    params.coveredLines = 44;
+    params.lines = 46;
     params.coverage = 0.96;
 
     checkParsing(params);
@@ -221,8 +221,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 5;
     params.fileName = "Money.cs";
-    params.coveredLines = 45;
-    params.lines = 48;
+    params.coveredLines = 44;
+    params.lines = 47;
     params.coverage = 0.94;
     mockIoFileForDotCover();
 
@@ -236,8 +236,8 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 4;
     params.fileName = "Money.cs";
-    params.coveredLines = 45;
-    params.lines = 59;
+    params.coveredLines = 44;
+    params.lines = 58;
     params.coverage = 0.76;
     mockIoFileForDotCover();
 
