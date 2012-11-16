@@ -85,16 +85,12 @@ public class FileCoverage {
    */
   public void addPoint(CoveragePoint point) {
     int startLine = point.getStartLine();
-    int endLine = point.getEndLine();
-    for (int idx = startLine; idx <= endLine; idx++) {
-      // We add a point for each line
-      SourceLine line = lines.get(idx);
-      if (line == null) {
-        line = new SourceLine(idx);
-        lines.put(idx, line);
-      }
-      line.update(point);
+    SourceLine line = lines.get(startLine);
+    if (line == null) {
+      line = new SourceLine(startLine);
+      lines.put(startLine, line);
     }
+    line.update(point);
   }
 
   /**
