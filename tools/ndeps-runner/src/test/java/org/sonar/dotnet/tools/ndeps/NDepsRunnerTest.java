@@ -29,6 +29,8 @@ import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -54,7 +56,9 @@ public class NDepsRunnerTest {
   @Before
   public void initData() throws Exception {
     vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getArtifact("Debug", null)).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    Set<File> generatedAssemblies = new HashSet<File>();
+    generatedAssemblies.add(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(generatedAssemblies);
     when(vsProject.getDirectory()).thenReturn(TestUtils.getResource("/Runner"));
     runner = NDepsRunner.create(fakeNDepsInstallDir.getAbsolutePath(), new File("target/sonar/tempFolder").getAbsolutePath());
   }

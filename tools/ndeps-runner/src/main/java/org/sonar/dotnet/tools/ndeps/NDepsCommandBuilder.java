@@ -27,6 +27,7 @@ import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.tools.CilToolCommandBuilderSupport;
 
 import java.io.File;
+import java.util.Collection;
 
 /**
  * Class used to build the command line to run the NDeps tool.
@@ -40,12 +41,12 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
 
   /**
    * Constructs a {@link NDepsCommandBuilder} object for the given Visual Studio solution.
-   * 
+   *
    * @param solution
    *          the solution to analyze
    *  @param project
    *          the VS project to analyze
-   *          
+   *
    * @return a DependencyParser builder for this solution
    */
   public static NDepsCommandBuilder createBuilder(VisualStudioSolution solution, VisualStudioProject project) {
@@ -57,15 +58,14 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
 
   /**
    * Transforms this command object into a Command object that can be passed to the CommandExecutor.
-   * 
+   *
    * @return the Command object that represents the command to launch.
    */
   public Command toCommand() throws NDepsException {
-    // NDeps should be improved to do like FxCop or Gendarme and to be able to use "sonar.dotnet.assemblies"
-    File assembly = vsProject.getArtifact(buildConfiguration, buildPlatform);
-    if (assembly == null || !assembly.exists()) {
-      throw new NDepsException("Assembly to scan not found for project: " + vsProject.getName());
-    }
+    // NDeps work only with a single assembly to scan
+    Collection<File> assemblyToScanFiles = findAssembliesToScan();
+    validate(assemblyToScanFiles);
+    File assembly = (File) assemblyToScanFiles.toArray()[0];
 
     LOG.debug("- DependencyParser program    : " + executable);
     Command command = Command.create(executable.getAbsolutePath());
@@ -79,5 +79,18 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
     command.addArgument(reportFile.getAbsolutePath());
 
     return command;
+  }
+
+  @Override
+  protected void validate(Collection<File> assemblyToScanFiles) {
+    super.validate(assemblyToScanFiles);
+
+    if (assemblyToScanFiles.size() != 1) {
+      throw new IllegalStateException("NDeps support only one Assembly to scan. Project: " + vsProject.getName());
+    }
+
+    if (!((File) assemblyToScanFiles.toArray()[0]).exists()) {
+      throw new IllegalStateException("Assembly to scan not found for project: " + vsProject.getName());
+    }
   }
 }

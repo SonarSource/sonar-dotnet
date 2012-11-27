@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 
@@ -84,14 +86,18 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     VisualStudioProject vsProject = getVSProject(project);
+    VisualStudioSolution solution = getVSSolution();
     if (vsProject == null) {
       // we must be at solution level
       return false;
     }
-    if (getAssemblyPatterns() != null && getAssemblyPatterns().length > 0) {
-      LOG.warn("Skipping NDeps analysis, NDeps cannot work properly " +
-        "when assembly locations are specified using " + DotNetConstants.ASSEMBLIES_TO_SCAN_KEY);
-      return false;
+
+    if (getAssemblyPatterns() != null) {
+      // Ndeps can analyse only one assembly
+      if (FileFinder.findFiles(solution, vsProject, getAssemblyPatterns()).size() > 1) {
+        LOG.warn("Skipping NDeps analysis, because multiple assemblies match " + DotNetConstants.ASSEMBLIES_TO_SCAN_KEY);
+        return false;
+      }
     }
 
     testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects
@@ -113,7 +119,8 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
   public void analyse(Project project, SensorContext context) {
     final File reportFile;
     File projectDir = project.getFileSystem().getBasedir();
-    String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + NDepsConstants.DEPENDENCYPARSER_REPORT_XML;
+    String workingDirectory = getMicrosoftWindowsEnvironment().getWorkingDirectory();
+    String reportDefaultPath = workingDirectory + "/" + NDepsConstants.DEPENDENCYPARSER_REPORT_XML;
 
     if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
       String reportPath = configuration.getString(NDepsConstants.REPORTS_PATH_KEY);
@@ -125,8 +132,7 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     } else {
       // run NDeps
       try {
-        File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-            .getWorkingDirectory());
+        File tempDir = new File(getVSSolution().getSolutionDir(), workingDirectory);
         NDepsRunner runner = NDepsRunner.create(configuration.getString(NDepsConstants.INSTALL_DIR_KEY), tempDir.getAbsolutePath());
 
         launchNDeps(project, runner);
@@ -155,6 +161,7 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), NDepsConstants.DEPENDENCYPARSER_REPORT_XML));
     builder.setBuildConfiguration(configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY));
     builder.setBuildPlatform(configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY));
+    builder.setAssembliesToScan(getAssemblyPatterns());
 
     runner.execute(builder, configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY));
   }

@@ -29,6 +29,8 @@ import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.is;
@@ -55,7 +57,9 @@ public class NDepsCommandBuilderTest {
   @Before
   public void init() throws Exception {
     vsProject = mock(VisualStudioProject.class);
-    when(vsProject.getArtifact("Debug", null)).thenReturn(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    Set<File> generatedAssemblies = new HashSet<File>();
+    generatedAssemblies.add(TestUtils.getResource("/Runner/FakeAssemblies/Fake1.assembly"));
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(generatedAssemblies);
     nDepsCommandBuilder = NDepsCommandBuilder.createBuilder(null, vsProject);
     nDepsCommandBuilder.setExecutable(nDepsExecutable);
     nDepsCommandBuilder.setReportFile(nDepsReportFile);
@@ -74,18 +78,20 @@ public class NDepsCommandBuilderTest {
 
   @Test
   public void testToCommandWithNoAssembly() throws Exception {
-    when(vsProject.getArtifact("Debug", null)).thenReturn(null);
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(new HashSet<File>());
 
-    thrown.expect(NDepsException.class);
-    thrown.expectMessage("Assembly to scan not found for project");
+    thrown.expect(IllegalStateException.class);
+    thrown.expectMessage("No assembly to scan. Please check your project plugin configuration ('sonar.dotnet.assemblies' property).");
     nDepsCommandBuilder.toCommand();
   }
 
   @Test
   public void testToCommandWithUnexistingAssembly() throws Exception {
-    when(vsProject.getArtifact("Debug", null)).thenReturn(new File("target/sonar/Deps/unexisting-assembly.dll"));
+    Set<File> generatedAssemblies = new HashSet<File>();
+    generatedAssemblies.add(new File("target/sonar/Deps/unexisting-assembly.dll"));
+    when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(generatedAssemblies);
 
-    thrown.expect(NDepsException.class);
+    thrown.expect(IllegalStateException.class);
     thrown.expectMessage("Assembly to scan not found for project");
     nDepsCommandBuilder.toCommand();
   }
