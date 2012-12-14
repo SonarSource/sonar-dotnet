@@ -58,6 +58,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private File openCoverInstallDirectory;
   private File dotCoverInstallDirectory;
   private String[] coverageExcludes;
+  private String attributeExcludes;
   private File coverageReportFile;
 
   private List<File> testAssemblies;
@@ -191,6 +192,17 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
    */
   public void setCoverageExcludes(String[] coverageExcludes) {
     this.coverageExcludes = coverageExcludes;
+  }
+  
+  
+  /**
+   * Sets the attributes that exclude methods/properties/classes
+   * 
+   * @param attributeExclude
+   * 		excluded attributes
+   */
+  public void setOpenCoverAttributeExcludes(String attributeExclude) {
+	  this.attributeExcludes = attributeExclude;
   }
 
   /**
@@ -353,13 +365,18 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     if (coverageExcludes != null) {
       for (String exclusion : coverageExcludes) {
         LOG.debug("- Opencover exclude   : {}", exclusion.trim());
-        filterBuilder.append("-[" + exclusion.trim() + "]* ");
+        filterBuilder.append(exclusion.trim());
       }
     }
     filterBuilder.append("\"");
     command.addArgument(filterBuilder.toString());
 
     command.addArgument("-mergebyhash");
+    
+    if(attributeExcludes != null && attributeExcludes.trim().length() > 0) {
+    	LOG.debug("- Opencover attribute exclude   : {}", attributeExcludes);
+    	command.addArgument("-excludebyattribute:" + attributeExcludes);
+    }
 
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("-output:" + coverageReportFile.getAbsolutePath());

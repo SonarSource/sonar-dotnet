@@ -68,6 +68,10 @@ public final class GallioConstants {
   public static final String OPEN_COVER_INSTALL_KEY = "sonar.opencover.installDirectory";
 
   public static final String OPEN_COVER_INSTALL_DEFVALUE = "C:/Program Files/OpenCover/";
+  
+  public static final String OPEN_COVER_ATTRIBUTE_EXCLUDES_KEY = "sonar.opencover.attributeExcludes";
+  
+  public static final String OPEN_COVER_ATTRIBUTE_EXCLUDES_DEFVALUE = "";
 
   public static final String DOT_COVER_INSTALL_KEY = "sonar.dotcover.installDirectory";
 
