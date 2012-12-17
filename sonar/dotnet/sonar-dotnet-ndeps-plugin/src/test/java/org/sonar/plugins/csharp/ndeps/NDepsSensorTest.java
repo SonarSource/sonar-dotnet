@@ -71,6 +71,7 @@ public class NDepsSensorTest {
     vsProject1 = mock(VisualStudioProject.class);
     when(vsProject1.getName()).thenReturn("Project #1");
     when(vsProject1.getGeneratedAssemblies(anyString(), anyString())).thenReturn(Collections.singleton(new File("toto.dll")));
+    when(vsProject1.getDirectory()).thenReturn(TestUtils.getResource("/"));
     vsProject2 = mock(VisualStudioProject.class);
     when(vsProject2.getName()).thenReturn("Project Test");
     when(vsProject2.isTest()).thenReturn(true);
@@ -98,6 +99,28 @@ public class NDepsSensorTest {
     project.setParent(project);
     project.setName("Project #1");
     assertThat(nDepsSensor.shouldExecuteOnProject(project), is(true));
+  }
+
+  @Test
+  public void shouldExecuteOnProjectWithAdvancedConfiguration() throws Exception {
+    Project project = new Project("");
+    project.setLanguageKey("cs");
+    project.setParent(project);
+    project.setName("Project #1");
+
+    configuration.setProperty(DotNetConstants.ASSEMBLIES_TO_SCAN_KEY, "**/*.dll");
+    assertThat(nDepsSensor.shouldExecuteOnProject(project), is(true));
+  }
+
+  @Test
+  public void shouldNotExecuteOnProjectWithAdvancedConfiguration() throws Exception {
+    Project project = new Project("");
+    project.setLanguageKey("cs");
+    project.setParent(project);
+    project.setName("Project #1");
+
+    configuration.setProperty(DotNetConstants.ASSEMBLIES_TO_SCAN_KEY, "**/*.dll,**/*.exe");
+    assertThat(nDepsSensor.shouldExecuteOnProject(project), is(false));
   }
 
   @Test

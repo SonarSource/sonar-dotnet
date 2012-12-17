@@ -100,7 +100,7 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
       }
     }
 
-    testSensor = vsProject.isTest(); // HACK in order to execute the senor on all projects
+    testSensor = vsProject.isTest(); // HACK in order to execute the sensor on all projects
     return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
 
