@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+
+import org.sonar.plugins.dotnet.api.DotNetConstants;
+
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
@@ -59,8 +63,9 @@ public class NDepsResultParser implements BatchExtension {
 
   private final VisualStudioProject vsProject;
 
-  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context) {
-    super();
+  private final boolean keyGenerationSafeMode;
+
+  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration) {
     this.resourceBridge = bridges.getBridge(project.getLanguageKey());
     this.context = context;
     this.project = project;
@@ -70,8 +75,8 @@ public class NDepsResultParser implements BatchExtension {
       vsProject = null;
     } else {
       vsProject = vsSolution.getProjectFromSonarProject(project);
-
     }
+    keyGenerationSafeMode = "safe".equalsIgnoreCase(configuration.getString(DotNetConstants.KEY_GENERATION_STRATEGY_KEY));
   }
 
   public void parse(String scope, File file) {
@@ -218,11 +223,12 @@ public class NDepsResultParser implements BatchExtension {
 
   private Resource<?> getResource(String name, String version) {
     // try to find the project
-    String projectKey = StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(name);
-    Resource<?> result = getProjectFromKey(project.getParent(), projectKey);
+    VisualStudioProject linkedProject = vsSolution.getProject(name);
+    //String projectKey = StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(name);
+    Resource<?> result;
 
     // if not found in the solution, get the binary
-    if (result == null) {
+    if (linkedProject == null) {
 
       Library library = new Library(name, version); // key, version
       library.setName(name);
@@ -234,6 +240,18 @@ public class NDepsResultParser implements BatchExtension {
       }
       result = library;
 
+    } else {
+      String projectKey;
+      if (keyGenerationSafeMode) {
+        projectKey = project.getParent().getKey() + ":" + StringUtils.deleteWhitespace(linkedProject.getName());
+      } else {
+        projectKey =  StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(linkedProject.getName());
+      }
+      if (StringUtils.isNotEmpty(project.getBranch())) {
+        projectKey += ":" + project.getBranch();
+      }
+
+      result = getProjectFromKey(project.getParent(), projectKey);
     }
 
     return result;

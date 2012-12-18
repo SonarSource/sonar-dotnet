@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import com.google.common.collect.Lists;
+
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
@@ -57,18 +61,24 @@ public class NDepsResultParserTest {
   private DotNetResourceBridge resourcesBridge;
   private SensorContext context;
   private Project project;
+  private Project project2;
+  private VisualStudioSolution vsSolution;
+  private VisualStudioProject vsProject;
 
   @Before
   public void setUp() {
     project = mock(Project.class);
+    //project2 = mock(Project.class);
     Project rootProject = mock(Project.class);
     when(project.getParent()).thenReturn(rootProject);
     when(project.getLanguageKey()).thenReturn("cs");
 
-    VisualStudioSolution vsSolution = mock(VisualStudioSolution.class);
-    VisualStudioProject vsProject = mock(VisualStudioProject.class);
-    when(vsSolution.getProject("Example.Core")).thenReturn(vsProject);
+    when(rootProject.getModules()).thenReturn(Lists.newArrayList(project, project2));
+
+    vsSolution = mock(VisualStudioSolution.class);
+    vsProject = mock(VisualStudioProject.class);
     when(vsSolution.getProjectFromSonarProject(project)).thenReturn(vsProject);
+    when(vsProject.getName()).thenReturn("Example.Core");
 
     resourcesBridge = mock(DotNetResourceBridge.class);
     when(resourcesBridge.getFromTypeName(anyString())).thenAnswer(new Answer<Resource<?>>() {
@@ -84,11 +94,13 @@ public class NDepsResultParserTest {
 
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     when(env.getCurrentSolution()).thenReturn(vsSolution);
-    parser = new NDepsResultParser(env, bridges, project, context);
+    parser = new NDepsResultParser(env, bridges, project, context, mock(DotNetConfiguration.class));
   }
 
   @Test
   public void testParse() {
+    when(vsSolution.getProject("Example.Core")).thenReturn(vsProject);
+
     File report = TestUtils.getResource("/ndeps-report.xml");
 
     parser.parse("compile", report);
@@ -124,6 +136,7 @@ public class NDepsResultParserTest {
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.MoneyBag", "Example.Core:Example.Core.Money");
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.MoneyBag", "Example.Core:Example.Core.IMoney");
   }
+
 
   private void assertThatDepsListContains(List<Dependency> depsList, String from, String to) {
     assertThat(depsList, hasItem(new Dependency(new org.sonar.api.resources.File(from), new org.sonar.api.resources.File(to))));
