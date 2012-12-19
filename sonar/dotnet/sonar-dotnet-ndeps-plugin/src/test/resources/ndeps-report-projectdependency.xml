@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dependencies name="Example.Core" version="1.0.0.0">
+  <Assembly name="Core" version="1.0.0.0">
+    <References>
+      <Reference name="mscorlib" fullName="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="4.0.0.0" />
+      <Reference name="Common" fullName="Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" version="1.0.0.0" />
+    </References>
+    <TypeReferences>
+      <From fullname="Core.Class1">
+        <To fullname="Common.Class1" assemblyname="Common" assemblyversion="1.0.0.0" />
+      </From>
+    </TypeReferences>
+  </Assembly>
+</Dependencies>

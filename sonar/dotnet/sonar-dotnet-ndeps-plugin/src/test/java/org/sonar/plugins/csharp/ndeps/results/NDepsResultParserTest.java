@@ -19,6 +19,12 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import org.powermock.api.mockito.PowerMockito;
+
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
 import com.google.common.collect.Lists;
 
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
@@ -55,6 +61,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(PowerMockRunner.class)
 public class NDepsResultParserTest {
 
   private NDepsResultParser parser;
@@ -64,14 +71,18 @@ public class NDepsResultParserTest {
   private Project project2;
   private VisualStudioSolution vsSolution;
   private VisualStudioProject vsProject;
+  private VisualStudioProject vsProject2;
 
   @Before
   public void setUp() {
-    project = mock(Project.class);
-    //project2 = mock(Project.class);
+    project = PowerMockito.mock(Project.class);
+    project2 = PowerMockito.mock(Project.class);
     Project rootProject = mock(Project.class);
     when(project.getParent()).thenReturn(rootProject);
     when(project.getLanguageKey()).thenReturn("cs");
+
+    when(project2.getParent()).thenReturn(rootProject);
+    when(project2.getLanguageKey()).thenReturn("cs");
 
     when(rootProject.getModules()).thenReturn(Lists.newArrayList(project, project2));
 
@@ -79,6 +90,9 @@ public class NDepsResultParserTest {
     vsProject = mock(VisualStudioProject.class);
     when(vsSolution.getProjectFromSonarProject(project)).thenReturn(vsProject);
     when(vsProject.getName()).thenReturn("Example.Core");
+    vsProject2 = mock(VisualStudioProject.class);
+    when(vsSolution.getProjectFromSonarProject(project2)).thenReturn(vsProject2);
+    when(vsProject2.getName()).thenReturn("Example.Common");
 
     resourcesBridge = mock(DotNetResourceBridge.class);
     when(resourcesBridge.getFromTypeName(anyString())).thenAnswer(new Answer<Resource<?>>() {
@@ -137,6 +151,33 @@ public class NDepsResultParserTest {
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.MoneyBag", "Example.Core:Example.Core.IMoney");
   }
 
+  @PrepareForTest({Resource.class})
+  @Test
+  public void shouldParseAndDetectProjectDependency() {
+    PowerMockito.when(project.getKey()).thenReturn("null:Example.Core");
+    PowerMockito.when(project2.getKey()).thenReturn("null:Example.Common");
+
+    when(vsSolution.getProject("Core")).thenReturn(vsProject);
+    when(vsSolution.getProject("Common")).thenReturn(vsProject2);
+
+    File report = TestUtils.getResource("/ndeps-report-projectdependency.xml");
+
+    parser.parse("compile", report);
+
+    ArgumentCaptor<Library> libCaptor = ArgumentCaptor.forClass(Library.class);
+    // there's only 1 "Reference" to an external library
+    verify(context, times(1)).getResource(libCaptor.capture());
+    Library library = libCaptor.getValue();
+    assertEquals("mscorlib", library.getName());
+
+    ArgumentCaptor<Dependency> dependencyCaptor = ArgumentCaptor.forClass(Dependency.class);
+    // 1 library dependency + 1 project dependency + 1 * 2 file dependencies
+    verify(context, times(4)).saveDependency(dependencyCaptor.capture());
+    List<Dependency> depsList = dependencyCaptor.getAllValues();
+
+    assertThat(depsList, hasItem(new Dependency(project, project2)));
+    assertThat(depsList, hasItem(new Dependency(project, library)));
+  }
 
   private void assertThatDepsListContains(List<Dependency> depsList, String from, String to) {
     assertThat(depsList, hasItem(new Dependency(new org.sonar.api.resources.File(from), new org.sonar.api.resources.File(to))));
