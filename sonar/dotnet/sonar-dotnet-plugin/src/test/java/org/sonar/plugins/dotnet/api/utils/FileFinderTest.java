@@ -191,4 +191,17 @@ public class FileFinderTest {
     assertEquals("AssemblyInfo.cs", csFile.getName());
   }
 
+  @Test
+  public void shouldNotThrowAnExceptionBecauseOfABadPattern() {
+    solution = mock(VisualStudioSolution.class);
+    project = mock(VisualStudioProject.class);
+    File solutionDir = new File("/"); //root folder
+    File projectDir = new File("/");
+    when(solution.getSolutionDir()).thenReturn(solutionDir);
+    when(project.getDirectory()).thenReturn(projectDir);
+    Collection<File> result =
+        FileFinder.findFiles(solution, project, "../*Info.cs"); // there is no parent directory
+    assertEquals(0, result.size());
+  }
+
 }

@@ -43,9 +43,9 @@ import java.util.Set;
  * $(SolutionDir) can be used to specify the folder where the visual studio sln file is located.
  * "../" can be used to climb in the folder tree.
  * Absolute and relative paths are both supported.
- * 
+ *
  * @author Alexandre Victoor
- * 
+ *
  */
 public final class FileFinder {
 
@@ -63,7 +63,7 @@ public final class FileFinder {
 
   /**
    * Find files that match the given patterns
-   * 
+   *
    * @param currentSolution
    *          The VS solution being analyzed by sonar
    * @param currentProject
@@ -79,7 +79,7 @@ public final class FileFinder {
 
   /**
    * Find directories that match the given patterns
-   * 
+   *
    * @param currentSolution
    *          The VS solution being analyzed by sonar
    * @param currentProject
@@ -102,7 +102,7 @@ public final class FileFinder {
 
   /**
    * Find files that match the given patterns
-   * 
+   *
    * @param currentSolution
    *          The VS solution being analyzed by sonar
    * @param currentProject
@@ -135,7 +135,7 @@ public final class FileFinder {
 
   /**
    * Find files that match the given patterns
-   * 
+   *
    * @param currentSolution
    *          The VS solution being analyzed by sonar
    * @param defaultWorkPath
@@ -150,7 +150,7 @@ public final class FileFinder {
 
   /**
    * Find files that match the given patterns
-   * 
+   *
    * @param currentSolution
    *          The VS solution being analyzed by sonar
    * @param defaultWorkDir
@@ -176,9 +176,15 @@ public final class FileFinder {
       }
       while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY)) {
         workDir = workDir.getParentFile();
+        if (workDir==null) {
+          LOG.warn("The following pattern is not correct: " + pattern);
+          break;
+        }
         currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY);
       }
-      if (StringUtils.contains(currentPattern, '*')) {
+      if (workDir == null) {
+        continue;
+      } else if (StringUtils.contains(currentPattern, '*')) {
         String prefix = StringUtils.substringBefore(currentPattern, "*");
         if (StringUtils.contains(prefix, '/')) {
           workDir = browse(workDir, prefix);
