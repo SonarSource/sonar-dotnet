@@ -87,6 +87,9 @@ public final class DotNetConstants {
   public static final String TEST_ASSEMBLIES_KEY = "sonar.dotnet.test.assemblies";
 
   public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
+  
+  public static final String DOTNET_NPANDAY_SUPPORT_KEY = "sonar.dotnet.npanday.support";
+  public static final String DOTNET_NPANDAY_SUPPORT_DEFVALUE = "false";
 
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.

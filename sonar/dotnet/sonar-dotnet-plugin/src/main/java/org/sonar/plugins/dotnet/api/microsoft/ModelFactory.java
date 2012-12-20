@@ -22,6 +22,8 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
+import org.apache.maven.project.MavenProject;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -56,7 +58,7 @@ import java.util.regex.Pattern;
 
 /**
  * Utility classes for the parsing of a Visual Studio project
- * 
+ *
  * @author Fabrice BELLINGARD
  * @author Jose CHILLAN Aug 14, 2009
  */
@@ -79,7 +81,7 @@ public final class ModelFactory {
 
   /**
    * Sets the pattern used to define if a project is a test project or not
-   * 
+   *
    * @param testProjectNamePattern
    *          the pattern
    */
@@ -93,7 +95,7 @@ public final class ModelFactory {
 
   /**
    * Checks, whether the child directory is a subdirectory of the base directory.
-   * 
+   *
    * @param base
    *          the base directory.
    * @param child
@@ -169,7 +171,7 @@ public final class ModelFactory {
 
   /**
    * Gets the solution from its folder and name.
-   * 
+   *
    * @param baseDirectory
    *          the directory containing the solution
    * @param solutionName
@@ -225,7 +227,7 @@ public final class ModelFactory {
 
   /**
    * Gets all the projects in a solution.
-   * 
+   *
    * @param solutionFile
    *          the solution file
    * @param solutionContent
@@ -294,7 +296,7 @@ public final class ModelFactory {
 
   /**
    * Creates a project from its file
-   * 
+   *
    * @param projectFile
    *          the project file
    * @return the visual project if possible to define
@@ -308,7 +310,7 @@ public final class ModelFactory {
 
   /**
    * Generates a list of projects from the path of the visual studio projects files (.*proj)
-   * 
+   *
    * @param projectFile
    *          the project file
    * @param projectName
@@ -464,7 +466,7 @@ public final class ModelFactory {
 
   /**
    * Reads a property from a project
-   * 
+   *
    * @param string
    * @param definition
    * @return
@@ -481,7 +483,7 @@ public final class ModelFactory {
 
   /**
    * Gets the relative paths of all the files in a project, as they are defined in the .*proj file.
-   * 
+   *
    * @param project
    *          the project file
    * @return a list of the project files
@@ -520,7 +522,7 @@ public final class ModelFactory {
 
   /**
    * Extracts a string project data.
-   * 
+   *
    * @param expression
    * @param projectFile
    * @return
@@ -539,14 +541,14 @@ public final class ModelFactory {
 
   /**
    * A Namespace context specialized for the handling of .*proj files
-   * 
+   *
    * @author Jose CHILLAN Sep 1, 2009
    */
   private static class VisualStudioNamespaceContext implements NamespaceContext {
 
     /**
      * Gets the namespace URI.
-     * 
+     *
      * @param prefix
      * @return
      */
@@ -580,7 +582,7 @@ public final class ModelFactory {
 
   /**
    * Checks a file existence in a directory.
-   * 
+   *
    * @param basedir
    *          the directory containing the file
    * @param fileName
@@ -593,5 +595,39 @@ public final class ModelFactory {
       return checkedFile;
     }
     return null;
+  }
+
+  /**
+   * Mavenize provided Visual Studio Project.
+   * @param mvnProject the maven project.
+   * @param vsProject the Visual Studio project.
+   */
+  public static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject) {
+    vsProject.setName(mvnProject.getName());
+    // use artifact id instead of final name, since final name is not been handled by npanday
+    vsProject.setAssemblyName(mvnProject.getArtifactId());
+    vsProject.setAssemblyVersion(mvnProject.getVersion());
+    String outputDir = mvnProject.getBuild().getDirectory();
+    outputDir = StringUtils.replace(outputDir, "\\", "/");
+    String relOutputDir = StringUtils.substringAfterLast(outputDir, "/");
+    if (vsProject.isTest()) {
+      vsProject.setForcedOutputDir(relOutputDir+"/test-assemblies");
+    } else {
+      vsProject.setForcedOutputDir(relOutputDir);
+    }
+  }
+
+  /**
+   * Create new  Visual Studio solution based on provided mavenized VS solution.
+   * @param root the maven root project.
+   * @param solution the mavenized VS solution.
+   * @return Visula Studio solution instance.
+   */
+  public static VisualStudioSolution newMvnVisualStudioSolution(MavenProject root, VisualStudioSolution solution) {
+    VisualStudioSolution mvnVSSolution = new VisualStudioSolution(solution.getSolutionFile(), solution.getProjects());
+    mvnVSSolution.setBuildConfigurations(solution.getBuildConfigurations());
+    mvnVSSolution.setName(root.getName());
+
+    return mvnVSSolution;
   }
 }

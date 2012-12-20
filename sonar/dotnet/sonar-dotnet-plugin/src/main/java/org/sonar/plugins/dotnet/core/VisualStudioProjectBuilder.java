@@ -19,8 +19,13 @@
  */
 package org.sonar.plugins.dotnet.core;
 
+import com.google.common.collect.Lists;
+
+import com.google.common.collect.Maps;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
@@ -39,6 +44,8 @@ import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -54,7 +61,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   /**
    * Creates a new {@link VisualStudioProjectBuilder}
-   * 
+   *
    * @param reactor
    *          the reactor
    * @param configuration
@@ -79,10 +86,14 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       retrieveMicrosoftWindowsEnvironmentConfig();
 
       // Then create the Visual Studio Solution object from the ".sln" file
-      createVisualStudioSolution(root.getBaseDir());
+      createVisualStudioSolution(root);
 
       // And finally create the Sonar projects definition
-      createMultiProjectStructure(root);
+      if (isNpandaySupport()) {
+        createMavenMultiProjectStructure(root);
+      } else {
+        createMultiProjectStructure(root);
+      }
 
       // lock the MicrosoftWindowsEnvironment object so that nobody can modify it afterwards
       microsoftWindowsEnvironment.lock();
@@ -135,6 +146,100 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     }
   }
 
+  /**
+   * Create Sonar project definition based on maven root project.
+   * @param root the root project definition instance.
+   */
+  private void createMavenMultiProjectStructure(ProjectDefinition root) {
+    root.resetSourceDirs();
+    LOG.debug("- Root Project: {}", root.getName());
+    String workDir = root.getWorkDir().getAbsolutePath().substring(root.getBaseDir().getAbsolutePath().length() + 1);
+    microsoftWindowsEnvironment.setWorkingDirectory(workDir);
+
+    List<ProjectDefinition> newSubProjects = Lists.newArrayListWithCapacity(root.getSubProjects().size());
+    for (ProjectDefinition subProject : root.getSubProjects()) {
+      MavenProject subMvnPrj = extractMavenProject(subProject);
+      VisualStudioProject subVsPrj = microsoftWindowsEnvironment.getCurrentProject(subMvnPrj.getName());
+
+      //Properties subprojectProperties = subProject.getProperties();
+      Properties subprojectProperties = (Properties) root.getProperties().clone();
+      overrideSonarLanguageProperty(subVsPrj, subprojectProperties);
+
+      ProjectDefinition newSubProject = ProjectDefinition.create().setProperties(subprojectProperties)
+          .setBaseDir(subVsPrj.getDirectory()).setWorkDir(new File(subVsPrj.getDirectory(), workDir)).setKey(subProject.getKey())
+          .setVersion(subMvnPrj.getVersion()).setName(subVsPrj.getName());
+      //subProject.setBaseDir(subVsPrj.getDirectory()).setWorkDir(new File(subVsPrj.getDirectory(), workDir))
+      //    .setVersion(subMvnPrj.getVersion()).setName(subVsPrj.getName());
+
+      if (subVsPrj.isTest()) {
+        newSubProject.setTestDirs(".");
+        for (SourceFile sourceFile : subVsPrj.getSourceFiles()) {
+          newSubProject.addTestFiles(sourceFile.getFile());
+        }
+      } else {
+        newSubProject.setSourceDirs(".");
+        for (SourceFile sourceFile : subVsPrj.getSourceFiles()) {
+          newSubProject.addSourceFiles(sourceFile.getFile());
+        }
+      }
+      newSubProjects.add(newSubProject);
+    }
+    root.getSubProjects().clear();
+    root.getSubProjects().addAll(newSubProjects);
+  }
+
+  /**
+   * TODO add documentation.
+   * @param root
+   * @param solution
+   * @return
+   */
+  private VisualStudioSolution mavenizeVisualStudioSolution(ProjectDefinition root, VisualStudioSolution solution) {
+
+    Map<File,VisualStudioProject> baseDirToVSPrj = Maps.newHashMap();
+    for(VisualStudioProject vsProject:solution.getProjects()) {
+      baseDirToVSPrj.put(vsProject.getDirectory(), vsProject);
+    }
+
+    Map<File,MavenProject> baseDirToMvnPrj = Maps.newHashMap();
+    MavenProject mvnRootPrj = extractMavenProject(root);
+    baseDirToMvnPrj.put(mvnRootPrj.getBasedir(), mvnRootPrj);
+    for(ProjectDefinition subProject: root.getSubProjects()) {
+      MavenProject mvnSubPrj = extractMavenProject(subProject);
+      baseDirToMvnPrj.put(mvnSubPrj.getBasedir(), mvnSubPrj);
+    }
+
+    for (Map.Entry<File, VisualStudioProject> baseDirToVSPrjEntry : baseDirToVSPrj.entrySet()) {
+      File baseDirPrj = baseDirToVSPrjEntry.getKey();
+      VisualStudioProject vsProject = baseDirToVSPrjEntry.getValue();
+      MavenProject mvnProject = baseDirToMvnPrj.get(baseDirPrj);
+      if (mvnProject == null) {
+        throw new SonarException("Cannot find maven project for Visual Studio project '" + vsProject.getName() + "'");
+      }
+      ModelFactory.mavenizeVisualStudioProject(mvnProject, vsProject);
+
+    }
+
+    return ModelFactory.newMvnVisualStudioSolution(mvnRootPrj, solution);
+  }
+
+
+  /**
+   * Extract maven project.
+   * @param the sonar project definition.
+   * @return maven  project
+   * @throws SonarException if maven project doesn't exist in provided sonar project definition.
+   */
+  private MavenProject extractMavenProject(ProjectDefinition root) {
+    MavenProject mvnProject = null;
+    for (Object extension : root.getContainerExtensions()) {
+      if (extension instanceof MavenProject) {
+        return (MavenProject) extension;
+      }
+    }
+    throw new SonarException("Cannot find required maven project in project '" + root.getName() + "' for NPanday support!");
+  }
+
   protected void overrideSonarLanguageProperty(VisualStudioProject vsProject, Properties subprojectProperties) {
     Collection<SourceFile> sourceFiles = vsProject.getSourceFiles();
     if (!sourceFiles.isEmpty()) {
@@ -172,7 +277,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     microsoftWindowsEnvironment.setSilverlightDirectory(silverlightDirectory);
   }
 
-  private void createVisualStudioSolution(File baseDir) {
+  private void createVisualStudioSolution(ProjectDefinition root) {
+    File baseDir = root.getBaseDir();
     File slnFile = findSlnFile(baseDir);
     if (slnFile == null) {
       throw new SonarException("No valid '.sln' file could be found. Please read the previous log messages to know more.");
@@ -183,6 +289,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       ModelFactory.setTestProjectNamePattern(configuration.getString(DotNetConstants.TEST_PROJECT_PATTERN_KEY));
       ModelFactory.setIntegTestProjectNamePattern(configuration.getString(DotNetConstants.IT_PROJECT_PATTERN_KEY));
       VisualStudioSolution solution = ModelFactory.getSolution(slnFile);
+      if (isNpandaySupport()) {
+        solution = mavenizeVisualStudioSolution(root, solution);
+      }
       microsoftWindowsEnvironment.setCurrentSolution(solution);
     } catch (IOException e) {
       throw new SonarException("Error occured while reading Visual Studio files.", e);
@@ -222,6 +331,14 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       slnFile = foundSlnFiles.iterator().next();
     }
     return slnFile;
+  }
+
+  /**
+   *
+   * @return <code>true</code> if npanday support property is setted to <code>true</code>, otherwise <code>false</code>
+   */
+  private boolean isNpandaySupport() {
+    return configuration.getBoolean(DotNetConstants.DOTNET_NPANDAY_SUPPORT_KEY);
   }
 
 }

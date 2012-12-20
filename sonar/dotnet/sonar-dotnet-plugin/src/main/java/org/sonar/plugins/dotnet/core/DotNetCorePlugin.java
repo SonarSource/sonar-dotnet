@@ -73,7 +73,9 @@ import java.util.List;
     name = "Build platform", description = "Build platform used to build the solution.", global = true, project = true),
   @Property(key = DotNetConstants.KEY_GENERATION_STRATEGY_KEY, defaultValue = "",
     name = "Resource key generation strategy", description = "Strategy to generate sonar resource keys. Default value is standard. If you encounter " +
-      "any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true)
+      "any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true),
+  @Property(key = DotNetConstants.DOTNET_NPANDAY_SUPPORT_KEY, defaultValue = DotNetConstants.DOTNET_NPANDAY_SUPPORT_DEFVALUE,
+    name = "NPanday support", description = "NPanday support.", global = true, project = true)
 })
 public class DotNetCorePlugin extends SonarPlugin {
 
