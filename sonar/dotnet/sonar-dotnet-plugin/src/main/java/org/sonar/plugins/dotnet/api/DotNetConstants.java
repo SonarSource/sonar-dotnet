@@ -87,13 +87,17 @@ public final class DotNetConstants {
   public static final String TEST_ASSEMBLIES_KEY = "sonar.dotnet.test.assemblies";
 
   public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
-  
+
   public static final String DOTNET_NPANDAY_SUPPORT_KEY = "sonar.dotnet.npanday.support";
   public static final String DOTNET_NPANDAY_SUPPORT_DEFVALUE = "false";
 
+  /** Key point to maven dependency directory of assemblies. The value should be relative to maven build directory */
+  public static final String DOTNET_MAVEN_DEPENDENCY_DIR_KEY = "sonar.dotnet.npanday.dependency.dir";
+  public static final String DOTNET_MAVEN_DEPENDENCY_DIR_DEFVALUE = "dependency";
+
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
-   * 
+   *
    * @param sdkVersion
    *          the wanted .NET version (2.5, 3.0 or 4.0)
    * @return the config key
@@ -104,7 +108,7 @@ public final class DotNetConstants {
 
   /**
    * Returns the config key that will allow to retrieve the Silverlight directory from the plugin configuration.
-   * 
+   *
    * @param silverlightVersion
    *          the wanted Silverlight version (3 or 4)
    * @return the config key

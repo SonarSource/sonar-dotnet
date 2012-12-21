@@ -28,11 +28,17 @@ import java.util.Set;
 /**
  * Represent a web/asp folder/project Visual Studio handle in a weird way asp projects since there is no csproj files. The description of
  * the project is embedded in the sln solution file.
- * 
+ *
  * @author Fabrice BELLINGARD
  * @author Alexandre Victoor
  */
 public class VisualStudioWebProject extends VisualStudioProject {
+
+  /** The default value of reference directory. Should be relative to solution base directory */
+  private static final String DEFAULT_REFERENCE__DIR_VALUE = "Bin";
+
+  /** The value of reference directory. Should be relative to solution base directory */
+  private String referenceDir = DEFAULT_REFERENCE__DIR_VALUE;
 
   public VisualStudioWebProject() {
     setType(ArtifactType.WEB);
@@ -40,7 +46,7 @@ public class VisualStudioWebProject extends VisualStudioProject {
 
   /**
    * @return the generated web dlls
-   * 
+   *
    */
   @Override
   public Set<File> getGeneratedAssemblies(String buildConfigurations, String buildPlatform) {
@@ -95,7 +101,7 @@ public class VisualStudioWebProject extends VisualStudioProject {
    * @return the dll files that correspond to VS references
    */
   public Set<File> getReferences() {
-    File binDirectory = new File(getDirectory(), "Bin");
+    File binDirectory = new File(getDirectory(), referenceDir);
     Set<File> result = new HashSet<File>();
     if (binDirectory.exists()) {
       File[] files = binDirectory.listFiles();
@@ -107,6 +113,14 @@ public class VisualStudioWebProject extends VisualStudioProject {
       }
     }
     return result;
+  }
+
+  /**
+   * Set reference directory.
+   * @param referenceDir the relative(to solution base directory) reference directory.
+   */
+  public void setReferenceDirectory(String referenceDir) {
+    this.referenceDir = referenceDir;
   }
 
 }

@@ -22,6 +22,10 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
+import org.sonar.plugins.dotnet.api.DotNetConstants;
+
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+
 import org.apache.maven.project.MavenProject;
 
 import org.apache.commons.io.FileUtils;
@@ -66,6 +70,8 @@ public final class ModelFactory {
 
   private static final Logger LOG = LoggerFactory.getLogger(ModelFactory.class);
 
+  /** The NPanday relative(to maven build directory) test assemblies directory*/
+  private static final String NPANDAY_TEST_ASSEMBLIES_DIR = "test-assemblies";
   /**
    * Pattern used to define if a project is a test project or not
    */
@@ -600,20 +606,28 @@ public final class ModelFactory {
   /**
    * Mavenize provided Visual Studio Project.
    * @param mvnProject the maven project.
-   * @param vsProject the Visual Studio project.
+   * @param vsProject the correlated Visual Studio project.
+   * @param configuration the dotnet configuration.
    */
-  public static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject) {
+  public static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
     vsProject.setName(mvnProject.getName());
-    // use artifact id instead of final name, since final name is not been handled by npanday
+    // use artifact id instead of final name, since final name is not been handled by NPanday
     vsProject.setAssemblyName(mvnProject.getArtifactId());
     vsProject.setAssemblyVersion(mvnProject.getVersion());
-    String outputDir = mvnProject.getBuild().getDirectory();
-    outputDir = StringUtils.replace(outputDir, "\\", "/");
-    String relOutputDir = StringUtils.substringAfterLast(outputDir, "/");
+    String mvnBuildDir = mvnProject.getBuild().getDirectory();
+    final String preferedFileSeparator = "/";
+    mvnBuildDir = StringUtils.replace(mvnBuildDir, "\\", preferedFileSeparator);
+    // maven relative build directory to project base directory
+    String relativeMvnBuildDir = StringUtils.substringAfterLast(mvnBuildDir, preferedFileSeparator);
     if (vsProject.isTest()) {
-      vsProject.setForcedOutputDir(relOutputDir+"/test-assemblies");
+      vsProject.setForcedOutputDir(relativeMvnBuildDir + preferedFileSeparator + NPANDAY_TEST_ASSEMBLIES_DIR);
     } else {
-      vsProject.setForcedOutputDir(relOutputDir);
+      vsProject.setForcedOutputDir(relativeMvnBuildDir);
+    }
+    // change reference directory for VS web project
+    if (vsProject instanceof VisualStudioWebProject) {
+      ((VisualStudioWebProject) vsProject).setReferenceDirectory(relativeMvnBuildDir + preferedFileSeparator
+        + configuration.getString(DotNetConstants.DOTNET_MAVEN_DEPENDENCY_DIR_KEY));
     }
   }
 

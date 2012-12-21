@@ -75,7 +75,10 @@ import java.util.List;
     name = "Resource key generation strategy", description = "Strategy to generate sonar resource keys. Default value is standard. If you encounter " +
       "any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true),
   @Property(key = DotNetConstants.DOTNET_NPANDAY_SUPPORT_KEY, defaultValue = DotNetConstants.DOTNET_NPANDAY_SUPPORT_DEFVALUE,
-    name = "NPanday support", description = "NPanday support.", global = true, project = true)
+    name = "NPanday support", description = "NPanday support.", global = true, project = true),
+  @Property(key = DotNetConstants.DOTNET_MAVEN_DEPENDENCY_DIR_KEY, defaultValue = DotNetConstants.DOTNET_MAVEN_DEPENDENCY_DIR_DEFVALUE,
+    name = "Mavne dependency directory", description = "Mavne dependency directory. The value should be relative to maven build directory.",
+    global = true, project = true)
 })
 public class DotNetCorePlugin extends SonarPlugin {
 

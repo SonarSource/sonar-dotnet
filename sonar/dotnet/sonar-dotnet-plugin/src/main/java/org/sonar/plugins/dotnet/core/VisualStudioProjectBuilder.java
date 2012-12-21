@@ -89,7 +89,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       createVisualStudioSolution(root);
 
       // And finally create the Sonar projects definition
-      if (isNpandaySupport()) {
+      if (isNpandaySupportEnabled()) {
         createMavenMultiProjectStructure(root);
       } else {
         createMultiProjectStructure(root);
@@ -189,26 +189,27 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
   }
 
   /**
-   * TODO add documentation.
-   * @param root
-   * @param solution
-   * @return
+   * Change VS solution projects like maven structure.
+   * @param root the sonar root project definition.
+   * @param solution the VS solution.
+   * @return new mavenized VS solution instance.
    */
   private VisualStudioSolution mavenizeVisualStudioSolution(ProjectDefinition root, VisualStudioSolution solution) {
-
-    Map<File,VisualStudioProject> baseDirToVSPrj = Maps.newHashMap();
-    for(VisualStudioProject vsProject:solution.getProjects()) {
+    // the base directory is used to correlate VS project with maven project
+    // correlate base directory to it VS project
+    Map<File, VisualStudioProject> baseDirToVSPrj = Maps.newHashMap();
+    for (VisualStudioProject vsProject : solution.getProjects()) {
       baseDirToVSPrj.put(vsProject.getDirectory(), vsProject);
     }
-
-    Map<File,MavenProject> baseDirToMvnPrj = Maps.newHashMap();
+    // correlate base directory to it maven project
+    Map<File, MavenProject> baseDirToMvnPrj = Maps.newHashMap();
     MavenProject mvnRootPrj = extractMavenProject(root);
     baseDirToMvnPrj.put(mvnRootPrj.getBasedir(), mvnRootPrj);
-    for(ProjectDefinition subProject: root.getSubProjects()) {
+    for (ProjectDefinition subProject : root.getSubProjects()) {
       MavenProject mvnSubPrj = extractMavenProject(subProject);
       baseDirToMvnPrj.put(mvnSubPrj.getBasedir(), mvnSubPrj);
     }
-
+    // change VS project
     for (Map.Entry<File, VisualStudioProject> baseDirToVSPrjEntry : baseDirToVSPrj.entrySet()) {
       File baseDirPrj = baseDirToVSPrjEntry.getKey();
       VisualStudioProject vsProject = baseDirToVSPrjEntry.getValue();
@@ -216,10 +217,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       if (mvnProject == null) {
         throw new SonarException("Cannot find maven project for Visual Studio project '" + vsProject.getName() + "'");
       }
-      ModelFactory.mavenizeVisualStudioProject(mvnProject, vsProject);
-
+      ModelFactory.mavenizeVisualStudioProject(mvnProject, vsProject, configuration);
     }
-
+    // we cannot return the changed VS solution, since exist private initialization methods in VisualStudioSolution class
     return ModelFactory.newMvnVisualStudioSolution(mvnRootPrj, solution);
   }
 
@@ -231,7 +231,6 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
    * @throws SonarException if maven project doesn't exist in provided sonar project definition.
    */
   private MavenProject extractMavenProject(ProjectDefinition root) {
-    MavenProject mvnProject = null;
     for (Object extension : root.getContainerExtensions()) {
       if (extension instanceof MavenProject) {
         return (MavenProject) extension;
@@ -289,7 +288,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       ModelFactory.setTestProjectNamePattern(configuration.getString(DotNetConstants.TEST_PROJECT_PATTERN_KEY));
       ModelFactory.setIntegTestProjectNamePattern(configuration.getString(DotNetConstants.IT_PROJECT_PATTERN_KEY));
       VisualStudioSolution solution = ModelFactory.getSolution(slnFile);
-      if (isNpandaySupport()) {
+      if (isNpandaySupportEnabled()) {
         solution = mavenizeVisualStudioSolution(root, solution);
       }
       microsoftWindowsEnvironment.setCurrentSolution(solution);
@@ -334,10 +333,10 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
   }
 
   /**
-   *
-   * @return <code>true</code> if npanday support property is setted to <code>true</code>, otherwise <code>false</code>
+   * Check if NPanday support is enabled.
+   * @return <code>true</code> if NPanday support property is enabled, otherwise <code>false</code>
    */
-  private boolean isNpandaySupport() {
+  private boolean isNpandaySupportEnabled() {
     return configuration.getBoolean(DotNetConstants.DOTNET_NPANDAY_SUPPORT_KEY);
   }
 
