@@ -48,12 +48,6 @@ public abstract class AbstractRuleBasedDotNetSensor extends AbstractRegularDotNe
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-	  LOG.info("##REM## Sonar project name: " + project.getName() );
-	  
-	  for (Project cp : project.getModules() ) {
-		  LOG.info("##REM## Sonar project module name: " + cp.getName() );
-	  }
-	  
     return super.shouldExecuteOnProject(project) && (isToolEnableInProfile());
   }
 
