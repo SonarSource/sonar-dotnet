@@ -72,6 +72,9 @@ public final class ModelFactory {
 
   /** The NPanday relative(to maven build directory) test assemblies directory*/
   private static final String NPANDAY_TEST_ASSEMBLIES_DIR = "test-assemblies";
+
+  private static final String NPANDAY_ASP_NET_PACKAGING = "asp";
+
   /**
    * Pattern used to define if a project is a test project or not
    */
@@ -609,10 +612,64 @@ public final class ModelFactory {
    * @param vsProject the correlated Visual Studio project.
    * @param configuration the dotnet configuration.
    */
-  public static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
+  public static VisualStudioProject mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
+    VisualStudioProject mavenizedVsPrj = vsProject;
+    String mvnPackaging = mvnProject.getPackaging();
+    if (NPANDAY_ASP_NET_PACKAGING.equalsIgnoreCase(mvnPackaging)) {
+      mavenizedVsPrj = mavenizeVisualStudioWebProject(mvnProject, vsProject, configuration);
+    } else {
+      mavenizeVisualStudioProject(mvnProject, mavenizedVsPrj);
+    }
+    return mavenizedVsPrj;
+  }
+
+  /**
+   * @param mvnProject
+   * @param vsProject
+   * @param configuration
+   * @return
+   */
+  private static VisualStudioWebProject mavenizeVisualStudioWebProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
+    // We define the namespace prefix for Visual Studio
+    VisualStudioWebProject webProject = new VisualStudioWebProject();
+    String artifactId = mvnProject.getArtifactId();
+    // use artifact id instead of final name, since final name is not been handled by NPanday
+    String projectName = artifactId;
+    String mvnBuildDir = mvnProject.getBuild().getDirectory();
+    final String preferedFileSeparator = "/";
+    mvnBuildDir = StringUtils.replace(mvnBuildDir, "\\", preferedFileSeparator);
+    // maven relative build directory to project base directory
+    String relativeMvnBuildDir = StringUtils.substringAfterLast(mvnBuildDir, preferedFileSeparator);
+
+    webProject.setName(projectName);
+    String assemblyName = projectName;
+    String rootNamespace = "";
+    File outputDir = new File(mvnBuildDir + preferedFileSeparator + artifactId);
+
+    // The project is populated
+    webProject.setDirectory(mvnProject.getBasedir());
+    webProject.setAssemblyName(assemblyName);
+    webProject.setRootNamespace(rootNamespace);
+
+    Map<BuildConfiguration, File> buildConfOutputDirMap = new HashMap<BuildConfiguration, File>();
+    buildConfOutputDirMap.put(new BuildConfiguration("Debug"), outputDir);
+    buildConfOutputDirMap.put(new BuildConfiguration("Release"), outputDir);
+    webProject.setBuildConfOutputDirMap(buildConfOutputDirMap);
+    webProject.setForcedOutputDir(relativeMvnBuildDir + preferedFileSeparator + artifactId);
+    webProject.setReferenceDirectory(relativeMvnBuildDir + preferedFileSeparator
+      + configuration.getString(DotNetConstants.DOTNET_MAVEN_DEPENDENCY_DIR_KEY));
+    return webProject;
+  }
+
+  /**
+   * @param mvnProject
+   * @param vsProject
+   */
+  private static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject) {
     vsProject.setName(mvnProject.getName());
     // use artifact id instead of final name, since final name is not been handled by NPanday
-    vsProject.setAssemblyName(mvnProject.getArtifactId());
+    String artifactId = mvnProject.getArtifactId();
+    vsProject.setAssemblyName(artifactId);
     vsProject.setAssemblyVersion(mvnProject.getVersion());
     String mvnBuildDir = mvnProject.getBuild().getDirectory();
     final String preferedFileSeparator = "/";
@@ -624,23 +681,21 @@ public final class ModelFactory {
     } else {
       vsProject.setForcedOutputDir(relativeMvnBuildDir);
     }
-    // change reference directory for VS web project
-    if (vsProject instanceof VisualStudioWebProject) {
-      ((VisualStudioWebProject) vsProject).setReferenceDirectory(relativeMvnBuildDir + preferedFileSeparator
-        + configuration.getString(DotNetConstants.DOTNET_MAVEN_DEPENDENCY_DIR_KEY));
-    }
   }
 
   /**
    * Create new  Visual Studio solution based on provided mavenized VS solution.
-   * @param root the maven root project.
-   * @param solution the mavenized VS solution.
-   * @return Visula Studio solution instance.
+   * @param solutionName the solution name.
+   * @param solutionFile the solution file.
+   * @param buildConfigurations the solution build configurations.
+   * @param projects the mavenized VS projects.
+   * @return Visual Studio solution instance.
    */
-  public static VisualStudioSolution newMvnVisualStudioSolution(MavenProject root, VisualStudioSolution solution) {
-    VisualStudioSolution mvnVSSolution = new VisualStudioSolution(solution.getSolutionFile(), solution.getProjects());
-    mvnVSSolution.setBuildConfigurations(solution.getBuildConfigurations());
-    mvnVSSolution.setName(root.getName());
+  public static VisualStudioSolution newMvnVisualStudioSolution(String solutionName, File solutionFile, List<BuildConfiguration> buildConfigurations,
+      List<VisualStudioProject> projects) {
+    VisualStudioSolution mvnVSSolution = new VisualStudioSolution(solutionFile, projects);
+    mvnVSSolution.setBuildConfigurations(buildConfigurations);
+    mvnVSSolution.setName(solutionName);
 
     return mvnVSSolution;
   }

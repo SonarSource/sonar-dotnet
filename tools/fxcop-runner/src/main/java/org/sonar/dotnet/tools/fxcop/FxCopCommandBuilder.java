@@ -49,11 +49,11 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Constructs a {@link FxCopCommandBuilder} object for the given Visual Studio project.
-   * @param solution 
+   * @param solution
    *          the current VS solution
    * @param project
    *          the VS project to analyze
-   * 
+   *
    * @return a FxCop builder for this project
    */
   public static FxCopCommandBuilder createBuilder(VisualStudioSolution solution, VisualStudioProject project) {
@@ -65,7 +65,7 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Sets the Silverlight folder
-   * 
+   *
    * @param silverlightFolder
    *          the Silverlight folder
    */
@@ -75,10 +75,10 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Sets the assembly dependencies directories if needed.
-   * 
+   *
    * @param assemblyDependencyDirectories
    *          the folders containing the dependencies
-   * 
+   *
    */
   public void setAssemblyDependencyDirectories(String... assemblyDependencyDirectories) {
     this.assemblyDependencyDirectories = assemblyDependencyDirectories;
@@ -86,10 +86,10 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Sets the parameter that allows to ignore generated code
-   * 
+   *
    * @param ignoreGeneratedCode
    *          true to ignore generated code
-   * 
+   *
    */
   public void setIgnoreGeneratedCode(boolean ignoreGeneratedCode) {
     this.ignoreGeneratedCode = ignoreGeneratedCode;
@@ -97,7 +97,7 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Sets the timeout (in minutes) used for the FxCop plugin.
-   * 
+   *
    * @param timeout
    *          the timeout
    */
@@ -107,7 +107,7 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
   /**
    * Transforms this command object into a array of string that can be passed to the CommandExecutor.
-   * 
+   *
    * @return the Command that represent the command to launch.
    */
   public Command toCommand() throws FxCopException {
@@ -154,9 +154,10 @@ public class FxCopCommandBuilder extends CilRuleEngineCommandBuilderSupport { //
 
     command.addArgument("/gac");
 
-    if (isAspUsed()) {
-      command.addArgument("/aspnet");
-    }
+    // FIXME argument produce fxcop failures, need follow up.
+    //if (isAspUsed()) {
+      //command.addArgument("/aspnet");
+    //}
 
     return command;
   }

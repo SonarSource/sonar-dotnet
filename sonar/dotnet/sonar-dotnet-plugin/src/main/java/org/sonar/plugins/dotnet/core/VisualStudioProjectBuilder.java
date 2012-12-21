@@ -210,6 +210,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       baseDirToMvnPrj.put(mvnSubPrj.getBasedir(), mvnSubPrj);
     }
     // change VS project
+    List<VisualStudioProject> newMvnVsProjects = Lists.newLinkedList();
     for (Map.Entry<File, VisualStudioProject> baseDirToVSPrjEntry : baseDirToVSPrj.entrySet()) {
       File baseDirPrj = baseDirToVSPrjEntry.getKey();
       VisualStudioProject vsProject = baseDirToVSPrjEntry.getValue();
@@ -217,10 +218,10 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       if (mvnProject == null) {
         throw new SonarException("Cannot find maven project for Visual Studio project '" + vsProject.getName() + "'");
       }
-      ModelFactory.mavenizeVisualStudioProject(mvnProject, vsProject, configuration);
+      newMvnVsProjects.add(ModelFactory.mavenizeVisualStudioProject(mvnProject, vsProject, configuration));
     }
     // we cannot return the changed VS solution, since exist private initialization methods in VisualStudioSolution class
-    return ModelFactory.newMvnVisualStudioSolution(mvnRootPrj, solution);
+    return ModelFactory.newMvnVisualStudioSolution(root.getName(), solution.getSolutionFile(), solution.getBuildConfigurations(), newMvnVsProjects);
   }
 
 
