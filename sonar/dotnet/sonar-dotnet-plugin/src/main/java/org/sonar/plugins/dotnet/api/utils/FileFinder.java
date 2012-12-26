@@ -257,7 +257,13 @@ public final class FileFinder {
     private final WildcardPattern pattern;
 
     public PatternFilter(File workDir, String pattern) {
-      String absolutePathPattern = workDir.getAbsolutePath() + "/" + pattern;
+      String absolutePathPattern = workDir.getAbsolutePath();
+      if (!absolutePathPattern.endsWith("\\")) {
+        // only if workDir is not
+        // a folder on another drive (on windows systems)
+        absolutePathPattern += "/";
+      }
+      absolutePathPattern +=  pattern;
       absolutePathPattern = convertSlash(absolutePathPattern);
       this.pattern = WildcardPattern.create(absolutePathPattern);
     }

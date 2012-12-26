@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.dotnet.api.utils;
 
+import org.junit.Ignore;
+
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 
@@ -95,6 +97,13 @@ public class FileFinderTest {
       assertTrue(file.exists());
       assertTrue(file.isDirectory());
     }
+  }
+
+  @Test
+  @Ignore("Impossible to automate this test on non win boxes")
+  public void testFindFilesOnOtherDrives() {
+    Collection<File> result = FileFinder.findFiles(solution, project, "F:\\**\\*.dll");
+    assertFalse(result.isEmpty());
   }
 
   @Test
