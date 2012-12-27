@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <FxCopProject Version="1.36">
     <ProjectOptions>
-        <SharedProject>True</SharedProject>
+        <SharedProject>False</SharedProject>
         <SaveMessages>
             <Project NewOnly="False" Status="Active, Excluded"/>
             <Report NewOnly="False" Status="Active"/>
@@ -15,7 +15,7 @@
         <Spelling Locale="en-US"/>
         <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
         <CustomDictionaries SearchProjectDir="True" SearchUserProfile="True" SearchFxCopDir="True"/>
-        <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+        <IgnoreGeneratedCode>True</IgnoreGeneratedCode>
     </ProjectOptions>
     <Rules>
         <RuleFiles>
