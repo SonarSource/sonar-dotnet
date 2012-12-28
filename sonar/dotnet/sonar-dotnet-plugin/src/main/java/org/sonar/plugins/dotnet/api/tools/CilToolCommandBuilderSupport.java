@@ -35,7 +35,7 @@ import java.util.Collection;
 
 /**
  * Support class for the cil based rule engines
- * 
+ *
  * @author Alexandre Victoor
  *
  */
@@ -57,7 +57,7 @@ public abstract class CilToolCommandBuilderSupport {
 
   /**
    * Set the assemblies to scan if the information should not be taken from the VS configuration files.
-   * 
+   *
    * @param assembliesToScan
    *          the assemblies to scan
    *
@@ -68,10 +68,10 @@ public abstract class CilToolCommandBuilderSupport {
 
   /**
    * Set the build configurations. By default, it is "Debug".
-   * 
+   *
    * @param buildConfigurations
    *          the build configurations
-   *          
+   *
    */
   public void setBuildConfiguration(String buildConfiguration) {
     this.buildConfiguration = buildConfiguration;
@@ -87,10 +87,10 @@ public abstract class CilToolCommandBuilderSupport {
 
   /**
    * Sets the executable
-   * 
+   *
    * @param executable
    *          the executable
-   * 
+   *
    */
   public void setExecutable(File executable) {
     this.executable = executable;
@@ -98,10 +98,10 @@ public abstract class CilToolCommandBuilderSupport {
 
   /**
    * Sets the report file to generate
-   * 
+   *
    * @param reportFile
    *          the report file
-   * 
+   *
    */
   public void setReportFile(File reportFile) {
     this.reportFile = reportFile;
@@ -113,6 +113,9 @@ public abstract class CilToolCommandBuilderSupport {
     if (assembliesToScan.length == 0) {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
       assemblyFiles = vsProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
+      if (assemblyFiles == null || assemblyFiles.isEmpty()) {
+        LOG.warn("No assembly found using csproj file {} with build configuration {} and platform {}", new Object[] {vsProject.getProjectFile(), buildConfiguration, buildPlatform});
+      }
     } else {
       // Some assemblies have been specified: let's analyze them
       assemblyFiles = FileFinder.findFiles(solution, vsProject, assembliesToScan);

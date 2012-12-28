@@ -104,6 +104,8 @@ public class GallioSensor extends AbstractDotNetSensor {
     File assembly = visualStudioProject.getArtifact(buildConfigurations, buildPlatform);
     if (assembly != null && assembly.isFile()) {
       assemblyFileList.add(assembly);
+    } else {
+      LOG.warn("Test assembly not found at the following location " + assembly);
     }
   }
 
@@ -120,6 +122,7 @@ public class GallioSensor extends AbstractDotNetSensor {
         for (VisualStudioProject visualStudioProject : testProjects) {
           Collection<File> projectTestAssemblies = FileFinder.findFiles(solution, visualStudioProject, testAssemblyPatterns);
           if (projectTestAssemblies.isEmpty()) {
+            LOG.info("Test assembly not found using pattern {}, fallback to visual studio default assembly location", testAssemblyPatterns);
             addAssembly(assemblyFiles, visualStudioProject);
           } else {
             assemblyFiles.addAll(projectTestAssemblies);
