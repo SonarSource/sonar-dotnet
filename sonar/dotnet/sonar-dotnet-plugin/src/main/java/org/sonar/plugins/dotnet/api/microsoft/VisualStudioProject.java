@@ -40,7 +40,7 @@ import java.util.UUID;
 
 /**
  * A dot net project extracted from a solution
- * 
+ *
  * @author Fabrice BELLINGARD
  * @author Jose CHILLAN Apr 16, 2009
  */
@@ -69,7 +69,7 @@ public class VisualStudioProject {
 
   /**
    * Builds a {@link VisualStudioProject} ...
-   * 
+   *
    * @param name
    * @param projectFile
    */
@@ -81,7 +81,7 @@ public class VisualStudioProject {
    * Gets the relative path of a file contained in the project. <br>
    * For example, if the visual studio project is C:/MySolution/MyProject/MyProject.csProj and the file is
    * C:/MySolution/MyProject/Dummy/Foo.cs, then the result is Dummy/Foo.cs
-   * 
+   *
    * @param file
    *          the file whose relative path is to be computed
    * @return the relative path, or <code>null</code> if the file is not in the project subdirectories
@@ -110,7 +110,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the name.
-   * 
+   *
    * @return The name to return.
    */
   public String getName() {
@@ -119,7 +119,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the projectFile.
-   * 
+   *
    * @return The projectFile to return.
    */
   public File getProjectFile() {
@@ -128,7 +128,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the type.
-   * 
+   *
    * @return The type to return.
    */
   public ArtifactType getType() {
@@ -141,7 +141,7 @@ public class VisualStudioProject {
 
   /**
    * Provides the location of the generated artifact(s) of this project according to the build configuration(s) used.
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @param buildPlatform
@@ -176,7 +176,8 @@ public class VisualStudioProject {
       if (artifactDirectory == null) {
         // just take the first one found...
         artifactDirectory = buildConfOutputDirMap.values().iterator().next();
-        LOG.debug("Fallback to directory {} for project {}", artifactDirectory, name);
+        LOG.warn("Configuration(s) {} not found for platform {} in " + projectFile, buildConfigurations, buildPlatform);
+        LOG.warn("Fallback to directory {} for project {}", artifactDirectory, name);
       } else {
         LOG.debug("Using directory " + artifactDirectory + " for project " + name + " with buildconfiguration " + buildConfiguration);
       }
@@ -186,7 +187,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the generated assembly according to the build configurations
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @return
@@ -199,7 +200,7 @@ public class VisualStudioProject {
   /**
    * Gets the generated assemblies according to the build configurations. There is zero or one single assembly generated except for web
    * assemblies.
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @return a Set of the generated assembly files. If no files found, the set will be empty.
@@ -217,7 +218,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the name of the artifact.
-   * 
+   *
    * @return
    */
   public String getArtifactName() {
@@ -226,7 +227,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the assemblyName.
-   * 
+   *
    * @return The assemblyName to return.
    */
   public String getAssemblyName() {
@@ -243,7 +244,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the assemblyName.
-   * 
+   *
    * @param assemblyName
    *          The assemblyName to set.
    */
@@ -256,7 +257,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the rootNamespace.
-   * 
+   *
    * @return The rootNamespace to return.
    */
   public String getRootNamespace() {
@@ -265,7 +266,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the rootNamespace.
-   * 
+   *
    * @param rootNamespace
    *          The rootNamespace to set.
    */
@@ -275,7 +276,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the directory.
-   * 
+   *
    * @return The directory to return.
    */
   public File getDirectory() {
@@ -284,7 +285,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the root directory of the project. For a regular project, this is where is located the csproj file.
-   * 
+   *
    * @param directory
    *          The directory to set.
    */
@@ -298,7 +299,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name
    *          The name to set.
    */
@@ -308,7 +309,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the projectFile.
-   * 
+   *
    * @param projectFile
    *          The projectFile to set.
    */
@@ -318,7 +319,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the projectGuid.
-   * 
+   *
    * @param projectGuid
    *          The projectGuid to set.
    */
@@ -328,7 +329,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the type.
-   * 
+   *
    * @param type
    *          The type to set.
    */
@@ -361,7 +362,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the artifact extension (.dll or .exe)
-   * 
+   *
    * @return the extension
    */
   public String getExtension() {
@@ -382,7 +383,7 @@ public class VisualStudioProject {
 
   /**
    * Gets all the files contained in the project
-   * 
+   *
    * @return
    */
   public Collection<SourceFile> getSourceFiles() {
@@ -431,7 +432,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the source representation of a given file.
-   * 
+   *
    * @param file
    *          the file to retrieve
    * @return the associated source file, or <code>null</code> if the file is not included in the assembly.
@@ -454,7 +455,7 @@ public class VisualStudioProject {
 
   /**
    * Test if this project is a parent directory of the given file.
-   * 
+   *
    * @param file
    *          the file to check
    * @return <code>true</code> if the file is under this project
@@ -465,7 +466,7 @@ public class VisualStudioProject {
 
   /**
    * Checks if the project contains a given source file.
-   * 
+   *
    * @param file
    *          the file to check
    * @return <code>true</code> if the project contains the file

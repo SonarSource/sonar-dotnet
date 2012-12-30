@@ -208,7 +208,7 @@ public final class FileFinder {
 
   protected static void logResults(Set<File> result, String... patternArray) {
     if (result.isEmpty()) {
-      LOG.warn("No file found using pattern(s) " + StringUtils.join(patternArray, ','));
+      LOG.debug("No file found at location(s) " + StringUtils.join(patternArray, ','));
     } else {
       LOG.debug("The following files have been found using pattern(s): {}\n{}",
           StringUtils.join(patternArray, ','), StringUtils.join(result, "\n  - "));
