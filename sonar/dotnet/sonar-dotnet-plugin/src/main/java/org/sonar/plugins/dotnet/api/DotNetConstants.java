@@ -107,7 +107,7 @@ public final class DotNetConstants {
    * Returns the config key that will allow to retrieve the Silverlight directory from the plugin configuration.
    * 
    * @param silverlightVersion
-   *          the wanted Silverlight version (3, 4 or 5)
+   *          the wanted Silverlight version (3, 4 or 5) 
    * @return the config key
    */
   public static String getSilverlightDirKey(String silverlightVersion) {
