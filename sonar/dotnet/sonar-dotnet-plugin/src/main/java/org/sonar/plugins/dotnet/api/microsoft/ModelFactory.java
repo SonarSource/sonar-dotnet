@@ -22,6 +22,18 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
+import org.codehaus.plexus.util.xml.Xpp3Dom;
+
+import org.apache.maven.model.Plugin;
+
+import com.google.common.collect.Maps;
+
+import org.sonar.api.utils.SonarException;
+
+import com.google.common.collect.Lists;
+
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
+
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
@@ -72,8 +84,12 @@ public final class ModelFactory {
 
   /** The NPanday relative(to maven build directory) test assemblies directory*/
   private static final String NPANDAY_TEST_ASSEMBLIES_DIR = "test-assemblies";
-
   private static final String NPANDAY_ASP_NET_PACKAGING = "asp";
+  private static final String NPANDAY_SILVERLIGHT_PACKAGING = "silverlight-application";
+  private static final String NPANDAY_DOTNET_EXECUTABLE_PACKAGING = "dotnet-executable";
+  private static final String NPANDAY_COMPILE_PLUGIN_KEY = "org.apache.npanday.plugins:maven-compile-plugin";
+  private static final String NPANDAY_ROOTNAMESPACE_KEY = "rootNamespace";
+  private static final String NPANDAY_TEST_ROOTNAMESPACE_KEY = "testRootNamespace";
 
   /**
    * Pattern used to define if a project is a test project or not
@@ -147,14 +163,15 @@ public final class ModelFactory {
     boolean integTestFlag = nameMatchPatterns(assemblyName, integTestProjectPatterns);
 
     if (testFlag) {
-      visualStudioProject.setUnitTest(true);
-      if (StringUtils.isEmpty(integTestProjectPatterns)) {
-        visualStudioProject.setIntegTest(true);
-      }
+      visualStudioProject.setProjectType(ProjectType.UNIT_TEST_PROJECT);
+      // TODO why we need this ?
+      // if (StringUtils.isEmpty(integTestProjectPatterns)) {
+      // visualStudioProject.setProjectType(ProjectType.IT_TEST_PROJECT);
+      // }
     }
 
     if (integTestFlag) {
-      visualStudioProject.setIntegTest(true);
+      visualStudioProject.setProjectType(ProjectType.IT_TEST_PROJECT);
     }
 
     if (testFlag || integTestFlag) {
@@ -386,7 +403,7 @@ public final class ModelFactory {
       project.setRootNamespace(rootNamespace);
 
       if (StringUtils.isNotEmpty(silverlightStr)) {
-        project.setSilverlightProject(true);
+        project.setProjectType(ProjectType.SILVERLIGHT_PROJECT);
       }
 
       // Get all source files to find the assembly version
@@ -607,31 +624,114 @@ public final class ModelFactory {
   }
 
   /**
-   * Mavenize provided Visual Studio Project.
-   * @param mvnProject the maven project.
-   * @param vsProject the correlated Visual Studio project.
-   * @param configuration the dotnet configuration.
+   * Gets the solution from sonar root project.
+   * @param root the sonar root project.
+   * @param configuration the .net configurations.
+   * @return the solution instance.
    */
-  public static VisualStudioProject mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
-    VisualStudioProject mavenizedVsPrj = vsProject;
-    String mvnPackaging = mvnProject.getPackaging();
-    if (NPANDAY_ASP_NET_PACKAGING.equalsIgnoreCase(mvnPackaging)) {
-      mavenizedVsPrj = mavenizeVisualStudioWebProject(mvnProject, vsProject, configuration);
-    } else {
-      mavenizeVisualStudioProject(mvnProject, mavenizedVsPrj);
+  public static VisualStudioSolution getSolution(final ProjectDefinition root, DotNetConfiguration configuration) {
+    MavenProject mvnRootPrj = extractMavenProject(root);
+    List<VisualStudioProject> projects = Lists.newLinkedList();
+    List<ProjectDefinition> subProjects = getSubProjects(root);
+    for (ProjectDefinition subProject : subProjects) {
+      MavenProject mvnSubProject = extractMavenProject(subProject);
+      boolean isTestProject = nameMatchPatterns(mvnSubProject.getArtifactId(), testProjectNamePattern + ((integTestProjectNamePattern != null) ? ";" + integTestProjectNamePattern
+          : StringUtils.EMPTY));
+      if(isTestProject) {
+        projects.add(buildVisualStudioTestProject(mvnSubProject, configuration));
+      } else {
+        projects.add(buildVisualStudioProject(mvnSubProject, configuration));
+        if (hasUnitTests(mvnSubProject)) {
+          projects.add(buildVisualStudioInnerTestProject(mvnSubProject, configuration));
+        }
+      }
     }
-    return mavenizedVsPrj;
+    // create solution
+    VisualStudioSolution solution = new VisualStudioSolution(mvnRootPrj.getFile(), projects);
+    // set build configurations
+    List<BuildConfiguration> buildConfigurations = Lists.newLinkedList();
+    buildConfigurations.add(new BuildConfiguration("Release"));
+    solution.setBuildConfigurations(buildConfigurations);
+    solution.setName(root.getName());
+
+    return solution;
   }
 
   /**
-   * @param mvnProject
-   * @param vsProject
-   * @param configuration
-   * @return
+   * Check if given project has unit test files.
+   * @param mvnProject the maven project.
+   * @return <code>true</code> if given project has unit test files, otherwise <code>false</code>.
    */
-  private static VisualStudioWebProject mavenizeVisualStudioWebProject(MavenProject mvnProject, VisualStudioProject vsProject, DotNetConfiguration configuration) {
+  private static boolean hasUnitTests(MavenProject mvnProject) {
+    boolean hasUnitTests = false;
+    List<String> testRoots = mvnProject.getTestCompileSourceRoots();
+    for (String testRoot : testRoots) {
+      File testDirecory = new File(testRoot);
+      if (!testDirecory.exists() || !testDirecory.isDirectory()) {
+        continue;
+      }
+      Collection<File> testFiles = FileUtils.listFiles(testDirecory, new String[] {"cs", "vb"}, true);
+      if (!testFiles.isEmpty()) {
+        hasUnitTests = true;
+        break;
+      }
+    }
+
+    return hasUnitTests;
+  }
+
+  /**
+   * Gets all sub project from root.
+   * @param root the root project.
+   * @return the list of projects.
+   */
+  private static List<ProjectDefinition> getSubProjects(final ProjectDefinition root) {
+    List<ProjectDefinition> projects = Lists.newLinkedList();
+    for (ProjectDefinition subProject : root.getSubProjects()) {
+      collectProjects(subProject, projects);
+    }
+
+    return projects;
+  }
+
+  /**
+   * Populates list of projects from hierarchy.
+   * @param project the project
+   * @param collected the list of collected projects.
+   */
+  private static void collectProjects(ProjectDefinition project, List<ProjectDefinition> collected) {
+    collected.add(project);
+    for (ProjectDefinition child : project.getSubProjects()) {
+      collectProjects(child, collected);
+    }
+  }
+
+  /**
+   * Build Visual Studio Project from given maven project.
+   * @param mvnProject the maven project.
+   * @param configuration the dotnet configuration.
+   */
+  public static VisualStudioProject buildVisualStudioProject(MavenProject mvnProject, DotNetConfiguration configuration) {
+    VisualStudioProject vsProject = null;
+    String mvnPackaging = mvnProject.getPackaging();
+    if (NPANDAY_ASP_NET_PACKAGING.equalsIgnoreCase(mvnPackaging)) {
+      vsProject = buildVisualStudioWebProject(mvnProject, configuration);
+    } else {
+      vsProject = buildVisualStudioBaseProject(mvnProject, configuration);
+    }
+    return vsProject;
+  }
+
+  /**
+   * Build Visual Studio Web Project based on given maven project.
+   * @param mvnProject the maven project.
+   * @param configuration the .net configurations.
+   * @return the Visual Studio Web project instance.
+   */
+  private static VisualStudioWebProject buildVisualStudioWebProject(MavenProject mvnProject, DotNetConfiguration configuration) {
     // We define the namespace prefix for Visual Studio
     VisualStudioWebProject webProject = new VisualStudioWebProject();
+    webProject.setProjectType(ProjectType.WEB_PROJECT);
     String artifactId = mvnProject.getArtifactId();
     // use artifact id instead of final name, since final name is not been handled by NPanday
     String projectName = artifactId;
@@ -648,11 +748,11 @@ public final class ModelFactory {
 
     // The project is populated
     webProject.setDirectory(mvnProject.getBasedir());
+    webProject.setSourceDirectory(new File(mvnProject.getBuild().getSourceDirectory()));
     webProject.setAssemblyName(assemblyName);
     webProject.setRootNamespace(rootNamespace);
 
     Map<BuildConfiguration, File> buildConfOutputDirMap = new HashMap<BuildConfiguration, File>();
-    buildConfOutputDirMap.put(new BuildConfiguration("Debug"), outputDir);
     buildConfOutputDirMap.put(new BuildConfiguration("Release"), outputDir);
     webProject.setBuildConfOutputDirMap(buildConfOutputDirMap);
     webProject.setForcedOutputDir(relativeMvnBuildDir + preferedFileSeparator + artifactId);
@@ -662,41 +762,134 @@ public final class ModelFactory {
   }
 
   /**
-   * @param mvnProject
-   * @param vsProject
+   * Build Visual Studio Project based on given maven project.
+   * @param mvnProject the maven project.
+   * @param configuration the .net configurations.
    */
-  private static void mavenizeVisualStudioProject(MavenProject mvnProject, VisualStudioProject vsProject) {
+  private static VisualStudioProject buildVisualStudioBaseProject(MavenProject mvnProject, DotNetConfiguration configuration) {
+    VisualStudioProject vsProject = new VisualStudioProject();
+    if (isExecutableProject(mvnProject)) {
+      vsProject.setType(ArtifactType.EXECUTABLE);
+    } else {
+      vsProject.setType(ArtifactType.LIBRARY);
+    }
     vsProject.setName(mvnProject.getName());
     // use artifact id instead of final name, since final name is not been handled by NPanday
     String artifactId = mvnProject.getArtifactId();
     vsProject.setAssemblyName(artifactId);
     vsProject.setAssemblyVersion(mvnProject.getVersion());
-    String mvnBuildDir = mvnProject.getBuild().getDirectory();
-    final String preferedFileSeparator = "/";
-    mvnBuildDir = StringUtils.replace(mvnBuildDir, "\\", preferedFileSeparator);
-    // maven relative build directory to project base directory
-    String relativeMvnBuildDir = StringUtils.substringAfterLast(mvnBuildDir, preferedFileSeparator);
-    if (vsProject.isTest()) {
-      vsProject.setForcedOutputDir(relativeMvnBuildDir + preferedFileSeparator + NPANDAY_TEST_ASSEMBLIES_DIR);
-    } else {
-      vsProject.setForcedOutputDir(relativeMvnBuildDir);
+    vsProject.setRootNamespace(findRootNamespace(mvnProject, false));
+    vsProject.setDirectory(mvnProject.getBasedir());
+    vsProject.setSourceDirectory(new File(mvnProject.getBuild().getSourceDirectory()));
+    Map<BuildConfiguration, File> buildConfOutputDirMap = Maps.newHashMap();
+    buildConfOutputDirMap.put(new BuildConfiguration("Release"), new File(mvnProject.getBuild().getDirectory()));
+    vsProject.setBuildConfOutputDirMap(buildConfOutputDirMap);
+
+    // check if is silverlight project
+    if (isSilverlightProject(mvnProject)) {
+      vsProject.setProjectType(ProjectType.SILVERLIGHT_PROJECT);
     }
+
+    return vsProject;
   }
 
   /**
-   * Create new  Visual Studio solution based on provided mavenized VS solution.
-   * @param solutionName the solution name.
-   * @param solutionFile the solution file.
-   * @param buildConfigurations the solution build configurations.
-   * @param projects the mavenized VS projects.
-   * @return Visual Studio solution instance.
+   * Check if is executable project.
    */
-  public static VisualStudioSolution newMvnVisualStudioSolution(String solutionName, File solutionFile, List<BuildConfiguration> buildConfigurations,
-      List<VisualStudioProject> projects) {
-    VisualStudioSolution mvnVSSolution = new VisualStudioSolution(solutionFile, projects);
-    mvnVSSolution.setBuildConfigurations(buildConfigurations);
-    mvnVSSolution.setName(solutionName);
+  private static boolean isExecutableProject(MavenProject mvnProject) {
+    return NPANDAY_DOTNET_EXECUTABLE_PACKAGING.equalsIgnoreCase(mvnProject.getPackaging());
+  }
 
-    return mvnVSSolution;
+  /**
+   * Build Visual Studio UnitTest Project on given maven test project.
+   * @param mvnProject the maven project.
+   * @param configuration the .net configurations.
+   */
+  private static VisualStudioProject buildVisualStudioTestProject(MavenProject mvnProject, DotNetConfiguration configuration) {
+    VisualStudioProject vsProject = new VisualStudioProject();
+    vsProject.setProjectType(ProjectType.UNIT_TEST_PROJECT);
+    vsProject.setType(ArtifactType.LIBRARY);
+    vsProject.setName(mvnProject.getName());
+    // use artifact id instead of final name, since final name is not been handled by NPanday
+    String artifactId = mvnProject.getArtifactId();
+    vsProject.setAssemblyName(artifactId);
+    vsProject.setAssemblyVersion(mvnProject.getVersion());
+    vsProject.setRootNamespace(findRootNamespace(mvnProject, false));
+    vsProject.setDirectory(mvnProject.getBasedir());
+    vsProject.setSourceDirectory(new File(mvnProject.getBuild().getSourceDirectory()));
+    Map<BuildConfiguration, File> buildConfOutputDirMap = Maps.newHashMap();
+    buildConfOutputDirMap.put(new BuildConfiguration("Release"), new File(mvnProject.getBuild().getDirectory(), NPANDAY_TEST_ASSEMBLIES_DIR));
+    vsProject.setBuildConfOutputDirMap(buildConfOutputDirMap);
+
+    return vsProject;
+  }
+
+  /**
+   * Build Visual Studio UnitTest Project on given maven project.
+   * @param mvnProject the maven project.
+   * @param configuration the .net configurations.
+   */
+  private static VisualStudioProject buildVisualStudioInnerTestProject(MavenProject mvnProject, DotNetConfiguration configuration) {
+    VisualStudioProject vsProject = new VisualStudioProject();
+    vsProject.setProjectType(ProjectType.UNIT_TEST_PROJECT);
+    vsProject.setType(ArtifactType.LIBRARY);
+    vsProject.setName(mvnProject.getName() + "Test");
+    // use artifact id instead of final name, since final name is not been handled by NPanday
+    String artifactId = mvnProject.getArtifactId() + "-test";
+    vsProject.setAssemblyName(artifactId);
+    vsProject.setAssemblyVersion(mvnProject.getVersion());
+    vsProject.setRootNamespace(findRootNamespace(mvnProject, true));
+    vsProject.setDirectory(mvnProject.getBasedir());
+    vsProject.setSourceDirectory(new File(mvnProject.getBuild().getTestSourceDirectory()));
+    Map<BuildConfiguration, File> buildConfOutputDirMap = Maps.newHashMap();
+    buildConfOutputDirMap.put(new BuildConfiguration("Release"), new File(mvnProject.getBuild().getDirectory(), NPANDAY_TEST_ASSEMBLIES_DIR));
+    vsProject.setBuildConfOutputDirMap(buildConfOutputDirMap);
+
+    return vsProject;
+  }
+
+  /**
+   * Check if is silverlight project.
+   */
+  private static boolean isSilverlightProject(MavenProject mvnProject) {
+    return NPANDAY_SILVERLIGHT_PACKAGING.equalsIgnoreCase(mvnProject.getPackaging());
+  }
+
+  /**
+   * Find rootnamespace of .net project.
+   * @param mvnProject the maven .net project.
+   * @param isTestNamespace <code>true</code> if should find rootnamespace for test project.
+   * @return the rootnamespace value.
+   */
+  private static String findRootNamespace(MavenProject mvnProject, boolean isTestNamespace) {
+    String rootnamespace = StringUtils.EMPTY;
+    Plugin npandayCompilePlugin = mvnProject.getPlugin(NPANDAY_COMPILE_PLUGIN_KEY);
+    if (npandayCompilePlugin != null) {
+      // Object configuration is a DOM representation.
+      Object configuration = npandayCompilePlugin.getConfiguration();
+      if (configuration instanceof Xpp3Dom) {
+        Xpp3Dom domConfig = (Xpp3Dom) configuration;
+        String namespaceKey = isTestNamespace ? NPANDAY_TEST_ROOTNAMESPACE_KEY : NPANDAY_ROOTNAMESPACE_KEY;
+        Xpp3Dom rootNamespaceDom = domConfig.getChild(namespaceKey);
+        rootnamespace = rootNamespaceDom != null ? rootNamespaceDom.getValue() : StringUtils.EMPTY;
+      }
+    }
+
+    return rootnamespace;
+  }
+
+  /**
+   * Extract maven project.
+   * @param the sonar project definition.
+   * @return maven  project
+   * @throws SonarException if maven project doesn't exist in provided sonar project definition.
+   */
+  public static MavenProject extractMavenProject(ProjectDefinition root) {
+    for (Object extension : root.getContainerExtensions()) {
+      if (extension instanceof MavenProject) {
+        return (MavenProject) extension;
+      }
+    }
+    throw new SonarException("Cannot find required maven project in project '" + root.getName() + "' for NPanday support!");
   }
 }

@@ -22,6 +22,8 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
+import com.google.common.base.Preconditions;
+
 import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -40,7 +42,7 @@ import java.util.UUID;
 
 /**
  * A dot net project extracted from a solution
- * 
+ *
  * @author Fabrice BELLINGARD
  * @author Jose CHILLAN Apr 16, 2009
  */
@@ -60,28 +62,28 @@ public class VisualStudioProject {
   private String forcedOutputDir;
   private Map<BuildConfiguration, File> buildConfOutputDirMap;
   private File directory;
-  private boolean silverlightProject;
+  /** Source directory */
+  private File sourceDirectory;
   private Map<File, SourceFile> sourceFileMap;
-
-  private boolean unitTest;
-
-  private boolean integTest;
+  /** The project type */
+  private ProjectType projectType;
 
   /**
    * Builds a {@link VisualStudioProject} ...
-   * 
+   *
    * @param name
    * @param projectFile
    */
   public VisualStudioProject() {
     super();
+    setProjectType(ProjectType.PROJECT);
   }
 
   /**
    * Gets the relative path of a file contained in the project. <br>
    * For example, if the visual studio project is C:/MySolution/MyProject/MyProject.csProj and the file is
    * C:/MySolution/MyProject/Dummy/Foo.cs, then the result is Dummy/Foo.cs
-   * 
+   *
    * @param file
    *          the file whose relative path is to be computed
    * @return the relative path, or <code>null</code> if the file is not in the project subdirectories
@@ -110,7 +112,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the name.
-   * 
+   *
    * @return The name to return.
    */
   public String getName() {
@@ -119,7 +121,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the projectFile.
-   * 
+   *
    * @return The projectFile to return.
    */
   public File getProjectFile() {
@@ -128,7 +130,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the type.
-   * 
+   *
    * @return The type to return.
    */
   public ArtifactType getType() {
@@ -141,7 +143,7 @@ public class VisualStudioProject {
 
   /**
    * Provides the location of the generated artifact(s) of this project according to the build configuration(s) used.
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @param buildPlatform
@@ -186,7 +188,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the generated assembly according to the build configurations
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @return
@@ -199,7 +201,7 @@ public class VisualStudioProject {
   /**
    * Gets the generated assemblies according to the build configurations. There is zero or one single assembly generated except for web
    * assemblies.
-   * 
+   *
    * @param buildConfigurations
    *          Visual Studio build configurations used to generate the project
    * @return a Set of the generated assembly files. If no files found, the set will be empty.
@@ -217,7 +219,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the name of the artifact.
-   * 
+   *
    * @return
    */
   public String getArtifactName() {
@@ -226,7 +228,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the assemblyName.
-   * 
+   *
    * @return The assemblyName to return.
    */
   public String getAssemblyName() {
@@ -243,7 +245,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the assemblyName.
-   * 
+   *
    * @param assemblyName
    *          The assemblyName to set.
    */
@@ -256,7 +258,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the rootNamespace.
-   * 
+   *
    * @return The rootNamespace to return.
    */
   public String getRootNamespace() {
@@ -265,7 +267,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the rootNamespace.
-   * 
+   *
    * @param rootNamespace
    *          The rootNamespace to set.
    */
@@ -275,7 +277,7 @@ public class VisualStudioProject {
 
   /**
    * Returns the directory.
-   * 
+   *
    * @return The directory to return.
    */
   public File getDirectory() {
@@ -284,7 +286,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the root directory of the project. For a regular project, this is where is located the csproj file.
-   * 
+   *
    * @param directory
    *          The directory to set.
    */
@@ -298,7 +300,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name
    *          The name to set.
    */
@@ -308,7 +310,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the projectFile.
-   * 
+   *
    * @param projectFile
    *          The projectFile to set.
    */
@@ -318,7 +320,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the projectGuid.
-   * 
+   *
    * @param projectGuid
    *          The projectGuid to set.
    */
@@ -328,7 +330,7 @@ public class VisualStudioProject {
 
   /**
    * Sets the type.
-   * 
+   *
    * @param type
    *          The type to set.
    */
@@ -340,28 +342,20 @@ public class VisualStudioProject {
    * @return true if the project contains tests (unit or integ).
    */
   public boolean isTest() {
-    return unitTest || integTest;
+    return isUnitTest() || isIntegTest();
   }
 
   public boolean isUnitTest() {
-    return this.unitTest;
+    return this.projectType == ProjectType.UNIT_TEST_PROJECT;
   }
 
   public boolean isIntegTest() {
-    return this.integTest;
-  }
-
-  void setUnitTest(boolean test) {
-    this.unitTest = test;
-  }
-
-  void setIntegTest(boolean test) {
-    this.integTest = test;
+    return this.projectType == ProjectType.IT_TEST_PROJECT;
   }
 
   /**
    * Gets the artifact extension (.dll or .exe)
-   * 
+   *
    * @return the extension
    */
   public String getExtension() {
@@ -382,7 +376,7 @@ public class VisualStudioProject {
 
   /**
    * Gets all the files contained in the project
-   * 
+   *
    * @return
    */
   public Collection<SourceFile> getSourceFiles() {
@@ -412,8 +406,8 @@ public class VisualStudioProject {
       }
 
     } else {
-      // For web projects, we take all the C# & VB files
-      Collection<File> csharpFiles = FileUtils.listFiles(directory, new String[] {"cs", "vb"}, true);
+      File searchDirectory = sourceDirectory != null ? sourceDirectory : directory;
+      Collection<File> csharpFiles = FileUtils.listFiles(searchDirectory, new String[] {"cs", "vb"}, true);
       for (File file : csharpFiles) {
         SourceFile sourceFile = new SourceFile(this, file, file.getParent(), file.getName());
         allFiles.put(file, sourceFile);
@@ -431,7 +425,7 @@ public class VisualStudioProject {
 
   /**
    * Gets the source representation of a given file.
-   * 
+   *
    * @param file
    *          the file to retrieve
    * @return the associated source file, or <code>null</code> if the file is not included in the assembly.
@@ -454,7 +448,7 @@ public class VisualStudioProject {
 
   /**
    * Test if this project is a parent directory of the given file.
-   * 
+   *
    * @param file
    *          the file to check
    * @return <code>true</code> if the file is under this project
@@ -465,7 +459,7 @@ public class VisualStudioProject {
 
   /**
    * Checks if the project contains a given source file.
-   * 
+   *
    * @param file
    *          the file to check
    * @return <code>true</code> if the project contains the file
@@ -487,22 +481,14 @@ public class VisualStudioProject {
   }
 
   public boolean isWebProject() {
-    return (projectFile == null);
-  }
-
-  /**
-   * @param silverlightProject
-   *          true if it is a silverlight project
-   */
-  void setSilverlightProject(boolean silverlightProject) {
-    this.silverlightProject = silverlightProject;
+    return this.projectType == ProjectType.WEB_PROJECT;
   }
 
   /**
    * @return true if it is a silverlight project
    */
   public boolean isSilverlightProject() {
-    return silverlightProject;
+    return this.projectType == ProjectType.SILVERLIGHT_PROJECT;
   }
 
   void setBuildConfOutputDirMap(Map<BuildConfiguration, File> buildConfOutputDirMap) {
@@ -515,6 +501,41 @@ public class VisualStudioProject {
 
   public String getRealAssemblyName() {
     return realAssemblyName;
+  }
+
+  /**
+   * Set the project type.
+   * @param projectType the project type
+   */
+  void setProjectType(ProjectType projectType) {
+    Preconditions.checkNotNull(projectType, "Project type cannot be null");
+    this.projectType = projectType;
+  }
+
+  /**
+   * Gets the project type.
+   * @return the project type.
+   */
+  public ProjectType getProjectType() {
+    return projectType;
+  }
+
+  /**
+   * Set the source directory.
+   * @param sourceDirectory the source directory.
+   */
+  void setSourceDirectory(File sourceDirectory) {
+    Preconditions.checkNotNull(sourceDirectory, "Source directory cannot be null");
+    Preconditions.checkArgument(sourceDirectory.isDirectory(), "Provided source '%s' is not a directory",sourceDirectory.toString());
+    this.sourceDirectory = sourceDirectory;
+  }
+
+  /**
+   * Gets the source directory.
+   * @return the source directory.
+   */
+  public File getSourceDirectory() {
+    return sourceDirectory;
   }
 
   @Override

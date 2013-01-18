@@ -42,6 +42,7 @@ public class VisualStudioWebProject extends VisualStudioProject {
 
   public VisualStudioWebProject() {
     setType(ArtifactType.WEB);
+    setProjectType(ProjectType.WEB_PROJECT);
   }
 
   /**
