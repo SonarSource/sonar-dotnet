@@ -53,6 +53,7 @@ public class NDepsPlugin extends SonarPlugin {
 
     list.add(NDepsResultParser.class);
     list.add(CSharpDsmDecorator.class);
+    list.add(CouplingDecorator.class);
 
     return list;
   }
