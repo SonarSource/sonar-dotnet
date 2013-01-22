@@ -399,7 +399,7 @@ public final class ModelFactory {
       if (StringUtils.startsWithIgnoreCase(file.getName(), "assemblyinfo")) {
         version = tryToGetVersion(file);
         if (version != null) {
-          break;
+          return version;
         }
       }
     }
