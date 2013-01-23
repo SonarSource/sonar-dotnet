@@ -23,13 +23,11 @@ import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Decorator;
 import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.batch.SonarIndex;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PersistenceMode;
-import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.resources.ResourceUtils;
 import org.sonar.graph.Cycle;
@@ -46,26 +44,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Copy/pasted from the original DSM descorator.
+ * Copy/pasted from the original DSM decorator.
  * Should be removed when the design API will be multi language
  */
-public class CSharpDsmDecorator implements Decorator {
+public class CSharpDsmDecorator extends DecoratorSupport {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpDsmDecorator.class);
 
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   // hack as long as DecoratorContext does not implement SonarIndex
   private SonarIndex index;
 
   public CSharpDsmDecorator(SonarIndex index, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    super(microsoftWindowsEnvironment);
     this.index = index;
-    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
-  }
-
-  public boolean shouldExecuteOnProject(Project project) {
-    return NDepsConstants.isLanguageSupported(project.getLanguageKey())
-      && !project.isRoot()
-      && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isWebProject();
   }
 
   @SuppressWarnings("rawtypes")

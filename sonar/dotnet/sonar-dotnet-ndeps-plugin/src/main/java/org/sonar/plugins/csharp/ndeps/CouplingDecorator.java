@@ -30,23 +30,12 @@ import org.sonar.api.resources.ResourceUtils;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 import org.sonar.api.batch.DecoratorContext;
-import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 
-import org.sonar.api.batch.Decorator;
-
-public class CouplingDecorator implements Decorator {
-
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+public class CouplingDecorator extends DecoratorSupport {
 
   public CouplingDecorator(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
-  }
-
-  public boolean shouldExecuteOnProject(Project project) {
-    return NDepsConstants.isLanguageSupported(project.getLanguageKey())
-      && !project.isRoot()
-      && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isWebProject();
+    super(microsoftWindowsEnvironment);
   }
 
   @SuppressWarnings("rawtypes")

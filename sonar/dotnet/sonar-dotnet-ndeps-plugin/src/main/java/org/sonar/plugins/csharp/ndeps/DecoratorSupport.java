@@ -19,17 +19,24 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import org.junit.Test;
+import org.sonar.api.batch.Decorator;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
-public class NDepsPluginTest {
+import org.sonar.api.resources.Project;
 
-  @Test
-  public void shouldDeclareCorrectExtensions() {
-    NDepsPlugin plugin = new NDepsPlugin();
-    assertThat(plugin.getExtensions().size(), is(4));
+public abstract class DecoratorSupport implements Decorator {
+
+  private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+
+  public DecoratorSupport(MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
+  }
+
+  public boolean shouldExecuteOnProject(Project project) {
+    return NDepsConstants.isLanguageSupported(project.getLanguageKey())
+      && !project.isRoot()
+      && !microsoftWindowsEnvironment.getCurrentProject(project.getName()).isWebProject();
   }
 
 }
