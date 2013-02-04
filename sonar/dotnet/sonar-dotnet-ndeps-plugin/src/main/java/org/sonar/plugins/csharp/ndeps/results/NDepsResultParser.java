@@ -19,6 +19,13 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import com.google.common.collect.Lists;
+
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
+
+import com.google.common.base.Joiner;
+
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 import org.sonar.plugins.dotnet.api.DotNetConstants;
@@ -48,6 +55,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import java.io.File;
+import java.util.List;
 
 public class NDepsResultParser implements BatchExtension {
 
@@ -124,6 +132,10 @@ public class NDepsResultParser implements BatchExtension {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
               parseTypeReferenceBlock(typeReferenceCursor);
             }
+            else if ("lcom4".equals(childCursor.getLocalName())) {
+              SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
+              parseLcom4Block(typeReferenceCursor);
+            }
           }
         }
       }
@@ -183,6 +195,49 @@ public class NDepsResultParser implements BatchExtension {
             }
           }
         }
+      }
+    }
+  }
+
+  private void parseLcom4Block(SMInputCursor cursor) throws XMLStreamException {
+    // Cursor is on <type>
+    while (cursor.getNext() != null) {
+      if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
+        String type = cursor.getAttrValue("fullName");
+        LOG.debug("Parsing LCOM4 data for type {}", type);
+        Resource<?> resource = resourceBridge.getFromTypeName(type);
+        LOG.debug("Found resource {}", resource);
+        Joiner joiner = Joiner.on(",");
+        List<String> blockList = Lists.newArrayList();
+        SMInputCursor blockCursor = cursor.childElementCursor();
+        while (blockCursor.getNext() != null) {
+          if (blockCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
+            SMInputCursor eltCursor = blockCursor.childElementCursor();
+            List<String> eltList = Lists.newArrayList();
+            while (eltCursor.getNext() != null) {
+              String eltType = "Field".equals(eltCursor.getAttrValue("type")) ? "FLD" : "MET";
+              String eltName = eltCursor.getAttrValue("name");
+              eltList.add("{\"q\":\""+ eltType +"\",\"n\":\""+ eltName +"\"}");
+            }
+            String block = "[" + joiner.join(eltList) + "]";
+            blockList.add(block);
+          }
+        }
+        if (resource!=null) {
+          final int lcom4;
+          final String lcom4Json;
+          if (blockList.size() == 0) {
+            lcom4 = 1;
+            lcom4Json = "[]";
+          } else {
+            lcom4 = blockList.size();
+            lcom4Json = "[" + joiner.join(blockList) + "]";
+          }
+          context.saveMeasure(resource, CoreMetrics.LCOM4, new Integer(lcom4).doubleValue());
+          Measure measure = new Measure(CoreMetrics.LCOM4_BLOCKS, lcom4Json);
+          context.saveMeasure(resource, measure);
+        }
+
       }
     }
   }

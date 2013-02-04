@@ -19,6 +19,12 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import com.google.common.collect.Collections2;
+
+import org.apache.commons.lang.StringUtils;
+
+import org.sonar.api.measures.CoreMetrics;
+
 import org.powermock.api.mockito.PowerMockito;
 
 import org.junit.runner.RunWith;
@@ -48,6 +54,7 @@ import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
@@ -55,11 +62,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(PowerMockRunner.class)
 public class NDepsResultParserTest {
@@ -127,16 +131,20 @@ public class NDepsResultParserTest {
 
     ArgumentCaptor<String> classCaptor = ArgumentCaptor.forClass(String.class);
     // getFromTypeName is called twice per "to" dependencies, and there are 6 "to" dependencies
-    verify(resourcesBridge, times(6 * 2)).getFromTypeName(classCaptor.capture());
+    verify(resourcesBridge, atLeast(6 * 2)).getFromTypeName(classCaptor.capture());
     List<String> classNames = classCaptor.getAllValues();
-    assertTrue(classNames.contains("Example.Core.IMoney"));
+
+    // classes with dependency and with LCOM4 data
+    assertTrue(classNames. contains("Example.Core.IMoney"));
     assertTrue(classNames.contains("Example.Core.Money"));
     assertTrue(classNames.contains("Example.Core.MoneyBag"));
     // Classes without dependencies
     assertFalse(classNames.contains("Example.Core.Dummy"));
     assertFalse(classNames.contains("Example.Core.SampleMeasure/Possible"));
-    assertFalse(classNames.contains("Example.Core.SampleMeasure"));
-    assertFalse(classNames.contains("Example.Core.Model.SubType"));
+
+    // Classes without dependencies
+    assertTrue(classNames.contains("Example.Core.SampleMeasure"));
+    assertTrue(classNames.contains("Example.Core.Model.SubType"));
 
     ArgumentCaptor<Dependency> dependencyCaptor = ArgumentCaptor.forClass(Dependency.class);
     // 1 library dependency + the 6*2 file dependencies
@@ -149,11 +157,14 @@ public class NDepsResultParserTest {
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.Money", "Example.Core:Example.Core.MoneyBag");
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.MoneyBag", "Example.Core:Example.Core.Money");
     assertThatDepsListContains(depsList, "Example.Core:Example.Core.MoneyBag", "Example.Core:Example.Core.IMoney");
+
+    verify(context, times(1)).saveMeasure(any(org.sonar.api.resources.File.class), eq(CoreMetrics.LCOM4), eq(3d));
+    verify(context, times(2)).saveMeasure(any(org.sonar.api.resources.File.class), eq(CoreMetrics.LCOM4), eq(2d));
   }
 
   @PrepareForTest({Resource.class})
   @Test
-  public void shouldParseAndDetectProjectDependency() {
+  public void shouldParseAndDetectProjectDependencyWithoutLcom() {
     PowerMockito.when(project.getKey()).thenReturn("null:Example.Core");
     PowerMockito.when(project2.getKey()).thenReturn("null:Example.Common");
 

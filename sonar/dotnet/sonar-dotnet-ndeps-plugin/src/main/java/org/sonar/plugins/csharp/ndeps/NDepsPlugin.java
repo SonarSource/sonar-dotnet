@@ -48,13 +48,15 @@ public class NDepsPlugin extends SonarPlugin {
    * {@inheritDoc}
    */
   public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(NDepsSensor.class);
+    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
+    extensions.add(NDepsSensor.class);
 
-    list.add(NDepsResultParser.class);
-    list.add(CSharpDsmDecorator.class);
-    list.add(CouplingDecorator.class);
+    extensions.add(NDepsResultParser.class);
+    extensions.add(CSharpDsmDecorator.class);
+    extensions.add(CouplingDecorator.class);
 
-    return list;
+    extensions.add(Lcom4Viewer.class);
+
+    return extensions;
   }
 }

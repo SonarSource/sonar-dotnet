@@ -29,7 +29,7 @@ public class NDepsPluginTest {
   @Test
   public void shouldDeclareCorrectExtensions() {
     NDepsPlugin plugin = new NDepsPlugin();
-    assertThat(plugin.getExtensions().size(), is(4));
+    assertThat(plugin.getExtensions().size(), is(5));
   }
 
 }

@@ -22,5 +22,68 @@
       <From fullname="Example.Core.SampleMeasure/Possible" />
       <From fullname="Example.Core.SampleMeasure" />
     </TypeReferences>
+    <lcom4>
+      <type fullName="&lt;Module&gt;" />
+      <type fullName="Example.Core.IMoney" />
+      <type fullName="Example.Core.Model.SubType">
+        <block>
+          <element type="Method" name="System.String get_Name()" />
+          <element type="Field" name="&lt;Name&gt;k__BackingField" />
+          <element type="Method" name="System.Void set_Name(System.String)" />
+        </block>
+      </type>
+      <type fullName="Example.Core.Money">
+        <block>
+          <element type="Method" name="Example.Core.IMoney Add(Example.Core.IMoney)" />
+          <element type="Method" name="Example.Core.IMoney Subtract(Example.Core.IMoney)" />
+        </block>
+        <block>
+          <element type="Method" name="Example.Core.IMoney AddMoney(Example.Core.Money)" />
+          <element type="Method" name="System.String get_Currency()" />
+          <element type="Method" name="System.Int32 get_Amount()" />
+          <element type="Field" name="fAmount" />
+          <element type="Field" name="fCurrency" />
+          <element type="Method" name="System.Boolean get_IsZero()" />
+          <element type="Method" name="Example.Core.IMoney Multiply(System.Int32)" />
+          <element type="Method" name="Example.Core.IMoney Negate()" />
+        </block>
+        <block>
+          <element type="Method" name="Example.Core.IMoney AddMoneyBag(Example.Core.MoneyBag)" />
+        </block>
+      </type>
+      <type fullName="Example.Core.Alex" />
+      <type fullName="Example.Core.MoneyBag">
+        <block>
+          <element type="Method" name="Example.Core.IMoney Add(Example.Core.IMoney)" />
+          <element type="Method" name="Example.Core.IMoney Subtract(Example.Core.IMoney)" />
+        </block>
+        <block>
+          <element type="Method" name="Example.Core.IMoney AddMoney(Example.Core.Money)" />
+          <element type="Method" name="Example.Core.IMoney Simplify()" />
+          <element type="Method" name="Example.Core.IMoney AddMoneyBag(Example.Core.MoneyBag)" />
+          <element type="Method" name="System.Void AppendBag(Example.Core.MoneyBag)" />
+          <element type="Field" name="fMonies" />
+          <element type="Method" name="System.Void AppendMoney(Example.Core.Money)" />
+          <element type="Method" name="Example.Core.Money FindMoney(System.String)" />
+          <element type="Method" name="System.Boolean Contains(Example.Core.Money)" />
+          <element type="Method" name="System.Boolean get_IsZero()" />
+          <element type="Method" name="Example.Core.IMoney Multiply(System.Int32)" />
+          <element type="Method" name="Example.Core.IMoney Negate()" />
+        </block>
+      </type>
+      <type fullName="Example.Core.SampleMeasure">
+        <block>
+          <element type="Method" name="System.Int32 get_Size()" />
+          <element type="Field" name="&lt;Size&gt;k__BackingField" />
+          <element type="Method" name="System.Void set_Size(System.Int32)" />
+          <element type="Method" name="System.String Compute()" />
+          <element type="Field" name="actual" />
+          <element type="Method" name="System.String Compute(System.String)" />
+        </block>
+        <block>
+          <element type="Method" name="System.String Compute(System.Int32)" />
+        </block>
+      </type>
+    </lcom4>
   </Assembly>
 </Dependencies>
