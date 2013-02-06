@@ -22,17 +22,17 @@
       <From fullname="Example.Core.SampleMeasure/Possible" />
       <From fullname="Example.Core.SampleMeasure" />
     </TypeReferences>
-    <lcom4>
-      <type fullName="&lt;Module&gt;" />
-      <type fullName="Example.Core.IMoney" />
-      <type fullName="Example.Core.Model.SubType">
+    <Design>
+      <type fullName="&lt;Module&gt;" rfc="0" dit="0" />
+      <type fullName="Example.Core.IMoney" rfc="0" dit="0" />
+      <type fullName="Example.Core.Model.SubType" rfc="0" dit="0" >
         <block>
           <element type="Method" name="System.String get_Name()" />
           <element type="Field" name="&lt;Name&gt;k__BackingField" />
           <element type="Method" name="System.Void set_Name(System.String)" />
         </block>
       </type>
-      <type fullName="Example.Core.Money">
+      <type fullName="Example.Core.Money" rfc="0" dit="0">
         <block>
           <element type="Method" name="Example.Core.IMoney Add(Example.Core.IMoney)" />
           <element type="Method" name="Example.Core.IMoney Subtract(Example.Core.IMoney)" />
@@ -51,8 +51,8 @@
           <element type="Method" name="Example.Core.IMoney AddMoneyBag(Example.Core.MoneyBag)" />
         </block>
       </type>
-      <type fullName="Example.Core.Alex" />
-      <type fullName="Example.Core.MoneyBag">
+      <type fullName="Example.Core.Alex" rfc="0" dit="0" />
+      <type fullName="Example.Core.MoneyBag" rfc="0" dit="0" >
         <block>
           <element type="Method" name="Example.Core.IMoney Add(Example.Core.IMoney)" />
           <element type="Method" name="Example.Core.IMoney Subtract(Example.Core.IMoney)" />
@@ -71,7 +71,7 @@
           <element type="Method" name="Example.Core.IMoney Negate()" />
         </block>
       </type>
-      <type fullName="Example.Core.SampleMeasure">
+      <type fullName="Example.Core.SampleMeasure" rfc="0" dit="0" >
         <block>
           <element type="Method" name="System.Int32 get_Size()" />
           <element type="Field" name="&lt;Size&gt;k__BackingField" />
@@ -84,6 +84,6 @@
           <element type="Method" name="System.String Compute(System.Int32)" />
         </block>
       </type>
-    </lcom4>
+    </Design>
   </Assembly>
 </Dependencies>

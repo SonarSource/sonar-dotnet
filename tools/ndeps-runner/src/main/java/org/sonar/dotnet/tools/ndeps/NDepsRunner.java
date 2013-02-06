@@ -41,7 +41,7 @@ public class NDepsRunner { // NOSONAR : can't mock it otherwise
 
   private static final String DEPENDENCYPARSER_EXECUTABLE = "DependencyParser.exe";
   private static final long MINUTES_TO_MILLISECONDS = 60000;
-  private static final String EMBEDDED_VERSION = "1.1";
+  private static final String EMBEDDED_VERSION = "1.2";
 
   private File nDepsExecutable;
 
@@ -51,7 +51,7 @@ public class NDepsRunner { // NOSONAR : can't mock it otherwise
   /**
    * Creates a new {@link NDepsRunner} object for the given executable file. If the executable file does not exist, then the embedded one
    * will be used.
-   * 
+   *
    * @param nDepsPath
    *          the full path of NDeps install directory. For instance: "C:/Program Files/NDeps". May be null: in this
    *          case, the embedded NDeps executable will be used.
@@ -89,7 +89,7 @@ public class NDepsRunner { // NOSONAR : can't mock it otherwise
 
   /**
    * Creates a pre-configured {@link NDepsCommandBuilder} that needs to be completed before running the {@link #execute(NDepsCommandBuilder, int)} method.
-   * 
+   *
    * @param solution
    *          the solution to analyse
    * @param project
@@ -104,7 +104,7 @@ public class NDepsRunner { // NOSONAR : can't mock it otherwise
 
   /**
    * Executes the given NDeps command.
-   * 
+   *
    * @param nDepsCommandBuilder
    *          the NDepsCommandBuilder
    * @param timeoutMinutes

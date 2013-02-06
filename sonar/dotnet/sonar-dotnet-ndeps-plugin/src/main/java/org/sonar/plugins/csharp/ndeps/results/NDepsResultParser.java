@@ -132,9 +132,9 @@ public class NDepsResultParser implements BatchExtension {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
               parseTypeReferenceBlock(typeReferenceCursor);
             }
-            else if ("lcom4".equals(childCursor.getLocalName())) {
+            else if ("Design".equals(childCursor.getLocalName())) {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
-              parseLcom4Block(typeReferenceCursor);
+              parseDesignBlock(typeReferenceCursor);
             }
           }
         }
@@ -199,14 +199,18 @@ public class NDepsResultParser implements BatchExtension {
     }
   }
 
-  private void parseLcom4Block(SMInputCursor cursor) throws XMLStreamException {
+  private void parseDesignBlock(SMInputCursor cursor) throws XMLStreamException {
     // Cursor is on <type>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
         String type = cursor.getAttrValue("fullName");
-        LOG.debug("Parsing LCOM4 data for type {}", type);
+        LOG.debug("Parsing design data for type {}", type);
         Resource<?> resource = resourceBridge.getFromTypeName(type);
         LOG.debug("Found resource {}", resource);
+
+        double rfc = new Integer(cursor.getAttrValue("rfc")).doubleValue();
+        double dit = new Integer(cursor.getAttrValue("dit")).doubleValue();
+
         Joiner joiner = Joiner.on(",");
         List<String> blockList = Lists.newArrayList();
         SMInputCursor blockCursor = cursor.childElementCursor();
@@ -224,6 +228,9 @@ public class NDepsResultParser implements BatchExtension {
           }
         }
         if (resource!=null) {
+          context.saveMeasure(resource, CoreMetrics.RFC, rfc);
+          context.saveMeasure(resource, CoreMetrics.DEPTH_IN_TREE, dit);
+
           final int lcom4;
           final String lcom4Json;
           if (blockList.size() == 0) {
