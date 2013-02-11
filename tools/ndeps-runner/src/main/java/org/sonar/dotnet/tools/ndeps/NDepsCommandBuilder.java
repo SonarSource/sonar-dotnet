@@ -78,6 +78,13 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
     command.addArgument("-o");
     command.addArgument(reportFile.getAbsolutePath());
 
+    boolean testProject = vsProject.isTest();
+    LOG.debug("- Design analysis         : " + !testProject);
+    if (!testProject) {
+      command.addArgument("-d");
+      command.addArgument("yes");
+    }
+
     return command;
   }
 
