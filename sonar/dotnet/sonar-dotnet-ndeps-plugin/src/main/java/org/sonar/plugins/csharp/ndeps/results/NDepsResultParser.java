@@ -19,6 +19,10 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import com.google.common.collect.Sets;
+
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
+
 import com.google.common.collect.Lists;
 
 import org.sonar.api.measures.CoreMetrics;
@@ -56,6 +60,7 @@ import javax.xml.stream.XMLStreamException;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
 
 public class NDepsResultParser implements BatchExtension {
 
@@ -67,14 +72,17 @@ public class NDepsResultParser implements BatchExtension {
 
   private final Project project;
 
+  private final ResourceHelper resourceHelper;
+
   private final VisualStudioSolution vsSolution;
 
   private final VisualStudioProject vsProject;
 
   private final boolean keyGenerationSafeMode;
 
-  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration) {
+  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration, ResourceHelper resourceHelper) {
     this.resourceBridge = bridges.getBridge(project.getLanguageKey());
+    this.resourceHelper = resourceHelper;
     this.context = context;
     this.project = project;
     vsSolution = env.getCurrentSolution();
@@ -199,14 +207,52 @@ public class NDepsResultParser implements BatchExtension {
     }
   }
 
+  private Resource<?> findResource(SMInputCursor cursor) throws XMLStreamException {
+    final Resource<?> resource;
+    String sourcePath = cursor.getAttrValue("source");
+    if (StringUtils.isEmpty(sourcePath)) {
+      String type = cursor.getAttrValue("fullName");
+      Resource<?> resourceFromType = resourceBridge.getFromTypeName(type);
+      if (resourceFromType != null && resourceHelper.isResourceInProject(resourceFromType, project)) {
+          resource = resourceFromType;
+      } else {
+        resource = null;
+      }
+    } else {
+      java.io.File sourceFile = new java.io.File(sourcePath).getAbsoluteFile();
+      VisualStudioProject currentVsProject = vsSolution.getProject(sourceFile);
+      if (vsProject.equals(currentVsProject)) {
+        if (vsProject.isTest()) {
+          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project.getFileSystem().getTestDirs());
+        } else {
+          resource = org.sonar.api.resources.File.fromIOFile(sourceFile, project);
+        }
+      } else {
+        resource = null;
+      }
+    }
+    LOG.debug("Found resource {}", resource);
+    return resource;
+  }
+
   private void parseDesignBlock(SMInputCursor cursor) throws XMLStreamException {
+    // we need to keep track of the resources
+    // already treated since several Type blocks
+    // in the report may be related to the same
+    // source file
+    Set<String> savedResourceIds = Sets.newHashSet();
+
     // Cursor is on <type>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
         String type = cursor.getAttrValue("fullName");
         LOG.debug("Parsing design data for type {}", type);
-        Resource<?> resource = resourceBridge.getFromTypeName(type);
-        LOG.debug("Found resource {}", resource);
+
+        Resource<?> resource = findResource(cursor);
+        if (resource == null || savedResourceIds.contains(resource.getKey())) {
+          continue;
+        }
+        savedResourceIds.add(resource.getKey());
 
         double rfc = new Integer(cursor.getAttrValue("rfc")).doubleValue();
         double dit = new Integer(cursor.getAttrValue("dit")).doubleValue();
@@ -286,7 +332,7 @@ public class NDepsResultParser implements BatchExtension {
   private Resource<?> getResource(String name, String version) {
     // try to find the project
     VisualStudioProject linkedProject = vsSolution.getProject(name);
-    //String projectKey = StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(name);
+
     Resource<?> result;
 
     // if not found in the solution, get the binary

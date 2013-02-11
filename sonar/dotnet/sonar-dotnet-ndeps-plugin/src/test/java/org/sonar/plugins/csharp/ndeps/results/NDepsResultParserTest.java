@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
+
 import com.google.common.collect.Collections2;
 
 import org.apache.commons.lang.StringUtils;
@@ -112,7 +114,11 @@ public class NDepsResultParserTest {
 
     MicrosoftWindowsEnvironment env = mock(MicrosoftWindowsEnvironment.class);
     when(env.getCurrentSolution()).thenReturn(vsSolution);
-    parser = new NDepsResultParser(env, bridges, project, context, mock(DotNetConfiguration.class));
+
+    ResourceHelper resourceHelper = mock(ResourceHelper.class);
+    when(resourceHelper.isResourceInProject(any(Resource.class), any(Project.class))).thenReturn(true);
+
+    parser = new NDepsResultParser(env, bridges, project, context, mock(DotNetConfiguration.class), resourceHelper);
   }
 
   @Test
