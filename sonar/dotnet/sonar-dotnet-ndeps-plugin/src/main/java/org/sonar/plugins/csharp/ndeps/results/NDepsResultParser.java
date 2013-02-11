@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import org.sonar.api.measures.PersistenceMode;
+import org.sonar.api.measures.RangeDistributionBuilder;
+
 import com.google.common.collect.Sets;
 
 import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
@@ -65,6 +68,8 @@ import java.util.Set;
 public class NDepsResultParser implements BatchExtension {
 
   private static final Logger LOG = LoggerFactory.getLogger(NDepsResultParser.class);
+
+  private static final Number[] RFC_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 50, 90, 150};
 
   private final DotNetResourceBridge resourceBridge;
 
@@ -275,6 +280,10 @@ public class NDepsResultParser implements BatchExtension {
         }
         if (resource!=null) {
           context.saveMeasure(resource, CoreMetrics.RFC, rfc);
+          RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
+          complexityDistribution.add(rfc);
+          context.saveMeasure(resource, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+
           context.saveMeasure(resource, CoreMetrics.DEPTH_IN_TREE, dit);
 
           final int lcom4;
