@@ -71,6 +71,8 @@ public class NDepsResultParser implements BatchExtension {
 
   private static final Number[] RFC_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 50, 90, 150};
 
+  private static final Number[] LCOM4_DISTRIB_BOTTOM_LIMITS = {2, 3, 4, 5, 10};
+
   private final DotNetResourceBridge resourceBridge;
 
   private final SensorContext context;
@@ -280,9 +282,9 @@ public class NDepsResultParser implements BatchExtension {
         }
         if (resource!=null) {
           context.saveMeasure(resource, CoreMetrics.RFC, rfc);
-          RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
-          complexityDistribution.add(rfc);
-          context.saveMeasure(resource, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+          RangeDistributionBuilder rfcDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
+          rfcDistribution.add(rfc);
+          context.saveMeasure(resource, rfcDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
 
           context.saveMeasure(resource, CoreMetrics.DEPTH_IN_TREE, dit);
 
@@ -295,7 +297,13 @@ public class NDepsResultParser implements BatchExtension {
             lcom4 = blockList.size();
             lcom4Json = "[" + joiner.join(blockList) + "]";
           }
-          context.saveMeasure(resource, CoreMetrics.LCOM4, new Integer(lcom4).doubleValue());
+
+          double lcom4Value = new Integer(lcom4).doubleValue();
+          context.saveMeasure(resource, CoreMetrics.LCOM4, lcom4Value);
+          RangeDistributionBuilder lcom4Distribution = new RangeDistributionBuilder(CoreMetrics.LCOM4_DISTRIBUTION, LCOM4_DISTRIB_BOTTOM_LIMITS);
+          lcom4Distribution.add(lcom4Value);
+          context.saveMeasure(resource, lcom4Distribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+
           Measure measure = new Measure(CoreMetrics.LCOM4_BLOCKS, lcom4Json);
           context.saveMeasure(resource, measure);
         }
