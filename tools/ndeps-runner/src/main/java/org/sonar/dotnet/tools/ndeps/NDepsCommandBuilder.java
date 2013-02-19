@@ -19,6 +19,8 @@
  */
 package org.sonar.dotnet.tools.ndeps;
 
+import org.apache.commons.lang.StringUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.utils.command.Command;
@@ -35,6 +37,8 @@ import java.util.Collection;
 public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSONAR Not final, because can't be mocked otherwise
 
   private static final Logger LOG = LoggerFactory.getLogger(NDepsCommandBuilder.class);
+
+  private String patterns;
 
   private NDepsCommandBuilder() {
   }
@@ -83,6 +87,11 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
     if (!testProject) {
       command.addArgument("-d");
       command.addArgument("yes");
+
+      if (StringUtils.isNotEmpty(patterns)) {
+        command.addArgument("-r");
+        command.addArgument(patterns);
+      }
     }
 
     return command;
@@ -99,5 +108,9 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
     if (!((File) assemblyToScanFiles.toArray()[0]).exists()) {
       throw new IllegalStateException("Assembly to scan not found for project: " + vsProject.getName());
     }
+  }
+
+  public void setPatterns(String patterns) {
+    this.patterns = patterns;
   }
 }

@@ -19,18 +19,18 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Collections2;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.ndeps.NDepsCommandBuilder;
 import org.sonar.dotnet.tools.ndeps.NDepsException;
@@ -38,10 +38,15 @@ import org.sonar.dotnet.tools.ndeps.NDepsRunner;
 import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
 @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
 public class NDepsSensor extends AbstractRegularDotNetSensor {
@@ -49,8 +54,9 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
   private static final Logger LOG = LoggerFactory.getLogger(NDepsSensor.class);
 
   private ProjectFileSystem fileSystem;
-
   private NDepsResultParser nDepsResultParser;
+  private RulesProfile rulesProfile;
+
 
   private boolean testSensor;
 
@@ -58,9 +64,10 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
    * Constructor
    */
   public NDepsSensor(ProjectFileSystem fileSystem, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, DotNetConfiguration configuration,
-      NDepsResultParser nDepsResultParser) {
+      NDepsResultParser nDepsResultParser, RulesProfile rulesProfile) {
     super(configuration, microsoftWindowsEnvironment, "NDeps", configuration.getString(NDepsConstants.MODE));
     this.nDepsResultParser = nDepsResultParser;
+    this.rulesProfile = rulesProfile;
     this.fileSystem = fileSystem;
   }
 
@@ -162,6 +169,16 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     builder.setBuildConfiguration(configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY));
     builder.setBuildPlatform(configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY));
     builder.setAssembliesToScan(getAssemblyPatterns());
+
+    List<ActiveRule> rules
+      = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
+    if (!rules.isEmpty()) {
+      Collection<String> params = Collections2.transform(rules, new Function<ActiveRule, String>() {
+        public String apply(ActiveRule rule) {
+          return rule.getParameter("fromClasses")+":"+rule.getParameter("toClasses");
+        }});
+      builder.setPatterns(Joiner.on(',').join(params));
+    }
 
     runner.execute(builder, configuration.getInt(NDepsConstants.TIMEOUT_MINUTES_KEY));
   }

@@ -19,6 +19,28 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
+import com.google.common.base.Predicate;
+
+import com.google.common.base.Predicate;
+
+import com.google.common.collect.Iterables;
+
+import com.google.common.collect.Collections2;
+
+import org.sonar.api.rules.ActiveRule;
+
+import org.sonar.api.profiles.RulesProfile;
+
+import org.sonar.api.rules.Violation;
+
+import org.sonar.api.rules.Rule;
+
+import org.sonar.api.rules.RuleFinder;
+
+import org.sonar.plugins.csharp.ndeps.NDepsConstants;
+
+import org.sonar.api.rules.RuleQuery;
+
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 
@@ -62,6 +84,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -74,20 +97,15 @@ public class NDepsResultParser implements BatchExtension {
   private static final Number[] LCOM4_DISTRIB_BOTTOM_LIMITS = {2, 3, 4, 5, 10};
 
   private final DotNetResourceBridge resourceBridge;
-
   private final SensorContext context;
-
   private final Project project;
-
   private final ResourceHelper resourceHelper;
-
   private final VisualStudioSolution vsSolution;
-
   private final VisualStudioProject vsProject;
-
+  private final RulesProfile rulesProfile;
   private final boolean keyGenerationSafeMode;
 
-  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration, ResourceHelper resourceHelper) {
+  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration, ResourceHelper resourceHelper, RulesProfile rulesProfile) {
     this.resourceBridge = bridges.getBridge(project.getLanguageKey());
     this.resourceHelper = resourceHelper;
     this.context = context;
@@ -99,6 +117,7 @@ public class NDepsResultParser implements BatchExtension {
     } else {
       vsProject = vsSolution.getProjectFromSonarProject(project);
     }
+    this.rulesProfile = rulesProfile;
     keyGenerationSafeMode = "safe".equalsIgnoreCase(configuration.getString(DotNetConstants.KEY_GENERATION_STRATEGY_KEY));
   }
 
@@ -178,47 +197,70 @@ public class NDepsResultParser implements BatchExtension {
   }
 
   private void parseTypeReferenceBlock(SMInputCursor cursor) throws XMLStreamException {
-    // Cursor is on <From>
+    // Cursor is on <From> or <Violation>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-        String fromType = cursor.getAttrValue("fullname");
+        String elementName = cursor.getLocalName();
+        if ("From".equals(elementName)) {
+          //String fromType = cursor.getAttrValue("fullname");
+          Resource<?> fromResource = findResource(cursor, "path", "fullname"); //resourceBridge.getFromTypeName(fromType);
 
-        SMInputCursor toCursor = cursor.childElementCursor();
-        while (toCursor.getNext() != null) {
-          if (toCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-            String toType = toCursor.getAttrValue("fullname");
+          SMInputCursor toCursor = cursor.childElementCursor();
+          while (toCursor.getNext() != null) {
+            if (toCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
+              String toType = toCursor.getAttrValue("fullname");
 
-            Resource<?> fromResource = resourceBridge.getFromTypeName(fromType);
-            Resource<?> toResource = resourceBridge.getFromTypeName(toType);
+              //Resource<?> fromResource = resourceBridge.getFromTypeName(fromType);
+              Resource<?> toResource = resourceBridge.getFromTypeName(toType);
 
-            // check if the source is not filtered
-            if (fromResource != null && toResource != null) {
-              // get the parent folder
-              Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
-              Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
+              // check if the source is not filtered
+              if (fromResource != null && toResource != null) {
+                // get the parent folder
+                Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
+                Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
 
-              // find the folder to folder dependency
-              Dependency folderDependency = findFolderDependency(fromParentFolderResource, toParentFolderResource);
+                // find the folder to folder dependency
+                Dependency folderDependency = findFolderDependency(fromParentFolderResource, toParentFolderResource);
 
-              // save the file to file dependency
-              Dependency fileDependency = new Dependency(fromResource, toResource);
-              fileDependency.setParent(folderDependency);
-              fileDependency.setUsage("USES");
-              fileDependency.setWeight(1);
-              context.saveDependency(fileDependency);
-              LOG.debug("Saving dependency from {} to {}", fromResource.getName(), toResource.getName());
+                // save the file to file dependency
+                Dependency fileDependency = new Dependency(fromResource, toResource);
+                fileDependency.setParent(folderDependency);
+                fileDependency.setUsage("USES");
+                fileDependency.setWeight(1);
+                context.saveDependency(fileDependency);
+                LOG.debug("Saving dependency from {} to {}", fromResource.getName(), toResource.getName());
+              }
             }
           }
+        } else if ("Violation".equals(elementName)) {
+          String subjectType = cursor.getAttrValue("fullname");
+          final String fromPattern = cursor.getAttrValue("fromPattern");
+          final String toPattern = cursor.getAttrValue("toPattern");
+          String dependency = cursor.getAttrValue("dependency");
+          Resource<?> resource = findResource(cursor, "path", "fullname");
+
+          List<ActiveRule> rules
+            = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
+          ActiveRule rule = Iterables.find(rules, new Predicate<ActiveRule>() {
+            public boolean apply(ActiveRule rule) {
+              return StringUtils.equals(fromPattern, rule.getParameter("fromClasses")) && StringUtils.equals(toPattern, rule.getParameter("toClasses"));
+            }});
+
+          Violation violation
+            = Violation.create(rule, resource);
+          violation.setMessage("Type " + subjectType + " has a reference to type " + dependency);
+          violation.setSeverity(rule.getSeverity());
+          context.saveViolation(violation);
         }
       }
     }
   }
 
-  private Resource<?> findResource(SMInputCursor cursor) throws XMLStreamException {
+  private Resource<?> findResource(SMInputCursor cursor, String pathAttr, String typeAttr) throws XMLStreamException {
     final Resource<?> resource;
-    String sourcePath = cursor.getAttrValue("source");
+    String sourcePath = cursor.getAttrValue(pathAttr);
     if (StringUtils.isEmpty(sourcePath)) {
-      String type = cursor.getAttrValue("fullName");
+      String type = cursor.getAttrValue(typeAttr);
       Resource<?> resourceFromType = resourceBridge.getFromTypeName(type);
       if (resourceFromType != null && resourceHelper.isResourceInProject(resourceFromType, project)) {
           resource = resourceFromType;
@@ -255,7 +297,7 @@ public class NDepsResultParser implements BatchExtension {
         String type = cursor.getAttrValue("fullName");
         LOG.debug("Parsing design data for type {}", type);
 
-        Resource<?> resource = findResource(cursor);
+        Resource<?> resource = findResource(cursor, "source", "fullName");
         if (resource == null || savedResourceIds.contains(resource.getKey())) {
           continue;
         }
@@ -263,6 +305,12 @@ public class NDepsResultParser implements BatchExtension {
 
         double rfc = new Integer(cursor.getAttrValue("rfc")).doubleValue();
         double dit = new Integer(cursor.getAttrValue("dit")).doubleValue();
+
+        String mergedTypes = cursor.getAttrValue("mergedTypes");
+        if (StringUtils.isNotEmpty(mergedTypes)) {
+          Measure measure = new Measure(NDepsConstants.MERGED_TYPES, mergedTypes);
+          context.saveMeasure(resource, measure);
+        }
 
         Joiner joiner = Joiner.on(",");
         List<String> blockList = Lists.newArrayList();
@@ -280,33 +328,32 @@ public class NDepsResultParser implements BatchExtension {
             blockList.add(block);
           }
         }
-        if (resource!=null) {
-          context.saveMeasure(resource, CoreMetrics.RFC, rfc);
-          RangeDistributionBuilder rfcDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
-          rfcDistribution.add(rfc);
-          context.saveMeasure(resource, rfcDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
 
-          context.saveMeasure(resource, CoreMetrics.DEPTH_IN_TREE, dit);
+        context.saveMeasure(resource, CoreMetrics.RFC, rfc);
+        RangeDistributionBuilder rfcDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
+        rfcDistribution.add(rfc);
+        context.saveMeasure(resource, rfcDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
 
-          final int lcom4;
-          final String lcom4Json;
-          if (blockList.size() == 0) {
-            lcom4 = 1;
-            lcom4Json = "[]";
-          } else {
-            lcom4 = blockList.size();
-            lcom4Json = "[" + joiner.join(blockList) + "]";
-          }
+        context.saveMeasure(resource, CoreMetrics.DEPTH_IN_TREE, dit);
 
-          double lcom4Value = new Integer(lcom4).doubleValue();
-          context.saveMeasure(resource, CoreMetrics.LCOM4, lcom4Value);
-          RangeDistributionBuilder lcom4Distribution = new RangeDistributionBuilder(CoreMetrics.LCOM4_DISTRIBUTION, LCOM4_DISTRIB_BOTTOM_LIMITS);
-          lcom4Distribution.add(lcom4Value);
-          context.saveMeasure(resource, lcom4Distribution.build().setPersistenceMode(PersistenceMode.MEMORY));
-
-          Measure measure = new Measure(CoreMetrics.LCOM4_BLOCKS, lcom4Json);
-          context.saveMeasure(resource, measure);
+        final int lcom4;
+        final String lcom4Json;
+        if (blockList.size() == 0) {
+          lcom4 = 1;
+          lcom4Json = "[]";
+        } else {
+          lcom4 = blockList.size();
+          lcom4Json = "[" + joiner.join(blockList) + "]";
         }
+
+        double lcom4Value = new Integer(lcom4).doubleValue();
+        context.saveMeasure(resource, CoreMetrics.LCOM4, lcom4Value);
+        RangeDistributionBuilder lcom4Distribution = new RangeDistributionBuilder(CoreMetrics.LCOM4_DISTRIBUTION, LCOM4_DISTRIB_BOTTOM_LIMITS);
+        lcom4Distribution.add(lcom4Value);
+        context.saveMeasure(resource, lcom4Distribution.build().setPersistenceMode(PersistenceMode.MEMORY));
+
+        Measure measure = new Measure(CoreMetrics.LCOM4_BLOCKS, lcom4Json);
+        context.saveMeasure(resource, measure);
 
       }
     }

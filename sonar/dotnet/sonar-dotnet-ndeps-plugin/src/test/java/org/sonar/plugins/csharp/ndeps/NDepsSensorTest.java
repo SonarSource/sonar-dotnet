@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.api.profiles.RulesProfile;
+
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
@@ -87,7 +89,7 @@ public class NDepsSensorTest {
     configuration = new Settings(new PropertyDefinitions(new DotNetCorePlugin(), new NDepsPlugin()));
 
     nDepsResultParser = mock(NDepsResultParser.class);
-    nDepsSensor = new NDepsSensor(fileSystem, microsoftWindowsEnvironment, new DotNetConfiguration(configuration), nDepsResultParser);
+    nDepsSensor = new NDepsSensor(fileSystem, microsoftWindowsEnvironment, new DotNetConfiguration(configuration), nDepsResultParser, mock(RulesProfile.class));
 
     reportFile = TestUtils.getResource("/ndeps-report.xml");
   }

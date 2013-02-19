@@ -19,17 +19,23 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import org.junit.Test;
+import org.sonar.api.rules.RuleRepository;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import com.google.common.collect.Lists;
 
-public class NDepsPluginTest {
+import org.sonar.api.ExtensionProvider;
+import org.sonar.api.ServerExtension;
+import java.util.List;
 
-  @Test
-  public void shouldDeclareCorrectExtensions() {
-    NDepsPlugin plugin = new NDepsPlugin();
-    assertThat(plugin.getExtensions().size(), is(7));
+public class NDepsRuleRepositoryProvider  extends ExtensionProvider implements ServerExtension {
+
+  @Override
+  public Object provide() {
+    List<RuleRepository> extensions = Lists.newArrayList();
+    for (String languageKey : NDepsConstants.SUPPORTED_LANGUAGES) {
+      String repoKey = NDepsConstants.REPOSITORY_KEY + "-" + languageKey;
+      extensions.add(new NDepsRuleRepository(repoKey, languageKey).setName("NDeps"));
+    }
+    return extensions;
   }
-
 }

@@ -19,53 +19,47 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
-import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
-
-import com.google.common.collect.Collections2;
-
-import org.apache.commons.lang.StringUtils;
-
-import org.sonar.api.measures.CoreMetrics;
-
-import org.powermock.api.mockito.PowerMockito;
-
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-
 import com.google.common.collect.Lists;
-
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.design.Dependency;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 public class NDepsResultParserTest {
@@ -118,7 +112,7 @@ public class NDepsResultParserTest {
     ResourceHelper resourceHelper = mock(ResourceHelper.class);
     when(resourceHelper.isResourceInProject(any(Resource.class), any(Project.class))).thenReturn(true);
 
-    parser = new NDepsResultParser(env, bridges, project, context, mock(DotNetConfiguration.class), resourceHelper);
+    parser = new NDepsResultParser(env, bridges, project, context, mock(DotNetConfiguration.class), resourceHelper, mock(RulesProfile.class));
   }
 
   @Test
@@ -145,8 +139,8 @@ public class NDepsResultParserTest {
     assertTrue(classNames.contains("Example.Core.Money"));
     assertTrue(classNames.contains("Example.Core.MoneyBag"));
     // Classes without dependencies
-    assertFalse(classNames.contains("Example.Core.Dummy"));
-    assertFalse(classNames.contains("Example.Core.SampleMeasure/Possible"));
+    assertTrue(classNames.contains("Example.Core.Dummy"));
+    assertTrue(classNames.contains("Example.Core.SampleMeasure/Possible"));
 
     // Classes without dependencies
     assertTrue(classNames.contains("Example.Core.SampleMeasure"));

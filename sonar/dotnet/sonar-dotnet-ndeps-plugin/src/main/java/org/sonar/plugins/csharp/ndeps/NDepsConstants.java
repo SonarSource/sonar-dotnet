@@ -19,10 +19,15 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-public final class NDepsConstants {
+import com.google.common.collect.Lists;
 
-  private NDepsConstants() {
-  }
+import java.util.List;
+
+import org.sonar.api.measures.Metrics;
+
+import org.sonar.api.measures.Metric;
+
+public final class NDepsConstants implements Metrics {
 
   public static final String DEPENDENCYPARSER_REPORT_XML = "ndeps-report.xml";
 
@@ -37,6 +42,11 @@ public final class NDepsConstants {
 
   public static final String[] SUPPORTED_LANGUAGES = new String[] {"cs", "vbnet"};
 
+  public static final String REPOSITORY_KEY = "ndeps";
+
+  public static final Metric MERGED_TYPES
+    = new Metric.Builder("ndeps_merged_types", "Merged Types", Metric.ValueType.DATA).setDescription("Types from a single source files").setDirection(Integer.valueOf(0)).setQualitative(Boolean.valueOf(false)).setDomain("Design").setHidden(true).setDeleteHistoricalData(true).create();
+
   //
   // Utility method
   //
@@ -48,5 +58,9 @@ public final class NDepsConstants {
       }
     }
     return false;
+  }
+
+  public List<Metric> getMetrics() {
+    return Lists.newArrayList(MERGED_TYPES);
   }
 }

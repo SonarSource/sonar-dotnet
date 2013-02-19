@@ -57,6 +57,10 @@ public class NDepsPlugin extends SonarPlugin {
 
     extensions.add(Lcom4Viewer.class);
 
+    extensions.add(NDepsRuleRepositoryProvider.class);
+
+    extensions.add(NDepsConstants.class);
+
     return extensions;
   }
 }
