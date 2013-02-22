@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Properties({
+  @Property(key = NDepsConstants.IGNORABLE_FIELDS_KEY, defaultValue = "",
+      name = "NDeps ignorable fields", description = "Names of the fields that should not be taken in account for LCOM4",
+      global = true, project = true, type = PropertyType.STRING),
   @Property(key = NDepsConstants.INSTALL_DIR_KEY,
     name = "NDeps install directory", description = "Absolute path of the NDeps installation folder.", global = true,
     project = false),

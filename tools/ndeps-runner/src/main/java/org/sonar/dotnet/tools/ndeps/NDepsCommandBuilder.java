@@ -40,6 +40,8 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
 
   private String patterns;
 
+  private String ignorableFields;
+
   private NDepsCommandBuilder() {
   }
 
@@ -92,6 +94,11 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
         command.addArgument("-r");
         command.addArgument(patterns);
       }
+
+      if (StringUtils.isNotEmpty(ignorableFields)) {
+        command.addArgument("-i");
+        command.addArgument(ignorableFields);
+      }
     }
 
     return command;
@@ -112,5 +119,9 @@ public class NDepsCommandBuilder extends CilToolCommandBuilderSupport { // NOSON
 
   public void setPatterns(String patterns) {
     this.patterns = patterns;
+  }
+
+  public void setIgnorableFields(String ignorableFields) {
+    this.ignorableFields = ignorableFields;
   }
 }

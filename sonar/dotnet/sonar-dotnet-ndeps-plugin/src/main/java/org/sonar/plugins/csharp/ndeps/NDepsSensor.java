@@ -169,6 +169,7 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     builder.setBuildConfiguration(configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY));
     builder.setBuildPlatform(configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY));
     builder.setAssembliesToScan(getAssemblyPatterns());
+    builder.setIgnorableFields(configuration.getString(NDepsConstants.IGNORABLE_FIELDS_KEY));
 
     List<ActiveRule> rules
       = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
