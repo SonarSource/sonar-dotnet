@@ -19,22 +19,25 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.collect.Lists;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import static com.sonar.csharp.checks.ResourceParser.scanFile;
 
-public final class CheckList {
+public class TodoCommentCheckTest {
 
-  private CheckList() {
-  }
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        CommentedCodeCheck.class,
-        TodoCommentCheck.class,
-        ParsingErrorCheck.class,
-        XPathCheck.class
-        );
+  @Test
+  public void detected() {
+    SourceFile file = scanFile("/checks/comments.cs", new TodoCommentCheck());
+
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(9)
+        .next().atLine(18);
   }
 
 }
