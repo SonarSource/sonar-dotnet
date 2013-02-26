@@ -46,7 +46,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
   /**
    * Creates a new {@link GallioRunner} object for the given executable file. If the executable file does not exist, then the embedded one
    * will be used.
-   * 
+   *
    * @param gallioPath
    *          the full path of Gallio installation directory. For instance: "C:/Program Files/Gallio".
    * @param tempFolder
@@ -65,7 +65,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
   /**
    * Creates a pre-configured {@link GallioCommandBuilder} that needs to be completed before running the
    * {@link #execute(GallioCommandBuilder, int)} method.
-   * 
+   *
    * @param solution
    *          the solution to analyse
    * @return the command to complete.
@@ -79,7 +79,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
 
   /**
    * Executes the given Gallio command.
-   * 
+   *
    * @param gallioCommandBuilder
    *          the gallioCommandBuilder
    * @param timeoutMinutes
@@ -91,7 +91,7 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
     LOG.debug("Executing Gallio program...");
     int exitCode = CommandExecutor.create().execute(gallioCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
     if (exitCode != 0 && exitCode != 16) {
-      if (exitCode == 1 && ignoreTestFailures) {
+      if ((exitCode == 1 || exitCode == -3) && ignoreTestFailures) {
         return;
       }
       throw new GallioException(exitCode);
