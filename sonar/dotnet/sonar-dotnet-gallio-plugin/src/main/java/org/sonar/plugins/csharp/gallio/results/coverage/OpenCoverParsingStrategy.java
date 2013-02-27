@@ -60,7 +60,7 @@ public class OpenCoverParsingStrategy implements CoverageResultParsingStrategy {
     fileCoverageRegistry = Maps.newHashMap();
 
     try {
-      cursor = cursor.childElementCursor().advance().childElementCursor();
+      cursor = cursor.childElementCursor("Modules").advance().childElementCursor();
       while (cursor.getNext() != null) {
         SMInputCursor moduleChildrenCursor = cursor.childElementCursor();
         while (moduleChildrenCursor.getNext() != null) {

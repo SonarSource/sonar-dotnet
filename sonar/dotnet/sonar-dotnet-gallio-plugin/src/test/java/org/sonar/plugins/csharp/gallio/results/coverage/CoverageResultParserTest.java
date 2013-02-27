@@ -215,6 +215,20 @@ public class CoverageResultParserTest {
   }
 
   @Test
+  public void testParseOpenCover40X() {
+    ParsingParameters params = new ParsingParameters();
+    params.report = "Coverage.OpenCover.4.0.X.xml";
+    params.assemblyName = "Example.Core";
+    params.fileNumber = 4;
+    params.fileName = "Money.cs";
+    params.coveredLines = 49;
+    params.lines = 63;
+    params.coverage = 0.78;
+
+    checkParsing(params);
+  }
+
+  @Test
   public void testParseDotCover() throws Exception {
     ParsingParameters params = new ParsingParameters();
     params.report = "Coverage.DotCover.xml";
