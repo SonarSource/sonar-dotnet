@@ -91,6 +91,8 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
     LOG.debug("Executing Gallio program...");
     int exitCode = CommandExecutor.create().execute(gallioCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
     if (exitCode != 0 && exitCode != 16) {
+      // exitCode is set to -3 when there is a test error
+      // and opencover is used
       if ((exitCode == 1 || exitCode == -3) && ignoreTestFailures) {
         return;
       }
