@@ -87,7 +87,7 @@
                 <configuration>
                   <rules>
                     <requireFilesSize>
-                      <maxsize>1900000</maxsize>
+                      <maxsize>2000000</maxsize>
                       <minsize>1800000</minsize>
                       <files>
                         <file>${project.build.directory}/CSharpPluginsEcosystem-${project.version}.zip</file>
