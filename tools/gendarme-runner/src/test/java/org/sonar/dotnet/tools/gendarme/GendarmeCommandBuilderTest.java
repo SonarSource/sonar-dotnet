@@ -21,7 +21,7 @@ package org.sonar.dotnet.tools.gendarme;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
@@ -41,11 +41,11 @@ import static org.mockito.Mockito.when;
 
 public class GendarmeCommandBuilderTest {
 
-  private static VisualStudioProject vsProject;
-  private static VisualStudioSolution solution;
+  private VisualStudioProject vsProject;
+  private VisualStudioSolution solution;
 
-  @BeforeClass
-  public static void initData() {
+  @Before
+  public void initData() {
     vsProject = mock(VisualStudioProject.class);
     solution = mock(VisualStudioSolution.class);
     when(vsProject.getGeneratedAssemblies("Debug", null)).thenReturn(
