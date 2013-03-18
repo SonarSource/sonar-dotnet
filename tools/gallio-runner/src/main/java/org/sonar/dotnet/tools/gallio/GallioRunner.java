@@ -31,6 +31,8 @@ import java.io.File;
  */
 public class GallioRunner { // NOSONAR : can't mock it otherwise
 
+  private static final int DOTCOVER_RETURN_CODE_WHEN_FAILURES = -3;
+
   private static final Logger LOG = LoggerFactory.getLogger(GallioRunner.class);
 
   private static final String GALLIO_EXECUTABLE = "bin/Gallio.Echo.exe";
@@ -91,9 +93,8 @@ public class GallioRunner { // NOSONAR : can't mock it otherwise
     LOG.debug("Executing Gallio program...");
     int exitCode = CommandExecutor.create().execute(gallioCommandBuilder.toCommand(), timeoutMinutes * MINUTES_TO_MILLISECONDS);
     if (exitCode != 0 && exitCode != 16) {
-      // exitCode is set to -3 when there is a test error
-      // and opencover is used
-      if ((exitCode == 1 || exitCode == -3) && ignoreTestFailures) {
+      // dotCover has a specific exit code when there are test failures
+      if ((exitCode == 1 || exitCode == DOTCOVER_RETURN_CODE_WHEN_FAILURES) && ignoreTestFailures) {
         return;
       }
       throw new GallioException(exitCode);
