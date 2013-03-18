@@ -53,8 +53,14 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
   public void init() {
     g = getContext().getGrammar();
 
-    subscribeTo(g.namespaceDeclaration, g.classDeclaration, g.interfaceDeclaration,
-        g.delegateDeclaration, g.structDeclaration, g.enumDeclaration);
+    subscribeTo(
+        g.namespaceDeclaration,
+        g.classDeclaration,
+        g.interfaceDeclaration,
+        g.delegateDeclaration,
+        g.structDeclaration,
+        g.enumDeclaration);
+
     keywordMap.put(g.classDeclaration, CSharpKeyword.CLASS);
     metricMap.put(g.classDeclaration, CSharpMetric.CLASSES);
     keywordMap.put(g.interfaceDeclaration, CSharpKeyword.INTERFACE);
@@ -129,15 +135,15 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
       typeName.append(".");
     }
     if (currentNodeType.equals(g.delegateDeclaration)) {
-      typeName.append(astNode.findFirstChild(keywordMap.get(currentNodeType)).nextSibling().nextSibling().getTokenValue());
+      typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getNextSibling().getTokenValue());
     } else {
-      typeName.append(astNode.findFirstChild(keywordMap.get(currentNodeType)).nextSibling().getTokenValue());
+      typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getTokenValue());
     }
     return typeName.toString();
   }
 
   private String extractNamespaceSignature(AstNode astNode) {
-    AstNode qualifiedIdentifierNode = astNode.findFirstChild(CSharpKeyword.NAMESPACE).nextSibling();
+    AstNode qualifiedIdentifierNode = astNode.getFirstChild(CSharpKeyword.NAMESPACE).getNextSibling();
     StringBuilder name = new StringBuilder();
     for (AstNode child : qualifiedIdentifierNode.getChildren()) {
       name.append(child.getTokenValue());

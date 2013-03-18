@@ -74,7 +74,7 @@ public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
     if (node.getType().equals(g.interfaceMethodDeclaration) || node.getType().equals(g.interfacePropertyDeclaration)
       || node.getType().equals(g.interfaceEventDeclaration) || node.getType().equals(g.interfaceIndexerDeclaration)) {
       // then we must look at the visibility of the enclosing interface definition
-      isPublicApi = checkNodeForPublicModifier(node.findFirstParent(g.interfaceDeclaration), g.interfaceModifier);
+      isPublicApi = checkNodeForPublicModifier(node.getFirstAncestor(g.interfaceDeclaration), g.interfaceModifier);
     } else {
       isPublicApi = checkNodeForPublicModifier(node, modifiersMap.get(nodeType));
     }
@@ -85,7 +85,7 @@ public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
   }
 
   private boolean checkNodeForPublicModifier(AstNode currentNode, AstNodeType wantedChildrenType) {
-    List<AstNode> modifiers = currentNode.findDirectChildren(wantedChildrenType);
+    List<AstNode> modifiers = currentNode.getChildren(wantedChildrenType);
     for (AstNode astNode : modifiers) {
       if (astNode.getToken().getType().equals(CSharpKeyword.PUBLIC)) {
         getContext().peekSourceCode().add(CSharpMetric.PUBLIC_API, 1);

@@ -39,9 +39,26 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
   @Override
   public void init() {
     g = getContext().getGrammar();
-    subscribeTo(g.ifStatement, g.switchStatement, g.labeledStatement, g.whileStatement, g.doStatement, g.forStatement, g.returnStatement,
-        g.methodBody, g.accessorBody, g.addAccessorDeclaration, g.removeAccessorDeclaration, g.operatorBody, g.constructorBody,
-        g.destructorBody, g.staticConstructorBody, CSharpPunctuator.AND_OP, CSharpPunctuator.OR_OP, CSharpKeyword.CASE);
+
+    subscribeTo(
+        g.ifStatement,
+        g.switchStatement,
+        g.labeledStatement,
+        g.whileStatement,
+        g.doStatement,
+        g.forStatement,
+        g.returnStatement,
+        g.methodBody,
+        g.accessorBody,
+        g.addAccessorDeclaration,
+        g.removeAccessorDeclaration,
+        g.operatorBody,
+        g.constructorBody,
+        g.destructorBody,
+        g.staticConstructorBody,
+        CSharpPunctuator.AND_OP,
+        CSharpPunctuator.OR_OP,
+        CSharpKeyword.CASE);
   }
 
   /**
@@ -68,7 +85,7 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
       parent = currentNode.getParent();
     }
     // here, parent is a block
-    if (!currentNode.nextSibling().is(CSharpPunctuator.RCURLYBRACE)) {
+    if (!currentNode.getNextSibling().is(CSharpPunctuator.RCURLYBRACE)) {
       return false;
     }
     if (isMemberBloc(parent.getParent())) {
@@ -78,8 +95,15 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
   }
 
   private boolean isMemberBloc(AstNode parent) {
-    return parent.is(g.methodBody) || parent.is(g.accessorBody) || parent.is(g.addAccessorDeclaration)
-      || parent.is(g.removeAccessorDeclaration) || parent.is(g.operatorBody) || parent.is(g.constructorBody)
-      || parent.is(g.destructorBody) || parent.is(g.staticConstructorBody);
+    return parent.is(
+        g.methodBody,
+        g.accessorBody,
+        g.addAccessorDeclaration,
+        g.removeAccessorDeclaration,
+        g.operatorBody,
+        g.constructorBody,
+        g.destructorBody,
+        g.staticConstructorBody);
   }
+
 }
