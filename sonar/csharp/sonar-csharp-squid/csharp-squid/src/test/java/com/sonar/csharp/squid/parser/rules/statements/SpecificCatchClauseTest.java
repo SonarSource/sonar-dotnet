@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SpecificCatchClauseTest {
 
@@ -44,9 +43,10 @@ public class SpecificCatchClauseTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("catch ( classType ) block"));
-    assertThat(p, parse("catch ( classType id ) block"));
+  public void ok() {
+    assertThat(p)
+        .matches("catch ( classType ) block")
+        .matches("catch ( classType id ) block");
   }
 
 }

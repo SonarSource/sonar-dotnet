@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class StaticConstructorModifiersTest {
 
@@ -43,19 +41,21 @@ public class StaticConstructorModifiersTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("static"));
-    assertThat(p, parse("extern unsafe static"));
-    assertThat(p, parse("unsafe extern static"));
-    assertThat(p, parse("extern static unsafe"));
-    assertThat(p, parse("unsafe static extern"));
-    assertThat(p, parse("static extern unsafe"));
-    assertThat(p, parse("static unsafe extern"));
+  public void ok() {
+    assertThat(p)
+        .matches("static")
+        .matches("extern unsafe static")
+        .matches("unsafe extern static")
+        .matches("extern static unsafe")
+        .matches("unsafe static extern")
+        .matches("static extern unsafe")
+        .matches("static unsafe extern");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

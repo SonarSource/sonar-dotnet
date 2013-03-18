@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AttributeSectionTest {
 
@@ -42,17 +41,20 @@ public class AttributeSectionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributeTargetSpecifier.mock();
     g.attributeList.mock();
-    assertThat(p, parse("[attributeList]"));
-    assertThat(p, parse("[attributeTargetSpecifier attributeList]"));
-    assertThat(p, parse("[attributeTargetSpecifier attributeList , ]"));
+
+    assertThat(p)
+        .matches("[attributeList]")
+        .matches("[attributeTargetSpecifier attributeList]")
+        .matches("[attributeTargetSpecifier attributeList , ]");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("[Obsolete(\"Use Fix property\")]"));
+  public void reallife() {
+    assertThat(p)
+        .matches("[Obsolete(\"Use Fix property\")]");
   }
 
 }

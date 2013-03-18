@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfaceIndexerDeclarationTest {
 
@@ -46,9 +45,10 @@ public class InterfaceIndexerDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("type this [formalParameterList] {interfaceAccessors}"));
-    assertThat(p, parse("attributes new type this [formalParameterList] {interfaceAccessors}"));
+  public void ok() {
+    assertThat(p)
+        .matches("type this [formalParameterList] {interfaceAccessors}")
+        .matches("attributes new type this [formalParameterList] {interfaceAccessors}");
   }
 
 }

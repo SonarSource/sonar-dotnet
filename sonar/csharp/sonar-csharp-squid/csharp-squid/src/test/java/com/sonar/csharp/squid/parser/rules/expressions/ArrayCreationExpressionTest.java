@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ArrayCreationExpressionTest {
 
@@ -43,30 +41,35 @@ public class ArrayCreationExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.nonArrayType.mock();
     g.expressionList.mock();
     g.rankSpecifier.mock();
     g.arrayInitializer.mock();
     g.arrayType.mock();
-    assertThat(p, parse("new nonArrayType[expressionList]"));
-    assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier"));
-    assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier rankSpecifier"));
-    assertThat(p, parse("new nonArrayType[expressionList] arrayInitializer"));
-    assertThat(p, parse("new nonArrayType[expressionList] rankSpecifier rankSpecifier arrayInitializer"));
-    assertThat(p, parse("new arrayType arrayInitializer"));
-    assertThat(p, parse("new rankSpecifier arrayInitializer"));
+
+    assertThat(p)
+        .matches("new nonArrayType[expressionList]")
+        .matches("new nonArrayType[expressionList] rankSpecifier")
+        .matches("new nonArrayType[expressionList] rankSpecifier rankSpecifier")
+        .matches("new nonArrayType[expressionList] arrayInitializer")
+        .matches("new nonArrayType[expressionList] rankSpecifier rankSpecifier arrayInitializer")
+        .matches("new arrayType arrayInitializer")
+        .matches("new rankSpecifier arrayInitializer");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.arrayType.mock();
-    assertThat(p, notParse("new arrayType"));
+
+    assertThat(p)
+        .notMatches("new arrayType");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("new[] { 0, 1, }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("new[] { 0, 1, }");
   }
 
 }

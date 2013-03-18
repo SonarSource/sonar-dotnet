@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AttributeArgumentExpressionTest {
 
@@ -42,15 +41,18 @@ public class AttributeArgumentExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.expression.mock();
-    assertThat(p, parse("expression"));
+
+    assertThat(p)
+        .matches("expression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("AttributeTargets.Assembly"));
-    assertThat(p, parse("\"Use Fix property\""));
+  public void reallife() {
+    assertThat(p)
+        .matches("AttributeTargets.Assembly")
+        .matches("\"Use Fix property\"");
   }
 
 }

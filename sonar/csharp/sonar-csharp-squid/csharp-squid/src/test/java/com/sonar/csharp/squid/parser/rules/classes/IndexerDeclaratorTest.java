@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class IndexerDeclaratorTest {
 
@@ -42,18 +41,21 @@ public class IndexerDeclaratorTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
     g.interfaceType.mock();
     g.formalParameterList.mock();
-    assertThat(p, parse("type this [formalParameterList]"));
-    assertThat(p, parse("type interfaceType.this [formalParameterList]"));
+
+    assertThat(p)
+        .matches("type this [formalParameterList]")
+        .matches("type interfaceType.this [formalParameterList]");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("object this[int i]"));
-    assertThat(p, parse("object IList.this[int i]"));
+  public void reallife() {
+    assertThat(p)
+        .matches("object this[int i]")
+        .matches("object IList.this[int i]");
   }
 
 }

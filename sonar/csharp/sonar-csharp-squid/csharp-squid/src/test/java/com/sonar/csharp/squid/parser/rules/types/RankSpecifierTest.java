@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class RankSpecifierTest {
 
@@ -43,15 +41,17 @@ public class RankSpecifierTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("[]"));
-    assertThat(p, parse("[,]"));
-    assertThat(p, parse("[,,]"));
+  public void ok() {
+    assertThat(p)
+        .matches("[]")
+        .matches("[,]")
+        .matches("[,,]");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("[1,2]"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("[1,2]");
   }
 
 }

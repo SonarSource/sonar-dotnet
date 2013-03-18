@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AnonymousMethodExpressionTest {
 
@@ -45,14 +43,16 @@ public class AnonymousMethodExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("delegate block "));
-    assertThat(p, parse("delegate explicitAnonymousFunctionSignature block "));
+  public void ok() {
+    assertThat(p)
+        .matches("delegate block ")
+        .matches("delegate explicitAnonymousFunctionSignature block ");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

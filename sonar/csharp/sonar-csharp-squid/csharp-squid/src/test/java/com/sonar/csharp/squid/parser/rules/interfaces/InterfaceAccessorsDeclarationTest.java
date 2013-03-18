@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfaceAccessorsDeclarationTest {
 
@@ -43,15 +42,16 @@ public class InterfaceAccessorsDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("get;"));
-    assertThat(p, parse("set;"));
-    assertThat(p, parse("attributes get;"));
-    assertThat(p, parse("attributes set;"));
-    assertThat(p, parse("get; set;"));
-    assertThat(p, parse("set; get;"));
-    assertThat(p, parse("attributes get; attributes set;"));
-    assertThat(p, parse("attributes set; attributes get;"));
+  public void ok() {
+    assertThat(p)
+        .matches("get;")
+        .matches("set;")
+        .matches("attributes get;")
+        .matches("attributes set;")
+        .matches("get; set;")
+        .matches("set; get;")
+        .matches("attributes get; attributes set;")
+        .matches("attributes set; attributes get;");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class JumpStatementTest {
 
@@ -48,12 +47,13 @@ public class JumpStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("breakStatement"));
-    assertThat(p, parse("continueStatement"));
-    assertThat(p, parse("gotoStatement"));
-    assertThat(p, parse("returnStatement"));
-    assertThat(p, parse("throwStatement"));
+  public void ok() {
+    assertThat(p)
+        .matches("breakStatement")
+        .matches("continueStatement")
+        .matches("gotoStatement")
+        .matches("returnStatement")
+        .matches("throwStatement");
   }
 
 }

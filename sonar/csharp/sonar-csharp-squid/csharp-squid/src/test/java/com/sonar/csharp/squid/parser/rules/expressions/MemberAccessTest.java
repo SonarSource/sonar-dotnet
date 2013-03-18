@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class MemberAccessTest {
 
@@ -43,26 +41,31 @@ public class MemberAccessTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.typeArgumentList.mock();
     g.predefinedType.mock();
     g.qualifiedAliasMember.mock();
-    assertThat(p, parse("predefinedType.id"));
-    assertThat(p, parse("predefinedType.id typeArgumentList"));
-    assertThat(p, parse("qualifiedAliasMember.id"));
+
+    assertThat(p)
+        .matches("predefinedType.id")
+        .matches("predefinedType.id typeArgumentList")
+        .matches("qualifiedAliasMember.id");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.qualifiedAliasMember.mock();
     g.typeArgumentList.mock();
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("qualifiedAliasMember.id typeArgumentList"));
+
+    assertThat(p)
+        .notMatches("")
+        .notMatches("qualifiedAliasMember.id typeArgumentList");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int.MaxValue"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int.MaxValue");
   }
 
 }

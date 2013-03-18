@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class DelegateDeclarationTest {
 
@@ -42,21 +41,23 @@ public class DelegateDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.returnType.mock();
     g.variantTypeParameterList.mock();
     g.formalParameterList.mock();
     g.typeParameterConstraintsClauses.mock();
-    assertThat(p, parse("delegate returnType id();"));
-    assertThat(p,
-        parse("attributes new delegate returnType id variantTypeParameterList (formalParameterList) typeParameterConstraintsClauses;"));
-    assertThat(p, parse("public protected internal private delegate returnType id();"));
+
+    assertThat(p)
+        .matches("delegate returnType id();")
+        .matches("attributes new delegate returnType id variantTypeParameterList (formalParameterList) typeParameterConstraintsClauses;")
+        .matches("public protected internal private delegate returnType id();");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;"));
+  public void reallife() {
+    assertThat(p)
+        .matches("delegate void CoContra2<[System.Obsolete()] out T, in K> () where T : struct;");
   }
 
 }

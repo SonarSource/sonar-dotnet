@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FixedStatementTest {
 
@@ -43,22 +41,26 @@ public class FixedStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.pointerType.mock();
     g.fixedPointerDeclarator.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("fixed(pointerType fixedPointerDeclarator) embeddedStatement"));
-    assertThat(p, parse("fixed(pointerType fixedPointerDeclarator, fixedPointerDeclarator, fixedPointerDeclarator) embeddedStatement"));
+
+    assertThat(p)
+        .matches("fixed(pointerType fixedPointerDeclarator) embeddedStatement")
+        .matches("fixed(pointerType fixedPointerDeclarator, fixedPointerDeclarator, fixedPointerDeclarator) embeddedStatement");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("fixed (int* p = stackalloc int[100], q = &y) {}"));
+  public void reallife() {
+    assertThat(p)
+        .matches("fixed (int* p = stackalloc int[100], q = &y) {}");
   }
 
 }

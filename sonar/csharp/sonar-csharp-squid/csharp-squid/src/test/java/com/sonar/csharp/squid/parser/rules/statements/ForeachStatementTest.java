@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ForeachStatementTest {
 
@@ -42,17 +41,20 @@ public class ForeachStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
     g.expression.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("foreach ( type id in expression ) embeddedStatement"));
+
+    assertThat(p)
+        .matches("foreach ( type id in expression ) embeddedStatement");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("foreach (Assembly assembly in AppDomain) {}"));
-    assertThat(p, parse("foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {}"));
+  public void reallife() {
+    assertThat(p)
+        .matches("foreach (Assembly assembly in AppDomain) {}")
+        .matches("foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {}");
   }
 
 }

@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FixedPointerInitializerTest {
 
@@ -43,21 +41,25 @@ public class FixedPointerInitializerTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.variableReference.mock();
     g.expression.mock();
-    assertThat(p, parse("&variableReference"));
-    assertThat(p, parse("expression"));
+
+    assertThat(p)
+        .matches("&variableReference")
+        .matches("expression");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("stackalloc int[100]"));
+  public void reallife() {
+    assertThat(p)
+        .matches("stackalloc int[100]");
   }
 
 }

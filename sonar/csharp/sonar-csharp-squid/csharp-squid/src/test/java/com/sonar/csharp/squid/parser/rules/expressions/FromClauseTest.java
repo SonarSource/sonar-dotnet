@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FromClauseTest {
 
@@ -43,22 +41,26 @@ public class FromClauseTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
     g.expression.mock();
-    assertThat(p, parse("from id in expression"));
-    assertThat(p, parse("from type id in expression"));
+
+    assertThat(p)
+        .matches("from id in expression")
+        .matches("from type id in expression");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("from c in customers"));
-    assertThat(p, parse("from People c in customers"));
+  public void reallife() {
+    assertThat(p)
+        .matches("from c in customers")
+        .matches("from People c in customers");
   }
 
 }

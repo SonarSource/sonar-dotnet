@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class VariantTypeParameterTest {
 
@@ -46,16 +44,18 @@ public class VariantTypeParameterTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("typeParameter"));
-    assertThat(p, parse("attributes typeParameter"));
-    assertThat(p, parse("varianceAnnotation typeParameter"));
-    assertThat(p, parse("attributes varianceAnnotation typeParameter"));
+  public void ok() {
+    assertThat(p)
+        .matches("typeParameter")
+        .matches("attributes typeParameter")
+        .matches("varianceAnnotation typeParameter")
+        .matches("attributes varianceAnnotation typeParameter");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AndExpressionTest {
 
@@ -43,10 +42,11 @@ public class AndExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("equalityExpression"));
-    assertThat(p, parse("equalityExpression & equalityExpression "));
-    assertThat(p, parse("equalityExpression & equalityExpression & equalityExpression & equalityExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("equalityExpression")
+        .matches("equalityExpression & equalityExpression ")
+        .matches("equalityExpression & equalityExpression & equalityExpression & equalityExpression");
   }
 
 }

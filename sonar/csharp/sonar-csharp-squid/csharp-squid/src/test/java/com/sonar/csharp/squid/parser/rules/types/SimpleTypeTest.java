@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SimpleTypeTest {
 
@@ -43,26 +41,28 @@ public class SimpleTypeTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("bool"));
-    assertThat(p, parse("decimal"));
-    assertThat(p, parse("sbyte"));
-    assertThat(p, parse("short"));
-    assertThat(p, parse("ushort"));
-    assertThat(p, parse("int"));
-    assertThat(p, parse("uint"));
-    assertThat(p, parse("long"));
-    assertThat(p, parse("ulong"));
-    assertThat(p, parse("char"));
-    assertThat(p, parse("float"));
-    assertThat(p, parse("double"));
+  public void ok() {
+    assertThat(p)
+        .matches("bool")
+        .matches("decimal")
+        .matches("sbyte")
+        .matches("short")
+        .matches("ushort")
+        .matches("int")
+        .matches("uint")
+        .matches("long")
+        .matches("ulong")
+        .matches("char")
+        .matches("float")
+        .matches("double");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("Float"));
-    assertThat(p, notParse("string"));
-    assertThat(p, notParse("object"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("Float")
+        .notMatches("string")
+        .notMatches("object");
   }
 
 }

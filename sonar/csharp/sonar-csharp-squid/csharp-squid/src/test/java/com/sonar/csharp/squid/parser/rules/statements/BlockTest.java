@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class BlockTest {
 
@@ -42,19 +41,21 @@ public class BlockTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.statement.mock();
-    assertThat(p, parse("{}"));
-    assertThat(p, parse("{ statement }"));
-    assertThat(p, parse("{ statement statement}"));
+
+    assertThat(p)
+        .matches("{}")
+        .matches("{ statement }")
+        .matches("{ statement statement}");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("{ Integer i = 15; }"));
-    assertThat(p, parse("{ Integer i = 15;  frameIndex++; }"));
-    assertThat(p,
-        parse("{ loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("{ Integer i = 15; }")
+        .matches("{ Integer i = 15;  frameIndex++; }")
+        .matches("{ loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }");
   }
 
 }

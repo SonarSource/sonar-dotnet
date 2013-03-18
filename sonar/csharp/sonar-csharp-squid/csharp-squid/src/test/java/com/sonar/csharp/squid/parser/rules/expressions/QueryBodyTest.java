@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class QueryBodyTest {
 
@@ -46,17 +44,19 @@ public class QueryBodyTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("selectOrGroupClause"));
-    assertThat(p, parse("selectOrGroupClause queryContinuation"));
-    assertThat(p, parse("queryBodyClause selectOrGroupClause queryContinuation"));
-    assertThat(p, parse("queryBodyClause queryBodyClause selectOrGroupClause queryContinuation"));
-    assertThat(p, parse("queryBodyClause queryBodyClause selectOrGroupClause"));
+  public void ok() {
+    assertThat(p)
+        .matches("selectOrGroupClause")
+        .matches("selectOrGroupClause queryContinuation")
+        .matches("queryBodyClause selectOrGroupClause queryContinuation")
+        .matches("queryBodyClause queryBodyClause selectOrGroupClause queryContinuation")
+        .matches("queryBodyClause queryBodyClause selectOrGroupClause");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

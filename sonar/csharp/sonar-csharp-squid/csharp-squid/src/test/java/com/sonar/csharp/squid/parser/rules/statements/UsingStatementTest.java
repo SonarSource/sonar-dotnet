@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class UsingStatementTest {
 
@@ -45,9 +44,10 @@ public class UsingStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("using (localVariableDeclaration) embeddedStatement"));
-    assertThat(p, parse("using (expression) embeddedStatement"));
+  public void ok() {
+    assertThat(p)
+        .matches("using (localVariableDeclaration) embeddedStatement")
+        .matches("using (expression) embeddedStatement");
   }
 
 }

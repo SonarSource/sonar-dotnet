@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class EnumDeclarationTest {
 
@@ -45,10 +44,11 @@ public class EnumDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("enum id enumBody"));
-    assertThat(p, parse("attributes new enum id enumBase enumBody;"));
-    assertThat(p, parse("public protected internal private enum id enumBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("enum id enumBody")
+        .matches("attributes new enum id enumBase enumBody;")
+        .matches("public protected internal private enum id enumBody");
   }
 
 }

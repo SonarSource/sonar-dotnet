@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FixedSizeBufferModifierTest {
 
@@ -43,18 +41,20 @@ public class FixedSizeBufferModifierTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("new"));
-    assertThat(p, parse("public"));
-    assertThat(p, parse("protected"));
-    assertThat(p, parse("internal"));
-    assertThat(p, parse("private"));
-    assertThat(p, parse("unsafe"));
+  public void ok() {
+    assertThat(p)
+        .matches("new")
+        .matches("public")
+        .matches("protected")
+        .matches("internal")
+        .matches("private")
+        .matches("unsafe");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

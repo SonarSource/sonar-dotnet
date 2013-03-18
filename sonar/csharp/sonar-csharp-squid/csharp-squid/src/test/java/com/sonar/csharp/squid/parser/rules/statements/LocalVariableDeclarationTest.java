@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class LocalVariableDeclarationTest {
 
@@ -42,22 +41,25 @@ public class LocalVariableDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
     g.localVariableInitializer.mock();
-    assertThat(p, parse("type id"));
-    assertThat(p, parse("type id = localVariableInitializer"));
-    assertThat(p, parse("type id1, id2 = localVariableInitializer, id3"));
+
+    assertThat(p)
+        .matches("type id")
+        .matches("type id = localVariableInitializer")
+        .matches("type id1, id2 = localVariableInitializer, id3");
   }
 
   @Test
-  public void testRealLife() {
-    assertThat(p, parse("int a = 1"));
-    assertThat(p, parse("int a = 1, b, c = 4"));
-    assertThat(p, parse("Message message = \"Hello World\""));
-    assertThat(p, parse("int num = count"));
-    assertThat(p, parse("int? num = count"));
-    assertThat(p, parse("Color? red = Colors.red"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int a = 1")
+        .matches("int a = 1, b, c = 4")
+        .matches("Message message = \"Hello World\"")
+        .matches("int num = count")
+        .matches("int? num = count")
+        .matches("Color? red = Colors.red");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FormalParameterListTest {
 
@@ -42,19 +41,22 @@ public class FormalParameterListTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.fixedParameters.mock();
     g.parameterArray.mock();
-    assertThat(p, parse("fixedParameters"));
-    assertThat(p, parse("parameterArray"));
-    assertThat(p, parse("fixedParameters, parameterArray"));
+
+    assertThat(p)
+        .matches("fixedParameters")
+        .matches("parameterArray")
+        .matches("fixedParameters, parameterArray");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int i"));
-    assertThat(p, parse("this IEnumerable<TSource> source, Func<TSource, int, bool> predicate"));
-    assertThat(p, parse("RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int i")
+        .matches("this IEnumerable<TSource> source, Func<TSource, int, bool> predicate")
+        .matches("RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType");
   }
 
 }

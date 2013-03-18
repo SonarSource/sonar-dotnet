@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TypeTest {
 
@@ -43,19 +41,23 @@ public class TypeTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.pointerType.mock();
-    assertThat(p, parse("pointerType"));
+
+    assertThat(p)
+        .matches("pointerType");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int*"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int*");
   }
 
 }

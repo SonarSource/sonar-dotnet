@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConstructorDeclarationTest {
 
@@ -46,15 +44,17 @@ public class ConstructorDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("constructorDeclarator constructorBody"));
-    assertThat(p, parse("attributes public constructorDeclarator constructorBody"));
-    assertThat(p, parse("protected internal private extern constructorDeclarator constructorBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("constructorDeclarator constructorBody")
+        .matches("attributes public constructorDeclarator constructorBody")
+        .matches("protected internal private extern constructorDeclarator constructorBody");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("static constructorDeclarator constructorBody"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("static constructorDeclarator constructorBody");
   }
 
 }

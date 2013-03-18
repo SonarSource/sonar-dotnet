@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConversionOperatorDeclaratorTest {
 
@@ -43,9 +42,10 @@ public class ConversionOperatorDeclaratorTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("implicit operator type ( type id )"));
-    assertThat(p, parse("explicit operator type ( type id )"));
+  public void ok() {
+    assertThat(p)
+        .matches("implicit operator type ( type id )")
+        .matches("explicit operator type ( type id )");
   }
 
 }

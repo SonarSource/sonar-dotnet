@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class UnaryExpressionTest {
 
@@ -42,22 +41,25 @@ public class UnaryExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.primaryExpression.mock();
     g.type.mock();
-    assertThat(p, parse("primaryExpression"));
-    assertThat(p, parse("+primaryExpression"));
-    assertThat(p, parse("-primaryExpression"));
-    assertThat(p, parse("!primaryExpression"));
-    assertThat(p, parse("~primaryExpression"));
-    assertThat(p, parse("++primaryExpression"));
-    assertThat(p, parse("--primaryExpression"));
-    assertThat(p, parse("( type ) primaryExpression"));
+
+    assertThat(p)
+        .matches("primaryExpression")
+        .matches("+primaryExpression")
+        .matches("-primaryExpression")
+        .matches("!primaryExpression")
+        .matches("~primaryExpression")
+        .matches("++primaryExpression")
+        .matches("--primaryExpression")
+        .matches("( type ) primaryExpression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("(Level)info.GetValue(\"Level\", typeof(Level))"));
+  public void reallife() {
+    assertThat(p)
+        .matches("(Level)info.GetValue(\"Level\", typeof(Level))");
   }
 
 }

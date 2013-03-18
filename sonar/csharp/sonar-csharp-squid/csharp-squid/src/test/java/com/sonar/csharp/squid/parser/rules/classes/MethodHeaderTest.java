@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class MethodHeaderTest {
 
@@ -42,24 +41,26 @@ public class MethodHeaderTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.returnType.mock();
     g.memberName.mock();
     g.typeParameterList.mock();
     g.formalParameterList.mock();
     g.typeParameterConstraintsClauses.mock();
-    assertThat(p, parse("returnType memberName ( ) "));
-    assertThat(p, parse("attributes new returnType memberName typeParameterList ( formalParameterList ) typeParameterConstraintsClauses"));
-    assertThat(p, parse("public protected internal private static virtual sealed override abstract extern returnType memberName ( ) "));
+
+    assertThat(p)
+        .matches("returnType memberName ( ) ")
+        .matches("attributes new returnType memberName typeParameterList ( formalParameterList ) typeParameterConstraintsClauses")
+        .matches("public protected internal private static virtual sealed override abstract extern returnType memberName ( ) ");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("public partial void OnError()"));
-    assertThat(p,
-        parse("public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)"));
-    assertThat(p, parse("public bool Contains(RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType)"));
+  public void reallife() {
+    assertThat(p)
+        .matches("public partial void OnError()")
+        .matches("public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)")
+        .matches("public bool Contains(RequestStatusDto? status, UserActionDto? action, OTCTypeDto? dealType)");
   }
 
 }

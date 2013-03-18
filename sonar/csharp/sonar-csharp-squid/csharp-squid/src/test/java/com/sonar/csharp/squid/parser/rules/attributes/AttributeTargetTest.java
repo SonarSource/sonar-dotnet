@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AttributeTargetTest {
 
@@ -43,24 +41,26 @@ public class AttributeTargetTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("field"));
-    assertThat(p, parse("event"));
-    assertThat(p, parse("method"));
-    assertThat(p, parse("param"));
-    assertThat(p, parse("property"));
-    assertThat(p, parse("return"));
-    assertThat(p, parse("type"));
+  public void ok() {
+    assertThat(p)
+        .matches("field")
+        .matches("event")
+        .matches("method")
+        .matches("param")
+        .matches("property")
+        .matches("return")
+        .matches("type");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("10"));
-    assertThat(p, notParse("myIdentifier"));
-    assertThat(p, notParse("public"));
-    assertThat(p, notParse("void"));
-    assertThat(p, notParse("unchecked"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("")
+        .notMatches("10")
+        .notMatches("myIdentifier")
+        .notMatches("public")
+        .notMatches("void")
+        .notMatches("unchecked");
   }
 
 }

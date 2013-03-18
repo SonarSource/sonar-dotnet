@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TypeOfExpressionTest {
 
@@ -42,19 +41,22 @@ public class TypeOfExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
     g.unboundTypeName.mock();
-    assertThat(p, parse("typeof (type)"));
-    assertThat(p, parse("typeof (unboundTypeName)"));
-    assertThat(p, parse("typeof (void)"));
+
+    assertThat(p)
+        .matches("typeof (type)")
+        .matches("typeof (unboundTypeName)")
+        .matches("typeof (void)");
   }
 
   @Test
-  public void testRealLife() {
-    assertThat(p, parse("typeof (MyClass)"));
-    assertThat(p, parse("typeof (CollectionProxy<>)"));
-    assertThat(p, parse("typeof (List<List<int>>)"));
+  public void reallife() {
+    assertThat(p)
+        .matches("typeof (MyClass)")
+        .matches("typeof (CollectionProxy<>)")
+        .matches("typeof (List<List<int>>)");
   }
 
 }

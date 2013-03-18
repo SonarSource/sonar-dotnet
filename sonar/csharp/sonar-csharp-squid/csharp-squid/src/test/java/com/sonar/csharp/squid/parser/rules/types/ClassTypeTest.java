@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ClassTypeTest {
 
@@ -44,16 +42,18 @@ public class ClassTypeTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("typeName"));
-    assertThat(p, parse("object"));
-    assertThat(p, parse("string"));
-    assertThat(p, parse("dynamic"));
+  public void ok() {
+    assertThat(p)
+        .matches("typeName")
+        .matches("object")
+        .matches("string")
+        .matches("dynamic");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("referenceType rankSpecifier"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("referenceType rankSpecifier");
   }
 
 }

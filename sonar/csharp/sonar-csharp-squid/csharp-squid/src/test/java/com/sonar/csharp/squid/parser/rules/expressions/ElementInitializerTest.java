@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ElementInitializerTest {
 
@@ -43,22 +41,26 @@ public class ElementInitializerTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.nonAssignmentExpression.mock();
     g.expressionList.mock();
-    assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("{expressionList}"));
+
+    assertThat(p)
+        .matches("nonAssignmentExpression")
+        .matches("{expressionList}");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("{}"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("")
+        .notMatches("{}");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("{1, \"\"}"));
+  public void reallife() {
+    assertThat(p)
+        .matches("{1, \"\"}");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PostMemberAccessTest {
 
@@ -42,16 +41,19 @@ public class PostMemberAccessTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.primaryExpression.mock();
     g.typeArgumentList.mock();
-    assertThat(p, parse(".id"));
-    assertThat(p, parse(".id typeArgumentList"));
+
+    assertThat(p)
+        .matches(".id")
+        .matches(".id typeArgumentList");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse(".MaxValue"));
+  public void reallife() {
+    assertThat(p)
+        .matches(".MaxValue");
   }
 
 }

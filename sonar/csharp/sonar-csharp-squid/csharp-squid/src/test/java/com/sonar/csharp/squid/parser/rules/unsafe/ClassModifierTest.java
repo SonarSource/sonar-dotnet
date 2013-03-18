@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ClassModifierTest {
 
@@ -42,8 +41,9 @@ public class ClassModifierTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("unsafe"));
+  public void ok() {
+    assertThat(p)
+        .matches("unsafe");
   }
 
 }

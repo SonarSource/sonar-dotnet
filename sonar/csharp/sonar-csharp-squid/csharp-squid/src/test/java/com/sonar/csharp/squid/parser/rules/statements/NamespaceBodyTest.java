@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class NamespaceBodyTest {
 
@@ -45,16 +44,15 @@ public class NamespaceBodyTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("{}"));
-    assertThat(p, parse("{externAliasDirective }"));
-    assertThat(p, parse("{usingDirective }"));
-    assertThat(p, parse("{namespaceMemberDeclaration}"));
-    assertThat(p, parse("{externAliasDirective namespaceMemberDeclaration}"));
-    assertThat(p, parse("{usingDirective usingDirective namespaceMemberDeclaration}"));
-    assertThat(
-        p,
-        parse("{externAliasDirective externAliasDirective usingDirective usingDirective namespaceMemberDeclaration namespaceMemberDeclaration}"));
+  public void ok() {
+    assertThat(p)
+        .matches("{}")
+        .matches("{externAliasDirective }")
+        .matches("{usingDirective }")
+        .matches("{namespaceMemberDeclaration}")
+        .matches("{externAliasDirective namespaceMemberDeclaration}")
+        .matches("{usingDirective usingDirective namespaceMemberDeclaration}")
+        .matches("{externAliasDirective externAliasDirective usingDirective usingDirective namespaceMemberDeclaration namespaceMemberDeclaration}");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class UnboundTypeNameTest {
 
@@ -42,19 +41,22 @@ public class UnboundTypeNameTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.genericDimensionSpecifier.mock();
-    assertThat(p, parse("id"));
-    assertThat(p, parse("id genericDimensionSpecifier"));
-    assertThat(p, parse("id :: otherId"));
-    assertThat(p, parse("id :: otherId genericDimensionSpecifier"));
-    assertThat(p, parse("id :: otherId . anotherId genericDimensionSpecifier"));
+
+    assertThat(p)
+        .matches("id")
+        .matches("id genericDimensionSpecifier")
+        .matches("id :: otherId")
+        .matches("id :: otherId genericDimensionSpecifier")
+        .matches("id :: otherId . anotherId genericDimensionSpecifier");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("CollectionProxy<>"));
-    assertThat(p, parse("CollectionProxy<,,>"));
+  public void reallife() {
+    assertThat(p)
+        .matches("CollectionProxy<>")
+        .matches("CollectionProxy<,,>");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfaceBodyTest {
 
@@ -46,10 +45,11 @@ public class InterfaceBodyTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("{}"));
-    assertThat(p, parse("{interfaceMethodDeclaration}"));
-    assertThat(p, parse("{interfacePropertyDeclaration interfaceEventDeclaration interfaceIndexerDeclaration}"));
+  public void ok() {
+    assertThat(p)
+        .matches("{}")
+        .matches("{interfaceMethodDeclaration}")
+        .matches("{interfacePropertyDeclaration interfaceEventDeclaration interfaceIndexerDeclaration}");
   }
 
 }

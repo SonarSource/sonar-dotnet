@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class CheckedStatementTest {
 
@@ -43,8 +42,9 @@ public class CheckedStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("checked block"));
+  public void ok() {
+    assertThat(p)
+        .matches("checked block");
   }
 
 }

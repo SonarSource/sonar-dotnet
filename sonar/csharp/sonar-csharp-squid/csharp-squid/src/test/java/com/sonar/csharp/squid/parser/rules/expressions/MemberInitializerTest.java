@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class MemberInitializerTest {
 
@@ -44,13 +42,15 @@ public class MemberInitializerTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("id = initializerValue"));
+  public void ok() {
+    assertThat(p)
+        .matches("id = initializerValue");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

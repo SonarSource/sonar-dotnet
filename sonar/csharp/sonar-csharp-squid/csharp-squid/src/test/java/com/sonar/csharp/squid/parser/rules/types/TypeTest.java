@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TypeTest {
 
@@ -42,14 +41,15 @@ public class TypeTest {
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("bool"));
-    assertThat(p, parse("AClass"));
-    assertThat(p, parse("AClass[]"));
-    assertThat(p, parse("int?"));
-    assertThat(p, parse("IEnumerable<TSource>"));
-    assertThat(p, parse("Func<TSource, int, bool>"));
-    assertThat(p, parse("RequestStatusDto?"));
+  public void reallife() {
+    assertThat(p)
+        .matches("bool")
+        .matches("AClass")
+        .matches("AClass[]")
+        .matches("int?")
+        .matches("IEnumerable<TSource>")
+        .matches("Func<TSource, int, bool>")
+        .matches("RequestStatusDto?");
   }
 
 }

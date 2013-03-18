@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class QualifiedAliasMemberTest {
 
@@ -42,15 +41,18 @@ public class QualifiedAliasMemberTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.typeArgumentList.mock();
-    assertThat(p, parse("id :: id"));
-    assertThat(p, parse("id :: id typeArgumentList"));
+
+    assertThat(p)
+        .matches("id :: id")
+        .matches("id :: id typeArgumentList");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("Foo::NonExisting"));
+  public void reallife() {
+    assertThat(p)
+        .matches("Foo::NonExisting");
   }
 
 }

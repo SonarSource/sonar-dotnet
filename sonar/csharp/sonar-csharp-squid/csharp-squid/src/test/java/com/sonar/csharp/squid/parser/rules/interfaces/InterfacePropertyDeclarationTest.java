@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfacePropertyDeclarationTest {
 
@@ -45,9 +44,10 @@ public class InterfacePropertyDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("type id {interfaceAccessors}"));
-    assertThat(p, parse("attributes new type id {interfaceAccessors}"));
+  public void ok() {
+    assertThat(p)
+        .matches("type id {interfaceAccessors}")
+        .matches("attributes new type id {interfaceAccessors}");
   }
 
 }

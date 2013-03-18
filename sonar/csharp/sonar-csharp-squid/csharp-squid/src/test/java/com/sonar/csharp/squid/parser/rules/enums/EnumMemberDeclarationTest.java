@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class EnumMemberDeclarationTest {
 
@@ -44,10 +43,11 @@ public class EnumMemberDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("id"));
-    assertThat(p, parse("id = expression"));
-    assertThat(p, parse("attributes id = expression"));
+  public void ok() {
+    assertThat(p)
+        .matches("id")
+        .matches("id = expression")
+        .matches("attributes id = expression");
   }
 
 }

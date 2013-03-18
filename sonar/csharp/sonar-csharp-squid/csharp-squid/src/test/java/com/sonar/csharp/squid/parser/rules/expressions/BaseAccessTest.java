@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class BaseAccessTest {
 
@@ -45,21 +43,24 @@ public class BaseAccessTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("base.id"));
-    assertThat(p, parse("base[ argumentList ]"));
+  public void ok() {
+    assertThat(p)
+        .matches("base.id")
+        .matches("base[ argumentList ]");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("base.id typeArgumentList"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("")
+        .notMatches("base.id typeArgumentList");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("base.GetService"));
-    assertThat(p, parse("base.GetService<T>"));
+  public void reallife() {
+    assertThat(p)
+        .matches("base.GetService")
+        .matches("base.GetService<T>");
   }
 
 }

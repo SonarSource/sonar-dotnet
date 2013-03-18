@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class IndexerDeclarationTest {
 
@@ -42,20 +41,21 @@ public class IndexerDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.indexerDeclarator.mock();
     g.accessorDeclarations.mock();
-    assertThat(p, parse("indexerDeclarator { accessorDeclarations }"));
-    assertThat(p, parse("attributes new indexerDeclarator { accessorDeclarations }"));
-    assertThat(
-        p,
-        parse("public protected internal private static virtual sealed override abstract extern indexerDeclarator { accessorDeclarations }"));
+
+    assertThat(p)
+        .matches("indexerDeclarator { accessorDeclarations }")
+        .matches("attributes new indexerDeclarator { accessorDeclarations }")
+        .matches("public protected internal private static virtual sealed override abstract extern indexerDeclarator { accessorDeclarations }");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("object IList.this[int i] { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("object IList.this[int i] { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }");
   }
 
 }

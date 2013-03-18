@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ObjectCreationExpressionTest {
 
@@ -43,26 +41,30 @@ public class ObjectCreationExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.argumentList.mock();
     g.type.mock();
     g.objectOrCollectionInitializer.mock();
-    assertThat(p, parse("new type()"));
-    assertThat(p, parse("new type(argumentList)"));
-    assertThat(p, parse("new type(argumentList) objectOrCollectionInitializer"));
-    assertThat(p, parse("new type() objectOrCollectionInitializer"));
-    assertThat(p, parse("new type objectOrCollectionInitializer"));
+
+    assertThat(p)
+        .matches("new type()")
+        .matches("new type(argumentList)")
+        .matches("new type(argumentList) objectOrCollectionInitializer")
+        .matches("new type() objectOrCollectionInitializer")
+        .matches("new type objectOrCollectionInitializer");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("new MyClass()"));
-    assertThat(p, parse("new Dictionary<int, string>  { {1, \"\"}  }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("new MyClass()")
+        .matches("new Dictionary<int, string>  { {1, \"\"}  }");
   }
 
 }

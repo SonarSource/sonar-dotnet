@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class StructDeclarationTest {
 
@@ -47,10 +46,11 @@ public class StructDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("struct id structBody"));
-    assertThat(p, parse("attributes new partial struct id typeParameterList structInterfaces typeParameterConstraintsClauses structBody;"));
-    assertThat(p, parse("public protected internal private struct id structBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("struct id structBody")
+        .matches("attributes new partial struct id typeParameterList structInterfaces typeParameterConstraintsClauses structBody;")
+        .matches("public protected internal private struct id structBody");
   }
 
 }

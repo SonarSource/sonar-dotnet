@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ForStatementTest {
 
@@ -42,21 +41,24 @@ public class ForStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.forInitializer.mock();
     g.forCondition.mock();
     g.forIterator.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("for ( ;; ) embeddedStatement"));
-    assertThat(p, parse("for ( forInitializer;forCondition;forIterator ) embeddedStatement"));
-    assertThat(p, parse("for ( forInitializer;;forIterator ) embeddedStatement"));
-    assertThat(p, parse("for ( ;forCondition; ) embeddedStatement"));
+
+    assertThat(p)
+        .matches("for ( ;; ) embeddedStatement")
+        .matches("for ( forInitializer;forCondition;forIterator ) embeddedStatement")
+        .matches("for ( forInitializer;;forIterator ) embeddedStatement")
+        .matches("for ( ;forCondition; ) embeddedStatement");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("for( int num = count;\n num > 0;\n --num)\n {}"));
-    assertThat(p, parse("for( int num = count;\n num > 0;\n --num)\n  { myClass.sayHello(); } "));
+  public void reallife() {
+    assertThat(p)
+        .matches("for( int num = count;\n num > 0;\n --num)\n {}")
+        .matches("for( int num = count;\n num > 0;\n --num)\n  { myClass.sayHello(); } ");
   }
 
 }

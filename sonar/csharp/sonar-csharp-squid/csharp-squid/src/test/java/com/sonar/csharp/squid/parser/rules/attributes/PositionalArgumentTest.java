@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PositionalArgumentTest {
 
@@ -42,16 +41,19 @@ public class PositionalArgumentTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributeArgumentExpression.mock();
     g.argumentName.mock();
-    assertThat(p, parse("attributeArgumentExpression"));
-    assertThat(p, parse("argumentName attributeArgumentExpression"));
+
+    assertThat(p)
+        .matches("attributeArgumentExpression")
+        .matches("argumentName attributeArgumentExpression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("AttributeTargets.Assembly"));
+  public void reallife() {
+    assertThat(p)
+        .matches("AttributeTargets.Assembly");
   }
 
 }

@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class MemberNameTest {
 
@@ -43,19 +41,22 @@ public class MemberNameTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.namespaceOrTypeName.mock();
-    assertThat(p, parse("namespaceOrTypeName"));
+
+    assertThat(p)
+        .matches("namespaceOrTypeName");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("ICollection.CopyTo"));
+  public void reallife() {
+    assertThat(p)
+        .matches("ICollection.CopyTo");
   }
-
 }

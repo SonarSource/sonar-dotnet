@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class IfStatementTest {
 
@@ -42,18 +41,19 @@ public class IfStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.expression.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("if ( expression ) embeddedStatement"));
-    assertThat(p, parse("if ( expression ) embeddedStatement else embeddedStatement"));
+
+    assertThat(p)
+        .matches("if ( expression ) embeddedStatement")
+        .matches("if ( expression ) embeddedStatement else embeddedStatement");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(
-        p,
-        parse("if (true) { loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("if (true) { loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty); }");
   }
 
 }

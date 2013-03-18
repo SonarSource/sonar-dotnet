@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class EventAccessorDeclarationTest {
 
@@ -44,11 +43,12 @@ public class EventAccessorDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("add block remove block"));
-    assertThat(p, parse("remove block add block"));
-    assertThat(p, parse("attributes add block attributes remove block"));
-    assertThat(p, parse("attributes remove block attributes add block"));
+  public void ok() {
+    assertThat(p)
+        .matches("add block remove block")
+        .matches("remove block add block")
+        .matches("attributes add block attributes remove block")
+        .matches("attributes remove block attributes add block");
   }
 
 }

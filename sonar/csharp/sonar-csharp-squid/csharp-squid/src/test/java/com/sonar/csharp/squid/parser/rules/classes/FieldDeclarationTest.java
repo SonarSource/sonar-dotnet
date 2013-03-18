@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FieldDeclarationTest {
 
@@ -45,12 +44,13 @@ public class FieldDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("type variableDeclarator;"));
-    assertThat(p, parse("type variableDeclarator, variableDeclarator;"));
-    assertThat(p, parse("attributes type variableDeclarator;"));
-    assertThat(p, parse("attributes new type variableDeclarator;"));
-    assertThat(p, parse("public protected internal private static readonly volatile type variableDeclarator;"));
+  public void ok() {
+    assertThat(p)
+        .matches("type variableDeclarator;")
+        .matches("type variableDeclarator, variableDeclarator;")
+        .matches("attributes type variableDeclarator;")
+        .matches("attributes new type variableDeclarator;")
+        .matches("public protected internal private static readonly volatile type variableDeclarator;");
   }
 
 }

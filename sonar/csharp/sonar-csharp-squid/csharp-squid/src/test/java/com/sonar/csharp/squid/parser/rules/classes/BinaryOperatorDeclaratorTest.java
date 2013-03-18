@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class BinaryOperatorDeclaratorTest {
 
@@ -43,23 +42,24 @@ public class BinaryOperatorDeclaratorTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("type operator + ( type id, type id)"));
-    assertThat(p, parse("type operator - ( type id, type id)"));
-    assertThat(p, parse("type operator * ( type id, type id)"));
-    assertThat(p, parse("type operator / ( type id, type id)"));
-    assertThat(p, parse("type operator % ( type id, type id)"));
-    assertThat(p, parse("type operator & ( type id, type id)"));
-    assertThat(p, parse("type operator | ( type id, type id)"));
-    assertThat(p, parse("type operator ^ ( type id, type id)"));
-    assertThat(p, parse("type operator << ( type id, type id)"));
-    assertThat(p, parse("type operator >> ( type id, type id)"));
-    assertThat(p, parse("type operator == ( type id, type id)"));
-    assertThat(p, parse("type operator != ( type id, type id)"));
-    assertThat(p, parse("type operator > ( type id, type id)"));
-    assertThat(p, parse("type operator < ( type id, type id)"));
-    assertThat(p, parse("type operator <= ( type id, type id)"));
-    assertThat(p, parse("type operator >= ( type id, type id)"));
+  public void ok() {
+    assertThat(p)
+        .matches("type operator + ( type id, type id)")
+        .matches("type operator - ( type id, type id)")
+        .matches("type operator * ( type id, type id)")
+        .matches("type operator / ( type id, type id)")
+        .matches("type operator % ( type id, type id)")
+        .matches("type operator & ( type id, type id)")
+        .matches("type operator | ( type id, type id)")
+        .matches("type operator ^ ( type id, type id)")
+        .matches("type operator << ( type id, type id)")
+        .matches("type operator >> ( type id, type id)")
+        .matches("type operator == ( type id, type id)")
+        .matches("type operator != ( type id, type id)")
+        .matches("type operator > ( type id, type id)")
+        .matches("type operator < ( type id, type id)")
+        .matches("type operator <= ( type id, type id)")
+        .matches("type operator >= ( type id, type id)");
   }
 
 }

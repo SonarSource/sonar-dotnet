@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PostInvocationTest {
 
@@ -42,22 +41,25 @@ public class PostInvocationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.argumentList.mock();
-    assertThat(p, parse("()"));
-    assertThat(p, parse("(argumentList)"));
+
+    assertThat(p)
+        .matches("()")
+        .matches("(argumentList)");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("()"));
-    assertThat(p, parse("()"));
-    assertThat(p, parse("(formatException.Message)"));
-    assertThat(p, parse("(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)"));
-    assertThat(p, parse("( foo)"));
-    assertThat(p, parse("( (x,y)=>String.Compare(x, y, true) )"));
-    assertThat(p, parse("(item => item.Id == prdId)"));
-    assertThat(p, parse("()"));
+  public void reallife() {
+    assertThat(p)
+        .matches("()")
+        .matches("()")
+        .matches("(formatException.Message)")
+        .matches("(@\"<samepath \"\"{0}\"\" {1}>\", path, defaultCaseSensitivity)")
+        .matches("( foo)")
+        .matches("( (x,y)=>String.Compare(x, y, true) )")
+        .matches("(item => item.Id == prdId)")
+        .matches("()");
   }
 
 }

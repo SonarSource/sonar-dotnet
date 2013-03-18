@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class NullCoalescingExpressionTest {
 
@@ -43,10 +42,11 @@ public class NullCoalescingExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("conditionalOrExpression"));
-    assertThat(p, parse("conditionalOrExpression ?? conditionalOrExpression "));
-    assertThat(p, parse("conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("conditionalOrExpression")
+        .matches("conditionalOrExpression ?? conditionalOrExpression ")
+        .matches("conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression");
   }
 
 }

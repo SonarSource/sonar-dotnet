@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConditionalOrExpressionTest {
 
@@ -43,10 +42,11 @@ public class ConditionalOrExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("conditionalAndExpression"));
-    assertThat(p, parse("conditionalAndExpression || conditionalAndExpression "));
-    assertThat(p, parse("conditionalAndExpression || conditionalAndExpression || conditionalAndExpression || conditionalAndExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("conditionalAndExpression")
+        .matches("conditionalAndExpression || conditionalAndExpression ")
+        .matches("conditionalAndExpression || conditionalAndExpression || conditionalAndExpression || conditionalAndExpression");
   }
 
 }

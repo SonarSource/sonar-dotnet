@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class LocalVariableInitializerTest {
 
@@ -44,9 +43,10 @@ public class LocalVariableInitializerTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("expression"));
-    assertThat(p, parse("arrayInitializer"));
+  public void ok() {
+    assertThat(p)
+        .matches("expression")
+        .matches("arrayInitializer");
   }
 
 }

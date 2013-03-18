@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class OperatorDeclarationTest {
 
@@ -46,14 +44,16 @@ public class OperatorDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("public operatorDeclarator operatorBody"));
-    assertThat(p, parse("attributes static extern operatorDeclarator operatorBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("public operatorDeclarator operatorBody")
+        .matches("attributes static extern operatorDeclarator operatorBody");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("private operatorDeclarator operatorBody"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("private operatorDeclarator operatorBody");
   }
 
 }

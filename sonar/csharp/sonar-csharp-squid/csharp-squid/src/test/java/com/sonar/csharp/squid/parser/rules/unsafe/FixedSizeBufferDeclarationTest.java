@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FixedSizeBufferDeclarationTest {
 
@@ -47,17 +45,19 @@ public class FixedSizeBufferDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("fixed type fixedSizeBufferDeclarator;"));
-    assertThat(p, parse("fixed type fixedSizeBufferDeclarator fixedSizeBufferDeclarator fixedSizeBufferDeclarator;"));
-    assertThat(p, parse("attributes fixed type fixedSizeBufferDeclarator;"));
-    assertThat(p, parse("attributes fixedSizeBufferModifier fixed type fixedSizeBufferDeclarator;"));
-    assertThat(p, parse("fixedSizeBufferModifier fixedSizeBufferModifier fixedSizeBufferModifier fixed type fixedSizeBufferDeclarator;"));
+  public void ok() {
+    assertThat(p)
+        .matches("fixed type fixedSizeBufferDeclarator;")
+        .matches("fixed type fixedSizeBufferDeclarator fixedSizeBufferDeclarator fixedSizeBufferDeclarator;")
+        .matches("attributes fixed type fixedSizeBufferDeclarator;")
+        .matches("attributes fixedSizeBufferModifier fixed type fixedSizeBufferDeclarator;")
+        .matches("fixedSizeBufferModifier fixedSizeBufferModifier fixedSizeBufferModifier fixed type fixedSizeBufferDeclarator;");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

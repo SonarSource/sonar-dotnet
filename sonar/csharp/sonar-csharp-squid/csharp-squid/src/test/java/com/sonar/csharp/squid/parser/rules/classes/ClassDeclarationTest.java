@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ClassDeclarationTest {
 
@@ -47,10 +46,11 @@ public class ClassDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("class MyClass classBody"));
-    assertThat(p, parse("public class MyClass classBody;"));
-    assertThat(p, parse("attributes partial class MyClass typeParameterList classBase typeParameterConstraintsClauses classBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("class MyClass classBody")
+        .matches("public class MyClass classBody;")
+        .matches("attributes partial class MyClass typeParameterList classBase typeParameterConstraintsClauses classBody");
   }
 
 }

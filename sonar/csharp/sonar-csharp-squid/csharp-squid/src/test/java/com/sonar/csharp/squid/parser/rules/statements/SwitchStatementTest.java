@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SwitchStatementTest {
 
@@ -46,16 +44,18 @@ public class SwitchStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("switch ( expression ) {}"));
-    assertThat(p, parse("switch ( expression ) { switchSection }"));
-    assertThat(p, parse("switch ( expression ) { switchSection switchSection}"));
+  public void ok() {
+    assertThat(p)
+        .matches("switch ( expression ) {}")
+        .matches("switch ( expression ) { switchSection }")
+        .matches("switch ( expression ) { switchSection switchSection}");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("switch ( expression ) switchSection"));
-    assertThat(p, notParse("switch ( expression ) { switchSection };"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("switch ( expression ) switchSection")
+        .notMatches("switch ( expression ) { switchSection };");
   }
 
 }

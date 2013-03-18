@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class MultiplicativeExpressionTest {
 
@@ -43,11 +42,12 @@ public class MultiplicativeExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("unaryExpression"));
-    assertThat(p, parse("unaryExpression * unaryExpression "));
-    assertThat(p, parse("unaryExpression * unaryExpression / unaryExpression % unaryExpression"));
-    assertThat(p, parse("unaryExpression % unaryExpression * unaryExpression % unaryExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("unaryExpression")
+        .matches("unaryExpression * unaryExpression ")
+        .matches("unaryExpression * unaryExpression / unaryExpression % unaryExpression")
+        .matches("unaryExpression % unaryExpression * unaryExpression % unaryExpression");
   }
 
 }

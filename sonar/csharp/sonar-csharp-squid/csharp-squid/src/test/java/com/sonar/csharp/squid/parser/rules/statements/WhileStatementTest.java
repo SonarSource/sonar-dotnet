@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class WhileStatementTest {
 
@@ -42,16 +41,19 @@ public class WhileStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.expression.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("while ( expression ) embeddedStatement"));
+
+    assertThat(p)
+        .matches("while ( expression ) embeddedStatement");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15; }"));
-    assertThat(p, parse("while (frameIndex < st.FrameCount) { Integer i = 15;  frameIndex++; }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("while (frameIndex < st.FrameCount) { Integer i = 15; }")
+        .matches("while (frameIndex < st.FrameCount) { Integer i = 15;  frameIndex++; }");
   }
 
 }

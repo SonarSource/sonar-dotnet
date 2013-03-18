@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfaceTypeTest {
 
@@ -43,24 +41,29 @@ public class InterfaceTypeTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.typeName.mock();
-    assertThat(p, parse("typeName"));
+
+    assertThat(p)
+        .matches("typeName");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.typeName.mock();
-    assertThat(p, notParse("object"));
-    assertThat(p, notParse("string"));
-    assertThat(p, notParse("this"));
-    assertThat(p, notParse("typeName.this"));
+
+    assertThat(p)
+        .notMatches("object")
+        .notMatches("string")
+        .notMatches("this")
+        .notMatches("typeName.this");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("ICollection"));
-    assertThat(p, notParse("IList.this"));
+  public void reallife() {
+    assertThat(p)
+        .matches("ICollection")
+        .notMatches("IList.this");
   }
 
 }

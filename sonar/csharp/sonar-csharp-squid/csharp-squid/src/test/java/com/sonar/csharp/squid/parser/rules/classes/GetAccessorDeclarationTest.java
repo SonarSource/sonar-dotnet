@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class GetAccessorDeclarationTest {
 
@@ -42,17 +41,20 @@ public class GetAccessorDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.accessorModifier.mock();
     g.accessorBody.mock();
-    assertThat(p, parse("get accessorBody"));
-    assertThat(p, parse("attributes accessorModifier get accessorBody"));
+
+    assertThat(p)
+        .matches("get accessorBody")
+        .matches("attributes accessorModifier get accessorBody");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; }");
   }
 
 }

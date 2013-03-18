@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AttributeArgumentsTest {
 
@@ -43,28 +41,32 @@ public class AttributeArgumentsTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.positionalArgument.mock();
     g.namedArgument.mock();
-    assertThat(p, parse("()"));
-    assertThat(p, parse("(positionalArgument)"));
-    assertThat(p, parse("(namedArgument)"));
-    assertThat(p, parse("(positionalArgument, namedArgument)"));
-    assertThat(p, parse("(positionalArgument, positionalArgument, namedArgument)"));
+
+    assertThat(p)
+        .matches("()")
+        .matches("(positionalArgument)")
+        .matches("(namedArgument)")
+        .matches("(positionalArgument, namedArgument)")
+        .matches("(positionalArgument, positionalArgument, namedArgument)");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("(AttributeTargets.Assembly)"));
-    assertThat(p, parse("(AllowMultiple=true)"));
-    assertThat(p, parse("(AllowMultiple=true, AllowMultiple=true)"));
-    assertThat(p, parse("(AttributeTargets.Assembly, AttributeTargets.Assembly)"));
-    assertThat(p, parse("(AttributeTargets.Assembly,AllowMultiple=true)"));
+  public void reallife() {
+    assertThat(p)
+        .matches("(AttributeTargets.Assembly)")
+        .matches("(AllowMultiple=true)")
+        .matches("(AllowMultiple=true, AllowMultiple=true)")
+        .matches("(AttributeTargets.Assembly, AttributeTargets.Assembly)")
+        .matches("(AttributeTargets.Assembly,AllowMultiple=true)");
   }
 
 }

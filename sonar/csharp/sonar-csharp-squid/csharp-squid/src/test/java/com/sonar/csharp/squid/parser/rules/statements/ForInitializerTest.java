@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ForInitializerTest {
 
@@ -42,16 +41,19 @@ public class ForInitializerTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.localVariableDeclaration.mock();
     g.statementExpressionList.mock();
-    assertThat(p, parse("localVariableDeclaration"));
-    assertThat(p, parse("statementExpressionList"));
+
+    assertThat(p)
+        .matches("localVariableDeclaration")
+        .matches("statementExpressionList");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int num = count"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int num = count");
   }
 
 }

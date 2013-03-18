@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class StructBodyTest {
 
@@ -52,12 +51,12 @@ public class StructBodyTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("{}"));
-    assertThat(p, parse("{constantDeclaration}"));
-    assertThat(
-        p,
-        parse("{fieldDeclaration methodDeclaration propertyDeclaration eventDeclaration indexerDeclaration operatorDeclaration constructorDeclaration staticConstructorDeclaration typeDeclaration}"));
+  public void ok() {
+    assertThat(p)
+        .matches("{}")
+        .matches("{constantDeclaration}")
+        .matches(
+            "{fieldDeclaration methodDeclaration propertyDeclaration eventDeclaration indexerDeclaration operatorDeclaration constructorDeclaration staticConstructorDeclaration typeDeclaration}");
   }
 
 }

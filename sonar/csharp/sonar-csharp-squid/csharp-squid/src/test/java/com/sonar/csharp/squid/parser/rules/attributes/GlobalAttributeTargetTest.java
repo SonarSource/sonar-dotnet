@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class GlobalAttributeTargetTest {
 
@@ -43,17 +41,19 @@ public class GlobalAttributeTargetTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("assembly"));
-    assertThat(p, parse("module"));
+  public void ok() {
+    assertThat(p)
+        .matches("assembly")
+        .matches("module");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
-    assertThat(p, notParse("10"));
-    assertThat(p, notParse("void"));
-    assertThat(p, notParse("unchecked"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("")
+        .notMatches("10")
+        .notMatches("void")
+        .notMatches("unchecked");
   }
 
 }

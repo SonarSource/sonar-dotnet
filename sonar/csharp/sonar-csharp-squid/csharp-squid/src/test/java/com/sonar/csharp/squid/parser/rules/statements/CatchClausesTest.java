@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class CatchClausesTest {
 
@@ -44,12 +43,13 @@ public class CatchClausesTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("specificCatchClause"));
-    assertThat(p, parse("specificCatchClause specificCatchClause specificCatchClause"));
-    assertThat(p, parse("specificCatchClause generalCatchClause"));
-    assertThat(p, parse("specificCatchClause specificCatchClause specificCatchClause generalCatchClause"));
-    assertThat(p, parse("generalCatchClause"));
+  public void ok() {
+    assertThat(p)
+        .matches("specificCatchClause")
+        .matches("specificCatchClause specificCatchClause specificCatchClause")
+        .matches("specificCatchClause generalCatchClause")
+        .matches("specificCatchClause specificCatchClause specificCatchClause generalCatchClause")
+        .matches("generalCatchClause");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConditionalExpressionTest {
 
@@ -42,18 +41,21 @@ public class ConditionalExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.nullCoalescingExpression.mock();
     g.expression.mock();
-    assertThat(p, parse("nullCoalescingExpression"));
-    assertThat(p, parse("nullCoalescingExpression ? expression : expression"));
+
+    assertThat(p)
+        .matches("nullCoalescingExpression")
+        .matches("nullCoalescingExpression ? expression : expression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("arg is string ? \"{0}\" : \"{1}\""));
-    assertThat(p, parse("RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence"));
-    assertThat(p, parse("arg is double ? true : false"));
+  public void reallife() {
+    assertThat(p)
+        .matches("arg is string ? \"{0}\" : \"{1}\"")
+        .matches("RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence")
+        .matches("arg is double ? true : false");
   }
 
 }

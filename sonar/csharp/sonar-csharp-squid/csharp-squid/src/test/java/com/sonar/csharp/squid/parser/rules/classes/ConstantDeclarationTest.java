@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConstantDeclarationTest {
 
@@ -45,12 +44,13 @@ public class ConstantDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("const type constantDeclarator;"));
-    assertThat(p, parse("const type constantDeclarator, constantDeclarator;"));
-    assertThat(p, parse("attributes const type constantDeclarator;"));
-    assertThat(p, parse("attributes internal const type constantDeclarator;"));
-    assertThat(p, parse("public new protected private const type constantDeclarator;"));
+  public void ok() {
+    assertThat(p)
+        .matches("const type constantDeclarator;")
+        .matches("const type constantDeclarator, constantDeclarator;")
+        .matches("attributes const type constantDeclarator;")
+        .matches("attributes internal const type constantDeclarator;")
+        .matches("public new protected private const type constantDeclarator;");
   }
 
 }

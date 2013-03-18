@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class VariantTypeParameterListTest {
 
@@ -43,20 +41,24 @@ public class VariantTypeParameterListTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.variantTypeParameter.mock();
-    assertThat(p, parse("<variantTypeParameter>"));
-    assertThat(p, parse("<variantTypeParameter, variantTypeParameter>"));
+
+    assertThat(p)
+        .matches("<variantTypeParameter>")
+        .matches("<variantTypeParameter, variantTypeParameter>");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("<[System.Obsolete()] out T, in K>"));
+  public void reallife() {
+    assertThat(p)
+        .matches("<[System.Obsolete()] out T, in K>");
   }
 
 }

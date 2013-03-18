@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class NullableTypeTest {
 
@@ -43,21 +41,26 @@ public class NullableTypeTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
-    assertThat(p, parse("type?"));
+
+    assertThat(p)
+        .matches("type?");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.enumType.mock();
-    assertThat(p, notParse("type"));
+
+    assertThat(p)
+        .notMatches("type");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int?"));
-    assertThat(p, parse("Color?"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int?")
+        .matches("Color?");
   }
 
 }

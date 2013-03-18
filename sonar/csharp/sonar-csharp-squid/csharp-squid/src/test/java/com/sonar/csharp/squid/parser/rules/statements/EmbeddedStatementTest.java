@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class EmbeddedStatementTest {
 
@@ -54,19 +53,20 @@ public class EmbeddedStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("block"));
-    assertThat(p, parse(";"));
-    assertThat(p, parse("expressionStatement"));
-    assertThat(p, parse("selectionStatement"));
-    assertThat(p, parse("iterationStatement"));
-    assertThat(p, parse("jumpStatement"));
-    assertThat(p, parse("tryStatement"));
-    assertThat(p, parse("checkedStatement"));
-    assertThat(p, parse("uncheckedStatement"));
-    assertThat(p, parse("lockStatement"));
-    assertThat(p, parse("usingStatement"));
-    assertThat(p, parse("yieldStatement"));
+  public void ok() {
+    assertThat(p)
+        .matches("block")
+        .matches(";")
+        .matches("expressionStatement")
+        .matches("selectionStatement")
+        .matches("iterationStatement")
+        .matches("jumpStatement")
+        .matches("tryStatement")
+        .matches("checkedStatement")
+        .matches("uncheckedStatement")
+        .matches("lockStatement")
+        .matches("usingStatement")
+        .matches("yieldStatement");
   }
 
 }

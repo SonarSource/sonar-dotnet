@@ -28,6 +28,8 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
+import static org.sonar.sslr.tests.Assertions.assertThat;
+
 import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
@@ -45,14 +47,16 @@ public class EmbeddedStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("unsafeStatement"));
-    assertThat(p, parse("fixedStatement"));
+  public void ok() {
+    assertThat(p)
+        .matches("unsafeStatement")
+        .matches("fixedStatement");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

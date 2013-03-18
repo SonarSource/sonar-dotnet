@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExclusiveOrExpressionTest {
 
@@ -43,10 +42,11 @@ public class ExclusiveOrExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("exclusiveOrExpression"));
-    assertThat(p, parse("exclusiveOrExpression | exclusiveOrExpression "));
-    assertThat(p, parse("exclusiveOrExpression | exclusiveOrExpression | exclusiveOrExpression | exclusiveOrExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("exclusiveOrExpression")
+        .matches("exclusiveOrExpression | exclusiveOrExpression ")
+        .matches("exclusiveOrExpression | exclusiveOrExpression | exclusiveOrExpression | exclusiveOrExpression");
   }
 
 }

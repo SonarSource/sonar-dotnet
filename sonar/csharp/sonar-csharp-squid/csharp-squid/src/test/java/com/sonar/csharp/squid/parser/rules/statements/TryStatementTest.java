@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TryStatementTest {
 
@@ -42,19 +41,21 @@ public class TryStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.block.mock();
     g.catchClauses.mock();
     g.finallyClause.mock();
-    assertThat(p, parse("try block catchClauses"));
-    assertThat(p, parse("try block finallyClause"));
-    assertThat(p, parse("try block catchClauses finallyClause"));
+
+    assertThat(p)
+        .matches("try block catchClauses")
+        .matches("try block finallyClause")
+        .matches("try block catchClauses finallyClause");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p,
-        parse("try { RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("try { RegisterAppDomainEvents(); } catch(System.Security.SecurityException)  { LogLog.Debug(\"LoggerManager\"); }");
   }
 
 }

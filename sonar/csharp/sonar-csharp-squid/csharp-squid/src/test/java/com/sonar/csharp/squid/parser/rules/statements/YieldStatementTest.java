@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class YieldStatementTest {
 
@@ -43,9 +42,10 @@ public class YieldStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("yield return expression;"));
-    assertThat(p, parse("yield break;"));
+  public void ok() {
+    assertThat(p)
+        .matches("yield return expression;")
+        .matches("yield break;");
   }
 
 }

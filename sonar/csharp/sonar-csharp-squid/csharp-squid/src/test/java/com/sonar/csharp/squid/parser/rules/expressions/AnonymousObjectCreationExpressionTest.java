@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AnonymousObjectCreationExpressionTest {
 
@@ -43,15 +41,18 @@ public class AnonymousObjectCreationExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.anonymousObjectInitializer.mock();
-    assertThat(p, parse("new anonymousObjectInitializer"));
+
+    assertThat(p)
+        .matches("new anonymousObjectInitializer");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
-    assertThat(p, parse("new { Country = g.Key, CustCount = g.Count() }"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("")
+        .matches("new { Country = g.Key, CustCount = g.Count() }");
   }
 
 }

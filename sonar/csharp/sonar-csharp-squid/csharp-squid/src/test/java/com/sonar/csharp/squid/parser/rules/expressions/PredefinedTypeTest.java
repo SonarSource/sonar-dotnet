@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PredefinedTypeTest {
 
@@ -43,27 +41,29 @@ public class PredefinedTypeTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("bool"));
-    assertThat(p, parse("byte"));
-    assertThat(p, parse("char"));
-    assertThat(p, parse("decimal"));
-    assertThat(p, parse("double"));
-    assertThat(p, parse("float"));
-    assertThat(p, parse("int"));
-    assertThat(p, parse("long"));
-    assertThat(p, parse("object"));
-    assertThat(p, parse("sbyte"));
-    assertThat(p, parse("short"));
-    assertThat(p, parse("string"));
-    assertThat(p, parse("uint"));
-    assertThat(p, parse("ulong"));
-    assertThat(p, parse("ushort"));
+  public void ok() {
+    assertThat(p)
+        .matches("bool")
+        .matches("byte")
+        .matches("char")
+        .matches("decimal")
+        .matches("double")
+        .matches("float")
+        .matches("int")
+        .matches("long")
+        .matches("object")
+        .matches("sbyte")
+        .matches("short")
+        .matches("string")
+        .matches("uint")
+        .matches("ulong")
+        .matches("ushort");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("String"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("String");
   }
 
 }

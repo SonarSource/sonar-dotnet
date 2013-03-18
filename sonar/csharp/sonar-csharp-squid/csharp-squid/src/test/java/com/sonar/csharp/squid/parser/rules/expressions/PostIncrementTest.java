@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PostIncrementTest {
 
@@ -42,13 +41,15 @@ public class PostIncrementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("++"));
+  public void ok() {
+    assertThat(p)
+        .matches("++");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("++"));
+  public void reallife() {
+    assertThat(p)
+        .matches("++");
   }
 
 }

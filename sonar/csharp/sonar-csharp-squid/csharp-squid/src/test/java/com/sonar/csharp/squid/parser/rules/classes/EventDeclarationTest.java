@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class EventDeclarationTest {
 
@@ -43,34 +41,39 @@ public class EventDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.type.mock();
     g.variableDeclarator.mock();
     g.memberName.mock();
     g.eventAccessorDeclarations.mock();
-    assertThat(p, parse("event type variableDeclarator;"));
-    assertThat(p, parse("event type variableDeclarator, variableDeclarator, variableDeclarator;"));
-    assertThat(p, parse("attributes new event type variableDeclarator, variableDeclarator ;"));
-    assertThat(p, parse("attributes new event type memberName {eventAccessorDeclarations}"));
-    assertThat(p, parse("public protected internal private static virtual sealed override abstract extern event type variableDeclarator;"));
+
+    assertThat(p)
+        .matches("event type variableDeclarator;")
+        .matches("event type variableDeclarator, variableDeclarator, variableDeclarator;")
+        .matches("attributes new event type variableDeclarator, variableDeclarator ;")
+        .matches("attributes new event type memberName {eventAccessorDeclarations}")
+        .matches("public protected internal private static virtual sealed override abstract extern event type variableDeclarator;");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.attributes.mock();
     g.type.mock();
     g.variableDeclarator.mock();
     g.memberName.mock();
     g.eventAccessorDeclarations.mock();
-    assertThat(p, notParse("event type;"));
-    assertThat(p, notParse("attributes eventModifier event type memberName {eventAccessorDeclarations};"));
-    assertThat(p, notParse("attributes eventModifier event type memberName {}"));
+
+    assertThat(p)
+        .notMatches("event type;")
+        .notMatches("attributes eventModifier event type memberName {eventAccessorDeclarations};")
+        .notMatches("attributes eventModifier event type memberName {}");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("public event EventHandler OnInitLoad, OnFilter, OnReset;"));
+  public void reallife() {
+    assertThat(p)
+        .matches("public event EventHandler OnInitLoad, OnFilter, OnReset;");
   }
 
 }

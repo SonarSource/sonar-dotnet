@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class NameSpaceOrTypeNameTest {
 
@@ -42,27 +41,30 @@ public class NameSpaceOrTypeNameTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.typeArgumentList.mock();
     g.qualifiedAliasMember.mock();
-    assertThat(p, parse("MyClass"));
-    assertThat(p, parse("MyClass typeArgumentList"));
-    assertThat(p, parse("qualifiedAliasMember"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass"));
-    assertThat(p, parse("qualifiedAliasMember.MyClass typeArgumentList"));
-    assertThat(p, parse("A.B.C.MyClass"));
+
+    assertThat(p)
+        .matches("MyClass")
+        .matches("MyClass typeArgumentList")
+        .matches("qualifiedAliasMember")
+        .matches("qualifiedAliasMember.MyClass")
+        .matches("qualifiedAliasMember.MyClass typeArgumentList")
+        .matches("A.B.C.MyClass");
   }
 
   @Test
-  public void testRealLife() {
-    assertThat(p, parse("NameSpaceOrTypeNameTest"));
-    assertThat(p, parse("NameSpaceOrTypeNameTest<Class>"));
-    assertThat(p, parse("Foo::NonExisting"));
-    assertThat(p, parse("Foo::NonExisting.Class"));
-    assertThat(p, parse("Foo::NonExisting.Class<AnotherClass>"));
-    assertThat(p, parse("com.sonar.csharp.squid.squid.parser.rules.basic.NameSpaceOrTypeNameTest"));
-    assertThat(p, parse("com.sonar.csharp.squid.squid.parser.rules.basic.NameSpaceOrTypeNameTest<Class>"));
-    assertThat(p, parse("Func<TSource, int, bool>"));
+  public void reallife() {
+    assertThat(p)
+        .matches("NameSpaceOrTypeNameTest")
+        .matches("NameSpaceOrTypeNameTest<Class>")
+        .matches("Foo::NonExisting")
+        .matches("Foo::NonExisting.Class")
+        .matches("Foo::NonExisting.Class<AnotherClass>")
+        .matches("com.sonar.csharp.squid.squid.parser.rules.basic.NameSpaceOrTypeNameTest")
+        .matches("com.sonar.csharp.squid.squid.parser.rules.basic.NameSpaceOrTypeNameTest<Class>")
+        .matches("Func<TSource, int, bool>");
   }
 
 }

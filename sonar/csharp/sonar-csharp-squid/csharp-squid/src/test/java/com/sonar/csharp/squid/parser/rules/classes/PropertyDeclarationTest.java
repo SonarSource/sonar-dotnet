@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PropertyDeclarationTest {
 
@@ -42,23 +41,23 @@ public class PropertyDeclarationTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.type.mock();
     g.memberName.mock();
     g.accessorDeclarations.mock();
-    assertThat(p, parse("type memberName { accessorDeclarations }"));
-    assertThat(p, parse("attributes new type memberName { accessorDeclarations }"));
-    assertThat(p,
-        parse("public protected internal private static virtual sealed override abstract extern type memberName { accessorDeclarations }"));
+
+    assertThat(p)
+        .matches("type memberName { accessorDeclarations }")
+        .matches("attributes new type memberName { accessorDeclarations }")
+        .matches("public protected internal private static virtual sealed override abstract extern type memberName { accessorDeclarations }");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("object myObject { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }"));
-    assertThat(
-        p,
-        parse("public override int LeftPrecedence { get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; } }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("object myObject { get { return (object)this[i]; } set { this[i] = (IAppender)value; } }")
+        .matches("public override int LeftPrecedence { get { return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence; } }");
   }
 
 }

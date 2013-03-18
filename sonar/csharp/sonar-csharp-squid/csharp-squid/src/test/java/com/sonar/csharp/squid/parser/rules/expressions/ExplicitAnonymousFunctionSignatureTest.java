@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExplicitAnonymousFunctionSignatureTest {
 
@@ -44,15 +42,17 @@ public class ExplicitAnonymousFunctionSignatureTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("()"));
-    assertThat(p, parse("(explicitAnonymousFunctionParameter)"));
-    assertThat(p, parse("(explicitAnonymousFunctionParameter, explicitAnonymousFunctionParameter)"));
+  public void ok() {
+    assertThat(p)
+        .matches("()")
+        .matches("(explicitAnonymousFunctionParameter)")
+        .matches("(explicitAnonymousFunctionParameter, explicitAnonymousFunctionParameter)");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

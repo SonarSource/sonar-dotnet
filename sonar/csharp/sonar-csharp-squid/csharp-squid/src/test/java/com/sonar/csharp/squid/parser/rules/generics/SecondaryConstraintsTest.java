@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class SecondaryConstraintsTest {
 
@@ -44,12 +43,13 @@ public class SecondaryConstraintsTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("interfaceType"));
-    assertThat(p, parse("interfaceType, interfaceType"));
-    assertThat(p, parse("typeParameter"));
-    assertThat(p, parse("typeParameter, typeParameter"));
-    assertThat(p, parse("typeParameter, interfaceType, typeParameter"));
+  public void ok() {
+    assertThat(p)
+        .matches("interfaceType")
+        .matches("interfaceType, interfaceType")
+        .matches("typeParameter")
+        .matches("typeParameter, typeParameter")
+        .matches("typeParameter, interfaceType, typeParameter");
   }
 
 }

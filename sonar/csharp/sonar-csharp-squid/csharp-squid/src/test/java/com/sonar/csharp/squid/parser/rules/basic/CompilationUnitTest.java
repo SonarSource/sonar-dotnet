@@ -46,7 +46,7 @@ public class CompilationUnitTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     assertThat(p, parse("externAliasDirective"));
     assertThat(p, parse("externAliasDirective externAliasDirective"));
     assertThat(p, parse("usingDirective"));
@@ -59,7 +59,7 @@ public class CompilationUnitTest {
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     assertThat(p, notParse("namespaceMemberDeclaration externAliasDirective"));
   }
 

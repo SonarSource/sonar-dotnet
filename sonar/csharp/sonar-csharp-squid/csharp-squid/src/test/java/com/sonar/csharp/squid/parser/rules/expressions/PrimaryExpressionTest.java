@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class PrimaryExpressionTest {
 
@@ -42,20 +41,23 @@ public class PrimaryExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.arrayCreationExpression.mock();
     g.primaryNoArrayCreationExpression.mock();
-    assertThat(p, parse("arrayCreationExpression"));
-    assertThat(p, parse("primaryNoArrayCreationExpression"));
+
+    assertThat(p)
+        .matches("arrayCreationExpression")
+        .matches("primaryNoArrayCreationExpression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("typeof(void).OneAttribute"));
-    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
-    assertThat(p, parse("dbCommand.Dispose()"));
-    assertThat(p, parse("checked(++i)"));
-    assertThat(p, parse("base.GetService<T>()"));
+  public void reallife() {
+    assertThat(p)
+        .matches("typeof(void).OneAttribute")
+        .matches("CurrentDomain.GetAssemblies()")
+        .matches("dbCommand.Dispose()")
+        .matches("checked(++i)")
+        .matches("base.GetService<T>()");
   }
 
 }

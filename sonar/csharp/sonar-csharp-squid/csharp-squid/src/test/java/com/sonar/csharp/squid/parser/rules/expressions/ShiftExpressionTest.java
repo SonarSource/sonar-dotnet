@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ShiftExpressionTest {
 
@@ -42,17 +41,20 @@ public class ShiftExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.additiveExpression.mock();
-    assertThat(p, parse("additiveExpression"));
-    assertThat(p, parse("additiveExpression << additiveExpression "));
-    assertThat(p, parse("additiveExpression >> additiveExpression << additiveExpression >> additiveExpression"));
+
+    assertThat(p)
+        .matches("additiveExpression")
+        .matches("additiveExpression << additiveExpression ")
+        .matches("additiveExpression >> additiveExpression << additiveExpression >> additiveExpression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("i << 5"));
-    assertThat(p, parse("i >> 5"));
+  public void reallife() {
+    assertThat(p)
+        .matches("i << 5")
+        .matches("i >> 5");
   }
 
 }

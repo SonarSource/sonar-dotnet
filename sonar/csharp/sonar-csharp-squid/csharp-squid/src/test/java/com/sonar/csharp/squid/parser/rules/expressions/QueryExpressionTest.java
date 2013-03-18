@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class QueryExpressionTest {
 
@@ -43,27 +41,31 @@ public class QueryExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.fromClause.mock();
     g.queryBody.mock();
-    assertThat(p, parse("fromClause queryBody"));
+
+    assertThat(p)
+        .matches("fromClause queryBody");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("from c in customers let d = c where d != null "
-      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
-      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country"));
-    assertThat(p, parse("from c in customers let d = c where d != null "
-      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
-      + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
-      + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }"));
-    assertThat(p, parse("from user in db.Users select new { user.Name, RoleName = user.Role.Name }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("from c in customers let d = c where d != null "
+          + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+          + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country")
+        .matches("from c in customers let d = c where d != null "
+          + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() "
+          + "join c1 in customers on c1.GetHashCode() equals c.GetHashCode() into e " + "group c by c.Country " + "into g "
+          + "orderby g.Count() ascending orderby g.Key descending " + "select new { Country = g.Key, CustCount = g.Count() }")
+        .matches("from user in db.Users select new { user.Name, RoleName = user.Role.Name }");
   }
 
 }

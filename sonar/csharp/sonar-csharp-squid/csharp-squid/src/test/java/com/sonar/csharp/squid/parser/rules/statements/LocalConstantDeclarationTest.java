@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class LocalConstantDeclarationTest {
 
@@ -45,15 +43,17 @@ public class LocalConstantDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("const type id = expression"));
-    assertThat(p, parse("const type id1 = expression, id2 = expression"));
+  public void ok() {
+    assertThat(p)
+        .matches("const type id = expression")
+        .matches("const type id1 = expression, id2 = expression");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse("const type id"));
-    assertThat(p, notParse("const type id1 = expression, id2"));
+  public void ko() {
+    assertThat(p)
+        .notMatches("const type id")
+        .notMatches("const type id1 = expression, id2");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class QualifiedIdentifierTest {
 
@@ -42,9 +41,10 @@ public class QualifiedIdentifierTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("id"));
-    assertThat(p, parse("A.B.id"));
+  public void ok() {
+    assertThat(p)
+        .matches("id")
+        .matches("A.B.id");
   }
 
 }

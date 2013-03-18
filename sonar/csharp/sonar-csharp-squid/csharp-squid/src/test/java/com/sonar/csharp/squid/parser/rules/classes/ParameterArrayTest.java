@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ParameterArrayTest {
 
@@ -44,9 +43,10 @@ public class ParameterArrayTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("params arrayType id"));
-    assertThat(p, parse("attributes params arrayType id"));
+  public void ok() {
+    assertThat(p)
+        .matches("params arrayType id")
+        .matches("attributes params arrayType id");
   }
 
 }

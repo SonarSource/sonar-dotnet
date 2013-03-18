@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class LambdaExpressionTest {
 
@@ -43,21 +41,25 @@ public class LambdaExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.anonymousFunctionSignature.mock();
     g.anonymousFunctionBody.mock();
-    assertThat(p, parse("anonymousFunctionSignature => anonymousFunctionBody"));
+
+    assertThat(p)
+        .matches("anonymousFunctionSignature => anonymousFunctionBody");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("(x,y)=>String.Compare(x, y, true)"));
-    assertThat(p, parse("item => item.Id == prdId"));
+  public void reallife() {
+    assertThat(p)
+        .matches("(x,y)=>String.Compare(x, y, true)")
+        .matches("item => item.Id == prdId");
   }
 
 }

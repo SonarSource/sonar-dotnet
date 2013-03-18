@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InclusiveOrExpressionTest {
 
@@ -43,10 +42,11 @@ public class InclusiveOrExpressionTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("andExpression"));
-    assertThat(p, parse("andExpression ^ andExpression "));
-    assertThat(p, parse("andExpression ^ andExpression ^ andExpression ^ andExpression"));
+  public void ok() {
+    assertThat(p)
+        .matches("andExpression")
+        .matches("andExpression ^ andExpression ")
+        .matches("andExpression ^ andExpression ^ andExpression ^ andExpression");
   }
 
 }

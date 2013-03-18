@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ConstructorInitializerTest {
 
@@ -42,12 +41,14 @@ public class ConstructorInitializerTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.argumentList.mock();
-    assertThat(p, parse(": base ()"));
-    assertThat(p, parse(": this ()"));
-    assertThat(p, parse(": base ( argumentList )"));
-    assertThat(p, parse(": this ( argumentList )"));
+
+    assertThat(p)
+        .matches(": base ()")
+        .matches(": this ()")
+        .matches(": base ( argumentList )")
+        .matches(": this ( argumentList )");
   }
 
 }

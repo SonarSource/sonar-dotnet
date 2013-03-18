@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class InterfaceMethodDeclarationTest {
 
@@ -47,9 +46,10 @@ public class InterfaceMethodDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("returnType id ();"));
-    assertThat(p, parse("attributes new returnType id typeParameterList (formalParameterList) typeParameterConstraintsClauses;"));
+  public void ok() {
+    assertThat(p)
+        .matches("returnType id ();")
+        .matches("attributes new returnType id typeParameterList (formalParameterList) typeParameterConstraintsClauses;");
   }
 
 }

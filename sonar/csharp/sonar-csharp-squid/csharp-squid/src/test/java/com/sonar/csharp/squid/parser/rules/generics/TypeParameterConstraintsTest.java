@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TypeParameterConstraintsTest {
 
@@ -45,14 +44,15 @@ public class TypeParameterConstraintsTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("primaryConstraint"));
-    assertThat(p, parse("secondaryConstraints"));
-    assertThat(p, parse("constructorConstraint"));
-    assertThat(p, parse("primaryConstraint, secondaryConstraints"));
-    assertThat(p, parse("primaryConstraint, constructorConstraint"));
-    assertThat(p, parse("secondaryConstraints, constructorConstraint"));
-    assertThat(p, parse("primaryConstraint, secondaryConstraints, constructorConstraint"));
+  public void ok() {
+    assertThat(p)
+        .matches("primaryConstraint")
+        .matches("secondaryConstraints")
+        .matches("constructorConstraint")
+        .matches("primaryConstraint, secondaryConstraints")
+        .matches("primaryConstraint, constructorConstraint")
+        .matches("secondaryConstraints, constructorConstraint")
+        .matches("primaryConstraint, secondaryConstraints, constructorConstraint");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class UsingDirectiveTest {
 
@@ -44,9 +43,10 @@ public class UsingDirectiveTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("using id = namespaceOrTypeName;"));
-    assertThat(p, parse("using namespaceName;"));
+  public void ok() {
+    assertThat(p)
+        .matches("using id = namespaceOrTypeName;")
+        .matches("using namespaceName;");
   }
 
 }

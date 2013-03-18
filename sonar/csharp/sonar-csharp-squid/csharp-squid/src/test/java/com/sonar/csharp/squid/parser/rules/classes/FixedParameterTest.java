@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class FixedParameterTest {
 
@@ -43,30 +41,34 @@ public class FixedParameterTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.attributes.mock();
     g.parameterModifier.mock();
     g.type.mock();
     g.expression.mock();
-    assertThat(p, parse("type id"));
-    assertThat(p, parse("parameterModifier type id"));
-    assertThat(p, parse("attributes type id"));
-    assertThat(p, parse("attributes parameterModifier type id"));
-    assertThat(p, parse("attributes parameterModifier type id = expression"));
-    assertThat(p, parse("type id = expression"));
+
+    assertThat(p)
+        .matches("type id")
+        .matches("parameterModifier type id")
+        .matches("attributes type id")
+        .matches("attributes parameterModifier type id")
+        .matches("attributes parameterModifier type id = expression")
+        .matches("type id = expression");
   }
 
   @Test
   public void testKo() throws Exception {
-    assertThat(p, notParse(""));
+    assertThat(p)
+        .notMatches("");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("int i"));
-    assertThat(p, parse("this IEnumerable<TSource> source"));
-    assertThat(p, parse("Func<TSource, int, bool> predicate"));
-    assertThat(p, parse("RequestStatusDto? status"));
+  public void reallife() {
+    assertThat(p)
+        .matches("int i")
+        .matches("this IEnumerable<TSource> source")
+        .matches("Func<TSource, int, bool> predicate")
+        .matches("RequestStatusDto? status");
   }
 
 }

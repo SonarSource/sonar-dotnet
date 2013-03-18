@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ContinueStatementTest {
 
@@ -43,8 +42,9 @@ public class ContinueStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("continue;"));
+  public void ok() {
+    assertThat(p)
+        .matches("continue;");
   }
 
 }

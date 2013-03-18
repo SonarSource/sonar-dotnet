@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ReturnStatementTest {
 
@@ -43,15 +42,18 @@ public class ReturnStatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.expression.mock();
-    assertThat(p, parse("return;"));
-    assertThat(p, parse("return expression;"));
+
+    assertThat(p)
+        .matches("return;")
+        .matches("return expression;");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence;"));
+  public void reallife() {
+    assertThat(p)
+        .matches("return RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence;");
   }
 
 }

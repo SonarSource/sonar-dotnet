@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class AssignmentTest {
 
@@ -43,39 +41,44 @@ public class AssignmentTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.unaryExpression.mock();
     g.expression.mock();
-    assertThat(p, parse("unaryExpression = expression"));
-    assertThat(p, parse("unaryExpression += expression"));
-    assertThat(p, parse("unaryExpression -= expression"));
-    assertThat(p, parse("unaryExpression *= expression"));
-    assertThat(p, parse("unaryExpression /= expression"));
-    assertThat(p, parse("unaryExpression %= expression"));
-    assertThat(p, parse("unaryExpression &= expression"));
-    assertThat(p, parse("unaryExpression |= expression"));
-    assertThat(p, parse("unaryExpression ^= expression"));
-    assertThat(p, parse("unaryExpression <<= expression"));
-    assertThat(p, parse("unaryExpression >>= expression"));
+
+    assertThat(p)
+        .matches("unaryExpression = expression")
+        .matches("unaryExpression += expression")
+        .matches("unaryExpression -= expression")
+        .matches("unaryExpression *= expression")
+        .matches("unaryExpression /= expression")
+        .matches("unaryExpression %= expression")
+        .matches("unaryExpression &= expression")
+        .matches("unaryExpression |= expression")
+        .matches("unaryExpression ^= expression")
+        .matches("unaryExpression <<= expression")
+        .matches("unaryExpression >>= expression");
   }
 
   @Test
-  public void testKo() {
+  public void ko() {
     g.unaryExpression.mock();
     g.expression.mock();
-    assertThat(p, notParse("unaryExpression != expression"));
-    assertThat(p, notParse("unaryExpression == expression"));
-    assertThat(p, notParse("unaryExpression >> expression"));
-    assertThat(p, notParse("unaryExpression + expression"));
+
+    assertThat(p)
+        .notMatches("unaryExpression != expression")
+        .notMatches("unaryExpression == expression")
+        .notMatches("unaryExpression >> expression")
+        .notMatches("unaryExpression + expression");
   }
 
   @Test
-  public void testRealLife() {
-    assertThat(p, parse("message = \"Hello World\""));
-    assertThat(p, parse("frameworkAssemblyInitialized = true"));
-    assertThat(p, parse("GetProperties(true)[key] = value"));
-    assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty)"));
-    assertThat(p, parse("m_headFilter = m_tailFilter = filter"));
+  public void reallife() {
+    assertThat(p)
+        .matches("message = \"Hello World\"")
+        .matches("frameworkAssemblyInitialized = true")
+        .matches("GetProperties(true)[key] = value")
+        .matches("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty)")
+        .matches("m_headFilter = m_tailFilter = filter");
   }
 
 }

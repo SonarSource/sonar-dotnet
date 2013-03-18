@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class ExpressionTest {
 
@@ -42,32 +41,35 @@ public class ExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.nonAssignmentExpression.mock();
     g.assignment.mock();
-    assertThat(p, parse("nonAssignmentExpression"));
-    assertThat(p, parse("assignment"));
+
+    assertThat(p)
+        .matches("nonAssignmentExpression")
+        .matches("assignment");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("CurrentDomain.GetAssemblies()"));
-    assertThat(p, parse("dbCommand.Dispose()"));
-    assertThat(p, parse("p.field++.ToString()"));
-    assertThat(p, parse("this.Id++"));
-    assertThat(p, parse("a++.ToString().ToString()"));
-    assertThat(p, parse("int.Parse(\"42\")"));
-    assertThat(p, parse("int.Parse(\"42\").ToString()"));
-    assertThat(p, parse("int.MaxValue"));
-    assertThat(p, parse("new []{12, 13}"));
-    assertThat(p, parse("new []{12, 13}.ToString()"));
-    assertThat(p, parse("new[] { 12, 13 }.Length"));
-    assertThat(p, parse("new[] { 12, 13 }[0]"));
-    assertThat(p, parse("db.Users"));
-    assertThat(p, parse("new { name }"));
-    assertThat(p, parse("new { name, foo }"));
-    assertThat(p, parse("new { user.Name, user.Role.Name }"));
-    assertThat(p, parse("from user in db.Users select new { user.Name, RoleName = user.Role.Name }"));
+  public void reallife() {
+    assertThat(p)
+        .matches("CurrentDomain.GetAssemblies()")
+        .matches("dbCommand.Dispose()")
+        .matches("p.field++.ToString()")
+        .matches("this.Id++")
+        .matches("a++.ToString().ToString()")
+        .matches("int.Parse(\"42\")")
+        .matches("int.Parse(\"42\").ToString()")
+        .matches("int.MaxValue")
+        .matches("new []{12, 13}")
+        .matches("new []{12, 13}.ToString()")
+        .matches("new[] { 12, 13 }.Length")
+        .matches("new[] { 12, 13 }[0]")
+        .matches("db.Users")
+        .matches("new { name }")
+        .matches("new { name, foo }")
+        .matches("new { user.Name, user.Role.Name }")
+        .matches("from user in db.Users select new { user.Name, RoleName = user.Role.Name }");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class GotoStatementTest {
 
@@ -44,10 +43,11 @@ public class GotoStatementTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("goto id;"));
-    assertThat(p, parse("goto case expression;"));
-    assertThat(p, parse("goto default;"));
+  public void ok() {
+    assertThat(p)
+        .matches("goto id;")
+        .matches("goto case expression;")
+        .matches("goto default;");
   }
 
 }

@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class TypeArgumentListTest {
 
@@ -42,17 +41,20 @@ public class TypeArgumentListTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.type.mock();
-    assertThat(p, parse("< type >"));
-    assertThat(p, parse("< type, type >"));
+
+    assertThat(p)
+        .matches("< type >")
+        .matches("< type, type >");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("<TSource>"));
-    assertThat(p, parse("<TSource, AClass>"));
-    assertThat(p, parse("<TSource, int, bool>"));
+  public void reallife() {
+    assertThat(p)
+        .matches("<TSource>")
+        .matches("<TSource, AClass>")
+        .matches("<TSource, int, bool>");
   }
 
 }

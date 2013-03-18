@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class RelationalExpressionTest {
 
@@ -42,19 +41,22 @@ public class RelationalExpressionTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.shiftExpression.mock();
-    assertThat(p, parse("shiftExpression"));
-    assertThat(p, parse("shiftExpression < shiftExpression "));
-    assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression"));
-    assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression is type"));
-    assertThat(p, parse("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression as type"));
-    assertThat(p, parse("shiftExpression <= shiftExpression as type > shiftExpression >= shiftExpression"));
+
+    assertThat(p)
+        .matches("shiftExpression")
+        .matches("shiftExpression < shiftExpression ")
+        .matches("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression")
+        .matches("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression is type")
+        .matches("shiftExpression <= shiftExpression > shiftExpression >= shiftExpression as type")
+        .matches("shiftExpression <= shiftExpression as type > shiftExpression >= shiftExpression");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("arg is double"));
+  public void reallife() {
+    assertThat(p)
+        .matches("arg is double");
   }
 
 }

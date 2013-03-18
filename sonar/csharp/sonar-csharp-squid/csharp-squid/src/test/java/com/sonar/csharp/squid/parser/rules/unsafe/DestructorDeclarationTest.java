@@ -28,9 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class DestructorDeclarationTest {
 
@@ -45,19 +43,21 @@ public class DestructorDeclarationTest {
   }
 
   @Test
-  public void testOk() {
-    assertThat(p, parse("~ id() destructorBody"));
-    assertThat(p, parse("attributes ~ id() destructorBody"));
-    assertThat(p, parse("extern unsafe ~ id() destructorBody"));
-    assertThat(p, parse("attributes unsafe ~ id() destructorBody"));
-    assertThat(p, parse("attributes extern ~ id() destructorBody"));
-    assertThat(p, parse("attributes extern unsafe ~ id() destructorBody"));
-    assertThat(p, parse("attributes unsafe extern ~ id() destructorBody"));
+  public void ok() {
+    assertThat(p)
+        .matches("~ id() destructorBody")
+        .matches("attributes ~ id() destructorBody")
+        .matches("extern unsafe ~ id() destructorBody")
+        .matches("attributes unsafe ~ id() destructorBody")
+        .matches("attributes extern ~ id() destructorBody")
+        .matches("attributes extern unsafe ~ id() destructorBody")
+        .matches("attributes unsafe extern ~ id() destructorBody");
   }
 
   @Test
-  public void testKo() {
-    assertThat(p, notParse(""));
+  public void ko() {
+    assertThat(p)
+        .notMatches("");
   }
 
 }

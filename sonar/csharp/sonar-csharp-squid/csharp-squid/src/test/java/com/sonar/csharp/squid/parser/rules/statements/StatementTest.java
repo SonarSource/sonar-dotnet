@@ -28,8 +28,7 @@ import org.junit.Test;
 
 import java.nio.charset.Charset;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class StatementTest {
 
@@ -43,22 +42,26 @@ public class StatementTest {
   }
 
   @Test
-  public void testOk() {
+  public void ok() {
     g.labeledStatement.mock();
     g.declarationStatement.mock();
     g.embeddedStatement.mock();
-    assertThat(p, parse("labeledStatement"));
-    assertThat(p, parse("declarationStatement"));
-    assertThat(p, parse("embeddedStatement"));
+
+    assertThat(p)
+        .matches("labeledStatement")
+        .matches("declarationStatement")
+        .matches("embeddedStatement");
   }
 
   @Test
-  public void testRealLife() throws Exception {
-    assertThat(p, parse("Integer i = 15;"));
-    assertThat(p, parse("frameIndex++;"));
-    assertThat(p, parse("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty);"));
-    assertThat(p, parse("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message);"));
-    assertThat(p, parse("m_headFilter = m_tailFilter = filter;"));
-    assertThat(p, parse("var query = from user in db.Users select new { user.Name, RoleName = user.Role.Name };"));
+  public void reallife() {
+    assertThat(p)
+        .matches("Integer i = 15;")
+        .matches("frameIndex++;")
+        .matches("loggingEvent.GetProperties()[\"log4jmachinename\"] = loggingEvent.LookupProperty(LoggingEvent.HostNameProperty);")
+        .matches("buf.Append(\"Exception during StringFormat: \").Append(formatException.Message);")
+        .matches("m_headFilter = m_tailFilter = filter;")
+        .matches("var query = from user in db.Users select new { user.Name, RoleName = user.Role.Name };");
   }
+
 }
