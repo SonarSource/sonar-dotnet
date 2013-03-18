@@ -156,13 +156,13 @@ import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.bridge;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.next;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.not;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.and;
+import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.firstOf;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.one2n;
 import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.opt;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.or;
 
 /**
- * Definition of each element of the C# grammar.
+ * Definition of each element of the C# grammar, based on the C# language specification 4.0
  */
 public class CSharpGrammarImpl extends CSharpGrammar {
 
@@ -171,8 +171,16 @@ public class CSharpGrammarImpl extends CSharpGrammar {
   private static final String PARTIAL = "partial";
 
   public CSharpGrammarImpl() {
-    // We follow the C# language specification 4.0
-    literal.is(or(TRUE, FALSE, INTEGER_DEC_LITERAL, INTEGER_HEX_LITERAL, REAL_LITERAL, CHARACTER_LITERAL, STRING_LITERAL, NULL));
+    literal.is(
+        firstOf(
+            TRUE,
+            FALSE,
+            INTEGER_DEC_LITERAL,
+            INTEGER_HEX_LITERAL,
+            REAL_LITERAL,
+            CHARACTER_LITERAL,
+            STRING_LITERAL,
+            NULL));
     rightShift.is(SUPERIOR, SUPERIOR);
     rightShiftAssignment.is(SUPERIOR, GE_OP);
 
@@ -226,7 +234,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     namespaceName.is(namespaceOrTypeName);
     typeName.is(namespaceOrTypeName);
     namespaceOrTypeName.is(
-        or(
+        firstOf(
             qualifiedAliasMember,
             and(IDENTIFIER, opt(typeArgumentList))),
         o2n(DOT, IDENTIFIER, opt(typeArgumentList)));
@@ -234,25 +242,27 @@ public class CSharpGrammarImpl extends CSharpGrammar {
 
   private void types() {
     simpleType.is(
-        or(
+        firstOf(
             numericType,
             BOOL));
-    numericType.is(or(
-        integralType,
-        floatingPointType,
-        DECIMAL));
-    integralType.is(or(
-        SBYTE,
-        BYTE,
-        SHORT,
-        USHORT,
-        INT,
-        UINT,
-        LONG,
-        ULONG,
-        CHAR));
+    numericType.is(
+        firstOf(
+            integralType,
+            floatingPointType,
+            DECIMAL));
+    integralType.is(
+        firstOf(
+            SBYTE,
+            BYTE,
+            SHORT,
+            USHORT,
+            INT,
+            UINT,
+            LONG,
+            ULONG,
+            CHAR));
     floatingPointType.is(
-        or(
+        firstOf(
             FLOAT,
             DOUBLE));
 
@@ -260,7 +270,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     rankSpecifiers.is(one2n(rankSpecifier));
 
     typePrimary.is(
-        or(
+        firstOf(
             simpleType,
             "dynamic",
             OBJECT,
@@ -269,19 +279,19 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         )).skip();
     nullableType.is(typePrimary, QUESTION, not(and(expression, COLON)));
     pointerType.is( // Moved from unsafe code to remove the left recursions
-        or(
+        firstOf(
             nullableType,
             typePrimary,
             VOID),
         STAR);
     arrayType.is(
-        or(
+        firstOf(
             pointerType,
             nullableType,
             typePrimary),
         rankSpecifiers);
     type.is(
-        or(
+        firstOf(
             arrayType,
             pointerType,
             nullableType,
@@ -291,7 +301,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     nonArrayType.is(not(arrayType), type);
 
     classType.is(
-        or(
+        firstOf(
             "dynamic",
             OBJECT,
             STRING,
@@ -307,11 +317,11 @@ public class CSharpGrammarImpl extends CSharpGrammar {
 
   private void expressions() {
     primaryExpressionPrimary.is(
-        or(
+        firstOf(
             arrayCreationExpression,
             primaryNoArrayCreationExpression)).skip();
     primaryNoArrayCreationExpression.is(
-        or(
+        firstOf(
             parenthesizedExpression,
             memberAccess,
             thisAccess,
@@ -340,7 +350,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     postfixExpression.is(
         primaryExpressionPrimary,
         o2n(
-        or(
+        firstOf(
             postMemberAccess,
             postElementAccess,
             postPointerMemberAccess,
@@ -353,18 +363,18 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     argument.is(opt(argumentName), argumentValue);
     argumentName.is(IDENTIFIER, COLON);
     argumentValue.is(
-        or(
+        firstOf(
             expression,
             and(REF, variableReference),
             and(OUT, variableReference)));
     simpleName.is(IDENTIFIER, opt(typeArgumentList));
     parenthesizedExpression.is(LPARENTHESIS, expression, RPARENTHESIS);
     memberAccess.is(
-        or(
+        firstOf(
             and(qualifiedAliasMember, DOT, IDENTIFIER),
             and(predefinedType, DOT, IDENTIFIER, opt(typeArgumentList))));
     predefinedType.is(
-        or(
+        firstOf(
             BOOL,
             BYTE,
             CHAR,
@@ -385,32 +395,32 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     // present in the "base-access" rule in the specification of C# 4.0
     baseAccess.is(
         BASE,
-        or(
+        firstOf(
             and(DOT, IDENTIFIER, opt(typeArgumentList)),
             and(LBRACKET, argumentList, RBRACKET)));
     objectCreationExpression.is(
         NEW, type,
-        or(
+        firstOf(
             and(LPARENTHESIS, opt(argumentList), RPARENTHESIS, opt(objectOrCollectionInitializer)),
             objectOrCollectionInitializer));
     objectOrCollectionInitializer.is(
-        or(
+        firstOf(
             objectInitializer,
             collectionInitializer));
     objectInitializer.is(LCURLYBRACE, opt(memberInitializer), o2n(COMMA, memberInitializer), opt(COMMA), RCURLYBRACE);
     memberInitializer.is(IDENTIFIER, EQUAL, initializerValue);
     initializerValue.is(
-        or(
+        firstOf(
             expression,
             objectOrCollectionInitializer));
     collectionInitializer.is(LCURLYBRACE, elementInitializer, o2n(COMMA, elementInitializer), opt(COMMA), RCURLYBRACE);
     elementInitializer.is(
-        or(
+        firstOf(
             nonAssignmentExpression,
             and(LCURLYBRACE, expressionList, RCURLYBRACE)));
     expressionList.is(expression, o2n(COMMA, expression));
     arrayCreationExpression.is(
-        or(
+        firstOf(
             and(NEW, nonArrayType, LBRACKET, expressionList, RBRACKET, o2n(rankSpecifier), opt(arrayInitializer)),
             and(NEW, arrayType, arrayInitializer), and(NEW, rankSpecifier, arrayInitializer)));
     delegateCreationExpression.is(NEW, delegateType, LPARENTHESIS, expression, RPARENTHESIS);
@@ -430,11 +440,11 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     defaultValueExpression.is(DEFAULT, LPARENTHESIS, type, RPARENTHESIS);
 
     unaryExpression.is(
-        or(
+        firstOf(
             and(LPARENTHESIS, type, RPARENTHESIS, unaryExpression),
             primaryExpression,
             and(
-                or(
+                firstOf(
                     MINUS,
                     EXCLAMATION,
                     INC_OP,
@@ -443,14 +453,14 @@ public class CSharpGrammarImpl extends CSharpGrammar {
                     PLUS),
                 unaryExpression),
             unsafe(
-            or(
+            firstOf(
                 pointerIndirectionExpression,
                 addressOfExpression)))).skipIfOneChild();
 
     multiplicativeExpression.is(
         unaryExpression,
         o2n(
-            or(
+            firstOf(
                 STAR,
                 SLASH,
                 MODULO),
@@ -458,37 +468,37 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     additiveExpression.is(
         multiplicativeExpression,
         o2n(
-            or(
+            firstOf(
                 PLUS,
                 MINUS),
             multiplicativeExpression)).skipIfOneChild();
     shiftExpression.is(
         additiveExpression,
         o2n(
-            or(
+            firstOf(
                 LEFT_OP,
                 rightShift),
             additiveExpression)).skipIfOneChild();
     relationalExpression.is(
         shiftExpression,
         o2n(
-        or(
+        firstOf(
             and(
-                or(
+                firstOf(
                     INFERIOR,
                     SUPERIOR,
                     LE_OP,
                     GE_OP),
                 shiftExpression),
             and(
-                or(
+                firstOf(
                     IS,
                     AS),
                 type)))).skipIfOneChild();
     equalityExpression.is(
         relationalExpression,
         o2n(
-            or(
+            firstOf(
                 EQ_OP,
                 NE_OP),
             relationalExpression)).skipIfOneChild();
@@ -502,34 +512,34 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     lambdaExpression.is(anonymousFunctionSignature, LAMBDA, anonymousFunctionBody);
     anonymousMethodExpression.is(DELEGATE, opt(explicitAnonymousFunctionSignature), block);
     anonymousFunctionSignature.is(
-        or(
+        firstOf(
             explicitAnonymousFunctionSignature,
             implicitAnonymousFunctionSignature));
     explicitAnonymousFunctionSignature.is(LPARENTHESIS, opt(explicitAnonymousFunctionParameter, o2n(COMMA, explicitAnonymousFunctionParameter)), RPARENTHESIS);
     explicitAnonymousFunctionParameter.is(opt(anonymousFunctionParameterModifier), type, IDENTIFIER);
     anonymousFunctionParameterModifier.is(
-        or(
+        firstOf(
             "ref",
             "out"));
     implicitAnonymousFunctionSignature.is(
-        or(
+        firstOf(
             implicitAnonymousFunctionParameter,
             and(LPARENTHESIS, opt(implicitAnonymousFunctionParameter, o2n(COMMA, implicitAnonymousFunctionParameter)), RPARENTHESIS)));
     implicitAnonymousFunctionParameter.is(IDENTIFIER);
     anonymousFunctionBody.is(
-        or(
+        firstOf(
             expression,
             block));
     queryExpression.is(fromClause, queryBody);
     fromClause.is(
         "from",
-        or(
+        firstOf(
             and(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression);
     queryBody.is(o2n(queryBodyClause), selectOrGroupClause, opt(queryContinuation));
     queryBodyClause.is(
-        or(
+        firstOf(
             fromClause,
             letClause,
             whereClause,
@@ -540,13 +550,13 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     whereClause.is("where", expression);
     joinClause.is(
         "join",
-        or(
+        firstOf(
             and(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression, "on", expression, "equals", expression);
     joinIntoClause.is(
         "join",
-        or(
+        firstOf(
             and(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression, "on", expression, "equals", expression,
@@ -554,11 +564,11 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     orderByClause.is("orderby", ordering, o2n(COMMA, ordering));
     ordering.is(expression, opt(orderingDirection));
     orderingDirection.is(
-        or(
+        firstOf(
             "ascending",
             "descending"));
     selectOrGroupClause.is(
-        or(
+        firstOf(
             selectClause,
             groupClause));
     selectClause.is("select", expression);
@@ -566,7 +576,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     queryContinuation.is("into", IDENTIFIER, queryBody);
     assignment.is(
         unaryExpression,
-        or(
+        firstOf(
             EQUAL,
             ADD_ASSIGN,
             SUB_ASSIGN,
@@ -580,24 +590,24 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             rightShiftAssignment),
         expression);
     nonAssignmentExpression.is(
-        or(
+        firstOf(
             lambdaExpression,
             queryExpression,
             conditionalExpression)).skip();
     expression.is(
-        or(
+        firstOf(
             assignment,
             nonAssignmentExpression));
   }
 
   private void statements() {
     statement.is(
-        or(
+        firstOf(
             labeledStatement,
             declarationStatement,
             embeddedStatement));
     embeddedStatement.is(
-        or(
+        firstOf(
             block,
             SEMICOLON,
             expressionStatement,
@@ -613,14 +623,14 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     block.is(LCURLYBRACE, o2n(statement), RCURLYBRACE);
     labeledStatement.is(IDENTIFIER, COLON, statement);
     declarationStatement.is(
-        or(
+        firstOf(
             localVariableDeclaration,
             localConstantDeclaration),
         SEMICOLON);
     localVariableDeclaration.is(type, localVariableDeclarator, o2n(COMMA, localVariableDeclarator));
     localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, localVariableInitializer));
     localVariableInitializer.is(
-        or(
+        firstOf(
             expression,
             arrayInitializer,
             unsafe(stackallocInitializer)));
@@ -628,18 +638,18 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     constantDeclarator.is(IDENTIFIER, EQUAL, expression);
     expressionStatement.is(expression, SEMICOLON);
     selectionStatement.is(
-        or(
+        firstOf(
             ifStatement,
             switchStatement));
     ifStatement.is(IF, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement, opt(ELSE, embeddedStatement));
     switchStatement.is(SWITCH, LPARENTHESIS, expression, RPARENTHESIS, LCURLYBRACE, o2n(switchSection), RCURLYBRACE);
     switchSection.is(one2n(switchLabel), one2n(statement));
     switchLabel.is(
-        or(
+        firstOf(
             and(CASE, expression, COLON),
             and(DEFAULT, COLON)));
     iterationStatement.is(
-        or(
+        firstOf(
             whileStatement,
             doStatement,
             forStatement,
@@ -648,7 +658,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     doStatement.is(DO, embeddedStatement, WHILE, LPARENTHESIS, expression, RPARENTHESIS, SEMICOLON);
     forStatement.is(FOR, LPARENTHESIS, opt(forInitializer), SEMICOLON, opt(forCondition), SEMICOLON, opt(forIterator), RPARENTHESIS, embeddedStatement);
     forInitializer.is(
-        or(
+        firstOf(
             localVariableDeclaration,
             statementExpressionList));
     forCondition.is(expression);
@@ -656,7 +666,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     statementExpressionList.is(expression, o2n(COMMA, expression));
     foreachStatement.is(FOREACH, LPARENTHESIS, type, IDENTIFIER, IN, expression, RPARENTHESIS, embeddedStatement);
     jumpStatement.is(
-        or(
+        firstOf(
             breakStatement,
             continueStatement,
             gotoStatement,
@@ -666,7 +676,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     continueStatement.is(CONTINUE, SEMICOLON);
     gotoStatement.is(
         GOTO,
-        or(
+        firstOf(
             IDENTIFIER,
             and(CASE, expression),
             DEFAULT),
@@ -675,11 +685,11 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     throwStatement.is(THROW, opt(expression), SEMICOLON);
     tryStatement.is(
         TRY, block,
-        or(
+        firstOf(
             and(opt(catchClauses), finallyClause),
             catchClauses));
     catchClauses.is(
-        or(
+        firstOf(
             and(o2n(specificCatchClause), generalCatchClause),
             one2n(specificCatchClause)));
     specificCatchClause.is(CATCH, LPARENTHESIS, classType, opt(IDENTIFIER), RPARENTHESIS, block);
@@ -690,12 +700,12 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     lockStatement.is(LOCK, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
     usingStatement.is(USING, LPARENTHESIS, resourceAcquisition, RPARENTHESIS, embeddedStatement);
     resourceAcquisition.is(
-        or(
+        firstOf(
             localVariableDeclaration,
             expression));
     yieldStatement.is(
         "yield",
-        or(
+        firstOf(
             and(RETURN, expression),
             BREAK),
         SEMICOLON);
@@ -704,17 +714,17 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     namespaceBody.is(LCURLYBRACE, o2n(externAliasDirective), o2n(usingDirective), o2n(namespaceMemberDeclaration), RCURLYBRACE);
     externAliasDirective.is(EXTERN, "alias", IDENTIFIER, SEMICOLON);
     usingDirective.is(
-        or(
+        firstOf(
             usingAliasDirective,
             usingNamespaceDirective));
     usingAliasDirective.is(USING, IDENTIFIER, EQUAL, namespaceOrTypeName, SEMICOLON);
     usingNamespaceDirective.is(USING, namespaceName, SEMICOLON);
     namespaceMemberDeclaration.is(
-        or(
+        firstOf(
             namespaceDeclaration,
             typeDeclaration));
     typeDeclaration.is(
-        or(
+        firstOf(
             classDeclaration,
             structDeclaration,
             interfaceDeclaration,
@@ -730,7 +740,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         classBody,
         opt(SEMICOLON));
     classModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -742,14 +752,14 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             UNSAFE));
     classBase.is(
         COLON,
-        or(
+        firstOf(
             and(classType, COMMA, interfaceTypeList),
             classType,
             interfaceTypeList));
     interfaceTypeList.is(interfaceType, o2n(COMMA, interfaceType));
     classBody.is(LCURLYBRACE, o2n(classMemberDeclaration), RCURLYBRACE);
     classMemberDeclaration.is(
-        or(
+        firstOf(
             constantDeclaration,
             fieldDeclaration,
             methodDeclaration,
@@ -767,7 +777,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         constantDeclarator, o2n(COMMA, constantDeclarator),
         SEMICOLON);
     constantModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -779,7 +789,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         variableDeclarator, o2n(COMMA, variableDeclarator),
         SEMICOLON);
     fieldModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -791,7 +801,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             UNSAFE));
     variableDeclarator.is(IDENTIFIER, opt(EQUAL, variableInitializer));
     variableInitializer.is(
-        or(
+        firstOf(
             expression,
             arrayInitializer));
     methodDeclaration.is(methodHeader, methodBody);
@@ -802,7 +812,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         LPARENTHESIS, opt(formalParameterList), RPARENTHESIS,
         opt(typeParameterConstraintsClauses)).skip();
     methodModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -816,42 +826,42 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             EXTERN,
             UNSAFE));
     returnType.is(
-        or(
+        firstOf(
             type,
             VOID));
     memberName.is(
         o2n(
-            or(
+            firstOf(
                 qualifiedAliasMember,
                 and(
-                    or(
+                    firstOf(
                         THIS,
                         IDENTIFIER),
                     opt(typeArgumentList))),
             DOT),
-        or(
+        firstOf(
             THIS,
             IDENTIFIER),
         opt(typeArgumentList));
     methodBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
     formalParameterList.is(
-        or(
+        firstOf(
             and(fixedParameters, opt(COMMA, parameterArray)),
             parameterArray));
     fixedParameters.is(fixedParameter, o2n(COMMA, fixedParameter));
     fixedParameter.is(opt(attributes), opt(parameterModifier), type, IDENTIFIER, opt(EQUAL, expression));
     parameterModifier.is(
-        or(
+        firstOf(
             REF,
             OUT,
             THIS));
     parameterArray.is(opt(attributes), PARAMS, arrayType, IDENTIFIER);
     propertyDeclaration.is(opt(attributes), o2n(propertyModifier), type, memberName, LCURLYBRACE, accessorDeclarations, RCURLYBRACE);
     propertyModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -865,31 +875,31 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             EXTERN,
             UNSAFE));
     accessorDeclarations.is(
-        or(
+        firstOf(
             and(getAccessorDeclaration, opt(setAccessorDeclaration)),
             and(setAccessorDeclaration, opt(getAccessorDeclaration))));
     getAccessorDeclaration.is(opt(attributes), o2n(accessorModifier), GET, accessorBody);
     setAccessorDeclaration.is(opt(attributes), o2n(accessorModifier), SET, accessorBody);
     accessorModifier.is(
-        or(
+        firstOf(
             and(PROTECTED, INTERNAL),
             and(INTERNAL, PROTECTED),
             PROTECTED,
             INTERNAL,
             PRIVATE));
     accessorBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
     eventDeclaration.is(
         opt(attributes),
         o2n(eventModifier),
         EVENT, type,
-        or(
+        firstOf(
             and(variableDeclarator, o2n(COMMA, variableDeclarator), SEMICOLON),
             and(memberName, LCURLYBRACE, eventAccessorDeclarations, RCURLYBRACE)));
     eventModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -903,7 +913,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             EXTERN,
             UNSAFE));
     eventAccessorDeclarations.is(
-        or(
+        firstOf(
             and(addAccessorDeclaration, removeAccessorDeclaration),
             and(removeAccessorDeclaration, addAccessorDeclaration)));
     addAccessorDeclaration.is(opt(attributes), "add", block);
@@ -912,7 +922,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         opt(attributes), o2n(indexerModifier),
         indexerDeclarator, LCURLYBRACE, accessorDeclarations, RCURLYBRACE);
     indexerModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -927,23 +937,27 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             UNSAFE));
     indexerDeclarator.is(
         type,
-        o2n(or(qualifiedAliasMember, and(IDENTIFIER, opt(typeArgumentList))), DOT),
+        o2n(
+            firstOf(
+                qualifiedAliasMember,
+                and(IDENTIFIER, opt(typeArgumentList))),
+            DOT),
         THIS, LBRACKET, formalParameterList, RBRACKET);
     operatorDeclaration.is(opt(attributes), one2n(operatorModifier), operatorDeclarator, operatorBody);
     operatorModifier.is(
-        or(
+        firstOf(
             PUBLIC,
             STATIC,
             EXTERN,
             UNSAFE));
     operatorDeclarator.is(
-        or(
+        firstOf(
             unaryOperatorDeclarator,
             binaryOperatorDeclarator,
             conversionOperatorDeclarator));
     unaryOperatorDeclarator.is(type, OPERATOR, overloadableUnaryOperator, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
     overloadableUnaryOperator.is(
-        or(
+        firstOf(
             PLUS,
             MINUS,
             EXCLAMATION,
@@ -954,7 +968,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             FALSE));
     binaryOperatorDeclarator.is(type, OPERATOR, overloadableBinaryOperator, LPARENTHESIS, type, IDENTIFIER, COMMA, type, IDENTIFIER, RPARENTHESIS);
     overloadableBinaryOperator.is(
-        or(
+        firstOf(
             PLUS,
             MINUS,
             STAR,
@@ -972,17 +986,17 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             GE_OP,
             LE_OP));
     conversionOperatorDeclarator.is(
-        or(
+        firstOf(
             IMPLICIT,
             EXPLICIT),
         OPERATOR, type, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
     operatorBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
     constructorDeclaration.is(opt(attributes), o2n(constructorModifier), constructorDeclarator, constructorBody);
     constructorModifier.is(
-        or(
+        firstOf(
             PUBLIC,
             PROTECTED,
             INTERNAL,
@@ -992,30 +1006,30 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     constructorDeclarator.is(IDENTIFIER, LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(constructorInitializer));
     constructorInitializer.is(
         COLON,
-        or(
+        firstOf(
             BASE,
             THIS),
         LPARENTHESIS, opt(argumentList), RPARENTHESIS);
     constructorBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
     staticConstructorDeclaration.is(
         opt(attributes),
         staticConstructorModifiers, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, staticConstructorBody);
     staticConstructorModifiers.is(
-        or(
+        firstOf(
             and(opt(EXTERN), STATIC, not(next(EXTERN))),
             and(STATIC, opt(EXTERN))));
     staticConstructorBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
     destructorDeclaration.is(
         opt(attributes), opt(EXTERN),
         TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody);
     destructorBody.is(
-        or(
+        firstOf(
             block,
             SEMICOLON));
   }
@@ -1028,7 +1042,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         structBody,
         opt(SEMICOLON));
     structModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -1038,7 +1052,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     structInterfaces.is(COLON, interfaceTypeList);
     structBody.is(LCURLYBRACE, o2n(structMemberDeclaration), RCURLYBRACE);
     structMemberDeclaration.is(
-        or(
+        firstOf(
             constantDeclaration,
             fieldDeclaration,
             methodDeclaration,
@@ -1056,7 +1070,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     arrayInitializer.is(
         LCURLYBRACE,
         opt(
-        or(
+        firstOf(
             and(variableInitializerList, COMMA),
             variableInitializerList)),
         RCURLYBRACE);
@@ -1071,7 +1085,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         interfaceBody,
         opt(SEMICOLON));
     interfaceModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -1081,13 +1095,13 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     variantTypeParameterList.is(INFERIOR, variantTypeParameter, o2n(COMMA, variantTypeParameter), SUPERIOR);
     variantTypeParameter.is(opt(attributes), opt(varianceAnnotation), typeParameter);
     varianceAnnotation.is(
-        or(
+        firstOf(
             IN,
             OUT));
     interfaceBase.is(COLON, interfaceTypeList);
     interfaceBody.is(LCURLYBRACE, o2n(interfaceMemberDeclaration), RCURLYBRACE);
     interfaceMemberDeclaration.is(
-        or(
+        firstOf(
             interfaceMethodDeclaration,
             interfacePropertyDeclaration,
             interfaceEventDeclaration,
@@ -1103,7 +1117,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         type, IDENTIFIER, LCURLYBRACE, interfaceAccessors, RCURLYBRACE);
     interfaceAccessors.is(
         opt(attributes),
-        or(
+        firstOf(
             and(GET, SEMICOLON, opt(attributes), SET),
             and(SET, SEMICOLON, opt(attributes), GET),
             GET,
@@ -1123,12 +1137,12 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     enumBody.is(
         LCURLYBRACE,
         opt(
-        or(
+        firstOf(
             and(enumMemberDeclarations, COMMA),
             enumMemberDeclarations)),
         RCURLYBRACE);
     enumModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -1147,7 +1161,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         opt(typeParameterConstraintsClauses),
         SEMICOLON);
     delegateModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -1161,14 +1175,14 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     globalAttributeSection.is(LBRACKET, globalAttributeTargetSpecifier, attributeList, opt(COMMA), RBRACKET);
     globalAttributeTargetSpecifier.is(globalAttributeTarget, COLON);
     globalAttributeTarget.is(
-        or(
+        firstOf(
             "assembly",
             "module"));
     attributes.is(one2n(attributeSection));
     attributeSection.is(LBRACKET, opt(attributeTargetSpecifier), attributeList, opt(COMMA), RBRACKET);
     attributeTargetSpecifier.is(attributeTarget, COLON);
     attributeTarget.is(
-        or(
+        firstOf(
             "field",
             "event",
             "method",
@@ -1182,12 +1196,12 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     attributeArguments.is(
         LPARENTHESIS,
         opt(
-            or(
+            firstOf(
                 namedArgument,
                 positionalArgument),
             o2n(
                 COMMA,
-                or(
+                firstOf(
                     namedArgument,
                     positionalArgument))),
         RPARENTHESIS);
@@ -1205,11 +1219,11 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     typeParameterConstraintsClauses.is(one2n(typeParameterConstraintsClause));
     typeParameterConstraintsClause.is("where", typeParameter, COLON, typeParameterConstraints);
     typeParameterConstraints.is(
-        or(
+        firstOf(
             and(primaryConstraint, COMMA, secondaryConstraints, COMMA, constructorConstraint),
             and(
                 primaryConstraint, COMMA,
-                or(
+                firstOf(
                     secondaryConstraints,
                     constructorConstraint)),
             and(secondaryConstraints, COMMA, constructorConstraint),
@@ -1217,17 +1231,17 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             secondaryConstraints,
             constructorConstraint));
     primaryConstraint.is(
-        or(
+        firstOf(
             classType,
             CLASS,
             STRUCT));
     secondaryConstraints.is(
-        or(
+        firstOf(
             interfaceType,
             typeParameter),
         o2n(
             COMMA,
-            or(
+            firstOf(
                 interfaceType,
                 typeParameter)));
     constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
@@ -1245,24 +1259,24 @@ public class CSharpGrammarImpl extends CSharpGrammar {
     destructorDeclaration.override(
         opt(attributes),
         o2n(
-        or(
+        firstOf(
             EXTERN,
             UNSAFE)),
         TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody);
     // FIXME override!
     staticConstructorModifiers.override(
         o2n(
-        or(
+        firstOf(
             EXTERN,
             UNSAFE)),
         STATIC,
         o2n(
-        or(
+        firstOf(
             EXTERN,
             UNSAFE)));
     // FIXME override!
     embeddedStatement.override(
-        or(
+        firstOf(
             block,
             SEMICOLON,
             expressionStatement,
@@ -1288,7 +1302,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         embeddedStatement);
     fixedPointerDeclarator.is(IDENTIFIER, EQUAL, fixedPointerInitializer);
     fixedPointerInitializer.is(
-        or(
+        firstOf(
             and(AND, variableReference),
             stackallocInitializer,
             expression));
@@ -1296,7 +1310,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
         opt(attributes), o2n(fixedSizeBufferModifier),
         FIXED, type, one2n(fixedSizeBufferDeclarator), SEMICOLON);
     fixedSizeBufferModifier.is(
-        or(
+        firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
