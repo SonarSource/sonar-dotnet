@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.slf4j.Logger;
@@ -37,6 +33,9 @@ import org.sonar.dotnet.tools.gallio.GallioException;
 import org.sonar.dotnet.tools.gallio.GallioRunner;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 import org.sonar.plugins.dotnet.api.utils.FileFinder;
 
@@ -105,7 +104,10 @@ public class GallioSensor extends AbstractDotNetSensor {
     if (assembly != null && assembly.isFile()) {
       assemblyFileList.add(assembly);
     } else {
-      LOG.warn("Test assembly not found at the following location " + assembly);
+      LOG.warn("Test assembly not found at the following location: {}"
+        + "\n, using the following configuration:\n  - csproj file: {}\n  - build configuration: {}\n  - platform: {}",
+          new Object[] {assembly, visualStudioProject.getProjectFile(), buildConfigurations, buildPlatform}
+          );
     }
   }
 
