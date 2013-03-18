@@ -73,8 +73,7 @@ public final class CSharpAstScanner {
             return comment.startsWith("//") ? comment.substring(2) : comment.substring(2, comment.length() - 2);
           }
 
-        }
-        );
+        });
 
     /* Files */
     builder.setFilesMetric(CSharpMetric.FILES);

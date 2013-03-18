@@ -33,8 +33,7 @@ public final class CheckList {
         CommentedCodeCheck.class,
         TodoCommentCheck.class,
         ParsingErrorCheck.class,
-        XPathCheck.class
-        );
+        XPathCheck.class);
   }
 
 }

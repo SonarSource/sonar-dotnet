@@ -275,8 +275,7 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             "dynamic",
             OBJECT,
             STRING,
-            typeName
-        )).skip();
+            typeName)).skip();
     nullableType.is(typePrimary, QUESTION, not(and(expression, COLON)));
     pointerType.is( // Moved from unsafe code to remove the left recursions
         firstOf(
