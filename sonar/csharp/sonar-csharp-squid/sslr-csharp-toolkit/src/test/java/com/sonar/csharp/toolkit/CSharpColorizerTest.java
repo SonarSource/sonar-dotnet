@@ -19,16 +19,20 @@
  */
 package com.sonar.csharp.toolkit;
 
-import org.sonar.sslr.toolkit.Toolkit;
+import org.junit.Test;
+import org.sonar.colorizer.Tokenizer;
 
-public final class CSharpToolkit {
+import java.util.List;
 
-  private CSharpToolkit() {
-  }
+import static org.fest.assertions.Assertions.assertThat;
 
-  public static void main(String[] args) {
-    Toolkit toolkit = new Toolkit("SSLR :: C# :: Toolkit", new CSharpConfigurationModel());
-    toolkit.run();
+public class CSharpColorizerTest {
+
+  @Test
+  public void getTokenizers() {
+    List<Tokenizer> tokenizers = CSharpColorizer.getTokenizers();
+
+    assertThat(tokenizers.size()).isGreaterThan(0);
   }
 
 }
