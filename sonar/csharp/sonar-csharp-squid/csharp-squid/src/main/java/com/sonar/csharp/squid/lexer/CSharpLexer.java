@@ -27,6 +27,7 @@ import com.sonar.csharp.squid.lexer.preprocessors.StandardPreprocessorLinePrepro
 import com.sonar.sslr.api.Preprocessor;
 import com.sonar.sslr.impl.Lexer;
 import com.sonar.sslr.impl.channel.BlackHoleChannel;
+import com.sonar.sslr.impl.channel.BomCharacterChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
@@ -94,7 +95,8 @@ public final class CSharpLexer {
         .withChannel(regexp(CSharpTokenType.PREPROCESSOR, "#[^\\r\\n]*"))
         // Others
         .withChannel(new BlackHoleChannel("[\\s]"))
-        .withChannel(new UnknownCharacterChannel(true)); /* Used to handle to BOM? */
+        .withChannel(new BomCharacterChannel())
+        .withChannel(new UnknownCharacterChannel());
 
     if (preprocessors.length > 0) {
       for (Preprocessor preprocessor : preprocessors) {
