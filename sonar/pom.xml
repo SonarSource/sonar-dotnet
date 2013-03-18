@@ -29,7 +29,7 @@
   </modules>
 
   <properties>
-    <sslrVersion>1.15</sslrVersion>
+    <sslrVersion>1.16</sslrVersion>
     <squidBridgeVersion>2.2</squidBridgeVersion>
     <sonarCommonRules>1.0.1</sonarCommonRules>
   </properties>
