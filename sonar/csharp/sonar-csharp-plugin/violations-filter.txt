@@ -1,4 +1,0 @@
-# Indentation should be handled by the IDE
-# Duplicate literals are acceptable in many cases
-*;checkstyle:com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck;*
-*;pmd:AvoidDuplicateLiterals;*
