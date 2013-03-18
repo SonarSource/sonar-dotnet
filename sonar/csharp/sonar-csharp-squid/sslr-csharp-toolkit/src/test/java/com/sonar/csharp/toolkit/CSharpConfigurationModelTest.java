@@ -35,10 +35,10 @@ public class CSharpConfigurationModelTest {
   public void getConfiguration_charset() {
     CSharpConfigurationModel model = new CSharpConfigurationModel();
     model.charsetProperty.setValue("UTF-8");
-    // assertThat(model.getCharset()).isEqualTo(Charsets.UTF_8);
+    assertThat(model.getCharset()).isEqualTo(Charsets.UTF_8);
     assertThat(model.getConfiguration().getCharset()).isEqualTo(Charsets.UTF_8);
     model.charsetProperty.setValue("ISO-8859-1");
-    // assertThat(model.getCharset()).isEqualTo(Charsets.ISO_8859_1);
+    assertThat(model.getCharset()).isEqualTo(Charsets.ISO_8859_1);
     assertThat(model.getConfiguration().getCharset()).isEqualTo(Charsets.ISO_8859_1);
   }
 

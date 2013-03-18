@@ -46,13 +46,10 @@ public class CSharpConfigurationModel extends AbstractConfigurationModel {
       getPropertyOrDefaultValue(CHARSET_PROPERTY_KEY, "UTF-8"),
       Validators.charsetValidator());
 
-  // FIXME SSLR 1.18
-  /*
-   * @Override
-   * public Charset getCharset() {
-   * return Charset.forName(charsetProperty.getValue());
-   * }
-   */
+  @Override
+  public Charset getCharset() {
+    return Charset.forName(charsetProperty.getValue());
+  }
 
   public List<ConfigurationProperty> getProperties() {
     return ImmutableList.of(charsetProperty);
