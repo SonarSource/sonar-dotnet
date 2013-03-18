@@ -19,31 +19,20 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
-
-public class EmbeddedStatementTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class EmbeddedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.embeddedStatement);
-    g.unsafeStatement.mock();
-    g.fixedStatement.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement));
+    p.getGrammar().rule(CSharpGrammarImpl.unsafeStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.fixedStatement).mock();
   }
 
   @Test

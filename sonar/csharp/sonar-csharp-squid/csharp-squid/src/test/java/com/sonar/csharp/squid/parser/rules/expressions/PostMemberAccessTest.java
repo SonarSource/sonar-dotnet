@@ -19,31 +19,24 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class PostMemberAccessTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class PostMemberAccessTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.postMemberAccess);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.postMemberAccess));
   }
 
   @Test
   public void ok() {
-    g.primaryExpression.mock();
-    g.typeArgumentList.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.primaryExpression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.typeArgumentList).mock();
 
     assertThat(p)
         .matches(".id")

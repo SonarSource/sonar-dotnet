@@ -19,30 +19,23 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class InterfaceMethodDeclarationTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class InterfaceMethodDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.interfaceMethodDeclaration);
-    g.attributes.mock();
-    g.returnType.mock();
-    g.typeParameterList.mock();
-    g.formalParameterList.mock();
-    g.typeParameterConstraintsClauses.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.interfaceMethodDeclaration));
+    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.returnType).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.typeParameterList).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
   }
 
   @Test

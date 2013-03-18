@@ -19,36 +19,29 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class EmbeddedStatementTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class EmbeddedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.embeddedStatement);
-    g.block.mock();
-    g.expressionStatement.mock();
-    g.selectionStatement.mock();
-    g.iterationStatement.mock();
-    g.jumpStatement.mock();
-    g.tryStatement.mock();
-    g.checkedStatement.mock();
-    g.uncheckedStatement.mock();
-    g.lockStatement.mock();
-    g.usingStatement.mock();
-    g.yieldStatement.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement));
+    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expressionStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.selectionStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.iterationStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.jumpStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.tryStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.checkedStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.uncheckedStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.lockStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.usingStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.yieldStatement).mock();
 
   }
 

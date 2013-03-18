@@ -20,13 +20,14 @@
 package com.sonar.csharp.squid.tree;
 
 import com.google.common.collect.Maps;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceType;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
 
 import java.util.Map;
@@ -36,9 +37,7 @@ import java.util.Stack;
  * Visitor that creates type resources and computes the number of types. <br/>
  * Types can be: classes, interfaces, delegates, enumerations and structures
  */
-public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
-
-  private CSharpGrammar g;
+public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   private String namespaceName;
   private final Stack<String> typeNameStack = new Stack<String>();
@@ -51,26 +50,24 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
    */
   @Override
   public void init() {
-    g = getContext().getGrammar();
-
     subscribeTo(
-        g.namespaceDeclaration,
-        g.classDeclaration,
-        g.interfaceDeclaration,
-        g.delegateDeclaration,
-        g.structDeclaration,
-        g.enumDeclaration);
+        CSharpGrammarImpl.namespaceDeclaration,
+        CSharpGrammarImpl.classDeclaration,
+        CSharpGrammarImpl.interfaceDeclaration,
+        CSharpGrammarImpl.delegateDeclaration,
+        CSharpGrammarImpl.structDeclaration,
+        CSharpGrammarImpl.enumDeclaration);
 
-    keywordMap.put(g.classDeclaration, CSharpKeyword.CLASS);
-    metricMap.put(g.classDeclaration, CSharpMetric.CLASSES);
-    keywordMap.put(g.interfaceDeclaration, CSharpKeyword.INTERFACE);
-    metricMap.put(g.interfaceDeclaration, CSharpMetric.INTERFACES);
-    keywordMap.put(g.delegateDeclaration, CSharpKeyword.DELEGATE);
-    metricMap.put(g.delegateDeclaration, CSharpMetric.DELEGATES);
-    keywordMap.put(g.structDeclaration, CSharpKeyword.STRUCT);
-    metricMap.put(g.structDeclaration, CSharpMetric.STRUCTS);
-    keywordMap.put(g.enumDeclaration, CSharpKeyword.ENUM);
-    metricMap.put(g.enumDeclaration, CSharpMetric.ENUMS);
+    keywordMap.put(CSharpGrammarImpl.classDeclaration, CSharpKeyword.CLASS);
+    metricMap.put(CSharpGrammarImpl.classDeclaration, CSharpMetric.CLASSES);
+    keywordMap.put(CSharpGrammarImpl.interfaceDeclaration, CSharpKeyword.INTERFACE);
+    metricMap.put(CSharpGrammarImpl.interfaceDeclaration, CSharpMetric.INTERFACES);
+    keywordMap.put(CSharpGrammarImpl.delegateDeclaration, CSharpKeyword.DELEGATE);
+    metricMap.put(CSharpGrammarImpl.delegateDeclaration, CSharpMetric.DELEGATES);
+    keywordMap.put(CSharpGrammarImpl.structDeclaration, CSharpKeyword.STRUCT);
+    metricMap.put(CSharpGrammarImpl.structDeclaration, CSharpMetric.STRUCTS);
+    keywordMap.put(CSharpGrammarImpl.enumDeclaration, CSharpKeyword.ENUM);
+    metricMap.put(CSharpGrammarImpl.enumDeclaration, CSharpMetric.ENUMS);
   }
 
   /**
@@ -79,13 +76,13 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
   @Override
   public void visitNode(AstNode astNode) {
     currentNodeType = astNode.getType();
-    if (astNode.is(g.namespaceDeclaration)) {
+    if (astNode.is(CSharpGrammarImpl.namespaceDeclaration)) {
       namespaceName = extractNamespaceSignature(astNode);
     } else {
       String typeName = extractTypeName(astNode);
       typeNameStack.push(typeName);
       SourceType type = null;
-      if (currentNodeType.equals(g.classDeclaration)) {
+      if (currentNodeType.equals(CSharpGrammarImpl.classDeclaration)) {
         type = new SourceClass(extractTypeSignature(typeName), typeName);
       } else {
         type = new SourceType(extractTypeSignature(typeName), typeName);
@@ -100,7 +97,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
    */
   @Override
   public void leaveNode(AstNode astNode) {
-    if (!astNode.is(g.namespaceDeclaration)) {
+    if (!astNode.is(CSharpGrammarImpl.namespaceDeclaration)) {
       getContext().popSourceCode();
       typeNameStack.pop();
     } else {
@@ -134,7 +131,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<CSharpGrammar> {
       typeName.append(typeNameStack.peek());
       typeName.append(".");
     }
-    if (currentNodeType.equals(g.delegateDeclaration)) {
+    if (currentNodeType.equals(CSharpGrammarImpl.delegateDeclaration)) {
       typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getNextSibling().getTokenValue());
     } else {
       typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getTokenValue());

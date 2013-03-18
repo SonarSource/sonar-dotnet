@@ -20,9 +20,9 @@
 package com.sonar.csharp.squid.metric;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -41,7 +41,7 @@ public class CSharpCommentsAndNoSonarVisitorTest {
 
   @Test
   public void testWithIgnoreHeaderComments() {
-    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
@@ -59,7 +59,7 @@ public class CSharpCommentsAndNoSonarVisitorTest {
     CSharpConfiguration conf = new CSharpConfiguration(Charset.forName("UTF-8"));
     conf.setIgnoreHeaderComments(false);
 
-    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(conf);
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(conf);
     scanner.scanFile(readFile("/metric/simpleFile-withComments.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 

@@ -19,43 +19,40 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
 
 /**
  * Visitor that computes the McCabe complexity.
  */
-public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
-
-  private CSharpGrammar g;
+public class CSharpComplexityVisitor extends SquidAstVisitor<Grammar> {
 
   /**
    * {@inheritDoc}
    */
   @Override
   public void init() {
-    g = getContext().getGrammar();
-
     subscribeTo(
-        g.ifStatement,
-        g.switchStatement,
-        g.labeledStatement,
-        g.whileStatement,
-        g.doStatement,
-        g.forStatement,
-        g.returnStatement,
-        g.methodBody,
-        g.accessorBody,
-        g.addAccessorDeclaration,
-        g.removeAccessorDeclaration,
-        g.operatorBody,
-        g.constructorBody,
-        g.destructorBody,
-        g.staticConstructorBody,
+        CSharpGrammarImpl.ifStatement,
+        CSharpGrammarImpl.switchStatement,
+        CSharpGrammarImpl.labeledStatement,
+        CSharpGrammarImpl.whileStatement,
+        CSharpGrammarImpl.doStatement,
+        CSharpGrammarImpl.forStatement,
+        CSharpGrammarImpl.returnStatement,
+        CSharpGrammarImpl.methodBody,
+        CSharpGrammarImpl.accessorBody,
+        CSharpGrammarImpl.addAccessorDeclaration,
+        CSharpGrammarImpl.removeAccessorDeclaration,
+        CSharpGrammarImpl.operatorBody,
+        CSharpGrammarImpl.constructorBody,
+        CSharpGrammarImpl.destructorBody,
+        CSharpGrammarImpl.staticConstructorBody,
         CSharpPunctuator.AND_OP,
         CSharpPunctuator.OR_OP,
         CSharpKeyword.CASE);
@@ -70,7 +67,7 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
       // this is an empty declaration
       return;
     }
-    if (node.is(g.returnStatement) && isLastReturnStatement(node)) {
+    if (node.is(CSharpGrammarImpl.returnStatement) && isLastReturnStatement(node)) {
       // last return of a block, do not count +1
       return;
     }
@@ -80,7 +77,7 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
   private boolean isLastReturnStatement(AstNode node) {
     AstNode currentNode = node;
     AstNode parent = currentNode.getParent();
-    while (!parent.is(g.block)) {
+    while (!parent.is(CSharpGrammarImpl.block)) {
       currentNode = parent;
       parent = currentNode.getParent();
     }
@@ -96,14 +93,14 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<CSharpGrammar> {
 
   private boolean isMemberBloc(AstNode parent) {
     return parent.is(
-        g.methodBody,
-        g.accessorBody,
-        g.addAccessorDeclaration,
-        g.removeAccessorDeclaration,
-        g.operatorBody,
-        g.constructorBody,
-        g.destructorBody,
-        g.staticConstructorBody);
+        CSharpGrammarImpl.methodBody,
+        CSharpGrammarImpl.accessorBody,
+        CSharpGrammarImpl.addAccessorDeclaration,
+        CSharpGrammarImpl.removeAccessorDeclaration,
+        CSharpGrammarImpl.operatorBody,
+        CSharpGrammarImpl.constructorBody,
+        CSharpGrammarImpl.destructorBody,
+        CSharpGrammarImpl.staticConstructorBody);
   }
 
 }

@@ -20,7 +20,7 @@
 package org.sonar.plugins.csharp.squid.check;
 
 import com.google.common.collect.Lists;
-import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.checks.SquidCheck;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.ServerExtension;
@@ -31,7 +31,7 @@ import java.util.Collection;
  * Abstract class that every check developed for the C# language should extend to be automatically injected in the C# plugin.
  *
  */
-public class CSharpCheck extends SquidCheck<CSharpGrammar> implements ServerExtension, BatchExtension {
+public class CSharpCheck extends SquidCheck<Grammar> implements ServerExtension, BatchExtension {
 
   /**
    * Turns an array of {@link CSharpCheck} objects into a collection of their corresponding class.

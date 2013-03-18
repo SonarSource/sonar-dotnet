@@ -20,14 +20,15 @@
 package com.sonar.csharp.squid.scanner;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
 import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
 import com.sonar.sslr.api.CommentAnalyser;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
@@ -43,12 +44,12 @@ public final class CSharpAstScanner {
   private CSharpAstScanner() {
   }
 
-  public static AstScanner<CSharpGrammar> create(CSharpConfiguration conf, SquidAstVisitor<CSharpGrammar>... visitors) {
+  public static AstScanner<Grammar> create(CSharpConfiguration conf, SquidAstVisitor<Grammar>... visitors) {
 
-    final SquidAstVisitorContextImpl<CSharpGrammar> context = new SquidAstVisitorContextImpl<CSharpGrammar>(new SourceProject("C# Project"));
-    final Parser<CSharpGrammar> parser = CSharpParser.create(conf);
+    final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<Grammar>(new SourceProject("C# Project"));
+    final Parser<Grammar> parser = CSharpParser.create(conf);
 
-    AstScanner.Builder<CSharpGrammar> builder = AstScanner.<CSharpGrammar> builder(context).setBaseParser(parser);
+    AstScanner.Builder<Grammar> builder = AstScanner.<Grammar> builder(context).setBaseParser(parser);
 
     /* Metrics */
     builder.withMetrics(CSharpMetric.values());
@@ -83,25 +84,37 @@ public final class CSharpAstScanner {
     builder.withSquidAstVisitor(new CSharpMemberVisitor());
 
     /* Metrics */
-    builder.withSquidAstVisitor(new LinesVisitor<CSharpGrammar>(CSharpMetric.LINES));
-    builder.withSquidAstVisitor(new LinesOfCodeVisitor<CSharpGrammar>(CSharpMetric.LINES_OF_CODE));
-    builder.withSquidAstVisitor(CommentsVisitor.<CSharpGrammar> builder()
+    builder.withSquidAstVisitor(new LinesVisitor<Grammar>(CSharpMetric.LINES));
+    builder.withSquidAstVisitor(new LinesOfCodeVisitor<Grammar>(CSharpMetric.LINES_OF_CODE));
+    builder.withSquidAstVisitor(CommentsVisitor.<Grammar> builder()
         .withCommentMetric(CSharpMetric.COMMENT_LINES)
         .withBlankCommentMetric(CSharpMetric.COMMENT_BLANK_LINES)
         .withNoSonar(true)
         .withIgnoreHeaderComment(conf.getIgnoreHeaderComments())
         .build());
-    builder.withSquidAstVisitor(CounterVisitor.<CSharpGrammar> builder()
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar> builder()
         .setMetricDef(CSharpMetric.STATEMENTS)
-        .subscribeTo(parser.getGrammar().labeledStatement, parser.getGrammar().declarationStatement, parser.getGrammar().expressionStatement,
-            parser.getGrammar().selectionStatement, parser.getGrammar().iterationStatement, parser.getGrammar().jumpStatement, parser.getGrammar().tryStatement,
-            parser.getGrammar().checkedStatement, parser.getGrammar().uncheckedStatement, parser.getGrammar().lockStatement, parser.getGrammar().usingStatement,
-            parser.getGrammar().yieldStatement)
+        .subscribeTo(
+            CSharpGrammarImpl.labeledStatement,
+            CSharpGrammarImpl.declarationStatement,
+            CSharpGrammarImpl.expressionStatement,
+            CSharpGrammarImpl.selectionStatement,
+            CSharpGrammarImpl.iterationStatement,
+            CSharpGrammarImpl.jumpStatement,
+            CSharpGrammarImpl.tryStatement,
+            CSharpGrammarImpl.checkedStatement,
+            CSharpGrammarImpl.uncheckedStatement,
+            CSharpGrammarImpl.lockStatement,
+            CSharpGrammarImpl.usingStatement,
+            CSharpGrammarImpl.yieldStatement)
         .build());
-    builder.withSquidAstVisitor(CounterVisitor.<CSharpGrammar> builder()
+    builder.withSquidAstVisitor(CounterVisitor.<Grammar> builder()
         .setMetricDef(CSharpMetric.ACCESSORS)
-        .subscribeTo(parser.getGrammar().getAccessorDeclaration, parser.getGrammar().setAccessorDeclaration, parser.getGrammar().addAccessorDeclaration,
-            parser.getGrammar().removeAccessorDeclaration)
+        .subscribeTo(
+            CSharpGrammarImpl.getAccessorDeclaration,
+            CSharpGrammarImpl.setAccessorDeclaration,
+            CSharpGrammarImpl.addAccessorDeclaration,
+            CSharpGrammarImpl.removeAccessorDeclaration)
         .build());
 
     /* Visitors */
@@ -109,7 +122,7 @@ public final class CSharpAstScanner {
     builder.withSquidAstVisitor(new CSharpPublicApiVisitor());
 
     /* External visitors (typically Check ones) */
-    for (SquidAstVisitor<CSharpGrammar> visitor : visitors) {
+    for (SquidAstVisitor<Grammar> visitor : visitors) {
       builder.withSquidAstVisitor(visitor);
     }
 

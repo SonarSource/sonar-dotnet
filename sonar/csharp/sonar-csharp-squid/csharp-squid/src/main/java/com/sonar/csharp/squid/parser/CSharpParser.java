@@ -20,8 +20,8 @@
 package com.sonar.csharp.squid.parser;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.lexer.CSharpLexer;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import com.sonar.sslr.impl.events.ParsingEventListener;
 
@@ -33,13 +33,15 @@ public final class CSharpParser {
   private CSharpParser() {
   }
 
-  public static Parser<CSharpGrammar> create(ParsingEventListener... parsingEventListeners) {
+  public static Parser<Grammar> create(ParsingEventListener... parsingEventListeners) {
     return create(new CSharpConfiguration(), parsingEventListeners);
   }
 
-  public static Parser<CSharpGrammar> create(CSharpConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder((CSharpGrammar) new CSharpGrammarImpl()).withLexer(CSharpLexer.create(conf))
-        .setParsingEventListeners(parsingEventListeners).build();
+  public static Parser<Grammar> create(CSharpConfiguration conf, ParsingEventListener... parsingEventListeners) {
+    return Parser.builder(CSharpGrammarImpl.create().buildWithMemoizationOfMatchesForAllRules())
+        .withLexer(CSharpLexer.create(conf))
+        .setParsingEventListeners(parsingEventListeners)
+        .build();
   }
 
 }

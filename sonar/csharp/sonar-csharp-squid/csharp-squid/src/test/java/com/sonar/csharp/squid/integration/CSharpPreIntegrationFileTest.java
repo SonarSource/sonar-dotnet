@@ -20,8 +20,8 @@
 package com.sonar.csharp.squid.integration;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class CSharpPreIntegrationFileTest {
 
   private final String filePath = "/parser/cSharpSyntaxAllInOneFile.cs";
   private File cSharpFile;
-  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<Grammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
 
   @Before
   public void init() throws Exception {

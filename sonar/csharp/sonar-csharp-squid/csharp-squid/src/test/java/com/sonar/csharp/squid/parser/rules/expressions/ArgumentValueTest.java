@@ -19,31 +19,24 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ArgumentValueTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class ArgumentValueTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.argumentValue);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.argumentValue));
   }
 
   @Test
   public void ok() {
-    g.expression.mock();
-    g.variableReference.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.variableReference).mock();
 
     assertThat(p)
         .matches("expression")

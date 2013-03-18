@@ -19,34 +19,27 @@
  */
 package com.sonar.csharp.squid.parser.rules.delegates;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class DelegateDeclarationTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class DelegateDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.delegateDeclaration);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.delegateDeclaration));
   }
 
   @Test
   public void ok() {
-    g.attributes.mock();
-    g.returnType.mock();
-    g.variantTypeParameterList.mock();
-    g.formalParameterList.mock();
-    g.typeParameterConstraintsClauses.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.returnType).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.variantTypeParameterList).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
 
     assertThat(p)
         .matches("delegate returnType id();")

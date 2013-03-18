@@ -19,32 +19,25 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class FixedStatementTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class FixedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.fixedStatement);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.fixedStatement));
   }
 
   @Test
   public void ok() {
-    g.pointerType.mock();
-    g.fixedPointerDeclarator.mock();
-    g.embeddedStatement.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.pointerType).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.fixedPointerDeclarator).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
 
     assertThat(p)
         .matches("fixed(pointerType fixedPointerDeclarator) embeddedStatement")

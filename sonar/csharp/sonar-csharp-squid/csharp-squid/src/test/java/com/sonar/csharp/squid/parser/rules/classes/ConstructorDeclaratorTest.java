@@ -19,27 +19,20 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ConstructorDeclaratorTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class ConstructorDeclaratorTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.constructorDeclarator);
-    g.formalParameterList.mock();
-    g.constructorInitializer.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.constructorDeclarator));
+    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.constructorInitializer).mock();
   }
 
   @Test

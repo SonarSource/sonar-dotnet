@@ -20,7 +20,7 @@
 package com.sonar.csharp.squid.parser;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -32,7 +32,7 @@ import java.nio.charset.Charset;
  */
 public class CSharpParserTest {
 
-  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<Grammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
 
   @Test
   public void testParsingSimpleSourceFile() {

@@ -20,9 +20,9 @@
 package com.sonar.csharp.checks;
 
 import com.google.common.collect.Sets;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.squid.checks.SquidCheck;
@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
   key = "CommentedCode",
   priority = Priority.BLOCKER)
 @BelongsToProfile(title = CSharpChecksConstants.SONAR_CSHARP_WAY_PROFILE_KEY, priority = Priority.BLOCKER)
-public class CommentedCodeCheck extends SquidCheck<CSharpGrammar> implements AstAndTokenVisitor {
+public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final double THRESHOLD = 0.94;
 

@@ -20,11 +20,11 @@
 package com.sonar.csharp.squid.metric;
 
 import com.google.common.collect.Sets;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.GenericTokenType;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.squid.SquidAstVisitor;
@@ -40,13 +40,13 @@ import java.util.Set;
 /**
  * Visitor that computes the CoreMetrics.NCLOC_DATA_KEY & CoreMetrics.COMMENT_LINES_DATA_KEY metrics used by the DevCockpit.
  */
-public class CSharpFileLinesVisitor extends SquidAstVisitor<CSharpGrammar> implements AstAndTokenVisitor {
+public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
-  private Project project;
-  private FileLinesContextFactory fileLinesContextFactory;
+  private final Project project;
+  private final FileLinesContextFactory fileLinesContextFactory;
   private FileLinesContext fileLinesContext;
-  private Set<Integer> linesOfCode = Sets.newHashSet();
-  private Set<Integer> linesOfComments = Sets.newHashSet();
+  private final Set<Integer> linesOfCode = Sets.newHashSet();
+  private final Set<Integer> linesOfComments = Sets.newHashSet();
 
   public CSharpFileLinesVisitor(Project project, FileLinesContextFactory fileLinesContextFactory) {
     this.project = project;

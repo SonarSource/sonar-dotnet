@@ -19,30 +19,23 @@
  */
 package com.sonar.csharp.squid.parser.rules.basic;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.nio.charset.Charset;
 
 import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
 import static com.sonar.sslr.test.parser.ParserMatchers.parse;
 import static org.junit.Assert.assertThat;
 
-public class CompilationUnitTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class CompilationUnitTest extends RuleTest {
 
   @Before
   public void init() {
-    g.externAliasDirective.mock();
-    g.usingDirective.mock();
-    g.globalAttributes.mock();
-    g.namespaceMemberDeclaration.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.externAliasDirective).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.usingDirective).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.globalAttributes).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.namespaceMemberDeclaration).mock();
   }
 
   @Test

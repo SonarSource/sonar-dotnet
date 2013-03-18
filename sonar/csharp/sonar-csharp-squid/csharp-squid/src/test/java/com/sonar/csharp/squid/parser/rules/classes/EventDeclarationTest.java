@@ -19,34 +19,27 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class EventDeclarationTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class EventDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.eventDeclaration);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.eventDeclaration));
   }
 
   @Test
   public void ok() {
-    g.attributes.mock();
-    g.type.mock();
-    g.variableDeclarator.mock();
-    g.memberName.mock();
-    g.eventAccessorDeclarations.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.variableDeclarator).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.eventAccessorDeclarations).mock();
 
     assertThat(p)
         .matches("event type variableDeclarator;")
@@ -58,11 +51,11 @@ public class EventDeclarationTest {
 
   @Test
   public void ko() {
-    g.attributes.mock();
-    g.type.mock();
-    g.variableDeclarator.mock();
-    g.memberName.mock();
-    g.eventAccessorDeclarations.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.variableDeclarator).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.eventAccessorDeclarations).mock();
 
     assertThat(p)
         .notMatches("event type;")

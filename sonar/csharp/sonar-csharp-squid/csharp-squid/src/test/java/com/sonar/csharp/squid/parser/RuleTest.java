@@ -17,33 +17,15 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.squid.parser.rules.unsafe;
+package com.sonar.csharp.squid.parser;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
-import com.sonar.csharp.squid.parser.RuleTest;
-import org.junit.Before;
-import org.junit.Test;
+import com.google.common.base.Charsets;
+import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.impl.Parser;
 
-import static org.sonar.sslr.tests.Assertions.assertThat;
+public abstract class RuleTest {
 
-public class PrimaryNoArrayCreationExpressionTest extends RuleTest {
-
-  @Before
-  public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.primaryNoArrayCreationExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.sizeOfExpression).mock();
-  }
-
-  @Test
-  public void ok() {
-    assertThat(p)
-        .matches("sizeOfExpression");
-  }
-
-  @Test
-  public void ko() {
-    assertThat(p)
-        .notMatches("");
-  }
+  protected Parser<Grammar> p = CSharpParser.create(new CSharpConfiguration(Charsets.UTF_8));
 
 }

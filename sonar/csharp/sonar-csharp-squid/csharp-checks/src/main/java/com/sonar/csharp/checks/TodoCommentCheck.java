@@ -19,36 +19,31 @@
  */
 package com.sonar.csharp.checks;
 
-import org.sonar.check.RuleProperty;
-
+import com.sonar.sslr.api.AstAndTokenVisitor;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.api.Token;
+import com.sonar.sslr.api.Trivia;
+import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Cardinality;
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
+import org.sonar.check.RuleProperty;
 
 import java.util.regex.Pattern;
 
-import com.sonar.sslr.api.Trivia;
-
-import com.sonar.sslr.api.Token;
-
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.squid.checks.SquidCheck;
-
-import org.sonar.check.BelongsToProfile;
-import org.sonar.check.Priority;
-import org.sonar.check.Rule;
-
 @Rule(
-    key = "TodoComment",
-    cardinality = Cardinality.MULTIPLE,
-    priority = Priority.MAJOR)
+  key = "TodoComment",
+  cardinality = Cardinality.MULTIPLE,
+  priority = Priority.MAJOR)
 @BelongsToProfile(title = CSharpChecksConstants.SONAR_CSHARP_WAY_PROFILE_KEY, priority = Priority.MAJOR)
-public class TodoCommentCheck extends SquidCheck<CSharpGrammar> implements AstAndTokenVisitor {
+public class TodoCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final String DEFAULT_PATTERN = "(TODO)|(todo)|(Todo)";
 
   @RuleProperty(
-      key = "commentPattern",
-      defaultValue = DEFAULT_PATTERN)
+    key = "commentPattern",
+    defaultValue = DEFAULT_PATTERN)
   public String commentPattern = DEFAULT_PATTERN;
 
   private final Pattern regexpToDivideStringByLine = Pattern.compile("(\r?\n)|(\r)");
@@ -69,7 +64,7 @@ public class TodoCommentCheck extends SquidCheck<CSharpGrammar> implements AstAn
 
         for (int lineOffset = 0; lineOffset < lines.length; lineOffset++) {
           if (regexpCommentPattern.matcher(lines[lineOffset]).find()) {
-            getContext().createLineViolation(this, "This comment matches with pattern "+commentPattern,
+            getContext().createLineViolation(this, "This comment matches with pattern " + commentPattern,
                 trivia.getToken().getLine() + lineOffset);
             break;
           }

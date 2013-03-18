@@ -20,8 +20,8 @@
 package org.sonar.plugins.csharp.squid.integration;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.squid.CSharpResourcesBridge;
-import org.sonar.squid.Squid;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceProject;
@@ -48,15 +47,14 @@ import static org.mockito.Mockito.when;
 public class CSharpResourcesBridgeTest {
 
   private static CSharpResourcesBridge cSharpResourcesBridge;
-  private static Squid squid;
 
   @BeforeClass
   public static void init() {
     cSharpResourcesBridge = new CSharpResourcesBridge();
-    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFiles(FileUtils.listFiles(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()), new SuffixFileFilter("cs"),
         FileFilterUtils.directoryFileFilter()));
-    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+    scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
     Collection<SourceCode> squidFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     for (SourceCode squidFile : squidFiles) {

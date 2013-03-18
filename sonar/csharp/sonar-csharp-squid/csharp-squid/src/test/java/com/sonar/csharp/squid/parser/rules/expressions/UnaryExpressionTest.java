@@ -19,31 +19,24 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class UnaryExpressionTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class UnaryExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.unaryExpression);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.unaryExpression));
   }
 
   @Test
   public void ok() {
-    g.primaryExpression.mock();
-    g.type.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.primaryExpression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
 
     assertThat(p)
         .matches("primaryExpression")

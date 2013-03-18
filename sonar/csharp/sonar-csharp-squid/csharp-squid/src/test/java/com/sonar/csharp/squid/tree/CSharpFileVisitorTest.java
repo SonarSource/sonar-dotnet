@@ -20,9 +20,10 @@
 package com.sonar.csharp.squid.tree;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.parser.RuleTest;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -35,11 +36,11 @@ import java.nio.charset.Charset;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class CSharpFileVisitorTest {
+public class CSharpFileVisitorTest extends RuleTest {
 
   @Test
   public void testScanFile() {
-    AstScanner<CSharpGrammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFile(readFile("/metric/Money.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 

@@ -19,33 +19,26 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ForStatementTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class ForStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.forStatement);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.forStatement));
   }
 
   @Test
   public void ok() {
-    g.forInitializer.mock();
-    g.forCondition.mock();
-    g.forIterator.mock();
-    g.embeddedStatement.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.forInitializer).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.forCondition).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.forIterator).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
 
     assertThat(p)
         .matches("for ( ;; ) embeddedStatement")

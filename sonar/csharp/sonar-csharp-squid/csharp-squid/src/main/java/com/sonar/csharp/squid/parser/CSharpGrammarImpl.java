@@ -19,8 +19,8 @@
  */
 package com.sonar.csharp.squid.parser;
 
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.sslr.impl.matcher.GrammarFunctions;
+import org.sonar.sslr.grammar.GrammarRuleKey;
+import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
 import static com.sonar.csharp.squid.api.CSharpKeyword.ABSTRACT;
 import static com.sonar.csharp.squid.api.CSharpKeyword.AS;
@@ -152,27 +152,336 @@ import static com.sonar.csharp.squid.api.CSharpTokenType.REAL_LITERAL;
 import static com.sonar.csharp.squid.api.CSharpTokenType.STRING_LITERAL;
 import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Advanced.bridge;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.next;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Predicate.not;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.and;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.firstOf;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.o2n;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.one2n;
-import static com.sonar.sslr.impl.matcher.GrammarFunctions.Standard.opt;
 
 /**
  * Definition of each element of the C# grammar, based on the C# language specification 4.0
  */
-public class CSharpGrammarImpl extends CSharpGrammar {
+public enum CSharpGrammarImpl implements GrammarRuleKey {
+
+  literal,
+  rightShift,
+  rightShiftAssignment,
+
+  // A.2.1 Basic concepts
+  compilationUnit,
+  namespaceName,
+  typeName,
+  namespaceOrTypeName,
+
+  // A.2.2 Types
+  simpleType,
+  numericType,
+  integralType,
+  floatingPointType,
+
+  rankSpecifier,
+  rankSpecifiers,
+
+  typePrimary,
+  nullableType,
+  pointerType,
+  arrayType,
+  type,
+
+  nonArrayType,
+  nonNullableValueType,
+
+  classType,
+  interfaceType,
+  enumType,
+  delegateType,
+
+  // A.2.3 Variables
+  variableReference,
+
+  // A.2.4 Expressions
+  primaryExpressionPrimary,
+  primaryNoArrayCreationExpression,
+  postElementAccess,
+  postMemberAccess,
+
+  postInvocation,
+  postIncrement,
+  postDecrement,
+  postPointerMemberAccess,
+
+  postfixExpression,
+  primaryExpression,
+
+  argumentList,
+  argument,
+  argumentName,
+  argumentValue,
+  simpleName,
+  parenthesizedExpression,
+  memberAccess,
+  predefinedType,
+  thisAccess,
+  baseAccess,
+  objectCreationExpression,
+  objectOrCollectionInitializer,
+  objectInitializer,
+  memberInitializer,
+  initializerValue,
+  collectionInitializer,
+  elementInitializer,
+  expressionList,
+  arrayCreationExpression,
+  delegateCreationExpression,
+  anonymousObjectCreationExpression,
+  anonymousObjectInitializer,
+  memberDeclarator,
+  typeOfExpression,
+  unboundTypeName,
+  genericDimensionSpecifier,
+  checkedExpression,
+  uncheckedExpression,
+  defaultValueExpression,
+  unaryExpression,
+  multiplicativeExpression,
+  additiveExpression,
+  shiftExpression,
+  relationalExpression,
+  equalityExpression,
+  andExpression,
+  exclusiveOrExpression,
+  inclusiveOrExpression,
+  conditionalAndExpression,
+  conditionalOrExpression,
+  nullCoalescingExpression,
+  conditionalExpression,
+  lambdaExpression,
+  anonymousMethodExpression,
+  anonymousFunctionSignature,
+  explicitAnonymousFunctionSignature,
+  explicitAnonymousFunctionParameter,
+  anonymousFunctionParameterModifier,
+  implicitAnonymousFunctionSignature,
+  implicitAnonymousFunctionParameter,
+  anonymousFunctionBody,
+  queryExpression,
+  fromClause,
+  queryBody,
+  queryBodyClause,
+  letClause,
+  whereClause,
+  joinClause,
+  joinIntoClause,
+  orderByClause,
+  ordering,
+  orderingDirection,
+  selectOrGroupClause,
+  selectClause,
+  groupClause,
+  queryContinuation,
+  assignment,
+  expression,
+  nonAssignmentExpression,
+
+  // A.2.5 Statement
+  statement,
+  embeddedStatement,
+  block,
+  labeledStatement,
+  declarationStatement,
+  localVariableDeclaration,
+  localVariableDeclarator,
+  localVariableInitializer,
+  localConstantDeclaration,
+  constantDeclarator,
+  expressionStatement,
+  selectionStatement,
+  ifStatement,
+  switchStatement,
+  switchSection,
+  switchLabel,
+  iterationStatement,
+  whileStatement,
+  doStatement,
+  forStatement,
+  forInitializer,
+  forCondition,
+  forIterator,
+  statementExpressionList,
+  foreachStatement,
+  jumpStatement,
+  breakStatement,
+  continueStatement,
+  gotoStatement,
+  returnStatement,
+  throwStatement,
+  tryStatement,
+  catchClauses,
+  specificCatchClause,
+  generalCatchClause,
+  finallyClause,
+  checkedStatement,
+  uncheckedStatement,
+  lockStatement,
+  usingStatement,
+  resourceAcquisition,
+  yieldStatement,
+  namespaceDeclaration,
+  qualifiedIdentifier,
+  namespaceBody,
+  externAliasDirective,
+  usingDirective,
+  usingAliasDirective,
+  usingNamespaceDirective,
+  namespaceMemberDeclaration,
+  typeDeclaration,
+  qualifiedAliasMember,
+
+  // A.2.6 Classes
+  classDeclaration,
+  classModifier,
+  classBase,
+  interfaceTypeList,
+  classBody,
+  classMemberDeclaration,
+  constantDeclaration,
+  constantModifier,
+  fieldDeclaration,
+  fieldModifier,
+  variableDeclarator,
+  variableInitializer,
+  methodDeclaration,
+  methodHeader,
+  methodModifier,
+  returnType,
+  memberName,
+  methodBody,
+  formalParameterList,
+  fixedParameters,
+  fixedParameter,
+  parameterModifier,
+  parameterArray,
+  propertyDeclaration,
+  propertyModifier,
+  accessorDeclarations,
+  getAccessorDeclaration,
+  setAccessorDeclaration,
+  accessorModifier,
+  accessorBody,
+  eventDeclaration,
+  eventModifier,
+  eventAccessorDeclarations,
+  addAccessorDeclaration,
+  removeAccessorDeclaration,
+  indexerDeclaration,
+  indexerModifier,
+  indexerDeclarator,
+  operatorDeclaration,
+  operatorModifier,
+  operatorDeclarator,
+  unaryOperatorDeclarator,
+  overloadableUnaryOperator,
+  binaryOperatorDeclarator,
+  overloadableBinaryOperator,
+  conversionOperatorDeclarator,
+  operatorBody,
+  constructorDeclaration,
+  constructorModifier,
+  constructorDeclarator,
+  constructorInitializer,
+  constructorBody,
+  staticConstructorDeclaration,
+  staticConstructorModifiers,
+  staticConstructorBody,
+  destructorDeclaration,
+  destructorBody,
+
+  // A.2.7 Struct
+  structDeclaration,
+  structModifier,
+  structInterfaces,
+  structBody,
+  structMemberDeclaration,
+
+  // A.2.8 Arrays
+  arrayInitializer,
+  variableInitializerList,
+
+  // A.2.9 Interfaces
+  interfaceDeclaration,
+  interfaceModifier,
+  variantTypeParameterList,
+  variantTypeParameter,
+  varianceAnnotation,
+  interfaceBase,
+  interfaceBody,
+  interfaceMemberDeclaration,
+  interfaceMethodDeclaration,
+  interfacePropertyDeclaration,
+  interfaceAccessors,
+  interfaceEventDeclaration,
+  interfaceIndexerDeclaration,
+
+  // A.2.10 Enums
+  enumDeclaration,
+  enumBase,
+  enumBody,
+  enumModifier,
+  enumMemberDeclarations,
+  enumMemberDeclaration,
+
+  // A.2.11 Delegates
+  delegateDeclaration,
+  delegateModifier,
+
+  // A.2.12 Attributes
+  globalAttributes,
+  globalAttributeSection,
+  globalAttributeTargetSpecifier,
+  globalAttributeTarget,
+  attributes,
+  attributeSection,
+  attributeTargetSpecifier,
+  attributeTarget,
+  attributeList,
+  attribute,
+  attributeName,
+  attributeArguments,
+  positionalArgument,
+  namedArgument,
+  attributeArgumentExpression,
+
+  // A.2.13 Generics
+  typeParameterList,
+  typeParameters,
+  typeParameter,
+  typeArgumentList,
+  typeArgument,
+  typeParameterConstraintsClauses,
+  typeParameterConstraintsClause,
+  typeParameterConstraints,
+  primaryConstraint,
+  secondaryConstraints,
+  constructorConstraint,
+
+  // A.3 Unsafe code
+  unsafeStatement,
+  pointerIndirectionExpression,
+  pointerElementAccess,
+  addressOfExpression,
+  sizeOfExpression,
+  fixedStatement,
+  fixedPointerDeclarator,
+  fixedPointerInitializer,
+  fixedSizeBufferDeclaration,
+  fixedSizeBufferModifier,
+  fixedSizeBufferDeclarator,
+  stackallocInitializer;
 
   private static final String SET = "set";
   private static final String GET = "get";
   private static final String PARTIAL = "partial";
 
-  public CSharpGrammarImpl() {
-    literal.is(
-        firstOf(
+  public static LexerfulGrammarBuilder create() {
+    LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
+
+    b.rule(literal).is(
+        b.firstOf(
             TRUE,
             FALSE,
             INTEGER_DEC_LITERAL,
@@ -181,77 +490,79 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             CHARACTER_LITERAL,
             STRING_LITERAL,
             NULL));
-    rightShift.is(SUPERIOR, SUPERIOR);
-    rightShiftAssignment.is(SUPERIOR, GE_OP);
+    b.rule(rightShift).is(SUPERIOR, SUPERIOR);
+    b.rule(rightShiftAssignment).is(SUPERIOR, GE_OP);
 
     // A.2.1 Basic concepts
-    basicConcepts();
+    basicConcepts(b);
 
     // A.2.2 Types
-    types();
+    types(b);
 
     // A.2.3 Variables
-    variables();
+    variables(b);
 
     // A.2.4 Expressions
-    expressions();
+    expressions(b);
 
     // A.2.5 Statements
-    statements();
+    statements(b);
 
     // A.2.6 Classes
-    classes();
+    classes(b);
 
     // A.2.7 Struct
-    structs();
+    structs(b);
 
     // A.2.8 Arrays
-    arrays();
+    arrays(b);
 
     // A.2.9 Interfaces
-    interfaces();
+    interfaces(b);
 
     // A.2.10 Enums
-    enums();
+    enums(b);
 
     // A.2.11 Delegates
-    delegates();
+    delegates(b);
 
     // A.2.12 Attributes
-    attributes();
+    attributes(b);
 
     // A.2.13 Generics
-    generics();
+    generics(b);
 
     // A.3 Unsafe code
-    unsafe();
+    unsafe(b);
 
-    GrammarFunctions.enableMemoizationOfMatchesForAllRules(this);
+    b.setRootRule(compilationUnit);
+
+    return b;
   }
 
-  private void basicConcepts() {
-    compilationUnit.is(o2n(externAliasDirective), o2n(usingDirective), opt(globalAttributes), o2n(namespaceMemberDeclaration), EOF);
-    namespaceName.is(namespaceOrTypeName);
-    typeName.is(namespaceOrTypeName);
-    namespaceOrTypeName.is(
-        firstOf(
+  private static void basicConcepts(LexerfulGrammarBuilder b) {
+    b.rule(compilationUnit).is(b.zeroOrMore(externAliasDirective), b.zeroOrMore(usingDirective), b.optional(globalAttributes), b.zeroOrMore(namespaceMemberDeclaration), EOF);
+    b.rule(namespaceName).is(namespaceOrTypeName);
+    b.rule(typeName).is(namespaceOrTypeName);
+    b.rule(namespaceOrTypeName).is(
+        b.firstOf(
             qualifiedAliasMember,
-            and(IDENTIFIER, opt(typeArgumentList))),
-        o2n(DOT, IDENTIFIER, opt(typeArgumentList)));
+            b.sequence(IDENTIFIER, b.optional(typeArgumentList))),
+        b.zeroOrMore(DOT, IDENTIFIER, b.optional(typeArgumentList)));
   }
 
-  private void types() {
-    simpleType.is(
-        firstOf(
+  private static void types(LexerfulGrammarBuilder b) {
+    b.rule(simpleType).is(
+        b.firstOf(
             numericType,
             BOOL));
-    numericType.is(
-        firstOf(
+    b.rule(numericType).is(
+        b.firstOf(
             integralType,
             floatingPointType,
             DECIMAL));
-    integralType.is(
-        firstOf(
+    b.rule(integralType).is(
+        b.firstOf(
             SBYTE,
             BYTE,
             SHORT,
@@ -261,66 +572,66 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             LONG,
             ULONG,
             CHAR));
-    floatingPointType.is(
-        firstOf(
+    b.rule(floatingPointType).is(
+        b.firstOf(
             FLOAT,
             DOUBLE));
 
-    rankSpecifier.is(LBRACKET, o2n(COMMA), RBRACKET);
-    rankSpecifiers.is(one2n(rankSpecifier));
+    b.rule(rankSpecifier).is(LBRACKET, b.zeroOrMore(COMMA), RBRACKET);
+    b.rule(rankSpecifiers).is(b.oneOrMore(rankSpecifier));
 
-    typePrimary.is(
-        firstOf(
+    b.rule(typePrimary).is(
+        b.firstOf(
             simpleType,
             "dynamic",
             OBJECT,
             STRING,
             typeName)).skip();
-    nullableType.is(typePrimary, QUESTION, not(and(expression, COLON)));
-    pointerType.is( // Moved from unsafe code to remove the left recursions
-        firstOf(
+    b.rule(nullableType).is(typePrimary, QUESTION, b.nextNot(b.sequence(expression, COLON)));
+    b.rule(pointerType).is(
+        b.firstOf(
             nullableType,
             typePrimary,
             VOID),
         STAR);
-    arrayType.is(
-        firstOf(
+    b.rule(arrayType).is(
+        b.firstOf(
             pointerType,
             nullableType,
             typePrimary),
         rankSpecifiers);
-    type.is(
-        firstOf(
+    b.rule(type).is(
+        b.firstOf(
             arrayType,
             pointerType,
             nullableType,
             typePrimary));
 
-    nonNullableValueType.is(not(nullableType), type);
-    nonArrayType.is(not(arrayType), type);
+    b.rule(nonNullableValueType).is(b.nextNot(nullableType), type);
+    b.rule(nonArrayType).is(b.nextNot(arrayType), type);
 
-    classType.is(
-        firstOf(
+    b.rule(classType).is(
+        b.firstOf(
             "dynamic",
             OBJECT,
             STRING,
             typeName));
-    interfaceType.is(typeName);
-    enumType.is(typeName);
-    delegateType.is(typeName);
+    b.rule(interfaceType).is(typeName);
+    b.rule(enumType).is(typeName);
+    b.rule(delegateType).is(typeName);
   }
 
-  private void variables() {
-    variableReference.is(expression);
+  private static void variables(LexerfulGrammarBuilder b) {
+    b.rule(variableReference).is(expression);
   }
 
-  private void expressions() {
-    primaryExpressionPrimary.is(
-        firstOf(
+  private static void expressions(LexerfulGrammarBuilder b) {
+    b.rule(primaryExpressionPrimary).is(
+        b.firstOf(
             arrayCreationExpression,
             primaryNoArrayCreationExpression)).skip();
-    primaryNoArrayCreationExpression.is(
-        firstOf(
+    b.rule(primaryNoArrayCreationExpression).is(
+        b.firstOf(
             parenthesizedExpression,
             memberAccess,
             thisAccess,
@@ -335,45 +646,43 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             anonymousMethodExpression,
             literal,
             simpleName,
-            // NOTE : unsafe.pointerElementAccess deactivated here because it shadows the "elementAccess" in the main grammar...
-            // Need to look into that later.
             unsafe(sizeOfExpression))).skip();
 
-    postMemberAccess.is(DOT, IDENTIFIER, opt(typeArgumentList));
-    postElementAccess.is(LBRACKET, argumentList, RBRACKET);
-    postPointerMemberAccess.is(PTR_OP, IDENTIFIER);
-    postIncrement.is(INC_OP);
-    postDecrement.is(DEC_OP);
-    postInvocation.is(LPARENTHESIS, opt(argumentList), RPARENTHESIS);
+    b.rule(postMemberAccess).is(DOT, IDENTIFIER, b.optional(typeArgumentList));
+    b.rule(postElementAccess).is(LBRACKET, argumentList, RBRACKET);
+    b.rule(postPointerMemberAccess).is(PTR_OP, IDENTIFIER);
+    b.rule(postIncrement).is(INC_OP);
+    b.rule(postDecrement).is(DEC_OP);
+    b.rule(postInvocation).is(LPARENTHESIS, b.optional(argumentList), RPARENTHESIS);
 
-    postfixExpression.is(
+    b.rule(postfixExpression).is(
         primaryExpressionPrimary,
-        o2n(
-        firstOf(
-            postMemberAccess,
-            postElementAccess,
-            postPointerMemberAccess,
-            postIncrement,
-            postDecrement,
-            postInvocation))).skipIfOneChild();
-    primaryExpression.is(postfixExpression);
+        b.zeroOrMore(
+            b.firstOf(
+                postMemberAccess,
+                postElementAccess,
+                postPointerMemberAccess,
+                postIncrement,
+                postDecrement,
+                postInvocation))).skipIfOneChild();
+    b.rule(primaryExpression).is(postfixExpression);
 
-    argumentList.is(argument, o2n(COMMA, argument));
-    argument.is(opt(argumentName), argumentValue);
-    argumentName.is(IDENTIFIER, COLON);
-    argumentValue.is(
-        firstOf(
+    b.rule(argumentList).is(argument, b.zeroOrMore(COMMA, argument));
+    b.rule(argument).is(b.optional(argumentName), argumentValue);
+    b.rule(argumentName).is(IDENTIFIER, COLON);
+    b.rule(argumentValue).is(
+        b.firstOf(
             expression,
-            and(REF, variableReference),
-            and(OUT, variableReference)));
-    simpleName.is(IDENTIFIER, opt(typeArgumentList));
-    parenthesizedExpression.is(LPARENTHESIS, expression, RPARENTHESIS);
-    memberAccess.is(
-        firstOf(
-            and(qualifiedAliasMember, DOT, IDENTIFIER),
-            and(predefinedType, DOT, IDENTIFIER, opt(typeArgumentList))));
-    predefinedType.is(
-        firstOf(
+            b.sequence(REF, variableReference),
+            b.sequence(OUT, variableReference)));
+    b.rule(simpleName).is(IDENTIFIER, b.optional(typeArgumentList));
+    b.rule(parenthesizedExpression).is(LPARENTHESIS, expression, RPARENTHESIS);
+    b.rule(memberAccess).is(
+        b.firstOf(
+            b.sequence(qualifiedAliasMember, DOT, IDENTIFIER),
+            b.sequence(predefinedType, DOT, IDENTIFIER, b.optional(typeArgumentList))));
+    b.rule(predefinedType).is(
+        b.firstOf(
             BOOL,
             BYTE,
             CHAR,
@@ -389,61 +698,57 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             UINT,
             ULONG,
             USHORT));
-    thisAccess.is(THIS);
-    // NOTE: baseAccess does not exactly stick to the specification: "opt(typeArgumentList)" has been added here, whereas it is not
-    // present in the "base-access" rule in the specification of C# 4.0
-    baseAccess.is(
+    b.rule(thisAccess).is(THIS);
+    b.rule(baseAccess).is(
         BASE,
-        firstOf(
-            and(DOT, IDENTIFIER, opt(typeArgumentList)),
-            and(LBRACKET, argumentList, RBRACKET)));
-    objectCreationExpression.is(
+        b.firstOf(
+            b.sequence(DOT, IDENTIFIER, b.optional(typeArgumentList)),
+            b.sequence(LBRACKET, argumentList, RBRACKET)));
+    b.rule(objectCreationExpression).is(
         NEW, type,
-        firstOf(
-            and(LPARENTHESIS, opt(argumentList), RPARENTHESIS, opt(objectOrCollectionInitializer)),
+        b.firstOf(
+            b.sequence(LPARENTHESIS, b.optional(argumentList), RPARENTHESIS, b.optional(objectOrCollectionInitializer)),
             objectOrCollectionInitializer));
-    objectOrCollectionInitializer.is(
-        firstOf(
+    b.rule(objectOrCollectionInitializer).is(
+        b.firstOf(
             objectInitializer,
             collectionInitializer));
-    objectInitializer.is(LCURLYBRACE, opt(memberInitializer), o2n(COMMA, memberInitializer), opt(COMMA), RCURLYBRACE);
-    memberInitializer.is(IDENTIFIER, EQUAL, initializerValue);
-    initializerValue.is(
-        firstOf(
+    b.rule(objectInitializer).is(LCURLYBRACE, b.optional(memberInitializer), b.zeroOrMore(COMMA, memberInitializer), b.optional(COMMA), RCURLYBRACE);
+    b.rule(memberInitializer).is(IDENTIFIER, EQUAL, initializerValue);
+    b.rule(initializerValue).is(
+        b.firstOf(
             expression,
             objectOrCollectionInitializer));
-    collectionInitializer.is(LCURLYBRACE, elementInitializer, o2n(COMMA, elementInitializer), opt(COMMA), RCURLYBRACE);
-    elementInitializer.is(
-        firstOf(
+    b.rule(collectionInitializer).is(LCURLYBRACE, elementInitializer, b.zeroOrMore(COMMA, elementInitializer), b.optional(COMMA), RCURLYBRACE);
+    b.rule(elementInitializer).is(
+        b.firstOf(
             nonAssignmentExpression,
-            and(LCURLYBRACE, expressionList, RCURLYBRACE)));
-    expressionList.is(expression, o2n(COMMA, expression));
-    arrayCreationExpression.is(
-        firstOf(
-            and(NEW, nonArrayType, LBRACKET, expressionList, RBRACKET, o2n(rankSpecifier), opt(arrayInitializer)),
-            and(NEW, arrayType, arrayInitializer), and(NEW, rankSpecifier, arrayInitializer)));
-    delegateCreationExpression.is(NEW, delegateType, LPARENTHESIS, expression, RPARENTHESIS);
-    anonymousObjectCreationExpression.is(NEW, anonymousObjectInitializer);
-    anonymousObjectInitializer.is(LCURLYBRACE, opt(memberDeclarator), o2n(COMMA, memberDeclarator), opt(COMMA), RCURLYBRACE);
-    // NOTE Rule memberDeclarator is relaxed to accept any expression
-    memberDeclarator.is(opt(IDENTIFIER, EQUAL), expression);
-    // NOTE : typeOfExpression does not exactly stick to the specification, but the bridge makes its easier to parse for now.
-    typeOfExpression.is(TYPEOF, bridge(LPARENTHESIS, RPARENTHESIS));
-    unboundTypeName.is(
-        one2n(
-            IDENTIFIER, opt(DOUBLE_COLON, IDENTIFIER), opt(genericDimensionSpecifier),
-            opt(DOT, IDENTIFIER, opt(genericDimensionSpecifier))), opt(DOT, IDENTIFIER, opt(genericDimensionSpecifier)));
-    genericDimensionSpecifier.is(INFERIOR, o2n(COMMA), SUPERIOR);
-    checkedExpression.is(CHECKED, LPARENTHESIS, expression, RPARENTHESIS);
-    uncheckedExpression.is(UNCHECKED, LPARENTHESIS, expression, RPARENTHESIS);
-    defaultValueExpression.is(DEFAULT, LPARENTHESIS, type, RPARENTHESIS);
+            b.sequence(LCURLYBRACE, expressionList, RCURLYBRACE)));
+    b.rule(expressionList).is(expression, b.zeroOrMore(COMMA, expression));
+    b.rule(arrayCreationExpression).is(
+        b.firstOf(
+            b.sequence(NEW, nonArrayType, LBRACKET, expressionList, RBRACKET, b.zeroOrMore(rankSpecifier), b.optional(arrayInitializer)),
+            b.sequence(NEW, arrayType, arrayInitializer), b.sequence(NEW, rankSpecifier, arrayInitializer)));
+    b.rule(delegateCreationExpression).is(NEW, delegateType, LPARENTHESIS, expression, RPARENTHESIS);
+    b.rule(anonymousObjectCreationExpression).is(NEW, anonymousObjectInitializer);
+    b.rule(anonymousObjectInitializer).is(LCURLYBRACE, b.optional(memberDeclarator), b.zeroOrMore(COMMA, memberDeclarator), b.optional(COMMA), RCURLYBRACE);
+    b.rule(memberDeclarator).is(b.optional(IDENTIFIER, EQUAL), expression);
+    b.rule(typeOfExpression).is(TYPEOF, b.bridge(LPARENTHESIS, RPARENTHESIS));
+    b.rule(unboundTypeName).is(
+        b.oneOrMore(
+            IDENTIFIER, b.optional(DOUBLE_COLON, IDENTIFIER), b.optional(genericDimensionSpecifier),
+            b.optional(DOT, IDENTIFIER, b.optional(genericDimensionSpecifier))), b.optional(DOT, IDENTIFIER, b.optional(genericDimensionSpecifier)));
+    b.rule(genericDimensionSpecifier).is(INFERIOR, b.zeroOrMore(COMMA), SUPERIOR);
+    b.rule(checkedExpression).is(CHECKED, LPARENTHESIS, expression, RPARENTHESIS);
+    b.rule(uncheckedExpression).is(UNCHECKED, LPARENTHESIS, expression, RPARENTHESIS);
+    b.rule(defaultValueExpression).is(DEFAULT, LPARENTHESIS, type, RPARENTHESIS);
 
-    unaryExpression.is(
-        firstOf(
-            and(LPARENTHESIS, type, RPARENTHESIS, unaryExpression),
+    b.rule(unaryExpression).is(
+        b.firstOf(
+            b.sequence(LPARENTHESIS, type, RPARENTHESIS, unaryExpression),
             primaryExpression,
-            and(
-                firstOf(
+            b.sequence(
+                b.firstOf(
                     MINUS,
                     EXCLAMATION,
                     INC_OP,
@@ -452,130 +757,131 @@ public class CSharpGrammarImpl extends CSharpGrammar {
                     PLUS),
                 unaryExpression),
             unsafe(
-            firstOf(
+            b.firstOf(
                 pointerIndirectionExpression,
                 addressOfExpression)))).skipIfOneChild();
 
-    multiplicativeExpression.is(
+    b.rule(multiplicativeExpression).is(
         unaryExpression,
-        o2n(
-            firstOf(
+        b.zeroOrMore(
+            b.firstOf(
                 STAR,
                 SLASH,
                 MODULO),
             unaryExpression)).skipIfOneChild();
-    additiveExpression.is(
+    b.rule(additiveExpression).is(
         multiplicativeExpression,
-        o2n(
-            firstOf(
+        b.zeroOrMore(
+            b.firstOf(
                 PLUS,
                 MINUS),
             multiplicativeExpression)).skipIfOneChild();
-    shiftExpression.is(
+    b.rule(shiftExpression).is(
         additiveExpression,
-        o2n(
-            firstOf(
+        b.zeroOrMore(
+            b.firstOf(
                 LEFT_OP,
                 rightShift),
             additiveExpression)).skipIfOneChild();
-    relationalExpression.is(
+    b.rule(relationalExpression).is(
         shiftExpression,
-        o2n(
-        firstOf(
-            and(
-                firstOf(
-                    INFERIOR,
-                    SUPERIOR,
-                    LE_OP,
-                    GE_OP),
-                shiftExpression),
-            and(
-                firstOf(
-                    IS,
-                    AS),
-                type)))).skipIfOneChild();
-    equalityExpression.is(
+        b.zeroOrMore(
+            b.firstOf(
+                b.sequence(
+                    b.firstOf(
+                        INFERIOR,
+                        SUPERIOR,
+                        LE_OP,
+                        GE_OP),
+                    shiftExpression),
+                b.sequence(
+                    b.firstOf(
+                        IS,
+                        AS),
+                    type)))).skipIfOneChild();
+    b.rule(equalityExpression).is(
         relationalExpression,
-        o2n(
-            firstOf(
+        b.zeroOrMore(
+            b.firstOf(
                 EQ_OP,
                 NE_OP),
             relationalExpression)).skipIfOneChild();
-    andExpression.is(equalityExpression, o2n(AND, equalityExpression)).skipIfOneChild();
-    exclusiveOrExpression.is(andExpression, o2n(XOR, andExpression)).skipIfOneChild();
-    inclusiveOrExpression.is(exclusiveOrExpression, o2n(OR, exclusiveOrExpression)).skipIfOneChild();
-    conditionalAndExpression.is(inclusiveOrExpression, o2n(AND_OP, inclusiveOrExpression)).skipIfOneChild();
-    conditionalOrExpression.is(conditionalAndExpression, o2n(OR_OP, conditionalAndExpression)).skipIfOneChild();
-    nullCoalescingExpression.is(conditionalOrExpression, opt(DOUBLE_QUESTION, nullCoalescingExpression)).skipIfOneChild();
-    conditionalExpression.is(nullCoalescingExpression, opt(QUESTION, expression, COLON, expression)).skipIfOneChild();
-    lambdaExpression.is(anonymousFunctionSignature, LAMBDA, anonymousFunctionBody);
-    anonymousMethodExpression.is(DELEGATE, opt(explicitAnonymousFunctionSignature), block);
-    anonymousFunctionSignature.is(
-        firstOf(
+    b.rule(andExpression).is(equalityExpression, b.zeroOrMore(AND, equalityExpression)).skipIfOneChild();
+    b.rule(exclusiveOrExpression).is(andExpression, b.zeroOrMore(XOR, andExpression)).skipIfOneChild();
+    b.rule(inclusiveOrExpression).is(exclusiveOrExpression, b.zeroOrMore(OR, exclusiveOrExpression)).skipIfOneChild();
+    b.rule(conditionalAndExpression).is(inclusiveOrExpression, b.zeroOrMore(AND_OP, inclusiveOrExpression)).skipIfOneChild();
+    b.rule(conditionalOrExpression).is(conditionalAndExpression, b.zeroOrMore(OR_OP, conditionalAndExpression)).skipIfOneChild();
+    b.rule(nullCoalescingExpression).is(conditionalOrExpression, b.optional(DOUBLE_QUESTION, nullCoalescingExpression)).skipIfOneChild();
+    b.rule(conditionalExpression).is(nullCoalescingExpression, b.optional(QUESTION, expression, COLON, expression)).skipIfOneChild();
+    b.rule(lambdaExpression).is(anonymousFunctionSignature, LAMBDA, anonymousFunctionBody);
+    b.rule(anonymousMethodExpression).is(DELEGATE, b.optional(explicitAnonymousFunctionSignature), block);
+    b.rule(anonymousFunctionSignature).is(
+        b.firstOf(
             explicitAnonymousFunctionSignature,
             implicitAnonymousFunctionSignature));
-    explicitAnonymousFunctionSignature.is(LPARENTHESIS, opt(explicitAnonymousFunctionParameter, o2n(COMMA, explicitAnonymousFunctionParameter)), RPARENTHESIS);
-    explicitAnonymousFunctionParameter.is(opt(anonymousFunctionParameterModifier), type, IDENTIFIER);
-    anonymousFunctionParameterModifier.is(
-        firstOf(
+    b.rule(explicitAnonymousFunctionSignature).is(LPARENTHESIS, b.optional(explicitAnonymousFunctionParameter, b.zeroOrMore(COMMA, explicitAnonymousFunctionParameter)),
+        RPARENTHESIS);
+    b.rule(explicitAnonymousFunctionParameter).is(b.optional(anonymousFunctionParameterModifier), type, IDENTIFIER);
+    b.rule(anonymousFunctionParameterModifier).is(
+        b.firstOf(
             "ref",
             "out"));
-    implicitAnonymousFunctionSignature.is(
-        firstOf(
+    b.rule(implicitAnonymousFunctionSignature).is(
+        b.firstOf(
             implicitAnonymousFunctionParameter,
-            and(LPARENTHESIS, opt(implicitAnonymousFunctionParameter, o2n(COMMA, implicitAnonymousFunctionParameter)), RPARENTHESIS)));
-    implicitAnonymousFunctionParameter.is(IDENTIFIER);
-    anonymousFunctionBody.is(
-        firstOf(
+            b.sequence(LPARENTHESIS, b.optional(implicitAnonymousFunctionParameter, b.zeroOrMore(COMMA, implicitAnonymousFunctionParameter)), RPARENTHESIS)));
+    b.rule(implicitAnonymousFunctionParameter).is(IDENTIFIER);
+    b.rule(anonymousFunctionBody).is(
+        b.firstOf(
             expression,
             block));
-    queryExpression.is(fromClause, queryBody);
-    fromClause.is(
+    b.rule(queryExpression).is(fromClause, queryBody);
+    b.rule(fromClause).is(
         "from",
-        firstOf(
-            and(type, IDENTIFIER),
+        b.firstOf(
+            b.sequence(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression);
-    queryBody.is(o2n(queryBodyClause), selectOrGroupClause, opt(queryContinuation));
-    queryBodyClause.is(
-        firstOf(
+    b.rule(queryBody).is(b.zeroOrMore(queryBodyClause), selectOrGroupClause, b.optional(queryContinuation));
+    b.rule(queryBodyClause).is(
+        b.firstOf(
             fromClause,
             letClause,
             whereClause,
             joinIntoClause,
             joinClause,
             orderByClause));
-    letClause.is("let", IDENTIFIER, EQUAL, expression);
-    whereClause.is("where", expression);
-    joinClause.is(
+    b.rule(letClause).is("let", IDENTIFIER, EQUAL, expression);
+    b.rule(whereClause).is("where", expression);
+    b.rule(joinClause).is(
         "join",
-        firstOf(
-            and(type, IDENTIFIER),
+        b.firstOf(
+            b.sequence(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression, "on", expression, "equals", expression);
-    joinIntoClause.is(
+    b.rule(joinIntoClause).is(
         "join",
-        firstOf(
-            and(type, IDENTIFIER),
+        b.firstOf(
+            b.sequence(type, IDENTIFIER),
             IDENTIFIER),
         IN, expression, "on", expression, "equals", expression,
         "into", IDENTIFIER);
-    orderByClause.is("orderby", ordering, o2n(COMMA, ordering));
-    ordering.is(expression, opt(orderingDirection));
-    orderingDirection.is(
-        firstOf(
+    b.rule(orderByClause).is("orderby", ordering, b.zeroOrMore(COMMA, ordering));
+    b.rule(ordering).is(expression, b.optional(orderingDirection));
+    b.rule(orderingDirection).is(
+        b.firstOf(
             "ascending",
             "descending"));
-    selectOrGroupClause.is(
-        firstOf(
+    b.rule(selectOrGroupClause).is(
+        b.firstOf(
             selectClause,
             groupClause));
-    selectClause.is("select", expression);
-    groupClause.is("group", expression, "by", expression);
-    queryContinuation.is("into", IDENTIFIER, queryBody);
-    assignment.is(
+    b.rule(selectClause).is("select", expression);
+    b.rule(groupClause).is("group", expression, "by", expression);
+    b.rule(queryContinuation).is("into", IDENTIFIER, queryBody);
+    b.rule(assignment).is(
         unaryExpression,
-        firstOf(
+        b.firstOf(
             EQUAL,
             ADD_ASSIGN,
             SUB_ASSIGN,
@@ -588,25 +894,25 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             LEFT_ASSIGN,
             rightShiftAssignment),
         expression);
-    nonAssignmentExpression.is(
-        firstOf(
+    b.rule(nonAssignmentExpression).is(
+        b.firstOf(
             lambdaExpression,
             queryExpression,
             conditionalExpression)).skip();
-    expression.is(
-        firstOf(
+    b.rule(expression).is(
+        b.firstOf(
             assignment,
             nonAssignmentExpression));
   }
 
-  private void statements() {
-    statement.is(
-        firstOf(
+  private static void statements(LexerfulGrammarBuilder b) {
+    b.rule(statement).is(
+        b.firstOf(
             labeledStatement,
             declarationStatement,
             embeddedStatement));
-    embeddedStatement.is(
-        firstOf(
+    b.rule(embeddedStatement).is(
+        b.firstOf(
             block,
             SEMICOLON,
             expressionStatement,
@@ -619,127 +925,128 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             lockStatement,
             usingStatement,
             yieldStatement));
-    block.is(LCURLYBRACE, o2n(statement), RCURLYBRACE);
-    labeledStatement.is(IDENTIFIER, COLON, statement);
-    declarationStatement.is(
-        firstOf(
+    b.rule(block).is(LCURLYBRACE, b.zeroOrMore(statement), RCURLYBRACE);
+    b.rule(labeledStatement).is(IDENTIFIER, COLON, statement);
+    b.rule(declarationStatement).is(
+        b.firstOf(
             localVariableDeclaration,
             localConstantDeclaration),
         SEMICOLON);
-    localVariableDeclaration.is(type, localVariableDeclarator, o2n(COMMA, localVariableDeclarator));
-    localVariableDeclarator.is(IDENTIFIER, opt(EQUAL, localVariableInitializer));
-    localVariableInitializer.is(
-        firstOf(
+    b.rule(localVariableDeclaration).is(type, localVariableDeclarator, b.zeroOrMore(COMMA, localVariableDeclarator));
+    b.rule(localVariableDeclarator).is(IDENTIFIER, b.optional(EQUAL, localVariableInitializer));
+    b.rule(localVariableInitializer).is(
+        b.firstOf(
             expression,
             arrayInitializer,
             unsafe(stackallocInitializer)));
-    localConstantDeclaration.is(CONST, type, constantDeclarator, o2n(COMMA, constantDeclarator));
-    constantDeclarator.is(IDENTIFIER, EQUAL, expression);
-    expressionStatement.is(expression, SEMICOLON);
-    selectionStatement.is(
-        firstOf(
+    b.rule(localConstantDeclaration).is(CONST, type, constantDeclarator, b.zeroOrMore(COMMA, constantDeclarator));
+    b.rule(constantDeclarator).is(IDENTIFIER, EQUAL, expression);
+    b.rule(expressionStatement).is(expression, SEMICOLON);
+    b.rule(selectionStatement).is(
+        b.firstOf(
             ifStatement,
             switchStatement));
-    ifStatement.is(IF, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement, opt(ELSE, embeddedStatement));
-    switchStatement.is(SWITCH, LPARENTHESIS, expression, RPARENTHESIS, LCURLYBRACE, o2n(switchSection), RCURLYBRACE);
-    switchSection.is(one2n(switchLabel), one2n(statement));
-    switchLabel.is(
-        firstOf(
-            and(CASE, expression, COLON),
-            and(DEFAULT, COLON)));
-    iterationStatement.is(
-        firstOf(
+    b.rule(ifStatement).is(IF, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement, b.optional(ELSE, embeddedStatement));
+    b.rule(switchStatement).is(SWITCH, LPARENTHESIS, expression, RPARENTHESIS, LCURLYBRACE, b.zeroOrMore(switchSection), RCURLYBRACE);
+    b.rule(switchSection).is(b.oneOrMore(switchLabel), b.oneOrMore(statement));
+    b.rule(switchLabel).is(
+        b.firstOf(
+            b.sequence(CASE, expression, COLON),
+            b.sequence(DEFAULT, COLON)));
+    b.rule(iterationStatement).is(
+        b.firstOf(
             whileStatement,
             doStatement,
             forStatement,
             foreachStatement));
-    whileStatement.is(WHILE, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
-    doStatement.is(DO, embeddedStatement, WHILE, LPARENTHESIS, expression, RPARENTHESIS, SEMICOLON);
-    forStatement.is(FOR, LPARENTHESIS, opt(forInitializer), SEMICOLON, opt(forCondition), SEMICOLON, opt(forIterator), RPARENTHESIS, embeddedStatement);
-    forInitializer.is(
-        firstOf(
+    b.rule(whileStatement).is(WHILE, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
+    b.rule(doStatement).is(DO, embeddedStatement, WHILE, LPARENTHESIS, expression, RPARENTHESIS, SEMICOLON);
+    b.rule(forStatement)
+        .is(FOR, LPARENTHESIS, b.optional(forInitializer), SEMICOLON, b.optional(forCondition), SEMICOLON, b.optional(forIterator), RPARENTHESIS, embeddedStatement);
+    b.rule(forInitializer).is(
+        b.firstOf(
             localVariableDeclaration,
             statementExpressionList));
-    forCondition.is(expression);
-    forIterator.is(statementExpressionList);
-    statementExpressionList.is(expression, o2n(COMMA, expression));
-    foreachStatement.is(FOREACH, LPARENTHESIS, type, IDENTIFIER, IN, expression, RPARENTHESIS, embeddedStatement);
-    jumpStatement.is(
-        firstOf(
+    b.rule(forCondition).is(expression);
+    b.rule(forIterator).is(statementExpressionList);
+    b.rule(statementExpressionList).is(expression, b.zeroOrMore(COMMA, expression));
+    b.rule(foreachStatement).is(FOREACH, LPARENTHESIS, type, IDENTIFIER, IN, expression, RPARENTHESIS, embeddedStatement);
+    b.rule(jumpStatement).is(
+        b.firstOf(
             breakStatement,
             continueStatement,
             gotoStatement,
             returnStatement,
             throwStatement));
-    breakStatement.is(BREAK, SEMICOLON);
-    continueStatement.is(CONTINUE, SEMICOLON);
-    gotoStatement.is(
+    b.rule(breakStatement).is(BREAK, SEMICOLON);
+    b.rule(continueStatement).is(CONTINUE, SEMICOLON);
+    b.rule(gotoStatement).is(
         GOTO,
-        firstOf(
+        b.firstOf(
             IDENTIFIER,
-            and(CASE, expression),
+            b.sequence(CASE, expression),
             DEFAULT),
         SEMICOLON);
-    returnStatement.is(RETURN, opt(expression), SEMICOLON);
-    throwStatement.is(THROW, opt(expression), SEMICOLON);
-    tryStatement.is(
+    b.rule(returnStatement).is(RETURN, b.optional(expression), SEMICOLON);
+    b.rule(throwStatement).is(THROW, b.optional(expression), SEMICOLON);
+    b.rule(tryStatement).is(
         TRY, block,
-        firstOf(
-            and(opt(catchClauses), finallyClause),
+        b.firstOf(
+            b.sequence(b.optional(catchClauses), finallyClause),
             catchClauses));
-    catchClauses.is(
-        firstOf(
-            and(o2n(specificCatchClause), generalCatchClause),
-            one2n(specificCatchClause)));
-    specificCatchClause.is(CATCH, LPARENTHESIS, classType, opt(IDENTIFIER), RPARENTHESIS, block);
-    generalCatchClause.is(CATCH, block);
-    finallyClause.is(FINALLY, block);
-    checkedStatement.is(CHECKED, block);
-    uncheckedStatement.is(UNCHECKED, block);
-    lockStatement.is(LOCK, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
-    usingStatement.is(USING, LPARENTHESIS, resourceAcquisition, RPARENTHESIS, embeddedStatement);
-    resourceAcquisition.is(
-        firstOf(
+    b.rule(catchClauses).is(
+        b.firstOf(
+            b.sequence(b.zeroOrMore(specificCatchClause), generalCatchClause),
+            b.oneOrMore(specificCatchClause)));
+    b.rule(specificCatchClause).is(CATCH, LPARENTHESIS, classType, b.optional(IDENTIFIER), RPARENTHESIS, block);
+    b.rule(generalCatchClause).is(CATCH, block);
+    b.rule(finallyClause).is(FINALLY, block);
+    b.rule(checkedStatement).is(CHECKED, block);
+    b.rule(uncheckedStatement).is(UNCHECKED, block);
+    b.rule(lockStatement).is(LOCK, LPARENTHESIS, expression, RPARENTHESIS, embeddedStatement);
+    b.rule(usingStatement).is(USING, LPARENTHESIS, resourceAcquisition, RPARENTHESIS, embeddedStatement);
+    b.rule(resourceAcquisition).is(
+        b.firstOf(
             localVariableDeclaration,
             expression));
-    yieldStatement.is(
+    b.rule(yieldStatement).is(
         "yield",
-        firstOf(
-            and(RETURN, expression),
+        b.firstOf(
+            b.sequence(RETURN, expression),
             BREAK),
         SEMICOLON);
-    namespaceDeclaration.is(NAMESPACE, qualifiedIdentifier, namespaceBody, opt(SEMICOLON));
-    qualifiedIdentifier.is(IDENTIFIER, o2n(DOT, IDENTIFIER));
-    namespaceBody.is(LCURLYBRACE, o2n(externAliasDirective), o2n(usingDirective), o2n(namespaceMemberDeclaration), RCURLYBRACE);
-    externAliasDirective.is(EXTERN, "alias", IDENTIFIER, SEMICOLON);
-    usingDirective.is(
-        firstOf(
+    b.rule(namespaceDeclaration).is(NAMESPACE, qualifiedIdentifier, namespaceBody, b.optional(SEMICOLON));
+    b.rule(qualifiedIdentifier).is(IDENTIFIER, b.zeroOrMore(DOT, IDENTIFIER));
+    b.rule(namespaceBody).is(LCURLYBRACE, b.zeroOrMore(externAliasDirective), b.zeroOrMore(usingDirective), b.zeroOrMore(namespaceMemberDeclaration), RCURLYBRACE);
+    b.rule(externAliasDirective).is(EXTERN, "alias", IDENTIFIER, SEMICOLON);
+    b.rule(usingDirective).is(
+        b.firstOf(
             usingAliasDirective,
             usingNamespaceDirective));
-    usingAliasDirective.is(USING, IDENTIFIER, EQUAL, namespaceOrTypeName, SEMICOLON);
-    usingNamespaceDirective.is(USING, namespaceName, SEMICOLON);
-    namespaceMemberDeclaration.is(
-        firstOf(
+    b.rule(usingAliasDirective).is(USING, IDENTIFIER, EQUAL, namespaceOrTypeName, SEMICOLON);
+    b.rule(usingNamespaceDirective).is(USING, namespaceName, SEMICOLON);
+    b.rule(namespaceMemberDeclaration).is(
+        b.firstOf(
             namespaceDeclaration,
             typeDeclaration));
-    typeDeclaration.is(
-        firstOf(
+    b.rule(typeDeclaration).is(
+        b.firstOf(
             classDeclaration,
             structDeclaration,
             interfaceDeclaration,
             enumDeclaration,
             delegateDeclaration));
-    qualifiedAliasMember.is(IDENTIFIER, DOUBLE_COLON, IDENTIFIER, opt(typeArgumentList));
+    b.rule(qualifiedAliasMember).is(IDENTIFIER, DOUBLE_COLON, IDENTIFIER, b.optional(typeArgumentList));
   }
 
-  private void classes() {
-    classDeclaration.is(
-        opt(attributes), o2n(classModifier), opt(PARTIAL),
-        CLASS, IDENTIFIER, opt(typeParameterList), opt(classBase), opt(typeParameterConstraintsClauses),
+  private static void classes(LexerfulGrammarBuilder b) {
+    b.rule(classDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(classModifier), b.optional(PARTIAL),
+        CLASS, IDENTIFIER, b.optional(typeParameterList), b.optional(classBase), b.optional(typeParameterConstraintsClauses),
         classBody,
-        opt(SEMICOLON));
-    classModifier.is(
-        firstOf(
+        b.optional(SEMICOLON));
+    b.rule(classModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -749,16 +1056,16 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             SEALED,
             STATIC,
             UNSAFE));
-    classBase.is(
+    b.rule(classBase).is(
         COLON,
-        firstOf(
-            and(classType, COMMA, interfaceTypeList),
+        b.firstOf(
+            b.sequence(classType, COMMA, interfaceTypeList),
             classType,
             interfaceTypeList));
-    interfaceTypeList.is(interfaceType, o2n(COMMA, interfaceType));
-    classBody.is(LCURLYBRACE, o2n(classMemberDeclaration), RCURLYBRACE);
-    classMemberDeclaration.is(
-        firstOf(
+    b.rule(interfaceTypeList).is(interfaceType, b.zeroOrMore(COMMA, interfaceType));
+    b.rule(classBody).is(LCURLYBRACE, b.zeroOrMore(classMemberDeclaration), RCURLYBRACE);
+    b.rule(classMemberDeclaration).is(
+        b.firstOf(
             constantDeclaration,
             fieldDeclaration,
             methodDeclaration,
@@ -770,25 +1077,25 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             destructorDeclaration,
             staticConstructorDeclaration,
             typeDeclaration));
-    constantDeclaration.is(
-        opt(attributes), o2n(constantModifier),
+    b.rule(constantDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(constantModifier),
         CONST, type,
-        constantDeclarator, o2n(COMMA, constantDeclarator),
+        constantDeclarator, b.zeroOrMore(COMMA, constantDeclarator),
         SEMICOLON);
-    constantModifier.is(
-        firstOf(
+    b.rule(constantModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE));
-    fieldDeclaration.is(
-        opt(attributes), o2n(fieldModifier),
+    b.rule(fieldDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(fieldModifier),
         type,
-        variableDeclarator, o2n(COMMA, variableDeclarator),
+        variableDeclarator, b.zeroOrMore(COMMA, variableDeclarator),
         SEMICOLON);
-    fieldModifier.is(
-        firstOf(
+    b.rule(fieldModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -798,20 +1105,20 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             READONLY,
             VOLATILE,
             UNSAFE));
-    variableDeclarator.is(IDENTIFIER, opt(EQUAL, variableInitializer));
-    variableInitializer.is(
-        firstOf(
+    b.rule(variableDeclarator).is(IDENTIFIER, b.optional(EQUAL, variableInitializer));
+    b.rule(variableInitializer).is(
+        b.firstOf(
             expression,
             arrayInitializer));
-    methodDeclaration.is(methodHeader, methodBody);
-    methodHeader.is(
-        opt(attributes), o2n(methodModifier), opt(PARTIAL),
+    b.rule(methodDeclaration).is(methodHeader, methodBody);
+    b.rule(methodHeader).is(
+        b.optional(attributes), b.zeroOrMore(methodModifier), b.optional(PARTIAL),
         returnType, memberName,
-        opt(typeParameterList),
-        LPARENTHESIS, opt(formalParameterList), RPARENTHESIS,
-        opt(typeParameterConstraintsClauses)).skip();
-    methodModifier.is(
-        firstOf(
+        b.optional(typeParameterList),
+        LPARENTHESIS, b.optional(formalParameterList), RPARENTHESIS,
+        b.optional(typeParameterConstraintsClauses)).skip();
+    b.rule(methodModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -824,43 +1131,43 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             ABSTRACT,
             EXTERN,
             UNSAFE));
-    returnType.is(
-        firstOf(
+    b.rule(returnType).is(
+        b.firstOf(
             type,
             VOID));
-    memberName.is(
-        o2n(
-            firstOf(
+    b.rule(memberName).is(
+        b.zeroOrMore(
+            b.firstOf(
                 qualifiedAliasMember,
-                and(
-                    firstOf(
+                b.sequence(
+                    b.firstOf(
                         THIS,
                         IDENTIFIER),
-                    opt(typeArgumentList))),
+                    b.optional(typeArgumentList))),
             DOT),
-        firstOf(
+        b.firstOf(
             THIS,
             IDENTIFIER),
-        opt(typeArgumentList));
-    methodBody.is(
-        firstOf(
+        b.optional(typeArgumentList));
+    b.rule(methodBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
-    formalParameterList.is(
-        firstOf(
-            and(fixedParameters, opt(COMMA, parameterArray)),
+    b.rule(formalParameterList).is(
+        b.firstOf(
+            b.sequence(fixedParameters, b.optional(COMMA, parameterArray)),
             parameterArray));
-    fixedParameters.is(fixedParameter, o2n(COMMA, fixedParameter));
-    fixedParameter.is(opt(attributes), opt(parameterModifier), type, IDENTIFIER, opt(EQUAL, expression));
-    parameterModifier.is(
-        firstOf(
+    b.rule(fixedParameters).is(fixedParameter, b.zeroOrMore(COMMA, fixedParameter));
+    b.rule(fixedParameter).is(b.optional(attributes), b.optional(parameterModifier), type, IDENTIFIER, b.optional(EQUAL, expression));
+    b.rule(parameterModifier).is(
+        b.firstOf(
             REF,
             OUT,
             THIS));
-    parameterArray.is(opt(attributes), PARAMS, arrayType, IDENTIFIER);
-    propertyDeclaration.is(opt(attributes), o2n(propertyModifier), type, memberName, LCURLYBRACE, accessorDeclarations, RCURLYBRACE);
-    propertyModifier.is(
-        firstOf(
+    b.rule(parameterArray).is(b.optional(attributes), PARAMS, arrayType, IDENTIFIER);
+    b.rule(propertyDeclaration).is(b.optional(attributes), b.zeroOrMore(propertyModifier), type, memberName, LCURLYBRACE, accessorDeclarations, RCURLYBRACE);
+    b.rule(propertyModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -873,32 +1180,32 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             ABSTRACT,
             EXTERN,
             UNSAFE));
-    accessorDeclarations.is(
-        firstOf(
-            and(getAccessorDeclaration, opt(setAccessorDeclaration)),
-            and(setAccessorDeclaration, opt(getAccessorDeclaration))));
-    getAccessorDeclaration.is(opt(attributes), o2n(accessorModifier), GET, accessorBody);
-    setAccessorDeclaration.is(opt(attributes), o2n(accessorModifier), SET, accessorBody);
-    accessorModifier.is(
-        firstOf(
-            and(PROTECTED, INTERNAL),
-            and(INTERNAL, PROTECTED),
+    b.rule(accessorDeclarations).is(
+        b.firstOf(
+            b.sequence(getAccessorDeclaration, b.optional(setAccessorDeclaration)),
+            b.sequence(setAccessorDeclaration, b.optional(getAccessorDeclaration))));
+    b.rule(getAccessorDeclaration).is(b.optional(attributes), b.zeroOrMore(accessorModifier), GET, accessorBody);
+    b.rule(setAccessorDeclaration).is(b.optional(attributes), b.zeroOrMore(accessorModifier), SET, accessorBody);
+    b.rule(accessorModifier).is(
+        b.firstOf(
+            b.sequence(PROTECTED, INTERNAL),
+            b.sequence(INTERNAL, PROTECTED),
             PROTECTED,
             INTERNAL,
             PRIVATE));
-    accessorBody.is(
-        firstOf(
+    b.rule(accessorBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
-    eventDeclaration.is(
-        opt(attributes),
-        o2n(eventModifier),
+    b.rule(eventDeclaration).is(
+        b.optional(attributes),
+        b.zeroOrMore(eventModifier),
         EVENT, type,
-        firstOf(
-            and(variableDeclarator, o2n(COMMA, variableDeclarator), SEMICOLON),
-            and(memberName, LCURLYBRACE, eventAccessorDeclarations, RCURLYBRACE)));
-    eventModifier.is(
-        firstOf(
+        b.firstOf(
+            b.sequence(variableDeclarator, b.zeroOrMore(COMMA, variableDeclarator), SEMICOLON),
+            b.sequence(memberName, LCURLYBRACE, eventAccessorDeclarations, RCURLYBRACE)));
+    b.rule(eventModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -911,17 +1218,17 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             ABSTRACT,
             EXTERN,
             UNSAFE));
-    eventAccessorDeclarations.is(
-        firstOf(
-            and(addAccessorDeclaration, removeAccessorDeclaration),
-            and(removeAccessorDeclaration, addAccessorDeclaration)));
-    addAccessorDeclaration.is(opt(attributes), "add", block);
-    removeAccessorDeclaration.is(opt(attributes), "remove", block);
-    indexerDeclaration.is(
-        opt(attributes), o2n(indexerModifier),
+    b.rule(eventAccessorDeclarations).is(
+        b.firstOf(
+            b.sequence(addAccessorDeclaration, removeAccessorDeclaration),
+            b.sequence(removeAccessorDeclaration, addAccessorDeclaration)));
+    b.rule(addAccessorDeclaration).is(b.optional(attributes), "add", block);
+    b.rule(removeAccessorDeclaration).is(b.optional(attributes), "remove", block);
+    b.rule(indexerDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(indexerModifier),
         indexerDeclarator, LCURLYBRACE, accessorDeclarations, RCURLYBRACE);
-    indexerModifier.is(
-        firstOf(
+    b.rule(indexerModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -934,29 +1241,29 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             ABSTRACT,
             EXTERN,
             UNSAFE));
-    indexerDeclarator.is(
+    b.rule(indexerDeclarator).is(
         type,
-        o2n(
-            firstOf(
+        b.zeroOrMore(
+            b.firstOf(
                 qualifiedAliasMember,
-                and(IDENTIFIER, opt(typeArgumentList))),
+                b.sequence(IDENTIFIER, b.optional(typeArgumentList))),
             DOT),
         THIS, LBRACKET, formalParameterList, RBRACKET);
-    operatorDeclaration.is(opt(attributes), one2n(operatorModifier), operatorDeclarator, operatorBody);
-    operatorModifier.is(
-        firstOf(
+    b.rule(operatorDeclaration).is(b.optional(attributes), b.oneOrMore(operatorModifier), operatorDeclarator, operatorBody);
+    b.rule(operatorModifier).is(
+        b.firstOf(
             PUBLIC,
             STATIC,
             EXTERN,
             UNSAFE));
-    operatorDeclarator.is(
-        firstOf(
+    b.rule(operatorDeclarator).is(
+        b.firstOf(
             unaryOperatorDeclarator,
             binaryOperatorDeclarator,
             conversionOperatorDeclarator));
-    unaryOperatorDeclarator.is(type, OPERATOR, overloadableUnaryOperator, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
-    overloadableUnaryOperator.is(
-        firstOf(
+    b.rule(unaryOperatorDeclarator).is(type, OPERATOR, overloadableUnaryOperator, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
+    b.rule(overloadableUnaryOperator).is(
+        b.firstOf(
             PLUS,
             MINUS,
             EXCLAMATION,
@@ -965,9 +1272,9 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             DEC_OP,
             TRUE,
             FALSE));
-    binaryOperatorDeclarator.is(type, OPERATOR, overloadableBinaryOperator, LPARENTHESIS, type, IDENTIFIER, COMMA, type, IDENTIFIER, RPARENTHESIS);
-    overloadableBinaryOperator.is(
-        firstOf(
+    b.rule(binaryOperatorDeclarator).is(type, OPERATOR, overloadableBinaryOperator, LPARENTHESIS, type, IDENTIFIER, COMMA, type, IDENTIFIER, RPARENTHESIS);
+    b.rule(overloadableBinaryOperator).is(
+        b.firstOf(
             PLUS,
             MINUS,
             STAR,
@@ -984,74 +1291,74 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             INFERIOR,
             GE_OP,
             LE_OP));
-    conversionOperatorDeclarator.is(
-        firstOf(
+    b.rule(conversionOperatorDeclarator).is(
+        b.firstOf(
             IMPLICIT,
             EXPLICIT),
         OPERATOR, type, LPARENTHESIS, type, IDENTIFIER, RPARENTHESIS);
-    operatorBody.is(
-        firstOf(
+    b.rule(operatorBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
-    constructorDeclaration.is(opt(attributes), o2n(constructorModifier), constructorDeclarator, constructorBody);
-    constructorModifier.is(
-        firstOf(
+    b.rule(constructorDeclaration).is(b.optional(attributes), b.zeroOrMore(constructorModifier), constructorDeclarator, constructorBody);
+    b.rule(constructorModifier).is(
+        b.firstOf(
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE,
             EXTERN,
             UNSAFE));
-    constructorDeclarator.is(IDENTIFIER, LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(constructorInitializer));
-    constructorInitializer.is(
+    b.rule(constructorDeclarator).is(IDENTIFIER, LPARENTHESIS, b.optional(formalParameterList), RPARENTHESIS, b.optional(constructorInitializer));
+    b.rule(constructorInitializer).is(
         COLON,
-        firstOf(
+        b.firstOf(
             BASE,
             THIS),
-        LPARENTHESIS, opt(argumentList), RPARENTHESIS);
-    constructorBody.is(
-        firstOf(
+        LPARENTHESIS, b.optional(argumentList), RPARENTHESIS);
+    b.rule(constructorBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
-    staticConstructorDeclaration.is(
-        opt(attributes),
+    b.rule(staticConstructorDeclaration).is(
+        b.optional(attributes),
         staticConstructorModifiers, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, staticConstructorBody);
-    staticConstructorModifiers.is(
-        firstOf(
-            and(opt(EXTERN), STATIC, not(next(EXTERN))),
-            and(STATIC, opt(EXTERN))));
-    staticConstructorBody.is(
-        firstOf(
+    b.rule(staticConstructorModifiers).is(
+        b.firstOf(
+            b.sequence(b.optional(EXTERN), STATIC, b.nextNot(b.next(EXTERN))),
+            b.sequence(STATIC, b.optional(EXTERN))));
+    b.rule(staticConstructorBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
-    destructorDeclaration.is(
-        opt(attributes), opt(EXTERN),
+    b.rule(destructorDeclaration).is(
+        b.optional(attributes), b.optional(EXTERN),
         TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody);
-    destructorBody.is(
-        firstOf(
+    b.rule(destructorBody).is(
+        b.firstOf(
             block,
             SEMICOLON));
   }
 
-  private void structs() {
-    structDeclaration.is(
-        opt(attributes), o2n(structModifier), opt(PARTIAL),
+  private static void structs(LexerfulGrammarBuilder b) {
+    b.rule(structDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(structModifier), b.optional(PARTIAL),
         STRUCT, IDENTIFIER,
-        opt(typeParameterList), opt(structInterfaces), opt(typeParameterConstraintsClauses),
+        b.optional(typeParameterList), b.optional(structInterfaces), b.optional(typeParameterConstraintsClauses),
         structBody,
-        opt(SEMICOLON));
-    structModifier.is(
-        firstOf(
+        b.optional(SEMICOLON));
+    b.rule(structModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE,
             UNSAFE));
-    structInterfaces.is(COLON, interfaceTypeList);
-    structBody.is(LCURLYBRACE, o2n(structMemberDeclaration), RCURLYBRACE);
-    structMemberDeclaration.is(
-        firstOf(
+    b.rule(structInterfaces).is(COLON, interfaceTypeList);
+    b.rule(structBody).is(LCURLYBRACE, b.zeroOrMore(structMemberDeclaration), RCURLYBRACE);
+    b.rule(structMemberDeclaration).is(
+        b.firstOf(
             constantDeclaration,
             fieldDeclaration,
             methodDeclaration,
@@ -1065,102 +1372,102 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             unsafe(fixedSizeBufferDeclaration)));
   }
 
-  private void arrays() {
-    arrayInitializer.is(
+  private static void arrays(LexerfulGrammarBuilder b) {
+    b.rule(arrayInitializer).is(
         LCURLYBRACE,
-        opt(
-        firstOf(
-            and(variableInitializerList, COMMA),
-            variableInitializerList)),
+        b.optional(
+            b.firstOf(
+                b.sequence(variableInitializerList, COMMA),
+                variableInitializerList)),
         RCURLYBRACE);
-    variableInitializerList.is(variableInitializer, o2n(COMMA, variableInitializer));
+    b.rule(variableInitializerList).is(variableInitializer, b.zeroOrMore(COMMA, variableInitializer));
   }
 
-  private void interfaces() {
-    interfaceDeclaration.is(
-        opt(attributes), o2n(interfaceModifier), opt(PARTIAL),
+  private static void interfaces(LexerfulGrammarBuilder b) {
+    b.rule(interfaceDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(interfaceModifier), b.optional(PARTIAL),
         INTERFACE, IDENTIFIER,
-        opt(variantTypeParameterList), opt(interfaceBase), opt(typeParameterConstraintsClauses),
+        b.optional(variantTypeParameterList), b.optional(interfaceBase), b.optional(typeParameterConstraintsClauses),
         interfaceBody,
-        opt(SEMICOLON));
-    interfaceModifier.is(
-        firstOf(
+        b.optional(SEMICOLON));
+    b.rule(interfaceModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE,
             UNSAFE));
-    variantTypeParameterList.is(INFERIOR, variantTypeParameter, o2n(COMMA, variantTypeParameter), SUPERIOR);
-    variantTypeParameter.is(opt(attributes), opt(varianceAnnotation), typeParameter);
-    varianceAnnotation.is(
-        firstOf(
+    b.rule(variantTypeParameterList).is(INFERIOR, variantTypeParameter, b.zeroOrMore(COMMA, variantTypeParameter), SUPERIOR);
+    b.rule(variantTypeParameter).is(b.optional(attributes), b.optional(varianceAnnotation), typeParameter);
+    b.rule(varianceAnnotation).is(
+        b.firstOf(
             IN,
             OUT));
-    interfaceBase.is(COLON, interfaceTypeList);
-    interfaceBody.is(LCURLYBRACE, o2n(interfaceMemberDeclaration), RCURLYBRACE);
-    interfaceMemberDeclaration.is(
-        firstOf(
+    b.rule(interfaceBase).is(COLON, interfaceTypeList);
+    b.rule(interfaceBody).is(LCURLYBRACE, b.zeroOrMore(interfaceMemberDeclaration), RCURLYBRACE);
+    b.rule(interfaceMemberDeclaration).is(
+        b.firstOf(
             interfaceMethodDeclaration,
             interfacePropertyDeclaration,
             interfaceEventDeclaration,
             interfaceIndexerDeclaration));
-    interfaceMethodDeclaration.is(
-        opt(attributes), opt(NEW),
+    b.rule(interfaceMethodDeclaration).is(
+        b.optional(attributes), b.optional(NEW),
         returnType, IDENTIFIER,
-        opt(typeParameterList),
-        LPARENTHESIS, opt(formalParameterList), RPARENTHESIS, opt(typeParameterConstraintsClauses),
+        b.optional(typeParameterList),
+        LPARENTHESIS, b.optional(formalParameterList), RPARENTHESIS, b.optional(typeParameterConstraintsClauses),
         SEMICOLON);
-    interfacePropertyDeclaration.is(
-        opt(attributes), opt(NEW),
+    b.rule(interfacePropertyDeclaration).is(
+        b.optional(attributes), b.optional(NEW),
         type, IDENTIFIER, LCURLYBRACE, interfaceAccessors, RCURLYBRACE);
-    interfaceAccessors.is(
-        opt(attributes),
-        firstOf(
-            and(GET, SEMICOLON, opt(attributes), SET),
-            and(SET, SEMICOLON, opt(attributes), GET),
+    b.rule(interfaceAccessors).is(
+        b.optional(attributes),
+        b.firstOf(
+            b.sequence(GET, SEMICOLON, b.optional(attributes), SET),
+            b.sequence(SET, SEMICOLON, b.optional(attributes), GET),
             GET,
             SET),
         SEMICOLON);
-    interfaceEventDeclaration.is(
-        opt(attributes), opt(NEW),
+    b.rule(interfaceEventDeclaration).is(
+        b.optional(attributes), b.optional(NEW),
         EVENT, type, IDENTIFIER, SEMICOLON);
-    interfaceIndexerDeclaration.is(
-        opt(attributes), opt(NEW),
+    b.rule(interfaceIndexerDeclaration).is(
+        b.optional(attributes), b.optional(NEW),
         type, THIS, LBRACKET, formalParameterList, RBRACKET, LCURLYBRACE, interfaceAccessors, RCURLYBRACE);
   }
 
-  private void enums() {
-    enumDeclaration.is(opt(attributes), o2n(enumModifier), ENUM, IDENTIFIER, opt(enumBase), enumBody, opt(SEMICOLON));
-    enumBase.is(COLON, integralType);
-    enumBody.is(
+  private static void enums(LexerfulGrammarBuilder b) {
+    b.rule(enumDeclaration).is(b.optional(attributes), b.zeroOrMore(enumModifier), ENUM, IDENTIFIER, b.optional(enumBase), enumBody, b.optional(SEMICOLON));
+    b.rule(enumBase).is(COLON, integralType);
+    b.rule(enumBody).is(
         LCURLYBRACE,
-        opt(
-        firstOf(
-            and(enumMemberDeclarations, COMMA),
-            enumMemberDeclarations)),
+        b.optional(
+            b.firstOf(
+                b.sequence(enumMemberDeclarations, COMMA),
+                enumMemberDeclarations)),
         RCURLYBRACE);
-    enumModifier.is(
-        firstOf(
+    b.rule(enumModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE));
-    enumMemberDeclarations.is(enumMemberDeclaration, o2n(COMMA, enumMemberDeclaration));
-    enumMemberDeclaration.is(opt(attributes), IDENTIFIER, opt(EQUAL, expression));
+    b.rule(enumMemberDeclarations).is(enumMemberDeclaration, b.zeroOrMore(COMMA, enumMemberDeclaration));
+    b.rule(enumMemberDeclaration).is(b.optional(attributes), IDENTIFIER, b.optional(EQUAL, expression));
   }
 
-  private void delegates() {
-    delegateDeclaration.is(
-        opt(attributes), o2n(delegateModifier),
+  private static void delegates(LexerfulGrammarBuilder b) {
+    b.rule(delegateDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(delegateModifier),
         DELEGATE, returnType, IDENTIFIER,
-        opt(variantTypeParameterList),
-        LPARENTHESIS, opt(formalParameterList), RPARENTHESIS,
-        opt(typeParameterConstraintsClauses),
+        b.optional(variantTypeParameterList),
+        LPARENTHESIS, b.optional(formalParameterList), RPARENTHESIS,
+        b.optional(typeParameterConstraintsClauses),
         SEMICOLON);
-    delegateModifier.is(
-        firstOf(
+    b.rule(delegateModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
@@ -1169,19 +1476,19 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             UNSAFE));
   }
 
-  private void attributes() {
-    globalAttributes.is(one2n(globalAttributeSection));
-    globalAttributeSection.is(LBRACKET, globalAttributeTargetSpecifier, attributeList, opt(COMMA), RBRACKET);
-    globalAttributeTargetSpecifier.is(globalAttributeTarget, COLON);
-    globalAttributeTarget.is(
-        firstOf(
+  private static void attributes(LexerfulGrammarBuilder b) {
+    b.rule(globalAttributes).is(b.oneOrMore(globalAttributeSection));
+    b.rule(globalAttributeSection).is(LBRACKET, globalAttributeTargetSpecifier, attributeList, b.optional(COMMA), RBRACKET);
+    b.rule(globalAttributeTargetSpecifier).is(globalAttributeTarget, COLON);
+    b.rule(globalAttributeTarget).is(
+        b.firstOf(
             "assembly",
             "module"));
-    attributes.is(one2n(attributeSection));
-    attributeSection.is(LBRACKET, opt(attributeTargetSpecifier), attributeList, opt(COMMA), RBRACKET);
-    attributeTargetSpecifier.is(attributeTarget, COLON);
-    attributeTarget.is(
-        firstOf(
+    b.rule(attributes).is(b.oneOrMore(attributeSection));
+    b.rule(attributeSection).is(LBRACKET, b.optional(attributeTargetSpecifier), attributeList, b.optional(COMMA), RBRACKET);
+    b.rule(attributeTargetSpecifier).is(attributeTarget, COLON);
+    b.rule(attributeTarget).is(
+        b.firstOf(
             "field",
             "event",
             "method",
@@ -1189,93 +1496,94 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             "property",
             RETURN,
             "type"));
-    attributeList.is(attribute, o2n(COMMA, attribute));
-    attribute.is(attributeName, opt(attributeArguments));
-    attributeName.is(typeName);
-    attributeArguments.is(
+    b.rule(attributeList).is(attribute, b.zeroOrMore(COMMA, attribute));
+    b.rule(attribute).is(attributeName, b.optional(attributeArguments));
+    b.rule(attributeName).is(typeName);
+    b.rule(attributeArguments).is(
         LPARENTHESIS,
-        opt(
-            firstOf(
+        b.optional(
+            b.firstOf(
                 namedArgument,
                 positionalArgument),
-            o2n(
+            b.zeroOrMore(
                 COMMA,
-                firstOf(
+                b.firstOf(
                     namedArgument,
                     positionalArgument))),
         RPARENTHESIS);
-    positionalArgument.is(opt(argumentName), attributeArgumentExpression);
-    namedArgument.is(IDENTIFIER, EQUAL, attributeArgumentExpression);
-    attributeArgumentExpression.is(expression);
+    b.rule(positionalArgument).is(b.optional(argumentName), attributeArgumentExpression);
+    b.rule(namedArgument).is(IDENTIFIER, EQUAL, attributeArgumentExpression);
+    b.rule(attributeArgumentExpression).is(expression);
   }
 
-  private void generics() {
-    typeParameterList.is(INFERIOR, typeParameters, SUPERIOR);
-    typeParameters.is(opt(attributes), typeParameter, o2n(COMMA, opt(attributes), typeParameter));
-    typeParameter.is(IDENTIFIER);
-    typeArgumentList.is(INFERIOR, typeArgument, o2n(COMMA, typeArgument), SUPERIOR);
-    typeArgument.is(type);
-    typeParameterConstraintsClauses.is(one2n(typeParameterConstraintsClause));
-    typeParameterConstraintsClause.is("where", typeParameter, COLON, typeParameterConstraints);
-    typeParameterConstraints.is(
-        firstOf(
-            and(primaryConstraint, COMMA, secondaryConstraints, COMMA, constructorConstraint),
-            and(
+  private static void generics(LexerfulGrammarBuilder b) {
+    b.rule(typeParameterList).is(INFERIOR, typeParameters, SUPERIOR);
+    b.rule(typeParameters).is(b.optional(attributes), typeParameter, b.zeroOrMore(COMMA, b.optional(attributes), typeParameter));
+    b.rule(typeParameter).is(IDENTIFIER);
+    b.rule(typeArgumentList).is(INFERIOR, typeArgument, b.zeroOrMore(COMMA, typeArgument), SUPERIOR);
+    b.rule(typeArgument).is(type);
+    b.rule(typeParameterConstraintsClauses).is(b.oneOrMore(typeParameterConstraintsClause));
+    b.rule(typeParameterConstraintsClause).is("where", typeParameter, COLON, typeParameterConstraints);
+    b.rule(typeParameterConstraints).is(
+        b.firstOf(
+            b.sequence(primaryConstraint, COMMA, secondaryConstraints, COMMA, constructorConstraint),
+            b.sequence(
                 primaryConstraint, COMMA,
-                firstOf(
+                b.firstOf(
                     secondaryConstraints,
                     constructorConstraint)),
-            and(secondaryConstraints, COMMA, constructorConstraint),
+            b.sequence(secondaryConstraints, COMMA, constructorConstraint),
             primaryConstraint,
             secondaryConstraints,
             constructorConstraint));
-    primaryConstraint.is(
-        firstOf(
+    b.rule(primaryConstraint).is(
+        b.firstOf(
             classType,
             CLASS,
             STRUCT));
-    secondaryConstraints.is(
-        firstOf(
+    b.rule(secondaryConstraints).is(
+        b.firstOf(
             interfaceType,
             typeParameter),
-        o2n(
+        b.zeroOrMore(
             COMMA,
-            firstOf(
+            b.firstOf(
                 interfaceType,
                 typeParameter)));
-    constructorConstraint.is(NEW, LPARENTHESIS, RPARENTHESIS);
+    b.rule(constructorConstraint).is(NEW, LPARENTHESIS, RPARENTHESIS);
   }
 
   /**
    * Syntactic sugar to highlight constructs, which were moved from {@link unsafe}
    * to get rid of call to {@link com.sonar.sslr.api.Rule#or} (removed in SSLR 1.13).
    */
-  private Object unsafe(Object matcher) {
+  private static Object unsafe(Object matcher) {
     return matcher;
   }
 
-  private void unsafe() {
-    destructorDeclaration.override(
-        opt(attributes),
-        o2n(
-        firstOf(
-            EXTERN,
-            UNSAFE)),
+  private static void unsafe(LexerfulGrammarBuilder b) {
+    // FIXME override!
+    b.rule(destructorDeclaration).override(
+        b.optional(attributes),
+        b.zeroOrMore(
+            b.firstOf(
+                EXTERN,
+                UNSAFE)),
         TILDE, IDENTIFIER, LPARENTHESIS, RPARENTHESIS, destructorBody);
     // FIXME override!
-    staticConstructorModifiers.override(
-        o2n(
-        firstOf(
-            EXTERN,
-            UNSAFE)),
+    b.rule(staticConstructorModifiers).override(
+        b.zeroOrMore(
+            b.firstOf(
+                EXTERN,
+                UNSAFE)),
         STATIC,
-        o2n(
-        firstOf(
-            EXTERN,
-            UNSAFE)));
+        b.zeroOrMore(
+            b.firstOf(
+                EXTERN,
+                UNSAFE)));
     // FIXME override!
-    embeddedStatement.override(
-        firstOf(
+    b.rule(embeddedStatement).override(
+        b.firstOf(
             block,
             SEMICOLON,
             expressionStatement,
@@ -1290,34 +1598,34 @@ public class CSharpGrammarImpl extends CSharpGrammar {
             yieldStatement,
             unsafeStatement,
             fixedStatement));
-    unsafeStatement.is(UNSAFE, block);
-    pointerIndirectionExpression.is(STAR, unaryExpression);
-    pointerElementAccess.is(primaryNoArrayCreationExpression, LBRACKET, expression, RBRACKET);
-    addressOfExpression.is(AND, unaryExpression);
-    sizeOfExpression.is(SIZEOF, LPARENTHESIS, type, RPARENTHESIS);
-    fixedStatement.is(
+    b.rule(unsafeStatement).is(UNSAFE, block);
+    b.rule(pointerIndirectionExpression).is(STAR, unaryExpression);
+    b.rule(pointerElementAccess).is(primaryNoArrayCreationExpression, LBRACKET, expression, RBRACKET);
+    b.rule(addressOfExpression).is(AND, unaryExpression);
+    b.rule(sizeOfExpression).is(SIZEOF, LPARENTHESIS, type, RPARENTHESIS);
+    b.rule(fixedStatement).is(
         FIXED,
-        LPARENTHESIS, pointerType, fixedPointerDeclarator, o2n(COMMA, fixedPointerDeclarator), RPARENTHESIS,
+        LPARENTHESIS, pointerType, fixedPointerDeclarator, b.zeroOrMore(COMMA, fixedPointerDeclarator), RPARENTHESIS,
         embeddedStatement);
-    fixedPointerDeclarator.is(IDENTIFIER, EQUAL, fixedPointerInitializer);
-    fixedPointerInitializer.is(
-        firstOf(
-            and(AND, variableReference),
+    b.rule(fixedPointerDeclarator).is(IDENTIFIER, EQUAL, fixedPointerInitializer);
+    b.rule(fixedPointerInitializer).is(
+        b.firstOf(
+            b.sequence(AND, variableReference),
             stackallocInitializer,
             expression));
-    fixedSizeBufferDeclaration.is(
-        opt(attributes), o2n(fixedSizeBufferModifier),
-        FIXED, type, one2n(fixedSizeBufferDeclarator), SEMICOLON);
-    fixedSizeBufferModifier.is(
-        firstOf(
+    b.rule(fixedSizeBufferDeclaration).is(
+        b.optional(attributes), b.zeroOrMore(fixedSizeBufferModifier),
+        FIXED, type, b.oneOrMore(fixedSizeBufferDeclarator), SEMICOLON);
+    b.rule(fixedSizeBufferModifier).is(
+        b.firstOf(
             NEW,
             PUBLIC,
             PROTECTED,
             INTERNAL,
             PRIVATE,
             UNSAFE));
-    fixedSizeBufferDeclarator.is(IDENTIFIER, LBRACKET, expression, RBRACKET);
-    stackallocInitializer.is(STACKALLOC, type, LBRACKET, expression, RBRACKET);
+    b.rule(fixedSizeBufferDeclarator).is(IDENTIFIER, LBRACKET, expression, RBRACKET);
+    b.rule(stackallocInitializer).is(STACKALLOC, type, LBRACKET, expression, RBRACKET);
   }
 
 }

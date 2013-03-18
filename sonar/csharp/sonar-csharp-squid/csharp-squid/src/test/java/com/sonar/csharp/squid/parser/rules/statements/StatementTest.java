@@ -19,33 +19,26 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class StatementTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class StatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.statement);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.statement));
 
   }
 
   @Test
   public void ok() {
-    g.labeledStatement.mock();
-    g.declarationStatement.mock();
-    g.embeddedStatement.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.labeledStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.declarationStatement).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
 
     assertThat(p)
         .matches("labeledStatement")

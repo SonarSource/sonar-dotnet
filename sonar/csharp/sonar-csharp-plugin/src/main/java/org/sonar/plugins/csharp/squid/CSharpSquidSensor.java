@@ -19,16 +19,14 @@
  */
 package org.sonar.plugins.csharp.squid;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-
 import com.google.common.collect.Lists;
 import com.sonar.csharp.checks.CheckList;
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
@@ -54,6 +52,7 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;
@@ -84,7 +83,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private Project project;
   private SensorContext context;
-  private AstScanner<CSharpGrammar> scanner;
+  private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
       MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
@@ -124,11 +123,11 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     this.project = project;
     this.context = context;
 
-    Collection<SquidAstVisitor<CSharpGrammar>> squidChecks = annotationCheckFactory.getChecks();
-    List<SquidAstVisitor<CSharpGrammar>> visitors = Lists.newArrayList(squidChecks);
+    Collection<SquidAstVisitor<Grammar>> squidChecks = annotationCheckFactory.getChecks();
+    List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(squidChecks);
     // TODO: remove the following line & class once SSLR Squid bridge computes NCLOC_DATA_KEY & COMMENT_LINES_DATA_KEY
     visitors.add(new CSharpFileLinesVisitor(project, fileLinesContextFactory));
-    scanner = CSharpAstScanner.create(createParserConfiguration(project), (SquidAstVisitor<CSharpGrammar>[]) visitors.toArray(new SquidAstVisitor[visitors.size()]));
+    scanner = CSharpAstScanner.create(createParserConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(getFilesToAnalyse(project));
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));

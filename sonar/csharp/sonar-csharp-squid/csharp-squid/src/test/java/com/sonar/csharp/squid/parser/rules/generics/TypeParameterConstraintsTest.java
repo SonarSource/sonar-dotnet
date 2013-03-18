@@ -19,28 +19,21 @@
  */
 package com.sonar.csharp.squid.parser.rules.generics;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class TypeParameterConstraintsTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class TypeParameterConstraintsTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.typeParameterConstraints);
-    g.primaryConstraint.mock();
-    g.secondaryConstraints.mock();
-    g.constructorConstraint.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraints));
+    p.getGrammar().rule(CSharpGrammarImpl.primaryConstraint).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.secondaryConstraints).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.constructorConstraint).mock();
   }
 
   @Test

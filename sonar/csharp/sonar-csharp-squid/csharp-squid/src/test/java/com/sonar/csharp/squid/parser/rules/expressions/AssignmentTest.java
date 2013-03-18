@@ -19,31 +19,24 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class AssignmentTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class AssignmentTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.assignment);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.assignment));
   }
 
   @Test
   public void ok() {
-    g.unaryExpression.mock();
-    g.expression.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.unaryExpression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
 
     assertThat(p)
         .matches("unaryExpression = expression")
@@ -61,8 +54,8 @@ public class AssignmentTest {
 
   @Test
   public void ko() {
-    g.unaryExpression.mock();
-    g.expression.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.unaryExpression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
 
     assertThat(p)
         .notMatches("unaryExpression != expression")

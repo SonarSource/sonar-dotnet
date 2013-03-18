@@ -20,11 +20,12 @@
 package com.sonar.csharp.squid.metric;
 
 import com.google.common.collect.Maps;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Trivia;
 import com.sonar.sslr.squid.SquidAstVisitor;
 
@@ -34,7 +35,7 @@ import java.util.Map;
 /**
  * Visitor that computes the number of statements.
  */
-public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
+public class CSharpPublicApiVisitor extends SquidAstVisitor<Grammar> {
 
   private final Map<AstNodeType, AstNodeType> modifiersMap = Maps.newHashMap();
 
@@ -43,24 +44,24 @@ public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
    */
   @Override
   public void init() {
-    CSharpGrammar g = getContext().getGrammar();
-    modifiersMap.put(g.classDeclaration, g.classModifier);
-    modifiersMap.put(g.structDeclaration, g.structModifier);
-    modifiersMap.put(g.interfaceDeclaration, g.interfaceModifier);
-    modifiersMap.put(g.enumDeclaration, g.enumModifier);
-    modifiersMap.put(g.delegateDeclaration, g.delegateModifier);
-    modifiersMap.put(g.constantDeclaration, g.constantModifier);
-    modifiersMap.put(g.fieldDeclaration, g.fieldModifier);
-    modifiersMap.put(g.methodDeclaration, g.methodModifier);
-    modifiersMap.put(g.propertyDeclaration, g.propertyModifier);
-    modifiersMap.put(g.eventDeclaration, g.eventModifier);
-    modifiersMap.put(g.indexerDeclarator, g.indexerModifier);
-    modifiersMap.put(g.operatorDeclaration, g.operatorModifier);
+    modifiersMap.put(CSharpGrammarImpl.classDeclaration, CSharpGrammarImpl.classModifier);
+    modifiersMap.put(CSharpGrammarImpl.structDeclaration, CSharpGrammarImpl.structModifier);
+    modifiersMap.put(CSharpGrammarImpl.interfaceDeclaration, CSharpGrammarImpl.interfaceModifier);
+    modifiersMap.put(CSharpGrammarImpl.enumDeclaration, CSharpGrammarImpl.enumModifier);
+    modifiersMap.put(CSharpGrammarImpl.delegateDeclaration, CSharpGrammarImpl.delegateModifier);
+    modifiersMap.put(CSharpGrammarImpl.constantDeclaration, CSharpGrammarImpl.constantModifier);
+    modifiersMap.put(CSharpGrammarImpl.fieldDeclaration, CSharpGrammarImpl.fieldModifier);
+    modifiersMap.put(CSharpGrammarImpl.methodDeclaration, CSharpGrammarImpl.methodModifier);
+    modifiersMap.put(CSharpGrammarImpl.propertyDeclaration, CSharpGrammarImpl.propertyModifier);
+    modifiersMap.put(CSharpGrammarImpl.eventDeclaration, CSharpGrammarImpl.eventModifier);
+    modifiersMap.put(CSharpGrammarImpl.indexerDeclarator, CSharpGrammarImpl.indexerModifier);
+    modifiersMap.put(CSharpGrammarImpl.operatorDeclaration, CSharpGrammarImpl.operatorModifier);
 
     subscribeTo(modifiersMap.keySet().toArray(new AstNodeType[modifiersMap.keySet().size()]));
     // and we need to add interface members that are special cases (they do not have modifiers, they inherit the visibility of their
     // enclosing interface definition)
-    subscribeTo(g.interfaceMethodDeclaration, g.interfacePropertyDeclaration, g.interfaceEventDeclaration, g.interfaceIndexerDeclaration);
+    subscribeTo(CSharpGrammarImpl.interfaceMethodDeclaration, CSharpGrammarImpl.interfacePropertyDeclaration, CSharpGrammarImpl.interfaceEventDeclaration,
+        CSharpGrammarImpl.interfaceIndexerDeclaration);
   }
 
   /**
@@ -68,13 +69,12 @@ public class CSharpPublicApiVisitor extends SquidAstVisitor<CSharpGrammar> {
    */
   @Override
   public void visitNode(AstNode node) {
-    CSharpGrammar g = getContext().getGrammar();
     AstNodeType nodeType = node.getType();
     boolean isPublicApi = false;
-    if (node.getType().equals(g.interfaceMethodDeclaration) || node.getType().equals(g.interfacePropertyDeclaration)
-      || node.getType().equals(g.interfaceEventDeclaration) || node.getType().equals(g.interfaceIndexerDeclaration)) {
+    if (node.getType().equals(CSharpGrammarImpl.interfaceMethodDeclaration) || node.getType().equals(CSharpGrammarImpl.interfacePropertyDeclaration)
+      || node.getType().equals(CSharpGrammarImpl.interfaceEventDeclaration) || node.getType().equals(CSharpGrammarImpl.interfaceIndexerDeclaration)) {
       // then we must look at the visibility of the enclosing interface definition
-      isPublicApi = checkNodeForPublicModifier(node.getFirstAncestor(g.interfaceDeclaration), g.interfaceModifier);
+      isPublicApi = checkNodeForPublicModifier(node.getFirstAncestor(CSharpGrammarImpl.interfaceDeclaration), CSharpGrammarImpl.interfaceModifier);
     } else {
       isPublicApi = checkNodeForPublicModifier(node, modifiersMap.get(nodeType));
     }

@@ -19,31 +19,24 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class ElementInitializerTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class ElementInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.elementInitializer);
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.elementInitializer));
   }
 
   @Test
   public void ok() {
-    g.nonAssignmentExpression.mock();
-    g.expressionList.mock();
+    p.getGrammar().rule(CSharpGrammarImpl.nonAssignmentExpression).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expressionList).mock();
 
     assertThat(p)
         .matches("nonAssignmentExpression")

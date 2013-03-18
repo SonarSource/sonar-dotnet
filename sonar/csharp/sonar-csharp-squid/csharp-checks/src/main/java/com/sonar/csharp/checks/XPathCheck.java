@@ -19,8 +19,8 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.checks.AbstractXPathCheck;
 import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
@@ -31,7 +31,7 @@ import org.sonar.check.RuleProperty;
   key = "XPath",
   priority = Priority.MAJOR,
   cardinality = Cardinality.MULTIPLE)
-public class XPathCheck extends AbstractXPathCheck<CSharpGrammar> {
+public class XPathCheck extends AbstractXPathCheck<Grammar> {
 
   private static final String DEFAULT_XPATH_QUERY = "";
   private static final String DEFAULT_MESSAGE = "The XPath expression matches this piece of code";

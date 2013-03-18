@@ -20,8 +20,8 @@
 package com.sonar.csharp.squid.integration;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
+import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.impl.Parser;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -43,7 +43,7 @@ import java.util.Set;
 public class CSharpPreIntegrationTest {
 
   private File cSharpFile = null;
-  private final Parser<CSharpGrammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+  private final Parser<Grammar> parser = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
   private final Set<String> filesToIgnore = new HashSet<String>();
 
   public CSharpPreIntegrationTest(File f) {

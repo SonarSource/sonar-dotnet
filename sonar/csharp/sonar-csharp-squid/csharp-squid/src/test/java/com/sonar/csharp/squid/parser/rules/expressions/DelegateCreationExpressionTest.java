@@ -19,27 +19,20 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class DelegateCreationExpressionTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class DelegateCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.delegateCreationExpression);
-    g.delegateType.mock();
-    g.expression.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.delegateCreationExpression));
+    p.getGrammar().rule(CSharpGrammarImpl.delegateType).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
   }
 
   @Test

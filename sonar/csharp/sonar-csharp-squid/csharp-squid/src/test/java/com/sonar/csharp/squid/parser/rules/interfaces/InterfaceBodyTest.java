@@ -19,29 +19,22 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpGrammar;
-import com.sonar.csharp.squid.parser.CSharpParser;
-import com.sonar.sslr.impl.Parser;
+import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.Charset;
-
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class InterfaceBodyTest {
-
-  private final Parser<CSharpGrammar> p = CSharpParser.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-  private final CSharpGrammar g = p.getGrammar();
+public class InterfaceBodyTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(g.interfaceBody);
-    g.interfaceMethodDeclaration.mock();
-    g.interfacePropertyDeclaration.mock();
-    g.interfaceEventDeclaration.mock();
-    g.interfaceIndexerDeclaration.mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.interfaceBody));
+    p.getGrammar().rule(CSharpGrammarImpl.interfaceMethodDeclaration).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.interfacePropertyDeclaration).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.interfaceEventDeclaration).mock();
+    p.getGrammar().rule(CSharpGrammarImpl.interfaceIndexerDeclaration).mock();
   }
 
   @Test
