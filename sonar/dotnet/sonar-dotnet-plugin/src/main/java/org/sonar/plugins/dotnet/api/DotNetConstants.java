@@ -60,6 +60,10 @@ public final class DotNetConstants {
   public static final String MVN_SILVERLIGHT_4_MSCORLIB_LOCATION_KEY = "silverlight.4.mscorlib.location";
   public static final String SILVERLIGHT_4_MSCORLIB_LOCATION_DEFVALUE = "C:/Program Files/Reference Assemblies/Microsoft/Framework/Silverlight/v4.0";
 
+  public static final String SILVERLIGHT_5_MSCORLIB_LOCATION_KEY = "sonar.silverlight.5.mscorlib.location";
+  public static final String MVN_SILVERLIGHT_5_MSCORLIB_LOCATION_KEY = "silverlight.5.mscorlib.location";
+  public static final String SILVERLIGHT_5_MSCORLIB_LOCATION_DEFVALUE = "C:/Program Files/Reference Assemblies/Microsoft/Framework/Silverlight/v5.0";
+
   public static final String SILVERLIGHT_VERSION_KEY = "sonar.silverlight.version";
   public static final String MVN_SILVERLIGHT_VERSION_KEY = "silverlight.version";
   public static final String SILVERLIGHT_VERSION_DEFVALUE = "4";
@@ -103,7 +107,7 @@ public final class DotNetConstants {
    * Returns the config key that will allow to retrieve the Silverlight directory from the plugin configuration.
    * 
    * @param silverlightVersion
-   *          the wanted Silverlight version (3 or 4)
+   *          the wanted Silverlight version (3, 4 or 5)
    * @return the config key
    */
   public static String getSilverlightDirKey(String silverlightVersion) {
@@ -121,6 +125,7 @@ public final class DotNetConstants {
     silverlightFrameworkLocationKeys = Maps.newHashMap();
     silverlightFrameworkLocationKeys.put("3", SILVERLIGHT_3_MSCORLIB_LOCATION_KEY);
     silverlightFrameworkLocationKeys.put("4", SILVERLIGHT_4_MSCORLIB_LOCATION_KEY);
+    silverlightFrameworkLocationKeys.put("5", SILVERLIGHT_5_MSCORLIB_LOCATION_KEY);
   }
 
 }
