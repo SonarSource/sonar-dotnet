@@ -20,7 +20,8 @@
 package com.sonar.csharp.checks;
 
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
@@ -28,14 +29,16 @@ import java.io.File;
 
 public class FunctionComplexityCheckTest {
 
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
+
   @Test
   public void test() {
     FunctionComplexityCheck check = new FunctionComplexityCheck();
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/functionComplexity.cs"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Refactor this method that has a complexity of 11 (which is greater than 10 authorized).")
-        .noMore();
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(3).withMessage("Refactor this method that has a complexity of 11 (which is greater than 10 authorized).");
   }
 
   @Test
@@ -44,10 +47,9 @@ public class FunctionComplexityCheckTest {
     check.maximumFunctionComplexityThreshold = 3;
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/functionComplexity.cs"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
+    checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(3).withMessage("Refactor this method that has a complexity of 11 (which is greater than 3 authorized).")
-        .next().atLine(8).withMessage("Refactor this method that has a complexity of 4 (which is greater than 3 authorized).")
-        .noMore();
+        .next().atLine(8).withMessage("Refactor this method that has a complexity of 4 (which is greater than 3 authorized).");
   }
 
 }

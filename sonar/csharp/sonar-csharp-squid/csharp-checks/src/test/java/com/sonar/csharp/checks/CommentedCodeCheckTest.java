@@ -40,4 +40,5 @@ public class CommentedCodeCheckTest {
         .next().atLine(6).withMessage("Sections of code should not be \"commented out\".")
         .next().atLine(11);
   }
+
 }

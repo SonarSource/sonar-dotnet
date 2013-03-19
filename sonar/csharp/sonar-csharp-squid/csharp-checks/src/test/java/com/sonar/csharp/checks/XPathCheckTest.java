@@ -20,13 +20,17 @@
 package com.sonar.csharp.checks;
 
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
 public class XPathCheckTest {
+
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void check() {
@@ -35,9 +39,8 @@ public class XPathCheckTest {
     check.message = "Avoid identifiers which are too long!";
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/xpath.cs"), check);
-    CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(7).withMessage("Avoid identifiers which are too long!")
-        .noMore();
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(7).withMessage("Avoid identifiers which are too long!");
   }
 
 }
