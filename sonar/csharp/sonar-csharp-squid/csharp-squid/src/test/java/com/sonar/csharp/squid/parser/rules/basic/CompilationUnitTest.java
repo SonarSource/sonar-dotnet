@@ -24,9 +24,7 @@ import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.sonar.sslr.test.parser.ParserMatchers.notParse;
-import static com.sonar.sslr.test.parser.ParserMatchers.parse;
-import static org.junit.Assert.assertThat;
+import static org.sonar.sslr.tests.Assertions.assertThat;
 
 public class CompilationUnitTest extends RuleTest {
 
@@ -40,20 +38,22 @@ public class CompilationUnitTest extends RuleTest {
 
   @Test
   public void ok() {
-    assertThat(p, parse("externAliasDirective"));
-    assertThat(p, parse("externAliasDirective externAliasDirective"));
-    assertThat(p, parse("usingDirective"));
-    assertThat(p, parse("usingDirective usingDirective"));
-    assertThat(p, parse("globalAttributes"));
-    assertThat(p, parse("namespaceMemberDeclaration"));
-    assertThat(p, parse("namespaceMemberDeclaration namespaceMemberDeclaration"));
-    assertThat(p, parse("externAliasDirective usingDirective globalAttributes namespaceMemberDeclaration"));
-    assertThat(p, parse("externAliasDirective externAliasDirective usingDirective globalAttributes namespaceMemberDeclaration"));
+    assertThat(p)
+        .matches("externAliasDirective")
+        .matches("externAliasDirective externAliasDirective")
+        .matches("usingDirective")
+        .matches("usingDirective usingDirective")
+        .matches("globalAttributes")
+        .matches("namespaceMemberDeclaration")
+        .matches("namespaceMemberDeclaration namespaceMemberDeclaration")
+        .matches("externAliasDirective usingDirective globalAttributes namespaceMemberDeclaration")
+        .matches("externAliasDirective externAliasDirective usingDirective globalAttributes namespaceMemberDeclaration");
   }
 
   @Test
   public void ko() {
-    assertThat(p, notParse("namespaceMemberDeclaration externAliasDirective"));
+    assertThat(p)
+        .notMatches("namespaceMemberDeclaration externAliasDirective");
   }
 
 }
