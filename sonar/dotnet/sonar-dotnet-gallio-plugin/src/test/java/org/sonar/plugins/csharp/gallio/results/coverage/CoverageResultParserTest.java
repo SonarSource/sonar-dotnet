@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.csharp.gallio.results.coverage;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.inject.internal.util.Lists;
@@ -40,6 +36,9 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.gallio.results.coverage.model.FileCoverage;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.test.TestUtils;
 
 import java.io.File;
@@ -221,9 +220,9 @@ public class CoverageResultParserTest {
     params.assemblyName = "Example.Core";
     params.fileNumber = 4;
     params.fileName = "Money.cs";
-    params.coveredLines = 49;
-    params.lines = 63;
-    params.coverage = 0.78;
+    params.coveredLines = 48;
+    params.lines = 62;
+    params.coverage = 0.77;
 
     checkParsing(params);
   }
