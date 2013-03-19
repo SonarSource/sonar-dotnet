@@ -34,25 +34,11 @@ public class LambdaExpressionTest extends RuleTest {
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(CSharpGrammar.ANONYMOUS_FUNCTION_SIGNATURE).override("anonymousFunctionSignature");
-    p.getGrammar().rule(CSharpGrammar.ANONYMOUS_FUNCTION_BODY).override("anonymousFunctionBody");
-
-    assertThat(p)
-        .matches("anonymousFunctionSignature => anonymousFunctionBody");
-  }
-
-  @Test
-  public void ko() {
-    assertThat(p)
-        .notMatches("");
-  }
-
-  @Test
   public void reallife() {
     assertThat(p)
         .matches("(x,y)=>String.Compare(x, y, true)")
-        .matches("item => item.Id == prdId");
+        .matches("item => item.Id == prdId")
+        .matches("async item => item.Id == prdId");
   }
 
 }

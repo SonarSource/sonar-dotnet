@@ -34,17 +34,11 @@ public class ExpressionStatementTest extends RuleTest {
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
-
-    assertThat(p)
-        .matches("expression;");
-  }
-
-  @Test
   public void reallife() {
     assertThat(p)
-        .matches("frameIndex++;");
+        .matches("foo();")
+        .matches("frameIndex++;")
+        .matches("await 0;");
   }
 
 }

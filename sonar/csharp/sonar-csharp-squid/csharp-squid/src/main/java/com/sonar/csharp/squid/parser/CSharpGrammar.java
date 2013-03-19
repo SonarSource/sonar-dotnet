@@ -155,7 +155,7 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 import static com.sonar.sslr.api.GenericTokenType.IDENTIFIER;
 
 /**
- * Definition of each element of the C# grammar, based on the C# language specification 4.0
+ * Definition of each element of the C# grammar, based on the C# language specification 5.0
  */
 public enum CSharpGrammar implements GrammarRuleKey {
 
@@ -291,6 +291,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
   LOCAL_CONSTANT_DECLARATION,
   CONSTANT_DECLARATOR,
   EXPRESSION_STATEMENT,
+  STATEMENT_EXPRESSION,
   SELECTION_STATEMENT,
   IF_STATEMENT,
   SWITCH_STATEMENT,
@@ -348,6 +349,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
   VARIABLE_INITIALIZER,
   METHOD_DECLARATION,
   METHOD_HEADER,
+  METHOD_MODIFIERS,
   METHOD_MODIFIER,
   RETURN_TYPE,
   MEMBER_NAME,
@@ -472,7 +474,11 @@ public enum CSharpGrammar implements GrammarRuleKey {
   FIXED_SIZE_BUFFER_DECLARATION,
   FIXED_SIZE_BUFFER_MODIFIER,
   FIXED_SIZE_BUFFER_DECLARATOR,
-  STACKALLOC_INITIALIZER;
+  STACKALLOC_INITIALIZER,
+
+  // C# 5.0
+  ASYNC,
+  AWAIT_EXPRESSION;
 
   private static final String SET = "set";
   private static final String GET = "get";
@@ -535,6 +541,9 @@ public enum CSharpGrammar implements GrammarRuleKey {
 
     // A.3 Unsafe code
     unsafe(b);
+
+    // C# 5.0
+    cSharp50(b);
 
     b.setRootRule(COMPILATION_UNIT);
 
@@ -751,6 +760,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
 
     b.rule(UNARY_EXPRESSION).is(
         b.firstOf(
+            AWAIT_EXPRESSION,
             b.sequence(LPARENTHESIS, TYPE, RPARENTHESIS, UNARY_EXPRESSION),
             PRIMARY_EXPRESSION,
             b.sequence(
@@ -819,8 +829,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
     b.rule(CONDITIONAL_OR_EXPRESSION).is(CONDITIONAL_AND_EXPRESSION, b.zeroOrMore(OR_OP, CONDITIONAL_AND_EXPRESSION)).skipIfOneChild();
     b.rule(NULL_COALESCING_EXPRESSION).is(CONDITIONAL_OR_EXPRESSION, b.optional(DOUBLE_QUESTION, NULL_COALESCING_EXPRESSION)).skipIfOneChild();
     b.rule(CONDITIONAL_EXPRESSION).is(NULL_COALESCING_EXPRESSION, b.optional(QUESTION, EXPRESSION, COLON, EXPRESSION)).skipIfOneChild();
-    b.rule(LAMBDA_EXPRESSION).is(ANONYMOUS_FUNCTION_SIGNATURE, LAMBDA, ANONYMOUS_FUNCTION_BODY);
-    b.rule(ANONYMOUS_METHOD_EXPRESSION).is(DELEGATE, b.optional(EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE), BLOCK);
+    b.rule(LAMBDA_EXPRESSION).is(b.optional(ASYNC), ANONYMOUS_FUNCTION_SIGNATURE, LAMBDA, ANONYMOUS_FUNCTION_BODY);
+    b.rule(ANONYMOUS_METHOD_EXPRESSION).is(b.optional(ASYNC), DELEGATE, b.optional(EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE), BLOCK);
     b.rule(ANONYMOUS_FUNCTION_SIGNATURE).is(
         b.firstOf(
             EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE,
@@ -947,7 +957,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
             unsafe(STACKALLOC_INITIALIZER)));
     b.rule(LOCAL_CONSTANT_DECLARATION).is(CONST, TYPE, CONSTANT_DECLARATOR, b.zeroOrMore(COMMA, CONSTANT_DECLARATOR));
     b.rule(CONSTANT_DECLARATOR).is(IDENTIFIER, EQUAL, EXPRESSION);
-    b.rule(EXPRESSION_STATEMENT).is(EXPRESSION, SEMICOLON);
+    b.rule(EXPRESSION_STATEMENT).is(STATEMENT_EXPRESSION, SEMICOLON);
+    b.rule(STATEMENT_EXPRESSION).is(EXPRESSION);
     b.rule(SELECTION_STATEMENT).is(
         b.firstOf(
             IF_STATEMENT,
@@ -1118,11 +1129,21 @@ public enum CSharpGrammar implements GrammarRuleKey {
             ARRAY_INITIALIZER));
     b.rule(METHOD_DECLARATION).is(METHOD_HEADER, METHOD_BODY);
     b.rule(METHOD_HEADER).is(
-        b.optional(ATTRIBUTES), b.zeroOrMore(METHOD_MODIFIER), b.optional(PARTIAL),
+        b.optional(ATTRIBUTES), b.optional(METHOD_MODIFIERS), b.optional(PARTIAL),
         RETURN_TYPE, MEMBER_NAME,
         b.optional(TYPE_PARAMETER_LIST),
         LPARENTHESIS, b.optional(FORMAL_PARAMETER_LIST), RPARENTHESIS,
         b.optional(TYPE_PARAMETER_CONSTRAINTS_CLAUSES)).skip();
+    b.rule(METHOD_MODIFIERS).is(
+        b.firstOf(
+            b.sequence(
+                b.next(ASYNC), METHOD_MODIFIER,
+                b.zeroOrMore(b.nextNot(ASYNC), METHOD_MODIFIER)),
+            b.sequence(
+                b.oneOrMore(b.nextNot(ASYNC), METHOD_MODIFIER),
+                b.optional(
+                    b.next(ASYNC), METHOD_MODIFIER,
+                    b.zeroOrMore(b.nextNot(ASYNC), METHOD_MODIFIER))))).skip();
     b.rule(METHOD_MODIFIER).is(
         b.firstOf(
             NEW,
@@ -1136,7 +1157,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
             OVERRIDE,
             ABSTRACT,
             EXTERN,
-            UNSAFE));
+            UNSAFE,
+            ASYNC));
     b.rule(RETURN_TYPE).is(
         b.firstOf(
             TYPE,
@@ -1632,6 +1654,11 @@ public enum CSharpGrammar implements GrammarRuleKey {
             UNSAFE));
     b.rule(FIXED_SIZE_BUFFER_DECLARATOR).is(IDENTIFIER, LBRACKET, EXPRESSION, RBRACKET);
     b.rule(STACKALLOC_INITIALIZER).is(STACKALLOC, TYPE, LBRACKET, EXPRESSION, RBRACKET);
+  }
+
+  private static void cSharp50(LexerfulGrammarBuilder b) {
+    b.rule(ASYNC).is("async");
+    b.rule(AWAIT_EXPRESSION).is("await", UNARY_EXPRESSION);
   }
 
 }

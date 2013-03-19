@@ -31,21 +31,14 @@ public class AnonymousMethodExpressionTest extends RuleTest {
   @Before
   public void init() {
     p.setRootRule(p.getGrammar().rule(CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION));
-    p.getGrammar().rule(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE).override("explicitAnonymousFunctionSignature");
-    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test
-  public void ok() {
+  public void reallife() {
     assertThat(p)
-        .matches("delegate block ")
-        .matches("delegate explicitAnonymousFunctionSignature block ");
-  }
-
-  @Test
-  public void ko() {
-    assertThat(p)
-        .notMatches("");
+        .matches("delegate {}")
+        .matches("delegate (int x) {}")
+        .matches("async delegate (int x) {}");
   }
 
 }

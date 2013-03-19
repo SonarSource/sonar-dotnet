@@ -31,14 +31,13 @@ public class StatementExpressionListTest extends RuleTest {
   @Before
   public void init() {
     p.setRootRule(p.getGrammar().rule(CSharpGrammar.STATEMENT_EXPRESSION_LIST));
-    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
   }
 
   @Test
-  public void ok() {
+  public void reallife() {
     assertThat(p)
-        .matches("expression")
-        .matches("expression,expression,expression");
+        .matches("0")
+        .matches("0, 0, 0");
   }
 
 }

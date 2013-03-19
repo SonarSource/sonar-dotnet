@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.squid.parser.rules.expressions;
+package com.sonar.csharp.squid.parser.rules.csharp50;
 
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
@@ -26,27 +26,19 @@ import org.junit.Test;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class UnaryExpressionTest extends RuleTest {
+public class AsyncTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammar.UNARY_EXPRESSION));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ASYNC));
   }
 
   @Test
   public void reallife() {
     assertThat(p)
-        .matches("0")
-        .matches("await 0")
-        .matches("(int)0")
-        .matches("-0")
-        .matches("!0")
-        .matches("++foo")
-        .matches("--foo")
-        .matches("~0")
-        .matches("+0")
+        .matches("async")
 
-        .matches("(Level)info.GetValue(\"Level\", typeof(Level))");
+        .notMatches("new");
   }
 
 }

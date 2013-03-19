@@ -31,15 +31,13 @@ public class UsingDirectiveTest extends RuleTest {
   @Before
   public void init() {
     p.setRootRule(p.getGrammar().rule(CSharpGrammar.USING_DIRECTIVE));
-    p.getGrammar().rule(CSharpGrammar.NAMESPACE_OR_TYPE_NAME).override("namespaceOrTypeName");
-    p.getGrammar().rule(CSharpGrammar.NAMESPACE_NAME).override("namespaceName");
   }
 
   @Test
-  public void ok() {
+  public void reallife() {
     assertThat(p)
-        .matches("using id = namespaceOrTypeName;")
-        .matches("using namespaceName;");
+        .matches("using id = foo;")
+        .matches("using foo;");
   }
 
 }
