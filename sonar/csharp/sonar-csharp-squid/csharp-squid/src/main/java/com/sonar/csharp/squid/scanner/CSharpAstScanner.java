@@ -19,6 +19,7 @@
  */
 package com.sonar.csharp.squid.scanner;
 
+import com.google.common.base.Charsets;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
@@ -37,11 +38,42 @@ import com.sonar.sslr.squid.metrics.CommentsVisitor;
 import com.sonar.sslr.squid.metrics.CounterVisitor;
 import com.sonar.sslr.squid.metrics.LinesOfCodeVisitor;
 import com.sonar.sslr.squid.metrics.LinesVisitor;
+import org.sonar.squid.api.SourceCode;
+import org.sonar.squid.api.SourceFile;
 import org.sonar.squid.api.SourceProject;
+import org.sonar.squid.indexer.QueryByType;
+
+import java.io.File;
+import java.util.Collection;
 
 public final class CSharpAstScanner {
 
   private CSharpAstScanner() {
+  }
+
+  /**
+   * Helper method for testing checks without having to deploy them on a Sonar instance.
+   * Uses default parser configuration with UTF-8.
+   */
+  public static SourceFile scanSingleFile(File file, SquidAstVisitor<Grammar>... visitors) {
+    CSharpConfiguration conf = new CSharpConfiguration(Charsets.UTF_8);
+    return scanSingleFile(file, conf, visitors);
+  }
+
+  /**
+   * Helper method for testing checks without having to deploy them on a Sonar instance.
+   */
+  public static SourceFile scanSingleFile(File file, CSharpConfiguration conf, SquidAstVisitor<Grammar>... visitors) {
+    if (!file.isFile()) {
+      throw new IllegalArgumentException("File '" + file + "' not found.");
+    }
+    AstScanner<Grammar> scanner = create(conf, visitors);
+    scanner.scanFile(file);
+    Collection<SourceCode> sources = scanner.getIndex().search(new QueryByType(SourceFile.class));
+    if (sources.size() != 1) {
+      throw new IllegalStateException("Only one SourceFile was expected whereas " + sources.size() + " has been returned.");
+    }
+    return (SourceFile) sources.iterator().next();
   }
 
   public static AstScanner<Grammar> create(CSharpConfiguration conf, SquidAstVisitor<Grammar>... visitors) {

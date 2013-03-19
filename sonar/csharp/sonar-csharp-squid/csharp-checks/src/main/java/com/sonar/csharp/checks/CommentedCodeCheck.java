@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
 @Rule(
   key = "CommentedCode",
   priority = Priority.BLOCKER)
-@BelongsToProfile(title = CSharpChecksConstants.SONAR_CSHARP_WAY_PROFILE_KEY, priority = Priority.BLOCKER)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.BLOCKER)
 public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final double THRESHOLD = 0.94;

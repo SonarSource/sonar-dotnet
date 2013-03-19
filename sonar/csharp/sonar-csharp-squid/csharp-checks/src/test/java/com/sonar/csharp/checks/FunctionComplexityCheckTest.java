@@ -26,17 +26,27 @@ import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
-public class XPathCheckTest {
+public class FunctionComplexityCheckTest {
 
   @Test
-  public void check() {
-    XPathCheck check = new XPathCheck();
-    check.xpathQuery = "//IDENTIFIER[string-length(@tokenValue) >= 10]";
-    check.message = "Avoid identifiers which are too long!";
+  public void test() {
+    FunctionComplexityCheck check = new FunctionComplexityCheck();
 
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/xpath.cs"), check);
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/functionComplexity.cs"), check);
     CheckMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(7).withMessage("Avoid identifiers which are too long!")
+        .next().atLine(3).withMessage("Refactor this method that has a complexity of 11 (which is greater than 10 authorized).")
+        .noMore();
+  }
+
+  @Test
+  public void custom() {
+    FunctionComplexityCheck check = new FunctionComplexityCheck();
+    check.maximumFunctionComplexityThreshold = 3;
+
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/functionComplexity.cs"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(3).withMessage("Refactor this method that has a complexity of 11 (which is greater than 3 authorized).")
+        .next().atLine(8).withMessage("Refactor this method that has a complexity of 4 (which is greater than 3 authorized).")
         .noMore();
   }
 

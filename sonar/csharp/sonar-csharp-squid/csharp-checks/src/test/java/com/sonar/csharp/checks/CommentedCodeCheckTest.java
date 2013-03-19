@@ -19,12 +19,13 @@
  */
 package com.sonar.csharp.checks;
 
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
-import static com.sonar.csharp.checks.ResourceParser.scanFile;
+import java.io.File;
 
 public class CommentedCodeCheckTest {
 
@@ -33,11 +34,10 @@ public class CommentedCodeCheckTest {
 
   @Test
   public void detected() {
-    SourceFile file = scanFile("/checks/commentedCode.cs", new CommentedCodeCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/commentedCode.cs"), new CommentedCodeCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(6).withMessage("Sections of code should not be \"commented out\".")
         .next().atLine(11);
   }
-
 }

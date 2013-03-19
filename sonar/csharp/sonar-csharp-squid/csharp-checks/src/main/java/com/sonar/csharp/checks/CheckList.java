@@ -25,12 +25,15 @@ import java.util.List;
 
 public final class CheckList {
 
+  public static final String SONAR_WAY_PROFILE = "Sonar way";
+
   private CheckList() {
   }
 
   public static List<Class> getChecks() {
     return Lists.<Class> newArrayList(
         CommentedCodeCheck.class,
+        FunctionComplexityCheck.class,
         TodoCommentCheck.class,
         ParsingErrorCheck.class,
         XPathCheck.class);

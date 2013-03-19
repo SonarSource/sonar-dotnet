@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
   key = "TodoComment",
   cardinality = Cardinality.MULTIPLE,
   priority = Priority.MAJOR)
-@BelongsToProfile(title = CSharpChecksConstants.SONAR_CSHARP_WAY_PROFILE_KEY, priority = Priority.MAJOR)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class TodoCommentCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
 
   private static final String DEFAULT_PATTERN = "(TODO)|(todo)|(Todo)";

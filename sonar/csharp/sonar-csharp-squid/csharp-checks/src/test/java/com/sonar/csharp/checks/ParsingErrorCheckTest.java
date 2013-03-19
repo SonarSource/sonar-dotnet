@@ -19,12 +19,14 @@
  */
 package com.sonar.csharp.checks;
 
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
-import static com.sonar.csharp.checks.ResourceParser.scanFile;
+import java.io.File;
+
 import static org.hamcrest.Matchers.containsString;
 
 public class ParsingErrorCheckTest {
@@ -34,7 +36,7 @@ public class ParsingErrorCheckTest {
 
   @Test
   public void detected() {
-    SourceFile file = scanFile("/checks/parsingError.cs", new ParsingErrorCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.cs"), new ParsingErrorCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(8).withMessageThat(containsString("DOT expected but \"}\" [RCURLYBRACE] found"));

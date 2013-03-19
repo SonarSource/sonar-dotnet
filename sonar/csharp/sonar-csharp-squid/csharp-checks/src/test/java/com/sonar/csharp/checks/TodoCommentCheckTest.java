@@ -19,12 +19,13 @@
  */
 package com.sonar.csharp.checks;
 
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
-import static com.sonar.csharp.checks.ResourceParser.scanFile;
+import java.io.File;
 
 public class TodoCommentCheckTest {
 
@@ -33,7 +34,7 @@ public class TodoCommentCheckTest {
 
   @Test
   public void detected() {
-    SourceFile file = scanFile("/checks/comments.cs", new TodoCommentCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/comments.cs"), new TodoCommentCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(9)
