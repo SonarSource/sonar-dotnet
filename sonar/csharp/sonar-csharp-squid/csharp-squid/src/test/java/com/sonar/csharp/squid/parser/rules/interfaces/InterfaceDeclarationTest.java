@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class InterfaceDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.interfaceDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.variantTypeParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceBase).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INTERFACE_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.VARIANT_TYPE_PARAMETER_LIST).override("variantTypeParameterList");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_BASE).override("interfaceBase");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS_CLAUSES).override("typeParameterConstraintsClauses");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_BODY).override("interfaceBody");
   }
 
   @Test

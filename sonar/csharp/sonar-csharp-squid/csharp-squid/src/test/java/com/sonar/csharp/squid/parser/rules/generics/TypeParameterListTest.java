@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.generics;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class TypeParameterListTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeParameterList));
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameters).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_LIST));
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETERS).override("typeParameters");
   }
 
   @Test

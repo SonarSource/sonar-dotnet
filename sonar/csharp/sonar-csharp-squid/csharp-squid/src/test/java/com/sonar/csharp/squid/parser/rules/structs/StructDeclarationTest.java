@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.structs;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class StructDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.structDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.structInterfaces).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.structBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.STRUCT_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.STRUCT_INTERFACES).override("structInterfaces");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_LIST).override("typeParameterList");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS_CLAUSES).override("typeParameterConstraintsClauses");
+    p.getGrammar().rule(CSharpGrammar.STRUCT_BODY).override("structBody");
   }
 
   @Test

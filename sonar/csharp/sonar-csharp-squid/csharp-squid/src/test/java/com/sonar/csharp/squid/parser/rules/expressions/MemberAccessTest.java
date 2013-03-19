@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class MemberAccessTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.memberAccess));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.MEMBER_ACCESS));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.typeArgumentList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.predefinedType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.qualifiedAliasMember).mock();
+    p.getGrammar().rule(CSharpGrammar.TYPE_ARGUMENT_LIST).override("typeArgumentList");
+    p.getGrammar().rule(CSharpGrammar.PREDEFINED_TYPE).override("predefinedType");
+    p.getGrammar().rule(CSharpGrammar.QUALIFIED_ALIAS_MEMBER).override("qualifiedAliasMember");
 
     assertThat(p)
         .matches("predefinedType.id")
@@ -47,8 +47,8 @@ public class MemberAccessTest extends RuleTest {
 
   @Test
   public void ko() {
-    p.getGrammar().rule(CSharpGrammarImpl.qualifiedAliasMember).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeArgumentList).mock();
+    p.getGrammar().rule(CSharpGrammar.QUALIFIED_ALIAS_MEMBER).override("qualifiedAliasMember");
+    p.getGrammar().rule(CSharpGrammar.TYPE_ARGUMENT_LIST).override("typeArgumentList");
 
     assertThat(p)
         .notMatches("")

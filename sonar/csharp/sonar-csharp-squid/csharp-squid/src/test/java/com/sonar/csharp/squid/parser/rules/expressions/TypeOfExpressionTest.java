@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class TypeOfExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeOfExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TYPE_OF_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.unboundTypeName).mock();
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.UNBOUND_TYPE_NAME).override("");
 
     assertThat(p)
         .matches("typeof (type)")

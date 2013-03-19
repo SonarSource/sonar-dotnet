@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class UsingDirectiveTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.usingDirective));
-    p.getGrammar().rule(CSharpGrammarImpl.namespaceOrTypeName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.namespaceName).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.USING_DIRECTIVE));
+    p.getGrammar().rule(CSharpGrammar.NAMESPACE_OR_TYPE_NAME).override("namespaceOrTypeName");
+    p.getGrammar().rule(CSharpGrammar.NAMESPACE_NAME).override("namespaceName");
   }
 
   @Test

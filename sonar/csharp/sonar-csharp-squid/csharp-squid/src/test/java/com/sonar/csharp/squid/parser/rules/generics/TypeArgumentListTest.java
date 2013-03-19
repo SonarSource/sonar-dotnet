@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.generics;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class TypeArgumentListTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeArgumentList));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TYPE_ARGUMENT_LIST));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
 
     assertThat(p)
         .matches("< type >")

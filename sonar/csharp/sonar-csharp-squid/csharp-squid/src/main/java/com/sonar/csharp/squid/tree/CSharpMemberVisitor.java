@@ -23,7 +23,7 @@ import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.api.source.SourceType;
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
@@ -40,14 +40,14 @@ public class CSharpMemberVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void init() {
     subscribeTo(
-        CSharpGrammarImpl.methodDeclaration,
-        CSharpGrammarImpl.constructorBody,
-        CSharpGrammarImpl.staticConstructorBody,
-        CSharpGrammarImpl.destructorBody,
-        CSharpGrammarImpl.accessorBody,
-        CSharpGrammarImpl.addAccessorDeclaration,
-        CSharpGrammarImpl.removeAccessorDeclaration,
-        CSharpGrammarImpl.operatorBody);
+        CSharpGrammar.METHOD_DECLARATION,
+        CSharpGrammar.CONSTRUCTOR_BODY,
+        CSharpGrammar.STATIC_CONSTRUCTOR_BODY,
+        CSharpGrammar.DESTRUCTOR_BODY,
+        CSharpGrammar.ACCESSOR_BODY,
+        CSharpGrammar.ADD_ACCESSOR_DECLARATION,
+        CSharpGrammar.REMOVE_ACCESSOR_DECLARATION,
+        CSharpGrammar.OPERATOR_BODY);
   }
 
   /**
@@ -68,21 +68,21 @@ public class CSharpMemberVisitor extends SquidAstVisitor<Grammar> {
 
   private String defineMemberSignature(AstNode astNode) {
     String memberSignature = "";
-    if (astNode.is(CSharpGrammarImpl.methodDeclaration)) {
-      memberSignature = extractMethodSignature(astNode.getFirstChild(CSharpGrammarImpl.methodBody));
-    } else if (astNode.is(CSharpGrammarImpl.accessorBody)) {
+    if (astNode.is(CSharpGrammar.METHOD_DECLARATION)) {
+      memberSignature = extractMethodSignature(astNode.getFirstChild(CSharpGrammar.METHOD_BODY));
+    } else if (astNode.is(CSharpGrammar.ACCESSOR_BODY)) {
       memberSignature = extractPropertySignature(astNode);
-    } else if (astNode.is(CSharpGrammarImpl.addAccessorDeclaration)) {
+    } else if (astNode.is(CSharpGrammar.ADD_ACCESSOR_DECLARATION)) {
       memberSignature = extractEventSignature("add", astNode);
-    } else if (astNode.is(CSharpGrammarImpl.removeAccessorDeclaration)) {
+    } else if (astNode.is(CSharpGrammar.REMOVE_ACCESSOR_DECLARATION)) {
       memberSignature = extractEventSignature("remove", astNode);
-    } else if (astNode.is(CSharpGrammarImpl.constructorBody)) {
+    } else if (astNode.is(CSharpGrammar.CONSTRUCTOR_BODY)) {
       memberSignature = ".ctor:" + astNode.getTokenLine();
-    } else if (astNode.is(CSharpGrammarImpl.staticConstructorBody)) {
+    } else if (astNode.is(CSharpGrammar.STATIC_CONSTRUCTOR_BODY)) {
       memberSignature = ".cctor():" + astNode.getTokenLine();
-    } else if (astNode.is(CSharpGrammarImpl.destructorBody)) {
+    } else if (astNode.is(CSharpGrammar.DESTRUCTOR_BODY)) {
       memberSignature = "Finalize:" + astNode.getTokenLine();
-    } else if (astNode.is(CSharpGrammarImpl.operatorBody)) {
+    } else if (astNode.is(CSharpGrammar.OPERATOR_BODY)) {
       // call it "op", but should be more precise: for instance, "+" => "op_Addition"
       memberSignature = "op:" + astNode.getTokenLine();
     } else {
@@ -104,17 +104,17 @@ public class CSharpMemberVisitor extends SquidAstVisitor<Grammar> {
   }
 
   private String extractMethodSignature(AstNode astNode) {
-    return astNode.getParent().getFirstChild(CSharpGrammarImpl.memberName).getTokenValue() + ":" + astNode.getTokenLine();
+    return astNode.getParent().getFirstChild(CSharpGrammar.MEMBER_NAME).getTokenValue() + ":" + astNode.getTokenLine();
   }
 
   private String extractPropertySignature(AstNode astNode) {
     StringBuilder signature = new StringBuilder(astNode.getPreviousSibling().getLastToken().getValue());
     signature.append("_");
     AstNode delcarationNode = astNode.getParent().getParent().getParent();
-    if (delcarationNode.is(CSharpGrammarImpl.indexerDeclaration)) {
+    if (delcarationNode.is(CSharpGrammar.INDEXER_DECLARATION)) {
       signature.append("Item");
     } else {
-      signature.append(delcarationNode.getFirstChild(CSharpGrammarImpl.memberName).getTokenValue());
+      signature.append(delcarationNode.getFirstChild(CSharpGrammar.MEMBER_NAME).getTokenValue());
     }
     signature.append(":");
     signature.append(astNode.getTokenLine());
@@ -125,7 +125,7 @@ public class CSharpMemberVisitor extends SquidAstVisitor<Grammar> {
     StringBuilder signature = new StringBuilder(accessor);
     signature.append("_");
     AstNode delcarationNode = astNode.getParent().getParent();
-    signature.append(delcarationNode.getFirstChild(CSharpGrammarImpl.memberName).getTokenValue());
+    signature.append(delcarationNode.getFirstChild(CSharpGrammar.MEMBER_NAME).getTokenValue());
     signature.append(":");
     signature.append(astNode.getTokenLine());
     return signature.toString();

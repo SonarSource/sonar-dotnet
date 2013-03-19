@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class PostElementAccessTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.postElementAccess));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.POST_ELEMENT_ACCESS));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.argumentList).mock();
+    p.getGrammar().rule(CSharpGrammar.ARGUMENT_LIST).override("argumentList");
 
     assertThat(p)
         .matches("[ argumentList ]");

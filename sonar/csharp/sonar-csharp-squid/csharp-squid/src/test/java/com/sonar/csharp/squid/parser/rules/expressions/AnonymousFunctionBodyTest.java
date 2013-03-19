@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class AnonymousFunctionBodyTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.anonymousFunctionBody));
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ANONYMOUS_FUNCTION_BODY));
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test

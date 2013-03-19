@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,16 +30,16 @@ public class ArrayCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.arrayCreationExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ARRAY_CREATION_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.nonArrayType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expressionList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.rankSpecifier).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.arrayInitializer).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.arrayType).mock();
+    p.getGrammar().rule(CSharpGrammar.NON_ARRAY_TYPE).override("nonArrayType");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION_LIST).override("expressionList");
+    p.getGrammar().rule(CSharpGrammar.RANK_SPECIFIER).override("rankSpecifier");
+    p.getGrammar().rule(CSharpGrammar.ARRAY_INITIALIZER).override("arrayInitializer");
+    p.getGrammar().rule(CSharpGrammar.ARRAY_TYPE).override("arrayType");
 
     assertThat(p)
         .matches("new nonArrayType[expressionList]")
@@ -53,7 +53,7 @@ public class ArrayCreationExpressionTest extends RuleTest {
 
   @Test
   public void ko() {
-    p.getGrammar().rule(CSharpGrammarImpl.arrayType).mock();
+    p.getGrammar().rule(CSharpGrammar.ARRAY_TYPE).override("");
 
     assertThat(p)
         .notMatches("new arrayType");

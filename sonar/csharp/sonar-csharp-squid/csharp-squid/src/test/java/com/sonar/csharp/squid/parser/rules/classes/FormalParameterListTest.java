@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class FormalParameterListTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.formalParameterList));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FORMAL_PARAMETER_LIST));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.fixedParameters).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.parameterArray).mock();
+    p.getGrammar().rule(CSharpGrammar.FIXED_PARAMETERS).override("fixedParameters");
+    p.getGrammar().rule(CSharpGrammar.PARAMETER_ARRAY).override("parameterArray");
 
     assertThat(p)
         .matches("fixedParameters")

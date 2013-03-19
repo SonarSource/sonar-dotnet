@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class ClassBaseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.classBase));
-    p.getGrammar().rule(CSharpGrammarImpl.classType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceTypeList).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.CLASS_BASE));
+    p.getGrammar().rule(CSharpGrammar.CLASS_TYPE).override("classType");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_TYPE_LIST).override("interfaceTypeList");
   }
 
   @Test

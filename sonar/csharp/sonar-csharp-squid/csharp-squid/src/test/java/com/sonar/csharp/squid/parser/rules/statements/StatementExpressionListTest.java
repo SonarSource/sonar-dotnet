@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class StatementExpressionListTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.statementExpressionList));
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.STATEMENT_EXPRESSION_LIST));
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
   }
 
   @Test

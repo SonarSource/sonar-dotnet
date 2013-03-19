@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,15 +30,15 @@ public class ForStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.forStatement));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FOR_STATEMENT));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.forInitializer).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.forCondition).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.forIterator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
+    p.getGrammar().rule(CSharpGrammar.FOR_INITIALIZER).override("forInitializer");
+    p.getGrammar().rule(CSharpGrammar.FOR_CONDITION).override("forCondition");
+    p.getGrammar().rule(CSharpGrammar.FOR_ITERATOR).override("forIterator");
+    p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT).override("embeddedStatement");
 
     assertThat(p)
         .matches("for ( ;; ) embeddedStatement")

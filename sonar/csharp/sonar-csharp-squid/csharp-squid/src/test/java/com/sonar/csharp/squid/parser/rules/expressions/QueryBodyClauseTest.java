@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class QueryBodyClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.queryBodyClause));
-    p.getGrammar().rule(CSharpGrammarImpl.fromClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.letClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.whereClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.joinClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.joinIntoClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.orderByClause).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.QUERY_BODY_CLAUSE));
+    p.getGrammar().rule(CSharpGrammar.FROM_CLAUSE).override("fromClause");
+    p.getGrammar().rule(CSharpGrammar.LET_CLAUSE).override("letClause");
+    p.getGrammar().rule(CSharpGrammar.WHERE_CLAUSE).override("whereClause");
+    p.getGrammar().rule(CSharpGrammar.JOIN_CLAUSE).override("joinClause");
+    p.getGrammar().rule(CSharpGrammar.JOIN_INTO_CLAUSE).override("joinIntoClause");
+    p.getGrammar().rule(CSharpGrammar.ORDER_BY_CLAUSE).override("orderByClause");
   }
 
   @Test

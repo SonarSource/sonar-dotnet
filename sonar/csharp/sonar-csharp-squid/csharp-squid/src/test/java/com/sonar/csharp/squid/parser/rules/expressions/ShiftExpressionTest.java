@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class ShiftExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.shiftExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.SHIFT_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.additiveExpression).mock();
+    p.getGrammar().rule(CSharpGrammar.ADDITIVE_EXPRESSION).override("additiveExpression");
 
     assertThat(p)
         .matches("additiveExpression")

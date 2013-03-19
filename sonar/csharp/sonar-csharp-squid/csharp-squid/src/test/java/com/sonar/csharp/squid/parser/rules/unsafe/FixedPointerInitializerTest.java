@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class FixedPointerInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.fixedPointerInitializer));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FIXED_POINTER_INITIALIZER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.variableReference).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.getGrammar().rule(CSharpGrammar.VARIABLE_REFERENCE).override("variableReference");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
 
     assertThat(p)
         .matches("&variableReference")

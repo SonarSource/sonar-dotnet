@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.structs;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,17 +30,17 @@ public class StructBodyTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.structBody));
-    p.getGrammar().rule(CSharpGrammarImpl.constantDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.fieldDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.methodDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.propertyDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.eventDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.indexerDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.operatorDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.constructorDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.staticConstructorDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeDeclaration).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.STRUCT_BODY));
+    p.getGrammar().rule(CSharpGrammar.CONSTANT_DECLARATION).override("constantDeclaration");
+    p.getGrammar().rule(CSharpGrammar.FIELD_DECLARATION).override("fieldDeclaration");
+    p.getGrammar().rule(CSharpGrammar.METHOD_DECLARATION).override("methodDeclaration");
+    p.getGrammar().rule(CSharpGrammar.PROPERTY_DECLARATION).override("propertyDeclaration");
+    p.getGrammar().rule(CSharpGrammar.EVENT_DECLARATION).override("eventDeclaration");
+    p.getGrammar().rule(CSharpGrammar.INDEXER_DECLARATION).override("indexerDeclaration");
+    p.getGrammar().rule(CSharpGrammar.OPERATOR_DECLARATION).override("operatorDeclaration");
+    p.getGrammar().rule(CSharpGrammar.CONSTRUCTOR_DECLARATION).override("constructorDeclaration");
+    p.getGrammar().rule(CSharpGrammar.STATIC_CONSTRUCTOR_DECLARATION).override("staticConstructorDeclaration");
+    p.getGrammar().rule(CSharpGrammar.TYPE_DECLARATION).override("typeDeclaration");
   }
 
   @Test

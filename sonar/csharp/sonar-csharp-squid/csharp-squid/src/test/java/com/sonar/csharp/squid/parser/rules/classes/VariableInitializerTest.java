@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class VariableInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.variableInitializer));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.VARIABLE_INITIALIZER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.arrayInitializer).mock();
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
+    p.getGrammar().rule(CSharpGrammar.ARRAY_INITIALIZER).override("arrayInitializer");
 
     assertThat(p)
         .matches("expression")

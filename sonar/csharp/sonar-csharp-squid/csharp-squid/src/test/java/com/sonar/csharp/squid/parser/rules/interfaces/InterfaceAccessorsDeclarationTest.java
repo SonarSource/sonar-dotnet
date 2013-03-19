@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class InterfaceAccessorsDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.interfaceAccessors));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INTERFACE_ACCESSORS));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
   }
 
   @Test

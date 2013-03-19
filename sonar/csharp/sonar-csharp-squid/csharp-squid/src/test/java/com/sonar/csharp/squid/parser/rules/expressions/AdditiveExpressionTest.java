@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class AdditiveExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.additiveExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.multiplicativeExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ADDITIVE_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.MULTIPLICATIVE_EXPRESSION).override("multiplicativeExpression");
   }
 
   @Test

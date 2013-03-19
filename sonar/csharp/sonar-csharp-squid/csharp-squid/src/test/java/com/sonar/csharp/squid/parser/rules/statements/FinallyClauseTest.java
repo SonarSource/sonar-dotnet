@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class FinallyClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.finallyClause));
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FINALLY_CLAUSE));
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test

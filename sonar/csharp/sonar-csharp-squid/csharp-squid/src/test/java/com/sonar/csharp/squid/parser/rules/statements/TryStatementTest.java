@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class TryStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.tryStatement));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TRY_STATEMENT));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.catchClauses).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.finallyClause).mock();
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
+    p.getGrammar().rule(CSharpGrammar.CATCH_CLAUSES).override("catchClauses");
+    p.getGrammar().rule(CSharpGrammar.FINALLY_CLAUSE).override("finallyClause");
 
     assertThat(p)
         .matches("try block catchClauses")

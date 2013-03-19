@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class FixedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.fixedStatement));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FIXED_STATEMENT));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.pointerType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.fixedPointerDeclarator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
+    p.getGrammar().rule(CSharpGrammar.POINTER_TYPE).override("pointerType");
+    p.getGrammar().rule(CSharpGrammar.FIXED_POINTER_DECLARATOR).override("fixedPointerDeclarator");
+    p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT).override("embeddedStatement");
 
     assertThat(p)
         .matches("fixed(pointerType fixedPointerDeclarator) embeddedStatement")

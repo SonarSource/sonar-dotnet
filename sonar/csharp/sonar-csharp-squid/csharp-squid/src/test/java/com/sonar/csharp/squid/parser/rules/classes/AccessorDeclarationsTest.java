@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class AccessorDeclarationsTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.accessorDeclarations));
-    p.getGrammar().rule(CSharpGrammarImpl.getAccessorDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.setAccessorDeclaration).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ACCESSOR_DECLARATIONS));
+    p.getGrammar().rule(CSharpGrammar.GET_ACCESSOR_DECLARATION).override("getAccessorDeclaration");
+    p.getGrammar().rule(CSharpGrammar.SET_ACCESSOR_DECLARATION).override("setAccessorDeclaration");
   }
 
   @Test

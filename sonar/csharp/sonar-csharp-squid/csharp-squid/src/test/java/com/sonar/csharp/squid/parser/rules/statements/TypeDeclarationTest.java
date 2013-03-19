@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class TypeDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.classDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.structDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.enumDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.delegateDeclaration).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TYPE_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.CLASS_DECLARATION).override("classDeclaration");
+    p.getGrammar().rule(CSharpGrammar.STRUCT_DECLARATION).override("structDeclaration");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_DECLARATION).override("interfaceDeclaration");
+    p.getGrammar().rule(CSharpGrammar.ENUM_DECLARATION).override("enumDeclaration");
+    p.getGrammar().rule(CSharpGrammar.DELEGATE_DECLARATION).override("delegateDeclaration");
   }
 
   @Test

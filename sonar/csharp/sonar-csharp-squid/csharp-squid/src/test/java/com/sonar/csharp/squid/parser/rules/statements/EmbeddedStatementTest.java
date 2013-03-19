@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,18 +30,18 @@ public class EmbeddedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expressionStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.selectionStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.iterationStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.jumpStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.tryStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.checkedStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.uncheckedStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.lockStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.usingStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.yieldStatement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION_STATEMENT).override("expressionStatement");
+    p.getGrammar().rule(CSharpGrammar.SELECTION_STATEMENT).override("selectionStatement");
+    p.getGrammar().rule(CSharpGrammar.ITERATION_STATEMENT).override("iterationStatement");
+    p.getGrammar().rule(CSharpGrammar.JUMP_STATEMENT).override("jumpStatement");
+    p.getGrammar().rule(CSharpGrammar.TRY_STATEMENT).override("tryStatement");
+    p.getGrammar().rule(CSharpGrammar.CHECKED_STATEMENT).override("checkedStatement");
+    p.getGrammar().rule(CSharpGrammar.UNCHECKED_STATEMENT).override("uncheckedStatement");
+    p.getGrammar().rule(CSharpGrammar.LOCK_STATEMENT).override("lockStatement");
+    p.getGrammar().rule(CSharpGrammar.USING_STATEMENT).override("usingStatement");
+    p.getGrammar().rule(CSharpGrammar.YIELD_STATEMENT).override("yieldStatement");
 
   }
 

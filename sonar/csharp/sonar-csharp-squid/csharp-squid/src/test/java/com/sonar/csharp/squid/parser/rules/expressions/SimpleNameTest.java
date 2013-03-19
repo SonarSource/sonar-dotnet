@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class SimpleNameTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.simpleName));
-    p.getGrammar().rule(CSharpGrammarImpl.typeArgumentList).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.SIMPLE_NAME));
+    p.getGrammar().rule(CSharpGrammar.TYPE_ARGUMENT_LIST).override("typeArgumentList");
   }
 
   @Test

@@ -24,7 +24,7 @@ import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceType;
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
@@ -51,23 +51,23 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void init() {
     subscribeTo(
-        CSharpGrammarImpl.namespaceDeclaration,
-        CSharpGrammarImpl.classDeclaration,
-        CSharpGrammarImpl.interfaceDeclaration,
-        CSharpGrammarImpl.delegateDeclaration,
-        CSharpGrammarImpl.structDeclaration,
-        CSharpGrammarImpl.enumDeclaration);
+        CSharpGrammar.NAMESPACE_DECLARATION,
+        CSharpGrammar.CLASS_DECLARATION,
+        CSharpGrammar.INTERFACE_DECLARATION,
+        CSharpGrammar.DELEGATE_DECLARATION,
+        CSharpGrammar.STRUCT_DECLARATION,
+        CSharpGrammar.ENUM_DECLARATION);
 
-    keywordMap.put(CSharpGrammarImpl.classDeclaration, CSharpKeyword.CLASS);
-    metricMap.put(CSharpGrammarImpl.classDeclaration, CSharpMetric.CLASSES);
-    keywordMap.put(CSharpGrammarImpl.interfaceDeclaration, CSharpKeyword.INTERFACE);
-    metricMap.put(CSharpGrammarImpl.interfaceDeclaration, CSharpMetric.INTERFACES);
-    keywordMap.put(CSharpGrammarImpl.delegateDeclaration, CSharpKeyword.DELEGATE);
-    metricMap.put(CSharpGrammarImpl.delegateDeclaration, CSharpMetric.DELEGATES);
-    keywordMap.put(CSharpGrammarImpl.structDeclaration, CSharpKeyword.STRUCT);
-    metricMap.put(CSharpGrammarImpl.structDeclaration, CSharpMetric.STRUCTS);
-    keywordMap.put(CSharpGrammarImpl.enumDeclaration, CSharpKeyword.ENUM);
-    metricMap.put(CSharpGrammarImpl.enumDeclaration, CSharpMetric.ENUMS);
+    keywordMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpKeyword.CLASS);
+    metricMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpMetric.CLASSES);
+    keywordMap.put(CSharpGrammar.INTERFACE_DECLARATION, CSharpKeyword.INTERFACE);
+    metricMap.put(CSharpGrammar.INTERFACE_DECLARATION, CSharpMetric.INTERFACES);
+    keywordMap.put(CSharpGrammar.DELEGATE_DECLARATION, CSharpKeyword.DELEGATE);
+    metricMap.put(CSharpGrammar.DELEGATE_DECLARATION, CSharpMetric.DELEGATES);
+    keywordMap.put(CSharpGrammar.STRUCT_DECLARATION, CSharpKeyword.STRUCT);
+    metricMap.put(CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS);
+    keywordMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpKeyword.ENUM);
+    metricMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
   }
 
   /**
@@ -76,13 +76,13 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void visitNode(AstNode astNode) {
     currentNodeType = astNode.getType();
-    if (astNode.is(CSharpGrammarImpl.namespaceDeclaration)) {
+    if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       namespaceName = extractNamespaceSignature(astNode);
     } else {
       String typeName = extractTypeName(astNode);
       typeNameStack.push(typeName);
       SourceType type = null;
-      if (currentNodeType.equals(CSharpGrammarImpl.classDeclaration)) {
+      if (currentNodeType.equals(CSharpGrammar.CLASS_DECLARATION)) {
         type = new SourceClass(extractTypeSignature(typeName), typeName);
       } else {
         type = new SourceType(extractTypeSignature(typeName), typeName);
@@ -97,7 +97,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
    */
   @Override
   public void leaveNode(AstNode astNode) {
-    if (!astNode.is(CSharpGrammarImpl.namespaceDeclaration)) {
+    if (!astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       getContext().popSourceCode();
       typeNameStack.pop();
     } else {
@@ -131,7 +131,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       typeName.append(typeNameStack.peek());
       typeName.append(".");
     }
-    if (currentNodeType.equals(CSharpGrammarImpl.delegateDeclaration)) {
+    if (currentNodeType.equals(CSharpGrammar.DELEGATE_DECLARATION)) {
       typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getNextSibling().getTokenValue());
     } else {
       typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getTokenValue());

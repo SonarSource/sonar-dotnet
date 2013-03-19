@@ -38,7 +38,7 @@ public final class CSharpParser {
   }
 
   public static Parser<Grammar> create(CSharpConfiguration conf, ParsingEventListener... parsingEventListeners) {
-    return Parser.builder(CSharpGrammarImpl.create().buildWithMemoizationOfMatchesForAllRules())
+    return Parser.builder(CSharpGrammar.create().buildWithMemoizationOfMatchesForAllRules())
         .withLexer(CSharpLexer.create(conf))
         .setParsingEventListeners(parsingEventListeners)
         .build();

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class InterfaceBodyTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.interfaceBody));
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceMethodDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfacePropertyDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceEventDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceIndexerDeclaration).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INTERFACE_BODY));
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_METHOD_DECLARATION).override("interfaceMethodDeclaration");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_PROPERTY_DECLARATION).override("interfacePropertyDeclaration");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_EVENT_DECLARATION).override("interfaceEventDeclaration");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_INDEXER_DECLARATION).override("interfaceIndexerDeclaration");
   }
 
   @Test

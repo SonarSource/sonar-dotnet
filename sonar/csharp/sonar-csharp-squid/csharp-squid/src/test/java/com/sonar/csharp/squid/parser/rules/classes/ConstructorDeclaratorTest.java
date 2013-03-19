@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class ConstructorDeclaratorTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.constructorDeclarator));
-    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.constructorInitializer).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.CONSTRUCTOR_DECLARATOR));
+    p.getGrammar().rule(CSharpGrammar.FORMAL_PARAMETER_LIST).override("formalParameterList");
+    p.getGrammar().rule(CSharpGrammar.CONSTRUCTOR_INITIALIZER).override("constructorInitializer");
   }
 
   @Test

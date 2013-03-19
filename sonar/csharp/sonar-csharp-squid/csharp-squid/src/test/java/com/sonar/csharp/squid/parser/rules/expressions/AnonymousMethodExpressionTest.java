@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class AnonymousMethodExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.anonymousMethodExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.explicitAnonymousFunctionSignature).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE).override("explicitAnonymousFunctionSignature");
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test

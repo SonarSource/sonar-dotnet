@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class IfStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.ifStatement));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.IF_STATEMENT));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
+    p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT).override("embeddedStatement");
 
     assertThat(p)
         .matches("if ( expression ) embeddedStatement")

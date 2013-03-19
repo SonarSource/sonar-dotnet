@@ -22,7 +22,7 @@ package com.sonar.csharp.squid.metric;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
@@ -38,21 +38,21 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void init() {
     subscribeTo(
-        CSharpGrammarImpl.ifStatement,
-        CSharpGrammarImpl.switchStatement,
-        CSharpGrammarImpl.labeledStatement,
-        CSharpGrammarImpl.whileStatement,
-        CSharpGrammarImpl.doStatement,
-        CSharpGrammarImpl.forStatement,
-        CSharpGrammarImpl.returnStatement,
-        CSharpGrammarImpl.methodBody,
-        CSharpGrammarImpl.accessorBody,
-        CSharpGrammarImpl.addAccessorDeclaration,
-        CSharpGrammarImpl.removeAccessorDeclaration,
-        CSharpGrammarImpl.operatorBody,
-        CSharpGrammarImpl.constructorBody,
-        CSharpGrammarImpl.destructorBody,
-        CSharpGrammarImpl.staticConstructorBody,
+        CSharpGrammar.IF_STATEMENT,
+        CSharpGrammar.SWITCH_STATEMENT,
+        CSharpGrammar.LABELED_STATEMENT,
+        CSharpGrammar.WHILE_STATEMENT,
+        CSharpGrammar.DO_STATEMENT,
+        CSharpGrammar.FOR_STATEMENT,
+        CSharpGrammar.RETURN_STATEMENT,
+        CSharpGrammar.METHOD_BODY,
+        CSharpGrammar.ACCESSOR_BODY,
+        CSharpGrammar.ADD_ACCESSOR_DECLARATION,
+        CSharpGrammar.REMOVE_ACCESSOR_DECLARATION,
+        CSharpGrammar.OPERATOR_BODY,
+        CSharpGrammar.CONSTRUCTOR_BODY,
+        CSharpGrammar.DESTRUCTOR_BODY,
+        CSharpGrammar.STATIC_CONSTRUCTOR_BODY,
         CSharpPunctuator.AND_OP,
         CSharpPunctuator.OR_OP,
         CSharpKeyword.CASE);
@@ -67,7 +67,7 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<Grammar> {
       // this is an empty declaration
       return;
     }
-    if (node.is(CSharpGrammarImpl.returnStatement) && isLastReturnStatement(node)) {
+    if (node.is(CSharpGrammar.RETURN_STATEMENT) && isLastReturnStatement(node)) {
       // last return of a block, do not count +1
       return;
     }
@@ -77,7 +77,7 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<Grammar> {
   private boolean isLastReturnStatement(AstNode node) {
     AstNode currentNode = node;
     AstNode parent = currentNode.getParent();
-    while (!parent.is(CSharpGrammarImpl.block)) {
+    while (!parent.is(CSharpGrammar.BLOCK)) {
       currentNode = parent;
       parent = currentNode.getParent();
     }
@@ -93,14 +93,14 @@ public class CSharpComplexityVisitor extends SquidAstVisitor<Grammar> {
 
   private boolean isMemberBloc(AstNode parent) {
     return parent.is(
-        CSharpGrammarImpl.methodBody,
-        CSharpGrammarImpl.accessorBody,
-        CSharpGrammarImpl.addAccessorDeclaration,
-        CSharpGrammarImpl.removeAccessorDeclaration,
-        CSharpGrammarImpl.operatorBody,
-        CSharpGrammarImpl.constructorBody,
-        CSharpGrammarImpl.destructorBody,
-        CSharpGrammarImpl.staticConstructorBody);
+        CSharpGrammar.METHOD_BODY,
+        CSharpGrammar.ACCESSOR_BODY,
+        CSharpGrammar.ADD_ACCESSOR_DECLARATION,
+        CSharpGrammar.REMOVE_ACCESSOR_DECLARATION,
+        CSharpGrammar.OPERATOR_BODY,
+        CSharpGrammar.CONSTRUCTOR_BODY,
+        CSharpGrammar.DESTRUCTOR_BODY,
+        CSharpGrammar.STATIC_CONSTRUCTOR_BODY);
   }
 
 }

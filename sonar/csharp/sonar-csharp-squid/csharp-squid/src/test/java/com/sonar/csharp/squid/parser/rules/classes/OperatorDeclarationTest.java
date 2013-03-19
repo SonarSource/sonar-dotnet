@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +30,10 @@ public class OperatorDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.operatorDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.operatorDeclarator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.operatorBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.OPERATOR_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.OPERATOR_DECLARATOR).override("operatorDeclarator");
+    p.getGrammar().rule(CSharpGrammar.OPERATOR_BODY).override("operatorBody");
   }
 
   @Test

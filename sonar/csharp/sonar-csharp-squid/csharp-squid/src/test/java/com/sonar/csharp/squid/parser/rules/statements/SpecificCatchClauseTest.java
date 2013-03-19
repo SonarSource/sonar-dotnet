@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class SpecificCatchClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.specificCatchClause));
-    p.getGrammar().rule(CSharpGrammarImpl.classType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.SPECIFIC_CATCH_CLAUSE));
+    p.getGrammar().rule(CSharpGrammar.CLASS_TYPE).override("classType");
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test

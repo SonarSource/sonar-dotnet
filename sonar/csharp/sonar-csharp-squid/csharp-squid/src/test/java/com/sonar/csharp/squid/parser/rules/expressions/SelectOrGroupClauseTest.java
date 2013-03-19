@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class SelectOrGroupClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.selectOrGroupClause));
-    p.getGrammar().rule(CSharpGrammarImpl.selectClause).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.groupClause).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.SELECT_OR_GROUP_CLAUSE));
+    p.getGrammar().rule(CSharpGrammar.SELECT_CLAUSE).override("selectClause");
+    p.getGrammar().rule(CSharpGrammar.GROUP_CLAUSE).override("groupClause");
   }
 
   @Test

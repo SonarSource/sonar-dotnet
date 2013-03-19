@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class ExplicitAnonymousFunctionSignatureTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.explicitAnonymousFunctionSignature));
-    p.getGrammar().rule(CSharpGrammarImpl.explicitAnonymousFunctionParameter).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE));
+    p.getGrammar().rule(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_PARAMETER).override("explicitAnonymousFunctionParameter");
   }
 
   @Test

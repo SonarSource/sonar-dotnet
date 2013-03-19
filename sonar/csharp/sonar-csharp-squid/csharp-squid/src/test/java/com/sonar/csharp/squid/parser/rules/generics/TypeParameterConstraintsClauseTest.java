@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.generics;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class TypeParameterConstraintsClauseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClause));
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameter).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraints).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS_CLAUSE));
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER).override("typeParameter");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS).override("typeParameterConstraints");
   }
 
   @Test

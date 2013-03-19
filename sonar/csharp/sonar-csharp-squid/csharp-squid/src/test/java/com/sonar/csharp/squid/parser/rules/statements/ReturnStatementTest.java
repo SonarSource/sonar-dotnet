@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ReturnStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.returnStatement));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.RETURN_STATEMENT));
 
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
 
     assertThat(p)
         .matches("return;")

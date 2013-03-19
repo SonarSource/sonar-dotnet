@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class IndexerDeclaratorTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.indexerDeclarator));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INDEXER_DECLARATOR));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.interfaceType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.INTERFACE_TYPE).override("interfaceType");
+    p.getGrammar().rule(CSharpGrammar.FORMAL_PARAMETER_LIST).override("formalParameterList");
 
     assertThat(p)
         .matches("type this [formalParameterList]")

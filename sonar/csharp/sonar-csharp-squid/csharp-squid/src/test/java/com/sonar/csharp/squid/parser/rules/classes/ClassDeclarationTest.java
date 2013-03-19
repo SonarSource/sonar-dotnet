@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class ClassDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.classDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.classBase).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.classBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.CLASS_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_LIST).override("typeParameterList");
+    p.getGrammar().rule(CSharpGrammar.CLASS_BASE).override("classBase");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS_CLAUSES).override("typeParameterConstraintsClauses");
+    p.getGrammar().rule(CSharpGrammar.CLASS_BODY).override("classBody");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class UnboundTypeNameTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.unboundTypeName));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.UNBOUND_TYPE_NAME));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.genericDimensionSpecifier).mock();
+    p.getGrammar().rule(CSharpGrammar.GENERIC_DIMENSION_SPECIFIER).override("");
 
     assertThat(p)
         .matches("id")

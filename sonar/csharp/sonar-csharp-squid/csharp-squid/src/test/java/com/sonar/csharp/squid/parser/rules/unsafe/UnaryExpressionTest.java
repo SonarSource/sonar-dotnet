@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +30,9 @@ public class UnaryExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.unaryExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.pointerIndirectionExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.addressOfExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.primaryNoArrayCreationExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.UNARY_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.POINTER_INDIRECTION_EXPRESSION).override("pointerIndirectionExpression");
+    p.getGrammar().rule(CSharpGrammar.ADDRESS_OF_EXPRESSION).override("addressOfExpression");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class EmbeddedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.unsafeStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.fixedStatement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.UNSAFE_STATEMENT).override("unsafeStatement");
+    p.getGrammar().rule(CSharpGrammar.FIXED_STATEMENT).override("fixedStatement");
   }
 
   @Test

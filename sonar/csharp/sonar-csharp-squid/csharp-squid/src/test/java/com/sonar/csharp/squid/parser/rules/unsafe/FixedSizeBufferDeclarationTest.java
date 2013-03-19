@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class FixedSizeBufferDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.fixedSizeBufferDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.fixedSizeBufferModifier).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.fixedSizeBufferDeclarator).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FIXED_SIZE_BUFFER_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.FIXED_SIZE_BUFFER_MODIFIER).override("fixedSizeBufferModifier");
+    p.getGrammar().rule(CSharpGrammar.FIXED_SIZE_BUFFER_DECLARATOR).override("fixedSizeBufferDeclarator");
   }
 
   @Test

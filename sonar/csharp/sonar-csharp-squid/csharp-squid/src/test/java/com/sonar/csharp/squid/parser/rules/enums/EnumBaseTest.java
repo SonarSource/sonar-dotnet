@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.enums;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class EnumBaseTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.enumBase));
-    p.getGrammar().rule(CSharpGrammarImpl.integralType).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ENUM_BASE));
+    p.getGrammar().rule(CSharpGrammar.INTEGRAL_TYPE).override("integralType");
   }
 
   @Test

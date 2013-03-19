@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class PrimaryExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.primaryExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.PRIMARY_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.arrayCreationExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.primaryNoArrayCreationExpression).mock();
+    p.getGrammar().rule(CSharpGrammar.ARRAY_CREATION_EXPRESSION).override("arrayCreationExpression");
+    p.getGrammar().rule(CSharpGrammar.PRIMARY_NO_ARRAY_CREATION_EXPRESSION).override("primaryNoArrayCreationExpression");
 
     assertThat(p)
         .matches("arrayCreationExpression")

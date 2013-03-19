@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class PointerTypeTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.pointerType));
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.POINTER_TYPE));
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,15 +30,15 @@ public class PropertyDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.propertyDeclaration));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.PROPERTY_DECLARATION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.accessorDeclarations).mock();
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.MEMBER_NAME).override("memberName");
+    p.getGrammar().rule(CSharpGrammar.ACCESSOR_DECLARATIONS).override("accessorDeclarations");
 
     assertThat(p)
         .matches("type memberName { accessorDeclarations }")

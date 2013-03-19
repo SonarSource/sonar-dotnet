@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class MemberNameTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.memberName));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.MEMBER_NAME));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.namespaceOrTypeName).mock();
+    p.getGrammar().rule(CSharpGrammar.NAMESPACE_OR_TYPE_NAME).override("");
 
     assertThat(p)
         .matches("namespaceOrTypeName");

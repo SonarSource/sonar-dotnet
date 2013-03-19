@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class UnaryExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.unaryExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.UNARY_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.primaryExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
+    p.getGrammar().rule(CSharpGrammar.PRIMARY_EXPRESSION).override("primaryExpression");
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
 
     assertThat(p)
         .matches("primaryExpression")

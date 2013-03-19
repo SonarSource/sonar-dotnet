@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class DelegateCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.delegateCreationExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.delegateType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.DELEGATE_CREATION_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.DELEGATE_TYPE).override("delegateType");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
   }
 
   @Test

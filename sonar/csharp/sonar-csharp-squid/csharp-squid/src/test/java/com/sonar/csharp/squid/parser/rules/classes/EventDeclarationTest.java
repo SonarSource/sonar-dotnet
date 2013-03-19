@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,16 +30,16 @@ public class EventDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.eventDeclaration));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.EVENT_DECLARATION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.variableDeclarator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.eventAccessorDeclarations).mock();
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.VARIABLE_DECLARATOR).override("variableDeclarator");
+    p.getGrammar().rule(CSharpGrammar.MEMBER_NAME).override("memberName");
+    p.getGrammar().rule(CSharpGrammar.EVENT_ACCESSOR_DECLARATIONS).override("eventAccessorDeclarations");
 
     assertThat(p)
         .matches("event type variableDeclarator;")
@@ -51,11 +51,11 @@ public class EventDeclarationTest extends RuleTest {
 
   @Test
   public void ko() {
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.variableDeclarator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.eventAccessorDeclarations).mock();
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.VARIABLE_DECLARATOR).override("");
+    p.getGrammar().rule(CSharpGrammar.MEMBER_NAME).override("memberName");
+    p.getGrammar().rule(CSharpGrammar.EVENT_ACCESSOR_DECLARATIONS).override("eventAccessorDeclarations");
 
     assertThat(p)
         .notMatches("event type;")

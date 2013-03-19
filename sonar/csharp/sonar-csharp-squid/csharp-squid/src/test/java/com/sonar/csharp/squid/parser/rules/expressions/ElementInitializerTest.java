@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ElementInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.elementInitializer));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ELEMENT_INITIALIZER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.nonAssignmentExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expressionList).mock();
+    p.getGrammar().rule(CSharpGrammar.NON_ASSIGNMENT_EXPRESSION).override("nonAssignmentExpression");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION_LIST).override("expressionList");
 
     assertThat(p)
         .matches("nonAssignmentExpression")

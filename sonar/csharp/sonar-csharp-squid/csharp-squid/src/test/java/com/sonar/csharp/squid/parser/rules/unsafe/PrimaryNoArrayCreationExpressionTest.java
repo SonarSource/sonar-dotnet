@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class PrimaryNoArrayCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.primaryNoArrayCreationExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.sizeOfExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.PRIMARY_NO_ARRAY_CREATION_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.SIZE_OF_EXPRESSION).override("");
   }
 
   @Test

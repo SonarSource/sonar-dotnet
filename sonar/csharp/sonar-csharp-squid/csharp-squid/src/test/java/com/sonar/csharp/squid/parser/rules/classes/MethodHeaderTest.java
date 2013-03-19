@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,17 +30,17 @@ public class MethodHeaderTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.methodHeader));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.METHOD_HEADER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.returnType).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.memberName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.formalParameterList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.typeParameterConstraintsClauses).mock();
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.RETURN_TYPE).override("returnType");
+    p.getGrammar().rule(CSharpGrammar.MEMBER_NAME).override("memberName");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_LIST).override("typeParameterList");
+    p.getGrammar().rule(CSharpGrammar.FORMAL_PARAMETER_LIST).override("formalParameterList");
+    p.getGrammar().rule(CSharpGrammar.TYPE_PARAMETER_CONSTRAINTS_CLAUSES).override("typeParameterConstraintsClauses");
 
     assertThat(p)
         .matches("returnType memberName ( ) ")

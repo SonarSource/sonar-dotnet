@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class NullCoalescingExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.nullCoalescingExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.conditionalOrExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.NULL_COALESCING_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.CONDITIONAL_OR_EXPRESSION).override("conditionalOrExpression");
   }
 
   @Test

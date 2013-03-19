@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class ExclusiveOrExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.inclusiveOrExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.exclusiveOrExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INCLUSIVE_OR_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.EXCLUSIVE_OR_EXPRESSION).override("exclusiveOrExpression");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +30,10 @@ public class StaticConstructorDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.staticConstructorDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.staticConstructorModifiers).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.staticConstructorBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.STATIC_CONSTRUCTOR_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.STATIC_CONSTRUCTOR_MODIFIERS).override("staticConstructorModifiers");
+    p.getGrammar().rule(CSharpGrammar.STATIC_CONSTRUCTOR_BODY).override("staticConstructorBody");
   }
 
   @Test

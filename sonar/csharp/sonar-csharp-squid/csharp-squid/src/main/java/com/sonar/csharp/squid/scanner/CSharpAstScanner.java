@@ -23,7 +23,7 @@ import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.csharp.squid.tree.CSharpMemberVisitor;
 import com.sonar.csharp.squid.tree.CSharpTypeVisitor;
@@ -95,26 +95,26 @@ public final class CSharpAstScanner {
     builder.withSquidAstVisitor(CounterVisitor.<Grammar> builder()
         .setMetricDef(CSharpMetric.STATEMENTS)
         .subscribeTo(
-            CSharpGrammarImpl.labeledStatement,
-            CSharpGrammarImpl.declarationStatement,
-            CSharpGrammarImpl.expressionStatement,
-            CSharpGrammarImpl.selectionStatement,
-            CSharpGrammarImpl.iterationStatement,
-            CSharpGrammarImpl.jumpStatement,
-            CSharpGrammarImpl.tryStatement,
-            CSharpGrammarImpl.checkedStatement,
-            CSharpGrammarImpl.uncheckedStatement,
-            CSharpGrammarImpl.lockStatement,
-            CSharpGrammarImpl.usingStatement,
-            CSharpGrammarImpl.yieldStatement)
+            CSharpGrammar.LABELED_STATEMENT,
+            CSharpGrammar.DECLARATION_STATEMENT,
+            CSharpGrammar.EXPRESSION_STATEMENT,
+            CSharpGrammar.SELECTION_STATEMENT,
+            CSharpGrammar.ITERATION_STATEMENT,
+            CSharpGrammar.JUMP_STATEMENT,
+            CSharpGrammar.TRY_STATEMENT,
+            CSharpGrammar.CHECKED_STATEMENT,
+            CSharpGrammar.UNCHECKED_STATEMENT,
+            CSharpGrammar.LOCK_STATEMENT,
+            CSharpGrammar.USING_STATEMENT,
+            CSharpGrammar.YIELD_STATEMENT)
         .build());
     builder.withSquidAstVisitor(CounterVisitor.<Grammar> builder()
         .setMetricDef(CSharpMetric.ACCESSORS)
         .subscribeTo(
-            CSharpGrammarImpl.getAccessorDeclaration,
-            CSharpGrammarImpl.setAccessorDeclaration,
-            CSharpGrammarImpl.addAccessorDeclaration,
-            CSharpGrammarImpl.removeAccessorDeclaration)
+            CSharpGrammar.GET_ACCESSOR_DECLARATION,
+            CSharpGrammar.SET_ACCESSOR_DECLARATION,
+            CSharpGrammar.ADD_ACCESSOR_DECLARATION,
+            CSharpGrammar.REMOVE_ACCESSOR_DECLARATION)
         .build());
 
     /* Visitors */

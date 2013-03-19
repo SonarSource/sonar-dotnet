@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class EqualityExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.equalityExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.relationalExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.EQUALITY_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.RELATIONAL_EXPRESSION).override("relationalExpression");
   }
 
   @Test

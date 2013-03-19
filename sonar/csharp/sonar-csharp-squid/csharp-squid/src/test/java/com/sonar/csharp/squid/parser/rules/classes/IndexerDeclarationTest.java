@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class IndexerDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.indexerDeclaration));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.INDEXER_DECLARATION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.attributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.indexerDeclarator).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.accessorDeclarations).mock();
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTES).override("attributes");
+    p.getGrammar().rule(CSharpGrammar.INDEXER_DECLARATOR).override("indexerDeclarator");
+    p.getGrammar().rule(CSharpGrammar.ACCESSOR_DECLARATIONS).override("accessorDeclarations");
 
     assertThat(p)
         .matches("indexerDeclarator { accessorDeclarations }")

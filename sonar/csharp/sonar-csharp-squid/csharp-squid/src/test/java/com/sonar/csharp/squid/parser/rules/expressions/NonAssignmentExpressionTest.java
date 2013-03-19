@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +30,10 @@ public class NonAssignmentExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.nonAssignmentExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.conditionalExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.lambdaExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.queryExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.NON_ASSIGNMENT_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.CONDITIONAL_EXPRESSION).override("conditionalExpression");
+    p.getGrammar().rule(CSharpGrammar.LAMBDA_EXPRESSION).override("lambdaExpression");
+    p.getGrammar().rule(CSharpGrammar.QUERY_EXPRESSION).override("queryExpression");
   }
 
   @Test

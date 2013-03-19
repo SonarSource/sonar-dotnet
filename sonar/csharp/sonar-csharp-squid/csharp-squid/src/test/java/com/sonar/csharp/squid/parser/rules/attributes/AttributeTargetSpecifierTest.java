@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.attributes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class AttributeTargetSpecifierTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.attributeTargetSpecifier));
-    p.getGrammar().rule(CSharpGrammarImpl.attributeTarget).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ATTRIBUTE_TARGET_SPECIFIER));
+    p.getGrammar().rule(CSharpGrammar.ATTRIBUTE_TARGET).override("attributeTarget");
   }
 
   @Test

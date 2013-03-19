@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class NamespaceDeclarationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.namespaceDeclaration));
-    p.getGrammar().rule(CSharpGrammarImpl.qualifiedIdentifier).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.namespaceBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.NAMESPACE_DECLARATION));
+    p.getGrammar().rule(CSharpGrammar.QUALIFIED_IDENTIFIER).override("qualifiedIdentifier");
+    p.getGrammar().rule(CSharpGrammar.NAMESPACE_BODY).override("namespaceBody");
   }
 
   @Test

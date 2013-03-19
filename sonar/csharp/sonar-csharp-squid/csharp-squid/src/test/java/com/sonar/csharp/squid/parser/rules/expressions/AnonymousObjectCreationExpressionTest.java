@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class AnonymousObjectCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.anonymousObjectCreationExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ANONYMOUS_OBJECT_CREATION_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.anonymousObjectInitializer).mock();
+    p.getGrammar().rule(CSharpGrammar.ANONYMOUS_OBJECT_INITIALIZER).override("anonymousObjectInitializer");
 
     assertThat(p)
         .matches("new anonymousObjectInitializer");

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.classes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class ConstructorInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.constructorInitializer));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.CONSTRUCTOR_INITIALIZER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.argumentList).mock();
+    p.getGrammar().rule(CSharpGrammar.ARGUMENT_LIST).override("argumentList");
 
     assertThat(p)
         .matches(": base ()")

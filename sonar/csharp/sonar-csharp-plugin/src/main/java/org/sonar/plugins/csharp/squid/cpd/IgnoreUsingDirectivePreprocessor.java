@@ -21,7 +21,7 @@ package org.sonar.plugins.csharp.squid.cpd;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpKeyword;
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.CSharpParser;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
@@ -41,7 +41,7 @@ public class IgnoreUsingDirectivePreprocessor extends Preprocessor {
 
   public IgnoreUsingDirectivePreprocessor(CSharpConfiguration conf) {
     this.parser = CSharpParser.create(conf);
-    this.parser.setRootRule(this.parser.getGrammar().rule(CSharpGrammarImpl.usingDirective));
+    this.parser.setRootRule(this.parser.getGrammar().rule(CSharpGrammar.USING_DIRECTIVE));
   }
 
   @Override

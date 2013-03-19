@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class UncheckedStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.uncheckedStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.block).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.UNCHECKED_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.BLOCK).override("block");
   }
 
   @Test

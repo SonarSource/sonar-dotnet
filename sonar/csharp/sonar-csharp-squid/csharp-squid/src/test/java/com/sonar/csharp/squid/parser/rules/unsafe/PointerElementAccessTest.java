@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class PointerElementAccessTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.pointerElementAccess));
-    p.getGrammar().rule(CSharpGrammarImpl.primaryNoArrayCreationExpression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.POINTER_ELEMENT_ACCESS));
+    p.getGrammar().rule(CSharpGrammar.PRIMARY_NO_ARRAY_CREATION_EXPRESSION).override("primaryNoArrayCreationExpression");
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
   }
 
   @Test

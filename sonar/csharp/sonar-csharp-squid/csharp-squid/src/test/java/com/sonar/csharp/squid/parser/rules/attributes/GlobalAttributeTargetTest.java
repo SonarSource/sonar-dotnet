@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.attributes;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class GlobalAttributeTargetTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.globalAttributeTarget));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.GLOBAL_ATTRIBUTE_TARGET));
   }
 
   @Test

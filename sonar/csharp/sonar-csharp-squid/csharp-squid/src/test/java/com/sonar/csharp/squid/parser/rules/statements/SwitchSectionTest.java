@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class SwitchSectionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.switchSection));
-    p.getGrammar().rule(CSharpGrammarImpl.switchLabel).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.statement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.SWITCH_SECTION));
+    p.getGrammar().rule(CSharpGrammar.SWITCH_LABEL).override("switchLabel");
+    p.getGrammar().rule(CSharpGrammar.STATEMENT).override("statement");
 
   }
 

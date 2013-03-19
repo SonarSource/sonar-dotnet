@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,14 +30,14 @@ public class ObjectCreationExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.objectCreationExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.OBJECT_CREATION_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.argumentList).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.objectOrCollectionInitializer).mock();
+    p.getGrammar().rule(CSharpGrammar.ARGUMENT_LIST).override("argumentList");
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.OBJECT_OR_COLLECTION_INITIALIZER).override("objectOrCollectionInitializer");
 
     assertThat(p)
         .matches("new type()")

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class IterationStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.iterationStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.whileStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.doStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.forStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.foreachStatement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ITERATION_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.WHILE_STATEMENT).override("whileStatement");
+    p.getGrammar().rule(CSharpGrammar.DO_STATEMENT).override("doStatement");
+    p.getGrammar().rule(CSharpGrammar.FOR_STATEMENT).override("forStatement");
+    p.getGrammar().rule(CSharpGrammar.FOREACH_STATEMENT).override("foreachStatement");
   }
 
   @Test

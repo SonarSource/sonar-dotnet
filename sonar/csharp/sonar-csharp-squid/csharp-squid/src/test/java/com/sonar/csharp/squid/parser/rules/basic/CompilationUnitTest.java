@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.basic;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +32,10 @@ public class CompilationUnitTest extends RuleTest {
 
   @Before
   public void init() {
-    p.getGrammar().rule(CSharpGrammarImpl.externAliasDirective).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.usingDirective).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.globalAttributes).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.namespaceMemberDeclaration).mock();
+    p.getGrammar().rule(CSharpGrammar.EXTERN_ALIAS_DIRECTIVE).override("externAliasDirective");
+    p.getGrammar().rule(CSharpGrammar.USING_DIRECTIVE).override("usingDirective");
+    p.getGrammar().rule(CSharpGrammar.GLOBAL_ATTRIBUTES).override("globalAttributes");
+    p.getGrammar().rule(CSharpGrammar.NAMESPACE_MEMBER_DECLARATION).override("namespaceMemberDeclaration");
   }
 
   @Test

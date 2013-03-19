@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ForInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.forInitializer));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.FOR_INITIALIZER));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.localVariableDeclaration).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.statementExpressionList).mock();
+    p.getGrammar().rule(CSharpGrammar.LOCAL_VARIABLE_DECLARATION).override("localVariableDeclaration");
+    p.getGrammar().rule(CSharpGrammar.STATEMENT_EXPRESSION_LIST).override("statementExpressionList");
 
     assertThat(p)
         .matches("localVariableDeclaration")

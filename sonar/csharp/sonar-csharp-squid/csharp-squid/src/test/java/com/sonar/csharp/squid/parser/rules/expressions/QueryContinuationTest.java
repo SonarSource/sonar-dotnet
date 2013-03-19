@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class QueryContinuationTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.queryContinuation));
-    p.getGrammar().rule(CSharpGrammarImpl.queryBody).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.QUERY_CONTINUATION));
+    p.getGrammar().rule(CSharpGrammar.QUERY_BODY).override("queryBody");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.types;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ArrayTypeTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.arrayType));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ARRAY_TYPE));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.type).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.rankSpecifier).mock();
+    p.getGrammar().rule(CSharpGrammar.TYPE).override("type");
+    p.getGrammar().rule(CSharpGrammar.RANK_SPECIFIER).override("rankSpecifier");
 
     assertThat(p)
         .matches("type rankSpecifier")

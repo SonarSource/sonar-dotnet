@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class DoStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.doStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.expression).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.embeddedStatement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.DO_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
+    p.getGrammar().rule(CSharpGrammar.EMBEDDED_STATEMENT).override("embeddedStatement");
   }
 
   @Test

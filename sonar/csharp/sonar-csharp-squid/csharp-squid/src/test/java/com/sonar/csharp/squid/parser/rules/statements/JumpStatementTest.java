@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.statements;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class JumpStatementTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.jumpStatement));
-    p.getGrammar().rule(CSharpGrammarImpl.breakStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.continueStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.gotoStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.returnStatement).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.throwStatement).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.JUMP_STATEMENT));
+    p.getGrammar().rule(CSharpGrammar.BREAK_STATEMENT).override("breakStatement");
+    p.getGrammar().rule(CSharpGrammar.CONTINUE_STATEMENT).override("continueStatement");
+    p.getGrammar().rule(CSharpGrammar.GOTO_STATEMENT).override("gotoStatement");
+    p.getGrammar().rule(CSharpGrammar.RETURN_STATEMENT).override("returnStatement");
+    p.getGrammar().rule(CSharpGrammar.THROW_STATEMENT).override("throwStatement");
 
   }
 

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.interfaces;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class VariantTypeParameterListTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.variantTypeParameterList));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.VARIANT_TYPE_PARAMETER_LIST));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.variantTypeParameter).mock();
+    p.getGrammar().rule(CSharpGrammar.VARIANT_TYPE_PARAMETER).override("variantTypeParameter");
 
     assertThat(p)
         .matches("<variantTypeParameter>")

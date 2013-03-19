@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ArgumentTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.argument));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ARGUMENT));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.argumentName).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.argumentValue).mock();
+    p.getGrammar().rule(CSharpGrammar.ARGUMENT_NAME).override("argumentName");
+    p.getGrammar().rule(CSharpGrammar.ARGUMENT_VALUE).override("argumentValue");
 
     assertThat(p)
         .matches("argumentValue")

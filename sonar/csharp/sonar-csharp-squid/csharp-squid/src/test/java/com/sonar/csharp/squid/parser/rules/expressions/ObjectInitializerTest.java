@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class ObjectInitializerTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.objectInitializer));
-    p.getGrammar().rule(CSharpGrammarImpl.memberInitializer).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.OBJECT_INITIALIZER));
+    p.getGrammar().rule(CSharpGrammar.MEMBER_INITIALIZER).override("memberInitializer");
   }
 
   @Test

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.unsafe;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class AddressOfExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.addressOfExpression));
-    p.getGrammar().rule(CSharpGrammarImpl.unaryExpression).mock();
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ADDRESS_OF_EXPRESSION));
+    p.getGrammar().rule(CSharpGrammar.UNARY_EXPRESSION).override("unaryExpression");
   }
 
   @Test

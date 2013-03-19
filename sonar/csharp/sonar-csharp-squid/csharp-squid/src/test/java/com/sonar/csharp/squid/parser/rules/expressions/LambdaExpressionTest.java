@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.parser.rules.expressions;
 
-import com.sonar.csharp.squid.parser.CSharpGrammarImpl;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class LambdaExpressionTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammarImpl.lambdaExpression));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.LAMBDA_EXPRESSION));
   }
 
   @Test
   public void ok() {
-    p.getGrammar().rule(CSharpGrammarImpl.anonymousFunctionSignature).mock();
-    p.getGrammar().rule(CSharpGrammarImpl.anonymousFunctionBody).mock();
+    p.getGrammar().rule(CSharpGrammar.ANONYMOUS_FUNCTION_SIGNATURE).override("anonymousFunctionSignature");
+    p.getGrammar().rule(CSharpGrammar.ANONYMOUS_FUNCTION_BODY).override("anonymousFunctionBody");
 
     assertThat(p)
         .matches("anonymousFunctionSignature => anonymousFunctionBody");
