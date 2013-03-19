@@ -17,4 +17,20 @@ class Program
   static void Main(string[] args)
   {
   }
+
+  /// <summary>
+  /// Handles the task exception.
+  /// </summary>
+  /// <example>
+  /// <code>
+  /// Task.Factory.StartNew (() => { throw null; }).IgnoreExceptions();
+  /// </code>
+  /// </example>
+  /// <param name="task">The task.</param>
+  void foo()
+  {
+  }
 }
+
+#if DEBUG
+#endif
