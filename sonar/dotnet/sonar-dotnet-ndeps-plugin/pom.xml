@@ -18,6 +18,7 @@
     <sonar.pluginKey>dotnetndeps</sonar.pluginKey>
     <sonar.pluginName>.NET NDeps</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.ndeps.NDepsPlugin</sonar.pluginClass>
+    <sonar.pluginParent>dotnet</sonar.pluginParent>
     <powermock.version>1.4.10</powermock.version>
   </properties>
 

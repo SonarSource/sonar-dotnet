@@ -18,6 +18,7 @@
   <properties>
     <sonar.pluginKey>csharpstylecop</sonar.pluginKey>
     <sonar.pluginName>C# StyleCop</sonar.pluginName>
+    <sonar.pluginParent>csharp</sonar.pluginParent>
     <sonar.pluginClass>org.sonar.plugins.csharp.stylecop.StyleCopPlugin</sonar.pluginClass>
   </properties>
 

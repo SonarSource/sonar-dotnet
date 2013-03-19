@@ -17,8 +17,9 @@
   <url>http://docs.codehaus.org/display/SONAR/C%23+Plugins+Ecosystem</url>
 
   <properties>
-    <sonar.pluginName>C# Core</sonar.pluginName>
+    <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.core.CSharpCorePlugin</sonar.pluginClass>
+    <sonar.requirePlugins>dotnet:${project.version}</sonar.requirePlugins> 
   </properties>
 
   <dependencies>

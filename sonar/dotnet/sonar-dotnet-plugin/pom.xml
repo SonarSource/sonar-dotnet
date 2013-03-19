@@ -16,7 +16,7 @@
   <url>http://docs.codehaus.org/display/SONAR/C%23+Plugins+Ecosystem</url>
 
   <properties>
-    <sonar.pluginName>.NET Core</sonar.pluginName>
+    <sonar.pluginName>.NET</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.dotnet.core.DotNetCorePlugin</sonar.pluginClass>
   </properties>
 
