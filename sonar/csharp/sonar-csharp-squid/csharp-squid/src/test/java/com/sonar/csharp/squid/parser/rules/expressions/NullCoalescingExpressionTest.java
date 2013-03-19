@@ -31,15 +31,14 @@ public class NullCoalescingExpressionTest extends RuleTest {
   @Before
   public void init() {
     p.setRootRule(p.getGrammar().rule(CSharpGrammar.NULL_COALESCING_EXPRESSION));
-    p.getGrammar().rule(CSharpGrammar.CONDITIONAL_OR_EXPRESSION).override("conditionalOrExpression");
   }
 
   @Test
-  public void ok() {
+  public void reallife() {
     assertThat(p)
-        .matches("conditionalOrExpression")
-        .matches("conditionalOrExpression ?? conditionalOrExpression ")
-        .matches("conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression ?? conditionalOrExpression");
+        .matches("0")
+        .matches("0 ?? 0")
+        .matches("0 ?? 0 ?? 0");
   }
 
 }

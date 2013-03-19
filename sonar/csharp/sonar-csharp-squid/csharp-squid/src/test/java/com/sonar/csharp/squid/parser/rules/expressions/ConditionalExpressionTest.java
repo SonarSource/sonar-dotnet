@@ -34,21 +34,13 @@ public class ConditionalExpressionTest extends RuleTest {
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(CSharpGrammar.NULL_COALESCING_EXPRESSION).override("nullCoalescingExpression");
-    p.getGrammar().rule(CSharpGrammar.EXPRESSION).override("expression");
-
-    assertThat(p)
-        .matches("nullCoalescingExpression")
-        .matches("nullCoalescingExpression ? expression : expression");
-  }
-
-  @Test
   public void reallife() {
     assertThat(p)
         .matches("arg is string ? \"{0}\" : \"{1}\"")
         .matches("RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence")
-        .matches("arg is double ? true : false");
+        .matches("arg is double ? true : false")
+        .matches("false ? null : new int?(42)")
+        .matches("false ? new int?(42) : null");
   }
 
 }

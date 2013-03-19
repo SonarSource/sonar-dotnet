@@ -34,16 +34,6 @@ public class ExpressionTest extends RuleTest {
   }
 
   @Test
-  public void ok() {
-    p.getGrammar().rule(CSharpGrammar.NON_ASSIGNMENT_EXPRESSION).override("nonAssignmentExpression");
-    p.getGrammar().rule(CSharpGrammar.ASSIGNMENT).override("assignment");
-
-    assertThat(p)
-        .matches("nonAssignmentExpression")
-        .matches("assignment");
-  }
-
-  @Test
   public void reallife() {
     assertThat(p)
         .matches("CurrentDomain.GetAssemblies()")
@@ -62,7 +52,10 @@ public class ExpressionTest extends RuleTest {
         .matches("new { name }")
         .matches("new { name, foo }")
         .matches("new { user.Name, user.Role.Name }")
-        .matches("from user in db.Users select new { user.Name, RoleName = user.Role.Name }");
+        .matches("from user in db.Users select new { user.Name, RoleName = user.Role.Name }")
+        .matches("new int?(42)")
+        .matches("null")
+        .matches("false ? new int?(42) : null");
   }
 
 }

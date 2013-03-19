@@ -19,6 +19,7 @@
  */
 package com.sonar.csharp.squid.parser;
 
+import com.sonar.csharp.squid.api.CSharpPunctuator;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
 
@@ -588,7 +589,11 @@ public enum CSharpGrammar implements GrammarRuleKey {
             OBJECT,
             STRING,
             TYPE_NAME)).skip();
-    b.rule(NULLABLE_TYPE).is(TYPE_PRIMARY, QUESTION, b.nextNot(b.sequence(EXPRESSION, COLON)));
+    b.rule(NULLABLE_TYPE).is(
+        TYPE_PRIMARY, QUESTION,
+        b.firstOf(
+            b.next(CSharpPunctuator.LPARENTHESIS),
+            b.nextNot(EXPRESSION, COLON)));
     b.rule(POINTER_TYPE).is(
         b.firstOf(
             NULLABLE_TYPE,
