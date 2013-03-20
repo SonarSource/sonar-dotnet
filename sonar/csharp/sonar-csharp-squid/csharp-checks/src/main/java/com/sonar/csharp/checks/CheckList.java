@@ -32,6 +32,7 @@ public final class CheckList {
 
   public static List<Class> getChecks() {
     return Lists.<Class> newArrayList(
+        BreakOutsideSwitchCheck.class,
         CommentedCodeCheck.class,
         FileLocCheck.class,
         FunctionComplexityCheck.class,

@@ -35,7 +35,7 @@ public class ParsingErrorCheckTest {
   public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
-  public void detected() {
+  public void test() {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.cs"), new ParsingErrorCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())

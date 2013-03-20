@@ -27,18 +27,19 @@ import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
-public class TodoCommentCheckTest {
+public class BreakOutsideSwitchCheckTest {
 
   @Rule
   public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
   public void test() {
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/comments.cs"), new TodoCommentCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/breakOutsideSwitch.cs"), new BreakOutsideSwitchCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(9)
-        .next().atLine(18);
+        .next().atLine(12).withMessage("Refactor the code in order to remove this break statement.")
+        .next().atLine(34)
+        .next().atLine(39);
   }
 
 }

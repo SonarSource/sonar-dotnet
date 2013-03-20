@@ -33,7 +33,7 @@ public class CommentedCodeCheckTest {
   public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
   @Test
-  public void detected() {
+  public void test() {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/commentedCode.cs"), new CommentedCodeCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
