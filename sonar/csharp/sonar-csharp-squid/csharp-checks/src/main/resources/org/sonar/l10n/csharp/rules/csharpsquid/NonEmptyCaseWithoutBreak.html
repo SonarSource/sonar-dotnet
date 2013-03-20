@@ -1,0 +1,52 @@
+<p>
+When the last statement of a switch-clause is not a break statement, the control flow "falls" into the next switch-clause.
+Whilst this is sometimes intentional, it is often a mistake which could lead to some unexpected behaviors.
+</p>
+
+<p>
+This rule doesn't apply to empty switch-clauses. Indeed those empty switch-clauses allow to specify the same behavior to a group of cases.
+</p>
+
+<p>The following code snippet:</p>
+
+<pre>
+int foo = 0;
+switch (foo)
+{
+  case 0:                           // Non-Compliant
+    Console.WriteLine("foo = 0");
+  case 1:                           // Non-Compliant
+    Console.WriteLine("foo = 1");
+  case 2:                           // Compliant
+    Console.WriteLine("foo = 2");
+    break;
+  case 3:                           // Compliant
+  case 4:                           // Compliant
+  case 5:                           // Compliant
+    Console.WriteLine("foo = 3, 4 or 5");
+    break;
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+int foo = 0;
+switch (foo)
+{
+  case 0:                           // Non-Compliant
+    Console.WriteLine("foo = 0");
+    break;
+  case 1:                           // Non-Compliant
+    Console.WriteLine("foo = 1");
+    break;
+  case 2:                           // Non-Compliant
+    Console.WriteLine("foo = 2");
+    break;
+  case 3:                           // Compliant
+  case 4:                           // Compliant
+  case 5:                           // Compliant
+    Console.WriteLine("foo = 3, 4 or 5");
+    break;
+}
+</pre>
