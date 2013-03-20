@@ -21,6 +21,7 @@ package com.sonar.csharp.squid.scanner;
 
 import com.google.common.base.Charsets;
 import com.sonar.csharp.squid.CSharpConfiguration;
+import com.sonar.csharp.squid.CharsetAwareVisitor;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
@@ -155,6 +156,9 @@ public final class CSharpAstScanner {
 
     /* External visitors (typically Check ones) */
     for (SquidAstVisitor<Grammar> visitor : visitors) {
+      if (visitor instanceof CharsetAwareVisitor) {
+        ((CharsetAwareVisitor) visitor).setCharset(conf.getCharset());
+      }
       builder.withSquidAstVisitor(visitor);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Sonar C# Plugin :: C# Squid :: Checks
+ * Sonar C# Plugin :: C# Squid :: Squid
  * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
  * dev@sonar.codehaus.org
  *
@@ -17,28 +17,12 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.checks;
+package com.sonar.csharp.squid;
 
-import com.google.common.collect.Lists;
+import java.nio.charset.Charset;
 
-import java.util.List;
+public interface CharsetAwareVisitor {
 
-public final class CheckList {
-
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
-
-  private CheckList() {
-  }
-
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        CommentedCodeCheck.class,
-        FileLocCheck.class,
-        FunctionComplexityCheck.class,
-        LineLengthCheck.class,
-        TodoCommentCheck.class,
-        ParsingErrorCheck.class,
-        XPathCheck.class);
-  }
+  void setCharset(Charset charset);
 
 }
