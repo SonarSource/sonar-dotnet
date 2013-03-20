@@ -23,6 +23,7 @@ import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
@@ -31,6 +32,7 @@ import java.util.List;
 @Rule(
   key = "NonEmptyCaseWithoutBreak",
   priority = Priority.MAJOR)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class NonEmptyCaseWithoutBreakCheck extends SquidCheck<Grammar> {
 
   @Override
