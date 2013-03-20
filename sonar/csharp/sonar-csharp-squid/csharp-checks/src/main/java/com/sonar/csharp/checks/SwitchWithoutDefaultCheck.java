@@ -19,29 +19,31 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.collect.Lists;
+import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.sonar.csharp.squid.parser.CSharpGrammar;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.Grammar;
+import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.BelongsToProfile;
+import org.sonar.check.Priority;
+import org.sonar.check.Rule;
 
-import java.util.List;
+@Rule(
+  key = "SwitchWithoutDefault",
+  priority = Priority.MAJOR)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
+public class SwitchWithoutDefaultCheck extends SquidCheck<Grammar> {
 
-public final class CheckList {
-
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
-
-  private CheckList() {
+  @Override
+  public void init() {
+    subscribeTo(CSharpGrammar.SWITCH_STATEMENT);
   }
 
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        BreakOutsideSwitchCheck.class,
-        CommentedCodeCheck.class,
-        FileLocCheck.class,
-        FunctionComplexityCheck.class,
-        LineLengthCheck.class,
-        ParsingErrorCheck.class,
-        SwitchWithoutDefaultCheck.class,
-        TabCharacterCheck.class,
-        TodoCommentCheck.class,
-        XPathCheck.class);
+  @Override
+  public void visitNode(AstNode node) {
+    if (node.select().children(CSharpGrammar.SWITCH_SECTION).children(CSharpGrammar.SWITCH_LABEL).children(CSharpKeyword.DEFAULT).isEmpty()) {
+      getContext().createLineViolation(this, "Add a default: case to this switch.", node);
+    }
   }
 
 }

@@ -19,29 +19,26 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.collect.Lists;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import java.io.File;
 
-public final class CheckList {
+public class SwitchWithoutDefaultCheckTest {
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
-  private CheckList() {
-  }
+  @Test
+  public void test() {
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/switchWithoutDefault.cs"), new SwitchWithoutDefaultCheck());
 
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        BreakOutsideSwitchCheck.class,
-        CommentedCodeCheck.class,
-        FileLocCheck.class,
-        FunctionComplexityCheck.class,
-        LineLengthCheck.class,
-        ParsingErrorCheck.class,
-        SwitchWithoutDefaultCheck.class,
-        TabCharacterCheck.class,
-        TodoCommentCheck.class,
-        XPathCheck.class);
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(7).withMessage("Add a default: case to this switch.")
+        .next().atLine(11);
   }
 
 }
