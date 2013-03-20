@@ -19,27 +19,25 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.collect.Lists;
+import com.sonar.csharp.squid.scanner.CSharpAstScanner;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.sonar.squid.api.SourceFile;
 
-import java.util.List;
+import java.io.File;
 
-public final class CheckList {
+public class TabCharacterCheckTest {
 
-  public static final String SONAR_WAY_PROFILE = "Sonar way";
+  @Rule
+  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
 
-  private CheckList() {
-  }
-
-  public static List<Class> getChecks() {
-    return Lists.<Class> newArrayList(
-        CommentedCodeCheck.class,
-        FileLocCheck.class,
-        FunctionComplexityCheck.class,
-        LineLengthCheck.class,
-        TabCharacterCheck.class,
-        TodoCommentCheck.class,
-        ParsingErrorCheck.class,
-        XPathCheck.class);
+  @Test
+  public void test() {
+    TabCharacterCheck check = new TabCharacterCheck();
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/tabCharacter.cs"), check);
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(7).withMessage("Replace all tab characters in this file by sequences of white-spaces.");
   }
 
 }
