@@ -601,7 +601,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
     b.rule(NULLABLE_TYPE).is(
         TYPE_PRIMARY, QUESTION,
         b.firstOf(
-            b.next(CSharpPunctuator.LPARENTHESIS),
+            b.next(b.bridge(CSharpPunctuator.LPARENTHESIS, CSharpPunctuator.RPARENTHESIS), CSharpPunctuator.COLON),
             b.nextNot(EXPRESSION, COLON)));
     b.rule(POINTER_TYPE).is(
         b.firstOf(

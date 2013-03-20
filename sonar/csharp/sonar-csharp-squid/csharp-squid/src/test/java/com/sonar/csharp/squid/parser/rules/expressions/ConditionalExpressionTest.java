@@ -40,7 +40,8 @@ public class ConditionalExpressionTest extends RuleTest {
         .matches("RightContext is CollectionOperator ? base.LeftPrecedence + 10 : base.LeftPrecedence")
         .matches("arg is double ? true : false")
         .matches("false ? null : new int?(42)")
-        .matches("false ? new int?(42) : null");
+        .matches("false ? new int?(42) : null")
+        .matches("a is T? ((T)a).foo() : bar()");
   }
 
 }
