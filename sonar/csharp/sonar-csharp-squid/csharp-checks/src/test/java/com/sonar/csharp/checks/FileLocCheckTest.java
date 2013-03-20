@@ -38,7 +38,7 @@ public class FileLocCheckTest {
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/fileLoc/big.cs"), check);
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().withMessage("This file has 1,002 lines of code, which is greater than 1,000 authorized. Split it into smaller files.");
+        .next().withMessage("This file has 1002 lines of code, which is greater than 1000 authorized. Split it into smaller files.");
   }
 
   @Test
@@ -56,7 +56,7 @@ public class FileLocCheckTest {
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/fileLoc/big.cs"), check);
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().withMessage("This file has 1,002 lines of code, which is greater than 3 authorized. Split it into smaller files.");
+        .next().withMessage("This file has 1002 lines of code, which is greater than 3 authorized. Split it into smaller files.");
   }
 
   @Test

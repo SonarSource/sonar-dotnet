@@ -52,10 +52,9 @@ public class FileLocCheck extends SquidCheck<Grammar> implements AstAndTokenVisi
   @Override
   public void leaveFile(AstNode node) {
     if (numberOfLoc > maximumFileLocThreshold) {
-      getContext().createFileViolation(this,
-          "This file has {0} lines of code, which is greater than {1} authorized. Split it into smaller files.",
-          numberOfLoc,
-          maximumFileLocThreshold);
+      getContext().createFileViolation(
+          this,
+          "This file has " + numberOfLoc + " lines of code, which is greater than " + maximumFileLocThreshold + " authorized. Split it into smaller files.");
     }
   }
 
