@@ -48,6 +48,9 @@ public final class DotNetConstants {
   public static final String MVN_DOTNET_4_0_SDK_DIR_KEY = "dotnet.4.0.sdk.directory";
   public static final String DOTNET_4_0_SDK_DIR_DEFVALUE = "C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319";
 
+  // There's no "DOTNET_4_5_SDK_DIR_DEFVALUE" as this is the same value as "DOTNET_4_0_SDK_DIR_DEFVALUE"
+  public static final String DOTNET_4_5_SDK_DIR_KEY = "sonar.dotnet.4.5.sdk.directory";
+
   public static final String DOTNET_VERSION_KEY = "sonar.dotnet.version";
   public static final String MVN_DOTNET_VERSION_KEY = "dotnet.tool.version";
   public static final String DOTNET_VERSION_DEFVALUE = "4.0";
@@ -96,7 +99,7 @@ public final class DotNetConstants {
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
    * 
    * @param sdkVersion
-   *          the wanted .NET version (2.5, 3.0 or 4.0)
+   *          the wanted .NET version (2.5, 3.0, 4.0 or 4.5)
    * @return the config key
    */
   public static String getDotnetSdkDirKey(String sdkVersion) {
@@ -118,10 +121,15 @@ public final class DotNetConstants {
   private static Map<String, String> silverlightFrameworkLocationKeys;
 
   static {
+    // === .NET Framework ===
     dotnetFrameworkLocationKeys = Maps.newHashMap();
     dotnetFrameworkLocationKeys.put("2.0", DOTNET_2_0_SDK_DIR_KEY);
     dotnetFrameworkLocationKeys.put("3.5", DOTNET_3_5_SDK_DIR_KEY);
     dotnetFrameworkLocationKeys.put("4.0", DOTNET_4_0_SDK_DIR_KEY);
+    // .NET 4.5 is installed in the same folder as 4.0
+    dotnetFrameworkLocationKeys.put("4.5", DOTNET_4_0_SDK_DIR_KEY);
+
+    // === Silverlight ===
     silverlightFrameworkLocationKeys = Maps.newHashMap();
     silverlightFrameworkLocationKeys.put("3", SILVERLIGHT_3_MSCORLIB_LOCATION_KEY);
     silverlightFrameworkLocationKeys.put("4", SILVERLIGHT_4_MSCORLIB_LOCATION_KEY);
