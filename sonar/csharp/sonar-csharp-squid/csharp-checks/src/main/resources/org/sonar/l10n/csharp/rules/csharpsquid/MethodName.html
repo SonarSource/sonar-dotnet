@@ -1,0 +1,22 @@
+<p>
+Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.
+This rule allow to check that all class names match a provided regular expression.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+class Foo
+{
+  void foo(); // Non-Compliant
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+class Foo
+{
+  void Foo(); // Compliant
+}
+</pre>

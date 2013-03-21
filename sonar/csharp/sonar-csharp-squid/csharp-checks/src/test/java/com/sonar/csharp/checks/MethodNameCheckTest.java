@@ -29,7 +29,7 @@ import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
-public class ClassNameCheckTest {
+public class MethodNameCheckTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -39,34 +39,33 @@ public class ClassNameCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/className.cs"), new ClassNameCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.cs"), new MethodNameCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Rename this class to match the regular expression: [A-HJ-Z][a-zA-Z]++|I[a-z][a-zA-Z]*+")
-        .next().atLine(11)
-        .next().atLine(15);
+        .next().atLine(5).withMessage("Rename this method to match the regular expression: [A-Z][a-zA-Z]++")
+        .next().atLine(6)
+        .next().atLine(13);
   }
 
   @Test
   public void custom() {
-    ClassNameCheck check = new ClassNameCheck();
-    check.format = "IFoo";
+    MethodNameCheck check = new MethodNameCheck();
+    check.format = "foo";
 
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/className.cs"), check);
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.cs"), check);
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Rename this class to match the regular expression: IFoo")
-        .next().atLine(7)
-        .next().atLine(11)
-        .next().atLine(19);
+        .next().atLine(7).withMessage("Rename this method to match the regular expression: foo")
+        .next().atLine(8)
+        .next().atLine(14);
   }
 
   @Test
   public void should_fail_with_bad_regular_expression() {
     thrown.expect(SonarException.class);
-    thrown.expectMessage("[" + ClassNameCheck.class.getSimpleName() + "] Unable to compile the regular expression: *");
+    thrown.expectMessage("[" + MethodNameCheck.class.getSimpleName() + "] Unable to compile the regular expression: *");
 
-    ClassNameCheck check = new ClassNameCheck();
+    MethodNameCheck check = new MethodNameCheck();
     check.format = "*";
     check.init();
   }

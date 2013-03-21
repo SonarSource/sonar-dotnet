@@ -30,15 +30,16 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Rule(
-  key = "ClassName",
+  key = "MethodName",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class ClassNameCheck extends SquidCheck<Grammar> {
+public class MethodNameCheck extends SquidCheck<Grammar> {
 
-  private static final String DEFAULT_FORMAT = "[A-HJ-Z][a-zA-Z]++|I[a-z][a-zA-Z]*+";
+  private static final String DEFAULT_FORMAT = "[A-Z][a-zA-Z]++";
 
   @RuleProperty(
     key = "format",
@@ -49,7 +50,9 @@ public class ClassNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(CSharpGrammar.CLASS_DECLARATION);
+    subscribeTo(
+        CSharpGrammar.METHOD_DECLARATION,
+        CSharpGrammar.INTERFACE_METHOD_DECLARATION);
 
     try {
       pattern = Pattern.compile(format, Pattern.DOTALL);
@@ -60,10 +63,18 @@ public class ClassNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    String className = node.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    String methodName;
 
-    if (!pattern.matcher(className).matches()) {
-      getContext().createLineViolation(this, "Rename this class to match the regular expression: " + format, node);
+    if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
+      List<AstNode> identifiers = node.getFirstChild(CSharpGrammar.MEMBER_NAME).getChildren(GenericTokenType.IDENTIFIER);
+      AstNode lastIdentifier = identifiers.get(identifiers.size() - 1);
+      methodName = lastIdentifier.getTokenOriginalValue();
+    } else {
+      methodName = node.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    }
+
+    if (!pattern.matcher(methodName).matches()) {
+      getContext().createLineViolation(this, "Rename this method to match the regular expression: " + format, node);
     }
   }
 

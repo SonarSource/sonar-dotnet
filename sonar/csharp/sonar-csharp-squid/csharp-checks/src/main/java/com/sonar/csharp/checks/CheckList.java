@@ -41,6 +41,7 @@ public final class CheckList {
         FunctionComplexityCheck.class,
         LineLengthCheck.class,
         MagicNumberCheck.class,
+        MethodNameCheck.class,
         NonEmptyCaseWithoutBreakCheck.class,
         ParsingErrorCheck.class,
         SwitchWithoutDefaultCheck.class,
