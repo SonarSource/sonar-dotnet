@@ -21,6 +21,7 @@ package com.sonar.csharp.checks;
 
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
@@ -28,32 +29,34 @@ import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 @Rule(
-  key = "AssignmentInsideSubExpression",
+  key = "AsyncAwaitIdentifier",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class AssignmentInsideSubExpressionCheck extends SquidCheck<Grammar> {
+public class AsyncAwaitIdentifierCheck extends SquidCheck<Grammar> {
 
   @Override
   public void init() {
-    subscribeTo(CSharpGrammar.ASSIGNMENT);
+    subscribeTo(GenericTokenType.IDENTIFIER);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (isInsideSubExpression(node)) {
-      getContext().createLineViolation(this, "Extract this assignment outside of the sub-expression.", node);
+    if (isAsyncOrAwaitIdentifier(node)) {
+      getContext().createLineViolation(this, "Rename this identifier.", node);
     }
   }
 
-  private boolean isInsideSubExpression(AstNode node) {
-    AstNode subExpression = node.getFirstAncestor(CSharpGrammar.EXPRESSION);
-    AstNode expression = subExpression.getFirstAncestor(CSharpGrammar.EXPRESSION);
-
-    return expression != null && !isLambdaExpression(expression);
+  private boolean isAsyncOrAwaitIdentifier(AstNode node) {
+    return isAsyncOrAwait(node) && !isContextualAsyncOrAwaitKeyword(node);
   }
 
-  private boolean isLambdaExpression(AstNode node) {
-    return node.hasDirectChildren(CSharpGrammar.LAMBDA_EXPRESSION);
+  private boolean isAsyncOrAwait(AstNode node) {
+    String value = node.getTokenOriginalValue();
+    return "async".equals(value) || "await".equals(value);
+  }
+
+  private boolean isContextualAsyncOrAwaitKeyword(AstNode node) {
+    return node.getParent().is(CSharpGrammar.ASYNC, CSharpGrammar.AWAIT_EXPRESSION);
   }
 
 }
