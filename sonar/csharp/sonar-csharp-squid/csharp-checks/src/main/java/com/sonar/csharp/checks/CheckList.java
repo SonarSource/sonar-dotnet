@@ -35,6 +35,7 @@ public final class CheckList {
         AssignmentInsideSubExpressionCheck.class,
         AsyncAwaitIdentifierCheck.class,
         BreakOutsideSwitchCheck.class,
+        ClassNameCheck.class,
         CommentedCodeCheck.class,
         FileLocCheck.class,
         FunctionComplexityCheck.class,
