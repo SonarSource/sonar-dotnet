@@ -276,6 +276,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
   GROUP_CLAUSE,
   QUERY_CONTINUATION,
   ASSIGNMENT,
+  ASSIGNMENT_TARGET,
   EXPRESSION,
   NON_ASSIGNMENT_EXPRESSION,
 
@@ -896,7 +897,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
     b.rule(GROUP_CLAUSE).is("group", EXPRESSION, "by", EXPRESSION);
     b.rule(QUERY_CONTINUATION).is("into", IDENTIFIER, QUERY_BODY);
     b.rule(ASSIGNMENT).is(
-        UNARY_EXPRESSION,
+        ASSIGNMENT_TARGET,
         b.firstOf(
             EQUAL,
             ADD_ASSIGN,
@@ -910,6 +911,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
             LEFT_ASSIGN,
             RIGHT_SHIFT_ASSIGNMENT),
         EXPRESSION);
+    b.rule(ASSIGNMENT_TARGET).is(UNARY_EXPRESSION);
     b.rule(NON_ASSIGNMENT_EXPRESSION).is(
         b.firstOf(
             LAMBDA_EXPRESSION,
