@@ -37,7 +37,7 @@ public class MagicNumberCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/magicNumber.cs"), new MagicNumberCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(16).withMessage("Extract this magic number into a constant or variable declaration.");
+        .next().atLine(16).withMessage("Extract this magic number into a constant, variable declaration or an enum.");
   }
 
   @Test
