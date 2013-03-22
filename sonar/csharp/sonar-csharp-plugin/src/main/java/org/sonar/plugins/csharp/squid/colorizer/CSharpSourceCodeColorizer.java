@@ -47,8 +47,9 @@ public class CSharpSourceCodeColorizer extends CodeColorizerFormat {
     tokenizers.add(new CppDocTokenizer("<span class=\"cppd\">", SPAN));
     tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", SPAN, CSharpKeyword.keywordValues()));
     tokenizers.add(new LiteralTokenizer("<span class=\"s\">", SPAN));
-    tokenizers.add(new RegexpTokenizer("<span class=\"j\">", SPAN, "#[^\\n\\r]*+")); // preprocessor directives
-    tokenizers.add(new RegexpTokenizer("<span class=\"c\">", SPAN, "[+-]?[0-9]++(\\.[0-9]*+)?")); // decimal constant
+    tokenizers.add(new RegexpTokenizer("<span class=\"j\">", SPAN, "#[^\\n\\r]*+"));
+    tokenizers.add(new RegexpTokenizer("<span class=\"c\">", SPAN, "[+-]?[0-9]++(\\.[0-9]*+)?"));
     return tokenizers;
   }
+
 }
