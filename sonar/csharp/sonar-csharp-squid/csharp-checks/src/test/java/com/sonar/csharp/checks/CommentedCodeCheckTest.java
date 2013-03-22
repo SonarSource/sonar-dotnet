@@ -37,7 +37,7 @@ public class CommentedCodeCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/commentedCode.cs"), new CommentedCodeCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(6).withMessage("Sections of code should not be \"commented out\".")
+        .next().atLine(6).withMessage("Remove this commented out code or move it into XML documentation.")
         .next().atLine(11);
   }
 

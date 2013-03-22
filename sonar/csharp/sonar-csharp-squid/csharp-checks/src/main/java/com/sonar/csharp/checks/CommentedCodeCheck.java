@@ -55,10 +55,10 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
     public Set<Detector> getDetectors() {
       Set<Detector> detectors = Sets.newHashSet();
 
-      detectors.add(new EndWithDetector(0.95, '}', ';', '{')); // NOSONAR Magic number is suitable in this case
-      detectors.add(new KeywordsDetector(0.7, "||", "&&")); // NOSONAR
-      detectors.add(new KeywordsDetector(0.3, CSharpKeyword.keywordValues())); // NOSONAR
-      detectors.add(new ContainsDetector(0.95, "++", "for(", "if(", "while(", "catch(", "switch(", "try{", "else{")); // NOSONAR
+      detectors.add(new EndWithDetector(0.95, '}', ';', '{'));
+      detectors.add(new KeywordsDetector(0.7, "||", "&&"));
+      detectors.add(new KeywordsDetector(0.3, CSharpKeyword.keywordValues()));
+      detectors.add(new ContainsDetector(0.95, "++", "for(", "if(", "while(", "catch(", "switch(", "try{", "else{"));
 
       return detectors;
     }
@@ -73,7 +73,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
 
         for (int lineOffset = 0; lineOffset < lines.length; lineOffset++) {
           if (codeRecognizer.isLineOfCode(lines[lineOffset])) {
-            getContext().createLineViolation(this, "Sections of code should not be \"commented out\".",
+            getContext().createLineViolation(this, "Remove this commented out code or move it into XML documentation.",
                 trivia.getToken().getLine() + lineOffset);
             break;
           }
