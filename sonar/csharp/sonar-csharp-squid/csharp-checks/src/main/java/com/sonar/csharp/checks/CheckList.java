@@ -38,6 +38,7 @@ public final class CheckList {
         ClassCouplingCheck.class,
         ClassNameCheck.class,
         CommentedCodeCheck.class,
+        CommentRegularExpressionCheck.class,
         FileLocCheck.class,
         FunctionComplexityCheck.class,
         LineLengthCheck.class,
@@ -47,7 +48,6 @@ public final class CheckList {
         ParsingErrorCheck.class,
         SwitchWithoutDefaultCheck.class,
         TabCharacterCheck.class,
-        TodoCommentCheck.class,
         XPathCheck.class);
   }
 

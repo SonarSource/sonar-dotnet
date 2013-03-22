@@ -20,25 +20,26 @@
 package com.sonar.csharp.checks;
 
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
-import org.junit.Rule;
+import com.sonar.sslr.squid.checks.CheckMessagesVerifier;
 import org.junit.Test;
 import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
-public class TodoCommentCheckTest {
-
-  @Rule
-  public CheckMessagesVerifierRule checkMessagesVerifier = new CheckMessagesVerifierRule();
+public class CommentRegularExpressionCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/comments.cs"), new TodoCommentCheck());
+    CommentRegularExpressionCheck check = new CommentRegularExpressionCheck();
+    check.regularExpression = "(?i).*TODO.*";
+    check.message = "Avoid TODO";
 
-    checkMessagesVerifier.verify(file.getCheckMessages())
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/commentRegularExpression.cs"), check);
+    CheckMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(5).withMessage("Avoid TODO")
+        .next().atLine(7)
         .next().atLine(9)
-        .next().atLine(18);
+        .noMore();
   }
 
 }
