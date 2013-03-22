@@ -43,16 +43,12 @@ public class LineLengthCheck extends SquidCheck<Grammar> implements CharsetAware
 
   private static final int DEFAULT_MAXIMUM_LINE_LENHGTH = 200;
 
-  private Charset charset;
-
   @RuleProperty(
     key = "maximumLineLength",
     defaultValue = "" + DEFAULT_MAXIMUM_LINE_LENHGTH)
   public int maximumLineLength = DEFAULT_MAXIMUM_LINE_LENHGTH;
 
-  public int getMaximumLineLength() {
-    return maximumLineLength;
-  }
+  private Charset charset;
 
   @Override
   public void visitFile(AstNode astNode) {
@@ -60,10 +56,10 @@ public class LineLengthCheck extends SquidCheck<Grammar> implements CharsetAware
     List<String> lines = readLines(file);
     for (int i = 0; i < lines.size(); i++) {
       int length = lines.get(i).length();
-      if (length > getMaximumLineLength()) {
+      if (length > maximumLineLength) {
         getContext().createLineViolation(
             this,
-            "Split this " + length + " characters long line (which is greater than " + getMaximumLineLength() + " authorized).",
+            "Split this " + length + " characters long line (which is greater than " + maximumLineLength + " authorized).",
             i + 1);
       }
     }
