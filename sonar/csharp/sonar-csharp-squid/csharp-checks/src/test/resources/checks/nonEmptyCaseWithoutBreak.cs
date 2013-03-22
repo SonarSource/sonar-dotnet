@@ -22,6 +22,10 @@ class Program
             case 6:                                   // Compliant
             case 7:                                   // Non-Compliant
                 Console.WriteLine("foo = 6 or 7");
+            case 8:                                   // Compliant
+                return;
+            case 9:                                   // Compliant
+                throw;
         }
 
         switch (foo)

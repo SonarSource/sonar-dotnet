@@ -45,7 +45,7 @@ public class NonEmptyCaseWithoutBreakCheck extends SquidCheck<Grammar> {
     List<AstNode> statements = node.getChildren(CSharpGrammar.STATEMENT);
     AstNode lastStatement = statements.get(statements.size() - 1);
 
-    if (!isBreakStatement(lastStatement)) {
+    if (!isBreakReturnOrThrowStatement(lastStatement)) {
       List<AstNode> switchLabels = node.getChildren(CSharpGrammar.SWITCH_LABEL);
       AstNode lastSwitchLabel = switchLabels.get(switchLabels.size() - 1);
 
@@ -53,12 +53,15 @@ public class NonEmptyCaseWithoutBreakCheck extends SquidCheck<Grammar> {
     }
   }
 
-  private boolean isBreakStatement(AstNode node) {
+  private boolean isBreakReturnOrThrowStatement(AstNode node) {
     AstNode embeddedStatement = node.getFirstChild(CSharpGrammar.EMBEDDED_STATEMENT);
 
     return embeddedStatement != null &&
       embeddedStatement.hasDirectChildren(CSharpGrammar.JUMP_STATEMENT) &&
-      embeddedStatement.getFirstChild(CSharpGrammar.JUMP_STATEMENT).hasDirectChildren(CSharpGrammar.BREAK_STATEMENT);
+      embeddedStatement.getFirstChild(CSharpGrammar.JUMP_STATEMENT).hasDirectChildren(
+          CSharpGrammar.BREAK_STATEMENT,
+          CSharpGrammar.RETURN_STATEMENT,
+          CSharpGrammar.THROW_STATEMENT);
   }
 
 }
