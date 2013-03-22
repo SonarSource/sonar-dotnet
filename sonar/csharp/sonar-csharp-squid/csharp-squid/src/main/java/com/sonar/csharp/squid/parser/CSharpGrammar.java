@@ -239,6 +239,7 @@ public enum CSharpGrammar implements GrammarRuleKey {
   UNCHECKED_EXPRESSION,
   DEFAULT_VALUE_EXPRESSION,
   UNARY_EXPRESSION,
+  AWAIT_EXPRESSION,
   MULTIPLICATIVE_EXPRESSION,
   ADDITIVE_EXPRESSION,
   SHIFT_EXPRESSION,
@@ -477,13 +478,11 @@ public enum CSharpGrammar implements GrammarRuleKey {
   FIXED_SIZE_BUFFER_DECLARATOR,
   STACKALLOC_INITIALIZER,
 
-  // C# 5.0
+  // Contextual keywords
   ASYNC,
-  AWAIT_EXPRESSION;
-
-  private static final String SET = "set";
-  private static final String GET = "get";
-  private static final String PARTIAL = "partial";
+  SET,
+  GET,
+  PARTIAL;
 
   public static LexerfulGrammarBuilder create() {
     LexerfulGrammarBuilder b = LexerfulGrammarBuilder.create();
@@ -543,8 +542,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
     // A.3 Unsafe code
     unsafe(b);
 
-    // C# 5.0
-    cSharp50(b);
+    // Contextual keywords
+    contextualKeywords(b);
 
     b.setRootRule(COMPILATION_UNIT);
 
@@ -777,6 +776,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
             b.firstOf(
                 POINTER_INDIRECTION_EXPRESSION,
                 ADDRESS_OF_EXPRESSION)))).skipIfOneChild();
+
+    b.rule(AWAIT_EXPRESSION).is("await", UNARY_EXPRESSION);
 
     b.rule(MULTIPLICATIVE_EXPRESSION).is(
         UNARY_EXPRESSION,
@@ -1658,9 +1659,11 @@ public enum CSharpGrammar implements GrammarRuleKey {
     b.rule(STACKALLOC_INITIALIZER).is(STACKALLOC, TYPE, LBRACKET, EXPRESSION, RBRACKET);
   }
 
-  private static void cSharp50(LexerfulGrammarBuilder b) {
+  private static void contextualKeywords(LexerfulGrammarBuilder b) {
     b.rule(ASYNC).is("async");
-    b.rule(AWAIT_EXPRESSION).is("await", UNARY_EXPRESSION);
+    b.rule(SET).is("set");
+    b.rule(GET).is("get");
+    b.rule(PARTIAL).is("partial");
   }
 
 }

@@ -58,7 +58,8 @@ public class ClassNameCheckTest {
         .next().atLine(3).withMessage("Rename this class to match the regular expression: IFoo")
         .next().atLine(7)
         .next().atLine(11)
-        .next().atLine(19);
+        .next().atLine(19)
+        .next().atLine(23);
   }
 
   @Test

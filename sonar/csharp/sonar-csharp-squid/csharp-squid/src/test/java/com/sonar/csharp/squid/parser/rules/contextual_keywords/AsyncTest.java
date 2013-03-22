@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package com.sonar.csharp.squid.parser.rules.csharp50;
+package com.sonar.csharp.squid.parser.rules.contextual_keywords;
 
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.csharp.squid.parser.RuleTest;
@@ -26,17 +26,19 @@ import org.junit.Test;
 
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class AwaitExpressionTest extends RuleTest {
+public class AsyncTest extends RuleTest {
 
   @Before
   public void init() {
-    p.setRootRule(p.getGrammar().rule(CSharpGrammar.AWAIT_EXPRESSION));
+    p.setRootRule(p.getGrammar().rule(CSharpGrammar.ASYNC));
   }
 
   @Test
   public void reallife() {
     assertThat(p)
-        .matches("await 0");
+        .matches("async")
+
+        .notMatches("new");
   }
 
 }

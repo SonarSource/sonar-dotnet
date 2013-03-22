@@ -19,3 +19,7 @@ class IFoo         // Non-Compliant
 class IdentityFoo  // Compliant
 {
 }
+
+partial class Foo  // Compliant
+{
+}
