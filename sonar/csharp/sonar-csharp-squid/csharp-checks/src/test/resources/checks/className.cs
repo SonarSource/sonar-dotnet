@@ -20,6 +20,7 @@ class IdentityFoo  // Compliant
 {
 }
 
-partial class Foo  // Compliant
+partial class
+Foo                // Compliant
 {
 }

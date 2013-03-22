@@ -59,7 +59,7 @@ public class ClassNameCheckTest {
         .next().atLine(7)
         .next().atLine(11)
         .next().atLine(19)
-        .next().atLine(23);
+        .next().atLine(24);
   }
 
   @Test

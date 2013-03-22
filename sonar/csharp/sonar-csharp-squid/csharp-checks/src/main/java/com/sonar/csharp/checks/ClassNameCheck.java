@@ -60,10 +60,10 @@ public class ClassNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    String className = node.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+    AstNode identifier = node.getFirstChild(GenericTokenType.IDENTIFIER);
 
-    if (!pattern.matcher(className).matches()) {
-      getContext().createLineViolation(this, "Rename this class to match the regular expression: " + format, node);
+    if (!pattern.matcher(identifier.getTokenOriginalValue()).matches()) {
+      getContext().createLineViolation(this, "Rename this class to match the regular expression: " + format, identifier);
     }
   }
 
