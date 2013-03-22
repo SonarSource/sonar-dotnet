@@ -14,5 +14,11 @@ class Program
 
         netSalary1 = Rate * grossSalary;          // Compliant
         netSalary2 = 0.85m * grossSalary;         // Non-Compliant
+
+        netSalary1 = 0;                           // Compliant, exception
+        netSalary1 = -1;                          // Compliant, exception
+        netSalary1 = +1;                          // Compliant, exception
+        netSalary1 = 0x0;                         // Compliant, exception
+        netSalary1 = 0x00;                        // Compliant, exception
     }
 }

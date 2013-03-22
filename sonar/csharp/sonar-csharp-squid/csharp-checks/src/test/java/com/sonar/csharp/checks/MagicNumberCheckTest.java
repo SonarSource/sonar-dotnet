@@ -40,4 +40,17 @@ public class MagicNumberCheckTest {
         .next().atLine(16).withMessage("Extract this magic number into a constant or variable declaration.");
   }
 
+  @Test
+  public void custom() {
+    MagicNumberCheck check = new MagicNumberCheck();
+    check.exceptions = "0.85m , 1,,";
+
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/magicNumber.cs"), check);
+
+    checkMessagesVerifier.verify(file.getCheckMessages())
+        .next().atLine(18)
+        .next().atLine(21)
+        .next().atLine(22);
+  }
+
 }
