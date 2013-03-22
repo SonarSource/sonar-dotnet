@@ -37,7 +37,7 @@ public class LineLengthCheckTest {
     LineLengthCheck check = new LineLengthCheck();
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/lineLength.cs"), check);
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Split this 137 characters long line (which is greater than 80 authorized).");
+        .next().atLine(3).withMessage("Split this 257 characters long line (which is greater than 200 authorized).");
   }
 
   @Test
@@ -47,8 +47,8 @@ public class LineLengthCheckTest {
 
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/lineLength.cs"), check);
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Split this 137 characters long line (which is greater than 40 authorized).")
-        .next().atLine(4).withMessage("Split this 80 characters long line (which is greater than 40 authorized).");
+        .next().atLine(3).withMessage("Split this 257 characters long line (which is greater than 40 authorized).")
+        .next().atLine(4).withMessage("Split this 200 characters long line (which is greater than 40 authorized).");
   }
 
 }
