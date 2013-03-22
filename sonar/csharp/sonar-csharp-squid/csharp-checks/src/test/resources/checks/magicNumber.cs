@@ -22,3 +22,13 @@ class Program
         netSalary1 = 0x00;                        // Compliant, exception
     }
 }
+
+public enum Foo
+{
+    a = 0,                                        // Compliant
+    b = 1,                                        // Compliant
+    c = 2,                                        // Compliant
+    d = 3,                                        // Compliant
+    e = 4                                         // Compliant
+}
+

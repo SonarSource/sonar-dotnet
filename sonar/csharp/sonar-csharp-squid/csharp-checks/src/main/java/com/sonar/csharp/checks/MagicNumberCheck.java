@@ -61,19 +61,23 @@ public class MagicNumberCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    if (!isInDeclaration(node) && !isExcluded(node)) {
+    if (!isInDeclaration(node) && !isExcluded(node) && !isInEnum(node)) {
       getContext().createLineViolation(this, "Extract this magic number into a constant or variable declaration.", node);
     }
-  }
-
-  private boolean isExcluded(AstNode node) {
-    return exceptionsSet.contains(node.getTokenOriginalValue());
   }
 
   private boolean isInDeclaration(AstNode node) {
     return node.hasAncestor(CSharpGrammar.LOCAL_VARIABLE_DECLARATOR) ||
       node.hasAncestor(CSharpGrammar.VARIABLE_DECLARATOR) ||
       node.hasAncestor(CSharpGrammar.CONSTANT_DECLARATOR);
+  }
+
+  private boolean isExcluded(AstNode node) {
+    return exceptionsSet.contains(node.getTokenOriginalValue());
+  }
+
+  private boolean isInEnum(AstNode node) {
+    return node.hasAncestor(CSharpGrammar.ENUM_DECLARATION);
   }
 
 }
