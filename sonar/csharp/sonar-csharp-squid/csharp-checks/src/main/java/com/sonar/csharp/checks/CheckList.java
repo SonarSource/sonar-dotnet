@@ -43,7 +43,6 @@ public final class CheckList {
         LineLengthCheck.class,
         MagicNumberCheck.class,
         MethodNameCheck.class,
-        NonEmptyCaseWithoutBreakCheck.class,
         ParameterAssignedToCheck.class,
         ParsingErrorCheck.class,
         SwitchWithoutDefaultCheck.class,
