@@ -49,11 +49,19 @@ public class AssignmentInsideSubExpressionCheck extends SquidCheck<Grammar> {
     AstNode subExpression = node.getFirstAncestor(CSharpGrammar.EXPRESSION);
     AstNode expression = subExpression.getFirstAncestor(CSharpGrammar.EXPRESSION);
 
-    return expression != null && !isLambdaExpression(expression);
+    return expression != null &&
+      !isLambdaExpression(expression) &&
+      !isDelegateExpression(expression);
   }
 
   private boolean isLambdaExpression(AstNode node) {
     return node.hasDirectChildren(CSharpGrammar.LAMBDA_EXPRESSION);
+  }
+
+  private boolean isDelegateExpression(AstNode node) {
+    return node.getNumberOfChildren() == 1 &&
+      node.hasDirectChildren(CSharpGrammar.PRIMARY_EXPRESSION) &&
+      node.getFirstChild(CSharpGrammar.PRIMARY_EXPRESSION).hasDirectChildren(CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION);
   }
 
 }
