@@ -24,12 +24,14 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
 @Rule(
   key = "BreakOutsideSwitch",
   priority = Priority.MAJOR)
+@BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class BreakOutsideSwitchCheck extends SquidCheck<Grammar> {
 
   @Override
