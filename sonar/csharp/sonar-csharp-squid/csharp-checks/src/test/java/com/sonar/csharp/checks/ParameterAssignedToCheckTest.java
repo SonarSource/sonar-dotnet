@@ -40,7 +40,14 @@ public class ParameterAssignedToCheckTest {
         .next().atLine(5).withMessage("Remove this assignment to the method parameter 'a'.")
         .next().atLine(30).withMessage("Remove this assignment to the method parameter 'b'.")
         .next().atLine(31).withMessage("Remove this assignment to the method parameter 'e'.")
-        .next().atLine(36);
+        .next().atLine(36)
+        .next().atLine(55)
+        .next().atLine(59)
+        .next().atLine(65)
+        .next().atLine(68)
+        .next().atLine(69)
+        .next().atLine(78)
+        .next().atLine(89);
   }
 
 }

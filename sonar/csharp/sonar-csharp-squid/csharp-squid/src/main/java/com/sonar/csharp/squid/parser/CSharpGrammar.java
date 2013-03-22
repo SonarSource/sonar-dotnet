@@ -19,6 +19,7 @@
  */
 package com.sonar.csharp.squid.parser;
 
+import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpPunctuator;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 import org.sonar.sslr.grammar.LexerfulGrammarBuilder;
@@ -842,8 +843,8 @@ public enum CSharpGrammar implements GrammarRuleKey {
     b.rule(EXPLICIT_ANONYMOUS_FUNCTION_PARAMETER).is(b.optional(ANONYMOUS_FUNCTION_PARAMETER_MODIFIER), TYPE, IDENTIFIER);
     b.rule(ANONYMOUS_FUNCTION_PARAMETER_MODIFIER).is(
         b.firstOf(
-            "ref",
-            "out"));
+            CSharpKeyword.REF,
+            CSharpKeyword.OUT));
     b.rule(IMPLICIT_ANONYMOUS_FUNCTION_SIGNATURE).is(
         b.firstOf(
             IMPLICIT_ANONYMOUS_FUNCTION_PARAMETER,

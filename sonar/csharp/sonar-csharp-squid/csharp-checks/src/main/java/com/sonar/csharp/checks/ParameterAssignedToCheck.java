@@ -32,6 +32,7 @@ import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -47,13 +48,14 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
   public void init() {
     subscribeTo(
         CSharpGrammar.METHOD_DECLARATION,
+        CSharpGrammar.LAMBDA_EXPRESSION,
+        CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION,
         CSharpGrammar.ASSIGNMENT);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
-      parameters.clear();
+    if (node.is(CSharpGrammar.METHOD_DECLARATION, CSharpGrammar.LAMBDA_EXPRESSION, CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION)) {
       parameters.addAll(getNonOutNorRefParameters(node));
     } else {
       String target = getAssignmentTarget(node);
@@ -64,7 +66,61 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
     }
   }
 
+  @Override
+  public void leaveNode(AstNode node) {
+    if (node.is(CSharpGrammar.METHOD_DECLARATION, CSharpGrammar.LAMBDA_EXPRESSION, CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION)) {
+      parameters.removeAll(getNonOutNorRefParameters(node));
+    }
+  }
+
   private static Set<String> getNonOutNorRefParameters(AstNode node) {
+    if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
+      return getNonOutNorRefMethodParameters(node);
+    } else if (node.is(CSharpGrammar.LAMBDA_EXPRESSION)) {
+      AstNode anonymousFunctionSignature = node.getFirstChild(CSharpGrammar.ANONYMOUS_FUNCTION_SIGNATURE);
+
+      if (anonymousFunctionSignature.hasDirectChildren(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE)) {
+        AstNode explicitAnonymousFunctionSignature = anonymousFunctionSignature.getFirstChild(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
+        return getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
+      } else {
+        AstNode implicitAnonymousFunctionSignature = anonymousFunctionSignature.getFirstChild(CSharpGrammar.IMPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
+        return getImplicitAnonymousFunctionParameters(implicitAnonymousFunctionSignature);
+      }
+    } else {
+      AstNode explicitAnonymousFunctionSignature = node.getFirstChild(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
+      return explicitAnonymousFunctionSignature == null ?
+          (Set<String>) Collections.EMPTY_SET : getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
+    }
+  }
+
+  private static Set<String> getImplicitAnonymousFunctionParameters(AstNode node) {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+
+    for (AstNode identifier : node.getDescendants(GenericTokenType.IDENTIFIER)) {
+      builder.add(identifier.getTokenOriginalValue());
+    }
+
+    return builder.build();
+  }
+
+  private static Set<String> getNonOutNorRefExplicitAnonymousFunctionParameters(AstNode node) {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+
+    for (AstNode explicitAnonymousFunctionParameter : node.getChildren(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_PARAMETER)) {
+      if (!isOutOrRefExplicitAnonymousFunctionParameter(explicitAnonymousFunctionParameter)) {
+        builder.add(explicitAnonymousFunctionParameter.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
+      }
+    }
+
+    return builder.build();
+  }
+
+  private static boolean isOutOrRefExplicitAnonymousFunctionParameter(AstNode node) {
+    return node.hasDirectChildren(CSharpGrammar.ANONYMOUS_FUNCTION_PARAMETER_MODIFIER) &&
+      node.getFirstChild(CSharpGrammar.ANONYMOUS_FUNCTION_PARAMETER_MODIFIER).hasDirectChildren(CSharpKeyword.OUT, CSharpKeyword.REF);
+  }
+
+  private static Set<String> getNonOutNorRefMethodParameters(AstNode node) {
     ImmutableSet.Builder<String> builder = ImmutableSet.builder();
 
     if (node.hasDirectChildren(CSharpGrammar.FORMAL_PARAMETER_LIST)) {
@@ -75,7 +131,7 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
           .children(CSharpGrammar.FIXED_PARAMETER);
 
       for (AstNode fixedParameter : fixedParameters) {
-        if (!isOutOrRef(fixedParameter)) {
+        if (!isOutOrRefFixedParameter(fixedParameter)) {
           builder.add(fixedParameter.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
         }
       }
@@ -84,7 +140,7 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
     return builder.build();
   }
 
-  private static boolean isOutOrRef(AstNode node) {
+  private static boolean isOutOrRefFixedParameter(AstNode node) {
     return node.hasDirectChildren(CSharpGrammar.PARAMETER_MODIFIER) &&
       node.getFirstChild(CSharpGrammar.PARAMETER_MODIFIER).hasDirectChildren(CSharpKeyword.OUT, CSharpKeyword.REF);
   }
