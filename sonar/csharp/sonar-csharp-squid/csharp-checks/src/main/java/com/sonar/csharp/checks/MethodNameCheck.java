@@ -63,18 +63,18 @@ public class MethodNameCheck extends SquidCheck<Grammar> {
 
   @Override
   public void visitNode(AstNode node) {
-    String methodName;
+    AstNode identifier;
 
     if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
       List<AstNode> identifiers = node.getFirstChild(CSharpGrammar.MEMBER_NAME).getChildren(GenericTokenType.IDENTIFIER);
       AstNode lastIdentifier = identifiers.get(identifiers.size() - 1);
-      methodName = lastIdentifier.getTokenOriginalValue();
+      identifier = lastIdentifier;
     } else {
-      methodName = node.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue();
+      identifier = node.getFirstChild(GenericTokenType.IDENTIFIER);
     }
 
-    if (!pattern.matcher(methodName).matches()) {
-      getContext().createLineViolation(this, "Rename this method to match the regular expression: " + format, node);
+    if (!pattern.matcher(identifier.getTokenOriginalValue()).matches()) {
+      getContext().createLineViolation(this, "Rename this method to match the regular expression: " + format, identifier);
     }
   }
 

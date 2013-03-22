@@ -44,7 +44,8 @@ public class MethodNameCheckTest {
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(5).withMessage("Rename this method to match the regular expression: [A-Z][a-zA-Z]++")
         .next().atLine(6)
-        .next().atLine(13);
+        .next().atLine(13)
+        .next().atLine(27);
   }
 
   @Test

@@ -20,3 +20,9 @@ class Bar
 {
     public event MyEventHandler foo_bar;
 }
+
+class Baz
+{
+    void
+      foo();           // Non-Compliant
+}
