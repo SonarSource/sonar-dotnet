@@ -42,7 +42,7 @@ public class MethodNameCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/methodName.cs"), new MethodNameCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(5).withMessage("Rename this method to match the regular expression: [A-Z][a-zA-Z]++")
+        .next().atLine(5).withMessage("Rename this method to match the regular expression: [A-Z][a-zA-Z0-9]++")
         .next().atLine(6)
         .next().atLine(13)
         .next().atLine(27);
