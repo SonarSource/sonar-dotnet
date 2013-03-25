@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ClassNameCheck extends SquidCheck<Grammar> {
 
-  private static final String DEFAULT_FORMAT = "[A-HJ-Z][a-zA-Z]++|I[a-z][a-zA-Z]*+";
+  private static final String DEFAULT_FORMAT = "[A-HJ-Z][a-zA-Z0-9]++|I[a-z0-9][a-zA-Z0-9]*+";
 
   @RuleProperty(
     key = "format",

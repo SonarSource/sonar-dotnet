@@ -42,7 +42,7 @@ public class ClassNameCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/className.cs"), new ClassNameCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(3).withMessage("Rename this class to match the regular expression: [A-HJ-Z][a-zA-Z]++|I[a-z][a-zA-Z]*+")
+        .next().atLine(3).withMessage("Rename this class to match the regular expression: [A-HJ-Z][a-zA-Z0-9]++|I[a-z0-9][a-zA-Z0-9]*+")
         .next().atLine(11)
         .next().atLine(15);
   }
