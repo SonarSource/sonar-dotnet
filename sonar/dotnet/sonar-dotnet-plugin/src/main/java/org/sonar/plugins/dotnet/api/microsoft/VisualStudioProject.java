@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -142,13 +141,13 @@ public class VisualStudioProject {
   /**
    * Provides the location of the generated artifact(s) of this project according to the build configuration(s) used.
    *
-   * @param buildConfigurations
-   *          Visual Studio build configurations used to generate the project
+   * @param buildConfiguration
+   *          Visual Studio build configuration used to generate the project
    * @param buildPlatform
    *          Platform used to build the project. Typical values are "Any CPU", "x86" and "x64"
    * @return
    */
-  public File getArtifactDirectory(String buildConfigurations, String buildPlatform) {
+  public File getArtifactDirectory(String buildConfiguration, String buildPlatform) {
     File artifactDirectory = null;
     if (StringUtils.isNotEmpty(forcedOutputDir)) {
       // first trying to use forcedOutputDir as a relative path
@@ -163,20 +162,11 @@ public class VisualStudioProject {
       artifactDirectory = assemblyDirectory;
 
     } else {
-      final BuildConfiguration buildConfiguration;
-
-      if (StringUtils.isEmpty(buildConfigurations) || StringUtils.contains(buildConfigurations, "Debug")) {
-        buildConfiguration = new BuildConfiguration("Debug", buildPlatform);
-      } else {
-        // get the first one found
-        String buildName = Arrays.asList(StringUtils.split(buildConfigurations, ",; ")).get(0);
-        buildConfiguration = new BuildConfiguration(buildName, buildPlatform);
-      }
-      artifactDirectory = buildConfOutputDirMap.get(buildConfiguration);
+      artifactDirectory = buildConfOutputDirMap.get(new BuildConfiguration(buildConfiguration, buildPlatform));
       if (artifactDirectory == null) {
         // just take the first one found...
         artifactDirectory = buildConfOutputDirMap.values().iterator().next();
-        LOG.warn("Configuration(s) {} not found for platform {} in " + projectFile, buildConfigurations, buildPlatform);
+        LOG.warn("Configuration(s) {} not found for platform {} in " + projectFile, buildConfiguration, buildPlatform);
         LOG.warn("Fallback to directory {} for project {}", artifactDirectory, name);
       } else {
         LOG.debug("Using directory " + artifactDirectory + " for project " + name + " with buildconfiguration " + buildConfiguration);
@@ -188,12 +178,12 @@ public class VisualStudioProject {
   /**
    * Gets the generated assembly according to the build configurations
    *
-   * @param buildConfigurations
-   *          Visual Studio build configurations used to generate the project
+   * @param buildConfiguration
+   *          Visual Studio build configuration used to generate the project
    * @return
    */
-  public File getArtifact(String buildConfigurations, String buildPlatform) {
-    File artifactDirectory = getArtifactDirectory(buildConfigurations, buildPlatform);
+  public File getArtifact(String buildConfiguration, String buildPlatform) {
+    File artifactDirectory = getArtifactDirectory(buildConfiguration, buildPlatform);
     return new File(artifactDirectory, getArtifactName());
   }
 
@@ -201,13 +191,13 @@ public class VisualStudioProject {
    * Gets the generated assemblies according to the build configurations. There is zero or one single assembly generated except for web
    * assemblies.
    *
-   * @param buildConfigurations
-   *          Visual Studio build configurations used to generate the project
+   * @param buildConfiguration
+   *          Visual Studio build configuration used to generate the project
    * @return a Set of the generated assembly files. If no files found, the set will be empty.
    */
-  public Set<File> getGeneratedAssemblies(String buildConfigurations, String platform) {
+  public Set<File> getGeneratedAssemblies(String buildConfiguration, String platform) {
     Set<File> result = Sets.newHashSet();
-    File assembly = getArtifact(buildConfigurations, platform);
+    File assembly = getArtifact(buildConfiguration, platform);
     if (assembly.exists()) {
       result.add(assembly);
     } else {

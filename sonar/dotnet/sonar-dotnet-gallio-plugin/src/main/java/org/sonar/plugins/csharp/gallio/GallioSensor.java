@@ -98,15 +98,15 @@ public class GallioSensor extends AbstractDotNetSensor {
   }
 
   private void addAssembly(Collection<File> assemblyFileList, VisualStudioProject visualStudioProject) {
-    String buildConfigurations = configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY);
+    String buildConfiguration = configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY);
     String buildPlatform = configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY);
-    File assembly = visualStudioProject.getArtifact(buildConfigurations, buildPlatform);
+    File assembly = visualStudioProject.getArtifact(buildConfiguration, buildPlatform);
     if (assembly != null && assembly.isFile()) {
       assemblyFileList.add(assembly);
     } else {
       LOG.warn("Test assembly not found at the following location: {}"
         + "\n, using the following configuration:\n  - csproj file: {}\n  - build configuration: {}\n  - platform: {}",
-          new Object[] {assembly, visualStudioProject.getProjectFile(), buildConfigurations, buildPlatform}
+          new Object[] {assembly, visualStudioProject.getProjectFile(), buildConfiguration, buildPlatform}
           );
     }
   }

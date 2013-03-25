@@ -23,13 +23,6 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.microsoft.BuildConfiguration;
-import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
-import org.sonar.plugins.dotnet.api.microsoft.SourceFile;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioWebProject;
-
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
@@ -89,9 +82,6 @@ public class ModelFactoryTest {
 
     assertEquals(1, solution.getProjects().size());
     VisualStudioProject project = solution.getProjects().get(0);
-
-    // Debug configuration should be the preferred one
-    assertTrue(project.getArtifact("CustomCompil;Debug", "Any CPU").getAbsolutePath().contains("Debug"));
 
     assertTrue(project.getArtifact("CustomCompil", "Any CPU").getAbsolutePath().contains("CustomCompil"));
     assertTrue(project.getArtifact("CustomCompil", "Any CPU").getAbsolutePath().endsWith(project.getName() + ".dll"));

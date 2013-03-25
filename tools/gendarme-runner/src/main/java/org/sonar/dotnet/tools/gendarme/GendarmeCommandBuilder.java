@@ -96,7 +96,7 @@ public final class GendarmeCommandBuilder extends CilRuleEngineCommandBuilderSup
     this.gendarmeSeverity = gendarmeSeverity;
   }
 
-  protected String getBuildConfigurations() {
+  protected String getBuildConfiguration() {
     return buildConfiguration;
   }
 

@@ -69,12 +69,12 @@ public class VisualStudioWebProject extends VisualStudioProject {
   }
 
   /**
-   * @param buildConfigurations
-   *          Visual Studio build configurations used to generate the project
+   * @param buildConfiguration
+   *          Visual Studio build configuration used to generate the project
    * @return the directory where asp.net pages are precompiled. null for a non web project
    */
-  public File getWebPrecompilationDirectory(String buildConfigurations, String buildPlatform) {
-    return new File(getArtifactDirectory(buildConfigurations, buildPlatform), "bin");
+  public File getWebPrecompilationDirectory(String buildConfiguration, String buildPlatform) {
+    return new File(getArtifactDirectory(buildConfiguration, buildPlatform), "bin");
   }
 
   /**

@@ -84,15 +84,15 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
       Collection<File> assemblies;
 
       final String[] assemblyPatterns = getAssemblyPatterns();
-      final String buildConfigurations = configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY);
+      final String buildConfiguration = configuration.getString(DotNetConstants.BUILD_CONFIGURATION_KEY);
       final String buildPlatform = configuration.getString(DotNetConstants.BUILD_PLATFORM_KEY);
       if (assemblyPatterns == null || assemblyPatterns.length == 0) {
-        assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
+        assemblies = visualProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
       } else {
         assemblies = findFiles(project, assemblyPatterns);
         if (assemblies.isEmpty()) {
           // fall back to the default VS output folder
-          assemblies = visualProject.getGeneratedAssemblies(buildConfigurations, buildPlatform);
+          assemblies = visualProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
         }
       }
 
