@@ -47,7 +47,12 @@ public class ParameterAssignedToCheckTest {
         .next().atLine(68)
         .next().atLine(69)
         .next().atLine(78)
-        .next().atLine(89);
+        .next().atLine(89)
+        .next().atLine(117)
+        .next().atLine(122)
+        .next().atLine(123)
+        .next().atLine(129)
+        .next().atLine(138);
   }
 
 }

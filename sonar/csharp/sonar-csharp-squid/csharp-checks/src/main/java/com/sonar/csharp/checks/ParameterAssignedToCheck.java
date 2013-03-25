@@ -47,50 +47,67 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
   @Override
   public void init() {
     subscribeTo(
+        CSharpGrammar.ASSIGNMENT,
+
         CSharpGrammar.METHOD_DECLARATION,
+        CSharpGrammar.INDEXER_DECLARATION,
+        CSharpGrammar.SET_ACCESSOR_DECLARATION,
+        CSharpGrammar.OPERATOR_DECLARATION,
         CSharpGrammar.LAMBDA_EXPRESSION,
-        CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION,
-        CSharpGrammar.ASSIGNMENT);
+        CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION);
   }
 
   @Override
   public void visitNode(AstNode node) {
-    if (node.is(CSharpGrammar.METHOD_DECLARATION, CSharpGrammar.LAMBDA_EXPRESSION, CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION)) {
-      parameters.addAll(getNonOutNorRefParameters(node));
-    } else {
+    if (node.is(CSharpGrammar.ASSIGNMENT)) {
       String target = getAssignmentTarget(node);
 
       if (parameters.contains(target)) {
         getContext().createLineViolation(this, "Remove this assignment to the method parameter '" + target + "'.", node);
       }
+    } else {
+      parameters.addAll(getNonOutNorRefParameters(node));
     }
   }
 
   @Override
   public void leaveNode(AstNode node) {
-    if (node.is(CSharpGrammar.METHOD_DECLARATION, CSharpGrammar.LAMBDA_EXPRESSION, CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION)) {
+    if (!node.is(CSharpGrammar.ASSIGNMENT)) {
       parameters.removeAll(getNonOutNorRefParameters(node));
     }
   }
 
   private static Set<String> getNonOutNorRefParameters(AstNode node) {
+    Set<String> parameters;
+
     if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
-      return getNonOutNorRefMethodParameters(node);
+      parameters = getNonOutNorRefMethodParameters(node);
+    } else if (node.is(CSharpGrammar.INDEXER_DECLARATION)) {
+      parameters = getNonOutNorRefIndexerParameters(node);
+    } else if (node.is(CSharpGrammar.SET_ACCESSOR_DECLARATION)) {
+      parameters = ImmutableSet.of("value");
+    } else if (node.is(CSharpGrammar.OPERATOR_DECLARATION)) {
+      parameters = getOperatorParameters(node);
     } else if (node.is(CSharpGrammar.LAMBDA_EXPRESSION)) {
       AstNode anonymousFunctionSignature = node.getFirstChild(CSharpGrammar.ANONYMOUS_FUNCTION_SIGNATURE);
 
       if (anonymousFunctionSignature.hasDirectChildren(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE)) {
         AstNode explicitAnonymousFunctionSignature = anonymousFunctionSignature.getFirstChild(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
-        return getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
+        parameters = getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
       } else {
         AstNode implicitAnonymousFunctionSignature = anonymousFunctionSignature.getFirstChild(CSharpGrammar.IMPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
-        return getImplicitAnonymousFunctionParameters(implicitAnonymousFunctionSignature);
+        parameters = getImplicitAnonymousFunctionParameters(implicitAnonymousFunctionSignature);
       }
-    } else {
+    } else if (node.is(CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION)) {
       AstNode explicitAnonymousFunctionSignature = node.getFirstChild(CSharpGrammar.EXPLICIT_ANONYMOUS_FUNCTION_SIGNATURE);
-      return explicitAnonymousFunctionSignature == null ?
-          (Set<String>) Collections.EMPTY_SET : getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
+      parameters = explicitAnonymousFunctionSignature == null ?
+          (Set<String>) Collections.EMPTY_SET :
+          getNonOutNorRefExplicitAnonymousFunctionParameters(explicitAnonymousFunctionSignature);
+    } else {
+      throw new IllegalArgumentException("Unexpected node type: " + node.getType() + ", " + node);
     }
+
+    return parameters;
   }
 
   private static Set<String> getImplicitAnonymousFunctionParameters(AstNode node) {
@@ -121,19 +138,26 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
   }
 
   private static Set<String> getNonOutNorRefMethodParameters(AstNode node) {
+    return node.hasDirectChildren(CSharpGrammar.FORMAL_PARAMETER_LIST) ?
+        getNonOutNorRefFormalParameters(node.getFirstChild(CSharpGrammar.FORMAL_PARAMETER_LIST)) :
+        Collections.EMPTY_SET;
+  }
+
+  private static Set<String> getNonOutNorRefIndexerParameters(AstNode node) {
+    return getNonOutNorRefFormalParameters(node.getFirstChild(CSharpGrammar.INDEXER_DECLARATOR).getFirstChild(CSharpGrammar.FORMAL_PARAMETER_LIST));
+  }
+
+  private static Set<String> getNonOutNorRefFormalParameters(AstNode node) {
     ImmutableSet.Builder<String> builder = ImmutableSet.builder();
 
-    if (node.hasDirectChildren(CSharpGrammar.FORMAL_PARAMETER_LIST)) {
-      Iterable<AstNode> fixedParameters = node
-          .getFirstChild(CSharpGrammar.FORMAL_PARAMETER_LIST)
-          .select()
-          .children(CSharpGrammar.FIXED_PARAMETERS)
-          .children(CSharpGrammar.FIXED_PARAMETER);
+    Iterable<AstNode> fixedParameters = node
+        .select()
+        .children(CSharpGrammar.FIXED_PARAMETERS)
+        .children(CSharpGrammar.FIXED_PARAMETER);
 
-      for (AstNode fixedParameter : fixedParameters) {
-        if (!isOutOrRefFixedParameter(fixedParameter)) {
-          builder.add(fixedParameter.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
-        }
+    for (AstNode fixedParameter : fixedParameters) {
+      if (!isOutOrRefFixedParameter(fixedParameter)) {
+        builder.add(fixedParameter.getFirstChild(GenericTokenType.IDENTIFIER).getTokenOriginalValue());
       }
     }
 
@@ -143,6 +167,21 @@ public class ParameterAssignedToCheck extends SquidCheck<Grammar> {
   private static boolean isOutOrRefFixedParameter(AstNode node) {
     return node.hasDirectChildren(CSharpGrammar.PARAMETER_MODIFIER) &&
       node.getFirstChild(CSharpGrammar.PARAMETER_MODIFIER).hasDirectChildren(CSharpKeyword.OUT, CSharpKeyword.REF);
+  }
+
+  private static Set<String> getOperatorParameters(AstNode node) {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+
+    List<AstNode> identifiers = node
+        .getFirstChild(CSharpGrammar.OPERATOR_DECLARATOR)
+        .getFirstChild(CSharpGrammar.UNARY_OPERATOR_DECLARATOR, CSharpGrammar.BINARY_OPERATOR_DECLARATOR, CSharpGrammar.CONVERSION_OPERATOR_DECLARATOR)
+        .getChildren(GenericTokenType.IDENTIFIER);
+
+    for (AstNode identifier : identifiers) {
+      builder.add(identifier.getTokenOriginalValue());
+    }
+
+    return builder.build();
   }
 
   private String getAssignmentTarget(AstNode node) {

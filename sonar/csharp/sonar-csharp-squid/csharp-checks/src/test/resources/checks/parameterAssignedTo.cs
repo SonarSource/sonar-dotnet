@@ -107,3 +107,35 @@ class Baz
         OnBaz += delegate { };
     }
 }
+
+class Qux
+{
+    public int this[int index]
+    {
+        get
+        {
+            index = 1;  // Non-Compliant
+            return 0;
+        }
+        set
+        {
+            index = 1;  // Non-Compliant
+            value = 45; // Non-Compliant ("value" is the implicit parameter)
+        }
+    }
+
+    public static Qux operator +(Qux first, Qux second)
+    {
+        first = null;   // Non-Compliant
+        return first;
+    }
+
+    public int Amount
+    {
+        get { return 0; }
+        set
+        {
+            value = 45; // Non-Compliant
+        }
+    }
+}
