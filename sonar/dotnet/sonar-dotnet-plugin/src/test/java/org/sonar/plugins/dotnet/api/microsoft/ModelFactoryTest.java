@@ -25,6 +25,7 @@ package org.sonar.plugins.dotnet.api.microsoft;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+import org.sonar.plugins.dotnet.api.DotNetException;
 
 import java.io.File;
 import java.util.Collection;
@@ -54,6 +55,7 @@ public class ModelFactoryTest {
   private static final String SOLUTION_PATH = "target/test-classes/solution/Example/Example.sln";
   private static final String MESSY_SOLUTION_PATH = "target/test-classes/solution/MessyTestSolution/MessyTestSolution.sln";
   private static final String LINK_SOLUTION_PATH = "target/test-classes/solution/LinkTestSolution/LinkTestSolution.sln";
+  private static final String INVALID_SOLUTION_PATH = "target/test-classes/solution/InvalidSolution/InvalidSolution.sln";
   private static final String SOLUTION_WITH_DUP_PATH = "target/test-classes/solution/DuplicatesExample/Example.sln";
   private static final String SOLUTION_WITH_CUSTOM_BUILD_PATH = "target/test-classes/solution/CustomBuild/CustomBuild.sln";
   private static final String SOLUTION_WITH_MULTIPLE_LANGUAGES_PATH = "target/test-classes/solution/MultiLanguageSolution/MultiLanguage.sln";
@@ -146,7 +148,11 @@ public class ModelFactoryTest {
     assertFalse(project.isSilverlightProject());
     Collection<SourceFile> libFiles = libProject.getSourceFiles();
     assertEquals("Bad number of files extracted", 2, libFiles.size());
+  }
 
+  @Test(expected = DotNetException.class)
+  public void testReadInvalidSolution() throws Exception {
+    ModelFactory.getSolution(new File(INVALID_SOLUTION_PATH));
   }
 
   @Test

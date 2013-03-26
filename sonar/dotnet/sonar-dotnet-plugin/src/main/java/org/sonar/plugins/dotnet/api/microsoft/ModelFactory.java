@@ -358,6 +358,12 @@ public final class ModelFactory {
       String rootNamespace = extractProjectProperty(rootNamespaceExpression, projectFile);
       String projectGuid = extractProjectProperty(projectGuidExpression, projectFile);
 
+      // Be sure assembly name is defined, prevent later errors with empty
+      // assembly names.
+      if ("".equals(assemblyName)) {
+        throw new DotNetException("Error while processing the project " + projectFile + " : assemblyName not defined");
+      }
+
       // because the GUID starts with { and ends with }, remove these characters
       projectGuid = projectGuid.substring(1, projectGuid.length() - 2);
 
@@ -561,7 +567,7 @@ public final class ModelFactory {
       } else if ("xml".equals(prefix)) {
         result = XMLConstants.XML_NS_URI;
       } else {
-        result = "" ; //XMLConstants.NULL_NS_URI;
+        result = ""; // XMLConstants.NULL_NS_URI;
       }
       return result;
     }
