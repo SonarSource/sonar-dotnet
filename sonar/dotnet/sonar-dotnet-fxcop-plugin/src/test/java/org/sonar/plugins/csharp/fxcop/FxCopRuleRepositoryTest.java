@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp.fxcop;
 
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.XMLRuleParser;
@@ -32,11 +33,35 @@ import static org.mockito.Mockito.mock;
 
 public class FxCopRuleRepositoryTest {
 
+  private static final int FXCOP_STANDARD_RULES_COUNT = 240;
+
   @Test
   public void loadRepositoryFromXml() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    FxCopRuleRepository repository = new FxCopRuleRepository("", "", fileSystem, new XMLRuleParser());
+    Settings settings = Settings.createForComponent(FxCopRuleRepositoryProvider.class);
+    FxCopRuleRepository repository = new FxCopRuleRepository("", "", fileSystem, new XMLRuleParser(), settings);
     List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(240));
+    assertThat(rules.size(), is(FXCOP_STANDARD_RULES_COUNT));
+  }
+
+  @Test
+  public void loadRepositoryWithProperty() {
+    ServerFileSystem fileSystem = mock(ServerFileSystem.class);
+    Settings settings = Settings.createForComponent(FxCopRuleRepositoryProvider.class);
+    settings.setProperty(FxCopRuleRepositoryProvider.SONAR_FXCOP_CUSTOM_RULES_PROP_KEY,
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+          + "<rules>"
+          + "<rule key=\"NewRule\">"
+          + "<name>New rule</name>"
+          + "<configKey>Foo</configKey>"
+          + "<category name=\"Maintainability\" />"
+          + "<description>Blabla</description>"
+          + "</rule>"
+          + "</rules>"
+        );
+
+    FxCopRuleRepository repository = new FxCopRuleRepository("", "", fileSystem, new XMLRuleParser(), settings);
+    List<Rule> rules = repository.createRules();
+    assertThat(rules.size(), is(FXCOP_STANDARD_RULES_COUNT + 1));
   }
 }

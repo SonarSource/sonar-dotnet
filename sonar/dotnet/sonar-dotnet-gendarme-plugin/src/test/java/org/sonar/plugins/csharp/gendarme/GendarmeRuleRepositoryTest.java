@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp.gendarme;
 
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.XMLRuleParser;
@@ -32,11 +33,35 @@ import static org.mockito.Mockito.mock;
 
 public class GendarmeRuleRepositoryTest {
 
+  private static final int GENDARME_STANDARD_RULES_COUNT = 216;
+
   @Test
   public void loadRepositoryFromXml() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser());
+    Settings settings = Settings.createForComponent(GendarmeRuleRepositoryProvider.class);
+    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser(), settings);
     List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(216));
+    assertThat(rules.size(), is(GENDARME_STANDARD_RULES_COUNT));
+  }
+
+  @Test
+  public void loadRepositoryWithProperty() {
+    ServerFileSystem fileSystem = mock(ServerFileSystem.class);
+    Settings settings = Settings.createForComponent(GendarmeRuleRepositoryProvider.class);
+    settings.setProperty(GendarmeRuleRepositoryProvider.SONAR_GENDARME_CUSTOM_RULES_PROP_KEY,
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+          + "<rules>"
+          + "<rule key=\"NewRule\">"
+          + "<name>New rule</name>"
+          + "<configKey>Foo</configKey>"
+          + "<category name=\"Maintainability\" />"
+          + "<description>Blabla</description>"
+          + "</rule>"
+          + "</rules>"
+        );
+
+    GendarmeRuleRepository repository = new GendarmeRuleRepository("", "", fileSystem, new XMLRuleParser(), settings);
+    List<Rule> rules = repository.createRules();
+    assertThat(rules.size(), is(GENDARME_STANDARD_RULES_COUNT + 1));
   }
 }

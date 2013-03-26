@@ -20,7 +20,11 @@
 package org.sonar.plugins.csharp.gendarme;
 
 import org.sonar.api.ExtensionProvider;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.ServerExtension;
+import org.sonar.api.config.Settings;
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.XMLRuleParser;
 
@@ -28,16 +32,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates FXCop rule repositories for every language supported by FxCop.
+ * Creates Gendarme rule repositories for every language supported by FxCop.
  */
+@Properties({
+  @Property(key = GendarmeRuleRepositoryProvider.SONAR_GENDARME_CUSTOM_RULES_PROP_KEY,
+    defaultValue = "", name = "Gendarme custom rules",
+    description = "XML description of Gendarme custom rules", type = PropertyType.TEXT,
+    global = true, project = false)
+})
 public class GendarmeRuleRepositoryProvider extends ExtensionProvider implements ServerExtension {
+
+  public static final String SONAR_GENDARME_CUSTOM_RULES_PROP_KEY = "sonar.gendarme.customRules.definition";
 
   private ServerFileSystem fileSystem;
   private XMLRuleParser xmlRuleParser;
+  private Settings settings;
 
-  public GendarmeRuleRepositoryProvider(ServerFileSystem fileSystem) {
+  public GendarmeRuleRepositoryProvider(ServerFileSystem fileSystem, Settings settings) {
     this.fileSystem = fileSystem;
     this.xmlRuleParser = new XMLRuleParser();
+    this.settings = settings;
   }
 
   @Override
@@ -51,7 +65,7 @@ public class GendarmeRuleRepositoryProvider extends ExtensionProvider implements
         // compatibility)
         repoKey += "-" + languageKey;
       }
-      extensions.add(new GendarmeRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser));
+      extensions.add(new GendarmeRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser, settings));
     }
 
     return extensions;

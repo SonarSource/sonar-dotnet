@@ -33,7 +33,7 @@ public class GendarmeRuleRepositoryProviderTest {
   @Test
   public void shouldCreateRepositoriesForEachSupportedLanguage() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    GendarmeRuleRepositoryProvider provider = new GendarmeRuleRepositoryProvider(fileSystem);
+    GendarmeRuleRepositoryProvider provider = new GendarmeRuleRepositoryProvider(fileSystem, null);
 
     List<GendarmeRuleRepository> extensions = (List<GendarmeRuleRepository>) provider.provide();
     assertThat(extensions.size()).isEqualTo(2);

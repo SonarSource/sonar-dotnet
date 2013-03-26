@@ -21,6 +21,7 @@
 package org.sonar.plugins.csharp.stylecop;
 
 import org.junit.Test;
+import org.sonar.api.config.Settings;
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.XMLRuleParser;
@@ -33,11 +34,36 @@ import static org.mockito.Mockito.mock;
 
 public class StyleCopRuleRepositoryTest {
 
+  private static final int STYLECOP_STANDARD_RULES_COUNT = 169;
+
   @Test
   public void loadRepositoryFromXml() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    StyleCopRuleRepository repository = new StyleCopRuleRepository(fileSystem, new XMLRuleParser());
+    Settings settings = Settings.createForComponent(StyleCopRuleRepository.class);
+    StyleCopRuleRepository repository = new StyleCopRuleRepository(fileSystem, new XMLRuleParser(), settings);
     List<Rule> rules = repository.createRules();
-    assertThat(rules.size(), is(169));
+    assertThat(rules.size(), is(STYLECOP_STANDARD_RULES_COUNT));
   }
+
+  @Test
+  public void loadRepositoryWithProperty() {
+    ServerFileSystem fileSystem = mock(ServerFileSystem.class);
+    Settings settings = Settings.createForComponent(StyleCopRuleRepository.class);
+    settings.setProperty(StyleCopRuleRepository.SONAR_STYLECOP_CUSTOM_RULES_PROP_KEY,
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+          + "<rules>"
+          + "<rule key=\"NewRule\">"
+          + "<name>New rule</name>"
+          + "<configKey>Foo</configKey>"
+          + "<category name=\"Maintainability\" />"
+          + "<description>Blabla</description>"
+          + "</rule>"
+          + "</rules>"
+        );
+
+    StyleCopRuleRepository repository = new StyleCopRuleRepository(fileSystem, new XMLRuleParser(), settings);
+    List<Rule> rules = repository.createRules();
+    assertThat(rules.size(), is(STYLECOP_STANDARD_RULES_COUNT + 1));
+  }
+
 }

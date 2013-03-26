@@ -33,7 +33,7 @@ public class FxCopRuleRepositoryProviderTest {
   @Test
   public void shouldCreateRepositoriesForEachSupportedLanguage() {
     ServerFileSystem fileSystem = mock(ServerFileSystem.class);
-    FxCopRuleRepositoryProvider provider = new FxCopRuleRepositoryProvider(fileSystem);
+    FxCopRuleRepositoryProvider provider = new FxCopRuleRepositoryProvider(fileSystem, null);
 
     List<FxCopRuleRepository> extensions = (List<FxCopRuleRepository>) provider.provide();
     assertThat(extensions.size()).isEqualTo(2);

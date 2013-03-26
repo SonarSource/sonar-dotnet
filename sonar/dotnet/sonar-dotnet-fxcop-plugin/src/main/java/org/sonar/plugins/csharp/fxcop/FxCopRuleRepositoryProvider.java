@@ -20,7 +20,11 @@
 package org.sonar.plugins.csharp.fxcop;
 
 import org.sonar.api.ExtensionProvider;
+import org.sonar.api.Properties;
+import org.sonar.api.Property;
+import org.sonar.api.PropertyType;
 import org.sonar.api.ServerExtension;
+import org.sonar.api.config.Settings;
 import org.sonar.api.platform.ServerFileSystem;
 import org.sonar.api.rules.XMLRuleParser;
 
@@ -30,14 +34,24 @@ import java.util.List;
 /**
  * Creates FXCop rule repositories for every language supported by FxCop.
  */
+@Properties({
+  @Property(key = FxCopRuleRepositoryProvider.SONAR_FXCOP_CUSTOM_RULES_PROP_KEY,
+    defaultValue = "", name = "FxCop custom rules",
+    description = "XML description of FxCop custom rules", type = PropertyType.TEXT,
+    global = true, project = false)
+})
 public class FxCopRuleRepositoryProvider extends ExtensionProvider implements ServerExtension {
+
+  public static final String SONAR_FXCOP_CUSTOM_RULES_PROP_KEY = "sonar.fxcop.customRules.definition";
 
   private ServerFileSystem fileSystem;
   private XMLRuleParser xmlRuleParser;
+  private Settings settings;
 
-  public FxCopRuleRepositoryProvider(ServerFileSystem fileSystem) {
+  public FxCopRuleRepositoryProvider(ServerFileSystem fileSystem, Settings settings) {
     this.fileSystem = fileSystem;
     this.xmlRuleParser = new XMLRuleParser();
+    this.settings = settings;
   }
 
   @Override
@@ -50,7 +64,7 @@ public class FxCopRuleRepositoryProvider extends ExtensionProvider implements Se
         // every repository key should be "fxcop-<language_key>", except for C# for which it is simply "fxcop" (for backward compatibility)
         repoKey += "-" + languageKey;
       }
-      extensions.add(new FxCopRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser));
+      extensions.add(new FxCopRuleRepository(repoKey, languageKey, fileSystem, xmlRuleParser, settings));
     }
 
     return extensions;
