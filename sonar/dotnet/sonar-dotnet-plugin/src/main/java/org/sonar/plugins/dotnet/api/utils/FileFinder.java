@@ -167,42 +167,45 @@ public final class FileFinder {
 
     Set<File> result = new HashSet<File>();
     for (String pattern : patternArray) {
-      String currentPattern = convertSlash(pattern);
-      File workDir = defaultWorkDir;
-      if (StringUtils.startsWith(pattern, SOLUTION_DIR_KEY)) {
-        workDir = currentSolution.getSolutionDir();
-        currentPattern = StringUtils.substringAfter(currentPattern, SOLUTION_DIR_KEY);
-      }
-      while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY)) {
-        workDir = workDir.getParentFile();
-        if (workDir==null) {
-          LOG.warn("The following pattern is not correct: " + pattern);
-          break;
-        }
-        currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY);
-      }
-      if (workDir == null) {
-        continue;
-      } else if (StringUtils.contains(currentPattern, '*')) {
-        String prefix = StringUtils.substringBefore(currentPattern, "*");
-        if (StringUtils.contains(prefix, '/')) {
-          workDir = browse(workDir, prefix);
-          currentPattern = "*" + StringUtils.substringAfter(currentPattern, "*");
-        }
-        IOFileFilter externalFilter = new PatternFilter(workDir, currentPattern);
-        listFiles(result, workDir, externalFilter);
-
-      } else {
-        File file = browse(workDir, currentPattern);
-        if (file.exists()) {
-          result.add(browse(workDir, currentPattern));
-        }
-      }
+      findFilesFromPattern(currentSolution, defaultWorkDir, result, pattern);
     }
 
     logResults(result, patternArray);
 
     return result;
+  }
+
+  private static void findFilesFromPattern(VisualStudioSolution currentSolution, File defaultWorkDir, Set<File> result, String pattern) {
+    String currentPattern = convertSlash(pattern);
+    File workDir = defaultWorkDir;
+    if (StringUtils.startsWith(pattern, SOLUTION_DIR_KEY)) {
+      workDir = currentSolution.getSolutionDir();
+      currentPattern = StringUtils.substringAfter(currentPattern, SOLUTION_DIR_KEY);
+    }
+    while (StringUtils.startsWith(currentPattern, PARENT_DIRECTORY)) {
+      workDir = workDir.getParentFile();
+      if (workDir == null) {
+        LOG.warn("The following pattern is not correct: " + pattern);
+        break;
+      }
+      currentPattern = StringUtils.substringAfter(currentPattern, PARENT_DIRECTORY);
+    }
+    if (workDir == null) {
+      return;
+    } else if (StringUtils.contains(currentPattern, '*')) {
+      String prefix = StringUtils.substringBefore(currentPattern, "*");
+      if (StringUtils.contains(prefix, '/')) {
+        workDir = browse(workDir, prefix);
+        currentPattern = "*" + StringUtils.substringAfter(currentPattern, "*");
+      }
+      IOFileFilter externalFilter = new PatternFilter(workDir, currentPattern);
+      listFiles(result, workDir, externalFilter);
+    } else {
+      File file = browse(workDir, currentPattern);
+      if (file.exists()) {
+        result.add(browse(workDir, currentPattern));
+      }
+    }
   }
 
   protected static void logResults(Set<File> result, String... patternArray) {
@@ -262,7 +265,7 @@ public final class FileFinder {
         // a folder on another drive (on windows systems)
         absolutePathPattern += "/";
       }
-      absolutePathPattern +=  pattern;
+      absolutePathPattern += pattern;
       absolutePathPattern = convertSlash(absolutePathPattern);
       this.pattern = WildcardPattern.create(absolutePathPattern);
     }

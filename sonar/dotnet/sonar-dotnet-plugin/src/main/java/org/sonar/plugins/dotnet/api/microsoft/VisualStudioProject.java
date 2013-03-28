@@ -52,7 +52,7 @@ public class VisualStudioProject {
   private ArtifactType type;
   private String assemblyName;
   private String assemblyVersion;
-  private String realAssemblyName; // assembly name found in the csproj file no matter what
+  private String realAssemblyName;
   private String rootNamespace;
   private UUID projectGuid;
   /** Output directory specified from maven */
@@ -385,7 +385,7 @@ public class VisualStudioProject {
 
   @SuppressWarnings("unchecked")
   private void initializeSourceFileMap() {
-    Map<File, SourceFile> allFiles = new LinkedHashMap<File, SourceFile>(); // Case of a regular project
+    Map<File, SourceFile> allFiles = new LinkedHashMap<File, SourceFile>();
     if (projectFile != null) {
       List<String> filesPath = ModelFactory.getFilesPath(projectFile);
 

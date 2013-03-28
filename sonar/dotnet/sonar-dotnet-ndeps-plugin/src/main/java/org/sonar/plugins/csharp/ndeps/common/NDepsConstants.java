@@ -42,8 +42,14 @@ public final class NDepsConstants implements Metrics {
 
   public static final String REPOSITORY_KEY = "ndeps";
 
-  public static final Metric MERGED_TYPES
-    = new Metric.Builder("ndeps_merged_types", "Merged Types", Metric.ValueType.DATA).setDescription("Types from a single source files").setDirection(Integer.valueOf(0)).setQualitative(Boolean.valueOf(false)).setDomain("Design").setHidden(true).setDeleteHistoricalData(true).create();
+  public static final Metric MERGED_TYPES = new Metric.Builder("ndeps_merged_types", "Merged Types", Metric.ValueType.DATA)
+      .setDescription("Types from a single source files")
+      .setDirection(0)
+      .setQualitative(false)
+      .setDomain("Design")
+      .setHidden(true)
+      .setDeleteHistoricalData(true)
+      .create();
 
   public static final String IGNORABLE_FIELDS_KEY = "sonar.ndeps.ignorable.fields";
 

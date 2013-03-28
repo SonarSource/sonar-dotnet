@@ -384,7 +384,8 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
 
     // We add all the configured exclusions
     if (coverageExcludes != null) {
-      String exclusion = Joiner.on(';').join(coverageExcludes); // HACK ';' should not be a splitter in CsharpConfiguration
+      // HACK ';' should not be a splitter in CsharpConfiguration
+      String exclusion = Joiner.on(';').join(coverageExcludes);
       LOG.debug("- dotCover exclude   : {}", exclusion);
       filterBuilder.append(exclusion);
     }

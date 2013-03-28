@@ -39,11 +39,11 @@ public class CouplingDecorator extends DecoratorSupport {
     if (shouldDecorateResource(context)) {
       Collection<Dependency> incomingDependencies = context.getIncomingDependencies();
       Collection<Dependency> outgoingDependencies = context.getOutgoingDependencies();
-      if (incomingDependencies!=null) {
-        context.saveMeasure(CoreMetrics.AFFERENT_COUPLINGS, new Integer(incomingDependencies.size()).doubleValue());
+      if (incomingDependencies != null) {
+        context.saveMeasure(CoreMetrics.AFFERENT_COUPLINGS, (double) incomingDependencies.size());
       }
-      if (outgoingDependencies!=null) {
-        context.saveMeasure(CoreMetrics.EFFERENT_COUPLINGS, new Integer(outgoingDependencies.size()).doubleValue());
+      if (outgoingDependencies != null) {
+        context.saveMeasure(CoreMetrics.EFFERENT_COUPLINGS, (double) outgoingDependencies.size());
       }
     }
   }

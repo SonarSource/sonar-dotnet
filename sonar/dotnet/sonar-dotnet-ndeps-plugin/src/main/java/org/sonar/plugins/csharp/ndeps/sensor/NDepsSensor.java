@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp.ndeps.sensor;
 
-import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Collections2;
@@ -36,6 +35,7 @@ import org.sonar.api.utils.SonarException;
 import org.sonar.dotnet.tools.ndeps.NDepsCommandBuilder;
 import org.sonar.dotnet.tools.ndeps.NDepsException;
 import org.sonar.dotnet.tools.ndeps.NDepsRunner;
+import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
@@ -56,7 +56,6 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
   private ProjectFileSystem fileSystem;
   private NDepsResultParser nDepsResultParser;
   private RulesProfile rulesProfile;
-
 
   private boolean testSensor;
 
@@ -99,15 +98,13 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
       return false;
     }
 
-    if (getAssemblyPatterns() != null) {
+    if (getAssemblyPatterns() != null && FileFinder.findFiles(solution, vsProject, getAssemblyPatterns()).size() > 1) {
       // Ndeps can analyse only one assembly
-      if (FileFinder.findFiles(solution, vsProject, getAssemblyPatterns()).size() > 1) {
-        LOG.warn("Skipping NDeps analysis, because multiple assemblies match " + DotNetConstants.ASSEMBLIES_TO_SCAN_KEY);
-        return false;
-      }
+      LOG.warn("Skipping NDeps analysis, because multiple assemblies match " + DotNetConstants.ASSEMBLIES_TO_SCAN_KEY);
+      return false;
     }
 
-    testSensor = vsProject.isTest(); // HACK in order to execute the sensor on all projects
+    testSensor = vsProject.isTest();
     return super.shouldExecuteOnProject(project) && !vsProject.isWebProject();
   }
 
@@ -171,13 +168,13 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     builder.setAssembliesToScan(getAssemblyPatterns());
     builder.setIgnorableFields(configuration.getString(NDepsConstants.IGNORABLE_FIELDS_KEY));
 
-    List<ActiveRule> rules
-      = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
+    List<ActiveRule> rules = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
     if (!rules.isEmpty()) {
       Collection<String> params = Collections2.transform(rules, new Function<ActiveRule, String>() {
         public String apply(ActiveRule rule) {
-          return rule.getParameter("fromClasses")+":"+rule.getParameter("toClasses");
-        }});
+          return rule.getParameter("fromClasses") + ":" + rule.getParameter("toClasses");
+        }
+      });
       builder.setPatterns(Joiner.on(',').join(params));
     }
 

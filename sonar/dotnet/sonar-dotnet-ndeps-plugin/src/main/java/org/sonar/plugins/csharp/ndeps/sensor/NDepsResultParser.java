@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.ndeps.sensor;
 
-import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -47,6 +45,7 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
@@ -65,6 +64,27 @@ import java.util.Set;
 
 public class NDepsResultParser implements BatchExtension {
 
+  private static final String SOURCE = "source";
+  private static final String TYPE_FULL_NAME = "fullName";
+  private static final String MERGED_TYPES = "mergedTypes";
+  private static final String TYPE = "type";
+  private static final String USES = "USES";
+  private static final String VIOLATION = "Violation";
+  private static final String DESIGN = "Design";
+  private static final String TYPE_REFERENCES = "TypeReferences";
+  private static final String REFERENCES = "References";
+  private static final String ASSEMBLY = "Assembly";
+  private static final String FROM = "From";
+  private static final String NAME = "name";
+  private static final String VERSION = "version";
+  private static final String TO_CLASSES = "toClasses";
+  private static final String FROM_CLASSES = "fromClasses";
+  private static final String FROM_PATTERN = "fromPattern";
+  private static final String TO_PATTERN = "toPattern";
+  private static final String DEPENDENCY = "dependency";
+  private static final String PATH = "path";
+  private static final String REFERENCE_FULLNAME = "fullname";
+
   private static final Logger LOG = LoggerFactory.getLogger(NDepsResultParser.class);
 
   private static final Number[] RFC_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 50, 90, 150};
@@ -80,7 +100,8 @@ public class NDepsResultParser implements BatchExtension {
   private final RulesProfile rulesProfile;
   private final boolean keyGenerationSafeMode;
 
-  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context, DotNetConfiguration configuration, ResourceHelper resourceHelper, RulesProfile rulesProfile) {
+  public NDepsResultParser(MicrosoftWindowsEnvironment env, DotNetResourceBridges bridges, Project project, SensorContext context,
+      DotNetConfiguration configuration, ResourceHelper resourceHelper, RulesProfile rulesProfile) {
     this.resourceBridge = bridges.getBridge(project.getLanguageKey());
     this.resourceHelper = resourceHelper;
     this.context = context;
@@ -100,7 +121,7 @@ public class NDepsResultParser implements BatchExtension {
     SMInputFactory inputFactory = new SMInputFactory(XMLInputFactory.newInstance());
     try {
       SMHierarchicCursor cursor = inputFactory.rootElementCursor(file);
-      SMInputCursor assemblyCursor = cursor.advance().descendantElementCursor("Assembly");
+      SMInputCursor assemblyCursor = cursor.advance().descendantElementCursor(ASSEMBLY);
       parseAssemblyBlocs(scope, assemblyCursor);
       cursor.getStreamReader().closeCompletely();
     } catch (XMLStreamException e) {
@@ -113,8 +134,8 @@ public class NDepsResultParser implements BatchExtension {
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
 
-        String assemblyName = cursor.getAttrValue("name");
-        String assemblyVersion = cursor.getAttrValue("version");
+        String assemblyName = cursor.getAttrValue(NAME);
+        String assemblyVersion = cursor.getAttrValue(VERSION);
 
         final Resource<?> from;
         VisualStudioProject vsProjectFromReport = vsSolution.getProject(assemblyName);
@@ -133,15 +154,15 @@ public class NDepsResultParser implements BatchExtension {
         if (from != null) {
           SMInputCursor childCursor = cursor.childElementCursor();
           while (childCursor.getNext() != null) {
-            if ("References".equals(childCursor.getLocalName())) {
+            if (REFERENCES.equals(childCursor.getLocalName())) {
               SMInputCursor referenceCursor = childCursor.childElementCursor();
               parseReferenceBlock(scope, referenceCursor, from);
             }
-            else if ("TypeReferences".equals(childCursor.getLocalName())) {
+            else if (TYPE_REFERENCES.equals(childCursor.getLocalName())) {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
               parseTypeReferenceBlock(typeReferenceCursor);
             }
-            else if ("Design".equals(childCursor.getLocalName())) {
+            else if (DESIGN.equals(childCursor.getLocalName())) {
               SMInputCursor typeReferenceCursor = childCursor.childElementCursor();
               parseDesignBlock(typeReferenceCursor);
             }
@@ -155,8 +176,8 @@ public class NDepsResultParser implements BatchExtension {
     // Cursor is on <Reference>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-        String referenceName = cursor.getAttrValue("name");
-        String referenceVersion = cursor.getAttrValue("version");
+        String referenceName = cursor.getAttrValue(NAME);
+        String referenceVersion = cursor.getAttrValue(VERSION);
 
         Resource<?> to = getResource(referenceName, referenceVersion);
 
@@ -176,56 +197,61 @@ public class NDepsResultParser implements BatchExtension {
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
         String elementName = cursor.getLocalName();
-        if ("From".equals(elementName)) {
-          //String fromType = cursor.getAttrValue("fullname");
-          Resource<?> fromResource = findResource(cursor, "path", "fullname"); //resourceBridge.getFromTypeName(fromType);
+        if (FROM.equals(elementName)) {
+          parseFromBlock(cursor);
+        } else if (VIOLATION.equals(elementName)) {
+          parseViolationBlock(cursor);
+        }
+      }
+    }
+  }
 
-          SMInputCursor toCursor = cursor.childElementCursor();
-          while (toCursor.getNext() != null) {
-            if (toCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-              String toType = toCursor.getAttrValue("fullname");
+  private void parseViolationBlock(SMInputCursor cursor) throws XMLStreamException {
+    String subjectType = cursor.getAttrValue(REFERENCE_FULLNAME);
+    final String fromPattern = cursor.getAttrValue(FROM_PATTERN);
+    final String toPattern = cursor.getAttrValue(TO_PATTERN);
+    String dependency = cursor.getAttrValue(DEPENDENCY);
+    Resource<?> resource = findResource(cursor, PATH, REFERENCE_FULLNAME);
 
-              //Resource<?> fromResource = resourceBridge.getFromTypeName(fromType);
-              Resource<?> toResource = resourceBridge.getFromTypeName(toType);
+    List<ActiveRule> rules = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
+    ActiveRule rule = Iterables.find(rules, new Predicate<ActiveRule>() {
+      public boolean apply(ActiveRule rule) {
+        return StringUtils.equals(fromPattern, rule.getParameter(FROM_CLASSES)) && StringUtils.equals(toPattern, rule.getParameter(TO_CLASSES));
+      }
+    });
 
-              // check if the source is not filtered
-              if (fromResource != null && toResource != null) {
-                // get the parent folder
-                Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
-                Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
+    Violation violation = Violation.create(rule, resource);
+    violation.setMessage("Type " + subjectType + " has a reference to type " + dependency);
+    violation.setSeverity(rule.getSeverity());
+    context.saveViolation(violation);
+  }
 
-                // find the folder to folder dependency
-                Dependency folderDependency = findFolderDependency(fromParentFolderResource, toParentFolderResource);
+  protected void parseFromBlock(SMInputCursor cursor) throws XMLStreamException {
+    Resource<?> fromResource = findResource(cursor, PATH, REFERENCE_FULLNAME);
 
-                // save the file to file dependency
-                Dependency fileDependency = new Dependency(fromResource, toResource);
-                fileDependency.setParent(folderDependency);
-                fileDependency.setUsage("USES");
-                fileDependency.setWeight(1);
-                context.saveDependency(fileDependency);
-                LOG.debug("Saving dependency from {} to {}", fromResource.getName(), toResource.getName());
-              }
-            }
-          }
-        } else if ("Violation".equals(elementName)) {
-          String subjectType = cursor.getAttrValue("fullname");
-          final String fromPattern = cursor.getAttrValue("fromPattern");
-          final String toPattern = cursor.getAttrValue("toPattern");
-          String dependency = cursor.getAttrValue("dependency");
-          Resource<?> resource = findResource(cursor, "path", "fullname");
+    SMInputCursor toCursor = cursor.childElementCursor();
+    while (toCursor.getNext() != null) {
+      if (toCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
+        String toType = toCursor.getAttrValue(REFERENCE_FULLNAME);
 
-          List<ActiveRule> rules
-            = rulesProfile.getActiveRulesByRepository(NDepsConstants.REPOSITORY_KEY + "-" + project.getLanguageKey());
-          ActiveRule rule = Iterables.find(rules, new Predicate<ActiveRule>() {
-            public boolean apply(ActiveRule rule) {
-              return StringUtils.equals(fromPattern, rule.getParameter("fromClasses")) && StringUtils.equals(toPattern, rule.getParameter("toClasses"));
-            }});
+        Resource<?> toResource = resourceBridge.getFromTypeName(toType);
 
-          Violation violation
-            = Violation.create(rule, resource);
-          violation.setMessage("Type " + subjectType + " has a reference to type " + dependency);
-          violation.setSeverity(rule.getSeverity());
-          context.saveViolation(violation);
+        // check if the source is not filtered
+        if (fromResource != null && toResource != null) {
+          // get the parent folder
+          Resource<?> fromParentFolderResource = (Resource<?>) fromResource.getParent();
+          Resource<?> toParentFolderResource = (Resource<?>) toResource.getParent();
+
+          // find the folder to folder dependency
+          Dependency folderDependency = findFolderDependency(fromParentFolderResource, toParentFolderResource);
+
+          // save the file to file dependency
+          Dependency fileDependency = new Dependency(fromResource, toResource);
+          fileDependency.setParent(folderDependency);
+          fileDependency.setUsage(USES);
+          fileDependency.setWeight(1);
+          context.saveDependency(fileDependency);
+          LOG.debug("Saving dependency from {} to {}", fromResource.getName(), toResource.getName());
         }
       }
     }
@@ -238,7 +264,7 @@ public class NDepsResultParser implements BatchExtension {
       String type = cursor.getAttrValue(typeAttr);
       Resource<?> resourceFromType = resourceBridge.getFromTypeName(type);
       if (resourceFromType != null && resourceHelper.isResourceInProject(resourceFromType, project)) {
-          resource = resourceFromType;
+        resource = resourceFromType;
       } else {
         resource = null;
       }
@@ -269,40 +295,26 @@ public class NDepsResultParser implements BatchExtension {
     // Cursor is on <type>
     while (cursor.getNext() != null) {
       if (cursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-        String type = cursor.getAttrValue("fullName");
+        String type = cursor.getAttrValue(TYPE_FULL_NAME);
         LOG.debug("Parsing design data for type {}", type);
 
-        Resource<?> resource = findResource(cursor, "source", "fullName");
+        Resource<?> resource = findResource(cursor, SOURCE, TYPE_FULL_NAME);
         if (resource == null || savedResourceIds.contains(resource.getKey())) {
           continue;
         }
         savedResourceIds.add(resource.getKey());
 
-        double rfc = new Integer(cursor.getAttrValue("rfc")).doubleValue();
-        double dit = new Integer(cursor.getAttrValue("dit")).doubleValue();
+        double rfc = Double.valueOf(cursor.getAttrValue("rfc"));
+        double dit = Double.valueOf(cursor.getAttrValue("dit"));
 
-        String mergedTypes = cursor.getAttrValue("mergedTypes");
+        String mergedTypes = cursor.getAttrValue(MERGED_TYPES);
         if (StringUtils.isNotEmpty(mergedTypes)) {
           Measure measure = new Measure(NDepsConstants.MERGED_TYPES, mergedTypes);
           context.saveMeasure(resource, measure);
         }
 
         Joiner joiner = Joiner.on(",");
-        List<String> blockList = Lists.newArrayList();
-        SMInputCursor blockCursor = cursor.childElementCursor();
-        while (blockCursor.getNext() != null) {
-          if (blockCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
-            SMInputCursor eltCursor = blockCursor.childElementCursor();
-            List<String> eltList = Lists.newArrayList();
-            while (eltCursor.getNext() != null) {
-              String eltType = "Field".equals(eltCursor.getAttrValue("type")) ? "FLD" : "MET";
-              String eltName = eltCursor.getAttrValue("name");
-              eltList.add("{\"q\":\""+ eltType +"\",\"n\":\""+ eltName +"\"}");
-            }
-            String block = "[" + joiner.join(eltList) + "]";
-            blockList.add(block);
-          }
-        }
+        List<String> blockList = extractBlockList(joiner, cursor.childElementCursor());
 
         context.saveMeasure(resource, CoreMetrics.RFC, rfc);
         RangeDistributionBuilder rfcDistribution = new RangeDistributionBuilder(CoreMetrics.RFC_DISTRIBUTION, RFC_DISTRIB_BOTTOM_LIMITS);
@@ -313,7 +325,7 @@ public class NDepsResultParser implements BatchExtension {
 
         final int lcom4;
         final String lcom4Json;
-        if (blockList.size() == 0) {
+        if (blockList.isEmpty()) {
           lcom4 = 1;
           lcom4Json = "[]";
         } else {
@@ -321,10 +333,9 @@ public class NDepsResultParser implements BatchExtension {
           lcom4Json = "[" + joiner.join(blockList) + "]";
         }
 
-        double lcom4Value = new Integer(lcom4).doubleValue();
-        context.saveMeasure(resource, CoreMetrics.LCOM4, lcom4Value);
+        context.saveMeasure(resource, CoreMetrics.LCOM4, (double) lcom4);
         RangeDistributionBuilder lcom4Distribution = new RangeDistributionBuilder(CoreMetrics.LCOM4_DISTRIBUTION, LCOM4_DISTRIB_BOTTOM_LIMITS);
-        lcom4Distribution.add(lcom4Value);
+        lcom4Distribution.add((double) lcom4);
         context.saveMeasure(resource, lcom4Distribution.build().setPersistenceMode(PersistenceMode.MEMORY));
 
         Measure measure = new Measure(CoreMetrics.LCOM4_BLOCKS, lcom4Json);
@@ -334,11 +345,29 @@ public class NDepsResultParser implements BatchExtension {
     }
   }
 
+  protected List<String> extractBlockList(Joiner joiner, SMInputCursor blockCursor) throws XMLStreamException {
+    List<String> blockList = Lists.newArrayList();
+    while (blockCursor.getNext() != null) {
+      if (blockCursor.getCurrEvent().equals(SMEvent.START_ELEMENT)) {
+        SMInputCursor eltCursor = blockCursor.childElementCursor();
+        List<String> eltList = Lists.newArrayList();
+        while (eltCursor.getNext() != null) {
+          String eltType = "Field".equals(eltCursor.getAttrValue(TYPE)) ? "FLD" : "MET";
+          String eltName = eltCursor.getAttrValue(NAME);
+          eltList.add("{\"q\":\"" + eltType + "\",\"n\":\"" + eltName + "\"}");
+        }
+        String block = "[" + joiner.join(eltList) + "]";
+        blockList.add(block);
+      }
+    }
+    return blockList;
+  }
+
   private Dependency findFolderDependency(Resource<?> fromParentFolderResource, Resource<?> toParentFolderResource) {
     Dependency folderDependency = findDependency(fromParentFolderResource, toParentFolderResource);
     if (folderDependency == null) {
       folderDependency = new Dependency(fromParentFolderResource, toParentFolderResource);
-      folderDependency.setUsage("USES");
+      folderDependency.setUsage(USES);
     }
 
     // save it
@@ -377,7 +406,8 @@ public class NDepsResultParser implements BatchExtension {
     // if not found in the solution, get the binary
     if (linkedProject == null) {
 
-      Library library = new Library(name, version); // key, version
+      // Library created from key (name) & version
+      Library library = new Library(name, version);
       library.setName(name);
       result = context.getResource(library);
 
@@ -392,7 +422,7 @@ public class NDepsResultParser implements BatchExtension {
       if (keyGenerationSafeMode) {
         projectKey = project.getParent().getKey() + ":" + StringUtils.deleteWhitespace(linkedProject.getName());
       } else {
-        projectKey =  StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(linkedProject.getName());
+        projectKey = StringUtils.substringBefore(project.getParent().getKey(), ":") + ":" + StringUtils.deleteWhitespace(linkedProject.getName());
       }
       if (StringUtils.isNotEmpty(project.getBranch())) {
         projectKey += ":" + project.getBranch();

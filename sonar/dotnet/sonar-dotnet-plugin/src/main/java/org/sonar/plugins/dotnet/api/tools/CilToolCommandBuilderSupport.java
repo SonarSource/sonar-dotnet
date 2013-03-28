@@ -112,7 +112,8 @@ public abstract class CilToolCommandBuilderSupport {
       LOG.debug("No assembly specified: will look into 'csproj' files to find which should be analyzed.");
       assemblyFiles = vsProject.getGeneratedAssemblies(buildConfiguration, buildPlatform);
       if (assemblyFiles == null || assemblyFiles.isEmpty()) {
-        LOG.warn("No assembly found using csproj file {} with build configuration {} and platform {}", new Object[] {vsProject.getProjectFile(), buildConfiguration, buildPlatform});
+        LOG.warn("No assembly found using csproj file {} with build configuration {} and platform {}",
+            new Object[] {vsProject.getProjectFile(), buildConfiguration, buildPlatform});
       }
     } else {
       // Some assemblies have been specified: let's analyze them

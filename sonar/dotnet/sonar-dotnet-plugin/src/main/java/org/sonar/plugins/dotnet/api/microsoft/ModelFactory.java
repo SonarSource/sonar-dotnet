@@ -567,7 +567,7 @@ public final class ModelFactory {
       } else if ("xml".equals(prefix)) {
         result = XMLConstants.XML_NS_URI;
       } else {
-        result = ""; // XMLConstants.NULL_NS_URI;
+        result = "";
       }
       return result;
     }
