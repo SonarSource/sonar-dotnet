@@ -102,7 +102,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
   }
 
   public void analyseUnitCoverage(Project project, SensorContext context) {
-    Collection<File> coverageReportFiles = findReportsToAnalyse(executionMode, GallioConstants.GALLIO_COVERAGE_REPORT_XML, GallioConstants.REPORTS_COVERAGE_PATH_KEY);
+    Collection<File> coverageReportFiles = findReportsToAnalyse(getExecutionMode(), GallioConstants.GALLIO_COVERAGE_REPORT_XML, GallioConstants.REPORTS_COVERAGE_PATH_KEY);
     if (coverageReportFiles.isEmpty()) {
       return;
     }

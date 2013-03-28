@@ -43,8 +43,8 @@ public abstract class AbstractDotNetSensor implements Sensor {
   public static final String MODE_REUSE_REPORT = "reuseReport";
 
   private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
-  protected final String toolName;
-  protected final String executionMode;
+  private final String toolName;
+  private final String executionMode;
 
   /**
    * Creates an {@link AbstractDotNetSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
@@ -65,9 +65,9 @@ public abstract class AbstractDotNetSensor implements Sensor {
     if (project.isRoot() || !isLanguageSupported(project.getLanguageKey())) {
       return false;
     }
-    boolean skipMode = MODE_SKIP.equalsIgnoreCase(executionMode);
+    boolean skipMode = MODE_SKIP.equalsIgnoreCase(getExecutionMode());
     if (skipMode) {
-      LOG.info("{} plugin won't execute as it is set to 'skip' mode.", toolName);
+      LOG.info("{} plugin won't execute as it is set to 'skip' mode.", getToolName());
       return false;
     }
 
@@ -153,6 +153,20 @@ public abstract class AbstractDotNetSensor implements Sensor {
     VisualStudioSolution vsSolution = microsoftWindowsEnvironment.getCurrentSolution();
     VisualStudioProject vsProject = getVSProject(project);
     return FileFinder.findFiles(vsSolution, vsProject, queries);
+  }
+
+  /**
+   * @return the toolName
+   */
+  protected String getToolName() {
+    return toolName;
+  }
+
+  /**
+   * @return the executionMode
+   */
+  protected String getExecutionMode() {
+    return executionMode;
   }
 
 }

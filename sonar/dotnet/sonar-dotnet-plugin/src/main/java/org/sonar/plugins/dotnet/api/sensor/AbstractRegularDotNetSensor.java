@@ -75,7 +75,7 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
   private boolean assembliesFound(Project project) {
     final boolean result;
 
-    boolean reuseMode = MODE_REUSE_REPORT.equalsIgnoreCase(executionMode);
+    boolean reuseMode = MODE_REUSE_REPORT.equalsIgnoreCase(getExecutionMode());
     if (reuseMode) {
       result = true;
     } else {
@@ -97,7 +97,7 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
       }
 
       if (assemblies.isEmpty()) {
-        LOG.warn("No assembly to check with " + toolName);
+        LOG.warn("No assembly to check with " + getToolName());
         result = false;
       } else {
         result = true;

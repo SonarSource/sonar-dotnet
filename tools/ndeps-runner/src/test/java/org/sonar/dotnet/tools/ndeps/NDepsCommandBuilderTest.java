@@ -74,6 +74,21 @@ public class NDepsCommandBuilderTest {
     assertThat(commands[1], endsWith("Fake1.assembly"));
     assertThat(commands[2], is("-o"));
     assertThat(commands[3], endsWith("deps-report.xml"));
+    assertThat(commands[4], is("-d"));
+    assertThat(commands[5], endsWith("yes"));
+  }
+
+  @Test
+  public void testOptionalParams() throws Exception {
+    nDepsCommandBuilder.setPatterns("foo");
+    nDepsCommandBuilder.setIgnorableFields("bar");
+
+    Command command = nDepsCommandBuilder.toCommand();
+    String[] commands = command.getArguments().toArray(new String[] {});
+    assertThat(commands[6], is("-r"));
+    assertThat(commands[7], is("foo"));
+    assertThat(commands[8], is("-i"));
+    assertThat(commands[9], is("bar"));
   }
 
   @Test

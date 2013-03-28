@@ -54,7 +54,7 @@ public abstract class AbstractRuleBasedDotNetSensor extends AbstractRegularDotNe
   private boolean isToolEnableInProfile() {
     boolean result = !rulesProfile.getActiveRulesByRepository(profileExporter.getKey()).isEmpty();
     if (!result) {
-      LOG.warn("/!\\ SKIP " + toolName + " analysis: no rule defined for " + toolName + " in the \"{}\" profile.", rulesProfile.getName());
+      LOG.warn("/!\\ SKIP " + getToolName() + " analysis: no rule defined for " + getToolName() + " in the \"{}\" profile.", rulesProfile.getName());
     }
     return result;
   }

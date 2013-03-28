@@ -96,6 +96,10 @@ public class ModelFactoryTest {
     VisualStudioSolution solution = ModelFactory.getSolution(file);
     VisualStudioProject project = solution.getProject("Example.Core");
     Collection<SourceFile> files = project.getSourceFiles();
+    for (SourceFile sourceFile : files) {
+      assertThat(sourceFile.toString()).startsWith("Source(");
+      assertThat(sourceFile.toString()).endsWith(".cs)");
+    }
     assertEquals("Bad number of files extracted", 6, files.size());
   }
 

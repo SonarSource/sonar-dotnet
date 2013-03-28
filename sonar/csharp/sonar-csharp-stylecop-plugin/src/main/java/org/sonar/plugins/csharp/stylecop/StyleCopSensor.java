@@ -114,7 +114,7 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
     final Collection<File> reportFiles;
     File projectDir = project.getFileSystem().getBasedir();
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + StyleCopConstants.STYLECOP_REPORT_XML;
-    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(getExecutionMode())) {
       String reportPath = configuration.getString(StyleCopConstants.REPORTS_PATH_KEY);
       if (StringUtils.isBlank(reportPath)) {
         reportPath = reportDefaultPath;

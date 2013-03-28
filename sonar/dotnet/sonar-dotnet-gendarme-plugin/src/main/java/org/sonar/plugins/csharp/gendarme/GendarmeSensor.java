@@ -151,7 +151,7 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
 
     final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + GendarmeConstants.GENDARME_REPORT_XML;
-    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(getExecutionMode())) {
       String reportPath = configuration.getString(GendarmeConstants.REPORTS_PATH_KEY);
       if (StringUtils.isEmpty(reportPath)) {
         reportPath = reportDefaultPath;

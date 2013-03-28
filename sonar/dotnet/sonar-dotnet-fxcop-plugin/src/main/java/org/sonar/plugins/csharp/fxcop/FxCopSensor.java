@@ -151,7 +151,7 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
 
     final Collection<File> reportFiles;
     String reportDefaultPath = getMicrosoftWindowsEnvironment().getWorkingDirectory() + "/" + FxCopConstants.FXCOP_REPORT_XML;
-    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(getExecutionMode())) {
       String reportPath = configuration.getString(FxCopConstants.REPORTS_PATH_KEY);
       if (StringUtils.isEmpty(reportPath)) {
         reportPath = reportDefaultPath;

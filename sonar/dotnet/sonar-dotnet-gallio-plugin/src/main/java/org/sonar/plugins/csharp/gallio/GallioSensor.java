@@ -80,7 +80,7 @@ public class GallioSensor extends AbstractDotNetSensor {
    * {@inheritDoc}
    */
   public boolean shouldExecuteOnProject(Project project) {
-    if (MODE_REUSE_REPORT.equals(executionMode)) {
+    if (MODE_REUSE_REPORT.equals(getExecutionMode())) {
       LOG.info("Gallio won't execute as it is set to 'reuseReport' mode.");
       return false;
     }

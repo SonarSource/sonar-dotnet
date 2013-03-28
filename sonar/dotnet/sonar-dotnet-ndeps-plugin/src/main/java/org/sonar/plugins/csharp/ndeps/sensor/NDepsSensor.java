@@ -126,7 +126,7 @@ public class NDepsSensor extends AbstractRegularDotNetSensor {
     String workingDirectory = getMicrosoftWindowsEnvironment().getWorkingDirectory();
     String reportDefaultPath = workingDirectory + "/" + NDepsConstants.DEPENDENCYPARSER_REPORT_XML;
 
-    if (MODE_REUSE_REPORT.equalsIgnoreCase(executionMode)) {
+    if (MODE_REUSE_REPORT.equalsIgnoreCase(getExecutionMode())) {
       String reportPath = configuration.getString(NDepsConstants.REPORTS_PATH_KEY);
       if (StringUtils.isEmpty(reportPath)) {
         reportPath = reportDefaultPath;

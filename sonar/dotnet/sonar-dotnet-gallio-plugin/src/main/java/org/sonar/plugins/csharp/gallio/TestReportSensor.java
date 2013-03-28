@@ -102,7 +102,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
 
   protected Collection<File> findTestReportsToAnalyse() {
     Collection<File> reports = Lists.newArrayList();
-    reports.addAll(findReportsToAnalyse(executionMode, GallioConstants.GALLIO_REPORT_XML, GallioConstants.REPORTS_PATH_KEY));
+    reports.addAll(findReportsToAnalyse(getExecutionMode(), GallioConstants.GALLIO_REPORT_XML, GallioConstants.REPORTS_PATH_KEY));
     String itExecutionMode = configuration.getString(GallioConstants.IT_MODE_KEY);
     if (!AbstractDotNetSensor.MODE_SKIP.equals(itExecutionMode)) {
       reports.addAll(findReportsToAnalyse(itExecutionMode, GallioConstants.IT_GALLIO_REPORT_XML, GallioConstants.IT_REPORTS_PATH_KEY));
