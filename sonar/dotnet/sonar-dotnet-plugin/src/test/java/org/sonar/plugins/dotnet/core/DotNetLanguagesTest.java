@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import org.sonar.plugins.dotnet.core.DotNetLanguages;
-
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;

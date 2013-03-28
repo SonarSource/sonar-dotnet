@@ -20,10 +20,8 @@
 package org.sonar.plugins.csharp.ndeps;
 
 import org.sonar.api.batch.Decorator;
-
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-
 import org.sonar.api.resources.Project;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 public abstract class DecoratorSupport implements Decorator {
 

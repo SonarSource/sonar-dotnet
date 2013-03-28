@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.dotnet.api.microsoft;
 
-import org.sonar.plugins.dotnet.api.microsoft.ModelFactory;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
 import org.junit.Test;
 import org.sonar.api.resources.Project;
 import org.sonar.test.TestUtils;

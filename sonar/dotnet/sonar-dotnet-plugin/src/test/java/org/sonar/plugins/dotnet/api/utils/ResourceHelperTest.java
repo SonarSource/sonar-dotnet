@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.dotnet.api.utils;
 
-import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
-
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.File;

@@ -20,13 +20,6 @@
 
 package org.sonar.plugins.csharp.core;
 
-import org.sonar.plugins.csharp.squid.CSharpResourcesBridge;
-import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
-import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
-import org.sonar.plugins.csharp.squid.CSharpSquidSensor;
-import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
-import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
-
 import org.sonar.api.CoreProperties;
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
@@ -34,7 +27,13 @@ import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.api.CSharp;
+import org.sonar.plugins.csharp.squid.CSharpResourcesBridge;
+import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
+import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
 import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
+import org.sonar.plugins.csharp.squid.CSharpSquidSensor;
+import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
+import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
 import java.util.ArrayList;
 import java.util.List;

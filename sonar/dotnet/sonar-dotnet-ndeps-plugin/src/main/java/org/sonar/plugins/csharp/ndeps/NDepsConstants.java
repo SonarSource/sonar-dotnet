@@ -20,12 +20,10 @@
 package org.sonar.plugins.csharp.ndeps;
 
 import com.google.common.collect.Lists;
-
-import java.util.List;
-
+import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.Metrics;
 
-import org.sonar.api.measures.Metric;
+import java.util.List;
 
 public final class NDepsConstants implements Metrics {
 

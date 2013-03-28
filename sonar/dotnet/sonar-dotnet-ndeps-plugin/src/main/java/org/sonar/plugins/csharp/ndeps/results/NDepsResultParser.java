@@ -19,50 +19,11 @@
  */
 package org.sonar.plugins.csharp.ndeps.results;
 
-import com.google.common.base.Predicate;
-
-import com.google.common.base.Predicate;
-
-import com.google.common.collect.Iterables;
-
-import com.google.common.collect.Collections2;
-
-import org.sonar.api.rules.ActiveRule;
-
-import org.sonar.api.profiles.RulesProfile;
-
-import org.sonar.api.rules.Violation;
-
-import org.sonar.api.rules.Rule;
-
-import org.sonar.api.rules.RuleFinder;
-
-import org.sonar.plugins.csharp.ndeps.NDepsConstants;
-
-import org.sonar.api.rules.RuleQuery;
-
-import org.sonar.api.measures.PersistenceMode;
-import org.sonar.api.measures.RangeDistributionBuilder;
-
-import com.google.common.collect.Sets;
-
-import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
-
-import com.google.common.collect.Lists;
-
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Measure;
-
 import com.google.common.base.Joiner;
-
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-
-import org.sonar.plugins.dotnet.api.DotNetConstants;
-
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.staxmate.SMInputFactory;
 import org.codehaus.staxmate.in.SMEvent;
@@ -73,18 +34,31 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.design.Dependency;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.measures.PersistenceMode;
+import org.sonar.api.measures.RangeDistributionBuilder;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Library;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
+import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
+import org.sonar.plugins.csharp.ndeps.NDepsConstants;
+import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridges;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
+import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
+import org.sonar.plugins.dotnet.api.utils.ResourceHelper;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 
 import java.io.File;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 

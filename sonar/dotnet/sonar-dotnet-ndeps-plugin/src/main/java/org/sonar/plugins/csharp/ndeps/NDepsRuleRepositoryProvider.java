@@ -19,12 +19,11 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
-import org.sonar.api.rules.RuleRepository;
-
 import com.google.common.collect.Lists;
-
 import org.sonar.api.ExtensionProvider;
 import org.sonar.api.ServerExtension;
+import org.sonar.api.rules.RuleRepository;
+
 import java.util.List;
 
 public class NDepsRuleRepositoryProvider  extends ExtensionProvider implements ServerExtension {

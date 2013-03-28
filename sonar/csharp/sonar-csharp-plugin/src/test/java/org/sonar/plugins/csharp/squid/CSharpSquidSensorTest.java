@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.squid;
 
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-
 import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +42,7 @@ import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.core.CSharpCorePlugin;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 import java.io.File;
 import java.nio.charset.Charset;

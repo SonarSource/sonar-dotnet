@@ -19,18 +19,14 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.design.Dependency;
-
-import java.util.Collection;
-
 import org.sonar.api.measures.CoreMetrics;
-
+import org.sonar.api.resources.Resource;
 import org.sonar.api.resources.ResourceUtils;
-
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
-import org.sonar.api.batch.DecoratorContext;
-import org.sonar.api.resources.Resource;
+import java.util.Collection;
 
 public class CouplingDecorator extends DecoratorSupport {
 
