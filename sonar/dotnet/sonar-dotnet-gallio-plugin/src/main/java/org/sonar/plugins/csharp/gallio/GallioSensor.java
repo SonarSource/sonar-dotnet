@@ -106,8 +106,7 @@ public class GallioSensor extends AbstractDotNetSensor {
     } else {
       LOG.warn("Test assembly not found at the following location: {}"
         + "\n, using the following configuration:\n  - csproj file: {}\n  - build configuration: {}\n  - platform: {}",
-          new Object[] {assembly, visualStudioProject.getProjectFile(), buildConfiguration, buildPlatform}
-          );
+          new Object[] {assembly, visualStudioProject.getProjectFile(), buildConfiguration, buildPlatform});
     }
   }
 
