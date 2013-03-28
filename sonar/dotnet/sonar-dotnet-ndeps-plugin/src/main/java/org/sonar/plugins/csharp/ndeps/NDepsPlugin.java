@@ -19,12 +19,18 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.plugins.csharp.ndeps.web.Lcom4Viewer;
+
+import org.sonar.plugins.csharp.ndeps.sensor.NDepsResultParser;
+import org.sonar.plugins.csharp.ndeps.sensor.NDepsSensor;
+import org.sonar.plugins.csharp.ndeps.decorators.CSharpDsmDecorator;
+import org.sonar.plugins.csharp.ndeps.decorators.CouplingDecorator;
+import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
 import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
-import org.sonar.plugins.csharp.ndeps.results.NDepsResultParser;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
 import java.util.ArrayList;

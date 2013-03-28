@@ -17,7 +17,9 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.ndeps.results;
+package org.sonar.plugins.csharp.ndeps.sensor;
+
+import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
@@ -45,7 +47,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.utils.SonarException;
-import org.sonar.plugins.csharp.ndeps.NDepsConstants;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.DotNetResourceBridge;

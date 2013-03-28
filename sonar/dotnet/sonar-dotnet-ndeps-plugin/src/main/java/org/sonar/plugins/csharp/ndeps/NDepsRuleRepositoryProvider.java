@@ -19,6 +19,8 @@
  */
 package org.sonar.plugins.csharp.ndeps;
 
+import org.sonar.plugins.csharp.ndeps.common.NDepsConstants;
+
 import com.google.common.collect.Lists;
 import org.sonar.api.ExtensionProvider;
 import org.sonar.api.ServerExtension;

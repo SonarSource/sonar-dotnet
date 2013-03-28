@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.ndeps;
+package org.sonar.plugins.csharp.ndeps.decorators;
 
 import org.sonar.api.batch.DecoratorContext;
 import org.sonar.api.design.Dependency;

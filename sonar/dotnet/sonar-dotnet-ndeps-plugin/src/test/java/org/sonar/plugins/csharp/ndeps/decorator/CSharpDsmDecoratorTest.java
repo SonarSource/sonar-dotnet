@@ -17,7 +17,9 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.ndeps;
+package org.sonar.plugins.csharp.ndeps.decorator;
+
+import org.sonar.plugins.csharp.ndeps.decorators.CSharpDsmDecorator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +30,6 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
-
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
