@@ -128,7 +128,8 @@ public abstract class AbstractDotNetSensor implements Sensor {
     VisualStudioProject vsProject = getVSProject(project);
     final boolean result;
     if (vsProject == null) {
-      result = false; // probably the root project, solution level
+      // probably the root project, solution level
+      result = false;
     } else {
       result = vsProject.isTest();
     }

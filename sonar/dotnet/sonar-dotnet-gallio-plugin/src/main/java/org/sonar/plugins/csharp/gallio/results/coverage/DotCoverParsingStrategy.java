@@ -124,7 +124,8 @@ public class DotCoverParsingStrategy implements CoverageResultParsingStrategy {
       int endLine = Integer.valueOf(statementCursor.getAttrValue("EndLine"));
       final int visits;
       if ("True".equals(statementCursor.getAttrValue("Covered"))) {
-        visits = 1; // we cannot know the exact number of visit with dotcover
+        // we cannot know the exact number of visit with dotcover
+        visits = 1;
       } else {
         visits = 0;
       }
