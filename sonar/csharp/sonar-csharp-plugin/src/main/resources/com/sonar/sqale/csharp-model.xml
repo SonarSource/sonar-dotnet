@@ -261,188 +261,6 @@
 		</chc>
 	</chc>
 	<chc>
-		<key>CHANGEABILITY</key>
-		<name>Changeability</name>
-		<chc>
-			<key>ARCHITECTURE_CHANGEABILITY</key>
-			<name>Architecture related changeability</name>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>DoNotDeclareProtectedMembersInSealedTypeRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>DoNotDeclareVirtualMethodsInSealedTypeRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>fxcop</rule-repo>
-				<rule-key>DoNotDeclareVisibleInstanceFields</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>fxcop</rule-repo>
-				<rule-key>MembersShouldNotExposeCertainConcreteTypes</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.03</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>AvoidSpeculativeGeneralityRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.375</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>TypesShouldBeInsideNamespacesRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.03</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>ConsiderAddingInterfaceRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.03</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>PreferGenericsOverRefObjectRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-		</chc>
-		<chc>
-			<key>DATA_CHANGEABILITY</key>
-			<name>Data related changeability</name>
-			<chc>
-				<rule-repo>fxcop</rule-repo>
-				<rule-key>AvoidEmptyInterfaces</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>AvoidEmptyInterfaceRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>AvoidVisibleConstantFieldRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.03</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>AvoidMessageChainsRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-					<txt>d</txt>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-		</chc>
-		<chc>
-			<key>LOGIC_CHANGEABILITY</key>
-			<name>Logic related changeability</name>
-			<chc>
-				<rule-repo>gendarme</rule-repo>
-				<rule-key>AvoidLackOfCohesionOfMethodsRule</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.375</val>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
-		</chc>
-	</chc>
-	<chc>
 		<key>MAINTAINABILITY</key>
 		<name>Maintainability</name>
 		<chc>
@@ -1264,7 +1082,7 @@
 			</chc>
 			<chc>
 				<rule-repo>stylecop</rule-repo>
-				<rule-key>DereferenceAndAccessOfSymbolsMustBeSpacedCorrectly</rule-key>
+				<rule-key>DereferenceAndAccessOfMustBeSpacedCorrectly</rule-key>
 				<prop>
 					<key>remediationFactor</key>
 					<val>0.01</val>
@@ -1663,6 +1481,97 @@
 				<prop>
 					<key>remediationFunction</key>
 					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>AsyncAwaitIdentifier</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>20.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>AssignmentInsideSubExpression</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>20.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>ClassName</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>20.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>LineLength</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>constant_resource</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>10.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>MagicNumber</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>10.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>MethodName</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>10.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>TabCharacter</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>constant_resource</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>5.0</val>
+					<txt>mn</txt>
 				</prop>
 			</chc>
 		</chc>
@@ -3667,6 +3576,58 @@
 					<txt>linear</txt>
 				</prop>
 			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>BreakOutsideSwitch</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>40.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>CommentedCode</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>30.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>FileLoc</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>constant_resource</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>3.0</val>
+					<txt>h</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>ParameterAssignedTo</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>30.0</val>
+					<txt>mn</txt>
+				</prop>
+			</chc>
 		</chc>
 	</chc>
 	<chc>
@@ -4121,18 +4082,6 @@
 		<chc>
 			<key>ERRORS</key>
 			<name>Errors</name>
-			<chc>
-				<rule-repo>pmd</rule-repo>
-				<rule-key>PreserveStackTrace</rule-key>
-				<prop>
-					<key>remediationFactor</key>
-					<val>0.125</val>
-				</prop>
-				<prop>
-					<key>remediationFunction</key>
-					<txt>linear</txt>
-				</prop>
-			</chc>
 			<chc>
 				<rule-repo>fxcop</rule-repo>
 				<rule-key>CustomErrorPageShouldBeSpecified</rule-key>
@@ -5541,6 +5490,201 @@
 					<key>remediationFactor</key>
 					<val>0.125</val>
 					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+		</chc>
+	</chc>
+	<chc>
+		<key>CHANGEABILITY</key>
+		<name>Changeability</name>
+		<chc>
+			<key>ARCHITECTURE_CHANGEABILITY</key>
+			<name>Architecture related changeability</name>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>DoNotDeclareProtectedMembersInSealedTypeRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>DoNotDeclareVirtualMethodsInSealedTypeRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>fxcop</rule-repo>
+				<rule-key>DoNotDeclareVisibleInstanceFields</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>fxcop</rule-repo>
+				<rule-key>MembersShouldNotExposeCertainConcreteTypes</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.03</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>AvoidSpeculativeGeneralityRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.375</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>TypesShouldBeInsideNamespacesRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.03</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>ConsiderAddingInterfaceRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.03</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>PreferGenericsOverRefObjectRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>ClassCoupling</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>3.0</val>
+					<txt>h</txt>
+				</prop>
+			</chc>
+		</chc>
+		<chc>
+			<key>DATA_CHANGEABILITY</key>
+			<name>Data related changeability</name>
+			<chc>
+				<rule-repo>fxcop</rule-repo>
+				<rule-key>AvoidEmptyInterfaces</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>AvoidEmptyInterfaceRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>AvoidVisibleConstantFieldRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.03</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>AvoidMessageChainsRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.125</val>
+					<txt>d</txt>
+				</prop>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+			</chc>
+		</chc>
+		<chc>
+			<key>LOGIC_CHANGEABILITY</key>
+			<name>Logic related changeability</name>
+			<chc>
+				<rule-repo>gendarme</rule-repo>
+				<rule-key>AvoidLackOfCohesionOfMethodsRule</rule-key>
+				<prop>
+					<key>remediationFactor</key>
+					<val>0.375</val>
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
@@ -7632,6 +7776,19 @@
 					<txt>linear</txt>
 				</prop>
 			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>SwitchWithoutDefault</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>1.0</val>
+					<txt>h</txt>
+				</prop>
+			</chc>
 		</chc>
 		<chc>
 			<key>SYNCHRONIZATION_RELIABILITY</key>
@@ -7763,6 +7920,10 @@
 				</prop>
 			</chc>
 		</chc>
+		<chc>
+			<key>UNIT_TESTS</key>
+			<name>Unit tests</name>
+		</chc>
 	</chc>
 	<chc>
 		<key>TESTABILITY</key>
@@ -7885,6 +8046,31 @@
 					<txt>linear</txt>
 				</prop>
 			</chc>
+			<chc>
+				<rule-repo>csharpsquid</rule-repo>
+				<rule-key>FunctionComplexity</rule-key>
+				<prop>
+					<key>remediationFunction</key>
+					<txt>linear</txt>
+				</prop>
+				<prop>
+					<key>remediationFactor</key>
+					<val>1.0</val>
+					<txt>h</txt>
+				</prop>
+			</chc>
+		</chc>
+	</chc>
+	<chc>
+		<key>REUSABILITY</key>
+		<name>Reusability</name>
+		<chc>
+			<key>MODULARITY</key>
+			<name>Modularity</name>
+		</chc>
+		<chc>
+			<key>TRANSPORTABILITY</key>
+			<name>Transportability</name>
 		</chc>
 	</chc>
 </sqale>
