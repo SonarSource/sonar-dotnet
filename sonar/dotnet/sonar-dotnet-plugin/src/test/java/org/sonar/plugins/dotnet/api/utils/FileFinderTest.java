@@ -20,7 +20,6 @@
 package org.sonar.plugins.dotnet.api.utils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
@@ -95,13 +94,6 @@ public class FileFinderTest {
       assertTrue(file.exists());
       assertTrue(file.isDirectory());
     }
-  }
-
-  @Test
-  @Ignore("Impossible to automate this test on non win boxes")
-  public void testFindFilesOnOtherDrives() {
-    Collection<File> result = FileFinder.findFiles(solution, project, "F:\\**\\*.dll");
-    assertFalse(result.isEmpty());
   }
 
   @Test
@@ -202,7 +194,7 @@ public class FileFinderTest {
   public void shouldNotThrowAnExceptionBecauseOfABadPattern() {
     solution = mock(VisualStudioSolution.class);
     project = mock(VisualStudioProject.class);
-    File solutionDir = new File("/"); //root folder
+    File solutionDir = new File("/"); // root folder
     File projectDir = new File("/");
     when(solution.getSolutionDir()).thenReturn(solutionDir);
     when(project.getDirectory()).thenReturn(projectDir);
