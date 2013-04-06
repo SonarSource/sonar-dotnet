@@ -69,6 +69,7 @@ public class NDepsResultParserTest {
   private NDepsResultParser parser;
   private DotNetResourceBridge resourcesBridge;
   private SensorContext context;
+  private Project rootProject;
   private Project project;
   private Project project2;
   private VisualStudioSolution vsSolution;
@@ -79,7 +80,7 @@ public class NDepsResultParserTest {
   public void setUp() {
     project = PowerMockito.mock(Project.class);
     project2 = PowerMockito.mock(Project.class);
-    Project rootProject = mock(Project.class);
+    rootProject = mock(Project.class);
     when(project.getParent()).thenReturn(rootProject);
     when(project.getLanguageKey()).thenReturn("cs");
 
@@ -190,6 +191,24 @@ public class NDepsResultParserTest {
 
     assertThat(depsList, hasItem(new Dependency(project, project2)));
     assertThat(depsList, hasItem(new Dependency(project, library)));
+  }
+
+  @PrepareForTest({Resource.class})
+  @Test
+  public void shoulNotFailOnSkippedModuleDependency() {
+    PowerMockito.when(project.getKey()).thenReturn("null:Example.Core");
+    PowerMockito.when(project2.getKey()).thenReturn("null:Example.Common");
+
+    when(vsSolution.getProject("Core")).thenReturn(vsProject);
+    when(vsSolution.getProject("Common")).thenReturn(vsProject2);
+    // Common is in the solution but "skipped"
+    when(rootProject.getModules()).thenReturn(Lists.newArrayList(project));
+
+    File report = TestUtils.getResource("/ndeps-report-projectdependency.xml");
+
+    parser.parse("compile", report);
+
+
   }
 
   private void assertThatDepsListContains(List<Dependency> depsList, String from, String to) {

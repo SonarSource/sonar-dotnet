@@ -181,13 +181,16 @@ public class NDepsResultParser implements BatchExtension {
 
         Resource<?> to = getResource(referenceName, referenceVersion);
 
-        // keep the dependency in cache
-        Dependency dependency = new Dependency(from, to);
-        dependency.setUsage(scope);
-        dependency.setWeight(1);
-        context.saveDependency(dependency);
-
-        LOG.debug("Saving dependency from {} to {}", from.getName(), to.getName());
+        if (to == null) {
+          LOG.debug("Ignoring dependency from {} to {}, the module may have been skipped", from.getName(), referenceName);
+        } else {
+          // keep the dependency in cache
+          Dependency dependency = new Dependency(from, to);
+          dependency.setUsage(scope);
+          dependency.setWeight(1);
+          context.saveDependency(dependency);
+          LOG.debug("Saving dependency from {} to {}", from.getName(), to.getName());
+        }
       }
     }
   }
