@@ -11,7 +11,7 @@
   <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
   <artifactId>dotnet</artifactId>
   <packaging>pom</packaging>
-  <version>2.1</version>
+  <version>2.2-SNAPSHOT</version>
 
   <name>Sonar .NET Ecosystem</name>
   <inceptionYear>2010</inceptionYear>
@@ -48,7 +48,7 @@
     <connection>scm:git:git@github.com:SonarCommunity/sonar-dotnet.git</connection>
     <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-dotnet.git</developerConnection>
     <url>https://github.com/SonarCommunity/sonar-dotnet</url>
-    <tag>2.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
