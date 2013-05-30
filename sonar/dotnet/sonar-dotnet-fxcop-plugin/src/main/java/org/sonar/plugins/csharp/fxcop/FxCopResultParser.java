@@ -242,6 +242,7 @@ public class FxCopResultParser implements BatchExtension {
           violation.setLineId(Integer.parseInt(lineNumber));
         }
         violation.setMessage(issueCursor.collectDescendantText().trim());
+        // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
         violation.setSeverity(currentRule.getSeverity());
         context.saveViolation(violation);
       }
@@ -255,6 +256,7 @@ public class FxCopResultParser implements BatchExtension {
       // the violation is saved at project level, not on a specific resource
       Violation violation = Violation.create(currentRule, project);
       violation.setMessage(messagesCursor.collectDescendantText().trim());
+      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {

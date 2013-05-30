@@ -135,6 +135,7 @@ public class StyleCopResultParser implements BatchExtension {
         violation.setLineId(Integer.parseInt(lineNumber));
       }
       violation.setMessage(violationsCursor.collectDescendantText().trim());
+      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {

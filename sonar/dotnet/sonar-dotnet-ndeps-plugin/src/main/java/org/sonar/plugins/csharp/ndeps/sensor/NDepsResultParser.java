@@ -225,6 +225,7 @@ public class NDepsResultParser implements BatchExtension {
 
     Violation violation = Violation.create(rule, resource);
     violation.setMessage("Type " + subjectType + " has a reference to type " + dependency);
+    // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
     violation.setSeverity(rule.getSeverity());
     context.saveViolation(violation);
   }

@@ -164,6 +164,7 @@ public class GendarmeViolationMaker implements BatchExtension {
     } else {
       violation.setMessage(currentMessage);
     }
+    // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
     violation.setSeverity(currentRule.getSeverity());
     context.saveViolation(violation);
     return violation;
