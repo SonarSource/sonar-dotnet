@@ -92,6 +92,9 @@ import java.util.List;
   @Property(key = GallioConstants.OPEN_COVER_ATTRIBUTE_EXCLUDES_KEY,
 	name = "OpenCover attribute excludes", description = "Exclude a class or method by filter(s) that match attributes that have been applied that have been applied. An * can be used as a wildcard. Example: *.ExcludeFromCoverage*",
 	global = false, project = false, defaultValue = GallioConstants.OPEN_COVER_ATTRIBUTE_EXCLUDES_DEFVALUE),
+  @Property(key = GallioConstants.ABSOLUTE_BASE_DIRECTORY_KEY,
+    name = "Gallio absolute base directory", description = "Set the base directory of the application that is being tested",
+    global = true, project = false, defaultValue = GallioConstants.ABSOLUTE_BASE_DIRECTORY_DEFVALUE),
   @Property(key = GallioConstants.IT_MODE_KEY, defaultValue = AbstractDotNetSensor.MODE_SKIP,
     name = "Gallio integration tests activation mode", description = "Possible values : Default (means 'skip'), " +
       "'active', 'skip' and 'reuseReport'.",

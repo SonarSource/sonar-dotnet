@@ -53,6 +53,9 @@ public final class GallioConstants {
 
   public static final String COVERAGE_EXCLUDES_KEY = "sonar.gallio.coverage.excludes";
   public static final String COVERAGE_EXCLUDES_DEFVALUE = null;
+  
+  public static final String ABSOLUTE_BASE_DIRECTORY_KEY = "sonar.gallio.absoluteBaseDirectory";
+  public static final String ABSOLUTE_BASE_DIRECTORY_DEFVALUE = "C:/Program Files/Gallio/bin";
 
   public static final String TIMEOUT_MINUTES_KEY = "sonar.gallio.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 30;

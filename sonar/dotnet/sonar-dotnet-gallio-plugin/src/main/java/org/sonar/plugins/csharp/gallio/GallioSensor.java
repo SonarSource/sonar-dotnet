@@ -222,6 +222,7 @@ public class GallioSensor extends AbstractDotNetSensor {
         .getStringArray(GallioConstants.COVERAGE_EXCLUDES_KEY, GallioConstants.COVERAGE_EXCLUDES_DEFVALUE));
     builder.setOpenCoverAttributeExcludes(configuration
     		.getString(GallioConstants.OPEN_COVER_ATTRIBUTE_EXCLUDES_KEY));
+    builder.setAbsoluteBaseDirectory(new File(configuration.getString(GallioConstants.ABSOLUTE_BASE_DIRECTORY_KEY)));
     builder.setPartCoverInstallDirectory(new File(configuration.getString(GallioConstants.PART_COVER_INSTALL_KEY)));
     builder.setOpenCoverInstallDirectory(new File(configuration.getString(GallioConstants.OPEN_COVER_INSTALL_KEY)));
     builder.setDotCoverInstallDirectory(new File(configuration.getString(GallioConstants.DOT_COVER_INSTALL_KEY)));

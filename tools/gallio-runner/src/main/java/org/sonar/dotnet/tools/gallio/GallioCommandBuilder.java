@@ -59,6 +59,7 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private File dotCoverInstallDirectory;
   private String[] coverageExcludes;
   private String attributeExcludes;
+  private File absoluteBaseDirectory;
   private File coverageReportFile;
 
   private List<File> testAssemblies;
@@ -204,6 +205,16 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setOpenCoverAttributeExcludes(String attributeExclude) {
 	  this.attributeExcludes = attributeExclude;
   }
+  
+  /**
+   * Sets the abd parameter for Gallio
+   * 
+   * @param absoluteBaseDirectory
+   *        project directory
+   */
+  public void setAbsoluteBaseDirectory(File absoluteBaseDirectory) {
+	  this.absoluteBaseDirectory = absoluteBaseDirectory;
+  }
 
   /**
    * Sets the coverage report file to generate
@@ -286,6 +297,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
     LOG.debug("- Runner              : {}", runner);
     gallioArguments.add("/r:" + runner.getValue());
+    
+    if(absoluteBaseDirectory != null && absoluteBaseDirectory.length() > 0) {
+    	LOG.debug("- Absolute base directory : {}", absoluteBaseDirectory.getAbsolutePath());
+    	gallioArguments.add("/abd:" + absoluteBaseDirectory.getAbsolutePath());
+    }
 
     File reportDirectory = gallioReportFile.getParentFile();
     LOG.debug("- Report directory    : {}", reportDirectory.getAbsolutePath());
