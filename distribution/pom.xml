@@ -18,36 +18,43 @@
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-dotnet-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-dotnet-fxcop-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-dotnet-gendarme-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-dotnet-ndeps-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
       <artifactId>sonar-dotnet-gallio-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
       <artifactId>sonar-csharp-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet.csharp</groupId>
       <artifactId>sonar-csharp-stylecop-plugin</artifactId>
       <version>${project.version}</version>
+      <type>sonar-plugin</type>
     </dependency>
   </dependencies>
 
