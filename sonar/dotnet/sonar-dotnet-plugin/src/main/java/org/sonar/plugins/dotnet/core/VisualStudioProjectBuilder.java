@@ -71,15 +71,19 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   @Override
   protected void build(ProjectReactor reactor) {
-    if (DotNetLanguages.isDotNetLanguage(configuration.getString("sonar.language"))) {
+    String sonarLanguage =   configuration.getString("sonar.language");
+    if (DotNetLanguages.isDotNetLanguage(sonarLanguage)) {
       LOG.debug("Executing VisualStudioProjectBuilder");
       ProjectDefinition root = reactor.getRoot();
 
       // First, read all the plugin configuration details related to MS Windows
       retrieveMicrosoftWindowsEnvironmentConfig();
 
-      // Then create the Visual Studio Solution object from the ".sln" file
-      createVisualStudioSolution(root.getBaseDir());
+      if(hasNoModulesDefined()) {// Then create the Visual Studio Solution object from the ".sln" file
+        createVisualStudioSolution(root.getBaseDir());
+      } else {
+        LOG.info("PST: modules defined");
+      }
 
       // And finally create the Sonar projects definition
       createMultiProjectStructure(root);
@@ -89,6 +93,9 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     }
   }
 
+  private boolean hasNoModulesDefined() {
+      return false;
+  }
   private void createMultiProjectStructure(ProjectDefinition root) {
     VisualStudioSolution currentSolution = microsoftWindowsEnvironment.getCurrentSolution();
     root.resetSourceDirs();
@@ -99,43 +106,47 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     boolean safeMode = "safe".equalsIgnoreCase(configuration.getString(DotNetConstants.KEY_GENERATION_STRATEGY_KEY));
 
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
-      final String projectKey;
-      if (safeMode) {
-        projectKey = root.getKey() + ":" + StringUtils.deleteWhitespace(vsProject.getName());
-      } else {
-        projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
-      }
-
-      if (projectKey.equals(root.getKey())) {
-        throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
-          + "'). Please set a unique 'sonar.projectKey' for the solution.");
-      }
-
-      Properties subprojectProperties = (Properties) root.getProperties().clone();
-      overrideSonarLanguageProperty(vsProject, subprojectProperties);
-
-      ProjectDefinition subProject = ProjectDefinition.create().setProperties(subprojectProperties)
-          .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
-          .setVersion(root.getVersion()).setName(vsProject.getName());
-
-      if (vsProject.isTest()) {
-        subProject.setTestDirs(".");
-        for (SourceFile sourceFile : vsProject.getSourceFiles()) {
-          subProject.addTestFiles(sourceFile.getFile());
-        }
-      } else {
-        subProject.setSourceDirs(".");
-        for (SourceFile sourceFile : vsProject.getSourceFiles()) {
-          subProject.addSourceFiles(sourceFile.getFile());
-        }
-      }
-
-      LOG.debug("  - Adding Sub Project => {}", subProject.getName());
-      root.addSubProject(subProject);
+        getProject(root, workDir, safeMode, vsProject);
     }
   }
 
-  protected void overrideSonarLanguageProperty(VisualStudioProject vsProject, Properties subprojectProperties) {
+    private void getProject(ProjectDefinition root, String workDir, boolean safeMode, VisualStudioProject vsProject) {
+        final String projectKey;
+        if (safeMode) {
+          projectKey = root.getKey() + ":" + StringUtils.deleteWhitespace(vsProject.getName());
+        } else {
+          projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
+        }
+
+        if (projectKey.equals(root.getKey())) {
+          throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
+            + "'). Please set a unique 'sonar.projectKey' for the solution.");
+        }
+
+        Properties subprojectProperties = (Properties) root.getProperties().clone();
+        overrideSonarLanguageProperty(vsProject, subprojectProperties);
+
+        ProjectDefinition subProject = ProjectDefinition.create().setProperties(subprojectProperties)
+            .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
+            .setVersion(root.getVersion()).setName(vsProject.getName());
+
+        if (vsProject.isTest()) {
+          subProject.setTestDirs(".");
+          for (SourceFile sourceFile : vsProject.getSourceFiles()) {
+            subProject.addTestFiles(sourceFile.getFile());
+          }
+        } else {
+          subProject.setSourceDirs(".");
+          for (SourceFile sourceFile : vsProject.getSourceFiles()) {
+            subProject.addSourceFiles(sourceFile.getFile());
+          }
+        }
+
+        LOG.debug("  - Adding Sub Project => {}", subProject.getName());
+        root.addSubProject(subProject);
+    }
+
+    protected void overrideSonarLanguageProperty(VisualStudioProject vsProject, Properties subprojectProperties) {
     Collection<SourceFile> sourceFiles = vsProject.getSourceFiles();
     if (!sourceFiles.isEmpty()) {
       for (SourceFile sourceFile : sourceFiles) {
