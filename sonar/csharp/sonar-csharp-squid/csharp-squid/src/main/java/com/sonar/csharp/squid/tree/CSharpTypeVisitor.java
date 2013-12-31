@@ -41,6 +41,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   private String namespaceName;
   private final Stack<String> typeNameStack = new Stack<String>();
+  private final Stack<String> namespaceStack = new Stack<String>();
   private AstNodeType currentNodeType;
   private final Map<AstNodeType, CSharpKeyword> keywordMap = Maps.newHashMap();
   private final Map<AstNodeType, CSharpMetric> metricMap = Maps.newHashMap();
@@ -77,7 +78,8 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   public void visitNode(AstNode astNode) {
     currentNodeType = astNode.getType();
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
-      namespaceName = extractNamespaceSignature(astNode);
+        namespaceStack.push(namespaceName);
+        namespaceName = extractNamespaceSignature(astNode);
     } else {
       String typeName = extractTypeName(astNode);
       typeNameStack.push(typeName);
@@ -101,7 +103,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       getContext().popSourceCode();
       typeNameStack.pop();
     } else {
-      namespaceName = null;
+      namespaceName = namespaceStack.pop();
     }
   }
 
