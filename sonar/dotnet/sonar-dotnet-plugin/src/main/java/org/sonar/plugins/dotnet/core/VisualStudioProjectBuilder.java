@@ -104,9 +104,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
     private boolean shouldLoadModulesFromSolution() {
         String sonarModulesPropertyValue=  configuration.getString("sonar.modules");
-        boolean hasModulesSpecified = !StringUtils.isEmpty(sonarModulesPropertyValue);
-        boolean specifyModules = configuration.getBoolean("sonar.dotnet.specifyModules");
-        return !(hasModulesSpecified || specifyModules);
+        return StringUtils.isEmpty(sonarModulesPropertyValue);
     }
 
     private void getProject(ProjectDefinition root, String workDir, boolean safeMode, VisualStudioProject vsProject) {
