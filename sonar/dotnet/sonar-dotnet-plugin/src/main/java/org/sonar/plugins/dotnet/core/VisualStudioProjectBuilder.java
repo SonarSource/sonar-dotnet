@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.dotnet.core;
 
-import com.google.common.annotations.VisibleForTesting;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

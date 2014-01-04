@@ -1,7 +1,7 @@
 /*
  * Sonar .NET Plugin :: Core
- * Copyright (C) 2013 Peter Stevens
- * peter@famstevens.eu
+ * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
+ * dev@sonar.codehaus.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
