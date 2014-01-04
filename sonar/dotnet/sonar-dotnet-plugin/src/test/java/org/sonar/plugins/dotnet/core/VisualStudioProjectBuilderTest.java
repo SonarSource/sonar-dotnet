@@ -43,6 +43,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -223,4 +224,17 @@ public class VisualStudioProjectBuilderTest {
     projectBuilder.build(reactor);
   }
 
+  /**
+   * if the sonar.modules property is set, then any solution should be ignored, 
+   * nothing is added to the reactor
+   */
+ @Test
+ public void testNoSpecifiedSlnFileAndModulesSpecifiedNoSolutionFound() {
+	    settings.setProperty(DotNetConstants.SOLUTION_FILE_KEY, "");
+	    settings.setProperty("sonar.modules", "a,b,c");
+	    assertThat(reactor.getProjects().size(),is(1));
+	    projectBuilder.build(reactor);
+	    assertThat(microsoftWindowsEnvironment.getDotnetSdkDirectory().getAbsolutePath(), is(fakeSdkDir.getAbsolutePath()));
+	    assertThat(reactor.getProjects().size(),is(1));
+ }
 }

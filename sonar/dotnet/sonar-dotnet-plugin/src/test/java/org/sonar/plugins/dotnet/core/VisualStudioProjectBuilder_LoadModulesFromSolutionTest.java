@@ -34,7 +34,6 @@ import java.lang.reflect.Method;
 
 public class VisualStudioProjectBuilder_LoadModulesFromSolutionTest {
 
-    public static final String SONAR_DOTNET_SPECIFY_MODULES = "sonar.dotnet.specifyModules";
     public static final String SONAR_MODULES = "sonar.modules";
     private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
     private ProjectReactor reactor;
@@ -53,13 +52,8 @@ public class VisualStudioProjectBuilder_LoadModulesFromSolutionTest {
                 new DotNetConfiguration(settings), microsoftWindowsEnvironment);
     }
 
-    /**
-     *
-     */
-
     @Test
     public void noSettings_ShouldLoadFromSolutionTest() {
-
         boolean result=shouldLoadModulesFromSolution();
         assertTrue(result);
     }
@@ -72,35 +66,12 @@ public class VisualStudioProjectBuilder_LoadModulesFromSolutionTest {
     }
 
     @Test
-    public void specifySet_ShouldNotLoadFromSolutionTest() {
-        settings.appendProperty(SONAR_DOTNET_SPECIFY_MODULES,"true");
-        boolean result=shouldLoadModulesFromSolution();
-        assertFalse(result);
-    }
-
-    @Test
-    public void specifySetAndModulesDefined_ShouldNotLoadFromSolutionTest() {
-        settings.appendProperty(SONAR_MODULES,"some");
-        settings.appendProperty(SONAR_DOTNET_SPECIFY_MODULES,"true");
-        boolean result=shouldLoadModulesFromSolution();
-        assertFalse(result);
-    }
-
-    @Test
-         public void specifySetAndModulesEmpty_ShouldNotLoadFromSolutionTest() {
+         public void modulesEmpty_ShouldLoadFromSolutionTest() {
         settings.appendProperty(SONAR_MODULES,"");
-        settings.appendProperty(SONAR_DOTNET_SPECIFY_MODULES,"true");
-        boolean result=shouldLoadModulesFromSolution();
-        assertFalse(result);
-    }
-
-    @Test
-    public void specifyFalseAndModulesEmpty_ShouldLoadFromSolutionTest() {
-        settings.appendProperty(SONAR_MODULES,"");
-        settings.appendProperty(SONAR_DOTNET_SPECIFY_MODULES,"false");
         boolean result=shouldLoadModulesFromSolution();
         assertTrue(result);
     }
+
     private Boolean shouldLoadModulesFromSolution() {
         return (Boolean)invokePrivateMethod(projectBuilder,"shouldLoadModulesFromSolution",null);
     }
