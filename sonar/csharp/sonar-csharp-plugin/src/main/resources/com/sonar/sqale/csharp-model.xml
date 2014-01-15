@@ -445,7 +445,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -457,7 +457,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -469,7 +469,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -481,7 +481,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -493,7 +493,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -505,7 +505,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -517,7 +517,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -529,7 +529,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -541,7 +541,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -601,7 +601,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -613,7 +613,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -625,7 +625,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -637,7 +637,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -649,7 +649,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -1527,7 +1527,7 @@
 				<rule-key>LineLength</rule-key>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 				<prop>
 					<key>remediationFactor</key>
@@ -1566,7 +1566,7 @@
 				<rule-key>TabCharacter</rule-key>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 				<prop>
 					<key>remediationFactor</key>
@@ -1845,7 +1845,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -1857,7 +1857,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -3607,7 +3607,7 @@
 				<rule-key>FileLoc</rule-key>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 				<prop>
 					<key>remediationFactor</key>
@@ -3971,7 +3971,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4092,7 +4092,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4105,7 +4105,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4118,7 +4118,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4131,7 +4131,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4161,7 +4161,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4343,7 +4343,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4356,7 +4356,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4477,7 +4477,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4490,7 +4490,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4503,7 +4503,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4516,7 +4516,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4594,7 +4594,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4607,7 +4607,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4620,7 +4620,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4646,7 +4646,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4659,7 +4659,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4672,7 +4672,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4685,7 +4685,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4698,7 +4698,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4711,7 +4711,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4724,7 +4724,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4737,7 +4737,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4750,7 +4750,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4776,7 +4776,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4789,7 +4789,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4815,7 +4815,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4828,7 +4828,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4841,7 +4841,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -4854,7 +4854,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
@@ -7682,7 +7682,7 @@
 				</prop>
 				<prop>
 					<key>remediationFunction</key>
-					<txt>constant_resource</txt>
+					<txt>constant_issue</txt>
 				</prop>
 			</chc>
 			<chc>
