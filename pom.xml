@@ -17,8 +17,8 @@
   <inceptionYear>2010</inceptionYear>
   <url>http://docs.codehaus.org/display/SONAR/C%23+Plugins+Ecosystem</url>
   <organization>
-    <name>Codehaus Sonar Plugins</name>
-    <url>http://sonar-plugins.codehaus.org/</url>
+    <name>SonarSource and Alexandre Victoor and Jose Chillan</name>
+    <url>http://www.sonarsource.com</url>
   </organization>
 
   <developers>
