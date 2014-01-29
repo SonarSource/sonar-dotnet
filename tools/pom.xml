@@ -18,9 +18,6 @@
     <module>fxcop-runner</module>
     <module>gendarme-runner</module>
     <module>gallio-runner</module>
-  <!--  
-    <module>dotnet-tools-commons</module>
-  -->
   </modules>
 
   <dependencies>
