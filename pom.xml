@@ -63,19 +63,6 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
   </properties>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <!-- TO BE REMOVED ONCE THE PARENT POM HAS UPGRADED TO 1.5+ VERSION OF THIS PLUGIN -->
-        <plugin>
-          <groupId>org.codehaus.sonar</groupId>
-          <artifactId>sonar-packaging-maven-plugin</artifactId>
-          <version>1.5</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-
   <profiles>
     <profile>
       <id>release</id>
