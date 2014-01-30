@@ -25,7 +25,7 @@ public final class CSharpSquidConstants {
   }
 
   public static final String REPOSITORY_KEY = "csharpsquid";
-  public static final String REPOSITORY_NAME = "Sonar";
+  public static final String REPOSITORY_NAME = "SonarQube";
 
   public static final String CPD_MINIMUM_TOKENS_PROPERTY = "sonar.cpd.cs.minimumTokens";
   public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.cs.ignoreLiteral";
