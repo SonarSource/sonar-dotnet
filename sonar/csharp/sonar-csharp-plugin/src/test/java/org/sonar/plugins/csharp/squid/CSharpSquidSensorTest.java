@@ -68,7 +68,7 @@ public class CSharpSquidSensorTest {
     FileLinesContext flc = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Matchers.any(Resource.class))).thenReturn(flc);
     sensor = new CSharpSquidSensor(dotNetConfiguration, language, cSharpResourcesBridge, resourceCreationLock,
-        microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory);
+      microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory);
   }
 
   @Test
@@ -76,8 +76,8 @@ public class CSharpSquidSensorTest {
     ProjectFileSystem projectFileSystem = mock(ProjectFileSystem.class);
     when(projectFileSystem.getSourceCharset()).thenReturn(Charset.forName("UTF-8"));
     InputFile inputFile = InputFileUtils.create(
-        new File("src/test/resources/"),
-        new File("src/test/resources/CSharpSquidSensor.cs"));
+      new File("src/test/resources/"),
+      new File("src/test/resources/CSharpSquidSensor.cs"));
     when(projectFileSystem.mainFiles(CSharpConstants.LANGUAGE_KEY)).thenReturn(ImmutableList.of(inputFile));
     when(projectFileSystem.getSourceDirs()).thenReturn(ImmutableList.of(new File("src/test/resources/")));
 
@@ -97,7 +97,6 @@ public class CSharpSquidSensorTest {
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.ACCESSORS), Mockito.eq(10.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMPLEXITY), Mockito.eq(72.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMMENT_BLANK_LINES), Mockito.eq(0.0));
-    verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMMENTED_OUT_CODE_LINES), Mockito.eq(0.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMMENT_LINES), Mockito.eq(33.0));
   }
 

@@ -86,14 +86,14 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
   private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
     this(dotNetConfiguration, cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory,
-        new CSharpCheck[] {});
+      new CSharpCheck[] {});
   }
 
   public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
-      CSharpCheck[] cSharpChecks) {
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+    CSharpCheck[] cSharpChecks) {
     super(dotNetConfiguration, microsoftWindowsEnvironment, "Squid C#", "");
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
@@ -192,11 +192,10 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     context.saveMeasure(sonarFile, CoreMetrics.ACCESSORS, squidFile.getDouble(CSharpMetric.ACCESSORS));
     context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(CSharpMetric.COMPLEXITY));
     context.saveMeasure(sonarFile, CoreMetrics.COMMENT_BLANK_LINES, squidFile.getDouble(CSharpMetric.COMMENT_BLANK_LINES));
-    context.saveMeasure(sonarFile, CoreMetrics.COMMENTED_OUT_CODE_LINES, squidFile.getDouble(CSharpMetric.COMMENTED_OUT_CODE_LINES));
     context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, squidFile.getDouble(CSharpMetric.COMMENT_LINES));
     context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_API, squidFile.getDouble(CSharpMetric.PUBLIC_API));
     context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API,
-        squidFile.getDouble(CSharpMetric.PUBLIC_API) - squidFile.getDouble(CSharpMetric.PUBLIC_DOC_API));
+      squidFile.getDouble(CSharpMetric.PUBLIC_API) - squidFile.getDouble(CSharpMetric.PUBLIC_DOC_API));
   }
 
   private void saveViolations(SourceCode squidFile, File sonarFile) {
@@ -221,7 +220,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
   private void saveMethodsComplexityDistribution(File sonarFile, SourceFile squidFile) {
     Collection<SourceCode> squidMethods = scanner.getIndex().search(new QueryByParent(squidFile), new QueryByType(SourceMember.class));
     RangeDistributionBuilder complexityMethodDistribution = new RangeDistributionBuilder(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION,
-        METHOD_DISTRIB_BOTTOM_LIMITS);
+      METHOD_DISTRIB_BOTTOM_LIMITS);
 
     for (SourceCode squidMethod : squidMethods) {
       complexityMethodDistribution.add(squidMethod.getDouble(CSharpMetric.COMPLEXITY));
