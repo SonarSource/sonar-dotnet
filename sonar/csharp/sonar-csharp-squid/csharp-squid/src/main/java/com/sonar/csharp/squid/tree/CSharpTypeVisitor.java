@@ -45,18 +45,15 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   private final Map<AstNodeType, CSharpKeyword> keywordMap = Maps.newHashMap();
   private final Map<AstNodeType, CSharpMetric> metricMap = Maps.newHashMap();
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void init() {
     subscribeTo(
-        CSharpGrammar.NAMESPACE_DECLARATION,
-        CSharpGrammar.CLASS_DECLARATION,
-        CSharpGrammar.INTERFACE_DECLARATION,
-        CSharpGrammar.DELEGATE_DECLARATION,
-        CSharpGrammar.STRUCT_DECLARATION,
-        CSharpGrammar.ENUM_DECLARATION);
+      CSharpGrammar.NAMESPACE_DECLARATION,
+      CSharpGrammar.CLASS_DECLARATION,
+      CSharpGrammar.INTERFACE_DECLARATION,
+      CSharpGrammar.DELEGATE_DECLARATION,
+      CSharpGrammar.STRUCT_DECLARATION,
+      CSharpGrammar.ENUM_DECLARATION);
 
     keywordMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpKeyword.CLASS);
     metricMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpMetric.CLASSES);
@@ -70,9 +67,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     metricMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void visitNode(AstNode astNode) {
     currentNodeType = astNode.getType();
@@ -92,9 +86,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void leaveNode(AstNode astNode) {
     if (!astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
@@ -105,9 +96,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public void leaveFile(AstNode astNode) {
     namespaceName = null;
