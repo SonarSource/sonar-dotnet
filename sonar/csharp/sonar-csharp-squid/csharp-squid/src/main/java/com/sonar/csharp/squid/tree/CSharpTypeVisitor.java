@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.tree;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMap;
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
@@ -40,9 +40,15 @@ import java.util.Stack;
  */
 public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
+  private static final Map<AstNodeType, CSharpMetric> METRIC_MAP = ImmutableMap.<AstNodeType, CSharpMetric>of(
+    CSharpGrammar.CLASS_DECLARATION, CSharpMetric.CLASSES,
+    CSharpGrammar.INTERFACE_DECLARATION, CSharpMetric.INTERFACES,
+    CSharpGrammar.DELEGATE_DECLARATION, CSharpMetric.DELEGATES,
+    CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS,
+    CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
+
   private String namespaceName;
   private final Stack<String> typeNameStack = new Stack<String>();
-  private final Map<AstNodeType, CSharpMetric> metricMap = Maps.newHashMap();
 
   @Override
   public void init() {
@@ -53,12 +59,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       CSharpGrammar.DELEGATE_DECLARATION,
       CSharpGrammar.STRUCT_DECLARATION,
       CSharpGrammar.ENUM_DECLARATION);
-
-    metricMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpMetric.CLASSES);
-    metricMap.put(CSharpGrammar.INTERFACE_DECLARATION, CSharpMetric.INTERFACES);
-    metricMap.put(CSharpGrammar.DELEGATE_DECLARATION, CSharpMetric.DELEGATES);
-    metricMap.put(CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS);
-    metricMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
   }
 
   @Override
@@ -74,7 +74,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       } else {
         type = new SourceType(extractTypeSignature(typeName), typeName);
       }
-      type.setMeasure(metricMap.get(astNode.getType()), 1);
+      type.setMeasure(METRIC_MAP.get(astNode.getType()), 1);
       getContext().addSourceCode(type);
     }
   }
