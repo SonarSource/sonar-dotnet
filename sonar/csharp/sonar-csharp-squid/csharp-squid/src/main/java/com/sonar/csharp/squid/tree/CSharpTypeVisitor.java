@@ -41,7 +41,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   private String namespaceName;
   private final Stack<String> typeNameStack = new Stack<String>();
-  private AstNodeType currentNodeType;
   private final Map<AstNodeType, CSharpKeyword> keywordMap = Maps.newHashMap();
   private final Map<AstNodeType, CSharpMetric> metricMap = Maps.newHashMap();
 
@@ -69,19 +68,18 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   @Override
   public void visitNode(AstNode astNode) {
-    currentNodeType = astNode.getType();
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       namespaceName = extractNamespaceSignature(astNode);
     } else {
       String typeName = extractTypeName(astNode);
       typeNameStack.push(typeName);
       SourceType type = null;
-      if (currentNodeType.equals(CSharpGrammar.CLASS_DECLARATION)) {
+      if (astNode.getType().equals(CSharpGrammar.CLASS_DECLARATION)) {
         type = new SourceClass(extractTypeSignature(typeName), typeName);
       } else {
         type = new SourceType(extractTypeSignature(typeName), typeName);
       }
-      type.setMeasure(metricMap.get(currentNodeType), 1);
+      type.setMeasure(metricMap.get(astNode.getType()), 1);
       getContext().addSourceCode(type);
     }
   }
@@ -99,7 +97,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void leaveFile(AstNode astNode) {
     namespaceName = null;
-    currentNodeType = null;
     typeNameStack.clear();
   }
 
@@ -119,10 +116,10 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       typeName.append(typeNameStack.peek());
       typeName.append(".");
     }
-    if (currentNodeType.equals(CSharpGrammar.DELEGATE_DECLARATION)) {
-      typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getNextSibling().getTokenValue());
+    if (astNode.getType().equals(CSharpGrammar.DELEGATE_DECLARATION)) {
+      typeName.append(astNode.getFirstChild(keywordMap.get(astNode.getType())).getNextSibling().getNextSibling().getTokenValue());
     } else {
-      typeName.append(astNode.getFirstChild(keywordMap.get(currentNodeType)).getNextSibling().getTokenValue());
+      typeName.append(astNode.getFirstChild(keywordMap.get(astNode.getType())).getNextSibling().getTokenValue());
     }
     return typeName.toString();
   }
