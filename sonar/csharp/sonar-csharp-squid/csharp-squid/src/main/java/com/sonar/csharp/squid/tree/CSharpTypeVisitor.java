@@ -27,6 +27,7 @@ import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
+import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
 
@@ -41,7 +42,6 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   private String namespaceName;
   private final Stack<String> typeNameStack = new Stack<String>();
-  private final Map<AstNodeType, CSharpKeyword> keywordMap = Maps.newHashMap();
   private final Map<AstNodeType, CSharpMetric> metricMap = Maps.newHashMap();
 
   @Override
@@ -54,15 +54,10 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       CSharpGrammar.STRUCT_DECLARATION,
       CSharpGrammar.ENUM_DECLARATION);
 
-    keywordMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpKeyword.CLASS);
     metricMap.put(CSharpGrammar.CLASS_DECLARATION, CSharpMetric.CLASSES);
-    keywordMap.put(CSharpGrammar.INTERFACE_DECLARATION, CSharpKeyword.INTERFACE);
     metricMap.put(CSharpGrammar.INTERFACE_DECLARATION, CSharpMetric.INTERFACES);
-    keywordMap.put(CSharpGrammar.DELEGATE_DECLARATION, CSharpKeyword.DELEGATE);
     metricMap.put(CSharpGrammar.DELEGATE_DECLARATION, CSharpMetric.DELEGATES);
-    keywordMap.put(CSharpGrammar.STRUCT_DECLARATION, CSharpKeyword.STRUCT);
     metricMap.put(CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS);
-    keywordMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpKeyword.ENUM);
     metricMap.put(CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
   }
 
@@ -86,11 +81,11 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   @Override
   public void leaveNode(AstNode astNode) {
-    if (!astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
+    if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
+      namespaceName = null;
+    } else {
       getContext().popSourceCode();
       typeNameStack.pop();
-    } else {
-      namespaceName = null;
     }
   }
 
@@ -116,11 +111,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
       typeName.append(typeNameStack.peek());
       typeName.append(".");
     }
-    if (astNode.getType().equals(CSharpGrammar.DELEGATE_DECLARATION)) {
-      typeName.append(astNode.getFirstChild(keywordMap.get(astNode.getType())).getNextSibling().getNextSibling().getTokenValue());
-    } else {
-      typeName.append(astNode.getFirstChild(keywordMap.get(astNode.getType())).getNextSibling().getTokenValue());
-    }
+    typeName.append(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenValue());
     return typeName.toString();
   }
 
