@@ -19,9 +19,9 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.sslr.api.AuditListener;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
+import com.sonar.sslr.squid.AstScannerExceptionHandler;
 import com.sonar.sslr.squid.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
@@ -32,14 +32,16 @@ import java.io.StringWriter;
 @Rule(
   key = "ParsingError",
   priority = Priority.MAJOR)
-public class ParsingErrorCheck extends SquidCheck<Grammar> implements AuditListener {
+public class ParsingErrorCheck extends SquidCheck<Grammar> implements AstScannerExceptionHandler {
 
+  @Override
   public void processException(Exception e) {
     StringWriter exception = new StringWriter();
     e.printStackTrace(new PrintWriter(exception));
     getContext().createFileViolation(this, exception.toString());
   }
 
+  @Override
   public void processRecognitionException(RecognitionException e) {
     getContext().createLineViolation(this, e.getMessage(), e.getLine());
   }

@@ -96,7 +96,6 @@ public class CSharpSquidSensorTest {
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.STATEMENTS), Mockito.eq(144.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.ACCESSORS), Mockito.eq(10.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMPLEXITY), Mockito.eq(72.0));
-    verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMMENT_BLANK_LINES), Mockito.eq(0.0));
     verify(context).saveMeasure(Mockito.any(Resource.class), Mockito.eq(CoreMetrics.COMMENT_LINES), Mockito.eq(33.0));
   }
 

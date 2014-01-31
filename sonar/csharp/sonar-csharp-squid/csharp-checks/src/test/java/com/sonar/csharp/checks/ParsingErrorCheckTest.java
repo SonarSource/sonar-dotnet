@@ -27,8 +27,6 @@ import org.sonar.squid.api.SourceFile;
 
 import java.io.File;
 
-import static org.hamcrest.Matchers.containsString;
-
 public class ParsingErrorCheckTest {
 
   @Rule
@@ -39,7 +37,7 @@ public class ParsingErrorCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/parsingError.cs"), new ParsingErrorCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-        .next().atLine(8).withMessageThat(containsString("DOT expected but \"}\" [RCURLYBRACE] found"));
+      .next().atLine(8);
   }
 
 }

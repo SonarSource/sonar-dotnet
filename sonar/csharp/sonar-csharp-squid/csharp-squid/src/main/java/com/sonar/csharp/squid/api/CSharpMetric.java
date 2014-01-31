@@ -28,29 +28,34 @@ import org.sonar.squid.measures.SumAggregationFormula;
  * Metrics computed for the C# language.
  */
 public enum CSharpMetric implements MetricDef {
-  FILES, CLASSES, INTERFACES, DELEGATES, STRUCTS, ENUMS, METHODS, LINES, LINES_OF_CODE, STATEMENTS, ACCESSORS, COMPLEXITY, COMMENT_BLANK_LINES, COMMENT_LINES, PUBLIC_API,
+  FILES, CLASSES, INTERFACES, DELEGATES, STRUCTS, ENUMS, METHODS, LINES, LINES_OF_CODE, STATEMENTS, ACCESSORS, COMPLEXITY, COMMENT_LINES, PUBLIC_API,
   PUBLIC_DOC_API;
 
   public double getInitValue() {
     return 0;
   }
 
+  @Override
   public String getName() {
     return name();
   }
 
+  @Override
   public boolean isCalculatedMetric() {
     return false;
   }
 
+  @Override
   public boolean aggregateIfThereIsAlreadyAValue() {
     return true;
   }
 
+  @Override
   public boolean isThereAggregationFormula() {
     return true;
   }
 
+  @Override
   public CalculatedMetricFormula getCalculatedMetricFormula() {
     return null;
   }

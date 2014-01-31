@@ -82,7 +82,7 @@ public class CSharpFileLinesVisitorTest {
 
     int lines = project.getInt(CSharpMetric.LINES);
     int loc = project.getInt(CSharpMetric.LINES_OF_CODE);
-    int comments = project.getInt(CSharpMetric.COMMENT_LINES) + project.getInt(CSharpMetric.COMMENT_BLANK_LINES);
+    int comments = project.getInt(CSharpMetric.COMMENT_LINES);
 
     verify(fileLinesContext, times(loc)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(1));
     verify(fileLinesContext, times(lines - loc)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(0));
