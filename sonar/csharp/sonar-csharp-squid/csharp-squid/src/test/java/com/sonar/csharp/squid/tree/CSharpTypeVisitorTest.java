@@ -21,6 +21,7 @@ package com.sonar.csharp.squid.tree;
 
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
+import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.csharp.squid.parser.RuleTest;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
@@ -57,7 +58,26 @@ public class CSharpTypeVisitorTest extends RuleTest {
 
     Collection<SourceCode> squidClasses = scanner.getIndex().search(new QueryByType(SourceType.class));
     Matcher<String> classesKeys = isOneOf("Foo.Class", "Foo.Class.InnerStruct", "Foo.Struct", "Foo.Struct.InnerClass", "Foo.Enum",
-        "Bar.Interface", "Bar.Delegate");
+      "Bar.Interface", "Bar.Delegate");
+    for (SourceCode sourceCode : squidClasses) {
+      assertThat(sourceCode.getKey(), classesKeys);
+    }
+  }
+
+  /**
+   * SONARDOTNT-382
+   */
+  @Test
+  public void should_handle_nested_namespaces() {
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFile(readFile("/tree/NestedNamespace.cs"));
+    scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+
+    Collection<SourceCode> squidClasses = scanner.getIndex().search(new QueryByType(SourceClass.class));
+    Matcher<String> classesKeys = isOneOf("Namespace1.ClassBeforeNestedNamespace1",
+      "NestedNamespace1.ClassInsideNestedNamespace1",
+      "Namespace1.ClassAfterNestedNamespace1");
+    assertThat(squidClasses.size(), is(3));
     for (SourceCode sourceCode : squidClasses) {
       assertThat(sourceCode.getKey(), classesKeys);
     }

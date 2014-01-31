@@ -20,7 +20,6 @@
 package com.sonar.csharp.squid.tree;
 
 import com.google.common.collect.ImmutableMap;
-import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceType;
@@ -48,6 +47,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
 
   private String namespaceName;
+  private final Stack<String> namespaceStack = new Stack<String>();
   private final Stack<String> typeNameStack = new Stack<String>();
 
   @Override
@@ -64,6 +64,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void visitNode(AstNode astNode) {
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
+      namespaceStack.push(namespaceName);
       namespaceName = extractNamespaceSignature(astNode);
     } else {
       String typeName = extractTypeName(astNode);
@@ -82,7 +83,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void leaveNode(AstNode astNode) {
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
-      namespaceName = null;
+      namespaceName = namespaceStack.pop();
     } else {
       getContext().popSourceCode();
       typeNameStack.pop();
@@ -95,14 +96,14 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     typeNameStack.clear();
   }
 
-  private String extractTypeSignature(String className) {
-    StringBuilder signature = new StringBuilder();
+  private String extractTypeSignature(String typeName) {
+    StringBuilder sb = new StringBuilder();
     if (namespaceName != null) {
-      signature.append(namespaceName);
-      signature.append(".");
+      sb.append(namespaceName);
+      sb.append(".");
     }
-    signature.append(className);
-    return signature.toString();
+    sb.append(typeName);
+    return sb.toString();
   }
 
   private String extractTypeName(AstNode astNode) {
@@ -116,7 +117,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   }
 
   private String extractNamespaceSignature(AstNode astNode) {
-    AstNode qualifiedIdentifierNode = astNode.getFirstChild(CSharpKeyword.NAMESPACE).getNextSibling();
+    AstNode qualifiedIdentifierNode = astNode.getFirstChild(CSharpGrammar.QUALIFIED_IDENTIFIER);
     StringBuilder name = new StringBuilder();
     for (AstNode child : qualifiedIdentifierNode.getChildren()) {
       name.append(child.getTokenValue());
