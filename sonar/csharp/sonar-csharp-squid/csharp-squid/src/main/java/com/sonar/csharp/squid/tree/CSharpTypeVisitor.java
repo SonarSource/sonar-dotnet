@@ -48,7 +48,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS,
     CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
 
-  private final List<String> qualifiedIdentifiersStack = Lists.newArrayList();
+  private final List<String> signatures = Lists.newArrayList();
 
   @Override
   public void init() {
@@ -65,16 +65,16 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   public void visitNode(AstNode astNode) {
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       String namespaceName = extractNamespaceSignature(astNode);
-      qualifiedIdentifiersStack.add(namespaceName);
+      signatures.add(namespaceName);
     } else {
-      String typeName = extractTypeName(astNode);
-      qualifiedIdentifiersStack.add(typeName);
+      String signature = extractTypeSignature(astNode);
+      signatures.add(signature);
 
       SourceType type;
       if (astNode.getType().equals(CSharpGrammar.CLASS_DECLARATION)) {
-        type = new SourceClass(currentQualifiedIdentifier(), typeName);
+        type = new SourceClass(currentQualifiedIdentifier(), signature);
       } else {
-        type = new SourceType(currentQualifiedIdentifier(), typeName);
+        type = new SourceType(currentQualifiedIdentifier(), signature);
       }
       type.setMeasure(METRIC_MAP.get(astNode.getType()), 1);
       getContext().addSourceCode(type);
@@ -86,20 +86,31 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     if (!astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       getContext().popSourceCode();
     }
-    qualifiedIdentifiersStack.remove(qualifiedIdentifiersStack.size() - 1);
+    signatures.remove(signatures.size() - 1);
   }
 
   @Override
   public void leaveFile(AstNode astNode) {
-    qualifiedIdentifiersStack.clear();
+    signatures.clear();
   }
 
   private String currentQualifiedIdentifier() {
-    return Joiner.on('.').join(qualifiedIdentifiersStack);
+    return Joiner.on('.').join(signatures);
   }
 
-  private String extractTypeName(AstNode astNode) {
-    return astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenValue();
+  private String extractTypeSignature(AstNode astNode) {
+    String typeName = astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenValue();
+
+    String signature;
+    AstNode typeParameterList = astNode.getFirstChild(CSharpGrammar.TYPE_PARAMETER_LIST);
+    if (typeParameterList != null) {
+      int numberOfParameters = typeParameterList.getFirstChild(CSharpGrammar.TYPE_PARAMETERS).getChildren(CSharpGrammar.TYPE_PARAMETER).size();
+      signature = typeName + "<" + numberOfParameters + ">";
+    } else {
+      signature = typeName;
+    }
+
+    return signature;
   }
 
   private String extractNamespaceSignature(AstNode astNode) {

@@ -21,3 +21,11 @@ line7";
                 Console.WriteLine(strMultiLine);
         }
 }
+
+public class Foo
+{
+}
+
+public class Foo<T>
+{
+}

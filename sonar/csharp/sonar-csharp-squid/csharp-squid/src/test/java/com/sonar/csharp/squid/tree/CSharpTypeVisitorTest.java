@@ -48,7 +48,7 @@ public class CSharpTypeVisitorTest extends RuleTest {
     scanner.scanFile(readFile("/tree/TypesAllInOneFile.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    assertThat(project.getInt(CSharpMetric.CLASSES)).isEqualTo(6);
+    assertThat(project.getInt(CSharpMetric.CLASSES)).isEqualTo(10);
     assertThat(project.getInt(CSharpMetric.INTERFACES)).isEqualTo(1);
     assertThat(project.getInt(CSharpMetric.DELEGATES)).isEqualTo(1);
     assertThat(project.getInt(CSharpMetric.STRUCTS)).isEqualTo(2);
@@ -61,7 +61,11 @@ public class CSharpTypeVisitorTest extends RuleTest {
       "Foo.Bar.Baz.Class1",
       "Foo.Bar.Baz.Class1.Class2",
       "Foo.Bar.Baz.Class1.Class2.Class3",
-      "Foo.Class4");
+      "Foo.Class4",
+      "GenericClass",
+      "GenericClass<1>",
+      "GenericClass<2>",
+      "GenericClass<5>");
 
     Collection<SourceCode> squidTypes = scanner.getIndex().search(new QueryByType(SourceType.class));
     assertThat(keys(squidTypes)).containsOnly(

@@ -32,27 +32,26 @@ import org.sonar.squid.indexer.QueryByType;
 import java.io.File;
 import java.nio.charset.Charset;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpLocVisitorTest {
 
   @Test
-  public void testScanFile() {
+  public void test() {
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
+    scanner.scanFile(readFile("/metric/LinesOfCode.cs"));
+    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+
+    assertThat(project.getInt(CSharpMetric.LINES_OF_CODE)).isEqualTo(21);
+  }
+
+  @Test
+  public void reallife() {
     AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFile(readFile("/metric/Money.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    assertThat(project.getInt(CSharpMetric.LINES_OF_CODE), is(278));
-  }
-
-  @Test
-  public void multiLineToken() {
-    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-    scanner.scanFile(readFile("/metric/locMultiLineToken.cs"));
-    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
-
-    assertThat(project.getInt(CSharpMetric.LINES_OF_CODE), is(15));
+    assertThat(project.getInt(CSharpMetric.LINES_OF_CODE)).isEqualTo(278);
   }
 
   protected File readFile(String path) {

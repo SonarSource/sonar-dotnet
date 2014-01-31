@@ -48,3 +48,19 @@ namespace Foo
     {
     }
 }
+
+public class GenericClass
+{
+}
+
+public class GenericClass<T>
+{
+}
+
+public class GenericClass<T1, T2>
+{
+}
+
+public class GenericClass<T1, T2, T3, T4, T5>
+{
+}
