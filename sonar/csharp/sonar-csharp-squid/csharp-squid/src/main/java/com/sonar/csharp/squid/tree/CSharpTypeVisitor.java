@@ -19,7 +19,9 @@
  */
 package com.sonar.csharp.squid.tree;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
 import com.sonar.csharp.squid.api.source.SourceType;
@@ -30,8 +32,8 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.SquidAstVisitor;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 /**
  * Visitor that creates type resources and computes the number of types. <br/>
@@ -46,9 +48,7 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
     CSharpGrammar.STRUCT_DECLARATION, CSharpMetric.STRUCTS,
     CSharpGrammar.ENUM_DECLARATION, CSharpMetric.ENUMS);
 
-  private String namespaceName;
-  private final Stack<String> namespaceStack = new Stack<String>();
-  private final Stack<String> typeNameStack = new Stack<String>();
+  private final List<String> qualifiedIdentifiersStack = Lists.newArrayList();
 
   @Override
   public void init() {
@@ -64,16 +64,17 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
   @Override
   public void visitNode(AstNode astNode) {
     if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
-      namespaceStack.push(namespaceName);
-      namespaceName = extractNamespaceSignature(astNode);
+      String namespaceName = extractNamespaceSignature(astNode);
+      qualifiedIdentifiersStack.add(namespaceName);
     } else {
       String typeName = extractTypeName(astNode);
-      typeNameStack.push(typeName);
-      SourceType type = null;
+      qualifiedIdentifiersStack.add(typeName);
+
+      SourceType type;
       if (astNode.getType().equals(CSharpGrammar.CLASS_DECLARATION)) {
-        type = new SourceClass(extractTypeSignature(typeName), typeName);
+        type = new SourceClass(currentQualifiedIdentifier(), typeName);
       } else {
-        type = new SourceType(extractTypeSignature(typeName), typeName);
+        type = new SourceType(currentQualifiedIdentifier(), typeName);
       }
       type.setMeasure(METRIC_MAP.get(astNode.getType()), 1);
       getContext().addSourceCode(type);
@@ -82,47 +83,32 @@ public class CSharpTypeVisitor extends SquidAstVisitor<Grammar> {
 
   @Override
   public void leaveNode(AstNode astNode) {
-    if (astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
-      namespaceName = namespaceStack.pop();
-    } else {
+    if (!astNode.is(CSharpGrammar.NAMESPACE_DECLARATION)) {
       getContext().popSourceCode();
-      typeNameStack.pop();
     }
+    qualifiedIdentifiersStack.remove(qualifiedIdentifiersStack.size() - 1);
   }
 
   @Override
   public void leaveFile(AstNode astNode) {
-    namespaceName = null;
-    typeNameStack.clear();
+    qualifiedIdentifiersStack.clear();
   }
 
-  private String extractTypeSignature(String typeName) {
-    StringBuilder sb = new StringBuilder();
-    if (namespaceName != null) {
-      sb.append(namespaceName);
-      sb.append(".");
-    }
-    sb.append(typeName);
-    return sb.toString();
+  private String currentQualifiedIdentifier() {
+    return Joiner.on('.').join(qualifiedIdentifiersStack);
   }
 
   private String extractTypeName(AstNode astNode) {
-    StringBuilder typeName = new StringBuilder();
-    if (!typeNameStack.isEmpty()) {
-      typeName.append(typeNameStack.peek());
-      typeName.append(".");
-    }
-    typeName.append(astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenValue());
-    return typeName.toString();
+    return astNode.getFirstChild(GenericTokenType.IDENTIFIER).getTokenValue();
   }
 
   private String extractNamespaceSignature(AstNode astNode) {
     AstNode qualifiedIdentifierNode = astNode.getFirstChild(CSharpGrammar.QUALIFIED_IDENTIFIER);
-    StringBuilder name = new StringBuilder();
+    StringBuilder sb = new StringBuilder();
     for (AstNode child : qualifiedIdentifierNode.getChildren()) {
-      name.append(child.getTokenValue());
+      sb.append(child.getTokenValue());
     }
-    return name.toString();
+    return sb.toString();
   }
 
 }

@@ -19,6 +19,7 @@
  */
 package com.sonar.csharp.squid.tree;
 
+import com.google.common.collect.ImmutableList;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceClass;
@@ -28,7 +29,6 @@ import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
-import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceProject;
@@ -38,9 +38,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Collection;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isOneOf;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpTypeVisitorTest extends RuleTest {
 
@@ -50,37 +48,36 @@ public class CSharpTypeVisitorTest extends RuleTest {
     scanner.scanFile(readFile("/tree/TypesAllInOneFile.cs"));
     SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    assertThat(project.getInt(CSharpMetric.CLASSES), is(2));
-    assertThat(project.getInt(CSharpMetric.INTERFACES), is(1));
-    assertThat(project.getInt(CSharpMetric.DELEGATES), is(1));
-    assertThat(project.getInt(CSharpMetric.STRUCTS), is(2));
-    assertThat(project.getInt(CSharpMetric.ENUMS), is(1));
-
-    Collection<SourceCode> squidClasses = scanner.getIndex().search(new QueryByType(SourceType.class));
-    Matcher<String> classesKeys = isOneOf("Foo.Class", "Foo.Class.InnerStruct", "Foo.Struct", "Foo.Struct.InnerClass", "Foo.Enum",
-      "Bar.Interface", "Bar.Delegate");
-    for (SourceCode sourceCode : squidClasses) {
-      assertThat(sourceCode.getKey(), classesKeys);
-    }
-  }
-
-  /**
-   * SONARDOTNT-382
-   */
-  @Test
-  public void should_handle_nested_namespaces() {
-    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
-    scanner.scanFile(readFile("/tree/NestedNamespace.cs"));
-    scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+    assertThat(project.getInt(CSharpMetric.CLASSES)).isEqualTo(6);
+    assertThat(project.getInt(CSharpMetric.INTERFACES)).isEqualTo(1);
+    assertThat(project.getInt(CSharpMetric.DELEGATES)).isEqualTo(1);
+    assertThat(project.getInt(CSharpMetric.STRUCTS)).isEqualTo(2);
+    assertThat(project.getInt(CSharpMetric.ENUMS)).isEqualTo(1);
 
     Collection<SourceCode> squidClasses = scanner.getIndex().search(new QueryByType(SourceClass.class));
-    Matcher<String> classesKeys = isOneOf("Namespace1.ClassBeforeNestedNamespace1",
-      "NestedNamespace1.ClassInsideNestedNamespace1",
-      "Namespace1.ClassAfterNestedNamespace1");
-    assertThat(squidClasses.size(), is(3));
-    for (SourceCode sourceCode : squidClasses) {
-      assertThat(sourceCode.getKey(), classesKeys);
+    assertThat(keys(squidClasses)).containsOnly(
+      "Foo.Class",
+      "Foo.Struct.InnerClass",
+      "Foo.Bar.Baz.Class1",
+      "Foo.Bar.Baz.Class1.Class2",
+      "Foo.Bar.Baz.Class1.Class2.Class3",
+      "Foo.Class4");
+
+    Collection<SourceCode> squidTypes = scanner.getIndex().search(new QueryByType(SourceType.class));
+    assertThat(keys(squidTypes)).containsOnly(
+      "Foo.Class.InnerStruct",
+      "Foo.Struct",
+      "Foo.Enum",
+      "Bar.Interface",
+      "Bar.Delegate");
+  }
+
+  public Collection<String> keys(Collection<SourceCode> squidClasses) {
+    ImmutableList.Builder<String> builder = ImmutableList.builder();
+    for (SourceCode squidClass : squidClasses) {
+      builder.add(squidClass.getKey());
     }
+    return builder.build();
   }
 
   protected File readFile(String path) {
