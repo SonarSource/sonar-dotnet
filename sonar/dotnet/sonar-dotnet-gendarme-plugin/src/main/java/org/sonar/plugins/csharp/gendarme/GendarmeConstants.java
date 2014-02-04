@@ -24,9 +24,6 @@ package org.sonar.plugins.csharp.gendarme;
  */
 public final class GendarmeConstants {
 
-  private GendarmeConstants() {
-  }
-
   public static final String REPOSITORY_KEY = "gendarme";
   public static final String TEST_REPOSITORY_KEY = "gendarme-test";
   public static final String REPOSITORY_NAME = "Gendarme";
@@ -53,5 +50,8 @@ public final class GendarmeConstants {
   public static final String MODE = "sonar.gendarme.mode";
 
   public static final String REPORTS_PATH_KEY = "sonar.gendarme.reports.path";
+
+  private GendarmeConstants() {
+  }
 
 }

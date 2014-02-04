@@ -24,9 +24,6 @@ package org.sonar.plugins.csharp.fxcop;
  */
 public final class FxCopConstants {
 
-  private FxCopConstants() {
-  }
-
   public static final String REPOSITORY_KEY = "fxcop";
   public static final String TEST_REPOSITORY_KEY = "fxcop-test";
   public static final String REPOSITORY_NAME = "FxCop";
@@ -54,5 +51,8 @@ public final class FxCopConstants {
   public static final String MODE = "sonar.fxcop.mode";
 
   public static final String REPORTS_PATH_KEY = "sonar.fxcop.reports.path";
+
+  private FxCopConstants() {
+  }
 
 }

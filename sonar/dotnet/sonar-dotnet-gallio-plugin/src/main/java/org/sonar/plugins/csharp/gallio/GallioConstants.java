@@ -26,9 +26,6 @@ import org.sonar.dotnet.tools.gallio.GallioRunnerConstants;
  */
 public final class GallioConstants {
 
-  private GallioConstants() {
-  }
-
   public static final String BARRIER_GALLIO_EXECUTED = "Gallio executed";
 
   public static final String GALLIO_REPORT_XML = "gallio-report.xml";
@@ -91,6 +88,9 @@ public final class GallioConstants {
   public static final String IT_REPORTS_COVERAGE_PATH_KEY = "sonar.gallio.it.coverage.reports.path";
 
   public static final String IT_TEST_ASSEMBLIES_KEY = "sonar.dotnet.it.assemblies";
+
+  private GallioConstants() {
+  }
 
   //
   // Utility method

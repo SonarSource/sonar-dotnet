@@ -29,9 +29,6 @@ import java.util.Map;
  */
 public final class DotNetConstants {
 
-  private DotNetConstants() {
-  }
-
   public static final String CORE_PLUGIN_EXECUTED = "Core executed";
 
   // ----------- Plugin Configuration Properties ----------- //
@@ -95,9 +92,12 @@ public final class DotNetConstants {
 
   public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
 
+  private DotNetConstants() {
+  }
+
   /**
    * Returns the config key that will allow to retrieve the .NET SDK directory from the plugin configuration.
-   * 
+   *
    * @param sdkVersion
    *          the wanted .NET version (2.5, 3.0, 4.0 or 4.5)
    * @return the config key
@@ -108,7 +108,7 @@ public final class DotNetConstants {
 
   /**
    * Returns the config key that will allow to retrieve the Silverlight directory from the plugin configuration.
-   * 
+   *
    * @param silverlightVersion
    *          the wanted Silverlight version (3, 4 or 5)
    * @return the config key
