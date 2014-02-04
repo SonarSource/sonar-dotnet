@@ -62,7 +62,7 @@ public class CSharpProjectInitializerTest {
   @Test
   public void shouldSetEncodingAndDefaultExcludes() throws Exception {
     initializer.execute(project);
-    assertThat(settings.getString("sonar.sourceEncoding"), is("UTF-8"));
+    assertThat(settings.getString("sonar.sourceEncoding")).isNull();
     assertThat(settings.getStringArray("sonar.exclusions"), is(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
   }
 
@@ -78,7 +78,6 @@ public class CSharpProjectInitializerTest {
   public void shouldNotSetDefaultExclusions() throws Exception {
     settings.setProperty("sonar.dotnet.excludeGeneratedCode", false);
     initializer.execute(project);
-    assertThat(settings.getString("sonar.sourceEncoding"), is("UTF-8"));
     assertThat(settings.getStringArray("sonar.exclusions"), is(new String[0]));
   }
 
@@ -86,7 +85,6 @@ public class CSharpProjectInitializerTest {
   public void shouldAddExclusions() throws Exception {
     settings.setProperty("sonar.exclusions", "Foo.cs,**/Bar.cs");
     initializer.execute(project);
-    assertThat(settings.getString("sonar.sourceEncoding"), is("UTF-8"));
     String[] exclusions = settings.getStringArray("sonar.exclusions");
     assertThat(exclusions.length, is(2 + CSharpConstants.DEFAULT_FILES_TO_EXCLUDE.length));
     assertThat(exclusions[0], is("Foo.cs"));

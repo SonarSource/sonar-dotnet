@@ -21,7 +21,6 @@ package org.sonar.plugins.csharp.core;
 
 import com.google.common.base.Joiner;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Initializer;
@@ -36,7 +35,7 @@ import org.sonar.plugins.dotnet.api.DotNetConstants;
 public class CSharpProjectInitializer extends Initializer {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpProjectInitializer.class);
-  private Settings projectSettings;
+  private final Settings projectSettings;
 
   public CSharpProjectInitializer(Settings settings) {
     this.projectSettings = settings;
@@ -49,14 +48,6 @@ public class CSharpProjectInitializer extends Initializer {
 
   @Override
   public void execute(Project project) {
-    if (StringUtils.isBlank(projectSettings.getString("sonar.sourceEncoding"))) {
-      LOG.info("'sonar.sourceEncoding' has not been defined: setting it to default value 'UTF-8'.");
-      projectSettings.setProperty("sonar.sourceEncoding", "UTF-8");
-
-      // To be removed
-      setPropertyOnDeprecatedConfiguration(project, "sonar.sourceEncoding", "UTF-8");
-    }
-
     // Handling exclusions
     if (projectSettings.getBoolean(DotNetConstants.EXCLUDE_GENERATED_CODE_KEY)) {
       String[] exclusions = projectSettings.getStringArray("sonar.exclusions");
