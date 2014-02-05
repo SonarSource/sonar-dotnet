@@ -21,8 +21,6 @@ package org.sonar.plugins.csharp.core;
 
 import com.google.common.base.Joiner;
 import org.apache.commons.lang.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Initializer;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
@@ -34,7 +32,6 @@ import org.sonar.plugins.dotnet.api.DotNetConstants;
  */
 public class CSharpProjectInitializer extends Initializer {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CSharpProjectInitializer.class);
   private final Settings projectSettings;
 
   public CSharpProjectInitializer(Settings settings) {

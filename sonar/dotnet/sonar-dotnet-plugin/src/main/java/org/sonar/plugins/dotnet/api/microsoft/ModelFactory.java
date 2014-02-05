@@ -235,7 +235,7 @@ public final class ModelFactory {
    * @throws DotNetException
    */
   private static List<VisualStudioProject> getProjects(File solutionFile, String solutionContent, List<BuildConfiguration> buildConfigurations)
-      throws IOException, DotNetException {
+    throws IOException, DotNetException {
 
     File baseDirectory = solutionFile.getParentFile();
 
@@ -318,7 +318,7 @@ public final class ModelFactory {
    *           if the file was not found
    */
   public static VisualStudioProject getProject(File projectFile, String projectName, List<BuildConfiguration> buildConfigurations)
-      throws FileNotFoundException, DotNetException {
+    throws FileNotFoundException, DotNetException {
 
     VisualStudioProject project = new VisualStudioProject();
     project.setProjectFile(projectFile);
@@ -443,7 +443,7 @@ public final class ModelFactory {
   }
 
   public static VisualStudioProject getWebProject(File solutionRoot, File projectRoot, String projectName, String definition)
-      throws FileNotFoundException {
+    throws FileNotFoundException {
 
     // We define the namespace prefix for Visual Studio
     VisualStudioProject project = new VisualStudioWebProject();
@@ -556,6 +556,7 @@ public final class ModelFactory {
      * @param prefix
      * @return
      */
+    @Override
     public String getNamespaceURI(String prefix) {
       if (prefix == null) {
         throw new IllegalStateException("Null prefix");
@@ -573,11 +574,13 @@ public final class ModelFactory {
     }
 
     // This method isn't necessary for XPath processing.
+    @Override
     public String getPrefix(String uri) {
       throw new UnsupportedOperationException();
     }
 
     // This method isn't necessary for XPath processing either.
+    @Override
     public Iterator<?> getPrefixes(String uri) {
       throw new UnsupportedOperationException();
     }

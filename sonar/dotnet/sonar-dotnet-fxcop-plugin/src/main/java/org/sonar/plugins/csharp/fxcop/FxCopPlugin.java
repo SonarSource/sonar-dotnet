@@ -62,6 +62,7 @@ public class FxCopPlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     // sensors
@@ -88,4 +89,5 @@ public class FxCopPlugin extends SonarPlugin {
 
     return list;
   }
+
 }

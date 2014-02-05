@@ -59,7 +59,7 @@ public class StyleCopResultParser implements BatchExtension {
 
   /**
    * Constructs a @link{StyleCopResultParser}.
-   * 
+   *
    * @param project
    * @param context
    * @param rulesManager
@@ -75,7 +75,7 @@ public class StyleCopResultParser implements BatchExtension {
 
   /**
    * Parses a processed violation file.
-   * 
+   *
    * @param file
    *          the file to parse
    */
@@ -101,9 +101,9 @@ public class StyleCopResultParser implements BatchExtension {
     // Cursor in on <Violations>
     VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject(project.getName());
     String repositoryKey =
-        vsProject.isTest() ? StyleCopConstants.TEST_REPOSITORY_KEY : StyleCopConstants.REPOSITORY_KEY;
+      vsProject.isTest() ? StyleCopConstants.TEST_REPOSITORY_KEY : StyleCopConstants.REPOSITORY_KEY;
     RuleQuery ruleQuery = RuleQuery.create().withRepositoryKey(repositoryKey);
-    StringBuffer configKey = new StringBuffer();
+    StringBuilder configKey = new StringBuilder();
     while (violationsCursor.getNext() != null) {
       configKey.setLength(0);
       configKey.append(violationsCursor.getAttrValue("RuleNamespace"));
@@ -135,7 +135,8 @@ public class StyleCopResultParser implements BatchExtension {
         violation.setLineId(Integer.parseInt(lineNumber));
       }
       violation.setMessage(violationsCursor.collectDescendantText().trim());
-      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
+      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar
+      // 3.6+)
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {
