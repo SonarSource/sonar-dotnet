@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp.fxcop;
 
-import org.sonar.api.Extension;
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -30,7 +30,6 @@ import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfileCSharp;
 import org.sonar.plugins.csharp.fxcop.profiles.SonarWayProfileVbNet;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,25 +62,23 @@ public class FxCopPlugin extends SonarPlugin {
    * {@inheritDoc}
    */
   @Override
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    // sensors
-    list.add(FxCopSensor.CSharpRegularFxCopSensor.class);
-    list.add(FxCopSensor.VbNetRegularFxCopSensor.class);
+  public List getExtensions() {
+    return ImmutableList.of(
+      // sensors
+      FxCopSensor.CSharpRegularFxCopSensor.class,
+      FxCopSensor.VbNetRegularFxCopSensor.class,
 
-    // Rules and profiles
-    list.add(FxCopRuleRepositoryProvider.class);
-    list.add(FxCopProfileExporter.CSharpRegularFxCopProfileExporter.class);
-    list.add(FxCopProfileExporter.VbNetRegularFxCopProfileExporter.class);
-    list.add(FxCopProfileImporter.CSharpRegularFxCopProfileImporter.class);
-    list.add(FxCopProfileImporter.VbNetRegularFxCopProfileImporter.class);
-    list.add(SonarWayProfileCSharp.class);
-    list.add(SonarWayProfileVbNet.class);
+      // Rules and profiles
+      FxCopRuleRepositoryProvider.class,
+      FxCopProfileExporter.CSharpRegularFxCopProfileExporter.class,
+      FxCopProfileExporter.VbNetRegularFxCopProfileExporter.class,
+      FxCopProfileImporter.CSharpRegularFxCopProfileImporter.class,
+      FxCopProfileImporter.VbNetRegularFxCopProfileImporter.class,
+      SonarWayProfileCSharp.class,
+      SonarWayProfileVbNet.class,
 
-    // Running FxCop
-    list.add(FxCopResultParser.class);
-
-    return list;
+      // Running FxCop
+      FxCopResultParser.class);
   }
 
 }
