@@ -24,13 +24,13 @@ package org.sonar.dotnet.tools.gallio;
  */
 public final class GallioRunnerConstants {
 
-  private GallioRunnerConstants() {
-  }
-
   public static final String COVERAGE_TOOL_NONE_KEY = "none";
   public static final String COVERAGE_TOOL_PARTCOVER_KEY = "PartCover";
   public static final String COVERAGE_TOOL_DOTCOVER_KEY = "dotCover";
   public static final String COVERAGE_TOOL_NCOVER_KEY = "NCover";
   public static final String COVERAGE_TOOL_OPENCOVER_KEY = "OpenCover";
+
+  private GallioRunnerConstants() {
+  }
 
 }

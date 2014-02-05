@@ -21,9 +21,6 @@ package org.sonar.plugins.csharp.squid;
 
 public final class CSharpSquidConstants {
 
-  private CSharpSquidConstants() {
-  }
-
   public static final String REPOSITORY_KEY = "csharpsquid";
   public static final String REPOSITORY_NAME = "SonarQube";
 
@@ -31,5 +28,8 @@ public final class CSharpSquidConstants {
   public static final String CPD_IGNORE_LITERALS_PROPERTY = "sonar.cpd.cs.ignoreLiteral";
   public static final boolean CPD_IGNORE_LITERALS_DEFVALUE = true;
   public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
+
+  private CSharpSquidConstants() {
+  }
 
 }

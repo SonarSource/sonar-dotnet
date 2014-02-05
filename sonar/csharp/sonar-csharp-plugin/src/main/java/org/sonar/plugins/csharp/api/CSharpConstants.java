@@ -25,9 +25,6 @@ package org.sonar.plugins.csharp.api;
  */
 public final class CSharpConstants {
 
-  private CSharpConstants() {
-  }
-
   public static final String LANGUAGE_KEY = "cs";
   public static final String LANGUAGE_NAME = "C#";
 
@@ -37,5 +34,8 @@ public final class CSharpConstants {
   public static final String CSHARP_WAY_PROFILE = "Sonar way";
 
   public static final String[] DEFAULT_FILES_TO_EXCLUDE = new String[] {"**/Reference.cs", "**/*.designer.cs", "**/*.Designer.cs", "**/*.g.cs"};
+
+  private CSharpConstants() {
+  }
 
 }

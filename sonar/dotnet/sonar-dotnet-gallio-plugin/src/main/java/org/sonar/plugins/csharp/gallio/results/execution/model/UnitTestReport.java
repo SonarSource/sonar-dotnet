@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * A report for a unit test file.
- * 
+ *
  * @author Jose CHILLAN Apr 28, 2009
  */
 public class UnitTestReport {
@@ -41,16 +41,16 @@ public class UnitTestReport {
   private int timeMS = 0;
   private int failures = 0;
   private int asserts;
-  private List<TestCaseDetail> details;
+  private final List<TestCaseDetail> details;
+
+  public UnitTestReport() {
+    details = new ArrayList<TestCaseDetail>();
+  }
 
   public void merge(UnitTestReport report) {
     for (TestCaseDetail detail : report.details) {
       addDetail(detail);
     }
-  }
-
-  public UnitTestReport() {
-    details = new ArrayList<TestCaseDetail>();
   }
 
   public int getErrors() {
@@ -133,7 +133,7 @@ public class UnitTestReport {
 
   /**
    * Returns the assemblyName.
-   * 
+   *
    * @return The assemblyName to return.
    */
   public String getAssemblyName() {
@@ -142,7 +142,7 @@ public class UnitTestReport {
 
   /**
    * Sets the assemblyName.
-   * 
+   *
    * @param assemblyName
    *          The assemblyName to set.
    */
@@ -152,7 +152,7 @@ public class UnitTestReport {
 
   /**
    * Returns the sourceFile.
-   * 
+   *
    * @return The sourceFile to return.
    */
   public File getSourceFile() {
@@ -161,7 +161,7 @@ public class UnitTestReport {
 
   /**
    * Sets the sourceFile.
-   * 
+   *
    * @param sourceFile
    *          The sourceFile to set.
    */
@@ -179,12 +179,12 @@ public class UnitTestReport {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((assemblyName == null) ? 0 : assemblyName.hashCode());
+    result = prime * result + (assemblyName == null ? 0 : assemblyName.hashCode());
     result = prime * result + asserts;
     result = prime * result + errors;
     result = prime * result + failures;
     result = prime * result + skipped;
-    result = prime * result + ((sourceFile == null) ? 0 : sourceFile.hashCode());
+    result = prime * result + (sourceFile == null ? 0 : sourceFile.hashCode());
     result = prime * result + tests;
     result = prime * result + timeMS;
     return result;
@@ -193,35 +193,49 @@ public class UnitTestReport {
   @Override
   @SuppressWarnings("all")
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     UnitTestReport other = (UnitTestReport) obj;
     if (assemblyName == null) {
-      if (other.assemblyName != null)
+      if (other.assemblyName != null) {
         return false;
-    } else if (!assemblyName.equals(other.assemblyName))
+      }
+    } else if (!assemblyName.equals(other.assemblyName)) {
       return false;
-    if (asserts != other.asserts)
+    }
+    if (asserts != other.asserts) {
       return false;
-    if (errors != other.errors)
+    }
+    if (errors != other.errors) {
       return false;
-    if (failures != other.failures)
+    }
+    if (failures != other.failures) {
       return false;
-    if (skipped != other.skipped)
+    }
+    if (skipped != other.skipped) {
       return false;
+    }
     if (sourceFile == null) {
-      if (other.sourceFile != null)
+      if (other.sourceFile != null) {
         return false;
-    } else if (!sourceFile.equals(other.sourceFile))
+      }
+    } else if (!sourceFile.equals(other.sourceFile)) {
       return false;
-    if (tests != other.tests)
+    }
+    if (tests != other.tests) {
       return false;
-    if (timeMS != other.timeMS)
+    }
+    if (timeMS != other.timeMS) {
       return false;
+    }
     return true;
   }
+
 }

@@ -92,6 +92,25 @@ public final class DotNetConstants {
 
   public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
 
+  private static Map<String, String> dotnetFrameworkLocationKeys;
+  private static Map<String, String> silverlightFrameworkLocationKeys;
+
+  static {
+    // === .NET Framework ===
+    dotnetFrameworkLocationKeys = Maps.newHashMap();
+    dotnetFrameworkLocationKeys.put("2.0", DOTNET_2_0_SDK_DIR_KEY);
+    dotnetFrameworkLocationKeys.put("3.5", DOTNET_3_5_SDK_DIR_KEY);
+    dotnetFrameworkLocationKeys.put("4.0", DOTNET_4_0_SDK_DIR_KEY);
+    // .NET 4.5 is installed in the same folder as 4.0
+    dotnetFrameworkLocationKeys.put("4.5", DOTNET_4_0_SDK_DIR_KEY);
+
+    // === Silverlight ===
+    silverlightFrameworkLocationKeys = Maps.newHashMap();
+    silverlightFrameworkLocationKeys.put("3", SILVERLIGHT_3_MSCORLIB_LOCATION_KEY);
+    silverlightFrameworkLocationKeys.put("4", SILVERLIGHT_4_MSCORLIB_LOCATION_KEY);
+    silverlightFrameworkLocationKeys.put("5", SILVERLIGHT_5_MSCORLIB_LOCATION_KEY);
+  }
+
   private DotNetConstants() {
   }
 
@@ -115,25 +134,6 @@ public final class DotNetConstants {
    */
   public static String getSilverlightDirKey(String silverlightVersion) {
     return silverlightFrameworkLocationKeys.get(silverlightVersion);
-  }
-
-  private static Map<String, String> dotnetFrameworkLocationKeys;
-  private static Map<String, String> silverlightFrameworkLocationKeys;
-
-  static {
-    // === .NET Framework ===
-    dotnetFrameworkLocationKeys = Maps.newHashMap();
-    dotnetFrameworkLocationKeys.put("2.0", DOTNET_2_0_SDK_DIR_KEY);
-    dotnetFrameworkLocationKeys.put("3.5", DOTNET_3_5_SDK_DIR_KEY);
-    dotnetFrameworkLocationKeys.put("4.0", DOTNET_4_0_SDK_DIR_KEY);
-    // .NET 4.5 is installed in the same folder as 4.0
-    dotnetFrameworkLocationKeys.put("4.5", DOTNET_4_0_SDK_DIR_KEY);
-
-    // === Silverlight ===
-    silverlightFrameworkLocationKeys = Maps.newHashMap();
-    silverlightFrameworkLocationKeys.put("3", SILVERLIGHT_3_MSCORLIB_LOCATION_KEY);
-    silverlightFrameworkLocationKeys.put("4", SILVERLIGHT_4_MSCORLIB_LOCATION_KEY);
-    silverlightFrameworkLocationKeys.put("5", SILVERLIGHT_5_MSCORLIB_LOCATION_KEY);
   }
 
 }

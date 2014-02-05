@@ -35,12 +35,20 @@ public class GallioException extends DotNetException {
 
   /**
    * Creates a new exception with the message corresponding to the given exit code.
-   * 
+   *
    * @param exitCode
    *          the exit code
    */
   public GallioException(int exitCode) {
     super("Gallio analysis failed: " + getSpecificMessage(exitCode));
+  }
+
+  public GallioException(String message) {
+    super(message);
+  }
+
+  public GallioException(String message, Throwable cause) {
+    super(message, cause);
   }
 
   private static String getSpecificMessage(int exitCode) {
@@ -61,20 +69,6 @@ public class GallioException extends DotNetException {
         break;
     }
     return specificMessage;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public GallioException(String message) {
-    super(message);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public GallioException(String message, Throwable cause) {
-    super(message, cause);
   }
 
 }

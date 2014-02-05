@@ -34,12 +34,20 @@ public class GendarmeException extends DotNetException {
 
   /**
    * Creates a new exception with the message corresponding to the given exit code.
-   * 
+   *
    * @param exitCode
    *          the exit code
    */
   public GendarmeException(int exitCode) {
     super("Gendarme analysis failed: " + getSpecificMessage(exitCode));
+  }
+
+  public GendarmeException(String message) {
+    super(message);
+  }
+
+  public GendarmeException(String message, Throwable cause) {
+    super(message, cause);
   }
 
   private static String getSpecificMessage(int exitCode) {
@@ -58,20 +66,6 @@ public class GendarmeException extends DotNetException {
         break;
     }
     return specificMessage;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public GendarmeException(String message) {
-    super(message);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  public GendarmeException(String message, Throwable cause) {
-    super(message, cause);
   }
 
 }

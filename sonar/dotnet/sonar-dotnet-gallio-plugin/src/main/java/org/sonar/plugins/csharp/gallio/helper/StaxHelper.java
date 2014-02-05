@@ -31,15 +31,15 @@ import javax.xml.stream.events.XMLEvent;
 
 /**
  * This class was made to avoid try/catch blocks everywhere for the XMLStreamException when collecting data and manipulating cursors
- * 
+ *
  * @author Maxime SCHNEIDER-DUFEUTRELLE January 31, 2011
  */
 public final class StaxHelper {
 
+  private static final Logger LOG = LoggerFactory.getLogger(StaxHelper.class);
+
   private StaxHelper() {
   }
-
-  private static final Logger LOG = LoggerFactory.getLogger(StaxHelper.class);
 
   /**
    * Retrieve the value of the given name attribute

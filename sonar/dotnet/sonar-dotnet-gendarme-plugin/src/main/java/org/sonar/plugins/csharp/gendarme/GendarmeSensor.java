@@ -56,15 +56,15 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(GendarmeSensor.class);
 
-  private ProjectFileSystem fileSystem;
-  private RulesProfile rulesProfile;
-  private GendarmeProfileExporter profileExporter;
-  private GendarmeResultParser gendarmeResultParser;
+  private final ProjectFileSystem fileSystem;
+  private final RulesProfile rulesProfile;
+  private final GendarmeProfileExporter profileExporter;
+  private final GendarmeResultParser gendarmeResultParser;
 
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class CSharpRegularGendarmeSensor extends GendarmeSensor {
     public CSharpRegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter profileExporter,
-        GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -80,7 +80,7 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class VbNetRegularGendarmeSensor extends GendarmeSensor {
     public VbNetRegularGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter profileExporter,
-        GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -97,7 +97,7 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class UnitTestsGendarmeSensor extends GendarmeSensor {
     public UnitTestsGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.UnitTestsGendarmeProfileExporter profileExporter,
-        GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -119,16 +119,8 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected boolean isCilSensor() {
-    return true;
-  }
-
-  /**
    * Constructs a {@link GendarmeSensor}.
-   * 
+   *
    * @param fileSystem
    * @param ruleFinder
    * @param gendarmeRunner
@@ -136,7 +128,7 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
    * @param rulesProfile
    */
   protected GendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter profileExporter,
-      GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "Gendarme", configuration.getString(GendarmeConstants.MODE));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
@@ -147,6 +139,15 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
   /**
    * {@inheritDoc}
    */
+  @Override
+  protected boolean isCilSensor() {
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void analyse(Project project, SensorContext context) {
 
     final Collection<File> reportFiles;
@@ -166,7 +167,7 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
       // run Gendarme
       try {
         File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-            .getWorkingDirectory());
+          .getWorkingDirectory());
         GendarmeRunner runner = GendarmeRunner.create(configuration.getString(GendarmeConstants.INSTALL_DIR_KEY), tempDir.getAbsolutePath());
 
         launchGendarme(project, runner, gendarmeConfigFile);

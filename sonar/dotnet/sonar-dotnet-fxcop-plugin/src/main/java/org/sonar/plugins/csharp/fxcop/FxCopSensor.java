@@ -55,15 +55,15 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(FxCopSensor.class);
 
-  private ProjectFileSystem fileSystem;
-  private RulesProfile rulesProfile;
-  private FxCopProfileExporter profileExporter;
-  private FxCopResultParser fxCopResultParser;
+  private final ProjectFileSystem fileSystem;
+  private final RulesProfile rulesProfile;
+  private final FxCopProfileExporter profileExporter;
+  private final FxCopResultParser fxCopResultParser;
 
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class CSharpRegularFxCopSensor extends FxCopSensor {
     public CSharpRegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.CSharpRegularFxCopProfileExporter profileExporter,
-        FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -79,7 +79,7 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class VbNetRegularFxCopSensor extends FxCopSensor {
     public VbNetRegularFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.VbNetRegularFxCopProfileExporter profileExporter,
-        FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -96,7 +96,7 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class UnitTestsFxCopSensor extends FxCopSensor {
     public UnitTestsFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.UnitTestsFxCopProfileExporter profileExporter,
-        FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
     }
 
@@ -118,16 +118,8 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
   }
 
   /**
-   * {@inheritDoc}
-   */
-  @Override
-  protected boolean isCilSensor() {
-    return true;
-  }
-
-  /**
    * Constructs a {@link FxCopSensor}.
-   * 
+   *
    * @param fileSystem
    * @param ruleFinder
    * @param fxCopRunner
@@ -135,7 +127,7 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
    * @param rulesProfile
    */
   protected FxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter profileExporter,
-      FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "FxCop", configuration.getString(FxCopConstants.MODE));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
@@ -147,6 +139,15 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
   /**
    * {@inheritDoc}
    */
+  @Override
+  protected boolean isCilSensor() {
+    return true;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void analyse(Project project, SensorContext context) {
 
     final Collection<File> reportFiles;

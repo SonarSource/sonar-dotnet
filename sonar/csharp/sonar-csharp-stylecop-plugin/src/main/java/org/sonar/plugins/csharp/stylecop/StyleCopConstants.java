@@ -25,9 +25,6 @@ package org.sonar.plugins.csharp.stylecop;
  */
 public final class StyleCopConstants {
 
-  private StyleCopConstants() {
-  }
-
   public static final String REPOSITORY_KEY = "stylecop";
   public static final String TEST_REPOSITORY_KEY = "stylecop-test";
   public static final String REPOSITORY_NAME = "StyleCop";
@@ -47,5 +44,8 @@ public final class StyleCopConstants {
   public static final String REPORTS_PATH_KEY = "sonar.stylecop.reports.path";
 
   public static final String ANALYZERS_SETTINGS_PATH_KEY = "sonar.stylecop.analyzers.settings";
+
+  private StyleCopConstants() {
+  }
 
 }
