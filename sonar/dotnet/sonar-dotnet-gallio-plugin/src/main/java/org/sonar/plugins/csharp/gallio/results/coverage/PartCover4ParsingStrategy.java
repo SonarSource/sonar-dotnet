@@ -44,6 +44,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
     setFileTag("File");
   }
 
+  @Override
   public boolean isCompatible(SMInputCursor rootCursor) {
     boolean result = false;
     String version = findAttributeValue(rootCursor, "version");
@@ -64,7 +65,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   /**
    * Parse a method, retrieving all its points
-   * 
+   *
    * @param method
    *          : method to parse
    * @param assemblyName
@@ -72,13 +73,14 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
    * @param sourceFilesById
    *          : map containing the source files
    */
+  @Override
   public void parseMethod(SMInputCursor method) {
 
     if (isAStartElement(method)) {
 
       String lineCount = findAttributeValue(method, "linecount");
       String temporaryFileId = findAttributeValue(method, "fid");
-      boolean areUncoveredLines = (temporaryFileId != null);
+      boolean areUncoveredLines = temporaryFileId != null;
       boolean methodWithPoints = false;
 
       SMInputCursor pointTag = descendantElements(method);
@@ -87,7 +89,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
       while (nextPosition(pointTag) != null) {
         methodWithPoints = true;
-        if (isAStartElement(pointTag) && (findAttributeValue(pointTag, getFileIdPointAttribute()) != null)) {
+        if (isAStartElement(pointTag) && findAttributeValue(pointTag, getFileIdPointAttribute()) != null) {
           CoveragePoint point = createPoint(pointTag);
           points.add(point);
           fid = findAttributeIntValue(pointTag, getFileIdPointAttribute());
@@ -106,7 +108,7 @@ public class PartCover4ParsingStrategy extends PartCoverParsingStrategy {
 
   /**
    * This method is used by PartCover4 to take uncovered lines into account
-   * 
+   *
    * @param lineCount
    * @param fileCoverage
    */

@@ -29,7 +29,7 @@ import java.io.File;
 
 /**
  * Details for a test case.
- * 
+ *
  * @author Jose CHILLAN Jun 16, 2009
  */
 public class TestCaseDetail {
@@ -109,7 +109,7 @@ public class TestCaseDetail {
 
   /**
    * Returns the status.
-   * 
+   *
    * @return The status to return.
    */
   public TestStatus getStatus() {
@@ -118,7 +118,7 @@ public class TestCaseDetail {
 
   /**
    * Sets the status.
-   * 
+   *
    * @param status
    *          The status to set.
    */
@@ -128,7 +128,7 @@ public class TestCaseDetail {
 
   /**
    * Returns the testFile.
-   * 
+   *
    * @return The testFile to return.
    */
   public File getSourceFile() {
@@ -137,7 +137,7 @@ public class TestCaseDetail {
 
   /**
    * Sets the testFile.
-   * 
+   *
    * @param testFile
    *          The testFile to set.
    */
@@ -147,7 +147,7 @@ public class TestCaseDetail {
 
   public String createSourceKey() {
     String path = this.sourceFile.getPath();
-    return ("[" + this.assemblyName + "]" + path);
+    return "[" + this.assemblyName + "]" + path;
   }
 
   public void merge(TestDescription description) {

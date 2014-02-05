@@ -56,7 +56,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TestReportSensor.class);
 
-  private GallioResultParser parser;
+  private final GallioResultParser parser;
 
   /**
    * Constructs a {@link TestReportSensor}.
@@ -66,7 +66,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
    * @param microsoftWindowsEnvironment
    */
   public TestReportSensor(DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
-      GallioResultParser parser) {
+    GallioResultParser parser) {
     super(configuration, microsoftWindowsEnvironment, "Gallio Report Parser", configuration.getString(GallioConstants.MODE));
     this.parser = parser;
   }
@@ -90,6 +90,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void analyse(Project project, SensorContext context) {
     Collection<File> testReportFiles = findTestReportsToAnalyse();
     if (testReportFiles.isEmpty()) {
@@ -176,7 +177,7 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
         saveFileMeasure(testFile, context, TestMetrics.COUNT_ASSERTS, testReport.getAsserts());
         int passedTests = testsCount - testReport.getErrors() - testReport.getFailures();
         if (testsCount > 0) {
-          double percentage = (float) passedTests * 100 / (float) testsCount;
+          double percentage = (float) passedTests * 100 / testsCount;
           saveFileMeasure(testFile, context, CoreMetrics.TEST_SUCCESS_DENSITY, ParsingUtils.scaleValue(percentage));
         }
         saveTestsDetails(testFile, context, testReport);
@@ -208,13 +209,13 @@ public class TestReportSensor extends AbstractRegularDotNetSensor {
     List<TestCaseDetail> details = fileReport.getDetails();
     for (TestCaseDetail detail : details) {
       testCaseDetails.append("<testcase status=\"").append(detail.getStatus().getSonarStatus()).append("\" time=\"")
-          .append(detail.getTimeMillis()).append("\" name=\"").append(detail.getName()).append("\"");
-      boolean isError = (detail.getStatus() == TestStatus.ERROR);
-      if (isError || (detail.getStatus() == TestStatus.FAILED)) {
+        .append(detail.getTimeMillis()).append("\" name=\"").append(detail.getName()).append("\"");
+      boolean isError = detail.getStatus() == TestStatus.ERROR;
+      if (isError || detail.getStatus() == TestStatus.FAILED) {
 
         testCaseDetails.append(">").append(isError ? "<error message=\"" : "<failure message=\"").append(detail.getFormatedErrorMessage())
-            .append("\">").append("<![CDATA[").append(detail.getFormatedStackTrace()).append("]]>")
-            .append(isError ? "</error>" : "</failure>").append("</testcase>");
+          .append("\">").append("<![CDATA[").append(detail.getFormatedStackTrace()).append("]]>")
+          .append(isError ? "</error>" : "</failure>").append("</testcase>");
       } else {
         testCaseDetails.append("/>");
       }

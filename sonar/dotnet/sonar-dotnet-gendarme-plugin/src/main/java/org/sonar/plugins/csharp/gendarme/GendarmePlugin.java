@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp.gendarme;
 
-import org.sonar.api.Extension;
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -32,7 +32,6 @@ import org.sonar.plugins.csharp.gendarme.results.GendarmeResultParser;
 import org.sonar.plugins.csharp.gendarme.results.GendarmeViolationMaker;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,24 +66,24 @@ public class GendarmePlugin extends SonarPlugin {
    * {@inheritDoc}
    */
   @Override
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    // sensors
-    list.add(GendarmeSensor.CSharpRegularGendarmeSensor.class);
-    list.add(GendarmeSensor.VbNetRegularGendarmeSensor.class);
+  public List getExtensions() {
+    return ImmutableList.of(
+      // sensors
+      GendarmeSensor.CSharpRegularGendarmeSensor.class,
+      GendarmeSensor.VbNetRegularGendarmeSensor.class,
 
-    // Rules and profiles
-    list.add(GendarmeRuleRepositoryProvider.class);
-    list.add(GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter.class);
-    list.add(GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter.class);
-    list.add(GendarmeProfileImporter.CSharpRegularGendarmeProfileImporter.class);
-    list.add(GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter.class);
-    list.add(SonarWayProfileCSharp.class);
-    list.add(SonarWayProfileVbNet.class);
+      // Rules and profiles
+      GendarmeRuleRepositoryProvider.class,
+      GendarmeProfileExporter.CSharpRegularGendarmeProfileExporter.class,
+      GendarmeProfileExporter.VbNetRegularGendarmeProfileExporter.class,
+      GendarmeProfileImporter.CSharpRegularGendarmeProfileImporter.class,
+      GendarmeProfileImporter.VbNetRegularGendarmeProfileImporter.class,
+      SonarWayProfileCSharp.class,
+      SonarWayProfileVbNet.class,
 
-    // Running Gendarme
-    list.add(GendarmeResultParser.class);
-    list.add(GendarmeViolationMaker.class);
-    return list;
+      // Running Gendarme
+      GendarmeResultParser.class,
+      GendarmeViolationMaker.class);
   }
+
 }

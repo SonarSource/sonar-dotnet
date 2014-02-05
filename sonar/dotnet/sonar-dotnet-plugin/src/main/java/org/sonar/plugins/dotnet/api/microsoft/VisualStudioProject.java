@@ -478,7 +478,7 @@ public class VisualStudioProject {
   }
 
   public boolean isWebProject() {
-    return (projectFile == null);
+    return projectFile == null;
   }
 
   /**

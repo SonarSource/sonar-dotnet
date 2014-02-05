@@ -20,7 +20,7 @@
 
 package org.sonar.plugins.csharp.stylecop;
 
-import org.sonar.api.Extension;
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -30,7 +30,6 @@ import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileExporter;
 import org.sonar.plugins.csharp.stylecop.profiles.StyleCopProfileImporter;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,19 +57,18 @@ public class StyleCopPlugin extends SonarPlugin {
    * {@inheritDoc}
    */
   @Override
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
-    list.add(StyleCopSensor.RegularStyleCopSensor.class);
+  public List getExtensions() {
+    return ImmutableList.of(
+      StyleCopSensor.RegularStyleCopSensor.class,
 
-    // Rules and profiles
-    list.add(StyleCopRuleRepository.class);
-    list.add(StyleCopProfileImporter.RegularStyleCopProfileImporter.class);
-    list.add(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
-    list.add(SonarWayProfile.class);
+      // Rules and profiles
+      StyleCopRuleRepository.class,
+      StyleCopProfileImporter.RegularStyleCopProfileImporter.class,
+      StyleCopProfileExporter.RegularStyleCopProfileExporter.class,
+      SonarWayProfile.class,
 
-    // Running StyleCop
-    list.add(StyleCopResultParser.class);
-    return list;
+      // Running StyleCop
+      StyleCopResultParser.class);
   }
 
 }
