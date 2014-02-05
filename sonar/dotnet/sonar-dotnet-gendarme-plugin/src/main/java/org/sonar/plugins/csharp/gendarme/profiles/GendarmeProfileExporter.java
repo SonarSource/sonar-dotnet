@@ -52,13 +52,6 @@ public class GendarmeProfileExporter extends ProfileExporter {
     }
   }
 
-  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
-  public static class UnitTestsGendarmeProfileExporter extends GendarmeProfileExporter {
-    public UnitTestsGendarmeProfileExporter() {
-      super("update-when-SONARPLUGINS-929-activated", GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME);
-    }
-  }
-
   protected GendarmeProfileExporter(String languageKey, String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
     setSupportedLanguages(languageKey);

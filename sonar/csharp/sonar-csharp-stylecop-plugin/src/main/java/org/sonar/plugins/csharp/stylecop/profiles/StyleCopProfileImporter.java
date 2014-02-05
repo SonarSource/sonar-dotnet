@@ -43,17 +43,11 @@ import java.util.List;
  */
 public class StyleCopProfileImporter extends ProfileImporter {
 
-  private RuleFinder ruleFinder;
+  private final RuleFinder ruleFinder;
 
   public static class RegularStyleCopProfileImporter extends StyleCopProfileImporter {
     public RegularStyleCopProfileImporter(RuleFinder ruleFinder) {
       super(StyleCopConstants.REPOSITORY_KEY, StyleCopConstants.REPOSITORY_NAME, ruleFinder);
-    }
-  }
-
-  public static class UnitTestsStyleCopProfileImporter extends StyleCopProfileImporter {
-    public UnitTestsStyleCopProfileImporter(RuleFinder ruleFinder) {
-      super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME, ruleFinder);
     }
   }
 

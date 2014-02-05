@@ -93,31 +93,6 @@ public abstract class GendarmeSensor extends AbstractRuleBasedDotNetSensor {
     }
   }
 
-  // Not used for the moment (see SONARPLUGINS-929)
-  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
-  public static class UnitTestsGendarmeSensor extends GendarmeSensor {
-    public UnitTestsGendarmeSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, GendarmeProfileExporter.UnitTestsGendarmeProfileExporter profileExporter,
-      GendarmeResultParser gendarmeResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(fileSystem, rulesProfile, profileExporter, gendarmeResultParser, configuration, microsoftWindowsEnvironment);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String[] getSupportedLanguages() {
-      return new String[] {"cs"};
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isTestSensor() {
-      return true;
-    }
-  }
-
   /**
    * Constructs a {@link GendarmeSensor}.
    *

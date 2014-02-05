@@ -68,12 +68,6 @@ public class StyleCopPlugin extends SonarPlugin {
     list.add(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
     list.add(SonarWayProfile.class);
 
-    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
-    // list.add(StyleCopSensor.UnitTestsStyleCopSensor.class);
-    // list.add(StyleCopUnitTestsRuleRepository.class);
-    // list.add(StyleCopProfileImporter.UnitTestsStyleCopProfileImporter.class);
-    // list.add(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class);
-
     // Running StyleCop
     list.add(StyleCopResultParser.class);
     return list;

@@ -71,12 +71,6 @@ public class StyleCopProfileExporter extends ProfileExporter {
     }
   }
 
-  public static class UnitTestsStyleCopProfileExporter extends StyleCopProfileExporter {
-    public UnitTestsStyleCopProfileExporter() {
-      super(StyleCopConstants.TEST_REPOSITORY_KEY, StyleCopConstants.TEST_REPOSITORY_NAME);
-    }
-  }
-
   protected StyleCopProfileExporter(String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
     setSupportedLanguages(CSharpConstants.LANGUAGE_KEY);
@@ -212,7 +206,7 @@ public class StyleCopProfileExporter extends ProfileExporter {
     }
 
     List<Rule> initialRules = new XMLRuleParser().parse(StyleCopProfileExporter.class
-        .getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules.xml"));
+      .getResourceAsStream("/org/sonar/plugins/csharp/stylecop/rules/rules.xml"));
     for (Rule rule : initialRules) {
       // Extracts the rule's information
       String configKey = rule.getConfigKey();

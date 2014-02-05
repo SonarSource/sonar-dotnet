@@ -43,15 +43,15 @@ import java.util.Map;
 
 /**
  * Class that allows to import Gendarme rule definition files into a Sonar Rule Profile
- * 
+ *
  * Note: the parsing of Gendarme rule file is partial: it uses only the "include" attribute of the "rules" tag in the format "rule1 | rule2"
  * (the wildcard "*" is not supported yet)
  */
 public class GendarmeProfileImporter extends ProfileImporter {
 
-  private RuleFinder ruleFinder;
-  private RuleQuery ruleQuery;
-  private String languageKey;
+  private final RuleFinder ruleFinder;
+  private final RuleQuery ruleQuery;
+  private final String languageKey;
 
   public static class CSharpRegularGendarmeProfileImporter extends GendarmeProfileImporter {
     public CSharpRegularGendarmeProfileImporter(RuleFinder ruleFinder) {
@@ -62,13 +62,6 @@ public class GendarmeProfileImporter extends ProfileImporter {
   public static class VbNetRegularGendarmeProfileImporter extends GendarmeProfileImporter {
     public VbNetRegularGendarmeProfileImporter(RuleFinder ruleFinder) {
       super("vbnet", GendarmeConstants.REPOSITORY_KEY + "-vbnet", GendarmeConstants.REPOSITORY_NAME, ruleFinder);
-    }
-  }
-
-  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
-  public static class UnitTestsGendarmeProfileImporter extends GendarmeProfileImporter {
-    public UnitTestsGendarmeProfileImporter(RuleFinder ruleFinder) {
-      super("update-when-SONARPLUGINS-929-activated", GendarmeConstants.TEST_REPOSITORY_KEY, GendarmeConstants.TEST_REPOSITORY_NAME, ruleFinder);
     }
   }
 
@@ -120,7 +113,7 @@ public class GendarmeProfileImporter extends ProfileImporter {
   }
 
   private void createActiveRule(SMInputCursor rulesCursor, Map<String, ActiveRule> activeRules, String gendarmeCategory,
-      RulesProfile profile, RulePriority rulePriority) throws XMLStreamException {
+    RulesProfile profile, RulePriority rulePriority) throws XMLStreamException {
     String[] includedRules = StringUtils.split(rulesCursor.getAttrValue("include"), '|');
     for (int i = 0; i < includedRules.length; i++) {
       String configKey = includedRules[i].trim() + "@" + gendarmeCategory;
@@ -139,7 +132,7 @@ public class GendarmeProfileImporter extends ProfileImporter {
   }
 
   private void addParametersToActiveRules(SMInputCursor rulesCursor, Map<String, ActiveRule> activeRules, String gendarmeCategory)
-      throws XMLStreamException {
+    throws XMLStreamException {
     SMInputCursor parameterCursor = rulesCursor.childElementCursor();
     while (parameterCursor.getNext() != null) {
       ActiveRule currentRule = activeRules.get(parameterCursor.getAttrValue("rule") + "@" + gendarmeCategory);

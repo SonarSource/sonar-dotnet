@@ -58,38 +58,23 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
   private static final Logger LOG = LoggerFactory.getLogger(StyleCopSensor.class);
   private static final String[] SUPPORTED_LANGUAGES = new String[] {CSharpConstants.LANGUAGE_KEY};
 
-  private ProjectFileSystem fileSystem;
-  private RulesProfile rulesProfile;
-  private StyleCopProfileExporter profileExporter;
-  private StyleCopResultParser styleCopResultParser;
-  private DotNetConfiguration configuration;
+  private final ProjectFileSystem fileSystem;
+  private final RulesProfile rulesProfile;
+  private final StyleCopProfileExporter profileExporter;
+  private final StyleCopResultParser styleCopResultParser;
+  private final DotNetConfiguration configuration;
 
   @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
   public static class RegularStyleCopSensor extends StyleCopSensor {
 
     public RegularStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter,
-        StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+      StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
       super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
-    }
-  }
-
-  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
-  public static class UnitTestsStyleCopSensor extends StyleCopSensor {
-    public UnitTestsStyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile,
-        StyleCopProfileExporter.UnitTestsStyleCopProfileExporter profileExporter,
-        StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-
-      super(fileSystem, rulesProfile, profileExporter, styleCopResultParser, configuration, microsoftWindowsEnvironment);
-    }
-
-    @Override
-    protected boolean isTestSensor() {
-      return true;
     }
   }
 
   protected StyleCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, StyleCopProfileExporter profileExporter,
-      StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    StyleCopResultParser styleCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(configuration, rulesProfile, profileExporter, microsoftWindowsEnvironment, "StyleCop", configuration.getString(StyleCopConstants.MODE));
     this.fileSystem = fileSystem;
     this.rulesProfile = rulesProfile;
@@ -109,6 +94,7 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public void analyse(Project project, SensorContext context) {
 
     final Collection<File> reportFiles;
@@ -129,10 +115,10 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
       // run StyleCop
       try {
         File tempDir = new File(getMicrosoftWindowsEnvironment().getCurrentSolution().getSolutionDir(), getMicrosoftWindowsEnvironment()
-            .getWorkingDirectory());
+          .getWorkingDirectory());
         StyleCopRunner runner = StyleCopRunner.create(
-            configuration.getString(StyleCopConstants.INSTALL_DIR_KEY),
-            getMicrosoftWindowsEnvironment().getDotnetSdkDirectory().getAbsolutePath(), tempDir.getAbsolutePath());
+          configuration.getString(StyleCopConstants.INSTALL_DIR_KEY),
+          getMicrosoftWindowsEnvironment().getDotnetSdkDirectory().getAbsolutePath(), tempDir.getAbsolutePath());
         launchStyleCop(project, runner, styleCopConfigFile);
       } catch (StyleCopException e) {
         throw new SonarException("StyleCop execution failed.", e);
@@ -148,7 +134,7 @@ public class StyleCopSensor extends AbstractRuleBasedDotNetSensor {
 
   protected void launchStyleCop(Project project, StyleCopRunner runner, File styleCopConfigFile) throws StyleCopException {
     StyleCopCommandBuilder builder = runner.createCommandBuilder(getMicrosoftWindowsEnvironment().getCurrentSolution(),
-        getVSProject(project));
+      getVSProject(project));
     builder.setConfigFile(styleCopConfigFile);
     builder.setReportFile(new File(fileSystem.getSonarWorkingDirectory(), StyleCopConstants.STYLECOP_REPORT_XML));
     runner.execute(builder, configuration.getInt(StyleCopConstants.TIMEOUT_MINUTES_KEY));

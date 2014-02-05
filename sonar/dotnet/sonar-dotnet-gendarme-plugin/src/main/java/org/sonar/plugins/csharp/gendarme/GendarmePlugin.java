@@ -82,12 +82,6 @@ public class GendarmePlugin extends SonarPlugin {
     list.add(SonarWayProfileCSharp.class);
     list.add(SonarWayProfileVbNet.class);
 
-    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
-    // list.add(GendarmeSensor.UnitTestsGendarmeSensor.class);
-    // list.add(GendarmeUnitTestsRuleRepository.class);
-    // list.add(GendarmeProfileImporter.UnitTestsGendarmeProfileImporter.class);
-    // list.add(GendarmeProfileExporter.UnitTestsGendarmeProfileExporter.class);
-
     // Running Gendarme
     list.add(GendarmeResultParser.class);
     list.add(GendarmeViolationMaker.class);

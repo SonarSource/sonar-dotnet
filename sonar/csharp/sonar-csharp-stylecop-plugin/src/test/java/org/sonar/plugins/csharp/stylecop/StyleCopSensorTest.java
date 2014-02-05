@@ -76,18 +76,13 @@ public class StyleCopSensorTest {
 
     rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository(anyString()))
-        .thenReturn(Collections.singletonList(new ActiveRule()));
+      .thenReturn(Collections.singletonList(new ActiveRule()));
 
   }
 
   private void initializeSensor() {
     sensor = new StyleCopSensor.RegularStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class), null, conf,
-        microsoftWindowsEnvironment);
-  }
-
-  private void initializeTestSensor() {
-    sensor = new StyleCopSensor.UnitTestsStyleCopSensor(null, rulesProfile, mock(StyleCopProfileExporter.UnitTestsStyleCopProfileExporter.class), null, conf,
-        microsoftWindowsEnvironment);
+      microsoftWindowsEnvironment);
   }
 
   @Test
@@ -124,16 +119,6 @@ public class StyleCopSensorTest {
   }
 
   @Test
-  public void testUnitTestsSensorShouldNotExecuteOnRegularProject() throws Exception {
-    initializeTestSensor();
-
-    when(project.getLanguageKey()).thenReturn("cs");
-    when(project.getName()).thenReturn("Project #1");
-
-    assertFalse(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
   public void testGenerateConfigurationFile() throws Exception {
     File sonarDir = new File("target/sonar");
     sonarDir.mkdirs();
@@ -142,6 +127,7 @@ public class StyleCopSensorTest {
     StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter = mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
     doAnswer(new Answer<Object>() {
 
+      @Override
       public Object answer(InvocationOnMock invocation) throws IOException {
         FileWriter writer = (FileWriter) invocation.getArguments()[1];
         writer.write("Hello");
@@ -164,6 +150,7 @@ public class StyleCopSensorTest {
     StyleCopProfileExporter.RegularStyleCopProfileExporter profileExporter = mock(StyleCopProfileExporter.RegularStyleCopProfileExporter.class);
     doAnswer(new Answer<Object>() {
 
+      @Override
       public Object answer(InvocationOnMock invocation) throws IOException {
         FileWriter writer = (FileWriter) invocation.getArguments()[1];
         writer.write("Hello");
