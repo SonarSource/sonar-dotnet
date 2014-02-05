@@ -41,8 +41,8 @@ import java.util.List;
  */
 public class FxCopProfileImporter extends ProfileImporter {
 
-  private RuleFinder ruleFinder;
-  private String languageKey;
+  private final RuleFinder ruleFinder;
+  private final String languageKey;
 
   public static class CSharpRegularFxCopProfileImporter extends FxCopProfileImporter {
     public CSharpRegularFxCopProfileImporter(RuleFinder ruleFinder) {
@@ -53,13 +53,6 @@ public class FxCopProfileImporter extends ProfileImporter {
   public static class VbNetRegularFxCopProfileImporter extends FxCopProfileImporter {
     public VbNetRegularFxCopProfileImporter(RuleFinder ruleFinder) {
       super("vbnet", FxCopConstants.REPOSITORY_KEY + "-vbnet", FxCopConstants.REPOSITORY_NAME, ruleFinder);
-    }
-  }
-
-  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
-  public static class UnitTestsFxCopProfileImporter extends FxCopProfileImporter {
-    public UnitTestsFxCopProfileImporter(RuleFinder ruleFinder) {
-      super("update-when-SONARPLUGINS-929-activated", FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME, ruleFinder);
     }
   }
 

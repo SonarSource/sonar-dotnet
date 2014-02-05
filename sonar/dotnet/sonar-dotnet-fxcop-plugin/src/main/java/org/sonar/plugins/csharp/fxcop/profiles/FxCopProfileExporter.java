@@ -60,13 +60,6 @@ public class FxCopProfileExporter extends ProfileExporter {
     }
   }
 
-  // Not used for the moment (see SONARPLUGINS-929) - Must be updated with correct language keys when reactivated
-  public static class UnitTestsFxCopProfileExporter extends FxCopProfileExporter {
-    public UnitTestsFxCopProfileExporter() {
-      super("update-when-SONARPLUGINS-929-activated", FxCopConstants.TEST_REPOSITORY_KEY, FxCopConstants.TEST_REPOSITORY_NAME);
-    }
-  }
-
   protected FxCopProfileExporter(String languageKey, String repositoryKey, String repositoryName) {
     super(repositoryKey, repositoryName);
     setSupportedLanguages(languageKey);

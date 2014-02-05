@@ -78,12 +78,6 @@ public class FxCopPlugin extends SonarPlugin {
     list.add(SonarWayProfileCSharp.class);
     list.add(SonarWayProfileVbNet.class);
 
-    // Rules on test sources - deactivated for the moment (see SONARPLUGINS-929)
-    // list.add(FxCopSensor.UnitTestsFxCopSensor.class);
-    // list.add(FxCopUnitTestsRuleRepository.class);
-    // list.add(FxCopProfileImporter.UnitTestsFxCopProfileImporter.class);
-    // list.add(FxCopProfileExporter.UnitTestsFxCopProfileExporter.class);
-
     // Running FxCop
     list.add(FxCopResultParser.class);
 

@@ -92,31 +92,6 @@ public abstract class FxCopSensor extends AbstractRuleBasedDotNetSensor {
     }
   }
 
-  // Not used for the moment (see SONARPLUGINS-929)
-  @DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
-  public static class UnitTestsFxCopSensor extends FxCopSensor {
-    public UnitTestsFxCopSensor(ProjectFileSystem fileSystem, RulesProfile rulesProfile, FxCopProfileExporter.UnitTestsFxCopProfileExporter profileExporter,
-      FxCopResultParser fxCopResultParser, DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
-      super(fileSystem, rulesProfile, profileExporter, fxCopResultParser, configuration, microsoftWindowsEnvironment);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isTestSensor() {
-      return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String[] getSupportedLanguages() {
-      return new String[] {"cs"};
-    }
-  }
-
   /**
    * Constructs a {@link FxCopSensor}.
    *
