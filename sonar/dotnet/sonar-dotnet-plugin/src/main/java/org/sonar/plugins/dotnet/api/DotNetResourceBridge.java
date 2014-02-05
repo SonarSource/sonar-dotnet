@@ -23,7 +23,7 @@ import com.google.common.annotations.Beta;
 import org.sonar.api.resources.Resource;
 
 /**
- * Classes that implement this interface give links between logical resources (types and members) and their enclosing source files. 
+ * Classes that implement this interface give links between logical resources (types and members) and their enclosing source files.
  * <br/>
  * <br/>
  * It is useful when parsing third-party tool reports that contain references to the logical structure of the code: it is then necessary to
@@ -38,30 +38,30 @@ public interface DotNetResourceBridge {
 
   /**
    * Returns the key of the language to which this resource bridge applies
-   * 
+   *
    * @return the key of the language
    */
   String getLanguageKey();
 
   /**
    * Returns the physical file that contains the definition of the type referenced by its namespace and its name.
-   * 
+   *
    * @param namespaceName
    *          the namespace of the type
    * @param typeName
    *          the type name
    * @return the resource that contains this type, or NULL if none
    */
-  Resource<?> getFromTypeName(String namespaceName, String typeName);
+  Resource getFromTypeName(String namespaceName, String typeName);
 
   /**
    * Returns the physical file that contains the definition of the type referenced by its full name.
-   * 
+   *
    * @param typeFullName
    *          the type full name
    * @return the resource that contains this type, or NULL if none
    */
-  Resource<?> getFromTypeName(String typeFullName);
+  Resource getFromTypeName(String typeFullName);
 
   /**
    * /!\ Do not use for the moment! <br>
@@ -69,10 +69,10 @@ public interface DotNetResourceBridge {
    * For the moment, method key ends with ':XXXX', where 'XXXX' is the line number, so this API does not work. <br>
    * <br>
    * TODO: Need to work on that.
-   * 
+   *
    * @param memberFullName
    * @return
    */
-  Resource<?> getFromMemberName(String memberFullName);
+  Resource getFromMemberName(String memberFullName);
 
 }

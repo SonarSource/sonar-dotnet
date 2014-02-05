@@ -20,8 +20,8 @@
 
 package org.sonar.plugins.csharp.core;
 
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.CoreProperties;
-import org.sonar.api.Extension;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -35,7 +35,6 @@ import org.sonar.plugins.csharp.squid.CSharpSquidSensor;
 import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,28 +62,27 @@ public class CSharpCorePlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
    */
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
+  @Override
+  public List getExtensions() {
+    return ImmutableList.of(
+      CSharp.class,
+      CSharpProjectInitializer.class,
 
-    extensions.add(CSharp.class);
-    extensions.add(CSharpProjectInitializer.class);
+      // Sensors
+      CSharpSourceImporter.class,
 
-    // Sensors
-    extensions.add(CSharpSourceImporter.class);
+      // Common Rules
+      CSharpCommonRulesEngineProvider.class,
 
-    // Common Rules
-    extensions.add(CSharpCommonRulesEngineProvider.class);
+      // C# Squid
+      CSharpCPDMapping.class,
+      CSharpSourceCodeColorizer.class,
+      CSharpSquidSensor.class,
+      CSharpResourcesBridge.class,
 
-    // C# Squid
-    extensions.add(CSharpCPDMapping.class);
-    extensions.add(CSharpSourceCodeColorizer.class);
-    extensions.add(CSharpSquidSensor.class);
-    extensions.add(CSharpResourcesBridge.class);
-
-    // rules
-    extensions.add(CSharpRuleRepository.class);
-    extensions.add(CSharpRuleProfile.class);
-    
-    return extensions;
+      // rules
+      CSharpRuleRepository.class,
+      CSharpRuleProfile.class);
   }
+
 }

@@ -43,20 +43,21 @@ public class CSharpConfigurationModel extends AbstractConfigurationModel {
 
   @VisibleForTesting
   ConfigurationProperty charsetProperty = new ConfigurationProperty("Charset", CHARSET_PROPERTY_KEY,
-      getPropertyOrDefaultValue(CHARSET_PROPERTY_KEY, "UTF-8"),
-      Validators.charsetValidator());
+    getPropertyOrDefaultValue(CHARSET_PROPERTY_KEY, "UTF-8"),
+    Validators.charsetValidator());
 
   @Override
   public Charset getCharset() {
     return Charset.forName(charsetProperty.getValue());
   }
 
+  @Override
   public List<ConfigurationProperty> getProperties() {
     return ImmutableList.of(charsetProperty);
   }
 
   @Override
-  public Parser<? extends Grammar> doGetParser() {
+  public Parser<Grammar> doGetParser() {
     return CSharpParser.create(getConfiguration());
   }
 

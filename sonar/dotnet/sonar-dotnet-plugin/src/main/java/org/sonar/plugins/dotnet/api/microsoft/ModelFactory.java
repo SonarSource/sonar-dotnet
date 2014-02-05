@@ -581,7 +581,7 @@ public final class ModelFactory {
 
     // This method isn't necessary for XPath processing either.
     @Override
-    public Iterator<?> getPrefixes(String uri) {
+    public Iterator getPrefixes(String uri) {
       throw new UnsupportedOperationException();
     }
 

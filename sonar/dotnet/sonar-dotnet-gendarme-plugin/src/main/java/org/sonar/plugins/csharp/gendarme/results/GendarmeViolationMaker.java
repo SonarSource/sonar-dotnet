@@ -52,7 +52,7 @@ public class GendarmeViolationMaker implements BatchExtension {
   private DotNetResourceBridge resourceBridge;
   private ResourceHelper resourceHelper;
 
-  private Map<Rule, String> rulesTypeMap = Maps.newHashMap();
+  private final Map<Rule, String> rulesTypeMap = Maps.newHashMap();
   private static final String TYPE_METHOD = "Method";
   private static final String TYPE_ASSEMBLY = "Assembly";
   private Rule currentRule;
@@ -65,7 +65,7 @@ public class GendarmeViolationMaker implements BatchExtension {
 
   /**
    * Constructs a @link{GendarmeResultParser}.
-   * 
+   *
    * @param project
    * @param context
    * @param rulesManager
@@ -87,11 +87,11 @@ public class GendarmeViolationMaker implements BatchExtension {
 
   /**
    * Creates a violation, given the elements that the class has in hands.
-   * 
+   *
    * @return the created violation
    */
   public Violation createViolation() {
-    final Resource<?> resource;
+    final Resource resource;
     Integer line = null;
     if (StringUtils.isEmpty(currentSource)) {
       // No source information, need to detect the corresponding resource through the CSharpResourceBridge
@@ -120,8 +120,8 @@ public class GendarmeViolationMaker implements BatchExtension {
     return createViolationOnResource(resource, line);
   }
 
-  private Resource<?> detectResource() {
-    Resource<?> foundResource = project;
+  private Resource detectResource() {
+    Resource foundResource = project;
     if (TYPE_ASSEMBLY.equals(rulesTypeMap.get(currentRule))) {
       // Do nothing, this will be created on the project
       LOG.trace("Violation on assembly: {}", currentTargetAssembly);
@@ -135,7 +135,7 @@ public class GendarmeViolationMaker implements BatchExtension {
     return foundResource;
   }
 
-  private Resource<?> tryDetection(String resourceIdentifier) {
+  private Resource tryDetection(String resourceIdentifier) {
     // For types, the currentLocation is the key
     String resourceKey = resourceIdentifier.replaceAll("/", ".");
     if (TYPE_METHOD.equals(rulesTypeMap.get(currentRule))) {
@@ -164,7 +164,8 @@ public class GendarmeViolationMaker implements BatchExtension {
     } else {
       violation.setMessage(currentMessage);
     }
-    // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
+    // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar
+    // 3.6+)
     violation.setSeverity(currentRule.getSeverity());
     context.saveViolation(violation);
     return violation;

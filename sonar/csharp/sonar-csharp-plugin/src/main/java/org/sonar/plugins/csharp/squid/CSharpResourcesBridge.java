@@ -43,7 +43,7 @@ import java.util.Set;
 public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBridge {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpResourcesBridge.class);
-  private Map<String, Resource<?>> logicalToPhysicalResourcesMap = Maps.newHashMap();
+  private final Map<String, Resource> logicalToPhysicalResourcesMap = Maps.newHashMap();
 
   private boolean canIndexFiles = true;
 
@@ -64,7 +64,7 @@ public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBrid
    * <br/>
    * <b>Note</b>: If the CSharpResourcesBridge has been locked (see {@link #lock()}), an {@link IllegalStateException} will be thrown if
    * this method is called.
-   * 
+   *
    * @param squidFile
    *          the Squid file
    * @param sonarFile
@@ -78,7 +78,7 @@ public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBrid
       indexChildren(squidFile.getChildren(), sonarFile);
     } else {
       throw new IllegalStateException(
-          "The CSharpResourcesBridge has been locked to prevent future modifications. It is impossible to index new files.");
+        "The CSharpResourcesBridge has been locked to prevent future modifications. It is impossible to index new files.");
     }
   }
 
@@ -95,6 +95,7 @@ public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBrid
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getLanguageKey() {
     return CSharpConstants.LANGUAGE_KEY;
   }
@@ -102,7 +103,8 @@ public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBrid
   /**
    * {@inheritDoc}
    */
-  public Resource<?> getFromTypeName(String namespaceName, String typeName) {
+  @Override
+  public Resource getFromTypeName(String namespaceName, String typeName) {
     StringBuilder typeFullName = new StringBuilder();
     if (!StringUtils.isEmpty(namespaceName)) {
       typeFullName.append(namespaceName);
@@ -115,14 +117,16 @@ public class CSharpResourcesBridge implements BatchExtension, DotNetResourceBrid
   /**
    * {@inheritDoc}
    */
-  public Resource<?> getFromTypeName(String typeFullName) {
+  @Override
+  public Resource getFromTypeName(String typeFullName) {
     return logicalToPhysicalResourcesMap.get(typeFullName);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Resource<?> getFromMemberName(String memberFullName) {
+  @Override
+  public Resource getFromMemberName(String memberFullName) {
     return logicalToPhysicalResourcesMap.get(memberFullName);
   }
 

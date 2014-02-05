@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp.gallio;
 
-import org.sonar.api.Extension;
+import com.google.common.collect.ImmutableList;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -30,7 +30,6 @@ import org.sonar.plugins.csharp.gallio.results.execution.GallioResultParser;
 import org.sonar.plugins.csharp.gallio.ui.GallioRubyWidget;
 import org.sonar.plugins.dotnet.api.sensor.AbstractDotNetSensor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -114,26 +113,26 @@ public class GallioPlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
    */
-  public List<Class<? extends Extension>> getExtensions() {
-    List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
-    extensions.add(TestMetrics.class);
+  @Override
+  public List getExtensions() {
+    return ImmutableList.of(
+      TestMetrics.class,
 
-    // Parser(s)
-    extensions.add(CoverageResultParser.class);
-    extensions.add(GallioResultParser.class);
+      // Parser(s)
+      CoverageResultParser.class,
+      GallioResultParser.class,
 
-    // Sensors
-    extensions.add(GallioSensor.class);
-    extensions.add(TestReportSensor.class);
-    extensions.add(CoverageReportSensor.class);
+      // Sensors
+      GallioSensor.class,
+      TestReportSensor.class,
+      CoverageReportSensor.class,
 
-    // Decorators
-    extensions.add(UnitCoverageDecorator.class);
-    extensions.add(ItCoverageDecorator.class);
+      // Decorators
+      UnitCoverageDecorator.class,
+      ItCoverageDecorator.class,
 
-    // Widget
-    extensions.add(GallioRubyWidget.class);
-
-    return extensions;
+      // Widget
+      GallioRubyWidget.class);
   }
+
 }
