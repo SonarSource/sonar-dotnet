@@ -37,8 +37,11 @@ import java.util.List;
  * Main class of the StyleCop plugin.
  */
 @Properties({
-  @Property(key = StyleCopConstants.INSTALL_DIR_KEY, defaultValue = StyleCopConstants.INSTALL_DIR_DEFVALUE,
-    name = "StyleCop install directory", description = "Absolute path of the StyleCop program install directory.", global = true,
+  @Property(
+    key = StyleCopConstants.INSTALL_DIR_KEY,
+    name = "StyleCop install directory",
+    description = "Absolute path of the Gendarme installation folder. If no path is set, the embedded version of StyleCop is used.",
+    global = true,
     project = false),
   @Property(key = StyleCopConstants.TIMEOUT_MINUTES_KEY, defaultValue = StyleCopConstants.TIMEOUT_MINUTES_DEFVALUE + "",
     name = "StyleCop program timeout", description = "Maximum number of minutes before the StyleCop program will be stopped.",
@@ -54,6 +57,7 @@ public class StyleCopPlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     list.add(StyleCopSensor.RegularStyleCopSensor.class);
@@ -74,4 +78,5 @@ public class StyleCopPlugin extends SonarPlugin {
     list.add(StyleCopResultParser.class);
     return list;
   }
+
 }

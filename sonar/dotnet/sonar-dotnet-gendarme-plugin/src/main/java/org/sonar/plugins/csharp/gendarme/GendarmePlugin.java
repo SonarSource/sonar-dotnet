@@ -39,8 +39,11 @@ import java.util.List;
  * Main class of the Gendarme plugin.
  */
 @Properties({
-  @Property(key = GendarmeConstants.INSTALL_DIR_KEY, defaultValue = GendarmeConstants.INSTALL_DIR_DEFVALUE,
-    name = "Gendarme install directory", description = "Absolute path of the Gendarme installation folder.", global = true,
+  @Property(
+    key = GendarmeConstants.INSTALL_DIR_KEY,
+    name = "Gendarme install directory",
+    description = "Absolute path of the Gendarme installation folder. If no path is set, the embedded version of Gendarme is used.",
+    global = true,
     project = false),
   @Property(key = GendarmeConstants.ASSEMBLIES_TO_SCAN_KEY, defaultValue = GendarmeConstants.ASSEMBLIES_TO_SCAN_DEFVALUE,
     name = "Assemblies to scan", description = "Comma-seperated list of paths of assemblies that should be scanned. "
@@ -63,6 +66,7 @@ public class GendarmePlugin extends SonarPlugin {
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> list = new ArrayList<Class<? extends Extension>>();
     // sensors

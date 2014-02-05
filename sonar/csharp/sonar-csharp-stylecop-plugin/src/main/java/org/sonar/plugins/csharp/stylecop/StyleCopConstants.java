@@ -38,7 +38,6 @@ public final class StyleCopConstants {
 
   // ----------- Plugin Configuration Properties ----------- //
   public static final String INSTALL_DIR_KEY = "sonar.stylecop.installDirectory";
-  public static final String INSTALL_DIR_DEFVALUE = "C:/Program Files/StyleCop 4.7";
 
   public static final String TIMEOUT_MINUTES_KEY = "sonar.stylecop.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 10;

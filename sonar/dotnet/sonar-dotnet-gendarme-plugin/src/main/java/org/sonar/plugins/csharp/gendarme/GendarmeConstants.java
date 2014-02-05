@@ -36,7 +36,6 @@ public final class GendarmeConstants {
 
   // ----------- Plugin Configuration Properties ----------- //
   public static final String INSTALL_DIR_KEY = "sonar.gendarme.installDirectory";
-  public static final String INSTALL_DIR_DEFVALUE = "C:/Program Files/gendarme-2.10-bin";
 
   public static final String ASSEMBLIES_TO_SCAN_KEY = "sonar.dotnet.assemblies";
   public static final String ASSEMBLIES_TO_SCAN_DEFVALUE = "";
