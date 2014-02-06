@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+    <artifactId>parent</artifactId>
+    <version>2.2-SNAPSHOT</version>
+    <relativePath>../..</relativePath>
+  </parent>
+
+  <artifactId>sonar-dotnet-tests-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
+
+  <name>Sonar .NET Plugin :: Tests</name>
+  <description>Plugin that imports code coverage on .NET projects.</description>
+  <url>http://docs.codehaus.org/display/SONAR/C%23+Plugins+Ecosystem</url>
+
+  <properties>
+    <sonar.pluginKey>dotnettests</sonar.pluginKey>
+    <sonar.pluginName>.NET Tests</sonar.pluginName>
+    <sonar.pluginClass>org.sonar.plugins.csharp.tests.TestsPlugin</sonar.pluginClass>
+    <sonar.pluginParent>dotnet</sonar.pluginParent>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+      <artifactId>sonar-dotnet-plugin</artifactId>
+      <version>${project.version}</version>
+      <type>sonar-plugin</type>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>
