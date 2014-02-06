@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.core;
 
+import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.resources.AbstractLanguage;
@@ -45,6 +46,8 @@ public class CSharpSourceImporterTest {
   @Test
   public void testShouldNotExecuteOnRootProject() {
     Project project = mock(Project.class);
+    Configuration conf = mock(Configuration.class);
+    when(project.getConfiguration()).thenReturn(conf);
     when(project.isRoot()).thenReturn(true);
     assertFalse(importer.shouldExecuteOnProject(project));
   }
@@ -53,6 +56,8 @@ public class CSharpSourceImporterTest {
   public void testShouldNotExecuteOnOtherLanguageProject() {
     AbstractLanguage java = mock(Java.class);
     Project project = mock(Project.class);
+    Configuration conf = mock(Configuration.class);
+    when(project.getConfiguration()).thenReturn(conf);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguage()).thenReturn(java);
     assertFalse(importer.shouldExecuteOnProject(project));
@@ -61,6 +66,8 @@ public class CSharpSourceImporterTest {
   @Test
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
+    Configuration conf = mock(Configuration.class);
+    when(project.getConfiguration()).thenReturn(conf);
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguage()).thenReturn(language);
     assertTrue(importer.shouldExecuteOnProject(project));
@@ -69,6 +76,8 @@ public class CSharpSourceImporterTest {
   @Test
   public void testShouldExecuteOnTestProject() {
     Project project = mock(Project.class);
+    Configuration conf = mock(Configuration.class);
+    when(project.getConfiguration()).thenReturn(conf);
     when(project.getName()).thenReturn("Project Test");
     when(project.getLanguage()).thenReturn(language);
     assertTrue(importer.shouldExecuteOnProject(project));
