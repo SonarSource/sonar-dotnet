@@ -128,10 +128,10 @@ public class NCover3ReportParser implements CoverageProvider {
 
   private void handleSegmentPointTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
     String doc = getRequiredAttribute(stream, "doc");
-    Integer line = parseInteger(getRequiredAttribute(stream, "l"));
-    Integer vc = parseInteger(getRequiredAttribute(stream, "vc"));
+    int line = getRequiredIntAttribute(stream, "l");
+    int vc = getRequiredIntAttribute(stream, "vc");
 
-    if (documents.containsKey(doc) && line != null && !isExcludedLine(line) && vc != null) {
+    if (documents.containsKey(doc) && !isExcludedLine(line)) {
       coverage.addHits(documents.get(doc), line, vc);
     }
   }
@@ -140,21 +140,14 @@ public class NCover3ReportParser implements CoverageProvider {
     return 0 == line;
   }
 
-  @Nullable
-  private Integer parseInteger(@Nullable String s) {
-    Integer result;
+  private int getRequiredIntAttribute(XMLStreamReader stream, String name) throws ParseErrorException {
+    String value = getRequiredAttribute(stream, name);
 
-    if (s == null) {
-      result = null;
-    } else {
-      try {
-        result = Integer.parseInt(s);
-      } catch (NumberFormatException e) {
-        result = null;
-      }
+    try {
+      return Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      throw new ParseErrorException("Expected an integer instead of \"" + value + "\" for the attribute \"" + name + "\"", stream.getLocation().getLineNumber());
     }
-
-    return result;
   }
 
   private static void checkRootTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {

@@ -34,15 +34,31 @@ public class NCover3ReportParserTest {
   public ExpectedException thrown = ExpectedException.none();
 
   @Test
-  public void empty() {
+  public void invalid_root() {
     thrown.expect(RuntimeException.class);
-    new NCover3ReportParser(new File("src/test/resources/ncover3/empty.nccov")).coverage();
+    thrown.expectMessage("<coverage>");
+    new NCover3ReportParser(new File("src/test/resources/ncover3/invalid_root.nccov")).coverage();
   }
 
   @Test
   public void wrong_version() {
     thrown.expect(RuntimeException.class);
+    thrown.expectMessage("exportversion");
     new NCover3ReportParser(new File("src/test/resources/ncover3/wrong_version.nccov")).coverage();
+  }
+
+  @Test
+  public void no_version() {
+    thrown.expect(RuntimeException.class);
+    thrown.expectMessage("exportversion");
+    new NCover3ReportParser(new File("src/test/resources/ncover3/no_version.nccov")).coverage();
+  }
+
+  @Test
+  public void non_existing_file() {
+    thrown.expect(RuntimeException.class);
+    thrown.expectMessage("non_existing_file");
+    new NCover3ReportParser(new File("src/test/resources/ncover3/non_existing_file.nccov")).coverage();
   }
 
   @Test
