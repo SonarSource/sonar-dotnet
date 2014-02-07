@@ -4,10 +4,10 @@
   <rebasedpaths />
   <filters />
   <documents>
-    <doc id="1" excluded="false" url="C:\CSharpPlayground\MyLibrary\Adder.cs" cs="B0BC97C776FACFF27CB56359F2B4FD3A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
-    <doc id="3" excluded="false" url="C:\CSharpPlayground\MyLibraryNUnitTest\AdderNUnitTest.cs" cs="6A759C6D31B76B14D1D3F1E56AD7502B" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="21" nid="0" />
-    <doc id="2" excluded="false" url="C:\CSharpPlayground\MyLibraryTest\AdderTest.cs" cs="7E5A9DF8B477B46A538E9A508CDB451C" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
-    <doc id="4" excluded="false" url="C:\CSharpPlayground\MyLibraryXUnitTest\AdderXUnitTest.cs" cs="45BAE5F98CB97DF5D5F0E0E0818E3C23" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="22" nid="0" />
+    <doc id="1" excluded="false" url="MyLibrary\Adder.cs" cs="B0BC97C776FACFF27CB56359F2B4FD3A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="3" excluded="false" url="MyLibraryNUnitTest\AdderNUnitTest.cs" cs="6A759C6D31B76B14D1D3F1E56AD7502B" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="21" nid="0" />
+    <doc id="2" excluded="false" url="MyLibraryTest\AdderTest.cs" cs="7E5A9DF8B477B46A538E9A508CDB451C" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
+    <doc id="4" excluded="false" url="MyLibraryXUnitTest\AdderXUnitTest.cs" cs="45BAE5F98CB97DF5D5F0E0E0818E3C23" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="22" nid="0" />
     <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
   </documents>
   <module moduleId="17" name="C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibrary\bin\Debug\MyLibrary.dll" assembly="MyLibrary" assemblyIdentity="MyLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">

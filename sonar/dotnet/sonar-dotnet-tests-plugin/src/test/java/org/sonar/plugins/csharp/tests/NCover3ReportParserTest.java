@@ -65,12 +65,12 @@ public class NCover3ReportParserTest {
   public void valid() {
     Coverage coverage = new NCover3ReportParser(new File("src/test/resources/ncover3/valid.nccov")).coverage();
     assertThat(coverage.files()).containsOnly(
-      "C:\\CSharpPlayground\\MyLibrary\\Adder.cs",
-      "C:\\CSharpPlayground\\MyLibraryNUnitTest\\AdderNUnitTest.cs",
-      "C:\\CSharpPlayground\\MyLibraryTest\\AdderTest.cs",
-      "C:\\CSharpPlayground\\MyLibraryXUnitTest\\AdderXUnitTest.cs");
+      "MyLibrary\\Adder.cs",
+      "MyLibraryNUnitTest\\AdderNUnitTest.cs",
+      "MyLibraryTest\\AdderTest.cs",
+      "MyLibraryXUnitTest\\AdderXUnitTest.cs");
 
-    assertThat(coverage.hits("C:\\CSharpPlayground\\MyLibrary\\Adder.cs"))
+    assertThat(coverage.hits("MyLibrary\\Adder.cs"))
       .hasSize(11)
       .includes(
         MapAssert.entry(12, 2),
