@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.tests;
 
+import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,27 +59,28 @@ public class NCover3ReportParser implements CoverageProvider {
       reader = new FileReader(file);
       stream = xmlFactory.createXMLStreamReader(reader);
 
-      if (!checkRootTag(stream)) {
-        LOG.error("Invalid document start in the report " + file.getAbsolutePath());
-      } else {
-        while (stream.hasNext()) {
-          if (stream.next() == XMLStreamConstants.START_ELEMENT) {
-            String tagName = stream.getLocalName();
+      checkRootTag(stream);
 
-            if ("doc".equals(tagName)) {
-              handleDocTag(stream);
-            } else if ("seqpnt".equals(tagName)) {
-              handleSegmentPointTag(stream);
-            }
+      while (stream.hasNext()) {
+        if (stream.next() == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("doc".equals(tagName)) {
+            handleDocTag(stream);
+          } else if ("seqpnt".equals(tagName)) {
+            handleSegmentPointTag(stream);
           }
         }
       }
-    } catch (MissingAttributeException e) {
-      logMissingAttribute(e);
+    } catch (ParseErrorException e) {
+      logParseError(e);
+      throw Throwables.propagate(e);
     } catch (IOException e) {
       logException(e);
+      throw Throwables.propagate(e);
     } catch (XMLStreamException e) {
       logException(e);
+      throw Throwables.propagate(e);
     } finally {
       if (stream != null) {
         closeQuietly(stream);
@@ -111,7 +113,7 @@ public class NCover3ReportParser implements CoverageProvider {
     }
   }
 
-  private void handleDocTag(XMLStreamReader stream) throws XMLStreamException, MissingAttributeException {
+  private void handleDocTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
     String id = getRequiredAttribute(stream, "id");
     String url = getRequiredAttribute(stream, "url");
 
@@ -124,7 +126,7 @@ public class NCover3ReportParser implements CoverageProvider {
     return "0".equals(id);
   }
 
-  private void handleSegmentPointTag(XMLStreamReader stream) throws XMLStreamException, MissingAttributeException {
+  private void handleSegmentPointTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
     String doc = getRequiredAttribute(stream, "doc");
     Integer line = parseInteger(getRequiredAttribute(stream, "l"));
     Integer vc = parseInteger(getRequiredAttribute(stream, "vc"));
@@ -155,22 +157,29 @@ public class NCover3ReportParser implements CoverageProvider {
     return result;
   }
 
-  private static boolean checkRootTag(XMLStreamReader stream) throws XMLStreamException {
+  private static void checkRootTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
     int event = stream.nextTag();
 
-    return event == XMLStreamConstants.START_ELEMENT &&
-      "coverage".equals(stream.getLocalName()) &&
-      hasAttribute(stream, "exportversion", "3");
+    if (event != XMLStreamConstants.START_ELEMENT || !"coverage".equals(stream.getLocalName())) {
+      throw new ParseErrorException("Missing root element <coverage>", stream.getLocation().getLineNumber());
+    }
+
+    checkRequiredAttribute(stream, "exportversion", "3");
   }
 
-  private static boolean hasAttribute(XMLStreamReader stream, String name, String value) {
-    return value.equals(getAttribute(stream, name));
+  private static void checkRequiredAttribute(XMLStreamReader stream, String name, String expectedValue) throws ParseErrorException {
+    String actualValue = getRequiredAttribute(stream, name);
+    if (!expectedValue.equals(actualValue)) {
+      throw new ParseErrorException(
+        "Expected \"" + expectedValue + "\" instead of \"" + actualValue + "\" for the \"" + name + "\" attribute",
+        stream.getLocation().getLineNumber());
+    }
   }
 
-  private String getRequiredAttribute(XMLStreamReader stream, String name) throws MissingAttributeException {
+  private static String getRequiredAttribute(XMLStreamReader stream, String name) throws ParseErrorException {
     String value = getAttribute(stream, name);
     if (value == null) {
-      throw new MissingAttributeException(name, stream.getLocalName(), stream.getLocation().getLineNumber());
+      throw new ParseErrorException("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">", stream.getLocation().getLineNumber());
     }
 
     return value;
@@ -187,23 +196,18 @@ public class NCover3ReportParser implements CoverageProvider {
     return null;
   }
 
-  private void logMissingAttribute(MissingAttributeException e) {
-    LOG.error("Missing attribute \"" + e.missingAttributeName +
-      "\" in " + file.getAbsolutePath() + " at line " + e.currentLine +
-      " in element <" + e.currentElementName + ">.");
+  private void logParseError(ParseErrorException e) {
+    LOG.error(e.getMessage() + " in " + file.getAbsolutePath() + " at line " + e.currentLine);
   }
 
-  private static class MissingAttributeException extends Exception {
+  private static class ParseErrorException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    private final String missingAttributeName;
-    private final String currentElementName;
     private final int currentLine;
 
-    public MissingAttributeException(String missingAttributeName, String currentElementName, int currentLine) {
-      this.missingAttributeName = missingAttributeName;
-      this.currentElementName = currentElementName;
+    public ParseErrorException(String message, int currentLine) {
+      super(message);
       this.currentLine = currentLine;
     }
 

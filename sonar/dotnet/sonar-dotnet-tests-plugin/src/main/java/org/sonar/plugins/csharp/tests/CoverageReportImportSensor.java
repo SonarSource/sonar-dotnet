@@ -1,0 +1,71 @@
+/*
+ * Sonar .NET Plugin :: Tests
+ * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
+ * dev@sonar.codehaus.org
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
+ */
+package org.sonar.plugins.csharp.tests;
+
+import com.google.common.collect.ImmutableSet;
+import org.sonar.api.batch.Sensor;
+import org.sonar.api.batch.SensorContext;
+import org.sonar.api.config.Settings;
+import org.sonar.api.measures.CoverageMeasuresBuilder;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.resources.Project;
+
+import java.io.File;
+import java.util.Map;
+import java.util.Set;
+
+public class CoverageReportImportSensor implements Sensor {
+
+  private static final Set<String> SUPPORTED_LANGUAGES = ImmutableSet.of("cs", "vbnet");
+
+  private final Settings settings;
+
+  public CoverageReportImportSensor(Settings settings) {
+    this.settings = settings;
+  }
+
+  @Override
+  public boolean shouldExecuteOnProject(Project project) {
+    return SUPPORTED_LANGUAGES.contains(project.getLanguageKey()) &&
+      settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY);
+  }
+
+  @Override
+  public void analyse(Project project, SensorContext context) {
+    Coverage coverage = new NCover3ReportParser(new File(settings.getString(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY))).coverage();
+    CoverageMeasuresBuilder coverageMeasureBuilder = CoverageMeasuresBuilder.create();
+
+    for (String filePath : coverage.files()) {
+      org.sonar.api.resources.File file = org.sonar.api.resources.File.fromIOFile(new File(filePath), project);
+
+      if (file != null) {
+        coverageMeasureBuilder.reset();
+        for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
+          coverageMeasureBuilder.setHits(entry.getKey(), entry.getValue());
+        }
+
+        for (Measure measure : coverageMeasureBuilder.createMeasures()) {
+          context.saveMeasure(file, measure);
+        }
+      }
+    }
+  }
+
+}

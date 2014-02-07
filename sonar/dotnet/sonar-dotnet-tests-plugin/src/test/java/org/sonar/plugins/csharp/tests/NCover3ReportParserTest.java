@@ -20,7 +20,9 @@
 package org.sonar.plugins.csharp.tests;
 
 import org.fest.assertions.MapAssert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.File;
 
@@ -28,16 +30,19 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class NCover3ReportParserTest {
 
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
+
   @Test
   public void empty() {
-    Coverage coverage = new NCover3ReportParser(new File("src/test/resources/ncover3/empty.nccov")).coverage();
-    assertThat(coverage.files()).isEmpty();
+    thrown.expect(RuntimeException.class);
+    new NCover3ReportParser(new File("src/test/resources/ncover3/empty.nccov")).coverage();
   }
 
   @Test
   public void wrong_version() {
-    Coverage coverage = new NCover3ReportParser(new File("src/test/resources/ncover3/wrong_version.nccov")).coverage();
-    assertThat(coverage.files()).isEmpty();
+    thrown.expect(RuntimeException.class);
+    new NCover3ReportParser(new File("src/test/resources/ncover3/wrong_version.nccov")).coverage();
   }
 
   @Test
