@@ -58,6 +58,8 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   private File openCoverInstallDirectory;
   private File dotCoverInstallDirectory;
   private String[] coverageExcludes;
+  private String attributeExcludes;
+  private File absoluteBaseDirectory;
   private File coverageReportFile;
 
   private List<File> testAssemblies;
@@ -192,6 +194,27 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
   public void setCoverageExcludes(String[] coverageExcludes) {
     this.coverageExcludes = coverageExcludes;
   }
+  
+  
+  /**
+   * Sets the attributes that exclude methods/properties/classes
+   * 
+   * @param attributeExclude
+   * 		excluded attributes
+   */
+  public void setOpenCoverAttributeExcludes(String attributeExclude) {
+	  this.attributeExcludes = attributeExclude;
+  }
+  
+  /**
+   * Sets the abd parameter for Gallio
+   * 
+   * @param absoluteBaseDirectory
+   *        project directory
+   */
+  public void setAbsoluteBaseDirectory(File absoluteBaseDirectory) {
+	  this.absoluteBaseDirectory = absoluteBaseDirectory;
+  }
 
   /**
    * Sets the coverage report file to generate
@@ -274,6 +297,11 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     }
     LOG.debug("- Runner              : {}", runner);
     gallioArguments.add("/r:" + runner.getValue());
+    
+    if(absoluteBaseDirectory != null && absoluteBaseDirectory.length() > 0) {
+    	LOG.debug("- Absolute base directory : {}", absoluteBaseDirectory.getAbsolutePath());
+    	gallioArguments.add("/abd:" + absoluteBaseDirectory.getAbsolutePath());
+    }
 
     File reportDirectory = gallioReportFile.getParentFile();
     LOG.debug("- Report directory    : {}", reportDirectory.getAbsolutePath());
@@ -353,13 +381,18 @@ public class GallioCommandBuilder { // NOSONAR class not final to allow mocking
     if (coverageExcludes != null) {
       for (String exclusion : coverageExcludes) {
         LOG.debug("- Opencover exclude   : {}", exclusion.trim());
-        filterBuilder.append("-[" + exclusion.trim() + "]* ");
+        filterBuilder.append(exclusion.trim());
       }
     }
     filterBuilder.append("\"");
     command.addArgument(filterBuilder.toString());
 
     command.addArgument("-mergebyhash");
+    
+    if(attributeExcludes != null && attributeExcludes.trim().length() > 0) {
+    	LOG.debug("- Opencover attribute exclude   : {}", attributeExcludes);
+    	command.addArgument("-excludebyattribute:" + attributeExcludes);
+    }
 
     LOG.debug("- Coverage report     : {}", coverageReportFile.getAbsolutePath());
     command.addArgument("-output:" + coverageReportFile.getAbsolutePath());

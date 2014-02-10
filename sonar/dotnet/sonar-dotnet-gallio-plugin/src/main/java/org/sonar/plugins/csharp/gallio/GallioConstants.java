@@ -50,6 +50,9 @@ public final class GallioConstants {
 
   public static final String COVERAGE_EXCLUDES_KEY = "sonar.gallio.coverage.excludes";
   public static final String COVERAGE_EXCLUDES_DEFVALUE = null;
+  
+  public static final String ABSOLUTE_BASE_DIRECTORY_KEY = "sonar.gallio.absoluteBaseDirectory";
+  public static final String ABSOLUTE_BASE_DIRECTORY_DEFVALUE = "C:/Program Files/Gallio/bin";
 
   public static final String TIMEOUT_MINUTES_KEY = "sonar.gallio.timeoutMinutes";
   public static final int TIMEOUT_MINUTES_DEFVALUE = 30;
@@ -65,6 +68,10 @@ public final class GallioConstants {
   public static final String OPEN_COVER_INSTALL_KEY = "sonar.opencover.installDirectory";
 
   public static final String OPEN_COVER_INSTALL_DEFVALUE = "C:/Program Files/OpenCover/";
+  
+  public static final String OPEN_COVER_ATTRIBUTE_EXCLUDES_KEY = "sonar.opencover.attributeExcludes";
+  
+  public static final String OPEN_COVER_ATTRIBUTE_EXCLUDES_DEFVALUE = "";
 
   public static final String DOT_COVER_INSTALL_KEY = "sonar.dotcover.installDirectory";
 
