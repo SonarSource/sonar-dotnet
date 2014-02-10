@@ -19,34 +19,23 @@
  */
 package org.sonar.plugins.csharp.tests;
 
-import com.google.common.collect.ImmutableList;
-import org.junit.Test;
-import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.resources.Project;
 
-import java.util.List;
+import java.io.File;
 
-import static org.fest.assertions.Assertions.assertThat;
+/**
+ * Layer of abstraction to improve the testability of the sensor.
+ */
+public class FileProvider {
 
-public class TestsPluginTest {
+  private final Project project;
 
-  @Test
-  public void number_of_extensions() {
-    assertThat(new TestsPlugin().getExtensions()).hasSize(2 + TestsPlugin.getPropertyDefinitions().size());
+  public FileProvider(Project project) {
+    this.project = project;
   }
 
-  @Test
-  public void number_of_properties() {
-    assertThat(keys(TestsPlugin.getPropertyDefinitions())).containsExactly(
-      "sonar.dotnet.tests.ncover3.reportPath",
-      "sonar.dotnet.tests.opencover.reportPath");
-  }
-
-  private static List<String> keys(List<PropertyDefinition> properties) {
-    ImmutableList.Builder<String> builder = ImmutableList.builder();
-    for (PropertyDefinition property : properties) {
-      builder.add(property.key());
-    }
-    return builder.build();
+  public org.sonar.api.resources.File fromPath(String path) {
+    return org.sonar.api.resources.File.fromIOFile(new File(path), project);
   }
 
 }

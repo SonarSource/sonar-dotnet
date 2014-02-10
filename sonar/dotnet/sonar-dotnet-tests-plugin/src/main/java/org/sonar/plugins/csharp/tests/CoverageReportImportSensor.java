@@ -19,15 +19,14 @@
  */
 package org.sonar.plugins.csharp.tests;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 
-import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,25 +34,30 @@ public class CoverageReportImportSensor implements Sensor {
 
   private static final Set<String> SUPPORTED_LANGUAGES = ImmutableSet.of("cs", "vbnet");
 
-  private final Settings settings;
+  private final CoverageProviderFactory coverageProviderFactory;
 
-  public CoverageReportImportSensor(Settings settings) {
-    this.settings = settings;
+  public CoverageReportImportSensor(CoverageProviderFactory coverageProviderFactory) {
+    this.coverageProviderFactory = coverageProviderFactory;
   }
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     return SUPPORTED_LANGUAGES.contains(project.getLanguageKey()) &&
-      settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY);
+      coverageProviderFactory.hasCoverageProperty();
   }
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    Coverage coverage = new NCover3ReportParser(new File(settings.getString(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY))).coverage();
+    analyze(context, new FileProvider(project));
+  }
+
+  @VisibleForTesting
+  void analyze(SensorContext context, FileProvider fileProvider) {
+    Coverage coverage = coverageProviderFactory.coverageProvider().coverage();
     CoverageMeasuresBuilder coverageMeasureBuilder = CoverageMeasuresBuilder.create();
 
     for (String filePath : coverage.files()) {
-      org.sonar.api.resources.File file = org.sonar.api.resources.File.fromIOFile(new File(filePath), project);
+      org.sonar.api.resources.File file = fileProvider.fromPath(filePath);
 
       if (file != null) {
         coverageMeasureBuilder.reset();

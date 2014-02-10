@@ -19,17 +19,23 @@
  */
 package org.sonar.plugins.csharp.tests;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.config.Settings;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.measures.Metric;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.api.resources.Resource;
 
-import java.io.File;
+import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CoverageReportImportSensorTest {
@@ -38,37 +44,66 @@ public class CoverageReportImportSensorTest {
   public void should_execute_on_project() {
     Project project = mock(Project.class);
 
+    CoverageProviderFactory coverageFactoryWithReports = mock(CoverageProviderFactory.class);
+    when(coverageFactoryWithReports.hasCoverageProperty()).thenReturn(true);
+
     when(project.getLanguageKey()).thenReturn("cs");
-    assertThat(new CoverageReportImportSensor(mockSettingsWithNCover3Report()).shouldExecuteOnProject(project)).isTrue();
+    assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isTrue();
 
     when(project.getLanguageKey()).thenReturn("vbnet");
-    assertThat(new CoverageReportImportSensor(mockSettingsWithNCover3Report()).shouldExecuteOnProject(project)).isTrue();
+    assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isTrue();
 
     when(project.getLanguageKey()).thenReturn("foo");
-    assertThat(new CoverageReportImportSensor(mockSettingsWithNCover3Report()).shouldExecuteOnProject(project)).isFalse();
+    assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isFalse();
+
+    CoverageProviderFactory coverageFactoryWithoutReports = mock(CoverageProviderFactory.class);
+    when(coverageFactoryWithoutReports.hasCoverageProperty()).thenReturn(false);
 
     when(project.getLanguageKey()).thenReturn("cs");
-    assertThat(new CoverageReportImportSensor(mock(Settings.class)).shouldExecuteOnProject(project)).isFalse();
+    assertThat(new CoverageReportImportSensor(coverageFactoryWithoutReports).shouldExecuteOnProject(project)).isFalse();
   }
 
   @Test
-  public void should_save_measures() {
+  public void analyze() {
+    Coverage coverage = mock(Coverage.class);
+    when(coverage.files()).thenReturn(ImmutableSet.of("Foo.cs", "Bar.cs"));
+    when(coverage.hits("Foo.cs")).thenReturn(ImmutableMap.<Integer, Integer> builder()
+      .put(24, 1)
+      .put(42, 0)
+      .build());
+    when(coverage.hits("Bar.cs")).thenReturn(ImmutableMap.<Integer, Integer> builder()
+      .put(42, 1)
+      .build());
+
+    CoverageProvider coverageProvider = mock(CoverageProvider.class);
+    when(coverageProvider.coverage()).thenReturn(coverage);
+
+    CoverageProviderFactory coverageProviderFactory = mock(CoverageProviderFactory.class);
+    when(coverageProviderFactory.coverageProvider()).thenReturn(coverageProvider);
+
     SensorContext context = mock(SensorContext.class);
 
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSourceDirs()).thenReturn(ImmutableList.of(new File("src/test/resources/")));
+    FileProvider fileProvider = mock(FileProvider.class);
 
-    Project project = mock(Project.class);
-    when(project.getFileSystem()).thenReturn(fileSystem);
+    org.sonar.api.resources.File foo = mock(org.sonar.api.resources.File.class);
+    when(fileProvider.fromPath("Foo.cs")).thenReturn(foo);
+    when(fileProvider.fromPath("Bar.cs")).thenReturn(null);
 
-    new CoverageReportImportSensor(mockSettingsWithNCover3Report()).analyse(project, context);
+    new CoverageReportImportSensor(coverageProviderFactory).analyze(context, fileProvider);
+
+    verify(context, Mockito.times(3)).saveMeasure(Mockito.any(Resource.class), Mockito.any(Measure.class));
+
+    ArgumentCaptor<Measure> captor = ArgumentCaptor.forClass(Measure.class);
+    verify(context, Mockito.times(3)).saveMeasure(Mockito.eq(foo), captor.capture());
+
+    List<Measure> values = captor.getAllValues();
+    checkMeasure(values.get(0), CoreMetrics.LINES_TO_COVER, 2.0);
+    checkMeasure(values.get(1), CoreMetrics.UNCOVERED_LINES, 1.0);
   }
 
-  private static Settings mockSettingsWithNCover3Report() {
-    Settings settings = mock(Settings.class);
-    when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(true);
-    when(settings.getString(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(new File("src/test/resources/ncover3/valid.nccov").getAbsolutePath());
-    return settings;
+  private static void checkMeasure(Measure measure, Metric metric, Double value) {
+    assertThat(measure.getMetric()).isEqualTo(metric);
+    assertThat(measure.getValue()).isEqualTo(value);
   }
 
 }

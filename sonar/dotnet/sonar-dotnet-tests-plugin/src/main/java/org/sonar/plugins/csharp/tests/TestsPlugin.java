@@ -29,11 +29,13 @@ import java.util.List;
 public class TestsPlugin extends SonarPlugin {
 
   public static final String NCOVER3_REPORT_PATH_PROPERTY = "sonar.dotnet.tests.ncover3.reportPath";
+  public static final String OPEN_COVER_REPORT_PATH_PROPERTY = "sonar.dotnet.tests.opencover.reportPath";
 
   @Override
   public List getExtensions() {
     return ImmutableList.builder()
       .addAll(getPropertyDefinitions())
+      .add(CoverageProviderFactory.class)
       .add(CoverageReportImportSensor.class)
       .build();
   }
@@ -47,6 +49,13 @@ public class TestsPlugin extends SonarPlugin {
         .subCategory(subCategory)
         .name("NCover3 report path")
         .description("Path (absolute or relative) to the NCover3 code coverage report.")
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(OPEN_COVER_REPORT_PATH_PROPERTY)
+        .category(dotNet)
+        .subCategory(subCategory)
+        .name("OpenCover report path")
+        .description("Path (absolute or relative) to the OpenCover code coverage report.")
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
