@@ -49,7 +49,7 @@ public class NCover3ReportParser implements CoverageProvider {
 
   @Override
   public Coverage coverage() {
-    LOG.info("Parsing the report " + file.getAbsolutePath());
+    LOG.info("Parsing the NCover3 report " + file.getAbsolutePath());
 
     FileReader reader = null;
     XMLStreamReader stream = null;
