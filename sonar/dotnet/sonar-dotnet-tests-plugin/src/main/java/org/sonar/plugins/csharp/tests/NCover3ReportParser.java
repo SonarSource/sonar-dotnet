@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp.tests;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
+import com.google.common.io.Closeables;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,12 +83,8 @@ public class NCover3ReportParser implements CoverageProvider {
       logException(e);
       throw Throwables.propagate(e);
     } finally {
-      if (stream != null) {
-        closeQuietly(stream);
-      }
-      if (reader != null) {
-        closeQuietly(reader);
-      }
+      closeQuietly(stream);
+      Closeables.closeQuietly(reader);
     }
 
     return coverage;
@@ -97,19 +94,13 @@ public class NCover3ReportParser implements CoverageProvider {
     LOG.error("Unable to parse the report " + file.getAbsolutePath(), e);
   }
 
-  private static void closeQuietly(XMLStreamReader reader) {
-    try {
-      reader.close();
-    } catch (XMLStreamException e) {
-      /* do nothing */
-    }
-  }
-
-  private static void closeQuietly(FileReader reader) {
-    try {
-      reader.close();
-    } catch (IOException e) {
-      /* do nothing */
+  private static void closeQuietly(@Nullable XMLStreamReader reader) {
+    if (reader != null) {
+      try {
+        reader.close();
+      } catch (XMLStreamException e) {
+        /* do nothing */
+      }
     }
   }
 
