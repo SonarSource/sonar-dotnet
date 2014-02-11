@@ -22,7 +22,6 @@ package org.sonar.plugins.csharp.fxcop;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -91,7 +90,7 @@ public class FxCopResultParserTest {
     parser = new FxCopResultParser(env, project, context, newRuleFinder(), bridges, resourceHelper);
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testParseFile1() throws Exception {
     resultFile = TestUtils.getResource("/Results/fxcop-report-1.xml");
@@ -104,7 +103,7 @@ public class FxCopResultParserTest {
     verify(context, times(13)).saveViolation(any(Violation.class));
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testParseFile2() throws Exception {
     resultFile = TestUtils.getResource("/Results/fxcop-report-2.xml");

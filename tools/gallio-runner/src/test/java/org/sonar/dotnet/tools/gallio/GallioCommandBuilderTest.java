@@ -23,7 +23,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
@@ -40,7 +39,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Ignore("FIXME")
+//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class GallioCommandBuilderTest {
 
   private static final File GALLIO_EXE = TestUtils.getResource("/Runner/FakeProg/Gallio/bin/Gallio.Echo.exe");

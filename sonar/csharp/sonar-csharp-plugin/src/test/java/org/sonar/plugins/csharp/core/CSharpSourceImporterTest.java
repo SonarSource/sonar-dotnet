@@ -21,7 +21,6 @@ package org.sonar.plugins.csharp.core;
 
 import org.apache.commons.configuration.Configuration;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.resources.Java;
@@ -64,7 +63,7 @@ public class CSharpSourceImporterTest {
     assertFalse(importer.shouldExecuteOnProject(project));
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
@@ -75,7 +74,7 @@ public class CSharpSourceImporterTest {
     assertTrue(importer.shouldExecuteOnProject(project));
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testShouldExecuteOnTestProject() {
     Project project = mock(Project.class);

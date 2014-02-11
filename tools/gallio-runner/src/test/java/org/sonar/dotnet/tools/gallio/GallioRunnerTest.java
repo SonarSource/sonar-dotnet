@@ -21,7 +21,6 @@ package org.sonar.dotnet.tools.gallio;
 
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import org.sonar.test.TestUtils;
@@ -54,7 +53,7 @@ public class GallioRunnerTest {
     runner = GallioRunner.create(fakeExecInstallPath, workDir, false);
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testCreateCommandBuilderForSolution() throws Exception {
     GallioCommandBuilder builder = runner.createCommandBuilder(solution);

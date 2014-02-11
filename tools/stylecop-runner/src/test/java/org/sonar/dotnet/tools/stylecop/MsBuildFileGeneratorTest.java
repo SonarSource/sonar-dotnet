@@ -21,7 +21,6 @@ package org.sonar.dotnet.tools.stylecop;
 
 import com.google.common.collect.Lists;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
@@ -74,7 +73,7 @@ public class MsBuildFileGeneratorTest {
     generatedFile.delete();
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testGenerateContent() throws Exception {
     File reportFile = mock(File.class);
@@ -87,7 +86,7 @@ public class MsBuildFileGeneratorTest {
     TestUtils.assertSimilarXml(TestUtils.getResourceContent("/Runner/MSBuild/stylecop-msbuild_for-tests.xml"), writer.toString());
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testGenerateContentForWebProject() throws Exception {
     when(project.getProjectFile()).thenReturn(null);

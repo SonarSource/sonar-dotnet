@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
@@ -37,7 +36,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Ignore("FIXME")
+//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class FxCopCommandBuilderTest {
 
   private static File fakeFxCopExecutable;

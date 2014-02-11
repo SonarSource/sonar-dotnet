@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp.fxcop.profiles;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Rule;
@@ -32,7 +31,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class FxCopProfileExporterTest {
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testSimpleFxCopRulesToExport() throws Exception {
     RulesProfile profile = RulesProfile.create("Sonar way", "cs");

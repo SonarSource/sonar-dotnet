@@ -23,7 +23,6 @@ package org.sonar.plugins.csharp.stylecop;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -77,7 +76,7 @@ public class StyleCopResultParserTest {
     resultFile = TestUtils.getResource("/Results/stylecop-report.xml");
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testParseFile() throws Exception {
     parser.parse(resultFile);

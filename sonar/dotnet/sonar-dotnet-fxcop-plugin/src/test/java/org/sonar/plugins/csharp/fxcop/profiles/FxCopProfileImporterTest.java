@@ -21,7 +21,6 @@ package org.sonar.plugins.csharp.fxcop.profiles;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -55,7 +54,7 @@ public class FxCopProfileImporterTest {
     importer = new FxCopProfileImporter.CSharpRegularFxCopProfileImporter(newRuleFinder());
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testImportSimpleProfile() {
     Reader reader = new StringReader(TestUtils.getResourceContent("/ProfileImporter/SimpleRules.FxCop.xml"));
@@ -73,7 +72,7 @@ public class FxCopProfileImporterTest {
     assertThat(profile.getActiveRules().get(0).getRepositoryKey()).isEqualTo("fxcop");
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void shouldCreateImporterForVbNet() {
     importer = new FxCopProfileImporter.VbNetRegularFxCopProfileImporter(newRuleFinder());

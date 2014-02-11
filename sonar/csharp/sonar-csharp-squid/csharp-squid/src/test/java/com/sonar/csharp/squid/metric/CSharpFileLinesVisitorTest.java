@@ -27,7 +27,6 @@ import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -78,7 +77,7 @@ public class CSharpFileLinesVisitorTest {
     fileLinesVisitor = new CSharpFileLinesVisitor(project, fileLinesContextFactory);
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testScanFile() {
     AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")), fileLinesVisitor);

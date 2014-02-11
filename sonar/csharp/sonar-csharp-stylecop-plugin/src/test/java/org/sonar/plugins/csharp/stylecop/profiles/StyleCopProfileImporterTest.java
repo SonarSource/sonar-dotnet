@@ -22,7 +22,6 @@ package org.sonar.plugins.csharp.stylecop.profiles;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -55,7 +54,7 @@ public class StyleCopProfileImporterTest {
     importer = new StyleCopProfileImporter.RegularStyleCopProfileImporter(newRuleFinder());
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testImportSimpleProfile() {
     Reader reader = new StringReader(TestUtils.getResourceContent("/ProfileImporter/SimpleRules.StyleCop.xml"));

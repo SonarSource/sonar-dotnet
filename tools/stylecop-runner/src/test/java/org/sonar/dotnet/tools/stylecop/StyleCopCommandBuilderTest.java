@@ -20,7 +20,6 @@
 package org.sonar.dotnet.tools.stylecop;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.utils.command.Command;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
@@ -51,7 +50,7 @@ public class StyleCopCommandBuilderTest {
     when(solution.getSolutionFile()).thenReturn(new File("target/sonar/solution/solution.sln"));
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testToCommandForSolution() throws Exception {
     StyleCopCommandBuilder styleCopCommandBuilder = StyleCopCommandBuilder.createBuilder(solution);
@@ -73,7 +72,7 @@ public class StyleCopCommandBuilderTest {
     report.delete();
   }
 
-  @Ignore("FIXME")
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testToCommandForProject() throws Exception {
     StyleCopCommandBuilder styleCopCommandBuilder = StyleCopCommandBuilder.createBuilder(solution, project);

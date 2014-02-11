@@ -24,7 +24,6 @@ import com.google.common.collect.Collections2;
 import com.google.inject.internal.util.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
@@ -55,7 +54,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Ignore
+//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({File.class, DotCoverParsingStrategy.class})
 public class CoverageResultParserTest {

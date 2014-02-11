@@ -21,7 +21,6 @@
 package org.sonar.plugins.csharp.stylecop.profiles;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Rule;
@@ -32,7 +31,7 @@ import org.sonar.test.TestUtils;
 import java.io.File;
 import java.io.StringWriter;
 
-@Ignore("FIXME")
+//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class StyleCopProfileExporterTest {
 
   private RulesProfile profile;

@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp.gendarme.profiles;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
@@ -34,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class GendarmeProfileExporterTest {
 
-  @Ignore
+  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
   public void testSimpleGendarmeRulesToExport() throws Exception {
     RulesProfile profile = RulesProfile.create("Sonar way", "cs");
