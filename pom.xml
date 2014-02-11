@@ -58,7 +58,7 @@
 
   <properties>
     <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
-    <sonar.version>4.2-SNAPSHOT</sonar.version>
+    <sonar.version>3.7</sonar.version>
 
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
   </properties>
