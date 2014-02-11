@@ -32,13 +32,13 @@ public class ResourceHelper implements BatchExtension {
     this.sensorContext = sensorContext;
   }
 
-  public boolean isResourceInProject(Resource<?> resource, Project project) {
+  public boolean isResourceInProject(Resource resource, Project project) {
     final boolean result;
 
     if (resource instanceof Project) {
       result = resource.getEffectiveKey().equals(project.getEffectiveKey());
     } else {
-      Resource<?> parent = sensorContext.getParent(resource);
+      Resource parent = sensorContext.getParent(resource);
       if (parent == null) {
         // should not happen
         result = false;
@@ -49,12 +49,12 @@ public class ResourceHelper implements BatchExtension {
     return result;
   }
 
-  public Project findParentProject(Resource<?> resource) {
+  public Project findParentProject(Resource resource) {
     final Project result;
     if (resource instanceof Project) {
       result = (Project) resource;
     } else {
-      Resource<?> parent = sensorContext.getParent(resource);
+      Resource parent = sensorContext.getParent(resource);
       if (parent == null) {
         // should not happen
         result = null;

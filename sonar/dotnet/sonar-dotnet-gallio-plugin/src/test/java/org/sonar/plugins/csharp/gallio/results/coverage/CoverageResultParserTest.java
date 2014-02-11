@@ -24,6 +24,7 @@ import com.google.common.collect.Collections2;
 import com.google.inject.internal.util.Lists;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
@@ -54,6 +55,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Ignore
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({File.class, DotCoverParsingStrategy.class})
 public class CoverageResultParserTest {
@@ -271,30 +273,31 @@ public class CoverageResultParserTest {
     when(sourceFileMock.getCanonicalFile()).thenReturn(sourceFileMock);
     when(sourceFileMock.getName()).thenReturn("Money.cs");
     PowerMockito
-        .whenNew(File.class)
-        .withParameterTypes(String.class)
-        .withArguments(eq("c:\\foobar\\example\\example.core\\money.cs"))
-        .thenReturn(sourceFileMock);
+      .whenNew(File.class)
+      .withParameterTypes(String.class)
+      .withArguments(eq("c:\\foobar\\example\\example.core\\money.cs"))
+      .thenReturn(sourceFileMock);
 
     PowerMockito
-        .whenNew(File.class)
-        .withParameterTypes(String.class)
-        .withArguments(not(eq("c:\\foobar\\example\\example.core\\money.cs")))
-        .thenAnswer(new Answer<File>() {
-          public File answer(InvocationOnMock invocation) throws Throwable {
-            return new File((String) (invocation.getArguments())[0]);
-          }
-        });
+      .whenNew(File.class)
+      .withParameterTypes(String.class)
+      .withArguments(not(eq("c:\\foobar\\example\\example.core\\money.cs")))
+      .thenAnswer(new Answer<File>() {
+        @Override
+        public File answer(InvocationOnMock invocation) throws Throwable {
+          return new File((String) invocation.getArguments()[0]);
+        }
+      });
   }
 
   private void mockIoFileForDotCoverBadly() throws Exception {
     File sourceFileMock = mock(File.class);
     when(sourceFileMock.getCanonicalFile()).thenThrow(new IOException());
     PowerMockito
-        .whenNew(File.class)
-        .withParameterTypes(String.class)
-        .withArguments(any())
-        .thenReturn(sourceFileMock);
+      .whenNew(File.class)
+      .withParameterTypes(String.class)
+      .withArguments(any())
+      .thenReturn(sourceFileMock);
   }
 
   @Test
@@ -308,12 +311,12 @@ public class CoverageResultParserTest {
     File file = TestUtils.getResource("/Results/coverage/" + parameters.report);
     List<FileCoverage> files = parser.parse(project, file);
 
-    int numberOfLinesInFiles = 0;
     for (FileCoverage fileCoverage : files) {
-      numberOfLinesInFiles += fileCoverage.getCountLines();
+      fileCoverage.getCountLines();
     }
 
     Collection<FileCoverage> filesFound = Collections2.filter(files, new Predicate<FileCoverage>() {
+      @Override
       public boolean apply(FileCoverage input) {
 
         return StringUtils.contains(input.getFile().getName(), parameters.fileName);

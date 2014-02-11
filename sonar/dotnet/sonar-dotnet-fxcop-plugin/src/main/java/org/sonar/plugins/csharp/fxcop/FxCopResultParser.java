@@ -78,14 +78,14 @@ public class FxCopResultParser implements BatchExtension {
 
   /**
    * Constructs a @link{FxCopResultParser}.
-   * 
+   *
    * @param project
    * @param context
    * @param rulesManager
    * @param profile
    */
   public FxCopResultParser(MicrosoftWindowsEnvironment env, Project project, SensorContext context, RuleFinder ruleFinder,
-      DotNetResourceBridges dotNetResourceBridges, ResourceHelper resourceHelper) {
+    DotNetResourceBridges dotNetResourceBridges, ResourceHelper resourceHelper) {
     super();
     this.vsSolution = env.getCurrentSolution();
     if (vsSolution == null) {
@@ -103,14 +103,14 @@ public class FxCopResultParser implements BatchExtension {
 
   /**
    * Parses a processed violation file.
-   * 
+   *
    * @param file
    *          the file to parse
    */
   public void parse(File file) {
 
     repositoryKey =
-        vsProject.isTest() ? FxCopConstants.TEST_REPOSITORY_KEY : FxCopConstants.REPOSITORY_KEY;
+      vsProject.isTest() ? FxCopConstants.TEST_REPOSITORY_KEY : FxCopConstants.REPOSITORY_KEY;
     if (!"cs".equals(project.getLanguageKey())) {
       // every repository key should be "fxcop-<language_key>", except for C# for which it is simply "fxcop" (for backward compatibility)
       repositoryKey += "-" + project.getLanguageKey();
@@ -185,14 +185,14 @@ public class FxCopResultParser implements BatchExtension {
   private void parseTypeBloc(String namespaceName, SMInputCursor cursor) throws XMLStreamException {
     // Cursor on <Type>
     String typeName = cursor.getAttrValue(NAME);
-    Resource<?> typeResource = resourceBridge.getFromTypeName(namespaceName, typeName);
+    Resource typeResource = resourceBridge.getFromTypeName(namespaceName, typeName);
     SMInputCursor messagesCursor = cursor.descendantElementCursor(MESSAGE);
     while (messagesCursor.getNext() != null) {
       // Cursor on <Message>
       if (messagesCursor.getCurrEvent() == SMEvent.START_ELEMENT) {
 
         Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(repositoryKey)
-            .withKey(messagesCursor.getAttrValue(TYPENAME)));
+          .withKey(messagesCursor.getAttrValue(TYPENAME)));
         if (currentRule != null) {
           // look for all potential issues
           searchForViolations(messagesCursor, typeResource, currentRule);
@@ -204,10 +204,10 @@ public class FxCopResultParser implements BatchExtension {
     }
   }
 
-  protected void searchForViolations(SMInputCursor messagesCursor, Resource<?> typeResource, Rule currentRule) throws XMLStreamException {
+  protected void searchForViolations(SMInputCursor messagesCursor, Resource typeResource, Rule currentRule) throws XMLStreamException {
     SMInputCursor issueCursor = messagesCursor.childElementCursor();
     while (issueCursor.getNext() != null) {
-      final Resource<?> resource;
+      final Resource resource;
       final boolean saveViolation;
       String path = issueCursor.getAttrValue("Path");
       String file = issueCursor.getAttrValue("File");
@@ -242,7 +242,8 @@ public class FxCopResultParser implements BatchExtension {
           violation.setLineId(Integer.parseInt(lineNumber));
         }
         violation.setMessage(issueCursor.collectDescendantText().trim());
-        // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
+        // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar
+        // 3.6+)
         violation.setSeverity(currentRule.getSeverity());
         context.saveViolation(violation);
       }
@@ -251,12 +252,13 @@ public class FxCopResultParser implements BatchExtension {
 
   private void createViolationFromMessageAtProjectLevel(SMInputCursor messagesCursor) throws XMLStreamException {
     Rule currentRule = ruleFinder.find(RuleQuery.create().withRepositoryKey(repositoryKey)
-        .withKey(messagesCursor.getAttrValue(TYPENAME)));
+      .withKey(messagesCursor.getAttrValue(TYPENAME)));
     if (currentRule != null) {
       // the violation is saved at project level, not on a specific resource
       Violation violation = Violation.create(currentRule, project);
       violation.setMessage(messagesCursor.collectDescendantText().trim());
-      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar 3.6+)
+      // The following line is useless (the API allows it but it does nothing): will be removed anyway when updating to Issues API (Sonar
+      // 3.6+)
       violation.setSeverity(currentRule.getSeverity());
       context.saveViolation(violation);
     } else {

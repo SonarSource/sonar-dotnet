@@ -145,7 +145,7 @@ public class GendarmeViolationMaker implements BatchExtension {
     return resourceBridge.getFromTypeName(resourceKey);
   }
 
-  private Violation createViolationOnResource(Resource<?> resource, Integer lineNumber) {
+  private Violation createViolationOnResource(Resource resource, Integer lineNumber) {
     if (StringUtils.isNotEmpty(currentSource) && resource == null) {
       LOG.debug("Ignoring violation on file outside current project ({})", currentSource);
       return null;

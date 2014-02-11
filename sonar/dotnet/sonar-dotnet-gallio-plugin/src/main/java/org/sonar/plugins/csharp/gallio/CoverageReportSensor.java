@@ -57,12 +57,12 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
   private static final Logger LOG = LoggerFactory.getLogger(CoverageReportSensor.class);
 
   private final PropertiesBuilder<String, Integer> lineHitsBuilder = new PropertiesBuilder<String, Integer>(
-      CoreMetrics.COVERAGE_LINE_HITS_DATA);
+    CoreMetrics.COVERAGE_LINE_HITS_DATA);
 
   private final PropertiesBuilder<String, Integer> itLineHitsBuilder = new PropertiesBuilder<String, Integer>(
-      CoreMetrics.IT_COVERAGE_LINE_HITS_DATA);
+    CoreMetrics.IT_COVERAGE_LINE_HITS_DATA);
 
-  private CoverageResultParser parser;
+  private final CoverageResultParser parser;
 
   /**
    * Constructs a {@link CoverageReportSensor}.
@@ -72,7 +72,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
    * @param microsoftWindowsEnvironment
    */
   public CoverageReportSensor(DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment,
-      CoverageResultParser parser) {
+    CoverageResultParser parser) {
     super(configuration, microsoftWindowsEnvironment, "Coverage", configuration.getString(GallioConstants.MODE));
     this.parser = parser;
   }
@@ -88,7 +88,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
   @Override
   public boolean shouldExecuteOnProject(Project project) {
     boolean coverageToolIsNone = GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY.equals(
-        configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
+      configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
     return super.shouldExecuteOnProject(project) && !coverageToolIsNone;
   }
 
@@ -181,7 +181,7 @@ public class CoverageReportSensor extends AbstractRegularDotNetSensor {
     }
   }
 
-  private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource<?> resource, boolean it) {
+  private void saveCoverageMeasures(SensorContext context, FileCoverage coverageData, Resource resource, boolean it) {
     double coverage = coverageData.getCoverage();
 
     if (it) {

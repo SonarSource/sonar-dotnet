@@ -37,6 +37,11 @@
       <artifactId>sonar-duplications</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-deprecated</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
 </project>

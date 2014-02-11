@@ -82,7 +82,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testDecorate() throws Exception {
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new File("Foo");
+    Resource projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     when(context.getMeasure(CoreMetrics.NCLOC)).thenReturn(new Measure(CoreMetrics.NCLOC, 100.0));
     when(context.getMeasure(CoreMetrics.STATEMENTS)).thenReturn(new Measure(CoreMetrics.STATEMENTS, 101.0));
@@ -96,7 +96,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testDecorateWithNoCoverage() throws Exception {
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new File("Foo");
+    Resource projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     Measure ncloc = mock(Measure.class);
     when(ncloc.getValue()).thenReturn(42d);
@@ -115,7 +115,7 @@ public class CoverageDecoratorTest {
   public void testDecorateWithNoCoverageNoStatement() throws Exception {
     // could be an interface or an enum
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new File("Foo");
+    Resource projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     Measure ncloc = mock(Measure.class);
     when(ncloc.getValue()).thenReturn(42d);
@@ -133,7 +133,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testDecorateWithNoCLOC() throws Exception {
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new File("Foo");
+    Resource projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     Measure ncloc = mock(Measure.class);
     when(ncloc.getValue()).thenReturn(42d);
@@ -148,7 +148,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testDontDecorateIfNotFile() throws Exception {
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new Project("Foo");
+    Resource projectResource = new Project("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     decorator.decorate(projectResource, context);
     verify(context, never()).saveMeasure(any(Metric.class), anyDouble());
@@ -157,7 +157,7 @@ public class CoverageDecoratorTest {
   @Test
   public void testDontDecorateIfFileAlreadyHasCoverageMeasure() throws Exception {
     CoverageDecorator decorator = createDecorator();
-    Resource<?> projectResource = new File("Foo");
+    Resource projectResource = new File("Foo");
     DecoratorContext context = mock(DecoratorContext.class);
     when(context.getMeasure(CoreMetrics.COVERAGE)).thenReturn(new Measure());
     decorator.decorate(projectResource, context);
@@ -169,7 +169,7 @@ public class CoverageDecoratorTest {
     UnitCoverageDecorator decorator = createDecorator();
 
     List<Metric> metrics = Arrays.asList(CoreMetrics.COVERAGE, CoreMetrics.LINE_COVERAGE, CoreMetrics.LINES_TO_COVER,
-        CoreMetrics.UNCOVERED_LINES);
+      CoreMetrics.UNCOVERED_LINES);
 
     assertThat(decorator.generatesCoverageMetrics(), equalTo(metrics));
   }

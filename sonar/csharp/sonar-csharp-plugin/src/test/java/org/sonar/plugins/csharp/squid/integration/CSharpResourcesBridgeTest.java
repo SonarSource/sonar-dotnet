@@ -53,7 +53,7 @@ public class CSharpResourcesBridgeTest {
     cSharpResourcesBridge = new CSharpResourcesBridge();
     AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")));
     scanner.scanFiles(FileUtils.listFiles(new java.io.File(CSharpResourcesBridgeTest.class.getResource("/tree").getFile()), new SuffixFileFilter("cs"),
-        FileFilterUtils.directoryFileFilter()));
+      FileFilterUtils.directoryFileFilter()));
     scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
     Collection<SourceCode> squidFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
@@ -66,7 +66,7 @@ public class CSharpResourcesBridgeTest {
 
   @Test
   public void testGetFromType() {
-    Resource<?> file = cSharpResourcesBridge.getFromTypeName("NUnit.Core", "NUnitFramework");
+    Resource file = cSharpResourcesBridge.getFromTypeName("NUnit.Core", "NUnitFramework");
     assertThat(file.getName(), is("NUnitFramework.cs"));
 
     file = cSharpResourcesBridge.getFromTypeName("Test");

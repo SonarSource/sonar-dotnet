@@ -39,6 +39,11 @@
       <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar</groupId>
+      <artifactId>sonar-deprecated</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <!-- Other dependencies -->
     <dependency>
       <groupId>commons-lang</groupId>

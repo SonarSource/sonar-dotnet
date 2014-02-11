@@ -62,7 +62,7 @@ public class CSharpResourcesBridgeTest {
 
   @Test
   public void testGetFromType() {
-    Resource<?> file = cSharpResourcesBridge.getFromTypeName("MyNamespace", "MyClass");
+    Resource file = cSharpResourcesBridge.getFromTypeName("MyNamespace", "MyClass");
     assertThat(file, notNullValue());
     assertThat(file.getName(), is("Fake.cs"));
 
@@ -73,7 +73,7 @@ public class CSharpResourcesBridgeTest {
 
   @Test
   public void testGetFromTypeWithoutNamespace() {
-    Resource<?> file = cSharpResourcesBridge.getFromTypeName("", "MyClassWithoutNamespace");
+    Resource file = cSharpResourcesBridge.getFromTypeName("", "MyClassWithoutNamespace");
     assertThat(file, notNullValue());
     assertThat(file.getName(), is("Fake.cs"));
   }
@@ -86,7 +86,7 @@ public class CSharpResourcesBridgeTest {
 
   @Test
   public void testGetFromMember() {
-    Resource<?> file = cSharpResourcesBridge.getFromMemberName("MyNamespace.MyClass#GetFoo");
+    Resource file = cSharpResourcesBridge.getFromMemberName("MyNamespace.MyClass#GetFoo");
     assertThat(file.getName(), is("Fake.cs"));
   }
 

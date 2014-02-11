@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.microsoft.VisualStudioProject;
@@ -33,9 +32,7 @@ import org.sonar.plugins.dotnet.api.microsoft.VisualStudioSolution;
 import java.io.File;
 import java.util.Collections;
 
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
@@ -127,16 +124,6 @@ public class AbstractRegularDotNetSensorTest {
     when(project.getName()).thenReturn("Project #1");
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
-  }
-
-  @Test
-  public void testFromFile() throws Exception {
-    ProjectFileSystem fileSystem = mock(ProjectFileSystem.class);
-    when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(new File("toto")));
-    Project project = mock(Project.class);
-    when(project.getFileSystem()).thenReturn(fileSystem);
-
-    assertThat(sensor.fromIOFile(new File("toto/tata/fake.cs"), project).getKey(), is("tata/fake.cs"));
   }
 
   @Test

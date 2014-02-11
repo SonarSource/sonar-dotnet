@@ -36,7 +36,7 @@ public class ResourceHelperTest {
   @Test
   public void testIsResourceInProjectForProject() throws Exception {
     ResourceHelper helper = new ResourceHelper(null);
-    Resource<?> resource = new Project("foo");
+    Resource resource = new Project("foo");
     assertThat(helper.isResourceInProject(resource, new Project("foo")), is(true));
     assertThat(helper.isResourceInProject(resource, new Project("bar")), is(false));
   }
@@ -44,7 +44,7 @@ public class ResourceHelperTest {
   @Test
   public void testIsResourceInProjectForResourceWithNoParent() throws Exception {
     SensorContext context = mock(SensorContext.class);
-    Resource<?> resource = new File("foo");
+    Resource resource = new File("foo");
     Project project = new Project("bar");
     ResourceHelper helper = new ResourceHelper(context);
     assertThat(helper.isResourceInProject(resource, project), is(false));
@@ -53,7 +53,7 @@ public class ResourceHelperTest {
   @Test
   public void testIsResourceInProjectForResourceWithParent() throws Exception {
     SensorContext context = mock(SensorContext.class);
-    Resource<?> resource = new File("foo");
+    Resource resource = new File("foo");
     Project project = new Project("bar");
     when(context.getParent(resource)).thenReturn(project);
     ResourceHelper helper = new ResourceHelper(context);
@@ -72,7 +72,7 @@ public class ResourceHelperTest {
   public void testfindParentProjectForProjectWithNoParent() throws Exception {
     SensorContext context = mock(SensorContext.class);
     ResourceHelper helper = new ResourceHelper(context);
-    Resource<?> resource = new File("foo");
+    Resource resource = new File("foo");
     assertThat(helper.findParentProject(resource), is(nullValue()));
   }
 
@@ -80,7 +80,7 @@ public class ResourceHelperTest {
   public void testfindParentProjectForProjectWithParent() throws Exception {
     SensorContext context = mock(SensorContext.class);
     ResourceHelper helper = new ResourceHelper(context);
-    Resource<?> resource = new File("foo");
+    Resource resource = new File("foo");
     Project project = new Project("bar");
     when(context.getParent(resource)).thenReturn(project);
     assertThat(helper.findParentProject(resource), is(project));
