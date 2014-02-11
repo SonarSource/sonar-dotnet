@@ -73,20 +73,23 @@ public abstract class CoverageDecorator implements Decorator {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
+    // FIXME: Deprecated
     if (project.isRoot() || !GallioConstants.isLanguageSupported(project.getLanguageKey())) {
       return false;
     }
     boolean skipMode = AbstractDotNetSensor.MODE_SKIP.equalsIgnoreCase(executionMode);
     boolean isTestProject = microsoftWindowsEnvironment.getCurrentProject(project.getName()).isTest();
     boolean coverageToolIsNone = GallioRunnerConstants.COVERAGE_TOOL_NONE_KEY.equals(
-        configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
+      configuration.getString(GallioConstants.COVERAGE_TOOL_KEY));
     return !isTestProject && !skipMode && !coverageToolIsNone;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   @SuppressWarnings("rawtypes")
   public void decorate(Resource resource, DecoratorContext context) {
     if (ResourceUtils.isFile(resource) && context.getMeasure(testMetric) == null) {

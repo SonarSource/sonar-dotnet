@@ -36,13 +36,14 @@ import java.util.List;
  */
 public class GendarmeRuleRepository extends RuleRepository {
 
-  private String repositoryKey;
-  private ServerFileSystem fileSystem;
-  private XMLRuleParser xmlRuleParser;
-  private Settings settings;
+  private final String repositoryKey;
+  private final ServerFileSystem fileSystem;
+  // FIXME: Deprecated
+  private final XMLRuleParser xmlRuleParser;
+  private final Settings settings;
 
   public GendarmeRuleRepository(String repoKey, String languageKey, ServerFileSystem fileSystem, XMLRuleParser xmlRuleParser,
-      Settings settings) {
+    Settings settings) {
     super(repoKey, languageKey);
     setName(GendarmeConstants.REPOSITORY_NAME);
     this.fileSystem = fileSystem;
@@ -60,6 +61,7 @@ public class GendarmeRuleRepository extends RuleRepository {
 
     // Custom rules:
     // - old fashion: XML files in the file system
+    // FIXME: Deprecated
     for (File userExtensionXml : fileSystem.getExtensions(repositoryKey, "xml")) {
       rules.addAll(xmlRuleParser.parse(userExtensionXml));
     }

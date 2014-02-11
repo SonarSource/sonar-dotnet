@@ -38,6 +38,7 @@ public class CSharpCPDMappingTest {
   private CSharp language;
   @Mock
   private Project project;
+  // FIXME: deprecated
   @Mock
   private ProjectFileSystem projectFileSystem;
 
@@ -46,6 +47,7 @@ public class CSharpCPDMappingTest {
   @Before
   public void init() {
     MockitoAnnotations.initMocks(this);
+    // FIXME: deprecated
     when(project.getFileSystem()).thenReturn(projectFileSystem);
 
     settings = Settings.createForComponent(new CSharpCorePlugin());

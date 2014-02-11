@@ -114,6 +114,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldNotExecuteOnTestProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
@@ -122,6 +123,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
@@ -130,6 +132,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldCilSensorNotExecuteOnTestProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     assertFalse(cilSensor.shouldExecuteOnProject(project));
   }
@@ -154,6 +157,7 @@ public class AbstractRegularDotNetSensorTest {
     cilSensor = new FakeCilSensor(FakeSensor.MODE_REUSE_REPORT);
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATION_KEY)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     assertTrue(cilSensor.shouldExecuteOnProject(project));
@@ -163,6 +167,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldCilSensorExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATION_KEY)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
 
@@ -174,6 +179,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldCilSensorNotExecuteOnNormalProjectWithoutAssemblies() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATION_KEY)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
 
@@ -184,6 +190,7 @@ public class AbstractRegularDotNetSensorTest {
   public void testShouldCilSensorExecuteOnNormalProjectWithBadPattern() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     when(configurationMock.getString(BUILD_CONFIGURATION_KEY)).thenReturn(BUILD_CONFIGURATIONS_DEFVALUE);
     when(configurationMock.getString(eq(ASSEMBLIES_TO_SCAN_KEY))).thenReturn("foo/bar/whatever/*.dll");

@@ -46,6 +46,7 @@ public class CSharpProjectInitializerTest {
     settings = Settings.createForComponent(new DotNetCorePlugin());
     project = mock(Project.class);
     Configuration deprecatedConf = new BaseConfiguration();
+    // FIXME: deprecated
     when(project.getConfiguration()).thenReturn(deprecatedConf);
 
     initializer = new CSharpProjectInitializer(settings);
@@ -55,6 +56,7 @@ public class CSharpProjectInitializerTest {
   public void shouldExecuteOnProject() {
     assertThat(initializer.shouldExecuteOnProject(project)).isFalse();
 
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("cs");
     assertThat(initializer.shouldExecuteOnProject(project)).isTrue();
   }

@@ -101,6 +101,7 @@ public class AbstractDotNetSensorTest {
   public void testShouldNotExecuteOnOtherLanguageProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("java");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }
@@ -109,6 +110,7 @@ public class AbstractDotNetSensorTest {
   public void testShouldExecuteEvenOnTestProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project Test");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("fake");
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
@@ -117,6 +119,7 @@ public class AbstractDotNetSensorTest {
   public void testShouldExecuteOnNormalProject() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("fake");
     assertTrue(sensor.shouldExecuteOnProject(project));
   }
@@ -125,6 +128,7 @@ public class AbstractDotNetSensorTest {
   public void testShouldNotExecuteOnNonSupportedLanguage() {
     Project project = mock(Project.class);
     when(project.getName()).thenReturn("Project #1");
+    // FIXME: deprecated
     when(project.getLanguageKey()).thenReturn("java");
     assertFalse(sensor.shouldExecuteOnProject(project));
   }

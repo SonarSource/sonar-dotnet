@@ -60,6 +60,7 @@ public class CSharpFileLinesVisitorTest {
   private FileLinesContext fileLinesContext;
   @Mock
   private Project project;
+  // FIXME: deprecated
   @Mock
   private ProjectFileSystem fileSystem;
 
@@ -67,7 +68,9 @@ public class CSharpFileLinesVisitorTest {
   public void init() {
     MockitoAnnotations.initMocks(this);
 
+    // FIXME: deprecated
     when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(TestUtils.getResource("/")));
+    // FIXME: deprecated
     when(project.getFileSystem()).thenReturn(fileSystem);
 
     when(fileLinesContextFactory.createFor(any(Resource.class))).thenReturn(fileLinesContext);

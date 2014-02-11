@@ -41,12 +41,12 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
 
   /**
    * Creates an {@link AbstractRegularDotNetSensor} that has a {@link MicrosoftWindowsEnvironment} reference.
-   * 
+   *
    * @param microsoftWindowsEnvironment
    *          the {@link MicrosoftWindowsEnvironment}
    */
   protected AbstractRegularDotNetSensor(DotNetConfiguration configuration, MicrosoftWindowsEnvironment microsoftWindowsEnvironment, String toolName,
-      String executionMode) {
+    String executionMode) {
     super(microsoftWindowsEnvironment, toolName, executionMode);
     this.configuration = configuration;
   }
@@ -69,7 +69,7 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
    */
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return super.shouldExecuteOnProject(project) && (isTestProject(project) == isTestSensor()) && (!isCilSensor() || assembliesFound(project));
+    return super.shouldExecuteOnProject(project) && isTestProject(project) == isTestSensor() && (!isCilSensor() || assembliesFound(project));
   }
 
   private boolean assembliesFound(Project project) {
@@ -112,6 +112,7 @@ public abstract class AbstractRegularDotNetSensor extends AbstractDotNetSensor {
   @Override
   public org.sonar.api.resources.File fromIOFile(File file, Project project) {
     if (isTestSensor()) {
+      // FIXME: deprecated
       return org.sonar.api.resources.File.fromIOFile(file, project.getFileSystem().getTestDirs());
     }
     return super.fromIOFile(file, project);

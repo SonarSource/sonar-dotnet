@@ -41,6 +41,7 @@ import java.util.List;
  * C# Core plugin class.
  */
 @Properties({
+  // FIXME: deprecated
   @Property(key = CSharpSquidConstants.CPD_MINIMUM_TOKENS_PROPERTY, defaultValue = "" + CoreProperties.CPD_MINIMUM_TOKENS_DEFAULT_VALUE,
     name = "Minimum tokens",
     description = "The number of duplicate tokens above which a block is considered as a duplication in a C# program.", global = true,

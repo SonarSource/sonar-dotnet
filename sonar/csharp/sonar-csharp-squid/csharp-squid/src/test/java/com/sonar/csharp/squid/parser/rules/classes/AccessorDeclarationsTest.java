@@ -38,10 +38,10 @@ public class AccessorDeclarationsTest extends RuleTest {
   @Test
   public void ok() {
     assertThat(p)
-        .matches("getAccessorDeclaration")
-        .matches("setAccessorDeclaration")
-        .matches("getAccessorDeclaration setAccessorDeclaration")
-        .matches("setAccessorDeclaration getAccessorDeclaration");
+      .matches("getAccessorDeclaration")
+      .matches("setAccessorDeclaration")
+      .matches("getAccessorDeclaration setAccessorDeclaration")
+      .matches("setAccessorDeclaration getAccessorDeclaration");
   }
 
 }

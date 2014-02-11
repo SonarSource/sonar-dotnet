@@ -38,14 +38,17 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   public CSharpCPDMapping(CSharp csharp, Project project, Settings settings) {
     super();
     this.csharp = csharp;
+    // FIXME: deprecated
     this.charset = project.getFileSystem().getSourceCharset();
     ignoreLiterals = settings.getBoolean(CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY);
   }
 
+  @Override
   public Language getLanguage() {
     return csharp;
   }
 
+  @Override
   public Tokenizer getTokenizer() {
     return new CSharpCPDTokenizer(ignoreLiterals, charset);
   }

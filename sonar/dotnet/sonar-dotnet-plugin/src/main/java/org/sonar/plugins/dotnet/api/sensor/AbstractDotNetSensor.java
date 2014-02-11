@@ -61,7 +61,9 @@ public abstract class AbstractDotNetSensor implements Sensor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public boolean shouldExecuteOnProject(Project project) {
+    // FIXME: deprecated
     if (project.isRoot() || !isLanguageSupported(project.getLanguageKey())) {
       return false;
     }
@@ -93,6 +95,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
   /**
    * {@inheritDoc}
    */
+  @Override
   public abstract void analyse(Project project, SensorContext context);
 
   /**

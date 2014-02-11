@@ -40,6 +40,7 @@ public class CSharpProjectInitializer extends Initializer {
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
+    // FIXME: deprecated
     return CSharpConstants.LANGUAGE_KEY.equals(project.getLanguageKey());
   }
 
@@ -62,6 +63,7 @@ public class CSharpProjectInitializer extends Initializer {
   // - exclusions
   // TODO: remove all this code when Apache Configuration has completely been removed
   private void setPropertyOnDeprecatedConfiguration(Project project, String key, Object value) {
+    // FIXME: deprecated
     project.getConfiguration().setProperty(key, value);
   }
 
