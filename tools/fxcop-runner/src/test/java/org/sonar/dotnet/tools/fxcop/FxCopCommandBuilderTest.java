@@ -36,7 +36,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
+// FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class FxCopCommandBuilderTest {
 
   private static File fakeFxCopExecutable;

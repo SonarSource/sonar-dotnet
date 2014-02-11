@@ -39,7 +39,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
+// FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class GallioCommandBuilderTest {
 
   private static final File GALLIO_EXE = TestUtils.getResource("/Runner/FakeProg/Gallio/bin/Gallio.Echo.exe");

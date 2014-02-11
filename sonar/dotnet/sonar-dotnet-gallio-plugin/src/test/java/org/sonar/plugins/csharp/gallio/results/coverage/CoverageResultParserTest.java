@@ -54,7 +54,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
+// FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({File.class, DotCoverParsingStrategy.class})
 public class CoverageResultParserTest {

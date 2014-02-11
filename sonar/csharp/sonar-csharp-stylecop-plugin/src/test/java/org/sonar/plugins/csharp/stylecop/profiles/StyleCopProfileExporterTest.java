@@ -31,7 +31,7 @@ import org.sonar.test.TestUtils;
 import java.io.File;
 import java.io.StringWriter;
 
-//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
+// FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class StyleCopProfileExporterTest {
 
   private RulesProfile profile;

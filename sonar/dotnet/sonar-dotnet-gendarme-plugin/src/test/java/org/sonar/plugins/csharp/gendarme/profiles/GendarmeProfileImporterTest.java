@@ -44,7 +44,7 @@ import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
+// FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
 public class GendarmeProfileImporterTest {
 
   private ValidationMessages messages;
