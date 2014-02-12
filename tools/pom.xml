@@ -17,7 +17,6 @@
     <module>stylecop-runner</module>
     <module>fxcop-runner</module>
     <module>gendarme-runner</module>
-    <module>gallio-runner</module>
   </modules>
 
   <dependencies>

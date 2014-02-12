@@ -18,7 +18,6 @@
     <!-- Plugins that can run on multiple .NET languages -->
     <module>dotnet/sonar-dotnet-fxcop-plugin</module>
     <module>dotnet/sonar-dotnet-gendarme-plugin</module>
-    <module>dotnet/sonar-dotnet-gallio-plugin</module>
     <module>dotnet/sonar-dotnet-tests-plugin</module>
     
     <!-- Core C# Plugin -->
