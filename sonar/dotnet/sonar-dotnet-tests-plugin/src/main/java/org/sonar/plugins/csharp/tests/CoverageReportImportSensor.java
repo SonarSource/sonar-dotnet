@@ -21,6 +21,8 @@ package org.sonar.plugins.csharp.tests;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.measures.CoverageMeasuresBuilder;
@@ -32,6 +34,7 @@ import java.util.Set;
 
 public class CoverageReportImportSensor implements Sensor {
 
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
   private static final Set<String> SUPPORTED_LANGUAGES = ImmutableSet.of("cs", "vbnet");
 
   private final CoverageProviderFactory coverageProviderFactory;
@@ -68,6 +71,8 @@ public class CoverageReportImportSensor implements Sensor {
         for (Measure measure : coverageMeasureBuilder.createMeasures()) {
           context.saveMeasure(file, measure);
         }
+      } else {
+        LOG.debug("Code coverage will not be imported for the following non-indexed file: " + filePath);
       }
     }
   }
