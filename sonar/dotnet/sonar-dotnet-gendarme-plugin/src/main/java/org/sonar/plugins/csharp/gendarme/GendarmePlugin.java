@@ -55,7 +55,7 @@ import java.util.List;
     name = "Gendarme program timeout", description = "Maximum number of minutes before the Gendarme program will be stopped.",
     global = true, project = true, type = PropertyType.INTEGER),
   @Property(key = GendarmeConstants.MODE, defaultValue = "", name = "Gendarme activation mode",
-    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false,
+    description = "Possible values : empty (means active), 'skip' and 'reuseReports'.", global = false, project = false,
     type = PropertyType.SINGLE_SELECT_LIST, options = {AbstractDotNetSensor.MODE_SKIP, AbstractDotNetSensor.MODE_REUSE_REPORT}),
   @Property(key = GendarmeConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the Gendarme report files",
     description = "Name of the Gendarme report file used when reuse report mode is activated. "

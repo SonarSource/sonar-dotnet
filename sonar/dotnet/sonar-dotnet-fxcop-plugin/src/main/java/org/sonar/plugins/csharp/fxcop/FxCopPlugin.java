@@ -51,7 +51,7 @@ import java.util.List;
     name = "FxCop program timeout", description = "Maximum number of minutes before the FxCop program will be stopped.", global = true,
     project = true, type = PropertyType.INTEGER),
   @Property(key = FxCopConstants.MODE, defaultValue = "", name = "FxCop activation mode",
-    description = "Possible values : empty (means active), 'skip' and 'reuseReport'.", global = false, project = false,
+    description = "Possible values : empty (means active), 'skip' and 'reuseReports'.", global = false, project = false,
     type = PropertyType.SINGLE_SELECT_LIST, options = {AbstractDotNetSensor.MODE_SKIP, AbstractDotNetSensor.MODE_REUSE_REPORT}),
   @Property(key = FxCopConstants.REPORTS_PATH_KEY, defaultValue = "", name = "Name of the FxCop report files",
     description = "Name of the FxCop report file used when reuse report mode is activated. "

@@ -40,7 +40,7 @@ public abstract class AbstractDotNetSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractDotNetSensor.class);
 
   public static final String MODE_SKIP = "skip";
-  public static final String MODE_REUSE_REPORT = "reuseReport";
+  public static final String MODE_REUSE_REPORT = "reuseReports";
 
   private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
   private final String toolName;
