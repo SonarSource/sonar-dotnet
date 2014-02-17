@@ -32,7 +32,6 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.File;
-import org.sonar.api.resources.Project;
 
 import java.util.List;
 import java.util.Set;
@@ -42,20 +41,21 @@ import java.util.Set;
  */
 public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements AstAndTokenVisitor {
 
-  private final Project project;
+  private final FileProvider fileProvider;
   private final FileLinesContextFactory fileLinesContextFactory;
   private FileLinesContext fileLinesContext;
+
   private final Set<Integer> linesOfCode = Sets.newHashSet();
   private final Set<Integer> linesOfComments = Sets.newHashSet();
 
-  public CSharpFileLinesVisitor(Project project, FileLinesContextFactory fileLinesContextFactory) {
-    this.project = project;
+  public CSharpFileLinesVisitor(FileProvider fileProvider, FileLinesContextFactory fileLinesContextFactory) {
+    this.fileProvider = fileProvider;
     this.fileLinesContextFactory = fileLinesContextFactory;
   }
 
   @Override
   public void visitFile(AstNode astNode) {
-    File sonarFile = File.fromIOFile(getContext().getFile(), project);
+    File sonarFile = fileProvider.fromIOFile(getContext().getFile());
     fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
   }
 
@@ -64,8 +64,8 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements 
     int fileLength = getContext().peekSourceCode().getInt(CSharpMetric.LINES);
 
     for (int line = 1; line <= fileLength; line++) {
-      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, getLineOfCode(line));
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, getLineOfComment(line));
+      fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, linesOfCode.contains(line) ? 1 : 0);
+      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, linesOfComments.contains(line) ? 1 : 0);
     }
     fileLinesContext.save();
 
@@ -73,6 +73,7 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements 
     linesOfComments.clear();
   }
 
+  @Override
   public void visitToken(Token token) {
     if (token.getType().equals(GenericTokenType.EOF)) {
       return;
@@ -85,20 +86,6 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements 
         linesOfComments.add(trivia.getToken().getLine());
       }
     }
-  }
-
-  private int getLineOfCode(int line) {
-    if (linesOfCode.contains(line)) {
-      return 1;
-    }
-    return 0;
-  }
-
-  private int getLineOfComment(int line) {
-    if (linesOfComments.contains(line)) {
-      return 1;
-    }
-    return 0;
   }
 
 }

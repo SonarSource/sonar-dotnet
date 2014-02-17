@@ -19,80 +19,89 @@
  */
 package com.sonar.csharp.squid.metric;
 
-import com.google.common.collect.Lists;
 import com.sonar.csharp.squid.CSharpConfiguration;
-import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.squid.api.SourceProject;
 import org.sonar.squid.indexer.QueryByType;
-import org.sonar.test.TestUtils;
 
 import java.io.File;
 import java.nio.charset.Charset;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CSharpFileLinesVisitorTest {
 
-  private CSharpFileLinesVisitor fileLinesVisitor;
-  @Mock
-  private FileLinesContextFactory fileLinesContextFactory;
-  @Mock
-  private FileLinesContext fileLinesContext;
-  @Mock
-  private Project project;
-  // FIXME: deprecated
-  @Mock
-  private ProjectFileSystem fileSystem;
-
-  @Before
-  public void init() {
-    MockitoAnnotations.initMocks(this);
-
-    // FIXME: deprecated
-    when(fileSystem.getSourceDirs()).thenReturn(Lists.newArrayList(TestUtils.getResource("/")));
-    // FIXME: deprecated
-    when(project.getFileSystem()).thenReturn(fileSystem);
-
-    when(fileLinesContextFactory.createFor(any(Resource.class))).thenReturn(fileLinesContext);
-
-    fileLinesVisitor = new CSharpFileLinesVisitor(project, fileLinesContextFactory);
-  }
-
-  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
   @Test
-  public void testScanFile() {
-    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")), fileLinesVisitor);
-    scanner.scanFile(readFile("/metric/Money.cs"));
-    SourceProject project = (SourceProject) scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
+  public void test() {
+    FileLinesContext fileLinesContext = mock(FileLinesContext.class);
+    FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
+    when(fileLinesContextFactory.createFor(Mockito.any(Resource.class))).thenReturn(fileLinesContext);
 
-    int lines = project.getInt(CSharpMetric.LINES);
-    int loc = project.getInt(CSharpMetric.LINES_OF_CODE);
-    int comments = project.getInt(CSharpMetric.COMMENT_LINES);
+    CSharpFileLinesVisitor visitor = new CSharpFileLinesVisitor(mock(FileProvider.class), fileLinesContextFactory);
 
-    verify(fileLinesContext, times(loc)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(1));
-    verify(fileLinesContext, times(lines - loc)).setIntValue(eq(CoreMetrics.NCLOC_DATA_KEY), anyInt(), eq(0));
+    AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")), visitor);
+    scanner.scanFile(readFile("/metric/CSharpFileLinesVisitor.cs"));
+    scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
-    verify(fileLinesContext, times(comments)).setIntValue(eq(CoreMetrics.COMMENT_LINES_DATA_KEY), anyInt(), eq(1));
-    verify(fileLinesContext, times(lines - comments)).setIntValue(eq(CoreMetrics.COMMENT_LINES_DATA_KEY), anyInt(), eq(0));
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 4, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 5, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 6, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 7, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 8, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 9, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 10, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 11, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 12, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 13, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 14, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 15, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 16, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 17, 0); // FIXME
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 18, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 19, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 20, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 21, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 22, 0);
+    verify(fileLinesContext, times(22)).setIntValue(Mockito.eq(CoreMetrics.NCLOC_DATA_KEY), Mockito.anyInt(), Mockito.anyInt());
+
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 2, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 3, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 4, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 5, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 6, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 7, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 8, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 9, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 10, 0); // FIXME
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 11, 0); // FIXME
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 12, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 13, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 14, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 15, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 16, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 17, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 18, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 19, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 20, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 21, 0);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 22, 0);
+    verify(fileLinesContext, times(22)).setIntValue(Mockito.eq(CoreMetrics.COMMENT_LINES_DATA_KEY), Mockito.anyInt(), Mockito.anyInt());
   }
 
   protected File readFile(String path) {

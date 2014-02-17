@@ -25,6 +25,7 @@ import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
+import com.sonar.csharp.squid.metric.FileProvider;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
@@ -126,7 +127,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     Collection<SquidAstVisitor<Grammar>> squidChecks = annotationCheckFactory.getChecks();
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(squidChecks);
     // TODO: remove the following line & class once SSLR Squid bridge computes NCLOC_DATA_KEY & COMMENT_LINES_DATA_KEY
-    visitors.add(new CSharpFileLinesVisitor(project, fileLinesContextFactory));
+    visitors.add(new CSharpFileLinesVisitor(new FileProvider(project), fileLinesContextFactory));
     scanner = CSharpAstScanner.create(createParserConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(getFilesToAnalyse(project));
 
