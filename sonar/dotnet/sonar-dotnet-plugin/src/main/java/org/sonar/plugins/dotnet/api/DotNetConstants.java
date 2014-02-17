@@ -90,8 +90,6 @@ public final class DotNetConstants {
 
   public static final String TEST_ASSEMBLIES_KEY = "sonar.dotnet.test.assemblies";
 
-  public static final String KEY_GENERATION_STRATEGY_KEY = "sonar.dotnet.key.generation.strategy";
-
   private static Map<String, String> dotnetFrameworkLocationKeys;
   private static Map<String, String> silverlightFrameworkLocationKeys;
 

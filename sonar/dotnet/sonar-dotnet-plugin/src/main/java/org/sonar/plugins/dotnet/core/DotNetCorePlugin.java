@@ -77,16 +77,14 @@ import java.util.List;
   @Property(key = DotNetConstants.BUILD_CONFIGURATION_KEY, defaultValue = DotNetConstants.BUILD_CONFIGURATIONS_DEFVALUE,
     name = "Build configuration", description = "Build configurations used to build the solution.", global = true, project = true),
   @Property(key = DotNetConstants.BUILD_PLATFORM_KEY, defaultValue = DotNetConstants.BUILD_PLATFORM_DEFVALUE,
-    name = "Build platform", description = "Build platform used to build the solution.", global = true, project = true),
-  @Property(key = DotNetConstants.KEY_GENERATION_STRATEGY_KEY, defaultValue = "",
-    name = "Resource key generation strategy", description = "Strategy to generate sonar resource keys. Default value is standard. If you encounter " +
-      "any 'NonUniqueResultException' errors you can set this property to 'safe'", global = true, project = true)
+    name = "Build platform", description = "Build platform used to build the solution.", global = true, project = true)
 })
 public class DotNetCorePlugin extends SonarPlugin {
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public List<Class<? extends Extension>> getExtensions() {
     List<Class<? extends Extension>> extensions = new ArrayList<Class<? extends Extension>>();
 

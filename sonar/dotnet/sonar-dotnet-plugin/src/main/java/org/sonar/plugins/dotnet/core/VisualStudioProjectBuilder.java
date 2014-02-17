@@ -49,12 +49,12 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
 
   private static final Logger LOG = LoggerFactory.getLogger(VisualStudioProjectBuilder.class);
 
-  private DotNetConfiguration configuration;
-  private MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
+  private final DotNetConfiguration configuration;
+  private final MicrosoftWindowsEnvironment microsoftWindowsEnvironment;
 
   /**
    * Creates a new {@link VisualStudioProjectBuilder}
-   * 
+   *
    * @param reactor
    *          the reactor
    * @param configuration
@@ -63,7 +63,7 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
    *          the shared Microsoft Windows Environment
    */
   public VisualStudioProjectBuilder(ProjectReactor reactor, DotNetConfiguration configuration,
-      MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
+    MicrosoftWindowsEnvironment microsoftWindowsEnvironment) {
     super(reactor);
     this.configuration = configuration;
     this.microsoftWindowsEnvironment = microsoftWindowsEnvironment;
@@ -96,15 +96,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
     String workDir = root.getWorkDir().getAbsolutePath().substring(root.getBaseDir().getAbsolutePath().length() + 1);
     microsoftWindowsEnvironment.setWorkingDirectory(workDir);
 
-    boolean safeMode = "safe".equalsIgnoreCase(configuration.getString(DotNetConstants.KEY_GENERATION_STRATEGY_KEY));
-
     for (VisualStudioProject vsProject : currentSolution.getProjects()) {
-      final String projectKey;
-      if (safeMode) {
-        projectKey = root.getKey() + ":" + StringUtils.deleteWhitespace(vsProject.getName());
-      } else {
-        projectKey = StringUtils.substringBefore(root.getKey(), ":") + ":" + StringUtils.deleteWhitespace(vsProject.getName());
-      }
+      String projectKey = root.getKey() + ":" + StringUtils.deleteWhitespace(vsProject.getName());
 
       if (projectKey.equals(root.getKey())) {
         throw new SonarException("The solution and one of its projects have the same key ('" + projectKey
@@ -115,8 +108,8 @@ public class VisualStudioProjectBuilder extends ProjectBuilder {
       overrideSonarLanguageProperty(vsProject, subprojectProperties);
 
       ProjectDefinition subProject = ProjectDefinition.create().setProperties(subprojectProperties)
-          .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
-          .setVersion(root.getVersion()).setName(vsProject.getName());
+        .setBaseDir(vsProject.getDirectory()).setWorkDir(new File(vsProject.getDirectory(), workDir)).setKey(projectKey)
+        .setVersion(root.getVersion()).setName(vsProject.getName());
 
       if (vsProject.isTest()) {
         subProject.setTestDirs(".");

@@ -139,7 +139,7 @@ public class VisualStudioProjectBuilderTest {
     ProjectDefinition subProject = reactor.getRoot().getSubProjects().get(0);
     VisualStudioProject vsProject = microsoftWindowsEnvironment.getCurrentProject("Example.Application");
     assertThat(subProject.getName(), is("Example.Application"));
-    assertThat(subProject.getKey(), is("groupId:Example.Application"));
+    assertThat(subProject.getKey(), is("groupId:artifactId:Example.Application"));
     assertThat(subProject.getVersion(), is("1.0"));
     assertThat(subProject.getBaseDir(), is(vsProject.getDirectory()));
     assertThat(subProject.getWorkDir(), is(new File(vsProject.getDirectory(), "WORK-DIR")));
@@ -154,7 +154,6 @@ public class VisualStudioProjectBuilderTest {
   @Test
   public void testCorrectlyConfiguredProjectInSafeMode() throws Exception {
     settings.setProperty(DotNetConstants.SOLUTION_FILE_KEY, "Example.sln");
-    settings.setProperty(DotNetConstants.KEY_GENERATION_STRATEGY_KEY, "safe");
     projectBuilder.build(reactor);
     // check that the configuration is OK
     assertThat(microsoftWindowsEnvironment.getDotnetVersion(), is("4.0"));
