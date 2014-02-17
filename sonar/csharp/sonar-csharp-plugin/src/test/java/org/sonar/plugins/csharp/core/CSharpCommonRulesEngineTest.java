@@ -19,32 +19,29 @@
  */
 package org.sonar.plugins.csharp.core;
 
-import org.sonar.api.resources.Project;
+import org.junit.Test;
 import org.sonar.commonrules.api.CommonRulesEngine;
-import org.sonar.commonrules.api.CommonRulesEngineProvider;
-import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.commonrules.api.CommonRulesRepository;
 
-public class CSharpCommonRulesEngineProvider extends CommonRulesEngineProvider {
+import static org.fest.assertions.Assertions.assertThat;
 
-  public CSharpCommonRulesEngineProvider() {
-    super();
+public class CSharpCommonRulesEngineTest {
+
+  @Test
+  public void provide_extensions() {
+    CommonRulesEngine engine = new CSharpCommonRulesEngine();
+    assertThat(engine.provide()).isNotEmpty();
   }
 
-  public CSharpCommonRulesEngineProvider(Project project) {
-    super(project);
-  }
-
-  @Override
-  protected void doActivation(CommonRulesEngine engine) {
-    engine.activateRule("InsufficientBranchCoverage");
-    engine.activateRule("InsufficientCommentDensity");
-    engine.activateRule("DuplicatedBlocks");
-    engine.activateRule("InsufficientLineCoverage");
-  }
-
-  @Override
-  protected String getLanguageKey() {
-    return CSharpConstants.LANGUAGE_KEY;
+  @Test
+  public void declare_rules() {
+    CommonRulesEngine engine = new CSharpCommonRulesEngine();
+    CommonRulesRepository repository = engine.newRepository();
+    assertThat(repository.rules()).hasSize(4);
+    assertThat(repository.rule("InsufficientBranchCoverage")).isNotNull();
+    assertThat(repository.rule("InsufficientCommentDensity")).isNotNull();
+    assertThat(repository.rule("DuplicatedBlocks")).isNotNull();
+    assertThat(repository.rule("InsufficientLineCoverage")).isNotNull();
   }
 
 }

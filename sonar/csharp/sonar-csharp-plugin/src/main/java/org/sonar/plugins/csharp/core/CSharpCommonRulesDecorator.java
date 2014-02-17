@@ -17,22 +17,17 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-
 package org.sonar.plugins.csharp.core;
 
-import org.junit.Test;
+import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.resources.ProjectFileSystem;
+import org.sonar.commonrules.api.CommonRulesDecorator;
+import org.sonar.plugins.csharp.api.CSharpConstants;
 
-import static org.fest.assertions.Assertions.assertThat;
+public class CSharpCommonRulesDecorator extends CommonRulesDecorator {
 
-public class CSharpCommonRulesEngineProviderTest {
-
-  @Test
-  public void shouldActivateRules() {
-    CSharpCommonRulesEngineProvider provider = new CSharpCommonRulesEngineProvider();
-    assertThat(provider.provide().size()).isGreaterThan(1);
-
-    provider = new CSharpCommonRulesEngineProvider(null);
-    assertThat(provider.provide().size()).isGreaterThan(1);
+  public CSharpCommonRulesDecorator(ProjectFileSystem fs, RulesProfile qProfile) {
+    super(CSharpConstants.LANGUAGE_KEY, fs, qProfile);
   }
 
 }

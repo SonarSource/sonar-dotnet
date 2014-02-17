@@ -73,7 +73,8 @@ public class CSharpCorePlugin extends SonarPlugin {
       CSharpSourceImporter.class,
 
       // Common Rules
-      CSharpCommonRulesEngineProvider.class,
+      CSharpCommonRulesEngine.class,
+      CSharpCommonRulesDecorator.class,
 
       // C# Squid
       CSharpCPDMapping.class,
