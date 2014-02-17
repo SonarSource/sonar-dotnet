@@ -79,12 +79,21 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements 
       return;
     }
 
-    linesOfCode.add(token.getLine());
+    addTokenLinesToSet(linesOfCode, token);
     List<Trivia> trivias = token.getTrivia();
     for (Trivia trivia : trivias) {
       if (trivia.isComment()) {
-        linesOfComments.add(trivia.getToken().getLine());
+        addTokenLinesToSet(linesOfComments, trivia.getToken());
       }
+    }
+  }
+
+  private static void addTokenLinesToSet(Set<Integer> set, Token token) {
+    int currentLine = token.getLine();
+
+    for (String line : token.getOriginalValue().split("\r\n?+|\n", -1)) {
+      set.add(currentLine);
+      currentLine++;
     }
   }
 
