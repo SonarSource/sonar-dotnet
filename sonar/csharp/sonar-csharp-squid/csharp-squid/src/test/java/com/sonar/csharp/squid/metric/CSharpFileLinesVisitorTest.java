@@ -23,7 +23,6 @@ import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.squid.AstScanner;
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.measures.CoreMetrics;
@@ -52,7 +51,7 @@ public class CSharpFileLinesVisitorTest {
     CSharpFileLinesVisitor visitor = new CSharpFileLinesVisitor(mock(FileProvider.class), fileLinesContextFactory);
 
     AstScanner<Grammar> scanner = CSharpAstScanner.create(new CSharpConfiguration(Charset.forName("UTF-8")), visitor);
-    scanner.scanFile(readFile("/metric/CSharpFileLinesVisitor.cs"));
+    scanner.scanFile(new File("src/test/resources/metric/CSharpFileLinesVisitor.cs"));
     scanner.getIndex().search(new QueryByType(SourceProject.class)).iterator().next();
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 0);
@@ -102,10 +101,6 @@ public class CSharpFileLinesVisitorTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 21, 0);
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 22, 0);
     verify(fileLinesContext, times(22)).setIntValue(Mockito.eq(CoreMetrics.COMMENT_LINES_DATA_KEY), Mockito.anyInt(), Mockito.anyInt());
-  }
-
-  protected File readFile(String path) {
-    return FileUtils.toFile(getClass().getResource(path));
   }
 
 }
