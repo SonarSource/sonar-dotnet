@@ -37,8 +37,7 @@ public class CSharpCommonRulesEngineTest {
   public void declare_rules() {
     CommonRulesEngine engine = new CSharpCommonRulesEngine();
     CommonRulesRepository repository = engine.newRepository();
-    assertThat(repository.rules()).hasSize(4);
-    assertThat(repository.rule("InsufficientBranchCoverage")).isNotNull();
+    assertThat(repository.rules()).hasSize(3);
     assertThat(repository.rule("InsufficientCommentDensity")).isNotNull();
     assertThat(repository.rule("DuplicatedBlocks")).isNotNull();
     assertThat(repository.rule("InsufficientLineCoverage")).isNotNull();

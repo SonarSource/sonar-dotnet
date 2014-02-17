@@ -32,7 +32,6 @@ public class CSharpCommonRulesEngine extends CommonRulesEngine {
   @Override
   protected void doEnableRules(CommonRulesRepository repository) {
     repository
-      .enableInsufficientBranchCoverageRule(null)
       .enableInsufficientCommentDensityRule(null)
       .enableDuplicatedBlocksRule()
       .enableInsufficientLineCoverageRule(null);
