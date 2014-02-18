@@ -24,13 +24,6 @@
   </properties>
 
   <dependencies>
-    <!-- .NET tools -->
-    <dependency>
-      <groupId>org.codehaus.sonar-plugins.dotnet.tools</groupId>
-      <artifactId>gendarme-runner</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
     <!-- sonar open-source -->
     <dependency>
       <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
