@@ -18,6 +18,7 @@
   <modules>
     <module>csharp-squid</module>
     <module>csharp-checks</module>
+    <module>sonar-csharp-plugin</module>
     <module>sslr-csharp-toolkit</module>
   </modules>
 
