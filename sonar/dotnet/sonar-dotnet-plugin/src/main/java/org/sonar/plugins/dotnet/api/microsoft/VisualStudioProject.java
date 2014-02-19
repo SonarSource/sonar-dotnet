@@ -201,7 +201,7 @@ public class VisualStudioProject {
     if (assembly.exists()) {
       result.add(assembly);
     } else {
-      LOG.info("Skipping the non generated assembly of project : {}", name);
+      LOG.info("Skipping the non generated assembly \"{}\" of project : {}", assembly.getAbsolutePath(), name);
     }
     return result;
   }
