@@ -32,7 +32,6 @@ import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.SensorContext;
@@ -52,7 +51,6 @@ import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-import org.sonar.plugins.dotnet.api.DotNetConstants;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
@@ -66,7 +64,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-@DependsUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
 @Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
