@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Settings;
 import org.sonar.plugins.csharp.core.CSharpCorePlugin;
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -36,7 +35,7 @@ public class CSharpTest {
   @Before
   public void init() {
     settings = Settings.createForComponent(new CSharpCorePlugin());
-    cSharp = new CSharp(new DotNetConfiguration(settings));
+    cSharp = new CSharp(settings);
   }
 
   @Test

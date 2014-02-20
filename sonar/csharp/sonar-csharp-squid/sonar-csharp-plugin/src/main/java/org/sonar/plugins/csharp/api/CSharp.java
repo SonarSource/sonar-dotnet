@@ -21,34 +21,36 @@
 package org.sonar.plugins.csharp.api;
 
 import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
 
 /**
  * Class that defines the C# language.
  */
 public class CSharp extends AbstractLanguage {
 
-  private DotNetConfiguration configuration;
+  private final Settings settings;
 
   /**
    * Constructs a {@link CSharp} language object with the given configuration.
-   * 
+   *
    * @param configuration
    */
-  public CSharp(DotNetConfiguration configuration) {
+  public CSharp(Settings settings) {
     super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
-    this.configuration = configuration;
+    this.settings = settings;
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = configuration.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
+    String[] suffixes = settings.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
     if (suffixes.length == 0) {
       suffixes = StringUtils.split(CSharpConstants.FILE_SUFFIXES_DEFVALUE, ",");
     }
     return suffixes;
   }
+
 }

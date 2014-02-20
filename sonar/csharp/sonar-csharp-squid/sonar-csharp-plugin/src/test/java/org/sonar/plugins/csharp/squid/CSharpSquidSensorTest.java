@@ -27,7 +27,6 @@ import org.mockito.Mockito;
 import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.NoSonarFilter;
-import org.sonar.api.config.PropertyDefinitions;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -40,8 +39,7 @@ import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.core.CSharpCorePlugin;
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
+import org.sonar.plugins.csharp.squid.check.CSharpCheck;
 import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 import java.io.File;
@@ -57,18 +55,16 @@ public class CSharpSquidSensorTest {
 
   @Before
   public void init() {
-    DotNetConfiguration dotNetConfiguration = new DotNetConfiguration(new Settings(new PropertyDefinitions(CSharpCorePlugin.class)));
-    CSharp language = new CSharp(dotNetConfiguration);
+    CSharp language = new CSharp(mock(Settings.class));
     CSharpResourcesBridge cSharpResourcesBridge = mock(CSharpResourcesBridge.class);
     ResourceCreationLock resourceCreationLock = mock(ResourceCreationLock.class);
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment = mock(MicrosoftWindowsEnvironment.class);
+    mock(MicrosoftWindowsEnvironment.class);
     RulesProfile profile = mock(RulesProfile.class);
     NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext flc = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Matchers.any(Resource.class))).thenReturn(flc);
-    sensor = new CSharpSquidSensor(dotNetConfiguration, language, cSharpResourcesBridge, resourceCreationLock,
-      microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory);
+    sensor = new CSharpSquidSensor(mock(Settings.class), language, cSharpResourcesBridge, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)

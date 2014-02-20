@@ -34,9 +34,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
+import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
 import org.sonar.api.checks.NoSonarFilter;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.PersistenceMode;
@@ -50,9 +52,6 @@ import org.sonar.api.rules.Violation;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
-import org.sonar.plugins.dotnet.api.DotNetConfiguration;
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
-import org.sonar.plugins.dotnet.api.sensor.AbstractRegularDotNetSensor;
 import org.sonar.squid.api.CheckMessage;
 import org.sonar.squid.api.SourceCode;
 import org.sonar.squid.api.SourceFile;
@@ -65,13 +64,13 @@ import java.util.Locale;
 import java.util.Set;
 
 @Phase(name = Phase.Name.PRE)
-public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
+public final class CSharpSquidSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
   private static final Number[] METHOD_DISTRIB_BOTTOM_LIMITS = {1, 2, 4, 6, 8, 10, 12};
   private static final Number[] FILES_DISTRIB_BOTTOM_LIMITS = {0, 5, 10, 20, 30, 60, 90};
-  private static final String[] SUPPORTED_LANGUAGES = new String[] {CSharpConstants.LANGUAGE_KEY};
 
+  private final Settings settings;
   private final CSharp cSharp;
   private final CSharpResourcesBridge cSharpResourcesBridge;
   private final ResourceCreationLock resourceCreationLock;
@@ -83,16 +82,10 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
   private SensorContext context;
   private AstScanner<Grammar> scanner;
 
-  public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(dotNetConfiguration, cSharp, cSharpResourcesBridge, resourceCreationLock, microsoftWindowsEnvironment, profile, noSonarFilter, fileLinesContextFactory,
-      new CSharpCheck[] {});
-  }
-
-  public CSharpSquidSensor(DotNetConfiguration dotNetConfiguration, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge, ResourceCreationLock resourceCreationLock,
-    MicrosoftWindowsEnvironment microsoftWindowsEnvironment, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSquidSensor(Settings settings, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge,
+    ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
-    super(dotNetConfiguration, microsoftWindowsEnvironment, "Squid C#", "");
+    this.settings = settings;
     this.cSharp = cSharp;
     this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
@@ -104,19 +97,12 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
-  public String[] getSupportedLanguages() {
-    return SUPPORTED_LANGUAGES;
+  public boolean shouldExecuteOnProject(Project project) {
+    return project.getLanguageKey().equals(CSharpConstants.LANGUAGE_KEY);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
-  @SuppressWarnings("unchecked")
   public void analyse(Project project, SensorContext context) {
     this.project = project;
     this.context = context;
@@ -143,7 +129,7 @@ public final class CSharpSquidSensor extends AbstractRegularDotNetSensor {
 
   private CSharpConfiguration createParserConfiguration(Project project) {
     CSharpConfiguration conf = new CSharpConfiguration(project.getFileSystem().getSourceCharset());
-    conf.setIgnoreHeaderComments(configuration.getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS));
+    conf.setIgnoreHeaderComments(settings.getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS));
     return conf;
   }
 
