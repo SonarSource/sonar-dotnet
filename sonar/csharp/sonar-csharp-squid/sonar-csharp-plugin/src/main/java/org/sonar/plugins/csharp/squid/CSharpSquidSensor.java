@@ -72,7 +72,6 @@ public final class CSharpSquidSensor implements Sensor {
 
   private final Settings settings;
   private final CSharp cSharp;
-  private final CSharpResourcesBridge cSharpResourcesBridge;
   private final ResourceCreationLock resourceCreationLock;
   private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
@@ -82,17 +81,16 @@ public final class CSharpSquidSensor implements Sensor {
   private SensorContext context;
   private AstScanner<Grammar> scanner;
 
-  public CSharpSquidSensor(Settings settings, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge,
+  public CSharpSquidSensor(Settings settings, CSharp cSharp,
     ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(settings, cSharp, cSharpResourcesBridge, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    this(settings, cSharp, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
-  public CSharpSquidSensor(Settings settings, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge,
+  public CSharpSquidSensor(Settings settings, CSharp cSharp,
     ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
     this.settings = settings;
     this.cSharp = cSharp;
-    this.cSharpResourcesBridge = cSharpResourcesBridge;
     this.resourceCreationLock = resourceCreationLock;
     this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
@@ -146,9 +144,6 @@ public final class CSharpSquidSensor implements Sensor {
       File sonarFile = File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
 
-      /* Fill the resource bridge API that can be used by other C# plugins to map logical resources to physical ones */
-      cSharpResourcesBridge.indexFile(squidFile, sonarFile);
-
       /* No Sonar */
       noSonarFilter.addResource(sonarFile, squidFile.getNoSonarTagLines());
 
@@ -167,7 +162,6 @@ public final class CSharpSquidSensor implements Sensor {
 
     // and lock everything to prevent future modifications
     LOG.debug("Locking the C# Resource Bridge and the Sonar Index: future modifications won't be possible.");
-    cSharpResourcesBridge.lock();
     resourceCreationLock.lock();
   }
 

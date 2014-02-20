@@ -56,7 +56,6 @@ public class CSharpSquidSensorTest {
   @Before
   public void init() {
     CSharp language = new CSharp(mock(Settings.class));
-    CSharpResourcesBridge cSharpResourcesBridge = mock(CSharpResourcesBridge.class);
     ResourceCreationLock resourceCreationLock = mock(ResourceCreationLock.class);
     mock(MicrosoftWindowsEnvironment.class);
     RulesProfile profile = mock(RulesProfile.class);
@@ -64,7 +63,7 @@ public class CSharpSquidSensorTest {
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext flc = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Matchers.any(Resource.class))).thenReturn(flc);
-    sensor = new CSharpSquidSensor(mock(Settings.class), language, cSharpResourcesBridge, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    sensor = new CSharpSquidSensor(mock(Settings.class), language, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)

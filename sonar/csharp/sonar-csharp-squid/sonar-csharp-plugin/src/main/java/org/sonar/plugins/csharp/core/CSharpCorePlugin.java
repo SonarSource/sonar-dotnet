@@ -27,7 +27,6 @@ import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.squid.CSharpResourcesBridge;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
 import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
@@ -80,7 +79,6 @@ public class CSharpCorePlugin extends SonarPlugin {
       CSharpCPDMapping.class,
       CSharpSourceCodeColorizer.class,
       CSharpSquidSensor.class,
-      CSharpResourcesBridge.class,
 
       // rules
       CSharpRuleRepository.class,
