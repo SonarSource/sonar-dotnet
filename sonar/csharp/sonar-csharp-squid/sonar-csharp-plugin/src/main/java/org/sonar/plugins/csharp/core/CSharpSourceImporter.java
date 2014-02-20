@@ -21,15 +21,12 @@
 package org.sonar.plugins.csharp.core;
 
 import org.sonar.api.batch.AbstractSourceImporter;
-import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.dotnet.api.DotNetConstants;
 
 /**
  * Simple source code importer for C# projects.
  */
-@DependedUpon(DotNetConstants.CORE_PLUGIN_EXECUTED)
 public class CSharpSourceImporter extends AbstractSourceImporter {
 
   public CSharpSourceImporter(CSharp cSharp) {

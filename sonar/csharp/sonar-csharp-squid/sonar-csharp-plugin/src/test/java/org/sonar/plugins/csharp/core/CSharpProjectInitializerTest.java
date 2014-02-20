@@ -26,8 +26,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.dotnet.core.DotNetCorePlugin;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -43,7 +41,7 @@ public class CSharpProjectInitializerTest {
 
   @Before
   public void initProject() {
-    settings = Settings.createForComponent(new DotNetCorePlugin());
+    settings = new Settings();
     project = mock(Project.class);
     Configuration deprecatedConf = new BaseConfiguration();
     // FIXME: deprecated
@@ -62,21 +60,6 @@ public class CSharpProjectInitializerTest {
   }
 
   @Test
-  public void shouldSetEncodingAndDefaultExcludes() throws Exception {
-    initializer.execute(project);
-    assertThat(settings.getString("sonar.sourceEncoding")).isNull();
-    assertThat(settings.getStringArray("sonar.exclusions"), is(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
-  }
-
-  @Test
-  public void shouldNotOverrideEncoding() throws Exception {
-    settings.setProperty("sonar.sourceEncoding", "ISO-8859-1");
-    initializer.execute(project);
-    assertThat(settings.getString("sonar.sourceEncoding"), is("ISO-8859-1"));
-    assertThat(settings.getStringArray("sonar.exclusions"), is(CSharpConstants.DEFAULT_FILES_TO_EXCLUDE));
-  }
-
-  @Test
   public void shouldNotSetDefaultExclusions() throws Exception {
     settings.setProperty("sonar.dotnet.excludeGeneratedCode", false);
     initializer.execute(project);
@@ -88,7 +71,6 @@ public class CSharpProjectInitializerTest {
     settings.setProperty("sonar.exclusions", "Foo.cs,**/Bar.cs");
     initializer.execute(project);
     String[] exclusions = settings.getStringArray("sonar.exclusions");
-    assertThat(exclusions.length, is(2 + CSharpConstants.DEFAULT_FILES_TO_EXCLUDE.length));
     assertThat(exclusions[0], is("Foo.cs"));
     assertThat(exclusions[1], is("**/Bar.cs"));
   }

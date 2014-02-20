@@ -53,12 +53,6 @@
         <artifactId>sonar-csharp-plugin</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <!-- .NET Core -->
-      <dependency>
-        <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
-        <artifactId>sonar-dotnet-plugin</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <!-- SSLR -->
       <dependency>
         <groupId>org.codehaus.sonar.sslr</groupId>

@@ -25,7 +25,6 @@ import org.sonar.api.batch.Initializer;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.dotnet.api.DotNetConstants;
 
 /**
  * Class used to initialize C# projects.
@@ -47,7 +46,7 @@ public class CSharpProjectInitializer extends Initializer {
   @Override
   public void execute(Project project) {
     // Handling exclusions
-    if (projectSettings.getBoolean(DotNetConstants.EXCLUDE_GENERATED_CODE_KEY)) {
+    if (projectSettings.getBoolean("sonar.dotnet.excludeGeneratedCode")) {
       String[] exclusions = projectSettings.getStringArray("sonar.exclusions");
       String[] newExclusions = (String[]) ArrayUtils.addAll(exclusions, CSharpConstants.DEFAULT_FILES_TO_EXCLUDE);
       projectSettings.setProperty("sonar.exclusions", Joiner.on(',').join(newExclusions));

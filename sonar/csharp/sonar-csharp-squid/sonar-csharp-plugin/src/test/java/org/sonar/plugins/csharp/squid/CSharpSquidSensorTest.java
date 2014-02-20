@@ -40,7 +40,6 @@ import org.sonar.api.resources.Resource;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
-import org.sonar.plugins.dotnet.api.microsoft.MicrosoftWindowsEnvironment;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -57,7 +56,6 @@ public class CSharpSquidSensorTest {
   public void init() {
     CSharp language = new CSharp(mock(Settings.class));
     ResourceCreationLock resourceCreationLock = mock(ResourceCreationLock.class);
-    mock(MicrosoftWindowsEnvironment.class);
     RulesProfile profile = mock(RulesProfile.class);
     NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
