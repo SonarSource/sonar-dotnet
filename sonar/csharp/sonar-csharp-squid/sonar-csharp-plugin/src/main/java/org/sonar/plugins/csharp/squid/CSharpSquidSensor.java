@@ -83,6 +83,11 @@ public final class CSharpSquidSensor implements Sensor {
   private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge,
+    ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
+    this(settings, cSharp, cSharpResourcesBridge, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+  }
+
+  public CSharpSquidSensor(Settings settings, CSharp cSharp, CSharpResourcesBridge cSharpResourcesBridge,
     ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
     this.settings = settings;
