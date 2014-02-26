@@ -41,9 +41,9 @@
   </modules>
 
   <scm>
-    <connection>scm:git:git@github.com:SonarCommunity/sonar-dotnet.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-dotnet.git</developerConnection>
-    <url>https://github.com/SonarCommunity/sonar-dotnet</url>
+    <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarCommunity/sonar-csharp</url>
     <tag>HEAD</tag>
   </scm>
   <issueManagement>
@@ -52,7 +52,7 @@
   </issueManagement>
   <ciManagement>
     <system>Cloudbees</system>
-    <url>https://sonarplugins.ci.cloudbees.com/job/dotnet/</url>
+    <url>https://sonarplugins.ci.cloudbees.com/job/chsarp/</url>
   </ciManagement>
 
   <properties>
