@@ -21,23 +21,12 @@
 package org.sonar.plugins.csharp.core;
 
 import org.sonar.api.batch.AbstractSourceImporter;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
 
-/**
- * Simple source code importer for C# projects.
- */
 public class CSharpSourceImporter extends AbstractSourceImporter {
 
   public CSharpSourceImporter(CSharp cSharp) {
     super(cSharp);
   }
 
-  @Override
-  public boolean shouldExecuteOnProject(Project project) {
-    if (project.isRoot()) {
-      return false;
-    }
-    return super.shouldExecuteOnProject(project);
-  }
 }

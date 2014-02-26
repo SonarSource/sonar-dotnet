@@ -19,70 +19,20 @@
  */
 package org.sonar.plugins.csharp.core;
 
-import org.apache.commons.configuration.Configuration;
-import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.api.resources.Java;
-import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class CSharpSourceImporterTest {
 
-  private CSharp language;
-  private CSharpSourceImporter importer;
-
-  @Before
-  public void init() {
-    language = mock(CSharp.class);
-    importer = new CSharpSourceImporter(language);
-  }
-
   @Test
-  public void testShouldNotExecuteOnRootProject() {
-    Project project = mock(Project.class);
-    Configuration conf = mock(Configuration.class);
-    when(project.getConfiguration()).thenReturn(conf);
-    when(project.isRoot()).thenReturn(true);
-    assertFalse(importer.shouldExecuteOnProject(project));
-  }
+  public void test() {
+    CSharp language = mock(CSharp.class);
+    CSharpSourceImporter importer = new CSharpSourceImporter(language);
 
-  @Test
-  public void testShouldNotExecuteOnOtherLanguageProject() {
-    AbstractLanguage java = mock(Java.class);
-    Project project = mock(Project.class);
-    Configuration conf = mock(Configuration.class);
-    when(project.getConfiguration()).thenReturn(conf);
-    when(project.getName()).thenReturn("Project #1");
-    when(project.getLanguage()).thenReturn(java);
-    assertFalse(importer.shouldExecuteOnProject(project));
-  }
-
-  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
-  @Test
-  public void testShouldExecuteOnNormalProject() {
-    Project project = mock(Project.class);
-    Configuration conf = mock(Configuration.class);
-    when(project.getConfiguration()).thenReturn(conf);
-    when(project.getName()).thenReturn("Project #1");
-    when(project.getLanguage()).thenReturn(language);
-    assertTrue(importer.shouldExecuteOnProject(project));
-  }
-
-  // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)
-  @Test
-  public void testShouldExecuteOnTestProject() {
-    Project project = mock(Project.class);
-    Configuration conf = mock(Configuration.class);
-    when(project.getConfiguration()).thenReturn(conf);
-    when(project.getName()).thenReturn("Project Test");
-    when(project.getLanguage()).thenReturn(language);
-    assertTrue(importer.shouldExecuteOnProject(project));
+    assertThat(importer.getLanguage()).isSameAs(language);
   }
 
 }
