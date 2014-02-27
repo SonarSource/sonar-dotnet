@@ -37,19 +37,19 @@ public class OpenCoverReportParserTest {
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("<CoverageSession>");
-    new OpenCoverReportParser(new File("src/test/resources/opencover/invalid_root.xml")).coverage();
+    new OpenCoverReportParser(new File("src/test/resources/opencover/invalid_root.xml")).parse();
   }
 
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("non_existing_file");
-    new OpenCoverReportParser(new File("src/test/resources/opencover/non_existing_file.xml")).coverage();
+    new OpenCoverReportParser(new File("src/test/resources/opencover/non_existing_file.xml")).parse();
   }
 
   @Test
   public void valid() {
-    Coverage coverage = new OpenCoverReportParser(new File("src/test/resources/opencover/valid.xml")).coverage();
+    Coverage coverage = new OpenCoverReportParser(new File("src/test/resources/opencover/valid.xml")).parse();
     assertThat(coverage.files()).containsOnly(
       "MyLibraryNUnitTest\\AdderNUnitTest.cs",
       "MyLibrary\\Adder.cs",

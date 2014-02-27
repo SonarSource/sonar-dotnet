@@ -37,9 +37,9 @@ public class CoverageReportImportSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
   private static final Set<String> SUPPORTED_LANGUAGES = ImmutableSet.of("cs", "vbnet");
 
-  private final CoverageProviderFactory coverageProviderFactory;
+  private final CoverageParserFactory coverageProviderFactory;
 
-  public CoverageReportImportSensor(CoverageProviderFactory coverageProviderFactory) {
+  public CoverageReportImportSensor(CoverageParserFactory coverageProviderFactory) {
     this.coverageProviderFactory = coverageProviderFactory;
   }
 
@@ -56,7 +56,7 @@ public class CoverageReportImportSensor implements Sensor {
 
   @VisibleForTesting
   void analyze(SensorContext context, FileProvider fileProvider) {
-    Coverage coverage = coverageProviderFactory.coverageProvider().coverage();
+    Coverage coverage = coverageProviderFactory.coverageProvider().parse();
     CoverageMeasuresBuilder coverageMeasureBuilder = CoverageMeasuresBuilder.create();
 
     for (String filePath : coverage.files()) {

@@ -19,9 +19,8 @@
  */
 package org.sonar.plugins.csharp.tests;
 
+public interface CoverageParser {
 
-public interface CoverageProvider {
-
-  Coverage coverage();
+  Coverage parse();
 
 }

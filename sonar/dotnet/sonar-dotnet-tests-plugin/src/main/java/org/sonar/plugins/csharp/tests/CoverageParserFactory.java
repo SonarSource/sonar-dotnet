@@ -25,11 +25,11 @@ import org.sonar.api.utils.SonarException;
 
 import java.io.File;
 
-public class CoverageProviderFactory implements BatchExtension {
+public class CoverageParserFactory implements BatchExtension {
 
   private final Settings settings;
 
-  public CoverageProviderFactory(Settings settings) {
+  public CoverageParserFactory(Settings settings) {
     this.settings = settings;
   }
 
@@ -38,8 +38,8 @@ public class CoverageProviderFactory implements BatchExtension {
       settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY);
   }
 
-  public CoverageProvider coverageProvider() {
-    CoverageProvider coverageProvider;
+  public CoverageParser coverageProvider() {
+    CoverageParser coverageProvider;
 
     if (settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY) && !settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)) {
       coverageProvider = new NCover3ReportParser(new File(settings.getString(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)));

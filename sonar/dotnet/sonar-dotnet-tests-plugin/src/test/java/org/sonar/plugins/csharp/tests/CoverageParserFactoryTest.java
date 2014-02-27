@@ -29,7 +29,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CoverageProviderFactoryTest {
+public class CoverageParserFactoryTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -40,19 +40,19 @@ public class CoverageProviderFactoryTest {
 
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(false);
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(false);
-    assertThat(new CoverageProviderFactory(settings).hasCoverageProperty()).isFalse();
+    assertThat(new CoverageParserFactory(settings).hasCoverageProperty()).isFalse();
 
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(false);
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(true);
-    assertThat(new CoverageProviderFactory(settings).hasCoverageProperty()).isTrue();
+    assertThat(new CoverageParserFactory(settings).hasCoverageProperty()).isTrue();
 
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(true);
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(false);
-    assertThat(new CoverageProviderFactory(settings).hasCoverageProperty()).isTrue();
+    assertThat(new CoverageParserFactory(settings).hasCoverageProperty()).isTrue();
 
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(true);
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(true);
-    assertThat(new CoverageProviderFactory(settings).hasCoverageProperty()).isTrue();
+    assertThat(new CoverageParserFactory(settings).hasCoverageProperty()).isTrue();
   }
 
   @Test
@@ -62,12 +62,12 @@ public class CoverageProviderFactoryTest {
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(true);
     when(settings.getString(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn("");
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(false);
-    assertThat(new CoverageProviderFactory(settings).coverageProvider()).isInstanceOf(NCover3ReportParser.class);
+    assertThat(new CoverageParserFactory(settings).coverageProvider()).isInstanceOf(NCover3ReportParser.class);
 
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(true);
     when(settings.getString(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn("");
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(false);
-    assertThat(new CoverageProviderFactory(settings).coverageProvider()).isInstanceOf(OpenCoverReportParser.class);
+    assertThat(new CoverageParserFactory(settings).coverageProvider()).isInstanceOf(OpenCoverReportParser.class);
   }
 
   @Test
@@ -81,7 +81,7 @@ public class CoverageProviderFactoryTest {
 
     when(settings.hasKey(TestsPlugin.NCOVER3_REPORT_PATH_PROPERTY)).thenReturn(true);
     when(settings.hasKey(TestsPlugin.OPEN_COVER_REPORT_PATH_PROPERTY)).thenReturn(true);
-    new CoverageProviderFactory(settings).coverageProvider();
+    new CoverageParserFactory(settings).coverageProvider();
   }
 
 }

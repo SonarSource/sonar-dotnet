@@ -36,7 +36,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
-public class OpenCoverReportParser implements CoverageProvider {
+public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(OpenCoverReportParser.class);
 
@@ -51,7 +51,7 @@ public class OpenCoverReportParser implements CoverageProvider {
   }
 
   @Override
-  public Coverage coverage() {
+  public Coverage parse() {
     LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
 
     FileReader reader = null;

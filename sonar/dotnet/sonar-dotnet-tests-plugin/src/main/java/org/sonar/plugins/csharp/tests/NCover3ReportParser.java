@@ -36,7 +36,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
-public class NCover3ReportParser implements CoverageProvider {
+public class NCover3ReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(NCover3ReportParser.class);
 
@@ -49,7 +49,7 @@ public class NCover3ReportParser implements CoverageProvider {
   }
 
   @Override
-  public Coverage coverage() {
+  public Coverage parse() {
     LOG.info("Parsing the NCover3 report " + file.getAbsolutePath());
 
     FileReader reader = null;

@@ -35,7 +35,7 @@ public class TestsPlugin extends SonarPlugin {
   public List getExtensions() {
     return ImmutableList.builder()
       .addAll(getPropertyDefinitions())
-      .add(CoverageProviderFactory.class)
+      .add(CoverageParserFactory.class)
       .add(CoverageReportImportSensor.class)
       .build();
   }

@@ -37,33 +37,33 @@ public class NCover3ReportParserTest {
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("<coverage>");
-    new NCover3ReportParser(new File("src/test/resources/ncover3/invalid_root.nccov")).coverage();
+    new NCover3ReportParser(new File("src/test/resources/ncover3/invalid_root.nccov")).parse();
   }
 
   @Test
   public void wrong_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser(new File("src/test/resources/ncover3/wrong_version.nccov")).coverage();
+    new NCover3ReportParser(new File("src/test/resources/ncover3/wrong_version.nccov")).parse();
   }
 
   @Test
   public void no_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser(new File("src/test/resources/ncover3/no_version.nccov")).coverage();
+    new NCover3ReportParser(new File("src/test/resources/ncover3/no_version.nccov")).parse();
   }
 
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("non_existing_file");
-    new NCover3ReportParser(new File("src/test/resources/ncover3/non_existing_file.nccov")).coverage();
+    new NCover3ReportParser(new File("src/test/resources/ncover3/non_existing_file.nccov")).parse();
   }
 
   @Test
   public void valid() {
-    Coverage coverage = new NCover3ReportParser(new File("src/test/resources/ncover3/valid.nccov")).coverage();
+    Coverage coverage = new NCover3ReportParser(new File("src/test/resources/ncover3/valid.nccov")).parse();
     assertThat(coverage.files()).containsOnly(
       "MyLibrary\\Adder.cs",
       "MyLibraryNUnitTest\\AdderNUnitTest.cs",

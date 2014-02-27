@@ -44,7 +44,7 @@ public class CoverageReportImportSensorTest {
   public void should_execute_on_project() {
     Project project = mock(Project.class);
 
-    CoverageProviderFactory coverageFactoryWithReports = mock(CoverageProviderFactory.class);
+    CoverageParserFactory coverageFactoryWithReports = mock(CoverageParserFactory.class);
     when(coverageFactoryWithReports.hasCoverageProperty()).thenReturn(true);
 
     when(project.getLanguageKey()).thenReturn("cs");
@@ -56,7 +56,7 @@ public class CoverageReportImportSensorTest {
     when(project.getLanguageKey()).thenReturn("foo");
     assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isFalse();
 
-    CoverageProviderFactory coverageFactoryWithoutReports = mock(CoverageProviderFactory.class);
+    CoverageParserFactory coverageFactoryWithoutReports = mock(CoverageParserFactory.class);
     when(coverageFactoryWithoutReports.hasCoverageProperty()).thenReturn(false);
 
     when(project.getLanguageKey()).thenReturn("cs");
@@ -75,10 +75,10 @@ public class CoverageReportImportSensorTest {
       .put(42, 1)
       .build());
 
-    CoverageProvider coverageProvider = mock(CoverageProvider.class);
-    when(coverageProvider.coverage()).thenReturn(coverage);
+    CoverageParser coverageProvider = mock(CoverageParser.class);
+    when(coverageProvider.parse()).thenReturn(coverage);
 
-    CoverageProviderFactory coverageProviderFactory = mock(CoverageProviderFactory.class);
+    CoverageParserFactory coverageProviderFactory = mock(CoverageParserFactory.class);
     when(coverageProviderFactory.coverageProvider()).thenReturn(coverageProvider);
 
     SensorContext context = mock(SensorContext.class);
