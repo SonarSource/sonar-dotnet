@@ -64,7 +64,9 @@ public class CSharpCorePlugin extends SonarPlugin {
    */
   @Override
   public List getExtensions() {
-    return ImmutableList.of(
+    ImmutableList.Builder builder = ImmutableList.builder();
+
+    builder.add(
       CSharp.class,
       CSharpProjectInitializer.class,
 
@@ -83,6 +85,10 @@ public class CSharpCorePlugin extends SonarPlugin {
       // rules
       CSharpRuleRepository.class,
       CSharpRuleProfile.class);
+
+    builder.addAll(CSharpFxCopProvider.extensions());
+
+    return builder.build();
   }
 
 }
