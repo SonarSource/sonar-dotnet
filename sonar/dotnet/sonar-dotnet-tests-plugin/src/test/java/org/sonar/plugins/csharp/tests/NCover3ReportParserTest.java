@@ -57,7 +57,7 @@ public class NCover3ReportParserTest {
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
-    thrown.expectMessage("non_existing_file");
+    thrown.expectMessage("non_existing_file.nccov");
     new NCover3ReportParser(new File("src/test/resources/ncover3/non_existing_file.nccov")).parse();
   }
 
