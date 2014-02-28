@@ -38,10 +38,16 @@
       <artifactId>csharp-checks</artifactId>
       <version>${project.version}</version>
     </dependency>
+
     <dependency>
       <groupId>org.codehaus.sonar-plugins.fxcop</groupId>
       <artifactId>sonar-fxcop-library</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.codehaus.sonar-plugins.dotnet.tests</groupId>
+      <artifactId>sonar-dotnet-tests-library</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.codehaus.sonar.sslr</groupId>
       <artifactId>sslr-core</artifactId>
@@ -124,8 +130,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>600000</maxsize>
-                  <minsize>300000</minsize>
+                  <maxsize>700000</maxsize>
+                  <minsize>500000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
