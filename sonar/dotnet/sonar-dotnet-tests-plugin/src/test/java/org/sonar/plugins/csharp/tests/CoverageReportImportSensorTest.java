@@ -45,33 +45,23 @@ public class CoverageReportImportSensorTest {
     Project project = mock(Project.class);
 
     CoverageParserFactory coverageFactoryWithReports = mock(CoverageParserFactory.class);
+
     when(coverageFactoryWithReports.hasCoverageProperty()).thenReturn(true);
-
-    when(project.getLanguageKey()).thenReturn("cs");
     assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isTrue();
 
-    when(project.getLanguageKey()).thenReturn("vbnet");
-    assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isTrue();
-
-    when(project.getLanguageKey()).thenReturn("foo");
+    when(coverageFactoryWithReports.hasCoverageProperty()).thenReturn(false);
     assertThat(new CoverageReportImportSensor(coverageFactoryWithReports).shouldExecuteOnProject(project)).isFalse();
-
-    CoverageParserFactory coverageFactoryWithoutReports = mock(CoverageParserFactory.class);
-    when(coverageFactoryWithoutReports.hasCoverageProperty()).thenReturn(false);
-
-    when(project.getLanguageKey()).thenReturn("cs");
-    assertThat(new CoverageReportImportSensor(coverageFactoryWithoutReports).shouldExecuteOnProject(project)).isFalse();
   }
 
   @Test
   public void analyze() {
     Coverage coverage = mock(Coverage.class);
     when(coverage.files()).thenReturn(ImmutableSet.of("Foo.cs", "Bar.cs"));
-    when(coverage.hits("Foo.cs")).thenReturn(ImmutableMap.<Integer, Integer> builder()
+    when(coverage.hits("Foo.cs")).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(24, 1)
       .put(42, 0)
       .build());
-    when(coverage.hits("Bar.cs")).thenReturn(ImmutableMap.<Integer, Integer> builder()
+    when(coverage.hits("Bar.cs")).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(42, 1)
       .build());
 

@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp.tests;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -30,12 +29,10 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.resources.Project;
 
 import java.util.Map;
-import java.util.Set;
 
 public class CoverageReportImportSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
-  private static final Set<String> SUPPORTED_LANGUAGES = ImmutableSet.of("cs", "vbnet");
 
   private final CoverageParserFactory coverageProviderFactory;
 
@@ -45,8 +42,7 @@ public class CoverageReportImportSensor implements Sensor {
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return SUPPORTED_LANGUAGES.contains(project.getLanguageKey()) &&
-      coverageProviderFactory.hasCoverageProperty();
+    return coverageProviderFactory.hasCoverageProperty();
   }
 
   @Override
