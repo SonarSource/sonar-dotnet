@@ -13,15 +13,8 @@
   <name>Sonar .NET Plugins</name>
 
   <modules>
-    <!-- Core .NET Plugin -->
-    <module>dotnet/sonar-dotnet-plugin</module>
-    <!-- Plugins that can run on multiple .NET languages -->
-    <module>dotnet/sonar-dotnet-fxcop-plugin</module>
-    <module>dotnet/sonar-dotnet-gendarme-plugin</module>
-
     <!-- Plugins that can run only on C# projects -->
     <module>csharp/sonar-csharp-squid</module>
-    <module>csharp/sonar-csharp-stylecop-plugin</module>
   </modules>
 
   <properties>
