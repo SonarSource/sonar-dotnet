@@ -35,15 +35,27 @@ public class OpenCoverReportParserTest {
 
   @Test
   public void invalid_root() {
-    thrown.expect(RuntimeException.class);
     thrown.expectMessage("<CoverageSession>");
     new OpenCoverReportParser(new File("src/test/resources/opencover/invalid_root.xml")).parse();
   }
 
   @Test
+  public void missing_start_line() {
+    thrown.expectMessage("Missing attribute \"sl\" in element <SequencePoint>");
+    thrown.expectMessage("missing_start_line.xml at line 27");
+    new OpenCoverReportParser(new File("src/test/resources/opencover/missing_start_line.xml")).parse();
+  }
+
+  @Test
+  public void wrong_start_line() {
+    thrown.expectMessage("Expected an integer instead of \"foo\" for the attribute \"sl\"");
+    thrown.expectMessage("wrong_start_line.xml at line 27");
+    new OpenCoverReportParser(new File("src/test/resources/opencover/wrong_start_line.xml")).parse();
+  }
+
+  @Test
   public void non_existing_file() {
-    thrown.expect(RuntimeException.class);
-    thrown.expectMessage("non_existing_file");
+    thrown.expectMessage("non_existing_file.xml");
     new OpenCoverReportParser(new File("src/test/resources/opencover/non_existing_file.xml")).parse();
   }
 

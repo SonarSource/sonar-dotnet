@@ -187,14 +187,14 @@ public class NCover3ReportParser implements CoverageParser {
       return new ParseErrorException(message + " in " + file.getAbsolutePath() + " at line " + stream.getLocation().getLineNumber());
     }
 
-    private static class ParseErrorException extends RuntimeException {
+  }
 
-      private static final long serialVersionUID = 1L;
+  private static class ParseErrorException extends RuntimeException {
 
-      public ParseErrorException(String message) {
-        super(message);
-      }
+    private static final long serialVersionUID = 1L;
 
+    public ParseErrorException(String message) {
+      super(message);
     }
 
   }

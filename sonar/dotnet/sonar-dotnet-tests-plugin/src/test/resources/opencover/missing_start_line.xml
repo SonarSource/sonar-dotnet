@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Summary numSequencePoints="28" visitedSequencePoints="20" numBranchPoints="12" visitedBranchPoints="8" sequenceCoverage="71.43" branchCoverage="66.67" maxCyclomaticComplexity="4" minCyclomaticComplexity="1" />
+    <Module hash="DE-2D-20-DB-C7-7A-F5-8E-3C-33-9B-1D-83-2A-1E-48-F8-A8-EB-7B">
+      <Summary numSequencePoints="6" visitedSequencePoints="6" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+      <FullName>C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibraryNUnitTest\bin\Debug\MyLibraryNUnitTest.dll</FullName>
+      <ModuleName>MyLibraryNUnitTest</ModuleName>
+      <Files>
+        <File uid="1" fullPath="MyLibraryNUnitTest\AdderNUnitTest.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="0" minCyclomaticComplexity="0" />
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <Summary numSequencePoints="6" visitedSequencePoints="6" numBranchPoints="2" visitedBranchPoints="2" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+          <FullName>MyLibraryNUnitTest.AdderNUnitTest</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="3" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void MyLibraryNUnitTest.AdderNUnitTest::Add()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="1" ordinal="0" offset="0" el="16" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="1" ordinal="0" offset="0" sl="16" sc="9" el="16" ec="10" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>

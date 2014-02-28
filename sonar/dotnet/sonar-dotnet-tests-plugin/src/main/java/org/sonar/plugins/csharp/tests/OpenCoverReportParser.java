@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.tests;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import com.google.common.io.Closeables;
@@ -32,8 +33,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 public class OpenCoverReportParser implements CoverageParser {
@@ -41,10 +43,6 @@ public class OpenCoverReportParser implements CoverageParser {
   private static final Logger LOG = LoggerFactory.getLogger(OpenCoverReportParser.class);
 
   private final File file;
-  private final Map<String, String> files = Maps.newHashMap();
-  private final Coverage coverage = new Coverage();
-
-  private String fileRef;
 
   public OpenCoverReportParser(File file) {
     this.file = file;
@@ -52,134 +50,138 @@ public class OpenCoverReportParser implements CoverageParser {
 
   @Override
   public Coverage parse() {
-    LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
+    return new Parser(file).parse();
+  }
 
-    FileReader reader = null;
-    XMLStreamReader stream = null;
-    XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
-    fileRef = null;
+  private static class Parser {
 
-    try {
-      reader = new FileReader(file);
-      stream = xmlFactory.createXMLStreamReader(reader);
+    private final File file;
+    private XMLStreamReader stream;
+    private final Map<String, String> files = Maps.newHashMap();
+    private final Coverage coverage = new Coverage();
+    private String fileRef;
 
-      checkRootTag(stream);
+    public Parser(File file) {
+      this.file = file;
+    }
 
-      while (stream.hasNext()) {
-        if (stream.next() == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
+    public Coverage parse() {
+      LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
 
-          if ("File".equals(tagName)) {
-            handleFileTag(stream);
-          } else if ("FileRef".equals(tagName)) {
-            handleFileRef(stream);
-          } else if ("SequencePoint".equals(tagName)) {
-            handleSegmentPointTag(stream);
+      InputStreamReader reader = null;
+      XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
+
+      try {
+        reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
+        stream = xmlFactory.createXMLStreamReader(reader);
+
+        checkRootTag();
+
+        while (stream.hasNext()) {
+          if (stream.next() == XMLStreamConstants.START_ELEMENT) {
+            String tagName = stream.getLocalName();
+
+            if ("File".equals(tagName)) {
+              handleFileTag();
+            } else if ("FileRef".equals(tagName)) {
+              handleFileRef();
+            } else if ("SequencePoint".equals(tagName)) {
+              handleSegmentPointTag();
+            }
           }
         }
-      }
-    } catch (ParseErrorException e) {
-      logParseError(e);
-      throw Throwables.propagate(e);
-    } catch (IOException e) {
-      logException(e);
-      throw Throwables.propagate(e);
-    } catch (XMLStreamException e) {
-      logException(e);
-      throw Throwables.propagate(e);
-    } finally {
-      closeQuietly(stream);
-      Closeables.closeQuietly(reader);
-    }
-
-    return coverage;
-  }
-
-  private void logException(Exception e) {
-    LOG.error("Unable to parse the report " + file.getAbsolutePath(), e);
-  }
-
-  private static void closeQuietly(@Nullable XMLStreamReader reader) {
-    if (reader != null) {
-      try {
-        reader.close();
+      } catch (IOException e) {
+        throw Throwables.propagate(e);
       } catch (XMLStreamException e) {
-        /* do nothing */
+        throw Throwables.propagate(e);
+      } finally {
+        closeXmlStream();
+        Closeables.closeQuietly(reader);
       }
-    }
-  }
 
-  private void handleFileRef(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
-    this.fileRef = getRequiredAttribute(stream, "uid");
-  }
-
-  private void handleFileTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
-    String uid = getRequiredAttribute(stream, "uid");
-    String fullPath = getRequiredAttribute(stream, "fullPath");
-
-    files.put(uid, fullPath);
-  }
-
-  private void handleSegmentPointTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
-    int line = getRequiredIntAttribute(stream, "sl");
-    int vc = getRequiredIntAttribute(stream, "vc");
-
-    if (files.containsKey(fileRef)) {
-      coverage.addHits(files.get(fileRef), line, vc);
-    }
-  }
-
-  private int getRequiredIntAttribute(XMLStreamReader stream, String name) throws ParseErrorException {
-    String value = getRequiredAttribute(stream, name);
-
-    try {
-      return Integer.parseInt(value);
-    } catch (NumberFormatException e) {
-      throw new ParseErrorException("Expected an integer instead of \"" + value + "\" for the attribute \"" + name + "\"", stream.getLocation().getLineNumber());
-    }
-  }
-
-  private static void checkRootTag(XMLStreamReader stream) throws XMLStreamException, ParseErrorException {
-    int event = stream.nextTag();
-
-    if (event != XMLStreamConstants.START_ELEMENT || !"CoverageSession".equals(stream.getLocalName())) {
-      throw new ParseErrorException("Missing root element <CoverageSession>", stream.getLocation().getLineNumber());
-    }
-  }
-
-  private static String getRequiredAttribute(XMLStreamReader stream, String name) throws ParseErrorException {
-    String value = getAttribute(stream, name);
-    if (value == null) {
-      throw new ParseErrorException("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">", stream.getLocation().getLineNumber());
+      return coverage;
     }
 
-    return value;
-  }
-
-  @Nullable
-  private static String getAttribute(XMLStreamReader stream, String name) {
-    for (int i = 0; i < stream.getAttributeCount(); i++) {
-      if (name.equals(stream.getAttributeLocalName(i))) {
-        return stream.getAttributeValue(i);
+    private void closeXmlStream() {
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (XMLStreamException e) {
+          /* do nothing */
+        }
       }
     }
 
-    return null;
+    private void handleFileRef() throws XMLStreamException {
+      this.fileRef = getRequiredAttribute("uid");
+    }
+
+    private void handleFileTag() throws XMLStreamException {
+      String uid = getRequiredAttribute("uid");
+      String fullPath = getRequiredAttribute("fullPath");
+
+      files.put(uid, fullPath);
+    }
+
+    private void handleSegmentPointTag() throws XMLStreamException {
+      int line = getRequiredIntAttribute("sl");
+      int vc = getRequiredIntAttribute("vc");
+
+      if (files.containsKey(fileRef)) {
+        coverage.addHits(files.get(fileRef), line, vc);
+      }
+    }
+
+    private int getRequiredIntAttribute(String name) {
+      String value = getRequiredAttribute(name);
+
+      try {
+        return Integer.parseInt(value);
+      } catch (NumberFormatException e) {
+        throw parseError("Expected an integer instead of \"" + value + "\" for the attribute \"" + name + "\"");
+      }
+    }
+
+    private void checkRootTag() throws XMLStreamException {
+      int event = stream.nextTag();
+
+      if (event != XMLStreamConstants.START_ELEMENT || !"CoverageSession".equals(stream.getLocalName())) {
+        throw parseError("Missing root element <CoverageSession>");
+      }
+    }
+
+    private String getRequiredAttribute(String name) {
+      String value = getAttribute(name);
+      if (value == null) {
+        throw parseError("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">");
+      }
+
+      return value;
+    }
+
+    @Nullable
+    private String getAttribute(String name) {
+      for (int i = 0; i < stream.getAttributeCount(); i++) {
+        if (name.equals(stream.getAttributeLocalName(i))) {
+          return stream.getAttributeValue(i);
+        }
+      }
+
+      return null;
+    }
+
+    private ParseErrorException parseError(String message) {
+      return new ParseErrorException(message + " in " + file.getAbsolutePath() + " at line " + stream.getLocation().getLineNumber());
+    }
+
   }
 
-  private void logParseError(ParseErrorException e) {
-    LOG.error(e.getMessage() + " in " + file.getAbsolutePath() + " at line " + e.currentLine);
-  }
-
-  private static class ParseErrorException extends Exception {
+  private static class ParseErrorException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private final int currentLine;
-
-    public ParseErrorException(String message, int currentLine) {
+    public ParseErrorException(String message) {
       super(message);
-      this.currentLine = currentLine;
     }
 
   }
