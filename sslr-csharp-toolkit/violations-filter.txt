@@ -1,2 +1,0 @@
-# Duplicate literals are acceptable in many cases
-*;pmd:AvoidDuplicateLiterals;*

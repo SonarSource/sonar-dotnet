@@ -12,10 +12,6 @@
 
   <name>Sonar C# Plugin :: C# Squid :: Squid</name>
 
-  <properties>
-    <sonar.switchoffviolations.configFile>${project.basedir}/violations-filter.txt</sonar.switchoffviolations.configFile>
-  </properties>
-
   <dependencies>
     <!-- sonarsource -->
     <dependency>
