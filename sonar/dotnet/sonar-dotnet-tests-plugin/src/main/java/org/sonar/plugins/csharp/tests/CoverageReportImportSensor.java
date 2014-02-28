@@ -32,6 +32,7 @@ import java.util.Map;
 
 public class CoverageReportImportSensor implements Sensor {
 
+  private static final String LANGUAGE_KEY = "cs";
   private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
 
   private final CoverageParserFactory coverageProviderFactory;
@@ -47,7 +48,7 @@ public class CoverageReportImportSensor implements Sensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    analyze(context, new FileProvider(project));
+    analyze(context, new FileProvider(project, context));
   }
 
   @VisibleForTesting
@@ -58,7 +59,7 @@ public class CoverageReportImportSensor implements Sensor {
     for (String filePath : coverage.files()) {
       org.sonar.api.resources.File file = fileProvider.fromPath(filePath);
 
-      if (file != null) {
+      if (file != null && LANGUAGE_KEY.equals(file.getLanguage().getKey())) {
         coverageMeasureBuilder.reset();
         for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
           coverageMeasureBuilder.setHits(entry.getKey(), entry.getValue());
