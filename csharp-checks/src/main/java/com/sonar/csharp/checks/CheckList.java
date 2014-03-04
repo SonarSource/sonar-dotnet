@@ -50,6 +50,7 @@ public final class CheckList {
         TabCharacterCheck.class,
         ForLoopCounterChangedCheck.class,
         AtLeastThreeCasesInSwitchCheck.class,
+        TooManyCasesInSwitchCheck.class,
         XPathCheck.class);
   }
 
