@@ -51,6 +51,7 @@ public final class CheckList {
         ForLoopCounterChangedCheck.class,
         AtLeastThreeCasesInSwitchCheck.class,
         TooManyCasesInSwitchCheck.class,
+        EmptyStatementCheck.class,
         XPathCheck.class);
   }
 
