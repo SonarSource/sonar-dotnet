@@ -90,7 +90,7 @@ class Program
 
 
       foreach (int element in myArray) {
-       element = 0;                           // Compliant - not in scope
+       element = 0;                           // Compliant - not in check's scope
       }
     }
 }
