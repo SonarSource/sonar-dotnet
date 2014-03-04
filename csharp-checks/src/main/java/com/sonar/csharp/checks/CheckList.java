@@ -48,6 +48,7 @@ public final class CheckList {
         ParsingErrorCheck.class,
         SwitchWithoutDefaultCheck.class,
         TabCharacterCheck.class,
+        ForLoopCounterChangedCheck.class,
         XPathCheck.class);
   }
 
