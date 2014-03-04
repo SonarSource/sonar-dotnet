@@ -49,6 +49,7 @@ public final class CheckList {
         SwitchWithoutDefaultCheck.class,
         TabCharacterCheck.class,
         ForLoopCounterChangedCheck.class,
+        AtLeastThreeCasesInSwitchCheck.class,
         XPathCheck.class);
   }
 
