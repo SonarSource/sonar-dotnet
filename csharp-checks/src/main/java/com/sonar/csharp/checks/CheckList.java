@@ -55,6 +55,7 @@ public final class CheckList {
         TooManyFunctionParametersCheck.class,
         IfConditionalAlwaysTrueOrFalseCheck.class,
         BooleanEqualityComparisonCheck.class,
+        ElseIfWithoutElseCheck.class,
         XPathCheck.class);
   }
 
