@@ -39,10 +39,6 @@ import java.util.List;
  * C# Core plugin class.
  */
 @Properties({
-  @Property(key = CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY, defaultValue = CSharpSquidConstants.CPD_IGNORE_LITERALS_DEFVALUE
-    + "", name = "Ignore literals", description = "if true, CPD ignores literal value differences when evaluating a duplicate block. "
-    + "This means that 'my first text'; and 'my second text'; will be seen as equivalent.", project = true, global = true,
-    type = PropertyType.BOOLEAN),
   @Property(
     key = CSharpSquidConstants.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",

@@ -33,12 +33,12 @@ import static org.junit.Assert.assertThat;
 
 public class CSharpCpdTokenizerTest {
 
-  private final CSharpCPDTokenizer tokenizer = new CSharpCPDTokenizer(true, Charset.defaultCharset());
+  private final CSharpCPDTokenizer tokenizer = new CSharpCPDTokenizer(Charset.defaultCharset());
 
   @Test
   public void testTokenize() throws FileNotFoundException {
     SourceCode source = new SourceCode(
-        new SourceCode.FileCodeLoader(readFile("/cpd/simpleFile.cs"), Charset.defaultCharset().displayName()));
+      new SourceCode.FileCodeLoader(readFile("/cpd/simpleFile.cs"), Charset.defaultCharset().displayName()));
     Tokens tokens = new Tokens();
     tokenizer.tokenize(source, tokens);
 
@@ -48,7 +48,7 @@ public class CSharpCpdTokenizerTest {
   @Test
   public void testExclusionOfComments() throws FileNotFoundException {
     SourceCode source = new SourceCode(new SourceCode.FileCodeLoader(readFile("/cpd/only-comments.cs"), Charset.defaultCharset()
-        .displayName()));
+      .displayName()));
     Tokens tokens = new Tokens();
     tokenizer.tokenize(source, tokens);
 
@@ -58,7 +58,7 @@ public class CSharpCpdTokenizerTest {
   @Test
   public void usingDirectiveIgnored() throws FileNotFoundException {
     SourceCode source = new SourceCode(new SourceCode.FileCodeLoader(readFile("/cpd/usingDirective.cs"), Charset.defaultCharset()
-        .displayName()));
+      .displayName()));
     Tokens tokens = new Tokens();
     tokenizer.tokenize(source, tokens);
 

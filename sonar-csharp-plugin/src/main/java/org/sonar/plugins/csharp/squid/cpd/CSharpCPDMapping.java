@@ -25,14 +25,12 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Language;
 import org.sonar.api.resources.Project;
 import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
 
 import java.nio.charset.Charset;
 
 public class CSharpCPDMapping extends AbstractCpdMapping {
 
   private final CSharp csharp;
-  private final boolean ignoreLiterals;
   private final Charset charset;
 
   public CSharpCPDMapping(CSharp csharp, Project project, Settings settings) {
@@ -40,7 +38,6 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
     this.csharp = csharp;
     // FIXME: deprecated
     this.charset = project.getFileSystem().getSourceCharset();
-    ignoreLiterals = settings.getBoolean(CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY);
   }
 
   @Override
@@ -50,7 +47,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
 
   @Override
   public Tokenizer getTokenizer() {
-    return new CSharpCPDTokenizer(ignoreLiterals, charset);
+    return new CSharpCPDTokenizer(charset);
   }
 
 }

@@ -36,14 +36,13 @@ import static com.sonar.sslr.api.GenericTokenType.EOF;
 
 public class CSharpCPDTokenizer implements Tokenizer {
 
-  private final boolean ignoreLiterals;
   private final Charset charset;
 
-  public CSharpCPDTokenizer(boolean ignoreLiterals, Charset charset) {
+  public CSharpCPDTokenizer(Charset charset) {
     this.charset = charset;
-    this.ignoreLiterals = ignoreLiterals;
   }
 
+  @Override
   public final void tokenize(SourceCode source, Tokens cpdTokens) {
     CSharpConfiguration conf = new CSharpConfiguration(charset);
     Lexer lexer = CSharpLexer.create(conf, new IgnoreUsingDirectivePreprocessor(conf));
@@ -61,7 +60,7 @@ public class CSharpCPDTokenizer implements Tokenizer {
   }
 
   private String getTokenImage(Token token) {
-    if (ignoreLiterals && token.getType() == CSharpTokenType.STRING_LITERAL) {
+    if (token.getType() == CSharpTokenType.STRING_LITERAL) {
       return CSharpTokenType.STRING_LITERAL.getValue();
     }
     return token.getValue();
