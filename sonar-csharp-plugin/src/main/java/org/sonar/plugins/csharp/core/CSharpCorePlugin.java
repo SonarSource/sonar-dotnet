@@ -21,7 +21,6 @@
 package org.sonar.plugins.csharp.core;
 
 import com.google.common.collect.ImmutableList;
-import org.sonar.api.CoreProperties;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
@@ -40,11 +39,6 @@ import java.util.List;
  * C# Core plugin class.
  */
 @Properties({
-  // FIXME: deprecated
-  @Property(key = CSharpSquidConstants.CPD_MINIMUM_TOKENS_PROPERTY, defaultValue = "" + CoreProperties.CPD_MINIMUM_TOKENS_DEFAULT_VALUE,
-    name = "Minimum tokens",
-    description = "The number of duplicate tokens above which a block is considered as a duplication in a C# program.", global = true,
-    project = true, type = PropertyType.INTEGER),
   @Property(key = CSharpSquidConstants.CPD_IGNORE_LITERALS_PROPERTY, defaultValue = CSharpSquidConstants.CPD_IGNORE_LITERALS_DEFVALUE
     + "", name = "Ignore literals", description = "if true, CPD ignores literal value differences when evaluating a duplicate block. "
     + "This means that 'my first text'; and 'my second text'; will be seen as equivalent.", project = true, global = true,
