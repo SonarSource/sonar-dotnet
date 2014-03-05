@@ -52,6 +52,7 @@ public final class CheckList {
         AtLeastThreeCasesInSwitchCheck.class,
         TooManyCasesInSwitchCheck.class,
         EmptyStatementCheck.class,
+        TooManyFunctionParametersCheck.class,
         XPathCheck.class);
   }
 
