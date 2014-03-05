@@ -53,6 +53,7 @@ public final class CheckList {
         TooManyCasesInSwitchCheck.class,
         EmptyStatementCheck.class,
         TooManyFunctionParametersCheck.class,
+        IfConditionalAlwaysTrueOrFalseCheck.class,
         XPathCheck.class);
   }
 
