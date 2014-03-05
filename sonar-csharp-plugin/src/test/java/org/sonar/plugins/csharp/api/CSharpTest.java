@@ -40,13 +40,13 @@ public class CSharpTest {
 
   @Test
   public void shouldGetDefaultFileSuffixes() {
-    assertThat(cSharp.getFileSuffixes()).containsOnly("cs");
+    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs");
   }
 
   @Test
   public void shouldGetCustomFileSuffixes() {
-    settings.setProperty(CSharpConstants.FILE_SUFFIXES_KEY, "cs, csharp");
-    assertThat(cSharp.getFileSuffixes()).containsOnly("cs", "csharp");
+    settings.setProperty(CSharpConstants.FILE_SUFFIXES_KEY, ".cs,.csharp");
+    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
 }
