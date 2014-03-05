@@ -63,7 +63,7 @@ public class CSharpReSharperProvider {
         .build(),
       PropertyDefinition.builder(RESHARPER_SOLUTION_FILE_PROPERTY_KEY)
         .name("Solution file")
-        .description("Example: C:\\Users\\SonarSource\\Documents\\Visual Studio 2013\\Projects\\MySolution.sln")
+        .description("Example: C:\\Projects\\MyProject\\MySolution.sln")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
