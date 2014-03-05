@@ -32,7 +32,6 @@ import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.Phase;
 import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
@@ -63,7 +62,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-@Phase(name = Phase.Name.PRE)
 public final class CSharpSquidSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSquidSensor.class);
