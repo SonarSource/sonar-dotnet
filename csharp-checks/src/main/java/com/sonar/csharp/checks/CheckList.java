@@ -56,6 +56,7 @@ public final class CheckList {
         IfConditionalAlwaysTrueOrFalseCheck.class,
         BooleanEqualityComparisonCheck.class,
         ElseIfWithoutElseCheck.class,
+        RightCurlyBraceStartsLineCheck.class,
         XPathCheck.class);
   }
 
