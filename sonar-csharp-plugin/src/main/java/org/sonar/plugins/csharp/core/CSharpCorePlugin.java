@@ -68,7 +68,6 @@ public class CSharpCorePlugin extends SonarPlugin {
 
     builder.add(
       CSharp.class,
-      CSharpProjectInitializer.class,
 
       // Sensors
       CSharpSourceImporter.class,
