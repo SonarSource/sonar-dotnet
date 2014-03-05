@@ -36,9 +36,6 @@ import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
 import java.util.List;
 
-/**
- * C# Core plugin class.
- */
 @Properties({
   @Property(
     key = CSharpConstants.FILE_SUFFIXES_KEY,
