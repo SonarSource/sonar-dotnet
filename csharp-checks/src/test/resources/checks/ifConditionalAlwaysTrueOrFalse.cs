@@ -2,11 +2,15 @@ class C
 {
     static void f()
     {
-      if (a == b) {    // Compliant
+      if (a == b) {     // Compliant
         doSomething();
       }
 
-      if (true == b) { // Compliant
+      if (true == b) {  // Compliant
+        doSomething();
+      }
+
+      if (a) {          // Compliant
         doSomething();
       }
 

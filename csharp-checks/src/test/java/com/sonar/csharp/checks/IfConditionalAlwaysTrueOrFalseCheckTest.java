@@ -37,8 +37,8 @@ public class IfConditionalAlwaysTrueOrFalseCheckTest {
     SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/ifConditionalAlwaysTrueOrFalse.cs"), new IfConditionalAlwaysTrueOrFalseCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
-      .next().atLine(13).withMessage("Remove this \"if\" statement.")
-      .next().atLine(17)
+      .next().atLine(17).withMessage("Remove this \"if\" statement.")
+      .next().atLine(21)
       .noMore();
   }
 
