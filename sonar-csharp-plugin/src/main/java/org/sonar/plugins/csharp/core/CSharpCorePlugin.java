@@ -26,6 +26,7 @@ import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.csharp.api.CSharp;
+import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
 import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
@@ -39,6 +40,13 @@ import java.util.List;
  * C# Core plugin class.
  */
 @Properties({
+  @Property(
+    key = CSharpConstants.FILE_SUFFIXES_KEY,
+    defaultValue = CSharpConstants.FILE_SUFFIXES_DEFVALUE,
+    name = "File suffixes",
+    description = "Comma-separated list of suffixes of files to analyze.",
+    project = true, global = true
+  ),
   @Property(
     key = CSharpSquidConstants.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",
