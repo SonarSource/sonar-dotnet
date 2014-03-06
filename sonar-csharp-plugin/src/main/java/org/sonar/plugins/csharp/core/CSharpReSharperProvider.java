@@ -71,6 +71,7 @@ public class CSharpReSharperProvider {
       PropertyDefinition.builder(RESHARPER_INSPECTCODE_PATH_PROPERTY_KEY)
         .name("Path to inspectcode.exe")
         .description("Example: C:/Program Files/jb-commandline-8.1.23.523/inspectcode.exe")
+        .defaultValue("C:/Program Files/jb-commandline-8.1.23.523/inspectcode.exe")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
