@@ -34,7 +34,7 @@ public class RightCurlyBraceStartsLineCheckTest {
 
   @Test
   public void test() {
-    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/rightCUrlyBraceStartsLine.cs"), new RightCurlyBraceStartsLineCheck());
+    SourceFile file = CSharpAstScanner.scanSingleFile(new File("src/test/resources/checks/rightCurlyBraceStartsLine.cs"), new RightCurlyBraceStartsLineCheck());
 
     checkMessagesVerifier.verify(file.getCheckMessages())
       .next().atLine(5).withMessage("Move this closing curly brace to the next line.")
