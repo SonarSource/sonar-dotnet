@@ -57,6 +57,7 @@ public final class CheckList {
         BooleanEqualityComparisonCheck.class,
         ElseIfWithoutElseCheck.class,
         RightCurlyBraceStartsLineCheck.class,
+        AlwaysUseCurlyBracesCheck.class,
         XPathCheck.class);
   }
 
