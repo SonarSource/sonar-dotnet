@@ -22,6 +22,7 @@ package com.sonar.csharp.squid.scanner;
 import com.google.common.base.Charsets;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.CharsetAwareVisitor;
+import com.sonar.csharp.squid.ProgressAstScanner;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.metric.CSharpComplexityVisitor;
 import com.sonar.csharp.squid.metric.CSharpPublicApiVisitor;
@@ -82,7 +83,7 @@ public final class CSharpAstScanner {
     final SquidAstVisitorContextImpl<Grammar> context = new SquidAstVisitorContextImpl<Grammar>(new SourceProject("C# Project"));
     final Parser<Grammar> parser = CSharpParser.create(conf);
 
-    AstScanner.Builder<Grammar> builder = AstScanner.<Grammar>builder(context).setBaseParser(parser);
+    AstScanner.Builder<Grammar> builder = new ProgressAstScanner.Builder(context).setBaseParser(parser);
 
     /* Metrics */
     builder.withMetrics(CSharpMetric.values());
