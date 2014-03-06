@@ -54,14 +54,14 @@ public class CSharpFxCopProvider {
       CSharpFxCopSensor.class,
       PropertyDefinition.builder(FXCOP_ASSEMBLIES_PROPERTY_KEY)
         .name("Assembly to analyze")
-        .description("Example: bin\\Debug\\MyProject.dll")
+        .description("Example: bin/Debug/MyProject.dll")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(FXCOP_FXCOPCMD_PATH_PROPERTY_KEY)
         .name("Path to FxCopCmd.exe")
-        .description("Example: C:\\Program Files\\Microsoft Visual Studio 12.0\\Team Tools\\Static Analysis Tools\\FxCop\\FxCopCmd.exe")
+        .description("Example: C:/Program Files/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)

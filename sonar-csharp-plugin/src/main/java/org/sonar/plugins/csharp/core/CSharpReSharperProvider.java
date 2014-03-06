@@ -63,14 +63,14 @@ public class CSharpReSharperProvider {
         .build(),
       PropertyDefinition.builder(RESHARPER_SOLUTION_FILE_PROPERTY_KEY)
         .name("Solution file")
-        .description("Example: C:\\Projects\\MyProject\\MySolution.sln")
+        .description("Example: C:/Projects/MyProject/MySolution.sln")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(RESHARPER_INSPECTCODE_PATH_PROPERTY_KEY)
         .name("Path to inspectcode.exe")
-        .description("Example: C:\\Program Files\\jb-commandline-8.1.23.523\\inspectcode.exe")
+        .description("Example: C:/Program Files/jb-commandline-8.1.23.523/inspectcode.exe")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)

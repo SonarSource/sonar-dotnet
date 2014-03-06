@@ -49,14 +49,14 @@ public class CSharpCodeCoverageProvider {
       CSharpCoverageReportImportSensor.class,
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
         .name("NCover3 report path")
-        .description("Example: report.nccov or C:\\report.nccov")
+        .description("Example: report.nccov or C:/report.nccov")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
         .name("OpenCover report path")
-        .description("Example: report.xml or C:\\report.xml")
+        .description("Example: report.xml or C:/report.xml")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
