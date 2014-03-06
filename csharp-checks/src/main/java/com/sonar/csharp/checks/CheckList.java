@@ -60,6 +60,7 @@ public final class CheckList {
         AlwaysUseCurlyBracesCheck.class,
         EmptyNestedBlockCheck.class,
         EmptyMethodsCheck.class,
+        UnusedLocalVariableCheck.class,
         XPathCheck.class);
   }
 
