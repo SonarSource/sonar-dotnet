@@ -59,6 +59,7 @@ public final class CheckList {
         RightCurlyBraceStartsLineCheck.class,
         AlwaysUseCurlyBracesCheck.class,
         EmptyNestedBlockCheck.class,
+        EmptyMethodsCheck.class,
         XPathCheck.class);
   }
 
