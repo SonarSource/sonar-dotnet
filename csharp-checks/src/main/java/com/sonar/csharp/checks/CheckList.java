@@ -58,6 +58,7 @@ public final class CheckList {
         ElseIfWithoutElseCheck.class,
         RightCurlyBraceStartsLineCheck.class,
         AlwaysUseCurlyBracesCheck.class,
+        EmptyNestedBlockCheck.class,
         XPathCheck.class);
   }
 
