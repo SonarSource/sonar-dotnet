@@ -38,8 +38,8 @@ public class CSharpCodeCoverageProviderTest {
       CSharpCoverageParserFactory.class,
       CSharpCoverageReportImportSensor.class);
     assertThat(propertyKeys(new CSharpCodeCoverageProvider().extensions())).containsOnly(
-      "sonar.csharp.ncover3.reportPath",
-      "sonar.csharp.opencover.reportPath");
+      "sonar.cs.ncover3.reportPath",
+      "sonar.cs.opencover.reportPath");
   }
 
   private static Set<String> nonProperties(List extensions) {

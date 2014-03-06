@@ -38,9 +38,9 @@ public class CSharpReSharperProviderTest {
       CSharpReSharperRuleRepository.class,
       CSharpReSharperSensor.class);
     assertThat(propertyKeys(new CSharpReSharperProvider().extensions())).containsOnly(
-      "sonar.csharp.resharper.project.name",
-      "sonar.csharp.resharper.solution.file",
-      "sonar.csharp.resharper.inspectcode.path");
+      "sonar.cs.resharper.project.name",
+      "sonar.cs.resharper.solution.file",
+      "sonar.cs.resharper.inspectcode.path");
   }
 
   private static Set<String> nonProperties(List extensions) {

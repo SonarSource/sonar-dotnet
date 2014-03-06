@@ -39,9 +39,9 @@ public class CSharpReSharperProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "ReSharper";
 
-  private static final String RESHARPER_PROJECT_NAME_PROPERTY_KEY = "sonar.csharp.resharper.project.name";
-  private static final String RESHARPER_SOLUTION_FILE_PROPERTY_KEY = "sonar.csharp.resharper.solution.file";
-  private static final String RESHARPER_INSPECTCODE_PATH_PROPERTY_KEY = "sonar.csharp.resharper.inspectcode.path";
+  private static final String RESHARPER_PROJECT_NAME_PROPERTY_KEY = "sonar.cs.resharper.project.name";
+  private static final String RESHARPER_SOLUTION_FILE_PROPERTY_KEY = "sonar.cs.resharper.solution.file";
+  private static final String RESHARPER_INSPECTCODE_PATH_PROPERTY_KEY = "sonar.cs.resharper.inspectcode.path";
 
   private static final ReSharperConfiguration RESHARPER_CONF = new ReSharperConfiguration(
     CSharpConstants.LANGUAGE_KEY,

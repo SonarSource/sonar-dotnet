@@ -38,8 +38,8 @@ public class CSharpFxCopProviderTest {
       CSharpFxCopRuleRepository.class,
       CSharpFxCopSensor.class);
     assertThat(propertyKeys(new CSharpFxCopProvider().extensions())).containsOnly(
-      "sonar.csharp.fxcop.assemblies",
-      "sonar.csharp.fxcop.fxcopcmd.path");
+      "sonar.cs.fxcop.assemblies",
+      "sonar.cs.fxcop.fxcopcmd.path");
   }
 
   private static Set<String> nonProperties(List extensions) {

@@ -35,8 +35,8 @@ public class CSharpCodeCoverageProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Code Coverage";
 
-  private static final String NCOVER3_PROPERTY_KEY = "sonar.csharp.ncover3.reportPath";
-  private static final String OPENCOVER_PROPERTY_KEY = "sonar.csharp.opencover.reportPath";
+  private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportPath";
+  private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportPath";
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpConstants.LANGUAGE_KEY,
