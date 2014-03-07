@@ -61,6 +61,7 @@ public final class CheckList {
         EmptyNestedBlockCheck.class,
         EmptyMethodsCheck.class,
         UnusedLocalVariableCheck.class,
+        ExpressionComplexityCheck.class,
         XPathCheck.class);
   }
 
