@@ -82,7 +82,6 @@ public class CSharpCorePlugin extends SonarPlugin {
 
     builder.addAll(CSharpFxCopProvider.extensions());
     builder.addAll(CSharpCodeCoverageProvider.extensions());
-    builder.addAll(CSharpReSharperProvider.extensions());
 
     return builder.build();
   }

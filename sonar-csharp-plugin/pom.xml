@@ -47,10 +47,6 @@
       <groupId>org.codehaus.sonar-plugins.dotnet.tests</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.codehaus.sonar-plugins.resharper</groupId>
-      <artifactId>sonar-resharper-library</artifactId>
-    </dependency>
 
     <dependency>
       <groupId>org.codehaus.sonar.sslr</groupId>
