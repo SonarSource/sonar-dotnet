@@ -43,10 +43,11 @@ import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
-import org.sonar.api.resources.InputFile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Violation;
+import org.sonar.api.scan.filesystem.FileQuery;
+import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.check.CSharpCheck;
@@ -69,6 +70,7 @@ public final class CSharpSquidSensor implements Sensor {
 
   private final Settings settings;
   private final CSharp cSharp;
+  private final ModuleFileSystem fileSystem;
   private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -78,15 +80,16 @@ public final class CSharpSquidSensor implements Sensor {
   private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(settings, cSharp, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    ModuleFileSystem fileSystem, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
+    this(settings, cSharp, fileSystem, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+    ModuleFileSystem fileSystem, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
     this.settings = settings;
     this.cSharp = cSharp;
+    this.fileSystem = fileSystem;
     this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
 
@@ -97,7 +100,7 @@ public final class CSharpSquidSensor implements Sensor {
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return project.getLanguageKey().equals(CSharpConstants.LANGUAGE_KEY);
+    return !filesToAnalyze().isEmpty();
   }
 
   @Override
@@ -110,23 +113,18 @@ public final class CSharpSquidSensor implements Sensor {
     // TODO: remove the following line & class once SSLR Squid bridge computes NCLOC_DATA_KEY & COMMENT_LINES_DATA_KEY
     visitors.add(new CSharpFileLinesVisitor(new FileProvider(project), fileLinesContextFactory));
     scanner = CSharpAstScanner.create(createParserConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
-    scanner.scanFiles(getFilesToAnalyse(project));
+    scanner.scanFiles(filesToAnalyze());
 
     Collection<SourceCode> squidSourceFiles = scanner.getIndex().search(new QueryByType(SourceFile.class));
     saveMeasures(squidSourceFiles);
   }
 
-  private List<java.io.File> getFilesToAnalyse(Project project) {
-    List<java.io.File> result = Lists.newArrayList();
-    for (InputFile file : project.getFileSystem().mainFiles(cSharp.getKey())) {
-      result.add(file.getFile());
-    }
-
-    return result;
+  private List<java.io.File> filesToAnalyze() {
+    return fileSystem.files(FileQuery.onSource().onLanguage(CSharpConstants.LANGUAGE_KEY));
   }
 
   private CSharpConfiguration createParserConfiguration(Project project) {
-    CSharpConfiguration conf = new CSharpConfiguration(project.getFileSystem().getSourceCharset());
+    CSharpConfiguration conf = new CSharpConfiguration(fileSystem.sourceCharset());
     conf.setIgnoreHeaderComments(settings.getBoolean(CSharpSquidConstants.IGNORE_HEADER_COMMENTS));
     return conf;
   }
