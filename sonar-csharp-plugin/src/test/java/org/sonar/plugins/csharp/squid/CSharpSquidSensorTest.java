@@ -24,7 +24,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
-import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.config.Settings;
@@ -55,13 +54,12 @@ public class CSharpSquidSensorTest {
   @Before
   public void init() {
     CSharp language = new CSharp(mock(Settings.class));
-    ResourceCreationLock resourceCreationLock = mock(ResourceCreationLock.class);
     RulesProfile profile = mock(RulesProfile.class);
     NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
     FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
     FileLinesContext flc = mock(FileLinesContext.class);
     when(fileLinesContextFactory.createFor(Matchers.any(Resource.class))).thenReturn(flc);
-    sensor = new CSharpSquidSensor(mock(Settings.class), language, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    sensor = new CSharpSquidSensor(mock(Settings.class), language, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   // FIXME: Crappy test (breaks in SQ 4.2-SNAPSHOT)

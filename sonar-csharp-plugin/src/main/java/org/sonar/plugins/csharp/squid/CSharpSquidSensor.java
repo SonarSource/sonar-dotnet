@@ -32,7 +32,6 @@ import com.sonar.sslr.squid.AstScanner;
 import com.sonar.sslr.squid.SquidAstVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.ResourceCreationLock;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
@@ -70,7 +69,6 @@ public final class CSharpSquidSensor implements Sensor {
 
   private final Settings settings;
   private final CSharp cSharp;
-  private final ResourceCreationLock resourceCreationLock;
   private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -80,16 +78,15 @@ public final class CSharpSquidSensor implements Sensor {
   private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(settings, cSharp, resourceCreationLock, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
+    this(settings, cSharp, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    ResourceCreationLock resourceCreationLock, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+    RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
     this.settings = settings;
     this.cSharp = cSharp;
-    this.resourceCreationLock = resourceCreationLock;
     this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
 
@@ -157,10 +154,6 @@ public final class CSharpSquidSensor implements Sensor {
       /* Metrics at the file level */
       saveMeasures(sonarFile, squidFile);
     }
-
-    // and lock everything to prevent future modifications
-    LOG.debug("Locking the C# Resource Bridge and the Sonar Index: future modifications won't be possible.");
-    resourceCreationLock.lock();
   }
 
   private void saveMeasures(Resource sonarFile, SourceCode squidFile) {
