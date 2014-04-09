@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp.core;
 
 import com.google.common.collect.ImmutableList;
+import org.sonar.api.PropertyType;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -41,17 +42,28 @@ public class CSharpFxCopProvider {
 
   private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assemblies";
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxcopcmd.path";
+  private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpConstants.LANGUAGE_KEY,
     CSharpConstants.LANGUAGE_KEY + "-fxcop",
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
-    FXCOP_FXCOPCMD_PATH_PROPERTY_KEY);
+    FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
+    FXCOP_TIMEOUT_PROPERTY_KEY);
 
   public static List extensions() {
     return ImmutableList.of(
       CSharpFxCopRuleRepository.class,
       CSharpFxCopSensor.class,
+      PropertyDefinition.builder(FXCOP_TIMEOUT_PROPERTY_KEY)
+        .name("FxCop execution timeout")
+        .description("Time in minutes after which FxCop's execution should be interrupted if not finished")
+        .defaultValue("10")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onQualifiers(Qualifiers.PROJECT)
+        .type(PropertyType.INTEGER)
+        .build(),
       PropertyDefinition.builder(FXCOP_ASSEMBLIES_PROPERTY_KEY)
         .name("Assembly to analyze")
         .description("Example: bin/Debug/MyProject.dll")

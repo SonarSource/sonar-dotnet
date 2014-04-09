@@ -39,6 +39,7 @@ public class CSharpFxCopProviderTest {
       CSharpFxCopSensor.class);
     assertThat(propertyKeys(new CSharpFxCopProvider().extensions())).containsOnly(
       "sonar.cs.fxcop.assemblies",
+      "sonar.cs.fxcop.timeoutMinutes",
       "sonar.cs.fxcop.fxcopcmd.path");
   }
 
