@@ -40,8 +40,8 @@ public class CSharpFxCopProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Code Analysis / FxCop";
 
-  private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assemblies";
-  private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxcopcmd.path";
+  private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assembly";
+  private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
