@@ -15,6 +15,21 @@
 
   <name>SonarQube C# Plugin</name>
   <inceptionYear>2010</inceptionYear>
+  <organization>
+    <name>Jose Chillan, Alexandre Victoor and SonarSource</name>
+    <url>http://www.sonarsource.com</url>
+  </organization>
+
+  <scm>
+    <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarCommunity/sonar-csharp</url>
+    <tag>HEAD</tag>
+  </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://jira.codehaus.org/browse/SONARCS</url>
+  </issueManagement>
 
   <modules>
     <module>csharp-squid</module>
