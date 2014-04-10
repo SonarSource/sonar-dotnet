@@ -20,12 +20,12 @@
 package com.sonar.csharp.checks;
 
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
-import com.sonar.sslr.squid.checks.CheckMessagesVerifierRule;
+import org.sonar.squidbridge.checks.CheckMessagesVerifierRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.utils.SonarException;
-import org.sonar.squid.api.SourceFile;
+import org.sonar.squidbridge.api.SourceFile;
 
 import java.io.File;
 

@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.api.source;
 
-import org.sonar.squid.api.SourceCode;
+import org.sonar.squidbridge.api.SourceCode;
 
 /**
  * SourceCode class that represents a type in C# (classes, interfaces, delegates, enumerations and structures)
@@ -28,7 +28,7 @@ public class SourceType extends SourceCode {
 
   /**
    * Creates a new {@link SourceType} object.
-   * 
+   *
    * @param key
    *          the key of the type
    */
@@ -38,7 +38,7 @@ public class SourceType extends SourceCode {
 
   /**
    * Creates a new {@link SourceType} object.
-   * 
+   *
    * @param key
    *          the key
    * @param typeName

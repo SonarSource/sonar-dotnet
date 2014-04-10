@@ -21,8 +21,8 @@ package com.sonar.csharp.checks;
 
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.RecognitionException;
-import com.sonar.sslr.squid.AstScannerExceptionHandler;
-import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.squidbridge.AstScannerExceptionHandler;
+import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 

@@ -19,10 +19,10 @@
  */
 package com.sonar.csharp.squid.api;
 
-import org.sonar.squid.measures.AggregationFormula;
-import org.sonar.squid.measures.CalculatedMetricFormula;
-import org.sonar.squid.measures.MetricDef;
-import org.sonar.squid.measures.SumAggregationFormula;
+import org.sonar.squidbridge.measures.AggregationFormula;
+import org.sonar.squidbridge.measures.CalculatedMetricFormula;
+import org.sonar.squidbridge.measures.MetricDef;
+import org.sonar.squidbridge.measures.SumAggregationFormula;
 
 /**
  * Metrics computed for the C# language.

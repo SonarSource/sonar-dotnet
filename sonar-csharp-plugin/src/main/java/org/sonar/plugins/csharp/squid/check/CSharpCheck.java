@@ -21,7 +21,7 @@ package org.sonar.plugins.csharp.squid.check;
 
 import com.google.common.collect.Lists;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.checks.SquidCheck;
+import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.ServerExtension;
 

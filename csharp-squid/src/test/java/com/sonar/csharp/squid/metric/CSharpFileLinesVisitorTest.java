@@ -22,15 +22,15 @@ package com.sonar.csharp.squid.metric;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.AstScanner;
+import org.sonar.squidbridge.AstScanner;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.Resource;
-import org.sonar.squid.api.SourceProject;
-import org.sonar.squid.indexer.QueryByType;
+import org.sonar.squidbridge.api.SourceProject;
+import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 import java.nio.charset.Charset;

@@ -30,7 +30,7 @@ import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.SquidAstVisitor;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 import java.util.List;
 import java.util.Map;

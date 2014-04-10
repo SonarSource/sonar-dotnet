@@ -25,7 +25,7 @@ import com.sonar.csharp.squid.api.CSharpPunctuator;
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.SquidAstVisitor;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 /**
  * Visitor that computes the McCabe complexity.

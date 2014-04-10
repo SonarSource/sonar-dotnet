@@ -39,8 +39,8 @@
   </modules>
 
   <properties>
-    <sslrVersion>1.19.2</sslrVersion>
-    <squidBridgeVersion>2.3</squidBridgeVersion>
+    <sslrVersion>1.20</sslrVersion>
+    <squidBridgeVersion>2.4</squidBridgeVersion>
     <sonarCommonRules>1.2</sonarCommonRules>
     <sonar.version>3.7</sonar.version>
 

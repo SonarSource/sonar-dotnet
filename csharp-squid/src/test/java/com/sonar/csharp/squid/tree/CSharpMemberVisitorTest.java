@@ -25,13 +25,13 @@ import com.sonar.csharp.squid.api.source.SourceMember;
 import com.sonar.csharp.squid.parser.RuleTest;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.AstScanner;
+import org.sonar.squidbridge.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.hamcrest.Matcher;
 import org.junit.Test;
-import org.sonar.squid.api.SourceCode;
-import org.sonar.squid.api.SourceProject;
-import org.sonar.squid.indexer.QueryByType;
+import org.sonar.squidbridge.api.SourceCode;
+import org.sonar.squidbridge.api.SourceProject;
+import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 import java.nio.charset.Charset;

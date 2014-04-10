@@ -26,7 +26,7 @@ import com.sonar.csharp.squid.api.source.SourceType;
 import com.sonar.csharp.squid.parser.CSharpGrammar;
 import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.SquidAstVisitor;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 /**
  * Visitor that creates member resources (= methods, property accessors, event accessors, indexer accessors, operators, constructors,

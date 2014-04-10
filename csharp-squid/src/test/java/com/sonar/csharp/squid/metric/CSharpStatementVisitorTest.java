@@ -23,11 +23,11 @@ import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.squid.AstScanner;
+import org.sonar.squidbridge.AstScanner;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.sonar.squid.api.SourceProject;
-import org.sonar.squid.indexer.QueryByType;
+import org.sonar.squidbridge.api.SourceProject;
+import org.sonar.squidbridge.indexer.QueryByType;
 
 import java.io.File;
 import java.nio.charset.Charset;

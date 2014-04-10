@@ -19,7 +19,7 @@
  */
 package com.sonar.csharp.squid.api.source;
 
-import org.sonar.squid.api.SourceCode;
+import org.sonar.squidbridge.api.SourceCode;
 
 /**
  * SourceCode class that represents a member in C# (methods, properties, ... )
@@ -28,7 +28,7 @@ public class SourceMember extends SourceCode {
 
   /**
    * Creates a new {@link SourceMember} object.
-   * 
+   *
    * @param key
    *          the key of the member
    */
@@ -38,7 +38,7 @@ public class SourceMember extends SourceCode {
 
   /**
    * Creates a new {@link SourceMember} object.
-   * 
+   *
    * @param parent
    *          the parent of this member
    * @param memberSignature
