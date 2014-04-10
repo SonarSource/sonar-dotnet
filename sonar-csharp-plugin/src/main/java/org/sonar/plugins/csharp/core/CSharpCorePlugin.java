@@ -47,7 +47,10 @@ import java.util.List;
     key = CSharpSquidConstants.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",
     name = "Ignore header comments",
-    description = "Set to 'true' to enable, or 'false' to disable.",
+    description = "If set to \"true\", the file headers (that are usually the same on each file: " +
+      "licensing information for example) are not considered as comments. Thus metrics such as \"Comment lines\" " +
+      "do not get incremented. If set to \"false\", those file headers are considered as comments and metrics such as " +
+      "\"Comment lines\" get incremented.",
     project = true, global = true,
     type = PropertyType.BOOLEAN)
 })
