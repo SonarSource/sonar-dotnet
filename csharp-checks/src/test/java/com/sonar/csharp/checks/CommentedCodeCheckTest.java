@@ -38,7 +38,8 @@ public class CommentedCodeCheckTest {
 
     checkMessagesVerifier.verify(file.getCheckMessages())
         .next().atLine(6).withMessage("Remove this commented out code or move it into XML documentation.")
-        .next().atLine(11);
+        .next().atLine(11)
+        .next().atLine(19);
   }
 
 }

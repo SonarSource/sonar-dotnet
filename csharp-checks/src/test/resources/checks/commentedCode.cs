@@ -14,6 +14,13 @@ class Program
   MyMethod();
   */
 
+  // Block of commented out code
+  //  void f ()
+  //  {
+  //    int i = 1;
+  //    dosomething();
+  //  }
+
   static void Main(string[] args)
   {
   }
