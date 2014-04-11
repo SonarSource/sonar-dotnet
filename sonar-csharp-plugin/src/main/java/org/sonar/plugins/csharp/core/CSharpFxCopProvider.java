@@ -46,7 +46,7 @@ public class CSharpFxCopProvider {
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpConstants.LANGUAGE_KEY,
-    CSharpConstants.LANGUAGE_KEY + "-fxcop",
+    "fxcop",
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
     FXCOP_TIMEOUT_PROPERTY_KEY);
