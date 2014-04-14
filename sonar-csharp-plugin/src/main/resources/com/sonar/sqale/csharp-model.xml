@@ -414,8 +414,8 @@
         </prop>
         <prop>
           <key>remediationFactor</key>
-          <val>0.0</val>
-          <txt>d</txt>
+          <val>5.0</val>
+          <txt>mn</txt>
         </prop>
         <prop>
           <key>offset</key>
@@ -4104,13 +4104,13 @@
         </prop>
         <prop>
           <key>remediationFactor</key>
-          <val>0.0</val>
-          <txt>d</txt>
+          <val>60.0</val>
+          <txt>mn</txt>
         </prop>
         <prop>
           <key>offset</key>
           <val>0.0</val>
-          <txt>d</txt>
+          <txt>mn</txt>
         </prop>
       </chc>
       <chc>
