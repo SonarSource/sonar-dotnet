@@ -2866,8 +2866,8 @@
         </prop>
         <prop>
           <key>remediationFactor</key>
-          <val>0.0</val>
-          <txt>d</txt>
+          <val>15.0</val>
+          <txt>mn</txt>
         </prop>
         <prop>
           <key>offset</key>
