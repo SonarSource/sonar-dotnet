@@ -52,14 +52,14 @@ public class CSharpCodeCoverageProvider {
         .description("Example: report.nccov or C:/report.nccov")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
-        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
         .name("OpenCover report path")
         .description("Example: report.xml or C:/report.xml")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
-        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
 
@@ -76,6 +76,7 @@ public class CSharpCodeCoverageProvider {
     public CSharpCoverageReportImportSensor(CSharpCoverageParserFactory coverageProviderFactory) {
       super(COVERAGE_CONF, coverageProviderFactory);
     }
+
   }
 
 }
