@@ -106,17 +106,7 @@
       </dependency>
       <dependency>
         <groupId>org.codehaus.sonar</groupId>
-        <artifactId>sonar-squid</artifactId>
-        <version>${sonar.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.sonar</groupId>
         <artifactId>sonar-duplications</artifactId>
-        <version>${sonar.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.codehaus.sonar</groupId>
-        <artifactId>sonar-channel</artifactId>
         <version>${sonar.version}</version>
       </dependency>
       <dependency>
