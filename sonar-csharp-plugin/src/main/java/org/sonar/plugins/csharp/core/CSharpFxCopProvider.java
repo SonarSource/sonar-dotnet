@@ -69,7 +69,7 @@ public class CSharpFxCopProvider {
         .description("Example: bin/Debug/MyProject.dll")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
-        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(FXCOP_FXCOPCMD_PATH_PROPERTY_KEY)
         .name("Path to FxCopCmd.exe")
