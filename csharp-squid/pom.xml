@@ -25,14 +25,6 @@
     <!-- sonar open-source -->
     <dependency>
       <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-channel</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-squid</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.sonar</groupId>
       <artifactId>sonar-plugin-api</artifactId>
     </dependency>
     <dependency>
