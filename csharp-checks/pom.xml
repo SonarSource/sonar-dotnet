@@ -33,10 +33,6 @@
       <artifactId>sonar-check-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-squid</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
       <artifactId>sslr-squid-bridge</artifactId>
     </dependency>
