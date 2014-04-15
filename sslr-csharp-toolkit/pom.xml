@@ -64,8 +64,6 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>jarjar-maven-plugin</artifactId>
-        <!-- TODO should be in parent -->
-        <version>1.5</version>
         <executions>
           <execution>
             <phase>package</phase>
