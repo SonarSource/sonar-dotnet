@@ -2851,6 +2851,10 @@
       </chc>
     </chc>
     <chc>
+      <key>NETWORK_USE</key>
+      <name>Network use</name>
+    </chc>
+    <chc>
       <key>CPU_EFFICIENCY</key>
       <name>Processor use</name>
       <chc>
