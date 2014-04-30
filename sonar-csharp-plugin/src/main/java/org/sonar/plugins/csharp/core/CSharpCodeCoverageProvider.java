@@ -24,8 +24,8 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
-import org.sonar.plugins.dotnet.tests.CoverageParserFactory;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
 
 import java.util.List;
@@ -35,8 +35,8 @@ public class CSharpCodeCoverageProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Code Coverage";
 
-  private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportPath";
-  private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportPath";
+  private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportsPaths";
+  private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportsPaths";
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpConstants.LANGUAGE_KEY,
@@ -48,22 +48,22 @@ public class CSharpCodeCoverageProvider {
       CSharpCoverageParserFactory.class,
       CSharpCoverageReportImportSensor.class,
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
-        .name("NCover3 report path")
-        .description("Example: report.nccov or C:/report.nccov")
+        .name("NCover3 Reports Paths")
+        .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
-        .name("OpenCover report path")
-        .description("Example: report.xml or C:/report.xml")
+        .name("OpenCover Reports Paths")
+        .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
 
-  public static class CSharpCoverageParserFactory extends CoverageParserFactory {
+  public static class CSharpCoverageParserFactory extends CoverageAggregator {
 
     public CSharpCoverageParserFactory(Settings settings) {
       super(COVERAGE_CONF, settings);
