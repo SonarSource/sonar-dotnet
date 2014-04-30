@@ -73,8 +73,8 @@ public class CSharpFxCopProvider {
         .build(),
       PropertyDefinition.builder(FXCOP_FXCOPCMD_PATH_PROPERTY_KEY)
         .name("Path to FxCopCmd.exe")
-        .description("Example: C:/Program Files/Microsoft FxCop 10.0/FxCopCmd.exe")
-        .defaultValue("C:/Program Files/Microsoft FxCop 10.0/FxCopCmd.exe")
+        .description("Example: C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
+        .defaultValue("C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
