@@ -68,12 +68,12 @@
       </dependency>
 
       <dependency>
-        <groupId>org.codehaus.sonar-plugins.fxcop</groupId>
+        <groupId>org.codehaus.sonar.dotnet.fxcop</groupId>
         <artifactId>sonar-fxcop-library</artifactId>
         <version>1.0</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.sonar-plugins.dotnet.tests</groupId>
+        <groupId>org.codehaus.sonar.dotnet.tests</groupId>
         <artifactId>sonar-dotnet-tests-library</artifactId>
         <version>1.0</version>
       </dependency>
