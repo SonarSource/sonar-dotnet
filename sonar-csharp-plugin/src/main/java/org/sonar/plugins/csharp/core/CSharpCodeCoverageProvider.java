@@ -37,11 +37,13 @@ public class CSharpCodeCoverageProvider {
 
   private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportsPaths";
   private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportsPaths";
+  private static final String DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.reportsPaths";
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpConstants.LANGUAGE_KEY,
     NCOVER3_PROPERTY_KEY,
-    OPENCOVER_PROPERTY_KEY);
+    OPENCOVER_PROPERTY_KEY,
+    DOTCOVER_PROPERTY_KEY);
 
   public static List extensions() {
     return ImmutableList.of(
@@ -57,6 +59,13 @@ public class CSharpCodeCoverageProvider {
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
         .name("OpenCover Reports Paths")
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(DOTCOVER_PROPERTY_KEY)
+        .name("dotCover (HTML) Reports Paths")
+        .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
