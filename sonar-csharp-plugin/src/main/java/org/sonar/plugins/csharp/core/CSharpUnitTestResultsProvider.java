@@ -61,8 +61,8 @@ public class CSharpUnitTestResultsProvider {
 
   public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
 
-    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator cSharpUnitTestResultsAggregator) {
-      super(cSharpUnitTestResultsAggregator);
+    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator) {
+      super(unitTestResultsAggregator);
     }
 
   }

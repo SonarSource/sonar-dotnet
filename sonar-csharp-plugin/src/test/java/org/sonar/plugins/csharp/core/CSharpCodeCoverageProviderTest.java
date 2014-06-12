@@ -22,7 +22,7 @@ package org.sonar.plugins.csharp.core;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageParserFactory;
+import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
 import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class CSharpCodeCoverageProviderTest {
   @Test
   public void test() {
     assertThat(nonProperties(new CSharpCodeCoverageProvider().extensions())).containsOnly(
-      CSharpCoverageParserFactory.class,
+      CSharpCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class);
     assertThat(propertyKeys(new CSharpCodeCoverageProvider().extensions())).containsOnly(
       "sonar.cs.ncover3.reportsPaths",

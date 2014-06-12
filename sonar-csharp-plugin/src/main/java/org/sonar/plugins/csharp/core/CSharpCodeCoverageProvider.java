@@ -47,7 +47,7 @@ public class CSharpCodeCoverageProvider {
 
   public static List extensions() {
     return ImmutableList.of(
-      CSharpCoverageParserFactory.class,
+      CSharpCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class,
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
         .name("NCover3 Reports Paths")
@@ -72,9 +72,9 @@ public class CSharpCodeCoverageProvider {
         .build());
   }
 
-  public static class CSharpCoverageParserFactory extends CoverageAggregator {
+  public static class CSharpCoverageAggregator extends CoverageAggregator {
 
-    public CSharpCoverageParserFactory(Settings settings) {
+    public CSharpCoverageAggregator(Settings settings) {
       super(COVERAGE_CONF, settings);
     }
 
@@ -82,8 +82,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageParserFactory coverageProviderFactory) {
-      super(COVERAGE_CONF, coverageProviderFactory);
+    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
+      super(COVERAGE_CONF, coverageAggregator);
     }
 
   }
