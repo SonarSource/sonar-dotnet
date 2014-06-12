@@ -56,9 +56,6 @@ import java.util.List;
 })
 public class CSharpCorePlugin extends SonarPlugin {
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public List getExtensions() {
     ImmutableList.Builder builder = ImmutableList.builder();
@@ -84,6 +81,7 @@ public class CSharpCorePlugin extends SonarPlugin {
 
     builder.addAll(CSharpFxCopProvider.extensions());
     builder.addAll(CSharpCodeCoverageProvider.extensions());
+    builder.addAll(CSharpUnitTestResultsProvider.extensions());
 
     return builder.build();
   }
