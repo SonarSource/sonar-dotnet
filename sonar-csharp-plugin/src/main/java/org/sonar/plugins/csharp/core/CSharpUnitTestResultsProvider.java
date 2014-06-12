@@ -34,7 +34,7 @@ public class CSharpUnitTestResultsProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Unit Tests";
 
-  private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.visualstudioTest.reportsPaths";
+  private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.vstest.reportsPaths";
 
   private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY);
 
