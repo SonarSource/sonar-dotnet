@@ -38,6 +38,9 @@ public class CSharpUnitTestResultsProvider {
 
   private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY);
 
+  private CSharpUnitTestResultsProvider() {
+  }
+
   public static List extensions() {
     return ImmutableList.of(
       CSharpUnitTestResultsAggregator.class,

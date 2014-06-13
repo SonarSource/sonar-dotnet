@@ -47,6 +47,9 @@ public class CSharpCodeCoverageProvider {
     DOTCOVER_PROPERTY_KEY,
     VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
 
+  private CSharpCodeCoverageProvider() {
+  }
+
   public static List extensions() {
     return ImmutableList.of(
       CSharpCoverageAggregator.class,
