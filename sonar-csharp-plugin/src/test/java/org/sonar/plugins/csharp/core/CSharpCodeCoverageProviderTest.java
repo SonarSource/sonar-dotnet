@@ -34,10 +34,10 @@ public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(new CSharpCodeCoverageProvider().extensions())).containsOnly(
+    assertThat(nonProperties(CSharpCodeCoverageProvider.extensions())).containsOnly(
       CSharpCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class);
-    assertThat(propertyKeys(new CSharpCodeCoverageProvider().extensions())).containsOnly(
+    assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
       "sonar.cs.ncover3.reportsPaths",
       "sonar.cs.opencover.reportsPaths",
       "sonar.cs.dotcover.reportsPaths",

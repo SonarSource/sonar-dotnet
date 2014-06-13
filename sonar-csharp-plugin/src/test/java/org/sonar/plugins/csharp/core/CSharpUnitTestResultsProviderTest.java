@@ -34,10 +34,10 @@ public class CSharpUnitTestResultsProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(new CSharpUnitTestResultsProvider().extensions())).containsOnly(
+    assertThat(nonProperties(CSharpUnitTestResultsProvider.extensions())).containsOnly(
       CSharpUnitTestResultsAggregator.class,
       CSharpUnitTestResultsImportSensor.class);
-    assertThat(propertyKeys(new CSharpUnitTestResultsProvider().extensions())).containsOnly(
+    assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
       "sonar.cs.vstest.reportsPaths");
   }
 
