@@ -40,7 +40,8 @@ public class CSharpCodeCoverageProviderTest {
     assertThat(propertyKeys(new CSharpCodeCoverageProvider().extensions())).containsOnly(
       "sonar.cs.ncover3.reportsPaths",
       "sonar.cs.opencover.reportsPaths",
-      "sonar.cs.dotcover.reportsPaths");
+      "sonar.cs.dotcover.reportsPaths",
+      "sonar.cs.vscoveragexml.reportsPaths");
   }
 
   private static Set<String> nonProperties(List extensions) {
