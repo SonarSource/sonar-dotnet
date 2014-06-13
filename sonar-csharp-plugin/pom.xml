@@ -16,6 +16,13 @@
   <description>Enable analysis and reporting on C# projects.</description>
   <url>http://docs.codehaus.org/display/SONAR/C%23+Ecosystem</url>
 
+  <scm>
+    <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarCommunity/sonar-csharp</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties>
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.core.CSharpCorePlugin</sonar.pluginClass>
