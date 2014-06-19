@@ -41,6 +41,7 @@ public class CSharpFxCopProvider {
   private static final String SUBCATEGORY = "Code Analysis / FxCop";
 
   private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assembly";
+  private static final String FXCOP_DIRECTORY_PROPERTY_KEY = "sonar.cs.fxcop.directory";
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
 
@@ -48,6 +49,7 @@ public class CSharpFxCopProvider {
     CSharpConstants.LANGUAGE_KEY,
     "fxcop",
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
+    FXCOP_DIRECTORY_PROPERTY_KEY,
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
     FXCOP_TIMEOUT_PROPERTY_KEY);
 
@@ -67,6 +69,14 @@ public class CSharpFxCopProvider {
       PropertyDefinition.builder(FXCOP_ASSEMBLIES_PROPERTY_KEY)
         .name("Assembly to analyze")
         .description("Example: bin/Debug/MyProject.dll")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(FXCOP_DIRECTORY_PROPERTY_KEY)
+        .name("List of directories (seperated by ',') to scan for referenced assemblies")
+        .description("Example: s:/Binaries,d:/dev/builddrop")
+        .defaultValue(null)
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
@@ -98,3 +108,4 @@ public class CSharpFxCopProvider {
   }
 
 }
+
