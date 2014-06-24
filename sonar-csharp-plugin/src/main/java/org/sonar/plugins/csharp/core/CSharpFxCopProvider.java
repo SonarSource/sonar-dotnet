@@ -43,6 +43,7 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assembly";
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
+  private static final String FXCOP_CUSTOM_RULES_PROPERTY_KEY = "sonar.cs.fxcop.customRules";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpConstants.LANGUAGE_KEY,
@@ -78,13 +79,22 @@ public class CSharpFxCopProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
-        .build());
+        .build(),
+      PropertyDefinition.builder(FXCOP_CUSTOM_RULES_PROPERTY_KEY)
+        .name("FxCop custom rules")
+        .description("XML definitions of custom FxCop rules, which are'nt builtin into the plugin."
+                   + " The used format is described <a href='http://docs.codehaus.org/display/SONAR/C%23+Plugin'>here</a>.")
+        .type(PropertyType.TEXT)
+        .category(CATEGORY)              
+        .subCategory(SUBCATEGORY)
+        .build()
+      );
   }
 
   public static class CSharpFxCopRuleRepository extends FxCopRuleRepository {
 
-    public CSharpFxCopRuleRepository(XMLRuleParser xmlRuleParser) {
-      super(FXCOP_CONF, xmlRuleParser);
+    public CSharpFxCopRuleRepository(XMLRuleParser xmlRuleParser, Settings settings) {
+      super(FXCOP_CONF, FXCOP_CUSTOM_RULES_PROPERTY_KEY, xmlRuleParser, settings);
     }
 
   }
