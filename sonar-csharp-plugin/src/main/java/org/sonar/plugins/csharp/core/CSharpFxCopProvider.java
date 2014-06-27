@@ -43,13 +43,15 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assembly";
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
+  private static final String FXCOP_ASPNET_PROPERTY_KEY = "sonar.cs.fxcop.aspnet";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpConstants.LANGUAGE_KEY,
     "fxcop",
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
-    FXCOP_TIMEOUT_PROPERTY_KEY);
+    FXCOP_TIMEOUT_PROPERTY_KEY,
+    FXCOP_ASPNET_PROPERTY_KEY);
 
   public static List extensions() {
     return ImmutableList.of(
@@ -75,6 +77,14 @@ public class CSharpFxCopProvider {
         .name("Path to FxCopCmd.exe")
         .description("Example: C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
         .defaultValue("C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(FXCOP_ASPNET_PROPERTY_KEY)
+        .name("ASP.NET")
+        .description("Whether or not to set the /aspnet flag when launching FxCopCmd.exe")
+        .defaultValue("false")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
