@@ -87,7 +87,7 @@ public class CSharpFxCopProvider {
         .defaultValue("false")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
-        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
 
