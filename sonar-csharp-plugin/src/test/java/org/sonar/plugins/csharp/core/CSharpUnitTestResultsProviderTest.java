@@ -38,7 +38,8 @@ public class CSharpUnitTestResultsProviderTest {
       CSharpUnitTestResultsAggregator.class,
       CSharpUnitTestResultsImportSensor.class);
     assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
-      "sonar.cs.vstest.reportsPaths");
+      "sonar.cs.vstest.reportsPaths",
+      "sonar.cs.nunit.reportsPaths");
   }
 
   private static Set<String> nonProperties(List extensions) {
