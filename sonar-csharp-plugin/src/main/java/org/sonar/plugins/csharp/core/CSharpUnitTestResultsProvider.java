@@ -35,8 +35,9 @@ public class CSharpUnitTestResultsProvider {
   private static final String SUBCATEGORY = "Unit Tests";
 
   private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.vstest.reportsPaths";
+  private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.nunit.reportsPaths";
 
-  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY);
+  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY);
 
   private CSharpUnitTestResultsProvider() {
   }
@@ -48,6 +49,13 @@ public class CSharpUnitTestResultsProvider {
       PropertyDefinition.builder(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY)
         .name("Visual Studio Test Reports Paths")
         .description("Example: \"report.trx\", \"report1.trx,report2.trx\" or \"C:/report.trx\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(NUNIT_TEST_RESULTS_PROPERTY_KEY)
+        .name("NUnit Test Reports Paths")
+        .description("Example: \"TestResult.xml\", \"TestResult1.xml,TestResult2.xml\" or \"C:/TestResult.xml\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
