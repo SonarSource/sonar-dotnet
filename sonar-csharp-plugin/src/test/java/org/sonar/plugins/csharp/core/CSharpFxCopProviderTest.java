@@ -41,7 +41,9 @@ public class CSharpFxCopProviderTest {
       "sonar.cs.fxcop.assembly",
       "sonar.cs.fxcop.timeoutMinutes",
       "sonar.cs.fxcop.fxCopCmdPath",
-      "sonar.cs.fxcop.aspnet");
+      "sonar.cs.fxcop.aspnet",
+      "sonar.cs.fxcop.directories",
+      "sonar.cs.fxcop.references");
   }
 
   private static Set<String> nonProperties(List extensions) {

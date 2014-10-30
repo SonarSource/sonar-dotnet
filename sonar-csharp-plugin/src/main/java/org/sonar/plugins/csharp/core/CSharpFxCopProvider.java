@@ -44,6 +44,8 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
   private static final String FXCOP_ASPNET_PROPERTY_KEY = "sonar.cs.fxcop.aspnet";
+  private static final String FXCOP_DIRECTORIES_PROPERTY_KEY = "sonar.cs.fxcop.directories";
+  private static final String FXCOP_REFERENCES_PROPERTY_KEY = "sonar.cs.fxcop.references";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpConstants.LANGUAGE_KEY,
@@ -51,7 +53,9 @@ public class CSharpFxCopProvider {
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
     FXCOP_TIMEOUT_PROPERTY_KEY,
-    FXCOP_ASPNET_PROPERTY_KEY);
+    FXCOP_ASPNET_PROPERTY_KEY,
+    FXCOP_DIRECTORIES_PROPERTY_KEY,
+    FXCOP_REFERENCES_PROPERTY_KEY);
 
   public static List extensions() {
     return ImmutableList.of(
@@ -88,6 +92,20 @@ public class CSharpFxCopProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(FXCOP_DIRECTORIES_PROPERTY_KEY)
+        .name("Additional assemblies directories")
+        .description("Comma-separated list of directories where FxCop should look for referenced assemblies. Example: c:/MyLibrary")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(FXCOP_REFERENCES_PROPERTY_KEY)
+        .name("Additional assemblies references")
+        .description("Comma-separated list of referenced assemblies to pass to FxCop. Example: c:/MyLibrary.dll")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
 
