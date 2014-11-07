@@ -50,3 +50,7 @@ packages/
 
 # SonarQube
 .sonar/
+
+# MSTest test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
