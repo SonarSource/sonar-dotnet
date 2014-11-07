@@ -43,11 +43,6 @@ namespace NSonarQubeAnalyzer
             return builder.ToImmutable();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trivia"></param>
-        /// <returns></returns>
         private static bool IsComment(SyntaxTrivia trivia)
         {
             return trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
