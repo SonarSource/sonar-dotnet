@@ -14,12 +14,12 @@ namespace Tests
         [TestMethod]
         public void Lines()
         {
-            Assert.AreEqual(1, MetricsFor("").Lines());
-            Assert.AreEqual(2, MetricsFor("\n").Lines());
-            Assert.AreEqual(2, MetricsFor("\r").Lines());
-            Assert.AreEqual(2, MetricsFor("\r\n").Lines());
-            Assert.AreEqual(2, MetricsFor("\n").Lines());
-            Assert.AreEqual(3, MetricsFor("using System;\r\n/*hello\r\nworld*/").Lines());
+            MetricsFor("").Lines().Should().Be(1);
+            MetricsFor("\n").Lines().Should().Be(2);
+            MetricsFor("\r").Lines().Should().Be(2);
+            MetricsFor("\r\n").Lines().Should().Be(2);
+            MetricsFor("\n").Lines().Should().Be(2);
+            MetricsFor("using System;\r\n/*hello\r\nworld*/").Lines().Should().Be(3);
         }
 
         [TestMethod]
