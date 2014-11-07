@@ -24,6 +24,7 @@ import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
+import org.sonar.plugins.csharp.CSharpSensor;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
@@ -77,7 +78,9 @@ public class CSharpCorePlugin extends SonarPlugin {
 
       // rules
       CSharpRuleRepository.class,
-      CSharpRuleProfile.class);
+      CSharpRuleProfile.class,
+
+      CSharpSensor.class);
 
     builder.addAll(CSharpFxCopProvider.extensions());
     builder.addAll(CSharpCodeCoverageProvider.extensions());

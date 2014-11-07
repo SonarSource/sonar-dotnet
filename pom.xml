@@ -32,6 +32,7 @@
   </issueManagement>
 
   <modules>
+    <module>NSonarQubeAnalyzer</module>
     <module>csharp-squid</module>
     <module>csharp-checks</module>
     <module>sonar-csharp-plugin</module>

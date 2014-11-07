@@ -22,6 +22,7 @@ package org.sonar.plugins.csharp.core;
 import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.plugins.csharp.CSharpSensor;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
@@ -46,10 +47,11 @@ public class CSharpCorePluginTest {
       CSharpSourceCodeColorizer.class,
       CSharpSquidSensor.class,
       CSharpRuleRepository.class,
-      CSharpRuleProfile.class);
+      CSharpRuleProfile.class,
+      CSharpSensor.class);
 
     assertThat(new CSharpCorePlugin().getExtensions()).hasSize(
-      9
+      10
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size());
