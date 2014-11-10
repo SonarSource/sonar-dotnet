@@ -11,8 +11,21 @@ using Microsoft.CodeAnalysis.CSharp;
 
 namespace NSonarQubeAnalyzer
 {
+    public class FileComments
+    {
+        public readonly ISet<int> NoSonar;
+        public readonly ISet<int> NonBlanks;
+
+        public FileComments(ISet<int> noSonar, ISet<int> nonBlanks)
+        {
+            this.NoSonar = noSonar;
+            this.NonBlanks = nonBlanks;
+        }
+    }
+
     public class Metrics
     {
+        private readonly string[] LINE_TERMINATORS = { "\r\n", "\n", "\r" };
         private SyntaxTree tree;
 
         public Metrics(SyntaxTree tree)
@@ -25,22 +38,35 @@ namespace NSonarQubeAnalyzer
             return tree.GetLineSpan(TextSpan.FromBounds(tree.Length, tree.Length)).EndLinePosition.Line + 1;
         }
 
-        public ISet<int> Comments()
+        public FileComments Comments(bool ignoreHeaderComments)
         {
-            var builder = ImmutableHashSet.CreateBuilder<int>();
+            var noSonar = ImmutableHashSet.CreateBuilder<int>();
+            var nonBlanks = ImmutableHashSet.CreateBuilder<int>();
+
             foreach (SyntaxTrivia trivia in tree.GetRoot().DescendantTrivia())
             {
-                if (IsComment(trivia))
+                if (!(ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None)) && IsComment(trivia))
                 {
-                    int startLine = tree.GetLineSpan(trivia.FullSpan).StartLinePosition.Line + 1;
-                    int endLine = tree.GetLineSpan(trivia.FullSpan).EndLinePosition.Line + 1;
-                    for (int line = startLine; line <= endLine; line++)
+                    int lineNumber = tree.GetLineSpan(trivia.FullSpan).StartLinePosition.Line + 1;
+
+                    foreach (string line in trivia.ToFullString().Split(LINE_TERMINATORS, StringSplitOptions.None))
                     {
-                        builder.Add(line);
+                        if (line.Contains("NOSONAR"))
+                        {
+                            nonBlanks.Remove(lineNumber);
+                            noSonar.Add(lineNumber);
+                        }
+                        else if (line.Any(char.IsLetter) && !noSonar.Contains(lineNumber))
+                        {
+                            nonBlanks.Add(lineNumber);
+                        }
+
+                        lineNumber++;
                     }
                 }
             }
-            return builder.ToImmutable();
+
+            return new FileComments(noSonar.ToImmutableHashSet(), nonBlanks.ToImmutableHashSet());
         }
 
         private static bool IsComment(SyntaxTrivia trivia)

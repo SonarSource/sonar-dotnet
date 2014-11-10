@@ -14,26 +14,99 @@ namespace Tests
         [TestMethod]
         public void Lines()
         {
-            MetricsFor("").Lines().Should().Be(1);
-            MetricsFor("\n").Lines().Should().Be(2);
-            MetricsFor("\r").Lines().Should().Be(2);
-            MetricsFor("\r\n").Lines().Should().Be(2);
-            MetricsFor("\n").Lines().Should().Be(2);
-            MetricsFor("using System;\r\n/*hello\r\nworld*/").Lines().Should().Be(3);
+            Lines("").Should().Be(1);
+            Lines("\n").Should().Be(2);
+            Lines("\r").Should().Be(2);
+            Lines("\r\n").Should().Be(2);
+            Lines("\n").Should().Be(2);
+            Lines("using System;\r\n/*hello\r\nworld*/").Should().Be(3);
+        }
+
+        private static int Lines(string text)
+        {
+            return MetricsFor(text).Lines();
         }
 
         [TestMethod]
-        public void Comments()
+        public void CommentsWithoutHeaders()
         {
-            MetricsFor("").Comments().Should().BeEmpty();
-            MetricsFor("#ifdef DEBUG\nfoo\n#endif").Comments().Should().BeEmpty();
-            MetricsFor("// l1").Comments().Should().BeEquivalentTo(1);
-            MetricsFor("// l1\n// l2").Comments().Should().BeEquivalentTo(1, 2);
-            MetricsFor("/* l1 */").Comments().Should().BeEquivalentTo(1);
-            MetricsFor("/* l1 \n l2 */").Comments().Should().BeEquivalentTo(1, 2);
-            MetricsFor("/* l1 \n l2 */").Comments().Should().BeEquivalentTo(1, 2);
-            MetricsFor("/// foo").Comments().Should().BeEquivalentTo(1);
-            MetricsFor("/** */").Comments().Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("").NonBlanks.Should().BeEmpty();
+            CommentsWithoutHeaders("").NoSonar.Should().BeEmpty();
+
+            CommentsWithoutHeaders("#ifdef DEBUG\nfoo\n#endif").NonBlanks.Should().BeEmpty();
+            CommentsWithoutHeaders("using System; #ifdef DEBUG\nfoo\n#endif").NonBlanks.Should().BeEmpty();
+
+            CommentsWithoutHeaders("// foo").NonBlanks.Should().BeEmpty();
+            CommentsWithoutHeaders("#if DEBUG\nfoo\n#endif\n// foo").NonBlanks.Should().BeEmpty();
+
+            CommentsWithoutHeaders("using System; // l1").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; // l1\n// l2").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithoutHeaders("using System; /* l1 */").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; /* l1 \n l2 */").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithoutHeaders("using System; /* l1 \n l2 */").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithoutHeaders("using System; /// foo").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; /** foo */").NonBlanks.Should().BeEquivalentTo(1);
+
+            CommentsWithoutHeaders("using System; /** foo \n \n bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+            CommentsWithoutHeaders("using System; /** foo \r \r bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+            CommentsWithoutHeaders("using System; /** foo \r\n \r\n bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+
+            CommentsWithoutHeaders("using System; // NOSONAR").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; // ooNOSONARoo").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; // nosonar").NoSonar.Should().BeEmpty();
+            CommentsWithoutHeaders("using System; // nOSonAr").NoSonar.Should().BeEmpty();
+
+            CommentsWithoutHeaders("using System; /* NOSONAR */ /* foo*/").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; /* NOSONAR */ /* foo */").NonBlanks.Should().BeEmpty();
+
+            CommentsWithoutHeaders("using System; /* foo*/ /* NOSONAR */").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithoutHeaders("using System; /* foo*/ /* NOSONAR */").NonBlanks.Should().BeEmpty();
+        }
+
+        private FileComments CommentsWithoutHeaders(string text)
+        {
+            return MetricsFor(text).Comments(true);
+        }
+
+        [TestMethod]
+        public void CommentsWitHeaders()
+        {
+            CommentsWithHeaders("").NonBlanks.Should().BeEmpty();
+            CommentsWithHeaders("").NoSonar.Should().BeEmpty();
+
+            CommentsWithHeaders("#ifdef DEBUG\nfoo\n#endif").NonBlanks.Should().BeEmpty();
+            CommentsWithHeaders("using System; #ifdef DEBUG\nfoo\n#endif").NonBlanks.Should().BeEmpty();
+
+            CommentsWithHeaders("// foo").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("#if DEBUG\nfoo\n#endif\n// foo").NonBlanks.Should().BeEquivalentTo(4);
+
+            CommentsWithHeaders("using System; // l1").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; // l1\n// l2").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithHeaders("using System; /* l1 */").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; /* l1 \n l2 */").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithHeaders("using System; /* l1 \n l2 */").NonBlanks.Should().BeEquivalentTo(1, 2);
+            CommentsWithHeaders("using System; /// foo").NonBlanks.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; /** foo */").NonBlanks.Should().BeEquivalentTo(1);
+
+            CommentsWithHeaders("using System; /** foo \n \n bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+            CommentsWithHeaders("using System; /** foo \r \r bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+            CommentsWithHeaders("using System; /** foo \r\n \r\n bar */").NonBlanks.Should().BeEquivalentTo(1, 3);
+
+            CommentsWithHeaders("using System; // NOSONAR").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; // ooNOSONARoo").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; // nosonar").NoSonar.Should().BeEmpty();
+            CommentsWithHeaders("using System; // nOSonAr").NoSonar.Should().BeEmpty();
+
+            CommentsWithHeaders("using System; /* NOSONAR */ /* foo*/").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; /* NOSONAR */ /* foo */").NonBlanks.Should().BeEmpty();
+
+            CommentsWithHeaders("using System; /* foo*/ /* NOSONAR */").NoSonar.Should().BeEquivalentTo(1);
+            CommentsWithHeaders("using System; /* foo*/ /* NOSONAR */").NonBlanks.Should().BeEmpty();
+        }
+
+        private FileComments CommentsWithHeaders(string text)
+        {
+            return MetricsFor(text).Comments(false);
         }
 
         private static Metrics MetricsFor(string text)
