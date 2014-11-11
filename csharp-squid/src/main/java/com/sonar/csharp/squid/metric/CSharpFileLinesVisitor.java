@@ -27,11 +27,11 @@ import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
 import com.sonar.sslr.api.Trivia;
-import org.sonar.squidbridge.SquidAstVisitor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.File;
+import org.sonar.squidbridge.SquidAstVisitor;
 
 import java.util.List;
 import java.util.Set;
@@ -65,7 +65,6 @@ public class CSharpFileLinesVisitor extends SquidAstVisitor<Grammar> implements 
 
     for (int line = 1; line <= fileLength; line++) {
       fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, linesOfCode.contains(line) ? 1 : 0);
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, linesOfComments.contains(line) ? 1 : 0);
     }
     fileLinesContext.save();
 

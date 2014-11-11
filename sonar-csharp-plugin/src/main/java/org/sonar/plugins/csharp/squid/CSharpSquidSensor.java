@@ -30,10 +30,10 @@ import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.AnnotationCheckFactory;
-import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
@@ -71,7 +71,6 @@ public final class CSharpSquidSensor implements Sensor {
   private final Settings settings;
   private final CSharp cSharp;
   private final ModuleFileSystem fileSystem;
-  private final NoSonarFilter noSonarFilter;
   private final AnnotationCheckFactory annotationCheckFactory;
   private final FileLinesContextFactory fileLinesContextFactory;
 
@@ -80,22 +79,26 @@ public final class CSharpSquidSensor implements Sensor {
   private AstScanner<Grammar> scanner;
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    ModuleFileSystem fileSystem, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory) {
-    this(settings, cSharp, fileSystem, profile, noSonarFilter, fileLinesContextFactory, new CSharpCheck[0]);
+    ModuleFileSystem fileSystem, RulesProfile profile, FileLinesContextFactory fileLinesContextFactory) {
+    this(settings, cSharp, fileSystem, profile, fileLinesContextFactory, new CSharpCheck[0]);
   }
 
   public CSharpSquidSensor(Settings settings, CSharp cSharp,
-    ModuleFileSystem fileSystem, RulesProfile profile, NoSonarFilter noSonarFilter, FileLinesContextFactory fileLinesContextFactory,
+    ModuleFileSystem fileSystem, RulesProfile profile, FileLinesContextFactory fileLinesContextFactory,
     CSharpCheck[] cSharpChecks) {
     this.settings = settings;
     this.cSharp = cSharp;
     this.fileSystem = fileSystem;
-    this.noSonarFilter = noSonarFilter;
     this.fileLinesContextFactory = fileLinesContextFactory;
 
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
     allChecks.addAll(CheckList.getChecks());
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);
+  }
+
+  @DependsUpon
+  public String dependsUponNSonarQubeAnalysis() {
+    return "NSonarQubeAnalysis";
   }
 
   @Override
@@ -137,9 +140,6 @@ public final class CSharpSquidSensor implements Sensor {
       File sonarFile = File.fromIOFile(new java.io.File(squidFile.getKey()), project);
       sonarFile.setLanguage(cSharp);
 
-      /* No Sonar */
-      noSonarFilter.addResource(sonarFile, squidFile.getNoSonarTagLines());
-
       /* Files complexity distribution */
       saveFilesComplexityDistribution(sonarFile, squidFile);
 
@@ -162,7 +162,6 @@ public final class CSharpSquidSensor implements Sensor {
     context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, squidFile.getDouble(CSharpMetric.STATEMENTS));
     context.saveMeasure(sonarFile, CoreMetrics.ACCESSORS, squidFile.getDouble(CSharpMetric.ACCESSORS));
     context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(CSharpMetric.COMPLEXITY));
-    context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, squidFile.getDouble(CSharpMetric.COMMENT_LINES));
     context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_API, squidFile.getDouble(CSharpMetric.PUBLIC_API));
     context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API,
       squidFile.getDouble(CSharpMetric.PUBLIC_API) - squidFile.getDouble(CSharpMetric.PUBLIC_DOC_API));

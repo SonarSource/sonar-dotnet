@@ -19,13 +19,21 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Closeables;
 import com.google.common.io.Files;
+import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.checks.NoSonarFilter;
+import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.FileLinesContext;
+import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.Project;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
@@ -34,21 +42,35 @@ import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
+@DependedUpon("NSonarQubeAnalysis")
 public class CSharpSensor implements Sensor {
 
   private static final String N_SONARQUBE_ANALYZER = "NSonarQubeAnalyzer";
   private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_ANALYZER + ".zip";
   private static final String N_SONARQUBE_ANALYZER_EXE = N_SONARQUBE_ANALYZER + ".exe";
 
+  private final Settings settings;
   private final ModuleFileSystem fileSystem;
+  private final FileLinesContextFactory fileLinesContextFactory;
+  private final NoSonarFilter noSonarFilter;
 
-  public CSharpSensor(ModuleFileSystem fileSystem) {
+  public CSharpSensor(Settings settings, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+    this.settings = settings;
     this.fileSystem = fileSystem;
+    this.fileLinesContextFactory = fileLinesContextFactory;
+    this.noSonarFilter = noSonarFilter;
   }
 
   @Override
@@ -60,43 +82,227 @@ public class CSharpSensor implements Sensor {
   public void analyse(Project project, SensorContext context) {
     unzipNSonarQubeAnalyzer();
 
-    for (File file : filesToAnalyze()) {
-      double lines = lines(file);
-
-      org.sonar.api.resources.File sonarFile = org.sonar.api.resources.File.fromIOFile(file, project);
-      context.saveMeasure(sonarFile, CoreMetrics.LINES, lines);
-    }
+    analyze();
+    importResults(project, context);
   }
 
-  private double lines(File file) {
+  private void analyze() {
+    StringBuilder sb = new StringBuilder();
+    appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    appendLine(sb, "<AnalysisInput>");
+    appendLine(sb, "  <Settings>");
+    appendLine(sb, "    <Setting>");
+    appendLine(sb, "      <Key>sonar.cs.ignoreHeaderComments</Key>");
+    appendLine(sb, "      <Value>" + (settings.getBoolean("sonar.cs.ignoreHeaderComments") ? "true" : "false") + "</Value>");
+    appendLine(sb, "    </Setting>");
+    appendLine(sb, "  </Settings>");
+    appendLine(sb, "  <Files>");
+    for (File file : filesToAnalyze()) {
+      appendLine(sb, "    <File>" + file.getAbsolutePath() + "</File>");
+    }
+    appendLine(sb, "  </Files>");
+    appendLine(sb, "</AnalysisInput>");
+
+    File analysisInput = new File(fileSystem.workingDir(), "analysis-input.xml");
+    File analysisOutput = new File(fileSystem.workingDir(), "analysis-output.xml");
+
+    try {
+      Files.write(sb, analysisInput, Charsets.UTF_8);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+
     // FIXME duplicated
     File workingDir = new File(fileSystem.workingDir(), N_SONARQUBE_ANALYZER);
     File executableFile = new File(workingDir, N_SONARQUBE_ANALYZER_EXE);
 
     Command command = Command.create(executableFile.getAbsolutePath())
-      .addArgument(file.getAbsolutePath());
+      .addArgument(analysisInput.getAbsolutePath())
+      .addArgument(analysisOutput.getAbsolutePath());
 
-    BufferedStreamConsumer bufferedStreamConsumer = new BufferedStreamConsumer();
-    CommandExecutor.create().execute(command, bufferedStreamConsumer, new SinkStreamConsumer(), Integer.MAX_VALUE);
-
-    String firstLine = bufferedStreamConsumer.lines().get(0);
-
-    return Double.parseDouble(firstLine);
+    CommandExecutor.create().execute(command, new SinkStreamConsumer(), new SinkStreamConsumer(), Integer.MAX_VALUE);
   }
 
-  private static class BufferedStreamConsumer implements StreamConsumer {
+  private void importResults(Project project, SensorContext context) {
+    // FIXME duplicated
+    File analysisOutput = new File(fileSystem.workingDir(), "analysis-output.xml");
 
-    ImmutableList.Builder<String> builder = ImmutableList.builder();
+    new AnalysisResultImporter(project, context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
+  }
 
-    @Override
-    public void consumeLine(String line) {
-      builder.add(line);
+  private static class AnalysisResultImporter {
+
+    private final Project project;
+    private final SensorContext context;
+    private XMLStreamReader stream;
+    private final FileLinesContextFactory fileLinesContextFactory;
+    private final NoSonarFilter noSonarFilter;
+
+    public AnalysisResultImporter(Project project, SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+      this.project = project;
+      this.context = context;
+      this.fileLinesContextFactory = fileLinesContextFactory;
+      this.noSonarFilter = noSonarFilter;
     }
 
-    public List<String> lines() {
-      return builder.build();
+    public void parse(File file) {
+      InputStreamReader reader = null;
+      XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
+
+      try {
+        reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
+        stream = xmlFactory.createXMLStreamReader(reader);
+
+        while (stream.hasNext()) {
+          if (stream.next() == XMLStreamConstants.START_ELEMENT) {
+            String tagName = stream.getLocalName();
+
+            if ("File".equals(tagName)) {
+              handleFileTag();
+            }
+          }
+        }
+      } catch (IOException e) {
+        throw Throwables.propagate(e);
+      } catch (XMLStreamException e) {
+        throw Throwables.propagate(e);
+      } finally {
+        closeXmlStream();
+        Closeables.closeQuietly(reader);
+      }
+
+      return;
     }
 
+    private void closeXmlStream() {
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (XMLStreamException e) {
+          throw Throwables.propagate(e);
+        }
+      }
+    }
+
+    private void handleFileTag() throws XMLStreamException {
+      org.sonar.api.resources.File sonarFile = null;
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "File".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Path".equals(tagName)) {
+            String path = stream.getElementText();
+            sonarFile = org.sonar.api.resources.File.fromIOFile(new File(path), project);
+          } else if ("Metrics".equals(tagName)) {
+            // TODO Better message
+            Preconditions.checkState(sonarFile != null);
+            handleMetricsTag(sonarFile);
+          }
+        }
+      }
+    }
+
+    private void handleMetricsTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "Metrics".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Lines".equals(tagName)) {
+            handleLinesMetricTag(sonarFile);
+          } else if ("Comments".equals(tagName)) {
+            handleCommentsMetricTag(sonarFile);
+          }
+        }
+      }
+    }
+
+    private void handleLinesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double lines = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.LINES, lines);
+    }
+
+    private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "Comments".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("NoSonar".equals(tagName)) {
+            handleNoSonarCommentsMetric(sonarFile);
+          } else if ("NonBlank".equals(tagName)) {
+            handleNonBlankCommentsMetric(sonarFile);
+          }
+        }
+      }
+    }
+
+    private void handleNoSonarCommentsMetric(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "NoSonar".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Line".equals(tagName)) {
+            int line = Integer.parseInt(stream.getElementText());
+            builder.add(line);
+          } else {
+            throw new IllegalArgumentException();
+          }
+        }
+      }
+
+      noSonarFilter.addResource(sonarFile, builder.build());
+    }
+
+    private void handleNonBlankCommentsMetric(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double lines = 0;
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "NonBlank".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Line".equals(tagName)) {
+            lines++;
+
+            int line = Integer.parseInt(stream.getElementText());
+            fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
+          } else {
+            throw new IllegalArgumentException();
+          }
+        }
+      }
+
+      fileLinesContext.save();
+      context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, lines);
+    }
+
+  }
+
+  private void appendLine(StringBuilder sb, String line) {
+    sb.append(line);
+    sb.append("\r\n");
   }
 
   private static class SinkStreamConsumer implements StreamConsumer {

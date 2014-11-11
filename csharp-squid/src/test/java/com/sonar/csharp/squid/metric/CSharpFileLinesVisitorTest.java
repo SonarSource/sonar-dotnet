@@ -22,13 +22,13 @@ package com.sonar.csharp.squid.metric;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.AstScanner;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.resources.Resource;
+import org.sonar.squidbridge.AstScanner;
 import org.sonar.squidbridge.api.SourceProject;
 import org.sonar.squidbridge.indexer.QueryByType;
 
@@ -77,30 +77,6 @@ public class CSharpFileLinesVisitorTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 21, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 22, 0);
     verify(fileLinesContext, times(22)).setIntValue(Mockito.eq(CoreMetrics.NCLOC_DATA_KEY), Mockito.anyInt(), Mockito.anyInt());
-
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 1, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 2, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 3, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 4, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 5, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 6, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 7, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 8, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 9, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 10, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 11, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 12, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 13, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 14, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 15, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 16, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 17, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 18, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 19, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 20, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 21, 0);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 22, 0);
-    verify(fileLinesContext, times(22)).setIntValue(Mockito.eq(CoreMetrics.COMMENT_LINES_DATA_KEY), Mockito.anyInt(), Mockito.anyInt());
   }
 
 }

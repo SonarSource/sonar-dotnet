@@ -13,13 +13,13 @@ namespace NSonarQubeAnalyzer
 {
     public class FileComments
     {
-        public readonly ISet<int> NoSonar;
-        public readonly ISet<int> NonBlanks;
+        public readonly IImmutableSet<int> NoSonar;
+        public readonly IImmutableSet<int> NonBlank;
 
-        public FileComments(ISet<int> noSonar, ISet<int> nonBlanks)
+        public FileComments(IImmutableSet<int> noSonar, IImmutableSet<int> nonBlank)
         {
             this.NoSonar = noSonar;
-            this.NonBlanks = nonBlanks;
+            this.NonBlank = nonBlank;
         }
     }
 
@@ -41,7 +41,7 @@ namespace NSonarQubeAnalyzer
         public FileComments Comments(bool ignoreHeaderComments)
         {
             var noSonar = ImmutableHashSet.CreateBuilder<int>();
-            var nonBlanks = ImmutableHashSet.CreateBuilder<int>();
+            var nonBlank = ImmutableHashSet.CreateBuilder<int>();
 
             foreach (SyntaxTrivia trivia in tree.GetRoot().DescendantTrivia())
             {
@@ -53,12 +53,12 @@ namespace NSonarQubeAnalyzer
                     {
                         if (line.Contains("NOSONAR"))
                         {
-                            nonBlanks.Remove(lineNumber);
+                            nonBlank.Remove(lineNumber);
                             noSonar.Add(lineNumber);
                         }
                         else if (line.Any(char.IsLetter) && !noSonar.Contains(lineNumber))
                         {
-                            nonBlanks.Add(lineNumber);
+                            nonBlank.Add(lineNumber);
                         }
 
                         lineNumber++;
@@ -66,7 +66,7 @@ namespace NSonarQubeAnalyzer
                 }
             }
 
-            return new FileComments(noSonar.ToImmutableHashSet(), nonBlanks.ToImmutableHashSet());
+            return new FileComments(noSonar.ToImmutableHashSet(), nonBlank.ToImmutableHashSet());
         }
 
         private static bool IsComment(SyntaxTrivia trivia)
