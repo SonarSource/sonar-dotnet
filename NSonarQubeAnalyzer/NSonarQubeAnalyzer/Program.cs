@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,6 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System.Threading;
 
 namespace NSonarQubeAnalyzer
 {
@@ -42,6 +44,30 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteElementString("Path", file);
 
                     SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
+                    var rules = ImmutableArray.Create<IDiagnosticAnalyzer>(new ClassName());
+                    var cancellationToken = new CancellationTokenSource().Token;
+                    // TODO Add using back
+                    var options = new AnalyzerOptions(ImmutableArray.Create<AdditionalStream>(), ImmutableDictionary.Create<string, string>());
+                    var driver = new AnalyzerDriver<SyntaxKind>(rules, n => n.CSharpKind(), options, cancellationToken, null);
+                    {
+                        Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree));
+                        //compilation = compilation.AddReferences(new MetadataReference[] { new MetadataFileReference(typeof(object).Assembly.Location) });
+                        compilation = compilation.WithEventQueue(driver.CompilationEventQueue);
+
+                        var result = compilation.GetDiagnostics(cancellationToken);
+                        Console.WriteLine("Diagnostics from compilation: " + result.Length);
+                        foreach (var diagnostic in result)
+                        {
+                            Console.WriteLine("  - " + diagnostic);
+                        }
+
+                        result = driver.GetDiagnosticsAsync().Result;
+                        Console.WriteLine("Diagnostics from analysis: " + result.Length);
+                        foreach (var diagnostic in result)
+                        {
+                            Console.WriteLine("  - " + diagnostic);
+                        }
+                    }
 
                     Metrics metrics = new Metrics(syntaxTree);
                     xmlOut.WriteStartElement("Metrics");
