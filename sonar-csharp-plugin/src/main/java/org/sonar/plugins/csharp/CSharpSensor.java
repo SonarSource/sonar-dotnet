@@ -30,11 +30,17 @@ import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.checks.NoSonarFilter;
+import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
+import org.sonar.api.issue.Issuable;
+import org.sonar.api.issue.Issuable.IssueBuilder;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.rule.RuleKey;
+import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.command.Command;
@@ -61,16 +67,23 @@ public class CSharpSensor implements Sensor {
   private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_ANALYZER + ".zip";
   private static final String N_SONARQUBE_ANALYZER_EXE = N_SONARQUBE_ANALYZER + ".exe";
 
+  private static final String REPOSITORY_KEY = "csharpsquid";
+
   private final Settings settings;
   private final ModuleFileSystem fileSystem;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private final RulesProfile ruleProfile;
+  private final ResourcePerspectives perspectives;
 
-  public CSharpSensor(Settings settings, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+  public CSharpSensor(Settings settings, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, RulesProfile ruleProfile,
+    ResourcePerspectives perspectives) {
     this.settings = settings;
     this.fileSystem = fileSystem;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.ruleProfile = ruleProfile;
+    this.perspectives = perspectives;
   }
 
   @Override
@@ -96,6 +109,11 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "      <Value>" + (settings.getBoolean("sonar.cs.ignoreHeaderComments") ? "true" : "false") + "</Value>");
     appendLine(sb, "    </Setting>");
     appendLine(sb, "  </Settings>");
+    appendLine(sb, "  <Rules>");
+    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(REPOSITORY_KEY)) {
+      appendLine(sb, "    <Rule>" + activeRule.getRuleKey() + "</Rule>");
+    }
+    appendLine(sb, "  </Rules>");
     appendLine(sb, "  <Files>");
     for (File file : filesToAnalyze()) {
       appendLine(sb, "    <File>" + file.getAbsolutePath() + "</File>");
@@ -127,7 +145,7 @@ public class CSharpSensor implements Sensor {
     // FIXME duplicated
     File analysisOutput = new File(fileSystem.workingDir(), "analysis-output.xml");
 
-    new AnalysisResultImporter(project, context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
+    new AnalysisResultImporter(project, context, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
 
   private static class AnalysisResultImporter {
@@ -137,12 +155,15 @@ public class CSharpSensor implements Sensor {
     private XMLStreamReader stream;
     private final FileLinesContextFactory fileLinesContextFactory;
     private final NoSonarFilter noSonarFilter;
+    private final ResourcePerspectives perspectives;
 
-    public AnalysisResultImporter(Project project, SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+    public AnalysisResultImporter(Project project, SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
+      ResourcePerspectives perspectives) {
       this.project = project;
       this.context = context;
       this.fileLinesContextFactory = fileLinesContextFactory;
       this.noSonarFilter = noSonarFilter;
+      this.perspectives = perspectives;
     }
 
     public void parse(File file) {
@@ -202,6 +223,10 @@ public class CSharpSensor implements Sensor {
             // TODO Better message
             Preconditions.checkState(sonarFile != null);
             handleMetricsTag(sonarFile);
+          } else if ("Issues".equals(tagName)) {
+            // TODO Better message
+            Preconditions.checkState(sonarFile != null);
+            handleIssuesTag(sonarFile);
           }
         }
       }
@@ -296,6 +321,49 @@ public class CSharpSensor implements Sensor {
 
       fileLinesContext.save();
       context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, lines);
+    }
+
+    private void handleIssuesTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      Issuable issuable = perspectives.as(Issuable.class, sonarFile);
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "Issues".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Issue".equals(tagName)) {
+            if (issuable != null) {
+              handleIssueTag(issuable);
+            }
+          }
+        }
+      }
+    }
+
+    private void handleIssueTag(Issuable issuable) throws XMLStreamException {
+      IssueBuilder builder = issuable.newIssueBuilder();
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "Issue".equals(stream.getLocalName())) {
+          issuable.addIssue(builder.build());
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Id".equals(tagName)) {
+            builder.ruleKey(RuleKey.of(REPOSITORY_KEY, stream.getElementText()));
+          } else if ("Line".equals(tagName)) {
+            builder.line(Integer.parseInt(stream.getElementText()));
+          } else if ("Message".equals(tagName)) {
+            builder.message(stream.getElementText());
+          }
+        }
+      }
     }
 
   }

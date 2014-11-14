@@ -27,6 +27,16 @@ namespace NSonarQubeAnalyzer
             var files = from e in xmlIn.Descendants("File")
                         select e.Value;
             bool ignoreHeaderComments = "true".Equals(settings["sonar.cs.ignoreHeaderComments"]);
+            var rules = (from e in xmlIn.Descendants("Rule")
+                         select e.Value)
+                         .ToImmutableHashSet();
+
+            var diagnosticAnalyzersBuilder = ImmutableArray.CreateBuilder<IDiagnosticAnalyzer>();
+            if (rules.Contains("SwitchWithoutDefault"))
+            {
+                diagnosticAnalyzersBuilder.Add(new SwitchWithoutDefault());
+            }
+            var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
             xmlOutSettings.Encoding = Encoding.UTF8;
@@ -65,6 +75,17 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteEndElement();
                     xmlOut.WriteEndElement();
 
+                    xmlOut.WriteEndElement();
+
+                    xmlOut.WriteStartElement("Issues");
+                    foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(syntaxTree))
+                    {
+                        xmlOut.WriteStartElement("Issue");
+                        xmlOut.WriteElementString("Id", diagnostic.Id);
+                        xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                        xmlOut.WriteElementString("Message", diagnostic.GetMessage());
+                        xmlOut.WriteEndElement();
+                    }
                     xmlOut.WriteEndElement();
 
                     xmlOut.WriteEndElement();

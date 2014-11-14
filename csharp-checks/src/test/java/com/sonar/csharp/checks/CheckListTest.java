@@ -56,32 +56,25 @@ public class CheckListTest {
   public void test() {
     List<Class> checks = CheckList.getChecks();
 
-    for (Class cls : checks) {
-      String testName = '/' + cls.getName().replace('.', '/') + "Test.class";
-      assertThat(getClass().getResource(testName))
-          .overridingErrorMessage("No test for " + cls.getSimpleName())
-          .isNotNull();
-    }
-
     ResourceBundle resourceBundle = ResourceBundle.getBundle("org.sonar.l10n.csharp", Locale.ENGLISH);
 
     List<Rule> rules = new AnnotationRuleParser().parse("repositoryKey", checks);
     for (Rule rule : rules) {
       resourceBundle.getString("rule.csharpsquid." + rule.getKey() + ".name");
       assertThat(getClass().getResource("/org/sonar/l10n/csharp/rules/csharpsquid/" + rule.getKey() + ".html"))
-          .overridingErrorMessage("No description for " + rule.getKey())
-          .isNotNull();
+        .overridingErrorMessage("No description for " + rule.getKey())
+        .isNotNull();
 
       assertThat(rule.getDescription())
-          .overridingErrorMessage("Description of " + rule.getKey() + " should be in separate file")
-          .isNullOrEmpty();
+        .overridingErrorMessage("Description of " + rule.getKey() + " should be in separate file")
+        .isNullOrEmpty();
 
       for (RuleParam param : rule.getParams()) {
         resourceBundle.getString("rule.csharpsquid." + rule.getKey() + ".param." + param.getKey());
 
         assertThat(param.getDescription())
-            .overridingErrorMessage("Description for param " + param.getKey() + " of " + rule.getKey() + " should be in separate file")
-            .isNullOrEmpty();
+          .overridingErrorMessage("Description for param " + param.getKey() + " of " + rule.getKey() + " should be in separate file")
+          .isNullOrEmpty();
       }
     }
   }

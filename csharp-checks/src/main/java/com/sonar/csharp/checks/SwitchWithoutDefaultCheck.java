@@ -19,31 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "SwitchWithoutDefault",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class SwitchWithoutDefaultCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.SWITCH_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.select().children(CSharpGrammar.SWITCH_SECTION).children(CSharpGrammar.SWITCH_LABEL).children(CSharpKeyword.DEFAULT).isEmpty()) {
-      getContext().createLineViolation(this, "Add a default: case to this switch.", node);
-    }
-  }
-
 }
