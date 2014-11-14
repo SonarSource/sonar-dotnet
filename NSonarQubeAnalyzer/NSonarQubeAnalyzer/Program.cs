@@ -36,6 +36,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new SwitchWithoutDefault());
             }
+            if (rules.Contains("S1301"))
+            {
+                diagnosticAnalyzersBuilder.Add(new AtLeastThreeCasesInSwitch());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

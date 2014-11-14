@@ -19,43 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-
-import java.util.List;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S1301",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class AtLeastThreeCasesInSwitchCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.SWITCH_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (hasLessThanThreeCases(node)) {
-      getContext().createLineViolation(this, "Replace this \"switch\" statement with \"if\" statements to increase readability.", node);
-    }
-  }
-
-  private static boolean hasLessThanThreeCases(AstNode switchStmt) {
-    List<AstNode> switchSelectionList = switchStmt.getChildren(CSharpGrammar.SWITCH_SECTION);
-    int nbCase = 0;
-
-    for (AstNode switchSelection : switchSelectionList) {
-      nbCase += switchSelection.getChildren(CSharpGrammar.SWITCH_LABEL).size();
-    }
-
-    return nbCase < 3;
-  }
-
 }
