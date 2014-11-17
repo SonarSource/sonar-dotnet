@@ -40,6 +40,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new AtLeastThreeCasesInSwitch());
             }
+            if (rules.Contains("BreakOutsideSwitch"))
+            {
+                diagnosticAnalyzersBuilder.Add(new BreakOutsideSwitch());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

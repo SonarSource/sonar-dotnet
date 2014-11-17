@@ -19,48 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.AstNodeType;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "BreakOutsideSwitch",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class BreakOutsideSwitchCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.BREAK_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (!isInSwitch(node)) {
-      getContext().createLineViolation(this, "Refactor the code in order to remove this break statement.", node);
-    }
-  }
-
-  private boolean isInSwitch(AstNode node) {
-    AstNode ancestor = getFirstAncestor(node, CSharpGrammar.SWITCH_STATEMENT, CSharpGrammar.ITERATION_STATEMENT);
-
-    return ancestor != null &&
-      ancestor.is(CSharpGrammar.SWITCH_STATEMENT);
-  }
-
-  private AstNode getFirstAncestor(AstNode node, AstNodeType t1, AstNodeType t2) {
-    AstNode result = node;
-
-    while (result != null && !result.is(t1, t2)) {
-      result = result.getParent();
-    }
-
-    return result;
-  }
-
 }

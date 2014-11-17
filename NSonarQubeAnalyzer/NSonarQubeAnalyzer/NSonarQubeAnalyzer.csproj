@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiagnosticsRunner.cs" />
+    <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
     <Compile Include="Diagnostics\SwitchWithoutDefault.cs" />
     <Compile Include="Metrics.cs" />

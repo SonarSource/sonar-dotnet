@@ -91,12 +91,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\BreakOutsideSwitch.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\AtLeastThreeCasesInSwitch.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\BreakOutsideSwitchTest.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitchTest.cs" />
     <Compile Include="Diagnostics\SwitchWithoutDefaultTest.cs" />
     <Compile Include="Diagnostics\Verifier.cs" />
