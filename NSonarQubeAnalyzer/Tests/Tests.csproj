@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\IfConditionalAlwaysTrueOrFalse.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\UnnecessaryBooleanLiteral.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -103,6 +106,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalseTest.cs" />
     <Compile Include="Diagnostics\UnnecessaryBooleanLiteralTest.cs" />
     <Compile Include="Diagnostics\BreakOutsideSwitchTest.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitchTest.cs" />

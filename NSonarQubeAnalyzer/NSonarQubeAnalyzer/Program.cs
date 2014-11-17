@@ -48,6 +48,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new UnnecessaryBooleanLiteral());
             }
+            if (rules.Contains("S1145"))
+            {
+                diagnosticAnalyzersBuilder.Add(new IfConditionalAlwaysTrueOrFalse());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiagnosticsRunner.cs" />
+    <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalse.cs" />
     <Compile Include="Diagnostics\UnnecessaryBooleanLiteral.cs" />
     <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />

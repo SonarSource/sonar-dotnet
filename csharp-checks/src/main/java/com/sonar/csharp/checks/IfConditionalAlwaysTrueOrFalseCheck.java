@@ -19,43 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S1145",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class IfConditionalAlwaysTrueOrFalseCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.IF_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (isOnlyBooleanLiteral(node.getFirstChild(CSharpGrammar.EXPRESSION))) {
-      getContext().createLineViolation(this, "Remove this \"if\" statement.", node);
-    }
-  }
-
-  private boolean isOnlyBooleanLiteral(AstNode expression) {
-    AstNode exprChild = expression.getFirstChild();
-
-    if (!exprChild.getToken().equals(exprChild.getLastToken())) {
-      return false;
-    }
-
-    String tokenValue = exprChild.getTokenValue();
-    return CSharpKeyword.TRUE.getValue().equals(tokenValue)
-      || CSharpKeyword.FALSE.getValue().equals(tokenValue);
-  }
-
 }
