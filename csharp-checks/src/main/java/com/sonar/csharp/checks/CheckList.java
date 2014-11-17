@@ -35,6 +35,7 @@ public final class CheckList {
       SwitchWithoutDefaultCheck.class,
       AtLeastThreeCasesInSwitchCheck.class,
       BreakOutsideSwitchCheck.class,
+      BooleanEqualityComparisonCheck.class,
 
       AssignmentInsideSubExpressionCheck.class,
       AsyncAwaitIdentifierCheck.class,
@@ -54,7 +55,6 @@ public final class CheckList {
       EmptyStatementCheck.class,
       TooManyFunctionParametersCheck.class,
       IfConditionalAlwaysTrueOrFalseCheck.class,
-      BooleanEqualityComparisonCheck.class,
       ElseIfWithoutElseCheck.class,
       RightCurlyBraceStartsLineCheck.class,
       AlwaysUseCurlyBracesCheck.class,
