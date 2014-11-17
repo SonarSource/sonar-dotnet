@@ -48,7 +48,6 @@ public final class CheckList {
       MagicNumberCheck.class,
       MethodNameCheck.class,
       ParameterAssignedToCheck.class,
-      ParsingErrorCheck.class,
       TabCharacterCheck.class,
       ForLoopCounterChangedCheck.class,
       TooManyCasesInSwitchCheck.class,
