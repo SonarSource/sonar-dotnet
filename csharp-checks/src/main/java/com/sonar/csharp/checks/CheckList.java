@@ -37,9 +37,9 @@ public final class CheckList {
       BreakOutsideSwitchCheck.class,
       BooleanEqualityComparisonCheck.class,
       IfConditionalAlwaysTrueOrFalseCheck.class,
+      AsyncAwaitIdentifierCheck.class,
 
       AssignmentInsideSubExpressionCheck.class,
-      AsyncAwaitIdentifierCheck.class,
       ClassCouplingCheck.class,
       ClassNameCheck.class,
       CommentedCodeCheck.class,

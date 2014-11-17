@@ -52,6 +52,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new IfConditionalAlwaysTrueOrFalse());
             }
+            if (rules.Contains("AsyncAwaitIdentifier"))
+            {
+                diagnosticAnalyzersBuilder.Add(new AsyncAwaitIdentifier());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

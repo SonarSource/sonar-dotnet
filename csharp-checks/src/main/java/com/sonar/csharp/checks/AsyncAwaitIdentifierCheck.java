@@ -19,44 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "AsyncAwaitIdentifier",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class AsyncAwaitIdentifierCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(GenericTokenType.IDENTIFIER);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (isAsyncOrAwaitIdentifier(node)) {
-      getContext().createLineViolation(this, "Rename this identifier.", node);
-    }
-  }
-
-  private boolean isAsyncOrAwaitIdentifier(AstNode node) {
-    return isAsyncOrAwait(node) && !isContextualAsyncOrAwaitKeyword(node);
-  }
-
-  private boolean isAsyncOrAwait(AstNode node) {
-    String value = node.getTokenOriginalValue();
-    return "async".equals(value) || "await".equals(value);
-  }
-
-  private boolean isContextualAsyncOrAwaitKeyword(AstNode node) {
-    return node.getParent().is(CSharpGrammar.ASYNC, CSharpGrammar.AWAIT_EXPRESSION);
-  }
-
 }
