@@ -33,6 +33,7 @@ public final class CheckList {
   public static List<Class> getChecks() {
     return Lists.<Class>newArrayList(
       SwitchWithoutDefaultCheck.class,
+      AtLeastThreeCasesInSwitchCheck.class,
 
       AssignmentInsideSubExpressionCheck.class,
       AsyncAwaitIdentifierCheck.class,
@@ -50,7 +51,6 @@ public final class CheckList {
       ParsingErrorCheck.class,
       TabCharacterCheck.class,
       ForLoopCounterChangedCheck.class,
-      AtLeastThreeCasesInSwitchCheck.class,
       TooManyCasesInSwitchCheck.class,
       EmptyStatementCheck.class,
       TooManyFunctionParametersCheck.class,
