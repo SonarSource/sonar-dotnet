@@ -34,10 +34,10 @@ public final class CheckList {
     return Lists.<Class>newArrayList(
       SwitchWithoutDefaultCheck.class,
       AtLeastThreeCasesInSwitchCheck.class,
+      BreakOutsideSwitchCheck.class,
 
       AssignmentInsideSubExpressionCheck.class,
       AsyncAwaitIdentifierCheck.class,
-      BreakOutsideSwitchCheck.class,
       ClassCouplingCheck.class,
       ClassNameCheck.class,
       CommentedCodeCheck.class,
