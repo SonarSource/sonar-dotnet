@@ -2,9 +2,9 @@
 
 namespace Tests.Diagnostics
 {
-    public class AtLeastThreeCasesInSwitchCheck
+    public class BreakOutsideSwitch
     {
-        public BreakOutsideSwitchTest(int n)
+        public BreakOutsideSwitch(int n)
         {
             while (true)
             {

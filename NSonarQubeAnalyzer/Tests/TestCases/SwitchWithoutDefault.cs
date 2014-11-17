@@ -1,8 +1,8 @@
 ﻿namespace Tests.Diagnostics
 {
-    public class SwitchWithoutDefaultTestCase
+    public class SwitchWithoutDefault
     {
-        public SwitchWithoutDefaultTestCase(int n)
+        public SwitchWithoutDefault(int n)
         {
             switch (n) // Noncompliant
             {

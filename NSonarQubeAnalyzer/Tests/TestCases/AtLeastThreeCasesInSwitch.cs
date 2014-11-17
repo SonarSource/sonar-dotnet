@@ -1,8 +1,8 @@
 ﻿namespace Tests.Diagnostics
 {
-    public class AtLeastThreeCasesInSwitchCheck
+    public class AtLeastThreeCasesInSwitch
     {
-        public AtLeastThreeCasesInSwitchCheck(int n)
+        public AtLeastThreeCasesInSwitch(int n)
         {
             switch (a) // Noncompliant
             {

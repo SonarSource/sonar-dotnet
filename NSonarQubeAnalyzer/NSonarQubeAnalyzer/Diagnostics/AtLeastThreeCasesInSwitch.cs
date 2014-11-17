@@ -32,13 +32,13 @@ namespace NSonarQubeAnalyzer
         public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
         {
             SwitchStatementSyntax switchNode = (SwitchStatementSyntax)node;
-            if (!hasAtLeastThreeLabels(switchNode))
+            if (!HasAtLeastThreeLabels(switchNode))
             {
                 addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
             }
         }
 
-        private static bool hasAtLeastThreeLabels(SwitchStatementSyntax node)
+        private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node)
         {
             return node.Sections.Sum(section => section.Labels.Count) >= 3;
         }
