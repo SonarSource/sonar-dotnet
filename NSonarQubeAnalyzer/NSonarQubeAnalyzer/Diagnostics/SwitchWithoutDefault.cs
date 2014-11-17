@@ -32,13 +32,13 @@ namespace NSonarQubeAnalyzer
         public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
         {
             SwitchStatementSyntax switchNode = (SwitchStatementSyntax)node;
-            if (!hasDefaultLabel(switchNode))
+            if (!HasDefaultLabel(switchNode))
             {
                 addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
             }
         }
 
-        private static bool hasDefaultLabel(SwitchStatementSyntax node)
+        private static bool HasDefaultLabel(SwitchStatementSyntax node)
         {
             return node.Sections.Any(section => section.Labels.Any(labels => labels.IsKind(SyntaxKind.DefaultSwitchLabel)));
         }
