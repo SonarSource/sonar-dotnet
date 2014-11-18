@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\ElseIfWithoutElse.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\AssignmentInsideSubExpression.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -112,6 +115,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\ElseIfWithoutElseTest.cs" />
     <Compile Include="Diagnostics\AssignmentInsideSubExpressionTest.cs" />
     <Compile Include="Diagnostics\AsyncAwaitIdentifierTest.cs" />
     <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalseTest.cs" />

@@ -60,6 +60,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new AssignmentInsideSubExpression());
             }
+            if (rules.Contains("S126"))
+            {
+                diagnosticAnalyzersBuilder.Add(new ElseIfWithoutElse());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

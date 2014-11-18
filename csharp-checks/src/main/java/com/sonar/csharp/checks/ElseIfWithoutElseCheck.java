@@ -19,40 +19,13 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S126",
   priority = Priority.MAJOR)
 public class ElseIfWithoutElseCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.IF_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (isElseIf(node)) {
-      AstNode elseClause = node.getFirstChild(CSharpKeyword.ELSE);
-      if (elseClause == null) {
-        getContext().createLineViolation(this, "Add the missing \"else\" clause.", node);
-      }
-    }
-  }
-
-  private boolean isElseIf(AstNode node) {
-    return isElse(node.getParent().getParent().getPreviousAstNode());
-  }
-
-  private boolean isElse(AstNode node) {
-    return node.is(CSharpKeyword.ELSE);
-  }
-
 }
