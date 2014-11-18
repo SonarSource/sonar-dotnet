@@ -19,49 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "AssignmentInsideSubExpression",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class AssignmentInsideSubExpressionCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.ASSIGNMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (isInsideSubExpression(node)) {
-      getContext().createLineViolation(this, "Extract this assignment outside of the sub-expression.", node);
-    }
-  }
-
-  private boolean isInsideSubExpression(AstNode node) {
-    AstNode subExpression = node.getFirstAncestor(CSharpGrammar.EXPRESSION);
-    AstNode expression = subExpression.getFirstAncestor(CSharpGrammar.EXPRESSION);
-
-    return expression != null &&
-      !isLambdaExpression(expression) &&
-      !isDelegateExpression(expression);
-  }
-
-  private boolean isLambdaExpression(AstNode node) {
-    return node.hasDirectChildren(CSharpGrammar.LAMBDA_EXPRESSION);
-  }
-
-  private boolean isDelegateExpression(AstNode node) {
-    return node.getNumberOfChildren() == 1 &&
-      node.hasDirectChildren(CSharpGrammar.PRIMARY_EXPRESSION) &&
-      node.getFirstChild(CSharpGrammar.PRIMARY_EXPRESSION).hasDirectChildren(CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION);
-  }
-
 }

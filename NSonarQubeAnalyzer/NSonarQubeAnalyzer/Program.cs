@@ -56,6 +56,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new AsyncAwaitIdentifier());
             }
+            if (rules.Contains("AssignmentInsideSubExpression"))
+            {
+                diagnosticAnalyzersBuilder.Add(new AssignmentInsideSubExpression());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

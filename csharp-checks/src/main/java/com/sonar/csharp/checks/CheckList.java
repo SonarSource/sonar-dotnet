@@ -38,8 +38,8 @@ public final class CheckList {
       BooleanEqualityComparisonCheck.class,
       IfConditionalAlwaysTrueOrFalseCheck.class,
       AsyncAwaitIdentifierCheck.class,
-
       AssignmentInsideSubExpressionCheck.class,
+
       ClassCouplingCheck.class,
       ClassNameCheck.class,
       CommentedCodeCheck.class,
