@@ -40,6 +40,7 @@ public final class CheckList {
       AsyncAwaitIdentifierCheck.class,
       AssignmentInsideSubExpressionCheck.class,
       ElseIfWithoutElseCheck.class,
+      EmptyStatementCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -54,7 +55,6 @@ public final class CheckList {
       TabCharacterCheck.class,
       ForLoopCounterChangedCheck.class,
       TooManyCasesInSwitchCheck.class,
-      EmptyStatementCheck.class,
       TooManyFunctionParametersCheck.class,
       RightCurlyBraceStartsLineCheck.class,
       AlwaysUseCurlyBracesCheck.class,

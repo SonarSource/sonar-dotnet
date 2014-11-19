@@ -64,6 +64,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new ElseIfWithoutElse());
             }
+            if (rules.Contains("S1116"))
+            {
+                diagnosticAnalyzersBuilder.Add(new EmptyStatement());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

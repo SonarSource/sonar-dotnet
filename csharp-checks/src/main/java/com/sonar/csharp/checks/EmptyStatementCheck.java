@@ -19,31 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S1116",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class EmptyStatementCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.EMBEDDED_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (node.getFirstChild().is(CSharpPunctuator.SEMICOLON)) {
-      getContext().createLineViolation(this, "Remove this empty statement.", node);
-    }
-  }
-
 }

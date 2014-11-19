@@ -85,6 +85,7 @@
     <Compile Include="Diagnostics\AssignmentInsideSubExpression.cs" />
     <Compile Include="Diagnostics\AsyncAwaitIdentifier.cs" />
     <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalse.cs" />
+    <Compile Include="Diagnostics\EmptyStatement.cs" />
     <Compile Include="Diagnostics\UnnecessaryBooleanLiteral.cs" />
     <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
