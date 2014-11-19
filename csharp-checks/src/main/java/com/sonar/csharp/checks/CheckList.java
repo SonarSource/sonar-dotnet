@@ -39,6 +39,7 @@ public final class CheckList {
       IfConditionalAlwaysTrueOrFalseCheck.class,
       AsyncAwaitIdentifierCheck.class,
       AssignmentInsideSubExpressionCheck.class,
+      ElseIfWithoutElseCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -55,7 +56,6 @@ public final class CheckList {
       TooManyCasesInSwitchCheck.class,
       EmptyStatementCheck.class,
       TooManyFunctionParametersCheck.class,
-      ElseIfWithoutElseCheck.class,
       RightCurlyBraceStartsLineCheck.class,
       AlwaysUseCurlyBracesCheck.class,
       EmptyNestedBlockCheck.class,
