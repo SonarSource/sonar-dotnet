@@ -19,6 +19,7 @@ namespace Tests
             Lines("\r").Should().Be(2);
             Lines("\r\n").Should().Be(2);
             Lines("\n").Should().Be(2);
+            Lines("\n\r").Should().Be(3);
             Lines("using System;\r\n/*hello\r\nworld*/").Should().Be(3);
         }
 

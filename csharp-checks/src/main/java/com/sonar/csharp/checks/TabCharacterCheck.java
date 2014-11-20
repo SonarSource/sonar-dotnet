@@ -19,46 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.io.Files;
-import com.sonar.csharp.squid.CharsetAwareVisitor;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.api.utils.SonarException;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.List;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "TabCharacter",
   priority = Priority.MINOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MINOR)
-public class TabCharacterCheck extends SquidCheck<Grammar> implements CharsetAwareVisitor {
-
-  private Charset charset;
-
-  public void setCharset(Charset charset) {
-    this.charset = charset;
-  }
-
-  @Override
-  public void visitFile(AstNode astNode) {
-    List<String> lines;
-    try {
-      lines = Files.readLines(getContext().getFile(), charset);
-    } catch (IOException e) {
-      throw new SonarException(e);
-    }
-    for (int i = 0; i < lines.size(); i++) {
-      if (lines.get(i).contains("\t")) {
-        getContext().createLineViolation(this, "Replace all tab characters in this file by sequences of white-spaces.", i + 1);
-        break;
-      }
-    }
-  }
-
+public class TabCharacterCheck extends SquidCheck<Grammar> {
 }

@@ -43,6 +43,7 @@ public final class CheckList {
       EmptyStatementCheck.class,
       AlwaysUseCurlyBracesCheck.class,
       RightCurlyBraceStartsLineCheck.class,
+      TabCharacterCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -54,7 +55,6 @@ public final class CheckList {
       MagicNumberCheck.class,
       MethodNameCheck.class,
       ParameterAssignedToCheck.class,
-      TabCharacterCheck.class,
       ForLoopCounterChangedCheck.class,
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,

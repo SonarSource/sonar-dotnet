@@ -76,6 +76,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new RightCurlyBraceStartsLine());
             }
+            if (rules.Contains("TabCharacter"))
+            {
+                diagnosticAnalyzersBuilder.Add(new TabCharacter());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

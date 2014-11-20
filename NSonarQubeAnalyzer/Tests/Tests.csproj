@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\TabCharacter.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\RightCurlyBraceStartsLine.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -124,6 +127,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\TabCharacterTest.cs" />
     <Compile Include="Diagnostics\RightCurlyBraceStartsLineTest.cs" />
     <Compile Include="Diagnostics\ElseIfWithoutElseTest.cs" />
     <Compile Include="Diagnostics\AssignmentInsideSubExpressionTest.cs" />
