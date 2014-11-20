@@ -42,6 +42,7 @@ public final class CheckList {
       ElseIfWithoutElseCheck.class,
       EmptyStatementCheck.class,
       AlwaysUseCurlyBracesCheck.class,
+      RightCurlyBraceStartsLineCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -57,7 +58,6 @@ public final class CheckList {
       ForLoopCounterChangedCheck.class,
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
-      RightCurlyBraceStartsLineCheck.class,
       EmptyNestedBlockCheck.class,
       EmptyMethodsCheck.class,
       UnusedLocalVariableCheck.class,

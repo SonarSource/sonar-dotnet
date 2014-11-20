@@ -19,46 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S1109",
   priority = Priority.MINOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MINOR)
 public class RightCurlyBraceStartsLineCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpPunctuator.RCURLYBRACE);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (!isExcluded(node) && !isOnSameLineThanLeftCurlyBrace(node) && !isFirstOnLine(node)) {
-      getContext().createLineViolation(this, "Move this closing curly brace to the next line.", node);
-    }
-  }
-
-  private boolean isExcluded(AstNode rcurly) {
-    return rcurly.getParent().is(
-      CSharpGrammar.ARRAY_INITIALIZER,
-      CSharpGrammar.COLLECTION_INITIALIZER,
-      CSharpGrammar.OBJECT_INITIALIZER);
-  }
-
-  private static boolean isFirstOnLine(AstNode rcurly) {
-    return rcurly.getPreviousAstNode().getLastToken().getLine() != rcurly.getTokenLine();
-  }
-
-  private static boolean isOnSameLineThanLeftCurlyBrace(AstNode rcurly) {
-    return rcurly.getParent().getFirstChild(CSharpPunctuator.LCURLYBRACE).getTokenLine() == rcurly.getTokenLine();
-  }
-
 }
