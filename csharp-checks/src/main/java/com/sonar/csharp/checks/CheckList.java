@@ -41,6 +41,7 @@ public final class CheckList {
       AssignmentInsideSubExpressionCheck.class,
       ElseIfWithoutElseCheck.class,
       EmptyStatementCheck.class,
+      AlwaysUseCurlyBracesCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -57,7 +58,6 @@ public final class CheckList {
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
       RightCurlyBraceStartsLineCheck.class,
-      AlwaysUseCurlyBracesCheck.class,
       EmptyNestedBlockCheck.class,
       EmptyMethodsCheck.class,
       UnusedLocalVariableCheck.class,
