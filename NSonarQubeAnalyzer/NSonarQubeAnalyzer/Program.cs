@@ -68,6 +68,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new EmptyStatement());
             }
+            if (rules.Contains("S121"))
+            {
+                diagnosticAnalyzersBuilder.Add(new UseCurlyBraces());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

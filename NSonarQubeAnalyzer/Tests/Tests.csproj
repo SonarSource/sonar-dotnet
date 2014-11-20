@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\UseCurlyBraces.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\EmptyStatement.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -121,6 +124,7 @@
     <Compile Include="Diagnostics\ElseIfWithoutElseTest.cs" />
     <Compile Include="Diagnostics\AssignmentInsideSubExpressionTest.cs" />
     <Compile Include="Diagnostics\AsyncAwaitIdentifierTest.cs" />
+    <Compile Include="Diagnostics\UseCurlyBracesTest.cs" />
     <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalseTest.cs" />
     <Compile Include="Diagnostics\EmptyStatementTest.cs" />
     <Compile Include="Diagnostics\UnnecessaryBooleanLiteralTest.cs" />
