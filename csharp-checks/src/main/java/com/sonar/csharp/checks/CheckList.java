@@ -44,6 +44,7 @@ public final class CheckList {
       AlwaysUseCurlyBracesCheck.class,
       RightCurlyBraceStartsLineCheck.class,
       TabCharacterCheck.class,
+      EmptyMethodsCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -59,7 +60,6 @@ public final class CheckList {
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
       EmptyNestedBlockCheck.class,
-      EmptyMethodsCheck.class,
       UnusedLocalVariableCheck.class,
       ExpressionComplexityCheck.class);
   }
