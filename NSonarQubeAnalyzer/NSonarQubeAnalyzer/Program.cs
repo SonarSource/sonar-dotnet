@@ -80,6 +80,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new TabCharacter());
             }
+            if (rules.Contains("S1186"))
+            {
+                diagnosticAnalyzersBuilder.Add(new EmptyMethod());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
