@@ -32,7 +32,7 @@ namespace Tests.Diagnostics
                 }
             }
 
-            expected.Should().BeEmpty();
+            expected.Should().BeEquivalentTo(Enumerable.Empty<int>());
         }
 
         private static IEnumerable<int> ExpectedIssues(SyntaxTree syntaxTree)

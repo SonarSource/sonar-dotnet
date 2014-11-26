@@ -84,6 +84,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new EmptyMethod());
             }
+            if (rules.Contains("S127"))
+            {
+                diagnosticAnalyzersBuilder.Add(new ForLoopCounterChanged());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
