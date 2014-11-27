@@ -60,8 +60,9 @@ public final class CheckList {
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
       EmptyNestedBlockCheck.class,
-      UnusedLocalVariableCheck.class,
-      ExpressionComplexityCheck.class);
+      ExpressionComplexityCheck.class,
+
+      UnusedLocalVariableCheck.class);
   }
 
 }
