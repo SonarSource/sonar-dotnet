@@ -48,6 +48,7 @@ public final class CheckList {
       ForLoopCounterChangedCheck.class,
       FileLocCheck.class,
       LineLengthCheck.class,
+      TooManyCasesInSwitchCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
@@ -57,7 +58,6 @@ public final class CheckList {
       MagicNumberCheck.class,
       MethodNameCheck.class,
       ParameterAssignedToCheck.class,
-      TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
       EmptyNestedBlockCheck.class,
       ExpressionComplexityCheck.class,

@@ -19,16 +19,12 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-
-import java.util.List;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S1479",
@@ -36,36 +32,11 @@ import java.util.List;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class TooManyCasesInSwitchCheck extends SquidCheck<Grammar> {
 
-
   public static final int DEFAULT = 30;
 
   @RuleProperty(
     key = "maximum",
     defaultValue = "" + DEFAULT)
   int maximum = DEFAULT;
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.SWITCH_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    int nbCase = getNumberOfCase(node);
-    if (nbCase > maximum) {
-      getContext().createLineViolation(this, "Reduce the number of switch cases from {0} to at most {1}.", node, nbCase, maximum);
-    }
-  }
-
-  private int getNumberOfCase(AstNode switchStmt) {
-    List<AstNode> switchSelectionList = switchStmt.getChildren(CSharpGrammar.SWITCH_SECTION);
-    int nbCase = 0;
-
-    for (AstNode switchSelection : switchSelectionList) {
-      nbCase += switchSelection.getChildren(CSharpGrammar.SWITCH_LABEL).size();
-    }
-
-    return nbCase;
-  }
 
 }

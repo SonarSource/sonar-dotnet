@@ -116,6 +116,20 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Maximum = int.Parse(maximum);
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("S1479"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "S1479".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var maximum = (from e in parameters
+                               where "maximum".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new TooManyLabelsInSwitch();
+                diagnostic.Maximum = int.Parse(maximum);
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
