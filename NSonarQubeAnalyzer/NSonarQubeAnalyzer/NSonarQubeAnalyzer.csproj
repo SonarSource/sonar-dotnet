@@ -84,6 +84,7 @@
     <Compile Include="Diagnostics\EmptyMethod.cs" />
     <Compile Include="Diagnostics\ForLoopCounterChanged.cs" />
     <Compile Include="Diagnostics\FileLines.cs" />
+    <Compile Include="Diagnostics\LineLength.cs" />
     <Compile Include="Diagnostics\TabCharacter.cs" />
     <Compile Include="Diagnostics\RightCurlyBraceStartsLine.cs" />
     <Compile Include="Diagnostics\ElseIfWithoutElse.cs" />
