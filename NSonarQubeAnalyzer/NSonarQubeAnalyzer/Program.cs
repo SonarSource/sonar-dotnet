@@ -28,7 +28,7 @@ namespace NSonarQubeAnalyzer
                         select e.Value;
             bool ignoreHeaderComments = "true".Equals(settings["sonar.cs.ignoreHeaderComments"]);
             var rules = (from e in xmlIn.Descendants("Rule")
-                         select e.Value)
+                         select e.Elements("Key").Single().Value)
                          .ToImmutableHashSet();
 
             var diagnosticAnalyzersBuilder = ImmutableArray.CreateBuilder<IDiagnosticAnalyzer>();

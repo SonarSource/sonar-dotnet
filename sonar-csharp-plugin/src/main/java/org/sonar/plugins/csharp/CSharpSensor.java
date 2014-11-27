@@ -22,7 +22,9 @@ package org.sonar.plugins.csharp;
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
@@ -41,6 +43,8 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.ActiveRuleParam;
+import org.sonar.api.rules.RuleParam;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.command.Command;
@@ -59,6 +63,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @DependedUpon("NSonarQubeAnalysis")
 public class CSharpSensor implements Sensor {
@@ -111,7 +117,20 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "  </Settings>");
     appendLine(sb, "  <Rules>");
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(REPOSITORY_KEY)) {
-      appendLine(sb, "    <Rule>" + activeRule.getRuleKey() + "</Rule>");
+      appendLine(sb, "    <Rule>");
+      appendLine(sb, "      <Key>" + activeRule.getRuleKey() + "</Key>");
+      Map<String, String> parameters = effectiveParameters(activeRule);
+      if (!parameters.isEmpty()) {
+        appendLine(sb, "      <Parameters>");
+        for (Entry<String, String> parameter : parameters.entrySet()) {
+          appendLine(sb, "        <Parameter>");
+          appendLine(sb, "          <Key>" + parameter.getKey() + "</Key>");
+          appendLine(sb, "          <Value>" + parameter.getValue() + "</Value>");
+          appendLine(sb, "        </Parameter>");
+        }
+        appendLine(sb, "      </Parameters>");
+      }
+      appendLine(sb, "    </Rule>");
     }
     appendLine(sb, "  </Rules>");
     appendLine(sb, "  <Files>");
@@ -139,6 +158,22 @@ public class CSharpSensor implements Sensor {
       .addArgument(analysisOutput.getAbsolutePath());
 
     CommandExecutor.create().execute(command, new SinkStreamConsumer(), new SinkStreamConsumer(), Integer.MAX_VALUE);
+  }
+
+  private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
+    Map<String, String> builder = Maps.newHashMap();
+
+    for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
+      builder.put(param.getKey(), param.getValue());
+    }
+
+    for (RuleParam param : activeRule.getRule().getParams()) {
+      if (!builder.containsKey(param.getKey())) {
+        builder.put(param.getKey(), param.getDefaultValue());
+      }
+    }
+
+    return ImmutableMap.copyOf(builder);
   }
 
   private void importResults(Project project, SensorContext context) {
