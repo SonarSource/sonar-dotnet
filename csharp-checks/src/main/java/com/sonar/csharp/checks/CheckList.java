@@ -46,12 +46,12 @@ public final class CheckList {
       TabCharacterCheck.class,
       EmptyMethodsCheck.class,
       ForLoopCounterChangedCheck.class,
+      FileLocCheck.class,
 
       ClassCouplingCheck.class,
       ClassNameCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
-      FileLocCheck.class,
       FunctionComplexityCheck.class,
       LineLengthCheck.class,
       MagicNumberCheck.class,

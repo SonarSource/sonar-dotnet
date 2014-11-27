@@ -19,21 +19,18 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.sslr.api.AstAndTokenVisitor;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import com.sonar.sslr.api.Token;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "FileLoc",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
-public class FileLocCheck extends SquidCheck<Grammar> implements AstAndTokenVisitor {
+public class FileLocCheck extends SquidCheck<Grammar> {
 
   private static final int DEFAULT_MAXIMUM_FILE_LOC_THRESHOLD = 1000;
 
@@ -41,30 +38,5 @@ public class FileLocCheck extends SquidCheck<Grammar> implements AstAndTokenVisi
     key = "maximumFileLocThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FILE_LOC_THRESHOLD)
   public int maximumFileLocThreshold = DEFAULT_MAXIMUM_FILE_LOC_THRESHOLD;
-
-  private int numberOfLoc = 0;
-  private int lastTokenLine = -1;
-
-  @Override
-  public void visitFile(AstNode node) {
-    numberOfLoc = 0;
-    lastTokenLine = -1;
-  }
-
-  @Override
-  public void leaveFile(AstNode node) {
-    if (numberOfLoc > maximumFileLocThreshold) {
-      getContext().createFileViolation(
-          this,
-          "This file has " + numberOfLoc + " lines of code, which is greater than " + maximumFileLocThreshold + " authorized. Split it into smaller files.");
-    }
-  }
-
-  public void visitToken(Token token) {
-    if (lastTokenLine != token.getLine()) {
-      lastTokenLine = token.getLine();
-      numberOfLoc++;
-    }
-  }
 
 }

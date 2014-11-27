@@ -91,6 +91,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\FileLines13.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestCases\FileLines12.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\ForLoopCounterChanged.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -135,6 +141,7 @@
     </None>
     <Compile Include="Diagnostics\EmptyMethodTest.cs" />
     <Compile Include="Diagnostics\ForLoopCounterChangedTest.cs" />
+    <Compile Include="Diagnostics\FileLinesTest.cs" />
     <Compile Include="Diagnostics\TabCharacterTest.cs" />
     <Compile Include="Diagnostics\RightCurlyBraceStartsLineTest.cs" />
     <Compile Include="Diagnostics\ElseIfWithoutElseTest.cs" />

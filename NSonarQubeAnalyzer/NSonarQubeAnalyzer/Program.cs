@@ -88,6 +88,20 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new ForLoopCounterChanged());
             }
+            if (rules.Contains("FileLoc"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                      where "FileLoc".Equals(e.Elements("Key").Single().Value)
+                      select e.Descendants("Parameter");
+                var maximum = (from e in parameters
+                              where "maximumFileLocThreshold".Equals(e.Elements("Key").Single().Value)
+                              select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new FileLines();
+                diagnostic.Maximum = int.Parse(maximum);
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
@@ -134,7 +148,10 @@ namespace NSonarQubeAnalyzer
                     {
                         xmlOut.WriteStartElement("Issue");
                         xmlOut.WriteElementString("Id", diagnostic.Id);
-                        xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                        if (diagnostic.Location != Location.None)
+                        {
+                            xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                        }
                         xmlOut.WriteElementString("Message", diagnostic.GetMessage());
                         xmlOut.WriteEndElement();
                     }
