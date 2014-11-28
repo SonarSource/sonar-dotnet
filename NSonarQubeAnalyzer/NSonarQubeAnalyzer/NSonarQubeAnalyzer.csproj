@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\EmptyMethod.cs" />
+    <Compile Include="Diagnostics\TooManyParameters.cs" />
     <Compile Include="Diagnostics\TooManyLabelsInSwitch.cs" />
     <Compile Include="Diagnostics\ForLoopCounterChanged.cs" />
     <Compile Include="Diagnostics\FileLines.cs" />

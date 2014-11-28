@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\TooManyParameters.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\TooManyLabelsInSwitch.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -146,6 +149,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Diagnostics\EmptyMethodTest.cs" />
+    <Compile Include="Diagnostics\TooManyParametersTest.cs" />
     <Compile Include="Diagnostics\TooManyLabelsInSwitchTest.cs" />
     <Compile Include="Diagnostics\ForLoopCounterChangedTest.cs" />
     <Compile Include="Diagnostics\FileLinesTest.cs" />
