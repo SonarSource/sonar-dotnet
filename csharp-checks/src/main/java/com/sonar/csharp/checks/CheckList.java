@@ -55,13 +55,13 @@ public final class CheckList {
 
       ClassCouplingCheck.class,
       CommentedCodeCheck.class,
-      CommentRegularExpressionCheck.class,
       FunctionComplexityCheck.class,
       MagicNumberCheck.class,
       ParameterAssignedToCheck.class,
       EmptyNestedBlockCheck.class,
       ExpressionComplexityCheck.class,
 
+      CommentRegularExpressionCheck.class,
       UnusedLocalVariableCheck.class);
   }
 
