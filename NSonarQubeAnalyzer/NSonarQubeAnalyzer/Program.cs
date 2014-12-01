@@ -172,6 +172,20 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Convention = convention;
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("MagicNumber"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "MagicNumber".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var exceptions = (from e in parameters
+                                  where "exceptions".Equals(e.Elements("Key").Single().Value)
+                                  select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new MagicNumber();
+                diagnostic.Exceptions = exceptions.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(e => e.Trim()).ToImmutableHashSet();
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

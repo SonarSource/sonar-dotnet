@@ -52,11 +52,11 @@ public final class CheckList {
       TooManyFunctionParametersCheck.class,
       ClassNameCheck.class,
       MethodNameCheck.class,
+      MagicNumberCheck.class,
 
       ClassCouplingCheck.class,
       CommentedCodeCheck.class,
       FunctionComplexityCheck.class,
-      MagicNumberCheck.class,
       ParameterAssignedToCheck.class,
       EmptyNestedBlockCheck.class,
       ExpressionComplexityCheck.class,

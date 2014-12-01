@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\MagicNumber.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\MethodName.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -154,6 +157,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\MagicNumberTest.cs" />
     <Compile Include="Diagnostics\MethodNameTest.cs" />
     <Compile Include="Diagnostics\EmptyMethodTest.cs" />
     <Compile Include="Diagnostics\ClassNameTest.cs" />

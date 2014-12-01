@@ -19,19 +19,11 @@
  */
 package com.sonar.csharp.checks;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.ImmutableSet;
-import com.sonar.csharp.squid.api.CSharpTokenType;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-
-import java.util.Collections;
-import java.util.Set;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "MagicNumber",
@@ -44,38 +36,5 @@ public class MagicNumberCheck extends SquidCheck<Grammar> {
     key = "exceptions",
     defaultValue = "" + DEFAULT_EXCEPTIONS)
   public String exceptions = DEFAULT_EXCEPTIONS;
-
-  private Set<String> exceptionsSet = Collections.EMPTY_SET;
-
-  @Override
-  public void init() {
-    subscribeTo(
-        CSharpTokenType.INTEGER_DEC_LITERAL,
-        CSharpTokenType.INTEGER_HEX_LITERAL,
-        CSharpTokenType.REAL_LITERAL);
-
-    exceptionsSet = ImmutableSet.copyOf(Splitter.on(',').omitEmptyStrings().trimResults().split(exceptions));
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    if (!isInDeclaration(node) && !isExcluded(node) && !isInEnum(node)) {
-      getContext().createLineViolation(this, "Extract this magic number into a constant, variable declaration or an enum.", node);
-    }
-  }
-
-  private boolean isInDeclaration(AstNode node) {
-    return node.hasAncestor(CSharpGrammar.LOCAL_VARIABLE_DECLARATOR) ||
-      node.hasAncestor(CSharpGrammar.VARIABLE_DECLARATOR) ||
-      node.hasAncestor(CSharpGrammar.CONSTANT_DECLARATOR);
-  }
-
-  private boolean isExcluded(AstNode node) {
-    return exceptionsSet.contains(node.getTokenOriginalValue());
-  }
-
-  private boolean isInEnum(AstNode node) {
-    return node.hasAncestor(CSharpGrammar.ENUM_DECLARATION);
-  }
 
 }
