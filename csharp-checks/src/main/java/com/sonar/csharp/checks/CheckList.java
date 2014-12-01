@@ -50,9 +50,9 @@ public final class CheckList {
       LineLengthCheck.class,
       TooManyCasesInSwitchCheck.class,
       TooManyFunctionParametersCheck.class,
+      ClassNameCheck.class,
 
       ClassCouplingCheck.class,
-      ClassNameCheck.class,
       CommentedCodeCheck.class,
       CommentRegularExpressionCheck.class,
       FunctionComplexityCheck.class,

@@ -144,6 +144,20 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Maximum = int.Parse(maximum);
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("ClassName"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "ClassName".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var convention = (from e in parameters
+                               where "format".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new ClassName();
+                diagnostic.Convention = convention;
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

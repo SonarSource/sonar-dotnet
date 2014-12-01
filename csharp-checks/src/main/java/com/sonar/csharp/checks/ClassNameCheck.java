@@ -19,18 +19,12 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.api.utils.SonarException;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-
-import java.util.regex.Pattern;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "ClassName",
@@ -38,33 +32,11 @@ import java.util.regex.Pattern;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class ClassNameCheck extends SquidCheck<Grammar> {
 
-  private static final String DEFAULT_FORMAT = "[A-HJ-Z][a-zA-Z0-9]++|I[a-z0-9][a-zA-Z0-9]*+";
+  private static final String DEFAULT_FORMAT = "^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$";
 
   @RuleProperty(
     key = "format",
     defaultValue = "" + DEFAULT_FORMAT)
   public String format = DEFAULT_FORMAT;
-
-  private Pattern pattern;
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.CLASS_DECLARATION);
-
-    try {
-      pattern = Pattern.compile(format, Pattern.DOTALL);
-    } catch (RuntimeException e) {
-      throw new SonarException("[" + getClass().getSimpleName() + "] Unable to compile the regular expression: " + format, e);
-    }
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode identifier = node.getFirstChild(GenericTokenType.IDENTIFIER);
-
-    if (!pattern.matcher(identifier.getTokenOriginalValue()).matches()) {
-      getContext().createLineViolation(this, "Rename this class to match the regular expression: " + format, identifier);
-    }
-  }
 
 }
