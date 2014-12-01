@@ -19,19 +19,12 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
-import com.sonar.sslr.api.GenericTokenType;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.api.utils.SonarException;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-
-import java.util.List;
-import java.util.regex.Pattern;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "MethodName",
@@ -39,43 +32,11 @@ import java.util.regex.Pattern;
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class MethodNameCheck extends SquidCheck<Grammar> {
 
-  private static final String DEFAULT_FORMAT = "[A-Z][a-zA-Z0-9]++";
+  private static final String DEFAULT_FORMAT = "^[A-Z][a-zA-Z0-9]+$";
 
   @RuleProperty(
     key = "format",
     defaultValue = "" + DEFAULT_FORMAT)
   public String format = DEFAULT_FORMAT;
-
-  private Pattern pattern;
-
-  @Override
-  public void init() {
-    subscribeTo(
-        CSharpGrammar.METHOD_DECLARATION,
-        CSharpGrammar.INTERFACE_METHOD_DECLARATION);
-
-    try {
-      pattern = Pattern.compile(format, Pattern.DOTALL);
-    } catch (RuntimeException e) {
-      throw new SonarException("[" + getClass().getSimpleName() + "] Unable to compile the regular expression: " + format, e);
-    }
-  }
-
-  @Override
-  public void visitNode(AstNode node) {
-    AstNode identifier;
-
-    if (node.is(CSharpGrammar.METHOD_DECLARATION)) {
-      List<AstNode> identifiers = node.getFirstChild(CSharpGrammar.MEMBER_NAME).getChildren(GenericTokenType.IDENTIFIER);
-      AstNode lastIdentifier = identifiers.get(identifiers.size() - 1);
-      identifier = lastIdentifier;
-    } else {
-      identifier = node.getFirstChild(GenericTokenType.IDENTIFIER);
-    }
-
-    if (!pattern.matcher(identifier.getTokenOriginalValue()).matches()) {
-      getContext().createLineViolation(this, "Rename this method to match the regular expression: " + format, identifier);
-    }
-  }
 
 }

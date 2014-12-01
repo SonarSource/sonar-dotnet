@@ -158,6 +158,20 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Convention = convention;
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("MethodName"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "MethodName".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var convention = (from e in parameters
+                                  where "format".Equals(e.Elements("Key").Single().Value)
+                                  select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new MethodName();
+                diagnostic.Convention = convention;
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
