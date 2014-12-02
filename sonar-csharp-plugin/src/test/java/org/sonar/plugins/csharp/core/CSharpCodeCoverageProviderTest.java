@@ -24,6 +24,8 @@ import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
 import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
+import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpITCoverageAggregator;
+import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpITCoverageReportImportSensor;
 
 import java.util.List;
 import java.util.Set;
@@ -36,12 +38,18 @@ public class CSharpCodeCoverageProviderTest {
   public void test() {
     assertThat(nonProperties(CSharpCodeCoverageProvider.extensions())).containsOnly(
       CSharpCoverageAggregator.class,
-      CSharpCoverageReportImportSensor.class);
+      CSharpCoverageReportImportSensor.class,
+      CSharpITCoverageAggregator.class,
+      CSharpITCoverageReportImportSensor.class);
     assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
       "sonar.cs.ncover3.reportsPaths",
       "sonar.cs.opencover.reportsPaths",
       "sonar.cs.dotcover.reportsPaths",
-      "sonar.cs.vscoveragexml.reportsPaths");
+      "sonar.cs.vscoveragexml.reportsPaths",
+      "sonar.cs.ncover3.it.reportsPaths",
+      "sonar.cs.opencover.it.reportsPaths",
+      "sonar.cs.dotcover.it.reportsPaths",
+      "sonar.cs.vscoveragexml.it.reportsPaths");
   }
 
   private static Set<String> nonProperties(List extensions) {
