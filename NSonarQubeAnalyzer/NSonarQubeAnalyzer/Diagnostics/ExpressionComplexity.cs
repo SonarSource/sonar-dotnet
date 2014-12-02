@@ -66,24 +66,26 @@ namespace NSonarQubeAnalyzer
 
             var expressionsToCheck = rootExpressions.Concat(compoundExpressionsDescendants);
 
-            var badExpressions =
+            var complexExpressions =
                 expressionsToCheck
-                .Where(
+                .Select(
                     e =>
-                        e
-                        .DescendantNodesAndSelf(
-                            e2 => !IsCompoundExpression(e2))
-                        .Where(
-                            e2 =>
-                                e2.IsKind(SyntaxKind.ConditionalExpression) ||
-                                e2.IsKind(SyntaxKind.LogicalAndExpression) ||
-                                e2.IsKind(SyntaxKind.LogicalOrExpression))
-                        .Take(Maximum + 1)
-                        .Count() == Maximum + 1);
+                    new {
+                        Expression = e,
+                        Complexity =
+                            e
+                            .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
+                            .Where(
+                                e2 =>
+                                    e2.IsKind(SyntaxKind.ConditionalExpression) ||
+                                    e2.IsKind(SyntaxKind.LogicalAndExpression) ||
+                                    e2.IsKind(SyntaxKind.LogicalOrExpression))
+                            .Count()})
+                .Where(e => e.Complexity > Maximum);
 
-            foreach (var badExpression in badExpressions)
+            foreach (var complexExpression in complexExpressions)
             {
-                addDiagnostic(Diagnostic.Create(Rule, badExpression.GetLocation(), Maximum, Maximum));
+                addDiagnostic(Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), Maximum, complexExpression.Complexity));
             }
         }
 
