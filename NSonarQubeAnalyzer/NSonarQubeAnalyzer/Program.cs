@@ -186,6 +186,20 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Exceptions = exceptions.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(e => e.Trim()).ToImmutableHashSet();
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("S1067"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "S1067".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var maximum = (from e in parameters
+                               where "max".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new ExpressionComplexity();
+                diagnostic.Maximum = int.Parse(maximum);
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
