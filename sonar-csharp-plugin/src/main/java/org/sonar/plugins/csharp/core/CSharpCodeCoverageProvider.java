@@ -19,16 +19,31 @@
  */
 package org.sonar.plugins.csharp.core;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.sonar.api.batch.Sensor;
+import org.sonar.api.batch.SensorContext;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
+import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.measures.CoverageMeasuresBuilder;
+import org.sonar.api.measures.Measure;
+import org.sonar.api.resources.Project;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.csharp.api.CSharpConstants;
+import org.sonar.plugins.dotnet.tests.Coverage;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
+import org.sonar.plugins.dotnet.tests.FileProvider;
+import org.sonar.plugins.dotnet.tests.WildcardPatternFileProvider;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class CSharpCodeCoverageProvider {
 
@@ -40,6 +55,12 @@ public class CSharpCodeCoverageProvider {
   private static final String DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.reportsPaths";
   private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.reportsPaths";
 
+  private static final String IT_NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.it.reportsPaths";
+  private static final String IT_OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.it.reportsPaths";
+  private static final String IT_DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.it.reportsPaths";
+  private static final String IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.it.reportsPaths";
+
+  
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpConstants.LANGUAGE_KEY,
     NCOVER3_PROPERTY_KEY,
@@ -47,13 +68,22 @@ public class CSharpCodeCoverageProvider {
     DOTCOVER_PROPERTY_KEY,
     VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
 
+  private static final CoverageConfiguration IT_COVERAGE_CONF = new CoverageConfiguration(
+	CSharpConstants.LANGUAGE_KEY,
+	IT_NCOVER3_PROPERTY_KEY,
+	IT_OPENCOVER_PROPERTY_KEY,
+	IT_DOTCOVER_PROPERTY_KEY,
+	IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
+  
   private CSharpCodeCoverageProvider() {
   }
 
   public static List extensions() {
     return ImmutableList.of(
       CSharpCoverageAggregator.class,
+      CSharpITCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class,
+      CSharpITCoverageReportImportSensor.class,
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
         .name("NCover3 Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
@@ -81,6 +111,34 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_NCOVER3_PROPERTY_KEY)
+        .name("NCover3 Integration Reports Paths")
+        .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_OPENCOVER_PROPERTY_KEY)
+        .name("OpenCover Integration Reports Paths")
+        .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_DOTCOVER_PROPERTY_KEY)
+        .name("dotCover (HTML) Integration Reports Paths")
+        .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
+        .name("Visual Studio (XML) Integration Reports Paths")
+        .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
   }
 
@@ -99,5 +157,22 @@ public class CSharpCodeCoverageProvider {
     }
 
   }
+
+  public static class CSharpITCoverageAggregator extends CoverageAggregator {
+
+    public CSharpITCoverageAggregator(Settings settings) {
+      super(IT_COVERAGE_CONF, settings);
+    }
+
+  }
+
+  public static class CSharpITCoverageReportImportSensor extends CoverageReportImportSensor {
+
+	public CSharpITCoverageReportImportSensor(CSharpITCoverageAggregator coverageAggregator) {
+	  super(IT_COVERAGE_CONF, coverageAggregator, true);
+	}
+  
+  }
+
 
 }
