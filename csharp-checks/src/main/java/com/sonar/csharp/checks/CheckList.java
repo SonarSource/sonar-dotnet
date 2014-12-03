@@ -57,10 +57,10 @@ public final class CheckList {
 
       ClassCouplingCheck.class,
       CommentedCodeCheck.class,
-      FunctionComplexityCheck.class,
       ParameterAssignedToCheck.class,
       EmptyNestedBlockCheck.class,
 
+      FunctionComplexityCheck.class,
       CommentRegularExpressionCheck.class,
       UnusedLocalVariableCheck.class);
   }
