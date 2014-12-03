@@ -19,54 +19,15 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpPunctuator;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "S108",
   priority = Priority.MAJOR)
 @BelongsToProfile(title = CheckList.SONAR_WAY_PROFILE, priority = Priority.MAJOR)
 public class EmptyNestedBlockCheck extends SquidCheck<Grammar> {
-
-  @Override
-  public void init() {
-    subscribeTo(CSharpGrammar.BLOCK, CSharpGrammar.SWITCH_STATEMENT);
-  }
-
-  @Override
-  public void visitNode(AstNode astNode) {
-    if (isNested(astNode) && isEmptyBlock(astNode)) {
-      getContext().createLineViolation(this, "Either remove or fill this block of code.", astNode);
-    }
-  }
-
-  private static boolean isNested(AstNode node) {
-    return node.getParent().isNot(
-      CSharpGrammar.UNSAFE_STATEMENT,
-      CSharpGrammar.ANONYMOUS_METHOD_EXPRESSION,
-      CSharpGrammar.ANONYMOUS_FUNCTION_BODY,
-      CSharpGrammar.METHOD_BODY,
-      CSharpGrammar.CONSTRUCTOR_BODY,
-      CSharpGrammar.DESTRUCTOR_BODY);
-  }
-
-  private static boolean isEmptyBlock(AstNode node) {
-    if (node.is(CSharpGrammar.SWITCH_STATEMENT)) {
-      return !node.hasDirectChildren(CSharpGrammar.SWITCH_SECTION);
-    }
-
-    AstNode rightCurlyBrace = node.getFirstChild(CSharpPunctuator.RCURLYBRACE);
-    return rightCurlyBrace.getPreviousAstNode().is(CSharpPunctuator.LCURLYBRACE) && !hasComment(rightCurlyBrace);
-  }
-
-  private static boolean hasComment(AstNode node) {
-    return node.getToken().hasTrivia();
-  }
-
 }

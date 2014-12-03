@@ -200,6 +200,10 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Maximum = int.Parse(maximum);
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
+            if (rules.Contains("S108"))
+            {
+                diagnosticAnalyzersBuilder.Add(new EmptyNestedBlock());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

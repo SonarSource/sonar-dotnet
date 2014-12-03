@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiagnosticsRunner.cs" />
+    <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
     <Compile Include="Diagnostics\ExpressionComplexity.cs" />
     <Compile Include="Diagnostics\MagicNumber.cs" />
     <Compile Include="Diagnostics\MethodName.cs" />
