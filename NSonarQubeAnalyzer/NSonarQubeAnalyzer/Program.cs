@@ -204,6 +204,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new EmptyNestedBlock());
             }
+            if (rules.Contains("ParameterAssignedTo"))
+            {
+                diagnosticAnalyzersBuilder.Add(new ParameterAssignedTo());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

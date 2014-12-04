@@ -91,6 +91,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\ParameterAssignedTo.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\EmptyNestedBlock.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -164,6 +167,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="Diagnostics\EmptyNestedBlockTest.cs" />
+    <Compile Include="Diagnostics\ParameterAssignedToTest.cs" />
     <Compile Include="Diagnostics\ExpressionComplexityTest.cs" />
     <Compile Include="Diagnostics\MagicNumberTest.cs" />
     <Compile Include="Diagnostics\MethodNameTest.cs" />
