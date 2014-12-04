@@ -55,9 +55,9 @@ public final class CheckList {
       MagicNumberCheck.class,
       ExpressionComplexityCheck.class,
       EmptyNestedBlockCheck.class,
+      ParameterAssignedToCheck.class,
 
       CommentedCodeCheck.class,
-      ParameterAssignedToCheck.class,
 
       FunctionComplexityCheck.class,
       CommentRegularExpressionCheck.class,
