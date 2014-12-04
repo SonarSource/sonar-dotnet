@@ -56,7 +56,6 @@ public final class CheckList {
       ExpressionComplexityCheck.class,
       EmptyNestedBlockCheck.class,
 
-      ClassCouplingCheck.class,
       CommentedCodeCheck.class,
       ParameterAssignedToCheck.class,
 
