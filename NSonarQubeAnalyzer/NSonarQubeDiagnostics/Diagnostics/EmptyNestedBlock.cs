@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp;
+using System.Collections.Immutable;
+using System.Threading;
+
+namespace NSonarQubeAnalyzer
+{
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    public class EmptyNestedBlock : ISyntaxNodeAnalyzer<SyntaxKind>
+    {
+        internal const string DiagnosticId = "S108";
+        internal const string Description = "Nested blocks of code should not be left empty";
+        internal const string MessageFormat = "Either remove or fill this block of code.";
+        internal const string Category = "SonarQube";
+        internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
+
+        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
+
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+
+        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.Block, SyntaxKind.SwitchStatement); } }
+
+        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        {
+            if (IsEmpty(node))
+            {
+                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
+            }
+        }
+
+        private static bool IsEmpty(SyntaxNode node)
+        {
+            return (node is SwitchStatementSyntax && IsEmpty((SwitchStatementSyntax)node)) ||
+                (node is BlockSyntax && IsNestedAndEmpty((BlockSyntax)node));
+        }
+
+        private static bool IsEmpty(SwitchStatementSyntax node)
+        {
+            return !node.Sections.Any();
+        }
+
+        private static bool IsNestedAndEmpty(BlockSyntax node)
+        {
+            return IsNested(node) && IsEmpty(node);
+        }
+
+        private static bool IsNested(BlockSyntax node)
+        {
+            var parent = node.Parent;
+            return !parent.IsKind(SyntaxKind.ConstructorDeclaration) &&
+                !parent.IsKind(SyntaxKind.DestructorDeclaration) &&
+                !parent.IsKind(SyntaxKind.MethodDeclaration) &&
+                !parent.IsKind(SyntaxKind.SimpleLambdaExpression) &&
+                !parent.IsKind(SyntaxKind.ParenthesizedLambdaExpression) &&
+                !parent.IsKind(SyntaxKind.AnonymousMethodExpression);
+        }
+
+        private static bool IsEmpty(BlockSyntax node)
+        {
+            return !node.Statements.Any() && !ContainsComment(node);
+        }
+
+        public static bool ContainsComment(BlockSyntax node)
+        {
+            return ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
+        }
+
+        private static bool ContainsComment(SyntaxTriviaList trivias)
+        {
+            return trivias.Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
+        }
+    }
+}

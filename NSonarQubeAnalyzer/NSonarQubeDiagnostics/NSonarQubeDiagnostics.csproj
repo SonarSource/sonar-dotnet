@@ -83,6 +83,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
+    <Compile Include="Diagnostics\ExpressionComplexity.cs" />
     <Compile Include="Diagnostics\MagicNumber.cs" />
     <Compile Include="Diagnostics\MethodName.cs" />
     <Compile Include="Diagnostics\EmptyMethod.cs" />

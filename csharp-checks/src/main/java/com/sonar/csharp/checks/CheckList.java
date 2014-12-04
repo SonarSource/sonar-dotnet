@@ -53,14 +53,14 @@ public final class CheckList {
       ClassNameCheck.class,
       MethodNameCheck.class,
       MagicNumberCheck.class,
+      ExpressionComplexityCheck.class,
+      EmptyNestedBlockCheck.class,
 
       ClassCouplingCheck.class,
       CommentedCodeCheck.class,
-      FunctionComplexityCheck.class,
       ParameterAssignedToCheck.class,
-      EmptyNestedBlockCheck.class,
-      ExpressionComplexityCheck.class,
 
+      FunctionComplexityCheck.class,
       CommentRegularExpressionCheck.class,
       UnusedLocalVariableCheck.class);
   }
