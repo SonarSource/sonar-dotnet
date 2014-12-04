@@ -3096,24 +3096,6 @@
         </prop>
       </chc>
       <chc>
-        <rule-repo>csharpsquid</rule-repo>
-        <rule-key>ClassCoupling</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>linear</txt>
-        </prop>
-        <prop>
-          <key>remediationFactor</key>
-          <val>3.0</val>
-          <txt>h</txt>
-        </prop>
-        <prop>
-          <key>offset</key>
-          <val>0.0</val>
-          <txt>d</txt>
-        </prop>
-      </chc>
-      <chc>
         <rule-repo>fxcop</rule-repo>
         <rule-key>AvoidExcessiveClassCoupling</rule-key>
         <prop>
