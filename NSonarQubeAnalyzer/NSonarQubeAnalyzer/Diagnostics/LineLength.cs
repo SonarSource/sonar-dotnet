@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class LineLength : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class LineLength : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "LineLength";
         internal const string Description = "Lines should not be too long";
@@ -25,21 +25,23 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            foreach (var line in node.SyntaxTree.GetText().Lines)
-            {
-                if (line.Span.Length > Maximum)
+            context.RegisterSyntaxTreeAction(
+                c =>
                 {
-                    addDiagnostic(Diagnostic.Create(Rule, node.SyntaxTree.GetLocation(line.Span), Maximum, line.Span.Length));
-                }
-            }
+                    foreach (var line in c.Tree.GetText().Lines)
+                    {
+                        if (line.Span.Length > Maximum)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
+                        }
+                    }
+                });
         }
     }
 }

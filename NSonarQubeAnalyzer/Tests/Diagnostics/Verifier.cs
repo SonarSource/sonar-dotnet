@@ -15,7 +15,7 @@ namespace Tests.Diagnostics
 {
     public class Verifier
     {
-        public static void Verify(string path, IDiagnosticAnalyzer diagnosticAnalyzer)
+        public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
         {
             var runner = new DiagnosticsRunner(ImmutableArray.Create(diagnosticAnalyzer));
 

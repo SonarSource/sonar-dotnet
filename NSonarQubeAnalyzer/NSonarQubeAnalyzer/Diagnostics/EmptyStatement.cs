@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class EmptyStatement : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class EmptyStatement : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1116";
         internal const string Description = "Empty statements should be removed";
@@ -24,13 +24,16 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.EmptyStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            addDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), node.ToString()));
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                },
+                SyntaxKind.EmptyStatement);
         }
     }
 }

@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class BreakOutsideSwitch : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class BreakOutsideSwitch : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "BreakOutsideSwitch";
         internal const string Description = "'break' should not be used outside of 'switch'";
@@ -25,17 +25,20 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.BreakStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            BreakStatementSyntax breakNode = (BreakStatementSyntax)node;
-            if (!IsInSwitch(breakNode))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    BreakStatementSyntax breakNode = (BreakStatementSyntax)c.Node;
+                    if (!IsInSwitch(breakNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, breakNode.GetLocation()));
+                    }
+                },
+                SyntaxKind.BreakStatement);
         }
 
         private static bool IsInSwitch(BreakStatementSyntax node)

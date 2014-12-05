@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TabCharacter : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class TabCharacter : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "TabCharacter";
         internal const string Description = "Tabulation character should not be used";
@@ -25,18 +25,20 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            int offset = node.ToFullString().IndexOf('\t');
-            if (offset >= 0)
-            {
-                var location = node.SyntaxTree.GetLocation(TextSpan.FromBounds(offset, offset));
-                addDiagnostic(Diagnostic.Create(Rule, location));
-            }
+            context.RegisterSyntaxTreeAction(
+                c =>
+                {
+                    int offset = c.Tree.GetText().ToString().IndexOf('\t');
+                    if (offset >= 0)
+                    {
+                        var location = c.Tree.GetLocation(TextSpan.FromBounds(offset, offset));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, location));
+                    }
+                });
         }
     }
 }

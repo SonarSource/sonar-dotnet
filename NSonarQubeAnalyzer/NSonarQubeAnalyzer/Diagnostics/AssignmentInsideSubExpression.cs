@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class AssignmentInsideSubExpression : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class AssignmentInsideSubExpression : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "AssignmentInsideSubExpression";
         internal const string Description = "Assignment should not be used inside sub-expressions";
@@ -25,33 +25,29 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest
+        public override void Initialize(AnalysisContext context)
         {
-            get
-            {
-                return ImmutableArray.Create(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxKind.AddAssignmentExpression,
-                    SyntaxKind.SubtractAssignmentExpression,
-                    SyntaxKind.MultiplyAssignmentExpression,
-                    SyntaxKind.DivideAssignmentExpression,
-                    SyntaxKind.ModuloAssignmentExpression,
-                    SyntaxKind.AndAssignmentExpression,
-                    SyntaxKind.ExclusiveOrAssignmentExpression,
-                    SyntaxKind.OrAssignmentExpression,
-                    SyntaxKind.LeftShiftAssignmentExpression,
-                    SyntaxKind.RightShiftAssignmentExpression);
-            }
-        }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
-        {
-            if (IsInSubExpression(node))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    if (IsInSubExpression(c.Node))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    }
+                },
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AddAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression,
+                SyntaxKind.ModuloAssignmentExpression,
+                SyntaxKind.AndAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression,
+                SyntaxKind.OrAssignmentExpression,
+                SyntaxKind.LeftShiftAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression);
         }
 
         private static bool IsInSubExpression(SyntaxNode node)

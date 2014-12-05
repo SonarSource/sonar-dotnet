@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class EmptyMethod : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class EmptyMethod : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1186";
         internal const string Description = "Methods should not be empty";
@@ -24,17 +24,23 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.MethodDeclaration); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            MethodDeclarationSyntax methodDeclaration = (MethodDeclarationSyntax)node;
-            if (methodDeclaration.Body != null && !methodDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword)) && IsEmpty(methodDeclaration.Body))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    MethodDeclarationSyntax methodNode = (MethodDeclarationSyntax)c.Node;
+
+                    if (methodNode.Body != null &&
+                        !methodNode.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword)) &&
+                        IsEmpty(methodNode.Body))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, methodNode.Identifier.GetLocation()));
+                    }
+                },
+                SyntaxKind.MethodDeclaration);
         }
 
         private static bool IsEmpty(BlockSyntax node)

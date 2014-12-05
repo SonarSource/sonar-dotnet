@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ForLoopCounterChanged : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class ForLoopCounterChanged : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S127";
         internal const string Description = "A loop's counter should not be assigned within the loop body";
@@ -25,9 +25,7 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.ForStatement); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         private class SideEffectExpression
         {
@@ -60,30 +58,28 @@ namespace NSonarQubeAnalyzer
                     SyntaxKind.OrAssignmentExpression,
                     SyntaxKind.LeftShiftAssignmentExpression,
                     SyntaxKind.RightShiftAssignmentExpression),
-                AffectedExpression = node => ((BinaryExpressionSyntax)node).Left
+                AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
             });
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            try
-            {
-                ForStatementSyntax forStatement = (ForStatementSyntax)node;
-
-                var loopCounters = LoopCounters(forStatement, semanticModel);
-                foreach (var affectedExpression in AffectedExpressions(forStatement.Statement))
+            context.RegisterSyntaxNodeAction(
+                c =>
                 {
-                    var symbol = semanticModel.GetSymbolInfo(affectedExpression).Symbol;
-                    if (symbol != null && loopCounters.Contains(symbol))
+                    ForStatementSyntax forNode = (ForStatementSyntax)c.Node;
+
+                    var loopCounters = LoopCounters(forNode, c.SemanticModel);
+
+                    foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
                     {
-                        Console.WriteLine("Found issue! line " + (affectedExpression.GetLocation().GetLineSpan().StartLinePosition.Line + 1) + ", Name = " + symbol.Name + ", original = " + symbol.OriginalDefinition);
-                        addDiagnostic(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.OriginalDefinition.Name));
+                        var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+                        if (symbol != null && loopCounters.Contains(symbol))
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.OriginalDefinition.Name));
+                        }
                     }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Caught an exception! " + e);
-            }
+                },
+                SyntaxKind.ForStatement);
         }
 
         private static IEnumerable<ISymbol> LoopCounters(ForStatementSyntax node, SemanticModel semanticModel)
@@ -95,7 +91,7 @@ namespace NSonarQubeAnalyzer
 
             var initializedVariables = node.Initializers
                 .Where(i => i.IsKind(SyntaxKind.SimpleAssignmentExpression))
-                .Select(i => semanticModel.GetSymbolInfo(((BinaryExpressionSyntax)i).Left).Symbol);
+                .Select(i => semanticModel.GetSymbolInfo(((AssignmentExpressionSyntax)i).Left).Symbol);
 
             return declaredVariables.Union(initializedVariables);
         }

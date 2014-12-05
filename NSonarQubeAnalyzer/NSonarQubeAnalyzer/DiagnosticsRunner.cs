@@ -13,9 +13,9 @@ namespace NSonarQubeAnalyzer
 {
     public class DiagnosticsRunner
     {
-        private readonly ImmutableArray<IDiagnosticAnalyzer> DiagnosticAnalyzers;
+        private readonly ImmutableArray<DiagnosticAnalyzer> DiagnosticAnalyzers;
 
-        public DiagnosticsRunner(ImmutableArray<IDiagnosticAnalyzer> diagnosticAnalyzers)
+        public DiagnosticsRunner(ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers)
         {
             DiagnosticAnalyzers = diagnosticAnalyzers;
         }
@@ -23,14 +23,11 @@ namespace NSonarQubeAnalyzer
         public IEnumerable<Diagnostic> GetDiagnostics(SyntaxTree syntaxTree)
         {
             var cancellationToken = new CancellationTokenSource().Token;
-            // FIXME Cannot dispose() because of violation of invariant in
-            // http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis/DiagnosticAnalyzer/AsyncQueue.cs,187
-            var driver = new AnalyzerDriver<SyntaxKind>(DiagnosticAnalyzers, n => n.CSharpKind(), null, cancellationToken, null);
 
             Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree));
-            compilation = compilation.WithEventQueue(driver.CompilationEventQueue);
-            compilation.GetDiagnostics(cancellationToken);
 
+            var driver = AnalyzerDriver.Create(compilation, DiagnosticAnalyzers, null, out compilation, cancellationToken);
+            compilation.GetDiagnostics(cancellationToken);
             return driver.GetDiagnosticsAsync().Result;
         }
     }

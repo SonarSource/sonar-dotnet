@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SwitchWithoutDefault : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class SwitchWithoutDefault : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "SwitchWithoutDefault";
         internal const string Description = "'switch' statement should have a 'default:' case";
@@ -25,17 +25,20 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.SwitchStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            SwitchStatementSyntax switchNode = (SwitchStatementSyntax)node;
-            if (!HasDefaultLabel(switchNode))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    SwitchStatementSyntax switchNode = (SwitchStatementSyntax)c.Node;
+                    if (!HasDefaultLabel(switchNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.GetLocation()));
+                    }
+                },
+                SyntaxKind.SwitchStatement);
         }
 
         private static bool HasDefaultLabel(SwitchStatementSyntax node)

@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UseCurlyBraces : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class UseCurlyBraces : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S121";
         internal const string Description = "Control structures should always use curly braces";
@@ -74,18 +74,21 @@ namespace NSonarQubeAnalyzer
                 Validator = node => ((WhileStatementSyntax)node).Statement.IsKind(SyntaxKind.Block)
             });
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return CheckedKinds.Select(e => e.Kind).ToImmutableArray(); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            var checkedKind = CheckedKinds.Where(e => node.IsKind(e.Kind)).Single();
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    var checkedKind = CheckedKinds.Where(e => c.Node.IsKind(e.Kind)).Single();
 
-            if (!checkedKind.Validator(node))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), checkedKind.Value));
-            }
+                    if (!checkedKind.Validator(c.Node))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), checkedKind.Value));
+                    }
+                },
+                CheckedKinds.Select(e => e.Kind).ToArray());
         }
     }
 }

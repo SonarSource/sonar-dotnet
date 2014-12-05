@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class AtLeastThreeCasesInSwitch : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class AtLeastThreeCasesInSwitch : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1301";
         internal const string Description = "\"switch\" statements should have at least 3 \"case\" clauses";
@@ -25,17 +25,20 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.SwitchStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            SwitchStatementSyntax switchNode = (SwitchStatementSyntax)node;
-            if (!HasAtLeastThreeLabels(switchNode))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    SwitchStatementSyntax switchNode = (SwitchStatementSyntax)c.Node;
+                    if (!HasAtLeastThreeLabels(switchNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    }
+                },
+                SyntaxKind.SwitchStatement);
         }
 
         private static bool HasAtLeastThreeLabels(SwitchStatementSyntax node)

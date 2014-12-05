@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class FileLines : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class FileLines : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "FileLoc";
         internal const string Description = "File should not have too many lines";
@@ -25,19 +25,23 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            int lines = node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
-            if (lines > Maximum)
-            {
-                addDiagnostic(Diagnostic.Create(Rule, Location.None, Maximum, lines));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    int lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+
+                    if (lines > Maximum)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.None, Maximum, lines));
+                    }
+                },
+                SyntaxKind.CompilationUnit);
         }
     }
 }

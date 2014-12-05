@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class RightCurlyBraceStartsLine : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class RightCurlyBraceStartsLine : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1109";
         internal const string Description = "A close curly brace should be located at the beginning of a line";
@@ -25,19 +25,22 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            foreach (var closeBraceToken in GetDescendantCloseBraceTokens(node))
-            {
-                if (!StartsLine(closeBraceToken) && !IsOnSameLineAsOpenBrace(closeBraceToken) && !IsInitializer(closeBraceToken.Parent))
+            context.RegisterSyntaxNodeAction(
+                c =>
                 {
-                    addDiagnostic(Diagnostic.Create(Rule, closeBraceToken.GetLocation()));
-                }
-            }
+                    foreach (var closeBraceToken in GetDescendantCloseBraceTokens(c.Node))
+                    {
+                        if (!StartsLine(closeBraceToken) && !IsOnSameLineAsOpenBrace(closeBraceToken) && !IsInitializer(closeBraceToken.Parent))
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, closeBraceToken.GetLocation()));
+                        }
+                    }
+                },
+                SyntaxKind.CompilationUnit);
         }
 
         private static bool StartsLine(SyntaxToken token)

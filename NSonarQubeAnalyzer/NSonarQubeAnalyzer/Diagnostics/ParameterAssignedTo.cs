@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ParameterAssignedTo : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class ParameterAssignedTo : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "ParameterAssignedTo";
         internal const string Description = "Parameter variable should not be assigned to";
@@ -24,36 +24,32 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest
+        public override void Initialize(AnalysisContext context)
         {
-            get
-            {
-                return ImmutableArray.Create(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxKind.AddAssignmentExpression,
-                    SyntaxKind.SubtractAssignmentExpression,
-                    SyntaxKind.MultiplyAssignmentExpression,
-                    SyntaxKind.DivideAssignmentExpression,
-                    SyntaxKind.ModuloAssignmentExpression,
-                    SyntaxKind.AndAssignmentExpression,
-                    SyntaxKind.ExclusiveOrAssignmentExpression,
-                    SyntaxKind.OrAssignmentExpression,
-                    SyntaxKind.LeftShiftAssignmentExpression,
-                    SyntaxKind.RightShiftAssignmentExpression);
-            }
-        }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    var assignmentNode = (AssignmentExpressionSyntax)c.Node;
+                    var symbol = c.SemanticModel.GetSymbolInfo(assignmentNode.Left).Symbol;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
-        {
-            var assignment = (BinaryExpressionSyntax)node;
-            var symbol = semanticModel.GetSymbolInfo(assignment.Left).Symbol;
-
-            if (symbol != null && AssignsToParameter(symbol))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), assignment.Left.ToString()));
-            }
+                    if (symbol != null && AssignsToParameter(symbol))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, assignmentNode.GetLocation(), assignmentNode.Left.ToString()));
+                    }
+                },
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AddAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression,
+                SyntaxKind.ModuloAssignmentExpression,
+                SyntaxKind.AndAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression,
+                SyntaxKind.OrAssignmentExpression,
+                SyntaxKind.LeftShiftAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression);
         }
 
         private bool AssignsToParameter(ISymbol symbol)

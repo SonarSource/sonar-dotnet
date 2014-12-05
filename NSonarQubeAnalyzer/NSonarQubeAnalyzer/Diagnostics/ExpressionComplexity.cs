@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ExpressionComplexity : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class ExpressionComplexity : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1067";
         internal const string Description = "Expressions should not be too complex";
@@ -26,9 +26,7 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum;
 
@@ -39,54 +37,62 @@ namespace NSonarQubeAnalyzer
             SyntaxKind.ObjectInitializerExpression,
             SyntaxKind.InvocationExpression});
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            var rootExpressions =
-                node
-                .DescendantNodes(e2 => !(e2 is ExpressionSyntax))
-                .Where(
-                    e =>
-                        e is ExpressionSyntax &&
-                        !IsCompoundExpression(e));
-            var compoundExpressionsDescendants =
-                node
-                .DescendantNodes()
-                .Where(e => IsCompoundExpression(e))
-                .SelectMany(
-                    e =>
-                        e
-                        .DescendantNodes(
-                            e2 =>
-                                e == e2 ||
-                                !(e2 is ExpressionSyntax))
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    var rootExpressions =
+                        c.Node
+                        .DescendantNodes(e2 => !(e2 is ExpressionSyntax))
                         .Where(
-                            e2 =>
-                                e2 is ExpressionSyntax &&
-                                !IsCompoundExpression(e2)));
+                            e =>
+                                e is ExpressionSyntax &&
+                                !IsCompoundExpression(e));
 
-            var expressionsToCheck = rootExpressions.Concat(compoundExpressionsDescendants);
+                    var compoundExpressionsDescendants =
+                        c.Node
+                        .DescendantNodes()
+                        .Where(e => IsCompoundExpression(e))
+                        .SelectMany(
+                            e =>
+                                e
+                                .DescendantNodes(
+                                    e2 =>
+                                        e == e2 ||
+                                        !(e2 is ExpressionSyntax))
+                                .Where(
+                                    e2 =>
+                                        e2 is ExpressionSyntax &&
+                                        !IsCompoundExpression(e2)));
 
-            var complexExpressions =
-                expressionsToCheck
-                .Select(
-                    e =>
-                    new {
-                        Expression = e,
-                        Complexity =
-                            e
-                            .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
-                            .Where(
-                                e2 =>
-                                    e2.IsKind(SyntaxKind.ConditionalExpression) ||
-                                    e2.IsKind(SyntaxKind.LogicalAndExpression) ||
-                                    e2.IsKind(SyntaxKind.LogicalOrExpression))
-                            .Count()})
-                .Where(e => e.Complexity > Maximum);
+                    var expressionsToCheck = rootExpressions.Concat(compoundExpressionsDescendants);
 
-            foreach (var complexExpression in complexExpressions)
-            {
-                addDiagnostic(Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), Maximum, complexExpression.Complexity));
-            }
+                    var complexExpressions =
+                        expressionsToCheck
+                        .Select(
+                            e =>
+                            new
+                            {
+                                Expression = e,
+                                Complexity =
+                                    e
+                                    .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
+                                    .Where(
+                                        e2 =>
+                                            e2.IsKind(SyntaxKind.ConditionalExpression) ||
+                                            e2.IsKind(SyntaxKind.LogicalAndExpression) ||
+                                            e2.IsKind(SyntaxKind.LogicalOrExpression))
+                                    .Count()
+                            })
+                        .Where(e => e.Complexity > Maximum);
+
+                    foreach (var complexExpression in complexExpressions)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), Maximum, complexExpression.Complexity));
+                    }
+                },
+                SyntaxKind.CompilationUnit);
         }
 
         private bool IsCompoundExpression(SyntaxNode node)

@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class IfConditionalAlwaysTrueOrFalse : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class IfConditionalAlwaysTrueOrFalse : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1145";
         internal const string Description = "\"if\" statement conditions should not unconditionally evaluate to \"true\" or to \"false\"";
@@ -25,17 +25,21 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.IfStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            IfStatementSyntax ifNode = (IfStatementSyntax)node;
-            if (HasBooleanLiteralExpressionAsCondition(ifNode))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    IfStatementSyntax ifNode = (IfStatementSyntax)c.Node;
+
+                    if (HasBooleanLiteralExpressionAsCondition(ifNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, ifNode.GetLocation()));
+                    }
+                },
+                SyntaxKind.IfStatement);
         }
 
         private static bool HasBooleanLiteralExpressionAsCondition(IfStatementSyntax node)

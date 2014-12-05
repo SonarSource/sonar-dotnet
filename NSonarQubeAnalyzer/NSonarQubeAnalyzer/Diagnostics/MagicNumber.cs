@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MagicNumber : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class MagicNumber : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "MagicNumber";
         internal const string Description = "Magic number should not be used";
@@ -26,25 +26,28 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.NumericLiteralExpression); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public IImmutableSet<string> Exceptions;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            LiteralExpressionSyntax literal = (LiteralExpressionSyntax)node;
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
 
-            if (!node.IsPartOfStructuredTrivia() &&
-                !node.Ancestors().Any(e =>
-                  e.IsKind(SyntaxKind.VariableDeclarator) ||
-                  e.IsKind(SyntaxKind.EnumDeclaration) ||
-                  e.IsKind(SyntaxKind.Attribute)) &&
-                !Exceptions.Contains(literal.Token.Text))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+                    if (!literalNode.IsPartOfStructuredTrivia() &&
+                        !literalNode.Ancestors().Any(e =>
+                          e.IsKind(SyntaxKind.VariableDeclarator) ||
+                          e.IsKind(SyntaxKind.EnumDeclaration) ||
+                          e.IsKind(SyntaxKind.Attribute)) &&
+                        !Exceptions.Contains(literalNode.Token.Text))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation()));
+                    }
+                },
+                SyntaxKind.NumericLiteralExpression);
         }
     }
 }

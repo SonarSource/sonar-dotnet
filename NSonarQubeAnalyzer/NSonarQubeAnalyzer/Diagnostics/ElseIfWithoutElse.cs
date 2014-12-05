@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ElseIfWithoutElse : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class ElseIfWithoutElse : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S126";
         internal const string Description = "\"if ... else if\" constructs shall be terminated with an \"else\" clause";
@@ -25,17 +25,22 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.IfStatement); } }
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            IfStatementSyntax ifStatement = (IfStatementSyntax)node;
-            if (IsElseIfWithoutElse(ifStatement))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    IfStatementSyntax ifNode = (IfStatementSyntax)c.Node;
+                    if (IsElseIfWithoutElse(ifNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, ifNode.GetLocation()));
+                    }
+                },
+                SyntaxKind.IfStatement);
         }
 
         private static bool IsElseIfWithoutElse(IfStatementSyntax node)

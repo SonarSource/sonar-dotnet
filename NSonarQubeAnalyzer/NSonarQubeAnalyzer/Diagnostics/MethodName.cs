@@ -16,7 +16,7 @@ using System.Text.RegularExpressions;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MethodName : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class MethodName : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "MethodName";
         internal const string Description = "Method name should comply with a naming convention";
@@ -26,20 +26,23 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.MethodDeclaration); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public string Convention;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            var identifier = ((MethodDeclarationSyntax)node).Identifier;
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    var identifierNode = ((MethodDeclarationSyntax)c.Node).Identifier;
 
-            if (!Regex.IsMatch(identifier.Text, Convention))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), Convention));
-            }
+                    if (!Regex.IsMatch(identifierNode.Text, Convention))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifierNode.GetLocation(), Convention));
+                    }
+                },
+                SyntaxKind.MethodDeclaration);
         }
     }
 }

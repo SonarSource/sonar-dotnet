@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class AsyncAwaitIdentifier : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class AsyncAwaitIdentifier : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1301";
         internal const string Description = "'async' and 'await' should not be used as identifier";
@@ -27,16 +27,19 @@ namespace NSonarQubeAnalyzer
 
         private static readonly IImmutableSet<string> ASYNC_OR_AWAIT = ImmutableHashSet.Create(new string[] {"async", "await"});
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.CompilationUnit); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(node))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Node))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
+                    }
+                },
+                SyntaxKind.CompilationUnit);
         }
 
         private static IEnumerable<SyntaxToken> GetAsyncOrAwaitTokens(SyntaxNode node)

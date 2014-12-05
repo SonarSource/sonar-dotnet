@@ -31,7 +31,7 @@ namespace NSonarQubeAnalyzer
                          select e.Elements("Key").Single().Value)
                          .ToImmutableHashSet();
 
-            var diagnosticAnalyzersBuilder = ImmutableArray.CreateBuilder<IDiagnosticAnalyzer>();
+            var diagnosticAnalyzersBuilder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
             if (rules.Contains("SwitchWithoutDefault"))
             {
                 diagnosticAnalyzersBuilder.Add(new SwitchWithoutDefault());
@@ -91,11 +91,11 @@ namespace NSonarQubeAnalyzer
             if (rules.Contains("FileLoc"))
             {
                 var parameters = from e in xmlIn.Descendants("Rule")
-                      where "FileLoc".Equals(e.Elements("Key").Single().Value)
-                      select e.Descendants("Parameter");
+                                 where "FileLoc".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
                 var maximum = (from e in parameters
-                              where "maximumFileLocThreshold".Equals(e.Elements("Key").Single().Value)
-                              select e.Elements("Value").Single().Value)
+                               where "maximumFileLocThreshold".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
                               .Single();
 
                 var diagnostic = new FileLines();
@@ -150,8 +150,8 @@ namespace NSonarQubeAnalyzer
                                  where "ClassName".Equals(e.Elements("Key").Single().Value)
                                  select e.Descendants("Parameter");
                 var convention = (from e in parameters
-                               where "format".Equals(e.Elements("Key").Single().Value)
-                               select e.Elements("Value").Single().Value)
+                                  where "format".Equals(e.Elements("Key").Single().Value)
+                                  select e.Elements("Value").Single().Value)
                               .Single();
 
                 var diagnostic = new ClassName();

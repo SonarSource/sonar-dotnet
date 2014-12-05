@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class EmptyNestedBlock : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class EmptyNestedBlock : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S108";
         internal const string Description = "Nested blocks of code should not be left empty";
@@ -24,16 +24,20 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.Block, SyntaxKind.SwitchStatement); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            if (IsEmpty(node))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    if (IsEmpty(c.Node))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    }
+                },
+                SyntaxKind.Block,
+                SyntaxKind.SwitchStatement);
         }
 
         private static bool IsEmpty(SyntaxNode node)

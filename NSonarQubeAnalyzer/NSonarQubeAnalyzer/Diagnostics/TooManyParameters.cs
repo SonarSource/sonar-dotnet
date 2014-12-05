@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyParameters : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class TooManyParameters : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S107";
         internal const string Description = "Functions should not have too many parameters";
@@ -25,21 +25,24 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.ParameterList); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            var parameterList = (ParameterListSyntax)node;
-            int parameters = parameterList.Parameters.Count;
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    var parameterListNode = (ParameterListSyntax)c.Node;
+                    int parameters = parameterListNode.Parameters.Count;
 
-            if (parameters > Maximum)
-            {
-                addDiagnostic(Diagnostic.Create(Rule, parameterList.GetLocation(), Maximum, parameters, ExtractName(node)));
-            }
+                    if (parameters > Maximum)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, parameterListNode.GetLocation(), Maximum, parameters, ExtractName(parameterListNode)));
+                    }
+                },
+                SyntaxKind.ParameterList);
         }
 
         private static string ExtractName(SyntaxNode node)

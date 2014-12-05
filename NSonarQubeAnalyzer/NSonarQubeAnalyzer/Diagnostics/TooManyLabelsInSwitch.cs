@@ -15,7 +15,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyLabelsInSwitch : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class TooManyLabelsInSwitch : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1479";
         internal const string Description = "\"switch\" statements should not have too many \"case\" clauses";
@@ -25,21 +25,24 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.SwitchStatement); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum;
 
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            SwitchStatementSyntax switchStatement = (SwitchStatementSyntax)node;
-            int labels = NumberOfLabels(switchStatement);
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    SwitchStatementSyntax switchNode = (SwitchStatementSyntax)c.Node;
+                    int labels = NumberOfLabels(switchNode);
 
-            if (labels > Maximum)
-            {
-                addDiagnostic(Diagnostic.Create(Rule, switchStatement.GetLocation(), Maximum, labels));
-            }
+                    if (labels > Maximum)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.GetLocation(), Maximum, labels));
+                    }
+                },
+                SyntaxKind.SwitchStatement);
         }
 
         private static int NumberOfLabels(SwitchStatementSyntax node)

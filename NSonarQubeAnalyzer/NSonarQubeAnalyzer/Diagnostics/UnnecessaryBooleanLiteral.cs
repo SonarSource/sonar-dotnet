@@ -14,7 +14,7 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UnnecessaryBooleanLiteral : ISyntaxNodeAnalyzer<SyntaxKind>
+    public class UnnecessaryBooleanLiteral : DiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1125";
         internal const string Description = "Literal boolean values should not be used in condition expressions";
@@ -24,17 +24,21 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
-        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.TrueLiteralExpression, SyntaxKind.FalseLiteralExpression); } }
-
-        public void AnalyzeNode(SyntaxNode node, SemanticModel semanticModel, Action<Diagnostic> addDiagnostic, AnalyzerOptions options, CancellationToken cancellationToken)
+        public override void Initialize(AnalysisContext context)
         {
-            LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)node;
-            if (IsUnnecessary(literalNode))
-            {
-                addDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), literalNode.Token.ToString()));
-            }
+            context.RegisterSyntaxNodeAction(
+                c =>
+                {
+                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
+                    if (IsUnnecessary(literalNode))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation(), literalNode.Token.ToString()));
+                    }
+                },
+                SyntaxKind.TrueLiteralExpression,
+                SyntaxKind.FalseLiteralExpression);
         }
 
         private static bool IsUnnecessary(LiteralExpressionSyntax node)
