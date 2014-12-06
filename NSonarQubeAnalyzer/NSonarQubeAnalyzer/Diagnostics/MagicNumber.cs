@@ -28,7 +28,7 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public IImmutableSet<string> Exceptions;
+        public IImmutableSet<string> Exceptions = ImmutableHashSet.Create("0", "1", "0x0", "0x00", ".0", ".1", "0.0", "1.0");
 
         public override void Initialize(AnalysisContext context)
         {

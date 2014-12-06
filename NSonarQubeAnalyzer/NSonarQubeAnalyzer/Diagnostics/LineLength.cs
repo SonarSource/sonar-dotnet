@@ -27,7 +27,7 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        public int Maximum = 80;
 
         public override void Initialize(AnalysisContext context)
         {

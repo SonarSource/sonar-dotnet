@@ -28,7 +28,7 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public string Convention;
+        public string Convention = "^[A-Z][a-zA-Z0-9]+$";
 
         public override void Initialize(AnalysisContext context)
         {
