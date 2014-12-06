@@ -16,11 +16,11 @@ using System.Text.RegularExpressions;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ClassName : DiagnosticAnalyzer
+    public class MagicNumber : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "ClassName";
-        internal const string Description = "Class name should comply with a naming convention";
-        internal const string MessageFormat = "Rename this class to match the regular expression: {0}";
+        internal const string DiagnosticId = "MagicNumber";
+        internal const string Description = "Magic number should not be used";
+        internal const string MessageFormat = "Extract this magic number into a constant, variable declaration or an enum.";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
@@ -28,21 +28,26 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public string Convention;
+        public IImmutableSet<string> Exceptions = ImmutableHashSet.Create("0", "1", "0x0", "0x00", ".0", ".1", "0.0", "1.0");
 
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var identifier = ((ClassDeclarationSyntax)c.Node).Identifier;
+                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
 
-                    if (!Regex.IsMatch(identifier.Text, Convention))
+                    if (!literalNode.IsPartOfStructuredTrivia() &&
+                        !literalNode.Ancestors().Any(e =>
+                          e.IsKind(SyntaxKind.VariableDeclarator) ||
+                          e.IsKind(SyntaxKind.EnumDeclaration) ||
+                          e.IsKind(SyntaxKind.Attribute)) &&
+                        !Exceptions.Contains(literalNode.Token.Text))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), Convention));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation()));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.NumericLiteralExpression);
         }
     }
 }

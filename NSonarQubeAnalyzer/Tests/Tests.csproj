@@ -219,6 +219,10 @@
       <Project>{79f0b359-8275-4f3b-b919-82c493b74665}</Project>
       <Name>NSonarQubeAnalyzer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NSonarQubeDiagnostics\NSonarQubeDiagnostics\NSonarQubeDiagnostics.csproj">
+      <Project>{d37599d1-a496-4093-9ec2-c286ccc378d9}</Project>
+      <Name>NSonarQubeDiagnostics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

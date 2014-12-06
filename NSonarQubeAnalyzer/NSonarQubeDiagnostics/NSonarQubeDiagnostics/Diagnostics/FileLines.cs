@@ -11,16 +11,15 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using System.Collections.Immutable;
 using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MethodName : DiagnosticAnalyzer
+    public class FileLines : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "MethodName";
-        internal const string Description = "Method name should comply with a naming convention";
-        internal const string MessageFormat = "Rename this method to match the regular expression: {0}";
+        internal const string DiagnosticId = "FileLoc";
+        internal const string Description = "File should not have too many lines";
+        internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into smaller files.";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
@@ -28,21 +27,21 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public string Convention;
+        public int Maximum = 500;
 
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var identifierNode = ((MethodDeclarationSyntax)c.Node).Identifier;
+                    int lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
 
-                    if (!Regex.IsMatch(identifierNode.Text, Convention))
+                    if (lines > Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifierNode.GetLocation(), Convention));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.None, Maximum, lines));
                     }
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.CompilationUnit);
         }
     }
 }

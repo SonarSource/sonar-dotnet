@@ -11,15 +11,16 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using System.Collections.Immutable;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class LineLength : DiagnosticAnalyzer
+    public class ClassName : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "LineLength";
-        internal const string Description = "Lines should not be too long";
-        internal const string MessageFormat = "Split this {1} characters long line (which is greater than {0} authorized).";
+        internal const string DiagnosticId = "ClassName";
+        internal const string Description = "Class name should comply with a naming convention";
+        internal const string MessageFormat = "Rename this class to match the regular expression: {0}";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
@@ -27,21 +28,21 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        public string Convention = "^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$";
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxTreeAction(
+            context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    foreach (var line in c.Tree.GetText().Lines)
+                    var identifier = ((ClassDeclarationSyntax)c.Node).Identifier;
+
+                    if (!Regex.IsMatch(identifier.Text, Convention))
                     {
-                        if (line.Span.Length > Maximum)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
-                        }
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), Convention));
                     }
-                });
+                },
+                SyntaxKind.ClassDeclaration);
         }
     }
 }

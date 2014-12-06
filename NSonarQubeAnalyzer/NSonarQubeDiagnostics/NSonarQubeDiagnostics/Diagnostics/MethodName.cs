@@ -16,11 +16,11 @@ using System.Text.RegularExpressions;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MagicNumber : DiagnosticAnalyzer
+    public class MethodName : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "MagicNumber";
-        internal const string Description = "Magic number should not be used";
-        internal const string MessageFormat = "Extract this magic number into a constant, variable declaration or an enum.";
+        internal const string DiagnosticId = "MethodName";
+        internal const string Description = "Method name should comply with a naming convention";
+        internal const string MessageFormat = "Rename this method to match the regular expression: {0}";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
@@ -28,26 +28,21 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public IImmutableSet<string> Exceptions;
+        public string Convention = "^[A-Z][a-zA-Z0-9]+$";
 
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
+                    var identifierNode = ((MethodDeclarationSyntax)c.Node).Identifier;
 
-                    if (!literalNode.IsPartOfStructuredTrivia() &&
-                        !literalNode.Ancestors().Any(e =>
-                          e.IsKind(SyntaxKind.VariableDeclarator) ||
-                          e.IsKind(SyntaxKind.EnumDeclaration) ||
-                          e.IsKind(SyntaxKind.Attribute)) &&
-                        !Exceptions.Contains(literalNode.Token.Text))
+                    if (!Regex.IsMatch(identifierNode.Text, Convention))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifierNode.GetLocation(), Convention));
                     }
                 },
-                SyntaxKind.NumericLiteralExpression);
+                SyntaxKind.MethodDeclaration);
         }
     }
 }
