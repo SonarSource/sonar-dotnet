@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{79F0B359-8275-4F3B-B919-82C493B74665}</ProjectGuid>
@@ -13,8 +13,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -99,36 +99,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiagnosticsRunner.cs" />
-    <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
-    <Compile Include="Diagnostics\ParameterAssignedTo.cs" />
-    <Compile Include="Diagnostics\ExpressionComplexity.cs" />
-    <Compile Include="Diagnostics\MagicNumber.cs" />
-    <Compile Include="Diagnostics\MethodName.cs" />
-    <Compile Include="Diagnostics\EmptyMethod.cs" />
-    <Compile Include="Diagnostics\ClassName.cs" />
-    <Compile Include="Diagnostics\TooManyParameters.cs" />
-    <Compile Include="Diagnostics\TooManyLabelsInSwitch.cs" />
-    <Compile Include="Diagnostics\ForLoopCounterChanged.cs" />
-    <Compile Include="Diagnostics\FileLines.cs" />
-    <Compile Include="Diagnostics\LineLength.cs" />
-    <Compile Include="Diagnostics\TabCharacter.cs" />
-    <Compile Include="Diagnostics\RightCurlyBraceStartsLine.cs" />
-    <Compile Include="Diagnostics\ElseIfWithoutElse.cs" />
-    <Compile Include="Diagnostics\AssignmentInsideSubExpression.cs" />
-    <Compile Include="Diagnostics\AsyncAwaitIdentifier.cs" />
-    <Compile Include="Diagnostics\UseCurlyBraces.cs" />
-    <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalse.cs" />
-    <Compile Include="Diagnostics\EmptyStatement.cs" />
-    <Compile Include="Diagnostics\UnnecessaryBooleanLiteral.cs" />
-    <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
-    <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
-    <Compile Include="Diagnostics\SwitchWithoutDefault.cs" />
     <Compile Include="Metrics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NSonarQubeDiagnostics\NSonarQubeDiagnostics\NSonarQubeDiagnostics.csproj">
+      <Project>{d37599d1-a496-4093-9ec2-c286ccc378d9}</Project>
+      <Name>NSonarQubeDiagnostics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

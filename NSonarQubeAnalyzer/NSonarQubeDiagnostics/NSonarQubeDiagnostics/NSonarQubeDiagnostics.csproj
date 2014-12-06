@@ -32,8 +32,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CodeFixProvider.cs" />
-    <Compile Include="DiagnosticAnalyzer.cs" />
+    <Compile Include="Diagnostics\AssignmentInsideSubExpression.cs" />
+    <Compile Include="Diagnostics\AsyncAwaitIdentifier.cs" />
+    <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
+    <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
+    <Compile Include="Diagnostics\ClassName.cs" />
+    <Compile Include="Diagnostics\ElseIfWithoutElse.cs" />
+    <Compile Include="Diagnostics\EmptyMethod.cs" />
+    <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
+    <Compile Include="Diagnostics\EmptyStatement.cs" />
+    <Compile Include="Diagnostics\ExpressionComplexity.cs" />
+    <Compile Include="Diagnostics\FileLines.cs" />
+    <Compile Include="Diagnostics\ForLoopCounterChanged.cs" />
+    <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalse.cs" />
+    <Compile Include="Diagnostics\LineLength.cs" />
+    <Compile Include="Diagnostics\MagicNumber.cs" />
+    <Compile Include="Diagnostics\MethodName.cs" />
+    <Compile Include="Diagnostics\ParameterAssignedTo.cs" />
+    <Compile Include="Diagnostics\RightCurlyBraceStartsLine.cs" />
+    <Compile Include="Diagnostics\SwitchWithoutDefault.cs" />
+    <Compile Include="Diagnostics\TabCharacter.cs" />
+    <Compile Include="Diagnostics\TooManyLabelsInSwitch.cs" />
+    <Compile Include="Diagnostics\TooManyParameters.cs" />
+    <Compile Include="Diagnostics\UnnecessaryBooleanLiteral.cs" />
+    <Compile Include="Diagnostics\UseCurlyBraces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

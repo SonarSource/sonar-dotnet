@@ -15,11 +15,11 @@ using System.Threading;
 namespace NSonarQubeAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class LineLength : DiagnosticAnalyzer
+    public class FileLines : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "LineLength";
-        internal const string Description = "Lines should not be too long";
-        internal const string MessageFormat = "Split this {1} characters long line (which is greater than {0} authorized).";
+        internal const string DiagnosticId = "FileLoc";
+        internal const string Description = "File should not have too many lines";
+        internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into smaller files.";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
@@ -27,21 +27,21 @@ namespace NSonarQubeAnalyzer
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum = 80;
+        public int Maximum = 500;
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxTreeAction(
+            context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    foreach (var line in c.Tree.GetText().Lines)
+                    int lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+
+                    if (lines > Maximum)
                     {
-                        if (line.Span.Length > Maximum)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
-                        }
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.None, Maximum, lines));
                     }
-                });
+                },
+                SyntaxKind.CompilationUnit);
         }
     }
 }
