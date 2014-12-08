@@ -113,6 +113,7 @@
     <Compile Include="Diagnostics\ElseIfWithoutElse.cs" />
     <Compile Include="Diagnostics\AssignmentInsideSubExpression.cs" />
     <Compile Include="Diagnostics\AsyncAwaitIdentifier.cs" />
+    <Compile Include="Diagnostics\UnusedLocalVariable.cs" />
     <Compile Include="Diagnostics\UseCurlyBraces.cs" />
     <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalse.cs" />
     <Compile Include="Diagnostics\EmptyStatement.cs" />

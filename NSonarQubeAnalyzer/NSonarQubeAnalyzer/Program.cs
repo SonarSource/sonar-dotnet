@@ -208,6 +208,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new ParameterAssignedTo());
             }
+            if (rules.Contains("S1481"))
+            {
+                diagnosticAnalyzersBuilder.Add(new UnusedLocalVariable());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

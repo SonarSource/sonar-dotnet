@@ -56,12 +56,11 @@ public final class CheckList {
       ExpressionComplexityCheck.class,
       EmptyNestedBlockCheck.class,
       ParameterAssignedToCheck.class,
+      UnusedLocalVariableCheck.class,
 
       CommentedCodeCheck.class,
-
       FunctionComplexityCheck.class,
-      CommentRegularExpressionCheck.class,
-      UnusedLocalVariableCheck.class);
+      CommentRegularExpressionCheck.class);
   }
 
 }
