@@ -46,7 +46,7 @@ namespace NSonarQubeAnalyzer
                 SyntaxKind.VariableDeclarator);
         }
 
-        // Dirty workaround for Microsoft.CodeAnalysis.FindSymbols.SymbolFinder not working as expected
+        // TODO Dirty workaround for Microsoft.CodeAnalysis.FindSymbols.SymbolFinder not working as expected
         private bool HasReferences(ISymbol symbol, SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
             foreach (SyntaxNode node in syntaxTree.GetCompilationUnitRoot().DescendantNodesAndSelf())
