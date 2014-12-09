@@ -29,35 +29,51 @@ namespace NSonarQubeAnalyzer
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(
+            context.RegisterCompilationEndAction(
                 c =>
                 {
-                    var variableDeclaratorNode = (VariableDeclaratorSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorNode);
+                    var syntaxTree = c.Compilation.SyntaxTrees.Single();
+                    var semanticModel = c.Compilation.GetSemanticModel(syntaxTree);
 
-                    if (symbol.Kind == SymbolKind.Local && !HasReferences(symbol, c.Node.SyntaxTree, c.SemanticModel))
+                    var variableDeclaratorNodes = syntaxTree
+                        .GetCompilationUnitRoot()
+                        .DescendantNodesAndSelf()
+                        .Where(e => e.IsKind(SyntaxKind.VariableDeclarator))
+                        .Select(e => (VariableDeclaratorSyntax)e);
+
+                    var referencedSymbols = ReferencedSymbols(syntaxTree, semanticModel);
+
+                    foreach (var variableDeclaratorNode in variableDeclaratorNodes)
                     {
-                        foreach (var syntaxReference in symbol.DeclaringSyntaxReferences)
+                        var symbol = semanticModel.GetDeclaredSymbol(variableDeclaratorNode);
+
+                        if (symbol.Kind == SymbolKind.Local && !referencedSymbols.Contains(symbol))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, syntaxReference.GetSyntax().GetLocation(), symbol.Name));
+                            foreach (var syntaxReference in symbol.DeclaringSyntaxReferences)
+                            {
+                                c.ReportDiagnostic(Diagnostic.Create(Rule, syntaxReference.GetSyntax().GetLocation(), symbol.Name));
+                            }
                         }
                     }
-                },
-                SyntaxKind.VariableDeclarator);
+                });
         }
 
         // TODO Dirty workaround for Microsoft.CodeAnalysis.FindSymbols.SymbolFinder not working as expected
-        private bool HasReferences(ISymbol symbol, SyntaxTree syntaxTree, SemanticModel semanticModel)
+        private IImmutableSet<ISymbol> ReferencedSymbols(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
+            var builder = ImmutableHashSet.CreateBuilder<ISymbol>();
+
             foreach (SyntaxNode node in syntaxTree.GetCompilationUnitRoot().DescendantNodesAndSelf())
             {
                 var symbolInfo = semanticModel.GetSymbolInfo(node);
-                if (symbol.Equals(symbolInfo.Symbol) || symbolInfo.CandidateSymbols.Contains(symbol))
+                if (symbolInfo.Symbol != null)
                 {
-                    return true;
+                    builder.Add(symbolInfo.Symbol);
                 }
+                builder.UnionWith(symbolInfo.CandidateSymbols);
             }
-            return false;
+
+            return builder.ToImmutable();
         }
     }
 }
