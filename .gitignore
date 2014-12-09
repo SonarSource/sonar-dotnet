@@ -54,3 +54,7 @@ packages/
 # MSTest test results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+# Visual Studio profiler files
+*.psess
+*.vsp
