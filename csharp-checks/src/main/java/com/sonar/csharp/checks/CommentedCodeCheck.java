@@ -20,7 +20,6 @@
 package com.sonar.csharp.checks;
 
 import com.google.common.collect.Sets;
-import com.sonar.csharp.squid.api.CSharpKeyword;
 import com.sonar.sslr.api.AstAndTokenVisitor;
 import com.sonar.sslr.api.Grammar;
 import com.sonar.sslr.api.Token;
@@ -52,19 +51,20 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
 
   private static class CSharpRecognizer implements LanguageFootprint {
 
+    @Override
     public Set<Detector> getDetectors() {
       Set<Detector> detectors = Sets.newHashSet();
 
       detectors.add(new EndWithDetector(0.95, '}', ';', '{'));
-      detectors.add(new KeywordsDetector(0.7, "||", "&&"));
-      detectors.add(new KeywordsDetector(0.3, CSharpKeyword.keywordValues()));
       detectors.add(new ContainsDetector(0.95, "++", "for(", "if(", "while(", "catch(", "switch(", "try{", "else{"));
+      detectors.add(new KeywordsDetector(0.7, "||", "&&"));
 
       return detectors;
     }
 
   }
 
+  @Override
   public void visitToken(Token token) {
     Trivia previousTrivia = null;
 
@@ -98,7 +98,7 @@ public class CommentedCodeCheck extends SquidCheck<Grammar> implements AstAndTok
   }
 
   private boolean previousLineIsCommentedCode(Trivia trivia, Trivia previousTrivia) {
-    return previousTrivia != null && (trivia.getToken().getLine() == previousTrivia.getToken().getLine() + 1)
+    return previousTrivia != null && trivia.getToken().getLine() == previousTrivia.getToken().getLine() + 1
       && isCommentedCode(previousTrivia.getToken().getValue());
   }
 
