@@ -13,7 +13,7 @@
 
   <name>Sonar C# Plugin :: Core</name>
   <description>Enable analysis and reporting on C# projects.</description>
-  <url>http://docs.codehaus.org/x/BIREDg</url>
+  <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
 
   <scm>
     <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
