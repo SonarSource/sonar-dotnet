@@ -39,10 +39,9 @@ namespace Tests.Diagnostics
         {
             var builder = ImmutableHashSet.CreateBuilder<int>();
 
-            return from trivia in syntaxTree.GetRoot().DescendantTrivia()
-                   where trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) &&
-                   trivia.ToFullString().Contains("Noncompliant")
-                   select trivia.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+            return from l in syntaxTree.GetText().Lines
+                   where l.ToString().Contains("Noncompliant")
+                   select l.LineNumber + 1;
         }
     }
 }

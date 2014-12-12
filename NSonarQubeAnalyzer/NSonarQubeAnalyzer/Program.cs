@@ -212,6 +212,10 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new UnusedLocalVariable());
             }
+            if (rules.Contains("CommentedCode"))
+            {
+                diagnosticAnalyzersBuilder.Add(new CommentedOutCode());
+            }
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();
