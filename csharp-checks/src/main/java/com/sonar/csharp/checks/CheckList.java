@@ -57,8 +57,8 @@ public final class CheckList {
       EmptyNestedBlockCheck.class,
       ParameterAssignedToCheck.class,
       UnusedLocalVariableCheck.class,
-
       CommentedCodeCheck.class,
+
       FunctionComplexityCheck.class,
       CommentRegularExpressionCheck.class);
   }
