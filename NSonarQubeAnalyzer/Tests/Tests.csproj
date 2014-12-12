@@ -111,6 +111,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\CommentRegularExpression.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\CommentedOutCode.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -192,6 +195,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlockTest.cs" />
     <Compile Include="Diagnostics\CommentedOutCodeTest.cs" />
     <Compile Include="Diagnostics\ParameterAssignedToTest.cs" />

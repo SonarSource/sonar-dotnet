@@ -119,6 +119,9 @@ public class CSharpSensor implements Sensor {
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(REPOSITORY_KEY)) {
       appendLine(sb, "    <Rule>");
       appendLine(sb, "      <Key>" + activeRule.getRuleKey() + "</Key>");
+      if (activeRule.getRule().getParent() != null) {
+        appendLine(sb, "      <ParentKey>" + activeRule.getRule().getParent().getKey() + "</ParentKey>");
+      }
       Map<String, String> parameters = effectiveParameters(activeRule);
       if (!parameters.isEmpty()) {
         appendLine(sb, "      <Parameters>");

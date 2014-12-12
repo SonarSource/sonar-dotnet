@@ -216,6 +216,40 @@ namespace NSonarQubeAnalyzer
             {
                 diagnosticAnalyzersBuilder.Add(new CommentedOutCode());
             }
+
+            var commentRegexpRules = from e in xmlIn.Descendants("Rule")
+                                     where "CommentRegularExpression".Equals(e.Elements("ParentKey").SingleOrDefault())
+                                     select e;
+            if (commentRegexpRules.Any())
+            {
+                var builder = ImmutableArray.CreateBuilder<CommentRegularExpressionRule>();
+                foreach (var commentRegexpRule in commentRegexpRules)
+                {
+                    string key = commentRegexpRule.Elements("Key").Single().Value;
+                    var parameters = commentRegexpRule.Descendants("Parameter");
+                    string message = (from e in parameters
+                                      where "message".Equals(e.Elements("Key").Single().Value)
+                                      select e.Elements("Value").Single().Value)
+                                  .Single();
+                    string regularExpression = (from e in parameters
+                                                where "regularExpression".Equals(e.Elements("Key").Single().Value)
+                                                select e.Elements("Value").Single().Value)
+                                  .Single();
+
+                    builder.Add(
+                        new CommentRegularExpressionRule
+                        {
+                            // TODO: Add rule description
+                            Descriptor = new DiagnosticDescriptor(key, "TODO", message, "SonarQube", DiagnosticSeverity.Warning, true),
+                            RegularExpression = regularExpression
+                        });
+
+                    var diagnostic = new CommentRegularExpression();
+                    diagnostic.Rules = builder.ToImmutable();
+                    diagnosticAnalyzersBuilder.Add(diagnostic);
+                }
+            }
+
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 
             var xmlOutSettings = new XmlWriterSettings();

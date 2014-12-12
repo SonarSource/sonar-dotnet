@@ -20,17 +20,17 @@
 package com.sonar.csharp.checks;
 
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.AbstractCommentRegularExpressionCheck;
 import org.sonar.check.Cardinality;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "CommentRegularExpression",
   cardinality = Cardinality.MULTIPLE,
   priority = Priority.MAJOR)
-public class CommentRegularExpressionCheck extends AbstractCommentRegularExpressionCheck<Grammar> {
+public class CommentRegularExpressionCheck extends SquidCheck<Grammar> {
 
   private static final String DEFAULT_REGULAR_EXPRESSION = "";
   private static final String DEFAULT_MESSAGE = "The regular expression matches this comment";
@@ -44,15 +44,5 @@ public class CommentRegularExpressionCheck extends AbstractCommentRegularExpress
     key = "message",
     defaultValue = "" + DEFAULT_MESSAGE)
   public String message = DEFAULT_MESSAGE;
-
-  @Override
-  public String getRegularExpression() {
-    return regularExpression;
-  }
-
-  @Override
-  public String getMessage() {
-    return message;
-  }
 
 }
