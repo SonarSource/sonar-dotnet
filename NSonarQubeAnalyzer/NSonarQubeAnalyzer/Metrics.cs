@@ -81,5 +81,18 @@ namespace NSonarQubeAnalyzer
         {
             return tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.ClassDeclaration)).Count();
         }
+
+        public int Accessors()
+        {
+            return tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        n.IsKind(SyntaxKind.GetAccessorDeclaration) ||
+                        n.IsKind(SyntaxKind.SetAccessorDeclaration) ||
+                        n.IsKind(SyntaxKind.AddAccessorDeclaration) ||
+                        n.IsKind(SyntaxKind.RemoveAccessorDeclaration))
+                .Count();
+        }
     }
 }

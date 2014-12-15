@@ -123,6 +123,22 @@ namespace Tests
             return MetricsFor(text).Classes();
         }
 
+        [TestMethod]
+        public void Accessors()
+        {
+            Accessors("").Should().Be(0);
+            Accessors("class MyClass { public int MyField; public MyClass() {} public int MyMethod() { return 42; } }").Should().Be(0);
+            Accessors("class MyClass { public int MyProperty { get; } }").Should().Be(1);
+            Accessors("class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
+            Accessors("class MyClass { public int MyProperty { get { return 0; } set { } } }").Should().Be(2);
+            Accessors("class MyClass { public event EventHandler OnSomething { add { } remove {} }").Should().Be(2);
+        }
+
+        private static int Accessors(string text)
+        {
+            return MetricsFor(text).Accessors();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));
