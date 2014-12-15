@@ -281,6 +281,8 @@ public class CSharpSensor implements Sensor {
 
           if ("Lines".equals(tagName)) {
             handleLinesMetricTag(sonarFile);
+          } else if ("Classes".equals(tagName)) {
+            handleClassesMetricTag(sonarFile);
           } else if ("Comments".equals(tagName)) {
             handleCommentsMetricTag(sonarFile);
           }
@@ -291,6 +293,11 @@ public class CSharpSensor implements Sensor {
     private void handleLinesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       double lines = Double.parseDouble(stream.getElementText());
       context.saveMeasure(sonarFile, CoreMetrics.LINES, lines);
+    }
+
+    private void handleClassesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double classes = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.CLASSES, classes);
     }
 
     private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {

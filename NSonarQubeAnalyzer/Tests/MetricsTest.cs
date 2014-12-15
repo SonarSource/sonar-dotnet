@@ -110,6 +110,19 @@ namespace Tests
             return MetricsFor(text).Comments(false);
         }
 
+        [TestMethod]
+        public void Classes()
+        {
+            Classes("").Should().Be(0);
+            Classes("class MyClass {}").Should().Be(1);
+            Classes("class MyClass1 {} namespace MyNamespace { class MyClass2 {} }").Should().Be(2);
+        }
+
+        private static int Classes(string text)
+        {
+            return MetricsFor(text).Classes();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

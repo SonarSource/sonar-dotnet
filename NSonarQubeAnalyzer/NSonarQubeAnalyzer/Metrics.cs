@@ -76,5 +76,10 @@ namespace NSonarQubeAnalyzer
                 trivia.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
                 trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
         }
+
+        public int Classes()
+        {
+            return tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.ClassDeclaration)).Count();
+        }
     }
 }

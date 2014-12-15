@@ -272,6 +272,7 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteStartElement("Metrics");
 
                     xmlOut.WriteElementString("Lines", metrics.Lines().ToString());
+                    xmlOut.WriteElementString("Classes", metrics.Classes().ToString());
 
                     FileComments comments = metrics.Comments(ignoreHeaderComments);
                     xmlOut.WriteStartElement("Comments");
