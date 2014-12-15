@@ -218,7 +218,7 @@ namespace NSonarQubeAnalyzer
             }
 
             var commentRegexpRules = from e in xmlIn.Descendants("Rule")
-                                     where "CommentRegularExpression".Equals(e.Elements("ParentKey").SingleOrDefault())
+                                     where "CommentRegularExpression".Equals((e.Elements("ParentKey").SingleOrDefault() ?? XElement.Parse("<Dummy />")).Value)
                                      select e;
             if (commentRegexpRules.Any())
             {
