@@ -139,6 +139,46 @@ namespace Tests
             return MetricsFor(text).Accessors();
         }
 
+        [TestMethod]
+        public void Statements()
+        {
+            Statements("").Should().Be(0);
+            Statements("class MyClass {}").Should().Be(0);
+            Statements("class MyClass { void MyMethod() {} }").Should().Be(0);
+            Statements("class MyClass { void MyMethod() { {} } }").Should().Be(0);
+            Statements("class MyClass { int MyMethod() { return 0; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { int l = 42; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { Console.WriteLine(); } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { ; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { foo: ; } }").Should().Be(2);
+            Statements("class MyClass { void MyMethod() { goto foo; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { break; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { continue; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { throw; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { yield return 42; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { yield break; } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { while (false) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { do {} while (false); } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { for (;;) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { foreach (var e in c) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { using (var e = new MyClass()) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { fixed (int* p = &pt.x) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { checked {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { unchecked {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { unsafe {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { if (false) {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { switch (v) { case 0: ; } } }").Should().Be(2);
+            Statements("class MyClass { void MyMethod() { try {} catch {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { try {} finally {} } }").Should().Be(1);
+            Statements("class MyClass { void MyMethod() { try {} catch {} finally {} } }").Should().Be(1);
+            Statements("class MyClass { int MyMethod() { int a = 42; Console.WriteLine(a); return a; } }").Should().Be(3);
+        }
+
+        private static int Statements(string text)
+        {
+            return MetricsFor(text).Statements();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));
