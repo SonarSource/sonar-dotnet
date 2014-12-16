@@ -179,6 +179,29 @@ namespace Tests
             return MetricsFor(text).Statements();
         }
 
+        [TestMethod]
+        public void Functions()
+        {
+            Functions("").Should().Be(0);
+            Functions("class MyClass { }").Should().Be(0);
+            Functions("abstract class MyClass { public abstract void MyMethod1(); }").Should().Be(0);
+            Functions("class MyClass { public int MyProperty1 { get; set; } }").Should().Be(0);
+            Functions("class MyClass { static MyClass() { } }").Should().Be(1);
+            Functions("class MyClass { public MyClass() { } }").Should().Be(1);
+            Functions("class MyClass { ~MyClass() { } }").Should().Be(1);
+            Functions("class MyClass { public void MyMethod2() { } }").Should().Be(1);
+            Functions("class MyClass { public static MyClass operator +(MyClass a) { return a; } }").Should().Be(1);
+            Functions("class MyClass { public int MyProperty2 { get { return 0; } } }").Should().Be(1);
+            Functions("class MyClass { public int MyProperty3 { set { } } }").Should().Be(1);
+            Functions("class MyClass { public int MyProperty4 { get { return 0; } set { } } }").Should().Be(2);
+            Functions("class MyClass { public event EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
+        }
+
+        private static int Functions(string text)
+        {
+            return MetricsFor(text).Functions();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

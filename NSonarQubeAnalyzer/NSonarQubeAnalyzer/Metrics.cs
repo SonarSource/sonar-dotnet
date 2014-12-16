@@ -99,5 +99,25 @@ namespace NSonarQubeAnalyzer
         {
             return tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n is StatementSyntax && !n.IsKind(SyntaxKind.Block)).Count();
         }
+
+        public int Functions()
+        {
+            return tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .Where(n => n.IsKind(SyntaxKind.Block) && IsFunction(n.Parent))
+                .Count();
+        }
+
+        private bool IsFunction(SyntaxNode node)
+        {
+            return node.IsKind(SyntaxKind.ConstructorDeclaration) ||
+                node.IsKind(SyntaxKind.DestructorDeclaration) ||
+                node.IsKind(SyntaxKind.MethodDeclaration) ||
+                node.IsKind(SyntaxKind.OperatorDeclaration) ||
+                node.IsKind(SyntaxKind.GetAccessorDeclaration) ||
+                node.IsKind(SyntaxKind.SetAccessorDeclaration) ||
+                node.IsKind(SyntaxKind.AddAccessorDeclaration) ||
+                node.IsKind(SyntaxKind.RemoveAccessorDeclaration);
+        }
     }
 }
