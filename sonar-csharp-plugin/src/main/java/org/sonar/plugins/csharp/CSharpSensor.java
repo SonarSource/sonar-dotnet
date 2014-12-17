@@ -301,28 +301,28 @@ public class CSharpSensor implements Sensor {
     }
 
     private void handleLinesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double lines = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.LINES, lines);
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.LINES, value);
     }
 
     private void handleClassesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double classes = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.CLASSES, classes);
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.CLASSES, value);
     }
 
     private void handleAccessorsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double accessors = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.ACCESSORS, accessors);
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.ACCESSORS, value);
     }
 
     private void handleStatementsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double statements = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, statements);
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, value);
     }
 
     private void handleFunctionsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double functions = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, functions);
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, value);
     }
 
     private void handlePublicApiMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
