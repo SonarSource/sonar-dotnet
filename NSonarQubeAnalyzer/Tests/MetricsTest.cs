@@ -287,6 +287,12 @@ namespace Tests
             Complexity("class MyClass { void MyMethod(int p) { var a = false; }").Should().Be(1);
             Complexity("class MyClass { void MyMethod(int p) { var a = false && false; }").Should().Be(2);
             Complexity("class MyClass { void MyMethod(int p) { var a = false || true; }").Should().Be(2);
+            Complexity("class MyClass { int MyProperty { get; set; } }").Should().Be(0);
+            Complexity("class MyClass { int MyProperty { get {} set {} } }").Should().Be(2);
+            Complexity("class MyClass { public MyClass() { } }").Should().Be(1);
+            Complexity("class MyClass { ~MyClass() { } }").Should().Be(1);
+            Complexity("class MyClass { public static MyClass operator +(MyClass a) { return a; } }").Should().Be(1);
+            Complexity("class MyClass { public event EventHandler OnSomething { add { } remove {} } }").Should().Be(2);
         }
 
         private static int Complexity(string text)
