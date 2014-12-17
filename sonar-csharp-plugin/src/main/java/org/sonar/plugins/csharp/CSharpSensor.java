@@ -295,6 +295,8 @@ public class CSharpSensor implements Sensor {
             handlePublicUndocumentedApiMetricTag(sonarFile);
           } else if ("Comments".equals(tagName)) {
             handleCommentsMetricTag(sonarFile);
+          } else if ("LinesOfCode".equals(tagName)) {
+            handleLinesOfCodeMetricTag(sonarFile);
           }
         }
       }
@@ -345,15 +347,15 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("NoSonar".equals(tagName)) {
-            handleNoSonarCommentsMetric(sonarFile);
+            handleNoSonarCommentsMetricTag(sonarFile);
           } else if ("NonBlank".equals(tagName)) {
-            handleNonBlankCommentsMetric(sonarFile);
+            handleNonBlankCommentsMetricTag(sonarFile);
           }
         }
       }
     }
 
-    private void handleNoSonarCommentsMetric(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleNoSonarCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
 
       while (stream.hasNext()) {
@@ -376,8 +378,8 @@ public class CSharpSensor implements Sensor {
       noSonarFilter.addResource(sonarFile, builder.build());
     }
 
-    private void handleNonBlankCommentsMetric(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      double lines = 0;
+    private void handleNonBlankCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double value = 0;
       FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
 
       while (stream.hasNext()) {
@@ -389,7 +391,7 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("Line".equals(tagName)) {
-            lines++;
+            value++;
 
             int line = Integer.parseInt(stream.getElementText());
             fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
@@ -400,7 +402,34 @@ public class CSharpSensor implements Sensor {
       }
 
       fileLinesContext.save();
-      context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, lines);
+      context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, value);
+    }
+
+    private void handleLinesOfCodeMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double value = 0;
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "LinesOfCode".equals(stream.getLocalName())) {
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Line".equals(tagName)) {
+            value++;
+
+            int line = Integer.parseInt(stream.getElementText());
+            fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
+          } else {
+            throw new IllegalArgumentException();
+          }
+        }
+      }
+
+      fileLinesContext.save();
+      context.saveMeasure(sonarFile, CoreMetrics.NCLOC, value);
     }
 
     private void handleIssuesTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {

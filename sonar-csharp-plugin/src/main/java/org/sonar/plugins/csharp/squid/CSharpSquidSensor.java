@@ -24,8 +24,6 @@ import com.sonar.csharp.checks.CheckList;
 import com.sonar.csharp.squid.CSharpConfiguration;
 import com.sonar.csharp.squid.api.CSharpMetric;
 import com.sonar.csharp.squid.api.source.SourceMember;
-import com.sonar.csharp.squid.metric.CSharpFileLinesVisitor;
-import com.sonar.csharp.squid.metric.FileProvider;
 import com.sonar.csharp.squid.scanner.CSharpAstScanner;
 import com.sonar.sslr.api.Grammar;
 import org.slf4j.Logger;
@@ -113,8 +111,6 @@ public final class CSharpSquidSensor implements Sensor {
 
     Collection<SquidAstVisitor<Grammar>> squidChecks = annotationCheckFactory.getChecks();
     List<SquidAstVisitor<Grammar>> visitors = Lists.newArrayList(squidChecks);
-    // TODO: remove the following line & class once SSLR Squid bridge computes NCLOC_DATA_KEY & COMMENT_LINES_DATA_KEY
-    visitors.add(new CSharpFileLinesVisitor(new FileProvider(project), fileLinesContextFactory));
     scanner = CSharpAstScanner.create(createParserConfiguration(project), visitors.toArray(new SquidAstVisitor[visitors.size()]));
     scanner.scanFiles(filesToAnalyze());
 
@@ -155,7 +151,6 @@ public final class CSharpSquidSensor implements Sensor {
   }
 
   private void saveMeasures(Resource sonarFile, SourceCode squidFile) {
-    context.saveMeasure(sonarFile, CoreMetrics.NCLOC, squidFile.getDouble(CSharpMetric.LINES_OF_CODE));
     context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(CSharpMetric.COMPLEXITY));
   }
 

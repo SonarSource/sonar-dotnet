@@ -29,6 +29,21 @@ namespace Tests
         }
 
         [TestMethod]
+        public void LinesOfCode()
+        {
+            LinesOfCode("").Should().BeEquivalentTo();
+            LinesOfCode("/* ... */\n").Should().BeEquivalentTo();
+            LinesOfCode("namespace { }").Should().BeEquivalentTo(1);
+            LinesOfCode("namespace \n { \n }").Should().BeEquivalentTo(1, 2, 3);
+            LinesOfCode("public class MyClass { public MyClass() { Console.WriteLine(@\"line1 \n line2 \n line3 \n line 4\"); } }").Should().BeEquivalentTo(1, 2, 3, 4);
+        }
+
+        private static IImmutableSet<int> LinesOfCode(string text)
+        {
+            return MetricsFor(text).LinesOfCode();
+        }
+
+        [TestMethod]
         public void CommentsWithoutHeaders()
         {
             CommentsWithoutHeaders("").NonBlank.Should().BeEmpty();

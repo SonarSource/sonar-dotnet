@@ -38,6 +38,21 @@ namespace NSonarQubeAnalyzer
             return tree.GetLineSpan(TextSpan.FromBounds(tree.Length, tree.Length)).EndLinePosition.Line + 1;
         }
 
+        public IImmutableSet<int> LinesOfCode()
+        {
+            return tree.GetCompilationUnitRoot()
+                .DescendantTokens()
+                .Where(t => !t.IsKind(SyntaxKind.EndOfFileToken))
+                .SelectMany(
+                    t =>
+                    {
+                        var start = t.GetLocation().GetLineSpan().StartLinePosition.Line + 1;
+                        var end = t.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+                        return Enumerable.Range(start, end - start + 1);
+                    })
+                .ToImmutableHashSet();
+        }
+
         public FileComments Comments(bool ignoreHeaderComments)
         {
             var noSonar = ImmutableHashSet.CreateBuilder<int>();

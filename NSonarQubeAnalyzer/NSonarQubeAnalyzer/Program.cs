@@ -295,6 +295,13 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteEndElement();
                     xmlOut.WriteEndElement();
 
+                    xmlOut.WriteStartElement("LinesOfCode");
+                    foreach (int line in metrics.LinesOfCode())
+                    {
+                        xmlOut.WriteElementString("Line", line.ToString());
+                    }
+                    xmlOut.WriteEndElement();
+
                     xmlOut.WriteEndElement();
 
                     xmlOut.WriteStartElement("Issues");
