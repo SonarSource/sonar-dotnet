@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class UseCurlyBraces
     {
         public UseCurlyBraces()

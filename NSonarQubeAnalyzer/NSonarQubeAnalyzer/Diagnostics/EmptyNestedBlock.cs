@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using System.Collections.Immutable;
-using System.Threading;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System.Collections.Immutable;
+    using System.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class EmptyNestedBlock : DiagnosticAnalyzer
+    public class EmptyNestedBlock : DiagnosticsRule
     {
         internal const string DiagnosticId = "S108";
         internal const string Description = "Nested blocks of code should not be left empty";
@@ -23,6 +17,17 @@ namespace NSonarQubeAnalyzer
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
+
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "S108";
+            }
+        }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 

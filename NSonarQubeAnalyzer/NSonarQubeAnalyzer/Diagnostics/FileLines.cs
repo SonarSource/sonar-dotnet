@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System.Threading;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System.Collections.Immutable;
+    using System.Linq;
+    using System.Xml.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class FileLines : DiagnosticAnalyzer
+    public class FileLines : DiagnosticsRule
     {
         internal const string DiagnosticId = "FileLoc";
         internal const string Description = "File should not have too many lines";
@@ -25,9 +18,36 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "FileLoc";
+            }
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        public int Maximum { get; set; }
+
+        /// <summary>
+        /// Configure the rule from the supplied settings
+        /// </summary>
+        /// <param name="settings">XML settings</param>
+        public override void Configure(XDocument settings)
+        {
+            var parameters = from e in settings.Descendants("Rule")
+                             where this.RuleId.Equals(e.Elements("Key").Single().Value)
+                             select e.Descendants("Parameter");
+            var maximum = (from e in parameters
+                           where "maximumFileLocThreshold".Equals(e.Elements("Key").Single().Value)
+                           select e.Elements("Value").Single().Value).Single();
+
+            this.Maximum = int.Parse(maximum);
+        }
 
         public override void Initialize(AnalysisContext context)
         {
@@ -36,9 +56,9 @@ namespace NSonarQubeAnalyzer
                 {
                     int lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
 
-                    if (lines > Maximum)
+                    if (lines > this.Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.None, Maximum, lines));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.None, this.Maximum, lines));
                     }
                 },
                 SyntaxKind.CompilationUnit);

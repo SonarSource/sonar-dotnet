@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
-using NSonarQubeAnalyzer;
-using System.Collections.Immutable;
-using FluentAssertions;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
+    using FluentAssertions;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using NSonarQubeAnalyzer;
+    using System.Collections.Generic;
+    using System.Collections.Immutable;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     public class Verifier
     {
         public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)

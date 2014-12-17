@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
+    using System;
+
     public class ParameterAssignedTo
     {
         void f1(int a)

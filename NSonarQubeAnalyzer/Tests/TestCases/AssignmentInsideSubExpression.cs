@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
+    using System.Collections.Generic;
+
     public class AssignmentInsideSubExpression
     {
         void Foo(int a)
