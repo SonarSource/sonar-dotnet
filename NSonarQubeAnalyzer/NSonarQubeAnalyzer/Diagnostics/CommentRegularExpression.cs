@@ -10,8 +10,9 @@
 
     public class CommentRegularExpressionRule
     {
-        public DiagnosticDescriptor Descriptor;
-        public string RegularExpression;
+        public DiagnosticDescriptor Descriptor { get; set; }
+
+        public string RegularExpression { get; set; }
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -39,9 +40,7 @@
         public override void Configure(XDocument settings)
         {
             var commentRegexpRules = from e in settings.Descendants("Rule")
-                                     where
-                                         this.RuleId.Equals(
-                                             (e.Elements("ParentKey").SingleOrDefault() ?? XElement.Parse("<Dummy />")).Value)
+                                     where this.RuleId.Equals(e.Elements("Key").Single().Value)
                                      select e;
 
             if (!commentRegexpRules.Any())
@@ -53,7 +52,7 @@
 
             foreach (var commentRegexpRule in commentRegexpRules)
             {
-                string key = commentRegexpRule.Elements("Key").Single().Value;
+                string key = commentRegexpRule.Elements("ChildKey").Single().Value;
                 var parameters = commentRegexpRule.Descendants("Parameter");
                 string message =
                     (from e in parameters
@@ -71,9 +70,9 @@
                             new DiagnosticDescriptor(key, "TODO", message, "SonarQube", DiagnosticSeverity.Warning, true),
                         RegularExpression = regularExpression
                     });
-
-                this.Rules = builder.ToImmutable();
             }
+
+            this.Rules = builder.ToImmutable();
         }
 
         public override void Initialize(AnalysisContext context)
