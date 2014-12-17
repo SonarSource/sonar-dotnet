@@ -147,8 +147,9 @@ namespace NSonarQubeAnalyzer
 
             var diagnosticAnalyzersBuilder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
+            var superType = typeof(DiagnosticsRule);
             var activatedRules = from type in Assembly.GetExecutingAssembly().ExportedTypes
-                                 where typeof(DiagnosticsRule).IsAssignableFrom(type)
+                                 where superType.IsAssignableFrom(type) && !type.IsAbstract
                                  let rule = (DiagnosticsRule)Activator.CreateInstance(type)
                                  where rules.Contains(rule.RuleId)
                                  select rule;
