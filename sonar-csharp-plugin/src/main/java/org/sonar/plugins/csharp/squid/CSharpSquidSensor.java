@@ -40,7 +40,6 @@ import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Violation;
 import org.sonar.api.scan.filesystem.FileQuery;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
@@ -70,8 +69,6 @@ public final class CSharpSquidSensor implements Sensor {
   private final CSharp cSharp;
   private final ModuleFileSystem fileSystem;
   private final AnnotationCheckFactory annotationCheckFactory;
-  private final FileLinesContextFactory fileLinesContextFactory;
-
   private Project project;
   private SensorContext context;
   private AstScanner<Grammar> scanner;
@@ -87,8 +84,6 @@ public final class CSharpSquidSensor implements Sensor {
     this.settings = settings;
     this.cSharp = cSharp;
     this.fileSystem = fileSystem;
-    this.fileLinesContextFactory = fileLinesContextFactory;
-
     Collection<Class> allChecks = CSharpCheck.toCollection(cSharpChecks);
     allChecks.addAll(CheckList.getChecks());
     this.annotationCheckFactory = AnnotationCheckFactory.create(profile, CSharpSquidConstants.REPOSITORY_KEY, allChecks);
@@ -144,14 +139,7 @@ public final class CSharpSquidSensor implements Sensor {
 
       /* Check messages */
       saveViolations(squidFile, sonarFile);
-
-      /* Metrics at the file level */
-      saveMeasures(sonarFile, squidFile);
     }
-  }
-
-  private void saveMeasures(Resource sonarFile, SourceCode squidFile) {
-    context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, squidFile.getDouble(CSharpMetric.COMPLEXITY));
   }
 
   private void saveViolations(SourceCode squidFile, File sonarFile) {

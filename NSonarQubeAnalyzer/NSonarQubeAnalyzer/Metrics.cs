@@ -187,5 +187,36 @@ namespace NSonarQubeAnalyzer
 
             return builder.ToImmutable();
         }
+
+        public int Complexity()
+        {
+            return tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .Where(
+                    n =>
+                        // TODO What about the null coalescing operator?
+                        n.IsKind(SyntaxKind.IfStatement) ||
+                        n.IsKind(SyntaxKind.SwitchStatement) ||
+                        n.IsKind(SyntaxKind.LabeledStatement) ||
+                        n.IsKind(SyntaxKind.WhileStatement) ||
+                        n.IsKind(SyntaxKind.DoStatement) ||
+                        n.IsKind(SyntaxKind.ForStatement) ||
+                        n.IsKind(SyntaxKind.ForEachStatement) ||
+                        n.IsKind(SyntaxKind.LogicalAndExpression) ||
+                        n.IsKind(SyntaxKind.LogicalOrExpression) ||
+                        n.IsKind(SyntaxKind.CaseSwitchLabel) ||
+                        (n.IsKind(SyntaxKind.ReturnStatement) && !IsLastStatement(n)) ||
+                        (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))))
+                .Count();
+        }
+
+        // TODO What about lambdas?
+        private bool IsLastStatement(SyntaxNode node)
+        {
+            var nextToken = node.GetLastToken().GetNextToken();
+            return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
+                nextToken.Parent.IsKind(SyntaxKind.Block) &&
+                IsFunction(nextToken.Parent.Parent);
+        }
     }
 }

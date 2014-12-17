@@ -266,6 +266,34 @@ namespace Tests
             return MetricsFor(text).PublicUndocumentedApi();
         }
 
+        [TestMethod]
+        public void Complexity()
+        {
+            Complexity("").Should().Be(0);
+            Complexity("class MyClass { }").Should().Be(0);
+            Complexity("abstract class MyClass { abstract void MyMethod(); }").Should().Be(0);
+            Complexity("class MyClass { void MyMethod() { } }").Should().Be(1);
+            Complexity("class MyClass { void MyMethod() { return; } }").Should().Be(1);
+            Complexity("class MyClass { void MyMethod() { return; return; } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod() { { return; } } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod() { if (false) { } } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod() { if (false) { } else { } } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { switch (p) { default: break; } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { switch (p) { case 0: break; default: break; } }").Should().Be(3);
+            Complexity("class MyClass { void MyMethod(int p) { foo: ; }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { do { } while (false); }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { for (;;) { } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(List<int> p) { foreach (var i in p) { } }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { var a = false; }").Should().Be(1);
+            Complexity("class MyClass { void MyMethod(int p) { var a = false && false; }").Should().Be(2);
+            Complexity("class MyClass { void MyMethod(int p) { var a = false || true; }").Should().Be(2);
+        }
+
+        private static int Complexity(string text)
+        {
+            return MetricsFor(text).Complexity();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));
