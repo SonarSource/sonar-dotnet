@@ -289,6 +289,10 @@ public class CSharpSensor implements Sensor {
             handleStatementsMetricTag(sonarFile);
           } else if ("Functions".equals(tagName)) {
             handleFunctionsMetricTag(sonarFile);
+          } else if ("PublicApi".equals(tagName)) {
+            handlePublicApiMetricTag(sonarFile);
+          } else if ("PublicUndocumentedApi".equals(tagName)) {
+            handlePublicUndocumentedApiMetricTag(sonarFile);
           } else if ("Comments".equals(tagName)) {
             handleCommentsMetricTag(sonarFile);
           }
@@ -319,6 +323,16 @@ public class CSharpSensor implements Sensor {
     private void handleFunctionsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       double functions = Double.parseDouble(stream.getElementText());
       context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, functions);
+    }
+
+    private void handlePublicApiMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_API, value);
+    }
+
+    private void handlePublicUndocumentedApiMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      double value = Double.parseDouble(stream.getElementText());
+      context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API, value);
     }
 
     private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {

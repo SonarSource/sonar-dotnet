@@ -202,6 +202,55 @@ namespace Tests
             return MetricsFor(text).Functions();
         }
 
+        [TestMethod]
+        public void PublicApi()
+        {
+            PublicApi("").Should().Be(0);
+            PublicApi("class MyClass { }").Should().Be(0);
+            PublicApi("public class MyClass { }").Should().Be(1);
+            PublicApi("namespace MyNS { }").Should().Be(0);
+            PublicApi("public class MyClass { }").Should().Be(1);
+            PublicApi("public class MyClass { public void MyMethod() { } }").Should().Be(2);
+            PublicApi("private class MyClass { public void MyMethod() { } }").Should().Be(0);
+            PublicApi("public class MyClass { public int MyField; }").Should().Be(2);
+            PublicApi("public interface MyInterface { public class MyClass { } }").Should().Be(2);
+            PublicApi("namespace MyNS { public class MyClass { } }").Should().Be(1);
+            PublicApi("public class MyClass { public event EventHandler OnSomething(); }").Should().Be(2);
+            PublicApi("public class MyClass { public delegate void Foo(); }").Should().Be(2);
+            PublicApi("public class MyClass { public static MyClass operator +(MyClass a) { return a; } }").Should().Be(2);
+            PublicApi("public class MyClass { public class MyClass2 { public int MyField; } }").Should().Be(3);
+            PublicApi("public enum MyEnum { MyValue1, MyValue2 }").Should().Be(1);
+            PublicApi("public struct MyStruct { public int MyField; }").Should().Be(2);
+            PublicApi("public class MyClass { public MyClass this[int i] { return null; } }").Should().Be(2);
+            PublicApi("public class MyClass { public int MyProperty { get; set; } }").Should().Be(2);
+            PublicApi("public class MyClass { void MyMethod() { } }").Should().Be(1);
+            PublicApi("public class MyClass { private void MyMethod() { } }").Should().Be(1);
+            PublicApi("public class MyClass { protected MyMethod() { } }").Should().Be(1);
+        }
+
+        private static int PublicApi(string text)
+        {
+            return MetricsFor(text).PublicApi();
+        }
+
+        [TestMethod]
+        public void PublicUndocumentedApi()
+        {
+            PublicUndocumentedApi("").Should().Be(0);
+            PublicUndocumentedApi("class MyClass { }").Should().Be(0);
+            PublicUndocumentedApi("public class MyClass { }").Should().Be(1);
+            PublicUndocumentedApi("/* ... */ public class MyClass { }").Should().Be(0);
+            PublicUndocumentedApi("// ... \n public class MyClass { }").Should().Be(0);
+            PublicUndocumentedApi("public class MyClass { \n public int MyField; }").Should().Be(2);
+            PublicUndocumentedApi("public class MyClass { \n /* ... */ public int MyField; }").Should().Be(1);
+            PublicUndocumentedApi("/// ... \n public class MyClass { \n /* ... */ public int MyField; }").Should().Be(0);
+        }
+
+        private static int PublicUndocumentedApi(string text)
+        {
+            return MetricsFor(text).PublicUndocumentedApi();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

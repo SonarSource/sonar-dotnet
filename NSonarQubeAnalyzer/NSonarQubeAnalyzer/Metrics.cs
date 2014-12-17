@@ -119,5 +119,58 @@ namespace NSonarQubeAnalyzer
                 node.IsKind(SyntaxKind.AddAccessorDeclaration) ||
                 node.IsKind(SyntaxKind.RemoveAccessorDeclaration);
         }
+
+        public int PublicApi()
+        {
+            return PublicApiNodes().Count();
+        }
+
+        public int PublicUndocumentedApi()
+        {
+            return PublicApiNodes()
+                .Where(
+                    n =>
+                        !n.GetLeadingTrivia()
+                        .Where(t => IsComment(t))
+                        .Any())
+                .Count();
+        }
+
+        private IEnumerable<SyntaxNode> PublicApiNodes()
+        {
+            var builder = ImmutableArray.CreateBuilder<SyntaxNode>();
+
+            var toVisit = new Stack<SyntaxNode>();
+            var visited = new HashSet<SyntaxNode>();
+
+            foreach (var member in tree.GetCompilationUnitRoot().Members)
+            {
+                toVisit.Push(member);
+            }
+
+            while (toVisit.Any())
+            {
+                var member = toVisit.Pop();
+                visited.Add(member);
+
+                var isPublic = member.ChildTokens().Where(t => t.IsKind(SyntaxKind.PublicKeyword)).Any();
+
+                if (isPublic)
+                {
+                    builder.Add(member);
+                }
+
+                if (isPublic || member.IsKind(SyntaxKind.NamespaceDeclaration))
+                {
+                    var children = member.ChildNodes().OfType<MemberDeclarationSyntax>();
+                    foreach (var child in children)
+                    {
+                        toVisit.Push(child);
+                    }
+                }
+            }
+
+            return builder.ToImmutable();
+        }
     }
 }

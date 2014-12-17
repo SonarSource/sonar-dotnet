@@ -276,6 +276,8 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteElementString("Accessors", metrics.Accessors().ToString());
                     xmlOut.WriteElementString("Statements", metrics.Statements().ToString());
                     xmlOut.WriteElementString("Functions", metrics.Functions().ToString());
+                    xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString());
+                    xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString());
 
                     FileComments comments = metrics.Comments(ignoreHeaderComments);
                     xmlOut.WriteStartElement("Comments");
