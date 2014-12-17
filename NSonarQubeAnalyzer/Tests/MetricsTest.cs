@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Immutable;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
-
-namespace Tests
+﻿namespace Tests
 {
+    using FluentAssertions;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NSonarQubeAnalyzer;
+    using System.Collections.Immutable;
+
     [TestClass]
     public class MetricsTest
     {

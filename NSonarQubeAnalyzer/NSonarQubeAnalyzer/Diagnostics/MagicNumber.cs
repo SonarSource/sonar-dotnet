@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System.Threading;
-using System.Text.RegularExpressions;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System;
+    using System.Collections.Immutable;
+    using System.Linq;
+    using System.Xml.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class MagicNumber : DiagnosticAnalyzer
+    public class MagicNumber : DiagnosticsRule
     {
         internal const string DiagnosticId = "MagicNumber";
         internal const string Description = "Magic number should not be used";
@@ -26,9 +20,38 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "MagicNumber";
+            }
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public IImmutableSet<string> Exceptions;
+        public IImmutableSet<string> Exceptions { get; set; }
+
+        /// <summary>
+        /// Configure the rule from the supplied settings
+        /// </summary>
+        /// <param name="settings">XML settings</param>
+        public override void Configure(XDocument settings)
+        {
+            var parameters = from e in settings.Descendants("Rule")
+                             where this.RuleId.Equals(e.Elements("Key").Single().Value)
+                             select e.Descendants("Parameter");
+            var exceptions = (from e in parameters
+                              where "exceptions".Equals(e.Elements("Key").Single().Value)
+                              select e.Elements("Value").Single().Value).Single();
+            this.Exceptions =
+                exceptions.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(e => e.Trim())
+                    .ToImmutableHashSet();
+        }
 
         public override void Initialize(AnalysisContext context)
         {
@@ -42,7 +65,7 @@ namespace NSonarQubeAnalyzer
                           e.IsKind(SyntaxKind.VariableDeclarator) ||
                           e.IsKind(SyntaxKind.EnumDeclaration) ||
                           e.IsKind(SyntaxKind.Attribute)) &&
-                        !Exceptions.Contains(literalNode.Token.Text))
+                        !this.Exceptions.Contains(literalNode.Token.Text))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation()));
                     }

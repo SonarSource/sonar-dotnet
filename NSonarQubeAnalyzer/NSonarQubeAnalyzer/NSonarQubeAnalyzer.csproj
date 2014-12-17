@@ -123,12 +123,15 @@
     <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
     <Compile Include="Diagnostics\SwitchWithoutDefault.cs" />
+    <Compile Include="DiagnosticsRule.cs" />
     <Compile Include="Metrics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

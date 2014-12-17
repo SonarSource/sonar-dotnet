@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System.Threading;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System.Collections.Immutable;
+    using System.Linq;
+    using System.Xml.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TooManyParameters : DiagnosticAnalyzer
+    public class TooManyParameters : DiagnosticsRule
     {
         internal const string DiagnosticId = "S107";
         internal const string Description = "Functions should not have too many parameters";
@@ -25,9 +19,37 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "S107";
+            }
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        public int Maximum { get; set; }
+
+        /// <summary>
+        /// Configure the rule from the supplied settings
+        /// </summary>
+        /// <param name="settings">XML settings</param>
+        public override void Configure(XDocument settings)
+        {
+            var parameters = from e in settings.Descendants("Rule")
+                             where this.RuleId.Equals(e.Elements("Key").Single().Value)
+                             select e.Descendants("Parameter");
+            var maximum =
+                (from e in parameters
+                 where "max".Equals(e.Elements("Key").Single().Value)
+                 select e.Elements("Value").Single().Value).Single();
+
+            this.Maximum = int.Parse(maximum);
+        }
 
         public override void Initialize(AnalysisContext context)
         {
@@ -37,9 +59,9 @@ namespace NSonarQubeAnalyzer
                     var parameterListNode = (ParameterListSyntax)c.Node;
                     int parameters = parameterListNode.Parameters.Count;
 
-                    if (parameters > Maximum)
+                    if (parameters > this.Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, parameterListNode.GetLocation(), Maximum, parameters, ExtractName(parameterListNode)));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, parameterListNode.GetLocation(), this.Maximum, parameters, ExtractName(parameterListNode)));
                     }
                 },
                 SyntaxKind.ParameterList);

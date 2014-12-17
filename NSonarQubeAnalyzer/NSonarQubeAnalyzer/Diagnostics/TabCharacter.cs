@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System.Threading;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using Microsoft.CodeAnalysis.Text;
+    using System.Collections.Immutable;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class TabCharacter : DiagnosticAnalyzer
+    public class TabCharacter : DiagnosticsRule
     {
         internal const string DiagnosticId = "TabCharacter";
         internal const string Description = "Tabulation character should not be used";
@@ -24,6 +15,17 @@ namespace NSonarQubeAnalyzer
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
+
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "TabCharacter";
+            }
+        }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
