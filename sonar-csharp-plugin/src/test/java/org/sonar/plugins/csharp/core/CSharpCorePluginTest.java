@@ -47,7 +47,7 @@ public class CSharpCorePluginTest {
       CSharpSensor.class);
 
     assertThat(new CSharpCorePlugin().getExtensions()).hasSize(
-      9
+      8
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size());
