@@ -227,6 +227,7 @@
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitchTest.cs" />
     <Compile Include="Diagnostics\SwitchWithoutDefaultTest.cs" />
     <Compile Include="Diagnostics\Verifier.cs" />
+    <Compile Include="DistrubtionTest.cs" />
     <Compile Include="MetricsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

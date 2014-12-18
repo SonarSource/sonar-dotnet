@@ -117,10 +117,14 @@ namespace NSonarQubeAnalyzer
 
         public int Functions()
         {
+            return FunctionNodes().Count();
+        }
+
+        public IEnumerable<SyntaxNode> FunctionNodes()
+        {
             return tree.GetCompilationUnitRoot()
                 .DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.Block) && IsFunction(n.Parent))
-                .Count();
+                .Where(n => n.IsKind(SyntaxKind.Block) && IsFunction(n.Parent));
         }
 
         private static bool IsFunction(SyntaxNode node)
@@ -222,6 +226,16 @@ namespace NSonarQubeAnalyzer
             return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
                 nextToken.Parent.IsKind(SyntaxKind.Block) &&
                 IsFunction(nextToken.Parent.Parent);
+        }
+
+        public Distribution FunctionComplexityDistribution()
+        {
+            var distribution = new Distribution(1, 2, 4, 6, 8, 10, 12);
+            foreach (var node in FunctionNodes())
+            {
+                distribution.Add(Complexity(node));
+            }
+            return distribution;
         }
     }
 }

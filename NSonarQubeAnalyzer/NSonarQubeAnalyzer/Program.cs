@@ -292,7 +292,16 @@ namespace NSonarQubeAnalyzer
                     xmlOut.WriteElementString("Functions", metrics.Functions().ToString());
                     xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString());
                     xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString());
-                    xmlOut.WriteElementString("Complexity", metrics.Complexity().ToString());
+
+                    var complexity = metrics.Complexity();
+                    xmlOut.WriteElementString("Complexity", complexity.ToString());
+
+                    // TODO This is a bit ridiculous, but is how SonarQube works
+                    var fileComplexityDistribution = new Distribution(0, 5, 10, 20, 30, 60, 90);
+                    fileComplexityDistribution.Add(complexity);
+                    xmlOut.WriteElementString("FileComplexityDistribution", fileComplexityDistribution.ToString());
+
+                    xmlOut.WriteElementString("FunctionComplexityDistribution", metrics.FunctionComplexityDistribution().ToString());
 
                     FileComments comments = metrics.Comments(ignoreHeaderComments);
                     xmlOut.WriteStartElement("Comments");

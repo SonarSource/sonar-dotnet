@@ -39,6 +39,7 @@ import org.sonar.api.issue.Issuable.IssueBuilder;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
@@ -295,6 +296,10 @@ public class CSharpSensor implements Sensor {
             handlePublicUndocumentedApiMetricTag(sonarFile);
           } else if ("Complexity".equals(tagName)) {
             handleComplexityMetricTag(sonarFile);
+          } else if ("FileComplexityDistribution".equals(tagName)) {
+            handleFileComplexityDistributionMetricTag(sonarFile);
+          } else if ("FunctionComplexityDistribution".equals(tagName)) {
+            handleFunctionComplexityDistributionMetricTag(sonarFile);
           } else if ("Comments".equals(tagName)) {
             handleCommentsMetricTag(sonarFile);
           } else if ("LinesOfCode".equals(tagName)) {
@@ -342,6 +347,16 @@ public class CSharpSensor implements Sensor {
     private void handleComplexityMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
       context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, value);
+    }
+
+    private void handleFileComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      String value = stream.getElementText();
+      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value));
+    }
+
+    private void handleFunctionComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+      String value = stream.getElementText();
+      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value));
     }
 
     private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {

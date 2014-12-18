@@ -124,6 +124,7 @@
     <Compile Include="Diagnostics\BreakOutsideSwitch.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitch.cs" />
     <Compile Include="Diagnostics\SwitchWithoutDefault.cs" />
+    <Compile Include="Distribution.cs" />
     <Compile Include="Metrics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

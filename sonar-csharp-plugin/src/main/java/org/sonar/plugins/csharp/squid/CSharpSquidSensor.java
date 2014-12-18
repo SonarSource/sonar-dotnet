@@ -35,7 +35,6 @@ import org.sonar.api.checks.AnnotationCheckFactory;
 import org.sonar.api.config.Settings;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.measures.RangeDistributionBuilder;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.File;
@@ -158,7 +157,6 @@ public final class CSharpSquidSensor implements Sensor {
   private void saveFilesComplexityDistribution(File sonarFile, SourceFile squidFile) {
     RangeDistributionBuilder complexityDistribution = new RangeDistributionBuilder(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, FILES_DISTRIB_BOTTOM_LIMITS);
     complexityDistribution.add(squidFile.getDouble(CSharpMetric.COMPLEXITY));
-    context.saveMeasure(sonarFile, complexityDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
   }
 
   private void saveMethodsComplexityDistribution(File sonarFile, SourceFile squidFile) {
@@ -169,8 +167,6 @@ public final class CSharpSquidSensor implements Sensor {
     for (SourceCode squidMethod : squidMethods) {
       complexityMethodDistribution.add(squidMethod.getDouble(CSharpMetric.COMPLEXITY));
     }
-
-    context.saveMeasure(sonarFile, complexityMethodDistribution.build().setPersistenceMode(PersistenceMode.MEMORY));
   }
 
 }
