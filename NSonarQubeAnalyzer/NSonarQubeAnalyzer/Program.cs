@@ -249,6 +249,20 @@ namespace NSonarQubeAnalyzer
                     diagnosticAnalyzersBuilder.Add(diagnostic);
                 }
             }
+            if (rules.Contains("FunctionComplexity"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "FunctionComplexity".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var maximum = (from e in parameters
+                               where "maximumFunctionComplexityThreshold".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new FunctionComplexity();
+                diagnostic.Maximum = int.Parse(maximum);
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
 
             var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
 

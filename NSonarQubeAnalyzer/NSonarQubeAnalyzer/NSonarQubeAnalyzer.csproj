@@ -99,6 +99,7 @@
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
     <Compile Include="Diagnostics\CommentedOutCode.cs" />
+    <Compile Include="Diagnostics\FunctionComplexity.cs" />
     <Compile Include="Diagnostics\ParameterAssignedTo.cs" />
     <Compile Include="Diagnostics\ExpressionComplexity.cs" />
     <Compile Include="Diagnostics\MagicNumber.cs" />

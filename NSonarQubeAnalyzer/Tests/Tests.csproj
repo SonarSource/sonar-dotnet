@@ -111,6 +111,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\FunctionComplexity.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\CommentRegularExpression.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -198,6 +201,7 @@
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlockTest.cs" />
     <Compile Include="Diagnostics\CommentedOutCodeTest.cs" />
+    <Compile Include="Diagnostics\FunctionComplexityTest.cs" />
     <Compile Include="Diagnostics\ParameterAssignedToTest.cs" />
     <Compile Include="Diagnostics\ExpressionComplexityTest.cs" />
     <Compile Include="Diagnostics\MagicNumberTest.cs" />

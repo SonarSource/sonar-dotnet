@@ -123,7 +123,7 @@ namespace NSonarQubeAnalyzer
                 .Count();
         }
 
-        private bool IsFunction(SyntaxNode node)
+        private static bool IsFunction(SyntaxNode node)
         {
             return node.IsKind(SyntaxKind.ConstructorDeclaration) ||
                 node.IsKind(SyntaxKind.DestructorDeclaration) ||
@@ -190,8 +190,13 @@ namespace NSonarQubeAnalyzer
 
         public int Complexity()
         {
-            return tree.GetCompilationUnitRoot()
-                .DescendantNodes()
+            return Complexity(tree.GetCompilationUnitRoot());
+        }
+
+        public static int Complexity(SyntaxNode node)
+        {
+            return node
+                .DescendantNodesAndSelf()
                 .Where(
                     n =>
                         // TODO What about the null coalescing operator?
@@ -211,7 +216,7 @@ namespace NSonarQubeAnalyzer
         }
 
         // TODO What about lambdas?
-        private bool IsLastStatement(SyntaxNode node)
+        private static bool IsLastStatement(SyntaxNode node)
         {
             var nextToken = node.GetLastToken().GetNextToken();
             return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
