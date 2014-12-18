@@ -27,7 +27,6 @@ import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
 import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
-import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
 import java.util.List;
 
@@ -42,7 +41,6 @@ public class CSharpCorePluginTest {
       CSharpSourceImporter.class,
       CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
-      CSharpCPDMapping.class,
       CSharpSourceCodeColorizer.class,
       CSharpRuleRepository.class,
       CSharpRuleProfile.class,
