@@ -40,6 +40,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Measure;
+import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
@@ -351,12 +352,13 @@ public class CSharpSensor implements Sensor {
 
     private void handleFileComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       String value = stream.getElementText();
-      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value));
+      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
     private void handleFunctionComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       String value = stream.getElementText();
-      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value));
+      System.out.println("Saving function complexity = " + value);
+      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
     private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {

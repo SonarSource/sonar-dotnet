@@ -26,7 +26,6 @@ import org.sonar.plugins.csharp.CSharpSensor;
 import org.sonar.plugins.csharp.api.CSharp;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
-import org.sonar.plugins.csharp.squid.CSharpSquidSensor;
 import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
@@ -45,13 +44,12 @@ public class CSharpCorePluginTest {
       CSharpCommonRulesDecorator.class,
       CSharpCPDMapping.class,
       CSharpSourceCodeColorizer.class,
-      CSharpSquidSensor.class,
       CSharpRuleRepository.class,
       CSharpRuleProfile.class,
       CSharpSensor.class);
 
     assertThat(new CSharpCorePlugin().getExtensions()).hasSize(
-      10
+      9
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size());
