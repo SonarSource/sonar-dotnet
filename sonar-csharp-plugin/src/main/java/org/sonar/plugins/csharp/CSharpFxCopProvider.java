@@ -47,7 +47,7 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_REFERENCES_PROPERTY_KEY = "sonar.cs.fxcop.references";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
-    CSharpConstants.LANGUAGE_KEY,
+    CSharpPlugin.LANGUAGE_KEY,
     "fxcop",
     FXCOP_ASSEMBLIES_PROPERTY_KEY,
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,

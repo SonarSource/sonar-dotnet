@@ -513,7 +513,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private List<File> filesToAnalyze() {
-    return fileSystem.files(FileQuery.onSource().onLanguage(CSharpConstants.LANGUAGE_KEY));
+    return fileSystem.files(FileQuery.onSource().onLanguage(CSharpPlugin.LANGUAGE_KEY));
   }
 
   private void unzipNSonarQubeAnalyzer() {

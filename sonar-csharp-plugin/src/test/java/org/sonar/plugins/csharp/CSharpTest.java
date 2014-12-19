@@ -19,13 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharp;
-import org.sonar.plugins.csharp.CSharpConstants;
-
-import org.sonar.plugins.csharp.CSharpPlugin;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.config.Settings;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpTest {
@@ -46,7 +43,7 @@ public class CSharpTest {
 
   @Test
   public void shouldGetCustomFileSuffixes() {
-    settings.setProperty(CSharpConstants.FILE_SUFFIXES_KEY, ".cs,.csharp");
+    settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs,.csharp");
     assertThat(cSharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 

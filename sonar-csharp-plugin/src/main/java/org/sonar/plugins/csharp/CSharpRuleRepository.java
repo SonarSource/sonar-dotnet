@@ -31,8 +31,8 @@ public class CSharpRuleRepository implements RulesDefinition {
   @Override
   public void define(Context context) {
     NewRepository repository = context
-      .createRepository(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY)
-      .setName(CSharpSquidConstants.REPOSITORY_NAME);
+      .createRepository(CSharpPlugin.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY)
+      .setName(CSharpPlugin.REPOSITORY_NAME);
 
     repository.createRule("AssignmentInsideSubExpression").setName("Assignment should not be used inside sub-expressions").setSeverity(Severity.MAJOR);
     repository.createRule("AsyncAwaitIdentifier").setName("'async' and 'await' should not be used as identifier").setSeverity(Severity.MAJOR);

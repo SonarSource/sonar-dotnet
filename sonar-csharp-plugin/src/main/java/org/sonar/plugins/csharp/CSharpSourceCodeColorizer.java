@@ -36,7 +36,7 @@ public class CSharpSourceCodeColorizer extends CodeColorizerFormat {
   private static final String SPAN = "</span>";
 
   public CSharpSourceCodeColorizer() {
-    super(CSharpConstants.LANGUAGE_KEY);
+    super(CSharpPlugin.LANGUAGE_KEY);
   }
 
   @Override

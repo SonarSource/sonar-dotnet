@@ -28,15 +28,15 @@ public class CSharp extends AbstractLanguage {
   private final Settings settings;
 
   public CSharp(Settings settings) {
-    super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
+    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
     this.settings = settings;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = settings.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
+    String[] suffixes = settings.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
     if (suffixes.length == 0) {
-      suffixes = StringUtils.split(CSharpConstants.FILE_SUFFIXES_DEFVALUE, ",");
+      suffixes = StringUtils.split(CSharpPlugin.FILE_SUFFIXES_DEFVALUE, ",");
     }
     return suffixes;
   }

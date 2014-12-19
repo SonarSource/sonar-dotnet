@@ -28,7 +28,7 @@ public class CSharpRuleProfile extends ProfileDefinition {
 
   @Override
   public RulesProfile createProfile(ValidationMessages validation) {
-    RulesProfile profile = RulesProfile.create(CSharpConstants.CSHARP_WAY_PROFILE, CSharpConstants.LANGUAGE_KEY);
+    RulesProfile profile = RulesProfile.create(CSharpPlugin.CSHARP_WAY_PROFILE, CSharpPlugin.LANGUAGE_KEY);
 
     activateRule(profile, "AssignmentInsideSubExpression");
     activateRule(profile, "AsyncAwaitIdentifier");
@@ -60,7 +60,7 @@ public class CSharpRuleProfile extends ProfileDefinition {
   }
 
   private static void activateRule(RulesProfile profile, String ruleKey) {
-    profile.activateRule(Rule.create(CSharpSquidConstants.REPOSITORY_KEY, ruleKey), null);
+    profile.activateRule(Rule.create(CSharpPlugin.REPOSITORY_KEY, ruleKey), null);
   }
 
 }

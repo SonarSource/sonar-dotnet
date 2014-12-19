@@ -25,7 +25,7 @@ import org.sonar.commonrules.api.CommonRulesRepository;
 public class CSharpCommonRulesEngine extends CommonRulesEngine {
 
   public CSharpCommonRulesEngine() {
-    super(CSharpConstants.LANGUAGE_KEY);
+    super(CSharpPlugin.LANGUAGE_KEY);
   }
 
   @Override

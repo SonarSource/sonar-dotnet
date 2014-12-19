@@ -40,7 +40,7 @@ public class CSharpCodeCoverageProvider {
   private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.reportsPaths";
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
-    CSharpConstants.LANGUAGE_KEY,
+    CSharpPlugin.LANGUAGE_KEY,
     NCOVER3_PROPERTY_KEY,
     OPENCOVER_PROPERTY_KEY,
     DOTCOVER_PROPERTY_KEY,

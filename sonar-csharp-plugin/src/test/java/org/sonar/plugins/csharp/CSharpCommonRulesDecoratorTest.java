@@ -19,12 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharpConstants;
-
-import org.sonar.plugins.csharp.CSharpCommonRulesDecorator;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.ProjectFileSystem;
+
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
@@ -33,7 +31,7 @@ public class CSharpCommonRulesDecoratorTest {
   @Test
   public void test_declaration() throws Exception {
     CSharpCommonRulesDecorator decorator = new CSharpCommonRulesDecorator(mock(ProjectFileSystem.class), mock(RulesProfile.class));
-    assertThat(decorator.language()).isEqualTo(CSharpConstants.LANGUAGE_KEY);
+    assertThat(decorator.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
   }
 
 }

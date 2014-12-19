@@ -26,7 +26,7 @@ import org.sonar.commonrules.api.CommonRulesDecorator;
 public class CSharpCommonRulesDecorator extends CommonRulesDecorator {
 
   public CSharpCommonRulesDecorator(ProjectFileSystem fs, RulesProfile qProfile) {
-    super(CSharpConstants.LANGUAGE_KEY, fs, qProfile);
+    super(CSharpPlugin.LANGUAGE_KEY, fs, qProfile);
   }
 
 }

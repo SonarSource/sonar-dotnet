@@ -29,14 +29,14 @@ import java.util.List;
 
 @Properties({
   @Property(
-    key = CSharpConstants.FILE_SUFFIXES_KEY,
-    defaultValue = CSharpConstants.FILE_SUFFIXES_DEFVALUE,
+    key = CSharpPlugin.FILE_SUFFIXES_KEY,
+    defaultValue = CSharpPlugin.FILE_SUFFIXES_DEFVALUE,
     name = "File suffixes",
     description = "Comma-separated list of suffixes of files to analyze.",
     project = true, global = true
   ),
   @Property(
-    key = CSharpSquidConstants.IGNORE_HEADER_COMMENTS,
+    key = CSharpPlugin.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",
     name = "Ignore header comments",
     description = "If set to \"true\", the file headers (that are usually the same on each file: " +
@@ -47,6 +47,19 @@ import java.util.List;
     type = PropertyType.BOOLEAN)
 })
 public class CSharpPlugin extends SonarPlugin {
+
+  public static final String LANGUAGE_KEY = "cs";
+  public static final String LANGUAGE_NAME = "C#";
+
+  public static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
+  public static final String FILE_SUFFIXES_DEFVALUE = ".cs";
+
+  public static final String CSHARP_WAY_PROFILE = "Sonar way";
+
+  public static final String REPOSITORY_KEY = "csharpsquid";
+  public static final String REPOSITORY_NAME = "SonarQube";
+
+  public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
 
   @Override
   public List getExtensions() {
