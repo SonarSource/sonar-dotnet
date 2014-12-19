@@ -26,7 +26,7 @@ import org.sonar.squidbridge.rules.ExternalDescriptionLoader;
 import org.sonar.squidbridge.rules.PropertyFileLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
-public class CSharpRuleRepository implements RulesDefinition {
+public class CSharpSonarRulesDefinition implements RulesDefinition {
 
   @Override
   public void define(Context context) {

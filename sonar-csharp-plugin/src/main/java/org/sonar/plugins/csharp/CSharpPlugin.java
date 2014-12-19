@@ -67,8 +67,8 @@ public class CSharpPlugin extends SonarPlugin {
 
     builder.add(
       CSharp.class,
-      CSharpRuleRepository.class,
-      CSharpRuleProfile.class,
+      CSharpSonarRulesDefinition.class,
+      CSharpSonarWayProfile.class,
       CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
       CSharpSourceCodeColorizer.class,

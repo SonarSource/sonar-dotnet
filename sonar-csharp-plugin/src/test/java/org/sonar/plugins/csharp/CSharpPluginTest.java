@@ -38,8 +38,8 @@ public class CSharpPluginTest {
       CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
       CSharpSourceCodeColorizer.class,
-      CSharpRuleRepository.class,
-      CSharpRuleProfile.class,
+      CSharpSonarRulesDefinition.class,
+      CSharpSonarWayProfile.class,
       CSharpSensor.class
     };
 

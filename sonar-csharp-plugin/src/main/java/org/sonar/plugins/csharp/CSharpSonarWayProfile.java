@@ -24,7 +24,7 @@ import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.utils.ValidationMessages;
 
-public class CSharpRuleProfile extends ProfileDefinition {
+public class CSharpSonarWayProfile extends ProfileDefinition {
 
   @Override
   public RulesProfile createProfile(ValidationMessages validation) {
