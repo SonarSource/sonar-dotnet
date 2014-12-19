@@ -326,10 +326,9 @@ namespace Tests
             CopyPasteTokens("class MyClass { /* ... */ \n string MyField = \"hehe\"; }")
                 .Should()
                 .BeEquivalentTo(
-                Tuple.Create("class", 1), Tuple.Create("MyClass", 1), Tuple.Create("{", 1),
-
-                Tuple.Create("string", 2), Tuple.Create("MyField", 2), Tuple.Create("=", 2),
-                Tuple.Create("\"\"", 2), Tuple.Create(";", 2), Tuple.Create("}", 2));
+                    Tuple.Create("class", 1), Tuple.Create("MyClass", 1), Tuple.Create("{", 1),
+                    Tuple.Create("string", 2), Tuple.Create("MyField", 2), Tuple.Create("=", 2),
+                    Tuple.Create("\"\"", 2), Tuple.Create(";", 2), Tuple.Create("}", 2));
         }
 
         private static ImmutableArray<Tuple<string, int>> CopyPasteTokens(string text)
