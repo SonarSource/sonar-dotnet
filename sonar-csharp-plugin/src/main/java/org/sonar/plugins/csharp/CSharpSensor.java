@@ -357,7 +357,6 @@ public class CSharpSensor implements Sensor {
 
     private void handleFunctionComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
       String value = stream.getElementText();
-      System.out.println("Saving function complexity = " + value);
       context.saveMeasure(sonarFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
