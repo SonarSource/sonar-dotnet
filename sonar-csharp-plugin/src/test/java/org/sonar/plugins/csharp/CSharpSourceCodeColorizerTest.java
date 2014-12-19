@@ -34,7 +34,7 @@ public class CSharpSourceCodeColorizerTest {
 
   @Test
   public void cSharpToHtml() throws Exception {
-    Reader cSharpFile = new FileReader(new File("src/test/resources/cpd/NUnitFramework.cs"));
+    Reader cSharpFile = new FileReader(new File("src/test/resources/CSharpSourceCodeColorizerTest/NUnitFramework.cs"));
 
     String html = new CodeColorizer(cobolColorizerFormat.getTokenizers()).toHtml(cSharpFile);
 

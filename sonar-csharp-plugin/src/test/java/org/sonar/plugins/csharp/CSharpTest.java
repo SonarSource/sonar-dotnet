@@ -28,23 +28,23 @@ import static org.fest.assertions.Assertions.assertThat;
 public class CSharpTest {
 
   private Settings settings;
-  private CSharp cSharp;
+  private CSharp csharp;
 
   @Before
   public void init() {
     settings = Settings.createForComponent(new CSharpPlugin());
-    cSharp = new CSharp(settings);
+    csharp = new CSharp(settings);
   }
 
   @Test
   public void shouldGetDefaultFileSuffixes() {
-    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs");
+    assertThat(csharp.getFileSuffixes()).containsOnly(".cs");
   }
 
   @Test
   public void shouldGetCustomFileSuffixes() {
     settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs,.csharp");
-    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
+    assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
 }

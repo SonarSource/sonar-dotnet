@@ -43,7 +43,7 @@ public class ZipTest {
     File out = tmp.getRoot();
     assertThat(out.listFiles()).hasSize(0);
 
-    new Zip(new File("src/test/resources/zip/sample.zip")).unzip(out);
+    new Zip(new File("src/test/resources/ZipTest/sample.zip")).unzip(out);
     assertThat(out.listFiles()).hasSize(4);
     assertThat(Files.toString(new File(out, "a.txt"), Charsets.UTF_8)).isEqualTo("hello");
     assertThat(Files.toString(new File(out, "b.txt"), Charsets.UTF_8)).isEqualTo("");
@@ -66,7 +66,7 @@ public class ZipTest {
     thrown.expectMessage("java.io.FileNotFoundException");
     thrown.expectMessage("non_existing.zip");
 
-    new Zip(new File("src/test/resources/zip/non_existing.zip")).unzip(tmp.getRoot());
+    new Zip(new File("src/test/resources/ZipTest/non_existing.zip")).unzip(tmp.getRoot());
   }
 
 }
