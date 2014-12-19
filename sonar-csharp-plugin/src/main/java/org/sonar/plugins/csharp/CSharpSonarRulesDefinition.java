@@ -54,45 +54,45 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
 
     NewRule commentRegex = repository.createRule("CommentRegularExpression2").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
-    commentRegex.createParam("regularExpression").setName("The regular expression")
+    commentRegex.createParam("regularExpression").setDescription("The regular expression")
       .setType(RuleParamType.STRING).setDefaultValue("");
-    commentRegex.createParam("message").setName("The issue message")
+    commentRegex.createParam("message").setDescription("The issue message")
       .setType(RuleParamType.STRING).setDefaultValue("");
 
     NewRule magicNumber = repository.createRule("MagicNumber").setName("Magic number should not be used").setSeverity(Severity.MINOR);
-    magicNumber.createParam("exceptions").setName("Comma separated list of allowed values (excluding '-' and '+' signs)")
+    magicNumber.createParam("exceptions").setDescription("Comma separated list of allowed values (excluding '-' and '+' signs)")
       .setType(RuleParamType.STRING).setDefaultValue("0,1,0x0,0x00,.0,.1,0.0,1.0");
 
     NewRule className = repository.createRule("ClassName2").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
-    className.createParam("format").setName("Regular expression used to check the class names against")
+    className.createParam("format").setDescription("Regular expression used to check the class names against")
       .setType(RuleParamType.STRING).setDefaultValue("^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$");
 
     NewRule methodName = repository.createRule("MethodName2").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
-    methodName.createParam("format").setName("Regular expression used to check the method names against")
+    methodName.createParam("format").setDescription("Regular expression used to check the method names against")
       .setType(RuleParamType.STRING).setDefaultValue("^[A-Z][a-zA-Z0-9]+$");
 
     NewRule fileLines = repository.createRule("FileLoc").setName("File should not have too many lines").setSeverity(Severity.MAJOR);
-    fileLines.createParam("maximumFileLocThreshold").setName("The maximum number of lines allowed in a file")
+    fileLines.createParam("maximumFileLocThreshold").setDescription("The maximum number of lines allowed in a file")
       .setType(RuleParamType.INTEGER).setDefaultValue("1000");
 
     NewRule methodComplexity = repository.createRule("FunctionComplexity").setName("Method complexity should not be too high").setSeverity(Severity.MAJOR);
-    methodComplexity.createParam("maximumFunctionComplexityThreshold").setName("The maximum authorized complexity in function")
+    methodComplexity.createParam("maximumFunctionComplexityThreshold").setDescription("The maximum authorized complexity in function")
       .setType(RuleParamType.INTEGER).setDefaultValue("10");
 
     NewRule lineLength = repository.createRule("LineLength").setName("Lines should not be too long").setSeverity(Severity.MINOR);
-    lineLength.createParam("maximumLineLength").setName("The maximum authorized line length")
+    lineLength.createParam("maximumLineLength").setDescription("The maximum authorized line length")
       .setType(RuleParamType.INTEGER).setDefaultValue("200");
 
     NewRule switchCases = repository.createRule("S1479").setName("\"switch\" statements should not have too many \"case\" clauses").setSeverity(Severity.MAJOR);
-    switchCases.createParam("maximum").setName("Maximum number of case")
+    switchCases.createParam("maximum").setDescription("Maximum number of case")
       .setType(RuleParamType.INTEGER).setDefaultValue("30");
 
     NewRule expressionComplexity = repository.createRule("S1067").setName("Expressions should not be too complex").setSeverity(Severity.MAJOR);
-    expressionComplexity.createParam("max").setName("Maximum number of allowed conditional operators in an expression")
+    expressionComplexity.createParam("max").setDescription("Maximum number of allowed conditional operators in an expression")
       .setType(RuleParamType.INTEGER).setDefaultValue("3");
 
     NewRule functionParameters = repository.createRule("S107").setName("Functions should not have too many parameters").setSeverity(Severity.MAJOR);
-    functionParameters.createParam("max").setName("Maximum authorized number of parameters")
+    functionParameters.createParam("max").setDescription("Maximum authorized number of parameters")
       .setType(RuleParamType.INTEGER).setDefaultValue("7");
 
     ExternalDescriptionLoader.loadHtmlDescriptions(repository, "/org/sonar/l10n/csharp/rules/csharpsquid");
