@@ -120,8 +120,8 @@ public class CSharpSensor implements Sensor {
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(REPOSITORY_KEY)) {
       appendLine(sb, "    <Rule>");
       appendLine(sb, "      <Key>" + activeRule.getRuleKey() + "</Key>");
-      if (activeRule.getRule().getParent() != null) {
-        appendLine(sb, "      <ParentKey>" + activeRule.getRule().getParent().getKey() + "</ParentKey>");
+      if (activeRule.getRule().getTemplate() != null) {
+        appendLine(sb, "      <ParentKey>" + activeRule.getRule().getTemplate().getKey() + "</ParentKey>");
       }
       Map<String, String> parameters = effectiveParameters(activeRule);
       if (!parameters.isEmpty()) {
@@ -465,10 +465,8 @@ public class CSharpSensor implements Sensor {
         } else if (next == XMLStreamConstants.START_ELEMENT) {
           String tagName = stream.getLocalName();
 
-          if ("Issue".equals(tagName)) {
-            if (issuable != null) {
-              handleIssueTag(issuable);
-            }
+          if ("Issue".equals(tagName) && issuable != null) {
+            handleIssueTag(issuable);
           }
         }
       }
@@ -508,6 +506,7 @@ public class CSharpSensor implements Sensor {
 
     @Override
     public void consumeLine(String line) {
+      // TODO: Log in debug?
     }
 
   }

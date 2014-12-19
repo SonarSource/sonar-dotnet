@@ -19,13 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharpFxCopProvider;
-import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopRuleRepository;
-import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopSensor;
-
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopRuleRepository;
+import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopSensor;
 
 import java.util.List;
 import java.util.Set;
@@ -36,10 +34,10 @@ public class CSharpFxCopProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(new CSharpFxCopProvider().extensions())).containsOnly(
+    assertThat(nonProperties(CSharpFxCopProvider.extensions())).containsOnly(
       CSharpFxCopRuleRepository.class,
       CSharpFxCopSensor.class);
-    assertThat(propertyKeys(new CSharpFxCopProvider().extensions())).containsOnly(
+    assertThat(propertyKeys(CSharpFxCopProvider.extensions())).containsOnly(
       "sonar.cs.fxcop.assembly",
       "sonar.cs.fxcop.timeoutMinutes",
       "sonar.cs.fxcop.fxCopCmdPath",

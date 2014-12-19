@@ -56,6 +56,9 @@ public class CSharpFxCopProvider {
     FXCOP_DIRECTORIES_PROPERTY_KEY,
     FXCOP_REFERENCES_PROPERTY_KEY);
 
+  private CSharpFxCopProvider() {
+  }
+
   public static List extensions() {
     return ImmutableList.of(
       CSharpFxCopRuleRepository.class,
