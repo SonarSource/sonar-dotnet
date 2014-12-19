@@ -19,10 +19,10 @@
  */
 package org.sonar.plugins.csharp.squid;
 
-import com.sonar.csharp.checks.CheckList;
+import org.sonar.api.rule.Severity;
+import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.squidbridge.annotations.AnnotationBasedRulesDefinition;
 import org.sonar.squidbridge.rules.ExternalDescriptionLoader;
 import org.sonar.squidbridge.rules.PropertyFileLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
@@ -34,8 +34,68 @@ public class CSharpRuleRepository implements RulesDefinition {
     NewRepository repository = context
       .createRepository(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY)
       .setName(CSharpSquidConstants.REPOSITORY_NAME);
-    AnnotationBasedRulesDefinition rules = new AnnotationBasedRulesDefinition(repository, CSharpConstants.LANGUAGE_KEY);
-    rules.addRuleClasses(false, CheckList.getChecks());
+
+    repository.createRule("AssignmentInsideSubExpression").setName("Assignment should not be used inside sub-expressions").setSeverity(Severity.MAJOR);
+    repository.createRule("AsyncAwaitIdentifier").setName("'async' and 'await' should not be used as identifier").setSeverity(Severity.MAJOR);
+    repository.createRule("BreakOutsideSwitch").setName("'break' should not be used outside of 'switch'").setSeverity(Severity.MAJOR);
+    repository.createRule("CommentedCode").setName("Comment should not include code").setSeverity(Severity.MINOR);
+    repository.createRule("ParameterAssignedTo").setName("Parameter variable should not be assigned to").setSeverity(Severity.MAJOR);
+    repository.createRule("SwitchWithoutDefault").setName("'switch' statement should have a 'default:' case").setSeverity(Severity.MAJOR);
+    repository.createRule("TabCharacter").setName("Tabulation character should not be used").setSeverity(Severity.MINOR);
+    repository.createRule("S127").setName("A loop's counter should not be assigned within the loop body").setSeverity(Severity.MAJOR);
+    repository.createRule("S1301").setName("\"switch\" statements should have at least 3 \"case\" clauses").setSeverity(Severity.MAJOR);
+    repository.createRule("S1116").setName("Empty statements should be removed").setSeverity(Severity.MAJOR);
+    repository.createRule("S1145").setName("\"if\" statement conditions should not unconditionally evaluate to \"true\" or to \"false\"").setSeverity(Severity.MAJOR);
+    repository.createRule("S1125").setName("Literal boolean values should not be used in condition expressions").setSeverity(Severity.MAJOR);
+    repository.createRule("S126").setName("\"if ... else if\" constructs shall be terminated with an \"else\" clause").setSeverity(Severity.MAJOR);
+    repository.createRule("S1109").setName("A close curly brace should be located at the beginning of a line").setSeverity(Severity.MINOR);
+    repository.createRule("S121").setName("Control structures should always use curly braces").setSeverity(Severity.MAJOR);
+    repository.createRule("S108").setName("Nested blocks of code should not be left empty").setSeverity(Severity.MAJOR);
+    repository.createRule("S1186").setName("Methods should not be empty").setSeverity(Severity.MAJOR);
+    repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
+
+    NewRule commentRegex = repository.createRule("CommentRegularExpression").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
+    commentRegex.createParam("regularExpression").setName("The regular expression")
+      .setType(RuleParamType.STRING).setDefaultValue("");
+    commentRegex.createParam("message").setName("The issue message")
+      .setType(RuleParamType.STRING).setDefaultValue("");
+
+    NewRule magicNumber = repository.createRule("MagicNumber").setName("Magic number should not be used").setSeverity(Severity.MINOR);
+    magicNumber.createParam("exceptions").setName("Comma separated list of allowed values (excluding '-' and '+' signs)")
+      .setType(RuleParamType.STRING).setDefaultValue("0,1,0x0,0x00,.0,.1,0.0,1.0");
+
+    NewRule className = repository.createRule("ClassName").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    className.createParam("format").setName("Regular expression used to check the class names against")
+      .setType(RuleParamType.STRING).setDefaultValue("^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$");
+
+    NewRule methodName = repository.createRule("MethodName").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    methodName.createParam("format").setName("Regular expression used to check the method names against")
+      .setType(RuleParamType.STRING).setDefaultValue("^[A-Z][a-zA-Z0-9]+$");
+
+    NewRule fileLines = repository.createRule("FileLoc").setName("File should not have too many lines").setSeverity(Severity.MAJOR);
+    fileLines.createParam("maximumFileLocThreshold").setName("The maximum number of lines allowed in a file")
+      .setType(RuleParamType.INTEGER).setDefaultValue("1000");
+
+    NewRule methodComplexity = repository.createRule("FunctionComplexity").setName("Method complexity should not be too high").setSeverity(Severity.MAJOR);
+    methodComplexity.createParam("maximumFunctionComplexityThreshold").setName("The maximum authorized complexity in function")
+      .setType(RuleParamType.INTEGER).setDefaultValue("10");
+
+    NewRule lineLength = repository.createRule("LineLength").setName("Lines should not be too long").setSeverity(Severity.MINOR);
+    lineLength.createParam("maximumLineLength").setName("The maximum authorized line length")
+      .setType(RuleParamType.INTEGER).setDefaultValue("200");
+
+    NewRule switchCases = repository.createRule("S1479").setName("\"switch\" statements should not have too many \"case\" clauses").setSeverity(Severity.MAJOR);
+    switchCases.createParam("maximum").setName("Maximum number of case")
+      .setType(RuleParamType.INTEGER).setDefaultValue("30");
+
+    NewRule expressionComplexity = repository.createRule("S1067").setName("Expressions should not be too complex").setSeverity(Severity.MAJOR);
+    expressionComplexity.createParam("max").setName("Maximum number of allowed conditional operators in an expression")
+      .setType(RuleParamType.INTEGER).setDefaultValue("3");
+
+    NewRule functionParameters = repository.createRule("S107").setName("Functions should not have too many parameters").setSeverity(Severity.MAJOR);
+    functionParameters.createParam("max").setName("Maximum authorized number of parameters")
+      .setType(RuleParamType.INTEGER).setDefaultValue("7");
+
     PropertyFileLoader.loadNames(repository, "/org/sonar/l10n/csharp.properties");
     ExternalDescriptionLoader.loadHtmlDescriptions(repository, "/org/sonar/l10n/csharp/rules/csharpsquid");
     SqaleXmlLoader.load(repository, "/com/sonar/sqale/csharp-model.xml");

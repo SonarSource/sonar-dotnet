@@ -33,7 +33,6 @@
 
   <modules>
     <module>NSonarQubeAnalyzer</module>
-    <module>csharp-checks</module>
     <module>sonar-csharp-plugin</module>
   </modules>
 

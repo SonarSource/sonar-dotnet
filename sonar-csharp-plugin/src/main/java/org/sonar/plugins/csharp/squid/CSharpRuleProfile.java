@@ -19,28 +19,49 @@
  */
 package org.sonar.plugins.csharp.squid;
 
-import com.sonar.csharp.checks.CheckList;
-import org.sonar.api.profiles.AnnotationProfileParser;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.rules.Rule;
 import org.sonar.api.utils.ValidationMessages;
 import org.sonar.plugins.csharp.api.CSharpConstants;
 
-/**
- * Creates the Sonar way profile using the C# checks found by the container.
- */
 public class CSharpRuleProfile extends ProfileDefinition {
-
-  private final AnnotationProfileParser annotationProfileParser;
-
-  public CSharpRuleProfile(AnnotationProfileParser annotationProfileParser) {
-    this.annotationProfileParser = annotationProfileParser;
-  }
 
   @Override
   public RulesProfile createProfile(ValidationMessages validation) {
-    return annotationProfileParser.parse(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.CSHARP_WAY_PROFILE, CSharpConstants.LANGUAGE_KEY,
-        CheckList.getChecks(), validation);
+    RulesProfile profile = RulesProfile.create(CSharpConstants.CSHARP_WAY_PROFILE, CSharpConstants.LANGUAGE_KEY);
+
+    activateRule(profile, "AssignmentInsideSubExpression");
+    activateRule(profile, "AsyncAwaitIdentifier");
+    activateRule(profile, "BreakOutsideSwitch");
+    activateRule(profile, "CommentedCode");
+    activateRule(profile, "ParameterAssignedTo");
+    activateRule(profile, "SwitchWithoutDefault");
+    activateRule(profile, "TabCharacter");
+    activateRule(profile, "S127");
+    activateRule(profile, "S1301");
+    activateRule(profile, "S1116");
+    activateRule(profile, "S1145");
+    activateRule(profile, "S1125");
+    activateRule(profile, "S1109");
+    activateRule(profile, "S121");
+    activateRule(profile, "S108");
+    activateRule(profile, "S1186");
+    activateRule(profile, "S1481");
+    activateRule(profile, "ClassName");
+    activateRule(profile, "MethodName");
+    activateRule(profile, "FileLoc");
+    activateRule(profile, "FunctionComplexity");
+    activateRule(profile, "LineLength");
+    activateRule(profile, "S1479");
+    activateRule(profile, "S1067");
+    activateRule(profile, "S107");
+
+    return profile;
+  }
+
+  private static void activateRule(RulesProfile profile, String ruleKey) {
+    profile.activateRule(Rule.create(CSharpSquidConstants.REPOSITORY_KEY, ruleKey), null);
   }
 
 }
