@@ -318,18 +318,23 @@ namespace Tests
         }
 
         [TestMethod]
-        public void CopyPasteTokenValues()
+        public void CopyPasteTokens()
         {
-            CopyPasteTokenValues("").Should().BeEquivalentTo();
-            CopyPasteTokenValues("using System;").Should().BeEquivalentTo();
+            CopyPasteTokens("").Should().BeEquivalentTo();
+            CopyPasteTokens("using System;").Should().BeEquivalentTo();
 
-            CopyPasteTokenValues("class MyClass { /* ... */ string MyField = \"hehe\"; }")
-                .Should().BeEquivalentTo("class", "MyClass", "{", "string", "MyField", "=", "\"\"", ";", "}");
+            CopyPasteTokens("class MyClass { /* ... */ \n string MyField = \"hehe\"; }")
+                .Should()
+                .BeEquivalentTo(
+                Tuple.Create("class", 1), Tuple.Create("MyClass", 1), Tuple.Create("{", 1),
+
+                Tuple.Create("string", 2), Tuple.Create("MyField", 2), Tuple.Create("=", 2),
+                Tuple.Create("\"\"", 2), Tuple.Create(";", 2), Tuple.Create("}", 2));
         }
 
-        private static ImmutableArray<string> CopyPasteTokenValues(string text)
+        private static ImmutableArray<Tuple<string, int>> CopyPasteTokens(string text)
         {
-            return MetricsFor(text).CopyPasteTokenValues();
+            return MetricsFor(text).CopyPasteTokens();
         }
 
         private static Metrics MetricsFor(string text)

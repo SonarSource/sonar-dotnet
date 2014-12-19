@@ -53,10 +53,10 @@ public class CSharpCPDMappingTest {
     assertThat(cpdTokens.getTokens()).hasSize(3);
 
     assertThat(cpdTokens.getTokens().get(0).getValue()).isEqualTo("bar1");
-    assertThat(cpdTokens.getTokens().get(0).getBeginLine()).isEqualTo(42);
+    assertThat(cpdTokens.getTokens().get(0).getBeginLine()).isEqualTo(3);
 
     assertThat(cpdTokens.getTokens().get(1).getValue()).isEqualTo("bar2");
-    assertThat(cpdTokens.getTokens().get(1).getBeginLine()).isEqualTo(42);
+    assertThat(cpdTokens.getTokens().get(1).getBeginLine()).isEqualTo(4);
 
     assertThat(cpdTokens.getTokens().get(2)).isSameAs(TokenEntry.EOF);
   }

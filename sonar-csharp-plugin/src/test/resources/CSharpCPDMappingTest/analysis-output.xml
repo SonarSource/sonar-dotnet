@@ -9,8 +9,10 @@
       <Issues>
       </Issues>
       <CopyPasteTokens>
-        <Token>foo1</Token>
-        <Token>foo2</Token>
+        <Token>
+          <Value>foo1</Value>
+          <Line>1</Line>
+        </Token>
       </CopyPasteTokens>
     </File>
     <File>
@@ -19,8 +21,14 @@
       </Metrics>
       <Issues />
       <CopyPasteTokens>
-        <Token>bar1</Token>
-        <Token>bar2</Token>
+        <Token>
+          <Value>bar1</Value>
+          <Line>3</Line>
+        </Token>
+        <Token>
+          <Value>bar2</Value>
+          <Line>4</Line>
+        </Token>
       </CopyPasteTokens>
     </File>
     <File>
@@ -29,8 +37,10 @@
       </Metrics>
       <Issues />
       <CopyPasteTokens>
-        <Token>baz1</Token>
-        <Token>baz2</Token>
+        <Token>
+          <Value>baz1</Value>
+          <Line>8</Line>
+        </Token>
       </CopyPasteTokens>
     </File>
   </Files>

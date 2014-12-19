@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.io.Closeables;
 import net.sourceforge.pmd.cpd.SourceCode;
@@ -154,8 +155,35 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
           String tagName = stream.getLocalName();
 
           if ("Token".equals(tagName)) {
-            String tokenValue = stream.getElementText();
-            cpdTokens.add(new TokenEntry(tokenValue, file.getAbsolutePath(), 42));
+            handleTokenTag();
+          } else {
+            throw new IllegalArgumentException();
+          }
+        }
+      }
+    }
+
+    private void handleTokenTag() throws XMLStreamException {
+      String value = null;
+      int line = -1;
+
+      while (stream.hasNext()) {
+        int next = stream.next();
+
+        if (next == XMLStreamConstants.END_ELEMENT && "Token".equals(stream.getLocalName())) {
+          Preconditions.checkState(value != null);
+          Preconditions.checkState(line != -1);
+
+          cpdTokens.add(new TokenEntry(value, file.getAbsolutePath(), line));
+
+          break;
+        } else if (next == XMLStreamConstants.START_ELEMENT) {
+          String tagName = stream.getLocalName();
+
+          if ("Value".equals(tagName)) {
+            value = stream.getElementText();
+          } else if ("Line".equals(tagName)) {
+            line = Integer.parseInt(stream.getElementText());
           } else {
             throw new IllegalArgumentException();
           }
