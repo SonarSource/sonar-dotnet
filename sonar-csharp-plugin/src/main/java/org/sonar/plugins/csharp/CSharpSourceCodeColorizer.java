@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.sonar.csharp.squid.api.CSharpKeyword;
+import com.google.common.collect.ImmutableSet;
 import org.sonar.api.web.CodeColorizerFormat;
 import org.sonar.colorizer.CDocTokenizer;
 import org.sonar.colorizer.CppDocTokenizer;
@@ -30,9 +30,88 @@ import org.sonar.colorizer.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CSharpSourceCodeColorizer extends CodeColorizerFormat {
 
+  private static final Set<String> KEYWORDS = ImmutableSet.of(
+    "abstract",
+    "as",
+    "base",
+    "bool",
+    "break",
+    "byte",
+    "case",
+    "catch",
+    "char",
+    "checked",
+    "class",
+    "const",
+    "continue",
+    "decimal",
+    "default",
+    "delegate",
+    "do",
+    "double",
+    "else",
+    "enum",
+    "event",
+    "explicit",
+    "extern",
+    "false",
+    "finally",
+    "fixed",
+    "float",
+    "for",
+    "foreach",
+    "goto",
+    "if",
+    "implicit",
+    "in",
+    "int",
+    "interface",
+    "internal",
+    "is",
+    "lock",
+    "long",
+    "namespace",
+    "new",
+    "null",
+    "object",
+    "operator",
+    "out",
+    "override",
+    "params",
+    "private",
+    "protected",
+    "public",
+    "readonly",
+    "ref",
+    "return",
+    "sbyte",
+    "sealed",
+    "short",
+    "sizeof",
+    "stackalloc",
+    "static",
+    "string",
+    "struct",
+    "switch",
+    "this",
+    "throw",
+    "true",
+    "try",
+    "typeof",
+    "uint",
+    "ulong",
+    "unchecked",
+    "unsafe",
+    "ushort",
+    "using",
+    "virtual",
+    "void",
+    "volatile",
+    "while");
   private static final String SPAN = "</span>";
 
   public CSharpSourceCodeColorizer() {
@@ -44,7 +123,7 @@ public class CSharpSourceCodeColorizer extends CodeColorizerFormat {
     List<Tokenizer> tokenizers = new ArrayList<Tokenizer>();
     tokenizers.add(new CDocTokenizer("<span class=\"cd\">", SPAN));
     tokenizers.add(new CppDocTokenizer("<span class=\"cppd\">", SPAN));
-    tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", SPAN, CSharpKeyword.keywordValues()));
+    tokenizers.add(new KeywordsTokenizer("<span class=\"k\">", SPAN, KEYWORDS));
     tokenizers.add(new LiteralTokenizer("<span class=\"s\">", SPAN));
     tokenizers.add(new RegexpTokenizer("<span class=\"j\">", SPAN, "#[^\\n\\r]*+"));
     tokenizers.add(new RegexpTokenizer("<span class=\"c\">", SPAN, "[+-]?[0-9]++(\\.[0-9]*+)?"));
