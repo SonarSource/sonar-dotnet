@@ -26,6 +26,7 @@ import org.sonar.squidbridge.rules.ExternalDescriptionLoader;
 import org.sonar.squidbridge.rules.PropertyFileLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
+// TODO This class is impossible to unit test because SonarQube 4.5.1 API doesn't expose "Context"
 public class CSharpSonarRulesDefinition implements RulesDefinition {
 
   @Override
