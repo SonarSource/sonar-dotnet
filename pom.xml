@@ -39,9 +39,9 @@
 
   <properties>
     <sslrVersion>1.20</sslrVersion>
-    <squidBridgeVersion>2.4</squidBridgeVersion>
+    <squidBridgeVersion>2.5</squidBridgeVersion>
     <sonarCommonRules>1.2</sonarCommonRules>
-    <sonar.version>3.7</sonar.version>
+    <sonar.version>4.5.1</sonar.version>
 
     <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
 

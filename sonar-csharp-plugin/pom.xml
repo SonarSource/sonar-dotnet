@@ -81,6 +81,12 @@
       <artifactId>sonar-common-rules</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
     <!-- sonar open-source -->
     <dependency>
       <groupId>org.codehaus.sonar</groupId>

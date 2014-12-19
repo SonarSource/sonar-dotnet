@@ -20,40 +20,25 @@
 package org.sonar.plugins.csharp.squid;
 
 import com.sonar.csharp.checks.CheckList;
-import org.sonar.api.rules.AnnotationRuleParser;
-import org.sonar.api.rules.Rule;
-import org.sonar.api.rules.RuleRepository;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.squid.check.CSharpCheck;
+import org.sonar.squidbridge.annotations.AnnotationBasedRulesDefinition;
+import org.sonar.squidbridge.rules.ExternalDescriptionLoader;
+import org.sonar.squidbridge.rules.PropertyFileLoader;
+import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
-import java.util.Collection;
-import java.util.List;
-
-public class CSharpRuleRepository extends RuleRepository {
-
-  /* We have to put those in our own repository, see http://jira.codehaus.org/browse/SONAR-3157 */
-  private final CSharpCheck[] customChecks;
-
-  public CSharpRuleRepository() {
-    this(new CSharpCheck[0]);
-  }
-
-  public CSharpRuleRepository(CSharpCheck[] providedChecks) {
-    super(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY);
-    setName(CSharpSquidConstants.REPOSITORY_NAME);
-    this.customChecks = new CSharpCheck[providedChecks.length];
-    System.arraycopy(providedChecks, 0, this.customChecks, 0, providedChecks.length);
-  }
+public class CSharpRuleRepository implements RulesDefinition {
 
   @Override
-  public List<Rule> createRules() {
-    return new AnnotationRuleParser().parse(getKey(), getChecks());
-  }
-
-  public Collection<Class> getChecks() {
-    Collection<Class> allChecks = CSharpCheck.toCollection(customChecks);
-    allChecks.addAll(CheckList.getChecks());
-    return allChecks;
+  public void define(Context context) {
+    NewRepository repository = context
+      .createRepository(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY)
+      .setName(CSharpSquidConstants.REPOSITORY_NAME);
+    AnnotationBasedRulesDefinition.load(repository, CSharpConstants.LANGUAGE_KEY, CheckList.getChecks());
+    PropertyFileLoader.loadNames(repository, "/org/sonar/l10n/csharp.properties");
+    ExternalDescriptionLoader.loadHtmlDescriptions(repository, "/org/sonar/l10n/csharp/rules/csharpsquid");
+    SqaleXmlLoader.load(repository, "/com/sonar/sqale/csharp-model.xml");
+    repository.done();
   }
 
 }
