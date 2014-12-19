@@ -237,5 +237,21 @@ namespace NSonarQubeAnalyzer
             }
             return distribution;
         }
+
+        public ImmutableArray<string> CopyPasteTokenValues()
+        {
+            var builder = ImmutableArray.CreateBuilder<string>();
+
+            foreach (var token in tree.GetCompilationUnitRoot().DescendantTokens(n => !n.IsKind(SyntaxKind.UsingDirective)))
+            {
+                if (!token.IsKind(SyntaxKind.EndOfFileToken))
+                {
+                    var value = token.IsKind(SyntaxKind.StringLiteralToken) ? "\"\"" : token.ToString();
+                    builder.Add(value);
+                }
+            }
+
+            return builder.ToImmutable();
+        }
     }
 }

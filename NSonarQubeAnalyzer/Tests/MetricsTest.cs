@@ -317,6 +317,21 @@ namespace Tests
             return MetricsFor(text).FunctionComplexityDistribution();
         }
 
+        [TestMethod]
+        public void CopyPasteTokenValues()
+        {
+            CopyPasteTokenValues("").Should().BeEquivalentTo();
+            CopyPasteTokenValues("using System;").Should().BeEquivalentTo();
+
+            CopyPasteTokenValues("class MyClass { /* ... */ string MyField = \"hehe\"; }")
+                .Should().BeEquivalentTo("class", "MyClass", "{", "string", "MyField", "=", "\"\"", ";", "}");
+        }
+
+        private static ImmutableArray<string> CopyPasteTokenValues(string text)
+        {
+            return MetricsFor(text).CopyPasteTokenValues();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

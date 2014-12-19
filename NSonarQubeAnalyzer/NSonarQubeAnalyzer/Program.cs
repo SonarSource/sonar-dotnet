@@ -342,6 +342,13 @@ namespace NSonarQubeAnalyzer
                     }
                     xmlOut.WriteEndElement();
 
+                    xmlOut.WriteStartElement("CopyPasteTokens");
+                    foreach (var tokenValue in metrics.CopyPasteTokenValues())
+                    {
+                        xmlOut.WriteElementString("Token", tokenValue);
+                    }
+                    xmlOut.WriteEndElement();
+
                     xmlOut.WriteEndElement();
                 }
                 xmlOut.WriteEndElement();
