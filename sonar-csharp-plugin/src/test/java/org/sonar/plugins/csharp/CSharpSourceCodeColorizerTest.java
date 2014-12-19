@@ -19,56 +19,34 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharpSourceCodeColorizer;
-
-import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.sonar.colorizer.CodeColorizer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.Reader;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpSourceCodeColorizerTest {
 
-  private CSharpSourceCodeColorizer cobolColorizerFormat = new CSharpSourceCodeColorizer();
+  private final CSharpSourceCodeColorizer cobolColorizerFormat = new CSharpSourceCodeColorizer();
 
   @Test
-  public void cSharpToHtml() throws IOException {
-    Reader cSharpFile = readFile("/cpd/NUnitFramework.cs");
+  public void cSharpToHtml() throws Exception {
+    Reader cSharpFile = new FileReader(new File("src/test/resources/cpd/NUnitFramework.cs"));
 
     String html = new CodeColorizer(cobolColorizerFormat.getTokenizers()).toHtml(cSharpFile);
 
-    assertHtml(html);
-    save(html, "sample.html");
-    assertContains(html, "<span class=\"cd\">/// Static methods that implement aspects of the NUnit framework that cut </span>");
-    assertContains(html, "<span class=\"k\">public</span>");
-    assertContains(html, "<span class=\"s\">\"NUnit.Framework.IgnoreAttribute\"</span>");
-    assertContains(html, "<span class=\"j\">#endregion</span>");
-    assertContains(html, "<span class=\"c\">0</span>");
+    assertThat(html).contains("<style");
+    assertThat(html).contains("<table class=\"code\"");
+    assertThat(html).contains("</html>");
+
+    assertThat(html).contains("<span class=\"cd\">/// Static methods that implement aspects of the NUnit framework that cut </span>");
+    assertThat(html).contains("<span class=\"k\">public</span>");
+    assertThat(html).contains("<span class=\"s\">\"NUnit.Framework.IgnoreAttribute\"</span>");
+    assertThat(html).contains("<span class=\"j\">#endregion</span>");
+    assertThat(html).contains("<span class=\"c\">0</span>");
   }
 
-  private FileReader readFile(String path) throws FileNotFoundException {
-    return new FileReader(FileUtils.toFile(getClass().getResource(path)));
-  }
-
-  private void assertHtml(String html) {
-    assertContains(html, "<style", "<table class=\"code\"", "</html>");
-  }
-
-  private void assertContains(String html, String... strings) {
-    for (String string : strings) {
-      assertThat(html, containsString(string));
-    }
-  }
-
-  private void save(String html, String filename) throws IOException {
-    File output = new File("target/colorizer/" + filename);
-    FileUtils.writeStringToFile(output, html);
-  }
 }
