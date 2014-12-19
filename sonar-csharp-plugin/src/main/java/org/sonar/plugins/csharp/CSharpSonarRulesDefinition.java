@@ -23,7 +23,6 @@ import org.sonar.api.rule.Severity;
 import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.squidbridge.rules.ExternalDescriptionLoader;
-import org.sonar.squidbridge.rules.PropertyFileLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 // TODO This class is impossible to unit test because SonarQube 4.5.1 API doesn't expose "Context"
@@ -54,7 +53,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1186").setName("Methods should not be empty").setSeverity(Severity.MAJOR);
     repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
 
-    NewRule commentRegex = repository.createRule("CommentRegularExpression").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
+    NewRule commentRegex = repository.createRule("CommentRegularExpression2").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setName("The regular expression")
       .setType(RuleParamType.STRING).setDefaultValue("");
     commentRegex.createParam("message").setName("The issue message")
@@ -64,11 +63,11 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     magicNumber.createParam("exceptions").setName("Comma separated list of allowed values (excluding '-' and '+' signs)")
       .setType(RuleParamType.STRING).setDefaultValue("0,1,0x0,0x00,.0,.1,0.0,1.0");
 
-    NewRule className = repository.createRule("ClassName").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    NewRule className = repository.createRule("ClassName2").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
     className.createParam("format").setName("Regular expression used to check the class names against")
       .setType(RuleParamType.STRING).setDefaultValue("^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$");
 
-    NewRule methodName = repository.createRule("MethodName").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    NewRule methodName = repository.createRule("MethodName2").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
     methodName.createParam("format").setName("Regular expression used to check the method names against")
       .setType(RuleParamType.STRING).setDefaultValue("^[A-Z][a-zA-Z0-9]+$");
 
@@ -96,7 +95,6 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     functionParameters.createParam("max").setName("Maximum authorized number of parameters")
       .setType(RuleParamType.INTEGER).setDefaultValue("7");
 
-    PropertyFileLoader.loadNames(repository, "/org/sonar/l10n/csharp.properties");
     ExternalDescriptionLoader.loadHtmlDescriptions(repository, "/org/sonar/l10n/csharp/rules/csharpsquid");
     SqaleXmlLoader.load(repository, "/com/sonar/sqale/csharp-model.xml");
     repository.done();

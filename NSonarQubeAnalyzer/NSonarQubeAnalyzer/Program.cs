@@ -144,10 +144,10 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Maximum = int.Parse(maximum);
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
-            if (rules.Contains("ClassName"))
+            if (rules.Contains("ClassName2"))
             {
                 var parameters = from e in xmlIn.Descendants("Rule")
-                                 where "ClassName".Equals(e.Elements("Key").Single().Value)
+                                 where "ClassName2".Equals(e.Elements("Key").Single().Value)
                                  select e.Descendants("Parameter");
                 var convention = (from e in parameters
                                   where "format".Equals(e.Elements("Key").Single().Value)
@@ -158,10 +158,10 @@ namespace NSonarQubeAnalyzer
                 diagnostic.Convention = convention;
                 diagnosticAnalyzersBuilder.Add(diagnostic);
             }
-            if (rules.Contains("MethodName"))
+            if (rules.Contains("MethodName2"))
             {
                 var parameters = from e in xmlIn.Descendants("Rule")
-                                 where "MethodName".Equals(e.Elements("Key").Single().Value)
+                                 where "MethodName2".Equals(e.Elements("Key").Single().Value)
                                  select e.Descendants("Parameter");
                 var convention = (from e in parameters
                                   where "format".Equals(e.Elements("Key").Single().Value)
@@ -218,7 +218,7 @@ namespace NSonarQubeAnalyzer
             }
 
             var commentRegexpRules = from e in xmlIn.Descendants("Rule")
-                                     where "CommentRegularExpression".Equals((e.Elements("ParentKey").SingleOrDefault() ?? XElement.Parse("<Dummy />")).Value)
+                                     where "CommentRegularExpression2".Equals((e.Elements("ParentKey").SingleOrDefault() ?? XElement.Parse("<Dummy />")).Value)
                                      select e;
             if (commentRegexpRules.Any())
             {

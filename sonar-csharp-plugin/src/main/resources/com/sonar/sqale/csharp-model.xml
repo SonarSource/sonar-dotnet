@@ -587,7 +587,7 @@
       </chc>
       <chc>
         <rule-repo>csharpsquid</rule-repo>
-        <rule-key>ClassName</rule-key>
+        <rule-key>ClassName2</rule-key>
         <prop>
           <key>remediationFunction</key>
           <txt>linear</txt>
@@ -623,7 +623,7 @@
       </chc>
       <chc>
         <rule-repo>csharpsquid</rule-repo>
-        <rule-key>MethodName</rule-key>
+        <rule-key>MethodName2</rule-key>
         <prop>
           <key>remediationFunction</key>
           <txt>linear</txt>
