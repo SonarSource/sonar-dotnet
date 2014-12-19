@@ -19,22 +19,9 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharpSourceCodeColorizer;
-
-import org.sonar.plugins.csharp.CSharpRuleProfile;
-import org.sonar.plugins.csharp.CSharpRuleRepository;
-import org.sonar.plugins.csharp.CSharp;
-import org.sonar.plugins.csharp.CSharpCodeCoverageProvider;
-import org.sonar.plugins.csharp.CSharpCommonRulesDecorator;
-import org.sonar.plugins.csharp.CSharpCommonRulesEngine;
-import org.sonar.plugins.csharp.CSharpPlugin;
-import org.sonar.plugins.csharp.CSharpFxCopProvider;
-import org.sonar.plugins.csharp.CSharpSourceImporter;
-import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider;
 import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.CSharpSensor;
 
 import java.util.List;
 
@@ -44,18 +31,22 @@ public class CSharpPluginTest {
 
   @Test
   public void getExtensions() {
-    assertThat(nonProperties(new CSharpPlugin().getExtensions())).contains(
+    List extensions = new CSharpPlugin().getExtensions();
+
+    Class<?>[] expectedExtensions = new Class<?>[] {
       CSharp.class,
-      CSharpSourceImporter.class,
       CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
       CSharpSourceCodeColorizer.class,
       CSharpRuleRepository.class,
       CSharpRuleProfile.class,
-      CSharpSensor.class);
+      CSharpSensor.class
+    };
 
-    assertThat(new CSharpPlugin().getExtensions()).hasSize(
-      8
+    assertThat(nonProperties(extensions)).contains(expectedExtensions);
+
+    assertThat(extensions).hasSize(
+      expectedExtensions.length
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size());

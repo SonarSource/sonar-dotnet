@@ -23,26 +23,15 @@ import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
 
-/**
- * Class that defines the C# language.
- */
 public class CSharp extends AbstractLanguage {
 
   private final Settings settings;
 
-  /**
-   * Constructs a {@link CSharp} language object with the given configuration.
-   *
-   * @param configuration
-   */
   public CSharp(Settings settings) {
     super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
     this.settings = settings;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   @Override
   public String[] getFileSuffixes() {
     String[] suffixes = settings.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);

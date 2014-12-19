@@ -54,21 +54,11 @@ public class CSharpPlugin extends SonarPlugin {
 
     builder.add(
       CSharp.class,
-
-      // Sensors
-      CSharpSourceImporter.class,
-
-      // Common Rules
-      CSharpCommonRulesEngine.class,
-      CSharpCommonRulesDecorator.class,
-
-      // C# Squid
-      CSharpSourceCodeColorizer.class,
-
-      // rules
       CSharpRuleRepository.class,
       CSharpRuleProfile.class,
-
+      CSharpCommonRulesEngine.class,
+      CSharpCommonRulesDecorator.class,
+      CSharpSourceCodeColorizer.class,
       CSharpSensor.class);
 
     builder.addAll(CSharpFxCopProvider.extensions());
