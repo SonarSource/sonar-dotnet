@@ -144,8 +144,8 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "  </Files>");
     appendLine(sb, "</AnalysisInput>");
 
-    File analysisInput = new File(fileSystem.workingDir(), "analysis-input.xml");
-    File analysisOutput = new File(fileSystem.workingDir(), "analysis-output.xml");
+    File analysisInput = toolInput();
+    File analysisOutput = toolOutput();
 
     try {
       Files.write(sb, analysisInput, Charsets.UTF_8);
@@ -153,8 +153,7 @@ public class CSharpSensor implements Sensor {
       throw Throwables.propagate(e);
     }
 
-    // FIXME duplicated
-    File workingDir = new File(fileSystem.workingDir(), N_SONARQUBE_ANALYZER);
+    File workingDir = toolWorkingDir();
     File executableFile = new File(workingDir, N_SONARQUBE_ANALYZER_EXE);
 
     Command command = Command.create(executableFile.getAbsolutePath())
@@ -181,8 +180,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private void importResults(Project project, SensorContext context) {
-    // FIXME duplicated
-    File analysisOutput = new File(fileSystem.workingDir(), "analysis-output.xml");
+    File analysisOutput = toolOutput();
 
     new AnalysisResultImporter(project, context, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
@@ -516,7 +514,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private void unzipNSonarQubeAnalyzer() {
-    File workingDir = new File(fileSystem.workingDir(), N_SONARQUBE_ANALYZER);
+    File workingDir = toolWorkingDir();
     File zipFile = new File(workingDir, N_SONARQUBE_ANALYZER_ZIP);
 
     try {
@@ -533,6 +531,22 @@ public class CSharpSensor implements Sensor {
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }
+  }
+
+  private File toolInput() {
+    return new File(fileSystem.workingDir(), "analysis-input.xml");
+  }
+
+  private File toolOutput() {
+    return toolOutput(fileSystem);
+  }
+
+  public static File toolOutput(ModuleFileSystem fileSystem) {
+    return new File(fileSystem.workingDir(), "analysis-output.xml");
+  }
+
+  private File toolWorkingDir() {
+    return new File(fileSystem.workingDir(), N_SONARQUBE_ANALYZER);
   }
 
 }

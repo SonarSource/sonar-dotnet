@@ -40,7 +40,8 @@ public class CSharpPluginTest {
       CSharpSourceCodeColorizer.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      CSharpSensor.class
+      CSharpSensor.class,
+      CSharpCPDMapping.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);

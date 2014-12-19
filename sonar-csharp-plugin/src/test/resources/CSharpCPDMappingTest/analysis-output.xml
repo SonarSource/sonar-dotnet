@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--This XML format is not an API-->
+<AnalysisOutput>
+  <Files>
+    <File>
+      <Path>C:\File1.cs</Path>
+      <Metrics>
+      </Metrics>
+      <Issues>
+      </Issues>
+      <CopyPasteTokens>
+        <Token>foo1</Token>
+        <Token>foo2</Token>
+      </CopyPasteTokens>
+    </File>
+    <File>
+      <Path>C:\File2.cs</Path>
+      <Metrics>
+      </Metrics>
+      <Issues />
+      <CopyPasteTokens>
+        <Token>bar1</Token>
+        <Token>bar2</Token>
+      </CopyPasteTokens>
+    </File>
+    <File>
+      <Path>C:\File3.cs</Path>
+      <Metrics>
+      </Metrics>
+      <Issues />
+      <CopyPasteTokens>
+        <Token>baz1</Token>
+        <Token>baz2</Token>
+      </CopyPasteTokens>
+    </File>
+  </Files>
+</AnalysisOutput>
