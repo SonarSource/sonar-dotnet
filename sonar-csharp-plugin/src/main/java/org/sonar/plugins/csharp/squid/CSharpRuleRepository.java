@@ -34,7 +34,8 @@ public class CSharpRuleRepository implements RulesDefinition {
     NewRepository repository = context
       .createRepository(CSharpSquidConstants.REPOSITORY_KEY, CSharpConstants.LANGUAGE_KEY)
       .setName(CSharpSquidConstants.REPOSITORY_NAME);
-    AnnotationBasedRulesDefinition.load(repository, CSharpConstants.LANGUAGE_KEY, CheckList.getChecks());
+    AnnotationBasedRulesDefinition rules = new AnnotationBasedRulesDefinition(repository, CSharpConstants.LANGUAGE_KEY);
+    rules.addRuleClasses(false, CheckList.getChecks());
     PropertyFileLoader.loadNames(repository, "/org/sonar/l10n/csharp.properties");
     ExternalDescriptionLoader.loadHtmlDescriptions(repository, "/org/sonar/l10n/csharp/rules/csharpsquid");
     SqaleXmlLoader.load(repository, "/com/sonar/sqale/csharp-model.xml");
