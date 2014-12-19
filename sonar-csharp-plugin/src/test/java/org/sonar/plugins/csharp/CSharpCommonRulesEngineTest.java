@@ -17,22 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
+
+import org.sonar.plugins.csharp.CSharpCommonRulesEngine;
 
 import org.junit.Test;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-
+import org.sonar.commonrules.api.CommonRulesEngine;
+import org.sonar.commonrules.api.CommonRulesRepository;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
-public class CSharpCommonRulesDecoratorTest {
+public class CSharpCommonRulesEngineTest {
 
   @Test
-  public void test_declaration() throws Exception {
-    CSharpCommonRulesDecorator decorator = new CSharpCommonRulesDecorator(mock(ProjectFileSystem.class), mock(RulesProfile.class));
-    assertThat(decorator.language()).isEqualTo(CSharpConstants.LANGUAGE_KEY);
+  public void provide_extensions() {
+    CommonRulesEngine engine = new CSharpCommonRulesEngine();
+    assertThat(engine.provide()).isNotEmpty();
+  }
+
+  @Test
+  public void declare_rules() {
+    CommonRulesEngine engine = new CSharpCommonRulesEngine();
+    CommonRulesRepository repository = engine.newRepository();
+    assertThat(repository.rules()).hasSize(3);
+    assertThat(repository.rule("InsufficientCommentDensity")).isNotNull();
+    assertThat(repository.rule("DuplicatedBlocks")).isNotNull();
+    assertThat(repository.rule("InsufficientLineCoverage")).isNotNull();
   }
 
 }

@@ -24,7 +24,7 @@
 
   <properties>
     <sonar.pluginName>C#</sonar.pluginName>
-    <sonar.pluginClass>org.sonar.plugins.csharp.core.CSharpCorePlugin</sonar.pluginClass>
+    <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
   </properties>
 
   <dependencies>

@@ -17,22 +17,37 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
 
+import org.sonar.plugins.csharp.CSharp;
+import org.sonar.plugins.csharp.CSharpConstants;
+
+import org.sonar.plugins.csharp.CSharpPlugin;
+import org.junit.Before;
 import org.junit.Test;
-import org.sonar.plugins.csharp.api.CSharp;
-
+import org.sonar.api.config.Settings;
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
-public class CSharpSourceImporterTest {
+public class CSharpTest {
+
+  private Settings settings;
+  private CSharp cSharp;
+
+  @Before
+  public void init() {
+    settings = Settings.createForComponent(new CSharpPlugin());
+    cSharp = new CSharp(settings);
+  }
 
   @Test
-  public void test() {
-    CSharp language = mock(CSharp.class);
-    CSharpSourceImporter importer = new CSharpSourceImporter(language);
+  public void shouldGetDefaultFileSuffixes() {
+    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs");
+  }
 
-    assertThat(importer.getLanguage()).isSameAs(language);
+  @Test
+  public void shouldGetCustomFileSuffixes() {
+    settings.setProperty(CSharpConstants.FILE_SUFFIXES_KEY, ".cs,.csharp");
+    assertThat(cSharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
   }
 
 }

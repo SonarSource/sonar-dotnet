@@ -17,35 +17,39 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.squid.check;
+package org.sonar.plugins.csharp;
 
-import com.google.common.collect.Lists;
-import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
-import org.sonar.api.BatchExtension;
-import org.sonar.api.ServerExtension;
-
-import java.util.Collection;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Settings;
+import org.sonar.api.resources.AbstractLanguage;
 
 /**
- * Abstract class that every check developed for the C# language should extend to be automatically injected in the C# plugin.
- *
+ * Class that defines the C# language.
  */
-public class CSharpCheck extends SquidCheck<Grammar> implements ServerExtension, BatchExtension {
+public class CSharp extends AbstractLanguage {
+
+  private final Settings settings;
 
   /**
-   * Turns an array of {@link CSharpCheck} objects into a collection of their corresponding class.
+   * Constructs a {@link CSharp} language object with the given configuration.
    *
-   * @param checks
-   * @return
+   * @param configuration
    */
-  @SuppressWarnings("rawtypes")
-  public static Collection<Class> toCollection(CSharpCheck[] checks) {
-    Collection<Class> checkClasses = Lists.newArrayList();
-    for (CSharpCheck check : checks) {
-      checkClasses.add(check.getClass());
+  public CSharp(Settings settings) {
+    super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
+    this.settings = settings;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String[] getFileSuffixes() {
+    String[] suffixes = settings.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
+    if (suffixes.length == 0) {
+      suffixes = StringUtils.split(CSharpConstants.FILE_SUFFIXES_DEFVALUE, ",");
     }
-    return checkClasses;
+    return suffixes;
   }
 
 }

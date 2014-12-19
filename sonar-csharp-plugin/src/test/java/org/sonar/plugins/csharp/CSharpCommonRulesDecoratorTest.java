@@ -17,17 +17,23 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
 
+import org.sonar.plugins.csharp.CSharpConstants;
+
+import org.sonar.plugins.csharp.CSharpCommonRulesDecorator;
+import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.commonrules.api.CommonRulesDecorator;
-import org.sonar.plugins.csharp.api.CSharpConstants;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
-public class CSharpCommonRulesDecorator extends CommonRulesDecorator {
+public class CSharpCommonRulesDecoratorTest {
 
-  public CSharpCommonRulesDecorator(ProjectFileSystem fs, RulesProfile qProfile) {
-    super(CSharpConstants.LANGUAGE_KEY, fs, qProfile);
+  @Test
+  public void test_declaration() throws Exception {
+    CSharpCommonRulesDecorator decorator = new CSharpCommonRulesDecorator(mock(ProjectFileSystem.class), mock(RulesProfile.class));
+    assertThat(decorator.language()).isEqualTo(CSharpConstants.LANGUAGE_KEY);
   }
 
 }

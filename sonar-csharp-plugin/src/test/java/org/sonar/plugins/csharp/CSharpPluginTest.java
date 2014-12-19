@@ -17,26 +17,34 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
 
+import org.sonar.plugins.csharp.CSharpSourceCodeColorizer;
+
+import org.sonar.plugins.csharp.CSharpRuleProfile;
+import org.sonar.plugins.csharp.CSharpRuleRepository;
+import org.sonar.plugins.csharp.CSharp;
+import org.sonar.plugins.csharp.CSharpCodeCoverageProvider;
+import org.sonar.plugins.csharp.CSharpCommonRulesDecorator;
+import org.sonar.plugins.csharp.CSharpCommonRulesEngine;
+import org.sonar.plugins.csharp.CSharpPlugin;
+import org.sonar.plugins.csharp.CSharpFxCopProvider;
+import org.sonar.plugins.csharp.CSharpSourceImporter;
+import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider;
 import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.csharp.CSharpSensor;
-import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
-import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
-import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 
 import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpCorePluginTest {
+public class CSharpPluginTest {
 
   @Test
   public void getExtensions() {
-    assertThat(nonProperties(new CSharpCorePlugin().getExtensions())).contains(
+    assertThat(nonProperties(new CSharpPlugin().getExtensions())).contains(
       CSharp.class,
       CSharpSourceImporter.class,
       CSharpCommonRulesEngine.class,
@@ -46,7 +54,7 @@ public class CSharpCorePluginTest {
       CSharpRuleProfile.class,
       CSharpSensor.class);
 
-    assertThat(new CSharpCorePlugin().getExtensions()).hasSize(
+    assertThat(new CSharpPlugin().getExtensions()).hasSize(
       8
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()

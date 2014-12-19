@@ -17,33 +17,31 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
+
+import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider;
+import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsAggregator;
+import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsImportSensor;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.core.CSharpFxCopProvider.CSharpFxCopRuleRepository;
-import org.sonar.plugins.csharp.core.CSharpFxCopProvider.CSharpFxCopSensor;
 
 import java.util.List;
 import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpFxCopProviderTest {
+public class CSharpUnitTestResultsProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(new CSharpFxCopProvider().extensions())).containsOnly(
-      CSharpFxCopRuleRepository.class,
-      CSharpFxCopSensor.class);
-    assertThat(propertyKeys(new CSharpFxCopProvider().extensions())).containsOnly(
-      "sonar.cs.fxcop.assembly",
-      "sonar.cs.fxcop.timeoutMinutes",
-      "sonar.cs.fxcop.fxCopCmdPath",
-      "sonar.cs.fxcop.aspnet",
-      "sonar.cs.fxcop.directories",
-      "sonar.cs.fxcop.references");
+    assertThat(nonProperties(CSharpUnitTestResultsProvider.extensions())).containsOnly(
+      CSharpUnitTestResultsAggregator.class,
+      CSharpUnitTestResultsImportSensor.class);
+    assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
+      "sonar.cs.vstest.reportsPaths",
+      "sonar.cs.nunit.reportsPaths");
   }
 
   private static Set<String> nonProperties(List extensions) {

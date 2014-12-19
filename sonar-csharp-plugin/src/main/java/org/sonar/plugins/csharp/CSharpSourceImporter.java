@@ -17,22 +17,14 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.api;
+package org.sonar.plugins.csharp;
 
-/**
- * Constants for the C# language.
- */
-public final class CSharpConstants {
+import org.sonar.api.batch.AbstractSourceImporter;
 
-  public static final String LANGUAGE_KEY = "cs";
-  public static final String LANGUAGE_NAME = "C#";
+public class CSharpSourceImporter extends AbstractSourceImporter {
 
-  public static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
-  public static final String FILE_SUFFIXES_DEFVALUE = ".cs";
-
-  public static final String CSHARP_WAY_PROFILE = "Sonar way";
-
-  private CSharpConstants() {
+  public CSharpSourceImporter(CSharp cSharp) {
+    super(cSharp);
   }
 
 }

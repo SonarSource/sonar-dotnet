@@ -17,29 +17,33 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
+
+import org.sonar.plugins.csharp.CSharpCodeCoverageProvider;
+import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
+import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.core.CSharpUnitTestResultsProvider.CSharpUnitTestResultsAggregator;
-import org.sonar.plugins.csharp.core.CSharpUnitTestResultsProvider.CSharpUnitTestResultsImportSensor;
 
 import java.util.List;
 import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpUnitTestResultsProviderTest {
+public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(CSharpUnitTestResultsProvider.extensions())).containsOnly(
-      CSharpUnitTestResultsAggregator.class,
-      CSharpUnitTestResultsImportSensor.class);
-    assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
-      "sonar.cs.vstest.reportsPaths",
-      "sonar.cs.nunit.reportsPaths");
+    assertThat(nonProperties(CSharpCodeCoverageProvider.extensions())).containsOnly(
+      CSharpCoverageAggregator.class,
+      CSharpCoverageReportImportSensor.class);
+    assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
+      "sonar.cs.ncover3.reportsPaths",
+      "sonar.cs.opencover.reportsPaths",
+      "sonar.cs.dotcover.reportsPaths",
+      "sonar.cs.vscoveragexml.reportsPaths");
   }
 
   private static Set<String> nonProperties(List extensions) {

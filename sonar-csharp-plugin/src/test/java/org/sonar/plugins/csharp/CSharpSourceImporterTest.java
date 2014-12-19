@@ -17,39 +17,23 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.api;
+package org.sonar.plugins.csharp;
 
-import org.apache.commons.lang.StringUtils;
-import org.sonar.api.config.Settings;
-import org.sonar.api.resources.AbstractLanguage;
+import org.sonar.plugins.csharp.CSharp;
 
-/**
- * Class that defines the C# language.
- */
-public class CSharp extends AbstractLanguage {
+import org.sonar.plugins.csharp.CSharpSourceImporter;
+import org.junit.Test;
+import static org.fest.assertions.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
-  private final Settings settings;
+public class CSharpSourceImporterTest {
 
-  /**
-   * Constructs a {@link CSharp} language object with the given configuration.
-   *
-   * @param configuration
-   */
-  public CSharp(Settings settings) {
-    super(CSharpConstants.LANGUAGE_KEY, CSharpConstants.LANGUAGE_NAME);
-    this.settings = settings;
-  }
+  @Test
+  public void test() {
+    CSharp language = mock(CSharp.class);
+    CSharpSourceImporter importer = new CSharpSourceImporter(language);
 
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String[] getFileSuffixes() {
-    String[] suffixes = settings.getStringArray(CSharpConstants.FILE_SUFFIXES_KEY);
-    if (suffixes.length == 0) {
-      suffixes = StringUtils.split(CSharpConstants.FILE_SUFFIXES_DEFVALUE, ",");
-    }
-    return suffixes;
+    assertThat(importer.getLanguage()).isSameAs(language);
   }
 
 }

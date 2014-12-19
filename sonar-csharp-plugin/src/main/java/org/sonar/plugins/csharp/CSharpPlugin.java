@@ -17,20 +17,13 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
-import org.sonar.plugins.csharp.CSharpSensor;
-import org.sonar.plugins.csharp.api.CSharp;
-import org.sonar.plugins.csharp.api.CSharpConstants;
-import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
-import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
-import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
-import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
 
 import java.util.List;
 
@@ -53,7 +46,7 @@ import java.util.List;
     project = true, global = true,
     type = PropertyType.BOOLEAN)
 })
-public class CSharpCorePlugin extends SonarPlugin {
+public class CSharpPlugin extends SonarPlugin {
 
   @Override
   public List getExtensions() {

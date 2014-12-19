@@ -17,7 +17,7 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.squid.colorizer;
+package org.sonar.plugins.csharp;
 
 import com.sonar.csharp.squid.api.CSharpKeyword;
 import org.sonar.api.web.CodeColorizerFormat;
@@ -27,7 +27,6 @@ import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.LiteralTokenizer;
 import org.sonar.colorizer.RegexpTokenizer;
 import org.sonar.colorizer.Tokenizer;
-import org.sonar.plugins.csharp.api.CSharpConstants;
 
 import java.util.ArrayList;
 import java.util.List;

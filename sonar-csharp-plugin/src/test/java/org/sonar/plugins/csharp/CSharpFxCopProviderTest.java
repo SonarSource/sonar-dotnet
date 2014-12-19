@@ -17,31 +17,35 @@
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
-package org.sonar.plugins.csharp.core;
+package org.sonar.plugins.csharp;
+
+import org.sonar.plugins.csharp.CSharpFxCopProvider;
+import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopRuleRepository;
+import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopSensor;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
-import org.sonar.plugins.csharp.core.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 
 import java.util.List;
 import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpCodeCoverageProviderTest {
+public class CSharpFxCopProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(CSharpCodeCoverageProvider.extensions())).containsOnly(
-      CSharpCoverageAggregator.class,
-      CSharpCoverageReportImportSensor.class);
-    assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
-      "sonar.cs.ncover3.reportsPaths",
-      "sonar.cs.opencover.reportsPaths",
-      "sonar.cs.dotcover.reportsPaths",
-      "sonar.cs.vscoveragexml.reportsPaths");
+    assertThat(nonProperties(new CSharpFxCopProvider().extensions())).containsOnly(
+      CSharpFxCopRuleRepository.class,
+      CSharpFxCopSensor.class);
+    assertThat(propertyKeys(new CSharpFxCopProvider().extensions())).containsOnly(
+      "sonar.cs.fxcop.assembly",
+      "sonar.cs.fxcop.timeoutMinutes",
+      "sonar.cs.fxcop.fxCopCmdPath",
+      "sonar.cs.fxcop.aspnet",
+      "sonar.cs.fxcop.directories",
+      "sonar.cs.fxcop.references");
   }
 
   private static Set<String> nonProperties(List extensions) {
