@@ -72,6 +72,11 @@
 
         public override void Initialize(AnalysisContext context)
         {
+            if (!Status)
+            {
+                return;
+            }
+
             context.RegisterSyntaxNodeAction(
                 c =>
                 {

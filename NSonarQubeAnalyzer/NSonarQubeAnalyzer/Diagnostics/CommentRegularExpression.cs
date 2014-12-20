@@ -98,6 +98,11 @@
 
         public override void Initialize(AnalysisContext context)
         {
+            if (!Status)
+            {
+                return;
+            }
+
             context.RegisterSyntaxTreeAction(
                 c =>
                 {
