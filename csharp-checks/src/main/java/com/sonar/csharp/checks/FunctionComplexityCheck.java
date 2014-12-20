@@ -19,17 +19,12 @@
  */
 package com.sonar.csharp.checks;
 
-import com.sonar.csharp.squid.api.CSharpMetric;
-import com.sonar.csharp.squid.api.source.SourceMember;
-import com.sonar.csharp.squid.parser.CSharpGrammar;
-import com.sonar.sslr.api.AstNode;
 import com.sonar.sslr.api.Grammar;
-import org.sonar.squidbridge.checks.SquidCheck;
 import org.sonar.check.BelongsToProfile;
 import org.sonar.check.Priority;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
-import org.sonar.squidbridge.api.SourceCode;
+import org.sonar.squidbridge.checks.SquidCheck;
 
 @Rule(
   key = "FunctionComplexity",
@@ -43,33 +38,5 @@ public class FunctionComplexityCheck extends SquidCheck<Grammar> {
     key = "maximumFunctionComplexityThreshold",
     defaultValue = "" + DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD)
   public int maximumFunctionComplexityThreshold = DEFAULT_MAXIMUM_FUNCTION_COMPLEXITY_THRESHOLD;
-
-  @Override
-  public void init() {
-    subscribeTo(
-        CSharpGrammar.METHOD_DECLARATION,
-        CSharpGrammar.CONSTRUCTOR_BODY,
-        CSharpGrammar.STATIC_CONSTRUCTOR_BODY,
-        CSharpGrammar.DESTRUCTOR_BODY,
-        CSharpGrammar.ACCESSOR_BODY,
-        CSharpGrammar.ADD_ACCESSOR_DECLARATION,
-        CSharpGrammar.REMOVE_ACCESSOR_DECLARATION,
-        CSharpGrammar.OPERATOR_BODY);
-  }
-
-  @Override
-  public void leaveNode(AstNode node) {
-    SourceCode source = getContext().peekSourceCode();
-    if (source instanceof SourceMember) {
-      SourceMember member = (SourceMember) source;
-      if (member.getInt(CSharpMetric.COMPLEXITY) > maximumFunctionComplexityThreshold) {
-        getContext().createLineViolation(this,
-            "Refactor this method that has a complexity of {0} (which is greater than {1} authorized).",
-            node,
-            member.getInt(CSharpMetric.COMPLEXITY),
-            maximumFunctionComplexityThreshold);
-      }
-    }
-  }
 
 }

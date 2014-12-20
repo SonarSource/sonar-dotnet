@@ -30,9 +30,7 @@ import org.sonar.plugins.csharp.api.CSharpConstants;
 import org.sonar.plugins.csharp.squid.CSharpRuleProfile;
 import org.sonar.plugins.csharp.squid.CSharpRuleRepository;
 import org.sonar.plugins.csharp.squid.CSharpSquidConstants;
-import org.sonar.plugins.csharp.squid.CSharpSquidSensor;
 import org.sonar.plugins.csharp.squid.colorizer.CSharpSourceCodeColorizer;
-import org.sonar.plugins.csharp.squid.cpd.CSharpCPDMapping;
 
 import java.util.List;
 
@@ -72,9 +70,7 @@ public class CSharpCorePlugin extends SonarPlugin {
       CSharpCommonRulesDecorator.class,
 
       // C# Squid
-      CSharpCPDMapping.class,
       CSharpSourceCodeColorizer.class,
-      CSharpSquidSensor.class,
 
       // rules
       CSharpRuleRepository.class,

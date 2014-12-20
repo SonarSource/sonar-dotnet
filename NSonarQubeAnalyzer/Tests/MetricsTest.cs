@@ -298,6 +298,23 @@
             return MetricsFor(text).Complexity();
         }
 
+        [TestMethod]
+        public void FunctionComplexityDistribution()
+        {
+            FunctionComplexityDistribution("").Ranges.Should().BeEquivalentTo(1, 2, 4, 6, 8, 10, 12);
+
+            FunctionComplexityDistribution("").Values.Should().BeEquivalentTo(0, 0, 0, 0, 0, 0, 0);
+            FunctionComplexityDistribution("class MyClass { void M1() { } }").Values.Should().BeEquivalentTo(1, 0, 0, 0, 0, 0, 0);
+            FunctionComplexityDistribution("class MyClass { void M1() { } void M2() { } }").Values.Should().BeEquivalentTo(2, 0, 0, 0, 0, 0, 0);
+            FunctionComplexityDistribution("class MyClass { void M1() { if (false) { } } }").Values.Should().BeEquivalentTo(0, 1, 0, 0, 0, 0, 0);
+            FunctionComplexityDistribution("class MyClass { void M1() { if (false) { } if (false) { } if (false) { } } }").Values.Should().BeEquivalentTo(0, 0, 1, 0, 0, 0, 0);
+        }
+
+        private static Distribution FunctionComplexityDistribution(string text)
+        {
+            return MetricsFor(text).FunctionComplexityDistribution();
+        }
+
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

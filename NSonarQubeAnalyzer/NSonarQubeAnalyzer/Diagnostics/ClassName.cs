@@ -1,5 +1,7 @@
 ﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using System.Collections.Generic;
+
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,6 +36,16 @@
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public string Convention { get; set; }
+
+        public override void SetDefaultSettings()
+        {
+            this.Convention = "^[A-Z][a-zA-Z0-9]+$";
+        }
+
+        public override void UpdateParameters(Dictionary<string, string> parameters)
+        {
+            this.Convention = parameters["format"];
+        }
 
         /// <summary>
         /// Configure the rule from the supplied settings

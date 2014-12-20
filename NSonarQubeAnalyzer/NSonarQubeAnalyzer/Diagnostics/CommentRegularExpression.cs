@@ -31,7 +31,28 @@
             }
         }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return this.Rules.Select(r => r.Descriptor).ToImmutableArray(); } }
+        public override void SetDefaultSettings()
+        {
+            var builder = ImmutableArray.CreateBuilder<CommentRegularExpressionRule>();
+            builder.Add(
+                new CommentRegularExpressionRule
+                {
+                        // TODO: Add rule description
+                        Descriptor =
+                        new DiagnosticDescriptor("CommentRegularExpression", "TODO", "TODO", "SonarQube", DiagnosticSeverity.Warning, true),
+                    RegularExpression = "(?i)TODO"
+                });
+
+            this.Rules = builder.ToImmutable();
+        }
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+        {
+            get
+            {
+                return this.Rules.Select(r => r.Descriptor).ToImmutableArray();
+            }
+        }
 
         /// <summary>
         /// Configure the rule from the supplied settings

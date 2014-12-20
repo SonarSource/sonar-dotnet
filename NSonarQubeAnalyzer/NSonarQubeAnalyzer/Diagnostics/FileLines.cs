@@ -1,5 +1,7 @@
 ﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using System.Collections.Generic;
+
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,6 +29,16 @@
             {
                 return "FileLoc";
             }
+        }
+
+        public override void SetDefaultSettings()
+        {
+            this.Maximum = 1000;
+        }
+
+        public override void UpdateParameters(Dictionary<string, string> parameters)
+        {
+            this.Maximum = int.Parse(parameters["maximumFileLocThreshold"]);
         }
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }

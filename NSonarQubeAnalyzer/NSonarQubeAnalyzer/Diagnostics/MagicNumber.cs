@@ -5,6 +5,7 @@
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Diagnostics;
     using System;
+    using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
     using System.Xml.Linq;
@@ -34,6 +35,22 @@
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public IImmutableSet<string> Exceptions { get; set; }
+
+        public override void SetDefaultSettings()
+        {
+            this.Exceptions = ImmutableHashSet.Create("0", "1", "0x0", "0x00", ".0", ".1", "0.0", "1.0");
+        }
+
+        public override void UpdateParameters(Dictionary<string, string> parameters)
+        {
+            var set = new HashSet<string>();
+            foreach (var exc in parameters["exceptions"].Split(','))
+            {
+                set.Add(exc);
+            }
+
+            Exceptions = set.ToImmutableHashSet();
+        }
 
         /// <summary>
         /// Configure the rule from the supplied settings

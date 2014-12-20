@@ -1,5 +1,7 @@
 ﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using System.Collections.Generic;
+
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Diagnostics;
     using System.Collections.Immutable;
@@ -31,6 +33,16 @@
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
         public int Maximum { get; set; }
+
+        public override void SetDefaultSettings()
+        {
+            this.Maximum = 200;
+        }
+
+        public override void UpdateParameters(Dictionary<string, string> parameters)
+        {
+            this.Maximum = int.Parse(parameters["maximumLineLength"]);
+        }
 
         /// <summary>
         /// Configure the rule from the supplied settings

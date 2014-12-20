@@ -30,6 +30,62 @@ namespace NSonarQubeAnalyzer
 
             var xmlOutSettings = new XmlWriterSettings { Encoding = Encoding.UTF8, Indent = true, IndentChars = "  " };
 
+<<<<<<< HEAD
+=======
+            var commentRegexpRules = from e in xmlIn.Descendants("Rule")
+                                     where "CommentRegularExpression".Equals((e.Elements("ParentKey").SingleOrDefault() ?? XElement.Parse("<Dummy />")).Value)
+                                     select e;
+            if (commentRegexpRules.Any())
+            {
+                var builder = ImmutableArray.CreateBuilder<CommentRegularExpressionRule>();
+                foreach (var commentRegexpRule in commentRegexpRules)
+                {
+                    string key = commentRegexpRule.Elements("Key").Single().Value;
+                    var parameters = commentRegexpRule.Descendants("Parameter");
+                    string message = (from e in parameters
+                                      where "message".Equals(e.Elements("Key").Single().Value)
+                                      select e.Elements("Value").Single().Value)
+                                  .Single();
+                    string regularExpression = (from e in parameters
+                                                where "regularExpression".Equals(e.Elements("Key").Single().Value)
+                                                select e.Elements("Value").Single().Value)
+                                  .Single();
+
+                    builder.Add(
+                        new CommentRegularExpressionRule
+                        {
+                            // TODO: Add rule description
+                            Descriptor = new DiagnosticDescriptor(key, "TODO", message, "SonarQube", DiagnosticSeverity.Warning, true),
+                            RegularExpression = regularExpression
+                        });
+
+                    var diagnostic = new CommentRegularExpression();
+                    diagnostic.Rules = builder.ToImmutable();
+                    diagnosticAnalyzersBuilder.Add(diagnostic);
+                }
+            }
+            if (rules.Contains("FunctionComplexity"))
+            {
+                var parameters = from e in xmlIn.Descendants("Rule")
+                                 where "FunctionComplexity".Equals(e.Elements("Key").Single().Value)
+                                 select e.Descendants("Parameter");
+                var maximum = (from e in parameters
+                               where "maximumFunctionComplexityThreshold".Equals(e.Elements("Key").Single().Value)
+                               select e.Elements("Value").Single().Value)
+                              .Single();
+
+                var diagnostic = new FunctionComplexity();
+                diagnostic.Maximum = int.Parse(maximum);
+                diagnosticAnalyzersBuilder.Add(diagnostic);
+            }
+
+            var diagnosticsRunner = new DiagnosticsRunner(diagnosticAnalyzersBuilder.ToImmutableArray());
+
+            var xmlOutSettings = new XmlWriterSettings();
+            xmlOutSettings.Encoding = Encoding.UTF8;
+            xmlOutSettings.Indent = true;
+            xmlOutSettings.IndentChars = "  ";
+>>>>>>> master
             using (var xmlOut = XmlWriter.Create(args[1], xmlOutSettings))
             {
                 xmlOut.WriteComment("This XML format is not an API");

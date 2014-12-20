@@ -115,13 +115,17 @@
 
         public int Functions()
         {
-            return tree.GetCompilationUnitRoot()
-                .DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.Block) && IsFunction(n.Parent))
-                .Count();
+            return FunctionNodes().Count();
         }
 
-        private bool IsFunction(SyntaxNode node)
+        public IEnumerable<SyntaxNode> FunctionNodes()
+        {
+            return tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .Where(n => n.IsKind(SyntaxKind.Block) && IsFunction(n.Parent));
+        }
+
+        private static bool IsFunction(SyntaxNode node)
         {
             return node.IsKind(SyntaxKind.ConstructorDeclaration) ||
                 node.IsKind(SyntaxKind.DestructorDeclaration) ||
@@ -188,8 +192,13 @@
 
         public int Complexity()
         {
-            return tree.GetCompilationUnitRoot()
-                .DescendantNodes()
+            return Complexity(tree.GetCompilationUnitRoot());
+        }
+
+        public static int Complexity(SyntaxNode node)
+        {
+            return node
+                .DescendantNodesAndSelf()
                 .Where(
                     n =>
                         // TODO What about the null coalescing operator?
@@ -209,12 +218,22 @@
         }
 
         // TODO What about lambdas?
-        private bool IsLastStatement(SyntaxNode node)
+        private static bool IsLastStatement(SyntaxNode node)
         {
             var nextToken = node.GetLastToken().GetNextToken();
             return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
                 nextToken.Parent.IsKind(SyntaxKind.Block) &&
                 IsFunction(nextToken.Parent.Parent);
+        }
+
+        public Distribution FunctionComplexityDistribution()
+        {
+            var distribution = new Distribution(1, 2, 4, 6, 8, 10, 12);
+            foreach (var node in FunctionNodes())
+            {
+                distribution.Add(Complexity(node));
+            }
+            return distribution;
         }
     }
 }
