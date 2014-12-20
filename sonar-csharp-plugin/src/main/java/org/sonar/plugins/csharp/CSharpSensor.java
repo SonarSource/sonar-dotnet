@@ -471,21 +471,29 @@ public class CSharpSensor implements Sensor {
     private void handleIssueTag(Issuable issuable) throws XMLStreamException {
       IssueBuilder builder = issuable.newIssueBuilder();
 
+      String id = null;
+      String message = null;
+
       while (stream.hasNext()) {
         int next = stream.next();
 
         if (next == XMLStreamConstants.END_ELEMENT && "Issue".equals(stream.getLocalName())) {
+          Preconditions.checkState(!"AnalyzerDriver".equals(id), "The analyzer failed, double check rule parameters or disable failing rules: " + message);
+
+          builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, stream.getElementText()));
+          builder.message(stream.getElementText());
+
           issuable.addIssue(builder.build());
           break;
         } else if (next == XMLStreamConstants.START_ELEMENT) {
           String tagName = stream.getLocalName();
 
           if ("Id".equals(tagName)) {
-            builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, stream.getElementText()));
+            id = stream.getElementText();
           } else if ("Line".equals(tagName)) {
             builder.line(Integer.parseInt(stream.getElementText()));
           } else if ("Message".equals(tagName)) {
-            builder.message(stream.getElementText());
+            message = stream.getElementText();
           }
         }
       }
