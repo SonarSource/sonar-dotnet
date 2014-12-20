@@ -480,8 +480,8 @@ public class CSharpSensor implements Sensor {
         if (next == XMLStreamConstants.END_ELEMENT && "Issue".equals(stream.getLocalName())) {
           Preconditions.checkState(!"AnalyzerDriver".equals(id), "The analyzer failed, double check rule parameters or disable failing rules: " + message);
 
-          builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, stream.getElementText()));
-          builder.message(stream.getElementText());
+          builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, id));
+          builder.message(message);
 
           issuable.addIssue(builder.build());
           break;
