@@ -40,7 +40,14 @@
             {
                 using (ZmqSocket subscriber = context.CreateSocket(SocketType.SUB))
                 {
-                    subscriber.Connect("tcp://localhost:5561");
+                    var currentProcess = Process.GetCurrentProcess();
+                    var id = currentProcess.Id;
+                    if (id < 5000)
+                    {
+                        id += 5000;
+                    }
+
+                    subscriber.Connect("tcp://localhost:" + id);
                     subscriber.Subscribe(Encoding.Unicode.GetBytes(this.RuleId));
 
                     while (this.SubscriberEnabled)
