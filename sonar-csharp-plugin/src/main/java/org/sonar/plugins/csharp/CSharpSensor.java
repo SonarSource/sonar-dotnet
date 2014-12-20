@@ -74,8 +74,6 @@ public class CSharpSensor implements Sensor {
   private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_ANALYZER + ".zip";
   private static final String N_SONARQUBE_ANALYZER_EXE = N_SONARQUBE_ANALYZER + ".exe";
 
-  private static final String REPOSITORY_KEY = "csharpsquid";
-
   private final Settings settings;
   private final ModuleFileSystem fileSystem;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -117,7 +115,7 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "    </Setting>");
     appendLine(sb, "  </Settings>");
     appendLine(sb, "  <Rules>");
-    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(REPOSITORY_KEY)) {
+    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
       appendLine(sb, "    <Rule>");
       appendLine(sb, "      <Key>" + activeRule.getRuleKey() + "</Key>");
       if (activeRule.getRule().getTemplate() != null) {
@@ -483,7 +481,7 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("Id".equals(tagName)) {
-            builder.ruleKey(RuleKey.of(REPOSITORY_KEY, stream.getElementText()));
+            builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, stream.getElementText()));
           } else if ("Line".equals(tagName)) {
             builder.line(Integer.parseInt(stream.getElementText()));
           } else if ("Message".equals(tagName)) {
