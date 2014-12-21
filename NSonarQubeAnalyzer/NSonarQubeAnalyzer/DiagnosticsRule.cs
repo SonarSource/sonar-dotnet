@@ -38,7 +38,7 @@
         {
             using (var context = ZmqContext.Create())
             {
-                using (ZmqSocket subscriber = context.CreateSocket(SocketType.SUB))
+                using (ZmqSocket subscriber = context.CreateSocket(SocketType.REQ))
                 {
                     var currentProcess = Process.GetCurrentProcess();
                     var id = currentProcess.Id;
@@ -48,33 +48,24 @@
                     }
 
                     subscriber.Connect("tcp://localhost:" + id);
-                    subscriber.Subscribe(Encoding.Unicode.GetBytes(this.RuleId));
 
-                    while (this.SubscriberEnabled)
+                    subscriber.Send(Encoding.Unicode.GetBytes(this.RuleId));
+                    var message = subscriber.ReceiveMessage();
+                    var data = Encoding.Unicode.GetString(message[0].Buffer);
+
+                    char[] charSeparators = { ';' };
+                    var elems = data.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+                    this.Status = bool.Parse(elems[1]);
+                    if (elems.Length > 2)
                     {
-                        var data = subscriber.Receive(Encoding.Unicode);
-                        try
+                        var parameters = new Dictionary<string, string>();
+                        for (int i = 2; i < elems.Length; i++)
                         {
-                            char[] charSeparators = { ';' };
-
-                            var elems = data.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
-
-                            this.Status = bool.Parse(elems[1]);
-                            if (elems.Length > 2)
-                            {
-                                var parameters = new Dictionary<string, string>();
-                                for (int i = 2; i < elems.Length; i++)
-                                {
-                                    parameters.Add(elems[i].Split('=')[0], elems[i].Split('=')[1]);
-                                }
-
-                                this.UpdateParameters(parameters);
-                            }
+                            parameters.Add(elems[i].Split('=')[0], elems[i].Split('=')[1]);
                         }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-                        }
+
+                        this.UpdateParameters(parameters);
                     }
                 }
             }           

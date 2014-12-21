@@ -10,7 +10,7 @@
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AsyncAwaitIdentifier : DiagnosticsRule
     {
-        internal const string DiagnosticId = "S1301";
+        internal const string DiagnosticId = "AsyncAwaitIdentifier";
         internal const string Description = "'async' and 'await' should not be used as identifier";
         internal const string MessageFormat = "Rename this identifier.";
         internal const string Category = "SonarQube";
