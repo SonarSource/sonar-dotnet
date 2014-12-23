@@ -358,6 +358,8 @@ namespace NSonarQubeAnalyzer
 
                 xmlOut.WriteEndElement();
                 xmlOut.WriteEndDocument();
+
+                xmlOut.Flush();
             }
         }
     }
