@@ -98,10 +98,10 @@ public class CSharpFxCopProvider {
       PropertyDefinition.builder(FXCOP_IGNOREGENERATEDCODE_PROPERTY_KEY)
             .name("Ignore generated code")
             .description("Whether or not to set the /igc flag when launching FxCopCmd.exe")
-            .defaultValue("false" )
+            .defaultValue("true" )
             .category(CATEGORY)
             .subCategory(SUBCATEGORY)
-            .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+            .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
             .build(),
       PropertyDefinition.builder(FXCOP_DIRECTORIES_PROPERTY_KEY)
         .name("Additional assemblies directories")
