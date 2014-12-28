@@ -44,7 +44,6 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_FXCOPCMD_PATH_PROPERTY_KEY = "sonar.cs.fxcop.fxCopCmdPath";
   private static final String FXCOP_TIMEOUT_PROPERTY_KEY = "sonar.cs.fxcop.timeoutMinutes";
   private static final String FXCOP_ASPNET_PROPERTY_KEY = "sonar.cs.fxcop.aspnet";
-  private static final String FXCOP_IGNOREGENERATEDCODE_PROPERTY_KEY = "sonar.cs.fxcop.ignoreGeneratedCode";
   private static final String FXCOP_DIRECTORIES_PROPERTY_KEY = "sonar.cs.fxcop.directories";
   private static final String FXCOP_REFERENCES_PROPERTY_KEY = "sonar.cs.fxcop.references";
 
@@ -55,7 +54,6 @@ public class CSharpFxCopProvider {
     FXCOP_FXCOPCMD_PATH_PROPERTY_KEY,
     FXCOP_TIMEOUT_PROPERTY_KEY,
     FXCOP_ASPNET_PROPERTY_KEY,
-    FXCOP_IGNOREGENERATEDCODE_PROPERTY_KEY,
     FXCOP_DIRECTORIES_PROPERTY_KEY,
     FXCOP_REFERENCES_PROPERTY_KEY);
 
@@ -95,14 +93,6 @@ public class CSharpFxCopProvider {
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
-      PropertyDefinition.builder(FXCOP_IGNOREGENERATEDCODE_PROPERTY_KEY)
-            .name("Ignore generated code")
-            .description("Whether or not to set the /igc flag when launching FxCopCmd.exe")
-            .defaultValue("false" )
-            .category(CATEGORY)
-            .subCategory(SUBCATEGORY)
-            .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
-            .build(),
       PropertyDefinition.builder(FXCOP_DIRECTORIES_PROPERTY_KEY)
         .name("Additional assemblies directories")
         .description("Comma-separated list of directories where FxCop should look for referenced assemblies. Example: c:/MyLibrary")
