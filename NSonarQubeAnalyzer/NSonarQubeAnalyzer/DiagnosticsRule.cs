@@ -56,16 +56,23 @@
                     char[] charSeparators = { ';' };
                     var elems = data.Split(charSeparators, StringSplitOptions.RemoveEmptyEntries);
 
-                    this.Status = bool.Parse(elems[1]);
-                    if (elems.Length > 2)
+                    try
                     {
-                        var parameters = new Dictionary<string, string>();
-                        for (int i = 2; i < elems.Length; i++)
+                        this.Status = bool.Parse(elems[1]);
+                        if (elems.Length > 2)
                         {
-                            parameters.Add(elems[i].Split('=')[0], elems[i].Split('=')[1]);
-                        }
+                            var parameters = new Dictionary<string, string>();
+                            for (int i = 2; i < elems.Length; i++)
+                            {
+                                parameters.Add(elems[i].Split('=')[0], elems[i].Split('=')[1]);
+                            }
 
-                        this.UpdateParameters(parameters);
+                            this.UpdateParameters(parameters);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
                     }
                 }
             }           
