@@ -53,7 +53,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1186").setName("Methods should not be empty").setSeverity(Severity.MAJOR);
     repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
 
-    NewRule commentRegex = repository.createRule("CommentRegularExpression2").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
+    NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")
       .setType(RuleParamType.STRING).setDefaultValue("");
     commentRegex.createParam("message").setDescription("The issue message")
@@ -63,11 +63,11 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     magicNumber.createParam("exceptions").setDescription("Comma separated list of allowed values (excluding '-' and '+' signs)")
       .setType(RuleParamType.STRING).setDefaultValue("0,1,0x0,0x00,.0,.1,0.0,1.0");
 
-    NewRule className = repository.createRule("ClassName2").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    NewRule className = repository.createRule("S101").setName("Class name should comply with a naming convention").setSeverity(Severity.MAJOR);
     className.createParam("format").setDescription("Regular expression used to check the class names against")
       .setType(RuleParamType.STRING).setDefaultValue("^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$");
 
-    NewRule methodName = repository.createRule("MethodName2").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
+    NewRule methodName = repository.createRule("S100").setName("Method name should comply with a naming convention").setSeverity(Severity.MAJOR);
     methodName.createParam("format").setDescription("Regular expression used to check the method names against")
       .setType(RuleParamType.STRING).setDefaultValue("^[A-Z][a-zA-Z0-9]+$");
 

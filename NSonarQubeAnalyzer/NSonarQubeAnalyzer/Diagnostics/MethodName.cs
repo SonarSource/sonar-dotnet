@@ -18,7 +18,7 @@ namespace NSonarQubeAnalyzer
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class MethodName : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "MethodName2";
+        internal const string DiagnosticId = "S100";
         internal const string Description = "Method name should comply with a naming convention";
         internal const string MessageFormat = "Rename this method to match the regular expression: {0}";
         internal const string Category = "SonarQube";
