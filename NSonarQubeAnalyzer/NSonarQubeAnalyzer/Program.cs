@@ -282,81 +282,90 @@ namespace NSonarQubeAnalyzer
                     Console.WriteLine(n + "/" + files.Count() + " files analyzed, starting to analyze: " + file);
                     n++;
 
-                    xmlOut.WriteStartElement("File");
-                    xmlOut.WriteElementString("Path", file);
-
-                    SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
-                    Metrics metrics = new Metrics(syntaxTree);
-                    xmlOut.WriteStartElement("Metrics");
-
-                    xmlOut.WriteElementString("Lines", metrics.Lines().ToString());
-                    xmlOut.WriteElementString("Classes", metrics.Classes().ToString());
-                    xmlOut.WriteElementString("Accessors", metrics.Accessors().ToString());
-                    xmlOut.WriteElementString("Statements", metrics.Statements().ToString());
-                    xmlOut.WriteElementString("Functions", metrics.Functions().ToString());
-                    xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString());
-                    xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString());
-
-                    var complexity = metrics.Complexity();
-                    xmlOut.WriteElementString("Complexity", complexity.ToString());
-
-                    // TODO This is a bit ridiculous, but is how SonarQube works
-                    var fileComplexityDistribution = new Distribution(0, 5, 10, 20, 30, 60, 90);
-                    fileComplexityDistribution.Add(complexity);
-                    xmlOut.WriteElementString("FileComplexityDistribution", fileComplexityDistribution.ToString());
-
-                    xmlOut.WriteElementString("FunctionComplexityDistribution", metrics.FunctionComplexityDistribution().ToString());
-
-                    FileComments comments = metrics.Comments(ignoreHeaderComments);
-                    xmlOut.WriteStartElement("Comments");
-                    xmlOut.WriteStartElement("NoSonar");
-                    foreach (int line in comments.NoSonar)
+                    try
                     {
-                        xmlOut.WriteElementString("Line", line.ToString());
-                    }
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteStartElement("NonBlank");
-                    foreach (int line in comments.NonBlank)
-                    {
-                        xmlOut.WriteElementString("Line", line.ToString());
-                    }
-                    xmlOut.WriteEndElement();
-                    xmlOut.WriteEndElement();
+                        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
+                        Metrics metrics = new Metrics(syntaxTree);
 
-                    xmlOut.WriteStartElement("LinesOfCode");
-                    foreach (int line in metrics.LinesOfCode())
-                    {
-                        xmlOut.WriteElementString("Line", line.ToString());
-                    }
-                    xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("File");
+                        xmlOut.WriteElementString("Path", file);
 
-                    xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("Metrics");
 
-                    xmlOut.WriteStartElement("Issues");
-                    foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(syntaxTree))
-                    {
-                        xmlOut.WriteStartElement("Issue");
-                        xmlOut.WriteElementString("Id", diagnostic.Id);
-                        if (diagnostic.Location != Location.None)
+                        xmlOut.WriteElementString("Lines", metrics.Lines().ToString());
+                        xmlOut.WriteElementString("Classes", metrics.Classes().ToString());
+                        xmlOut.WriteElementString("Accessors", metrics.Accessors().ToString());
+                        xmlOut.WriteElementString("Statements", metrics.Statements().ToString());
+                        xmlOut.WriteElementString("Functions", metrics.Functions().ToString());
+                        xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString());
+                        xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString());
+
+                        var complexity = metrics.Complexity();
+                        xmlOut.WriteElementString("Complexity", complexity.ToString());
+
+                        // TODO This is a bit ridiculous, but is how SonarQube works
+                        var fileComplexityDistribution = new Distribution(0, 5, 10, 20, 30, 60, 90);
+                        fileComplexityDistribution.Add(complexity);
+                        xmlOut.WriteElementString("FileComplexityDistribution", fileComplexityDistribution.ToString());
+
+                        xmlOut.WriteElementString("FunctionComplexityDistribution", metrics.FunctionComplexityDistribution().ToString());
+
+                        FileComments comments = metrics.Comments(ignoreHeaderComments);
+                        xmlOut.WriteStartElement("Comments");
+                        xmlOut.WriteStartElement("NoSonar");
+                        foreach (int line in comments.NoSonar)
                         {
-                            xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                            xmlOut.WriteElementString("Line", line.ToString());
                         }
-                        xmlOut.WriteElementString("Message", diagnostic.GetMessage());
+                        xmlOut.WriteEndElement();
+                        xmlOut.WriteStartElement("NonBlank");
+                        foreach (int line in comments.NonBlank)
+                        {
+                            xmlOut.WriteElementString("Line", line.ToString());
+                        }
+                        xmlOut.WriteEndElement();
+                        xmlOut.WriteEndElement();
+
+                        xmlOut.WriteStartElement("LinesOfCode");
+                        foreach (int line in metrics.LinesOfCode())
+                        {
+                            xmlOut.WriteElementString("Line", line.ToString());
+                        }
+                        xmlOut.WriteEndElement();
+
+                        xmlOut.WriteEndElement();
+
+                        xmlOut.WriteStartElement("Issues");
+                        foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(syntaxTree))
+                        {
+                            xmlOut.WriteStartElement("Issue");
+                            xmlOut.WriteElementString("Id", diagnostic.Id);
+                            if (diagnostic.Location != Location.None)
+                            {
+                                xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                            }
+                            xmlOut.WriteElementString("Message", diagnostic.GetMessage());
+                            xmlOut.WriteEndElement();
+                        }
+                        xmlOut.WriteEndElement();
+
+                        xmlOut.WriteStartElement("CopyPasteTokens");
+                        foreach (var token in metrics.CopyPasteTokens())
+                        {
+                            xmlOut.WriteStartElement("Token");
+                            xmlOut.WriteElementString("Value", token.Item1);
+                            xmlOut.WriteElementString("Line", token.Item2.ToString());
+                            xmlOut.WriteEndElement();
+                        }
+                        xmlOut.WriteEndElement();
+
                         xmlOut.WriteEndElement();
                     }
-                    xmlOut.WriteEndElement();
-
-                    xmlOut.WriteStartElement("CopyPasteTokens");
-                    foreach (var token in metrics.CopyPasteTokens())
+                    catch (Exception e)
                     {
-                        xmlOut.WriteStartElement("Token");
-                        xmlOut.WriteElementString("Value", token.Item1);
-                        xmlOut.WriteElementString("Line", token.Item2.ToString());
-                        xmlOut.WriteEndElement();
+                        Console.Error.WriteLine("Failed to analyze the file: " + file);
+                        Console.Error.WriteLine(e);
                     }
-                    xmlOut.WriteEndElement();
-
-                    xmlOut.WriteEndElement();
                 }
                 xmlOut.WriteEndElement();
 

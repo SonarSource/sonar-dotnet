@@ -156,7 +156,7 @@ public class CSharpSensor implements Sensor {
       .addArgument(analysisInput.getAbsolutePath())
       .addArgument(analysisOutput.getAbsolutePath());
 
-    CommandExecutor.create().execute(command, new SinkStreamConsumer(), new SinkStreamConsumer(), Integer.MAX_VALUE);
+    CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
@@ -504,11 +504,20 @@ public class CSharpSensor implements Sensor {
     sb.append("\r\n");
   }
 
-  private static class SinkStreamConsumer implements StreamConsumer {
+  private static class LogInfoStreamConsumer implements StreamConsumer {
 
     @Override
     public void consumeLine(String line) {
       LOG.info(line);
+    }
+
+  }
+
+  private static class LogErrorStreamConsumer implements StreamConsumer {
+
+    @Override
+    public void consumeLine(String line) {
+      LOG.error(line);
     }
 
   }
