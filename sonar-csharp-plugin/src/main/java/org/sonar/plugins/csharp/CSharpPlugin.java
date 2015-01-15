@@ -72,6 +72,7 @@ public class CSharpPlugin extends SonarPlugin {
       CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
       CSharpSourceCodeColorizer.class,
+      NSonarQubeAnalyzerExtractor.class,
       CSharpSensor.class,
       CSharpCPDMapping.class);
 

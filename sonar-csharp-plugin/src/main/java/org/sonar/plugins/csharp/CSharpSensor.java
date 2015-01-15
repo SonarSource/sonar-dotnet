@@ -25,7 +25,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import org.sonar.api.batch.DependedUpon;
@@ -61,7 +60,6 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
@@ -70,20 +68,19 @@ import java.util.Map.Entry;
 @DependedUpon("NSonarQubeAnalysis")
 public class CSharpSensor implements Sensor {
 
-  private static final String N_SONARQUBE_ANALYZER = "NSonarQubeAnalyzer";
-  private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_ANALYZER + ".zip";
-  private static final String N_SONARQUBE_ANALYZER_EXE = N_SONARQUBE_ANALYZER + ".exe";
-
   private final Settings settings;
+  private final NSonarQubeAnalyzerExtractor extractor;
   private final ModuleFileSystem fileSystem;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final RulesProfile ruleProfile;
   private final ResourcePerspectives perspectives;
 
-  public CSharpSensor(Settings settings, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, RulesProfile ruleProfile,
+  public CSharpSensor(Settings settings, NSonarQubeAnalyzerExtractor extractor, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory,
+    NoSonarFilter noSonarFilter, RulesProfile ruleProfile,
     ResourcePerspectives perspectives) {
     this.settings = settings;
+    this.extractor = extractor;
     this.fileSystem = fileSystem;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
@@ -98,8 +95,6 @@ public class CSharpSensor implements Sensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    unzipNSonarQubeAnalyzer();
-
     analyze();
     importResults(project, context);
   }
@@ -151,8 +146,7 @@ public class CSharpSensor implements Sensor {
       throw Throwables.propagate(e);
     }
 
-    File workingDir = toolWorkingDir();
-    File executableFile = new File(workingDir, N_SONARQUBE_ANALYZER_EXE);
+    File executableFile = extractor.executableFile();
 
     Command command = Command.create(executableFile.getAbsolutePath())
       .addArgument(analysisInput.getAbsolutePath())
@@ -519,26 +513,6 @@ public class CSharpSensor implements Sensor {
     return fileSystem.files(FileQuery.onSource().onLanguage(CSharpPlugin.LANGUAGE_KEY));
   }
 
-  private void unzipNSonarQubeAnalyzer() {
-    File workingDir = toolWorkingDir();
-    File zipFile = new File(workingDir, N_SONARQUBE_ANALYZER_ZIP);
-
-    try {
-      Files.createParentDirs(zipFile);
-
-      InputStream is = getClass().getResourceAsStream("/" + N_SONARQUBE_ANALYZER_ZIP);
-      try {
-        Files.write(ByteStreams.toByteArray(is), zipFile);
-      } finally {
-        is.close();
-      }
-
-      new Zip(zipFile).unzip(workingDir);
-    } catch (IOException e) {
-      throw Throwables.propagate(e);
-    }
-  }
-
   private File toolInput() {
     return new File(fileSystem.workingDir(), "analysis-input.xml");
   }
@@ -549,10 +523,6 @@ public class CSharpSensor implements Sensor {
 
   public static File toolOutput(ModuleFileSystem fileSystem) {
     return new File(fileSystem.workingDir(), "analysis-output.xml");
-  }
-
-  private File toolWorkingDir() {
-    return new File(fileSystem.workingDir(), N_SONARQUBE_ANALYZER);
   }
 
 }
