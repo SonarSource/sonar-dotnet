@@ -29,6 +29,9 @@ import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
+import org.sonar.api.issue.Issuable;
+import org.sonar.api.issue.Issuable.IssueBuilder;
+import org.sonar.api.issue.Issue;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -36,6 +39,8 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.rule.RuleKey;
 
 import java.io.File;
 
@@ -53,6 +58,10 @@ public class CSharpSensorTest {
   private FileLinesContextFactory fileLinesContextFactory;
   private NSonarQubeAnalyzerExtractor extractor;
   private NoSonarFilter noSonarFilter;
+  private ResourcePerspectives perspectives;
+  private Issuable issuable;
+  private IssueBuilder issueBuilder;
+  private Issue issue;
 
   @Test
   public void shouldExecuteOnProject() {
@@ -89,12 +98,19 @@ public class CSharpSensorTest {
     when(extractor.executableFile()).thenReturn(new File("src/test/resources/CSharpSensorTest/fake.bat"));
 
     noSonarFilter = mock(NoSonarFilter.class);
+    perspectives = mock(ResourcePerspectives.class);
+    issuable = mock(Issuable.class);
+    issueBuilder = mock(IssueBuilder.class);
+    when(issuable.newIssueBuilder()).thenReturn(issueBuilder);
+    issue = mock(Issue.class);
+    when(issueBuilder.build()).thenReturn(issue);
+    when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(Resource.class))).thenReturn(issuable);
 
     CSharpSensor sensor =
       new CSharpSensor(
         mock(Settings.class), extractor,
         fs,
-        fileLinesContextFactory, noSonarFilter, mock(RulesProfile.class), mock(ResourcePerspectives.class));
+        fileLinesContextFactory, noSonarFilter, mock(RulesProfile.class), perspectives);
 
     context = mock(SensorContext.class);
     sensor.analyse(mock(Project.class), context);
@@ -143,6 +159,14 @@ public class CSharpSensorTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 12, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 13, 1);
+  }
+
+  @Test
+  public void issue() {
+    verify(issueBuilder).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"));
+    verify(issueBuilder).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
+    verify(issueBuilder).line(16);
+    verify(issuable).addIssue(issue);
   }
 
 }
