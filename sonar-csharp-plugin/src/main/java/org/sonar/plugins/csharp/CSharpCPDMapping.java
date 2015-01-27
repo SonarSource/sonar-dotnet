@@ -29,8 +29,8 @@ import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
 import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.batch.DependsUpon;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.resources.Language;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -46,11 +46,11 @@ import java.io.InputStreamReader;
 public class CSharpCPDMapping extends AbstractCpdMapping {
 
   private final CSharp csharp;
-  private final ModuleFileSystem fileSystem;
+  private final FileSystem fs;
 
-  public CSharpCPDMapping(CSharp csharp, ModuleFileSystem fileSystem) {
+  public CSharpCPDMapping(CSharp csharp, FileSystem fs) {
     this.csharp = csharp;
-    this.fileSystem = fileSystem;
+    this.fs = fs;
   }
 
   @Override
@@ -64,7 +64,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
 
       @Override
       public void tokenize(SourceCode source, Tokens cpdTokens) {
-        File toolOutput = CSharpSensor.toolOutput(fileSystem);
+        File toolOutput = CSharpSensor.toolOutput(fs);
         new AnalysisResultImporter(cpdTokens, source.getFileName()).parse(toolOutput);
         cpdTokens.add(TokenEntry.EOF);
       }

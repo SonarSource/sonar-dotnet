@@ -23,7 +23,7 @@ import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokens;
 import org.junit.Test;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
+import org.sonar.api.batch.fs.FileSystem;
 
 import java.io.File;
 
@@ -36,9 +36,9 @@ public class CSharpCPDMappingTest {
   @Test
   public void test() throws Exception {
     CSharp csharp = mock(CSharp.class);
-    ModuleFileSystem fileSystem = mock(ModuleFileSystem.class);
-    when(fileSystem.workingDir()).thenReturn(new File("src/test/resources/CSharpCPDMappingTest"));
-    CSharpCPDMapping cpd = new CSharpCPDMapping(csharp, fileSystem);
+    FileSystem fs = mock(FileSystem.class);
+    when(fs.workDir()).thenReturn(new File("src/test/resources/CSharpCPDMappingTest"));
+    CSharpCPDMapping cpd = new CSharpCPDMapping(csharp, fs);
 
     assertThat(cpd.getLanguage()).isSameAs(csharp);
 

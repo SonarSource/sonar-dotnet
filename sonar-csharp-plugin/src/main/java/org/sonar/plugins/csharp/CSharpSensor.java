@@ -32,6 +32,7 @@ import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.checks.NoSonarFilter;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
@@ -48,8 +49,6 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.ActiveRuleParam;
 import org.sonar.api.rules.RuleParam;
-import org.sonar.api.scan.filesystem.FileQuery;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
@@ -63,7 +62,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -74,18 +72,18 @@ public class CSharpSensor implements Sensor {
 
   private final Settings settings;
   private final NSonarQubeAnalyzerExtractor extractor;
-  private final ModuleFileSystem fileSystem;
+  private final FileSystem fs;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final RulesProfile ruleProfile;
   private final ResourcePerspectives perspectives;
 
-  public CSharpSensor(Settings settings, NSonarQubeAnalyzerExtractor extractor, ModuleFileSystem fileSystem, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSensor(Settings settings, NSonarQubeAnalyzerExtractor extractor, FileSystem fs, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter, RulesProfile ruleProfile,
     ResourcePerspectives perspectives) {
     this.settings = settings;
     this.extractor = extractor;
-    this.fileSystem = fileSystem;
+    this.fs = fs;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.ruleProfile = ruleProfile;
@@ -94,7 +92,7 @@ public class CSharpSensor implements Sensor {
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return !filesToAnalyze().isEmpty();
+    return filesToAnalyze().iterator().hasNext();
   }
 
   @Override
@@ -522,20 +520,20 @@ public class CSharpSensor implements Sensor {
 
   }
 
-  private List<File> filesToAnalyze() {
-    return fileSystem.files(FileQuery.onSource().onLanguage(CSharpPlugin.LANGUAGE_KEY));
+  private Iterable<File> filesToAnalyze() {
+    return fs.files(fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY));
   }
 
   private File toolInput() {
-    return new File(fileSystem.workingDir(), "analysis-input.xml");
+    return new File(fs.workDir(), "analysis-input.xml");
   }
 
   private File toolOutput() {
-    return toolOutput(fileSystem);
+    return toolOutput(fs);
   }
 
-  public static File toolOutput(ModuleFileSystem fileSystem) {
-    return new File(fileSystem.workingDir(), "analysis-output.xml");
+  public static File toolOutput(FileSystem fileSystem) {
+    return new File(fileSystem.workDir(), "analysis-output.xml");
   }
 
 }
