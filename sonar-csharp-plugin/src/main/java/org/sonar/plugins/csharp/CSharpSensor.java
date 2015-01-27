@@ -33,11 +33,13 @@ import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.checks.NoSonarFilter;
+import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.Issuable;
 import org.sonar.api.issue.Issuable.IssueBuilder;
+import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
@@ -176,22 +178,22 @@ public class CSharpSensor implements Sensor {
   private void importResults(Project project, SensorContext context) {
     File analysisOutput = toolOutput();
 
-    new AnalysisResultImporter(project, context, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
+    new AnalysisResultImporter(project, context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
 
   private static class AnalysisResultImporter {
 
-    private final Project project;
     private final SensorContext context;
+    private final FileSystem fs;
     private XMLStreamReader stream;
     private final FileLinesContextFactory fileLinesContextFactory;
     private final NoSonarFilter noSonarFilter;
     private final ResourcePerspectives perspectives;
 
-    public AnalysisResultImporter(Project project, SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
+    public AnalysisResultImporter(Project project, SensorContext context, FileSystem fs, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
       ResourcePerspectives perspectives) {
-      this.project = project;
       this.context = context;
+      this.fs = fs;
       this.fileLinesContextFactory = fileLinesContextFactory;
       this.noSonarFilter = noSonarFilter;
       this.perspectives = perspectives;
@@ -237,7 +239,7 @@ public class CSharpSensor implements Sensor {
     }
 
     private void handleFileTag() throws XMLStreamException {
-      org.sonar.api.resources.File sonarFile = null;
+      InputFile inputFile = null;
 
       while (stream.hasNext()) {
         int next = stream.next();
@@ -249,21 +251,21 @@ public class CSharpSensor implements Sensor {
 
           if ("Path".equals(tagName)) {
             String path = stream.getElementText();
-            sonarFile = org.sonar.api.resources.File.fromIOFile(new File(path), project);
+            inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(path));
           } else if ("Metrics".equals(tagName)) {
             // TODO Better message
-            Preconditions.checkState(sonarFile != null);
-            handleMetricsTag(sonarFile);
+            Preconditions.checkState(inputFile != null);
+            handleMetricsTag(inputFile);
           } else if ("Issues".equals(tagName)) {
             // TODO Better message
-            Preconditions.checkState(sonarFile != null);
-            handleIssuesTag(sonarFile);
+            Preconditions.checkState(inputFile != null);
+            handleIssuesTag(inputFile);
           }
         }
       }
     }
 
-    private void handleMetricsTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleMetricsTag(InputFile inputFile) throws XMLStreamException {
       while (stream.hasNext()) {
         int next = stream.next();
 
@@ -273,85 +275,85 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("Lines".equals(tagName)) {
-            handleLinesMetricTag(sonarFile);
+            handleLinesMetricTag(inputFile);
           } else if ("Classes".equals(tagName)) {
-            handleClassesMetricTag(sonarFile);
+            handleClassesMetricTag(inputFile);
           } else if ("Accessors".equals(tagName)) {
-            handleAccessorsMetricTag(sonarFile);
+            handleAccessorsMetricTag(inputFile);
           } else if ("Statements".equals(tagName)) {
-            handleStatementsMetricTag(sonarFile);
+            handleStatementsMetricTag(inputFile);
           } else if ("Functions".equals(tagName)) {
-            handleFunctionsMetricTag(sonarFile);
+            handleFunctionsMetricTag(inputFile);
           } else if ("PublicApi".equals(tagName)) {
-            handlePublicApiMetricTag(sonarFile);
+            handlePublicApiMetricTag(inputFile);
           } else if ("PublicUndocumentedApi".equals(tagName)) {
-            handlePublicUndocumentedApiMetricTag(sonarFile);
+            handlePublicUndocumentedApiMetricTag(inputFile);
           } else if ("Complexity".equals(tagName)) {
-            handleComplexityMetricTag(sonarFile);
+            handleComplexityMetricTag(inputFile);
           } else if ("FileComplexityDistribution".equals(tagName)) {
-            handleFileComplexityDistributionMetricTag(sonarFile);
+            handleFileComplexityDistributionMetricTag(inputFile);
           } else if ("FunctionComplexityDistribution".equals(tagName)) {
-            handleFunctionComplexityDistributionMetricTag(sonarFile);
+            handleFunctionComplexityDistributionMetricTag(inputFile);
           } else if ("Comments".equals(tagName)) {
-            handleCommentsMetricTag(sonarFile);
+            handleCommentsMetricTag(inputFile);
           } else if ("LinesOfCode".equals(tagName)) {
-            handleLinesOfCodeMetricTag(sonarFile);
+            handleLinesOfCodeMetricTag(inputFile);
           }
         }
       }
     }
 
-    private void handleLinesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleLinesMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.LINES, value);
+      context.saveMeasure(inputFile, CoreMetrics.LINES, value);
     }
 
-    private void handleClassesMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleClassesMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.CLASSES, value);
+      context.saveMeasure(inputFile, CoreMetrics.CLASSES, value);
     }
 
-    private void handleAccessorsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleAccessorsMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.ACCESSORS, value);
+      context.saveMeasure(inputFile, CoreMetrics.ACCESSORS, value);
     }
 
-    private void handleStatementsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleStatementsMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.STATEMENTS, value);
+      context.saveMeasure(inputFile, CoreMetrics.STATEMENTS, value);
     }
 
-    private void handleFunctionsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleFunctionsMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.FUNCTIONS, value);
+      context.saveMeasure(inputFile, CoreMetrics.FUNCTIONS, value);
     }
 
-    private void handlePublicApiMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handlePublicApiMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_API, value);
+      context.saveMeasure(inputFile, CoreMetrics.PUBLIC_API, value);
     }
 
-    private void handlePublicUndocumentedApiMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handlePublicUndocumentedApiMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API, value);
+      context.saveMeasure(inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API, value);
     }
 
-    private void handleComplexityMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleComplexityMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(sonarFile, CoreMetrics.COMPLEXITY, value);
+      context.saveMeasure(inputFile, CoreMetrics.COMPLEXITY, value);
     }
 
-    private void handleFileComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleFileComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
       String value = stream.getElementText();
-      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
+      context.saveMeasure(inputFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
-    private void handleFunctionComplexityDistributionMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleFunctionComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
       String value = stream.getElementText();
-      context.saveMeasure(sonarFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
+      context.saveMeasure(inputFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
-    private void handleCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
       while (stream.hasNext()) {
         int next = stream.next();
 
@@ -361,15 +363,15 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("NoSonar".equals(tagName)) {
-            handleNoSonarCommentsMetricTag(sonarFile);
+            handleNoSonarCommentsMetricTag(inputFile);
           } else if ("NonBlank".equals(tagName)) {
-            handleNonBlankCommentsMetricTag(sonarFile);
+            handleNonBlankCommentsMetricTag(inputFile);
           }
         }
       }
     }
 
-    private void handleNoSonarCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleNoSonarCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
       ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
 
       while (stream.hasNext()) {
@@ -389,12 +391,12 @@ public class CSharpSensor implements Sensor {
         }
       }
 
-      noSonarFilter.addResource(sonarFile, builder.build());
+      noSonarFilter.addComponent(((DefaultInputFile) inputFile).key(), builder.build());
     }
 
-    private void handleNonBlankCommentsMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleNonBlankCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = 0;
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
       while (stream.hasNext()) {
         int next = stream.next();
@@ -416,12 +418,12 @@ public class CSharpSensor implements Sensor {
       }
 
       fileLinesContext.save();
-      context.saveMeasure(sonarFile, CoreMetrics.COMMENT_LINES, value);
+      context.saveMeasure(inputFile, CoreMetrics.COMMENT_LINES, value);
     }
 
-    private void handleLinesOfCodeMetricTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
+    private void handleLinesOfCodeMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = 0;
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(sonarFile);
+      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
       while (stream.hasNext()) {
         int next = stream.next();
@@ -443,11 +445,11 @@ public class CSharpSensor implements Sensor {
       }
 
       fileLinesContext.save();
-      context.saveMeasure(sonarFile, CoreMetrics.NCLOC, value);
+      context.saveMeasure(inputFile, CoreMetrics.NCLOC, value);
     }
 
-    private void handleIssuesTag(org.sonar.api.resources.File sonarFile) throws XMLStreamException {
-      Issuable issuable = perspectives.as(Issuable.class, sonarFile);
+    private void handleIssuesTag(InputFile inputFile) throws XMLStreamException {
+      Issuable issuable = perspectives.as(Issuable.class, org.sonar.api.resources.File.create(inputFile.relativePath()));
 
       while (stream.hasNext()) {
         int next = stream.next();
