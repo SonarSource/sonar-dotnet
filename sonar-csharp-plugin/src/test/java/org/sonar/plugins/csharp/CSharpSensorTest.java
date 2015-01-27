@@ -19,8 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.collect.ImmutableSet;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -30,6 +33,7 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 
@@ -48,6 +52,7 @@ public class CSharpSensorTest {
   private FileLinesContext fileLinesContext;
   private FileLinesContextFactory fileLinesContextFactory;
   private NSonarQubeAnalyzerExtractor extractor;
+  private NoSonarFilter noSonarFilter;
 
   @Test
   public void shouldExecuteOnProject() {
@@ -83,11 +88,13 @@ public class CSharpSensorTest {
     extractor = mock(NSonarQubeAnalyzerExtractor.class);
     when(extractor.executableFile()).thenReturn(new File("src/test/resources/CSharpSensorTest/fake.bat"));
 
+    noSonarFilter = mock(NoSonarFilter.class);
+
     CSharpSensor sensor =
       new CSharpSensor(
         mock(Settings.class), extractor,
         fs,
-        fileLinesContextFactory, mock(NoSonarFilter.class), mock(RulesProfile.class), mock(ResourcePerspectives.class));
+        fileLinesContextFactory, noSonarFilter, mock(RulesProfile.class), mock(ResourcePerspectives.class));
 
     context = mock(SensorContext.class);
     sensor.analyse(mock(Project.class), context);
@@ -103,6 +110,39 @@ public class CSharpSensorTest {
     verify(context).saveMeasure(inputFile, CoreMetrics.PUBLIC_API, 4d);
     verify(context).saveMeasure(inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API, 2d);
     verify(context).saveMeasure(inputFile, CoreMetrics.COMPLEXITY, 3d);
+  }
+
+  @Test
+  public void distribution() {
+    ArgumentCaptor<Measure> captor = ArgumentCaptor.forClass(Measure.class);
+    verify(context, Mockito.times(2)).saveMeasure(Mockito.eq(inputFile), captor.capture());
+    int i = 0;
+    for (Measure measure : captor.getAllValues()) {
+      if (measure.getMetric().equals(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION)) {
+        i++;
+        assertThat(measure.getData()).isEqualTo("0=1;5=0;10=0;20=0;30=0;60=0;90=0");
+      } else if (measure.getMetric().equals(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION)) {
+        i++;
+        assertThat(measure.getData()).isEqualTo("1=3;2=0;4=0;6=0;8=0;10=0;12=0");
+      }
+    }
+    assertThat(i).isEqualTo(2);
+  }
+
+  @Test
+  public void commentsAndNoSonar() {
+    verify(noSonarFilter).addComponent(inputFile.key(), ImmutableSet.of(8));
+    verify(context).saveMeasure(inputFile, CoreMetrics.COMMENT_LINES, 2d);
+  }
+
+  @Test
+  public void devCockpit() {
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 3, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 7, 1);
+
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 12, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 13, 1);
   }
 
 }
