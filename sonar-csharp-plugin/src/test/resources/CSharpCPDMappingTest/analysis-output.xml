@@ -10,7 +10,7 @@
       </Issues>
       <CopyPasteTokens>
         <Token>
-          <Value>foo1</Value>
+          <Value>Zm9vMQ==</Value>
           <Line>1</Line>
         </Token>
       </CopyPasteTokens>
@@ -22,11 +22,11 @@
       <Issues />
       <CopyPasteTokens>
         <Token>
-          <Value>bar1</Value>
+          <Value>YmFyMQ==</Value>
           <Line>3</Line>
         </Token>
         <Token>
-          <Value>bar2</Value>
+          <Value>YmFyMg==</Value>
           <Line>4</Line>
         </Token>
       </CopyPasteTokens>
@@ -38,7 +38,7 @@
       <Issues />
       <CopyPasteTokens>
         <Token>
-          <Value>baz1</Value>
+          <Value>YmF6MQ==</Value>
           <Line>8</Line>
         </Token>
       </CopyPasteTokens>

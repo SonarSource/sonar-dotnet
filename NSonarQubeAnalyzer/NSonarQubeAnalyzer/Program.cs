@@ -13,6 +13,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.Threading;
+using System.Security;
 
 namespace NSonarQubeAnalyzer
 {
@@ -111,7 +112,7 @@ namespace NSonarQubeAnalyzer
                         foreach (var token in metrics.CopyPasteTokens())
                         {
                             xmlOut.WriteStartElement("Token");
-                            xmlOut.WriteElementString("Value", token.Item1);
+                            xmlOut.WriteElementString("Value", Convert.ToBase64String(Encoding.UTF8.GetBytes(token.Item1)));
                             xmlOut.WriteElementString("Line", token.Item2.ToString());
                             xmlOut.WriteEndElement();
                         }

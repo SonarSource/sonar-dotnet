@@ -27,6 +27,7 @@ import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
 import net.sourceforge.pmd.cpd.Tokens;
+import org.apache.commons.codec.binary.Base64;
 import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.batch.DependsUpon;
 import org.sonar.api.batch.fs.FileSystem;
@@ -181,7 +182,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
           String tagName = stream.getLocalName();
 
           if ("Value".equals(tagName)) {
-            value = stream.getElementText();
+            value = new String(Base64.decodeBase64(stream.getElementText()), Charsets.UTF_8);
           } else if ("Line".equals(tagName)) {
             line = Integer.parseInt(stream.getElementText());
           } else {
