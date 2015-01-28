@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
-using System.Threading;
-using System.Text.RegularExpressions;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System.Collections.Immutable;
+    using System.Linq;
+    using System.Xml.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class ExpressionComplexity : DiagnosticAnalyzer
+    public class ExpressionComplexity : DiagnosticsRule
     {
         internal const string DiagnosticId = "S1067";
         internal const string Description = "Expressions should not be too complex";
@@ -26,9 +19,37 @@ namespace NSonarQubeAnalyzer
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "S1067";
+            }
+        }
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        public int Maximum { get; set; }
+
+        /// <summary>
+        /// Configure the rule from the supplied settings
+        /// </summary>
+        /// <param name="settings">XML settings</param>
+        public override void Configure(XDocument settings)
+        {
+            var parameters = from e in settings.Descendants("Rule")
+                             where this.RuleId.Equals(e.Elements("Key").Single().Value)
+                             select e.Descendants("Parameter");
+            var maximum =
+                (from e in parameters
+                 where "max".Equals(e.Elements("Key").Single().Value)
+                 select e.Elements("Value").Single().Value).Single();
+
+            this.Maximum = int.Parse(maximum);
+        }
 
         private IImmutableSet<SyntaxKind> CompoundExpressionKinds = ImmutableHashSet.Create(new SyntaxKind[] {
             SyntaxKind.SimpleLambdaExpression,
@@ -48,12 +69,12 @@ namespace NSonarQubeAnalyzer
                         .Where(
                             e =>
                                 e is ExpressionSyntax &&
-                                !IsCompoundExpression(e));
+                                !this.IsCompoundExpression(e));
 
                     var compoundExpressionsDescendants =
                         c.Node
                         .DescendantNodes()
-                        .Where(e => IsCompoundExpression(e))
+                        .Where(e => this.IsCompoundExpression(e))
                         .SelectMany(
                             e =>
                                 e
@@ -64,7 +85,7 @@ namespace NSonarQubeAnalyzer
                                 .Where(
                                     e2 =>
                                         e2 is ExpressionSyntax &&
-                                        !IsCompoundExpression(e2)));
+                                        !this.IsCompoundExpression(e2)));
 
                     var expressionsToCheck = rootExpressions.Concat(compoundExpressionsDescendants);
 
@@ -77,7 +98,7 @@ namespace NSonarQubeAnalyzer
                                 Expression = e,
                                 Complexity =
                                     e
-                                    .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
+                                    .DescendantNodesAndSelf(e2 => !this.IsCompoundExpression(e2))
                                     .Where(
                                         e2 =>
                                             e2.IsKind(SyntaxKind.ConditionalExpression) ||
@@ -85,11 +106,11 @@ namespace NSonarQubeAnalyzer
                                             e2.IsKind(SyntaxKind.LogicalOrExpression))
                                     .Count()
                             })
-                        .Where(e => e.Complexity > Maximum);
+                        .Where(e => e.Complexity > this.Maximum);
 
                     foreach (var complexExpression in complexExpressions)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), Maximum, complexExpression.Complexity));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), this.Maximum, complexExpression.Complexity));
                     }
                 },
                 SyntaxKind.CompilationUnit);
@@ -97,7 +118,7 @@ namespace NSonarQubeAnalyzer
 
         private bool IsCompoundExpression(SyntaxNode node)
         {
-            return CompoundExpressionKinds.Any(k => node.IsKind(k));
+            return this.CompoundExpressionKinds.Any(k => node.IsKind(k));
         }
     }
 }

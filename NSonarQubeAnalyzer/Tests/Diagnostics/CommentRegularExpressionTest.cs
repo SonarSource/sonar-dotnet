@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NSonarQubeAnalyzer.Diagnostics;
+    using System.Collections.Immutable;
+
     [TestClass]
     public class CommentRegularExpressionTest
     {

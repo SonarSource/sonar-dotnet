@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Diagnostics;
-
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp;
-using System.Collections.Immutable;
-using System.Threading;
-
-namespace NSonarQubeAnalyzer
+﻿namespace NSonarQubeAnalyzer.Diagnostics
 {
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.Diagnostics;
+    using System;
+    using System.Collections.Immutable;
+    using System.Linq;
+
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UseCurlyBraces : DiagnosticAnalyzer
+    public class UseCurlyBraces : DiagnosticsRule
     {
         internal const string DiagnosticId = "S121";
         internal const string Description = "Control structures should always use curly braces";
@@ -23,6 +18,17 @@ namespace NSonarQubeAnalyzer
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
+
+        /// <summary>
+        /// Rule ID
+        /// </summary>
+        public override string RuleId
+        {
+            get
+            {
+                return "S121";
+            }
+        }
 
         private class CheckedKind
         {
@@ -81,14 +87,14 @@ namespace NSonarQubeAnalyzer
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var checkedKind = CheckedKinds.Where(e => c.Node.IsKind(e.Kind)).Single();
+                    var checkedKind = this.CheckedKinds.Where(e => c.Node.IsKind(e.Kind)).Single();
 
                     if (!checkedKind.Validator(c.Node))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), checkedKind.Value));
                     }
                 },
-                CheckedKinds.Select(e => e.Kind).ToArray());
+                this.CheckedKinds.Select(e => e.Kind).ToArray());
         }
     }
 }
