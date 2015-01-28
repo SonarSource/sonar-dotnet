@@ -95,6 +95,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlock.cs" />

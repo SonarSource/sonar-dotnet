@@ -50,6 +50,7 @@ import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.ActiveRuleParam;
+import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
@@ -116,10 +117,9 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "  <Rules>");
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
       appendLine(sb, "    <Rule>");
-      appendLine(sb, "      <Key>" + activeRule.getRuleKey() + "</Key>");
-      if (activeRule.getRule().getTemplate() != null) {
-        appendLine(sb, "      <ParentKey>" + activeRule.getRule().getTemplate().getKey() + "</ParentKey>");
-      }
+      Rule template = activeRule.getRule().getTemplate();
+      String ruleKey = template == null ? activeRule.getRuleKey() : template.getKey();
+      appendLine(sb, "      <Key>" + ruleKey + "</Key>");
       Map<String, String> parameters = effectiveParameters(activeRule);
       if (!parameters.isEmpty()) {
         appendLine(sb, "      <Parameters>");
@@ -161,6 +161,10 @@ public class CSharpSensor implements Sensor {
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
     Map<String, String> builder = Maps.newHashMap();
+
+    if (activeRule.getRule().getTemplate() != null) {
+      builder.put("RuleKey", activeRule.getRuleKey());
+    }
 
     for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
       builder.put(param.getKey(), param.getValue());

@@ -198,6 +198,7 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="ConfigurationTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlockTest.cs" />
     <Compile Include="Diagnostics\CommentedOutCodeTest.cs" />
@@ -240,7 +241,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ConfigurationTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
