@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
+using System.Globalization;
 
 namespace NSonarQubeAnalyzer
 {
@@ -87,7 +88,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["maximumFileLocThreshold"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
@@ -98,7 +99,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["maximumLineLength"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
@@ -109,7 +110,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["maximum"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
@@ -120,7 +121,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["max"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
@@ -131,7 +132,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["max"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
@@ -142,7 +143,7 @@ namespace NSonarQubeAnalyzer
                 {
                     analyzer.Maximum = int.Parse(
                         Parameters[analyzer.SupportedDiagnostics.Single().Id].Single()["maximumFunctionComplexityThreshold"],
-                        System.Globalization.NumberStyles.None);
+                        NumberStyles.None, CultureInfo.InvariantCulture);
                     builder.Add(analyzer);
                 }
             }
