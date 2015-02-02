@@ -14,12 +14,26 @@
   <version>3.5-SNAPSHOT</version>
 
   <name>SonarQube C# Plugin</name>
-  <inceptionYear>2010</inceptionYear>
+  <inceptionYear>2014</inceptionYear>
   <organization>
-    <name>Jose Chillan, Alexandre Victoor and SonarSource</name>
+    <name>SonarSource</name>
     <url>http://www.sonarsource.com</url>
   </organization>
+  <licenses>
+    <license>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
+  <developers>
+    <developer>
+      <id>dbolkensteyn</id>
+      <name>Dinesh Bolkensteyn</name>
+      <organization>SonarSource</organization>
+    </developer>
+  </developers>
   <scm>
     <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
     <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
@@ -31,16 +45,15 @@
     <url>http://jira.codehaus.org/browse/SONARCS</url>
   </issueManagement>
 
+  <properties>
+    <sonar.version>4.5.1</sonar.version>
+    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
+  </properties>
+
   <modules>
     <module>NSonarQubeAnalyzer</module>
     <module>sonar-csharp-plugin</module>
   </modules>
-
-  <properties>
-    <sonar.version>4.5.1</sonar.version>
-    <license.owner>Jose Chillan, Alexandre Victoor and SonarSource</license.owner>
-    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-  </properties>
 
   <dependencyManagement>
     <dependencies>

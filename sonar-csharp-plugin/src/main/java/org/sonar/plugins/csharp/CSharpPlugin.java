@@ -1,6 +1,6 @@
 /*
  * Sonar C# Plugin :: Core
- * Copyright (C) 2010 Jose Chillan, Alexandre Victoor and SonarSource
+ * Copyright (C) 2014 SonarSource
  * dev@sonar.codehaus.org
  *
  * This program is free software; you can redistribute it and/or
