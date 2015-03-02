@@ -45,7 +45,7 @@ public class CSharpFxCopProvider {
   private static final String FXCOP_ASPNET_PROPERTY_KEY = "sonar.cs.fxcop.aspnet";
   private static final String FXCOP_DIRECTORIES_PROPERTY_KEY = "sonar.cs.fxcop.directories";
   private static final String FXCOP_REFERENCES_PROPERTY_KEY = "sonar.cs.fxcop.references";
-  private static final String FXCOP_REPORT_PATH_PROPERTY_KEY = "sonar.fxcop.references";
+  private static final String FXCOP_REPORT_PATH_PROPERTY_KEY = "sonar.fxcop.reportPath";
 
   private static final FxCopConfiguration FXCOP_CONF = new FxCopConfiguration(
     CSharpPlugin.LANGUAGE_KEY,
