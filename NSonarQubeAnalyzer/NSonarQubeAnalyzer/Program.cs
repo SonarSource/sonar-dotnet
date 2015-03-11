@@ -38,6 +38,7 @@ namespace NSonarQubeAnalyzer
                 int n = 0;
                 foreach (var file in configuration.Files)
                 {
+                    xmlOut.Flush();
                     Console.WriteLine(n + "/" + configuration.Files.Count() + " files analyzed, starting to analyze: " + file);
                     n++;
 
