@@ -108,16 +108,6 @@ namespace NSonarQubeAnalyzer
                         }
                         xmlOut.WriteEndElement();
 
-                        xmlOut.WriteStartElement("CopyPasteTokens");
-                        foreach (var token in metrics.CopyPasteTokens())
-                        {
-                            xmlOut.WriteStartElement("Token");
-                            xmlOut.WriteElementString("Value", Convert.ToBase64String(Encoding.UTF8.GetBytes(token.Item1)));
-                            xmlOut.WriteElementString("Line", token.Item2.ToString());
-                            xmlOut.WriteEndElement();
-                        }
-                        xmlOut.WriteEndElement();
-
                         xmlOut.WriteEndElement();
                     }
                     catch (Exception e)

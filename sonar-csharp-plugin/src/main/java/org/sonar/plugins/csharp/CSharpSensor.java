@@ -29,7 +29,6 @@ import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.batch.DependedUpon;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
@@ -68,7 +67,6 @@ import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Map.Entry;
 
-@DependedUpon("NSonarQubeAnalysis")
 public class CSharpSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);

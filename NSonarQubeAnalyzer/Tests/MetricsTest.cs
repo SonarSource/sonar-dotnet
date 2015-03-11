@@ -317,25 +317,6 @@ namespace Tests
             return MetricsFor(text).FunctionComplexityDistribution();
         }
 
-        [TestMethod]
-        public void CopyPasteTokens()
-        {
-            CopyPasteTokens("").Should().BeEquivalentTo();
-            CopyPasteTokens("using System;").Should().BeEquivalentTo();
-
-            CopyPasteTokens("class MyClass { /* ... */ \n string MyField = \"hehe\"; }")
-                .Should()
-                .BeEquivalentTo(
-                    Tuple.Create("class", 1), Tuple.Create("MyClass", 1), Tuple.Create("{", 1),
-                    Tuple.Create("string", 2), Tuple.Create("MyField", 2), Tuple.Create("=", 2),
-                    Tuple.Create("\"\"", 2), Tuple.Create(";", 2), Tuple.Create("}", 2));
-        }
-
-        private static ImmutableArray<Tuple<string, int>> CopyPasteTokens(string text)
-        {
-            return MetricsFor(text).CopyPasteTokens();
-        }
-
         private static Metrics MetricsFor(string text)
         {
             return new Metrics(CSharpSyntaxTree.ParseText(text));

@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.base.Charsets;
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokens;
@@ -37,28 +38,51 @@ public class CSharpCPDMappingTest {
   public void test() throws Exception {
     CSharp csharp = mock(CSharp.class);
     FileSystem fs = mock(FileSystem.class);
-    when(fs.workDir()).thenReturn(new File("src/test/resources/CSharpCPDMappingTest"));
+    when(fs.encoding()).thenReturn(Charsets.UTF_8);
     CSharpCPDMapping cpd = new CSharpCPDMapping(csharp, fs);
 
     assertThat(cpd.getLanguage()).isSameAs(csharp);
 
     SourceCode source = mock(SourceCode.class);
-    when(source.getFileName()).thenReturn("C:\\File2.cs");
+    when(source.getFileName()).thenReturn(new File("src/test/resources/CSharpCPDMappingTest/File.cs").getAbsolutePath());
 
     Tokens cpdTokens = new Tokens();
     assertThat(cpdTokens.getTokens()).isEmpty();
 
     cpd.getTokenizer().tokenize(source, cpdTokens);
 
-    assertThat(cpdTokens.getTokens()).hasSize(3);
+    assertThat(cpdTokens.getTokens()).hasSize(13);
 
-    assertThat(cpdTokens.getTokens().get(0).getValue()).isEqualTo("bar1");
-    assertThat(cpdTokens.getTokens().get(0).getBeginLine()).isEqualTo(3);
+    assertThat(cpdTokens.getTokens().get(0).getValue()).isEqualTo("namespace");
+    assertThat(cpdTokens.getTokens().get(0).getBeginLine()).isEqualTo(5);
 
-    assertThat(cpdTokens.getTokens().get(1).getValue()).isEqualTo("bar2");
-    assertThat(cpdTokens.getTokens().get(1).getBeginLine()).isEqualTo(4);
+    assertThat(cpdTokens.getTokens().get(1).getValue()).isEqualTo("Foo");
+    assertThat(cpdTokens.getTokens().get(1).getBeginLine()).isEqualTo(5);
 
-    assertThat(cpdTokens.getTokens().get(2)).isSameAs(TokenEntry.EOF);
+    assertThat(cpdTokens.getTokens().get(2).getValue()).isEqualTo("{");
+    assertThat(cpdTokens.getTokens().get(2).getBeginLine()).isEqualTo(6);
+
+    assertThat(cpdTokens.getTokens().get(3).getValue()).isEqualTo("using");
+    assertThat(cpdTokens.getTokens().get(3).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(4).getValue()).isEqualTo("(");
+    assertThat(cpdTokens.getTokens().get(4).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(5).getValue()).isEqualTo("foo");
+    assertThat(cpdTokens.getTokens().get(5).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(6).getValue()).isEqualTo("=");
+    assertThat(cpdTokens.getTokens().get(6).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(7).getValue()).isEqualTo("LITERAL");
+    assertThat(cpdTokens.getTokens().get(7).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(8).getValue()).isEqualTo(")");
+    assertThat(cpdTokens.getTokens().get(8).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(9).getValue()).isEqualTo("{");
+    assertThat(cpdTokens.getTokens().get(9).getBeginLine()).isEqualTo(10);
+    assertThat(cpdTokens.getTokens().get(10).getValue()).isEqualTo("}");
+    assertThat(cpdTokens.getTokens().get(10).getBeginLine()).isEqualTo(10);
+
+    assertThat(cpdTokens.getTokens().get(11).getValue()).isEqualTo("}");
+    assertThat(cpdTokens.getTokens().get(11).getBeginLine()).isEqualTo(11);
+
+    assertThat(cpdTokens.getTokens().get(12)).isSameAs(TokenEntry.EOF);
   }
 
 }
