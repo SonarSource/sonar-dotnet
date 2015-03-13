@@ -60,7 +60,7 @@ namespace NSonarQubeAnalyzer
 
             foreach (SyntaxTrivia trivia in tree.GetRoot().DescendantTrivia())
             {
-                if (!(ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None)) && IsComment(trivia))
+                if (IsComment(trivia) && !(ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None)))
                 {
                     int lineNumber = tree.GetLineSpan(trivia.FullSpan).StartLinePosition.Line + 1;
 
