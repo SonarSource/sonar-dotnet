@@ -51,10 +51,10 @@ namespace Tests
             var commentAnalyzer = analyzers.OfType<CommentRegularExpression>().Single();
             commentAnalyzer.Rules.Should().HaveCount(2);
             commentAnalyzer.Rules[0].Descriptor.Id.ShouldBeEquivalentTo("TODO");
-            commentAnalyzer.Rules[0].Descriptor.MessageFormat.ShouldBeEquivalentTo("Fix this TODO");
+            commentAnalyzer.Rules[0].Descriptor.MessageFormat.ToString().ShouldBeEquivalentTo("Fix this TODO");
             commentAnalyzer.Rules[0].RegularExpression.ShouldBeEquivalentTo(".*TODO.*");
             commentAnalyzer.Rules[1].Descriptor.Id.ShouldBeEquivalentTo("FIXME");
-            commentAnalyzer.Rules[1].Descriptor.MessageFormat.ShouldBeEquivalentTo("Fix this FIXME");
+            commentAnalyzer.Rules[1].Descriptor.MessageFormat.ToString().ShouldBeEquivalentTo("Fix this FIXME");
             commentAnalyzer.Rules[1].RegularExpression.ShouldBeEquivalentTo(".*FIXME.*");
         }
     }
