@@ -51,6 +51,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S108").setName("Nested blocks of code should not be left empty").setSeverity(Severity.MAJOR);
     repository.createRule("S1186").setName("Methods should not be empty").setSeverity(Severity.MAJOR);
     repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
+	repository.createRule("S1848").setName("Objects should not be created to be dropped immediately without being used").setSeverity(Severity.CRITICAL);
 
     NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")

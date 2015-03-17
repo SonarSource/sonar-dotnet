@@ -31,7 +31,8 @@ namespace NSonarQubeAnalyzer
             new EmptyNestedBlock(),
             new ParameterAssignedTo(),
             new UnusedLocalVariable(),
-            new CommentedOutCode()
+            new CommentedOutCode(),
+            new ObjectCreatedDropped()
         );
 
         public bool IgnoreHeaderComments { private set; get; }
