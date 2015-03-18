@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer;
+using NSonarQubeAnalyzer.Diagnostics;
 using FluentAssertions;
 using System.Collections.Immutable;
 

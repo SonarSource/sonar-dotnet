@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.Text;
 using System.Collections.Immutable;
 using System.Threading;
 
-namespace NSonarQubeAnalyzer
+namespace NSonarQubeAnalyzer.Diagnostics
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class TooManyParameters : DiagnosticAnalyzer

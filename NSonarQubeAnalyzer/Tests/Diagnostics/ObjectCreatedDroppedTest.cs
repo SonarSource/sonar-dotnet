@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
 {
@@ -14,7 +9,7 @@ namespace Tests.Diagnostics
         [TestMethod]
         public void ObjectCreatedDropped()
         {
-            Verifier.Verify(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());
+            Verifier.Verify(@"TestCases\ObjectCreatedDropped.cs", new ObjectCreatedDropped());            
         }
     }
 }

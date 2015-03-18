@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
+using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
 {

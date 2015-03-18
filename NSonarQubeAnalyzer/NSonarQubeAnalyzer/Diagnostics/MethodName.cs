@@ -13,7 +13,7 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Text.RegularExpressions;
 
-namespace NSonarQubeAnalyzer
+namespace NSonarQubeAnalyzer.Diagnostics
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class MethodName : DiagnosticAnalyzer

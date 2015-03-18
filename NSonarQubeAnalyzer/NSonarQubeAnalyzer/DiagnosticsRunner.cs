@@ -27,7 +27,9 @@ namespace NSonarQubeAnalyzer
             Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree));
 
             if (DiagnosticAnalyzers.IsDefaultOrEmpty)
+            {
                 return new Diagnostic[0];
+            }
 
             var compilationWithAnalyzer = new CompilationWithAnalyzers(compilation, DiagnosticAnalyzers, null, cancellationToken);
 

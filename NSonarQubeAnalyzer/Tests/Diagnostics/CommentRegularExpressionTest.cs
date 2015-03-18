@@ -2,7 +2,7 @@
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
+using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
 {

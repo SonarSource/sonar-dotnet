@@ -8,6 +8,7 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis;
 using System.Globalization;
+using NSonarQubeAnalyzer.Diagnostics;
 
 namespace NSonarQubeAnalyzer
 {

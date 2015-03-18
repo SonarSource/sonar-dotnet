@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSonarQubeAnalyzer;
+using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
 {
