@@ -52,6 +52,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1186").setName("Methods should not be empty").setSeverity(Severity.MAJOR);
     repository.createRule("S1481").setName("Unused local variables should be removed").setSeverity(Severity.MAJOR);
     repository.createRule("S1848").setName("Objects should not be created to be dropped immediately without being used").setSeverity(Severity.CRITICAL);
+    repository.createRule("S1862").setName("Related \"if/else if\" statements should not have the same condition").setSeverity(Severity.CRITICAL);
 
     NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")

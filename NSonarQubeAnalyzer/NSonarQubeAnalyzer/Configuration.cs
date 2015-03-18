@@ -33,7 +33,8 @@ namespace NSonarQubeAnalyzer
             new ParameterAssignedTo(),
             new UnusedLocalVariable(),
             new CommentedOutCode(),
-            new ObjectCreatedDropped()
+            new ObjectCreatedDropped(),
+            new ConditionalStructureSameCondition()
         );
 
         public bool IgnoreHeaderComments { private set; get; }

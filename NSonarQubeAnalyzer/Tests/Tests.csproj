@@ -129,6 +129,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\ConditionalStructureSameCondition.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\ObjectCreatedDropped.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -221,6 +224,7 @@
     </None>
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
+    <Compile Include="Diagnostics\ConditionalStructureSameConditionTest.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlockTest.cs" />
     <Compile Include="Diagnostics\CommentedOutCodeTest.cs" />
     <Compile Include="Diagnostics\FunctionComplexityTest.cs" />
