@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
+using System.Xml.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using NSonarQubeAnalyzer.Diagnostics;
 
 namespace NSonarQubeAnalyzer

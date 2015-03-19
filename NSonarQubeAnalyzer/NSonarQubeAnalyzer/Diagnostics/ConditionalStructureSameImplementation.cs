@@ -1,11 +1,11 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -28,19 +28,19 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
 
-                    var preceedingStatements = ifStatement
-                        .GetPreceedingStatementsInConditionChain()
+                    var precedingStatements = ifStatement
+                        .GetPrecedingStatementsInConditionChain()
                         .ToList();
 
-                    CheckStatement(c, ifStatement.Statement, preceedingStatements);
+                    CheckStatement(c, ifStatement.Statement, precedingStatements);
 
                     if (ifStatement.Else == null) 
                     {
                         return;
                     }
 
-                    preceedingStatements.Add(ifStatement.Statement);
-                    CheckStatement(c, ifStatement.Else.Statement, preceedingStatements);                                       
+                    precedingStatements.Add(ifStatement.Statement);
+                    CheckStatement(c, ifStatement.Else.Statement, precedingStatements);                                       
                 },
                 SyntaxKind.IfStatement);
 
@@ -48,45 +48,45 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 c =>
                 {
                     var switchSection = (SwitchSectionSyntax)c.Node;
-                    var preceedingSection = switchSection
-                        .GetPreceedingSections()
-                        .FirstOrDefault(preceeding => SyntaxFactory.AreEquivalent(switchSection.Statements, preceeding.Statements));
+                    var precedingSection = switchSection
+                        .GetPrecedingSections()
+                        .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(switchSection.Statements, preceding.Statements));
 
-                    if (preceedingSection != null) 
+                    if (precedingSection != null) 
                     {
-                        ReportSection(c, switchSection, preceedingSection);
+                        ReportSection(c, switchSection, precedingSection);
                     }                    
                 },
                 SyntaxKind.SwitchSection);
         }
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, List<StatementSyntax> preceedingStatements)
+        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, List<StatementSyntax> precedingStatements)
         {
-            var preceedingStatement = preceedingStatements
-                .FirstOrDefault(preceeding => SyntaxFactory.AreEquivalent(statementToCheck, preceeding));
+            var precedingStatement = precedingStatements
+                .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(statementToCheck, preceding));
 
-            if (preceedingStatement != null)
+            if (precedingStatement != null)
             {
-                ReportStatement(c, statementToCheck, preceedingStatement);
+                ReportStatement(c, statementToCheck, precedingStatement);
             }
         }
 
-        private static void ReportSection(SyntaxNodeAnalysisContext c, SwitchSectionSyntax switchSection, SwitchSectionSyntax preceedingSection)
+        private static void ReportSection(SyntaxNodeAnalysisContext c, SwitchSectionSyntax switchSection, SwitchSectionSyntax precedingSection)
         {
-            ReportSyntaxNode(c, switchSection, preceedingSection, "case");
+            ReportSyntaxNode(c, switchSection, precedingSection, "case");
         }
 
-        private static void ReportStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, StatementSyntax preceedingStatement)
+        private static void ReportStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, StatementSyntax precedingStatement)
         {
-            ReportSyntaxNode(c, statement, preceedingStatement, "branch");
+            ReportSyntaxNode(c, statement, precedingStatement, "branch");
         }
 
-        private static void ReportSyntaxNode(SyntaxNodeAnalysisContext c, SyntaxNode node, SyntaxNode preceedingNode, string errorMessageDiscriminator)
+        private static void ReportSyntaxNode(SyntaxNodeAnalysisContext c, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator)
         {
             c.ReportDiagnostic(Diagnostic.Create(
                            Rule,
                            node.GetLocation(),
-                           preceedingNode.GetLocation().GetLineSpan().StartLinePosition.Line + 1, 
+                           precedingNode.GetLocation().GetLineSpan().StartLinePosition.Line + 1, 
                            errorMessageDiscriminator));
         } 
     }

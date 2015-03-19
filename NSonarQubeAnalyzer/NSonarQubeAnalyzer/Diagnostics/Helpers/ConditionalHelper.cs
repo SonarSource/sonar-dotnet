@@ -1,9 +1,6 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 {
@@ -11,42 +8,42 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
     {
         #region If
 
-        public static IList<IfStatementSyntax> GetPreceedingIfsInConditionChain(this IfStatementSyntax ifStatement)
+        public static IList<IfStatementSyntax> GetPrecedingIfsInConditionChain(this IfStatementSyntax ifStatement)
         {
             var ifList = new List<IfStatementSyntax>();
             var currentIf = ifStatement;
 
             while (currentIf.Parent is ElseClauseSyntax)
             {
-                var preceedingIf = currentIf.Parent.Parent as IfStatementSyntax;
-                if (preceedingIf == null)
+                var precedingIf = currentIf.Parent.Parent as IfStatementSyntax;
+                if (precedingIf == null)
                 {
                     break;
                 }
 
-                ifList.Add(preceedingIf);
-                currentIf = preceedingIf;
+                ifList.Add(precedingIf);
+                currentIf = precedingIf;
             }
 
             ifList.Reverse();
             return ifList;
         }
 
-        public static IEnumerable<StatementSyntax> GetPreceedingStatementsInConditionChain(this IfStatementSyntax ifStatement)
+        public static IEnumerable<StatementSyntax> GetPrecedingStatementsInConditionChain(this IfStatementSyntax ifStatement)
         {
-            return GetPreceedingIfsInConditionChain(ifStatement).Select(i => i.Statement);
+            return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Statement);
         }
 
-        public static IEnumerable<ExpressionSyntax> GetPreceedingConditionsInConditionChain(this IfStatementSyntax ifStatement)
+        public static IEnumerable<ExpressionSyntax> GetPrecedingConditionsInConditionChain(this IfStatementSyntax ifStatement)
         {
-            return GetPreceedingIfsInConditionChain(ifStatement).Select(i => i.Condition);
+            return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Condition);
         }
 
         #endregion
 
         #region Switch
 
-        public static IList<SwitchSectionSyntax> GetPreceedingSections(this SwitchSectionSyntax caseStatement)
+        public static IList<SwitchSectionSyntax> GetPrecedingSections(this SwitchSectionSyntax caseStatement)
         {
             var caseList = new List<SwitchSectionSyntax>();
 
@@ -54,7 +51,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 
             var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
 
-            for (int i = 0; i < currentSectionIndex; i++)
+            for (var i = 0; i < currentSectionIndex; i++)
             {
                 caseList.Add(switchStatement.Sections[i]);
             }

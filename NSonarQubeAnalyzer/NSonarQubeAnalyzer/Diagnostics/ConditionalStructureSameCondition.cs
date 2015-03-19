@@ -1,10 +1,9 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
@@ -35,16 +34,16 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
                     var currentCondition = ifStatement.Condition;
 
-                    var preceedingCondition = ifStatement
-                        .GetPreceedingConditionsInConditionChain()
-                        .FirstOrDefault(preceeding => SyntaxFactory.AreEquivalent(currentCondition, preceeding));
+                    var precedingCondition = ifStatement
+                        .GetPrecedingConditionsInConditionChain()
+                        .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(currentCondition, preceding));
 
-                    if (preceedingCondition != null)
+                    if (precedingCondition != null)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,
                                 currentCondition.GetLocation(),
-                                preceedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
+                                precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
                     }
                 },
                 SyntaxKind.IfStatement);
