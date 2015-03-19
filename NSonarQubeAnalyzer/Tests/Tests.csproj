@@ -229,6 +229,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Compile Include="ConfigurationTest.cs" />
+    <Compile Include="DiagnosticRunnerTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameImplementationTest.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameConditionTest.cs" />
