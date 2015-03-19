@@ -116,6 +116,8 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
+    <Compile Include="Diagnostics\Helpers\TreeNavigation.cs" />
+    <Compile Include="Diagnostics\MultilineBlocksWithoutBrace.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameImplementation.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameCondition.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
