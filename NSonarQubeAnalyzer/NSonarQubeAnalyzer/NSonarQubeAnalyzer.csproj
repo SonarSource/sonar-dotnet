@@ -116,10 +116,12 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
+    <Compile Include="Diagnostics\ConditionalStructureSameImplementation.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameCondition.cs" />
     <Compile Include="Diagnostics\EmptyNestedBlock.cs" />
     <Compile Include="Diagnostics\CommentedOutCode.cs" />
     <Compile Include="Diagnostics\FunctionComplexity.cs" />
+    <Compile Include="Diagnostics\Helpers\ConditionalHelper.cs" />
     <Compile Include="Diagnostics\ObjectCreatedDropped.cs" />
     <Compile Include="Diagnostics\ParameterAssignedTo.cs" />
     <Compile Include="Diagnostics\ExpressionComplexity.cs" />

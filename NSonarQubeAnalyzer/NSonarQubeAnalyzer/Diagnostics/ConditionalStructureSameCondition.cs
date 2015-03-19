@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -34,8 +35,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
                     var currentCondition = ifStatement.Condition;
 
-                    var preceedingIfs = GetPreceedingIfs(ifStatement);
-                    var preceedingConditions = preceedingIfs.Select(st => st.Condition).ToList();
+                    var preceedingConditions = ifStatement.GetPreceedingConditionsInConditionChain().ToList();
 
                     for (int i = 0; i < preceedingConditions.Count; i++)
                     {
