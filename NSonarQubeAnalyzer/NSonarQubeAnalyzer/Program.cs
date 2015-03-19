@@ -45,8 +45,6 @@ namespace NSonarQubeAnalyzer
 
                     try
                     {
-
-                        throw new Exception();
                         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
                         Metrics metrics = new Metrics(syntaxTree);
 
