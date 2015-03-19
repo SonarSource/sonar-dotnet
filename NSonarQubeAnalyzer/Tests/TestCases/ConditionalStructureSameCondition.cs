@@ -15,11 +15,11 @@ namespace Tests.TestCases
             {
 
             }
-            else if (b && b) // Noncompliant
+            else if (b &&  b) // Noncompliant
             {
 
             }
-            else if (b && b) // Noncompliant
+            else if (b && b    ) // Noncompliant
             {
 
             }
@@ -27,7 +27,7 @@ namespace Tests.TestCases
             {
 
             }
-            else if (b && b) // Noncompliant
+            else if (b && /*some comment*/ b) // Noncompliant
             {
 
             }

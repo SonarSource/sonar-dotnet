@@ -35,44 +35,19 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
                     var currentCondition = ifStatement.Condition;
 
-                    var preceedingConditions = ifStatement.GetPreceedingConditionsInConditionChain().ToList();
+                    var preceedingCondition = ifStatement
+                        .GetPreceedingConditionsInConditionChain()
+                        .FirstOrDefault(preceeding => SyntaxFactory.AreEquivalent(currentCondition, preceeding));
 
-                    for (int i = 0; i < preceedingConditions.Count; i++)
+                    if (preceedingCondition != null)
                     {
-                        var preceedingCondition = preceedingConditions[i];
-
-                        if (currentCondition.IsEquivalentTo(preceedingCondition))
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(
+                        c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,
                                 currentCondition.GetLocation(),
                                 preceedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
-                            break;
-                        }
                     }
                 },
                 SyntaxKind.IfStatement);
-        }
-
-        private List<IfStatementSyntax> GetPreceedingIfs(IfStatementSyntax ifStatement)
-        {
-            var ifList = new List<IfStatementSyntax>();
-            var currentIf = ifStatement;
-
-            while (currentIf.Parent is ElseClauseSyntax)
-            {
-                var preceedingIf = currentIf.Parent.Parent as IfStatementSyntax;
-                if (preceedingIf == null)
-                {
-                    break;
-                }
-
-                ifList.Add(preceedingIf);
-                currentIf = preceedingIf;
-            }
-
-            ifList.Reverse();
-            return ifList;
-        }
+        }        
     }
 }
