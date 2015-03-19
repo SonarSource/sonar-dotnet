@@ -10,6 +10,7 @@ using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using System.IO;
+using System.Net.Mime;
 using System.Xml;
 using System.Xml.Linq;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace NSonarQubeAnalyzer
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             var configuration = new Configuration(XDocument.Load(args[0]));
 
@@ -35,7 +36,7 @@ namespace NSonarQubeAnalyzer
                 xmlOut.WriteStartElement("AnalysisOutput");
 
                 xmlOut.WriteStartElement("Files");
-                int n = 0;
+                var n = 0;
                 foreach (var file in configuration.Files)
                 {
                     xmlOut.Flush();
@@ -44,6 +45,8 @@ namespace NSonarQubeAnalyzer
 
                     try
                     {
+
+                        throw new Exception();
                         SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
                         Metrics metrics = new Metrics(syntaxTree);
 
@@ -96,6 +99,7 @@ namespace NSonarQubeAnalyzer
                         xmlOut.WriteEndElement();
 
                         xmlOut.WriteStartElement("Issues");
+                        
                         foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(syntaxTree))
                         {
                             xmlOut.WriteStartElement("Issue");
@@ -107,6 +111,7 @@ namespace NSonarQubeAnalyzer
                             xmlOut.WriteElementString("Message", diagnostic.GetMessage());
                             xmlOut.WriteEndElement();
                         }
+                        
                         xmlOut.WriteEndElement();
 
                         xmlOut.WriteEndElement();
@@ -115,14 +120,19 @@ namespace NSonarQubeAnalyzer
                     {
                         Console.Error.WriteLine("Failed to analyze the file: " + file);
                         Console.Error.WriteLine(e);
+                        return 1;
                     }
                 }
+
+
+
                 xmlOut.WriteEndElement();
 
                 xmlOut.WriteEndElement();
                 xmlOut.WriteEndDocument();
 
                 xmlOut.Flush();
+                return 0;
             }
         }
     }
