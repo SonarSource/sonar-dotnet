@@ -8,7 +8,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
     {
         public static IEnumerable<SyntaxNode> NextSiblings(this SyntaxNode self)
         {
-            if (self.Parent == null)
+            if (self == null || self.Parent == null)
             {
                 yield break; 
             }
@@ -20,6 +20,22 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
             for (var i = childIndex + 1; i < childCount; i++)
             {
                 yield return siblingsAndSelf[i];
+            }
+        }
+
+        public static IEnumerable<SyntaxNode> FollowingSyntaxNodes(this SyntaxNode self)
+        {
+            var currentSyntaxNode = self;
+
+            while (currentSyntaxNode != null)
+            {
+                var lastToken = currentSyntaxNode.GetLastToken();
+                var nextToken = lastToken.GetNextToken();
+
+                var nextSyntaxNode = nextToken.Parent;
+                yield return nextSyntaxNode;
+
+                currentSyntaxNode = nextSyntaxNode;
             }
         }
     }

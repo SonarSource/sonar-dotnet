@@ -8,6 +8,32 @@ namespace Tests.TestCases
 {
     class ConditionalStructureSameCondition
     {
+        public static int Tencrement(int a)
+        {
+            if (a == 1) 
+                a++;
+                return a; // Noncompliant
+
+
+            else if (a == 2)
+            {
+
+            }
+            else if (a == 1) 
+                a *= 3;
+
+                return a; // Noncompliant
+
+            while (true)
+                while (true)
+                    a++; /*comment */
+    /**/            return a; // Noncompliant
+
+
+//            String empty = "";
+            return a + 10;
+        }
+
         public void Test()
         {
             while (true) 

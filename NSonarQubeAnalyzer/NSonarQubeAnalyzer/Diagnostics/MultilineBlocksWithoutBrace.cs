@@ -69,7 +69,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 return;
             }
 
-            var nextStatement = c.Node.NextSiblings().FirstOrDefault();
+            var nextStatement = c.Node.FollowingSyntaxNodes().FirstOrDefault();
             if (nextStatement == null)
             {
                 return;
