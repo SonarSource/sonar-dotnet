@@ -55,6 +55,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1862").setName("Related \"if/else if\" statements should not have the same condition").setSeverity(Severity.CRITICAL);
     repository.createRule("S1871").setName("Two branches in the same conditional structure should not have exactly the same implementation").setSeverity(Severity.MAJOR);
     repository.createRule("S2681").setName("Multiline blocks should be enclosed in curly braces").setSeverity(Severity.CRITICAL);
+    repository.createRule("S1764").setName("Identical expressions should not be used on both sides of a binary operator").setSeverity(Severity.CRITICAL);
 
     NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")
