@@ -129,6 +129,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\SelfAssignedVariables.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\IdenticalExpressionsInBinaryOp.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -237,6 +240,7 @@
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="DiagnosticRunnerTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
+    <Compile Include="Diagnostics\SelfAssignedVariablesTest.cs" />
     <Compile Include="Diagnostics\IdenticalExpressionsInBinaryOpTest.cs" />
     <Compile Include="Diagnostics\MultilineBlocksWithoutBraceTest.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameImplementationTest.cs" />

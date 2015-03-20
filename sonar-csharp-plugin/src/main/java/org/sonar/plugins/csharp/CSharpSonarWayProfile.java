@@ -60,6 +60,7 @@ public class CSharpSonarWayProfile extends ProfileDefinition {
     activateRule(profile, "S1871");
     activateRule(profile, "S2681");
     activateRule(profile, "S1764");
+    activateRule(profile, "S1656");
 
     return profile;
   }
