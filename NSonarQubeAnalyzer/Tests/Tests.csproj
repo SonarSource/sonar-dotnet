@@ -129,6 +129,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\EmptyCatch.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\CatchRethrow.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -244,6 +247,7 @@
     <Compile Include="DiagnosticRunnerTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\CatchRethrowTest.cs" />
+    <Compile Include="Diagnostics\EmptyStatementTest.cs" />
     <Compile Include="Diagnostics\SelfAssignedVariablesTest.cs" />
     <Compile Include="Diagnostics\IdenticalExpressionsInBinaryOpTest.cs" />
     <Compile Include="Diagnostics\MultilineBlocksWithoutBraceTest.cs" />
@@ -272,7 +276,7 @@
     <Compile Include="Diagnostics\UnusedLocalVariableTest.cs" />
     <Compile Include="Diagnostics\UseCurlyBracesTest.cs" />
     <Compile Include="Diagnostics\IfConditionalAlwaysTrueOrFalseTest.cs" />
-    <Compile Include="Diagnostics\EmptyStatementTest.cs" />
+    <Compile Include="Diagnostics\EmptyCatchTest.cs" />
     <Compile Include="Diagnostics\UnnecessaryBooleanLiteralTest.cs" />
     <Compile Include="Diagnostics\BreakOutsideSwitchTest.cs" />
     <Compile Include="Diagnostics\AtLeastThreeCasesInSwitchTest.cs" />

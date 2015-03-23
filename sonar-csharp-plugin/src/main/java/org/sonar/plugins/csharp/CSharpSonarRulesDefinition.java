@@ -58,6 +58,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S1764").setName("Identical expressions should not be used on both sides of a binary operator").setSeverity(Severity.CRITICAL);
     repository.createRule("S1656").setName("Variables should not be self-assigned").setSeverity(Severity.MAJOR);
     repository.createRule("S2737").setName("\"catch\" clauses should do more than rethrow").setSeverity(Severity.MAJOR);
+    repository.createRule("S2486").setName("Exceptions should not be ignored").setSeverity(Severity.MAJOR);
 
     NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")

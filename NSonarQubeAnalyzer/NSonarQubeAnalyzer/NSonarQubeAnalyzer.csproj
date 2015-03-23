@@ -115,6 +115,7 @@
   <ItemGroup>
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
+    <Compile Include="Diagnostics\EmptyCatch.cs" />
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
     <Compile Include="Diagnostics\CatchRethrow.cs" />
     <Compile Include="Diagnostics\Helpers\TreeNavigation.cs" />
