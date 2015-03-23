@@ -38,7 +38,8 @@ namespace NSonarQubeAnalyzer
             new IdenticalExpressionsInBinaryOp(),
             new SelfAssignedVariables(),
             new CatchRethrow(),
-            new EmptyCatch()
+            new EmptyCatch(),
+            new StaticFieldInGenericClass()
         );
 
         public bool IgnoreHeaderComments { private set; get; }
