@@ -135,6 +135,7 @@
     <Compile Include="Diagnostics\EmptyMethod.cs" />
     <Compile Include="Diagnostics\ClassName.cs" />
     <Compile Include="Diagnostics\SelfAssignedVariables.cs" />
+    <Compile Include="Diagnostics\ShortCircuitNullPointerDereference.cs" />
     <Compile Include="Diagnostics\StaticFieldInGenericClass.cs" />
     <Compile Include="Diagnostics\TooManyParameters.cs" />
     <Compile Include="Diagnostics\TooManyLabelsInSwitch.cs" />

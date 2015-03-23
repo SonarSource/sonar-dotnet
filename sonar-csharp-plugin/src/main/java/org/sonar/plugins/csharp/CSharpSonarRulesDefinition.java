@@ -60,6 +60,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     repository.createRule("S2737").setName("\"catch\" clauses should do more than rethrow").setSeverity(Severity.MAJOR);
     repository.createRule("S2486").setName("Exceptions should not be ignored").setSeverity(Severity.MAJOR);
     repository.createRule("S2743").setName("Static field in generic type should be avoided").setSeverity(Severity.CRITICAL);
+    repository.createRule("S1697").setName("Short-circuit logic should be used to prevent null pointer dereferences in conditionals").setSeverity(Severity.BLOCKER);
 
     NewRule commentRegex = repository.createRule("S124").setName("Comment regular expression rule").setSeverity(Severity.MAJOR).setTemplate(true);
     commentRegex.createParam("regularExpression").setDescription("The regular expression")

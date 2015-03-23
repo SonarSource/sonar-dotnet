@@ -129,6 +129,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\ShortCircuitNullPointerDereference.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\StaticFieldInGenericClass.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -267,6 +270,7 @@
     <Compile Include="Diagnostics\MethodNameTest.cs" />
     <Compile Include="Diagnostics\EmptyMethodTest.cs" />
     <Compile Include="Diagnostics\ClassNameTest.cs" />
+    <Compile Include="Diagnostics\ShortCircuitNullPointerDereferenceTest.cs" />
     <Compile Include="Diagnostics\TooManyParametersTest.cs" />
     <Compile Include="Diagnostics\TooManyLabelsInSwitchTest.cs" />
     <Compile Include="Diagnostics\ForLoopCounterChangedTest.cs" />
