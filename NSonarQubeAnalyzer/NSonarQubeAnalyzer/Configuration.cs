@@ -36,7 +36,8 @@ namespace NSonarQubeAnalyzer
             new ConditionalStructureSameImplementation(),
             new MultilineBlocksWithoutBrace(),
             new IdenticalExpressionsInBinaryOp(),
-            new SelfAssignedVariables()
+            new SelfAssignedVariables(),
+            new CatchRethrow()
         );
 
         public bool IgnoreHeaderComments { private set; get; }

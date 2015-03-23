@@ -116,6 +116,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
+    <Compile Include="Diagnostics\CatchRethrow.cs" />
     <Compile Include="Diagnostics\Helpers\TreeNavigation.cs" />
     <Compile Include="Diagnostics\IdenticalExpressionsInBinaryOp.cs" />
     <Compile Include="Diagnostics\MultilineBlocksWithoutBrace.cs" />
