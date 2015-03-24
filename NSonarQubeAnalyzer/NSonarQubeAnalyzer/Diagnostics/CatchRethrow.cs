@@ -15,12 +15,9 @@ namespace NSonarQubeAnalyzer.Diagnostics
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-        private readonly BlockSyntax _throwBlock =
-            CSharpSyntaxTree.ParseText("{throw;}", new CSharpParseOptions(kind: SourceCodeKind.Interactive))
-                .GetRoot()
-                .DescendantNodes()
-                .OfType<BlockSyntax>()
-                .First();
+        private readonly BlockSyntax throwBlock =
+            SyntaxFactory.Block(
+                SyntaxFactory.ThrowStatement());
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
@@ -39,7 +36,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     }
 
                     if (tryStatement.Catches.Count == 1 &&
-                        SyntaxFactory.AreEquivalent(tryStatement.Catches[0].Block, _throwBlock))
+                        SyntaxFactory.AreEquivalent(tryStatement.Catches[0].Block, throwBlock))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,
@@ -50,7 +47,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     var lastcatchClause = tryStatement.Catches.Last();
 
                     if (IsGenericExceptionClause(lastcatchClause, c.SemanticModel) && 
-                        SyntaxFactory.AreEquivalent(lastcatchClause.Block, _throwBlock))
+                        SyntaxFactory.AreEquivalent(lastcatchClause.Block, throwBlock))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,

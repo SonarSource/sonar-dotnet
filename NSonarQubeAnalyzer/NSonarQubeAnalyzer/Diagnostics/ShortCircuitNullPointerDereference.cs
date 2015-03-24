@@ -18,12 +18,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-        private readonly ExpressionSyntax _nullExpression =
-            CSharpSyntaxTree.ParseText("null", new CSharpParseOptions(kind: SourceCodeKind.Interactive))
-                .GetRoot()
-                .DescendantNodes()
-                .OfType<ExpressionSyntax>()
-                .First();
+        private readonly ExpressionSyntax nullExpression = SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
@@ -69,8 +64,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     continue;
                 }
 
-                var leftNull = SyntaxFactory.AreEquivalent(comparisonToNull.Left, _nullExpression);
-                var rightNull = SyntaxFactory.AreEquivalent(comparisonToNull.Right, _nullExpression);
+                var leftNull = SyntaxFactory.AreEquivalent(comparisonToNull.Left, nullExpression);
+                var rightNull = SyntaxFactory.AreEquivalent(comparisonToNull.Right, nullExpression);
 
                 if (leftNull && rightNull)
                 {

@@ -30,12 +30,10 @@ namespace NSonarQubeAnalyzer.Diagnostics
             SyntaxKind.LeftShiftExpression, SyntaxKind.RightShiftExpression
         };
 
-        private readonly LiteralExpressionSyntax _literalOneSyntax =
-            CSharpSyntaxTree.ParseText("1", new CSharpParseOptions(kind: SourceCodeKind.Interactive))
-                .GetRoot()
-                .DescendantNodes()
-                .OfType<LiteralExpressionSyntax>()
-                .First();
+        private readonly LiteralExpressionSyntax literalOneSyntax =
+            SyntaxFactory.LiteralExpression(
+                SyntaxKind.NumericLiteralExpression,
+                SyntaxFactory.Literal(1));
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
@@ -46,8 +44,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var expression = (BinaryExpressionSyntax) c.Node;
 
-                    if (expression.OperatorToken.IsKind(SyntaxKind.LessThanLessThanToken) &&
-                        SyntaxFactory.AreEquivalent(expression.Right, _literalOneSyntax))
+                    if (expression.IsKind(SyntaxKind.LeftShiftExpression) &&
+                        SyntaxFactory.AreEquivalent(expression.Right, literalOneSyntax))
                     {
                         return;
                     }

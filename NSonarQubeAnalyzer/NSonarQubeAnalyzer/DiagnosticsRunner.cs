@@ -10,7 +10,7 @@ namespace NSonarQubeAnalyzer
     public class DiagnosticsRunner
     {
         private readonly ImmutableArray<DiagnosticAnalyzer> DiagnosticAnalyzers;
-
+        
         public DiagnosticsRunner(ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers)
         {
             DiagnosticAnalyzers = diagnosticAnalyzers;
