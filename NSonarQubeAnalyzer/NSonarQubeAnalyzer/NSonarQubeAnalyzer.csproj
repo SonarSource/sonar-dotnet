@@ -119,7 +119,6 @@
     <Compile Include="Diagnostics\CommentRegularExpression.cs" />
     <Compile Include="Diagnostics\CatchRethrow.cs" />
     <Compile Include="Diagnostics\Helpers\EquivalenceChecker.cs" />
-    <Compile Include="Diagnostics\Helpers\TreeNavigation.cs" />
     <Compile Include="Diagnostics\IdenticalExpressionsInBinaryOp.cs" />
     <Compile Include="Diagnostics\MultilineBlocksWithoutBrace.cs" />
     <Compile Include="Diagnostics\ConditionalStructureSameImplementation.cs" />

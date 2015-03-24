@@ -25,22 +25,19 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var statement = GetStatement((WhileStatementSyntax)c.Node);
-                    CheckLoop(c, statement);
+                    CheckLoop(c, ((WhileStatementSyntax)c.Node).Statement);
                 },
                 SyntaxKind.WhileStatement);
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var statement = GetStatement((ForStatementSyntax)c.Node);
-                    CheckLoop(c, statement);
+                    CheckLoop(c, ((ForStatementSyntax)c.Node).Statement);
                 },
                 SyntaxKind.ForStatement);
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var statement = GetStatement((ForEachStatementSyntax)c.Node);
-                    CheckLoop(c, statement);
+                    CheckLoop(c, ((ForEachStatementSyntax)c.Node).Statement);
                 },
                 SyntaxKind.ForEachStatement);
             context.RegisterSyntaxNodeAction(
@@ -62,20 +59,15 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 "conditionally", "unconditionally");
         }
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, params object[] args)
+        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, string executed, string execute)
         {
             if (statement is BlockSyntax)
             {
                 return;
             }
 
-            var nextStatement = c.Node.FollowingSyntaxNodes().FirstOrDefault();
+            var nextStatement = c.Node.GetLastToken().GetNextToken().Parent;
             if (nextStatement == null)
-            {
-                return;
-            }
-
-            if (statement.HasLeadingTrivia ^ nextStatement.HasLeadingTrivia)
             {
                 return;
             }
@@ -85,25 +77,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
             if (charPositionWithinLine1 == charPositionWithinLine2)
             {
-                c.ReportDiagnostic(Diagnostic.Create(Rule, nextStatement.GetLocation(), args));
+                c.ReportDiagnostic(Diagnostic.Create(Rule, nextStatement.GetLocation(), executed, execute));
             }
         }
-
-        #region Get statement for loops
-
-        private static StatementSyntax GetStatement(ForStatementSyntax multilineStatement)
-        {
-            return multilineStatement.Statement;
-        }
-        private static StatementSyntax GetStatement(WhileStatementSyntax multilineStatement)
-        {
-            return multilineStatement.Statement;
-        }
-        private static StatementSyntax GetStatement(ForEachStatementSyntax multilineStatement)
-        {
-            return multilineStatement.Statement;
-        }
-
-        #endregion
     }
 }
