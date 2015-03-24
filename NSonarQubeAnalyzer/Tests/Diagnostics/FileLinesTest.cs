@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
@@ -10,8 +9,7 @@ namespace Tests.Diagnostics
         [TestMethod]
         public void FileLines()
         {
-            var diagnostic = new FileLines();
-            diagnostic.Maximum = 12;
+            var diagnostic = new FileLines {Maximum = 12};
             Verifier.Verify(@"TestCases\FileLines12.cs", diagnostic);
             Verifier.Verify(@"TestCases\FileLines13.cs", diagnostic);
         }

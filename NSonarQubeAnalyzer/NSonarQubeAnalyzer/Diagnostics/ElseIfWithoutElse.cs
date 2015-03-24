@@ -26,7 +26,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    IfStatementSyntax ifNode = (IfStatementSyntax)c.Node;
+                    var ifNode = (IfStatementSyntax)c.Node;
                     if (IsElseIfWithoutElse(ifNode))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, ifNode.GetLocation()));

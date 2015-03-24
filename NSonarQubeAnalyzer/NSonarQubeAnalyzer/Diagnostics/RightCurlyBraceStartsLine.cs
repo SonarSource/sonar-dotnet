@@ -43,11 +43,11 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private static bool IsOnSameLineAsOpenBrace(SyntaxToken closeBraceToken)
         {
-            var openBraceToken = closeBraceToken.Parent.ChildTokens().Where(token => token.IsKind(SyntaxKind.OpenBraceToken)).Single();
+            var openBraceToken = closeBraceToken.Parent.ChildTokens().Single(token => token.IsKind(SyntaxKind.OpenBraceToken));
             return openBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line == closeBraceToken.GetLocation().GetLineSpan().StartLinePosition.Line;
         }
 
-        private bool IsInitializer(SyntaxNode node)
+        private static bool IsInitializer(SyntaxNode node)
         {
             return node.IsKind(SyntaxKind.ArrayInitializerExpression) ||
                 node.IsKind(SyntaxKind.CollectionInitializerExpression) ||

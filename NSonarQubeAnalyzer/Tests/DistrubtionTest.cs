@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
-using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer;
 

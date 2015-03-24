@@ -25,13 +25,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var ifStatement = c.Node as IfStatementSyntax;
-
-                    if (ifStatement == null)
-                    {
-                        return;
-                    }
-
+                    var ifStatement = (IfStatementSyntax)c.Node;
                     var currentCondition = ifStatement.Condition;
 
                     var precedingCondition = ifStatement

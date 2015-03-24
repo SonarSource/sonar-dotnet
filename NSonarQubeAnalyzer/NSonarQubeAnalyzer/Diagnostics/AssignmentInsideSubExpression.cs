@@ -44,9 +44,9 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private static bool IsInSubExpression(SyntaxNode node)
         {
-            ExpressionSyntax expression = node.Parent.FirstAncestorOrSelf<ExpressionSyntax>(ancestor => ancestor is ExpressionSyntax);
+            var expression = node.Parent.FirstAncestorOrSelf<ExpressionSyntax>(ancestor => ancestor != null);
 
-            return expression is ExpressionSyntax &&
+            return expression != null &&
                 !expression.IsKind(SyntaxKind.ParenthesizedLambdaExpression) &&
                 !expression.IsKind(SyntaxKind.SimpleLambdaExpression) &&
                 !expression.IsKind(SyntaxKind.AnonymousMethodExpression) &&

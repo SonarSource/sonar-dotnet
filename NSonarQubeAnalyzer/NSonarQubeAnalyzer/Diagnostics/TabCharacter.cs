@@ -23,12 +23,14 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxTreeAction(
                 c =>
                 {
-                    int offset = c.Tree.GetText().ToString().IndexOf('\t');
-                    if (offset >= 0)
+                    var offset = c.Tree.GetText().ToString().IndexOf('\t');
+                    if (offset < 0)
                     {
-                        var location = c.Tree.GetLocation(TextSpan.FromBounds(offset, offset));
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, location));
+                        return;
                     }
+
+                    var location = c.Tree.GetLocation(TextSpan.FromBounds(offset, offset));
+                    c.ReportDiagnostic(Diagnostic.Create(Rule, location));
                 });
         }
     }

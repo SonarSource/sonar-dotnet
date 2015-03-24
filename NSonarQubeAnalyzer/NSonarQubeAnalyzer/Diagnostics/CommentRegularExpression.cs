@@ -32,12 +32,9 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     foreach (var comment in comments)
                     {
                         var text = comment.ToString();
-                        foreach (var rule in Rules)
+                        foreach (var rule in Rules.Where(rule => Regex.IsMatch(text, rule.RegularExpression)))
                         {
-                            if (Regex.IsMatch(text, rule.RegularExpression))
-                            {
-                                c.ReportDiagnostic(Diagnostic.Create(rule.Descriptor, comment.GetLocation()));
-                            }
+                            c.ReportDiagnostic(Diagnostic.Create(rule.Descriptor, comment.GetLocation()));
                         }
                     }
                 });

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -55,7 +54,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 return;
             }
 
-            var expressionsInChain = ExpressionsInChain(binaryExpression).ToList();
+            var expressionsInChain = GetExpressionsInChain(binaryExpression).ToList();
 
             for (var i = 0; i < expressionsInChain.Count; i++)
             {
@@ -82,41 +81,32 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 }
 
                 var expressionComparedToNull = leftNull?comparisonToNull.Right:comparisonToNull.Left;
-
-                for (var j = i + 1; j < expressionsInChain.Count; j++)
-                {
-                    var reported = ReportMatchingDereference(c, expressionsInChain[j], expressionComparedToNull, comparisonToNull);
-
-                    if (reported)
-                    {
-                        break;
-                    }
-                }
+                CheckFollowingExpressions(c, i, expressionsInChain, expressionComparedToNull, comparisonToNull);
             }
         }
 
-        private static bool ReportMatchingDereference(SyntaxNodeAnalysisContext c, ExpressionSyntax subsequentExpression,
-            ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax binary)
+        private static void CheckFollowingExpressions(SyntaxNodeAnalysisContext c, int currentExpressionIndex, List<ExpressionSyntax> expressionsInChain,
+            ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax comparisonToNull)
         {
-
-            foreach (var descendant in subsequentExpression
-                .DescendantNodes()
-                .Where(n => SyntaxFactory.AreEquivalent(n, expressionComparedToNull)))
+            for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
             {
-                if (descendant.Parent is MemberAccessExpressionSyntax ||
-                    descendant.Parent is ElementAccessExpressionSyntax)
+                foreach (var descendant in expressionsInChain[j]
+                    .DescendantNodes()
+                    .Where(n => SyntaxFactory.AreEquivalent(n, expressionComparedToNull)))
                 {
-                    //found
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, binary.GetLocation(),
+                    if (!(descendant.Parent is MemberAccessExpressionSyntax) &&
+                        !(descendant.Parent is ElementAccessExpressionSyntax))
+                    {
+                        continue;
+                    }
+
+                    c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
                         expressionComparedToNull.ToString()));
-                    return true;
                 }
             }
-
-            return false;
         }
 
-        private IEnumerable<ExpressionSyntax> ExpressionsInChain(BinaryExpressionSyntax binaryExpression)
+        private static IEnumerable<ExpressionSyntax> GetExpressionsInChain(BinaryExpressionSyntax binaryExpression)
         {
             var expressionList = new List<ExpressionSyntax>();
 

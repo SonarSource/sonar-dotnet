@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer.Diagnostics;
@@ -19,8 +18,7 @@ namespace Tests.Diagnostics
                     RegularExpression = "(?i)TODO"
                 });
 
-            var diagnostic = new CommentRegularExpression();
-            diagnostic.Rules = rules;
+            var diagnostic = new CommentRegularExpression {Rules = rules};
             Verifier.Verify(@"TestCases\CommentRegularExpression.cs", diagnostic);
         }
     }

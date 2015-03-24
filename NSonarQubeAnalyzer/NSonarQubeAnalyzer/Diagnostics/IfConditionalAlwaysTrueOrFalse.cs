@@ -24,7 +24,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    IfStatementSyntax ifNode = (IfStatementSyntax)c.Node;
+                    var ifNode = (IfStatementSyntax)c.Node;
 
                     if (HasBooleanLiteralExpressionAsCondition(ifNode))
                     {

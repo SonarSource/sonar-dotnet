@@ -45,7 +45,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 SyntaxKind.RightShiftAssignmentExpression);
         }
 
-        private bool AssignsToParameter(ISymbol symbol)
+        private static bool AssignsToParameter(ISymbol symbol)
         {
             if (!(symbol is IParameterSymbol))
             {

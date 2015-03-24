@@ -18,7 +18,7 @@ namespace NSonarQubeAnalyzer
 
         public void Add(int value)
         {
-            int i = Ranges.Length - 1;
+            var i = Ranges.Length - 1;
 
             while (i > 0 && value < Ranges[i])
             {

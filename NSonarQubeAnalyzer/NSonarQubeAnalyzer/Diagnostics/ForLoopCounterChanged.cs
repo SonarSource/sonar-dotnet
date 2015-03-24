@@ -61,9 +61,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    ForStatementSyntax forNode = (ForStatementSyntax)c.Node;
-
-                    var loopCounters = LoopCounters(forNode, c.SemanticModel);
+                    var forNode = (ForStatementSyntax)c.Node;
+                    var loopCounters = LoopCounters(forNode, c.SemanticModel).ToList();
 
                     foreach (var affectedExpression in AffectedExpressions(forNode.Statement))
                     {
@@ -95,8 +94,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
         {
             return node
                 .DescendantNodesAndSelf()
-                .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(k => n.IsKind(k))))
-                .Select(n => SideEffectExpressions.Where(s => s.Kinds.Any(k => n.IsKind(k))).Single().AffectedExpression(n));
+                .Where(n => SideEffectExpressions.Any(s => s.Kinds.Any(n.IsKind)))
+                .Select(n => SideEffectExpressions.Single(s => s.Kinds.Any(n.IsKind)).AffectedExpression(n));
         }
     }
 }

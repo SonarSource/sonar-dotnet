@@ -27,7 +27,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 c =>
                 {
                     var parameterListNode = (ParameterListSyntax)c.Node;
-                    int parameters = parameterListNode.Parameters.Count;
+                    var parameters = parameterListNode.Parameters.Count;
 
                     if (parameters > Maximum)
                     {

@@ -27,7 +27,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
+                    var literalNode = (LiteralExpressionSyntax)c.Node;
 
                     if (!literalNode.IsPartOfStructuredTrivia() &&
                         !literalNode.Ancestors().Any(e =>

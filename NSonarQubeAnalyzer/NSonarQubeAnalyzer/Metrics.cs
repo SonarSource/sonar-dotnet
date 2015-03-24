@@ -92,25 +92,24 @@ namespace NSonarQubeAnalyzer
 
         public int Classes()
         {
-            return tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n.IsKind(SyntaxKind.ClassDeclaration)).Count();
+            return tree.GetCompilationUnitRoot().DescendantNodes().Count(n => n.IsKind(SyntaxKind.ClassDeclaration));
         }
 
         public int Accessors()
         {
             return tree.GetCompilationUnitRoot()
                 .DescendantNodes()
-                .Where(
+                .Count(
                     n =>
                         n.IsKind(SyntaxKind.GetAccessorDeclaration) ||
                         n.IsKind(SyntaxKind.SetAccessorDeclaration) ||
                         n.IsKind(SyntaxKind.AddAccessorDeclaration) ||
-                        n.IsKind(SyntaxKind.RemoveAccessorDeclaration))
-                .Count();
+                        n.IsKind(SyntaxKind.RemoveAccessorDeclaration));
         }
 
         public int Statements()
         {
-            return tree.GetCompilationUnitRoot().DescendantNodes().Where(n => n is StatementSyntax && !n.IsKind(SyntaxKind.Block)).Count();
+            return tree.GetCompilationUnitRoot().DescendantNodes().Count(n => n is StatementSyntax && !n.IsKind(SyntaxKind.Block));
         }
 
         public int Functions()
@@ -145,12 +144,9 @@ namespace NSonarQubeAnalyzer
         public int PublicUndocumentedApi()
         {
             return PublicApiNodes()
-                .Where(
-                    n =>
-                        !n.GetLeadingTrivia()
-                        .Where(t => IsComment(t))
-                        .Any())
-                .Count();
+                .Count(n =>
+                    !n.GetLeadingTrivia()
+                        .Any(IsComment));
         }
 
         private IEnumerable<SyntaxNode> PublicApiNodes()
@@ -170,7 +166,7 @@ namespace NSonarQubeAnalyzer
                 var member = toVisit.Pop();
                 visited.Add(member);
 
-                var isPublic = member.ChildTokens().Where(t => t.IsKind(SyntaxKind.PublicKeyword)).Any();
+                var isPublic = member.ChildTokens().Any(t => t.IsKind(SyntaxKind.PublicKeyword));
 
                 if (isPublic)
                 {
@@ -199,7 +195,7 @@ namespace NSonarQubeAnalyzer
         {
             return node
                 .DescendantNodesAndSelf()
-                .Where(
+                .Count(
                     n =>
                         // TODO What about the null coalescing operator?
                         n.IsKind(SyntaxKind.IfStatement) ||
@@ -213,8 +209,7 @@ namespace NSonarQubeAnalyzer
                         n.IsKind(SyntaxKind.LogicalOrExpression) ||
                         n.IsKind(SyntaxKind.CaseSwitchLabel) ||
                         (n.IsKind(SyntaxKind.ReturnStatement) && !IsLastStatement(n)) ||
-                        (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))))
-                .Count();
+                        (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))));
         }
 
         // TODO What about lambdas?

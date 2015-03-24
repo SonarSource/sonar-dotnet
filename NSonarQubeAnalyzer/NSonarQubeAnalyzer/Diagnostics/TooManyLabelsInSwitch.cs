@@ -27,8 +27,8 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    SwitchStatementSyntax switchNode = (SwitchStatementSyntax)c.Node;
-                    int labels = NumberOfLabels(switchNode);
+                    var switchNode = (SwitchStatementSyntax)c.Node;
+                    var labels = NumberOfLabels(switchNode);
 
                     if (labels > Maximum)
                     {

@@ -25,7 +25,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    MethodDeclarationSyntax methodNode = (MethodDeclarationSyntax)c.Node;
+                    var methodNode = (MethodDeclarationSyntax)c.Node;
 
                     if (methodNode.Body != null &&
                         !methodNode.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword)) &&

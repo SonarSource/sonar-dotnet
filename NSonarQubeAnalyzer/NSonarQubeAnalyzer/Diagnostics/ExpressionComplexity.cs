@@ -45,7 +45,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     var compoundExpressionsDescendants =
                         c.Node
                         .DescendantNodes()
-                        .Where(e => IsCompoundExpression(e))
+                        .Where(IsCompoundExpression)
                         .SelectMany(
                             e =>
                                 e
@@ -70,12 +70,11 @@ namespace NSonarQubeAnalyzer.Diagnostics
                                 Complexity =
                                     e
                                     .DescendantNodesAndSelf(e2 => !IsCompoundExpression(e2))
-                                    .Where(
+                                    .Count(
                                         e2 =>
                                             e2.IsKind(SyntaxKind.ConditionalExpression) ||
                                             e2.IsKind(SyntaxKind.LogicalAndExpression) ||
                                             e2.IsKind(SyntaxKind.LogicalOrExpression))
-                                    .Count()
                             })
                         .Where(e => e.Complexity > Maximum);
 
@@ -89,7 +88,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private bool IsCompoundExpression(SyntaxNode node)
         {
-            return CompoundExpressionKinds.Any(k => node.IsKind(k));
+            return CompoundExpressionKinds.Any(node.IsKind);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Immutable;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
@@ -11,8 +9,7 @@ namespace Tests.Diagnostics
         [TestMethod]
         public void FunctionComplexity()
         {
-            var diagnostic = new FunctionComplexity();
-            diagnostic.Maximum = 3;
+            var diagnostic = new FunctionComplexity {Maximum = 3};
             Verifier.Verify(@"TestCases\FunctionComplexity.cs", diagnostic);
         }
     }

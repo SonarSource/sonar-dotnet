@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis;
-using NSonarQubeAnalyzer;
-using System.Collections.Immutable;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
+using NSonarQubeAnalyzer;
 
 namespace Tests.Diagnostics
 {
@@ -18,18 +16,19 @@ namespace Tests.Diagnostics
         public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
         {
             var runner = new DiagnosticsRunner(ImmutableArray.Create(diagnosticAnalyzer));
+            var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(path, Encoding.UTF8));
 
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(path, Encoding.UTF8));
-
-            List<int> expected = new List<int>(ExpectedIssues(syntaxTree));
+            var expected = new List<int>(ExpectedIssues(syntaxTree));
             foreach (var diagnostic in runner.GetDiagnostics(syntaxTree))
             {
-                if (diagnostic.Id == diagnosticAnalyzer.SupportedDiagnostics.Single().Id)
+                if (diagnostic.Id != diagnosticAnalyzer.SupportedDiagnostics.Single().Id)
                 {
-                    int line = diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1;
-                    expected.Should().Contain(line);
-                    expected.Remove(line);
+                    continue;
                 }
+
+                var line = diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1;
+                expected.Should().Contain(line);
+                expected.Remove(line);
             }
 
             expected.Should().BeEquivalentTo(Enumerable.Empty<int>());

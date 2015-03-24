@@ -25,7 +25,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    int lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+                    var lines = c.Node.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
 
                     if (lines > Maximum)
                     {

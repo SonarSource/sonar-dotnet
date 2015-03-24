@@ -24,7 +24,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    LiteralExpressionSyntax literalNode = (LiteralExpressionSyntax)c.Node;
+                    var literalNode = (LiteralExpressionSyntax)c.Node;
                     if (IsUnnecessary(literalNode))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, literalNode.GetLocation(), literalNode.Token.ToString()));

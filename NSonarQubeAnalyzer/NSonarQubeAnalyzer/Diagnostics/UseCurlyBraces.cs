@@ -76,7 +76,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var checkedKind = CheckedKinds.Where(e => c.Node.IsKind(e.Kind)).Single();
+                    var checkedKind = CheckedKinds.Single(e => c.Node.IsKind(e.Kind));
 
                     if (!checkedKind.Validator(c.Node))
                     {

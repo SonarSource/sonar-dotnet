@@ -24,7 +24,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    BreakStatementSyntax breakNode = (BreakStatementSyntax)c.Node;
+                    var breakNode = (BreakStatementSyntax)c.Node;
                     if (!IsInSwitch(breakNode))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, breakNode.GetLocation()));
@@ -35,7 +35,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private static bool IsInSwitch(BreakStatementSyntax node)
         {
-            SyntaxNode ancestor = node.FirstAncestorOrSelf<SyntaxNode>(e =>
+            var ancestor = node.FirstAncestorOrSelf<SyntaxNode>(e =>
                 e.IsKind(SyntaxKind.SwitchStatement) ||
                 e.IsKind(SyntaxKind.WhileStatement) ||
                 e.IsKind(SyntaxKind.DoStatement) ||

@@ -24,11 +24,11 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var objectCreation = c.Node as ObjectCreationExpressionSyntax;
-                    var parent = c.Node.Parent as ExpressionStatementSyntax;
-                    if (objectCreation!= null && parent != null)
+                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                    var parent = objectCreation.Parent as ExpressionStatementSyntax;
+                    if (parent != null)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), objectCreation.Type));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.GetLocation(), objectCreation.Type));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);

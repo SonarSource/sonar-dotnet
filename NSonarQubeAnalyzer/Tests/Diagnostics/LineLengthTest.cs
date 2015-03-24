@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer.Diagnostics;
 
 namespace Tests.Diagnostics
@@ -10,8 +9,7 @@ namespace Tests.Diagnostics
         [TestMethod]
         public void LineLength()
         {
-            var diagnostic = new LineLength();
-            diagnostic.Maximum = 47;
+            var diagnostic = new LineLength {Maximum = 47};
             Verifier.Verify(@"TestCases\LineLength.cs", diagnostic);
         }
     }

@@ -40,12 +40,14 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     {
                         var symbol = semanticModel.GetDeclaredSymbol(variableDeclaratorNode);
 
-                        if (symbol.Kind == SymbolKind.Local && !referencedSymbols.Contains(symbol))
+                        if (symbol.Kind != SymbolKind.Local || referencedSymbols.Contains(symbol))
                         {
-                            foreach (var syntaxReference in symbol.DeclaringSyntaxReferences)
-                            {
-                                c.ReportDiagnostic(Diagnostic.Create(Rule, syntaxReference.GetSyntax().GetLocation(), symbol.Name));
-                            }
+                            continue;
+                        }
+
+                        foreach (var syntaxReference in symbol.DeclaringSyntaxReferences)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, syntaxReference.GetSyntax().GetLocation(), symbol.Name));
                         }
                     }
                 });
@@ -56,7 +58,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
         {
             var builder = ImmutableHashSet.CreateBuilder<ISymbol>();
 
-            foreach (SyntaxNode node in syntaxTree.GetCompilationUnitRoot().DescendantNodesAndSelf())
+            foreach (var node in syntaxTree.GetCompilationUnitRoot().DescendantNodesAndSelf())
             {
                 var symbolInfo = semanticModel.GetSymbolInfo(node);
                 if (symbolInfo.Symbol != null)

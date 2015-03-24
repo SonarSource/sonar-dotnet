@@ -25,7 +25,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    SwitchStatementSyntax switchNode = (SwitchStatementSyntax)c.Node;
+                    var switchNode = (SwitchStatementSyntax)c.Node;
                     if (!HasDefaultLabel(switchNode))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.GetLocation()));

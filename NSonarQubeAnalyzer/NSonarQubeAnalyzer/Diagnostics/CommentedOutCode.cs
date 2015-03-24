@@ -30,38 +30,45 @@ namespace NSonarQubeAnalyzer.Diagnostics
                         Action<IEnumerable<SyntaxTrivia>> check =
                             trivias =>
                             {
-                                int lastCommentedCodeLine = int.MinValue;
+                                var lastCommentedCodeLine = int.MinValue;
 
                                 foreach (var trivia in trivias)
                                 {
-                                    if (trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+                                    if (!trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) &&
+                                        !trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
                                     {
-                                        string contents = trivia.ToString().Substring(2);
-                                        if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+                                        continue;
+                                    }
+
+                                    var contents = trivia.ToString().Substring(2);
+                                    if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
+                                    {
+                                        contents = contents.Substring(0, contents.Length - 2);
+                                    }
+
+                                    var baseLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
+                                    // TODO Do not duplicate line terminators here
+                                    var lines = contents.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+                                    for (var offset = 0; offset < lines.Length; offset++)
+                                    {
+                                        if (!IsCode(lines[offset]))
                                         {
-                                            contents = contents.Substring(0, contents.Length - 2);
+                                            continue;
                                         }
 
-                                        int baseLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
-                                        // TODO Do not duplicate line terminators here
-                                        var lines = contents.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                                        var lineNumber = baseLineNumber + offset;
+                                        var oldLastCommentedCodeLine = lastCommentedCodeLine;
+                                        lastCommentedCodeLine = lineNumber;
 
-                                        for (int offset = 0; offset < lines.Length; offset++)
+                                        if (lineNumber == oldLastCommentedCodeLine + 1)
                                         {
-                                            if (IsCode(lines[offset]))
-                                            {
-                                                int lineNumber = baseLineNumber + offset;
-                                                int oldLastCommentedCodeLine = lastCommentedCodeLine;
-                                                lastCommentedCodeLine = lineNumber;
-
-                                                if (lineNumber != oldLastCommentedCodeLine + 1)
-                                                {
-                                                    var location = Location.Create(c.Tree, c.Tree.GetText().Lines[lineNumber].Span);
-                                                    c.ReportDiagnostic(Diagnostic.Create(Rule, location));
-                                                    break;
-                                                }
-                                            }
+                                            continue;
                                         }
+
+                                        var location = Location.Create(c.Tree, c.Tree.GetText().Lines[lineNumber].Span);
+                                        c.ReportDiagnostic(Diagnostic.Create(Rule, location));
+                                        break;
                                     }
                                 }
                             };
@@ -72,7 +79,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 });
         }
 
-        private bool IsCode(string line)
+        private static bool IsCode(string line)
         {
             line = line.Replace(" ", "").Replace("\t", "");
 
