@@ -30,8 +30,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var expression = (AssignmentExpressionSyntax) c.Node;
 
-                    if (expression.Parent is InitializerExpressionSyntax ||
-                        expression.Parent is AnonymousObjectMemberDeclaratorSyntax)
+                    if (expression.Parent is InitializerExpressionSyntax)
                     {
                         return;
                     }
