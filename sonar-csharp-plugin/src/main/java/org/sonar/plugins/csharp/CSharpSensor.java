@@ -154,7 +154,10 @@ public class CSharpSensor implements Sensor {
       .addArgument(analysisInput.getAbsolutePath())
       .addArgument(analysisOutput.getAbsolutePath());
 
-    CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+    int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+    if (exitCode != 0) {
+      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode);
+    }
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
