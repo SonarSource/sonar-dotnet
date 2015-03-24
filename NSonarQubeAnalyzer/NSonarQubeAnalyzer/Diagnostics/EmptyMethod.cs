@@ -12,7 +12,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
     {
         internal const string DiagnosticId = "S1186";
         internal const string Description = "Methods should not be empty";
-        internal const string MessageFormat = "Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.";
+        internal const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a NotSupportedException or complete the implementation.";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
