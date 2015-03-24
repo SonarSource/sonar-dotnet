@@ -2,6 +2,12 @@
 {
     public class ForLoopCounterChanged
     {
+        class Helper
+        {
+            public int i { get; set; }
+            public int[] j { get; set; }
+        }
+
         public ForLoopCounterChanged()
         {
             for (int a = 0; a < 42; a++)
@@ -81,7 +87,7 @@
                 (int)i;
             }
 
-            var s1 = new { i = 0, j = new int[] { 0, 1 } };
+            var s1 = new Helper { i = 0, j = new int[] { 0, 1 } };
 
             for (s1.i = 0; s1.i < 3; s1.i++)
             {

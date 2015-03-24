@@ -78,10 +78,10 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private static IEnumerable<ISymbol> LoopCounters(ForStatementSyntax node, SemanticModel semanticModel)
         {
-            var declaredVariables = node.Declaration == null ?
-                Enumerable.Empty<ISymbol>() :
-                node.Declaration.Variables
-                .Select(v => semanticModel.GetDeclaredSymbol(v));
+            var declaredVariables = node.Declaration == null
+                ? Enumerable.Empty<ISymbol>()
+                : node.Declaration.Variables
+                    .Select(v => semanticModel.GetDeclaredSymbol(v));
 
             var initializedVariables = node.Initializers
                 .Where(i => i.IsKind(SyntaxKind.SimpleAssignmentExpression))

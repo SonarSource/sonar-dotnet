@@ -45,7 +45,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var expression = (BinaryExpressionSyntax) c.Node;
 
-                    if (expression.OperatorToken.Kind() == SyntaxKind.LessThanLessThanToken &&
+                    if (expression.OperatorToken.IsKind(SyntaxKind.LessThanLessThanToken) &&
                         SyntaxFactory.AreEquivalent(
                             expression.Right,
                             _literalOneSyntax))

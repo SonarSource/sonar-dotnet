@@ -49,7 +49,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
                     var lastcatchClause = tryStatement.Catches.Last();
 
-                    if (IsGenericExceptionClause(lastcatchClause) && 
+                    if (IsGenericExceptionClause(lastcatchClause, c.SemanticModel) && 
                         SyntaxFactory.AreEquivalent(lastcatchClause.Block, _throwBlock))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
@@ -60,10 +60,13 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 SyntaxKind.TryStatement);
         }
 
-        private static bool IsGenericExceptionClause(CatchClauseSyntax catchClause)
+        private static bool IsGenericExceptionClause(CatchClauseSyntax catchClause, SemanticModel semanticModel)
         {
+            var symbolDisplayFormat = new SymbolDisplayFormat(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+
             return catchClause.Declaration == null ||
-                   (catchClause.Declaration.Type.GetText().ToString() == "Exception");
+                   (semanticModel.GetTypeInfo(catchClause.Declaration.Type).Type.ToDisplayString(symbolDisplayFormat) == typeof(System.Exception).FullName);
         }
     }
 }

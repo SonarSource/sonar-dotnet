@@ -20,7 +20,8 @@ namespace NSonarQubeAnalyzer
         {
             var cancellationToken = new CancellationTokenSource().Token;
 
-            Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree));
+            Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree),
+                new[] {MetadataReference.CreateFromAssembly(typeof (object).Assembly)});
 
             if (DiagnosticAnalyzers.IsDefaultOrEmpty)
             {

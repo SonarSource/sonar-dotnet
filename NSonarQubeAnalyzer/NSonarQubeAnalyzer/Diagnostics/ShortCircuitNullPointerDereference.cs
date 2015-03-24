@@ -34,22 +34,22 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var binaryExpression = (BinaryExpressionSyntax)c.Node;
 
-                    var operatorText = "!=";
+                    var comparisonOperator = SyntaxKind.ExclamationEqualsToken;
 
-                    if (binaryExpression.OperatorToken.ValueText == "&&")
+                    if (binaryExpression.OperatorToken.IsKind(SyntaxKind.AmpersandAmpersandToken))
                     {
-                        operatorText = "==";
+                        comparisonOperator = SyntaxKind.EqualsEqualsToken;
                     }
 
-                    ReportDereference(binaryExpression, operatorText, c);
+                    ReportDereference(binaryExpression, comparisonOperator, c);
                 },
                 SyntaxKind.LogicalOrExpression, SyntaxKind.LogicalAndExpression);
         }
 
-        private void ReportDereference(BinaryExpressionSyntax binaryExpression, string operatorText, SyntaxNodeAnalysisContext c)
+        private void ReportDereference(BinaryExpressionSyntax binaryExpression, SyntaxKind comparisonOperator, SyntaxNodeAnalysisContext c)
         {
             var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
-            if (binaryParent != null && binaryExpression.OperatorToken.ValueText == binaryParent.OperatorToken.ValueText)
+            if (binaryParent != null && SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken))
             {
                 return;
             }
@@ -62,7 +62,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
                 var comparisonToNull = currentExpression as BinaryExpressionSyntax;
 
-                if (comparisonToNull == null || comparisonToNull.OperatorToken.ValueText != operatorText)
+                if (comparisonToNull == null || !comparisonToNull.OperatorToken.IsKind(comparisonOperator))
                 {
                     continue;
                 }
@@ -116,7 +116,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 expressionList.Add(currentBinary.Right);
 
                 var leftBinary = currentBinary.Left as BinaryExpressionSyntax;
-                if (leftBinary == null || leftBinary.OperatorToken.ValueText != binaryExpression.OperatorToken.ValueText)
+                if (leftBinary == null || !SyntaxFactory.AreEquivalent(leftBinary.OperatorToken, binaryExpression.OperatorToken))
                 {
                     expressionList.Add(currentBinary.Left);
                     break;
