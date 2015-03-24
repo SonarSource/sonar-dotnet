@@ -15,9 +15,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
-        private readonly BlockSyntax throwBlock =
-            SyntaxFactory.Block(
-                SyntaxFactory.ThrowStatement());
+        private readonly BlockSyntax throwBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, Severity, true);
 
@@ -29,41 +27,22 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 c =>
                 {
                     var tryStatement = (TryStatementSyntax)c.Node;
+                    
+                    var lastCatchClause = tryStatement.Catches.LastOrDefault();
 
-                    if (tryStatement.Catches.Count < 1)
+                    if (lastCatchClause == null)
                     {
                         return;
                     }
 
-                    if (tryStatement.Catches.Count == 1 &&
-                        SyntaxFactory.AreEquivalent(tryStatement.Catches[0].Block, throwBlock))
+                    if (SyntaxFactory.AreEquivalent(lastCatchClause.Block, throwBlock))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,
-                                tryStatement.Catches[0].GetLocation()));
-                        return;
-                    }
-
-                    var lastcatchClause = tryStatement.Catches.Last();
-
-                    if (IsGenericExceptionClause(lastcatchClause, c.SemanticModel) && 
-                        SyntaxFactory.AreEquivalent(lastcatchClause.Block, throwBlock))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(
-                                Rule,
-                                lastcatchClause.GetLocation()));
+                                lastCatchClause.GetLocation()));
                     }
                 },
                 SyntaxKind.TryStatement);
-        }
-
-        private static bool IsGenericExceptionClause(CatchClauseSyntax catchClause, SemanticModel semanticModel)
-        {
-            var symbolDisplayFormat = new SymbolDisplayFormat(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
-
-            return catchClause.Declaration == null ||
-                   (semanticModel.GetTypeInfo(catchClause.Declaration.Type).Type.ToDisplayString(symbolDisplayFormat) == typeof(System.Exception).FullName);
         }
     }
 }

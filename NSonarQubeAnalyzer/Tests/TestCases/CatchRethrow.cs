@@ -32,7 +32,7 @@ namespace Tests.TestCases
             {
                 throw;
             }
-            catch (System.Exception) //Noncompliant
+            catch (AnyException) //Noncompliant
             {
                 throw;
             }
