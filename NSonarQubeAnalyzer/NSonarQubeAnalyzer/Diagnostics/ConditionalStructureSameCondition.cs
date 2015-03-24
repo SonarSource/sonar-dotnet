@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Simplification;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
@@ -27,10 +28,12 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
                     var currentCondition = ifStatement.Condition;
-
+                    
+                    var expandedCurrentCondition = Simplifier.Expand(currentCondition, c.SemanticModel, new AdhocWorkspace());
+                    
                     var precedingCondition = ifStatement
                         .GetPrecedingConditionsInConditionChain()
-                        .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(currentCondition, preceding));
+                        .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(expandedCurrentCondition, preceding, c.SemanticModel, false));
 
                     if (precedingCondition != null)
                     {

@@ -8,18 +8,20 @@ namespace Tests.TestCases
 {
     class ConditionalStructureSameCondition
     {
+        public int prop { get; set; }
+        private void doSomething(int i) { }
         public void Test()
         {
             switch (i)
             {
                 case 1:
-                    doSomething();
+                    doSomething(prop);
                     break;
                 case 2:
                     doSomethingDifferent();
                     break;
                 case 3:  // Noncompliant;
-                    doSomething();
+                    this.doSomething(this.prop);
                     break;
                 case 4:
                     {
@@ -33,7 +35,7 @@ namespace Tests.TestCases
                         break;
                     }
                 default: // Noncompliant;
-                    doSomething();
+                    doSomething(prop);
                     break;
             }
 

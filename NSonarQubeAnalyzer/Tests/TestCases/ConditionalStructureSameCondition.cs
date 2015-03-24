@@ -8,30 +8,31 @@ namespace Tests.TestCases
 {
     class ConditionalStructureSameCondition
     {
+        public bool condition { get; set; }
         public void Test()
         {
             var b = true;
-            if (b && b)
+            if (b && condition)
             {
 
             }
-            else if (b &&  b) // Noncompliant
+            else if (b && this.condition) // Noncompliant
             {
 
             }
-            else if (b && b    ) // Noncompliant
+            else if (b && condition) // Noncompliant
             {
 
             }
-            else if (!b && b)
+            else if (!b && this.condition)
             {
 
             }
-            else if (b && /*some comment*/ b) // Noncompliant
+            else if (b && /*some comment*/ condition) // Noncompliant
             {
 
             }
-            else if (!b && b) // Noncompliant
+            else if (!b && condition) // Noncompliant
             {
 
             }
@@ -40,7 +41,7 @@ namespace Tests.TestCases
             {
             }
             else if (condition1) // Noncompliant
-            { 
+            {
             }
 
             if (condition2)
@@ -50,7 +51,7 @@ namespace Tests.TestCases
             {
             }
             else if (condition1) // Noncompliant
-            { 
+            {
             }
 
             if (condition1)
@@ -60,7 +61,7 @@ namespace Tests.TestCases
             {
             }
             else if (condition1) // Noncompliant
-            { 
+            {
             }
         }
     }

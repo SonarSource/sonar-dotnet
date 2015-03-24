@@ -22,7 +22,7 @@ namespace NSonarQubeAnalyzer
 
             Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree),
                 new[] {MetadataReference.CreateFromAssembly(typeof (object).Assembly)});
-
+            
             if (DiagnosticAnalyzers.IsDefaultOrEmpty)
             {
                 return new Diagnostic[0];

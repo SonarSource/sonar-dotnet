@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -35,7 +36,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                         return;
                     }
 
-                    if (SyntaxFactory.AreEquivalent(expression.Left, expression.Right))
+                    if (EquivalenceChecker.AreEquivalent(expression.Left, expression.Right, c.SemanticModel))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
                     }

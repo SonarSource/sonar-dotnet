@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -46,14 +47,12 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     var expression = (BinaryExpressionSyntax) c.Node;
 
                     if (expression.OperatorToken.IsKind(SyntaxKind.LessThanLessThanToken) &&
-                        SyntaxFactory.AreEquivalent(
-                            expression.Right,
-                            _literalOneSyntax))
+                        SyntaxFactory.AreEquivalent(expression.Right, _literalOneSyntax))
                     {
                         return;
                     }
 
-                    if (SyntaxFactory.AreEquivalent(expression.Left, expression.Right))
+                    if (EquivalenceChecker.AreEquivalent(expression.Left, expression.Right, c.SemanticModel))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), expression.OperatorToken));
                     }

@@ -5,6 +5,8 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Simplification;
+using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -88,11 +90,13 @@ namespace NSonarQubeAnalyzer.Diagnostics
         private static void CheckFollowingExpressions(SyntaxNodeAnalysisContext c, int currentExpressionIndex, List<ExpressionSyntax> expressionsInChain,
             ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax comparisonToNull)
         {
+            var expandedExpressionComparedToNull = Simplifier.Expand(expressionComparedToNull, c.SemanticModel, new AdhocWorkspace());
+
             for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
             {
                 foreach (var descendant in expressionsInChain[j]
                     .DescendantNodes()
-                    .Where(n => SyntaxFactory.AreEquivalent(n, expressionComparedToNull)))
+                    .Where(n => n.IsKind(expressionComparedToNull.Kind()) && EquivalenceChecker.AreEquivalent(expandedExpressionComparedToNull, n, c.SemanticModel, false)))
                 {
                     if (!(descendant.Parent is MemberAccessExpressionSyntax) &&
                         !(descendant.Parent is ElementAccessExpressionSyntax))

@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Simplification;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace NSonarQubeAnalyzer.Diagnostics
@@ -48,9 +49,10 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 c =>
                 {
                     var switchSection = (SwitchSectionSyntax)c.Node;
+                    var switchStatements = EquivalenceChecker.GetExpandedList(switchSection.Statements, c.SemanticModel);
                     var precedingSection = switchSection
                         .GetPrecedingSections()
-                        .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(switchSection.Statements, preceding.Statements));
+                        .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(switchStatements, preceding.Statements, c.SemanticModel, false));
 
                     if (precedingSection != null) 
                     {
@@ -62,8 +64,10 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, List<StatementSyntax> precedingStatements)
         {
+            var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, new AdhocWorkspace());
+
             var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => SyntaxFactory.AreEquivalent(statementToCheck, preceding));
+                .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(expandedStatementToCheck, preceding, c.SemanticModel, false));
 
             if (precedingStatement != null)
             {
