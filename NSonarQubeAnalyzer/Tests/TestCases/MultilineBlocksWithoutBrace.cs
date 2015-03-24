@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
-    class ConditionalStructureSameCondition
+    class MultilineBlocksWithoutBrace
     {
-        public static int Tencrement(int a)
+        public static int SomeMethod(int a)
         {
             if (a == 1) 
                 a++;
                 return a; // Noncompliant
 
-
+            if (true)
+            { }
             else if (a == 2)
             {
 
