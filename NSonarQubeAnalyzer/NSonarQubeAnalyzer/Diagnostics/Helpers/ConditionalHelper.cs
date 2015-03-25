@@ -43,20 +43,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 
         #region Switch
 
-        public static IList<SwitchSectionSyntax> GetPrecedingSections(this SwitchSectionSyntax caseStatement)
+        public static IEnumerable<SwitchSectionSyntax> GetPrecedingSections(this SwitchSectionSyntax caseStatement)
         {
-            var caseList = new List<SwitchSectionSyntax>();
-
             var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
 
             var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
 
-            for (var i = 0; i < currentSectionIndex; i++)
-            {
-                caseList.Add(switchStatement.Sections[i]);
-            }
-
-            return caseList;
+            return switchStatement.Sections.Take(currentSectionIndex);
         }
 
         #endregion
