@@ -34,7 +34,7 @@ public class CSharpSonarRulesDefinitionTest {
     new CSharpSonarRulesDefinition().define(context);
 
     assertThat(context.repositories()).hasSize(1);
-    assertThat(context.repository("csharpsquid").rules()).hasSize(38);
+    assertThat(context.repository("csharpsquid").rules()).hasSize(39);
   }
 
 }

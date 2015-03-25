@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace NSonarQubeAnalyzer
@@ -16,12 +15,9 @@ namespace NSonarQubeAnalyzer
             DiagnosticAnalyzers = diagnosticAnalyzers;
         }
 
-        public IEnumerable<Diagnostic> GetDiagnostics(SyntaxTree syntaxTree)
+        public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation)
         {
             var cancellationToken = new CancellationTokenSource().Token;
-
-            Compilation compilation = CSharpCompilation.Create(null, ImmutableArray.Create(syntaxTree),
-                new[] {MetadataReference.CreateFromAssembly(typeof (object).Assembly)});
             
             if (DiagnosticAnalyzers.IsDefaultOrEmpty)
             {

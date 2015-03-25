@@ -5,7 +5,6 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace NSonarQubeAnalyzer
 {
@@ -14,9 +13,8 @@ namespace NSonarQubeAnalyzer
         public static int Main(string[] args)
         {
             var configuration = new Configuration(XDocument.Load(args[0]));
-
             var diagnosticsRunner = new DiagnosticsRunner(configuration.Analyzers());
-
+            
             var xmlOutSettings = new XmlWriterSettings();
             xmlOutSettings.Encoding = Encoding.UTF8;
             xmlOutSettings.Indent = true;
@@ -36,7 +34,17 @@ namespace NSonarQubeAnalyzer
 
                     try
                     {
-                        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
+                        var solution =
+                            new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
+                                .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
+                                .AddDocument("foo.cs", File.ReadAllText(file, Encoding.UTF8))
+                                .Project
+                                .Solution;
+
+                        var compilation = solution.Projects.First().GetCompilationAsync().Result;
+                        var syntaxTree = compilation.SyntaxTrees.First();
+
+                        //var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
                         Metrics metrics = new Metrics(syntaxTree);
 
                         xmlOut.WriteStartElement("File");
@@ -89,7 +97,7 @@ namespace NSonarQubeAnalyzer
 
                         xmlOut.WriteStartElement("Issues");
                         
-                        foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(syntaxTree))
+                        foreach (var diagnostic in diagnosticsRunner.GetDiagnostics(compilation))
                         {
                             xmlOut.WriteStartElement("Issue");
                             xmlOut.WriteElementString("Id", diagnostic.Id);

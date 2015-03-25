@@ -129,6 +129,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="TestCases\ForLoopCounterCondition.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestCases\ShortCircuitNullPointerDereference.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -253,6 +256,7 @@
     <Compile Include="DiagnosticRunnerTest.cs" />
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\CatchRethrowTest.cs" />
+    <Compile Include="Diagnostics\ForLoopCounterConditionTest.cs" />
     <Compile Include="Diagnostics\StaticFieldInGenericClassTest.cs" />
     <Compile Include="Diagnostics\EmptyStatementTest.cs" />
     <Compile Include="Diagnostics\SelfAssignedVariablesTest.cs" />

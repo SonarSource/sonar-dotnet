@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Simplification;
@@ -14,13 +10,14 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
         public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, SemanticModel semanticModel, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
         {
             var equivalent = false;
+            
+            if ((shouldExpandFirst || shouldExpandSecond) && semanticModel == null)
+            {
+                throw new ArgumentNullException("semanticModel");
+            }
+
             try
             {
-                if ((shouldExpandFirst || shouldExpandSecond) && semanticModel == null)
-                {
-                    throw new ArgumentNullException("semanticModel");
-                }
-
                 if (shouldExpandFirst)
                 {
                     node1 = Simplifier.Expand(node1, semanticModel, new AdhocWorkspace());
@@ -31,10 +28,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
                     node2 = Simplifier.Expand(node2, semanticModel, new AdhocWorkspace());
                 }
             }
-            finally 
+            catch
             {
-                equivalent = SyntaxFactory.AreEquivalent(node1, node2);
+                //couldn't expand node
             }
+
+            equivalent = SyntaxFactory.AreEquivalent(node1, node2);
 
             return equivalent;
         }
@@ -83,10 +82,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
                 {
                     simplifiedNode = Simplifier.Expand(syntaxNode, semanticModel, workspace);
                 }
-                finally 
+                catch
                 {
-                    newNodeList1 = newNodeList1.Add(simplifiedNode);
+                    //couldn't expand node
                 }
+                
+                newNodeList1 = newNodeList1.Add(simplifiedNode);
             }
             return newNodeList1;
         }

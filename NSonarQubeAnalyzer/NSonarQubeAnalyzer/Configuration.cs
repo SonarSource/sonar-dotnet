@@ -40,7 +40,8 @@ namespace NSonarQubeAnalyzer
             new CatchRethrow(),
             new EmptyCatch(),
             new StaticFieldInGenericClass(),
-            new ShortCircuitNullPointerDereference()
+            new ShortCircuitNullPointerDereference(),
+            new ForLoopCounterCondition()
         );
 
         public bool IgnoreHeaderComments { private set; get; }
