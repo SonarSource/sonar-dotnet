@@ -1,9 +1,11 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.FindSymbols;
 
 namespace NSonarQubeAnalyzer.Diagnostics
 {
@@ -20,27 +22,35 @@ namespace NSonarQubeAnalyzer.Diagnostics
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
+        public Solution CurrentSolution { get; set; }
+
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterCompilationEndAction(
                 c =>
                 {
-                    var syntaxTree = c.Compilation.SyntaxTrees.Single();
-                    var semanticModel = c.Compilation.GetSemanticModel(syntaxTree);
-
+                    var compilation = CurrentSolution.Projects.First().GetCompilationAsync().Result;
+                    var syntaxTree = compilation.SyntaxTrees.First();
+                    var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                    
                     var variableDeclaratorNodes = syntaxTree
                         .GetCompilationUnitRoot()
                         .DescendantNodesAndSelf()
                         .Where(e => e.IsKind(SyntaxKind.VariableDeclarator))
                         .Select(e => (VariableDeclaratorSyntax)e);
-
-                    var referencedSymbols = ReferencedSymbols(syntaxTree, semanticModel);
-
+                    
                     foreach (var variableDeclaratorNode in variableDeclaratorNodes)
                     {
                         var symbol = semanticModel.GetDeclaredSymbol(variableDeclaratorNode);
 
-                        if (symbol.Kind != SymbolKind.Local || referencedSymbols.Contains(symbol))
+                        if (symbol.Kind != SymbolKind.Local)
+                        {
+                            continue;
+                        }
+
+                        var references = GetReferencesForSymbol(symbol);
+
+                        if (references.Any())
                         {
                             continue;
                         }
@@ -53,22 +63,17 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 });
         }
 
-        // TODO Dirty workaround for Microsoft.CodeAnalysis.FindSymbols.SymbolFinder not working as expected
-        private IImmutableSet<ISymbol> ReferencedSymbols(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        private IEnumerable<SyntaxNode> GetReferencesForSymbol(ISymbol symbol)
         {
-            var builder = ImmutableHashSet.CreateBuilder<ISymbol>();
-
-            foreach (var node in syntaxTree.GetCompilationUnitRoot().DescendantNodesAndSelf())
+            var references = SymbolFinder.FindReferencesAsync(symbol, CurrentSolution).Result.ToList();
+            foreach (var referencedSymbol in references)
             {
-                var symbolInfo = semanticModel.GetSymbolInfo(node);
-                if (symbolInfo.Symbol != null)
+                foreach (var referenceLocation in referencedSymbol.Locations)
                 {
-                    builder.Add(symbolInfo.Symbol);
+                    var syntaxTree = referenceLocation.Location.SourceTree;
+                    yield return syntaxTree.GetRoot().FindNode(referenceLocation.Location.SourceSpan);
                 }
-                builder.UnionWith(symbolInfo.CandidateSymbols);
             }
-
-            return builder.ToImmutable();
         }
     }
 }

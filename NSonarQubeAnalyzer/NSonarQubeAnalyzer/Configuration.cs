@@ -12,7 +12,7 @@ namespace NSonarQubeAnalyzer
 {
     public class Configuration
     {
-        private ImmutableArray<DiagnosticAnalyzer> ParameterLessAnalyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+        private readonly ImmutableArray<DiagnosticAnalyzer> parameterLessAnalyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
             new SwitchWithoutDefault(),
             new AtLeastThreeCasesInSwitch(),
             new BreakOutsideSwitch(),
@@ -29,7 +29,6 @@ namespace NSonarQubeAnalyzer
             new ForLoopCounterChanged(),
             new EmptyNestedBlock(),
             new ParameterAssignedTo(),
-            new UnusedLocalVariable(),
             new CommentedOutCode(),
             new ObjectCreatedDropped(),
             new ConditionalStructureSameCondition(),
@@ -80,11 +79,11 @@ namespace NSonarQubeAnalyzer
             Parameters = builder.ToImmutable();
         }
 
-        public ImmutableArray<DiagnosticAnalyzer> Analyzers()
+        public ImmutableArray<DiagnosticAnalyzer> Analyzers(Solution currentSolution)
         {
             var builder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
-            foreach (var parameterLessAnalyzer in ParameterLessAnalyzers)
+            foreach (var parameterLessAnalyzer in parameterLessAnalyzers)
             {
                 if (AnalyzerIds.Contains(parameterLessAnalyzer.SupportedDiagnostics.Single().Id))
                 {
@@ -204,6 +203,12 @@ namespace NSonarQubeAnalyzer
                 var analyzer = new CommentRegularExpression();
                 analyzer.Rules = rules.ToImmutable();
                 builder.Add(analyzer);
+            }
+
+            {
+
+                builder.Add(new UnusedLocalVariable() { CurrentSolution = currentSolution });
+            
             }
 
             return builder.ToImmutable();

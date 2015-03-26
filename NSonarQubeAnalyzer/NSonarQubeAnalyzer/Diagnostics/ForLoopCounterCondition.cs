@@ -29,12 +29,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     var forNode = (ForStatementSyntax)c.Node;
                     
                     var incrementorSymbols = GetIncrementorSymbols(forNode, c.SemanticModel).ToList();
-
-                    //for find all reference
-                    //var compilation = CurrentSolution.Projects.First().GetCompilationAsync().Result;
-                    //var semanticModel = compilation.GetSemanticModel(c.Node.SyntaxTree);
-                    //var incrementorSymbols = GetIncrementorSymbols(forNode, semanticModel).ToList();
-
+                    
                     if (!incrementorSymbols.Any())
                     {
                         return;
@@ -52,19 +47,6 @@ namespace NSonarQubeAnalyzer.Diagnostics
                 },
                 SyntaxKind.ForStatement);
         }
-
-        //private IEnumerable<SyntaxNode> GetReferencesForSymbol(ISymbol symbol)
-        //{
-        //    var references = SymbolFinder.FindReferencesAsync(symbol, CurrentSolution).Result.ToList();
-        //    foreach (var referencedSymbol in references)
-        //    {
-        //        foreach (var referenceLocation in referencedSymbol.Locations)
-        //        {
-        //            var syntaxTree = referenceLocation.Location.SourceTree;
-        //            yield return syntaxTree.GetRoot().FindNode(referenceLocation.Location.SourceSpan);
-        //        }
-        //    }
-        //}
 
         private static IEnumerable<ISymbol> GetIncrementorSymbols(ForStatementSyntax forNode,
             SemanticModel semanticModel)

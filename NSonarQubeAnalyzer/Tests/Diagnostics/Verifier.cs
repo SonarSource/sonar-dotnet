@@ -12,22 +12,13 @@ namespace Tests.Diagnostics
 {
     public class Verifier
     {
-        public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
+        public static void Verify(Solution solution, DiagnosticAnalyzer diagnosticAnalyzer)
         {
             var runner = new DiagnosticsRunner(ImmutableArray.Create(diagnosticAnalyzer));
-
-            var solution =
-                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
-                    .AddDocument("foo.cs", File.ReadAllText(path, Encoding.UTF8))
-                    .Project
-                    .Solution;
             
             var compilation = solution.Projects.First().GetCompilationAsync().Result;
             var syntaxTree = compilation.SyntaxTrees.First();
             
-            //var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(path, Encoding.UTF8));
-
             var expected = new List<int>(ExpectedIssues(syntaxTree));
             foreach (var diagnostic in runner.GetDiagnostics(compilation))
             {
@@ -44,10 +35,20 @@ namespace Tests.Diagnostics
             expected.Should().BeEquivalentTo(Enumerable.Empty<int>());
         }
 
+        public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
+        {
+            var solution =
+                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
+                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
+                    .AddDocument("foo.cs", File.ReadAllText(path, Encoding.UTF8))
+                    .Project
+                    .Solution;
+            
+            Verify(solution, diagnosticAnalyzer);
+        }
+
         private static IEnumerable<int> ExpectedIssues(SyntaxTree syntaxTree)
         {
-            var builder = ImmutableHashSet.CreateBuilder<int>();
-
             return from l in syntaxTree.GetText().Lines
                    where l.ToString().Contains("Noncompliant")
                    select l.LineNumber + 1;

@@ -13,7 +13,6 @@ namespace NSonarQubeAnalyzer
         public static int Main(string[] args)
         {
             var configuration = new Configuration(XDocument.Load(args[0]));
-            var diagnosticsRunner = new DiagnosticsRunner(configuration.Analyzers());
             
             var xmlOutSettings = new XmlWriterSettings();
             xmlOutSettings.Encoding = Encoding.UTF8;
@@ -43,9 +42,9 @@ namespace NSonarQubeAnalyzer
 
                         var compilation = solution.Projects.First().GetCompilationAsync().Result;
                         var syntaxTree = compilation.SyntaxTrees.First();
+                        var diagnosticsRunner = new DiagnosticsRunner(configuration.Analyzers(solution));
 
-                        //var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(file, Encoding.UTF8));
-                        Metrics metrics = new Metrics(syntaxTree);
+                        var metrics = new Metrics(syntaxTree);
 
                         xmlOut.WriteStartElement("File");
                         xmlOut.WriteElementString("Path", file);

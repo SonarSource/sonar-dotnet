@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -7,15 +8,15 @@ namespace Tests.Diagnostics
         void F1()
         {
             int a; // Noncompliant
-            var b =
-                c =>
+            var b = (Action<int>) (
+                _ =>
                 {
                     int i; // Noncompliant
                     int j = 42;
                     Console.WriteLine("Hello, world!" + j);
-                }
+                });
 
-            b(null);
+            b(5);
 
             string c;
             c = "Hello, world!";
