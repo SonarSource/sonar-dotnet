@@ -13,7 +13,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
     {
         internal const string DiagnosticId = "S1994";
         internal const string Description = @"""for"" loop incrementers should modify the variable being tested in the loop's stop condition";
-        internal const string MessageFormat = @"This loop's stop condition does not test variables used in the incrementer.";
+        internal const string MessageFormat = @"This loop's stop condition does not test variables updated by the incrementer.";
         internal const string Category = "SonarQube";
         internal const DiagnosticSeverity Severity = DiagnosticSeverity.Warning;
 
