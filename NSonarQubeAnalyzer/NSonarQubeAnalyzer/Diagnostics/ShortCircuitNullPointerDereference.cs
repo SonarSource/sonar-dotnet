@@ -91,7 +91,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             {
                 foreach (var descendant in expressionsInChain[j]
                     .DescendantNodes()
-                    .Where(n => n.IsKind(expressionComparedToNull.Kind()) && EquivalenceChecker.AreEquivalent(expandedExpressionComparedToNull, n, c.SemanticModel, false)))
+                    .Where(n => n.IsKind(expressionComparedToNull.Kind()) && new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedExpressionComparedToNull, n, false)))
                 {
                     if (!(descendant.Parent is MemberAccessExpressionSyntax) &&
                         !(descendant.Parent is ElementAccessExpressionSyntax))

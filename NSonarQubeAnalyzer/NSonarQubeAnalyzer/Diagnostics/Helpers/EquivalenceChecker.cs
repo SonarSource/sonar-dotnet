@@ -5,27 +5,29 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 {
-    public static class EquivalenceChecker
+    public class EquivalenceChecker
     {
-        public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, SemanticModel semanticModel, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
-        {
-            var equivalent = false;
-            
-            if ((shouldExpandFirst || shouldExpandSecond) && semanticModel == null)
-            {
-                throw new ArgumentNullException("semanticModel");
-            }
+        private readonly SemanticModel semanticModel;
+        private readonly Workspace workspace;
 
+        public EquivalenceChecker(SemanticModel semanticModel)
+        {
+            this.semanticModel = semanticModel;
+            workspace = new AdhocWorkspace();
+        }
+
+        public bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
+        {
             try
             {
                 if (shouldExpandFirst)
                 {
-                    node1 = Simplifier.Expand(node1, semanticModel, new AdhocWorkspace());
+                    node1 = Simplifier.Expand(node1, semanticModel, workspace);
                 }
 
                 if (shouldExpandSecond)
                 {
-                    node2 = Simplifier.Expand(node2, semanticModel, new AdhocWorkspace());
+                    node2 = Simplifier.Expand(node2, semanticModel, workspace);
                 }
             }
             catch
@@ -33,18 +35,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
                 //couldn't expand node
             }
 
-            equivalent = SyntaxFactory.AreEquivalent(node1, node2);
+            var equivalent = SyntaxFactory.AreEquivalent(node1, node2);
 
             return equivalent;
         }
 
-        public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, SemanticModel semanticModel, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
+        public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
         {
-            if ((shouldExpandFirst || shouldExpandSecond) && semanticModel == null)
-            {
-                throw new ArgumentNullException("semanticModel");
-            }
-
             if (nodeList1.Count != nodeList2.Count)
             {
                 return false;
@@ -52,12 +49,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 
             if (shouldExpandFirst)
             {
-                nodeList1 = GetExpandedList(nodeList1, semanticModel);
+                nodeList1 = GetExpandedList(nodeList1);
             }
 
             if (shouldExpandSecond)
             {
-                nodeList2 = GetExpandedList(nodeList2, semanticModel);
+                nodeList2 = GetExpandedList(nodeList2);
             }
 
             for (var i = 0; i < nodeList1.Count; i++)
@@ -71,10 +68,9 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
             return true;
         }
 
-        public static SyntaxList<SyntaxNode> GetExpandedList(SyntaxList<SyntaxNode> nodeList1, SemanticModel semanticModel)
+        public SyntaxList<SyntaxNode> GetExpandedList(SyntaxList<SyntaxNode> nodeList1)
         {
             var newNodeList1 = new SyntaxList<SyntaxNode>();
-            var workspace = new AdhocWorkspace();
             foreach (var syntaxNode in nodeList1)
             {
                 var simplifiedNode = syntaxNode;

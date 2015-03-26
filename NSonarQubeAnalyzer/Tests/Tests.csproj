@@ -257,6 +257,8 @@
     <Compile Include="Diagnostics\CommentRegularExpressionTest.cs" />
     <Compile Include="Diagnostics\CatchRethrowTest.cs" />
     <Compile Include="Diagnostics\ForLoopCounterConditionTest.cs" />
+    <Compile Include="Diagnostics\Helpers\ConditionalHelperTest.cs" />
+    <Compile Include="Diagnostics\Helpers\EquivalenceCheckerTest.cs" />
     <Compile Include="Diagnostics\StaticFieldInGenericClassTest.cs" />
     <Compile Include="Diagnostics\EmptyStatementTest.cs" />
     <Compile Include="Diagnostics\SelfAssignedVariablesTest.cs" />

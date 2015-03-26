@@ -49,7 +49,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                         return;
                     }
 
-                    if (EquivalenceChecker.AreEquivalent(expression.Left, expression.Right, c.SemanticModel))
+                    if (new EquivalenceChecker(c.SemanticModel).AreEquivalent(expression.Left, expression.Right))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation(), expression.OperatorToken));
                     }

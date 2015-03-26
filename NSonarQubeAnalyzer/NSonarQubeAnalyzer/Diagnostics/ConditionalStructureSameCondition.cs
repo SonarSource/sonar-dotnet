@@ -33,7 +33,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
                     
                     var precedingCondition = ifStatement
                         .GetPrecedingConditionsInConditionChain()
-                        .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(expandedCurrentCondition, preceding, c.SemanticModel, false));
+                        .FirstOrDefault(preceding => new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedCurrentCondition, preceding, false));
 
                     if (precedingCondition != null)
                     {

@@ -48,11 +48,12 @@ namespace NSonarQubeAnalyzer.Diagnostics
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
+                    var eqChecker = new EquivalenceChecker(c.SemanticModel);
                     var switchSection = (SwitchSectionSyntax)c.Node;
-                    var switchStatements = EquivalenceChecker.GetExpandedList(switchSection.Statements, c.SemanticModel);
+                    var switchStatements = eqChecker.GetExpandedList(switchSection.Statements);
                     var precedingSection = switchSection
                         .GetPrecedingSections()
-                        .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(switchStatements, preceding.Statements, c.SemanticModel, false));
+                        .FirstOrDefault(preceding => eqChecker.AreEquivalent(switchStatements, preceding.Statements, false));
 
                     if (precedingSection != null) 
                     {
@@ -67,7 +68,7 @@ namespace NSonarQubeAnalyzer.Diagnostics
             var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, new AdhocWorkspace());
 
             var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(expandedStatementToCheck, preceding, c.SemanticModel, false));
+                .FirstOrDefault(preceding => new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedStatementToCheck, preceding, false));
 
             if (precedingStatement != null)
             {
