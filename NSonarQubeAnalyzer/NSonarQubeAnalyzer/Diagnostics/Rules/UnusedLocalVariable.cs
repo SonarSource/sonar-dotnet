@@ -50,8 +50,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     foreach (var variableDeclaratorNode in variableDeclaratorNodes)
                     {
                         var symbol = semanticModel.GetDeclaredSymbol(variableDeclaratorNode);
-
-                        if (symbol.Kind != SymbolKind.Local)
+                        
+                        if (symbol == null || symbol.Kind != SymbolKind.Local)
                         {
                             continue;
                         }
