@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
-
-
 
 namespace Tests.Diagnostics.Helpers
 {

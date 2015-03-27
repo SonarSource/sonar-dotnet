@@ -6,7 +6,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using NSonarQubeAnalyzer.Diagnostics;
+using NSonarQubeAnalyzer.Diagnostics.Rules;
 
 namespace NSonarQubeAnalyzer
 {

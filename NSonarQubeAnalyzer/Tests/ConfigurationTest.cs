@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer;
-using NSonarQubeAnalyzer.Diagnostics;
+using NSonarQubeAnalyzer.Diagnostics.Rules;
 
 namespace Tests
 {

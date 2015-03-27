@@ -1,0 +1,23 @@
+<p>
+A static field in a generic type is not shared among instances of different closed constructed types, thus <code>CustomList<int>.MaxAllowedLength</code> and <code>CustomList<string>.MaxAllowedLength</code> will 
+point to different variables, even though <code>MaxAllowedLength</code> is seemingly shared among all <code>CustomList<></code> generic classes.
+</p>
+<p>
+If you need to have a static field shared among instances with different generic arguments, define a non-generic base class to store your static members, then set your generic type to inherit from the base class.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class CustomList<T> {
+  public static int MaxAllowedLength { get; set; }  // Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class CustomList {
+  public static int MaxAllowedLength { get; set; } 
+}
+public class CustomList<T> : CustomList {
+}
+</pre>
