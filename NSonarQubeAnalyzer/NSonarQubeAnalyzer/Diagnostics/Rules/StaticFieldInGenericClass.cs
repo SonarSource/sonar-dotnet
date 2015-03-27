@@ -61,7 +61,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 SyntaxKind.ClassDeclaration);
         }
 
-        private static void ReportMember(SyntaxNode node, TypeSyntax type, List<string> typeParameterNames, SyntaxNodeAnalysisContext c)
+        private static void ReportMember(SyntaxNode node, TypeSyntax type, IEnumerable<string> typeParameterNames, 
+            SyntaxNodeAnalysisContext c)
         {
             var genericTypeName = type as GenericNameSyntax;
 

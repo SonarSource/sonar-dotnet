@@ -45,6 +45,11 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 
         public static IEnumerable<SwitchSectionSyntax> GetPrecedingSections(this SwitchSectionSyntax caseStatement)
         {
+            if (caseStatement == null)
+            {
+                return new SwitchSectionSyntax[0];
+            }
+
             var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
 
             var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);

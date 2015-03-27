@@ -11,13 +11,21 @@ namespace NSonarQubeAnalyzer.Diagnostics.SonarProperties
         public bool IsActivatedByDefault { get; set; }
         public bool Template { get; set; }
 
-        public RuleAttribute(string key, Severity severity, string description = null, bool isActivatedByDefault = true, bool template = false)
+        public RuleAttribute(string key, Severity severity, string description, bool isActivatedByDefault, bool template)
         {
             Key = key;
             Description = description;
             Severity = severity;
             IsActivatedByDefault = isActivatedByDefault;
             Template = template;
+        }
+        public RuleAttribute(string key, Severity severity, string description, bool isActivatedByDefault)
+            :this(key, severity, description, isActivatedByDefault, false)
+        {
+        }
+        public RuleAttribute(string key, Severity severity, string description)
+            : this(key, severity, description, true, false)
+        {
         }
     }
 }

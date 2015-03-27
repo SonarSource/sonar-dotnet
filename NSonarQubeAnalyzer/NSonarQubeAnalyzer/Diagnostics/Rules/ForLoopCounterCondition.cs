@@ -59,15 +59,10 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             SemanticModel semanticModel)
         {
             var accessedSymbols = new List<ISymbol>();
-            foreach (var expressionSyntax in forNode.Incrementors)
+            foreach (var dataFlowAnalysis in forNode.Incrementors
+                .Select(semanticModel.AnalyzeDataFlow)
+                .Where(dataFlowAnalysis => dataFlowAnalysis.Succeeded))
             {
-                var dataFlowAnalysis = semanticModel.AnalyzeDataFlow(expressionSyntax);
-
-                if (!dataFlowAnalysis.Succeeded)
-                {
-                    continue;
-                }
-
                 accessedSymbols.AddRange(dataFlowAnalysis.WrittenInside);
                 accessedSymbols.AddRange(dataFlowAnalysis.ReadInside);
             }
@@ -85,12 +80,9 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
             var dataFlowAnalysis = semanticModel.AnalyzeDataFlow(forNode.Condition);
 
-            if (!dataFlowAnalysis.Succeeded)
-            {
-                return new ISymbol[0];
-            }
-
-            return dataFlowAnalysis.ReadInside.Distinct();
+            return dataFlowAnalysis.Succeeded 
+                ? dataFlowAnalysis.ReadInside.Distinct() 
+                : new ISymbol[0];
         }
     }
 }

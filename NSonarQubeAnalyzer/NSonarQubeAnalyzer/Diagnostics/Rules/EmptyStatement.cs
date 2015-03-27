@@ -28,10 +28,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
-                },
+                c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())),
                 SyntaxKind.EmptyStatement);
         }
     }

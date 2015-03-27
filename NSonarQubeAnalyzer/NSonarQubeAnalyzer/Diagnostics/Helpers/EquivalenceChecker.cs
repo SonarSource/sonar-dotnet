@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -15,50 +16,70 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
             workspace = new AdhocWorkspace();
         }
 
-        public bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
+        public bool AreEquivalent(SyntaxNode node1, SyntaxNode node2)
         {
+            return AreEquivalent(node1, node2, true, true);
+        }
+        public bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, bool shouldExpandFirst)
+        {
+            return AreEquivalent(node1, node2, shouldExpandFirst, true);
+        }
+        public bool AreEquivalent(SyntaxNode node1, SyntaxNode node2, bool shouldExpandFirst, bool shouldExpandSecond)
+        {
+            var nodeToCompare1 = node1;
+            var nodeToCompare2 = node2;
             try
             {
                 if (shouldExpandFirst)
                 {
-                    node1 = Simplifier.Expand(node1, semanticModel, workspace);
+                    nodeToCompare1 = Simplifier.Expand(node1, semanticModel, workspace);
                 }
 
                 if (shouldExpandSecond)
                 {
-                    node2 = Simplifier.Expand(node2, semanticModel, workspace);
+                    nodeToCompare2 = Simplifier.Expand(node2, semanticModel, workspace);
                 }
             }
-            catch
+            catch(ArgumentException)
             {
                 //couldn't expand node
             }
 
-            var equivalent = SyntaxFactory.AreEquivalent(node1, node2);
+            var equivalent = SyntaxFactory.AreEquivalent(nodeToCompare1, nodeToCompare2);
 
             return equivalent;
         }
 
-        public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, bool shouldExpandFirst = true, bool shouldExpandSecond = true)
+        public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2)
+        {
+            return AreEquivalent(nodeList1, nodeList2, true, true);
+        }
+        public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, bool shouldExpandFirst)
+        {
+            return AreEquivalent(nodeList1, nodeList2, shouldExpandFirst, true);
+        }
+        public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2, bool shouldExpandFirst, bool shouldExpandSecond)
         {
             if (nodeList1.Count != nodeList2.Count)
             {
                 return false;
             }
 
+            var nodeListToCompare1 = nodeList1;
             if (shouldExpandFirst)
             {
-                nodeList1 = GetExpandedList(nodeList1);
+                nodeListToCompare1 = GetExpandedList(nodeList1);
             }
 
+            var nodeListToCompare2 = nodeList2;
             if (shouldExpandSecond)
             {
-                nodeList2 = GetExpandedList(nodeList2);
+                nodeListToCompare2 = GetExpandedList(nodeList2);
             }
 
-            for (var i = 0; i < nodeList1.Count; i++)
+            for (var i = 0; i < nodeListToCompare1.Count; i++)
             {
-                if (!SyntaxFactory.AreEquivalent(nodeList1[i], nodeList2[i]))
+                if (!SyntaxFactory.AreEquivalent(nodeListToCompare1[i], nodeListToCompare2[i]))
                 {
                     return false;
                 }
@@ -77,7 +98,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
                 {
                     simplifiedNode = Simplifier.Expand(syntaxNode, semanticModel, workspace);
                 }
-                catch
+                catch (ArgumentException)
                 {
                     //couldn't expand node
                 }

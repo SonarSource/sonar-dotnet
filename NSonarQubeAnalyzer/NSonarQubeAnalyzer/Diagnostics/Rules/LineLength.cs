@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
@@ -32,12 +33,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             context.RegisterSyntaxTreeAction(
                 c =>
                 {
-                    foreach (var line in c.Tree.GetText().Lines)
+                    foreach (var line in c.Tree
+                        .GetText()
+                        .Lines
+                        .Where(line => line.Span.Length > Maximum))
                     {
-                        if (line.Span.Length > Maximum)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
-                        }
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
                     }
                 });
         }

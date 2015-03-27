@@ -8,23 +8,23 @@ namespace NSonarQubeAnalyzer
 {
     public class DiagnosticsRunner
     {
-        private readonly ImmutableArray<DiagnosticAnalyzer> DiagnosticAnalyzers;
+        private readonly ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers;
         
         public DiagnosticsRunner(ImmutableArray<DiagnosticAnalyzer> diagnosticAnalyzers)
         {
-            DiagnosticAnalyzers = diagnosticAnalyzers;
+            this.diagnosticAnalyzers = diagnosticAnalyzers;
         }
 
         public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation)
         {
             var cancellationToken = new CancellationTokenSource().Token;
             
-            if (DiagnosticAnalyzers.IsDefaultOrEmpty)
+            if (diagnosticAnalyzers.IsDefaultOrEmpty)
             {
                 return new Diagnostic[0];
             }
 
-            var compilationWithAnalyzer = new CompilationWithAnalyzers(compilation, DiagnosticAnalyzers, null, cancellationToken);
+            var compilationWithAnalyzer = new CompilationWithAnalyzers(compilation, diagnosticAnalyzers, null, cancellationToken);
 
             return compilationWithAnalyzer.GetAnalyzerDiagnosticsAsync().Result;
         }

@@ -30,28 +30,16 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    CheckLoop(c, ((WhileStatementSyntax)c.Node).Statement);
-                },
+                c => CheckLoop(c, ((WhileStatementSyntax) c.Node).Statement),
                 SyntaxKind.WhileStatement);
             context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    CheckLoop(c, ((ForStatementSyntax)c.Node).Statement);
-                },
+                c => CheckLoop(c, ((ForStatementSyntax) c.Node).Statement),
                 SyntaxKind.ForStatement);
             context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    CheckLoop(c, ((ForEachStatementSyntax)c.Node).Statement);
-                },
+                c => CheckLoop(c, ((ForEachStatementSyntax) c.Node).Statement),
                 SyntaxKind.ForEachStatement);
             context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    CheckIf(c, (IfStatementSyntax)c.Node);
-                },
+                c => CheckIf(c, (IfStatementSyntax) c.Node),
                 SyntaxKind.IfStatement);
         }
 
@@ -66,7 +54,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 "conditionally", "unconditionally");
         }
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, string executed, string execute)
+        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statement, 
+            string executed, string execute)
         {
             if (statement is BlockSyntax)
             {

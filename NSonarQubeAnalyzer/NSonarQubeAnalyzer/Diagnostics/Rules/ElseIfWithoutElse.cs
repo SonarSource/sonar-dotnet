@@ -26,8 +26,6 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public ImmutableArray<SyntaxKind> SyntaxKindsOfInterest { get { return ImmutableArray.Create(SyntaxKind.IfStatement); } }
-
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(

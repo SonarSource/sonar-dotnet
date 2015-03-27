@@ -54,14 +54,14 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool AssignsToParameter(ISymbol symbol)
         {
-            if (!(symbol is IParameterSymbol))
+            var parameterSymbol = symbol as IParameterSymbol;
+
+            if (parameterSymbol == null)
             {
                 return false;
             }
-
-            var parameter = (IParameterSymbol)symbol;
-
-            return parameter.RefKind == RefKind.None;
+            
+            return parameterSymbol.RefKind == RefKind.None;
         }
     }
 }

@@ -16,15 +16,15 @@ namespace NSonarQubeAnalyzer
 
         public FileComments(IImmutableSet<int> noSonar, IImmutableSet<int> nonBlank)
         {
-            this.NoSonar = noSonar;
-            this.NonBlank = nonBlank;
+            NoSonar = noSonar;
+            NonBlank = nonBlank;
         }
     }
 
     public class Metrics
     {
-        private readonly string[] LINE_TERMINATORS = { "\r\n", "\n", "\r" };
-        private SyntaxTree tree;
+        private readonly string[] lineTerminators = { "\r\n", "\n", "\r" };
+        private readonly SyntaxTree tree;
 
         public Metrics(SyntaxTree tree)
         {
@@ -58,24 +58,27 @@ namespace NSonarQubeAnalyzer
 
             foreach (SyntaxTrivia trivia in tree.GetRoot().DescendantTrivia())
             {
-                if (IsComment(trivia) && !(ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None)))
+                if (!IsComment(trivia) ||
+                    ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None))
                 {
-                    int lineNumber = tree.GetLineSpan(trivia.FullSpan).StartLinePosition.Line + 1;
+                    continue;
+                }
 
-                    foreach (string line in trivia.ToFullString().Split(LINE_TERMINATORS, StringSplitOptions.None))
+                var lineNumber = tree.GetLineSpan(trivia.FullSpan).StartLinePosition.Line + 1;
+
+                foreach (var line in trivia.ToFullString().Split(lineTerminators, StringSplitOptions.None))
+                {
+                    if (line.Contains("NOSONAR"))
                     {
-                        if (line.Contains("NOSONAR"))
-                        {
-                            nonBlank.Remove(lineNumber);
-                            noSonar.Add(lineNumber);
-                        }
-                        else if (line.Any(char.IsLetter) && !noSonar.Contains(lineNumber))
-                        {
-                            nonBlank.Add(lineNumber);
-                        }
-
-                        lineNumber++;
+                        nonBlank.Remove(lineNumber);
+                        noSonar.Add(lineNumber);
                     }
+                    else if (line.Any(char.IsLetter) && !noSonar.Contains(lineNumber))
+                    {
+                        nonBlank.Add(lineNumber);
+                    }
+
+                    lineNumber++;
                 }
             }
 
@@ -109,7 +112,9 @@ namespace NSonarQubeAnalyzer
 
         public int Statements()
         {
-            return tree.GetCompilationUnitRoot().DescendantNodes().Count(n => n is StatementSyntax && !n.IsKind(SyntaxKind.Block));
+            return tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .Count(n => n is StatementSyntax && !n.IsKind(SyntaxKind.Block));
         }
 
         public int Functions()
@@ -173,13 +178,15 @@ namespace NSonarQubeAnalyzer
                     builder.Add(member);
                 }
 
-                if (isPublic || member.IsKind(SyntaxKind.NamespaceDeclaration))
+                if (!isPublic && !member.IsKind(SyntaxKind.NamespaceDeclaration))
                 {
-                    var children = member.ChildNodes().OfType<MemberDeclarationSyntax>();
-                    foreach (var child in children)
-                    {
-                        toVisit.Push(child);
-                    }
+                    continue;
+                }
+
+                var children = member.ChildNodes().OfType<MemberDeclarationSyntax>();
+                foreach (var child in children)
+                {
+                    toVisit.Push(child);
                 }
             }
 

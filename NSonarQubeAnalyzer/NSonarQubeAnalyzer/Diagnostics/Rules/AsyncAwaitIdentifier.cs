@@ -25,7 +25,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), true);
 
-        private static readonly IImmutableSet<string> AsyncOrAwait = ImmutableHashSet.Create(new string[] {"async", "await"});
+        private static readonly IImmutableSet<string> AsyncOrAwait = ImmutableHashSet.Create("async", "await");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 

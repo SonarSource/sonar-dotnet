@@ -49,7 +49,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             return !node.Statements.Any() && !ContainsComment(node);
         }
 
-        public static bool ContainsComment(BlockSyntax node)
+        private static bool ContainsComment(BlockSyntax node)
         {
             return ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
         }

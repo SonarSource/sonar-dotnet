@@ -55,7 +55,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
                                     var baseLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
                                     // TODO Do not duplicate line terminators here
-                                    var lines = contents.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                                    var lines = contents.Split(new [] { "\r\n", "\n" }, StringSplitOptions.None);
 
                                     for (var offset = 0; offset < lines.Length; offset++)
                                     {
@@ -88,20 +88,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool IsCode(string line)
         {
-            line = line.Replace(" ", "").Replace("\t", "");
+            var checkedLine = line.Replace(" ", "").Replace("\t", "");
 
-            return line.EndsWith(";") ||
-                line.EndsWith("{") ||
-                line.EndsWith("}") ||
-                line.Contains("++") ||
-                line.Contains("for(") ||
-                line.Contains("if(") ||
-                line.Contains("while(") ||
-                line.Contains("catch(") ||
-                line.Contains("switch(") ||
-                line.Contains("try{") ||
-                line.Contains("else{") ||
-                (line.Length - line.Replace("&&", "").Replace("||", "").Length) / 2 >= 3;
+            return checkedLine.EndsWith(";") ||
+                checkedLine.EndsWith("{") ||
+                checkedLine.EndsWith("}") ||
+                checkedLine.Contains("++") ||
+                checkedLine.Contains("for(") ||
+                checkedLine.Contains("if(") ||
+                checkedLine.Contains("while(") ||
+                checkedLine.Contains("catch(") ||
+                checkedLine.Contains("switch(") ||
+                checkedLine.Contains("try{") ||
+                checkedLine.Contains("else{") ||
+                (checkedLine.Length - checkedLine.Replace("&&", "").Replace("||", "").Length) / 2 >= 3;
         }
     }
 }

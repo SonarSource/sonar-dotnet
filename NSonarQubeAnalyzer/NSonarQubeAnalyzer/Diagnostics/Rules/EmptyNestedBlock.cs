@@ -43,8 +43,11 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool IsEmpty(SyntaxNode node)
         {
-            return (node is SwitchStatementSyntax && IsEmpty((SwitchStatementSyntax)node)) ||
-                (node is BlockSyntax && IsNestedAndEmpty((BlockSyntax)node));
+            var switchNode = node as SwitchStatementSyntax;
+            var blockNode = node as BlockSyntax;
+
+            return (switchNode != null && IsEmpty(switchNode)) ||
+                (blockNode != null && IsNestedAndEmpty(blockNode));
         }
 
         private static bool IsEmpty(SwitchStatementSyntax node)
@@ -73,7 +76,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             return !node.Statements.Any() && !ContainsComment(node);
         }
 
-        public static bool ContainsComment(BlockSyntax node)
+        private static bool ContainsComment(BlockSyntax node)
         {
             return ContainsComment(node.OpenBraceToken.TrailingTrivia) || ContainsComment(node.CloseBraceToken.LeadingTrivia);
         }

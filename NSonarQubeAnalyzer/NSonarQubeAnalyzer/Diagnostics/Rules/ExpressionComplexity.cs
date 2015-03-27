@@ -30,12 +30,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", "3")]
         public int Maximum { get; set; }
 
-        private readonly IImmutableSet<SyntaxKind> compoundExpressionKinds = ImmutableHashSet.Create(new SyntaxKind[] {
+        private readonly IImmutableSet<SyntaxKind> compoundExpressionKinds = ImmutableHashSet.Create(
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.ArrayInitializerExpression,
             SyntaxKind.AnonymousMethodExpression,
             SyntaxKind.ObjectInitializerExpression,
-            SyntaxKind.InvocationExpression});
+            SyntaxKind.InvocationExpression);
 
         public override void Initialize(AnalysisContext context)
         {

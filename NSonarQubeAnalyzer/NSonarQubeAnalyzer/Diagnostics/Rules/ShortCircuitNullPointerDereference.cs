@@ -54,7 +54,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         private void ReportDereference(BinaryExpressionSyntax binaryExpression, SyntaxKind comparisonOperator, SyntaxNodeAnalysisContext c)
         {
             var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
-            if (binaryParent != null && SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken))
+            if (binaryParent != null && 
+                SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken))
             {
                 return;
             }
@@ -85,7 +86,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     continue;
                 }
 
-                var expressionComparedToNull = leftNull?comparisonToNull.Right:comparisonToNull.Left;
+                var expressionComparedToNull = leftNull ? comparisonToNull.Right : comparisonToNull.Left;
                 CheckFollowingExpressions(c, i, expressionsInChain, expressionComparedToNull, comparisonToNull);
             }
         }
@@ -99,14 +100,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             {
                 foreach (var descendant in expressionsInChain[j]
                     .DescendantNodes()
-                    .Where(n => n.IsKind(expressionComparedToNull.Kind()) && new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedExpressionComparedToNull, n, false)))
+                    .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
+                                         new EquivalenceChecker(c.SemanticModel).AreEquivalent(
+                                             expandedExpressionComparedToNull, descendant, false))
+                    .Where(descendant =>
+                        descendant.Parent is MemberAccessExpressionSyntax ||
+                        descendant.Parent is ElementAccessExpressionSyntax))
                 {
-                    if (!(descendant.Parent is MemberAccessExpressionSyntax) &&
-                        !(descendant.Parent is ElementAccessExpressionSyntax))
-                    {
-                        continue;
-                    }
-
                     c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
                         expressionComparedToNull.ToString()));
                 }
@@ -123,7 +123,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 expressionList.Add(currentBinary.Right);
 
                 var leftBinary = currentBinary.Left as BinaryExpressionSyntax;
-                if (leftBinary == null || !SyntaxFactory.AreEquivalent(leftBinary.OperatorToken, binaryExpression.OperatorToken))
+                if (leftBinary == null || 
+                    !SyntaxFactory.AreEquivalent(leftBinary.OperatorToken, binaryExpression.OperatorToken))
                 {
                     expressionList.Add(currentBinary.Left);
                     break;

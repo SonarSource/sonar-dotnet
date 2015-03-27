@@ -33,12 +33,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    foreach (var closeBraceToken in GetDescendantCloseBraceTokens(c.Node))
+                    foreach (var closeBraceToken in GetDescendantCloseBraceTokens(c.Node)
+                        .Where(closeBraceToken => 
+                            !StartsLine(closeBraceToken) && 
+                            !IsOnSameLineAsOpenBrace(closeBraceToken) && 
+                            !IsInitializer(closeBraceToken.Parent)))
                     {
-                        if (!StartsLine(closeBraceToken) && !IsOnSameLineAsOpenBrace(closeBraceToken) && !IsInitializer(closeBraceToken.Parent))
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, closeBraceToken.GetLocation()));
-                        }
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, closeBraceToken.GetLocation()));
                     }
                 },
                 SyntaxKind.CompilationUnit);

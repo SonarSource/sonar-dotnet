@@ -13,11 +13,14 @@ namespace NSonarQubeAnalyzer
         public static int Main(string[] args)
         {
             var configuration = new Configuration(XDocument.Load(args[0]));
-            
-            var xmlOutSettings = new XmlWriterSettings();
-            xmlOutSettings.Encoding = Encoding.UTF8;
-            xmlOutSettings.Indent = true;
-            xmlOutSettings.IndentChars = "  ";
+
+            var xmlOutSettings = new XmlWriterSettings
+            {
+                Encoding = Encoding.UTF8, 
+                Indent = true, 
+                IndentChars = "  "
+            };
+
             using (var xmlOut = XmlWriter.Create(args[1], xmlOutSettings))
             {
                 xmlOut.WriteComment("This XML format is not an API");
@@ -69,16 +72,16 @@ namespace NSonarQubeAnalyzer
 
                         xmlOut.WriteElementString("FunctionComplexityDistribution", metrics.FunctionComplexityDistribution().ToString());
 
-                        FileComments comments = metrics.Comments(configuration.IgnoreHeaderComments);
+                        var comments = metrics.Comments(configuration.IgnoreHeaderComments);
                         xmlOut.WriteStartElement("Comments");
                         xmlOut.WriteStartElement("NoSonar");
-                        foreach (int line in comments.NoSonar)
+                        foreach (var line in comments.NoSonar)
                         {
                             xmlOut.WriteElementString("Line", line.ToString());
                         }
                         xmlOut.WriteEndElement();
                         xmlOut.WriteStartElement("NonBlank");
-                        foreach (int line in comments.NonBlank)
+                        foreach (var line in comments.NonBlank)
                         {
                             xmlOut.WriteElementString("Line", line.ToString());
                         }
@@ -86,7 +89,7 @@ namespace NSonarQubeAnalyzer
                         xmlOut.WriteEndElement();
 
                         xmlOut.WriteStartElement("LinesOfCode");
-                        foreach (int line in metrics.LinesOfCode())
+                        foreach (var line in metrics.LinesOfCode())
                         {
                             xmlOut.WriteElementString("Line", line.ToString());
                         }

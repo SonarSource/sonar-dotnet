@@ -70,7 +70,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 SyntaxKind.SwitchSection);
         }
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, List<StatementSyntax> precedingStatements)
+        private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, 
+            IEnumerable<StatementSyntax> precedingStatements)
         {
             var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, new AdhocWorkspace());
 
