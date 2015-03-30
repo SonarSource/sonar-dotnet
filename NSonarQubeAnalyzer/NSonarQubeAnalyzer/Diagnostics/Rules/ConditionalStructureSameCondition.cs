@@ -37,17 +37,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     var currentCondition = ifStatement.Condition;
                     
                     var expandedCurrentCondition = Simplifier.Expand(currentCondition, c.SemanticModel, new AdhocWorkspace());
-                    
-                    var precedingCondition = ifStatement
-                        .GetPrecedingConditionsInConditionChain()
-                        .FirstOrDefault(preceding => new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedCurrentCondition, preceding, false));
-
-                    if (precedingCondition != null)
+                    using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(
+                        var precedingCondition = ifStatement
+                            .GetPrecedingConditionsInConditionChain()
+                            .FirstOrDefault(
+                                preceding => eqChecker.AreEquivalent(expandedCurrentCondition, preceding, false));
+
+                        if (precedingCondition != null)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,
                                 currentCondition.GetLocation(),
                                 precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
+                        }
                     }
                 },
                 SyntaxKind.IfStatement);

@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Simplification;
 
 namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 {
-    public class EquivalenceChecker
+    public class EquivalenceChecker : IDisposable
     {
         private readonly SemanticModel semanticModel;
         private readonly Workspace workspace;
@@ -28,26 +29,28 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
         {
             var nodeToCompare1 = node1;
             var nodeToCompare2 = node2;
-            try
-            {
-                if (shouldExpandFirst)
-                {
-                    nodeToCompare1 = Simplifier.Expand(node1, semanticModel, workspace);
-                }
 
-                if (shouldExpandSecond)
-                {
-                    nodeToCompare2 = Simplifier.Expand(node2, semanticModel, workspace);
-                }
-            }
-            catch(ArgumentException)
+            if (shouldExpandFirst && IsExpandable(node1))
             {
-                //couldn't expand node
+                nodeToCompare1 = Simplifier.Expand(node1, semanticModel, workspace);
+            }
+
+            if (shouldExpandSecond && IsExpandable(node2))
+            {
+                nodeToCompare2 = Simplifier.Expand(node2, semanticModel, workspace);
             }
 
             var equivalent = SyntaxFactory.AreEquivalent(nodeToCompare1, nodeToCompare2);
 
             return equivalent;
+        }
+
+        private static bool IsExpandable(SyntaxNode node1)
+        {
+            return node1 is ExpressionSyntax ||
+                   node1 is StatementSyntax ||
+                   node1 is AttributeSyntax ||
+                   node1 is ConstructorInitializerSyntax;
         }
 
         public bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2)
@@ -94,18 +97,23 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
             foreach (var syntaxNode in nodeList1)
             {
                 var simplifiedNode = syntaxNode;
-                try
+
+                if (IsExpandable(syntaxNode))
                 {
                     simplifiedNode = Simplifier.Expand(syntaxNode, semanticModel, workspace);
-                }
-                catch (ArgumentException)
-                {
-                    //couldn't expand node
                 }
                 
                 newNodeList1 = newNodeList1.Add(simplifiedNode);
             }
             return newNodeList1;
+        }
+
+        public void Dispose()
+        {
+            if (workspace != null)
+            {
+                workspace.Dispose();
+            }
         }
     }
 }

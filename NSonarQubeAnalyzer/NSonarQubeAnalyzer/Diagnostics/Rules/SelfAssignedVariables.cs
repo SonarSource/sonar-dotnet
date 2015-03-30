@@ -43,9 +43,12 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                         return;
                     }
 
-                    if (new EquivalenceChecker(c.SemanticModel).AreEquivalent(expression.Left, expression.Right))
+                    using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        if (eqChecker.AreEquivalent(expression.Left, expression.Right))
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        }
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression

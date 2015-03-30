@@ -9,7 +9,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 namespace NSonarQubeAnalyzer.Diagnostics.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
+    [SqaleConstantRemediation("2min")]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     public class TabCharacter : DiagnosticAnalyzer

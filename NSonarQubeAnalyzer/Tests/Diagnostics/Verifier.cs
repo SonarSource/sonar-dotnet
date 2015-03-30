@@ -37,13 +37,7 @@ namespace Tests.Diagnostics
 
         public static void Verify(string path, DiagnosticAnalyzer diagnosticAnalyzer)
         {
-            var solution =
-                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
-                    .AddDocument("foo.cs", File.ReadAllText(path, Encoding.UTF8))
-                    .Project
-                    .Solution;
-            
+            var solution = CompilationHelper.GetSolutionFromFiles(path);
             Verify(solution, diagnosticAnalyzer);
         }
 

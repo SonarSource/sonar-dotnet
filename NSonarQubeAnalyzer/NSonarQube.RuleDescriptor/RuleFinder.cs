@@ -87,7 +87,8 @@ namespace NSonarQube.RuleDescriptor
 
             SqaleDescriptor sqale = null;
 
-            if (sqaleRemediation != null)
+            if (sqaleRemediation != null && 
+                !(sqaleRemediation is NoSqaleRemediationAttribute))
             {
                 var sqaleSubCharacteristic = analyzerType.GetCustomAttributes<SqaleSubCharacteristicAttribute>().First();
                 sqale = new SqaleDescriptor { SubCharacteristic = sqaleSubCharacteristic.SubCharacteristic.ToSonarQubeString() };

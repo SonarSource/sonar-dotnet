@@ -10,7 +10,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 namespace NSonarQubeAnalyzer.Diagnostics.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
+    [SqaleConstantRemediation("10min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class AssignmentInsideSubExpression : DiagnosticAnalyzer

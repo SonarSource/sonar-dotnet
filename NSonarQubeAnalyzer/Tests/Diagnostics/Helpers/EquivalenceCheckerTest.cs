@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSonarQubeAnalyzer;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace Tests.Diagnostics.Helpers
@@ -48,12 +49,7 @@ namespace Test
         [TestInitialize]
         public void TestSetup()
         {
-            solution =
-                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof(object).Assembly))
-                    .AddDocument("foo.cs", Source)
-                    .Project
-                    .Solution;
+            solution = CompilationHelper.GetSolutionFromText(Source);
 
             compilation = solution.Projects.First().GetCompilationAsync().Result;
             syntaxTree = compilation.SyntaxTrees.First();
@@ -61,6 +57,15 @@ namespace Test
             eqChecker = new EquivalenceChecker(semanticModel);
 
             methods = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().ToList();
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            if (eqChecker != null)
+            {
+                eqChecker.Dispose();
+            }
         }
 
         [TestMethod]

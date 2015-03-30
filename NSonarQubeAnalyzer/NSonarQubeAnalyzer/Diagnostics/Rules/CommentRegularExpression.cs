@@ -16,8 +16,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
-    [SqaleSubCharacteristic(SqaleSubCharacteristic.Understandability)]
+    [NoSqaleRemediation()]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class CommentRegularExpression : DiagnosticAnalyzer
     {

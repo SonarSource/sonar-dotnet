@@ -4,6 +4,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSonarQubeAnalyzer;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 
 namespace Tests.Diagnostics.Helpers
@@ -55,12 +56,7 @@ namespace Test
         [TestInitialize]
         public void TestSetup()
         {
-            solution =
-                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof(object).Assembly))
-                    .AddDocument("foo.cs", Source)
-                    .Project
-                    .Solution;
+            solution = CompilationHelper.GetSolutionFromText(Source);
 
             compilation = solution.Projects.First().GetCompilationAsync().Result;
             syntaxTree = compilation.SyntaxTrees.First();
@@ -74,11 +70,11 @@ namespace Test
         public void GetPrecedingIfsInConditionChain()
         {
             var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingIfsInConditionChain().Count.Should().Be(0);
+            ifStatement1.GetPrecedingIfsInConditionChain().Should().HaveCount(0);
 
             var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
-            preceding.Count.Should().Be(1);
+            preceding.Should().HaveCount(1);
 
             ifStatement1.ShouldBeEquivalentTo(preceding[0]);
         }
@@ -87,11 +83,11 @@ namespace Test
         public void GetPrecedingStatementsInConditionChain()
         {
             var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingStatementsInConditionChain().Count().Should().Be(0);
+            ifStatement1.GetPrecedingStatementsInConditionChain().Should().HaveCount(0);
 
             var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
-            preceding.Count().Should().Be(1);
+            preceding.Should().HaveCount(1);
 
             ifStatement1.Statement.ShouldBeEquivalentTo(preceding[0]);
         }
@@ -100,11 +96,11 @@ namespace Test
         public void GetPrecedingConditionsInConditionChain()
         {
             var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
-            ifStatement1.GetPrecedingConditionsInConditionChain().Count().Should().Be(0);
+            ifStatement1.GetPrecedingConditionsInConditionChain().Should().HaveCount(0);
 
             var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
-            preceding.Count().Should().Be(1);
+            preceding.Should().HaveCount(1);
 
             ifStatement1.Condition.ShouldBeEquivalentTo(preceding[0]);
         }
@@ -114,8 +110,8 @@ namespace Test
         {
             var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-            sections.Last().GetPrecedingSections().Count().Should().Be(2);
-            sections.First().GetPrecedingSections().Count().Should().Be(0);
+            sections.Last().GetPrecedingSections().Should().HaveCount(2);
+            sections.First().GetPrecedingSections().Should().HaveCount(0);
             sections.Last().GetPrecedingSections().First().ShouldBeEquivalentTo(sections.First());
         }
     }

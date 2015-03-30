@@ -34,7 +34,7 @@ namespace Tests.Diagnostics.Attributes
         }
 
         [TestMethod]
-        public void SingleSqaleSubCharacteristicAttribute()
+        public void SqaleSubCharacteristicAttribute()
         {
             var analyzers = typeof(AssignmentInsideSubExpression).Assembly
                 .GetTypes()
@@ -43,12 +43,27 @@ namespace Tests.Diagnostics.Attributes
 
             foreach (var analyzer in analyzers)
             {
-                var count = analyzer.GetCustomAttributes<SqaleSubCharacteristicAttribute>().Count();
-                if (count != 1)
+                var noSqaleCount = analyzer.GetCustomAttributes<NoSqaleRemediationAttribute>().Count();
+
+                var subCharacteristicCount = analyzer.GetCustomAttributes<SqaleSubCharacteristicAttribute>().Count();
+
+                if (noSqaleCount > 0)
                 {
-                    throw new Exception(
-                        string.Format("Only one SqaleSubCharacteristicAttribute can be assigned to DiagnosticAnalyzers, '{0}' has {1}",
-                        analyzer.Name, count));
+                    if (subCharacteristicCount > 0)
+                    {
+                        throw new Exception(
+                            string.Format("SqaleSubCharacteristicAttribute can only be assigned to DiagnosticAnalyzers that have a SQALE remediation function, '{0}' has NoSqaleRemediationAttribute",
+                            analyzer.Name));
+                    }
+                }
+                else
+                {
+                    if (subCharacteristicCount != 1)
+                    {
+                        throw new Exception(
+                            string.Format("Only one SqaleSubCharacteristicAttribute can be assigned to DiagnosticAnalyzers, '{0}' has {1}",
+                            analyzer.Name, subCharacteristicCount));
+                    }
                 }
             }
         }
@@ -107,7 +122,7 @@ namespace Tests.Diagnostics.Attributes
 
             var matchingEnumStrings = enumStrings.Intersect(stringsFromJava);
 
-            enumStrings.Count.ShouldBeEquivalentTo(matchingEnumStrings.Count());
+            enumStrings.Should().HaveCount(matchingEnumStrings.Count());
         }
     }
 }

@@ -113,6 +113,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompilationHelper.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
     <Compile Include="Diagnostics\SonarProperties\RuleAttribute.cs" />

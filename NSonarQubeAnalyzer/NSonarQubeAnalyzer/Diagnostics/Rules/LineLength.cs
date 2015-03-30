@@ -9,7 +9,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 namespace NSonarQubeAnalyzer.Diagnostics.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
+    [SqaleConstantRemediation("2min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class LineLength : DiagnosticAnalyzer

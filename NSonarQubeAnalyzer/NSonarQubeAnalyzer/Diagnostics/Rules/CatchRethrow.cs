@@ -36,13 +36,9 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     var tryStatement = (TryStatementSyntax)c.Node;
                     
                     var lastCatchClause = tryStatement.Catches.LastOrDefault();
-
-                    if (lastCatchClause == null)
-                    {
-                        return;
-                    }
-
-                    if (SyntaxFactory.AreEquivalent(lastCatchClause.Block, throwBlock))
+                    
+                    if (lastCatchClause!=null && 
+                        SyntaxFactory.AreEquivalent(lastCatchClause.Block, throwBlock))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(
                                 Rule,

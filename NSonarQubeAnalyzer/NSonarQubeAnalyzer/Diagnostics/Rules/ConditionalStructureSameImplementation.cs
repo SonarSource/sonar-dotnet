@@ -55,17 +55,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    var eqChecker = new EquivalenceChecker(c.SemanticModel);
-                    var switchSection = (SwitchSectionSyntax)c.Node;
-                    var switchStatements = eqChecker.GetExpandedList(switchSection.Statements);
-                    var precedingSection = switchSection
-                        .GetPrecedingSections()
-                        .FirstOrDefault(preceding => eqChecker.AreEquivalent(switchStatements, preceding.Statements, false));
-
-                    if (precedingSection != null) 
+                    using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                     {
-                        ReportSection(c, switchSection, precedingSection);
-                    }                    
+                        var switchSection = (SwitchSectionSyntax) c.Node;
+                        var switchStatements = eqChecker.GetExpandedList(switchSection.Statements);
+                        var precedingSection = switchSection
+                            .GetPrecedingSections()
+                            .FirstOrDefault(
+                                preceding => eqChecker.AreEquivalent(switchStatements, preceding.Statements, false));
+
+                        if (precedingSection != null)
+                        {
+                            ReportSection(c, switchSection, precedingSection);
+                        }
+                    }
                 },
                 SyntaxKind.SwitchSection);
         }
@@ -74,13 +77,15 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             IEnumerable<StatementSyntax> precedingStatements)
         {
             var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, new AdhocWorkspace());
-
-            var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => new EquivalenceChecker(c.SemanticModel).AreEquivalent(expandedStatementToCheck, preceding, false));
-
-            if (precedingStatement != null)
+            using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
             {
-                ReportStatement(c, statementToCheck, precedingStatement);
+                var precedingStatement = precedingStatements
+                    .FirstOrDefault(preceding => eqChecker.AreEquivalent(expandedStatementToCheck, preceding, false));
+
+                if (precedingStatement != null)
+                {
+                    ReportStatement(c, statementToCheck, precedingStatement);
+                }
             }
         }
 

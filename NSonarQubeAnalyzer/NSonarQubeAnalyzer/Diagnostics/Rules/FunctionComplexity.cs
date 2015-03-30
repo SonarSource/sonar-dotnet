@@ -9,7 +9,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 namespace NSonarQubeAnalyzer.Diagnostics.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
+    [SqaleConstantRemediation("1h")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.IntegrationTestability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class FunctionComplexity : DiagnosticAnalyzer

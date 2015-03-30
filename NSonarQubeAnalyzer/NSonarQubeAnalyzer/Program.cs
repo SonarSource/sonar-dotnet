@@ -36,12 +36,7 @@ namespace NSonarQubeAnalyzer
 
                     try
                     {
-                        var solution =
-                            new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                                .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
-                                .AddDocument("foo.cs", File.ReadAllText(file, Encoding.UTF8))
-                                .Project
-                                .Solution;
+                        var solution = CompilationHelper.GetSolutionFromFiles(file);
 
                         var compilation = solution.Projects.First().GetCompilationAsync().Result;
                         var syntaxTree = compilation.SyntaxTrees.First();

@@ -16,12 +16,7 @@ namespace Tests
         {
             var runner = new DiagnosticsRunner(ImmutableArray.Create<DiagnosticAnalyzer>());
 
-            var solution =
-                new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
-                    .AddDocument("foo.cs", "")
-                    .Project
-                    .Solution;
+            var solution = CompilationHelper.GetSolutionFromText("");
 
             var compilation = solution.Projects.First().GetCompilationAsync().Result;
             var syntaxTree = compilation.SyntaxTrees.First();
@@ -29,7 +24,7 @@ namespace Tests
 
             var diagnosticsResult = runner.GetDiagnostics(compilation);
 
-            diagnosticsResult.Count().ShouldBeEquivalentTo(0);
+            diagnosticsResult.Should().HaveCount(0);
         }
     }
 }

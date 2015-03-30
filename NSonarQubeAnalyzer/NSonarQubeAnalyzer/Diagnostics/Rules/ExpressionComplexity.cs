@@ -11,7 +11,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 namespace NSonarQubeAnalyzer.Diagnostics.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation]
+    [SqaleConstantRemediation("30min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.UnitTestability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class ExpressionComplexity : DiagnosticAnalyzer

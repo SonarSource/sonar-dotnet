@@ -95,20 +95,22 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax comparisonToNull)
         {
             var expandedExpressionComparedToNull = Simplifier.Expand(expressionComparedToNull, c.SemanticModel, new AdhocWorkspace());
-
-            for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
+            using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
             {
-                foreach (var descendant in expressionsInChain[j]
-                    .DescendantNodes()
-                    .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
-                                         new EquivalenceChecker(c.SemanticModel).AreEquivalent(
-                                             expandedExpressionComparedToNull, descendant, false))
-                    .Where(descendant =>
-                        descendant.Parent is MemberAccessExpressionSyntax ||
-                        descendant.Parent is ElementAccessExpressionSyntax))
+                for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
-                        expressionComparedToNull.ToString()));
+                    foreach (var descendant in expressionsInChain[j]
+                        .DescendantNodes()
+                        .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
+                                             eqChecker.AreEquivalent(
+                                                 expandedExpressionComparedToNull, descendant, false))
+                        .Where(descendant =>
+                            descendant.Parent is MemberAccessExpressionSyntax ||
+                            descendant.Parent is ElementAccessExpressionSyntax))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
+                            expressionComparedToNull.ToString()));
+                    }
                 }
             }
         }
