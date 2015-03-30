@@ -7,7 +7,6 @@ using System.Reflection;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NSonarQube.RuleDescriptor.RuleDescriptors;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
-using NSonarQubeAnalyzer.Diagnostics.Rules;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 
@@ -44,7 +43,7 @@ namespace NSonarQube.RuleDescriptor
             {
                 Key = rule.Key,
                 Title = rule.Description,
-                Severity = rule.Severity.ToString().ToUpper(),
+                Severity = rule.Severity.ToString().ToUpper(CultureInfo.InvariantCulture),
                 IsActivatedByDefault = rule.IsActivatedByDefault,
                 Cardinality = rule.Template ? "MULTIPLE" : "SINGLE",
             };

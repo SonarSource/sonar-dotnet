@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Text;
-using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSonarQubeAnalyzer;
 using NSonarQubeAnalyzer.Diagnostics.Rules;
 

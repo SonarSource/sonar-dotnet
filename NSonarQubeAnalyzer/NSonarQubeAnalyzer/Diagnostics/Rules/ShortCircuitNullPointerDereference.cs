@@ -54,9 +54,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         private void ReportDereference(BinaryExpressionSyntax binaryExpression, SyntaxKind comparisonOperator, 
             SyntaxNodeAnalysisContext c)
         {
-            var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
-            if (binaryParent != null && 
-                SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken))
+            if (IsMidLevelExpression(binaryExpression))
             {
                 return;
             }
@@ -90,6 +88,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 var expressionComparedToNull = leftNull ? comparisonToNull.Right : comparisonToNull.Left;
                 CheckFollowingExpressions(c, i, expressionsInChain, expressionComparedToNull, comparisonToNull);
             }
+        }
+
+        private static bool IsMidLevelExpression(BinaryExpressionSyntax binaryExpression)
+        {
+            var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
+            return binaryParent != null && 
+                   SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken);
         }
 
         private static void CheckFollowingExpressions(SyntaxNodeAnalysisContext c, int currentExpressionIndex,
