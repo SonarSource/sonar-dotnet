@@ -9,7 +9,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
     public class EquivalenceChecker : IDisposable
     {
         private readonly SemanticModel semanticModel;
-        private readonly Workspace workspace;
+        private Workspace workspace;
 
         public EquivalenceChecker(SemanticModel semanticModel)
         {
@@ -110,9 +110,21 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+            {
+                return;
+            }
+
             if (workspace != null)
             {
                 workspace.Dispose();
+                workspace = null;
             }
         }
     }

@@ -16,7 +16,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [NoSqaleRemediation()]
+    [NoSqaleRemediation]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     public class CommentRegularExpression : DiagnosticAnalyzer
     {

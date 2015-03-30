@@ -58,8 +58,8 @@ namespace NSonarQube.RuleDescriptor
                     ruleDescriptor.Description = reader.ReadToEnd();
                 }
             }
-            var parameters =
-                analyzerType.GetProperties().Where(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
+            var parameters = analyzerType.GetProperties()
+                .Where(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
 
             foreach (var propertyInfo in parameters)
             {
@@ -67,12 +67,11 @@ namespace NSonarQube.RuleDescriptor
                 ruleDescriptor.Parameters.Add(
                     new RuleParameter
                     {
-                        DefaultValue = ruleParameter.DefaultValue, 
-                        Description = ruleParameter.Description, 
+                        DefaultValue = ruleParameter.DefaultValue,
+                        Description = ruleParameter.Description,
                         Key = ruleParameter.Key,
                         Type = ruleParameter.Type.ToSonarQubeString()
                     });
-            
             }
 
             var tags = analyzerType.GetCustomAttributes<TagsAttribute>().FirstOrDefault();
@@ -83,32 +82,41 @@ namespace NSonarQube.RuleDescriptor
             }
 
             var sqaleRemediation = analyzerType.GetCustomAttributes<SqaleRemediationAttribute>().FirstOrDefault();
-
-            SqaleDescriptor sqale = null;
-
-            if (sqaleRemediation != null && 
-                !(sqaleRemediation is NoSqaleRemediationAttribute))
+            
+            if (sqaleRemediation == null || sqaleRemediation is NoSqaleRemediationAttribute)
             {
-                var sqaleSubCharacteristic = analyzerType.GetCustomAttributes<SqaleSubCharacteristicAttribute>().First();
-                sqale = new SqaleDescriptor { SubCharacteristic = sqaleSubCharacteristic.SubCharacteristic.ToSonarQubeString() };
-                var constant = sqaleRemediation as SqaleConstantRemediationAttribute;
-                if (constant != null)
+                return new FullRuleDescriptor
                 {
-                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty
-                    {
-                        Key = "remediationFunction",
-                        Text = "CONSTANT_ISSUE"
-                    });
-
-                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty
-                    {
-                        Key = "offset",
-                        Value = constant.Value
-                    });
-
-                    sqale.Remediation.RuleKey = rule.Key;
-                }
+                    RuleDescriptor = ruleDescriptor,
+                    SqaleDescriptor = null
+                };
             }
+
+            var sqaleSubCharacteristic = analyzerType.GetCustomAttributes<SqaleSubCharacteristicAttribute>().First();
+            var sqale = new SqaleDescriptor { SubCharacteristic = sqaleSubCharacteristic.SubCharacteristic.ToSonarQubeString() };
+            var constant = sqaleRemediation as SqaleConstantRemediationAttribute;
+            if (constant == null)
+            {
+                return new FullRuleDescriptor
+                {
+                    RuleDescriptor = ruleDescriptor,
+                    SqaleDescriptor = sqale
+                };
+            }
+
+            sqale.Remediation.Properties.Add(new SqaleRemediationProperty
+            {
+                Key = "remediationFunction",
+                Text = "CONSTANT_ISSUE"
+            });
+
+            sqale.Remediation.Properties.Add(new SqaleRemediationProperty
+            {
+                Key = "offset",
+                Value = constant.Value
+            });
+
+            sqale.Remediation.RuleKey = rule.Key;
 
             return new FullRuleDescriptor
             {

@@ -43,7 +43,8 @@ namespace NSonarQube.RuleDescriptor
         private static void WriteSqaleDescriptorFile(string filePath, IEnumerable<FullRuleDescriptor> fullRuleDescriptors)
         {
             var root = new SqaleRoot();
-            foreach (var fullRuleDescriptor in fullRuleDescriptors)
+            foreach (var fullRuleDescriptor in fullRuleDescriptors
+                .Where(fullRuleDescriptor => fullRuleDescriptor.SqaleDescriptor != null))
             {
                 root.Sqale.Add(fullRuleDescriptor.SqaleDescriptor);
             }
@@ -84,12 +85,12 @@ namespace NSonarQube.RuleDescriptor
                 IndentChars = "  "
             };
             
-            using (var ms = new MemoryStream())
-            using (var writer = XmlWriter.Create(ms, settings))
+            using (var stream = new MemoryStream())
+            using (var writer = XmlWriter.Create(stream, settings))
             {
                 var serializer = new XmlSerializer(objectToSerialize.GetType());
                 serializer.Serialize(writer, objectToSerialize, new XmlSerializerNamespaces(new[] {XmlQualifiedName.Empty}));
-                var ruleXml = Encoding.UTF8.GetString(ms.ToArray());
+                var ruleXml = Encoding.UTF8.GetString(stream.ToArray());
                 File.WriteAllText(filePath, ruleXml);
             }
         }

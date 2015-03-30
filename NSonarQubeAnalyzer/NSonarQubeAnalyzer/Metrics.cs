@@ -236,7 +236,7 @@ namespace NSonarQubeAnalyzer
                     SyntaxKind.ForEachStatement,
                     SyntaxKind.LogicalAndExpression,
                     SyntaxKind.LogicalOrExpression,
-                    SyntaxKind.CaseSwitchLabel,
+                    SyntaxKind.CaseSwitchLabel
                 };
             }
         }
