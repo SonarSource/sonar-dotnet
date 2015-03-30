@@ -20,17 +20,24 @@
 package org.sonar.plugins.csharp;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.utils.ValidationMessages;
 
-import static org.fest.assertions.Assertions.assertThat;
+import java.io.Reader;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class CSharpSonarWayProfileTest {
 
   @Test
   public void test() {
-    RulesProfile profile = new CSharpSonarWayProfile().createProfile(ValidationMessages.create());
-    assertThat(profile.getActiveRules()).hasSize(36);
+    XMLProfileParser xmlParser = mock(XMLProfileParser.class);
+    ValidationMessages validation = ValidationMessages.create();
+    RulesProfile profile = new CSharpSonarWayProfile(xmlParser).createProfile(validation);
+    verify(xmlParser).parse(Mockito.any(Reader.class), Mockito.same(validation));
   }
 
 }

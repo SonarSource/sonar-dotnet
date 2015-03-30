@@ -19,59 +19,25 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.base.Charsets;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.Rule;
+import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.utils.ValidationMessages;
+
+import java.io.InputStreamReader;
 
 public class CSharpSonarWayProfile extends ProfileDefinition {
 
-  @Override
-  public RulesProfile createProfile(ValidationMessages validation) {
-    RulesProfile profile = RulesProfile.create(CSharpPlugin.CSHARP_WAY_PROFILE, CSharpPlugin.LANGUAGE_KEY);
+  private final XMLProfileParser xmlParser;
 
-    activateRule(profile, "AssignmentInsideSubExpression");
-    activateRule(profile, "AsyncAwaitIdentifier");
-    activateRule(profile, "BreakOutsideSwitch");
-    activateRule(profile, "CommentedCode");
-    activateRule(profile, "ParameterAssignedTo");
-    activateRule(profile, "SwitchWithoutDefault");
-    activateRule(profile, "TabCharacter");
-    activateRule(profile, "S127");
-    activateRule(profile, "S1301");
-    activateRule(profile, "S1116");
-    activateRule(profile, "S1145");
-    activateRule(profile, "S1125");
-    activateRule(profile, "S1109");
-    activateRule(profile, "S121");
-    activateRule(profile, "S108");
-    activateRule(profile, "S1186");
-    activateRule(profile, "S1481");
-    activateRule(profile, "S101");
-    activateRule(profile, "S100");
-    activateRule(profile, "FileLoc");
-    activateRule(profile, "FunctionComplexity");
-    activateRule(profile, "LineLength");
-    activateRule(profile, "S1479");
-    activateRule(profile, "S1067");
-    activateRule(profile, "S107");
-    activateRule(profile, "S1848");
-    activateRule(profile, "S1862");
-    activateRule(profile, "S1871");
-    activateRule(profile, "S2681");
-    activateRule(profile, "S1764");
-    activateRule(profile, "S1656");
-    activateRule(profile, "S2737");
-    activateRule(profile, "S2486");
-    activateRule(profile, "S2743");
-    activateRule(profile, "S1697");
-    activateRule(profile, "S1994");
-
-    return profile;
+  public CSharpSonarWayProfile(XMLProfileParser xmlParser) {
+    this.xmlParser = xmlParser;
   }
 
-  private static void activateRule(RulesProfile profile, String ruleKey) {
-    profile.activateRule(Rule.create(CSharpPlugin.REPOSITORY_KEY, ruleKey), null);
+  @Override
+  public RulesProfile createProfile(ValidationMessages validation) {
+    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/profile.xml"), Charsets.UTF_8), validation);
   }
 
 }

@@ -35,6 +35,12 @@
       <type>zip</type>
       <scope>provided</scope>
     </dependency>
+	<dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>NSonarQubeAnalyzer</artifactId>
+      <version>${project.version}</version>
+      <classifier>rule-resources</classifier>
+    </dependency>
 
     <dependency>
       <groupId>org.codehaus.sonar.dotnet.fxcop</groupId>
@@ -99,6 +105,7 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
+		    <id>copy-NSonarQubeAnalyzer</id>
             <goals>
               <goal>copy</goal>
             </goals>
@@ -112,6 +119,24 @@
                   <version>${project.version}</version>
                   <type>zip</type>
                   <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+		  <execution>
+		    <id>unpack-rule-resources</id>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <phase>prepare-package</phase>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>NSonarQubeAnalyzer</artifactId>
+                  <version>${project.version}</version>
+                  <classifier>rule-resources</classifier>
                 </artifactItem>
               </artifactItems>
             </configuration>
@@ -132,8 +157,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>6500000</maxsize>
-                  <minsize>5500000</minsize>
+                  <maxsize>7000000</maxsize>
+                  <minsize>6000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
