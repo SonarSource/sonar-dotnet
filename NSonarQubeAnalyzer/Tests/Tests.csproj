@@ -252,6 +252,9 @@
     <None Include="TestCases\SwitchWithoutDefault.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="ConfigurationTest.cs" />
     <Compile Include="DiagnosticRunnerTest.cs" />
     <Compile Include="RuleTest.cs" />

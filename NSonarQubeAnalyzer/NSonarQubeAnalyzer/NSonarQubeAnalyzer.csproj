@@ -113,6 +113,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="CompilationHelper.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="DiagnosticsRunner.cs" />
