@@ -92,7 +92,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             var checkedLine = line.Replace(" ", "").Replace("\t", "");
 
             return
-                CodeEndings.Any(ending => checkedLine.EndsWith(ending)) ||
+                CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal)) ||
                 CodeParts.Any(part => checkedLine.Contains(part)) ||
                 (checkedLine.Length - checkedLine.Replace("&&", "").Replace("||", "").Length)/2 >= 3;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -54,13 +55,13 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     if (conditionSymbols.Any())
                     {
                         var conditionVariables = string.Join(",", conditionSymbols.Select(s=>s.Name));
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(), 
-                            string.Format(MessageFormatNotEmpty, incrementedVariables, conditionVariables)));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(),
+                            string.Format(CultureInfo.InvariantCulture, MessageFormatNotEmpty, incrementedVariables, conditionVariables)));
                     }
                     else
                     {
                         c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(),
-                            string.Format(MessageFormatEmpty, incrementedVariables)));
+                            string.Format(CultureInfo.InvariantCulture, MessageFormatEmpty, incrementedVariables)));
                     }
 
                 },

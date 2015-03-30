@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -28,7 +29,9 @@ namespace Tests
             foreach (var analyzer in analyzers)
             {
                 var ruleDescriptor = analyzer.GetCustomAttributes<RuleAttribute>().First();
-                var resource = resources.SingleOrDefault(r => r.EndsWith(string.Format("Diagnostics.RuleDescriptions.{0}.html", ruleDescriptor.Key)));
+                var resource = resources.SingleOrDefault(r => r.EndsWith(
+                    string.Format(CultureInfo.InvariantCulture, "Diagnostics.RuleDescriptions.{0}.html",
+                        ruleDescriptor.Key), StringComparison.OrdinalIgnoreCase));
                 if (resource != null)
                 {
                     using (var stream = assembly.GetManifestResourceStream(resource))

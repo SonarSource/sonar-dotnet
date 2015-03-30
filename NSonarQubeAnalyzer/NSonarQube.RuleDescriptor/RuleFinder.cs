@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -49,7 +50,9 @@ namespace NSonarQube.RuleDescriptor
             };
 
             var resources = analyzerType.Assembly.GetManifestResourceNames();
-            var resource = resources.SingleOrDefault(r => r.EndsWith(string.Format("Diagnostics.RuleDescriptions.{0}.html", rule.Key)));
+            var resource = resources.SingleOrDefault(r => r.EndsWith(
+                string.Format(CultureInfo.InvariantCulture, "Diagnostics.RuleDescriptions.{0}.html", rule.Key),
+                StringComparison.OrdinalIgnoreCase));
             if (resource != null)
             {
                 using (var stream = analyzerType.Assembly.GetManifestResourceStream(resource))

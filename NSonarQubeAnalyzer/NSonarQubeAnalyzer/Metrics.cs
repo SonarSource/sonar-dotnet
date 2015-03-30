@@ -87,10 +87,7 @@ namespace NSonarQubeAnalyzer
 
         private static bool IsComment(SyntaxTrivia trivia)
         {
-            return trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
-                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) ||
-                trivia.IsKind(SyntaxKind.SingleLineDocumentationCommentTrivia) ||
-                trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
+            return TriviaKinds.Contains(trivia.Kind());
         }
 
         public int Classes()
@@ -103,11 +100,7 @@ namespace NSonarQubeAnalyzer
             return tree.GetCompilationUnitRoot()
                 .DescendantNodes()
                 .Count(
-                    n =>
-                        n.IsKind(SyntaxKind.GetAccessorDeclaration) ||
-                        n.IsKind(SyntaxKind.SetAccessorDeclaration) ||
-                        n.IsKind(SyntaxKind.AddAccessorDeclaration) ||
-                        n.IsKind(SyntaxKind.RemoveAccessorDeclaration));
+                    n => AccessorKinds.Contains(n.Kind()));
         }
 
         public int Statements()
@@ -134,23 +127,7 @@ namespace NSonarQubeAnalyzer
             return FunctionKinds.Contains(node.Kind());
         }
 
-        private static IEnumerable<SyntaxKind> FunctionKinds
-        {
-            get
-            {
-                return new[]
-                {
-                    SyntaxKind.ConstructorDeclaration,
-                    SyntaxKind.DestructorDeclaration, 
-                    SyntaxKind.MethodDeclaration,
-                    SyntaxKind.OperatorDeclaration,
-                    SyntaxKind.GetAccessorDeclaration,
-                    SyntaxKind.SetAccessorDeclaration,
-                    SyntaxKind.AddAccessorDeclaration,
-                    SyntaxKind.RemoveAccessorDeclaration
-                };
-            }
-        }
+        
 
         public int PublicApi()
         {
@@ -221,6 +198,72 @@ namespace NSonarQubeAnalyzer
                         (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))));
         }
 
+        // TODO What about lambdas?
+        private static bool IsLastStatement(SyntaxNode node)
+        {
+            var nextToken = node.GetLastToken().GetNextToken();
+            return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
+                nextToken.Parent.IsKind(SyntaxKind.Block) &&
+                IsFunction(nextToken.Parent.Parent);
+        }
+
+        public Distribution FunctionComplexityDistribution()
+        {
+            var distribution = new Distribution(1, 2, 4, 6, 8, 10, 12);
+            foreach (var node in FunctionNodes())
+            {
+                distribution.Add(Complexity(node));
+            }
+            return distribution;
+        }
+
+        #region Kind lists
+
+        private static IEnumerable<SyntaxKind> TriviaKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.SingleLineCommentTrivia,
+                    SyntaxKind.MultiLineCommentTrivia, 
+                    SyntaxKind.SingleLineDocumentationCommentTrivia,
+                    SyntaxKind.MultiLineDocumentationCommentTrivia
+                };
+            }
+        }
+
+        private static IEnumerable<SyntaxKind> AccessorKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.GetAccessorDeclaration,
+                    SyntaxKind.SetAccessorDeclaration, 
+                    SyntaxKind.AddAccessorDeclaration,
+                    SyntaxKind.RemoveAccessorDeclaration
+                };
+            }
+        }
+        private static IEnumerable<SyntaxKind> FunctionKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.ConstructorDeclaration,
+                    SyntaxKind.DestructorDeclaration, 
+                    SyntaxKind.MethodDeclaration,
+                    SyntaxKind.OperatorDeclaration,
+                    SyntaxKind.GetAccessorDeclaration,
+                    SyntaxKind.SetAccessorDeclaration,
+                    SyntaxKind.AddAccessorDeclaration,
+                    SyntaxKind.RemoveAccessorDeclaration
+                };
+            }
+        }
+
         private static IEnumerable<SyntaxKind> ComplexityIncreasingKinds
         {
             get
@@ -241,23 +284,6 @@ namespace NSonarQubeAnalyzer
             }
         }
 
-        // TODO What about lambdas?
-        private static bool IsLastStatement(SyntaxNode node)
-        {
-            var nextToken = node.GetLastToken().GetNextToken();
-            return nextToken.IsKind(SyntaxKind.CloseBraceToken) &&
-                nextToken.Parent.IsKind(SyntaxKind.Block) &&
-                IsFunction(nextToken.Parent.Parent);
-        }
-
-        public Distribution FunctionComplexityDistribution()
-        {
-            var distribution = new Distribution(1, 2, 4, 6, 8, 10, 12);
-            foreach (var node in FunctionNodes())
-            {
-                distribution.Add(Complexity(node));
-            }
-            return distribution;
-        }
+        #endregion
     }
 }
