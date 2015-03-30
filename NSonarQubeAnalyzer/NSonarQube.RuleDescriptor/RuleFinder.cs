@@ -116,7 +116,8 @@ namespace NSonarQube.RuleDescriptor
             sqale.Remediation.Properties.Add(new SqaleRemediationProperty
             {
                 Key = "offset",
-                Value = constant.Value
+                Value = constant.Value,
+                Text = ""
             });
 
             sqale.Remediation.RuleKey = rule.Key;
