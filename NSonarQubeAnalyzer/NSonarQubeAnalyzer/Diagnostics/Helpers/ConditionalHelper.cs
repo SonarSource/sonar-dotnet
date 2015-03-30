@@ -13,14 +13,10 @@ namespace NSonarQubeAnalyzer.Diagnostics.Helpers
             var ifList = new List<IfStatementSyntax>();
             var currentIf = ifStatement;
 
-            while (currentIf.Parent is ElseClauseSyntax)
+            while (currentIf.Parent is ElseClauseSyntax &&
+                currentIf.Parent.Parent is IfStatementSyntax)
             {
-                var precedingIf = currentIf.Parent.Parent as IfStatementSyntax;
-                if (precedingIf == null)
-                {
-                    break;
-                }
-
+                var precedingIf = (IfStatementSyntax) currentIf.Parent.Parent;
                 ifList.Add(precedingIf);
                 currentIf = precedingIf;
             }

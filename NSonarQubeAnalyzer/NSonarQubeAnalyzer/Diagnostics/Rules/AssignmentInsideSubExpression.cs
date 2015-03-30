@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -54,10 +56,21 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             var expression = node.Parent.FirstAncestorOrSelf<ExpressionSyntax>(ancestor => ancestor != null);
 
             return expression != null &&
-                !expression.IsKind(SyntaxKind.ParenthesizedLambdaExpression) &&
-                !expression.IsKind(SyntaxKind.SimpleLambdaExpression) &&
-                !expression.IsKind(SyntaxKind.AnonymousMethodExpression) &&
-                !expression.IsKind(SyntaxKind.ObjectInitializerExpression);
+                   !AllowedParentExpressionKinds.Contains(expression.Kind());
+        }
+
+        private static IEnumerable<SyntaxKind> AllowedParentExpressionKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.SimpleLambdaExpression,
+                    SyntaxKind.AnonymousMethodExpression,
+                    SyntaxKind.ObjectInitializerExpression
+                };
+            }
         }
     }
 }

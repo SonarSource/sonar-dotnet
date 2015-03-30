@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -44,11 +46,22 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool IsUnnecessary(LiteralExpressionSyntax node)
         {
-            return node.Parent.IsKind(SyntaxKind.EqualsExpression) ||
-                node.Parent.IsKind(SyntaxKind.NotEqualsExpression) ||
-                node.Parent.IsKind(SyntaxKind.LogicalAndExpression) ||
-                node.Parent.IsKind(SyntaxKind.LogicalOrExpression) ||
-                node.Parent.IsKind(SyntaxKind.LogicalNotExpression);
+            return AllowedContainerKinds.Contains(node.Parent.Kind());
+        }
+
+        private static IEnumerable<SyntaxKind> AllowedContainerKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.EqualsExpression,
+                    SyntaxKind.NotEqualsExpression, 
+                    SyntaxKind.LogicalAndExpression,
+                    SyntaxKind.LogicalOrExpression,
+                    SyntaxKind.LogicalNotExpression
+                };
+            }
         }
     }
 }

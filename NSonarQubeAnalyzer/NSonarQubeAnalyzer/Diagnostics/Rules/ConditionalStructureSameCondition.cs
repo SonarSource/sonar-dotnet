@@ -35,21 +35,24 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
                     var currentCondition = ifStatement.Condition;
-                    
-                    var expandedCurrentCondition = Simplifier.Expand(currentCondition, c.SemanticModel, new AdhocWorkspace());
-                    using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
-                    {
-                        var precedingCondition = ifStatement
-                            .GetPrecedingConditionsInConditionChain()
-                            .FirstOrDefault(
-                                preceding => eqChecker.AreEquivalent(expandedCurrentCondition, preceding, false));
 
-                        if (precedingCondition != null)
+                    using (var workspace = new AdhocWorkspace())
+                    {
+                        var expandedCurrentCondition = Simplifier.Expand(currentCondition, c.SemanticModel, workspace);
+                        using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(
-                                Rule,
-                                currentCondition.GetLocation(),
-                                precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
+                            var precedingCondition = ifStatement
+                                .GetPrecedingConditionsInConditionChain()
+                                .FirstOrDefault(
+                                    preceding => eqChecker.AreEquivalent(expandedCurrentCondition, preceding, false));
+
+                            if (precedingCondition != null)
+                            {
+                                c.ReportDiagnostic(Diagnostic.Create(
+                                    Rule,
+                                    currentCondition.GetLocation(),
+                                    precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
+                            }
                         }
                     }
                 },

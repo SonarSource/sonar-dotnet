@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -90,18 +91,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         {
             var checkedLine = line.Replace(" ", "").Replace("\t", "");
 
-            return checkedLine.EndsWith(";") ||
-                checkedLine.EndsWith("{") ||
-                checkedLine.EndsWith("}") ||
-                checkedLine.Contains("++") ||
-                checkedLine.Contains("for(") ||
-                checkedLine.Contains("if(") ||
-                checkedLine.Contains("while(") ||
-                checkedLine.Contains("catch(") ||
-                checkedLine.Contains("switch(") ||
-                checkedLine.Contains("try{") ||
-                checkedLine.Contains("else{") ||
-                (checkedLine.Length - checkedLine.Replace("&&", "").Replace("||", "").Length) / 2 >= 3;
+            return
+                CodeEndings.Any(ending => checkedLine.EndsWith(ending)) ||
+                CodeParts.Any(part => checkedLine.Contains(part)) ||
+                (checkedLine.Length - checkedLine.Replace("&&", "").Replace("||", "").Length)/2 >= 3;
+        }
+
+        private static IEnumerable<string> CodeEndings
+        {
+            get { return new[] {";", "{", "}"}; }
+        }
+
+        private static IEnumerable<string> CodeParts
+        {
+            get { return new[] { "++", "for(", "if(", "while(", "catch(", "switch(", "try(", "else(" }; }
         }
     }
 }

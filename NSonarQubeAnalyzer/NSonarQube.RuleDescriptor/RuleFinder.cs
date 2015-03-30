@@ -12,7 +12,7 @@ using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
 
 namespace NSonarQube.RuleDescriptor
 {
-    public class RuleFinder
+    internal class RuleFinder
     {
         private readonly List<Type> diagnosticAnalyzers;
 
@@ -38,7 +38,6 @@ namespace NSonarQube.RuleDescriptor
             {
                 return null;
             }
-
 
             var ruleDescriptor = new RuleDescriptors.RuleDescriptor
             {
@@ -66,7 +65,7 @@ namespace NSonarQube.RuleDescriptor
             {
                 var ruleParameter = propertyInfo.GetCustomAttributes<RuleParameterAttribute>().First();
                 ruleDescriptor.Parameters.Add(
-                    new RuleParameter()
+                    new RuleParameter
                     {
                         DefaultValue = ruleParameter.DefaultValue, 
                         Description = ruleParameter.Description, 
@@ -95,13 +94,13 @@ namespace NSonarQube.RuleDescriptor
                 var constant = sqaleRemediation as SqaleConstantRemediationAttribute;
                 if (constant != null)
                 {
-                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty()
+                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty
                     {
                         Key = "remediationFunction",
                         Text = "CONSTANT_ISSUE"
                     });
 
-                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty()
+                    sqale.Remediation.Properties.Add(new SqaleRemediationProperty
                     {
                         Key = "offset",
                         Value = constant.Value
@@ -111,7 +110,7 @@ namespace NSonarQube.RuleDescriptor
                 }
             }
 
-            return new FullRuleDescriptor()
+            return new FullRuleDescriptor
             {
                 RuleDescriptor = ruleDescriptor,
                 SqaleDescriptor = sqale

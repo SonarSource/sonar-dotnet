@@ -17,16 +17,18 @@ namespace NSonarQubeAnalyzer
 
         public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation)
         {
-            var cancellationToken = new CancellationTokenSource().Token;
-            
             if (diagnosticAnalyzers.IsDefaultOrEmpty)
             {
                 return new Diagnostic[0];
             }
 
-            var compilationWithAnalyzer = new CompilationWithAnalyzers(compilation, diagnosticAnalyzers, null, cancellationToken);
+            using (var tokenSource = new CancellationTokenSource())
+            {
+                var compilationWithAnalyzer = new CompilationWithAnalyzers(compilation, diagnosticAnalyzers, null,
+                    tokenSource.Token);
 
-            return compilationWithAnalyzer.GetAnalyzerDiagnosticsAsync().Result;
+                return compilationWithAnalyzer.GetAnalyzerDiagnosticsAsync().Result;
+            }
         }
     }
 }

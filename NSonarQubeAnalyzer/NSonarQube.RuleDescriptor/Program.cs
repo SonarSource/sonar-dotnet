@@ -56,7 +56,7 @@ namespace NSonarQube.RuleDescriptor
             var root = new QualityProfileRoot();
             foreach (var fullRuleDescriptor in fullRuleDescriptors.Where(full => full.RuleDescriptor.IsActivatedByDefault))
             {
-                root.Rules.Add(new QualityProfileRuleDescriptor()
+                root.Rules.Add(new QualityProfileRuleDescriptor
                 {
                     Key = fullRuleDescriptor.RuleDescriptor.Key
                 });

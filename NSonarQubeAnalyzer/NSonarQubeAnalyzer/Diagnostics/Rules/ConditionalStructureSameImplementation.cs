@@ -76,15 +76,18 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, 
             IEnumerable<StatementSyntax> precedingStatements)
         {
-            var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, new AdhocWorkspace());
-            using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
+            using (var workspace = new AdhocWorkspace())
             {
-                var precedingStatement = precedingStatements
-                    .FirstOrDefault(preceding => eqChecker.AreEquivalent(expandedStatementToCheck, preceding, false));
-
-                if (precedingStatement != null)
+                var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, workspace);
+                using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                 {
-                    ReportStatement(c, statementToCheck, precedingStatement);
+                    var precedingStatement = precedingStatements
+                        .FirstOrDefault(preceding => eqChecker.AreEquivalent(expandedStatementToCheck, preceding, false));
+
+                    if (precedingStatement != null)
+                    {
+                        ReportStatement(c, statementToCheck, precedingStatement);
+                    }
                 }
             }
         }

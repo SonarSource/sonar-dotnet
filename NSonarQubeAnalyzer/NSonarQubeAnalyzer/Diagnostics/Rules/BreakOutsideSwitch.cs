@@ -1,4 +1,6 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,14 +44,24 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool IsInSwitch(BreakStatementSyntax node)
         {
-            var ancestor = node.FirstAncestorOrSelf<SyntaxNode>(e =>
-                e.IsKind(SyntaxKind.SwitchStatement) ||
-                e.IsKind(SyntaxKind.WhileStatement) ||
-                e.IsKind(SyntaxKind.DoStatement) ||
-                e.IsKind(SyntaxKind.ForStatement) ||
-                e.IsKind(SyntaxKind.ForEachStatement));
+            var ancestor = node.FirstAncestorOrSelf<SyntaxNode>(e => LoopOrSwitch.Contains(e.Kind()));
 
             return ancestor != null && ancestor.IsKind(SyntaxKind.SwitchStatement);
+        }
+
+        private static IEnumerable<SyntaxKind> LoopOrSwitch
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.SwitchStatement,
+                    SyntaxKind.WhileStatement, 
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.ForEachStatement
+                };
+            }
         }
     }
 }

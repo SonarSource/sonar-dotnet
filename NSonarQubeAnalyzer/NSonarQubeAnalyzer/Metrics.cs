@@ -131,14 +131,25 @@ namespace NSonarQubeAnalyzer
 
         private static bool IsFunction(SyntaxNode node)
         {
-            return node.IsKind(SyntaxKind.ConstructorDeclaration) ||
-                node.IsKind(SyntaxKind.DestructorDeclaration) ||
-                node.IsKind(SyntaxKind.MethodDeclaration) ||
-                node.IsKind(SyntaxKind.OperatorDeclaration) ||
-                node.IsKind(SyntaxKind.GetAccessorDeclaration) ||
-                node.IsKind(SyntaxKind.SetAccessorDeclaration) ||
-                node.IsKind(SyntaxKind.AddAccessorDeclaration) ||
-                node.IsKind(SyntaxKind.RemoveAccessorDeclaration);
+            return FunctionKinds.Contains(node.Kind());
+        }
+
+        private static IEnumerable<SyntaxKind> FunctionKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.ConstructorDeclaration,
+                    SyntaxKind.DestructorDeclaration, 
+                    SyntaxKind.MethodDeclaration,
+                    SyntaxKind.OperatorDeclaration,
+                    SyntaxKind.GetAccessorDeclaration,
+                    SyntaxKind.SetAccessorDeclaration,
+                    SyntaxKind.AddAccessorDeclaration,
+                    SyntaxKind.RemoveAccessorDeclaration
+                };
+            }
         }
 
         public int PublicApi()
@@ -205,18 +216,29 @@ namespace NSonarQubeAnalyzer
                 .Count(
                     n =>
                         // TODO What about the null coalescing operator?
-                        n.IsKind(SyntaxKind.IfStatement) ||
-                        n.IsKind(SyntaxKind.SwitchStatement) ||
-                        n.IsKind(SyntaxKind.LabeledStatement) ||
-                        n.IsKind(SyntaxKind.WhileStatement) ||
-                        n.IsKind(SyntaxKind.DoStatement) ||
-                        n.IsKind(SyntaxKind.ForStatement) ||
-                        n.IsKind(SyntaxKind.ForEachStatement) ||
-                        n.IsKind(SyntaxKind.LogicalAndExpression) ||
-                        n.IsKind(SyntaxKind.LogicalOrExpression) ||
-                        n.IsKind(SyntaxKind.CaseSwitchLabel) ||
+                        ComplexityIncreasingKinds.Contains(n.Kind()) ||
                         (n.IsKind(SyntaxKind.ReturnStatement) && !IsLastStatement(n)) ||
                         (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))));
+        }
+
+        private static IEnumerable<SyntaxKind> ComplexityIncreasingKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.SwitchStatement, 
+                    SyntaxKind.LabeledStatement,
+                    SyntaxKind.WhileStatement,
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.LogicalAndExpression,
+                    SyntaxKind.LogicalOrExpression,
+                    SyntaxKind.CaseSwitchLabel,
+                };
+            }
         }
 
         // TODO What about lambdas?

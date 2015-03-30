@@ -51,7 +51,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 SyntaxKind.LogicalOrExpression, SyntaxKind.LogicalAndExpression);
         }
 
-        private void ReportDereference(BinaryExpressionSyntax binaryExpression, SyntaxKind comparisonOperator, SyntaxNodeAnalysisContext c)
+        private void ReportDereference(BinaryExpressionSyntax binaryExpression, SyntaxKind comparisonOperator, 
+            SyntaxNodeAnalysisContext c)
         {
             var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
             if (binaryParent != null && 
@@ -91,25 +92,32 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             }
         }
 
-        private static void CheckFollowingExpressions(SyntaxNodeAnalysisContext c, int currentExpressionIndex, List<ExpressionSyntax> expressionsInChain,
+        private static void CheckFollowingExpressions(SyntaxNodeAnalysisContext c, int currentExpressionIndex,
+            List<ExpressionSyntax> expressionsInChain,
             ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax comparisonToNull)
         {
-            var expandedExpressionComparedToNull = Simplifier.Expand(expressionComparedToNull, c.SemanticModel, new AdhocWorkspace());
-            using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
+            using (var workspace = new AdhocWorkspace())
             {
-                for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
+                var expandedExpressionComparedToNull = Simplifier.Expand(expressionComparedToNull, c.SemanticModel,
+                    workspace);
+
+                using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                 {
-                    foreach (var descendant in expressionsInChain[j]
-                        .DescendantNodes()
-                        .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
-                                             eqChecker.AreEquivalent(
-                                                 expandedExpressionComparedToNull, descendant, false))
-                        .Where(descendant =>
-                            descendant.Parent is MemberAccessExpressionSyntax ||
-                            descendant.Parent is ElementAccessExpressionSyntax))
+                    for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
-                            expressionComparedToNull.ToString()));
+                        foreach (var descendant in expressionsInChain[j]
+                            .DescendantNodes()
+                            .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
+                                                 eqChecker.AreEquivalent(
+                                                     expandedExpressionComparedToNull, descendant, false))
+                            .Where(descendant =>
+                                descendant.Parent is MemberAccessExpressionSyntax ||
+                                descendant.Parent is ElementAccessExpressionSyntax)
+                            .ToList())
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
+                                expressionComparedToNull.ToString()));
+                        }
                     }
                 }
             }

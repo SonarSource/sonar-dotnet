@@ -12,26 +12,32 @@ namespace NSonarQubeAnalyzer
     {
         public static Solution GetSolutionFromFiles(params string[] filePaths)
         {
-            var project = new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof(object).Assembly));
-
-            foreach (var filePath in filePaths)
+            using (var workspace = new AdhocWorkspace())
             {
-                var file = new FileInfo(filePath);
-                var document = project.AddDocument(file.Name, File.ReadAllText(file.FullName, Encoding.UTF8));
-                project = document.Project;
-            }
+                var project = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
+                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly));
 
-            return project.Solution;
+                foreach (var filePath in filePaths)
+                {
+                    var file = new FileInfo(filePath);
+                    var document = project.AddDocument(file.Name, File.ReadAllText(file.FullName, Encoding.UTF8));
+                    project = document.Project;
+                }
+
+                return project.Solution;
+            }
         }
 
         public static Solution GetSolutionFromText(string text)
         {
-            return new AdhocWorkspace().CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
-                .AddDocument("foo.cs", text)
-                .Project
-                .Solution;
+            using (var workspace = new AdhocWorkspace())
+            {
+                return workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
+                    .AddMetadataReference(MetadataReference.CreateFromAssembly(typeof (object).Assembly))
+                    .AddDocument("foo.cs", text)
+                    .Project
+                    .Solution;
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace NSonarQube.RuleDescriptor.RuleDescriptors
             {
                 return new XmlDocument().CreateCDataSection(Description);
             }
-            set { Description = value.Value; }
+            set { Description = value == null ? "" : value.Value; }
         }
 
         [XmlElement("tag")]

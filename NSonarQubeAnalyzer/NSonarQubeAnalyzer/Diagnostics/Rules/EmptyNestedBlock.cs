@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -62,13 +63,23 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         private static bool IsNested(BlockSyntax node)
         {
-            var parent = node.Parent;
-            return !parent.IsKind(SyntaxKind.ConstructorDeclaration) &&
-                !parent.IsKind(SyntaxKind.DestructorDeclaration) &&
-                !parent.IsKind(SyntaxKind.MethodDeclaration) &&
-                !parent.IsKind(SyntaxKind.SimpleLambdaExpression) &&
-                !parent.IsKind(SyntaxKind.ParenthesizedLambdaExpression) &&
-                !parent.IsKind(SyntaxKind.AnonymousMethodExpression);
+            return !AllowedContainerKinds.Contains(node.Parent.Kind());
+        }
+
+        private static IEnumerable<SyntaxKind> AllowedContainerKinds
+        {
+            get
+            {
+                return new[]
+                {
+                    SyntaxKind.ConstructorDeclaration,
+                    SyntaxKind.DestructorDeclaration, 
+                    SyntaxKind.MethodDeclaration,
+                    SyntaxKind.SimpleLambdaExpression,
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.AnonymousMethodExpression
+                };
+            }
         }
 
         private static bool IsEmpty(BlockSyntax node)
