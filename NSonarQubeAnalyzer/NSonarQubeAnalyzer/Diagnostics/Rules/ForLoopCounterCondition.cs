@@ -19,15 +19,16 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
     {
         internal const string DiagnosticId = "S1994";
         internal const string Description = @"""for"" loop incrementers should modify the variable being tested in the loop's stop condition";
-        internal const string MessageFormat = @"This loop's stop condition does not test variables updated by the incrementer.";
+        internal const string MessageFormatNotEmpty = @"This loop's stop condition tests ""{0}"" but the incrementer updates ""{1}"".";
+        internal const string MessageFormatEmpty = @"This loop's stop incrementer updates ""{0}"" but the stop condition doesn't test any variables.";
         internal const string Category = "SonarQube";
         internal const Severity RuleSeverity = Severity.Critical; 
         internal const bool IsActivatedByDefault = true;
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), true);
+        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, "{0}", Category, RuleSeverity.ToDiagnosticSeverity(), true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
-        
+
         public override void Initialize(AnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(
@@ -35,21 +36,32 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 {
                     var forNode = (ForStatementSyntax)c.Node;
                     
-                    var incrementorSymbols = GetIncrementorSymbols(forNode, c.SemanticModel).ToList();
+                    var incrementedSymbols = GetIncrementorSymbols(forNode, c.SemanticModel).ToList();
                     
-                    if (!incrementorSymbols.Any())
+                    if (!incrementedSymbols.Any())
                     {
                         return;
                     }
 
                     var conditionSymbols = GetReadSymbolsCondition(forNode, c.SemanticModel).ToList();
 
-                    if (conditionSymbols.Intersect(incrementorSymbols).Any())
+                    if (conditionSymbols.Intersect(incrementedSymbols).Any())
                     {
                         return;
                     }
 
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation()));
+                    var incrementedVariables = string.Join(",", incrementedSymbols.Select(s => s.Name));
+                    if (conditionSymbols.Any())
+                    {
+                        var conditionVariables = string.Join(",", conditionSymbols.Select(s=>s.Name));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(), 
+                            string.Format(MessageFormatNotEmpty, incrementedVariables, conditionVariables)));
+                    }
+                    else
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(),
+                            string.Format(MessageFormatEmpty, incrementedVariables)));
+                    }
 
                 },
                 SyntaxKind.ForStatement);
