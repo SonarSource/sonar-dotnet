@@ -63,9 +63,9 @@ namespace NSonarQube.RuleDescriptor
             var parameters = analyzerType.GetProperties()
                 .Where(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
 
-            foreach (var propertyInfo in parameters)
+            foreach (var ruleParameter in parameters
+                .Select(propertyInfo => propertyInfo.GetCustomAttributes<RuleParameterAttribute>().First()))
             {
-                var ruleParameter = propertyInfo.GetCustomAttributes<RuleParameterAttribute>().First();
                 ruleDescriptor.Parameters.Add(
                     new RuleParameter
                     {
