@@ -25,7 +25,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        public int Maximum;
+        [RuleParameter("maximumFileLocThreshold", PropertyType.Integer, "The maximum number of lines allowed in a file", "1000")]
+        public int Maximum { get; set; }
 
         public override void Initialize(AnalysisContext context)
         {
