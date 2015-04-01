@@ -34,41 +34,31 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterCompilationEndAction(
-                c =>
+            context.RegisterSyntaxNodeAction(c =>
+            {
+                var compilation = CurrentSolution.Projects.First().GetCompilationAsync().Result;
+                var syntaxTree = compilation.SyntaxTrees.First();
+                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+
+                var declaration = (VariableDeclaratorSyntax) c.Node;
+
+                var symbol = semanticModel.GetDeclaredSymbol(declaration);
+
+                if (symbol == null || symbol.Kind != SymbolKind.Local)
                 {
-                    var compilation = CurrentSolution.Projects.First().GetCompilationAsync().Result;
-                    var syntaxTree = compilation.SyntaxTrees.First();
-                    var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                    
-                    var variableDeclaratorNodes = syntaxTree
-                        .GetCompilationUnitRoot()
-                        .DescendantNodesAndSelf()
-                        .Where(e => e.IsKind(SyntaxKind.VariableDeclarator))
-                        .Select(e => (VariableDeclaratorSyntax)e);
-                    
-                    foreach (var variableDeclaratorNode in variableDeclaratorNodes)
-                    {
-                        var symbol = semanticModel.GetDeclaredSymbol(variableDeclaratorNode);
-                        
-                        if (symbol == null || symbol.Kind != SymbolKind.Local)
-                        {
-                            continue;
-                        }
+                    return;
+                }
 
-                        var references = GetReferencesForSymbol(symbol);
+                var references = GetReferencesForSymbol(symbol).ToList();
 
-                        if (references.Any())
-                        {
-                            continue;
-                        }
+                if (references.Any())
+                {
+                    return;
+                }
 
-                        foreach (var syntaxReference in symbol.DeclaringSyntaxReferences)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, syntaxReference.GetSyntax().GetLocation(), symbol.Name));
-                        }
-                    }
-                });
+                c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), symbol.Name));
+            },
+                SyntaxKind.VariableDeclarator);
         }
 
         private IEnumerable<SyntaxNode> GetReferencesForSymbol(ISymbol symbol)
