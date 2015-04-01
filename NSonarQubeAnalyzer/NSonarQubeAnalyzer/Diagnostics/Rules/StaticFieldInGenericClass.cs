@@ -46,14 +46,14 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
                     var fields = classDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
-                        .Where(f => f.Modifiers.Any(m => m.Text == "static"))
+                        .Where(f => f.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
                         .ToList();
 
                     fields.ForEach(field => ReportMember(field, field.Declaration.Type, typeParameterNames, c));
 
                     var properties = classDeclaration.Members
                         .OfType<PropertyDeclarationSyntax>()
-                        .Where(p => p.Modifiers.Any(m => m.Text == "static"))
+                        .Where(p => p.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
                         .ToList();
 
                     properties.ForEach(property => ReportMember(property, property.Type, typeParameterNames, c));

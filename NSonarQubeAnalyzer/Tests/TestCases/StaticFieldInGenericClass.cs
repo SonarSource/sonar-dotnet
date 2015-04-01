@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
+    internal class C
+    {
+        private static Dictionary<string, List<int>> Dict; 
+    }
+
     class StaticFieldInGenericClass<T/*comment*/, /*comment*/U>
     {
         private static Dictionary<string, List<T>> Dict; 
