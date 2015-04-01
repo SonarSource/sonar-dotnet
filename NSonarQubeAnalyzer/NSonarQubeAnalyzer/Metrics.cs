@@ -194,8 +194,18 @@ namespace NSonarQubeAnalyzer
                     n =>
                         // TODO What about the null coalescing operator?
                         ComplexityIncreasingKinds.Contains(n.Kind()) ||
-                        (n.IsKind(SyntaxKind.ReturnStatement) && !IsLastStatement(n)) ||
-                        (IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block))));
+                        IsReturnButNotLast(n) ||
+                        IsFunctionAndHasBlock(n));
+        }
+
+        private static bool IsFunctionAndHasBlock(SyntaxNode n)
+        {
+            return IsFunction(n) && n.ChildNodes().Any(c => c.IsKind(SyntaxKind.Block));
+        }
+
+        private static bool IsReturnButNotLast(SyntaxNode n)
+        {
+            return n.IsKind(SyntaxKind.ReturnStatement) && !IsLastStatement(n);
         }
 
         // TODO What about lambdas?
