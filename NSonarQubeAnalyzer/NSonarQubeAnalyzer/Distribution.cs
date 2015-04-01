@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 
 namespace NSonarQubeAnalyzer
 {
@@ -30,7 +31,8 @@ namespace NSonarQubeAnalyzer
 
         public override string ToString()
         {
-            return string.Join(";", Ranges.Zip(Values, (r, v) => r.ToString() + "=" + v.ToString()));
+            return string.Join(";", 
+                Ranges.Zip(Values, (r, v) => string.Format(CultureInfo.InvariantCulture, "{0}={1}", r, v)));
         }
     }
 }

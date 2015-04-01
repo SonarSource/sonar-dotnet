@@ -110,7 +110,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 {
                     for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
                     {
-                        foreach (var descendant in expressionsInChain[j]
+                        if (expressionsInChain[j]
                             .DescendantNodes()
                             .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
                                                  eqChecker.AreEquivalent(
@@ -118,7 +118,8 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                             .Where(descendant =>
                                 descendant.Parent is MemberAccessExpressionSyntax ||
                                 descendant.Parent is ElementAccessExpressionSyntax)
-                            .ToList())
+                            .ToList()
+                            .Any())
                         {
                             c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
                                 expressionComparedToNull.ToString()));

@@ -56,7 +56,7 @@ namespace NSonarQubeAnalyzer
             var noSonar = ImmutableHashSet.CreateBuilder<int>();
             var nonBlank = ImmutableHashSet.CreateBuilder<int>();
 
-            foreach (SyntaxTrivia trivia in tree.GetRoot().DescendantTrivia())
+            foreach (var trivia in tree.GetRoot().DescendantTrivia())
             {
                 if (!IsComment(trivia) ||
                     ignoreHeaderComments && trivia.Token.GetPreviousToken().IsKind(SyntaxKind.None))

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -48,16 +49,16 @@ namespace NSonarQubeAnalyzer
 
                         xmlOut.WriteStartElement("Metrics");
 
-                        xmlOut.WriteElementString("Lines", metrics.Lines().ToString());
-                        xmlOut.WriteElementString("Classes", metrics.Classes().ToString());
-                        xmlOut.WriteElementString("Accessors", metrics.Accessors().ToString());
-                        xmlOut.WriteElementString("Statements", metrics.Statements().ToString());
-                        xmlOut.WriteElementString("Functions", metrics.Functions().ToString());
-                        xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString());
-                        xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString());
+                        xmlOut.WriteElementString("Lines", metrics.Lines().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("Classes", metrics.Classes().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("Accessors", metrics.Accessors().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("Statements", metrics.Statements().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("Functions", metrics.Functions().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("PublicApi", metrics.PublicApi().ToString(CultureInfo.InvariantCulture));
+                        xmlOut.WriteElementString("PublicUndocumentedApi", metrics.PublicUndocumentedApi().ToString(CultureInfo.InvariantCulture));
 
                         var complexity = metrics.Complexity();
-                        xmlOut.WriteElementString("Complexity", complexity.ToString());
+                        xmlOut.WriteElementString("Complexity", complexity.ToString(CultureInfo.InvariantCulture));
 
                         // TODO This is a bit ridiculous, but is how SonarQube works
                         var fileComplexityDistribution = new Distribution(0, 5, 10, 20, 30, 60, 90);
@@ -71,13 +72,13 @@ namespace NSonarQubeAnalyzer
                         xmlOut.WriteStartElement("NoSonar");
                         foreach (var line in comments.NoSonar)
                         {
-                            xmlOut.WriteElementString("Line", line.ToString());
+                            xmlOut.WriteElementString("Line", line.ToString(CultureInfo.InvariantCulture));
                         }
                         xmlOut.WriteEndElement();
                         xmlOut.WriteStartElement("NonBlank");
                         foreach (var line in comments.NonBlank)
                         {
-                            xmlOut.WriteElementString("Line", line.ToString());
+                            xmlOut.WriteElementString("Line", line.ToString(CultureInfo.InvariantCulture));
                         }
                         xmlOut.WriteEndElement();
                         xmlOut.WriteEndElement();
@@ -85,7 +86,7 @@ namespace NSonarQubeAnalyzer
                         xmlOut.WriteStartElement("LinesOfCode");
                         foreach (var line in metrics.LinesOfCode())
                         {
-                            xmlOut.WriteElementString("Line", line.ToString());
+                            xmlOut.WriteElementString("Line", line.ToString(CultureInfo.InvariantCulture));
                         }
                         xmlOut.WriteEndElement();
 
@@ -99,7 +100,7 @@ namespace NSonarQubeAnalyzer
                             xmlOut.WriteElementString("Id", diagnostic.Id);
                             if (diagnostic.Location != Location.None)
                             {
-                                xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString());
+                                xmlOut.WriteElementString("Line", (diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1).ToString(CultureInfo.InvariantCulture));
                             }
                             xmlOut.WriteElementString("Message", diagnostic.GetMessage());
                             xmlOut.WriteEndElement();
