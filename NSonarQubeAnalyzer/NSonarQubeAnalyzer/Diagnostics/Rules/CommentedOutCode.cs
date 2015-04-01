@@ -48,28 +48,28 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                                         continue;
                                     }
 
-                                    var contents = trivia.ToString().Substring(2);
+                                    var triviaContent = trivia.ToString().Substring(2);
                                     if (trivia.IsKind(SyntaxKind.MultiLineCommentTrivia))
                                     {
-                                        contents = contents.Substring(0, contents.Length - 2);
+                                        triviaContent = triviaContent.Substring(0, triviaContent.Length - 2);
                                     }
 
-                                    var baseLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
+                                    var triviaStartingLineNumber = trivia.GetLocation().GetLineSpan().StartLinePosition.Line;
                                     // TODO Do not duplicate line terminators here
-                                    var lines = contents.Split(new [] { "\r\n", "\n" }, StringSplitOptions.None);
+                                    var triviaLines = triviaContent.Split(new [] { "\r\n", "\n" }, StringSplitOptions.None);
 
-                                    for (var offset = 0; offset < lines.Length; offset++)
+                                    for (var triviaLineNumber = 0; triviaLineNumber < triviaLines.Length; triviaLineNumber++)
                                     {
-                                        if (!IsCode(lines[offset]))
+                                        if (!IsCode(triviaLines[triviaLineNumber]))
                                         {
                                             continue;
                                         }
 
-                                        var lineNumber = baseLineNumber + offset;
-                                        var oldLastCommentedCodeLine = lastCommentedCodeLine;
+                                        var lineNumber = triviaStartingLineNumber + triviaLineNumber;
+                                        var previousLastCommentedCodeLine = lastCommentedCodeLine;
                                         lastCommentedCodeLine = lineNumber;
 
-                                        if (lineNumber == oldLastCommentedCodeLine + 1)
+                                        if (lineNumber == previousLastCommentedCodeLine + 1)
                                         {
                                             continue;
                                         }

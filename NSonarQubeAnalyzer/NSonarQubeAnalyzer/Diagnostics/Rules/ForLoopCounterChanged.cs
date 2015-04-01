@@ -29,7 +29,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
-        private class SideEffectExpression
+        private sealed class SideEffectExpression
         {
             public IImmutableList<SyntaxKind> Kinds;
             public Func<SyntaxNode, SyntaxNode> AffectedExpression;

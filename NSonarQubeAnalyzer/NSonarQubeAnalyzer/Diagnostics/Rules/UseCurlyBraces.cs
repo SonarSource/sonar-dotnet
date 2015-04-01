@@ -27,7 +27,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), true);
 
-        private class CheckedKind
+        private sealed class CheckedKind
         {
             public SyntaxKind Kind;
             public string Value;
