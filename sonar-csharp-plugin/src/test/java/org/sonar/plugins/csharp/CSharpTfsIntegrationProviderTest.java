@@ -19,47 +19,40 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpPluginTest {
+public class CSharpTfsIntegrationProviderTest {
 
   @Test
-  public void getExtensions() {
-    List extensions = new CSharpPlugin().getExtensions();
-
-    Class<?>[] expectedExtensions = new Class<?>[] {
-      CSharp.class,
-      CSharpCommonRulesEngine.class,
-      CSharpCommonRulesDecorator.class,
-      CSharpSourceCodeColorizer.class,
-      CSharpSonarRulesDefinition.class,
-      CSharpSonarWayProfile.class,
-      NSonarQubeAnalyzerExtractor.class,
-      CSharpSensor.class,
-      CSharpCPDMapping.class
-    };
-
-    assertThat(nonProperties(extensions)).contains(expectedExtensions);
-
-    assertThat(extensions).hasSize(
-      expectedExtensions.length
-        + CSharpFxCopProvider.extensions().size()
-        + CSharpCodeCoverageProvider.extensions().size()
-        + CSharpUnitTestResultsProvider.extensions().size()
-        + CSharpTfsIntegrationProvider.extensions().size());
+  public void test() {
+    assertThat(nonProperties(CSharpTfsIntegrationProvider.extensions())).isEmpty();
+    assertThat(propertyKeys(CSharpTfsIntegrationProvider.extensions())).containsOnly(
+      "sonar.cs.tfs.testProjectPattern");
   }
 
-  private static List nonProperties(List extensions) {
-    ImmutableList.Builder builder = ImmutableList.builder();
+  private static Set<String> nonProperties(List extensions) {
+    ImmutableSet.Builder builder = ImmutableSet.builder();
     for (Object extension : extensions) {
       if (!(extension instanceof PropertyDefinition)) {
         builder.add(extension);
+      }
+    }
+    return builder.build();
+  }
+
+  private static Set<String> propertyKeys(List extensions) {
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    for (Object extension : extensions) {
+      if (extension instanceof PropertyDefinition) {
+        PropertyDefinition property = (PropertyDefinition) extension;
+        builder.add(property.key());
       }
     }
     return builder.build();
