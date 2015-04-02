@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarQube.Analyzers.Helpers;
 using SonarQube.Analyzers.Rules;
 using SonarQube.Analyzers.SonarQube.Settings.Sqale;
+using SonarQube.Analyzers.SonarQube.Settings;
 
 namespace SonarQube.Rules.Test.Attributes
 {
@@ -16,8 +17,8 @@ namespace SonarQube.Rules.Test.Attributes
         [TestMethod]
         public void SingleSqaleRemediationAttribute()
         {
-            var analyzers = typeof(AssignmentInsideSubExpression).Assembly
-                .GetTypes()
+            var analyzers = typeof(RuleParameterAttribute).Assembly
+				.GetTypes()
                 .Where(t => t.IsSubclassOf(typeof (DiagnosticAnalyzer)))
                 .ToList();
 
@@ -36,8 +37,8 @@ namespace SonarQube.Rules.Test.Attributes
         [TestMethod]
         public void SqaleSubCharacteristicAttribute()
         {
-            var analyzers = typeof(AssignmentInsideSubExpression).Assembly
-                .GetTypes()
+            var analyzers = typeof(RuleParameterAttribute).Assembly
+				.GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
                 .ToList();
 

@@ -11,13 +11,13 @@ using SonarQube.RuleDescriptor;
 
 namespace SonarQube.Rules.Test
 {
-    [TestClass]
+	[TestClass]
     public class RuleTest
     {
-        [TestMethod]
+		[TestMethod]
         public void RuleHasResourceHtml()
         {
-            var assembly = typeof(AssignmentInsideSubExpression).Assembly;
+			var assembly = typeof(RuleParameterAttribute).Assembly;
 
             var analyzers = assembly
                 .GetTypes()
@@ -51,9 +51,9 @@ namespace SonarQube.Rules.Test
         [TestMethod]
         public void DiagnosticAnalyzerHasRuleAttribute()
         {
-            var assembly = typeof(AssignmentInsideSubExpression).Assembly;
+            var assembly = typeof(RuleParameterAttribute).Assembly;
 
-            var analyzers = assembly
+			var analyzers = assembly
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
                 .ToList();

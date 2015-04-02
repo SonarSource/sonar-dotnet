@@ -58,3 +58,6 @@ packages/
 # Visual Studio profiler files
 *.psess
 *.vsp
+
+# Visual Studio setting folder?
+.vs/
