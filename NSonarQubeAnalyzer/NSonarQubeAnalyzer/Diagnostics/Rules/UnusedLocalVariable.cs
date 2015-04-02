@@ -34,44 +34,50 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(c =>
+            context.RegisterCodeBlockStartAction<SyntaxKind>(cbc =>
             {
-                var compilation = CurrentSolution.Projects.First().GetCompilationAsync().Result;
-                var syntaxTree = compilation.SyntaxTrees.First();
-                var semanticModel = compilation.GetSemanticModel(syntaxTree);
-
-                var declaration = (VariableDeclaratorSyntax) c.Node;
-
-                var symbol = semanticModel.GetDeclaredSymbol(declaration);
-
-                if (symbol == null || symbol.Kind != SymbolKind.Local)
+                var unusedLocals = new List<ISymbol>();
+ 
+                cbc.RegisterSyntaxNodeAction(c =>
                 {
-                    return;
-                }
+                    unusedLocals.AddRange(
+                        ((LocalDeclarationStatementSyntax) c.Node).Declaration
+                            .Variables.Select(variable => c.SemanticModel.GetDeclaredSymbol(variable)));
+                },
+                SyntaxKind.LocalDeclarationStatement);
 
-                var references = GetReferencesForSymbol(symbol).ToList();
-
-                if (references.Any())
+                cbc.RegisterSyntaxNodeAction(c =>
                 {
-                    return;
-                }
-
-                c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), symbol.Name));
-            },
-                SyntaxKind.VariableDeclarator);
-        }
-
-        private IEnumerable<SyntaxNode> GetReferencesForSymbol(ISymbol symbol)
-        {
-            var references = SymbolFinder.FindReferencesAsync(symbol, CurrentSolution).Result.ToList();
-            foreach (var referencedSymbol in references)
-            {
-                foreach (var referenceLocation in referencedSymbol.Locations)
+                    var variableDeclarationSyntax = ((UsingStatementSyntax)c.Node).Declaration;
+                    if (variableDeclarationSyntax != null)
+                    {
+                        unusedLocals.AddRange(
+                            variableDeclarationSyntax
+                                .Variables.Select(variable => c.SemanticModel.GetDeclaredSymbol(variable)));
+                    }
+                },
+                SyntaxKind.UsingStatement);
+ 
+                cbc.RegisterSyntaxNodeAction(c =>
                 {
-                    var syntaxTree = referenceLocation.Location.SourceTree;
-                    yield return syntaxTree.GetRoot().FindNode(referenceLocation.Location.SourceSpan);
-                }
-            }
+                    var symbolInfo = c.SemanticModel.GetSymbolInfo(c.Node);
+                    unusedLocals.Remove(symbolInfo.Symbol);
+
+                    foreach (var candidateSymbol in symbolInfo.CandidateSymbols)
+                    {
+                        unusedLocals.Remove(candidateSymbol);
+                    }
+                },
+                SyntaxKind.IdentifierName);
+ 
+                cbc.RegisterCodeBlockEndAction(c =>
+                {
+                    foreach (var unused in unusedLocals)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, unused.Locations.First(), unused.Name));
+                    }
+                });
+            });
         }
     }
 }
