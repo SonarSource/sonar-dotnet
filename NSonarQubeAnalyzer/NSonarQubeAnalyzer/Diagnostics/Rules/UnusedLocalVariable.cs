@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.FindSymbols;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
