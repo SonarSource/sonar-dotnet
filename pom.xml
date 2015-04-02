@@ -51,7 +51,7 @@
   </properties>
 
   <modules>
-    <module>NSonarQubeAnalyzer</module>
+    <module>SonarQube.CSharp</module>
     <module>sonar-csharp-plugin</module>
   </modules>
 

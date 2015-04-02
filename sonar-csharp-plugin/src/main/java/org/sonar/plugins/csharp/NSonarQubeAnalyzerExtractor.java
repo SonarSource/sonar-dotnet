@@ -33,8 +33,9 @@ import java.io.InputStream;
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class NSonarQubeAnalyzerExtractor implements BatchExtension {
 
-  private static final String N_SONARQUBE_ANALYZER = "NSonarQubeAnalyzer";
-  private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_ANALYZER + ".zip";
+  private static final String N_SONARQUBE_ANALYZER = "SonarQube.Runner";
+  private static final String N_SONARQUBE_CSHARP_PRODUCT_NAME = "SonarQube.CSharp";
+  private static final String N_SONARQUBE_ANALYZER_ZIP = N_SONARQUBE_CSHARP_PRODUCT_NAME + ".zip";
   private static final String N_SONARQUBE_ANALYZER_EXE = N_SONARQUBE_ANALYZER + ".exe";
 
   private final ProjectReactor reactor;

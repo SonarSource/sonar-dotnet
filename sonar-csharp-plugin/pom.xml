@@ -30,14 +30,14 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>NSonarQubeAnalyzer</artifactId>
+      <artifactId>SonarQube.CSharp</artifactId>
       <version>${project.version}</version>
       <type>zip</type>
       <scope>provided</scope>
     </dependency>
 	<dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>NSonarQubeAnalyzer</artifactId>
+      <artifactId>SonarQube.CSharp</artifactId>
       <version>${project.version}</version>
       <classifier>rule-resources</classifier>
     </dependency>
@@ -105,7 +105,7 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
           <execution>
-		    <id>copy-NSonarQubeAnalyzer</id>
+		    <id>copy-SonarQube.CSharp</id>
             <goals>
               <goal>copy</goal>
             </goals>
@@ -115,7 +115,7 @@
               <artifactItems>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
-                  <artifactId>NSonarQubeAnalyzer</artifactId>
+                  <artifactId>SonarQube.CSharp</artifactId>
                   <version>${project.version}</version>
                   <type>zip</type>
                   <outputDirectory>${project.build.outputDirectory}</outputDirectory>
@@ -134,7 +134,7 @@
               <artifactItems>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
-                  <artifactId>NSonarQubeAnalyzer</artifactId>
+                  <artifactId>SonarQube.CSharp</artifactId>
                   <version>${project.version}</version>
                   <classifier>rule-resources</classifier>
                 </artifactItem>
