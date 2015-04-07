@@ -22,7 +22,7 @@ namespace SonarQube.Analyzers.Rules
         internal const Severity RuleSeverity = Severity.Critical; 
         internal const bool IsActivatedByDefault = true;
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), true);
+        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
 
         internal static SyntaxKind[] SyntaxElementsToCheck = 
         {

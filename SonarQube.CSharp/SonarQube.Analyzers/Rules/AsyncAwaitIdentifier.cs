@@ -23,7 +23,7 @@ namespace SonarQube.Analyzers.Rules
         internal const Severity RuleSeverity = Severity.Major;
         internal const bool IsActivatedByDefault = true;
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), true);
+        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
 
         private static readonly IImmutableSet<string> AsyncOrAwait = ImmutableHashSet.Create("async", "await");
 

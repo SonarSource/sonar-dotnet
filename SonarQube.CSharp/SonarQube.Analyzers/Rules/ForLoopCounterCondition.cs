@@ -26,7 +26,7 @@ namespace SonarQube.Analyzers.Rules
         internal const Severity RuleSeverity = Severity.Critical; 
         internal const bool IsActivatedByDefault = true;
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, "{0}", Category, RuleSeverity.ToDiagnosticSeverity(), true);
+        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, "{0}", Category, RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 
