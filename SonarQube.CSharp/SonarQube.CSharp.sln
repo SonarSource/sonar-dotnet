@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		AssemblyInfo.Shared.cs = AssemblyInfo.Shared.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.Analyzers", "SonarQube.Analyzers\SonarQube.Analyzers.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.Analyzers.Extra", "SonarQube.Analyzers.Extra\SonarQube.Analyzers.Extra.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
 EndProject
@@ -22,9 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.CodeFixes", "Sona
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.CSharp.Vsix", "SonarQube.CSharp.Vsix\SonarQube.CSharp.Vsix.csproj", "{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.Analyzers.Vs", "SonarQube.Analyzers.Vs\SonarQube.Analyzers.Vs.csproj", "{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.Vs.Test", "SonarQube.Vs.Test\SonarQube.Vs.Test.csproj", "{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarQube.Analyzers", "SonarQube.Analyzers\SonarQube.Analyzers.csproj", "{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,24 +108,11 @@ Global
 		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Release|x86.ActiveCfg = Release|Any CPU
 		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Release|x86.Build.0 = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Debug|x86.Build.0 = Debug|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|x86.ActiveCfg = Release|Any CPU
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4AC7D054-B645-46D7-9671-D666BCE0C745} = {B7233F78-E142-4882-B084-7C83BE472109}
-		{6EE7FA8D-31AA-42D1-B45C-01582C7EE1D2} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 EndGlobal

@@ -59,11 +59,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SonarQube.Analyzers.Vs\SonarQube.Analyzers.Vs.csproj">
-      <Project>{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}</Project>
-      <Name>SonarQube.Analyzers.Vs</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    <ProjectReference Include="..\SonarQube.Analyzers\SonarQube.Analyzers.csproj">
+      <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
+      <Name>SonarQube.Analyzers</Name>
     </ProjectReference>
     <ProjectReference Include="..\SonarQube.CodeFixes\SonarQube.CodeFixes.csproj">
       <Project>{48971A5B-796A-4D6B-9CC8-8554124A0462}</Project>

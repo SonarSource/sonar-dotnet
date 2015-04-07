@@ -126,8 +126,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SonarQube.Analyzers\SonarQube.Analyzers.csproj">
+    <ProjectReference Include="..\SonarQube.Analyzers.Extra\SonarQube.Analyzers.Extra.csproj">
       <Project>{4c1bb6ce-645f-400b-b491-af7bb40e5c01}</Project>
+      <Name>SonarQube.Analyzers.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SonarQube.Analyzers\SonarQube.Analyzers.csproj">
+      <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
       <Name>SonarQube.Analyzers</Name>
     </ProjectReference>
   </ItemGroup>

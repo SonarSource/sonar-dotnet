@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-	<Metadata>
-		<Identity Id="SonarQube.CSharp.Vsix.Microsoft.5a69f2bd-2501-4759-b280-e281104abfb7" Version="1.0" Language="en-US" Publisher="SonarSource" />
-		<DisplayName>SonarQube CSharp</DisplayName>
-		<Description xml:space="preserve">SonarQube C# rules</Description>
-	</Metadata>
-	<Installation>
-		<InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0]" />
-		<InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinExpress" />
-		<InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinDesktopExpress" />
-		<InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VWDExpress" />
-		<InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Community" />
-	</Installation>
-	<Dependencies>
-		<Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-	</Dependencies>
-	<Assets>
-		<Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarQube.Analyzers.Vs" Path="|SonarQube.Analyzers.Vs|" />
-		<Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" Path="|SonarQube.Analyzers.Vs|" d:ProjectName="SonarQube.Analyzers.Vs" />
-		<Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarQube.CodeFixes" Path="|SonarQube.CodeFixes|" />
-		<Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarQube.CodeFixes" Path="|SonarQube.CodeFixes|" />
-	</Assets>
+    <Metadata>
+        <Identity Id="SonarQube.CSharp.Vsix.Microsoft.5a69f2bd-2501-4759-b280-e281104abfb7" Version="1.1" Language="en-US" Publisher="SonarSource" />
+        <DisplayName>SonarQube CSharp</DisplayName>
+        <Description xml:space="preserve">SonarQube C# rules</Description>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0,15.0)" />
+        <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinExpress" />
+        <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VSWinDesktopExpress" />
+        <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.VWDExpress" />
+        <InstallationTarget Version="[14.0,15.0)" Id="Microsoft.VisualStudio.Community" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarQube.Analyzers" Path="|SonarQube.Analyzers|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" Path="|SonarQube.Analyzers|" />
+        <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarQube.CodeFixes" Path="|SonarQube.CodeFixes|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarQube.CodeFixes" Path="|SonarQube.CodeFixes|" />
+    </Assets>
 </PackageManifest>

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}</ProjectGuid>
+    <ProjectGuid>{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SonarQube.Analyzers</RootNamespace>
-    <AssemblyName>SonarQube.Analyzers</AssemblyName>
+    <AssemblyName>SonarQube.Analyzers.Extra</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -87,139 +87,64 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ConditionalHelper.cs" />
-    <Compile Include="Helpers\EnumHelper.cs" />
-    <Compile Include="Helpers\EquivalenceChecker.cs" />
+    <Compile Include="Distribution.cs" />
+    <Compile Include="Metrics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\AssignmentInsideSubExpression.cs" />
-    <Compile Include="Rules\AsyncAwaitIdentifier.cs" />
-    <Compile Include="Rules\AtLeastThreeCasesInSwitch.cs" />
-    <Compile Include="Rules\BreakOutsideSwitch.cs" />
-    <Compile Include="Rules\CatchRethrow.cs" />
-    <Compile Include="Rules\CommentedOutCode.cs" />
-    <Compile Include="Rules\ConditionalStructureSameCondition.cs" />
-    <Compile Include="Rules\ConditionalStructureSameImplementation.cs" />
-    <Compile Include="Rules\ElseIfWithoutElse.cs" />
-    <Compile Include="Rules\EmptyCatch.cs" />
-    <Compile Include="Rules\EmptyMethod.cs" />
-    <Compile Include="Rules\EmptyNestedBlock.cs" />
-    <Compile Include="Rules\EmptyStatement.cs" />
-    <Compile Include="Rules\ForLoopCounterChanged.cs" />
-    <Compile Include="Rules\ForLoopCounterCondition.cs" />
-    <Compile Include="Rules\IdenticalExpressionsInBinaryOp.cs" />
-    <Compile Include="Rules\IfConditionalAlwaysTrueOrFalse.cs" />
-    <Compile Include="Rules\MultilineBlocksWithoutBrace.cs" />
-    <Compile Include="Rules\ObjectCreatedDropped.cs" />
-    <Compile Include="Rules\ParameterAssignedTo.cs" />
-    <Compile Include="Rules\RightCurlyBraceStartsLine.cs" />
-    <Compile Include="Rules\SelfAssignedVariables.cs" />
-    <Compile Include="Rules\ShortCircuitNullPointerDereference.cs" />
-    <Compile Include="Rules\StaticFieldInGenericClass.cs" />
-    <Compile Include="Rules\SwitchWithoutDefault.cs" />
-    <Compile Include="Rules\TabCharacter.cs" />
-    <Compile Include="Rules\UnnecessaryBooleanLiteral.cs" />
-    <Compile Include="Rules\UnusedLocalVariable.cs" />
-    <Compile Include="Rules\UseCurlyBraces.cs" />
-    <Compile Include="SonarQube.Settings\PropertyType.cs" />
-    <Compile Include="SonarQube.Settings\RuleAttribute.cs" />
-    <Compile Include="SonarQube.Settings\RuleParameterAttribute.cs" />
-    <Compile Include="SonarQube.Settings\Severity.cs" />
-    <Compile Include="SonarQube.Settings\Sqale\NoSqaleRemediationAttribute.cs" />
-    <Compile Include="SonarQube.Settings\Sqale\SqaleConstantRemediationAttribute.cs" />
-    <Compile Include="SonarQube.Settings\Sqale\SqaleRemediationAttribute.cs" />
-    <Compile Include="SonarQube.Settings\Sqale\SqaleSubCharacteristic.cs" />
-    <Compile Include="SonarQube.Settings\Sqale\SqaleSubCharacteristicAttribute.cs" />
-    <Compile Include="SonarQube.Settings\TagsAttribute.cs" />
+    <Compile Include="Rules\ClassName.cs" />
+    <Compile Include="Rules\CommentRegularExpression.cs" />
+    <Compile Include="Rules\ExpressionComplexity.cs" />
+    <Compile Include="Rules\FileLines.cs" />
+    <Compile Include="Rules\FunctionComplexity.cs" />
+    <Compile Include="Rules\LineLength.cs" />
+    <Compile Include="Rules\MagicNumber.cs" />
+    <Compile Include="Rules\MethodName.cs" />
+    <Compile Include="Rules\TooManyLabelsInSwitch.cs" />
+    <Compile Include="Rules\TooManyParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1301.html" />
+    <EmbeddedResource Include="Rules.Description\FileLoc.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\AssignmentInsideSubExpression.html" />
+    <EmbeddedResource Include="Rules.Description\FunctionComplexity.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\AsyncAwaitIdentifier.html" />
+    <EmbeddedResource Include="Rules.Description\LineLength.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BreakOutsideSwitch.html" />
+    <EmbeddedResource Include="Rules.Description\MagicNumber.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\CommentedCode.html" />
+    <EmbeddedResource Include="Rules.Description\S100.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\ParameterAssignedTo.html" />
+    <EmbeddedResource Include="Rules.Description\S101.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S2737.html" />
+    <EmbeddedResource Include="Rules.Description\S1067.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1862.html" />
+    <EmbeddedResource Include="Rules.Description\S107.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S2486.html" />
+    <EmbeddedResource Include="Rules.Description\S124.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1481.html" />
+    <EmbeddedResource Include="Rules.Description\TodoComment.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S121.html" />
+    <EmbeddedResource Include="Rules.Description\XPath.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S2681.html" />
+    <ProjectReference Include="..\SonarQube.Analyzers\SonarQube.Analyzers.csproj">
+      <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
+      <Name>SonarQube.Analyzers</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S2743.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\SwitchWithoutDefault.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1697.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1871.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1848.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1764.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S126.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S127.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1186.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S108.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1116.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1994.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1145.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1109.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1656.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\TabCharacter.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\S1125.html" />
+    <EmbeddedResource Include="Rules.Description\S1479.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

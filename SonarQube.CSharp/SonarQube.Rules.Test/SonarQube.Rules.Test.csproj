@@ -307,8 +307,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SonarQube.Analyzers.Extra\SonarQube.Analyzers.Extra.csproj">
+      <Project>{4c1bb6ce-645f-400b-b491-af7bb40e5c01}</Project>
+      <Name>SonarQube.Analyzers.Extra</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SonarQube.Analyzers\SonarQube.Analyzers.csproj">
-      <Project>{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}</Project>
+      <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
       <Name>SonarQube.Analyzers</Name>
     </ProjectReference>
     <ProjectReference Include="..\SonarQube.RuleDescriptor\SonarQube.RuleDescriptor.csproj">
