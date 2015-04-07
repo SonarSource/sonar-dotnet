@@ -31,15 +31,13 @@ namespace SonarQube.Analyzers.Rules
 
         public override void Initialize(AnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Node))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
-                    }
-                },
-                SyntaxKind.CompilationUnit);
+			context.RegisterSyntaxTreeAction(
+				c => {					
+                    foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Tree.GetRoot()))
+					{
+						c.ReportDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
+					}
+				});
         }
 
         private static IEnumerable<SyntaxToken> GetAsyncOrAwaitTokens(SyntaxNode node)
