@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarQube.Analyzers.Helpers;
 using SonarQube.Analyzers.SonarQube.Settings;
 using SonarQube.Analyzers.SonarQube.Settings.Sqale;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarQube.Analyzers.Rules
 {
@@ -32,11 +33,12 @@ namespace SonarQube.Analyzers.Rules
         public override void Initialize(AnalysisContext context)
         {
 			context.RegisterSyntaxTreeAction(
-				c => {					
-                    foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Tree.GetRoot()))
-					{
-						c.ReportDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
-					}
+				c => {
+                    foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Tree.GetRoot())
+                        .Where(token => !token.Parent.AncestorsAndSelf().OfType<IdentifierNameSyntax>().Any()))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, asyncOrAwaitToken.GetLocation()));
+                    }
 				});
         }
 
