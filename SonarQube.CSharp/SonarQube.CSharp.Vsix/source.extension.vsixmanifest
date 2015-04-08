@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SonarQube.CSharp.Vsix.Microsoft.5a69f2bd-2501-4759-b280-e281104abfb7" Version="1.1" Language="en-US" Publisher="SonarSource" />
+        <Identity Id="SonarQube.CSharp.Vsix.Microsoft.5a69f2bd-2501-4759-b280-e281104abfb7" Version="1.0.0.0" Language="en-US" Publisher="SonarSource" />
         <DisplayName>SonarQube CSharp</DisplayName>
-        <Description xml:space="preserve">SonarQube C# rules</Description>
+        <Description xml:space="preserve">This extension provides a subset of SonarQube rules to identify code quality issues in C# source code.</Description>
+        <MoreInfo>http://www.sonarsource.com</MoreInfo>
+        <License>License.txt</License>
+        <Icon>sonarsource_icon_BG_white_small.png</Icon>
+        <PreviewImage>sonarsource_icon_BG_white_large.png</PreviewImage>
+        <Tags>C#, CSharp, SonarQube, Code analysis, Roslyn</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[14.0,15.0)" />

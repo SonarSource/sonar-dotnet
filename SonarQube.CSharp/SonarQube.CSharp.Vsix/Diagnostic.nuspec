@@ -7,13 +7,13 @@
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
     <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <projectUrl>http://www.sonarsource.com</projectUrl>
+    <iconUrl>http://www.sonarsource.com/wp-content/uploads/2012/03/sonarsource_icon_BG_white.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>SonarQube C# rules</description>
+    <description>This package provides a subset of SonarQube rules to identify code quality issues in C# source code.</description>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright SounarSource, 2015</copyright>
-    <tags>SonarQube, CSharp, analyzers</tags>
+    <copyright>Copyright SonarSource 2015</copyright>
+    <tags>C#, CSharp, SonarQube, Code analysis, Roslyn</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>
