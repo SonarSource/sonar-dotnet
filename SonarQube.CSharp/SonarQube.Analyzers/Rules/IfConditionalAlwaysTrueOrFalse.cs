@@ -17,7 +17,7 @@ namespace SonarQube.Analyzers.Rules
     {
         internal const string DiagnosticId = "S1145";
         internal const string Description = "\"if\" statement conditions should not unconditionally evaluate to \"true\" or to \"false\"";
-        internal const string MessageFormat = "Replace this \"switch\" statement with \"if\" statements to increase readability.";
+        internal const string MessageFormat = "Remove this \"if\" statement.";
         internal const string Category = "SonarQube";
         internal const Severity RuleSeverity = Severity.Major; 
         internal const bool IsActivatedByDefault = true;
