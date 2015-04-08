@@ -14,7 +14,7 @@ namespace SonarQube.Rules.Test.Rules
             var rules = ImmutableArray.Create(
                 new CommentRegularExpressionRule
                 {
-                    Descriptor = new DiagnosticDescriptor("id1", "", "", "SonarQube", DiagnosticSeverity.Warning, true),
+                    Descriptor = Analyzers.Rules.CommentRegularExpression.CreateDiagnosticDescriptor("id1", ""),
                     RegularExpression = "(?i)TODO"
                 });
 

@@ -27,7 +27,10 @@ namespace SonarQube.Analyzers.Rules
 
         private readonly ExpressionSyntax nullExpression = SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
 
-        internal static DiagnosticDescriptor Rule = new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category, RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault);
+        internal static DiagnosticDescriptor Rule =
+            new DiagnosticDescriptor(DiagnosticId, Description, MessageFormat, Category,
+                RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault,
+                helpLinkUri: "http://nemo.sonarqube.org/coding_rules#rule_key=csharpsquid%3AS1697");
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return ImmutableArray.Create(Rule); } }
 

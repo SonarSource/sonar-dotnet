@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarQube.Analyzers.Helpers;
 using SonarQube.Analyzers.SonarQube.Settings;
 using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 
@@ -18,6 +19,7 @@ namespace SonarQube.Analyzers.Rules
 	[DiagnosticAnalyzer(LanguageNames.CSharp)]
 	[NoSqaleRemediation]
 	[Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault, true)]
+    [LegacyKey("CommentRegularExpression")]
 	public class CommentRegularExpression : DiagnosticAnalyzer
 	{
 		internal const string DiagnosticId = "S124";
@@ -26,8 +28,15 @@ namespace SonarQube.Analyzers.Rules
 		internal const string Category = "SonarQube";
 		internal const Severity RuleSeverity = Severity.Major;
 		internal const bool IsActivatedByDefault = false;
+        
+	    public static DiagnosticDescriptor CreateDiagnosticDescriptor(string diagnosticId, string messageFormat)
+	    {
+            return new DiagnosticDescriptor(diagnosticId, Description, messageFormat, Category,
+                RuleSeverity.ToDiagnosticSeverity(), IsActivatedByDefault,
+                helpLinkUri: "http://nemo.sonarqube.org/coding_rules#rule_key=csharpsquid%3ACommentRegularExpression");
+        }
 
-		public ImmutableArray<CommentRegularExpressionRule> Rules;
+	    public ImmutableArray<CommentRegularExpressionRule> Rules;
 
 		public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { return Rules.Select(r => r.Descriptor).ToImmutableArray(); } }
 

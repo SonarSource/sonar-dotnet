@@ -4,7 +4,7 @@
         <Identity Id="SonarQube.CSharp.Vsix.Microsoft.5a69f2bd-2501-4759-b280-e281104abfb7" Version="1.0.0.0" Language="en-US" Publisher="SonarSource" />
         <DisplayName>SonarQube CSharp</DisplayName>
         <Description xml:space="preserve">This extension provides a subset of SonarQube rules to identify code quality issues in C# source code.</Description>
-        <MoreInfo>http://www.sonarsource.com</MoreInfo>
+        <MoreInfo>http://redirect.sonarsource.com/plugins/csharp.html</MoreInfo>
         <License>License.txt</License>
         <Icon>sonarsource_icon_BG_white_small.png</Icon>
         <PreviewImage>sonarsource_icon_BG_white_large.png</PreviewImage>

@@ -136,9 +136,7 @@ namespace SonarQube.Runner
                     new CommentRegularExpressionRule
                     {
                         // TODO: Add rule description
-                        Descriptor =
-                            new DiagnosticDescriptor(parameters["RuleKey"], "TODO", parameters["message"], "SonarQube",
-                                DiagnosticSeverity.Warning, true),
+                        Descriptor = CommentRegularExpression.CreateDiagnosticDescriptor(parameters["RuleKey"], parameters["message"]),
                         RegularExpression = parameters["regularExpression"]
                     });
             }
