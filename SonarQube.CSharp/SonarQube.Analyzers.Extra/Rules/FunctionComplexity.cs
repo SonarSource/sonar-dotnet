@@ -12,9 +12,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("1h")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.IntegrationTestability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("FunctionComplexity")]
+    [Tags("brain-overload")]
     public class FunctionComplexity : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "FunctionComplexity";
+        internal const string DiagnosticId = "S1541";
         internal const string Description = "Method complexity should not be too high";
         internal const string MessageFormat = "Refactor this method that has a complexity of {1} (which is greater than {0} authorized).";
         internal const string Category = "SonarQube";

@@ -12,12 +12,14 @@ using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 namespace SonarQube.Analyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("10min")]
+    [SqaleConstantRemediation("5min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [Tags("bug", "cwe", "misra")]
+    [LegacyKey("AssignmentInSubExpressionCheck", "AssignmentInSubExpression", "AssignmentWithinCondition", "AssignmentInsideSubExpression")]
     public class AssignmentInsideSubExpression : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "AssignmentInsideSubExpression";
+        internal const string DiagnosticId = "S1121";
         internal const string Description = "Assignment should not be used inside sub-expressions";
         internal const string MessageFormat = "Extract this assignment outside of the sub-expression.";
         internal const string Category = "SonarQube";

@@ -15,9 +15,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("5min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Understandability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("CommentedCode")]
+    [Tags("misra", "unused")]
     public class CommentedOutCode : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "CommentedCode";
+        internal const string DiagnosticId = "S125";
         internal const string Description = "Comment should not include code";
         internal const string MessageFormat = "Remove this commented out code or move it into XML documentation.";
         internal const string Category = "SonarQube";

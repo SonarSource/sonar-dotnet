@@ -10,12 +10,14 @@ using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 namespace SonarQube.Analyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("10min")]
+    [SqaleConstantRemediation("5min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.IntegrationTestability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("ParameterAssignedTo")]
+    [Tags("misra", "pitfall")]
     public class ParameterAssignedTo : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "ParameterAssignedTo";
+        internal const string DiagnosticId = "S1226";
         internal const string Description = "Parameter variable should not be assigned to";
         internal const string MessageFormat = "Remove this assignment to the method parameter '{0}'.";
         internal const string Category = "SonarQube";

@@ -105,16 +105,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\FileLoc.html" />
+    <EmbeddedResource Include="Rules.Description\S104.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\FunctionComplexity.html" />
+    <EmbeddedResource Include="Rules.Description\S1541.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\LineLength.html" />
+    <EmbeddedResource Include="Rules.Description\S103.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\MagicNumber.html" />
+    <EmbeddedResource Include="Rules.Description\S109.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\S100.html" />

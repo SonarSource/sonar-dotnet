@@ -12,9 +12,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("2min")]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
+    [LegacyKey("TabCharacter")]
+    [Tags("convention")]
     public class TabCharacter : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "TabCharacter";
+        internal const string DiagnosticId = "S105";
         internal const string Description = "Tabulation character should not be used";
         internal const string MessageFormat = "Replace all tab characters in this file by sequences of white-spaces.";
         internal const string Category = "SonarQube";

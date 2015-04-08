@@ -12,12 +12,13 @@ using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 namespace SonarQube.Analyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("20min")]
+    [SqaleConstantRemediation("10min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Understandability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("BreakOutsideSwitch")]
     public class BreakOutsideSwitch : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "BreakOutsideSwitch";
+        internal const string DiagnosticId = "S1227";
         internal const string Description = "'break' should not be used outside of 'switch'";
         internal const string MessageFormat = "Refactor the code in order to remove this break statement.";
         internal const string Category = "SonarQube";

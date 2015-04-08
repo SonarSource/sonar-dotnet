@@ -12,9 +12,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("20min")]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
+    [LegacyKey("FileLoc")]
+    [Tags("brain-overload")]
     public class FileLines : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "FileLoc";
+        internal const string DiagnosticId = "S104";
         internal const string Description = "File should not have too many lines";
         internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into smaller files.";
         internal const string Category = "SonarQube";

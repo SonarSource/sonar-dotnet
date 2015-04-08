@@ -19,17 +19,17 @@ namespace SonarQube.Rules.Test
             conf.Files.Should().BeEquivalentTo(@"C:\MyClass1.cs", @"C:\MyClass2.cs");
 
             conf.AnalyzerIds.Should().BeEquivalentTo(
-                "AssignmentInsideSubExpression",
-                "AsyncAwaitIdentifier",
-                "BreakOutsideSwitch",
+                "S1121",
+                "S2306",
+                "S1227",
 
-                "FileLoc",
-                "FunctionComplexity",
-                "LineLength",
+                "S104",
+                "S1541",
+                "S103",
                 "S1479",
                 "S1067",
                 "S107",
-                "MagicNumber",
+                "S109",
                 "S101",
                 "S100",
                 "S124");

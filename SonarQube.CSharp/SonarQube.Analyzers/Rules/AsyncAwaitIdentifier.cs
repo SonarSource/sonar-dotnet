@@ -15,9 +15,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("5min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("AsyncAwaitIdentifier")]
+    [Tags("pitfall")]
     public class AsyncAwaitIdentifier : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "AsyncAwaitIdentifier";
+        internal const string DiagnosticId = "S2306";
         internal const string Description = "'async' and 'await' should not be used as identifier";
         internal const string MessageFormat = "Rename this identifier.";
         internal const string Category = "SonarQube";

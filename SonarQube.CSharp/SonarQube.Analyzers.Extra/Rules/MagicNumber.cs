@@ -14,9 +14,11 @@ namespace SonarQube.Analyzers.Rules
     [SqaleConstantRemediation("5min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("MagicNumber")]
+    [Tags("brain-overload")]
     public class MagicNumber : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "MagicNumber";
+        internal const string DiagnosticId = "S109";
         internal const string Description = "Magic number should not be used";
         internal const string MessageFormat = "Extract this magic number into a constant, variable declaration or an enum.";
         internal const string Category = "SonarQube";

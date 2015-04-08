@@ -11,12 +11,14 @@ using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 namespace SonarQube.Analyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("10min")]
+    [SqaleConstantRemediation("5min")]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.LogicReliability)]
+    [Tags("cert", "cwe", "misra")]
+    [LegacyKey("SwitchWithoutDefault")]
     public class SwitchWithoutDefault : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "SwitchWithoutDefault";
+        internal const string DiagnosticId = "S131";
         internal const string Description = "'switch' statement should have a 'default:' case";
         internal const string MessageFormat = "Add a default: case to this switch.";
         internal const string Category = "SonarQube";

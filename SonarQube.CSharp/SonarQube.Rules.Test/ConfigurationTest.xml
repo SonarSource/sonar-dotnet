@@ -8,16 +8,16 @@
   </Settings>
   <Rules>
     <Rule>
-      <Key>AssignmentInsideSubExpression</Key>
+      <Key>S1121</Key>
     </Rule>
     <Rule>
-      <Key>AsyncAwaitIdentifier</Key>
+      <Key>S2306</Key>
     </Rule>
     <Rule>
-      <Key>BreakOutsideSwitch</Key>
+      <Key>S1227</Key>
     </Rule>
     <Rule>
-      <Key>FileLoc</Key>
+      <Key>S104</Key>
       <Parameters>
         <Parameter>
           <Key>maximumFileLocThreshold</Key>
@@ -26,7 +26,7 @@
       </Parameters>
     </Rule>
     <Rule>
-      <Key>FunctionComplexity</Key>
+      <Key>S1541</Key>
       <Parameters>
         <Parameter>
           <Key>maximumFunctionComplexityThreshold</Key>
@@ -35,7 +35,7 @@
       </Parameters>
     </Rule>
     <Rule>
-      <Key>LineLength</Key>
+      <Key>S103</Key>
       <Parameters>
         <Parameter>
           <Key>maximumLineLength</Key>
@@ -71,7 +71,7 @@
       </Parameters>
     </Rule>
     <Rule>
-      <Key>MagicNumber</Key>
+      <Key>S109</Key>
       <Parameters>
         <Parameter>
           <Key>exceptions</Key>

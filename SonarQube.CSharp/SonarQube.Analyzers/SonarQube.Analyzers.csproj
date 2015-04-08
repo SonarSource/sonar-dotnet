@@ -120,6 +120,7 @@
     <Compile Include="Rules\UnnecessaryBooleanLiteral.cs" />
     <Compile Include="Rules\UnusedLocalVariable.cs" />
     <Compile Include="Rules\UseCurlyBraces.cs" />
+    <Compile Include="SonarQube.Settings\LegacyKeyAttribute.cs" />
     <Compile Include="SonarQube.Settings\PropertyType.cs" />
     <Compile Include="SonarQube.Settings\RuleAttribute.cs" />
     <Compile Include="SonarQube.Settings\RuleParameterAttribute.cs" />
@@ -138,19 +139,19 @@
     <EmbeddedResource Include="Rules.Description\S1301.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\AssignmentInsideSubExpression.html" />
+    <EmbeddedResource Include="Rules.Description\S1121.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\AsyncAwaitIdentifier.html" />
+    <EmbeddedResource Include="Rules.Description\S2306.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\BreakOutsideSwitch.html" />
+    <EmbeddedResource Include="Rules.Description\S1227.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\CommentedCode.html" />
+    <EmbeddedResource Include="Rules.Description\S125.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\ParameterAssignedTo.html" />
+    <EmbeddedResource Include="Rules.Description\S1226.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\S2737.html" />
@@ -174,7 +175,7 @@
     <EmbeddedResource Include="Rules.Description\S2743.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\SwitchWithoutDefault.html" />
+    <EmbeddedResource Include="Rules.Description\S131.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\S1697.html" />
@@ -216,7 +217,7 @@
     <EmbeddedResource Include="Rules.Description\S1656.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Rules.Description\TabCharacter.html" />
+    <EmbeddedResource Include="Rules.Description\S105.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Rules.Description\S1125.html" />

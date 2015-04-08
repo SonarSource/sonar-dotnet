@@ -9,12 +9,14 @@ using SonarQube.Analyzers.SonarQube.Settings.Sqale;
 namespace SonarQube.Analyzers.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SqaleConstantRemediation("2min")]
+    [SqaleConstantRemediation("1min")]
     [SqaleSubCharacteristic(SqaleSubCharacteristic.Readability)]
     [Rule(DiagnosticId, RuleSeverity, Description, IsActivatedByDefault)]
+    [LegacyKey("LineLength")]
+    [Tags("convention")]
     public class LineLength : DiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "LineLength";
+        internal const string DiagnosticId = "S103";
         internal const string Description = "Lines should not be too long";
         internal const string MessageFormat = "Split this {1} characters long line (which is greater than {0} authorized).";
         internal const string Category = "SonarQube";
