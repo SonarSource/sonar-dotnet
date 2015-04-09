@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
-    class ConditionalStructureSameCondition
+    class ConditionalStructureSameCondition_Switch
     {
         public int prop { get; set; }
-        private void doSomething(int i) { }
+        private void doTheRest() { throw new NotSupportedException(); }
+        private void doSomething() { throw new NotSupportedException(); }
+        private void doSomething(int i) { throw new NotSupportedException(); }
+        private void doSomethingDifferent() { throw new NotSupportedException(); }
+        private void doSomething2() { throw new NotSupportedException(); }
         public void Test()
         {
+            var i = 5;
             switch (i)
             {
                 case 1:
@@ -34,6 +39,7 @@ namespace Tests.TestCases
                         doSomething2();
                         break;
                     }
+
                 default: // Noncompliant;
                     doSomething(prop);
                     break;
@@ -50,6 +56,7 @@ namespace Tests.TestCases
                     break;
                 default:
                     doTheRest();
+                    break;
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿#pragma warning disable 659 // overrides AddToHashCodeCombiner instead
+﻿using System.Runtime.InteropServices;
+
+#pragma warning disable 659 // overrides AddToHashCodeCombiner instead
 
 namespace Tests.Diagnostics
 {
@@ -29,7 +31,7 @@ namespace Tests.Diagnostics
             netSalary1 = +1;
             netSalary1 = 0x0;
             netSalary1 = 0x00;
-            netSalary1 = .1;
+            netSalary1 = (decimal).1;
         }
 
         public enum Foo

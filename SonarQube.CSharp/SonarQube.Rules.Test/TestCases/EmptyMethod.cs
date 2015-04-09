@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Tests.Diagnostics
 {
@@ -18,12 +19,12 @@ namespace Tests.Diagnostics
           Console.WriteLine();
         }
 
-        [Attribute]
+        [Conditional("DEBUG")]
         void F4()    // Noncompliant
         {
         }
 
-        void virtual F5()
+        protected virtual void F5()
         {
         }
 

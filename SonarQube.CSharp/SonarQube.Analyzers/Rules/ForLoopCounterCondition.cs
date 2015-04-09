@@ -58,12 +58,12 @@ namespace SonarQube.Analyzers.Rules
                     if (conditionSymbols.Any())
                     {
                         var conditionVariables = string.Join(",", conditionSymbols.Select(s=>s.Name));
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.Condition.GetLocation(),
                             string.Format(CultureInfo.InvariantCulture, MessageFormatNotEmpty, incrementedVariables, conditionVariables)));
                     }
                     else
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, forNode.ForKeyword.GetLocation(),
                             string.Format(CultureInfo.InvariantCulture, MessageFormatEmpty, incrementedVariables)));
                     }
 

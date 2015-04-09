@@ -79,7 +79,7 @@ namespace SonarQube.Analyzers.Rules
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.OriginalDefinition.Name));
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
                         }
                     }
                 },

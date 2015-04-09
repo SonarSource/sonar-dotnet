@@ -8,14 +8,14 @@ namespace Tests.Diagnostics
         {
         }
 
-        public ~EmptyNestedBlock()
+        ~EmptyNestedBlock()
         {
         }
 
-        void F1()
+        void F1(bool b)
         {
             for (int i = 0; i < 42; i++) { }  // Noncompliant
-
+            var a = b;
             switch (a) { /* This commit doesn't count */ } // Noncompliant
 
             try { } // Noncompliant
@@ -33,7 +33,7 @@ namespace Tests.Diagnostics
 
             switch (a)
             {
-                case 1:
+                case true:
                     break;
                 default:
                     break;
@@ -41,9 +41,9 @@ namespace Tests.Diagnostics
 
             unsafe { } // Noncompliant
 
-            var foo1 = x => { }
-            var foo2 = (x) => { }
-            var foo3 = delegate { } 
+            var foo1 = new Action<object>(x => { });
+            var foo2 = new Action<object>((x) => { });
+            var foo3 = new Action(delegate { });
         }
 
         void F2()

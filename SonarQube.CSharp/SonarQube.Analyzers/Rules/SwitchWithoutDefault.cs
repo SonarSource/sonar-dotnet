@@ -40,7 +40,7 @@ namespace SonarQube.Analyzers.Rules
                     var switchNode = (SwitchStatementSyntax)c.Node;
                     if (!HasDefaultLabel(switchNode))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.SwitchKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.SwitchStatement);

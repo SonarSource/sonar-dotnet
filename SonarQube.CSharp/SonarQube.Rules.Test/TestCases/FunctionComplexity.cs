@@ -1,4 +1,6 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+
+namespace Tests.Diagnostics
 {
     public class FunctionComplexity
     {
@@ -36,6 +38,7 @@
                 if (false) { }
                 if (false) { }
                 if (false) { }
+                return 0;
             }
             set // Noncompliant
             {
@@ -66,6 +69,7 @@
             if (false) { }
             if (false) { }
             if (false) { }
+            return null;
         }
     }
 }

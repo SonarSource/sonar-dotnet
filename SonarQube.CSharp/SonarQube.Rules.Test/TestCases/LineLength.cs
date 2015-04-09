@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -6,7 +7,7 @@ namespace Tests.Diagnostics
     {
         public LineLength()
         {
-            Console.WriteLine("This is OK....);
+            Console.WriteLine("This is OK...");
             Console.WriteLine(); // Noncompliant
         }
     }

@@ -8,7 +8,9 @@ namespace Tests.TestCases
 {
     class IdenticalExpressionsInBinaryOp
     {
-        public void Test() 
+        public void doZ() { throw new Exception();}
+        public void doW() { throw new Exception();}
+        public void Test(bool a, bool b)
         {
             if (a == a) //Noncompliant
             {

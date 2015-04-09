@@ -1,8 +1,8 @@
 ﻿namespace Tests.Diagnostics
 {
-    public class FileLines
+    public class FileLines12
     {
-        public FileLines()
+        public FileLines12()
         {
         }
     }

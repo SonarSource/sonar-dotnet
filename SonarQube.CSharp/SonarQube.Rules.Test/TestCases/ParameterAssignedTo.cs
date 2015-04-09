@@ -2,6 +2,14 @@
 
 namespace Tests.Diagnostics
 {
+    public static class ParameterAssignedToStatic
+    {
+        static void f7(this int a)
+        {
+            a = 42; // Noncompliant
+        }
+    }
+
     public class ParameterAssignedTo
     {
         void f1(int a)
@@ -25,7 +33,7 @@ namespace Tests.Diagnostics
             a = 42;
         }
 
-        void f5()
+        static void f5()
         {
         }
 
@@ -35,23 +43,23 @@ namespace Tests.Diagnostics
           e = 0; // Noncompliant
         }
 
-        void f7(this int a)
-        {
-          a = 42; // Noncompliant
-        }
 
+        delegate void d1(out int b, int c, ref int d);
+
+        private event d1 e;
         void f8(Func<int, int> param)
         {
-            var l1 = delegate(out int b, int c, ref int d)
+            d1 dd = delegate (out int b, int c, ref int d)
             {
                 b = 0;
                 c = 0; // Noncompliant
                 d = 0;
             };
 
-            param = 42; // Noncompliant
-
-            var l2 += (out int foo1, int foo2, ref int foo3) => {
+            param = i => 42; // Noncompliant
+            
+            e += delegate(out int foo1, int foo2, ref int foo3)
+            {
                 foo1 = 0;
                 foo2 = 0; // Noncompliant
             };

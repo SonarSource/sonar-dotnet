@@ -39,6 +39,10 @@
             {
 
             }
+            for (int i = 0; ; i++) //Noncompliant
+            {
+
+            }
 
             var o = new HelperClass();
             for (k = 0; someMethod(o) < 10; P++, j++, o.Property--, someMethod(o)) //Compliant

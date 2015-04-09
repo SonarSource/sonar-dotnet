@@ -8,6 +8,7 @@ namespace Tests.TestCases
 {
     class MultilineBlocksWithoutBrace
     {
+        public static void Tests() { throw new Exception();}
         public static int SomeMethod(int a)
         {
             if (a == 1) 

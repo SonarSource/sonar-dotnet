@@ -1,7 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
+    internal class TreeNode
+    {
+        public TreeNode Parent { get; set; }
+    }
+
     public class ShortCircuitNullPointerDereference
     {
         public object O { get; set; }
@@ -12,14 +19,16 @@ namespace Tests.Diagnostics
             {
                 
             }
+            
+            List<int> l = new List<int>();
+            bool someOtherCondition = a== b;
 
-            List<int> l = null;
             if ( someOtherCondition && null == l && l.Count()>5)  // Noncompliant
             {
                 Console.WriteLine("Message");
             }
 
-            TreeNode t = new TreeNode();
+            var t = new TreeNode();
 
             while(someOtherCondition && (t != /*Comment*/ null || t.Parent /*Comment*/ != null)) // Noncompliant
             {

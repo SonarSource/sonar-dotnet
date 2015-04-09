@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
-    class ConditionalStructureSameCondition
+    class ConditionalStructureSameCondition1
     {
         public bool condition { get; set; }
+        public bool condition1 { get; set; }
+        public bool condition2 { get; set; }
         public void Test()
         {
             var b = true;

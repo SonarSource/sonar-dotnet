@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
-    class ConditionalStructureSameCondition
+    class ConditionalStructureSameCondition_If
     {
+        public bool someCondition1 { get; set; }
+        public bool someCondition2 { get; set; }
+        public bool someCondition3 { get; set; }
+
+        public void DoSomething1() { }
+        public void DoSomething2() { }
+
         public void Test()
         {
             if (someCondition1)

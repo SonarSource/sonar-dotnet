@@ -4,11 +4,12 @@ namespace Tests.TestCases
 {
     class CatchRethrow
     {
+        private void doSomething() { throw new NotSupportedException(); }
         public void Test()
         {
             try
             {
-
+                doSomething();
             }
             catch (Exception exc) //Noncompliant
             {
@@ -17,7 +18,7 @@ namespace Tests.TestCases
 
             try
             {
-
+                doSomething();
             }
             catch (ArgumentException) //Noncompliant
             {
@@ -26,20 +27,20 @@ namespace Tests.TestCases
 
             try
             {
-
+                doSomething();
             }
             catch (ArgumentException) 
             {
                 throw;
             }
-            catch (AnyException) //Noncompliant
+            catch (NotSupportedException) //Noncompliant
             {
                 throw;
             }
 
             try
             {
-
+                doSomething();
             }
             catch (ArgumentException)
             {

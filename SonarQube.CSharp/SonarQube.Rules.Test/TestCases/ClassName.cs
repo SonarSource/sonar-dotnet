@@ -4,7 +4,7 @@
     {
     }
 
-    class Foo
+    partial class Foo
     {
     }
 

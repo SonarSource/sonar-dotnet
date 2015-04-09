@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -14,7 +16,7 @@ namespace Tests.Diagnostics
 
         public void Foo(int async) // Noncompliant
         {
-            from await in new List<int>() // Noncompliant
+            var x = from await in new List<int>() {5,6,7 } // Noncompliant
             select await;
         }
 

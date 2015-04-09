@@ -4,27 +4,24 @@
     {
         public UnnecessaryBooleanLiteral(bool a, bool b)
         {
-            !true;                      // Noncompliant
-            !false;                     // Noncompliant
-            (a == false)                // Noncompliant
+            var x = !true;                      // Noncompliant
+            x = !false;                     // Noncompliant
+            x = (a == false)                // Noncompliant
                 && true;                // Noncompliant
-            a == true;                  // Noncompliant
-            a != false;                 // Noncompliant
-            a != true;                  // Noncompliant
-            false == a;                 // Noncompliant
-            true == a;                  // Noncompliant
-            false != a;                 // Noncompliant
-            true != a;                  // Noncompliant
-            false && Foo();             // Noncompliant
-            Foo() || true;              // Noncompliant
-            a == true == b;             // Noncompliant
+            x = a == true;                  // Noncompliant
+            x = a != false;                 // Noncompliant
+            x = a != true;                  // Noncompliant
+            x = false == a;                 // Noncompliant
+            x = true == a;                  // Noncompliant
+            x = false != a;                 // Noncompliant
+            x = true != a;                  // Noncompliant
+            x = false && Foo();             // Noncompliant
+            x = Foo() || true;              // Noncompliant
+            x = a == true == b;             // Noncompliant
 
-            a == Foo(true);             // Compliant
-            true < 0;                   // Compliant
-            ~true;                      // Compliant
-            ++true;                     // Compliant
-            !a;                         // Compliant
-            Foo() && Bar();             // Compliant
+            x = a == Foo(true);             // Compliant
+            x = !a;                         // Compliant
+            x = Foo() && Bar();             // Compliant
         }
 
         private bool Foo()

@@ -6,7 +6,7 @@
         void Foo();
     }
 
-    public class Foo : MyInterface
+    public class FooClass : MyInterface
     {
         void foo() { } // Noncompliant
         void MyInterface.foo() { } // Noncompliant

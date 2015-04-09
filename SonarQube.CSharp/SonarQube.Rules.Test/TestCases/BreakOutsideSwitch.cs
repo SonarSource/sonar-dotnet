@@ -40,8 +40,6 @@ namespace Tests.Diagnostics
             {
                 break; // Noncompliant
             }
-
-            break; // Noncompliant
         }
     }
 }

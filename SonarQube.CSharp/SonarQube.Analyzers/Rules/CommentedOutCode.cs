@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarQube.Analyzers.Helpers;
 using SonarQube.Analyzers.SonarQube.Settings;
 using SonarQube.Analyzers.SonarQube.Settings.Sqale;
@@ -79,7 +80,11 @@ namespace SonarQube.Analyzers.Rules
                                             continue;
                                         }
 
-                                        var location = Location.Create(c.Tree, c.Tree.GetText().Lines[lineNumber].Span);
+                                        var lineSpan = c.Tree.GetText().Lines[lineNumber].Span;
+                                        var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
+
+                                        var location = Location.Create(c.Tree,
+                                            commentLineSpan.HasValue ? commentLineSpan.Value : lineSpan);
                                         c.ReportDiagnostic(Diagnostic.Create(Rule, location));
                                         break;
                                     }

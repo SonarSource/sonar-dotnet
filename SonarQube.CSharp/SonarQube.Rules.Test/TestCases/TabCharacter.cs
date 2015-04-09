@@ -2,9 +2,9 @@
 
 namespace Tests.Diagnostics
 {
-    public class RightCurlyBraceStartsLine
+    public class TabCharacter
     {
-        public RightCurlyBraceStartsLine()
+        public TabCharacter()
         {
             var tabs = "	"; // Noncompliant
             var tabs2 = "		";

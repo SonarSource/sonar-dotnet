@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
     public class AssignmentInsideSubExpression
     {
-        void Foo(int a)
+        void foo(int a)
         {
         }
 
-        void Foo(bool a)
+        void foo(bool a)
         {
         }
 
-        void Foo(Func<int, int> f)
+        int foo(Func<int, int> f)
         {
+            throw new Exception();
         }
 
         private class MyClass
@@ -48,19 +50,21 @@ namespace Tests.Diagnostics
                 return a;
             });
 
-            if (i = 0) { } // Not yet covered
+            var b = true;
+
+            if (b = false) { } // Not yet covered
             if (i == 0) i = 2;
 
             string result = "";
             if (!string.IsNullOrEmpty(result)) result = result + " ";
-            var v1 = delegate { };
-            var v2 = delegate { foo = 42; };
-            var v3 = (x) => x = 42;
-            var v4 = (x) => { x = 42; };
+            var v1 = new Action(delegate { });
+            var v2 = new Action(delegate { var foo = 42; });
+            var v3 = new Func<object, object>((x) => x = 42);
+            var v4 = new Action<object>((x) => { x = 42; });
             var v5 = new { MyField = 42 };
             var v6 = new MyClass { MyField = 42 };
             var v7 = new MyClass() { MyField = 42 };
-            var v8 = Foo(x => { x = 42; return 0; } );
+            var v8 = foo(x => { x = 42; return 0; } );
         }
     }
 }

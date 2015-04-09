@@ -62,8 +62,7 @@ using System;
 
 namespace Tests.Diagnostics
 {
-    /* foo */ ;
-    ; /* foo */
+    
 
     /// <summary>
     /// ...
@@ -73,6 +72,12 @@ namespace Tests.Diagnostics
     /// </code>
     public class CommentedOutCode
     {
+        public void M() {
+            /* foo */ M();
+            M(); /* foo */
+        }
+
+
         int a; // Noncompliant: Console.WriteLine();
         int b; // Noncompliant: Console.WriteLine();
     }

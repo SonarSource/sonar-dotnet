@@ -4,7 +4,7 @@
     {
         public AtLeastThreeCasesInSwitch(int n)
         {
-            switch (a) // Noncompliant
+            switch (n) // Noncompliant
             {
                 case 0:
                     break;
@@ -16,12 +16,13 @@
             {
             }
 
-            switch (a)
+            switch (n)
             { 
                 case 0:
                     break;
                 case 1:
                 default:
+                    var x=5;
                     break;
             }
         }

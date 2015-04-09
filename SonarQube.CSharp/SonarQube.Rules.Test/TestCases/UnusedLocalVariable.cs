@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
@@ -8,10 +9,10 @@ namespace Tests.Diagnostics
     {
         void F1()
         {
-            var packageA = PackageUtility.CreatePackage("Foo", "1.0");
-            var packageB = PackageUtility.CreatePackage("Qux", "1.0");
+            var packageA = DoSomething("Foo", "1.0");
+            var packageB = DoSomething("Qux", "1.0");
 
-            var localRepository = new MockPackageRepository { packageA, packageB }; // Noncompliant
+            var localRepository = new Cl { packageA, packageB }; // Noncompliant
 
             using (var x = new StreamReader("")) // Noncompliant
             {
@@ -38,8 +39,17 @@ namespace Tests.Diagnostics
             Console.WriteLine(e);
         }
 
+        private object DoSomething(string foo, string p1)
+        {
+            throw new NotImplementedException();
+        }
+
         void F2(int a)
         {
         }
+    }
+
+    internal class Cl : List<object>
+    {
     }
 }

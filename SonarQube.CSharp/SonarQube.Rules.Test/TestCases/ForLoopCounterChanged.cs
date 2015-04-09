@@ -10,9 +10,9 @@
 
         public ForLoopCounterChanged()
         {
-            for (int a = 0; a < 42; a++)
+            for (int a2 = 0; a2 < 42; a2++)
             {
-                a = 0; // Noncompliant
+                a2 = 0; // Noncompliant
             }
 
             int a;
@@ -42,7 +42,7 @@
                 g = 0; // Compliant
             }
 
-            int g = 0;
+            g = 0;
 
             for (int h = 0; h < 42; h++)
             {
@@ -55,7 +55,7 @@
             ++g;
             g = 0;
 
-            for (int i = 0; 0 < 42; i++)
+            for (int i = 0; i < 42; i++)
             {
                 i++; // Noncompliant
                 --i; // Noncompliant
@@ -72,19 +72,18 @@
                 i ^= 1; // Noncompliant
                 i <<= 1; // Noncompliant
                 i >>= 1; // Noncompliant
-                new { i = 0 }.i++;
             }
 
             for (int j = 0; j < 42; j++)
             {
-                for (k = 0; j++ < 42; k++) // Noncompliant
+                for (var k = 0; j++ < 42; k++) // Noncompliant
                 {
                 }
             }
 
             for (int i = 0; i < 42; i++)
             {
-                (int)i;
+                var x = (int)i;
             }
 
             var s1 = new Helper { i = 0, j = new int[] { 0, 1 } };
@@ -109,21 +108,23 @@
                 a1[0] = 1; // Not detected
                 a1[1] = 1;
             }
-
-            int i = 0;
-            for (; i > 0; i++)
             {
-                i = 1;
+                int i = 0;
+                for (; i > 0; i++)
+                {
+                    i = 1;
+                }
+
+                for (i = 0; i < 3; i++)
+                {
+                    s1.i = 1;
+                }
             }
 
-            for (i = 0; i < 3; i++)
+            foreach (object element in new object[0])
             {
-                s1.i = 1;
-            }
-
-            foreach (int element in myArray)
-            {
-                element = 0;
+                var e = element;
+                e = null;
             }
         }
     }
