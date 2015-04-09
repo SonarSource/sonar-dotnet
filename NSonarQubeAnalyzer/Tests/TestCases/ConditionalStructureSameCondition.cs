@@ -16,7 +16,7 @@ namespace Tests.TestCases
             {
 
             }
-            else if (b && this.condition) // Noncompliant
+            else if (b && condition) // Noncompliant
             {
 
             }
@@ -24,7 +24,7 @@ namespace Tests.TestCases
             {
 
             }
-            else if (!b && this.condition)
+            else if (!b && condition)
             {
 
             }

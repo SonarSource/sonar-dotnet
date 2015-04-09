@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Simplification;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
@@ -101,11 +100,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
             List<ExpressionSyntax> expressionsInChain,
             ExpressionSyntax expressionComparedToNull, BinaryExpressionSyntax comparisonToNull)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var expandedExpressionComparedToNull = Simplifier.Expand(expressionComparedToNull, c.SemanticModel,
-                    workspace);
-
+            
                 using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                 {
                     for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
@@ -114,7 +109,7 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                             .DescendantNodes()
                             .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
                                                  eqChecker.AreEquivalent(
-                                                     expandedExpressionComparedToNull, descendant, false))
+                                                     expressionComparedToNull, descendant))
                             .Where(descendant =>
                                 descendant.Parent is MemberAccessExpressionSyntax ||
                                 descendant.Parent is ElementAccessExpressionSyntax)
@@ -126,7 +121,6 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                         }
                     }
                 }
-            }
         }
 
         private static IEnumerable<ExpressionSyntax> GetExpressionsInChain(BinaryExpressionSyntax binaryExpression)

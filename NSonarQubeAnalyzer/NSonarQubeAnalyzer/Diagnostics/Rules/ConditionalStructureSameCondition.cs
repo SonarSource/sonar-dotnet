@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Simplification;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
@@ -35,24 +34,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
                     var currentCondition = ifStatement.Condition;
-
-                    using (var workspace = new AdhocWorkspace())
+                    
+                    using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                     {
-                        var expandedCurrentCondition = Simplifier.Expand(currentCondition, c.SemanticModel, workspace);
-                        using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
-                        {
-                            var precedingCondition = ifStatement
-                                .GetPrecedingConditionsInConditionChain()
-                                .FirstOrDefault(
-                                    preceding => eqChecker.AreEquivalent(expandedCurrentCondition, preceding, false));
+                        var precedingCondition = ifStatement
+                            .GetPrecedingConditionsInConditionChain()
+                            .FirstOrDefault(
+                                preceding => eqChecker.AreEquivalent(currentCondition, preceding));
 
-                            if (precedingCondition != null)
-                            {
-                                c.ReportDiagnostic(Diagnostic.Create(
-                                    Rule,
-                                    currentCondition.GetLocation(),
-                                    precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
-                            }
+                        if (precedingCondition != null)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(
+                                Rule,
+                                currentCondition.GetLocation(),
+                                precedingCondition.GetLocation().GetLineSpan().StartLinePosition.Line + 1));
                         }
                     }
                 },

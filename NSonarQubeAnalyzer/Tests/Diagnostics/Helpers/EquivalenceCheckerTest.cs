@@ -80,27 +80,6 @@ namespace Test
                 methods.First(m => m.Identifier.ValueText == "Method1").Body,
                 methods.First(m => m.Identifier.ValueText == "Method3").Body);
             result.Should().BeFalse();
-
-            var expandedMethod1 = Simplifier.Expand(methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                semanticModel, solution.Workspace);
-
-            var expandedMethod2 = Simplifier.Expand(methods.First(m => m.Identifier.ValueText == "Method2").Body,
-                semanticModel, solution.Workspace);
-
-            result = eqChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body, false);
-            result.Should().BeFalse();
-
-            result = eqChecker.AreEquivalent(
-                expandedMethod1,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body, false);
-            result.Should().BeTrue();
-
-            result = eqChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                expandedMethod2, false, false);
-            result.Should().BeFalse();
         }
 
         [TestMethod]
@@ -115,44 +94,6 @@ namespace Test
                 methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
                 methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
             result.Should().BeFalse();
-
-            var expandedMethod1 = Simplifier.Expand(methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                semanticModel, solution.Workspace);
-
-            var expandedMethod2 = Simplifier.Expand(methods.First(m => m.Identifier.ValueText == "Method2").Body,
-                semanticModel, solution.Workspace);
-
-            result = eqChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body.Statements, false);
-            result.Should().BeFalse();
-
-            result = eqChecker.AreEquivalent(
-                expandedMethod1.Statements,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body.Statements, false);
-            result.Should().BeTrue();
-
-            result = eqChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                expandedMethod2.Statements, false, false);
-            result.Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void GetExpandedList()
-        {
-            var expandedList = eqChecker.GetExpandedList(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements);
-
-            var result = eqChecker.AreEquivalent(expandedList,
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements, false, false);
-
-            result.Should().BeFalse();
-
-            result = eqChecker.AreEquivalent(expandedList,
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements, false, true);
-
-            result.Should().BeTrue();
         }
     }
 }

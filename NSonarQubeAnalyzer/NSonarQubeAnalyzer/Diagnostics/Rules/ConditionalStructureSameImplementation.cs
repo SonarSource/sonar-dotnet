@@ -5,7 +5,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Simplification;
 using NSonarQubeAnalyzer.Diagnostics.Helpers;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties;
 using NSonarQubeAnalyzer.Diagnostics.SonarProperties.Sqale;
@@ -58,11 +57,10 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                     using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                     {
                         var switchSection = (SwitchSectionSyntax) c.Node;
-                        var switchStatements = eqChecker.GetExpandedList(switchSection.Statements);
                         var precedingSection = switchSection
                             .GetPrecedingSections()
                             .FirstOrDefault(
-                                preceding => eqChecker.AreEquivalent(switchStatements, preceding.Statements, false));
+                                preceding => eqChecker.AreEquivalent(switchSection.Statements, preceding.Statements));
 
                         if (precedingSection != null)
                         {
@@ -76,20 +74,17 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
         private static void CheckStatement(SyntaxNodeAnalysisContext c, StatementSyntax statementToCheck, 
             IEnumerable<StatementSyntax> precedingStatements)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var expandedStatementToCheck = Simplifier.Expand(statementToCheck, c.SemanticModel, workspace);
+            
                 using (var eqChecker = new EquivalenceChecker(c.SemanticModel))
                 {
                     var precedingStatement = precedingStatements
-                        .FirstOrDefault(preceding => eqChecker.AreEquivalent(expandedStatementToCheck, preceding, false));
+                        .FirstOrDefault(preceding => eqChecker.AreEquivalent(statementToCheck, preceding));
 
                     if (precedingStatement != null)
                     {
                         ReportStatement(c, statementToCheck, precedingStatement);
                     }
                 }
-            }
         }
 
         private static void ReportSection(SyntaxNodeAnalysisContext c, SwitchSectionSyntax switchSection, SwitchSectionSyntax precedingSection)

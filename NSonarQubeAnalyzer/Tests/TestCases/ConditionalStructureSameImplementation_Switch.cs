@@ -21,7 +21,7 @@ namespace Tests.TestCases
                     doSomethingDifferent();
                     break;
                 case 3:  // Noncompliant;
-                    this.doSomething(this.prop);
+                    doSomething(prop);
                     break;
                 case 4:
                     {
