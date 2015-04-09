@@ -105,16 +105,20 @@ namespace NSonarQubeAnalyzer.Diagnostics.Rules
                 {
                     for (var j = currentExpressionIndex + 1; j < expressionsInChain.Count; j++)
                     {
-                        if (expressionsInChain[j]
-                            .DescendantNodes()
-                            .Where(descendant => descendant.IsKind(expressionComparedToNull.Kind()) &&
-                                                 eqChecker.AreEquivalent(
-                                                     expressionComparedToNull, descendant))
+                        var descendantNodes = expressionsInChain[j].DescendantNodes()
                             .Where(descendant =>
-                                descendant.Parent is MemberAccessExpressionSyntax ||
-                                descendant.Parent is ElementAccessExpressionSyntax)
-                            .ToList()
-                            .Any())
+                                descendant.IsKind(expressionComparedToNull.Kind()) &&
+                                eqChecker.AreEquivalent(expressionComparedToNull, descendant))
+                                .Where(descendant =>
+                            (descendant.Parent is MemberAccessExpressionSyntax &&
+                             eqChecker.AreEquivalent(expressionComparedToNull,
+                                 ((MemberAccessExpressionSyntax) descendant.Parent).Expression)) ||
+                            (descendant.Parent is ElementAccessExpressionSyntax &&
+                             eqChecker.AreEquivalent(expressionComparedToNull,
+                                 ((ElementAccessExpressionSyntax) descendant.Parent).Expression)))
+                            .ToList();
+
+                        if (descendantNodes.Any())
                         {
                             c.ReportDiagnostic(Diagnostic.Create(Rule, comparisonToNull.GetLocation(),
                                 expressionComparedToNull.ToString()));
