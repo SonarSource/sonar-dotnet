@@ -1,0 +1,1298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rules>
+  <rule>
+    <key>S2486</key>
+    <name>Exceptions should not be ignored</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+string text = "";
+try {
+  text = File.ReadAllText(fileName);
+} catch (Exception exc) {  // Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+string text = "";
+try {
+  text = File.ReadAllText(fileName);
+} catch (Exception exc) {
+  logger.Log(exc);
+}
+</pre>]]></description>
+  </rule>
+  <rule>
+    <key>S124</key>
+    <name>Regular expression on comment</name>
+    <severity>MAJOR</severity>
+    <cardinality>MULTIPLE</cardinality>
+    <description><![CDATA[<p>
+This rule template can be used to create rules which will be triggered when a comment matches a given regular expression.
+For example, one can create a rule with the regular expression "TODO" to match all comment containing "TODO".
+</p>
+
+<p>
+Note that, in order to match TODO regardless of the case, the "(?i)" modifier can be prepended to the expression, as in "(?i)TODO".
+</p>
+]]></description>
+  </rule>
+  <rule>
+    <key>S2737</key>
+    <name>"catch" clauses should do more than rethrow</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+A <code>catch</code> clause that only rethrows the caught exception has the same effect as omitting the <code>catch</code> altogether and letting it bubble up automatically, but with more code and the additional detrement of leaving maintainers scratching their heads.
+Such clauses should either be eliminated or populated with the appropriate logic.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+string s = "";
+try {
+  s = File.ReadAllText(fileName);
+}
+catch (Exception e) {  // Noncompliant
+  throw;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+string s = "";
+try {
+  s = File.ReadAllText(fileName);
+}
+catch (Exception e) {
+  logger.LogError(e);
+  throw;
+}
+</pre>
+or
+<pre>
+string s = File.ReadAllText(fileName);
+</pre>]]></description>
+  </rule>
+  <rule>
+    <key>S1994</key>
+    <name>"for" loop incrementers should modify the variable being tested in the loop's stop condition</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+It is almost always an error when a <code>for</code> loop's stop condition and incrementer don't act on the same variable. Even when it is not, it could confuse future maintainers of the code, and should be avoided.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+for (i = 0; i < 10; j++) {  // Noncompliant
+  // ...
+}
+</pre>
+
+<h2>Compliant Code Example</h2>
+<pre>
+for (i = 0; i < 10; i++) {
+  // ...
+}
+</pre>]]></description>
+  </rule>
+  <rule>
+    <key>S1764</key>
+    <name>Identical expressions should not be used on both sides of a binary operator</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy/paste error and therefore a bug, or it is simply wasted code, and should be simplified. In the case of bitwise operators and most binary mathematical operators, having the same value on both sides of an operator yields predictable results, and should be simplified.
+</p>
+<p>
+This rule ignores <code>*</code>, <code>+</code>, and <code>=</code>.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if ( a == a ) { // always true
+  doZ();
+}
+if ( a != a ) { // always false
+  doY();
+}
+if ( a == b && a == b ) { // if the first one is true, the second one is too
+  doX();
+}
+if ( a == b || a == b ) { // if the first one is true, the second one is too
+  doW();
+}
+
+int j = 5 / 5; //always 1
+int k = 5 - 5; //always 0
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+doZ();
+
+if ( a == b ) {
+  doX();
+}
+if ( a == b ) {
+  doW();
+}
+
+int j = 1;
+int k = 0;
+</pre>
+
+<h2>Exceptions</h2>
+Left-shifting 1 onto 1 is common in the construction of bit masks, and is ignored.
+<pre>
+int i = 1 << 1; // Compliant
+int j = a << a; // Noncompliant
+</pre>
+
+<h2>See</h2>
+
+<ul>
+<li> <a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C</a> - Detect and remove code that has no effect</li>
+<li> <a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP</a> - Detect and remove code that has no effect</li>
+</ul>]]></description>
+  </rule>
+  <rule>
+    <key>S2681</key>
+    <name>Multiline blocks should be enclosed in curly braces</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Curly braces can be omitted from a one-line block, such as with an <code>if</code> statement or <code>for</code> loop, but doing so can be misleading and induce bugs.
+This rule raises an issue when the indention of the lines after a one-line block indicates an intent to include those lines in the block, but the omission of curly braces means the lines will be unconditionally executed once.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (condition)
+  firstActionInBlock();
+  secondAction();  // Noncompliant; executed unconditionally
+thirdAction();
+
+string str = null;
+for (int i = 0; i < array.length; i++) 
+  str = array[i];
+  doTheThing(str);  // Noncompliant; executed only on last array element
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (condition) {
+  firstActionInBlock();
+  secondAction();
+}
+thirdAction();
+
+string str = null;
+for (int i = 0; i < array.length; i++) {
+  str = array[i];
+  doTheThing(str);
+}
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S1871</key>
+    <name>Two branches in the same conditional structure should not have exactly the same implementation</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Having two <code>cases</code> in the same <code>switch</code> statement or branches in the same <code>if</code> structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is 
+truly needed for both instances, then they should be combined, for an <code>if</code> structure or one should fall through to the other for a switch.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+switch (i) {
+  case 1: 
+    doSomething();
+    break;
+  case 2: 
+    doSomethingDifferent();
+    break;
+  case 3:  // Noncompliant; duplicates case 1's implementation
+    doSomething(); 
+    break;
+  default: 
+    doTheRest();
+}
+
+if (a >= 0 && a < 10) {
+  doTheThing();
+else if (a >= 10 && a < 20) {
+  doTheOtherThing();
+}
+else if (a >= 20 && a < 50) {
+  doTheThing();  // Noncompliant; duplicates first condition
+}
+else {
+  doTheRest(); 
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+switch (i) {
+  case 1: 
+  case 3:
+    doSomething();
+    break;
+  case 2: 
+    doSomethingDifferent();
+    break;
+  default: 
+    doTheRest();
+}
+
+if ((a >= 0 && a < 10) || (a >= 20 && a < 50)) {
+  doTheThing();
+else if (a >= 10 && a < 20) {
+  doTheOtherThing();
+}
+else {
+  doTheRest(); 
+}
+</pre>
+or
+<pre>
+switch (i) {
+  case 1: 
+    doSomething();
+    break;
+  case 2: 
+    doSomethingDifferent();
+    break;
+  case 3:
+    doThirdThing(); 
+    break;
+  default: 
+    doTheRest();
+}
+
+if (a >= 0 && a < 10) {
+  doTheThing();
+else if (a >= 10 && a < 20) {
+  doTheOtherThing();
+}
+else if (a >= 20 && a < 50) {
+  doTheThirdThing();
+}
+else {
+  doTheRest(); 
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1862</key>
+    <name>Related "if/else if" statements should not have the same condition</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+A chain of <code>if</code>/<code>else if</code> statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to true.
+Therefore, duplicating a condition automatically leads to dead code. Usually, this is due to a copy/paste error. At best, it's simply dead code and at worst, it's a bug that is likely to induce 
+further bugs as the code is maintained, and obviously it could lead to unexpected behavior.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (param == 1)
+  openWindow();
+else if (param == 2)
+  closeWindow();
+else if (param == 1)  // Noncompliant
+  moveWindowToTheBackground();
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (param == 1)
+  openWindow();
+else if (param == 2)
+  closeWindow();
+else if (param == 3)
+  moveWindowToTheBackground();
+}
+</pre>
+
+<h2>See</h2>
+
+<ul>
+<li> <a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C</a> - Detect and remove code that has no effect</li>
+<li> <a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP</a> - Detect and remove code that has no effect</li>
+</ul>]]></description>
+  </rule>
+  <rule>
+    <key>S108</key>
+    <name>Nested blocks of code should not be left empty</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Most of the time a block of code is empty when a piece of code is really missing. So such empty block must be either filled or removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+for (int i = 0; i < 42; i++){}  // Empty on purpose or missing piece of code ?
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>CommentedCode</key>
+    <name>Comment should not include code</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>Here are the main reasons why commented code is a code smell:</p>
+
+<ul>
+  <li>It always raises more questions than it gives answers</li>
+  <li>Everybody will forget very quickly how relevant the commented code is</li>
+  <li>This is distraction when going down the code as it stops the flow of eyes</li>
+  <li>It is a bad SCM engine : Subversion, CVS and Git are really more trustworthy !</li>
+  <li>The simple fact of understanding why code was commented out in the first place can take a lot of time</li>
+</ul>
+
+<p>
+If some code must be conditionally compiled, then the preprocessor's #if should be used, as in:
+</p>
+
+<pre>
+#if DEBUG
+  Console.WriteLine("Debug mode is activated!");
+#endif
+</pre>
+
+<p>
+The following code snippet illustrates this rule:
+</p>
+
+<pre>
+using System;
+
+class Program
+{
+  // This line is fine, but the following is not
+  //int Id = 0;
+
+  /*
+  The following line is bad
+
+  void Test() { int dirId = this.Id++; }
+
+  No violation on the following line, because there is at most one violation per comment
+  MyMethod();
+  */
+
+  static void Main(string[] args)
+  {
+  }
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>FunctionComplexity</key>
+    <name>Method complexity should not be too high</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>The cyclomatic complexity of a function should not exceed a defined threshold.</p>
+<p>Complex code can perform poorly and will in any case be difficult to understand and therefore to maintain.</p>
+]]></description>
+    <param>
+      <key>maximumFunctionComplexityThreshold</key>
+      <description><![CDATA[The maximum authorized complexity in function]]></description>
+      <type>INTEGER</type>
+      <defaultValue>10</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S1848</key>
+    <name>Objects should not be created to be dropped immediately without being used</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+There is no good reason to create a new object to not do anything with it. Most of the time, this is due to a missing piece of code and so could lead to an unexpected behavior in production.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (x < 0)
+  new ArgumentException("x must be nonnegative");
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (x < 0)
+  throw new ArgumentException("x must be nonnegative");
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>ParameterAssignedTo</key>
+    <name>Parameter variable should not be assigned to</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Parameters variables that are not marked as <code>out</code> or <code>ref</code> should not be assigned to from within a method.
+Those modifications will not impact the caller of the method, which can be confusing.
+Instead, it is better to assign the parameter to a temporary variable.
+</p>
+
+<p>The following code snippet:</p>
+
+<pre>
+void foo(int a)
+{
+  a = 42;           // Non-Compliant
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+void foo(int a)
+{
+  int tmp = a;
+  tmp = 42;         // Compliant
+}
+</pre>
+
+<p>or:</p>
+
+<pre>
+void foo(out int a) // 'ref' is also allowed
+{
+  a = 42;           // Compliant
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1067</key>
+    <name>Expressions should not be too complex</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+The complexity of an expression is defined by the number of <code>&&</code>, <code>||</code> and <code>condition ? ifTrue : ifFalse</code> operators it contains.<br/>
+A single expression's complexity should not become too high to keep the code readable.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>With the default threshold value 3</p>
+<pre>
+if (((condition1 && condition2) || (condition3 && condition4)) && condition5) { ... }
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if ( (myFirstCondition() || mySecondCondition()) && myLastCondition()) { ... }
+</pre>
+]]></description>
+    <param>
+      <key>max</key>
+      <description><![CDATA[Maximum number of allowed conditional operators in an expression]]></description>
+      <type>INTEGER</type>
+      <defaultValue>3</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>MagicNumber</key>
+    <name>Magic number should not be used</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Numbers are not self-explanatory, they only are made of a value, which does not explain their purpose.
+Moreover, if the same number should be consistently used in multiple places, using a constant will ensure that all occurences are updated at once.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+netSalary = 0.85m * grossSalary;  // Non-Compliant - where does 0.85m come from, what does it mean?
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+const decimal Rate = 0.85m;       // Compliant - it's now clear what the 0.85m is
+netSalary = Rate * grossSalary;   // Compliant
+</pre>
+]]></description>
+    <param>
+      <key>exceptions</key>
+      <description><![CDATA[Comma separated list of allowed values (excluding '-' and '+' signs)]]></description>
+      <type>STRING</type>
+      <defaultValue>0,1,0x0,0x00,.0,.1,0.0,1.0</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S100</key>
+    <name>Method name should comply with a naming convention</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.
+This rule allows to check that all class names match a provided regular expression.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+void foo() // Non-Compliant
+{
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+void Foo() // Compliant
+{
+}
+</pre>
+]]></description>
+    <param>
+      <key>format</key>
+      <description><![CDATA[Regular expression used to check the method names against]]></description>
+      <type>STRING</type>
+      <defaultValue>^[A-Z][a-zA-Z0-9]+$</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S1186</key>
+    <name>Methods should not be empty</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+There are four reasons for a method not to have a method body:
+  <ul>
+    <li>It is an unintentional omission, and should be fixed.</li>
+    <li>It is not yet, or never will be, supported. In this case an <code>NotSupportedException</code> should be thrown.</li>
+    <li>The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override.</li>
+  </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public override void DoSomething()
+{
+}
+
+public override void doSomethingElse()
+{
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public override void DoSomething()
+{
+  // Do nothing because of X and Y.
+}
+
+public override void doSomethingElse() {
+  throw new NotSupportedException();
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>An abstract class' may have empty methods, in order to provide default implementations for child classes.</p>
+<pre>
+abstract class Animal {
+  public void speak() {
+  }
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S101</key>
+    <name>Class name should comply with a naming convention</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.
+This rule allows to check that all class names match a provided regular expression.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+class foo // Non-Compliant
+{
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+class Foo // Compliant
+{
+}
+</pre>
+]]></description>
+    <param>
+      <key>format</key>
+      <description><![CDATA[Regular expression used to check the class names against.]]></description>
+      <type>STRING</type>
+      <defaultValue>^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S1656</key>
+    <name>Variables should not be self-assigned</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+There is no reason to re-assign a variable to itself. Either this statement is redundant and should be removed, or the re-assignment is a mistake and some other value or variable was intended for the assignment instead.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void setName(String name) {
+    name = name;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public void setName(String name) {
+    this.name = name;
+}
+</pre>]]></description>
+    <tag>bug</tag>
+    <tag>cert</tag>
+  </rule>
+  <rule>
+    <key>S1697</key>
+    <name>Short-circuit logic should be used to prevent null pointer dereferences in conditionals</name>
+    <severity>BLOCKER</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+When either the equality operator in a null test or the logical operator that follows it is reversed, the code has the appearance of safely null-testing the object before dereferencing it. 
+Unfortunately the effect is just the opposite - the object is null-tested and then dereferenced only if it is null, leading to a guaranteed null pointer dereference.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (str == null && str.Length == 0) {
+  Console.WriteLine("String is empty");
+}
+
+if (str != null || str.Length > 0) {
+  Console.WriteLine("String is not empty");
+}
+</pre>
+
+<h2>Compliant Code Example</h2>
+<pre>
+if (str == null || str.Length == 0) {
+  Console.WriteLine("String is empty");
+}
+
+if (str != null && str.Length > 0) {
+  Console.WriteLine("String is not empty");
+}
+</pre>]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S2743</key>
+    <name>Static fields should not be used in generic types</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+A static field in a generic type is not shared among instances of different closed constructed types, thus <code>CustomList<int>.MaxAllowedLength</code> and <code>CustomList<string>.MaxAllowedLength</code> will 
+point to different variables, even though <code>MaxAllowedLength</code> is seemingly shared among all <code>CustomList<></code> generic classes.
+</p>
+<p>
+If you need to have a static field shared among instances with different generic arguments, define a non-generic base class to store your static members, then set your generic type to inherit from the base class.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class CustomList<T> {
+  public static int MaxAllowedLength { get; set; }  // Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class CustomList {
+  public static int MaxAllowedLength { get; set; } 
+}
+public class CustomList<T> : CustomList {
+}
+</pre>]]></description>
+  </rule>
+  <rule>
+    <key>S107</key>
+    <name>Functions should not have too many parameters</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the function is doing too many things.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<p>The following code snippet illustrates this rule with a maximum number of 4 parameters:</p>
+<pre>
+public void doSomething(int param1, int param2, int param3, string param4, long param5)
+{
+...
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public void doSomething(int param1, int param2, int param3, string param4)
+{
+...
+}
+</pre>
+]]></description>
+    <tag>brain-overload</tag>
+    <param>
+      <key>max</key>
+      <description><![CDATA[Maximum authorized number of parameters]]></description>
+      <type>INTEGER</type>
+      <defaultValue>7</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S1479</key>
+    <name>"switch" statements should not have too many "case" clauses</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  When <code>switch</code> statements have a large set of <code>case</code> clauses, it is usually an attempt to map two sets of data. A real map structure would be more readable and maintainable, and should be used instead.
+</p>
+]]></description>
+    <tag>brain-overload</tag>
+    <param>
+      <key>maximum</key>
+      <description><![CDATA[Maximum number of case]]></description>
+      <type>INTEGER</type>
+      <defaultValue>30</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S127</key>
+    <name>A loop's counter should not be assigned within the loop body</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Loop counters should not be modified in the body of the loop to prevent unexpected side effects.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Foo
+{
+    static void Main()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(i);
+            if (condition)
+            {
+               i = 20;
+           }
+        }
+    }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class Foo
+{
+    static void Main()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(i);
+        }
+    }
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>FileLoc</key>
+    <name>File should not have too many lines</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+A source file that grows too much tends to aggregate too many responsibilities and inevitably becomes harder to understand and therefore to maintain.
+Above a specific threshold, it is strongly advised to refactor it into smaller pieces of code which focus on well defined tasks.
+Those smaller files will not only be easier to understand but also probably easier to test.
+</p>
+]]></description>
+    <param>
+      <key>maximumFileLocThreshold</key>
+      <description><![CDATA[The maximum number of lines allowed in a file]]></description>
+      <type>INTEGER</type>
+      <defaultValue>1000</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>LineLength</key>
+    <name>Lines should not be too long</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Having to scroll horizontally makes it harder to get a quick overview and understanding of any piece of code.
+</p>
+]]></description>
+    <param>
+      <key>maximumLineLength</key>
+      <description><![CDATA[The maximum authorized line length]]></description>
+      <type>INTEGER</type>
+      <defaultValue>200</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>TabCharacter</key>
+    <name>Tabulation character should not be used</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Developers should not need to configure the tab width of their text editors in order to be able to read source code.
+So the use of tabulation character must be banned.
+</p>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1109</key>
+    <name>A close curly brace should be located at the beginning of a line</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Shared coding conventions make it possible for a team to efficiently collaborate. This rule makes it mandatory to place a close curly brace at the beginning of a line.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if(condition) {
+  doSomething();}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if(condition) {
+  doSomething();
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>When blocks are inlined (open and close curly braces on the same line), no issue is triggered.</p>
+<pre>
+if(condition) {doSomething();}
+</pre>
+]]></description>
+    <tag>convention</tag>
+  </rule>
+  <rule>
+    <key>S126</key>
+    <name>"if ... else if" constructs shall be terminated with an "else" clause</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  This rule applies whenever an <code>if</code> statement is followed by one or
+  more <code>else if</code> statements, the final <code>else if</code> shall be
+  followed by an <code>else</code> statement.
+</p>
+
+<p>
+The requirement for a final <code>else</code> statement is defensive programming.
+The <code>else</code> statement should either take appropriate action or contain
+a suitable comment as to why no action is taken. This is consistent with the
+requirement to have a final <code>default</code> clause in a <code>switch</code>
+statement.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (x == 0)
+{
+  doSomething();
+} else if (x == 1)
+{
+  doSomethingElse();
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (x == 0)
+{
+  doSomething();
+} else if (x == 1)
+{
+  doSomethingElse();
+} else
+{
+  throw new IllegalStateException();
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>AssignmentInsideSubExpression</key>
+    <name>Assignment should not be used inside sub-expressions</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Assignments within sub-expressions are hard to spot and therefore make the code less readable.
+It is also a common mistake to write <code>=</code> when <code>==</code> was meant.
+Ideally, every expression should have no more than one side-effect.
+Assignments inside lambda and delegate expressions are allowed.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+foo(i = 42);  // Non-Compliant
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+i = 42;
+foo(i);       // Compliant
+</pre>
+
+or:
+
+<pre>
+foo(i == 42); // Compliant
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>AsyncAwaitIdentifier</key>
+    <name>'async' and 'await' should not be used as identifier</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Since C# 5.0, <code>async</code> and <code>await</code> are contextual keywords.
+Contextual keywords do have a particular meaning in some contexts, but can still be used as variable names for example.
+Keywords, on the other hand, are always reserved, and therefore are not valid variable names.
+To avoid any confusion though, it is best to not use <code>async</code> and <code>await</code> as identifiers.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+int await = 42;         // Non-Compliant
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+int someOtherName = 42; // Compliant
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1481</key>
+    <name>Unused local variables should be removed</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will not wonder what the variable is used for.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public int numberOfMinutes(int hours) {
+  int seconds = 0;   // seconds is never used
+  return hours * 60;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public int numberOfMinutes(int hours) {
+  return hours * 60;
+}
+</pre>
+]]></description>
+    <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S121</key>
+    <name>Control structures should always use curly braces</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  While not technically incorrect, the omission of curly braces can be misleading, and may lead to the introduction of errors during maintenance.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+// the two statements seems to be attached to the if statement, but that is only true for the first one:
+if (condition)
+  executeSomething();
+  checkSomething();
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (condition) {
+  executeSomething();
+  checkSomething();
+}
+</pre>
+]]></description>
+    <tag>cert</tag>
+    <tag>cwe</tag>
+    <tag>misra</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
+    <key>S1145</key>
+    <name>"if" statement conditions should not unconditionally evaluate to "true" or to "false"</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  <code>if</code> statements with conditions that are always false have the effect of making blocks of code non-functional. This can be useful during debugging, but should not be checked in. <code>if</code> statements with conditions that are always true are completely redundant, and make the code less readable.
+</p>
+<p>
+In either case, unconditional <code>if</code> statements should be removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (true) {
+  doSomething();
+}
+...
+if (false) {
+  doSomethingElse();
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+doSomething();
+...
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1116</key>
+    <name>Empty statements should be removed</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  Empty statements, i.e. ;, are usually introduced by mistake, for example because:
+  <ul>
+    <li>It was meant to be replaced by an actual statement, but this was forgotten.</li>
+    <li>It was meant to be replaced by an actual statement, but this was forgotten.</li>
+  </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+void doSomething()
+{
+  ;                                                   // Non-Compliant - was used as a kind of TODO marker
+}
+
+void doSomethingElse()
+{
+  Console.WriteLine("Hello, world!");;                // Non-Compliant - double ;
+  ...
+  for (int i = 0; i < 3; Console.WriteLine(i), i++);  // Non-Compliant - Rarely, they are used on purpose as the body of a loop. It is a bad practice to have side-effects outside of the loop body
+  ...
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+void doSomething()
+{
+}
+
+void doSomethingElse()
+{
+  Console.WriteLine("Hello, world!");
+  ...
+  for (int i = 0; i < 3; i++)
+  {
+    Console.WriteLine(i);
+   }
+  ...
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1125</key>
+    <name>Literal boolean values should not be used in condition expressions</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Remove literal boolean values from conditional expressions to improve readability. Anything that can be tested for equality with a boolean value must itself be a boolean value, and boolean values can be tested atomically.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (booleanVariable == true) { /* ... */ }
+if (booleanVariable != true) { /* ... */ }
+if (booleanVariable || false) { /* ... */ }
+doSomething(!false);
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (booleanVariable) { /* ... */ }
+if (!booleanVariable) { /* ... */ }
+if (booleanVariable) { /* ... */ }
+doSomething(true);
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>BreakOutsideSwitch</key>
+    <name>'break' should not be used outside of 'switch'</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+The <code>break;</code> statement, as its name indicates, breaks the control flow of the program in an unstructured way.
+It reduces the program readability, and makes refactoring more complex when used outside of <code>switch</code>.
+</p>
+
+<p>The following code:</p>
+
+<pre>
+int i = 0;
+while (true)
+{
+  if (i == 10)
+  {
+    break;      // Non-Compliant
+  }
+
+  Console.WriteLine(i);
+  i++;
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+int i = 0;
+while (i != 10) // Compliant
+{
+  Console.WriteLine(i);
+  i++;
+}
+</pre>
+
+<p>The following code is compliant:</p>
+
+<pre>
+int foo = 0;
+switch (foo)
+{
+  case 0:
+    Console.WriteLine("foo = 0");
+    break;      // Compliant
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>S1301</key>
+    <name>"switch" statements should have at least 3 "case" clauses</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+<code>switch</code> statements are useful when there are many different cases depending on the value of the same expression.</br>
+For just one or two cases however, the code will be more readable with <code>if</code> statements.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+switch (variable) {
+  case 0:
+    doSomething();
+    break;
+  default:
+    doSomethingElse();
+    break;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+if (variable == 0) {
+  doSomething();
+} else {
+  doSomethingElse();
+}
+</pre>
+]]></description>
+  </rule>
+  <rule>
+    <key>SwitchWithoutDefault</key>
+    <name>'switch' statement should have a 'default:' case</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Always having a <code>default:</code> case in <code>switch</code> statements is defensive programming.
+It should either take appropriate action or contain a suitable comment as to why no action is taken.
+</p>
+
+<p>The following code snippet:</p>
+
+<pre>
+int foo = 42;
+switch (foo) // Non-Compliant
+{
+  case 0:
+    Console.WriteLine("foo = 0");
+    break;
+  case 42:
+    Console.WriteLine("foo = 42");
+    break;
+}
+</pre>
+
+<p>should be refactored into:</p>
+
+<pre>
+int foo = 42;
+switch (foo) // Compliant
+{
+  case 0:
+    Console.WriteLine("foo = 0");
+    break;
+  case 42:
+    Console.WriteLine("foo = 42");
+    break;
+  default:
+    throw new InvalidOperationException("Unexpected value foo = " + foo);
+}
+</pre>
+]]></description>
+  </rule>
+</rules>
