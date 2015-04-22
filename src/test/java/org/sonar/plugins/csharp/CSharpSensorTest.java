@@ -56,7 +56,7 @@ public class CSharpSensorTest {
   private DefaultFileSystem fs;
   private FileLinesContext fileLinesContext;
   private FileLinesContextFactory fileLinesContextFactory;
-  private NSonarQubeAnalyzerExtractor extractor;
+  private RuleRunnerExtractor extractor;
   private NoSonarFilter noSonarFilter;
   private ResourcePerspectives perspectives;
   private Issuable issuable;
@@ -69,7 +69,7 @@ public class CSharpSensorTest {
 
     CSharpSensor sensor =
       new CSharpSensor(
-        mock(Settings.class), mock(NSonarQubeAnalyzerExtractor.class),
+        mock(Settings.class), mock(RuleRunnerExtractor.class),
         fs,
         mock(FileLinesContextFactory.class), mock(NoSonarFilter.class), mock(RulesProfile.class), mock(ResourcePerspectives.class));
 
@@ -94,7 +94,7 @@ public class CSharpSensorTest {
     fileLinesContextFactory = mock(FileLinesContextFactory.class);
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
 
-    extractor = mock(NSonarQubeAnalyzerExtractor.class);
+    extractor = mock(RuleRunnerExtractor.class);
     when(extractor.executableFile()).thenReturn(new File("src/test/resources/CSharpSensorTest/fake.bat"));
 
     noSonarFilter = mock(NoSonarFilter.class);

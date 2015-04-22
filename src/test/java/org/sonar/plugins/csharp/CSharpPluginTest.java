@@ -40,7 +40,7 @@ public class CSharpPluginTest {
       CSharpSourceCodeColorizer.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      NSonarQubeAnalyzerExtractor.class,
+      RuleRunnerExtractor.class,
       CSharpSensor.class,
       CSharpCPDMapping.class
     };

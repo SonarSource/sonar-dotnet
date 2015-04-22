@@ -72,14 +72,14 @@ public class CSharpSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);
 
   private final Settings settings;
-  private final NSonarQubeAnalyzerExtractor extractor;
+  private final RuleRunnerExtractor extractor;
   private final FileSystem fs;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final RulesProfile ruleProfile;
   private final ResourcePerspectives perspectives;
 
-  public CSharpSensor(Settings settings, NSonarQubeAnalyzerExtractor extractor, FileSystem fs, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSensor(Settings settings, RuleRunnerExtractor extractor, FileSystem fs, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter, RulesProfile ruleProfile,
     ResourcePerspectives perspectives) {
     this.settings = settings;
