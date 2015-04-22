@@ -26,11 +26,11 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.rules.XMLRuleParser;
 import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.fxcop.FxCopConfiguration;
-import org.sonar.plugins.fxcop.FxCopRuleRepository;
+import org.sonar.plugins.fxcop.FxCopRulesDefinition;
 import org.sonar.plugins.fxcop.FxCopSensor;
+import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 import java.util.List;
 
@@ -63,7 +63,7 @@ public class CSharpFxCopProvider {
 
   public static List extensions() {
     return ImmutableList.of(
-      CSharpFxCopRuleRepository.class,
+      CSharpFxCopRulesDefinition.class,
       CSharpFxCopSensor.class,
       PropertyDefinition.builder(FXCOP_TIMEOUT_PROPERTY_KEY)
         .name("FxCop execution timeout")
@@ -113,10 +113,17 @@ public class CSharpFxCopProvider {
         .build());
   }
 
-  public static class CSharpFxCopRuleRepository extends FxCopRuleRepository {
+  public static class CSharpFxCopRulesDefinition extends FxCopRulesDefinition {
 
-    public CSharpFxCopRuleRepository(XMLRuleParser xmlRuleParser) {
-      super(FXCOP_CONF, xmlRuleParser);
+    public CSharpFxCopRulesDefinition() {
+      super(
+        FXCOP_CONF,
+        new FxCopRulesDefinitionSqaleLoader() {
+          @Override
+          public void loadSqale(NewRepository repository) {
+            SqaleXmlLoader.load(repository, "/com/sonar/sqale/fxcop.xml");
+          }
+        });
     }
 
   }

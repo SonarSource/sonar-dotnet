@@ -22,7 +22,7 @@ package org.sonar.plugins.csharp;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopRuleRepository;
+import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopRulesDefinition;
 import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopSensor;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class CSharpFxCopProviderTest {
   @Test
   public void test() {
     assertThat(nonProperties(CSharpFxCopProvider.extensions())).containsOnly(
-      CSharpFxCopRuleRepository.class,
+      CSharpFxCopRulesDefinition.class,
       CSharpFxCopSensor.class);
     assertThat(propertyKeys(CSharpFxCopProvider.extensions())).containsOnly(
       "sonar.cs.fxcop.assembly",

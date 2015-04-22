@@ -36,9 +36,8 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
 
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), Charsets.UTF_8));
-
-    SqaleXmlLoader.load(repository, "/com/sonar/sqale/fxcop.xml");
     SqaleXmlLoader.load(repository, "/org/sonar/plugins/csharp/sqale.xml");
+
     repository.done();
   }
 
