@@ -28,13 +28,13 @@ import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CSharpTfsIntegrationProviderTest {
+public class CSharpMsBuildIntegrationProviderTest {
 
   @Test
   public void test() {
-    assertThat(nonProperties(CSharpTfsIntegrationProvider.extensions())).isEmpty();
-    assertThat(propertyKeys(CSharpTfsIntegrationProvider.extensions())).containsOnly(
-      "sonar.cs.tfs.testProjectPattern");
+    assertThat(nonProperties(CSharpMsBuildIntegrationProvider.extensions())).isEmpty();
+    assertThat(propertyKeys(CSharpMsBuildIntegrationProvider.extensions())).containsOnly(
+      "sonar.cs.msbuild.testProjectPattern");
   }
 
   private static Set<String> nonProperties(List extensions) {

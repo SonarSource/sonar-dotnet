@@ -26,20 +26,20 @@ import org.sonar.api.resources.Qualifiers;
 
 import java.util.List;
 
-public class CSharpTfsIntegrationProvider {
+public class CSharpMsBuildIntegrationProvider {
 
   private static final String CATEGORY = "C#";
-  private static final String SUBCATEGORY = "TFS";
+  private static final String SUBCATEGORY = "MSBuild";
 
-  private CSharpTfsIntegrationProvider() {
+  private CSharpMsBuildIntegrationProvider() {
   }
 
   public static List extensions() {
     return ImmutableList.of(
-      PropertyDefinition.builder("sonar.cs.tfs.testProjectPattern")
+      PropertyDefinition.builder("sonar.cs.msbuild.testProjectPattern")
         .name("Test project pattern")
         .description("Regular expression matched by test project files path (.NET syntax)")
-        .defaultValue("(?i).*test.*")
+        .defaultValue(".*test.*")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT)

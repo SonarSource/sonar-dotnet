@@ -52,7 +52,7 @@ public class CSharpPluginTest {
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
-        + CSharpTfsIntegrationProvider.extensions().size());
+        + CSharpMsBuildIntegrationProvider.extensions().size());
   }
 
   private static List nonProperties(List extensions) {
