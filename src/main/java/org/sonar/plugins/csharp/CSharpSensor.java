@@ -33,6 +33,7 @@ import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.Settings;
@@ -528,7 +529,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private Iterable<File> filesToAnalyze() {
-    return fs.files(fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY));
+    return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
   }
 
   private File toolInput() {

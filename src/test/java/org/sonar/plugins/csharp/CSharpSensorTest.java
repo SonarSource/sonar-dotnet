@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.component.ResourcePerspectives;
@@ -78,7 +79,10 @@ public class CSharpSensorTest {
     fs.add(new DefaultInputFile("foo").setAbsolutePath("foo").setLanguage("java"));
     assertThat(sensor.shouldExecuteOnProject(mock(Project.class))).isFalse();
 
-    fs.add(new DefaultInputFile("bar").setAbsolutePath("bar").setLanguage("cs"));
+    fs.add(new DefaultInputFile("bar").setAbsolutePath("bar").setLanguage("cs").setType(Type.TEST));
+    assertThat(sensor.shouldExecuteOnProject(mock(Project.class))).isFalse();
+
+    fs.add(new DefaultInputFile("baz").setAbsolutePath("baz").setLanguage("cs"));
     assertThat(sensor.shouldExecuteOnProject(mock(Project.class))).isTrue();
   }
 
