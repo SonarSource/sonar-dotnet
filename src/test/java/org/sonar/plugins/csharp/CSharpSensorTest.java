@@ -19,7 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.io.Files;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -42,6 +45,10 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.ActiveRuleParam;
+import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.RuleParam;
 
 import java.io.File;
 
@@ -110,11 +117,38 @@ public class CSharpSensorTest {
     when(issueBuilder.build()).thenReturn(issue);
     when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(InputFile.class))).thenReturn(issuable);
 
+    ActiveRule templateActiveRule = mock(ActiveRule.class);
+    when(templateActiveRule.getRuleKey()).thenReturn("[template_key]");
+    Rule templateRule = mock(Rule.class);
+    Rule baseTemplateRule = mock(Rule.class);
+    when(baseTemplateRule.getKey()).thenReturn("[base_key]");
+    when(templateRule.getTemplate()).thenReturn(baseTemplateRule);
+    when(templateActiveRule.getRule()).thenReturn(templateRule);
+
+    ActiveRule parametersActiveRule = mock(ActiveRule.class);
+    when(parametersActiveRule.getRuleKey()).thenReturn("[parameters_key]");
+    ActiveRuleParam param1 = mock(ActiveRuleParam.class);
+    when(param1.getKey()).thenReturn("[param1_key]");
+    when(param1.getValue()).thenReturn("[param1_value]");
+    when(parametersActiveRule.getActiveRuleParams()).thenReturn(ImmutableList.of(param1));
+    Rule parametersRule = mock(Rule.class);
+    RuleParam param1Default = mock(org.sonar.api.rules.RuleParam.class);
+    when(param1Default.getKey()).thenReturn("[param1_key]");
+    when(param1Default.getDefaultValue()).thenReturn("[param1_default_value]");
+    RuleParam param2Default = mock(org.sonar.api.rules.RuleParam.class);
+    when(param2Default.getKey()).thenReturn("[param2_default_key]");
+    when(param2Default.getDefaultValue()).thenReturn("[param2_default_value]");
+    when(parametersRule.getParams()).thenReturn(ImmutableList.of(param1Default, param2Default));
+    when(parametersActiveRule.getRule()).thenReturn(parametersRule);
+
+    RulesProfile rulesProfile = mock(RulesProfile.class);
+    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
+
     CSharpSensor sensor =
       new CSharpSensor(
         mock(Settings.class), extractor,
         fs,
-        fileLinesContextFactory, noSonarFilter, mock(RulesProfile.class), perspectives);
+        fileLinesContextFactory, noSonarFilter, rulesProfile, perspectives);
 
     context = mock(SensorContext.class);
     sensor.analyse(mock(Project.class), context);
@@ -171,6 +205,12 @@ public class CSharpSensorTest {
     verify(issueBuilder).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
     verify(issueBuilder).line(16);
     verify(issuable).addIssue(issue);
+  }
+
+  @Test
+  public void produced_analysis_input() throws Exception {
+    assertThat(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""))
+      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
 }
