@@ -42,6 +42,7 @@ public class RuleRunnerExtractorTest {
     RuleRunnerExtractor extractor = new RuleRunnerExtractor(reactor);
 
     assertThat(extractor.executableFile()).isEqualTo(new File(new File(workDir, "SonarQube.CSharp.CodeAnalysis.Runner"), "SonarQube.CSharp.CodeAnalysis.Runner.exe"));
+    assertThat(extractor.executableFile()).isEqualTo(new File(new File(workDir, "SonarQube.CSharp.CodeAnalysis.Runner"), "SonarQube.CSharp.CodeAnalysis.Runner.exe"));
   }
 
 }
