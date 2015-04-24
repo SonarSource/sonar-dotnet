@@ -48,7 +48,7 @@
   </issueManagement>
 
   <properties>
-    <sonar.version>4.5.1</sonar.version>
+    <sonar.version>4.5.2</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
