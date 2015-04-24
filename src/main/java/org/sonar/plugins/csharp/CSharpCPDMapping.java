@@ -65,7 +65,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   private static final String CONNECTING_CHAR = g("\\p{Pc}");
   private static final String FORMATTING_CHAR = g("\\p{Cf}");
 
-  private static enum CSharpPunctuator implements TokenType {
+  private enum CSharpPunctuator implements TokenType {
     SEMICOLON(";"), EQUAL("="), STAR("*"), LCURLYBRACE("{"), LPARENTHESIS("("), LBRACKET("["), RBRACKET("]"), RPARENTHESIS(")"), RCURLYBRACE(
       "}"), COLON(":"), COMMA(","), DOT("."), EXCLAMATION("!"), SUPERIOR(">"), INFERIOR("<"), PLUS("+"), MINUS("-"), SLASH("/"), MODULO("%"), AND(
       "&"), XOR("^"), OR("|"), QUESTION("?"), TILDE("~"), DOUBLE_COLON("::"), DOUBLE_QUESTION("??"), EQ_OP("=="), NE_OP("!="), LEFT_ASSIGN(
@@ -162,7 +162,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
         List<Token> tokens = lexer.lex(new File(fileName));
         tokens = removeUsingDirectives(tokens);
         for (Token token : tokens) {
-          if (token.getType() == GenericTokenType.EOF) {
+          if (GenericTokenType.EOF.equals(token.getType())) {
             break;
           }
 
@@ -173,7 +173,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
       }
 
       private String getTokenImage(Token token) {
-        if (token.getType() == GenericTokenType.LITERAL) {
+        if (GenericTokenType.LITERAL.equals(token.getType())) {
           return GenericTokenType.LITERAL.getValue();
         }
         return token.getValue();
