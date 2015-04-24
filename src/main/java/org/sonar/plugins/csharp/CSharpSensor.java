@@ -455,7 +455,7 @@ public class CSharpSensor implements Sensor {
     }
 
     private void handleIssuesTag(InputFile inputFile) throws XMLStreamException {
-      Issuable issuable = perspectives.as(Issuable.class, org.sonar.api.resources.File.create(inputFile.relativePath()));
+      Issuable issuable = perspectives.as(Issuable.class, inputFile);
 
       while (stream.hasNext()) {
         int next = stream.next();

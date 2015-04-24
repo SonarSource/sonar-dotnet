@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.sonar.api.batch.SensorContext;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -40,7 +41,6 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.Resource;
 import org.sonar.api.rule.RuleKey;
 
 import java.io.File;
@@ -108,7 +108,7 @@ public class CSharpSensorTest {
     when(issuable.newIssueBuilder()).thenReturn(issueBuilder);
     issue = mock(Issue.class);
     when(issueBuilder.build()).thenReturn(issue);
-    when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(Resource.class))).thenReturn(issuable);
+    when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(InputFile.class))).thenReturn(issuable);
 
     CSharpSensor sensor =
       new CSharpSensor(
