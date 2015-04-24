@@ -21,12 +21,12 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import org.sonar.api.PropertyType;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.component.ResourcePerspectives;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Qualifiers;
-import org.sonar.api.scan.filesystem.ModuleFileSystem;
 import org.sonar.plugins.fxcop.FxCopConfiguration;
 import org.sonar.plugins.fxcop.FxCopRulesDefinition;
 import org.sonar.plugins.fxcop.FxCopSensor;
@@ -130,8 +130,8 @@ public class CSharpFxCopProvider {
 
   public static class CSharpFxCopSensor extends FxCopSensor {
 
-    public CSharpFxCopSensor(Settings settings, RulesProfile profile, ModuleFileSystem fileSystem, ResourcePerspectives perspectives) {
-      super(FXCOP_CONF, settings, profile, fileSystem, perspectives);
+    public CSharpFxCopSensor(Settings settings, RulesProfile profile, FileSystem fs, ResourcePerspectives perspectives) {
+      super(FXCOP_CONF, settings, profile, fs, perspectives);
     }
 
   }
