@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.plugins.csharp.CSharpCommonRulesEngine;
-
 import org.junit.Test;
-import org.sonar.commonrules.api.CommonRulesEngine;
-import org.sonar.commonrules.api.CommonRulesRepository;
+import org.sonar.squidbridge.commonrules.api.CommonRulesEngine;
+import org.sonar.squidbridge.commonrules.api.CommonRulesRepository;
+import org.sonar.squidbridge.commonrules.internal.CommonRulesConstants;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpCommonRulesEngineTest {
@@ -38,10 +38,11 @@ public class CSharpCommonRulesEngineTest {
   public void declare_rules() {
     CommonRulesEngine engine = new CSharpCommonRulesEngine();
     CommonRulesRepository repository = engine.newRepository();
-    assertThat(repository.rules()).hasSize(3);
-    assertThat(repository.rule("InsufficientCommentDensity")).isNotNull();
-    assertThat(repository.rule("DuplicatedBlocks")).isNotNull();
-    assertThat(repository.rule("InsufficientLineCoverage")).isNotNull();
+
+    assertThat(repository.enabledRuleKeys()).containsOnly(
+      CommonRulesConstants.RULE_INSUFFICIENT_COMMENT_DENSITY,
+      CommonRulesConstants.RULE_DUPLICATED_BLOCKS,
+      CommonRulesConstants.RULE_INSUFFICIENT_LINE_COVERAGE);
   }
 
 }

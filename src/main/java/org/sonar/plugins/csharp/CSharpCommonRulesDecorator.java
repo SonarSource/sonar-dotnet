@@ -19,14 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.resources.ProjectFileSystem;
-import org.sonar.commonrules.api.CommonRulesDecorator;
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.rule.CheckFactory;
+import org.sonar.api.component.ResourcePerspectives;
+import org.sonar.squidbridge.commonrules.api.CommonRulesDecorator;
 
 public class CSharpCommonRulesDecorator extends CommonRulesDecorator {
 
-  public CSharpCommonRulesDecorator(ProjectFileSystem fs, RulesProfile qProfile) {
-    super(CSharpPlugin.LANGUAGE_KEY, fs, qProfile);
+  public CSharpCommonRulesDecorator(FileSystem fs, CheckFactory checkFactory, ResourcePerspectives perspectives) {
+    super(CSharpPlugin.LANGUAGE_KEY, fs, checkFactory, perspectives);
   }
 
 }
