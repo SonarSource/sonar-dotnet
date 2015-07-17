@@ -28,8 +28,7 @@ import java.util.List;
 
 public class CSharpMsBuildIntegrationProvider {
 
-  private static final String CATEGORY = "C#";
-  private static final String SUBCATEGORY = "MSBuild";
+  private static final String CATEGORY = "MSBuild SonarQube Runner";
 
   private CSharpMsBuildIntegrationProvider() {
   }
@@ -41,7 +40,6 @@ public class CSharpMsBuildIntegrationProvider {
         .description("Regular expression matched by test project files path (.NET syntax)")
         .defaultValue(".*test.*")
         .category(CATEGORY)
-        .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT)
         .type(PropertyType.STRING)
         .build());
