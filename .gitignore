@@ -1,3 +1,6 @@
+# Quick fix for a broken unit test...
+src/test/resources/CSharpSensorTest/analysis-input.xml
+
 # Maven
 target/
 
