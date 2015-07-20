@@ -33,7 +33,7 @@ import java.io.InputStream;
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class RuleRunnerExtractor implements BatchExtension {
 
-  private static final String RULE_RUNNER = "SonarQube.CSharp.CodeAnalysis.Runner";
+  private static final String RULE_RUNNER = "SonarLint.Runner";
   private static final String RULE_RUNNER_ZIP = RULE_RUNNER + ".zip";
   private static final String RULE_RUNNER_EXE = RULE_RUNNER + ".exe";
 
