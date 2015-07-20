@@ -12,7 +12,7 @@
       <Parameters>
         <Parameter>
           <Key>RuleKey</Key>
-          <Value>[template_key]</Value>
+          <Value>[template_key&quot;&apos;&lt;&gt;&amp;]</Value>
         </Parameter>
       </Parameters>
     </Rule>

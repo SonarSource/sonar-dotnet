@@ -118,7 +118,7 @@ public class CSharpSensorTest {
     when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(InputFile.class))).thenReturn(issuable);
 
     ActiveRule templateActiveRule = mock(ActiveRule.class);
-    when(templateActiveRule.getRuleKey()).thenReturn("[template_key]");
+    when(templateActiveRule.getRuleKey()).thenReturn("[template_key\"'<>&]");
     Rule templateRule = mock(Rule.class);
     Rule baseTemplateRule = mock(Rule.class);
     when(baseTemplateRule.getKey()).thenReturn("[base_key]");

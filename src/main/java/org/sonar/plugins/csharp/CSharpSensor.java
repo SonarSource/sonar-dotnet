@@ -118,14 +118,14 @@ public class CSharpSensor implements Sensor {
       appendLine(sb, "    <Rule>");
       Rule template = activeRule.getRule().getTemplate();
       String ruleKey = template == null ? activeRule.getRuleKey() : template.getKey();
-      appendLine(sb, "      <Key>" + ruleKey + "</Key>");
+      appendLine(sb, "      <Key>" + escapeXml(ruleKey) + "</Key>");
       Map<String, String> parameters = effectiveParameters(activeRule);
       if (!parameters.isEmpty()) {
         appendLine(sb, "      <Parameters>");
         for (Entry<String, String> parameter : parameters.entrySet()) {
           appendLine(sb, "        <Parameter>");
-          appendLine(sb, "          <Key>" + parameter.getKey() + "</Key>");
-          appendLine(sb, "          <Value>" + parameter.getValue() + "</Value>");
+          appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
+          appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
           appendLine(sb, "        </Parameter>");
         }
         appendLine(sb, "      </Parameters>");
@@ -135,7 +135,7 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "  </Rules>");
     appendLine(sb, "  <Files>");
     for (File file : filesToAnalyze()) {
-      appendLine(sb, "    <File>" + file.getAbsolutePath() + "</File>");
+      appendLine(sb, "    <File>" + escapeXml(file.getAbsolutePath()) + "</File>");
     }
     appendLine(sb, "  </Files>");
     appendLine(sb, "</AnalysisInput>");
@@ -159,6 +159,10 @@ public class CSharpSensor implements Sensor {
     if (exitCode != 0) {
       throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode);
     }
+  }
+
+  private static String escapeXml(String str) {
+    return str.replace("&", "&amp;").replace("\"", "&quot;").replace("'", "&apos;").replace("<", "&lt;").replace(">", "&gt;");
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
