@@ -62,9 +62,9 @@
       <version>1.3</version>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.sonar.dotnet.tests</groupId>
+      <groupId>org.sonarsource.sonar-plugins.dotnet.tests</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.2</version>
+      <version>1.3-SNAPSHOT</version>
     </dependency>
 
     <dependency>

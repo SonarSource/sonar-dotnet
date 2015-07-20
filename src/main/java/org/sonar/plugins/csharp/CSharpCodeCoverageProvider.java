@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
@@ -93,8 +94,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
-      super(COVERAGE_CONF, coverageAggregator);
+    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator, FileSystem fs) {
+      super(COVERAGE_CONF, coverageAggregator, fs);
     }
 
   }
