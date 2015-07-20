@@ -48,7 +48,6 @@
   </issueManagement>
 
   <properties>
-    <bintray.package>sonar-csharp-plugin</bintray.package>
     <sonar.version>4.5.2</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>C#</sonar.pluginName>
