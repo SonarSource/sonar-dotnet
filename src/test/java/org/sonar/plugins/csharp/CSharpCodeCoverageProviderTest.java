@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
-import org.apache.maven.settings.Settings;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
@@ -31,7 +30,6 @@ import java.util.List;
 import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class CSharpCodeCoverageProviderTest {
 
@@ -53,8 +51,6 @@ public class CSharpCodeCoverageProviderTest {
     assertThat(constructor.isAccessible()).isFalse();
     constructor.setAccessible(true);
     constructor.newInstance();
-
-    new CSharpCoverageAggregator(mock(Settings.class));
   }
 
   private static Set<String> nonProperties(List extensions) {
