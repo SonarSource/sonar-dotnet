@@ -39,7 +39,7 @@ public class CSharpFxCopProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Deprecated";
   private static final String DEPRECATION_TEXT = "This deprecated property is not used anymore and so must be ignored when launching the SonarQube analysis of " +
-    ".Net projects with help of the MSBuild Runner. If the old deprecated Visual Studio Bootstrapper plugin is still used along with SonarRunner to analyse .Net projects, " +
+    ".NET projects with help of the MSBuild Runner. If the old deprecated Visual Studio Bootstrapper plugin is still used along with SonarRunner to analyse .NET projects, " +
     "moving to the MSBuild Runner should be scheduled because one day the backward support of the Visual Studio Boostrapper plugin will be dropped.";
 
   private static final String FXCOP_ASSEMBLIES_PROPERTY_KEY = "sonar.cs.fxcop.assembly";
@@ -70,7 +70,7 @@ public class CSharpFxCopProvider {
       CSharpFxCopSensor.class,
       PropertyDefinition.builder(FXCOP_TIMEOUT_PROPERTY_KEY)
         .name(deprecatedName("FxCop execution timeout"))
-        .description(deprecatedName("Time in minutes after which FxCop's execution should be interrupted if not finished"))
+        .description(deprecatedDescription("Time in minutes after which FxCop's execution should be interrupted if not finished"))
         .defaultValue("10")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
@@ -79,14 +79,14 @@ public class CSharpFxCopProvider {
         .build(),
       PropertyDefinition.builder(FXCOP_ASSEMBLIES_PROPERTY_KEY)
         .name(deprecatedName("Assembly to analyze"))
-        .description(deprecatedName("Example: bin/Debug/MyProject.dll"))
+        .description(deprecatedDescription("Example: bin/Debug/MyProject.dll"))
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(FXCOP_FXCOPCMD_PATH_PROPERTY_KEY)
         .name(deprecatedName("Path to FxCopCmd.exe"))
-        .description(deprecatedName("Example: C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe"))
+        .description(deprecatedDescription("Example: C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe"))
         .defaultValue("C:/Program Files (x86)/Microsoft Visual Studio 12.0/Team Tools/Static Analysis Tools/FxCop/FxCopCmd.exe")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
@@ -94,7 +94,7 @@ public class CSharpFxCopProvider {
         .build(),
       PropertyDefinition.builder(FXCOP_ASPNET_PROPERTY_KEY)
         .name(deprecatedName("ASP.NET"))
-        .description(deprecatedName("Whether or not to set the /aspnet flag when launching FxCopCmd.exe"))
+        .description(deprecatedDescription("Whether or not to set the /aspnet flag when launching FxCopCmd.exe"))
         .defaultValue("false")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
@@ -102,18 +102,22 @@ public class CSharpFxCopProvider {
         .build(),
       PropertyDefinition.builder(FXCOP_DIRECTORIES_PROPERTY_KEY)
         .name(deprecatedName("Additional assemblies directories"))
-        .description(deprecatedName("Comma-separated list of directories where FxCop should look for referenced assemblies. Example: c:/MyLibrary"))
+        .description(deprecatedDescription("Comma-separated list of directories where FxCop should look for referenced assemblies. Example: c:/MyLibrary"))
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(FXCOP_REFERENCES_PROPERTY_KEY)
         .name(deprecatedName("Additional assemblies references"))
-        .description(deprecatedName("Comma-separated list of referenced assemblies to pass to FxCop. Example: c:/MyLibrary.dll"))
+        .description(deprecatedDescription("Comma-separated list of referenced assemblies to pass to FxCop. Example: c:/MyLibrary.dll"))
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build());
+  }
+
+  private static String deprecatedDescription(String description) {
+    return description + "<br /><br />" + DEPRECATION_TEXT;
   }
 
   private static String deprecatedName(String name) {

@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.apache.commons.lang.StringUtils;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.AbstractLanguage;
 
@@ -34,11 +33,7 @@ public class CSharp extends AbstractLanguage {
 
   @Override
   public String[] getFileSuffixes() {
-    String[] suffixes = settings.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
-    if (suffixes.length == 0) {
-      suffixes = StringUtils.split(CSharpPlugin.FILE_SUFFIXES_DEFVALUE, ",");
-    }
-    return suffixes;
+    return settings.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
   }
 
 }

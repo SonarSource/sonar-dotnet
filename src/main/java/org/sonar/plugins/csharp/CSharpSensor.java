@@ -509,7 +509,7 @@ public class CSharpSensor implements Sensor {
 
   }
 
-  private void appendLine(StringBuilder sb, String line) {
+  private static void appendLine(StringBuilder sb, String line) {
     sb.append(line);
     sb.append("\r\n");
   }
