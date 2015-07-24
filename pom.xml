@@ -11,7 +11,7 @@
   <groupId>org.sonarsource.sonar-plugins.dotnet.csharp</groupId>
   <artifactId>sonar-csharp-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>4.1-SNAPSHOT</version>
+  <version>4.1</version>
 
   <name>SonarQube C# Plugin</name>
   <description>Enable analysis and reporting on C# projects.</description>
@@ -40,7 +40,7 @@
     <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
     <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
     <url>https://github.com/SonarCommunity/sonar-csharp</url>
-    <tag>HEAD</tag>
+    <tag>4.1</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
