@@ -98,7 +98,7 @@ public class CSharpSensorTest {
     fs = new DefaultFileSystem();
     fs.setWorkDir(new File("src/test/resources/CSharpSensorTest"));
 
-    inputFile = new DefaultInputFile("MyClass.cs").setAbsolutePath("MyClass.cs");
+    inputFile = new DefaultInputFile("Foo&Bar.cs").setAbsolutePath("Foo&Bar.cs").setLanguage("cs");
     fs.add(inputFile);
 
     fileLinesContext = mock(FileLinesContext.class);
@@ -209,7 +209,9 @@ public class CSharpSensorTest {
 
   @Test
   public void produced_analysis_input() throws Exception {
-    assertThat(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""))
+    assertThat(
+      Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+        .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
       .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 

@@ -31,5 +31,6 @@
     </Rule>
   </Rules>
   <Files>
+    <File>Foo&amp;Bar.cs</File>
   </Files>
 </AnalysisInput>
