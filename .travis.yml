@@ -6,7 +6,7 @@ jdk:
   - oraclejdk7
 
 script:
-  - mvn verify -B -e -V
+  - mvn -version
 
 cache:
   directories:
