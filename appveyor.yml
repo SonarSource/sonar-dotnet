@@ -4,4 +4,5 @@ install:
   - choco install maven
 
 build_script:
+  - echo %PATH%
   - mvn clean install
