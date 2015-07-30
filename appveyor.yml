@@ -2,3 +2,6 @@ version: 1.0.{build}
 
 install:
   - choco install maven
+
+build_script:
+  - mvn clean install
