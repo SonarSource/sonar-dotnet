@@ -1,0 +1,11 @@
+version: 1.0.{build}
+
+install: 
+
+before_build:
+
+build_script:
+
+test:
+
+after_test:
