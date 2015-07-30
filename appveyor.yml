@@ -2,6 +2,8 @@ version: 1.0.{build}
 
 install:
   - choco install maven
+# Reload the %PATH% user environment variable
+  - setx PATH -k "HKEY_CURRENT_USER\Environment\PATH"
 
 build_script:
   - echo %PATH%
