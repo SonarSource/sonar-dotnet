@@ -5,7 +5,23 @@ function FetchAndUnzip
 	param ([string]$Url, [string]$Out)
 
 	$tmp = [System.IO.Path]::GetTempFileName()
-	(New-Object System.Net.WebClient).DownloadFile($Url, $tmp)
+	[System.Reflection.Assembly]::LoadWithPartialName('System.Net.Http') | Out-Null
+	$client = (New-Object System.Net.Http.HttpClient)
+	try
+	{
+		if (-not([string]::IsNullOrEmpty($env:GITHUB_TOKEN)))
+		{
+			$credentials = [string]::Format([System.Globalization.CultureInfo]::InvariantCulture, "{0}:", $env:GITHUB_TOKEN);
+			$credentials = [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credentials));
+			$client.DefaultRequestHeaders.Authorization = (New-Object System.Net.Http.Headers.AuthenticationHeaderValue("Basic", $credentials));
+		}
+		$contents = $client.GetByteArrayAsync($url).Result;
+		[System.IO.File]::WriteAllBytes($tmp, $contents);
+	}
+	finally
+	{
+		$client.Dispose()
+	}
 
 	if (-not(Test-Path $Out))
 	{
