@@ -115,19 +115,19 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
     }
 }
 
-switch ($env:RUN_ITS)
+switch ($env:TEST)
 {
-	"false"
+	"CI"
 	{
 		mvn verify "--batch-mode" "-B" "-e" "-V"
 		CheckLastExitCode
 	}
 
-	"true"
+	"PLUGIN"
 	{
 		InstallAppveyorTools
 
-		mvn install "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
+		mvn package "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
 		CheckLastExitCode
 
 		if ($env:SQ_VERSION -eq "DEV")
@@ -138,7 +138,7 @@ switch ($env:RUN_ITS)
 		pushd its/plugin
 		try
 		{
-			mvn install "--batch-mode" "-DcsharpVersion=""DEV""" "-Dsonar.runtimeVersion=""$env:SQ_VERSION""" "-Dmaven.test.redirectTestOutputToFile=false" "-Dsonar.jdbc.dialect=embedded" "-Dorchestrator.updateCenterUrl=http://update.sonarsource.org/update-center-dev.properties" "-Dmaven.localRepository=$env:USERPROFILE\.m2\repository"
+			mvn test "--batch-mode" "-DcsharpVersion=""DEV""" "-Dsonar.runtimeVersion=""$env:SQ_VERSION""" "-Dmaven.test.redirectTestOutputToFile=false" "-Dsonar.jdbc.dialect=embedded" "-Dorchestrator.updateCenterUrl=http://update.sonarsource.org/update-center-dev.properties" "-Dmaven.localRepository=$env:USERPROFILE\.m2\repository"
 			CheckLastExitCode
 		}
 		finally
@@ -149,6 +149,6 @@ switch ($env:RUN_ITS)
 
 	default
 	{
-		throw "RUN_ITS should be set to either ""true"" or ""false"", not: ""$env:RUN_ITS"""
+		throw "Unexpected TEST mode: $env:TEST"
 	}
 }

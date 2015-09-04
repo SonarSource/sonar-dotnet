@@ -44,8 +44,7 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .addPlugin(PLUGIN_KEY)
-    .setMainPluginKey(PLUGIN_KEY)
+    .addPlugin(FileLocation.of("../../target/sonar-csharp-plugin.jar"))
     .restoreProfileAtStartup(FileLocation.of("profiles/fxcop.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
