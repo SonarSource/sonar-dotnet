@@ -38,7 +38,7 @@ public class CSharpMsBuildIntegrationProvider {
       PropertyDefinition.builder("sonar.cs.msbuild.testProjectPattern")
         .name("Test project pattern")
         .description("Regular expression matched by test project files path (.NET syntax)")
-        .defaultValue(".*test.*")
+        .defaultValue("[^\\\\]*test[^\\\\]*$")
         .category(CATEGORY)
         .onQualifiers(Qualifiers.PROJECT)
         .type(PropertyType.STRING)
