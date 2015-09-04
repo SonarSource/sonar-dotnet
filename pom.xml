@@ -8,7 +8,7 @@
     <version>23</version>
   </parent>
 
-  <groupId>org.sonarsource.sonar-plugins.dotnet.csharp</groupId>
+  <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-csharp-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
   <version>4.2-SNAPSHOT</version>
