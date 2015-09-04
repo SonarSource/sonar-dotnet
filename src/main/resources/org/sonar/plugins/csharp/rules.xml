@@ -1,6 +1,685 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <rules>
   <rule>
+    <key>S3254</key>
+    <name>Default parameter values should not be passed as arguments</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Specifying the default parameter values in a method call is redundant. Such values should be omitted in the interests of readability.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void M(int x, int y = 5, int z = 7) { /* ... */ }
+
+// ...
+M(1, 5); //Noncompliant, y has the default value
+M(1, z: 7); //Noncompliant, z has the default value
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public void M(int x, int y=5, int z = 7) { /* ... */ }
+
+// ...
+M(1);
+M(1);
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3240</key>
+    <name>The simplest possible condition syntax should be used</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    In the interests of keeping code clean, the simplest possible conditional syntax should be used. That means using
+    the <code>??</code> operator for an assign-if-not-null operator, and using the ternary operator <code>?:</code> for
+    assignment to a single variable.
+</p>
+
+<h2>Noncompliant Code Sample</h2>
+<pre>
+object a = null, b = null, x;
+
+if (a != null) // Noncompliant; needlessly verbose
+{
+  x = a;
+}
+else
+{
+  x = b;
+}
+
+x = a != null ? a : b; // Noncompliant; better but could still be simplified
+
+x = (a == null) ? new object() : a; // Noncompliant
+
+if (condition) // Noncompliant
+{
+  x = a;
+}
+else
+{
+  x = b;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+object x;
+
+x = a ?? b;
+x = a ?? b;
+x = a ?? new object();
+x = condition ? a : b;
+</pre>]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3218</key>
+    <name>Inner class members should not shadow outer class "static" or type members</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    It's possible to name the members of an inner class the same as the <code>static</code> members of its enclosing class -
+    possible, but a bad idea. That's because maintainers may be confused about which members are being used where. Instead the
+    inner class' members should be renamed and all the references updated.
+</p>
+
+<h2>Noncompliant Code Sample</h2>
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int A; //Noncompliant
+    public int MyProp
+    {
+      get { return A; }  // Returns inner A. Was that intended?
+    }
+  }
+}
+</pre>
+After a rename
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int B;
+    public int MyProp
+    {
+      get { return A; }  // Still compiles and runs but functionality has changed
+    }
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int InnerA;
+    public int MyProp
+    {
+      get { return InnerA; }
+    }
+  }
+}
+</pre>]]></description>
+    <tag>design</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
+    <key>S3169</key>
+    <name>Multiple "OrderBy" calls should not be used</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    There's no point in chaining multiple <code>OrderBy</code> calls in a LINQ; only the last one will be reflected in the result
+    because each subsequent call completely reorders the list. Thus, calling <code>OrderBy</code> multiple times is a performance
+    issue as well, because all of the sorting will be executed, but only the result of the last sort will be kept.
+</p>
+<p>
+    Instead, use <code>ThenBy</code> for each call after the first.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var x = personList
+  .OrderBy(person => person.Age)
+  .OrderBy(person => person.Name)  // Noncompliant
+  .ToList();  // x is sorted by Name, not sub-sorted
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var x = personList
+  .OrderBy(person => person.Age)
+  .ThenBy(person => person.Name)
+  .ToList();
+</pre>
+]]></description>
+    <tag>bug</tag>
+    <tag>preformance</tag>
+  </rule>
+  <rule>
+    <key>S1172</key>
+    <name>Unused method parameters should be removed</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+void DoSomething(int a, int b) // "b" is unused
+{
+  Compute(a);
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+void DoSomething(int a)
+{
+  Compute(a);
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    <code>virtual</code>, <code>override</code> methods and interface implementations are ignored.
+</p>
+<pre>
+override void DoSomething(int a, int b) // no issue reported on b
+{
+  Compute(a);
+}
+</pre>
+
+<h2>See</h2>
+
+<ul>
+    <li>MISRA C++:2008, 0-1-11</li>
+    <li>MISRA C:2012, 2.7</li>
+</ul>]]></description>
+    <tag>misra</tag>
+    <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S3234</key>
+    <name>"GC.SuppressFinalize" should not be invoked for types without destructors</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>GC.SuppressFinalize</code> asks the Common Language Runtime not to call the finalizer of an object. This is useful when
+    implementing the dispose pattern where object finalization is already handled in <code>IDisposable.Dispose</code>. However, it
+    has no effect if there is no finalizer defined in the object's type, so using it in such cases is just confusing.
+</p>
+<p>
+    This rule raises an issue when <code>GC.SuppressFinalize</code> is called for objects of <code>sealed</code> types without a finalizer.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+sealed class MyClass
+{
+  public void Method()
+  {
+    ...
+    GC.SuppressFinalize(this); //Noncompliant
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+sealed class MyClass
+{
+  public void Method()
+  {
+    ...
+  }
+}
+</pre>
+]]></description>
+    <tag>confusing</tag>
+    <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S3052</key>
+    <name>Fields should not be initialized to default values</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The compiler automatically initializes class fields to their default values before setting them with any initialization
+    values, so there is no need to explicitly set a field to its default value. Further, under the logic that cleaner code
+    is better code, it's considered poor style to do so.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class X
+{
+  public int field = 0; // Noncompliant; defaults to 0. Reinitializing incurs minor performance penalty
+  public object o = null; //Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class X
+{
+  public int field;
+  public object o;
+}
+</pre>
+]]></description>
+    <tag>convention</tag>
+  </rule>
+  <rule>
+    <key>S2761</key>
+    <name>Doubled prefix operators "!!" and "~~" should not be used</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Calling the <code>!</code> or <code>~</code> prefix operator twice does nothing: the second invocation undoes the first.
+    Such mistakes are typically caused by accidentally double-tapping the key in question without noticing.
+</p>
+<p>
+    Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+int v1 = 0;
+bool v2 = false;
+
+var v3 = !!v1; // Noncompliant
+var v4 = ~~v2; // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+int v1 = 0;
+bool v2 = false;
+
+var v3 = !v1;
+var v4 = ~v2;
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3249</key>
+    <name>Classes directly  extending "Object" should not call "base" in "GetHashCode" or "Equals"</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Making a <code>base</code> call in an overridden method is generally a good idea, but not in <code>GetHashCode</code> and
+    <code>Equals</code> for classes that directly extend <code>Object</code> because those methods are based on the object reference.
+    Meaning that no two <code>Objects</code> that use those <code>base</code> methods will ever be equal or have the same hash.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Point
+{
+  private readonly int x;
+  public MyClass(int x)
+  {
+    this.x = x;
+  }
+  public override int GetHashCode()
+  {
+    return x.GetHashCode() ^ base.GetHashCode(); //Noncompliant
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class Point
+{
+  private readonly int x;
+  public MyClass(int x)
+  {
+    this.x = x;
+  }
+  public override int GetHashCode()
+  {
+    return x.GetHashCode();
+  }
+}
+</pre>
+
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S1121</key>
+    <name>Assignments should not be made from within sub-expressions</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Assignments within sub-expressions are hard to spot and therefore make the code less readable.
+    It is also a common mistake to write <code>=</code> when <code>==</code> was meant.
+    Ideally, expressions should should not have side-effects.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+doSomething(i = 42);
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+i = 42;
+doSomething(i);
+// or
+doSomething(i == 42);  // Perhaps in fact the comparison operator was expected
+</pre>
+
+<h2>Exceptions</h2>
+Assignments inside lambda and delegate expressions are allowed.
+
+<h2>See</h2>
+<ul>
+    <li>MISRA C:2004, 13.1 - Assignment operators shall not be used in expressions that yield a Boolean value</li>
+    <li>MISRA C++:2008, 6-2-1 - Assignment operators shall not be used in sub-expressions</li>
+    <li>MISRA C:2012, 13.4 - The result of an assignment operator should not be used</li>
+    <li><a href="http://cwe.mitre.org/data/definitions/481.html">MITRE, CWE-481</a> - Assigning instead of Comparing</li>
+</ul>]]></description>
+    <tag>suspicious</tag>
+    <tag>cwe</tag>
+    <tag>misra</tag>
+  </rule>
+  <rule>
+    <key>S3235</key>
+    <name>Redundant parentheses should not be used</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Redundant parentheses are simply wasted keystrokes, and should be removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+[MyAttribute()] //Noncompliant
+class MyClass
+{
+  public int MyProperty { get; set; }
+  public static MyClass CreateNew(int propertyValue)
+  {
+    return new MyClass() //Noncompliant
+    {
+      MyProperty = propertyValue
+    };
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+[MyAttribute]
+class MyClass
+{
+  public int MyProperty { get; set; }
+  public static MyClass CreateNew(int propertyValue)
+  {
+    return new MyClass
+    {
+      MyProperty = propertyValue
+    };
+  }
+}
+</pre>
+]]></description>
+    <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S3237</key>
+    <name>"value" parameters should be used</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    In property and indexer <code>set</code> methods, and in event <code>add</code> and <code>remove</code> methods, the implicit
+    <code>value</code> parameter holds the value the accessor was called with. Not using the <code>value</code> means that the
+    accessor ignores the caller's intent which could cause unexpected results at runtime.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+private int count;
+public int Count
+{
+  get { return count; }
+  set { count = 42; } // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+private int count;
+public int Count
+{
+  get { return count; }
+  set { count = value; }
+}
+</pre>
+or
+<pre>
+public int Count
+{
+  get { return count; }
+  set { throw new InvalidOperationException(); }
+}
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3244</key>
+    <name>Anonymous delegates should not be used to unsubscribe from Events</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them.
+    That's because the process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove
+    this item from the subscription list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries
+    to remove a different item from the list than was added. The result: <code>NOOP</code>.
+</p>
+<p>
+    Instead, save the delegate to a variable and use the variable to subscribe and unsubscribe.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+listView.PreviewTextInput += (obj,args) =>
+        listView_PreviewTextInput(obj,args,listView);
+
+// ...
+
+listView.PreviewTextInput -= (obj, args) =>
+        listView_PreviewTextInput(obj, args, listView); // Noncompliant; this delegate was never subscribed
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+EventHandler func = (obj,args) => listView_PreviewTextInput(obj,args,listView);
+
+listView.PreviewTextInput += func;
+
+// ...
+
+listView.PreviewTextInput -= func;
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3172</key>
+    <name>Delegates should not be subtracted</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    In C#, delegates can be added together to chain their execution, and subtracted to remove their execution from the chain.
+</p>
+<p>
+    Subtracting a chain of delegates from another one might yield unexpected results as shown hereunder - and is likely to be a bug
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+MyDelegate first, second, third, fourth;
+first = () => Console.Write("1");
+second = () => Console.Write("2");
+third = () => Console.Write("3");
+fourth = () => Console.Write("4");
+
+MyDelegate chain1234 = first + second + third + fourth; // Compliant - chain sequence = "1234"
+MyDelegate chain12 = chain1234 - third - fourth; // Compliant - chain sequence = "12"
+
+// The chain sequence of "chain23" will be "1234" instead of "23"!
+// Indeed, the sequence "1234" does not contain the subsequence "14", so nothing is subtracted
+// (but note that "1234" contains both the "1" and "4" subsequences)
+MyDelegate chain23 = chain1234 - (first + fourth); // Noncompliant
+
+chain23(); // will print "1234"!
+</pre>
+
+<h2>Noncompliant Solution</h2>
+<pre>
+MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
+
+chain23(); // will print "23"
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3217</key>
+    <name>"Explicit" conversions of "foreach" loops should not be used</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The <code>foreach</code> statement was introduced in the C# language prior to generics. To make it easier to work with
+    non-generic collections available at that time such as <code>ArrayList</code>, the <code>foreach</code> statements allows
+    to downcast the collection's element of type <code>Object</code> into any other type. The problem is that, to achieve that,
+    the <code>foreach</code> statements silently performs <code>explicit</code> type conversion, which at runtime can result in
+    an <code>InvalidCastException</code> to be thrown.
+</p>
+<p>
+    New C# code should use generics and not rely on <code>foreach</code> statement's silent <code>explicit</code> conversions.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+ArrayList list = new ArrayList();
+list.Add(0);
+list.Add(1);
+// list.Add("surprise!"); // uncommenting this line will make both foreach below throw an InvalidCastException
+
+foreach (object elementObject in list)
+{
+  int element = (int)elementObject; // This "explicit" conversion is hidden within the foreach loop
+  Console.WriteLine(element);
+}
+
+// can be written in an equivalent but shorter way:
+
+foreach (int element in list) // Noncompliant
+{
+  Console.WriteLine(element);
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+List&lt;int&gt; list = new List&lt;int&gt;();
+list.Add(0);
+list.Add(1);
+// list.Add("surprise!"); // uncommenting this line won't compile
+
+foreach (int element in list)
+{
+  Console.WriteLine(element);
+}
+</pre>
+or
+<pre>
+ArrayList list = new ArrayList();
+list.Add(0);
+list.Add(1);
+list.Add("surprise!");
+
+foreach (int element in list.OfType&lt;int&gt;())
+{
+  Console.WriteLine(element);
+}
+</pre>
+]]></description>
+    <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S3215</key>
+    <name>"interface" instances should not be cast to concrete types</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Needing to cast from an <code>interface</code> to a concrete type indicates that something is wrong with the abstractions in
+    use, likely that something is missing from the <code>interface</code>. Instead of casting to a discrete type, the missing
+    functionality should be added to the <code>interface</code>. Otherwise there is the risk of runtime exceptions.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface IMyInterface
+{
+  void DoStuff();
+}
+
+public class MyClass1 : IMyInterface
+{
+  public int Data { get { return new Random().Next(); } }
+
+  public void DoStuff()
+  {
+    // TODO...
+  }
+}
+
+public static class DowncastExampleProgram
+{
+  static void EntryPoint(IMyInterface interfaceRef)
+  {
+    MyClass1 class1 = (MyClass1)interfaceRef;  // Noncompliant
+    int privateData = class1.Data;
+
+    class1 = interfaceRef as MyClass1;  // Noncompliant
+    if (class1 != null)
+    {
+      // ...
+    }
+  }
+}
+</pre>
+]]></description>
+    <tag>design</tag>
+  </rule>
+  <rule>
     <key>S2278</key>
     <name>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</name>
     <severity>CRITICAL</severity>
@@ -11,11 +690,11 @@
 </p>
 <blockquote>
     <p>
-        Adopted in 1977 for federal agencies to use in protecting sensitive, unclassified information, the DES is being withdrawn 
+        Adopted in 1977 for federal agencies to use in protecting sensitive, unclassified information, the DES is being withdrawn
         because it no longer provides the security that is needed to protect federal government information.
     </p>
     <p>
-        Federal agencies are encouraged to use the Advanced Encryption Standard, a faster and stronger algorithm approved as FIPS 
+        Federal agencies are encouraged to use the Advanced Encryption Standard, a faster and stronger algorithm approved as FIPS
         197 in 2001.
     </p>
 </blockquote>
@@ -40,6 +719,7 @@ using (var aes = new AesCryptoServiceProvider())
 
 <ul>
     <li><a href="http://cwe.mitre.org/data/definitions/326.html">MITRE CWE-326</a> - Inadequate Encryption Strength</li>
+    <li><a href="http://cwe.mitre.org/data/definitions/327.html">MITRE CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm</li>
     <li><a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">OWASP Top Ten 2013 Category A6</a> - Sensitive Data Exposure</li>
     <li>Derived from FindSecBugs rule <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#DES_USAGE">DES / DESede Unsafe</a></li>
 </ul>]]></description>
@@ -60,7 +740,7 @@ using (var aes = new AesCryptoServiceProvider())
     <code>anyValue ^ 0</code> and <code>anyValue | 0</code>.
 </p>
 ]]></description>
-    <tag>bug</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S1699</key>
@@ -84,20 +764,20 @@ using (var aes = new AesCryptoServiceProvider())
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Parent 
+public class Parent
 {
-  public Parent () 
+  public Parent()
   {
     DoSomething();  // Noncompliant
   }
 
   public virtual void DoSomething() // can be overridden
-  {  
+  {
     ...
   }
 }
 
-public class Child : Parent 
+public class Child : Parent
 {
   private string foo;
 
@@ -106,14 +786,14 @@ public class Child : Parent
     this.foo = foo;
   }
 
-  public override void DoSomething() 
+  public override void DoSomething()
   {
     Console.WriteLine(this.foo.Length);
   }
 }
 </pre>
 ]]></description>
-    <tag>bug</tag>
+    <tag>pitfall</tag>
   </rule>
   <rule>
     <key>S2387</key>
@@ -122,17 +802,17 @@ public class Child : Parent
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     Having a variable with the same name in two unrelated classes is fine, but do the same thing within a class hierarchy
-    and you'll get confusion at best, chaos at worst. Perhaps even worse is the case where a child class field varies from 
+    and you'll get confusion at best, chaos at worst. Perhaps even worse is the case where a child class field varies from
     the name of a parent class only by case.
 </p>
 <p>
-    This rule ignores <code>private</code> parent class members, but in all other such cases, the child class field should 
+    This rule ignores <code>private</code> parent class members, but in all other such cases, the child class field should
     be renamed.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Fruit 
+public class Fruit
 {
   protected Season ripe;
   protected Color flesh;
@@ -140,7 +820,7 @@ public class Fruit
   // ...
 }
 
-public class Raspberry : Fruit 
+public class Raspberry : Fruit
 {
   private bool ripe;  // Noncompliant
   private static Color FLESH; // Noncompliant
@@ -149,7 +829,7 @@ public class Raspberry : Fruit
 
 <h2>Compliant Solution</h2>
 <pre>
-public class Fruit 
+public class Fruit
 {
   protected Season ripe;
   protected Color flesh;
@@ -157,7 +837,7 @@ public class Fruit
   // ...
 }
 
-public class Raspberry : Fruit 
+public class Raspberry : Fruit
 {
   private bool ripened;
   private static Color FLESH_COLOR;
@@ -172,7 +852,7 @@ public class Raspberry : Fruit
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Correctly updating a <code>static</code> field from a non-static method is tricky to get right and could easily lead to 
+    Correctly updating a <code>static</code> field from a non-static method is tricky to get right and could easily lead to
     bugs if there are multiple class instances and/or multiple threads in play.
 </p>
 <p>
@@ -181,11 +861,11 @@ public class Raspberry : Fruit
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass 
+public class MyClass
 {
   private static int count = 0;
 
-  public void DoSomething() 
+  public void DoSomething()
   {
     //...
     count++;  // Noncompliant
@@ -202,7 +882,7 @@ public class MyClass
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    The purpose of an abstract class is to provide some heritable behaviors while also defining methods which must be 
+    The purpose of an abstract class is to provide some heritable behaviors while also defining methods which must be
     implemented by sub-classes.
 </p>
 <p>
@@ -215,19 +895,19 @@ public class MyClass
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public abstract class Animal 
+public abstract class Animal //Noncompliant; should be an interface
 {
   abstract void Move();
   abstract void Feed();
 }
 
-public abstract class Color 
+public abstract class Color //Noncompliant; should be concrete with a private constructor
 {
   private int red = 0;
   private int green = 0;
   private int blue = 0;
 
-  public int GetRed() 
+  public int GetRed()
   {
     return red;
   }
@@ -236,28 +916,28 @@ public abstract class Color
 
 <h2>Compliant Solution</h2>
 <pre>
-public interface Animal 
+public interface Animal
 {
   void Move();
   void Feed();
 }
 
-public class Color 
+public class Color
 {
   private int red = 0;
   private int green = 0;
   private int blue = 0;
 
-  private Color ()
+  private Color()
   {}
 
-  public int GetRed() 
+  public int GetRed()
   {
     return red;
   }
 }
 
-public abstract class Lamp 
+public abstract class Lamp
 {
   private bool switchLamp = false;
 
@@ -279,36 +959,37 @@ public abstract class Lamp
   <rule>
     <key>S2197</key>
     <name>Modulus results should not be checked for direct equality</name>
-    <severity>CRITICAL</severity>
+    <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    When the modulus of a negative number is calculated, the result will either be negative or zero. Thus, comparing the 
-    modulus of a variable for equality with a positive number (or a negative one) could result in false negatives.
+    When the modulus of a negative number is calculated, the result will either be negative or zero. Thus, comparing the modulus
+    of a variable for equality with a positive number (or a negative one) could result in unexpected results.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public bool isOdd(int x) {
-  return x % 2 == 1;  // Noncompliant; if x is negative, x % 2 == -1
+public boo IsOdd(int x)
+{
+  return x % 2 == 1;  // Noncompliant; if x is an odd negative, x % 2 == -1
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-public bool isOdd(int x)
+public bool IsOdd(int x)
 {
-  return x %2 != 0;
+  return x % 2 != 0;
 }
 </pre>
 or
 <pre>
-public bool isOdd(int x) 
+public bool IsOdd(uint x)
 {
-  return Math.Abs(x%2) == 1;
+  return x % 2 == 1;
 }
 </pre>
 ]]></description>
-    <tag>bug</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S2692</key>
@@ -321,7 +1002,7 @@ public bool isOdd(int x)
     value in a <code>string</code>, <code>List</code>, or an array, consider using the <code>Contains</code> method instead.
 </p>
 <p>
-    This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code>, 
+    This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code>,
     or array is tested against <code>&gt;0</code>.
 </p>
 
@@ -336,19 +1017,19 @@ strings.add(name);
 string[] stringArray = strings.ToArray();
 
 if (strings.IndexOf(color) &gt; 0) // Noncompliant
-{  
+{
   // ...
 }
 if (name.IndexOf("ish") &gt; 0) // Noncompliant
-{ 
+{
   // ...
 }
 if (name.IndexOf("ae") &gt; 0) // Noncompliant
-{ 
+{
   // ...
 }
 if (Array.IndexOf(stringArray, color) &gt; 0) // Noncompliant
-{  
+{
   // ...
 }
 </pre>
@@ -361,20 +1042,20 @@ List&lt;string&gt; strings = new List&lt;string&gt; ();
 strings.add(color);
 strings.add(name);
 string[] stringArray = strings.ToArray();
-if (strings.IndexOf(color) &gt; -1) 
+if (strings.IndexOf(color) &gt; -1)
 {
   // ...
 }
-if (name.IndexOf("ish") &gt;= 0) 
+if (name.IndexOf("ish") &gt;= 0)
 {
   // ...
 }
-if (name.Contains("ae") 
+if (name.Contains("ae")
 {
   // ...
 }
 if (Array.IndexOf(stringArray, color) &gt;= 0)
-{  
+{
   // ...
 }
 </pre>
@@ -384,11 +1065,11 @@ if (Array.IndexOf(stringArray, color) &gt;= 0)
   <rule>
     <key>S2952</key>
     <name>Classes should "Dispose" of members from the classes' own "Dispose" methods</name>
-    <severity>MAJOR</severity>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     It is possible in an <code>IDisposable</code> to call <code>Dispose</code> on class members from any method, but the
-    contract of <code>Dispose</code> is that it will clean up all unmanaged resources. Move disposing of members to some 
+    contract of <code>Dispose</code> is that it will clean up all unmanaged resources. Move disposing of members to some
     other method, and you risk resource leaks.
 </p>
 
@@ -396,7 +1077,7 @@ if (Array.IndexOf(stringArray, color) &gt;= 0)
 <pre>
 public class ResourceHolder : IDisposable
 {
-  private FileStream fs;  
+  private FileStream fs;
   public void OpenResource(string path)
   {
     this.fs = new FileStream(path, FileMode.Open);
@@ -406,12 +1087,12 @@ public class ResourceHolder : IDisposable
     this.fs.Close();
   }
 
-  public void CleanUp() 
+  public void CleanUp()
   {
     this.fs.Dispose(); // Noncompliant; Dispose not called in class' Dispose method
   }
 
-  public void Dispose() 
+  public void Dispose()
   {
     // method added to satisfy demands of interface
   }
@@ -432,7 +1113,7 @@ public class ResourceHolder : IDisposable
     this.fs.Close();
   }
 
-  public void Dispose() 
+  public void Dispose()
   {
     this.fs.Dispose();
   }
@@ -455,17 +1136,17 @@ public class ResourceHolder : IDisposable
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    <code>Dispose</code> as a method name should be used exclusively to implement <code>IDisposable.Dispose</code> to prevent 
+    <code>Dispose</code> as a method name should be used exclusively to implement <code>IDisposable.Dispose</code> to prevent
     any confusion.
 </p>
 <p>
-    It may be tempting to create a <code>Dispose</code> method for other purposes, but doing so will result in confusion and 
+    It may be tempting to create a <code>Dispose</code> method for other purposes, but doing so will result in confusion and
     likely lead to problems in production.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class GarbageDisposal 
+public class GarbageDisposal
 {
   private int Dispose()  // Noncompliant
   {
@@ -478,7 +1159,7 @@ public class GarbageDisposal
 <pre>
 public class GarbageDisposal : IDisposable
 {
-  public void Dispose() 
+  public void Dispose()
   {
     // ...
   }
@@ -486,7 +1167,7 @@ public class GarbageDisposal : IDisposable
 </pre>
 or
 <pre>
-public class GarbageDisposal 
+public class GarbageDisposal
 {
   private int Grind()
   {
@@ -506,7 +1187,7 @@ public class GarbageDisposal : IDisposable
   {
     //...
   }
-  public void Dispose() 
+  public void Dispose()
   {
     Dispose(true);
     GC.SuppressFinalize(this);
@@ -527,15 +1208,15 @@ public class GarbageDisposal : IDisposable
 </p>
 <p>
     C# adds an implicit public constructor to every class which does not explicitly define at least one constructor. Hence, at
-    least one <code>protected</code> constructor should be defined if you wish to subclass this utility class. Or the 
+    least one <code>protected</code> constructor should be defined if you wish to subclass this utility class. Or the
     <code>static</code> keyword should be added to the class declaration to prevent subclassing.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class StringUtils // Noncompliant
-{ 
-  public static string Concatenate(string s1, string s2) 
+{
+  public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
@@ -545,8 +1226,8 @@ public class StringUtils // Noncompliant
 <h2>Compliant Solution</h2>
 <pre>
 public static class StringUtils
-{ 
-  public static string Concatenate(string s1, string s2) 
+{
+  public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
@@ -555,11 +1236,11 @@ public static class StringUtils
 or
 <pre>
 public class StringUtils
-{ 
+{
   protected StringUtils()
   {
   }
-  public static string Concatenate(string s1, string s2) 
+  public static string Concatenate(string s1, string s2)
   {
     return s1 + s2;
   }
@@ -579,11 +1260,11 @@ public class StringUtils
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int Example(int i) 
+public int Example(int i)
 {
   return (int) (i + 42); // Noncompliant
 }
-public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll) 
+public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 {
   return coll.Reverse().OfType&lt;int&gt;(); // Noncompliant
 }
@@ -591,19 +1272,17 @@ public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 
 <h2>Compliant Solution</h2>
 <pre>
-public int Example(int i) 
+public int Example(int i)
 {
   return i + 42;
 }
-public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll) 
+public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 {
   return coll.Reverse();
 }
 </pre>
 ]]></description>
     <tag>clumsy</tag>
-    <tag>cwe</tag>
-    <tag>misra</tag>
   </rule>
   <rule>
     <key>S2330</key>
@@ -616,7 +1295,7 @@ public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 </p>
 <p>
     While this array conversion can be useful in readonly situations to pass instances of <code>A[]</code> wherever
-    <code>B[]</code> is expected, it must be used with care, since assigning an instance of <code>B</code> into an array of 
+    <code>B[]</code> is expected, it must be used with care, since assigning an instance of <code>B</code> into an array of
     <code>A</code> will cause an <code>ArrayTypeMismatchException</code> to be thrown at runtime.
 </p>
 
@@ -681,9 +1360,9 @@ class Program
     ways <code>IEnumerable LINQ</code>s can be simplified
 </p>
 <ul>
-    <li>Use <code>OfType</code> instead of using <code>Select</code> with <code>as</code> to type cast elements and then 
+    <li>Use <code>OfType</code> instead of using <code>Select</code> with <code>as</code> to type cast elements and then
     null-checking in a query expression to choose elements based on type.</li>
-    <li>Use <code>OfType</code> instead of using <code>Where</code> and the <code>is</code> operator, followed by a cast 
+    <li>Use <code>OfType</code> instead of using <code>Where</code> and the <code>is</code> operator, followed by a cast
     in a <code>Select</code></li>
     <li>Use an expression in <code>Any</code> instead of <code>Where(element => [expression]).Any()</code>.</li>
 </ul>
@@ -714,7 +1393,7 @@ seq.Any(element => [expression])
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Using <code>Object.ReferenceEquals</code> to compare the references of two value types simply won't return the 
+    Using <code>Object.ReferenceEquals</code> to compare the references of two value types simply won't return the
     expected results most of the time because such types are passed by value, not by reference.
 </p>
 
@@ -749,7 +1428,7 @@ public class MyClass
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     When an object has a field annotated with <code>ThreadStatic</code>, that field is shared within a given thread,
-    but unique across threads. Since a class' static initializer is only invoked for the 
+    but unique across threads. Since a class' static initializer is only invoked for the
     first thread created, it also means that only the first thread will have the expected initial values.
 </p>
 <p>
@@ -771,11 +1450,11 @@ public class Foo
 {
   [ThreadStatic]
   public static object _perThreadObject;
-  public static object PerThreadObject 
+  public static object PerThreadObject
   {
-    get 
+    get
     {
-      if (_perThreadObject == null) 
+      if (_perThreadObject == null)
       {
         _perThreadObject = new object();
       }
@@ -799,13 +1478,13 @@ public class Foo
     attribute is simply ignored on non-<code>static</code> fields.
 </p>
 <p>
-    So <code>ThreadStatic</code> should either be removed or replaced with a use of the <code>ThreadLocal&lt;T&gt;</code> class, 
+    So <code>ThreadStatic</code> should either be removed or replaced with a use of the <code>ThreadLocal&lt;T&gt;</code> class,
     which gives a similar behavior for non-<code>static</code> fields.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass 
+public class MyClass
 {
   [ThreadStatic]  // Noncompliant
   private int count = 0;
@@ -816,7 +1495,7 @@ public class MyClass
 
 <h2>Compliant Solution</h2>
 <pre>
-public class MyClass 
+public class MyClass
 {
   private int count = 0;
 
@@ -825,7 +1504,7 @@ public class MyClass
 </pre>
 or
 <pre>
-public class MyClass 
+public class MyClass
 {
   private readonly ThreadLocal&lt;int&gt; count = new ThreadLocal&lt;int&gt;();
   public int Count
@@ -847,13 +1526,13 @@ public class MyClass
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     Field-like events are events that do not have explicit <code>add</code> and <code>remove</code> methods. The compiler
-    generates a <code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit 
+    generates a <code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit
     <code>add</code> and <code>remove</code> methods.
 </p>
 <p>
     When a <code>virtual</code> field-like <code>event</code> is overridden by another field-like <code>event</code>,
     the behavior of the C# compiler is to generate a new <code>private</code> <code>delegate</code> field in the derived
-    class, separate from the parent's field. This results in multiple and separate events being created, which is rarely 
+    class, separate from the parent's field. This results in multiple and separate events being created, which is rarely
     what's actually intended.
 </p>
 <p>
@@ -937,7 +1616,7 @@ class Program
     Typically you want to use <code>using</code> to create a local <code>IDisposable</code> variable; it will trigger
     disposal of the object when control passes out of the block's scope. The exception to this rule is when your
     method returns that <code>IDisposable</code>. In that case <code>using</code> disposes of the object before the
-    caller can make use of it, likely causing exceptions at runtime. So you should either remove <code>using</code> or 
+    caller can make use of it, likely causing exceptions at runtime. So you should either remove <code>using</code> or
     avoid returning the <code>IDisposable</code>.
 </p>
 
@@ -949,7 +1628,7 @@ public FileStream WriteToFile(string path, string text)
   {
     var bytes = Encoding.UTF8.GetBytes(text);
     fs.Write(bytes, 0, bytes.Length);
-    return fs; 
+    return fs;
   }
 }
 </pre>
@@ -974,7 +1653,7 @@ public FileStream WriteToFile(string path, string text)
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     <code>goto</code> is an unstructured control flow statement. It makes code less readable and maintainable.
-    Structured control flow statements such as <code>if</code>, <code>for</code>, <code>while</code>, 
+    Structured control flow statements such as <code>if</code>, <code>for</code>, <code>while</code>,
     <code>continue</code> or <code>break</code> should be used instead.
 </p>
 
@@ -994,7 +1673,7 @@ public FileStream WriteToFile(string path, string text)
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Locking on the current object instance (i.e. <code>this</code>), or on a <code>Type</code> object increases the chance 
+    Locking on the current object instance (i.e. <code>this</code>), or on a <code>Type</code> object increases the chance
     of deadlocks because any other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose.
 </p>
 <p>
@@ -1038,13 +1717,13 @@ public void MyLockingMethod()
     then a value type, such as a <code>struct</code>, could also be passed. In such cases, comparing the
     type parameter to <code>null</code> would always be false, because a <code>struct</code> can
     be empty, but never <code>null</code>. If a value type is truly what's expected, then the comparison should use
-    <code>default()</code>. If it's not, then constraints should be added so that no value type can be 
+    <code>default()</code>. If it's not, then constraints should be added so that no value type can be
     passed.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-private bool IsDefault&lt;T&gt;(T value) 
+private bool IsDefault&lt;T&gt;(T value)
 {
   if (value == null) // Noncompliant
   {
@@ -1056,7 +1735,7 @@ private bool IsDefault&lt;T&gt;(T value)
 
 <h2>Compliant Solution</h2>
 <pre>
-private bool IsDefault&lt;T&gt;(T value) 
+private bool IsDefault&lt;T&gt;(T value)
 {
   if(object.Equals(value, default(T)))
   {
@@ -1069,7 +1748,7 @@ or
 <pre>
 private bool IsDefault&lt;T&gt;(T value) where T : class
 {
-  if (value == null) 
+  if (value == null)
   {
     // ...
   }
@@ -1089,7 +1768,7 @@ private bool IsDefault&lt;T&gt;(T value) where T : class
     those of a <code>readonly</code> value field, such as a <code>struct</code>, cannot.
 </p>
 <p>
-    If the member could be either a <code>class</code> or a <code>struct</code> then assignment to its properties 
+    If the member could be either a <code>class</code> or a <code>struct</code> then assignment to its properties
     could be unreliable, working sometimes but not others.
 </p>
 
@@ -1101,7 +1780,7 @@ interface IPoint
   int Y { get; set; }
 }
 
-class PointManager&lt;T&gt; where T: IPoint 
+class PointManager&lt;T&gt; where T: IPoint
 {
   readonly T point;  // this could be a struct
   public PointManager(T point)
@@ -1125,7 +1804,7 @@ interface IPoint
   int Y { get; set; }
 }
 
-class PointManager&lt;T&gt; where T : IPoint 
+class PointManager&lt;T&gt; where T : IPoint
 {
   readonly T point;  // this could be a struct
   public PointManager(T point)
@@ -1147,7 +1826,7 @@ interface IPoint
   int Y { get; set; }
 }
 
-class PointManager&lt;T&gt; where T : class, IPoint 
+class PointManager&lt;T&gt; where T : class, IPoint
 {
   readonly T point;  // this can only be a class
   public PointManager(T point)
@@ -1174,7 +1853,7 @@ class PointManager&lt;T&gt; where T : class, IPoint
     Fields should not be part of an API, and therefore should always be private. Indeed, they
     cannot be added to an interface for instance, and validation cannot be added later on without
     breaking backward compatiblity. Instead, developers should encapsulate their fields into
-    properties. Explicit property getters and setters can be introduced for validation purposes 
+    properties. Explicit property getters and setters can be introduced for validation purposes
     or to smooth the transition to a newer system.
 </p>
 
@@ -1182,7 +1861,7 @@ class PointManager&lt;T&gt; where T : class, IPoint
 <pre>
 public class Foo
 {
-  public int MagicNumber = 42; 
+  public int MagicNumber = 42;
 }
 </pre>
 
@@ -1190,8 +1869,8 @@ public class Foo
 <pre>
 public class Foo
 {
-  public int MagicNumber 
-  { 
+  public int MagicNumber
+  {
     get { return 42; }
   }
 }
@@ -1200,7 +1879,7 @@ or
 <pre>
 public class Foo
 {
-  private int MagicNumber = 42; 
+  private int MagicNumber = 42;
 }
 </pre>
 
@@ -1229,7 +1908,7 @@ public class Foo
 public class Math
 {
   public static double Pi = 3.14;  // Noncompliant
-} 
+}
 </pre>
 or
 <pre>
@@ -1239,8 +1918,8 @@ public class Shape
 
   private class EmptyShape : Shape
   {
-  } 
-} 
+  }
+}
 </pre>
 
 <h2>Compliant Solution</h2>
@@ -1248,18 +1927,18 @@ public class Shape
 public class Math
 {
   public const double Pi = 3.14;
-} 
+}
 </pre>
 or
 <pre>
 public class Shape
 {
-  public static readonly Shape Empty = new EmptyShape(); 
+  public static readonly Shape Empty = new EmptyShape();
 
   private class EmptyShape : Shape
   {
-  } 
-} 
+  }
+}
 </pre>]]></description>
     <tag>pitfall</tag>
   </rule>
@@ -1284,7 +1963,7 @@ public class Shape
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder 
+public class ResourceHolder
 {
   private FileStream fs;  // Noncompliant; Dispose is never called
   public void OpenResource(string path)
@@ -1318,7 +1997,7 @@ public class ResourceHolder : IDisposable
     this.fs.Close();
   }
 
-  public void Dispose() 
+  public void Dispose()
   {
     this.fs.Dispose();
   }
@@ -1335,7 +2014,7 @@ public class ResourceHolder : IDisposable
 </pre>
 
 <h2>Exceptions</h2>
-Local <code>IDisposable</code>s returned from methods are ignored, as are local <code>IDisposable</code>s that are 
+Local <code>IDisposable</code>s returned from methods are ignored, as are local <code>IDisposable</code>s that are
 initialized with non-local <code>IDisposable</code>s.
 <pre>
   public Stream WriteToFile(string path, string text)
@@ -1371,7 +2050,7 @@ initialized with non-local <code>IDisposable</code>s.
     <description><![CDATA[<p>
     <code>readonly</code> fields can only be assigned in a class constructor. If a class has a field that's
     not marked <code>readonly</code> but is only set in the constructor, it could cause confusion about the
-    field's intended use. To avoid confusion, such fields should be marked <code>readonly</code> to make their 
+    field's intended use. To avoid confusion, such fields should be marked <code>readonly</code> to make their
     intended use explicit, and to prevent future maintainers from inadvertently changing their use.
 </p>
 
@@ -1380,7 +2059,7 @@ initialized with non-local <code>IDisposable</code>s.
 class Person
 {
   int _birthYear;  // Noncompliant
-  Person(int birthYear) 
+  Person(int birthYear)
   {
     _birthYear = birthYear;
   }
@@ -1392,7 +2071,7 @@ class Person
 class Person
 {
   readonly int _birthYear;
-  Person(int birthYear) 
+  Person(int birthYear)
   {
     _birthYear = birthYear;
   }
@@ -1407,7 +2086,7 @@ class Person
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Using <code>.Count() > 0</code> to test for emptiness works, but using <code>.Any()</code> makes the intent clearer, 
+    Using <code>.Count()</code> to test for emptiness works, but using <code>.Any()</code> makes the intent clearer,
     and the code more readable.
 </p>
 
@@ -1417,11 +2096,11 @@ private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {
   return strings.Count() > 0; // Noncompliant
 }
-private static bool HasContent2(&lt;string&gt; strings)
+private static bool HasContent2(IEnumerable&lt;string&gt; strings)
 {
   return strings.Count() >= 1; // Noncompliant
 }
-private static bool IsEmpty(&lt;string&gt; strings)
+private static bool IsEmpty(IEnumerable&lt;string&gt; strings)
 {
   return strings.Count() == 0; // Noncompliant
 }
@@ -1429,12 +2108,12 @@ private static bool IsEmpty(&lt;string&gt; strings)
 
 <h2>Compliant Solution</h2>
 <pre>
-private static bool HasContent(&lt;string&gt; strings)
+private static bool HasContent(IEnumerable&lt;string&gt; strings)
 {
   return strings.Any();
 }
 
-private static bool IsEmpty(&lt;string&gt; strings)
+private static bool IsEmpty(IEnumerable&lt;string&gt; strings)
 {
   return !strings.Any();
 }
@@ -1449,7 +2128,7 @@ private static bool IsEmpty(&lt;string&gt; strings)
     <description><![CDATA[<p>
     When the parameters to the implementation of a <code>partial</code> method don't match those
     in the signature declaration, then confusion is almost guaranteed. Either the implementer was
-    confused when he renamed, swapped or mangled the parameter names in the implementation, or 
+    confused when he renamed, swapped or mangled the parameter names in the implementation, or
     callers will be confused.
 </p>
 
@@ -1457,18 +2136,18 @@ private static bool IsEmpty(&lt;string&gt; strings)
 <pre>
 partial class Point
 {
-  partial void OnChange(int x, int y);
+  partial void MoveVertically(int z);
 }
 
 partial class Point
 {
   int x = 0;
   int y = 0;
+  int z = 0;
 
-  partial void OnChange(int x, int yk)  // Noncompliant
+  partial void MoveVertically(int y)  // Noncompliant
   {
-    this.x = x;
-    this.y = yk;
+    this.y = y;
   }
 }
 </pre>
@@ -1477,22 +2156,30 @@ partial class Point
 <pre>
 partial class Point
 {
-  partial void OnChange(int x, int y);
+  partial void MoveVertically(int z);
 }
 
 partial class Point
 {
   int x = 0;
   int y = 0;
+  int z = 0;
 
-  partial void OnChange(int x, int y)
+  partial void MoveVertically(int z)
   {
-    this.x = x;
-    this.y = y;
+    this.z = z;
   }
 }
 </pre>
-]]></description>
+
+<h2>See</h2>
+
+<ul>
+    <li>MISRA C:2004, 8.3 - For each function parameter the type given in the declaration and definition shall be identical, and the return types shall also be identical</li>
+    <li>MISRA C:2004, 16.4 - The identifiers used in the declaration and definition of a function shall be identical.</li>
+    <li>MISRA C++:2008, 8-4-2 - The identifiers used for the parameters in a re-declaration of a function shall be identical to those in the declaration.</li>
+    <li>MISRA C:2012, 8.3 - All declarations of an object or function shall use the same names and type qualifiers.</li>
+</ul>]]></description>
     <tag>cert</tag>
     <tag>misra</tag>
     <tag>pitfall</tag>
@@ -1500,12 +2187,12 @@ partial class Point
   <rule>
     <key>S2931</key>
     <name>Classes with "IDisposable" members should implement "IDisposable"</name>
-    <severity>MAJOR</severity>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     Classes with <code>IDisposable</code> members are responsible for cleaning up those members by calling
     their <code>Dispose</code> methods. The best practice here is for the owning class to itself implement
-    <code>IDisposable</code> and call its members' <code>Dispose</code> methods from its own 
+    <code>IDisposable</code> and call its members' <code>Dispose</code> methods from its own
     <code>Dispose</code> method.
 </p>
 
@@ -1538,7 +2225,7 @@ public class ResourceHolder : IDisposable
   {
     this.fs.Close();
   }
-  public void Dispose() 
+  public void Dispose()
   {
     this.fs.Dispose();
   }
@@ -1567,10 +2254,10 @@ public class ResourceHolder : IDisposable
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (condition1) 
+if (condition1)
 {
-  if (condition2) 
-  {        
+  if (condition2)
+  {
     ...
   }
 }
@@ -1578,8 +2265,8 @@ if (condition1)
 
 <h2>Compliant Solution</h2>
 <pre>
-if (condition1 &amp;&amp; condition2) 
-{        
+if (condition1 &amp;&amp; condition2)
+{
   ...
 }
 </pre>
@@ -1593,23 +2280,23 @@ if (condition1 &amp;&amp; condition2)
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     Shadowing fields with a local variable or with a method parameter is a bad practice that
-    reduces code readability: It makes it confusing to know whether the field or the variable 
+    reduces code readability: It makes it confusing to know whether the field or the variable
     is being used.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-class Foo 
+class Foo
 {
   public int myField;
 
-  public void doSomething() 
+  public void doSomething()
   {
     int myField = 0;
     ...
   }
 
-  public void doSomethingElse(int myField) 
+  public void doSomethingElse(int myField)
   {
     ...
   }
@@ -1618,7 +2305,7 @@ class Foo
 
 <h2>Exceptions</h2>
 <p>
-    Constructors are exceptions; it is common practice to name arguments for the fields the 
+    Constructors are exceptions; it is common practice to name arguments for the fields the
     values will be assigned to. Static methods are also excepted.
 </p>
 
@@ -1626,12 +2313,12 @@ class Foo
 class Foo {
   public int myField;
 
-  public Foo(int myField) 
+  public Foo(int myField)
   {
     this.myField = myField;
   }
 
-  public static Foo build(int myField) 
+  public static Foo build(int myField)
   {
     ...
   }
@@ -1694,30 +2381,30 @@ var address = IPAddress.Parse(ip);
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public override string ToString () 
+public override string ToString ()
 {
-  if (this.collection.Count == 0) 
+  if (this.collection.Count == 0)
   {
     return null; // Noncompliant
-  } 
-  else 
+  }
+  else
   {
     // ...
- 
+
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-public override string ToString () 
+public override string ToString ()
 {
-  if (this.collection.Count == 0) 
+  if (this.collection.Count == 0)
   {
     return "";
-  } 
-  else 
+  }
+  else
   {
     // ...
- 
+
 </pre>
 
 <h2>See</h2>
@@ -1752,7 +2439,7 @@ double d = 0.1; // 0.1000000000000000055511151231257827021181583404541015625
     (Results will vary based on compiler and compiler settings)
 </p>
 <p>
-    Therefore, the use of the equality (<code>==</code>) and inequality (<code>!=</code>) operators on 
+    Therefore, the use of the equality (<code>==</code>) and inequality (<code>!=</code>) operators on
     <code>float</code> or <code>double</code> values is almost always an error.
 </p>
 <p>
@@ -1764,17 +2451,17 @@ double d = 0.1; // 0.1000000000000000055511151231257827021181583404541015625
 <pre>
 float myNumber = 3.146f;
 if ( myNumber == 3.146f ) //Noncompliant. Because of floating point imprecision, this will be false
-{  
+{
   // ...
 }
 
 if (myNumber &lt;= 3.146f &amp;&amp; mNumber &gt;= 3.146f) // Noncompliant indirect equality test
-{ 
+{
   // ...
 }
 
-if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test 
-{ 
+if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test
+{
   // ...
 }
 </pre>
@@ -1795,7 +2482,7 @@ if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction.
-    Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in 
+    Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in
     the code. Even if it's not an error, it is at best a waste of resources. Therefore all calculated values should be used.
 </p>
 
@@ -1804,11 +2491,11 @@ if (myNumber &lt; 4 || myNumber &gt; 4) // Noncompliant indirect inequality test
 void calculateRate(int a, int b)
 {
   int i;
-  
+
   i = a + b; // Noncompliant; calculation result not used before value is overwritten
   i = doSomething();  // Noncompliant; retrieved value not used
-  for (i = 0; i &lt; 10; i++) 
-  { 
+  for (i = 0; i &lt; 10; i++)
+  {
     //  ...
   }
   // ...
@@ -1825,8 +2512,8 @@ void calculateRate(int a, int b)
   i += a + b;
   storeI(i)
 
-  for (i = 0; i &lt; 10; i++) 
-  { 
+  for (i = 0; i &lt; 10; i++)
+  {
     //  ...
   }
 }
@@ -1840,7 +2527,7 @@ void calculateRate(int a, int b)
     <li><a href="https://www.securecoding.cert.org/confluence/x/S4IyAQ">CERT, MSC13-CPP</a> - Detect and remove unused values</li>
 </ul>
 ]]></description>
-    <tag>bug</tag>
+    <tag>suspicious</tag>
     <tag>cert</tag>
     <tag>cwe</tag>
     <tag>unused</tag>
@@ -1853,17 +2540,17 @@ void calculateRate(int a, int b)
     <description><![CDATA[<p>
     <code>GetHashCode</code> is used to file an object in a <code>Dictionary</code> or <code>Hashtable</code>.
     If <code>GetHashCode</code> uses non-<code>readonly</code> fields and those fields change after the object
-    is stored, the object immediately becomes mis-filed in the <code>Hashtable</code>. Any subsequent test to 
+    is stored, the object immediately becomes mis-filed in the <code>Hashtable</code>. Any subsequent test to
     see if the object is in the <code>Hashtable</code> will return a false negative.
 </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Person 
+public class Person
 {
   public int age;
   public string name;
 
-  public override int GetHashCode() 
+  public override int GetHashCode()
   {
     int hash = 12;
     hash += this.age.GetHashCode(); // Noncompliant
@@ -1874,12 +2561,12 @@ public class Person
 
 <h2>Compliant Solution</h2>
 <pre>
-public class Person 
+public class Person
 {
   public readonly DateTime birthday;
   public string name;
 
-  public override int GetHashCode() 
+  public override int GetHashCode()
   {
     int hash = 12;
     hash += this.birthday.GetHashCode();
@@ -1895,7 +2582,7 @@ public class Person
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Debug statements are always useful during development. But include them in production code - particularly 
+    Debug statements are always useful during development. But include them in production code - particularly
     in code that runs client-side - and you run the risk of inadvertently exposing sensitive information.
 </p>
 
@@ -1950,6 +2637,8 @@ var hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName("SHA256Managed");
 var hashProvider3 = HashAlgorithm.Create("SHA256Managed");
 </pre>
 
+<h2>See</h2>
+
 <ul>
     <li> <a href="http://cwe.mitre.org/data/definitions/328">MITRE, CWE-328</a> - Reversible One-Way Hash</li>
     <li> <a href="http://cwe.mitre.org/data/definitions/327">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm</li>
@@ -1973,7 +2662,7 @@ var hashProvider3 = HashAlgorithm.Create("SHA256Managed");
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int pickNumber() 
+public int pickNumber()
 {
   int i = 0;
   int j = 0;
@@ -1986,13 +2675,13 @@ public int pickNumber()
 
 <h2>Compliant Solution</h2>
 <pre>
-public int pickNumber() 
+public int pickNumber()
 {
   int i = 0;
   int j = 0;
 
-  i++; 
-  return ++j; 
+  i++;
+  return ++j;
 }
 </pre>
 ]]></description>
@@ -2004,108 +2693,32 @@ public int pickNumber()
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Type parameters that aren't used are dead code, which can only distract and possibly confuse 
+    Type parameters that aren't used are dead code, which can only distract and possibly confuse
     developers during maintenance. Therefore, unused type parameters should be removed.
 </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class MoreMath&lt;T&gt; // Noncompliant; &lt;T&gt;is ignored
-{  
+{
   public int Add&lt;T&gt;(int a, int b) // Noncompliant; &lt;T&gt; is ignored
-  { 
-    return a + b; 
+  {
+    return a + b;
   }
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-public class MoreMath 
+public class MoreMath
 {
-  public int Add (int a, int b) 
+  public int Add (int a, int b)
   {
-    return a + b; 
+    return a + b;
   }
 }
 </pre>
 ]]></description>
     <tag>unused</tag>
-  </rule>
-  <rule>
-    <key>S2325</key>
-    <name>Methods and properties that don't access instance data should be static</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Class methods and properties that don't access instance data can and should be <code>static</code> to prevent any misunderstanding
-    about the contract of the method.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-public class Utilities
-{
-  public int MagicNum // Noncompliant
-  {
-    get 
-    {
-      return 42;
-    }
-  }
-
-  private static string magicWord = "please";
-  public string MagicWord  // Noncompliant
-  {
-    get 
-    {
-      return magicWord;
-    }
-    set 
-    {
-      magicWord = value;
-    }
-  }
-
-  public int Sum(int a, int b)  // Noncompliant
-  {
-    return a + b;
-  }
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-public class Utilities
-{
-  public static int MagicNum
-  {
-    get 
-    {
-      return 42;
-    }
-  }
-
-  private static string magicWord = "please";
-  public static string MagicWord 
-  {
-    get 
-    {
-      return magicWord;
-    }
-    set 
-    {
-      magicWord = value;
-    }
-  }
-
-  public static int Sum(int a, int b)
-  {
-    return a + b;
-  }
-}
-</pre>
-]]></description>
-    <tag>performance</tag>
   </rule>
   <rule>
     <key>S2234</key>
@@ -2115,18 +2728,18 @@ public class Utilities
     <description><![CDATA[<p>
     When the names of parameters in a method call match the names of the method arguments,
     it contributes to clearer, more readable code. However, when the names match, but are
-    passed in a different order than the method arguments, it indicates a mistake in the 
+    passed in a different order than the method arguments, it indicates a mistake in the
     parameter order which will likely lead to unexpected results.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public double divide(int divisor, int dividend) 
+public double divide(int divisor, int dividend)
 {
   return divisor/dividend;
 }
 
-public void doTheThing() 
+public void doTheThing()
 {
   int divisor = 15;
   int dividend = 5;
@@ -2138,12 +2751,12 @@ public void doTheThing()
 
 <h2>Compliant Solution</h2>
 <pre>
-public double divide(int divisor, int dividend) 
+public double divide(int divisor, int dividend)
 {
   return divisor/dividend;
 }
 
-public void doTheThing() 
+public void doTheThing()
 {
   int divisor = 15;
   int dividend = 5;
@@ -2157,7 +2770,7 @@ public void doTheThing()
   <rule>
     <key>S1940</key>
     <name>Boolean checks should not be inverted</name>
-    <severity>MAJOR</severity>
+    <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     It is needlessly complex to invert the result of a boolean comparison. The opposite comparison should be made instead.
@@ -2171,7 +2784,7 @@ bool b = !(i < 10);  // Noncompliant
 
 <h2>Compliant Solution</h2>
 <pre>
-if (a != 2) { ... } 
+if (a != 2) { ... }
 bool b = (i >= 10);
 </pre>
 
@@ -2191,7 +2804,7 @@ bool b = (i >= 10);
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public boolean canVote(Person person) 
+public boolean canVote(Person person)
 {
   return person.getAge > 18 ? true : true; // Noncompliant; is this what was intended?
 }
@@ -2199,7 +2812,7 @@ public boolean canVote(Person person)
 
 <h2>Compliant Solution</h2>
 <pre>
-public boolean canVote(Person person) 
+public boolean canVote(Person person)
 {
   return person.getAge > 18 ? true : false;
 }
@@ -2209,14 +2822,14 @@ public boolean canVote(Person person)
   <rule>
     <key>S2757</key>
     <name>Reversed operators should not be used</name>
-    <severity>MAJOR</severity>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    The use of operators pairs (<code>=+</code> or <code>=-</code>) where the reversed, single operator 
+    The use of operators pairs (<code>=+</code> or <code>=-</code>) where the reversed, single operator
     was meant (<code>+=</code> or <code>-=</code>) will compile and run, but not produce the expected results.
 </p>
 <p>
-    This rule raises an issue when <code>=+</code>, and <code>=-</code> are used, but ignores the operators 
+    This rule raises an issue when <code>=+</code>, and <code>=-</code> are used, but ignores the operators
     when they're spaced out: <code>= +</code>, <code>= -</code>.
 </p>
 
@@ -2238,38 +2851,6 @@ target = -num; // Compliant; intent to assign inverse value of num is clear
 target += num;
 </pre>]]></description>
     <tag>bug</tag>
-  </rule>
-  <rule>
-    <key>S1121</key>
-    <name>Assignments should not be made from within sub-expressions</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Assignments within sub-expressions are hard to spot and therefore make the code less readable.
-    It is also a common mistake to write <code>=</code> when <code>==</code> was meant.
-    Ideally, every expression should have no more than one side-effect.
-    Assignments inside lambda and delegate expressions are allowed.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-doSomething(i = 42);
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-i = 42;
-doSomething(i);   
-// or
-doSomething(i == 42);  // Perhaps in fact the comparison operator was expected
-</pre>
-
-<h2>Exceptions</h2>
-<p>Assignments in <code>while</code> statement conditions, and assignments enclosed in relational expressions are allowed.</p>
-]]></description>
-    <tag>bug</tag>
-    <tag>cwe</tag>
-    <tag>misra</tag>
   </rule>
   <rule>
     <key>S2306</key>
@@ -2309,7 +2890,7 @@ int someOtherName = 42;
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch (variable) 
+switch (variable)
 {
   case 0:
     doSomething();
@@ -2322,15 +2903,21 @@ switch (variable)
 
 <h2>Compliant Solution</h2>
 <pre>
-if (variable == 0) 
+if (variable == 0)
 {
   doSomething();
-} else 
+} else
 {
   doSomethingElse();
 }
 </pre>
-]]></description>
+
+<h2>See</h2>
+<ul>
+    <li>MISRA C:2004, 15.5 - Every switch statement shall have at least one case clause.</li>
+    <li>MISRA C++:2008, 6-4-8 - Every switch statement shall have at least one case-clause.</li>
+    <li>MISRA C:2012, 16.6 - Every switch statement shall have at least two switch-clauses</li>
+</ul>]]></description>
     <tag>misra</tag>
   </rule>
   <rule>
@@ -2343,7 +2930,7 @@ if (variable == 0)
 Ideally, every loop should have a single termination condition.
 </p>
 
-<p>The following code:</p>
+<h2>Noncompliant Code Example</h2>
 
 <pre>
 int i = 0;
@@ -2359,7 +2946,7 @@ while (true)
 }
 </pre>
 
-<p>should be refactored into:</p>
+<h2>Compliant Solution</h2>
 
 <pre>
 int i = 0;
@@ -2367,18 +2954,6 @@ while (i != 10) // Compliant
 {
   Console.WriteLine(i);
   i++;
-}
-</pre>
-
-<p>The following code is compliant:</p>
-
-<pre>
-int foo = 0;
-switch (foo)
-{
-  case 0:
-    Console.WriteLine("foo = 0");
-    break;      // Compliant
 }
 </pre>
 ]]></description>
@@ -2396,12 +2971,12 @@ Such clauses should either be eliminated or populated with the appropriate logic
 <h2>Noncompliant Code Example</h2>
 <pre>
 string s = "";
-try 
+try
 {
   s = File.ReadAllText(fileName);
 }
 catch (Exception e) // Noncompliant
-{  
+{
   throw;
 }
 </pre>
@@ -2409,11 +2984,11 @@ catch (Exception e) // Noncompliant
 <h2>Compliant Solution</h2>
 <pre>
 string s = "";
-try 
+try
 {
   s = File.ReadAllText(fileName);
 }
-catch (Exception e) 
+catch (Exception e)
 {
   logger.LogError(e);
   throw;
@@ -2450,29 +3025,31 @@ string s = File.ReadAllText(fileName);
   <rule>
     <key>S2760</key>
     <name>Sequential tests should not check the same condition</name>
-    <severity>MAJOR</severity>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    When the same condition is checked twice in a row, it is either inefficient - why not combine the checks? - or an error - 
+    When the same condition is checked twice in a row, it is either inefficient - why not combine the checks? - or an error -
     some other condition should have been checked in the second test.
+</p>
+<p>
     This rule raises an issue when sequential <code>if</code>s or <code>switch</code>es test the same condition.
 </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (a == b) 
-{ 
+if (a == b)
+{
   doTheThing(b);
 }
 if (a == b) // Noncompliant; is this really what was intended?
-{  
+{
   doTheThing(c);
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-if (a == b) 
-{ 
+if (a == b)
+{
   doTheThing(b);
   doTheThing(c);
 }
@@ -2481,11 +3058,11 @@ if (a == b)
 or
 
 <pre>
-if (a == b) 
-{ 
+if (a == b)
+{
   doTheThing(b);
 }
-if (b == c) 
+if (b == c)
 {
   doTheThing(c);
 }
@@ -2493,7 +3070,7 @@ if (b == c)
 
 <h2>Exceptions</h2>
 <p>
-    This rule ignores sequential <code>if</code> statements when any symbols checked in the condition is modified within 
+    This rule ignores sequential <code>if</code> statements when any symbols checked in the condition is modified within
     the first <code>if</code>.
 </p>]]></description>
     <tag>bug</tag>
@@ -2505,7 +3082,7 @@ if (b == c)
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
 A chain of <code>if</code>/<code>else if</code> statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to <code>true</code>.
-Therefore, duplicating a condition automatically leads to dead code. Usually, this is due to a copy/paste error. At best, it's simply dead code and at worst, it's a bug that is likely to induce 
+Therefore, duplicating a condition automatically leads to dead code. Usually, this is due to a copy/paste error. At best, it's simply dead code and at worst, it's a bug that is likely to induce
 further bugs as the code is maintained, and obviously it could lead to unexpected behavior.
 </p>
 
@@ -2548,45 +3125,45 @@ else if (param == 3)
     <description><![CDATA[<p>
     Having two <code>cases</code> in the same <code>switch</code> statement or branches in the same <code>if</code> structure
     with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for
-    both instances, then in an <code>if</code> structure they should be combined, or for a <code>switch</code>, one should fall 
+    both instances, then in an <code>if</code> structure they should be combined, or for a <code>switch</code>, one should fall
     through to the other.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-switch (i) 
+switch (i)
 {
-  case 1: 
+  case 1:
     doSomething();
     break;
-  case 2: 
+  case 2:
     doSomethingDifferent();
     break;
   case 3:  // Noncompliant; duplicates case 1's implementation
-    doSomething(); 
+    doSomething();
     break;
-  default: 
+  default:
     doTheRest();
 }
 
-if (a >= 0 && a < 10) 
+if (a >= 0 &amp;&amp; a < 10)
 {
   doTheThing();
 }
-else if (a >= 10 && a < 20) 
+else if (a >= 10 &amp;&amp; a < 20)
 {
   doTheOtherThing();
 }
-else if (a >= 20 && a < 50) 
+else if (a >= 20 &amp;&amp; a < 50)
 {
   doTheThing();  // Noncompliant; duplicates first condition
 }
-else 
+else
 {
-  doTheRest(); 
+  doTheRest();
 }
 
-if (b == 0) 
+if (b == 0)
 {
   doOneMoreThing();
 }
@@ -2595,77 +3172,78 @@ if (b == 0)
 <h2>Compliant Solution</h2>
 <pre>
 switch (i) {
-  case 1: 
+  case 1:
   case 3:
     doSomething();
     break;
-  case 2: 
+  case 2:
     doSomethingDifferent();
     break;
-  default: 
+  default:
     doTheRest();
 }
 
-if ((a >= 0 && a < 10) || (a >= 20 && a < 50)) 
+if ((a >= 0 &amp;&amp; a < 10) || (a >= 20 &amp;&amp; a < 50))
 {
   doTheThing();
 }
-else if (a >= 10 && a < 20) 
+else if (a >= 10 &amp;&amp; a < 20)
 {
   doTheOtherThing();
 }
-else 
+else
 {
-  doTheRest(); 
+  doTheRest();
 }
 
 doOneMoreThing();
 </pre>
 or
 <pre>
-switch (i) 
+switch (i)
 {
-  case 1: 
+  case 1:
     doSomething();
     break;
-  case 2: 
+  case 2:
     doSomethingDifferent();
     break;
   case 3:
-    doThirdThing(); 
+    doThirdThing();
     break;
-  default: 
+  default:
     doTheRest();
 }
 
-if (a >= 0 && a < 10) 
+if (a >= 0 &amp;&amp; a < 10)
 {
   doTheThing();
 }
-else if (a >= 10 && a < 20) 
+else if (a >= 10 &amp;&amp; a < 20)
 {
   doTheOtherThing();
 }
-else if (a >= 20 && a < 50) 
+else if (a >= 20 &amp;&amp; a < 50)
 {
   doTheThirdThing();
 }
-else 
+else
 {
-  doTheRest(); 
+  doTheRest();
 }
 </pre>
 ]]></description>
-    <tag>bug</tag>
+    <tag>design</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S126</key>
-    <name>"if ... else if" constructs shall be terminated with an "else" clause</name>
+    <name>"if ... else if" constructs should end with "else" clause</name>
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
   This rule applies whenever an <code>if</code> statement is followed by one or
-  more <code>else if</code> statements, the final <code>else if</code> shall be
+  more <code>else if</code> statements, the final <code>else if</code> should be
   followed by an <code>else</code> statement.
 </p>
 
@@ -2728,23 +3306,23 @@ When exceptions occur, it is usually a bad idea to simply ignore them. Instead, 
 <h2>Noncompliant Code Example</h2>
 <pre>
 string text = "";
-try 
+try
 {
   text = File.ReadAllText(fileName);
-} 
+}
 catch (Exception exc) // Noncompliant
-{  
+{
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
 string text = "";
-try 
+try
 {
   text = File.ReadAllText(fileName);
-} 
-catch (Exception exc) 
+}
+catch (Exception exc)
 {
   logger.Log(exc);
 }
@@ -2791,7 +3369,7 @@ public override void DoSomething()
   // Do nothing because of X and Y.
 }
 
-public override void doSomethingElse() 
+public override void doSomethingElse()
 {
   throw new NotSupportedException();
 }
@@ -2800,15 +3378,15 @@ public override void doSomethingElse()
 <h2>Exceptions</h2>
 <p>An abstract class' may have empty methods, in order to provide default implementations for child classes.</p>
 <pre>
-abstract class Animal 
+abstract class Animal
 {
-  public void Speak() 
+  public void Speak()
   {
   }
 }
 </pre>
 ]]></description>
-    <tag>bug</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S108</key>
@@ -2829,7 +3407,7 @@ for (int i = 0; i < 42; i++) {}  // Empty on purpose or missing piece of code ?
     When a block contains a comment, this block is not considered to be empty.
 </p>
 ]]></description>
-    <tag>bug</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S1116</key>
@@ -2848,14 +3426,16 @@ for (int i = 0; i < 42; i++) {}  // Empty on purpose or missing piece of code ?
 <pre>
 void doSomething()
 {
-  ;                                                   // Non-Compliant - was used as a kind of TODO marker
+  ; // Noncompliant - was used as a kind of TODO marker
 }
 
 void doSomethingElse()
 {
-  Console.WriteLine("Hello, world!");;                // Non-Compliant - double ;
+  Console.WriteLine("Hello, world!");;  // Noncompliant - double ;
   ...
-  for (int i = 0; i < 3; Console.WriteLine(i), i++);  // Non-Compliant - Rarely, they are used on purpose as the body of a loop. It is a bad practice to have side-effects outside of the loop body
+  // Rarely, they are used on purpose as the body of a loop. It is a bad practice to
+  // have side-effects outside of the loop body
+  for (int i = 0; i < 3; Console.WriteLine(i), i++); // Noncompliant
   ...
 }
 </pre>
@@ -2964,14 +3544,14 @@ It is almost always an error when a <code>for</code> loop's stop condition and i
 <h2>Noncompliant Code Example</h2>
 <pre>
 for (i = 0; i < 10; j++) // Noncompliant
-{  
+{
   // ...
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-for (i = 0; i < 10; i++) 
+for (i = 0; i < 10; i++)
 {
   // ...
 }
@@ -2993,19 +3573,19 @@ This rule ignores <code>*</code>, <code>+</code>, and <code>=</code>.
 <h2>Noncompliant Code Example</h2>
 <pre>
 if ( a == a ) // always true
-{ 
+{
   doZ();
 }
 if ( a != a ) // always false
-{ 
+{
   doY();
 }
-if ( a == b && a == b ) // if the first one is true, the second one is too
-{ 
+if ( a == b &amp;&amp; a == b ) // if the first one is true, the second one is too
+{
   doX();
 }
 if ( a == b || a == b ) // if the first one is true, the second one is too
-{ 
+{
   doW();
 }
 
@@ -3017,11 +3597,11 @@ int k = 5 - 5; //always 0
 <pre>
 doZ();
 
-if ( a == b ) 
+if ( a == b )
 {
   doX();
 }
-if ( a == b ) 
+if ( a == b )
 {
   doW();
 }
@@ -3061,12 +3641,12 @@ In either case, unconditional <code>if</code> statements should be removed.
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (true) 
+if (true)
 {
   doSomething();
 }
 ...
-if (false) 
+if (false)
 {
   doSomethingElse();
 }
@@ -3090,7 +3670,7 @@ doSomething();
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
 Curly braces can be omitted from a one-line block, such as with an <code>if</code> statement or <code>for</code> loop, but doing so can be misleading and induce bugs.
-This rule raises an issue when the indention of the lines after a one-line block indicates an intent to include those lines in the block, but the omission of curly braces means the lines will be unconditionally executed once.
+This rule raises an issue when the indentation of the lines after a one-line block indicates an intent to include those lines in the block, but the omission of curly braces means the lines will be unconditionally executed once.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -3101,14 +3681,14 @@ if (condition)
 thirdAction();
 
 string str = null;
-for (int i = 0; i < array.length; i++) 
+for (int i = 0; i < array.length; i++)
   str = array[i];
   doTheThing(str);  // Noncompliant; executed only on last array element
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-if (condition) 
+if (condition)
 {
   firstActionInBlock();
   secondAction();
@@ -3116,7 +3696,7 @@ if (condition)
 thirdAction();
 
 string str = null;
-for (int i = 0; i < array.length; i++) 
+for (int i = 0; i < array.length; i++)
 {
   str = array[i];
   doTheThing(str);
@@ -3163,16 +3743,16 @@ if (x < 0)
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-class MyClass 
+class MyClass
 {
   public String name;
 
-  public MyClass(String name) 
+  public MyClass(String name)
   {
     name = name;                    // Noncompliant - useless identity assignment
   }
 
-  public int add(int a, int b) 
+  public int add(int a, int b)
   {
     a = a + b;                      // Noncompliant
 
@@ -3181,7 +3761,7 @@ class MyClass
     return a;                       // Seems like the parameter is returned as is, what is the point?
   }
 
-  public static void main(String[] args) 
+  public static void main(String[] args)
   {
     MyClass foo = new MyClass();
     int a = 40;
@@ -3193,21 +3773,21 @@ class MyClass
 
 <h2>Compliant Solution</h2>
 <pre>
-class MyClass 
+class MyClass
 {
   public String name;
 
-  public MyClass(String name) 
+  public MyClass(String name)
   {
     this.name = name;               // Compliant
   }
 
-  public int add(int a, int b) 
+  public int add(int a, int b)
   {
     return a + b;                   // Compliant
   }
 
-  public static void main(String[] args) 
+  public static void main(String[] args)
   {
     MyClass foo = new MyClass();
     int a = 40;
@@ -3236,14 +3816,14 @@ Shared coding conventions make it possible for a team to efficiently collaborate
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-if(condition) 
+if(condition)
 {
   doSomething();}
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-if(condition) 
+if(condition)
 {
   doSomething();
 }
@@ -3260,7 +3840,7 @@ if(condition) { doSomething(); }
   <rule>
     <key>S1656</key>
     <name>Variables should not be self-assigned</name>
-    <severity>MAJOR</severity>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
 There is no reason to re-assign a variable to itself. Either this statement is redundant and should be removed, or the re-assignment is a mistake and some other value or variable was intended for the assignment instead.
@@ -3268,7 +3848,7 @@ There is no reason to re-assign a variable to itself. Either this statement is r
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void setName(string name) 
+public void setName(string name)
 {
     name = name;
 }
@@ -3276,7 +3856,7 @@ public void setName(string name)
 
 <h2>Compliant Solution</h2>
 <pre>
-public void setName(string name) 
+public void setName(string name)
 {
     this.name = name;
 }
@@ -3297,18 +3877,18 @@ public void setName(string name)
     <severity>BLOCKER</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-When either the equality operator in a null test or the logical operator that follows it is reversed, the code has the appearance of safely null-testing the object before dereferencing it. 
+When either the equality operator in a null test or the logical operator that follows it is reversed, the code has the appearance of safely null-testing the object before dereferencing it.
 Unfortunately the effect is just the opposite - the object is null-tested and then dereferenced only if it is null, leading to a guaranteed null pointer dereference.
 </p>
 
 <h2>Noncompliant Code Sample</h2>
 <pre>
-if (str == null && str.Length == 0) 
+if (str == null &amp;&amp; str.Length == 0)
 {
   Console.WriteLine("String is empty");
 }
 
-if (str != null || str.Length > 0) 
+if (str != null || str.Length > 0)
 {
   Console.WriteLine("String is not empty");
 }
@@ -3316,12 +3896,12 @@ if (str != null || str.Length > 0)
 
 <h2>Compliant Solution</h2>
 <pre>
-if (str == null || str.Length == 0) 
+if (str == null || str.Length == 0)
 {
   Console.WriteLine("String is empty");
 }
 
-if (str != null && str.Length > 0) 
+if (str != null &amp;&amp; str.Length > 0)
 {
   Console.WriteLine("String is not empty");
 }
@@ -3344,16 +3924,16 @@ if (str != null && str.Length > 0)
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class LengthLimitedSingletonCollection&lt;T&gt; where T : new() 
+public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
 {
   protected const int MaxAllowedLength = 5;
   protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;(); // Noncompliant
-  public static T GetInstance() 
+  public static T GetInstance()
   {
     object instance;
-    if (!instances.TryGetValue(typeof(T), out instance)) 
+    if (!instances.TryGetValue(typeof(T), out instance))
     {
-      if (instances.Count >= MaxAllowedLength) 
+      if (instances.Count >= MaxAllowedLength)
       {
         throw new Exception();
       }
@@ -3367,19 +3947,19 @@ public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
 
 <h2>Compliant Solution</h2>
 <pre>
-public class SingletonCollectionBase 
+public class SingletonCollectionBase
 {
-  protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;(); 
+  protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;();
 }
 public class LengthLimitedSingletonCollection&lt;T&gt; : SingletonCollectionBase where T : new()
 {
   protected const int MaxAllowedLength = 5;
-  public static T GetInstance() 
+  public static T GetInstance()
   {
     object instance;
-    if (!instances.TryGetValue(typeof(T), out instance)) 
+    if (!instances.TryGetValue(typeof(T), out instance))
     {
-      if (instances.Count >= MaxAllowedLength) 
+      if (instances.Count >= MaxAllowedLength)
       {
         throw new Exception();
       }
@@ -3396,7 +3976,7 @@ public class LengthLimitedSingletonCollection&lt;T&gt; : SingletonCollectionBase
     If the static field or property uses a type parameter, then the developer is assumed to understand that the static member is not shared among the closed constructed types.
 </p>
 <pre>
-public class Cache&lt;T&gt; 
+public class Cache&lt;T&gt;
 {
   private static Dictionary&lt;string, T&gt; CacheDictionary { get; set; } // Compliant
 }
@@ -3411,14 +3991,14 @@ public class Cache&lt;T&gt;
     <description><![CDATA[<p>
     The requirement for a final <code>default</code> clause is defensive programming. The clause should either take
     appropriate action, or contain a suitable comment as to why no action is taken. Even when the <code>switch</code>
-    covers all current values of an <code>enum</code>, a <code>default</code> case should still be used because there is 
+    covers all current values of an <code>enum</code>, a <code>default</code> case should still be used because there is
     no guarantee that the <code>enum</code> won't be extended.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
 int foo = 42;
-switch (foo) // Non-Compliant
+switch (foo) // Noncompliant
 {
   case 0:
     Console.WriteLine("foo = 0");
@@ -3478,11 +4058,11 @@ So the use of tabulation character must be banned.
   </rule>
   <rule>
     <key>S1125</key>
-    <name>Literal boolean values should not be used in condition expressions</name>
+    <name>Boolean literals should not be redundant</name>
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-Remove literal boolean values from conditional expressions to improve readability. Anything that can be tested for equality with a boolean value must itself be a boolean value, and boolean values can be tested atomically.
+    Redundant Boolean literals should be removed from expressions to improve readability.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -3526,7 +4106,7 @@ If a local variable is declared but not used, it is dead code and should be remo
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public int numberOfMinutes(int hours) 
+public int numberOfMinutes(int hours)
 {
   int seconds = 0;   // seconds is never used
   return hours * 60;
@@ -3535,7 +4115,7 @@ public int numberOfMinutes(int hours)
 
 <h2>Compliant Solution</h2>
 <pre>
-public int numberOfMinutes(int hours) 
+public int numberOfMinutes(int hours)
 {
   return hours * 60;
 }
@@ -3556,7 +4136,7 @@ using(var t = new Timer()) // t never used, but compliant.
   </rule>
   <rule>
     <key>S121</key>
-    <name>Control structures should always use curly braces</name>
+    <name>Control structures should use curly braces</name>
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
@@ -3573,7 +4153,7 @@ if (condition)
 
 <h2>Compliant Solution</h2>
 <pre>
-if (condition) 
+if (condition)
 {
   executeSomething();
   checkSomething();
@@ -3599,7 +4179,7 @@ if (condition)
   </rule>
   <rule>
     <key>S101</key>
-    <name>Class name should comply with a naming convention</name>
+    <name>Class names should comply with a naming convention</name>
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
@@ -3607,20 +4187,16 @@ Sharing some naming conventions is a key point to make it possible for a team to
 This rule allows to check that all class names match a provided regular expression.
 </p>
 
-<p>The following code:</p>
-
+<h2>Noncompliant Code Example</h2>
+<p>With default provided regular expression <code>^(?:[A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*)$</code>:</p>
 <pre>
-class foo // Non-Compliant
-{
-}
+    class my_class {...}
 </pre>
 
-<p>should be refactored into:</p>
+<h2>Compliant Solution</h2>
 
 <pre>
-class Foo // Compliant
-{
-}
+    class MyClass {...}
 </pre>
 ]]></description>
     <tag>convention</tag>
@@ -3638,12 +4214,12 @@ class Foo // Compliant
     <cardinality>MULTIPLE</cardinality>
     <description><![CDATA[<p>
     This rule template can be used to create rules which will be triggered when a comment matches a given regular expression.
-    For example, one can create a rule with the regular expression <code>.*TODO.*</code> to match all comment 
+    For example, one can create a rule with the regular expression <code>.*TODO.*</code> to match all comment
     containing "TODO".
 </p>
 
 <p>
-    Note that, in order to match TODO regardless of the case, the <code>(?i)</code> modifier can be prepended to the 
+    Note that, in order to match TODO regardless of the case, the <code>(?i)</code> modifier can be prepended to the
     expression, as in <code>(?i).*TODO.*</code>.
 </p>
 ]]></description>
@@ -3794,8 +4370,8 @@ public static void doSomething() {
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.
-This rule allows to check that all class names match a provided regular expression.
+    Shared naming conventions allow teams to collaborate efficiently. This rule checks that all method names match a provided
+    regular expression.
 </p>
 
 <p>The following code:</p>
