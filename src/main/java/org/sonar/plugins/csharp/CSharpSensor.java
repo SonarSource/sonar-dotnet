@@ -157,7 +157,7 @@ public class CSharpSensor implements Sensor {
 
     int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
     if (exitCode != 0) {
-      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode);
+      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode + " - Verify that the .NET Framework version 4.5.2 at least is installed.");
     }
   }
 
