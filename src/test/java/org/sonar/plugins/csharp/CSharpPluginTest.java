@@ -42,7 +42,8 @@ public class CSharpPluginTest {
       CSharpSonarWayProfile.class,
       RuleRunnerExtractor.class,
       CSharpSensor.class,
-      CSharpCPDMapping.class
+      CSharpCPDMapping.class,
+      SonarLintProfileExporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);

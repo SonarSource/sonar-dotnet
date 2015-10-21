@@ -20,13 +20,19 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableSet;
+import org.sonar.api.BatchExtension;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 import java.io.InputStreamReader;
+import java.util.Set;
 
-public class CSharpSonarRulesDefinition implements RulesDefinition {
+public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtension {
+
+  private Set<String> parameterlessRuleKeys = null;
 
   @Override
   public void define(Context context) {
@@ -38,7 +44,20 @@ public class CSharpSonarRulesDefinition implements RulesDefinition {
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), Charsets.UTF_8));
     SqaleXmlLoader.load(repository, "/org/sonar/plugins/csharp/sqale.xml");
 
+    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    for (NewRule rule : repository.rules()) {
+      if (rule.params().isEmpty()) {
+        builder.add(rule.key());
+      }
+    }
+    parameterlessRuleKeys = builder.build();
+
     repository.done();
+  }
+
+  public Set<String> parameterlessRuleKeys() {
+    Preconditions.checkNotNull(parameterlessRuleKeys);
+    return parameterlessRuleKeys;
   }
 
 }

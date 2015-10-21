@@ -22,6 +22,8 @@ package org.sonar.plugins.csharp;
 import org.junit.Test;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 
+import java.util.Set;
+
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CSharpSonarRulesDefinitionTest {
@@ -31,10 +33,16 @@ public class CSharpSonarRulesDefinitionTest {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    new CSharpSonarRulesDefinition().define(context);
+    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition();
+    csharpRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
     assertThat(context.repository("csharpsquid").rules()).isNotEmpty();
+
+    Set<String> sonarLintRules = csharpRulesDefinition.parameterlessRuleKeys();
+    assertThat(sonarLintRules.contains("S100")).isFalse();
+    assertThat(sonarLintRules.size()).isGreaterThan(50);
+    assertThat(sonarLintRules.size()).isLessThanOrEqualTo(context.repository("csharpsquid").rules().size());
   }
 
 }
