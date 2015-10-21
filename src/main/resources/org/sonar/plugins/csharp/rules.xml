@@ -1,6 +1,363 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <rules>
   <rule>
+    <key>S3262</key>
+    <name>"params" should be used on overrides</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Overriding methods automatically inherit the <code>params</code> behavior. To ease readability, this modifier should be explicitly used in
+    the overriding method as well.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Base
+{
+  public virtual void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+class Derived : Base
+{
+  public override void Method(int[] numbers) // Noncompliant, the params is missing.
+  {
+    ...
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class Base
+{
+  public virtual void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+class Derived : Base
+{
+  public override void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+</pre>
+]]></description>
+    <tag>confusing</tag>
+  </rule>
+  <rule>
+    <key>S2219</key>
+    <name>"Type.IsAssignableFrom()" should not be used to check object type</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    To check the type of an object there are at least three options:
+    <ul>
+        <li>The simplest and shortest one uses the <code>expr is SomeType</code> operator</li>
+        <li>The slightly longer <code>typeInstance.IsInstanceOfType(expr)</code></li>
+        <li>The cumbersome and error-prone one uses <code>expr1.GetType().IsAssignableFrom(expr2.GetType())</code></li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+A expr1;
+B expr2;
+if (expr2.GetType().IsAssignableFrom(expr1.GetType())) { /* ... */ } // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+A expr;
+if (expr is MyType) { /* ... */ }
+</pre>
+
+or, when the type is not known at compile time:
+
+<pre>
+A expr;
+Type myType;
+if (myType.IsInstanceOfType(expr)) { /* ... */ }
+</pre>]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3236</key>
+    <name>Methods with caller info attributes should not be invoked with explicit arguments</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Caller information attributes (<code>CallerFilePathAttribute</code>, <code>CallerLineNumberAttribute</code>, and
+    <code>CallerMemberNameAttribute</code>) provide a way to get information about the caller of a method through optional parameters.
+    But the arguments for these optional parameters are only generated if they are not explicitly defined in the call. Thus, specifying
+    the argument values defeats the purpose of the attributes.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+void TraceMessage(string message,
+  [CallerMemberName] string memberName = "",
+  [CallerFilePath] string filePath = "",
+  [CallerLineNumber] int lineNumber = 0)
+{
+  /* ... */
+}
+
+void MyMethod()
+{
+  TraceMessage("my message", "MyMethod"); // Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+void TraceMessage(string message,
+  [CallerMemberName] string memberName = "",
+  [CallerFilePath] string filePath = "",
+  [CallerLineNumber] int lineNumber = 0)
+{
+  /* ... */
+}
+
+void MyMethod()
+{
+  TraceMessage("my message");
+}
+</pre>
+]]></description>
+    <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S2292</key>
+    <name>Trivial properties should be auto-implemented</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Trivial properties, which include no logic but setting and getting a backing field should be converted to auto-implemented
+    properties, yielding cleaner and more readable code.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Car
+{
+  private string _make;
+  public string Make // Noncompliant
+  {
+    get { return _make; }
+    set { _make = value; }
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class Car
+{
+  public string Make { get; set; }
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3253</key>
+    <name>"base()" constructor calls should not be explicitly made</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Since the compiler will automatically invoke the base type's no-argument constructor, there's no need to specify its invocation explicitly. Doing so just clutters the code.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class X
+{
+  public X()
+  {
+    /* ... */
+  }
+}
+
+class Y : X
+{
+  public Y(int parameter) : base() // Noncompliant
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class X
+{
+  public X()
+  {
+    /* ... */
+  }
+}
+
+class Y : X
+{
+  public Y(int parameter)
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S1939</key>
+    <name>Inheritance list should not be redundant</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    An inheritance list entry is redundant if:
+    <ul>
+        <li>It is <code>Object</code> - all classes extend <code>Object</code> implicitly.</li>
+        <li>It is <code>int</code> for an <code>enum</code></li>
+        <li>It is a base class of another listed inheritance.</li>
+    </ul>
+    Such redundant declarations should be removed because they needlessly clutter the code and can be confusing.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass : Object  // Noncompliant
+
+enum MyEnum : int  // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass
+
+enum MyEnum
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S2333</key>
+    <name>Redundant modifiers should be removed</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Unnecessary keywords simply clutter the code and should be removed. Specifically:
+    <ul>
+        <li><code>virtual</code> on members of classes that are never overridden</li>
+        <li><code>partial</code> on type declarations that are completely defined in one place</li>
+        <li><code>sealed</code> on members of <code>sealed</code> classes</li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+internal partial class MyClass // Noncompliant;
+{
+  public virtual void DoSomething()  // Noncompliant; virtual is gratuitous
+  {
+    // ...
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+internal class MyClass
+{
+  public void DoSomething()
+  {
+    // ...
+  }
+}
+</pre>
+]]></description>
+    <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S818</key>
+    <name>Literal suffixes should be upper case</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Using upper case literal suffixes removes the potential ambiguity between "1" (digit 1) and "l" (letter el) for declaring literals.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+const uint a = 0u;      // Noncompliant
+const long b = 0l;      // Noncompliant
+const ulong c = 0Ul;     // Noncompliant
+const ulong d = 0uL;     // Noncompliant
+const decimal e = 1.2m;  // Noncompliant
+const float f = 1.2f;    // Noncompliant
+const double g = 1.2d;    // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+const uint a = 0U;
+const long b = 0L;
+const ulong c = 0UL;
+const ulong d = 0UL;
+const decimal e = 1.2M;
+const float f = 1.2F;
+const double g = 1.2D;
+</pre>
+
+<h2>See</h2>
+<ul>
+    <li>MISRA C++:2008, 2-13-4 - Literal suffixes shall be upper case</li>
+    <li>MISRA C:2012, 7.3 - The lowercase character "l" shall not be used in a literal suffix</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/koAtAQ">CERT DCL16-C</a> - Use "L," not "l," to indicate a long value</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/n4AtAQ">CERT DCL16-CPP</a> - Use "L," not "l," to indicate a long value</li>
+</ul>
+]]></description>
+    <tag>cert</tag>
+    <tag>convention</tag>
+    <tag>misra</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
+    <key>S2275</key>
+    <name>Format strings should be passed the correct number of arguments</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Use fewer arguments than are expected in your format string, and you'll get an error at runtime. Use more arguments than are
+    expected, and you probably won't get the output you expect. Either way, it's a bug.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s1 = string.Format("{0} {1} {2}", 1, 2); // Noncompliant; too few arguments
+var s2 = string.Format("{0}", 10, 11); // Noncompliant; too many arguments
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+// Pass the expected number of arguments
+var s1 = string.Format("{0} {1} {2}", 1, 2, 3);
+var s2 = string.Format("{0}", 10);
+</pre>
+or
+<pre>
+// Fix the format string
+var s1 = string.Format("{0} {1}", 1, 2);
+var s2 = string.Format("{0} {1}", 10, 11);
+</pre>
+]]></description>
+    <tag>bug</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
     <key>S3254</key>
     <name>Default parameter values should not be passed as arguments</name>
     <severity>MINOR</severity>
@@ -172,7 +529,7 @@ var x = personList
 </pre>
 ]]></description>
     <tag>bug</tag>
-    <tag>preformance</tag>
+    <tag>performance</tag>
   </rule>
   <rule>
     <key>S1172</key>
@@ -218,6 +575,49 @@ override void DoSomething(int a, int b) // no issue reported on b
 </ul>]]></description>
     <tag>misra</tag>
     <tag>unused</tag>
+  </rule>
+  <rule>
+    <key>S3263</key>
+    <name>Static fields should appear in the order they must be initialized</name>
+    <severity>BLOCKER</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Static field initializers are executed in the order in which they appear in the class from top to bottom. Thus,
+    placing a static field in a class above the field or fields required for its initialization will yield unexpected
+    results.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass
+{
+  public static int X = Y; // Noncompliant; Y at this time is still assigned default(int), i.e. 0
+  public static int Y = 42;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass
+{
+  public static int Y = 42;
+  public static int X = Y;
+}
+</pre>
+or
+<pre>
+class MyClass
+{
+  public static int X;
+  public static int Y = 42;
+
+  static MyClass()
+  {
+    X = Y;
+  }
+}
+</pre>]]></description>
+    <tag>bug</tag>
   </rule>
   <rule>
     <key>S3234</key>
@@ -287,8 +687,54 @@ class X
   public object o;
 }
 </pre>
+
+<h2>Exceptions</h2>
+<code>const</code> fields are ignored.
 ]]></description>
     <tag>convention</tag>
+  </rule>
+  <rule>
+    <key>S3246</key>
+    <name>Generic type parameters should be co/contravariant when possible</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    In the interests of making code as usable as possible, interfaces and delegates with generic parameters should use the
+    <code>out</code> and <code>in</code> modifiers when possible to make the interfaces and delegates covariant and contravariant,
+    respectively.
+</p>
+<p>
+    The <code>out</code> keyword can be used when the type parameter is used only as a return type in the interface or delegate.
+    Doing so makes the parameter covariant, and allows interface and delegate instances created with a sub-type to be used as
+    instances created with a base type. The most notable example of this is <code>IEnumerable&lt;out T&gt;</code>, which allows
+    the assignment of an <code>IEnumerable&lt;string&gt;</code> instance to an <code>IEnumerable&lt;object&gt;</code> variable,
+    for instance.
+</p>
+<p>
+    The <code>in</code> keyword can be used when the type parameter is used only as a method parameter in the interface or a
+    parameter in the delegate. Doing so makes the parameter contravariant, and allows interface and delegate instances created
+    with a base type to be used as instances created with a sub-type. I.e. this is the inversion of covariance. The most notable
+    example of this is the <code>Action&lt;in T&gt;</code> delegate, which allows the assignment of an
+    <code>Action&lt;object&gt;</code> instance to a <code>Action&lt;string&gt;</code> variable, for instance.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+interface IConsumer&lt;T&gt;  // Noncompliant
+{
+    bool Eat(T fruit);
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+interface IConsumer&lt;in T&gt;
+{
+    bool Eat(T fruit);
+}
+</pre>
+]]></description>
+    <tag>api-design</tag>
   </rule>
   <rule>
     <key>S2761</key>
@@ -560,7 +1006,7 @@ MyDelegate chain23 = chain1234 - (first + fourth); // Noncompliant
 chain23(); // will print "1234"!
 </pre>
 
-<h2>Noncompliant Solution</h2>
+<h2>Compliant Solution</h2>
 <pre>
 MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
 
@@ -3025,14 +3471,11 @@ string s = File.ReadAllText(fileName);
   <rule>
     <key>S2760</key>
     <name>Sequential tests should not check the same condition</name>
-    <severity>CRITICAL</severity>
+    <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    When the same condition is checked twice in a row, it is either inefficient - why not combine the checks? - or an error -
-    some other condition should have been checked in the second test.
-</p>
-<p>
-    This rule raises an issue when sequential <code>if</code>s or <code>switch</code>es test the same condition.
+    When the same condition is checked twice in a row, it is either confusing - why have separate checks? - or an error - some other condition
+    should have been checked in the second test.
 </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -3070,10 +3513,10 @@ if (b == c)
 
 <h2>Exceptions</h2>
 <p>
-    This rule ignores sequential <code>if</code> statements when any symbols checked in the condition is modified within
-    the first <code>if</code>.
+    Since it is a common pattern to test a variable, reassign it if it fails the test, then re-test it, that pattern is ignored.
 </p>]]></description>
-    <tag>bug</tag>
+    <tag>clumsy</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S1862</key>
