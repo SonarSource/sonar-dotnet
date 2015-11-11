@@ -149,10 +149,10 @@
 
   <profiles>
     <profile>
-	  <id>milestone</id>
-	  <build>
-	    <finalName>${project.artifactId}-${project.version}</finalName>
-	  </build>
-	</profile>
+      <id>milestone</id>
+      <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+      </build>
+    </profile>
   </profiles>
 </project>
