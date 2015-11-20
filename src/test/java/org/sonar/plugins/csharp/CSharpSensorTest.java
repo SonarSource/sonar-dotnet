@@ -60,6 +60,9 @@ import static org.mockito.Mockito.when;
 public class CSharpSensorTest {
 
   private SensorContext context;
+  private Project project;
+  private CSharpSensor sensor;
+  private Settings settings;
   private DefaultInputFile inputFile;
   private DefaultFileSystem fs;
   private FileLinesContext fileLinesContext;
@@ -144,18 +147,21 @@ public class CSharpSensorTest {
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
 
-    CSharpSensor sensor =
+    settings = mock(Settings.class);
+    sensor =
       new CSharpSensor(
-        mock(Settings.class), extractor,
+        settings, extractor,
         fs,
         fileLinesContextFactory, noSonarFilter, rulesProfile, perspectives);
 
+    project = mock(Project.class);
     context = mock(SensorContext.class);
-    sensor.analyse(mock(Project.class), context);
   }
 
   @Test
   public void metrics() {
+    sensor.analyse(project, context);
+
     verify(context).saveMeasure(inputFile, CoreMetrics.LINES, 27d);
     verify(context).saveMeasure(inputFile, CoreMetrics.CLASSES, 1d);
     verify(context).saveMeasure(inputFile, CoreMetrics.ACCESSORS, 5d);
@@ -168,6 +174,8 @@ public class CSharpSensorTest {
 
   @Test
   public void distribution() {
+    sensor.analyse(project, context);
+
     ArgumentCaptor<Measure> captor = ArgumentCaptor.forClass(Measure.class);
     verify(context, Mockito.times(2)).saveMeasure(Mockito.eq(inputFile), captor.capture());
     int i = 0;
@@ -185,12 +193,16 @@ public class CSharpSensorTest {
 
   @Test
   public void commentsAndNoSonar() {
+    sensor.analyse(project, context);
+
     verify(noSonarFilter).addComponent(inputFile.key(), ImmutableSet.of(8));
     verify(context).saveMeasure(inputFile, CoreMetrics.COMMENT_LINES, 2d);
   }
 
   @Test
   public void devCockpit() {
+    sensor.analyse(project, context);
+
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 3, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 7, 1);
 
@@ -201,6 +213,8 @@ public class CSharpSensorTest {
 
   @Test
   public void issue() {
+    sensor.analyse(project, context);
+
     verify(issueBuilder).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"));
     verify(issueBuilder).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
     verify(issueBuilder).line(16);
@@ -208,11 +222,37 @@ public class CSharpSensorTest {
   }
 
   @Test
-  public void produced_analysis_input() throws Exception {
+  public void escapesAnalysisInput() throws Exception {
+    sensor.analyse(project, context);
+
     assertThat(
       Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
       .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+  }
+
+  @Test
+  public void roslynReportIsProcessed() {
+    when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report.json").getAbsolutePath());
+    sensor.analyse(project, context);
+
+    verify(issueBuilder).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
+    verify(issueBuilder).message("This issue comes from the Roslyn report");
+    verify(issueBuilder).line(42);
+
+    // One issue saved from the Rolsyn report, one from the rule runner one
+    verify(issuable, Mockito.times(2)).addIssue(issue);
+  }
+
+  @Test
+  public void roslynRulesNotExecutedTwice() throws Exception {
+    when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report.json").getAbsolutePath());
+    sensor.analyse(project, context);
+
+    assertThat(
+      Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+        .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
+      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
 }

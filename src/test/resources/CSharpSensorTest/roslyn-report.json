@@ -1,0 +1,114 @@
+{
+  "version": "0.1",
+  "toolInfo": {
+    "toolName": "Microsoft (R) Visual C# Compiler",
+    "productVersion": "1.0.0",
+    "fileVersion": "1.0.0"
+  },
+  "issues": [
+    {
+      "ruleId": "[parameters_key]",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "Foo&Bar.cs",
+              "region": {
+                "startLine": 42,
+                "startColumn": 55,
+                "endLine": 43,
+                "endColumn": 57
+              }
+            }
+          ]
+        }
+      ],
+      "fullMessage": "This issue comes from the Roslyn report",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel
+		": "2",
+        "defaultSeverity": "Warning",
+        "title": "Unreachable code detected",
+        "category": "Compiler",
+        "isEnabledByDefault": "True",
+        "customTags": "Compiler;Telemetry"
+      }
+    },
+    {
+      "ruleId": "CS0067",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "Foo&Bar.cs",
+              "region": {
+                "startLine": 13,
+                "startColumn": 41,
+                "endLine": 13,
+                "endColumn": 46
+              }
+            }
+          ]
+        }
+      ],
+      "fullMessage": "The event 'Program.OnFoo' is never used",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel": "3",
+        "defaultSeverity": "Warning",
+        "title": "Event is never used",
+        "category": "Compiler",
+        "isEnabledByDefault": "True",
+        "customTags": "Compiler;Telemetry"
+      }
+    },
+	{
+      "ruleId": "[parameters_key]",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "NonExisting.cs",
+              "region": {
+                "startLine": 42,
+                "startColumn": 55,
+                "endLine": 43,
+                "endColumn": 57
+              }
+            }
+          ]
+        }
+      ],
+      "fullMessage": "This issue comes from the Roslyn report",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel
+		": "2",
+        "defaultSeverity": "Warning",
+        "title": "Unreachable code detected",
+        "category": "Compiler",
+        "isEnabledByDefault": "True",
+        "customTags": "Compiler;Telemetry"
+      }
+    },
+	{
+      "ruleId": "[parameters_key]",
+      "locations": [
+        {
+        }
+      ],
+      "fullMessage": "This issue comes from the Roslyn report",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel
+		": "2",
+        "defaultSeverity": "Warning",
+        "title": "Unreachable code detected",
+        "category": "Compiler",
+        "isEnabledByDefault": "True",
+        "customTags": "Compiler;Telemetry"
+      }
+    }
+  ]
+}

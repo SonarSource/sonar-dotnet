@@ -25,8 +25,12 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -67,10 +71,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class CSharpSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);
+  private static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
@@ -99,11 +105,18 @@ public class CSharpSensor implements Sensor {
 
   @Override
   public void analyse(Project project, SensorContext context) {
-    analyze();
+    String roslynReportPath = settings.getString(ROSLYN_REPORT_PATH_PROPERTY_KEY);
+    boolean hasRoslynReportPath = roslynReportPath != null;
+
+    analyze(!hasRoslynReportPath);
     importResults(project, context);
+
+    if (hasRoslynReportPath) {
+      importRoslynReport(roslynReportPath);
+    }
   }
 
-  private void analyze() {
+  private void analyze(boolean includeRules) {
     StringBuilder sb = new StringBuilder();
     appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     appendLine(sb, "<AnalysisInput>");
@@ -114,23 +127,25 @@ public class CSharpSensor implements Sensor {
     appendLine(sb, "    </Setting>");
     appendLine(sb, "  </Settings>");
     appendLine(sb, "  <Rules>");
-    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
-      appendLine(sb, "    <Rule>");
-      Rule template = activeRule.getRule().getTemplate();
-      String ruleKey = template == null ? activeRule.getRuleKey() : template.getKey();
-      appendLine(sb, "      <Key>" + escapeXml(ruleKey) + "</Key>");
-      Map<String, String> parameters = effectiveParameters(activeRule);
-      if (!parameters.isEmpty()) {
-        appendLine(sb, "      <Parameters>");
-        for (Entry<String, String> parameter : parameters.entrySet()) {
-          appendLine(sb, "        <Parameter>");
-          appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
-          appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
-          appendLine(sb, "        </Parameter>");
+    if (includeRules) {
+      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
+        appendLine(sb, "    <Rule>");
+        Rule template = activeRule.getRule().getTemplate();
+        String ruleKey = template == null ? activeRule.getRuleKey() : template.getKey();
+        appendLine(sb, "      <Key>" + escapeXml(ruleKey) + "</Key>");
+        Map<String, String> parameters = effectiveParameters(activeRule);
+        if (!parameters.isEmpty()) {
+          appendLine(sb, "      <Parameters>");
+          for (Entry<String, String> parameter : parameters.entrySet()) {
+            appendLine(sb, "        <Parameter>");
+            appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
+            appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
+            appendLine(sb, "        </Parameter>");
+          }
+          appendLine(sb, "      </Parameters>");
         }
-        appendLine(sb, "      </Parameters>");
+        appendLine(sb, "    </Rule>");
       }
-      appendLine(sb, "    </Rule>");
     }
     appendLine(sb, "  </Rules>");
     appendLine(sb, "  <Files>");
@@ -189,6 +204,59 @@ public class CSharpSensor implements Sensor {
     File analysisOutput = toolOutput();
 
     new AnalysisResultImporter(project, context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
+  }
+
+  private void importRoslynReport(String reportPath) {
+    String contents;
+    try {
+      contents = Files.toString(new File(reportPath), Charsets.UTF_8);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+
+    Set<String> activeRuleIds = Sets.newHashSet();
+    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
+      activeRuleIds.add(activeRule.getRuleKey());
+    }
+
+    JsonParser parser = new JsonParser();
+    for (JsonElement issueElement : parser.parse(contents).getAsJsonObject().get("issues").getAsJsonArray()) {
+      JsonObject issue = issueElement.getAsJsonObject();
+
+      String ruleId = issue.get("ruleId").getAsString();
+      if (!activeRuleIds.contains(ruleId)) {
+        continue;
+      }
+
+      String fullMessage = issue.get("fullMessage").getAsString();
+      for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
+        JsonObject location = locationElement.getAsJsonObject();
+        if (location.has("analysisTarget")) {
+          for (JsonElement analysisTargetElement : location.get("analysisTarget").getAsJsonArray()) {
+            JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
+            String uri = analysisTarget.get("uri").getAsString();
+            JsonObject region = analysisTarget.get("region").getAsJsonObject();
+            int startLine = region.get("startLine").getAsInt();
+
+            handleRoslynIssue(ruleId, uri, startLine, fullMessage);
+          }
+        }
+      }
+    }
+  }
+
+  private void handleRoslynIssue(String ruleId, String uri, int startLine, String fullMessage) {
+    InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(uri));
+    if (inputFile != null) {
+      Issuable issuable = perspectives.as(Issuable.class, inputFile);
+      if (issuable != null) {
+        IssueBuilder builder = issuable.newIssueBuilder();
+        builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, ruleId));
+        builder.line(startLine);
+        builder.message(fullMessage);
+        issuable.addIssue(builder.build());
+      }
+    }
   }
 
   private static class AnalysisResultImporter {
