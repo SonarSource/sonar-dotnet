@@ -43,7 +43,8 @@ public class CSharpPluginTest {
       RuleRunnerExtractor.class,
       CSharpSensor.class,
       CSharpCPDMapping.class,
-      SonarLintProfileExporter.class
+      SonarLintProfileExporter.class,
+      SonarLintFakeProfileImporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
