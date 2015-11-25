@@ -241,7 +241,7 @@ public class CSharpSensor implements Sensor {
         continue;
       }
 
-      String fullMessage = issue.get("fullMessage").getAsString();
+      String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
       for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
         JsonObject location = locationElement.getAsJsonObject();
         if (location.has("analysisTarget")) {
@@ -251,7 +251,7 @@ public class CSharpSensor implements Sensor {
             JsonObject region = analysisTarget.get("region").getAsJsonObject();
             int startLine = region.get("startLine").getAsInt();
 
-            handleRoslynIssue(ruleId, uri, startLine, fullMessage);
+            handleRoslynIssue(ruleId, uri, startLine, message);
           }
         }
       }

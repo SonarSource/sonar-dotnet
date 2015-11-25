@@ -71,8 +71,12 @@ public class CSharpSensorTest {
   private NoSonarFilter noSonarFilter;
   private ResourcePerspectives perspectives;
   private Issuable issuable;
-  private IssueBuilder issueBuilder;
-  private Issue issue;
+  private IssueBuilder issueBuilder1;
+  private IssueBuilder issueBuilder2;
+  private IssueBuilder issueBuilder3;
+  private Issue issue1;
+  private Issue issue2;
+  private Issue issue3;
 
   @Test
   public void shouldExecuteOnProject() {
@@ -114,10 +118,16 @@ public class CSharpSensorTest {
     noSonarFilter = mock(NoSonarFilter.class);
     perspectives = mock(ResourcePerspectives.class);
     issuable = mock(Issuable.class);
-    issueBuilder = mock(IssueBuilder.class);
-    when(issuable.newIssueBuilder()).thenReturn(issueBuilder);
-    issue = mock(Issue.class);
-    when(issueBuilder.build()).thenReturn(issue);
+    issueBuilder1 = mock(IssueBuilder.class);
+    issueBuilder2 = mock(IssueBuilder.class);
+    issueBuilder3 = mock(IssueBuilder.class);
+    when(issuable.newIssueBuilder()).thenReturn(issueBuilder1, issueBuilder2, issueBuilder3);
+    issue1 = mock(Issue.class);
+    when(issueBuilder1.build()).thenReturn(issue1);
+    issue2 = mock(Issue.class);
+    when(issueBuilder2.build()).thenReturn(issue2);
+    issue3 = mock(Issue.class);
+    when(issueBuilder3.build()).thenReturn(issue3);
     when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(InputFile.class))).thenReturn(issuable);
 
     ActiveRule templateActiveRule = mock(ActiveRule.class);
@@ -215,10 +225,10 @@ public class CSharpSensorTest {
   public void issue() {
     sensor.analyse(project, context);
 
-    verify(issueBuilder).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"));
-    verify(issueBuilder).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
-    verify(issueBuilder).line(16);
-    verify(issuable).addIssue(issue);
+    verify(issueBuilder1).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"));
+    verify(issueBuilder1).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
+    verify(issueBuilder1).line(16);
+    verify(issuable).addIssue(issue1);
   }
 
   @Test
@@ -236,12 +246,22 @@ public class CSharpSensorTest {
     when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report.json").getAbsolutePath());
     sensor.analyse(project, context);
 
-    verify(issueBuilder).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
-    verify(issueBuilder).message("This issue comes from the Roslyn report");
-    verify(issueBuilder).line(42);
+    // We use a mocked rule runner which will report an issue even if a Roslyn report is provided
+    verify(issueBuilder1).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"));
+    verify(issueBuilder1).message("Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation.");
+    verify(issueBuilder1).line(16);
 
-    // One issue saved from the Rolsyn report, one from the rule runner one
-    verify(issuable, Mockito.times(2)).addIssue(issue);
+    verify(issueBuilder2).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
+    verify(issueBuilder2).message("Short messages should be used first in Roslyn reports");
+    verify(issueBuilder2).line(42);
+
+    verify(issueBuilder3).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
+    verify(issueBuilder3).message("There only is a full message in the Roslyn report");
+    verify(issueBuilder3).line(100);
+
+    verify(issuable).addIssue(issue1);
+    verify(issuable).addIssue(issue2);
+    verify(issuable).addIssue(issue3);
   }
 
   @Test
