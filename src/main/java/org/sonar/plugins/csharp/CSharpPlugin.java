@@ -76,6 +76,7 @@ public class CSharpPlugin extends SonarPlugin {
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
+      SonarLintParameterProfileExporter.class,
       SonarLintFakeProfileImporter.class);
 
     builder.addAll(CSharpFxCopProvider.extensions());

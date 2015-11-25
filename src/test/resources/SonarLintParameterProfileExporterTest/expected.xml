@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnalysisInput>
+  <Rules>
+    <Rule>
+      <Key>[base_key]</Key>
+      <Parameters>
+        <Parameter>
+          <Key>RuleKey</Key>
+          <Value>[template_key&quot;&apos;&lt;&gt;&amp;]</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+    <Rule>
+      <Key>[parameters_key]</Key>
+      <Parameters>
+        <Parameter>
+          <Key>[param2_default_key]</Key>
+          <Value>[param2_default_value]</Value>
+        </Parameter>
+        <Parameter>
+          <Key>[param1_key]</Key>
+          <Value>[param1_value]</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+  <Files>
+  </Files>
+</AnalysisInput>

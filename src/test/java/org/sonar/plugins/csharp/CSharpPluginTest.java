@@ -44,6 +44,7 @@ public class CSharpPluginTest {
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
+      SonarLintParameterProfileExporter.class,
       SonarLintFakeProfileImporter.class
     };
 

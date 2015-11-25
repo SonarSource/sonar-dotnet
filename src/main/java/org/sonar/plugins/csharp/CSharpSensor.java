@@ -117,15 +117,44 @@ public class CSharpSensor implements Sensor {
   }
 
   private void analyze(boolean includeRules) {
+    String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, ruleProfile, filesToAnalyze());
+
+    File analysisInput = toolInput();
+    File analysisOutput = toolOutput();
+
+    try {
+      Files.write(analysisSettings, analysisInput, Charsets.UTF_8);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+
+    File executableFile = extractor.executableFile();
+
+    Command command = Command.create(executableFile.getAbsolutePath())
+      .addArgument(analysisInput.getAbsolutePath())
+      .addArgument(analysisOutput.getAbsolutePath());
+
+    int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+    if (exitCode != 0) {
+      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode + " - Verify that the .NET Framework version 4.5.2 at least is installed.");
+    }
+  }
+
+  public static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, RulesProfile ruleProfile, Iterable<File> files) {
     StringBuilder sb = new StringBuilder();
+
     appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     appendLine(sb, "<AnalysisInput>");
-    appendLine(sb, "  <Settings>");
-    appendLine(sb, "    <Setting>");
-    appendLine(sb, "      <Key>sonar.cs.ignoreHeaderComments</Key>");
-    appendLine(sb, "      <Value>" + (settings.getBoolean("sonar.cs.ignoreHeaderComments") ? "true" : "false") + "</Value>");
-    appendLine(sb, "    </Setting>");
-    appendLine(sb, "  </Settings>");
+
+    if (includeSettings) {
+      appendLine(sb, "  <Settings>");
+      appendLine(sb, "    <Setting>");
+      appendLine(sb, "      <Key>sonar.cs.ignoreHeaderComments</Key>");
+      appendLine(sb, "      <Value>" + (ignoreHeaderComments ? "true" : "false") + "</Value>");
+      appendLine(sb, "    </Setting>");
+      appendLine(sb, "  </Settings>");
+    }
+
     appendLine(sb, "  <Rules>");
     if (includeRules) {
       for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
@@ -148,32 +177,16 @@ public class CSharpSensor implements Sensor {
       }
     }
     appendLine(sb, "  </Rules>");
+
     appendLine(sb, "  <Files>");
-    for (File file : filesToAnalyze()) {
+    for (File file : files) {
       appendLine(sb, "    <File>" + escapeXml(file.getAbsolutePath()) + "</File>");
     }
     appendLine(sb, "  </Files>");
+
     appendLine(sb, "</AnalysisInput>");
 
-    File analysisInput = toolInput();
-    File analysisOutput = toolOutput();
-
-    try {
-      Files.write(sb, analysisInput, Charsets.UTF_8);
-    } catch (IOException e) {
-      throw Throwables.propagate(e);
-    }
-
-    File executableFile = extractor.executableFile();
-
-    Command command = Command.create(executableFile.getAbsolutePath())
-      .addArgument(analysisInput.getAbsolutePath())
-      .addArgument(analysisOutput.getAbsolutePath());
-
-    int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
-    if (exitCode != 0) {
-      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode + " - Verify that the .NET Framework version 4.5.2 at least is installed.");
-    }
+    return sb.toString();
   }
 
   private static String escapeXml(String str) {
