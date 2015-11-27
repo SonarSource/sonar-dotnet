@@ -37,9 +37,9 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarCommunity/sonar-csharp.git</developerConnection>
-    <url>https://github.com/SonarCommunity/sonar-csharp</url>
+    <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-csharp</url>
     <tag>HEAD</tag>
   </scm>
   <issueManagement>
