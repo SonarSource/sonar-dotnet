@@ -114,7 +114,7 @@ public class SonarLintProfileExporterTest {
     assertThat(writer.toString()).isEqualTo(
       "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
         "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">\r\n" +
-        "  <Rules AnalyzerId=\"SonarLint\" RuleNamespace=\"SonarLint\">\r\n" +
+        "  <Rules AnalyzerId=\"SonarLint.CSharp\" RuleNamespace=\"SonarLint.CSharp\">\r\n" +
         "    <Rule Id=\"S1004\" Action=\"Warning\" />\r\n" +
         "    <Rule Id=\"S1002\" Action=\"None\" />\r\n" +
         "  </Rules>\r\n" +

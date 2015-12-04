@@ -47,7 +47,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-    appendLine(writer, "  <Rules AnalyzerId=\"SonarLint\" RuleNamespace=\"SonarLint\">");
+    appendLine(writer, "  <Rules AnalyzerId=\"SonarLint.CSharp\" RuleNamespace=\"SonarLint.CSharp\">");
 
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
       Rule rule = activeRule.getRule();
