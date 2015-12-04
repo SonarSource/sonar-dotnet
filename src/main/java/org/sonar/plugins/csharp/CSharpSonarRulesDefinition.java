@@ -32,7 +32,7 @@ import java.util.Set;
 
 public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtension {
 
-  private Set<String> parameterlessRuleKeys = null;
+  private Set<String> allRuleKeys = null;
 
   @Override
   public void define(Context context) {
@@ -46,18 +46,16 @@ public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtensi
 
     ImmutableSet.Builder<String> builder = ImmutableSet.builder();
     for (NewRule rule : repository.rules()) {
-      if (rule.params().isEmpty()) {
-        builder.add(rule.key());
-      }
+      builder.add(rule.key());
     }
-    parameterlessRuleKeys = builder.build();
+    allRuleKeys = builder.build();
 
     repository.done();
   }
 
-  public Set<String> parameterlessRuleKeys() {
-    Preconditions.checkNotNull(parameterlessRuleKeys);
-    return parameterlessRuleKeys;
+  public Set<String> allRuleKeys() {
+    Preconditions.checkNotNull(allRuleKeys);
+    return allRuleKeys;
   }
 
 }
