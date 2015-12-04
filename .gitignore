@@ -1,5 +1,5 @@
 # Quick fix for a broken unit test...
-src/test/resources/CSharpSensorTest/analysis-input.xml
+src/test/resources/CSharpSensorTest/SonarLint.xml
 
 # Maven
 target/

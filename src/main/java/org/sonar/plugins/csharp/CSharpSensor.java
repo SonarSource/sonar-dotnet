@@ -132,7 +132,8 @@ public class CSharpSensor implements Sensor {
 
     Command command = Command.create(executableFile.getAbsolutePath())
       .addArgument(analysisInput.getAbsolutePath())
-      .addArgument(analysisOutput.getAbsolutePath());
+      .addArgument(analysisOutput.getAbsolutePath())
+      .addArgument("cs");
 
     int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
     if (exitCode != 0) {
@@ -618,7 +619,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private File toolInput() {
-    return new File(fs.workDir(), "analysis-input.xml");
+    return new File(fs.workDir(), "SonarLint.xml");
   }
 
   private File toolOutput() {

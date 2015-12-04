@@ -138,8 +138,6 @@ public class CoverageTest {
 
   @Test
   public void no_coverage_on_tests() {
-    Assume.assumeTrue(Tests.is_at_least_plugin_4_1());
-
     SonarRunner build = Tests.createSonarRunnerBuild()
       .setProjectDir(new File("projects/NoCoverageOnTests/"))
       .setProjectKey("NoCoverageOnTests")

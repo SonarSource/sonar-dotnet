@@ -29,7 +29,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  CommentRegexpRuleTest.class,
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
   FileSuffixesTest.class,
@@ -40,8 +39,6 @@ import org.junit.runners.Suite.SuiteClasses;
 })
 public class Tests {
 
-  private static final String PLUGIN_KEY = "csharp";
-
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .addPlugin(FileLocation.of("../../target/sonar-csharp-plugin.jar"))
@@ -50,10 +47,6 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .build();
-
-  public static boolean is_at_least_plugin_4_1() {
-    return ORCHESTRATOR.getConfiguration().getPluginVersion(PLUGIN_KEY).isGreaterThanOrEquals("4.1");
-  }
 
   public static SonarRunner createSonarRunnerBuild() {
     SonarRunner build = SonarRunner.create();

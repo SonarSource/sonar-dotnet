@@ -236,9 +236,9 @@ public class CSharpSensorTest {
     sensor.analyse(project, context);
 
     assertThat(
-      Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+      Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
   @Test
@@ -270,9 +270,9 @@ public class CSharpSensorTest {
     sensor.analyse(project, context);
 
     assertThat(
-      Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+      Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/analysis-input-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
 }
