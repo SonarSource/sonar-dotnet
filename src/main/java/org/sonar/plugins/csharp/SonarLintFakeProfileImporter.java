@@ -36,7 +36,7 @@ public class SonarLintFakeProfileImporter extends ProfileImporter {
   @Override
   public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
     messages.addErrorText("Do not use this profile importer.");
-    return new RulesProfile(getName(), CSharpPlugin.LANGUAGE_KEY);
+    return RulesProfile.create(getName(), CSharpPlugin.LANGUAGE_KEY);
   }
 
 }
