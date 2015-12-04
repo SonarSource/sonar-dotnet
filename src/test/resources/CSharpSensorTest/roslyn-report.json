@@ -43,10 +43,10 @@
             {
               "uri": "Foo&Bar.cs",
               "region": {
-                "startLine": 100,
-                "startColumn": 55,
-                "endLine": 100,
-                "endColumn": 57
+                "startLine": 0,
+                "startColumn": 0,
+                "endLine": 0,
+                "endColumn": 0
               }
             }
           ]

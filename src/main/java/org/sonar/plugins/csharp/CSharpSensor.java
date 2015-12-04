@@ -265,7 +265,7 @@ public class CSharpSensor implements Sensor {
       if (issuable != null) {
         IssueBuilder builder = issuable.newIssueBuilder();
         builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, ruleId));
-        builder.line(startLine);
+        builder.line(startLine + 1);
         builder.message(fullMessage);
         issuable.addIssue(builder.build());
       }

@@ -253,11 +253,11 @@ public class CSharpSensorTest {
 
     verify(issueBuilder2).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
     verify(issueBuilder2).message("Short messages should be used first in Roslyn reports");
-    verify(issueBuilder2).line(42);
+    verify(issueBuilder2).line(43);
 
     verify(issueBuilder3).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
     verify(issueBuilder3).message("There only is a full message in the Roslyn report");
-    verify(issueBuilder3).line(100);
+    verify(issueBuilder3).line(1);
 
     verify(issuable).addIssue(issue1);
     verify(issuable).addIssue(issue2);
