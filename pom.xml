@@ -14,7 +14,7 @@
   <version>4.4-SNAPSHOT</version>
 
   <name>SonarQube C# Plugin</name>
-  <description>Enable analysis and reporting on C# projects.</description>
+  <description>Enables scanning of C# source files</description>
   <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
   <inceptionYear>2014</inceptionYear>
   <organization>
