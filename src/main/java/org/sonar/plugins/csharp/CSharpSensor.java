@@ -117,6 +117,13 @@ public class CSharpSensor implements Sensor {
   }
 
   private void analyze(boolean includeRules) {
+    if (includeRules) {
+      LOG.warn("**********************************************************************************");
+      LOG.warn("*                Use MSBuild 14 to get the best analysis results                 *");
+      LOG.warn("* The use of MSBuild 12 or the sonar-runner to analyze C# projects is DEPRECATED *");
+      LOG.warn("**********************************************************************************");
+    }
+
     String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, ruleProfile, filesToAnalyze());
 
     File analysisInput = toolInput();
