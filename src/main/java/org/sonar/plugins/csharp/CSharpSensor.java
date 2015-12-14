@@ -241,25 +241,28 @@ public class CSharpSensor implements Sensor {
     }
 
     JsonParser parser = new JsonParser();
-    for (JsonElement issueElement : parser.parse(contents).getAsJsonObject().get("issues").getAsJsonArray()) {
-      JsonObject issue = issueElement.getAsJsonObject();
+    JsonElement issues = parser.parse(contents).getAsJsonObject().get("issues");
+    if (issues != null) {
+      for (JsonElement issueElement : issues.getAsJsonArray()) {
+        JsonObject issue = issueElement.getAsJsonObject();
 
-      String ruleId = issue.get("ruleId").getAsString();
-      if (!activeRuleIds.contains(ruleId)) {
-        continue;
-      }
+        String ruleId = issue.get("ruleId").getAsString();
+        if (!activeRuleIds.contains(ruleId)) {
+          continue;
+        }
 
-      String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
-      for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
-        JsonObject location = locationElement.getAsJsonObject();
-        if (location.has("analysisTarget")) {
-          for (JsonElement analysisTargetElement : location.get("analysisTarget").getAsJsonArray()) {
-            JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
-            String uri = analysisTarget.get("uri").getAsString();
-            JsonObject region = analysisTarget.get("region").getAsJsonObject();
-            int startLine = region.get("startLine").getAsInt();
+        String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
+        for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
+          JsonObject location = locationElement.getAsJsonObject();
+          if (location.has("analysisTarget")) {
+            for (JsonElement analysisTargetElement : location.get("analysisTarget").getAsJsonArray()) {
+              JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
+              String uri = analysisTarget.get("uri").getAsString();
+              JsonObject region = analysisTarget.get("region").getAsJsonObject();
+              int startLine = region.get("startLine").getAsInt();
 
-            handleRoslynIssue(ruleId, uri, startLine, message);
+              handleRoslynIssue(ruleId, uri, startLine, message);
+            }
           }
         }
       }

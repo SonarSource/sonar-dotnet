@@ -275,4 +275,10 @@ public class CSharpSensorTest {
       .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
+  @Test
+  public void roslynEmptyReportShouldNotFail() {
+    when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report-empty.json").getAbsolutePath());
+    sensor.analyse(project, context);
+  }
+
 }
