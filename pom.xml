@@ -11,7 +11,7 @@
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-csharp-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>4.4</version>
+  <version>4.5-SNAPSHOT</version>
 
   <name>SonarQube C# Plugin</name>
   <description>Enables scanning of C# source files</description>
@@ -40,7 +40,7 @@
     <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
     <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
     <url>https://github.com/SonarSource/sonar-csharp</url>
-    <tag>4.4</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
