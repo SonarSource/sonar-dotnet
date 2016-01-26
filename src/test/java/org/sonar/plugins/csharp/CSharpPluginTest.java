@@ -45,7 +45,8 @@ public class CSharpPluginTest {
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
       SonarLintParameterProfileExporter.class,
-      SonarLintFakeProfileImporter.class
+      SonarLintFakeProfileImporter.class,
+      RoslynProfileExporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
@@ -55,7 +56,8 @@ public class CSharpPluginTest {
         + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
-        + CSharpMsBuildIntegrationProvider.extensions().size());
+        + CSharpMsBuildIntegrationProvider.extensions().size()
+        + RoslynProfileExporter.sonarLintRepositoryProperties().size());
   }
 
   private static List nonProperties(List extensions) {

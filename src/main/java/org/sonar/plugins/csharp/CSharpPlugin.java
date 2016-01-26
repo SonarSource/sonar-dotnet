@@ -77,12 +77,14 @@ public class CSharpPlugin extends SonarPlugin {
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
       SonarLintParameterProfileExporter.class,
-      SonarLintFakeProfileImporter.class);
+      SonarLintFakeProfileImporter.class,
+      RoslynProfileExporter.class);
 
     builder.addAll(CSharpFxCopProvider.extensions());
     builder.addAll(CSharpCodeCoverageProvider.extensions());
     builder.addAll(CSharpUnitTestResultsProvider.extensions());
     builder.addAll(CSharpMsBuildIntegrationProvider.extensions());
+    builder.addAll(RoslynProfileExporter.sonarLintRepositoryProperties());
 
     return builder.build();
   }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoslynExportProfile Version="1.0">
+  <Configuration>
+    <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
+      <Rules AnalyzerId="SonarLint.CSharp" RuleNamespace="SonarLint.CSharp">
+        <Rule Id="[template_key&quot;&apos;&lt;&gt;&amp;]" Action="Warning" />
+        <Rule Id="[parameters_key]" Action="Warning" />
+        <Rule Id="InactiveRule" Action="None" />
+      </Rules>
+    </RuleSet>
+    <AdditionalFiles>
+      <AdditionalFile FileName="SonarLint.xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxBbmFseXNpc0lucHV0Pg0KICA8UnVsZXM+DQogICAgPFJ1bGU+DQogICAgICA8S2V5PltiYXNlX2tleV08L0tleT4NCiAgICAgIDxQYXJhbWV0ZXJzPg0KICAgICAgICA8UGFyYW1ldGVyPg0KICAgICAgICAgIDxLZXk+UnVsZUtleTwvS2V5Pg0KICAgICAgICAgIDxWYWx1ZT5bdGVtcGxhdGVfa2V5JnF1b3Q7JmFwb3M7Jmx0OyZndDsmYW1wO108L1ZhbHVlPg0KICAgICAgICA8L1BhcmFtZXRlcj4NCiAgICAgIDwvUGFyYW1ldGVycz4NCiAgICA8L1J1bGU+DQogICAgPFJ1bGU+DQogICAgICA8S2V5PltwYXJhbWV0ZXJzX2tleV08L0tleT4NCiAgICAgIDxQYXJhbWV0ZXJzPg0KICAgICAgICA8UGFyYW1ldGVyPg0KICAgICAgICAgIDxLZXk+W3BhcmFtMl9kZWZhdWx0X2tleV08L0tleT4NCiAgICAgICAgICA8VmFsdWU+W3BhcmFtMl9kZWZhdWx0X3ZhbHVlXTwvVmFsdWU+DQogICAgICAgIDwvUGFyYW1ldGVyPg0KICAgICAgICA8UGFyYW1ldGVyPg0KICAgICAgICAgIDxLZXk+W3BhcmFtMV9rZXldPC9LZXk+DQogICAgICAgICAgPFZhbHVlPltwYXJhbTFfdmFsdWVdPC9WYWx1ZT4NCiAgICAgICAgPC9QYXJhbWV0ZXI+DQogICAgICA8L1BhcmFtZXRlcnM+DQogICAgPC9SdWxlPg0KICA8L1J1bGVzPg0KICA8RmlsZXM+DQogIDwvRmlsZXM+DQo8L0FuYWx5c2lzSW5wdXQ+DQo=</AdditionalFile>
+    </AdditionalFiles>
+  </Configuration>
+  <Deployment>
+    <NuGetPackages>
+      <NuGetPackage Id="SonarLint" Version="1.6.0" />
+    </NuGetPackages>
+  </Deployment>
+</RoslynExportProfile>
