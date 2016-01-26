@@ -71,7 +71,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARLINT_PLUGIN_KEY))
-        .defaultValue("1.6.0")
+        .defaultValue("1.7.0")
         .hidden()
         .build());
   }

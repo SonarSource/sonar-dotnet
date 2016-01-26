@@ -818,6 +818,123 @@ seq.Any(element => [expression])
     <tag>clumsy</tag>
   </rule>
   <rule>
+    <key>S1858</key>
+    <name>"ToString()" calls should not be redundant</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Invoking a method designed to return a string representation of an object which is already a string is a waste of
+    keystrokes. Similarly, explicitly invoking <code>ToString()</code> when the compiler would do it implicitly is also
+    needless code-bloat.
+</p>
+<p>
+    This rule raises an issue when <code>ToString()</code> is invoked:
+    <ul>
+        <li>on a <code>string</code></li>
+        <li>on a non-<code>string</code> operand to concatenation</li>
+        <li>on an argument to <code>string.Format</code></li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s.ToString();  // Noncompliant
+var u = "" + 1.ToString(); // Noncompliant
+var v = string.Format("{0}", 1.ToString()); // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s;
+var u = "" + 1;
+var v = string.Format("{0}", 1);
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3457</key>
+    <name>"string.Format()" should not be called without placeholders</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    There's no need to incur the overhead of a formatting call when the string to be formatted contains no formatting symbols.
+    Instead, simply use the original input string.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = string.Format("some text");
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var s = "some text";
+</pre>]]></description>
+    <tag>confusing</tag>
+  </rule>
+  <rule>
+    <key>S1185</key>
+    <name>Overriding members should do more than simply call the same member in the super class</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Overriding a member just to call the same member from the base class without performing any other actions is useless and
+    misleading. The only time this is justified is in <code>sealed</code> overriding methods, where the effect is to lock in
+    the parent class behavior.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public override void Method() // Noncompliant
+{
+  base.Method();
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public override void Method()
+{
+  //do something else
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3456</key>
+    <name>"string.ToCharArray()" should not be called redundantly</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>ToCharArray</code> can be omitted when the operation on the array could have been done directly on the string, such as when
+    iterating over the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit
+    <code>ToCharArray</code> calls should be omitted.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+string str = "some string";
+foreach (var c in str.ToCharArray()) // Noncompliant
+{
+  // ...
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+string str = "some string";
+foreach (var c in str)
+{
+  // ...
+}
+</pre>]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
     <key>S3216</key>
     <name>"ConfigureAwait(false)" should be used</name>
     <severity>MAJOR</severity>
@@ -1270,12 +1387,12 @@ public class Child : Parent
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-void calculateRate(int a, int b)
+void CalculateRate(int a, int b)
 {
   int i;
 
   i = a + b; // Noncompliant; calculation result not used before value is overwritten
-  i = doSomething();  // Noncompliant; retrieved value not used
+  i = DoSomething();  // Noncompliant; retrieved value not used
   for (i = 0; i &lt; 10; i++)
   {
     //  ...
@@ -1286,13 +1403,13 @@ void calculateRate(int a, int b)
 
 <h2>Compliant Solution</h2>
 <pre>
-void calculateRate(int a, int b)
+void CalculateRate(int a, int b)
 {
   int i;
 
-  i = doSomething();
+  i = DoSomething();
   i += a + b;
-  storeI(i)
+  StoreI(i)
 
   for (i = 0; i &lt; 10; i++)
   {
@@ -1300,6 +1417,11 @@ void calculateRate(int a, int b)
   }
 }
 </pre>
+
+<h2>Exceptions</h2>
+<p>
+    No issue is reported on statements inside <code>try</code> blocks.
+</p>
 
 <h2>See</h2>
 
@@ -1468,35 +1590,72 @@ public class ResourceHolder : IDisposable
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    You can't rely on garbage collection to clean up everything. Specifically, you can't count on
-    it to release non-memory resources such as <code>File</code>s. For that, there's the <code>IDisposable</code>
-    interface, and the contract that <code>Dispose</code> will always be called on such objects.
+    When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency reasons, some objects such as <code>Bitmap</code> use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have potentially huge unmanaged memory footprints, but will have a tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed footprint, and fails to reclaim the unmanaged memory (by calling <code>Bitmap</code>'s finalizer method) in a timely fashion.
 </p>
+
 <p>
-    When an <code>IDisposable</code> is a class member, then it's up to that class to call <code>Dispose</code>
-    on it, ideally in its own <code>Dispose</code> method. If it's a local variable, then it should be instantiated
-    with a <code>using</code> clause to prompt automatic cleanup when it goes out of scope.
+    Moreover, memory is not the only system resource which needs to managed in a timely fashion: The operating system can only handle having so many file descriptors (e.g. <code>FileStream</code>) or sockets (e.g. <code>WebClient</code>) open at any given time. Therefore, it is important to <code>Dispose</code> of them as soon as they are no longer needed, rather than relying on the garbage collector to call these objects' finalizers at some nondeterministic point in the future.
 </p>
+
 <p>
-    This rule raises issues on members that are never <code>Dispose</code>d.
+    This rule tracks <code>private</code> fields and local variables of the following <code>IDisposable</code> types, which are never disposed, closed, aliased, returned, or passed to other methods.
 </p>
+
+<ul>
+    <li>
+        <code>System.IO</code> namespace
+        <ul>
+            <li><code>System.IO.FileStream</code></li>
+            <li><code>System.IO.StreamReader</code></li>
+            <li><code>System.IO.StreamWriter</code></li>
+        </ul>
+    </li>
+    <li>
+        <code>System.Net</code> namespace
+        <ul>
+            <li><code>System.Net.WebClient</code></li>
+        </ul>
+    </li>
+    <li>
+        <code>System.Net.Sockets</code> namespace
+        <ul>
+            <li><code>System.Net.Sockets.Socket</code></li>
+            <li><code>System.Net.Sockets.TcpClient</code></li>
+            <li><code>System.Net.Sockets.TcpListener</code></li>
+            <li><code>System.Net.Sockets.UdpClient</code></li>
+        </ul>
+    <li>
+        <code>System.Drawing</code> namespace
+        <ul>
+            <li><code>System.Drawing.Image</code></li>
+            <li><code>System.Drawing.Bitmap</code></li>
+        </ul>
+    </li>
+</ul>
+
+which are either instantiated directly using the <code>new</code> operator, or using one of the following factory methods:
+
+<ul>
+    <li><code>System.IO.File.Create()</li>
+    <li><code>System.IO.File.Open()</li>
+    <li><code>System.Drawing.Image.FromFile()</li>
+    <li><code>System.Drawing.Image.FromStream()</li>
+</ul>
+
+on both private fields and local variables.
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder
+public class ResourceHolder 
 {
-  private FileStream fs;  // Noncompliant; Dispose is never called
+  private FileStream fs; // Noncompliant; Dispose or Close are never called
   public void OpenResource(string path)
   {
     this.fs = new FileStream(path, FileMode.Open);
   }
-  public void CloseResource()
-  {
-    this.fs.Close();
-  }
   public void WriteToFile(string path, string text)
   {
-    var fs = new FileStream(path, FileMode.Open);  // Noncompliant
+    var fs = new FileStream(path, FileMode.Open); // Noncompliant
     var bytes = Encoding.UTF8.GetBytes(text);
     fs.Write(bytes, 0, bytes.Length);
   }
@@ -1512,16 +1671,10 @@ public class ResourceHolder : IDisposable
   {
     this.fs = new FileStream(path, FileMode.Open);
   }
-  public void CloseResource()
-  {
-    this.fs.Close();
-  }
-
-  public void Dispose()
+  public void Dispose() 
   {
     this.fs.Dispose();
   }
-
   public void WriteToFile(string path, string text)
   {
     using (var fs = new FileStream(path, FileMode.Open))
@@ -1534,22 +1687,20 @@ public class ResourceHolder : IDisposable
 </pre>
 
 <h2>Exceptions</h2>
-Local <code>IDisposable</code>s returned from methods are ignored, as are local <code>IDisposable</code>s that are
-initialized with non-local <code>IDisposable</code>s.
+<code>IDisposable</code> variables returned from a method or passed to other methods are ignored, as are local <code>IDisposable</code>s that are initialized with other {{IDisposable}}s.
 <pre>
-  public Stream WriteToFile(string path, string text)
-  {
-    var fs = new FileStream(path, FileMode.Open); // Compliant, because it is returned
-    var bytes = Encoding.UTF8.GetBytes(text);
-    fs.Write(bytes, 0, bytes.Length);
-    return fs;
-  }
-
-  public void ReadFromStream(Stream s)
-  {
-    var sr = new StreamReader(s); // Compliant as it would close the underlying stream.
-    // ...
-  }
+public Stream WriteToFile(string path, string text)
+{
+  var fs = new FileStream(path, FileMode.Open); // Compliant, because it is returned
+  var bytes = Encoding.UTF8.GetBytes(text);
+  fs.Write(bytes, 0, bytes.Length);
+  return fs;
+}
+public void ReadFromStream(Stream s)
+{
+  var sr = new StreamReader(s); // Compliant as it would close the underlying stream.
+  // ...
+}
 </pre>
 
 <h2>See</h2>
@@ -2110,8 +2261,8 @@ if ( (myFirstCondition() || mySecondCondition()) && myLastCondition()) { ... }
 <pre>
 class X
 {
-  public int field = 0; // Noncompliant; defaults to 0. Reinitializing incurs minor performance penalty
-  public object o = null; //Noncompliant
+  public int field = 0; // Noncompliant
+  public object o = null; // Noncompliant
 }
 </pre>
 
@@ -3703,6 +3854,22 @@ public static class Extensions
   public static void MyHelper(this HtmlHelper helper) //no issue reported here
   {
     // no use of helper here
+  }
+}
+</pre>
+
+<p>
+    Methods that have attributes defined on them are also ignored.
+</p>
+<pre>
+public class MyDto
+{
+  public string Name { get; set; }
+
+  [OnDeserialized]
+  private void OnDeserialized(StreamingContext context)
+  {
+    // ...
   }
 }
 </pre>
@@ -5426,6 +5593,51 @@ public override string ToString ()
 ]]></description>
     <tag>bug</tag>
     <tag>cwe</tag>
+  </rule>
+  <rule>
+    <key>S1144</key>
+    <name>Unused private types or members should be removed</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Private types or members that are never executed or referenced are dead code: unnecessary, inoperative code that
+    should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to
+    understand the program and preventing bugs from being introduced.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+  private void UnusedPrivateMethod() {...} // Noncompliant
+
+  private class UnusedClass {...} // Noncompliant
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo
+{
+  private Foo()
+  {
+    UsedPrivateMethod();
+  }
+
+  private void UsedPrivateMethod()
+  {
+    var c = new UsedClass();
+  }
+
+  private class UsedClass {...}
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    This rule doesn't raise any issue on empty constructors and attributed members.
+</p>]]></description>
+    <tag>unused</tag>
   </rule>
   <rule>
     <key>S2761</key>
