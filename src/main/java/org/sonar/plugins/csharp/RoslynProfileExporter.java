@@ -138,7 +138,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(writer, "</RoslynExportProfile>");
   }
 
-  private ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey(List<ActiveRule> activeRules) {
+  private static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey(List<ActiveRule> activeRules) {
     ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
 
     for (ActiveRule activeRule : activeRules) {
