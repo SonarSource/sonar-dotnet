@@ -169,7 +169,7 @@ public class CSharpSensorTest {
 
     customRoslynActiveRule = mock(ActiveRule.class);
     when(customRoslynActiveRule.getRuleKey()).thenReturn("custom-roslyn");
-    when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn-foo");
+    when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn.foo");
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
@@ -277,7 +277,7 @@ public class CSharpSensorTest {
     verify(issueBuilder3).message("There only is a full message in the Roslyn report");
     verify(issueBuilder3).line(1);
 
-    verify(issueBuilder4).ruleKey(RuleKey.of("roslyn-foo", "custom-roslyn"));
+    verify(issueBuilder4).ruleKey(RuleKey.of("roslyn.foo", "custom-roslyn"));
     verify(issueBuilder4).message("Custom Roslyn analyzer message");
     verify(issueBuilder4).line(93);
 
@@ -311,7 +311,7 @@ public class CSharpSensorTest {
 
     when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report.json").getAbsolutePath());
 
-    thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn-foo\" rule repositories.");
+    thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
 
     sensor.analyse(project, context);
   }

@@ -45,7 +45,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String SONARLINT_PLUGIN_KEY = "sonarlint-cs";
-  private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn-";
+  private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
   private final Settings settings;
   private final RulesDefinition[] rulesDefinitions;
 

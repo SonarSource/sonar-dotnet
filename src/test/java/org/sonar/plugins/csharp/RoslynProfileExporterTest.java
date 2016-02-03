@@ -133,7 +133,7 @@ public class RoslynProfileExporterTest {
 
     Rule customRoslynRule = mock(Rule.class);
     ActiveRule customRoslynActiveRule = mock(ActiveRule.class);
-    when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn-custom");
+    when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn.custom");
     when(customRoslynActiveRule.getRuleKey()).thenReturn("CA1000");
     when(customRoslynActiveRule.getRule()).thenReturn(customRoslynRule);
 
@@ -175,7 +175,7 @@ public class RoslynProfileExporterTest {
 
       @Override
       public void define(Context context) {
-        NewRepository repo = context.createRepository("roslyn-custom", "cs");
+        NewRepository repo = context.createRepository("roslyn.custom", "cs");
         repo.createRule("CA1000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
         repo.createRule("CustomRoslynInactiverule1").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
         repo.createRule("CustomRoslynInactiverule2").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
@@ -223,7 +223,7 @@ public class RoslynProfileExporterTest {
   public void should_fail_fast_with_incomplete_plugin_metadata() {
     Rule rule = mock(Rule.class);
     ActiveRule activeRule = mock(ActiveRule.class);
-    when(activeRule.getRepositoryKey()).thenReturn("roslyn-foo");
+    when(activeRule.getRepositoryKey()).thenReturn("roslyn.foo");
     when(activeRule.getRuleKey()).thenReturn("CA1000");
     when(activeRule.getRule()).thenReturn(rule);
 
@@ -256,7 +256,7 @@ public class RoslynProfileExporterTest {
 
     ActiveRule customRoslynActiveRuleKey = mock(ActiveRule.class);
     when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("3");
-    when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn-foo");
+    when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn.foo");
     activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(customRoslynActiveRuleKey));
     assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
     assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
