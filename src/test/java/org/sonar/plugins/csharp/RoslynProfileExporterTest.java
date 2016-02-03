@@ -21,9 +21,11 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.StringWriter;
+import java.util.Collections;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.config.Settings;
@@ -234,6 +236,39 @@ public class RoslynProfileExporterTest {
     thrown.expectMessage("The mandatory property \"foo.analyzerId\" must be set by the Roslyn plugin.");
 
     exporter.exportProfile(rulesProfile, new StringWriter());
+  }
+
+  @Test
+  public void activeRoslynRulesByPluginKey() {
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(Collections.<ActiveRule>emptyList()).size()).isEqualTo(0);
+
+    ActiveRule randomActiveRuleKey = mock(ActiveRule.class);
+    when(randomActiveRuleKey.getRuleKey()).thenReturn("1");
+    when(randomActiveRuleKey.getRepositoryKey()).thenReturn("1");
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
+
+    ActiveRule sonarLintActiveRuleKey = mock(ActiveRule.class);
+    when(sonarLintActiveRuleKey.getRuleKey()).thenReturn("2");
+    when(sonarLintActiveRuleKey.getRepositoryKey()).thenReturn("csharpsquid");
+    ImmutableMultimap<String, ActiveRule> activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(sonarLintActiveRuleKey));
+    assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPluginKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
+
+    ActiveRule customRoslynActiveRuleKey = mock(ActiveRule.class);
+    when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("3");
+    when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn-foo");
+    activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(customRoslynActiveRuleKey));
+    assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
+
+    activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(
+      ImmutableList.of(
+        randomActiveRuleKey,
+        sonarLintActiveRuleKey,
+        customRoslynActiveRuleKey));
+    assertThat(activeRulesByPluginKey.size()).isEqualTo(2);
+    assertThat(activeRulesByPluginKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
+    assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
   }
 
 }

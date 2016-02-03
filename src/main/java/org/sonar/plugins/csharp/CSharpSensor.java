@@ -23,14 +23,24 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.Map.Entry;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -59,19 +69,6 @@ import org.sonar.api.rules.RuleParam;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 public class CSharpSensor implements Sensor {
 
@@ -235,9 +232,13 @@ public class CSharpSensor implements Sensor {
       throw Throwables.propagate(e);
     }
 
-    Set<String> activeRuleIds = Sets.newHashSet();
-    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
-      activeRuleIds.add(activeRule.getRuleKey());
+    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ruleProfile.getActiveRules());
+    Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
+    for (ActiveRule activeRoslynRule: activeRoslynRulesByPluginKey.values()) {
+      String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRule.getRuleKey(), activeRoslynRule.getRepositoryKey());
+      if (previousRepositoryKey != null) {
+        throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRule.getRuleKey() + "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRule.getRepositoryKey() + "\" rule repositories.");
+      }
     }
 
     JsonParser parser = new JsonParser();
@@ -247,7 +248,7 @@ public class CSharpSensor implements Sensor {
         JsonObject issue = issueElement.getAsJsonObject();
 
         String ruleId = issue.get("ruleId").getAsString();
-        if (!activeRuleIds.contains(ruleId)) {
+        if (!repositoryKeyByRoslynRuleKey.containsKey(ruleId)) {
           continue;
         }
 
@@ -261,7 +262,7 @@ public class CSharpSensor implements Sensor {
               JsonObject region = analysisTarget.get("region").getAsJsonObject();
               int startLine = region.get("startLine").getAsInt();
 
-              handleRoslynIssue(ruleId, uri, startLine, message);
+              handleRoslynIssue(repositoryKeyByRoslynRuleKey.get(ruleId), ruleId, uri, startLine, message);
             }
           }
         }
@@ -269,13 +270,13 @@ public class CSharpSensor implements Sensor {
     }
   }
 
-  private void handleRoslynIssue(String ruleId, String uri, int startLine, String fullMessage) {
+  private void handleRoslynIssue(String repositoryKey, String ruleId, String uri, int startLine, String fullMessage) {
     InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(uri));
     if (inputFile != null) {
       Issuable issuable = perspectives.as(Issuable.class, inputFile);
       if (issuable != null) {
         IssueBuilder builder = issuable.newIssueBuilder();
-        builder.ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, ruleId));
+        builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
         builder.line(startLine + 1);
         builder.message(fullMessage);
         issuable.addIssue(builder.build());
