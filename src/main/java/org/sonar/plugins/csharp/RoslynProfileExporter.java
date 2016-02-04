@@ -142,6 +142,10 @@ public class RoslynProfileExporter extends ProfileExporter {
     ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
 
     for (ActiveRule activeRule : activeRules) {
+      if (activeRule.getRule().getLanguage() != CSharpPlugin.LANGUAGE_KEY) {
+        continue;
+      }
+
       if (activeRule.getRepositoryKey().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
         String pluginKey = activeRule.getRepositoryKey().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);

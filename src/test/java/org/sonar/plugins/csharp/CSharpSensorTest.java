@@ -144,6 +144,7 @@ public class CSharpSensorTest {
     when(templateActiveRule.getRuleKey()).thenReturn("[template_key\"'<>&]");
     when(templateActiveRule.getRepositoryKey()).thenReturn("csharpsquid");
     Rule templateRule = mock(Rule.class);
+    when(templateRule.getLanguage()).thenReturn("cs");
     Rule baseTemplateRule = mock(Rule.class);
     when(baseTemplateRule.getKey()).thenReturn("[base_key]");
     when(baseTemplateRule.getRepositoryKey()).thenReturn("csharpsquid");
@@ -158,6 +159,7 @@ public class CSharpSensorTest {
     when(param1.getValue()).thenReturn("[param1_value]");
     when(parametersActiveRule.getActiveRuleParams()).thenReturn(ImmutableList.of(param1));
     Rule parametersRule = mock(Rule.class);
+    when(parametersRule.getLanguage()).thenReturn("cs");
     RuleParam param1Default = mock(org.sonar.api.rules.RuleParam.class);
     when(param1Default.getKey()).thenReturn("[param1_key]");
     when(param1Default.getDefaultValue()).thenReturn("[param1_default_value]");
@@ -167,9 +169,12 @@ public class CSharpSensorTest {
     when(parametersRule.getParams()).thenReturn(ImmutableList.of(param1Default, param2Default));
     when(parametersActiveRule.getRule()).thenReturn(parametersRule);
 
+    Rule customRoslynRule = mock(Rule.class);
+    when(customRoslynRule.getLanguage()).thenReturn("cs");
     customRoslynActiveRule = mock(ActiveRule.class);
     when(customRoslynActiveRule.getRuleKey()).thenReturn("custom-roslyn");
     when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn.foo");
+    when(customRoslynActiveRule.getRule()).thenReturn(customRoslynRule);
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));

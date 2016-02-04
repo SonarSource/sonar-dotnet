@@ -67,6 +67,7 @@ public class RoslynProfileExporterTest {
     when(templateActiveRule.getRepositoryKey()).thenReturn("csharpsquid");
     when(templateActiveRule.getRuleKey()).thenReturn("[template_key\"'<>&]");
     Rule templateRule = mock(Rule.class);
+    when(templateRule.getLanguage()).thenReturn("cs");
     Rule baseTemplateRule = mock(Rule.class);
     when(baseTemplateRule.getKey()).thenReturn("[base_key]");
     when(templateRule.getTemplate()).thenReturn(baseTemplateRule);
@@ -80,6 +81,7 @@ public class RoslynProfileExporterTest {
     when(param1.getValue()).thenReturn("[param1_value]");
     when(parametersActiveRule.getActiveRuleParams()).thenReturn(ImmutableList.of(param1));
     Rule parametersRule = mock(Rule.class);
+    when(parametersRule.getLanguage()).thenReturn("cs");
     RuleParam param1Default = mock(org.sonar.api.rules.RuleParam.class);
     when(param1Default.getKey()).thenReturn("[param1_key]");
     when(param1Default.getDefaultValue()).thenReturn("[param1_default_value]");
@@ -126,18 +128,21 @@ public class RoslynProfileExporterTest {
   @Test
   public void mixed_sonarlint_and_custom_rules() throws Exception {
     Rule sonarLintRule = mock(Rule.class);
+    when(sonarLintRule.getLanguage()).thenReturn("cs");
     ActiveRule sonarLintActiveRule = mock(ActiveRule.class);
     when(sonarLintActiveRule.getRepositoryKey()).thenReturn("csharpsquid");
     when(sonarLintActiveRule.getRuleKey()).thenReturn("S1000");
     when(sonarLintActiveRule.getRule()).thenReturn(sonarLintRule);
 
     Rule customRoslynRule = mock(Rule.class);
+    when(customRoslynRule.getLanguage()).thenReturn("cs");
     ActiveRule customRoslynActiveRule = mock(ActiveRule.class);
     when(customRoslynActiveRule.getRepositoryKey()).thenReturn("roslyn.custom");
     when(customRoslynActiveRule.getRuleKey()).thenReturn("CA1000");
     when(customRoslynActiveRule.getRule()).thenReturn(customRoslynRule);
 
     Rule fxcopRule = mock(Rule.class);
+    when(fxcopRule.getLanguage()).thenReturn("cs");
     ActiveRule fxcopActiveRule = mock(ActiveRule.class);
     when(fxcopActiveRule.getRepositoryKey()).thenReturn("fxcop");
     when(fxcopActiveRule.getRuleKey()).thenReturn("CA2000");
@@ -222,6 +227,7 @@ public class RoslynProfileExporterTest {
   @Test
   public void should_fail_fast_with_incomplete_plugin_metadata() {
     Rule rule = mock(Rule.class);
+    when(rule.getLanguage()).thenReturn("cs");
     ActiveRule activeRule = mock(ActiveRule.class);
     when(activeRule.getRepositoryKey()).thenReturn("roslyn.foo");
     when(activeRule.getRuleKey()).thenReturn("CA1000");
@@ -242,21 +248,36 @@ public class RoslynProfileExporterTest {
   public void activeRoslynRulesByPluginKey() {
     assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(Collections.<ActiveRule>emptyList()).size()).isEqualTo(0);
 
+    Rule csRule = mock(Rule.class);
+    when(csRule.getLanguage()).thenReturn("cs");
+
+    Rule vbnetRule = mock(Rule.class);
+    when(vbnetRule.getLanguage()).thenReturn("vbnet");
+
     ActiveRule randomActiveRuleKey = mock(ActiveRule.class);
-    when(randomActiveRuleKey.getRuleKey()).thenReturn("1");
-    when(randomActiveRuleKey.getRepositoryKey()).thenReturn("1");
+    when(randomActiveRuleKey.getRuleKey()).thenReturn("csrule");
+    when(randomActiveRuleKey.getRepositoryKey()).thenReturn("csrule");
+    when(randomActiveRuleKey.getRule()).thenReturn(csRule);
     assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
 
+    ActiveRule vbnetActiveRuleKey = mock(ActiveRule.class);
+    when(vbnetActiveRuleKey.getRuleKey()).thenReturn("vbnet");
+    when(vbnetActiveRuleKey.getRepositoryKey()).thenReturn("roslyn.foo");
+    when(vbnetActiveRuleKey.getRule()).thenReturn(vbnetRule);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(vbnetActiveRuleKey)).size()).isEqualTo(0);
+
     ActiveRule sonarLintActiveRuleKey = mock(ActiveRule.class);
-    when(sonarLintActiveRuleKey.getRuleKey()).thenReturn("2");
+    when(sonarLintActiveRuleKey.getRuleKey()).thenReturn("S1000");
     when(sonarLintActiveRuleKey.getRepositoryKey()).thenReturn("csharpsquid");
+    when(sonarLintActiveRuleKey.getRule()).thenReturn(csRule);
     ImmutableMultimap<String, ActiveRule> activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(sonarLintActiveRuleKey));
     assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
     assertThat(activeRulesByPluginKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
 
     ActiveRule customRoslynActiveRuleKey = mock(ActiveRule.class);
-    when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("3");
+    when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("ca1000");
     when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn.foo");
+    when(customRoslynActiveRuleKey.getRule()).thenReturn(csRule);
     activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(customRoslynActiveRuleKey));
     assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
     assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
@@ -264,6 +285,7 @@ public class RoslynProfileExporterTest {
     activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(
       ImmutableList.of(
         randomActiveRuleKey,
+        vbnetActiveRuleKey,
         sonarLintActiveRuleKey,
         customRoslynActiveRuleKey));
     assertThat(activeRulesByPluginKey.size()).isEqualTo(2);
