@@ -237,7 +237,9 @@ public class CSharpSensor implements Sensor {
     for (ActiveRule activeRoslynRule: activeRoslynRulesByPluginKey.values()) {
       String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRule.getRuleKey(), activeRoslynRule.getRepositoryKey());
       if (previousRepositoryKey != null) {
-        throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRule.getRuleKey() + "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRule.getRepositoryKey() + "\" rule repositories.");
+        throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRule.getRuleKey() +
+          "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRule.getRepositoryKey() +
+          "\" rule repositories.");
       }
     }
 
