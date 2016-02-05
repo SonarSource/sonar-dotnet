@@ -45,7 +45,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String SONARLINT_PLUGIN_KEY = "sonarlint-cs";
-  private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn-";
+  private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
   private final Settings settings;
   private final RulesDefinition[] rulesDefinitions;
 
@@ -138,10 +138,14 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(writer, "</RoslynExportProfile>");
   }
 
-  private static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey(List<ActiveRule> activeRules) {
+  public static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey(List<ActiveRule> activeRules) {
     ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
 
     for (ActiveRule activeRule : activeRules) {
+      if (!activeRule.getRule().getLanguage().equals(CSharpPlugin.LANGUAGE_KEY)) {
+        continue;
+      }
+
       if (activeRule.getRepositoryKey().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
         String pluginKey = activeRule.getRepositoryKey().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);
