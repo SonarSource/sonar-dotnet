@@ -142,7 +142,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
 
     for (ActiveRule activeRule : activeRules) {
-      if (activeRule.getRule().getLanguage() != CSharpPlugin.LANGUAGE_KEY) {
+      if (!activeRule.getRule().getLanguage().equals(CSharpPlugin.LANGUAGE_KEY)) {
         continue;
       }
 
