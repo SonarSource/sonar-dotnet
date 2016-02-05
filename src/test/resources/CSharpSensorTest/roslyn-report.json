@@ -93,12 +93,23 @@
       "fullMessage": "This issue comes from the Roslyn report"
     },
     {
-      "ruleId": "[parameters_key]",
+      "ruleId": "custom-roslyn",
       "locations": [
         {
+          "analysisTarget": [
+            {
+              "uri": "Foo&Bar.cs",
+              "region": {
+                "startLine": 92,
+                "startColumn": 0,
+                "endLine": 0,
+                "endColumn": 0
+              }
+            }
+          ]
         }
       ],
-      "fullMessage": "This issue comes from the Roslyn report"
+      "fullMessage": "Custom Roslyn analyzer message"
     }
   ]
 }
