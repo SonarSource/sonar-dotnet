@@ -19,23 +19,22 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.io.Reader;
 import org.sonar.api.profiles.ProfileImporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.utils.ValidationMessages;
-
-import java.io.Reader;
 
 // SONARCS-558 workaround for SONAR-6969
 public class SonarLintFakeProfileImporter extends ProfileImporter {
 
   public SonarLintFakeProfileImporter() {
-    super("sonarlint-vs-cs-fake", "Do not use");
+    super("sonarlint-vs-cs-fake", "Technical importer for the MSBuild SonarQube Scanner");
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
   }
 
   @Override
   public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
-    messages.addErrorText("Do not use this profile importer.");
+    messages.addErrorText("The technical importer for the MSBuild SonarQube Scanner cannot be used.");
     return RulesProfile.create(getName(), CSharpPlugin.LANGUAGE_KEY);
   }
 

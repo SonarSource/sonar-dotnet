@@ -25,7 +25,7 @@ import org.sonar.api.utils.ValidationMessages;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class SonarLintProfileFakeImporterTest {
+public class SonarLintFakeProfileImporterTest {
 
   @Test
   public void test() {
@@ -33,11 +33,11 @@ public class SonarLintProfileFakeImporterTest {
 
     SonarLintFakeProfileImporter importer = new SonarLintFakeProfileImporter();
     assertThat(importer.getSupportedLanguages()).containsOnly("cs");
-    assertThat(importer.getName()).isEqualTo("Do not use");
+    assertThat(importer.getName()).isEqualTo("Technical importer for the MSBuild SonarQube Scanner");
 
     RulesProfile profile = importer.importProfile(null, messages);
-    assertThat(messages.getErrors()).containsExactly("Do not use this profile importer.");
-    assertThat(profile.getName()).isEqualTo("Do not use");
+    assertThat(messages.getErrors()).containsExactly("The technical importer for the MSBuild SonarQube Scanner cannot be used.");
+    assertThat(profile.getName()).isEqualTo("Technical importer for the MSBuild SonarQube Scanner");
     assertThat(profile.getLanguage()).isEqualTo("cs");
     assertThat(profile.getActiveRules()).isEmpty();
   }
