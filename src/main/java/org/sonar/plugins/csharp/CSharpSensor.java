@@ -26,7 +26,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import com.google.common.io.Closeables;
 import com.google.common.io.Files;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -305,11 +304,9 @@ public class CSharpSensor implements Sensor {
     }
 
     public void parse(File file) {
-      InputStreamReader reader = null;
       XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
 
-      try {
-        reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8);
+      try (InputStreamReader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8)) {
         stream = xmlFactory.createXMLStreamReader(reader);
 
         while (stream.hasNext()) {
@@ -321,13 +318,10 @@ public class CSharpSensor implements Sensor {
             }
           }
         }
-      } catch (IOException e) {
-        throw Throwables.propagate(e);
-      } catch (XMLStreamException e) {
+      } catch (XMLStreamException | IOException e) {
         throw Throwables.propagate(e);
       } finally {
         closeXmlStream();
-        Closeables.closeQuietly(reader);
       }
 
       return;
