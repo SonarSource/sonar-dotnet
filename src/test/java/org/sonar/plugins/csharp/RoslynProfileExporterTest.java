@@ -94,10 +94,13 @@ public class RoslynProfileExporterTest {
     when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
 
     Settings settings = mock(Settings.class);
+    when(settings.getDefaultValue("sonarlint-cs.pluginKey")).thenReturn("csharp");
+    when(settings.getDefaultValue("sonarlint-cs.pluginVersion")).thenReturn("1.7.0");
+    when(settings.getDefaultValue("sonarlint-cs.staticResourceName")).thenReturn("SonarLint.zip");
     when(settings.getDefaultValue("sonarlint-cs.analyzerId")).thenReturn("SonarLint.CSharp");
     when(settings.getDefaultValue("sonarlint-cs.ruleNamespace")).thenReturn("SonarLint.CSharp");
     when(settings.getDefaultValue("sonarlint-cs.nuget.packageId")).thenReturn("SonarLint");
-    when(settings.getDefaultValue("sonarlint-cs.nuget.packageVersion")).thenReturn("1.6.0");
+    when(settings.getDefaultValue("sonarlint-cs.nuget.packageVersion")).thenReturn("1.7.0");
 
     RulesDefinition sonarLintRepo = new RulesDefinition() {
 
@@ -149,11 +152,17 @@ public class RoslynProfileExporterTest {
     when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(sonarLintActiveRule, customRoslynActiveRule, fxcopActiveRule));
 
     Settings settings = mock(Settings.class);
+    when(settings.getDefaultValue("sonarlint-cs.pluginKey")).thenReturn("csharp");
+    when(settings.getDefaultValue("sonarlint-cs.pluginVersion")).thenReturn("1.7.0");
+    when(settings.getDefaultValue("sonarlint-cs.staticResourceName")).thenReturn("SonarLint.zip");
     when(settings.getDefaultValue("sonarlint-cs.analyzerId")).thenReturn("SonarLint.CSharp");
     when(settings.getDefaultValue("sonarlint-cs.ruleNamespace")).thenReturn("SonarLint.CSharp");
     when(settings.getDefaultValue("sonarlint-cs.nuget.packageId")).thenReturn("SonarLint");
-    when(settings.getDefaultValue("sonarlint-cs.nuget.packageVersion")).thenReturn("1.6.0");
+    when(settings.getDefaultValue("sonarlint-cs.nuget.packageVersion")).thenReturn("1.7.0");
 
+    when(settings.getDefaultValue("custom.pluginKey")).thenReturn("customPluginKey");
+    when(settings.getDefaultValue("custom.pluginVersion")).thenReturn("customPluginVersion");
+    when(settings.getDefaultValue("custom.staticResourceName")).thenReturn("customPluginStaticResourceName");
     when(settings.getDefaultValue("custom.analyzerId")).thenReturn("custom-roslyn");
     when(settings.getDefaultValue("custom.ruleNamespace")).thenReturn("custom-roslyn-namespace");
     when(settings.getDefaultValue("custom.nuget.packageId")).thenReturn("custom-roslyn-package");
@@ -240,35 +249,35 @@ public class RoslynProfileExporterTest {
 
   @Test
   public void activeRoslynRulesByPluginKey() {
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(Collections.<ActiveRule>emptyList()).size()).isEqualTo(0);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.<ActiveRule>emptyList()).size()).isEqualTo(0);
 
     ActiveRule randomActiveRuleKey = mock(ActiveRule.class);
     when(randomActiveRuleKey.getRuleKey()).thenReturn("1");
     when(randomActiveRuleKey.getRepositoryKey()).thenReturn("1");
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
 
     ActiveRule sonarLintActiveRuleKey = mock(ActiveRule.class);
     when(sonarLintActiveRuleKey.getRuleKey()).thenReturn("2");
     when(sonarLintActiveRuleKey.getRepositoryKey()).thenReturn("csharpsquid");
-    ImmutableMultimap<String, ActiveRule> activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(sonarLintActiveRuleKey));
-    assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
-    assertThat(activeRulesByPluginKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
+    ImmutableMultimap<String, ActiveRule> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(sonarLintActiveRuleKey));
+    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPartialRepoKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
 
     ActiveRule customRoslynActiveRuleKey = mock(ActiveRule.class);
     when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("3");
     when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn.foo");
-    activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ImmutableList.of(customRoslynActiveRuleKey));
-    assertThat(activeRulesByPluginKey.size()).isEqualTo(1);
-    assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
+    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(customRoslynActiveRuleKey));
+    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
+    assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 
-    activeRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(
+    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(
       ImmutableList.of(
         randomActiveRuleKey,
         sonarLintActiveRuleKey,
         customRoslynActiveRuleKey));
-    assertThat(activeRulesByPluginKey.size()).isEqualTo(2);
-    assertThat(activeRulesByPluginKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
-    assertThat(activeRulesByPluginKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
+    assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(2);
+    assertThat(activeRulesByPartialRepoKey.get("sonarlint-cs")).containsOnly(sonarLintActiveRuleKey);
+    assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
   }
 
 }

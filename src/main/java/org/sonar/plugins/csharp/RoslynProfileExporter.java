@@ -44,8 +44,11 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 
 public class RoslynProfileExporter extends ProfileExporter {
 
-  private static final String SONARLINT_PLUGIN_KEY = "sonarlint-cs";
+  private static final String SONARLINT_PARTIAL_REPO_KEY = "sonarlint-cs";
+  private static final String SONARLINT_NUGET_VERSION = "1.7.0";
+
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
+
   private final Settings settings;
   private final RulesDefinition[] rulesDefinitions;
 
@@ -58,42 +61,54 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   public static List<PropertyDefinition> sonarLintRepositoryProperties() {
     return Arrays.asList(
-      PropertyDefinition.builder(analyzerIdPropertyKey(SONARLINT_PLUGIN_KEY))
+      PropertyDefinition.builder(pluginKeyPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
+        .defaultValue("csharp")
+        .hidden()
+        .build(),
+      PropertyDefinition.builder(pluginVersionPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
+        .defaultValue(SONARLINT_NUGET_VERSION)
+        .hidden()
+        .build(),
+      PropertyDefinition.builder(staticResourceNamePropertyKey(SONARLINT_PARTIAL_REPO_KEY))
+        .defaultValue("SonarLint.zip")
+        .hidden()
+        .build(),
+      PropertyDefinition.builder(analyzerIdPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
         .defaultValue("SonarLint.CSharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(ruleNamespacePropertyKey(SONARLINT_PLUGIN_KEY))
+      PropertyDefinition.builder(ruleNamespacePropertyKey(SONARLINT_PARTIAL_REPO_KEY))
         .defaultValue("SonarLint.CSharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARLINT_PLUGIN_KEY))
+      PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
         .defaultValue("SonarLint")
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARLINT_PLUGIN_KEY))
-        .defaultValue("1.7.0")
+      PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
+        .defaultValue(SONARLINT_NUGET_VERSION)
         .hidden()
         .build());
   }
 
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
-    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey = activeRoslynRulesByPluginKey(rulesProfile.getActiveRules());
+    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules());
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
 
     appendLine(writer, "  <Configuration>");
     appendLine(writer, "    <RuleSet Name=\"Rules for SonarQube\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-    for (String pluginKey : activeRoslynRulesByPluginKey.keySet()) {
-      String analyzerId = mandatoryPropertyValue(analyzerIdPropertyKey(pluginKey));
-      String ruleNamespace = mandatoryPropertyValue(ruleNamespacePropertyKey(pluginKey));
+    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+      String analyzerId = mandatoryPropertyValue(analyzerIdPropertyKey(partialRepoKey));
+      String ruleNamespace = mandatoryPropertyValue(ruleNamespacePropertyKey(partialRepoKey));
 
       appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
 
       Set<String> activeRules = Sets.newHashSet();
       String repositoryKey = null;
-      for (ActiveRule activeRule : activeRoslynRulesByPluginKey.get(pluginKey)) {
+      for (ActiveRule activeRule : activeRoslynRulesByPartialRepoKey.get(partialRepoKey)) {
         if (repositoryKey == null) {
           repositoryKey = activeRule.getRepositoryKey();
         }
@@ -125,20 +140,32 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(writer, "  </Configuration>");
 
     appendLine(writer, "  <Deployment>");
+
+    appendLine(writer, "    <Plugins>");
+    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+      String pluginKey = mandatoryPropertyValue(pluginKeyPropertyKey(partialRepoKey));
+      String pluginVersion = mandatoryPropertyValue(pluginVersionPropertyKey(partialRepoKey));
+      String staticResourceName = mandatoryPropertyValue(staticResourceNamePropertyKey(partialRepoKey));
+
+      appendLine(writer, "      <Plugin Key=\"" + escapeXml(pluginKey) + "\" Version=\"" + escapeXml(pluginVersion) + "\" StaticResourceName=\"" + escapeXml(staticResourceName) + "\" />");
+    }
+    appendLine(writer, "    </Plugins>");
+
     appendLine(writer, "    <NuGetPackages>");
-    for (String pluginKey : activeRoslynRulesByPluginKey.keySet()) {
-      String packageId = mandatoryPropertyValue(nugetPackageIdPropertyKey(pluginKey));
-      String packageVersion = mandatoryPropertyValue(nugetPackageVersionPropertyKey(pluginKey));
+    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+      String packageId = mandatoryPropertyValue(nugetPackageIdPropertyKey(partialRepoKey));
+      String packageVersion = mandatoryPropertyValue(nugetPackageVersionPropertyKey(partialRepoKey));
 
       appendLine(writer, "      <NuGetPackage Id=\"" + escapeXml(packageId) + "\" Version=\"" + escapeXml(packageVersion) + "\" />");
     }
     appendLine(writer, "    </NuGetPackages>");
+
     appendLine(writer, "  </Deployment>");
 
     appendLine(writer, "</RoslynExportProfile>");
   }
 
-  public static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey(List<ActiveRule> activeRules) {
+  public static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey(List<ActiveRule> activeRules) {
     ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
 
     for (ActiveRule activeRule : activeRules) {
@@ -146,7 +173,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         String pluginKey = activeRule.getRepositoryKey().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);
       } else if ("csharpsquid".equals(activeRule.getRepositoryKey())) {
-        builder.put(SONARLINT_PLUGIN_KEY, activeRule);
+        builder.put(SONARLINT_PARTIAL_REPO_KEY, activeRule);
       }
     }
 
@@ -172,20 +199,32 @@ public class RoslynProfileExporter extends ProfileExporter {
     return Preconditions.checkNotNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
   }
 
-  private static String analyzerIdPropertyKey(String pluginKey) {
-    return pluginKey + ".analyzerId";
+  private static String pluginKeyPropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".pluginKey";
   }
 
-  private static String ruleNamespacePropertyKey(String pluginKey) {
-    return pluginKey + ".ruleNamespace";
+  private static String pluginVersionPropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".pluginVersion";
   }
 
-  private static String nugetPackageIdPropertyKey(String pluginKey) {
-    return pluginKey + ".nuget.packageId";
+  private static String staticResourceNamePropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".staticResourceName";
   }
 
-  private static String nugetPackageVersionPropertyKey(String pluginKey) {
-    return pluginKey + ".nuget.packageVersion";
+  private static String analyzerIdPropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".analyzerId";
+  }
+
+  private static String ruleNamespacePropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".ruleNamespace";
+  }
+
+  private static String nugetPackageIdPropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".nuget.packageId";
+  }
+
+  private static String nugetPackageVersionPropertyKey(String partialRepoKey) {
+    return partialRepoKey + ".nuget.packageVersion";
   }
 
   private static String escapeXml(String str) {

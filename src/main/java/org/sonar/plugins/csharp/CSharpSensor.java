@@ -232,9 +232,9 @@ public class CSharpSensor implements Sensor {
       throw Throwables.propagate(e);
     }
 
-    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPluginKey = RoslynProfileExporter.activeRoslynRulesByPluginKey(ruleProfile.getActiveRules());
+    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ruleProfile.getActiveRules());
     Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
-    for (ActiveRule activeRoslynRule: activeRoslynRulesByPluginKey.values()) {
+    for (ActiveRule activeRoslynRule: activeRoslynRulesByPartialRepoKey.values()) {
       String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRule.getRuleKey(), activeRoslynRule.getRepositoryKey());
       if (previousRepositoryKey != null) {
         throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRule.getRuleKey() +

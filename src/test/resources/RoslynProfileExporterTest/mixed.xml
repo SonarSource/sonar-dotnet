@@ -17,8 +17,12 @@
     </AdditionalFiles>
   </Configuration>
   <Deployment>
+    <Plugins>
+      <Plugin Key="csharp" Version="1.7.0" StaticResourceName="SonarLint.zip" />
+      <Plugin Key="customPluginKey" Version="customPluginVersion" StaticResourceName="customPluginStaticResourceName" />
+    </Plugins>
     <NuGetPackages>
-      <NuGetPackage Id="SonarLint" Version="1.6.0" />
+      <NuGetPackage Id="SonarLint" Version="1.7.0" />
       <NuGetPackage Id="custom-roslyn-package" Version="custom-rolsyn-version" />
     </NuGetPackages>
   </Deployment>

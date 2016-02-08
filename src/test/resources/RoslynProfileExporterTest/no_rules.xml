@@ -8,6 +8,8 @@
     </AdditionalFiles>
   </Configuration>
   <Deployment>
+    <Plugins>
+    </Plugins>
     <NuGetPackages>
     </NuGetPackages>
   </Deployment>
