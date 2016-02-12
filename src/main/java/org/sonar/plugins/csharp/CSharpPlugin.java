@@ -20,12 +20,11 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.SonarPlugin;
-
-import java.util.List;
 
 @Properties({
   @Property(
@@ -76,7 +75,6 @@ public class CSharpPlugin extends SonarPlugin {
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
-      SonarLintParameterProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class);
 

@@ -20,10 +20,9 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
-
-import java.util.List;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -44,7 +43,6 @@ public class CSharpPluginTest {
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
-      SonarLintParameterProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class
     };

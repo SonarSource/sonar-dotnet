@@ -24,11 +24,12 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Sets;
+import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import org.apache.commons.codec.binary.Base64;
@@ -131,9 +132,8 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(writer, "    <AdditionalFiles>");
 
-    StringWriter sonarlintWriter = new StringWriter();
-    new SonarLintParameterProfileExporter().exportProfile(rulesProfile, sonarlintWriter);
-    String base64 = new String(Base64.encodeBase64(sonarlintWriter.toString().getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+    String sonarlintParameters = CSharpSensor.analysisSettings(false, false, true, rulesProfile, Collections.<File>emptyList());
+    String base64 = new String(Base64.encodeBase64(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
     appendLine(writer, "      <AdditionalFile FileName=\"SonarLint.xml\">" + base64 + "</AdditionalFile>");
     appendLine(writer, "    </AdditionalFiles>");
 
