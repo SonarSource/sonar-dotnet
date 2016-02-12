@@ -119,6 +119,11 @@ public class CSharpSensor implements Sensor {
       LOG.warn("*                Use MSBuild 14 to get the best analysis results                 *");
       LOG.warn("* The use of MSBuild 12 or the sonar-runner to analyze C# projects is DEPRECATED *");
       LOG.warn("**********************************************************************************");
+
+      ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ruleProfile.getActiveRules());
+      if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
+        throw new IllegalArgumentException("Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
+      }
     }
 
     String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, ruleProfile, filesToAnalyze());

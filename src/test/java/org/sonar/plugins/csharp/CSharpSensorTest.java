@@ -22,8 +22,10 @@ package org.sonar.plugins.csharp;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import java.io.File;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -88,6 +90,7 @@ public class CSharpSensorTest {
   private Issue issue5;
   private ActiveRule parametersActiveRule;
   private ActiveRule customRoslynActiveRule;
+  private List<ActiveRule> allEnabledRules = Lists.newArrayList();
 
   @Test
   public void shouldExecuteOnProject() {
@@ -183,7 +186,9 @@ public class CSharpSensorTest {
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
     when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
-    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule, customRoslynActiveRule));
+    allEnabledRules.add(templateActiveRule);
+    allEnabledRules.add(parametersActiveRule);
+    when(rulesProfile.getActiveRules()).thenReturn(allEnabledRules);
 
     settings = mock(Settings.class);
     sensor =
@@ -194,6 +199,10 @@ public class CSharpSensorTest {
 
     project = mock(Project.class);
     context = mock(SensorContext.class);
+  }
+
+  private void enableCustomRoslynRules() {
+    allEnabledRules.add(customRoslynActiveRule);
   }
 
   @Test
@@ -271,6 +280,8 @@ public class CSharpSensorTest {
 
   @Test
   public void roslynReportIsProcessed() {
+    enableCustomRoslynRules();
+
     when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(new File("src/test/resources/CSharpSensorTest/roslyn-report.json").getAbsolutePath());
     sensor.analyse(project, context);
 
@@ -321,6 +332,8 @@ public class CSharpSensorTest {
 
   @Test
   public void failWithDuplicateRuleKey() {
+    enableCustomRoslynRules();
+
     String ruleKey = parametersActiveRule.getRuleKey();
     when(customRoslynActiveRule.getRuleKey()).thenReturn(ruleKey);
 
@@ -328,6 +341,15 @@ public class CSharpSensorTest {
 
     thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
 
+    sensor.analyse(project, context);
+  }
+
+  @Test
+  public void failWithCustomRoslynRulesAndMSBuild12() {
+    enableCustomRoslynRules();
+    when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(null);
+
+    thrown.expectMessage("Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
     sensor.analyse(project, context);
   }
 
