@@ -110,6 +110,12 @@
         }
       ],
       "fullMessage": "Custom Roslyn analyzer message"
+    },
+    {
+      "ruleId": "[parameters_key]",
+      "locations": [
+      ],
+      "fullMessage": "This is an assembly level Roslyn issue with no location"
     }
   ]
 }

@@ -60,6 +60,7 @@ import org.sonar.api.measures.Measure;
 import org.sonar.api.measures.PersistenceMode;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.ActiveRuleParam;
@@ -108,7 +109,7 @@ public class CSharpSensor implements Sensor {
     importResults(project, context);
 
     if (hasRoslynReportPath) {
-      importRoslynReport(roslynReportPath);
+      importRoslynReport(roslynReportPath, perspectives.as(Issuable.class, (Resource)project));
     }
   }
 
@@ -220,10 +221,10 @@ public class CSharpSensor implements Sensor {
   private void importResults(Project project, SensorContext context) {
     File analysisOutput = toolOutput();
 
-    new AnalysisResultImporter(project, context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
+    new AnalysisResultImporter(context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
 
-  private void importRoslynReport(String reportPath) {
+  private void importRoslynReport(String reportPath, Issuable projectIssuable) {
     String contents;
     try {
       contents = Files.toString(new File(reportPath), Charsets.UTF_8);
@@ -254,10 +255,12 @@ public class CSharpSensor implements Sensor {
         }
 
         String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
+        boolean hasLocation = false;
         for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
           JsonObject location = locationElement.getAsJsonObject();
           if (location.has("analysisTarget")) {
             for (JsonElement analysisTargetElement : location.get("analysisTarget").getAsJsonArray()) {
+              hasLocation = true;
               JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
               String uri = analysisTarget.get("uri").getAsString();
               JsonObject region = analysisTarget.get("region").getAsJsonObject();
@@ -266,6 +269,9 @@ public class CSharpSensor implements Sensor {
               handleRoslynIssue(repositoryKeyByRoslynRuleKey.get(ruleId), ruleId, uri, startLine, message);
             }
           }
+        }
+        if (!hasLocation && projectIssuable != null) {
+          handleRoslynProjectIssue(projectIssuable, repositoryKeyByRoslynRuleKey.get(ruleId), ruleId, message);
         }
       }
     }
@@ -285,6 +291,13 @@ public class CSharpSensor implements Sensor {
     }
   }
 
+  private static void handleRoslynProjectIssue(Issuable projectIssuable, String repositoryKey, String ruleId, String fullMessage) {
+    IssueBuilder builder = projectIssuable.newIssueBuilder();
+    builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
+    builder.message(fullMessage);
+    projectIssuable.addIssue(builder.build());
+  }
+
   private static class AnalysisResultImporter {
 
     private final SensorContext context;
@@ -294,7 +307,7 @@ public class CSharpSensor implements Sensor {
     private final NoSonarFilter noSonarFilter;
     private final ResourcePerspectives perspectives;
 
-    public AnalysisResultImporter(Project project, SensorContext context, FileSystem fs, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
+    public AnalysisResultImporter(SensorContext context, FileSystem fs, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
       ResourcePerspectives perspectives) {
       this.context = context;
       this.fs = fs;

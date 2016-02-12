@@ -46,6 +46,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.measures.Measure;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.resources.Project;
+import org.sonar.api.resources.Resource;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.ActiveRuleParam;
@@ -74,14 +75,17 @@ public class CSharpSensorTest {
   private NoSonarFilter noSonarFilter;
   private ResourcePerspectives perspectives;
   private Issuable issuable;
+  private Issuable projectIssuable;
   private IssueBuilder issueBuilder1;
   private IssueBuilder issueBuilder2;
   private IssueBuilder issueBuilder3;
   private IssueBuilder issueBuilder4;
+  private IssueBuilder issueBuilder5;
   private Issue issue1;
   private Issue issue2;
   private Issue issue3;
   private Issue issue4;
+  private Issue issue5;
   private ActiveRule parametersActiveRule;
   private ActiveRule customRoslynActiveRule;
 
@@ -129,6 +133,7 @@ public class CSharpSensorTest {
     issueBuilder2 = mock(IssueBuilder.class);
     issueBuilder3 = mock(IssueBuilder.class);
     issueBuilder4 = mock(IssueBuilder.class);
+    issueBuilder5 = mock(IssueBuilder.class);
     when(issuable.newIssueBuilder()).thenReturn(issueBuilder1, issueBuilder2, issueBuilder3, issueBuilder4);
     issue1 = mock(Issue.class);
     when(issueBuilder1.build()).thenReturn(issue1);
@@ -139,6 +144,11 @@ public class CSharpSensorTest {
     issue4 = mock(Issue.class);
     when(issueBuilder4.build()).thenReturn(issue4);
     when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(InputFile.class))).thenReturn(issuable);
+    issue5 = mock(Issue.class);
+    when(issueBuilder5.build()).thenReturn(issue5);
+    projectIssuable = mock(Issuable.class);
+    when(projectIssuable.newIssueBuilder()).thenReturn(issueBuilder5);
+    when(perspectives.as(Mockito.eq(Issuable.class), Mockito.any(Resource.class))).thenReturn(projectIssuable);
 
     ActiveRule templateActiveRule = mock(ActiveRule.class);
     when(templateActiveRule.getRuleKey()).thenReturn("[template_key\"'<>&]");
@@ -281,10 +291,15 @@ public class CSharpSensorTest {
     verify(issueBuilder4).message("Custom Roslyn analyzer message");
     verify(issueBuilder4).line(93);
 
+    verify(issueBuilder5).ruleKey(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"));
+    verify(issueBuilder5).message("This is an assembly level Roslyn issue with no location");
+    verify(issueBuilder5, Mockito.never()).line(1);
+
     verify(issuable).addIssue(issue1);
     verify(issuable).addIssue(issue2);
     verify(issuable).addIssue(issue3);
     verify(issuable).addIssue(issue4);
+    verify(projectIssuable).addIssue(issue5);
   }
 
   @Test
