@@ -9,7 +9,6 @@
       <Rules AnalyzerId="custom-roslyn" RuleNamespace="custom-roslyn-namespace">
         <Rule Id="CA1000" Action="Warning" />
         <Rule Id="CustomRoslynInactiverule1" Action="None" />
-        <Rule Id="CustomRoslynInactiverule2" Action="None" />
       </Rules>
     </RuleSet>
     <AdditionalFiles>

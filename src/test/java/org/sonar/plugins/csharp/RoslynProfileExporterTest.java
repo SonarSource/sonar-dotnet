@@ -187,7 +187,6 @@ public class RoslynProfileExporterTest {
         NewRepository repo = context.createRepository("roslyn.custom", "cs");
         repo.createRule("CA1000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
         repo.createRule("CustomRoslynInactiverule1").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
-        repo.createRule("CustomRoslynInactiverule2").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
         repo.done();
       }
 
