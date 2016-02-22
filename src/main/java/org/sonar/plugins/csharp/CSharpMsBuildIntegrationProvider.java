@@ -20,15 +20,14 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 
-import java.util.List;
-
 public class CSharpMsBuildIntegrationProvider {
 
-  private static final String CATEGORY = "MSBuild SonarQube Runner";
+  private static final String CATEGORY = "Scanner for MSBuild";
 
   private CSharpMsBuildIntegrationProvider() {
   }
