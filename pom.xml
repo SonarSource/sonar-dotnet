@@ -44,7 +44,7 @@
   </scm>
   <issueManagement>
     <system>JIRA</system>
-    <url>http://jira.codehaus.org/browse/SONARCS</url>
+    <url>https://jira.sonarsource.com/browse/SONARCS</url>
   </issueManagement>
 
   <properties>
