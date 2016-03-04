@@ -21,14 +21,13 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.Sets;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Set;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Set;
 
 public class SonarLintProfileExporter extends ProfileExporter {
 
@@ -47,7 +46,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-    appendLine(writer, "  <Rules AnalyzerId=\"SonarLint.CSharp\" RuleNamespace=\"SonarLint.CSharp\">");
+    appendLine(writer, "  <Rules AnalyzerId=\"SonarAnalyzer.CSharp\" RuleNamespace=\"SonarAnalyzer.CSharp\">");
 
     for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
       Rule rule = activeRule.getRule();

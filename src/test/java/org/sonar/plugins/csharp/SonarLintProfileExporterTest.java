@@ -21,15 +21,14 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import java.io.StringWriter;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.rules.RulePriority;
-
-import java.io.StringWriter;
-import java.util.Set;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -75,7 +74,7 @@ public class SonarLintProfileExporterTest {
     assertThat(writer.toString()).isEqualTo(
       "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
         "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">\r\n" +
-        "  <Rules AnalyzerId=\"SonarLint.CSharp\" RuleNamespace=\"SonarLint.CSharp\">\r\n" +
+        "  <Rules AnalyzerId=\"SonarAnalyzer.CSharp\" RuleNamespace=\"SonarAnalyzer.CSharp\">\r\n" +
         "    <Rule Id=\"S1000\" Action=\"Warning\" />\r\n" +
         "    <Rule Id=\"S1001\" Action=\"None\" />\r\n" +
         "  </Rules>\r\n" +

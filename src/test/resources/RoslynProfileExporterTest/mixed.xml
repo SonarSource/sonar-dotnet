@@ -2,7 +2,7 @@
 <RoslynExportProfile Version="1.0">
   <Configuration>
     <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
-      <Rules AnalyzerId="SonarLint.CSharp" RuleNamespace="SonarLint.CSharp">
+      <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
         <Rule Id="S1000" Action="Warning" />
         <Rule Id="SonarLintInactiveRule" Action="None" />
       </Rules>
@@ -17,11 +17,11 @@
   </Configuration>
   <Deployment>
     <Plugins>
-      <Plugin Key="csharp" Version="1.7.0" StaticResourceName="SonarLint.zip" />
+      <Plugin Key="csharp" Version="1.7.0" StaticResourceName="SonarAnalyzer.zip" />
       <Plugin Key="customPluginKey" Version="customPluginVersion" StaticResourceName="customPluginStaticResourceName" />
     </Plugins>
     <NuGetPackages>
-      <NuGetPackage Id="SonarLint" Version="1.7.0" />
+      <NuGetPackage Id="SonarAnalyzer.CSharp" Version="1.10.0" />
       <NuGetPackage Id="custom-roslyn-package" Version="custom-rolsyn-version" />
     </NuGetPackages>
   </Deployment>

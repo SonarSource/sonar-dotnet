@@ -45,8 +45,8 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 
 public class RoslynProfileExporter extends ProfileExporter {
 
-  private static final String SONARLINT_PARTIAL_REPO_KEY = "sonarlint-cs";
-  private static final String SONARLINT_NUGET_VERSION = "1.7.0";
+  private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
+  private static final String SONARANALYZER_NUGET_VERSION = "1.10.0";
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
@@ -62,32 +62,32 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   public static List<PropertyDefinition> sonarLintRepositoryProperties() {
     return Arrays.asList(
-      PropertyDefinition.builder(pluginKeyPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
+      PropertyDefinition.builder(pluginKeyPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
         .defaultValue("csharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(pluginVersionPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue(SONARLINT_NUGET_VERSION)
+      PropertyDefinition.builder(pluginVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue(SONARANALYZER_NUGET_VERSION)
         .hidden()
         .build(),
-      PropertyDefinition.builder(staticResourceNamePropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue("SonarLint.zip")
+      PropertyDefinition.builder(staticResourceNamePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue("SonarAnalyzer.zip")
         .hidden()
         .build(),
-      PropertyDefinition.builder(analyzerIdPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue("SonarLint.CSharp")
+      PropertyDefinition.builder(analyzerIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue("SonarAnalyzer.CSharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(ruleNamespacePropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue("SonarLint.CSharp")
+      PropertyDefinition.builder(ruleNamespacePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue("SonarAnalyzer.CSharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue("SonarLint")
+      PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue("SonarAnalyzer.CSharp")
         .hidden()
         .build(),
-      PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARLINT_PARTIAL_REPO_KEY))
-        .defaultValue(SONARLINT_NUGET_VERSION)
+      PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
+        .defaultValue(SONARANALYZER_NUGET_VERSION)
         .hidden()
         .build());
   }
@@ -173,7 +173,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         String pluginKey = activeRule.getRepositoryKey().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);
       } else if ("csharpsquid".equals(activeRule.getRepositoryKey())) {
-        builder.put(SONARLINT_PARTIAL_REPO_KEY, activeRule);
+        builder.put(SONARANALYZER_PARTIAL_REPO_KEY, activeRule);
       }
     }
 

@@ -13,11 +13,11 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3168</key>
+      <key>S2306</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S2306</key>
+      <key>S3168</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -29,7 +29,7 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S2737</key>
+      <key>S2486</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -42,22 +42,6 @@
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
       <key>S2971</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3457</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
-      <key>S1185</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3456</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3216</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -109,11 +93,11 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S2291</key>
+      <key>S1116</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S1116</key>
+      <key>S2291</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -137,11 +121,11 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3376</key>
+      <key>S3217</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3217</key>
+      <key>S3376</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -154,10 +138,6 @@
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
       <key>S2326</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3397</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -177,6 +157,10 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3397</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S1066</key>
     </rule>
     <rule>
@@ -189,7 +173,27 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3444</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S2278</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1944</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3220</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S2184</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1185</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -201,7 +205,15 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1006</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S3262</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3450</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -213,6 +225,10 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3265</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S1848</key>
     </rule>
     <rule>
@@ -221,7 +237,15 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S3220</key>
+      <key>S3466</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3451</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3447</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -234,6 +258,10 @@
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
       <key>S2234</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3251</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -261,6 +289,14 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3456</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1698</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S2995</key>
     </rule>
     <rule>
@@ -270,6 +306,10 @@
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
       <key>S1656</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3449</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -301,15 +341,23 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S1449</key>
-    </rule>
-    <rule>
-      <repositoryKey>csharpsquid</repositoryKey>
       <key>S2275</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3457</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1449</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
       <key>S3234</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S3216</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
@@ -329,11 +377,15 @@
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
-      <key>S1144</key>
+      <key>S3443</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>
       <key>S2761</key>
+    </rule>
+    <rule>
+      <repositoryKey>csharpsquid</repositoryKey>
+      <key>S1144</key>
     </rule>
     <rule>
       <repositoryKey>csharpsquid</repositoryKey>

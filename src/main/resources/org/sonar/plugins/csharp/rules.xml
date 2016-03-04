@@ -190,6 +190,30 @@ Assignments inside lambda and delegate expressions are allowed.
     <tag>misra</tag>
   </rule>
   <rule>
+    <key>S2306</key>
+    <name>"async" and "await" should not be used as identifiers</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+Since C# 5.0, <code>async</code> and <code>await</code> are contextual keywords.
+Contextual keywords do have a particular meaning in some contexts, but can still be used as variable names for example.
+Keywords, on the other hand, are always reserved, and therefore are not valid variable names.
+To avoid any confusion though, it is best to not use <code>async</code> and <code>await</code> as identifiers.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+int await = 42; // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+int someOtherName = 42;
+</pre>
+]]></description>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
     <key>S3168</key>
     <name>"async" methods should not return "void"</name>
     <severity>CRITICAL</severity>
@@ -250,30 +274,6 @@ class HttpPrinter
 </pre>
 ]]></description>
     <tag>bug</tag>
-  </rule>
-  <rule>
-    <key>S2306</key>
-    <name>"async" and "await" should not be used as identifiers</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-Since C# 5.0, <code>async</code> and <code>await</code> are contextual keywords.
-Contextual keywords do have a particular meaning in some contexts, but can still be used as variable names for example.
-Keywords, on the other hand, are always reserved, and therefore are not valid variable names.
-To avoid any confusion though, it is best to not use <code>async</code> and <code>await</code> as identifiers.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-int await = 42; // Noncompliant
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-int someOtherName = 42;
-</pre>
-]]></description>
-    <tag>pitfall</tag>
   </rule>
   <rule>
     <key>S1764</key>
@@ -493,11 +493,15 @@ public static class DowncastExampleProgram
   </rule>
   <rule>
     <key>S2486</key>
-    <name>Exceptions should not be ignored</name>
+    <name>Generic exceptions should not be ignored</name>
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.
+    When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly,
+    or at least to log them.
+</p>
+<p>
+    This rule only reports on empty catch clauses that catch generic <code>Exception</code>s.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -532,12 +536,11 @@ catch (Exception exc)
 </ul>]]></description>
     <tag>cwe</tag>
     <tag>error-handling</tag>
-    <tag>security</tag>
   </rule>
   <rule>
     <key>S2737</key>
     <name>"catch" clauses should do more than rethrow</name>
-    <severity>MAJOR</severity>
+    <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
 A <code>catch</code> clause that only rethrows the caught exception has the same effect as omitting the <code>catch</code> altogether and letting it bubble up automatically, but with more code and the additional detrement of leaving maintainers scratching their heads.
@@ -576,6 +579,7 @@ string s = File.ReadAllText(fileName);
 </pre>]]></description>
     <tag>clumsy</tag>
     <tag>unused</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S101</key>
@@ -816,152 +820,6 @@ seq.Any(element => [expression])
 </pre>
 ]]></description>
     <tag>clumsy</tag>
-  </rule>
-  <rule>
-    <key>S1858</key>
-    <name>"ToString()" calls should not be redundant</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Invoking a method designed to return a string representation of an object which is already a string is a waste of
-    keystrokes. Similarly, explicitly invoking <code>ToString()</code> when the compiler would do it implicitly is also
-    needless code-bloat.
-</p>
-<p>
-    This rule raises an issue when <code>ToString()</code> is invoked:
-    <ul>
-        <li>on a <code>string</code></li>
-        <li>on a non-<code>string</code> operand to concatenation</li>
-        <li>on an argument to <code>string.Format</code></li>
-    </ul>
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-var s = "foo";
-var t = "fee fie foe " + s.ToString();  // Noncompliant
-var u = "" + 1.ToString(); // Noncompliant
-var v = string.Format("{0}", 1.ToString()); // Noncompliant
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-var s = "foo";
-var t = "fee fie foe " + s;
-var u = "" + 1;
-var v = string.Format("{0}", 1);
-</pre>
-]]></description>
-    <tag>clumsy</tag>
-  </rule>
-  <rule>
-    <key>S3457</key>
-    <name>"string.Format()" should not be called without placeholders</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    There's no need to incur the overhead of a formatting call when the string to be formatted contains no formatting symbols.
-    Instead, simply use the original input string.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-var s = string.Format("some text");
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-var s = "some text";
-</pre>]]></description>
-    <tag>confusing</tag>
-  </rule>
-  <rule>
-    <key>S1185</key>
-    <name>Overriding members should do more than simply call the same member in the super class</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Overriding a member just to call the same member from the base class without performing any other actions is useless and
-    misleading. The only time this is justified is in <code>sealed</code> overriding methods, where the effect is to lock in
-    the parent class behavior.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-public override void Method() // Noncompliant
-{
-  base.Method();
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-public override void Method()
-{
-  //do something else
-}
-</pre>
-]]></description>
-    <tag>clumsy</tag>
-  </rule>
-  <rule>
-    <key>S3456</key>
-    <name>"string.ToCharArray()" should not be called redundantly</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    <code>ToCharArray</code> can be omitted when the operation on the array could have been done directly on the string, such as when
-    iterating over the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit
-    <code>ToCharArray</code> calls should be omitted.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-string str = "some string";
-foreach (var c in str.ToCharArray()) // Noncompliant
-{
-  // ...
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-string str = "some string";
-foreach (var c in str)
-{
-  // ...
-}
-</pre>]]></description>
-    <tag>clumsy</tag>
-  </rule>
-  <rule>
-    <key>S3216</key>
-    <name>"ConfigureAwait(false)" should be used</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    After an <code>await</code>ed <code>Task</code> has executed, you can continue execution in the original, calling
-    thread or any arbitrary thread. Unless the rest of the code needs the context from which the <oode>Task</oode> was
-    spawned, <code>Task.ConfigureAwait(false)</code> should be used to keep execution in the <code>Task</code> thread
-    to avoid the need of context switching and the possibility of deadlocks.
-</p>
-<p>
-    This rule raises an issue when code in a class library <code>await</code>s a <code>Task</code> and continues
-    execution in the original calling thread.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-var response = await httpClient.GetAsync(url);  // Noncompliant
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-var response = await httpClient.GetAsync(url).ConfigureAwait(false);
-</pre>
-]]></description>
-    <tag>multi-threading</tag>
-    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S125</key>
@@ -1484,6 +1342,7 @@ class Y : X
 </pre>
 ]]></description>
     <tag>clumsy</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S3172</key>
@@ -1590,15 +1449,22 @@ public class ResourceHolder : IDisposable
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency reasons, some objects such as <code>Bitmap</code> use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have potentially huge unmanaged memory footprints, but will have a tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed footprint, and fails to reclaim the unmanaged memory (by calling <code>Bitmap</code>'s finalizer method) in a timely fashion.
+    When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency
+    reasons, some objects such as <code>Bitmap</code> use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have
+    potentially huge unmanaged memory footprints, but will have a tiny managed ones. Unfortunately, the garbage collector only sees the tiny
+    managed footprint, and fails to reclaim the unmanaged memory (by calling <code>Bitmap</code>'s finalizer method) in a timely fashion.
 </p>
 
 <p>
-    Moreover, memory is not the only system resource which needs to managed in a timely fashion: The operating system can only handle having so many file descriptors (e.g. <code>FileStream</code>) or sockets (e.g. <code>WebClient</code>) open at any given time. Therefore, it is important to <code>Dispose</code> of them as soon as they are no longer needed, rather than relying on the garbage collector to call these objects' finalizers at some nondeterministic point in the future.
+    Moreover, memory is not the only system resource which needs to managed in a timely fashion: The operating system can only handle having so
+    many file descriptors (e.g. <code>FileStream</code>) or sockets (e.g. <code>WebClient</code>) open at any given time. Therefore, it is
+    important to <code>Dispose</code> of them as soon as they are no longer needed, rather than relying on the garbage collector to call these
+    objects' finalizers at some nondeterministic point in the future.
 </p>
 
 <p>
-    This rule tracks <code>private</code> fields and local variables of the following <code>IDisposable</code> types, which are never disposed, closed, aliased, returned, or passed to other methods.
+    This rule tracks <code>private</code> fields and local variables of the following <code>IDisposable</code> types, which are never disposed,
+    closed, aliased, returned, or passed to other methods.
 </p>
 
 <ul>
@@ -1636,17 +1502,17 @@ public class ResourceHolder : IDisposable
 which are either instantiated directly using the <code>new</code> operator, or using one of the following factory methods:
 
 <ul>
-    <li><code>System.IO.File.Create()</li>
-    <li><code>System.IO.File.Open()</li>
-    <li><code>System.Drawing.Image.FromFile()</li>
-    <li><code>System.Drawing.Image.FromStream()</li>
+    <li><code>System.IO.File.Create()</code></li>
+    <li><code>System.IO.File.Open()</code></li>
+    <li><code>System.Drawing.Image.FromFile()</code></li>
+    <li><code>System.Drawing.Image.FromStream()</code></li>
 </ul>
 
 on both private fields and local variables.
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class ResourceHolder 
+public class ResourceHolder
 {
   private FileStream fs; // Noncompliant; Dispose or Close are never called
   public void OpenResource(string path)
@@ -1671,7 +1537,7 @@ public class ResourceHolder : IDisposable
   {
     this.fs = new FileStream(path, FileMode.Open);
   }
-  public void Dispose() 
+  public void Dispose()
   {
     this.fs.Dispose();
   }
@@ -1687,7 +1553,10 @@ public class ResourceHolder : IDisposable
 </pre>
 
 <h2>Exceptions</h2>
-<code>IDisposable</code> variables returned from a method or passed to other methods are ignored, as are local <code>IDisposable</code>s that are initialized with other {{IDisposable}}s.
+<p>
+    <code>IDisposable</code> variables returned from a method or passed to other methods are ignored, as are local <code>IDisposable</code>s that
+    are initialized with other <code>IDisposable</code>s.
+</p>
 <pre>
 public Stream WriteToFile(string path, string text)
 {
@@ -1960,6 +1829,67 @@ for (int i = 0; i < 42; i++) {}  // Empty on purpose or missing piece of code ?
     <tag>suspicious</tag>
   </rule>
   <rule>
+    <key>S1116</key>
+    <name>Empty statements should be removed</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+  Empty statements, i.e. <code>;</code>, are usually introduced by mistake, for example because:
+  <ul>
+    <li>It was meant to be replaced by an actual statement, but this was forgotten.</li>
+    <li>There was a typo which lead the semicolon to be doubled, i.e. <code>;;</code>.</li>
+  </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+void doSomething()
+{
+  ; // Noncompliant - was used as a kind of TODO marker
+}
+
+void doSomethingElse()
+{
+  Console.WriteLine("Hello, world!");;  // Noncompliant - double ;
+  ...
+  // Rarely, they are used on purpose as the body of a loop. It is a bad practice to
+  // have side-effects outside of the loop body
+  for (int i = 0; i < 3; Console.WriteLine(i), i++); // Noncompliant
+  ...
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+void doSomething()
+{
+}
+
+void doSomethingElse()
+{
+  Console.WriteLine("Hello, world!");
+  ...
+  for (int i = 0; i < 3; i++)
+  {
+    Console.WriteLine(i);
+   }
+  ...
+}
+</pre>
+
+<h2>See</h2>
+
+<ul>
+    <li>MISRA C:2004, 14.3 - Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment provided that the first character following the null statement is a white-space character.</li>
+    <li>MISRA C++:2008, 6-2-3 - Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment, provided that the first character following the null statement is a white-space character.</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C</a> - Detect and remove code that has no effect</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP</a> - Detect and remove code that has no effect</li>
+</ul>]]></description>
+    <tag>cert</tag>
+    <tag>misra</tag>
+    <tag>unused</tag>
+  </rule>
+  <rule>
     <key>S2291</key>
     <name>Overflow checking should not be disabled for "Enumerable.Sum"</name>
     <severity>CRITICAL</severity>
@@ -2031,67 +1961,6 @@ void Add(List&lt;int&gt; list)
     <tag>security</tag>
   </rule>
   <rule>
-    <key>S1116</key>
-    <name>Empty statements should be removed</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-  Empty statements, i.e. <code>;</code>, are usually introduced by mistake, for example because:
-  <ul>
-    <li>It was meant to be replaced by an actual statement, but this was forgotten.</li>
-    <li>There was a typo which lead the semicolon to be doubled, i.e. <code>;;</code>.</li>
-  </ul>
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-void doSomething()
-{
-  ; // Noncompliant - was used as a kind of TODO marker
-}
-
-void doSomethingElse()
-{
-  Console.WriteLine("Hello, world!");;  // Noncompliant - double ;
-  ...
-  // Rarely, they are used on purpose as the body of a loop. It is a bad practice to
-  // have side-effects outside of the loop body
-  for (int i = 0; i < 3; Console.WriteLine(i), i++); // Noncompliant
-  ...
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-void doSomething()
-{
-}
-
-void doSomethingElse()
-{
-  Console.WriteLine("Hello, world!");
-  ...
-  for (int i = 0; i < 3; i++)
-  {
-    Console.WriteLine(i);
-   }
-  ...
-}
-</pre>
-
-<h2>See</h2>
-
-<ul>
-    <li>MISRA C:2004, 14.3 - Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment provided that the first character following the null statement is a white-space character.</li>
-    <li>MISRA C++:2008, 6-2-3 - Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment, provided that the first character following the null statement is a white-space character.</li>
-    <li><a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C</a> - Detect and remove code that has no effect</li>
-    <li><a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP</a> - Detect and remove code that has no effect</li>
-</ul>]]></description>
-    <tag>cert</tag>
-    <tag>misra</tag>
-    <tag>unused</tag>
-  </rule>
-  <rule>
     <key>S2344</key>
     <name>Enumeration type names should not have "Flags" or "Enum" suffixes</name>
     <severity>MINOR</severity>
@@ -2138,8 +2007,8 @@ enum Foo
     Even simple floating point assignments are not simple:
 </p>
 <pre>
-float f = 0.1f; // 0.100000001490116119384765625
-double d = 0.1; // 0.1000000000000000055511151231257827021181583404541015625
+float f = 0.100000001f; // 0.1
+double d = 0.10000000000000001; // 0.1
 </pre>
 
 <p>
@@ -2279,6 +2148,7 @@ class X
 <code>const</code> fields are ignored.
 ]]></description>
     <tag>convention</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S2387</key>
@@ -2529,50 +2399,6 @@ enum FruitType
     <tag>convention</tag>
   </rule>
   <rule>
-    <key>S3376</key>
-    <name>Attribute, EventArgs, and Exception type names should end with the type being extended</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Adherence to the standard naming conventions makes your code not only more readable, but more usable. For instance,
-    <code>class FirstAttribute : Attribute</code> can be used simply with <code>First</code>, but you must use the full
-    name for <code>class AttributeOne : Attribute</code>.
-</p>
-<p>
-    This rule raises an issue when classes extending <code>Attribute</code>, <code>EventArgs</code>, or
-    <code>Exception</code>, do not end with their parent class names.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-class AttributeOne : Attribute  // Noncompliant
-{
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-class FirstAttribute : Attribute
-{
-}
-</pre>
-
-<h2>Exceptions</h2>
-<p>
-    If a class' direct base class doesn't follow the convention, then no issue is reported on the class itself, regardless of
-    whether or not it conforms to the convention.
-</p>
-<pre>
-class Timeout : Exception // Noncompliant
-{
-}
-class ExtendedTimeout : Timeout // Ignored; doesn't conform to convention, but the direct base doesn't conform either
-{
-}
-</pre>]]></description>
-    <tag>convention</tag>
-  </rule>
-  <rule>
     <key>S3217</key>
     <name>"Explicit" conversions of "foreach" loops should not be used</name>
     <severity>MAJOR</severity>
@@ -2585,54 +2411,70 @@ class ExtendedTimeout : Timeout // Ignored; doesn't conform to convention, but t
     an <code>InvalidCastException</code> to be thrown.
 </p>
 <p>
-    New C# code should use generics and not rely on <code>foreach</code> statement's silent <code>explicit</code> conversions.
+    C# code iterating on generic collections or arrays should not rely on <code>foreach</code> statement's silent <code>explicit</code>
+    conversions.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-ArrayList list = new ArrayList();
-list.Add(0);
-list.Add(1);
-// list.Add("surprise!"); // uncommenting this line will make both foreach below throw an InvalidCastException
+public class Fruit { }
+public class Orange : Fruit { }
+public class Apple : Fruit { }
 
-foreach (object elementObject in list)
+class MyTest
 {
-  int element = (int)elementObject; // This "explicit" conversion is hidden within the foreach loop
-  Console.WriteLine(element);
-}
+  public void Test()
+  {
+    var fruitBasket = new List<Fruit>();
+    fruitBasket.Add(new Orange());
+    fruitBasket.Add(new Orange());
+    // fruitBasket.Add(new Apple());  // uncommenting this line will make both foreach below throw an InvalidCastException
 
-// can be written in an equivalent but shorter way:
+    foreach (Fruit fruit in fruitBasket)
+    {
+      var orange = (Orange)fruit; // This "explicit" conversion is hidden within the foreach loop below
+      ...
+    }
 
-foreach (int element in list) // Noncompliant
-{
-  Console.WriteLine(element);
+    foreach (Orange orange in fruitBasket) // Noncompliant
+    {
+      ...
+    }
+  }
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-List&lt;int&gt; list = new List&lt;int&gt;();
-list.Add(0);
-list.Add(1);
-// list.Add("surprise!"); // uncommenting this line won't compile
+var fruitBasket = new List<Orange>();
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Orange());
+// fruitBasket.Add(new Apple());  // uncommenting this line won't compile
 
-foreach (int element in list)
+foreach (Orange orange in fruitBasket)
 {
-  Console.WriteLine(element);
+  ...
 }
 </pre>
 or
 <pre>
-ArrayList list = new ArrayList();
-list.Add(0);
-list.Add(1);
-list.Add("surprise!");
+var fruitBasket = new List<Fruit>();
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Apple());
 
-foreach (int element in list.OfType&lt;int&gt;())
+foreach (Orange orange in fruitBasket.OfType<Orange>())
 {
-  Console.WriteLine(element);
+  ...
 }
 </pre>
+
+<h2>Exceptions</h2>
+<p>
+    The rule ignores iterations on collections of <code>object</code>s. This includes legacy code that uses
+    <code>ArrayList</code>. Furthermore, the rule does not report on cases when user defined conversions are
+    being called.
+</p>
 ]]></description>
     <tag>suspicious</tag>
   </rule>
@@ -2725,6 +2567,50 @@ for (i = 0; i < 10; i++)
     <tag>suspicious</tag>
   </rule>
   <rule>
+    <key>S3376</key>
+    <name>Attribute, EventArgs, and Exception type names should end with the type being extended</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Adherence to the standard naming conventions makes your code not only more readable, but more usable. For instance,
+    <code>class FirstAttribute : Attribute</code> can be used simply with <code>First</code>, but you must use the full
+    name for <code>class AttributeOne : Attribute</code>.
+</p>
+<p>
+    This rule raises an issue when classes extending <code>Attribute</code>, <code>EventArgs</code>, or
+    <code>Exception</code>, do not end with their parent class names.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class AttributeOne : Attribute  // Noncompliant
+{
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class FirstAttribute : Attribute
+{
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    If a class' direct base class doesn't follow the convention, then no issue is reported on the class itself, regardless of
+    whether or not it conforms to the convention.
+</p>
+<pre>
+class Timeout : Exception // Noncompliant
+{
+}
+class ExtendedTimeout : Timeout // Ignored; doesn't conform to convention, but the direct base doesn't conform either
+{
+}
+</pre>]]></description>
+    <tag>convention</tag>
+  </rule>
+  <rule>
     <key>S1541</key>
     <name>Methods should not be too complex</name>
     <severity>MAJOR</severity>
@@ -2738,6 +2624,51 @@ for (i = 0; i < 10; i++)
       <description><![CDATA[The maximum authorized complexity in function]]></description>
       <type>INTEGER</type>
       <defaultValue>10</defaultValue>
+    </param>
+  </rule>
+  <rule>
+    <key>S134</key>
+    <name>Control flow statements "if", "for", "foreach", "do", "while", "switch" and "try" should not be nested too deeply</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Nested <code>if</code>, <code>switch</code>, <code>for</code>, <code>foreach</code>, <code>while</code>, <code>do</code>, and <code>try</code> statements
+    are key ingredients for making what's known as "Spaghetti code". Such code is hard to read, refactor and therefore maintain.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+
+<p>With the default threshold of 3:</p>
+
+<pre>
+if (condition1) // Compliant - depth = 1
+{
+  /* ... */
+  if (condition2) // Compliant - depth = 2
+  {
+    /* ... */
+    for(int i = 0; i < 10; i++) // Compliant - depth = 3, not exceeding the limit
+    {
+      /* ... */
+      if (condition4) // Noncompliant - depth = 4
+      {
+        if (condition5) // Depth = 5, exceeding the limit, but issues are only reported on depth = 4
+        {
+          /* ... */
+        }
+        return;
+      }
+    }
+  }
+}
+</pre>
+]]></description>
+    <tag>brain-overload</tag>
+    <param>
+      <key>max</key>
+      <description><![CDATA[Maximum allowed control flow statement nesting depth]]></description>
+      <type>INTEGER</type>
+      <defaultValue>3</defaultValue>
     </param>
   </rule>
   <rule>
@@ -2954,97 +2885,14 @@ public class MoreMath
     <tag>unused</tag>
   </rule>
   <rule>
-    <key>S3397</key>
-    <name>"base.Equals" should not be used to check for reference equality in "Equals" if "base" is not "object"</name>
-    <severity>CRITICAL</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    <code>object.Equals()</code> overrides can be optimized by checking first for reference equality between <code>this</code> and the
-    parameter. This check can be implemented by calling <code>object.ReferenceEquals()</code> or <code>base.Equals()</code>, where
-    <code>base</code> is <code>object</code>. However, using <code>base.Equals()</code> is a maintenance hazard because while it works
-    if you extend <code>Object</code> directly, if you introduce a new base class that overrides <code>Equals</code>, it suddenly stops
-    working.
-</p>
-<p>
-    This rule raises an issue if <code>base.Equals()</code> is used but <code>base</code> is not <code>object</code>.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-class Base
-{
-  private int baseField;
-
-  public override bool Equals(object other)
-  {
-    if (base.Equals(other)) // Okay; base is object
-    {
-      return true;
-    }
-
-    return this.baseField == ((Base)other).baseField;
-  }
-}
-
-class Derived : Base
-{
-  private int derivedField;
-
-  public override bool Equals(object other)
-  {
-    if (base.Equals(other))  // Noncompliant
-    {
-      return true;
-    }
-
-    return this.derivedField == ((Derived)other).derivedField;
-  }
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-class Base
-{
-  private int baseField;
-
-  public override bool Equals(object other)
-  {
-    if (object.ReferenceEquals(this, other))  // base.Equals is okay here, but object.ReferenceEquals is better
-    {
-      return true;
-    }
-
-    return this.baseField == ((Base)other).baseField;
-  }
-}
-
-class Derived : Base
-{
-  private int derivedField;
-
-  public override bool Equals(object other)
-  {
-    if (object.ReferenceEquals(this, other))
-    {
-      return true;
-    }
-
-    return base.Equals(other) &amp;&amp; this.derivedField == ((Derived)other).derivedField;
-  }
-}
-</pre>]]></description>
-    <tag>bug</tag>
-  </rule>
-  <rule>
     <key>S3249</key>
-    <name>Classes directly extending "Object" should not call "base" in "GetHashCode" or "Equals"</name>
+    <name>Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"</name>
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
     Making a <code>base</code> call in an overridden method is generally a good idea, but not in <code>GetHashCode</code> and
-    <code>Equals</code> for classes that directly extend <code>Object</code> because those methods are based on the object reference.
-    Meaning that no two <code>Objects</code> that use those <code>base</code> methods will ever be equal or have the same hash.
+    <code>Equals</code> for classes that directly extend <code>object</code> because those methods are based on the object reference.
+    Meaning that no two <code>objects</code> that use those <code>base</code> methods will ever be equal or have the same hash.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -3146,37 +2994,73 @@ public class Person
   </rule>
   <rule>
     <key>S2219</key>
-    <name>"Type.IsAssignableFrom()" should not be used to check object type</name>
-    <severity>MAJOR</severity>
+    <name>Runtime type checking should be simplified</name>
+    <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    To check the type of an object there are at least three options:
+    To check the type of an object there are several options:
     <ul>
-        <li>The simplest and shortest one uses the <code>expr is SomeType</code> operator</li>
-        <li>The slightly longer <code>typeInstance.IsInstanceOfType(expr)</code></li>
-        <li>The cumbersome and error-prone one uses <code>expr1.GetType().IsAssignableFrom(expr2.GetType())</code></li>
+        <li>
+            <code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the
+            type is known at compile time,</li>
+        <li><code>typeInstance.IsInstanceOfType(expr)</code> if the type is calculated during runtime.</li>
     </ul>
+</p>
+<p>
+    If runtime calculated <code>Type</code>s need to be compared:
+    <ul>
+        <li><code>typeInstance1.IsAssignableFrom(typeInstance2)</code>.</li>
+    </ul>
+</p>
+<p>
+    Depending on whether the type is returned by a <code>GetType()</code> or <code>typeof()</code> call, the <code>IsAssignableFrom()</code> and
+    <code>IsInstanceOfType()</code> might be simplified. Similarly, if the type is sealed, the type comparison with <code>==</code> can be converted
+    to an <code>is</code> call. Simplifying the calls also make <code>null</code> checking unnecessary because both <code>is</code> and
+    <code>IsInstanceOfType</code> performs it already.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-A expr1;
-B expr2;
-if (expr2.GetType().IsAssignableFrom(expr1.GetType())) { /* ... */ } // Noncompliant
+class Fruit { }
+sealed class Apple : Fruit { }
+
+class Program
+{
+  static void Main()
+  {
+    var apple = new Apple();
+    var b = apple != null &amp;&amp; apple.GetType() == typeof (Apple); // Noncompliant
+    b = typeof(Apple).IsInstanceOfType(apple); // Noncompliant
+    if (apple != null)
+    {
+      b = typeof(Apple).IsAssignableFrom(apple.GetType()); // Noncompliant
+    }
+    var appleType = typeof (Apple);
+    if (apple != null)
+    {
+      b = appleType.IsAssignableFrom(apple.GetType()); // Noncompliant
+    }
+  }
+}
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-A expr;
-if (expr is MyType) { /* ... */ }
-</pre>
+class Fruit { }
+sealed class Apple : Fruit { }
 
-or, when the type is not known at compile time:
-
-<pre>
-A expr;
-Type myType;
-if (myType.IsInstanceOfType(expr)) { /* ... */ }
+class Program
+{
+  static void Main()
+  {
+    var apple = new Apple();
+    var b = apple is Apple;
+    b = apple is Apple;
+    b = apple is Apple;
+    var appleType = typeof(Apple);
+    b = appleType.IsInstanceOfType(apple);
+  }
+}
 </pre>]]></description>
     <tag>clumsy</tag>
   </rule>
@@ -3200,6 +3084,89 @@ if (myType.IsInstanceOfType(expr)) { /* ... */ }
 ]]></description>
     <tag>brain-overload</tag>
     <tag>misra</tag>
+  </rule>
+  <rule>
+    <key>S3397</key>
+    <name>"base.Equals" should not be used to check for reference equality in "Equals" if "base" is not "object"</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>object.Equals()</code> overrides can be optimized by checking first for reference equality between <code>this</code> and the
+    parameter. This check can be implemented by calling <code>object.ReferenceEquals()</code> or <code>base.Equals()</code>, where
+    <code>base</code> is <code>object</code>. However, using <code>base.Equals()</code> is a maintenance hazard because while it works
+    if you extend <code>Object</code> directly, if you introduce a new base class that overrides <code>Equals</code>, it suddenly stops
+    working.
+</p>
+<p>
+    This rule raises an issue if <code>base.Equals()</code> is used but <code>base</code> is not <code>object</code>.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Base
+{
+  private int baseField;
+
+  public override bool Equals(object other)
+  {
+    if (base.Equals(other)) // Okay; base is object
+    {
+      return true;
+    }
+
+    return this.baseField == ((Base)other).baseField;
+  }
+}
+
+class Derived : Base
+{
+  private int derivedField;
+
+  public override bool Equals(object other)
+  {
+    if (base.Equals(other))  // Noncompliant
+    {
+      return true;
+    }
+
+    return this.derivedField == ((Derived)other).derivedField;
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class Base
+{
+  private int baseField;
+
+  public override bool Equals(object other)
+  {
+    if (object.ReferenceEquals(this, other))  // base.Equals is okay here, but object.ReferenceEquals is better
+    {
+      return true;
+    }
+
+    return this.baseField == ((Base)other).baseField;
+  }
+}
+
+class Derived : Base
+{
+  private int derivedField;
+
+  public override bool Equals(object other)
+  {
+    if (object.ReferenceEquals(this, other))
+    {
+      return true;
+    }
+
+    return base.Equals(other) &amp;&amp; this.derivedField == ((Derived)other).derivedField;
+  }
+}
+</pre>]]></description>
+    <tag>bug</tag>
   </rule>
   <rule>
     <key>S1313</key>
@@ -3445,6 +3412,99 @@ if (Array.IndexOf(stringArray, color) &gt;= 0)
     <tag>pitfall</tag>
   </rule>
   <rule>
+    <key>S3444</key>
+    <name>Interfaces with colliding, inherited members should explicitly redefine interface members</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    When an interface <code>IDerived</code> inherits from two interfaces <code>IBase1</code> and <code>IBase2</code> that both 
+    define a member <code>SomeProperty</code>, calling <code>IDerived.SomeProperty</code> will result in the compiler error 
+    <code>CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'</code>.
+</p>
+<p>
+    Every caller will be forced to cast instances of <code>IDerived</code> to <code>IBase1</code> or <code>IBase2</code> to 
+    resolve the ambiguity and to be able to access <code>SomeProperty</code>. Instead, it is better to resolve the ambiguity on 
+    the definition of <code>IDerived</code> either by:
+    <ul>
+        <li>renaming one of the <code>SomeProperty</code> in <code>IBase1</code> or <code>IBase2</code> to remove the collision</li>
+        <li>or by also defining a new <code>SomeProperty</code> member on <code>IDerived</code>. Use this only if all 
+        <code>SomeProperty</code> are meant to hold the same value.</li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface IBase1
+{
+  string SomeProperty { get; set; }
+}
+
+public interface IBase2
+{
+  string SomeProperty { get; set; }
+}
+
+public interface IDerived : IBase1, IBase2 // Noncompliant, accessing IDerived.SomeProperty is ambiguous
+{
+}
+
+public class MyClass : IDerived
+{
+  // Implements both IBase1.SomeProperty and IBase2.SomeProperty
+  public string SomeProperty { get; set; } = "Hello";
+
+  public static void Main()
+  {
+    MyClass myClass = new MyClass();
+    Console.WriteLine(myClass.SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase1)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IDerived)myClass).SomeProperty); // Error CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public interface IDerived : IBase1, IBase2
+{
+  new string SomeProperty { get; set; }
+}
+
+public class MyClass : IDerived
+{
+  // Implements IBase1.SomeProperty, IBase2.SomeProperty and IDerived.SomeProperty
+  public string SomeProperty { get; set; } = "Hello";
+
+  public static void Main()
+  {
+    MyClass myClass = new MyClass();
+    Console.WriteLine(myClass.SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase1)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IDerived)myClass).SomeProperty); // Writes "Hello" as expected
+  }
+}
+</pre>
+<p>or</p>
+<pre>
+public interface IBase1
+{
+  string SomePropertyOne { get; set; }
+}
+
+public interface IBase2
+{
+  string SomePropertyTwo { get; set; }
+}
+
+public interface IDerived : IBase1, IBase2
+{
+}
+</pre>]]></description>
+    <tag>design</tag>
+  </rule>
+  <rule>
     <key>S2278</key>
     <name>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</name>
     <severity>CRITICAL</severity>
@@ -3537,6 +3597,92 @@ var hashProvider3 = HashAlgorithm.Create("SHA256Managed");
     <tag>owasp-a6</tag>
     <tag>sans-top25-porous</tag>
     <tag>security</tag>
+  </rule>
+  <rule>
+    <key>S1944</key>
+    <name>Inappropriate casts should not be made</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as
+    <code>InvalidCastException</code>s. The compiler will catch bad casts from one class to another, but not bad casts to
+    interfaces.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface MyInterface
+{ /* ... */ }
+
+public class Implementer : MyInterface
+{ /* ... */ }
+
+public class MyClass
+{ /* ... */ }
+
+public static class Program
+{
+  public static void Main()
+  {
+    var myclass = new MyClass();
+    var x = (MyInterface) myclass; // Noncompliant, InvalidCastException is being thrown
+    var b = myclass is MyInterface; // Noncompliant, always false
+  }
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    No issue is reported if the interface has no implementing class in the assembly.
+</p>
+
+<h2>See</h2>
+<ul>
+    <li>MISRA C:2004, 11.4 - A cast should not be performed between a pointer to object type and an integral type.</li>
+    <li>MISRA C++:2008, 5-2-3 - Casts to a base class from a derived class should not be performed on polymorphic types.</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/tgAV">CERT, EXP36-C.</a> - Do not cast pointers into more strictly aligned pointer types</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/j4AyAQ">CERT, EXP56-CPP.</a> - Do not cast pointers into more strictly aligned pointer types</li>
+    <li><a href="http://cwe.mitre.org/data/definitions/588.html">MITRE, CWE-588</a> - Attempt to Access Child of a Non-structure Pointer</li>
+    <li><a href="http://cwe.mitre.org/data/definitions/704.html">MITRE, CWE-704</a> - Incorrect Type Conversion or Cast</li>
+</ul>
+]]></description>
+    <tag>bug</tag>
+    <tag>cert</tag>
+    <tag>cwe</tag>
+    <tag>misra</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
+    <key>S3220</key>
+    <name>Method calls should not resolve ambiguously to overloads with "params"</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The rules for method resolution are complex and perhaps not properly understood by all coders. The <code>params</code> keyword can make
+    method declarations overlap in non-obvious ways, so that slight changes in the argument types of an invocation can resolve to different
+    methods.
+</p>
+<p>
+    This rule raises an issue when an invocation resolves to a method declaration with <code>params</code>, but could also resolve to another
+    non-<code>params</code> method too.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass
+{
+  private void Format(string a, params object[] b) { }
+
+  private void Format(object a, object b, object c) { }
+}
+
+// ...
+MyClass myClass = new MyClass();
+
+myClass.Format("", null, null); //Noncompliant, resolves to the first Format with params, but was that intended?
+</pre>
+]]></description>
+    <tag>pitfall</tag>
   </rule>
   <rule>
     <key>S103</key>
@@ -3638,6 +3784,72 @@ public void MyLockingMethod()
 ]]></description>
     <tag>bug</tag>
     <tag>multi-threading</tag>
+  </rule>
+  <rule>
+    <key>S2184</key>
+    <name>Result of integer division should not be assigned to floating point variable</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    When division is performed on <code>int</code>s, the result will always be an <code>int</code>. You can assign that result to a
+    <code>double</code>, <code>float</code> or <code>decimal</code> with automatic type conversion, but having started as an
+    <code>int</code>, the result will likely not be what you expect. If the result of <code>int</code> division is assigned to a
+    floating-point variable, precision will have been lost before the assignment. Instead, at least one operand should be cast or
+    promoted to the final type before the operation takes place.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+static void Main()
+{
+  decimal dec = 3/2; // Noncompliant
+  Method(3/2); // Noncompliant
+}
+static void Method(float f) { }
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+static void Main()
+{
+  decimal dec = (decimal)3/2;
+  Method(3.0F/2);
+}
+static void Method(float f) { }
+</pre>
+]]></description>
+    <tag>bug</tag>
+    <tag>cwe</tag>
+    <tag>sans-top25-risky</tag>
+    <tag>security</tag>
+  </rule>
+  <rule>
+    <key>S1185</key>
+    <name>Overriding members should do more than simply call the same member in the super class</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Overriding a member just to call the same member from the base class without performing any other actions is useless and
+    misleading. The only time this is justified is in <code>sealed</code> overriding methods, where the effect is to lock in
+    the parent class behavior.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public override void Method() // Noncompliant
+{
+  base.Method();
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public override void Method()
+{
+  //do something else
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
   </rule>
   <rule>
     <key>S3218</key>
@@ -3762,6 +3974,87 @@ myClass.Print(new string[3] {"yes", "no", "maybe"});  // which version of Print 
     <tag>unused</tag>
   </rule>
   <rule>
+    <key>S1006</key>
+    <name>Method overrides should use the same default parameter values as the base methods</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Default arguments are determined by the static type of the object. If a default argument is different for a parameter in an
+    overriding method, the value used in the call will be different when calls are made via the base or derived object, which may
+    be contrary to developer expectations.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Base
+{
+  public virtual void Write(int i = 42)
+  {
+    Console.WriteLine(i);
+  }
+}
+
+public class Derived : Base
+{
+  public override void Write(int i = 5) // Noncompliant
+  {
+    Console.WriteLine(i);
+  }
+}
+
+public class Program
+{
+  public static void Main()
+  {
+    var derived = new Derived();
+    derived.Write(); // writes 5
+    Print(derived);  // writes 42; was that expected?
+  }
+  private void Print(Base item)
+  {
+    item.Write();
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+
+<pre>
+public class Base
+{
+  public virtual void Write(int i = 42)
+  {
+    Console.WriteLine(i);
+  }
+}
+
+public class Derived : Base
+{
+  public override void Write(int i = 42)
+  {
+    Console.WriteLine(i);
+  }
+}
+
+public class Program
+{
+  public static void Main()
+  {
+    var derived = new Derived();
+    derived.Write(); // writes 42
+    Print(derived);  // writes 42
+  }
+  private void Print(Base item)
+  {
+    item.Write();
+  }
+}
+</pre>
+]]></description>
+    <tag>misra</tag>
+    <tag>pitfall</tag>
+  </rule>
+  <rule>
     <key>S3262</key>
     <name>"params" should be used on overrides</name>
     <severity>MINOR</severity>
@@ -3808,6 +4101,40 @@ class Derived : Base
 </pre>
 ]]></description>
     <tag>confusing</tag>
+  </rule>
+  <rule>
+    <key>S3450</key>
+    <name>Parameters with "[DefaultParameterValue]" attributes should also be marked with "[Optional]"</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    There is no point in providing a default value for a parameter if callers are required to provide a value for it anyway. Thus,
+    <code>[DefaultParameterValue]</code> should always be used in conjunction with <code>[Optional]</code>.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void MyMethod([DefaultParameterValue(5)] int j) //Noncompliant, useless
+{
+  Console.WriteLine(j);
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public void MyMethod(int j = 5)
+{
+  Console.WriteLine(j);
+}
+</pre>
+<p>or</p>
+<pre>
+public void MyMethod([DefaultParameterValue(5)][Optional] int j)
+{
+  Console.WriteLine(j);
+}
+</pre>]]></description>
+    <tag>pitfall</tag>
   </rule>
   <rule>
     <key>S1172</key>
@@ -3967,6 +4294,44 @@ class MyClass
     <tag>convention</tag>
   </rule>
   <rule>
+    <key>S3265</key>
+    <name>Non-flags enums should not be used in bitwise operations</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>enum</code>s are usually used to identify distinct elements in a set of values. However <code>enum</code>s can be treated as bit fields and 
+    bitwise operations can be used on them to combine the values. This is a good way of specifying multiple elements of set with a single value. 
+    When <code>enum</code>s are used this way, it is a best practice to mark the <code>enum</code> with the <code>FlagsAttribute</code>.
+</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+enum Permissions
+{
+  None = 0,
+  Read = 1,
+  Write = 2,
+  Execute = 4
+}
+// ...
+var x = Permissions.Read | Permissions.Write;  // Noncompliant; enum is not marked with [Flags]
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[Flags]
+enum Permissions
+{
+  None = 0,
+  Read = 1,
+  Write = 2,
+  Execute = 4
+}
+// ...
+var x = Permissions.Read | Permissions.Write;
+</pre>
+]]></description>
+    <tag>convention</tag>
+  </rule>
+  <rule>
     <key>S1848</key>
     <name>Objects should not be created to be dropped immediately without being used</name>
     <severity>CRITICAL</severity>
@@ -4026,35 +4391,163 @@ void Notify(string company, string office = "QJZ")
     <tag>pitfall</tag>
   </rule>
   <rule>
-    <key>S3220</key>
-    <name>Method calls should not resolve ambiguously to overloads with "params"</name>
-    <severity>MAJOR</severity>
+    <key>S3466</key>
+    <name>Optional parameters should be passed to "base" calls</name>
+    <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    The rules for method resolution are complex and perhaps not properly understood by all coders. The <code>params</code> keyword can make
-    method declarations overlap in non-obvious ways, so that slight changes in the argument types of an invocation can resolve to different
-    methods.
-</p>
-<p>
-    This rule raises an issue when an invocation resolves to a method declaration with <code>params</code>, but could also resolve to another
-    non-<code>params</code> method too.
+    Generally, writing the least code that will readably do the job is a good thing, so omitting default parameter values seems to 
+    make sense. Unfortunately, when you omit them from the <code>base</code> call in an override, you're not actually getting the 
+    job done thoroughly, because you're ignoring the value the caller passed in. The result will likely not be what the caller 
+    expected.
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class MyClass
+public class BaseClass
 {
-  private void Format(string a, params object[] b) { }
-
-  private void Format(object a, object b, object c) { }
+  public virtual void MyMethod(int i = 1)
+  { 
+    Console.WriteLine(i);
+  }
 }
 
-// ...
-MyClass myClass = new MyClass();
+public class DerivedClass : BaseClass
+{
+  public override void MyMethod(int i = 1)
+  {
+    // ... 
+    base.MyMethod(); // Noncompliant; caller's value is ignored
+  }
 
-myClass.Format("", null, null); //Noncompliant, resolves to the first Format with params, but was that intended?
+  static int Main(string[] args) 
+  {
+    DerivedClass dc = new DerivedClass();
+    dc.MyMethod(12);  // prints 1
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class BaseClass
+{
+  public virtual void MyMethod(int i = 1)
+  { 
+    Console.WriteLine(i);
+  }
+}
+
+public class DerivedClass : BaseClass
+{
+  public override void MyMethod(int i = 1)
+  {
+    // ... 
+    base.MyMethod(i);
+  }
+
+  static int Main(string[] args) 
+  {
+    DerivedClass dc = new DerivedClass();
+    dc.MyMethod(12);  // prints 12
+  }
+}
+</pre>]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3451</key>
+    <name>"[DefaultValue]" should not be used when "[DefaultParameterValue]" is meant</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The use of <code>[DefaultValue]</code> with <code>[Optional]</code> has no more effect than <code>[Optional]</code> alone. That's because 
+    <code>[DefaultValue]</code> doesn't actually do anything; it merely indicates the intent for the value. More than likely, 
+    <code>[DefaultValue]</code> was used in confusion instead of <code>[DefaultParameterValue]</code>.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass
+{
+  public void DoStuff([Optional][DefaultValue(4)]int i, int j = 5)  // Noncompliant
+  {
+    Console.WriteLine(i);
+  }
+
+  public static void Main()
+  {
+    new MyClass().DoStuff(); // prints 0
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass
+{
+  public void DoStuff([Optional][DefaultParameterValue(4)]int i, int j = 5) 
+  {
+    Console.WriteLine(i);
+  }
+
+  public static void Main()
+  {
+    new MyClass().DoStuff(); // prints 4
+  }
+}
 </pre>
 ]]></description>
+    <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S3447</key>
+    <name>"[Optional]" should not be used on "ref" or "out" parameters</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The use of <code>ref</code> or <code>out</code> in combination with <code>[Optional]</code> is both confusing and contradictory.
+    <code>[Optional]</code> indicates that the parameter doesn't have to be provided, while out and ref mean that the parameter will be used
+    to return data to the caller (<code>ref</code> additionally indicates that the parameter may also be used to pass data into the method).
+</p>
+<p>
+    Thus, making it <code>[Optional]</code> to provide the parameter in which you will be passing back the method results doesn't make sense.
+    In fact, the compiler will raise an error on such code. Unfortunately, it raises the error on method calls where the
+    <code>[Optional]</code> parameter has been omitted, not the source of the problem, the method declaration.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass
+{
+    public void DoStuff([Optional] ref int i) // Noncompliant
+    {
+        Console.WriteLine(i);
+    }
+
+    public static void Main()
+    {
+        new MyClass().DoStuff(); // This doesn't compile, CS7036 shows
+    }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass
+{
+  public void DoStuff(ref int i)
+  {
+    Console.WriteLine(i);
+  }
+
+  public static void Main()
+  {
+    var i = 42;
+    new MyClass().DoStuff(ref i);
+  }
+}
+</pre>]]></description>
     <tag>pitfall</tag>
   </rule>
   <rule>
@@ -4277,6 +4770,36 @@ public void doTheThing()
 }
 </pre>]]></description>
     <tag>bug</tag>
+  </rule>
+  <rule>
+    <key>S3251</key>
+    <name>Implementations should be provided for "partial" methods</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>partial</code> methods allow an increased degree of flexibility in programming a system. Hooks can be added to generated code
+    by invoking methods that define their signature, but might not have an implementation yet. But if the implementation is still missing
+    when the code makes it to production, the compiler silently removes the call. In the best case scenario, such calls simply represent
+    cruft, but in they worst case they are critical, missing functionality, the loss of which will lead to unexpected results at runtime.
+</p>
+<p>
+    This rule raises an issue for partial methods for which no implementation can be found in the assembly.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+partial class C
+{
+  partial void M(); //Noncompliant
+
+  void OtherM()
+  {
+    M(); //Noncompliant. Will be removed.
+  }
+}
+</pre>
+]]></description>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S2372</key>
@@ -4504,6 +5027,7 @@ M(1);
 </pre>
 ]]></description>
     <tag>clumsy</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S1905</key>
@@ -4539,6 +5063,77 @@ public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
 </pre>
 ]]></description>
     <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S3257</key>
+    <name>Declarations and initializations should be as concise as possible</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Unnecessarily verbose declarations and initializations make it harder to read the code, and should be simplified.
+</p>
+<p>
+    Specifically the following should be omitted when they can be inferred:
+    <ul>
+        <li>array element type</li>
+        <li>array size</li>
+        <li><code>new DelegateType</code></li>
+        <li><code>new Nullable&lt;Type&gt;</code></li>
+        <li>object or collection initializers (<code>{}</code>)</li>
+        <li>type of lambda expression parameters</li>
+        <li>parameter declarations of anonymous methods when the parameters are not used.</li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var l = new List&lt;int&gt;() {}; // Noncompliant, {} can be removed
+var o = new object() {}; // Noncompliant, {} can be removed
+
+var ints = new int[] {1, 2, 3}; // Noncompliant, int can be omitted
+ints = new int[3] {1, 2, 3}; // Noncompliant, the size specification can be removed
+
+int? i = new int?(5); // Noncompliant new int? could be omitted, it can be inferred from the declaration, and there's implicit conversion from T to T?
+var j = new int?(5);
+
+Func&lt;int, int&gt; f1 = (int i) => 1; //Noncompliant, can be simplified
+
+class Class
+{
+  private event EventHandler MyEvent;
+
+  public Class()
+  {
+    MyEvent += new EventHandler((a,b) => { }); // Noncompliant, needlessly verbose
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var l = new List&lt;int&gt;();
+var o = new object();
+
+var ints = new [] {1, 2, 3};
+ints = new [] {1, 2, 3};
+
+int? i = 5;
+var j = new int?(5);
+
+Func&lt;int, int&gt; f1 = (i) => 1;
+
+class Class
+{
+  private event EventHandler MyEvent;
+
+  public Class()
+  {
+    MyEvent += (a,b) => { };
+  }
+}
+</pre>]]></description>
+    <tag>clumsy</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S1939</key>
@@ -4579,35 +5174,49 @@ enum MyEnum
     <description><![CDATA[<p>
     Unnecessary keywords simply clutter the code and should be removed. Specifically:
     <ul>
-        <li><code>virtual</code> on members of classes that are never overridden</li>
         <li><code>partial</code> on type declarations that are completely defined in one place</li>
         <li><code>sealed</code> on members of <code>sealed</code> classes</li>
+        <li><code>unsafe</code> method or block inside construct already marked with <code>unsafe</code>, or when there are no <code>unsafe</code>
+        constructs in the block</li>
     </ul>
 </p>
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-internal partial class MyClass // Noncompliant;
+public partial class MyClass // Noncompliant
 {
-  public virtual void DoSomething()  // Noncompliant; virtual is gratuitous
+  public virtual void Method()
   {
-    // ...
+  }
+}
+
+public sealed class MyOtherClass : MyClass
+{
+  public sealed override void Method() // Noncompliant
+  {
   }
 }
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-internal class MyClass
+public class MyClass
 {
-  public void DoSomething()
+  public virtual void Method()
   {
-    // ...
+  }
+}
+
+public sealed class MyOtherClass : MyClass
+{
+  public override void Method()
+  {
   }
 }
 </pre>
 ]]></description>
     <tag>unused</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S3235</key>
@@ -4651,6 +5260,182 @@ class MyClass
 </pre>
 ]]></description>
     <tag>unused</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
+    <key>S3441</key>
+    <name>Redundant property names should be omitted in anonymous classes</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    When an anonymous type's properties are copied from properties or variables with the same names, it yields cleaner code to
+    omit the new type's property name and the assignment operator.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var X = 5;
+
+var anon = new
+{
+  X = X, //Noncompliant, the new object would have the same property without the "X =" part.
+  Y = "my string"
+};
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var X = 5;
+
+var anon = new
+{
+  X,
+  Y = "my string"
+};
+</pre>]]></description>
+    <tag>clumsy</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
+    <key>S3456</key>
+    <name>"string.ToCharArray()" should not be called redundantly</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>ToCharArray</code> can be omitted when the operation on the array could have been done directly on the string, such as when
+    iterating over the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit
+    <code>ToCharArray</code> calls should be omitted.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+string str = "some string";
+foreach (var c in str.ToCharArray()) // Noncompliant
+{
+  // ...
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+string str = "some string";
+foreach (var c in str)
+{
+  // ...
+}
+</pre>]]></description>
+    <tag>clumsy</tag>
+  </rule>
+  <rule>
+    <key>S1858</key>
+    <name>"ToString()" calls should not be redundant</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Invoking a method designed to return a string representation of an object which is already a string is a waste of
+    keystrokes. Similarly, explicitly invoking <code>ToString()</code> when the compiler would do it implicitly is also
+    needless code-bloat.
+</p>
+<p>
+    This rule raises an issue when <code>ToString()</code> is invoked:
+    <ul>
+        <li>on a <code>string</code></li>
+        <li>on a non-<code>string</code> operand to concatenation</li>
+        <li>on an argument to <code>string.Format</code></li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s.ToString();  // Noncompliant
+var u = "" + 1.ToString(); // Noncompliant
+var v = string.Format("{0}", 1.ToString()); // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s;
+var u = "" + 1;
+var v = string.Format("{0}", 1);
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
+    <key>S1698</key>
+    <name>"==" should not be used when "Equals" is overridden</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Using the equality <code>==</code> and inequality <code>!=</code> operators to compare two objects generally works. The operators
+    can be overloaded, and therefore the comparison can resolve to the appropriate method. However, when the operators are used on
+    interface instances, then <code>==</code> resolves to reference equality, which may result in unexpected behavior if implementing
+    classes override <code>Equals</code>. Similarly, when a class overrides <code>Equals</code>, but instances are compared with
+    non-overloaded <code>==</code>, there is a high chance that value comparison was meant instead of the reference one.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface IMyInterface
+{
+}
+
+public class MyClass : IMyInterface
+{
+    public override bool Equals(object obj)
+    {
+        //...
+    }
+}
+
+public class Program
+{
+    public static void Method(IMyInterface instance1, IMyInterface instance2)
+    {
+        if (instance1 == instance2) // Noncompliant, will do reference equality check, but was that intended? MyClass overrides Equals.
+        {
+            Console.WriteLine("Equal");
+        }
+    }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public interface IMyInterface
+{
+}
+
+public class MyClass : IMyInterface
+{
+    public override bool Equals(object obj)
+    {
+        //...
+    }
+}
+
+public class Program
+{
+    public static void Method(IMyInterface instance1, IMyInterface instance2)
+    {
+        if (object.Equals(instance1, instance2)) // object.Equals checks for null and then calls the instance based Equals, so MyClass.Equals
+        {
+            Console.WriteLine("Equal");
+        }
+    }
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    The rule does not report on comparisons of <code>System.Type</code> instances and on comparisons inside <code>Equals</code> overrides.
+</p>
+]]></description>
+    <tag>cert</tag>
+    <tag>cwe</tag>
   </rule>
   <rule>
     <key>S2995</key>
@@ -4688,7 +5473,7 @@ public class MyClass
   </rule>
   <rule>
     <key>S2757</key>
-    <name>Reversed operators should not be used</name>
+    <name>"=+" should not be used instead of "+="</name>
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
@@ -4786,6 +5571,28 @@ public void setName(string name)
     <tag>cert</tag>
   </rule>
   <rule>
+    <key>S3449</key>
+    <name>Right operands of shift operators should be integers</name>
+    <severity>BLOCKER</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Numbers can be shifted with the <code>&lt;&lt;</code> and <code>&gt;&gt;</code> operators, but the right operand of the operation needs to be 
+    an <code>int</code> or a type that has an implicit conversion to <code>int</code>. However, with <code>dynamic</code>, the compiler's type 
+    checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to 
+    <code>int</code> at runtime, then a <code>RuntimeBinderException</code> will be raised.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+dynamic d = 5;
+var x = d &gt;&gt; 5.4; // Noncompliant
+x = d &gt;&gt; null; // Noncompliant
+x &lt;&lt;= new object(); // Noncompliant
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
     <key>S1697</key>
     <name>Short-circuit logic should be used to prevent null pointer dereferences in conditionals</name>
     <severity>BLOCKER</severity>
@@ -4868,55 +5675,6 @@ Func&lt;object, bool&gt; item1 = o =&gt; { return true; }; // Compliant
 Func&lt;object, bool&gt; item1 = o =&gt; { var r = false; return r; }; // Noncompliant
 </pre>]]></description>
     <tag>convention</tag>
-  </rule>
-  <rule>
-    <key>S2674</key>
-    <name>The length returned from a stream read should be checked</name>
-    <severity>BLOCKER</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    You cannot assume that any given stream reading call will fill the <code>byte[]</code> passed in to the method with
-    the number of bytes requested. Instead, you must check the value returned by the read method to see how many bytes
-    were read. Fail to do so, and you introduce a bug that is both harmful and difficult to reproduce.
-</p>
-<p>
-    This rule raises an issue when a <code>Stream.Read</code> or a <code>Stream.ReadAsync</code> method is called, but
-    the return value is not checked.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-public void DoSomething(string fileName)
-{
-  using (var stream = File.Open(fileName, FileMode.Open))
-  {
-    var result = new byte[stream.Length];
-    stream.Read(result, 0, (int)stream.Length); // Noncompliant
-    // ... do something with result
-  }
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-public void DoSomething(string fileName)
-{
-  using (var stream = File.Open(fileName, FileMode.Open))
-  {
-    var buffer = new byte[1024];
-    using (var ms = new MemoryStream())
-    {
-        int read;
-        while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-        {
-            ms.Write(buffer, 0, read);
-        }
-        // ... do something with ms
-    }
-  }
-}
-</pre>]]></description>
-    <tag>bug</tag>
   </rule>
   <rule>
     <key>S2743</key>
@@ -5119,6 +5877,55 @@ public class MyClass
     <tag>multi-threading</tag>
   </rule>
   <rule>
+    <key>S2674</key>
+    <name>The length returned from a stream read should be checked</name>
+    <severity>BLOCKER</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    You cannot assume that any given stream reading call will fill the <code>byte[]</code> passed in to the method with
+    the number of bytes requested. Instead, you must check the value returned by the read method to see how many bytes
+    were read. Fail to do so, and you introduce a bug that is both harmful and difficult to reproduce.
+</p>
+<p>
+    This rule raises an issue when a <code>Stream.Read</code> or a <code>Stream.ReadAsync</code> method is called, but
+    the return value is not checked.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void DoSomething(string fileName)
+{
+  using (var stream = File.Open(fileName, FileMode.Open))
+  {
+    var result = new byte[stream.Length];
+    stream.Read(result, 0, (int)stream.Length); // Noncompliant
+    // ... do something with result
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public void DoSomething(string fileName)
+{
+  using (var stream = File.Open(fileName, FileMode.Open))
+  {
+    var buffer = new byte[1024];
+    using (var ms = new MemoryStream())
+    {
+        int read;
+        while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+        {
+            ms.Write(buffer, 0, read);
+        }
+        // ... do something with ms
+    }
+  }
+}
+</pre>]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
     <key>S1643</key>
     <name>Strings should not be concatenated using "+" in a loop</name>
     <severity>MAJOR</severity>
@@ -5148,39 +5955,6 @@ string str = bld.ToString();
 </pre>
 ]]></description>
     <tag>performance</tag>
-  </rule>
-  <rule>
-    <key>S1449</key>
-    <name>Culture should be specified for String operations</name>
-    <severity>MAJOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    <code>String.ToLower()</code>, <code>.ToUpper</code>, <code>.Compare</code>, and
-    <code>.Equals</code> are all culture-dependent, as are some (floating point number-related) calls to ToString. Fortunately, all have
-    variants which accept an argument specifying the culture or formatter to use. Leave that argument off and the call will use the
-    system default culture, possibly creating problems with international characters.
-</p>
-<p>
-    Such calls without a culture may work fine in the system's "home" environment, but break in ways that are extremely difficult to
-    diagnose for customers who use different encodings. Such bugs can be nearly, if not completely, impossible to reproduce when it's
-    time to fix them.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-var lowered = someString.ToLower(); //Noncompliant
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-var lowered = someString.ToLower(CultureInfo.InvariantCulture);
-</pre>
-or
-<pre>
-var lowered = someString.ToLowerInvariant();
-</pre>
-]]></description>
-    <tag>unpredictable</tag>
   </rule>
   <rule>
     <key>S2275</key>
@@ -5213,6 +5987,70 @@ var s2 = string.Format("{0} {1}", 10, 11);
 ]]></description>
     <tag>bug</tag>
     <tag>pitfall</tag>
+  </rule>
+  <rule>
+    <key>S3457</key>
+    <name>"string.Format()" should not be called without placeholders</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    There's no need to incur the overhead of a formatting call when the string to be formatted contains no formatting symbols.
+    Instead, simply use the original input string.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = string.Format("some text");
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var s = "some text";
+</pre>]]></description>
+    <tag>confusing</tag>
+  </rule>
+  <rule>
+    <key>S1449</key>
+    <name>Culture should be specified for "string" operations</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    <code>string.ToLower()</code>, <code>ToUpper</code>, <code>IndexOf</code>, <code>LastIndexOf</code>, and <code>Compare</code> are 
+    all culture-dependent, as are some (floating point number and <code>DateTime</code>-related) calls to <code>ToString</code>. Fortunately, all have
+    variants which accept an argument specifying the culture or formatter to use. Leave that argument off and the call will use the
+    system default culture, possibly creating problems with international characters.
+</p>
+<p>
+    <code>string.CompareTo()</code> is also culture specific, but has no overload that takes a culture information, so instead it's better to use 
+    <code>CompareOrdinal</code>, or <code>Compare</code> with culture.
+</p>
+<p>
+    Calls without a culture may work fine in the system's "home" environment, but break in ways that are extremely difficult to
+    diagnose for customers who use different encodings. Such bugs can be nearly, if not completely, impossible to reproduce when it's
+    time to fix them.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var lowered = someString.ToLower(); //Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var lowered = someString.ToLower(CultureInfo.InvariantCulture);
+</pre>
+or
+<pre>
+var lowered = someString.ToLowerInvariant();
+</pre>
+
+<h2>See</h2>
+<ul>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/EwAiAg">CERT, STR02-J.</a> - Specify an appropriate locale when comparing locale-dependent data</li>
+</ul>
+]]></description>
+    <tag>cert</tag>
+    <tag>unpredictable</tag>
   </rule>
   <rule>
     <key>S3234</key>
@@ -5299,6 +6137,75 @@ if (variable == 0)
     <tag>misra</tag>
   </rule>
   <rule>
+    <key>S3532</key>
+    <name>Empty "default" clauses in a "switch" should be removed</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    The <code>default</code> clause should take appropriate action. Having an empty <code>default</code> is a waste of keystrokes.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+enum Fruit
+{
+  Apple,
+  Orange,
+  Banana
+}
+
+void PrintName(Fruit fruit)
+{
+  switch(fruit)
+  {
+    case Fruit.Apple:
+      Console.WriteLine("apple");
+      break;
+    default:  //Noncompliant
+      break;
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+enum Fruit
+{
+  Apple,
+  Orange,
+  Banana
+}
+
+void PrintName(Fruit fruit)
+{
+  switch(fruit)
+  {
+    case Fruit.Apple:
+      Console.WriteLine("apple");
+      break;
+    default:
+      throw new NotSupportedException();
+  }
+}
+</pre>
+<p>or</p>
+<pre>
+void PrintName(Fruit fruit)
+{
+  switch(fruit)
+  {
+    case Fruit.Apple:
+      Console.WriteLine("apple");
+      break;
+  }
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+    <tag>unused</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
     <key>S131</key>
     <name>"switch/Select" statements should end with a "default/Case Else" clause</name>
     <severity>MAJOR</severity>
@@ -5370,6 +6277,35 @@ So the use of tabulation character must be banned.
 </p>
 ]]></description>
     <tag>convention</tag>
+  </rule>
+  <rule>
+    <key>S3216</key>
+    <name>"ConfigureAwait(false)" should be used</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    After an <code>await</code>ed <code>Task</code> has executed, you can continue execution in the original, calling
+    thread or any arbitrary thread. Unless the rest of the code needs the context from which the <code>Task</code> was
+    spawned, <code>Task.ConfigureAwait(false)</code> should be used to keep execution in the <code>Task</code> thread
+    to avoid the need of context switching and the possibility of deadlocks.
+</p>
+<p>
+    This rule raises an issue when code in a class library <code>await</code>s a <code>Task</code> and continues
+    execution in the original calling thread.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var response = await httpClient.GetAsync(url);  // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var response = await httpClient.GetAsync(url).ConfigureAwait(false);
+</pre>
+]]></description>
+    <tag>multi-threading</tag>
+    <tag>suspicious</tag>
   </rule>
   <rule>
     <key>S2758</key>
@@ -5595,6 +6531,70 @@ public override string ToString ()
     <tag>cwe</tag>
   </rule>
   <rule>
+    <key>S3443</key>
+    <name>Type examining methods should be avoided on "System.Type" instances</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    If you call <code>GetType()</code> on a <code>Type</code> variable, the return value will always be <code>typeof(System.Type)</code>. So there's no real 
+    point in making that call. The same applies to passing a type argument to <code>IsInstanceOfType</code>. In both cases the results are entirely 
+    predictable.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+var type = typeof(int);
+var ttype = type.GetType(); //Noncompliant, always typeof(System.Type)
+
+var s = "abc";
+
+if (s.GetType().IsInstanceOfType(typeof(string))) //Noncompliant; false
+{ /* ... */ }
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var s = "abc";
+
+if (s.GetType().IsInstanceOfType("ssss"))
+{ /* ... */ }
+</pre>]]></description>
+    <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S2761</key>
+    <name>Doubled prefix operators "!!" and "~~" should not be used</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Calling the <code>!</code> or <code>~</code> prefix operator twice does nothing: the second invocation undoes the first.
+    Such mistakes are typically caused by accidentally double-tapping the key in question without noticing.
+</p>
+<p>
+    Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+int v1 = 0;
+bool v2 = false;
+
+var v3 = !!v1; // Noncompliant
+var v4 = ~~v2; // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+int v1 = 0;
+bool v2 = false;
+
+var v3 = !v1;
+var v4 = ~v2;
+</pre>
+]]></description>
+    <tag>bug</tag>
+  </rule>
+  <rule>
     <key>S1144</key>
     <name>Unused private types or members should be removed</name>
     <severity>MAJOR</severity>
@@ -5638,39 +6638,6 @@ public class Foo
     This rule doesn't raise any issue on empty constructors and attributed members.
 </p>]]></description>
     <tag>unused</tag>
-  </rule>
-  <rule>
-    <key>S2761</key>
-    <name>Doubled prefix operators "!!" and "~~" should not be used</name>
-    <severity>CRITICAL</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Calling the <code>!</code> or <code>~</code> prefix operator twice does nothing: the second invocation undoes the first.
-    Such mistakes are typically caused by accidentally double-tapping the key in question without noticing.
-</p>
-<p>
-    Either this is a bug, if the operator was actually meant to be called once, or misleading if done on purpose.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-int v1 = 0;
-bool v2 = false;
-
-var v3 = !!v1; // Noncompliant
-var v4 = ~~v2; // Noncompliant
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-int v1 = 0;
-bool v2 = false;
-
-var v3 = !v1;
-var v4 = ~v2;
-</pre>
-]]></description>
-    <tag>bug</tag>
   </rule>
   <rule>
     <key>S121</key>
