@@ -20,14 +20,13 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
-
-import java.util.List;
 
 public class CSharpUnitTestResultsProvider {
 
@@ -36,8 +35,9 @@ public class CSharpUnitTestResultsProvider {
 
   private static final String VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.vstest.reportsPaths";
   private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.nunit.reportsPaths";
+  private static final String XUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.xunit.reportsPaths";
 
-  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY);
+  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY, XUNIT_TEST_RESULTS_PROPERTY_KEY);
 
   private CSharpUnitTestResultsProvider() {
   }

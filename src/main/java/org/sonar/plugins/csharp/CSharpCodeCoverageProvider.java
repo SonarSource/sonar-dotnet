@@ -20,6 +20,7 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -27,8 +28,6 @@ import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
-
-import java.util.List;
 
 public class CSharpCodeCoverageProvider {
 
@@ -40,6 +39,11 @@ public class CSharpCodeCoverageProvider {
   private static final String DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.reportsPaths";
   private static final String VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.reportsPaths";
 
+  private static final String IT_NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.it.reportsPaths";
+  private static final String IT_OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.it.reportsPaths";
+  private static final String IT_DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.it.reportsPaths";
+  private static final String IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY = "sonar.cs.vscoveragexml.it.reportsPaths";
+
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpPlugin.LANGUAGE_KEY,
     NCOVER3_PROPERTY_KEY,
@@ -47,36 +51,72 @@ public class CSharpCodeCoverageProvider {
     DOTCOVER_PROPERTY_KEY,
     VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
 
+  private static final CoverageConfiguration IT_COVERAGE_CONF = new CoverageConfiguration(
+    CSharpPlugin.LANGUAGE_KEY,
+    IT_NCOVER3_PROPERTY_KEY,
+    IT_OPENCOVER_PROPERTY_KEY,
+    IT_DOTCOVER_PROPERTY_KEY,
+    IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY);
+
   private CSharpCodeCoverageProvider() {
   }
 
   public static List extensions() {
     return ImmutableList.of(
-      CSharpCoverageAggregator.class,
-      CSharpCoverageReportImportSensor.class,
+      CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
+      CSharpCoverageReportImportSensor.class, CSharpIntegrationCoverageReportImportSensor.class,
+
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
-        .name("NCover3 Reports Paths")
+        .name("NCover3 Unit Tests Reports Paths")
+        .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_NCOVER3_PROPERTY_KEY)
+        .name("NCover3 Integration Tests Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
-        .name("OpenCover Reports Paths")
+        .name("OpenCover Unit Tests Reports Paths")
+        .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_OPENCOVER_PROPERTY_KEY)
+        .name("OpenCover Integration Tests Reports Paths")
         .description("Example: \"report.xml\", \"report1.xml,report2.xml\" or \"C:/report.xml\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(DOTCOVER_PROPERTY_KEY)
-        .name("dotCover (HTML) Reports Paths")
+        .name("dotCover Unit Tests (HTML) Reports Paths")
+        .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_DOTCOVER_PROPERTY_KEY)
+        .name("dotCover Integration Tests (HTML) Reports Paths")
         .description("Example: \"report.html\", \"report1.html,report2.html\" or \"C:/report.html\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
         .build(),
       PropertyDefinition.builder(VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
-        .name("Visual Studio (XML) Reports Paths")
+        .name("Visual Studio Unit Tests (XML) Reports Paths")
+        .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
+      PropertyDefinition.builder(IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
+        .name("Visual Studio Integration Tests (XML) Reports Paths")
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
@@ -95,7 +135,23 @@ public class CSharpCodeCoverageProvider {
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
     public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator, FileSystem fs) {
-      super(COVERAGE_CONF, coverageAggregator, fs);
+      super(COVERAGE_CONF, coverageAggregator, fs, false);
+    }
+
+  }
+
+  public static class CSharpIntegrationCoverageAggregator extends CoverageAggregator {
+
+    public CSharpIntegrationCoverageAggregator(Settings settings) {
+      super(IT_COVERAGE_CONF, settings);
+    }
+
+  }
+
+  public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
+
+    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator, FileSystem fs) {
+      super(IT_COVERAGE_CONF, coverageAggregator, fs, true);
     }
 
   }
