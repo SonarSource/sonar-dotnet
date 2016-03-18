@@ -27,9 +27,6 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -229,16 +226,9 @@ public class CSharpSensor implements Sensor {
     new AnalysisResultImporter(context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
 
-  private void importRoslynReport(String reportPath, Issuable projectIssuable) {
-    String contents;
-    try {
-      contents = Files.toString(new File(reportPath), Charsets.UTF_8);
-    } catch (IOException e) {
-      throw Throwables.propagate(e);
-    }
-
+  private void importRoslynReport(String reportPath, final Issuable projectIssuable) {
     ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ruleProfile.getActiveRules());
-    Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
+    final Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
     for (ActiveRule activeRoslynRule: activeRoslynRulesByPartialRepoKey.values()) {
       String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRule.getRuleKey(), activeRoslynRule.getRepositoryKey());
       if (previousRepositoryKey != null) {
@@ -248,59 +238,46 @@ public class CSharpSensor implements Sensor {
       }
     }
 
-    JsonParser parser = new JsonParser();
-    JsonElement issues = parser.parse(contents).getAsJsonObject().get("issues");
-    if (issues != null) {
-      for (JsonElement issueElement : issues.getAsJsonArray()) {
-        JsonObject issue = issueElement.getAsJsonObject();
+    new SarifParser(new SarifParserCallback() {
 
-        String ruleId = issue.get("ruleId").getAsString();
-        if (!repositoryKeyByRoslynRuleKey.containsKey(ruleId)) {
-          continue;
+      @Override
+      public void onProjectIssue(String ruleId, String message) {
+        String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
+        if (repositoryKey == null) {
+          return;
         }
 
-        String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
-        boolean hasLocation = false;
-        for (JsonElement locationElement : issue.get("locations").getAsJsonArray()) {
-          JsonObject location = locationElement.getAsJsonObject();
-          if (location.has("analysisTarget")) {
-            for (JsonElement analysisTargetElement : location.get("analysisTarget").getAsJsonArray()) {
-              hasLocation = true;
-              JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
-              String uri = analysisTarget.get("uri").getAsString();
-              JsonObject region = analysisTarget.get("region").getAsJsonObject();
-              int startLine = region.get("startLine").getAsInt();
-
-              handleRoslynIssue(repositoryKeyByRoslynRuleKey.get(ruleId), ruleId, uri, startLine, message);
-            }
-          }
-        }
-        if (!hasLocation && projectIssuable != null) {
-          handleRoslynProjectIssue(projectIssuable, repositoryKeyByRoslynRuleKey.get(ruleId), ruleId, message);
-        }
+        IssueBuilder builder = projectIssuable.newIssueBuilder();
+        builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
+        builder.message(message);
+        projectIssuable.addIssue(builder.build());
       }
-    }
-  }
 
-  private void handleRoslynIssue(String repositoryKey, String ruleId, String uri, int startLine, String fullMessage) {
-    InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(uri));
-    if (inputFile != null) {
-      Issuable issuable = perspectives.as(Issuable.class, inputFile);
-      if (issuable != null) {
+      @Override
+      public void onIssue(String ruleId, String file, String message, int startLine) {
+        String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
+        if (repositoryKey == null) {
+          return;
+        }
+
+        InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(file));
+        if (inputFile == null) {
+          return;
+        }
+
+        Issuable issuable = perspectives.as(Issuable.class, inputFile);
+        if (issuable == null) {
+          return;
+        }
+
         IssueBuilder builder = issuable.newIssueBuilder();
         builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
         builder.line(startLine + 1);
-        builder.message(fullMessage);
+        builder.message(message);
         issuable.addIssue(builder.build());
       }
-    }
-  }
 
-  private static void handleRoslynProjectIssue(Issuable projectIssuable, String repositoryKey, String ruleId, String fullMessage) {
-    IssueBuilder builder = projectIssuable.newIssueBuilder();
-    builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
-    builder.message(fullMessage);
-    projectIssuable.addIssue(builder.build());
+    }).parse(new File(reportPath));
   }
 
   private static class AnalysisResultImporter {
