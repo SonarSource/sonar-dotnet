@@ -65,8 +65,8 @@ public class SarifParserTest {
 
     InOrder inOrder = inOrder(callback);
 
-    inOrder.verify(callback).onIssue("S1172", normalize("C:\\Foo.cs"), "Remove this unused method parameter \"args\".", 43);
-    inOrder.verify(callback).onIssue("CA1000", normalize("C:\\Bar.cs"), "There is just a full message.", 2);
+    inOrder.verify(callback).onIssue("S1172", "C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43);
+    inOrder.verify(callback).onIssue("CA1000", "C:\\Bar.cs", "There is just a full message.", 2);
     inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", "This is an assembly level Roslyn issue with no location.");
     inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", "No analysis targets, report at assembly level.");
     inOrder.verifyNoMoreInteractions();
