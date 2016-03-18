@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import java.io.File;
-import org.apache.commons.lang.SystemUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -80,16 +79,8 @@ public class SarifParserTest {
 
     InOrder inOrder = inOrder(callback);
 
-    inOrder.verify(callback).onIssue("S125", normalize("C:\\Foo.cs"), "Remove this commented out code.", 58);
+    inOrder.verify(callback).onIssue("S125", "C:\\Foo`1.cs", "Remove this commented out code.", 58);
     inOrder.verifyNoMoreInteractions();
-  }
-
-  private static String normalize(String path) {
-    if (SystemUtils.IS_OS_WINDOWS) {
-      return path;
-    }
-
-    return "/" + path.replace('\\', '/');
   }
 
 }

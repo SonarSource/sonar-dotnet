@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Throwables;
 import com.google.common.io.Files;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,11 +27,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class SarifParser {
 
+  private static final String FILE_PROTOCOL = "file:///";
   private SarifParserCallback callback;
 
   public SarifParser(SarifParserCallback callback) {
@@ -55,23 +53,23 @@ public class SarifParser {
         JsonObject runLog = runLogElement.getAsJsonObject();
         JsonArray results = runLog.getAsJsonArray("results");
         if (results != null) {
-          handleIssues(results, false, true);
+          handleIssues(results, false);
         }
       }
     } else if (root.has("issues")) {
       JsonElement issues = parser.parse(contents).getAsJsonObject().get("issues");
-      handleIssues(issues.getAsJsonArray(), true, false);
+      handleIssues(issues.getAsJsonArray(), true);
     }
   }
 
-  private void handleIssues(JsonArray issues, boolean linesOffByOne, boolean convertUri) {
+  private void handleIssues(JsonArray issues, boolean linesOffByOne) {
     for (JsonElement issueElement : issues) {
       JsonObject issue = issueElement.getAsJsonObject();
-      handleIssue(issue, linesOffByOne, convertUri);
+      handleIssue(issue, linesOffByOne);
     }
   }
 
-  private void handleIssue(JsonObject issue, boolean linesOffByOne, boolean convertUri) {
+  private void handleIssue(JsonObject issue, boolean linesOffByOne) {
     String ruleId = issue.get("ruleId").getAsString();
 
     String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
@@ -84,7 +82,7 @@ public class SarifParser {
           JsonObject analysisTarget = analysisTargetElement.getAsJsonObject();
 
           String uri = analysisTarget.get("uri").getAsString();
-          String absolutePath = convertUri ? uriToAbsolutePath(uri) : uri;
+          String absolutePath = uriToAbsolutePath(uri);
 
           JsonObject region = analysisTarget.get("region").getAsJsonObject();
           int startLine = region.get("startLine").getAsInt();
@@ -101,11 +99,11 @@ public class SarifParser {
   }
 
   private static String uriToAbsolutePath(String uri) {
-    try {
-      return new File(new URI(uri)).getAbsolutePath();
-    } catch (URISyntaxException e) {
-      throw Throwables.propagate(e);
+    if (!uri.startsWith(FILE_PROTOCOL)) {
+      return uri;
     }
+
+    return uri.substring(FILE_PROTOCOL.length()).replace('/', '\\');
   }
 
 }

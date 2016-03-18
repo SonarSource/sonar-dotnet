@@ -15,7 +15,7 @@
             {
               "analysisTarget": [
                 {
-                  "uri": "file:\/\/\/C:\/Foo.cs",
+                  "uri": "file:\/\/\/C:\/Foo`1.cs",
                   "region": {
                     "startLine": 58,
                     "startColumn": 13,
