@@ -254,13 +254,13 @@ public class CSharpSensor implements Sensor {
       }
 
       @Override
-      public void onIssue(String ruleId, String file, String message, int startLine) {
+      public void onIssue(String ruleId, String absolutePath, String message, int line) {
         String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
         if (repositoryKey == null) {
           return;
         }
 
-        InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(file));
+        InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(absolutePath));
         if (inputFile == null) {
           return;
         }
@@ -272,7 +272,7 @@ public class CSharpSensor implements Sensor {
 
         IssueBuilder builder = issuable.newIssueBuilder();
         builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
-        builder.line(startLine + 1);
+        builder.line(line);
         builder.message(message);
         issuable.addIssue(builder.build());
       }

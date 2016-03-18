@@ -22,6 +22,6 @@ package org.sonar.plugins.csharp;
 public interface SarifParserCallback {
 
   void onProjectIssue(String ruleId, String message);
-  void onIssue(String ruleId, String file, String message, int startLine);
+  void onIssue(String ruleId, String absolutePath, String message, int line);
 
 }

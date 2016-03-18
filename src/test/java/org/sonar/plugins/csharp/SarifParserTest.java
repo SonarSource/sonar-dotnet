@@ -47,7 +47,12 @@ public class SarifParserTest {
   @Test
   public void should_not_fail_ony_empty_report() {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1_empty.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1_empty_issues.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1_empty_no_issues.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_no_results.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_no_runLogs.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_results.json"));
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_runLogs.json"));
     verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
   }
 
@@ -59,10 +64,22 @@ public class SarifParserTest {
 
     InOrder inOrder = inOrder(callback);
 
-    inOrder.verify(callback).onIssue("S1172", "C:\\Foo.cs", "Remove this unused method parameter \"args\".", 42);
-    inOrder.verify(callback).onIssue("CA1000", "C:\\Bar.cs", "There is just a full message.", 1);
+    inOrder.verify(callback).onIssue("S1172", "C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43);
+    inOrder.verify(callback).onIssue("CA1000", "C:\\Bar.cs", "There is just a full message.", 2);
     inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", "This is an assembly level Roslyn issue with no location.");
     inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", "No analysis targets, report at assembly level.");
+    inOrder.verifyNoMoreInteractions();
+  }
+
+  // VS 2015 Update 2
+  @Test
+  public void sarif_version_0_4() {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4.json"));
+
+    InOrder inOrder = inOrder(callback);
+
+    inOrder.verify(callback).onIssue("S125", "C:\\Foo.cs", "Remove this commented out code.", 58);
     inOrder.verifyNoMoreInteractions();
   }
 
