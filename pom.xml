@@ -123,7 +123,6 @@
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -154,9 +153,9 @@
 
   <profiles>
     <profile>
-      <id>milestone</id>
+      <id>noVersionNumberInJar</id>
       <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}</finalName>
       </build>
     </profile>
   </profiles>

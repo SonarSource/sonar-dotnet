@@ -125,7 +125,7 @@ switch ($env:TEST)
 	{
 		InstallAppveyorTools
 
-		mvn package "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
+		mvn package "-PnoVersionNumberInJar" "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
 		CheckLastExitCode
 
 		if ($env:SQ_VERSION -eq "DEV")
