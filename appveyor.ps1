@@ -113,7 +113,7 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
     }
 }
 
-Build "SonarSource/sonar-dotnet-tests-library" "1.3"
+Build "SonarSource/sonar-dotnet-tests-library" "1.3.1"
 
 switch ($env:TEST)
 {
