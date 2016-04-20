@@ -207,6 +207,21 @@
         <prop>
           <key>offset</key>
           <txt />
+          <val>2min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
+      <key>UNDERSTANDABILITY</key>
+      <chc>
+        <rule-key>S3453</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
           <val>5min</val>
         </prop>
       </chc>
@@ -392,21 +407,6 @@
       </chc>
     </chc>
     <chc>
-      <key>READABILITY</key>
-      <chc>
-        <rule-key>S3253</rule-key>
-        <prop>
-          <key>remediationFunction</key>
-          <txt>CONSTANT_ISSUE</txt>
-        </prop>
-        <prop>
-          <key>offset</key>
-          <txt />
-          <val>2min</val>
-        </prop>
-      </chc>
-    </chc>
-    <chc>
       <key>LOGIC_RELIABILITY</key>
       <chc>
         <rule-key>S3172</rule-key>
@@ -512,6 +512,21 @@
       </chc>
     </chc>
     <chc>
+      <key>READABILITY</key>
+      <chc>
+        <rule-key>S3261</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>2min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
       <key>LOGIC_RELIABILITY</key>
       <chc>
         <rule-key>S108</rule-key>
@@ -598,6 +613,21 @@
           <key>offset</key>
           <txt />
           <val>5min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
+      <key>UNDERSTANDABILITY</key>
+      <chc>
+        <rule-key>S3445</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>2min</val>
         </prop>
       </chc>
     </chc>
@@ -1549,6 +1579,21 @@
     <chc>
       <key>READABILITY</key>
       <chc>
+        <rule-key>S3253</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>2min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
+      <key>READABILITY</key>
+      <chc>
         <rule-key>S3254</rule-key>
         <prop>
           <key>remediationFunction</key>
@@ -1708,6 +1753,21 @@
           <key>offset</key>
           <txt />
           <val>15min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
+      <key>LOGIC_RELIABILITY</key>
+      <chc>
+        <rule-key>S2201</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>10min</val>
         </prop>
       </chc>
     </chc>
@@ -1967,6 +2027,21 @@
       </chc>
     </chc>
     <chc>
+      <key>UNDERSTANDABILITY</key>
+      <chc>
+        <rule-key>S3458</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>1min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
       <key>READABILITY</key>
       <chc>
         <rule-key>S1301</rule-key>
@@ -2173,6 +2248,21 @@
           <key>offset</key>
           <txt />
           <val>5min</val>
+        </prop>
+      </chc>
+    </chc>
+    <chc>
+      <key>UNDERSTANDABILITY</key>
+      <chc>
+        <rule-key>S3241</rule-key>
+        <prop>
+          <key>remediationFunction</key>
+          <txt>CONSTANT_ISSUE</txt>
+        </prop>
+        <prop>
+          <key>offset</key>
+          <txt />
+          <val>2min</val>
         </prop>
       </chc>
     </chc>

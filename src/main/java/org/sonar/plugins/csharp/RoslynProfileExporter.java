@@ -46,7 +46,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
-  private static final String SONARANALYZER_NUGET_VERSION = "1.10.0";
+  private static final String SONARANALYZER_NUGET_VERSION = "1.11.0";
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 

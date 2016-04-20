@@ -176,7 +176,20 @@ doSomething(i == 42);  // Perhaps in fact the comparison operator was expected
 </pre>
 
 <h2>Exceptions</h2>
-Assignments inside lambda and delegate expressions are allowed.
+Assignments inside lambda and delegate expressions are allowed. Furthermore, the following two patterns are also accepted.
+<pre>
+while ((val = GetNewValue()) > 0)
+{
+...
+}
+</pre>
+<pre>
+private object myField;
+public object MyProperty
+{
+  get { return myField ?? (myField = new object()); }
+}
+</pre>
 
 <h2>See</h2>
 <ul>
@@ -184,6 +197,10 @@ Assignments inside lambda and delegate expressions are allowed.
     <li>MISRA C++:2008, 6-2-1 - Assignment operators shall not be used in sub-expressions</li>
     <li>MISRA C:2012, 13.4 - The result of an assignment operator should not be used</li>
     <li><a href="http://cwe.mitre.org/data/definitions/481.html">MITRE, CWE-481</a> - Assigning instead of Comparing</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/nYFtAg">CERT, EXP45-C</a> - Do not perform assignments in selection statements</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/1gCTAw">CERT, EXP51-J.</a> - Do not perform assignments in conditional expressions</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/KQvhAg">CERT, EXP19-CPP.</a> - Do not perform assignments in conditional expressions</li>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/KYIyAQ">CERT, MSC02-CPP.</a> - Avoid errors of omission</li>
 </ul>]]></description>
     <tag>suspicious</tag>
     <tag>cwe</tag>
@@ -583,32 +600,71 @@ string s = File.ReadAllText(fileName);
   </rule>
   <rule>
     <key>S101</key>
-    <name>Class names should comply with a naming convention</name>
+    <name>Types should be named in camel case</name>
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.
-This rule allows to check that all class names match a provided regular expression.
+    Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not type names are camel cased. To reduce noise, two consecutive
+    upper case characters are allowed unless they form the whole type name. So, <code>MyXClass</code> is compliant, but <code>XC</code> on its own is not.
 </p>
 
 <h2>Noncompliant Code Example</h2>
-<p>With default provided regular expression <code>^([A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]+Extensions)$</code>:</p>
 <pre>
 class my_class {...}
+class SOMEName42 {...}
 </pre>
 
 <h2>Compliant Solution</h2>
 
 <pre>
 class MyClass {...}
+class SomeName42 {...}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    The rule ignores types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. Furthermore, the rule
+    allows to have <code>'_'</code> characters in class names inside test projects.
+</p>
+
+<pre>
+class Some_Name___42 {...} // valid in test
+class Some_name___42 {...} // still not valid
+class Some_Name_XC {...} // invalid because of XC, should be Some_Name_Xc
 </pre>]]></description>
     <tag>convention</tag>
-    <param>
-      <key>format</key>
-      <description><![CDATA[Regular expression used to check the class names against.]]></description>
-      <type>STRING</type>
-      <defaultValue>^([A-HJ-Z][a-zA-Z0-9]+|I[a-z0-9][a-zA-Z0-9]*|[A-Z][a-zA-Z0-9]+Extensions)$</defaultValue>
-    </param>
+  </rule>
+  <rule>
+    <key>S3453</key>
+    <name>Classes should not have only "private" constructors</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    A class with only <code>private</code> constructors can't be instantiated, thus, it seems to be pointless code.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass // Noncompliant
+{
+  private MyClass() { ... }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass
+{
+  public MyClass() { ... }
+}
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    Classes that themselves access their private constructors (singletons or smart enums) are ignored. Classes with only
+    <code>static</code> members are also ignored because they are covered by Rule S1118.
+</p>]]></description>
+    <tag>design</tag>
   </rule>
   <rule>
     <key>S1694</key>
@@ -1295,56 +1351,6 @@ void CalculateRate(int a, int b)
     <tag>unused</tag>
   </rule>
   <rule>
-    <key>S3253</key>
-    <name>"base()" constructor calls should not be explicitly made</name>
-    <severity>MINOR</severity>
-    <cardinality>SINGLE</cardinality>
-    <description><![CDATA[<p>
-    Since the compiler will automatically invoke the base type's no-argument constructor, there's no need to specify its invocation explicitly. Doing so just clutters the code.
-</p>
-
-<h2>Noncompliant Code Example</h2>
-<pre>
-class X
-{
-  public X()
-  {
-    /* ... */
-  }
-}
-
-class Y : X
-{
-  public Y(int parameter) : base() // Noncompliant
-  {
-    /* does something with the parameter */
-  }
-}
-</pre>
-
-<h2>Compliant Solution</h2>
-<pre>
-class X
-{
-  public X()
-  {
-    /* ... */
-  }
-}
-
-class Y : X
-{
-  public Y(int parameter)
-  {
-    /* does something with the parameter */
-  }
-}
-</pre>
-]]></description>
-    <tag>clumsy</tag>
-    <tag>finding</tag>
-  </rule>
-  <rule>
     <key>S3172</key>
     <name>Delegates should not be subtracted</name>
     <severity>CRITICAL</severity>
@@ -1765,7 +1771,7 @@ public class GarbageDisposal : IDisposable
 There are several reasons for a method not to have a method body:
   <ul>
     <li>It is an unintentional omission, and should be fixed.</li>
-    <li>It is not yet, or never will be, supported. In this case an <code>NotSupportedException</code> should be thrown.</li>
+    <li>It is not yet, or never will be, supported. In this case a <code>NotSupportedException</code> should be thrown.</li>
     <li>The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override.</li>
   </ul>
 </p>
@@ -1795,17 +1801,41 @@ public override void doSomethingElse()
 </pre>
 
 <h2>Exceptions</h2>
-<p>An abstract class' may have empty methods, in order to provide default implementations for child classes.</p>
-<pre>
-abstract class Animal
-{
-  public void Speak()
-  {
-  }
-}
-</pre>
+<p>
+    The following methods are ignored:
+    <ul>
+        <li>empty <code>virtual</code> methods,</li>
+        <li>empty methods that override an <code>abstract</code> method,</li>
+        <li>empty overrides in test assemblies.</li>
+    </ul>
+</p>
 ]]></description>
     <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S3261</key>
+    <name>Namespaces should not be empty</name>
+    <severity>INFO</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Namespaces with no lines of code clutter a project and should be removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+namespace MyEmptyNamespace // Noncompliant
+{
+
+}
+</pre>
+
+<h2>See</h2>
+<ul>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/OYIyAQ">CERT, MSC07-CPP.</a> - Detect and remove dead code</li>
+</ul>
+]]></description>
+    <tag>cert</tag>
+    <tag>unused</tag>
   </rule>
   <rule>
     <key>S108</key>
@@ -2085,6 +2115,49 @@ public bool IsOdd(uint x)
 </pre>
 ]]></description>
     <tag>suspicious</tag>
+  </rule>
+  <rule>
+    <key>S3445</key>
+    <name>Exceptions should not be explicitly rethrown</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    When rethrowing an exception, you should do it by simply calling <code>throw;</code> and not <code>throw exc;</code>,
+    because the stack trace is reset with the second syntax, making debugging a lot harder.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+try
+{}
+catch(ExceptionType1 exc)
+{
+  Console.WriteLine(exc);
+  throw exc; // Noncompliant; stacktrace is reset
+}
+catch (ExceptionType2 exc)
+{
+  throw new Exception("My custom message", exc);  // Compliant; stack trace preserved
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+try
+{}
+catch(ExceptionType1 exc)
+{
+  Console.WriteLine(exc);
+  throw;
+}
+catch (ExceptionType2 exc)
+{
+  throw new Exception("My custom message", exc);
+}
+</pre>]]></description>
+    <tag>clumsy</tag>
+    <tag>unused</tag>
+    <tag>finding</tag>
   </rule>
   <rule>
     <key>S1067</key>
@@ -2425,7 +2498,7 @@ class MyTest
 {
   public void Test()
   {
-    var fruitBasket = new List<Fruit>();
+    var fruitBasket = new List&lt;Fruit&gt;();
     fruitBasket.Add(new Orange());
     fruitBasket.Add(new Orange());
     // fruitBasket.Add(new Apple());  // uncommenting this line will make both foreach below throw an InvalidCastException
@@ -2446,7 +2519,7 @@ class MyTest
 
 <h2>Compliant Solution</h2>
 <pre>
-var fruitBasket = new List<Orange>();
+var fruitBasket = new List&lt;Orange&gt;();
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Orange());
 // fruitBasket.Add(new Apple());  // uncommenting this line won't compile
@@ -2458,12 +2531,12 @@ foreach (Orange orange in fruitBasket)
 </pre>
 or
 <pre>
-var fruitBasket = new List<Fruit>();
+var fruitBasket = new List&lt;Fruit&gt;();
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Orange());
 fruitBasket.Add(new Apple());
 
-foreach (Orange orange in fruitBasket.OfType<Orange>())
+foreach (Orange orange in fruitBasket.OfType&lt;Orange&gt;())
 {
   ...
 }
@@ -3712,24 +3785,12 @@ Having to scroll horizontally makes it harder to get a quick overview and unders
 
 <h2>Noncompliant Code Example</h2>
 <pre>
-const uint a = 0u;      // Noncompliant
 const long b = 0l;      // Noncompliant
-const ulong c = 0Ul;     // Noncompliant
-const ulong d = 0uL;     // Noncompliant
-const decimal e = 1.2m;  // Noncompliant
-const float f = 1.2f;    // Noncompliant
-const double g = 1.2d;    // Noncompliant
 </pre>
 
 <h2>Compliant Solution</h2>
 <pre>
-const uint a = 0U;
 const long b = 0L;
-const ulong c = 0UL;
-const ulong d = 0UL;
-const decimal e = 1.2M;
-const float f = 1.2F;
-const double g = 1.2D;
 </pre>
 
 <h2>See</h2>
@@ -3916,18 +3977,16 @@ class Outer
   </rule>
   <rule>
     <key>S100</key>
-    <name>Method name should comply with a naming convention</name>
+    <name>Methods and properties should be named in camel case</name>
     <severity>MINOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Shared naming conventions allow teams to collaborate efficiently. This rule checks that all method names match a provided
-    regular expression.
+    Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not method and property names are camel cased.
+    To reduce noise, two consecutive upper case characters are allowed unless they form the whole name. So, <code>MyXMethod</code> is compliant,
+    but <code>XM</code> on its own is not.
 </p>
 
-<p>The following code:</p>
-
 <h2>Noncompliant Code Example</h2>
-<p>With default provided regular expression <code>^[A-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$</code>:</p>
 <pre>
 public int doSomething(){...}
 </pre>
@@ -3937,14 +3996,19 @@ public int doSomething(){...}
 <pre>
 public int DoSomething(){...}
 </pre>
+
+<h2>Exceptions</h2>
+<p>
+    The rule ignores members in types that are marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>.
+    <code>extern</code> methods are also excluded from the check. Furthermore, when <code>'_'</code> character is found in a name,
+    the camel casing is not enforced.
+</p>
+<pre>
+void My_method(){...}   // valid
+void My_method_(){...}  // invalid, leading and trailing underscores are reported
+</pre>
 ]]></description>
     <tag>convention</tag>
-    <param>
-      <key>format</key>
-      <description><![CDATA[Regular expression used to check the method names against]]></description>
-      <type>STRING</type>
-      <defaultValue>^[A-Z][a-zA-Z0-9_]*[a-zA-Z0-9]$</defaultValue>
-    </param>
   </rule>
   <rule>
     <key>S3427</key>
@@ -5000,6 +5064,57 @@ public class Program
     <tag>pitfall</tag>
   </rule>
   <rule>
+    <key>S3253</key>
+    <name>Constructor and destructor declarations should not be redundant</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Since the compiler will automatically invoke the base type's no-argument constructor, there's no need to specify its invocation
+    explicitly. Also, when only a single <code>public</code> parameterless constructor is defined in a class, then that constructor
+    can be removed because the compiler would generate it automatically. Similarly, empty <code>static</code> constructors and empty
+    destructors are also wasted keystrokes.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+class X
+{
+  public X() { } // Noncompliant
+  static X() { }  // Noncompliant
+  ~X() { } // Noncompliant
+
+  ...
+}
+
+class Y : X
+{
+  public Y(int parameter) : base() // Noncompliant
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+class X
+{
+  ...
+}
+
+class Y : X
+{
+  public Y(int parameter)
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
     <key>S3254</key>
     <name>Default parameter values should not be passed as arguments</name>
     <severity>MINOR</severity>
@@ -5472,17 +5587,68 @@ public class MyClass
     <tag>bug</tag>
   </rule>
   <rule>
+    <key>S2201</key>
+    <name>"=+" should not be used instead of "+="</name>
+    <severity>CRITICAL</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    When the call to a function doesn't have any side effects, what is the point of making the call if the results are
+    ignored? In such case, either the function call is useless and should be dropped or the source code doesn't behave
+    as expected.
+</p>
+<p>
+    To prevent generating any false-positives, this rule triggers an issues only when the results of the following methods
+    are ignored:
+    <ul>
+        <li>LINQ method,</li>
+        <li><code>[Pure]</code> method,</li>
+        <li>any method on <code>string</code>, <code>int</code>, ...,
+        <code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code>, <code>ImmutableHashSet&lt;T&gt;</code>, ...</li>
+    </ul>
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+coll.Where(i => i &gt; 5).Select(i => i*i); // Noncompliant
+"this string".Equals("other string"); // Noncompliant
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+var res = coll.Where(i => i &gt; 5).Select(i => i*i); // Noncompliant
+var isEqual = "this string".Equals("other string"); // Noncompliant
+</pre>
+
+<h2>Exceptions</h2>
+<p>
+    This rule doesn't report issues on method calls with <code>out</code> or <code>ref</code> arguments.
+</p>
+
+<h2>See</h2>
+<p>
+    <ul>
+        <li>MISRA C:2012, 17.7 - The value returned by a function having non-void return type shall be used</li>
+        <li><a href="https://www.securecoding.cert.org/confluence/x/9YIRAQ">CERT, EXP12-C.</a> - Do not ignore values returned by functions</li>
+        <li><a href="https://www.securecoding.cert.org/confluence/x/eoAyAQ">CERT, EXP12-CPP.</a> - Do not ignore values returned by functions or methods</li>
+        <li><a href="https://www.securecoding.cert.org/confluence/x/9gEqAQ">CERT, EXP00-J.</a> - Do not ignore values returned by methods</li>
+    </ul>
+</p>]]></description>
+    <tag>bug</tag>
+    <tag>cert</tag>
+    <tag>misra</tag>
+  </rule>
+  <rule>
     <key>S2757</key>
     <name>"=+" should not be used instead of "+="</name>
     <severity>CRITICAL</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    The use of operators pairs (<code>=+</code> or <code>=-</code>) where the reversed, single operator
-    was meant (<code>+=</code> or <code>-=</code>) will compile and run, but not produce the expected results.
+    The use of operators pairs (<code>=+</code>, <code>=-</code> or <code>=!</code>) where the reversed, single operator
+    was meant (<code>+=</code>, <code>-=</code> or <code>!=</code>) will compile and run, but not produce the expected results.
 </p>
 <p>
-    This rule raises an issue when <code>=+</code>, and <code>=-</code> are used, but ignores the operators
-    when they're spaced out: <code>= +</code>, <code>= -</code>.
+    This rule raises an issue when <code>=+</code>, <code>=-</code> and <code>=!</code> are used, but ignores the operators
+    when they're spaced out: <code>= +</code>, <code>= -</code>, <code>= !</code>.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -6093,6 +6259,52 @@ sealed class MyClass
     <tag>unused</tag>
   </rule>
   <rule>
+    <key>S3458</key>
+    <name>Empty "case" clauses that fall through to the "default" should be omitted</name>
+    <severity>MINOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Empty <code>case</code> clauses that fall through to the <code>default</code> are useless. Whether or not such a <code>case</code>
+    is present, the <code>default</code> clause will be invoked. Such <code>case</code>s simply clutter the code, and should be removed.
+</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+switch(ch)
+{
+  case 'a' :
+    handleA();
+    break;
+  case 'b' :
+    handleB();
+    break;
+  case 'c' :  // Noncompliant
+  default:
+    handleTheRest();
+    break;
+}
+</pre>
+
+<h2>Compliant Solution</h2>
+<pre>
+switch(ch)
+{
+  case 'a' :
+    handleA();
+    break;
+  case 'b' :
+    handleB();
+    break;
+  default:
+    handleTheRest();
+    break;
+}
+</pre>
+]]></description>
+    <tag>clumsy</tag>
+    <tag>finding</tag>
+  </rule>
+  <rule>
     <key>S1301</key>
     <name>"switch" statements should have at least 3 "case" clauses</name>
     <severity>MINOR</severity>
@@ -6441,6 +6653,11 @@ public class Foo
     <description><![CDATA[<p>
   When <code>switch</code> statements have a large set of <code>case</code> clauses, it is usually an attempt to map two sets of data. A real map structure would be more readable and maintainable, and should be used instead.
 </p>
+
+<h2>Exceptions</h2>
+<p>
+    No issue is reported on <code>switch</code> statements that work on <code>enum</code>s.
+</p>
 ]]></description>
     <tag>brain-overload</tag>
     <param>
@@ -6640,6 +6857,25 @@ public class Foo
     <tag>unused</tag>
   </rule>
   <rule>
+    <key>S3241</key>
+    <name>Methods should not return values that are never used</name>
+    <severity>MAJOR</severity>
+    <cardinality>SINGLE</cardinality>
+    <description><![CDATA[<p>
+    Private methods are clearly intended for use only within their own scope. When such methods return values that are never used by any of their callers, then
+    clearly there is no need to actually make the return, and it should be removed in the interests of efficiency and clarity.
+</p>
+
+<h2>See</h2>
+<ul>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP.</a> - Detect and remove code that has no effect</li>
+</ul>
+]]></description>
+    <tag>cert</tag>
+    <tag>design</tag>
+    <tag>unused</tag>
+  </rule>
+  <rule>
     <key>S121</key>
     <name>Control structures should use curly braces</name>
     <severity>MAJOR</severity>
@@ -6764,9 +7000,8 @@ public int pickNumber()
     <severity>MAJOR</severity>
     <cardinality>SINGLE</cardinality>
     <description><![CDATA[<p>
-    Shadowing fields with a local variable or with a method parameter is a bad practice that
-    reduces code readability: It makes it confusing to know whether the field or the variable
-    is being used.
+    Shadowing fields with a local variable is a bad practice that reduces code readability: It makes it confusing to know whether the
+    field or the variable is being used.
 </p>
 
 <h2>Noncompliant Code Example</h2>
@@ -6775,41 +7010,18 @@ class Foo
 {
   public int myField;
 
-  public void doSomething()
+  public void DoSomething()
   {
-    int myField = 0;
-    ...
-  }
-
-  public void doSomethingElse(int myField)
-  {
+    int myField = 0;  // Noncompliant
     ...
   }
 }
 </pre>
 
-<h2>Exceptions</h2>
-<p>
-    Constructors are exceptions; it is common practice to name arguments for the fields the
-    values will be assigned to. Static methods are also excepted.
-</p>
-
-<pre>
-class Foo {
-  public int myField;
-
-  public Foo(int myField)
-  {
-    this.myField = myField;
-  }
-
-  public static Foo build(int myField)
-  {
-    ...
-  }
-}
-</pre>
-]]></description>
+<h2>See</h2>
+<ul>
+    <li><a href="https://www.securecoding.cert.org/confluence/x/2ADEAw">CERT, DCL51-J.</a> - Do not shadow or obscure identifiers in subscopes</li>
+</ul>]]></description>
     <tag>pitfall</tag>
   </rule>
   <rule>
