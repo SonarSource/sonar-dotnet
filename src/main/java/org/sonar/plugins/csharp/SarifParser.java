@@ -70,6 +70,10 @@ public class SarifParser {
   }
 
   private void handleIssue(JsonObject issue, boolean linesOffByOne) {
+    if (isSuppressed(issue)) {
+      return;
+    }
+
     String ruleId = issue.get("ruleId").getAsString();
 
     String message = issue.get(issue.has("shortMessage") ? "shortMessage" : "fullMessage").getAsString();
@@ -96,6 +100,23 @@ public class SarifParser {
     if (!hasLocation) {
       callback.onProjectIssue(ruleId, message);
     }
+  }
+
+  private static boolean isSuppressed(JsonObject issue) {
+    JsonElement isSuppressedInSource = issue.get("isSuppressedInSource");
+    if (isSuppressedInSource != null) {
+      return isSuppressedInSource.getAsBoolean();
+    }
+
+    JsonElement properties = issue.get("properties");
+    if (properties != null && properties.isJsonObject()) {
+      isSuppressedInSource = properties.getAsJsonObject().get("isSuppressedInSource");
+      if (isSuppressedInSource != null) {
+        return isSuppressedInSource.getAsBoolean();
+      }
+    }
+
+    return false;
   }
 
   private static String uriToAbsolutePath(String uri) {

@@ -66,9 +66,11 @@ public class SarifParserTest {
 
     inOrder.verify(callback).onIssue("S1172", "C:\\Foo.cs", "Remove this unused method parameter \"args\".", 43);
     inOrder.verify(callback).onIssue("CA1000", "C:\\Bar.cs", "There is just a full message.", 2);
+    verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+
     inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", "This is an assembly level Roslyn issue with no location.");
     inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", "No analysis targets, report at assembly level.");
-    inOrder.verifyNoMoreInteractions();
+    verify(callback, Mockito.times(2)).onProjectIssue(Mockito.anyString(), Mockito.anyString());
   }
 
   // VS 2015 Update 2
@@ -80,7 +82,9 @@ public class SarifParserTest {
     InOrder inOrder = inOrder(callback);
 
     inOrder.verify(callback).onIssue("S125", "C:\\Foo`1.cs", "Remove this commented out code.", 58);
-    inOrder.verifyNoMoreInteractions();
+    verify(callback, Mockito.only()).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+
+    verify(callback, Mockito.never()).onProjectIssue(Mockito.anyString(), Mockito.anyString());
   }
 
 }
