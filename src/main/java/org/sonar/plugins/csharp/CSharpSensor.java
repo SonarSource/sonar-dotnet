@@ -37,6 +37,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import org.apache.commons.lang.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
@@ -94,7 +95,7 @@ public class CSharpSensor implements Sensor {
 
   @Override
   public boolean shouldExecuteOnProject(Project project) {
-    return filesToAnalyze().iterator().hasNext();
+    return SystemUtils.IS_OS_WINDOWS && filesToAnalyze().iterator().hasNext();
   }
 
   @Override
