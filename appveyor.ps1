@@ -113,6 +113,8 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
     }
 }
 
+BuildSnapshot "SonarSource/sonar-fxcop-library"
+
 switch ($env:TEST)
 {
 	"CI"
