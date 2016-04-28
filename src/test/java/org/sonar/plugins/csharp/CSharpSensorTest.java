@@ -26,6 +26,8 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import java.io.File;
 import java.util.List;
+import org.apache.commons.lang.SystemUtils;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -94,6 +96,8 @@ public class CSharpSensorTest {
 
   @Test
   public void shouldExecuteOnProject() {
+    Assume.assumeTrue(SystemUtils.IS_OS_WINDOWS);
+
     DefaultFileSystem fs = new DefaultFileSystem();
 
     CSharpSensor sensor =
