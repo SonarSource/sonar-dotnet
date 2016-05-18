@@ -90,15 +90,6 @@ function Build
 	}
 }
 
-function BuildSnapshot
-{
-	param ([string]$Project)
-
-	echo "Fetch and build snapshot of [$Project]"
-
-	Build $Project "HEAD"
-}
-
 function CheckLastExitCode
 {
     param ([int[]]$SuccessCodes = @(0))
@@ -127,11 +118,6 @@ switch ($env:TEST)
 
 		mvn package "-PnoVersionNumberInJar" "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
 		CheckLastExitCode
-
-		if ($env:SQ_VERSION -eq "DEV")
-		{
-			BuildSnapshot "SonarSource/sonarqube"
-		}
 
 		pushd its/plugin
 		try
