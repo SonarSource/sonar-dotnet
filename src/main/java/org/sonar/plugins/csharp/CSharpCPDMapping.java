@@ -30,6 +30,8 @@ import com.sonar.sslr.impl.channel.BomCharacterChannel;
 import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
+import java.io.File;
+import java.util.List;
 import net.sourceforge.pmd.cpd.SourceCode;
 import net.sourceforge.pmd.cpd.TokenEntry;
 import net.sourceforge.pmd.cpd.Tokenizer;
@@ -37,9 +39,6 @@ import net.sourceforge.pmd.cpd.Tokens;
 import org.sonar.api.batch.AbstractCpdMapping;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.resources.Language;
-
-import java.io.File;
-import java.util.List;
 
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.ANY_CHAR;
 import static com.sonar.sslr.impl.channel.RegexpChannelBuilder.DIGIT;
@@ -65,7 +64,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   private static final String CONNECTING_CHAR = g("\\p{Pc}");
   private static final String FORMATTING_CHAR = g("\\p{Cf}");
 
-  private enum CSharpPunctuator implements TokenType {
+  enum CSharpPunctuator implements TokenType {
     SEMICOLON(";"), EQUAL("="), STAR("*"), LCURLYBRACE("{"), LPARENTHESIS("("), LBRACKET("["), RBRACKET("]"), RPARENTHESIS(")"), RCURLYBRACE(
       "}"), COLON(":"), COMMA(","), DOT("."), EXCLAMATION("!"), SUPERIOR(">"), INFERIOR("<"), PLUS("+"), MINUS("-"), SLASH("/"), MODULO("%"), AND(
       "&"), XOR("^"), OR("|"), QUESTION("?"), TILDE("~"), DOUBLE_COLON("::"), DOUBLE_QUESTION("??"), EQ_OP("=="), NE_OP("!="), LEFT_ASSIGN(
