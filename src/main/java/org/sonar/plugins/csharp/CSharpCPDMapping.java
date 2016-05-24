@@ -64,7 +64,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
   private static final String CONNECTING_CHAR = g("\\p{Pc}");
   private static final String FORMATTING_CHAR = g("\\p{Cf}");
 
-  enum CSharpPunctuator implements TokenType {
+  private enum CSharpPunctuator implements TokenType {
     SEMICOLON(";"), EQUAL("="), STAR("*"), LCURLYBRACE("{"), LPARENTHESIS("("), LBRACKET("["), RBRACKET("]"), RPARENTHESIS(")"), RCURLYBRACE(
       "}"), COLON(":"), COMMA(","), DOT("."), EXCLAMATION("!"), SUPERIOR(">"), INFERIOR("<"), PLUS("+"), MINUS("-"), SLASH("/"), MODULO("%"), AND(
       "&"), XOR("^"), OR("|"), QUESTION("?"), TILDE("~"), DOUBLE_COLON("::"), DOUBLE_QUESTION("??"), EQ_OP("=="), NE_OP("!="), LEFT_ASSIGN(
@@ -73,7 +73,7 @@ public class CSharpCPDMapping extends AbstractCpdMapping {
 
     private final String value;
 
-    private CSharpPunctuator(String word) {
+    CSharpPunctuator(String word) {
       this.value = word;
     }
 
