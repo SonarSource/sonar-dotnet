@@ -52,6 +52,7 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
+    <gitRepositoryName>sonar-csharp</gitRepositoryName>
   </properties>
 
   <dependencies>
