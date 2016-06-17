@@ -1,11 +1,13 @@
 version: 1.0.{build}
 
 cache:
-  - C:\Users\appveyor\.m2 -> **\pom.xml
+  - C:\Users\appveyor\.m2\repository
 
 install:
   - set MAVEN_VERSION=3.2.5
-  - choco install maven -version %MAVEN_VERSION%
+  - mkdir C:\bin
+  - curl --output C:\bin\apache-maven-%MAVEN_VERSION%-bin.zip -L -sS --retry 3 --retry-delay 10 "http://www.apache.org/dyn/closer.cgi?action=download&filename=maven/maven-3/%MAVEN_VERSION%/binaries/apache-maven-%MAVEN_VERSION%-bin.zip"
+  - unzip -q -d C:\bin C:\bin\apache-maven-%MAVEN_VERSION%-bin.zip
   - set PATH=%PATH%;C:\bin\apache-maven-%MAVEN_VERSION%\bin
 
 environment:

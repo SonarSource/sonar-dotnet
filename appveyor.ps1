@@ -33,7 +33,7 @@ function FetchAndUnzip
 
 function InstallAppveyorTools
 {
-	$travisUtilsVersion = "16"
+	$travisUtilsVersion = "28"
 	$localPath = "$env:USERPROFILE\.local"
 	$travisUtilsPath = "$localPath\travis-utils-$travisUtilsVersion"
 	if (Test-Path $travisUtilsPath)
@@ -47,47 +47,16 @@ function InstallAppveyorTools
 		FetchAndUnzip $url $localPath
 	}
 
-	$mavenLocalRepository = "$env:USERPROFILE\.m2\repository"
-	if (-not(Test-Path $mavenLocalRepository))
+	$mavenLocal = "$env:USERPROFILE\.m2"
+	if (-not(Test-Path $mavenLocal))
 	{
-		mkdir $mavenLocalRepository | Out-Null
+		mkdir $mavenLocal | Out-Null
 	}
-	echo "Installating Travis Utils closed source Maven projects into $mavenLocalRepository"
-	Copy-Item "$travisUtilsPath\m2repo\*" $mavenLocalRepository -Force -Recurse
+	echo "Installating Travis Utils public Maven settings.xml into $mavenLocal"
+	Copy-Item "$travisUtilsPath\m2\settings-public.xml" "$mavenLocal\settings.xml"
 
 	$env:ORCHESTRATOR_CONFIG_URL = ""
 	$env:TRAVIS = "ORCH-332"
-}
-
-function Build
-{
-	param ([string]$Project, [string]$Sha1)
-
-	$msg = "Fetch [" + $Project + ":" + $Sha1 + "]"
-	echo $msg
-
-	$url = "https://github.com/$Project/archive/$Sha1.zip"
-	$tmp = "c:\snapshot"
-	if (Test-Path $tmp)
-	{
-		Cmd /C "rmdir /S /Q $tmp"
-	}
-
-	FetchAndUnzip $url $tmp
-
-	$msg = "Build [" + $Project + ":" + $Sha1 + "]"
-	echo $msg
-
-	pushd $tmp\*
-	try
-	{
-		mvn install "--batch-mode" "-DskipTests" "-Pdev"
-		CheckLastExitCode
-	}
-	finally
-	{
-		popd
-	}
 }
 
 function CheckLastExitCode
@@ -104,6 +73,8 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
     }
 }
 
+InstallAppveyorTools
+
 switch ($env:TEST)
 {
 	"CI"
@@ -114,8 +85,6 @@ switch ($env:TEST)
 
 	"PLUGIN"
 	{
-		InstallAppveyorTools
-
 		mvn package "-PnoVersionNumberInJar" "--batch-mode" "-Dsource.skip=true" "-Denforcer.skip=true" "-Danimal.sniffer.skip=true" "-Dmaven.test.skip=true"
 		CheckLastExitCode
 
