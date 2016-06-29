@@ -17,11 +17,8 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+@ParametersAreNonnullByDefault
+package org.sonar.plugins.csharp.sarif;
 
-public interface SarifParserCallback {
+import javax.annotation.ParametersAreNonnullByDefault;
 
-  void onProjectIssue(String ruleId, String message);
-  void onIssue(String ruleId, String absolutePath, String message, int line);
-
-}

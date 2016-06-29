@@ -17,59 +17,49 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonar.plugins.csharp.sarif;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import java.io.File;
-import java.io.IOException;
 
-public class SarifParser {
+public class SarifParser01And04 implements SarifParser {
 
   private static final String FILE_PROTOCOL = "file:///";
-  private SarifParserCallback callback;
+  private String contents;
 
-  public SarifParser(SarifParserCallback callback) {
-    this.callback = callback;
+  SarifParser01And04(String contents) {
+    this.contents = contents;
   }
 
-  public void parse(File file) {
-    String contents;
-    try {
-      contents = Files.toString(file, Charsets.UTF_8);
-    } catch (IOException e) {
-      throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + file.getAbsolutePath(), e);
-    }
-
+  @Override
+  public void parse(SarifParserCallback callback) {
     JsonParser parser = new JsonParser();
     JsonObject root = parser.parse(contents).getAsJsonObject();
     if (root.has("runLogs")) {
       JsonElement runLogs = parser.parse(contents).getAsJsonObject().get("runLogs");
-      for (JsonElement runLogElement: runLogs.getAsJsonArray()) {
+      for (JsonElement runLogElement : runLogs.getAsJsonArray()) {
         JsonObject runLog = runLogElement.getAsJsonObject();
         JsonArray results = runLog.getAsJsonArray("results");
         if (results != null) {
-          handleIssues(results, false);
+          handleIssues(results, false, callback);
         }
       }
     } else if (root.has("issues")) {
       JsonElement issues = parser.parse(contents).getAsJsonObject().get("issues");
-      handleIssues(issues.getAsJsonArray(), true);
+      handleIssues(issues.getAsJsonArray(), true, callback);
     }
   }
 
-  private void handleIssues(JsonArray issues, boolean linesOffByOne) {
+  private static void handleIssues(JsonArray issues, boolean linesOffByOne, SarifParserCallback callback) {
     for (JsonElement issueElement : issues) {
       JsonObject issue = issueElement.getAsJsonObject();
-      handleIssue(issue, linesOffByOne);
+      handleIssue(issue, linesOffByOne, callback);
     }
   }
 
-  private void handleIssue(JsonObject issue, boolean linesOffByOne) {
+  private static void handleIssue(JsonObject issue, boolean linesOffByOne, SarifParserCallback callback) {
     if (isSuppressed(issue)) {
       return;
     }
@@ -90,7 +80,7 @@ public class SarifParser {
 
           JsonObject region = analysisTarget.get("region").getAsJsonObject();
           int startLine = region.get("startLine").getAsInt();
-          int line = linesOffByOne ? startLine + 1 : startLine;
+          int line = linesOffByOne ? (startLine + 1) : startLine;
 
           callback.onIssue(ruleId, absolutePath, message, line);
         }

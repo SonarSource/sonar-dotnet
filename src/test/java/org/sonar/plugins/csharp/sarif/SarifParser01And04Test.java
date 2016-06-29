@@ -17,50 +17,44 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonar.plugins.csharp.sarif;
 
 import java.io.File;
-import org.junit.Rule;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
+import org.sonar.plugins.csharp.sarif.SarifParser01And04;
+import org.sonar.plugins.csharp.sarif.SarifParserCallback;
 
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class SarifParserTest {
-
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
-  @Test
-  public void non_existing() {
-    thrown.expectMessage("Unable to read the Roslyn SARIF report file: ");
-    thrown.expectMessage("non_existing.json");
-
-    SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/non_existing.json"));
+public class SarifParser01And04Test {
+  private String getContents(String fileName) throws IOException {
+    return FileUtils.readFileToString(new File("src/test/resources/SarifParserTest/" + fileName));
   }
 
   @Test
-  public void should_not_fail_ony_empty_report() {
+  public void should_not_fail_ony_empty_report() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1_empty_issues.json"));
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1_empty_no_issues.json"));
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_no_results.json"));
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_no_runLogs.json"));
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_results.json"));
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4_empty_runLogs.json"));
+    new SarifParser01And04(getContents("v0_1_empty_issues.json")).parse(callback);
+    new SarifParser01And04(getContents("v0_1_empty_no_issues.json")).parse(callback);
+    new SarifParser01And04(getContents("v0_4_empty_no_results.json")).parse(callback);
+    new SarifParser01And04(getContents("v0_4_empty_no_runLogs.json")).parse(callback);
+    new SarifParser01And04(getContents("v0_4_empty_results.json")).parse(callback);
+    new SarifParser01And04(getContents("v0_4_empty_runLogs.json")).parse(callback);
     verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
   }
 
   // VS 2015 Update 1
   @Test
-  public void sarif_version_0_1() {
+  public void sarif_version_0_1() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_1.json"));
+    new SarifParser01And04(getContents("v0_1.json")).parse(callback);
 
     InOrder inOrder = inOrder(callback);
 
@@ -75,9 +69,9 @@ public class SarifParserTest {
 
   // VS 2015 Update 2
   @Test
-  public void sarif_version_0_4() {
+  public void sarif_version_0_4() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser(callback).parse(new File("src/test/resources/SarifParserTest/v0_4.json"));
+    new SarifParser01And04(getContents("v0_4.json")).parse(callback);
 
     InOrder inOrder = inOrder(callback);
 

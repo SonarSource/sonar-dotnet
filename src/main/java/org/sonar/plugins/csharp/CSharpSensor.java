@@ -67,6 +67,9 @@ import org.sonar.api.rules.RuleParam;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
+import org.sonar.plugins.csharp.sarif.SarifParser;
+import org.sonar.plugins.csharp.sarif.SarifParserCallback;
+import org.sonar.plugins.csharp.sarif.SarifParserFactory;
 
 public class CSharpSensor implements Sensor {
 
@@ -107,7 +110,7 @@ public class CSharpSensor implements Sensor {
     importResults(project, context);
 
     if (hasRoslynReportPath) {
-      importRoslynReport(roslynReportPath, perspectives.as(Issuable.class, (Resource)project));
+      importRoslynReport(roslynReportPath, perspectives.as(Issuable.class, (Resource) project));
     }
   }
 
@@ -120,7 +123,8 @@ public class CSharpSensor implements Sensor {
 
       ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ruleProfile.getActiveRules());
       if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
-        throw new IllegalArgumentException("Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
+        throw new IllegalArgumentException(
+          "Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
       }
     }
 
@@ -230,7 +234,7 @@ public class CSharpSensor implements Sensor {
   private void importRoslynReport(String reportPath, final Issuable projectIssuable) {
     ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ruleProfile.getActiveRules());
     final Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
-    for (ActiveRule activeRoslynRule: activeRoslynRulesByPartialRepoKey.values()) {
+    for (ActiveRule activeRoslynRule : activeRoslynRulesByPartialRepoKey.values()) {
       String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRule.getRuleKey(), activeRoslynRule.getRepositoryKey());
       if (previousRepositoryKey != null) {
         throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRule.getRuleKey() +
@@ -239,7 +243,7 @@ public class CSharpSensor implements Sensor {
       }
     }
 
-    new SarifParser(new SarifParserCallback() {
+    SarifParserCallback callback = new SarifParserCallback() {
 
       @Override
       public void onProjectIssue(String ruleId, String message) {
@@ -278,7 +282,10 @@ public class CSharpSensor implements Sensor {
         issuable.addIssue(builder.build());
       }
 
-    }).parse(new File(reportPath));
+    };
+
+    SarifParser parser = SarifParserFactory.create(new File(reportPath));
+    parser.parse(callback);
   }
 
   private static class AnalysisResultImporter {
