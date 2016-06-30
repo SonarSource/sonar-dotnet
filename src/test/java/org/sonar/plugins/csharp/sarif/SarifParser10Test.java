@@ -65,6 +65,18 @@ public class SarifParser10Test {
   }
 
   @Test
+  public void sarif_path_escaping() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(getContents("v1_0_escaping.json")).parse(callback);
+
+    InOrder inOrder = inOrder(callback);
+
+    inOrder.verify(callback).onIssue("S107", "C:\\git\\Temp Folder SomeRandom!@#$%^&()\\csharp\\ConsoleApplication1\\Program.cs",
+      "Method has 3 parameters, which is greater than the 2 authorized.", 52);
+    verify(callback, Mockito.times(1)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+  }
+
+  @Test
   public void dont_fail_on_empty_report() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(getContents("v1_0_empty.json")).parse(callback);

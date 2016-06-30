@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.csharp.sarif;
 
+import java.io.File;
+import java.net.URI;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -104,7 +107,7 @@ public class SarifParser10 implements SarifParser {
       return uri;
     }
 
-    return uri.substring(FILE_PROTOCOL.length()).replace('/', '\\');
+    return new File(URI.create(uri)).getAbsolutePath().toString();
   }
 
 }

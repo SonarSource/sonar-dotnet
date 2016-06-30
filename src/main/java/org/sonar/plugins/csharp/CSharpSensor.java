@@ -262,16 +262,19 @@ public class CSharpSensor implements Sensor {
       public void onIssue(String ruleId, String absolutePath, String message, int line) {
         String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
         if (repositoryKey == null) {
+          LOG.debug("No repository key for issue with rule ID: " + ruleId);
           return;
         }
 
         InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(absolutePath));
         if (inputFile == null) {
+          LOG.debug("File not indexed: " + absolutePath);
           return;
         }
 
         Issuable issuable = perspectives.as(Issuable.class, inputFile);
         if (issuable == null) {
+          LOG.debug("No issuable for file: " + absolutePath);
           return;
         }
 
