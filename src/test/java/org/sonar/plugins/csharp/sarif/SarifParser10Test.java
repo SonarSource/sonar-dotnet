@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
@@ -42,11 +43,12 @@ public class SarifParser10Test {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(getContents("v1_0.json")).parse(callback);
 
-    InOrder inOrder = inOrder(callback);
-
-    inOrder.verify(callback).onIssue("S1234", "C:\\Foo.cs", "One issue per line", 1);
-    inOrder.verify(callback).onIssue("S1234", "C:\\Bar.cs", "One issue per line", 2);
-    verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    if (SystemUtils.IS_OS_WINDOWS) {
+      InOrder inOrder = inOrder(callback);
+      inOrder.verify(callback).onIssue("S1234", "C:\\Foo.cs", "One issue per line", 1);
+      inOrder.verify(callback).onIssue("S1234", "C:\\Bar.cs", "One issue per line", 2);
+      verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    }
   }
 
   @Test
@@ -54,14 +56,15 @@ public class SarifParser10Test {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(getContents("v1_0_another.json")).parse(callback);
 
-    InOrder inOrder = inOrder(callback);
+    if (SystemUtils.IS_OS_WINDOWS) {
+      InOrder inOrder = inOrder(callback);
+      inOrder.verify(callback).onIssue("S1186", "C:\\Program.cs",
+        "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation.", 26);
+      inOrder.verify(callback).onIssue("S1172", "C:\\Program.cs", "Remove this unused method parameter \"args\".", 26);
+      inOrder.verify(callback).onIssue("S1118", "C:\\Program.cs", "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.", 9);
 
-    inOrder.verify(callback).onIssue("S1186", "C:\\Program.cs",
-      "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation.", 26);
-    inOrder.verify(callback).onIssue("S1172", "C:\\Program.cs", "Remove this unused method parameter \"args\".", 26);
-    inOrder.verify(callback).onIssue("S1118", "C:\\Program.cs", "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.", 9);
-
-    verify(callback, Mockito.times(3)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+      verify(callback, Mockito.times(3)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    }
   }
 
   @Test
@@ -69,11 +72,12 @@ public class SarifParser10Test {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(getContents("v1_0_escaping.json")).parse(callback);
 
-    InOrder inOrder = inOrder(callback);
-
-    inOrder.verify(callback).onIssue("S107", "C:\\git\\Temp Folder SomeRandom!@#$%^&()\\csharp\\ConsoleApplication1\\Program.cs",
-      "Method has 3 parameters, which is greater than the 2 authorized.", 52);
-    verify(callback, Mockito.times(1)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    if (SystemUtils.IS_OS_WINDOWS) {
+      InOrder inOrder = inOrder(callback);
+      inOrder.verify(callback).onIssue("S107", "C:\\git\\Temp Folder SomeRandom!@#$%^&()\\csharp\\ConsoleApplication1\\Program.cs",
+        "Method has 3 parameters, which is greater than the 2 authorized.", 52);
+      verify(callback, Mockito.times(1)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    }
   }
 
   @Test
