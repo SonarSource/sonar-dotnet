@@ -49,7 +49,6 @@ public class SarifParserFactory {
         case "0.4":
         case "0.1":
           return new SarifParser01And04(contents);
-        case "1.0.0":
         case "1.0":
         default:
           return new SarifParser10(contents);

@@ -24,10 +24,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class SarifParser01And04 implements SarifParser {
+class SarifParser01And04 implements SarifParser {
 
   private static final String FILE_PROTOCOL = "file:///";
-  private String contents;
+  private final String contents;
 
   SarifParser01And04(String contents) {
     this.contents = contents;
@@ -38,7 +38,7 @@ public class SarifParser01And04 implements SarifParser {
     JsonParser parser = new JsonParser();
     JsonObject root = parser.parse(contents).getAsJsonObject();
     if (root.has("runLogs")) {
-      JsonElement runLogs = parser.parse(contents).getAsJsonObject().get("runLogs");
+      JsonElement runLogs = root.get("runLogs");
       for (JsonElement runLogElement : runLogs.getAsJsonArray()) {
         JsonObject runLog = runLogElement.getAsJsonObject();
         JsonArray results = runLog.getAsJsonArray("results");
@@ -52,14 +52,14 @@ public class SarifParser01And04 implements SarifParser {
     }
   }
 
-  private static void handleIssues(JsonArray issues, boolean linesOffByOne, SarifParserCallback callback) {
+  private static void handleIssues(JsonArray issues, boolean offsetStartAtZero, SarifParserCallback callback) {
     for (JsonElement issueElement : issues) {
       JsonObject issue = issueElement.getAsJsonObject();
-      handleIssue(issue, linesOffByOne, callback);
+      handleIssue(issue, offsetStartAtZero, callback);
     }
   }
 
-  private static void handleIssue(JsonObject issue, boolean linesOffByOne, SarifParserCallback callback) {
+  private static void handleIssue(JsonObject issue, boolean offsetStartAtZero, SarifParserCallback callback) {
     if (isSuppressed(issue)) {
       return;
     }
@@ -80,7 +80,7 @@ public class SarifParser01And04 implements SarifParser {
 
           JsonObject region = analysisTarget.get("region").getAsJsonObject();
           int startLine = region.get("startLine").getAsInt();
-          int line = linesOffByOne ? (startLine + 1) : startLine;
+          int line = offsetStartAtZero ? (startLine + 1) : startLine;
 
           callback.onIssue(ruleId, absolutePath, message, line);
         }

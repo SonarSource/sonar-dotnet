@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp.sarif;
 
+@FunctionalInterface
 public interface SarifParser {
   void parse(SarifParserCallback callback);
 }

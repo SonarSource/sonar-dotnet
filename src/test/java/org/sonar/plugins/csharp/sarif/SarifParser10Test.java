@@ -19,9 +19,11 @@
  */
 package org.sonar.plugins.csharp.sarif;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +50,19 @@ public class SarifParser10Test {
       inOrder.verify(callback).onIssue("S1234", "C:\\Foo.cs", "One issue per line", 1);
       inOrder.verify(callback).onIssue("S1234", "C:\\Bar.cs", "One issue per line", 2);
       verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
+    }
+  }
+  
+  @Test
+  public void sarif_version_1_0_no_location() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(getContents("v1_0_no_location.json")).parse(callback);
+
+    if (SystemUtils.IS_OS_WINDOWS) {
+      InOrder inOrder = inOrder(callback);
+      inOrder.verify(callback).onProjectIssue("S1234", "One issue per line");
+      verify(callback, Mockito.times(1)).onProjectIssue(anyString(), anyString());
+      verifyNoMoreInteractions(callback);
     }
   }
 

@@ -107,7 +107,7 @@ public class SarifParser10 implements SarifParser {
       return uri;
     }
 
-    return new File(URI.create(uri)).getAbsolutePath().toString();
+    return new File(URI.create(uri)).getAbsolutePath();
   }
 
 }

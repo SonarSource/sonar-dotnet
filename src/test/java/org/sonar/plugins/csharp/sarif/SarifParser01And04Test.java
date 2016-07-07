@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp.sarif;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -35,7 +36,7 @@ import static org.mockito.Mockito.verify;
 
 public class SarifParser01And04Test {
   private String getContents(String fileName) throws IOException {
-    return FileUtils.readFileToString(new File("src/test/resources/SarifParserTest/" + fileName));
+    return FileUtils.readFileToString(new File("src/test/resources/SarifParserTest/" + fileName), StandardCharsets.UTF_8);
   }
 
   @Test
