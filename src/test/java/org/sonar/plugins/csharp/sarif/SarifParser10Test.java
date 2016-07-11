@@ -52,11 +52,24 @@ public class SarifParser10Test {
       verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.anyString(), Mockito.anyString(), Mockito.anyInt());
     }
   }
-  
+
   @Test
   public void sarif_version_1_0_no_location() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(getContents("v1_0_no_location.json")).parse(callback);
+
+    if (SystemUtils.IS_OS_WINDOWS) {
+      InOrder inOrder = inOrder(callback);
+      inOrder.verify(callback).onProjectIssue("S1234", "One issue per line");
+      verify(callback, Mockito.times(1)).onProjectIssue(anyString(), anyString());
+      verifyNoMoreInteractions(callback);
+    }
+  }
+
+  @Test
+  public void sarif_version_1_0_empty_location() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(getContents("v1_0_empty_location.json")).parse(callback);
 
     if (SystemUtils.IS_OS_WINDOWS) {
       InOrder inOrder = inOrder(callback);

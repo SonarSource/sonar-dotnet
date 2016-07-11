@@ -27,6 +27,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * Parser for SARIF report v1.0 (introduced in VS 2015 update 3)
+ */
 public class SarifParser10 implements SarifParser {
   private static final String FILE_PROTOCOL = "file:///";
   private String contents;
@@ -41,6 +44,9 @@ public class SarifParser10 implements SarifParser {
     JsonObject root = parser.parse(contents).getAsJsonObject();
     JsonElement runLogs = root.get("runs");
 
+    if (runLogs == null) {
+      return;
+    }
     for (JsonElement runElement : runLogs.getAsJsonArray()) {
       JsonObject run = runElement.getAsJsonObject();
       JsonArray results = run.getAsJsonArray("results");
@@ -66,17 +72,24 @@ public class SarifParser10 implements SarifParser {
     String message = resultObj.get("message").getAsString();
 
     boolean hasLocation = false;
-    for (JsonElement locationEl : resultObj.get("locations").getAsJsonArray()) {
-      JsonObject locationObj = locationEl.getAsJsonObject();
-      if (locationObj.has("resultFile")) {
-        JsonObject resultFileObj = locationObj.get("resultFile").getAsJsonObject();
-        hasLocation = true;
-        String uri = resultFileObj.get("uri").getAsString();
-        String absolutePath = uriToAbsolutePath(uri);
-        JsonObject region = resultFileObj.get("region").getAsJsonObject();
-        int startLine = region.get("startLine").getAsInt();
+    if (resultObj.has("locations")) {
+      for (JsonElement locationEl : resultObj.get("locations").getAsJsonArray()) {
+        JsonObject locationObj = locationEl.getAsJsonObject();
+        if (locationObj.has("resultFile")) {
+          JsonObject resultFileObj = locationObj.get("resultFile").getAsJsonObject();
 
-        callback.onIssue(ruleId, absolutePath, message, startLine);
+          if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
+            continue;
+          }
+
+          String uri = resultFileObj.get("uri").getAsString();
+          String absolutePath = uriToAbsolutePath(uri);
+          JsonObject region = resultFileObj.get("region").getAsJsonObject();
+          int startLine = region.get("startLine").getAsInt();
+
+          callback.onIssue(ruleId, absolutePath, message, startLine);
+          hasLocation = true;
+        }
       }
     }
 
