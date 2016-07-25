@@ -86,7 +86,6 @@ public class SarifParser10 implements SarifParser {
           String absolutePath = uriToAbsolutePath(uri);
           JsonObject region = resultFileObj.get("region").getAsJsonObject();
           int startLine = region.get("startLine").getAsInt();
-
           callback.onIssue(ruleId, absolutePath, message, startLine);
           hasLocation = true;
         }

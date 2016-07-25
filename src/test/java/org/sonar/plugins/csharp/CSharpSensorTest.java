@@ -100,11 +100,10 @@ public class CSharpSensorTest {
 
     DefaultFileSystem fs = new DefaultFileSystem();
 
-    CSharpSensor sensor =
-      new CSharpSensor(
-        mock(Settings.class), mock(RuleRunnerExtractor.class),
-        fs,
-        mock(FileLinesContextFactory.class), mock(NoSonarFilter.class), mock(RulesProfile.class), mock(ResourcePerspectives.class));
+    CSharpSensor sensor = new CSharpSensor(
+      mock(Settings.class), mock(RuleRunnerExtractor.class),
+      fs,
+      mock(FileLinesContextFactory.class), mock(NoSonarFilter.class), mock(RulesProfile.class), mock(ResourcePerspectives.class));
 
     assertThat(sensor.shouldExecuteOnProject(mock(Project.class))).isFalse();
 
@@ -195,11 +194,10 @@ public class CSharpSensorTest {
     when(rulesProfile.getActiveRules()).thenReturn(allEnabledRules);
 
     settings = mock(Settings.class);
-    sensor =
-      new CSharpSensor(
-        settings, extractor,
-        fs,
-        fileLinesContextFactory, noSonarFilter, rulesProfile, perspectives);
+    sensor = new CSharpSensor(
+      settings, extractor,
+      fs,
+      fileLinesContextFactory, noSonarFilter, rulesProfile, perspectives);
 
     project = mock(Project.class);
     context = mock(SensorContext.class);
@@ -279,7 +277,16 @@ public class CSharpSensorTest {
     assertThat(
       Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+          .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+  }
+
+  @Test
+  public void testShouldExecute() {
+    if (SystemUtils.IS_OS_WINDOWS) {
+      assertThat(sensor.shouldExecuteOnProject(project)).isTrue();
+    } else {
+      assertThat(sensor.shouldExecuteOnProject(project)).isFalse();
+    }
   }
 
   @Test
@@ -325,7 +332,7 @@ public class CSharpSensorTest {
     assertThat(
       Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+          .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
   @Test
@@ -353,7 +360,8 @@ public class CSharpSensorTest {
     enableCustomRoslynRules();
     when(settings.getString("sonar.cs.roslyn.reportFilePath")).thenReturn(null);
 
-    thrown.expectMessage("Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
+    thrown.expectMessage(
+      "Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
     sensor.analyse(project, context);
   }
 

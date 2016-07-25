@@ -107,7 +107,7 @@ public class CSharpSensor implements Sensor {
     boolean hasRoslynReportPath = roslynReportPath != null;
 
     analyze(!hasRoslynReportPath);
-    importResults(project, context);
+    importResults(context);
 
     if (hasRoslynReportPath) {
       importRoslynReport(roslynReportPath, perspectives.as(Issuable.class, (Resource) project));
@@ -225,7 +225,7 @@ public class CSharpSensor implements Sensor {
     return ImmutableMap.copyOf(builder);
   }
 
-  private void importResults(Project project, SensorContext context) {
+  private void importResults(SensorContext context) {
     File analysisOutput = toolOutput();
 
     new AnalysisResultImporter(context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
@@ -243,52 +243,59 @@ public class CSharpSensor implements Sensor {
       }
     }
 
-    SarifParserCallback callback = new SarifParserCallback() {
-
-      @Override
-      public void onProjectIssue(String ruleId, String message) {
-        String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
-        if (repositoryKey == null) {
-          return;
-        }
-
-        IssueBuilder builder = projectIssuable.newIssueBuilder();
-        builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
-        builder.message(message);
-        projectIssuable.addIssue(builder.build());
-      }
-
-      @Override
-      public void onIssue(String ruleId, String absolutePath, String message, int line) {
-        String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
-        if (repositoryKey == null) {
-          LOG.debug("No repository key for issue with rule ID: " + ruleId);
-          return;
-        }
-
-        InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(absolutePath));
-        if (inputFile == null) {
-          LOG.debug("File not indexed: " + absolutePath);
-          return;
-        }
-
-        Issuable issuable = perspectives.as(Issuable.class, inputFile);
-        if (issuable == null) {
-          LOG.debug("No issuable for file: " + absolutePath);
-          return;
-        }
-
-        IssueBuilder builder = issuable.newIssueBuilder();
-        builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
-        builder.line(line);
-        builder.message(message);
-        issuable.addIssue(builder.build());
-      }
-
-    };
-
+    SarifParserCallback callback = new ParserCallback(repositoryKeyByRoslynRuleKey, projectIssuable);
     SarifParser parser = SarifParserFactory.create(new File(reportPath));
     parser.parse(callback);
+  }
+
+  private class ParserCallback implements SarifParserCallback {
+    private final Map<String, String> repositoryKeyByRoslynRuleKey;
+    private final Issuable projectIssuable;
+
+    ParserCallback(Map<String, String> repositoryKeyByRoslynRuleKey, Issuable projectIssuable) {
+      this.repositoryKeyByRoslynRuleKey = repositoryKeyByRoslynRuleKey;
+      this.projectIssuable = projectIssuable;
+    }
+
+    @Override
+    public void onProjectIssue(String ruleId, String message) {
+      String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
+      if (repositoryKey == null) {
+        return;
+      }
+
+      IssueBuilder builder = projectIssuable.newIssueBuilder();
+      builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
+      builder.message(message);
+      projectIssuable.addIssue(builder.build());
+    }
+
+    @Override
+    public void onIssue(String ruleId, String absolutePath, String message, int line) {
+      String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
+      if (repositoryKey == null) {
+        LOG.debug("No repository key for issue with rule ID: " + ruleId);
+        return;
+      }
+
+      InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(absolutePath));
+      if (inputFile == null) {
+        LOG.debug("File not indexed: " + absolutePath);
+        return;
+      }
+
+      Issuable issuable = perspectives.as(Issuable.class, inputFile);
+      if (issuable == null) {
+        LOG.debug("No issuable for file: " + absolutePath);
+        return;
+      }
+
+      IssueBuilder builder = issuable.newIssueBuilder();
+      builder.ruleKey(RuleKey.of(repositoryKey, ruleId));
+      builder.line(line);
+      builder.message(message);
+      issuable.addIssue(builder.build());
+    }
   }
 
   private static class AnalysisResultImporter {
@@ -358,12 +365,10 @@ public class CSharpSensor implements Sensor {
             String path = stream.getElementText();
             inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(path));
           } else if ("Metrics".equals(tagName)) {
-            // TODO Better message
-            Preconditions.checkState(inputFile != null);
+            Preconditions.checkState(inputFile != null, "No file path for File Tag");
             handleMetricsTag(inputFile);
           } else if ("Issues".equals(tagName)) {
-            // TODO Better message
-            Preconditions.checkState(inputFile != null);
+            Preconditions.checkState(inputFile != null, "No file path for File Tag");
             handleIssuesTag(inputFile);
           }
         }
