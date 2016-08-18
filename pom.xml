@@ -149,8 +149,51 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+        <executions>
+          <execution>
+            <id>copy-plugin</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>SonarAnalyzer.CSharp</artifactId>
+                  <version>LATEST</version>     
+                  <type>nupkg</type>         
+                  <overWrite>true</overWrite>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>SonarLint.Descriptor.CSharp</artifactId>
+                  <version>LATEST</version>     
+                  <type>nupkg</type>         
+                  <overWrite>true</overWrite>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>SonarLint.Runner</artifactId>
+                  <version>LATEST</version>     
+                  <type>nupkg</type>         
+                  <overWrite>true</overWrite>
+                </artifactItem>                
+              </artifactItems>
+              <outputDirectory>src/main/resources/static</outputDirectory>
+              <overWriteReleases>true</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+  
 
   <profiles>
     <profile>
