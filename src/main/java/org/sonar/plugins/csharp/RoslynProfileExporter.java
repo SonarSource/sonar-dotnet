@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
@@ -26,13 +27,18 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Sets;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Writer;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import com.google.common.io.Resources;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
@@ -46,7 +52,6 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
-  private static final String SONARANALYZER_NUGET_VERSION = "1.13.0";
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
@@ -61,13 +66,20 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   public static List<PropertyDefinition> sonarLintRepositoryProperties() {
+    String sonarAnalyzerNugetVersion;
+    try {
+      sonarAnalyzerNugetVersion = IOUtils.toString(RoslynProfileExporter.class.getResourceAsStream("/static/version.txt"), Charsets.UTF_8);
+    } catch (IOException e) {
+      throw Throwables.propagate(e);
+    }
+
     return Arrays.asList(
       PropertyDefinition.builder(pluginKeyPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
         .defaultValue("csharp")
         .hidden()
         .build(),
       PropertyDefinition.builder(pluginVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_NUGET_VERSION)
+        .defaultValue(sonarAnalyzerNugetVersion)
         .hidden()
         .build(),
       PropertyDefinition.builder(staticResourceNamePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
@@ -87,7 +99,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_NUGET_VERSION)
+        .defaultValue(sonarAnalyzerNugetVersion)
         .hidden()
         .build());
   }
