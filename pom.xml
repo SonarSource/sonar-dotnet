@@ -153,11 +153,24 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>3.0.0</version>
         <executions>
           <execution>
             <id>clean-nuget-files</id>
             <phase>validate</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>src/main/resources/static/nuget</directory>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+          <execution>
+            <id>delete-nuget-folder</id>
+            <phase>generate-sources</phase>
             <goals>
               <goal>clean</goal>
             </goals>
@@ -175,7 +188,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
         <executions>
           <execution>
             <id>copy-plugin</id>
@@ -213,14 +225,6 @@
               <stripVersion>true</stripVersion>
             </configuration>
           </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <version>2.10</version>
-        <executions>
           <execution>
             <id>copy-plugin-with-version</id>
             <phase>initialize</phase>
@@ -260,6 +264,7 @@
                 <unzip src="src/main/resources/static/nuget/SonarAnalyzer.CSharp.nupkg" dest="src/main/resources/static/nuget/SonarAnalyzer.CSharp/" />
                 <unzip src="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp.nupkg" dest="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp/" />
                 <unzip src="src/main/resources/static/nuget/SonarLint.Runner.nupkg" dest="src/main/resources/static/nuget/SonarLint.Runner/" />
+                <!-- SQALE XML in sslr requires a resource to read from -->
                 <copy todir="src/main/resources/org/sonar/plugins/csharp">
                   <fileset dir="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp/xml">
                     <include name="*.xml"/>
@@ -304,27 +309,6 @@
               <regex>^.*SonarAnalyzer\.CSharp-(.*)-build.*$</regex>
               <replacement>$1</replacement>
               <failIfNoMatch>true</failIfNoMatch>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>delete-nuget-folder</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <tasks>
-                <delete dir="src/main/resources/static/nuget"/>
-              </tasks>
             </configuration>
           </execution>
         </executions>
