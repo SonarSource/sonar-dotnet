@@ -30,7 +30,7 @@ import org.sonar.api.config.PropertyDefinition;
 import java.util.List;
 import java.util.Set;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpUnitTestResultsProviderTest {
 
@@ -44,8 +44,8 @@ public class CSharpUnitTestResultsProviderTest {
       "sonar.cs.nunit.reportsPaths");
   }
 
-  private static Set<String> nonProperties(List extensions) {
-    ImmutableSet.Builder builder = ImmutableSet.builder();
+  private static Set<Object> nonProperties(List extensions) {
+    ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
     for (Object extension : extensions) {
       if (!(extension instanceof PropertyDefinition)) {
         builder.add(extension);

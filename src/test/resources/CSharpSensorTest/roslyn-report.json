@@ -14,10 +14,10 @@
             {
               "uri": "Foo&Bar.cs",
               "region": {
-                "startLine": 42,
-                "startColumn": 55,
-                "endLine": 43,
-                "endColumn": 57
+                "startLine": 18,
+                "startColumn": 9,
+                "endLine": 19,
+                "endColumn": 11
               }
             }
           ]
@@ -43,10 +43,7 @@
             {
               "uri": "Foo&Bar.cs",
               "region": {
-                "startLine": 0,
-                "startColumn": 0,
-                "endLine": 0,
-                "endColumn": 0
+                "startLine": 0
               }
             }
           ]
@@ -62,10 +59,10 @@
             {
               "uri": "Foo&Bar.cs",
               "region": {
-                "startLine": 13,
-                "startColumn": 41,
-                "endLine": 13,
-                "endColumn": 46
+                "startLine": 18,
+                "startColumn": 11,
+                "endLine": 18,
+                "endColumn": 16
               }
             }
           ]
@@ -81,10 +78,10 @@
             {
               "uri": "NonExisting.cs",
               "region": {
-                "startLine": 42,
-                "startColumn": 55,
-                "endLine": 43,
-                "endColumn": 57
+                "startLine": 18,
+                "startColumn": 15,
+                "endLine": 18,
+                "endColumn": 17
               }
             }
           ]
@@ -100,10 +97,7 @@
             {
               "uri": "Foo&Bar.cs",
               "region": {
-                "startLine": 92,
-                "startColumn": 0,
-                "endLine": 0,
-                "endColumn": 0
+                "startLine": 18
               }
             }
           ]

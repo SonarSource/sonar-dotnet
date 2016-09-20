@@ -35,8 +35,8 @@ public class CSharpFxCopProviderTest {
   @Test
   public void test() {
     assertThat(nonProperties(CSharpFxCopProvider.extensions())).containsOnly(
-      CSharpFxCopRulesDefinition.class.toString(),
-      CSharpFxCopSensor.class.toString());
+      CSharpFxCopRulesDefinition.class,
+      CSharpFxCopSensor.class);
     assertThat(propertyKeys(CSharpFxCopProvider.extensions())).containsOnly(
       "sonar.cs.fxcop.assembly",
       "sonar.cs.fxcop.timeoutMinutes",
@@ -46,8 +46,8 @@ public class CSharpFxCopProviderTest {
       "sonar.cs.fxcop.references");
   }
 
-  private static Set<String> nonProperties(List extensions) {
-    ImmutableSet.Builder builder = ImmutableSet.builder();
+  private static Set<Object> nonProperties(List extensions) {
+    ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
     for (Object extension : extensions) {
       if (!(extension instanceof PropertyDefinition)) {
         builder.add(extension);

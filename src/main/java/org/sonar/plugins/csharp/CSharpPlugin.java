@@ -19,12 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
-import java.util.List;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
-import org.sonar.api.SonarPlugin;
+import org.sonar.api.Plugin;
 
 @Properties({
   @Property(
@@ -45,7 +43,7 @@ import org.sonar.api.SonarPlugin;
     project = true, global = true,
     type = PropertyType.BOOLEAN)
 })
-public class CSharpPlugin extends SonarPlugin {
+public class CSharpPlugin implements Plugin {
 
   public static final String LANGUAGE_KEY = "cs";
   public static final String LANGUAGE_NAME = "C#";
@@ -61,10 +59,8 @@ public class CSharpPlugin extends SonarPlugin {
   public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
 
   @Override
-  public List getExtensions() {
-    ImmutableList.Builder builder = ImmutableList.builder();
-
-    builder.add(
+  public void define(Context context) {
+    context.addExtensions(
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
@@ -78,13 +74,10 @@ public class CSharpPlugin extends SonarPlugin {
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class);
 
-    builder.addAll(CSharpFxCopProvider.extensions());
-    builder.addAll(CSharpCodeCoverageProvider.extensions());
-    builder.addAll(CSharpUnitTestResultsProvider.extensions());
-    builder.addAll(CSharpMsBuildIntegrationProvider.extensions());
-    builder.addAll(RoslynProfileExporter.sonarLintRepositoryProperties());
-
-    return builder.build();
+    context.addExtensions(CSharpFxCopProvider.extensions());
+    context.addExtensions(CSharpCodeCoverageProvider.extensions());
+    context.addExtensions(CSharpUnitTestResultsProvider.extensions());
+    context.addExtensions(CSharpMsBuildIntegrationProvider.extensions());
+    context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());
   }
-
 }

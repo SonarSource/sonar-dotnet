@@ -23,31 +23,35 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Writer;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-import com.google.common.io.Resources;
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.rules.ActiveRuleParam;
+import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
+
+import static java.util.stream.Collectors.toList;
 
 public class RoslynProfileExporter extends ProfileExporter {
 
@@ -106,7 +110,10 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
-    ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules());
+    ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
+      .stream()
+      .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
+      .collect(toList()));
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
     appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
@@ -121,12 +128,12 @@ public class RoslynProfileExporter extends ProfileExporter {
 
       Set<String> activeRules = Sets.newHashSet();
       String repositoryKey = null;
-      for (ActiveRule activeRule : activeRoslynRulesByPartialRepoKey.get(partialRepoKey)) {
+      for (RuleKey activeRuleKey : activeRoslynRulesByPartialRepoKey.get(partialRepoKey)) {
         if (repositoryKey == null) {
-          repositoryKey = activeRule.getRepositoryKey();
+          repositoryKey = activeRuleKey.repository();
         }
 
-        String ruleKey = activeRule.getRuleKey();
+        String ruleKey = activeRuleKey.rule();
         activeRules.add(ruleKey);
         appendLine(writer, "        <Rule Id=\"" + escapeXml(ruleKey) + "\" Action=\"Warning\" />");
       }
@@ -144,8 +151,9 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(writer, "    <AdditionalFiles>");
 
-    String sonarlintParameters = CSharpSensor.analysisSettings(false, false, true, rulesProfile, Collections.<File>emptyList());
-    String base64 = new String(Base64.encodeBase64(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+    String sonarlintParameters = analysisSettings(false, false, true, rulesProfile);
+    java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+    String base64 = new String(encoder.encode(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
     appendLine(writer, "      <AdditionalFile FileName=\"SonarLint.xml\">" + base64 + "</AdditionalFile>");
     appendLine(writer, "    </AdditionalFiles>");
 
@@ -177,14 +185,78 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(writer, "</RoslynExportProfile>");
   }
 
-  public static ImmutableMultimap<String, ActiveRule> activeRoslynRulesByPartialRepoKey(List<ActiveRule> activeRules) {
-    ImmutableMultimap.Builder<String, ActiveRule> builder = ImmutableMultimap.builder();
+  private static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, RulesProfile ruleProfile) {
+    StringBuilder sb = new StringBuilder();
 
-    for (ActiveRule activeRule : activeRules) {
-      if (activeRule.getRepositoryKey().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
-        String pluginKey = activeRule.getRepositoryKey().substring(ROSLYN_REPOSITORY_PREFIX.length());
+    appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    appendLine(sb, "<AnalysisInput>");
+
+    if (includeSettings) {
+      appendLine(sb, "  <Settings>");
+      appendLine(sb, "    <Setting>");
+      appendLine(sb, "      <Key>" + CSharpPlugin.IGNORE_HEADER_COMMENTS + "</Key>");
+      appendLine(sb, "      <Value>" + (ignoreHeaderComments ? "true" : "false") + "</Value>");
+      appendLine(sb, "    </Setting>");
+      appendLine(sb, "  </Settings>");
+    }
+
+    appendLine(sb, "  <Rules>");
+    if (includeRules) {
+      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
+        appendLine(sb, "    <Rule>");
+        appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
+        Map<String, String> parameters = effectiveParameters(activeRule);
+        if (!parameters.isEmpty()) {
+          appendLine(sb, "      <Parameters>");
+          for (Map.Entry<String, String> parameter : parameters.entrySet()) {
+            appendLine(sb, "        <Parameter>");
+            appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
+            appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
+            appendLine(sb, "        </Parameter>");
+          }
+          appendLine(sb, "      </Parameters>");
+        }
+        appendLine(sb, "    </Rule>");
+      }
+    }
+    appendLine(sb, "  </Rules>");
+
+    appendLine(sb, "  <Files>");
+    appendLine(sb, "  </Files>");
+
+    appendLine(sb, "</AnalysisInput>");
+
+    return sb.toString();
+  }
+
+  private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
+    Map<String, String> builder = Maps.newHashMap();
+
+    if (activeRule.getRule().getTemplate() != null) {
+      builder.put("RuleKey", activeRule.getRuleKey());
+    }
+
+    for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
+      builder.put(param.getKey(), param.getValue());
+    }
+
+    for (RuleParam param : activeRule.getRule().getParams()) {
+      if (!builder.containsKey(param.getKey())) {
+        builder.put(param.getKey(), param.getDefaultValue());
+      }
+    }
+
+    return ImmutableMap.copyOf(builder);
+  }
+
+  public static ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
+    ImmutableMultimap.Builder<String, RuleKey> builder = ImmutableMultimap.builder();
+
+    for (RuleKey activeRule : activeRules) {
+      if (activeRule.repository().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
+        String pluginKey = activeRule.repository().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);
-      } else if ("csharpsquid".equals(activeRule.getRepositoryKey())) {
+      } else if (CSharpPlugin.REPOSITORY_KEY.equals(activeRule.repository())) {
         builder.put(SONARANALYZER_PARTIAL_REPO_KEY, activeRule);
       }
     }
@@ -252,4 +324,8 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
   }
 
+  private static void appendLine(StringBuilder sb, String line) {
+    sb.append(line);
+    sb.append("\r\n");
+  }
 }

@@ -22,15 +22,21 @@ package org.sonar.plugins.csharp;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.junit.Test;
+import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.utils.Version;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class CSharpPluginTest {
 
   @Test
   public void getExtensions() {
-    List extensions = new CSharpPlugin().getExtensions();
+    Plugin.Context context = new Plugin.Context(mock(Version.class));
+    new CSharpPlugin().define(context);
+
+    List extensions = context.getExtensions();
 
     Class<?>[] expectedExtensions = new Class<?>[] {
       CSharp.class,

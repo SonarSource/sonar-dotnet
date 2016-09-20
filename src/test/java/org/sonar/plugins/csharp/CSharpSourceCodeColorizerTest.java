@@ -38,7 +38,6 @@ public class CSharpSourceCodeColorizerTest {
 
     String html = new CodeColorizer(cobolColorizerFormat.getTokenizers()).toHtml(cSharpFile, null);
 
-    assertThat(html).contains("<style");
     assertThat(html).contains("<table class=\"code\"");
     assertThat(html).contains("</html>");
 
