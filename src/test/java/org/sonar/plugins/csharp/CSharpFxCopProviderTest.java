@@ -28,15 +28,15 @@ import org.sonar.plugins.csharp.CSharpFxCopProvider.CSharpFxCopSensor;
 import java.util.List;
 import java.util.Set;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpFxCopProviderTest {
 
   @Test
   public void test() {
     assertThat(nonProperties(CSharpFxCopProvider.extensions())).containsOnly(
-      CSharpFxCopRulesDefinition.class,
-      CSharpFxCopSensor.class);
+      CSharpFxCopRulesDefinition.class.toString(),
+      CSharpFxCopSensor.class.toString());
     assertThat(propertyKeys(CSharpFxCopProvider.extensions())).containsOnly(
       "sonar.cs.fxcop.assembly",
       "sonar.cs.fxcop.timeoutMinutes",

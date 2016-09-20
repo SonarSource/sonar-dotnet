@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp.sarif;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -29,6 +27,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SarifParserFactoryTest {
   @Rule

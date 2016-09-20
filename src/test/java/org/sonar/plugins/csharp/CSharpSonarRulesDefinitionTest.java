@@ -24,7 +24,7 @@ import org.sonar.api.server.rule.RulesDefinition.Context;
 
 import java.util.Set;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSonarRulesDefinitionTest {
 

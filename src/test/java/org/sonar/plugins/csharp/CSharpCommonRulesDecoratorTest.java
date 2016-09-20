@@ -24,7 +24,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.rule.CheckFactory;
 import org.sonar.api.component.ResourcePerspectives;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class CSharpCommonRulesDecoratorTest {

@@ -24,7 +24,7 @@ import org.sonar.squidbridge.commonrules.api.CommonRulesEngine;
 import org.sonar.squidbridge.commonrules.api.CommonRulesRepository;
 import org.sonar.squidbridge.commonrules.internal.CommonRulesConstants;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpCommonRulesEngineTest {
 
