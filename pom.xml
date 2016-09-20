@@ -48,7 +48,7 @@
   </issueManagement>
 
   <properties>
-    <sonar.version>4.5.2</sonar.version>
+    <sonar.version>5.6</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
@@ -73,6 +73,12 @@
       <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
       <artifactId>sslr-squid-bridge</artifactId>
       <version>2.6</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>sonar-plugin-api</artifactId>
+          <groupId>org.codehaus.sonar</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -81,20 +87,14 @@
     </dependency>
 
     <dependency>
-      <groupId>org.codehaus.sonar</groupId>
+      <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.sonar</groupId>
+      <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-duplications</artifactId>
-      <version>${sonar.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.sonar</groupId>
-      <artifactId>sonar-deprecated</artifactId>
       <version>${sonar.version}</version>
       <scope>provided</scope>
     </dependency>
