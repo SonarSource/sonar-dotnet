@@ -1,4 +1,4 @@
 org/sonar/plugins/csharp/*.xml
 static/version.txt
 static/SonarAnalyzer.zip
-SonarLint.Runner.zip
+SonarAnalyzer.Scanner.zip

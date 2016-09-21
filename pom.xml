@@ -53,6 +53,8 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
+    <sonarAnalyzer.version>1.19.0-build00932</sonarAnalyzer.version>
+    <sonarAnalyzer.workDirectory>src/main/resources/static/nuget</sonarAnalyzer.workDirectory>
   </properties>
 
   <dependencies>
@@ -155,7 +157,7 @@
         <artifactId>maven-clean-plugin</artifactId>
         <executions>
           <execution>
-            <id>clean-nuget-files</id>
+            <id>delete-nuget-folder-content-pre</id>
             <phase>validate</phase>
             <goals>
               <goal>clean</goal>
@@ -163,13 +165,13 @@
             <configuration>
               <filesets>
                 <fileset>
-                  <directory>src/main/resources/static/nuget</directory>
+                  <directory>${sonarAnalyzer.workDirectory}</directory>
                 </fileset>
               </filesets>
             </configuration>
           </execution>
           <execution>
-            <id>delete-nuget-folder</id>
+            <id>delete-nuget-folder-content-post</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>clean</goal>
@@ -177,7 +179,7 @@
             <configuration>
               <filesets>
                 <fileset>
-                  <directory>src/main/resources/static/nuget</directory>
+                  <directory>${sonarAnalyzer.workDirectory}</directory>
                 </fileset>
               </filesets>
             </configuration>
@@ -200,51 +202,29 @@
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
                   <artifactId>SonarAnalyzer.CSharp</artifactId>
-                  <version>LATEST</version>
+                  <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarLint.Descriptor.CSharp</artifactId>
-                  <version>LATEST</version>
+                  <artifactId>SonarAnalyzer.RuleDocGenerator.CSharp</artifactId>
+                  <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarLint.Runner</artifactId>
-                  <version>LATEST</version>
+                  <artifactId>SonarAnalyzer.Scanner</artifactId>
+                  <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>src/main/resources/static/nuget</outputDirectory>
+              <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
               <overWriteReleases>true</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
               <stripVersion>true</stripVersion>
-            </configuration>
-          </execution>
-          <execution>
-            <id>copy-plugin-with-version</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarAnalyzer.CSharp</artifactId>
-                  <version>LATEST</version>
-                  <type>nupkg</type>
-                  <overWrite>true</overWrite>
-                </artifactItem>
-              </artifactItems>
-              <outputDirectory>src/main/resources/static/nuget</outputDirectory>
-              <overWriteReleases>true</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
-              <stripVersion>false</stripVersion>
             </configuration>
           </execution>
         </executions>
@@ -257,31 +237,30 @@
         <executions>
           <execution>
             <id>unzip-nuget</id>
-            <phase>initialize</phase>
+            <phase>validate</phase>
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <tasks>
-                <unzip src="src/main/resources/static/nuget/SonarAnalyzer.CSharp.nupkg" dest="src/main/resources/static/nuget/SonarAnalyzer.CSharp/" />
-                <unzip src="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp.nupkg" dest="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp/" />
-                <unzip src="src/main/resources/static/nuget/SonarLint.Runner.nupkg" dest="src/main/resources/static/nuget/SonarLint.Runner/" />
+                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/" />
+                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
+                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
                 <!-- SQALE XML in sslr requires a resource to read from -->
                 <copy todir="src/main/resources/org/sonar/plugins/csharp">
-                  <fileset dir="src/main/resources/static/nuget/SonarLint.Descriptor.CSharp/xml">
+                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
                     <include name="*.xml"/>
                   </fileset>
                 </copy>
-                <zip destfile="src/main/resources/static/SonarAnalyzer.zip"
-                     basedir="src/main/resources/static/nuget/SonarAnalyzer.CSharp/analyzers"/>
-                <zip destfile="src/main/resources/SonarLint.Runner.zip"
-                     basedir="src/main/resources/static/nuget/SonarLint.Runner/assembly"/>
-
-                <path id="path.with.version">
-                  <fileset dir="src/main/resources/static/nuget/">
-                    <include name="SonarAnalyzer.CSharp-*-build*.nupkg"/>
+                <copy todir="src/main/proto">
+                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
+                    <include name="*.proto"/>
                   </fileset>
-                </path>
-                <property name="name.with.version" refid="path.with.version"/>
-                <echo message="name.with.version: ${name.with.version}"/>
+                </copy>
+                <zip destfile="src/main/resources/static/SonarAnalyzer.zip"
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/analyzers"/>
+                <zip destfile="src/main/resources/SonarAnalyzer.Scanner.zip"
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
+
+                <echo file="src/main/resources/static/version.txt" message="${sonarAnalyzer.version}" />
               </tasks>
 
             </configuration>
@@ -291,49 +270,6 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>regex-property</id>
-            <goals>
-              <goal>regex-property</goal>
-            </goals>
-            <phase>initialize</phase>
-            <configuration>
-              <name>sonaranalyzer.version</name>
-              <value>${name.with.version}</value>
-              <regex>^.*SonarAnalyzer\.CSharp-(.*)-build.*$</regex>
-              <replacement>$1</replacement>
-              <failIfNoMatch>true</failIfNoMatch>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>version-output</id>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <phase>generate-sources</phase>
-            <configuration>
-              <tasks>
-                <echo file="src/main/resources/static/version.txt" message="${sonaranalyzer.version}" />
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
     </plugins>
   </build>
 

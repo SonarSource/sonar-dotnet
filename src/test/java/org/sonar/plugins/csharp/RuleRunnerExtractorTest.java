@@ -41,8 +41,7 @@ public class RuleRunnerExtractorTest {
 
     RuleRunnerExtractor extractor = new RuleRunnerExtractor(reactor);
 
-    assertThat(extractor.executableFile()).isEqualTo(new File(new File(workDir, "SonarLint.Runner"), "SonarLint.Runner.exe"));
-    assertThat(extractor.executableFile()).isEqualTo(new File(new File(workDir, "SonarLint.Runner"), "SonarLint.Runner.exe"));
+    assertThat(extractor.executableFile()).isEqualTo(new File(new File(workDir, "SonarAnalyzer.Scanner"), "SonarAnalyzer.Scanner.exe"));
   }
 
 }
