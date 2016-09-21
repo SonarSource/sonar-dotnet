@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rule.Severity;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.ActiveRuleParam;
@@ -37,9 +38,10 @@ import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.RoslynProfileExporter.SONARANALYZER_CSHARP_NAME;
 
 public class RoslynProfileExporterTest {
 
@@ -97,20 +99,15 @@ public class RoslynProfileExporterTest {
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
     when(settings.getDefaultValue("sonaranalyzer-cs.staticResourceName")).thenReturn("SonarAnalyzer.zip");
-    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn("SonarAnalyzer.CSharp");
+    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn(SONARANALYZER_CSHARP_NAME);
     when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageVersion")).thenReturn("1.10.0");
 
-    RulesDefinition sonarLintRepo = new RulesDefinition() {
-
-      @Override
-      public void define(Context context) {
-        NewRepository repo = context.createRepository("csharpsquid", "cs");
-        repo.createRule("InactiveRule").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
-        repo.done();
-      }
-
+    RulesDefinition sonarLintRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("csharpsquid", "cs");
+      repo.createRule("InactiveRule").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
+      repo.done();
     };
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] { sonarLintRepo });
@@ -155,9 +152,9 @@ public class RoslynProfileExporterTest {
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
     when(settings.getDefaultValue("sonaranalyzer-cs.staticResourceName")).thenReturn("SonarAnalyzer.zip");
-    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn("SonarAnalyzer.CSharp");
+    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn(SONARANALYZER_CSHARP_NAME);
     when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageVersion")).thenReturn("1.10.0");
 
     when(settings.getDefaultValue("custom.pluginKey")).thenReturn("customPluginKey");
@@ -168,50 +165,30 @@ public class RoslynProfileExporterTest {
     when(settings.getDefaultValue("custom.nuget.packageId")).thenReturn("custom-roslyn-package");
     when(settings.getDefaultValue("custom.nuget.packageVersion")).thenReturn("custom-rolsyn-version");
 
-    RulesDefinition sonarLintRepo = new RulesDefinition() {
-
-      @Override
-      public void define(Context context) {
-        NewRepository repo = context.createRepository("csharpsquid", "cs");
-        repo.createRule("S1000").setName("S1000").setMarkdownDescription("S1000").setSeverity(Severity.MAJOR);
-        repo.createRule("SonarLintInactiveRule").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
-        repo.done();
-      }
-
+    RulesDefinition sonarLintRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("csharpsquid", "cs");
+      repo.createRule("S1000").setName("S1000").setMarkdownDescription("S1000").setSeverity(Severity.MAJOR);
+      repo.createRule("SonarLintInactiveRule").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
+      repo.done();
     };
 
-    RulesDefinition customRoslynRepo = new RulesDefinition() {
-
-      @Override
-      public void define(Context context) {
-        NewRepository repo = context.createRepository("roslyn.custom", "cs");
-        repo.createRule("CA1000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
-        repo.createRule("CustomRoslynInactiverule1").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
-        repo.done();
-      }
-
+    RulesDefinition customRoslynRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("roslyn.custom", "cs");
+      repo.createRule("CA1000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
+      repo.createRule("CustomRoslynInactiverule1").setName("InactiveRule").setMarkdownDescription("InactiveRule").setSeverity(Severity.MAJOR);
+      repo.done();
     };
 
-    RulesDefinition fxcopRepo = new RulesDefinition() {
-
-      @Override
-      public void define(Context context) {
-        NewRepository repo = context.createRepository("fxcop", "cs");
-        repo.createRule("CA2000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
-        repo.done();
-      }
-
+    RulesDefinition fxcopRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("fxcop", "cs");
+      repo.createRule("CA2000").setName("CA1000").setMarkdownDescription("CA1000").setSeverity(Severity.MAJOR);
+      repo.done();
     };
 
-    RulesDefinition stylecopRepo = new RulesDefinition() {
-
-      @Override
-      public void define(Context context) {
-        NewRepository repo = context.createRepository("stylecop", "cs");
-        repo.createRule("SC1000").setName("SC1000").setMarkdownDescription("SC1000").setSeverity(Severity.MAJOR);
-        repo.done();
-      }
-
+    RulesDefinition stylecopRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("stylecop", "cs");
+      repo.createRule("SC1000").setName("SC1000").setMarkdownDescription("SC1000").setSeverity(Severity.MAJOR);
+      repo.done();
     };
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] { sonarLintRepo, customRoslynRepo, fxcopRepo, stylecopRepo });
@@ -248,23 +225,23 @@ public class RoslynProfileExporterTest {
 
   @Test
   public void activeRoslynRulesByPluginKey() {
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.<ActiveRule>emptyList()).size()).isEqualTo(0);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.emptyList()).size()).isEqualTo(0);
 
-    ActiveRule randomActiveRuleKey = mock(ActiveRule.class);
-    when(randomActiveRuleKey.getRuleKey()).thenReturn("1");
-    when(randomActiveRuleKey.getRepositoryKey()).thenReturn("1");
+    RuleKey randomActiveRuleKey = mock(RuleKey.class);
+    when(randomActiveRuleKey.rule()).thenReturn("1");
+    when(randomActiveRuleKey.repository()).thenReturn("1");
     assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
 
-    ActiveRule sonarLintActiveRuleKey = mock(ActiveRule.class);
-    when(sonarLintActiveRuleKey.getRuleKey()).thenReturn("2");
-    when(sonarLintActiveRuleKey.getRepositoryKey()).thenReturn("csharpsquid");
-    ImmutableMultimap<String, ActiveRule> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(sonarLintActiveRuleKey));
+    RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
+    when(sonarLintActiveRuleKey.rule()).thenReturn("2");
+    when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
+    ImmutableMultimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(sonarLintActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
-    ActiveRule customRoslynActiveRuleKey = mock(ActiveRule.class);
-    when(customRoslynActiveRuleKey.getRuleKey()).thenReturn("3");
-    when(customRoslynActiveRuleKey.getRepositoryKey()).thenReturn("roslyn.foo");
+    RuleKey customRoslynActiveRuleKey = mock(RuleKey.class);
+    when(customRoslynActiveRuleKey.rule()).thenReturn("3");
+    when(customRoslynActiveRuleKey.repository()).thenReturn("roslyn.foo");
     activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(customRoslynActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);

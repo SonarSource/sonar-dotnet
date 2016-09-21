@@ -188,23 +188,6 @@ public class MetricsTest {
     assertThat(getFileMeasure("functions").getIntValue()).isEqualTo(2);
   }
 
-  /* Accessors */
-
-  @Test
-  public void accessorsAtProjectLevel() {
-    assertThat(getProjectMeasure("accessors").getIntValue()).isEqualTo(3);
-  }
-
-  @Test
-  public void accessorsAtDirectoryLevel() {
-    assertThat(getDirectoryMeasure("accessors").getIntValue()).isEqualTo(2);
-  }
-
-  @Test
-  public void accessorsAtFileLevel() {
-    assertThat(getFileMeasure("accessors").getIntValue()).isEqualTo(1);
-  }
-
   /* Classes */
 
   @Test

@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSourceCodeColorizerTest {
 
@@ -36,9 +36,8 @@ public class CSharpSourceCodeColorizerTest {
   public void cSharpToHtml() throws Exception {
     Reader cSharpFile = new FileReader(new File("src/test/resources/CSharpSourceCodeColorizerTest/NUnitFramework.cs"));
 
-    String html = new CodeColorizer(cobolColorizerFormat.getTokenizers()).toHtml(cSharpFile);
+    String html = new CodeColorizer(cobolColorizerFormat.getTokenizers()).toHtml(cSharpFile, null);
 
-    assertThat(html).contains("<style");
     assertThat(html).contains("<table class=\"code\"");
     assertThat(html).contains("</html>");
 

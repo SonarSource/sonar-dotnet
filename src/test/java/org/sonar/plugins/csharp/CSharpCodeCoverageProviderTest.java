@@ -30,15 +30,17 @@ import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageReportI
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageReportImportSensor;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void test() {
     assertThat(nonProperties(CSharpCodeCoverageProvider.extensions())).containsOnly(
-      CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
-      CSharpCoverageReportImportSensor.class, CSharpIntegrationCoverageReportImportSensor.class);
+      CSharpCoverageAggregator.class,
+      CSharpIntegrationCoverageAggregator.class,
+      CSharpCoverageReportImportSensor.class,
+      CSharpIntegrationCoverageReportImportSensor.class);
     assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
       "sonar.cs.ncover3.reportsPaths", "sonar.cs.ncover3.it.reportsPaths",
       "sonar.cs.opencover.reportsPaths", "sonar.cs.opencover.it.reportsPaths",
@@ -54,8 +56,8 @@ public class CSharpCodeCoverageProviderTest {
     constructor.newInstance();
   }
 
-  private static Set<String> nonProperties(List extensions) {
-    ImmutableSet.Builder builder = ImmutableSet.builder();
+  private static Set<Object> nonProperties(List extensions) {
+    ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
     for (Object extension : extensions) {
       if (!(extension instanceof PropertyDefinition)) {
         builder.add(extension);
