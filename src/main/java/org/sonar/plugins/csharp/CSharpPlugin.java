@@ -64,7 +64,6 @@ public class CSharpPlugin implements Plugin {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      CSharpCommonRulesEngine.class,
       CSharpCommonRulesDecorator.class,
       CSharpSourceCodeColorizer.class,
       RuleRunnerExtractor.class,
