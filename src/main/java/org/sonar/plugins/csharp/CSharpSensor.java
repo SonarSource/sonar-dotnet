@@ -39,6 +39,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import org.apache.commons.lang.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.measure.Metric;
@@ -51,8 +52,6 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.Settings;
-import org.sonar.api.internal.apachecommons.lang.SystemUtils;
-import org.sonar.api.internal.google.common.annotations.VisibleForTesting;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
@@ -71,7 +70,6 @@ public class CSharpSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);
 
-  @VisibleForTesting
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
@@ -106,12 +104,10 @@ public class CSharpSensor implements Sensor {
     executeInternal(context);
   }
 
-  @VisibleForTesting
   boolean shouldExecuteOnProject(FileSystem fs) {
     return SystemUtils.IS_OS_WINDOWS && filesToAnalyze(fs).iterator().hasNext();
   }
 
-  @VisibleForTesting
   void executeInternal(SensorContext context) {
     String roslynReportPath = settings.getString(ROSLYN_REPORT_PATH_PROPERTY_KEY);
     boolean hasRoslynReportPath = roslynReportPath != null;
@@ -647,7 +643,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private static File toolOutput(FileSystem fileSystem) {
-      return new File(fileSystem.workDir(), ANALYSIS_OUTPUT_DIRECTORY_NAME);
+    return new File(fileSystem.workDir(), ANALYSIS_OUTPUT_DIRECTORY_NAME);
   }
 
 }
