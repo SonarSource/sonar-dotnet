@@ -393,8 +393,6 @@ public class CSharpSensor implements Sensor {
             handleLinesMetricTag(inputFile);
           } else if ("Classes".equals(tagName)) {
             handleClassesMetricTag(inputFile);
-          } else if ("Accessors".equals(tagName)) {
-            handleAccessorsMetricTag(inputFile);
           } else if ("Statements".equals(tagName)) {
             handleStatementsMetricTag(inputFile);
           } else if ("Functions".equals(tagName)) {
@@ -426,11 +424,6 @@ public class CSharpSensor implements Sensor {
     private void handleClassesMetricTag(InputFile inputFile) throws XMLStreamException {
       double value = Double.parseDouble(stream.getElementText());
       context.saveMeasure(inputFile, CoreMetrics.CLASSES, value);
-    }
-
-    private void handleAccessorsMetricTag(InputFile inputFile) throws XMLStreamException {
-      double value = Double.parseDouble(stream.getElementText());
-      context.saveMeasure(inputFile, CoreMetrics.ACCESSORS, value);
     }
 
     private void handleStatementsMetricTag(InputFile inputFile) throws XMLStreamException {

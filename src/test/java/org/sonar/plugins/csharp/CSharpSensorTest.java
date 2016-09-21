@@ -213,7 +213,6 @@ public class CSharpSensorTest {
 
     verify(context).saveMeasure(inputFile, CoreMetrics.LINES, 27d);
     verify(context).saveMeasure(inputFile, CoreMetrics.CLASSES, 1d);
-    verify(context).saveMeasure(inputFile, CoreMetrics.ACCESSORS, 5d);
     verify(context).saveMeasure(inputFile, CoreMetrics.STATEMENTS, 2d);
     verify(context).saveMeasure(inputFile, CoreMetrics.FUNCTIONS, 3d);
     verify(context).saveMeasure(inputFile, CoreMetrics.PUBLIC_API, 4d);
