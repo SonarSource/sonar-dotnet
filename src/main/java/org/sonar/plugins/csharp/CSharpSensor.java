@@ -76,6 +76,11 @@ public class CSharpSensor implements Sensor {
   private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);
   private static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
+  private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
+  // Do not change this. SonarAnalyzer defines this filename
+  private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
+
+
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
   private final FileSystem fs;
@@ -131,7 +136,7 @@ public class CSharpSensor implements Sensor {
     String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, ruleProfile, filesToAnalyze());
 
     File analysisInput = toolInput();
-    File analysisOutput = toolOutput();
+    File analysisOutputDirectory = toolOutput();
 
     try {
       Files.write(analysisSettings, analysisInput, Charsets.UTF_8);
@@ -143,7 +148,7 @@ public class CSharpSensor implements Sensor {
 
     Command command = Command.create(executableFile.getAbsolutePath())
       .addArgument(analysisInput.getAbsolutePath())
-      .addArgument(analysisOutput.getAbsolutePath())
+      .addArgument(analysisOutputDirectory.getAbsolutePath())
       .addArgument("cs");
 
     int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
@@ -226,7 +231,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private void importResults(SensorContext context) {
-    File analysisOutput = toolOutput();
+    File analysisOutput = new File(toolOutput(), ANALYSIS_OUTPUT_XML_NAME);
 
     new AnalysisResultImporter(context, fs, fileLinesContextFactory, noSonarFilter, perspectives).parse(analysisOutput);
   }
@@ -645,7 +650,7 @@ public class CSharpSensor implements Sensor {
   }
 
   public static File toolOutput(FileSystem fileSystem) {
-    return new File(fileSystem.workDir(), "analysis-output.xml");
+    return new File(fileSystem.workDir(), ANALYSIS_OUTPUT_DIRECTORY_NAME);
   }
 
 }
