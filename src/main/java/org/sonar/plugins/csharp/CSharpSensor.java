@@ -236,7 +236,7 @@ public class CSharpSensor implements Sensor {
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
   }
 
-  private void importRoslynReport(String reportPath, final SensorContext context) {
+  private static void importRoslynReport(String reportPath, final SensorContext context) {
     ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
       .findAll()
       .stream()
@@ -256,7 +256,7 @@ public class CSharpSensor implements Sensor {
     SarifParserFactory.create(new File(reportPath)).parse(callback);
   }
 
-  private class SarifParserCallbackImpl implements SarifParserCallback {
+  private static class SarifParserCallbackImpl implements SarifParserCallback {
     private final SensorContext context;
     private final Map<String, String> repositoryKeyByRoslynRuleKey;
 
@@ -642,7 +642,7 @@ public class CSharpSensor implements Sensor {
     return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
   }
 
-  private File toolInput(FileSystem fs) {
+  private static File toolInput(FileSystem fs) {
     return new File(fs.workDir(), "SonarLint.xml");
   }
 
