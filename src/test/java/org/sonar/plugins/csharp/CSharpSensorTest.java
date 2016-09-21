@@ -30,7 +30,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
@@ -136,7 +135,6 @@ public class CSharpSensorTest {
       .extracting("metric.key", "value")
       .containsOnly(
         Tuple.tuple(CoreMetrics.LINES_KEY, 27),
-        Tuple.tuple(CoreMetrics.ACCESSORS_KEY, 5),
         Tuple.tuple(CoreMetrics.CLASSES_KEY, 1),
         Tuple.tuple(CoreMetrics.NCLOC_KEY, 3),
         Tuple.tuple(CoreMetrics.COMMENT_LINES_KEY, 2),

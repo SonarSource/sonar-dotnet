@@ -386,8 +386,6 @@ public class CSharpSensor implements Sensor {
             handleLinesMetricTag(inputFile);
           } else if ("Classes".equals(tagName)) {
             handleClassesMetricTag(inputFile);
-          } else if ("Accessors".equals(tagName)) {
-            handleAccessorsMetricTag(inputFile);
           } else if ("Statements".equals(tagName)) {
             handleStatementsMetricTag(inputFile);
           } else if ("Functions".equals(tagName)) {
@@ -437,10 +435,6 @@ public class CSharpSensor implements Sensor {
       parseAndSaveIntegerMetric(inputFile, CoreMetrics.CLASSES);
     }
 
-    private void handleAccessorsMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.ACCESSORS);
-    }
-
     private void handleStatementsMetricTag(InputFile inputFile) throws XMLStreamException {
       parseAndSaveIntegerMetric(inputFile, CoreMetrics.STATEMENTS);
     }
@@ -463,14 +457,10 @@ public class CSharpSensor implements Sensor {
 
     private void handleFileComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
       parseAndSaveStringMetric(inputFile, CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION);
-//      String value = stream.getElementText();
-//      context.saveMeasure(inputFile, new Measure(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
     private void handleFunctionComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
       parseAndSaveStringMetric(inputFile, CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION);
-//      String value = stream.getElementText();
-//      context.saveMeasure(inputFile, new Measure(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION, value).setPersistenceMode(PersistenceMode.MEMORY));
     }
 
     private void handleCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
