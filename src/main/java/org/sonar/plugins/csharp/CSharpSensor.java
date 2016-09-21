@@ -40,8 +40,6 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import org.apache.commons.lang.SystemUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -61,6 +59,8 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
@@ -68,7 +68,7 @@ import static java.util.stream.Collectors.toList;
 
 public class CSharpSensor implements Sensor {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CSharpSensor.class);
+  private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
