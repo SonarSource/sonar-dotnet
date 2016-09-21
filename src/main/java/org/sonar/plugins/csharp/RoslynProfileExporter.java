@@ -204,17 +204,7 @@ public class RoslynProfileExporter extends ProfileExporter {
       for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
         appendLine(sb, "    <Rule>");
         appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
-        Map<String, String> parameters = effectiveParameters(activeRule);
-        if (!parameters.isEmpty()) {
-          appendLine(sb, "      <Parameters>");
-          for (Map.Entry<String, String> parameter : parameters.entrySet()) {
-            appendLine(sb, "        <Parameter>");
-            appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
-            appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
-            appendLine(sb, "        </Parameter>");
-          }
-          appendLine(sb, "      </Parameters>");
-        }
+        appendParameters(sb, effectiveParameters(activeRule));
         appendLine(sb, "    </Rule>");
       }
     }
@@ -226,6 +216,19 @@ public class RoslynProfileExporter extends ProfileExporter {
     appendLine(sb, "</AnalysisInput>");
 
     return sb.toString();
+  }
+
+  private static void appendParameters(StringBuilder sb, Map<String, String> parameters) {
+    if (!parameters.isEmpty()) {
+      appendLine(sb, "      <Parameters>");
+      for (Map.Entry<String, String> parameter : parameters.entrySet()) {
+        appendLine(sb, "        <Parameter>");
+        appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
+        appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
+        appendLine(sb, "        </Parameter>");
+      }
+      appendLine(sb, "      </Parameters>");
+    }
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
