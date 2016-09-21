@@ -76,7 +76,6 @@ public class CSharpSensor implements Sensor {
   // Do not change this. SonarAnalyzer defines this filename
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
 
-
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
   private final FileLinesContextFactory fileLinesContextFactory;
@@ -129,10 +128,10 @@ public class CSharpSensor implements Sensor {
 
       ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey =
         RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
-        .findAll()
-        .stream()
-        .map(r -> r.ruleKey())
-        .collect(toList()));
+          .findAll()
+          .stream()
+          .map(r -> r.ruleKey())
+          .collect(toList()));
 
       if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
         throw new IllegalArgumentException(
