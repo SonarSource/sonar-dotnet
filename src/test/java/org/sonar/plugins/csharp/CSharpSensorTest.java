@@ -94,7 +94,7 @@ public class CSharpSensorTest {
     System.out.println(destDir);
     File csFile = new File("src/test/resources/Foo&Bar.cs").getAbsoluteFile();
 
-    File analysisReport = new File(workDir, "analysis-output.xml");
+    File analysisReport = new File(workDir, "output/analysis-output.xml");
     org.apache.commons.io.FileUtils.write(analysisReport,
       StringUtils.replace(org.apache.commons.io.FileUtils.readFileToString(analysisReport, StandardCharsets.UTF_8), "<Path>Foo&amp;Bar.cs</Path>",
         "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>"),
