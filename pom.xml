@@ -80,11 +80,15 @@
       <version>2.6.1</version>
       <exclusions>
         <exclusion>
+          <!-- because otherwise it brings in sonar-plugin-api 4.5.1 -->
           <artifactId>sonar-plugin-api</artifactId>
           <groupId>org.codehaus.sonar</groupId>
         </exclusion>
       </exclusions>
     </dependency>
+
+    <!-- because org.sonarsource.sonarqube:sonar-duplications:jar:5.6
+         brings in guava 17, which sslr-core doens't work with; it needs guava 10 -->
     <dependency>
       <groupId>org.codehaus.sonar.sslr</groupId>
       <artifactId>sslr-core</artifactId>
