@@ -41,6 +41,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.RoslynProfileExporter.SONARANALYZER_CSHARP_NAME;
 
 public class RoslynProfileExporterTest {
 
@@ -98,9 +99,9 @@ public class RoslynProfileExporterTest {
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
     when(settings.getDefaultValue("sonaranalyzer-cs.staticResourceName")).thenReturn("SonarAnalyzer.zip");
-    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn("SonarAnalyzer.CSharp");
+    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn(SONARANALYZER_CSHARP_NAME);
     when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageVersion")).thenReturn("1.10.0");
 
     RulesDefinition sonarLintRepo = context -> {
@@ -151,9 +152,9 @@ public class RoslynProfileExporterTest {
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
     when(settings.getDefaultValue("sonaranalyzer-cs.staticResourceName")).thenReturn("SonarAnalyzer.zip");
-    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn("SonarAnalyzer.CSharp");
-    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn("SonarAnalyzer.CSharp");
+    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn(SONARANALYZER_CSHARP_NAME);
     when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageVersion")).thenReturn("1.10.0");
 
     when(settings.getDefaultValue("custom.pluginKey")).thenReturn("customPluginKey");

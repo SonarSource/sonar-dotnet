@@ -27,12 +27,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,6 +54,7 @@ import static java.util.stream.Collectors.toList;
 public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
+  static final String SONARANALYZER_CSHARP_NAME = "SonarAnalyzer.CSharp";
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
@@ -91,15 +90,15 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(analyzerIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue("SonarAnalyzer.CSharp")
+        .defaultValue(SONARANALYZER_CSHARP_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(ruleNamespacePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue("SonarAnalyzer.CSharp")
+        .defaultValue(SONARANALYZER_CSHARP_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue("SonarAnalyzer.CSharp")
+        .defaultValue(SONARANALYZER_CSHARP_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
