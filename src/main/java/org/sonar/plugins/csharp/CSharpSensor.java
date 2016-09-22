@@ -30,23 +30,27 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.annotation.CheckForNull;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import org.apache.commons.lang.SystemUtils;
-import org.sonar.api.batch.measure.Metric;
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.measure.Metric;
+import org.sonar.api.batch.rule.ActiveRule;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.Settings;
@@ -55,12 +59,12 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.protocol.FileTokenInfoOuterClass;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
@@ -75,6 +79,7 @@ public class CSharpSensor implements Sensor {
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
   // Do not change this. SonarAnalyzer defines this filename
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
+  private static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-infos.dat";
 
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
@@ -229,6 +234,11 @@ public class CSharpSensor implements Sensor {
     File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
 
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
+
+    File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+    if (highlightInfoFile.isFile()) {
+      new HighlightImporter(context).parse(highlightInfoFile);
+    }
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
@@ -295,6 +305,83 @@ public class CSharpSensor implements Sensor {
           .at(inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset))
           .message(message))
         .save();
+    }
+  }
+
+  private static class HighlightImporter {
+    private final SensorContext context;
+
+    HighlightImporter(SensorContext context) {
+      this.context = context;
+    }
+
+    void parse(File tokenInfoFile) {
+      FileSystem fs = context.fileSystem();
+
+      try (InputStream input = java.nio.file.Files.newInputStream(tokenInfoFile.toPath())) {
+        while (true) {
+          FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo = FileTokenInfoOuterClass.FileTokenInfo.parseDelimitedFrom(input);
+          if (fileTokenInfo == null) {
+            break;
+          }
+          importHighlights(fs, fileTokenInfo);
+        }
+      } catch (IOException e) {
+        throw Throwables.propagate(e);
+      }
+    }
+
+    private void importHighlights(FileSystem fs, FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo) {
+      File file = new File(fileTokenInfo.getFilePath());
+
+      for (FileTokenInfoOuterClass.FileTokenInfo.TokenInfoInFile tokenInfo : fileTokenInfo.getTokenInfoList()) {
+        FileTokenInfoOuterClass.TextRange textRange = tokenInfo.getTextRange();
+        int startLine = textRange.getStartLine();
+        int startLineOffset = textRange.getStartOffset();
+        int endLine = textRange.getEndLine();
+        int endLineOffset = textRange.getEndOffset();
+
+        TypeOfText typeOfText = toType(tokenInfo.getTokenType());
+        if (typeOfText != null) {
+          context.newHighlighting()
+            .onFile(fs.inputFile(fs.predicates().is(file)))
+            .highlight(startLine, startLineOffset, endLine, endLineOffset, typeOfText)
+            .save();
+        }
+      }
+    }
+
+    @CheckForNull
+    private TypeOfText toType(FileTokenInfoOuterClass.TokenType tokenType) {
+      // unmatched:
+      //case DECLARATION_NAME:
+      //case IDENTIFIER:
+      //case NUMERIC_LITERAL:
+      //case TYPE_PARAMETER:
+      //case UNKNOWN:
+      //case UNRECOGNIZED:
+      switch (tokenType) {
+        // missing: case ANNOTATION:
+        // missing: case CONSTANT:
+
+        case COMMENT:
+          return TypeOfText.COMMENT;
+
+        // missing: case STRUCTURED_COMMENT:
+
+        case KEYWORD:
+          return TypeOfText.KEYWORD;
+
+        // missing: case KEYWORD_LIGHT:
+
+        case STRING_LITERAL:
+          return TypeOfText.STRING;
+
+        // missing: case PREPROCESS_DIRECTIVE:
+
+        default:
+          return null;
+      }
     }
   }
 
