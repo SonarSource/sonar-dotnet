@@ -50,6 +50,7 @@ import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
@@ -333,6 +334,8 @@ public class CSharpSensor implements Sensor {
 
     private void importHighlights(FileSystem fs, FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo) {
       File file = new File(fileTokenInfo.getFilePath());
+      NewHighlighting highlights = context.newHighlighting().onFile(fs.inputFile(fs.predicates().is(file)));
+      boolean foundMappableHighlights = false;
 
       for (FileTokenInfoOuterClass.FileTokenInfo.TokenInfoInFile tokenInfo : fileTokenInfo.getTokenInfoList()) {
         FileTokenInfoOuterClass.TextRange textRange = tokenInfo.getTextRange();
@@ -343,11 +346,12 @@ public class CSharpSensor implements Sensor {
 
         TypeOfText typeOfText = toType(tokenInfo.getTokenType());
         if (typeOfText != null) {
-          context.newHighlighting()
-            .onFile(fs.inputFile(fs.predicates().is(file)))
-            .highlight(startLine, startLineOffset, endLine, endLineOffset, typeOfText)
-            .save();
+          highlights.highlight(startLine, startLineOffset, endLine, endLineOffset, typeOfText);
+          foundMappableHighlights = true;
         }
+      }
+      if (foundMappableHighlights) {
+        highlights.save();
       }
     }
 
