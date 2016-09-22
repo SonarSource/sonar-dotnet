@@ -34,6 +34,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.annotation.CheckForNull;
@@ -54,6 +55,7 @@ import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
@@ -78,9 +80,11 @@ public class CSharpSensor implements Sensor {
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
-  // Do not change this. SonarAnalyzer defines this filename
+
+  // Do not change these. SonarAnalyzer defines these filenames
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
   private static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-infos.dat";
+  private static final String SYMBOLS_OUTPUT_PROTOBUF_NAME = "token-reference-infos.dat";
 
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
@@ -240,6 +244,11 @@ public class CSharpSensor implements Sensor {
     if (highlightInfoFile.isFile()) {
       new HighlightImporter(context).parse(highlightInfoFile);
     }
+
+    File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLS_OUTPUT_PROTOBUF_NAME);
+    if (symbolRefsInfoFile.isFile()) {
+      new SymbolRefsImporter(context).parse(symbolRefsInfoFile);
+    }
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
@@ -386,6 +395,51 @@ public class CSharpSensor implements Sensor {
         default:
           return null;
       }
+    }
+  }
+
+  private static class SymbolRefsImporter {
+    private final SensorContext context;
+
+    SymbolRefsImporter(SensorContext context) {
+      this.context = context;
+    }
+
+    void parse(File symbolRefsInfoFile) {
+      FileSystem fs = context.fileSystem();
+
+      try (InputStream input = java.nio.file.Files.newInputStream(symbolRefsInfoFile.toPath())) {
+        while (true) {
+          FileTokenInfoOuterClass.FileTokenReferenceInfo fileTokenReferenceInfo = FileTokenInfoOuterClass.FileTokenReferenceInfo.parseDelimitedFrom(input);
+          if (fileTokenReferenceInfo == null) {
+            break;
+          }
+          importSymbolRefs(fs, fileTokenReferenceInfo);
+        }
+      } catch (IOException e) {
+        throw Throwables.propagate(e);
+      }
+    }
+
+    private void importSymbolRefs(FileSystem fs, FileTokenInfoOuterClass.FileTokenReferenceInfo fileTokenReferenceInfo) {
+      File file = new File(fileTokenReferenceInfo.getFilePath());
+      NewSymbolTable symbolTable = context.newSymbolTable().onFile(fs.inputFile(fs.predicates().is(file)));
+
+      for (FileTokenInfoOuterClass.FileTokenReferenceInfo.SymbolReference tokenInfo : fileTokenReferenceInfo.getReferenceList()) {
+        addTextRange(symbolTable, tokenInfo.getDeclaration());
+        for (FileTokenInfoOuterClass.TextRange refTextRange : tokenInfo.getReferenceList()) {
+          addTextRange(symbolTable, refTextRange);
+        }
+      }
+      symbolTable.save();
+    }
+
+    private void addTextRange(NewSymbolTable symbolTable, FileTokenInfoOuterClass.TextRange textRange) {
+      int startLine = textRange.getStartLine();
+      int startLineOffset = textRange.getStartOffset();
+      int endLine = textRange.getEndLine();
+      int endLineOffset = textRange.getEndOffset();
+      symbolTable.newSymbol(startLine, startLineOffset, endLine, endLineOffset);
     }
   }
 
