@@ -40,7 +40,6 @@ public class CSharpPluginTest {
 
     Class<?>[] expectedExtensions = new Class<?>[] {
       CSharp.class,
-      CSharpSourceCodeColorizer.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
       RuleRunnerExtractor.class,
