@@ -71,7 +71,7 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.0.11</version>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -168,7 +168,7 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>11000000</maxsize>
+                  <maxsize>12000000</maxsize>
                   <minsize>7000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
