@@ -234,10 +234,14 @@ public class CSharpSensor implements Sensor {
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
 
     File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    ProtobufImporters.highlightImporter().parse(context, highlightInfoFile);
+    if (highlightInfoFile.isFile()) {
+      ProtobufImporters.highlightImporter().parse(context, highlightInfoFile);
+    }
 
     File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
+    if (symbolRefsInfoFile.isFile()) {
+      ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
+    }
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
