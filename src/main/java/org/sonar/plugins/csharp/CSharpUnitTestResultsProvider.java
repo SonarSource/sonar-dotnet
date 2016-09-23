@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
@@ -72,8 +73,8 @@ public class CSharpUnitTestResultsProvider {
 
   public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
 
-    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator) {
-      super(unitTestResultsAggregator);
+    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef) {
+      super(unitTestResultsAggregator, projectDef);
     }
 
   }
