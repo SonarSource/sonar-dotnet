@@ -30,13 +30,11 @@ import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.annotation.CheckForNull;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
@@ -45,18 +43,13 @@ import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
-import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
-import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.batch.sensor.symbol.NewSymbol;
-import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
@@ -68,11 +61,13 @@ import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.dotnet.protocol.FileTokenInfoOuterClass;
+import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 public class CSharpSensor implements Sensor {
 
@@ -82,10 +77,8 @@ public class CSharpSensor implements Sensor {
 
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
 
-  // Do not change these. SonarAnalyzer defines these filenames
+  // Do not change this. SonarAnalyzer defines this filename
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
-  private static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-infos.dat";
-  private static final String SYMBOLS_OUTPUT_PROTOBUF_NAME = "token-reference-infos.dat";
 
   private final Settings settings;
   private final RuleRunnerExtractor extractor;
@@ -238,18 +231,13 @@ public class CSharpSensor implements Sensor {
 
   private void importResults(SensorContext context) {
     File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
-
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
 
     File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    if (highlightInfoFile.isFile()) {
-      new HighlightImporter(context).parse(highlightInfoFile);
-    }
+    ProtobufImporters.highlightImporter().parse(context, highlightInfoFile);
 
-    File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLS_OUTPUT_PROTOBUF_NAME);
-    if (symbolRefsInfoFile.isFile()) {
-      new SymbolRefsImporter(context).parse(symbolRefsInfoFile);
-    }
+    File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+    ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
@@ -317,129 +305,6 @@ public class CSharpSensor implements Sensor {
           .message(message))
         .save();
     }
-  }
-
-  private static class HighlightImporter {
-    private final SensorContext context;
-
-    HighlightImporter(SensorContext context) {
-      this.context = context;
-    }
-
-    void parse(File tokenInfoFile) {
-      FileSystem fs = context.fileSystem();
-
-      try (InputStream input = java.nio.file.Files.newInputStream(tokenInfoFile.toPath())) {
-        while (true) {
-          FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo = FileTokenInfoOuterClass.FileTokenInfo.parseDelimitedFrom(input);
-          if (fileTokenInfo == null) {
-            break;
-          }
-          importHighlights(fs, fileTokenInfo);
-        }
-      } catch (IOException e) {
-        throw Throwables.propagate(e);
-      }
-    }
-
-    private void importHighlights(FileSystem fs, FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo) {
-      InputFile inputFile = toInputFile(fs, fileTokenInfo.getFilePath());
-      NewHighlighting highlights = context.newHighlighting().onFile(inputFile);
-      boolean foundMappableHighlights = false;
-
-      for (FileTokenInfoOuterClass.FileTokenInfo.TokenInfoInFile tokenInfo : fileTokenInfo.getTokenInfoList()) {
-        TypeOfText typeOfText = toType(tokenInfo.getTokenType());
-        if (typeOfText != null) {
-          highlights.highlight(toTextRange(inputFile, tokenInfo.getTextRange()), typeOfText);
-          foundMappableHighlights = true;
-        }
-      }
-      if (foundMappableHighlights) {
-        highlights.save();
-      }
-    }
-
-    @CheckForNull
-    private TypeOfText toType(FileTokenInfoOuterClass.TokenType tokenType) {
-      // Note:
-      // TypeOfText.ANNOTATION -> like a type in C#, so received as DECLARATION_NAME
-      // TypeOfText.STRUCTURED_COMMENT -> not colored differently in C#, so received as COMMENT
-      // TypeOfText.PREPROCESS_DIRECTIVE -> received as KEYWORD
-
-      switch (tokenType) {
-        case NUMERIC_LITERAL:
-          return TypeOfText.CONSTANT;
-
-        case COMMENT:
-          return TypeOfText.COMMENT;
-
-        case KEYWORD:
-          return TypeOfText.KEYWORD;
-
-        case DECLARATION_NAME:
-        case TYPE_PARAMETER:
-          return TypeOfText.KEYWORD_LIGHT;
-
-        case STRING_LITERAL:
-          return TypeOfText.STRING;
-
-        case UNRECOGNIZED:
-          // generated by protobuf
-        case UNKNOWN:
-        default:
-          // do not color
-          return null;
-      }
-    }
-  }
-
-  private static class SymbolRefsImporter {
-    private final SensorContext context;
-
-    SymbolRefsImporter(SensorContext context) {
-      this.context = context;
-    }
-
-    void parse(File symbolRefsInfoFile) {
-      FileSystem fs = context.fileSystem();
-
-      try (InputStream input = java.nio.file.Files.newInputStream(symbolRefsInfoFile.toPath())) {
-        while (true) {
-          FileTokenInfoOuterClass.FileTokenReferenceInfo fileTokenReferenceInfo = FileTokenInfoOuterClass.FileTokenReferenceInfo.parseDelimitedFrom(input);
-          if (fileTokenReferenceInfo == null) {
-            break;
-          }
-          importSymbolRefs(fs, fileTokenReferenceInfo);
-        }
-      } catch (IOException e) {
-        throw Throwables.propagate(e);
-      }
-    }
-
-    private void importSymbolRefs(FileSystem fs, FileTokenInfoOuterClass.FileTokenReferenceInfo fileTokenReferenceInfo) {
-      InputFile inputFile = toInputFile(fs, fileTokenReferenceInfo.getFilePath());
-      NewSymbolTable symbolTable = context.newSymbolTable().onFile(inputFile);
-
-      for (FileTokenInfoOuterClass.FileTokenReferenceInfo.SymbolReference tokenInfo : fileTokenReferenceInfo.getReferenceList()) {
-        NewSymbol symbol = symbolTable.newSymbol(toTextRange(inputFile, tokenInfo.getDeclaration()));
-        for (FileTokenInfoOuterClass.TextRange refTextRange : tokenInfo.getReferenceList()) {
-          symbol.newReference(toTextRange(inputFile, refTextRange));
-        }
-      }
-      symbolTable.save();
-    }
-  }
-
-  private static InputFile toInputFile(FileSystem fs, String file) {
-    return fs.inputFile(fs.predicates().is(new File(file)));
-  }
-
-  private static TextRange toTextRange(InputFile inputFile, FileTokenInfoOuterClass.TextRange pbTextRange) {
-    int startLine = pbTextRange.getStartLine();
-    int startLineOffset = pbTextRange.getStartOffset();
-    int endLine = pbTextRange.getEndLine();
-    int endLineOffset = pbTextRange.getEndOffset();
-    return inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset);
   }
 
   private static class AnalysisResultImporter {
