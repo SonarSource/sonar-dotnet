@@ -34,7 +34,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import javax.annotation.CheckForNull;
@@ -46,6 +45,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
@@ -55,6 +55,7 @@ import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.batch.sensor.symbol.NewSymbol;
 import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
@@ -173,7 +174,7 @@ public class CSharpSensor implements Sensor {
     }
   }
 
-  public static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, SensorContext context) {
+  private static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, SensorContext context) {
     StringBuilder sb = new StringBuilder();
 
     appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -342,20 +343,14 @@ public class CSharpSensor implements Sensor {
     }
 
     private void importHighlights(FileSystem fs, FileTokenInfoOuterClass.FileTokenInfo fileTokenInfo) {
-      File file = new File(fileTokenInfo.getFilePath());
-      NewHighlighting highlights = context.newHighlighting().onFile(fs.inputFile(fs.predicates().is(file)));
+      InputFile inputFile = toInputFile(fs, fileTokenInfo.getFilePath());
+      NewHighlighting highlights = context.newHighlighting().onFile(inputFile);
       boolean foundMappableHighlights = false;
 
       for (FileTokenInfoOuterClass.FileTokenInfo.TokenInfoInFile tokenInfo : fileTokenInfo.getTokenInfoList()) {
-        FileTokenInfoOuterClass.TextRange textRange = tokenInfo.getTextRange();
-        int startLine = textRange.getStartLine();
-        int startLineOffset = textRange.getStartOffset();
-        int endLine = textRange.getEndLine();
-        int endLineOffset = textRange.getEndOffset();
-
         TypeOfText typeOfText = toType(tokenInfo.getTokenType());
         if (typeOfText != null) {
-          highlights.highlight(startLine, startLineOffset, endLine, endLineOffset, typeOfText);
+          highlights.highlight(toTextRange(inputFile, tokenInfo.getTextRange()), typeOfText);
           foundMappableHighlights = true;
         }
       }
@@ -422,25 +417,29 @@ public class CSharpSensor implements Sensor {
     }
 
     private void importSymbolRefs(FileSystem fs, FileTokenInfoOuterClass.FileTokenReferenceInfo fileTokenReferenceInfo) {
-      File file = new File(fileTokenReferenceInfo.getFilePath());
-      NewSymbolTable symbolTable = context.newSymbolTable().onFile(fs.inputFile(fs.predicates().is(file)));
+      InputFile inputFile = toInputFile(fs, fileTokenReferenceInfo.getFilePath());
+      NewSymbolTable symbolTable = context.newSymbolTable().onFile(inputFile);
 
       for (FileTokenInfoOuterClass.FileTokenReferenceInfo.SymbolReference tokenInfo : fileTokenReferenceInfo.getReferenceList()) {
-        addTextRange(symbolTable, tokenInfo.getDeclaration());
+        NewSymbol symbol = symbolTable.newSymbol(toTextRange(inputFile, tokenInfo.getDeclaration()));
         for (FileTokenInfoOuterClass.TextRange refTextRange : tokenInfo.getReferenceList()) {
-          addTextRange(symbolTable, refTextRange);
+          symbol.newReference(toTextRange(inputFile, refTextRange));
         }
       }
       symbolTable.save();
     }
+  }
 
-    private void addTextRange(NewSymbolTable symbolTable, FileTokenInfoOuterClass.TextRange textRange) {
-      int startLine = textRange.getStartLine();
-      int startLineOffset = textRange.getStartOffset();
-      int endLine = textRange.getEndLine();
-      int endLineOffset = textRange.getEndOffset();
-      symbolTable.newSymbol(startLine, startLineOffset, endLine, endLineOffset);
-    }
+  private static InputFile toInputFile(FileSystem fs, String file) {
+    return fs.inputFile(fs.predicates().is(new File(file)));
+  }
+
+  private static TextRange toTextRange(InputFile inputFile, FileTokenInfoOuterClass.TextRange pbTextRange) {
+    int startLine = pbTextRange.getStartLine();
+    int startLineOffset = pbTextRange.getStartOffset();
+    int endLine = pbTextRange.getEndLine();
+    int endLineOffset = pbTextRange.getEndOffset();
+    return inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset);
   }
 
   private static class AnalysisResultImporter {
