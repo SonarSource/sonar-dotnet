@@ -278,11 +278,6 @@
                     <include name="*.xml"/>
                   </fileset>
                 </copy>
-                <copy todir="src/main/proto">
-                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
-                    <include name="*.proto"/>
-                  </fileset>
-                </copy>
                 <zip destfile="src/main/resources/static/SonarAnalyzer.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/analyzers"/>
                 <zip destfile="src/main/resources/SonarAnalyzer.Scanner.zip"
