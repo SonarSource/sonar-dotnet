@@ -21,7 +21,6 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
 import java.util.List;
-import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
