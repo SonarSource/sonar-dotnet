@@ -52,6 +52,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_DIRECTORY_NAME;
+import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_XML_NAME;
 
 public class CSharpSensorTest {
 
@@ -95,7 +97,7 @@ public class CSharpSensorTest {
     System.out.println(destDir);
     File csFile = new File("src/test/resources/Foo&Bar.cs").getAbsoluteFile();
 
-    File analysisReport = new File(workDir, "output/analysis-output.xml");
+    File analysisReport = new File(new File(workDir, ANALYSIS_OUTPUT_DIRECTORY_NAME), ANALYSIS_OUTPUT_XML_NAME);
     org.apache.commons.io.FileUtils.write(analysisReport,
       StringUtils.replace(org.apache.commons.io.FileUtils.readFileToString(analysisReport, StandardCharsets.UTF_8), "<Path>Foo&amp;Bar.cs</Path>",
         "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>"),
