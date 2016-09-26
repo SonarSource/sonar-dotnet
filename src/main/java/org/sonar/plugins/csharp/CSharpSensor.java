@@ -61,6 +61,7 @@ import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
@@ -81,11 +82,11 @@ public class CSharpSensor implements Sensor {
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
 
   private final Settings settings;
-  private final RuleRunnerExtractor extractor;
+  private final SonarAnalyzerScannerExtractor extractor;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
 
-  public CSharpSensor(Settings settings, RuleRunnerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter) {
     this.settings = settings;
     this.extractor = extractor;
@@ -154,7 +155,7 @@ public class CSharpSensor implements Sensor {
       throw Throwables.propagate(e);
     }
 
-    File executableFile = extractor.executableFile();
+    File executableFile = extractor.executableFile(CSharpPlugin.LANGUAGE_KEY);
 
     Command command = Command.create(executableFile.getAbsolutePath())
       .addArgument(analysisInput.getAbsolutePath())

@@ -23,6 +23,7 @@ import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonar.api.Plugin;
+import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 @Properties({
   @Property(
@@ -64,7 +65,7 @@ public class CSharpPlugin implements Plugin {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      RuleRunnerExtractor.class,
+      SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
