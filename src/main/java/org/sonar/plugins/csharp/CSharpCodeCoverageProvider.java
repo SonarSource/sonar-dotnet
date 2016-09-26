@@ -134,7 +134,7 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator, FileSystem fs) {
+    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
       super(COVERAGE_CONF, coverageAggregator, false);
     }
 
@@ -150,7 +150,7 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator, FileSystem fs) {
+    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator) {
       super(IT_COVERAGE_CONF, coverageAggregator, true);
     }
 
