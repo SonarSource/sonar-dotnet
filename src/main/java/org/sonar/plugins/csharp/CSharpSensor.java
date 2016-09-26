@@ -134,7 +134,7 @@ public class CSharpSensor implements Sensor {
         RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
           .findAll()
           .stream()
-          .map(r -> r.ruleKey())
+          .map(ActiveRule::ruleKey)
           .collect(toList()));
 
       if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
@@ -248,7 +248,7 @@ public class CSharpSensor implements Sensor {
     ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
       .findAll()
       .stream()
-      .map(r -> r.ruleKey())
+      .map(ActiveRule::ruleKey)
       .collect(toList()));
     final Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
     for (RuleKey activeRoslynRuleKey : activeRoslynRulesByPartialRepoKey.values()) {
