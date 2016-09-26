@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.utils.Version;
+import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -42,7 +43,7 @@ public class CSharpPluginTest {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      RuleRunnerExtractor.class,
+      SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
       CSharpCPDMapping.class,
       SonarLintProfileExporter.class,

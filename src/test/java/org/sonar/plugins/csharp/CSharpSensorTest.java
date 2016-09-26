@@ -46,6 +46,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -65,7 +66,7 @@ public class CSharpSensorTest {
   private DefaultInputFile inputFile;
   private FileLinesContext fileLinesContext;
   private FileLinesContextFactory fileLinesContextFactory;
-  private RuleRunnerExtractor extractor;
+  private SonarAnalyzerScannerExtractor extractor;
   private NoSonarFilter noSonarFilter;
   private SensorContextTester tester;
 
@@ -118,8 +119,8 @@ public class CSharpSensorTest {
     fileLinesContextFactory = mock(FileLinesContextFactory.class);
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
 
-    extractor = mock(RuleRunnerExtractor.class);
-    when(extractor.executableFile()).thenReturn(new File(workDir, SystemUtils.IS_OS_WINDOWS ? "fake.bat" : "fake.sh"));
+    extractor = mock(SonarAnalyzerScannerExtractor.class);
+    when(extractor.executableFile(CSharpPlugin.LANGUAGE_KEY)).thenReturn(new File(workDir, SystemUtils.IS_OS_WINDOWS ? "fake.bat" : "fake.sh"));
 
     noSonarFilter = mock(NoSonarFilter.class);
     settings = new Settings();
