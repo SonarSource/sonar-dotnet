@@ -76,10 +76,10 @@ public class CSharpSensor implements Sensor {
 
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
-  private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
+  static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
 
   // Do not change this. SonarAnalyzer defines this filename
-  private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
+  static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
 
   private final Settings settings;
   private final SonarAnalyzerScannerExtractor extractor;
