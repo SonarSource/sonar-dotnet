@@ -28,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -97,17 +98,17 @@ public class CSharpSensorTest {
     System.out.println(destDir);
     File csFile = new File("src/test/resources/Foo&Bar.cs").getAbsoluteFile();
 
-    File analysisReport = new File(new File(workDir, ANALYSIS_OUTPUT_DIRECTORY_NAME), ANALYSIS_OUTPUT_XML_NAME);
-    org.apache.commons.io.FileUtils.write(analysisReport,
-      StringUtils.replace(org.apache.commons.io.FileUtils.readFileToString(analysisReport, StandardCharsets.UTF_8), "<Path>Foo&amp;Bar.cs</Path>",
-        "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>"),
-      StandardCharsets.UTF_8);
+    Path analysisReport = workDir.toPath().resolve(ANALYSIS_OUTPUT_DIRECTORY_NAME).resolve(ANALYSIS_OUTPUT_XML_NAME);
+    java.nio.file.Files.write(analysisReport,
+      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(analysisReport), StandardCharsets.UTF_8), "<Path>Foo&amp;Bar.cs</Path>",
+        "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>").getBytes(StandardCharsets.UTF_8),
+      StandardOpenOption.WRITE);
 
-    File roslynReport = new File(workDir, "roslyn-report.json");
-    org.apache.commons.io.FileUtils.write(roslynReport,
-      StringUtils.replace(org.apache.commons.io.FileUtils.readFileToString(roslynReport, StandardCharsets.UTF_8), "Foo&Bar.cs",
-        StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())),
-      StandardCharsets.UTF_8);
+    Path roslynReport = workDir.toPath().resolve("roslyn-report.json");
+    java.nio.file.Files.write(roslynReport,
+      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Foo&Bar.cs",
+        StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
+      StandardOpenOption.WRITE);
 
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
