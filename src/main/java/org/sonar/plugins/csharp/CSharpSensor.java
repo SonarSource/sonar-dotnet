@@ -236,11 +236,15 @@ public class CSharpSensor implements Sensor {
     File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
     if (highlightInfoFile.isFile()) {
       ProtobufImporters.highlightImporter().parse(context, highlightInfoFile);
+    } else {
+      LOG.warn("Syntax highlighting data file not found: " + highlightInfoFile);
     }
 
     File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
     if (symbolRefsInfoFile.isFile()) {
       ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
+    } else {
+      LOG.warn("Symbol reference data file not found: " + symbolRefsInfoFile);
     }
   }
 
