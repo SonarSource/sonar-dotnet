@@ -40,12 +40,13 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import org.apache.commons.lang.SystemUtils;
-import org.sonar.api.batch.measure.Metric;
-import org.sonar.api.batch.sensor.Sensor;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.measure.Metric;
+import org.sonar.api.batch.rule.ActiveRule;
+import org.sonar.api.batch.sensor.Sensor;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
@@ -55,16 +56,18 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 public class CSharpSensor implements Sensor {
 
@@ -73,6 +76,7 @@ public class CSharpSensor implements Sensor {
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output";
+
   // Do not change this. SonarAnalyzer defines this filename
   private static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
 
@@ -130,7 +134,7 @@ public class CSharpSensor implements Sensor {
         RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
           .findAll()
           .stream()
-          .map(r -> r.ruleKey())
+          .map(ActiveRule::ruleKey)
           .collect(toList()));
 
       if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
@@ -163,7 +167,7 @@ public class CSharpSensor implements Sensor {
     }
   }
 
-  public static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, SensorContext context) {
+  private static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, SensorContext context) {
     StringBuilder sb = new StringBuilder();
 
     appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -227,15 +231,28 @@ public class CSharpSensor implements Sensor {
 
   private void importResults(SensorContext context) {
     File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
-
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
+
+    File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+    if (highlightInfoFile.isFile()) {
+      ProtobufImporters.highlightImporter().parse(context, highlightInfoFile);
+    } else {
+      LOG.warn("Syntax highlighting data file not found: " + highlightInfoFile);
+    }
+
+    File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+    if (symbolRefsInfoFile.isFile()) {
+      ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
+    } else {
+      LOG.warn("Symbol reference data file not found: " + symbolRefsInfoFile);
+    }
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
     ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
       .findAll()
       .stream()
-      .map(r -> r.ruleKey())
+      .map(ActiveRule::ruleKey)
       .collect(toList()));
     final Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
     for (RuleKey activeRoslynRuleKey : activeRoslynRulesByPartialRepoKey.values()) {

@@ -53,7 +53,7 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
-    <sonarAnalyzer.version>1.19.0-alpha01</sonarAnalyzer.version>
+    <sonarAnalyzer.version>1.19.0-build00962</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>src/main/resources/static/nuget</sonarAnalyzer.workDirectory>
   </properties>
 
@@ -66,12 +66,12 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.3.2</version>
+      <version>1.5-build365</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.0.11</version>
+      <version>1.0.0.19</version>
     </dependency>
 
     <dependency>
@@ -94,6 +94,22 @@
           <groupId>org.picocontainer</groupId>
           <artifactId>picocontainer</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.sonar.sslr</groupId>
+          <artifactId>sslr-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.sonar.sslr</groupId>
+          <artifactId>sslr-xpath</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
 
@@ -113,11 +129,11 @@
       <version>1.3.9</version>
       <scope>provided</scope>
     </dependency>
-    <!-- Needed by sonar-dotnet-tests-library -->
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>2.5</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -168,7 +184,7 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>11000000</maxsize>
+                  <maxsize>12000000</maxsize>
                   <minsize>7000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
@@ -276,11 +292,6 @@
                 <copy todir="src/main/resources/org/sonar/plugins/csharp">
                   <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
                     <include name="*.xml"/>
-                  </fileset>
-                </copy>
-                <copy todir="src/main/proto">
-                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
-                    <include name="*.proto"/>
                   </fileset>
                 </copy>
                 <zip destfile="src/main/resources/static/SonarAnalyzer.zip"
