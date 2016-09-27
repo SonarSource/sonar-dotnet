@@ -396,31 +396,31 @@ public class CSharpSensor implements Sensor {
           String tagName = stream.getLocalName();
 
           if ("Lines".equals(tagName)) {
-            handleLinesMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.LINES);
           } else if ("Classes".equals(tagName)) {
-            handleClassesMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.CLASSES);
           } else if ("Statements".equals(tagName)) {
-            handleStatementsMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.STATEMENTS);
           } else if ("Functions".equals(tagName)) {
-            handleFunctionsMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.FUNCTIONS);
           } else if ("PublicApi".equals(tagName)) {
-            handlePublicApiMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.PUBLIC_API);
           } else if ("PublicUndocumentedApi".equals(tagName)) {
-            handlePublicUndocumentedApiMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API);
           } else if ("Complexity".equals(tagName)) {
-            handleComplexityMetricTag(inputFile);
+            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY);
           } else if ("FileComplexityDistribution".equals(tagName)) {
-            handleFileComplexityDistributionMetricTag(inputFile);
+            handleStringMeasure(inputFile, CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION);
           } else if ("FunctionComplexityDistribution".equals(tagName)) {
-            handleFunctionComplexityDistributionMetricTag(inputFile);
+            handleStringMeasure(inputFile, CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION);
           } else if ("Comments".equals(tagName)) {
             handleCommentsMetricTag(inputFile);
           } else if ("LinesOfCode".equals(tagName)) {
             handleLinesOfCodeMetricTag(inputFile);
           } else if ("ComplexityInClasses".equals(tagName)) {
-            parseAndSaveIntegerMetric(inputFile, CoreMetrics.COMPLEXITY_IN_CLASSES);
+            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY_IN_CLASSES);
           } else if ("ComplexityInFunctions".equals(tagName)) {
-            parseAndSaveIntegerMetric(inputFile, CoreMetrics.COMPLEXITY_IN_FUNCTIONS);
+            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY_IN_FUNCTIONS);
           }
         }
       }
@@ -434,50 +434,14 @@ public class CSharpSensor implements Sensor {
         .save();
     }
 
-    private void parseAndSaveIntegerMetric(InputFile inputFile, Metric<Integer> metric) throws XMLStreamException {
+    private void handleIntMeasure(InputFile inputFile, Metric<Integer> metric) throws XMLStreamException {
       int value = Integer.parseInt(stream.getElementText());
       saveMetric(inputFile, metric, value);
     }
 
-    private void parseAndSaveStringMetric(InputFile inputFile, Metric<String> metric) throws XMLStreamException {
+    private void handleStringMeasure(InputFile inputFile, Metric<String> metric) throws XMLStreamException {
       String value = stream.getElementText();
       saveMetric(inputFile, metric, value);
-    }
-
-    private void handleLinesMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.LINES);
-    }
-
-    private void handleClassesMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.CLASSES);
-    }
-
-    private void handleStatementsMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.STATEMENTS);
-    }
-
-    private void handleFunctionsMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.FUNCTIONS);
-    }
-
-    private void handlePublicApiMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.PUBLIC_API);
-    }
-
-    private void handlePublicUndocumentedApiMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API);
-    }
-
-    private void handleComplexityMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveIntegerMetric(inputFile, CoreMetrics.COMPLEXITY);
-    }
-
-    private void handleFileComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveStringMetric(inputFile, CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION);
-    }
-
-    private void handleFunctionComplexityDistributionMetricTag(InputFile inputFile) throws XMLStreamException {
-      parseAndSaveStringMetric(inputFile, CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION);
     }
 
     private void handleCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
