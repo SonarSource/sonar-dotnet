@@ -147,6 +147,8 @@ public class CSharpSensorTest {
         Tuple.tuple(CoreMetrics.FUNCTIONS_KEY, 3),
         Tuple.tuple(CoreMetrics.PUBLIC_API_KEY, 4),
         Tuple.tuple(CoreMetrics.PUBLIC_UNDOCUMENTED_API_KEY, 2),
+        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_CLASSES_KEY, 3),
+        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_FUNCTIONS_KEY, 2),
         Tuple.tuple(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION_KEY, "0=1;5=0;10=0;20=0;30=0;60=0;90=0"),
         Tuple.tuple(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION_KEY, "1=3;2=0;4=0;6=0;8=0;10=0;12=0"),
         Tuple.tuple(CoreMetrics.COMPLEXITY_KEY, 3));

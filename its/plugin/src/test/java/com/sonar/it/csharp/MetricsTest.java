@@ -120,6 +120,16 @@ public class MetricsTest {
     assertThat(getFileMeasure("complexity").getIntValue()).isEqualTo(2);
   }
 
+  @Test
+  public void complexityInClassesAtFileLevel() {
+    assertThat(getFileMeasure("complexity_in_classes").getIntValue()).isEqualTo(2);
+  }
+
+  @Test
+  public void complexityInFunctionsAtFileLevel() {
+    assertThat(getFileMeasure("complexity_in_functions").getIntValue()).isEqualTo(2);
+  }
+
   /* Lines */
 
   @Test
