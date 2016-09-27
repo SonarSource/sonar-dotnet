@@ -69,6 +69,7 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
 
 public class CSharpSensor implements Sensor {
 
@@ -246,6 +247,13 @@ public class CSharpSensor implements Sensor {
       ProtobufImporters.symbolRefsImporter().parse(context, symbolRefsInfoFile);
     } else {
       LOG.warn("Symbol reference data file not found: " + symbolRefsInfoFile);
+    }
+
+    File cpdTokensInfoFile = new File(toolOutput(context.fileSystem()), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+    if (cpdTokensInfoFile.isFile()) {
+      ProtobufImporters.cpdTokensImporter().parse(context, cpdTokensInfoFile);
+    } else {
+      LOG.warn("CPD token data file not found: " + cpdTokensInfoFile);
     }
   }
 
