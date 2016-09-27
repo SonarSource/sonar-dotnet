@@ -32,13 +32,16 @@ import java.util.Set;
 
 public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtension {
 
+  public static final String REPOSITORY_KEY = "csharpsquid";
+  public static final String REPOSITORY_NAME = "SonarAnalyzer";
+
   private Set<String> allRuleKeys = null;
 
   @Override
   public void define(Context context) {
     NewRepository repository = context
-      .createRepository(CSharpPlugin.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY)
-      .setName(CSharpPlugin.REPOSITORY_NAME);
+      .createRepository(REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY)
+      .setName(REPOSITORY_NAME);
 
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), Charsets.UTF_8));

@@ -185,7 +185,7 @@ public class CSharpSensor implements Sensor {
 
     appendLine(sb, "  <Rules>");
     if (includeRules) {
-      Collection<ActiveRule> activeRules = context.activeRules().findByRepository(CSharpPlugin.REPOSITORY_KEY);
+      Collection<ActiveRule> activeRules = context.activeRules().findByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY);
       for (ActiveRule activeRule : activeRules) {
         appendLine(sb, "    <Rule>");
         appendLine(sb, "      <Key>" + escapeXml(activeRule.ruleKey().rule()) + "</Key>");
@@ -608,7 +608,7 @@ public class CSharpSensor implements Sensor {
           if (line != null) {
             newLocation.at(inputFile.selectLine(line));
           }
-          newIssue.forRule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, id))
+          newIssue.forRule(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, id))
             .at(newLocation)
             .save();
           break;

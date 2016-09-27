@@ -194,7 +194,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(sb, "  <Rules>");
     if (includeRules) {
-      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
+      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)) {
         appendLine(sb, "    <Rule>");
         appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
         appendParameters(sb, effectiveParameters(activeRule));
@@ -251,7 +251,7 @@ public class RoslynProfileExporter extends ProfileExporter {
       if (activeRule.repository().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
         String pluginKey = activeRule.repository().substring(ROSLYN_REPOSITORY_PREFIX.length());
         builder.put(pluginKey, activeRule);
-      } else if (CSharpPlugin.REPOSITORY_KEY.equals(activeRule.repository())) {
+      } else if (CSharpSonarRulesDefinition.REPOSITORY_KEY.equals(activeRule.repository())) {
         builder.put(SONARANALYZER_PARTIAL_REPO_KEY, activeRule);
       }
     }
