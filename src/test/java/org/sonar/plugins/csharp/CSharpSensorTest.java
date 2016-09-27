@@ -55,6 +55,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_DIRECTORY_NAME;
 import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_XML_NAME;
+import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
 
 public class CSharpSensorTest {
 
@@ -165,17 +166,17 @@ public class CSharpSensorTest {
     sensor.executeInternal(tester);
 
     assertThat(tester.allIssues()).extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
-      .containsOnly(Tuple.tuple(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"), 16,
+      .containsOnly(Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 16,
         "Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation."));
   }
 
   @Test
   public void escapesAnalysisInput() throws Exception {
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
       .setParam("param1", "value1")
       .activate()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S9999"))
+      .create(RuleKey.of(REPOSITORY_KEY, "S9999"))
       .setParam("param9", "value9")
       .activate()
       .build());
@@ -191,9 +192,9 @@ public class CSharpSensorTest {
   @Test
   public void roslynReportIsProcessed() {
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
       .activate()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"))
+      .create(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "custom-roslyn"))
       .activate()
@@ -205,15 +206,15 @@ public class CSharpSensorTest {
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
       .containsOnly(
-        Tuple.tuple(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"), 16,
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 16,
           "Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation."),
-        Tuple.tuple(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"), 19,
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 19,
           "Short messages should be used first in Roslyn reports"),
-        Tuple.tuple(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"), 1,
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 1,
           "There only is a full message in the Roslyn report"),
         Tuple.tuple(RuleKey.of("roslyn.foo", "custom-roslyn"), 19,
           "Custom Roslyn analyzer message"),
-        Tuple.tuple(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"), null,
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), null,
           "This is an assembly level Roslyn issue with no location")
 
       );
@@ -239,7 +240,7 @@ public class CSharpSensorTest {
   @Test
   public void failWithDuplicateRuleKey() {
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"))
+      .create(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "[parameters_key]"))
       .activate()
@@ -254,7 +255,7 @@ public class CSharpSensorTest {
   @Test
   public void failWithCustomRoslynRulesAndMSBuild12() {
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "[parameters_key]"))
       .activate()
