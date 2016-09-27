@@ -55,7 +55,7 @@ public class CSharpPlugin implements Plugin {
   public static final String CSHARP_WAY_PROFILE = "Sonar way";
 
   public static final String REPOSITORY_KEY = "csharpsquid";
-  public static final String REPOSITORY_NAME = "SonarQube";
+  public static final String REPOSITORY_NAME = "SonarAnalyzer";
 
   public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
 
