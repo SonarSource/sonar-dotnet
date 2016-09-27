@@ -417,6 +417,10 @@ public class CSharpSensor implements Sensor {
             handleCommentsMetricTag(inputFile);
           } else if ("LinesOfCode".equals(tagName)) {
             handleLinesOfCodeMetricTag(inputFile);
+          } else if ("ComplexityInClasses".equals(tagName)) {
+            parseAndSaveIntegerMetric(inputFile, CoreMetrics.COMPLEXITY_IN_CLASSES);
+          } else if ("ComplexityInFunctions".equals(tagName)) {
+            parseAndSaveIntegerMetric(inputFile, CoreMetrics.COMPLEXITY_IN_FUNCTIONS);
           }
         }
       }
