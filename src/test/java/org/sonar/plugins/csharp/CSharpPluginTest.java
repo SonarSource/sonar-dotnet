@@ -54,7 +54,6 @@ public class CSharpPluginTest {
 
     assertThat(extensions).hasSize(
       expectedExtensions.length
-        + CSharpFxCopProvider.extensions().size()
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
         + CSharpMsBuildIntegrationProvider.extensions().size()

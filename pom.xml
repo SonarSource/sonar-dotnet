@@ -59,11 +59,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.sonarsource.fxcop</groupId>
-      <artifactId>sonar-fxcop-library</artifactId>
-      <version>1.5</version>
-    </dependency>
-    <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
       <version>1.5-build365</version>

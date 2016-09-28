@@ -32,7 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
   FileSuffixesTest.class,
-  FxCopTest.class,
   MetricsTest.class,
   NoSonarTest.class,
   UnitTestResultsTest.class
@@ -42,7 +41,6 @@ public class Tests {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
     .addPlugin(FileLocation.of("../../target/sonar-csharp-plugin.jar"))
-    .restoreProfileAtStartup(FileLocation.of("profiles/fxcop.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))

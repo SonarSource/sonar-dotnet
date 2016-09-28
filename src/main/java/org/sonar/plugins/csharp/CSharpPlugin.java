@@ -19,10 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
-import org.sonar.api.Plugin;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 @Properties({
@@ -31,8 +31,7 @@ import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
     defaultValue = CSharpPlugin.FILE_SUFFIXES_DEFVALUE,
     name = "File suffixes",
     description = "Comma-separated list of suffixes of files to analyze.",
-    project = true, global = true
-  ),
+    project = true, global = true),
   @Property(
     key = CSharpPlugin.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",
@@ -65,7 +64,6 @@ public class CSharpPlugin implements Plugin {
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class);
 
-    context.addExtensions(CSharpFxCopProvider.extensions());
     context.addExtensions(CSharpCodeCoverageProvider.extensions());
     context.addExtensions(CSharpUnitTestResultsProvider.extensions());
     context.addExtensions(CSharpMsBuildIntegrationProvider.extensions());
