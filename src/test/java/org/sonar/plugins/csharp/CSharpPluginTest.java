@@ -45,7 +45,6 @@ public class CSharpPluginTest {
       CSharpSonarWayProfile.class,
       SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
-      CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class
