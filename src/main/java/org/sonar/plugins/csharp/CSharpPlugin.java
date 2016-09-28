@@ -61,7 +61,6 @@ public class CSharpPlugin implements Plugin {
       CSharpSonarWayProfile.class,
       SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
-      CSharpCPDMapping.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class);
