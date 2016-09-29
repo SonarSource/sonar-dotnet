@@ -3,7 +3,7 @@
 <AnalysisOutput>
   <Files>
     <File>
-      <Path>Foo&amp;Bar.cs</Path>
+      <Path>Program.cs</Path>
       <Metrics>
         <Lines>27</Lines>
         <Classes>1</Classes>
