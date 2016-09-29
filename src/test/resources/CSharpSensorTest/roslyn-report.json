@@ -12,7 +12,7 @@
         {
           "analysisTarget": [
             {
-              "uri": "Foo&Bar.cs",
+              "uri": "Program.cs",
               "region": {
                 "startLine": 18,
                 "startColumn": 9,
@@ -41,7 +41,7 @@
         {
           "analysisTarget": [
             {
-              "uri": "Foo&Bar.cs",
+              "uri": "Program.cs",
               "region": {
                 "startLine": 0
               }
@@ -57,7 +57,7 @@
         {
           "analysisTarget": [
             {
-              "uri": "Foo&Bar.cs",
+              "uri": "Program.cs",
               "region": {
                 "startLine": 18,
                 "startColumn": 11,
@@ -95,7 +95,7 @@
         {
           "analysisTarget": [
             {
-              "uri": "Foo&Bar.cs",
+              "uri": "Program.cs",
               "region": {
                 "startLine": 18
               }

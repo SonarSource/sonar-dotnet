@@ -9,6 +9,6 @@
   <Rules>
   </Rules>
   <Files>
-    <File>Foo&amp;Bar.cs</File>
+    <File>Program.cs</File>
   </Files>
 </AnalysisInput>

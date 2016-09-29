@@ -20,7 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileReader;
@@ -97,24 +96,24 @@ public class CSharpSensorTest {
       }
     });
     System.out.println(destDir);
-    File csFile = new File("src/test/resources/Foo&Bar.cs").getAbsoluteFile();
+    File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
 
     Path analysisReport = workDir.toPath().resolve(ANALYSIS_OUTPUT_DIRECTORY_NAME).resolve(ANALYSIS_OUTPUT_XML_NAME);
     java.nio.file.Files.write(analysisReport,
-      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(analysisReport), StandardCharsets.UTF_8), "<Path>Foo&amp;Bar.cs</Path>",
+      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(analysisReport), StandardCharsets.UTF_8), "<Path>Program.cs</Path>",
         "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>").getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
     Path roslynReport = workDir.toPath().resolve("roslyn-report.json");
     java.nio.file.Files.write(roslynReport,
-      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Foo&Bar.cs",
+      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
         StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
 
-    inputFile = new DefaultInputFile(tester.module().key(), "Foo&Bar.cs")
+    inputFile = new DefaultInputFile(tester.module().key(), "Program.cs")
       .setLanguage(CSharpPlugin.LANGUAGE_KEY)
       .initMetadata(new FileMetadata().readMetadata(new FileReader(csFile)));
     tester.fileSystem().add(inputFile);
@@ -136,31 +135,41 @@ public class CSharpSensorTest {
   public void metricsAndNoSonar() {
     sensor.executeInternal(tester);
 
-    assertThat(tester.measures(tester.module().key() + ":Foo&Bar.cs"))
+    assertThat(tester.measures(tester.module().key() + ":Program.cs"))
       .extracting("metric.key", "value")
       .containsOnly(
-        Tuple.tuple(CoreMetrics.LINES_KEY, 27),
-        Tuple.tuple(CoreMetrics.CLASSES_KEY, 1),
-        Tuple.tuple(CoreMetrics.NCLOC_KEY, 3),
-        Tuple.tuple(CoreMetrics.COMMENT_LINES_KEY, 2),
-        Tuple.tuple(CoreMetrics.STATEMENTS_KEY, 2),
+        Tuple.tuple(CoreMetrics.LINES_KEY, 55),
+        Tuple.tuple(CoreMetrics.CLASSES_KEY, 2),
+        Tuple.tuple(CoreMetrics.NCLOC_KEY, 35),
+        Tuple.tuple(CoreMetrics.COMMENT_LINES_KEY, 12),
+        Tuple.tuple(CoreMetrics.STATEMENTS_KEY, 6),
         Tuple.tuple(CoreMetrics.FUNCTIONS_KEY, 3),
-        Tuple.tuple(CoreMetrics.PUBLIC_API_KEY, 4),
-        Tuple.tuple(CoreMetrics.PUBLIC_UNDOCUMENTED_API_KEY, 2),
-        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_CLASSES_KEY, 3),
-        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_FUNCTIONS_KEY, 2),
-        Tuple.tuple(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION_KEY, "0=1;5=0;10=0;20=0;30=0;60=0;90=0"),
-        Tuple.tuple(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION_KEY, "1=3;2=0;4=0;6=0;8=0;10=0;12=0"),
-        Tuple.tuple(CoreMetrics.COMPLEXITY_KEY, 3));
+        Tuple.tuple(CoreMetrics.PUBLIC_API_KEY, 2),
+        Tuple.tuple(CoreMetrics.PUBLIC_UNDOCUMENTED_API_KEY, 1),
+        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_CLASSES_KEY, 7),
+        Tuple.tuple(CoreMetrics.COMPLEXITY_IN_FUNCTIONS_KEY, 7),
+        Tuple.tuple(CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION_KEY, "0=0;5=1;10=0;20=0;30=0;60=0;90=0"),
+        Tuple.tuple(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION_KEY, "1=2;2=0;4=1;6=0;8=0;10=0;12=0"),
+        Tuple.tuple(CoreMetrics.COMPLEXITY_KEY, 7));
 
-    verify(noSonarFilter).noSonarInFile(inputFile, ImmutableSet.of(8));
+    //verify(noSonarFilter).noSonarInFile(inputFile, ImmutableSet.of(8));
 
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 3, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 7, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 10, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 11, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 12, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 13, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 17, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 18, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 19, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 20, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 21, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 22, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 46, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 48, 1);
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 12, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 13, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 3, 1);
   }
 
   @Test
@@ -187,7 +196,7 @@ public class CSharpSensorTest {
 
     assertThat(
       Files.toString(new File(workDir, "SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
-        .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
+        .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
       .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 
@@ -229,7 +238,7 @@ public class CSharpSensorTest {
 
     assertThat(
       Files.toString(new File(workDir, "SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
-        .replaceAll("<File>.*?Foo&amp;Bar.cs</File>", "<File>Foo&amp;Bar.cs</File>"))
+        .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
       .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
   }
 

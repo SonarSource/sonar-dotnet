@@ -24,14 +24,12 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -43,7 +41,6 @@ import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
-import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -52,8 +49,6 @@ import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.command.Command;
@@ -62,14 +57,16 @@ import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
+import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 import static java.util.stream.Collectors.toList;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 public class CSharpSensor implements Sensor {
 
@@ -235,25 +232,18 @@ public class CSharpSensor implements Sensor {
     File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
     new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
 
-    File highlightInfoFile = new File(toolOutput(context.fileSystem()), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    if (highlightInfoFile.isFile()) {
-      ProtobufImporters.highlightImporter().accept(context, highlightInfoFile);
-    } else {
-      LOG.warn("Syntax highlighting data file not found: " + highlightInfoFile);
-    }
+    parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), METRICS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.highlightImporter(), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+  }
 
-    File symbolRefsInfoFile = new File(toolOutput(context.fileSystem()), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    if (symbolRefsInfoFile.isFile()) {
-      ProtobufImporters.symbolRefsImporter().accept(context, symbolRefsInfoFile);
+  private void parseProtobuf(SensorContext context, ProtobufImporter importer, String filename) {
+    File protobuf = new File(toolOutput(context.fileSystem()), filename);
+    if (protobuf.isFile()) {
+      importer.accept(context, protobuf);
     } else {
-      LOG.warn("Symbol reference data file not found: " + symbolRefsInfoFile);
-    }
-
-    File cpdTokensInfoFile = new File(toolOutput(context.fileSystem()), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
-    if (cpdTokensInfoFile.isFile()) {
-      ProtobufImporters.cpdTokensImporter().accept(context, cpdTokensInfoFile);
-    } else {
-      LOG.warn("CPD token data file not found: " + cpdTokensInfoFile);
+      LOG.warn("Protobuf file not found: " + protobuf);
     }
   }
 
@@ -383,168 +373,12 @@ public class CSharpSensor implements Sensor {
           if ("Path".equals(tagName)) {
             String path = stream.getElementText();
             inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(path));
-          } else if ("Metrics".equals(tagName)) {
-            Preconditions.checkState(inputFile != null, "No file path for File Tag");
-            handleMetricsTag(inputFile);
           } else if ("Issues".equals(tagName)) {
             Preconditions.checkState(inputFile != null, "No file path for File Tag");
             handleIssuesTag(inputFile);
           }
         }
       }
-    }
-
-    private void handleMetricsTag(InputFile inputFile) throws XMLStreamException {
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "Metrics".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Lines".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.LINES);
-          } else if ("Classes".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.CLASSES);
-          } else if ("Statements".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.STATEMENTS);
-          } else if ("Functions".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.FUNCTIONS);
-          } else if ("PublicApi".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.PUBLIC_API);
-          } else if ("PublicUndocumentedApi".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.PUBLIC_UNDOCUMENTED_API);
-          } else if ("Complexity".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY);
-          } else if ("FileComplexityDistribution".equals(tagName)) {
-            handleStringMeasure(inputFile, CoreMetrics.FILE_COMPLEXITY_DISTRIBUTION);
-          } else if ("FunctionComplexityDistribution".equals(tagName)) {
-            handleStringMeasure(inputFile, CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION);
-          } else if ("Comments".equals(tagName)) {
-            handleCommentsMetricTag(inputFile);
-          } else if ("LinesOfCode".equals(tagName)) {
-            handleLinesOfCodeMetricTag(inputFile);
-          } else if ("ComplexityInClasses".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY_IN_CLASSES);
-          } else if ("ComplexityInFunctions".equals(tagName)) {
-            handleIntMeasure(inputFile, CoreMetrics.COMPLEXITY_IN_FUNCTIONS);
-          }
-        }
-      }
-    }
-
-    private <T extends Serializable> void saveMetric(InputFile inputFile, Metric<T> metric, T value) {
-      context.<T>newMeasure()
-        .on(inputFile)
-        .forMetric(metric)
-        .withValue(value)
-        .save();
-    }
-
-    private void handleIntMeasure(InputFile inputFile, Metric<Integer> metric) throws XMLStreamException {
-      int value = Integer.parseInt(stream.getElementText());
-      saveMetric(inputFile, metric, value);
-    }
-
-    private void handleStringMeasure(InputFile inputFile, Metric<String> metric) throws XMLStreamException {
-      String value = stream.getElementText();
-      saveMetric(inputFile, metric, value);
-    }
-
-    private void handleCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "Comments".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("NoSonar".equals(tagName)) {
-            handleNoSonarCommentsMetricTag(inputFile);
-          } else if ("NonBlank".equals(tagName)) {
-            handleNonBlankCommentsMetricTag(inputFile);
-          }
-        }
-      }
-    }
-
-    private void handleNoSonarCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
-      ImmutableSet.Builder<Integer> builder = ImmutableSet.builder();
-
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "NoSonar".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Line".equals(tagName)) {
-            int line = Integer.parseInt(stream.getElementText());
-            builder.add(line);
-          } else {
-            throw new IllegalArgumentException();
-          }
-        }
-      }
-
-      noSonarFilter.noSonarInFile(inputFile, builder.build());
-    }
-
-    private void handleNonBlankCommentsMetricTag(InputFile inputFile) throws XMLStreamException {
-      int value = 0;
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
-
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "NonBlank".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Line".equals(tagName)) {
-            value++;
-
-            int line = Integer.parseInt(stream.getElementText());
-            fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
-          } else {
-            throw new IllegalArgumentException();
-          }
-        }
-      }
-
-      fileLinesContext.save();
-      saveMetric(inputFile, CoreMetrics.COMMENT_LINES, value);
-    }
-
-    private void handleLinesOfCodeMetricTag(InputFile inputFile) throws XMLStreamException {
-      int value = 0;
-      FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
-
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "LinesOfCode".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Line".equals(tagName)) {
-            value++;
-
-            int line = Integer.parseInt(stream.getElementText());
-            fileLinesContext.setIntValue(CoreMetrics.NCLOC_DATA_KEY, line, 1);
-          } else {
-            throw new IllegalArgumentException();
-          }
-        }
-      }
-
-      fileLinesContext.save();
-      saveMetric(inputFile, CoreMetrics.NCLOC, value);
     }
 
     private void handleIssuesTag(InputFile inputFile) throws XMLStreamException {
