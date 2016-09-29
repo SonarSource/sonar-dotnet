@@ -52,8 +52,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_DIRECTORY_NAME;
-import static org.sonar.plugins.csharp.CSharpSensor.ANALYSIS_OUTPUT_XML_NAME;
 import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
 
 public class CSharpSensorTest {
@@ -95,14 +93,7 @@ public class CSharpSensorTest {
         throw new IllegalStateException(e);
       }
     });
-    System.out.println(destDir);
     File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
-
-    Path analysisReport = workDir.toPath().resolve(ANALYSIS_OUTPUT_DIRECTORY_NAME).resolve(ANALYSIS_OUTPUT_XML_NAME);
-    java.nio.file.Files.write(analysisReport,
-      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(analysisReport), StandardCharsets.UTF_8), "<Path>Program.cs</Path>",
-        "<Path>" + csFile.getAbsolutePath().replace("&", "&amp;") + "</Path>").getBytes(StandardCharsets.UTF_8),
-      StandardOpenOption.WRITE);
 
     Path roslynReport = workDir.toPath().resolve("roslyn-report.json");
     java.nio.file.Files.write(roslynReport,
@@ -177,8 +168,14 @@ public class CSharpSensorTest {
     sensor.executeInternal(tester);
 
     assertThat(tester.allIssues()).extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
-      .containsOnly(Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 16,
-        "Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation."));
+      .containsOnly(
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 40,
+          "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1172"), 40,
+          "Remove this unused method parameter \"args\"."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1118"), 23,
+          "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.")
+        );
   }
 
   @Test
@@ -217,8 +214,12 @@ public class CSharpSensorTest {
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
       .containsOnly(
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 16,
-          "Add a nested comment explaining why this method is empty, throw an NotSupportedException or complete the implementation."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 40,
+          "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1172"), 40,
+          "Remove this unused method parameter \"args\"."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1118"), 23,
+          "Add a \"protected\" constructor or the \"static\" keyword to the class declaration."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 19,
           "Short messages should be used first in Roslyn reports"),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 1,
