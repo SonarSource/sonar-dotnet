@@ -238,7 +238,7 @@ public class CSharpSensor implements Sensor {
     parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
   }
 
-  private void parseProtobuf(SensorContext context, ProtobufImporter importer, String filename) {
+  private static void parseProtobuf(SensorContext context, ProtobufImporter importer, String filename) {
     File protobuf = new File(toolOutput(context.fileSystem()), filename);
     if (protobuf.isFile()) {
       importer.accept(context, protobuf);
