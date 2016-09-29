@@ -230,7 +230,7 @@ public class CSharpSensor implements Sensor {
 
   private void importResults(SensorContext context) {
     File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
-    new AnalysisResultImporter(context, fileLinesContextFactory, noSonarFilter).parse(analysisOutput);
+    new AnalysisResultImporter(context).parse(analysisOutput);
 
     parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), METRICS_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.highlightImporter(), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
@@ -318,13 +318,9 @@ public class CSharpSensor implements Sensor {
 
     private final SensorContext context;
     private XMLStreamReader stream;
-    private final FileLinesContextFactory fileLinesContextFactory;
-    private final NoSonarFilter noSonarFilter;
 
-    public AnalysisResultImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+    public AnalysisResultImporter(SensorContext context) {
       this.context = context;
-      this.fileLinesContextFactory = fileLinesContextFactory;
-      this.noSonarFilter = noSonarFilter;
     }
 
     public void parse(File file) {
