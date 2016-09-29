@@ -20,23 +20,16 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -46,7 +39,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.issue.NewIssue;
-import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
@@ -65,6 +57,7 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
@@ -75,9 +68,6 @@ public class CSharpSensor implements Sensor {
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
 
   static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
-
-  // Do not change this. SonarAnalyzer defines this filename
-  static final String ANALYSIS_OUTPUT_XML_NAME = "analysis-output.xml";
 
   private final Settings settings;
   private final SonarAnalyzerScannerExtractor extractor;
@@ -229,9 +219,7 @@ public class CSharpSensor implements Sensor {
   }
 
   private void importResults(SensorContext context) {
-    File analysisOutput = new File(toolOutput(context.fileSystem()), ANALYSIS_OUTPUT_XML_NAME);
-    new AnalysisResultImporter(context).parse(analysisOutput);
-
+    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), ISSUES_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), METRICS_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.highlightImporter(), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
@@ -312,126 +300,6 @@ public class CSharpSensor implements Sensor {
           .message(message))
         .save();
     }
-  }
-
-  private static class AnalysisResultImporter {
-
-    private final SensorContext context;
-    private XMLStreamReader stream;
-
-    public AnalysisResultImporter(SensorContext context) {
-      this.context = context;
-    }
-
-    public void parse(File file) {
-      XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
-
-      try (InputStreamReader reader = new InputStreamReader(new FileInputStream(file), Charsets.UTF_8)) {
-        stream = xmlFactory.createXMLStreamReader(reader);
-
-        while (stream.hasNext()) {
-          if (stream.next() == XMLStreamConstants.START_ELEMENT) {
-            String tagName = stream.getLocalName();
-
-            if ("File".equals(tagName)) {
-              handleFileTag();
-            }
-          }
-        }
-      } catch (XMLStreamException | IOException e) {
-        throw Throwables.propagate(e);
-      } finally {
-        closeXmlStream();
-      }
-    }
-
-    private void closeXmlStream() {
-      if (stream != null) {
-        try {
-          stream.close();
-        } catch (XMLStreamException e) {
-          throw Throwables.propagate(e);
-        }
-      }
-    }
-
-    private void handleFileTag() throws XMLStreamException {
-      InputFile inputFile = null;
-
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "File".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Path".equals(tagName)) {
-            String path = stream.getElementText();
-            inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(path));
-          } else if ("Issues".equals(tagName)) {
-            Preconditions.checkState(inputFile != null, "No file path for File Tag");
-            handleIssuesTag(inputFile);
-          }
-        }
-      }
-    }
-
-    private void handleIssuesTag(InputFile inputFile) throws XMLStreamException {
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "Issues".equals(stream.getLocalName())) {
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Issue".equals(tagName)) {
-            handleIssueTag(inputFile, context);
-          }
-        }
-      }
-    }
-
-    private void handleIssueTag(InputFile inputFile, SensorContext context) throws XMLStreamException {
-
-      String id = null;
-      String message = null;
-      Integer line = null;
-
-      NewIssue newIssue = context.newIssue();
-
-      while (stream.hasNext()) {
-        int next = stream.next();
-
-        if (next == XMLStreamConstants.END_ELEMENT && "Issue".equals(stream.getLocalName())) {
-          Preconditions.checkState(!"AnalyzerDriver".equals(id), "The analyzer failed, double check rule parameters or disable failing rules: " + message);
-
-          NewIssueLocation newLocation = newIssue
-            .newLocation()
-            .on(inputFile)
-            .message(message);
-          if (line != null) {
-            newLocation.at(inputFile.selectLine(line));
-          }
-          newIssue.forRule(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, id))
-            .at(newLocation)
-            .save();
-          break;
-        } else if (next == XMLStreamConstants.START_ELEMENT) {
-          String tagName = stream.getLocalName();
-
-          if ("Id".equals(tagName)) {
-            id = stream.getElementText();
-          } else if ("Line".equals(tagName)) {
-            line = Integer.parseInt(stream.getElementText());
-          } else if ("Message".equals(tagName)) {
-            message = stream.getElementText();
-          }
-        }
-      }
-    }
-
   }
 
   private static void appendLine(StringBuilder sb, String line) {
