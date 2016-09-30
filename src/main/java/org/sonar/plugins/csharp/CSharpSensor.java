@@ -219,8 +219,9 @@ public class CSharpSensor implements Sensor {
   }
 
   private void importResults(SensorContext context) {
-    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), ISSUES_OUTPUT_PROTOBUF_NAME);
+    // Note: the no-sonar rules must be imported before issues, otherwise the affected issues won't get excluded!
     parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), METRICS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), ISSUES_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.highlightImporter(), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
     parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
