@@ -42,6 +42,14 @@ namespace ConsoleApplication1
         }
     }
 
+    class IFoo
+    {
+    }
+
+    class IBar  // NOSONAR
+    {
+    }
+
     [SuppressMessage("Maintainability", "S2326:Unused type parameters should be removed")]
     class MoreMath<T> // Noncompliant; <T>is ignored
     {

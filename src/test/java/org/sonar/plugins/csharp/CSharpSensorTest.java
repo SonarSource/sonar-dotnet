@@ -28,6 +28,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.util.Collections;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -129,9 +131,9 @@ public class CSharpSensorTest {
     assertThat(tester.measures(tester.module().key() + ":Program.cs"))
       .extracting("metric.key", "value")
       .containsOnly(
-        Tuple.tuple(CoreMetrics.LINES_KEY, 55),
-        Tuple.tuple(CoreMetrics.CLASSES_KEY, 2),
-        Tuple.tuple(CoreMetrics.NCLOC_KEY, 35),
+        Tuple.tuple(CoreMetrics.LINES_KEY, 63),
+        Tuple.tuple(CoreMetrics.CLASSES_KEY, 4),
+        Tuple.tuple(CoreMetrics.NCLOC_KEY, 41),
         Tuple.tuple(CoreMetrics.COMMENT_LINES_KEY, 12),
         Tuple.tuple(CoreMetrics.STATEMENTS_KEY, 6),
         Tuple.tuple(CoreMetrics.FUNCTIONS_KEY, 3),
@@ -143,7 +145,7 @@ public class CSharpSensorTest {
         Tuple.tuple(CoreMetrics.FUNCTION_COMPLEXITY_DISTRIBUTION_KEY, "1=2;2=0;4=1;6=0;8=0;10=0;12=0"),
         Tuple.tuple(CoreMetrics.COMPLEXITY_KEY, 7));
 
-    //verify(noSonarFilter).noSonarInFile(inputFile, ImmutableSet.of(8));
+    verify(noSonarFilter).noSonarInFile(inputFile, Collections.singleton(49));
 
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 10, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 11, 1);
@@ -155,8 +157,8 @@ public class CSharpSensorTest {
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 20, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 21, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 22, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 46, 1);
-    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 48, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 54, 1);
+    verify(fileLinesContext).setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, 56, 1);
 
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 1, 1);
     verify(fileLinesContext).setIntValue(CoreMetrics.NCLOC_DATA_KEY, 2, 1);
@@ -174,7 +176,11 @@ public class CSharpSensorTest {
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1172"), 40,
           "Remove this unused method parameter \"args\"."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1118"), 23,
-          "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.")
+          "Add a \"protected\" constructor or the \"static\" keyword to the class declaration."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 45,
+          "Rename class \"IFoo\" to match camel case naming rules, consider using \"Foo\"."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 49,
+          "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\".")
         );
   }
 
@@ -220,6 +226,10 @@ public class CSharpSensorTest {
           "Remove this unused method parameter \"args\"."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1118"), 23,
           "Add a \"protected\" constructor or the \"static\" keyword to the class declaration."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 45,
+          "Rename class \"IFoo\" to match camel case naming rules, consider using \"Foo\"."),
+        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 49,
+          "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\"."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 19,
           "Short messages should be used first in Roslyn reports"),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 1,
