@@ -104,7 +104,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   private static String getAnalyzerVersion() {
     try {
-      return new BufferedReader(new InputStreamReader(RoslynProfileExporter.class.getResourceAsStream("/static/version.txt"))).readLine();
+      return new BufferedReader(new InputStreamReader(RoslynProfileExporter.class.getResourceAsStream("/static/version.txt"), StandardCharsets.UTF_8)).readLine();
     } catch (IOException e) {
       throw new IllegalStateException("Couldn't read C# analyzer version number from '/static/version.txt'", e);
     }

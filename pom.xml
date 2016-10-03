@@ -261,7 +261,7 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
 
-                <echo file="src/main/resources/static/version.txt" message="${sonarAnalyzer.version}" />
+                <echo file="src/main/resources/static/version.txt" message="${sonarAnalyzer.version}" encoding="utf-8" />
               </tasks>
 
             </configuration>
