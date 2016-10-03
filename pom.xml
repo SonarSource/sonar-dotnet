@@ -54,7 +54,7 @@
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <sonarAnalyzer.version>1.19.0-build00975</sonarAnalyzer.version>
-    <sonarAnalyzer.workDirectory>src/main/resources/static/nuget</sonarAnalyzer.workDirectory>
+    <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
   </properties>
 
   <dependencies>
@@ -154,6 +154,19 @@
   </dependencies>
 
   <build>
+   <resources>
+     <resource>
+       <directory>src/main/resources</directory>
+     </resource>
+     <resource>
+       <directory>${sonarAnalyzer.workDirectory}</directory>
+       <includes>
+         <include>static/SonarAnalyzer-${sonarAnalyzer.version}.zip</include>
+         <include>SonarAnalyzer.Scanner.zip</include>
+       </includes>
+     </resource>
+   </resources>
+ 
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -175,41 +188,6 @@
                   </files>
                 </requireFilesSize>
               </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-clean-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>delete-nuget-folder-content-pre</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-            <configuration>
-              <filesets>
-                <fileset>
-                  <directory>${sonarAnalyzer.workDirectory}</directory>
-                </fileset>
-              </filesets>
-            </configuration>
-          </execution>
-          <execution>
-            <id>delete-nuget-folder-content-post</id>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-            <configuration>
-              <filesets>
-                <fileset>
-                  <directory>${sonarAnalyzer.workDirectory}</directory>
-                </fileset>
-              </filesets>
             </configuration>
           </execution>
         </executions>
@@ -278,9 +256,9 @@
                     <include name="*.xml"/>
                   </fileset>
                 </copy>
-                <zip destfile="src/main/resources/static/SonarAnalyzer.zip"
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${sonarAnalyzer.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/analyzers"/>
-                <zip destfile="src/main/resources/SonarAnalyzer.Scanner.zip"
+                <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
 
                 <echo file="src/main/resources/static/version.txt" message="${sonarAnalyzer.version}" />

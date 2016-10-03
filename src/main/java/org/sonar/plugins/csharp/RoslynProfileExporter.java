@@ -19,14 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import static java.util.stream.Collectors.toList;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -47,14 +44,18 @@ import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 
-import static java.util.stream.Collectors.toList;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 public class RoslynProfileExporter extends ProfileExporter {
 
   static final String SONARANALYZER_CSHARP_NAME = "SonarAnalyzer.CSharp";
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
-  // seems arbitrary and unused at the moment. Can be read from RoslynProfileExporter.class.getResourceAsStream("/static/version.txt")
-  private static final String SONARANALYZER_NUGET_VERSION = "1.19";
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
@@ -69,17 +70,18 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   public static List<PropertyDefinition> sonarLintRepositoryProperties() {
+    String analyzerVersion = getAnalyzerVersion();
     return Arrays.asList(
       PropertyDefinition.builder(pluginKeyPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
         .defaultValue("csharp")
         .hidden()
         .build(),
       PropertyDefinition.builder(pluginVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_NUGET_VERSION)
+        .defaultValue(analyzerVersion)
         .hidden()
         .build(),
       PropertyDefinition.builder(staticResourceNamePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue("SonarAnalyzer.zip")
+        .defaultValue("SonarAnalyzer-" + analyzerVersion + ".zip")
         .hidden()
         .build(),
       PropertyDefinition.builder(analyzerIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
@@ -95,9 +97,17 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_NUGET_VERSION)
+        .defaultValue(analyzerVersion)
         .hidden()
         .build());
+  }
+
+  private static String getAnalyzerVersion() {
+    try {
+      return new BufferedReader(new InputStreamReader(RoslynProfileExporter.class.getResourceAsStream("/static/version.txt"))).readLine();
+    } catch (IOException e) {
+      throw new IllegalStateException("Couldn't read C# analyzer version number from '/static/version.txt'", e);
+    }
   }
 
   @Override
@@ -159,7 +169,8 @@ public class RoslynProfileExporter extends ProfileExporter {
       String pluginVersion = mandatoryPropertyValue(pluginVersionPropertyKey(partialRepoKey));
       String staticResourceName = mandatoryPropertyValue(staticResourceNamePropertyKey(partialRepoKey));
 
-      appendLine(writer, "      <Plugin Key=\"" + escapeXml(pluginKey) + "\" Version=\"" + escapeXml(pluginVersion) + "\" StaticResourceName=\"" + escapeXml(staticResourceName) + "\" />");
+      appendLine(writer,
+        "      <Plugin Key=\"" + escapeXml(pluginKey) + "\" Version=\"" + escapeXml(pluginVersion) + "\" StaticResourceName=\"" + escapeXml(staticResourceName) + "\" />");
     }
     appendLine(writer, "    </Plugins>");
 
