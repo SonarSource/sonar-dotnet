@@ -53,7 +53,7 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
-    <sonarAnalyzer.version>1.19.0-build00966</sonarAnalyzer.version>
+    <sonarAnalyzer.version>1.19.0-build00975</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>src/main/resources/static/nuget</sonarAnalyzer.workDirectory>
   </properties>
 
@@ -66,7 +66,7 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.0.65</version>
+      <version>1.0.0.73</version>
     </dependency>
 
     <dependency>
