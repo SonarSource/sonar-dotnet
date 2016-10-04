@@ -131,7 +131,6 @@ public class CSharpSensorTest {
     assertThat(tester.measures(tester.module().key() + ":Program.cs"))
       .extracting("metric.key", "value")
       .containsOnly(
-        Tuple.tuple(CoreMetrics.LINES_KEY, 63),
         Tuple.tuple(CoreMetrics.CLASSES_KEY, 4),
         Tuple.tuple(CoreMetrics.NCLOC_KEY, 41),
         Tuple.tuple(CoreMetrics.COMMENT_LINES_KEY, 12),
