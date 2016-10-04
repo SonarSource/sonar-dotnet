@@ -24,12 +24,17 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
-import com.google.common.io.Files;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.StreamSupport;
+
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -66,7 +71,7 @@ public class CSharpSensor implements Sensor {
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
   static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
-
+  static final String ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY = "sonar.cs.analyzer.projectOutPath";
   static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
 
   private final Settings settings;
@@ -104,15 +109,46 @@ public class CSharpSensor implements Sensor {
     String roslynReportPath = settings.getString(ROSLYN_REPORT_PATH_PROPERTY_KEY);
     boolean hasRoslynReportPath = roslynReportPath != null;
 
-    analyze(!hasRoslynReportPath, context);
-    importResults(context);
+    String analyzerWorkDirPath = settings.getString(ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY);
+    boolean requiresAnalyzerScannerExecution = requiresAnalyzerScannerExecution(analyzerWorkDirPath);
+
+    LOG.info("SonarAnalyzer.Scanner needs to be executed: " + requiresAnalyzerScannerExecution);
+
+    if (requiresAnalyzerScannerExecution) {
+      analyze(!hasRoslynReportPath, context);
+    }
+
+    Path workDirectory = requiresAnalyzerScannerExecution
+      ? toolOutput(context.fileSystem())
+      : analyzerOutputDir(analyzerWorkDirPath);
+
+    LOG.info("Importing analysis results from " + workDirectory.toAbsolutePath().toString());
+    importResults(context, workDirectory);
 
     if (hasRoslynReportPath) {
+      LOG.info("Importing Roslyn report");
       importRoslynReport(roslynReportPath, context);
     }
   }
 
-  private void analyze(boolean includeRules, SensorContext context) {
+  private static boolean requiresAnalyzerScannerExecution(String analyzerWorkDirPath) {
+    Path dir = analyzerOutputDir(analyzerWorkDirPath);
+    if (!Files.exists(dir)){
+      LOG.info("Analyzer working directory does not exist");
+      return true;
+    }
+
+    try ( DirectoryStream<Path> files = Files.newDirectoryStream(dir, p -> p.toAbsolutePath().toString().toLowerCase().endsWith(".pb"))) {
+      long count = StreamSupport.stream(files.spliterator(), false).count();
+      LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
+      return count == 0;
+    } catch (IOException e) {
+      LOG.warn("Could not check for .pb files in " + dir.toAbsolutePath().toString(), e);
+      return true;
+    }
+  }
+
+  void analyze(boolean includeRules, SensorContext context) {
     if (includeRules) {
       LOG.warn("***********************************************************************************");
       LOG.warn("*                 Use MSBuild 14 to get the best analysis results                 *");
@@ -134,11 +170,11 @@ public class CSharpSensor implements Sensor {
 
     String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, context);
 
-    File analysisInput = toolInput(context.fileSystem());
-    File analysisOutput = toolOutput(context.fileSystem());
+    Path analysisInput = toolInput(context.fileSystem());
+    Path analysisOutput = toolOutput(context.fileSystem());
 
     try {
-      Files.write(analysisSettings, analysisInput, Charsets.UTF_8);
+      Files.write(analysisInput, analysisSettings.getBytes(Charsets.UTF_8));
     } catch (IOException e) {
       throw Throwables.propagate(e);
     }
@@ -146,8 +182,8 @@ public class CSharpSensor implements Sensor {
     File executableFile = extractor.executableFile(CSharpPlugin.LANGUAGE_KEY);
 
     Command command = Command.create(executableFile.getAbsolutePath())
-      .addArgument(analysisInput.getAbsolutePath())
-      .addArgument(analysisOutput.getAbsolutePath())
+      .addArgument(analysisInput.toAbsolutePath().toString())
+      .addArgument(analysisOutput.toAbsolutePath().toString())
       .addArgument("cs");
 
     int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
@@ -218,19 +254,19 @@ public class CSharpSensor implements Sensor {
     return ImmutableMap.copyOf(builder);
   }
 
-  private void importResults(SensorContext context) {
+  void importResults(SensorContext context, Path workDirectory) {
     // Note: the no-sonar rules must be imported before issues, otherwise the affected issues won't get excluded!
-    parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), METRICS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), ISSUES_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.highlightImporter(), HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), workDirectory, METRICS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), workDirectory, ISSUES_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.highlightImporter(), workDirectory, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), workDirectory, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+    parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), workDirectory, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
   }
 
-  private static void parseProtobuf(SensorContext context, ProtobufImporter importer, String filename) {
-    File protobuf = new File(toolOutput(context.fileSystem()), filename);
-    if (protobuf.isFile()) {
-      importer.accept(context, protobuf);
+  private static void parseProtobuf(SensorContext context, ProtobufImporter importer, Path workDirectory, String filename) {
+    Path protobuf = workDirectory.resolve(filename);
+    if (Files.exists(protobuf)) {
+      importer.accept(context, protobuf.toFile());
     } else {
       LOG.warn("Protobuf file not found: " + protobuf);
     }
@@ -330,12 +366,16 @@ public class CSharpSensor implements Sensor {
     return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
   }
 
-  private static File toolInput(FileSystem fs) {
-    return new File(fs.workDir(), "SonarLint.xml");
+  private static Path toolInput(FileSystem fs) {
+    return fs.workDir().toPath().resolve("SonarLint.xml");
   }
 
-  private static File toolOutput(FileSystem fileSystem) {
-    return new File(fileSystem.workDir(), ANALYSIS_OUTPUT_DIRECTORY_NAME);
+  private static Path toolOutput(FileSystem fs) {
+    return fs.workDir().toPath().resolve(ANALYSIS_OUTPUT_DIRECTORY_NAME);
+  }
+
+  private static Path analyzerOutputDir(String analyzerWorkDirPath) {
+    return Paths.get(analyzerWorkDirPath, ANALYSIS_OUTPUT_DIRECTORY_NAME);
   }
 
 }

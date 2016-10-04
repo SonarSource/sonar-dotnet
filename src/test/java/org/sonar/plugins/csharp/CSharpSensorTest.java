@@ -19,11 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -52,7 +51,12 @@ import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
 
@@ -73,20 +77,19 @@ public class CSharpSensorTest {
   private NoSonarFilter noSonarFilter;
   private SensorContextTester tester;
 
-  private File workDir;
+  private Path workDir;
 
   @Before
   public void prepare() throws Exception {
-    workDir = temp.newFolder();
+    workDir = temp.newFolder().toPath();
     Path srcDir = Paths.get("src/test/resources/CSharpSensorTest");
-    Path destDir = workDir.toPath();
     java.nio.file.Files.walk(srcDir).forEach(path -> {
       if (java.nio.file.Files.isDirectory(path)) {
         return;
       }
       Path relativized = srcDir.relativize(path);
       try {
-        Path destFile = destDir.resolve(relativized);
+        Path destFile = workDir.resolve(relativized);
         if (!java.nio.file.Files.exists(destFile.getParent())) {
           java.nio.file.Files.createDirectories(destFile.getParent());
         }
@@ -97,14 +100,14 @@ public class CSharpSensorTest {
     });
     File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
 
-    Path roslynReport = workDir.toPath().resolve("roslyn-report.json");
+    Path roslynReport = workDir.resolve("roslyn-report.json");
     java.nio.file.Files.write(roslynReport,
       StringUtils.replace(new String(java.nio.file.Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
         StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
     tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir);
+    tester.fileSystem().setWorkDir(workDir.toFile());
 
     inputFile = new DefaultInputFile(tester.module().key(), "Program.cs")
       .setLanguage(CSharpPlugin.LANGUAGE_KEY)
@@ -116,7 +119,7 @@ public class CSharpSensorTest {
     when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
 
     extractor = mock(SonarAnalyzerScannerExtractor.class);
-    when(extractor.executableFile(CSharpPlugin.LANGUAGE_KEY)).thenReturn(new File(workDir, SystemUtils.IS_OS_WINDOWS ? "fake.bat" : "fake.sh"));
+    when(extractor.executableFile(CSharpPlugin.LANGUAGE_KEY)).thenReturn(new File(workDir.toFile(), SystemUtils.IS_OS_WINDOWS ? "fake.bat" : "fake.sh"));
 
     noSonarFilter = mock(NoSonarFilter.class);
     settings = new Settings();
@@ -197,9 +200,10 @@ public class CSharpSensorTest {
     sensor.executeInternal(tester);
 
     assertThat(
-      Files.toString(new File(workDir, "SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+      readFile(workDir, "SonarLint.xml")
+        .replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+      .isEqualTo(readFile("src/test/resources/CSharpSensorTest/SonarLint-expected.xml").replaceAll("\r?\n|\r", ""));
   }
 
   @Test
@@ -213,7 +217,7 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, new File(workDir, "roslyn-report.json").getAbsolutePath());
+    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     sensor.executeInternal(tester);
 
     assertThat(tester.allIssues())
@@ -243,18 +247,21 @@ public class CSharpSensorTest {
 
   @Test
   public void roslynRulesNotExecutedTwice() throws Exception {
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, new File(workDir, "roslyn-report.json").getAbsolutePath());
+    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     sensor.executeInternal(tester);
 
     assertThat(
-      Files.toString(new File(workDir, "SonarLint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "")
+      readFile(workDir, "SonarLint.xml")
+        .replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
-      .isEqualTo(Files.toString(new File("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", ""));
+      .isEqualTo(
+        readFile("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml")
+          .replaceAll("\r?\n|\r", ""));
   }
 
   @Test
   public void roslynEmptyReportShouldNotFail() {
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, new File(workDir, "roslyn-report-empty.json").getAbsolutePath());
+    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toAbsolutePath().toString());
     sensor.executeInternal(tester);
   }
 
@@ -267,7 +274,7 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, new File(workDir, "roslyn-report.json").getAbsolutePath());
+    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
 
     sensor.executeInternal(tester);
@@ -286,4 +293,43 @@ public class CSharpSensorTest {
       "Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
     sensor.executeInternal(tester);
   }
+
+  @Test
+  public void endStepAnalysisCalledWhenNoBuildPhaseComputedMetricsArePresent() throws Exception {
+    // Setup test folder:
+    Path analyzerWorkDirectory = temp.newFolder().toPath();
+    Path outputDir = analyzerWorkDirectory.resolve("output-cs");
+    Files.createDirectories(outputDir);
+
+    settings.setProperty(CSharpSensor.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
+    CSharpSensor spy = spy(sensor);
+    spy.executeInternal(tester);
+    verify(spy, times(1)).analyze(true, tester);
+  }
+
+  @Test
+  public void endStepAnalysisNotCalledWhenBuildPhaseComputedMetrics() throws Exception {
+    // Setup test folder:
+    Path analyzerWorkDirectory = temp.newFolder().toPath();
+    Path outputDir = analyzerWorkDirectory.resolve("output-cs");
+    Files.createDirectories(outputDir);
+    // Add dummy protobuf file
+    Path pbFile = outputDir.resolve("dummy.pb");
+    Files.createFile(pbFile);
+
+    settings.setProperty(CSharpSensor.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
+    CSharpSensor spy = spy(sensor);
+    spy.executeInternal(tester);
+    verify(spy, never()).analyze(anyBoolean(), eq(tester));
+    verify(spy, times(1)).importResults(tester, outputDir);
+  }
+
+  private static String readFile(Path directory, String fileName) throws Exception {
+    return new String(Files.readAllBytes(directory.resolve(fileName)));
+  }
+
+  private static String readFile(String fileName) throws Exception {
+    return new String(Files.readAllBytes(Paths.get(fileName)));
+  }
+
 }
