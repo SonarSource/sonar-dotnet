@@ -21,52 +21,39 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
-import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
+import org.sonarsource.dotnet.shared.plugins.AnalysisInputXml;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporter;
-import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 import static java.util.stream.Collectors.toList;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
-public class CSharpSensor implements Sensor {
+public class CSharpSensor extends AbstractSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
@@ -76,15 +63,12 @@ public class CSharpSensor implements Sensor {
 
   private final Settings settings;
   private final SonarAnalyzerScannerExtractor extractor;
-  private final FileLinesContextFactory fileLinesContextFactory;
-  private final NoSonarFilter noSonarFilter;
 
   public CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter) {
+    super(fileLinesContextFactory, noSonarFilter, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;
     this.extractor = extractor;
-    this.fileLinesContextFactory = fileLinesContextFactory;
-    this.noSonarFilter = noSonarFilter;
   }
 
   @Override
@@ -105,12 +89,16 @@ public class CSharpSensor implements Sensor {
     return SystemUtils.IS_OS_WINDOWS && filesToAnalyze(fs).iterator().hasNext();
   }
 
+  private static Iterable<File> filesToAnalyze(FileSystem fs) {
+    return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
+  }
+
   void executeInternal(SensorContext context) {
     String roslynReportPath = settings.getString(ROSLYN_REPORT_PATH_PROPERTY_KEY);
     boolean hasRoslynReportPath = roslynReportPath != null;
 
     String analyzerWorkDirPath = settings.getString(ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY);
-    boolean requiresAnalyzerScannerExecution = requiresAnalyzerScannerExecution(analyzerWorkDirPath);
+    boolean requiresAnalyzerScannerExecution = requiresAnalyzerScannerExecution(analyzerWorkDirPath, ANALYSIS_OUTPUT_DIRECTORY_NAME);
 
     LOG.info("SonarAnalyzer.Scanner needs to be executed: " + requiresAnalyzerScannerExecution);
 
@@ -131,23 +119,6 @@ public class CSharpSensor implements Sensor {
     }
   }
 
-  private static boolean requiresAnalyzerScannerExecution(String analyzerWorkDirPath) {
-    Path dir = analyzerOutputDir(analyzerWorkDirPath);
-    if (!Files.exists(dir)){
-      LOG.info("Analyzer working directory does not exist");
-      return true;
-    }
-
-    try ( DirectoryStream<Path> files = Files.newDirectoryStream(dir, p -> p.toAbsolutePath().toString().toLowerCase().endsWith(".pb"))) {
-      long count = StreamSupport.stream(files.spliterator(), false).count();
-      LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
-      return count == 0;
-    } catch (IOException e) {
-      LOG.warn("Could not check for .pb files in " + dir.toAbsolutePath().toString(), e);
-      return true;
-    }
-  }
-
   void analyze(boolean includeRules, SensorContext context) {
     if (includeRules) {
       LOG.warn("***********************************************************************************");
@@ -155,12 +126,11 @@ public class CSharpSensor implements Sensor {
       LOG.warn("* The use of MSBuild 12 or the sonar-scanner to analyze C# projects is DEPRECATED *");
       LOG.warn("***********************************************************************************");
 
-      ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey =
-        RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
-          .findAll()
-          .stream()
-          .map(ActiveRule::ruleKey)
-          .collect(toList()));
+      ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+        .findAll()
+        .stream()
+        .map(ActiveRule::ruleKey)
+        .collect(toList()));
 
       if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
         throw new IllegalArgumentException(
@@ -168,7 +138,8 @@ public class CSharpSensor implements Sensor {
       }
     }
 
-    String analysisSettings = analysisSettings(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, context);
+    String analysisSettings = AnalysisInputXml.generate(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, context,
+      CSharpSonarRulesDefinition.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY);
 
     Path analysisInput = toolInput(context.fileSystem());
     Path analysisOutput = toolOutput(context.fileSystem());
@@ -184,91 +155,11 @@ public class CSharpSensor implements Sensor {
     Command command = Command.create(executableFile.getAbsolutePath())
       .addArgument(analysisInput.toAbsolutePath().toString())
       .addArgument(analysisOutput.toAbsolutePath().toString())
-      .addArgument("cs");
+      .addArgument(CSharpPlugin.LANGUAGE_KEY);
 
     int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
     if (exitCode != 0) {
       throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode + " - Verify that the .NET Framework version 4.5.2 at least is installed.");
-    }
-  }
-
-  private static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, SensorContext context) {
-    StringBuilder sb = new StringBuilder();
-
-    appendLine(sb, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-    appendLine(sb, "<AnalysisInput>");
-
-    if (includeSettings) {
-      appendLine(sb, "  <Settings>");
-      appendLine(sb, "    <Setting>");
-      appendLine(sb, "      <Key>sonar.cs.ignoreHeaderComments</Key>");
-      appendLine(sb, "      <Value>" + (ignoreHeaderComments ? "true" : "false") + "</Value>");
-      appendLine(sb, "    </Setting>");
-      appendLine(sb, "  </Settings>");
-    }
-
-    appendLine(sb, "  <Rules>");
-    if (includeRules) {
-      Collection<ActiveRule> activeRules = context.activeRules().findByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY);
-      for (ActiveRule activeRule : activeRules) {
-        appendLine(sb, "    <Rule>");
-        appendLine(sb, "      <Key>" + escapeXml(activeRule.ruleKey().rule()) + "</Key>");
-        Map<String, String> parameters = effectiveParameters(activeRule);
-        if (!parameters.isEmpty()) {
-          appendLine(sb, "      <Parameters>");
-          for (Entry<String, String> parameter : parameters.entrySet()) {
-            appendLine(sb, "        <Parameter>");
-            appendLine(sb, "          <Key>" + escapeXml(parameter.getKey()) + "</Key>");
-            appendLine(sb, "          <Value>" + escapeXml(parameter.getValue()) + "</Value>");
-            appendLine(sb, "        </Parameter>");
-          }
-          appendLine(sb, "      </Parameters>");
-        }
-        appendLine(sb, "    </Rule>");
-      }
-    }
-    appendLine(sb, "  </Rules>");
-
-    appendLine(sb, "  <Files>");
-    for (File file : filesToAnalyze(context.fileSystem())) {
-      appendLine(sb, "    <File>" + escapeXml(file.getAbsolutePath()) + "</File>");
-    }
-    appendLine(sb, "  </Files>");
-
-    appendLine(sb, "</AnalysisInput>");
-
-    return sb.toString();
-  }
-
-  private static String escapeXml(String str) {
-    return str.replace("&", "&amp;").replace("\"", "&quot;").replace("'", "&apos;").replace("<", "&lt;").replace(">", "&gt;");
-  }
-
-  private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
-    Map<String, String> builder = Maps.newHashMap();
-
-    for (Entry<String, String> param : activeRule.params().entrySet()) {
-      builder.put(param.getKey(), param.getValue());
-    }
-
-    return ImmutableMap.copyOf(builder);
-  }
-
-  void importResults(SensorContext context, Path workDirectory) {
-    // Note: the no-sonar rules must be imported before issues, otherwise the affected issues won't get excluded!
-    parseProtobuf(context, ProtobufImporters.metricsImporter(fileLinesContextFactory, noSonarFilter), workDirectory, METRICS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.issuesImporter(CSharpSonarRulesDefinition.REPOSITORY_KEY), workDirectory, ISSUES_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.highlightImporter(), workDirectory, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.symbolRefsImporter(), workDirectory, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(context, ProtobufImporters.cpdTokensImporter(), workDirectory, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
-  }
-
-  private static void parseProtobuf(SensorContext context, ProtobufImporter importer, Path workDirectory, String filename) {
-    Path protobuf = workDirectory.resolve(filename);
-    if (Files.exists(protobuf)) {
-      importer.accept(context, protobuf.toFile());
-    } else {
-      LOG.warn("Protobuf file not found: " + protobuf);
     }
   }
 
@@ -288,86 +179,8 @@ public class CSharpSensor implements Sensor {
       }
     }
 
-    SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
+    SarifParserCallback callback = new SarifParserCallbackImplementation(context, repositoryKeyByRoslynRuleKey);
     SarifParserFactory.create(new File(reportPath)).parse(callback);
-  }
-
-  private static class SarifParserCallbackImpl implements SarifParserCallback {
-    private final SensorContext context;
-    private final Map<String, String> repositoryKeyByRoslynRuleKey;
-
-    SarifParserCallbackImpl(SensorContext context, Map<String, String> repositoryKeyByRoslynRuleKey) {
-      this.context = context;
-      this.repositoryKeyByRoslynRuleKey = repositoryKeyByRoslynRuleKey;
-    }
-
-    @Override
-    public void onProjectIssue(String ruleId, String message) {
-      String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
-      if (repositoryKey == null) {
-        return;
-      }
-      NewIssue newIssue = context.newIssue();
-      newIssue
-        .forRule(RuleKey.of(repositoryKey, ruleId))
-        .at(newIssue.newLocation()
-          .on(context.module())
-          .message(message))
-        .save();
-    }
-
-    @Override
-    public void onIssue(String ruleId, String absolutePath, String message, int startLine, int startLineOffset, int endLine, int endLineOffset) {
-      String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
-      if (repositoryKey == null) {
-        return;
-      }
-
-      InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates().hasAbsolutePath(absolutePath));
-      if (inputFile == null) {
-        return;
-      }
-
-      NewIssue newIssue = context.newIssue();
-      newIssue
-        .forRule(RuleKey.of(repositoryKey, ruleId))
-        .at(newIssue.newLocation()
-          .on(inputFile)
-          .at(inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset))
-          .message(message))
-        .save();
-    }
-  }
-
-  private static void appendLine(StringBuilder sb, String line) {
-    sb.append(line);
-    sb.append("\r\n");
-  }
-
-  private static class LogInfoStreamConsumer implements StreamConsumer {
-
-    @Override
-    public void consumeLine(String line) {
-      LOG.info(line);
-    }
-
-  }
-
-  private static class LogErrorStreamConsumer implements StreamConsumer {
-
-    @Override
-    public void consumeLine(String line) {
-      LOG.error(line);
-    }
-
-  }
-
-  private static Iterable<File> filesToAnalyze(FileSystem fs) {
-    return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
-  }
-
-  private static Path toolInput(FileSystem fs) {
-    return fs.workDir().toPath().resolve("SonarLint.xml");
   }
 
   private static Path toolOutput(FileSystem fs) {

@@ -34,6 +34,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
@@ -62,10 +63,10 @@ import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY
 
 public class CSharpSensorTest {
 
-  @org.junit.Rule
+  @Rule
   public ExpectedException thrown = ExpectedException.none();
 
-  @org.junit.Rule
+  @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
   private CSharpSensor sensor;
@@ -83,17 +84,17 @@ public class CSharpSensorTest {
   public void prepare() throws Exception {
     workDir = temp.newFolder().toPath();
     Path srcDir = Paths.get("src/test/resources/CSharpSensorTest");
-    java.nio.file.Files.walk(srcDir).forEach(path -> {
-      if (java.nio.file.Files.isDirectory(path)) {
+    Files.walk(srcDir).forEach(path -> {
+      if (Files.isDirectory(path)) {
         return;
       }
       Path relativized = srcDir.relativize(path);
       try {
         Path destFile = workDir.resolve(relativized);
-        if (!java.nio.file.Files.exists(destFile.getParent())) {
-          java.nio.file.Files.createDirectories(destFile.getParent());
+        if (!Files.exists(destFile.getParent())) {
+          Files.createDirectories(destFile.getParent());
         }
-        java.nio.file.Files.copy(path, destFile, StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(path, destFile, StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
       } catch (Exception e) {
         throw new IllegalStateException(e);
       }
@@ -101,8 +102,8 @@ public class CSharpSensorTest {
     File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
 
     Path roslynReport = workDir.resolve("roslyn-report.json");
-    java.nio.file.Files.write(roslynReport,
-      StringUtils.replace(new String(java.nio.file.Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
+    Files.write(roslynReport,
+      StringUtils.replace(new String(Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
         StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
@@ -184,26 +185,6 @@ public class CSharpSensorTest {
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 49,
           "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\".")
         );
-  }
-
-  @Test
-  public void escapesAnalysisInput() throws Exception {
-    tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
-      .setParam("param1", "value1")
-      .activate()
-      .create(RuleKey.of(REPOSITORY_KEY, "S9999"))
-      .setParam("param9", "value9")
-      .activate()
-      .build());
-
-    sensor.executeInternal(tester);
-
-    assertThat(
-      readFile(workDir, "SonarLint.xml")
-        .replaceAll("\r?\n|\r", "")
-        .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
-      .isEqualTo(readFile("src/test/resources/CSharpSensorTest/SonarLint-expected.xml").replaceAll("\r?\n|\r", ""));
   }
 
   @Test
