@@ -204,16 +204,6 @@ public class CSharpSensorTest {
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
       .containsOnly(
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1186"), 40,
-          "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation."),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1172"), 40,
-          "Remove this unused method parameter \"args\"."),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S1118"), 23,
-          "Add a \"protected\" constructor or the \"static\" keyword to the class declaration."),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 45,
-          "Rename class \"IFoo\" to match camel case naming rules, consider using \"Foo\"."),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 49,
-          "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\"."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 19,
           "Short messages should be used first in Roslyn reports"),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 1,
@@ -299,10 +289,12 @@ public class CSharpSensorTest {
     Files.createFile(pbFile);
 
     settings.setProperty(CSharpSensor.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
+    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+
     CSharpSensor spy = spy(sensor);
     spy.executeInternal(tester);
     verify(spy, never()).analyze(anyBoolean(), eq(tester));
-    verify(spy, times(1)).importResults(tester, outputDir);
+    verify(spy, times(1)).importResults(tester, outputDir, false);
   }
 
   private static String readFile(Path directory, String fileName) throws Exception {

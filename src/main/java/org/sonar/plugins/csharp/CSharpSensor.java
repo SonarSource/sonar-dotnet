@@ -111,7 +111,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
       : analyzerOutputDir(analyzerWorkDirPath);
 
     LOG.info("Importing analysis results from " + workDirectory.toAbsolutePath().toString());
-    importResults(context, workDirectory);
+    importResults(context, workDirectory, !hasRoslynReportPath);
 
     if (hasRoslynReportPath) {
       LOG.info("Importing Roslyn report");
