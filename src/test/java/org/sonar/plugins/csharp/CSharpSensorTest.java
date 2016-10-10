@@ -297,6 +297,16 @@ public class CSharpSensorTest {
     verify(spy, times(1)).importResults(tester, outputDir, false);
   }
 
+  @Test
+  public void noAnalysisIsExecutedOnEmptyContext() throws Exception {
+    tester = SensorContextTester.create(new File("src/test/resources"));
+
+    CSharpSensor spy = spy(sensor);
+    spy.execute(tester);
+
+    verify(spy, never()).executeInternal(tester);
+  }
+
   private static String readFile(Path directory, String fileName) throws Exception {
     return new String(Files.readAllBytes(directory.resolve(fileName)));
   }
