@@ -10,19 +10,6 @@ install:
   - unzip -q -d C:\bin C:\bin\apache-maven-%MAVEN_VERSION%-bin.zip
   - set PATH=%PATH%;C:\bin\apache-maven-%MAVEN_VERSION%\bin
 
-environment:
-  matrix:
-  - TEST: CI
-  - TEST: PLUGIN
-    SQ_VERSION: DEV
-  - TEST: PLUGIN
-    SQ_VERSION: LTS
-  - TEST: PLUGIN
-    SQ_VERSION: LATEST_RELEASE
-
-matrix:
-  fast_finish: true
-
 build_script:
   - ps: ./appveyor.ps1
 
