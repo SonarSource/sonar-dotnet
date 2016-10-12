@@ -275,12 +275,4 @@
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>noVersionNumberInJar</id>
-      <build>
-        <finalName>${project.artifactId}</finalName>
-      </build>
-    </profile>
-  </profiles>
 </project>
