@@ -56,6 +56,9 @@
     <!-- sonarAnalyzer.version should match the one specified in sonar-dotnet-shared-library -->
     <sonarAnalyzer.version>1.19.0-RC1</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+    <!-- This 2.2.0.0-build777 version is an unsigned version, so we should not release with it -->
+    <scanner.msbuild.version>2.2.0.0-build777</scanner.msbuild.version>
+    <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
   </properties>
 
   <dependencies>
@@ -157,13 +160,18 @@
   <build>
    <resources>
      <resource>
-       <directory>src/main/resources</directory>
-     </resource>
-     <resource>
        <directory>${sonarAnalyzer.workDirectory}</directory>
        <includes>
+         <include>org/sonar/plugins/csharp/*.xml</include>
+         <include>static/version.txt</include>
          <include>static/SonarAnalyzer-${sonarAnalyzer.version}.zip</include>
          <include>SonarAnalyzer.Scanner.zip</include>
+       </includes>
+     </resource>
+     <resource>
+       <directory>${scanner.msbuild.workDirectory}</directory>
+       <includes>
+         <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
        </includes>
      </resource>
    </resources>
@@ -212,6 +220,7 @@
                   <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
@@ -219,6 +228,7 @@
                   <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
                 </artifactItem>
                 <artifactItem>
                   <groupId>${project.groupId}</groupId>
@@ -226,9 +236,18 @@
                   <version>${sonarAnalyzer.version}</version>
                   <type>nupkg</type>
                   <overWrite>true</overWrite>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.sonarsource.scanner.msbuild</groupId>
+                  <artifactId>sonar-scanner-msbuild</artifactId>
+                  <version>${scanner.msbuild.version}</version>
+                  <classifier>impl</classifier>
+                  <type>zip</type>
+                  <overWrite>true</overWrite>
+                  <outputDirectory>${scanner.msbuild.workDirectory}</outputDirectory>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
               <overWriteReleases>true</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
               <stripVersion>true</stripVersion>
@@ -252,7 +271,7 @@
                 <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
                 <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
                 <!-- SQALE XML in sslr requires a resource to read from -->
-                <copy todir="src/main/resources/org/sonar/plugins/csharp">
+                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                   <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
                     <include name="*.xml"/>
                   </fileset>
@@ -262,7 +281,9 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
 
-                <echo file="src/main/resources/static/version.txt" message="${sonarAnalyzer.version}" encoding="utf-8" />
+                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${sonarAnalyzer.version}" encoding="utf-8" />
+
+                <move file="${scanner.msbuild.workDirectory}/sonar-scanner-msbuild-impl.zip" tofile="${scanner.msbuild.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"/>
               </tasks>
 
             </configuration>
