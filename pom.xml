@@ -56,7 +56,7 @@
     <!-- sonarAnalyzer.version should match the one specified in sonar-dotnet-shared-library -->
     <sonarAnalyzer.version>1.19.0-RC2</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <scanner.msbuild.version>2.2.0.12</scanner.msbuild.version>
+    <scanner.msbuild.version>2.2.0.20</scanner.msbuild.version>
     <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
   </properties>
 
