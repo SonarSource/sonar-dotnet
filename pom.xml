@@ -58,6 +58,8 @@
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <scanner.msbuild.version>2.2.0.24</scanner.msbuild.version>
     <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
+    <!-- Release: enable publication to Bintray -->
+    <artifactsToPublish>${project.groupId}:${project.artifactId}:jar</artifactsToPublish>
   </properties>
 
   <dependencies>
