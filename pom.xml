@@ -54,7 +54,7 @@
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <!-- sonarAnalyzer.version should match the one specified in sonar-dotnet-shared-library -->
-    <sonarAnalyzer.version>1.20.0-RC1</sonarAnalyzer.version>
+    <sonarAnalyzer.version>1.20.0</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <scanner.msbuild.version>2.2.0.24</scanner.msbuild.version>
     <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
@@ -71,7 +71,7 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.1.135</version>
+      <version>1.0.1.138</version>
     </dependency>
 
     <dependency>
