@@ -71,7 +71,7 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.1.138</version>
+      <version>1.0.2.162</version>
     </dependency>
 
     <dependency>

@@ -139,7 +139,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
 
     String analysisSettings = AnalysisInputXml.generate(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, context,
-      CSharpSonarRulesDefinition.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY);
+      CSharpSonarRulesDefinition.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY, context.fileSystem().encoding().name());
 
     Path analysisInput = toolInput(context.fileSystem());
     Path analysisOutput = toolOutput(context.fileSystem());

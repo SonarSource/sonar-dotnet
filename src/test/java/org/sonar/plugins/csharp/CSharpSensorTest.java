@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import java.io.File;
 import java.io.FileReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -219,6 +220,7 @@ public class CSharpSensorTest {
   @Test
   public void roslynRulesNotExecutedTwice() throws Exception {
     settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    tester.fileSystem().setEncoding(Charset.forName("UTF-8"));
     sensor.executeInternal(tester);
 
     assertThat(
