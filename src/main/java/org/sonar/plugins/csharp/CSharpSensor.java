@@ -25,11 +25,9 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Maps;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Map;
-
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -47,6 +45,7 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
 import org.sonarsource.dotnet.shared.plugins.AnalysisInputXml;
+import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
@@ -57,18 +56,16 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
-  static final String ROSLYN_REPORT_PATH_PROPERTY_KEY = "sonar.cs.roslyn.reportFilePath";
-  static final String ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY = "sonar.cs.analyzer.projectOutPath";
-  static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
-
   private final Settings settings;
   private final SonarAnalyzerScannerExtractor extractor;
+  private final CSharpConfiguration config;
 
   public CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
-    NoSonarFilter noSonarFilter) {
-    super(fileLinesContextFactory, noSonarFilter, CSharpSonarRulesDefinition.REPOSITORY_KEY);
+    NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile) {
+    super(fileLinesContextFactory, noSonarFilter, config, encodingPerFile, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;
     this.extractor = extractor;
+    this.config = config;
   }
 
   @Override
@@ -94,24 +91,24 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   }
 
   void executeInternal(SensorContext context) {
-    String roslynReportPath = settings.getString(ROSLYN_REPORT_PATH_PROPERTY_KEY);
-    boolean hasRoslynReportPath = roslynReportPath != null;
-
-    String analyzerWorkDirPath = settings.getString(ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY);
-    boolean requiresAnalyzerScannerExecution = requiresAnalyzerScannerExecution(analyzerWorkDirPath, ANALYSIS_OUTPUT_DIRECTORY_NAME);
+    boolean requiresAnalyzerScannerExecution = !config.isReportsComingFromMSBuild();
 
     LOG.info("SonarAnalyzer.Scanner needs to be executed: " + requiresAnalyzerScannerExecution);
 
+    String roslynReportPath = settings.getString(config.getRoslynJsonReportPathProperty());
+    boolean hasRoslynReportPath = roslynReportPath != null;
+
+    Path protobufReportsDirectory;
     if (requiresAnalyzerScannerExecution) {
+      // MSBuild 12 or MSBuild 14 with old scanner
       analyze(!hasRoslynReportPath, context);
+      protobufReportsDirectory = protobufReportPathForMSBuild12(context);
+    } else {
+      protobufReportsDirectory = config.protobufReportPathFromScanner();
     }
 
-    Path workDirectory = requiresAnalyzerScannerExecution
-      ? toolOutput(context.fileSystem())
-      : analyzerOutputDir(analyzerWorkDirPath);
-
-    LOG.info("Importing analysis results from " + workDirectory.toAbsolutePath().toString());
-    importResults(context, workDirectory, !hasRoslynReportPath);
+    LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath().toString());
+    importResults(context, protobufReportsDirectory, !hasRoslynReportPath);
 
     if (hasRoslynReportPath) {
       LOG.info("Importing Roslyn report");
@@ -142,7 +139,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
       CSharpSonarRulesDefinition.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY, context.fileSystem().encoding().name());
 
     Path analysisInput = toolInput(context.fileSystem());
-    Path analysisOutput = toolOutput(context.fileSystem());
+    Path analysisOutput = protobufReportPathForMSBuild12(context);
 
     try {
       Files.write(analysisInput, analysisSettings.getBytes(Charsets.UTF_8));
@@ -183,12 +180,10 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     SarifParserFactory.create(new File(reportPath)).parse(callback);
   }
 
-  private static Path toolOutput(FileSystem fs) {
-    return fs.workDir().toPath().resolve(ANALYSIS_OUTPUT_DIRECTORY_NAME);
-  }
-
-  private static Path analyzerOutputDir(String analyzerWorkDirPath) {
-    return Paths.get(analyzerWorkDirPath, ANALYSIS_OUTPUT_DIRECTORY_NAME);
+  public final Path protobufReportPathForMSBuild12(SensorContext context) {
+    // With MSBuild 12 or old version of the scanner, protobuf reports are not generated
+    // so return a new directory in the SQ working dir and the sensor will be responsible to execute analyzer.
+    return context.fileSystem().workDir().toPath().resolve(config.getAnalyzerReportDir());
   }
 
 }
