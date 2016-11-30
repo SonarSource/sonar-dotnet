@@ -23,7 +23,9 @@ import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
+import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
+import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 @Properties({
   @Property(
@@ -60,6 +62,9 @@ public class CSharpPlugin implements Plugin {
       CSharpSonarWayProfile.class,
       SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
+      CSharpConfiguration.class,
+      WrongEncodingFileFilter.class,
+      EncodingPerFile.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       RoslynProfileExporter.class);

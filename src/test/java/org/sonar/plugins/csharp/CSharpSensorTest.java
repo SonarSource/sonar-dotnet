@@ -21,6 +21,8 @@ package org.sonar.plugins.csharp;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,7 +31,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.Collections;
-
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.SystemUtils;
@@ -39,9 +40,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.CoreProperties;
+import org.sonar.api.SonarQubeVersion;
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
@@ -49,16 +53,18 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
+import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.anyBoolean;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.when;
 import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
 
@@ -102,6 +108,13 @@ public class CSharpSensorTest {
     });
     File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
 
+    EncodingInfo msg = EncodingInfo.newBuilder().setEncoding("UTF-8").setFilePath(csFile.getAbsolutePath()).build();
+    try (OutputStream output = Files.newOutputStream(workDir.resolve("output-cs\\encoding.pb"))) {
+      msg.writeDelimitedTo(output);
+    } catch (IOException e) {
+      throw new IllegalStateException("could not save message to file", e);
+    }
+
     Path roslynReport = workDir.resolve("roslyn-report.json");
     Files.write(roslynReport,
       StringUtils.replace(new String(Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
@@ -126,7 +139,9 @@ public class CSharpSensorTest {
     noSonarFilter = mock(NoSonarFilter.class);
     settings = new Settings();
 
-    sensor = new CSharpSensor(settings, extractor, fileLinesContextFactory, noSonarFilter);
+    CSharpConfiguration csConfigConfiguration = new CSharpConfiguration(settings);
+    sensor = new CSharpSensor(settings, extractor, fileLinesContextFactory, noSonarFilter, csConfigConfiguration,
+      new EncodingPerFile(ProjectDefinition.create().setProperty(CoreProperties.ENCODING_PROPERTY, "UTF-8"), new SonarQubeVersion(tester.getSonarQubeVersion())));
   }
 
   @Test
@@ -184,8 +199,7 @@ public class CSharpSensorTest {
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 45,
           "Rename class \"IFoo\" to match camel case naming rules, consider using \"Foo\"."),
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "S101"), 49,
-          "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\".")
-        );
+          "Rename class \"IBar\" to match camel case naming rules, consider using \"Bar\"."));
   }
 
   @Test
@@ -199,7 +213,7 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     sensor.executeInternal(tester);
 
     assertThat(tester.allIssues())
@@ -214,12 +228,12 @@ public class CSharpSensorTest {
         Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), null,
           "This is an assembly level Roslyn issue with no location")
 
-      );
+    );
   }
 
   @Test
   public void roslynRulesNotExecutedTwice() throws Exception {
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     tester.fileSystem().setEncoding(Charset.forName("UTF-8"));
     sensor.executeInternal(tester);
 
@@ -227,14 +241,14 @@ public class CSharpSensorTest {
       readFile(workDir, "SonarLint.xml")
         .replaceAll("\r?\n|\r", "")
         .replaceAll("<File>.*?Program.cs</File>", "<File>Program.cs</File>"))
-      .isEqualTo(
-        readFile("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml")
-          .replaceAll("\r?\n|\r", ""));
+          .isEqualTo(
+            readFile("src/test/resources/CSharpSensorTest/SonarLint-expected-with-roslyn.xml")
+              .replaceAll("\r?\n|\r", ""));
   }
 
   @Test
   public void roslynEmptyReportShouldNotFail() {
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toAbsolutePath().toString());
     sensor.executeInternal(tester);
   }
 
@@ -247,7 +261,7 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
     thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
 
     sensor.executeInternal(tester);
@@ -274,7 +288,7 @@ public class CSharpSensorTest {
     Path outputDir = analyzerWorkDirectory.resolve("output-cs");
     Files.createDirectories(outputDir);
 
-    settings.setProperty(CSharpSensor.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
     CSharpSensor spy = spy(sensor);
     spy.executeInternal(tester);
     verify(spy, times(1)).analyze(true, tester);
@@ -290,8 +304,8 @@ public class CSharpSensorTest {
     Path pbFile = outputDir.resolve("dummy.pb");
     Files.createFile(pbFile);
 
-    settings.setProperty(CSharpSensor.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
-    settings.setProperty(CSharpSensor.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, analyzerWorkDirectory.toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
 
     CSharpSensor spy = spy(sensor);
     spy.executeInternal(tester);
