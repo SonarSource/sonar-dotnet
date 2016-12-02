@@ -43,7 +43,10 @@
             {
               "uri": "Program.cs",
               "region": {
-                "startLine": 0
+                "startLine": 0,
+                "startColumn": 0,
+                "endLine": 0,
+                "endColumn": 1
               }
             }
           ]
@@ -97,7 +100,10 @@
             {
               "uri": "Program.cs",
               "region": {
-                "startLine": 18
+                "startLine": 18,
+                "startColumn": 0,
+                "endLine": 18,
+                "endColumn": 1
               }
             }
           ]
