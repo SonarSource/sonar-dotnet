@@ -21,14 +21,12 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class FileSuffixesTest {
@@ -54,8 +52,7 @@ public class FileSuffixesTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("FileSuffixesTest", "files")).getMeasureIntValue("files")).isEqualTo(1);
+    assertThat(getMeasureAsInt("FileSuffixesTest", "files")).isEqualTo(1);
   }
 
   @Test
@@ -71,8 +68,7 @@ public class FileSuffixesTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("FileSuffixesTest", "files")).getMeasureIntValue("files")).isEqualTo(2);
+    assertThat(getMeasureAsInt("FileSuffixesTest", "files")).isEqualTo(2);
   }
 
 }

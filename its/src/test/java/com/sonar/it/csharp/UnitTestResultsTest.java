@@ -21,14 +21,13 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.getMeasure;
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class UnitTestResultsTest {
@@ -54,11 +53,10 @@ public class UnitTestResultsTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "tests"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_errors"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_failures"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "skipped_tests"))).isNull();
+    assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
+    assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
+    assertThat(getMeasure("UnitTestResultsTest", "test_failures")).isNull();
+    assertThat(getMeasure("UnitTestResultsTest", "skipped_tests")).isNull();
   }
 
   @Test
@@ -75,11 +73,10 @@ public class UnitTestResultsTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "tests")).getMeasureIntValue("tests")).isEqualTo(32);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_errors")).getMeasureIntValue("test_errors")).isEqualTo(1);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_failures")).getMeasureIntValue("test_failures")).isEqualTo(10);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "skipped_tests")).getMeasureIntValue("skipped_tests")).isEqualTo(7);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(10);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(7);
   }
 
   @Test
@@ -96,11 +93,10 @@ public class UnitTestResultsTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "tests")).getMeasureIntValue("tests")).isEqualTo(196);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_errors")).getMeasureIntValue("test_errors")).isEqualTo(30);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "test_failures")).getMeasureIntValue("test_failures")).isEqualTo(20);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "skipped_tests")).getMeasureIntValue("skipped_tests")).isEqualTo(7);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(196);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(7);
   }
 
   @Test
@@ -118,8 +114,7 @@ public class UnitTestResultsTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("UnitTestResultsTest", "tests")).getMeasureIntValue("tests")).isEqualTo(32);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
   }
 
 }

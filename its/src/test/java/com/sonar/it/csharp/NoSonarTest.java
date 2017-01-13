@@ -21,16 +21,12 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.Measure;
-import org.sonar.wsclient.services.Resource;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class NoSonarTest {
@@ -38,8 +34,6 @@ public class NoSonarTest {
   private static final String PROJECT = "NoSonarTest";
   @ClassRule
   public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
-
-  private static Sonar wsClient;
 
   @BeforeClass
   public static void init() {
@@ -54,20 +48,17 @@ public class NoSonarTest {
       .setProperty("sonar.sourceEncoding", "UTF-8")
       .setProfile("class_name");
     orchestrator.executeBuild(build);
-
-    wsClient = orchestrator.getServer().getWsClient();
   }
 
   @Test
   public void filesAtProjectLevel() {
-    assertThat(getProjectMeasure("violations").getIntValue()).isEqualTo(1);
+    assertThat(getProjectMeasureAsInt("violations")).isEqualTo(1);
   }
 
   /* Helper methods */
 
-  private Measure getProjectMeasure(String metricKey) {
-    Resource resource = wsClient.find(ResourceQuery.createForMetrics(PROJECT, metricKey));
-    return resource == null ? null : resource.getMeasure(metricKey);
+  private Integer getProjectMeasureAsInt(String metricKey) {
+    return getMeasureAsInt(PROJECT, metricKey);
   }
 
 }

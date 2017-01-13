@@ -21,14 +21,12 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class DoNotAnalyzeTestFilesTest {
@@ -55,10 +53,9 @@ public class DoNotAnalyzeTestFilesTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("DoNotAnalyzeTestFilesTest", "files"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("DoNotAnalyzeTestFilesTest", "lines"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("DoNotAnalyzeTestFilesTest", "ncloc"))).isNull();
+    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "files")).isNull();
+    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "lines")).isNull();
+    assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "ncloc")).isNull();
   }
 
 }

@@ -21,15 +21,13 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
-import org.junit.Assume;
+import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.sonar.wsclient.Sonar;
-import org.sonar.wsclient.services.ResourceQuery;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.getMeasure;
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CoverageTest {
@@ -55,9 +53,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "uncovered_lines"))).isNull();
+    assertThat(getMeasure("CoverageTest", "lines_to_cover")).isNull();
+    assertThat(getMeasure("CoverageTest", "uncovered_lines")).isNull();
   }
 
   @Test
@@ -74,9 +71,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover")).getMeasureIntValue("lines_to_cover")).isEqualTo(2);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "uncovered_lines")).getMeasureIntValue("uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
@@ -93,9 +89,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover")).getMeasureIntValue("lines_to_cover")).isEqualTo(2);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "uncovered_lines")).getMeasureIntValue("uncovered_lines")).isEqualTo(0);
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
   }
 
   @Test
@@ -112,9 +107,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover")).getMeasureIntValue("lines_to_cover")).isEqualTo(2);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "uncovered_lines")).getMeasureIntValue("uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
@@ -131,9 +125,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover")).getMeasureIntValue("lines_to_cover")).isEqualTo(2);
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "uncovered_lines")).getMeasureIntValue("uncovered_lines")).isEqualTo(1);
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
@@ -151,9 +144,8 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("NoCoverageOnTests", "lines_to_cover"))).isNull();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("NoCoverageOnTests", "uncovered_lines"))).isNull();
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
   }
 
   @Test
@@ -170,8 +162,7 @@ public class CoverageTest {
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    Sonar wsClient = orchestrator.getServer().getWsClient();
-    assertThat(wsClient.find(ResourceQuery.createForMetrics("CoverageTest", "lines_to_cover")).getMeasureIntValue("lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
 
 }
