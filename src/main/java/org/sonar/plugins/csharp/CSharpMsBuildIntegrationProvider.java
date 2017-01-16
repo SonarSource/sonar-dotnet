@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
+import java.util.Collections;
 import java.util.List;
 import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
@@ -33,7 +33,7 @@ public class CSharpMsBuildIntegrationProvider {
   }
 
   public static List extensions() {
-    return ImmutableList.of(
+    return Collections.singletonList(
       PropertyDefinition.builder("sonar.cs.msbuild.testProjectPattern")
         .name("Test project pattern")
         .description("Regular expression matched by test project files path (.NET syntax)")

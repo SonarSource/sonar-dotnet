@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -59,7 +59,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(mock(RulesProfile.class), writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -119,7 +119,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -200,7 +200,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/mixed.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/mixed.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 

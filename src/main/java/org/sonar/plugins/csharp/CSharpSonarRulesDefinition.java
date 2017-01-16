@@ -19,16 +19,16 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Set;
 import org.sonar.api.BatchExtension;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
-import java.io.InputStreamReader;
-import java.util.Set;
+import static java.util.Objects.requireNonNull;
 
 public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtension {
 
@@ -44,7 +44,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtensi
       .setName(REPOSITORY_NAME);
 
     RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
-    loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), Charsets.UTF_8));
+    loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), StandardCharsets.UTF_8));
     SqaleXmlLoader.load(repository, "/org/sonar/plugins/csharp/sqale.xml");
 
     ImmutableSet.Builder<String> builder = ImmutableSet.builder();
@@ -57,8 +57,7 @@ public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtensi
   }
 
   public Set<String> allRuleKeys() {
-    Preconditions.checkNotNull(allRuleKeys);
-    return allRuleKeys;
+    return requireNonNull(allRuleKeys);
   }
 
 }

@@ -19,10 +19,9 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Throwables;
-import com.google.common.collect.Sets;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashSet;
 import java.util.Set;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
@@ -41,7 +40,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile ruleProfile, Writer writer) {
-    Set<String> disabledRuleKeys = Sets.newHashSet();
+    Set<String> disabledRuleKeys = new HashSet<>();
     disabledRuleKeys.addAll(csharpRulesDefinition.allRuleKeys());
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
@@ -68,7 +67,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
       writer.write(line);
       writer.write("\r\n");
     } catch (IOException e) {
-      Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 
