@@ -19,18 +19,20 @@
  */
 package org.sonar.plugins.csharp;
 
-import static java.util.stream.Collectors.toList;
-
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
@@ -44,13 +46,8 @@ import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toList;
 
 public class RoslynProfileExporter extends ProfileExporter {
 
@@ -128,7 +125,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
       appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
 
-      Set<String> activeRules = Sets.newHashSet();
+      Set<String> activeRules = new HashSet<>();
       String repositoryKey = null;
       for (RuleKey activeRuleKey : activeRoslynRulesByPartialRepoKey.get(partialRepoKey)) {
         if (repositoryKey == null) {
@@ -236,7 +233,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
-    Map<String, String> builder = Maps.newHashMap();
+    Map<String, String> builder = new HashMap<>();
 
     if (activeRule.getRule().getTemplate() != null) {
       builder.put("RuleKey", activeRule.getRuleKey());
@@ -286,7 +283,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private String mandatoryPropertyValue(String propertyKey) {
-    return Preconditions.checkNotNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
+    return requireNonNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
   }
 
   private static String pluginKeyPropertyKey(String partialRepoKey) {
@@ -326,7 +323,7 @@ public class RoslynProfileExporter extends ProfileExporter {
       writer.write(line);
       writer.write("\r\n");
     } catch (IOException e) {
-      Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 

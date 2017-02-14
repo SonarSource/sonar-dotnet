@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
+import java.util.Arrays;
 import java.util.List;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -61,7 +61,7 @@ public class CSharpCodeCoverageProvider {
   }
 
   public static List extensions() {
-    return ImmutableList.of(
+    return Arrays.asList(
       CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class, CSharpIntegrationCoverageReportImportSensor.class,
 

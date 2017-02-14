@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
+import java.util.Arrays;
 import java.util.List;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
@@ -44,7 +44,7 @@ public class CSharpUnitTestResultsProvider {
   }
 
   public static List extensions() {
-    return ImmutableList.of(
+    return Arrays.asList(
       CSharpUnitTestResultsAggregator.class,
       CSharpUnitTestResultsImportSensor.class,
       PropertyDefinition.builder(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY)
