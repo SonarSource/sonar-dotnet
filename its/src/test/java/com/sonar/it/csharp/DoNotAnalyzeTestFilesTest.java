@@ -41,7 +41,7 @@ public class DoNotAnalyzeTestFilesTest {
 
   @Test
   public void should_not_increment_test() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/DoNotAnalyzeTestFilesTest/"))
       .setProjectKey("DoNotAnalyzeTestFilesTest")
       .setProjectName("DoNotAnalyzeTestFilesTest")

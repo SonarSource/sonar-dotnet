@@ -21,6 +21,8 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
+
 import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -46,13 +48,14 @@ public class MetricsTest {
   public static void init() {
     orchestrator.resetData();
 
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarScanner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/MetricsTest/"))
       .setProjectKey("MetricsTest")
       .setProjectName("MetricsTest")
       .setProjectVersion("1.0")
       .setSourceDirs(".")
       .setProperty("sonar.sourceEncoding", "UTF-8")
+      .setProperty("sonar.verbose", "true")
       .setProfile("no_rule");
     orchestrator.executeBuild(build);
   }

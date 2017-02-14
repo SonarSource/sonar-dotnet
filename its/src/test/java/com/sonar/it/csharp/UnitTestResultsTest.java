@@ -42,7 +42,7 @@ public class UnitTestResultsTest {
 
   @Test
   public void should_not_import_unit_test_results_without_report() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/UnitTestResultsTest/"))
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")
@@ -61,7 +61,7 @@ public class UnitTestResultsTest {
 
   @Test
   public void vstest() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/UnitTestResultsTest/"))
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")
@@ -81,7 +81,7 @@ public class UnitTestResultsTest {
 
   @Test
   public void nunit() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/UnitTestResultsTest/"))
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")
@@ -101,7 +101,7 @@ public class UnitTestResultsTest {
 
   @Test
   public void should_support_wildcard_patterns() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/UnitTestResultsTest/"))
       .setProjectKey("UnitTestResultsTest")
       .setProjectName("UnitTestResultsTest")

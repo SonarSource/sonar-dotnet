@@ -41,7 +41,7 @@ public class FileSuffixesTest {
 
   @Test
   public void suffixes_set_to_cs() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/FileSuffixesTest/"))
       .setProjectKey("FileSuffixesTest")
       .setProjectName("FileSuffixesTest")
@@ -57,7 +57,7 @@ public class FileSuffixesTest {
 
   @Test
   public void suffixes_set_to_cs_and_txt() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/FileSuffixesTest/"))
       .setProjectKey("FileSuffixesTest")
       .setProjectName("FileSuffixesTest")

@@ -21,6 +21,7 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.SonarRunner;
+import com.sonar.orchestrator.build.SonarScanner;
 import com.sonar.orchestrator.locator.FileLocation;
 import java.io.File;
 import java.util.List;
@@ -59,8 +60,8 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .build();
 
-  public static SonarRunner createSonarRunnerBuild() {
-    SonarRunner build = SonarRunner.create();
+  public static SonarScanner createSonarScannerBuild() {
+    SonarScanner build = SonarScanner.create();
     return build;
   }
 

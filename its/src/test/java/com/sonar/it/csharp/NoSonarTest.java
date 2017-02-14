@@ -39,7 +39,7 @@ public class NoSonarTest {
   public static void init() {
     orchestrator.resetData();
 
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/NoSonarTest/"))
       .setProjectKey("NoSonarTest")
       .setProjectName("NoSonarTest")

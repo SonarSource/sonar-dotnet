@@ -42,7 +42,7 @@ public class CoverageTest {
 
   @Test
   public void should_not_import_coverage_without_report() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -59,7 +59,7 @@ public class CoverageTest {
 
   @Test
   public void ncover3() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -77,7 +77,7 @@ public class CoverageTest {
 
   @Test
   public void open_cover() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -95,7 +95,7 @@ public class CoverageTest {
 
   @Test
   public void dotcover() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -113,7 +113,7 @@ public class CoverageTest {
 
   @Test
   public void visual_studio() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
@@ -131,7 +131,7 @@ public class CoverageTest {
 
   @Test
   public void no_coverage_on_tests() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/NoCoverageOnTests/"))
       .setProjectKey("NoCoverageOnTests")
       .setProjectName("NoCoverageOnTests")
@@ -150,7 +150,7 @@ public class CoverageTest {
 
   @Test
   public void should_support_wildcard_patterns() {
-    SonarRunner build = Tests.createSonarRunnerBuild()
+    SonarRunner build = Tests.createSonarScannerBuild()
       .setProjectDir(new File("projects/CoverageTest/"))
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
