@@ -110,7 +110,7 @@ public class RoslynProfileExporterTest {
       repo.done();
     };
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] { sonarLintRepo });
+    RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] {sonarLintRepo});
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -191,7 +191,7 @@ public class RoslynProfileExporterTest {
       repo.done();
     };
 
-    RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] { sonarLintRepo, customRoslynRepo, fxcopRepo, stylecopRepo });
+    RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] {sonarLintRepo, customRoslynRepo, fxcopRepo, stylecopRepo});
     assertThat(exporter.getKey()).isEqualTo("roslyn-cs");
     assertThat(exporter.getName()).isEqualTo("Technical exporter for the MSBuild SonarQube Scanner");
     assertThat(exporter.getSupportedLanguages()).containsOnly("cs");
@@ -221,6 +221,51 @@ public class RoslynProfileExporterTest {
     thrown.expectMessage("The mandatory property \"foo.analyzerId\" must be set by the Roslyn plugin.");
 
     exporter.exportProfile(rulesProfile, new StringWriter());
+  }
+
+  @Test
+  public void ruleWithParameterWithNullValue() {
+    Settings settings = mock(Settings.class);
+    when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
+    when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
+    when(settings.getDefaultValue("sonaranalyzer-cs.staticResourceName")).thenReturn("SonarAnalyzer.zip");
+    when(settings.getDefaultValue("sonaranalyzer-cs.analyzerId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.ruleNamespace")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageId")).thenReturn(SONARANALYZER_CSHARP_NAME);
+    when(settings.getDefaultValue("sonaranalyzer-cs.nuget.packageVersion")).thenReturn("1.10.0");
+
+    RulesDefinition sonarLintRepo = context -> {
+      RulesDefinition.NewRepository repo = context.createRepository("csharpsquid", "cs");
+      repo.createRule("S1000")
+        .setName("S1000")
+        .setMarkdownDescription("S1000")
+        .setSeverity(Severity.MAJOR);
+      repo.done();
+    };
+
+    Rule sonarLintRule = mock(Rule.class);
+    ActiveRule sonarLintActiveRule = mock(ActiveRule.class);
+    when(sonarLintActiveRule.getRepositoryKey()).thenReturn("csharpsquid");
+    when(sonarLintActiveRule.getRuleKey()).thenReturn("S1000");
+    when(sonarLintActiveRule.getRule()).thenReturn(sonarLintRule);
+    ActiveRuleParam param = mock(ActiveRuleParam.class);
+    when(param.getKey()).thenReturn("param");
+    when(param.getValue()).thenReturn(null);
+    when(sonarLintActiveRule.getActiveRuleParams()).thenReturn(Collections.singletonList(param));
+
+    RulesProfile rulesProfile = mock(RulesProfile.class);
+    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(sonarLintActiveRule));
+    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(sonarLintActiveRule));
+    when(rulesProfile.getLanguage()).thenReturn("csharp");
+    when(rulesProfile.getName()).thenReturn("myprofile");
+
+    RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] {sonarLintRepo});
+    StringWriter writer = new StringWriter();
+
+    thrown.expect(IllegalStateException.class);
+    thrown.expectMessage("Rule 'S1000' has parameter 'param'");
+    exporter.exportProfile(rulesProfile, writer);
+
   }
 
   @Test

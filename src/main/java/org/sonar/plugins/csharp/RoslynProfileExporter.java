@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
+
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
@@ -43,9 +45,12 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
+import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
@@ -53,7 +58,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class RoslynProfileExporter extends ProfileExporter {
-
+  private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
   static final String SONARANALYZER_CSHARP_NAME = "SonarAnalyzer.CSharp";
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
 
@@ -112,80 +117,89 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
-    ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
-      .stream()
-      .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
-      .collect(toList()));
+    try {
+      ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
+        .stream()
+        .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
+        .collect(toList()));
 
-    appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-    appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
+      appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+      appendLine(writer, "<RoslynExportProfile Version=\"1.0\">");
 
-    appendLine(writer, "  <Configuration>");
-    appendLine(writer, "    <RuleSet Name=\"Rules for SonarQube\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
-      String analyzerId = mandatoryPropertyValue(analyzerIdPropertyKey(partialRepoKey));
-      String ruleNamespace = mandatoryPropertyValue(ruleNamespacePropertyKey(partialRepoKey));
+      appendLine(writer, "  <Configuration>");
+      appendLine(writer, "    <RuleSet Name=\"Rules for SonarQube\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
+      for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+        writeRepoRuleSet(partialRepoKey, activeRoslynRulesByPartialRepoKey.get(partialRepoKey), writer);
+      }
+      appendLine(writer, "    </RuleSet>");
 
-      appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
+      appendLine(writer, "    <AdditionalFiles>");
 
-      Set<String> activeRules = Sets.newHashSet();
-      String repositoryKey = null;
-      for (RuleKey activeRuleKey : activeRoslynRulesByPartialRepoKey.get(partialRepoKey)) {
-        if (repositoryKey == null) {
-          repositoryKey = activeRuleKey.repository();
-        }
+      String sonarlintParameters = analysisSettings(false, false, true, rulesProfile);
+      java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+      String base64 = new String(encoder.encode(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
+      appendLine(writer, "      <AdditionalFile FileName=\"SonarLint.xml\">" + base64 + "</AdditionalFile>");
+      appendLine(writer, "    </AdditionalFiles>");
 
-        String ruleKey = activeRuleKey.rule();
-        activeRules.add(ruleKey);
-        appendLine(writer, "        <Rule Id=\"" + escapeXml(ruleKey) + "\" Action=\"Warning\" />");
+      appendLine(writer, "  </Configuration>");
+
+      appendLine(writer, "  <Deployment>");
+
+      appendLine(writer, "    <Plugins>");
+      for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+        String pluginKey = mandatoryPropertyValue(pluginKeyPropertyKey(partialRepoKey));
+        String pluginVersion = mandatoryPropertyValue(pluginVersionPropertyKey(partialRepoKey));
+        String staticResourceName = mandatoryPropertyValue(staticResourceNamePropertyKey(partialRepoKey));
+
+        appendLine(writer,
+          "      <Plugin Key=\"" + escapeXml(pluginKey) + "\" Version=\"" + escapeXml(pluginVersion) + "\" StaticResourceName=\"" + escapeXml(staticResourceName) + "\" />");
+      }
+      appendLine(writer, "    </Plugins>");
+
+      appendLine(writer, "    <NuGetPackages>");
+      for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
+        String packageId = mandatoryPropertyValue(nugetPackageIdPropertyKey(partialRepoKey));
+        String packageVersion = mandatoryPropertyValue(nugetPackageVersionPropertyKey(partialRepoKey));
+
+        appendLine(writer, "      <NuGetPackage Id=\"" + escapeXml(packageId) + "\" Version=\"" + escapeXml(packageVersion) + "\" />");
+      }
+      appendLine(writer, "    </NuGetPackages>");
+
+      appendLine(writer, "  </Deployment>");
+
+      appendLine(writer, "</RoslynExportProfile>");
+    } catch (Exception e) {
+      LOG.error("Error exporting profile '{}' for language '{}'", rulesProfile.getName(), rulesProfile.getLanguage(), e);
+      throw e;
+    }
+  }
+
+  private void writeRepoRuleSet(String partialRepoKey, ImmutableCollection<RuleKey> ruleKeys, Writer writer) {
+    String analyzerId = mandatoryPropertyValue(analyzerIdPropertyKey(partialRepoKey));
+    String ruleNamespace = mandatoryPropertyValue(ruleNamespacePropertyKey(partialRepoKey));
+
+    appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
+
+    Set<String> activeRules = Sets.newHashSet();
+    String repositoryKey = null;
+    for (RuleKey activeRuleKey : ruleKeys) {
+      if (repositoryKey == null) {
+        repositoryKey = activeRuleKey.repository();
       }
 
-      List<String> allRuleKeys = allRuleKeysByRepositoryKey(repositoryKey);
-      for (String ruleKey : allRuleKeys) {
-        if (!activeRules.contains(ruleKey)) {
-          appendLine(writer, "        <Rule Id=\"" + escapeXml(ruleKey) + "\" Action=\"None\" />");
-        }
+      String ruleKey = activeRuleKey.rule();
+      activeRules.add(ruleKey);
+      appendLine(writer, "        <Rule Id=\"" + escapeXml(ruleKey) + "\" Action=\"Warning\" />");
+    }
+
+    List<String> allRuleKeys = allRuleKeysByRepositoryKey(repositoryKey);
+    for (String ruleKey : allRuleKeys) {
+      if (!activeRules.contains(ruleKey)) {
+        appendLine(writer, "        <Rule Id=\"" + escapeXml(ruleKey) + "\" Action=\"None\" />");
       }
-
-      appendLine(writer, "      </Rules>");
     }
-    appendLine(writer, "    </RuleSet>");
 
-    appendLine(writer, "    <AdditionalFiles>");
-
-    String sonarlintParameters = analysisSettings(false, false, true, rulesProfile);
-    java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
-    String base64 = new String(encoder.encode(sonarlintParameters.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
-    appendLine(writer, "      <AdditionalFile FileName=\"SonarLint.xml\">" + base64 + "</AdditionalFile>");
-    appendLine(writer, "    </AdditionalFiles>");
-
-    appendLine(writer, "  </Configuration>");
-
-    appendLine(writer, "  <Deployment>");
-
-    appendLine(writer, "    <Plugins>");
-    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
-      String pluginKey = mandatoryPropertyValue(pluginKeyPropertyKey(partialRepoKey));
-      String pluginVersion = mandatoryPropertyValue(pluginVersionPropertyKey(partialRepoKey));
-      String staticResourceName = mandatoryPropertyValue(staticResourceNamePropertyKey(partialRepoKey));
-
-      appendLine(writer,
-        "      <Plugin Key=\"" + escapeXml(pluginKey) + "\" Version=\"" + escapeXml(pluginVersion) + "\" StaticResourceName=\"" + escapeXml(staticResourceName) + "\" />");
-    }
-    appendLine(writer, "    </Plugins>");
-
-    appendLine(writer, "    <NuGetPackages>");
-    for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
-      String packageId = mandatoryPropertyValue(nugetPackageIdPropertyKey(partialRepoKey));
-      String packageVersion = mandatoryPropertyValue(nugetPackageVersionPropertyKey(partialRepoKey));
-
-      appendLine(writer, "      <NuGetPackage Id=\"" + escapeXml(packageId) + "\" Version=\"" + escapeXml(packageVersion) + "\" />");
-    }
-    appendLine(writer, "    </NuGetPackages>");
-
-    appendLine(writer, "  </Deployment>");
-
-    appendLine(writer, "</RoslynExportProfile>");
+    appendLine(writer, "      </Rules>");
   }
 
   private static String analysisSettings(boolean includeSettings, boolean ignoreHeaderComments, boolean includeRules, RulesProfile ruleProfile) {
@@ -243,16 +257,24 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
 
     for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
+      checkValueNotNull(param.getValue(), activeRule.getRuleKey(), param.getKey());
       builder.put(param.getKey(), param.getValue());
     }
 
     for (RuleParam param : activeRule.getRule().getParams()) {
       if (!builder.containsKey(param.getKey())) {
+        checkValueNotNull(param.getDefaultValue(), activeRule.getRuleKey(), param.getKey());
         builder.put(param.getKey(), param.getDefaultValue());
       }
     }
 
     return ImmutableMap.copyOf(builder);
+  }
+
+  private static void checkValueNotNull(@Nullable String value, String ruleKey, String paramKey) {
+    if (value == null) {
+      throw new IllegalStateException(String.format("Rule '%s' has parameter '%s' with a null value", ruleKey, paramKey));
+    }
   }
 
   public static ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
