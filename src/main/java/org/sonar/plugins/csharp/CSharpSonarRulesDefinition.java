@@ -1,5 +1,5 @@
 /*
- * SonarQube C# Plugin
+ * SonarC#
  * Copyright (C) 2014-2017 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *

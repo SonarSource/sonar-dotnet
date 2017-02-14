@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.sonarsource.parent</groupId>
     <artifactId>parent</artifactId>
-    <version>38</version>
+    <version>39</version>
   </parent>
 
   <groupId>org.sonarsource.dotnet</groupId>
@@ -13,8 +13,8 @@
   <packaging>sonar-plugin</packaging>
   <version>5.7-SNAPSHOT</version>
 
-  <name>SonarQube C# Plugin</name>
-  <description>Enables scanning of C# source files</description>
+  <name>SonarC#</name>
+  <description>Code Analyzer for C#</description>
   <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
   <inceptionYear>2014</inceptionYear>
   <organization>
@@ -31,8 +31,28 @@
 
   <developers>
     <developer>
-      <id>dbolkensteyn</id>
-      <name>Dinesh Bolkensteyn</name>
+      <id>aleve</id>
+      <name>Amaury Levé</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>vhristov</id>
+      <name>Valeri Hristov</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>jgyerik</id>
+      <name>Janos Gyerik</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>dmeneses</id>
+      <name>Duarte Meneses</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>jhenry</id>
+      <name>Julien Henry</name>
       <organization>SonarSource</organization>
     </developer>
   </developers>
