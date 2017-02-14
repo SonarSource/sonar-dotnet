@@ -40,6 +40,21 @@
       <name>Valeri Hristov</name>
       <organization>SonarSource</organization>
     </developer>
+	<developer>
+      <id>jgyerik</id>
+      <name>Janos Gyerik</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>dmeneses</id>
+      <name>Duarte Meneses</name>
+      <organization>SonarSource</organization>
+    </developer>
+	<developer>
+      <id>jhenry</id>
+      <name>Julien Henry</name>
+      <organization>SonarSource</organization>
+    </developer>
   </developers>
   <scm>
     <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
