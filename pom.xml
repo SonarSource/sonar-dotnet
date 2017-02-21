@@ -86,12 +86,12 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.5.0.393</version>
+      <version>1.6.0.533</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.0.5.333</version>
+      <version>1.1.0.381</version>
     </dependency>
 
     <dependency>
