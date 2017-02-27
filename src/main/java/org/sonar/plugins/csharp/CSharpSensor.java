@@ -75,15 +75,23 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    if (!shouldExecuteOnProject(context.fileSystem())) {
-      LOG.debug("OS is not Windows. Skip Sensor.");
-      return;
+    if (shouldExecuteOnProject(context.fileSystem())) {
+      executeInternal(context);
     }
-    executeInternal(context);
   }
 
   boolean shouldExecuteOnProject(FileSystem fs) {
-    return SystemUtils.IS_OS_WINDOWS && filesToAnalyze(fs).iterator().hasNext();
+    if (!SystemUtils.IS_OS_WINDOWS) {
+      LOG.debug("OS is not Windows. Skip Sensor.");
+      return false;
+    }
+
+    if (!filesToAnalyze(fs).iterator().hasNext()) {
+      LOG.debug("No files to analyze. Skip Sensor.");
+      return false;
+    }
+
+    return true;
   }
 
   private static Iterable<File> filesToAnalyze(FileSystem fs) {
