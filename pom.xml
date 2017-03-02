@@ -11,7 +11,7 @@
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-csharp-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>5.8-SNAPSHOT</version>
+  <version>5.9-SNAPSHOT</version>
 
   <name>SonarC#</name>
   <description>Code Analyzer for C#</description>
@@ -86,12 +86,12 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.6.0.533</version>
+      <version>1.7.0.544</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.1.0.388</version>
+      <version>1.2.0.397</version>
     </dependency>
 
     <dependency>
