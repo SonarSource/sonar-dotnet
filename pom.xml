@@ -86,7 +86,7 @@
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.7.0.544</version>
+      <version>1.7.0.545</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
