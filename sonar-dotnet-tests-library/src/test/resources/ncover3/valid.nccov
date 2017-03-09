@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
+<coverage profilerVersion="3.4.18.6937" driverVersion="3.4.18.6937" exportversion="3" viewdisplayname="" startTime="2014-02-06T15:47:06.9555313Z" measureTime="2014-02-06T15:47:09.9262344Z" projectName="New Project" buildid="3a947bd1-ea16-478e-9e0e-315c2dfaed69" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="New Project" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+  <rebasedpaths />
+  <filters />
+  <documents>
+    <doc id="1" excluded="false" url="MyLibrary\Adder.cs" cs="B0BC97C776FACFF27CB56359F2B4FD3A" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="17" nid="0" />
+    <doc id="3" excluded="false" url="MyLibraryNUnitTest\AdderNUnitTest.cs" cs="6A759C6D31B76B14D1D3F1E56AD7502B" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="21" nid="0" />
+    <doc id="2" excluded="false" url="MyLibraryTest\AdderTest.cs" cs="7E5A9DF8B477B46A538E9A508CDB451C" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="19" nid="0" />
+    <doc id="4" excluded="false" url="MyLibraryXUnitTest\AdderXUnitTest.cs" cs="45BAE5F98CB97DF5D5F0E0E0818E3C23" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="22" nid="0" />
+    <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
+  </documents>
+  <module moduleId="17" name="C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibrary\bin\Debug\MyLibrary.dll" assembly="MyLibrary" assemblyIdentity="MyLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="Foo.A" signature="Foo.A" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+    <class name="Foo.A`1" signature="Foo.A`1" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+    <class name="Foo.A`2" signature="Foo.A`2" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+    <class name="MyLibrary.Adder" signature="MyLibrary.Adder" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+      <method name="Add" signature="Add(System.Int32 op1,System.Int32 op2) : System.Int32 [static]" excluded="false" instrumented="true" cc="4" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="12" el="12" c="13" ec="36" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="0" o="13" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="2" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="0" o="18" l="14" el="14" c="17" ec="52" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="0" o="23" l="15" el="15" c="17" ec="52" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="31" l="18" el="18" c="20" ec="50" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="3C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="2" o="3C" l="22" el="22" c="13" ec="47" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="47" l="22" el="22" c="48" ec="103" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="4C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="2" o="5A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+        <seqpnt vc="2" o="60" l="26" el="26" c="13" ec="30" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="66" l="27" el="27" c="9" ec="10" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="67" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+      <method name="Test1" signature="Test1() : System.Boolean [static]" excluded="false" instrumented="true" cc="1" vc="4" nid="0">
+        <seqpnt vc="4" o="1" l="31" el="31" c="13" ec="25" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="4" o="5" l="32" el="32" c="9" ec="10" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="4" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+      <method name="Test2" signature="Test2() : System.Boolean [static]" excluded="false" instrumented="true" cc="1" vc="2" nid="0">
+        <seqpnt vc="2" o="1" l="36" el="36" c="13" ec="26" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="5" l="37" el="37" c="9" ec="10" ex="false" fl="65536" doc="1" nid="0" />
+        <seqpnt vc="2" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="1" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="21" name="C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibraryNUnitTest\bin\Debug\MyLibraryNUnitTest.dll" assembly="MyLibraryNUnitTest" assemblyIdentity="MyLibraryNUnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="MyLibraryNUnitTest.AdderNUnitTest" signature="MyLibraryNUnitTest.AdderNUnitTest" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+      </method>
+      <method name="Add" signature="Add() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="17" el="17" c="13" ec="51" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="1" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+        <seqpnt vc="1" o="11" l="18" el="18" c="9" ec="10" ex="false" fl="65536" doc="3" nid="0" />
+      </method>
+      <method name="Add2" signature="Add2() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="1" l="23" el="23" c="13" ec="51" ex="false" fl="65536" doc="3" nid="0" />
+        <seqpnt vc="1" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="3" nid="0" />
+        <seqpnt vc="1" o="11" l="24" el="24" c="9" ec="10" ex="false" fl="65536" doc="3" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="19" name="C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibraryTest\bin\Debug\MyLibraryTest.dll" assembly="MyLibraryTest" assemblyIdentity="MyLibraryTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="MyLibraryTest.AdderTest" signature="MyLibraryTest.AdderTest" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+      </method>
+      <method name="Add" signature="Add() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="17" el="17" c="13" ec="51" ex="false" fl="65536" doc="2" nid="0" />
+        <seqpnt vc="0" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="2" nid="0" />
+        <seqpnt vc="0" o="11" l="18" el="18" c="9" ec="10" ex="false" fl="65536" doc="2" nid="0" />
+      </method>
+    </class>
+  </module>
+  <module moduleId="22" name="C:\Users\Dinesh\Documents\Visual Studio 2010\Projects\CSharpPlayground\MyLibraryXUnitTest\bin\Debug\MyLibraryXUnitTest.dll" assembly="MyLibraryXUnitTest" assemblyIdentity="MyLibraryXUnitTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="MyLibraryXUnitTest.AdderXUnitTest" signature="MyLibraryXUnitTest.AdderXUnitTest" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+      </method>
+      <method name="Add" signature="Add() : void" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
+        <seqpnt vc="0" o="1" l="16" el="16" c="13" ec="48" ex="false" fl="65536" doc="4" nid="0" />
+        <seqpnt vc="0" o="11" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="4" nid="0" />
+        <seqpnt vc="0" o="11" l="17" el="17" c="9" ec="10" ex="false" fl="65536" doc="4" nid="0" />
+      </method>
+    </class>
+  </module>
+</coverage>

@@ -70,9 +70,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.sonarsource.dotnet</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>sonar-dotnet-tests-library</artifactId>
-      <version>1.7.0.545</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.dotnet</groupId>
