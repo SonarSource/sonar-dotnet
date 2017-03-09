@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.3.1.0",
+        "fileVersion": "1.3.1.60616",
+        "semanticVersion": "1.3.1",
+        "language": "en-GB"
+      },
+      "results": [
+        {
+          "ruleId": "S3776",
+          "level": "warning",
+          "message": "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 22,
+                  "endLine": 54,
+                  "endColumn": 25
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 13,
+                  "endLine": 56,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 17,
+                  "endLine": 65,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 53,
+                  "endLine": 65,
+                  "endColumn": 55
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "+1",
+              "1": "+2 (incl 1 for nesting)",
+              "2": "+1"
+            }
+          }
+        }
+      ],
+      "rules": {
+        "S3776": {
+          "id": "S3776",
+          "shortDescription": "Cognitive Complexity of methods should not be too high",
+          "fullDescription": "Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be difficult to maintain.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.23.0.0&ruleId=S3776",
+          "properties": {
+            "category": "Sonar Code Smell",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

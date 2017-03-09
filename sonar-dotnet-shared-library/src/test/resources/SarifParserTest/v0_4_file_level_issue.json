@@ -1,0 +1,134 @@
+{
+  "version": "0.4",
+  "runLogs": [
+    {
+      "toolInfo": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.2.0",
+        "fileVersion": "1.2.0.60220"
+      },
+      "results": [
+        {
+          "ruleId": "S104",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Program.cs",
+                  "region": {
+                    "startLine": 1,
+                    "startColumn": 1,
+                    "endLine": 1,
+                    "endColumn": 1
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Dummy",
+          "fullMessage": "Dummy.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "...",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S104",
+            "isEnabledByDefault": "True"
+          }
+        },
+        {
+          "ruleId": "S105",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Program.cs",
+                  "region": {
+                    "startLine": 1,
+                    "startColumn": 1,
+                    "endLine": 1,
+                    "endColumn": 1
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Dummy",
+          "fullMessage": "Dummy.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "...",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S104",
+            "isEnabledByDefault": "True"
+          }
+        },
+        {
+          "ruleId": "S105",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Program.cs",
+                  "region": {
+                    "startLine": 1,
+                    "startColumn": 1,
+                    "endLine": 1,
+                    "endColumn": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Dummy",
+          "fullMessage": "Dummy.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "...",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S104",
+            "isEnabledByDefault": "True"
+          }
+        },
+        {
+          "ruleId": "S106",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Program.cs",
+                  "region": {
+                    "startLine": 1,
+                    "startColumn": 1,
+                    "endLine": 1,
+                    "endColumn": 1
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Dummy",
+          "fullMessage": "Dummy.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "...",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S104",
+            "isEnabledByDefault": "True"
+          }
+        }
+      ]
+    }
+  ]
+}

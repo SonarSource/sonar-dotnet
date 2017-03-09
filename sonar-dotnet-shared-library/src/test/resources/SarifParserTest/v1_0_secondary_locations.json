@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.3.1.0",
+        "fileVersion": "1.3.1.60616",
+        "semanticVersion": "1.3.1",
+        "language": "en-GB"
+      },
+      "results": [
+        {
+          "ruleId": "S1764",
+          "level": "warning",
+          "message": "Identical sub-expressions on both sides of operator \"==\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 35,
+                  "endLine": 28,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "%BASEDIR%Foo.cs",
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 14,
+                  "endLine": 28,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "S1764": {
+          "id": "S1764",
+          "shortDescription": "Identical expressions should not be used on both sides of a binary operator",
+          "fullDescription": "Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy/paste error and therefore a bug, or it is simply wasted code, and should be simplified. In the case of bitwise operators and most binary mathematical operators, having the same value on both sides of an operator yields predictable results, and should be simplified.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.23.0.0&ruleId=S1764",
+          "properties": {
+            "category": "Sonar Bug",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

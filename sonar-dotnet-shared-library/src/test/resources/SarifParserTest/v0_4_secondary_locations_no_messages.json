@@ -1,0 +1,71 @@
+{
+  "version": "0.4",
+  "runLogs": [
+    {
+      "toolInfo": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.2.0",
+        "fileVersion": "1.2.0.60317"
+      },
+      "results": [
+        {
+          "ruleId": "S3776",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:///c:/primary.cs",
+                  "region": {
+                    "startLine": 54,
+                    "startColumn": 22,
+                    "endLine": 54,
+                    "endColumn": 25
+                  }
+                }
+              ]
+            },
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:///c:/secondary1.cs",
+                  "region": {
+                    "startLine": 56,
+                    "startColumn": 13,
+                    "endLine": 56,
+                    "endColumn": 15
+                  }
+                }
+              ]
+            },
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:///c:/secondary2.cs",
+                  "region": {
+                    "startLine": 65,
+                    "startColumn": 17,
+                    "endLine": 65,
+                    "endColumn": 19
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed",
+          "fullMessage": "Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be difficult to maintain.",
+          "isSuppressedInSource": false,
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "Cognitive Complexity of methods should not be too high",
+            "category": "Sonar Code Smell",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.23.0.1793&ruleId=S3776",
+            "isEnabledByDefault": "True"
+          }
+        }
+      ]
+    }
+  ]
+}

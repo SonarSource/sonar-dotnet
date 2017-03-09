@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.3.1.0",
+        "fileVersion": "1.3.1.60616",
+        "semanticVersion": "1.3.1",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S1234",
+          "level": "warning",
+          "message": "One issue per line",
+          "locations": [ ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "S1234": {
+          "id": "S1234",
+          "shortDescription": "One issue per line",
+          "fullDescription": "This rule will create an issue for every source code line",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Test",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json.schemastore.org/sarif-1.0.0",
+  "version": "1.0.0",
+  "runs": [
+    {
+      "tool": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.3.1.0",
+        "fileVersion": "1.3.1.60616",
+        "semanticVersion": "1.3.1",
+        "language": "en-US"
+      },
+      "results": [
+        {
+          "ruleId": "S1186",
+          "level": "warning",
+          "message": "Add a nested comment explaining why this method is empty, throw a \"NotSupportedException\" or complete the implementation.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Program.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 21,
+                  "endLine": 26,
+                  "endColumn": 25
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1172",
+          "level": "warning",
+          "message": "Remove this unused method parameter \"args\".",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Program.cs",
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 26,
+                  "endLine": 26,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a \"protected\" constructor or the \"static\" keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "%BASEDIR%Program.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 18,
+                  "endLine": 9,
+                  "endColumn": 25
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        }
+      ],
+      "rules": {
+        "S1118": {
+          "id": "S1118",
+          "shortDescription": "Utility classes should not have public constructors",
+          "fullDescription": "Utility classes, which are collections of \"static\" members, are not meant to be instantiated. Even \"abstract\" utility classes, which can be extended, should not have \"public\" constructors. C# adds an implicit public constructor to every class which does not explicitly define at least one constructor. Hence, at least one \"protected\" constructor should be defined if you wish to subclass this utility class. Or the \"static\" keyword should be added to the class declaration to prevent subclassing.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.13.0&ruleId=S1118",
+          "properties": {
+            "category": "Design",
+            "isEnabledByDefault": true
+          }
+        },
+        "S1172": {
+          "id": "S1172",
+          "shortDescription": "Unused method parameters should be removed",
+          "fullDescription": "Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.13.0&ruleId=S1172",
+          "properties": {
+            "category": "Maintainability",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Unnecessary"
+            ]
+          }
+        },
+        "S1186": {
+          "id": "S1186",
+          "shortDescription": "Methods should not be empty",
+          "fullDescription": "There are several reasons for a method not to have a method body: It is an unintentional omission, and should be fixed. It is not yet, or never will be, supported. In this case a \"NotSupportedException\" should be thrown. The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override.",
+          "defaultLevel": "warning",
+          "helpUri": "http://vs.sonarlint.org/rules/index.html#version=1.13.0&ruleId=S1186",
+          "properties": {
+            "category": "Reliability",
+            "isEnabledByDefault": true
+          }
+        }
+      }
+    }
+  ]
+}

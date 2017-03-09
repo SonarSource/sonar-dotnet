@@ -1,0 +1,220 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.sonarsource.dotnet</groupId>
+    <artifactId>sonar-csharp</artifactId>
+    <version>5.9-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sonar-dotnet-shared-library</artifactId>
+  
+  <name>SonarSource :: .NET :: Shared library</name>
+  <description>Share code between C# and VB.NET plugins</description>
+  
+  <properties>
+    <sonar.version>6.1</sonar.version>
+    <protobuf.version>3.1.0</protobuf.version>
+    <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
+    <!-- used for deployment to SonarSource Artifactory -->
+    <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${protobuf.version}</version>
+    </dependency>
+
+    <!-- unit tests -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.4.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>1.10.19</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.3.0.Final</version>
+      </extension>
+    </extensions>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.7</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>1.9.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>protobuf-compile</id>
+      <activation>
+        <file>
+          <exists>src/main/protobuf</exists>
+        </file>
+      </activation>
+      <properties>
+        <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
+        <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+        <sonarAnalyzer.version>1.23.0.1828</sonarAnalyzer.version>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-plugin</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarAnalyzer.Scanner</artifactId>
+                      <version>${sonarAnalyzer.version}</version>
+                      <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
+                  <overWriteReleases>true</overWriteReleases>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                  <stripVersion>true</stripVersion>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>unzip-nuget</id>
+                <phase>validate</phase>
+                <configuration>
+                  <exportAntProperties>true</exportAntProperties>
+                  <tasks>
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
+                    <delete>
+                      <fileset dir="src/main/protobuf" excludes=".gitignore"></fileset>
+                    </delete>
+                    <copy todir="src/main/protobuf">
+                      <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
+                        <include name="*.proto"/>
+                      </fileset>
+                    </copy>
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>compile-protobuf-sources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <target>
+                    <fileset id="fileset" dir="${project.basedir}/src/main/protobuf">
+                      <include name="*.proto" />
+                    </fileset>
+                    <pathconvert refid="fileset" property="protos" pathsep=" " />
+                    <mkdir dir="${project.build.directory}/generated-sources/protobuf" />
+                    <chmod file="${protobuf.compiler}" perm="u+x" />
+                    <exec failonerror="true" executable="${protobuf.compiler}">
+                      <arg value="--proto_path=${project.basedir}/src/main/protobuf" />
+                      <arg value="--java_out=${project.build.directory}/generated-sources/protobuf" />
+                      <arg line="${protos}" />
+                    </exec>
+                  </target>
+                </configuration>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protoc</artifactId>
+                <version>${protobuf.version}</version>
+                <classifier>${os.detected.classifier}</classifier>
+                <type>exe</type>
+              </dependency>
+            </dependencies>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>add-protobuf-generated-sources</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>add-source</goal>
+                </goals>
+                <configuration>
+                  <sources>
+                 <source>${project.build.directory}/generated-sources/protobuf</source>
+                  </sources>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

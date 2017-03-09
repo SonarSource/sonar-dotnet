@@ -75,9 +75,9 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.sonarsource.dotnet</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>sonar-dotnet-shared-library</artifactId>
-      <version>1.2.0.397</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
