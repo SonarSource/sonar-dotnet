@@ -1,0 +1,105 @@
+{
+  "version": "0.1",
+  "toolInfo": {
+    "toolName": "Microsoft (R) Visual C# Compiler",
+    "productVersion": "1.0.0",
+    "fileVersion": "1.0.0"
+  },
+  "issues": [
+    {
+      "ruleId": "S1172",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "C:\\Foo.cs",
+              "region": {
+                "startLine": 42,
+                "startColumn": 55,
+                "endLine": 43,
+                "endColumn": 57
+              }
+            }
+          ]
+        }
+      ],
+      "shortMessage": "Remove this unused method parameter \"args\".",
+      "fullMessage": "Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel": "1",
+        "defaultSeverity": "Warning",
+        "title": "Unused method parameters should be removed",
+        "category": "Maintainability",
+        "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S1172",
+        "isEnabledByDefault": "True",
+        "isSuppressedInSource": "False",
+        "customTags": "Unnecessary"
+      }
+    },
+    {
+      "ruleId": "S1172",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "C:\\Bar.cs",
+              "region": {
+                "startLine": 58,
+                "startColumn": 55,
+                "endLine": 58,
+                "endColumn": 57
+              }
+            }
+          ]
+        }
+      ],
+      "shortMessage": "Remove this unused method parameter \"args\".",
+      "fullMessage": "Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.",
+      "properties": {
+        "severity": "Warning",
+        "warningLevel": "1",
+        "defaultSeverity": "Warning",
+        "title": "Unused method parameters should be removed",
+        "category": "Maintainability",
+        "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S1172",
+        "isEnabledByDefault": "True",
+        "isSuppressedInSource": "True",
+        "customTags": "Unnecessary"
+      }
+    },
+    {
+      "ruleId": "CA1000",
+      "locations": [
+        {
+          "analysisTarget": [
+            {
+              "uri": "C:\\Bar.cs",
+              "region": {
+                "startLine": 1,
+                "startColumn": 2,
+                "endLine": 3,
+                "endColumn": 4
+              }
+            }
+          ]
+        }
+      ],
+      "fullMessage": "There is just a full message."
+    },
+    {
+      "ruleId": "AssemblyLevelRule",
+      "locations": [
+      ],
+      "fullMessage": "This is an assembly level Roslyn issue with no location."
+    },
+    {
+      "ruleId": "NoAnalysisTargetsLocation",
+      "locations": [
+        {
+        }
+      ],
+      "fullMessage": "No analysis targets, report at assembly level."
+    }
+  ]
+}

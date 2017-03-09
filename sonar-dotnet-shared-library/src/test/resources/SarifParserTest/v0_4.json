@@ -1,0 +1,75 @@
+{
+  "version": "0.4",
+  "runLogs": [
+    {
+      "toolInfo": {
+        "name": "Microsoft (R) Visual C# Compiler",
+        "version": "1.2.0",
+        "fileVersion": "1.2.0.60220"
+      },
+      "results": [
+        {
+          "ruleId": "S125",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Foo`1.cs",
+                  "region": {
+                    "startLine": 58,
+                    "startColumn": 13,
+                    "endLine": 58,
+                    "endColumn": 51
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Remove this commented out code.",
+          "fullMessage": "Programmers should not comment out code as it bloats programs and reduces readability. Unused code should be deleted and can be retrieved from source control history if required.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "Sections of code should not be \"commented out\"",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S125",
+            "isEnabledByDefault": "True"
+          }
+        },
+        {
+          "ruleId": "S125",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Bar.cs",
+                  "region": {
+                    "startLine": 42,
+                    "startColumn": 13,
+                    "endLine": 42,
+                    "endColumn": 51
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Remove this commented out code.",
+          "fullMessage": "Programmers should not comment out code as it bloats programs and reduces readability. Unused code should be deleted and can be retrieved from source control history if required.",
+          "isSuppressedInSource": true,
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "Sections of code should not be \"commented out\"",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S125",
+            "isEnabledByDefault": "True"
+          }
+        }
+      ]
+    }
+  ]
+}
