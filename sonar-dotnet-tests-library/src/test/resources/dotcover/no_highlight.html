@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>mylibrary\calc.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyLibrary
+{
+    public class Calc
+    {
+        public static int Add(int left, int right)
+        {
+            return left + right;
+        }
+
+        public static int Multiply(int left, int right)
+        {
+            return left * right;
+        }
+
+        public static int Divide(int left, int right)
+        {
+            if (right == 0)
+            {
+                Console.WriteLine(&quot;ERROR: Division by zero!&quot;);
+            }
+
+            return left / right;
+        }
+
+        public static void horrible_code(out int result)
+        {
+            result = 42;
+        }
+    }
+}
+
+    </pre>
+  </body>
+</html>

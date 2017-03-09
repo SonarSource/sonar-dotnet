@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyLibrary
+{
+    public class Calc
+    {
+        public static int Add(int left, int right)
+        {
+            return left + right;
+        }
+
+        public static int Multiply(int left, int right)
+        {
+            return left * right;
+        }
+
+        public static int Divide(int left, int right)
+        {
+            if (right == 0)
+            {
+                Console.WriteLine(&quot;ERROR: Division by zero!&quot;);
+            }
+
+            return left / right;
+        }
+
+        public static void horrible_code(out int result)
+        {
+            result = 42;
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[12,9,12,10,0]]);
+    </script>
+    <script type="text/javascript">
+      highlightRanges([[12,9,12,10,0],[13,13,13,33,0],[14,9,14,10,0],[22,9,22,10,0],[23,13,23,28,0],[24,13,24,14,0],[25,17,25,63,0],[26,13,26,14,0],[28,13,28,33,0],[29,9,29,10,0],[32,9,32,10,0],[33,13,33,25,0],[34,9,34,10,0],[17,9,17,10,1],[18,13,18,33,1],[19,9,19,10,1]]);
+    </script>
+  </body>
+</html>

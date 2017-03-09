@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<results>
+  <modules>
+    <module name="calcmultiplytest.dll" path="calcmultiplytest.dll" id="9753A02D1CD4A149AF8424F2CCB0D1CE01000000" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+      <functions>
+        <function id="8272" token="0x6000001" name="TestMethod1()" type_name="MultiplyTest" block_coverage="100.00" line_coverage="100.00" blocks_covered="3" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="13" start_column="9" end_line="13" end_column="10" />
+            <range source_id="0" covered="yes" start_line="14" start_column="13" end_line="14" end_column="55" />
+            <range source_id="0" covered="yes" start_line="15" start_column="9" end_line="15" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="CalcMultiplyTest\MultiplyTest.cs">
+        </source_file>
+      </source_files>
+    </module>
+    <module name="mylibrary.dll" path="mylibrary.dll" id="FB216D2B58233E4094446935C1C5AF4C01000000" block_coverage="20.00" line_coverage="18.75" blocks_covered="2" blocks_not_covered="8" lines_covered="3" lines_partially_covered="0" lines_not_covered="13">
+      <functions>
+        <function id="8272" token="0x6000001" name="Add(int, int)" type_name="Calc" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="2" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="0" covered="no" start_line="12" start_column="9" end_line="12" end_column="10" />
+            <range source_id="0" covered="no" start_line="13" start_column="13" end_line="13" end_column="33" />
+            <range source_id="0" covered="no" start_line="14" start_column="9" end_line="14" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8296" token="0x6000002" name="Multiply(int, int)" type_name="Calc" block_coverage="100.00" line_coverage="100.00" blocks_covered="2" blocks_not_covered="0" lines_covered="3" lines_partially_covered="0" lines_not_covered="0">
+          <ranges>
+            <range source_id="0" covered="yes" start_line="17" start_column="9" end_line="17" end_column="10" />
+            <range source_id="0" covered="partial" start_line="18" start_column="13" end_line="18" end_column="33" />
+            <range source_id="0" covered="yes" start_line="19" start_column="9" end_line="19" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8320" token="0x6000003" name="Divide(int, int)" type_name="Calc" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="5" lines_covered="0" lines_partially_covered="0" lines_not_covered="7">
+          <ranges>
+            <range source_id="0" covered="no" start_line="22" start_column="9" end_line="22" end_column="10" />
+            <range source_id="0" covered="no" start_line="23" start_column="13" end_line="23" end_column="28" />
+            <range source_id="0" covered="no" start_line="24" start_column="13" end_line="24" end_column="14" />
+            <range source_id="0" covered="no" start_line="25" start_column="17" end_line="25" end_column="63" />
+            <range source_id="0" covered="no" start_line="26" start_column="13" end_line="26" end_column="14" />
+            <range source_id="0" covered="no" start_line="28" start_column="13" end_line="28" end_column="33" />
+            <range source_id="0" covered="no" start_line="29" start_column="9" end_line="29" end_column="10" />
+          </ranges>
+        </function>
+        <function id="8362" token="0x6000004" name="horrible_code(out int)" type_name="Calc" block_coverage="0.00" line_coverage="0.00" blocks_covered="0" blocks_not_covered="1" lines_covered="0" lines_partially_covered="0" lines_not_covered="3">
+          <ranges>
+            <range source_id="0" covered="no" start_line="32" start_column="9" end_line="32" end_column="10" />
+            <range source_id="0" covered="no" start_line="33" start_column="13" end_line="33" end_column="25" />
+            <range source_id="0" covered="no" start_line="34" start_column="9" end_line="34" end_column="10" />
+          </ranges>
+        </function>
+      </functions>
+      <source_files>
+        <source_file id="0" path="MyLibrary\Calc.cs">
+        </source_file>
+      </source_files>
+    </module>
+  </modules>
+</results>
