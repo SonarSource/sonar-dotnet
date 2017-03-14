@@ -116,11 +116,12 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       StringBuffer sb = new StringBuffer();
 
       Matcher matcher = millisecondsPattern.matcher(value);
+      StringBuilder trailingZeros = new StringBuilder();
       while (matcher.find()) {
         String milliseconds = matcher.group(2);
-        String trailingZeros = "";
+        trailingZeros.setLength(0);
         for (int i = 0; i < 3 - milliseconds.length(); i++) {
-          trailingZeros += "0";
+          trailingZeros.append("0");
         }
         matcher.appendReplacement(sb, "$1" + trailingZeros);
       }
