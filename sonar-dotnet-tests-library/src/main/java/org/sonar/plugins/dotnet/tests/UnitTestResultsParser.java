@@ -20,9 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.function.BiConsumer;
 
-public interface UnitTestResultsParser {
-
-  void parse(File file, UnitTestResults unitTestResults);
-
+@FunctionalInterface
+public interface UnitTestResultsParser extends BiConsumer<File, UnitTestResults> {
 }

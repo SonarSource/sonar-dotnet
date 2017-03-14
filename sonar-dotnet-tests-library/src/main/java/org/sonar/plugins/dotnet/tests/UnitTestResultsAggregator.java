@@ -85,7 +85,7 @@ public class UnitTestResultsAggregator {
   private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {
     for (String reportPathPattern : Splitter.on(',').trimResults().omitEmptyStrings().split(reportPaths)) {
       for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-        parser.parse(reportFile, unitTestResults);
+        parser.accept(reportFile, unitTestResults);
       }
     }
   }

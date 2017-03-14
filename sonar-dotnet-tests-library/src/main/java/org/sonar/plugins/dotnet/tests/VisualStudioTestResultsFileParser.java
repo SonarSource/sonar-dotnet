@@ -36,7 +36,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
   private static final Logger LOG = Loggers.get(VisualStudioTestResultsFileParser.class);
 
   @Override
-  public void parse(File file, UnitTestResults unitTestResults) {
+  public void accept(File file, UnitTestResults unitTestResults) {
     LOG.info("Parsing the Visual Studio Test Results file " + file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }
