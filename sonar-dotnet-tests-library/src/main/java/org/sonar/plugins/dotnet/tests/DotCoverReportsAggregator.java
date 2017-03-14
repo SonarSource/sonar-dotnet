@@ -61,7 +61,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     Preconditions.checkArgument(!reportFiles.isEmpty(), "No dotCover report HTML source file found under: " + folder.getAbsolutePath());
   }
 
-  private List<File> listReportFiles(File folder) {
+  private static List<File> listReportFiles(File folder) {
     Stream<Path> pathStream;
     try {
       pathStream = Files.list(folder.toPath());
