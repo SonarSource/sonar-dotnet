@@ -45,9 +45,7 @@ public class XmlParserHelper implements AutoCloseable {
       XMLInputFactory xmlFactory = XMLInputFactory.newInstance();
       this.stream = xmlFactory.createXMLStreamReader(reader);
 
-    } catch (FileNotFoundException e) {
-      throw Throwables.propagate(e);
-    } catch (XMLStreamException e) {
+    } catch (FileNotFoundException | XMLStreamException e) {
       throw Throwables.propagate(e);
     }
   }
