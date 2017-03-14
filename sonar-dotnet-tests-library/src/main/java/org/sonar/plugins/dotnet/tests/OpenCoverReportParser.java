@@ -31,7 +31,7 @@ public class OpenCoverReportParser implements CoverageParser {
   private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
 
   @Override
-  public void parse(File file, Coverage coverage) {
+  public void accept(File file, Coverage coverage) {
     LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }

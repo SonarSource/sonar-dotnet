@@ -44,7 +44,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
   }
 
   @Override
-  public void parse(File file, Coverage coverage) {
+  public void accept(File file, Coverage coverage) {
     LOG.info("Aggregating the HTML reports from " + file.getAbsolutePath());
     checkIsHtml(file);
 
@@ -55,7 +55,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     List<File> reportFiles = listReportFiles(folder);
     for (File reportFile : reportFiles) {
       if (!isExcluded(reportFile)) {
-        parser.parse(reportFile, coverage);
+        parser.accept(reportFile, coverage);
       }
     }
     Preconditions.checkArgument(!reportFiles.isEmpty(), "No dotCover report HTML source file found under: " + folder.getAbsolutePath());

@@ -31,7 +31,7 @@ public class NCover3ReportParser implements CoverageParser {
   private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
 
   @Override
-  public void parse(File file, Coverage coverage) {
+  public void accept(File file, Coverage coverage) {
     LOG.info("Parsing the NCover3 report " + file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }

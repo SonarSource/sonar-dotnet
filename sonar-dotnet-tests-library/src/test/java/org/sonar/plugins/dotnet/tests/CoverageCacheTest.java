@@ -37,10 +37,10 @@ public class CoverageCacheTest {
     when(reportFile.getAbsolutePath()).thenReturn("foo.txt");
 
     Coverage coverage = cache.readCoverageFromCacheOrParse(parser, reportFile);
-    verify(parser, Mockito.times(1)).parse(reportFile, coverage);
+    verify(parser, Mockito.times(1)).accept(reportFile, coverage);
 
     cache.readCoverageFromCacheOrParse(parser, reportFile);
-    verify(parser, Mockito.times(1)).parse(Mockito.eq(reportFile), Mockito.any(Coverage.class));
+    verify(parser, Mockito.times(1)).accept(Mockito.eq(reportFile), Mockito.any(Coverage.class));
   }
 
 }

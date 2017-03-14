@@ -37,7 +37,7 @@ public class DotCoverReportParserTest {
   public void no_title() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The report contents does not match the following regular expression: .*?<title>(.*?)</title>.*");
-    new DotCoverReportParser().parse(new File("src/test/resources/dotcover/no_title.html"), mock(Coverage.class));
+    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/no_title.html"), mock(Coverage.class));
   }
 
   @Test
@@ -45,13 +45,13 @@ public class DotCoverReportParserTest {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The report contents does not match the following regular expression: "
       + ".*<script type=\"text/javascript\">\\s*+highlightRanges\\(\\[(.*?)\\]\\);\\s*+</script>.*");
-    new DotCoverReportParser().parse(new File("src/test/resources/dotcover/no_highlight.html"), mock(Coverage.class));
+    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/no_highlight.html"), mock(Coverage.class));
   }
 
   @Test
   public void valid() throws Exception {
     Coverage coverage = new Coverage();
-    new DotCoverReportParser().parse(new File("src/test/resources/dotcover/valid.html"), coverage);
+    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/valid.html"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       new File("mylibrary\\calc.cs").getCanonicalPath());
@@ -79,7 +79,7 @@ public class DotCoverReportParserTest {
 
   @Test
   public void should_not_fail_with_invalid_path() {
-    new DotCoverReportParser().parse(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
+    new DotCoverReportParser().accept(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
   }
 
 }
