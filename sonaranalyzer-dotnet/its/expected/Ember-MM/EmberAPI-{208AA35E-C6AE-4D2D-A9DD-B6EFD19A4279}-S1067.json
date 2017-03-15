@@ -1,0 +1,342 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  912,
+"startColumn":  16,
+"endLine":  912,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  266,
+"startColumn":  36,
+"endLine":  272,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  405,
+"startColumn":  24,
+"endLine":  407,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  24,
+"endLine":  416,
+"endColumn":  195
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  1086,
+"startColumn":  16,
+"endLine":  1087,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  16,
+"endLine":  83,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  16,
+"endLine":  116,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  16,
+"endLine":  147,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  28,
+"endLine":  159,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  469,
+"startColumn":  28,
+"endLine":  470,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  672,
+"startColumn":  24,
+"endLine":  674,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  26,
+"endLine":  368,
+"endColumn":  179
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  372,
+"startColumn":  26,
+"endLine":  372,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  378,
+"startColumn":  26,
+"endLine":  378,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (23) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  24,
+"endLine":  284,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (47) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  24,
+"endLine":  312,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (11) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  24,
+"endLine":  325,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  364,
+"startColumn":  20,
+"endLine":  366,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (10) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  429,
+"startColumn":  16,
+"endLine":  433,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  831,
+"startColumn":  90,
+"endLine":  833,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  882,
+"startColumn":  73,
+"endLine":  884,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3586,
+"startColumn":  12,
+"endLine":  3586,
+"endColumn":  192
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3611,
+"startColumn":  12,
+"endLine":  3611,
+"endColumn":  199
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3641,
+"startColumn":  12,
+"endLine":  3641,
+"endColumn":  193
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (7) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  12,
+"endLine":  33,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  12,
+"endLine":  322,
+"endColumn":  139
+}
+}
+}
+]
+}

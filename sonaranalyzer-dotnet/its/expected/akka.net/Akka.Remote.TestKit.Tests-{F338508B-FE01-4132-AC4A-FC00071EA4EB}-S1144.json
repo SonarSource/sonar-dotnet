@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"region":  {
+"startLine":  353,
+"startColumn":  13,
+"endLine":  357,
+"endColumn":  14
+}
+}
+}
+]
+}

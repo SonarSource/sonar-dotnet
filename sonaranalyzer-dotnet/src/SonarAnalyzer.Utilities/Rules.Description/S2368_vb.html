@@ -1,0 +1,24 @@
+<p>Exposing methods with multidimensional array parameters requires developers to have advanced knowledge about the language in order to be able to
+use them. Moreover, what exactly to pass to such parameters is not intuitive. Therefore, such methods should not be exposed, but can be used
+internally.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub WriteMatrix(ByVal matrix As Integer()()) ' Non-Compliant
+        ' ...
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class Matrix
+    ' ...
+End Class
+
+Module Module1
+    Sub WriteMatrix(ByVal matrix As Matrix)      ' Compliant
+        ' ...
+    End Sub
+End Module
+</pre>
+

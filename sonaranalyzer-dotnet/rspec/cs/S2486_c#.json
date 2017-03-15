@@ -1,0 +1,19 @@
+{
+  "title": "Generic exceptions should not be ignored",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1h"
+  },
+  "tags": [
+    "cwe",
+    "error-handling",
+    "bug",
+    "suspicious"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Minor"
+}

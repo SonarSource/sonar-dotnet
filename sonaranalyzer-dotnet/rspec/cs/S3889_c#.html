@@ -1,0 +1,12 @@
+<p><code>Thread.Suspend</code> and <code>Thread.Resume</code> can give unpredictable results, and have been deprecated. Instead, other synchronization
+mechanisms should be used, such as <code>Monitor</code>, <code>Mutex</code>, and <code>Semaphore</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+static void Main(string[] args)
+{
+  // ...
+  Thread.CurrentThread.Suspend(); // Noncompliant
+  Thread.CurrentThread.Resume(); // Noncompliant
+}
+</pre>
+

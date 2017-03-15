@@ -1,0 +1,12 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MainVersion>5.9.0</MainVersion>
+    <AssemblyVersion>$(MainVersion)</AssemblyVersion>
+    <!-- The file version is changed by the CI job to contain the build number -->
+    <AssemblyFileVersion>$(MainVersion).0</AssemblyFileVersion>
+    <!-- The NuGet version is changed by the CI job to contain the build number in a NuGet supported way -->
+    <NugetVersion>$(MainVersion)</NugetVersion>
+    <AssemblyInformationalVersion>Version:$(AssemblyFileVersion) Branch:not-set Sha1:not-set</AssemblyInformationalVersion>
+    <VsixVersion>$(AssemblyFileVersion)</VsixVersion>
+  </PropertyGroup>
+</Project>

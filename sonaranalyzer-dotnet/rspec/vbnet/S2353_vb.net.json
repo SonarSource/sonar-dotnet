@@ -1,0 +1,13 @@
+{
+  "title": "Indexed properties should be named \"Item\"",
+  "type": "CODE_SMELL",
+  "status": "deprecated",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Minor"
+}

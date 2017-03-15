@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 138 or change one of the implementations.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  144,
+"endColumn":  14
+}
+},
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  14
+}
+}
+]
+},
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 417 or change one of the implementations.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  76,
+"endLine":  418,
+"endColumn":  96
+}
+},
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  57,
+"endLine":  417,
+"endColumn":  77
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgPleaseWait.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  14,
+"endLine":  27,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  14,
+"endLine":  28,
+"endColumn":  35
+}
+}
+}
+]
+}

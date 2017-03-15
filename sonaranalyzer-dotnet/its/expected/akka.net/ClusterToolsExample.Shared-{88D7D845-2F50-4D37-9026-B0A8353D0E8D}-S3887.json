@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Messages.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  53,
+"endLine":  53,
+"endColumn":  59
+}
+}
+}
+]
+}

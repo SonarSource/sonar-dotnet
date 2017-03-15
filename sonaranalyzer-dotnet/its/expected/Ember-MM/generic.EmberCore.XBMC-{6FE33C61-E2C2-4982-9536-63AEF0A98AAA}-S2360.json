@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  307,
+"startColumn":  72,
+"endLine":  307,
+"endColumn":  80
+}
+}
+}
+]
+}

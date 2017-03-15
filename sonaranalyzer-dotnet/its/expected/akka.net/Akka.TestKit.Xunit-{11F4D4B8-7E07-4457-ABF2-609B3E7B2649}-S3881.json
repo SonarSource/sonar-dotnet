@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  25
+}
+},
+{
+"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  21,
+"endLine":  86,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,10 @@
+<p>Strings and integral types are typically used as indexers. When some other type is required, it typically indicates design problems, and
+potentially a situation where a method should be used instead.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public int this[MyCustomClass index]  // Noncompliant
+{
+    // get and set accessors
+}
+</pre>
+

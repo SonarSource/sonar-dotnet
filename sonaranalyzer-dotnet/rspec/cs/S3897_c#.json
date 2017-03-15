@@ -1,0 +1,13 @@
+{
+  "title": "Classes that provide \"Equals(<T>)\" or override \"Equals(Object)\" should implement \"IEquatable<T>\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "api-design"
+  ],
+  "defaultSeverity": "Major"
+}

@@ -1,0 +1,196 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  17,
+"endLine":  88,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  13,
+"endLine":  86,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  21,
+"endLine":  207,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  17,
+"endLine":  205,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  13,
+"endLine":  319,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  21,
+"endLine":  24,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3275,
+"startColumn":  17,
+"endLine":  3275,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3273,
+"startColumn":  13,
+"endLine":  3273,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3432,
+"startColumn":  17,
+"endLine":  3432,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3430,
+"startColumn":  13,
+"endLine":  3430,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3460,
+"startColumn":  17,
+"endLine":  3460,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3458,
+"startColumn":  13,
+"endLine":  3458,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

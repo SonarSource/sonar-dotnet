@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'newHistory'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  41,
+"endLine":  147,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'disassociateNotification'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  796,
+"startColumn":  60,
+"endLine":  796,
+"endColumn":  66
+}
+}
+}
+]
+}

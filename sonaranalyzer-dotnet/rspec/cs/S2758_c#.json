@@ -1,0 +1,13 @@
+{
+  "title": "The ternary operator should not return the same value regardless of the condition",
+  "type": "BUG",
+  "status": "deprecated",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

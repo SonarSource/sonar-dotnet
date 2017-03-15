@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  44,
+"endLine":  58,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  44,
+"endLine":  75,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '::1' address configurable.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  44,
+"endLine":  93,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '84.12.65.72' address configurable.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  44,
+"endLine":  111,
+"endColumn":  57
+}
+}
+}
+]
+}

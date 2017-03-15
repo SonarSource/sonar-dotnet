@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  259,
+"startColumn":  9,
+"endLine":  259,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  592,
+"startColumn":  29,
+"endLine":  592,
+"endColumn":  35
+}
+}
+}
+]
+}

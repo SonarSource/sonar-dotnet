@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  81,
+"endLine":  15,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  40,
+"endLine":  19,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  62,
+"endLine":  19,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  82,
+"endLine":  79,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  143,
+"endLine":  79,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  29,
+"endLine":  83,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  81,
+"endLine":  15,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  40,
+"endLine":  19,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  62,
+"endLine":  19,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  82,
+"endLine":  80,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  143,
+"endLine":  80,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  32,
+"endLine":  84,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  81,
+"endLine":  15,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  40,
+"endLine":  19,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  62,
+"endLine":  19,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  82,
+"endLine":  80,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  143,
+"endLine":  80,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  32,
+"endLine":  84,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  18,
+"startColumn":  86,
+"endLine":  18,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  20,
+"startColumn":  70,
+"endLine":  20,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  22,
+"startColumn":  66,
+"endLine":  22,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  43,
+"endLine":  76,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  80,
+"endLine":  76,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  42,
+"endLine":  79,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  39,
+"endLine":  93,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  76,
+"endLine":  93,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  43,
+"endLine":  96,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  39,
+"endLine":  99,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  35,
+"endLine":  102,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  72,
+"endLine":  102,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  102,
+"startColumn":  110,
+"endLine":  102,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  45,
+"endLine":  105,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  82,
+"endLine":  105,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  165,
+"endLine":  105,
+"endColumn":  172
+}
+}
+}
+]
+}

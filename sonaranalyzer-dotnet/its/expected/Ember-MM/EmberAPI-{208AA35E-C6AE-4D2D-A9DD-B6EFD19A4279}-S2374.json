@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  29,
+"endLine":  38,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  31,
+"endLine":  43,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  95,
+"endLine":  379,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  106,
+"endLine":  379,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  27,
+"endLine":  380,
+"endColumn":  35
+}
+}
+}
+]
+}

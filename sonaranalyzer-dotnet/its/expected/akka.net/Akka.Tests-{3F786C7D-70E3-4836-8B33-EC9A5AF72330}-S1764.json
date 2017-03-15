@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1764",
+"message":  "Identical sub-expressions on both sides of operator '=='.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  35,
+"endLine":  28,
+"endColumn":  52
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  14,
+"endLine":  28,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S1764",
+"message":  "Identical sub-expressions on both sides of operator '!='.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  35,
+"endLine":  29,
+"endColumn":  52
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  14,
+"endLine":  29,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

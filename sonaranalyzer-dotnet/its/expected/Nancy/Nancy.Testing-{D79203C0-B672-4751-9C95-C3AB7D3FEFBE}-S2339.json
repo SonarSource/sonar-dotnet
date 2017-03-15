@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Accept.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  29,
+"endLine":  12,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Accept.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  29,
+"endLine":  18,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Accept.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  29,
+"endLine":  24,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Accept.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  29,
+"endLine":  30,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  29,
+"endLine":  12,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\TestingViewFactory.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\TestingViewFactory.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\TestingViewFactory.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  29,
+"endLine":  59,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\TestingViewFactory.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  29,
+"endLine":  63,
+"endColumn":  39
+}
+}
+}
+]
+}

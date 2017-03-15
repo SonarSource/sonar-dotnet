@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 18 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1318,
+"startColumn":  9,
+"endLine":  1318,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  3,
+"endLine":  199,
+"endColumn":  67
+}
+}
+}
+]
+}

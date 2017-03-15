@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  5,
+"endLine":  378,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  6,
+"endLine":  380,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  383,
+"startColumn":  5,
+"endLine":  383,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  5,
+"endLine":  385,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  5,
+"endLine":  388,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  5,
+"endLine":  390,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  5,
+"endLine":  392,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  327,
+"startColumn":  6,
+"endLine":  327,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  328,
+"startColumn":  6,
+"endLine":  328,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  6,
+"endLine":  329,
+"endColumn":  23
+}
+}
+}
+]
+}

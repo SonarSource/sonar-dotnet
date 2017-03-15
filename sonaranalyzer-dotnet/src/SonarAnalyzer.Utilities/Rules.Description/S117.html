@@ -1,0 +1,26 @@
+<p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.This rule checks that all local variables
+follow a naming convention.</p>
+<p>The default configuration is:</p>
+<ul>
+  <li> Camel casing, starting with a lower case character, e.g. backColor </li>
+  <li> Short abbreviations of 2 letters can be capitalized only when not at the beginning, e.g. id, productID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. html </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
+<pre>
+Module Module1
+    Sub Main()
+        Dim Foo = 0 ' Noncompliant
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo = 0 ' Compliant
+    End Sub
+End Module
+</pre>
+

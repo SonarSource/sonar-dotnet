@@ -1,0 +1,334 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  21,
+"endLine":  398,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  41
+}
+},
+{
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  52,
+"endLine":  12,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  29,
+"endLine":  144,
+"endColumn":  36
+}
+},
+{
+"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  16,
+"endLine":  144,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  21,
+"endLine":  230,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  26
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  26
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  29,
+"endLine":  165,
+"endColumn":  36
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  16,
+"endLine":  165,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2680,
+"startColumn":  23,
+"endLine":  2680,
+"endColumn":  38
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2680,
+"startColumn":  23,
+"endLine":  2680,
+"endColumn":  38
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2734,
+"startColumn":  25,
+"endLine":  2734,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2748,
+"startColumn":  23,
+"endLine":  2748,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2748,
+"startColumn":  23,
+"endLine":  2748,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2813,
+"startColumn":  25,
+"endLine":  2813,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2825,
+"startColumn":  23,
+"endLine":  2825,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2825,
+"startColumn":  23,
+"endLine":  2825,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2895,
+"startColumn":  25,
+"endLine":  2895,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2910,
+"startColumn":  23,
+"endLine":  2910,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2910,
+"startColumn":  23,
+"endLine":  2910,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2992,
+"startColumn":  25,
+"endLine":  2992,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  18,
+"endLine":  90,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  18,
+"endLine":  90,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  21,
+"endLine":  178,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

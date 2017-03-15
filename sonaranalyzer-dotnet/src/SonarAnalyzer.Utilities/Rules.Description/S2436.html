@@ -1,0 +1,8 @@
+<p>A method or class with too many type parameters has likely aggregated too many responsibilities and should be split.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With the default parameter value of 2:</p>
+<pre>
+&lt;S, T, U, V&gt; void foo() {} // Noncompliant; not really readable
+&lt;String, Integer, Object, String&gt;foo(); // especially on invocations
+</pre>
+

@@ -1,0 +1,381 @@
+{
+"issues":  [
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  109,
+"endLine":  93,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  42,
+"endLine":  144,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  608,
+"startColumn":  64,
+"endLine":  608,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  380,
+"startColumn":  42,
+"endLine":  380,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  267,
+"startColumn":  42,
+"endLine":  267,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  90,
+"endLine":  83,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  142,
+"startColumn":  82,
+"endLine":  142,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  90,
+"endLine":  192,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  32,
+"endLine":  68,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  32,
+"endLine":  93,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  28,
+"endLine":  150,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  85,
+"endLine":  151,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  61,
+"endLine":  175,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  84,
+"endLine":  186,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  192,
+"startColumn":  45,
+"endLine":  192,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  197,
+"startColumn":  72,
+"endLine":  197,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  40,
+"endLine":  48,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  36,
+"endLine":  49,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  729,
+"startColumn":  42,
+"endLine":  729,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2925,
+"startColumn":  29,
+"endLine":  2925,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4729,
+"startColumn":  98,
+"endLine":  4729,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5287,
+"startColumn":  38,
+"endLine":  5287,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5395,
+"startColumn":  26,
+"endLine":  5395,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5639,
+"startColumn":  18,
+"endLine":  5639,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5698,
+"startColumn":  29,
+"endLine":  5698,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5723,
+"startColumn":  25,
+"endLine":  5723,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5981,
+"startColumn":  125,
+"endLine":  5981,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6453,
+"startColumn":  108,
+"endLine":  6453,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6458,
+"startColumn":  108,
+"endLine":  6458,
+"endColumn":  120
+}
+}
+}
+]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Empty \"default\" clauses should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "\t1min"
+  },
+  "tags": [
+    "unused",
+    "finding",
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor"
+}

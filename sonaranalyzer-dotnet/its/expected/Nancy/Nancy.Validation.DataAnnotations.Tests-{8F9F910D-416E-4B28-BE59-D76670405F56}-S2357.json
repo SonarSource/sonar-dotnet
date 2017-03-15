@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'propertyValidator1' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  44,
+"endLine":  13,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'propertyValidator2' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  44,
+"endLine":  14,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'validatableObjectAdapter' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  51,
+"endLine":  15,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'validatorFactory' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  51,
+"endLine":  16,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'validator' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  50,
+"endLine":  17,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'validator' private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DefaultValidatableObjectAdapterFixture.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  57,
+"endLine":  13,
+"endColumn":  66
+}
+}
+}
+]
+}

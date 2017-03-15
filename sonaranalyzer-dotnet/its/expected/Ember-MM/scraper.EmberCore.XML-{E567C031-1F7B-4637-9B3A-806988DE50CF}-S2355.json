@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  62,
+"endLine":  178,
+"endColumn":  86
+}
+}
+}
+]
+}

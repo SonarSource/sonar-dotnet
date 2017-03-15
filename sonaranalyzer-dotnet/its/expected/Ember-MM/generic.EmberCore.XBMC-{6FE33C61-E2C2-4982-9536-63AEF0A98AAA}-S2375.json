@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use 'Me.xCom' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  25,
+"endLine":  45,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 15 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  9,
+"endLine":  82,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",
+"region":  {
+"startLine":  113,
+"startColumn":  9,
+"endLine":  113,
+"endColumn":  77
+}
+}
+}
+]
+}

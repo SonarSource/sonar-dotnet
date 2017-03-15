@@ -1,0 +1,78 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2017 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+
+namespace SonarAnalyzer.Rules.VisualBasic
+{
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+    [Rule(DiagnosticId)]
+    public class UseShortCircuitingOperator : UseShortCircuitingOperatorBase<SyntaxKind, BinaryExpressionSyntax>
+    {
+        protected static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        protected override DiagnosticDescriptor Rule => rule;
+
+        protected override string GetSuggestedOpName(BinaryExpressionSyntax node) =>
+            OperatorNames[ShortCircuitingAlternative[node.Kind()]];
+
+        protected override string GetCurrentOpName(BinaryExpressionSyntax node) =>
+            OperatorNames[node.Kind()];
+
+        protected override IEnumerable<SyntaxNode> GetOperands(BinaryExpressionSyntax expression)
+        {
+            yield return expression.Left;
+            yield return expression.Right;
+        }
+
+        protected override SyntaxToken GetOperator(BinaryExpressionSyntax expression) =>
+            expression.OperatorToken;
+
+        internal static readonly IDictionary<SyntaxKind, SyntaxKind> ShortCircuitingAlternative = new Dictionary<SyntaxKind, SyntaxKind>
+        {
+            { SyntaxKind.AndExpression, SyntaxKind.AndAlsoExpression },
+            { SyntaxKind.OrExpression, SyntaxKind.OrElseExpression }
+        }.ToImmutableDictionary();
+
+        private static readonly IDictionary<SyntaxKind, string> OperatorNames = new Dictionary<SyntaxKind, string>
+        {
+            { SyntaxKind.AndExpression, "And" },
+            { SyntaxKind.OrExpression, "Or" },
+            { SyntaxKind.AndAlsoExpression, "AndAlso" },
+            { SyntaxKind.OrElseExpression, "OrElse" },
+        }.ToImmutableDictionary();
+
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+
+        protected override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => ImmutableArray.Create<SyntaxKind>(
+            SyntaxKind.AndExpression,
+            SyntaxKind.OrExpression);
+    }
+}

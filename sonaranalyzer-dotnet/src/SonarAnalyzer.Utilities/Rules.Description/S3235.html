@@ -1,0 +1,36 @@
+<p>Redundant parentheses are simply wasted keystrokes, and should be removed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[MyAttribute()] //Noncompliant
+class MyClass
+{
+  public int MyProperty { get; set; }
+  public static MyClass CreateNew(int propertyValue)
+  {
+    return new MyClass() //Noncompliant
+    {
+      MyProperty = propertyValue
+    };
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[MyAttribute]
+class MyClass
+{
+  public int MyProperty { get; set; }
+  public static MyClass CreateNew(int propertyValue)
+  {
+    return new MyClass
+    {
+      MyProperty = propertyValue
+    };
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP.</a> - Detect and remove code that has no effect </li>
+</ul>
+

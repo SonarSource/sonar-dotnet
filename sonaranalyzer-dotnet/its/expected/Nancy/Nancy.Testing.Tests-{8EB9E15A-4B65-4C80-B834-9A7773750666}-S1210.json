@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1210",
+"message":  "When implementing IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  22,
+"endLine":  159,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1210",
+"message":  "When implementing IComparable, you should also override Equals, <, >, <=, >=, ==, !=.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  22,
+"endLine":  182,
+"endColumn":  38
+}
+}
+}
+]
+}

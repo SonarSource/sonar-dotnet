@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'name'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  201,
+"startColumn":  39,
+"endLine":  201,
+"endColumn":  50
+}
+}
+}
+]
+}

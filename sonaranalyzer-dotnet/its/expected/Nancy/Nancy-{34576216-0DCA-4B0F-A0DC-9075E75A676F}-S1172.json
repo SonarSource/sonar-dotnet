@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'serializer'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  129,
+"endLine":  259,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'diagnosticsProvider'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  59,
+"endLine":  176,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  377,
+"startColumn":  76,
+"endLine":  377,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  439,
+"startColumn":  76,
+"endLine":  439,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  73,
+"endLine":  597,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  85,
+"endLine":  633,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'viewEngine'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  73,
+"endLine":  42,
+"endColumn":  95
+}
+}
+}
+]
+}

@@ -1,0 +1,18 @@
+<p><code>partial</code> methods allow an increased degree of flexibility in programming a system. Hooks can be added to generated code by invoking
+methods that define their signature, but might not have an implementation yet. But if the implementation is still missing when the code makes it to
+production, the compiler silently removes the call. In the best case scenario, such calls simply represent cruft, but in they worst case they are
+critical, missing functionality, the loss of which will lead to unexpected results at runtime.</p>
+<p>This rule raises an issue for partial methods for which no implementation can be found in the assembly.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+partial class C
+{
+  partial void M(); //Noncompliant
+
+  void OtherM()
+  {
+    M(); //Noncompliant. Will be removed.
+  }
+}
+</pre>
+

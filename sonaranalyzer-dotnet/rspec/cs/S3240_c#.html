@@ -1,0 +1,45 @@
+<p>In the interests of keeping code clean, the simplest possible conditional syntax should be used. That means </p>
+<ul>
+  <li> using the <code>??</code> operator for an assign-if-not-null operator, </li>
+  <li> using the ternary operator <code>?:</code> for assignment to a single variable, and </li>
+  <li> removing the <code>??</code> when the left operand is known to be <code>null</code>, or known to be definitely not <code>null</code>. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+object a = null, b = null, x;
+
+if (a != null) // Noncompliant; needlessly verbose
+{
+  x = a;
+}
+else
+{
+  x = b;
+}
+
+x = a != null ? a : b; // Noncompliant; better but could still be simplified
+
+x = (a == null) ? new object() : a; // Noncompliant
+
+if (condition) // Noncompliant
+{
+  x = a;
+}
+else
+{
+  x = b;
+}
+
+var y = null ?? new object(); // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+object x;
+
+x = a ?? b;
+x = a ?? b;
+x = a ?? new object();
+x = condition ? a : b;
+var y = new object();
+</pre>
+

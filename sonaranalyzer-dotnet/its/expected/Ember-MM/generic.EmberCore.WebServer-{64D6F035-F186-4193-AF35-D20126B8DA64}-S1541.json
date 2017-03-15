@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  5,
+"endLine":  39,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 71 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  21,
+"startColumn":  5,
+"endLine":  21,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 22 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  5,
+"endLine":  319,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  391,
+"startColumn":  5,
+"endLine":  391,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  429,
+"startColumn":  5,
+"endLine":  429,
+"endColumn":  85
+}
+}
+}
+]
+}

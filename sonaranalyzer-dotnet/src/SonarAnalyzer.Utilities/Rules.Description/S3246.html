@@ -1,0 +1,25 @@
+<p>In the interests of making code as usable as possible, interfaces and delegates with generic parameters should use the <code>out</code> and
+<code>in</code> modifiers when possible to make the interfaces and delegates covariant and contravariant, respectively.</p>
+<p>The <code>out</code> keyword can be used when the type parameter is used only as a return type in the interface or delegate. Doing so makes the
+parameter covariant, and allows interface and delegate instances created with a sub-type to be used as instances created with a base type. The most
+notable example of this is <code>IEnumerable&lt;out T&gt;</code>, which allows the assignment of an <code>IEnumerable&lt;string&gt;</code> instance to
+an <code>IEnumerable&lt;object&gt;</code> variable, for instance.</p>
+<p>The <code>in</code> keyword can be used when the type parameter is used only as a method parameter in the interface or a parameter in the delegate.
+Doing so makes the parameter contravariant, and allows interface and delegate instances created with a base type to be used as instances created with
+a sub-type. I.e. this is the inversion of covariance. The most notable example of this is the <code>Action&lt;in T&gt;</code> delegate, which allows
+the assignment of an <code>Action&lt;object&gt;</code> instance to a <code>Action&lt;string&gt;</code> variable, for instance.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+interface IConsumer&lt;T&gt;  // Noncompliant
+{
+    bool Eat(T fruit);
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+interface IConsumer&lt;in T&gt;
+{
+    bool Eat(T fruit);
+}
+</pre>
+

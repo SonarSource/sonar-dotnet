@@ -1,0 +1,14 @@
+{
+  "title": "Classes should not have only \"private\" constructors",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "design"
+  ],
+  "defaultSeverity": "Major"
+}

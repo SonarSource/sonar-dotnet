@@ -1,0 +1,53 @@
+<p>Array covariance is the principle that if an implicit or explicit reference conversion exits from type <code>A</code> to <code>B</code>, then the
+same conversion exists from the array type <code>A[]</code> to <code>B[]</code>.</p>
+<p>While this array conversion can be useful in readonly situations to pass instances of <code>A[]</code> where <code>B[]</code> is expected, it must
+be used with care, since assigning an instance of <code>B</code> into an array of <code>A</code> will cause an <code>ArrayTypeMismatchException</code>
+to be thrown at runtime.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+abstract class Fruit { }
+class Apple : Fruit { }
+class Orange : Fruit { }
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Fruit[] fruits = new Apple[1]; // Noncompliant - array covariance is used
+    FillWithOranges(fruits);
+  }
+
+  // Just looking at the code doesn't reveal anything suspicious
+  static void FillWithOranges(Fruit[] fruits)
+  {
+    for (int i = 0; i &lt; fruits.Length; i++)
+    {
+      fruits[i] = new Orange(); // Will throw an ArrayTypeMismatchException
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+abstract class Fruit { }
+class Apple : Fruit { }
+class Orange : Fruit { }
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Orange[] fruits = new Orange[1]; // Compliant
+    FillWithOranges(fruits);
+  }
+
+  static void FillWithOranges(Orange[] fruits)
+  {
+    for (int i = 0; i &lt; fruits.Length; i++)
+    {
+      fruits[i] = new Orange();
+    }
+  }
+}
+</pre>
+

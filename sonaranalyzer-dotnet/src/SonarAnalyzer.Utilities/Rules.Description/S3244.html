@@ -1,0 +1,26 @@
+<p>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That's because the
+process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove <em>this item</em> from the subscription
+list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added.
+The result: <code>NOOP</code>.</p>
+<p>Instead, save the delegate to a variable and use the variable to subscribe and unsubscribe.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+listView.PreviewTextInput += (obj,args) =&gt;
+        listView_PreviewTextInput(obj,args,listView);
+
+// ...
+
+listView.PreviewTextInput -= (obj, args) =&gt;
+        listView_PreviewTextInput(obj, args, listView); // Noncompliant; this delegate was never subscribed
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+EventHandler func = (obj,args) =&gt; listView_PreviewTextInput(obj,args,listView);
+
+listView.PreviewTextInput += func;
+
+// ...
+
+listView.PreviewTextInput -= func;
+</pre>
+

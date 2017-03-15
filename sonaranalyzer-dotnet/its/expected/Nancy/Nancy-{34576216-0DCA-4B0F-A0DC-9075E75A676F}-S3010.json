@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S3010",
+"message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  57
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  42,
+"endLine":  15,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3010",
+"message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  45
+}
+},
+{
+"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  42,
+"endLine":  14,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3010",
+"message":  "Remove this assignment of 'conventions' or initialize it statically.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  50,
+"endLine":  15,
+"endColumn":  61
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  38
+}
+}
+}
+]
+}

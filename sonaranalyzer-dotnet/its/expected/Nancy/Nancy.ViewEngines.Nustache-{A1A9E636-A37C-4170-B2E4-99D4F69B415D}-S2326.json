@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'TModel' is not used in the method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  52,
+"endLine":  49,
+"endColumn":  58
+}
+}
+}
+]
+}

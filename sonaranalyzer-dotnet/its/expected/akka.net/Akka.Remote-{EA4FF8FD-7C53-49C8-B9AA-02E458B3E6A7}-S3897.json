@@ -1,0 +1,130 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Deadline>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  26
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  30,
+"endLine":  41,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Stats>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  29,
+"endLine":  177,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  34,
+"endLine":  179,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<HandshakeInfo>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  27,
+"endLine":  234,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AkkaProtocolHandle>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  20,
+"endLine":  267,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<TokenBucket>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  18,
+"endLine":  513,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<SetThrottle>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  607,
+"startColumn":  27,
+"endLine":  607,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AssociationHandle>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  27,
+"endLine":  261,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AbstractTransportAdapterHandle>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  29,
+"endLine":  196,
+"endColumn":  59
+}
+}
+}
+]
+}

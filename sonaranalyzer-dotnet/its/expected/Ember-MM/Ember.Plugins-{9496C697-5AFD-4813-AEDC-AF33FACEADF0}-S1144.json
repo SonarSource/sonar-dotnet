@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  76
+}
+}
+}
+]
+}

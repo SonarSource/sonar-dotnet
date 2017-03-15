@@ -1,0 +1,14 @@
+{
+  "title": "\"ServiceContract\" and \"OperationContract\" attributes should be used together",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "bug",
+    "suspicious"
+  ],
+  "defaultSeverity": "Major"
+}

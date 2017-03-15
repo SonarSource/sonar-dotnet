@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  322,
+"startColumn":  74,
+"endLine":  322,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  331,
+"startColumn":  86,
+"endLine":  331,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  755,
+"startColumn":  39,
+"endLine":  755,
+"endColumn":  55
+}
+}
+}
+]
+}

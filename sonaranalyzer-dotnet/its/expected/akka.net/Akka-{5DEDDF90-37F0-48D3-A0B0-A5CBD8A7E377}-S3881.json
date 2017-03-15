@@ -1,0 +1,208 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  27,
+"endLine":  36,
+"endColumn":  38
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  27,
+"endLine":  36,
+"endColumn":  38
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  21,
+"endLine":  206,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  28
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  21,
+"endLine":  195,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  18,
+"endLine":  239,
+"endColumn":  23
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  336,
+"startColumn":  21,
+"endLine":  336,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  27,
+"endLine":  18,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  20,
+"endLine":  224,
+"endColumn":  39
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  20,
+"endLine":  224,
+"endColumn":  39
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  21,
+"endLine":  350,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  24,
+"endLine":  226,
+"endColumn":  53
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  24,
+"endLine":  226,
+"endColumn":  53
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  25,
+"endLine":  260,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  23,
+"endLine":  522,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  23,
+"endLine":  522,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  25,
+"endLine":  534,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

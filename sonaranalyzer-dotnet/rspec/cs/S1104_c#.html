@@ -1,0 +1,36 @@
+<p>Public fields in public classes do not respect the encapsulation principle and has three main disadvantages:</p>
+<ul>
+  <li> Additional behavior such as validation cannot be added. </li>
+  <li> The internal representation is exposed, and cannot be changed afterwards. </li>
+  <li> Member values are subject to change from anywhere in the code and may not meet the programmer's assumptions. </li>
+</ul>
+<p>By using private fields and public properties (set and get), unauthorized modifications are prevented. Properties also benefit from additional
+protection (security) features such as Link Demands.</p>
+<p>Note that due to optimizations on simple properties, public fields provide only very little performance gain.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+    public int instanceData = 32; // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo
+{
+    private int instanceData = 32;
+
+    public int InstanceData
+    {
+        get { return instanceData; }
+	set { instanceData = value ; }
+    }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Fields marked as <code>readonly</code> or <code>const</code> are ignored by this rule.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/493.html">MITRE, CWE-493</a> - Critical Public Variable Without Final Modifier </li>
+</ul>
+

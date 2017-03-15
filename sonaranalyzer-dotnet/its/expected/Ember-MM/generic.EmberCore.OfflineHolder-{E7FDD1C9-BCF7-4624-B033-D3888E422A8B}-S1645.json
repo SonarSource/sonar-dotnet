@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1645",
+"message":  "Switch this use of the '+' operator to the '&'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  468,
+"startColumn":  21,
+"endLine":  468,
+"endColumn":  22
+}
+}
+}
+]
+}

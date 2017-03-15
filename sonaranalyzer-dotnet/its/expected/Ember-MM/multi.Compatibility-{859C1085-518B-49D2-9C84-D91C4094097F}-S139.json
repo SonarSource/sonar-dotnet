@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  17,
+"endLine":  306,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  477,
+"startColumn":  17,
+"endLine":  477,
+"endColumn":  60
+}
+}
+}
+]
+}

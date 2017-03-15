@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  55,
+"endLine":  66,
+"endColumn":  119
+}
+}
+}
+]
+}

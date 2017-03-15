@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\Internal\InterlockedSpin.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  33,
+"endLine":  26,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\Internal\InterlockedSpin.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  61,
+"endLine":  47,
+"endColumn":  64
+}
+}
+}
+]
+}

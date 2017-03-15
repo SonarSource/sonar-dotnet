@@ -1,0 +1,26 @@
+<p>Locking on the current object instance (i.e. <code>this</code>), or on a <code>Type</code> object increases the chance of deadlocks because any
+other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose. </p>
+<p>Instead, a new, private <code>object</code> should be created and used for the lock.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void MyLockingMethod()
+{
+  lock (this) // Noncompliant
+  {
+    // ...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+object lockObj = new object();
+
+public void MyLockingMethod()
+{
+  lock (lockObj)
+  {
+    // ...
+  }
+}
+</pre>
+

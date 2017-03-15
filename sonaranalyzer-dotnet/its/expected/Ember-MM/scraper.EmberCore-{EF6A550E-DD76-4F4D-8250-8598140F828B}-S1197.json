@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  885,
+"startColumn":  11,
+"endLine":  885,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  11,
+"endLine":  896,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  925,
+"startColumn":  7,
+"endLine":  925,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  25,
+"endLine":  155,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  42,
+"startColumn":  13,
+"endLine":  42,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  23
+}
+}
+}
+]
+}

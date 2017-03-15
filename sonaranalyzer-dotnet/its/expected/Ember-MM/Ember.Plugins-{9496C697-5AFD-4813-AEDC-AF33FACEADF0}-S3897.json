@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  22,
+"endLine":  231,
+"endColumn":  33
+}
+},
+{
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  25,
+"endLine":  335,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

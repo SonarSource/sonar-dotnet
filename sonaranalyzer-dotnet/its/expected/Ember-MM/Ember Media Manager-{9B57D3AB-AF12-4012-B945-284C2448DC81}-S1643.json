@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  29,
+"endLine":  68,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  25,
+"endLine":  182,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  193,
+"startColumn":  29,
+"endLine":  193,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  205,
+"startColumn":  33,
+"endLine":  205,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  37,
+"endLine":  217,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  230,
+"startColumn":  41,
+"endLine":  230,
+"endColumn":  54
+}
+}
+}
+]
+}

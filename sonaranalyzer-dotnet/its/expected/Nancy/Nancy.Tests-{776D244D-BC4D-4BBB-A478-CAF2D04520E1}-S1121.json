@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'requestStream.Position' from this expression.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Extensions\RequestStreamExtensionsFixture.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  62,
+"endLine":  22,
+"endColumn":  63
+}
+}
+}
+]
+}

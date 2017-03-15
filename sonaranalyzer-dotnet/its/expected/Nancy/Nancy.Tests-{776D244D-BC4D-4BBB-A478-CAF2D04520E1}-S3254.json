@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1189,
+"startColumn":  41,
+"endLine":  1189,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1207,
+"startColumn":  41,
+"endLine":  1207,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1224,
+"startColumn":  41,
+"endLine":  1224,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1241,
+"startColumn":  41,
+"endLine":  1241,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1259,
+"startColumn":  41,
+"endLine":  1259,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1282,
+"startColumn":  41,
+"endLine":  1282,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1331,
+"startColumn":  41,
+"endLine":  1331,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1437,
+"startColumn":  41,
+"endLine":  1437,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1475,
+"startColumn":  41,
+"endLine":  1475,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'typeConverters'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1491,
+"startColumn":  41,
+"endLine":  1491,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'fileName'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ResponseExtensionsFixture.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  71,
+"endLine":  39,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewRendererFixture.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  53,
+"endLine":  27,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'model'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewRendererFixture.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  54,
+"endLine":  43,
+"endColumn":  58
+}
+}
+}
+]
+}

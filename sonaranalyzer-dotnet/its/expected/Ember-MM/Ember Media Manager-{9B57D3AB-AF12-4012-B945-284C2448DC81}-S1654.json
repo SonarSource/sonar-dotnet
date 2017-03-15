@@ -1,0 +1,823 @@
+{
+"issues":  [
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  48,
+"endLine":  35,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  98,
+"endLine":  35,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  35,
+"endLine":  41,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  37,
+"endLine":  53,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  41,
+"endLine":  155,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  606,
+"startColumn":  72,
+"endLine":  606,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  20,
+"endLine":  52,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  595,
+"startColumn":  41,
+"endLine":  595,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1458,
+"startColumn":  72,
+"endLine":  1458,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  48,
+"endLine":  36,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  48,
+"endLine":  36,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  41,
+"endLine":  51,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  57,
+"endLine":  27,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  642,
+"startColumn":  59,
+"endLine":  642,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  39,
+"endLine":  131,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  64,
+"endLine":  131,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2609,
+"startColumn":  49,
+"endLine":  2609,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2609,
+"startColumn":  71,
+"endLine":  2609,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2693,
+"startColumn":  68,
+"endLine":  2693,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2748,
+"startColumn":  81,
+"endLine":  2748,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2753,
+"startColumn":  82,
+"endLine":  2753,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2758,
+"startColumn":  78,
+"endLine":  2758,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2994,
+"startColumn":  42,
+"endLine":  2994,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"region":  {
+"startLine":  34,
+"startColumn":  48,
+"endLine":  34,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  59,
+"endLine":  187,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  82,
+"endLine":  121,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  206,
+"startColumn":  41,
+"endLine":  206,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  32,
+"endLine":  315,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  73,
+"endLine":  315,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1730,
+"startColumn":  45,
+"endLine":  1730,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3451,
+"startColumn":  44,
+"endLine":  3451,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4243,
+"startColumn":  36,
+"endLine":  4243,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4243,
+"startColumn":  61,
+"endLine":  4243,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5151,
+"startColumn":  35,
+"endLine":  5151,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5784,
+"startColumn":  80,
+"endLine":  5784,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5846,
+"startColumn":  39,
+"endLine":  5846,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5866,
+"startColumn":  32,
+"endLine":  5866,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5896,
+"startColumn":  38,
+"endLine":  5896,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5896,
+"startColumn":  63,
+"endLine":  5896,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5920,
+"startColumn":  36,
+"endLine":  5920,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6487,
+"startColumn":  99,
+"endLine":  6487,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6581,
+"startColumn":  85,
+"endLine":  6581,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6615,
+"startColumn":  66,
+"endLine":  6615,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6670,
+"startColumn":  39,
+"endLine":  6670,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6828,
+"startColumn":  43,
+"endLine":  6828,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6828,
+"startColumn":  70,
+"endLine":  6828,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6828,
+"startColumn":  115,
+"endLine":  6828,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6828,
+"startColumn":  157,
+"endLine":  6828,
+"endColumn":  162
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6918,
+"startColumn":  41,
+"endLine":  6918,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6918,
+"startColumn":  68,
+"endLine":  6918,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6918,
+"startColumn":  113,
+"endLine":  6918,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6918,
+"startColumn":  155,
+"endLine":  6918,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7081,
+"startColumn":  42,
+"endLine":  7081,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7081,
+"startColumn":  67,
+"endLine":  7081,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7081,
+"startColumn":  92,
+"endLine":  7081,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  40,
+"endLine":  7135,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  58,
+"endLine":  7135,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  86,
+"endLine":  7135,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  112,
+"endLine":  7135,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7135,
+"startColumn":  136,
+"endLine":  7135,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7719,
+"startColumn":  32,
+"endLine":  7719,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8385,
+"startColumn":  34,
+"endLine":  8385,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1654",
+"message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8752,
+"startColumn":  107,
+"endLine":  8752,
+"endColumn":  116
+}
+}
+}
+]
+}

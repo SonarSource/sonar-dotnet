@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'ShowFormOnUIThreadEventArgs' to match camel case naming rules, consider using 'ShowFormOnUiThreadEventArgs'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Events\ShowFormOnUIThread.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ITVImageScraper' to match camel case naming rules, consider using 'ITvImageScraper'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\ITVImageScraper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename interface 'ITVInfoScraper' to match camel case naming rules, consider using 'ITvInfoScraper'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\ITVInfoScraper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  36
+}
+}
+}
+]
+}

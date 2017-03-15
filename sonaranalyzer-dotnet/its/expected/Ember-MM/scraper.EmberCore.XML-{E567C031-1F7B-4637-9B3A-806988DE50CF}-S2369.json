@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2369",
+"message":  "Rename 'pURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  13,
+"endLine":  306,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'bType' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  13,
+"endLine":  340,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'parentRunning' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'parentRunning' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename '_AssemblyName' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  19,
+"endLine":  47,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'pContent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'indent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperNode.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  30,
+"endLine":  36,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename 'strHTML' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  23,
+"endLine":  127,
+"endColumn":  30
+}
+}
+}
+]
+}

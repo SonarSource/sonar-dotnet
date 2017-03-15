@@ -1,0 +1,13 @@
+{
+  "title": "Functions, procedures and properties should not be too complex",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "brain-overload"
+  ],
+  "defaultSeverity": "Critical"
+}

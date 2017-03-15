@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'shouldIgnoreOtherMessageTypes'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  54,
+"endLine":  128,
+"endColumn":  89
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+<p>Debug statements are always useful during development. But include them in production code - particularly in code that runs client-side - and you
+run the risk of inadvertently exposing sensitive information.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+private void DoSomething ()
+{
+  // ...
+  Console.WriteLine ("so far, so good..."); // Noncompliant
+  // ...
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">OWASP Top Ten 2013 Category A6</a> - Sensitive Data Exposure
+  </li>
+</ul>
+

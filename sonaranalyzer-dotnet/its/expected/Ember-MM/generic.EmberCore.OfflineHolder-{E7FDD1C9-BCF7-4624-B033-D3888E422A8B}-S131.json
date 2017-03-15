@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  9,
+"endLine":  251,
+"endColumn":  15
+}
+}
+}
+]
+}

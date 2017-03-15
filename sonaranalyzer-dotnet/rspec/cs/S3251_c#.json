@@ -1,0 +1,13 @@
+{
+  "title": "Implementations should be provided for \"partial\" methods",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "suspicious"
+  ],
+  "defaultSeverity": "Minor"
+}

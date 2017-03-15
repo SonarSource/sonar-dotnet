@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'StructModel'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\StructModel.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  19,
+"endLine":  3,
+"endColumn":  30
+}
+}
+}
+]
+}

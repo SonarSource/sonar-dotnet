@@ -1,0 +1,13 @@
+{
+  "title": "Events should be invoked",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "unused"
+  ],
+  "defaultSeverity": "Major"
+}

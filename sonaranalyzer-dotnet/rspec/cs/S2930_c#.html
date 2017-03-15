@@ -1,0 +1,109 @@
+<p>When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency
+reasons, some objects such as <code>Bitmap</code> use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have
+potentially huge unmanaged memory footprints, but will have tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed
+footprint, and fails to reclaim the unmanaged memory (by calling <code>Bitmap</code>'s finalizer method) in a timely fashion. </p>
+<p>Moreover, memory is not the only system resource which needs to be managed in a timely fashion: The operating system can only handle having so many
+file descriptors (e.g. <code>FileStream</code>) or sockets (e.g. <code>WebClient</code>) open at any given time. Therefore, it is important to
+<code>Dispose</code> of them as soon as they are no longer needed, rather than relying on the garbage collector to call these objects' finalizers at
+some nondeterministic point in the future.</p>
+<p>This rule tracks <code>private</code> fields and local variables of the following <code>IDisposable</code> types, which are never disposed, closed,
+aliased, returned, or passed to other methods.</p>
+<ul>
+  <li> <code>System.IO</code> namespace
+    <ul>
+      <li> <code>System.IO.FileStream</code> </li>
+      <li> <code>System.IO.StreamReader</code> </li>
+      <li> <code>System.IO.StreamWriter</code> </li>
+    </ul> </li>
+  <li> <code>System.Net</code> namespace
+    <ul>
+      <li> <code>System.Net.WebClient</code> </li>
+    </ul> </li>
+  <li> <code>System.Net.Sockets</code> namespace
+    <ul>
+      <li> <code>System.Net.Sockets.Socket</code> </li>
+      <li> <code>System.Net.Sockets.TcpClient</code> </li>
+      <li> <code>System.Net.Sockets.UdpClient</code> </li>
+    </ul> </li>
+  <li> <code>System.Drawing</code> namespace
+    <ul>
+      <li> <code>System.Drawing.Image</code> </li>
+      <li> <code>System.Drawing.Bitmap</code> </li>
+    </ul> </li>
+</ul>
+<p>which are either instantiated directly using the <code>new</code> operator, or using one of the following factory methods:</p>
+<ul>
+  <li> <code>System.IO.File.Create()</code> </li>
+  <li> <code>System.IO.File.Open()</code> </li>
+  <li> <code>System.Drawing.Image.FromFile()</code> </li>
+  <li> <code>System.Drawing.Image.FromStream()</code> </li>
+</ul>
+<p>on both private fields and local variables.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class ResourceHolder
+{
+  private FileStream fs; // Noncompliant; Dispose or Close are never called
+
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+
+  public void WriteToFile(string path, string text)
+  {
+    var fs = new FileStream(path, FileMode.Open); // Noncompliant
+    var bytes = Encoding.UTF8.GetBytes(text);
+    fs.Write(bytes, 0, bytes.Length);
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class ResourceHolder : IDisposable
+{
+  private FileStream fs;
+
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+
+  public void Dispose()
+  {
+    this.fs.Dispose();
+  }
+
+  public void WriteToFile(string path, string text)
+  {
+    using (var fs = new FileStream(path, FileMode.Open))
+    {
+      var bytes = Encoding.UTF8.GetBytes(text);
+      fs.Write(bytes, 0, bytes.Length);
+    }
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p><code>IDisposable</code> variables returned from a method or passed to other methods are ignored, as are local <code>IDisposable</code>s that are
+initialized with other <code>IDisposable</code>s.</p>
+<pre>
+public Stream WriteToFile(string path, string text)
+{
+  var fs = new FileStream(path, FileMode.Open); // Compliant, because it is returned
+  var bytes = Encoding.UTF8.GetBytes(text);
+  fs.Write(bytes, 0, bytes.Length);
+  return fs;
+}
+
+public void ReadFromStream(Stream s)
+{
+  var sr = new StreamReader(s); // Compliant as it would close the underlying stream.
+  // ...
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/459.html">MITRE, CWE-459</a> - Incomplete Cleanup </li>
+</ul>
+

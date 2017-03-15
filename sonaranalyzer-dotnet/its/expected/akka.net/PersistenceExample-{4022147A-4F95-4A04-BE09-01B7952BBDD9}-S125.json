@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  17,
+"endLine":  26,
+"endColumn":  47
+}
+}
+}
+]
+}

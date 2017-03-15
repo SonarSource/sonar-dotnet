@@ -1,0 +1,13 @@
+{
+  "title": "Fields that are only assigned in the constructor should be \"readonly\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Major"
+}

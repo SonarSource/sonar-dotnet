@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'cdf' to match camel case naming rules, consider using 'Cdf'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  30,
+"endLine":  308,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'testDisassociate' to match camel case naming rules, consider using 'TestDisassociate'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  30,
+"endLine":  42,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'testAssociate' to match camel case naming rules, consider using 'TestAssociate'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  30,
+"endLine":  43,
+"endColumn":  43
+}
+}
+}
+]
+}

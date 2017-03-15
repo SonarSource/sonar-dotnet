@@ -1,0 +1,18 @@
+{
+  "title": "\"Select\" statements should end with a \"Case Else\" clause",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe",
+    "misra",
+    "cert"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Critical"
+}

@@ -1,0 +1,18 @@
+<p>The information that an enumeration type is actually an enumeration or a set of flags should not be duplicated in its name.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Enum FooFlags ' Noncompliant
+    Foo = 1
+    Bar = 2
+    Baz = 4
+End Enum
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Enum Foo      ' Compliant
+    Foo = 1
+    Bar = 2
+    Baz = 4
+End Enum
+</pre>
+

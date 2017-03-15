@@ -1,0 +1,41 @@
+<p>Unnecessary keywords simply clutter the code and should be removed. Specifically:</p>
+<ul>
+  <li> <code>partial</code> on type declarations that are completely defined in one place </li>
+  <li> <code>sealed</code> on members of <code>sealed</code> classes </li>
+  <li> <code>unsafe</code> method or block inside construct already marked with <code>unsafe</code>, or when there are no <code>unsafe</code>
+  constructs in the block </li>
+  <li> <code>checked</code> and <code>unchecked</code> blocks with no integral-type arithmetic operations </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public partial class MyClass // Noncompliant
+{
+  public virtual void Method()
+  {
+  }
+}
+
+public sealed class MyOtherClass : MyClass
+{
+  public sealed override void Method() // Noncompliant
+  {
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass
+{
+  public virtual void Method()
+  {
+  }
+}
+
+public sealed class MyOtherClass : MyClass
+{
+  public override void Method()
+  {
+  }
+}
+</pre>
+

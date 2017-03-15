@@ -1,0 +1,2 @@
+# Text files should have CRLF line endings, even on non-Windows machines
+*.json eol=crlf

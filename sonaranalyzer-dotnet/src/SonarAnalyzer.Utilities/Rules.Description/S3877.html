@@ -1,0 +1,27 @@
+<p>It is expected that some methods should be called with caution, but others, such as <code>ToString</code>, are expected to "just work". Throwing an
+exception from such a method is likely to break callers' code unexpectedly.</p>
+<p>An issue is raised when an exception is thrown from any of the following: </p>
+<ul>
+  <li> Event accessors </li>
+  <li> <code>Equals</code> </li>
+  <li> <code>GetHashCode</code> </li>
+  <li> <code>ToString</code> </li>
+  <li> <code>static</code> constructors </li>
+  <li> <code>Dispose</code> </li>
+  <li> <code>operator ==</code> </li>
+  <li> <code>implicit</code> cast operators </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public override string ToString()
+{
+  if (string.IsNullOrEmpty(Name))
+  {
+    throw new ArgumentException("...");  // Noncompliant
+  }
+  //...
+</pre>
+<h2>Exceptions</h2>
+<p><code>System.InvalidOperationException</code>, <code>System.NotSupportedException</code>, and <code>System.ArgumentException</code> and their
+derivatives are ignored in event accessors.</p>
+

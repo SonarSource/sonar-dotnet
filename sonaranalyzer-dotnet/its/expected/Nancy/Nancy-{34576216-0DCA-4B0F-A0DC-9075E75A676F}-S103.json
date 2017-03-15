@@ -1,0 +1,1278 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 242 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  243
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 230 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  640,
+"startColumn":  1,
+"endLine":  640,
+"endColumn":  231
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  210
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  257
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  1,
+"endLine":  107,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  1,
+"endLine":  90,
+"endColumn":  236
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  1,
+"endLine":  99,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  1,
+"endLine":  92,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 223 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  1,
+"endLine":  129,
+"endColumn":  224
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 270 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  1,
+"endLine":  145,
+"endColumn":  271
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  1,
+"endLine":  163,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  1,
+"endLine":  282,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 557 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  558
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  237
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 255 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  256
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  263
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 243 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  244
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 785 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  786
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 262 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  1,
+"endLine":  62,
+"endColumn":  263
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 225 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  226
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 710 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  711
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  1,
+"endLine":  227,
+"endColumn":  257
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 241 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  1,
+"endLine":  268,
+"endColumn":  242
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  1,
+"endLine":  195,
+"endColumn":  240
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  1,
+"endLine":  197,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 650 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  1,
+"endLine":  198,
+"endColumn":  651
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 260 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  1,
+"endLine":  225,
+"endColumn":  261
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 264 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  1,
+"endLine":  227,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 694 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  1,
+"endLine":  228,
+"endColumn":  695
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 219 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  754,
+"startColumn":  1,
+"endLine":  754,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 318 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  759,
+"startColumn":  1,
+"endLine":  759,
+"endColumn":  319
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Extensions\StreamExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\HttpMultipartBuffer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  1,
+"endLine":  71,
+"endColumn":  218
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 229 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  230
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 331 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  332
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  1,
+"endLine":  117,
+"endColumn":  235
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  1,
+"endLine":  118,
+"endColumn":  297
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\INancyModule.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  360
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\INancyModule.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  1,
+"endLine":  82,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  1,
+"endLine":  219,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 233 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  1,
+"endLine":  274,
+"endColumn":  234
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 296 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  1,
+"endLine":  275,
+"endColumn":  297
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 273 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  1,
+"endLine":  95,
+"endColumn":  274
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 331 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  1,
+"endLine":  110,
+"endColumn":  332
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 234 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  1,
+"endLine":  145,
+"endColumn":  235
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  1,
+"endLine":  165,
+"endColumn":  236
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 641 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  1,
+"endLine":  210,
+"endColumn":  642
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 495 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  1,
+"endLine":  219,
+"endColumn":  496
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  1,
+"endLine":  229,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 1244 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  1,
+"endLine":  231,
+"endColumn":  1245
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 1096 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  1,
+"endLine":  240,
+"endColumn":  1097
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 1019 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  1,
+"endLine":  252,
+"endColumn":  1020
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 997 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  1,
+"endLine":  264,
+"endColumn":  998
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  1,
+"endLine":  274,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 613 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  1,
+"endLine":  276,
+"endColumn":  614
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 610 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  1,
+"endLine":  285,
+"endColumn":  611
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 256 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  1,
+"endLine":  297,
+"endColumn":  257
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 425 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  1,
+"endLine":  306,
+"endColumn":  426
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 283 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  1,
+"endLine":  80,
+"endColumn":  284
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 242 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonConfiguration.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  243
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 326 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  327
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 236 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  1,
+"endLine":  89,
+"endColumn":  237
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 260 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  261
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 224 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  225
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 694 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  695
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\NancyModule.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  1,
+"endLine":  247,
+"endColumn":  360
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 226 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  1,
+"endLine":  150,
+"endColumn":  227
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 205 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  1,
+"endLine":  162,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 208 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  1,
+"endLine":  192,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  262
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 261 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  262
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 210 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 350 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  351
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 212 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  1,
+"endLine":  242,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  266
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 248 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  249
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 265 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\SecurityHooks.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  1,
+"endLine":  113,
+"endColumn":  266
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 240 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  721,
+"startColumn":  1,
+"endLine":  721,
+"endColumn":  241
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 249 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  1,
+"endLine":  722,
+"endColumn":  250
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 239 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  1,
+"endLine":  723,
+"endColumn":  240
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 220 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3294,
+"startColumn":  1,
+"endLine":  3294,
+"endColumn":  221
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3458,
+"startColumn":  1,
+"endLine":  3458,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 269 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3533,
+"startColumn":  1,
+"endLine":  3533,
+"endColumn":  270
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 218 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\Validation\DefaultValidatorLocator.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  219
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  1,
+"endLine":  192,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  203
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 214 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  215
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 202 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  203
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Fields should not have public accessibility",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "cwe",
+    "security"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Minor"
+}

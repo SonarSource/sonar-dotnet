@@ -1,0 +1,37 @@
+<p>Overriding methods automatically inherit the <code>params</code> behavior. To ease readability, this modifier should be explicitly used in the
+overriding method as well.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Base
+{
+  public virtual void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+class Derived : Base
+{
+  public override void Method(int[] numbers) // Noncompliant, the params is missing.
+  {
+    ...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Base
+{
+  public virtual void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+class Derived : Base
+{
+  public override void Method(params int[] numbers)
+  {
+    ...
+  }
+}
+</pre>
+

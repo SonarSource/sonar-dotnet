@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'Shared Read-Only' property.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  24
+}
+}
+}
+]
+}

@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  27,
+"endLine":  261,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  27,
+"endLine":  268,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  27,
+"endLine":  396,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  27,
+"endLine":  144,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\ByteBuffer.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  27,
+"endLine":  99,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\Dns.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  50,
+"endLine":  75,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  23,
+"endLine":  47,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Serialization\Serialization.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  23,
+"endLine":  135,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  41,
+"endLine":  48,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  40,
+"endLine":  125,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  27,
+"endLine":  178,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  31,
+"endLine":  266,
+"endColumn":  55
+}
+}
+}
+]
+}

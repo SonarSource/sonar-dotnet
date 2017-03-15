@@ -1,0 +1,102 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<NancyBootstrapperBase>'.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  436,
+"startColumn":  37,
+"endLine":  436,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BindingMemberInfo>'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<CsrfToken>'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  25,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<TypeRegistration>'.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3019,
+"startColumn":  29,
+"endLine":  3019,
+"endColumn":  45
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3039,
+"startColumn":  34,
+"endLine":  3039,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<GenericMethodCacheKey>'.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  429,
+"startColumn":  30,
+"endLine":  429,
+"endColumn":  51
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  450,
+"startColumn":  34,
+"endLine":  450,
+"endColumn":  40
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  25,
+"endLine":  131,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,14 @@
+<p>The parameter to <code>Assembly.Load</code> includes the full specification of the dll to be loaded. Use another method, and you might end up with
+a dll other than the one you expected. </p>
+<p>This rule raises an issue when <code>Assembly.LoadFrom</code>, <code>Assembly.LoadFile</code>, or <code>Assembly.LoadWithPartialName</code> is
+called.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+static void Main(string[] args)
+{
+    Assembly.LoadFrom(...); // Noncompliant
+    Assembly.LoadFile(...); // Noncompliant
+    Assembly.LoadWithPartialName(...); // Noncompliant + deprecated
+}
+</pre>
+

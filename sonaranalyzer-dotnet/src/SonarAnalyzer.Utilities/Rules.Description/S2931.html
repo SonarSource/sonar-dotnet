@@ -1,0 +1,43 @@
+<p>Classes with <code>IDisposable</code> members are responsible for cleaning up those members by calling their <code>Dispose</code> methods. The best
+practice here is for the owning class to itself implement <code>IDisposable</code> and call its members' <code>Dispose</code> methods from its own
+<code>Dispose</code> method.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
+{
+  private FileStream fs;  // This member is never Dispose'd
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+  public void CloseResource()
+  {
+    this.fs.Close();
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class ResourceHolder : IDisposable
+{
+  private FileStream fs;
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+  public void CloseResource()
+  {
+    this.fs.Close();
+  }
+
+  public void Dispose()
+  {
+    this.fs.Dispose();
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/459.html">MITRE, CWE-459</a> - Incomplete Cleanup </li>
+</ul>
+

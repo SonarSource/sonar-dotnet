@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2374",
+"message":  "Change this unsigned type to 'Integer'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  432,
+"startColumn":  22,
+"endLine":  432,
+"endColumn":  30
+}
+}
+}
+]
+}

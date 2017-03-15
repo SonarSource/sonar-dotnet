@@ -1,0 +1,17 @@
+{
+  "title": "\"ToString()\" method should not return null",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe",
+    "bug"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Major"
+}

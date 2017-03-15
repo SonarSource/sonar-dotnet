@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Samples.Cluster.Simple\Program.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  13,
+"endLine":  21,
+"endColumn":  30
+}
+}
+}
+]
+}

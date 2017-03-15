@@ -1,0 +1,62 @@
+<p>The <code>foreach</code> statement was introduced in the C# language prior to generics to make it easier to work with the non-generic collections
+available at that time such as <code>ArrayList</code>. The <code>foreach</code> statements allows you to downcast elements of a collection of
+<code>Object</code>s to any other type. The problem is that to achieve the cast, the <code>foreach</code> statements silently performs
+<code>explicit</code> type conversion, which at runtime can result in an <code>InvalidCastException</code>.</p>
+<p>C# code iterating on generic collections or arrays should not rely on <code>foreach</code> statement's silent <code>explicit</code>
+conversions.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Fruit { }
+public class Orange : Fruit { }
+public class Apple : Fruit { }
+
+class MyTest
+{
+  public void Test()
+  {
+    var fruitBasket = new List&lt;Fruit&gt;();
+    fruitBasket.Add(new Orange());
+    fruitBasket.Add(new Orange());
+    // fruitBasket.Add(new Apple());  // uncommenting this line will make both foreach below throw an InvalidCastException
+
+    foreach (Fruit fruit in fruitBasket)
+    {
+      var orange = (Orange)fruit; // This "explicit" conversion is hidden within the foreach loop below
+      ...
+    }
+
+    foreach (Orange orange in fruitBasket) // Noncompliant
+    {
+      ...
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+var fruitBasket = new List&lt;Orange&gt;();
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Orange());
+// fruitBasket.Add(new Apple());  // uncommenting this line won't compile
+
+foreach (Orange orange in fruitBasket)
+{
+  ...
+}
+</pre>
+<p>or</p>
+<pre>
+var fruitBasket = new List&lt;Fruit&gt;();
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Orange());
+fruitBasket.Add(new Apple());
+
+foreach (Orange orange in fruitBasket.OfType&lt;Orange&gt;())
+{
+  ...
+}
+</pre>
+<h2>Exceptions</h2>
+<p>The rule ignores iterations on collections of <code>object</code>s. This includes legacy code that uses <code>ArrayList</code>. Furthermore, the
+rule does not report on cases when user defined conversions are being called. </p>
+

@@ -1,0 +1,38 @@
+<p>Since the compiler will automatically invoke the base type's no-argument constructor, there's no need to specify its invocation explicitly. Also,
+when only a single <code>public</code> parameterless constructor is defined in a class, then that constructor can be removed because the compiler
+would generate it automatically. Similarly, empty <code>static</code> constructors and empty destructors are also wasted keystrokes.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class X
+{
+  public X() { } // Noncompliant
+  static X() { }  // Noncompliant
+  ~X() { } // Noncompliant
+
+  ...
+}
+
+class Y : X
+{
+  public Y(int parameter) : base() // Noncompliant
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class X
+{
+  ...
+}
+
+class Y : X
+{
+  public Y(int parameter)
+  {
+    /* does something with the parameter */
+  }
+}
+</pre>
+

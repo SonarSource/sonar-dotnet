@@ -103,39 +103,9 @@
       <properties>
         <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
         <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-        <sonarAnalyzer.version>1.24.0.2106</sonarAnalyzer.version>
       </properties>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-plugin</id>
-                <phase>validate</phase>
-                <goals>
-                  <goal>copy</goal>
-                </goals>
-                <configuration>
-                  <artifactItems>
-                    <artifactItem>
-                      <groupId>${project.groupId}</groupId>
-                      <artifactId>SonarAnalyzer.Scanner</artifactId>
-                      <version>${sonarAnalyzer.version}</version>
-                      <type>nupkg</type>
-                      <overWrite>true</overWrite>
-                    </artifactItem>
-                  </artifactItems>
-                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
-                  <overWriteReleases>true</overWriteReleases>
-                  <overWriteSnapshots>true</overWriteSnapshots>
-                  <stripVersion>true</stripVersion>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
@@ -146,7 +116,7 @@
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
-                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
+                    <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/SonarAnalyzer.Scanner.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
                     <delete>
                       <fileset dir="src/main/protobuf" excludes=".gitignore"></fileset>
                     </delete>

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'httpsPort'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  88,
+"endLine":  62,
+"endColumn":  92
+}
+}
+}
+]
+}

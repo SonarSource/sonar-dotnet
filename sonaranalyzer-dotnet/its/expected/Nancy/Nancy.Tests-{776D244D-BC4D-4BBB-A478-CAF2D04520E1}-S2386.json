@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2386",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  38,
+"endLine":  11,
+"endColumn":  66
+}
+}
+}
+]
+}

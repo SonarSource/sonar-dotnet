@@ -1,0 +1,14 @@
+{
+  "title": "\"ThreadStatic\" should not be used on non-static fields",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "unused"
+  ],
+  "defaultSeverity": "Major"
+}

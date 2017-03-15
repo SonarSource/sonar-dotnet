@@ -1,0 +1,498 @@
+{
+"issues":  [
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  233,
+"startColumn":  111,
+"endLine":  233,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  111,
+"endLine":  290,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  59,
+"endLine":  297,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  59,
+"endLine":  304,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  489,
+"startColumn":  218,
+"endLine":  489,
+"endColumn":  219
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  173,
+"endLine":  104,
+"endColumn":  174
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  190,
+"endLine":  207,
+"endColumn":  191
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  277,
+"startColumn":  86,
+"endLine":  277,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  393,
+"startColumn":  190,
+"endLine":  393,
+"endColumn":  191
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  59,
+"endLine":  35,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  42,
+"startColumn":  59,
+"endLine":  42,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  59,
+"endLine":  54,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  59,
+"startColumn":  59,
+"endLine":  59,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  59,
+"endLine":  69,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  59,
+"endLine":  76,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  59,
+"endLine":  96,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  101,
+"startColumn":  59,
+"endLine":  101,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  59,
+"endLine":  111,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  118,
+"startColumn":  59,
+"endLine":  118,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  59,
+"endLine":  125,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  59,
+"endLine":  132,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  59,
+"endLine":  139,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  59,
+"endLine":  146,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  59,
+"endLine":  153,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  160,
+"startColumn":  59,
+"endLine":  160,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  167,
+"startColumn":  59,
+"endLine":  167,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  59,
+"endLine":  174,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  59,
+"endLine":  186,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  199,
+"startColumn":  59,
+"endLine":  199,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  212,
+"startColumn":  59,
+"endLine":  212,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  59,
+"endLine":  227,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  59,
+"endLine":  242,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  255,
+"startColumn":  59,
+"endLine":  255,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  59,
+"endLine":  268,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  279,
+"startColumn":  59,
+"endLine":  279,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  290,
+"startColumn":  59,
+"endLine":  290,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  305,
+"startColumn":  59,
+"endLine":  305,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  59,
+"endLine":  317,
+"endColumn":  60
+}
+}
+}
+]
+}

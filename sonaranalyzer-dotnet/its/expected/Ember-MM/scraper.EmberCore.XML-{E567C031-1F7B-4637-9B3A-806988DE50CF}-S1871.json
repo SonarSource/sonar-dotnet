@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 726 or change one of the implementations.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  733,
+"startColumn":  41,
+"endLine":  738,
+"endColumn":  67
+}
+}
+}
+]
+}

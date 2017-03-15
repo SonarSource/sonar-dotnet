@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('!=') instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  26,
+"endLine":  149,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1940",
+"message":  "Use the opposite operator ('!=') instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  395,
+"startColumn":  20,
+"endLine":  395,
+"endColumn":  42
+}
+}
+}
+]
+}

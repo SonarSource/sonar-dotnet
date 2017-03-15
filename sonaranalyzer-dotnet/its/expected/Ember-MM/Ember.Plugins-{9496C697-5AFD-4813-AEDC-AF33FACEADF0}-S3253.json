@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  10
+}
+}
+}
+]
+}

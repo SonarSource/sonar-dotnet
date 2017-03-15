@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S117",
+"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  64,
+"startColumn":  7,
+"endLine":  64,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S117",
+"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  7,
+"endLine":  72,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S117",
+"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  7,
+"endLine":  110,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S117",
+"message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  7,
+"endLine":  68,
+"endColumn":  13
+}
+}
+}
+]
+}

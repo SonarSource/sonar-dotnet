@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  27,
+"endLine":  20,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  30,
+"endLine":  22,
+"endColumn":  41
+}
+}
+}
+]
+}

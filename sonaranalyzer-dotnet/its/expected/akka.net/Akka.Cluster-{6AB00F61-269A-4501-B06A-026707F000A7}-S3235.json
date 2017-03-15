@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  61,
+"endLine":  218,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  86,
+"endLine":  242,
+"endColumn":  88
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  27,
+"endLine":  59,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  27,
+"endLine":  49,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  27,
+"endLine":  77,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  27,
+"endLine":  46,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  27,
+"endLine":  284,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerStartupSpec.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  27,
+"endLine":  41,
+"endColumn":  61
+}
+}
+}
+]
+}

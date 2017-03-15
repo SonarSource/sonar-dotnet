@@ -1,0 +1,31 @@
+<p>Most developers expect property access to be as efficient as field access. However, if a property returns an array, it must return a deep copy of
+the original array or risk having the object's internal state altered unexpectedly.</p>
+<p>However, making a deep copy, especially when the array is large, is much slower than a simple field access. Therefore, such properties should be
+refactored into methods.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    ' Internal state
+    Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
+
+    ReadOnly Property Foo() As String() ' Noncompliant
+        Get
+            Dim copy = array.Clone      ' Expensive call
+            Return copy
+        End Get
+    End Property
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    ' Internal state
+    Dim array = {"apple", "banana", "orange", "pineapple", "strawberry"}
+
+    Function GetFoo() As String()       ' Compliant
+        Dim copy = array.Clone
+        Return copy
+    End Function
+End Module
+</pre>
+

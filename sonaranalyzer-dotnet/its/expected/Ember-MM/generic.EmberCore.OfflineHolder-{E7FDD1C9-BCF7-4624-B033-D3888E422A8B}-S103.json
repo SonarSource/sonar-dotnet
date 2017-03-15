@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  121,
+"startColumn":  1,
+"endLine":  121,
+"endColumn":  210
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 237 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  1,
+"endLine":  147,
+"endColumn":  238
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 232 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  433,
+"startColumn":  1,
+"endLine":  433,
+"endColumn":  233
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  210
+}
+}
+}
+]
+}

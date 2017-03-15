@@ -1,0 +1,13 @@
+{
+  "title": "Value types should implement \"IEquatable<T>\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor"
+}

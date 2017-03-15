@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  311,
+"startColumn":  19,
+"endLine":  311,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  321,
+"startColumn":  28,
+"endLine":  321,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  19,
+"endLine":  328,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  28,
+"endLine":  338,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  19,
+"endLine":  379,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  389,
+"startColumn":  28,
+"endLine":  389,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2366",
+"message":  "Rename this property to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  406,
+"startColumn":  28,
+"endLine":  406,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,46 @@
+<p>Flags enumerations should not rely on the language to initialize the values of their members. Implicit initialization will set the first member to
+0, and increment the value by one for each subsequent member. This implicit behavior does not allow members to be combined using the bitwise or
+operator in a useful way.</p>
+<p>Instead, 0 and powers of two (i.e. 1, 2, 4, 8, 16, ...) should be used to explicitly initialize all the members.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+&lt;Flags()&gt;
+Enum FruitType    ' Non-Compliant
+  None
+  Banana
+  Orange
+  Strawberry
+End Enum
+
+Module Module1
+  Sub Main()
+    Dim bananaAndStrawberry = FruitType.Banana Or FruitType.Strawberry
+
+    ' Will display only Strawberry!
+    Console.WriteLine(bananaAndStrawberry.ToString())
+  End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+&lt;Flags()&gt;
+Enum FruitType    ' Compliant
+  None = 0
+  Banana = 1
+  Orange = 2
+  Strawberry = 4
+End Enum
+
+Module Module1
+  Sub Main()
+    Dim bananaAndStrawberry = FruitType.Banana Or FruitType.Strawberry
+
+    ' Will display Banana and Strawberry, as expected.
+    Console.WriteLine(bananaAndStrawberry.ToString())
+  End Sub
+End Module
+</pre>
+<h2>Exceptions</h2>
+<p>The default initialization of 0, 1, 2, 3, 4, ... matches 0, 1, 2, 4, 8 ... in the first three values, so no issue is reported if the first three
+members of the enumeration is not initialized.</p>
+

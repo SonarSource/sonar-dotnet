@@ -1,0 +1,26 @@
+<p>The compiler automatically initializes class fields, auto-properties and events to their default values before setting them with any initialization
+values, so there is no need to explicitly set a member to its default value. Further, under the logic that cleaner code is better code, it's
+considered poor style to do so.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class X
+{
+  public int field = 0; // Noncompliant
+  public object o = null; // Noncompliant
+  public object MyProperty { get; set; } = null; // Noncompliant
+  public event EventHandler MyEvent = null;  // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class X
+{
+  public int field;
+  public object o;
+  public object MyProperty { get; set; }
+  public event EventHandler MyEvent;
+}
+</pre>
+<h2>Exceptions</h2>
+<p><code>const</code> fields are ignored.</p>
+

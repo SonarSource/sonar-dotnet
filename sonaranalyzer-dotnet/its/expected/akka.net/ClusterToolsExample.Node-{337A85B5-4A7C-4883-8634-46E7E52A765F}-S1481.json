@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove this unused 'proxyRef' local variable.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  25
+}
+}
+}
+]
+}

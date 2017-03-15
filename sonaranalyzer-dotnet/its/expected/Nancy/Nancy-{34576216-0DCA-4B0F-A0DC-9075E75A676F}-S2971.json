@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  38,
+"endLine":  256,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  38,
+"endLine":  260,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  38,
+"endLine":  190,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  38,
+"endLine":  194,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  28,
+"endLine":  221,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  24,
+"endLine":  232,
+"endColumn":  29
+}
+}
+}
+]
+}

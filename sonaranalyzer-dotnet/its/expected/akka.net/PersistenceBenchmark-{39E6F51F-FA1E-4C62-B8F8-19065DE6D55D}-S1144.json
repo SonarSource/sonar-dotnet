@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  10
+}
+}
+}
+]
+}

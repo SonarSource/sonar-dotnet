@@ -1,0 +1,33 @@
+<p>Throwing such general exceptions as <code>Exception</code>, <code>SystemException</code>, <code>ApplicationException</code>,
+<code>IndexOutOfRangeException</code>, <code>NullReferenceException</code>, <code>OutOfMemoryException</code> and
+<code>ExecutionEngineException</code> prevents calling methods from handling true, system-generated exceptions differently than application-generated
+errors. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void DoSomething(object obj)
+{
+  if (obj == null)
+  {
+    throw new NullReferenceException("obj");  // Noncompliant
+  }
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void DoSomething(object obj)
+{
+  if (obj == null)
+  {
+    throw new ArgumentNullException("obj");
+  }
+  // ...
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/397.html">MITRE, CWE-397</a> - Declaration of Throws for Generic Exception </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/BoB3AQ">CERT, ERR07-J.</a> - Do not throw RuntimeException, Exception, or Throwable
+  </li>
+</ul>
+

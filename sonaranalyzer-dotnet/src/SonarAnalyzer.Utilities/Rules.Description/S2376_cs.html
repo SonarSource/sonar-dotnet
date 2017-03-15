@@ -1,0 +1,26 @@
+<p>Properties with only setters are confusing and counterintuitive. Instead, a property getter should be added if possible, or the property should be
+replaced with a setter method.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Program
+{
+    public int Foo  //Non-Compliant
+    {
+        set
+        {
+            // ... some code ...
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Program
+{
+    public void SetFoo(int value)
+    {
+        // ... some code ...
+    }
+}
+</pre>
+

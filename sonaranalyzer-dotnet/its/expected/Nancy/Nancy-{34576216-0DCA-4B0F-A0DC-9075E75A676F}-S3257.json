@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  51,
+"endLine":  128,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  552,
+"startColumn":  42,
+"endLine":  552,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  47,
+"endLine":  171,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3508,
+"startColumn":  94,
+"endLine":  3508,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3512,
+"startColumn":  63,
+"endLine":  3512,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3535,
+"startColumn":  94,
+"endLine":  3535,
+"endColumn":  98
+}
+}
+}
+]
+}

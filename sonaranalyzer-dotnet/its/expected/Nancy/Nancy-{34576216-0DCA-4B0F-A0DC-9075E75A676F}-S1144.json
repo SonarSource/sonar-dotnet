@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  13,
+"endLine":  249,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  376,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  3,
+"endLine":  422,
+"endColumn":  4
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  323,
+"startColumn":  9,
+"endLine":  326,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  9,
+"endLine":  172,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  13,
+"endLine":  88,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  9,
+"endLine":  96,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3230,
+"startColumn":  9,
+"endLine":  3233,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3620,
+"startColumn":  9,
+"endLine":  3623,
+"endColumn":  10
+}
+}
+}
+]
+}

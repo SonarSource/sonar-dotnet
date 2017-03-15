@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  30,
+"endLine":  116,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  30,
+"endLine":  260,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  22,
+"endLine":  176,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  22,
+"endLine":  187,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  29,
+"endLine":  31,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  29,
+"endLine":  54,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  29,
+"endLine":  78,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  29,
+"endLine":  101,
+"endColumn":  44
+}
+}
+}
+]
+}

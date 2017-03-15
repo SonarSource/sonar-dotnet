@@ -1,0 +1,18 @@
+{
+  "title": "\"IDisposables\" should be disposed",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "cwe",
+    "denial-of-service",
+    "bug"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Blocker"
+}

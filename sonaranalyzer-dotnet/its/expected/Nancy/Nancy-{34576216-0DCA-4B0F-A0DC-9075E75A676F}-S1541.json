@@ -1,0 +1,4621 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  30,
+"endLine":  229,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  30,
+"endLine":  229,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  13,
+"endLine":  233,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  13,
+"endLine":  239,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  13,
+"endLine":  245,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  44,
+"endLine":  245,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  17,
+"endLine":  248,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  18,
+"endLine":  254,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  53,
+"endLine":  254,
+"endColumn":  55
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  17,
+"endLine":  257,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  18,
+"endLine":  263,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  266,
+"startColumn":  17,
+"endLine":  266,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  21,
+"endLine":  268,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  17,
+"endLine":  278,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  17,
+"endLine":  288,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  46,
+"endLine":  288,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  17,
+"endLine":  295,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  17,
+"endLine":  97,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  17,
+"endLine":  98,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  17,
+"endLine":  100,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  17,
+"endLine":  102,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  17,
+"endLine":  103,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  17,
+"endLine":  104,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  17,
+"endLine":  106,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  17,
+"endLine":  108,
+"endColumn":  21
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  46,
+"endLine":  109,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  32,
+"endLine":  332,
+"endColumn":  51
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  32,
+"endLine":  332,
+"endColumn":  51
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  13,
+"endLine":  338,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  341,
+"startColumn":  13,
+"endLine":  341,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  13,
+"endLine":  345,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  42,
+"endLine":  348,
+"endColumn":  44
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  30,
+"endLine":  348,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  13,
+"endLine":  359,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  364,
+"startColumn":  13,
+"endLine":  364,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  21,
+"endLine":  367,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  21,
+"endLine":  370,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  21,
+"endLine":  373,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  575,
+"startColumn":  30,
+"endLine":  575,
+"endColumn":  43
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  575,
+"startColumn":  30,
+"endLine":  575,
+"endColumn":  43
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  13,
+"endLine":  577,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  13,
+"endLine":  598,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  25,
+"endLine":  598,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  13,
+"endLine":  603,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  13,
+"endLine":  608,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  610,
+"startColumn":  38,
+"endLine":  610,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  38,
+"endLine":  609,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  27,
+"endLine":  608,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  26,
+"endLine":  609,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  610,
+"startColumn":  26,
+"endLine":  610,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  17,
+"endLine":  613,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  31,
+"endLine":  613,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  32,
+"endLine":  256,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  32,
+"endLine":  256,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  13,
+"endLine":  258,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  13,
+"endLine":  261,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  13,
+"endLine":  265,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  17,
+"endLine":  268,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  66,
+"endLine":  268,
+"endColumn":  68
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  54,
+"endLine":  268,
+"endColumn":  56
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  42,
+"endLine":  268,
+"endColumn":  44
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  30,
+"endLine":  268,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  13,
+"endLine":  279,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  13,
+"endLine":  286,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  21,
+"endLine":  290,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  21,
+"endLine":  293,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  21,
+"endLine":  296,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  21,
+"endLine":  299,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  21,
+"endLine":  307,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  21,
+"endLine":  311,
+"endColumn":  25
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  25,
+"endLine":  317,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  38,
+"endLine":  317,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 28 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  32,
+"endLine":  389,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  32,
+"endLine":  389,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  13,
+"endLine":  391,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  13,
+"endLine":  394,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  397,
+"startColumn":  13,
+"endLine":  397,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  13,
+"endLine":  414,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  417,
+"startColumn":  17,
+"endLine":  417,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  21,
+"endLine":  419,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  17,
+"endLine":  434,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  437,
+"startColumn":  21,
+"endLine":  437,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  449,
+"startColumn":  17,
+"endLine":  449,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  451,
+"startColumn":  21,
+"endLine":  451,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  25,
+"endLine":  462,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  22,
+"endLine":  476,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  479,
+"startColumn":  21,
+"endLine":  479,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  25,
+"endLine":  482,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  44,
+"endLine":  482,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  22,
+"endLine":  493,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  495,
+"startColumn":  21,
+"endLine":  495,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  25,
+"endLine":  502,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  26,
+"endLine":  519,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  43,
+"endLine":  519,
+"endColumn":  45
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  527,
+"startColumn":  26,
+"endLine":  527,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  26,
+"endLine":  535,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  42,
+"endLine":  535,
+"endColumn":  44
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  55,
+"endLine":  535,
+"endColumn":  57
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  25,
+"endLine":  545,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  13,
+"endLine":  555,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  559,
+"startColumn":  18,
+"endLine":  559,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  30,
+"endLine":  346,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  30,
+"endLine":  346,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  13,
+"endLine":  348,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  13,
+"endLine":  350,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  13,
+"endLine":  354,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  354,
+"startColumn":  28,
+"endLine":  354,
+"endColumn":  30
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  13,
+"endLine":  357,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  357,
+"startColumn":  27,
+"endLine":  357,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  13,
+"endLine":  362,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  17,
+"endLine":  365,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  22,
+"endLine":  369,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  35,
+"endLine":  369,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  21,
+"endLine":  372,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  30,
+"endLine":  389,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  30,
+"endLine":  389,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  13,
+"endLine":  391,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  394,
+"startColumn":  13,
+"endLine":  394,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  13,
+"endLine":  399,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  17,
+"endLine":  402,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  79,
+"endLine":  402,
+"endColumn":  81
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  55,
+"endLine":  402,
+"endColumn":  57
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  31,
+"endLine":  402,
+"endColumn":  33
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  43,
+"endLine":  402,
+"endColumn":  45
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  402,
+"startColumn":  67,
+"endLine":  402,
+"endColumn":  69
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  21,
+"endLine":  404,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  13,
+"endLine":  140,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  38,
+"endLine":  140,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  13,
+"endLine":  143,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  13,
+"endLine":  151,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  46,
+"endLine":  154,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  31,
+"endLine":  154,
+"endColumn":  33
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  21,
+"endLine":  156,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  41,
+"endLine":  156,
+"endColumn":  43
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  25,
+"endLine":  160,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  26,
+"endLine":  168,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  17,
+"endLine":  180,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 20 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  30,
+"endLine":  249,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  30,
+"endLine":  249,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  13,
+"endLine":  251,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  13,
+"endLine":  253,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  13,
+"endLine":  256,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  13,
+"endLine":  259,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  28,
+"endLine":  259,
+"endColumn":  30
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  13,
+"endLine":  262,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  27,
+"endLine":  262,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  13,
+"endLine":  270,
+"endColumn":  16
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  17,
+"endLine":  272,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  54,
+"endLine":  272,
+"endColumn":  56
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  37,
+"endLine":  272,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  21,
+"endLine":  274,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  51,
+"endLine":  274,
+"endColumn":  53
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  25,
+"endLine":  276,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  25,
+"endLine":  282,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  26,
+"endLine":  289,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  13,
+"endLine":  313,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  16,
+"endLine":  275,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  16,
+"endLine":  275,
+"endColumn":  29
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  13,
+"endLine":  278,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  278,
+"startColumn":  30,
+"endLine":  278,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  13,
+"endLine":  282,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  70,
+"endLine":  282,
+"endColumn":  72
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  46,
+"endLine":  282,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  30,
+"endLine":  282,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  18,
+"endLine":  284,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  18,
+"endLine":  287,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  17,
+"endLine":  289,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  13,
+"endLine":  302,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  308,
+"startColumn":  13,
+"endLine":  308,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  13,
+"endLine":  311,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  30,
+"endLine":  311,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  25,
+"endLine":  144,
+"endColumn":  38
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  25,
+"endLine":  144,
+"endColumn":  38
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  13,
+"endLine":  148,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  13,
+"endLine":  151,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  17,
+"endLine":  156,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  21,
+"endLine":  161,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  13,
+"endLine":  169,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  13,
+"endLine":  172,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  13,
+"endLine":  176,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  13,
+"endLine":  183,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  185,
+"startColumn":  17,
+"endLine":  185,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  48,
+"endLine":  192,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  13,
+"endLine":  197,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  38,
+"endLine":  197,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  17,
+"endLine":  205,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  21,
+"endLine":  207,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  17,
+"endLine":  213,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 25 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  16,
+"endLine":  317,
+"endColumn":  31
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  16,
+"endLine":  317,
+"endColumn":  31
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  13,
+"endLine":  319,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  17,
+"endLine":  321,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  13,
+"endLine":  329,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  17,
+"endLine":  332,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  84,
+"endLine":  332,
+"endColumn":  86
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  21,
+"endLine":  335,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  68,
+"endLine":  335,
+"endColumn":  70
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  43,
+"endLine":  335,
+"endColumn":  45
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  137,
+"endLine":  335,
+"endColumn":  139
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  103,
+"endLine":  335,
+"endColumn":  105
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  21,
+"endLine":  338,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  349,
+"startColumn":  21,
+"endLine":  349,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  355,
+"startColumn":  18,
+"endLine":  355,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  13,
+"endLine":  360,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  17,
+"endLine":  363,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  21,
+"endLine":  366,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  39,
+"endLine":  366,
+"endColumn":  41
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  21,
+"endLine":  369,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  17,
+"endLine":  380,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  46,
+"endLine":  380,
+"endColumn":  48
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  17,
+"endLine":  389,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  17,
+"endLine":  398,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  21,
+"endLine":  400,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  21,
+"endLine":  405,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 23 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  8,
+"endLine":  484,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  8,
+"endLine":  484,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  4,
+"endLine":  488,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  4,
+"endLine":  500,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  506,
+"startColumn":  5,
+"endLine":  506,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  6,
+"endLine":  509,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  511,
+"startColumn":  11,
+"endLine":  511,
+"endColumn":  13
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  513,
+"startColumn":  11,
+"endLine":  513,
+"endColumn":  13
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  11,
+"endLine":  515,
+"endColumn":  13
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  5,
+"endLine":  521,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  6,
+"endLine":  522,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  524,
+"startColumn":  11,
+"endLine":  524,
+"endColumn":  13
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  530,
+"startColumn":  5,
+"endLine":  530,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  531,
+"startColumn":  6,
+"endLine":  531,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  537,
+"startColumn":  5,
+"endLine":  537,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  6,
+"endLine":  538,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  5,
+"endLine":  544,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  545,
+"startColumn":  6,
+"endLine":  545,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  5,
+"endLine":  549,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  6,
+"endLine":  550,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  59,
+"endLine":  550,
+"endColumn":  61
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  553,
+"startColumn":  79,
+"endLine":  553,
+"endColumn":  80
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  555,
+"startColumn":  7,
+"endLine":  555,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  4,
+"endLine":  570,
+"endColumn":  6
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 65 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  8,
+"endLine":  577,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  8,
+"endLine":  577,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  581,
+"startColumn":  4,
+"endLine":  581,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  5,
+"endLine":  585,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  4,
+"endLine":  589,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  6,
+"endLine":  594,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  6,
+"endLine":  597,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  6,
+"endLine":  600,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  6,
+"endLine":  603,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  6,
+"endLine":  606,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  6,
+"endLine":  609,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  610,
+"startColumn":  6,
+"endLine":  610,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  611,
+"startColumn":  6,
+"endLine":  611,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  614,
+"startColumn":  6,
+"endLine":  614,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  11,
+"endLine":  620,
+"endColumn":  13
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  41,
+"endLine":  620,
+"endColumn":  43
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  620,
+"startColumn":  68,
+"endLine":  620,
+"endColumn":  70
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  624,
+"startColumn":  4,
+"endLine":  624,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  632,
+"startColumn":  5,
+"endLine":  632,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  637,
+"startColumn":  5,
+"endLine":  637,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  5,
+"endLine":  642,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  647,
+"startColumn":  5,
+"endLine":  647,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  652,
+"startColumn":  5,
+"endLine":  652,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  5,
+"endLine":  657,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  662,
+"startColumn":  5,
+"endLine":  662,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  667,
+"startColumn":  5,
+"endLine":  667,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  5,
+"endLine":  672,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  5,
+"endLine":  679,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  684,
+"startColumn":  5,
+"endLine":  684,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  686,
+"startColumn":  6,
+"endLine":  686,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  696,
+"startColumn":  5,
+"endLine":  696,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  701,
+"startColumn":  5,
+"endLine":  701,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  706,
+"startColumn":  5,
+"endLine":  706,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  711,
+"startColumn":  5,
+"endLine":  711,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  713,
+"startColumn":  6,
+"endLine":  713,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  719,
+"startColumn":  5,
+"endLine":  719,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  6,
+"endLine":  722,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  726,
+"startColumn":  6,
+"endLine":  726,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  735,
+"startColumn":  5,
+"endLine":  735,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  737,
+"startColumn":  6,
+"endLine":  737,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  741,
+"startColumn":  6,
+"endLine":  741,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  748,
+"startColumn":  5,
+"endLine":  748,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  756,
+"startColumn":  5,
+"endLine":  756,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  764,
+"startColumn":  5,
+"endLine":  764,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  765,
+"startColumn":  6,
+"endLine":  765,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  8,
+"endLine":  769,
+"endColumn":  12
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  770,
+"startColumn":  9,
+"endLine":  770,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  778,
+"startColumn":  8,
+"endLine":  778,
+"endColumn":  12
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  779,
+"startColumn":  8,
+"endLine":  779,
+"endColumn":  12
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  780,
+"startColumn":  9,
+"endLine":  780,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  787,
+"startColumn":  8,
+"endLine":  787,
+"endColumn":  12
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  790,
+"startColumn":  9,
+"endLine":  790,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  800,
+"startColumn":  5,
+"endLine":  800,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  808,
+"startColumn":  7,
+"endLine":  808,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  809,
+"startColumn":  8,
+"endLine":  809,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  817,
+"startColumn":  7,
+"endLine":  817,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  820,
+"startColumn":  8,
+"endLine":  820,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  830,
+"startColumn":  5,
+"endLine":  830,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  834,
+"startColumn":  6,
+"endLine":  834,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  842,
+"startColumn":  5,
+"endLine":  842,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  843,
+"startColumn":  5,
+"endLine":  843,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  846,
+"startColumn":  7,
+"endLine":  846,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  847,
+"startColumn":  7,
+"endLine":  847,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  848,
+"startColumn":  9,
+"endLine":  848,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  855,
+"startColumn":  7,
+"endLine":  855,
+"endColumn":  11
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  858,
+"startColumn":  9,
+"endLine":  858,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  8,
+"endLine":  565,
+"endColumn":  18
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  8,
+"endLine":  565,
+"endColumn":  18
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  567,
+"startColumn":  4,
+"endLine":  567,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  575,
+"startColumn":  4,
+"endLine":  575,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  6,
+"endLine":  579,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  582,
+"startColumn":  6,
+"endLine":  582,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  585,
+"startColumn":  6,
+"endLine":  585,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  6,
+"endLine":  588,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  6,
+"endLine":  591,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  6,
+"endLine":  594,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  597,
+"startColumn":  6,
+"endLine":  597,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  600,
+"startColumn":  6,
+"endLine":  600,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  6,
+"endLine":  603,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  606,
+"startColumn":  6,
+"endLine":  606,
+"endColumn":  10
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  610,
+"startColumn":  7,
+"endLine":  610,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  88,
+"endLine":  617,
+"endColumn":  89
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 40 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  8,
+"endLine":  104,
+"endColumn":  26
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  8,
+"endLine":  104,
+"endColumn":  26
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  4,
+"endLine":  106,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  122,
+"endLine":  107,
+"endColumn":  123
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  4,
+"endLine":  109,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  20,
+"endLine":  109,
+"endColumn":  22
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  4,
+"endLine":  115,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  4,
+"endLine":  127,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  5,
+"endLine":  130,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  5,
+"endLine":  135,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  6,
+"endLine":  137,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  4,
+"endLine":  147,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  5,
+"endLine":  150,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  21,
+"endLine":  150,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  5,
+"endLine":  161,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  33,
+"endLine":  165,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  33,
+"endLine":  169,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  33,
+"endLine":  173,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  33,
+"endLine":  174,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  33,
+"endLine":  175,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  33,
+"endLine":  176,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  33,
+"endLine":  177,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  33,
+"endLine":  178,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  33,
+"endLine":  179,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  33,
+"endLine":  180,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  6,
+"endLine":  181,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  33,
+"endLine":  187,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  33,
+"endLine":  191,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  5,
+"endLine":  195,
+"endColumn":  9
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  33,
+"endLine":  199,
+"endColumn":  37
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  4,
+"endLine":  204,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  4,
+"endLine":  209,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  13,
+"endLine":  214,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  4,
+"endLine":  220,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  4,
+"endLine":  228,
+"endColumn":  6
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  234,
+"startColumn":  5,
+"endLine":  234,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  5,
+"endLine":  239,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  6,
+"endLine":  240,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  6,
+"endLine":  244,
+"endColumn":  8
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  5,
+"endLine":  255,
+"endColumn":  7
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  5,
+"endLine":  261,
+"endColumn":  7
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  29,
+"endLine":  239,
+"endColumn":  61
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  29,
+"endLine":  239,
+"endColumn":  61
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  13,
+"endLine":  243,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  13,
+"endLine":  249,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  102,
+"endLine":  249,
+"endColumn":  104
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  58,
+"endLine":  249,
+"endColumn":  60
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  17,
+"endLine":  254,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  21,
+"endLine":  258,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  49,
+"endLine":  258,
+"endColumn":  51
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  17,
+"endLine":  272,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  21,
+"endLine":  277,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  277,
+"startColumn":  83,
+"endLine":  277,
+"endColumn":  85
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 22 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  23,
+"endLine":  68,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  23,
+"endLine":  68,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  65,
+"endLine":  71,
+"endColumn":  67
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  37,
+"endLine":  71,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  17,
+"endLine":  74,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  55,
+"endLine":  83,
+"endColumn":  56
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  17,
+"endLine":  86,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  17,
+"endLine":  98,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  13,
+"endLine":  113,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  17,
+"endLine":  115,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  111,
+"endLine":  115,
+"endColumn":  113
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  67,
+"endLine":  115,
+"endColumn":  69
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  21,
+"endLine":  119,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  25,
+"endLine":  122,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  25,
+"endLine":  132,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  29,
+"endLine":  138,
+"endColumn":  31
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  21,
+"endLine":  155,
+"endColumn":  28
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  25,
+"endLine":  161,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  17,
+"endLine":  175,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  45,
+"endLine":  175,
+"endColumn":  47
+}
+},
+{
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  13,
+"endLine":  181,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  16,
+"endLine":  48,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  16,
+"endLine":  48,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  13,
+"endLine":  66,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  30,
+"endLine":  84,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  55,
+"endLine":  86,
+"endColumn":  57
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  13,
+"endLine":  90,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  37,
+"endLine":  90,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  52,
+"endLine":  95,
+"endColumn":  54
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  30,
+"endLine":  38,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  44,
+"endLine":  43,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  30,
+"endLine":  43,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  73,
+"endLine":  43,
+"endColumn":  75
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  42,
+"endLine":  48,
+"endColumn":  44
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  68,
+"endLine":  48,
+"endColumn":  70
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3085,
+"startColumn":  22,
+"endLine":  3085,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3085,
+"startColumn":  22,
+"endLine":  3085,
+"endColumn":  42
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3092,
+"startColumn":  90,
+"endLine":  3092,
+"endColumn":  92
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3092,
+"startColumn":  58,
+"endLine":  3092,
+"endColumn":  60
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3092,
+"startColumn":  159,
+"endLine":  3092,
+"endColumn":  161
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3092,
+"startColumn":  117,
+"endLine":  3092,
+"endColumn":  119
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3095,
+"startColumn":  17,
+"endLine":  3095,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3108,
+"startColumn":  137,
+"endLine":  3108,
+"endColumn":  139
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3108,
+"startColumn":  95,
+"endLine":  3108,
+"endColumn":  97
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3108,
+"startColumn":  73,
+"endLine":  3108,
+"endColumn":  75
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3111,
+"startColumn":  17,
+"endLine":  3111,
+"endColumn":  24
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3118,
+"startColumn":  21,
+"endLine":  3118,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3120,
+"startColumn":  25,
+"endLine":  3120,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3123,
+"startColumn":  25,
+"endLine":  3123,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3130,
+"startColumn":  21,
+"endLine":  3130,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3361,
+"startColumn":  24,
+"endLine":  3361,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3361,
+"startColumn":  24,
+"endLine":  3361,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3366,
+"startColumn":  13,
+"endLine":  3366,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3384,
+"startColumn":  13,
+"endLine":  3384,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3389,
+"startColumn":  17,
+"endLine":  3389,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3409,
+"startColumn":  13,
+"endLine":  3409,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3426,
+"startColumn":  13,
+"endLine":  3426,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3426,
+"startColumn":  58,
+"endLine":  3426,
+"endColumn":  60
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3430,
+"startColumn":  13,
+"endLine":  3430,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3430,
+"startColumn":  58,
+"endLine":  3430,
+"endColumn":  60
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3432,
+"startColumn":  17,
+"endLine":  3432,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3451,
+"startColumn":  13,
+"endLine":  3451,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3454,
+"startColumn":  13,
+"endLine":  3454,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3458,
+"startColumn":  13,
+"endLine":  3458,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3458,
+"startColumn":  104,
+"endLine":  3458,
+"endColumn":  106
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3458,
+"startColumn":  142,
+"endLine":  3458,
+"endColumn":  144
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3460,
+"startColumn":  17,
+"endLine":  3460,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3460,
+"startColumn":  53,
+"endLine":  3460,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 22 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3247,
+"startColumn":  22,
+"endLine":  3247,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3247,
+"startColumn":  22,
+"endLine":  3247,
+"endColumn":  40
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3249,
+"startColumn":  13,
+"endLine":  3249,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3256,
+"startColumn":  13,
+"endLine":  3256,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3258,
+"startColumn":  17,
+"endLine":  3258,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3261,
+"startColumn":  17,
+"endLine":  3261,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3262,
+"startColumn":  99,
+"endLine":  3262,
+"endColumn":  100
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3269,
+"startColumn":  13,
+"endLine":  3269,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3269,
+"startColumn":  45,
+"endLine":  3269,
+"endColumn":  47
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3270,
+"startColumn":  42,
+"endLine":  3270,
+"endColumn":  43
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3273,
+"startColumn":  13,
+"endLine":  3273,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3273,
+"startColumn":  45,
+"endLine":  3273,
+"endColumn":  47
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3275,
+"startColumn":  17,
+"endLine":  3275,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3277,
+"startColumn":  21,
+"endLine":  3277,
+"endColumn":  23
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3280,
+"startColumn":  99,
+"endLine":  3280,
+"endColumn":  100
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3285,
+"startColumn":  13,
+"endLine":  3285,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3289,
+"startColumn":  13,
+"endLine":  3289,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3294,
+"startColumn":  13,
+"endLine":  3294,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3294,
+"startColumn":  104,
+"endLine":  3294,
+"endColumn":  106
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3294,
+"startColumn":  134,
+"endLine":  3294,
+"endColumn":  136
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3295,
+"startColumn":  85,
+"endLine":  3295,
+"endColumn":  86
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3295,
+"startColumn":  112,
+"endLine":  3295,
+"endColumn":  113
+}
+},
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3298,
+"startColumn":  13,
+"endLine":  3298,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

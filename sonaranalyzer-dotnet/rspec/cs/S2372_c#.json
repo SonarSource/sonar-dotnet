@@ -1,0 +1,14 @@
+{
+  "title": "Exceptions should not be thrown from property getters",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "error-handling",
+    "bug"
+  ],
+  "defaultSeverity": "Major"
+}

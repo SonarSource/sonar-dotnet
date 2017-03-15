@@ -1,0 +1,12 @@
+<p>Since C# 5.0, <code>async</code> and <code>await</code> are contextual keywords. Contextual keywords do have a particular meaning in some contexts,
+but can still be used as variable names. Keywords, on the other hand, are always reserved, and therefore are not valid variable names. To avoid any
+confusion though, it is best to not use <code>async</code> and <code>await</code> as identifiers.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+int await = 42; // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+int someOtherName = 42;
+</pre>
+

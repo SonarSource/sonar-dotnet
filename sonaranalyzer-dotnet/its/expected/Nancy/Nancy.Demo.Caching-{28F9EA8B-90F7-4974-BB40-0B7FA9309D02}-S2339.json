@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Caching\CachingExtensions\ContextExtensions.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  29,
+"endLine":  5,
+"endColumn":  50
+}
+}
+}
+]
+}

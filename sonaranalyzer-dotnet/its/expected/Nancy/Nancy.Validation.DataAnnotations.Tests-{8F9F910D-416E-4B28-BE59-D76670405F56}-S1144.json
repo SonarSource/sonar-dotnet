@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
+"region":  {
+"startLine":  139,
+"startColumn":  13,
+"endLine":  139,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'h' in a separate statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  16,
+"endLine":  412,
+"endColumn":  17
+}
+}
+}
+]
+}

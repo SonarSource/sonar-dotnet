@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  23,
+"endLine":  523,
+"endColumn":  47
+}
+}
+}
+]
+}

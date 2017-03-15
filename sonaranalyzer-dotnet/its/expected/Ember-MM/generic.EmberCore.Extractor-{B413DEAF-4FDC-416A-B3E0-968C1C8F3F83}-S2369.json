@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2369",
+"message":  "Rename '_isedit' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  16,
+"endLine":  55,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename '_movie' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  16,
+"endLine":  56,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename '_setfa' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  16,
+"endLine":  57,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2369",
+"message":  "Rename '_thumbcount' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  16,
+"endLine":  58,
+"endColumn":  27
+}
+}
+}
+]
+}

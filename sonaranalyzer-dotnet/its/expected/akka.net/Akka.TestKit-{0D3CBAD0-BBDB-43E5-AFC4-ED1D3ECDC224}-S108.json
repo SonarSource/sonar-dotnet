@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  18
+}
+}
+}
+]
+}

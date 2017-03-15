@@ -1,0 +1,14 @@
+{
+  "title": "Strings should not be concatenated using \"+\" or \"&\" in a loop",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "performance",
+    "bug"
+  ],
+  "defaultSeverity": "Minor"
+}

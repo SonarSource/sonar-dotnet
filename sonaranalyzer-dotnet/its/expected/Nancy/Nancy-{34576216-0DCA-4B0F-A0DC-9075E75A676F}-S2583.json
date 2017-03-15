@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  17,
+"endLine":  256,
+"endColumn":  30
+}
+}
+}
+]
+}

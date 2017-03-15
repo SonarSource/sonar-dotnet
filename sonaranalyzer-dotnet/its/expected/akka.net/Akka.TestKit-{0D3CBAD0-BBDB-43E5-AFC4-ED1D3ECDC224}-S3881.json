@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  25,
+"endLine":  179,
+"endColumn":  48
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  25,
+"endLine":  210,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

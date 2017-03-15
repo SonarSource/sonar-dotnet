@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  634,
+"startColumn":  160,
+"endLine":  634,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  686,
+"startColumn":  220,
+"endLine":  686,
+"endColumn":  228
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  718,
+"startColumn":  217,
+"endLine":  718,
+"endColumn":  225
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  23,
+"endLine":  51,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  1
+}
+}
+}
+]
+}

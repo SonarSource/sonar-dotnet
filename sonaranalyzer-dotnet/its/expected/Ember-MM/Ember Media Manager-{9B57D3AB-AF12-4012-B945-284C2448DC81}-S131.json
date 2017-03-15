@@ -1,0 +1,667 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  9,
+"endLine":  70,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  29,
+"endLine":  180,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  217,
+"startColumn":  13,
+"endLine":  217,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  21,
+"endLine":  319,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  95,
+"startColumn":  25,
+"endLine":  95,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  37,
+"endLine":  109,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  17,
+"endLine":  165,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  411,
+"startColumn":  13,
+"endLine":  411,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2111,
+"startColumn":  9,
+"endLine":  2111,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2120,
+"startColumn":  9,
+"endLine":  2120,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2724,
+"startColumn":  13,
+"endLine":  2724,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4107,
+"startColumn":  13,
+"endLine":  4107,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4129,
+"startColumn":  13,
+"endLine":  4129,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4151,
+"startColumn":  13,
+"endLine":  4151,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4173,
+"startColumn":  13,
+"endLine":  4173,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4195,
+"startColumn":  13,
+"endLine":  4195,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4217,
+"startColumn":  13,
+"endLine":  4217,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4239,
+"startColumn":  13,
+"endLine":  4239,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4261,
+"startColumn":  13,
+"endLine":  4261,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4283,
+"startColumn":  13,
+"endLine":  4283,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  9,
+"endLine":  339,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  352,
+"startColumn":  9,
+"endLine":  352,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  34,
+"startColumn":  3,
+"endLine":  34,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  3,
+"endLine":  67,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  17,
+"endLine":  184,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1302,
+"startColumn":  21,
+"endLine":  1302,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1927,
+"startColumn":  17,
+"endLine":  1927,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2513,
+"startColumn":  13,
+"endLine":  2513,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2912,
+"startColumn":  17,
+"endLine":  2912,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3007,
+"startColumn":  13,
+"endLine":  3007,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3304,
+"startColumn":  17,
+"endLine":  3304,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3437,
+"startColumn":  21,
+"endLine":  3437,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3899,
+"startColumn":  17,
+"endLine":  3899,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4026,
+"startColumn":  21,
+"endLine":  4026,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5668,
+"startColumn":  25,
+"endLine":  5668,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5785,
+"startColumn":  9,
+"endLine":  5785,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5787,
+"startColumn":  17,
+"endLine":  5787,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6504,
+"startColumn":  17,
+"endLine":  6504,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6537,
+"startColumn":  9,
+"endLine":  6537,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6585,
+"startColumn":  13,
+"endLine":  6585,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6618,
+"startColumn":  9,
+"endLine":  6618,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7448,
+"startColumn":  17,
+"endLine":  7448,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8387,
+"startColumn":  13,
+"endLine":  8387,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8418,
+"startColumn":  9,
+"endLine":  8418,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8483,
+"startColumn":  17,
+"endLine":  8483,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8500,
+"startColumn":  13,
+"endLine":  8500,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8660,
+"startColumn":  17,
+"endLine":  8660,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8753,
+"startColumn":  9,
+"endLine":  8753,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8790,
+"startColumn":  17,
+"endLine":  8790,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8799,
+"startColumn":  17,
+"endLine":  8799,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S131",
+"message":  "Add a 'Case Else' clause to this 'Select' statement.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8834,
+"startColumn":  17,
+"endLine":  8834,
+"endColumn":  23
+}
+}
+}
+]
+}

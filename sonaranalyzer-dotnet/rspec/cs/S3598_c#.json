@@ -1,0 +1,13 @@
+{
+  "title": "One-way \"OperationContract\" methods should have \"void\" return type",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Major"
+}

@@ -1,0 +1,18 @@
+<p>The name of a method should communicate what it does, and the names of its parameters should indicate how they're used. If a method and its
+parameter have the same name it is an indication that one of these rules of thumb has been broken, if not both. Even if by some trick of language
+that's not the case, it is still likely to confuse callers and maintainers.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void Login(string login)  // Noncompliant
+{
+  //...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void Login(string userName)
+{
+  //...
+}
+</pre>
+

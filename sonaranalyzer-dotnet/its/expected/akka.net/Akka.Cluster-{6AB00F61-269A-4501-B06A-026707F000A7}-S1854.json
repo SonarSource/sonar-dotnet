@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'set'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  39,
+"endLine":  334,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'observerRows'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  69,
+"endLine":  165,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'oldRecord'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  30,
+"endLine":  206,
+"endColumn":  36
+}
+}
+}
+]
+}

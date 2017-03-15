@@ -1,0 +1,190 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  21,
+"endLine":  190,
+"endColumn":  92
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  21,
+"endLine":  190,
+"endColumn":  92
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  13,
+"endLine":  204,
+"endColumn":  16
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  25,
+"endLine":  212,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  29,
+"endLine":  213,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  59,
+"endLine":  213,
+"endColumn":  61
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  25,
+"endLine":  223,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  29,
+"endLine":  224,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  59,
+"endLine":  224,
+"endColumn":  61
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  33,
+"endLine":  229,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  25,
+"endLine":  239,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  29,
+"endLine":  240,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  59,
+"endLine":  240,
+"endColumn":  61
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  25,
+"endLine":  248,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  29,
+"endLine":  249,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  59,
+"endLine":  249,
+"endColumn":  61
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  33,
+"endLine":  256,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  33,
+"endLine":  258,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  66,
+"endLine":  258,
+"endColumn":  68
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  33,
+"endLine":  260,
+"endColumn":  35
+}
+}
+]
+}
+]
+}

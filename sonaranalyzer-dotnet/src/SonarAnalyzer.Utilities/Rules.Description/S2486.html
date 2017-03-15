@@ -1,0 +1,32 @@
+<p>When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.</p>
+<p>This rule only reports on empty catch clauses that catch generic <code>Exception</code>s.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+string text = "";
+try
+{
+  text = File.ReadAllText(fileName);
+}
+catch (Exception exc) // Noncompliant
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+string text = "";
+try
+{
+  text = File.ReadAllText(fileName);
+}
+catch (Exception exc)
+{
+  logger.Log(exc);
+}
+</pre>
+<h2>Exceptions</h2>
+<p>When a block contains a comment, it is not considered to be empty.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/391.html">MITRE, CWE-391</a> - Unchecked Error Condition </li>
+</ul>
+

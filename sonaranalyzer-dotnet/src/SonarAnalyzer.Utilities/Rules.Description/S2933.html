@@ -1,0 +1,28 @@
+<p><code>readonly</code> fields can only be assigned in a class constructor. If a class has a field that's not marked <code>readonly</code> but is
+only set in the constructor, it could cause confusion about the field's intended use. To avoid confusion, such fields should be marked
+<code>readonly</code> to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Person
+{
+  int _birthYear;  // Noncompliant
+  Person(int birthYear)
+  {
+    _birthYear = birthYear;
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Person
+{
+  readonly int _birthYear;
+  Person(int birthYear)
+  {
+    _birthYear = birthYear;
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Fields with attributes are ignored.</p>
+

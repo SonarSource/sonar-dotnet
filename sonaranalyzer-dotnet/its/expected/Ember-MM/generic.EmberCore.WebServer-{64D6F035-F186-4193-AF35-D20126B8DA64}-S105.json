@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\frmSettingsHolder.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  1,
+"endLine":  70,
+"endColumn":  1
+}
+}
+}
+]
+}

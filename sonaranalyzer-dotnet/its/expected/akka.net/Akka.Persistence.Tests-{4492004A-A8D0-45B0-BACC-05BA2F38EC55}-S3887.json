@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  42,
+"endLine":  80,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  42,
+"endLine":  125,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  42,
+"endLine":  126,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  48,
+"endLine":  184,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3887",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  48,
+"endLine":  157,
+"endColumn":  80
+}
+}
+}
+]
+}

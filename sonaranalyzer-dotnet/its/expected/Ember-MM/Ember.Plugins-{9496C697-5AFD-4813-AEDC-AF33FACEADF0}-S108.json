@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  59,
+"endLine":  102,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  59,
+"endLine":  109,
+"endColumn":  62
+}
+}
+}
+]
+}

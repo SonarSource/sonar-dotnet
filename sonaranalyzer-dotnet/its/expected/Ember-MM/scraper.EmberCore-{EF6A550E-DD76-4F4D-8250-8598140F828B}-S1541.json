@@ -1,0 +1,537 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 214 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  2,
+"endLine":  30,
+"endColumn":  261
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 48 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  658,
+"startColumn":  2,
+"endLine":  658,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  813,
+"startColumn":  2,
+"endLine":  813,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  864,
+"startColumn":  2,
+"endLine":  864,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 185 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  9,
+"endLine":  138,
+"endColumn":  265
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  635,
+"startColumn":  9,
+"endLine":  635,
+"endColumn":  209
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  840,
+"startColumn":  9,
+"endLine":  840,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  930,
+"startColumn":  9,
+"endLine":  930,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  5,
+"endLine":  144,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  9,
+"endLine":  68,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  5,
+"endLine":  90,
+"endColumn":  158
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 35 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  9,
+"endLine":  133,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  296,
+"startColumn":  5,
+"endLine":  296,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  5,
+"endLine":  204,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  359,
+"startColumn":  5,
+"endLine":  359,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  5,
+"endLine":  619,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  706,
+"startColumn":  5,
+"endLine":  706,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  887,
+"startColumn":  5,
+"endLine":  887,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  1042,
+"startColumn":  5,
+"endLine":  1042,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  1169,
+"startColumn":  5,
+"endLine":  1169,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  5,
+"endLine":  65,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 51 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  5,
+"endLine":  308,
+"endColumn":  185
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  540,
+"startColumn":  5,
+"endLine":  540,
+"endColumn":  220
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  9,
+"endLine":  240,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 57 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  9,
+"endLine":  300,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  427,
+"startColumn":  9,
+"endLine":  427,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  572,
+"startColumn":  9,
+"endLine":  572,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  664,
+"startColumn":  9,
+"endLine":  664,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 33 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  811,
+"startColumn":  9,
+"endLine":  811,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  957,
+"startColumn":  9,
+"endLine":  957,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 149 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1051,
+"startColumn":  9,
+"endLine":  1051,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  5,
+"endLine":  75,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  5,
+"endLine":  313,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 100 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  5,
+"endLine":  60,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  376,
+"startColumn":  5,
+"endLine":  376,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 35 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  436,
+"startColumn":  5,
+"endLine":  436,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 47 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  707,
+"startColumn":  5,
+"endLine":  707,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  892,
+"startColumn":  5,
+"endLine":  892,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  937,
+"startColumn":  5,
+"endLine":  937,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 50 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  1077,
+"startColumn":  5,
+"endLine":  1077,
+"endColumn":  144
+}
+}
+}
+]
+}

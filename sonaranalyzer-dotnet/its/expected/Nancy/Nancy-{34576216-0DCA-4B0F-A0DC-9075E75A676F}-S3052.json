@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'disposed', the compiler will do that for you.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3833,
+"startColumn":  23,
+"endLine":  3833,
+"endColumn":  30
+}
+}
+}
+]
+}

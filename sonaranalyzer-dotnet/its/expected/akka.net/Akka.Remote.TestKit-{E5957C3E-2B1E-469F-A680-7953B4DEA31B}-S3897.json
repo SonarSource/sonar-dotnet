@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Data>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BarrierTimeoutException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  29,
+"endLine":  124,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<FailedBarrierException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  29,
+"endLine":  162,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<DuplicateNodeException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  29,
+"endLine":  200,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<WrongBarrierException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  29,
+"endLine":  244,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BarrierEmptyException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  29,
+"endLine":  294,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ClientLostException>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  29,
+"endLine":  332,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ClientDisconnected>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<NodeInfo>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  31,
+"endLine":  131,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<RoleName>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ToClient>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  11,
+"endLine":  72,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ToServer>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  11,
+"endLine":  128,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Hello>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  18,
+"endLine":  186,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<EnterBarrier>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  18,
+"endLine":  238,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<FailBarrier>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  290,
+"startColumn":  18,
+"endLine":  290,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BarrierResult>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  18,
+"endLine":  332,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Throttle>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  384,
+"startColumn":  18,
+"endLine":  384,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ThrottleMsg>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  18,
+"endLine":  454,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Disconnect>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  516,
+"startColumn":  18,
+"endLine":  516,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<DisconnectMsg>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  578,
+"startColumn":  18,
+"endLine":  578,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Terminate>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  630,
+"startColumn":  18,
+"endLine":  630,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<TerminateMsg>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  682,
+"startColumn":  18,
+"endLine":  682,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<GetAddress>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  724,
+"startColumn":  18,
+"endLine":  724,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AddressReply>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  766,
+"startColumn":  18,
+"endLine":  766,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Remove>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  832,
+"startColumn":  18,
+"endLine":  832,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Data>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  24,
+"endLine":  178,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Connected>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  24,
+"endLine":  229,
+"endColumn":  33
+}
+}
+}
+]
+}

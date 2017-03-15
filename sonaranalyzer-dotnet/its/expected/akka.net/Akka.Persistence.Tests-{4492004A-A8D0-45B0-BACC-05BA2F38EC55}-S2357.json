@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Payload' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  36,
+"endLine":  94,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Tags' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  42,
+"endLine":  80,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Value' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  33,
+"endLine":  81,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'CountryCode' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  36,
+"endLine":  103,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Age' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  33,
+"endLine":  104,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Adult' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  42,
+"endLine":  125,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Minor' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  42,
+"endLine":  126,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Log' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  45,
+"endLine":  158,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  48,
+"endLine":  184,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'State' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  48,
+"endLine":  157,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  5,
+"endLine":  207,
+"endColumn":  100
+}
+}
+}
+]
+}

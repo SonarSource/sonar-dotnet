@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  507,
+"startColumn":  18,
+"endLine":  507,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  836,
+"startColumn":  45,
+"endLine":  836,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  863,
+"startColumn":  45,
+"endLine":  863,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1151,
+"startColumn":  58,
+"endLine":  1151,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1157,
+"startColumn":  51,
+"endLine":  1157,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1170,
+"startColumn":  54,
+"endLine":  1170,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1176,
+"startColumn":  49,
+"endLine":  1176,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  749,
+"startColumn":  38,
+"endLine":  749,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  781,
+"startColumn":  38,
+"endLine":  781,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  817,
+"startColumn":  42,
+"endLine":  817,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  844,
+"startColumn":  42,
+"endLine":  844,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  960,
+"startColumn":  34,
+"endLine":  960,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  1014,
+"startColumn":  34,
+"endLine":  1014,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,46 @@
+<p>The <code>IEquatable&lt;T&gt;</code> interface has only one method in it: <code>Equals(&lt;T&gt;)</code>. If you've already written
+<code>Equals(T)</code>, there's no reason not to explicitly implement <code>IEquatable&lt;T&gt;</code>. Doing so expands the utility of your class by
+allowing it to be used where an <code>IEquatable</code> is called for.</p>
+<p>Similarly, having written <code>Equals(&lt;T&gt;)</code>, it's not that much further to go to write <code>Equals(Object)</code> and vice versa;
+just a couple more lines brings a large dividend of functionality. So this rule raises an issue when <code>Equals(&lt;T&gt;)</code> is not accompanied
+by <code>IEquatable</code> and <code>Equals(Object)</code>, and vice versa.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass  // Noncompliant
+{
+  public override bool Equals(object other)
+  {
+    //...
+  }
+}
+</pre>
+<pre>
+class MyClass  // Noncompliant
+{
+  public bool Equals(MyClass other)
+  {
+    //...
+  }
+}
+</pre>
+<pre>
+class MyClass : IEquatable&lt;T&gt;  // Noncompliant
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass : IEquatable&lt;MyClass&gt;
+{
+  public override bool Equals(object other)
+  {
+    return Equals(other as MyClass);
+  }
+
+  public bool Equals(MyClass other)
+  {
+    //...
+  }
+}
+</pre>
+

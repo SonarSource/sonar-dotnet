@@ -1,0 +1,23 @@
+<p>To improve the code readability, the explicit line continuation character, <code>_</code>, should not be used. Instead, it is better to break lines
+after an operator.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub Main()
+        ' Noncompliant
+        Console.WriteLine("Hello" _
+                          &amp; "world")
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+
+        Console.WriteLine("Hello" &amp;
+                          "world")
+    End Sub
+End Module
+</pre>
+

@@ -1,0 +1,72 @@
+<p>Field-like events are events that do not have explicit <code>add</code> and <code>remove</code> methods. The compiler generates a
+<code>private</code> <code>delegate</code> field to back the event, as well as generating the implicit <code>add</code> and <code>remove</code>
+methods.</p>
+<p>When a <code>virtual</code> field-like <code>event</code> is overridden by another field-like <code>event</code>, the behavior of the C# compiler
+is to generate a new <code>private</code> <code>delegate</code> field in the derived class, separate from the parent's field. This results in multiple
+and separate events being created, which is rarely what's actually intended.</p>
+<p>To prevent this, remove the <code>virtual</code> designation from the parent class event.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+abstract class Car
+{
+  public virtual event EventHandler OnRefueled; // Noncompliant
+
+  public void Refuel()
+  {
+    // This OnRefueld will always be null
+     if (OnRefueled != null)
+     {
+       OnRefueled(this, null);
+     }
+  }
+}
+
+class R2 : Car
+{
+  public override event EventHandler OnRefueled;
+}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    var r2 = new R2();
+    r2.OnRefueled += new EventHandler((o, a) =&gt;
+    {
+      Console.WriteLine("This event will never be called");
+    });
+    r2.Refuel();
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+abstract class Car
+{
+  public event EventHandler OnRefueled; // Compliant
+
+  public void Refuel()
+  {
+    if (OnRefueled != null)
+    {
+      OnRefueled(this, null);
+    }
+  }
+}
+
+class R2 : Car {}
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    var r2 = new R2();
+    r2.OnRefueled += new EventHandler((o, a) =&gt;
+    {
+      Console.WriteLine("This event will be called");
+    });
+    r2.Refuel();
+  }
+}
+</pre>
+

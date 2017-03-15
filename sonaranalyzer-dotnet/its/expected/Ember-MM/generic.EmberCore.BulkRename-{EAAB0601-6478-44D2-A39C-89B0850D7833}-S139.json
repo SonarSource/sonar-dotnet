@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  53,
+"endLine":  79,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  72,
+"endLine":  97,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  68,
+"endLine":  99,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  137,
+"startColumn":  118,
+"endLine":  137,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  64,
+"endLine":  153,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  60,
+"endLine":  155,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  372,
+"startColumn":  51,
+"endLine":  372,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  74,
+"endLine":  90,
+"endColumn":  87
+}
+}
+}
+]
+}

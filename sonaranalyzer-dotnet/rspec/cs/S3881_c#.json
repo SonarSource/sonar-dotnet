@@ -1,0 +1,13 @@
+{
+  "title": "\"IDisposable\" should be implemented correctly",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

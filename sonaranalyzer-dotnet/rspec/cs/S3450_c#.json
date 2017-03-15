@@ -1,0 +1,13 @@
+{
+  "title": "Parameters with \"[DefaultParameterValue]\" attributes should also be marked \"[Optional]\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Minor"
+}

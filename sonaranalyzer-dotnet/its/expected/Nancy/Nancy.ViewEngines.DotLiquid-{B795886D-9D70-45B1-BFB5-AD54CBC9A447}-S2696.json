@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Remove this set, which updates a 'static' field from an instance method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  40
+}
+}
+}
+]
+}

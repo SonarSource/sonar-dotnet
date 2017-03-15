@@ -1,0 +1,14 @@
+{
+  "title": "Constructors should only call non-overridable methods",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "cert",
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical"
+}

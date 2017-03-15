@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Uid' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\AddressUidExtension.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  29,
+"endLine":  41,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'IsTombstone' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  34,
+"endLine":  34,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LogLevel' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  34,
+"endLine":  208,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'HandshakeInfo' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  39,
+"endLine":  280,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'StateActor' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  35,
+"endLine":  282,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Codec' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  38,
+"endLine":  284,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ExtendedActorSystem' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  45,
+"endLine":  121,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AssociateBehavior' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  78,
+"endLine":  31,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'DisassociateBehavior' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  79,
+"endLine":  32,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ListenBehavior' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LocalAddress' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'ShutdownBehavior' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  62,
+"endLine":  41,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'WriteBehavior' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  98,
+"endLine":  42,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Inbound' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  608,
+"startColumn":  30,
+"endLine":  608,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Actor' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  35,
+"endLine":  168,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'AddedSchemeIdentifier' private.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  32,
+"endLine":  101,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  80,
+"endLine":  37,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  122,
+"startColumn":  24,
+"endLine":  122,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  24,
+"endLine":  128,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  87,
+"endLine":  128,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  116,
+"endLine":  128,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  12,
+"endLine":  146,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  586,
+"startColumn":  20,
+"endLine":  586,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  611,
+"startColumn":  28,
+"endLine":  611,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  640,
+"startColumn":  24,
+"endLine":  640,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,576 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  135,
+"endLine":  94,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  141,
+"endLine":  104,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  141,
+"endLine":  116,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  154,
+"endLine":  138,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  157,
+"endLine":  163,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  105,
+"endLine":  12,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  101,
+"endLine":  45,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  98,
+"endLine":  64,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  134,
+"endLine":  31,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  89,
+"endLine":  41,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  96,
+"endLine":  55,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  92,
+"endLine":  66,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  93,
+"endLine":  77,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  89,
+"endLine":  88,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  94,
+"endLine":  99,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  90,
+"endLine":  110,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  97,
+"endLine":  121,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  93,
+"endLine":  132,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  95,
+"endLine":  143,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  91,
+"endLine":  154,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  94,
+"endLine":  165,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  90,
+"endLine":  176,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  93,
+"endLine":  187,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  89,
+"endLine":  198,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  58,
+"endLine":  111,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  118,
+"endLine":  54,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  117,
+"endLine":  76,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  131,
+"endLine":  20,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  140,
+"endLine":  21,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  95,
+"endLine":  32,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  90,
+"endLine":  44,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  86,
+"endLine":  56,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  87,
+"endLine":  68,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  83,
+"endLine":  80,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  88,
+"endLine":  92,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  84,
+"endLine":  104,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  91,
+"endLine":  116,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  87,
+"endLine":  128,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  89,
+"endLine":  140,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  85,
+"endLine":  152,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  88,
+"endLine":  164,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  84,
+"endLine":  176,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  87,
+"endLine":  188,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  83,
+"endLine":  200,
+"endColumn":  89
+}
+}
+}
+]
+}

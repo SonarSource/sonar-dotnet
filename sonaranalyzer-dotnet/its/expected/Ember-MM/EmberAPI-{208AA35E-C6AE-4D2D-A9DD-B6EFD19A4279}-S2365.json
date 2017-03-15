@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'GetIFOAudio' into a method, properties should not be based on arrays.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  30,
+"endLine":  62,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2365",
+"message":  "Refactor 'GetIFOVideo' into a method, properties should not be based on arrays.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  30,
+"endLine":  110,
+"endColumn":  41
+}
+}
+}
+]
+}

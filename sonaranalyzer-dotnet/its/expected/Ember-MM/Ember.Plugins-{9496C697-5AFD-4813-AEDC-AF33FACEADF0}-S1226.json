@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'context'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'context'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  17,
+"endLine":  115,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'imdbId'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  39,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'imdbId'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  17,
+"endLine":  41,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'imdbId'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  21,
+"endLine":  45,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'imdbId'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  21,
+"endLine":  47,
+"endColumn":  27
+}
+}
+}
+]
+}

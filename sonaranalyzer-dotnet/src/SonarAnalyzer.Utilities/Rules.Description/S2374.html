@@ -1,0 +1,23 @@
+<p>Unsigned integers have different arithmetic operators than signed ones - operators that few developers understand. Therefore, signed types should
+be preferred where possible.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo1 As UShort   ' Noncompliant
+        Dim foo2 As UInteger ' Noncompliant
+        Dim foo3 As ULong    ' Noncompliant
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo1 As Short
+        Dim foo2 As Integer
+        Dim foo3 As Long
+    End Sub
+End Module
+</pre>
+

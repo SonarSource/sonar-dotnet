@@ -1,0 +1,544 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BaseClusterUserAction>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  33,
+"endLine":  32,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Join>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  31,
+"endLine":  99,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Welcome>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  31,
+"endLine":  145,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<InitJoinAck>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  31,
+"endLine":  229,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<InitJoinNack>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  31,
+"endLine":  264,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<VectorClockStats>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2056,
+"startColumn":  18,
+"endLine":  2056,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  2070,
+"startColumn":  30,
+"endLine":  2070,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<InitJoin>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  24,
+"endLine":  218,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  34,
+"endLine":  220,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<SendGossipTo>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  379,
+"startColumn":  31,
+"endLine":  379,
+"endColumn":  43
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  34,
+"endLine":  390,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<MemberStatusChange>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  31,
+"endLine":  173,
+"endColumn":  49
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  34,
+"endLine":  189,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<MemberRemoved>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  29,
+"endLine":  236,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  34,
+"endLine":  253,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<LeaderChanged>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  29,
+"endLine":  276,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  34,
+"endLine":  293,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<RoleLeaderChanged>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  29,
+"endLine":  315,
+"endColumn":  46
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  34,
+"endLine":  351,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ReachabilityEvent>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  374,
+"startColumn":  31,
+"endLine":  374,
+"endColumn":  48
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  388,
+"startColumn":  34,
+"endLine":  388,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<SeenChanged>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  31,
+"endLine":  452,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  473,
+"startColumn":  34,
+"endLine":  473,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ReachabilityChanged>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  31,
+"endLine":  483,
+"endColumn":  50
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  497,
+"startColumn":  34,
+"endLine":  497,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<CurrentInternalStats>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  31,
+"endLine":  515,
+"endColumn":  51
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"region":  {
+"startLine":  547,
+"startColumn":  34,
+"endLine":  547,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Heartbeat>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  31,
+"endLine":  181,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<HeartbeatRsp>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  31,
+"endLine":  208,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<MetricsGossip>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  27,
+"endLine":  203,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<MetricsGossipEnvelope>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  27,
+"endLine":  293,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<NodeMetrics>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  18,
+"endLine":  338,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Metric>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  25,
+"endLine":  404,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<GossipStatus>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  11,
+"endLine":  366,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<UniqueAddress>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  18,
+"endLine":  245,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  30,
+"endLine":  259,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Member>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  24
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  30,
+"endLine":  75,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Reachability>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  30
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  373,
+"startColumn":  30,
+"endLine":  373,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Record>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  29,
+"endLine":  42,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  34,
+"endLine":  61,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Node>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  26
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  34,
+"endLine":  82,
+"endColumn":  40
+}
+}
+]
+}
+]
+}

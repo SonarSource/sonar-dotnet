@@ -1,0 +1,1070 @@
+{
+"issues":  [
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  817,
+"startColumn":  117,
+"endLine":  817,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  818,
+"startColumn":  132,
+"endLine":  818,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  825,
+"startColumn":  117,
+"endLine":  825,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  826,
+"startColumn":  110,
+"endLine":  826,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  827,
+"startColumn":  148,
+"endLine":  827,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  114,
+"endLine":  147,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  49,
+"endLine":  314,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  116,
+"endLine":  315,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  89,
+"endLine":  316,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  317,
+"startColumn":  115,
+"endLine":  317,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  318,
+"startColumn":  128,
+"endLine":  318,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  79,
+"endLine":  319,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  239,
+"endLine":  320,
+"endColumn":  240
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  122,
+"endLine":  368,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  122,
+"endLine":  388,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  413,
+"startColumn":  61,
+"endLine":  413,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  457,
+"startColumn":  156,
+"endLine":  457,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  513,
+"startColumn":  103,
+"endLine":  513,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  514,
+"startColumn":  109,
+"endLine":  514,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  535,
+"startColumn":  97,
+"endLine":  535,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  536,
+"startColumn":  102,
+"endLine":  536,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  537,
+"startColumn":  106,
+"endLine":  537,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  538,
+"startColumn":  103,
+"endLine":  538,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  539,
+"startColumn":  116,
+"endLine":  539,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  113,
+"endLine":  565,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  566,
+"startColumn":  113,
+"endLine":  566,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  567,
+"startColumn":  83,
+"endLine":  567,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  568,
+"startColumn":  92,
+"endLine":  568,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  578,
+"startColumn":  113,
+"endLine":  578,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  579,
+"startColumn":  81,
+"endLine":  579,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  580,
+"startColumn":  92,
+"endLine":  580,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  598,
+"startColumn":  103,
+"endLine":  598,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  599,
+"startColumn":  116,
+"endLine":  599,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  626,
+"startColumn":  91,
+"endLine":  626,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  97,
+"endLine":  627,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  673,
+"startColumn":  134,
+"endLine":  673,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  674,
+"startColumn":  128,
+"endLine":  674,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  734,
+"startColumn":  99,
+"endLine":  734,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  855,
+"startColumn":  131,
+"endLine":  855,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  867,
+"startColumn":  80,
+"endLine":  867,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  868,
+"startColumn":  180,
+"endLine":  868,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  869,
+"startColumn":  124,
+"endLine":  869,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  880,
+"startColumn":  80,
+"endLine":  880,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  881,
+"startColumn":  169,
+"endLine":  881,
+"endColumn":  170
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  882,
+"startColumn":  113,
+"endLine":  882,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  895,
+"startColumn":  79,
+"endLine":  895,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  896,
+"startColumn":  169,
+"endLine":  896,
+"endColumn":  170
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  897,
+"startColumn":  113,
+"endLine":  897,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  915,
+"startColumn":  78,
+"endLine":  915,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  916,
+"startColumn":  180,
+"endLine":  916,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  917,
+"startColumn":  124,
+"endLine":  917,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"region":  {
+"startLine":  201,
+"startColumn":  61,
+"endLine":  201,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"region":  {
+"startLine":  559,
+"startColumn":  95,
+"endLine":  559,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  129,
+"startColumn":  22,
+"endLine":  129,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  338,
+"startColumn":  180,
+"endLine":  338,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  339,
+"startColumn":  173,
+"endLine":  339,
+"endColumn":  174
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  346,
+"startColumn":  180,
+"endLine":  346,
+"endColumn":  181
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1193,
+"startColumn":  155,
+"endLine":  1193,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1194,
+"startColumn":  221,
+"endLine":  1194,
+"endColumn":  222
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1198,
+"startColumn":  86,
+"endLine":  1198,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1199,
+"startColumn":  175,
+"endLine":  1199,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1200,
+"startColumn":  316,
+"endLine":  1200,
+"endColumn":  317
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1201,
+"startColumn":  285,
+"endLine":  1201,
+"endColumn":  286
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1202,
+"startColumn":  326,
+"endLine":  1202,
+"endColumn":  327
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1203,
+"startColumn":  330,
+"endLine":  1203,
+"endColumn":  331
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1206,
+"startColumn":  87,
+"endLine":  1206,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1207,
+"startColumn":  176,
+"endLine":  1207,
+"endColumn":  177
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1208,
+"startColumn":  286,
+"endLine":  1208,
+"endColumn":  287
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1209,
+"startColumn":  328,
+"endLine":  1209,
+"endColumn":  329
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1212,
+"startColumn":  99,
+"endLine":  1212,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1213,
+"startColumn":  178,
+"endLine":  1213,
+"endColumn":  179
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1214,
+"startColumn":  228,
+"endLine":  1214,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1215,
+"startColumn":  276,
+"endLine":  1215,
+"endColumn":  277
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1216,
+"startColumn":  336,
+"endLine":  1216,
+"endColumn":  337
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1219,
+"startColumn":  95,
+"endLine":  1219,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1220,
+"startColumn":  176,
+"endLine":  1220,
+"endColumn":  177
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1221,
+"startColumn":  270,
+"endLine":  1221,
+"endColumn":  271
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  334,
+"endLine":  1222,
+"endColumn":  335
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1280,
+"startColumn":  22,
+"endLine":  1280,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1469,
+"startColumn":  22,
+"endLine":  1469,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1730,
+"startColumn":  22,
+"endLine":  1730,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  827,
+"startColumn":  103,
+"endLine":  827,
+"endColumn":  104
+}
+}
+}
+]
+}

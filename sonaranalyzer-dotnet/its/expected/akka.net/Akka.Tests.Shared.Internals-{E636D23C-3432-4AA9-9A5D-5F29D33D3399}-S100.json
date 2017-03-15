@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'intercept' to match camel case naming rules, consider using 'Intercept'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  24,
+"endLine":  134,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPF'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  21,
+"endLine":  140,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPF'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"region":  {
+"startLine":  146,
+"startColumn":  21,
+"endLine":  146,
+"endColumn":  32
+}
+}
+}
+]
+}

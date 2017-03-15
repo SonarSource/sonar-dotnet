@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  50,
+"endLine":  46,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  61,
+"endLine":  50,
+"endColumn":  70
+}
+}
+}
+]
+}

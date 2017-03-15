@@ -1,0 +1,53 @@
+<p>When the parameters to the implementation of a <code>partial</code> method don't match those in the signature declaration, then confusion is almost
+guaranteed. Either the implementer was confused when he renamed, swapped or mangled the parameter names in the implementation, or callers will be
+confused.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+partial class Point
+{
+  partial void MoveVertically(int z);
+}
+
+partial class Point
+{
+  int x = 0;
+  int y = 0;
+  int z = 0;
+
+  partial void MoveVertically(int y)  // Noncompliant
+  {
+    this.y = y;
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+partial class Point
+{
+  partial void MoveVertically(int z);
+}
+
+partial class Point
+{
+  int x = 0;
+  int y = 0;
+  int z = 0;
+
+  partial void MoveVertically(int z)
+  {
+    this.z = z;
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> MISRA C:2004, 8.3 - For each function parameter the type given in the declaration and definition shall be identical, and the return types shall
+  also be identical </li>
+  <li> MISRA C:2004, 16.4 - The identifiers used in the declaration and definition of a function shall be identical. </li>
+  <li> MISRA C++:2008, 8-4-2 - The identifiers used for the parameters in a re-declaration of a function shall be identical to those in the
+  declaration. </li>
+  <li> MISRA C:2012, 8.3 - All declarations of an object or function shall use the same names and type qualifiers. </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/cwGTAw">CERT, DCL40-C.</a> - Do not create incompatible declarations of the same
+  function or object </li>
+</ul>
+

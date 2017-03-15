@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  46,
+"endLine":  55,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  57,
+"endLine":  38,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  38,
+"endLine":  23,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  27,
+"endLine":  26,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  38,
+"endLine":  15,
+"endColumn":  10
+}
+}
+}
+]
+}

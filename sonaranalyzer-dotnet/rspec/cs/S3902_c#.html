@@ -1,0 +1,26 @@
+<p>For performance reasons, you should never try to retrieve the current assembly object using <code>Assembly.GetExecutingAssembly()</code> but
+instead you should use the <code>Type.Assembly</code> property using a type defined in the current assembly. The
+<code>Assembly.GetExecutingAssembly()</code> call will walk up the call stack to find the assembly leading to a much slower access.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Example
+{
+   public static void Main()
+   {
+      Assembly assem = Assembly.GetExecutingAssembly(); // Noncompliant
+      Console.WriteLine("Assembly name: {0}", assem.FullName);
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Example
+{
+   public static void Main()
+   {
+      Assembly assem = typeof(Example).Assembly; // Here we use the type of the current class
+      Console.WriteLine("Assembly name: {0}", assem.FullName);
+   }
+}
+</pre>
+

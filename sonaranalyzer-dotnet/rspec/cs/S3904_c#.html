@@ -1,0 +1,28 @@
+<p>If no <code>AssemblyVersionAttribute</code> is provided, the same default version will be used for every build. Since the version number is used by
+The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Reflection;
+
+[assembly: AssemblyTitle("MyAssembly")] // Noncompliant
+
+namespace MyLibrary
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Reflection;
+
+[assembly: AssemblyTitle("MyAssembly")]
+[assembly: AssemblyVersionAttribute("1.2.125.0")]
+
+namespace MyLibrary
+{
+}
+</pre>
+<h2>See</h2>
+<p><a href="https://msdn.microsoft.com/en-us/library/51ket42z.aspx">Assembly Versioning (MSDN)</a></p>
+

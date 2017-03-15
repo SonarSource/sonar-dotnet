@@ -1,0 +1,394 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make 'rootPath' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DefaultStaticContentProvider.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  24,
+"endLine":  13,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_typeResolver' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  32,
+"endLine":  52,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'serializer' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  24,
+"endLine":  293,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'typeResolver' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  26,
+"endLine":  294,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'retainCasing' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  8,
+"endLine":  295,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'maxJsonLength' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  296,
+"startColumn":  7,
+"endLine":  296,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'recursionLimit' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  298,
+"startColumn":  7,
+"endLine":  298,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'modes' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  301,
+"startColumn":  20,
+"endLine":  301,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'returnValue' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  18,
+"endLine":  302,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'currentKey' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  18,
+"endLine":  307,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'serializer' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  24,
+"endLine":  49,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'typeResolver' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  26,
+"endLine":  50,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'recursionLimit' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  7,
+"endLine":  51,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'maxJsonLength' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  7,
+"endLine":  52,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'retainCasing' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  8,
+"endLine":  54,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'iso8601DateFormat' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  8,
+"endLine":  55,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'propertyInfo' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'fieldInfo' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  19,
+"endLine":  14,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'routeSegmentConstraints' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  54,
+"endLine":  21,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'segmentMatch' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  30,
+"endLine":  10,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_Container' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  840,
+"startColumn":  38,
+"endLine":  840,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_Registration' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  841,
+"startColumn":  38,
+"endLine":  841,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_factory' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2559,
+"startColumn":  77,
+"endLine":  2559,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_factory' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2617,
+"startColumn":  35,
+"endLine":  2617,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_instance' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2684,
+"startColumn":  28,
+"endLine":  2684,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_hashCode' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3021,
+"startColumn":  25,
+"endLine":  3021,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_Parent' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3075,
+"startColumn":  26,
+"endLine":  3075,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'textResourceFinder' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  36,
+"endLine":  23,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'renderContext' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  32,
+"endLine":  7,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make 'message' 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  24,
+"endLine":  16,
+"endColumn":  31
+}
+}
+}
+]
+}

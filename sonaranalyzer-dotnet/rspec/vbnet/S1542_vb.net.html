@@ -1,0 +1,33 @@
+<p>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all subroutine and function names match a provided regular
+expression.</p>
+<p>The default configuration is the one recommended by Microsoft:</p>
+<ul>
+  <li> Pascal casing, starting with an upper case character, e.g. BackColor </li>
+  <li> Short abbreviations of 2 letters can be capitalized, e.g. GetID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. GetHtml </li>
+  <li> Event handlers with a handles clause and two-parameter methods with <code>EventArgs</code> second parameter are not covered by this rule. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code></p>
+<pre>
+Module Module1
+  Sub bad_subroutine()                      ' Noncompliant
+  End Sub
+
+  Public Function Bad_Function() As Integer ' Noncompliant
+    Return 42
+  End Function
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+  Sub GoodSubroutine()                      ' Compliant
+  End Sub
+
+  Public Function GoodFunction() As Integer ' Compliant
+    Return 42
+  End Function
+End Module
+</pre>
+

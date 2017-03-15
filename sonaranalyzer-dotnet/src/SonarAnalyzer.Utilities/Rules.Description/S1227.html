@@ -1,0 +1,26 @@
+<p><code>break;</code> is an unstructured control flow statement which makes code harder to read.</p>
+<p>Ideally, every loop should have a single termination condition.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+int i = 0;
+while (true)
+{
+  if (i == 10)
+  {
+    break;      // Non-Compliant
+  }
+
+  Console.WriteLine(i);
+  i++;
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+int i = 0;
+while (i != 10) // Compliant
+{
+  Console.WriteLine(i);
+  i++;
+}
+</pre>
+

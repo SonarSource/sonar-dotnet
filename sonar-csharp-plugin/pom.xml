@@ -60,8 +60,6 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
-    <!-- sonarAnalyzer.version should match the one specified in sonar-dotnet-shared-library -->
-    <sonarAnalyzer.version>1.24.0.2106</sonarAnalyzer.version>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <scanner.msbuild.version>2.2.0.24</scanner.msbuild.version>
     <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
@@ -221,30 +219,6 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarAnalyzer.CSharp</artifactId>
-                  <version>${sonarAnalyzer.version}</version>
-                  <type>nupkg</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarAnalyzer.RuleDocGenerator.CSharp</artifactId>
-                  <version>${sonarAnalyzer.version}</version>
-                  <type>nupkg</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>${project.groupId}</groupId>
-                  <artifactId>SonarAnalyzer.Scanner</artifactId>
-                  <version>${sonarAnalyzer.version}</version>
-                  <type>nupkg</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
-                </artifactItem>
-                <artifactItem>
                   <groupId>org.sonarsource.scanner.msbuild</groupId>
                   <artifactId>sonar-scanner-msbuild</artifactId>
                   <version>${scanner.msbuild.version}</version>
@@ -273,9 +247,9 @@
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <tasks>
-                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/" />
-                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
-                <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
+                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/Release/SonarAnalyzer.CSharp.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/" />
+                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/SonarAnalyzer.RuleDocGenerator.CSharp.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
+                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/SonarAnalyzer.Scanner.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
                 <!-- SQALE XML in sslr requires a resource to read from -->
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                   <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">

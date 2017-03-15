@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IInternalActorRef' implements 'ICanTell' so 'ICanTell' can be removed from the inheritance list.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  54,
+"endLine":  22,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IInternalActorRef' implements 'IEquatable<IActorRef>' so 'IEquatable<IActorRef>' can be removed from the inheritance list.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  62,
+"endLine":  22,
+"endColumn":  85
+}
+}
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  22,
+"endLine":  136,
+"endColumn":  36
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  25,
+"endLine":  152,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

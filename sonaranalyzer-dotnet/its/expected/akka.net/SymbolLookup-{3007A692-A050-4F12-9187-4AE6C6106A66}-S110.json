@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S110",
+"message":  "This class has 7 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  26,
+"endLine":  20,
+"endColumn":  34
+}
+}
+}
+]
+}

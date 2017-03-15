@@ -1,0 +1,13 @@
+{
+  "title": "Classes directly extending \"object\" should not call \"base\" in \"GetHashCode\" or \"Equals\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Major"
+}

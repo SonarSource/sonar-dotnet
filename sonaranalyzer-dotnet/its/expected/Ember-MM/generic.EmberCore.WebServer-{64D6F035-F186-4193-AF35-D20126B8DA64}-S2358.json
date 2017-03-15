@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  16,
+"endLine":  47,
+"endColumn":  37
+}
+}
+}
+]
+}

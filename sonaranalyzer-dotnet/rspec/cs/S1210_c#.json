@@ -1,0 +1,13 @@
+{
+  "title": "When implementing \"IComparable\", \"Equals(object o)\" and the \"<\", \">\", \"==\", \"!=\" operators should be overridden",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Minor"
+}

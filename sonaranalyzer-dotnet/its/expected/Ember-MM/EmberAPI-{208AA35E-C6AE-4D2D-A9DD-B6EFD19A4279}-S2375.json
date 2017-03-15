@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 22 statements that use '_movieDB.Movie' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1194,
+"startColumn":  17,
+"endLine":  1194,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use '_movieDB.Movie.FileInfo.StreamDetails' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1288,
+"startColumn":  29,
+"endLine":  1288,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use '_movieDB.Movie.FileInfo.StreamDetails.Video(i)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1288,
+"startColumn":  29,
+"endLine":  1288,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use '_TVEpDB.TVEp.FileInfo.StreamDetails' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1599,
+"startColumn":  29,
+"endLine":  1599,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 7 statements that use '_TVEpDB.TVEp.FileInfo.StreamDetails.Video(i)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"region":  {
+"startLine":  1599,
+"startColumn":  29,
+"endLine":  1599,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 21 statements that use 'Master.eSettings.FilterCustom' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3587,
+"startColumn":  13,
+"endLine":  3587,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 21 statements that use 'Master.eSettings.ShowFilterCustom' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3612,
+"startColumn":  13,
+"endLine":  3612,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 25 statements that use 'Master.eSettings.EpFilterCustom' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3642,
+"startColumn":  13,
+"endLine":  3642,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 6 statements that use 'Master.eSettings.TVShowRegexes' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"region":  {
+"startLine":  3682,
+"startColumn":  13,
+"endLine":  3682,
+"endColumn":  51
+}
+}
+}
+]
+}

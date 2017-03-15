@@ -1,0 +1,13 @@
+{
+  "title": "Non-flags enums should not be used in bitwise operations",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "convention"
+  ],
+  "defaultSeverity": "Critical"
+}

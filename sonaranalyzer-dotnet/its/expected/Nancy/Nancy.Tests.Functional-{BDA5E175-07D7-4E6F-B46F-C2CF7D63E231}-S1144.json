@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  837,
+"startColumn":  13,
+"endLine":  850,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  866,
+"startColumn":  13,
+"endLine":  869,
+"endColumn":  14
+}
+}
+}
+]
+}

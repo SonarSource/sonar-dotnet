@@ -1,0 +1,14 @@
+{
+  "title": "Method calls should not resolve ambiguously to overloads with \"params\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "bug",
+    "pitfall"
+  ],
+  "defaultSeverity": "Minor"
+}

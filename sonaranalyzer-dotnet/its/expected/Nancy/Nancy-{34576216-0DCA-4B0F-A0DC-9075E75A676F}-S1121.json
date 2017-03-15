@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'disableCaches' from this expression.",
+"location":  {
+"uri":  "Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  50,
+"endLine":  19,
+"endColumn":  51
+}
+}
+}
+]
+}

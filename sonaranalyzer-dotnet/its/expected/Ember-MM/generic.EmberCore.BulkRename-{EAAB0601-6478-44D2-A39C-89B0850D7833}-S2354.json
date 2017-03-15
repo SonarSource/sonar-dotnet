@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  566,
+"startColumn":  87,
+"endLine":  566,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"region":  {
+"startLine":  567,
+"startColumn":  82,
+"endLine":  567,
+"endColumn":  83
+}
+}
+}
+]
+}

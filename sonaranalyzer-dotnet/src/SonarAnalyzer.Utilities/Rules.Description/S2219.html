@@ -1,0 +1,88 @@
+<p>To check the type of an object there are several options:</p>
+<ul>
+  <li> <code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the type is known at compile time, </li>
+  <li> <code>typeInstance.IsInstanceOfType(expr)</code> if the type is calculated during runtime. </li>
+</ul>
+<p>If runtime calculated <code>Type</code>s need to be compared:</p>
+<ul>
+  <li> <code>typeInstance1.IsAssignableFrom(typeInstance2)</code>. </li>
+</ul>
+<p>Depending on whether the type is returned by a <code>GetType()</code> or <code>typeof()</code> call, the <code>IsAssignableFrom()</code> and
+<code>IsInstanceOfType()</code> might be simplified. Similarly, if the type is <code>sealed</code>, the type comparison with <code>==</code> can be
+converted to an <code>is</code> call. Simplifying the calls also make <code>null</code> checking unnecessary because both <code>is</code> and
+<code>IsInstanceOfType</code> performs it already.</p>
+<p>Finally, utilizing the most concise language constructs for type checking makes the code more readable, so</p>
+<ul>
+  <li> <code>expr as T != null</code> checks should be simplified to <code>expr is T</code>, and </li>
+  <li> <code>expr is T</code> should be converted to <code>expr != null</code>, when <code>expr</code> is of type <code>T</code>. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Fruit { }
+sealed class Apple : Fruit { }
+
+class Program
+{
+  static void Main()
+  {
+    var apple = new Apple();
+    var b = apple != null &amp;&amp; apple.GetType() == typeof (Apple); // Noncompliant
+    b = typeof(Apple).IsInstanceOfType(apple); // Noncompliant
+    if (apple != null)
+    {
+      b = typeof(Apple).IsAssignableFrom(apple.GetType()); // Noncompliant
+    }
+    var appleType = typeof (Apple);
+    if (apple != null)
+    {
+      b = appleType.IsAssignableFrom(apple.GetType()); // Noncompliant
+    }
+
+    Fruit f = apple;
+    if (f as Apple != null) // Noncompliant
+    {
+    }
+    if (apple is Apple) // Noncompliant
+    {
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Fruit { }
+sealed class Apple : Fruit { }
+
+class Program
+{
+  static void Main()
+  {
+    var apple = new Apple();
+    var b = apple is Apple;
+    b = apple is Apple;
+    b = apple is Apple;
+    var appleType = typeof(Apple);
+    b = appleType.IsInstanceOfType(apple);
+
+    Fruit f = apple;
+    if (f is Apple)
+    {
+    }
+    if (apple != null)
+    {
+    }
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Calling <code>GetType</code> on an object of <code>Nullable&lt;T&gt;</code> type returns the underlying generic type parameter <code>T</code>, thus
+a comparison with <code>typeof(Nullable&lt;T&gt;)</code> can't be simplified to use the <code>is</code> operator, which doesn't make difference
+between <code>T</code> and <code>T?</code>.</p>
+<pre>
+int? i = 42;
+bool condition = i.GetType() == typeof(int?); // false;
+condition = i is int?; // true
+</pre>
+<p>No issue is reported on <code>expr is T</code> expressions if either operand of the <code>is</code> operator is a value type. In that case CS0183
+or CS0184 reports.</p>
+

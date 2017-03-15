@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  51,
+"endLine":  41,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  55,
+"endLine":  65,
+"endColumn":  57
+}
+}
+}
+]
+}

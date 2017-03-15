@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2386",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  43,
+"endLine":  22,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S2386",
+"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  43,
+"endLine":  32,
+"endColumn":  10
+}
+}
+}
+]
+}

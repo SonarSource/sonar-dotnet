@@ -1,0 +1,14 @@
+{
+  "title": "VB.Net: \"Exit Select\" statements should not be used redundantly",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "unused",
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor"
+}

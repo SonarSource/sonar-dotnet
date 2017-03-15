@@ -1,0 +1,73 @@
+<p>While the properties of a <code>readonly</code> reference type field can still be changed after initialization, those of a <code>readonly</code>
+value field, such as a <code>struct</code>, cannot. </p>
+<p>If the member could be either a <code>class</code> or a <code>struct</code> then assignment to its properties could be unreliable, working
+sometimes but not others.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+interface IPoint
+{
+  int X { get; set; }
+  int Y { get; set; }
+}
+
+class PointManager&lt;T&gt; where T: IPoint
+{
+  readonly T point;  // this could be a struct
+  public PointManager(T point)
+  {
+    this.point = point;
+  }
+
+  public void MovePointVertically(int newX)
+  {
+    point.X = newX; //Noncompliant; if point is a struct, then nothing happened
+    Console.WriteLine(point.X);
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+interface IPoint
+{
+  int X { get; set; }
+  int Y { get; set; }
+}
+
+class PointManager&lt;T&gt; where T : IPoint
+{
+  readonly T point;  // this could be a struct
+  public PointManager(T point)
+  {
+    this.point = point;
+  }
+
+  public void MovePointVertically(int newX) // assignment has been removed
+  {
+    Console.WriteLine(point.X);
+  }
+}
+</pre>
+<p>or</p>
+<pre>
+interface IPoint
+{
+  int X { get; set; }
+  int Y { get; set; }
+}
+
+class PointManager&lt;T&gt; where T : class, IPoint
+{
+  readonly T point;  // this can only be a class
+  public PointManager(T point)
+  {
+    this.point = point;
+  }
+
+  public void MovePointVertically(int newX)
+  {
+    point.X = newX;  // this assignment is guaranteed to work
+    Console.WriteLine(point.X);
+  }
+}
+</pre>
+

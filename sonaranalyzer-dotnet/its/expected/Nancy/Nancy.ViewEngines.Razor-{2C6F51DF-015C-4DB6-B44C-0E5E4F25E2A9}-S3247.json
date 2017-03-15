@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  17,
+"endLine":  249,
+"endColumn":  49
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  25,
+"endLine":  251,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  17,
+"endLine":  254,
+"endColumn":  60
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  36,
+"endLine":  256,
+"endColumn":  77
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  17,
+"endLine":  270,
+"endColumn":  30
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  33,
+"endLine":  272,
+"endColumn":  44
+}
+}
+]
+}
+]
+}

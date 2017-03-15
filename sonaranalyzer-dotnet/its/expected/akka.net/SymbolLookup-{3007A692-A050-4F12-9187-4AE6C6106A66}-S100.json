@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'symbol' to match camel case naming rules, consider using 'Symbol'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  23,
+"endLine":  15,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EPSEstimateCurrentYear' to match camel case naming rules, consider using 'EpsEstimateCurrentYear'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  23,
+"endLine":  32,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EPSEstimateNextYear' to match camel case naming rules, consider using 'EpsEstimateNextYear'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  23,
+"endLine":  33,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EPSEstimateNextQuarter' to match camel case naming rules, consider using 'EpsEstimateNextQuarter'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  23,
+"endLine":  34,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EBITDA' to match camel case naming rules, consider using 'Ebitda'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  23,
+"endLine":  48,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'PERatio' to match camel case naming rules, consider using 'PeRatio'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  23,
+"endLine":  76,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'PERatioRealtime' to match camel case naming rules, consider using 'PeRatioRealtime'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  23,
+"endLine":  78,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'PEGRatio' to match camel case naming rules, consider using 'PegRatio'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  23,
+"endLine":  79,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'PriceEPSEstimateCurrentYear' to match camel case naming rules, consider using 'PriceEpsEstimateCurrentYear'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  23,
+"endLine":  80,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'PriceEPSEstimateNextYear' to match camel case naming rules, consider using 'PriceEpsEstimateNextYear'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  23,
+"endLine":  81,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'quote' to match camel case naming rules, consider using 'Quote'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  22,
+"endLine":  101,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'count' to match camel case naming rules, consider using 'Count'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  20,
+"endLine":  106,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'created' to match camel case naming rules, consider using 'Created'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  23,
+"endLine":  107,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'lang' to match camel case naming rules, consider using 'Lang'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  23,
+"endLine":  108,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'results' to match camel case naming rules, consider using 'Results'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  24,
+"endLine":  109,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'query' to match camel case naming rules, consider using 'Query'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockQuoteModels.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  22,
+"endLine":  114,
+"endColumn":  27
+}
+}
+}
+]
+}

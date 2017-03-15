@@ -1,0 +1,61 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  41
+}
+},
+{
+"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  387,
+"startColumn":  21,
+"endLine":  387,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  15,
+"endLine":  135,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  15,
+"endLine":  135,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  25,
+"endLine":  144,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Recursion should not be infinite",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Blocker"
+}

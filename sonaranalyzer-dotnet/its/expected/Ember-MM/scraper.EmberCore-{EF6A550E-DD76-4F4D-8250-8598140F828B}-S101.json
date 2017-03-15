@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  14,
+"endLine":  27,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailerFormat.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1281,
+"startColumn":  18,
+"endLine":  1281,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1386,
+"startColumn":  18,
+"endLine":  1386,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1470,
+"startColumn":  18,
+"endLine":  1470,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1531,
+"startColumn":  18,
+"endLine":  1531,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1625,
+"startColumn":  18,
+"endLine":  1625,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1731,
+"startColumn":  18,
+"endLine":  1731,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVChangeEp.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVEpisodePoster.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  14,
+"endLine":  28,
+"endColumn":  30
+}
+}
+}
+]
+}

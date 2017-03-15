@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1117",
+"message":  "Rename 'identifier' which hides the field with the same name.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  17,
+"endLine":  92,
+"endColumn":  27
+}
+}
+}
+]
+}

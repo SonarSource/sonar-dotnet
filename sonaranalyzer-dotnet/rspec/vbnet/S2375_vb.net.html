@@ -1,0 +1,35 @@
+<p>Using the <code>With</code> statement for a series of calls to the same object makes the code more readable.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With the default value of 6:</p>
+<pre>
+Module Module1
+    Dim product = New With {.Name = "paperclips", .RetailPrice = 1.2, .WholesalePrice = 0.6, .A = 0, .B = 0, .C = 0}
+
+    Sub Main()
+        product.Name = ""           ' Noncompliant
+        product.RetailPrice = 0
+        product.WholesalePrice = 0
+        product.A = 0
+        product.B = 0
+        product.C = 0
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Dim product = New With {.Name = "paperclips", .RetailPrice = 1.2, .WholesalePrice = 0.6, .A = 0, .B = 0, .C = 0}
+
+    Sub Main()
+        With product
+            .Name = ""
+            .RetailPrice = 0
+            .WholesalePrice = 0
+            .A = 0
+            .B = 0
+            .C = 0
+        End With
+    End Sub
+End Module
+</pre>
+

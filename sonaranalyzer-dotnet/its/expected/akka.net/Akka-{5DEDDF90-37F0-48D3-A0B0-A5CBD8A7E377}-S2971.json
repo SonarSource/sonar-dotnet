@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop 'ToArray' from the middle of the call chain.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  42,
+"endLine":  279,
+"endColumn":  49
+}
+}
+}
+]
+}

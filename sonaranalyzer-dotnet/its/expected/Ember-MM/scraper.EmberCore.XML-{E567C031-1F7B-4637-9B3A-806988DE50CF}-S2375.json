@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'chkImage(iIndex)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  125,
+"startColumn":  17,
+"endLine":  125,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'lblImage(iIndex)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  17,
+"endLine":  139,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  802,
+"startColumn":  13,
+"endLine":  802,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  313,
+"startColumn":  9,
+"endLine":  313,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 34 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 5 statements that use 'RegExps(RegExps.Count - 1)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  241,
+"startColumn":  17,
+"endLine":  241,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 5 statements that use 'RegExps(RegExps.Count - 1)' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  277,
+"startColumn":  17,
+"endLine":  277,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 5 statements that use 'Me._scraperLookups' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  153
+}
+}
+}
+]
+}

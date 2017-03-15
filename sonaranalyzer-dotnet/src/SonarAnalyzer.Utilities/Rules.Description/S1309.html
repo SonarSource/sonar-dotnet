@@ -1,0 +1,11 @@
+<p>This rule allows you to track the usage of the <code>SuppressMessage</code> attributes and <code>#pragma warning disable</code> mechanism.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[SuppressMessage("", "S100")]
+...
+
+#pragma warning disable S100
+...
+#pragma warning restore S100
+</pre>
+

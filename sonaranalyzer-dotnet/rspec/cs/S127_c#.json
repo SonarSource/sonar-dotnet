@@ -1,0 +1,14 @@
+{
+  "title": "\"for\" loop stop conditions should be invariant",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "misra",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major"
+}

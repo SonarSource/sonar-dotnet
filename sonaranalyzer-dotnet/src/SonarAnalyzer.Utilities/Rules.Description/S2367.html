@@ -1,0 +1,22 @@
+<p>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all non-private <code>Const</code> field names comply with
+the provided regular expression.</p>
+<p>The default configuration is the one recommended by Microsoft:</p>
+<ul>
+  <li> Pascal casing, starting with an upper case character, e.g. BackColor </li>
+  <li> Short abbreviations of 2 letters can be capitalized, e.g. GetID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. GetHtml </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
+<pre>
+Module Module1
+    Public Const foo = 0  ' Noncompliant
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Public Const Foo = 0  ' Compliant
+End Module
+</pre>
+

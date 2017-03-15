@@ -1,0 +1,13 @@
+{
+  "title": "\"operator==\" should not be overloaded on reference types",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Blocker"
+}

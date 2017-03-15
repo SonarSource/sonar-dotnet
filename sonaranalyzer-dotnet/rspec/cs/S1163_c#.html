@@ -1,0 +1,34 @@
+<p>Throwing an exception from within a finally block will mask any exception which was previously thrown in the <code>try</code> or <code>catch</code>
+block.</p>
+<p>The masked's exception message and stack trace will be lost.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+try
+{
+  /* some work which end up throwing an exception */
+  throw new ArgumentException();
+}
+finally
+{
+  /* clean up */
+  throw new InvalidOperationException();       // Noncompliant; will mask the ArgumentException
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+try
+{
+  /* some work which end up throwing an exception */
+  throw new ArgumentException();
+}
+finally
+{
+  /* clean up */                       // Compliant
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/soUbAQ">CERT, ERR05-J.</a> - Do not let checked exceptions escape from a finally block
+  </li>
+</ul>
+

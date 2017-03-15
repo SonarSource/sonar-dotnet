@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  27,
+"endLine":  16,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Snapshot\SnapshotStoreSpec.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  44
+}
+}
+}
+]
+}

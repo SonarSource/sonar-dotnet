@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\BackendActor.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  17,
+"endLine":  46,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2228",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Program.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  13,
+"endLine":  33,
+"endColumn":  30
+}
+}
+}
+]
+}

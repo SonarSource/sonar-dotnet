@@ -1,0 +1,18 @@
+<p>Specifying the default parameter values in a method call is redundant. Such values should be omitted in the interests of readability.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void M(int x, int y=5, int z = 7) { /* ... */ }
+
+// ...
+M(1, 5); //Noncompliant, y has the default value
+M(1, z: 7); //Noncompliant, z has the default value
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void M(int x, int y=5, int z = 7) { /* ... */ }
+
+// ...
+M(1);
+M(1);
+</pre>
+

@@ -1,0 +1,18 @@
+<p>Array literals are more compact than array creation expressions.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo = New String() {"a", "b", "c"} ' Noncompliant
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo = {"a", "b", "c"}              ' Compliant
+    End Sub
+End Module
+</pre>
+

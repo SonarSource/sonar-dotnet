@@ -1,0 +1,24 @@
+<p>Since <code>abstract</code> classes can't be instantiated, there's no point in their having <code>public</code> or <code>internal</code>
+constructors. If there is basic initialization logic that should run when an extending class instance is created, you can by all means put it in a
+constructor, but make that constructor <code>private</code> or <code>protected</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+abstract class Base
+{
+    public Base() // Noncompliant, should be private or protected
+    {
+      //...
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+abstract class Base
+{
+    protected Base()
+    {
+      //...
+    }
+}
+</pre>
+

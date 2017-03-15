@@ -1,0 +1,41 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Quarantined>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  26,
+"endLine":  81,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<AddressTerm>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  26,
+"endLine":  54,
+"endColumn":  37
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  38,
+"endLine":  68,
+"endColumn":  44
+}
+}
+]
+}
+]
+}

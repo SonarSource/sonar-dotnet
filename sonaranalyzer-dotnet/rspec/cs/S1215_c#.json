@@ -1,0 +1,15 @@
+{
+  "title": "\"GC.Collect\" should not be called",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "performance",
+    "unpredictable",
+    "bad-practice"
+  ],
+  "defaultSeverity": "Minor"
+}

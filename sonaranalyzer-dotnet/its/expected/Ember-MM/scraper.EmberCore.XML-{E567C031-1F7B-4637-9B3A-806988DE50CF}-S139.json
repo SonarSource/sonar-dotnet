@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  265,
+"startColumn":  48,
+"endLine":  265,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S139",
+"message":  "Move this trailing comment on the previous empty line.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  48,
+"endLine":  315,
+"endColumn":  127
+}
+}
+}
+]
+}

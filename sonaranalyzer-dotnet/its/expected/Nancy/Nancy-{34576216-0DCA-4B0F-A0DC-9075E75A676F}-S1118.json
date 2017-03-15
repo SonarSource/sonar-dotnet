@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'private' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  25,
+"endLine":  36,
+"endColumn":  34
+}
+}
+}
+]
+}

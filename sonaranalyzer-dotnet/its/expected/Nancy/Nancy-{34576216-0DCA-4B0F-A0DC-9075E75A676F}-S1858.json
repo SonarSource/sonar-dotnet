@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  101,
+"endLine":  28,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()', the compiler will do it for you.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  36,
+"endLine":  390,
+"endColumn":  48
+}
+}
+}
+]
+}

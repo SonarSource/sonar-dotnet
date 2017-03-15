@@ -1,0 +1,45 @@
+<p>Needing to cast from an <code>interface</code> to a concrete type indicates that something is wrong with the abstractions in use, likely that
+something is missing from the <code>interface</code>. Instead of casting to a discrete type, the missing functionality should be added to the
+<code>interface</code>. Otherwise there is a risk of runtime exceptions.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface IMyInterface
+{
+  void DoStuff();
+}
+
+public class MyClass1 : IMyInterface
+{
+  public int Data { get { return new Random().Next(); } }
+
+  public void DoStuff()
+  {
+    // TODO...
+  }
+}
+
+public static class DowncastExampleProgram
+{
+  static void EntryPoint(IMyInterface interfaceRef)
+  {
+    MyClass1 class1 = (MyClass1)interfaceRef;  // Noncompliant
+    int privateData = class1.Data;
+
+    class1 = interfaceRef as MyClass1;  // Noncompliant
+    if (class1 != null)
+    {
+      // ...
+    }
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Casting to <code>object</code> doesn't raise an issue, because it can never fail.</p>
+<pre>
+static void EntryPoint(IMyInterface interfaceRef)
+{
+  var o = (object)interfaceRef;
+  ...
+}
+</pre>
+

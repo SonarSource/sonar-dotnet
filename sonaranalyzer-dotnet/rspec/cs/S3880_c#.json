@@ -1,0 +1,13 @@
+{
+  "title": "Finalizers should not be empty",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Major"
+}

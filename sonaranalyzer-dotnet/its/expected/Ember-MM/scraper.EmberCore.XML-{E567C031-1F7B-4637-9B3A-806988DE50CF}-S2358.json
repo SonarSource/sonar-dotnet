@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  91,
+"startColumn":  16,
+"endLine":  91,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  16,
+"endLine":  110,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  20,
+"endLine":  114,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  20,
+"endLine":  120,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  20,
+"endLine":  126,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  354,
+"startColumn":  20,
+"endLine":  354,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  631,
+"startColumn":  12,
+"endLine":  631,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  688,
+"startColumn":  12,
+"endLine":  688,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  691,
+"startColumn":  39,
+"endLine":  691,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  699,
+"startColumn":  16,
+"endLine":  699,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  709,
+"startColumn":  28,
+"endLine":  709,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  755,
+"startColumn":  16,
+"endLine":  755,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  28,
+"endLine":  133,
+"endColumn":  56
+}
+}
+}
+]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Track uses of in-source issue suppressions",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Info"
+}

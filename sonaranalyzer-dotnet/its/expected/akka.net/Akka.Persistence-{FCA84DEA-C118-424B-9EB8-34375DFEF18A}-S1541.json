@@ -1,0 +1,118 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  33,
+"endLine":  30,
+"endColumn":  40
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  33,
+"endLine":  30,
+"endColumn":  40
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  15
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  21,
+"endLine":  38,
+"endColumn":  22
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  18,
+"endLine":  42,
+"endColumn":  20
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  25,
+"endLine":  48,
+"endColumn":  26
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  18,
+"endLine":  53,
+"endColumn":  20
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  18,
+"endLine":  59,
+"endColumn":  20
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  20
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  23
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  18,
+"endLine":  77,
+"endColumn":  20
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  21,
+"endLine":  83,
+"endColumn":  23
+}
+}
+]
+}
+]
+}

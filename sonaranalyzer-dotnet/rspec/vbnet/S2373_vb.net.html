@@ -1,0 +1,21 @@
+<p>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all generic type parameter names match a provided regular
+expression.</p>
+<p>The default configuration is the one recommended by Microsoft:</p>
+<ul>
+  <li> Must start with an upper case 'T' character, e.g. T </li>
+  <li> Followed by Pascal casing, starting with an upper case character, e.g. TKey </li>
+  <li> Short abbreviations of 2 letters can be capitalized, e.g. TFooID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. TFooHtml </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default parameter value <code>^T(([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)?$</code>:</p>
+<pre>
+Public Class Foo(Of t) ' Noncompliant
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class Foo(Of T) ' Compliant
+End Class
+</pre>
+

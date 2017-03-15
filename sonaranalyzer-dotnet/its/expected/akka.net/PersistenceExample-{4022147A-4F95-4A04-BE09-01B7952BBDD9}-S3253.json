@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  10
+}
+}
+}
+]
+}

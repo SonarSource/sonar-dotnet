@@ -1,0 +1,21 @@
+{
+  "title": "Results of integer division should not be assigned to floating point variables",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "cwe",
+    "bug",
+    "sans-top25-risky",
+    "misra",
+    "cert"
+  ],
+  "standards": [
+    "CWE",
+    "SANS Top 25"
+  ],
+  "defaultSeverity": "Minor"
+}

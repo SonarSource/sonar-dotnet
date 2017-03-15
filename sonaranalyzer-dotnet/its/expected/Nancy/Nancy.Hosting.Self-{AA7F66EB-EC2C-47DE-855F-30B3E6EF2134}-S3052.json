@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'stop', the compiler will do that for you.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  34
+}
+}
+}
+]
+}

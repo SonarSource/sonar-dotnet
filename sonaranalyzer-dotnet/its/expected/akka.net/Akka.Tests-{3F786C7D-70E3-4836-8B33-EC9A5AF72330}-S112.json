@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  57,
+"endLine":  131,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  27,
+"endLine":  197,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  31,
+"endLine":  248,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  48,
+"endLine":  54,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  48,
+"endLine":  56,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  31,
+"endLine":  65,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  48,
+"endLine":  78,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  48,
+"endLine":  80,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  35,
+"endLine":  92,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  52,
+"endLine":  41,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  52,
+"endLine":  57,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  69,
+"endLine":  68,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  69,
+"endLine":  76,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  111,
+"endLine":  203,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  51,
+"endLine":  249,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  51,
+"endLine":  274,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  50,
+"endLine":  58,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  23,
+"endLine":  203,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  51,
+"endLine":  235,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"region":  {
+"startLine":  381,
+"startColumn":  39,
+"endLine":  381,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"region":  {
+"startLine":  424,
+"startColumn":  27,
+"endLine":  424,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  27,
+"endLine":  70,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  27,
+"endLine":  97,
+"endColumn":  36
+}
+}
+}
+]
+}

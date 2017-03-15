@@ -1,0 +1,27 @@
+<p>Typically you want to use <code>using</code> to create a local <code>IDisposable</code> variable; it will trigger disposal of the object when
+control passes out of the block's scope. The exception to this rule is when your method returns that <code>IDisposable</code>. In that case
+<code>using</code> disposes of the object before the caller can make use of it, likely causing exceptions at runtime. So you should either remove
+<code>using</code> or avoid returning the <code>IDisposable</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public FileStream WriteToFile(string path, string text)
+{
+  using (var fs = File.Create(path)) // Noncompliant
+  {
+    var bytes = Encoding.UTF8.GetBytes(text);
+    fs.Write(bytes, 0, bytes.Length);
+    return fs;
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public FileStream WriteToFile(string path, string text)
+{
+  var fs = File.Create(path);
+  var bytes = Encoding.UTF8.GetBytes(text);
+  fs.Write(bytes, 0, bytes.Length);
+  return fs;
+}
+</pre>
+

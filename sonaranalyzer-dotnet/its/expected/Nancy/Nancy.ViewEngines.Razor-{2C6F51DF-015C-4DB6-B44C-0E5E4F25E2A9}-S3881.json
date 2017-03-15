@@ -1,0 +1,103 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  41
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  41
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  21,
+"endLine":  70,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  33
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  33
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  414,
+"startColumn":  21,
+"endLine":  414,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  46
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  21,
+"endLine":  62,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

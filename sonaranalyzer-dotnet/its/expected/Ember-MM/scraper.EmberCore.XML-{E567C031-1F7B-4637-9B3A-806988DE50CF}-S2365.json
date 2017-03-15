@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'Buffers' into a method, properties should not be based on arrays.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  29,
+"endLine":  72,
+"endColumn":  36
+}
+}
+}
+]
+}

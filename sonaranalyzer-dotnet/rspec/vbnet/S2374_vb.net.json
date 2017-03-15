@@ -1,0 +1,13 @@
+{
+  "title": "Signed types should be preferred to unsigned ones",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical"
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'system'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  534,
+"startColumn":  33,
+"endLine":  534,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'a'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  81,
+"endLine":  120,
+"endColumn":  82
+}
+}
+}
+]
+}

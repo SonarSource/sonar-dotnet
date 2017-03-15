@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  23,
+"endLine":  114,
+"endColumn":  44
+}
+}
+}
+]
+}

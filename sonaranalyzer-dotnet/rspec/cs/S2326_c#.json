@@ -1,0 +1,14 @@
+{
+  "title": "Unused type parameters should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cert",
+    "unused"
+  ],
+  "defaultSeverity": "Major"
+}

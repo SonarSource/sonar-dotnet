@@ -1,0 +1,16 @@
+{
+  "title": "Exceptions should not be thrown in finally blocks",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "error-handling",
+    "bug",
+    "cert",
+    "suspicious"
+  ],
+  "defaultSeverity": "Major"
+}

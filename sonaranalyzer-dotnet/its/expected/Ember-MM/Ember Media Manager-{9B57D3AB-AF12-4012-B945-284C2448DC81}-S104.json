@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S104",
+"message":  "This file has 1542 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S104",
+"message":  "This file has 4603 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+},
+{
+"id":  "S104",
+"message":  "This file has 9022 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

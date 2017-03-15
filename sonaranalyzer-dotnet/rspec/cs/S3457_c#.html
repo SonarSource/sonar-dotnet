@@ -1,0 +1,11 @@
+<p>There's no need to incur the overhead of a formatting call when the string to be formatted contains no placeholders. Instead, simply use the
+original input string.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = string.Format("some text");
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+var s = "some text";
+</pre>
+

@@ -1,0 +1,8 @@
+# SonarLint binaries
+binaries/
+
+# Actual SARIF files
+actual/
+
+# MSBuild & other output
+output/

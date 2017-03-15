@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'j'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  19,
+"endLine":  161,
+"endColumn":  22
+}
+}
+}
+]
+}

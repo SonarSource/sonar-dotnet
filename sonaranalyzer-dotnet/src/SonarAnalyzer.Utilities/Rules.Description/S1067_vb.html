@@ -1,0 +1,15 @@
+<p>Complex boolean expressions are hard to read and so to maintain.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With the default threshold value of 3</p>
+<pre>
+If ((condition1 AndAlso condition2) OrElse (condition3 AndAlso condition4)) AndAlso condition5) Then  'Noncompliant
+  ...
+End If
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+If ((MyFirstCondition() OrElse MySecondCondition()) AndAlso MyLastCondition()) Then
+  ...
+End If
+</pre>
+

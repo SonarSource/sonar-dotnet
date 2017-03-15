@@ -1,0 +1,41 @@
+<p>A <code>static</code> field that is neither constant nor read-only is not thread-safe. Correctly accessing these fields from different threads
+needs synchronization with <code>lock</code>s. Improper synchronization may lead to unexpected results, thus publicly visible static fields are best
+suited for storing non-changing data shared by many consumers. To enforce this intent, these fields should be marked <code>readonly</code> or
+converted to constants.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Math
+{
+  public static double Pi = 3.14;  // Noncompliant
+}
+</pre>
+<p>or</p>
+<pre>
+public class Shape
+{
+  public static Shape Empty = new EmptyShape();  // Noncompliant
+
+  private class EmptyShape : Shape
+  {
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Math
+{
+  public const double Pi = 3.14;
+}
+</pre>
+<p>or</p>
+<pre>
+public class Shape
+{
+  public static readonly Shape Empty = new EmptyShape();
+
+  private class EmptyShape : Shape
+  {
+  }
+}
+</pre>
+

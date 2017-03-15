@@ -1,0 +1,196 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<InvalidReq>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  30,
+"endLine":  116,
+"endColumn":  40
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  34,
+"endLine":  124,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ReqAck>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  30,
+"endLine":  260,
+"endColumn":  36
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  34,
+"endLine":  268,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  30,
+"endLine":  275,
+"endColumn":  37
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  25,
+"endLine":  284,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  30,
+"endLine":  70,
+"endColumn":  39
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  25,
+"endLine":  79,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ReqAck>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  22,
+"endLine":  176,
+"endColumn":  28
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  34,
+"endLine":  180,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<InvalidReq>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  22,
+"endLine":  187,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  34,
+"endLine":  191,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  22,
+"endLine":  215,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  25,
+"endLine":  223,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  22,
+"endLine":  262,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  270,
+"startColumn":  25,
+"endLine":  270,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Failed>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  30,
+"endLine":  18,
+"endColumn":  36
+}
+}
+}
+]
+}

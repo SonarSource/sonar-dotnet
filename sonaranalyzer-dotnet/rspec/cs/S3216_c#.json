@@ -1,0 +1,15 @@
+{
+  "title": "\"ConfigureAwait(false)\" should be used",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "multi-threading",
+    "bug",
+    "suspicious"
+  ],
+  "defaultSeverity": "Critical"
+}

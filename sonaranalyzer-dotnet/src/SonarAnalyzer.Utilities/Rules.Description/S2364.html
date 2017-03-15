@@ -1,0 +1,24 @@
+<p>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all <code>Private</code> field names match the provided
+regular expression.</p>
+<p>Note that this rule does not apply to <code>Private Shared ReadOnly</code> fields, which are checked by another rule.</p>
+<p>The default configuration is:</p>
+<ul>
+  <li> Optionally, can start with an underscore character or "s_", e.g. <em>foo, s</em>foo </li>
+  <li> Camel casing, starting with a lower case character, e.g. backColor </li>
+  <li> Short abbreviations of 2 letters can be capitalized only when not at the beginning, e.g. "id" in productID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. html </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
+<pre>
+Class Foo
+    Private Foo As Integer  ' Noncompliant
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class Foo
+    Private foo As Integer  ' Compliant
+End Class
+</pre>
+

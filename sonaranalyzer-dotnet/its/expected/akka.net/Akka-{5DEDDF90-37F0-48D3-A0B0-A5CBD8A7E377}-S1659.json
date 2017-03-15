@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'b' in a separate statement.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  29,
+"endLine":  215,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'n' in a separate statement.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  36,
+"endLine":  215,
+"endColumn":  37
+}
+}
+}
+]
+}

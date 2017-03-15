@@ -1,0 +1,604 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  21,
+"endLine":  39,
+"endColumn":  41
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  31,
+"endLine":  40,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  22,
+"endLine":  64,
+"endColumn":  37
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  25,
+"endLine":  66,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  17,
+"endLine":  204,
+"endColumn":  45
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  25,
+"endLine":  206,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  16,
+"endLine":  122,
+"endColumn":  38
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  29,
+"endLine":  124,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  20,
+"endLine":  130,
+"endColumn":  40
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  32,
+"endLine":  131,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  22,
+"endLine":  121,
+"endColumn":  50
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  36,
+"endLine":  123,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  17,
+"endLine":  94,
+"endColumn":  38
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  34,
+"endLine":  96,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  21,
+"endLine":  239,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  28,
+"endLine":  240,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  21,
+"endLine":  241,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  50,
+"endLine":  242,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  21,
+"endLine":  243,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  50,
+"endLine":  244,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  21,
+"endLine":  245,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  50,
+"endLine":  246,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  247,
+"startColumn":  21,
+"endLine":  247,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  50,
+"endLine":  248,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  21,
+"endLine":  249,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  250,
+"startColumn":  50,
+"endLine":  250,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  21,
+"endLine":  251,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  50,
+"endLine":  252,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  21,
+"endLine":  253,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  50,
+"endLine":  254,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  21,
+"endLine":  255,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  50,
+"endLine":  256,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  21,
+"endLine":  257,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  258,
+"startColumn":  50,
+"endLine":  258,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  21,
+"endLine":  259,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  50,
+"endLine":  260,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  21,
+"endLine":  261,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  262,
+"startColumn":  57,
+"endLine":  262,
+"endColumn":  69
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  21,
+"endLine":  263,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  29,
+"endLine":  264,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  219,
+"startColumn":  22,
+"endLine":  219,
+"endColumn":  52
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  32,
+"endLine":  221,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  30
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Serialization\ByteArraySerializer.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  24,
+"endLine":  55,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  21,
+"endLine":  238,
+"endColumn":  33
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  35,
+"endLine":  239,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  21,
+"endLine":  240,
+"endColumn":  35
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  35,
+"endLine":  241,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  21,
+"endLine":  242,
+"endColumn":  37
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  35,
+"endLine":  243,
+"endColumn":  49
+}
+}
+]
+}
+]
+}

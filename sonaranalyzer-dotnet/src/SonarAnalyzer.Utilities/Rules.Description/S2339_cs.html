@@ -1,0 +1,26 @@
+<p>Constant members are copied at compile time to the call sites, instead of being fetched at runtime.</p>
+<p>As an example, say you have a library with a constant <code>Version</code> member set to <code>1.0</code>, and a client application linked to it.
+This library is then updated and <code>Version</code> is set to <code>2.0</code>. Unfortunately, even after the old DLL is replaced by the new one,
+<code>Version</code> will still be <code>1.0</code> for the client application. In order to see <code>2.0</code>, the client application would need to
+be rebuilt against the new version of the library.</p>
+<p>This means that you should use constants to hold values that by definition will never change, such as <code>Zero</code>. In practice, those cases
+are uncommon, and therefore it is generally better to avoid constant members.</p>
+<p>This rule only reports issues on public constant fields, which can be reached from outside the defining assembly.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+    public const double Version = 1.0;           // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo
+{
+    public static double Version
+    {
+      get { return 1.0; }
+    }
+}
+</pre>
+

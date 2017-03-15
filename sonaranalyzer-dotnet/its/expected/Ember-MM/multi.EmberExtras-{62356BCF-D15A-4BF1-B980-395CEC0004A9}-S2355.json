@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  52,
+"endLine":  30,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  105
+}
+}
+}
+]
+}

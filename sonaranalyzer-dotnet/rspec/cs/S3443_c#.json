@@ -1,0 +1,14 @@
+{
+  "title": "Type should not be examined on \"System.Type\" instances",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "suspicious"
+  ],
+  "defaultSeverity": "Major"
+}

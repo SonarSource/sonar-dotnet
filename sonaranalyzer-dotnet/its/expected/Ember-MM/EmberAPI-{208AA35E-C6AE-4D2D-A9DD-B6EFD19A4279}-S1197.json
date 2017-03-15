@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  34,
+"startColumn":  9,
+"endLine":  34,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  25,
+"endLine":  126,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  564,
+"startColumn":  13,
+"endLine":  564,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  565,
+"startColumn":  13,
+"endLine":  565,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  576,
+"startColumn":  13,
+"endLine":  576,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  588,
+"startColumn":  13,
+"endLine":  588,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIHashing.vb",
+"region":  {
+"startLine":  98,
+"startColumn":  21,
+"endLine":  98,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  22,
+"endLine":  150,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  467,
+"startColumn":  11,
+"endLine":  467,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  481,
+"startColumn":  11,
+"endLine":  481,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"region":  {
+"startLine":  1334,
+"startColumn":  13,
+"endLine":  1334,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  150,
+"startColumn":  25,
+"endLine":  150,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  17,
+"endLine":  104,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  13,
+"endLine":  115,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  194,
+"startColumn":  17,
+"endLine":  194,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  239,
+"startColumn":  17,
+"endLine":  239,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  350,
+"startColumn":  17,
+"endLine":  350,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  288,
+"startColumn":  21,
+"endLine":  288,
+"endColumn":  32
+}
+}
+}
+]
+}

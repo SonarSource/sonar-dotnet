@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsViewRenderer.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  111,
+"endLine":  65,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  44,
+"endLine":  96,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  721,
+"startColumn":  101,
+"endLine":  721,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  90,
+"endLine":  722,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  90,
+"endLine":  723,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3148,
+"startColumn":  62,
+"endLine":  3148,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3171,
+"startColumn":  58,
+"endLine":  3171,
+"endColumn":  60
+}
+}
+}
+]
+}

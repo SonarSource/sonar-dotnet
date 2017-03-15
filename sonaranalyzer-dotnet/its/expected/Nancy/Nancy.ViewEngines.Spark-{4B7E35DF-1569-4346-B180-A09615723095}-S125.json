@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DescriptorFilterExtensions.cs",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  8
+}
+}
+}
+]
+}

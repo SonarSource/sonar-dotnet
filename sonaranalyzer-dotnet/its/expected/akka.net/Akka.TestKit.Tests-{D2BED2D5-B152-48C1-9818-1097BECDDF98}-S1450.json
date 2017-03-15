@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the '_msg' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\Logger.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  24,
+"endLine":  16,
+"endColumn":  28
+}
+}
+}
+]
+}

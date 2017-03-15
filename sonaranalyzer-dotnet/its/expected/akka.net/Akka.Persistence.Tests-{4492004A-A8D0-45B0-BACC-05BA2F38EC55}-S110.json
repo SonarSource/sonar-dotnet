@@ -1,0 +1,524 @@
+{
+"issues":  [
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  24,
+"endLine":  130,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  24,
+"endLine":  324,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  457,
+"startColumn":  20,
+"endLine":  457,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  24,
+"endLine":  122,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  24,
+"endLine":  143,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  24,
+"endLine":  165,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  24,
+"endLine":  204,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  24,
+"endLine":  242,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  24,
+"endLine":  274,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  306,
+"startColumn":  24,
+"endLine":  306,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 7 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  24,
+"endLine":  345,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  24,
+"endLine":  378,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  24,
+"endLine":  390,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  423,
+"startColumn":  24,
+"endLine":  423,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  475,
+"startColumn":  24,
+"endLine":  475,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  504,
+"startColumn":  24,
+"endLine":  504,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  536,
+"startColumn":  24,
+"endLine":  536,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  570,
+"startColumn":  24,
+"endLine":  570,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  24,
+"endLine":  599,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  628,
+"startColumn":  24,
+"endLine":  628,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  657,
+"startColumn":  24,
+"endLine":  657,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  705,
+"startColumn":  24,
+"endLine":  705,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 7 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  24,
+"endLine":  727,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  765,
+"startColumn":  24,
+"endLine":  765,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  788,
+"startColumn":  24,
+"endLine":  788,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  811,
+"startColumn":  24,
+"endLine":  811,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  836,
+"startColumn":  24,
+"endLine":  836,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  858,
+"startColumn":  24,
+"endLine":  858,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  23,
+"endLine":  168,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  23,
+"endLine":  177,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  23,
+"endLine":  186,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  23,
+"endLine":  206,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  23,
+"endLine":  227,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  23,
+"endLine":  251,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_Become.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_Become.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  23,
+"endLine":  117,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  23,
+"endLine":  67,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\SnapshotSpec.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  24,
+"endLine":  116,
+"endColumn":  47
+}
+}
+}
+]
+}

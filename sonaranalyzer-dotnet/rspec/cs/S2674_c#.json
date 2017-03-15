@@ -1,0 +1,14 @@
+{
+  "title": "The length returned from a stream read should be checked",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "bug",
+    "cert"
+  ],
+  "defaultSeverity": "Minor"
+}

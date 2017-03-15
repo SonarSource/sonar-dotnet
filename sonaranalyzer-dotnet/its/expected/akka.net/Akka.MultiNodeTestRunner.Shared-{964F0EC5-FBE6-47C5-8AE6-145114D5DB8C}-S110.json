@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\FileSystemMessageSinkActor.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  18,
+"endLine":  44,
+"endColumn":  44
+}
+}
+}
+]
+}

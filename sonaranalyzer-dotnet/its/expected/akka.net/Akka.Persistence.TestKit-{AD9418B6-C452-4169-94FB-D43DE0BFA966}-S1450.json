@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the '_senderProbe' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  27,
+"endLine":  37,
+"endColumn":  39
+}
+}
+}
+]
+}

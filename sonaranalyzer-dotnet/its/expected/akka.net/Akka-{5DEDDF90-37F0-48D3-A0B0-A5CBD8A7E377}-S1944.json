@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1944",
+"message":  "Review this cast; in this project there's no type that extends 'ActorBase' and implements 'IDisposable'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  303,
+"startColumn":  43,
+"endLine":  303,
+"endColumn":  54
+}
+}
+}
+]
+}

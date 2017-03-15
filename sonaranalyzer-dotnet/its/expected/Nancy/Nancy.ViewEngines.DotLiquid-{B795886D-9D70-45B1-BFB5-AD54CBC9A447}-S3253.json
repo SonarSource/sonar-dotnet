@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\DefaultFileSystemFactory.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  10
+}
+}
+}
+]
+}

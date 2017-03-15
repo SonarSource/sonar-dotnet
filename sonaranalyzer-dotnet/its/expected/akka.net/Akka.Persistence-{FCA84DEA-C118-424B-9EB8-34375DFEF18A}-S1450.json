@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the '_extension' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  47,
+"endLine":  20,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the '_log' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  42,
+"endLine":  138,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the '_extension' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  47,
+"endLine":  17,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the '_persistence' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\WriteJournal.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the '_extension' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  57
+}
+}
+}
+]
+}

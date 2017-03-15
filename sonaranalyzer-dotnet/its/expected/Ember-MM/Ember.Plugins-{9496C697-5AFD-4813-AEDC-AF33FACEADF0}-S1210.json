@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1210",
+"message":  "When implementing IComparable<T>, you should also override Equals, <, >, <=, >=, ==, !=.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  22,
+"endLine":  231,
+"endColumn":  33
+}
+}
+}
+]
+}

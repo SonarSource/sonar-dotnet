@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'TurnOff' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  32,
+"endLine":  40,
+"endColumn":  39
+}
+}
+}
+]
+}

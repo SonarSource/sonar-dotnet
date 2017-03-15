@@ -1,0 +1,13 @@
+{
+  "title": "Generic type parameters should be co\/contravariant when possible",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "api-design"
+  ],
+  "defaultSeverity": "Major"
+}

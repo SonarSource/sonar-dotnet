@@ -1,0 +1,22 @@
+<p>Events that are not invoked anywhere are dead code, and there's no good reason to keep them in the source.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class UninvokedEventSample
+{
+    private event Action&lt;object, EventArgs&gt; Happened; //Noncompliant
+
+    public void RegisterEventHandler(Action&lt;object, EventArgs&gt; handler)
+    {
+        Happened += handler; //we register some event handlers
+    }
+
+    public void RaiseEvent()
+    {
+        if (Happened != null)
+        {
+            // Happened(this, null); // the event is never triggered, because this line is commented out.
+        }
+    }
+}
+</pre>
+

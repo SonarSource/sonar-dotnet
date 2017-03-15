@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  29,
+"endLine":  322,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  37,
+"endColumn":  44
+}
+}
+}
+]
+}

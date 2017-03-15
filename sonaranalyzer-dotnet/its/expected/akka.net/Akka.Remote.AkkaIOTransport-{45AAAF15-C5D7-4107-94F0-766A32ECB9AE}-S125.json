@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  13,
+"endLine":  38,
+"endColumn":  52
+}
+}
+}
+]
+}

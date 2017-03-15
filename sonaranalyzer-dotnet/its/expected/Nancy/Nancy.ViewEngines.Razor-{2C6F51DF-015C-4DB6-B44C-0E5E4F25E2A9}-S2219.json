@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2219",
+"message":  "Use the 'is' operator instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  299,
+"startColumn":  17,
+"endLine":  299,
+"endColumn":  74
+}
+}
+}
+]
+}

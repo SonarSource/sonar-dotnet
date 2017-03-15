@@ -1,0 +1,18 @@
+{
+  "title": "Useless \"if(true) {...}\" and \"if(false){...}\" blocks should be removed",
+  "type": "BUG",
+  "status": "deprecated",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "cwe",
+    "bug",
+    "misra"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Major"
+}

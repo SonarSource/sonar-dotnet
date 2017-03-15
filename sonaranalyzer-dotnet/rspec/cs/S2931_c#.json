@@ -1,0 +1,18 @@
+{
+  "title": "Classes with \"IDisposable\" members should implement \"IDisposable\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "cwe",
+    "denial-of-service",
+    "bug"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Blocker"
+}

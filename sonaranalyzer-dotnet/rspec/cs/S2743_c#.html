@@ -1,0 +1,68 @@
+<p>A static field in a generic type is not shared among instances of different closed constructed types, thus
+<code>LengthLimitedSingletonCollection&lt;int&gt;.instances</code> and <code>LengthLimitedSingletonCollection&lt;string&gt;.instances</code> will
+point to different objects, even though <code>instances</code> is seemingly shared among all <code>LengthLimitedSingletonCollection&lt;&gt;</code>
+generic classes.</p>
+<p>If you need to have a static field shared among instances with different generic arguments, define a non-generic base class to store your static
+members, then set your generic type to inherit from the base class.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class LengthLimitedSingletonCollection&lt;T&gt; where T : new()
+{
+  protected const int MaxAllowedLength = 5;
+  protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;(); // Noncompliant
+
+  public static T GetInstance()
+  {
+    object instance;
+
+    if (!instances.TryGetValue(typeof(T), out instance))
+    {
+      if (instances.Count &gt;= MaxAllowedLength)
+      {
+        throw new Exception();
+      }
+      instance = new T();
+      instances.Add(typeof(T), instance);
+    }
+    return (T)instance;
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class SingletonCollectionBase
+{
+  protected static Dictionary&lt;Type, object&gt; instances = new Dictionary&lt;Type, object&gt;();
+}
+
+public class LengthLimitedSingletonCollection&lt;T&gt; : SingletonCollectionBase where T : new()
+{
+  protected const int MaxAllowedLength = 5;
+
+  public static T GetInstance()
+  {
+    object instance;
+
+    if (!instances.TryGetValue(typeof(T), out instance))
+    {
+      if (instances.Count &gt;= MaxAllowedLength)
+      {
+        throw new Exception();
+      }
+      instance = new T();
+      instances.Add(typeof(T), instance);
+    }
+    return (T)instance;
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>If the static field or property uses a type parameter, then the developer is assumed to understand that the static member is not shared among the
+closed constructed types.</p>
+<pre>
+public class Cache&lt;T&gt;
+{
+   private static Dictionary&lt;string, T&gt; CacheDictionary { get; set; } // Compliant
+}
+</pre>
+

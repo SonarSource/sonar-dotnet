@@ -1,0 +1,15 @@
+{
+  "title": "\"ToString()\" calls should not be redundant",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "bug",
+    "finding",
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor"
+}

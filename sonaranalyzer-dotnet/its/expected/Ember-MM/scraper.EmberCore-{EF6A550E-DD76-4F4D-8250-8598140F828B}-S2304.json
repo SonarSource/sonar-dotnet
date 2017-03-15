@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMPA.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  11,
+"endLine":  27,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeMPDB.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  11,
+"endLine":  27,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  11,
+"endLine":  23,
+"endColumn":  15
+}
+}
+}
+]
+}

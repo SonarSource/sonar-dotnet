@@ -1,0 +1,24 @@
+<p>Using <code>Object.ReferenceEquals</code> to compare the references of two value types simply won't return the expected results most of the time
+because such types are passed by value, not by reference.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass
+{
+  private MyStruct myStruct;
+
+  public void DoSomething(MyStruct s1) {
+    int a = 1;
+    int b = 1;
+
+    if (Object.ReferenceEquals(myStruct, s1))  // Noncompliant; this can never be true
+    {
+      // ...
+    }
+    else if (Object.ReferenceEquals(a,b)) // Noncompliant
+    {
+      // ...
+    }
+  }
+}
+</pre>
+

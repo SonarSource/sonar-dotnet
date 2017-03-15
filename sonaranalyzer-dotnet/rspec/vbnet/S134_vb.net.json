@@ -1,0 +1,13 @@
+{
+  "title": "Control flow statements \"If\", \"For\", \"For Each\", \"Do\", \"While\", \"Select\" and \"Try\" should not be nested too deeply",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "brain-overload"
+  ],
+  "defaultSeverity": "Critical"
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'PluginHolder'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  21,
+"endLine":  19,
+"endColumn":  33
+}
+}
+}
+]
+}

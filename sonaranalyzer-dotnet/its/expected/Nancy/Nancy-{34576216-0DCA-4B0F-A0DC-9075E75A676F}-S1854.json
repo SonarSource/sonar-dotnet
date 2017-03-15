@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'cookieCulture'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  34,
+"endLine":  120,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'uri'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'bytes'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  19,
+"endLine":  187,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'acc'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  318,
+"startColumn":  17,
+"endLine":  318,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'js'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  16,
+"endLine":  48,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'js'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  16,
+"endLine":  60,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'current'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3209,
+"startColumn":  39,
+"endLine":  3209,
+"endColumn":  45
+}
+}
+}
+]
+}

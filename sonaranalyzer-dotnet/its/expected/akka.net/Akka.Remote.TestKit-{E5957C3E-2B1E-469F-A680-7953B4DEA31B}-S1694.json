@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  27,
+"endLine":  29,
+"endColumn":  42
+}
+}
+}
+]
+}

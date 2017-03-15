@@ -1,0 +1,30 @@
+<p>In property and indexer <code>set</code> methods, and in event <code>add</code> and <code>remove</code> methods, the implicit <code>value</code>
+parameter holds the value the accessor was called with. Not using the <code>value</code> means that the accessor ignores the caller's intent which
+could cause unexpected results at runtime.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+private int count;
+public int Count
+{
+  get { return count; }
+  set { count = 42; } // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+private int count;
+public int Count
+{
+  get { return count; }
+  set { count = value; }
+}
+</pre>
+<p>or</p>
+<pre>
+public int Count
+{
+  get { return count; }
+  set { throw new InvalidOperationException(); }
+}
+</pre>
+

@@ -1,0 +1,21 @@
+<p>Indexed properties are meant to represent access to a logical collection. When multiple parameters are required, this design guideline may be
+violated, and refactoring the property into a method is preferable.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    ReadOnly Property Sum(ByVal a As Integer, ByVal b As Integer) ' Noncompliant
+        Get
+            Return a + b
+        End Get
+    End Property
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Function Sum(ByVal a As Integer, ByVal b As Integer)          ' Compliant
+        Return a + b
+    End Function
+End Module
+</pre>
+

@@ -1,0 +1,511 @@
+{
+"issues":  [
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  11,
+"endLine":  29,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Fanart.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  11,
+"endLine":  26,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  11,
+"endLine":  32,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  11,
+"endLine":  29,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  11,
+"endLine":  26,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Enumerators.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  11,
+"endLine":  27,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\FunctionInformation.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Include.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  11,
+"endLine":  29,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  11,
+"endLine":  37,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperEvaluation.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  11,
+"endLine":  27,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunctionContainer.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperNode.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  11,
+"endLine":  29,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\Delegates.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\Delegates.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  15,
+"endLine":  31,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  11,
+"endLine":  31,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  15,
+"endLine":  32,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  11,
+"endLine":  25,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  15,
+"endLine":  26,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperInfo.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  11,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperInfo.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  15,
+"endLine":  31,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  37,
+"startColumn":  11,
+"endLine":  37,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  15,
+"endLine":  38,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  32,
+"startColumn":  11,
+"endLine":  32,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  33,
+"startColumn":  15,
+"endLine":  33,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  11,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2304",
+"message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  11,
+"endLine":  36,
+"endColumn":  21
+}
+}
+}
+]
+}

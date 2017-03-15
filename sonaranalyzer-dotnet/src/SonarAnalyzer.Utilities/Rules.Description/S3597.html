@@ -1,0 +1,24 @@
+<p>The <code>ServiceContract</code> attribute specifies that a class or interface defines the communication contract of a Windows Communication
+Foundation (WCF) service. The service operations of this class or interface are defined by <code>OperationContract</code> attributes added to methods.
+It doesn't make sense to define a contract without any service operations; thus, in a <code>ServiceContract</code> class or interface at least one
+method should be annotated with <code>OperationContract</code>. Similarly, WCF only serves <code>OperationContract</code> methods that are defined
+inside <code>ServiceContract</code> classes or interfaces; thus, this rule also checks that <code>ServiceContract</code> is added to the containing
+type of <code>OperationContract</code> methods.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[ServiceContract]
+interface IMyService // Noncompliant
+{
+  int MyServiceMethod();
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[ServiceContract]
+interface IMyService
+{
+  [OperationContract]
+  int MyServiceMethod();
+}
+</pre>
+

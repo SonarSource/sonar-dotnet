@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Owin\AppBuilderExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  91,
+"endLine":  23,
+"endColumn":  97
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2362",
+"message":  "Rename 'MaxScraperBuffers' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  19,
+"endLine":  38,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2362",
+"message":  "Rename 'MaxScraperBuffers' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  19,
+"endLine":  39,
+"endColumn":  36
+}
+}
+}
+]
+}

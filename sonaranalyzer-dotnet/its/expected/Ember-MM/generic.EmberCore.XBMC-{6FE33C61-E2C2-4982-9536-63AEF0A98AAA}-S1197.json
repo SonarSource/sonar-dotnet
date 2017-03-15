@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  19
+}
+}
+}
+]
+}

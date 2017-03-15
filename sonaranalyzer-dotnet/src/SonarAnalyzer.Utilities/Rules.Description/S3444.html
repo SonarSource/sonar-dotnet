@@ -1,0 +1,79 @@
+<p>When an interface inherits from two interfaces that both define a member with the same name, trying to access that member through the derived
+interface will result in the compiler error <code>CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'</code>.</p>
+<p>So instead, every caller will be forced to cast instances of the derived interface to one or the other of its base interfaces to resolve the
+ambiguity and be able to access the member. Instead, it is better to resolve the ambiguity in the definition of the derived interface either by:</p>
+<ul>
+  <li> renaming the member in one of the base interfaces to remove the collision </li>
+  <li> also defining that member in the derived interface. Use this only if all copies of the member are meant to hold the same value. </li>
+</ul>
+<p> </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public interface IBase1
+{
+  string SomeProperty { get; set; }
+}
+
+public interface IBase2
+{
+  string SomeProperty { get; set; }
+}
+
+public interface IDerived : IBase1, IBase2 // Noncompliant, accessing IDerived.SomeProperty is ambiguous
+{
+}
+
+public class MyClass : IDerived
+{
+  // Implements both IBase1.SomeProperty and IBase2.SomeProperty
+  public string SomeProperty { get; set; } = "Hello";
+
+  public static void Main()
+  {
+    MyClass myClass = new MyClass();
+    Console.WriteLine(myClass.SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase1)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IDerived)myClass).SomeProperty); // Error CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public interface IDerived : IBase1, IBase2
+{
+  new string SomeProperty { get; set; }
+}
+
+public class MyClass : IDerived
+{
+  // Implements IBase1.SomeProperty, IBase2.SomeProperty and IDerived.SomeProperty
+  public string SomeProperty { get; set; } = "Hello";
+
+  public static void Main()
+  {
+    MyClass myClass = new MyClass();
+    Console.WriteLine(myClass.SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase1)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IBase2)myClass).SomeProperty); // Writes "Hello" as expected
+    Console.WriteLine(((IDerived)myClass).SomeProperty); // Writes "Hello" as expected
+  }
+}
+</pre>
+<p>or</p>
+<pre>
+public interface IBase1
+{
+  string SomePropertyOne { get; set; }
+}
+
+public interface IBase2
+{
+  string SomePropertyTwo { get; set; }
+}
+
+public interface IDerived : IBase1, IBase2
+{
+}
+</pre>
+

@@ -1,0 +1,15 @@
+{
+  "title": "Method parameters and caught exceptions should not be reassigned",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "misra",
+    "pitfall"
+  ],
+  "defaultSeverity": "Minor"
+}

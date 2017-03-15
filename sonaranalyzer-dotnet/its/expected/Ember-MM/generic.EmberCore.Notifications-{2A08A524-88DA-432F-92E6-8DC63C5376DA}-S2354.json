@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  51,
+"endLine":  132,
+"endColumn":  52
+}
+}
+}
+]
+}

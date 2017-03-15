@@ -1,0 +1,28 @@
+<p><code>StringBuilder</code> is more efficient than string concatenation, especially when the operator is repeated over and over as in loops.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo = ""
+        foo &amp;= "Result: "       ' Compliant - outside of loop
+
+        For i = 1 To 9
+            foo &amp;= i            ' Noncompliant
+        Next
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim foo = New System.Text.StringBuilder
+        foo.Append("Result: ")  ' Compliant
+
+        For i = 1 To 9
+            foo.Append(i)       ' Compliant
+        Next
+    End Sub
+End Module
+</pre>
+

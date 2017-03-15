@@ -1,0 +1,329 @@
+{
+"issues":  [
+{
+"id":  "S2364",
+"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  14,
+"startColumn":  10,
+"endLine":  14,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_ID' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  167,
+"startColumn":  11,
+"endLine":  167,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_CollectionNumber' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  168,
+"startColumn":  11,
+"endLine":  168,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Type' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  169,
+"startColumn":  11,
+"endLine":  169,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_LocalTitle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  170,
+"startColumn":  11,
+"endLine":  170,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_OriginalTitle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  11,
+"endLine":  171,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_SortTitle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  11,
+"endLine":  172,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_ForcedTitle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  173,
+"startColumn":  11,
+"endLine":  173,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_IMDBrating' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  174,
+"startColumn":  11,
+"endLine":  174,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_ProductionYear' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  11,
+"endLine":  175,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Added' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  11,
+"endLine":  178,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_IMDbId' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  179,
+"startColumn":  11,
+"endLine":  179,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_RunningTime' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  11,
+"endLine":  180,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_TMDbId' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  181,
+"startColumn":  11,
+"endLine":  181,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Studios' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  182,
+"startColumn":  11,
+"endLine":  182,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_CDUniverseId' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  183,
+"startColumn":  11,
+"endLine":  183,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Persons' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  184,
+"startColumn":  11,
+"endLine":  184,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Genres' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  11,
+"endLine":  185,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Description' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  11,
+"endLine":  186,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_AudioTracks' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  187,
+"startColumn":  11,
+"endLine":  187,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_Subtitles' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  188,
+"startColumn":  11,
+"endLine":  188,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_MPAARating' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  11,
+"endLine":  189,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename 'fYAMJ' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  8,
+"startColumn":  10,
+"endLine":  8,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S2364",
+"message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  11,
+"startColumn":  10,
+"endLine":  11,
+"endColumn":  23
+}
+}
+}
+]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "\"[DefaultValue]\" should not be used when \"[DefaultParameterValue]\" is meant",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "bug",
+    "suspicious"
+  ],
+  "defaultSeverity": "Major"
+}

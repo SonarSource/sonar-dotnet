@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 209 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  1,
+"endLine":  112,
+"endColumn":  210
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 204 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  1,
+"endLine":  207,
+"endColumn":  205
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 247 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  139,
+"startColumn":  1,
+"endLine":  139,
+"endColumn":  248
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 323 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  143,
+"startColumn":  1,
+"endLine":  143,
+"endColumn":  324
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 323 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  1,
+"endLine":  147,
+"endColumn":  324
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 276 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  1,
+"endLine":  209,
+"endColumn":  277
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 292 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  218,
+"startColumn":  1,
+"endLine":  218,
+"endColumn":  293
+}
+}
+}
+]
+}

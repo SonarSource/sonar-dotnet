@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserDefaultsFixture.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  28,
+"endLine":  172,
+"endColumn":  43
+}
+}
+}
+]
+}

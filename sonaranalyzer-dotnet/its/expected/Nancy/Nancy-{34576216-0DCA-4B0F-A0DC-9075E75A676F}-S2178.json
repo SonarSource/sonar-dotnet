@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  74,
+"endLine":  24,
+"endColumn":  75
+}
+}
+}
+]
+}

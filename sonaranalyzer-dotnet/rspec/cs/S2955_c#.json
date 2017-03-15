@@ -1,0 +1,13 @@
+{
+  "title": "Generic parameters not constrained to reference types should not be compared to \"null\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Minor"
+}

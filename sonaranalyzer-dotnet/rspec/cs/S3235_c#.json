@@ -1,0 +1,15 @@
+{
+  "title": "Redundant parentheses should not be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "cert",
+    "unused",
+    "finding"
+  ],
+  "defaultSeverity": "Minor"
+}

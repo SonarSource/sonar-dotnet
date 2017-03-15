@@ -1,0 +1,15 @@
+{
+  "title": "Exceptions should not be explicitly rethrown",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "error-handling",
+    "bug",
+    "confusing"
+  ],
+  "defaultSeverity": "Major"
+}

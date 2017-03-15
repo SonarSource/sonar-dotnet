@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3904",
+"message":  "Provide an 'AssemblyVersion' attribute for this assembly.",
+"location":  null
+}
+]
+}

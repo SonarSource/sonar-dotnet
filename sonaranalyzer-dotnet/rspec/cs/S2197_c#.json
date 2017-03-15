@@ -1,0 +1,15 @@
+{
+  "title": "Modulus results should not be checked for direct equality",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "cert",
+    "suspicious"
+  ],
+  "defaultSeverity": "Minor"
+}

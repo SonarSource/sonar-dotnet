@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  32,
+"endLine":  28,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  32,
+"endLine":  29,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  26,
+"endLine":  64,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  26,
+"endLine":  65,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  26,
+"endLine":  66,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  26,
+"endLine":  67,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  26,
+"endLine":  68,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  26,
+"endLine":  69,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  27,
+"endLine":  184,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  31,
+"endLine":  196,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemTests.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  45,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  88,
+"endLine":  173,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  86,
+"endLine":  174,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  83,
+"endLine":  176,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  55,
+"endLine":  228,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  55,
+"endLine":  230,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  48,
+"endLine":  313,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  96,
+"endLine":  32,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  87,
+"endLine":  30,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  86,
+"endLine":  38,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"region":  {
+"startLine":  300,
+"startColumn":  53,
+"endLine":  300,
+"endColumn":  55
+}
+}
+}
+]
+}

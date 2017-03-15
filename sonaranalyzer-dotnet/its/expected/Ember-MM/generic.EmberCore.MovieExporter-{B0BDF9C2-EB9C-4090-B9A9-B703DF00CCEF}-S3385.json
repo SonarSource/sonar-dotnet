@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  219,
+"startColumn":  33,
+"endLine":  219,
+"endColumn":  41
+}
+}
+}
+]
+}

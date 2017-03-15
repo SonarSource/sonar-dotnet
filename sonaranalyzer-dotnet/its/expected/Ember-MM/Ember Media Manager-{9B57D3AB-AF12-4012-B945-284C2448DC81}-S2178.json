@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3169,
+"startColumn":  46,
+"endLine":  3169,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3491,
+"startColumn":  46,
+"endLine":  3491,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  3776,
+"startColumn":  46,
+"endLine":  3776,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this 'And' to 'AndAlso'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4043,
+"startColumn":  46,
+"endLine":  4043,
+"endColumn":  49
+}
+}
+}
+]
+}

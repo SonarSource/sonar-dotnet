@@ -1,0 +1,12 @@
+<p>Numbers can be shifted with the <code>&lt;&lt;</code> and <code>&gt;&gt;</code> operators, but the right operand of the operation needs to be an
+<code>int</code> or a type that has an implicit conversion to <code>int</code>. However, with <code>dynamic</code>, the compiler's type checking is
+turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to <code>int</code> at runtime,
+then a <code>RuntimeBinderException</code> will be raised.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+dynamic d = 5;
+var x = d &gt;&gt; 5.4; // Noncompliant
+x = d &gt;&gt; null; // Noncompliant
+x &lt;&lt;= new object(); // Noncompliant
+</pre>
+

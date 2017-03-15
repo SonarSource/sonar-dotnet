@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2328",
+"message":  "Remove this use of 'Data' from the 'GetHashCode' declaration, or make it 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2328",
+"message":  "Remove this use of 'ConverterData' from the 'GetHashCode' declaration, or make it 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  11,
+"endLine":  33,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2328",
+"message":  "Remove this use of 'PrimitiveConverterData' from the 'GetHashCode' declaration, or make it 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  41,
+"endLine":  33,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2328",
+"message":  "Remove this use of 'Data' from the 'GetHashCode' declaration, or make it 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  20
+}
+}
+}
+]
+}

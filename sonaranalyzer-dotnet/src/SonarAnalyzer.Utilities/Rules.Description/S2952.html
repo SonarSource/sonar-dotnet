@@ -1,0 +1,53 @@
+<p>It is possible in an <code>IDisposable</code> to call <code>Dispose</code> on class members from any method, but the contract of
+<code>Dispose</code> is that it will clean up all unmanaged resources. Move disposing of members to some other method, and you risk resource
+leaks.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class ResourceHolder : IDisposable
+{
+  private FileStream fs;
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+  public void CloseResource()
+  {
+    this.fs.Close();
+  }
+
+  public void CleanUp()
+  {
+    this.fs.Dispose(); // Noncompliant; Dispose not called in class' Dispose method
+  }
+
+  public void Dispose()
+  {
+    // method added to satisfy demands of interface
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class ResourceHolder : IDisposable
+{
+  private FileStream fs;
+  public void OpenResource(string path)
+  {
+    this.fs = new FileStream(path, FileMode.Open);
+  }
+  public void CloseResource()
+  {
+    this.fs.Close();
+  }
+
+  public void Dispose()
+  {
+    this.fs.Dispose();
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/459.html">MITRE, CWE-459</a> - Incomplete Cleanup </li>
+</ul>
+

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Hosting.Self\Program.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  18
+}
+}
+}
+]
+}

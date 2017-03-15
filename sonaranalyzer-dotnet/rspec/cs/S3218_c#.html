@@ -1,0 +1,56 @@
+<p>It's possible to name the members of an inner class the same as the <code>static</code> members of its enclosing class - possible, but a bad idea.
+That's because maintainers may be confused about which members are being used where. Instead the inner class' members should be renamed and all the
+references updated.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int A; //Noncompliant
+    public int MyProp
+    {
+      get { return A; }  // Returns inner A. Was that intended?
+    }
+  }
+}
+</pre>
+<p>After a rename</p>
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int B;
+    public int MyProp
+    {
+      get { return A; }  // Still compiles and runs but functionality has changed
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class Outer
+{
+  public static int A;
+
+  public class Inner
+  {
+    public int InnerA;
+    public int MyProp
+    {
+      get { return InnerA; }
+    }
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/2ADEAw">CERT, DCL51-J.</a> - Do not shadow or obscure identifiers in subscopes </li>
+</ul>
+

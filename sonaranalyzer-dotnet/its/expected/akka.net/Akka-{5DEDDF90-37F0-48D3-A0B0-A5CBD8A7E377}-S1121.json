@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_until' from this expression.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  32,
+"endLine":  55,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_head' from this expression.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  27,
+"endLine":  245,
+"endColumn":  28
+}
+}
+}
+]
+}

@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 244 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  245
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 216 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  1,
+"endLine":  282,
+"endColumn":  217
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 206 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  283,
+"startColumn":  1,
+"endLine":  283,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 201 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 222 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  1,
+"endLine":  80,
+"endColumn":  223
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 228 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  1,
+"endLine":  141,
+"endColumn":  229
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 337 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  1,
+"endLine":  178,
+"endColumn":  338
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 263 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  258,
+"startColumn":  1,
+"endLine":  258,
+"endColumn":  264
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 231 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  337,
+"startColumn":  1,
+"endLine":  337,
+"endColumn":  232
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 235 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  1,
+"endLine":  340,
+"endColumn":  236
+}
+}
+}
+]
+}

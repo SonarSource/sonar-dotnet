@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Authentication.Forms\FormsAuthBootstrapper.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  53,
+"endLine":  34,
+"endColumn":  55
+}
+}
+}
+]
+}

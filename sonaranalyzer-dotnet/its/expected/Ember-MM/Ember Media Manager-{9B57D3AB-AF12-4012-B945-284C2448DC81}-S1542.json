@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Populate_FileList' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  155,
+"startColumn":  17,
+"endLine":  155,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SelectMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1121,
+"startColumn":  17,
+"endLine":  1121,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SelectMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  668,
+"startColumn":  17,
+"endLine":  668,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2605,
+"startColumn":  17,
+"endLine":  2605,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSetupChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2609,
+"startColumn":  17,
+"endLine":  2609,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'createGenreThumbs' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2797,
+"startColumn":  17,
+"endLine":  2797,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'dtListUpdate' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4195,
+"startColumn":  9,
+"endLine":  4195,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'fillScreenInfoWithEpisode' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4488,
+"startColumn":  17,
+"endLine":  4488,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'fillScreenInfoWithMovie' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4646,
+"startColumn":  17,
+"endLine":  4646,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'fillScreenInfoWithSeason' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4840,
+"startColumn":  17,
+"endLine":  4840,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'fillScreenInfoWithShow' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  4983,
+"startColumn":  17,
+"endLine":  4983,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Mono_Shown' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6324,
+"startColumn":  17,
+"endLine":  6324,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'MoveMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6343,
+"startColumn":  17,
+"endLine":  6343,
+"endColumn":  25
+}
+}
+}
+]
+}

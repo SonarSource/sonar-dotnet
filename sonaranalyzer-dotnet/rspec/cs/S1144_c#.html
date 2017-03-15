@@ -1,0 +1,35 @@
+<p>Private types or members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out
+dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+  private void UnusedPrivateMethod() {...} // Noncompliant
+
+  private class UnusedClass {...} // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo
+{
+  private Foo()
+  {
+    UsedPrivateMethod();
+  }
+
+  private void UsedPrivateMethod()
+  {
+    var c = new UsedClass();
+  }
+
+  private class UsedClass {...}
+}
+</pre>
+<h2>Exceptions</h2>
+<p>This rule doesn't raise any issue on empty constructors and attributed members.</p>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/OYIyAQ">CERT, MSC07-CPP.</a> - Detect and remove dead code </li>
+</ul>
+

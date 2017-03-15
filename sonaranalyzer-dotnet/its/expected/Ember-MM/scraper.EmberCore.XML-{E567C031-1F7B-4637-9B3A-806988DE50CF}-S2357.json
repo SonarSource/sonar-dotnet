@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'pURL' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  306,
+"startColumn":  13,
+"endLine":  306,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Result' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  13,
+"endLine":  316,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'bType' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  340,
+"startColumn":  13,
+"endLine":  340,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Parameter' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"region":  {
+"startLine":  341,
+"startColumn":  13,
+"endLine":  341,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'parentRunning' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'parentRunning' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  12,
+"endLine":  27,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'DBMovie' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'pContent' private.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  28
+}
+}
+}
+]
+}

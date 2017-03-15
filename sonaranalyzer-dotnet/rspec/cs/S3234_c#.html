@@ -1,0 +1,26 @@
+<p><code>GC.SuppressFinalize</code> asks the Common Language Runtime not to call the finalizer of an object. This is useful when implementing the
+dispose pattern where object finalization is already handled in <code>IDisposable.Dispose</code>. However, it has no effect if there is no finalizer
+defined in the object's type, so using it in such cases is just confusing.</p>
+<p>This rule raises an issue when <code>GC.SuppressFinalize</code> is called for objects of <code>sealed</code> types without a finalizer.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+sealed class MyClass
+{
+  public void Method()
+  {
+    ...
+    GC.SuppressFinalize(this); //Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+sealed class MyClass
+{
+  public void Method()
+  {
+    ...
+  }
+}
+</pre>
+

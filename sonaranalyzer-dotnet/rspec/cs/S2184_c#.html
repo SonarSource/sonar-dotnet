@@ -1,0 +1,38 @@
+<p>When division is performed on <code>int</code>s, the result will always be an <code>int</code>. You can assign that result to a
+<code>double</code>, <code>float</code> or <code>decimal</code> with automatic type conversion, but having started as an <code>int</code>, the result
+will likely not be what you expect. If the result of <code>int</code> division is assigned to a floating-point variable, precision will have been lost
+before the assignment. Instead, at least one operand should be cast or promoted to the final type before the operation takes place.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+static void Main()
+{
+  decimal dec = 3/2; // Noncompliant
+  Method(3/2); // Noncompliant
+}
+
+static void Method(float f) { }
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+static void Main()
+{
+  decimal dec = (decimal)3/2;
+  Method(3.0F/2);
+}
+
+static void Method(float f) { }
+</pre>
+<h2>See</h2>
+<ul>
+  <li> MISRA C++:2008, 5-0-8 - An explicit integral or floating-point conversion shall not increase the size of the underlying type of a cvalue
+  expression. </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/190">MITRE, CWE-190</a> - Integer Overflow or Wraparound </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/woIyAQ">CERT, NUM50-J.</a> - Convert integers to floating point for floating-point
+  operations </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/AxE">CERT, INT18-C.</a> - Evaluate integer expressions in a larger size before
+  comparing or assigning to that size </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/1IAyAQ">CERT, INT18-CPP.</a> - Evaluate integer expressions in a larger size before
+  comparing or assigning to that size </li>
+  <li> <a href="http://www.sans.org/top25-software-errors/">SANS Top 25</a> - Risky Resource Management </li>
+</ul>
+

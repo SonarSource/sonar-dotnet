@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  21,
+"endLine":  13,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  34,
+"endLine":  14,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  38,
+"endLine":  11,
+"endColumn":  66
+}
+}
+}
+]
+}

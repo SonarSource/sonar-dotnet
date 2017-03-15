@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  1
+}
+}
+}
+]
+}

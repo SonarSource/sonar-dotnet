@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3256",
+"message":  "Use 'string.IsNullOrEmpty()' instead of comparing to empty string.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  24,
+"endLine":  113,
+"endColumn":  61
+}
+}
+}
+]
+}

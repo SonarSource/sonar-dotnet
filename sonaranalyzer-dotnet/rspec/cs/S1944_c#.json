@@ -1,0 +1,20 @@
+{
+  "title": "Inappropriate casts should not be made",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "cwe",
+    "bug",
+    "misra",
+    "cert",
+    "pitfall"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Critical"
+}

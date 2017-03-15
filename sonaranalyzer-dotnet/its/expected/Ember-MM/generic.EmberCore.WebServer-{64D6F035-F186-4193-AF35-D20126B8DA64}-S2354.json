@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  28,
+"endLine":  31,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  34,
+"startColumn":  35,
+"endLine":  34,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  25,
+"endLine":  36,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2354",
+"message":  "Reformat the code to remove this use of the line continuation character.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  28,
+"endLine":  39,
+"endColumn":  29
+}
+}
+}
+]
+}

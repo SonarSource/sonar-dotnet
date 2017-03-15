@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  57,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  27,
+"endLine":  11,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  27,
+"endLine":  10,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  27,
+"endLine":  3,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to an interface.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JavaScriptPrimitiveConverter.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  27,
+"endLine":  6,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NancyModule.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  38
+}
+}
+}
+]
+}

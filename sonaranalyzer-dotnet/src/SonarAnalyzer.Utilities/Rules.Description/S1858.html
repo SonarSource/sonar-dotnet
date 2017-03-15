@@ -1,0 +1,30 @@
+<p>Invoking a method designed to return a string representation of an object which is already a string is a waste of keystrokes. Similarly, explicitly
+invoking <code>ToString()</code> when the compiler would do it implicitly is also needless code-bloat.</p>
+<p>This rule raises an issue when <code>ToString()</code> is invoked:</p>
+<ul>
+  <li> on a <code>string</code> </li>
+  <li> on a non-<code>string</code> operand to concatenation </li>
+  <li> on an argument to <code>string.Format</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s.ToString();  // Noncompliant
+var someObject = new object();
+var u = "" + someObject.ToString(); // Noncompliant
+var v = string.Format("{0}", someObject.ToString()); // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+var s = "foo";
+var t = "fee fie foe " + s;
+var someObject = new object();
+var u = "" + someObject;
+var v = string.Format("{0}", someObject);
+</pre>
+<h2>Exceptions</h2>
+<p>The rule does not report on value types, where leaving off the <code>ToString()</code> call would result in automatic boxing.</p>
+<pre>
+var v = string.Format("{0}", 1.ToString());
+</pre>
+

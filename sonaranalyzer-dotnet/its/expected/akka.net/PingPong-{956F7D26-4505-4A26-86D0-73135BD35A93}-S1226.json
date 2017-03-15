@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'bestThroughput'.",
+"location":  {
+"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  17,
+"endLine":  212,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'redCount'.",
+"location":  {
+"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  17,
+"endLine":  213,
+"endColumn":  25
+}
+}
+}
+]
+}

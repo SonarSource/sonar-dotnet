@@ -1,0 +1,30 @@
+<p>Using the <code>readonly</code> keyword on a field means that it can't be changed after initialization. However, when applied to collections or
+arrays, that's only partly true. <code>readonly</code> enforces that another instance can't be assigned to the field, but it cannot keep the contents
+from being updated. That means that in practice, the field value really can be changed, and the use of <code>readonly</code> on such a field is
+misleading, and you're likely to not be getting the behavior you expect.</p>
+<p>This rule raises an issue when a non-private, <code>readonly</code> field is an array or collection.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass
+{
+  public readonly string[] strings;  // Noncompliant
+
+  // ...
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass
+{
+  public string[] strings;
+
+  // ...
+</pre>
+<p>or</p>
+<pre>
+public class MyClass
+{
+  private readonly string[] strings;
+
+  // ...
+</pre>
+

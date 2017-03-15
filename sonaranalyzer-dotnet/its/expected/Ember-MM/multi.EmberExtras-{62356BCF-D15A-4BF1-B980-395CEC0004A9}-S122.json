@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  253,
+"startColumn":  17,
+"endLine":  253,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  3,
+"endLine":  84,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  85,
+"startColumn":  9,
+"endLine":  85,
+"endColumn":  73
+}
+}
+}
+]
+}

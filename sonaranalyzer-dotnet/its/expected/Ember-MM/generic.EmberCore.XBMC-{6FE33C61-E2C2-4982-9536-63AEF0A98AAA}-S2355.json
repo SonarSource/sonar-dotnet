@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  232,
+"startColumn":  70,
+"endLine":  232,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  55,
+"endLine":  80,
+"endColumn":  222
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  414,
+"startColumn":  25,
+"endLine":  414,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"region":  {
+"startLine":  416,
+"startColumn":  65,
+"endLine":  416,
+"endColumn":  90
+}
+}
+}
+]
+}

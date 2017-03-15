@@ -1,0 +1,33 @@
+<p>Visual Basic .NET, unlike many other programming languages, has no "fall-through" for its <code>Select</code> cases. Each case already has an
+implicit <code>Exit Select</code> as its last instruction. It therefore is redundant to explicitly add one.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+  Sub Main()
+    Dim x = 0
+    Select Case x
+      Case 0
+        Console.WriteLine("0")
+        Exit Select                ' Noncompliant
+      Case Else
+        Console.WriteLine("Not 0")
+        Exit Select                ' Noncompliant
+    End Select
+  End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+  Sub Main()
+    Dim x = 0
+    Select Case x
+      Case 0                         ' Compliant
+        Console.WriteLine("0")
+      Case Else                      ' Compliant
+        Console.WriteLine("Not 0")
+    End Select
+  End Sub
+End Module
+</pre>
+

@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make this IP '192.168.107.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  54,
+"endLine":  131,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  26,
+"endLine":  261,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  92,
+"endLine":  37,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  92,
+"endLine":  53,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  95,
+"endLine":  74,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  95,
+"endLine":  75,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  1020,
+"startColumn":  75,
+"endLine":  1020,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  1031,
+"startColumn":  113,
+"endLine":  1031,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '192.0.2.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  59,
+"endLine":  197,
+"endColumn":  70
+}
+}
+}
+]
+}

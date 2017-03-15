@@ -1,0 +1,17 @@
+<p>"After" and "Before" prefixes or suffixes should not be used to indicate pre and post events. The concepts of before and after should be given to
+events using the present and past tense.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Class Foo
+    Event BeforeClose() ' Noncompliant
+    Event AfterClose()  ' Noncompliant
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class Foo
+    Event Closing()     ' Compliant
+    Event Closed()      ' Compliant
+End Class
+</pre>
+

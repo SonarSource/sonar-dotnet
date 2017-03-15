@@ -1,0 +1,29 @@
+<p>In most cases, indexed properties should be named Item for consistency. Exceptions are when there exists a name which is obviously better, for
+example <code>System.String.Chars(System.Int32)</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Dim array = {"apple", "banana", "orange", "strawberry"}
+
+    ReadOnly Property Foo(ByVal index As Integer)  ' Noncompliant
+        Get
+            Return array(index)
+        End Get
+    End Property
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Dim array = {"apple", "banana", "orange", "strawberry"}
+
+    ReadOnly Property Item(ByVal index As Integer)
+        Get
+            Return array(index)
+        End Get
+    End Property
+End Module
+</pre>
+<h2>Deprecated</h2>
+<p>This rule is deprecated, and will eventually be removed.</p>
+

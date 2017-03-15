@@ -1,0 +1,32 @@
+<p>Prefer the use of <code>Try ... Catch</code> blocks instead of <code>On Error</code> statements.</p>
+<p>Visual Basic .NET and Visual Basic 2005 offer structured exception handling that provides a powerful, more readable alternative to the <code>On
+Error Goto</code> error handling from previous versions of Microsoft Visual Basic. Structured exception handling is more powerful because it allows
+you to nest error handlers inside other error handlers within the same procedure. Furthermore, structured exception handling uses a block syntax
+similar to the <code>If...Else...End If</code> statement. This makes Visual Basic .NET and Visual Basic 2005 code more readable and easier to
+maintain.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Sub DivideByZero()
+  On Error GoTo nextstep
+  Dim result As Integer
+  Dim num As Integer
+  num = 100
+  result = num / 0
+nextstep:
+  System.Console.WriteLine("Error")
+End Sub
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Sub DivideByZero()
+  Try
+    Dim result As Integer
+    Dim num As Integer
+    num = 100
+    result = num / 0
+  Catch
+    System.Console.WriteLine("Error")
+  End Try
+End Sub
+</pre>
+

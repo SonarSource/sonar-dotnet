@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  48,
+"endLine":  292,
+"endColumn":  57
+}
+}
+}
+]
+}

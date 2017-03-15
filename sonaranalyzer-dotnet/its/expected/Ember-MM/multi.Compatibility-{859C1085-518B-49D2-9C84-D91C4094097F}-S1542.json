@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  14,
+"endLine":  83,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_SetupChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  87,
+"startColumn":  14,
+"endLine":  87,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  92,
+"startColumn":  14,
+"endLine":  92,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_SetupChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  14,
+"endLine":  96,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  14,
+"endLine":  96,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_SetupChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  14,
+"endLine":  100,
+"endColumn":  33
+}
+}
+}
+]
+}

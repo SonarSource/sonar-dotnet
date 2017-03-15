@@ -1,0 +1,31 @@
+<p><code>enum</code>s are usually used to identify distinct elements in a set of values. However <code>enum</code>s can be treated as bit fields and
+bitwise operations can be used on them to combine the values. This is a good way of specifying multiple elements of set with a single value. When
+<code>enum</code>s are used this way, it is a best practice to mark the <code>enum</code> with the <code>FlagsAttribute</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+enum Permissions
+{
+  None = 0,
+  Read = 1,
+  Write = 2,
+  Execute = 4
+}
+// ...
+
+var x = Permissions.Read | Permissions.Write;  // Noncompliant; enum is not marked with [Flags]
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[Flags]
+enum Permissions
+{
+  None = 0,
+  Read = 1,
+  Write = 2,
+  Execute = 4
+}
+// ...
+
+var x = Permissions.Read | Permissions.Write;
+</pre>
+

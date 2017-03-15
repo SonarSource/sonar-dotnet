@@ -1,0 +1,14 @@
+{
+  "title": "Multiple \"OrderBy\" calls should not be used",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "performance",
+    "bug"
+  ],
+  "defaultSeverity": "Minor"
+}

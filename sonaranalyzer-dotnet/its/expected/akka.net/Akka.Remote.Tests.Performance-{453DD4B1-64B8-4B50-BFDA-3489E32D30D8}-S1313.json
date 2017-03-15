@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  89,
+"endLine":  70,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  89,
+"endLine":  73,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  153,
+"endLine":  74,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make this IP '127.0.0.1' address configurable.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  153,
+"endLine":  77,
+"endColumn":  164
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"region":  {
+"startLine":  31,
+"startColumn":  46,
+"endLine":  31,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"region":  {
+"startLine":  38,
+"startColumn":  46,
+"endLine":  38,
+"endColumn":  184
+}
+}
+},
+{
+"id":  "S2355",
+"message":  "Use an array literal here instead.",
+"location":  {
+"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  46,
+"endLine":  48,
+"endColumn":  180
+}
+}
+}
+]
+}

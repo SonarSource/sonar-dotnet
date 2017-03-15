@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3881",
+"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  18,
+"endLine":  26,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  18,
+"endLine":  26,
+"endColumn":  27
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

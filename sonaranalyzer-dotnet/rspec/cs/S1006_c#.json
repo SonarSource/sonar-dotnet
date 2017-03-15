@@ -1,0 +1,15 @@
+{
+  "title": "Method overrides should not change parameter defaults",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "misra",
+    "cert",
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical"
+}

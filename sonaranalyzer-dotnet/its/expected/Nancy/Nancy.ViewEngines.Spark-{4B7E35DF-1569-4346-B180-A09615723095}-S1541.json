@@ -1,0 +1,118 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  30,
+"endLine":  73,
+"endColumn":  36
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  30,
+"endLine":  73,
+"endColumn":  36
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  30,
+"endLine":  77,
+"endColumn":  32
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  13,
+"endLine":  82,
+"endColumn":  15
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  61,
+"endLine":  85,
+"endColumn":  63
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  61,
+"endLine":  84,
+"endColumn":  63
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  57,
+"endLine":  83,
+"endColumn":  59
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  57,
+"endLine":  82,
+"endColumn":  59
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  13,
+"endLine":  91,
+"endColumn":  20
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  17,
+"endLine":  94,
+"endColumn":  19
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  64,
+"endLine":  94,
+"endColumn":  66
+}
+}
+]
+}
+]
+}

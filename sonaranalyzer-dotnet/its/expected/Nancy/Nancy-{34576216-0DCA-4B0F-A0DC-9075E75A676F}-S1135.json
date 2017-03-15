@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  16,
+"endLine":  252,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  12,
+"endLine":  54,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  405,
+"startColumn":  16,
+"endLine":  405,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NancyContext.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  16,
+"endLine":  34,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  16,
+"endLine":  135,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  12,
+"endLine":  7,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  16,
+"endLine":  48,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3147,
+"startColumn":  16,
+"endLine":  3147,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3170,
+"startColumn":  16,
+"endLine":  3170,
+"endColumn":  20
+}
+}
+}
+]
+}

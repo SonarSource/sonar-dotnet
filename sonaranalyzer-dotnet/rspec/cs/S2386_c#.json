@@ -1,0 +1,19 @@
+{
+  "title": "Mutable fields should not be \"public static\"",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "cwe",
+    "security",
+    "unpredictable",
+    "cert"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Minor"
+}

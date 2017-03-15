@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  39,
+"endLine":  151,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  658,
+"startColumn":  25,
+"endLine":  658,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  644,
+"startColumn":  33,
+"endLine":  644,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"region":  {
+"startLine":  830,
+"startColumn":  29,
+"endLine":  830,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunctionContainer.vb",
+"region":  {
+"startLine":  132,
+"startColumn":  25,
+"endLine":  132,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  25,
+"endLine":  79,
+"endColumn":  33
+}
+}
+}
+]
+}

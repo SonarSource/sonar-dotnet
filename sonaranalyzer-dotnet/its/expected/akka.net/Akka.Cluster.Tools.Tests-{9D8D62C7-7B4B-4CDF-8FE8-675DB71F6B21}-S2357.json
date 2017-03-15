@@ -1,0 +1,524 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Client' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  34,
+"endLine":  26,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'First' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  34,
+"endLine":  27,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Second' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  34,
+"endLine":  28,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Third' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Fourth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  34,
+"endLine":  30,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'First' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  34,
+"endLine":  25,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Second' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  34,
+"endLine":  26,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Third' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  34,
+"endLine":  27,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Path' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  36,
+"endLine":  56,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Message' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  36,
+"endLine":  57,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Path' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  36,
+"endLine":  69,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Message' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  36,
+"endLine":  70,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Path' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  36,
+"endLine":  82,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Message' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  36,
+"endLine":  83,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Topic' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  36,
+"endLine":  95,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Message' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  36,
+"endLine":  96,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Topic' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  36,
+"endLine":  108,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Message' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  36,
+"endLine":  109,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Topic' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  36,
+"endLine":  121,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Group' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  36,
+"endLine":  122,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Topic' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  36,
+"endLine":  134,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Group' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  36,
+"endLine":  135,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Controller' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  34,
+"endLine":  40,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'First' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  34,
+"endLine":  41,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Second' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  34,
+"endLine":  42,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Third' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  34,
+"endLine":  43,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Fourth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  34,
+"endLine":  44,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Fifth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  34,
+"endLine":  45,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Sixth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  34,
+"endLine":  46,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'First' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  34,
+"endLine":  21,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Second' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  34,
+"endLine":  22,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Third' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  34,
+"endLine":  23,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Controller' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  34,
+"endLine":  25,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Observer' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  34,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'First' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  34,
+"endLine":  27,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Second' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  34,
+"endLine":  28,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Third' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Fourth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  34,
+"endLine":  30,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Fifth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  34,
+"endLine":  31,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Sixth' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  34,
+"endLine":  32,
+"endColumn":  39
+}
+}
+}
+]
+}

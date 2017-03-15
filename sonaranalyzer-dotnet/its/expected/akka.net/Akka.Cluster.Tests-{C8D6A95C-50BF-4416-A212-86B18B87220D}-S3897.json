@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<DownCalled>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  22,
+"endLine":  17,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  34,
+"endLine":  26,
+"endColumn":  40
+}
+}
+]
+}
+]
+}

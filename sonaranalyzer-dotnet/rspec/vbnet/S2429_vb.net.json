@@ -1,0 +1,13 @@
+{
+  "title": "Arrays should be initialized using the \"... = {}\" syntax",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor"
+}

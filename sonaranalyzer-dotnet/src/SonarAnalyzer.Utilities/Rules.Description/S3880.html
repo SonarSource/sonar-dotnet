@@ -1,0 +1,12 @@
+<p>Finalizers come with a performance cost due to the overhead of tracking the life cycle of objects. An empty one is consequently costly with no
+benefit or justification.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+    ~Foo() // Noncompliant
+    {
+    }
+}
+</pre>
+

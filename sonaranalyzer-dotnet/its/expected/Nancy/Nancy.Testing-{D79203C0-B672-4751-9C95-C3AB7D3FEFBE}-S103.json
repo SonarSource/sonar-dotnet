@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 326 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  425,
+"startColumn":  1,
+"endLine":  425,
+"endColumn":  327
+}
+}
+}
+]
+}

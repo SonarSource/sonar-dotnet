@@ -1,0 +1,50 @@
+<p>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value
+only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources.
+Therefore all calculated values should be used.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+void CalculateRate(int a, int b)
+{
+  int i;
+
+  i = a + b; // Noncompliant; calculation result not used before value is overwritten
+  i = DoSomething();  // Noncompliant; retrieved value not used
+  for (i = 0; i &lt; 10; i++)
+  {
+    //  ...
+  }
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+void CalculateRate(int a, int b)
+{
+  int i;
+
+  i = DoSomething();
+  i += a + b;
+  StoreI(i);
+
+  for (i = 0; i &lt; 10; i++)
+  {
+    //  ...
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>No issue is reported when </p>
+<ul>
+  <li> the analyzed method body contains <code>try</code> blocks, </li>
+  <li> a lambda expression captures the local variables, or </li>
+  <li> the variable is unused (case covered by Rule S1481). </li>
+</ul>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/563.html">MITRE, CWE-563</a> - Assignment to Variable without Use ('Unused Variable') </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/QYA5">CERT, MSC13-C.</a> - Detect and remove unused values </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/S4IyAQ">CERT, MSC13-CPP.</a> - Detect and remove unused values </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/uQCSBg">CERT, MSC56-J.</a> - Detect and remove superfluous code and values </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/SIIyAQ">CERT, MSC12-CPP.</a> - Detect and remove code that has no effect </li>
+</ul>
+

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  20
+}
+}
+}
+]
+}

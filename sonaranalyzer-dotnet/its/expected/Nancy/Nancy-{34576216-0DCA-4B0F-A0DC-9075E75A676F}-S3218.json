@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2830,
+"startColumn":  28,
+"endLine":  2830,
+"endColumn":  36
+}
+}
+}
+]
+}

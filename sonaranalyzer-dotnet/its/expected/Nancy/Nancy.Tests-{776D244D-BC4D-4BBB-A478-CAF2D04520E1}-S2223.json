@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'Empty' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  38,
+"endLine":  11,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'testFileInput' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  30,
+"endLine":  5,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'ExpectedOutput' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  30,
+"endLine":  46,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'UnbindableStaticField' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  31,
+"endLine":  246,
+"endColumn":  52
+}
+}
+}
+]
+}

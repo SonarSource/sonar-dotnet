@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  24
+}
+}
+}
+]
+}

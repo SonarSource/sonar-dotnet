@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  9,
+"endLine":  11,
+"endColumn":  115
+}
+}
+}
+]
+}

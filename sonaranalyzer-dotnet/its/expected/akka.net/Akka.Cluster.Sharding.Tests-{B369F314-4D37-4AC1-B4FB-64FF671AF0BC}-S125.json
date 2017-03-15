@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  21,
+"endLine":  91,
+"endColumn":  89
+}
+}
+}
+]
+}

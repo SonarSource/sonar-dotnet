@@ -1,0 +1,13 @@
+{
+  "title": "Field-like events should not be virtual",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Critical"
+}

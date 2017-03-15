@@ -1,0 +1,91 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<CustomMessageOverrideEquals>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  22,
+"endLine":  344,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Ack>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  24,
+"endLine":  30,
+"endColumn":  27
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  34,
+"endLine":  41,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ImmutableMessageWithPrivateCtor>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  22,
+"endLine":  70,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ImmutableMessage>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  22,
+"endLine":  107,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Comparable>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  28
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  30,
+"endLine":  12,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

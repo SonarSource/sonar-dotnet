@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3385",
+"message":  "Remove this 'Exit' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  63,
+"endLine":  109,
+"endColumn":  71
+}
+}
+}
+]
+}

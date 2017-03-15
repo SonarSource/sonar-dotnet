@@ -1,0 +1,34 @@
+<p>The use of <code>[DefaultValue]</code> with <code>[Optional]</code> has no more effect than <code>[Optional]</code> alone. That's because
+<code>[DefaultValue]</code> doesn't actually do anything; it merely indicates the intent for the value. More than likely, <code>[DefaultValue]</code>
+was used in confusion instead of <code>[DefaultParameterValue]</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass
+{
+    public void DoStuff([Optional][DefaultValue(4)]int i, int j = 5)  // Noncompliant
+    {
+        Console.WriteLine(i);
+    }
+
+    public static void Main()
+    {
+        new MyClass().DoStuff(); // prints 0
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass
+{
+    public void DoStuff([Optional][DefaultParameterValue(4)]int i, int j = 5)
+    {
+        Console.WriteLine(i);
+    }
+
+    public static void Main()
+    {
+        new MyClass().DoStuff(); // prints 4
+    }
+}
+</pre>
+

@@ -1,0 +1,19 @@
+<p>For better readability, do not put more than one statement on a single line.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim a = 0 : Dim b = 0  ' Noncompliant
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub Main()
+        Dim a = 0              ' Compliant
+        Dim b = 0              ' Compliant
+    End Sub
+End Module
+</pre>
+

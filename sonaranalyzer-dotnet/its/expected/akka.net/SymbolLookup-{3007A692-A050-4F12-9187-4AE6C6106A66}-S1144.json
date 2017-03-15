@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove this unused private member.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  55
+}
+}
+}
+]
+}

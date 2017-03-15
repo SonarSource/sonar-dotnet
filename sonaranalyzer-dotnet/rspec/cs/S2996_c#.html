@@ -1,0 +1,32 @@
+<p>When an object has a field annotated with <code>ThreadStatic</code>, that field is shared within a given thread, but unique across threads. Since a
+class' static initializer is only invoked for the first thread created, it also means that only the first thread will have the expected initial
+values.</p>
+<p>Instead, allow such fields to be initialized to their default values or make the initialization lazy.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo
+{
+  [ThreadStatic]
+  public static object PerThreadObject = new object(); // Noncompliant. Will be null in all the threads except the first one.
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo
+{
+  [ThreadStatic]
+  public static object _perThreadObject;
+  public static object PerThreadObject
+  {
+    get
+    {
+      if (_perThreadObject == null)
+      {
+        _perThreadObject = new object();
+      }
+      return _perThreadObject;
+    }
+  }
+}
+</pre>
+

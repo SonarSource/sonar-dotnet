@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  27,
+"endLine":  133,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  27,
+"endLine":  38,
+"endColumn":  36
+}
+}
+}
+]
+}

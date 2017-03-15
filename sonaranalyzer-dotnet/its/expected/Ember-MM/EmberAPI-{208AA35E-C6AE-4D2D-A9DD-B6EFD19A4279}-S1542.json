@@ -1,0 +1,706 @@
+{
+"issues":  [
+{
+"id":  "S1542",
+"message":  "Rename procedure 'DGVDoubleBuffer' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  803,
+"startColumn":  23,
+"endLine":  803,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'EmberAPIVersion' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  809,
+"startColumn":  28,
+"endLine":  809,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'PNLDoubleBuffer' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  941,
+"startColumn":  23,
+"endLine":  941,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'TestMediaInfoDLL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"region":  {
+"startLine":  1056,
+"startColumn":  23,
+"endLine":  1056,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctOpenIFOFile' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  189,
+"startColumn":  21,
+"endLine":  189,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctAudioAttVTSM_VTS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  22,
+"endLine":  242,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctHexOffset' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  276,
+"startColumn":  22,
+"endLine":  276,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctHexTimeToDecTime' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  280,
+"startColumn":  22,
+"endLine":  280,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctParseIFO_VSTFile' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  285,
+"startColumn":  22,
+"endLine":  285,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctPlayBackTimeToString' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  375,
+"startColumn":  22,
+"endLine":  375,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctProgramChainInformation' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  22,
+"endLine":  388,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctSRPT' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  412,
+"startColumn":  22,
+"endLine":  412,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctStrByteToHex' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  446,
+"startColumn":  22,
+"endLine":  446,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctSubPictureAttVTSM_VTS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  468,
+"startColumn":  22,
+"endLine":  468,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'fctVideoAtt_VTS_VOBS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  480,
+"startColumn":  22,
+"endLine":  480,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'isBDRip' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  57,
+"startColumn":  32,
+"endLine":  57,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'isVideoTS' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  32,
+"endLine":  66,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'IsValidURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  353,
+"startColumn":  21,
+"endLine":  353,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOGetLangByCode2' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  21,
+"endLine":  96,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOGetLangByCode3' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  21,
+"endLine":  100,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOLangGetCode2ByLang' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  28,
+"endLine":  104,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOLangGetCode3ByLang' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  108,
+"startColumn":  28,
+"endLine":  108,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOLangGetLanguagesList' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  112,
+"startColumn":  28,
+"endLine":  112,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOLangGetLanguagesListAlpha2' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  120,
+"startColumn":  28,
+"endLine":  120,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'ISOLangGetLanguagesListAlpha3' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  127,
+"startColumn":  28,
+"endLine":  127,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfoA_Get' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  300,
+"startColumn":  29,
+"endLine":  300,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfoA_Open' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  29,
+"endLine":  304,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'MediaInfo_Close' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  308,
+"startColumn":  24,
+"endLine":  308,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfo_Count_Get' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  312,
+"startColumn":  29,
+"endLine":  312,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'MediaInfo_Delete' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  316,
+"startColumn":  24,
+"endLine":  316,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfo_Get' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  320,
+"startColumn":  29,
+"endLine":  320,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfo_New' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  324,
+"startColumn":  29,
+"endLine":  324,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'MediaInfo_Open' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  328,
+"startColumn":  29,
+"endLine":  328,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'Count_Get' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  379,
+"startColumn":  22,
+"endLine":  379,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'Get_' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"region":  {
+"startLine":  403,
+"startColumn":  22,
+"endLine":  403,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handler_MovieScraperEvent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  16,
+"endLine":  111,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handler_TVScraperEvent' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  115,
+"startColumn":  16,
+"endLine":  115,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'loadModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  130,
+"startColumn":  16,
+"endLine":  130,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'loadScrapersModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  191,
+"startColumn":  16,
+"endLine":  191,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'loadTVScrapersModules' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  262,
+"startColumn":  16,
+"endLine":  262,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'GetIMDBFromNonConf' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  216,
+"startColumn":  28,
+"endLine":  216,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'LoadMovieFromNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  531,
+"startColumn":  28,
+"endLine":  531,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'LoadTVEpFromNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  606,
+"startColumn":  28,
+"endLine":  606,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'LoadTVShowFromNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  655,
+"startColumn":  28,
+"endLine":  655,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SaveMovieToNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  697,
+"startColumn":  23,
+"endLine":  697,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SaveSingleNFOItem' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  855,
+"startColumn":  23,
+"endLine":  855,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SaveTVEpToNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  890,
+"startColumn":  23,
+"endLine":  890,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'SaveTVShowToNFO' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  969,
+"startColumn":  23,
+"endLine":  969,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'isValidDir' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  637,
+"startColumn":  21,
+"endLine":  637,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'CleanURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  28,
+"endLine":  51,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'isValidURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  315,
+"startColumn":  28,
+"endLine":  315,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'TruncateURL' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  357,
+"startColumn":  28,
+"endLine":  357,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'USACertToMPAA' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"region":  {
+"startLine":  385,
+"startColumn":  28,
+"endLine":  385,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename function 'XMLToLowerCase' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  452,
+"startColumn":  28,
+"endLine":  452,
+"endColumn":  42
+}
+}
+}
+]
+}

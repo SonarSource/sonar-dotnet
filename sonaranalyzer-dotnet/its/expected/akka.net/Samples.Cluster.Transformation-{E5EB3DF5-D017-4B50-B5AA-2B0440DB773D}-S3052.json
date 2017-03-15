@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Jobs', the compiler will do that for you.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationFrontend.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2375",
+"message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  777,
+"startColumn":  9,
+"endLine":  777,
+"endColumn":  61
+}
+}
+}
+]
+}

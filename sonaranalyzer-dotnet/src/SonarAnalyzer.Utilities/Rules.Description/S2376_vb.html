@@ -1,0 +1,21 @@
+<p>Properties with only setters are confusing and counterintuitive. Instead, a property getter should be added if possible, or the property should be
+replaced with a setter method.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Module Module1
+    WriteOnly Property Foo() As Integer ' Non-Compliant
+        Set(ByVal value As Integer)
+            ' ... some code ...
+        End Set
+    End Property
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub SetFoo(ByVal value As Integer)  ' Compliant
+        ' ... some code ...
+    End Sub
+End Module
+</pre>
+

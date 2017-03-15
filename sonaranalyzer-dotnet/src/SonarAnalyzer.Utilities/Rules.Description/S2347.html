@@ -1,0 +1,25 @@
+<p>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all even handler names match a provided regular
+expression.</p>
+<p>The default configuration is:</p>
+<ul>
+  <li> Either in Pascal case, i.e. starting with an upper case letter, e.g. OnMyButtonClicked </li>
+  <li> Or, a subject, in Pascal or camel case, followed by an underscore followed by an event name, in Pascal case, e.g. btn1_Clicked </li>
+</ul>
+<p>Event handlers with a <code>handles</code> clause and two-parameter methods with <code>EventArgs</code> second parameter are covered by this
+rule.</p>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
+<pre>
+Module Module1
+    Sub subject__SomeEvent() Handles X.SomeEvent   ' Noncompliant - two underscores
+    End Sub
+End Module
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Module Module1
+    Sub subject_SomeEvent() Handles X.SomeEvent    ' Compliant
+    End Sub
+End Module
+</pre>
+

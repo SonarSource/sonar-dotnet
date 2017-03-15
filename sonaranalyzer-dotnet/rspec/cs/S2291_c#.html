@@ -1,0 +1,51 @@
+<p><code>Enumerable.Sum()</code> always executes addition in a <code>checked</code> context, so an <code>OverflowException</code> will be thrown if
+the value exceeds <code>MaxValue</code> even if an <code>unchecked</code> context was specified. Using an <code>unchecked</code> context anyway
+represents a misunderstanding of how <code>Sum</code> works.</p>
+<p>This rule raises an issue when an <code>unchecked</code> context is specified for a <code>Sum</code> on integer types.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+void Add(List&lt;int&gt; list)
+{
+  int d = unchecked(list.Sum());  // Noncompliant
+
+  unchecked
+  {
+    int e = list.Sum();  // Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+void Add(List&lt;int&gt; list)
+{
+  int d = list.Sum();
+
+  try
+  {
+    int e = list.Sum();
+  }
+  catch (System.OverflowException e)
+  {
+    // exception handling...
+  }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>When the <code>Sum()</code> call is inside a <code>try-catch</code> block, no issues are reported.</p>
+<pre>
+void Add(List&lt;int&gt; list)
+{
+  unchecked
+  {
+    try
+    {
+      int e = list.Sum();
+    }
+    catch (System.OverflowException e)
+    {
+      // exception handling...
+    }
+  }
+}
+</pre>
+

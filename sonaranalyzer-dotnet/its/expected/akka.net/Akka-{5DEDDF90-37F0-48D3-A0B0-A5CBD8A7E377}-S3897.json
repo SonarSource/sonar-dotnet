@@ -1,0 +1,235 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ActorSelection>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  24
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  21,
+"endLine":  115,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ExtensionIdProvider>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  27,
+"endLine":  111,
+"endColumn":  46
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  30,
+"endLine":  145,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<RemoteScope>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\RemoteScope.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  29
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\RemoteScope.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  30,
+"endLine":  35,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Scope.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Actor\Scope.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  29,
+"endLine":  29,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ActorRefRoutee>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  18,
+"endLine":  48,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ActorSelectionRoutee>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  18,
+"endLine":  86,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  39
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Group>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  242,
+"startColumn":  27,
+"endLine":  242,
+"endColumn":  32
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  30,
+"endLine":  263,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<Pool>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  27,
+"endLine":  419,
+"endColumn":  31
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  30,
+"endLine":  447,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<WildcardTree>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Util\WildcardTree.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  25,
+"endLine":  17,
+"endColumn":  37
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Util\WildcardTree.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  30,
+"endLine":  56,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

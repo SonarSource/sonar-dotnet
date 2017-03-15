@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Id' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  36,
+"endLine":  65,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Id' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  36,
+"endLine":  75,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'I' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  33,
+"endLine":  76,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Id' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  36,
+"endLine":  87,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'N' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  33,
+"endLine":  88,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Id' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  36,
+"endLine":  62,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LocationMap' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  60,
+"endLine":  83,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'CounterId' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  34,
+"endLine":  98,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Id' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  34,
+"endLine":  108,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Payload' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  36,
+"endLine":  109,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Delta' private.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  33,
+"endLine":  120,
+"endColumn":  38
+}
+}
+}
+]
+}

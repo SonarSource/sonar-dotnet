@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  55,
+"endLine":  105,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  55,
+"endLine":  126,
+"endColumn":  62
+}
+}
+}
+]
+}

@@ -1,0 +1,48 @@
+<p>When you implement <code>IComparable</code> or <code>IComparable&lt;T&gt;</code> on a class, the CLR cannot automatically call your implementation
+in the comparison operators <code>&lt;</code>, <code>==</code>, <code>&gt;</code> and <code>!=</code>. Also, you could get weird and unpredictable
+results if the <code>Equals()</code> method does not follow the same logic as <code>CompareTo()</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo: IComparable
+{
+  public int CompareTo(object obj) { /* ... */ }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Foo: IComparable
+{
+  public int CompareTo(object obj) { /* ... */ }
+  public bool Equals(object obj)
+  {
+    var other = obj as Foo;
+    if (object.ReferenceEquals(other, null))
+    {
+      return false;
+    }
+    return this.CompareTo(other) == 0;
+  }
+  public int GetHashCode() { /* ... */ }
+  public static bool operator == (Foo left, Foo right)
+  {
+    if (object.ReferenceEquals(left, null))
+    {
+      return object.ReferenceEquals(right, null);
+    }
+    return left.Equals(right);
+  }
+  public static bool operator &gt; (Foo left, Foo right)
+  {
+    return Compare(left, right) &gt; 0;
+  }
+  public static bool operator &lt; (Foo left, Foo right)
+  {
+    return Compare(left, right) &lt; 0;
+  }
+  public static bool operator != (Foo left, Foo right)
+  {
+    return !(left == right);
+  }
+}
+</pre>
+

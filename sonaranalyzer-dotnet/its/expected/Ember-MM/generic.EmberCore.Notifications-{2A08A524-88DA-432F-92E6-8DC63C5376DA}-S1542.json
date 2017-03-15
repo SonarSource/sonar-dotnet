@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleEnabledChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  17,
+"endLine":  136,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  140,
+"startColumn":  17,
+"endLine":  140,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_NotifierClicked' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1542",
+"message":  "Rename procedure 'Handle_NotifierClosed' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  148,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  38
+}
+}
+}
+]
+}

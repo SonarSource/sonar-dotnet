@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the '_receptionist' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  36,
+"endLine":  34,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the '_pruneInterval' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  35,
+"endLine":  112,
+"endColumn":  49
+}
+}
+}
+]
+}

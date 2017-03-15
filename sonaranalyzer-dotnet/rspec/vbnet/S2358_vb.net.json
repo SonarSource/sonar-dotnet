@@ -1,0 +1,13 @@
+{
+  "title": "\"IsNot\" should be used instead of \"Not ... Is ...\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Major"
+}

@@ -1,0 +1,381 @@
+{
+"issues":  [
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  24,
+"endLine":  66,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  175,
+"startColumn":  24,
+"endLine":  175,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  240,
+"startColumn":  24,
+"endLine":  240,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  275,
+"startColumn":  24,
+"endLine":  275,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  24,
+"endLine":  304,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  48,
+"startColumn":  20,
+"endLine":  48,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  20,
+"endLine":  68,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  78,
+"startColumn":  20,
+"endLine":  78,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  97,
+"startColumn":  24,
+"endLine":  97,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  98,
+"startColumn":  24,
+"endLine":  98,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  24,
+"endLine":  103,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  104,
+"startColumn":  24,
+"endLine":  104,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  24,
+"endLine":  105,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  24,
+"endLine":  109,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  110,
+"startColumn":  24,
+"endLine":  110,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  111,
+"startColumn":  24,
+"endLine":  111,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  20,
+"endLine":  109,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  282,
+"startColumn":  16,
+"endLine":  282,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  284,
+"startColumn":  51,
+"endLine":  284,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  482,
+"startColumn":  24,
+"endLine":  482,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  520,
+"startColumn":  24,
+"endLine":  520,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  600,
+"startColumn":  16,
+"endLine":  600,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  619,
+"startColumn":  16,
+"endLine":  619,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2629,
+"startColumn":  50,
+"endLine":  2629,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2633,
+"startColumn":  50,
+"endLine":  2633,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2800,
+"startColumn":  28,
+"endLine":  2800,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2855,
+"startColumn":  28,
+"endLine":  2855,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  6951,
+"startColumn":  95,
+"endLine":  6951,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S2358",
+"message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  8958,
+"startColumn":  12,
+"endLine":  8958,
+"endColumn":  44
+}
+}
+}
+]
+}

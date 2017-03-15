@@ -1,0 +1,14 @@
+{
+  "title": "\"string.ToCharArray()\" should not be called redundantly",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "bug",
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor"
+}

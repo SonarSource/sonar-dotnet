@@ -1,0 +1,20 @@
+{
+  "title": "Conditions should not unconditionally evaluate to \"true\" or to \"false\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "cwe",
+    "bug",
+    "misra",
+    "cert",
+    "pitfall"
+  ],
+  "standards": [
+    "CWE"
+  ],
+  "defaultSeverity": "Major"
+}

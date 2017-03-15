@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\ApplicationEvents.vb",
+"region":  {
+"startLine":  44,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  671,
+"startColumn":  29,
+"endLine":  671,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  704,
+"startColumn":  25,
+"endLine":  704,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1226,
+"startColumn":  29,
+"endLine":  1226,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1312,
+"startColumn":  13,
+"endLine":  1312,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  408,
+"startColumn":  21,
+"endLine":  408,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2132,
+"startColumn":  17,
+"endLine":  2132,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  186,
+"startColumn":  29,
+"endLine":  186,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  2802,
+"startColumn":  13,
+"endLine":  2802,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  5296,
+"startColumn":  17,
+"endLine":  5296,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1197",
+"message":  "Move the array designator from the variable to the type.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  7848,
+"startColumn":  21,
+"endLine":  7848,
+"endColumn":  29
+}
+}
+}
+]
+}

@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  29,
+"endLine":  23,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"region":  {
+"startLine":  28,
+"startColumn":  14,
+"endLine":  28,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgRestart.vb",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  14,
+"endLine":  29,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  14,
+"endLine":  25,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  14,
+"endLine":  27,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  14,
+"endLine":  29,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  23
+}
+}
+}
+]
+}

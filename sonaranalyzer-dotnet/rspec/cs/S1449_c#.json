@@ -1,0 +1,15 @@
+{
+  "title": "Culture should be specified for \"string\" operations",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "bug",
+    "unpredictable",
+    "cert"
+  ],
+  "defaultSeverity": "Minor"
+}

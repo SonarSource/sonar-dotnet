@@ -1,0 +1,13 @@
+{
+  "title": "Property assignments should not be made for \"readonly\" fields not constrained to reference types",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "bug"
+  ],
+  "defaultSeverity": "Minor"
+}

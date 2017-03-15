@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  14,
+"endLine":  27,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"region":  {
+"startLine":  1070,
+"startColumn":  15,
+"endLine":  1070,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  773,
+"startColumn":  11,
+"endLine":  773,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  789,
+"startColumn":  11,
+"endLine":  789,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  803,
+"startColumn":  11,
+"endLine":  803,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"region":  {
+"startLine":  818,
+"startColumn":  11,
+"endLine":  818,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  14,
+"endLine":  27,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  14,
+"endLine":  30,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
+"location":  {
+"uri":  "Ember-MM\EmberAPI\dlgVersions.vb",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  25
+}
+}
+}
+]
+}

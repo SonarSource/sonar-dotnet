@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<RedeliveryTick>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  31,
+"endLine":  259,
+"endColumn":  45
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  34,
+"endLine":  267,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  29,
+"endLine":  108,
+"endColumn":  43
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  25,
+"endLine":  122,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  29,
+"endLine":  135,
+"endColumn":  50
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
+"endColumn":  45
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  25,
+"endLine":  168,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Override 'Equals(object)'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  25,
+"endLine":  90,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<RecoveryCompleted>'.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  25,
+"endLine":  72,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  30,
+"endLine":  77,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

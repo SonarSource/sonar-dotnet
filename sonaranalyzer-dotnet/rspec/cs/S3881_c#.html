@@ -1,0 +1,108 @@
+<p>The <code>IDisposable</code> interface is a mechanism to release unmanaged resources, if not implemented correctly this could result in resource
+leaks or more severe bugs.</p>
+<p>This rule raises an issue when the recommended dispose pattern, as defined by Microsoft, is not adhered to.</p>
+<p>In particular the <code>Dispose()</code> method should only contain the following code:</p>
+<pre>
+public void Dispose()
+{
+    Dispose(true);
+    GC.SuppressFinalize(this);
+}
+</pre>
+<p>Specifically this rule checks for these problems:</p>
+<ul>
+  <li> <code>Dispose()</code> is virtual. </li>
+  <li> <code>Dispose()</code> is not public. </li>
+  <li> An exception is thrown inside <code>Dispose()</code> or <code>Dispose(bool)</code>. </li>
+  <li> This is an unsealed type and <code>Dispose(bool)</code> is not <code>protected virtual</code>. </li>
+  <li> This is an unsealed type and <code>Dispose()</code> doesn't match the implementation above. </li>
+  <li> This is an unsealed type and the finalizer doesn't call <code>Dispose(bool)</code> or the class finalizer. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo : IDisposable // Noncompliant - provide protected overridable implementation of Dispose(bool) on Foo or mark the type as sealed.
+{
+    public void Dispose() // Noncompliant - should contain only a call to Dispose(true) and then GC.SuppressFinalize(this)
+    {
+        // Cleanup
+    }
+}
+
+public class Foo : IDisposable
+{
+    void IDisposable.Dispose() // Noncompliant - Dispose() should be public
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this)
+    }
+
+    public virtual void Dispose() // Noncompliant - Dispose() should be sealed
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this)
+    }
+}
+
+public class Foo : IDisposable
+{
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this)
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Cleanup
+    }
+
+    ~Foo() // Noncompliant - Modify Foo.~Foo() so that it calls Dispose(false) and then returns.
+    {
+        // Cleanup
+    }
+}{code}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public sealed class Foo : IDisposable
+{
+    public void Dispose()
+    {
+        // Cleanup
+    }
+}
+
+public class Foo : IDisposable
+{
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Cleanup
+    }
+}
+
+public class Foo : IDisposable
+{
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Cleanup
+    }
+
+    ~Foo()
+    {
+        Dispose(false);
+    }
+}
+</pre>
+

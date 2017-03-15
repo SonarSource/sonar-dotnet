@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Samples.Cluster.Simple\Program.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  44,
+"endLine":  20,
+"endColumn":  50
+}
+}
+}
+]
+}

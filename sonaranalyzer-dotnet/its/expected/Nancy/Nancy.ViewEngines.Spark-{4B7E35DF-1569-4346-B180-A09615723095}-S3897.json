@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<BuildDescriptorParams>'.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  18,
+"endLine":  6,
+"endColumn":  39
+}
+},
+{
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  30,
+"endLine":  73,
+"endColumn":  36
+}
+}
+]
+}
+]
+}

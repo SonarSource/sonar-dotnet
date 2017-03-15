@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2219",
+"message":  "Use the 'is' operator instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  63,
+"endLine":  43,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2219",
+"message":  "Use the 'IsInstanceOfType()' method instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  25,
+"endLine":  297,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2219",
+"message":  "Use the 'is' operator instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  17,
+"endLine":  53,
+"endColumn":  51
+}
+}
+}
+]
+}

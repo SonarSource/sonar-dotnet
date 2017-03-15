@@ -1,0 +1,35 @@
+<p>When the same condition is checked twice in a row, it is either confusing - why have separate checks? - or an error - some other condition should
+have been checked in the second test.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (a == b)
+{
+  doTheThing(b);
+}
+if (a == b) // Noncompliant; is this really what was intended?
+{
+  doTheThing(c);
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+if (a == b)
+{
+  doTheThing(b);
+  doTheThing(c);
+}
+</pre>
+<p>or</p>
+<pre>
+if (a == b)
+{
+  doTheThing(b);
+}
+if (b == c)
+{
+  doTheThing(c);
+}
+</pre>
+<h2>Exceptions</h2>
+<p>Since it is a common pattern to test a variable, reassign it if it fails the test, then re-test it, that pattern is ignored.</p>
+

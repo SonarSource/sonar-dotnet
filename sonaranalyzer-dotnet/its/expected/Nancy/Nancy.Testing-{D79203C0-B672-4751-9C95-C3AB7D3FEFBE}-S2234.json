@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2234",
+"message":  "Parameters to 'Equals' have the same names but not the same order as the method arguments.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  27,
+"endLine":  58,
+"endColumn":  33
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  21,
+"endLine":  13,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

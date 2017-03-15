@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  25,
+"endLine":  257,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  13,
+"endLine":  111,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  13,
+"endLine":  391,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  17,
+"endLine":  118,
+"endColumn":  18
+}
+}
+}
+]
+}

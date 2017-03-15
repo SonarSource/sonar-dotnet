@@ -1,0 +1,24 @@
+<p>Unnecessary casting expressions make the code harder to read and understand.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public int Example(int i)
+{
+  return (int) (i + 42); // Noncompliant
+}
+public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
+{
+  return coll.Reverse().OfType&lt;int&gt;(); // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public int Example(int i)
+{
+  return i + 42;
+}
+public IEnumerable&lt;int&gt; ExampleCollection(IEnumerable&lt;int&gt; coll)
+{
+  return coll.Reverse();
+}
+</pre>
+

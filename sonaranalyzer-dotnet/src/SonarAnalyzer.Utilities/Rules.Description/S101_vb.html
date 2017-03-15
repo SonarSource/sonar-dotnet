@@ -1,0 +1,20 @@
+<p>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate. This rule allows to check that all class
+names match a provided regular expression.</p>
+<p>The default configuration is the one recommended by Microsoft:</p>
+<ul>
+  <li> Pascal casing, starting with an upper case character, e.g. BackColor </li>
+  <li> Short abbreviations of 2 letters can be capitalized, e.g. GetID </li>
+  <li> Longer abbreviations need to be lower cased, e.g. GetHtml </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<p>With the default regular expression <code>^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>:</p>
+<pre>
+Class foo ' Noncompliant
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Class Foo ' Compliant
+End Class
+</pre>
+

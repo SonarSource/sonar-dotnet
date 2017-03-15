@@ -1,0 +1,32 @@
+<p>In C#, delegates can be added together to chain their execution, and subtracted to remove their execution from the chain.</p>
+<p>Subtracting a chain of delegates from another one might yield unexpected results as shown hereunder - and is likely to be a bug.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+MyDelegate first, second, third, fourth;
+first = () =&gt; Console.Write("1");
+second = () =&gt; Console.Write("2");
+third = () =&gt; Console.Write("3");
+fourth = () =&gt; Console.Write("4");
+
+MyDelegate chain1234 = first + second + third + fourth; // Compliant - chain sequence = "1234"
+MyDelegate chain12 = chain1234 - third - fourth; // Compliant - chain sequence = "12"
+
+
+MyDelegate chain14 = first + fourth; // creates a new MyDelegate instance which is a list under the covers
+MyDelegate chain23 = chain1234 - chain14; // Noncompliant; (first + fourth) doesn't exist in chain1234
+
+
+// The chain sequence of "chain23" will be "1234" instead of "23"!
+// Indeed, the sequence "1234" does not contain the subsequence "14", so nothing is subtracted
+// (but note that "1234" contains both the "1" and "4" subsequences)
+chain23 = chain1234 - (first + fourth); // Noncompliant
+
+chain23(); // will print "1234"!
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+MyDelegate chain23 = chain1234 - first - fourth; // Compliant - "1" is first removed, followed by "4"
+
+chain23(); // will print "23"
+</pre>
+

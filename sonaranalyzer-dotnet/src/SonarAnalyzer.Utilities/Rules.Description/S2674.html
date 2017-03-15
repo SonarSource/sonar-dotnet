@@ -1,0 +1,42 @@
+<p>You cannot assume that any given stream reading call will fill the <code>byte[]</code> passed in to the method with the number of bytes requested.
+Instead, you must check the value returned by the read method to see how many bytes were read. Fail to do so, and you introduce a bug that is both
+harmful and difficult to reproduce.</p>
+<p>This rule raises an issue when a <code>Stream.Read</code> or a <code>Stream.ReadAsync</code> method is called, but the return value is not
+checked.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void DoSomething(string fileName)
+{
+  using (var stream = File.Open(fileName, FileMode.Open))
+  {
+    var result = new byte[stream.Length];
+    stream.Read(result, 0, (int)stream.Length); // Noncompliant
+    // ... do something with result
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void DoSomething(string fileName)
+{
+  using (var stream = File.Open(fileName, FileMode.Open))
+  {
+    var buffer = new byte[1024];
+    using (var ms = new MemoryStream())
+    {
+        int read;
+        while ((read = stream.Read(buffer, 0, buffer.Length)) &gt; 0)
+        {
+            ms.Write(buffer, 0, read);
+        }
+        // ... do something with ms
+    }
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/XACSAQ">CERT, FIO10-J.</a> - Ensure the array is filled when using read() to fill an
+  array </li>
+</ul>
+

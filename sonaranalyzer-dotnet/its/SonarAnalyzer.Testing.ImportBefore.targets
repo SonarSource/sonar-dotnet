@@ -1,0 +1,49 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="OverrideRoslynCodeAnalysisPropertiesWithSonarAnalyzer"
+          AfterTargets="ResolveCodeAnalysisRuleSet"
+          BeforeTargets="CoreCompile">
+
+    <PropertyGroup>
+      <SonarAnalyzerRegressionTestRunning Condition="Exists('$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll')">true</SonarAnalyzerRegressionTestRunning>
+      <SonarAnalyzerRegressionTestRunning Condition="$(SonarAnalyzerRegressionTestRunning) == ''">false</SonarAnalyzerRegressionTestRunning>
+      <ProjectConfFilePath>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt;$(MSBuildStartupDirectory)\SonarLint.xml</ProjectConfFilePath>
+    </PropertyGroup>
+
+    <MakeDir Condition="$(SonarAnalyzerRegressionTestRunning)"
+            Directories="$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)"/>
+    <WriteLinesToFile Condition="$(SonarAnalyzerRegressionTestRunning)"
+            File="$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)\ProjectOutFolderPath.txt"
+            Lines="$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)"
+            Overwrite="true"
+            Encoding="Unicode" />
+    
+    <Warning Text="Not running a SonarAnalyzer test build? Or forgot to build SonarAnalyzer first? Delete this file: $(MSBuildThisFileFullPath) to remove this error" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
+
+    <ItemGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
+      <!-- Remove all previously added analyzers -->
+      <Analyzer Remove="@(Analyzer)" />
+      
+      <!-- Add the SonarAnalyzer analyzer DLLs -->
+      <Analyzer Include="$(MSBuildStartupDirectory)\binaries\SonarAnalyzer*.dll" />
+      <AdditionalFiles Include="$(ProjectConfFilePath)" />
+    </ItemGroup>
+
+    <PropertyGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
+      <!-- Set the path to the SARIF report -->
+      <ErrorLog>$(MSBuildStartupDirectory)\output\$(PROJECT)\$(AssemblyName)-$(ProjectGuid).json</ErrorLog>
+      
+      <!-- Override the ruleset with all SonarAnalyzer rules -->
+      <ResolvedCodeAnalysisRuleSet>$(MSBuildStartupDirectory)\output\AllSonarAnalyzerRules.ruleset</ResolvedCodeAnalysisRuleSet>
+
+      <!-- Don't fail the build -->
+      <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+      <WarningsAsErrors></WarningsAsErrors>
+
+      <!-- Keep all messages, including AD0001 -->
+      <WarningLevel>4</WarningLevel>
+
+      <!-- Enable the reporting of analyzer performances -->
+      <ReportAnalyzer>true</ReportAnalyzer>
+    </PropertyGroup>
+  </Target>
+</Project>

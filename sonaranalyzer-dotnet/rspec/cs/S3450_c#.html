@@ -1,0 +1,24 @@
+<p>There is no point in providing a default value for a parameter if callers are required to provide a value for it anyway. Thus,
+<code>[DefaultParameterValue]</code> should always be used in conjunction with <code>[Optional]</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public void MyMethod([DefaultParameterValue(5)] int j) //Noncompliant, useless
+{
+  Console.WriteLine(j);
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public void MyMethod(int j = 5)
+{
+  Console.WriteLine(j);
+}
+</pre>
+<p>or</p>
+<pre>
+public void MyMethod([DefaultParameterValue(5)][Optional] int j)
+{
+  Console.WriteLine(j);
+}
+</pre>
+

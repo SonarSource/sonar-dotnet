@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'ToList', which has no side effect.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  13,
+"endLine":  191,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'ToList', which has no side effect.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  13,
+"endLine":  213,
+"endColumn":  67
+}
+}
+}
+]
+}

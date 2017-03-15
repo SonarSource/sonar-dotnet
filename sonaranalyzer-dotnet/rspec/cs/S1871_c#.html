@@ -1,0 +1,106 @@
+<p>Having two <code>cases</code> in the same <code>switch</code> statement or branches in the same <code>if</code> structure with the same
+implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an
+<code>if</code> structure they should be combined, or for a <code>switch</code>, one should fall through to the other.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+switch (i)
+{
+  case 1:
+    DoSomething();
+    break;
+  case 2:
+    DoSomethingDifferent();
+    break;
+  case 3:  // Noncompliant; duplicates case 1's implementation
+    DoSomething();
+    break;
+  default:
+    DoTheRest();
+}
+
+if (a &gt;= 0 &amp;&amp; a &lt; 10)
+{
+  DoTheThing();
+}
+else if (a &gt;= 10 &amp;&amp; a &lt; 20)
+{
+  DoTheOtherThing();
+}
+else if (a &gt;= 20 &amp;&amp; a &lt; 50)
+{
+  DoTheThing();  // Noncompliant; duplicates first condition
+}
+else
+{
+  DoTheRest();
+}
+
+if (b == 0)
+{
+  DoOneMoreThing();
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+switch (i) {
+  case 1:
+  case 3:
+    DoSomething();
+    break;
+  case 2:
+    DoSomethingDifferent();
+    break;
+  default:
+    DoTheRest();
+}
+
+if ((a &gt;= 0 &amp;&amp; a &lt; 10) || (a &gt;= 20 &amp;&amp; a &lt; 50))
+{
+  DoTheThing();
+}
+else if (a &gt;= 10 &amp;&amp; a &lt; 20)
+{
+  DoTheOtherThing();
+}
+else
+{
+  DoTheRest();
+}
+
+DoOneMoreThing();
+</pre>
+<p>or</p>
+<pre>
+switch (i)
+{
+  case 1:
+    DoSomething();
+    break;
+  case 2:
+    DoSomethingDifferent();
+    break;
+  case 3:
+    DoThirdThing();
+    break;
+  default:
+    DoTheRest();
+}
+
+if (a &gt;= 0 &amp;&amp; a &lt; 10)
+{
+  DoTheThing();
+}
+else if (a &gt;= 10 &amp;&amp; a &lt; 20)
+{
+  DoTheOtherThing();
+}
+else if (a &gt;= 20 &amp;&amp; a &lt; 50)
+{
+  DoTheThirdThing();
+}
+else
+{
+  DoTheRest();
+}
+</pre>
+

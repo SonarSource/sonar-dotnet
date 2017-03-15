@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop 'ToArray' from the middle of the call chain.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  64,
+"endLine":  359,
+"endColumn":  71
+}
+}
+}
+]
+}

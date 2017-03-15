@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'FileIODispatcher' to match camel case naming rules, consider using 'FileIoDispatcher'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\Tcp.cs",
+"region":  {
+"startLine":  722,
+"startColumn":  27,
+"endLine":  722,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'PeerSentEOF' to match camel case naming rules, consider using 'PeerSentEof'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  25,
+"endLine":  156,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'checkRangeConvert' to match camel case naming rules, consider using 'CheckRangeConvert'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  25,
+"endLine":  174,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'newBuilder' to match camel case naming rules, consider using 'NewBuilder'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  45,
+"endLine":  363,
+"endColumn":  55
+}
+}
+}
+]
+}

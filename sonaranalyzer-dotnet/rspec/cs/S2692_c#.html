@@ -1,0 +1,60 @@
+<p>Most checks against an <code>IndexOf</code> value compare it with -1 because 0 is a valid index. Any checks which look for values
+<code>&gt;0</code> ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a <code>string</code>,
+<code>List</code>, or an array, consider using the <code>Contains</code> method instead.</p>
+<p>This rule raises an issue when an <code>IndexOf</code> value retrieved from a <code>string</code>, <code>List</code>, or array is tested against
+<code>&gt;0</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+string color = "blue";
+string name = "ishmael";
+
+List&lt;string&gt; strings = new List&lt;string&gt;();
+strings.Add(color);
+strings.Add(name);
+string[] stringArray = strings.ToArray();
+
+if (strings.IndexOf(color) &gt; 0) // Noncompliant
+{
+  // ...
+}
+if (name.IndexOf("ish") &gt; 0) // Noncompliant
+{
+  // ...
+}
+if (name.IndexOf("ae") &gt; 0) // Noncompliant
+{
+  // ...
+}
+if (Array.IndexOf(stringArray, color) &gt; 0) // Noncompliant
+{
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+string color = "blue";
+string name = "ishmael";
+
+List&lt;string&gt; strings = new List&lt;string&gt; ();
+strings.Add(color);
+strings.Add(name);
+string[] stringArray = strings.ToArray();
+
+if (strings.IndexOf(color) &gt; -1)
+{
+  // ...
+}
+if (name.IndexOf("ish") &gt;= 0)
+{
+  // ...
+}
+if (name.Contains("ae"))
+{
+  // ...
+}
+if (Array.IndexOf(stringArray, color) &gt;= 0)
+{
+  // ...
+}
+</pre>
+

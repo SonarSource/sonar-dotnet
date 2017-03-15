@@ -1,0 +1,13 @@
+<p>Calling <code>GetType()</code> on a nullable object returns the underlying value type. Thus, comparing the returned <code>Type</code> object to
+<code>typeof(Nullable&lt;SomeType&gt;)</code> doesn't make sense. The comparison either throws an exception or the result can be known at compile
+time.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+int? nullable = 42;
+bool comparison = nullable.GetType() == typeof(Nullable&lt;int&gt;); // Noncompliant, always false
+comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, always true
+
+nullable = null;
+comparison = nullable.GetType() != typeof(Nullable&lt;int&gt;); // Noncompliant, calling GetType on a null always throws an exception
+</pre>
+

@@ -1,0 +1,25 @@
+<p>Use fewer arguments than are expected in your format string, and you'll get an error at runtime. Use more arguments than are expected, and you
+probably won't get the output you expect. Either way, it's a bug.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+var s1 = string.Format("{0} {1} {2}", 1, 2); // Noncompliant; too few arguments
+var s2 = string.Format("{0}", 10, 11); // Noncompliant; too many arguments
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+// Pass the expected number of arguments
+var s1 = string.Format("{0} {1} {2}", 1, 2, 3);
+var s2 = string.Format("{0}", 10);
+</pre>
+<p>or</p>
+<pre>
+// Fix the format string
+var s1 = string.Format("{0} {1}", 1, 2);
+var s2 = string.Format("{0} {1}", 10, 11);
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/wQA1">CERT, FIO47-C.</a> - Use valid format strings </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/e4EyAQ">CERT, FIO00-CPP.</a> - Take care when creating format strings </li>
+</ul>
+

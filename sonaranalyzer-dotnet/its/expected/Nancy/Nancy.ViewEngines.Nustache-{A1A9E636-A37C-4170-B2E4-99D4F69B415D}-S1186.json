@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  21,
+"endLine":  30,
+"endColumn":  31
+}
+}
+}
+]
+}

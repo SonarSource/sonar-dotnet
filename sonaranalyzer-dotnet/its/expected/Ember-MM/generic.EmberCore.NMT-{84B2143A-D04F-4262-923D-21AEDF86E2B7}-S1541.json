@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this constructor is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  75,
+"startColumn":  5,
+"endLine":  75,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  151,
+"startColumn":  5,
+"endLine":  151,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  204,
+"startColumn":  5,
+"endLine":  204,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  292,
+"startColumn":  5,
+"endLine":  292,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  374,
+"startColumn":  5,
+"endLine":  374,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  539,
+"startColumn":  5,
+"endLine":  539,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  813,
+"startColumn":  5,
+"endLine":  813,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  901,
+"startColumn":  5,
+"endLine":  901,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1022,
+"startColumn":  5,
+"endLine":  1022,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1101,
+"startColumn":  5,
+"endLine":  1101,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1213,
+"startColumn":  5,
+"endLine":  1213,
+"endColumn":  192
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this function is 13 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1278,
+"startColumn":  5,
+"endLine":  1278,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1349,
+"startColumn":  5,
+"endLine":  1349,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1456,
+"startColumn":  5,
+"endLine":  1456,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1516,
+"startColumn":  5,
+"endLine":  1516,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1601,
+"startColumn":  5,
+"endLine":  1601,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
+"location":  {
+"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  5,
+"endLine":  51,
+"endColumn":  65
+}
+}
+}
+]
+}
