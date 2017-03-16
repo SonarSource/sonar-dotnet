@@ -85,8 +85,6 @@ function uploadPackages(
     #iex $command
 } 
 
-$env:CI_BUILD_NUMBER="C#-$env:BUILD_NUMBER"
-
 if ($env:IS_PULLREQUEST -eq "true") { 
     write-host -f green "in a pull request"
 
