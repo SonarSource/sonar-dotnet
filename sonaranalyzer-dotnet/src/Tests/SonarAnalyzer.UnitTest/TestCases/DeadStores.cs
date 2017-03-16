@@ -17,6 +17,20 @@ namespace Tests.Diagnostics
         {
             return 5;
         }
+        public void Foo()
+        {
+            string s = null; // Compliant
+            s = "foo";
+            Console.Write(s);
+            int i = 0;
+            int a = -1;
+            int b = 1;
+            bool t = true;
+            bool f = false;
+            string foo = ""; // Noncompliant
+            foo = "f";
+            Console.Write(foo);
+        }
     }
 
     public class DeadStores
@@ -132,7 +146,7 @@ namespace Tests.Diagnostics
 
         public int Switch1(int x)
         {
-            var b = 0; // Noncompliant
+            var b = 0; // Compliant
             switch (x)
             {
                 case 6:
@@ -297,7 +311,7 @@ namespace Tests.Diagnostics
 
         private void SimpleAssignment(bool b1, bool b2)
         {
-            var x = false;  // Noncompliant
+            var x = false;  // Compliant
             (x) = b1 && b2; // Noncompliant
             x = b1 && b2;   // Noncompliant
         }

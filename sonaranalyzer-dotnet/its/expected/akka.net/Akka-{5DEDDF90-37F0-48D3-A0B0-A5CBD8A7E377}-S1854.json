@@ -41,19 +41,6 @@
 },
 {
 "id":  "S1854",
-"message":  "Remove this useless assignment to local variable 'oldNext'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
-"region":  {
-"startLine":  148,
-"startColumn":  26,
-"endLine":  148,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\Resolver.cs",

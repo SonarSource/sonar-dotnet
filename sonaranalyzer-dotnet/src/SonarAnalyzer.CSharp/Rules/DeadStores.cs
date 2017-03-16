@@ -44,8 +44,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected sealed override DiagnosticDescriptor Rule => rule;
+
+        private static readonly ISet<string> AllowedValues = new HashSet<string> { "-1", "0", "1" };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -264,6 +265,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (declarator.Initializer != null &&
+                    !IsAllowedInitialization(declarator.Initializer) &&
                     !symbol.IsConst &&
                     !liveOut.Contains(symbol) &&
                     !IsUnusedLocal(symbol))
@@ -274,6 +276,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 liveOut.Remove(symbol);
             }
 
+            private bool IsAllowedInitialization(EqualsValueClauseSyntax initializer)
+            {
+                var literalExpression = initializer.Value as LiteralExpressionSyntax;
+                return literalExpression != null &&
+                    (
+                        literalExpression.IsKind(SyntaxKind.NullLiteralExpression) ||
+                        literalExpression.IsKind(SyntaxKind.TrueLiteralExpression) ||
+                        literalExpression.IsKind(SyntaxKind.FalseLiteralExpression) ||
+                        literalExpression.IsKind(SyntaxKind.NumericLiteralExpression) &&
+                            AllowedValues.Contains(literalExpression.Token.ValueText)
+                    );
+            }
             private bool IsUnusedLocal(ISymbol declaredSymbol)
             {
                 return node.DescendantNodes()
