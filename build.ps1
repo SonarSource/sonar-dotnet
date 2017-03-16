@@ -48,6 +48,9 @@ function set_maven_build_version
 
 $env:DEPLOY_PULL_REQUEST="true"
 
+# Waiting for a fix in parent pom:
+$env:CI_BUILD_NUMBER="JAVA-$env:BUILD_NUMBER"
+
 if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
 {
   echo "======= Build, deploy and analyze master"
