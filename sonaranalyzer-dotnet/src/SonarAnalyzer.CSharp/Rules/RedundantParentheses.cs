@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -66,6 +69,46 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var expression = (ParenthesizedExpressionSyntax)c.Node;
+
+                    if (!(expression.Parent is ParenthesizedExpressionSyntax) &&
+                        (expression.Expression is ParenthesizedExpressionSyntax))
+                    {
+                        var innermostExpression = GetSelfAndDescendantParenthesizedExpressions(expression)
+                            .Reverse()
+                            .Skip(1)
+                            .First(); // There are always at least two parenthesized expressions
+
+                        var location = Location.Create(expression.SyntaxTree, 
+                            GetSpan(expression.OpenParenToken, innermostExpression.OpenParenToken));
+
+                        var secondaryLocation = Location.Create(expression.SyntaxTree, 
+                            GetSpan(innermostExpression.CloseParenToken, expression.CloseParenToken));
+
+                        c.ReportDiagnostic(
+                            Diagnostic.Create(Rule, location, additionalLocations: new[] { secondaryLocation }));
+                    }
+                },
+                SyntaxKind.ParenthesizedExpression);
+        }
+
+        private static TextSpan GetSpan(SyntaxToken startToken, SyntaxToken endToken)
+        {
+            return TextSpan.FromBounds(startToken.Span.Start, endToken.Span.End);
+        }
+
+        private IEnumerable<ParenthesizedExpressionSyntax> GetSelfAndDescendantParenthesizedExpressions(ParenthesizedExpressionSyntax expression)
+        {
+            var descendant = expression;
+            while (descendant != null)
+            {
+                yield return descendant;
+                descendant = descendant.Expression as ParenthesizedExpressionSyntax;
+            }
         }
     }
 }
