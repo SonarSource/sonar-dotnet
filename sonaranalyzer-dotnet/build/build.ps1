@@ -85,11 +85,7 @@ function uploadPackages(
     #iex $command
 } 
 
-$env:BUILD_ID="C#-$env:BUILD_NUMBER"
-$env:CI_BUILD_URL=$env:BUILD_URL
-$env:GIT_BRANCH=$env:GITHUB_BRANCH
-$env:GIT_COMMIT=$env:GIT_SHA1
- 
+$env:CI_BUILD_NUMBER="C#-$env:BUILD_NUMBER"
 
 if ($env:IS_PULLREQUEST -eq "true") { 
     write-host -f green "in a pull request"
