@@ -51,19 +51,6 @@
 "endColumn":  10
 }
 }
-},
-{
-"id":  "S1144",
-"message":  "Remove this unused private member.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  9,
-"endLine":  53,
-"endColumn":  10
-}
-}
 }
 ]
 }

@@ -80,5 +80,13 @@ namespace SonarAnalyzer.Helpers
                 (methodSymbol.Name == nameof(object.Equals) ||
                 methodSymbol.Name == explicitName);
         }
+
+        public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.Constructor &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
+                methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
 {
@@ -89,7 +90,7 @@ namespace Tests.Diagnostics
         private int OnlySet2 { set { } } // Fixed
         private int BothAccessed { get; set; }
 
-        private string OnlyGet { get { return 42; } }
+        private int OnlyGet { get { return 42; } }
 
         public void M()
         {
@@ -99,8 +100,28 @@ namespace Tests.Diagnostics
 
             BothAccessed++;
 
-            var x = 10;
+            int? x = 10;
             x = this?.OnlyGet;
+        }
+    }
+
+    [Serializable]
+    public sealed class GoodException : Exception
+    {
+        public GoodException()
+        {
+        }
+        public GoodException(string message)
+            : base(message)
+        {
+        }
+        public GoodException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+        private GoodException(SerializationInfo info, StreamingContext context) // Compliant because of the serialization
+            : base(info, context)
+        {
         }
     }
 }
