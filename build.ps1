@@ -49,7 +49,7 @@ function set_maven_build_version
 $env:DEPLOY_PULL_REQUEST="true"
 
 # Waiting for a fix in parent pom:
-$env:BUILD_ID=$env:BUILD_NUMBER
+$env:BUILD_ID="MVN-$env:BUILD_NUMBER"
 $env:CI_BUILD_URL=$env:BUILD_URL
 $env:GIT_BRANCH=$env:GITHUB_BRANCH
 $env:GIT_COMMIT=$env:GIT_SHA1

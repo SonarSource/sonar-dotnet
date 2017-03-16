@@ -83,7 +83,13 @@ function uploadPackages(
     #write-host -f green  "Deploy to repox with $version"    
     #$command = 'mvn deploy -Pdeploy-sonarsource -B -e -V'
     #iex $command
-}  
+} 
+
+$env:BUILD_ID="C#-$env:BUILD_NUMBER"
+$env:CI_BUILD_URL=$env:BUILD_URL
+$env:GIT_BRANCH=$env:GITHUB_BRANCH
+$env:GIT_COMMIT=$env:GIT_SHA1
+ 
 
 if ($env:IS_PULLREQUEST -eq "true") { 
     write-host -f green "in a pull request"
