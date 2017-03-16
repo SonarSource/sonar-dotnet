@@ -51,7 +51,7 @@ $env:DEPLOY_PULL_REQUEST="true"
 # Waiting for a fix in parent pom:
 $env:CI_BUILD_NUMBER="MVN-$env:BUILD_NUMBER"
 
-if ($env:GIT_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
+if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
 {
   echo "======= Build, deploy and analyze master"
   
