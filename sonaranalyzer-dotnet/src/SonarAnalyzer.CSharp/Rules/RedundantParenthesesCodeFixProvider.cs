@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.CodeAnalysis.CodeActions;
 using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ImmutableArray.Create(RedundantParentheses.DiagnosticId);
             }
         }
+
         public sealed override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
@@ -50,15 +52,23 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan);
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newRoot = root.RemoveNode(syntaxNode, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
-                context.Diagnostics);
+            if (syntaxNode is ArgumentListSyntax ||
+                syntaxNode is AttributeArgumentListSyntax)
+            {
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        Title,
+                        c =>
+                        {
+                            var newRoot = root.RemoveNode(syntaxNode, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
+                    context.Diagnostics);
+            }
+            else
+            {
+                // Do nothing, we don't want to mess the code if we don't find what we expect
+            }
 
             return TaskHelper.CompletedTask;
         }
