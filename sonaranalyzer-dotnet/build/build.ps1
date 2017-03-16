@@ -122,7 +122,7 @@ if ($env:IS_PULLREQUEST -eq "true") {
     uploadPackages -version $version
 
 } else {
-    if (($env:GITHUB_BRANCH -eq "MMF-806") -or ($env:GITHUB_BRANCH -eq "refs/heads/master")) {
+    if (($env:GITHUB_BRANCH -eq "master") -or ($env:GITHUB_BRANCH -eq "refs/heads/master")) {
         write-host -f green "Building master branch"
 
         #setup Nuget.config

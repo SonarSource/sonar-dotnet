@@ -54,7 +54,7 @@ $env:CI_BUILD_URL=$env:BUILD_URL
 $env:GIT_BRANCH=$env:GITHUB_BRANCH
 $env:GIT_COMMIT=$env:GIT_SHA1
 
-if ($env:GIT_BRANCH -eq 'MMF-806' -and $env:IS_PULLREQUEST -eq "false")
+if ($env:GIT_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
 {
   echo "======= Build, deploy and analyze master"
   
