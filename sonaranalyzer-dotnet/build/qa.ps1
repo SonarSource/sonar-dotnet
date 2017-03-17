@@ -13,27 +13,32 @@ If (Test-Path $strFileName){
 	Remove-Item $strFileName
 }
 
-$env:FILENAME="$env:ARTIFACT.$env:VERSION.nupkg"
+#list of artifacts to tests
+$artifacts = "SonarAnalyzer.CSharp","SonarAnalyzer.VisualBasic","SonarAnalyzer.Scanner"
 
-#download nuget package
-$ARTIFACTORY_SRC_REPO="sonarsource-nuget-qa"
-$url = "$env:ARTIFACTORY_URL/$ARTIFACTORY_SRC_REPO/$env:FILENAME"
-Write-Host "Downloading $url"
-$pair = "$($env:REPOX_QAPUBLICADMIN_USERNAME):$($env:REPOX_QAPUBLICADMIN_PASSWORD)"
-$encodedCreds = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
-$basicAuthValue = "Basic $encodedCreds"
-$Headers = @{Authorization = $basicAuthValue}
-Invoke-WebRequest -UseBasicParsing -Uri "$url" -Headers $Headers -OutFile $env:FILENAME
+foreach ($artifact in $artifacts) { 
+    $env:FILENAME="$artifact.$env:VERSION.nupkg"
 
-#unzip nuget package
-$zipName=$env:FILENAME.Substring(0, $env:FILENAME.LastIndexOf('.'))+".zip"
-Move-Item $env:FILENAME $zipName -force
-$shell_app=new-object -com shell.application
-$baseDir=(Get-Item -Path ".\" -Verbose).FullName
-$destination = $shell_app.NameSpace($baseDir)
-$zip_file = $shell_app.NameSpace("$baseDir\$zipName")
-Write-Host "Unzipping $baseDir\$zipName"
-$destination.CopyHere($zip_file.Items(), 0x14) 
+    #download nuget package
+    $ARTIFACTORY_SRC_REPO="sonarsource-nuget-qa"
+    $url = "$env:ARTIFACTORY_URL/$ARTIFACTORY_SRC_REPO/$env:FILENAME"
+    Write-Host "Downloading $url"
+    $pair = "$($env:REPOX_QAPUBLICADMIN_USERNAME):$($env:REPOX_QAPUBLICADMIN_PASSWORD)"
+    $encodedCreds = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
+    $basicAuthValue = "Basic $encodedCreds"
+    $Headers = @{Authorization = $basicAuthValue}
+    Invoke-WebRequest -UseBasicParsing -Uri "$url" -Headers $Headers -OutFile $env:FILENAME
+
+    #unzip nuget package
+    $zipName=$env:FILENAME.Substring(0, $env:FILENAME.LastIndexOf('.'))+".zip"
+    Move-Item $env:FILENAME $zipName -force
+    $shell_app=new-object -com shell.application
+    $baseDir=(Get-Item -Path ".\" -Verbose).FullName
+    $destination = $shell_app.NameSpace($baseDir)
+    $zip_file = $shell_app.NameSpace("$baseDir\$zipName")
+    Write-Host "Unzipping $baseDir\$zipName"
+    $destination.CopyHere($zip_file.Items(), 0x14) 
+}
 
 #get sha1
 $productversion="empty"
@@ -86,22 +91,14 @@ testExitCode
 testExitCode
 
 #move dlls to correct locations
-Write-Host "Installing downloaded dlls"
-$dllpath="empty"
-if ($env:FILENAME -like '*CSharp*') {
-    $dllpath="SonarAnalyzer.CSharp"
-}
-if ($env:FILENAME -like '*VisualBasic*') {
-    $dllpath="SonarAnalyzer.VisualBasic"
-}
-if ($env:FILENAME -like '*Scanner*') {
-    $dllpath="SonarAnalyzer.Scanner"
-}
-Write-Host "Copying analyzers"
-Copy-Item .\analyzers\*.dll .\src\$dllpath\bin\Release -force
-Copy-Item .\analyzers\*.dll .\its\binaries -force
+foreach ($artifact in $artifacts) { 
+    $env:FILENAME="$artifact.$env:VERSION.nupkg"
 
-dir .\src\$dllpath\bin\Release
+    Write-Host "Installing downloaded dlls for $artifact"        
+    Copy-Item .\analyzers\*.dll .\src\$artifact\bin\Release -force
+    Copy-Item .\analyzers\*.dll .\its\binaries -force
+    dir .\src\$artifact\bin\Release
+}
 dir .\its\binaries
 
 #run tests
