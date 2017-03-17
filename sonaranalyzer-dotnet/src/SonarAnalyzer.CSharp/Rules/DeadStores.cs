@@ -46,8 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected sealed override DiagnosticDescriptor Rule => rule;
 
-        private static readonly ISet<string> AllowedValues = new HashSet<string> { "-1", "0", "1" };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -132,8 +130,10 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SyntaxNodeAnalysisContext context;
             private readonly ISymbol declaration;
             private readonly IEnumerable<ISymbol> excludedLocals;
-
             private readonly CSharpSyntaxNode node;
+
+        private static readonly ISet<string> AllowedNumericValues = new HashSet<string> { "-1", "0", "1" };
+        private static readonly ISet<string> AllowedStringValues = new HashSet<string> { "" };
 
             public InBlockLivenessAnalysis(Block block, IEnumerable<ISymbol> blockOutState, IEnumerable<ISymbol> excludedLocals, CSharpSyntaxNode node, ISymbol declaration,
                 SyntaxNodeAnalysisContext context)
@@ -278,16 +278,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsAllowedInitialization(EqualsValueClauseSyntax initializer)
             {
-                var literalExpression = initializer.Value as LiteralExpressionSyntax;
-                return literalExpression != null &&
-                    (
-                        literalExpression.IsKind(SyntaxKind.NullLiteralExpression) ||
-                        literalExpression.IsKind(SyntaxKind.TrueLiteralExpression) ||
-                        literalExpression.IsKind(SyntaxKind.FalseLiteralExpression) ||
-                        literalExpression.IsKind(SyntaxKind.NumericLiteralExpression) &&
-                            AllowedValues.Contains(literalExpression.Token.ValueText)
-                    );
+                return IsAllowedObjectInitialization(initializer.Value) ||
+                    IsAllowedBooleanInitialization(initializer.Value) ||
+                    IsAllowedNumericInitialization(initializer.Value) ||
+                    IsAllowedStringInitialization(initializer.Value);
             }
+
+            private bool IsAllowedObjectInitialization(ExpressionSyntax expression)
+            {
+                return expression.IsKind(SyntaxKind.NullLiteralExpression);
+            }
+
+            private bool IsAllowedBooleanInitialization(ExpressionSyntax expression)
+            {
+                return expression.IsKind(SyntaxKind.TrueLiteralExpression) ||
+                    expression.IsKind(SyntaxKind.FalseLiteralExpression);
+            }
+
+            private bool IsAllowedNumericInitialization(ExpressionSyntax expression)
+            {
+                return expression.IsKind(SyntaxKind.NumericLiteralExpression) &&
+                    AllowedNumericValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText);
+            }
+
+            private bool IsAllowedStringInitialization(ExpressionSyntax expression)
+            {
+                return (expression.IsKind(SyntaxKind.StringLiteralExpression) &&
+                    AllowedStringValues.Contains(((LiteralExpressionSyntax)expression).Token.ValueText)) ||
+                    expression.IsStringEmpty(context.SemanticModel);
+            }
+
             private bool IsUnusedLocal(ISymbol declaredSymbol)
             {
                 return node.DescendantNodes()

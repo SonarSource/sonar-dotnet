@@ -27,9 +27,12 @@ namespace Tests.Diagnostics
             int b = 1;
             bool t = true;
             bool f = false;
-            string foo = ""; // Noncompliant
+            string foo = ""; // Compliant
             foo = "f";
             Console.Write(foo);
+            string s2 = string.Empty; // Compliant
+            s2 = "f";
+            Console.Write(s2);
         }
     }
 
