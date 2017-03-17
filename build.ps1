@@ -48,8 +48,9 @@ function set_maven_build_version
 
 $env:DEPLOY_PULL_REQUEST="true"
 
-# Waiting for a fix in parent pom:
-$env:CI_BUILD_NUMBER="JAVA-$env:BUILD_NUMBER"
+# remove env variables so qgate is not displayed for java (we only want qgate for sonaranalyzer as long as only one qgate can be shown in burgr)
+Remove-Item Env:\CI_BUILD_NUMBER
+Remove-Item Env:\CI_PRODUCT
 
 if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
 {
