@@ -47,55 +47,55 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSymbolAction(
-                c =>
+            context.RegisterSymbolAction(RaiseOnUninvokedEventDeclaration, SymbolKind.NamedType);
+        }
+
+        private void RaiseOnUninvokedEventDeclaration(SymbolAnalysisContext context)
+        {
+            var namedType = (INamedTypeSymbol)context.Symbol;
+            if (!namedType.IsClassOrStruct() ||
+                namedType.ContainingType != null)
+            {
+                return;
+            }
+
+            var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, context.Compilation);
+
+            var removableEvents = removableDeclarationCollector.GetRemovableDeclarations(
+                ImmutableHashSet.Create(SyntaxKind.EventDeclaration), maxAccessibility);
+            var removableEventFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
+                ImmutableHashSet.Create(SyntaxKind.EventFieldDeclaration), maxAccessibility);
+
+            var allRemovableEvents = removableEvents.Concat(removableEventFields).ToList();
+            if (!allRemovableEvents.Any())
+            {
+                return;
+            }
+
+            var symbolNames = allRemovableEvents.Select(t => t.Symbol.Name).ToImmutableHashSet();
+            var usedSymbols = GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
+            var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
+            var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
+
+            foreach (var removableEvent in allRemovableEvents)
+            {
+                if (!usedSymbols.Contains(removableEvent.Symbol))
                 {
-                    var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (!namedType.IsClassOrStruct() ||
-                        namedType.ContainingType != null)
-                    {
-                        return;
-                    }
+                    /// reported by <see cref="UnusedPrivateMember"/>
+                    continue;
+                }
 
-                    var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, c.Compilation);
+                if (!invokedSymbols.Contains(removableEvent.Symbol) &&
+                    !possiblyCopiedSymbols.Contains(removableEvent.Symbol))
+                {
+                    var eventField = removableEvent.SyntaxNode as VariableDeclaratorSyntax;
+                    var location = eventField != null
+                        ? eventField.Identifier.GetLocation()
+                        : ((EventDeclarationSyntax)removableEvent.SyntaxNode).Identifier.GetLocation();
 
-                    var removableEvents = removableDeclarationCollector.GetRemovableDeclarations(
-                        ImmutableHashSet.Create(SyntaxKind.EventDeclaration), maxAccessibility);
-                    var removableEventFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                        ImmutableHashSet.Create(SyntaxKind.EventFieldDeclaration), maxAccessibility);
-
-                    var allRemovableEvents = removableEvents.Concat(removableEventFields).ToList();
-                    if (!allRemovableEvents.Any())
-                    {
-                        return;
-                    }
-
-                    var symbolNames = allRemovableEvents.Select(t => t.Symbol.Name).ToImmutableHashSet();
-                    var usedSymbols = GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
-                    var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
-                    var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
-
-                    foreach (var removableEvent in allRemovableEvents)
-                    {
-                        if (!usedSymbols.Contains(removableEvent.Symbol))
-                        {
-                            /// reported by <see cref="UnusedPrivateMember"/>
-                            continue;
-                        }
-
-                        if (!invokedSymbols.Contains(removableEvent.Symbol) &&
-                            !possiblyCopiedSymbols.Contains(removableEvent.Symbol))
-                        {
-                            var eventField = removableEvent.SyntaxNode as VariableDeclaratorSyntax;
-                            var location = eventField != null
-                                ? eventField.Identifier.GetLocation()
-                                : ((EventDeclarationSyntax)removableEvent.SyntaxNode).Identifier.GetLocation();
-
-                            c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location));
-                        }
-                    }
-                },
-                SymbolKind.NamedType);
+                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, location));
+                }
+            }
         }
 
         private static ISet<ISymbol> GetReferencedSymbolsWithMatchingNames(RemovableDeclarationCollector removableDeclarationCollector,
@@ -248,7 +248,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 invokedMethodName = memberBinding.Name;
             }
 
-            if ((memberAccess != null || memberBinding  != null) &&
+            if ((memberAccess != null || memberBinding != null) &&
                 expression != null &&
                 IsExplicitDelegateInvocation(symbol, invokedMethodName))
             {

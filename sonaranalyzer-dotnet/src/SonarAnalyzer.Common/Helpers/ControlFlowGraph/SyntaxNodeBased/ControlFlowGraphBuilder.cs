@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public Block EntryBlock { get; private set; }
         public ExitBlock ExitBlock { get; }
 
-        internal ControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
+        protected ControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
         {
             if (node == null)
             {

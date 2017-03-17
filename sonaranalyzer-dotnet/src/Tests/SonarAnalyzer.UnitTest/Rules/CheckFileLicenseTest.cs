@@ -46,7 +46,8 @@ namespace SonarAnalyzer.UnitTest.Rules
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */";
-        private const string SingleLineRegexHeader = @"// Copyright \(c\) \w*\. All Rights Reserved\. Licensed under the LGPL License\.  See License\.txt in the project root for license information\.";
+        private const string SingleLineRegexHeader = @"// Copyright \(c\) \w*\. All Rights Reserved\. " +
+            @"Licensed under the LGPL License\.  See License\.txt in the project root for license information\.";
         private const string MultiLineRegexHeader = @"/\*
  \* SonarQube, open source software quality management tool\.
  \* Copyright \(C\) \d\d\d\d-\d\d\d\d SonarSource

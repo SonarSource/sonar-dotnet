@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
             private readonly SemanticModel semanticModel;
             private readonly List<TokenTypeInfo.Types.TokenInfo> spans = new List<TokenTypeInfo.Types.TokenInfo>();
 
-            public TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
+            protected TokenClassifierBase(SyntaxToken token, SemanticModel semanticModel)
             {
                 this.token = token;
                 this.semanticModel = semanticModel;

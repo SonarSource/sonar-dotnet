@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         protected readonly ISet<ISymbol> capturedVariables = new HashSet<ISymbol>();
 
-        internal LiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
+        protected LiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
             this.reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();

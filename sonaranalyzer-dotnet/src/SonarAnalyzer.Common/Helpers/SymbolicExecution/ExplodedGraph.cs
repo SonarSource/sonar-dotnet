@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public event EventHandler ExitBlockReached;
         public event EventHandler<ConditionEvaluatedEventArgs> ConditionEvaluated;
 
-        public ExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, LiveVariableAnalysis lva)
+        protected ExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, LiveVariableAnalysis lva)
         {
             this.cfg = cfg;
             this.declaration = declaration;

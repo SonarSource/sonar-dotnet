@@ -48,51 +48,52 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var tryStatement = (TryStatementSyntax)c.Node;
-                    var catches = tryStatement.Catches.ToList();
-                    var caughtExceptionTypes = new Lazy<List<INamedTypeSymbol>>(() => ComputeExceptionTypesIfNeeded(catches, c.SemanticModel));
-                    var redundantCatches = new HashSet<CatchClauseSyntax>();
-                    var isIntermediate = false;
-
-                    for (int i = catches.Count - 1; i >= 0; i--)
-                    {
-                        var currentCatch = catches[i];
-                        if (!EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock))
-                        {
-                            isIntermediate = true;
-                            continue;
-                        }
-
-                        if (!isIntermediate)
-                        {
-                            redundantCatches.Add(currentCatch);
-                            continue;
-                        }
-
-                        if (currentCatch.Filter != null)
-                        {
-                            continue;
-                        }
-
-                        if (!IsMoreSpecificTypeThanANotRedundantCatch(i, catches, caughtExceptionTypes.Value, redundantCatches))
-                        {
-                            redundantCatches.Add(currentCatch);
-                        }
-                    }
-
-                    foreach (var redundantCatch in redundantCatches)
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, redundantCatch.GetLocation()));
-                    }
-                },
-                SyntaxKind.TryStatement);
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
         }
 
-        private static bool IsMoreSpecificTypeThanANotRedundantCatch(int catchIndex, List<CatchClauseSyntax> catches, List<INamedTypeSymbol> caughtExceptionTypes,
-            ISet<CatchClauseSyntax> redundantCatches)
+        private void RaiseOnInvalidCatch(SyntaxNodeAnalysisContext context)
+        {
+            var tryStatement = (TryStatementSyntax)context.Node;
+            var catches = tryStatement.Catches.ToList();
+            var caughtExceptionTypes = new Lazy<List<INamedTypeSymbol>>(() =>
+                ComputeExceptionTypesIfNeeded(catches, context.SemanticModel));
+            var redundantCatches = new HashSet<CatchClauseSyntax>();
+            var isIntermediate = false;
+
+            for (int i = catches.Count - 1; i >= 0; i--)
+            {
+                var currentCatch = catches[i];
+                if (!EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock))
+                {
+                    isIntermediate = true;
+                    continue;
+                }
+
+                if (!isIntermediate)
+                {
+                    redundantCatches.Add(currentCatch);
+                    continue;
+                }
+
+                if (currentCatch.Filter != null)
+                {
+                    continue;
+                }
+
+                if (!IsMoreSpecificTypeThanANotRedundantCatch(i, catches, caughtExceptionTypes.Value, redundantCatches))
+                {
+                    redundantCatches.Add(currentCatch);
+                }
+            }
+
+            foreach (var redundantCatch in redundantCatches)
+            {
+                context.ReportDiagnostic(Diagnostic.Create(Rule, redundantCatch.GetLocation()));
+            }
+        }
+
+        private static bool IsMoreSpecificTypeThanANotRedundantCatch(int catchIndex, List<CatchClauseSyntax> catches,
+            List<INamedTypeSymbol> caughtExceptionTypes, ISet<CatchClauseSyntax> redundantCatches)
         {
             var currentType = caughtExceptionTypes[catchIndex];
             for (int i = catchIndex + 1; i < caughtExceptionTypes.Count; i++)
@@ -108,7 +109,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return false;
         }
 
-        private static List<INamedTypeSymbol> ComputeExceptionTypesIfNeeded(IEnumerable<CatchClauseSyntax> catches, SemanticModel semanticModel)
+        private static List<INamedTypeSymbol> ComputeExceptionTypesIfNeeded(IEnumerable<CatchClauseSyntax> catches,
+            SemanticModel semanticModel)
         {
             return catches
                 .Select(clause =>

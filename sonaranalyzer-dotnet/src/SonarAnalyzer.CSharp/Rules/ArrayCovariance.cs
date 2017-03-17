@@ -37,83 +37,85 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected sealed override DiagnosticDescriptor Rule => rule;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax) c.Node;
-                    var typeDerived = c.SemanticModel.GetTypeInfo(assignment.Right).Type;
-                    var typeBase = c.SemanticModel.GetTypeInfo(assignment.Left).Type;
-
-                    if (AreCovariantArrayTypes(typeDerived, typeBase))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, assignment.Right.GetLocation()));
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInSimpleAssignmentExpression,
                 SyntaxKind.SimpleAssignmentExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var variableDeclaration = (VariableDeclarationSyntax)c.Node;
-                    var typeBase = c.SemanticModel.GetTypeInfo(variableDeclaration.Type).Type;
-
-                    foreach (var variable in variableDeclaration.Variables
-                        .Where(syntax => syntax.Initializer != null))
-                    {
-                        var typeDerived = c.SemanticModel.GetTypeInfo(variable.Initializer.Value).Type;
-
-                        if (AreCovariantArrayTypes(typeDerived, typeBase))
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, variable.Initializer.Value.GetLocation()));
-                        }
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInVariableDeclaration,
                 SyntaxKind.VariableDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    var methodParameterLookup = new MethodParameterLookup(invocation, c.SemanticModel);
-
-                    foreach (var argument in invocation.ArgumentList.Arguments)
-                    {
-                        IParameterSymbol parameter;
-                        if (!methodParameterLookup.TryGetParameterSymbol(argument, out parameter) ||
-                            parameter.IsParams)
-                        {
-                            continue;
-                        }
-
-                        var typeDerived = c.SemanticModel.GetTypeInfo(argument.Expression).Type;
-                        if (AreCovariantArrayTypes(typeDerived, parameter.Type))
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, argument.GetLocation()));
-                        }
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInInvocationExpression,
                 SyntaxKind.InvocationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var castExpression = (CastExpressionSyntax) c.Node;
-                    var typeDerived = c.SemanticModel.GetTypeInfo(castExpression.Expression).Type;
-                    var typeBase = c.SemanticModel.GetTypeInfo(castExpression.Type).Type;
-
-                    if (AreCovariantArrayTypes(typeDerived, typeBase))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, castExpression.Type.GetLocation()));
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInCastExpression,
                 SyntaxKind.CastExpression);
         }
 
+        private void RaiseOnArrayCovarianceInSimpleAssignmentExpression(SyntaxNodeAnalysisContext context)
+        {
+            var assignment = (AssignmentExpressionSyntax)context.Node;
+            var typeDerived = context.SemanticModel.GetTypeInfo(assignment.Right).Type;
+            var typeBase = context.SemanticModel.GetTypeInfo(assignment.Left).Type;
+
+            if (AreCovariantArrayTypes(typeDerived, typeBase))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(Rule, assignment.Right.GetLocation()));
+            }
+        }
+
+        private void RaiseOnArrayCovarianceInVariableDeclaration(SyntaxNodeAnalysisContext context)
+        {
+            var variableDeclaration = (VariableDeclarationSyntax)context.Node;
+            var typeBase = context.SemanticModel.GetTypeInfo(variableDeclaration.Type).Type;
+
+            foreach (var variable in variableDeclaration.Variables
+                .Where(syntax => syntax.Initializer != null))
+            {
+                var typeDerived = context.SemanticModel.GetTypeInfo(variable.Initializer.Value).Type;
+
+                if (AreCovariantArrayTypes(typeDerived, typeBase))
+                {
+                    context.ReportDiagnostic(Diagnostic.Create(Rule, variable.Initializer.Value.GetLocation()));
+                }
+            }
+        }
+
+        private void RaiseOnArrayCovarianceInInvocationExpression(SyntaxNodeAnalysisContext context)
+        {
+            var invocation = (InvocationExpressionSyntax)context.Node;
+            var methodParameterLookup = new MethodParameterLookup(invocation, context.SemanticModel);
+
+            foreach (var argument in invocation.ArgumentList.Arguments)
+            {
+                IParameterSymbol parameter;
+                if (!methodParameterLookup.TryGetParameterSymbol(argument, out parameter) ||
+                    parameter.IsParams)
+                {
+                    continue;
+                }
+
+                var typeDerived = context.SemanticModel.GetTypeInfo(argument.Expression).Type;
+                if (AreCovariantArrayTypes(typeDerived, parameter.Type))
+                {
+                    context.ReportDiagnostic(Diagnostic.Create(Rule, argument.GetLocation()));
+                }
+            }
+        }
+
+        private void RaiseOnArrayCovarianceInCastExpression(SyntaxNodeAnalysisContext context)
+        {
+            var castExpression = (CastExpressionSyntax)context.Node;
+            var typeDerived = context.SemanticModel.GetTypeInfo(castExpression.Expression).Type;
+            var typeBase = context.SemanticModel.GetTypeInfo(castExpression.Type).Type;
+
+            if (AreCovariantArrayTypes(typeDerived, typeBase))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(Rule, castExpression.Type.GetLocation()));
+            }
+        }
 
         private static bool AreCovariantArrayTypes(ITypeSymbol typeDerivedArray, ITypeSymbol typeBaseArray)
         {
