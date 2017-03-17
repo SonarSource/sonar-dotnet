@@ -1,0 +1,13 @@
+{
+  "title": "Deserialization methods should be provided for \"OptionalField\" members",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "serialization"
+  ],
+  "defaultSeverity": "Major"
+}

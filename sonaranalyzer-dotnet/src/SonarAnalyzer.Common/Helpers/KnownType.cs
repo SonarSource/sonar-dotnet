@@ -167,6 +167,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new KnownType("System.Runtime.CompilerServices.CallerMemberNameAttribute");
         public static readonly KnownType System_Runtime_CompilerServices_CallerFilePathAttribute = new KnownType("System.Runtime.CompilerServices.CallerFilePathAttribute");
         public static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new KnownType("System.Runtime.CompilerServices.CallerLineNumberAttribute");
+        public static readonly KnownType System_Runtime_Serialization_OptionalFieldAttribute = new KnownType("System.Runtime.Serialization.OptionalFieldAttribute");
+        public static readonly KnownType System_Runtime_Serialization_OnDeserializingAttribute = new KnownType("System.Runtime.Serialization.OnDeserializingAttribute");
+        public static readonly KnownType System_Runtime_Serialization_OnDeserializedAttribute = new KnownType("System.Runtime.Serialization.OnDeserializedAttribute");
 
         public static readonly ISet<KnownType> CallerInfoAttributes = ImmutableHashSet.Create(
             System_Runtime_CompilerServices_CallerFilePathAttribute,
