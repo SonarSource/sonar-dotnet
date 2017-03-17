@@ -120,9 +120,9 @@ namespace SonarAnalyzer.UnitTest
                         }
                     }
 
-                    if (expectedIssues.Any())
+                    if (expectedIssues.Count != 0)
                     {
-                        Execute.Assertion.FailWith($"Issue was expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                        Execute.Assertion.FailWith($"Issue expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
                     }
                 }
             }

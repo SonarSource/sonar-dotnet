@@ -43,9 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSymbolAction(
-                c => CheckClassWithOnlyUnusedPrivateConstructors(c),
-                SymbolKind.NamedType);
+            context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
         }
 
         private static void CheckClassWithOnlyUnusedPrivateConstructors(SymbolAnalysisContext context)
@@ -130,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
                 .Where(m => m != null)
-                .Any(ctor => object.Equals(ctor.ContainingType?.OriginalDefinition, namedType));
+                .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
         }
 
         private static IEnumerable<IMethodSymbol> GetConstructors(IEnumerable<ISymbol> members)
