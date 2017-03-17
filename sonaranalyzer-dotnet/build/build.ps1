@@ -85,16 +85,15 @@ function uploadPackages(
     #iex $command
 } 
 
+#get version number
+$buildversion="$env:BUILD_NUMBER"
+[xml]$versionProps = Get-Content .\build\Version.props
+$version = $versionProps.Project.PropertyGroup.MainVersion+".$buildversion"
+setVersion -version $version
+
 if ($env:IS_PULLREQUEST -eq "true") { 
     write-host -f green "in a pull request"
-
-    #get version number
-    $buildversion="$env:BUILD_NUMBER"
-    [xml]$versionProps = Get-Content .\build\Version.props
-    $version = $versionProps.Project.PropertyGroup.MainVersion+".$buildversion"
-    
-    setVersion -version $version
-
+        
     #start analysis
     .\MSBuild.SonarQube.Runner begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" /v:latest `
         /d:sonar.host.url=$env:SONAR_HOST_URL `
@@ -131,14 +130,7 @@ if ($env:IS_PULLREQUEST -eq "true") {
         testExitCode
         $apikey = $env:ARTIFACTORY_DEPLOY_USERNAME+":"+$env:ARTIFACTORY_DEPLOY_PASSWORD
         & $env:NUGET_PATH setapikey $apikey -Source repox
-        testExitCode
-
-        #get version number
-        $buildversion="$env:BUILD_NUMBER"
-        [xml]$versionProps = Get-Content .\build\Version.props
-        $version = $versionProps.Project.PropertyGroup.MainVersion+".$buildversion"
-
-        setVersion -version $version
+        testExitCode     
 
         #start analysis
         .\MSBuild.SonarQube.Runner begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" /v:master `
@@ -163,7 +155,19 @@ if ($env:IS_PULLREQUEST -eq "true") {
         uploadPackages -version $version      
         
     } else {
-        write-host -f green "not on master"
+        write-host -f green "Build, no analysis, no upload"
+
+        #nuget restore
+        & $env:NUGET_PATH restore .\SonarAnalyzer.sln
+        testExitCode
+
+        #build 
+        & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
+        testExitCode
+
+        #generate packages
+        generatePackages
+
     }
 
 }
