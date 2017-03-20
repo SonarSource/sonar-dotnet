@@ -168,6 +168,9 @@ if ($env:IS_PULLREQUEST -eq "true") {
         #generate packages
         generatePackages
 
+        #do not start qa
+        if (test-path .\version.properties) { rm .\version.properties }
+
     }
 
 }
