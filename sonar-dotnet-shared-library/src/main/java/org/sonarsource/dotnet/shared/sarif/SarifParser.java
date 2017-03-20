@@ -19,7 +19,8 @@
  */
 package org.sonarsource.dotnet.shared.sarif;
 
+import java.util.function.Consumer;
+
 @FunctionalInterface
-public interface SarifParser {
-  void parse(SarifParserCallback callback);
+public interface SarifParser extends Consumer<SarifParserCallback> {
 }

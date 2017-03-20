@@ -42,7 +42,7 @@ class SarifParser10 implements SarifParser {
   }
 
   @Override
-  public void parse(SarifParserCallback callback) {
+  public void accept(SarifParserCallback callback) {
     if (!root.has("runs")) {
       return;
     }
@@ -153,7 +153,15 @@ class SarifParser10 implements SarifParser {
     int endLine = endLineOrNull != null ? endLineOrNull.getAsInt() : startLine;
 
     JsonElement endColumnOrNull = region.get("endColumn");
-    int endColumn = endColumnOrNull != null ? endColumnOrNull.getAsInt() : (endLineOrNull != null ? (endLine == startLine ? startColumn : 1) : startColumn);
+    int endColumn;
+    if (endColumnOrNull != null) {
+      endColumn = endColumnOrNull.getAsInt();
+    } else if (endLineOrNull != null) {
+      endColumn = endLine == startLine ? startColumn : 1;
+    } else {
+      endColumn = startColumn;
+    }
+
     int endLineOffset = endColumn - 1;
 
     if (startColumn == endColumn && startLine == endLine) {

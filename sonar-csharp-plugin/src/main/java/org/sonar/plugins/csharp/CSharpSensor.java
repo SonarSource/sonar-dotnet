@@ -185,7 +185,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
 
     SarifParserCallback callback = new SarifParserCallbackImplementation(context, repositoryKeyByRoslynRuleKey);
-    SarifParserFactory.create(new File(reportPath)).parse(callback);
+    SarifParserFactory.create(new File(reportPath)).accept(callback);
   }
 
   public final Path protobufReportPathForMSBuild12(SensorContext context) {
