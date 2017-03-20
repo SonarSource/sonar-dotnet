@@ -37,7 +37,7 @@ public class XUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Missing attribute \"total\" in element <assembly> in ");
     thrown.expectMessage(new File("src/test/resources/xunit/no_counters.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/no_counters.xml"), mock(UnitTestResults.class));
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_counters.xml"), mock(UnitTestResults.class));
   }
 
   @Test
@@ -45,7 +45,7 @@ public class XUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected an integer instead of \"invalid\" for the attribute \"total\" in ");
     thrown.expectMessage(new File("src/test/resources/xunit/invalid_total.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/invalid_total.xml"), mock(UnitTestResults.class));
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/invalid_total.xml"), mock(UnitTestResults.class));
   }
 
   @Test
@@ -53,13 +53,13 @@ public class XUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected either an <assemblies> or an <assembly> root tag, but got <foo> instead.");
     thrown.expectMessage(new File("src/test/resources/xunit/invalid_root.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/invalid_root.xml"), mock(UnitTestResults.class));
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/invalid_root.xml"), mock(UnitTestResults.class));
   }
 
   @Test
   public void valid() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/valid.xml"), results);
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid.xml"), results);
 
     assertThat(results.tests()).isEqualTo(17);
     assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);
@@ -72,7 +72,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void valid_xunit_1_9_2() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
 
     assertThat(results.tests()).isEqualTo(6);
     assertThat(results.passedPercentage()).isEqualTo(3 * 100.0 / 6);
@@ -84,7 +84,7 @@ public class XUnitTestResultsFileParserTest {
   @Test
   public void should_not_fail_without_execution_time() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new XUnitTestResultsFileParser().parse(new File("src/test/resources/xunit/no_execution_time.xml"), results);
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_execution_time.xml"), results);
 
     assertThat(results.tests()).isEqualTo(17);
     assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);

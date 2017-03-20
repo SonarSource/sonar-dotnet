@@ -37,7 +37,7 @@ public class NUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Missing attribute \"total\" in element <test-results> in ");
     thrown.expectMessage(new File("src/test/resources/nunit/no_counters.xml").getAbsolutePath());
-    new NUnitTestResultsFileParser().parse(new File("src/test/resources/nunit/no_counters.xml"), mock(UnitTestResults.class));
+    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/no_counters.xml"), mock(UnitTestResults.class));
   }
 
   @Test
@@ -45,13 +45,13 @@ public class NUnitTestResultsFileParserTest {
     thrown.expect(ParseErrorException.class);
     thrown.expectMessage("Expected an integer instead of \"invalid\" for the attribute \"total\" in ");
     thrown.expectMessage(new File("src/test/resources/nunit/invalid_total.xml").getAbsolutePath());
-    new NUnitTestResultsFileParser().parse(new File("src/test/resources/nunit/invalid_total.xml"), mock(UnitTestResults.class));
+    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/invalid_total.xml"), mock(UnitTestResults.class));
   }
 
   @Test
   public void valid() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParser().parse(new File("src/test/resources/nunit/valid.xml"), results);
+    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid.xml"), results);
 
     assertThat(results.tests()).isEqualTo(196);
     assertThat(results.passedPercentage()).isEqualTo(146 * 100.0 / 196);
@@ -64,7 +64,7 @@ public class NUnitTestResultsFileParserTest {
   @Test
   public void valid_comma_in_double() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParser().parse(new File("src/test/resources/nunit/valid_comma_in_double.xml"), results);
+    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid_comma_in_double.xml"), results);
 
     assertThat(results.executionTime()).isEqualTo(1051);
   }
@@ -72,7 +72,7 @@ public class NUnitTestResultsFileParserTest {
   @Test
   public void valid_no_execution_time() throws Exception {
     UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParser().parse(new File("src/test/resources/nunit/valid_no_execution_time.xml"), results);
+    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/valid_no_execution_time.xml"), results);
 
     assertThat(results.tests()).isEqualTo(196);
     assertThat(results.passedPercentage()).isEqualTo(146 * 100.0 / 196);

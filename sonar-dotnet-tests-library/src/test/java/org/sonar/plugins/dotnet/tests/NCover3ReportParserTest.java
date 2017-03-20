@@ -37,34 +37,34 @@ public class NCover3ReportParserTest {
   public void invalid_root() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("<coverage>");
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/invalid_root.nccov"), mock(Coverage.class));
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/invalid_root.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void wrong_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/wrong_version.nccov"), mock(Coverage.class));
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/wrong_version.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void no_version() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("exportversion");
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/no_version.nccov"), mock(Coverage.class));
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/no_version.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void non_existing_file() {
     thrown.expect(RuntimeException.class);
     thrown.expectMessage("non_existing_file.nccov");
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/non_existing_file.nccov"), mock(Coverage.class));
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/non_existing_file.nccov"), mock(Coverage.class));
   }
 
   @Test
   public void valid() throws Exception {
     Coverage coverage = new Coverage();
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/valid.nccov"), coverage);
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/valid.nccov"), coverage);
 
     assertThat(coverage.files()).containsOnly(
       new File("MyLibrary\\Adder.cs").getCanonicalPath(),
@@ -90,7 +90,7 @@ public class NCover3ReportParserTest {
 
   @Test
   public void should_not_fail_with_invalid_path() {
-    new NCover3ReportParser().parse(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
+    new NCover3ReportParser().accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
   }
 
 }

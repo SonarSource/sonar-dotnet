@@ -35,7 +35,7 @@ public class CoverageCache {
     Coverage coverage = cache.get(path);
     if (coverage == null) {
       coverage = new Coverage();
-      parser.parse(reportFile, coverage);
+      parser.accept(reportFile, coverage);
       cache.put(path, coverage);
       LOG.info("Adding this code coverage report to the cache for later reuse: " + path);
     } else {

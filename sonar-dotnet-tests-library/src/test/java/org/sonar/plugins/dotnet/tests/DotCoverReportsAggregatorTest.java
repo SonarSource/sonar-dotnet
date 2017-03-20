@@ -38,28 +38,28 @@ public class DotCoverReportsAggregatorTest {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The following report dotCover report HTML sources folder cannot be found: ");
     thrown.expectMessage(new File("src/test/resources/dotcover_aggregator/no_sources/src").getAbsolutePath());
-    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).parse(new File("src/test/resources/dotcover_aggregator/no_sources.html"), mock(Coverage.class));
+    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).accept(new File("src/test/resources/dotcover_aggregator/no_sources.html"), mock(Coverage.class));
   }
 
   @Test
   public void not_html() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("Only dotCover HTML reports which start with \"<!DOCTYPE html>\" are supported.");
-    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).parse(new File("src/test/resources/dotcover_aggregator/not_html.html"), mock(Coverage.class));
+    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).accept(new File("src/test/resources/dotcover_aggregator/not_html.html"), mock(Coverage.class));
   }
 
   @Test
   public void no_extension() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("The following dotCover report name should have an extension: no_extension");
-    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).parse(new File("src/test/resources/dotcover_aggregator/no_extension"), mock(Coverage.class));
+    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).accept(new File("src/test/resources/dotcover_aggregator/no_extension"), mock(Coverage.class));
   }
 
   @Test
   public void empty_folder() {
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage("No dotCover report HTML source file found under:");
-    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).parse(new File("src/test/resources/dotcover_aggregator/empty_folder.html"), mock(Coverage.class));
+    new DotCoverReportsAggregator(mock(DotCoverReportParser.class)).accept(new File("src/test/resources/dotcover_aggregator/empty_folder.html"), mock(Coverage.class));
   }
 
   @Test
@@ -67,11 +67,11 @@ public class DotCoverReportsAggregatorTest {
     DotCoverReportParser parser = mock(DotCoverReportParser.class);
 
     Coverage coverage = new Coverage();
-    new DotCoverReportsAggregator(parser).parse(new File("src/test/resources/dotcover_aggregator/foo.bar.html"), coverage);
+    new DotCoverReportsAggregator(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar.html"), coverage);
 
-    verify(parser).parse(new File("src/test/resources/dotcover_aggregator/foo.bar/src/1.html"), coverage);
-    verify(parser).parse(new File("src/test/resources/dotcover_aggregator/foo.bar/src/2.html"), coverage);
-    verify(parser, Mockito.never()).parse(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
+    verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/1.html"), coverage);
+    verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/2.html"), coverage);
+    verify(parser, Mockito.never()).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
   }
 
 }

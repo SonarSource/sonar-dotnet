@@ -36,7 +36,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
   private static final Logger LOG = Loggers.get(VisualStudioTestResultsFileParser.class);
 
   @Override
-  public void parse(File file, UnitTestResults unitTestResults) {
+  public void accept(File file, UnitTestResults unitTestResults) {
     LOG.info("Parsing the Visual Studio Test Results file " + file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }
@@ -116,11 +116,12 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       StringBuffer sb = new StringBuffer();
 
       Matcher matcher = millisecondsPattern.matcher(value);
+      StringBuilder trailingZeros = new StringBuilder();
       while (matcher.find()) {
         String milliseconds = matcher.group(2);
-        String trailingZeros = "";
+        trailingZeros.setLength(0);
         for (int i = 0; i < 3 - milliseconds.length(); i++) {
-          trailingZeros += "0";
+          trailingZeros.append("0");
         }
         matcher.appendReplacement(sb, "$1" + trailingZeros);
       }

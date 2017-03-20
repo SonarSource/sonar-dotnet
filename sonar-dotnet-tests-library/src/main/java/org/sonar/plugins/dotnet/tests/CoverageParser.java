@@ -20,9 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.function.BiConsumer;
 
-public interface CoverageParser {
-
-  void parse(File file, Coverage coverage);
-
+@FunctionalInterface
+public interface CoverageParser extends BiConsumer<File, Coverage> {
 }

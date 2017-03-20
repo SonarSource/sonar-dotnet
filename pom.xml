@@ -10,8 +10,8 @@
 
   <groupId>org.sonarsource.dotnet</groupId>
   <artifactId>sonar-csharp</artifactId>
-  <packaging>pom</packaging>
   <version>5.9-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <name>SonarC# parent</name>
   <description>Code Analyzer for C#</description>
@@ -28,13 +28,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <modules>
-    <module>sonar-dotnet-tests-library</module>
-    <module>sonar-dotnet-shared-library</module>
-    <module>sonar-csharp-plugin</module>
-    <module>sonaranalyzer-dotnet</module>
-  </modules>
 
   <developers>
     <developer>
@@ -63,6 +56,14 @@
       <organization>SonarSource</organization>
     </developer>
   </developers>
+
+  <modules>
+    <module>sonar-dotnet-tests-library</module>
+    <module>sonar-dotnet-shared-library</module>
+    <module>sonar-csharp-plugin</module>
+    <module>sonaranalyzer-dotnet</module>
+  </modules>
+
   <scm>
     <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
     <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
