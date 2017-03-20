@@ -7,6 +7,12 @@ function testExitCode(){
     }
 }
 
+#build settings for dev-env
+if ($env:DEV -eq "true"){
+    $env:MSBUILD_PATH="msbuild"
+    $env:NUGET_PATH="nuget"
+}
+
 #download MSBuild
     $url = "https://github.com/SonarSource-VisualStudio/sonar-msbuild-runner/releases/download/2.0/MSBuild.SonarQube.Runner-2.0.zip"
     $output = ".\MSBuild.SonarQube.Runner.zip"    
@@ -71,18 +77,6 @@ function uploadPackages(
         $filePath=$file.fullname
         (Get-Content .\sonaranalyzer-maven-artifacts\$artifact\pom.xml) -replace "file-$artifact", "$filePath" | Set-Content .\sonaranalyzer-maven-artifacts\$artifact\pom.xml          
     }
-
-    #cd build\poms
-    #write-host -f green  "set version $version in pom.xml"
-    #$command = "mvn versions:set -DgenerateBackupPoms=false -DnewVersion='$version'"
-    #iex $command
-    #write-host -f green  "set version $version in env VAR PROJECT_VERSION for artifactory buildinfo metadata"
-    #$env:PROJECT_VERSION=$version
-    #write-host -f green  "set the buildnumber to this job build number"
-    #$env:BUILD_ID=$env:BUILD_NUMBER
-    #write-host -f green  "Deploy to repox with $version"    
-    #$command = 'mvn deploy -Pdeploy-sonarsource -B -e -V'
-    #iex $command
 } 
 
 #get version number
@@ -90,6 +84,7 @@ $buildversion="$env:BUILD_NUMBER"
 [xml]$versionProps = Get-Content .\build\Version.props
 $version = $versionProps.Project.PropertyGroup.MainVersion+".$buildversion"
 setVersion -version $version
+
 
 if ($env:IS_PULLREQUEST -eq "true") { 
     write-host -f green "in a pull request"
@@ -162,8 +157,13 @@ if ($env:IS_PULLREQUEST -eq "true") {
         testExitCode
 
         #build 
-        & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
-        testExitCode
+        if ($env:DEV -eq "true"){
+            & $env:MSBUILD_PATH .\SonarAnalyzer.sln
+            testExitCode
+        }else{
+            & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
+            testExitCode
+        }
 
         #generate packages
         generatePackages

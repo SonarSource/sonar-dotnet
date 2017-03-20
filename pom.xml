@@ -61,7 +61,6 @@
     <module>sonar-dotnet-tests-library</module>
     <module>sonar-dotnet-shared-library</module>
     <module>sonar-csharp-plugin</module>
-    <module>sonaranalyzer-dotnet</module>
   </modules>
 
   <scm>
@@ -80,4 +79,14 @@
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:${project.artifactId}:jar</artifactsToPublish>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>sonaranalyzer</id>
+      <modules>
+        <module>sonaranalyzer-dotnet</module>
+      </modules>
+    </profile>
+  </profiles>
+
 </project>

@@ -2,10 +2,6 @@ $ErrorActionPreference = "Stop"
 
 $PSVersionTable.PSVersion
 
-cd sonaranalyzer-dotnet
-& .\build\build.ps1
-cd ..
-
 function CheckLastExitCode(){
     If($LASTEXITCODE -ne 0) {
         write-host -f green "lastexitcode: $LASTEXITCODE"
@@ -48,9 +44,15 @@ function set_maven_build_version
 
 $env:DEPLOY_PULL_REQUEST="true"
 
+#build sonaranalyzer
+cd sonaranalyzer-dotnet
+& .\build\build.ps1
+CheckLastExitCode
+cd ..
+
 # remove env variables so qgate is not displayed for java (we only want qgate for sonaranalyzer as long as only one qgate can be shown in burgr)
-Remove-Item Env:\CI_BUILD_NUMBER
-Remove-Item Env:\CI_PRODUCT
+if (test-path Env:\CI_BUILD_NUMBER) { Remove-Item Env:\CI_BUILD_NUMBER }
+if (test-path Env:\CI_PRODUCT) { Remove-Item Env:\CI_PRODUCT }
 
 if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
 {
@@ -62,7 +64,7 @@ if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
   $env:MAVEN_OPTS="-Xmx1536m -Xms128m"
   
   mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-      "-Pcoverage-per-test,deploy-sonarsource,release" `
+      "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
       "-Dmaven.test.redirectTestOutputToFile=false" `
       "-Dsonar.host.url=$env:SONAR_HOST_URL" `
       "-Dsonar.login=$env:SONAR_TOKEN" `
@@ -70,7 +72,7 @@ if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
       -B -e -V
   CheckLastExitCode
 }
-elseif ($env:PULL_REQUEST -ne $null -and $env:GITHUB_TOKEN -ne $null)
+elseif ($env:IS_PULLREQUEST -eq "true" -and $env:GITHUB_TOKEN -ne $null)
 {
   echo '======= Build and analyze pull request'
   
@@ -85,7 +87,7 @@ elseif ($env:PULL_REQUEST -ne $null -and $env:GITHUB_TOKEN -ne $null)
   {
     echo '======= with deploy'
     mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-      -Pdeploy-sonarsource `
+      "-Pdeploy-sonarsource,sonaranalyzer" `
       "-Dmaven.test.redirectTestOutputToFile=false" `
       "-Dsonar.analysis.mode=issues" `
       "-Dsonar.github.pullRequest=$env:PULL_REQUEST" `
@@ -114,6 +116,8 @@ elseif ($env:PULL_REQUEST -ne $null -and $env:GITHUB_TOKEN -ne $null)
 else
 {
   echo '======= Build, no analysis, no deploy'
+
+  set_maven_build_version $env:BUILD_NUMBER
 
   # No need for Maven phase "install" as the generated JAR files do not need to be installed
   # in Maven local repository. Phase "verify" is enough.
