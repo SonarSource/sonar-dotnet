@@ -148,7 +148,15 @@ class SarifParser01And04 implements SarifParser {
     int endLineFixed = offsetStartAtZero ? (endLine + 1) : endLine;
 
     JsonElement endColumnOrNull = region.get("endColumn");
-    int endColumn = endColumnOrNull != null ? endColumnOrNull.getAsInt() : (endLineOrNull != null ? (endLine == startLine ? startColumn : 1) : startColumn);
+    int endColumn;
+    if (endColumnOrNull != null) {
+      endColumn = endColumnOrNull.getAsInt();
+    } else if (endLineOrNull != null) {
+      endColumn = endLine == startLine ? startColumn : 1;
+    } else {
+      endColumn = startColumn;
+    }
+
     int endLineOffset = offsetStartAtZero ? endColumn : (endColumn - 1);
 
     if (startColumn == endColumn && startLineFixed == endLineFixed) {
