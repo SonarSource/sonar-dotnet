@@ -137,5 +137,20 @@ namespace SonarAnalyzer.Helpers
             return nameofIdentifier.HasValue &&
                 (nameofIdentifier.Value.ToString() == NameOfKeywordText);
         }
+
+        public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            var memberAccessExpression = expression as MemberAccessExpressionSyntax;
+            if (memberAccessExpression == null)
+            {
+                return false;
+            }
+
+            var name = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
+
+            return name.Symbol != null &&
+                   name.Symbol.IsInType(KnownType.System_String) &&
+                   name.Symbol.Name == nameof(string.Empty);
+        }
     }
 }

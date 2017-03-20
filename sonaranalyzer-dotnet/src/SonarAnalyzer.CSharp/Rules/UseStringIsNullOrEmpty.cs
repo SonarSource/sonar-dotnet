@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
- 
+
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return IsStringEmptyLiteral(expression) ||
                    IsStringEmptyConst(expression, semanticModel) ||
-                   IsStringEmpty(expression, semanticModel);
+                   expression.IsStringEmpty(semanticModel);
         }
 
         private static bool IsStringEmptyConst(ExpressionSyntax expression, SemanticModel semanticModel)
@@ -140,21 +140,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var literalExpression = expression as LiteralExpressionSyntax;
             return literalExpression?.Token.ValueText == string.Empty;
-        }
-
-        private static bool IsStringEmpty(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var memberAccessExpression = expression as MemberAccessExpressionSyntax;
-            if (memberAccessExpression == null)
-            {
-                return false;
-            }
-
-            var name = semanticModel.GetSymbolInfo(memberAccessExpression.Name);
-
-            return name.Symbol != null &&
-                   name.Symbol.IsInType(KnownType.System_String) &&
-                   name.Symbol.Name == nameof(string.Empty);
         }
     }
 }
