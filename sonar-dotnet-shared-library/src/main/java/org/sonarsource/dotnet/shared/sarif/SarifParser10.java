@@ -42,7 +42,7 @@ class SarifParser10 implements SarifParser {
   }
 
   @Override
-  public void parse(SarifParserCallback callback) {
+  public void accept(SarifParserCallback callback) {
     if (!root.has("runs")) {
       return;
     }

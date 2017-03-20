@@ -37,7 +37,7 @@ class SarifParser01And04 implements SarifParser {
   }
 
   @Override
-  public void parse(SarifParserCallback callback) {
+  public void accept(SarifParserCallback callback) {
     if (root.has("runLogs")) {
       JsonElement runLogs = root.get("runLogs");
       for (JsonElement runLogElement : runLogs.getAsJsonArray()) {
