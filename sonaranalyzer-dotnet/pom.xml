@@ -25,6 +25,10 @@
     </license>
   </licenses>
 
+  <modules>
+    <module>sonaranalyzer-maven-artifacts</module>
+  </modules>
+
   <scm> 
     <connection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</connection>
     <developerConnection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</developerConnection>
@@ -41,8 +45,4 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <gitRepositoryName>sonaranalyzer-dotnet</gitRepositoryName>
   </properties>
-
-  <modules>
-    <module>sonaranalyzer-maven-artifacts</module>
-  </modules>
 </project>

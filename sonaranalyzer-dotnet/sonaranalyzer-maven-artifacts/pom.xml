@@ -25,6 +25,14 @@
     </license>
   </licenses>
 
+  <modules>
+    <module>SonarAnalyzer.RuleDocGenerator.CSharp</module>
+    <module>SonarAnalyzer.RuleDocGenerator.VisualBasic</module>
+    <module>SonarAnalyzer.Scanner</module>
+    <module>SonarAnalyzer.CSharp</module>
+    <module>SonarAnalyzer.VisualBasic</module>
+  </modules>
+
   <scm> 
     <connection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</connection>
     <developerConnection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</developerConnection>
@@ -41,12 +49,4 @@
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <gitRepositoryName>sonaranalyzer-dotnet</gitRepositoryName>
   </properties>
-
-  <modules>
-    <module>SonarAnalyzer.RuleDocGenerator.CSharp</module>
-    <module>SonarAnalyzer.RuleDocGenerator.VisualBasic</module>
-    <module>SonarAnalyzer.Scanner</module>
-    <module>SonarAnalyzer.CSharp</module>
-    <module>SonarAnalyzer.VisualBasic</module>
-  </modules>
 </project>
