@@ -113,5 +113,5 @@ Write-Host "Start regression tests"
 cd .\its
 git submodule update --init --recursive --depth 1
 testExitCode
-cmd /c .\regression-test.bat
+& .\regression-test.ps1
 testExitCode

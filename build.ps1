@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $PSVersionTable.PSVersion
 
-function CheckLastExitCode(){
+function testExitCode(){
     If($LASTEXITCODE -ne 0) {
         write-host -f green "lastexitcode: $LASTEXITCODE"
         exit $LASTEXITCODE
@@ -14,7 +14,7 @@ function maven_expression
   param ([string]$exp)
   
   $out = mvn help:evaluate -B -Dexpression="$exp"
-  CheckLastExitCode
+  testExitCode
   $m = ($out | Select-String -NotMatch -Pattern '^\[|Download\w\+\:')
   $m.Line
 }
@@ -37,7 +37,7 @@ function set_maven_build_version
   echo "Replacing version $CURRENT_VERSION with $NEW_VERSION"
 
   mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=$NEW_VERSION" -DgenerateBackupPoms=false -B -e
-  CheckLastExitCode
+  testExitCode
 
   $env:PROJECT_VERSION=$NEW_VERSION
 }
@@ -47,7 +47,7 @@ $env:DEPLOY_PULL_REQUEST="true"
 #build sonaranalyzer
 cd sonaranalyzer-dotnet
 & .\build\build.ps1
-CheckLastExitCode
+testExitCode
 cd ..
 
 # remove env variables so qgate is not displayed for java (we only want qgate for sonaranalyzer as long as only one qgate can be shown in burgr)
@@ -70,7 +70,7 @@ if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
       "-Dsonar.login=$env:SONAR_TOKEN" `
       "-Dsonar.projectVersion=$CURRENT_VERSION" `
       -B -e -V
-  CheckLastExitCode
+  testExitCode
 }
 elseif ($env:IS_PULLREQUEST -eq "true" -and $env:GITHUB_TOKEN -ne $null)
 {
@@ -96,7 +96,7 @@ elseif ($env:IS_PULLREQUEST -eq "true" -and $env:GITHUB_TOKEN -ne $null)
       "-Dsonar.host.url=$env:SONAR_HOST_URL" `
       "-Dsonar.login=$env:SONAR_TOKEN" `
       -B -e -V
-    CheckLastExitCode
+    testExitCode
   }
   else
   {
@@ -110,7 +110,7 @@ elseif ($env:IS_PULLREQUEST -eq "true" -and $env:GITHUB_TOKEN -ne $null)
       "-Dsonar.host.url=$env:SONAR_HOST_URL" `
       "-Dsonar.login=$env:SONAR_TOKEN" `
       -B -e -V
-    CheckLastExitCode
+    testExitCode
   }
 }
 else
@@ -125,5 +125,5 @@ else
   mvn verify `
       "-Dmaven.test.redirectTestOutputToFile=false" `
       -B -e -V
-  CheckLastExitCode
+  testExitCode
 }
