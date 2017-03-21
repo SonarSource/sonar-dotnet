@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'PreMovieInfoScraperAction' a static method.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  47,
+"endLine":  51,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PostMovieInfoScraperAction' a static method.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  36,
+"endLine":  59,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PreMovieImageScraperAction' a static method.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  48,
+"endLine":  67,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PostMovieImageScraperAction' a static method.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  36,
+"endLine":  75,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Settings' a static property.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  36,
+"endLine":  49,
+"endColumn":  44
+}
+}
+}
+]
+}

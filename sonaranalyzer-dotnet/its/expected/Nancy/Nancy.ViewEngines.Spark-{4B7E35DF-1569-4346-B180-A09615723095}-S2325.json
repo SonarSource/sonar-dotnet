@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'H' a static method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  23,
+"endLine":  28,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HTML' a static method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  23,
+"endLine":  33,
+"endColumn":  27
+}
+}
+}
+]
+}

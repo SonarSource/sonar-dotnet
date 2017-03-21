@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'RemoveAccent' a static method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  23,
+"endLine":  127,
+"endColumn":  35
+}
+}
+}
+]
+}

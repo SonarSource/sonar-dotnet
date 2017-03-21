@@ -2217,6 +2217,30 @@
   <data name="S2306_Title" xml:space="preserve">
     <value>"async" and "await" should not be used as identifiers</value>
   </data>
+  <data name="S2325_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S2325_Description" xml:space="preserve">
+    <value>Class methods and properties that don't access instance data can be static to prevent any misunderstanding about the contract of the method. </value>
+  </data>
+  <data name="S2325_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2325_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2325_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2325_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S2325_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S2325_Title" xml:space="preserve">
+    <value>Methods and properties that don't access instance data should be static</value>
+  </data>
   <data name="S2326_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
