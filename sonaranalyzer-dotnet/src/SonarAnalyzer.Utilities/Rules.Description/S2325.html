@@ -1,0 +1,65 @@
+<p>Class methods and properties that don't access instance data can be <code>static</code> to prevent any misunderstanding about the contract of the
+method. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Utilities
+{
+  public int MagicNum // Noncompliant
+  {
+    get
+    {
+      return 42;
+    }
+  }
+
+  private static string magicWord = "please";
+  public string MagicWord  // Noncompliant
+  {
+    get
+    {
+      return magicWord;
+    }
+    set
+    {
+      magicWord = value;
+    }
+  }
+
+  public int Sum(int a, int b)  // Noncompliant
+  {
+    return a + b;
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Utilities
+{
+  public static int MagicNum
+  {
+    get
+    {
+      return 42;
+    }
+  }
+
+  private static string magicWord = "please";
+  public static string MagicWord
+  {
+    get
+    {
+      return magicWord;
+    }
+    set
+    {
+      magicWord = value;
+    }
+  }
+
+  public static int Sum(int a, int b)
+  {
+    return a + b;
+  }
+}
+</pre>
+

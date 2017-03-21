@@ -1,0 +1,13 @@
+{
+  "title": "Methods and properties that don't access instance data should be static",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Minor"
+}

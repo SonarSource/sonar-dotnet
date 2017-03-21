@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetConfigurableBootstrapperMembers' a static method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  37,
+"endLine":  178,
+"endColumn":  71
+}
+}
+}
+]
+}

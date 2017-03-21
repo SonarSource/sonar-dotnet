@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetCleanTemplateName' a static method.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  24,
+"endLine":  79,
+"endColumn":  44
+}
+}
+}
+]
+}
