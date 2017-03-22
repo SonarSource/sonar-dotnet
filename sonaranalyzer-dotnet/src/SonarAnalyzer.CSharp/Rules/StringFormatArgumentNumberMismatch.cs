@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     Index = index;
                     Alignment = alignment;
-                    FormatString = FormatString;
+                    FormatString = formatString;
                 }
 
                 public int Index { get; }
