@@ -78,7 +78,7 @@
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:${project.artifactId}:jar</artifactsToPublish>
-    <sonar.jacoco.reportPaths>../target/jacoco.exec,../its/target/jacoco-it.exec</sonar.jacoco.reportPaths>
+    <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
 
   <profiles>
