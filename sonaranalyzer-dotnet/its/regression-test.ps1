@@ -100,7 +100,7 @@ git add -A .
 testExitCode
 git commit -m "Initial commit with expected files" | out-null
 testExitCode
-rm -Recurse -force *.json 
+Get-ChildItem * -Include *.json -Recurse | Remove-Item -Force
 Pop-Location
 
 # Setup output folder
