@@ -81,36 +81,18 @@
     <sonar.jacoco.reportPaths>../target/jacoco.exec</sonar.jacoco.reportPaths>
   </properties>
 
-  <profiles>
-    <profile>
-      <id>sonaranalyzer</id>
-      <modules>
-        <module>sonaranalyzer-dotnet</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>coverage</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.7.9</version>
-            <configuration>
-              <append>true</append>
-              <destFile>../target/jacoco.exec</destFile>
-            </configuration>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>prepare-agent</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.7.9</version>
+        <configuration>
+          <append>true</append>
+          <destFile>../target/jacoco.exec</destFile>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
