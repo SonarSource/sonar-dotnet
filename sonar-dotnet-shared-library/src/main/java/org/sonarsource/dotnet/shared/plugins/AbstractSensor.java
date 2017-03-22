@@ -19,14 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.StreamSupport;
 
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -72,7 +68,6 @@ public abstract class AbstractSensor {
   }
 
   public void importResults(SensorContext context, Path protobufReportsDirectory, boolean importIssues) {
-
     Predicate<InputFile> inputFileFilter;
     if (!config.isReportsComingFromMSBuild()) {
       // Filter was not executed during FS indexing because protobuf reports were not present (MSBuild 12 or old scanner)
@@ -99,22 +94,6 @@ public abstract class AbstractSensor {
       importer.accept(protobuf);
     } else {
       LOG.warn("Protobuf file not found: " + protobuf);
-    }
-  }
-
-  public static boolean areProtobufAnalysisFilesPresent(Path analyzerOutputDir) {
-    if (!Files.exists(analyzerOutputDir)) {
-      LOG.info("Analyzer working directory does not exist");
-      return true;
-    }
-
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, p -> p.toAbsolutePath().toString().toLowerCase().endsWith(".pb"))) {
-      long count = StreamSupport.stream(files.spliterator(), false).count();
-      LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
-      return count == 0;
-    } catch (IOException e) {
-      LOG.warn("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath().toString(), e);
-      return true;
     }
   }
 

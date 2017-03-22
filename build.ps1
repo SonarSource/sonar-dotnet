@@ -62,7 +62,7 @@ if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
   set_maven_build_version $env:BUILD_NUMBER
   
   $env:MAVEN_OPTS="-Xmx1536m -Xms128m"
-  
+
   mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
       "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
       "-Dmaven.test.redirectTestOutputToFile=false" `
