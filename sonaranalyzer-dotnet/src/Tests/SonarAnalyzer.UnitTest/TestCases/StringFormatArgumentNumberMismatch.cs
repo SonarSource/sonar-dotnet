@@ -32,6 +32,7 @@ namespace Tests.Diagnostics
 
             s = string.Format("{-1}", arg0); // Noncompliant {{Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.}}
             s = string.Format(null, "{}"); // Noncompliant
+            s = string.Format("}{ {0}", 42); // Noncompliant
 
             s = string.Format("{0} {1}", arg0); // Noncompliant {{Invalid string format, the highest string format item index should not be greater than the arguments count.}}
             s = string.Format("{0} {1} {2}", new[] { 1, 2 }); // Noncompliant

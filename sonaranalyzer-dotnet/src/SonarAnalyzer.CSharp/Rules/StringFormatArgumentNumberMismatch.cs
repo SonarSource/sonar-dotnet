@@ -186,13 +186,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     throw new FormatException("the format cannot be null.");
                 }
 
-                var tokens = ExtractFormatItemTokens(format);
-                var stringFormatItems = ConvertToStringFormatItems(tokens);
+                var stringFormatItems = ExtractFormatItems(format);
 
                 return new StringFormat(format, stringFormatItems);
             }
 
-            private static IEnumerable<string> ExtractFormatItemTokens(string format)
+            private static IEnumerable<StringFormatItem> ExtractFormatItems(string format)
             {
                 var curlyBraceCount = 0;
                 var previousChar = '\0';
@@ -218,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         curlyBraceCount--;
                         if (currentFormatItemBuilder != null)
                         {
-                            yield return currentFormatItemBuilder.ToString();
+                            yield return CreateStringFormatItem(currentFormatItemBuilder.ToString());
                             currentFormatItemBuilder = null;
                         }
                     }
@@ -236,48 +235,45 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private static IEnumerable<StringFormatItem> ConvertToStringFormatItems(IEnumerable<string> stringFormatItemTokens)
+            private static StringFormatItem CreateStringFormatItem(string formatItem)
             {
-                foreach (var formatItem in stringFormatItemTokens)
+                var indexOfComma = formatItem.IndexOf(',');
+                var indexOfColon = formatItem.IndexOf(':');
+                var split = formatItem.Split(',', ':');
+
+                if (indexOfComma >= 0 && indexOfColon >= 0 && indexOfColon < indexOfComma ||
+                    split.Length > 3)
                 {
-                    var indexOfComma = formatItem.IndexOf(',');
-                    var indexOfColon = formatItem.IndexOf(':');
-                    var split = formatItem.Split(',', ':');
-
-                    if (indexOfComma >= 0 && indexOfColon >= 0 && indexOfColon < indexOfComma ||
-                        split.Length > 3)
-                    {
-                        throw new FormatException("format items should comply with the following pattern '{index[,alignment][:formatString]}'.");
-                    }
-
-                    int index;
-                    int? alignment = null;
-                    string formatString = null;
-
-                    if (!int.TryParse(split[0], out index))
-                    {
-                        throw new FormatException("format item index should be a number.");
-                    }
-
-                    if (indexOfComma >= 0)
-                    {
-                        int localAlignment;
-                        if (!int.TryParse(split[1], out localAlignment))
-                        {
-                            throw new FormatException("format item alignment should be a number.");
-                        }
-                        alignment = localAlignment;
-                    }
-
-                    if (indexOfColon >= 0)
-                    {
-                        formatString = indexOfComma >= 0
-                            ? split[2]
-                            : split[1];
-                    }
-
-                    yield return new StringFormatItem(index, alignment, formatString);
+                    throw new FormatException("format items should comply with the following pattern '{index[,alignment][:formatString]}'.");
                 }
+
+                int index;
+                int? alignment = null;
+                string formatString = null;
+
+                if (!int.TryParse(split[0], out index))
+                {
+                    throw new FormatException("format item index should be a number.");
+                }
+
+                if (indexOfComma >= 0)
+                {
+                    int localAlignment;
+                    if (!int.TryParse(split[1], out localAlignment))
+                    {
+                        throw new FormatException("format item alignment should be a number.");
+                    }
+                    alignment = localAlignment;
+                }
+
+                if (indexOfColon >= 0)
+                {
+                    formatString = indexOfComma >= 0
+                        ? split[2]
+                        : split[1];
+                }
+
+                return new StringFormatItem(index, alignment, formatString);
             }
 
             public void Validate(ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel)
