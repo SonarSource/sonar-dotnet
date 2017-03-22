@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!StringFormatArgumentNumberMismatch.FormatterAcceptsArgumentCount(formatString, 0))
+                    if (!StringFormatArgumentNumberMismatch.IsFormatValid(formatString, 0))
                     {
                         ///A more severe issue is already reported by <see cref="StringFormatArgumentNumberMismatch"/>
                         return;

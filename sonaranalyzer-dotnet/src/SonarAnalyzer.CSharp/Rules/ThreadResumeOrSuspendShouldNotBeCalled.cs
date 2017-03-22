@@ -42,6 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Threading_Thread, "Suspend"),
             new MethodSignature(KnownType.System_Threading_Thread, "Resume")
         };
-        protected sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
+        internal sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
     }
 }

@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest
 
             if (expectedIssue == null)
             {
-                Execute.Assertion.FailWith($"Issue not expected on line {lineNumber}");
+                Execute.Assertion.FailWith($"Issue with message '{message}' not expected on line {lineNumber}");
             }
 
             if (expectedIssue.Message != null && expectedIssue.Message != message)

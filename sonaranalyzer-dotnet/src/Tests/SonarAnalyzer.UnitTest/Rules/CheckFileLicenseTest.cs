@@ -73,70 +73,80 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CheckUnlicensedFileStartWithUsing()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckSingleLineLicensedFileStartWithUsing()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckSingleLineRegexLicensedFileStartWithUsing()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithUsing.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckMultiLineLicensedFileStartWithUsing()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = MultiLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckMultiLineRegexLicensedFileStartWithUsing()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithUsing.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckUnlicensedFileStartWithNamespace()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs", new CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithNamespace.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckSingleLineLicensedFileStartWithNamespace()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs", new CheckFileLicense { HeaderFormat = SingleLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckSingleLineRegexLicensedFileStartWithNamespace()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs", new CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_SingleLineLicenseStartWithNamespace.cs",
+                new CheckFileLicense { HeaderFormat = SingleLineRegexHeader, IsRegularExpression = true });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckMultiLineLicensedFileStartWithNamespace()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs", new CheckFileLicense { HeaderFormat = MultiLineHeader });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineHeader });
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void CheckMultiLineRegexLicensedFileStartWithNamespace()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs", new CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
+            Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_MultiLineLicenseStartWithNamespace.cs",
+                new CheckFileLicense { HeaderFormat = MultiLineRegexHeader, IsRegularExpression = true });
         }
 
         [TestMethod]
@@ -145,16 +155,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             try
             {
-                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs", new CheckFileLicense { HeaderFormat = SingleLineHeader });
+                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
+                    new CheckFileLicense { HeaderFormat = SingleLineHeader });
             }
-            catch (AssertFailedException ex)
+            catch (AssertFailedException ex) when (ex.Message == "Issue with message 'Add or update the header of this file.' not expected on line 1")
             {
                 // Putting the expected issue within the file make the file being no longer empty so we need to catch the expected issue
                 // from here.
-                if (ex.Message != "Issue not expected on line 1")
-                {
-                    throw;
-                }
             }
         }
 
@@ -168,7 +175,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "\r\nParameter name: headerFormat'.}.";
             try
             {
-                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = string.Empty });
+                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
+                    new CheckFileLicense { HeaderFormat = string.Empty });
             }
             catch (AssertFailedException ex)
             {
@@ -190,7 +198,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "\r\nParameter name: headerFormat'.}.";
             try
             {
-                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs", new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
+                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
+                    new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
             }
             catch (AssertFailedException ex)
             {

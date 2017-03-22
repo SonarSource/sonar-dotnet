@@ -30,7 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StringFormatArgumentNumberMismatch()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\StringFormatArgumentNumberMismatch.cs", new StringFormatArgumentNumberMismatch());
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatArgumentNumberMismatch.cs",
+                new StringFormatArgumentNumberMismatch());
         }
     }
 }

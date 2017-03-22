@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             new MethodSignature(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
         };
-        protected sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
+        internal sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
     }
 }

@@ -206,6 +206,12 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType System_Threading_Thread = new KnownType("System.Threading.Thread");
 
+        public static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");
+        public static readonly KnownType System_IO_TextWriter = new KnownType("System.IO.TextWriter");
+        public static readonly KnownType System_Diagnostics_Debug = new KnownType("System.Diagnostics.Debug");
+        public static readonly KnownType System_Diagnostics_Trace = new KnownType("System.Diagnostics.Trace");
+        public static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
+
         #endregion
 
         public string TypeName { get; }

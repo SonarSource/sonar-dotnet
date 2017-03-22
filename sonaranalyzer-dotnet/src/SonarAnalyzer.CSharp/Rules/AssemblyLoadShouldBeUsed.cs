@@ -44,6 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFile"),
             new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
         };
-        protected sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
+        internal sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
     }
 }
