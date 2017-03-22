@@ -78,6 +78,7 @@
     <gitRepositoryName>sonar-csharp</gitRepositoryName>
     <!-- Release: enable publication to Bintray -->
     <artifactsToPublish>${project.groupId}:${project.artifactId}:jar</artifactsToPublish>
+    <sonar.jacoco.reportPaths>../target/jacoco.exec,../its/target/jacoco-it.exec</sonar.jacoco.reportPaths>
   </properties>
 
   <profiles>
@@ -86,6 +87,29 @@
       <modules>
         <module>sonaranalyzer-dotnet</module>
       </modules>
+    </profile>
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.9</version>
+            <configuration>
+              <append>true</append>
+              <destFile>../target/jacoco.exec</destFile>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
