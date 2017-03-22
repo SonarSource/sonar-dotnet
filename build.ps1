@@ -63,21 +63,9 @@ if ($env:GITHUB_BRANCH -eq 'master' -and $env:IS_PULLREQUEST -eq "false")
   
   $env:MAVEN_OPTS="-Xmx1536m -Xms128m"
 
-  mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy `
+  mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
       "-Pcoverage,coverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
       "-Dmaven.test.redirectTestOutputToFile=false" `
-      -B -e -V
-  testExitCode
-
-  # Run ITs to collect IT coverage
-  cd its
-  mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify `
-      "-Pcoverage" `
-      "-Dmaven.test.redirectTestOutputToFile=false"
-  testExitCode
-
-  cd ..
-  mvn sonar:sonar `
       "-Dsonar.host.url=$env:SONAR_HOST_URL" `
       "-Dsonar.login=$env:SONAR_TOKEN" `
       "-Dsonar.projectVersion=$CURRENT_VERSION" `
