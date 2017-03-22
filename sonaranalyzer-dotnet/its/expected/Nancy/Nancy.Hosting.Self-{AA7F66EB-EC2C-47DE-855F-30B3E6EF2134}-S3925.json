@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  65
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  12,
+"endLine":  11,
+"endColumn":  17
+}
+},
+{
+"uri":  "Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  12,
+"endLine":  11,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,70 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  18,
+"endLine":  189,
+"endColumn":  45
+}
+},
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  12,
+"endLine":  189,
+"endColumn":  17
+}
+},
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  12,
+"endLine":  189,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  18,
+"endLine":  515,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  12,
+"endLine":  515,
+"endColumn":  17
+}
+},
+{
+"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  515,
+"startColumn":  12,
+"endLine":  515,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -78,6 +79,17 @@ namespace SonarAnalyzer.Helpers
             return  methodSymbol.Parameters.Length == 1 &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
                 (methodSymbol.Name == nameof(object.Equals) ||
+                methodSymbol.Name == explicitName);
+        }
+
+        public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
+        {
+            const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";
+            return methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
+                methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext) &&
+                methodSymbol.ReturnsVoid &&
+                (methodSymbol.Name == nameof(ISerializable.GetObjectData) ||
                 methodSymbol.Name == explicitName);
         }
 
