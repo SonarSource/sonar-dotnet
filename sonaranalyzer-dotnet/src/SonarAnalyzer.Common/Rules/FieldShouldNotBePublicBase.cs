@@ -36,7 +36,8 @@ namespace SonarAnalyzer.Rules
             return fieldSymbol != null &&
                    !fieldSymbol.IsStatic &&
                    !fieldSymbol.IsConst &&
-                   fieldSymbol.DeclaredAccessibility == Accessibility.Public;
+                   fieldSymbol.IsPublicApi() &&
+                   fieldSymbol.ContainingType.IsClass();
         }
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
