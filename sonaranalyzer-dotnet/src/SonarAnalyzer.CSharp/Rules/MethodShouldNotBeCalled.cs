@@ -30,19 +30,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MethodShouldNotBeCalled : SonarDiagnosticAnalyzer
     {
-        protected class MethodSignature
-        {
-            internal MethodSignature(KnownType containingType, string name)
-            {
-                ContainingType = containingType;
-                Name = name;
-            }
-
-            internal KnownType ContainingType { get; }
-            internal string Name { get; }
-        }
-
-        protected abstract IEnumerable<MethodSignature> InvalidMethods { get; }
+        internal abstract IEnumerable<MethodSignature> InvalidMethods { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {

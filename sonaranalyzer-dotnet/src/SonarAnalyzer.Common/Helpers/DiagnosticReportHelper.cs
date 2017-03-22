@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
@@ -60,5 +61,10 @@ namespace SonarAnalyzer.Helpers
         }
 
         #endregion
+
+        public static string CreateStringFromArgs<T>(IEnumerable<T> values)
+        {
+            return string.Concat("'", string.Join("', '", values), "'");
+        }
     }
 }

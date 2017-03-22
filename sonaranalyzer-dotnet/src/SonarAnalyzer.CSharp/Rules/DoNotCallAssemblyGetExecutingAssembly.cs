@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             new MethodSignature(KnownType.System_Reflection_Assembly, "GetExecutingAssembly")
         };
-        protected sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
+        internal sealed override IEnumerable<MethodSignature> InvalidMethods => invalidMethods;
     }
 }
