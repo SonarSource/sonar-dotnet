@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  25,
+"endLine":  169,
+"endColumn":  55
+}
+},
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  19,
+"endLine":  169,
+"endColumn":  24
+}
+},
+{
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  16,
+"endLine":  173,
+"endColumn":  46
+}
+}
+]
+}
+]
+}

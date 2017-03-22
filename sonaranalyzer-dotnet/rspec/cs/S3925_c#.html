@@ -1,0 +1,86 @@
+<p>The <code>ISerializable</code> interface is the mechanism to control the type serialization process. If not implemented correctly this could result
+in an invalid serialization and hard to detect bugs.</p>
+<p>This rules raises an issue on types that implement <code>ISerializable</code> without following the serialization pattern recommended by
+Microsoft.</p>
+<p>Specifically this rule checks for these problems:</p>
+<ul>
+  <li> The <code>System.SerializableAttribute</code> attribute is missing. </li>
+  <li> Non-serializable fields are not marked with the <code>System.NonSerializedAttribute</code> attribute. </li>
+  <li> There is no serialization constructor. </li>
+  <li> An unsealed type has a serialization constructor that is not <code>protected</code>. </li>
+  <li> A sealed type has a serialization constructor that is not <code>private</code>. </li>
+  <li> An unsealed type has a <code>ISerializable.GetObjectData</code> that is not both <code>public</code> and <code>virtual</code>. </li>
+  <li> A derived type has a serialization constructor that does not call the <code>base</code> constructor. </li>
+  <li> A derived type has a <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
+  <li> A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Foo : ISerializable // Noncompliant the [Serializable] attribute is missing
+{
+}
+</pre>
+<p>or</p>
+<pre>
+public class Bar
+{
+}
+
+[Serializable]
+public class Foo : ISerializable // Noncompliant the serialization constructor is missing
+{
+    private readonly Bar bar; // Noncompliant the field is not marked with [NonSerialized]
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Bar
+{
+}
+
+[Serializable]
+public class Foo : ISerializable
+{
+    [NonSerialized]
+    private readonly Bar bar;
+
+    public Foo()
+    {
+        // ...
+    }
+
+    protected Foo(SerializationInfo info, StreamingContext context)
+    {
+        // ...
+    }
+
+    public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        // ...
+    }
+}
+
+[Serializable]
+public sealed class SubFoo : Foo
+{
+    private int val;
+
+    public SubFoo()
+    {
+        // ...
+    }
+
+    private SubFoo(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
+        // ...
+    }
+
+    public override void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        base.GetObjectData(info, context);
+        // ...
+    }
+}
+</pre>
+

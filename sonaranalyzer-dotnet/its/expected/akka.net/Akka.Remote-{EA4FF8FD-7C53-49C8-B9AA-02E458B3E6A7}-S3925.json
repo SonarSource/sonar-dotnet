@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  18,
+"endLine":  103,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  12,
+"endLine":  103,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  18,
+"endLine":  42,
+"endColumn":  39
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  12,
+"endLine":  42,
+"endColumn":  17
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  49
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  19,
+"endLine":  34,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  18,
+"endLine":  65,
+"endColumn":  45
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  12,
+"endLine":  65,
+"endColumn":  17
+}
+}
+]
+}
+]
+}

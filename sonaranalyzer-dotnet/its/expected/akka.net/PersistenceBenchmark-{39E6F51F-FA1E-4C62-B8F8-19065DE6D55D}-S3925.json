@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3925",
+"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  18,
+"endLine":  59,
+"endColumn":  42
+}
+},
+{
+"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  12,
+"endLine":  59,
+"endColumn":  17
+}
+}
+]
+}
+]
+}
