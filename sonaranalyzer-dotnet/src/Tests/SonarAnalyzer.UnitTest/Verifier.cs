@@ -18,14 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.UnitTest.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -36,6 +28,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentAssertions;
+using FluentAssertions.Execution;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
@@ -120,7 +120,10 @@ namespace SonarAnalyzer.UnitTest
                         }
                     }
 
-                    expectedIssues.Should().BeEmpty($"Issue not expected but found on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                    if (expectedIssues.Any())
+                    {
+                        Execute.Assertion.FailWith($"Issue was expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                    }
                 }
             }
         }
