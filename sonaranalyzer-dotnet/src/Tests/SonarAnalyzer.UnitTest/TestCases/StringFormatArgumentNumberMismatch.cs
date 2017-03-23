@@ -21,6 +21,9 @@ namespace Tests.Diagnostics
             s = string.Format("{0:0000}", 42); // Compliant
             s = string.Format("{2}-{0}-{1}", 1, 2, 3); // Compliant
             s = string.Format("no format"); // Compliant
+            s = string.Format("{{{0}}}", 42); // Compliant, displays {42}
+            s = string.Format("{{\r\n{0}}}", 42); // Compliant, displays {\r\n42}
+            s = string.Format("{{}}"); // Compliant, displays {}
 
             s = string.Format("{0}", arg0, arg1); // Noncompliant {{Invalid string format, the following arguments are unused: 'arg1'.}}
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
