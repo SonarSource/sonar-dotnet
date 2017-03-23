@@ -138,7 +138,7 @@ buildProject "Ember-MM" "Ember Media Manager.sln"
 
 # Normalize SARIF reports
 Write-Host "Normalizing the SARIF reports"
-& ./CreateIssueReports.ps1
+& ./CreateIssueReports.ps1 | out-null
 If($LASTEXITCODE -ne 0) { ps_error }
 
 # Compute analyzer performances

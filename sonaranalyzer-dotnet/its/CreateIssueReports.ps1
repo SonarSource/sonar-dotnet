@@ -3,12 +3,12 @@
 function FixUriDeclaration
 {
 	param ($files)
-	
+
 	$files |
       Foreach-Object {
         If ($_.uri) {
 		  # Remove the URI prefix
-          $_.uri = $_.uri.replace('file:///', '') 
+          $_.uri = $_.uri.replace('file:///', '')
 		  # Remove the common absolute path prefix
 		  $_.uri = ([System.IO.FileInfo]$_.uri).FullName
           $_.uri = $_.uri.replace($pathPrefix, '')
@@ -92,23 +92,23 @@ function CreateIssueReports
       }
 
     FixUriDeclaration($allIssues.locations.analysisTarget)
-    
-    $allIssues = $allIssues | %{ GetIssue($_) }
+
+    $allIssues = $allIssues | Foreach-Object { GetIssue($_) }
   }
   ElseIf ($json.runLogs) {
-    $allIssues = $json.runLogs | %{$_.results}
+    $allIssues = $json.runLogs | Foreach-Object {$_.results}
 
     FixUriDeclaration($allIssues.locations.analysisTarget)
-    
-    $allIssues = $allIssues | %{ GetIssue($_) }
+
+    $allIssues = $allIssues | Foreach-Object { GetIssue($_) }
   }
   ElseIf ($json.runs) {
-    $allIssues = $json.runs | %{$_.results}
+    $allIssues = $json.runs | Foreach-Object {$_.results}
 
     FixUriDeclaration($allIssues.locations.resultFile)
-	FixUriDeclaration($allIssues.relatedLocations.physicalLocation)
-    
-    $allIssues = $allIssues | %{ GetIssueV3($_) }
+	  FixUriDeclaration($allIssues.relatedLocations.physicalLocation)
+
+    $allIssues = $allIssues | Foreach-Object { GetIssueV3($_) }
   }
 
   # Change spaces to %20
@@ -134,7 +134,7 @@ function CreateIssueReports
 
   $file = [System.IO.FileInfo]$sarifReportPath
   $file
-  $project = ([System.IO.FileInfo]$file.DirectoryName).Name  
+  $project = ([System.IO.FileInfo]$file.DirectoryName).Name
   $project
   $issuesByRule |
     Foreach-Object {
@@ -143,13 +143,12 @@ function CreateIssueReports
 
       $path = Join-Path (Join-Path 'actual' $project) ($file.BaseName + '-' + $_.Name + $file.Extension)
       $path
-      $lines = 
-	    (
-			(ConvertTo-Json $object -Depth 42 | 
-				% { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
-			) -split "`r`n"													# Convert JSON to String and split lines
-		) |  
-        Foreach-Object { $_.TrimStart() }                            		# Remove leading spaces
+      $lines =
+        (
+          (ConvertTo-Json $object -Depth 42 |
+				    ForEach-Object { [System.Text.RegularExpressions.Regex]::Unescape($_) }  # Unescape powershell to json automatic escape
+			    ) -split "`r`n"												            	                       # Convert JSON to String and split lines
+		    ) | Foreach-Object { $_.TrimStart() }                                        # Remove leading spaces
       Set-Content $path $lines
     }
 }
