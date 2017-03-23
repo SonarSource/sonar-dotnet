@@ -6,25 +6,37 @@ function testExitCode(){
 }
 
 # Possible outcomes
-function sucess(){
+function success(){
     Write-Host "SUCCESS: No differences were found!"    
     cleanup "0"
 }
 
 function build_error(){
     param ([string]$PROJECT)
-    Write-Host "ERROR: The project $PROJECT could not be built!"
+    Write-Host "ERROR: $PROJECT build failed. See 'output/$PROJECT.log' for more details."
     cleanup "1"
 }
 
 function diff_error(){
-    Write-Host "ERROR: There are differences between the actual and the expected issues!"
+    Write-Host "ERROR: There are differences between the actual and the expected issues."
     cleanup "2"
 }
 
 function ps_error(){
-    Write-Host "ERROR: Error while executing an internal PowerShell script"
+    Write-Host "ERROR: Error while executing an internal PowerShell script."
     cleanup "3"
+}
+
+function binaries_missing(){
+	Write-Host "ERROR: Could not find '.\binaries\SonarAnalyzer.dll'."
+    cleanup "4"
+}
+
+# Checks
+function preTestChecks(){
+	if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
+		binaries_missing
+	}
 }
 
 # Cleanup
@@ -40,13 +52,15 @@ function cleanup(){
 
 # Building projects
 function buildProject(){
-    param ([string]$PROJECT)
-    Write-Host "Building: $PROJECT"
-    New-Item -ItemType directory -Path .\output\$PROJECT | out-null
-    Push-Location $PROJECT
-    & .\sonarlint-build.bat > ..\output\$PROJECT.txt
-    If($LASTEXITCODE -ne 0) { build_error }
-    Pop-Location
+    param ([string]$ProjectName, [string]$SolutionRelativePath)
+    
+	Write-Host "Building: $ProjectName"
+    New-Item -ItemType directory -Path .\output\$ProjectName | out-null
+	$solutionPath = ".\${ProjectName}\${SolutionRelativePath}"
+	$Env:PROJECT = $ProjectName # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+	& nuget restore $solutionPath -Verbosity quiet 
+	& msbuild /verbosity:detailed /m /t:rebuild /p:Configuration=Debug $solutionPath > .\output\$ProjectName.log
+    If($LASTEXITCODE -ne 0) { build_error $ProjectName }
 }
 
 
@@ -85,6 +99,8 @@ $s+=@"
 # Set the current working directory to the script's folder
 Push-Location -Path $PSScriptRoot -StackName "regression"
 
+preTestChecks
+
 # Setup the actual folder with the expected files
 Write-Host "Initializing the actual issues Git repo with the expected ones..."
 if (Test-Path .\actual) { rm -Recurse -force actual }
@@ -112,9 +128,9 @@ rulesetGenerator
 # Install the imports before targets file
 Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore" -Recurse
 
-buildProject "akka.net"
-buildProject "Nancy"
-buildProject "Ember-MM"
+buildProject "akka.net" "src\Akka.sln"
+buildProject "Nancy" "src\Nancy.sln"
+buildProject "Ember-MM" "Ember Media Manager.sln"
 
 # Normalize SARIF reports
 Write-Host "Normalizing the SARIF reports"
@@ -135,4 +151,4 @@ git diff --cached --exit-code | out-null
 If($LASTEXITCODE -ne 0) { diff_error }
 Pop-Location
 
-
+success
