@@ -1,19 +1,22 @@
+$importBeforePath = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
+
 function testExitCode(){
     If($LASTEXITCODE -ne 0) {
-        write-host -f green "lastexitcode: $LASTEXITCODE"
+        write-host -f green "lastexitcode: ${LASTEXITCODE}"
         exit $LASTEXITCODE
     }
 }
 
 # Possible outcomes
 function success(){
-    Write-Host "SUCCESS: No differences were found!"    
+    Write-Host "SUCCESS: No differences were found!"
     cleanup "0"
 }
 
 function build_error(){
-    param ([string]$PROJECT)
-    Write-Host "ERROR: $PROJECT build failed. See 'output/$PROJECT.log' for more details."
+    param ([string]$project)
+
+    Write-Host "ERROR: ${project} build failed. See 'output/${project}.log' for more details."
     cleanup "1"
 }
 
@@ -42,8 +45,9 @@ function preTestChecks(){
 # Cleanup
 function cleanup(){
     param ([string]$exit)
+
     # Uninstall the imports before targets file
-    rm -force "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore\SonarAnalyzer.Testing.ImportBefore.targets"
+    Remove-Item -Force "${importBeforePath}\SonarAnalyzer.Testing.ImportBefore.targets"
     # Restore current working directory
     Pop-Location -StackName "regression"
     # Exit
@@ -53,12 +57,12 @@ function cleanup(){
 # Building projects
 function buildProject(){
     param ([string]$ProjectName, [string]$SolutionRelativePath)
-    
+
 	Write-Host "Building: $ProjectName"
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 	$solutionPath = ".\${ProjectName}\${SolutionRelativePath}"
 	$Env:PROJECT = $ProjectName # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
-	& nuget restore $solutionPath -Verbosity quiet 
+	& nuget restore $solutionPath -Verbosity quiet
 	& msbuild /verbosity:detailed /m /t:rebuild /p:Configuration=Debug $solutionPath > .\output\$ProjectName.log
     If($LASTEXITCODE -ne 0) { build_error $ProjectName }
 }
@@ -81,8 +85,8 @@ $s=@"
 <!-- It would be better to generate the actual list from the analyzer assemblies -->
   <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
 "@
-    for ($i = 0; $i -le $max; $i++) { 
-        $s+="    <Rule Id=""S$i"" Action=""Warning"" />`r`n" 
+    for ($i = 0; $i -le $max; $i++) {
+        $s+="    <Rule Id=""S$i"" Action=""Warning"" />`r`n"
     }
 $s+=@"
   </Rules>
@@ -103,7 +107,7 @@ preTestChecks
 
 # Setup the actual folder with the expected files
 Write-Host "Initializing the actual issues Git repo with the expected ones..."
-if (Test-Path .\actual) { rm -Recurse -force actual }
+if (Test-Path .\actual) { Remove-Item -Recurse -Force actual }
 Copy-Item .\expected -Destination .\actual -Recurse
 Push-Location actual
 git init
@@ -120,13 +124,13 @@ Get-ChildItem * -Include *.json -Recurse | Remove-Item -Force
 Pop-Location
 
 # Setup output folder
-if (Test-Path .\output) { rm -Recurse -force output }
+if (Test-Path .\output) { Remove-Item -Recurse -Force output }
 New-Item -ItemType directory -Path .\output | out-null
 
 # Generate the SonarAnalyzer all rules ruleset
 rulesetGenerator
 # Install the imports before targets file
-Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore" -Recurse
+Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse
 
 buildProject "akka.net" "src\Akka.sln"
 buildProject "Nancy" "src\Nancy.sln"
