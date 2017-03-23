@@ -28,45 +28,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'Path' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
-"region":  {
-"startLine":  16,
-"startColumn":  13,
-"endLine":  16,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'ElemCounts' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
-"region":  {
-"startLine":  17,
-"startColumn":  13,
-"endLine":  17,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'XBMCSource' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
-"region":  {
-"startLine":  18,
-"startColumn":  13,
-"endLine":  18,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
 "uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",

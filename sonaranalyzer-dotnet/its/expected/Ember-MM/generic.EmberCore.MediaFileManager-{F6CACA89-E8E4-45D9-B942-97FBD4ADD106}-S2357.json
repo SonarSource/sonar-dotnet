@@ -2,45 +2,6 @@
 "issues":  [
 {
 "id":  "S2357",
-"message":  "Make 'dst' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
-"region":  {
-"startLine":  383,
-"startColumn":  13,
-"endLine":  383,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'src' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
-"region":  {
-"startLine":  384,
-"startColumn":  13,
-"endLine":  384,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'doMove' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
-"region":  {
-"startLine":  385,
-"startColumn":  13,
-"endLine":  385,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'FolderPath' private.",
 "location":  {
 "uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",

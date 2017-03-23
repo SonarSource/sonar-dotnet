@@ -116,19 +116,6 @@
 "endColumn":  53
 }
 }
-},
-{
-"id":  "S2357",
-"message":  "Make 'State' private.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
-"region":  {
-"startLine":  157,
-"startColumn":  48,
-"endLine":  157,
-"endColumn":  53
-}
-}
 }
 ]
 }

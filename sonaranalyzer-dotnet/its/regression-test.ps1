@@ -130,7 +130,7 @@ New-Item -ItemType directory -Path .\output | out-null
 # Generate the SonarAnalyzer all rules ruleset
 rulesetGenerator
 # Install the imports before targets file
-Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse
+Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse -Container
 
 buildProject "akka.net" "src\Akka.sln"
 buildProject "Nancy" "src\Nancy.sln"

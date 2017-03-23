@@ -28,45 +28,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'destPath' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1341,
-"startColumn":  13,
-"endLine":  1341,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'resizePoster' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1342,
-"startColumn":  13,
-"endLine":  1342,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'srcPath' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
-"region":  {
-"startLine":  1343,
-"startColumn":  13,
-"endLine":  1343,
-"endColumn":  20
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
 "uri":  "Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",

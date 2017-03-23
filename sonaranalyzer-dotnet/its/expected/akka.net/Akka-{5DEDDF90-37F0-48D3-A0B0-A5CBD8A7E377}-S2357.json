@@ -28,32 +28,6 @@
 },
 {
 "id":  "S2357",
-"message":  "Make 'Result' private.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
-"region":  {
-"startLine":  106,
-"startColumn":  54,
-"endLine":  106,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Workers' private.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
-"region":  {
-"startLine":  289,
-"startColumn":  39,
-"endLine":  289,
-"endColumn":  46
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'Ref' private.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
@@ -75,32 +49,6 @@
 "startColumn":  33,
 "endLine":  54,
 "endColumn":  40
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Next' private.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
-"region":  {
-"startLine":  259,
-"startColumn":  25,
-"endLine":  259,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Value' private.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
-"region":  {
-"startLine":  260,
-"startColumn":  22,
-"endLine":  260,
-"endColumn":  27
 }
 }
 }

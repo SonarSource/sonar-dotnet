@@ -19,32 +19,6 @@
 "location":  {
 "uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
 "region":  {
-"startLine":  518,
-"startColumn":  33,
-"endLine":  518,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Ok' private.",
-"location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
-"startLine":  519,
-"startColumn":  30,
-"endLine":  519,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Shard' private.",
-"location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
-"region":  {
 "startLine":  600,
 "startColumn":  33,
 "endLine":  600,
@@ -972,19 +946,6 @@
 "startColumn":  33,
 "endLine":  140,
 "endColumn":  44
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'Entries' private.",
-"location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
-"region":  {
-"startLine":  158,
-"startColumn":  53,
-"endLine":  158,
-"endColumn":  60
 }
 }
 },

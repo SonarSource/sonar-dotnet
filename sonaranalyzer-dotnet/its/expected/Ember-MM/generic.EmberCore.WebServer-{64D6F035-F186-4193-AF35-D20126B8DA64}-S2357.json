@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S2357",
-"message":  "Make 'Ext' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
-"region":  {
-"startLine":  35,
-"startColumn":  20,
-"endLine":  35,
-"endColumn":  23
-}
-}
-},
-{
-"id":  "S2357",
-"message":  "Make 'MineType' private.",
-"location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
-"region":  {
-"startLine":  37,
-"startColumn":  20,
-"endLine":  37,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S2357",
 "message":  "Make 'MimeTypes' private.",
 "location":  {
 "uri":  "Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
