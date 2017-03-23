@@ -74,6 +74,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
+            if (!methodSymbol.Parameters.Any())
+            {
+                return; // empty method
+            }
+
             var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider) ? 1 : 0;
             var formatExpression = invocation.ArgumentList.Arguments[formatArgumentIndex];
 
@@ -235,25 +240,47 @@ namespace SonarAnalyzer.Rules.CSharp
                 var curlyBraceCount = 0;
                 var previousChar = '\0';
                 StringBuilder currentFormatItemBuilder = null;
+                var isEscapingOpenCurlyBrace = false;
+                var isEscapingCloseCurlyBrace = false;
                 for (int i = 0; i < format.Length; i++)
                 {
                     var currentChar = format[i];
 
                     if (currentChar == '{')
                     {
-                        curlyBraceCount++;
-                        if (currentFormatItemBuilder == null)
+                        if (previousChar == '{' && !isEscapingOpenCurlyBrace)
                         {
-                            currentFormatItemBuilder = new StringBuilder();
+                            curlyBraceCount--;
+                            currentFormatItemBuilder = null;
+                            isEscapingOpenCurlyBrace = true;
+                        }
+                        else
+                        {
+                            curlyBraceCount++;
+                            isEscapingOpenCurlyBrace = false;
+                            if (currentFormatItemBuilder == null)
+                            {
+                                currentFormatItemBuilder = new StringBuilder();
+                            }
                         }
                     }
-                    else if (previousChar == '{' && !char.IsDigit(currentChar))
+                    else if (previousChar == '{' &&  !char.IsDigit(currentChar) && currentFormatItemBuilder != null)
                     {
                         throw new FormatException("opening curly brace can only be followed by a digit or an opening curly brace.");
                     }
                     else if (currentChar == '}')
                     {
-                        curlyBraceCount--;
+                        if (previousChar == '}' && !isEscapingCloseCurlyBrace)
+                        {
+                            curlyBraceCount++;
+                            isEscapingCloseCurlyBrace = true;
+                        }
+                        else
+                        {
+                            curlyBraceCount--;
+                            isEscapingCloseCurlyBrace = false;
+                        }
+
                         if (currentFormatItemBuilder != null)
                         {
                             yield return StringFormatItem.Parse(currentFormatItemBuilder.ToString());

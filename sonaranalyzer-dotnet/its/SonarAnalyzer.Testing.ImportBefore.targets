@@ -17,7 +17,7 @@
             Overwrite="true"
             Encoding="Unicode" />
     
-    <Warning Text="Not running a SonarAnalyzer test build? Or forgot to build SonarAnalyzer first? Delete this file: $(MSBuildThisFileFullPath) to remove this error" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
+    <Error Text="Could not find '$(MSBuildStartupDirectory)\binaries\SonarAnalyzer.dll'" Condition="!$(SonarAnalyzerRegressionTestRunning)" />
 
     <ItemGroup Condition="$(SonarAnalyzerRegressionTestRunning)">
       <!-- Remove all previously added analyzers -->

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2275",
+"message":  "Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"region":  {
+"startLine":  632,
+"startColumn":  30,
+"endLine":  634,
+"endColumn":  37
+}
+}
+}
+]
+}
