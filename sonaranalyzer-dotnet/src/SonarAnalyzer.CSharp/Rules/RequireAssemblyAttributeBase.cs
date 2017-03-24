@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class RequireAssemblyAttributeBase : SonarDiagnosticAnalyzer
     {
+        protected abstract bool ReportsOnTestSource { get; }
         protected abstract bool IsRequiredAttribute(AttributeSyntax attribute, SemanticModel semanticModel);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -51,7 +52,8 @@ namespace SonarAnalyzer.Rules
 
                 c.RegisterCompilationEndAction(cc =>
                 {
-                    if (shouldRaise)
+                    if ((shouldRaise && ReportsOnTestSource) ||
+                        (shouldRaise && !ReportsOnTestSource && !c.Compilation.IsTest()))
                     {
                         cc.ReportDiagnostic(Diagnostic.Create(Rule, null));
                     }
