@@ -1,8 +1,10 @@
 # SonarC#
 
-[![Build status](https://ci.appveyor.com/api/projects/status/jkq9jl39q569y4jh/branch/master?svg=true)](https://ci.appveyor.com/project/SonarSource/sonar-csharp/branch/master)
+[![Analyzer Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=sonaranalyzer-csharp-vbnet)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)
+[![Plugin Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=org.sonarsource.dotnet%3Asonar-csharp)](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)
+[![Plugin Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=org.sonarsource.javascript%3Ajavascript&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)
 
-Sonarc# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for JavaScript language used as an extension for the [SonarQube](http://www.sonarqube.org/) platform. It will allow you to produce stable and easily supported code by helping you to find and to correct bugs, vulnerabilities and smells in your code.
+SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for C# language used as an extension for the [SonarQube](http://www.sonarqube.org/) platform. It will allow you to produce stable and easily supported code by helping you to find and to correct bugs, vulnerabilities and smells in your code.
 
 ## Features
 * 190+ rules (including 80+ bug detection)
@@ -17,7 +19,7 @@ Sonarc# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program
 * [StackOverflow](https://stackoverflow.com/questions/tagged/sonarc%23)
 
 ## Have question or feedback?
-To provide feedback (request a feature, report a bug etc.) use the [SonarQube Google Group](https://groups.google.com/forum/#!forum/sonarqube). Please do not forget to specify the language (C#!), plugin version and SonarQube version.
+To provide feedback (request a feature, report a bug etc.) use the [SonarQube Google Group](https://groups.google.com/forum/#!forum/sonarqube). Please do not forget to specify the language (C#), plugin version and SonarQube version.
 If you have a question on how to use plugin direct it to [StackOverflow](http://stackoverflow.com/questions/tagged/sonarqube+c%23+or+sonarc%23) tagged both `sonarqube` and `c#` or `sonarc#`.
 
 ## How to contribute
