@@ -34,6 +34,11 @@ namespace SonarAnalyzer.Rules
         {
             context.RegisterCompilationStartAction(c =>
             {
+                if (!ReportsOnTestSource && c.Compilation.IsTest())
+                {
+                    return;
+                }
+
                 var shouldRaise = true;
 
                 c.RegisterSemanticModelAction(cc =>
@@ -52,8 +57,7 @@ namespace SonarAnalyzer.Rules
 
                 c.RegisterCompilationEndAction(cc =>
                 {
-                    if ((shouldRaise && ReportsOnTestSource) ||
-                        (shouldRaise && !ReportsOnTestSource && !c.Compilation.IsTest()))
+                    if (shouldRaise)
                     {
                         cc.ReportDiagnostic(Diagnostic.Create(Rule, null));
                     }
