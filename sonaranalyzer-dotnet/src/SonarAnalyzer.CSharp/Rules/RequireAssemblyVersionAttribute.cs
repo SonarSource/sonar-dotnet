@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,15 +30,16 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RequireAssemblyVersionAttribute : RequireAssemblyAttributeBase
+    public sealed class RequireAssemblyVersionAttribute : RequireAssemblyAttributeBase
     {
         internal const string DiagnosticId = "S3904";
         private const string MessageFormat = "Provide an 'AssemblyVersion' attribute for this assembly.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule => rule;
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override bool ReportsOnTestSource => false;
 
         protected override bool IsRequiredAttribute(AttributeSyntax attribute, SemanticModel semanticModel)
         {
