@@ -1,8 +1,9 @@
 # SonarC#
 
-[![Analyzer Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=sonaranalyzer-csharp-vbnet)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)
-[![Plugin Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=org.sonarsource.dotnet%3Asonar-csharp)](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)
-[![Plugin Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=org.sonarsource.javascript%3Ajavascript&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)
+|Product|Quality Gate|Coverage|
+|:--:|:--:|:--:|
+|Analyzer|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=sonaranalyzer-csharp-vbnet)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)|[![Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=sonaranalyzer-csharp-vbnet&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)|
+|Plugin|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=org.sonarsource.dotnet%3Asonar-csharp)](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)|
 
 SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for C# language used as an extension for the [SonarQube](http://www.sonarqube.org/) platform. It will allow you to produce stable and easily supported code by helping you to find and to correct bugs, vulnerabilities and smells in your code.
 
