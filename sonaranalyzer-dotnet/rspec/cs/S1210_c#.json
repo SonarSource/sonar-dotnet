@@ -1,5 +1,5 @@
 {
-  "title": "When implementing \"IComparable\", \"Equals(object o)\" and the \"<\", \">\", \"==\", \"!=\" operators should be overridden",
+  "title": "\"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"",
   "type": "BUG",
   "status": "ready",
   "remediation": {

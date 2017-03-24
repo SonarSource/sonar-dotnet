@@ -1,19 +1,26 @@
-<p>Assignments within sub-expressions are hard to spot and therefore make the code less readable.</p>
-<p>It is also a common mistake to write <code>=</code> when <code>==</code> was meant.</p>
-<p>Ideally, sub-expressions should not have side-effects.</p>
+<p>Assignments within sub-expressions are hard to spot and therefore make the code less readable. Ideally, sub-expressions should not have
+side-effects.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-doSomething(i = 42);
+if (string.IsNullOrEmpty(result = str.Substring(index, length))) // Noncompliant
+{
+  //...
+}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-i = 42;
-doSomething(i);
-// or
-doSomething(i == 42);  // Perhaps in fact the comparison operator was expected
+var result = str.Substring(index, length);
+if (string.IsNullOrEmpty(result))
+{
+  //...
+}
 </pre>
 <h2>Exceptions</h2>
-<p>Assignments inside lambda and delegate expressions are allowed. Furthermore, the following two patterns are also accepted.</p>
+<p>Assignments inside lambda and delegate expressions are allowed. </p>
+<p>Furthermore, the following patterns are also accepted:</p>
+<pre>
+var a = b = c = 10;
+</pre>
 <pre>
 while ((val = GetNewValue()) &gt; 0)
 {
@@ -21,10 +28,13 @@ while ((val = GetNewValue()) &gt; 0)
 }
 </pre>
 <pre>
-private object myField;
-public object MyProperty
+private MyClass instance;
+public MyClass Instance
 {
-  get { return myField ?? (myField = new object()); }
+  get
+  {
+    return instance ?? (instance = new MyClass());
+  }
 }
 </pre>
 <h2>See</h2>

@@ -1,6 +1,6 @@
 {
   "title": "Finalizers should not be empty",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

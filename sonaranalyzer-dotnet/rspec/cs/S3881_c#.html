@@ -33,13 +33,13 @@ public class Foo : IDisposable
     void IDisposable.Dispose() // Noncompliant - Dispose() should be public
     {
         Dispose(true);
-        GC.SuppressFinalize(this)
+        GC.SuppressFinalize(this);
     }
 
     public virtual void Dispose() // Noncompliant - Dispose() should be sealed
     {
         Dispose(true);
-        GC.SuppressFinalize(this)
+        GC.SuppressFinalize(this);
     }
 }
 
@@ -48,7 +48,7 @@ public class Foo : IDisposable
     public void Dispose()
     {
         Dispose(true);
-        GC.SuppressFinalize(this)
+        GC.SuppressFinalize(this);
     }
 
     protected virtual void Dispose(bool disposing)

@@ -1,6 +1,7 @@
 <p><code>public static</code> mutable fields of classes which are accessed directly should be protected to the degree possible. This can be done by
 reducing the accessibility of the field or by changing the return type to an immutable type.</p>
-<p>This rule raises issues for <code>public static</code> collections.</p>
+<p>This rule raises issues for <code>public static</code> fields with a type inheriting/implementing <code>System.Array</code> or
+<code>System.Collections.Generic.ICollection&lt;T&gt;</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class A
@@ -10,6 +11,18 @@ public class A
   // ...
 }
 </pre>
+<h2>Exceptions</h2>
+<p>The issue won't raise if the type of the field inherits/implements one (at least) of the following types:</p>
+<ul>
+  <li> <code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableArray&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableDictionary&lt;TKey, TValue&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableList&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableSet&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableStack&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Immutable.IImmutableQueue&lt;T&gt;</code> </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/582.html">MITRE, CWE-582</a> - Array Declared Public, Final, and Static </li>

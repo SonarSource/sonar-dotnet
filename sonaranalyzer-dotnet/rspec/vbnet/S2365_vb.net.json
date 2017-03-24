@@ -1,5 +1,5 @@
 {
-  "title": "Properties should not be based on arrays",
+  "title": "Properties should not make collection or array copies",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -7,7 +7,8 @@
     "constantCost": "5min"
   },
   "tags": [
+    "api-design",
     "performance"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Critical"
 }

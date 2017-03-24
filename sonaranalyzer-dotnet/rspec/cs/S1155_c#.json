@@ -1,13 +1,12 @@
 {
   "title": "\"Any()\" should be used to test for emptiness",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "2min"
   },
   "tags": [
-    "bug",
     "clumsy"
   ],
   "defaultSeverity": "Minor"

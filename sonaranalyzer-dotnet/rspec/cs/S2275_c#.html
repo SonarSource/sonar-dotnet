@@ -1,22 +1,44 @@
-<p>Use fewer arguments than are expected in your format string, and you'll get an error at runtime. Use more arguments than are expected, and you
-probably won't get the output you expect. Either way, it's a bug.</p>
+<p>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected
+behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of
+<code>String.Format</code>, <code>StringBuilder.AppendFormat</code>, <code>Console.Write</code>, <code>Console.WriteLine</code>,
+<code>TextWriter.Write</code>, <code>TextWriter.WriteLine</code>, <code>Debug.WriteLine(String, Object[])</code>,
+<code>Trace.TraceError(String, Object[])</code>, <code>Trace.TraceInformation(String, Object[])</code>,
+<code>Trace.TraceWarning(String, Object[])</code> and <code>TraceSource.TraceInformation(String, Object[])</code>. </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var s1 = string.Format("{0} {1} {2}", 1, 2); // Noncompliant; too few arguments
-var s2 = string.Format("{0}", 10, 11); // Noncompliant; too many arguments
+s = string.Format("[0}", arg0);
+s = string.Format("{{0}", arg0);
+s = string.Format("{0}}", arg0);
+s = string.Format("{-1}", arg0);
+s = string.Format("{0} {1}", arg0);
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-// Pass the expected number of arguments
-var s1 = string.Format("{0} {1} {2}", 1, 2, 3);
-var s2 = string.Format("{0}", 10);
+s = string.Format("{0}", 42); // Compliant
+s = string.Format("{0,10}", 42); // Compliant
+s = string.Format("{0,-10}", 42); // Compliant
+s = string.Format("{0:0000}", 42); // Compliant
+s = string.Format("{2}-{0}-{1}", 1, 2, 3); // Compliant
+s = string.Format("no format"); // Compliant
 </pre>
-<p>or</p>
+<h2>Exceptions</h2>
+<ul>
+  <li> No issue is raised if the format string is not a <code>const</code>. </li>
+</ul>
 <pre>
-// Fix the format string
-var s1 = string.Format("{0} {1}", 1, 2);
-var s2 = string.Format("{0} {1}", 10, 11);
+var pattern = "{0} {1} {2}";
+var res = string.Format(pattern, 1, 2); // Compliant, not const string are not recognized
 </pre>
+<ul>
+  <li> No issue is raised if the argument is not an inline creation array. </li>
+</ul>
+<pre>
+var array = new int[] {};
+var res = string.Format("{0} {1}", array); // Compliant we don't know the size of the array
+</pre>
+<ul>
+  <li> This rule doesn't check whether the format specifier (defined after the <code>:</code>) is actually valid. </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/wQA1">CERT, FIO47-C.</a> - Use valid format strings </li>
