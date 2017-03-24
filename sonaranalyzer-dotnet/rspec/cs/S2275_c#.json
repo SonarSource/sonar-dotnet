@@ -1,5 +1,5 @@
 {
-  "title": "Format strings should be passed the correct number of arguments",
+  "title": "Composite format strings should not lead to unexpected behavior at runtime",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -11,5 +11,5 @@
     "cert",
     "pitfall"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Blocker"
 }

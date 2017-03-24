@@ -43,7 +43,7 @@ public static class Extensions
   }
 }
 </pre>
-<p>Methods that have attributes defined on them are also ignored.</p>
+<p>Methods that have attributes defined on them are ignored.</p>
 <pre>
 public class MyDto
 {
@@ -56,6 +56,17 @@ public class MyDto
   }
 }
 </pre>
+<p>Empty or unsupported methods are ignored.</p>
+<pre>
+public void DoSomething()
+{}
+
+public void Call()
+{
+  throw new NotImplementedException();
+}
+</pre>
+<p>And obviously no issue is raised on the <code>static void Main(string[] args)</code> method</p>
 <h2>See</h2>
 <ul>
   <li> MISRA C++:2008, 0-1-11 - There shall be no unused parameters (named or unnamed) in nonvirtual functions. </li>

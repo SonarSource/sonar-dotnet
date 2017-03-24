@@ -172,7 +172,7 @@
     <value>A source file that grows too much tends to aggregate too many responsibilities and inevitably becomes harder to understand and therefore to maintain. Above a specific threshold, it is strongly advised to refactor it into smaller pieces of code which focus on well defined tasks. Those smaller files will not only be easier to understand but also probably easier to test.</value>
   </data>
   <data name="S104_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S104_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -286,13 +286,13 @@
     <value>Interface names should comply with a naming convention</value>
   </data>
   <data name="S1147_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1147_Description" xml:space="preserve">
     <value>End statements exit the control flow of the program in an unstructured way. This statement stops code execution immediately without executing Dispose or Finalize methods, or executing Finally blocks. Therefore, it should be avoided.</value>
   </data>
   <data name="S1147_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1147_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -304,7 +304,7 @@
     <value>Blocker</value>
   </data>
   <data name="S1147_Tags" xml:space="preserve">
-    <value>cwe,bug,cert,suspicious</value>
+    <value>cwe,cert,suspicious</value>
   </data>
   <data name="S1147_Title" xml:space="preserve">
     <value>"End" statements should not be used</value>
@@ -436,7 +436,7 @@
     <value>Nested If, Select, For, For Each, While, Do, and Try statements are key ingredients for making what's known as "Spaghetti code".</value>
   </data>
   <data name="S134_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S134_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -526,7 +526,7 @@
     <value>Functions and procedures should comply with a naming convention</value>
   </data>
   <data name="S1643_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1643_Description" xml:space="preserve">
     <value>StringBuilder is more efficient than string concatenation, especially when the operator is repeated over and over as in loops.</value>
@@ -544,7 +544,7 @@
     <value>Minor</value>
   </data>
   <data name="S1643_Tags" xml:space="preserve">
-    <value>performance,bug</value>
+    <value>performance</value>
   </data>
   <data name="S1643_Title" xml:space="preserve">
     <value>Strings should not be concatenated using "+" or "&amp;" in a loop</value>
@@ -694,7 +694,7 @@
     <value>Related "If/ElseIf" statements should not have the same condition</value>
   </data>
   <data name="S1871_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1871_Description" xml:space="preserve">
     <value>Having two Cases in the same Select statement or branches in the same If structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an If structure they should be combined, or for a Select, one should fall through to the other.</value>
@@ -709,16 +709,16 @@
     <value>10min</value>
   </data>
   <data name="S1871_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S1871_Tags" xml:space="preserve">
-    <value>bug,design,suspicious</value>
+    <value>design,suspicious</value>
   </data>
   <data name="S1871_Title" xml:space="preserve">
-    <value>Two branches in the same conditional structure should not have exactly the same implementation</value>
+    <value>Two branches in a conditional structure should not have exactly the same implementation</value>
   </data>
   <data name="S2178_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
     <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
@@ -733,7 +733,7 @@
     <value>5min</value>
   </data>
   <data name="S2178_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Blocker</value>
   </data>
   <data name="S2178_Tags" xml:space="preserve">
     <value>bug,cert</value>
@@ -817,7 +817,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S2342_Description" xml:space="preserve">
-    <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all Enum names match a provided regular expression.</value>
+    <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all enum names match a provided regular expression.</value>
   </data>
   <data name="S2342_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1273,7 +1273,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S2365_Description" xml:space="preserve">
-    <value>Most developers expect property access to be as efficient as field access. However, if a property returns an array, it must return a deep copy of the original array or risk having the object's internal state altered unexpectedly.</value>
+    <value>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will be much slower than a simple field access, contrary to the caller's likely expectations. Therefore, such properties should be refactored into methods so that callers are not surprised by unexpectedly poor performance.</value>
   </data>
   <data name="S2365_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1285,13 +1285,13 @@
     <value>5min</value>
   </data>
   <data name="S2365_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S2365_Tags" xml:space="preserve">
-    <value>performance</value>
+    <value>api-design,performance</value>
   </data>
   <data name="S2365_Title" xml:space="preserve">
-    <value>Properties should not be based on arrays</value>
+    <value>Properties should not make collection or array copies</value>
   </data>
   <data name="S2366_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>

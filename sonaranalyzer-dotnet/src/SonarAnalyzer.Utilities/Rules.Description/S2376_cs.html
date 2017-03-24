@@ -17,10 +17,20 @@ class Program
 <pre>
 class Program
 {
+    private int foo;
+
     public void SetFoo(int value)
     {
         // ... some code ...
+        foo = value;
     }
+}
+</pre>
+<p>or</p>
+<pre>
+class Program
+{
+  public int Foo { get; set; } // Compliant
 }
 </pre>
 

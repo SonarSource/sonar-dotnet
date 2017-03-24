@@ -1,5 +1,5 @@
 {
-  "title": "Generic types should not have too many parameters",
+  "title": "Classes and methods should not have too many generic parameters",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

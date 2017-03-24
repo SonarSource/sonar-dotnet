@@ -37,7 +37,9 @@ void CalculateRate(int a, int b)
 <ul>
   <li> the analyzed method body contains <code>try</code> blocks, </li>
   <li> a lambda expression captures the local variables, or </li>
-  <li> the variable is unused (case covered by Rule S1481). </li>
+  <li> the variable is unused (case covered by Rule S1481) </li>
+  <li> initializations to <code>-1</code>, <code>0</code>, <code>1</code>, <code>null</code>, <code>true</code>, <code>false</code>, <code>""</code>
+  and <code>string.Empty</code>. </li>
 </ul>
 <h2>See</h2>
 <ul>

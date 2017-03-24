@@ -1,6 +1,5 @@
-<p>For performance reasons, you should never try to retrieve the current assembly object using <code>Assembly.GetExecutingAssembly()</code> but
-instead you should use the <code>Type.Assembly</code> property using a type defined in the current assembly. The
-<code>Assembly.GetExecutingAssembly()</code> call will walk up the call stack to find the assembly leading to a much slower access.</p>
+<p>Using <code>Type.Assembly</code> to get the current assembly is nearly free in terms of performance; it's a simple property access. On the other
+hand, <code>Assembly.GetExecutingAssembly()</code> can take up to 30 times as long because it walks up the call stack to find the assembly.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class Example

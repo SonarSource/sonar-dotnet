@@ -1,6 +1,6 @@
 {
   "title": "Short-circuit logic should be used in boolean contexts",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -10,5 +10,5 @@
     "bug",
     "cert"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Blocker"
 }

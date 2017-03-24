@@ -220,7 +220,7 @@
     <value>A source file that grows too much tends to aggregate too many responsibilities and inevitably becomes harder to understand and therefore to maintain. Above a specific threshold, it is strongly advised to refactor it into smaller pieces of code which focus on well defined tasks. Those smaller files will not only be easier to understand but also probably easier to test.</value>
   </data>
   <data name="S104_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S104_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -529,7 +529,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1121_Description" xml:space="preserve">
-    <value>Assignments within sub-expressions are hard to spot and therefore make the code less readable.</value>
+    <value>Assignments within sub-expressions are hard to spot and therefore make the code less readable. Ideally, sub-expressions should not have side-effects.</value>
   </data>
   <data name="S1121_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -658,10 +658,10 @@
     <value>Useless "if(true) {...}" and "if(false){...}" blocks should be removed</value>
   </data>
   <data name="S1155_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1155_Description" xml:space="preserve">
-    <value>Using .Count() to test for emptiness works, but using .Any() makes the intent clearer, and the code more readable.</value>
+    <value>Using .Count() to test for emptiness works, but using .Any() makes the intent clearer, and the code more readable. However, there are some cases where special attention should be paid:</value>
   </data>
   <data name="S1155_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -676,7 +676,7 @@
     <value>Minor</value>
   </data>
   <data name="S1155_Tags" xml:space="preserve">
-    <value>bug,clumsy</value>
+    <value>clumsy</value>
   </data>
   <data name="S1155_Title" xml:space="preserve">
     <value>"Any()" should be used to test for emptiness</value>
@@ -781,7 +781,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S1206_Description" xml:space="preserve">
-    <value>There is a contract between Equals(Object) and GetHashCode(): If two objects are equal according to the Equals(Object) method, then calling GetHashCode on each of them must yield the same result. If this is not the case, many collections won't handle class instances correctly.</value>
+    <value>There is a contract between Equals(object) and GetHashCode(): If two objects are equal according to the Equals(object) method, then calling GetHashCode() on each of them must yield the same result. If this is not the case, many collections won't handle class instances correctly.</value>
   </data>
   <data name="S1206_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -790,7 +790,7 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S1206_RemediationCost" xml:space="preserve">
-    <value>15min</value>
+    <value>15 min</value>
   </data>
   <data name="S1206_Severity" xml:space="preserve">
     <value>Minor</value>
@@ -829,7 +829,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S1210_Description" xml:space="preserve">
-    <value>When you implement IComparable or IComparable&amp;lt;T&amp;gt; on a class, the CLR cannot automatically call your implementation in the comparison operators &amp;lt;, ==, &amp;gt; and !=. Also, you could get weird and unpredictable results if the Equals() method does not follow the same logic as CompareTo().</value>
+    <value>When you implement IComparable or IComparable&amp;lt;T&amp;gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &amp;lt;, &amp;lt;=, &amp;gt;, &amp;gt;=). That's because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
   </data>
   <data name="S1210_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -847,13 +847,13 @@
     <value>bug</value>
   </data>
   <data name="S1210_Title" xml:space="preserve">
-    <value>When implementing "IComparable", "Equals(object o)" and the "&lt;", "&gt;", "==", "!=" operators should be overridden</value>
+    <value>"Equals" and the comparison operators should be overridden when implementing "IComparable"</value>
   </data>
   <data name="S1215_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
   <data name="S1215_Description" xml:space="preserve">
-    <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking operation that examines ever object in memory for cleanup. Further, you don't have control over when this blocking cleanup will actually run.</value>
+    <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking operation that examines every object in memory for cleanup. Further, you don't have control over when this blocking cleanup will actually run.</value>
   </data>
   <data name="S1215_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1144,7 +1144,7 @@
     <value>Nested if, switch, for, foreach, while, do, and try statements are key ingredients for making what's known as "Spaghetti code".</value>
   </data>
   <data name="S134_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S134_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1306,7 +1306,7 @@
     <value>Methods and properties should not be too complex</value>
   </data>
   <data name="S1643_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1643_Description" xml:space="preserve">
     <value>StringBuilder is more efficient than string concatenation, especially when the operator is repeated over and over as in loops.</value>
@@ -1324,7 +1324,7 @@
     <value>Minor</value>
   </data>
   <data name="S1643_Tags" xml:space="preserve">
-    <value>performance,bug</value>
+    <value>performance</value>
   </data>
   <data name="S1643_Title" xml:space="preserve">
     <value>Strings should not be concatenated using '+' in a loop</value>
@@ -1432,7 +1432,7 @@
     <value>Using the equality == and inequality != operators to compare two objects generally works. The operators can be overloaded, and therefore the comparison can resolve to the appropriate method. However, when the operators are used on interface instances, then == resolves to reference equality, which may result in unexpected behavior if implementing classes override Equals. Similarly, when a class overrides Equals, but instances are compared with non-overloaded ==, there is a high chance that value comparison was meant instead of the reference one.</value>
   </data>
   <data name="S1698_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1698_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1594,7 +1594,7 @@
     <value>Related "if/else if" statements should not have the same condition</value>
   </data>
   <data name="S1871_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1871_Description" xml:space="preserve">
     <value>Having two cases in the same switch statement or branches in the same if structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an if structure they should be combined, or for a switch, one should fall through to the other.</value>
@@ -1609,13 +1609,13 @@
     <value>10min</value>
   </data>
   <data name="S1871_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S1871_Tags" xml:space="preserve">
-    <value>bug,design,suspicious</value>
+    <value>design,suspicious</value>
   </data>
   <data name="S1871_Title" xml:space="preserve">
-    <value>Two branches in the same conditional structure should not have exactly the same implementation</value>
+    <value>Two branches in a conditional structure should not have exactly the same implementation</value>
   </data>
   <data name="S1905_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1810,7 +1810,7 @@
     <value>"sealed" classes should not have "protected" members</value>
   </data>
   <data name="S2178_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
     <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
@@ -1825,7 +1825,7 @@
     <value>5min</value>
   </data>
   <data name="S2178_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Blocker</value>
   </data>
   <data name="S2178_Tags" xml:space="preserve">
     <value>bug,cert</value>
@@ -1852,7 +1852,7 @@
     <value>Minor</value>
   </data>
   <data name="S2184_Tags" xml:space="preserve">
-    <value>cwe,bug,sans-top25-risky,misra,cert</value>
+    <value>cwe,overflow,bug,sans-top25-risky,misra,cert</value>
   </data>
   <data name="S2184_Title" xml:space="preserve">
     <value>Results of integer division should not be assigned to floating point variables</value>
@@ -2077,7 +2077,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S2275_Description" xml:space="preserve">
-    <value>Use fewer arguments than are expected in your format string, and you'll get an error at runtime. Use more arguments than are expected, and you probably won't get the output you expect. Either way, it's a bug.</value>
+    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
   </data>
   <data name="S2275_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2089,13 +2089,13 @@
     <value>10min</value>
   </data>
   <data name="S2275_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Blocker</value>
   </data>
   <data name="S2275_Tags" xml:space="preserve">
     <value>bug,cert,pitfall</value>
   </data>
   <data name="S2275_Title" xml:space="preserve">
-    <value>Format strings should be passed the correct number of arguments</value>
+    <value>Composite format strings should not lead to unexpected behavior at runtime</value>
   </data>
   <data name="S2278_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
@@ -2368,7 +2368,7 @@
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all enum names match a provided regular expression.</value>
   </data>
   <data name="S2342_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2342_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2647,7 +2647,7 @@
     <value>brain-overload</value>
   </data>
   <data name="S2436_Title" xml:space="preserve">
-    <value>Generic types should not have too many parameters</value>
+    <value>Classes and methods should not have too many generic parameters</value>
   </data>
   <data name="S2437_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2722,10 +2722,10 @@
     <value>Types and "this" should not be used for locking</value>
   </data>
   <data name="S2583_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2583_Description" xml:space="preserve">
-    <value>Conditional statements using a condition which cannot be anything but false have the effect of making blocks of code non-functional. If the condition cannot evaluate to anything but true, the conditional statement is completely redundant, and makes the code less readable.</value>
+    <value>If a boolean expression cannot evaluate to anything but true, this expression is completely redundant. From time to time, such useless expression can be used on purpose to increase the readability of the code. But such expression deserves to be carefully reviewed to make sure that was the initial programmer's intent.</value>
   </data>
   <data name="S2583_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2737,13 +2737,13 @@
     <value>15min</value>
   </data>
   <data name="S2583_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Minor</value>
   </data>
   <data name="S2583_Tags" xml:space="preserve">
     <value>cwe,bug,misra,cert,pitfall</value>
   </data>
   <data name="S2583_Title" xml:space="preserve">
-    <value>Conditions should not unconditionally evaluate to "true" or to "false"</value>
+    <value>Expressions should not unconditionally evaluate to "true"</value>
   </data>
   <data name="S2674_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3370,7 +3370,7 @@
     <value>"async" methods should not return "void"</value>
   </data>
   <data name="S3169_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3169_Description" xml:space="preserve">
     <value>There's no point in chaining multiple OrderBy calls in a LINQ; only the last one will be reflected in the result because each subsequent call completely reorders the list. Thus, calling OrderBy multiple times is a performance issue as well, because all of the sorting will be executed, but only the result of the last sort will be kept.</value>
@@ -3385,10 +3385,10 @@
     <value>5min</value>
   </data>
   <data name="S3169_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S3169_Tags" xml:space="preserve">
-    <value>performance,bug</value>
+    <value>performance</value>
   </data>
   <data name="S3169_Title" xml:space="preserve">
     <value>Multiple "OrderBy" calls should not be used</value>
@@ -4378,10 +4378,10 @@
     <value>"string.ToCharArray()" should not be called redundantly</value>
   </data>
   <data name="S3457_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3457_Description" xml:space="preserve">
-    <value>There's no need to incur the overhead of a formatting call when the string to be formatted contains no placeholders. Instead, simply use the original input string.</value>
+    <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
   </data>
   <data name="S3457_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4390,16 +4390,16 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S3457_RemediationCost" xml:space="preserve">
-    <value>2min</value>
+    <value>10min</value>
   </data>
   <data name="S3457_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S3457_Tags" xml:space="preserve">
-    <value>bug,confusing</value>
+    <value>cert,confusing</value>
   </data>
   <data name="S3457_Title" xml:space="preserve">
-    <value>"string.Format()" should not be called without placeholders</value>
+    <value>Composite format strings should be used correctly</value>
   </data>
   <data name="S3458_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4813,7 +4813,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3875_Description" xml:space="preserve">
-    <value>The use of == to compare to objects is expected to do a reference comparison. That is, it is expected to return true if and only if they are the same object instance. Overloading the operator to do anything else will inevitably lead to the introduction bugs by callers. On the other hand, overloading it to do exactly that is pointless; that's what == does by default.</value>
+    <value>The use of == to compare to objects is expected to do a reference comparison. That is, it is expected to return true if and only if they are the same object instance. Overloading the operator to do anything else will inevitably lead to the introduction of bugs by callers. On the other hand, overloading it to do exactly that is pointless; that's what == does by default.</value>
   </data>
   <data name="S3875_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4882,13 +4882,13 @@
     <value>Exceptions should not be thrown from unexpected methods</value>
   </data>
   <data name="S3880_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3880_Description" xml:space="preserve">
     <value>Finalizers come with a performance cost due to the overhead of tracking the life cycle of objects. An empty one is consequently costly with no benefit or justification.</value>
   </data>
   <data name="S3880_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3880_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5005,7 +5005,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S3889_Description" xml:space="preserve">
-    <value>Thread.Suspend and Thread.Resume can give unpredictable results, and have been deprecated. Instead, other synchronization mechanisms should be used, such as Monitor, Mutex, and Semaphore.</value>
+    <value>Thread.Suspend and Thread.Resume can give unpredictable results, and both methods have been deprecated. Indeed, if Thread.Suspend is not used very carefully, a thread can be suspended while holding a lock, thus leading to a deadlock. Other safer synchronization mechanisms should be used, such as Monitor, Mutex, and Semaphore.</value>
   </data>
   <data name="S3889_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5050,7 +5050,7 @@
     <value>Classes that provide "Equals(&lt;T&gt;)" or override "Equals(Object)" should implement "IEquatable&lt;T&gt;"</value>
   </data>
   <data name="S3898_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3898_Description" xml:space="preserve">
     <value>If you're using a struct, it is likely because you're interested in performance. But by failing to implement IEquatable&amp;lt;T&amp;gt; you're loosing performance when comparisons are made because without IEquatable&amp;lt;T&amp;gt;, boxing and reflection are used to make comparisons. </value>
@@ -5065,7 +5065,7 @@
     <value>20min</value>
   </data>
   <data name="S3898_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S3898_Tags" xml:space="preserve">
     <value>performance</value>
@@ -5074,10 +5074,10 @@
     <value>Value types should implement "IEquatable&lt;T&gt;"</value>
   </data>
   <data name="S3902_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3902_Description" xml:space="preserve">
-    <value>For performance reasons, you should never try to retrieve the current assembly object using Assembly.GetExecutingAssembly() but instead you should use the Type.Assembly property using a type defined in the current assembly. The Assembly.GetExecutingAssembly() call will walk up the call stack to find the assembly leading to a much slower access.</value>
+    <value>Using Type.Assembly to get the current assembly is nearly free in terms of performance; it's a simple property access. On the other hand, Assembly.GetExecutingAssembly() can take up to 30 times as long because it walks up the call stack to find the assembly.</value>
   </data>
   <data name="S3902_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>

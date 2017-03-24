@@ -27,7 +27,12 @@ public class Foo
 }
 </pre>
 <h2>Exceptions</h2>
-<p>This rule doesn't raise any issue on empty constructors and attributed members.</p>
+<p>This rule doesn't raise any issue on:</p>
+<ul>
+  <li> Empty constructors </li>
+  <li> Attributed members </li>
+  <li> Empty serialization constructor on type with <code>System.SerializableAttribute</code> attribute. </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/OYIyAQ">CERT, MSC07-CPP.</a> - Detect and remove dead code </li>
