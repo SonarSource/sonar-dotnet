@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override DiagnosticDescriptor Rule => rule;
 
-        internal const string SymbolReferenceFileName = "symbol-reference.pb";
+        internal const string SymbolReferenceFileName = "symrefs.pb";
 
         protected sealed override string FileName => SymbolReferenceFileName;
 
