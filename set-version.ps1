@@ -1,6 +1,7 @@
 [CmdletBinding()]
 Param(
     [Parameter(Mandatory=$True, Position=1)]
+    [ValidatePattern("\d{1,3}\.\d{1,3}(\.\d{1,3})?")]
     [string]$version
 )
 
@@ -27,12 +28,5 @@ function UpdateDotNetFiles {
     Pop-Location
 }
 
-function ValidateVersionFormat {
-    If ($version -notmatch "\d{1,3}\.\d{1,3}(\.\d{1,3})?") {
-        Write-Error "Invalid version format."
-    }
-}
-
-ValidateVersionFormat
 UpdateJavaFiles
 UpdateDotNetFiles
