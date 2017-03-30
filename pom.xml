@@ -95,4 +95,12 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>sonaranalyzer</id>
+      <modules>
+        <module>sonaranalyzer-dotnet</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>
