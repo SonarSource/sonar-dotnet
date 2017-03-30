@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EnumerationValueName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class EnumerationValueName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2343";
         private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the enumeration value names against.", NamingHelper.PascalCasingPattern)]
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var enumMemberDeclaration = (EnumMemberDeclarationSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(enumMemberDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, enumMemberDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, enumMemberDeclaration.Identifier.GetLocation(),
                             enumMemberDeclaration.Identifier.ValueText, Pattern));
                     }
                 },

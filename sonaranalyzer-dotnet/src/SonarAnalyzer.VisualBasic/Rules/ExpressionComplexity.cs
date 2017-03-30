@@ -31,13 +31,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
+    public sealed class ExpressionComplexity : ExpressionComplexityBase<ExpressionSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override DiagnosticDescriptor Rule => rule;
 
         public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 

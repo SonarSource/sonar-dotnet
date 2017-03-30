@@ -22,6 +22,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -29,8 +30,11 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract bool ReportsOnTestSource { get; }
         protected abstract bool IsRequiredAttribute(AttributeSyntax attribute, SemanticModel semanticModel);
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(c =>
             {

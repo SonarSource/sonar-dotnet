@@ -25,7 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class FileEncodingAnalyzer : FileEncodingAnalyzerBase
+    public sealed class FileEncodingAnalyzer : FileEncodingAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }

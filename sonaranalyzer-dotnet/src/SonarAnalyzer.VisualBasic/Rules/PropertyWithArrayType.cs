@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class PropertyWithArrayType : SonarDiagnosticAnalyzer
+    public sealed class PropertyWithArrayType : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2365";
         private const string MessageFormat = "Refactor '{0}' into a method, properties should not be based on arrays.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var symbol = c.SemanticModel.GetDeclaredSymbol(propertyStatement);
                     if (symbol?.Type is IArrayTypeSymbol)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
                     }
                 },
                 SyntaxKind.PropertyStatement);

@@ -26,12 +26,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class LocalVariableName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class LocalVariableName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S117";
         private const string MessageFormat = "Rename this local variable to match the regular expression: '{0}'.";
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the local variable names against.", NamingHelper.CamelCasingPattern)]
@@ -78,7 +79,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(Rule, controlVar.GetLocation(), Pattern));
+            context.ReportDiagnostic(Diagnostic.Create(rule, controlVar.GetLocation(), Pattern));
         }
 
         private void ProcessVariableDeclarator(SyntaxNodeAnalysisContext context)
@@ -100,7 +101,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     continue;
                 }
 
-                context.ReportDiagnostic(Diagnostic.Create(Rule, name.Identifier.GetLocation(), Pattern));
+                context.ReportDiagnostic(Diagnostic.Create(rule, name.Identifier.GetLocation(), Pattern));
             }
         }
     }

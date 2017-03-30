@@ -22,10 +22,10 @@ using System;
 
 namespace SonarAnalyzer.Common
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public sealed class RuleAttribute : Attribute
     {
-        public string Key { get; private set; }
+        public string Key { get; }
 
         public RuleAttribute(string key)
         {

@@ -23,6 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Utilities;
 using System.Linq;
+using System.Reflection;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -30,29 +31,34 @@ namespace SonarAnalyzer.UnitTest.Common
     public class RuleDescriptorTest
     {
         [TestMethod]
-        public void GetAllRuleDescriptors_Count()
+        public void CheckAllAnalyzersHaveRuleId()
         {
-            CheckRuleDescriptorsCount(AnalyzerLanguage.CSharp);
-            CheckRuleDescriptorsCount(AnalyzerLanguage.VisualBasic);
+            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.CSharp);
+            CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage.VisualBasic);
         }
 
-        private static void CheckRuleDescriptorsCount(AnalyzerLanguage language)
+        private static void CheckLanguageSpecificAnalyzersHaveRuleId(AnalyzerLanguage language)
         {
-            RuleDetailBuilder.GetAllRuleDetails(language)
-                .Should().HaveSameCount(new RuleFinder().GetAnalyzerTypes(language));
+            new RuleFinder()
+                .GetAnalyzerTypes(language)
+                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
+                .Should()
+                .BeFalse();
         }
 
         [TestMethod]
-        public void GetParameterlessRuleDescriptors_Count()
+        public void CheckParameterlessRuleDescriptorsHaveRuleId()
         {
-            ParameterlessRuleDescriptorsCount(AnalyzerLanguage.CSharp);
-            ParameterlessRuleDescriptorsCount(AnalyzerLanguage.VisualBasic);
+            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.CSharp);
+            CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage.VisualBasic);
         }
 
-        private static void ParameterlessRuleDescriptorsCount(AnalyzerLanguage language)
+        private static void CheckLanguageSpecificParameterlessRuleDescriptorsHaveRuleId(AnalyzerLanguage language)
         {
-            RuleDetailBuilder.GetParameterlessRuleDetails(language)
-                .Should().HaveSameCount(new RuleFinder().GetParameterlessAnalyzerTypes(language));
+            new RuleFinder().GetParameterlessAnalyzerTypes(language)
+                .Any(at => !at.GetCustomAttributes<RuleAttribute>().Any())
+                .Should()
+                .BeFalse();
         }
 
         [TestMethod]

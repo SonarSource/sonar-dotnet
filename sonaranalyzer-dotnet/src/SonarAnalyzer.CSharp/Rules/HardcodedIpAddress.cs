@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<string> SkippedWords = ImmutableHashSet.Create("VERSION", "ASSEMBLY");
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             typeof(VariableDeclaratorSyntax),
             typeof(ParameterSyntax));
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, stringLiteral.GetLocation(), text));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, stringLiteral.GetLocation(), text));
                 },
                 SyntaxKind.StringLiteralExpression);
         }

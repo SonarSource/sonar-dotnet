@@ -39,9 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (returnedSymbols.Any())
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, usingStatement.UsingKeyword.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, usingStatement.UsingKeyword.GetLocation(),
                             string.Join(", ",
                                 returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s))));
                     }

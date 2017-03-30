@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class TypeParameterName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class TypeParameterName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2373";
         private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string DefaultFormat = "^T(" + NamingHelper.PascalCasingInternalPattern + ")?";
 
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var typeParameter = (TypeParameterSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(typeParameter.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, typeParameter.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, typeParameter.Identifier.GetLocation(),
                             typeParameter.Identifier.ValueText, Pattern));
                     }
                 },

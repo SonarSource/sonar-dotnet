@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.Common
         where TMethodSyntax : SyntaxNode
         where TParameterSyntax: SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -65,6 +65,10 @@ namespace SonarAnalyzer.Rules.Common
                 },
                 SyntaxKindsOfInterest.ToArray());
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static bool HasAllowedAttribute(TParameterSyntax parameterSyntax, SemanticModel semanticModel)
         {

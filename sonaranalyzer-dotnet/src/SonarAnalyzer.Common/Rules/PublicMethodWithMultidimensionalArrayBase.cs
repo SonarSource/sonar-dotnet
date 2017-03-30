@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.Common
         where TLanguageKindEnum : struct
         where TMethodSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -71,5 +71,9 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract SyntaxToken GetIdentifier(TMethodSyntax method);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

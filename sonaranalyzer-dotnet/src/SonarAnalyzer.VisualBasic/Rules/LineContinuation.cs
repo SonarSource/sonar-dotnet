@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class LineContinuation : SonarDiagnosticAnalyzer
+    public sealed class LineContinuation : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2354";
         private const string MessageFormat = "Reformat the code to remove this use of the line continuation character.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     foreach (var lineContinuation in lineContinuations)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, lineContinuation.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, lineContinuation.GetLocation()));
                     }
                 });
         }

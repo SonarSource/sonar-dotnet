@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class StaticFieldWrittenFromInstanceMember : StaticFieldWrittenFrom
+    public sealed class StaticFieldWrittenFromInstanceMember : StaticFieldWrittenFrom
     {
         internal const string DiagnosticId = "S2696";
         private const string MessageFormat = "{0}";
@@ -37,8 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override DiagnosticDescriptor Rule => rule;
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol)
         {

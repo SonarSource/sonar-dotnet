@@ -41,12 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string EqualsName = "Equals";
         private static readonly ISet<string> MethodNames = ImmutableHashSet.Create( "GetHashCode", EqualsName );
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var firstPosition = locations.Select(loc => loc.SourceSpan.Start).Min();
                             var location = locations.First(loc => loc.SourceSpan.Start == firstPosition);
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, location, methodSymbol.Name));
+                            c.ReportDiagnostic(Diagnostic.Create(rule, location, methodSymbol.Name));
                         });
                 });
         }

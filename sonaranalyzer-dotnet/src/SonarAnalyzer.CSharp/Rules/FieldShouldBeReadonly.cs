@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> assignmentKinds = ImmutableHashSet.Create(
             SyntaxKind.SimpleAssignmentExpression,
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.PostDecrementExpression,
             SyntaxKind.PostIncrementExpression);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var field in fieldCollector.NonCompliantFields)
                     {
                         var identifier = field.SyntaxNode.Identifier;
-                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, identifier.GetLocation(), identifier.ValueText));
                     }
                 },
                 SymbolKind.NamedType);

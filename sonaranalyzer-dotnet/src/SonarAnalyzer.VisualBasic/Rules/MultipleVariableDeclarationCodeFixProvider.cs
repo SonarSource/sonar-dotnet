@@ -31,7 +31,7 @@ using System;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class MultipleVariableDeclarationCodeFixProvider : MultipleVariableDeclarationCodeFixProviderBase
+    public sealed class MultipleVariableDeclarationCodeFixProvider : MultipleVariableDeclarationCodeFixProviderBase
     {
         protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
         {

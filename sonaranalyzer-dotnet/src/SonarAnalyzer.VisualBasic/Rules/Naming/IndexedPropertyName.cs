@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class IndexedPropertyName : SonarDiagnosticAnalyzer
+    public sealed class IndexedPropertyName : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2353";
         private const string MessageFormat = "Rename this property to 'Item'.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         propertyDeclaration.ParameterList.Parameters.Any() &&
                         propertyDeclaration.Identifier.ValueText != "Item")
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, propertyDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.PropertyStatement);

@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Rules.Common
         where TFieldDeclarationSyntax: SyntaxNode
         where TLocalDeclarationSyntax: SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -60,6 +61,10 @@ namespace SonarAnalyzer.Rules.Common
                 },
                 FieldDeclarationKind);
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private static void CheckAndReportVariables(IList<SyntaxToken> variables, SyntaxNodeAnalysisContext context, DiagnosticDescriptor rule)
         {
