@@ -28,7 +28,7 @@ import org.sonar.api.measures.FileLinesContextFactory;
 public final class ProtobufImporters {
 
   public static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-type.pb";
-  public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symbol-reference.pb";
+  public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
   public static final String CPDTOKENS_OUTPUT_PROTOBUF_NAME = "token-cpd.pb";
   public static final String METRICS_OUTPUT_PROTOBUF_NAME = "metrics.pb";
   public static final String ISSUES_OUTPUT_PROTOBUF_NAME = "issues.pb";
