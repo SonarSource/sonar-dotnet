@@ -24,14 +24,22 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class StringFormatTypoFreeValidatorTest
+    public class StringFormatValidatorTest
     {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void StringFormatRuntimeExceptionFreeValidator()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\StringFormatRuntimeExceptionFreeValidator.cs",
+                new StringFormatValidator());
+        }
+
         [TestMethod]
         [TestCategory("Rule")]
         public void StringFormatTypoFreeValidator()
         {
             Verifier.VerifyAnalyzer(@"TestCases\StringFormatTypoFreeValidator.cs",
-                new StringFormatTypoFreeValidator());
+                new StringFormatValidator());
         }
     }
 }

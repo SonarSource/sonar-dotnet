@@ -32,12 +32,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class SwitchWithoutDefault : SwitchWithoutDefaultBase<SyntaxKind>
+    public sealed class SwitchWithoutDefault : SwitchWithoutDefaultBase<SyntaxKind>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.SelectBlock);
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var switchNode = (SelectBlockSyntax)node;
             if (!HasDefaultLabel(switchNode))
             {
-                diagnostic = Diagnostic.Create(Rule, switchNode.SelectStatement.SelectKeyword.GetLocation(), "Case Else", "Select");
+                diagnostic = Diagnostic.Create(rule, switchNode.SelectStatement.SelectKeyword.GetLocation(), "Case Else", "Select");
                 return true;
             }
 

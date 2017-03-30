@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EventName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class EventName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2348";
         private const string MessageFormat = "Rename this event to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the event names against.", NamingHelper.PascalCasingPattern)]
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var eventDeclaration = (EventStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(eventDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, eventDeclaration.Identifier.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, eventDeclaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.EventStatement);

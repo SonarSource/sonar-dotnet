@@ -46,9 +46,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -119,13 +119,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (objectEqualsMethod != null && typeSpecificEqualsMethod != null)
             {
-                return Diagnostic.Create(Rule, classIdentifier.GetLocation(),
+                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
                     string.Format(ImplementIEquatableMessage, classIdentifier.ValueText));
             }
 
             if (objectEqualsMethod != null)
             {
-                return Diagnostic.Create(Rule, classIdentifier.GetLocation(),
+                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
                     additionalLocations: new[] { objectEqualsMethod.Identifier.GetLocation() },
                     properties: new Dictionary<string, string> { ["0"] = EqualsObjectSecondaryMessage }.ToImmutableDictionary(),
                     messageArgs: string.Format(ImplementIEquatableMessage, classIdentifier.ValueText));
@@ -133,13 +133,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!implementsIEquatable)
             {
-                return Diagnostic.Create(Rule, classIdentifier.GetLocation(),
+                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
                     additionalLocations: new[] { typeSpecificEqualsMethod.Identifier.GetLocation() },
                     properties: new Dictionary<string, string> { ["0"] = EqualsTSecondaryMessage }.ToImmutableDictionary(),
                     messageArgs: string.Format(ImplementAndOverrideMessage, classIdentifier.ValueText));
             }
 
-            return Diagnostic.Create(Rule, classIdentifier.GetLocation(),
+            return Diagnostic.Create(rule, classIdentifier.GetLocation(),
                 additionalLocations: new[] { typeSpecificEqualsMethod.Identifier.GetLocation() },
                 properties: new Dictionary<string, string> { ["0"] = EqualsTSecondaryMessage }.ToImmutableDictionary(),
                 messageArgs: OverrideEqualsMessage);

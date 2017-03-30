@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int MaximumDepthDefaultValue = 5;
         [RuleParameter(
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var baseTypesCount = symbol.GetSelfAndBaseTypes().Count() - 1; // remove the class itself
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
                             baseTypesCount, MaximumDepth));
                     }
 

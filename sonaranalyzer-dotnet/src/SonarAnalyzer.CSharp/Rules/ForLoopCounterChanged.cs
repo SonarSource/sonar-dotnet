@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private sealed class SideEffectExpression
         {
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
             });
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
+                            c.ReportDiagnostic(Diagnostic.Create(rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
                         }
                     }
                 },

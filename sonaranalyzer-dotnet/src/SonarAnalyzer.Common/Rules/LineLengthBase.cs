@@ -22,6 +22,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -32,12 +33,13 @@ namespace SonarAnalyzer.Rules
 
         private const int DefaultValueMaximum = 200;
 
-        [RuleParameter("maximumLineLength", PropertyType.Integer, "The maximum authorized line length.", DefaultValueMaximum)]
+        [RuleParameter("maximumLineLength", PropertyType.Integer, "The maximum authorized line length.",
+            DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -46,9 +48,14 @@ namespace SonarAnalyzer.Rules
                     foreach (var line in c.Tree.GetText().Lines
                         .Where(line => line.Span.Length > Maximum))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span), Maximum, line.Span.Length));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span),
+                            Maximum, line.Span.Length));
                     }
                 });
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

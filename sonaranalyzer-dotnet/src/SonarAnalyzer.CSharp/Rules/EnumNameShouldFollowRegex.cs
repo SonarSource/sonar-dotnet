@@ -33,12 +33,10 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule => rule;
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
-        protected sealed override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumDeclaration;
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
-
-        protected sealed override SyntaxToken GetIdentifier(EnumDeclarationSyntax declaration) => declaration.Identifier;
+        protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumDeclaration;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override SyntaxToken GetIdentifier(EnumDeclarationSyntax declaration) => declaration.Identifier;
     }
 }

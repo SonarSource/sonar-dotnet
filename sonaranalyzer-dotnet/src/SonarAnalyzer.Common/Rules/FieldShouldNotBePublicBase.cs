@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
         where TFieldDeclarationSyntax : SyntaxNode
         where TVariableSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -76,5 +76,8 @@ namespace SonarAnalyzer.Rules
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
         protected abstract IEnumerable<TVariableSyntax> GetVariables(TFieldDeclarationSyntax fieldDeclaration);
         protected abstract SyntaxToken GetIdentifier(TVariableSyntax variable);
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

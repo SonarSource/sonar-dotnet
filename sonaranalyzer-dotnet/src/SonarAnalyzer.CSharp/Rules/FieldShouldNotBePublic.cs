@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -33,9 +34,8 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class FieldShouldNotBePublic : FieldShouldNotBePublicBase<SyntaxKind, FieldDeclarationSyntax, VariableDeclaratorSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.FieldDeclaration);

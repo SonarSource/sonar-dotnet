@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -41,9 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var argumentList = (AttributeArgumentListSyntax)c.Node;
                     if (!argumentList.Arguments.Any())
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, argumentList.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, argumentList.GetLocation()));
                     }
                 },
                 SyntaxKind.AttributeArgumentList);
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         objectCreation.Initializer != null &&
                         !argumentList.Arguments.Any())
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, argumentList.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, argumentList.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
@@ -90,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             GetSpan(innermostExpression.CloseParenToken, expression.CloseParenToken));
 
                         c.ReportDiagnostic(
-                            Diagnostic.Create(Rule, location, additionalLocations: new[] { secondaryLocation }));
+                            Diagnostic.Create(rule, location, additionalLocations: new[] { secondaryLocation }));
                     }
                 },
                 SyntaxKind.ParenthesizedExpression);

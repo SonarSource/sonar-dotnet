@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase
+    public sealed class CopyPasteTokenAnalyzer : CopyPasteTokenAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 

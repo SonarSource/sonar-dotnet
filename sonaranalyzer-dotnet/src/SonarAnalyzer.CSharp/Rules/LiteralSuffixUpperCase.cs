@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,9 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (text[text.Length - 1] == 'l' &&
                         c.SemanticModel.GetTypeInfo(literal).Type.Is(KnownType.System_Int64))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, Location.Create(literal.SyntaxTree,
+                        c.ReportDiagnostic(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
                             new TextSpan(literal.Span.End - 1, 1))));
                     }
                 },

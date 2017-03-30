@@ -48,9 +48,9 @@ namespace SonarAnalyzer.UnitTest.Common
 
             foreach (var analyzer in analyzers)
             {
-                var ruleDescriptor = analyzer.GetCustomAttributes<RuleAttribute>().SingleOrDefault();
+                var ruleDescriptors = analyzer.GetCustomAttributes<RuleAttribute>();
 
-                ruleDescriptor.Should().NotBeNull("RuleAttribute is missing from DiagnosticAnalyzer '{0}'", analyzer.Name);
+                ruleDescriptors.Should().NotBeEmpty("RuleAttribute is missing from DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
 
@@ -66,8 +66,8 @@ namespace SonarAnalyzer.UnitTest.Common
 
             foreach (var analyzer in analyzers)
             {
-                var attribute = analyzer.GetCustomAttributes<RuleAttribute>().SingleOrDefault();
-                attribute.Should().BeNull("RuleAttribute is added to abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
+                var attributes = analyzer.GetCustomAttributes<RuleAttribute>();
+                attributes.Should().BeEmpty("At least one RuleAttribute is added to the abstract DiagnosticAnalyzer '{0}'", analyzer.Name);
             }
         }
 

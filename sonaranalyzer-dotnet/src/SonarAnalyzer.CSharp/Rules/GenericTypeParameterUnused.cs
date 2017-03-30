@@ -41,9 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(analysisContext =>
             {
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Select(typeParameter => typeParameter.Identifier.Text)
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule,
+                            c.ReportDiagnostic(Diagnostic.Create(rule,
                                 helper.TypeParameterList.Parameters.First(tp => tp.Identifier.Text == typeParameter)
                                     .GetLocation(),
                                 typeParameter, helper.ContainerSyntaxTypeName));

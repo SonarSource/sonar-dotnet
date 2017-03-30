@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.Common
         where TLanguageKindEnum : struct
         where TPropertyDeclaration : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -50,7 +50,8 @@ namespace SonarAnalyzer.Rules.Common
                     }
 
                     var identifier = GetIdentifier(prop);
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                    c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        identifier.ValueText));
                 },
                 SyntaxKindsOfInterest.ToArray());
         }
@@ -59,5 +60,9 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract bool IsWriteOnlyProperty(TPropertyDeclaration prop);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

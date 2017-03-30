@@ -19,7 +19,6 @@ namespace Tests.Diagnostics
             s = string.Format(string.Format("{0}", 42));
 
             s = string.Format("{0}", 1);
-            s = string.Format("{0}");
             s = string.Format(CultureInfo.InvariantCulture, "{0}", 3);
             s = string.Format(CultureInfo.InvariantCulture, "some text"); //Noncompliant
             s = string.Format(format: "some text"); //Noncompliant
@@ -28,7 +27,6 @@ namespace Tests.Diagnostics
             s = string.Format("{0}", arg0, arg1); // Noncompliant {{The format string might be wrong, the following arguments are unused: 'arg1'.}}
             s = string.Format("{0}", arg0, arg1, arg2); // Noncompliant {{The format string might be wrong, the following arguments are unused: 'arg1', 'arg2'.}}
 
-            s = string.Format("{0} {2}", arg0, arg1);
             s = string.Format("{0} {2}", arg0, arg1, arg2); // Noncompliant {{The format string might be wrong, the following item indexes are missing: '1'.}}
         }
 

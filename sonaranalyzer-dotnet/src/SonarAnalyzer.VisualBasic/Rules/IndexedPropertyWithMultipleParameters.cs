@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class IndexedPropertyWithMultipleParameters : SonarDiagnosticAnalyzer
+    public sealed class IndexedPropertyWithMultipleParameters : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2352";
         private const string MessageFormat = "This indexed property has {0} parameters, use methods instead.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (property.ParameterList != null &&
                         property.ParameterList.Parameters.Count > 1)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, property.Identifier.GetLocation(), property.ParameterList.Parameters.Count));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, property.Identifier.GetLocation(), property.ParameterList.Parameters.Count));
                     }
                 },
                 SyntaxKind.PropertyStatement);

@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultValueMaximum = 7;
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
                         Mapping.TryGetValue(parameterListNode.Parent.Kind(), out declarationName))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, parameterListNode.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, parameterListNode.GetLocation(),
                             Maximum, parameters, declarationName));
                     }
                 },

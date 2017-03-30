@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ClassName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class ClassName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S101";
         private const string MessageFormat = "Rename this class to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the class names against.", NamingHelper.PascalCasingPattern)]
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var declaration = (ClassStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.ClassStatement);

@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class StringConcatenationWithPlus : SonarDiagnosticAnalyzer
+    public sealed class StringConcatenationWithPlus : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1645";
         private const string MessageFormat = "Switch this use of the '+' operator to the '&'.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (leftType.Is(KnownType.System_String) ||
                         rightType.Is(KnownType.System_String))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, binary.OperatorToken.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
                     }
                 },
                 SyntaxKind.AddExpression);

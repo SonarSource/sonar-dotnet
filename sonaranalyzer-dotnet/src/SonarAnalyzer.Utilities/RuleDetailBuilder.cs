@@ -40,18 +40,26 @@ namespace SonarAnalyzer.Utilities
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails(AnalyzerLanguage language)
         {
-            return new RuleFinder().GetAnalyzerTypes(language).Select(t => GetRuleDetail(t, language));
+            return new RuleFinder()
+                .GetAnalyzerTypes(language)
+                .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
         }
 
         public static IEnumerable<RuleDetail> GetParameterlessRuleDetails(AnalyzerLanguage language)
         {
-            return new RuleFinder().GetParameterlessAnalyzerTypes(language).Select(t => GetRuleDetail(t, language));
+            return new RuleFinder()
+                .GetParameterlessAnalyzerTypes(language)
+                .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
         }
 
-        private static RuleDetail GetRuleDetail(Type analyzerType, AnalyzerLanguage language)
+        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType, AnalyzerLanguage language)
         {
-            var rule = analyzerType.GetCustomAttributes<RuleAttribute>().Single();
+            return analyzerType.GetCustomAttributes<RuleAttribute>()
+                .Select(ruleAttribute => GetRuleDetail(ruleAttribute, analyzerType, language));
+        }
 
+        private static RuleDetail GetRuleDetail(RuleAttribute rule, Type analyzerType, AnalyzerLanguage language)
+        {
             var resources = new ResourceManager("SonarAnalyzer.RspecStrings", analyzerType.Assembly);
 
             var ruleDetail = new RuleDetail

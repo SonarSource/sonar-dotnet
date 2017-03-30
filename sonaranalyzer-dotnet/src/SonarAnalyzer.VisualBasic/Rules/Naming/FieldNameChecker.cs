@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -50,11 +51,16 @@ namespace SonarAnalyzer.Rules.VisualBasic
                             IsCandidateSymbol(symbol) &&
                             !NamingHelper.IsRegexMatch(symbol.Name, Pattern))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(SupportedDiagnostics.First(), name.GetLocation(), symbol.Name, Pattern));
+                            c.ReportDiagnostic(Diagnostic.Create(Rule, name.GetLocation(),
+                                symbol.Name, Pattern));
                         }
                     }
                 },
                 SyntaxKind.FieldDeclaration);
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

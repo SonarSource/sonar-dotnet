@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class SingleStatementPerLineBase<TStatementSyntax> : SingleStatementPerLineBase
         where TStatementSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -60,6 +61,10 @@ namespace SonarAnalyzer.Rules.Common
                     }
                 });
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private IEnumerable<TStatementSyntax> GetStatements(SyntaxTree tree)
         {

@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -38,8 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<KnownType> CallerInfoAttributesToReportOn = new HashSet<KnownType>
         {
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             continue;
                         }
 
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, argument.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

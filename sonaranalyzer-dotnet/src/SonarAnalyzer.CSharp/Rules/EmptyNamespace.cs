@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,9 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager)
                                        .WithSeverity(Severity.Info);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             // in order to let the tests work properly, we do this in a tree action
             // https://github.com/dotnet/roslyn/issues/4745 was fixed in Roslyn 1.1,
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var ns in namespaces)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, ns.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, ns.GetLocation()));
                     }
                 });
         }

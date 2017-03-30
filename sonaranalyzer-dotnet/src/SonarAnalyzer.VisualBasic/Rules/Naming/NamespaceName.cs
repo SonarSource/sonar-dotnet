@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class NamespaceName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class NamespaceName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2304";
         private const string MessageFormat = "Rename this namespace to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string DefaultPattern =
             "^" + NamingHelper.PascalCasingInternalPattern + @"(\." + NamingHelper.PascalCasingInternalPattern + ")*$";
@@ -57,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (declarationName != null &&
                         !NamingHelper.IsRegexMatch(declarationName, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Name.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Name.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.NamespaceStatement);

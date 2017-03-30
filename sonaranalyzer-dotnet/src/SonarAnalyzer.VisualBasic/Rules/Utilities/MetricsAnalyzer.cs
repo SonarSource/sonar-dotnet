@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public class MetricsAnalyzer : MetricsAnalyzerBase
+    public sealed class MetricsAnalyzer : MetricsAnalyzerBase
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 

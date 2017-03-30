@@ -25,14 +25,18 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
     public abstract class MethodShouldNotBeCalled : SonarDiagnosticAnalyzer
     {
         internal abstract IEnumerable<MethodSignature> InvalidMethods { get; }
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(ReportIfInvalidMethodIsCalled, SyntaxKind.InvocationExpression);
         }

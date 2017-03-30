@@ -27,12 +27,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class FileLines : FileLinesBase
+    public sealed class FileLines : FileLinesBase
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
-
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>

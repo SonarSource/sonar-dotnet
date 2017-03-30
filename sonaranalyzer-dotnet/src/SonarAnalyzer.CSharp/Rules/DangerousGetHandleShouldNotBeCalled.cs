@@ -23,19 +23,20 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DangerousGetHandleShouldNotBeCalled : MethodShouldNotBeCalled
+    public sealed class DangerousGetHandleShouldNotBeCalled : MethodShouldNotBeCalled
     {
         internal const string DiagnosticId = "S3869";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
         {

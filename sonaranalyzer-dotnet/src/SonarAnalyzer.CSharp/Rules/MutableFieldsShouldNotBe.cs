@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -51,6 +52,9 @@ namespace SonarAnalyzer.Rules
         };
 
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -68,7 +72,8 @@ namespace SonarAnalyzer.Rules
             var symbolInfo = analysisContext.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type);
             if (IsInvalidMutableType(symbolInfo.Symbol))
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule, fieldDeclaration.Declaration.Variables[0].GetLocation()));
+                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule,
+                    fieldDeclaration.Declaration.Variables[0].GetLocation()));
             }
         }
 
