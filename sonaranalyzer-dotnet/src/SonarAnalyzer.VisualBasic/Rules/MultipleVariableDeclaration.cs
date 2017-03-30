@@ -30,15 +30,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
     using Microsoft.CodeAnalysis.VisualBasic;
     using Microsoft.CodeAnalysis.VisualBasic.Syntax;
     using Helpers;
+    using System.Collections.Immutable;
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
+    public sealed class MultipleVariableDeclaration : MultipleVariableDeclarationBase<SyntaxKind,
         FieldDeclarationSyntax, LocalDeclarationStatementSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;

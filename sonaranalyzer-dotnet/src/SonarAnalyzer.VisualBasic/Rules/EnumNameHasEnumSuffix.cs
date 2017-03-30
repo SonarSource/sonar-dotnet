@@ -30,11 +30,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EnumNameHasEnumSuffix : EnumNameHasEnumSuffixBase<SyntaxKind>
+    public sealed class EnumNameHasEnumSuffix : EnumNameHasEnumSuffixBase<SyntaxKind>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.EnumStatement);
@@ -43,6 +42,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetIdentifier(SyntaxNode node) => ((EnumStatementSyntax)node).Identifier;
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

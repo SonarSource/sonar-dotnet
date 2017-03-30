@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.SwitchStatement);
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var switchNode = (SwitchStatementSyntax)node;
             if(!HasDefaultLabel(switchNode))
             {
-                diagnostic = Diagnostic.Create(Rule, switchNode.SwitchKeyword.GetLocation(), "default", "switch");
+                diagnostic = Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), "default", "switch");
                 return true;
             }
 

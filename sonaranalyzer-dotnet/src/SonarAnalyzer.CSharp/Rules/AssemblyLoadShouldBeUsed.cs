@@ -28,15 +28,14 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class AssemblyLoadShouldBeUsed : MethodShouldNotBeCalled
+    public sealed class AssemblyLoadShouldBeUsed : MethodShouldNotBeCalled
     {
         internal const string DiagnosticId = "S3885";
         private const string MessageFormat = "Replace this call to '{0}' with 'Assembly.Load'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly IEnumerable<MethodSignature> invalidMethods = new List<MethodSignature>
         {

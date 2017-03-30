@@ -25,12 +25,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class CommentLineEnd : SonarDiagnosticAnalyzer
+    public sealed class CommentLineEnd : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S139";
         private const string MessageFormat = "Move this trailing comment on the previous empty line.";
@@ -38,8 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string DefaultPattern = @"^'\s*\S+\s*$";
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 if (location.GetLineSpan().StartLinePosition.Line == tokenLine &&
                     !Regex.IsMatch(comment.ToString(), LegalCommentPattern))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(Rule, location));
+                    context.ReportDiagnostic(Diagnostic.Create(rule, location));
                 }
             }
         }

@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EventNameContainsBeforeOrAfter : SonarDiagnosticAnalyzer
+    public sealed class EventNameContainsBeforeOrAfter : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2349";
         private const string MessageFormat = "Rename this event to remove the '{0}' {1}.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string PrefixLiteral = "prefix";
         private const string SuffixLiteral = "suffix";
@@ -80,7 +81,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, eventStatement.Identifier.GetLocation(), matched, part));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, eventStatement.Identifier.GetLocation(), matched, part));
                 },
                 SyntaxKind.EventStatement);
         }

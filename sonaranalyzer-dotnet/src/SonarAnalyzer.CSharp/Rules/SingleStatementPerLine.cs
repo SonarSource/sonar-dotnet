@@ -25,16 +25,16 @@ using SonarAnalyzer.Rules.Common;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
+    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override bool StatementShouldBeExcluded(StatementSyntax statement)

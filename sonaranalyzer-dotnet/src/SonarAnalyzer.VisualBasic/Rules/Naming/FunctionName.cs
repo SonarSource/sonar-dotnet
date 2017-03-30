@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class FunctionName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class FunctionName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1542";
         private const string MessageFormat = "Rename {0} '{1}' to match the regular expression: '{2}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the function names against.", NamingHelper.PascalCasingPattern)]
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                             "function", methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern) &&
                         !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                             "procedure", methodDeclaration.Identifier.ValueText, Pattern));
                     }
                 },

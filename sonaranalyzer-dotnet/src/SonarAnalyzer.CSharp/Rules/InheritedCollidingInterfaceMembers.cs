@@ -40,11 +40,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int MaxMemberDisplayCount = 2;
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var secondaryLocations = collidingMembers.SelectMany(x => x.Locations)
                                                                  .Where(x => x.IsInSource);
 
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation(),
                             additionalLocations: secondaryLocations,
                             messageArgs: new object[] { membersText, pluralize }));
                     }

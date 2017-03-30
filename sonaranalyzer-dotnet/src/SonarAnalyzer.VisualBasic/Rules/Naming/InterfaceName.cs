@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class InterfaceName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class InterfaceName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S114";
         private const string MessageFormat = "Rename this interface to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string DefaultPattern = "^I" + NamingHelper.PascalCasingInternalPattern + "$";
 
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var declaration = (InterfaceStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.InterfaceStatement);

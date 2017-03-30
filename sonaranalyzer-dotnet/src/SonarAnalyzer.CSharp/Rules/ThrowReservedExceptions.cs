@@ -24,19 +24,19 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ThrowReservedExceptions : ThrowReservedExceptionsBase
+    public sealed class ThrowReservedExceptions : ThrowReservedExceptionsBase
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule => rule;
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
-
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(ReportReservedExceptionCreation, SyntaxKind.ObjectCreationExpression);
         }

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.Common
         where TLanguageKindEnum : struct
         where TBinaryExpression : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -75,5 +75,9 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract SyntaxToken GetOperator(TBinaryExpression expression);
 
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

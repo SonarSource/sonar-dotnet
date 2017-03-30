@@ -3,7 +3,7 @@
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
  *
- * Thi sprogram is free software; you can redistribute it and/or
+ * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 3 of the License, or (at your option) any later version.
@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SymbolKind> InstanceSymbolKinds = new HashSet<SymbolKind>
         {
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SymbolKind.Method
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckIssue<PropertyDeclarationSyntax>(c, d => d.Identifier, "property"),
@@ -145,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditional = node.Parent as ConditionalAccessExpressionSyntax;
             var memberBinding = node.Parent as MemberBindingExpressionSyntax;
 
-            return 
+            return
                 memberAccess == null && conditional == null && memberBinding == null ||
                 memberAccess?.Expression == node ||
                 conditional?.Expression == node;
@@ -161,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
 
             return symbol != null &&
-                !symbol.IsStatic && 
+                !symbol.IsStatic &&
                 InstanceSymbolKinds.Contains(symbol.Kind);
         }
     }

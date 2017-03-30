@@ -26,11 +26,15 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using System;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class DoNotCallInsecureSecurityAlgorithm : SonarDiagnosticAnalyzer
     {
+        protected abstract DiagnosticDescriptor Rule { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
         internal abstract ISet<KnownType> AlgorithmTypes { get; }
         protected abstract ISet<string> AlgorithmParameterlessFactoryMethods { get; }
         protected abstract ISet<string> AlgorithmParameteredFactoryMethods { get; }
@@ -60,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) ||
                 IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
-                context.ReportDiagnostic(Diagnostic.Create(SupportedDiagnostics[0],
-                    invocation.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, invocation.GetLocation()));
             }
         }
 
@@ -109,8 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeInfo.ConvertedType.DerivesFromAny(AlgorithmTypes))
             {
-                context.ReportDiagnostic(Diagnostic.Create(SupportedDiagnostics[0],
-                    objectCreation.Type.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, objectCreation.Type.GetLocation()));
             }
         }
     }

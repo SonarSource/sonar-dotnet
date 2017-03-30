@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class SwitchWithoutDefaultBase<TLanguageKindEnum> : SwitchWithoutDefaultBase
         where TLanguageKindEnum : struct
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,

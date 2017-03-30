@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Protobuf;
 
@@ -32,7 +33,7 @@ namespace SonarAnalyzer.Rules
             new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
                 true, customTags: WellKnownDiagnosticTags.NotConfigurable);
 
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string EncodingFileName = "encoding.pb";
 

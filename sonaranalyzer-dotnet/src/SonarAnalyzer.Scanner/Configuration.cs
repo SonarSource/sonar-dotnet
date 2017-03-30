@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Runner
             var builder = ImmutableArray.CreateBuilder<DiagnosticAnalyzer>();
 
             foreach (var analyzer in analyzers
-                .Where(analyzer => AnalyzerIds.Contains(analyzer.SupportedDiagnostics.Single().Id)))
+                .Where(analyzer => analyzer.SupportedDiagnostics.Any(diagnostic => AnalyzerIds.Contains(diagnostic.Id))))
             {
                 builder.Add(analyzer);
             }

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.Common
         where TEnumDeclarationSyntax : SyntaxNode
         where TEnumMemberDeclarationSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -65,6 +65,9 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract SyntaxToken GetIdentifier(TEnumDeclarationSyntax declaration);
         protected abstract IList<TEnumMemberDeclarationSyntax> GetMembers(TEnumDeclarationSyntax declaration);
         protected abstract bool IsInitialized(TEnumMemberDeclarationSyntax member);
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private bool AreAllRequiredMembersInitialized(TEnumDeclarationSyntax declaration)
         {

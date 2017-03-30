@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<string> MethodNamesWithPredicate = ImmutableHashSet.Create(
             "Any", "LongCount", "Count",
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string WhereMethodName = "Where";
         private const string SelectMethodName = "Select";
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

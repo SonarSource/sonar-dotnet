@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,9 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var argument = argumentMapping.Argument;
                         var parameter = argumentMapping.Parameter;
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, argument.GetLocation(), parameter.Name));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation(), parameter.Name));
                     }
                 },
                 SyntaxKind.InvocationExpression);

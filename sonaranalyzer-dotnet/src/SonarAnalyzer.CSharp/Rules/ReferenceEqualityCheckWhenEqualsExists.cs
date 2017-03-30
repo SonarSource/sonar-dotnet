@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string EqualsName = "Equals";
 
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<KnownType> AllowedTypesWithAllDerived = ImmutableHashSet.Create(
             KnownType.System_Windows_DependencyObject);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
                 compilationStartContext =>
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (MightOverrideEquals(typeLeft, allInterfacesWithImplementationsOverriddenEquals) ||
                                 MightOverrideEquals(typeRight, allInterfacesWithImplementationsOverriddenEquals))
                             {
-                                c.ReportDiagnostic(Diagnostic.Create(Rule, binary.OperatorToken.GetLocation()));
+                                c.ReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
                             }
                         },
                         SyntaxKind.EqualsExpression,

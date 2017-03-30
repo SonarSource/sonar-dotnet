@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
             new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
                 true, customTags: WellKnownDiagnosticTags.NotConfigurable);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string SymbolReferenceFileName = "symrefs.pb";
 

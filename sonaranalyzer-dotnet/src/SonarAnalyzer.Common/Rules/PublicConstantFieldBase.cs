@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -33,12 +34,13 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
     }
 
-    public abstract class PublicConstantFieldBase<TLanguageKindEnum, TFieldDeclarationSyntax, TFieldName> : PublicConstantFieldBase
+    public abstract class PublicConstantFieldBase<TLanguageKindEnum, TFieldDeclarationSyntax, TFieldName>
+        : PublicConstantFieldBase
         where TLanguageKindEnum : struct
         where TFieldDeclarationSyntax : SyntaxNode
         where TFieldName : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -63,7 +65,8 @@ namespace SonarAnalyzer.Rules.Common
 
                     foreach (var variable in variables)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, GetReportLocation(variable), MessageArgument));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, GetReportLocation(variable),
+                            MessageArgument));
                     }
                 },
                 FieldDeclarationKind);
@@ -74,5 +77,9 @@ namespace SonarAnalyzer.Rules.Common
         public abstract string MessageArgument { get; }
 
         protected abstract Location GetReportLocation(TFieldName node);
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

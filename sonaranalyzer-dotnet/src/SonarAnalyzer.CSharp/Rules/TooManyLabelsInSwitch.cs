@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultValueMaximum = 30;
 
@@ -64,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (labels > Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, switchNode.SwitchKeyword.GetLocation(), Maximum, labels));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, labels));
                     }
                 },
                 SyntaxKind.SwitchStatement);

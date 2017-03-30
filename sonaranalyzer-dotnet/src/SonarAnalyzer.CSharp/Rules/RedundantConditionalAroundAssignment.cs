@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -38,9 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -68,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment) ||
                         AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, condition.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, condition.GetLocation()));
                     }
                 },
                 SyntaxKind.IfStatement);

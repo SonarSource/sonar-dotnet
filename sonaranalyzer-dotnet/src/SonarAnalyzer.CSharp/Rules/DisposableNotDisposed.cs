@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<KnownType> TrackedTypes = ImmutableHashSet.Create(
             KnownType.System_IO_FileStream,
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ISymbol Symbol { get; set; }
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             if (!excludedSymbols.Contains(trackedNodeAndSymbol.Symbol))
                             {
-                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name), c.Compilation);
+                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, trackedNodeAndSymbol.Node.GetLocation(), trackedNodeAndSymbol.Symbol.Name), c.Compilation);
                             }
                         }
                     }

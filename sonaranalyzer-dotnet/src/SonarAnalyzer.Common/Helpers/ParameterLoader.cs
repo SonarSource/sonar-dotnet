@@ -111,10 +111,11 @@ namespace SonarAnalyzer.Helpers
                 .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
                 .Where(p => p.Descriptor != null);
 
+            var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
             foreach (var propertyParameterPair in propertyParameterPairs)
             {
                 var parameter = parameters
-                    .FirstOrDefault(p => p.RuleId == parameteredAnalyzer.SupportedDiagnostics.Single().Id);
+                    .FirstOrDefault(p => ids.Contains(p.RuleId));
 
                 var parameterValue = parameter?.ParameterValues
                     .FirstOrDefault(pv => pv.ParameterKey == propertyParameterPair.Descriptor.Key);

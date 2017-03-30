@@ -22,6 +22,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.Rules
     {
         public abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        protected override void Initialize(ParameterLoadingAnalysisContext context)
+        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -90,5 +91,8 @@ namespace SonarAnalyzer.Rules
         protected abstract bool IsComplexityIncreasingKind(SyntaxNode node);
 
         protected abstract bool IsCompoundExpression(SyntaxNode node);
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

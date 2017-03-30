@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -42,9 +43,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -61,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                         identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(), TypeKindNameMapping[typeDeclaration.Kind()],
+                        c.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), TypeKindNameMapping[typeDeclaration.Kind()],
                             identifier.ValueText, MessageFormatUnderscore));
                         return;
                     }
@@ -70,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetChangedName(identifier.ValueText, typeDeclaration, c.SemanticModel.Compilation.IsTest(), out suggestion))
                     {
                         var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(),
                             TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
                     }
                 },

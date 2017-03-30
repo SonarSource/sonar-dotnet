@@ -22,6 +22,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules
             new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
                 true, customTags: WellKnownDiagnosticTags.NotConfigurable);
 
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string MetricsFileName = "metrics.pb";
 

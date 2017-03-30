@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private class ParameterHidingMethodInfo
         {
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public IMethodSymbol HiddenMethod { get; set; }
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>
@@ -109,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var isOtherFile = syntax.SyntaxTree.FilePath != hidingMethodSyntax.SyntaxTree.FilePath;
 
-                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule, syntax.GetLocation(),
+                        c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, syntax.GetLocation(),
                             hidingMethodSyntax.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
                             isOtherFile
                                 ? $" in file '{new FileInfo(hidingMethodSyntax.SyntaxTree.FilePath).Name}'"

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.Common
         where TEnumDeclarationSyntax : SyntaxNode
         where TEnumMemberSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -61,7 +61,8 @@ namespace SonarAnalyzer.Rules.Common
                     var identifier = GetIdentifier(zeroMember);
                     if (identifier.ValueText != "None")
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, zeroMember.GetLocation(), identifier.ValueText));
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, zeroMember.GetLocation(),
+                            identifier.ValueText));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());
@@ -106,5 +107,9 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract IEnumerable<TEnumMemberSyntax> GetMembers(TEnumDeclarationSyntax node);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

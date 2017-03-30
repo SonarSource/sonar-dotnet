@@ -25,12 +25,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ArrayDesignatorOnVariable : SonarDiagnosticAnalyzer
+    public sealed class ArrayDesignatorOnVariable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1197";
         private const string MessageFormat = "Move the array designator from the variable to the type.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     foreach (var name in declarator.Names.Where(n => n.ArrayRankSpecifiers.Any()))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, name.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, name.GetLocation()));
                     }
                 },
                 SyntaxKind.VariableDeclarator);

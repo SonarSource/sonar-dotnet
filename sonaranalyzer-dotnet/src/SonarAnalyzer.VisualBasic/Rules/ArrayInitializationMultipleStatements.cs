@@ -33,15 +33,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ArrayInitializationMultipleStatements : SonarDiagnosticAnalyzer
+    public sealed class ArrayInitializationMultipleStatements : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2429";
         private const string MessageFormat = "Refactor this code to use the '... = {}' syntax.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -90,7 +89,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, declaration.GetLocation()));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, declaration.GetLocation()));
                 },
                 SyntaxKind.LocalDeclarationStatement);
         }

@@ -26,16 +26,16 @@ using System.Linq;
 using System;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
+    public sealed class SingleStatementPerLine : SingleStatementPerLineBase<StatementSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override bool StatementShouldBeExcluded(StatementSyntax statement)

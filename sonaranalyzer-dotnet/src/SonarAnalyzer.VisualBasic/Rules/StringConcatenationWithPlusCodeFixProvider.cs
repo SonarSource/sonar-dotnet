@@ -32,7 +32,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class StringConcatenationWithPlusCodeFixProvider : SonarCodeFixProvider
+    public sealed class StringConcatenationWithPlusCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Change to '&'";
         public sealed override ImmutableArray<string> FixableDiagnosticIds

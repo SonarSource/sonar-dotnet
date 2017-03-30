@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!HasValidLicenseHeader(firstNode))
                 {
                     var properties = CreateDiagnosticProperties();
-                    stac.ReportDiagnostic(Diagnostic.Create(Rule, Location.Create(stac.Tree, TextSpan.FromBounds(0, 0)), properties));
+                    stac.ReportDiagnostic(Diagnostic.Create(rule, Location.Create(stac.Tree, TextSpan.FromBounds(0, 0)), properties));
                 }
             });
         }
