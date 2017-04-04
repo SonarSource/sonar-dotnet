@@ -168,7 +168,7 @@
        <includes>
          <include>org/sonar/plugins/csharp/*.xml</include>
          <include>static/version.txt</include>
-         <include>static/SonarAnalyzer-${sonarAnalyzer.version}.zip</include>
+         <include>static/SonarAnalyzer-${project.version}.zip</include>
          <include>SonarAnalyzer.Scanner.zip</include>
        </includes>
      </resource>
@@ -256,12 +256,12 @@
                     <include name="*.xml"/>
                   </fileset>
                 </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${sonarAnalyzer.version}.zip"
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/analyzers"/>
                 <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
 
-                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${sonarAnalyzer.version}" encoding="utf-8" />
+                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
 
                 <move file="${scanner.msbuild.workDirectory}/sonar-scanner-msbuild-impl.zip" tofile="${scanner.msbuild.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"/>
               </tasks>
