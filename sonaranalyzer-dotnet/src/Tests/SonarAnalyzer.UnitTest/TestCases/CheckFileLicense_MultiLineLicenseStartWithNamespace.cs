@@ -19,7 +19,7 @@
  */
 namespace Tests.Diagnostics // Compliant
 {
-    public class UnlicensedFile
+    public class Foo
     {
     }
 }

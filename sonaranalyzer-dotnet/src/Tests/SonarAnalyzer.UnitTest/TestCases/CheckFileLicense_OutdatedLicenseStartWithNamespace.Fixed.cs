@@ -20,7 +20,7 @@
 
 namespace Tests.Diagnostics // Fixed
 {
-    public class UnlicensedFile
+    public class Foo
     {
     }
 }

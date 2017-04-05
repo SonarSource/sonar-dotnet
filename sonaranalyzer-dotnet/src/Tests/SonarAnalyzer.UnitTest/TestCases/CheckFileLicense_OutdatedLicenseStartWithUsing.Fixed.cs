@@ -22,7 +22,7 @@ using System; // Fixed
 
 namespace Tests.Diagnostics
 {
-    public class UnlicensedFile
+    public class Foo
     {
     }
 }

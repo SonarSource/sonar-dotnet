@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.UnitTest.TestCases // Fixed
 {
-    class CheckFileLicense_DefaultValues
+    class Foo
     {
     }
 }

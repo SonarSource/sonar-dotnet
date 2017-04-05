@@ -1,6 +1,6 @@
 ﻿namespace SonarAnalyzer.UnitTest.TestCases // Noncompliant
 {
-    class CheckFileLicense_DefaultValues
+    class Foo
     {
     }
 }

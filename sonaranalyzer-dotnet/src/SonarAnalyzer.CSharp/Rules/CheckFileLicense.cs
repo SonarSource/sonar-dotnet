@@ -120,20 +120,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var header = GetHeaderOrDefault(node.GetLeadingTrivia().First());
-            if (header == null || !AreHeadersEqual(header))
+            var trivias = node.GetLeadingTrivia();
+            if (trivias.Last().IsKind(SyntaxKind.EndOfLineTrivia))
             {
-                return false;
+                trivias = trivias.RemoveAt(trivias.Count - 1);
             }
 
-            return true;
-        }
-
-        private static string GetHeaderOrDefault(SyntaxTrivia trivia)
-        {
-            var isComment = trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
-
-            return isComment ? trivia.ToString() : null;
+            var header = trivias.ToString();
+            return header != null && AreHeadersEqual(header);
         }
 
         private bool AreHeadersEqual(string currentHeader)
