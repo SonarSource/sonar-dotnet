@@ -215,7 +215,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void CheckFileLicense_WhenNoLicenseStartWithNamespaceAndUsesDefaultValues_ShouldBeNoncompliant()
+        public void CheckFileLicenseCodeFix_WhenNoLicenseStartWithNamespaceAndUsesDefaultValues_ShouldBeNoncompliant()
         {
             Verifier.VerifyCodeFix(
             @"TestCases\CheckFileLicense_DefaultValues.cs",
