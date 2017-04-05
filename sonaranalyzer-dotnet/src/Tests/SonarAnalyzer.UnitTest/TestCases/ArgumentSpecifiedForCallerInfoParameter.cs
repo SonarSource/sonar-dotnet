@@ -14,24 +14,15 @@ namespace Tests.Diagnostics
             /* ... */
         }
 
-        void TransmitCall(string message,
-          [CallerMemberName] string memberName = "")
-        {
-            TraceMessage(message, memberName); // Compliant
-        }
-
-        void TransmitCall2(string message,
-          [CallerMemberName] string memberName = "")
-        {
-            TraceMessage(message, filePath: memberName); // Noncompliant {{Remove this argument from the method call; it hides the caller information.}}
-//                                ^^^^^^^^^^^^^^^^^^^^
-        }
-
         void MyMethod()
         {
-            TraceMessage("my message", "MyMethod"); // Noncompliant
-            TraceMessage("my message");
+            TraceMessage("my message", "MyMethod"); // Compliant
+            TraceMessage("my message"); // Compliant
             TraceMessage("my message", filePath: "aaaa"); // Noncompliant
+            TraceMessage("my message", lineNumber: 42); // Noncompliant
+            TraceMessage("my message",
+                filePath: "aaaa",  // Noncompliant
+                lineNumber: 42); // Noncompliant
         }
     }
 }
