@@ -133,9 +133,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool AreHeadersEqual(string currentHeader)
         {
+            var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
+            var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n");
+
             return IsRegularExpression
-                ? Regex.IsMatch(currentHeader, HeaderFormat, RegexOptions.Compiled)
-                : currentHeader == HeaderFormat;
+                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
+                : unixEndingHeader.Equals(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
         private ImmutableDictionary<string, string> CreateDiagnosticProperties()
