@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class InsecureEncryptionAlgorithm : SonarDiagnosticAnalyzer
+    public sealed class InsecureEncryptionAlgorithm : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2278";
         private const string MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
@@ -40,22 +40,25 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        protected override DiagnosticDescriptor Rule => rule;
 
         private const string BaseEncryptionAlgorithmCreate = "System.Security.Cryptography.SymmetricAlgorithm.Create";
 
         private static readonly ISet<string> AlgorithmNames = ImmutableHashSet.Create(
             "DES",
             "3DES",
-            "TripleDES");
+            "TripleDES",
+            "RC2");
 
         private static readonly ISet<string> MethodNamesToReachEncryptionAlgorithm = ImmutableHashSet.Create(
             "System.Security.Cryptography.DES.Create",
-            "System.Security.Cryptography.TripleDES.Create");
+            "System.Security.Cryptography.TripleDES.Create",
+            "System.Security.Cryptography.RC2.Create");
 
         private static readonly ISet<KnownType> BaseClassNamesForEncryptionAlgorithm = ImmutableHashSet.Create(
             KnownType.System_Security_Cryptography_DES,
-            KnownType.System_Security_Cryptography_TripleDES);
+            KnownType.System_Security_Cryptography_TripleDES,
+            KnownType.System_Security_Cryptography_RC2);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

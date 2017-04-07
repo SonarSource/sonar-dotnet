@@ -34,9 +34,21 @@ namespace Tests.Diagnostics
                 //...
             }
 
+            using (var rc21 = new RC2CryptoServiceProvider()) // Noncompliant
+            {
+
+            }
+
+            using (var rc22 = RC2.Create()) // Noncompliant
+            {
+
+            }
+
             SymmetricAlgorithm des1 = SymmetricAlgorithm.Create("DES"); //Noncompliant
             des1 = SymmetricAlgorithm.Create("TripleDES"); //Noncompliant
             des1 = SymmetricAlgorithm.Create("3DES"); //Noncompliant
+
+            SymmetricAlgorithm rc23 = SymmetricAlgorithm.Create("RC2"); // Noncompliant
         }
     }
 }
