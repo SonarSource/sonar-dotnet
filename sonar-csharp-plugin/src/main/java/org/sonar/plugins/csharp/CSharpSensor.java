@@ -80,7 +80,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
   }
 
-  private boolean shouldExecuteOnProject(FileSystem fs) {
+  private static boolean shouldExecuteOnProject(FileSystem fs) {
     if (!SystemUtils.IS_OS_WINDOWS) {
       LOG.debug("OS is not Windows. Skip Sensor.");
       return false;

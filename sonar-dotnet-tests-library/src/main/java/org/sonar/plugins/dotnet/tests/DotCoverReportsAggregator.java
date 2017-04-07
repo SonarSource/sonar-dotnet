@@ -20,7 +20,6 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
