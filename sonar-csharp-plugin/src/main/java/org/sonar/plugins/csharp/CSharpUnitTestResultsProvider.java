@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.Arrays;
 import java.util.List;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;

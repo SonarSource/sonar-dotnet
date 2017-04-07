@@ -42,7 +42,7 @@ public class NCover3ReportParser implements CoverageParser {
     private final Map<String, String> documents = new HashMap<>();
     private final Coverage coverage;
 
-    public Parser(File file, Coverage coverage) {
+    Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
     }

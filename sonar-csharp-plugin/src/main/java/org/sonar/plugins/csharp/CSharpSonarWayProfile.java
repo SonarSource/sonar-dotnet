@@ -31,7 +31,7 @@ public class CSharpSonarWayProfile extends ProfileDefinition {
 
   private final XMLProfileParser xmlParser;
 
-  public CSharpSonarWayProfile(XMLProfileParser xmlParser) {
+  CSharpSonarWayProfile(XMLProfileParser xmlParser) {
     this.xmlParser = xmlParser;
   }
 

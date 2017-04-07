@@ -39,7 +39,7 @@ public class UnitTestResultsAggregator {
   }
 
   @VisibleForTesting
-  public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Settings settings,
+  UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Settings settings,
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParser nunitTestResultsFileParser,
     XUnitTestResultsFileParser xunitTestResultsFileParser) {
@@ -50,7 +50,7 @@ public class UnitTestResultsAggregator {
     this.xunitTestResultsFileParser = xunitTestResultsFileParser;
   }
 
-  public boolean hasUnitTestResultsProperty() {
+  boolean hasUnitTestResultsProperty() {
     return hasVisualStudioTestResultsFile() || hasNUnitTestResultsFile() || hasXUnitTestResultsFile();
   }
 
@@ -66,7 +66,7 @@ public class UnitTestResultsAggregator {
     return settings.hasKey(unitTestConf.xunitTestResultsFilePropertyKey());
   }
 
-  public UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
+  UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
     if (hasVisualStudioTestResultsFile()) {
       aggregate(wildcardPatternFileProvider, settings.getString(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, unitTestResults);
     }

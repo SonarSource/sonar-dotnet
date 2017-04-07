@@ -39,7 +39,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
   private final DotCoverReportParser parser;
 
-  public DotCoverReportsAggregator(DotCoverReportParser parser) {
+  DotCoverReportsAggregator(DotCoverReportParser parser) {
     this.parser = parser;
   }
 
@@ -66,7 +66,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     try {
       pathStream = Files.list(folder.toPath());
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
 
     return pathStream
@@ -80,7 +80,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     try {
       contents = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
     Preconditions.checkArgument(contents.startsWith("<!DOCTYPE html>"), "Only dotCover HTML reports which start with \"<!DOCTYPE html>\" are supported.");
   }

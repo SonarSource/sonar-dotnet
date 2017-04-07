@@ -52,7 +52,7 @@ public class DotCoverReportParser implements CoverageParser {
     private final File file;
     private final Coverage coverage;
 
-    public Parser(File file, Coverage coverage) {
+    Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
     }
@@ -62,7 +62,7 @@ public class DotCoverReportParser implements CoverageParser {
       try {
         contents = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
       } catch (IOException e) {
-        throw Throwables.propagate(e);
+        throw new RuntimeException(e);
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);

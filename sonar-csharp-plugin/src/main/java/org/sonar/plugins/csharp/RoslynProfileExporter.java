@@ -165,7 +165,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
   }
 
-  private void writeRepoRuleSet(String partialRepoKey, ImmutableCollection<RuleKey> ruleKeys, Writer writer) {
+  private void writeRepoRuleSet(String partialRepoKey, Collection<RuleKey> ruleKeys, Writer writer) {
     String analyzerId = mandatoryPropertyValue(analyzerIdPropertyKey(partialRepoKey));
     String ruleNamespace = mandatoryPropertyValue(ruleNamespacePropertyKey(partialRepoKey));
 
@@ -268,7 +268,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
   }
 
-  static ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
+  static Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
     ImmutableMultimap.Builder<String, RuleKey> builder = ImmutableMultimap.builder();
 
     for (RuleKey activeRule : activeRules) {

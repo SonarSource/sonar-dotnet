@@ -275,19 +275,19 @@ public class RoslynProfileExporterTest {
     RuleKey randomActiveRuleKey = mock(RuleKey.class);
     when(randomActiveRuleKey.rule()).thenReturn("1");
     when(randomActiveRuleKey.repository()).thenReturn("1");
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(randomActiveRuleKey)).size()).isEqualTo(0);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(randomActiveRuleKey)).size()).isEqualTo(0);
 
     RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
     when(sonarLintActiveRuleKey.rule()).thenReturn("2");
     when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
-    Multimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(sonarLintActiveRuleKey));
+    Multimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(sonarLintActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
     RuleKey customRoslynActiveRuleKey = mock(RuleKey.class);
     when(customRoslynActiveRuleKey.rule()).thenReturn("3");
     when(customRoslynActiveRuleKey.repository()).thenReturn("roslyn.foo");
-    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(customRoslynActiveRuleKey));
+    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(customRoslynActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 

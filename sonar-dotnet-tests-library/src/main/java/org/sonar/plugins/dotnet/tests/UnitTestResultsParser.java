@@ -23,5 +23,5 @@ import java.io.File;
 import java.util.function.BiConsumer;
 
 @FunctionalInterface
-public interface UnitTestResultsParser extends BiConsumer<File, UnitTestResults> {
+interface UnitTestResultsParser extends BiConsumer<File, UnitTestResults> {
 }

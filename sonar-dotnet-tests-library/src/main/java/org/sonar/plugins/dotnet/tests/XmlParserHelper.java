@@ -19,7 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,7 +37,7 @@ public class XmlParserHelper implements AutoCloseable {
   private final InputStreamReader reader;
   private final XMLStreamReader stream;
 
-  public XmlParserHelper(File file) {
+  XmlParserHelper(File file) {
     try {
       this.file = file;
       this.reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
@@ -46,11 +45,11 @@ public class XmlParserHelper implements AutoCloseable {
       this.stream = xmlFactory.createXMLStreamReader(reader);
 
     } catch (FileNotFoundException | XMLStreamException e) {
-      throw Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 
-  public void checkRootTag(String name) {
+  void checkRootTag(String name) {
     String rootTag = nextStartTag();
 
     if (!name.equals(rootTag)) {
@@ -59,7 +58,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  public String nextStartTag() {
+  String nextStartTag() {
     try {
       while (stream.hasNext()) {
         if (stream.next() == XMLStreamConstants.START_ELEMENT) {
@@ -74,7 +73,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  public String nextStartOrEndTag() {
+  String nextStartOrEndTag() {
     try {
       while (stream.hasNext()) {
         int next = stream.next();
@@ -91,19 +90,19 @@ public class XmlParserHelper implements AutoCloseable {
     }
   }
 
-  public void checkRequiredAttribute(String name, int expectedValue) {
+  void checkRequiredAttribute(String name, int expectedValue) {
     int actualValue = getRequiredIntAttribute(name);
     if (expectedValue != actualValue) {
       throw parseError("Expected \"" + expectedValue + "\" instead of \"" + actualValue + "\" for the \"" + name + "\" attribute");
     }
   }
 
-  public int getRequiredIntAttribute(String name) {
+  int getRequiredIntAttribute(String name) {
     String value = getRequiredAttribute(name);
     return tagToIntValue(name, value);
   }
 
-  public int getIntAttributeOrZero(String name) {
+  int getIntAttributeOrZero(String name) {
     String value = getAttribute(name);
     return value == null ? 0 : tagToIntValue(name, value);
   }
@@ -117,7 +116,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  public Double getDoubleAttribute(String name) {
+  Double getDoubleAttribute(String name) {
     String value = getAttribute(name);
     if (value == null) {
       return null;
@@ -131,7 +130,7 @@ public class XmlParserHelper implements AutoCloseable {
     }
   }
 
-  public String getRequiredAttribute(String name) {
+  String getRequiredAttribute(String name) {
     String value = getAttribute(name);
     if (value == null) {
       throw parseError("Missing attribute \"" + name + "\" in element <" + stream.getLocalName() + ">");
@@ -141,7 +140,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  public String getAttribute(String name) {
+  String getAttribute(String name) {
     for (int i = 0; i < stream.getAttributeCount(); i++) {
       if (name.equals(stream.getAttributeLocalName(i))) {
         return stream.getAttributeValue(i);
@@ -151,7 +150,7 @@ public class XmlParserHelper implements AutoCloseable {
     return null;
   }
 
-  public ParseErrorException parseError(String message) {
+  ParseErrorException parseError(String message) {
     return new ParseErrorException(message + " in " + file.getAbsolutePath() + " at line " + stream.getLocation().getLineNumber());
   }
 
@@ -163,12 +162,12 @@ public class XmlParserHelper implements AutoCloseable {
       try {
         stream.close();
       } catch (XMLStreamException e) {
-        throw Throwables.propagate(e);
+        throw new RuntimeException(e);
       }
     }
   }
 
-  public XMLStreamReader stream() {
+  XMLStreamReader stream() {
     return stream;
   }
 
