@@ -19,13 +19,13 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.profiles.XMLProfileParser;
 import org.sonar.api.utils.ValidationMessages;
 
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class CSharpSonarWayProfile extends ProfileDefinition {
 
@@ -37,7 +37,7 @@ public class CSharpSonarWayProfile extends ProfileDefinition {
 
   @Override
   public RulesProfile createProfile(ValidationMessages validation) {
-    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/profile.xml"), Charsets.UTF_8), validation);
+    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/profile.xml"), StandardCharsets.UTF_8), validation);
   }
 
 }

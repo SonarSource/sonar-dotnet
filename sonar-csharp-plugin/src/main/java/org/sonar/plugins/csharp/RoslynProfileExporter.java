@@ -26,13 +26,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.*;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
@@ -48,14 +46,7 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import static java.util.Objects.requireNonNull;
 
 public class RoslynProfileExporter extends ProfileExporter {
   private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
@@ -67,14 +58,14 @@ public class RoslynProfileExporter extends ProfileExporter {
   private final Settings settings;
   private final RulesDefinition[] rulesDefinitions;
 
-  public RoslynProfileExporter(Settings settings, RulesDefinition[] rulesDefinitions) {
+  RoslynProfileExporter(Settings settings, RulesDefinition[] rulesDefinitions) {
     super("roslyn-cs", "Technical exporter for the MSBuild SonarQube Scanner");
     this.settings = settings;
     this.rulesDefinitions = rulesDefinitions;
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
   }
 
-  public static List<PropertyDefinition> sonarLintRepositoryProperties() {
+  static List<PropertyDefinition> sonarLintRepositoryProperties() {
     String analyzerVersion = getAnalyzerVersion();
     return Arrays.asList(
       PropertyDefinition.builder(pluginKeyPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
@@ -118,7 +109,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
     try {
-      ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
+      Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
         .stream()
         .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
         .collect(toList()));
@@ -180,7 +171,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
 
-    Set<String> activeRules = Sets.newHashSet();
+    Set<String> activeRules = new HashSet<>();
     String repositoryKey = null;
     for (RuleKey activeRuleKey : ruleKeys) {
       if (repositoryKey == null) {
@@ -250,7 +241,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
-    Map<String, String> builder = Maps.newHashMap();
+    Map<String, String> builder = new HashMap<>();
 
     if (activeRule.getRule().getTemplate() != null) {
       builder.put("RuleKey", activeRule.getRuleKey());
@@ -277,7 +268,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
   }
 
-  public static ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
+  static ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
     ImmutableMultimap.Builder<String, RuleKey> builder = ImmutableMultimap.builder();
 
     for (RuleKey activeRule : activeRules) {
@@ -308,7 +299,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private String mandatoryPropertyValue(String propertyKey) {
-    return Preconditions.checkNotNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
+    return requireNonNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
   }
 
   private static String pluginKeyPropertyKey(String partialRepoKey) {
@@ -348,7 +339,7 @@ public class RoslynProfileExporter extends ProfileExporter {
       writer.write(line);
       writer.write("\r\n");
     } catch (IOException e) {
-      Throwables.propagate(e);
+      throw new RuntimeException(e);
     }
   }
 

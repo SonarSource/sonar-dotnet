@@ -19,12 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
 import java.io.File;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -59,7 +59,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(mock(RulesProfile.class), writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/no_rules.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -80,7 +80,7 @@ public class RoslynProfileExporterTest {
     ActiveRuleParam param1 = mock(ActiveRuleParam.class);
     when(param1.getKey()).thenReturn("[param1_key]");
     when(param1.getValue()).thenReturn("[param1_value]");
-    when(parametersActiveRule.getActiveRuleParams()).thenReturn(ImmutableList.of(param1));
+    when(parametersActiveRule.getActiveRuleParams()).thenReturn(Arrays.asList(param1));
     Rule parametersRule = mock(Rule.class);
     RuleParam param1Default = mock(org.sonar.api.rules.RuleParam.class);
     when(param1Default.getKey()).thenReturn("[param1_key]");
@@ -88,12 +88,12 @@ public class RoslynProfileExporterTest {
     RuleParam param2Default = mock(org.sonar.api.rules.RuleParam.class);
     when(param2Default.getKey()).thenReturn("[param2_default_key]");
     when(param2Default.getDefaultValue()).thenReturn("[param2_default_value]");
-    when(parametersRule.getParams()).thenReturn(ImmutableList.of(param1Default, param2Default));
+    when(parametersRule.getParams()).thenReturn(Arrays.asList(param1Default, param2Default));
     when(parametersActiveRule.getRule()).thenReturn(parametersRule);
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
-    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(templateActiveRule, parametersActiveRule));
+    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(Arrays.asList(templateActiveRule, parametersActiveRule));
+    when(rulesProfile.getActiveRules()).thenReturn(Arrays.asList(templateActiveRule, parametersActiveRule));
 
     Settings settings = mock(Settings.class);
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
@@ -119,7 +119,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/only_sonarlint.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -144,9 +144,9 @@ public class RoslynProfileExporterTest {
     when(fxcopActiveRule.getRule()).thenReturn(fxcopRule);
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(sonarLintActiveRule));
+    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(Arrays.asList(sonarLintActiveRule));
 
-    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(sonarLintActiveRule, customRoslynActiveRule, fxcopActiveRule));
+    when(rulesProfile.getActiveRules()).thenReturn(Arrays.asList(sonarLintActiveRule, customRoslynActiveRule, fxcopActiveRule));
 
     Settings settings = mock(Settings.class);
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
@@ -200,7 +200,7 @@ public class RoslynProfileExporterTest {
     exporter.exportProfile(rulesProfile, writer);
 
     String actual = writer.toString().replaceAll("\r?\n|\r", "");
-    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/mixed.xml"), Charsets.UTF_8).replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/mixed.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
     assertThat(actual).isEqualTo(expected);
   }
 
@@ -213,7 +213,7 @@ public class RoslynProfileExporterTest {
     when(activeRule.getRule()).thenReturn(rule);
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(activeRule));
+    when(rulesProfile.getActiveRules()).thenReturn(Arrays.asList(activeRule));
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(mock(Settings.class), new RulesDefinition[0]);
 
@@ -254,8 +254,8 @@ public class RoslynProfileExporterTest {
     when(sonarLintActiveRule.getActiveRuleParams()).thenReturn(Collections.singletonList(param));
 
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(ImmutableList.of(sonarLintActiveRule));
-    when(rulesProfile.getActiveRules()).thenReturn(ImmutableList.of(sonarLintActiveRule));
+    when(rulesProfile.getActiveRulesByRepository("csharpsquid")).thenReturn(Arrays.asList(sonarLintActiveRule));
+    when(rulesProfile.getActiveRules()).thenReturn(Arrays.asList(sonarLintActiveRule));
     when(rulesProfile.getLanguage()).thenReturn("csharp");
     when(rulesProfile.getName()).thenReturn("myprofile");
 
@@ -275,24 +275,24 @@ public class RoslynProfileExporterTest {
     RuleKey randomActiveRuleKey = mock(RuleKey.class);
     when(randomActiveRuleKey.rule()).thenReturn("1");
     when(randomActiveRuleKey.repository()).thenReturn("1");
-    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(randomActiveRuleKey)).size()).isEqualTo(0);
+    assertThat(RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(randomActiveRuleKey)).size()).isEqualTo(0);
 
     RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
     when(sonarLintActiveRuleKey.rule()).thenReturn("2");
     when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
-    ImmutableMultimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(sonarLintActiveRuleKey));
+    Multimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(sonarLintActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
     RuleKey customRoslynActiveRuleKey = mock(RuleKey.class);
     when(customRoslynActiveRuleKey.rule()).thenReturn("3");
     when(customRoslynActiveRuleKey.repository()).thenReturn("roslyn.foo");
-    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(ImmutableList.of(customRoslynActiveRuleKey));
+    activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Arrays.asList(customRoslynActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 
     activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(
-      ImmutableList.of(
+        Arrays.asList(
         randomActiveRuleKey,
         sonarLintActiveRuleKey,
         customRoslynActiveRuleKey));

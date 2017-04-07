@@ -22,6 +22,7 @@ package org.sonar.plugins.csharp;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
@@ -42,7 +43,7 @@ public class SonarLintProfileExporterTest {
     Rule ruleS1000 = mock(Rule.class);
     when(ruleS1000.getKey()).thenReturn("S1000");
     RuleParam ruleParam = mock(RuleParam.class);
-    when(ruleS1000.getParams()).thenReturn(ImmutableList.of(ruleParam));
+    when(ruleS1000.getParams()).thenReturn(Arrays.asList(ruleParam));
     when(ruleS1000.getTemplate()).thenReturn(null);
     when(ruleS1000.getSeverity()).thenReturn(RulePriority.MAJOR);
     org.sonar.api.rules.ActiveRule activeRuleS1000 = mock(ActiveRule.class);
@@ -52,7 +53,7 @@ public class SonarLintProfileExporterTest {
     // S1001 is a SonarLint rule and disabled -> should be disabled in exported rule set
     Rule ruleS1001 = mock(Rule.class);
     when(ruleS1001.getKey()).thenReturn("S1001");
-    when(ruleS1001.getParams()).thenReturn(ImmutableList.<RuleParam>of());
+    when(ruleS1001.getParams()).thenReturn(Arrays.<RuleParam>asList());
     when(ruleS1001.getTemplate()).thenReturn(null);
     when(ruleS1001.getSeverity()).thenReturn(RulePriority.MAJOR);
 
@@ -69,7 +70,7 @@ public class SonarLintProfileExporterTest {
 
     StringWriter writer = new StringWriter();
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)).thenReturn(ImmutableList.of(activeRuleS1000));
+    when(rulesProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)).thenReturn(Arrays.asList(activeRuleS1000));
     exporter.exportProfile(rulesProfile, writer);
     assertThat(writer.toString()).isEqualTo(
       "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
