@@ -19,11 +19,7 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,111 +28,35 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class InsecureEncryptionAlgorithm : SonarDiagnosticAnalyzer
+    public sealed class InsecureEncryptionAlgorithm : DoNotCallInsecureSecurityAlgorithm
     {
         internal const string DiagnosticId = "S2278";
         private const string MessageFormat = "Use the recommended AES (Advanced Encryption Standard) instead.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule => rule;
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
-
-        private const string BaseEncryptionAlgorithmCreate = "System.Security.Cryptography.SymmetricAlgorithm.Create";
-
-        private static readonly ISet<string> AlgorithmNames = ImmutableHashSet.Create(
-            "DES",
-            "3DES",
-            "TripleDES");
-
-        private static readonly ISet<string> MethodNamesToReachEncryptionAlgorithm = ImmutableHashSet.Create(
-            "System.Security.Cryptography.DES.Create",
-            "System.Security.Cryptography.TripleDES.Create");
-
-        private static readonly ISet<KnownType> BaseClassNamesForEncryptionAlgorithm = ImmutableHashSet.Create(
-            KnownType.System_Security_Cryptography_DES,
-            KnownType.System_Security_Cryptography_TripleDES);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        private static readonly ISet<KnownType> algorithmTypes = new HashSet<KnownType>
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckObjectCreation(c),
-                SyntaxKind.ObjectCreationExpression);
+                KnownType.System_Security_Cryptography_DES,
+                KnownType.System_Security_Cryptography_TripleDES,
+                KnownType.System_Security_Cryptography_RC2
+        };
+        internal override ISet<KnownType> AlgorithmTypes => algorithmTypes;
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckInvocation(c),
-                SyntaxKind.InvocationExpression);
-        }
+        private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>();
+        protected override ISet<string> AlgorithmParameterlessFactoryMethods => algorithmParameterlessFactoryMethods;
 
-        private static void CheckInvocation(SyntaxNodeAnalysisContext context)
+        private static readonly ISet<string> algorithmParameteredFactoryMethods = new HashSet<string>
         {
-            var invocation = (InvocationExpressionSyntax)context.Node;
+            "System.Security.Cryptography.CryptoConfig.CreateFromName",
+            "System.Security.Cryptography.SymmetricAlgorithm.Create"
+        };
+        protected override ISet<string> AlgorithmParameteredFactoryMethods => algorithmParameteredFactoryMethods;
 
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol;
-            if (methodSymbol?.ContainingType == null)
-            {
-                return;
-            }
-
-            var methodName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
-            if (MethodNamesToReachEncryptionAlgorithm.Contains(methodName) ||
-                IsBaseEncryptionCreateCalled(methodName, invocation.ArgumentList))
-            {
-                context.ReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation()));
-            }
-        }
-
-        private static void CheckObjectCreation(SyntaxNodeAnalysisContext context)
-        {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
-
-            var typeInfo = context.SemanticModel.GetTypeInfo(objectCreation);
-            if (typeInfo.ConvertedType == null || typeInfo.ConvertedType is IErrorTypeSymbol)
-            {
-                return;
-            }
-
-            var insecureArgorithmType = GetInsecureAlgorithmBase(typeInfo.ConvertedType);
-
-            if (insecureArgorithmType != null &&
-                insecureArgorithmType.IsAny(BaseClassNamesForEncryptionAlgorithm))
-            {
-                context.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.Type.GetLocation()));
-            }
-        }
-
-        private static bool IsBaseEncryptionCreateCalled(string methodName, ArgumentListSyntax argumentList)
-        {
-            if (methodName != BaseEncryptionAlgorithmCreate)
-            {
-                return false;
-            }
-
-            if (argumentList.Arguments.Count == 0 ||
-                !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                return false;
-            }
-
-            var algorithmNameCandidate = ((LiteralExpressionSyntax)argumentList.Arguments.First().Expression).Token.ValueText;
-            var algorithmName = AlgorithmNames
-                .FirstOrDefault(alg =>
-                    algorithmNameCandidate.StartsWith(alg, System.StringComparison.Ordinal));
-
-            return algorithmName != null;
-        }
-
-        private static ITypeSymbol GetInsecureAlgorithmBase(ITypeSymbol type)
-        {
-            var currentType = type;
-
-            while (currentType != null &&
-                !currentType.IsAny(BaseClassNamesForEncryptionAlgorithm))
-            {
-                currentType = currentType.BaseType;
-            }
-
-            return currentType;
-        }
+        private static readonly ISet<string> factoryParameterNames =
+            new HashSet<string> { "DES", "3DES", "TripleDES", "RC2" };
+        protected override ISet<string> FactoryParameterNames => factoryParameterNames;
     }
 }

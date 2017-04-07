@@ -19,11 +19,7 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -32,110 +28,46 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class InsecureHashAlgorithm : SonarDiagnosticAnalyzer
+    public sealed class InsecureHashAlgorithm : DoNotCallInsecureSecurityAlgorithm
     {
         internal const string DiagnosticId = "S2070";
-        private const string MessageFormat = "Use a stronger encryption algorithm than {0}.";
+        private const string MessageFormat = "Use a stronger hashing/asymmetric algorithm.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        protected override DiagnosticDescriptor Rule => rule;
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
-
-        private static readonly IDictionary<KnownType, string> InsecureHashAlgorithmTypeNames = new Dictionary<KnownType, string>
+        private static readonly ISet<KnownType> algorithmTypes = new HashSet<KnownType>
         {
-            { KnownType.System_Security_Cryptography_SHA1, "SHA1"},
-            { KnownType.System_Security_Cryptography_MD5, "MD5"}
-        }.ToImmutableDictionary();
+                KnownType.System_Security_Cryptography_SHA1,
+                KnownType.System_Security_Cryptography_MD5,
+                KnownType.System_Security_Cryptography_DSA,
+                KnownType.System_Security_Cryptography_RIPEMD160,
+                KnownType.System_Security_Cryptography_HMACSHA1,
+                KnownType.System_Security_Cryptography_HMACMD5,
+                KnownType.System_Security_Cryptography_HMACRIPEMD160
+        };
+        internal override ISet<KnownType> AlgorithmTypes => algorithmTypes;
 
-        private static readonly ISet<string> MethodNamesToReachHashAlgorithm = ImmutableHashSet.Create(
+        private static readonly ISet<string> algorithmParameterlessFactoryMethods = new HashSet<string>
+        {
+            "System.Security.Cryptography.HMAC.Create"
+        };
+        protected override ISet<string> AlgorithmParameterlessFactoryMethods => algorithmParameterlessFactoryMethods;
+
+        private static readonly ISet<string> algorithmParameteredFactoryMethods = new HashSet<string>
+        {
             "System.Security.Cryptography.CryptoConfig.CreateFromName",
-            "System.Security.Cryptography.HashAlgorithm.Create");
+            "System.Security.Cryptography.HashAlgorithm.Create",
+            "System.Security.Cryptography.KeyedHashAlgorithm.Create",
+            "System.Security.Cryptography.AsymmetricAlgorithm.Create",
+            "System.Security.Cryptography.HMAC.Create"
+        };
+        protected override ISet<string> AlgorithmParameteredFactoryMethods => algorithmParameteredFactoryMethods;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckObjectCreation(c),
-                SyntaxKind.ObjectCreationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckInvocation(c),
-                SyntaxKind.InvocationExpression);
-        }
-
-        private static void CheckInvocation(SyntaxNodeAnalysisContext context)
-        {
-            var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol;
-            if (methodSymbol?.ContainingType == null)
-            {
-                return;
-            }
-
-            var methodName = $"{methodSymbol.ContainingType}.{methodSymbol.Name}";
-            string algorithmName;
-            if (MethodNamesToReachHashAlgorithm.Contains(methodName) &&
-                TryGetAlgorithmName(invocation.ArgumentList, out algorithmName))
-            {
-                context.ReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(), algorithmName));
-            }
-        }
-
-        private static void CheckObjectCreation(SyntaxNodeAnalysisContext context)
-        {
-            var objectCreation = (ObjectCreationExpressionSyntax)context.Node;
-
-            var typeInfo = context.SemanticModel.GetTypeInfo(objectCreation);
-
-            if (typeInfo.ConvertedType == null || typeInfo.ConvertedType is IErrorTypeSymbol)
-            {
-                return;
-            }
-
-            ITypeSymbol insecureArgorithmType;
-            if (!TryGetInsecureAlgorithmBase(typeInfo.ConvertedType, out insecureArgorithmType))
-            {
-                return;
-            }
-
-            var insecureHashAlgorithmType = InsecureHashAlgorithmTypeNames.FirstOrDefault(t => insecureArgorithmType.Is(t.Key));
-            if (!insecureHashAlgorithmType.Equals(default(KeyValuePair<KnownType, string>)))
-            {
-                context.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.Type.GetLocation(), insecureHashAlgorithmType.Value));
-            }
-        }
-
-        private static bool TryGetAlgorithmName(ArgumentListSyntax argumentList, out string algorithmName)
-        {
-            if (argumentList == null ||
-                argumentList.Arguments.Count == 0 ||
-                !argumentList.Arguments.First().Expression.IsKind(SyntaxKind.StringLiteralExpression))
-            {
-                algorithmName = null;
-                return false;
-            }
-
-            var algorithmNameCandidate = ((LiteralExpressionSyntax)argumentList.Arguments.First().Expression).Token.ValueText;
-            algorithmName = InsecureHashAlgorithmTypeNames.Values
-                .FirstOrDefault(alg =>
-                    algorithmNameCandidate.StartsWith(alg, System.StringComparison.Ordinal));
-
-            return algorithmName != null;
-        }
-
-        private static bool TryGetInsecureAlgorithmBase(ITypeSymbol type, out ITypeSymbol insecureAlgorithmBase)
-        {
-            insecureAlgorithmBase = null;
-            var currentType = type;
-
-            while (currentType != null &&
-                !currentType.Is(KnownType.System_Security_Cryptography_HashAlgorithm))
-            {
-                insecureAlgorithmBase = currentType;
-                currentType = currentType.BaseType;
-            }
-
-            return insecureAlgorithmBase != null;
-        }
+        private static readonly ISet<string> factoryParameterNames =
+            new HashSet<string> { "SHA1", "MD5", "DSA", "HMACMD5", "HMACRIPEMD160", "RIPEMD160",
+                "RIPEMD160Managed" };
+        protected override ISet<string> FactoryParameterNames => factoryParameterNames;
     }
 }
