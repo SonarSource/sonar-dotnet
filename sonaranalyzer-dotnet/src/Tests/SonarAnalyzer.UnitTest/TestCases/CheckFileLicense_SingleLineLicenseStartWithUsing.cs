@@ -3,7 +3,7 @@ using System; // Compliant
 
 namespace Tests.Diagnostics
 {
-    public class UnlicensedFile
+    public class Foo
     {
     }
 }

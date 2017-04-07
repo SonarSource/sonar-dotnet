@@ -58,7 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */";
+ */
+";
 
         internal const string IsRegularExpressionRuleParameterKey = "isRegularExpression";
         internal const string IsRegularExpressionPropertyKey = nameof(IsRegularExpression);
@@ -120,27 +121,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var header = GetHeaderOrDefault(node.GetLeadingTrivia().First());
-            if (header == null || !AreHeadersEqual(header))
+            var trivias = node.GetLeadingTrivia();
+            if (trivias.Last().IsKind(SyntaxKind.EndOfLineTrivia))
             {
-                return false;
+                trivias = trivias.RemoveAt(trivias.Count - 1);
             }
 
-            return true;
-        }
-
-        private static string GetHeaderOrDefault(SyntaxTrivia trivia)
-        {
-            var isComment = trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) || trivia.IsKind(SyntaxKind.MultiLineCommentTrivia);
-
-            return isComment ? trivia.ToString() : null;
+            var header = trivias.ToString();
+            return header != null && AreHeadersEqual(header);
         }
 
         private bool AreHeadersEqual(string currentHeader)
         {
+            var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
+            var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n");
+
             return IsRegularExpression
-                ? Regex.IsMatch(currentHeader, HeaderFormat, RegexOptions.Compiled)
-                : currentHeader == HeaderFormat;
+                ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
+                : unixEndingHeader.Equals(unixEndingHeaderFormat, StringComparison.Ordinal);
         }
 
         private ImmutableDictionary<string, string> CreateDiagnosticProperties()

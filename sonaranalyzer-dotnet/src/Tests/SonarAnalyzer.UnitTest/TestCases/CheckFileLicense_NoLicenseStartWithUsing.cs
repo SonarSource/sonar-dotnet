@@ -6,7 +6,7 @@ using System;
 
 namespace Tests.Diagnostics
 {
-    public class UnlicensedFile
+    public class Foo
     {
     }
 }
