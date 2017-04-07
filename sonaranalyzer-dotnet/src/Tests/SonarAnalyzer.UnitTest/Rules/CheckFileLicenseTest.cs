@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
+using System;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -174,16 +175,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant()
         {
-            try
-            {
-                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
+            Action action =
+                () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
                     new CheckFileLicense { HeaderFormat = SingleLineHeader });
-            }
-            catch (AssertFailedException ex) when (ex.Message == "Issue with message 'Add or update the header of this file.' not expected on line 1")
-            {
-                // Putting the expected issue within the file make the file being no longer empty so we need to catch the expected issue
-                // from here.
-            }
+            action.ShouldThrow<AssertFailedException>()
+                  .WithMessage("Issue with message 'Add or update the header of this file.' not expected on line 1");
         }
 
         [TestMethod]
@@ -195,22 +191,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "threw an exception of type 'System.ArgumentException' with message 'Invalid regular expression: " +
                 FailingSingleLineRegexHeader +
                 "\r\nParameter name: headerFormat'.}.";
-            bool hasThrown = false;
-            try
-            {
-                Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
-                    new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
-            }
-            catch (AssertFailedException ex)
-            {
-                if (ex.Message != expectedErrorMessage)
-                {
-                    throw;
-                }
-                hasThrown = true;
-            }
 
-            hasThrown.Should().BeTrue();
+            Action action =
+                () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
+                    new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
+            action.ShouldThrow<AssertFailedException>()
+                  .WithMessage(expectedErrorMessage);
         }
 
         [TestMethod]
