@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S2070",
-"message":  "Use a stronger encryption algorithm than SHA1.",
+"message":  "Use a stronger hashing/asymmetric algorithm.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
