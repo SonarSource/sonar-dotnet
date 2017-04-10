@@ -93,6 +93,28 @@
   </build>
 
   <profiles>
+	<profile>
+	  <id>debug</id>
+	  <activation>
+        <property>
+          <name>debug</name>
+        </property>
+      </activation>
+	  <properties>
+	    <mode>Debug</mode>
+	  </properties>
+	</profile>
+	<profile>
+	  <id>release</id>
+	  <activation>
+        <property>
+          <name>!debug</name>
+        </property>
+      </activation>
+	  <properties>
+	    <mode>Release</mode>
+	  </properties>
+	</profile>
     <profile>
       <id>protobuf-compile</id>
       <activation>
@@ -117,7 +139,7 @@
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
                     <copy todir="src/main/protobuf">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/protobuf">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${mode}/protobuf">
                         <include name="*.proto"/>
                       </fileset>
                     </copy>
