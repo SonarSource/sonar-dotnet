@@ -38,7 +38,7 @@ public class SonarAnalyzerScannerExtractor {
   private final ProjectReactor reactor;
   private File file = null;
 
-  SonarAnalyzerScannerExtractor(ProjectReactor reactor) {
+  public SonarAnalyzerScannerExtractor(ProjectReactor reactor) {
     this.reactor = reactor;
   }
 

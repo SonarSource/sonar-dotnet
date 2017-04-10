@@ -19,6 +19,7 @@
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
+	<analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
   <dependencies>
@@ -101,18 +102,7 @@
         </property>
       </activation>
 	  <properties>
-	    <mode>Debug</mode>
-	  </properties>
-	</profile>
-	<profile>
-	  <id>release</id>
-	  <activation>
-        <property>
-          <name>!debug</name>
-        </property>
-      </activation>
-	  <properties>
-	    <mode>Release</mode>
+	    <analyzer.build.conf>Debug</analyzer.build.conf>
 	  </properties>
 	</profile>
     <profile>
@@ -139,7 +129,7 @@
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
                     <copy todir="src/main/protobuf">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${mode}/protobuf">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}/protobuf">
                         <include name="*.proto"/>
                       </fileset>
                     </copy>

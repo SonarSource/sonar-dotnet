@@ -32,7 +32,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
 
   private final CSharpSonarRulesDefinition csharpRulesDefinition;
 
-  SonarLintProfileExporter(CSharpSonarRulesDefinition csharpRulesDefinition) {
+  public SonarLintProfileExporter(CSharpSonarRulesDefinition csharpRulesDefinition) {
     super("sonarlint-vs-cs", "SonarLint for Visual Studio Rule Set");
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
     this.csharpRulesDefinition = csharpRulesDefinition;

@@ -28,7 +28,7 @@ public class CSharpConfiguration extends AbstractConfiguration {
   static final String ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY = "sonar.cs.analyzer.projectOutPath";
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
 
-  CSharpConfiguration(Settings settings) {
+  public CSharpConfiguration(Settings settings) {
     super(settings);
   }
 

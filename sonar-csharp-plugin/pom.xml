@@ -63,6 +63,7 @@
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <scanner.msbuild.version>2.2.0.24</scanner.msbuild.version>
     <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
+	<analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
   <dependencies>
@@ -170,18 +171,7 @@
         </property>
       </activation>
       <properties>
-        <mode>Debug</mode>
-      </properties>
-    </profile>
-    <profile>
-      <id>release</id>
-      <activation>
-        <property>
-          <name>!debug</name>
-        </property>
-      </activation>
-      <properties>
-        <mode>Release</mode>
+        <analyzer.build.conf>Debug</analyzer.build.conf>
       </properties>
     </profile>
   </profiles>
@@ -273,7 +263,7 @@
               <exportAntProperties>true</exportAntProperties>
               <tasks>
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${mode}/">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.build.conf}/">
                     <include name="SonarAnalyzer.dll"/>
                     <include name="SonarAnalyzer.CSharp.dll"/>
                     <include name="Google.Protobuf.dll"/>
@@ -283,7 +273,7 @@
                             basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
 
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${mode}">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}">
                     <include name="*.dll"/>
                     <include name="*.exe"/>
                     <include name="*.exe.config"/>
@@ -293,7 +283,7 @@
                   basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner"/>
 
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${mode}/cs">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
                     <include name="rules.xml"/>
                     <include name="profile.xml"/>
                     <include name="sqale.xml"/>

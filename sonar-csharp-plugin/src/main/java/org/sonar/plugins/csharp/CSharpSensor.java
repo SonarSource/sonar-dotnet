@@ -60,7 +60,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   private final SonarAnalyzerScannerExtractor extractor;
   private final CSharpConfiguration config;
 
-  CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile) {
     super(fileLinesContextFactory, noSonarFilter, config, encodingPerFile, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;

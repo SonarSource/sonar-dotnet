@@ -27,7 +27,7 @@ import org.sonar.api.utils.ValidationMessages;
 // SONARCS-558 workaround for SONAR-6969
 public class SonarLintFakeProfileImporter extends ProfileImporter {
 
-  SonarLintFakeProfileImporter() {
+  public SonarLintFakeProfileImporter() {
     super("sonarlint-vs-cs-fake", "Technical importer for the MSBuild SonarQube Scanner");
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
   }

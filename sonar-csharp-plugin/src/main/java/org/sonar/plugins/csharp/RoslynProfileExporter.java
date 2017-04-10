@@ -67,7 +67,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   private final Settings settings;
   private final RulesDefinition[] rulesDefinitions;
 
-  RoslynProfileExporter(Settings settings, RulesDefinition[] rulesDefinitions) {
+  public RoslynProfileExporter(Settings settings, RulesDefinition[] rulesDefinitions) {
     super("roslyn-cs", "Technical exporter for the MSBuild SonarQube Scanner");
     this.settings = settings;
     this.rulesDefinitions = rulesDefinitions;
