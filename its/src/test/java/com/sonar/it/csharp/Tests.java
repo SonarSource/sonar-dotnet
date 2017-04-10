@@ -61,8 +61,7 @@ public class Tests {
     .build();
 
   public static SonarScanner createSonarScannerBuild() {
-    SonarScanner build = SonarScanner.create();
-    return build;
+    return SonarScanner.create();
   }
 
   @CheckForNull

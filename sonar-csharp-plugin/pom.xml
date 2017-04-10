@@ -33,22 +33,22 @@
       <name>Amaury Levé</name>
       <organization>SonarSource</organization>
     </developer>
-	<developer>
+    <developer>
       <id>vhristov</id>
       <name>Valeri Hristov</name>
       <organization>SonarSource</organization>
     </developer>
-	<developer>
+    <developer>
       <id>jgyerik</id>
       <name>Janos Gyerik</name>
       <organization>SonarSource</organization>
     </developer>
-	<developer>
+    <developer>
       <id>dmeneses</id>
       <name>Duarte Meneses</name>
       <organization>SonarSource</organization>
     </developer>
-	<developer>
+    <developer>
       <id>jhenry</id>
       <name>Julien Henry</name>
       <organization>SonarSource</organization>
@@ -161,24 +161,49 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>debug</id>
+      <activation>
+        <property>
+          <name>debug</name>
+        </property>
+      </activation>
+      <properties>
+        <mode>Debug</mode>
+      </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <activation>
+        <property>
+          <name>!debug</name>
+        </property>
+      </activation>
+      <properties>
+        <mode>Release</mode>
+      </properties>
+    </profile>
+  </profiles>
+
   <build>
-   <resources>
-     <resource>
-       <directory>${sonarAnalyzer.workDirectory}</directory>
-       <includes>
-         <include>org/sonar/plugins/csharp/*.xml</include>
-         <include>static/version.txt</include>
-         <include>static/SonarAnalyzer-${project.version}.zip</include>
-         <include>SonarAnalyzer.Scanner.zip</include>
-       </includes>
-     </resource>
-     <resource>
-       <directory>${scanner.msbuild.workDirectory}</directory>
-       <includes>
-         <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
-       </includes>
-     </resource>
-   </resources>
+    <resources>
+      <resource>
+        <directory>${sonarAnalyzer.workDirectory}</directory>
+        <includes>
+          <include>org/sonar/plugins/csharp/*.xml</include>
+          <include>static/version.txt</include>
+          <include>static/SonarAnalyzer-${project.version}.zip</include>
+          <include>SonarAnalyzer.Scanner.zip</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${scanner.msbuild.workDirectory}</directory>
+        <includes>
+          <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
+        </includes>
+      </resource>
+    </resources>
 
     <plugins>
       <plugin>
@@ -247,19 +272,39 @@
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <tasks>
-                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/Release/SonarAnalyzer.CSharp.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/" />
-                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/Release/SonarAnalyzer.RuleDocGenerator.CSharp.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
-                <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/SonarAnalyzer.Scanner.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
-                <!-- SQALE XML in sslr requires a resource to read from -->
-                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
-                    <include name="*.xml"/>
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${mode}/">
+                    <include name="SonarAnalyzer.dll"/>
+                    <include name="SonarAnalyzer.CSharp.dll"/>
+                    <include name="Google.Protobuf.dll"/>
                   </fileset>
                 </copy>
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/analyzers"/>
+                            basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
+
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${mode}">
+                    <include name="*.dll"/>
+                    <include name="*.exe"/>
+                    <include name="*.exe.config"/>
+                  </fileset>
+                </copy>
                 <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
-                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/assembly"/>
+                  basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner"/>
+
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${mode}/cs">
+                    <include name="rules.xml"/>
+                    <include name="profile.xml"/>
+                    <include name="sqale.xml"/>
+                  </fileset>
+                </copy>
+                <!-- SQALE XML in sslr requires a resource to read from -->
+                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
+                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
+                    <include name="*.xml"/>
+                  </fileset>
+                </copy>
 
                 <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
 

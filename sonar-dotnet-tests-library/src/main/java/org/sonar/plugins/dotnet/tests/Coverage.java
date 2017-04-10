@@ -31,7 +31,7 @@ public class Coverage {
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
 
-  public void addHits(String file, int line, int hits) {
+  void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
 
     if (oldHitsByLine == null) {
@@ -61,7 +61,7 @@ public class Coverage {
     return hitsByLineAndFile.keySet();
   }
 
-  public Map<Integer, Integer> hits(String file) {
+  Map<Integer, Integer> hits(String file) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
     if (oldHitsByLine == null) {
       return Collections.emptyMap();
@@ -77,7 +77,7 @@ public class Coverage {
     return result;
   }
 
-  public void mergeWith(Coverage otherCoverage) {
+  void mergeWith(Coverage otherCoverage) {
     Map<String, int[]> other = otherCoverage.hitsByLineAndFile;
 
     for (Map.Entry<String, int[]> entry : other.entrySet()) {

@@ -32,7 +32,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class DoNotAnalyzeTestFilesTest {
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void init() throws Exception {

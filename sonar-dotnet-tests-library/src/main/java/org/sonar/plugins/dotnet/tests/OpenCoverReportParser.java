@@ -43,7 +43,7 @@ public class OpenCoverReportParser implements CoverageParser {
     private final Coverage coverage;
     private String fileRef;
 
-    public Parser(File file, Coverage coverage) {
+    Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
     }

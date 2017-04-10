@@ -33,7 +33,7 @@ public class NoSonarTest {
 
   private static final String PROJECT = "NoSonarTest";
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void init() {

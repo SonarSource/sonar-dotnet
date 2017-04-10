@@ -62,7 +62,7 @@ public class CoverageAggregator {
     this.visualStudioCoverageXmlReportParser = visualStudioCoverageXmlReportParser;
   }
 
-  public boolean hasCoverageProperty() {
+  boolean hasCoverageProperty() {
     return hasNCover3ReportPaths() || hasOpenCoverReportPaths() || hasDotCoverReportPaths() || hasVisualStudioCoverageXmlReportPaths();
   }
 
@@ -82,7 +82,7 @@ public class CoverageAggregator {
     return settings.hasKey(coverageConf.visualStudioCoverageXmlPropertyKey());
   }
 
-  public Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
+  Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
     if (hasNCover3ReportPaths()) {
       aggregate(wildcardPatternFileProvider, settings.getString(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
     }

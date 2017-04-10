@@ -20,7 +20,6 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -52,7 +51,7 @@ public class DotCoverReportParser implements CoverageParser {
     private final File file;
     private final Coverage coverage;
 
-    public Parser(File file, Coverage coverage) {
+    Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
     }
@@ -62,7 +61,7 @@ public class DotCoverReportParser implements CoverageParser {
       try {
         contents = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
       } catch (IOException e) {
-        throw Throwables.propagate(e);
+        throw new IllegalStateException(e);
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);

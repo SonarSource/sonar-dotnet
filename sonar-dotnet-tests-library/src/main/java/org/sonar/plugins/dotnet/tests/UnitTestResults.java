@@ -50,7 +50,7 @@ public class UnitTestResults {
     return tests;
   }
 
-  public double passedPercentage() {
+  double passedPercentage() {
     return passed * 100.0 / tests();
   }
 
@@ -67,7 +67,7 @@ public class UnitTestResults {
   }
 
   @CheckForNull
-  public Long executionTime() {
+  Long executionTime() {
     return executionTime;
   }
 
