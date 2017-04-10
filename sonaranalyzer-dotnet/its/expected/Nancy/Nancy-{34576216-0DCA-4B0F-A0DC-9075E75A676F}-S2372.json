@@ -4,19 +4,6 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HeadResponse.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  23,
-"endLine":  128,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
 "uri":  "Nancy\src\Nancy\NancyModule.cs",
 "region":  {
 "startLine":  89,

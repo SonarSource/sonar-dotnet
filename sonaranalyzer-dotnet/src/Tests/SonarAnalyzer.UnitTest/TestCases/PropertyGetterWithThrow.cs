@@ -1,5 +1,7 @@
 ﻿namespace Tests.Diagnostics
 {
+    using System;
+
     public class PropertyGetterWithThrow
     {
         public int MyProperty
@@ -7,16 +9,47 @@
             get
             {
                 var x = 5;
-                throw new System.NotSupportedException(); //Noncompliant {{Remove the exception throwing from this property getter, or refactor the property into a method.}}
-//              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                throw new NotSupportedException(); // Compliant
             }
-            set { }
+        }
+        public int MyProperty2
+        {
+            get
+            {
+                throw new NotImplementedException(); // Compliant
+            }
+        }
+        public int MyProperty3
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(); // Compliant
+            }
+        }
+        public int MyProperty4
+        {
+            get
+            {
+                throw new Exception(); // Noncompliant {{Remove the exception throwing from this property getter, or refactor the property into a method.}}
+//              ^^^^^^^^^^^^^^^^^^^^^^
+            }
+        }
+        public int MyProperty5
+        {
+            get
+            {
+                return 42;
+            }
+            set
+            {
+                throw new Exception(); // Compliant - setters are ignored by this rule
+            }
         }
         public int this[int i]
         {
             get
             {
-                throw new System.Exception(); // okay
+                throw new System.Exception(); // Compliant - indexed getters are ignored by this rule
             }
             set
             {
