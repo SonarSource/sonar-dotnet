@@ -67,7 +67,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
       writer.write(line);
       writer.write("\r\n");
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new IllegalStateException(e);
     }
   }
 

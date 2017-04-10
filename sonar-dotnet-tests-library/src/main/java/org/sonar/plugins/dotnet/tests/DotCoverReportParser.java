@@ -61,7 +61,7 @@ public class DotCoverReportParser implements CoverageParser {
       try {
         contents = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        throw new IllegalStateException(e);
       }
 
       String fileCanonicalPath = extractFileCanonicalPath(contents);

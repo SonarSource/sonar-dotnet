@@ -45,7 +45,7 @@ public class XmlParserHelper implements AutoCloseable {
       this.stream = xmlFactory.createXMLStreamReader(reader);
 
     } catch (FileNotFoundException | XMLStreamException e) {
-      throw new RuntimeException(e);
+      throw new IllegalStateException(e);
     }
   }
 
@@ -162,7 +162,7 @@ public class XmlParserHelper implements AutoCloseable {
       try {
         stream.close();
       } catch (XMLStreamException e) {
-        throw new RuntimeException(e);
+        throw new IllegalStateException(e);
       }
     }
   }

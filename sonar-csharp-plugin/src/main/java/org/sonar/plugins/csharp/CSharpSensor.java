@@ -152,7 +152,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     try {
       Files.write(analysisInput, analysisSettings.getBytes(StandardCharsets.UTF_8));
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      throw new IllegalStateException(e);
     }
 
     File executableFile = extractor.executableFile(CSharpPlugin.LANGUAGE_KEY);
