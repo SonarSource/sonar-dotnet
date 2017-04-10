@@ -36,16 +36,16 @@ public class AnalysisInputXml {
     // static only
   }
 
-  protected static String escapeXml(String str) {
+  private static String escapeXml(String str) {
     return str.replace("&", "&amp;").replace("\"", "&quot;").replace("'", "&apos;").replace("<", "&lt;").replace(">", "&gt;");
   }
 
-  protected static void appendLine(StringBuilder sb, String line) {
+  private static void appendLine(StringBuilder sb, String line) {
     sb.append(line);
     sb.append("\r\n");
   }
 
-  protected static Map<String, String> effectiveParameters(ActiveRule activeRule) {
+  private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
     Map<String, String> builder = new HashMap<>();
 
     for (Entry<String, String> param : activeRule.params().entrySet()) {
@@ -112,7 +112,7 @@ public class AnalysisInputXml {
     }
   }
 
-  protected static Iterable<File> filesToAnalyze(FileSystem fs, String languageKey) {
+  private static Iterable<File> filesToAnalyze(FileSystem fs, String languageKey) {
     return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(languageKey)));
   }
 }

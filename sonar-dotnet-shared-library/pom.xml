@@ -93,6 +93,28 @@
   </build>
 
   <profiles>
+	<profile>
+	  <id>debug</id>
+	  <activation>
+        <property>
+          <name>debug</name>
+        </property>
+      </activation>
+	  <properties>
+	    <mode>Debug</mode>
+	  </properties>
+	</profile>
+	<profile>
+	  <id>release</id>
+	  <activation>
+        <property>
+          <name>!debug</name>
+        </property>
+      </activation>
+	  <properties>
+	    <mode>Release</mode>
+	  </properties>
+	</profile>
     <profile>
       <id>protobuf-compile</id>
       <activation>
@@ -111,17 +133,13 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <executions>
               <execution>
-                <id>unzip-nuget</id>
+                <id>copy-protobuf</id>
                 <phase>validate</phase>
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
-                    <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/SonarAnalyzer.Scanner.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
-                    <delete>
-                      <fileset dir="src/main/protobuf" excludes=".gitignore"></fileset>
-                    </delete>
                     <copy todir="src/main/protobuf">
-                      <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${mode}/protobuf">
                         <include name="*.proto"/>
                       </fileset>
                     </copy>

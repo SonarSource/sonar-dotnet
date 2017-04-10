@@ -50,7 +50,7 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
 
     private boolean foundCounters;
 
-    public Parser(File file, UnitTestResults unitTestResults) {
+    Parser(File file, UnitTestResults unitTestResults) {
       this.file = file;
       this.unitTestResults = unitTestResults;
     }

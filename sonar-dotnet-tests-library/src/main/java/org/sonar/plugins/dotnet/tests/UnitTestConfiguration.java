@@ -31,15 +31,15 @@ public class UnitTestConfiguration {
     this.xunitTestResultsFilePropertyKey = xunitTestResultsFilePropertyKey;
   }
 
-  public String visualStudioTestResultsFilePropertyKey() {
+  String visualStudioTestResultsFilePropertyKey() {
     return visualStudioTestResultsFilePropertyKey;
   }
 
-  public String nunitTestResultsFilePropertyKey() {
+  String nunitTestResultsFilePropertyKey() {
     return nunitTestResultsFilePropertyKey;
   }
 
-  public String xunitTestResultsFilePropertyKey() {
+  String xunitTestResultsFilePropertyKey() {
     return xunitTestResultsFilePropertyKey;
   }
 

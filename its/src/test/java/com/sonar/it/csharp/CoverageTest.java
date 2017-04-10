@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class CoverageTest {
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void init() throws Exception {

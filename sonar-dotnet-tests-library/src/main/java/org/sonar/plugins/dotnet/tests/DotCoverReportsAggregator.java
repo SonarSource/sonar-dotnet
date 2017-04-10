@@ -20,7 +20,6 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -39,7 +38,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
   private final DotCoverReportParser parser;
 
-  public DotCoverReportsAggregator(DotCoverReportParser parser) {
+  DotCoverReportsAggregator(DotCoverReportParser parser) {
     this.parser = parser;
   }
 
@@ -66,7 +65,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     try {
       pathStream = Files.list(folder.toPath());
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new IllegalStateException(e);
     }
 
     return pathStream
@@ -80,7 +79,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
     try {
       contents = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new IllegalStateException(e);
     }
     Preconditions.checkArgument(contents.startsWith("<!DOCTYPE html>"), "Only dotCover HTML reports which start with \"<!DOCTYPE html>\" are supported.");
   }
