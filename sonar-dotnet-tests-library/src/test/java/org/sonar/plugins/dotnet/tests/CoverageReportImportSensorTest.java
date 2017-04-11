@@ -30,6 +30,8 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.ce.posttask.Project;
+import org.sonar.api.config.Settings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -43,11 +45,13 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void coverage() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
+    Settings settings = mock(Settings.class);
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("",  "","", "", "", "");
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, false).describe(new DefaultSensorDescriptor());
+    new CoverageReportImportSensor(settings, coverageConf, coverageAggregator, false).describe(new DefaultSensorDescriptor());
   }
 
   @Test
@@ -65,6 +69,8 @@ public class CoverageReportImportSensorTest {
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) throws Exception {
+    Settings settings = mock(Settings.class);
+
     File baseDir = temp.newFolder();
 
     Coverage coverage = mock(Coverage.class);
@@ -93,13 +99,41 @@ public class CoverageReportImportSensorTest {
     context.fileSystem().add(inputFile);
     context.fileSystem().add(new DefaultInputFile("foo", "Baz.java").setLanguage("java"));
 
-    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "","", "", "", "");
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, isIntegrationTest).analyze(context, coverage);
+    new CoverageReportImportSensor(settings, coverageConf, coverageAggregator, isIntegrationTest).analyze(context, coverage);
 
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 
     return context;
   }
+
+  @Test
+  public void analyseWithCache() throws Exception {
+    File baseDir = temp.newFolder();
+    Settings settings = mock(Settings.class);
+    when(settings.getBoolean("globalCache")).thenReturn(true);
+
+    Project project = mock(Project.class);
+
+    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+    when(coverageAggregator.hasCoverageProperty()).thenReturn(true);
+    SensorContextTester context = SensorContextTester.create(baseDir);
+
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    DefaultInputFile inputFile = new DefaultInputFile("foo", "Foo.cs")
+            .setLanguage("cs")
+            .initMetadata("a\na\na\na\na\na\na\na\na\na\n");
+    context.fileSystem().add(inputFile);
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "globalCache", "", "", "", "");
+    CoverageReportImportSensor.clearCache();
+    CoverageReportImportSensor sensor = new CoverageReportImportSensor(settings, coverageConf, coverageAggregator, false);
+    sensor.execute(context);
+    sensor = new CoverageReportImportSensor(settings, coverageConf, coverageAggregator, false);
+    sensor.execute(context);
+    verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(Coverage.class));
+  }
+
 
 }

@@ -22,13 +22,15 @@ package org.sonar.plugins.dotnet.tests;
 public class CoverageConfiguration {
 
   private final String languageKey;
+  private final String globalCacheKey;
   private final String ncover3PropertyKey;
   private final String openCoverPropertyKey;
   private final String dotCoverPropertyKey;
   private final String visualStudioCoverageXmlPropertyKey;
 
-  public CoverageConfiguration(String languageKey, String ncover3PropertyKey, String openCoverPropertyKey, String dotCoverPropertyKey, String visualStudioCoverageXmlPropertyKey) {
+  public CoverageConfiguration(String languageKey, String globalCacheKey, String ncover3PropertyKey, String openCoverPropertyKey, String dotCoverPropertyKey, String visualStudioCoverageXmlPropertyKey) {
     this.languageKey = languageKey;
+    this.globalCacheKey = globalCacheKey;
     this.ncover3PropertyKey = ncover3PropertyKey;
     this.openCoverPropertyKey = openCoverPropertyKey;
     this.dotCoverPropertyKey = dotCoverPropertyKey;
@@ -37,6 +39,10 @@ public class CoverageConfiguration {
 
   public String languageKey() {
     return languageKey;
+  }
+
+  public String globalCacheKey() {
+    return globalCacheKey;
   }
 
   public String ncover3PropertyKey() {
