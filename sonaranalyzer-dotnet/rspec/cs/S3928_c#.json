@@ -1,0 +1,13 @@
+{
+  "title": "Parameter names used into ArgumentException constructors should match an existing one ",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

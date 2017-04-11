@@ -5169,6 +5169,30 @@
   <data name="S3926_Title" xml:space="preserve">
     <value>Deserialization methods should be provided for "OptionalField" members</value>
   </data>
+  <data name="S3928_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3928_Description" xml:space="preserve">
+    <value>Some constructors of the ArgumentException, ArgumentNullException, ArgumentOutOfRangeException and DuplicateWaitObjectException classes must be fed with a valid parameter name. This rule raises an issue in two cases:</value>
+  </data>
+  <data name="S3928_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3928_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3928_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3928_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3928_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3928_Title" xml:space="preserve">
+    <value>Parameter names used into ArgumentException constructors should match an existing one </value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
