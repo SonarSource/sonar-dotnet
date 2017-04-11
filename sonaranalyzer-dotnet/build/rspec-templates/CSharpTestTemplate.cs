@@ -30,7 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void $DiagnosticClassName$()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs", new $DiagnosticClassName$());
+            Verifier.VerifyAnalyzer(@"TestCases\$DiagnosticClassName$.cs",
+                new $DiagnosticClassName$());
         }
     }
 }
