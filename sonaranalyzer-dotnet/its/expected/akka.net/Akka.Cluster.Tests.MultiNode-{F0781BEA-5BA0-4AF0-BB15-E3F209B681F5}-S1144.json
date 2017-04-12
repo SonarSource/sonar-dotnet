@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'DumbObserver'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'DumbObserver'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {

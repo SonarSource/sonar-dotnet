@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Children'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'TryGetChild'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'IsWaitingForChildren'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'FactoryConsumer'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'FactoryConsumer'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'CloseReason'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'UpdatePendingWriteAndThen'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'WriteFileFailed'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_objectArrayType'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'RotateLeft64'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
 "region":  {

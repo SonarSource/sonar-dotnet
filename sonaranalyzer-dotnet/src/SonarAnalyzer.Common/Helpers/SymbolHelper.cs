@@ -252,5 +252,10 @@ namespace SonarAnalyzer.Helpers
             }
             return result;
         }
+
+        public static bool IsConstructor(this ISymbol symbol)
+        {
+            return symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
+        }
     }
 }

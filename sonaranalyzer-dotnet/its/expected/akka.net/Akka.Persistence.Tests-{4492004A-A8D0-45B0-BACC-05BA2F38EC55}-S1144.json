@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_random'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_timeout'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_counter'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {

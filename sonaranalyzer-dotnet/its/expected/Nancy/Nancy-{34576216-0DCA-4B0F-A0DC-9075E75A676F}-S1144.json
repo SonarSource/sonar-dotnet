@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'RootPath'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'SerializeGenericDictionary'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Request.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Response.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'GetAllRoutes'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'RemoveRegistration'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'ConstructType'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {

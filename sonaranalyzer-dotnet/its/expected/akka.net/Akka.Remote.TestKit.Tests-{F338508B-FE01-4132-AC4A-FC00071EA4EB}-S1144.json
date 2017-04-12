@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Ref'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'BarrierCoordinatorSupervisor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {

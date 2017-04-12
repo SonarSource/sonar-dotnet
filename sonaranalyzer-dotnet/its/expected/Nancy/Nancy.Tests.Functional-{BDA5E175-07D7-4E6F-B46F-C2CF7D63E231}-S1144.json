@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'NegotiationModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'NotFoundStatusCodeHandler'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {

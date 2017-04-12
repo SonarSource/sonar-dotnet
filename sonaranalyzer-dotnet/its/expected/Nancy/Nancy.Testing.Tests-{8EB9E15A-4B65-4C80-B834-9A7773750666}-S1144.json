@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'PreRequestHook'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'PostRequestHook'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'OnErrorHook'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'BlowUpModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {

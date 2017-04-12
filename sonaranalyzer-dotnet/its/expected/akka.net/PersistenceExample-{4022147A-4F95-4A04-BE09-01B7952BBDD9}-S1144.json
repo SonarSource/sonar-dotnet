@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'ViewExample'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'SnapshotedActor'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'FailingActorExample'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {

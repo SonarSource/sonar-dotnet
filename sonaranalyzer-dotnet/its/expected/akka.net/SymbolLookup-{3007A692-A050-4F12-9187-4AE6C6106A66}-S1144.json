@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'rss'.",
 "location":  {
 "uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'stock'.",
 "location":  {
 "uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'm_lock'.",
 "location":  {
 "uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {

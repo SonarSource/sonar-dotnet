@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_endpoints'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'MinAdaptiveBackoffNanos'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'AckIdleTimerName'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'Serialize'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Serialization\MessageContainerSerializer.cs",
 "region":  {

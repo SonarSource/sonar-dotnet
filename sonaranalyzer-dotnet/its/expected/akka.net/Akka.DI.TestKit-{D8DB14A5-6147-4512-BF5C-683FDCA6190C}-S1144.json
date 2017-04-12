@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'DiPerRequestActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'DiSingletonActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'DiParentActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'DisposableActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'UnboundedStashActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'BoundedStashActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
