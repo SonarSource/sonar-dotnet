@@ -12,14 +12,14 @@ function Exec ([scriptblock]$command, [string]$errorMessage = "Error executing c
     $output = & $command
     if ((-not $?) -or ($lastexitcode -ne 0)) {
         Write-Error $output
-        throw $errorMessage 
+        throw $errorMessage
     }
     return $output
 }
 
 function Test-ExitCode([string]$errorMessage = "Error executing command.") {
     if ((-not $?) -or ($lastexitcode -ne 0)) {
-        throw $errorMessage 
+        throw $errorMessage
     }
 }
 
@@ -75,16 +75,22 @@ function Get-Sha1 {
     return Exec { & git rev-parse HEAD }
 }
 
-function Get-ExecutablePath([string]$name, [string]$envVar) {
+function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) {
     $path = [environment]::GetEnvironmentVariable($envVar, "Process")
 
     if (!$path) {
-        $path = Exec { & where.exe $name } `
-            | Select-Object -First 1
+        if (!$directory) {
+            $path = Exec { & where.exe $name } `
+                | Select-Object -First 1
+        } else {
+            $path = Exec { & where.exe /R $directory $name } `
+                | Select-Object -First 1
+        }
     }
 
     if (Test-Path $path) {
         Write-Host "Found ${name} at ${path}"
+        [environment]::SetEnvironmentVariable($envVar, $path)
         return $path
     }
 
@@ -102,6 +108,12 @@ function Get-MsBuildPath {
 
 function Get-VsTestPath {
     return Get-ExecutablePath -name "VSTest.Console.exe" -envVar "VSTEST_PATH"
+}
+
+function Get-CodeCoveragePath {
+    $vstest_exe = Get-VsTestPath
+    $codeCoverageDirectory = Join-Path (Get-ChildItem $vstest_exe).Directory "..\..\..\..\.."
+    return Get-ExecutablePath -name "CodeCoverage.exe" -directory $codeCoverageDirectory -envVar "CODE_COVERAGE_PATH"
 }
 
 function Expand-ZIPFile($source, $destination) {
@@ -138,7 +150,7 @@ function Get-SonarQubeRunnerPath {
 }
 
 function Set-Version {
-    Write-Header "Setting version..."
+    Write-Header "Updating version in all files..."
 
     $buildNumber = Get-BuildNumber
     $branchName = Get-BranchName
@@ -168,7 +180,7 @@ function Get-Version {
 }
 
 function Generate-Metadata {
-    Write-Header "Generating rule descriptor metadata..."
+    Write-Header "Generating rules metadata..."
 
     #Generate the XML descriptor files for the C# plugin
     $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Release")
@@ -194,10 +206,10 @@ function Pack-Nugets {
         | ForEach-Object {
         $output = (Join-Path $_.DirectoryName "bin\Release")
 
-        Write-Host "Creating package " + $_.FullName
+        Write-Host "Creating NuGet package: " + $_.FullName
 
         & $nuget_exe pack $_.FullName -NoPackageAnalysis -OutputDirectory $output
-        Test-ExitCode "Failed to create nuget package $_"
+        Test-ExitCode "NuGet package creation FAILED."
     }
 }
 
@@ -218,7 +230,7 @@ function Setup-NugetConfig(
 }
 
 function Update-MavenArtifacts([string]$version) {
-    Write-Header "Updating Maven artifacts with version ${version}..."
+    Write-Header "Updating SonarAnalyzer pom files to version ${version}..."
 
     $packages = Get-ChildItem (Resolve-RepoPath "src") -Recurse "*.nupkg"
 
@@ -233,7 +245,7 @@ function Update-MavenArtifacts([string]$version) {
 }
 
 function Publish-Packages {
-    Write-Header "Publishing nugets..."
+    Write-Header "Publishing NuGet packages..."
 
     $nuget_exe = Get-NuGetPath
 
@@ -245,10 +257,10 @@ function Publish-Packages {
 }
 
 function Restore-Packages ([string]$solutionPath) {
-    Write-Header "Restoring nuget packages..."
+    Write-Header "Restoring NuGet packages..."
     $nuget_exe = Get-NuGetPath
     & $nuget_exe restore $solutionPath
-    Test-ExitCode "Failed to restore nuget packages."
+    Test-ExitCode "Restoring NuGet packages FAILED."
 }
 
 function Begin-Analysis(
@@ -258,7 +270,7 @@ function Begin-Analysis(
     [string]$sonarQubeProjectName,
     [array][parameter(ValueFromRemainingArguments = $true)] $remainingArgs) {
 
-    Write-Header "Beginning analysis..."
+    Write-Header "Running SonarQube Analysis begin step..."
 
     $sonarqube_runner_exe = Get-SonarQubeRunnerPath
 
@@ -268,16 +280,16 @@ function Begin-Analysis(
         /d:sonar.host.url=$sonarQubeUrl `
         /d:sonar.login=$sonarQubeToken `
         $remainingArgs
-    Test-ExitCode "Failed to start analysis."
+    Test-ExitCode "SonarQube Analysis begin step FAILED."
 }
 
 function End-Analysis([string]$sonarQubeToken) {
-    Write-Header "Ending analysis..."
+    Write-Header "Running SonarQube Analysis end step..."
 
     $sonarqube_runner_exe = Get-SonarQubeRunnerPath
 
     & $sonarqube_runner_exe end /d:sonar.login=$sonarQubeToken
-    Test-ExitCode "Failed to end analysis."
+    Test-ExitCode "SonarQube Analysis end step FAILED."
 }
 
 function Build-Solution (
@@ -291,7 +303,7 @@ function Build-Solution (
     $msbuild_exe = Get-MsBuildPath
 
     & $msbuild_exe $solutionPath $remainingArgs
-    Test-ExitCode "Failed to build ${solutionPath}."
+    Test-ExitCode "Build FAILED."
 }
 
 function Build-ReleaseSolution(
@@ -311,15 +323,22 @@ function Build-ReleaseSolution(
 }
 
 function Run-Tests {
-    Write-Header "Running tests..."
+    Write-Header "Starting test execution..."
 
     $vstest_exe = Get-VsTestPath
-
     Get-ChildItem (Resolve-RepoPath "src") -Recurse -Include "*.UnitTest.dll" `
         | Where-Object { $_.DirectoryName -Match "bin" } `
         | ForEach-Object {
-        Write-Host "Running tests in $_"
-        & $vstest_exe $_ /Enablecodecoverage /inIsolation
-        Test-ExitCode "Failed to execute tests in $_"
+            Write-Host "------ Unit Tests started: Assembly: $_ ------"
+            & $vstest_exe $_ /Enablecodecoverage /inIsolation
+            Test-ExitCode "Unit Tests execution FAILED."
+        }
+
+    $codeCoverage_exe = Get-CodeCoveragePath
+    Write-Host "Generating code coverage reports:"
+    Get-ChildItem (Resolve-RepoPath "TestResults") -Recurse -Include "*.coverage" | ForEach-Object {
+        $filePathWithNewExtension = $_.FullName + "xml"
+        Write-Host "  ${filePathWithNewExtension}"
+        & $codeCoverage_exe analyze /output:$filePathWithNewExtension $_.FullName
     }
 }

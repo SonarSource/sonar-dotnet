@@ -32,19 +32,20 @@ if ($badArgs -Ne $null) {
 . (Join-Path $PSScriptRoot "build-utils.ps1")
 
 function Queue-QaBuild() {
-    Write-Header "Queueing next build..."
+    Write-Header "Queueing QA job..."
 
     $versionPropertiesPath = (Resolve-RepoPath "version.properties")
 
     $version = Get-Version
-    
+
     "VERSION=${version}" `
         | Out-File -Encoding utf8 -Append $versionPropertiesPath
 
     To-UnixLineEndings $versionPropertiesPath
 
     $content = Get-Content $versionPropertiesPath
-    Write-Host "version.properties content is '{$content}'"}
+    Write-Host "version.properties content is '{$content}'"
+}
 
 Set-Version
 
@@ -79,10 +80,10 @@ else {
 }
 
 if ($debugBuild) {
-    Build-Solution ".\SonarAnalyzer.sln"
+    Build-Solution (Resolve-RepoPath ".\SonarAnalyzer.sln")
 }
 else {
-    Build-ReleaseSolution ".\SonarAnalyzer.sln" $certificatePath
+    Build-ReleaseSolution (Resolve-RepoPath ".\SonarAnalyzer.sln") $certificatePath
 }
 
 if ($test) {

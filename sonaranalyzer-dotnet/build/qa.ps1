@@ -30,7 +30,7 @@ function Get-AuthHeaders() {
     return @{Authorization = $basicAuthValue}
 }
 
-function Get-BuildArtifacts() {
+function Get-BuildArtifacts {
     Write-Header "Downloading build artifacts..."
 
     $authHeaders = (Get-AuthHeaders)
@@ -43,7 +43,7 @@ function Get-BuildArtifacts() {
         Remove-Item $tempFolder -Recurse -Force -ErrorAction Ignore
         New-Item $tempFolder -ItemType Directory
 
-        foreach ($packageName in $packageNames) { 
+        foreach ($packageName in $packageNames) {
             $downloadUrl = (Get-PackageUrl "${packageName}.${version}.nupkg")
             $zipPath = (Join-Path $tempFolder "${packageName}.${version}.zip")
 
@@ -67,8 +67,8 @@ function Invoke-IntegrationTests {
     }
 }
 
-function Queue-ArtifactsBuild() {
-    Write-Header "Queueing next build..."
+function Queue-ArtifactsBuild {
+    Write-Header "Queueing Artifacts job..."
 
     $sha1propertiesPath = (Resolve-RepoPath "sha1.properties")
 
