@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class UnusedPrivateMember : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1144";
-        private const string MessageFormat = "Remove this unused private member.";
+        private const string MessageFormat = "Remove the unused private {0} '{1}'.";
         private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
 
         private static readonly DiagnosticDescriptor rule =
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var accessorSyntax = GetAccessorSyntax(property.SetMethod);
                     if (accessorSyntax != null)
                     {
-                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation()), context.Compilation);
+                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "set accessor in property", property.Name), context.Compilation);
                     }
                     continue;
                 }
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var accessorSyntax = GetAccessorSyntax(property.GetMethod);
                     if (accessorSyntax != null && accessorSyntax.Body != null)
                     {
-                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation()), context.Compilation);
+                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "get accessor in property", property.Name), context.Compilation);
                     }
                 }
             }
@@ -178,7 +178,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, location), context.Compilation);
+                var memberKind = GetMemberType(unused.Symbol);
+                var memberName = GetMemberName(unused.Symbol);
+
+                context.ReportDiagnosticIfNonGenerated(
+                    Diagnostic.Create(rule, location, memberKind, memberName),
+                    context.Compilation);
             }
         }
 
@@ -201,7 +206,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             declaredPrivateSymbols.UnionWith(methodSymbols);
         }
-
 
         private static void CollectRemovableEventsAndProperties(RemovableDeclarationCollector helper,
             HashSet<ISymbol> declaredPrivateSymbols)
@@ -467,6 +471,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var eventFieldDeclaration = syntax.Parent.Parent as EventFieldDeclarationSyntax;
             return eventFieldDeclaration?.Declaration;
+        }
+
+        private static string GetMemberType(ISymbol symbol)
+        {
+            if (symbol.IsConstructor())
+            {
+                return "constructor";
+            }
+
+            switch (symbol.Kind)
+            {
+                case SymbolKind.Event:
+                case SymbolKind.Field:
+                case SymbolKind.Method:
+                case SymbolKind.Property:
+                    return symbol.Kind.ToString().ToLowerInvariant();
+                case SymbolKind.NamedType:
+                    return "type";
+                default:
+                    return "member";
+            }
+        }
+
+        private static string GetMemberName(ISymbol symbol)
+        {
+            return symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
         }
     }
 }

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'NonPublicActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'WorkerActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'FailingChildInnerActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'FailingChildInnerActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'FailingChildOuterActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'FailingChildOuterActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'RecipeActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TestProducer'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'EchoReceiveActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'PreStartEchoReceiveActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'CallReceiveWhenHandlingMessageActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'IntPredicatesActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TypePredicatesActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'ReceiveAnyActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'BecomeActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'BecomeDirectlyInConstructorActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'CrashActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'StashingActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'StashAndReplyActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'StashEverythingActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'StashingTwiceActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'Greeted'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'Resumer'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'Failure'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'ByteStrings'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
 "region":  {

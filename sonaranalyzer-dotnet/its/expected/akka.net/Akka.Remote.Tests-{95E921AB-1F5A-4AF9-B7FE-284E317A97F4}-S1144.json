@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TestActorProxy'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Address'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Address'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Uid'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'AtStartup'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'Port'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private type 'Proxy'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'Proxy'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'LastActivityIsDisassociate'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {

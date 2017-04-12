@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'DefaultAction'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {

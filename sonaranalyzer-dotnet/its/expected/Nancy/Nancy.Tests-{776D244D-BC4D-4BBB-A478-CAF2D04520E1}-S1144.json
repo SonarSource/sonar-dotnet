@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'DefaultAction'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'FakeDiagnostics'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Diagnostics\CustomInteractiveDiagnosticsFixture.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'CreateRequestStream'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'GetTestingEnvironment'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\JavaScriptSerializerFixture.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field 'UnbindablePrivateField'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TestModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Routing\ConstraintNodeRouteResolverFixture.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TestModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Routing\ConstraintNodeRouteScoringFixture.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'MethodNotAllowedModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteResolverFixture.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'NoRootModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteResolverFixture.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private constructor 'TestModule'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteResolverFixture.cs",
 "region":  {

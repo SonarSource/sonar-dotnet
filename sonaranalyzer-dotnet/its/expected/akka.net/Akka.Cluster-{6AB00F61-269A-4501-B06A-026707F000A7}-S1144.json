@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_log'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_log'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_log'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_retryTask'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'ClearState'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private field '_log'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {

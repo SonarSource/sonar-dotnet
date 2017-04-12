@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'RunClusterSingletonSeed'.",
 "location":  {
 "uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private method 'RunClusterClientSeed'.",
 "location":  {
 "uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
 "region":  {

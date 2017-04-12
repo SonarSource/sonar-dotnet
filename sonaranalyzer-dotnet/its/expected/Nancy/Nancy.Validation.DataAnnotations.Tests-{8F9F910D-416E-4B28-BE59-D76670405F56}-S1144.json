@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Foo'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove this unused private member.",
+"message":  "Remove the unused private property 'Bar'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
 "region":  {

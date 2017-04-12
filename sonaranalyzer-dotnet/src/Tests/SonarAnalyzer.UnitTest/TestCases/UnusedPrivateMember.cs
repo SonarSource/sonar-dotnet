@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
                 Console.WriteLine();
             }
 
-            public Gen(int i) : this() // Noncompliant
+            public Gen(int i) : this() // Noncompliant {{Remove the unused private constructor 'Gen'.}}
             {
                 Console.WriteLine();
             }
@@ -54,18 +54,18 @@ namespace Tests.Diagnostics
         private
             int field3, field4; // Noncompliant;
 //                      ^^^^^^
-        private int Property // Noncompliant {{Remove this unused private member.}}
+        private int Property // Noncompliant {{Remove the unused private property 'Property'.}}
         {
             get; set;
         }
-        private void Method() { } // Noncompliant
-        private class Class { }// Noncompliant
+        private void Method() { } // Noncompliant {{Remove the unused private method 'Method'.}}
+        private class Class { }// Noncompliant {{Remove the unused private type 'Class'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^
-        private struct Struct { }// Noncompliant
+        private struct Struct { }// Noncompliant {{Remove the unused private type 'Struct'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^
         private delegate void Delegate();
-        private delegate void Delegate2(); // Noncompliant
-        private event Delegate Event; //Noncompliant
+        private delegate void Delegate2(); // Noncompliant {{Remove the unused private type 'Delegate2'.}}
+        private event Delegate Event; //Noncompliant {{Remove the unused private event 'Event'.}}
         private event Delegate MyEvent;
 
         private int MyProperty
@@ -82,14 +82,14 @@ namespace Tests.Diagnostics
             private Class2() // Compliant
             {
             }
-            private Class2(int i) // Noncompliant
+            private Class2(int i) // Noncompliant {{Remove the unused private constructor 'Class2'.}}
             {
                 new Class2("").field2 = 3;
             }
             private Class2(string i)
             {
             }
-            public int field; // Noncompliant
+            public int field; // Noncompliant {{Remove the unused private field 'field'.}}
             public int field2;
         }
 
@@ -97,10 +97,10 @@ namespace Tests.Diagnostics
         {
             void Method();
         }
-        private class Class3 : MyInterface // Noncompliant
+        private class Class3 : MyInterface // Noncompliant {{Remove the unused private type 'Class3'.}}
         {
             public void Method() { var x = this[20]; }
-            public void Method1() { var x = Method2(); } // Noncompliant
+            public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused private method 'Method1'.}}
             public static int Method2() { return 2; }
 
             public int this[int index]
@@ -132,12 +132,12 @@ namespace Tests.Diagnostics
 
     public class PropertyAccess
     {
-        private int OnlyRead { get; set; }  // Noncompliant
+        private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
 //                                  ^^^^
         private int OnlySet { get; set; }
-        private int OnlySet2 { get { return 42; } set { } } // Noncompliant
+        private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
 //                             ^^^^^^^^^^^^^^^^^^
-        private int NotAccessed { get; set; }   // Noncompliant
+        private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         private int BothAccessed { get; set; }
 
