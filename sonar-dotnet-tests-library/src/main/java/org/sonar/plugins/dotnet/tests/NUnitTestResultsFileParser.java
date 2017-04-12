@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.io.File;
-import java.io.IOException;
-import javax.annotation.CheckForNull;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import javax.annotation.CheckForNull;
+import java.io.File;
+import java.io.IOException;
 
 public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 

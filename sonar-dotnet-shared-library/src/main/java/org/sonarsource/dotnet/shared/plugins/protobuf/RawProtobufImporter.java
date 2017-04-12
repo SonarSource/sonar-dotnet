@@ -20,6 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;

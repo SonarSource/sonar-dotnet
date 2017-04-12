@@ -21,6 +21,8 @@ package org.sonarsource.dotnet.shared.plugins.testutils;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Parser;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,13 +32,8 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.*;
 
 /**
  * Utility class to filter protobuf binary files to contain a single input-file (Program.cs)

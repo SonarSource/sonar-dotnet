@@ -19,8 +19,6 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Arrays;
-import java.util.List;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -28,6 +26,9 @@ import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CSharpUnitTestResultsProvider {
 

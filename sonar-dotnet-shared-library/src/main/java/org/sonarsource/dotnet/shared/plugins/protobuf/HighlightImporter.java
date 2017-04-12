@@ -19,14 +19,15 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.util.function.Predicate;
-import javax.annotation.CheckForNull;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
+
+import javax.annotation.CheckForNull;
+import java.util.function.Predicate;
 
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 

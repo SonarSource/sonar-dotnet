@@ -19,11 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Map;
-import java.util.function.Predicate;
-
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -40,11 +35,12 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.*;
 
 public abstract class AbstractSensor {
   private static final Logger LOG = Loggers.get(AbstractSensor.class);

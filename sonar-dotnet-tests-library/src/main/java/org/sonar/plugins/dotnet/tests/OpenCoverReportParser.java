@@ -19,12 +19,13 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 public class OpenCoverReportParser implements CoverageParser {
 

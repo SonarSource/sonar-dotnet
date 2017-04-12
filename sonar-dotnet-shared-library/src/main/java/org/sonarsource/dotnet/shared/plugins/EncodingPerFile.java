@@ -19,9 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.util.Map;
 import org.sonar.api.CoreProperties;
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.BatchSide;
@@ -33,6 +30,10 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
+
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.util.Map;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
 

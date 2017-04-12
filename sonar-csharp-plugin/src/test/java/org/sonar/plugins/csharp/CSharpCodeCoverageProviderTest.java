@@ -20,15 +20,16 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
-import java.lang.reflect.Constructor;
-import java.util.List;
-import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageReportImportSensor;
+
+import java.lang.reflect.Constructor;
+import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

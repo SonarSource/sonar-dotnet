@@ -19,10 +19,11 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.io.File;
-import java.util.WeakHashMap;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import java.io.File;
+import java.util.WeakHashMap;
 
 class CoverageCache {
 

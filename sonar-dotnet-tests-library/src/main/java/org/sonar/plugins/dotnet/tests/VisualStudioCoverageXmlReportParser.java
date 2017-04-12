@@ -21,10 +21,11 @@ package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import java.io.File;
-import java.io.IOException;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import java.io.File;
+import java.io.IOException;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 

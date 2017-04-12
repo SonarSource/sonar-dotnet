@@ -21,9 +21,10 @@ package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
-import java.io.File;
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.config.Settings;
+
+import java.io.File;
 
 @BatchSide
 public class CoverageAggregator {

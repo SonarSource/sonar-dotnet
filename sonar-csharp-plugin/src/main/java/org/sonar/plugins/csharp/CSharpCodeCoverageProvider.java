@@ -19,14 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Arrays;
-import java.util.List;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CSharpCodeCoverageProvider {
 

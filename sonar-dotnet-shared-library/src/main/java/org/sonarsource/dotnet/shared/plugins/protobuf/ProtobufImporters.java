@@ -19,11 +19,12 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.util.function.Predicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
+
+import java.util.function.Predicate;
 
 public final class ProtobufImporters {
 

@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -19,14 +19,15 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.File;
-import java.io.IOException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+
+import java.io.File;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toInputFile;

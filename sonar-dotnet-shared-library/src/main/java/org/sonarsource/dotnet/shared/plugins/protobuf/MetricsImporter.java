@@ -19,9 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.function.Predicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -31,6 +28,10 @@ import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.function.Predicate;
 
 class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
 

@@ -19,17 +19,17 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile.Type;
+import org.sonar.api.batch.rule.ActiveRule;
+import org.sonar.api.batch.sensor.SensorContext;
+
 import java.io.File;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile.Type;
-import org.sonar.api.batch.rule.ActiveRule;
-import org.sonar.api.batch.sensor.SensorContext;
 
 public class AnalysisInputXml {
   private AnalysisInputXml() {

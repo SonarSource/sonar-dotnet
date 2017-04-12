@@ -19,7 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.util.function.Predicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -27,6 +26,8 @@ import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
+
+import java.util.function.Predicate;
 
 import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
 

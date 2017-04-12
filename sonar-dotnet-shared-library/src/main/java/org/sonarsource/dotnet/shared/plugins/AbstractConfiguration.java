@@ -19,17 +19,18 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import org.sonar.api.batch.BatchSide;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.config.Settings;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.StreamSupport;
-import org.sonar.api.batch.BatchSide;
-import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.config.Settings;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 @BatchSide
 @ScannerSide

@@ -20,18 +20,15 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
 import com.sonar.orchestrator.build.SonarScanner;
-
-import java.io.File;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.sonarqube.ws.WsMeasures.Measure;
 
-import static com.sonar.it.csharp.Tests.getComponent;
-import static com.sonar.it.csharp.Tests.getMeasure;
-import static com.sonar.it.csharp.Tests.getMeasureAsInt;
+import java.io.File;
+
+import static com.sonar.it.csharp.Tests.*;
 import static org.apache.commons.lang.StringUtils.countMatches;
 import static org.fest.assertions.Assertions.assertThat;
 

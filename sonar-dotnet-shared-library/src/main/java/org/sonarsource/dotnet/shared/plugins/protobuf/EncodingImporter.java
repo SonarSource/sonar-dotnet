@@ -19,13 +19,14 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import java.nio.charset.Charset;
-import java.util.HashMap;
-import java.util.Map;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
+
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
 

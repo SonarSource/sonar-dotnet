@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.io.File;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

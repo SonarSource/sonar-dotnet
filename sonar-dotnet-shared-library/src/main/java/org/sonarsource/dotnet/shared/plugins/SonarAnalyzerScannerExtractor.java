@@ -19,13 +19,14 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.utils.ZipUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 
 @BatchSide
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)

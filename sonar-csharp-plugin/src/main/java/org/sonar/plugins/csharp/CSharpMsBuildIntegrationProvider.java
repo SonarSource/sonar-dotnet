@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.util.Collections;
-import java.util.List;
 import org.sonar.api.PropertyType;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CSharpMsBuildIntegrationProvider {
 

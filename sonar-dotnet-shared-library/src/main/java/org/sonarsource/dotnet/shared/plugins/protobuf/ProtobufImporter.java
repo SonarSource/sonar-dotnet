@@ -20,11 +20,12 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
+
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
 

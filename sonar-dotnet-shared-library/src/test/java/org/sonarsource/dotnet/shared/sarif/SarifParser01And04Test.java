@@ -21,6 +21,13 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
+import org.sonar.api.utils.log.LogTester;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,14 +36,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.InOrder;
-import org.mockito.Mockito;
-import org.sonar.api.utils.log.LogTester;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 

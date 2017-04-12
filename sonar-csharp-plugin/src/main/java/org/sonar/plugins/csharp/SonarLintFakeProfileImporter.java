@@ -19,10 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.io.Reader;
 import org.sonar.api.profiles.ProfileImporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.utils.ValidationMessages;
+
+import java.io.Reader;
 
 // SONARCS-558 workaround for SONAR-6969
 public class SonarLintFakeProfileImporter extends ProfileImporter {
