@@ -63,7 +63,7 @@ public abstract class AbstractConfiguration {
     }
     Path analyzerOutputDir = protobufReportPathFromScanner();
 
-    if (!Files.exists(analyzerOutputDir)) {
+    if (!analyzerOutputDir.toFile().exists()) {
       LOG.info("Analyzer working directory does not exist");
       return false;
     }

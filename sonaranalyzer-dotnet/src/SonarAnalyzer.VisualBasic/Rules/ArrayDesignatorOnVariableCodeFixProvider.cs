@@ -31,7 +31,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class ArrayDesignatorOnVariableCodeFixProvider : SonarCodeFixProvider
+    public sealed class ArrayDesignatorOnVariableCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Move the array designator to the type";
         public sealed override ImmutableArray<string> FixableDiagnosticIds

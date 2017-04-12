@@ -31,12 +31,12 @@ import java.util.Set;
 
 public class WildcardPatternFileProvider {
 
-  public static final String CURRENT_FOLDER = ".";
-  public static final String PARENT_FOLDER = "..";
+  private static final String CURRENT_FOLDER = ".";
+  private static final String PARENT_FOLDER = "..";
 
-  public static final String RECURSIVE_PATTERN = "**";
-  public static final String ZERO_OR_MORE_PATTERN = "*";
-  public static final String ANY_PATTERN = "?";
+  private static final String RECURSIVE_PATTERN = "**";
+  private static final String ZERO_OR_MORE_PATTERN = "*";
+  private static final String ANY_PATTERN = "?";
 
   private final File baseDir;
   private final String directorySeparator;
@@ -46,7 +46,7 @@ public class WildcardPatternFileProvider {
     this.directorySeparator = directorySeparator;
   }
 
-  public Set<File> listFiles(String pattern) {
+  Set<File> listFiles(String pattern) {
     List<String> elements = ImmutableList.copyOf(Splitter.on(directorySeparator).split(pattern));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);

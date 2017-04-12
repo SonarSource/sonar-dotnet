@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private sealed class CheckedKind
         {
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IssueReportLocation = node => ((WhileStatementSyntax)node).WhileKeyword.GetLocation()
             });
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!checkedKind.Validator(c.Node))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, checkedKind.IssueReportLocation(c.Node), checkedKind.Value));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, checkedKind.IssueReportLocation(c.Node), checkedKind.Value));
                     }
                 },
                 CheckedKinds.Select(e => e.Kind).ToArray());

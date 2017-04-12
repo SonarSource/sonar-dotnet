@@ -33,11 +33,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class FlagsEnumZeroMember : FlagsEnumZeroMemberBase<SyntaxKind, EnumStatementSyntax, EnumMemberDeclarationSyntax>
+    public sealed class FlagsEnumZeroMember : FlagsEnumZeroMemberBase<SyntaxKind, EnumStatementSyntax, EnumMemberDeclarationSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.EnumStatement);

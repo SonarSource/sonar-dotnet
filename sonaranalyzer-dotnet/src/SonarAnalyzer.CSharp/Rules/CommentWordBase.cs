@@ -24,14 +24,18 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     public abstract class CommentWordBase : SonarDiagnosticAnalyzer
     {
         protected abstract string Word { get; }
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        protected override void Initialize(SonarAnalysisContext context)
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 c =>

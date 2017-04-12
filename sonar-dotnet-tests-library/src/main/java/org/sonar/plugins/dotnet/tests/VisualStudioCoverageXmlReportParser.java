@@ -43,7 +43,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
     private final Multimap<Integer, Integer> uncoveredLines = HashMultimap.create();
     private final Coverage coverage;
 
-    public Parser(File file, Coverage coverage) {
+    Parser(File file, Coverage coverage) {
       this.file = file;
       this.coverage = coverage;
     }

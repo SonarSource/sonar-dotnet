@@ -41,11 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<string> IgnoredMethodNames = ImmutableHashSet.Create("Equals", "GetHashCode");
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var method = (MethodDeclarationSyntax)c.Node;
                     if (IsMethodCandidate(method, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, method.GetLocation(), method.Identifier.ValueText, "method"));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, method.GetLocation(), method.Identifier.ValueText, "method"));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var property = (PropertyDeclarationSyntax)c.Node;
                     if (IsPropertyCandidate(property, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, property.GetLocation(), property.Identifier.ValueText, "property"));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, property.GetLocation(), property.Identifier.ValueText, "property"));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);

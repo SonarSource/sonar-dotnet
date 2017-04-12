@@ -53,10 +53,15 @@ namespace SonarAnalyzer.Rules
 
             if (ReservedExceptionTypeNames.Contains(exceptionTypeFullName))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, GetLocation(context.Node), exceptionTypeFullName));
+                context.ReportDiagnostic(Diagnostic.Create(Rule, GetLocation(context.Node),
+                    exceptionTypeFullName));
             }
         }
 
         protected abstract Location GetLocation(SyntaxNode node);
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

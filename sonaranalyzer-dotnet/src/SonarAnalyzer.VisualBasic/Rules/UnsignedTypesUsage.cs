@@ -25,12 +25,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class UnsignedTypesUsage : SonarDiagnosticAnalyzer
+    public sealed class UnsignedTypesUsage : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2374";
         private const string MessageFormat = "Change this unsigned type to '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax).Symbol as ITypeSymbol;
                     if (typeSymbol.IsAny(KnownType.UnsignedIntegers))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, typeSyntax.GetLocation(),
+                        c.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation(),
                             SignedPairs[typeSymbol.SpecialType]));
                     }
                 },

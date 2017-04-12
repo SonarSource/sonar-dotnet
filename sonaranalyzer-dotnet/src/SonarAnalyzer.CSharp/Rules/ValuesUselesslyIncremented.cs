@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -38,9 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -62,12 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (increment.Parent is ReturnStatementSyntax)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
                         return;
                     }
                     if (increment.Parent is ArrowExpressionClauseSyntax)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
                         return;
                     }
 
@@ -77,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         assignment.Right == increment &&
                         EquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, increment.GetLocation(), operatorText));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
                     }
                 },
                 SyntaxKind.PostIncrementExpression,

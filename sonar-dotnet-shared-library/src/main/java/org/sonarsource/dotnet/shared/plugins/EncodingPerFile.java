@@ -20,7 +20,6 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 import org.sonar.api.CoreProperties;
@@ -54,11 +53,11 @@ public class EncodingPerFile {
     this.sonarQubeVersion = sonarQubeVersion;
   }
 
-  public void init(Path reportDir) {
+  void init(Path reportDir) {
     EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
 
     Path encodingReportProtobuf = reportDir.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
-    if (Files.exists(encodingReportProtobuf)) {
+    if (encodingReportProtobuf.toFile().exists()) {
       encodingImporter.accept(encodingReportProtobuf);
     } else {
       LOG.warn("Protobuf file not found: {}", encodingReportProtobuf);
@@ -67,7 +66,7 @@ public class EncodingPerFile {
     this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
   }
 
-  public boolean encodingMatch(InputFile inputFile) {
+  boolean encodingMatch(InputFile inputFile) {
     String inputFilePath = inputFile.path().toAbsolutePath().toString();
 
     if (!roslynEncodingPerPath.containsKey(inputFilePath)) {

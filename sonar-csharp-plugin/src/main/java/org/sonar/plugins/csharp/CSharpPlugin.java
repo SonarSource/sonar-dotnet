@@ -47,12 +47,12 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 })
 public class CSharpPlugin implements Plugin {
 
-  public static final String LANGUAGE_KEY = "cs";
-  public static final String LANGUAGE_NAME = "C#";
+  static final String LANGUAGE_KEY = "cs";
+  static final String LANGUAGE_NAME = "C#";
 
-  public static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
-  public static final String FILE_SUFFIXES_DEFVALUE = ".cs";
-  public static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
+  static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
+  static final String FILE_SUFFIXES_DEFVALUE = ".cs";
+  static final String IGNORE_HEADER_COMMENTS = "sonar.cs.ignoreHeaderComments";
 
   @Override
   public void define(Context context) {

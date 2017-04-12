@@ -4,58 +4,6 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  21,
-"endLine":  147,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
-"region":  {
-"startLine":  303,
-"startColumn":  17,
-"endLine":  303,
-"endColumn":  92
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  19,
-"endLine":  78,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
-"region":  {
-"startLine":  350,
-"startColumn":  19,
-"endLine":  350,
-"endColumn":  78
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
 "uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  630,
@@ -75,19 +23,6 @@
 "startColumn":  21,
 "endLine":  170,
 "endColumn":  92
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Event\StandardOutLogger.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  19,
-"endLine":  37,
-"endColumn":  89
 }
 }
 },
@@ -121,38 +56,12 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
-"region":  {
-"startLine":  152,
-"startColumn":  19,
-"endLine":  152,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
 "uri":  "akka.net\src\core\Akka\Routing\RouterPoolActor.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  21,
 "endLine":  34,
 "endColumn":  89
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\Serialization\JavaSerializer.cs",
-"region":  {
-"startLine":  40,
-"startColumn":  19,
-"endLine":  40,
-"endColumn":  53
 }
 }
 }

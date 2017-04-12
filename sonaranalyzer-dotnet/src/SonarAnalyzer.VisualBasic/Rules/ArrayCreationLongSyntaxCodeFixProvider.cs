@@ -30,7 +30,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class ArrayCreationLongSyntaxCodeFixProvider : SonarCodeFixProvider
+    public sealed class ArrayCreationLongSyntaxCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Use an array literal";
         public sealed override ImmutableArray<string> FixableDiagnosticIds

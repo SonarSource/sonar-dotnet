@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class PropertyName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class PropertyName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2366";
         private const string MessageFormat = "Rename this property to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the property names against.", NamingHelper.PascalCasingPattern)]
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     if (!NamingHelper.IsRegexMatch(propertyDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, propertyDeclaration.Identifier.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.PropertyStatement);

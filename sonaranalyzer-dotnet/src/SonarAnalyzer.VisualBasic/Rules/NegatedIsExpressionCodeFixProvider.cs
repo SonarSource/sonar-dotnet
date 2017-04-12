@@ -32,7 +32,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class NegatedIsExpressionCodeFixProvider : SonarCodeFixProvider
+    public sealed class NegatedIsExpressionCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Replace 'Not...Is...' with 'IsNot'.";
         public sealed override ImmutableArray<string> FixableDiagnosticIds

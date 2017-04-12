@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnostic(
                     Diagnostic.Create(
-                        Rule,
+                        rule,
                         getLocation(node),
                         walker.IncrementLocations.ToAdditionalLocations(),
                         walker.IncrementLocations.ToProperties(),

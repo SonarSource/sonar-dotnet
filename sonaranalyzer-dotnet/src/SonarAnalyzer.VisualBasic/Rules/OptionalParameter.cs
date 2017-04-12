@@ -33,11 +33,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class OptionalParameter : OptionalParameterBase<SyntaxKind, MethodBaseSyntax, ParameterSyntax>
+    public sealed class OptionalParameter : OptionalParameterBase<SyntaxKind, MethodBaseSyntax, ParameterSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(

@@ -19,15 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Throwables;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Maps;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
+
+import com.google.common.collect.Multimap;
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -80,7 +80,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
   }
 
-  boolean shouldExecuteOnProject(FileSystem fs) {
+  private static boolean shouldExecuteOnProject(FileSystem fs) {
     if (!SystemUtils.IS_OS_WINDOWS) {
       LOG.debug("OS is not Windows. Skip Sensor.");
       return false;
@@ -131,7 +131,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
       LOG.warn("* The use of MSBuild 12 or the sonar-scanner to analyze C# projects is DEPRECATED *");
       LOG.warn("***********************************************************************************");
 
-      ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+      Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
@@ -150,9 +150,9 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     Path analysisOutput = protobufReportPathForMSBuild12(context);
 
     try {
-      Files.write(analysisInput, analysisSettings.getBytes(Charsets.UTF_8));
+      Files.write(analysisInput, analysisSettings.getBytes(StandardCharsets.UTF_8));
     } catch (IOException e) {
-      throw Throwables.propagate(e);
+      throw new IllegalStateException(e);
     }
 
     File executableFile = extractor.executableFile(CSharpPlugin.LANGUAGE_KEY);
@@ -169,12 +169,12 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
-    ImmutableMultimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+    Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
       .findAll()
       .stream()
       .map(ActiveRule::ruleKey)
       .collect(toList()));
-    final Map<String, String> repositoryKeyByRoslynRuleKey = Maps.newHashMap();
+    final Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
     for (RuleKey activeRoslynRuleKey : activeRoslynRulesByPartialRepoKey.values()) {
       String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
       if (previousRepositoryKey != null) {
@@ -188,7 +188,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     SarifParserFactory.create(new File(reportPath)).accept(callback);
   }
 
-  public final Path protobufReportPathForMSBuild12(SensorContext context) {
+  private Path protobufReportPathForMSBuild12(SensorContext context) {
     // With MSBuild 12 or old version of the scanner, protobuf reports are not generated
     // so return a new directory in the SQ working dir and the sensor will be responsible to execute analyzer.
     return context.fileSystem().workDir().toPath().resolve(config.getAnalyzerReportDir());

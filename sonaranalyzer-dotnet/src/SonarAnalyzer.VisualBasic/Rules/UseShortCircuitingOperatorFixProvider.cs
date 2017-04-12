@@ -27,7 +27,7 @@ using SonarAnalyzer.Rules.Common;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public class UseShortCircuitingOperatorFixProvider : UseShortCircuitingOperatorFixProviderBase<BinaryExpressionSyntax>
+    public sealed class UseShortCircuitingOperatorFixProvider : UseShortCircuitingOperatorFixProviderBase<BinaryExpressionSyntax>
     {
         internal override bool IsCandidateExpression(BinaryExpressionSyntax expression)
         {

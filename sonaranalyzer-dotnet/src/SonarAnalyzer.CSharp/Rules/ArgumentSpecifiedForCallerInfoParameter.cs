@@ -25,30 +25,35 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ArgumentSpecifiedForCallerInfoParameter : SonarDiagnosticAnalyzer
+    public sealed class ArgumentSpecifiedForCallerInfoParameter : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3236";
         private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        private static readonly ISet<KnownType> CallerInfoAttributesToReportOn = new HashSet<KnownType>
+        {
+            KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
+            KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
+        };
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var methodCall = (InvocationExpressionSyntax)c.Node;
                     var methodParameterLookup = new MethodParameterLookup(methodCall, c.SemanticModel);
-                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                        .ToList();
 
                     var methodSymbol = methodParameterLookup.MethodSymbol;
                     if (methodSymbol == null)
@@ -56,6 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings();
                     foreach (var argumentMapping in argumentMappings)
                     {
                         var parameter = argumentMapping.Parameter;
@@ -69,12 +75,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         var symbolForArgument = c.SemanticModel.GetSymbolInfo(argument.Expression).Symbol as IParameterSymbol;
                         if (symbolForArgument != null &&
-                            object.Equals(callerInfoAttributeDataOnCall.AttributeClass, GetCallerInfoAttribute(symbolForArgument)?.AttributeClass))
+                            Equals(callerInfoAttributeDataOnCall.AttributeClass, GetCallerInfoAttribute(symbolForArgument)?.AttributeClass))
                         {
                             continue;
                         }
 
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, argument.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -83,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter)
         {
             return parameter.GetAttributes()
-                .FirstOrDefault(attr => attr.AttributeClass.IsAny(KnownType.CallerInfoAttributes));
+                .FirstOrDefault(attr => attr.AttributeClass.IsAny(CallerInfoAttributesToReportOn));
         }
     }
 }

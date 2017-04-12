@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class RedundantExitSelect : SonarDiagnosticAnalyzer
+    public sealed class RedundantExitSelect : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2951";
         private const string MessageFormat = "Remove this redundant use of 'Exit Select'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -54,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     if (caseBlock.Statements.Last() == exit)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, exit.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, exit.GetLocation()));
                     }
                 },
                 SyntaxKind.ExitSelectStatement);

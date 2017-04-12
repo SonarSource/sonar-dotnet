@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.Common
         where TAssignmentExpression : SyntaxNode
         where TBinaryExpression : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
@@ -84,6 +84,10 @@ namespace SonarAnalyzer.Rules.Common
 
             context.ReportDiagnostic(Diagnostic.Create(Rule, assignment.GetLocation()));
         }
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private SyntaxNode GetInnerMostLeftOfConcatenation(TBinaryExpression binaryExpression)
         {

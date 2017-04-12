@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -31,18 +30,18 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class PropertyGetterWithThrow : PropertyGetterWithThrowBase<SyntaxKind, AccessorDeclarationSyntax>
+    public sealed class PropertyGetterWithThrow : PropertyGetterWithThrowBase<SyntaxKind, AccessorDeclarationSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.ThrowStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
+        protected override SyntaxKind ThrowSyntaxKind => SyntaxKind.ThrowStatement;
 
         protected override bool IsGetter(AccessorDeclarationSyntax propertyGetter) => propertyGetter.IsKind(SyntaxKind.GetAccessorDeclaration);
         protected override bool IsIndexer(AccessorDeclarationSyntax propertyGetter) => propertyGetter.Parent.Parent is IndexerDeclarationSyntax;
+
+        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) => ((ThrowStatementSyntax)syntaxNode).Expression;
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
     }

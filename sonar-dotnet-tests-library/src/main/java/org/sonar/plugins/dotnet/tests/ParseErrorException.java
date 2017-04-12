@@ -19,11 +19,11 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-public class ParseErrorException extends RuntimeException {
+class ParseErrorException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
-  public ParseErrorException(String message) {
+  ParseErrorException(String message) {
     super(message);
   }
 

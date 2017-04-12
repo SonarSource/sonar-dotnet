@@ -325,12 +325,12 @@ namespace SonarAnalyzer.UnitTest
         internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
             DiagnosticAnalyzer diagnosticAnalyzer)
         {
-            var id = diagnosticAnalyzer.SupportedDiagnostics.Single().Id;
+            var ids = new HashSet<string>(diagnosticAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
 
             var diagnostics = GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }).ToList();
             VerifyNoExceptionThrown(diagnostics);
 
-            return diagnostics.Where(d => id == d.Id);
+            return diagnostics.Where(d => ids.Contains(d.Id));
         }
 
         private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics)

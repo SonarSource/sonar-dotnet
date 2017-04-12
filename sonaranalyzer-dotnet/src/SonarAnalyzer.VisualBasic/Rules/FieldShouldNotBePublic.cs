@@ -18,25 +18,24 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using System.Linq;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class FieldShouldNotBePublic : FieldShouldNotBePublicBase<SyntaxKind, FieldDeclarationSyntax, ModifiedIdentifierSyntax>
+    public sealed class FieldShouldNotBePublic : FieldShouldNotBePublicBase<SyntaxKind, FieldDeclarationSyntax, ModifiedIdentifierSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.FieldDeclaration);
@@ -46,6 +45,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEnumerable<ModifiedIdentifierSyntax> GetVariables(FieldDeclarationSyntax fieldDeclaration) =>
             fieldDeclaration.Declarators.SelectMany(d => d.Names);
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

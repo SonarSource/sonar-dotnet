@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class SimpleDoLoop : SonarDiagnosticAnalyzer
+    public sealed class SimpleDoLoop : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2340";
         private const string MessageFormat = "Use a structured loop instead.";
@@ -37,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var doBlock = (DoLoopBlockSyntax)c.Node;
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, doBlock.DoStatement.DoKeyword.GetLocation()));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, doBlock.DoStatement.DoKeyword.GetLocation()));
                 },
                 SyntaxKind.SimpleDoLoopBlock);
         }

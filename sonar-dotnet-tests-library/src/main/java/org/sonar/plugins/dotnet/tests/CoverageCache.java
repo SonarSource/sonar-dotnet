@@ -24,13 +24,13 @@ import java.util.WeakHashMap;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-public class CoverageCache {
+class CoverageCache {
 
   private static final Logger LOG = Loggers.get(CoverageCache.class);
 
   private final WeakHashMap<String, Coverage> cache = new WeakHashMap<>();
 
-  public Coverage readCoverageFromCacheOrParse(CoverageParser parser, File reportFile) {
+  Coverage readCoverageFromCacheOrParse(CoverageParser parser, File reportFile) {
     String path = reportFile.getAbsolutePath();
     Coverage coverage = cache.get(path);
     if (coverage == null) {

@@ -30,14 +30,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class StaticFieldWrittenFromInstanceConstructor : StaticFieldWrittenFrom
+    public sealed class StaticFieldWrittenFromInstanceConstructor : StaticFieldWrittenFrom
     {
         internal const string DiagnosticId = "S3010";
         private const string MessageFormat = "Remove this assignment of '{0}' or initialize it statically.";
 
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol)

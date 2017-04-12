@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -31,15 +30,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class PropertyGetterWithThrow : PropertyGetterWithThrowBase<SyntaxKind, AccessorBlockSyntax>
+    public sealed class PropertyGetterWithThrow : PropertyGetterWithThrowBase<SyntaxKind, AccessorBlockSyntax>
     {
-        protected static readonly DiagnosticDescriptor rule =
+        private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
-        private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(SyntaxKind.ThrowStatement);
-        public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
+        protected override SyntaxKind ThrowSyntaxKind => SyntaxKind.ThrowStatement;
 
         protected override bool IsGetter(AccessorBlockSyntax propertyGetter) => propertyGetter.IsKind(SyntaxKind.GetAccessorBlock);
 
@@ -53,6 +50,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return propertyBlock.PropertyStatement.ParameterList != null &&
                 propertyBlock.PropertyStatement.ParameterList.Parameters.Any();
         }
+
+        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) => ((ThrowStatementSyntax)syntaxNode).Expression;
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }

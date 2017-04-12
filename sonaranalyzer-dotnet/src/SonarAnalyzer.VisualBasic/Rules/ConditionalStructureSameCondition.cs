@@ -27,17 +27,17 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ConditionalStructureSameCondition : ConditionalStructureSameConditionBase
+    public sealed class ConditionalStructureSameCondition : ConditionalStructureSameConditionBase
     {
         internal static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

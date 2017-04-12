@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class UseWithStatement : ParameterLoadingDiagnosticAnalyzer
+    public sealed class UseWithStatement : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2375";
         private const string MessageFormat = "Wrap this and the following {0} statement{2} that use '{1}' in a 'With' statement.";
@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultMinimumSeriesLength = 6;
 
@@ -119,7 +118,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (matchCount >= MinimumSeriesLength)
             {
                 var nextStatementCount = matchCount - 1;
-                context.ReportDiagnostic(Diagnostic.Create(Rule, executableStatement.GetLocation(),
+                context.ReportDiagnostic(Diagnostic.Create(rule, executableStatement.GetLocation(),
                     nextStatementCount, expression.ToString(), nextStatementCount == 1 ? string.Empty : "s"));
                 return true;
             }

@@ -18,17 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Common.VisualBasic
 {
-    public class Metrics : MetricsBase
+    public sealed class Metrics : MetricsBase
     {
         public Metrics(SyntaxTree tree) : base(tree)
         {
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Common.VisualBasic
 
         protected override IEnumerable<SyntaxNode> PublicApiNodes => Enumerable.Empty<SyntaxNode>(); // Not calculated for VB.Net
 
-        protected bool IsComplexityIncreasingKind(SyntaxNode node) =>
+        private bool IsComplexityIncreasingKind(SyntaxNode node) =>
             ComplexityIncreasingKinds.Contains(node.Kind());
 
         public override int GetComplexity(SyntaxNode node) =>

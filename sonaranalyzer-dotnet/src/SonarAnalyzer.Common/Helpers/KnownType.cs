@@ -123,6 +123,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Security_Cryptography_HashAlgorithm = new KnownType("System.Security.Cryptography.HashAlgorithm");
         public static readonly KnownType System_Security_Cryptography_SHA1 = new KnownType("System.Security.Cryptography.SHA1");
         public static readonly KnownType System_Security_Cryptography_MD5 = new KnownType("System.Security.Cryptography.MD5");
+        public static readonly KnownType System_Security_Cryptography_DSA = new KnownType("System.Security.Cryptography.DSA");
+        public static readonly KnownType System_Security_Cryptography_RC2 = new KnownType("System.Security.Cryptography.RC2");
+        public static readonly KnownType System_Security_Cryptography_RIPEMD160 = new KnownType("System.Security.Cryptography.RIPEMD160");
+        public static readonly KnownType System_Security_Cryptography_HMACSHA1 = new KnownType("System.Security.Cryptography.HMACSHA1");
+        public static readonly KnownType System_Security_Cryptography_HMACMD5 = new KnownType("System.Security.Cryptography.HMACMD5");
+        public static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new KnownType("System.Security.Cryptography.HMACRIPEMD160");
 
         public static readonly KnownType System_Reflection_Assembly = new KnownType("System.Reflection.Assembly");
         public static readonly KnownType System_Reflection_AssemblyVersionAttribute = new KnownType("System.Reflection.AssemblyVersionAttribute");

@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<SyntaxTrivia> CreateFileHeaderTrivias(string comment)
         {
-            var endOfLineTrivia = SyntaxFactory.CarriageReturnLineFeed;
-            return new[] { SyntaxFactory.Comment(comment), endOfLineTrivia, endOfLineTrivia };
+            return new[] { SyntaxFactory.Comment(comment), SyntaxFactory.CarriageReturnLineFeed };
         }
     }
 }

@@ -23,25 +23,25 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EndStatementUsage : SonarDiagnosticAnalyzer
+    public sealed class EndStatementUsage : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1147";
         private const string MessageFormat = "Remove this call to 'End' or ensure it is really required.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())),
+                c => c.ReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.EndStatement);
         }
     }

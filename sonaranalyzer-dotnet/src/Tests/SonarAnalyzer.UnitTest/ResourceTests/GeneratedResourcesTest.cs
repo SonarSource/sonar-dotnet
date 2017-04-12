@@ -28,6 +28,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 using FluentAssertions;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.ResourceTests
 {
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
                            .Where(typeof(SonarDiagnosticAnalyzer).IsAssignableFrom)
                            .Where(t => !t.IsAbstract)
                            .Where(IsNotUtilityAnalyzer)
-                           .Select(GetRuleNameFromAttributes)
+                           .SelectMany(GetRuleNamesFromAttributes)
                            .OrderBy(name => name)
                            .ToArray();
         }
@@ -85,13 +86,11 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
             return ruleNames;
         }
 
-        private static string GetRuleNameFromAttributes(Type analyzerType)
+        private static IEnumerable<string> GetRuleNamesFromAttributes(Type analyzerType)
         {
-            var name = analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
+            return analyzerType.GetCustomAttributes(typeof(RuleAttribute), true)
                                 .OfType<RuleAttribute>()
-                                .FirstOrDefault()
-                                ?.Key;
-            return name;
+                                .Select(attr => attr.Key);
         }
 
         private static string GetRuleFromFileName(string fileName)

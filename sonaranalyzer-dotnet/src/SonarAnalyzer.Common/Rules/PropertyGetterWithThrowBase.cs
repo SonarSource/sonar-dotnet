@@ -22,6 +22,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -31,13 +32,20 @@ namespace SonarAnalyzer.Rules.Common
         protected const string MessageFormat = "Remove the exception throwing from this property getter, or refactor the property into a method.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
+        internal static readonly ISet<KnownType> AllowedExceptionTypes = new HashSet<KnownType>
+        {
+            KnownType.System_NotImplementedException,
+            KnownType.System_NotSupportedException
+        };
     }
 
-    public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> : PropertyGetterWithThrowBase
+    public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> :
+        PropertyGetterWithThrowBase
         where TLanguageKindEnum : struct
         where TAccessorSyntax : SyntaxNode
     {
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<TLanguageKindEnum>(
                 GeneratedCodeRecognizer,
@@ -59,9 +67,17 @@ namespace SonarAnalyzer.Rules.Common
                     cbc.RegisterSyntaxNodeAction(
                         c =>
                         {
+                            var throwExpression = GetThrowExpression(c.Node);
+                            var symbol = c.SemanticModel.GetSymbolInfo(throwExpression).Symbol;
+                            if (symbol == null ||
+                                symbol.ContainingType.DerivesFromAny(AllowedExceptionTypes))
+                            {
+                                return;
+                            }
+
                             c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation()));
                         },
-                        SyntaxKindsOfInterest.ToArray());
+                        ThrowSyntaxKind);
                 });
         }
 
@@ -69,6 +85,11 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract bool IsGetter(TAccessorSyntax propertyGetter);
 
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+        protected abstract TLanguageKindEnum ThrowSyntaxKind { get; }
+        protected abstract SyntaxNode GetThrowExpression(SyntaxNode syntaxNode);
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

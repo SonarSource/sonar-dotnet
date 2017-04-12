@@ -25,12 +25,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class OnErrorStatement : SonarDiagnosticAnalyzer
+    public sealed class OnErrorStatement : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2359";
         private const string MessageFormat = "Remove this use of 'OnError'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorGoToStatementSyntax)c.Node;
-                    c.ReportDiagnostic(Diagnostic.Create(Rule,
+                    c.ReportDiagnostic(Diagnostic.Create(rule,
                         Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.OnKeyword.SpanStart, node.ErrorKeyword.Span.End))));
                 },
                 SyntaxKind.OnErrorGoToLabelStatement,
@@ -57,7 +58,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var node = (OnErrorResumeNextStatementSyntax)c.Node;
-                    c.ReportDiagnostic(Diagnostic.Create(Rule,
+                    c.ReportDiagnostic(Diagnostic.Create(rule,
                         Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.OnKeyword.SpanStart, node.ErrorKeyword.Span.End))));
                 },
                 SyntaxKind.OnErrorResumeNextStatement);

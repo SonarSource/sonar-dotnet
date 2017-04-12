@@ -19,6 +19,7 @@
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
+	<analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
   <dependencies>
@@ -93,6 +94,17 @@
   </build>
 
   <profiles>
+	<profile>
+	  <id>debug</id>
+	  <activation>
+        <property>
+          <name>debug</name>
+        </property>
+      </activation>
+	  <properties>
+	    <analyzer.build.conf>Debug</analyzer.build.conf>
+	  </properties>
+	</profile>
     <profile>
       <id>protobuf-compile</id>
       <activation>
@@ -111,17 +123,13 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <executions>
               <execution>
-                <id>unzip-nuget</id>
+                <id>copy-protobuf</id>
                 <phase>validate</phase>
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
-                    <unzip src="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/Release/SonarAnalyzer.Scanner.${project.version}.nupkg" dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/" />
-                    <delete>
-                      <fileset dir="src/main/protobuf" excludes=".gitignore"></fileset>
-                    </delete>
                     <copy todir="src/main/protobuf">
-                      <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner/protobuf">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}/protobuf">
                         <include name="*.proto"/>
                       </fileset>
                     </copy>

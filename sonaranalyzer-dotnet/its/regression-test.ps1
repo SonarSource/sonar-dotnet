@@ -1,158 +1,84 @@
 $importBeforePath = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
 
-function testExitCode(){
-    If($LASTEXITCODE -ne 0) {
-        write-host -f green "lastexitcode: ${LASTEXITCODE}"
-        exit $LASTEXITCODE
+. (Join-Path $PSScriptRoot "..\build\build-utils.ps1")
+
+function Test-SonarAnalyzerDll {
+    if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
+        throw "Could not find '.\binaries\SonarAnalyzer.dll'."
     }
 }
 
-# Possible outcomes
-function success(){
-    Write-Host "SUCCESS: No differences were found!"
-    cleanup "0"
-}
-
-function build_error(){
-    param ([string]$project)
-
-    Write-Host "ERROR: ${project} build failed. See 'output/${project}.log' for more details."
-    cleanup "1"
-}
-
-function diff_error(){
-    Write-Host "ERROR: There are differences between the actual and the expected issues."
-    cleanup "2"
-}
-
-function ps_error(){
-    Write-Host "ERROR: Error while executing an internal PowerShell script."
-    cleanup "3"
-}
-
-function binaries_missing(){
-	Write-Host "ERROR: Could not find '.\binaries\SonarAnalyzer.dll'."
-    cleanup "4"
-}
-
-# Checks
-function preTestChecks(){
-	if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
-		binaries_missing
-	}
-}
-
-# Cleanup
-function cleanup(){
-    param ([string]$exit)
-
-    # Uninstall the imports before targets file
-    Remove-Item -Force "${importBeforePath}\SonarAnalyzer.Testing.ImportBefore.targets"
-    # Restore current working directory
-    Pop-Location -StackName "regression"
-    # Exit
-    exit $exit
-}
-
-# Building projects
-function buildProject(){
-    param ([string]$ProjectName, [string]$SolutionRelativePath)
-
-	Write-Host "Building: $ProjectName"
+function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
-	$solutionPath = ".\${ProjectName}\${SolutionRelativePath}"
-	$Env:PROJECT = $ProjectName # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
-	& nuget restore $solutionPath -Verbosity quiet
-	& msbuild /verbosity:detailed /m /t:rebuild /p:Configuration=Debug $solutionPath > .\output\$ProjectName.log
-    If($LASTEXITCODE -ne 0) { build_error $ProjectName }
+    
+    $solutionPath = (Resolve-Path ".\${ProjectName}\${SolutionRelativePath}")
+    
+    # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    $Env:PROJECT = $ProjectName
+    
+    (Build-Solution $solutionPath /v:detailed /m /t:rebuild /p:Configuration=Debug) `
+        > .\output\$ProjectName.log
 }
 
-
-#generate rulesest file
-function rulesetGenerator(){
-    $ErrorActionPreference = "Stop"
-
-    $max = 10000
-$s=@"
-<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="AllSonarAnalyzerRules" Description="Ruleset used to test for rule regressions." ToolsVersion="14.0">
-<!-- AD0001, the analyzer catching other analyzer exceptions, should be enabled at Error level -->
-  <Rules AnalyzerId="Roslyn.Core" RuleNamespace="Roslyn.Core">
-    <Rule Id="AD0001" Action="Error" />
-  </Rules>
-
-<!-- This list is just hardcoded for now with plausible existing & upcoming rule IDs -->
-<!-- It would be better to generate the actual list from the analyzer assemblies -->
-  <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
-"@
-    for ($i = 0; $i -le $max; $i++) {
-        $s+="    <Rule Id=""S$i"" Action=""Warning"" />`r`n"
+function Initialize-ActualFolder {
+    Write-Host "Initializing the actual issues Git repo with the expected ones..."
+    if (Test-Path .\actual) { 
+        Remove-Item -Recurse -Force actual 
     }
-$s+=@"
-  </Rules>
-  <Rules AnalyzerId="SonarAnalyzer.VisualBasic" RuleNamespace="SonarAnalyzer.VisualBasic">
-"@
-    for ($i = 0; $i -le $max; $i++) { $s+="    <Rule Id=""S$i"" Action=""Warning"" />`r`n" }
-$s+=@"
-  </Rules>
-</RuleSet>
-"@
-    $s | out-file -encoding utf8 -append ".\output\AllSonarAnalyzerRules.ruleset"
+
+    Copy-Item .\expected -Destination .\actual -Recurse
+    Exec-InLocation "actual" {
+        Exec { git init }
+        Exec { git config user.email "regression-test@example.com" }
+        Exec { git config user.name "regression-test" }
+        Exec { git add -A . }
+        Exec { git commit -m "Initial commit with expected files" | out-null }
+        Get-ChildItem * -Include *.json -Recurse | Remove-Item -Force
+    }
 }
 
-# Set the current working directory to the script's folder
-Push-Location -Path $PSScriptRoot -StackName "regression"
+function Initialize-OutputFolder {
+    if (Test-Path .\output) {
+        Remove-Item -Recurse -Force output 
+    }
+    New-Item -ItemType directory -Path .\output | out-null
+    Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
+}
 
-preTestChecks
+try {
+    Push-Location -Path $PSScriptRoot
 
-# Setup the actual folder with the expected files
-Write-Host "Initializing the actual issues Git repo with the expected ones..."
-if (Test-Path .\actual) { Remove-Item -Recurse -Force actual }
-Copy-Item .\expected -Destination .\actual -Recurse
-Push-Location actual
-git init
-testExitCode
-git config user.email "regression-test@example.com"
-testExitCode
-git config user.name "regression-test"
-testExitCode
-git add -A .
-testExitCode
-git commit -m "Initial commit with expected files" | out-null
-testExitCode
-Get-ChildItem * -Include *.json -Recurse | Remove-Item -Force
-Pop-Location
+    Test-SonarAnalyzerDll
 
-# Setup output folder
-if (Test-Path .\output) { Remove-Item -Recurse -Force output }
-New-Item -ItemType directory -Path .\output | out-null
+    Initialize-ActualFolder
+    Initialize-OutputFolder
 
-# Generate the SonarAnalyzer all rules ruleset
-rulesetGenerator
-# Install the imports before targets file
-Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse -Container
+    Write-Host "Installing the imports before targets file"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse -Container
 
-buildProject "akka.net" "src\Akka.sln"
-buildProject "Nancy" "src\Nancy.sln"
-buildProject "Ember-MM" "Ember Media Manager.sln"
+    Build-Project "akka.net" "src\Akka.sln"
+    Build-Project "Nancy" "src\Nancy.sln"
+    Build-Project "Ember-MM" "Ember Media Manager.sln"
 
-# Normalize SARIF reports
-Write-Host "Normalizing the SARIF reports"
-& ./CreateIssueReports.ps1 | out-null
-If($LASTEXITCODE -ne 0) { ps_error }
+    Write-Host "Normalizing the SARIF reports"
+    Exec { & ./CreateIssueReports.ps1 | out-null }
 
-# Compute analyzer performances
-Write-Host "Computing analyzer performances"
-& ./ExtractAnalyzerPerformancesFromLogs.ps1
-If($LASTEXITCODE -ne 0) { ps_error }
+    Write-Host "Computing analyzer performance"
+    Exec { & ./ExtractAnalyzerPerformancesFromLogs.ps1 }
 
-# Assert no differences
-Write-Host "Checking for differences..."
-Push-Location actual
-git add -A .
-testExitCode
-git diff --cached --exit-code | out-null
-If($LASTEXITCODE -ne 0) { diff_error }
-Pop-Location
+    Write-Host "Checking for differences..."
+    Exec-InLocation "actual" {
+        Exec { git add -A . }
+        Exec { git diff --cached --exit-code | out-null } -errorMessage "There are differences between the actual and the expected issues."
+    }
 
-success
+    Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
+}
+catch {
+    Write-Error $_
+    exit 1
+}
+finally {
+    Pop-Location
+    Remove-Item -Force "${importBeforePath}\SonarAnalyzer.Testing.ImportBefore.targets" -ErrorAction Ignore
+}

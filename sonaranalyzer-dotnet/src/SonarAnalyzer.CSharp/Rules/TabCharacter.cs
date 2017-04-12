@@ -28,14 +28,13 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class TabCharacter : TabCharacterBase
+    public sealed class TabCharacter : TabCharacterBase
     {
-        protected const string DiagnosticId = "S105";
-        protected const string MessageFormat = "Replace all tab characters in this file by sequences of white-spaces.";
+        private const string DiagnosticId = "S105";
+        private const string MessageFormat = "Replace all tab characters in this file by sequences of white-spaces.";
 
         internal static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         protected override DiagnosticDescriptor Rule => rule;
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;

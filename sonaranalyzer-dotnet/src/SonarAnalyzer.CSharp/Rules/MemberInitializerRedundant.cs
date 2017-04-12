@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     using SymbolWithInitializer = KeyValuePair<ISymbol, EqualsValueClauseSyntax>;
     using CtorDeclarationTuple = SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>;
+    using System.Collections.Immutable;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
@@ -47,9 +48,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -91,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (setInAllCtors)
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
+                            c.ReportDiagnostic(Diagnostic.Create(rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
                         }
                     }
                 },

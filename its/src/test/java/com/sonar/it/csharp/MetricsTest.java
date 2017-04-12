@@ -1,7 +1,7 @@
 /*
  * SonarSource :: C# :: ITs :: Plugin
- * Copyright (C) 2011-2016 SonarSource SA
- * mailto:contact AT sonarsource DOT com
+ * Copyright (C) 2011-2017 SonarSource SA
+ * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -42,7 +42,7 @@ public class MetricsTest {
   private static final String FILE = "MetricsTest:foo/Class1.cs";
 
   @ClassRule
-  public static Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
   public static void init() {

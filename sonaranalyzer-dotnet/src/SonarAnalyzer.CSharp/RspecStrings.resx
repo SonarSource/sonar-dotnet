@@ -3586,10 +3586,10 @@
     <value>Redundant parentheses should not be used</value>
   </data>
   <data name="S3236_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3236_Description" xml:space="preserve">
-    <value>Caller information attributes (CallerFilePathAttribute, CallerLineNumberAttribute, and CallerMemberNameAttribute) provide a way to get information about the caller of a method through optional parameters. But the arguments for these optional parameters are only generated if they are not explicitly defined in the call. Thus, specifying the argument values defeats the purpose of the attributes.</value>
+    <value>Caller information attributes: CallerFilePathAttribute and CallerLineNumberAttribute provide a way to get information about the caller of a method through optional parameters. But the arguments for these optional parameters are only generated if they are not explicitly defined in the call. Thus, specifying the argument values defeats the purpose of the attributes.</value>
   </data>
   <data name="S3236_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3604,7 +3604,7 @@
     <value>Minor</value>
   </data>
   <data name="S3236_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>suspicious</value>
   </data>
   <data name="S3236_Title" xml:space="preserve">
     <value>Caller information arguments should not be provided explicitly</value>

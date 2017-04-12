@@ -1,179 +1,105 @@
+[CmdletBinding(PositionalBinding = $false)]
+param (
+    [switch]$analyze = $false,
+    [switch]$test = $false,
+    [switch]$package = $false,
+    [switch]$debugBuild = $false,
+
+    [string]$githubRepo,
+    [string]$githubToken,
+    [string]$githubPullRequest,
+
+    [string]$isPullRequest,
+
+    [string]$sonarQubeProjectName = "SonarAnalyzer for C#",
+    [string]$sonarQubeProjectKey = "sonaranalyzer-csharp-vbnet",
+    [string]$sonarQubeUrl = "http://localhost:9000",
+    [string]$sonarQubeToken = $null,
+
+    [string]$certificatePath,
+
+    [string]$artifactoryUrl = "https://repox.sonarsource.com/api/nuget",
+    [string]$artifactoryUser = $env:ARTIFACTORY_DEPLOY_USERNAME,
+    [string]$artifactoryPass = $env:ARTIFACTORY_DEPLOY_PASSWORD,
+    [parameter(ValueFromRemainingArguments = $true)] $badArgs)
+
 $ErrorActionPreference = "Stop"
 
-function testExitCode(){
-    If($LASTEXITCODE -ne 0) {
-        write-host -f green "lastexitcode: $LASTEXITCODE"
-        exit $LASTEXITCODE
-    }
+if ($badArgs -Ne $null) {
+    throw "Bad arguments: $badArgs"
 }
 
-#build settings for dev-env
-if ($env:DEV -eq "true"){
-    $env:MSBUILD_PATH="msbuild"
-    $env:NUGET_PATH="nuget"
-}
+. (Join-Path $PSScriptRoot "build-utils.ps1")
 
-#download MSBuild
-    $url = "https://github.com/SonarSource-VisualStudio/sonar-msbuild-runner/releases/download/2.0/MSBuild.SonarQube.Runner-2.0.zip"
-    $output = ".\MSBuild.SonarQube.Runner.zip"    
-    Invoke-WebRequest -Uri $url -OutFile $output
-    unzip -o .\MSBuild.SonarQube.Runner.zip
-    testExitCode
+function Queue-QaBuild() {
+    Write-Header "Queueing next build..."
 
-function setVersion(
-    [string] $version)
-{
-    #generate build version from the build number
-    $buildversion="$env:BUILD_NUMBER"
+    $versionPropertiesPath = (Resolve-RepoPath "version.properties")
+
+    $version = Get-Version
     
-    $branchName = "$env:GITHUB_BRANCH"
-    $sha1 = "$env:GIT_SHA1"
+    "VERSION=${version}" `
+        | Out-File -Encoding utf8 -Append $versionPropertiesPath
 
-    #Append build number to the versions
-    (Get-Content .\build\Version.props) -replace '<NugetVersion>\$\(MainVersion\)</NugetVersion>', "<NugetVersion>`$(MainVersion).$buildversion</NugetVersion>" | Set-Content .\build\Version.props
-    (Get-Content .\build\Version.props) -replace '<AssemblyFileVersion>\$\(MainVersion\)\.0</AssemblyFileVersion>', "<AssemblyFileVersion>`$(MainVersion).$buildversion</AssemblyFileVersion>" | Set-Content .\build\Version.props
-    (Get-Content .\build\Version.props) -replace '<AssemblyInformationalVersion>Version:\$\(AssemblyFileVersion\) Branch:not-set Sha1:not-set</AssemblyInformationalVersion>', "<AssemblyInformationalVersion>Version:`$(AssemblyFileVersion) Branch:$branchName Sha1:$sha1</AssemblyInformationalVersion>" | Set-Content .\build\Version.props
-    & $env:MSBUILD_PATH  .\build\ChangeVersion.proj
-    testExitCode
-    
-    #write version to property file
-    $s="VERSION=$version"
-    Write-Host "$s"
-    $s | out-file -encoding utf8 -append ".\version.properties"
-    #convert sha1 property file to unix for jenkins compatiblity
-    Get-ChildItem .\version.properties | ForEach-Object {
-        $contents = [IO.File]::ReadAllText($_) -replace "`r`n?", "`n"
-        $utf8 = New-Object System.Text.UTF8Encoding $false
-        [IO.File]::WriteAllText($_, $contents, $utf8)
-    }
-}  
+    To-UnixLineEndings $versionPropertiesPath
 
-function generatePackages()
-{
-    #Generate the XML descriptor files for the C# plugin
-    pushd .\src\SonarAnalyzer.RuleDescriptorGenerator\bin\Release
-    .\SonarAnalyzer.RuleDescriptorGenerator.exe cs
-    .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet
-    popd
-    #generate packages
-    $files = Get-ChildItem .\src -recurse *.nuspec
-    foreach ($file in $files) {
-        $output = $file.directoryname+"\bin\Release"
-        & $env:NUGET_PATH pack $file.fullname -NoPackageAnalysis -OutputDirectory $output
-        testExitCode
-    }
+    $content = Get-Content $versionPropertiesPath
+    Write-Host "version.properties content is '{$content}'"}
+
+Set-Version
+
+Setup-NugetConfig $artifactoryUrl $artifactoryUser $artifactoryPass
+
+$branchName = Get-BranchName
+
+Write-Header "Temporary info Analyze=${analyze} Branch=${branchName} PR=${isPullRequest}"
+
+$isMaster = $branchName -Eq "master"
+$skippedAnalysis = $false
+
+if ($analyze -And $isPullRequest -Eq "true") {
+    Write-Host "Pull request '${githubPullRequest}'"
+
+    Begin-Analysis $sonarQubeUrl $sonarQubeToken $sonarQubeProjectKey $sonarQubeProjectName `
+            /d:sonar.github.pullRequest=$githubPullRequest `
+            /d:sonar.github.repository=$githubRepo `
+            /d:sonar.github.oauth=$githubToken `
+            /d:sonar.analysis.mode="issues" `
+            /d:sonar.scanAllFiles="true" `
+            /v:"latest"
+}
+elseif ($analyze -And $isMaster) {
+    Write-Host "Is master '${isMaster}'"
+
+    Begin-Analysis $sonarQubeUrl $sonarQubeToken $sonarQubeProjectKey $sonarQubeProjectName `
+            /v:"master"
+}
+else {
+    $skippedAnalysis = $true
 }
 
-function uploadPackages(
-    [string] $version)
-{
-    $files = Get-ChildItem src -recurse *.nupkg
-    foreach ($file in $files) {    
-        #upload to nuget repo 
-        & $env:NUGET_PATH push $file.fullname -Source repox
-        testExitCode
-        #compute artifact name from filename
-        $artifact=$file.name.replace($file.extension,"").replace(".$version","")
-        $filePath=$file.fullname
-        (Get-Content .\sonaranalyzer-maven-artifacts\$artifact\pom.xml) -replace "file-$artifact", "$filePath" | Set-Content .\sonaranalyzer-maven-artifacts\$artifact\pom.xml          
-    }
-} 
-
-#get version number
-$buildversion="$env:BUILD_NUMBER"
-[xml]$versionProps = Get-Content .\build\Version.props
-$version = $versionProps.Project.PropertyGroup.MainVersion+".$buildversion"
-setVersion -version $version
-
-
-if ($env:IS_PULLREQUEST -eq "true") { 
-    write-host -f green "in a pull request"
-        
-    #start analysis
-    .\MSBuild.SonarQube.Runner begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" /v:latest `
-        /d:sonar.host.url=$env:SONAR_HOST_URL `
-        /d:sonar.login=$env:SONAR_TOKEN `
-        /d:sonar.github.pullRequest=$env:PULL_REQUEST `
-        /d:sonar.github.repository=$env:GITHUB_REPO `
-        /d:sonar.github.oauth=$env:GITHUB_TOKEN `
-        /d:sonar.analysis.mode=issues `
-        /d:sonar.scanAllFiles=true
-    testExitCode
-
-    & $env:NUGET_PATH restore .\SonarAnalyzer.sln
-    testExitCode
-    & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
-    testExitCode
-
-    #end analysis
-    .\MSBuild.SonarQube.Runner end /d:sonar.login=$env:SONAR_TOKEN
-    testExitCode
-
-    #generate packages
-    generatePackages
-
-    #upload packages    
-    uploadPackages -version $version
-
-} else {
-    if (($env:GITHUB_BRANCH -eq "master") -or ($env:GITHUB_BRANCH -eq "refs/heads/master")) {
-        write-host -f green "Building master branch"
-
-        #setup Nuget.config
-        del $env:APPDATA\NuGet\NuGet.Config
-        & $env:NUGET_PATH sources Add -Name repox -Source https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa/
-        testExitCode
-        $apikey = $env:ARTIFACTORY_DEPLOY_USERNAME+":"+$env:ARTIFACTORY_DEPLOY_PASSWORD
-        & $env:NUGET_PATH setapikey $apikey -Source repox
-        testExitCode     
-
-        #start analysis
-        .\MSBuild.SonarQube.Runner begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" /v:master `
-            /d:sonar.host.url=$env:SONAR_HOST_URL `
-            /d:sonar.login=$env:SONAR_TOKEN 
-        testExitCode
-
-        #build
-        & $env:NUGET_PATH restore .\SonarAnalyzer.sln
-        testExitCode
-        & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
-        testExitCode
-
-        #end analysis
-        .\MSBuild.SonarQube.Runner end /d:sonar.login=$env:SONAR_TOKEN
-        testExitCode
-
-        #generate packages
-        generatePackages
-        
-        #upload packages        
-        uploadPackages -version $version      
-        
-    } else {
-        write-host -f green "Build, no analysis, no upload"
-
-        #nuget restore
-        & $env:NUGET_PATH restore .\SonarAnalyzer.sln
-        testExitCode
-
-        #build 
-        if ($env:DEV -eq "true"){
-            & $env:MSBUILD_PATH .\SonarAnalyzer.sln
-            testExitCode
-        }else{
-            & $env:MSBUILD_PATH .\SonarAnalyzer.sln /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m /p:defineConstants=SignAssembly /p:SignAssembly=true /p:AssemblyOriginatorKeyFile=$env:CERT_PATH
-            testExitCode
-        }
-
-        #generate packages
-        generatePackages
-
-        #do not start qa
-        if (test-path .\version.properties) { rm .\version.properties }
-
-    }
-
+if ($debugBuild) {
+    Build-Solution ".\SonarAnalyzer.sln"
+}
+else {
+    Build-ReleaseSolution ".\SonarAnalyzer.sln" $certificatePath
 }
 
+if ($test) {
+    Run-Tests
+}
 
+if (-Not $skippedAnalysis) {
+    End-Analysis $sonarQubeToken
+}
 
+if ($package) {
+    Generate-Metadata
+    Pack-Nugets
+    Publish-Packages
+    Update-MavenArtifacts (Get-Version)
+}
+
+if ($isPullRequest -Eq "true" -Or $isMaster) {
+    Queue-QaBuild
+}

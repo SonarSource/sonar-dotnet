@@ -22,12 +22,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Common;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class CommentTodo : CommentWordBase
+    public sealed class CommentTodo : CommentWordBase
     {
         protected override string Word => "TODO";
 
@@ -38,7 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
         internal static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
-
         protected override DiagnosticDescriptor Rule => rule;
     }
 }

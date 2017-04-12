@@ -26,12 +26,29 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
+using System.Collections.Immutable;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class StringFormatValidatorBase : SonarDiagnosticAnalyzer
+    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [Rule(BugDiagnosticId)]
+    [Rule(CodeSmellDiagnosticId)]
+    public class StringFormatValidator : SonarDiagnosticAnalyzer
     {
-        protected const string MessageFormat = "{0}";
+        private const string BugDiagnosticId = "S2275";
+        private const string CodeSmellDiagnosticId = "S3457";
+        private const string MessageFormat = "{0}";
+
+        private static readonly DiagnosticDescriptor bugRule =
+          DiagnosticDescriptorBuilder.GetDescriptor(BugDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        private static readonly DiagnosticDescriptor codeSmellRule =
+          DiagnosticDescriptorBuilder.GetDescriptor(CodeSmellDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(bugRule, codeSmellRule);
 
         private static readonly ISet<MethodSignature> HandledFormatMethods = new HashSet<MethodSignature>
         {
@@ -48,66 +65,91 @@ namespace SonarAnalyzer.Rules
             new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
         };
 
-        protected abstract ISet<ValidationFailure.FailureKind> FailuresToReportOn { get; }
+        private static readonly ISet<ValidationFailure> bugRelatedFailures =
+            new HashSet<ValidationFailure>
+            {
+                ValidationFailure.UnknownError,
+                ValidationFailure.NullFormatString,
+                ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
+                ValidationFailure.UnbalancedCurlyBraceCount,
+                ValidationFailure.FormatItemMalformed,
+                ValidationFailure.FormatItemIndexIsNaN,
+                ValidationFailure.FormatItemAlignmentIsNaN,
+                ValidationFailure.FormatItemIndexTooHigh
+            };
+
+        private static readonly ISet<ValidationFailure> codeSmellRelatedFailures =
+            new HashSet<ValidationFailure>
+            {
+                ValidationFailure.SimpleString,
+                ValidationFailure.MissingFormatItemIndex,
+                ValidationFailure.UnusedFormatArguments
+            };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-
-                    if (methodSymbol == null || !methodSymbol.Parameters.Any())
-                    {
-                        return;
-                    }
-
-                    var currentMethod = HandledFormatMethods
-                        .Where(hfm => methodSymbol.ContainingType.Is(hfm.ContainingType))
-                        .FirstOrDefault(method => method.Name == methodSymbol.Name);
-                    if (currentMethod == null)
-                    {
-                        return;
-                    }
-
-                    var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider)
-                        ? 1 : 0;
-                    var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex];
-
-                    var constValue = c.SemanticModel.GetConstantValue(formatStringExpression.Expression);
-                    if (!constValue.HasValue)
-                    {
-                        // can't check non-constant format strings
-                        return;
-                    }
-
-                    var failure = CheckForIssues((string)constValue.Value, invocation.ArgumentList,
-                        formatArgumentIndex, c.SemanticModel);
-                    if (ShouldNotReport(failure, currentMethod))
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnostic(Diagnostic.Create(Rule, invocation.Expression.GetLocation(),
-                            ProcessErrorMessage(failure)));
-                }, SyntaxKind.InvocationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForFormatStringIssues, SyntaxKind.InvocationExpression);
         }
 
-        private bool ShouldNotReport(ValidationFailure failure, MethodSignature currentMethod)
+        private static void CheckForFormatStringIssues(SyntaxNodeAnalysisContext analysisContext)
         {
-            return failure == null ||
-                !FailuresToReportOn.Contains(failure.Kind) ||
-                (failure.Kind == ValidationFailure.FailureKind.SimpleString &&
-                !currentMethod.Name.Contains("Format"));
+            var invocation = (InvocationExpressionSyntax)analysisContext.Node;
+            var methodSymbol = analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+
+            if (methodSymbol == null || !methodSymbol.Parameters.Any())
+            {
+                return;
+            }
+
+            var currentMethodSignature = HandledFormatMethods
+                .Where(hfm => methodSymbol.ContainingType.Is(hfm.ContainingType))
+                .FirstOrDefault(method => method.Name == methodSymbol.Name);
+            if (currentMethodSignature == null)
+            {
+                return;
+            }
+
+            var formatArgumentIndex = methodSymbol.Parameters[0].IsType(KnownType.System_IFormatProvider)
+                ? 1 : 0;
+            var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex];
+
+            var constValue = analysisContext.SemanticModel.GetConstantValue(formatStringExpression.Expression);
+            if (!constValue.HasValue)
+            {
+                // can't check non-constant format strings
+                return;
+            }
+
+            var failure = TryParseAndValidate((string)constValue.Value, invocation.ArgumentList,
+                formatArgumentIndex, analysisContext.SemanticModel);
+            if (failure == null ||
+                (failure == ValidationFailure.SimpleString &&
+                !currentMethodSignature.Name.EndsWith("Format")))
+            {
+                // Don't report on no failure or on methods without Format in the name if the string is a simple
+                // string. For example, Console.Write("foo") is valid string.Format("foo") is not.
+                return;
+            }
+
+            if (bugRelatedFailures.Contains(failure))
+            {
+                analysisContext.ReportDiagnostic(Diagnostic.Create(bugRule, invocation.Expression.GetLocation(),
+                    failure.ToString()));
+            }
+
+            if (codeSmellRelatedFailures.Contains(failure))
+            {
+                analysisContext.ReportDiagnostic(Diagnostic.Create(codeSmellRule, invocation.Expression.GetLocation(),
+                    failure.ToString()));
+            }
         }
 
-        private static ValidationFailure CheckForIssues(string formatStringText, ArgumentListSyntax argumentList,
+        private static ValidationFailure TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList,
             int formatArgumentIndex, SemanticModel semanticModel)
         {
             if (formatStringText == null)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.NullFormatString);
+                return ValidationFailure.NullFormatString;
             }
 
             List<FormatStringItem> formatStringItems;
@@ -150,7 +192,7 @@ namespace SonarAnalyzer.Rules
 
                 if (previousChar == '{' && !char.IsDigit(currentChar) && currentFormatItemBuilder != null)
                 {
-                    return new ValidationFailure(ValidationFailure.FailureKind.InvalidCharacterAfterOpenCurlyBrace);
+                    return ValidationFailure.InvalidCharacterAfterOpenCurlyBrace;
                 }
 
                 if (currentChar == '}')
@@ -180,7 +222,7 @@ namespace SonarAnalyzer.Rules
 
             if (curlyBraceCount != 0)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.UnbalancedCurlyBraceCount);
+                return ValidationFailure.UnbalancedCurlyBraceCount;
             }
 
             return null;
@@ -196,7 +238,7 @@ namespace SonarAnalyzer.Rules
             if (indexOfComma >= 0 && indexOfColon >= 0 && indexOfColon < indexOfComma ||
                 split.Length > 3)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.FormatItemMalformed);
+                return ValidationFailure.FormatItemMalformed;
             }
 
             int index;
@@ -205,7 +247,7 @@ namespace SonarAnalyzer.Rules
 
             if (!int.TryParse(split[0], out index))
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.FormatItemIndexIsNaN);
+                return ValidationFailure.FormatItemIndexIsNaN;
             }
 
             if (indexOfComma >= 0)
@@ -213,7 +255,7 @@ namespace SonarAnalyzer.Rules
                 int localAlignment;
                 if (!int.TryParse(split[1], out localAlignment))
                 {
-                    return new ValidationFailure(ValidationFailure.FailureKind.FormatItemAlignmentIsNaN);
+                    return ValidationFailure.FormatItemAlignmentIsNaN;
                 }
                 alignment = localAlignment;
             }
@@ -268,7 +310,7 @@ namespace SonarAnalyzer.Rules
             }
             catch (FormatException)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.UnknownError);
+                return ValidationFailure.UnknownError;
             }
         }
 
@@ -277,7 +319,7 @@ namespace SonarAnalyzer.Rules
             if (maxFormatItemIndex.HasValue &&
                 maxFormatItemIndex.Value + 1 > argumentsCount)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.FormatItemIndexTooHigh);
+                return ValidationFailure.FormatItemIndexTooHigh;
             }
 
             return null;
@@ -287,7 +329,7 @@ namespace SonarAnalyzer.Rules
         {
             if (formatStringItemsCount == 0 && argumentsCount == 0)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.SimpleString);
+                return ValidationFailure.SimpleString;
             }
 
             return null;
@@ -303,12 +345,14 @@ namespace SonarAnalyzer.Rules
 
             var missingFormatItemIndexes = Enumerable.Range(0, maxFormatItemIndex.Value + 1)
                 .Except(formatStringItems.Select(item => item.Index))
+                .Select(i => i.ToString())
                 .ToList();
 
             if (missingFormatItemIndexes.Count > 0)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.MissingFormatItemIndex,
-                    DiagnosticReportHelper.CreateStringFromArgs(missingFormatItemIndexes));
+                var failure = ValidationFailure.MissingFormatItemIndex;
+                failure.AdditionalData = missingFormatItemIndexes;
+                return failure;
             }
 
             return null;
@@ -323,72 +367,53 @@ namespace SonarAnalyzer.Rules
 
             if (unusedArgumentNames.Count > 0)
             {
-                return new ValidationFailure(ValidationFailure.FailureKind.UnusedFormatArguments,
-                    DiagnosticReportHelper.CreateStringFromArgs(unusedArgumentNames));
+                var failure = ValidationFailure.UnusedFormatArguments;
+                failure.AdditionalData = unusedArgumentNames;
+                return failure;
             }
 
             return null;
         }
 
-        private static string ProcessErrorMessage(ValidationFailure failure)
+        public class ValidationFailure
         {
-            switch (failure.Kind)
-            {
-                case ValidationFailure.FailureKind.NullFormatString:
-                    return "Invalid string format, the format string cannot be null.";
-                case ValidationFailure.FailureKind.InvalidCharacterAfterOpenCurlyBrace:
-                    return "Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.";
-                case ValidationFailure.FailureKind.UnbalancedCurlyBraceCount:
-                    return "Invalid string format, unbalanced curly brace count.";
-                case ValidationFailure.FailureKind.FormatItemMalformed:
-                    return "Invalid string format, all format items should comply with the following pattern '{index[,alignment][:formatString]}'.";
-                case ValidationFailure.FailureKind.FormatItemIndexIsNaN:
-                    return "Invalid string format, all format item indexes should be numbers.";
-                case ValidationFailure.FailureKind.FormatItemAlignmentIsNaN:
-                    return "Invalid string format, all format item alignments should be numbers.";
-                case ValidationFailure.FailureKind.FormatItemIndexTooHigh:
-                    return "Invalid string format, the highest string format item index should not be greater than the arguments count.";
-                case ValidationFailure.FailureKind.SimpleString:
-                    return "Remove this formatting call and simply use the input string.";
-                case ValidationFailure.FailureKind.MissingFormatItemIndex:
-                    return string.Concat("The format string might be wrong, the following item indexes are missing: ",
-                        failure.AdditionalInformation, ".");
-                case ValidationFailure.FailureKind.UnusedFormatArguments:
-                    return string.Concat("The format string might be wrong, the following arguments are unused: ",
-                        failure.AdditionalInformation, ".");
-                case ValidationFailure.FailureKind.UnknownError:
-                default:
-                    return "Invalid string format, the format string is invalid and is likely to throw at runtime.";
-            }
-        }
+            public static readonly ValidationFailure NullFormatString =
+                new ValidationFailure("Invalid string format, the format string cannot be null.");
+            public static readonly ValidationFailure InvalidCharacterAfterOpenCurlyBrace =
+                new ValidationFailure("Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.");
+            public static readonly ValidationFailure UnbalancedCurlyBraceCount =
+                new ValidationFailure("Invalid string format, unbalanced curly brace count.");
+            public static readonly ValidationFailure FormatItemMalformed =
+                new ValidationFailure("Invalid string format, all format items should comply with the following pattern '{index[,alignment][:formatString]}'.");
+            public static readonly ValidationFailure FormatItemIndexIsNaN =
+                new ValidationFailure("Invalid string format, all format item indexes should be numbers.");
+            public static readonly ValidationFailure FormatItemAlignmentIsNaN =
+                new ValidationFailure("Invalid string format, all format item alignments should be numbers.");
+            public static readonly ValidationFailure FormatItemIndexTooHigh =
+                new ValidationFailure("Invalid string format, the highest string format item index should not be greater than the arguments count.");
+            public static readonly ValidationFailure SimpleString =
+                new ValidationFailure("Remove this formatting call and simply use the input string.");
+            public static readonly ValidationFailure UnknownError =
+                new ValidationFailure("Invalid string format, the format string is invalid and is likely to throw at runtime.");
+            public static readonly ValidationFailure MissingFormatItemIndex =
+                new ValidationFailure("The format string might be wrong, the following item indexes are missing: ");
+            public static readonly ValidationFailure UnusedFormatArguments =
+                new ValidationFailure("The format string might be wrong, the following arguments are unused: ");
 
-        protected class ValidationFailure
-        {
-            public enum FailureKind
+            private string message;
+            private ValidationFailure(string message)
             {
-                Success,
-                FormatStringNotConstant,
-                UnknownError,
-                SimpleString,
-                NullFormatString,
-                InvalidCharacterAfterOpenCurlyBrace,
-                UnbalancedCurlyBraceCount,
-                FormatItemMalformed,
-                FormatItemIndexIsNaN,
-                FormatItemAlignmentIsNaN,
-                FormatItemIndexTooHigh,
-                MissingFormatItemIndex,
-                UnusedFormatArguments
+                this.message = message;
             }
 
-            public ValidationFailure(FailureKind kind, string additionalInformation = "")
-            {
-                Kind = kind;
-                AdditionalInformation = additionalInformation;
-            }
+            public IEnumerable<string> AdditionalData { get; set; }
 
-            public FailureKind Kind { get; }
-            public string AdditionalInformation { get; }
+            public override string ToString()
+            {
+                return AdditionalData == null
+                    ? message
+                    : string.Concat(message, DiagnosticReportHelper.CreateStringFromArgs(AdditionalData), ".");
+            }
         }
 
         private sealed class FormatStringItem

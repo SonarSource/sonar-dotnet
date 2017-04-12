@@ -24,6 +24,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,9 +40,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>
@@ -83,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classOrInterface = namedType.IsClass() ? "class" : "interface";
                     message = string.Format(message, classOrInterface);
 
-                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(Rule,
+                    c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule,
                         declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                 },
                 SymbolKind.NamedType);

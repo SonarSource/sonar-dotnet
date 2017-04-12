@@ -40,7 +40,7 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
     private final File file;
     private final UnitTestResults unitTestResults;
 
-    public Parser(File file, UnitTestResults unitTestResults) {
+    Parser(File file, UnitTestResults unitTestResults) {
       this.file = file;
       this.unitTestResults = unitTestResults;
     }

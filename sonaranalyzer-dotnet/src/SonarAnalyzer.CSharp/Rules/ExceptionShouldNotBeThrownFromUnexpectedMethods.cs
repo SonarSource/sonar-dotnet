@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<KnownType> DefaultAllowedExceptions = new HashSet<KnownType>
         {
@@ -64,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.GreaterThanEqualsToken
         };
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckForIssue<MethodDeclarationSyntax>(c, mds => IsTrackedMethod(mds, c.SemanticModel),
@@ -118,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (throwToReportOn != null)
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule, throwToReportOn.GetLocation()));
+                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, throwToReportOn.GetLocation()));
             }
         }
 

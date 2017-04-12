@@ -24,12 +24,13 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class ParameterName : ParameterLoadingDiagnosticAnalyzer
+    public sealed class ParameterName : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1654";
         private const string MessageFormat = "Rename this parameter to match the regular expression: '{0}'.";
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
 
-        protected sealed override DiagnosticDescriptor Rule => rule;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("format", PropertyType.String,
             "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
@@ -53,7 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (parameterDeclaration.Identifier != null &&
                         !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.Parameter);

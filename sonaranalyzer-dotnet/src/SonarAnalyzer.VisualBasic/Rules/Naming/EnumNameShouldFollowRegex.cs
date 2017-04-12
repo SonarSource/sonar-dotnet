@@ -29,16 +29,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind, EnumStatementSyntax>
+    public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind, EnumStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
-        protected sealed override DiagnosticDescriptor Rule => rule;
-        protected sealed override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumStatement;
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
-
-        protected sealed override SyntaxToken GetIdentifier(EnumStatementSyntax declaration) => declaration.Identifier;
+        protected override DiagnosticDescriptor Rule => rule;
+        protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumStatement;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override SyntaxToken GetIdentifier(EnumStatementSyntax declaration) => declaration.Identifier;
     }
 }
