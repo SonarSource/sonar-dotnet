@@ -19,8 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import org.junit.Test;
