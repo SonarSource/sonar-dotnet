@@ -33,6 +33,8 @@ public class CSharpCodeCoverageProvider {
   private static final String CATEGORY = "C#";
   private static final String SUBCATEGORY = "Code Coverage";
 
+  private static final String GLOBALCACHE_PROPERTY_KEY = "sonar.cs.coverage.useGlobalCache";
+
   private static final String NCOVER3_PROPERTY_KEY = "sonar.cs.ncover3.reportsPaths";
   private static final String OPENCOVER_PROPERTY_KEY = "sonar.cs.opencover.reportsPaths";
   private static final String DOTCOVER_PROPERTY_KEY = "sonar.cs.dotcover.reportsPaths";
@@ -45,6 +47,7 @@ public class CSharpCodeCoverageProvider {
 
   private static final CoverageConfiguration COVERAGE_CONF = new CoverageConfiguration(
     CSharpPlugin.LANGUAGE_KEY,
+    GLOBALCACHE_PROPERTY_KEY,
     NCOVER3_PROPERTY_KEY,
     OPENCOVER_PROPERTY_KEY,
     DOTCOVER_PROPERTY_KEY,
@@ -52,6 +55,7 @@ public class CSharpCodeCoverageProvider {
 
   private static final CoverageConfiguration IT_COVERAGE_CONF = new CoverageConfiguration(
     CSharpPlugin.LANGUAGE_KEY,
+    GLOBALCACHE_PROPERTY_KEY,
     IT_NCOVER3_PROPERTY_KEY,
     IT_OPENCOVER_PROPERTY_KEY,
     IT_DOTCOVER_PROPERTY_KEY,
@@ -65,6 +69,13 @@ public class CSharpCodeCoverageProvider {
       CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
       CSharpCoverageReportImportSensor.class, CSharpIntegrationCoverageReportImportSensor.class,
 
+      PropertyDefinition.builder(GLOBALCACHE_PROPERTY_KEY)
+        .name("Use Global Coverage")
+        .description("Set to true to reuse parsed file for the whole analysis.")
+        .category(CATEGORY)
+        .subCategory(SUBCATEGORY)
+        .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .build(),
       PropertyDefinition.builder(NCOVER3_PROPERTY_KEY)
         .name("NCover3 Unit Tests Reports Paths")
         .description("Example: \"report.nccov\", \"report1.nccov,report2.nccov\" or \"C:/report.nccov\"")
@@ -133,8 +144,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
-      super(COVERAGE_CONF, coverageAggregator, false);
+    public CSharpCoverageReportImportSensor(Settings settings, CSharpCoverageAggregator coverageAggregator) {
+      super(settings, COVERAGE_CONF, coverageAggregator, false);
     }
 
   }
@@ -149,8 +160,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator) {
-      super(IT_COVERAGE_CONF, coverageAggregator, true);
+    public CSharpIntegrationCoverageReportImportSensor(Settings settings, CSharpIntegrationCoverageAggregator coverageAggregator) {
+      super(settings, IT_COVERAGE_CONF, coverageAggregator, true);
     }
 
   }

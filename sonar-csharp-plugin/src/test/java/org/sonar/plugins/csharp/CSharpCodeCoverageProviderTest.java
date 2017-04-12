@@ -42,6 +42,7 @@ public class CSharpCodeCoverageProviderTest {
       CSharpCoverageReportImportSensor.class,
       CSharpIntegrationCoverageReportImportSensor.class);
     assertThat(propertyKeys(CSharpCodeCoverageProvider.extensions())).containsOnly(
+      "sonar.cs.coverage.useGlobalCache",
       "sonar.cs.ncover3.reportsPaths", "sonar.cs.ncover3.it.reportsPaths",
       "sonar.cs.opencover.reportsPaths", "sonar.cs.opencover.it.reportsPaths",
       "sonar.cs.dotcover.reportsPaths", "sonar.cs.dotcover.it.reportsPaths",
