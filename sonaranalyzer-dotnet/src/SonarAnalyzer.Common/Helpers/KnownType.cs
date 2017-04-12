@@ -204,6 +204,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_InvalidOperationException = new KnownType("System.InvalidOperationException");
         public static readonly KnownType System_NotSupportedException = new KnownType("System.NotSupportedException");
         public static readonly KnownType System_ArgumentException = new KnownType("System.ArgumentException");
+        public static readonly KnownType System_ArgumentNullException = new KnownType("System.ArgumentNullException");
+        public static readonly KnownType System_ArgumentOutOfRangeException = new KnownType("System.ArgumentOutOfRangeException");
+        public static readonly KnownType System_DuplicateWaitObjectException = new KnownType("System.DuplicateWaitObjectException");
 
 
         public static readonly KnownType System_IComparable = new KnownType("System.IComparable");
