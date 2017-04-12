@@ -141,5 +141,17 @@ namespace Tests.Diagnostics
                 throw new ArgumentNullException("value");
             }
         }
+
+        void ComplexCase(int a)
+        {
+            var simple = b =>
+                {
+                    var parenthesized = (c, d) =>
+                    {
+                        throw new ArgumentNullException("a"); // Noncompliant
+                        throw new ArgumentNullException("b"); // Noncompliant
+                    };
+                };
+        }
     }
 }

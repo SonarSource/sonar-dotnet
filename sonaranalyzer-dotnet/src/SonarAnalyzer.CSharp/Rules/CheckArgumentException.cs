@@ -119,15 +119,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     string.Format(InvalidParameterName, parameterNameValue.Value)));
         }
 
-        private static IEnumerable<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
+        private static ISet<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)
         {
-            var creationContext =
-                creationSyntax.FirstAncestorOrSelf<SimpleLambdaExpressionSyntax>() ??
-                creationSyntax.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>() ??
-                creationSyntax.FirstAncestorOrSelf<AccessorDeclarationSyntax>() ??
-                (SyntaxNode)creationSyntax.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
+            var creationContext = creationSyntax.AncestorsAndSelf().FirstOrDefault(ancestor =>
+                ancestor is SimpleLambdaExpressionSyntax ||
+                ancestor is ParenthesizedLambdaExpressionSyntax ||
+                ancestor is AccessorDeclarationSyntax ||
+                ancestor is BaseMethodDeclarationSyntax);
 
-            return GetArgumentNames(creationContext);
+            return new HashSet<string>(GetArgumentNames(creationContext));
         }
 
         private static IEnumerable<string> GetArgumentNames(SyntaxNode node)
