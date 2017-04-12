@@ -47,7 +47,7 @@ public class CoverageReportImportSensorTest {
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, false).describe(new DefaultSensorDescriptor());
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false).describe(new DefaultSensorDescriptor());
   }
 
   @Test
@@ -95,7 +95,7 @@ public class CoverageReportImportSensorTest {
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, isIntegrationTest).analyze(context, coverage);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", isIntegrationTest).analyze(context, coverage);
 
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 

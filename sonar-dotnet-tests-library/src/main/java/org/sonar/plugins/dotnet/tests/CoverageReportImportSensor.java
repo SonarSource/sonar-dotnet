@@ -41,17 +41,28 @@ public class CoverageReportImportSensor implements Sensor {
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
   private final boolean isIntegrationTest;
+  private final String languageKey;
+  private final String languageName;
 
-  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator, boolean isIntegrationTest) {
+  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator, String languageKey, String languageName, boolean isIntegrationTest) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
     this.isIntegrationTest = isIntegrationTest;
+    this.languageKey = languageKey;
+    this.languageName = languageName;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor
-      .name("Coverage Report Import");
+    StringBuilder builder = new StringBuilder(this.languageName);
+    if (this.isIntegrationTest) {
+      builder.append(" Integration Tests ");
+    } else {
+      builder.append(" Unit Tests ");
+    }
+    builder.append("Coverage Report Import");
+    descriptor.name(builder.toString());
+    descriptor.onlyOnLanguage(this.languageKey);
   }
 
   @Override

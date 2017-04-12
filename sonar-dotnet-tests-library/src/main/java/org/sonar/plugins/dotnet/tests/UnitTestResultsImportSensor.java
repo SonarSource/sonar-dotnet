@@ -36,15 +36,21 @@ public class UnitTestResultsImportSensor implements Sensor {
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
   private final UnitTestResultsAggregator unitTestResultsAggregator;
   private final ProjectDefinition projectDef;
+  private final String languageKey;
+  private final String languageName;
 
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef) {
+  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef, String languageKey, String languageName) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.projectDef = projectDef;
+    this.languageKey = languageKey;
+    this.languageName = languageName;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name("Unit Test Results Import");
+    String name = String.format("%s Unit Test Results Import", this.languageName);
+    descriptor.name(name);
+    descriptor.onlyOnLanguage(this.languageKey);
   }
 
   @Override
