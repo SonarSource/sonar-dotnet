@@ -37,7 +37,7 @@ public class CSharpMsBuildIntegrationProvider {
     return Collections.singletonList(
       PropertyDefinition.builder("sonar.cs.msbuild.testProjectPattern")
         .name("Test project pattern")
-        .description("Regular expression matched by test project files path (.NET syntax)")
+        .description("DEPRECATED - Use 'sonar.msbuild.testProjectPattern' key in the Scanner for MSBuild (client side) instead.\nRegular expression matched by test project files path (.NET syntax)")
         .defaultValue("[^\\\\]*test[^\\\\]*$")
         .category(CATEGORY)
         .onQualifiers(Qualifiers.PROJECT)
