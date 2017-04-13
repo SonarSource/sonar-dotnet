@@ -54,14 +54,11 @@ public class CoverageReportImportSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    StringBuilder builder = new StringBuilder(this.languageName);
     if (this.isIntegrationTest) {
-      builder.append(" Integration Tests ");
+      descriptor.name(this.languageName + " Integration Tests Coverage Report Import");
     } else {
-      builder.append(" Unit Tests ");
+      descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
     }
-    builder.append("Coverage Report Import");
-    descriptor.name(builder.toString());
     descriptor.onlyOnLanguage(this.languageKey);
   }
 
