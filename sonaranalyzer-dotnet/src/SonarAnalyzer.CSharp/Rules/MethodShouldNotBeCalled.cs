@@ -58,12 +58,8 @@ namespace SonarAnalyzer.Rules
             }
 
             var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(identifier.Value.Parent);
-            if (methodCallSymbol.Symbol == null)
-            {
-                return;
-            }
-
-            if (!methodCallSymbol.Symbol.ContainingType.ConstructedFrom.Is(methodName.ContainingType))
+            if (methodCallSymbol.Symbol == null ||
+                !methodCallSymbol.Symbol.ContainingType.ConstructedFrom.Is(methodName.ContainingType))
             {
                 return;
             }

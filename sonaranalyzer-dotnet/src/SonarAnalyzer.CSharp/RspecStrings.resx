@@ -5217,6 +5217,30 @@
   <data name="S3928_Title" xml:space="preserve">
     <value>Parameter names used into ArgumentException constructors should match an existing one </value>
   </data>
+  <data name="S3971_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3971_Description" xml:space="preserve">
+    <value>GC.SuppressFinalize requests that the system not call the finalizer for the specified object. This should only be done when implementing Dispose as part of the Dispose Pattern.</value>
+  </data>
+  <data name="S3971_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3971_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3971_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3971_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3971_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3971_Title" xml:space="preserve">
+    <value>"GC.SuppressFinalize" should not be called</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

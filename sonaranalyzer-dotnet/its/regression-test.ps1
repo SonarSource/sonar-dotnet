@@ -10,20 +10,20 @@ function Test-SonarAnalyzerDll {
 
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
-    
+
     $solutionPath = (Resolve-Path ".\${ProjectName}\${SolutionRelativePath}")
-    
+
     # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
     $Env:PROJECT = $ProjectName
-    
+
     (Build-Solution $solutionPath /v:detailed /m /t:rebuild /p:Configuration=Debug) `
         > .\output\$ProjectName.log
 }
 
 function Initialize-ActualFolder {
     Write-Host "Initializing the actual issues Git repo with the expected ones..."
-    if (Test-Path .\actual) { 
-        Remove-Item -Recurse -Force actual 
+    if (Test-Path .\actual) {
+        Remove-Item -Recurse -Force actual
     }
 
     Copy-Item .\expected -Destination .\actual -Recurse
@@ -39,7 +39,7 @@ function Initialize-ActualFolder {
 
 function Initialize-OutputFolder {
     if (Test-Path .\output) {
-        Remove-Item -Recurse -Force output 
+        Remove-Item -Recurse -Force output
     }
     New-Item -ItemType directory -Path .\output | out-null
     Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
@@ -69,13 +69,14 @@ try {
     Write-Host "Checking for differences..."
     Exec-InLocation "actual" {
         Exec { git add -A . }
-        Exec { git diff --cached --exit-code | out-null } -errorMessage "There are differences between the actual and the expected issues."
+        Exec { git diff --cached --exit-code | out-null } -errorMessage "ERROR: There are differences between the actual and the expected issues."
     }
 
     Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
+    exit 0
 }
 catch {
-    Write-Error $_
+    Write-Host -ForegroundColor Red $_.Exception.Message
     exit 1
 }
 finally {
