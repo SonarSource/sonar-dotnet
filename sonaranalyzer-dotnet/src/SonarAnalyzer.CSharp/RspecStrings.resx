@@ -2722,10 +2722,10 @@
     <value>Types and "this" should not be used for locking</value>
   </data>
   <data name="S2583_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Sonar Bug</value>
   </data>
   <data name="S2583_Description" xml:space="preserve">
-    <value>If a boolean expression cannot evaluate to anything but true, this expression is completely redundant. From time to time, such useless expression can be used on purpose to increase the readability of the code. But such expression deserves to be carefully reviewed to make sure that was the initial programmer's intent.</value>
+    <value>Conditional expressions which are always true or false can lead to dead code. Such code is always buggy and should never be used in production.</value>
   </data>
   <data name="S2583_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2737,13 +2737,37 @@
     <value>15min</value>
   </data>
   <data name="S2583_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Major</value>
   </data>
   <data name="S2583_Tags" xml:space="preserve">
-    <value>cwe,bug,misra,cert,pitfall</value>
+    <value>cwe,bug,misra,cert,unused,pitfall</value>
   </data>
   <data name="S2583_Title" xml:space="preserve">
-    <value>Expressions should not unconditionally evaluate to "true"</value>
+    <value>Conditionally executed blocks should be reachable</value>
+  </data>
+  <data name="S2589_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S2589_Description" xml:space="preserve">
+    <value>If a boolean expression doesn't change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous because it does not match the programmer's intent, then it's a bug and the expression should be fixed.</value>
+  </data>
+  <data name="S2589_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2589_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2589_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S2589_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S2589_Tags" xml:space="preserve">
+    <value>cwe,misra,cert,redundant</value>
+  </data>
+  <data name="S2589_Title" xml:space="preserve">
+    <value>Boolean expressions should not be gratuitous</value>
   </data>
   <data name="S2674_Category" xml:space="preserve">
     <value>Sonar Bug</value>

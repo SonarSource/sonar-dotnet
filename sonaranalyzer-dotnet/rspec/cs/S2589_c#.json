@@ -1,18 +1,16 @@
 {
-  "title": "Conditionally executed blocks should be reachable",
-  "type": "BUG",
+  "title": "Boolean expressions should not be gratuitous",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "15min"
+    "constantCost": "10min"
   },
   "tags": [
     "cwe",
-    "bug",
     "misra",
     "cert",
-    "unused",
-    "pitfall"
+    "redundant"
   ],
   "standards": [
     "CWE"

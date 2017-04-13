@@ -24,27 +24,41 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.FlowAnalysis.Common;
 using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using ExplodedGraph = SonarAnalyzer.Helpers.FlowAnalysis.CSharp.ExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using ExplodedGraph = Helpers.FlowAnalysis.CSharp.ExplodedGraph;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
+    [Rule(S2583DiagnosticId)]
+    [Rule(S2589DiagnosticId)]
     public class ConditionEvaluatesToConstant : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2583";
-        private const string MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
+        private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = ImmutableHashSet.Create(
+            SyntaxKind.LogicalAndExpression,
+            SyntaxKind.LogicalOrExpression,
+            SyntaxKind.TrueLiteralExpression,
+            SyntaxKind.FalseLiteralExpression);
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private const string S2583DiagnosticId = "S2583"; // Bug
+        private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private const string S2589DiagnosticId = "S2589"; // Code smell
+        private const string S2589MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
+
+        private static readonly DiagnosticDescriptor s2583 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S2583DiagnosticId, S2583MessageFormat, RspecStrings.ResourceManager);
+
+        private static readonly DiagnosticDescriptor s2589 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2583, s2589);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -60,7 +74,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 (sender, args) => CollectConditions(args, conditionTrue, conditionFalse);
 
             EventHandler explorationEnded =
-                (sender, args) => ProcessVisitedBlocks(conditionTrue, conditionFalse, context);
+                (sender, args) => Enumerable.Empty<Diagnostic>()
+                    .Union(conditionTrue
+                        .Except(conditionFalse)
+                        .Select(node => GetDiagnostics(node, true)))
+                    .Union(conditionFalse
+                        .Except(conditionTrue)
+                        .Select(node => GetDiagnostics(node, false)))
+                    .ToList()
+                    .ForEach(context.ReportDiagnostic);
 
             explodedGraph.ExplorationEnded += explorationEnded;
             explodedGraph.ConditionEvaluated += collectConditions;
@@ -76,41 +98,130 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void ProcessVisitedBlocks(HashSet<SyntaxNode> conditionTrue, HashSet<SyntaxNode> conditionFalse, SyntaxNodeAnalysisContext context)
+        private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
         {
-            foreach (var alwaysTrue in conditionTrue.Except(conditionFalse))
+            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue)
+                .ToList();
+
+            var constantText = constantValue.ToString().ToLowerInvariant();
+
+            return unreachableLocations.Count > 0 ?
+                Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations) :
+                Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
+        }
+
+        private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
+        {
+            var unreachableExpressions = GetUnreachableExpressions(constantExpression, constantValue)
+                .ToList();
+
+            if (unreachableExpressions.Count > 0)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, alwaysTrue.GetLocation(), "true"));
+                yield return Location.Create(
+                    constantExpression.SyntaxTree,
+                    GetSpan(unreachableExpressions.First(), unreachableExpressions.Last()));
+            }
+            else
+            {
+                // When the constant expression is the only child of a if/while/etc. statement
+                // it is not reported as unreachable, but regardless we want to check if its
+                // parent has an unreachable branch.
+                var expression = constantExpression as ExpressionSyntax;
+                if (expression != null)
+                {
+                    unreachableExpressions.Add(expression);
+                }
             }
 
-            foreach (var alwaysFalse in conditionFalse.Except(conditionTrue))
+            var statement = GetUnreachableStatement(unreachableExpressions, constantValue);
+            if (statement != null)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, alwaysFalse.GetLocation(), "false"));
+                yield return statement.GetLocation();
             }
+        }
+
+        private static TextSpan GetSpan(SyntaxNode startNode, SyntaxNode endNode)
+        {
+            if (startNode.Equals(endNode))
+            {
+                return startNode.Span;
+            }
+            return TextSpan.FromBounds(startNode.SpanStart, endNode.Span.End);
+        }
+
+        private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)
+        {
+            var parent = unreachableExpressions
+                .Select(SyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
+                .Select(node => node.Parent is BinaryExpressionSyntax
+                    ? node.Parent.Parent
+                    : node.Parent) // Constant node is the only expression in an if statement condition
+                .FirstOrDefault();
+
+            if (constantValue)
+            {
+                return (SyntaxNode)
+                    (parent as ConditionalExpressionSyntax)?.WhenFalse ??
+                    (parent as IfStatementSyntax)?.Else?.Statement;
+            }
+            else
+            {
+                return (SyntaxNode)
+                    (parent as ConditionalExpressionSyntax)?.WhenTrue ??
+                    (parent as IfStatementSyntax)?.Statement ??
+                    (parent as WhileStatementSyntax)?.Statement ??
+                    (parent as DoStatementSyntax)?.Statement;
+            }
+        }
+
+        private static IEnumerable<ExpressionSyntax> GetUnreachableExpressions(SyntaxNode constantExpression, bool constantValue)
+        {
+            // This is ugly with LINQ, hence the loop
+            foreach (var current in constantExpression.AncestorsAndSelf())
+            {
+                if (current.Parent is ParenthesizedExpressionSyntax)
+                {
+                    continue;
+                }
+
+                var binary = current.Parent as BinaryExpressionSyntax;
+                if (!IsShortcuttingExpression(binary, constantValue))
+                {
+                    break;
+                }
+
+                if (binary.Left == current)
+                {
+                    yield return binary.Right;
+                }
+            }
+        }
+
+        private static bool IsShortcuttingExpression(BinaryExpressionSyntax expression, bool constantValueIsTrue)
+        {
+            return expression != null &&
+                (expression.IsKind(SyntaxKind.LogicalAndExpression) && !constantValueIsTrue ||
+                    expression.IsKind(SyntaxKind.LogicalOrExpression) && constantValueIsTrue);
         }
 
         private static void CollectConditions(ConditionEvaluatedEventArgs args, HashSet<SyntaxNode> conditionTrue, HashSet<SyntaxNode> conditionFalse)
         {
-            if (args.Condition == null ||
-                OmittedSyntaxKinds.Contains(args.Condition.Kind()))
+            var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
+
+            if (condition == null ||
+                OmittedSyntaxKinds.Contains(condition.Kind()))
             {
                 return;
             }
 
             if (args.EvaluationValue)
             {
-                conditionTrue.Add(args.Condition);
+                conditionTrue.Add(condition);
             }
             else
             {
-                conditionFalse.Add(args.Condition);
+                conditionFalse.Add(condition);
             }
         }
-
-        private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = ImmutableHashSet.Create(
-            SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression,
-            SyntaxKind.TrueLiteralExpression,
-            SyntaxKind.FalseLiteralExpression);
     }
 }
