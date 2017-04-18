@@ -5241,6 +5241,30 @@
   <data name="S3962_Title" xml:space="preserve">
     <value>"static readonly" constants should be "const" instead</value>
   </data>
+  <data name="S3963_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3963_Description" xml:space="preserve">
+    <value>When a static constructor serves no other purpose that initializing static fields, it comes with an unnecessary performance cost because the compiler generates a check before each static method or instance constructor invocation.</value>
+  </data>
+  <data name="S3963_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3963_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3963_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3963_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S3963_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3963_Title" xml:space="preserve">
+    <value>"static" fields should be initialized inline</value>
+  </data>
   <data name="S3971_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
