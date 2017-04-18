@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void AssemblyLoadShouldBeUsed()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.cs", new AssemblyLoadShouldBeUsed());
+            Verifier.VerifyAnalyzer(@"TestCases\AssemblyLoadShouldBeUsed.cs", new DoNotCallAssemblyLoadInvalidMethods());
         }
     }
 }

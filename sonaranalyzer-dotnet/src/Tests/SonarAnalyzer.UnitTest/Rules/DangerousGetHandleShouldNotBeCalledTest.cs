@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void DangerousGetHandleShouldNotBeCalled()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs", new DangerousGetHandleShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\DangerousGetHandleShouldNotBeCalled.cs", new DoNotCallDangerousGetHandleMethod());
         }
     }
 }

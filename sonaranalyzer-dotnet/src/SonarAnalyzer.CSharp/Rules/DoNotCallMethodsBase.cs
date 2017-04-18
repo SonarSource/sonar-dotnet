@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,60 +22,55 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class DoNotCallGCSuppressFinalize : SonarDiagnosticAnalyzer
+    public abstract class DoNotCallMethodsBase : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3971";
-        private const string MessageFormat = "Do not call 'GC.SuppressFinalize'.";
+        internal abstract IEnumerable<MethodSignature> CheckedMethods { get; }
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfInvalidMethodIsCalled,
-                SyntaxKind.InvocationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeInvocation, SyntaxKind.InvocationExpression);
         }
 
-        private void ReportIfInvalidMethodIsCalled(SyntaxNodeAnalysisContext analysisContext)
+        protected virtual bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
+            SemanticModel semanticModel) => true;
+
+        private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 
             var identifier = GetMethodCallIdentifier(invocation);
-            if (identifier == null ||
-                !identifier.Value.ValueText.Equals("SuppressFinalize"))
+            if (identifier == null)
+            {
+                return;
+            }
+
+            var methodSignature = CheckedMethods.FirstOrDefault(method => method.Name.Equals(identifier.Value.ValueText));
+            if (methodSignature == null)
             {
                 return;
             }
 
             var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(identifier.Value.Parent);
             if (methodCallSymbol.Symbol == null ||
-                !methodCallSymbol.Symbol.ContainingType.ConstructedFrom.Is(KnownType.System_GC))
+                !methodCallSymbol.Symbol.ContainingType.ConstructedFrom.Is(methodSignature.ContainingType))
             {
                 return;
             }
 
-            var methodDeclaration = invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-            if (methodDeclaration == null)
+            if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel))
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, identifier.Value.GetLocation()));
-                return;
-            }
-
-            var methodSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-            if (methodSymbol == null ||
-                !methodSymbol.IsIDisposableDispose())
-            {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, identifier.Value.GetLocation()));
-                return;
+                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
+                    methodSignature.ToShortName()));
             }
         }
 

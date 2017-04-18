@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+
 namespace SonarAnalyzer.Helpers
 {
     internal class MethodSignature
@@ -30,5 +32,16 @@ namespace SonarAnalyzer.Helpers
 
         internal KnownType ContainingType { get; }
         internal string Name { get; }
+
+        internal string ToShortName()
+        {
+            var containingTypeName = ContainingType.TypeName.Split('.').Last();
+            return string.Concat(containingTypeName, ".", Name);
+        }
+
+        internal string ToFullName()
+        {
+            return string.Concat(ContainingType.TypeName, ".", Name);
+        }
     }
 }

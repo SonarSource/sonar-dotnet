@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCallAssemblyGetExecutingAssembly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallAssemblyGetExecutingAssembly.cs", 
-                new DoNotCallAssemblyGetExecutingAssembly());
+                new DoNotCallAssemblyGetExecutingAssemblyMethod());
         }
     }
 }

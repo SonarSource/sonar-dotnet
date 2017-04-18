@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCallGCSuppressFinalize()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs",
-                new DoNotCallGCSuppressFinalize());
+                new DoNotCallGCSuppressFinalizeMethod());
         }
     }
 }
