@@ -156,6 +156,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var type = semanticModel.GetTypeInfo(castExpression.Type).Type;
 
                 if (type == null ||
+                    type.OriginalDefinition.Is(KnownType.System_Nullable_T) ||
                     !semanticModel.Compilation.ClassifyConversion(typeExpression, type).IsNullable ||
                     !programState.PeekValue().HasConstraint(ObjectConstraint.Null, programState))
                 {

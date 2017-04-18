@@ -100,6 +100,11 @@ namespace Tests.Diagnostics
             int? i = null;
             var n = (NullableTest)i; // don't care, custom cast
         }
+        public void Test5()
+        {
+            int? i = null;
+            var d = (double?)i;
+        }
 
         public static explicit operator NullableTest(int? i)
         {
