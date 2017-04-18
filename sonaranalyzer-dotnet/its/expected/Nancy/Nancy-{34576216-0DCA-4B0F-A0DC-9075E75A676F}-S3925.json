@@ -465,15 +465,6 @@
 "endLine":  652,
 "endColumn":  24
 }
-},
-{
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  652,
-"startColumn":  19,
-"endLine":  652,
-"endColumn":  24
-}
 }
 ]
 },

@@ -11,7 +11,7 @@ function Resolve-RepoPath([string]$relativePath) {
 function Exec ([scriptblock]$command, [string]$errorMessage = "Error executing command: " + $command) {
     $output = & $command
     if ((-not $?) -or ($lastexitcode -ne 0)) {
-        Write-Error $output
+        Write-Host $output
         throw $errorMessage
     }
     return $output
@@ -89,7 +89,7 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
     }
 
     if (Test-Path $path) {
-        Write-Host "Found ${name} at ${path}"
+        Write-Debug "Found ${name} at ${path}"
         [environment]::SetEnvironmentVariable($envVar, $path)
         return $path
     }
@@ -144,7 +144,7 @@ function Get-SonarQubeRunnerPath {
 
     Remove-Item $sonarqube_runner_zip -Force
 
-    Write-Host "Found MSBuild.SonarQube.Runner.exe at ${sonarqube_runner_exe}"
+    Write-Debug "Found MSBuild.SonarQube.Runner.exe at ${sonarqube_runner_exe}"
 
     return $sonarqube_runner_exe
 }
@@ -296,7 +296,7 @@ function Build-Solution (
     [string][Parameter(Mandatory = $true, Position = 0)]$solutionPath,
     [array][parameter(ValueFromRemainingArguments = $true)] $remainingArgs) {
 
-    Write-Header "Building solution {$solutionPath}..."
+    Write-Header "Building solution ${solutionPath}..."
 
     Restore-Packages $solutionPath
 

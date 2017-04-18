@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,30 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Helpers
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    internal class MethodSignature
+    [TestClass]
+    public class DoNotCallGCSuppressFinalizeTest
     {
-        internal MethodSignature(KnownType containingType, string name)
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCallGCSuppressFinalize()
         {
-            ContainingType = containingType;
-            Name = name;
-        }
-
-        internal KnownType ContainingType { get; }
-        internal string Name { get; }
-
-        internal string ToShortName()
-        {
-            var containingTypeName = ContainingType.TypeName.Split('.').Last();
-            return string.Concat(containingTypeName, ".", Name);
-        }
-
-        internal string ToFullName()
-        {
-            return string.Concat(ContainingType.TypeName, ".", Name);
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCallGCSuppressFinalize.cs",
+                new DoNotCallGCSuppressFinalizeMethod());
         }
     }
 }

@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void GcCollectShouldNotBeCalled()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\GcCollectShouldNotBeCalled.cs", new GcCollectShouldNotBeCalled());
+            Verifier.VerifyAnalyzer(@"TestCases\GcCollectShouldNotBeCalled.cs", new DoNotCallGCCollectMethod());
         }
     }
 }
