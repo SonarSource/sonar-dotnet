@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  9,
+"endLine":  73,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.ModelBinding\Database\DB.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\Fakes\FakeRootPathProvider.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  10
+}
+}
+}
+]
+}

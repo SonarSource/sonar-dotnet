@@ -1,0 +1,39 @@
+<p>When a <code>static</code> constructor serves no other purpose that initializing <code>static</code> fields, it comes with an unnecessary
+performance cost because the compiler generates a check before each <code>static</code> method or instance constructor invocation.</p>
+<p>Instead, inline initialization is highly recommended.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+namespace myLib
+{
+  public class Foo
+  {
+    static int i;
+    static string s;
+
+    static Foo() // Noncompliant
+    {
+      i = 3;
+      ResourceManager sm =  new ResourceManager("strings", Assembly.GetExecutingAssembly());
+      s = sm.GetString("mystring");
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+namespace myLib
+{
+  public class Foo
+  {
+    static int i =3;
+    static string s = InitString();
+
+    static string InitString()
+    {
+      ResourceManager sm = new ResourceManager("strings", Assembly.GetExecutingAssembly());
+      return sm.GetString("mystring");
+    }
+  }
+}
+</pre>
+
