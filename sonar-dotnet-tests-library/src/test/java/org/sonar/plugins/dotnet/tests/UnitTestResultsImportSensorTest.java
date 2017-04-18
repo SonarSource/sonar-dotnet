@@ -41,14 +41,14 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void coverage() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create()).describe(new DefaultSensorDescriptor());
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#").describe(new DefaultSensorDescriptor());
     SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create()).execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#").execute(sensorContext);
     verifyZeroInteractions(sensorContext);
     when(unitTestResultsAggregator.hasUnitTestResultsProperty()).thenReturn(true);
     ProjectDefinition sub = ProjectDefinition.create();
     ProjectDefinition.create().addSubProject(sub);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub).execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#").execute(sensorContext);
     verifyZeroInteractions(sensorContext);
   }
 
@@ -67,7 +67,7 @@ public class UnitTestResultsImportSensorTest {
 
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create()).analyze(context, results);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#").analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
@@ -95,7 +95,7 @@ public class UnitTestResultsImportSensorTest {
     when(results.executionTime()).thenReturn(null);
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create()).analyze(context, results);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#").analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
