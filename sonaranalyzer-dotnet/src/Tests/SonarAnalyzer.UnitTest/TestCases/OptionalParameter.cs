@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Tests.Diagnostics
+﻿namespace Tests.Diagnostics
 {
     public interface IInterface
     {
@@ -30,6 +28,22 @@ namespace Tests.Diagnostics
         private OptionalParameter(int i = 0) // Compliant, private
         {
         }
+
+        private void PrivateFoo(int i = 42) // Compliant, private
+        { }
+
+        internal void InternalFoo(int i = 42) // Compliant, internal
+        { }
+
+        protected void ProtectedFoo(int i = 42) // Compliant
+        { }
+
+        internal protected void InternalProtectedFoo(int i = 42) // Compliant
+        {
+        }
+
+        public void PublicFoo(int i = 42) // Noncompliant
+        { }
     }
 
     public class CallerMember
