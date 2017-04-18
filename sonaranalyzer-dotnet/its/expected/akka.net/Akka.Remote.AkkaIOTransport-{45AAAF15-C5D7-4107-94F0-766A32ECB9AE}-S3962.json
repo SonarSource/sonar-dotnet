@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AkkaIOTransport.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  39,
+"endLine":  18,
+"endColumn":  47
+}
+}
+}
+]
+}
