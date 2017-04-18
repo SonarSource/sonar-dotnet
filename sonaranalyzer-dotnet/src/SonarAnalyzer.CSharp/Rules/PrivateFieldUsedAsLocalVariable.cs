@@ -69,23 +69,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classMethods = classSymbol.GetMembers().Where(m => m.Kind == SymbolKind.Method).ToImmutableHashSet();
 
                     ExcludePrivateFieldsBasedOnReferences(privateFields, referencesByEnclosingSymbol, classMethods);
-                    ExcludePrivateFieldsBasedOnCompilerErrors(privateFields, referencesByEnclosingSymbol, classMethods, classNode);
+                    ExcludePrivateFieldsBasedOnCompilerErrors(privateFields, referencesByEnclosingSymbol, classMethods,
+                        classNode, c.SemanticModel.Compilation);
 
                     foreach (var privateField in privateFields.Values.Where(f => !f.Excluded))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, privateField.Syntax.GetLocation(), privateField.Symbol.Name));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, privateField.Syntax.GetLocation(),
+                            privateField.Symbol.Name));
                     }
                 },
                 SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);
         }
 
-        private static IImmutableDictionary<ISymbol, PrivateField> GetPrivateFields(TypeDeclarationSyntax classNode, SemanticModel semanticModel)
+        private static IImmutableDictionary<ISymbol, PrivateField> GetPrivateFields(TypeDeclarationSyntax classNode,
+            SemanticModel semanticModel)
         {
             return classNode.Members
                         .Where(m => m.IsKind(SyntaxKind.FieldDeclaration))
                         .Cast<FieldDeclarationSyntax>()
                         .Where(f => !f.AttributeLists.Any())
-                        .SelectMany(f => f.Declaration.Variables.Select(v => new PrivateField(v, semanticModel.GetDeclaredSymbol(v))))
+                        .SelectMany(f => f.Declaration.Variables.Select(
+                            v => new PrivateField(v, semanticModel.GetDeclaredSymbol(v))))
                         .Where(f => f.Symbol != null && f.Symbol.DeclaredAccessibility == Accessibility.Private)
                         .ToImmutableDictionary(
                             f => f.Symbol,
@@ -114,12 +118,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 SyntaxNode referenceSyntax = potentialReference;
-                while (referenceSyntax.Parent != null && referencedSymbol.Equals(semanticModel.GetSymbolInfo(referenceSyntax.Parent).Symbol))
+                while (referenceSyntax.Parent != null &&
+                       referencedSymbol.Equals(semanticModel.GetSymbolInfo(referenceSyntax.Parent).Symbol))
                 {
                     referenceSyntax = referenceSyntax.Parent;
                 }
 
-                if (referenceSyntax.Parent != null && referenceSyntax.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
+                if (referenceSyntax.Parent != null &&
+                    referenceSyntax.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
                 {
                     referenceSyntax = referenceSyntax.Parent;
                 }
@@ -202,12 +208,14 @@ namespace SonarAnalyzer.Rules.CSharp
             IImmutableDictionary<ISymbol, PrivateField> privateFields,
             IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> referencesByEnclosingSymbol,
             IImmutableSet<ISymbol> classMethods,
-            TypeDeclarationSyntax classNode)
+            TypeDeclarationSyntax classNode,
+            Compilation compilation)
         {
             var replacements = new Dictionary<SyntaxNode, BlockSyntax>();
             foreach (var classMethod in classMethods.Where(m => referencesByEnclosingSymbol.ContainsKey(m)))
             {
-                var references = referencesByEnclosingSymbol[classMethod].Where(r => !privateFields[r.Value].Excluded).ToImmutableDictionary(kv => kv.Key, kv => kv.Value);
+                var references = referencesByEnclosingSymbol[classMethod].Where(r => !privateFields[r.Value].Excluded)
+                    .ToImmutableDictionary(kv => kv.Key, kv => kv.Value);
 
                 BlockSyntax body;
                 BlockSyntax newBody;
@@ -229,13 +237,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 null,
                 null,
                 null);
-            var newSyntaxTree = classNode.SyntaxTree.WithRootAndOptions(newSyntaxRoot, classNode.SyntaxTree.Options);
-            var newCompilation = CSharpCompilation.Create(nameof(PrivateFieldUsedAsLocalVariable), new[] { newSyntaxTree });
+            var newSyntaxTree = classNode.SyntaxTree.WithRootAndOptions(newSyntaxRoot,
+                classNode.SyntaxTree.Options);
+            var newCompilation = CSharpCompilation.Create(nameof(PrivateFieldUsedAsLocalVariable),
+                new[] { newSyntaxTree }, compilation.References, compilation.Options as CSharpCompilationOptions);
 
             var diagnostics = newCompilation.GetDiagnostics();
             foreach (var privateField in privateFields.Values.Where(f => !f.Excluded))
             {
-                if (diagnostics.Any(d => d.Id == WellKnownDiagnosticIds.ERR_UseDefViolation && d.GetMessage().Contains(privateField.UniqueName)))
+                if (diagnostics.Any(d => d.Id == WellKnownDiagnosticIds.ERR_UseDefViolation
+                                         && d.GetMessage().Contains(privateField.UniqueName)))
                 {
                     privateField.Excluded = true;
                 }
@@ -309,8 +320,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var localDeclaration = SyntaxFactory.LocalDeclarationStatement(
                 SyntaxFactory.VariableDeclaration(
-                    SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword)).WithTrailingTrivia(SyntaxFactory.Space),
-                    SyntaxFactory.SeparatedList(symbolsToRewrite.Select(s => SyntaxFactory.VariableDeclarator(privateFields[s].UniqueName)))));
+                    SyntaxFactory.PredefinedType(
+                        SyntaxFactory.Token(SyntaxKind.IntKeyword)).WithTrailingTrivia(SyntaxFactory.Space),
+                    SyntaxFactory.SeparatedList(symbolsToRewrite.Select(
+                        s => SyntaxFactory.VariableDeclarator(privateFields[s].UniqueName)))));
 
             var rewrittenNodesBuilder = ImmutableHashSet.CreateBuilder<SyntaxNode>();
             var newBody = body.ReplaceSyntax(
