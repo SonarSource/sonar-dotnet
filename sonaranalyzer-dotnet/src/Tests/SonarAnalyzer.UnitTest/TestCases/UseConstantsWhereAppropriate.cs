@@ -19,6 +19,8 @@ namespace Tests.Diagnostics
         static readonly ushort x13 = 1;    // Noncompliant
         static readonly string x14 = "";   // Noncompliant
 
+        static readonly int maxVal = int.MaxValue; // Noncompliant
+
         static readonly object x15 = null; // Compliant
 
         static readonly bool y1;     // Compliant
