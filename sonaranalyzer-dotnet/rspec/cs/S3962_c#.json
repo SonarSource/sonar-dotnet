@@ -1,0 +1,13 @@
+{
+  "title": "\"static readonly\" constants should be \"const\" instead",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor"
+}

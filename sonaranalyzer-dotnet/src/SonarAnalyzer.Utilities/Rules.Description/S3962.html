@@ -1,0 +1,28 @@
+<p>The value of a <code>static readonly</code> field is computed at runtime while the value of a <code>const</code> field is calculated at compile
+time, which improves performance.</p>
+<p>This rule raises an issue when a <code>static readonly</code> field is initialiazed with a value that is computable at compile time.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+namespace myLib
+{
+  public class Foo
+  {
+    static readonly int x = 1;  // Noncompliant
+    static readonly int y = x + 4; // Noncompliant
+    static readonly string s = "Bar";  // Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+namespace myLib
+{
+  public class Foo
+  {
+    const int x = 1;
+    const int y = x + 4;
+    const string s = "Bar";
+  }
+}
+</pre>
+

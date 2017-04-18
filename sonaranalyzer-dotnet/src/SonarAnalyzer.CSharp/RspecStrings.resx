@@ -5217,6 +5217,30 @@
   <data name="S3928_Title" xml:space="preserve">
     <value>Parameter names used into ArgumentException constructors should match an existing one </value>
   </data>
+  <data name="S3962_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3962_Description" xml:space="preserve">
+    <value>The value of a static readonly field is computed at runtime while the value of a const field is calculated at compile time, which improves performance.</value>
+  </data>
+  <data name="S3962_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3962_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3962_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3962_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S3962_Tags" xml:space="preserve">
+    <value>performance</value>
+  </data>
+  <data name="S3962_Title" xml:space="preserve">
+    <value>"static readonly" constants should be "const" instead</value>
+  </data>
   <data name="S3971_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
