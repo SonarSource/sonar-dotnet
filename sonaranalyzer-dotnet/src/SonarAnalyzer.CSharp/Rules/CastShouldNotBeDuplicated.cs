@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -51,6 +51,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
             var castType = isExpression.Right as TypeSyntax;
             if (castType == null)
+            {
+                return;
+            }
+
+            var castTypeSymbol = analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol as INamedTypeSymbol;
+            if (castTypeSymbol == null ||
+                castTypeSymbol.TypeKind == TypeKind.Struct)
             {
                 return;
             }

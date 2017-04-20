@@ -5,30 +5,6 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  534,
-"startColumn":  21,
-"endLine":  534,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  536,
-"startColumn":  29,
-"endLine":  536,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
 "uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  282,
@@ -77,54 +53,6 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  29,
-"endLine":  49,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
-"region":  {
-"startLine":  191,
-"startColumn":  21,
-"endLine":  191,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
-"region":  {
-"startLine":  193,
-"startColumn":  29,
-"endLine":  193,
-"endColumn":  42
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
 "uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
 "region":  {
 "startLine":  105,
@@ -164,54 +92,6 @@
 "startColumn":  29,
 "endLine":  41,
 "endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
-"region":  {
-"startLine":  47,
-"startColumn":  21,
-"endLine":  47,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  29,
-"endLine":  49,
-"endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  21,
-"endLine":  70,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
-"region":  {
-"startLine":  72,
-"startColumn":  29,
-"endLine":  72,
-"endColumn":  41
 }
 }
 ]

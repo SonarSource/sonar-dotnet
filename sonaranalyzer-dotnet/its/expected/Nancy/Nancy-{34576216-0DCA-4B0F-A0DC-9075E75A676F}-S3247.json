@@ -5,102 +5,6 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  400,
-"startColumn":  17,
-"endLine":  400,
-"endColumn":  43
-}
-},
-{
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  402,
-"startColumn":  24,
-"endLine":  402,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  425,
-"startColumn":  17,
-"endLine":  425,
-"endColumn":  47
-}
-},
-{
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  427,
-"startColumn":  24,
-"endLine":  427,
-"endColumn":  52
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  450,
-"startColumn":  17,
-"endLine":  450,
-"endColumn":  47
-}
-},
-{
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
-"region":  {
-"startLine":  452,
-"startColumn":  24,
-"endLine":  452,
-"endColumn":  52
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  17,
-"endLine":  52,
-"endColumn":  29
-}
-},
-{
-"uri":  "Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  24,
-"endLine":  54,
-"endColumn":  34
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
 "uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  154,
@@ -284,30 +188,6 @@
 "startColumn":  51,
 "endLine":  379,
 "endColumn":  83
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  384,
-"startColumn":  15,
-"endLine":  384,
-"endColumn":  30
-}
-},
-{
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  386,
-"startColumn":  26,
-"endLine":  386,
-"endColumn":  39
 }
 }
 ]
