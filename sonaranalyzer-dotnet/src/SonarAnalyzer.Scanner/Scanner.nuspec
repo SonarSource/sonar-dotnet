@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>SonarAnalyzer.Scanner</id>
-    <version>5.9.0.0</version>
+    <version>5.10.0.0</version>
     <title>SonarAnalyzer Scanner</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>

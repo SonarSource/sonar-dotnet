@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MainVersion>5.9.0</MainVersion>
+    <MainVersion>5.10.0</MainVersion>
     <BuildNumber>0</BuildNumber>
     <Sha1>not-set</Sha1>
     <BranchName>not-set</BranchName>

@@ -5,8 +5,14 @@ Param(
     [string]$version
 )
 
-function UpdateJavaFiles {
-    Write-Output "Update version in Java files"
+function Write-Header([string]$message) {
+    Write-Host "================================================"
+    Write-Host $message
+    Write-Host "================================================"
+}
+
+function Set-VersionForJava {
+    Write-Header "Updating version in Java files"
 
     $fixedVersion = $version
     If ($fixedVersion.Split('.').Count -eq 3 -and $fixedVersion.EndsWith(".0")) {
@@ -15,18 +21,22 @@ function UpdateJavaFiles {
     mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${fixedVersion}-SNAPSHOT" -DgenerateBackupPoms=false -B -e
 }
 
-function UpdateDotNetFiles {
-    Write-Output "Update version in .Net files"
+function Set-VersionForDotNet {
+    Write-Header "Updating version in .Net files"
 
-    Push-Location ".\sonaranalyzer-dotnet\build"
-    $versionPropsFile = "Version.props"
-    $xml = [xml](Get-Content $versionPropsFile)
-    $xml.Project.PropertyGroup.MainVersion = ${version}
-    $xml.Save($versionPropsFile)
-
-    msbuild "ChangeVersion.proj"
-    Pop-Location
+    try {
+        Push-Location ".\sonaranalyzer-dotnet\build"
+        $versionPropsFile = Resolve-Path "Version.props"
+        $xml = [xml](Get-Content $versionPropsFile)
+        $xml.Project.PropertyGroup.MainVersion = ${version}
+        $xml.Save($versionPropsFile)
+        msbuild "ChangeVersion.proj"
+    }
+    finally {
+        Pop-Location
+    }
 }
 
-UpdateJavaFiles
-UpdateDotNetFiles
+Set-VersionForJava
+Write-Output ""
+Set-VersionForDotNet
