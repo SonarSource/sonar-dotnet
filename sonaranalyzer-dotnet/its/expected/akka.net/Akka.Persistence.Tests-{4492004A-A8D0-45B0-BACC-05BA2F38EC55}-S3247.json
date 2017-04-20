@@ -5,54 +5,6 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  21,
-"endLine":  213,
-"endColumn":  35
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
-"region":  {
-"startLine":  215,
-"startColumn":  31,
-"endLine":  215,
-"endColumn":  43
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
-"region":  {
-"startLine":  219,
-"startColumn":  26,
-"endLine":  219,
-"endColumn":  45
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
-"region":  {
-"startLine":  221,
-"startColumn":  40,
-"endLine":  221,
-"endColumn":  57
-}
-}
-]
-},
-{
-"id":  "S3247",
-"message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
-"location":  [
-{
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  337,

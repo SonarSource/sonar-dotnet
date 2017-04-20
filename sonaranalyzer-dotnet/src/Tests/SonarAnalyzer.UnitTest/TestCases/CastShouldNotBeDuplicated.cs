@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
+    class Fruit { }
+
     class Program
     {
         public void Foo()
@@ -31,6 +33,22 @@ namespace Tests.Diagnostics
                 var f2 = (Fruit)x; // Compliant - should be non compliant
             }
 
+        }
+
+        public void FooBar()
+        {
+            if (x is int)
+            {
+                var res = (int)x; // Compliant because we are casting to a ValueType
+            }
+        }
+
+        public void UnknownFoo()
+        {
+            if (x is Car)  // Compliant because we ignore what the type is (there will be an error)
+            {
+                var c = (Car)x;
+            }
         }
     }
 }
