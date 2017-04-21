@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -51,6 +50,30 @@ namespace SonarAnalyzer.Rules.CSharp
             defaultValue: MaximumDepthDefaultValue)]
         public int MaximumDepth { get; set; } = MaximumDepthDefaultValue;
 
+        private ICollection<Regex> filteredClassesRegex = new List<Regex>();
+
+        private const string FilteredClassesDefaultValue = "";
+        private string filteredClasses = FilteredClassesDefaultValue;
+        [RuleParameter(
+            key: "filteredClasses",
+            type: PropertyType.String,
+            description: "Classes to be filtered out of the count of inheritance. Depth counting will stop when a filtered class is reached. (String)",
+            defaultValue: FilteredClassesDefaultValue)]
+        public string FilteredClasses
+        {
+            get
+            {
+                return filteredClasses;
+            }
+            set
+            {
+                filteredClasses = value;
+                filteredClassesRegex = filteredClasses.Split(',')
+                    .Select(s => new Regex(WilcardToRegular(s), RegexOptions.Compiled))
+                    .ToList();
+            }
+        }
+
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -63,7 +86,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var baseTypesCount = symbol.GetSelfAndBaseTypes().Count() - 1; // remove the class itself
+                    var baseTypesCount = 0;
+                    var baseTypeNames = symbol.GetSelfAndBaseTypes()
+                        .Select(nts => nts.OriginalDefinition.ToDisplayString())
+                        .Skip(1); // remove the class itself
+                    foreach (var className in baseTypeNames)
+                    {
+                        if (filteredClassesRegex.Any(regex => regex.IsMatch(className)))
+                        {
+                            break;
+                        }
+                        baseTypesCount++;
+                    }
+
                     if (baseTypesCount > MaximumDepth)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
@@ -71,6 +106,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                 }, SyntaxKind.ClassDeclaration);
+        }
+
+        private static string WilcardToRegular(string pattern)
+        {
+            return string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
         }
     }
 }

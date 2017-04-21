@@ -36,10 +36,18 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void AvoidExcessiveInheritance_CustomValues()
+        public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass()
         {
             Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
-                new AvoidExcessiveInheritance { MaximumDepth = 2 });
+                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.SecondSubClass" });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void AvoidExcessiveInheritance_CustomValuesWilcardFilteredClass()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\AvoidExcessiveInheritance_CustomValues.cs",
+                new AvoidExcessiveInheritance { MaximumDepth = 2, FilteredClasses = "Tests.Diagnostics.*SubClass" });
         }
     }
 }
