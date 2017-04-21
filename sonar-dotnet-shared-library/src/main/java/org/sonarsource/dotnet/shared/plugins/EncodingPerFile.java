@@ -44,7 +44,7 @@ public class EncodingPerFile {
   private static final Version INPUT_FILE_CHARSET = Version.create(6, 1);
 
   // Lazy initialized
-  private Map<String, Charset> roslynEncodingPerPath;
+  private Map<Path, Charset> roslynEncodingPerPath;
 
   private final ProjectDefinition projectDef;
   private final SonarQubeVersion sonarQubeVersion;
@@ -68,7 +68,7 @@ public class EncodingPerFile {
   }
 
   boolean encodingMatch(InputFile inputFile) {
-    String inputFilePath = inputFile.path().toAbsolutePath().toString();
+    Path inputFilePath = inputFile.path().toAbsolutePath();
 
     if (!roslynEncodingPerPath.containsKey(inputFilePath)) {
       // When there is no entry for a file, it means it was not processed by Roslyn. So we consider encoding to be ok.

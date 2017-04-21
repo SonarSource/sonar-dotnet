@@ -25,8 +25,11 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
 
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
 
@@ -52,8 +55,11 @@ public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
     encodingPerPath.put(message.getFilePath(), charset);
   }
 
-  public Map<String, Charset> getEncodingPerPath() {
-    return encodingPerPath;
+  public Map<Path, Charset> getEncodingPerPath() {
+    return encodingPerPath.entrySet()
+        .stream()
+        .collect(Collectors.toMap(entry -> Paths.get(entry.getKey()),
+                                  Map.Entry::getValue));
   }
 
 }
