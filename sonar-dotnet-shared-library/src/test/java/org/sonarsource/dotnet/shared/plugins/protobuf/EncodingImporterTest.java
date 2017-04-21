@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,10 +54,10 @@ public class EncodingImporterTest {
 
     importer.accept(protobuf.toPath());
 
-    Map<String, Charset> encodingPerPath = importer.getEncodingPerPath();
+    Map<Path, Charset> encodingPerPath = importer.getEncodingPerPath();
 
     assertThat(encodingPerPath.size()).isEqualTo(1);
-    assertThat(encodingPerPath.get(TEST_FILE_PATH)).isEqualTo(StandardCharsets.UTF_8);
+    assertThat(encodingPerPath.get(Paths.get(TEST_FILE_PATH))).isEqualTo(StandardCharsets.UTF_8);
   }
 
 }
