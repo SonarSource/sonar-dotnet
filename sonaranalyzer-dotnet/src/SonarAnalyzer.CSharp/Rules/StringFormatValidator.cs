@@ -20,15 +20,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using System.Collections.Immutable;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -73,8 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
                 ValidationFailure.UnbalancedCurlyBraceCount,
                 ValidationFailure.FormatItemMalformed,
-                ValidationFailure.FormatItemIndexIsNaN,
-                ValidationFailure.FormatItemAlignmentIsNaN,
                 ValidationFailure.FormatItemIndexTooHigh
             };
 
@@ -85,6 +84,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValidationFailure.MissingFormatItemIndex,
                 ValidationFailure.UnusedFormatArguments
             };
+
+        private static readonly Regex StringFormatItemRegex = // pattern is {index[,alignment][:formatString]}
+            new Regex(@"^(?<Index>\d+)(,(?<Alignment>-?\d+))?(:(?<Format>.+))?$", RegexOptions.Compiled);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -231,43 +233,22 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ValidationFailure TryParseItem(string formatItem, out FormatStringItem formatStringItem)
         {
             formatStringItem = null;
-            var indexOfComma = formatItem.IndexOf(',');
-            var indexOfColon = formatItem.IndexOf(':');
-            var split = formatItem.Split(',', ':');
 
-            if (indexOfComma >= 0 && indexOfColon >= 0 && indexOfColon < indexOfComma ||
-                split.Length > 3)
+            var matchResult = StringFormatItemRegex.Match(formatItem);
+            if (!matchResult.Success)
             {
                 return ValidationFailure.FormatItemMalformed;
             }
 
-            int index;
-            int? alignment = null;
-            string formatString = null;
-
-            if (!int.TryParse(split[0], out index))
-            {
-                return ValidationFailure.FormatItemIndexIsNaN;
-            }
-
-            if (indexOfComma >= 0)
-            {
-                int localAlignment;
-                if (!int.TryParse(split[1], out localAlignment))
-                {
-                    return ValidationFailure.FormatItemAlignmentIsNaN;
-                }
-                alignment = localAlignment;
-            }
-
-            if (indexOfColon >= 0)
-            {
-                formatString = indexOfComma >= 0
-                    ? split[2]
-                    : split[1];
-            }
-
+            var index = int.Parse(matchResult.Groups["Index"].Value);
+            var alignment = matchResult.Groups["Alignment"].Success
+                ? (int?)int.Parse(matchResult.Groups["Alignment"].Value)
+                : null;
+            var formatString = matchResult.Groups["Format"].Success
+                ? matchResult.Groups["Format"].Value
+                : null;
             formatStringItem = new FormatStringItem(index, alignment, formatString);
+
             return null;
         }
 
@@ -385,10 +366,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 new ValidationFailure("Invalid string format, unbalanced curly brace count.");
             public static readonly ValidationFailure FormatItemMalformed =
                 new ValidationFailure("Invalid string format, all format items should comply with the following pattern '{index[,alignment][:formatString]}'.");
-            public static readonly ValidationFailure FormatItemIndexIsNaN =
-                new ValidationFailure("Invalid string format, all format item indexes should be numbers.");
-            public static readonly ValidationFailure FormatItemAlignmentIsNaN =
-                new ValidationFailure("Invalid string format, all format item alignments should be numbers.");
             public static readonly ValidationFailure FormatItemIndexTooHigh =
                 new ValidationFailure("Invalid string format, the highest string format item index should not be greater than the arguments count.");
             public static readonly ValidationFailure SimpleString =
