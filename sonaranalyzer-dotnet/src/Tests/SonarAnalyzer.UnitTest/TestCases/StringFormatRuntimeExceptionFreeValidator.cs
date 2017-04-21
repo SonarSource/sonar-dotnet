@@ -52,6 +52,7 @@ namespace Tests.Diagnostics
 
             s = string.Format("{0test}", 42); // Noncompliant {{Invalid string format, all format items should comply with the following pattern '{index[,alignment][:formatString]}'.}}
             s = string.Format("{0,test}", 42); // Noncompliant
+            s = string.Format("{0.0}", 42); // Noncompliant
             s = string.Format("{0:C,10}", 42);
             s = string.Format("{0:hh:mm:ss}", DateTime.Now);
             s = string.Format("{0:dd/MM/yyyy}", DateTime.Now);
