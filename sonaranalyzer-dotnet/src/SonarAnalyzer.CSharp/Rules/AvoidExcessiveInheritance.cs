@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 filteredClasses = value;
                 filteredClassesRegex = filteredClasses.Split(',')
-                    .Select(s => new Regex(WilcardToRegular(s), RegexOptions.Compiled))
+                    .Select(WilcardPatternToRegularExpression)
                     .ToList();
             }
         }
@@ -86,18 +86,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var baseTypesCount = 0;
-                    var baseTypeNames = symbol.GetSelfAndBaseTypes()
+                    var baseTypesCount = symbol.GetSelfAndBaseTypes()
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
-                        .Skip(1); // remove the class itself
-                    foreach (var className in baseTypeNames)
-                    {
-                        if (filteredClassesRegex.Any(regex => regex.IsMatch(className)))
-                        {
-                            break;
-                        }
-                        baseTypesCount++;
-                    }
+                        .Skip(1) // remove the class itself
+                        .TakeWhile(className => filteredClassesRegex.All(regex => !regex.IsMatch(className)))
+                        .Count();
 
                     if (baseTypesCount > MaximumDepth)
                     {
@@ -108,9 +101,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private static string WilcardToRegular(string pattern)
+        private static Regex WilcardPatternToRegularExpression(string pattern)
         {
-            return string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
+            var regexPattern = string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
+            return new Regex(regexPattern, RegexOptions.Compiled);
         }
     }
 }
