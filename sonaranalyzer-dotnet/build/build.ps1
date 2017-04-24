@@ -73,11 +73,12 @@ elseif ($analyze -And $isMaster) {
     Write-Host "Is master '${isMaster}'"
 
     $testResultsPath = Resolve-RepoPath "TestResults"
+    Write-Host "Looking for reports in: ${testResultsPath}"
 
     Begin-Analysis $sonarQubeUrl $sonarQubeToken $sonarQubeProjectKey $sonarQubeProjectName `
             /v:"master" `
-            /d:sonar.cs.vstest.reportsPaths="${testResultsPath}\*.trx" `
-            /d:sonar.cs.vscoveragexml.reportsPaths="${testResultsPath}\*.coveragexml"
+            /d:sonar.cs.vstest.reportsPaths="${testResultsPath}\**\*.trx" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="${testResultsPath}\**\*.coveragexml"
 }
 else {
     $skippedAnalysis = $true
