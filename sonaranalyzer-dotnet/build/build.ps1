@@ -72,8 +72,12 @@ if ($analyze -And $isPullRequest -Eq "true") {
 elseif ($analyze -And $isMaster) {
     Write-Host "Is master '${isMaster}'"
 
+    $testResultsPath = Resolve-RepoPath "TestResults"
+
     Begin-Analysis $sonarQubeUrl $sonarQubeToken $sonarQubeProjectKey $sonarQubeProjectName `
-            /v:"master"
+            /v:"master" `
+            /d:sonar.cs.vstest.reportsPaths="${testResultsPath}\*.trx" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="${testResultsPath}\*.coveragexml"
 }
 else {
     $skippedAnalysis = $true

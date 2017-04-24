@@ -330,7 +330,7 @@ function Run-Tests {
         | Where-Object { $_.DirectoryName -Match "bin" } `
         | ForEach-Object {
             Write-Host "------ Unit Tests started: Assembly: $_ ------"
-            & $vstest_exe $_ /Enablecodecoverage /inIsolation
+            & $vstest_exe $_ /Enablecodecoverage /inIsolation /Logger:trx
             Test-ExitCode "Unit Tests execution FAILED."
         }
 
