@@ -2,6 +2,214 @@
 "issues":  [
 {
 "id":  "S1144",
+"message":  "Remove the unused internal method 'IncrementedCopy'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  194,
+"startColumn":  9,
+"endLine":  197,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'AtLeastOnceDeliverySemantic'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  9,
+"endLine":  286,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Init'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  9,
+"endLine":  361,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Deliver'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  9,
+"endLine":  397,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'ConfirmDelivery'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  9,
+"endLine":  408,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'GetDeliverySnapshot'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  416,
+"startColumn":  9,
+"endLine":  423,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'SetDeliverySnapshot'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  9,
+"endLine":  439,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Cancel'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  9,
+"endLine":  444,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'OnReplaySuccess'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  9,
+"endLine":  450,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'AroundReceive'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  452,
+"startColumn":  9,
+"endLine":  460,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'EventsourcedState'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Pop'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  9,
+"endLine":  327,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'NotifyAboutReplayCompletion'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\InternalExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'EnqueueMessageFirst'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\InternalExtensions.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'ReplayMediator'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  9,
+"endLine":  248,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal field 'Instance'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  9,
+"endLine":  122,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field '_timeout'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
@@ -10,6 +218,97 @@
 "startColumn":  9,
 "endLine":  32,
 "endColumn":  70
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'WriteConfirmationsFailure'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  9,
+"endLine":  199,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'PluginHolder'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'AdaptersFor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  9,
+"endLine":  148,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'NonPersistentMessage'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  9,
+"endLine":  58,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'ViewState'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Limit'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  9,
+"endLine":  249,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'IsMatch'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  9,
+"endLine":  254,
+"endColumn":  10
 }
 }
 }

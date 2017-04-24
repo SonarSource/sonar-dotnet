@@ -25,6 +25,19 @@
 "endColumn":  76
 }
 }
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'MovieScraperManager'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  9,
+"endLine":  55,
+"endColumn":  10
+}
+}
 }
 ]
 }

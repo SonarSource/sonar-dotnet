@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'NonPublicActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  368,
-"startColumn":  13,
-"endLine":  371,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'WorkerActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  376,
-"startColumn":  13,
-"endLine":  392,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private type 'FailingChildInnerActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
@@ -106,175 +80,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'EchoReceiveActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  13,
-"endLine":  149,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'PreStartEchoReceiveActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  13,
-"endLine":  158,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'CallReceiveWhenHandlingMessageActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  13,
-"endLine":  182,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'IntPredicatesActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  187,
-"startColumn":  13,
-"endLine":  202,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'TypePredicatesActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  13,
-"endLine":  224,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'ReceiveAnyActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  230,
-"startColumn":  13,
-"endLine":  234,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'BecomeActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'BecomeDirectlyInConstructorActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  123,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'CrashActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  13,
-"endLine":  72,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashingActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashAndReplyActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  13,
-"endLine":  197,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashEverythingActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  203,
-"startColumn":  13,
-"endLine":  206,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashingTwiceActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  13,
-"endLine":  227,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'Greeted'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
@@ -282,19 +87,6 @@
 "startLine":  229,
 "startColumn":  13,
 "endLine":  237,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'Resumer'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  13,
-"endLine":  60,
 "endColumn":  14
 }
 }
@@ -309,6 +101,266 @@
 "startColumn":  13,
 "endLine":  88,
 "endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'TestActorWrapperActor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  9,
+"endLine":  52,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Notification'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  9,
+"endLine":  67,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'Registration'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  85,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Registration'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'LocalServerTest'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  742,
+"startColumn":  9,
+"endLine":  752,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Run'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  756,
+"startColumn":  9,
+"endLine":  771,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'CreateConnectionActor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  784,
+"startColumn":  9,
+"endLine":  787,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'UnacceptedConnectionTest'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  831,
+"startColumn":  9,
+"endLine":  835,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal set accessor in property 'ConnectionActor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  843,
+"startColumn":  13,
+"endLine":  843,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Run'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  851,
+"startColumn":  9,
+"endLine":  862,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'AcceptServerSideChannel'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  864,
+"startColumn":  9,
+"endLine":  879,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'EstablishedConnectionTest'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  890,
+"startColumn":  9,
+"endLine":  897,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Run'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  914,
+"startColumn":  9,
+"endLine":  944,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'WriteCmd'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  948,
+"startColumn":  9,
+"endLine":  951,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'CloseServerSideAndWaitForClientReadable'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  953,
+"startColumn":  9,
+"endLine":  958,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'PullFromServerSide'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  965,
+"startColumn":  9,
+"endLine":  968,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'AssertThisConnectionActorTerminated'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  1003,
+"startColumn":  9,
+"endLine":  1006,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'AbortClose'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  1008,
+"startColumn":  9,
+"endLine":  1014,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'TestException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  9,
+"endLine":  338,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'TestException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  340,
+"startColumn":  9,
+"endLine":  343,
+"endColumn":  10
 }
 }
 },

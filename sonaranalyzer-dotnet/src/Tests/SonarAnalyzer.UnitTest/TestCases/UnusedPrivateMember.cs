@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class MyAttribute : Attribute { }
 
-    class UnusedPrivateMember
+    public class UnusedPrivateMember
     {
         public static void Main() { }
 
@@ -36,11 +36,35 @@ namespace Tests.Diagnostics
             }
         }
 
+        internal sealed class FooBar : Attribute
+        {
+            internal FooBar()
+            {
+                TypeId = 42;
+            }
+        }
+
+        internal sealed class Something
+        {
+            public readonly object Obj;
+            public Something(object obj)
+            {
+                Obj = obj;
+            }
+        }
+
         public UnusedPrivateMember()
         {
             MyProperty = 5;
             MyEvent += UnusedPrivateMember_MyEvent;
             new Gen<int>();
+            var fb = Do<FooBar>();
+            var s = new Something(42);
+        }
+
+        public T Do<T>()
+        {
+            return Activator.CreateInstance<T>();
         }
 
         private void UnusedPrivateMember_MyEvent()
@@ -108,6 +132,18 @@ namespace Tests.Diagnostics
                 get { return 42; }
             }
         }
+
+        internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal type 'Class4'.}}
+        {
+            public void Method() { var x = this[20]; }
+            public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused internal method 'Method1'.}}
+            public static int Method2() { return 2; }
+
+            public int this[int index]
+            {
+                get { return 42; }
+            }
+        }
     }
     public static class MyExtension
     {
@@ -134,11 +170,17 @@ namespace Tests.Diagnostics
     {
         private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
 //                                  ^^^^
+        internal int OnlyReadInternal { get; set; }  // Noncompliant {{Remove the unused internal set accessor in property 'OnlyReadInternal'.}}
+//                                           ^^^^
         private int OnlySet { get; set; }
         private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
 //                             ^^^^^^^^^^^^^^^^^^
+        internal int OnlySet2Internal { get { return 42; } set { } } // Noncompliant {{Remove the unused internal get accessor in property 'OnlySet2Internal'.}}
+//                                      ^^^^^^^^^^^^^^^^^^
         private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        internal int NotAccessedInternal { get; set; }   // Noncompliant {{Remove the unused internal property 'NotAccessedInternal'.}}
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
@@ -146,8 +188,10 @@ namespace Tests.Diagnostics
         public void M()
         {
             Console.WriteLine(OnlyRead);
+            Console.WriteLine(OnlyReadInternal);
             OnlySet = 42;
             (this.OnlySet2) = 42;
+            (this.OnlySet2Internal) = 42;
 
             BothAccessed++;
 

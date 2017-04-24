@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -27,7 +29,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class UnusedPrivateMember : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1144";
-        private const string MessageFormat = "Remove the unused private {0} '{1}'.";
+        private const string MessageFormat = "Remove the unused {0} {1} '{2}'.";
         private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
 
         private static readonly DiagnosticDescriptor rule =
@@ -45,51 +46,95 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly Accessibility maxAccessibility = Accessibility.Private;
+        private static readonly Accessibility maxAccessibility = Accessibility.Internal;
+
+        private ConcurrentBag<Diagnostic> possibleUnusedInternalMembers;
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSymbolAction(
+            context.RegisterCompilationStartAction(
                 c =>
                 {
-                    var namedType = (INamedTypeSymbol)c.Symbol;
-                    if (!namedType.IsClassOrStruct() ||
-                        namedType.ContainingType != null)
-                    {
-                        return;
-                    }
+                    var shouldRaise = true;
+                    possibleUnusedInternalMembers = new ConcurrentBag<Diagnostic>();
 
-                    var declarationCollector = new RemovableDeclarationCollector(namedType, c.Compilation);
+                    c.RegisterSemanticModelAction(
+                        cc =>
+                        {
+                            var isInternalsVisibleToAttributeFound = cc.SemanticModel.SyntaxTree.GetRoot()
+                                .DescendantNodes()
+                                .OfType<AttributeListSyntax>()
+                                .SelectMany(list => list.Attributes)
+                                .Any(a => IsInternalVisibleToAttribute(a, cc.SemanticModel));
+                            if (isInternalsVisibleToAttributeFound)
+                            {
+                                shouldRaise = false;
+                            }
+                        });
 
-                    var declaredPrivateSymbols = new HashSet<ISymbol>();
-                    var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
+                    c.RegisterSymbolAction(
+                        cc =>
+                        {
+                            var namedType = (INamedTypeSymbol)cc.Symbol;
+                            if (!namedType.IsClassOrStruct() ||
+                                namedType.ContainingType != null)
+                            {
+                                return;
+                            }
 
-                    CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols);
-                    CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols, fieldLikeSymbols);
-                    CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols);
-                    CollectRemovableMethods(declarationCollector, declaredPrivateSymbols);
+                            var declarationCollector = new RemovableDeclarationCollector(namedType, cc.Compilation);
 
-                    if (!declaredPrivateSymbols.Any())
-                    {
-                        return;
-                    }
+                            var declaredPrivateSymbols = new HashSet<ISymbol>();
+                            var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-                    var usedSymbols = new HashSet<ISymbol>();
-                    var emptyConstructors = new HashSet<ISymbol>();
+                            CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols);
+                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols, fieldLikeSymbols);
+                            CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols);
+                            CollectRemovableMethods(declarationCollector, declaredPrivateSymbols);
 
-                    var propertyAccessorAccess = new Dictionary<IPropertySymbol, AccessorAccess>();
+                            if (!declaredPrivateSymbols.Any())
+                            {
+                                return;
+                            }
 
-                    CollectUsedSymbols(declarationCollector, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
-                    CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(declarationCollector,
-                        usedSymbols, emptyConstructors);
+                            var usedSymbols = new HashSet<ISymbol>();
+                            var emptyConstructors = new HashSet<ISymbol>();
 
-                    ReportIssues(c, usedSymbols, declaredPrivateSymbols, emptyConstructors, fieldLikeSymbols);
-                    ReportUnusedPropertyAccessors(c, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
-                },
-                SymbolKind.NamedType);
+                            var propertyAccessorAccess = new Dictionary<IPropertySymbol, AccessorAccess>();
+
+                            CollectUsedSymbols(declarationCollector, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+                            CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(declarationCollector,
+                                usedSymbols, emptyConstructors);
+
+                            ReportIssues(cc, usedSymbols, declaredPrivateSymbols, emptyConstructors, fieldLikeSymbols);
+                            ReportUnusedPropertyAccessors(cc, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+                        }, SymbolKind.NamedType);
+
+                    c.RegisterCompilationEndAction(
+                        cc =>
+                        {
+                            if (!shouldRaise)
+                            {
+                                return;
+                            }
+
+                            foreach (var diagnostic in possibleUnusedInternalMembers)
+                            {
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                            }
+                        });
+                });
         }
 
-        private static void ReportUnusedPropertyAccessors(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
+        private static bool IsInternalVisibleToAttribute(AttributeSyntax attribute, SemanticModel semanticModel)
+        {
+            var attributeConstructor = semanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
+
+            return attributeConstructor != null &&
+                attributeConstructor.ContainingType.Is(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
+        }
+
+        private void ReportUnusedPropertyAccessors(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
             HashSet<ISymbol> declaredPrivateSymbols,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
@@ -104,22 +149,48 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
+                var effectiveAccessibility = property.GetEffectiveAccessibility();
+
                 if (access == AccessorAccess.Get && property.SetMethod != null)
                 {
                     var accessorSyntax = GetAccessorSyntax(property.SetMethod);
-                    if (accessorSyntax != null)
+                    if (accessorSyntax == null)
                     {
-                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "set accessor in property", property.Name), context.Compilation);
+                        continue;
                     }
-                    continue;
+
+                    if (effectiveAccessibility == Accessibility.Internal)
+                    {
+                        possibleUnusedInternalMembers.Add(Diagnostic.Create(rule, accessorSyntax.GetLocation(),
+                            "internal", "set accessor in property", property.Name));
+                        continue;
+                    }
+                    if (effectiveAccessibility == Accessibility.Private)
+                    {
+                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(),
+                            "private", "set accessor in property", property.Name), context.Compilation);
+                    }
+
                 }
 
                 if (access == AccessorAccess.Set && property.GetMethod != null)
                 {
                     var accessorSyntax = GetAccessorSyntax(property.GetMethod);
-                    if (accessorSyntax != null && accessorSyntax.Body != null)
+                    if (accessorSyntax == null || accessorSyntax.Body == null)
                     {
-                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "get accessor in property", property.Name), context.Compilation);
+                        continue;
+                    }
+
+                    if (effectiveAccessibility == Accessibility.Internal)
+                    {
+                        possibleUnusedInternalMembers.Add(Diagnostic.Create(rule, accessorSyntax.GetLocation(),
+                            "internal", "get accessor in property", property.Name));
+                        continue;
+                    }
+                    if (effectiveAccessibility == Accessibility.Private)
+                    {
+                        context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, accessorSyntax.GetLocation(),
+                            "private", "get accessor in property", property.Name), context.Compilation);
                     }
                 }
             }
@@ -130,7 +201,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
-        private static void ReportIssues(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
+        private void ReportIssues(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
             HashSet<ISymbol> declaredPrivateSymbols, HashSet<ISymbol> emptyConstructors,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
@@ -178,12 +249,31 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
+                if (unused.Symbol.IsConstructor() &&
+                    !unused.Symbol.GetParameters().Any() &&
+                    !unusedSymbols.Contains(unused.Symbol.ContainingType))
+                {
+                    // Don't report on unused default constructors if we haven't reported the type as unused.
+                    continue;
+                }
+
                 var memberKind = GetMemberType(unused.Symbol);
                 var memberName = GetMemberName(unused.Symbol);
+                var effectiveAccessibility = unused.Symbol.GetEffectiveAccessibility();
 
-                context.ReportDiagnosticIfNonGenerated(
-                    Diagnostic.Create(rule, location, memberKind, memberName),
-                    context.Compilation);
+                if (effectiveAccessibility == Accessibility.Internal)
+                {
+                    // We can't report internal members directly because they might be used through another assembly.
+                    possibleUnusedInternalMembers.Add(
+                        Diagnostic.Create(rule, location, "internal", memberKind, memberName));
+                    continue;
+                }
+                if (effectiveAccessibility == Accessibility.Private)
+                {
+                    context.ReportDiagnosticIfNonGenerated(
+                        Diagnostic.Create(rule, location, "private", memberKind, memberName),
+                        context.Compilation);
+                }
             }
         }
 

@@ -2,6 +2,58 @@
 "issues":  [
 {
 "id":  "S1144",
+"message":  "Remove the unused internal method 'Add'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'ShouldFail'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'ProcessingFailure'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'InternalTestKit'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  32,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field '_random'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
@@ -15,6 +67,162 @@
 },
 {
 "id":  "S1144",
+"message":  "Remove the unused internal constructor 'SimpleTransitionFSM'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  9,
+"endLine":  477,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'PersistentEventsStreamer'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  500,
+"startColumn":  9,
+"endLine":  504,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Item'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  9,
+"endLine":  548,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'NonEmptyShoppingCart'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  9,
+"endLine":  583,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'AddItem'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  9,
+"endLine":  612,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'ItemAdded'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  639,
+"startColumn":  9,
+"endLine":  642,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'WriteFailedException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'ReplayFailedException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  28,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Cleanup'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  9,
+"endLine":  91,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'Initialize'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  9,
+"endLine":  96,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal field 'Instance'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  9,
+"endLine":  136,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'TestException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  9,
+"endLine":  145,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
 "message":  "Remove the unused private field '_timeout'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
@@ -23,6 +231,58 @@
 "startColumn":  9,
 "endLine":  20,
 "endColumn":  70
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'FailingMemoryStore'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  54,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'BehaviorOneActor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Cmd'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Evt'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  9,
+"endLine":  58,
+"endColumn":  10
 }
 }
 },

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused internal constructor 'Sink'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  10
+}
+}
+}
+]
+}

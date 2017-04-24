@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'NegotiationModule'.",
-"location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
-"region":  {
-"startLine":  837,
-"startColumn":  13,
-"endLine":  850,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private constructor 'NotFoundStatusCodeHandler'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",

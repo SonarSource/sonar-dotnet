@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused internal method 'RequestExitCode'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  54,
+"endColumn":  10
+}
+}
+}
+]
+}
