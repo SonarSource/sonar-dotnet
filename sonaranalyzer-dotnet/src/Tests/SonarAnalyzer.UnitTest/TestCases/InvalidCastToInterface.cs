@@ -77,33 +77,54 @@ namespace Tests.Diagnostics
     public class Node
     { }
 
+    public class MyClass
+    {
+        public double? D { get; set; } = 1.001;
+    }
+
     public class NullableTest
     {
         public void Test1()
         {
-            int? i = null;
-            var ii = (int)i; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}
-//                   ^^^^^^
-}
+            int? i1 = null;
+            var ii = (int)i1; // Noncompliant {{Nullable is known to be empty, this cast throws an exception.}}
+//                   ^^^^^^^
+        }
         public void Test2()
         {
-            int? i = 10;
-            var ii = (int)i;
+            int? i2 = 10;
+            var ii = (int)i2;
         }
         public void Test3()
         {
-            int? i = null;
-            var d = (double)i; // Noncompliant
+            int? i3 = null;
+            var d = (double)i3; // Noncompliant
         }
         public void Test4()
         {
-            int? i = null;
-            var n = (NullableTest)i; // don't care, custom cast
+            int? i4 = null;
+            var n = (NullableTest)i4; // don't care, custom cast
         }
         public void Test5()
         {
-            int? i = null;
-            var d = (double?)i;
+            int? i5 = null;
+            var d = (double?)i5; // Compliant as the resulting type allows null
+        }
+        public void Test6()
+        {
+            int? i6 = 42;
+            var d = (double?)i6;
+        }
+        public void Test7()
+        {
+            int i7 = 42;
+            var d = (double)i7;
+        }
+
+        public void TestMethod(object obj)
+        {
+            var a = obj as MyClass;
+            var test = (ushort?)a?.D;
         }
 
         public static explicit operator NullableTest(int? i)
