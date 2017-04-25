@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -47,23 +47,31 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var unaryExpression = (PrefixUnaryExpressionSyntax) c.Node;
 
-                    var op = unaryExpression.OperatorToken;
-                    var prevToken = op.GetPreviousToken();
+                    var operatorToken = unaryExpression.OperatorToken;
+                    var previousToken = operatorToken.GetPreviousToken();
+                    var nextToken = operatorToken.GetNextToken();
 
-                    var opLocation = op.GetLocation();
-                    var opStartPosition = opLocation.GetLineSpan().StartLinePosition;
-                    var prevStartPosition = prevToken.GetLocation().GetLineSpan().StartLinePosition;
+                    var operatorLocation = operatorToken.GetLocation();
 
-                    if (prevToken.IsKind(SyntaxKind.EqualsToken) &&
-                        prevStartPosition.Line == opStartPosition.Line &&
-                        prevStartPosition.Character == opStartPosition.Character - 1)
+                    var operatorSpan = operatorLocation.GetLineSpan();
+                    var previousSpan = previousToken.GetLocation().GetLineSpan();
+                    var nextSpan = nextToken.GetLocation().GetLineSpan();
+
+                    if (previousToken.IsKind(SyntaxKind.EqualsToken) && 
+                        TiedTogether(previousSpan, operatorSpan) &&
+                        !(operatorToken.IsKind(SyntaxKind.MinusToken) && TiedTogether(operatorSpan, nextSpan)))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, opLocation, $"{op.Text}="));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}="));
                     }
                 },
                 SyntaxKind.UnaryMinusExpression,
                 SyntaxKind.UnaryPlusExpression,
                 SyntaxKind.LogicalNotExpression);
+        }
+
+        private static bool TiedTogether(FileLinePositionSpan span, FileLinePositionSpan nextSpan)
+        {
+            return span.EndLinePosition == nextSpan.StartLinePosition;
         }
     }
 }

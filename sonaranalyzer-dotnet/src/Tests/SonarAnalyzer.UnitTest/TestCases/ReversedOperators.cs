@@ -14,8 +14,12 @@ namespace Tests.Diagnostics
             target =- num;  // Noncompliant {{Was '-=' meant instead?}}
 //                  ^
             target =+ num;  // Noncompliant; target = 3
+//                  ^
 
             target = -num;  // Compliant; intent to assign inverse value of num is clear
+            target =-num;  // Compliant; most probably intent to assign inverse value?
+            target=-num;  // Compliant; most probably intent to assign inverse value?
+
             target += num;
 
             target += -num;
@@ -23,10 +27,9 @@ namespace Tests.Diagnostics
                 +num;
 
             bool a, b;
-            if (a =! b) ; // Noncompliant
-            if (a != b) ;
-
-            if (a = !b) ;
+            if (a =! b) { } // Noncompliant
+            if (a != b) { }
+            if (a = !b) { }
         }
     }
 }
