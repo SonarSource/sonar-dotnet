@@ -15,7 +15,8 @@ param (
     [string]$sonarQubeProjectKey = "sonaranalyzer-csharp-vbnet",
     [string]$sonarQubeUrl = "http://localhost:9000",
     [string]$sonarQubeToken = $null,
-
+	
+	[string]$solutionName = "SonarAnalyzer.sln",
     [string]$certificatePath,
 
     [string]$artifactoryUrl = "https://repox.sonarsource.com/api/nuget",
@@ -45,6 +46,39 @@ function Queue-QaBuild() {
 
     $content = Get-Content $versionPropertiesPath
     Write-Host "version.properties content is '{$content}'"
+}
+
+function Generate-Metadata {
+    Write-Header "Generating rules metadata..."
+
+    #Generate the XML descriptor files for the C# plugin
+    $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Release")
+    if (-Not (Test-Path $generatorPath)) {
+        Write-Warning "Using debug build of SonarAnalyzer.RuleDescriptorGenerator.exe"
+        $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Debug")
+    }
+
+    Write-Host "Executing generator ${generatorPath}"
+
+    Push-Location $generatorPath
+    Exec { .\SonarAnalyzer.RuleDescriptorGenerator.exe cs }
+    Exec { .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet }
+    Pop-Location
+}
+
+function Update-MavenArtifacts([string]$version) {
+    Write-Header "Updating SonarAnalyzer pom files to version ${version}..."
+
+    $packages = Get-ChildItem (Resolve-RepoPath "src") -Recurse "*.nupkg"
+
+    foreach ($file in $packages) {
+        $packageId = $file.Name `
+            -Replace $file.Extension, "" `
+            -Replace ".$version", ""
+
+        (Get-Content (Resolve-RepoPath ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml")) -Replace "file-${packageId}", $file.FullName `
+            | Set-Content ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml"
+    }
 }
 
 Set-Version
@@ -85,10 +119,10 @@ else {
 }
 
 if ($debugBuild) {
-    Build-Solution (Resolve-RepoPath ".\SonarAnalyzer.sln")
+    Build-Solution (Resolve-RepoPath $solutionName)
 }
 else {
-    Build-ReleaseSolution (Resolve-RepoPath ".\SonarAnalyzer.sln") $certificatePath
+    Build-ReleaseSolution (Resolve-RepoPath $solutionName) $certificatePath
 }
 
 if ($test) {

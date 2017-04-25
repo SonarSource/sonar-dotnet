@@ -179,24 +179,6 @@ function Get-Version {
     return $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
 }
 
-function Generate-Metadata {
-    Write-Header "Generating rules metadata..."
-
-    #Generate the XML descriptor files for the C# plugin
-    $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Release")
-    if (-Not (Test-Path $generatorPath)) {
-        Write-Warning "Using debug build of SonarAnalyzer.RuleDescriptorGenerator.exe"
-        $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Debug")
-    }
-
-    Write-Host "Executing generator ${generatorPath}"
-
-    Push-Location $generatorPath
-    Exec { .\SonarAnalyzer.RuleDescriptorGenerator.exe cs }
-    Exec { .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet }
-    Pop-Location
-}
-
 function Pack-Nugets {
     Write-Header "Packing nugets..."
 
@@ -227,21 +209,6 @@ function Setup-NugetConfig(
     Exec { & $nuget_exe Sources Add -Name "repox" -Source "${artifactoryUrl}/sonarsource-nuget-qa" }
 
     Exec { & $nuget_exe SetApiKey "${artifactoryUser}:${artifactoryPass}" -Source repox }
-}
-
-function Update-MavenArtifacts([string]$version) {
-    Write-Header "Updating SonarAnalyzer pom files to version ${version}..."
-
-    $packages = Get-ChildItem (Resolve-RepoPath "src") -Recurse "*.nupkg"
-
-    foreach ($file in $packages) {
-        $packageId = $file.Name `
-            -Replace $file.Extension, "" `
-            -Replace ".$version", ""
-
-        (Get-Content (Resolve-RepoPath ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml")) -Replace "file-${packageId}", $file.FullName `
-            | Set-Content ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml"
-    }
 }
 
 function Publish-Packages {
