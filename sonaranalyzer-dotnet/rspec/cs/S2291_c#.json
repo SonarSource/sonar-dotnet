@@ -1,6 +1,6 @@
 {
   "title": "Overflow checking should not be disabled for \"Enumerable.Sum\"",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -10,5 +10,5 @@
     "error-handling",
     "bug"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Critical"
 }

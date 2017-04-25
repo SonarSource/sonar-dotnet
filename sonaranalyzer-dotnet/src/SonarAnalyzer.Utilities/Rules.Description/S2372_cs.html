@@ -9,17 +9,17 @@ public int Foo
   {
     throw new Exception(); // Noncompliant
   }
-  set
-  {
-    // do set ...
-  }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public void SetFoo(int foo)
-{
-  // do set ...
-}
+Module Module1
+    Sub SetFoo(ByVal value As Integer)         ' Compliant
+        ' ... some code ...
+    End Sub
+End Module
 </pre>
+<h2>Exceptions</h2>
+<p>No issue is raised when the thrown exception derives from or is of type <code>NotImplementedException</code>, <code>NotSupportedException</code> or
+<code>PlatformNotSupportedException</code>.</p>
 

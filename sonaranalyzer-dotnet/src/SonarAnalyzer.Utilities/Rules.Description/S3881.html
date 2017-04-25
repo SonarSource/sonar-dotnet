@@ -1,22 +1,19 @@
 <p>The <code>IDisposable</code> interface is a mechanism to release unmanaged resources, if not implemented correctly this could result in resource
 leaks or more severe bugs.</p>
-<p>This rule raises an issue when the recommended dispose pattern, as defined by Microsoft, is not adhered to.</p>
-<p>In particular the <code>Dispose()</code> method should only contain the following code:</p>
-<pre>
-public void Dispose()
-{
-    Dispose(true);
-    GC.SuppressFinalize(this);
-}
-</pre>
-<p>Specifically this rule checks for these problems:</p>
+<p>This rule raises an issue when the recommended dispose pattern, as defined by Microsoft, is not adhered to. See the <strong>Compliant
+Solution</strong> section for examples.</p>
+<p>Satisfying the rule's conditions will enable potential derived classes to correctly dispose the members of your class:</p>
 <ul>
-  <li> <code>Dispose()</code> is virtual. </li>
-  <li> <code>Dispose()</code> is not public. </li>
-  <li> An exception is thrown inside <code>Dispose()</code> or <code>Dispose(bool)</code>. </li>
-  <li> This is an unsealed type and <code>Dispose(bool)</code> is not <code>protected virtual</code>. </li>
-  <li> This is an unsealed type and <code>Dispose()</code> doesn't match the implementation above. </li>
-  <li> This is an unsealed type and the finalizer doesn't call <code>Dispose(bool)</code> or the class finalizer. </li>
+  <li> <code>sealed</code> classes are not checked. </li>
+  <li> If a base class implements <code>IDisposable</code> your class should not have <code>IDisposable</code> in the list of its interfaces. In such
+  cases it is recommended to override the base class's <code>protected virtual void Dispose(bool)</code> method or its equivalent. </li>
+  <li> The class should not implement <code>IDisposable</code> explicitly, e.g. the <code>Dispose()</code> method should be public. </li>
+  <li> The class should contain <code>protected virtual void Dispose(bool)</code> method. This method allows the derived classes to correctly dispose
+  the resources of this class. </li>
+  <li> The content of the <code>Dispose()</code> method should be a single invocation of <code>Dispose(true)</code>. </li>
+  <li> If the class has a finalizer, i.e. a destructor, the only code in its body should be a single invocation of <code>Dispose(false)</code>. </li>
+  <li> If the class has a finalizer, an additional call to <code>GC.SuppressFinalize(this)</code> is required in the <code>Dispose()</code> method.
+  </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -64,7 +61,8 @@ public class Foo : IDisposable
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public sealed class Foo : IDisposable
+// Sealed class
+public sealed class Foo1 : IDisposable
 {
     public void Dispose()
     {
@@ -72,7 +70,22 @@ public sealed class Foo : IDisposable
     }
 }
 
-public class Foo : IDisposable
+// Simple implementation
+public class Foo2 : IDisposable
+{
+    public void Dispose()
+    {
+        Dispose(true);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        // Cleanup
+    }
+}
+
+// Implementation with a finalizer
+public class Foo3 : IDisposable
 {
     public void Dispose()
     {
@@ -84,24 +97,21 @@ public class Foo : IDisposable
     {
         // Cleanup
     }
-}
 
-public class Foo : IDisposable
-{
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        // Cleanup
-    }
-
-    ~Foo()
+    ~Foo3()
     {
         Dispose(false);
+    }
+}
+
+// Base disposable class
+public class Foo4 : DisposableBase
+{
+    protected override void Dispose(bool disposing)
+    {
+        // Cleanup
+        // Do not forget to call base
+        base.Dispose(disposing);
     }
 }
 </pre>

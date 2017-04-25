@@ -430,7 +430,7 @@
     <value>A close curly brace should be located at the beginning of a line</value>
   </data>
   <data name="S1116_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1116_Description" xml:space="preserve">
     <value>Empty statements, i.e. ;, are usually introduced by mistake, for example because:</value>
@@ -448,7 +448,7 @@
     <value>Minor</value>
   </data>
   <data name="S1116_Tags" xml:space="preserve">
-    <value>bug,misra,cert,unused</value>
+    <value>misra,cert,unused</value>
   </data>
   <data name="S1116_Title" xml:space="preserve">
     <value>Empty statements should be removed</value>
@@ -502,7 +502,7 @@
     <value>Utility classes should not have public constructors</value>
   </data>
   <data name="S112_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S112_Description" xml:space="preserve">
     <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors. </value>
@@ -520,7 +520,7 @@
     <value>Major</value>
   </data>
   <data name="S112_Tags" xml:space="preserve">
-    <value>cwe,error-handling,bug,cert</value>
+    <value>cwe,error-handling,cert</value>
   </data>
   <data name="S112_Title" xml:space="preserve">
     <value>General exceptions should never be thrown</value>
@@ -613,7 +613,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1144_Description" xml:space="preserve">
-    <value>Private types or members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</value>
+    <value>Private, or internal, types or members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</value>
   </data>
   <data name="S1144_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -682,10 +682,10 @@
     <value>"Any()" should be used to test for emptiness</value>
   </data>
   <data name="S1163_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1163_Description" xml:space="preserve">
-    <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block.</value>
+    <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block, and the masked's exception message and stack trace will be lost.</value>
   </data>
   <data name="S1163_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -697,10 +697,10 @@
     <value>30min</value>
   </data>
   <data name="S1163_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S1163_Tags" xml:space="preserve">
-    <value>error-handling,bug,cert,suspicious</value>
+    <value>error-handling,cert,suspicious</value>
   </data>
   <data name="S1163_Title" xml:space="preserve">
     <value>Exceptions should not be thrown in finally blocks</value>
@@ -709,7 +709,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1172_Description" xml:space="preserve">
-    <value>Unused parameters are misleading. Whatever the value passed to such parameters is, the behavior will be the same.</value>
+    <value>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</value>
   </data>
   <data name="S1172_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -850,7 +850,7 @@
     <value>"Equals" and the comparison operators should be overridden when implementing "IComparable"</value>
   </data>
   <data name="S1215_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1215_Description" xml:space="preserve">
     <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking operation that examines every object in memory for cleanup. Further, you don't have control over when this blocking cleanup will actually run.</value>
@@ -865,7 +865,7 @@
     <value>30min</value>
   </data>
   <data name="S1215_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Critical</value>
   </data>
   <data name="S1215_Tags" xml:space="preserve">
     <value>performance,unpredictable,bad-practice</value>
@@ -892,13 +892,13 @@
     <value>Major</value>
   </data>
   <data name="S122_Tags" xml:space="preserve">
-    <value>convention</value>
+    <value>style</value>
   </data>
   <data name="S122_Title" xml:space="preserve">
     <value>Statements should be on separate lines</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
     <value>While it is technically correct to assign to parameters from within method bodies, it is better to use temporary variables to store intermediate results.</value>
@@ -916,7 +916,7 @@
     <value>Minor</value>
   </data>
   <data name="S1226_Tags" xml:space="preserve">
-    <value>bug,misra,pitfall</value>
+    <value>misra,pitfall</value>
   </data>
   <data name="S1226_Title" xml:space="preserve">
     <value>Method parameters and caught exceptions should not be reassigned</value>
@@ -1168,7 +1168,7 @@
     <value>string.ToLower(), ToUpper, IndexOf, LastIndexOf, and Compare are all culture-dependent, as are some (floating point number and DateTime-related) calls to ToString. Fortunately, all have variants which accept an argument specifying the culture or formatter to use. Leave that argument off and the call will use the system default culture, possibly creating problems with international characters.</value>
   </data>
   <data name="S1449_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1449_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1348,7 +1348,7 @@
     <value>Major</value>
   </data>
   <data name="S1656_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S1656_Title" xml:space="preserve">
     <value>Variables should not be self-assigned</value>
@@ -1426,13 +1426,13 @@
     <value>Short-circuit logic should be used to prevent null pointer dereferences in conditionals</value>
   </data>
   <data name="S1698_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1698_Description" xml:space="preserve">
     <value>Using the equality == and inequality != operators to compare two objects generally works. The operators can be overloaded, and therefore the comparison can resolve to the appropriate method. However, when the operators are used on interface instances, then == resolves to reference equality, which may result in unexpected behavior if implementing classes override Equals. Similarly, when a class overrides Equals, but instances are compared with non-overloaded ==, there is a high chance that value comparison was meant instead of the reference one.</value>
   </data>
   <data name="S1698_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1698_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1441,10 +1441,10 @@
     <value>2min</value>
   </data>
   <data name="S1698_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Minor</value>
   </data>
   <data name="S1698_Tags" xml:space="preserve">
-    <value>cwe,bug,cert</value>
+    <value>cwe,cert,suspicious</value>
   </data>
   <data name="S1698_Title" xml:space="preserve">
     <value>"==" should not be used when "Equals" is overridden</value>
@@ -1564,13 +1564,13 @@
     <value>Major</value>
   </data>
   <data name="S1854_Tags" xml:space="preserve">
-    <value>cwe,bug,cert,unused,suspicious</value>
+    <value>cwe,bug,cert,unused</value>
   </data>
   <data name="S1854_Title" xml:space="preserve">
     <value>Dead stores should be removed</value>
   </data>
   <data name="S1858_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1858_Description" xml:space="preserve">
     <value>Invoking a method designed to return a string representation of an object which is already a string is a waste of keystrokes. Similarly, explicitly invoking ToString() when the compiler would do it implicitly is also needless code-bloat.</value>
@@ -1588,7 +1588,7 @@
     <value>Minor</value>
   </data>
   <data name="S1858_Tags" xml:space="preserve">
-    <value>bug,finding,clumsy</value>
+    <value>finding,clumsy</value>
   </data>
   <data name="S1858_Title" xml:space="preserve">
     <value>"ToString()" calls should not be redundant</value>
@@ -1738,10 +1738,10 @@
     <value>Inappropriate casts should not be made</value>
   </data>
   <data name="S1994_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1994_Description" xml:space="preserve">
-    <value>It is almost always an error when a for loop's stop condition and incrementer don't act on the same variable. Even when it is not, it could confuse future maintainers of the code, and should be avoided.</value>
+    <value>It can be extremely confusing when a for loop's counter is incremented outside of its increment clause. In such cases, the increment should be moved to the loop's increment clause if at all possible.</value>
   </data>
   <data name="S1994_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1753,13 +1753,13 @@
     <value>20min</value>
   </data>
   <data name="S1994_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S1994_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>confusing</value>
   </data>
   <data name="S1994_Title" xml:space="preserve">
-    <value>"for" loop incrementers should modify the variable being tested in the loop's stop condition</value>
+    <value>"for" loop increment clauses should modify the loops' counters</value>
   </data>
   <data name="S2070_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
@@ -1852,7 +1852,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2178_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S2178_Title" xml:space="preserve">
     <value>Short-circuit logic should be used in boolean contexts</value>
@@ -1906,7 +1906,7 @@
     <value>Recursion should not be infinite</value>
   </data>
   <data name="S2197_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2197_Description" xml:space="preserve">
     <value>When the modulus of a negative number is calculated, the result will either be negative or zero. Thus, comparing the modulus of a variable for equality with a positive number (or a negative one) could result in unexpected results. </value>
@@ -1921,10 +1921,10 @@
     <value>5min</value>
   </data>
   <data name="S2197_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Critical</value>
   </data>
   <data name="S2197_Tags" xml:space="preserve">
-    <value>bug,cert,suspicious</value>
+    <value>cert,suspicious</value>
   </data>
   <data name="S2197_Title" xml:space="preserve">
     <value>Modulus results should not be checked for direct equality</value>
@@ -2170,7 +2170,7 @@
     <value>Field-like events should not be virtual</value>
   </data>
   <data name="S2291_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2291_Description" xml:space="preserve">
     <value>Enumerable.Sum() always executes addition in a checked context, so an OverflowException will be thrown if the value exceeds MaxValue even if an unchecked context was specified. Using an unchecked context anyway represents a misunderstanding of how Sum works.</value>
@@ -2185,7 +2185,7 @@
     <value>15min</value>
   </data>
   <data name="S2291_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Critical</value>
   </data>
   <data name="S2291_Tags" xml:space="preserve">
     <value>error-handling,bug</value>
@@ -2554,7 +2554,7 @@
     <value>Public methods should not have multidimensional array parameters</value>
   </data>
   <data name="S2372_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2372_Description" xml:space="preserve">
     <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method. </value>
@@ -2572,7 +2572,7 @@
     <value>Major</value>
   </data>
   <data name="S2372_Tags" xml:space="preserve">
-    <value>error-handling,bug</value>
+    <value>error-handling</value>
   </data>
   <data name="S2372_Title" xml:space="preserve">
     <value>Exceptions should not be thrown from property getters</value>
@@ -2674,7 +2674,7 @@
     <value>Classes and methods should not have too many generic parameters</value>
   </data>
   <data name="S2437_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2437_Description" xml:space="preserve">
     <value>Certain bit operations are just silly and should not be performed because their results are predictable.</value>
@@ -2689,16 +2689,16 @@
     <value>5min</value>
   </data>
   <data name="S2437_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Blocker</value>
   </data>
   <data name="S2437_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>suspicious</value>
   </data>
   <data name="S2437_Title" xml:space="preserve">
     <value>Silly bit operations should not be performed</value>
   </data>
   <data name="S2486_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2486_Description" xml:space="preserve">
     <value>When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.</value>
@@ -2716,7 +2716,7 @@
     <value>Minor</value>
   </data>
   <data name="S2486_Tags" xml:space="preserve">
-    <value>cwe,error-handling,bug,suspicious</value>
+    <value>cwe,error-handling,suspicious</value>
   </data>
   <data name="S2486_Title" xml:space="preserve">
     <value>Generic exceptions should not be ignored</value>
@@ -2788,7 +2788,7 @@
     <value>Major</value>
   </data>
   <data name="S2589_Tags" xml:space="preserve">
-    <value>cwe,misra,cert,redundant</value>
+    <value>cwe,bug,misra,cert,redundant</value>
   </data>
   <data name="S2589_Title" xml:space="preserve">
     <value>Boolean expressions should not be gratuitous</value>
@@ -2866,7 +2866,7 @@
     <value>"NaN" should not be used in comparisons</value>
   </data>
   <data name="S2692_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2692_Description" xml:space="preserve">
     <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &amp;gt;0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
@@ -2881,10 +2881,10 @@
     <value>2min</value>
   </data>
   <data name="S2692_Severity" xml:space="preserve">
-    <value>Minor</value>
+    <value>Critical</value>
   </data>
   <data name="S2692_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>suspicious</value>
   </data>
   <data name="S2692_Title" xml:space="preserve">
     <value>"IndexOf" checks should not be for positive numbers</value>
@@ -2965,7 +2965,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S2757_Description" xml:space="preserve">
-    <value>The use of operators pairs (=+, =- or =!) where the reversed, single operator was meant (+=, -= or !=) will compile and run, but not produce the expected results.</value>
+    <value>The use of operators pairs ( =+, =- or =! ) where the reversed, single operator was meant (+=, -= or !=) will compile and run, but not produce the expected results.</value>
   </data>
   <data name="S2757_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -3490,7 +3490,7 @@
     <value>"interface" instances should not be cast to concrete types</value>
   </data>
   <data name="S3216_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3216_Description" xml:space="preserve">
     <value>After an awaited Task has executed, you can continue execution in the original, calling thread or any arbitrary thread. Unless the rest of the code needs the context from which the Task was spawned, Task.ConfigureAwait(false) should be used to keep execution in the Task thread to avoid the need for context switching and the possibility of deadlocks.</value>
@@ -3508,7 +3508,7 @@
     <value>Critical</value>
   </data>
   <data name="S3216_Tags" xml:space="preserve">
-    <value>multi-threading,bug,suspicious</value>
+    <value>multi-threading,suspicious</value>
   </data>
   <data name="S3216_Title" xml:space="preserve">
     <value>"ConfigureAwait(false)" should be used</value>
@@ -4210,7 +4210,7 @@
     <value>"abstract" classes should not have "public" constructors</value>
   </data>
   <data name="S3443_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3443_Description" xml:space="preserve">
     <value>If you call GetType() on a Type variable, the return value will always be typeof(System.Type). So there's no real point in making that call. The same applies to passing a type argument to IsInstanceOfType. In both cases the results are entirely predictable.</value>
@@ -4225,10 +4225,10 @@
     <value>5min</value>
   </data>
   <data name="S3443_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Blocker</value>
   </data>
   <data name="S3443_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>suspicious</value>
   </data>
   <data name="S3443_Title" xml:space="preserve">
     <value>Type should not be examined on "System.Type" instances</value>
@@ -4258,7 +4258,7 @@
     <value>Interfaces should not simply inherit from base interfaces with colliding members</value>
   </data>
   <data name="S3445_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3445_Description" xml:space="preserve">
     <value>When rethrowing an exception, you should do it by simply calling throw; and not throw exc;, because the stack trace is reset with the second syntax, making debugging a lot harder.</value>
@@ -4276,7 +4276,7 @@
     <value>Major</value>
   </data>
   <data name="S3445_Tags" xml:space="preserve">
-    <value>error-handling,bug,confusing</value>
+    <value>error-handling,confusing</value>
   </data>
   <data name="S3445_Title" xml:space="preserve">
     <value>Exceptions should not be explicitly rethrown</value>
@@ -4354,7 +4354,7 @@
     <value>Parameters with "[DefaultParameterValue]" attributes should also be marked "[Optional]"</value>
   </data>
   <data name="S3451_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3451_Description" xml:space="preserve">
     <value>The use of [DefaultValue] with [Optional] has no more effect than [Optional] alone. That's because [DefaultValue] doesn't actually do anything; it merely indicates the intent for the value. More than likely, [DefaultValue] was used in confusion instead of [DefaultParameterValue].</value>
@@ -4369,10 +4369,10 @@
     <value>2min</value>
   </data>
   <data name="S3451_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S3451_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>suspicious</value>
   </data>
   <data name="S3451_Title" xml:space="preserve">
     <value>"[DefaultValue]" should not be used when "[DefaultParameterValue]" is meant</value>
@@ -4546,7 +4546,7 @@
     <value>Empty "default" clauses should be removed</value>
   </data>
   <data name="S3597_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3597_Description" xml:space="preserve">
     <value>The ServiceContract attribute specifies that a class or interface defines the communication contract of a Windows Communication Foundation (WCF) service. The service operations of this class or interface are defined by OperationContract attributes added to methods. It doesn't make sense to define a contract without any service operations; thus, in a ServiceContract class or interface at least one method should be annotated with OperationContract. Similarly, WCF only serves OperationContract methods that are defined inside ServiceContract classes or interfaces; thus, this rule also checks that ServiceContract is added to the containing type of OperationContract methods.</value>
@@ -4564,7 +4564,7 @@
     <value>Major</value>
   </data>
   <data name="S3597_Tags" xml:space="preserve">
-    <value>bug,suspicious</value>
+    <value>api-design</value>
   </data>
   <data name="S3597_Title" xml:space="preserve">
     <value>"ServiceContract" and "OperationContract" attributes should be used together</value>
@@ -4786,7 +4786,7 @@
     <value>"SafeHandle.DangerousGetHandle" should not be called</value>
   </data>
   <data name="S3871_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3871_Description" xml:space="preserve">
     <value>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be public for that to work. </value>
@@ -4801,10 +4801,10 @@
     <value>5min</value>
   </data>
   <data name="S3871_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S3871_Tags" xml:space="preserve">
-    <value>error-handling</value>
+    <value>error-handling,api-design</value>
   </data>
   <data name="S3871_Title" xml:space="preserve">
     <value>Exception types should be "public"</value>
@@ -4834,10 +4834,10 @@
     <value>Parameter names should not duplicate the names of their methods</value>
   </data>
   <data name="S3874_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3874_Description" xml:space="preserve">
-    <value>Passing a parameter by reference, which is what happens when you use the out or ref parameter modifiers, means that the method will receive a pointer to the argument, rather than the argument itself. If the argument was a value type, the method will be able to change the argument's values. If it was a reference type, then the method receives a pointer to a pointer, is is usually not what was intended. Even when it is what was intended, this is the sort of thing that's difficult to get right, and should be used with caution.</value>
+    <value>Passing a parameter by reference, which is what happens when you use the out or ref parameter modifiers, means that the method will receive a pointer to the argument, rather than the argument itself. If the argument was a value type, the method will be able to change the argument's values. If it was a reference type, then the method receives a pointer to a pointer, which is usually not what was intended. Even when it is what was intended, this is the sort of thing that's difficult to get right, and should be used with caution.</value>
   </data>
   <data name="S3874_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -4849,7 +4849,7 @@
     <value>20min</value>
   </data>
   <data name="S3874_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S3874_Tags" xml:space="preserve">
     <value>suspicious</value>

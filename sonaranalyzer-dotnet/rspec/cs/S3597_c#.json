@@ -1,14 +1,13 @@
 {
   "title": "\"ServiceContract\" and \"OperationContract\" attributes should be used together",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "2min"
   },
   "tags": [
-    "bug",
-    "suspicious"
+    "api-design"
   ],
   "defaultSeverity": "Major"
 }

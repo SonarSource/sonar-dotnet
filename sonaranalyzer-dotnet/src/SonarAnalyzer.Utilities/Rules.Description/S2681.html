@@ -9,6 +9,11 @@ if (condition)
   SecondAction();  // Noncompliant; executed unconditionally
 ThirdAction();
 
+if(condition) FirstActionInBlock(); SecondAction();  // Noncompliant; secondAction executed unconditionally
+
+if(condition) FirstActionInBlock();  // Noncompliant
+  SecondAction();  // Executed unconditionally
+
 string str = null;
 for (int i = 0; i &lt; array.Length; i++)
   str = array[i];

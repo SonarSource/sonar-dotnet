@@ -1,6 +1,6 @@
 {
   "title": "\"GC.Collect\" should not be called",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -11,5 +11,5 @@
     "unpredictable",
     "bad-practice"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Critical"
 }

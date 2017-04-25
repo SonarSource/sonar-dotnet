@@ -1,14 +1,13 @@
 {
   "title": "Type should not be examined on \"System.Type\" instances",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
-    "bug",
     "suspicious"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Blocker"
 }

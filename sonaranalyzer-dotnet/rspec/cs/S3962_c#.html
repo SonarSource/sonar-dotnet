@@ -1,6 +1,71 @@
 <p>The value of a <code>static readonly</code> field is computed at runtime while the value of a <code>const</code> field is calculated at compile
 time, which improves performance.</p>
 <p>This rule raises an issue when a <code>static readonly</code> field is initialiazed with a value that is computable at compile time.</p>
+<p>As specified by Microsoft, the list of types that can have a constant value are:</p>
+<table>
+  <tbody>
+    <tr>
+      <th>C# type</th>
+      <th>.Net Fwk type</th>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>System.Boolean</td>
+    </tr>
+    <tr>
+      <td>byte</td>
+      <td>System.Byte</td>
+    </tr>
+    <tr>
+      <td>sbyte</td>
+      <td>System.SByte</td>
+    </tr>
+    <tr>
+      <td>char</td>
+      <td>System.Char</td>
+    </tr>
+    <tr>
+      <td>decimal</td>
+      <td>System.Decimal</td>
+    </tr>
+    <tr>
+      <td>double</td>
+      <td>System.Double</td>
+    </tr>
+    <tr>
+      <td>float</td>
+      <td>System.Single</td>
+    </tr>
+    <tr>
+      <td>int</td>
+      <td>System.Int32</td>
+    </tr>
+    <tr>
+      <td>uint</td>
+      <td>System.UInt32</td>
+    </tr>
+    <tr>
+      <td>long</td>
+      <td>System.Int64</td>
+    </tr>
+    <tr>
+      <td>ulong</td>
+      <td>System.UInt64</td>
+    </tr>
+    <tr>
+      <td>short</td>
+      <td>System.Int16</td>
+    </tr>
+    <tr>
+      <td>ushort</td>
+      <td>System.UInt16</td>
+    </tr>
+    <tr>
+      <td>string</td>
+      <td>System.String</td>
+    </tr>
+  </tbody>
+</table>
 <h2>Noncompliant Code Example</h2>
 <pre>
 namespace myLib

@@ -1,6 +1,6 @@
 {
   "title": "\"==\" should not be used when \"Equals\" is overridden",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -8,11 +8,11 @@
   },
   "tags": [
     "cwe",
-    "bug",
-    "cert"
+    "cert",
+    "suspicious"
   ],
   "standards": [
     "CWE"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Minor"
 }

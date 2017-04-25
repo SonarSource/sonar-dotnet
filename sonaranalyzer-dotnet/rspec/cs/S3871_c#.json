@@ -1,13 +1,14 @@
 {
   "title": "Exception types should be \"public\"",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
-    "error-handling"
+    "error-handling",
+    "api-design"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Critical"
 }

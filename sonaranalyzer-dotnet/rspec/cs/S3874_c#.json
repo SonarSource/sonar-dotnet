@@ -1,6 +1,6 @@
 {
   "title": "\"out\" and \"ref\" parameters should not be used",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -9,5 +9,5 @@
   "tags": [
     "suspicious"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Critical"
 }
