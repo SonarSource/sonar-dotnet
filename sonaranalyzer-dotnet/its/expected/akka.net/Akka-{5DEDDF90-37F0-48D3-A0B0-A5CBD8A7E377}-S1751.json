@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1751",
+"message":  "Remove this 'break' statement or make it conditional.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1751",
+"message":  "Remove this 'break' statement or make it conditional.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  17,
+"endLine":  58,
+"endColumn":  23
+}
+}
+}
+]
+}
