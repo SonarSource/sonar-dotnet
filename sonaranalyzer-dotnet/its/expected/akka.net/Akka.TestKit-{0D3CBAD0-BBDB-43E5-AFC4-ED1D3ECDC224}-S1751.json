@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1751",
+"message":  "Remove this 'return' statement or make it conditional.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  28
+}
+}
+}
+]
+}

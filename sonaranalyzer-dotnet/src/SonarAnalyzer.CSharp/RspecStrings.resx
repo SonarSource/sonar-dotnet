@@ -1473,6 +1473,30 @@
   <data name="S1699_Title" xml:space="preserve">
     <value>Constructors should only call non-overridable methods</value>
   </data>
+  <data name="S1751_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S1751_Description" xml:space="preserve">
+    <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
+  </data>
+  <data name="S1751_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1751_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1751_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1751_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1751_Tags" xml:space="preserve">
+    <value>bug,misra,cert,unused</value>
+  </data>
+  <data name="S1751_Title" xml:space="preserve">
+    <value>Jump statements should not be used unconditionally</value>
+  </data>
   <data name="S1764_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
