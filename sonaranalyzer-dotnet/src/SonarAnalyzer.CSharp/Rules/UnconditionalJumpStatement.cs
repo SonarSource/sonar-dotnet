@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -43,77 +42,64 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<SyntaxKind> methodOrProperty = new HashSet<SyntaxKind>(new[]
+        private static readonly ISet<SyntaxKind> methodOrPropertyDeclarations = new HashSet<SyntaxKind>
         {
             SyntaxKind.MethodDeclaration,
             SyntaxKind.PropertyDeclaration,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.SimpleLambdaExpression
-        });
+        };
 
-        private static readonly ISet<SyntaxKind> conditionaStatements = new HashSet<SyntaxKind>(new[]
+        private static readonly ISet<SyntaxKind> conditionalStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.IfStatement,
             SyntaxKind.SwitchStatement,
             SyntaxKind.CatchClause
-        });
+        };
 
-        private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>(new[]
+        private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.ForEachStatement,
             SyntaxKind.ForStatement,
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement
-        });
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c => 
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var jumpStatement = (StatementSyntax)c.Node;
 
-                var statement = jumpStatement
+                var conditionalOrLoopStatement = jumpStatement
                     .Ancestors()
                     .TakeWhile(IsWithinMethodPropertyOrLambda)
-                    .FirstOrDefault(IsConditionalOrLoop);
+                    .FirstOrDefault(IsConditionalOrLoopStatement);
 
-                if (statement != null && IsLoop(statement))
+                if (IsLoopStatement(conditionalOrLoopStatement))
                 {
                     c.ReportDiagnostic(Diagnostic.Create(rule, jumpStatement.GetLocation(), GetKeywordText(jumpStatement)));
                 }
-            }, 
+            },
             SyntaxKind.BreakStatement,
             SyntaxKind.ContinueStatement,
             SyntaxKind.ReturnStatement,
             SyntaxKind.ThrowStatement);
         }
 
-        private static string GetKeywordText(StatementSyntax statement)
-        {
-            return (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
-                (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
-                (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
-                (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
-        }
+        private static string GetKeywordText(StatementSyntax statement) =>
+            (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
+            (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
+            (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
+            (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
 
-        private static bool IsWithinMethodPropertyOrLambda(SyntaxNode node)
-        {
-            return !methodOrProperty.Contains((SyntaxKind)node.RawKind);
-        }
+        private static bool IsWithinMethodPropertyOrLambda(SyntaxNode node) =>
+            !node.IsAnyKind(methodOrPropertyDeclarations);
 
-        private static bool IsConditionalOrLoop(SyntaxNode node)
-        {
-            return IsConditional(node) || IsLoop(node);
-        }
+        private static bool IsConditionalOrLoopStatement(SyntaxNode node) =>
+            node.IsAnyKind(conditionalStatements) || IsLoopStatement(node);
 
-        private static bool IsConditional(SyntaxNode node)
-        {
-            return conditionaStatements.Contains((SyntaxKind)node.RawKind);
-        }
-
-        private static bool IsLoop(SyntaxNode node)
-        {
-            return loopStatements.Contains((SyntaxKind)node.RawKind);
-        }
+        private static bool IsLoopStatement(SyntaxNode node) =>
+            node.IsAnyKind(loopStatements);
     }
 }
