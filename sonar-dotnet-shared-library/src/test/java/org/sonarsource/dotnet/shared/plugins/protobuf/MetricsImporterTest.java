@@ -24,16 +24,17 @@ import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -53,7 +54,8 @@ public class MetricsImporterTest {
   public void test_skip_filtered_files() {
     SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
-    DefaultInputFile inputFile = new DefaultInputFile("dummyKey", TEST_FILE_PATH);
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .build();
     tester.fileSystem().add(inputFile);
 
     File protobuf = new File(TEST_DATA_DIR, METRICS_OUTPUT_PROTOBUF_NAME);
@@ -68,8 +70,9 @@ public class MetricsImporterTest {
   public void test_metrics_get_imported() throws FileNotFoundException {
     SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
-    DefaultInputFile inputFile = new DefaultInputFile("dummyKey", TEST_FILE_PATH)
-      .initMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)));
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .build();
     tester.fileSystem().add(inputFile);
 
     File protobuf = new File(TEST_DATA_DIR, METRICS_OUTPUT_PROTOBUF_NAME);
@@ -84,7 +87,7 @@ public class MetricsImporterTest {
     new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter, f -> true).accept(protobuf.toPath());
 
     Collection<Measure> measures = tester.measures(inputFile.key());
-    assertThat(measures).hasSize(12);
+    assertThat(measures).hasSize(13);
 
     // TODO change test data so that all metrics have different expected values
 
@@ -101,6 +104,7 @@ public class MetricsImporterTest {
         Tuple.tuple(CoreMetrics.COMPLEXITY_IN_CLASSES, 7),
         Tuple.tuple(CoreMetrics.COMPLEXITY_IN_FUNCTIONS, 7),
         Tuple.tuple(CoreMetrics.COMMENT_LINES, 12),
+        Tuple.tuple(CoreMetrics.COGNITIVE_COMPLEXITY, 18),
         Tuple.tuple(CoreMetrics.NCLOC, 41));
 
     verify(noSonarFilter).noSonarInFile(inputFile, Collections.singleton(49));

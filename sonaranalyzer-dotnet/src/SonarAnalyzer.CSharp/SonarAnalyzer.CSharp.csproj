@@ -86,6 +86,7 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="Helpers\CognitiveComplexityWalker.cs" />
     <Compile Include="Helpers\ControlFlowGraph\Blocks\ForeachCollectionProducerBlock.cs" />
     <Compile Include="Helpers\ControlFlowGraph\Blocks\ForInitializerBlock.cs" />
     <Compile Include="Helpers\ControlFlowGraph\Blocks\LockBlock.cs" />

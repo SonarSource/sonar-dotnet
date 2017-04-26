@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +49,9 @@ public class SensorContextUtilsTest {
   public void toInputFile_should_return_file_if_exists() throws IOException {
     // note: the .getCanonicalFile() is a precaution for filename-shortening on windows
     File file = temporaryFolder.newFile().getCanonicalFile();
-    fs.add(new DefaultInputFile("dummy", file.getName()));
+    fs.add(new TestInputFileBuilder("dummy", file.getName())
+      .setModuleBaseDir(file.getParentFile().toPath())
+      .build());
     assertThat(toInputFile(fs, file.getName()).file()).isEqualTo(file);
   }
 
@@ -60,7 +63,7 @@ public class SensorContextUtilsTest {
   @Test
   public void toInputFile_should_return_null_if_file_is_a_dir() throws IOException {
     File folder = temporaryFolder.newFolder();
-    fs.add(new DefaultInputFile("dummy", folder.getName()));
+    fs.add(new TestInputFileBuilder("dummy", folder.getName()).build());
     assertThat(toInputFile(fs, "nonexistent")).isNull();
   }
 

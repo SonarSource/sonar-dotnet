@@ -160,7 +160,11 @@ namespace SonarAnalyzer.Common
 
         public int Complexity => GetComplexity(tree.GetRoot());
 
+        public int CognitiveComplexity => GetCognitiveComplexity(tree.GetRoot());
+
         public abstract int GetComplexity(SyntaxNode node);
+
+        public abstract int GetCognitiveComplexity(SyntaxNode node);
 
         public Distribution FunctionComplexityDistribution
         {

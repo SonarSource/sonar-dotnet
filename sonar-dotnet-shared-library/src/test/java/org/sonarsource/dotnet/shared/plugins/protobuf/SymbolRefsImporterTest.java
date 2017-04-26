@@ -22,6 +22,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
@@ -42,8 +43,9 @@ public class SymbolRefsImporterTest {
   public void test_symbolrefs_get_imported() throws FileNotFoundException {
     SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
-    DefaultInputFile inputFile = new DefaultInputFile("dummyKey", TEST_FILE_PATH)
-      .initMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)));
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .build();
     tester.fileSystem().add(inputFile);
 
     File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);

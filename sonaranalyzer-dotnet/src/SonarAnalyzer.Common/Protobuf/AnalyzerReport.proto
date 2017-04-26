@@ -104,6 +104,8 @@ message MetricsInfo {
   repeated int32 no_sonar_comment = 12;
   repeated int32 non_blank_comment = 13;
   repeated int32 code_line = 14;
+
+  int32 cognitive_complexity = 15;
 }
 
 // Issues
