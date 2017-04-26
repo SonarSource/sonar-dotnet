@@ -144,7 +144,7 @@ function Get-SonarQubeRunnerPath {
 
     Remove-Item $sonarqube_runner_zip -Force
 
-    Write-Debug "Found MSBuild.SonarQube.Runner.exe at ${sonarqube_runner_exe}"
+    Write-Host "Found MSBuild.SonarQube.Runner.exe at ${sonarqube_runner_exe}"
 
     return $sonarqube_runner_exe
 }
@@ -191,7 +191,7 @@ function Pack-Nugets {
         Write-Host "Creating NuGet package: " + $_.FullName
 
         & $nuget_exe pack $_.FullName -NoPackageAnalysis -OutputDirectory $output
-        Test-ExitCode "NuGet package creation FAILED."
+        Test-ExitCode "ERROR: NuGet package creation FAILED."
     }
 }
 
@@ -227,7 +227,7 @@ function Restore-Packages ([string]$solutionPath) {
     Write-Header "Restoring NuGet packages..."
     $nuget_exe = Get-NuGetPath
     & $nuget_exe restore $solutionPath
-    Test-ExitCode "Restoring NuGet packages FAILED."
+    Test-ExitCode "ERROR: Restoring NuGet packages FAILED."
 }
 
 function Begin-Analysis(
@@ -247,7 +247,7 @@ function Begin-Analysis(
         /d:sonar.host.url=$sonarQubeUrl `
         /d:sonar.login=$sonarQubeToken `
         $remainingArgs
-    Test-ExitCode "SonarQube Analysis begin step FAILED."
+    Test-ExitCode "ERROR: SonarQube Analysis begin step FAILED."
 }
 
 function End-Analysis([string]$sonarQubeToken) {
@@ -256,7 +256,7 @@ function End-Analysis([string]$sonarQubeToken) {
     $sonarqube_runner_exe = Get-SonarQubeRunnerPath
 
     & $sonarqube_runner_exe end /d:sonar.login=$sonarQubeToken
-    Test-ExitCode "SonarQube Analysis end step FAILED."
+    Test-ExitCode "ERROR: SonarQube Analysis end step FAILED."
 }
 
 function Build-Solution (
@@ -270,7 +270,7 @@ function Build-Solution (
     $msbuild_exe = Get-MsBuildPath
 
     & $msbuild_exe $solutionPath $remainingArgs
-    Test-ExitCode "Build FAILED."
+    Test-ExitCode "ERROR: Build FAILED."
 }
 
 function Build-ReleaseSolution(
@@ -292,14 +292,16 @@ function Build-ReleaseSolution(
 function Run-Tests {
     Write-Header "Starting test execution..."
 
-    $vstest_exe = Get-VsTestPath
+    $testFiles = @()
     Get-ChildItem (Resolve-RepoPath "src") -Recurse -Include "*.UnitTest.dll" `
         | Where-Object { $_.DirectoryName -Match "bin" } `
-        | ForEach-Object {
-            Write-Host "------ Unit Tests started: Assembly: $_ ------"
-            & $vstest_exe $_ /Enablecodecoverage /inIsolation /Logger:trx
-            Test-ExitCode "Unit Tests execution FAILED."
-        }
+        | ForEach-Object { $testFiles += $_ }
+
+    Write-Host "Running unit tests for: ${testFiles}"
+
+    $vstest_exe = Get-VsTestPath
+    & $vstest_exe $testFiles /Enablecodecoverage /inIsolation /Logger:trx
+    Test-ExitCode "ERROR: Unit Tests execution FAILED."
 
     $codeCoverage_exe = Get-CodeCoveragePath
     Write-Host "Generating code coverage reports:"
@@ -307,5 +309,6 @@ function Run-Tests {
         $filePathWithNewExtension = $_.FullName + "xml"
         Write-Host "  ${filePathWithNewExtension}"
         & $codeCoverage_exe analyze /output:$filePathWithNewExtension $_.FullName
+        Test-ExitCode "ERROR: Code coverage reports generation FAILED."
     }
 }
