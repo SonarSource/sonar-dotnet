@@ -69,6 +69,8 @@ namespace SonarAnalyzer.Rules
                 ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetComplexity),
                 ComplexityInFunctions = metrics.FunctionNodes.Sum(metrics.GetComplexity),
 
+                CognitiveComplexity = metrics.CognitiveComplexity,
+
                 FileComplexityDistribution = new Distribution(Distribution.FileComplexityRange).Add(complexity).ToString(),
                 FunctionComplexityDistribution = metrics.FunctionComplexityDistribution.ToString()
             };

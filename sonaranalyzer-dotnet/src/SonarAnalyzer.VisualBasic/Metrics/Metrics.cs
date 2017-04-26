@@ -78,6 +78,11 @@ namespace SonarAnalyzer.Common.VisualBasic
                     IsComplexityIncreasingKind(n) ||
                     IsFunction(n));
 
+        public override int GetCognitiveComplexity(SyntaxNode node)
+        {
+            return 0;
+        }
+
         private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
             SyntaxKind.CommentTrivia,
             SyntaxKind.DocumentationCommentExteriorTrivia,

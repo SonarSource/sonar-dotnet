@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.rule.RuleKey;
@@ -55,9 +56,10 @@ public class AnalysisInputXmlTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir.toFile());
 
-    inputFile = new DefaultInputFile(tester.module().key(), "Program.cs")
+    inputFile = new TestInputFileBuilder(tester.module().key(), "Program.cs")
       .setLanguage(LANGUAGE_KEY)
-      .initMetadata(new FileMetadata().readMetadata(new FileReader(csFile)));
+      .setMetadata(new FileMetadata().readMetadata(new FileReader(csFile)))
+      .build();
     tester.fileSystem().add(inputFile);
   }
 

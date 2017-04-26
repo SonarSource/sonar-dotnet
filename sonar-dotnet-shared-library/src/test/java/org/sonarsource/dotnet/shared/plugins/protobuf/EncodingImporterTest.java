@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import java.io.File;
@@ -44,7 +45,8 @@ public class EncodingImporterTest {
   public void test_encoding_get_imported() throws FileNotFoundException {
     SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
 
-    DefaultInputFile inputFile = new DefaultInputFile("dummyKey", TEST_FILE_PATH);
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .build();
     tester.fileSystem().add(inputFile);
 
     File protobuf = new File(TEST_DATA_DIR, ENCODING_OUTPUT_PROTOBUF_NAME);

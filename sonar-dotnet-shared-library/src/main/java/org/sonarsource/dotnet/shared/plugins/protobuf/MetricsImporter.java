@@ -26,6 +26,7 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 
@@ -38,12 +39,14 @@ class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
   private final SensorContext context;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
+  private final boolean supportsCognitiveComplexity;
 
   MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, Predicate<InputFile> inputFileFilter) {
     super(SonarAnalyzer.MetricsInfo.parser(), context, inputFileFilter, SonarAnalyzer.MetricsInfo::getFilePath);
     this.context = context;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
+    this.supportsCognitiveComplexity = isSonarQubeGreaterThanOrEqualTo63();
   }
 
   @Override
@@ -73,7 +76,16 @@ class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
     }
     saveMetric(context, inputFile, CoreMetrics.NCLOC, message.getCodeLineCount());
 
+    boolean cognitiveComplexityError = message.getCognitiveComplexity() < 0;
+    if (supportsCognitiveComplexity && !cognitiveComplexityError) {
+      saveMetric(context, inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, message.getCognitiveComplexity());
+    }
+
     fileLinesContext.save();
+  }
+
+  private boolean isSonarQubeGreaterThanOrEqualTo63() {
+    return context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(6, 3));
   }
 
   private static <T extends Serializable> void saveMetric(SensorContext context, InputFile inputFile, Metric<T> metric, T value) {
@@ -83,5 +95,4 @@ class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
       .withValue(value)
       .save();
   }
-
 }

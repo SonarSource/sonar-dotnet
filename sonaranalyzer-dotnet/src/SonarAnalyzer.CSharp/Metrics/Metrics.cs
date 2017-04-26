@@ -25,6 +25,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Common.CSharp
 {
@@ -144,6 +145,13 @@ namespace SonarAnalyzer.Common.CSharp
             var walker = new CyclomaticComplexityWalker();
             walker.Visit(node);
             return walker.CyclomaticComplexity;
+        }
+
+        public override int GetCognitiveComplexity(SyntaxNode node)
+        {
+            var walker = new CognitiveComplexityWalker();
+            walker.Visit(node);
+            return walker.VisitEndedCorrectly ? walker.Complexity : -1;
         }
 
         private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
