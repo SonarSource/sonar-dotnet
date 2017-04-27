@@ -18,16 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public abstract class EqualsRelationship : BinaryRelationship
+    public abstract class EqualsRelationship : BinaryRelationship, IEquatable<EqualsRelationship>
     {
         protected EqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
         }
 
-        protected bool Equals(EqualsRelationship other)
+        public bool Equals(EqualsRelationship other)
         {
             return other != null && AreOperandsMatching(other);
         }
@@ -40,10 +42,20 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
         }
 
+        public sealed override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            return Equals(obj as EqualsRelationship);
+        }
+
         internal static int GetHashCodeMinMaxOrdered(int leftHash, int rightHash, int typeHash)
         {
-            var min = System.Math.Min(leftHash, rightHash);
-            var max = System.Math.Max(leftHash, rightHash);
+            var min = Math.Min(leftHash, rightHash);
+            var max = Math.Max(leftHash, rightHash);
 
             var hash = 19;
             hash = hash * 31 + typeHash;

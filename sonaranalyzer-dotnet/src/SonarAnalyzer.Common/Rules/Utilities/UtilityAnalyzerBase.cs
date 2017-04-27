@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
-using System.Linq;
 using System.Collections.Generic;
-using Google.Protobuf;
 using System.IO;
-using Microsoft.CodeAnalysis.Diagnostics;
+using System.Linq;
 using System.Xml.Linq;
+using Google.Protobuf;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -156,7 +156,15 @@ namespace SonarAnalyzer.Rules
 
                         if (!File.Exists(pathToWrite))
                         {
-                            using (File.Create(pathToWrite)) { }
+                            FileStream fileStream = null;
+                            try
+                            {
+                                fileStream = File.Create(pathToWrite);
+                            }
+                            finally
+                            {
+                                fileStream?.Dispose();
+                            }
                         }
 
                         using (var metricsStream = new FileStream(pathToWrite, FileMode.Append, FileAccess.Write))

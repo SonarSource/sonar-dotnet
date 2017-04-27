@@ -54,16 +54,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return new ValueNotEqualsRelationship(LeftOperand, RightOperand);
         }
 
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            return Equals(obj as ValueEqualsRelationship);
-        }
-
         public override string ToString()
         {
             return $"Eq({LeftOperand}, {RightOperand})";

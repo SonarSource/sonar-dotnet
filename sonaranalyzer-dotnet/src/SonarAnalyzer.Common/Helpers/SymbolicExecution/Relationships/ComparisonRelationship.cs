@@ -18,12 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public sealed class ComparisonRelationship : BinaryRelationship
+    public sealed class ComparisonRelationship : BinaryRelationship, IEquatable<ComparisonRelationship>
     {
         internal ComparisonKind ComparisonKind { get; }
 
@@ -193,7 +194,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return Equals(obj as ComparisonRelationship);
         }
 
-        private bool Equals(ComparisonRelationship other)
+        public bool Equals(ComparisonRelationship other)
         {
             if (other == null ||
                 ComparisonKind != other.ComparisonKind)

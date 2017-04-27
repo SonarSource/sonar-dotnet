@@ -18,16 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public abstract class NotEqualsRelationship : BinaryRelationship
+    public abstract class NotEqualsRelationship : BinaryRelationship, IEquatable<NotEqualsRelationship>
     {
         protected NotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
         }
 
-        protected bool Equals(NotEqualsRelationship other)
+        public sealed override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            return Equals(obj as EqualsRelationship);
+        }
+
+        public bool Equals(NotEqualsRelationship other)
         {
             return other != null && AreOperandsMatching(other);
         }

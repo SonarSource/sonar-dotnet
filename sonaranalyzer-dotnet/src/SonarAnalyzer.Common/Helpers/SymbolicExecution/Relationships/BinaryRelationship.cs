@@ -18,11 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public abstract class BinaryRelationship
+    public abstract class BinaryRelationship : IEquatable<BinaryRelationship>
     {
         internal SymbolicValue LeftOperand { get; }
         internal SymbolicValue RightOperand { get; }
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return Equals(obj as BinaryRelationship);
         }
 
-        private bool Equals(BinaryRelationship other)
+        public bool Equals(BinaryRelationship other)
         {
             if (other == null ||
                 GetType() != other.GetType())

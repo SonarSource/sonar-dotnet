@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValidationFailure.UnusedFormatArguments
             };
 
-        private static readonly Regex StringFormatItemRegex = // pattern is {index[,alignment][:formatString]}
+        private static readonly Regex StringFormatItemRegex = // pattern is: index[,alignment][:formatString]
             new Regex(@"^(?<Index>\d+)(,(?<Alignment>-?\d+))?(:(?<Format>.+))?$", RegexOptions.Compiled);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -286,7 +286,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             try
             {
-                var _ = string.Format(formatString, new object[1000000]);
+                string.Format(formatString, new object[1000000]);
                 return null;
             }
             catch (FormatException)
@@ -377,7 +377,8 @@ namespace SonarAnalyzer.Rules.CSharp
             public static readonly ValidationFailure UnusedFormatArguments =
                 new ValidationFailure("The format string might be wrong, the following arguments are unused: ");
 
-            private string message;
+            private readonly string message;
+
             private ValidationFailure(string message)
             {
                 this.message = message;
