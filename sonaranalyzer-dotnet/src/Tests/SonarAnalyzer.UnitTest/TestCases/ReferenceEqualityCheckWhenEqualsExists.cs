@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
     {
         public override bool Equals(object obj)
         {
-            return new Base() == obj; // Compliant, we are inside teh Equals.
+            return new Base() == obj; // Compliant, we are inside the Equals.
         }
     }
 
@@ -60,9 +60,9 @@ namespace Tests.Diagnostics
 //                    ^^
             b = x != y; // Noncompliant
             b = x != null;
-            b = x == new object(); // Noncompliant
-            b = new Base() == new object(); // Noncompliant
-            b = new MyClass() == new object(); // Noncompliant
+            b = x == new object();
+            b = new Base() == new object();
+            b = new MyClass() == new object();
             b = new MyClass2() == new object(); // CS0253
             b = new object() == new object();
 
@@ -74,6 +74,9 @@ namespace Tests.Diagnostics
 
             var dependencyObject = new System.Windows.Data.CollectionViewSource();
             b = dependencyObject == dependencyObject;
+
+            b = x == null; // Compliant
+            b = y == (object)null; // Compliant
         }
 
         private static T1 CompareExchange<T1>(ref T1 reference, T1 expectedValue, T1 newValue) where T1 : class
