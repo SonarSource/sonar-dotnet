@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
 
@@ -99,6 +100,30 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters.Length == 2 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
                 methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
+        }
+
+        public static bool IsArrayClone(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Parameters.Length == 0 &&
+                methodSymbol.Name == nameof(Array.Clone) &&
+                methodSymbol.ContainingType.Is(KnownType.System_Array);
+        }
+
+        public static bool IsEnumerableToList(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+                methodSymbol.Parameters.Length == 0 &&
+                methodSymbol.Name == nameof(Enumerable.ToList) &&
+                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
+        }
+
+        public static bool IsEnumerableToArray(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+                methodSymbol.Parameters.Length == 0 &&
+                methodSymbol.Name == nameof(Enumerable.ToArray) &&
+                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
     }
 }
