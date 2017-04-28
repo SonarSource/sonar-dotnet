@@ -1,6 +1,6 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-if ($project.DTE.Version -NotIn '14.0', '15.0')
+if ('14.0', '15.0' -notcontains $project.DTE.Version)
 {
     throw 'This package can only be installed on Visual Studio 2015 or Visual Studio 2017.'
 }
