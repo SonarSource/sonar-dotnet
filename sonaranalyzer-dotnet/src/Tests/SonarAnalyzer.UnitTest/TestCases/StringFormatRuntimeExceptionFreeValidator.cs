@@ -67,6 +67,7 @@ namespace Tests.Diagnostics
             Console.Write("0");
             Console.Write("{0}", 42);
             Console.Write("{{}}"); // Compliant, displays {}
+            Console.Write("{"); // Compliant
 
             Console.Write("[0}", args[0]); // Noncompliant
             Console.Write("{-1}", args[0]); // Noncompliant
@@ -78,6 +79,7 @@ namespace Tests.Diagnostics
         {
             Console.WriteLine("0");
             Console.WriteLine("{0}", 42);
+            Console.WriteLine("{"); // Compliant
 
             Console.WriteLine("[0}", args[0]); // Noncompliant
             Console.WriteLine("{-1}", args[0]); // Noncompliant
@@ -99,6 +101,7 @@ namespace Tests.Diagnostics
         {
             System.IO.TextWriter.Write("0");
             System.IO.TextWriter.Write("{0}", 42);
+            System.IO.TextWriter.Write("{"); // Compliant
 
             System.IO.TextWriter.Write("[0}", args[0]); // Noncompliant
             System.IO.TextWriter.Write("{-1}", args[0]); // Noncompliant
@@ -110,6 +113,7 @@ namespace Tests.Diagnostics
         {
             System.IO.TextWriter.WriteLine("0");
             System.IO.TextWriter.WriteLine("{0}", 42);
+            System.IO.TextWriter.WriteLine("{"); // Compliant
 
             System.IO.TextWriter.WriteLine("[0}", args[0]); // Noncompliant
             System.IO.TextWriter.WriteLine("{-1}", args[0]); // Noncompliant
@@ -121,6 +125,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.Debug.WriteLine("0");
             System.Diagnostics.Debug.WriteLine("{0}", 42);
+            System.Diagnostics.Debug.WriteLine("{"); // Compliant
 
             System.Diagnostics.Debug.WriteLine("[0}", args[0]); // Noncompliant
             System.Diagnostics.Debug.WriteLine("{-1}", args[0]); // Noncompliant
@@ -132,6 +137,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.Trace.TraceError("0");
             System.Diagnostics.Trace.TraceError("{0}", 42);
+            System.Diagnostics.Trace.TraceError("{"); // Compliant
 
             System.Diagnostics.Trace.TraceError("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceError("{-1}", args[0]); // Noncompliant
@@ -143,6 +149,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.Trace.TraceInformation("0");
             System.Diagnostics.Trace.TraceInformation("{0}", 42);
+            System.Diagnostics.Trace.TraceInformation("{"); // Compliant
 
             System.Diagnostics.Trace.TraceInformation("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceInformation("{-1}", args[0]); // Noncompliant
@@ -154,6 +161,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.Trace.TraceWarning("0");
             System.Diagnostics.Trace.TraceWarning("{0}", 42);
+            System.Diagnostics.Trace.TraceWarning("{"); // Compliant
 
             System.Diagnostics.Trace.TraceWarning("[0}", args[0]); // Noncompliant
             System.Diagnostics.Trace.TraceWarning("{-1}", args[0]); // Noncompliant
@@ -165,6 +173,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.TraceSource.TraceInformation("0");
             System.Diagnostics.TraceSource.TraceInformation("{0}", 42);
+            System.Diagnostics.TraceSource.TraceInformation( "{"); // Compliant
 
             System.Diagnostics.TraceSource.TraceInformation("[0}", args[0]); // Noncompliant
             System.Diagnostics.TraceSource.TraceInformation("{-1}", args[0]); // Noncompliant

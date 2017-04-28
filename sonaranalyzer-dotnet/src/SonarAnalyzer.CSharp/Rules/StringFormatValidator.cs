@@ -125,11 +125,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var failure = TryParseAndValidate((string)constValue.Value, invocation.ArgumentList,
                 formatArgumentIndex, analysisContext.SemanticModel);
             if (failure == null ||
-                (failure == ValidationFailure.SimpleString &&
-                !currentMethodSignature.Name.EndsWith("Format")))
+                CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
             {
-                // Don't report on no failure or on methods without Format in the name if the string is a simple
-                // string. For example, Console.Write("foo") is valid string.Format("foo") is not.
                 return;
             }
 
@@ -144,6 +141,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 analysisContext.ReportDiagnostic(Diagnostic.Create(codeSmellRule, invocation.Expression.GetLocation(),
                     failure.ToString()));
             }
+        }
+
+        private static bool CanIgnoreFailure(ValidationFailure failure, string methodName, int argumentsCount)
+        {
+            if (methodName.EndsWith("Format") ||
+                failure == ValidationFailure.UnusedFormatArguments ||
+                failure == ValidationFailure.FormatItemIndexTooHigh)
+            {
+                return false;
+            }
+
+            return argumentsCount == 1;
         }
 
         private static ValidationFailure TryParseAndValidate(string formatStringText, ArgumentListSyntax argumentList,
