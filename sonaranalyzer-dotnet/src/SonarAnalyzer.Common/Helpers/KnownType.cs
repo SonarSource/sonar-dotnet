@@ -223,6 +223,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Diagnostics_Trace = new KnownType("System.Diagnostics.Trace");
         public static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
 
+        public static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new KnownType("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
+
         #endregion
 
         public string TypeName { get; }
