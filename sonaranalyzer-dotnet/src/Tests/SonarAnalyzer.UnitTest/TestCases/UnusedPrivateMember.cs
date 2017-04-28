@@ -136,7 +136,7 @@ namespace Tests.Diagnostics
         internal class Class4 : MyInterface // Noncompliant {{Remove the unused internal type 'Class4'.}}
         {
             public void Method() { var x = this[20]; }
-            public void Method1() { var x = Method2(); } // Noncompliant {{Remove the unused internal method 'Method1'.}}
+            public void Method1() { var x = Method2(); }
             public static int Method2() { return 2; }
 
             public int this[int index]
@@ -170,17 +170,17 @@ namespace Tests.Diagnostics
     {
         private int OnlyRead { get; set; }  // Noncompliant {{Remove the unused private set accessor in property 'OnlyRead'.}}
 //                                  ^^^^
-        internal int OnlyReadInternal { get; set; }  // Noncompliant {{Remove the unused internal set accessor in property 'OnlyReadInternal'.}}
-//                                           ^^^^
+        internal int OnlyReadInternal { get; set; }
+
         private int OnlySet { get; set; }
         private int OnlySet2 { get { return 42; } set { } } // Noncompliant {{Remove the unused private get accessor in property 'OnlySet2'.}}
 //                             ^^^^^^^^^^^^^^^^^^
-        internal int OnlySet2Internal { get { return 42; } set { } } // Noncompliant {{Remove the unused internal get accessor in property 'OnlySet2Internal'.}}
-//                                      ^^^^^^^^^^^^^^^^^^
+        internal int OnlySet2Internal { get { return 42; } set { } }
+
         private int NotAccessed { get; set; }   // Noncompliant {{Remove the unused private property 'NotAccessed'.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        internal int NotAccessedInternal { get; set; }   // Noncompliant {{Remove the unused internal property 'NotAccessedInternal'.}}
-//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        internal int NotAccessedInternal { get; set; }
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }

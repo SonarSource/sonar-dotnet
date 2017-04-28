@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly Accessibility maxAccessibility = Accessibility.Internal;
+        private static readonly Accessibility maxAccessibility = Accessibility.Private;
 
         private ConcurrentBag<Diagnostic> possibleUnusedInternalMembers;
 
@@ -84,15 +84,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var declarationCollector = new RemovableDeclarationCollector(namedType, cc.Compilation);
 
-                            var declaredPrivateSymbols = new HashSet<ISymbol>();
+                            var declaredSymbols = new HashSet<ISymbol>();
                             var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-                            CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols);
-                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols, fieldLikeSymbols);
-                            CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols);
-                            CollectRemovableMethods(declarationCollector, declaredPrivateSymbols);
+                            CollectRemovableNamedTypes(declarationCollector, declaredSymbols);
+                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredSymbols, fieldLikeSymbols);
+                            CollectRemovableEventsAndProperties(declarationCollector, declaredSymbols);
+                            CollectRemovableMethods(declarationCollector, declaredSymbols);
 
-                            if (!declaredPrivateSymbols.Any())
+                            if (!declaredSymbols.Any())
                             {
                                 return;
                             }
@@ -102,12 +102,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var propertyAccessorAccess = new Dictionary<IPropertySymbol, AccessorAccess>();
 
-                            CollectUsedSymbols(declarationCollector, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+                            CollectUsedSymbols(declarationCollector, usedSymbols, declaredSymbols, propertyAccessorAccess);
                             CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(declarationCollector,
                                 usedSymbols, emptyConstructors);
 
-                            ReportIssues(cc, usedSymbols, declaredPrivateSymbols, emptyConstructors, fieldLikeSymbols);
-                            ReportUnusedPropertyAccessors(cc, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+                            ReportIssues(cc, usedSymbols, declaredSymbols, emptyConstructors, fieldLikeSymbols);
+                            ReportUnusedPropertyAccessors(cc, usedSymbols, declaredSymbols, propertyAccessorAccess);
                         }, SymbolKind.NamedType);
 
                     c.RegisterCompilationEndAction(
@@ -135,11 +135,11 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private void ReportUnusedPropertyAccessors(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
-            HashSet<ISymbol> declaredPrivateSymbols,
+            HashSet<ISymbol> declaredSymbols,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
-            var usedPrivatePropertis = declaredPrivateSymbols.Intersect(usedSymbols).OfType<IPropertySymbol>();
-            var onlyOneAccessorAccessed = usedPrivatePropertis.Where(p => propertyAccessorAccess.ContainsKey(p));
+            var usedProperties = declaredSymbols.Intersect(usedSymbols).OfType<IPropertySymbol>();
+            var onlyOneAccessorAccessed = usedProperties.Where(p => propertyAccessorAccess.ContainsKey(p));
 
             foreach (var property in onlyOneAccessorAccessed)
             {
@@ -202,10 +202,10 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private void ReportIssues(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
-            HashSet<ISymbol> declaredPrivateSymbols, HashSet<ISymbol> emptyConstructors,
+            HashSet<ISymbol> declaredSymbols, HashSet<ISymbol> emptyConstructors,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
-            var unusedSymbols = declaredPrivateSymbols
+            var unusedSymbols = declaredSymbols
                 .Except(usedSymbols.Union(emptyConstructors))
                 .ToList();
 
@@ -278,7 +278,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void CollectRemovableMethods(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols)
+            HashSet<ISymbol> declaredSymbols)
         {
             var methodSymbols = declarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
@@ -294,32 +294,32 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode) as IMethodSymbol)
                     .Where(method => RemovableDeclarationCollector.IsRemovable(method, maxAccessibility));
 
-            declaredPrivateSymbols.UnionWith(methodSymbols);
+            declaredSymbols.UnionWith(methodSymbols);
         }
 
         private static void CollectRemovableEventsAndProperties(RemovableDeclarationCollector helper,
-            HashSet<ISymbol> declaredPrivateSymbols)
+            HashSet<ISymbol> declaredSymbols)
         {
             var declarationKinds = ImmutableHashSet.Create(SyntaxKind.EventDeclaration, SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration);
             var declarations = helper.GetRemovableDeclarations(declarationKinds, maxAccessibility);
-            declaredPrivateSymbols.UnionWith(declarations.Select(d => d.Symbol));
+            declaredSymbols.UnionWith(declarations.Select(d => d.Symbol));
         }
 
         private static void CollectRemovableFieldLikeDeclarations(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+            HashSet<ISymbol> declaredSymbols, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var declarationKinds = ImmutableHashSet.Create(SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration);
             var removableFieldsDefinitions = declarationCollector.GetRemovableFieldLikeDeclarations(declarationKinds, maxAccessibility);
 
             foreach (var fieldsDefinitions in removableFieldsDefinitions)
             {
-                declaredPrivateSymbols.Add(fieldsDefinitions.Symbol);
+                declaredSymbols.Add(fieldsDefinitions.Symbol);
                 fieldLikeSymbols.Add(fieldsDefinitions.Symbol, fieldsDefinitions.SyntaxNode);
             }
         }
 
         private static void CollectRemovableNamedTypes(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols)
+            HashSet<ISymbol> declaredSymbols)
         {
             var symbols = declarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
@@ -335,9 +335,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             SemanticModel = container.SemanticModel
                         }))
                     .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode))
-                    .Where(symbol => RemovableDeclarationCollector.IsRemovable(symbol, maxAccessibility));
+                    .Where(symbol => RemovableDeclarationCollector.IsRemovable(symbol, Accessibility.Internal));
 
-            declaredPrivateSymbols.UnionWith(symbols);
+            declaredSymbols.UnionWith(symbols);
         }
 
         private static void CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(
@@ -377,14 +377,14 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void CollectUsedSymbols(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> usedSymbols, HashSet<ISymbol> declaredPrivateSymbols,
+            HashSet<ISymbol> usedSymbols, HashSet<ISymbol> declaredSymbols,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
-            var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToImmutableHashSet();
-            var anyRemovableIndexers = declaredPrivateSymbols
+            var symbolNames = declaredSymbols.Select(s => s.Name).ToImmutableHashSet();
+            var anyRemovableIndexers = declaredSymbols
                 .OfType<IPropertySymbol>()
                 .Any(p => p.IsIndexer);
-            var anyRemovableCtors = declaredPrivateSymbols
+            var anyRemovableCtors = declaredSymbols
                 .OfType<IMethodSymbol>()
                 .Any(m => m.MethodKind == MethodKind.Constructor);
 

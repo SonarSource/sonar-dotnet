@@ -106,19 +106,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused internal method 'Shuffle'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MemberOrderingSpec.cs",
-"region":  {
-"startLine":  217,
-"startColumn":  9,
-"endLine":  231,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private field 'f1'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests\Proto\ClusterMessageSerializerSpec.cs",
@@ -127,19 +114,6 @@
 "startColumn":  9,
 "endLine":  59,
 "endColumn":  57
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused internal method 'Create'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\TestMember.cs",
-"region":  {
-"startLine":  15,
-"startColumn":  9,
-"endLine":  18,
-"endColumn":  10
 }
 }
 }

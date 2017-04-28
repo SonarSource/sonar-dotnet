@@ -110,10 +110,13 @@ namespace Tests.Diagnostics
     public class PropertyAccess
     {
         private int OnlyRead { get; }  // Fixed
-        internal int OnlyReadInternal { get; }  // Fixed
+        internal int OnlyReadInternal { get; set; }
+
         private int OnlySet { get; set; }
         private int OnlySet2 { set { } } // Fixed
-        internal int OnlySet2Internal { set { } } // Fixed
+        internal int OnlySet2Internal { get { return 42; } set { } }
+        internal int NotAccessedInternal { get; set; }
+
         private int BothAccessed { get; set; }
 
         private int OnlyGet { get { return 42; } }
