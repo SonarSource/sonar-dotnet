@@ -1,0 +1,39 @@
+<p>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will
+be much slower than a simple field access, contrary to the caller's likely expectations. Therefore, such properties should be refactored into methods
+so that callers are not surprised by unexpectedly poor performance.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
+public IEnumerable&lt;string&gt; Foo  // Noncompliant
+{
+    get
+    {
+        return _foo.ToList();
+    }
+}
+
+private string[] _bar = new string[] { "a", "b", "c" };
+public IEnumerable&lt;string&gt; Bar // Noncompliant
+{
+    get
+    {
+        return (string[])_bar.Clone();
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+private List&lt;string&gt; _foo = new List&lt;string&gt; { "a", "b", "c" };
+private string[] _bar = new string[] { "a", "b", "c" };
+
+public IEnumerable&lt;string&gt; GetFoo()
+{
+    return _foo.ToList();
+}
+
+public IEnumerable&lt;string&gt; GetBar()
+{
+    return (string[])_bar.Clone();
+}
+</pre>
+
