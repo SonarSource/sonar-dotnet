@@ -108,6 +108,7 @@ namespace Tests.Diagnostics
                 get { return 42; }
             }
         }
+        internal class Class4 : MyInterface { } // Noncompliant {{Remove the unused internal type 'Class4'.}}
     }
     public static class MyExtension
     {
