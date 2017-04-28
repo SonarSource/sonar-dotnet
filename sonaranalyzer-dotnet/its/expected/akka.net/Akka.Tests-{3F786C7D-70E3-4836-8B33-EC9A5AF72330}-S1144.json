@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'NonPublicActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  368,
-"startColumn":  13,
-"endLine":  371,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'WorkerActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
-"region":  {
-"startLine":  376,
-"startColumn":  13,
-"endLine":  392,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private type 'FailingChildInnerActor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
@@ -106,175 +80,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'EchoReceiveActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  13,
-"endLine":  149,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'PreStartEchoReceiveActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  13,
-"endLine":  158,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'CallReceiveWhenHandlingMessageActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  168,
-"startColumn":  13,
-"endLine":  182,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'IntPredicatesActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  187,
-"startColumn":  13,
-"endLine":  202,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'TypePredicatesActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  207,
-"startColumn":  13,
-"endLine":  224,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'ReceiveAnyActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
-"region":  {
-"startLine":  230,
-"startColumn":  13,
-"endLine":  234,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'BecomeActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
-"region":  {
-"startLine":  91,
-"startColumn":  13,
-"endLine":  97,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'BecomeDirectlyInConstructorActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  13,
-"endLine":  123,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'CrashActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
-"region":  {
-"startLine":  66,
-"startColumn":  13,
-"endLine":  72,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashingActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashAndReplyActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  189,
-"startColumn":  13,
-"endLine":  197,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashEverythingActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  203,
-"startColumn":  13,
-"endLine":  206,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'StashingTwiceActor'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
-"region":  {
-"startLine":  212,
-"startColumn":  13,
-"endLine":  227,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'Greeted'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
@@ -282,19 +87,6 @@
 "startLine":  229,
 "startColumn":  13,
 "endLine":  237,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'Resumer'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
-"region":  {
-"startLine":  54,
-"startColumn":  13,
-"endLine":  60,
 "endColumn":  14
 }
 }
@@ -309,6 +101,19 @@
 "startColumn":  13,
 "endLine":  88,
 "endColumn":  14
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused internal type 'Registration'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  85,
+"endColumn":  10
 }
 }
 },

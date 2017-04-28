@@ -38,19 +38,6 @@
 "endColumn":  84
 }
 }
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private constructor 'BlowUpModule'.",
-"location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
-"region":  {
-"startLine":  217,
-"startColumn":  13,
-"endLine":  220,
-"endColumn":  14
-}
-}
 }
 ]
 }

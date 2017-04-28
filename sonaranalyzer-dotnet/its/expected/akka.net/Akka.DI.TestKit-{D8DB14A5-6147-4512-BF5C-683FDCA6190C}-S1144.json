@@ -28,19 +28,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private constructor 'DiParentActor'.",
-"location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
-"region":  {
-"startLine":  61,
-"startColumn":  13,
-"endLine":  64,
-"endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private constructor 'DisposableActor'.",
 "location":  {
 "uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
