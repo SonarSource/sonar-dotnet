@@ -15,7 +15,7 @@ SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program
 
 ## Useful links
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
-* [Issue tracking](http://jira.sonarsource.com/browse/SONARCS)
+* [Issue tracking](https://github.com/SonarSource/sonar-csharp/issues)
 * [Google Group for feedback](https://groups.google.com/forum/#!forum/sonarqube)
 * [StackOverflow](https://stackoverflow.com/questions/tagged/sonarc%23)
 
