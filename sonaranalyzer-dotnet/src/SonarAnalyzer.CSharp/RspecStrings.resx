@@ -5385,6 +5385,30 @@
   <data name="S3971_Title" xml:space="preserve">
     <value>"GC.SuppressFinalize" should not be called</value>
   </data>
+  <data name="S3993_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3993_Description" xml:space="preserve">
+    <value>When defining custom attributes System.AttributeUsageAttribute has to be used to indicate where the attribute can be applied. This will determine its valid locations in the code.</value>
+  </data>
+  <data name="S3993_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3993_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3993_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3993_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3993_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3993_Title" xml:space="preserve">
+    <value>Custom attributes should be marked with "System.AttributeUsageAttribute"</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
