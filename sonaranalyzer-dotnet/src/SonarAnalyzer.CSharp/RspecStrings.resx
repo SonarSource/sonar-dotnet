@@ -5385,6 +5385,30 @@
   <data name="S3971_Title" xml:space="preserve">
     <value>"GC.SuppressFinalize" should not be called</value>
   </data>
+  <data name="S3981_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S3981_Description" xml:space="preserve">
+    <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
+  </data>
+  <data name="S3981_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3981_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3981_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3981_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3981_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3981_Title" xml:space="preserve">
+    <value>Collection sizes and array lengths should not be tested against "&gt;= 0"</value>
+  </data>
   <data name="S3993_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
