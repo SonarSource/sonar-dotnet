@@ -1,0 +1,21 @@
+<p>Assemblies should explicitly indicate whether they are meant to be COM visible or not. If the <code>ComVisibleAttribute</code> is not present, the
+default is to make the content of the assembly visible to COM clients.</p>
+<p>Note that COM visibility can be overridden for individual types and members.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary  // Noncompliant
+{
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+[assembly: System.Runtime.InteropServices.ComVisible(false)]
+namespace MyLibrary
+{
+}
+</pre>
+
