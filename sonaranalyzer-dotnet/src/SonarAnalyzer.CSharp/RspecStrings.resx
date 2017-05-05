@@ -5409,6 +5409,30 @@
   <data name="S3981_Title" xml:space="preserve">
     <value>Collection sizes and array lengths should not be tested against "&gt;= 0"</value>
   </data>
+  <data name="S3992_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3992_Description" xml:space="preserve">
+    <value>Assemblies should explicitly indicate whether they are meant to be COM visible or not. If the ComVisibleAttribute is not present, the default is to make the content of the assembly visible to COM clients.</value>
+  </data>
+  <data name="S3992_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3992_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3992_RemediationCost" xml:space="preserve">
+    <value>1min</value>
+  </data>
+  <data name="S3992_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3992_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3992_Title" xml:space="preserve">
+    <value>Assemblies should explicitly specify COM visibility</value>
+  </data>
   <data name="S3993_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
