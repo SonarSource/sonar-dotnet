@@ -95,6 +95,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_NonSerializedAttribute = new KnownType("System.NonSerializedAttribute");
         public static readonly KnownType System_Attribute = new KnownType("System.Attribute");
         public static readonly KnownType System_AttributeUsageAttribute = new KnownType("System.AttributeUsageAttribute");
+        public static readonly KnownType System_CLSCompliantAttribute = new KnownType("System.CLSCompliantAttribute");
 
         public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_Generic_IReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>");

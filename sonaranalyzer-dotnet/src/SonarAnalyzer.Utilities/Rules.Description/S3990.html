@@ -1,0 +1,12 @@
+<p>Assemblies should conform with the Common Language Specification (CLS) in order to be usable across programming languages. To be compliant an
+assembly has to indicate it with <code>System.CLSCompliantAttribute</code>.</p>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+[assembly:CLSCompliant(true)]
+namespace MyLibrary
+{
+}
+</pre>
+

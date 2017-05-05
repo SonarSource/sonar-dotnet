@@ -5409,6 +5409,30 @@
   <data name="S3981_Title" xml:space="preserve">
     <value>Collection sizes and array lengths should not be tested against "&gt;= 0"</value>
   </data>
+  <data name="S3990_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3990_Description" xml:space="preserve">
+    <value>Assemblies should conform with the Common Language Specification (CLS) in order to be usable across programming languages. To be compliant an assembly has to indicate it with System.CLSCompliantAttribute.</value>
+  </data>
+  <data name="S3990_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3990_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3990_RemediationCost" xml:space="preserve">
+    <value>1min</value>
+  </data>
+  <data name="S3990_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3990_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3990_Title" xml:space="preserve">
+    <value>Assemblies should be marked as CLS compliant</value>
+  </data>
   <data name="S3992_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
