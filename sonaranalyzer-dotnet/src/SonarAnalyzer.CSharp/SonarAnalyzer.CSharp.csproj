@@ -103,6 +103,7 @@
     <Compile Include="Helpers\MethodParameterLookup.cs" />
     <Compile Include="Helpers\RemovableDeclarationCollector.cs" />
     <Compile Include="Helpers\FlowAnalysisExtensions.cs" />
+    <Compile Include="Helpers\StringUtils.cs" />
     <Compile Include="Helpers\SymbolicExecution\ExplodedGraph.cs" />
     <Compile Include="Helpers\SymbolicExecution\InvocationVisitor.cs" />
     <Compile Include="Helpers\SymbolicExecution\MemberAccessedEventArgs.cs" />
