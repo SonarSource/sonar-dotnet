@@ -24,14 +24,14 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class UriPropertiesShouldNotBeStringsTest
+    public class UseUriInsteadOfStringTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UriPropertiesShouldNotBeStrings()
+        public void UseUriInsteadOfString()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UriPropertiesShouldNotBeStrings.cs",
-                new UriPropertiesShouldNotBeStrings());
+            Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
+                new UseUriInsteadOfString());
         }
     }
 }
