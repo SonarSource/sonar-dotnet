@@ -3,15 +3,30 @@ param
     [Parameter(Mandatory = $true, HelpMessage = "action: new, fix or update", Position = 0)]
     [ValidateSet("new", "fix", "update")]
     [string]$action,
-    [Parameter(Mandatory = $true, HelpMessage = "numeric rule key, e.g. without S in the beginning", Position = 1)]
+    [Parameter(Mandatory = $true, HelpMessage = "language: cs or vbnet", Position = 1)]
+    [ValidateSet("cs", "vbnet")]
+    [string]$lang,
+    [Parameter(Mandatory = $true, HelpMessage = "numeric rule key, e.g. without S in the beginning", Position = 2)]
     [string]$ruleKey,
-    [Parameter(Mandatory = $true, HelpMessage = "your github auth token", Position = 2)]
+    [Parameter(Mandatory = $true, HelpMessage = "your github auth token", Position = 3)]
     [string]$token,
     [int]$milestoneKey
 )
 
+# for testing
+#$projectUri = "https://api.github.com/repos/valhristov/test1/issues"
+$projectUri = "https://api.github.com/repos/SonarSource/sonar-csharp/issues"
+
+$ruleapiLanguageMap =
+@{
+    "cs" = "c#";
+    "vbnet" = "vb.net";
+}
+
 function Get-Description() {
-    $htmlPath = "${rspecFolder}\\S${ruleKey}_c#.html"
+    $language = $ruleapiLanguageMap.Get_Item($lang)
+
+    $htmlPath = "${rspecFolder}\\S${ruleKey}_${language}.html"
     if (-Not (Test-Path $htmlPath)) {
         Get-RspecMetadata
     }
@@ -29,7 +44,9 @@ function Get-Description() {
 }
 
 function Get-Title() {
-    $jsonPath = "${rspecFolder}\\S${ruleKey}_c#.json"
+    $language = $ruleapiLanguageMap.Get_Item($lang)
+
+    $jsonPath = "${rspecFolder}\\S${ruleKey}_${language}.json"
     if (-Not (Test-Path $jsonPath)) {
         Get-RspecMetadata
     }
@@ -50,7 +67,9 @@ function Get-Title() {
 
 function Get-RspecMetadata() {
     Write-Host "downloading RSPEC metadata to ${rspecFolder}"
-    java -jar $env:rule_api_path generate -directory $rspecFolder -language "c#" -rule "S${ruleKey}" | Out-Host
+
+    $language = $ruleapiLanguageMap.Get_Item($lang)
+    java -jar $env:rule_api_path generate -directory $rspecFolder -language $language -rule "S${ruleKey}" | Out-Host
 }
 
 function Get-Labels() {
@@ -80,7 +99,7 @@ function New-Issue() {
     }
 
     Invoke-WebRequest `
-        -Uri "https://api.github.com/repos/SonarSource/sonar-csharp/issues" `
+        -Uri $projectUri `
         -Method "POST" `
         -Headers $headers `
         -Body ($payload | ConvertTo-Json)
