@@ -249,24 +249,16 @@ public class RoslynProfileExporter extends ProfileExporter {
     }
 
     for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
-      checkValueNotNull(param.getValue(), activeRule.getRuleKey(), param.getKey());
-      builder.put(param.getKey(), param.getValue());
+      builder.put(param.getKey(), param.getValue() == null ? "" : param.getValue());
     }
 
     for (RuleParam param : activeRule.getRule().getParams()) {
       if (!builder.containsKey(param.getKey())) {
-        checkValueNotNull(param.getDefaultValue(), activeRule.getRuleKey(), param.getKey());
-        builder.put(param.getKey(), param.getDefaultValue());
+        builder.put(param.getKey(), param.getDefaultValue() == null ? "" : param.getDefaultValue());
       }
     }
 
     return ImmutableMap.copyOf(builder);
-  }
-
-  private static void checkValueNotNull(@Nullable String value, String ruleKey, String paramKey) {
-    if (value == null) {
-      throw new IllegalStateException(String.format("Rule '%s' has parameter '%s' with a null value", ruleKey, paramKey));
-    }
   }
 
   static Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {

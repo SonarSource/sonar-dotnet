@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RoslynExportProfile Version="1.0">
+  <Configuration>
+    <RuleSet Name="Rules for SonarQube" Description="This rule set was automatically generated from SonarQube." ToolsVersion="14.0">
+      <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+        <Rule Id="S1000" Action="Warning" />
+      </Rules>
+    </RuleSet>
+    <AdditionalFiles>
+      <AdditionalFile FileName="SonarLint.xml">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxBbmFseXNpc0lucHV0Pg0KICA8UnVsZXM+DQogICAgPFJ1bGU+DQogICAgICA8S2V5PlMxMDAwPC9LZXk+DQogICAgICA8UGFyYW1ldGVycz4NCiAgICAgICAgPFBhcmFtZXRlcj4NCiAgICAgICAgICA8S2V5PnBhcmFtPC9LZXk+DQogICAgICAgICAgPFZhbHVlPjwvVmFsdWU+DQogICAgICAgIDwvUGFyYW1ldGVyPg0KICAgICAgPC9QYXJhbWV0ZXJzPg0KICAgIDwvUnVsZT4NCiAgPC9SdWxlcz4NCiAgPEZpbGVzPg0KICA8L0ZpbGVzPg0KPC9BbmFseXNpc0lucHV0Pg0K</AdditionalFile>
+    </AdditionalFiles>
+  </Configuration>
+  <Deployment>
+    <Plugins>
+      <Plugin Key="csharp" Version="1.7.0" StaticResourceName="SonarAnalyzer.zip" />
+    </Plugins>
+    <NuGetPackages>
+      <NuGetPackage Id="SonarAnalyzer.CSharp" Version="1.10.0" />
+    </NuGetPackages>
+  </Deployment>
+</RoslynExportProfile>
