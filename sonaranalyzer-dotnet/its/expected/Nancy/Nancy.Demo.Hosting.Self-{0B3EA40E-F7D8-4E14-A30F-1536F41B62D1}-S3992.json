@@ -1,9 +1,0 @@
-{
-"issues":  [
-{
-"id":  "S3992",
-"message":  "Mark this assembly with 'System.Runtime.InteropServices.ComVisibleAttribute'",
-"location":  null
-}
-]
-}
