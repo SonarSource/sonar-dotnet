@@ -1,0 +1,51 @@
+<p>A thread acquiring a lock on an object that can be accessed across application domain boundaries runs the risk of being blocked by another thread
+in a different application domain. Objects that can be accessed across application domain boundaries are said to have weak identity. Types with weak
+identity are:</p>
+<ul>
+  <li> <code>MarshalByRefObject</code> </li>
+  <li> <code>ExecutionEngineException</code> </li>
+  <li> <code>OutOfMemoryException</code> </li>
+  <li> <code>StackOverflowException</code> </li>
+  <li> <code>String</code> </li>
+  <li> <code>MemberInfo</code> </li>
+  <li> <code>ParameterInfo</code> </li>
+  <li> <code>Thread</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Threading;
+
+namespace MyLibrary
+{
+  class Foo
+  {
+    string myString = "foo";
+
+    void Bar()
+    {
+      lock(myString) { } // Noncompliant
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Threading;
+
+namespace MyLibrary
+{
+  class Foo
+  {
+    string myString = "foo";
+    private readonly Object thisLock = new Object();
+
+    void Bar()
+    {
+      lock(thisLock) { } // Compliant
+    }
+  }
+}
+</pre>
+

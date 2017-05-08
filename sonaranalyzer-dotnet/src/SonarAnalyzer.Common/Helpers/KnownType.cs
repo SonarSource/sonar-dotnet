@@ -96,6 +96,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Attribute = new KnownType("System.Attribute");
         public static readonly KnownType System_AttributeUsageAttribute = new KnownType("System.AttributeUsageAttribute");
         public static readonly KnownType System_CLSCompliantAttribute = new KnownType("System.CLSCompliantAttribute");
+        public static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
 
         public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_Generic_IReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>");
@@ -139,6 +140,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Reflection_Assembly = new KnownType("System.Reflection.Assembly");
         public static readonly KnownType System_Reflection_AssemblyVersionAttribute = new KnownType("System.Reflection.AssemblyVersionAttribute");
         public static readonly KnownType System_Reflection_MemberInfo = new KnownType("System.Reflection.MemberInfo");
+        public static readonly KnownType System_Reflection_ParameterInfo = new KnownType("System.Reflection.ParameterInfo");
         public static readonly KnownType System_Reflection_Module = new KnownType("System.Reflection.Module");
         public static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new KnownType("System.Data.Common.CommandTrees.DbExpression");
         public static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
@@ -213,6 +215,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ArgumentNullException = new KnownType("System.ArgumentNullException");
         public static readonly KnownType System_ArgumentOutOfRangeException = new KnownType("System.ArgumentOutOfRangeException");
         public static readonly KnownType System_DuplicateWaitObjectException = new KnownType("System.DuplicateWaitObjectException");
+        public static readonly KnownType System_StackOverflowException = new KnownType("System.StackOverflowException");
 
 
         public static readonly KnownType System_IComparable = new KnownType("System.IComparable");
