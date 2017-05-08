@@ -34,6 +34,7 @@ import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -225,7 +226,7 @@ public class RoslynProfileExporterTest {
   }
 
   @Test
-  public void ruleWithParameterWithNullValue() {
+  public void ruleWithParameterWithNullValue() throws IOException {
     Settings settings = mock(Settings.class);
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginKey")).thenReturn("csharp");
     when(settings.getDefaultValue("sonaranalyzer-cs.pluginVersion")).thenReturn("1.7.0");
@@ -262,11 +263,11 @@ public class RoslynProfileExporterTest {
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(settings, new RulesDefinition[] {sonarLintRepo});
     StringWriter writer = new StringWriter();
-
-    thrown.expect(IllegalStateException.class);
-    thrown.expectMessage("Rule 'S1000' has parameter 'param'");
     exporter.exportProfile(rulesProfile, writer);
 
+    String actual = writer.toString().replaceAll("\r?\n|\r", "");
+    String expected = Files.toString(new File("src/test/resources/RoslynProfileExporterTest/empty_string_value.xml"), StandardCharsets.UTF_8).replaceAll("\r?\n|\r", "");
+    assertThat(actual).isEqualTo(expected);
   }
 
   @Test
