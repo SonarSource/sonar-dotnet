@@ -118,13 +118,6 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
 
-        public static bool IsEnumerableCount(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                methodSymbol.Name == nameof(Enumerable.Count) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
-        }
-
         public static bool IsEnumerableToArray(this IMethodSymbol methodSymbol)
         {
             return methodSymbol.MethodKind == MethodKind.ReducedExtension &&

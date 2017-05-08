@@ -140,6 +140,7 @@
     <Compile Include="Helpers\FluentTestHelper.cs" />
     <Compile Include="Helpers\TypeHelperTest.cs" />
     <Compile Include="Helpers\SymbolHelperTest.cs" />
+    <Compile Include="PackagingTests\VsixTest.cs" />
     <Compile Include="PackagingTests\DocGeneratorTest.cs" />
     <Compile Include="Helpers\DiagnosticAnalyzerContextHelperTest.cs" />
     <Compile Include="Helpers\DiagnosticReportHelperTest.cs" />
