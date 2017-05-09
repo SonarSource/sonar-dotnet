@@ -15,7 +15,7 @@ param (
     [string]$sonarQubeProjectKey = "sonaranalyzer-csharp-vbnet",
     [string]$sonarQubeUrl = "http://localhost:9000",
     [string]$sonarQubeToken = $null,
-	
+
 	[string]$solutionName = "SonarAnalyzer.sln",
     [string]$certificatePath,
 

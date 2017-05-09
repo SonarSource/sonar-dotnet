@@ -1,10 +1,11 @@
 Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 
 $sonarqube_runner_version = "2.0"
+$repo_path = (Resolve-Path (Join-Path $PSScriptRoot ".."))
 
 # Resolves the given relative to the repository path to absolute.
 function Resolve-RepoPath([string]$relativePath) {
-    return (Join-Path (Resolve-Path (Join-Path $PSScriptRoot "..")) $relativePath)
+    return [IO.Path]::GetFullPath((Join-Path $repo_path $relativePath))
 }
 
 # Original: http://jameskovacs.com/2010/02/25/the-exec-problem
@@ -82,7 +83,8 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
         if (!$directory) {
             $path = Exec { & where.exe $name } `
                 | Select-Object -First 1
-        } else {
+        }
+        else {
             $path = Exec { & where.exe /R $directory $name } `
                 | Select-Object -First 1
         }
@@ -118,10 +120,21 @@ function Get-CodeCoveragePath {
 
 function Expand-ZIPFile($source, $destination) {
     Write-Host "Expanding ZIP file ${source}"
-    $application = New-Object -Com Shell.Application
-    $zip = $application.NameSpace($source)
-    foreach ($item in $zip.items()) {
-        $application.NameSpace($destination).CopyHere($item, 0x14)
+
+    if (Get-Command "Expand-Archive" -errorAction SilentlyContinue) {
+        # PS v5.0+
+        Expand-Archive $source $destination -Force
+    } else {
+        if (-Not (Test-Path $destination)) {
+            Write-Host "Creating ${destination}"
+            New-Item $destination -ItemType Directory
+        }
+
+        $application = New-Object -Com Shell.Application
+
+        $zip = $application.NameSpace($source)
+        $destinationFolder = $application.NameSpace($destination)
+        $destinationFolder.CopyHere($zip.items(), 0x14)
     }
 }
 
@@ -140,7 +153,6 @@ function Get-SonarQubeRunnerPath {
 
     # perhaps we could use other folder, not the repository root
     Expand-ZIPFile $sonarqube_runner_zip (Resolve-RepoPath "")
-    # PS v5.0 -> Expand-Archive $sonarqube_runner_zip (Resolve-RepoPath "") -Force
 
     Remove-Item $sonarqube_runner_zip -Force
 

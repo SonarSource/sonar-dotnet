@@ -49,8 +49,16 @@ function Get-BuildArtifacts {
 
             Invoke-WebRequest -UseBasicParsing -Uri $downloadUrl -Headers $authHeaders -OutFile $zipPath
 
-            Expand-ZIPFile $zipPath (Resolve-RepoPath ".\its\binaries") -Force
+            if (-Not (Test-Path $zipPath)) {
+                throw "Zip file was not downloaded correctly"
+            }
+
+            Expand-ZIPFile $zipPath $tempFolder
         }
+
+        $tempAnalyzers = Join-Path $tempFolder "analyzers"
+        $binaryFolder = Resolve-RepoPath ".\its\binaries"
+        Copy-Item $tempAnalyzers $binaryFolder -Recurse -Force
     }
     finally {
         Remove-Item $tempFolder -Recurse -Force -ErrorAction Ignore
@@ -60,10 +68,11 @@ function Get-BuildArtifacts {
 function Invoke-IntegrationTests {
     Write-Header "Running integration tests..."
 
-    Exec-InLocation (Resolve-RepoPath ".") {
+    Exec-InLocation (Resolve-RepoPath "") {
         Exec { git submodule update --init --recursive --depth 1 }
 
         & .\its\regression-test.ps1
+        Test-ExitCode "ERROR: Integration tests FAILED."
     }
 }
 
