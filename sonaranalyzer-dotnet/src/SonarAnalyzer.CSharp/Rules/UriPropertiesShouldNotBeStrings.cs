@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
                     if (propertySymbol.Type.SpecialType == SpecialType.System_String &&
+                        !propertySymbol.IsOverride &&
                         NameContainsUri(propertySymbol.Name))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, propertyDeclaration.Type.GetLocation()));

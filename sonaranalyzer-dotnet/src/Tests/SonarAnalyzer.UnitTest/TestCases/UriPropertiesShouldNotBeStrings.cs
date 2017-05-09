@@ -2,6 +2,17 @@ using System;
 
 namespace Tests.Diagnostics
 {
+    class Foo
+    {
+        string Url { get; set; } // Noncompliant
+//      ^^^^^^
+    }
+
+    class Bar : Foo
+    {
+        override string Url { get; set; } // Compliant
+    }
+
     class Program
     {
         // Url
