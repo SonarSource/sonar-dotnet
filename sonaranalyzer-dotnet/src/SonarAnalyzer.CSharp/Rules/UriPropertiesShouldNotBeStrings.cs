@@ -36,8 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3996";
         private const string MessageFormat = "Change this property type to 'System.Uri'";
 
-        private static readonly ImmutableHashSet<string> UrlNameVariants
-            = (new HashSet<string> { "uri", "url", "urn" }).ToImmutableHashSet();
+        private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

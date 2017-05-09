@@ -28,7 +28,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UriPropertiesShouldBeStrings()
+        public void UriPropertiesShouldNotBeStrings()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriPropertiesShouldNotBeStrings.cs",
                 new UriPropertiesShouldNotBeStrings());
