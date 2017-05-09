@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -61,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static bool NameContainsUri(string name, params string[] word)
+        private static bool NameContainsUri(string name)
         {
             var wordsInName = name.SplitCamelCaseToWords();
             return UrlNameVariants.Overlaps(wordsInName);
