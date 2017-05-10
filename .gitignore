@@ -59,3 +59,6 @@ packages/
 # MSTest test results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+# Rule API artifacts that generate a lot of merge conflicts
+Sonar_way_profile.json
