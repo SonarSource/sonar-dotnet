@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -50,6 +51,16 @@ namespace SonarAnalyzer.Common
                 .Select((item, index) => new { Message = item.Message, Index = index.ToString() })
                 .ToDictionary(i => i.Index, i => i.Message)
                 .ToImmutableDictionary();
+        }
+
+        public static SecondaryLocation GetSecondaryLocation(this Diagnostic diagnostic, int index)
+        {
+            if (diagnostic.AdditionalLocations.Count <= index)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            return new SecondaryLocation(diagnostic.AdditionalLocations[index],
+                diagnostic.Properties.GetValueOrDefault(index.ToString()));
         }
     }
 }

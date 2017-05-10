@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
@@ -50,7 +50,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\NancyEngine.cs",
@@ -92,7 +92,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\Request.cs",
@@ -125,7 +125,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\Response.cs",
@@ -167,7 +167,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -200,7 +200,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -233,7 +233,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -266,7 +266,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -299,7 +299,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",

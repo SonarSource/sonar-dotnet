@@ -132,5 +132,13 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Name == nameof(Enumerable.ToArray) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
+
+        public static bool IsGcSuppressFinalize(this IMethodSymbol method)
+        {
+            return method != null &&
+                method.Parameters.Length == 1 &&
+                method.Name == nameof(GC.SuppressFinalize) &&
+                method.ContainingType.Is(KnownType.System_GC);
+        }
     }
 }

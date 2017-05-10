@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",

@@ -34,6 +34,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = Microsoft.CodeAnalysis.CSharp;
@@ -101,23 +102,19 @@ namespace SonarAnalyzer.UnitTest
 
                     foreach (var diagnostic in diagnostics)
                     {
-                        var location = diagnostic.Location;
-                        var message = diagnostic.GetMessage();
-
                         string issueId;
-                        VerifyIssue(expectedIssues, issue => issue.IsPrimary, location, message, out issueId);
+                        VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out issueId);
 
-                        var sortedAdditionalLocations = diagnostic.AdditionalLocations
-                                                                  .OrderBy(x => x.GetLineNumberToReport())
-                                                                  .ThenBy(x => x.GetLineSpan().StartLinePosition.Character)
-                                                                  .ToList();
-                        for (int i = 0; i < sortedAdditionalLocations.Count; i++)
-                        {
-                            location = sortedAdditionalLocations[i];
-                            diagnostic.Properties.TryGetValue(i.ToString(), out message);
-
-                            VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary, location, message, out issueId);
-                        }
+                        diagnostic.AdditionalLocations
+                            .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                            .OrderBy(x => x.Location.GetLineNumberToReport())
+                            .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character)
+                            .ToList()
+                            .ForEach(secondaryLocation => 
+                            {
+                                VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary,
+                                    secondaryLocation.Location, secondaryLocation.Message, out issueId);
+                            });
                     }
 
                     if (expectedIssues.Count != 0)

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
@@ -35,7 +35,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
