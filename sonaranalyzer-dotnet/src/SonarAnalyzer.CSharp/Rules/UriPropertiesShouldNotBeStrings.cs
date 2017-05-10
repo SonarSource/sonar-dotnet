@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class UriPropertiesShouldNotBeStrings : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3996";
-        private const string MessageFormat = "Change this property type to 'System.Uri'";
+        private const string MessageFormat = "Change this property type to 'System.Uri'.";
 
         private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
-                    if (propertySymbol.Type.SpecialType == SpecialType.System_String &&
+                    if (propertySymbol.Type.Is(KnownType.System_String) &&
                         !propertySymbol.IsOverride &&
                         NameContainsUri(propertySymbol.Name))
                     {

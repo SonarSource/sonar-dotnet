@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
     class Program
     {
         // Url
-        string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'}}
+        string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
 //      ^^^^^^
         string url // Noncompliant
 //      ^^^^^^
@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
 
 
         // Urn
-        string Urn { get; set; } // Noncompliant {{Change this property type to 'System.Uri'}}
+        string Urn { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
 //      ^^^^^^
         string urn { get; set; } // Noncompliant
         string urnSpelling { get; set; } // Noncompliant
@@ -55,7 +55,7 @@ namespace Tests.Diagnostics
 
 
         // Uri
-        string Uri { get; set; } // Noncompliant {{Change this property type to 'System.Uri'}}
+        string Uri { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
 //      ^^^^^^
         string uri { get; set; } // Noncompliant
         string uriSpelling { get; set; } // Noncompliant

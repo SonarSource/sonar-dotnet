@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3996",
-"message":  "Change this property type to 'System.Uri'",
+"message":  "Change this property type to 'System.Uri'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Authentication.Forms\FormsAuthenticationConfiguration.cs",
 "region":  {
