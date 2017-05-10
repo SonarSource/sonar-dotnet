@@ -30,20 +30,41 @@ using System.Collections.Generic;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class UriPropertiesShouldNotBeStrings : SonarDiagnosticAnalyzer
+    [Rule(DiagnosticId_RuleS3995)]
+    [Rule(DiagnosticId_RuleS3996)]
+    public sealed class UseUriInsteadOfString : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3996";
-        private const string MessageFormat = "Change this property type to 'System.Uri'.";
+        internal const string DiagnosticId_RuleS3995 = "S3995";
+        private const string MessageFormat_RuleS3995 = "Change this return type to 'System.Uri'.";
+        private static readonly DiagnosticDescriptor rule_S3995 =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS3995, MessageFormat_RuleS3995, RspecStrings.ResourceManager);
+
+        internal const string DiagnosticId_RuleS3996 = "S3996";
+        private const string MessageFormat_RuleS3996 = "Change this property type to 'System.Uri'.";
+        private static readonly DiagnosticDescriptor rule_S3996 =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS3996, MessageFormat_RuleS3996, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule_S3995, rule_S3996);
 
         private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+
+                    if (methodSymbol.ReturnType.Is(KnownType.System_String) &&
+                        !methodSymbol.IsOverride &&
+                        NameContainsUri(methodSymbol.Name))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule_S3995, methodDeclaration.ReturnType.GetLocation()));
+                    }
+                },
+                SyntaxKind.MethodDeclaration);
+
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
@@ -54,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !propertySymbol.IsOverride &&
                         NameContainsUri(propertySymbol.Name))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, propertyDeclaration.Type.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);

@@ -1,0 +1,36 @@
+<p>String representations of URIs or URLs are prone to parsing and encoding errors which can lead to vulnerabilities. The <code>System.Uri</code>
+class is a safe alternative and should be preferred.</p>
+<p>This rule raises an issue when a method has a <code>string</code> return type and its name contains "Uri", "Urn", or "Url" or begins with "uri",
+"urn", or "url".</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public class MyClass
+   {
+      public string GetParentUri() // Noncompliant
+      {
+         return "http://www.mysite.com";
+      }
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public class MyClass
+   {
+
+      public Uri GetParentUri()
+      {
+         return new URI("http://www.mysite.com");
+      }
+   }
+}
+</pre>
+

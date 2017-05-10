@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  24,
+"endLine":  385,
+"endColumn":  30
+}
+}
+}
+]
+}
