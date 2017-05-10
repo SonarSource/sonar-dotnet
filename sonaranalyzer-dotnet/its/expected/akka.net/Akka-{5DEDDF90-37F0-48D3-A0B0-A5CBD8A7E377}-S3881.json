@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
@@ -35,7 +35,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
@@ -59,7 +59,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Actor\Inbox.cs",
@@ -83,7 +83,55 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  40
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  33,
+"endLine":  179,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  34
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S3881",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Dispatch\Mailbox.cs",
@@ -107,7 +155,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
@@ -140,7 +188,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
@@ -173,7 +221,7 @@
 },
 {
 "id":  "S3881",
-"message":  "Fix this implementation of IDisposable to conform to the dispose pattern.",
+"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",

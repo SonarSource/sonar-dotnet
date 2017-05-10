@@ -257,5 +257,10 @@ namespace SonarAnalyzer.Helpers
         {
             return symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
         }
+
+        public static bool IsDestructor(this IMethodSymbol method)
+        {
+            return method.MethodKind == MethodKind.Destructor;
+        }
     }
 }
