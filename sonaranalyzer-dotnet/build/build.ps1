@@ -15,8 +15,8 @@ param (
     [string]$sonarQubeProjectKey = "sonaranalyzer-csharp-vbnet",
     [string]$sonarQubeUrl = "http://localhost:9000",
     [string]$sonarQubeToken = $null,
-	
-	[string]$solutionName = "SonarAnalyzer.sln",
+
+    [string]$solutionName = "SonarAnalyzer.sln",
     [string]$certificatePath,
 
     [string]$artifactoryUrl = "https://repox.sonarsource.com/api/nuget",
@@ -73,8 +73,8 @@ function Update-MavenArtifacts([string]$version) {
 
     foreach ($file in $packages) {
         $packageId = $file.Name `
-            -Replace $file.Extension, "" `
-            -Replace ".$version", ""
+ -Replace $file.Extension, "" `
+ -Replace ".$version", ""
 
         (Get-Content (Resolve-RepoPath ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml")) -Replace "file-${packageId}", $file.FullName `
             | Set-Content ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml"

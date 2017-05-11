@@ -6,43 +6,41 @@
 # or
 # rspec.ps1 cs|vbnet <rule-key>
 #
-# Add will download the specified rule json and html files. If you want to add a 
+# Add will download the specified rule json and html files. If you want to add a
 # rule to both c# and vb.net execute the operation for each language.
 #
 # NOTES:
 # - All operations recreate the projects' resources, do not edit manually.
 param (
-    [Parameter(Mandatory=$true, HelpMessage="language: cs or vbnet", Position=0)]
+    [Parameter(Mandatory = $true, HelpMessage = "language: cs or vbnet", Position = 0)]
     [ValidateSet("cs", "vbnet")]
     [string]
     $language,
-    [Parameter(HelpMessage="The key of the rule to add/update, e.g. S1234. If omitted will update all existing rules.", Position=1)]
+    [Parameter(HelpMessage = "The key of the rule to add/update, e.g. S1234. If omitted will update all existing rules.", Position = 1)]
     [string]
     $ruleKey,
-    [Parameter(HelpMessage="The name of the rule class.", Position=2)]
+    [Parameter(HelpMessage = "The name of the rule class.", Position = 2)]
     [string]
     $className
 )
 
-if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path)))
-{
+if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path))) {
     throw "Download the latest version of rule-api jar from repox and set the %rule_api_path% environment variable with the full path of the jar."
 }
 
 $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
-if (-Not (Test-Path $resgenPath))
-{
+if (-Not (Test-Path $resgenPath)) {
     throw "You need to install the Windows SDK before using this script."
 }
 
-$categoriesMap = 
+$categoriesMap =
 @{
     "BUG" = "Sonar Bug";
     "CODE_SMELL" = "Sonar Code Smell";
     "VULNERABILITY" = "Sonar Vulnerability";
 }
 
-$severitiesMap = 
+$severitiesMap =
 @{
     "Critical" = "Critical";
     "Major" = "Major";
@@ -51,7 +49,7 @@ $severitiesMap =
     "Blocker" = "Blocker";
 }
 
-$remediationsMap = 
+$remediationsMap =
 @{
     "" = "";
     "Constant/Issue" = "Constant/Issue";
@@ -76,13 +74,11 @@ $resourceLanguageMap =
 }
 
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
-function GetRspecDownloadPath()
-{
+function GetRspecDownloadPath() {
     param ($lang)
 
     $rspecFolder = "${PSScriptRoot}\\..\\rspec\\${lang}"
-    if (-Not (Test-Path $rspecFolder))
-    {
+    if (-Not (Test-Path $rspecFolder)) {
         New-Item $rspecFolder | Out-Null
     }
 
@@ -90,17 +86,14 @@ function GetRspecDownloadPath()
 }
 
 # Returns a string array with rule keys for the specified language.
-function GetRules()
-{
+function GetRules() {
     param ($lang)
 
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
     $htmlFiles = Get-ChildItem "$(GetRspecDownloadPath $lang)\\*" -Include "*.html"
-    foreach ($htmlFile in $htmlFiles)
-    {
-        if ($htmlFile -Match "(S\d+)_(${suffix}).html")
-        {
+    foreach ($htmlFile in $htmlFiles) {
+        if ($htmlFile -Match "(S\d+)_(${suffix}).html") {
             $Matches[1]
         }
     }
@@ -109,26 +102,22 @@ function GetRules()
 # Copies the downloaded RSPEC html files for all rules in the specified language
 # to 'SonarAnalyzer.Utilities\Rules.Description'. If a rule is present in the otherLanguageRules
 # collection, a language suffix will be added to the target file name, so that the VB.NET and
-# C# files could have different html resources.  
-function CopyResources()
-{
+# C# files could have different html resources.
+function CopyResources() {
     param ($lang, $rules, $otherLanguageRules)
 
     $descriptionsFolder = "${PSScriptRoot}\\..\\src\\SonarAnalyzer.Utilities\\Rules.Description"
     $rspecFolder = GetRspecDownloadPath $lang
-    
+
     $source_suffix = "_" + $ruleapiLanguageMap.Get_Item($lang)
 
-    foreach ($rule in $rules)
-    {
+    foreach ($rule in $rules) {
         $suffix = ""
-        if ($otherLanguageRules -contains $rule)
-        {
+        if ($otherLanguageRules -contains $rule) {
             $suffix = "_$($resourceLanguageMap.Get_Item($lang))"
 
             $sharedLanguageDescription = "${descriptionsFolder}\\${rule}.html"
-            if (Test-Path $sharedLanguageDescription)
-            {
+            if (Test-Path $sharedLanguageDescription) {
                 Remove-Item $sharedLanguageDescription -Force
             }
         }
@@ -137,8 +126,7 @@ function CopyResources()
     }
 }
 
-function CreateStringResources()
-{
+function CreateStringResources() {
     param ($lang, $rules)
 
     $rspecFolder = GetRspecDownloadPath $lang
@@ -148,20 +136,17 @@ function CreateStringResources()
 
     $resources = New-Object System.Collections.ArrayList
 
-    foreach ($rule in $rules)
-    {
+    foreach ($rule in $rules) {
         $json = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.json" | ConvertFrom-Json
         $html = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.html"
 
         # take the first paragraph of the HTML file
-        if ($html -Match "<p>((.|\n)*?)</p>")
-        {
+        if ($html -Match "<p>((.|\n)*?)</p>") {
             # strip HTML tags and new lines
             $description = $Matches[1] -replace '<[^>]*>', ''
             $description = $description -replace '\n|( +)', ' '
         }
-        else 
-        {
+        else {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
         }
 
@@ -172,8 +157,7 @@ function CreateStringResources()
         [void]$resources.Add("${rule}_Severity=$($severitiesMap.Get_Item(${json}.defaultSeverity))") # TODO see how can we implement lowering the severity for certain rules
         [void]$resources.Add("${rule}_Tags=" + (${json}.tags -Join ","))
 
-        if (${json}.remediation.func)
-        {
+        if (${json}.remediation.func) {
             [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
             [void]$resources.Add("${rule}_RemediationCost=$(${json}.remediation.constantCost)") # TODO see if we have remediations other than constantConst and fix them
         }
@@ -191,29 +175,26 @@ function CreateStringResources()
     Invoke-Expression "& `"${resgenPath}`" ${rawResourcesPath} ${resourcesPath}"
 }
 
-function GenerateRuleClasses()
-{
+function GenerateRuleClasses() {
     $ruleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
     $csharpRulesFolder = "${PSScriptRoot}\\..\\src\\SonarAnalyzer.CSharp\\Rules"
     $csharpRuleTestsFolder = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
     $csharpRuleTestCasesFolder = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
 
-    (Get-Content "${ruleTemplateFolder}\\CSharpRuleTemplate.cs") -replace '\$DiagnosticClassName\$', $className -replace '\$DiagnosticId\$', $ruleKey | 
+    (Get-Content "${ruleTemplateFolder}\\CSharpRuleTemplate.cs") -replace '\$DiagnosticClassName\$', $className -replace '\$DiagnosticId\$', $ruleKey |
         Set-Content "${csharpRulesFolder}\\${className}.cs"
 
-    (Get-Content "${ruleTemplateFolder}\\CSharpTestTemplate.cs") -replace '\$DiagnosticClassName\$', $className | 
+    (Get-Content "${ruleTemplateFolder}\\CSharpTestTemplate.cs") -replace '\$DiagnosticClassName\$', $className |
         Set-Content "${csharpRuleTestsFolder}\\${className}Test.cs"
 
-    (Get-Content "${ruleTemplateFolder}\\CSharpTestCaseTemplate.cs") -replace '\$DiagnosticClassName\$', $className | 
+    (Get-Content "${ruleTemplateFolder}\\CSharpTestCaseTemplate.cs") -replace '\$DiagnosticClassName\$', $className |
         Set-Content "${csharpRuleTestCasesFolder}\\${className}.cs"
 }
 
-if ($ruleKey)
-{
+if ($ruleKey) {
     java -jar $env:rule_api_path generate -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
 }
-else
-{
+else {
     java -jar $env:rule_api_path update -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
 }
 
@@ -225,7 +206,6 @@ CopyResources "vbnet" $vbRules $csRules
 CreateStringResources "cs" $csRules
 CreateStringResources "vbnet" $vbRules
 
-if ($className -And $ruleKey)
-{
+if ($className -And $ruleKey) {
     GenerateRuleClasses
 }

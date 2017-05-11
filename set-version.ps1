@@ -1,6 +1,6 @@
 [CmdletBinding()]
 Param(
-    [Parameter(Mandatory=$True, Position=1)]
+    [Parameter(Mandatory = $True, Position = 1)]
     [ValidatePattern("\d{1,3}\.\d{1,3}(\.\d{1,3})?")]
     [string]$version
 )

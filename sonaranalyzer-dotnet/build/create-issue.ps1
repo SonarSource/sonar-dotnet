@@ -13,8 +13,6 @@ param
     [int]$milestoneKey
 )
 
-# for testing
-#$projectUri = "https://api.github.com/repos/valhristov/test1/issues"
 $projectUri = "https://api.github.com/repos/SonarSource/sonar-csharp/issues"
 
 $ruleapiLanguageMap =
@@ -87,12 +85,12 @@ function New-Issue() {
     Write-Host "creating issue ${title}"
 
     $headers = @{"Authorization" = "token ${token}"}
-    
+
     $payload = @{
         title = (Get-Title)
         body = (Get-Description)
         labels = (Get-Labels)
-    } 
+    }
 
     if ($milestoneKey) {
         $payload.milestone = $milestoneKey
