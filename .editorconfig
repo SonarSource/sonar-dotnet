@@ -1,0 +1,11 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+end_of_line = crlf
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+[*.{cs,ps1,bat,cmd}]
+indent_size = 4

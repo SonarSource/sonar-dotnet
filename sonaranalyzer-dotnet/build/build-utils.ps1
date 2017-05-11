@@ -124,7 +124,8 @@ function Expand-ZIPFile($source, $destination) {
     if (Get-Command "Expand-Archive" -errorAction SilentlyContinue) {
         # PS v5.0+
         Expand-Archive $source $destination -Force
-    } else {
+    }
+    else {
         if (-Not (Test-Path $destination)) {
             Write-Host "Creating ${destination}"
             New-Item $destination -ItemType Directory
