@@ -553,7 +553,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1645_Description" xml:space="preserve">
-    <value>Consistently using the &amp;amp; operator for string concatenation make the developer intentions clear.</value>
+    <value>Consistently using the &amp; operator for string concatenation make the developer intentions clear.</value>
   </data>
   <data name="S1645_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>

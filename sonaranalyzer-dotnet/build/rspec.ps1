@@ -55,19 +55,19 @@ $remediationsMap =
     "Constant/Issue" = "Constant/Issue";
 }
 
-$projectsMap =
+$projectsMap = 
 @{
     "cs" = "SonarAnalyzer.CSharp";
     "vbnet" = "SonarAnalyzer.VisualBasic";
 }
 
-$ruleapiLanguageMap =
+$ruleapiLanguageMap = 
 @{
     "cs" = "c#";
     "vbnet" = "vb.net";
 }
 
-$resourceLanguageMap =
+$resourceLanguageMap = 
 @{
     "cs" = "cs";
     "vbnet" = "vb";
@@ -145,6 +145,9 @@ function CreateStringResources() {
             # strip HTML tags and new lines
             $description = $Matches[1] -replace '<[^>]*>', ''
             $description = $description -replace '\n|( +)', ' '
+            $description = $description -replace '&amp;', '&'
+            $description = $description -replace '&lt;', '<'
+            $description = $description -replace '&gt;', '>'
         }
         else {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
