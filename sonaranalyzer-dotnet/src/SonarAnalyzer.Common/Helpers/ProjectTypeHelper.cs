@@ -22,11 +22,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
     internal static class ProjectTypeHelper
     {
+        public static bool IsTest(this SyntaxNodeAnalysisContext context)
+        {
+            return context.SemanticModel.Compilation.IsTest();
+        }
+
         public static bool IsTest(this Compilation compilation)
         {
             var assemblyName = string.Empty;

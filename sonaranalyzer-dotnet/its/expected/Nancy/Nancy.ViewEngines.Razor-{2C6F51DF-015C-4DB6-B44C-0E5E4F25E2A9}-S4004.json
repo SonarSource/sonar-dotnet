@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'SectionContents' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  44,
+"endLine":  59,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Sections' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  44,
+"endLine":  102,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Assemblies' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  42,
+"endLine":  24,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Namespaces' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  43,
+"endLine":  36,
+"endColumn":  53
+}
+}
+}
+]
+}
