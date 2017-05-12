@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId_RuleS3994)]
     [Rule(DiagnosticId_RuleS3995)]
     [Rule(DiagnosticId_RuleS3996)]
+    [Rule(DiagnosticId_RuleS4005)]
     public sealed class UseUriInsteadOfString : SonarDiagnosticAnalyzer
     {
         #region Rule definition
@@ -51,10 +52,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat_RuleS3996 = "Change this property type to 'System.Uri'.";
         private static readonly DiagnosticDescriptor rule_S3996 =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS3996, MessageFormat_RuleS3996, RspecStrings.ResourceManager);
+
+        internal const string DiagnosticId_RuleS4005 = "S4005";
+        private const string MessageFormat_RuleS4005 = "Call the overload that takes a 'System.Uri' as an argument instead.";
+        private static readonly DiagnosticDescriptor rule_S4005 =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS4005, MessageFormat_RuleS4005, RspecStrings.ResourceManager);
         #endregion
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(rule_S3994, rule_S3995, rule_S3996);
+            => ImmutableArray.Create(rule_S3994, rule_S3995, rule_S3996, rule_S4005);
 
         private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
 
@@ -106,6 +112,29 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var invokedMethodSymbol = c.SemanticModel.GetSymbolInfo(c.Node).Symbol as IMethodSymbol;
+                    if (invokedMethodSymbol == null || invokedMethodSymbol.IsInType(KnownType.System_Uri))
+                    {
+                        return;
+                    }
+
+                    var stringUrlParams = GetStringUrlParamIndexes(invokedMethodSymbol);
+                    if (stringUrlParams.Count == 0)
+                    {
+                        return;
+                    }
+
+                    if (HasOverloadThatUsesUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule_S4005, c.Node.GetLocation()));
+                    }
+                },
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression);
         }
 
         private bool HasOverloadThatUsesUriTypeInPlaceOfString(IMethodSymbol originalMethodSymbol, ISet<int> paramIdx)
