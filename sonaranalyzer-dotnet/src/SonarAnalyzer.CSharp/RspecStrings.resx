@@ -5625,6 +5625,30 @@
   <data name="S4000_Title" xml:space="preserve">
     <value>Pointers to unmanaged memory should not be visible</value>
   </data>
+  <data name="S4004_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4004_Description" xml:space="preserve">
+    <value>A writable collection property can be replaced by a completely different collection. Making it readonly prevents that while still allowing individual members to be set. If you want to allow the replacement of the whole collection the recommended pattern is to implement a method to remove all the elements (e.g. System.Collections.List&lt;T&gt;.Clear) and a method to populate the collection (e.g. System.Collections.List&lt;T&gt;.AddRange).</value>
+  </data>
+  <data name="S4004_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4004_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4004_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4004_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4004_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4004_Title" xml:space="preserve">
+    <value>Collection properties should be readonly</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

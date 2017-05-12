@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Array = new KnownType(SpecialType.System_Array, "System.Array");
         public static readonly KnownType System_Collections_Generic_IList_T = new KnownType(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList<T>");
         public static readonly KnownType System_Collections_Generic_ICollection_T = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection<T>");
+        public static readonly KnownType System_Collections_ICollection = new KnownType("System.Collections.ICollection");
 
         public static readonly KnownType System_Object = new KnownType(SpecialType.System_Object, "object");
         public static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
@@ -144,6 +145,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Security_Cryptography_HMACSHA1 = new KnownType("System.Security.Cryptography.HMACSHA1");
         public static readonly KnownType System_Security_Cryptography_HMACMD5 = new KnownType("System.Security.Cryptography.HMACMD5");
         public static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new KnownType("System.Security.Cryptography.HMACRIPEMD160");
+        public static readonly KnownType System_Security_PermissionSet = new KnownType("System.Security.PermissionSet");
 
         public static readonly KnownType System_Reflection_Assembly = new KnownType("System.Reflection.Assembly");
         public static readonly KnownType System_Reflection_AssemblyVersionAttribute = new KnownType("System.Reflection.AssemblyVersionAttribute");

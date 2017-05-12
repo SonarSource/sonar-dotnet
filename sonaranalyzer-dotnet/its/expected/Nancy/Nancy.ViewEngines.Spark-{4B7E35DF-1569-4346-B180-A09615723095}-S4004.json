@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Filters' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  41,
+"endLine":  34,
+"endColumn":  48
+}
+}
+}
+]
+}
