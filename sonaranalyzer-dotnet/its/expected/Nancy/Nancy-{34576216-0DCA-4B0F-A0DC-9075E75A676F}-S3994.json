@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  66,
+"endLine":  148,
+"endColumn":  72
+}
+}
+}
+]
+}

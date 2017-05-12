@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  42,
+"endLine":  385,
+"endColumn":  48
+}
+}
+}
+]
+}
