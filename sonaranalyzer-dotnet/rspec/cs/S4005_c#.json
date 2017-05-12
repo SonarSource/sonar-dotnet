@@ -1,0 +1,13 @@
+{
+  "title": "\"System.Uri\" argument should be passed instead of string",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

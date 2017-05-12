@@ -33,5 +33,13 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfString.cs",
                 new UseUriInsteadOfString());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseUriInsteadOfStringMethodOverloads()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UseUriInsteadOfStringMethodOverloads.cs",
+                new UseUriInsteadOfString());
+        }
     }
 }
