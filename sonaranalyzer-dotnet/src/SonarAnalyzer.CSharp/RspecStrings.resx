@@ -289,7 +289,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1067_Description" xml:space="preserve">
-    <value>The complexity of an expression is defined by the number of &amp;amp;&amp;amp;, || and condition ? ifTrue : ifFalse operators it contains.</value>
+    <value>The complexity of an expression is defined by the number of &amp;&amp;, || and condition ? ifTrue : ifFalse operators it contains.</value>
   </data>
   <data name="S1067_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -829,7 +829,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S1210_Description" xml:space="preserve">
-    <value>When you implement IComparable or IComparable&amp;lt;T&amp;gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &amp;lt;, &amp;lt;=, &amp;gt;, &amp;gt;=). That's because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
+    <value>When you implement IComparable or IComparable&lt;T&gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &lt;, &lt;=, &gt;, &gt;=). That's because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
   </data>
   <data name="S1210_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2893,7 +2893,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S2692_Description" xml:space="preserve">
-    <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &amp;gt;0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
+    <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &gt;0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
   </data>
   <data name="S2692_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2965,7 +2965,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S2743_Description" xml:space="preserve">
-    <value>A static field in a generic type is not shared among instances of different closed constructed types, thus LengthLimitedSingletonCollection&amp;lt;int&amp;gt;.instances and LengthLimitedSingletonCollection&amp;lt;string&amp;gt;.instances will point to different objects, even though instances is seemingly shared among all LengthLimitedSingletonCollection&amp;lt;&amp;gt; generic classes.</value>
+    <value>A static field in a generic type is not shared among instances of different closed constructed types, thus LengthLimitedSingletonCollection&lt;int&gt;.instances and LengthLimitedSingletonCollection&lt;string&gt;.instances will point to different objects, even though instances is seemingly shared among all LengthLimitedSingletonCollection&lt;&gt; generic classes.</value>
   </data>
   <data name="S2743_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4333,7 +4333,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S3449_Description" xml:space="preserve">
-    <value>Numbers can be shifted with the &amp;lt;&amp;lt; and &amp;gt;&amp;gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler's type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
+    <value>Numbers can be shifted with the &lt;&lt; and &gt;&gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler's type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
   </data>
   <data name="S3449_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -4348,7 +4348,7 @@
     <value>Critical</value>
   </data>
   <data name="S3449_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3449_Title" xml:space="preserve">
     <value>Right operands of shift operators should be integers</value>
@@ -4693,7 +4693,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S3610_Description" xml:space="preserve">
-    <value>Calling GetType() on a nullable object returns the underlying value type. Thus, comparing the returned Type object to typeof(Nullable&amp;lt;SomeType&amp;gt;) doesn't make sense. The comparison either throws an exception or the result can be known at compile time.</value>
+    <value>Calling GetType() on a nullable object returns the underlying value type. Thus, comparing the returned Type object to typeof(Nullable&lt;SomeType&gt;) doesn't make sense. The comparison either throws an exception or the result can be known at compile time.</value>
   </data>
   <data name="S3610_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5101,7 +5101,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3897_Description" xml:space="preserve">
-    <value>The IEquatable&amp;lt;T&amp;gt; interface has only one method in it: Equals(&amp;lt;T&amp;gt;). If you've already written Equals(T), there's no reason not to explicitly implement IEquatable&amp;lt;T&amp;gt;. Doing so expands the utility of your class by allowing it to be used where an IEquatable is called for.</value>
+    <value>The IEquatable&lt;T&gt; interface has only one method in it: Equals(&lt;T&gt;). If you've already written Equals(T), there's no reason not to explicitly implement IEquatable&lt;T&gt;. Doing so expands the utility of your class by allowing it to be used where an IEquatable is called for.</value>
   </data>
   <data name="S3897_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5125,7 +5125,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3898_Description" xml:space="preserve">
-    <value>If you're using a struct, it is likely because you're interested in performance. But by failing to implement IEquatable&amp;lt;T&amp;gt; you're loosing performance when comparisons are made because without IEquatable&amp;lt;T&amp;gt;, boxing and reflection are used to make comparisons. </value>
+    <value>If you're using a struct, it is likely because you're interested in performance. But by failing to implement IEquatable&lt;T&gt; you're loosing performance when comparisons are made because without IEquatable&lt;T&gt;, boxing and reflection are used to make comparisons. </value>
   </data>
   <data name="S3898_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
