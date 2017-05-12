@@ -53,7 +53,14 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
         public static readonly KnownType System_DateTime = new KnownType(SpecialType.System_DateTime, "DateTime");
 
+        public static readonly KnownType System_IntPtr = new KnownType(SpecialType.System_IntPtr, "IntPtr");
+        public static readonly KnownType System_UIntPtr = new KnownType(SpecialType.System_UIntPtr, "UIntPtr");
+
         public static readonly KnownType System_String_Array = new KnownType("string[]");
+
+        public static readonly ISet<KnownType> PointerTypes = ImmutableHashSet.Create(
+            System_IntPtr,
+            System_UIntPtr);
 
         public static readonly ISet<KnownType> FloatingPointNumbers = ImmutableHashSet.Create(
             System_Single,

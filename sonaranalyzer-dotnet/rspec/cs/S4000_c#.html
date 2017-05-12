@@ -1,0 +1,30 @@
+<p>The <code>IntPtr</code> and <code>UIntPtr</code> types are used to access unmanaged memory, usually in order to use C or C++ libraries. If such a
+pointer is not secured by making it <code>private</code>, <code>internal</code> or <code>readonly</code>, it can lead to a vulnerability allowing
+access to arbitrary locations.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public class MyClass
+  {
+    public IntPtr myPointer;  // Noncompliant
+    protected UIntPtr myOtherPointer; // Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public class MyClass
+  {
+    private IntPtr myPointer;
+    protected readonly UIntPtr myOtherPointer;
+  }
+}
+</pre>
+
