@@ -26,14 +26,22 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [Rule(DiagnosticId_RuleS3994)]
     [Rule(DiagnosticId_RuleS3995)]
     [Rule(DiagnosticId_RuleS3996)]
     public sealed class UseUriInsteadOfString : SonarDiagnosticAnalyzer
     {
+        #region Rule definition
+        internal const string DiagnosticId_RuleS3994 = "S3994";
+        private const string MessageFormat_RuleS3994 = "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.";
+        private static readonly DiagnosticDescriptor rule_S3994 =
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS3994, MessageFormat_RuleS3994, RspecStrings.ResourceManager);
+
         internal const string DiagnosticId_RuleS3995 = "S3995";
         private const string MessageFormat_RuleS3995 = "Change this return type to 'System.Uri'.";
         private static readonly DiagnosticDescriptor rule_S3995 =
@@ -43,8 +51,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat_RuleS3996 = "Change this property type to 'System.Uri'.";
         private static readonly DiagnosticDescriptor rule_S3996 =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId_RuleS3996, MessageFormat_RuleS3996, RspecStrings.ResourceManager);
+        #endregion
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule_S3995, rule_S3996);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
+            => ImmutableArray.Create(rule_S3994, rule_S3995, rule_S3996);
 
         private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
 
@@ -56,11 +66,28 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
+                    if (methodSymbol.IsOverride)
+                    {
+                        return;
+                    }
+
                     if (methodSymbol.ReturnType.Is(KnownType.System_String) &&
-                        !methodSymbol.IsOverride &&
                         NameContainsUri(methodSymbol.Name))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule_S3995, methodDeclaration.ReturnType.GetLocation()));
+                    }
+
+                    var stringUrlParams = GetStringUrlParamIndexes(methodSymbol);
+                    if (!stringUrlParams.Any() ||
+                        HasOverloadThatUsesUriTypeInPlaceOfString(methodSymbol, stringUrlParams))
+                    {
+                        return;
+                    }
+
+                    foreach (int paramIdx in stringUrlParams)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule_S3994,
+                            methodDeclaration.ParameterList.Parameters[paramIdx].Type.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -79,6 +106,52 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
+        }
+
+        private bool HasOverloadThatUsesUriTypeInPlaceOfString(IMethodSymbol originalMethodSymbol, ISet<int> paramIdx)
+        {
+            foreach (var methodSymbol in GetOtherMethodOverrides(originalMethodSymbol))
+            {
+                if (methodSymbol.Parameters
+                    .Where((paramSymbol, i) => UsesUriInPlaceOfStringUri(paramSymbol, originalMethodSymbol.Parameters[i], paramIdx.Contains(i)))
+                    .Any())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private ISet<int> GetStringUrlParamIndexes(IMethodSymbol methodSymbol)
+        {
+            var set = new HashSet<int>();
+
+            int i = 0;
+            foreach (var paramSymbol in methodSymbol.Parameters)
+            {
+                if (paramSymbol.Type.Is(KnownType.System_String) &&
+                    NameContainsUri(paramSymbol.Name))
+                {
+                    set.Add(i);
+                }
+                i++;
+            }
+            return set;
+        }
+
+        private IEnumerable<IMethodSymbol> GetOtherMethodOverrides(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.ContainingType
+                .GetMembers(methodSymbol.Name)
+                .OfType<IMethodSymbol>()
+                .Where(m => m.Parameters.Count() == methodSymbol.Parameters.Count())
+                .Where(m => !Equals(m, methodSymbol));
+        }
+
+        private bool UsesUriInPlaceOfStringUri(IParameterSymbol paramSymbol, IParameterSymbol originalParamSymbol, bool isStringUri)
+        {
+            return isStringUri ? paramSymbol.Type.Is(KnownType.System_Uri) :
+                Equals(paramSymbol, originalParamSymbol);
         }
 
         private static bool NameContainsUri(string name)
