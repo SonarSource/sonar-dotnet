@@ -9,6 +9,7 @@ namespace Tests.Diagnostics
         private UIntPtr privatePointer2;
         internal IntPtr internalPointer1;
         internal UIntPtr internalPointer2;
+        public readonly IntPtr publicReadonlyPointer1;
         protected readonly IntPtr protectedReadonlyPointer1;
         protected readonly UIntPtr protectedReadonlyPointer2;
         protected internal readonly IntPtr protectedInternalReadonlyPointer1;
