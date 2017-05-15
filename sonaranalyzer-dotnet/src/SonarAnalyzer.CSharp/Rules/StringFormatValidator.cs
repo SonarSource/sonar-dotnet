@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var failure = TryParseAndValidate((string)constValue.Value, invocation.ArgumentList,
+            var failure = TryParseAndValidate(constValue.Value as string, invocation.ArgumentList,
                 formatArgumentIndex, analysisContext.SemanticModel);
             if (failure == null ||
                 CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
@@ -152,6 +152,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
+            // All methods in HandledFormatMethods that do not end on Format have an overload 
+            // with only one argument and the rule should not raise an issue
             return argumentsCount == 1;
         }
 
