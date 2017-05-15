@@ -23,6 +23,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -162,6 +163,30 @@ namespace SonarAnalyzer.Helpers
         public static bool IsAnyKind(this SyntaxToken syntaxToken, ICollection<SyntaxKind> collection)
         {
             return collection.Contains((SyntaxKind)syntaxToken.RawKind);
+        }
+
+        public static bool ContainsMethodInvocation(BaseMethodDeclarationSyntax methodDeclarationBase, SemanticModel semanticModel,
+            Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
+        {
+            IEnumerable<SyntaxNode> childNodes = methodDeclarationBase?.Body?.DescendantNodes();
+            if (childNodes == null)
+            {
+                childNodes = (methodDeclarationBase as MethodDeclarationSyntax)?.ExpressionBody?.DescendantNodes();
+            }
+
+            return childNodes != null &&
+                ContainsMethodInvocation(childNodes, semanticModel, syntaxPredicate, symbolPredicate);
+        }
+
+        private static bool ContainsMethodInvocation(IEnumerable<SyntaxNode> syntaxNodes, SemanticModel semanticModel,
+            Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
+        {
+            return syntaxNodes
+                .OfType<InvocationExpressionSyntax>()
+                .Where(syntaxPredicate)
+                .Select(e => semanticModel.GetSymbolInfo(e.Expression).Symbol)
+                .OfType<IMethodSymbol>()
+                .Any(symbolPredicate);
         }
     }
 }

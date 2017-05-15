@@ -5577,6 +5577,30 @@
   <data name="S3996_Title" xml:space="preserve">
     <value>URI properties should not be strings</value>
   </data>
+  <data name="S3997_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3997_Description" xml:space="preserve">
+    <value>String representations of URIs or URLs are prone to parsing and encoding errors which can lead to vulnerabilities. The System.Uri class is a safe alternative and should be preferred.</value>
+  </data>
+  <data name="S3997_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3997_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3997_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3997_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3997_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3997_Title" xml:space="preserve">
+    <value>String URI overloads should call "System.Uri" overloads</value>
+  </data>
   <data name="S3998_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
