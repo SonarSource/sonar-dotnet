@@ -4,6 +4,9 @@ namespace Tests.Diagnostics
 {
     class Program
     {
+        Program(Uri uri) { }
+        Program(string stringUri) { }
+
         public static void FetchResource(string uriString) { }
         public static void FetchResource(Uri uri) { }
 
@@ -26,6 +29,8 @@ namespace Tests.Diagnostics
 
         static void Main()
         {
+            var p = new Program("www.sonarsource.com"); // Noncompliant
+
             FetchResource("www.sonarsource.com");
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Call the overload that takes a 'System.Uri' as an argument instead.}}
             FetchResource(new Uri("www.sonarsource.com"));

@@ -138,7 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportDiagnostic(Diagnostic.Create(rule_S4005, c.Node.GetLocation()));
                     }
                 },
-                SyntaxKind.InvocationExpression);
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression);
         }
 
         private bool HasOverloadThatUsesUriTypeInPlaceOfString(IMethodSymbol originalMethodSymbol, ISet<int> paramIdx)
