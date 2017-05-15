@@ -68,6 +68,7 @@ namespace Tests.Diagnostics
             Console.Write("{0}", 42);
             Console.Write("{{}}"); // Compliant, displays {}
             Console.Write("{"); // Compliant
+            Console.Write(ulong.MaxValue);
 
             Console.Write("[0}", args[0]); // Noncompliant
             Console.Write("{-1}", args[0]); // Noncompliant
@@ -80,6 +81,7 @@ namespace Tests.Diagnostics
             Console.WriteLine("0");
             Console.WriteLine("{0}", 42);
             Console.WriteLine("{"); // Compliant
+            Console.WriteLine(ulong.MaxValue);
 
             Console.WriteLine("[0}", args[0]); // Noncompliant
             Console.WriteLine("{-1}", args[0]); // Noncompliant
@@ -102,6 +104,7 @@ namespace Tests.Diagnostics
             System.IO.TextWriter.Write("0");
             System.IO.TextWriter.Write("{0}", 42);
             System.IO.TextWriter.Write("{"); // Compliant
+            System.IO.TextWriter.Write(ulong.MaxValue);
 
             System.IO.TextWriter.Write("[0}", args[0]); // Noncompliant
             System.IO.TextWriter.Write("{-1}", args[0]); // Noncompliant
@@ -114,6 +117,7 @@ namespace Tests.Diagnostics
             System.IO.TextWriter.WriteLine("0");
             System.IO.TextWriter.WriteLine("{0}", 42);
             System.IO.TextWriter.WriteLine("{"); // Compliant
+            System.IO.TextWriter.WriteLine(ulong.MaxValue);
 
             System.IO.TextWriter.WriteLine("[0}", args[0]); // Noncompliant
             System.IO.TextWriter.WriteLine("{-1}", args[0]); // Noncompliant
@@ -126,6 +130,7 @@ namespace Tests.Diagnostics
             System.Diagnostics.Debug.WriteLine("0");
             System.Diagnostics.Debug.WriteLine("{0}", 42);
             System.Diagnostics.Debug.WriteLine("{"); // Compliant
+            System.Diagnostics.Debug.WriteLine(ulong.MaxValue);
 
             System.Diagnostics.Debug.WriteLine("[0}", args[0]); // Noncompliant
             System.Diagnostics.Debug.WriteLine("{-1}", args[0]); // Noncompliant
@@ -173,7 +178,7 @@ namespace Tests.Diagnostics
         {
             System.Diagnostics.TraceSource.TraceInformation("0");
             System.Diagnostics.TraceSource.TraceInformation("{0}", 42);
-            System.Diagnostics.TraceSource.TraceInformation( "{"); // Compliant
+            System.Diagnostics.TraceSource.TraceInformation("{"); // Compliant
 
             System.Diagnostics.TraceSource.TraceInformation("[0}", args[0]); // Noncompliant
             System.Diagnostics.TraceSource.TraceInformation("{-1}", args[0]); // Noncompliant
