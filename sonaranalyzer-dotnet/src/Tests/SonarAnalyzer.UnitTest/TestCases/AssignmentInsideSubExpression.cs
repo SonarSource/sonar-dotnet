@@ -98,17 +98,17 @@ namespace Tests.Diagnostics
 
             oo = oo ?? (o = new object()); // Noncompliant
 
-            if ((a = b = 0) != 0) { }  // Noncompliant
+            if ((a = b = 0) != 0) { }  // Compliant
             int x = (a = b) + 5; // Noncompliant
         }
         public void TestMethod1()
         {
             var j = 5;
             var k = 5;
-            var i = j = // Noncompliant
-                k = 10; // Noncompliant
-            i = j =     // Noncompliant
-                k = 10; // Noncompliant
+            var i = j =
+                k = 10;
+            i = j =
+                k = 10;
         }
     }
 }

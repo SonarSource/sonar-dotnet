@@ -74,12 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression)
         {
-            var isInsideEqualsValueClause = topParenthesizedExpression.Parent is EqualsValueClauseSyntax;
-            if (isInsideEqualsValueClause)
-            {
-                return true;
-            }
-
             return IsInsideExpression(topParenthesizedExpression) &&
                 !IsCompliantAssignmentInsideExpression(assignment, topParenthesizedExpression);
         }
@@ -176,6 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = ImmutableHashSet.Create(
+            SyntaxKind.SimpleAssignmentExpression,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
