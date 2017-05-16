@@ -116,24 +116,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var invokedMethod = c.SemanticModel.GetSymbolInfo(c.Node).Symbol as IMethodSymbol;
-                    if (invokedMethod == null)
+                    var invokedMethodSymbol = c.SemanticModel.GetSymbolInfo(c.Node).Symbol as IMethodSymbol;
+                    if (invokedMethodSymbol == null || invokedMethodSymbol.IsInType(KnownType.System_Uri))
                     {
                         return;
                     }
 
-                    if (invokedMethod.IsInType(KnownType.System_Uri))
+                    var stringUrlParams = GetStringUrlParamIndexes(invokedMethodSymbol);
+                    if (stringUrlParams.Count == 0)
                     {
                         return;
                     }
 
-                    var stringUrlParams = GetStringUrlParamIndexes(invokedMethod);
-                    if (!stringUrlParams.Any())
-                    {
-                        return;
-                    }
-
-                    if (HasOverloadThatUsesUriTypeInPlaceOfString(invokedMethod, stringUrlParams))
+                    if (HasOverloadThatUsesUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule_S4005, c.Node.GetLocation()));
                     }
