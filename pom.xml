@@ -70,8 +70,8 @@
     <tag>HEAD</tag>
   </scm>
   <issueManagement>
-    <system>JIRA</system>
-    <url>https://jira.sonarsource.com/browse/SONARCS</url>
+    <system>GitHub Issues</system>
+    <url>https://github.com/SonarSource/sonar-csharp/issues</url>
   </issueManagement>
 
   <properties>
