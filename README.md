@@ -16,12 +16,9 @@ SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program
 ## Useful links
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
 * [Issue tracking](https://github.com/SonarSource/sonar-csharp/issues)
-* [Google Group for feedback](https://groups.google.com/forum/#!forum/sonarqube)
-* [StackOverflow](https://stackoverflow.com/questions/tagged/sonarc%23)
 
 ## Have question or feedback?
-To provide feedback (request a feature, report a bug etc.) use the [SonarQube Google Group](https://groups.google.com/forum/#!forum/sonarqube). Please do not forget to specify the language (C#), plugin version and SonarQube version.
-If you have a question on how to use plugin direct it to [StackOverflow](http://stackoverflow.com/questions/tagged/sonarqube+c%23+or+sonarc%23) tagged both `sonarqube` and `c#` or `sonarc#`.
+To provide feedback (request a feature, report a bug etc.), simply [create a GitHub Issue](https://github.com/SonarSource/sonar-csharp/issues).
 
 ## How to contribute
 Check out the [contributing](CONTRIBUTING.md) page to see the best places to log issues and start discussions.
