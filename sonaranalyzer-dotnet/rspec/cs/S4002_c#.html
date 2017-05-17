@@ -1,0 +1,76 @@
+<p>This rule raises an issue when a disposable type contains fields of the following types and does not implement a proper finalizer:</p>
+<ul>
+  <li> <code>System.IntPtr</code> </li>
+  <li> <code>System.UIntPtr</code> </li>
+  <li> <code>System.Runtime.InteropService.HandleRef</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Runtime.InteropServices;
+
+namespace MyLibrary
+{
+  public class Foo : IDisposable // Noncompliant: Doesn't have a finalizer
+  {
+    private IntPtr myResource;
+    private bool disposed = false;
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposed)
+      {
+        // Dispose of resources held by this instance.
+        FreeResource(myResource);
+        disposed = true;
+
+        // Suppress finalization of this disposed instance.
+        if (disposing)
+        {
+          GC.SuppressFinalize(this);
+        }
+      }
+    }
+
+    public void Dispose() {
+      Dispose(true);
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Runtime.InteropServices;
+
+namespace MyLibrary
+{
+  public class Foo : IDisposable
+  {
+    private IntPtr myResource;
+    private bool disposed = false;
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposed)
+      {
+        // Dispose of resources held by this instance.
+        FreeResource(myResource);
+        disposed = true;
+
+        // Suppress finalization of this disposed instance.
+        if (disposing)
+        {
+          GC.SuppressFinalize(this);
+        }
+      }
+    }
+
+    ~Foo()
+    {
+      Dispose(false);
+    }
+  }
+}
+</pre>
+

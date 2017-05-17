@@ -5625,6 +5625,24 @@
   <data name="S4000_Title" xml:space="preserve">
     <value>Pointers to unmanaged memory should not be visible</value>
   </data>
+  <data name="S4002_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4002_Description" xml:space="preserve">
+    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a proper finalizer:</value>
+  </data>
+  <data name="S4002_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4002_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4002_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4002_Title" xml:space="preserve">
+    <value>Disposable types should declare finalizers</value>
+  </data>
   <data name="S4004_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
