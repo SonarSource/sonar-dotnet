@@ -72,50 +72,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(VerifyDeclaration,
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyMethodDeclaration,
                 SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
-
-                    if (propertySymbol.Type.Is(KnownType.System_String) &&
-                        !propertySymbol.IsOverride &&
-                        NameContainsUri(propertySymbol.Name))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyPropertyDeclaration,
                 SyntaxKind.PropertyDeclaration);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invokedMethodSymbol = c.SemanticModel.GetSymbolInfo(c.Node).Symbol as IMethodSymbol;
-                    if (invokedMethodSymbol == null || invokedMethodSymbol.IsInType(KnownType.System_Uri))
-                    {
-                        return;
-                    }
-
-                    var stringUrlParams = GetStringUrlParamIndexes(invokedMethodSymbol);
-                    var methodOverloads = FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams);
-                    if (stringUrlParams.Count > 0 && methodOverloads.Any())
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(rule_S4005, c.Node.GetLocation()));
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(VerifyInvocationAndCreation,
                 SyntaxKind.InvocationExpression,
                 SyntaxKind.ObjectCreationExpression);
         }
 
-        private void VerifyDeclaration(SyntaxNodeAnalysisContext context)
+        private void VerifyMethodDeclaration(SyntaxNodeAnalysisContext context)
         {
             var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
             var methodSymbol = context.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-            if (methodDeclaration == null || methodSymbol == null || methodSymbol.IsOverride)
+            if (methodSymbol == null || methodSymbol.IsOverride)
             {
                 return;
             }
@@ -137,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         mSyntax => true,
                         mSymbol => methodOverloadSet.Contains(mSymbol)))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule_S3997, FindIdentifierLocation(methodDeclaration)));
+                    context.ReportDiagnostic(Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()));
                 }
             }
             else
@@ -150,15 +123,33 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private Location FindIdentifierLocation(BaseMethodDeclarationSyntax baseMethodDeclaration)
+        private void VerifyPropertyDeclaration(SyntaxNodeAnalysisContext context)
         {
-            var location = (baseMethodDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
-            if (location == null)
+            var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
+            var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
+
+            if (propertySymbol.Type.Is(KnownType.System_String) &&
+                !propertySymbol.IsOverride &&
+                NameContainsUri(propertySymbol.Name))
             {
-                location = (baseMethodDeclaration as ConstructorDeclarationSyntax)?.Identifier.GetLocation();
+                context.ReportDiagnostic(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
+            }
+        }
+
+        private void VerifyInvocationAndCreation(SyntaxNodeAnalysisContext context)
+        {
+            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IMethodSymbol;
+            if (invokedMethodSymbol == null || invokedMethodSymbol.IsInType(KnownType.System_Uri))
+            {
+                return;
             }
 
-            return location;
+            var stringUrlParams = GetStringUrlParamIndexes(invokedMethodSymbol);
+            var methodOverloads = FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams);
+            if (stringUrlParams.Count > 0 && methodOverloads.Any())
+            {
+                context.ReportDiagnostic(Diagnostic.Create(rule_S4005, context.Node.GetLocation()));
+            }
         }
 
         private void VerifyReturnType(SyntaxNodeAnalysisContext context,

@@ -5,13 +5,14 @@ namespace Tests.Diagnostics
     #region S3996 Property type
     class S3996_Foo
     {
-        string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
-//      ^^^^^^
+        public virtual string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+//                     ^^^^^^
     }
 
-    class S3996_Bar
+    class S3996_Bar : S3996_Foo
     {
-        override string Url { get; set; } // Compliant
+        public override string Url { get; set; } // Compliant
+        override string Url_InvalidCode { get; set; } // Compliant
     }
 
     class S3996
@@ -57,13 +58,15 @@ namespace Tests.Diagnostics
 
     class S3995_Foo
     {
-        string Uri() => ""; // Noncompliant {{Change this return type to 'System.Uri'.}}
-//      ^^^^^^
+        public virtual string Uri() => ""; // Noncompliant {{Change this return type to 'System.Uri'.}}
+//                     ^^^^^^
     }
 
-    class S3995_Bar
+    class S3995_Bar : S3995_Foo
     {
-        override string Uri() => ""; // Compliant
+        public override string Uri() => ""; // Compliant
+
+        public override string Uri_InvalidCode() => ""; // Compliant
     }
 
     class S3995
@@ -85,8 +88,6 @@ namespace Tests.Diagnostics
 
 
         // Test there are no false positives
-        string Pouring() => ""; // Compliant
-        string Hurl() => ""; // Compliant
         string Pouring() => ""; // Compliant
         string Hurl() => ""; // Compliant
     }
@@ -181,7 +182,7 @@ namespace Tests.Diagnostics
             Uri result;
             // Do not raise issues when using Uri class
             Uri.TryCreate("", UriKind.Absolute, out result); // Compliant
-            Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant
+            Uri.TryCreate(new object(), UriKind.Absolute, out result); // Compliant - invalid code
 
             result = new Uri("foo");
             result = new Uri("foo", true);

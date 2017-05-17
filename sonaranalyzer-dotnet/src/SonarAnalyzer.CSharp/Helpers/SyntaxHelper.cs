@@ -188,5 +188,15 @@ namespace SonarAnalyzer.Helpers
                 .OfType<IMethodSymbol>()
                 .Any(symbolPredicate);
         }
+
+        public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration)
+        {
+            var identifierSyntax = (methodDeclaration as MethodDeclarationSyntax)?.Identifier ??
+                                   (methodDeclaration as ConstructorDeclarationSyntax)?.Identifier ??
+                                   (methodDeclaration as DestructorDeclarationSyntax)?.Identifier;
+
+            return identifierSyntax?.GetLocation();
+        }
+
     }
 }
