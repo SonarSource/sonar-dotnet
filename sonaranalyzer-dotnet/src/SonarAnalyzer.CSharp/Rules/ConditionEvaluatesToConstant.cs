@@ -42,9 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = ImmutableHashSet.Create(
             SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression,
-            SyntaxKind.TrueLiteralExpression,
-            SyntaxKind.FalseLiteralExpression);
+            SyntaxKind.LogicalOrExpression);
 
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
@@ -209,7 +207,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
 
             if (condition == null ||
-                OmittedSyntaxKinds.Contains(condition.Kind()))
+                OmittedSyntaxKinds.Contains(condition.Kind()) ||
+                IsWhileTrueLoopCondition(condition))
             {
                 return;
             }
@@ -222,6 +221,12 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 conditionFalse.Add(condition);
             }
+        }
+
+        private static bool IsWhileTrueLoopCondition(SyntaxNode condition)
+        {
+            return condition.IsKind(SyntaxKind.TrueLiteralExpression) &&
+                condition.Parent.IsKind(SyntaxKind.WhileStatement);
         }
     }
 }

@@ -115,13 +115,13 @@ namespace Tests.Diagnostics
 
         public void Method2Literals()
         {
-            if (true) // Compliant
+            if (true) // Noncompliant
             {
                 Console.WriteLine();
             }
 
-            if (false) // Compliant
-            {
+            if (false) // Noncompliant
+            { // Secondary
                 Console.WriteLine();
             }
 
@@ -183,7 +183,7 @@ namespace Tests.Diagnostics
 
         public void Method7(bool cond)
         {
-            while (true) // Not reporting on this
+            while (true) // Compliant, this is too common to report on
             {
                 Console.WriteLine();
             }
