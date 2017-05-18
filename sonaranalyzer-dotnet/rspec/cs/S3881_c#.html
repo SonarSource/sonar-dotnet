@@ -14,10 +14,13 @@ Solution</strong> section for examples.</p>
   <li> If the class has a finalizer, i.e. a destructor, the only code in its body should be a single invocation of <code>Dispose(false)</code>. </li>
   <li> If the class has a finalizer, an additional call to <code>GC.SuppressFinalize(this)</code> is required in the <code>Dispose()</code> method.
   </li>
+  <li> If the class inherits from a class that implements <code>IDisposable</code> it must call the <code>Dispose</code>, or
+  <code>Dispose(bool)</code> method of the base class from within its own implementation of <code>Dispose</code> or <code>Dispose(bool)</code>,
+  respectively. This ensures that all resources from the base class are properly released. </li>
 </ul>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public class Foo : IDisposable // Noncompliant - provide protected overridable implementation of Dispose(bool) on Foo or mark the type as sealed.
+public class Foo1 : IDisposable // Noncompliant - provide protected overridable implementation of Dispose(bool) on Foo or mark the type as sealed.
 {
     public void Dispose() // Noncompliant - should contain only a call to Dispose(true) and then GC.SuppressFinalize(this)
     {
@@ -25,7 +28,7 @@ public class Foo : IDisposable // Noncompliant - provide protected overridable i
     }
 }
 
-public class Foo : IDisposable
+public class Foo2 : IDisposable
 {
     void IDisposable.Dispose() // Noncompliant - Dispose() should be public
     {
@@ -40,7 +43,7 @@ public class Foo : IDisposable
     }
 }
 
-public class Foo : IDisposable
+public class Foo3 : IDisposable
 {
     public void Dispose()
     {
@@ -53,7 +56,7 @@ public class Foo : IDisposable
         // Cleanup
     }
 
-    ~Foo() // Noncompliant - Modify Foo.~Foo() so that it calls Dispose(false) and then returns.
+    ~Foo3() // Noncompliant - Modify Foo.~Foo() so that it calls Dispose(false) and then returns.
     {
         // Cleanup
     }
@@ -115,4 +118,13 @@ public class Foo4 : DisposableBase
     }
 }
 </pre>
+<h2>See</h2>
+<p>Refer to </p>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/498928w2.aspx">MSDN</a> for complete documentation on the dispose pattern. </li>
+  <li> <a href="http://blog.stephencleary.com/2009/08/how-to-implement-idisposable-and.html">Stephen Cleary</a> for excellent Q&amp;A about
+  IDisposable </li>
+  <li> <a href="http://pragmateek.com/c-scope-your-global-state-changes-with-idisposable-and-the-using-statement/">Pragma Geek</a> for additional
+  usages of IDisposable, beyond releasing resources. </li>
+</ul>
 
