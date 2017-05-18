@@ -220,7 +220,7 @@
     <value>Complex boolean expressions are hard to read and so to maintain.</value>
   </data>
   <data name="S1067_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1067_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -238,7 +238,7 @@
     <value>Expressions should not be too complex</value>
   </data>
   <data name="S112_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S112_Description" xml:space="preserve">
     <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors. </value>
@@ -256,7 +256,7 @@
     <value>Major</value>
   </data>
   <data name="S112_Tags" xml:space="preserve">
-    <value>cwe,error-handling,bug,cert</value>
+    <value>cwe,error-handling,cert</value>
   </data>
   <data name="S112_Title" xml:space="preserve">
     <value>General exceptions should never be thrown</value>
@@ -376,13 +376,13 @@
     <value>Major</value>
   </data>
   <data name="S122_Tags" xml:space="preserve">
-    <value>convention</value>
+    <value>style</value>
   </data>
   <data name="S122_Title" xml:space="preserve">
     <value>Statements should be on separate lines</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
     <value>While it is technically correct to assign to parameters from within method bodies, it is better to use temporary variables to store intermediate results.</value>
@@ -400,7 +400,7 @@
     <value>Minor</value>
   </data>
   <data name="S1226_Tags" xml:space="preserve">
-    <value>bug,misra,pitfall</value>
+    <value>misra,pitfall</value>
   </data>
   <data name="S1226_Title" xml:space="preserve">
     <value>Method parameters and caught exceptions should not be reassigned</value>
@@ -592,7 +592,7 @@
     <value>Major</value>
   </data>
   <data name="S1654_Tags" xml:space="preserve">
-    <value />
+    <value>convention</value>
   </data>
   <data name="S1654_Title" xml:space="preserve">
     <value>Method parameters should follow a naming convention</value>
@@ -616,7 +616,7 @@
     <value>Major</value>
   </data>
   <data name="S1656_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S1656_Title" xml:space="preserve">
     <value>Variables should not be self-assigned</value>
@@ -664,7 +664,7 @@
     <value>Major</value>
   </data>
   <data name="S1764_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S1764_Title" xml:space="preserve">
     <value>Identical expressions should not be used on both sides of a binary operator</value>
@@ -688,7 +688,7 @@
     <value>Major</value>
   </data>
   <data name="S1862_Tags" xml:space="preserve">
-    <value>bug,cert,unused,pitfall</value>
+    <value>cert,unused,pitfall</value>
   </data>
   <data name="S1862_Title" xml:space="preserve">
     <value>Related "If/ElseIf" statements should not have the same condition</value>
@@ -736,7 +736,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2178_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S2178_Title" xml:space="preserve">
     <value>Short-circuit logic should be used in boolean contexts</value>
@@ -904,7 +904,7 @@
     <value>Minor</value>
   </data>
   <data name="S2345_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2345_Title" xml:space="preserve">
     <value>Flags enumerations should explicitly initialize all their members</value>
@@ -1414,7 +1414,7 @@
     <value>Non-private "Shared ReadOnly" fields should comply with a naming convention</value>
   </data>
   <data name="S2372_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2372_Description" xml:space="preserve">
     <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method. </value>
@@ -1432,7 +1432,7 @@
     <value>Major</value>
   </data>
   <data name="S2372_Tags" xml:space="preserve">
-    <value>error-handling,bug</value>
+    <value>error-handling</value>
   </data>
   <data name="S2372_Title" xml:space="preserve">
     <value>Exceptions should not be thrown from property getters</value>

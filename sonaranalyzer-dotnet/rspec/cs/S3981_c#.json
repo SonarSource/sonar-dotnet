@@ -1,5 +1,5 @@
 {
-  "title": "Collection sizes and array lengths should not be tested against \">= 0\"",
+  "title": "Collection sizes and array length comparisons should make sense",
   "type": "BUG",
   "status": "ready",
   "remediation": {

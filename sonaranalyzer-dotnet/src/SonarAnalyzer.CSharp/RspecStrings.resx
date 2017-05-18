@@ -400,7 +400,7 @@
     <value>Minor</value>
   </data>
   <data name="S1104_Tags" xml:space="preserve">
-    <value>cwe,security</value>
+    <value>cwe</value>
   </data>
   <data name="S1104_Title" xml:space="preserve">
     <value>Fields should not have public accessibility</value>
@@ -613,7 +613,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1144_Description" xml:space="preserve">
-    <value>Private, or internal, types or members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</value>
+    <value>private or internal types or private members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</value>
   </data>
   <data name="S1144_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -640,7 +640,7 @@
     <value>if statements with conditions that are always false have the effect of making blocks of code non-functional. if statements with conditions that are always true are completely redundant, and make the code less readable.</value>
   </data>
   <data name="S1145_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1145_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -652,7 +652,7 @@
     <value>Major</value>
   </data>
   <data name="S1145_Tags" xml:space="preserve">
-    <value>cwe,bug,misra</value>
+    <value>cwe,misra</value>
   </data>
   <data name="S1145_Title" xml:space="preserve">
     <value>Useless "if(true) {...}" and "if(false){...}" blocks should be removed</value>
@@ -796,7 +796,7 @@
     <value>Minor</value>
   </data>
   <data name="S1206_Tags" xml:space="preserve">
-    <value>cwe,bug,cert</value>
+    <value>cwe,cert</value>
   </data>
   <data name="S1206_Title" xml:space="preserve">
     <value>"Equals(Object)" and "GetHashCode()" should be overridden in pairs</value>
@@ -844,7 +844,7 @@
     <value>Minor</value>
   </data>
   <data name="S1210_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S1210_Title" xml:space="preserve">
     <value>"Equals" and the comparison operators should be overridden when implementing "IComparable"</value>
@@ -952,7 +952,7 @@
     <value>Floating point math is imprecise because of the challenges of storing such values in a binary representation. Even worse, floating point math is not associative; push a float or a double through a series of simple mathematical operations and the answer will be different based on the order of those operation because of the rounding that takes place at each step.</value>
   </data>
   <data name="S1244_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1244_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -964,7 +964,7 @@
     <value>Major</value>
   </data>
   <data name="S1244_Tags" xml:space="preserve">
-    <value>bug,misra</value>
+    <value>misra</value>
   </data>
   <data name="S1244_Title" xml:space="preserve">
     <value>Floating point numbers should not be tested for equality</value>
@@ -1132,7 +1132,7 @@
     <value>Major</value>
   </data>
   <data name="S1313_Tags" xml:space="preserve">
-    <value>security,cert</value>
+    <value>cert</value>
   </data>
   <data name="S1313_Title" xml:space="preserve">
     <value>IP addresses should not be hardcoded</value>
@@ -1180,7 +1180,7 @@
     <value>Minor</value>
   </data>
   <data name="S1449_Tags" xml:space="preserve">
-    <value>bug,unpredictable,cert</value>
+    <value>unpredictable,cert</value>
   </data>
   <data name="S1449_Title" xml:space="preserve">
     <value>Culture should be specified for "string" operations</value>
@@ -1420,7 +1420,7 @@
     <value>Major</value>
   </data>
   <data name="S1697_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S1697_Title" xml:space="preserve">
     <value>Short-circuit logic should be used to prevent null pointer dereferences in conditionals</value>
@@ -1492,7 +1492,7 @@
     <value>Major</value>
   </data>
   <data name="S1751_Tags" xml:space="preserve">
-    <value>bug,misra,cert,unused</value>
+    <value>misra,cert,unused</value>
   </data>
   <data name="S1751_Title" xml:space="preserve">
     <value>Jump statements should not be used unconditionally</value>
@@ -1516,7 +1516,7 @@
     <value>Major</value>
   </data>
   <data name="S1764_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S1764_Title" xml:space="preserve">
     <value>Identical expressions should not be used on both sides of a binary operator</value>
@@ -1546,7 +1546,7 @@
     <value>Objects should not be created to be dropped immediately without being used</value>
   </data>
   <data name="S1854_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1854_Description" xml:space="preserve">
     <value>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources. Therefore all calculated values should be used.</value>
@@ -1564,7 +1564,7 @@
     <value>Major</value>
   </data>
   <data name="S1854_Tags" xml:space="preserve">
-    <value>cwe,bug,cert,unused</value>
+    <value>cwe,cert,unused</value>
   </data>
   <data name="S1854_Title" xml:space="preserve">
     <value>Dead stores should be removed</value>
@@ -1612,7 +1612,7 @@
     <value>Major</value>
   </data>
   <data name="S1862_Tags" xml:space="preserve">
-    <value>bug,cert,unused,pitfall</value>
+    <value>cert,unused,pitfall</value>
   </data>
   <data name="S1862_Title" xml:space="preserve">
     <value>Related "if/else if" statements should not have the same condition</value>
@@ -1732,7 +1732,7 @@
     <value>Critical</value>
   </data>
   <data name="S1944_Tags" xml:space="preserve">
-    <value>cwe,bug,misra,cert,pitfall</value>
+    <value>cwe,misra,cert,pitfall</value>
   </data>
   <data name="S1944_Title" xml:space="preserve">
     <value>Inappropriate casts should not be made</value>
@@ -1780,7 +1780,7 @@
     <value>Critical</value>
   </data>
   <data name="S2070_Tags" xml:space="preserve">
-    <value>cwe,security,owasp-a6,sans-top25-porous</value>
+    <value>cwe,owasp-a6,sans-top25-porous</value>
   </data>
   <data name="S2070_Title" xml:space="preserve">
     <value>SHA-1 and Message-Digest hash algorithms should not be used</value>
@@ -1804,7 +1804,7 @@
     <value>Major</value>
   </data>
   <data name="S2123_Tags" xml:space="preserve">
-    <value>bug,unused</value>
+    <value>unused</value>
   </data>
   <data name="S2123_Title" xml:space="preserve">
     <value>Values should not be uselessly incremented</value>
@@ -1876,7 +1876,7 @@
     <value>Minor</value>
   </data>
   <data name="S2184_Tags" xml:space="preserve">
-    <value>cwe,overflow,bug,sans-top25-risky,misra,cert</value>
+    <value>cwe,overflow,sans-top25-risky,misra,cert</value>
   </data>
   <data name="S2184_Title" xml:space="preserve">
     <value>Results of integer division should not be assigned to floating point variables</value>
@@ -1900,7 +1900,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2190_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2190_Title" xml:space="preserve">
     <value>Recursion should not be infinite</value>
@@ -1948,7 +1948,7 @@
     <value>Major</value>
   </data>
   <data name="S2201_Tags" xml:space="preserve">
-    <value>bug,misra,cert</value>
+    <value>misra,cert</value>
   </data>
   <data name="S2201_Title" xml:space="preserve">
     <value>Return values should not be ignored when function calls don't have any side effects</value>
@@ -2020,7 +2020,7 @@
     <value>Major</value>
   </data>
   <data name="S2225_Tags" xml:space="preserve">
-    <value>cwe,bug</value>
+    <value>cwe</value>
   </data>
   <data name="S2225_Title" xml:space="preserve">
     <value>"ToString()" method should not return null</value>
@@ -2044,7 +2044,7 @@
     <value>Minor</value>
   </data>
   <data name="S2228_Tags" xml:space="preserve">
-    <value>security,owasp-a6</value>
+    <value>owasp-a6</value>
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
@@ -2068,7 +2068,7 @@
     <value>Major</value>
   </data>
   <data name="S2234_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2234_Title" xml:space="preserve">
     <value>Parameters should be passed in the correct order</value>
@@ -2092,7 +2092,7 @@
     <value>Major</value>
   </data>
   <data name="S2259_Tags" xml:space="preserve">
-    <value>cwe,bug,cert</value>
+    <value>cwe,cert</value>
   </data>
   <data name="S2259_Title" xml:space="preserve">
     <value>Null pointers should not be dereferenced</value>
@@ -2116,7 +2116,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2275_Tags" xml:space="preserve">
-    <value>bug,cert,pitfall</value>
+    <value>cert,pitfall</value>
   </data>
   <data name="S2275_Title" xml:space="preserve">
     <value>Composite format strings should not lead to unexpected behavior at runtime</value>
@@ -2140,7 +2140,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2278_Tags" xml:space="preserve">
-    <value>cwe,security,cert,owasp-a6,sans-top25-porous</value>
+    <value>cwe,cert,owasp-a6,sans-top25-porous</value>
   </data>
   <data name="S2278_Title" xml:space="preserve">
     <value>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</value>
@@ -2188,7 +2188,7 @@
     <value>Critical</value>
   </data>
   <data name="S2291_Tags" xml:space="preserve">
-    <value>error-handling,bug</value>
+    <value>error-handling</value>
   </data>
   <data name="S2291_Title" xml:space="preserve">
     <value>Overflow checking should not be disabled for "Enumerable.Sum"</value>
@@ -2308,7 +2308,7 @@
     <value>Minor</value>
   </data>
   <data name="S2328_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2328_Title" xml:space="preserve">
     <value>"GetHashCode" should not reference mutable fields</value>
@@ -2452,7 +2452,7 @@
     <value>Minor</value>
   </data>
   <data name="S2345_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2345_Title" xml:space="preserve">
     <value>Flags enumerations should explicitly initialize all their members</value>
@@ -2644,7 +2644,7 @@
     <value>Minor</value>
   </data>
   <data name="S2386_Tags" xml:space="preserve">
-    <value>cwe,security,unpredictable,cert</value>
+    <value>cwe,unpredictable,cert</value>
   </data>
   <data name="S2386_Title" xml:space="preserve">
     <value>Mutable fields should not be "public static"</value>
@@ -2764,7 +2764,7 @@
     <value>Critical</value>
   </data>
   <data name="S2551_Tags" xml:space="preserve">
-    <value>multi-threading,bug</value>
+    <value>multi-threading</value>
   </data>
   <data name="S2551_Title" xml:space="preserve">
     <value>Types and "this" should not be used for locking</value>
@@ -2788,7 +2788,7 @@
     <value>Major</value>
   </data>
   <data name="S2583_Tags" xml:space="preserve">
-    <value>cwe,bug,misra,cert,unused,pitfall</value>
+    <value>cwe,misra,cert,unused,pitfall</value>
   </data>
   <data name="S2583_Title" xml:space="preserve">
     <value>Conditionally executed blocks should be reachable</value>
@@ -2812,7 +2812,7 @@
     <value>Major</value>
   </data>
   <data name="S2589_Tags" xml:space="preserve">
-    <value>cwe,bug,misra,cert,redundant</value>
+    <value>cwe,misra,cert,redundant</value>
   </data>
   <data name="S2589_Title" xml:space="preserve">
     <value>Boolean expressions should not be gratuitous</value>
@@ -2836,7 +2836,7 @@
     <value>Minor</value>
   </data>
   <data name="S2674_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S2674_Title" xml:space="preserve">
     <value>The length returned from a stream read should be checked</value>
@@ -2860,7 +2860,7 @@
     <value>Major</value>
   </data>
   <data name="S2681_Tags" xml:space="preserve">
-    <value>cwe,bug,cert</value>
+    <value>cwe,cert</value>
   </data>
   <data name="S2681_Title" xml:space="preserve">
     <value>Multiline blocks should be enclosed in curly braces</value>
@@ -2884,7 +2884,7 @@
     <value>Major</value>
   </data>
   <data name="S2688_Tags" xml:space="preserve">
-    <value>bug,cert</value>
+    <value>cert</value>
   </data>
   <data name="S2688_Title" xml:space="preserve">
     <value>"NaN" should not be used in comparisons</value>
@@ -2944,7 +2944,7 @@
     <value>A catch clause that only rethrows the caught exception has the same effect as omitting the catch altogether and letting it bubble up automatically, but with more code and the additional detrement of leaving maintainers scratching their heads. </value>
   </data>
   <data name="S2737_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2737_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2980,7 +2980,7 @@
     <value>Major</value>
   </data>
   <data name="S2743_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2743_Title" xml:space="preserve">
     <value>Static fields should not be used in generic types</value>
@@ -3004,7 +3004,7 @@
     <value>Major</value>
   </data>
   <data name="S2757_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2757_Title" xml:space="preserve">
     <value>"=+" should not be used instead of "+="</value>
@@ -3076,7 +3076,7 @@
     <value>Major</value>
   </data>
   <data name="S2761_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2761_Title" xml:space="preserve">
     <value>Doubled prefix operators "!!" and "~~" should not be used</value>
@@ -3100,7 +3100,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2930_Tags" xml:space="preserve">
-    <value>cwe,denial-of-service,bug</value>
+    <value>cwe,denial-of-service</value>
   </data>
   <data name="S2930_Title" xml:space="preserve">
     <value>"IDisposables" should be disposed</value>
@@ -3124,7 +3124,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2931_Tags" xml:space="preserve">
-    <value>cwe,denial-of-service,bug</value>
+    <value>cwe,denial-of-service</value>
   </data>
   <data name="S2931_Title" xml:space="preserve">
     <value>Classes with "IDisposable" members should implement "IDisposable"</value>
@@ -3172,7 +3172,7 @@
     <value>Minor</value>
   </data>
   <data name="S2934_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2934_Title" xml:space="preserve">
     <value>Property assignments should not be made for "readonly" fields not constrained to reference types</value>
@@ -3196,7 +3196,7 @@
     <value>Critical</value>
   </data>
   <data name="S2952_Tags" xml:space="preserve">
-    <value>cwe,denial-of-service,bug</value>
+    <value>cwe,denial-of-service</value>
   </data>
   <data name="S2952_Title" xml:space="preserve">
     <value>Classes should "Dispose" of members from the classes' own "Dispose" methods</value>
@@ -3244,7 +3244,7 @@
     <value>Minor</value>
   </data>
   <data name="S2955_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2955_Title" xml:space="preserve">
     <value>Generic parameters not constrained to reference types should not be compared to "null"</value>
@@ -3292,7 +3292,7 @@
     <value>Major</value>
   </data>
   <data name="S2995_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2995_Title" xml:space="preserve">
     <value>"Object.ReferenceEquals" should not be used for value types</value>
@@ -3316,7 +3316,7 @@
     <value>Major</value>
   </data>
   <data name="S2996_Tags" xml:space="preserve">
-    <value>multi-threading,bug</value>
+    <value>multi-threading</value>
   </data>
   <data name="S2996_Title" xml:space="preserve">
     <value>"ThreadStatic" fields should not be initialized</value>
@@ -3340,7 +3340,7 @@
     <value>Major</value>
   </data>
   <data name="S2997_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S2997_Title" xml:space="preserve">
     <value>"IDisposables" created in a "using" statement should not be returned</value>
@@ -3364,7 +3364,7 @@
     <value>Major</value>
   </data>
   <data name="S3005_Tags" xml:space="preserve">
-    <value>bug,unused</value>
+    <value>unused</value>
   </data>
   <data name="S3005_Title" xml:space="preserve">
     <value>"ThreadStatic" should not be used on non-static fields</value>
@@ -3388,7 +3388,7 @@
     <value>Major</value>
   </data>
   <data name="S3010_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3010_Title" xml:space="preserve">
     <value>Static fields should not be updated in constructors</value>
@@ -3436,7 +3436,7 @@
     <value>Major</value>
   </data>
   <data name="S3168_Tags" xml:space="preserve">
-    <value>multi-threading,bug</value>
+    <value>multi-threading</value>
   </data>
   <data name="S3168_Title" xml:space="preserve">
     <value>"async" methods should not return "void"</value>
@@ -3484,7 +3484,7 @@
     <value>Major</value>
   </data>
   <data name="S3172_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3172_Title" xml:space="preserve">
     <value>Delegates should not be subtracted</value>
@@ -3604,7 +3604,7 @@
     <value>Minor</value>
   </data>
   <data name="S3220_Tags" xml:space="preserve">
-    <value>bug,pitfall</value>
+    <value>pitfall</value>
   </data>
   <data name="S3220_Title" xml:space="preserve">
     <value>Method calls should not resolve ambiguously to overloads with "params"</value>
@@ -3616,7 +3616,7 @@
     <value>GC.SuppressFinalize asks the Common Language Runtime not to call the finalizer of an object. This is useful when implementing the dispose pattern where object finalization is already handled in IDisposable.Dispose. However, it has no effect if there is no finalizer defined in the object's type, so using it in such cases is just confusing.</value>
   </data>
   <data name="S3234_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3234_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3772,7 +3772,7 @@
     <value>Major</value>
   </data>
   <data name="S3244_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3244_Title" xml:space="preserve">
     <value>Anonymous delegates should not be used to unsubscribe from Events</value>
@@ -3844,7 +3844,7 @@
     <value>Major</value>
   </data>
   <data name="S3249_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3249_Title" xml:space="preserve">
     <value>Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"</value>
@@ -4036,7 +4036,7 @@
     <value>Major</value>
   </data>
   <data name="S3263_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3263_Title" xml:space="preserve">
     <value>Static fields should appear in the order they must be initialized </value>
@@ -4132,7 +4132,7 @@
     <value>Minor</value>
   </data>
   <data name="S3397_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3397_Title" xml:space="preserve">
     <value>"base.Equals" should not be used to check for reference equality in "Equals" if "base" is not "object"</value>
@@ -4420,7 +4420,7 @@
     <value>Major</value>
   </data>
   <data name="S3453_Tags" xml:space="preserve">
-    <value>bug,design</value>
+    <value>design</value>
   </data>
   <data name="S3453_Title" xml:space="preserve">
     <value>Classes should not have only "private" constructors</value>
@@ -4444,7 +4444,7 @@
     <value>Minor</value>
   </data>
   <data name="S3456_Tags" xml:space="preserve">
-    <value>bug,clumsy</value>
+    <value>clumsy</value>
   </data>
   <data name="S3456_Title" xml:space="preserve">
     <value>"string.ToCharArray()" should not be called redundantly</value>
@@ -4540,7 +4540,7 @@
     <value>Major</value>
   </data>
   <data name="S3466_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3466_Title" xml:space="preserve">
     <value>Optional parameters should be passed to "base" calls</value>
@@ -4612,7 +4612,7 @@
     <value>Major</value>
   </data>
   <data name="S3598_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3598_Title" xml:space="preserve">
     <value>One-way "OperationContract" methods should have "void" return type</value>
@@ -4660,7 +4660,7 @@
     <value>Major</value>
   </data>
   <data name="S3603_Tags" xml:space="preserve">
-    <value>bug</value>
+    <value />
   </data>
   <data name="S3603_Title" xml:space="preserve">
     <value>Methods with "Pure" attribute should return a value </value>
@@ -4708,7 +4708,7 @@
     <value>Major</value>
   </data>
   <data name="S3610_Tags" xml:space="preserve">
-    <value>bug,redundant</value>
+    <value>redundant</value>
   </data>
   <data name="S3610_Title" xml:space="preserve">
     <value>Nullable type comparison should not be redundant</value>
@@ -4756,7 +4756,7 @@
     <value>Major</value>
   </data>
   <data name="S3655_Tags" xml:space="preserve">
-    <value>cwe,bug</value>
+    <value>cwe</value>
   </data>
   <data name="S3655_Title" xml:space="preserve">
     <value>Empty nullable value should not be accessed</value>
@@ -5212,7 +5212,7 @@
     <value>Critical</value>
   </data>
   <data name="S3904_Tags" xml:space="preserve">
-    <value>bug,pitfall</value>
+    <value>pitfall</value>
   </data>
   <data name="S3904_Title" xml:space="preserve">
     <value>Assemblies should have version information</value>
@@ -5389,7 +5389,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S3981_Description" xml:space="preserve">
-    <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
+    <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
   </data>
   <data name="S3981_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -5407,7 +5407,7 @@
     <value />
   </data>
   <data name="S3981_Title" xml:space="preserve">
-    <value>Collection sizes and array lengths should not be tested against "&gt;= 0"</value>
+    <value>Collection sizes and array length comparisons should make sense</value>
   </data>
   <data name="S3984_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5485,7 +5485,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3993_Description" xml:space="preserve">
-    <value>When defining custom attributes System.AttributeUsageAttribute has to be used to indicate where the attribute can be applied. This will determine its valid locations in the code.</value>
+    <value>When defining custom attributes, System.AttributeUsageAttribute must be used to indicate where the attribute can be applied. This will determine its valid locations in the code.</value>
   </data>
   <data name="S3993_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -5500,7 +5500,7 @@
     <value>Major</value>
   </data>
   <data name="S3993_Tags" xml:space="preserve">
-    <value />
+    <value>api-design</value>
   </data>
   <data name="S3993_Title" xml:space="preserve">
     <value>Custom attributes should be marked with "System.AttributeUsageAttribute"</value>

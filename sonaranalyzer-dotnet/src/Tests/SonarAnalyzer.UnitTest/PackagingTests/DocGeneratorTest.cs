@@ -39,8 +39,9 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         [TestCategory(TestCategoryName)]
         public void CheckNumberOfCrossReferences()
         {
+            // These are the deprecated rules which reference their successors
             var crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.CSharp);
-            crossReferenceCount.Should().Be(5);
+            crossReferenceCount.Should().Be(6);
             crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.VisualBasic);
             crossReferenceCount.Should().Be(1);
         }

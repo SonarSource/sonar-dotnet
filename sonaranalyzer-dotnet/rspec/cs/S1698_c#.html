@@ -55,6 +55,8 @@ public class Program
 </pre>
 <h2>Exceptions</h2>
 <p>The rule does not report on comparisons of <code>System.Type</code> instances and on comparisons inside <code>Equals</code> overrides.</p>
+<p>It also does not raise an issue when one of the operands is <code>null</code> nor when one of the operand is cast to <code>object</code> (because
+in this case we want to ensure reference equality even if some <code>==</code> overload is present).</p>
 <h2>See</h2>
 <ul>
   <li> <a href="http://cwe.mitre.org/data/definitions/595.html">MITRE, CWE-595</a> - Comparison of Object References Instead of Object Contents </li>

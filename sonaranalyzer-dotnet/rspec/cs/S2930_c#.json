@@ -8,8 +8,7 @@
   },
   "tags": [
     "cwe",
-    "denial-of-service",
-    "bug"
+    "denial-of-service"
   ],
   "standards": [
     "CWE"
