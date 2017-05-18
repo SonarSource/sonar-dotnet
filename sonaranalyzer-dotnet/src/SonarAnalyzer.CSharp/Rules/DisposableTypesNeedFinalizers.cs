@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return classDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
                         .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
-                        .Any(si => si != null && si.IsAny(nativeHandles));
+                        .Any(si => si.IsAny(nativeHandles));
         }
 
         private static bool HasFinalizer(ClassDeclarationSyntax classDeclaration)
