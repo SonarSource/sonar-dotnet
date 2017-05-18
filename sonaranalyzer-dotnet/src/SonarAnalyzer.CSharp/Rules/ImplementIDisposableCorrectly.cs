@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (!HasStatementsCount(destructorSyntax.Body, 1) ||
-                    !CallsVirtualDispose(destructorSyntax.Body, argumentValue: "false"))
+                    !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
                         $"Modify '{classSymbol.Name}.~{classSymbol.Name}()' so that it calls 'Dispose(false)' and then returns.");
@@ -164,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var parameterName = disposeMethod.ParameterList.Parameters.Single().Identifier.ToString();
 
-                if (!CallsVirtualDispose(disposeMethod.Body, argumentValue: parameterName))
+                if (!CallsVirtualDispose(disposeMethod, argumentValue: parameterName))
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
                         $"Modify 'Dispose({parameterName})' so that it calls 'base.Dispose({parameterName})'.");
@@ -183,8 +183,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     : 1; //// Dispose(true);
 
                 if (!HasStatementsCount(disposeMethod.Body, expectedStatementsCount) ||
-                    !CallsVirtualDispose(disposeMethod.Body, argumentValue: "true") ||
-                    (!CallsSuppressFinalize(disposeMethod.Body) && hasDestructor))
+                    !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
+                    (!CallsSuppressFinalize(disposeMethod) && hasDestructor))
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
                         $"'{classSymbol.Name}.Dispose()' should contain only a call to 'Dispose(true)'"
@@ -241,16 +241,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return methodBody.ChildNodes().Count() == expectedStatementsCount;
             }
 
-            private bool CallsSuppressFinalize(BlockSyntax methodBody)
+            private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration)
             {
-                return ContainsMethodInvocation(methodBody,
+                return SyntaxHelper.ContainsMethodInvocation(methodDeclaration,
+                    semanticModel,
                     method => HasArgumentValues(method, "this"),
                     KnownMethods.IsGcSuppressFinalize);
             }
 
-            private bool CallsVirtualDispose(BlockSyntax methodBody, string argumentValue)
+            private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, string argumentValue)
             {
-                return ContainsMethodInvocation(methodBody,
+                return SyntaxHelper.ContainsMethodInvocation(methodDeclaration,
+                    semanticModel,
                     method => HasArgumentValues(method, argumentValue),
                     IsVirtualDisposeBool);
             }
@@ -272,19 +274,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(predicate)
                     .SelectMany(m => m.DeclaringSyntaxReferences)
                     .Select(r => r.GetSyntax());
-            }
-
-            private bool ContainsMethodInvocation(BlockSyntax block,
-                Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
-            {
-                return block.ChildNodes()
-                    .OfType<ExpressionStatementSyntax>()
-                    .Select(e => e.Expression)
-                    .OfType<InvocationExpressionSyntax>()
-                    .Where(syntaxPredicate)
-                    .Select(e => semanticModel.GetSymbolInfo(e.Expression).Symbol)
-                    .OfType<IMethodSymbol>()
-                    .Any(symbolPredicate);
             }
         }
     }

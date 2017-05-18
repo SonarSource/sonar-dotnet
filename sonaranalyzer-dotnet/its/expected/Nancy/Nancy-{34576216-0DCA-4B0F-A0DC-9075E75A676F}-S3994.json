@@ -12,6 +12,19 @@
 "endColumn":  72
 }
 }
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Url.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  26
+}
+}
 }
 ]
 }

@@ -1,0 +1,40 @@
+<p>String representations of URIs or URLs are prone to parsing and encoding errors which can lead to vulnerabilities. The <code>System.Uri</code>
+class is a safe alternative and should be preferred.</p>
+<p>This rule raises an issue when two overloads differ only by the string / <code>Uri</code> parameter and the string overload doesn't call the
+<code>Uri</code> overload. It is assumed that the string parameter represents a URI because of the exact match besides that parameter type. It stands
+to reason that the safer overload should be used.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public class MyClass
+   {
+      public void FetchResource(string uriString) // Noncompliant
+      {
+         // No calls to FetResource(Uri)
+      }
+
+      public void FetchResource(Uri uri) { }
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public class MyClass
+   {
+      public void FetchResource(string uriString)
+      {
+          FetchResource(new Uri(uriString));
+      }
+
+      public void FetchResource(Uri uri) { }
+   }
+}
+</pre>
+
