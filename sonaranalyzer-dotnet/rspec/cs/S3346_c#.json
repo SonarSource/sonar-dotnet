@@ -1,0 +1,13 @@
+{
+  "title": "Expressions used in \"Debug.Assert\" should not produce side effects",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cert"
+  ],
+  "defaultSeverity": "Major"
+}

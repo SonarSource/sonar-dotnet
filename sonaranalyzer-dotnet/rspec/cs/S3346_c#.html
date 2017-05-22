@@ -1,0 +1,20 @@
+<p>An assertion is a piece of code that’s used during development when the compilation debug mode is activated. It allows a program to check itself as
+it runs. When an assertion is true, that means everything is operating as expected. </p>
+<p>In non-debug mode, all <code>Debug.Assert</code> are automatically left out. So, by contract, the boolean expressions that are evaluated by those
+assertions must absolutely not contain any side effects. Otherwise, when leaving the Debug mode, the functional behavior of the application is not the
+same anymore.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Debug.Assert(list.Remove("dog"));
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+bool result = list.Remove("dog");
+Debug.Assert(result);
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/vwG7AQ">CERT, EXP06-J.</a> - Expressions used in assertions must not produce side
+  effects </li>
+</ul>
+
