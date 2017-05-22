@@ -147,6 +147,7 @@
     <Compile Include="Helpers\NavigationHelperTest.cs" />
     <Compile Include="Helpers\EquivalenceCheckerTest.cs" />
     <Compile Include="Common\MetricsTest.cs" />
+    <Compile Include="PackagingTests\RuleTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FixAllDiagnosticProvider.cs" />
     <Compile Include="ResourceTests\GeneratedResourcesTest.cs" />
@@ -183,10 +184,12 @@
     <ProjectReference Include="..\..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj">
       <Project>{01df3cb0-2213-42f3-bb8e-0c3bc330de7a}</Project>
       <Name>SonarAnalyzer.VisualBasic</Name>
+      <Aliases>global,vbnet</Aliases>
     </ProjectReference>
     <ProjectReference Include="..\..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj">
       <Project>{39ccd086-a7f8-42a0-b402-3c9bd9eb4825}</Project>
       <Name>SonarAnalyzer.CSharp</Name>
+      <Aliases>global,csharp</Aliases>
     </ProjectReference>
     <ProjectReference Include="..\..\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.csproj">
       <Project>{98ef48f7-28d7-44ca-8c7f-6042ea4898e1}</Project>
